@@ -30,4 +30,11 @@ public class ExceptionHandler {
             }
         }
     }
+
+
+    public void checkIncorrectDelim(char delim) {
+        if (delim == ',' || delim == ':') {
+            throw new IllegalArgumentException("기본 구분자는 커스텀 구분자로 설정할 수 없습니다.");
+        }
+    }
 }
