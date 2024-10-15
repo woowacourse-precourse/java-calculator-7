@@ -1,2 +1,4 @@
-package calculator.service;public class CalculatorService {
+package calculator.service;
+
+public class CalculatorService {
 }

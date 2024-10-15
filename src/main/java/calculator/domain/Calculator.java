@@ -1,2 +1,4 @@
-package calculator.domain;public class Calculator {
+package calculator.domain;
+
+public class Calculator {
 }

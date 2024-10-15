@@ -1,2 +1,4 @@
-package calculator.controller;public class CalculatorController {
+package calculator.controller;
+
+public class CalculatorController {
 }
