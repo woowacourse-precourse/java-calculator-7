@@ -25,6 +25,8 @@ public class Application {
         String delimiters = String.join("|", parser);
         String[] numbers = input.split(delimiters);
 
+        int sum = 0;
+
         for (String number : numbers) {
             if (!number.isEmpty()) {
                 try {
@@ -32,12 +34,11 @@ public class Application {
                     if (num < 0) {
                         throw new IllegalArgumentException();
                     }
+                    sum += num;
                 } catch (NumberFormatException e) {
                     throw new IllegalArgumentException();
                 }
             }
         }
-
-
     }
 }
