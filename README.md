@@ -1,1 +1,1 @@
-# java-calculator-precourse
+# 기능명세서
