@@ -19,6 +19,8 @@ public class NumberParser {
         String[] splitWord = calculatedValue.getValue().split("");
         StringBuilder keepNumber = new StringBuilder();
 
+
+        //todo 구조 변경하기
         for (String s : splitWord) {
             if(s.equals(divider.getComma()) || s.equals(divider.getClon()) || s.equals(divider.getCustomDivider())){
                 int number = Integer.parseInt(keepNumber.toString());

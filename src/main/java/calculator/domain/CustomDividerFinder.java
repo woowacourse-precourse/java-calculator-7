@@ -12,7 +12,7 @@ public class CustomDividerFinder {
     private final static Integer CLOSER_INDEX = 3;
     private final static Integer CUSTOM_DIVIDER_INDEX = 2;
 
-    public void findCustomDividers(CalculatedValue calculatedValue, Divider divider) {
+    public void findCustomDividers(CalculatedValue calculatedValue, Divider divider) { //todo 인수를 생성자로?
         String inputValue = calculatedValue.getValue();
         int openerIndex = inputValue.indexOf(OPENER);
         int closerIndex = inputValue.indexOf(CLOSER);
@@ -31,8 +31,5 @@ public class CustomDividerFinder {
             divider.setCustomDivider(String.valueOf(charCustomDivider));
         }
     }
-
-
-
 
 }

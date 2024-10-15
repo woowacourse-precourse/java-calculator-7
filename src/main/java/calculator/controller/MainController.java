@@ -39,6 +39,7 @@ public class MainController {
         return new NumberParser(divider);
     }
 
+    //todo 이거를 클래스에서 처리하기 위해서는? - 서비스로
     private void updateCustomDivider(CalculatedValue calculatedValue, Divider divider,CustomDividerFinder customDividerFinder){
         try{
             customDividerFinder.findCustomDividers(calculatedValue,divider);
@@ -47,20 +48,21 @@ public class MainController {
         }
     }
 
-    private Divider createDivider(){
-        return new Divider();
-    }
 
     private CustomDividerFinder createCustomDividerFinder(){
         return new CustomDividerFinder();
     }
 
-    private String inputStringToAdd(){
-        return Input.inputStringToAdd();
+    private Divider createDivider(){
+        return new Divider();
     }
 
     private CalculatedValue createCalculatedValue(){
         return new CalculatedValue(inputStringToAdd());
+    }
+
+    private String inputStringToAdd(){
+        return Input.inputStringToAdd();
     }
 
 }
