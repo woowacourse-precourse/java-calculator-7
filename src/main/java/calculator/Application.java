@@ -11,4 +11,13 @@ public class Application {
             return;
         }
     }
+
+    private static boolean checkWhetherInputUsingCustomDelimiter(String input) {
+        if (input.charAt(0) >= '0' && input.charAt(0) <= '9') {
+            return false;
+        } else if (input.charAt(0) == '\\') {
+            return true;
+        }
+        throw new IllegalArgumentException();
+    }
 }
