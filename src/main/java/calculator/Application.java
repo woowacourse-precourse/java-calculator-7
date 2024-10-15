@@ -22,4 +22,7 @@ public class Application {
         return values;
     }
 
+    private static int checkIsInt(String str) throws IllegalArgumentException{
+        return Integer.parseInt(str);
+    }
 }
