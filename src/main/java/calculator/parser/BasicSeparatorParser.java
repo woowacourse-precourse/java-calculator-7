@@ -31,4 +31,20 @@ public class BasicSeparatorParser implements SeparatorParser{
 		String mathematicalExpression = tokenizer.nextToken();
 		return mathematicalExpression;
 	}
+
+	@Override
+	public String generateRegex(Set<String> separators) {
+		if(separators.isEmpty()){
+			return "";
+		}
+		StringBuilder separatorRegex = new StringBuilder();
+
+		for (String separator : separators) {
+			separatorRegex.append("|").append(separator);
+		}
+
+		separatorRegex.deleteCharAt(0);
+		return separatorRegex.toString();
+	}
+
 }
