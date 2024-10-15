@@ -1,14 +1,12 @@
 package calculator.domain;
 
-import java.util.Arrays;
-
 public class StringAddCalculator {
     private static final String DELIMITER = ",|:";
     private static final String CUSTOM_DELIMITER_START = "//";
     private static final String CUSTOM_DELIMITER_END = "\\n";
-    private static final int DEFAULT_VALUE = 0;
-
     private static final String NUMBER_FORMAT_ERROR = "숫자값만 입력가능합니다.";
+    private static final String MIN_VALUE_ERROR = "양수만 입력가능합니다.";
+    private static final int DEFAULT_VALUE = 0;
 
     public StringAddCalculator() {
     }
@@ -34,6 +32,7 @@ public class StringAddCalculator {
         int[] values = convertToInt(inputValue);
         int sum = 0;
         for (int value : values) {
+            validateMinValue(value);
             sum += value;
         }
         return sum;
@@ -54,6 +53,12 @@ public class StringAddCalculator {
             Integer.parseInt(value);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(NUMBER_FORMAT_ERROR);
+        }
+    }
+
+    private void validateMinValue(final int value) {
+        if (value <= DEFAULT_VALUE) {
+            throw new IllegalArgumentException(MIN_VALUE_ERROR);
         }
     }
 }
