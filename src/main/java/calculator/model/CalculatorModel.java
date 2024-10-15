@@ -8,7 +8,7 @@ public class CalculatorModel {
             sum += Integer.parseInt(number.trim());
         }
 
-
         return sum;
+
     }
 }

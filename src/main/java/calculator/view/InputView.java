@@ -17,12 +17,20 @@ public class InputView {
 
     public String[] inputCalculateNumber() {
         System.out.println(INPUT_NUMBER_MESSAGE);
-        String inputNumber = Console.readLine();
+        String inputNumber = trimInputNumber(Console.readLine());
+
+        if (inputNumber.isEmpty()) {
+            return new String[]{"0"};
+        }
         String[] splitNumber = splitInput(inputNumber);
 
         validator.validateInputNumber(splitNumber);
 
         return splitNumber;
+    }
+
+    private String trimInputNumber(String inputNumber) {
+        return inputNumber.trim();
     }
 
     private String[] splitInput(String input) {
