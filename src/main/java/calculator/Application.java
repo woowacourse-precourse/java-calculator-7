@@ -7,7 +7,16 @@ public class Application {
     public static String handleCustomDelimiter(String input) {
         int custom_end_idx = input.indexOf("\\n");
         String custom_delimiter = input.substring(2, custom_end_idx);
-        delimiters = delimiters + "|" + custom_delimiter;
+
+        // handling special characters in Java
+        if ("|?*()[]{}".contains(custom_delimiter)) {
+            delimiters = delimiters + "|\\" + custom_delimiter;
+        } else if (custom_delimiter.equals("\\")) {
+            delimiters = delimiters + "|\\\\";
+        }
+        else {
+            delimiters = delimiters + "|" + custom_delimiter;
+        }
 
         return input.substring(custom_end_idx + 2);
     }
