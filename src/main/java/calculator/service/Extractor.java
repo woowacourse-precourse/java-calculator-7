@@ -12,12 +12,13 @@ public class Extractor {
             return null;
         }
 
-        // TODO 여기서 중간에 validate 들어가야 함
+        // TODO: 여기서 중간에 validate 들어가야 함
+        //  음수인지 판정을 우선적으로 !
 
-        // TODO 커스텀으로 "'//', '\n'으로 입력받는 경우 delimeter를 해당 입력 값으로 변경할 것
+        // TODO: 커스텀으로 "'//', '\n'으로 입력받는 경우 delimeter를 해당 입력 값으로 변경할 것
         if (input.contains("//") && input.contains("\\n")) {
             String[] tokens = input.split("//|\\\\n");
-            // TODO tokens에 전부 다 들어 있으니 첫 번째 요소는 구분자로 쓰고 나머지는 통째로 뒤에 들어 있을 테니까
+            // TODO: tokens에 전부 다 들어 있으니 첫 번째 요소는 구분자로 쓰고 나머지는 통째로 뒤에 들어 있을 테니까
             //  나머지 부분을 구분자인 첫 번째 요소로 전부 잘라내면 그게 바로 숫자 ??
             String delimeter = tokens[1];
             String[] numberTokens = tokens[2].split(delimeter);
@@ -25,6 +26,7 @@ public class Extractor {
             for (String numberToken : numberTokens) {
                 integers.add(Integer.parseInt(numberToken));
             }
+            validateNegativeNumber(integers);
             return integers;
         }
 
@@ -33,6 +35,19 @@ public class Extractor {
         for (String token : tokens) {
             integers.add(Integer.parseInt(token));
         }
+        validateNegativeNumber(integers);
         return integers;
+    }
+
+    private void validateNegativeNumber(List<Integer> integers) {
+        if (integers.isEmpty()) {
+            return;
+        }
+
+        for (Integer integer : integers) {
+            if (integer < 0) {
+                throw new IllegalArgumentException("값이 0보다 작습니다 !!");
+            }
+        }
     }
 }
