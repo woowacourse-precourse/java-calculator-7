@@ -1,7 +1,7 @@
 # 프리코스 1주차 - 문자열 덧셈 계산기
 ---
 ## 디렉토리 구조
-''' java-calculator-7
+''' plaintext
 ├── .gradle
 ├── .idea
 ├── gradle
