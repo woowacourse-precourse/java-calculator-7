@@ -3,11 +3,12 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.NoSuchElementException;
 
 public class Application {
 
-    private static ArrayList<Character> delimiters = new ArrayList<>();
+    private static HashSet<Character> delimiters = new HashSet<>();
 
     public static void main(String[] args) {
         // TODO: 프로그램 구현
@@ -17,12 +18,12 @@ public class Application {
         } catch (NoSuchElementException e){
         }
 
-        int result = customProcess(input);
+        int result = calc(input);
 
         System.out.println("결과 : " + result);
     }
 
-    private static int customProcess(String input) {
+    private static int calc(String input) {
         int result = 0;
         initDelimiter();
 
@@ -56,15 +57,15 @@ public class Application {
     }
 
     private static String[] splitInput(String input) {
-        StringBuilder regex = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
         for (Character delimiter : delimiters) {
-            if (!regex.isEmpty()) {
-                regex.append("|");
+            if (!builder.isEmpty()) {
+                builder.append("|");
             }
-            regex.append("\\").append(delimiter);
+            builder.append("\\").append(delimiter);
         }
 
-        return input.split(regex.toString());
+        return input.split(builder.toString());
     }
 
     private static void initDelimiter() {
