@@ -1,5 +1,5 @@
 # java-calculator-precourse
-
+[과제 내용](https://github.com/ouvir/java-calculator-7/blob/ouvir/docs/description.md)
 ## 기능 요구 사항 정리
 1. 입력한 문자열에서 숫자를 추출하여 더하는 계산기를 구현
 2. 커스텀 구분자 설정 기능
