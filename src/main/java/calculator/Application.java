@@ -9,7 +9,6 @@ public class Application {
         // Get input
         String input = readLine();
 
-        // 1-1. 기본 구분자만 입력된 경우
         try {
             int result = add(input);
             System.out.println("결과 : " + result);
@@ -23,9 +22,14 @@ public class Application {
         if (input.isEmpty()) {
             return 0;
         }
+        // 1-1. 기본 구분자만 입력된 경우
+        String delimiter = ",|:";
 
-        String defaultDelimiter = ",|:";
-        String[] tokens = input.split(defaultDelimiter);
+        /**
+         * 1.2 커스텀 구분자를 포함하여 입력된 경우
+         */
+
+        String[] tokens = input.split(delimiter);
         int sum = 0;
 
         for (String token : tokens) {
