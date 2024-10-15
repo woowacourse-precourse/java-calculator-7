@@ -9,6 +9,9 @@ public class Calculator {
      * @return 덧셈 결과
      */
     public Integer add(String input){
+        if (isEmpty(input)) return 0;
+
+
         if (checkCustomSeparator(input)){
             String customSeparator = getCustomSeparator(input);
             String newCalculation = processCustomSeparator(input, customSeparator);
@@ -84,45 +87,65 @@ public class Calculator {
      * 입력값이 비어있는지 확인합니다.
      * @param input 사용자에게 입력 받은 수식
      * @return 입력값이 비어있으면 true, 아니면 false
+     * @throws IllegalArgumentException 입력값이 비어있는 경우 예외 발생
      */
-    private boolean isEmpty(String input){
-        return input.isEmpty();
+    private boolean isEmpty(String input) {
+        if (input.isEmpty()) {
+            throw new IllegalArgumentException("입력값이 비어 있습니다.");
+        }
+        return false; // 비어있지 않으면 false 반환
     }
 
     /**
      * 입력값에 음수가 존재하는지 확인합니다.
      * @param input 사용자에게 입력 받은 수식
-     * @return 입력값이 음수이면 true, 아니면 false
+     * @return 입력값이 음수이면 true
+     * @throws IllegalArgumentException 음수가 존재할 경우 예외 발생
      */
-    private boolean isNegative(String input){
-        return input.contains("-");
+    private boolean isNegative(String input) {
+        if (input.contains("-")) {
+            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+        }
+        return false; // 음수가 없으면 false 반환
     }
 
     /**
      * 입력값에 숫자가 아닌 문자가 존재하는지 확인합니다.
      * @param input 사용자에게 입력 받은 수식
-     * @return 입력값에 숫자가 아닌 문자가 존재하면 true, 아니면 false
+     * @return 입력값에 숫자가 아닌 문자가 존재하면 true
+     * @throws IllegalArgumentException 숫자 이외의 문자가 존재할 경우 예외 발생
      */
     private boolean isNotNumber(String input) {
-        return input.matches(".*[a-zA-Z]+.*");
+        if (input.matches(".*[a-zA-Z]+.*")) {
+            throw new IllegalArgumentException("숫자 이외의 문자는 입력할 수 없습니다.");
+        }
+        return false; // 숫자만 존재하면 false 반환
     }
 
     /**
      * 커스텀 구분자가 정확히 입력되었는지 확인합니다.
      * @param input 사용자에게 입력 받은 수식
-     * @return 커스텀 구분자가 정확히 입력되었으면 true, 아니면 false
+     * @return 커스텀 구분자가 정확히 입력되었으면 true
+     * @throws IllegalArgumentException 커스텀 구분자가 정확히 입력되지 않았을 경우 예외 발생
      */
     private boolean isValidCustomDelimiterFormat(String input) {
-        return input.matches("//.\n.*");
+        if (!input.matches("//.\n.*")) {
+            throw new IllegalArgumentException("커스텀 구분자 형식이 올바르지 않습니다.");
+        }
+        return true; // 형식이 올바르면 true 반환
     }
 
     /**
-     * 지정된 구분자 외의 문자가 포함 되었는지 확인합니다.
+     * 지정된 구분자 외의 문자가 포함되었는지 확인합니다.
      * @param input 사용자에게 입력 받은 수식
-     * @return 지정된 구분자 외의 문자가 포함 되었으면 true, 아니면 false
+     * @return 지정된 구분자 외의 문자가 포함되지 않은 경우 false
+     * @throws IllegalArgumentException 지정된 구분자 외의 문자가 포함되었을 경우 예외 발생
      */
     private boolean isInvalidDelimiter(String input) {
-        return input.matches(".*[^0-9,;].*");
+        if (input.matches(".*[^0-9,;].*")) {
+            throw new IllegalArgumentException("지정된 구분자 외의 문자는 입력할 수 없습니다.");
+        }
+        return false; // 지정된 구분자만 있으면 false 반환
     }
 
 }
