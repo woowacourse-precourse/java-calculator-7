@@ -25,13 +25,12 @@ class Calculator {
     public void run(){
         //hasPlusSeparator:추가 구분자가 있는가?
         boolean hasPlusSeparator = checkPlusSeparator();
-        System.out.println(hasPlusSeparator);
-        //List 형태로 숫자가 분해된 것을 확인함.
+        //List 형태로 숫자가 분해.
         String[] separatedStringArr = separate(hasPlusSeparator);
-        System.out.println(Arrays.stream(separatedStringArr).toList());
         //숫자가 아닌 것이 남아 있는지 확인. 여기서 통과 여부는 throw 가 안되면 통과임.
         hasNaN(separatedStringArr);
-
+        //숫자를 합한 뒤 출력
+        System.out.println("결과 : "+sum(separatedStringArr));
     }
     private boolean checkPlusSeparator() {
         //추가 구분자가 있으려면 문자열 길이가 최소 5글자는 넘어야 됨.
@@ -63,5 +62,12 @@ class Calculator {
                     throw new IllegalArgumentException();
             }
         }
+    }
+    private int sum(String[] separatedStringArr){
+        int sum = 0;
+        for(String separatedString:separatedStringArr){
+            sum += Integer.parseInt(separatedString);
+        }
+        return sum;
     }
 }
