@@ -2,15 +2,14 @@ package calculator.global.api;
 
 public class JudgmentAPI {
 
-    private boolean validNumber(char ch) {
-        for(char i = '0'; i < '9'; i++) {
-            if(ch == i) {
-                return true;
-            }
-        }
+//    private boolean validNumber(char ch) {
+//    }
 
-        return false;
-    }
+	public boolean isExitCustomSeparator() {
+		return true;
+	}
+
+	public
 
     public int isNextTrue(Boolean[] booleans, int init) {
         int arrayLength = booleans.length;
@@ -23,7 +22,6 @@ public class JudgmentAPI {
                 return continuousTrue;
             }
         }
-
         return continuousTrue;
     }
 }

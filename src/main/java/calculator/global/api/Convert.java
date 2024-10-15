@@ -1,6 +1,6 @@
 package calculator.global.api;
 
 public interface Convert {
-	int[] convertNumbers(boolean[] booleans);
-	boolean[] convertBooleans(String sentence);
+	int[] convertBooleansToInteger(boolean[] booleans);
+	boolean[] convertStringToBooleans(String sentence);
 }
