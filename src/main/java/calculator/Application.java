@@ -12,8 +12,14 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = readLine();
 
-        String[] separatedInput = input.split(separator);
-        for (String num : separatedInput) {
+        String[] separatedInput = input.split("\\\\n");
+        for (int i = 0; i < (separatedInput.length - 1); i++) {
+            separator += "|";
+            separator += separatedInput[i].substring(2);
+        }
+
+        String[] calcValue = separatedInput[separatedInput.length-1].split(separator);
+        for (String num : calcValue) {
             sum += app.stringToInt(num);
         }
         System.out.println("결과 : " + sum);
