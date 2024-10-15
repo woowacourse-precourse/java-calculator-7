@@ -8,9 +8,11 @@ public class Application {
 
         String input = Console.readLine();
 
-        if(input.startsWith("//")){
-            
+        if (input.startsWith("//")) {
+            // //@\n1@2,3:4
+            int customDelimiterEndIndex = input.indexOf("\\n");
         }
+
 
     }
 }
