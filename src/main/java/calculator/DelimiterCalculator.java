@@ -12,10 +12,22 @@ public class DelimiterCalculator implements Calculator {
     }
     @Override
     public int calculate(String input) {
-        addNumbersFromInput(input);
+        boolean hasCustomDelimiter = checkCustomDelimiter(input);
+        addNumbersFromInput(hasCustomDelimiter? input.substring(5) : input);
         return numbers.stream().mapToInt(Integer::intValue).sum();
     }
 
+    private boolean checkCustomDelimiter(String input) {
+        if (input.startsWith("//") && input.length() > 4) {
+            char delimiter = input.charAt(2);
+            if (input.charAt(3) != '\\' || input.charAt(4) != 'n') {
+                throw new IllegalArgumentException("Invalid input");
+            }
+            delimiters.add(delimiter);
+            return true;
+        }
+        return false;
+    }
 
     private void addNumbersFromInput(String input) {
         if (input == null) {
