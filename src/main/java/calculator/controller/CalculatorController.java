@@ -1,5 +1,6 @@
 package calculator.controller;
 
+import calculator.service.Adder;
 import calculator.service.Extractor;
 import calculator.view.InputView;
 
@@ -9,10 +10,12 @@ public class CalculatorController {
 
     private final InputView inputView;
     private final Extractor extractor;
+    private final Adder adder;
 
-    public CalculatorController(InputView inputView, Extractor extractor) {
+    public CalculatorController(InputView inputView, Extractor extractor, Adder adder) {
         this.inputView = inputView;
         this.extractor = extractor;
+        this.adder = adder;
     }
 
     public void start() {
@@ -26,7 +29,8 @@ public class CalculatorController {
 
             String input = inputView.getUserInput();               // 사용자 입력 받기
             List<Integer> extractedIntegers = extractor.extractNumbers(input);
-            System.out.println(extractedIntegers);
+            adder.addAllNumbers(extractedIntegers);
+            System.out.println(adder.addAllNumbers(extractedIntegers));
         }
     }
 }
