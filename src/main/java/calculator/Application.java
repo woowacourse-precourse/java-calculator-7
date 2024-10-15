@@ -16,6 +16,8 @@ public class Application {
             String combineDelimiter = defaultDelimiter.getDefaultDelimiter()
                     .substring(0, defaultDelimiter.getDefaultDelimiter().length() - 1)
                     + customDelimiter.getCustomDelimiter() + "]";
+            String[] stringNumbers = input.split(combineDelimiter);
+
 
         }
 
