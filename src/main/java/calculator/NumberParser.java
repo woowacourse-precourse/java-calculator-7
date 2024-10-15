@@ -17,9 +17,6 @@ public class NumberParser {
         String[] splitWord = input.split("");
         StringBuilder keepNumber = new StringBuilder();
 
-        //todo 음수 유효검사
-
-
         for (String s : splitWord) {
             if(s.equals(divider.getComma()) || s.equals(divider.getClon()) || s.equals(divider.getCustomDivider())){
                 int number = Integer.parseInt(keepNumber.toString());
@@ -38,6 +35,8 @@ public class NumberParser {
 
         return result;
     }
+
+
 
 
 
