@@ -36,8 +36,8 @@ public class Application {
             if (indexOfEndSign == -1) {
                 // 예외 던지기
             }
-            String delimiterPart = input.substring(2, indexOfEndSign);
-            delimiter = "[,:]|" + Pattern.quote(delimiterPart);
+            String customDelimiterPart = input.substring(2, indexOfEndSign);
+            delimiter = "[,:]|" + Pattern.quote(customDelimiterPart);
             numberPart = input.substring(indexOfEndSign + 2);
         }
 
