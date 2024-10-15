@@ -34,7 +34,8 @@ public class CalculatorTest {
 
     @Test
     void 커스텀_구분자_더하기_테스트() {
-        assertEquals(13,calculator.add("//;\n1;2,10"));
-        assertEquals(13,calculator.add("//\\\n1\\2\\10"));
+        assertEquals(13,calculator.add("//;\\n1;2,10"));
+        assertEquals(1,calculator.add("//;\\n1"));
+
     }
 }

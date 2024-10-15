@@ -30,7 +30,7 @@ public class Calculator {
 
     String extractDelimiter(String inputString) {
         if(inputString.startsWith("//")){
-            String customDelimiter = inputString.substring(2, inputString.indexOf("\n"));
+            String customDelimiter = inputString.substring(2, inputString.indexOf("\\n"));
             return DEFAULT_DELIMITER + "|" + Pattern.quote(customDelimiter);
         }
         return DEFAULT_DELIMITER;
@@ -38,7 +38,7 @@ public class Calculator {
 
     String removeCustomDelimiterDeclaration(String inputString) {
         if(inputString.startsWith("//")){
-            return inputString.substring(inputString.indexOf("\n") + 1);
+            return inputString.substring(inputString.indexOf("\\n") + 2);
         }
         return inputString;
     }
