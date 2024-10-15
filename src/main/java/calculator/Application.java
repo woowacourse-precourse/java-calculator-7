@@ -17,12 +17,12 @@ public class Application {
     public static int[] MakeSplitWordList(String FullLine) {
         String[] SplitWords;
         if (FullLine.startsWith("//")) {
-            int EndIndex = FullLine.indexOf("\n");
+            int EndIndex = FullLine.indexOf("\\n");
             String CustomSplitWord = FullLine.substring(2, EndIndex);
-            String RemainLine = FullLine.substring(EndIndex+1);
-            SplitWords =  RemainLine.split("[,|:]" + CustomSplitWord);
+            String RemainLine = FullLine.substring(EndIndex+2);
+            SplitWords =  RemainLine.split("[,:]" + CustomSplitWord);
         } else {
-            SplitWords =  FullLine.split("[,|:]");
+            SplitWords =  FullLine.split("[,:]");
         }
 
         // int로 형변환 및 잘못된 입력값 구분
@@ -30,6 +30,11 @@ public class Application {
         for (int i = 0; i < NumList.length; i++){
             try {
                 NumList[i] = Integer.parseInt(SplitWords[i]);
+                // 양수 확인
+                if (NumList[i] < 1) {
+                    throw new IllegalArgumentException("IllegalArgumentException");
+                }
+            //숫자가 아니면 에러 발생
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("IllegalArgumentException");
             }

@@ -19,6 +19,9 @@
 2. 문자열 앞부분 //와 \n이 존재할 때, 그 사이 존재하는 문자를 커스텀 구분자로 인식 후 구분자 단위로 나누기 + 나눈 값 int로 형 변환하여 return
 3. 입력받은 문자 합 반환
 4. 잘못된 값 입력 받을 경우 IllegalArgumentException발생 후 애플리케이션 종료
+### 추가 기능
+1. 양수로 구성되어야 함. 
+
 ## 입출력 요구 사항
 입력
 - 구분자와 양수로 구성된 문자열
@@ -40,3 +43,9 @@
 ## 라이브러리
 - camp.nextstep.edu.missionutils에서 제공하는 Console API를 사용하여 구현해야 한다.
   - 사용자가 입력하는 값은 camp.nextstep.edu.missionutils.Console의 readLine()을 활용한다.
+
+
+
+## 진행 과정 존재했던 error 해결법
+    - \n을 그냥 그대로 썼다가 에러 발생 -> 이스케이프 문자라 \\n로 사용해야함
+    - \\n으로 변경 후 문자 길이를 제대로 계산 안해서 error
