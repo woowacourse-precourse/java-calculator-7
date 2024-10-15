@@ -15,13 +15,13 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = readLine();
 
-        String pattern = "^(//.*\\\\n)*([0-9]+(.+[0-9]+)*|)$";
+        String pattern = "^(//.+\\\\n)*([0-9]+(.+[0-9]+)*|)$";
         Pattern p = Pattern.compile(pattern);
         Matcher m = p.matcher(input);
         if (!m.find()) {
             throw new IllegalArgumentException();
         }
-
+        System.out.println(m.group(1));
         if (!(m.group(1) == null)) {
             separators = app.buildSeparators(m.group(1));
         }
