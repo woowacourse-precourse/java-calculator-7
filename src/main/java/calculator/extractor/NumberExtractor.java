@@ -1,21 +1,23 @@
 package calculator.extractor;
 
+import calculator.number.Numbers;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserInputConverter {
+public class NumberExtractor {
     private static final List<String> DEFAULT_DELIMITERS = java.util.List.of(",", ":");
 
     private final CustomDelimiterCalculator customDelimiterCalculator = new CustomDelimiterCalculator();
     private final List<String> delimiters = new ArrayList<>(DEFAULT_DELIMITERS);
 
-    public List<String> split(String str) {
+    public Numbers extract(String str) {
         if (customDelimiterCalculator.hasCustomDelimiter(str)) {
             addCustomDelimiter(str);
             str = customDelimiterCalculator.removeCustomDelimiterPrefix(str);
         }
 
-        return List.of(splitByDelimiters(str));
+        List<String> strNumbers = splitByDelimiters(str);
+        return Numbers.of(strNumbers);
     }
 
     private void addCustomDelimiter(String str) {
@@ -23,9 +25,9 @@ public class UserInputConverter {
         delimiters.add(customDelimiter);
     }
 
-    private String[] splitByDelimiters(String str) {
+    private List<String> splitByDelimiters(String str) {
         String regex = getRegex();
-        return str.split(regex);
+        return List.of(str.split(regex));
     }
 
     private String getRegex() {
