@@ -9,12 +9,18 @@ public class StringCalculator {
 
     private static final String DISTINGUISHED = "[,;]";
 
-    public String extractCustom(String value) {
-        return value.substring(2, 3);
+    public String extractCustomValue(String value) {
+        if (value.startsWith("//")) {
+            return value.substring(2, 3);
+        }
+        return DISTINGUISHED;
     }
 
     public String removeValue(String value) {
-        return value.substring(5);
+        if (value.startsWith("//")) {
+            return value.substring(5);
+        }
+        return value;
     }
 
     public String[] createNewValue(String removeAfterValue, String separatorValue) {
@@ -34,7 +40,4 @@ public class StringCalculator {
                 .sum();
     }
 
-    public String[] separatorValue(String value) {
-        return value.split(DISTINGUISHED);
-    }
 }
