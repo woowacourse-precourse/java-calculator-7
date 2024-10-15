@@ -1,9 +1,10 @@
 package calculator.view;
 
 import calculator.constant.ViewConstants;
+import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
-    public static void printStart(){
-        System.out.println(ViewConstants.INPUT_STRING.getMessage());
+    public static String inputNumbers(){
+        return Console.readLine();
     }
 }
