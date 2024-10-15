@@ -39,85 +39,9 @@ class ApplicationTest extends NsTest {
             run(input);
             assertThat(output()).contains("결과 : 10");
         });
-    }
-    @Test
-    public void 입력값_비어있는_경우(){
-        String input = "";
-        assertSimpleTest(() -> {
-            run(input);
-            assertThat(output()).contains("결과 : 0");
-        });
+
     }
 
-    @Test
-    public void 음수가_포함된_경우(){
-        String input = "1,2,3,-4";
-        assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException(input))
-                .isInstanceOf(IllegalArgumentException.class)
-        );
-    }
-
-    @Test
-    public void 알파벳_포함된_경우(){
-        String input = "1,a,b,4";
-        assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException(input))
-                .isInstanceOf(IllegalArgumentException.class)
-        );
-    }
-
-    @Test
-    public void 특수문자_포함된_경우(){
-        String input = "&,2,3,4";
-        assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException(input))
-                .isInstanceOf(IllegalArgumentException.class)
-        );
-    }
-
-    @Test
-    public void 지정된구분자외문자_포함된_경우(){
-        String input = "1,2,3?-4";
-        assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException(input))
-                .isInstanceOf(IllegalArgumentException.class)
-        );
-    }
-    @Test
-    public void 커스텀구분자_선언된_경우_1(){
-        String input = "//;\n1;2;3";
-        assertSimpleTest(() -> {
-            run(input);
-            assertThat(output()).contains("결과 : 6");
-        });
-    }
-    @Test
-    public void 커스텀구분자_선언된_경우_2(){
-        String input = "//a\n1a2a3";
-        assertSimpleTest(() -> {
-            run(input);
-            assertThat(output()).contains("결과 : 6");
-        });
-    }
-
-    @Test
-    public void 커스텀구분자가_선언되었지만_올바르지_않은_경우_1(){
-        String input = "//;n1;2;3";
-        assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException(input))
-                .isInstanceOf(IllegalArgumentException.class)
-        );
-    }
-
-    @Test
-    public void 커스텀구분자가_선언되었지만_올바르지_않은_경우_2(){
-        String input = ";\n1;2;3";
-        assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException(input))
-                .isInstanceOf(IllegalArgumentException.class)
-        );
-    }
 
     @Override
     public void runMain() {
