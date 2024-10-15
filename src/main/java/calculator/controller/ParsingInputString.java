@@ -8,6 +8,7 @@ import java.util.List;
 public class ParsingInputString {
 
     private final InputString inputString;
+    private static final int beginIndex = 5;
 
     public ParsingInputString(InputString inputString) {
         this.inputString = inputString;
@@ -30,6 +31,6 @@ public class ParsingInputString {
         if (input.indexOf("//") == 0 && input.indexOf("\n") == 3) {
             inputString.setCustomChar(input.charAt(2));
         }
-        inputString.setInput(input.substring(5));
+        inputString.setInput(input.substring(beginIndex));
     }
 }
