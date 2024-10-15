@@ -34,6 +34,9 @@ public class Application {
 
         String[] numbers = input.split(delimiter);
         for (String number : numbers) {
+            if ("".equals(number)) {
+                throw new IllegalArgumentException("구분자 사이에는 숫자가 입력되어야 합니다.");
+            }
             int operand = Integer.parseInt(number);
             if (operand < 0) {
                 throw new IllegalArgumentException();

@@ -19,6 +19,7 @@
 - [x] 예외 처리
   - [x] 음수가 있는 경우, IllegalArgumentException 을 발생시켜라
   - [x] 문자열 안에 공백이 있는 경우, IllegalArgumentException 을 발생시켜라
+  - [x] 구분자를 중복해서 쓰는 경우, IllegalArgumentException 을 발생시켜라
 
 ## 회고
 #### 첫번째 시도(10/15)
