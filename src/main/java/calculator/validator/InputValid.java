@@ -17,9 +17,9 @@ public class InputValid {
     public static boolean checkStartWithCustomSeparator(String str) {
         String regex = "^//.*?\n.*";
         if (!str.matches(regex)) {
-            throw new IllegalArgumentException(InputValidationException.INVALID_CUSTOM_SEPARATOR_FORMAT.getMessage());
+            return true;
         }
-        return true;
+        return false;
     }
 
     // 커스텀 구분자 길이 제한
