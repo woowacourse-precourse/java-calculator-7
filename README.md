@@ -18,6 +18,11 @@
 - 출력: ArrayList<String>
 - 설명: 문자열 계산기의 기본 구분자를 ArrayList<String>형식으로 반환한다.
 
+### 2. 커스텀 구분자 반환 함수
+- 입력: String
+- 출력: ArrayList<Integer>
+- 설명: 입력받은 문자열을 파싱하여 기본 구분자와 커스텀 구분자를 ArrayList<String>형식으로 반환한다.
+
 ### 2. 문자열 파싱 함수
 
 - 입력: String
