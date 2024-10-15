@@ -4,6 +4,21 @@ package calculator.model;
 public class Calculator {
 
     /**
+     * 수식을 입력받아 덧셈을 진행합니다.
+     * @param input 사용자에게 입력 받은 수식
+     * @return 덧셈 결과
+     */
+    public Integer add(String input){
+        if (checkCustomSeparator(input)){
+            String customSeparator = getCustomSeparator(input);
+            String newCalculation = processCustomSeparator(input, customSeparator);
+            return calculate(parseCustomSeparator(newCalculation));
+        }
+        return calculate(parseCustomSeparator(input));
+    }
+
+
+    /**
      * 입력 받은 수식이 커스텀 구분자를 포함하고 있는지 확인합니다.
      * @param input 사용자에게 입력 받은 수식
      * @return 커스텀 구분자를 포함하면 true, 아니면 false
