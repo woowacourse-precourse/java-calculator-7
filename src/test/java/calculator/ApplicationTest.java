@@ -28,4 +28,33 @@ class ApplicationTest extends NsTest {
     public void runMain() {
         Application.main(new String[]{});
     }
+
+    @Test
+    void 커스텀_구분자를_사용하여_덧셈을_할수있다() {
+        // given
+        String input = "//t\n1t2t3t4";
+        int idx = input.indexOf("\n");
+        String split = input.substring(2, idx);
+        String substring = input.substring(idx + 1);
+        System.out.println(substring);
+        String[] splitNumbers = substring.split(split);
+        int result = 0;
+
+        // when
+        for(String number : splitNumbers) {
+            result += Integer.parseInt(number);
+        }
+
+        // then
+        assertThat(result).isEqualTo(10);
+    }
+
+    @Test
+    void 커스텀_구분자는_여러_글자를_사용할_수_있다() {
+        // given
+
+        // when
+
+        // then
+    }
 }

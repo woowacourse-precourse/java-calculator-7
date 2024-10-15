@@ -32,9 +32,13 @@ public class Application {
             String[] splitNumbers = numbersWithDelimiter.split(buildDelimiterRegex(delimiters));
 
             for (String number : splitNumbers) {
-                int parsedNumber = Integer.parseInt(number);
-                validatePositiveNumber(parsedNumber);
-                result += parsedNumber;
+                try {
+                    int parsedNumber = Integer.parseInt(number);
+                    validatePositiveNumber(parsedNumber);
+                    result += parsedNumber;
+                } catch(NumberFormatException e) {
+                    throw new IllegalArgumentException("숫자 이외의 값을 입력할 수 없습니다.");
+                }
             }
         }
         System.out.println("결과 : " + result);
