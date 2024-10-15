@@ -42,6 +42,14 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 공백만_입력하였을_때() {
+        assertSimpleTest(() -> {
+            run("                             ");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
