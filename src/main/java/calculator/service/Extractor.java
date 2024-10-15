@@ -44,7 +44,7 @@ public class Extractor {
 
         for (Integer integer : integers) {
             if (integer < 0) {
-                throw new IllegalArgumentException("값이 0보다 작습니다 !!");
+                throw new IllegalArgumentException("[ERROR] 값이 0보다 작습니다 !!");
             }
         }
     }
