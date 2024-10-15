@@ -98,8 +98,14 @@ public class Calculator {
         return input.contains("-");
     }
 
-
-
+    /**
+     * 입력값에 숫자가 아닌 문자가 존재하는지 확인합니다.
+     * @param input 사용자에게 입력 받은 수식
+     * @return 입력값에 숫자가 아닌 문자가 존재하면 true, 아니면 false
+     */
+    private boolean isNotNumber(String input) {
+        return input.matches(".*[a-zA-Z]+.*");
+    }
 
 
 }
