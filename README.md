@@ -1,1 +1,8 @@
-# java-calculator-precourse
+# 문자열 덧셈 계산기
+
+---
+## 구현할 기능 목록
+1. 문자열 입력받기 (camp.nextstep.edu.missionutils에서 제공하는 Console API를 사용하여 구현)
+2. ***(,)*** 쉼표와 ***(:)*** 콜론을 기본 구분자로 사용하여 입력받은 문자열을 분리한 숫자의 합을 반환한다
+3. 커스텀 구분자를 입력 받아서 숫자의 합을 반환한다
+4. 사용자가 입력을 잘못했을 경우에 ***IllegalArgumentException*** 을 발생시킨 후 종료
