@@ -23,5 +23,6 @@ public class CalculatorController {
         String readString = inputView.readString();
         List<Integer> numberList = separator.getNumberList(readString);
         numbers = new Numbers(numberList);
+        int sum = numbers.getSum();
     }
 }
