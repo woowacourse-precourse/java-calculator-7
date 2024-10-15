@@ -2,6 +2,7 @@ package calculator;
 
 public class Application {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        MainController mainController = new MainController();
+        mainController.main();
     }
 }
