@@ -25,12 +25,15 @@ public class Application {
             SplitWords =  FullLine.split("[,|:]");
         }
 
-        // int로 형변환
+        // int로 형변환 및 잘못된 입력값 구분
         int[] NumList = new int[SplitWords.length];
         for (int i = 0; i < NumList.length; i++){
-            NumList[i] = Integer.parseInt(SplitWords[i]);
+            try {
+                NumList[i] = Integer.parseInt(SplitWords[i]);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("IllegalArgumentException");
+            }
         }
-
         return NumList;
     }
     public static int Result(int[] NumList) {
