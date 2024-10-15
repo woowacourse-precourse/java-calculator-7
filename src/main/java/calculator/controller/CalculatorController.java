@@ -20,6 +20,6 @@ public class CalculatorController {
     public void startCalculator() {
         outputView.printStartMessage();
         inputStringSeparator = new InputStringSeparator(inputView.getString());
-        sumCalculator.getResult(inputStringSeparator.getInputNumber());
+        // sumCalculator.getResult(inputStringSeparator.getInputNumber());
     }
 }
