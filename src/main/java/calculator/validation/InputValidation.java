@@ -6,7 +6,7 @@ public class InputValidation {
     public static String readInputValidation(String input) {
         SeparatorValidation.separator(input);
         AlphabetValidation.alphabet(input);
-//        NumberValidation.number(input);
+        NumberValidation.number(input);
         return input;
     }
 }
