@@ -12,7 +12,7 @@ public class Application {
         String customDelimiter = "";
         String input = Console.readLine();
 
-        if (input.startsWith("//")) {
+        if (isCustom(input)) {
             int delimiterEndIndex = input.indexOf("\\n");
             customDelimiter = input.substring(2, delimiterEndIndex);
             input = input.substring(delimiterEndIndex + 2);
@@ -36,5 +36,9 @@ public class Application {
 
         System.out.println(sum);
 
+    }
+
+    private static boolean isCustom(String input) {
+        return input.startsWith("//");
     }
 }
