@@ -12,6 +12,6 @@ public class NumberValidation {
     }
 
     private static boolean isNotPositiveNumber(String input) {
-        return input.equals("0") || input.contains("-");
+        return input.equals("0") || input.equals("-");
     }
 }
