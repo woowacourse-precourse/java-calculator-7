@@ -20,7 +20,7 @@ public class BasicMathematicalExpressionParser implements MathematicalExpression
 		String[] stringNumbers = text.split(separatorRegex);
 		int[] numbers = new int[stringNumbers.length];
 
-		for(int i=0; i<stringNumbers.length; i++){
+		for (int i = 0; i < stringNumbers.length; i++) {
 			numbers[i] = stringNumberToNumber(stringNumbers[i]);
 		}
 

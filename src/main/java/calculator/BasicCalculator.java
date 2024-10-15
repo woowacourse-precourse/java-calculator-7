@@ -31,10 +31,10 @@ public class BasicCalculator implements Calculator {
 	}
 
 	public BasicCalculator(SeparatorParser separatorParser, MathematicalExpressionParser mathematicalExpressionParser) {
-		if(separatorParser == null){
+		if (separatorParser == null) {
 			this.separatorParser = new BasicSeparatorParser();
 		}
-		if(mathematicalExpressionParser == null){
+		if (mathematicalExpressionParser == null) {
 			this.mathematicalExpressionParser = new BasicMathematicalExpressionParser();
 		}
 		separators = new HashSet<>(Arrays.asList(BASIC_SEPARATORS));
