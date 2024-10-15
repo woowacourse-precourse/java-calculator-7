@@ -50,8 +50,13 @@ public class Calculator {
         return newDelimiter;
     }
 
-    private boolean isValidSpliter(){
-        return true;
+    private boolean isValidInput(){
+        String regexForValidInput = "[0-9" + escapeSetting() + "]*";
+        return userInput.matches(regexForValidInput);
+    }
+
+    private String escapeSetting() {
+        return DELIMITER.replaceAll("([\\W])", "\\\\$1");
     }
 
 }
