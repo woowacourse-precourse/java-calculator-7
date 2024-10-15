@@ -1,8 +1,10 @@
 package calculator.model;
 
+import java.util.Locale;
+
 public class StringCalculator {
 
-    // TODO 여러개 표현식 구분 구현
+    // TODO 구분자만 있을 경우 처리
     public int add(String input) {
         if (input == null || input.isEmpty()) {
             return 0;
@@ -16,9 +18,16 @@ public class StringCalculator {
         }
 
         String[] numbers = input.split(delimiter);
+
+        // TODO 나중에 예외처리
+        if(input.trim().isEmpty() || areAllEmpty(numbers)){
+            return 0;
+        }
+
         return sum(numbers);
     }
 
+    // 각 구분자별 처리하는 메소드 구현
     private String extractDelimiters(String delimitersPart){
         if (delimitersPart.startsWith("//[")){
             String delimiters = delimitersPart.substring(3, delimitersPart.length() -1);
@@ -29,8 +38,18 @@ public class StringCalculator {
         }
     }
 
+    // 숫자 배열에 숫자가 없을 경우 0으로 반환
+    private Boolean areAllEmpty(String[] numbers){
+        for(String number : numbers){
+            if (!number.trim().isEmpty()){
+                return false;
+            }
 
+        }
+        return true;
+    }
 
+    // 숫자 합산
     private int sum(String[] numbers) {
         int total = 0;
         for (String number : numbers) {
