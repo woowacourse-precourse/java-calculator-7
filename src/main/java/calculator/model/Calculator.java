@@ -30,4 +30,14 @@ public class Calculator {
         String[] parts = getParts(input);
         return parts[0].substring(2);
     }
+
+    /**
+     * 커스텀 구분자를 정규 구분자인 ","로 변환합니다.
+     * @param input 입력 받은 기존 상태의 수식
+     * @return 변환된 수식
+     */
+    private String processCustomSeparator(String input, String customSeparator){
+        String[] parts = getParts(input);
+        return parts[1].replace(customSeparator, ",");
+    }
 }
