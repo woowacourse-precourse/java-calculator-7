@@ -41,4 +41,11 @@ public class CalculatorServiceTest {
         assertArrayEquals(expected2, actual2);
     }
 
+    @Test
+    void 숫자_합산(){
+        int [] input = {1,2,3};
+        int actual = cal.plus(input);
+        assertEquals(6, actual);
+    }
+
 }

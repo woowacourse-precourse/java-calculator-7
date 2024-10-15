@@ -28,4 +28,12 @@ public class CalculatorService {
         }
         return intArrays;
     }
+
+    public int plus(int[] input) {
+        int sum = 0;
+        for (int i : input){
+            sum += i;
+        }
+        return sum;
+    }
 }
