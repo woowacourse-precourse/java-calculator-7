@@ -13,7 +13,7 @@ public class Application {
 
         String input = Console.readLine();
 
-        if (input.startsWith("//")) {
+        if (isCustom(input)) {
             int customDelimiterEndIndex = input.indexOf("\\n");
             CustomDelimiter customDelimiter = new CustomDelimiter(input.substring(2, customDelimiterEndIndex));
             input = input.substring(customDelimiterEndIndex + 2);
@@ -32,9 +32,23 @@ public class Application {
                     sum += Integer.parseInt(stringNumber);
                 }
             }
-            System.out.println("결과 : "+sum);
+            System.out.println("결과 : " + sum);
+        }
+
+        if (!isCustom(input)) {
+            String defaultRegex = defaultDelimiter.getDefaultDelimiter();
+            String[] stringNumbers = input.split(defaultRegex);
+            int sum = 0;
+            for (String stringNumber : stringNumbers) {
+                sum += Integer.parseInt(stringNumber);
+            }
+            System.out.println("결과 : " + sum);
         }
 
 
+    }
+
+    private static boolean isCustom(String input) {
+        return input.startsWith("//");
     }
 }
