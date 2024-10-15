@@ -1,7 +1,7 @@
 package calculator;
 
 public class Calculator {
-    private final String userInput;
+    private String userInput;
     private final OutputView outputView = new OutputView();
     private String DELIMITER = ",|:|";
     private final Long resultNumber = 0L;
@@ -44,7 +44,10 @@ public class Calculator {
     }
 
     private String getCustomSpliter() {
-        return null;
+        int delimiterIndex = userInput.indexOf("\n");
+        String newDelimiter = userInput.substring(2, delimiterIndex);
+        userInput = userInput.substring(delimiterIndex + 1);
+        return newDelimiter;
     }
 
     private boolean isValidSpliter(){
