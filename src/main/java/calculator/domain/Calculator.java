@@ -27,4 +27,12 @@ public class Calculator {
     public List<Integer> getNumbers() {
         return this.numbers;
     }
+
+    public Integer getSumNumbers() {
+        int sum = 0;
+        for (Integer number : numbers) {
+            sum += number;
+        }
+        return sum;
+    }
 }

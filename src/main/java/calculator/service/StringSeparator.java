@@ -25,7 +25,7 @@ public class StringSeparator {
                         calculator.addNumber(Integer.parseInt(number));
                     }
                 } else {
-                    divide += str.charAt(i)
+                    divide += str.charAt(i);
                 }
             }
         }
