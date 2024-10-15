@@ -18,7 +18,6 @@ public class Regex {
     private List<Integer> numbers = new ArrayList<>();
 
     public void inputExpression() {
-
         String input = Console.readLine();
         Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
         Matcher matcher = pattern.matcher(input);
@@ -26,6 +25,7 @@ public class Regex {
         if(matcher.find()){
             customDelimiter = matcher.group(1);
             expression = matcher.group(2);
+            validateNotDigit();
         } else {
             expression = input;
         }
@@ -33,13 +33,28 @@ public class Regex {
         Console.close();
     }
 
-    public void setNumbers(){
+    private void validateNotDigit() {
+        if(Character.isDigit(customDelimiter.charAt(0))){
+            throw new IllegalArgumentException("잘못된 입력입니다.");
+        }
+    }
 
+    public void setNumbers(){
         if(customDelimiter == null){
             numbers = getList(BASIC_DELIMITER);
         } else {
             customDelimiter = customDelimiter + "|" + BASIC_DELIMITER;
             numbers = getList(customDelimiter);
+        }
+
+        validateIsPositive();
+    }
+
+    private void validateIsPositive() {
+        for(int number : numbers) {
+            if(number < 0) {
+                throw new IllegalArgumentException("잘못된 입력입니다.");
+            }
         }
     }
 
