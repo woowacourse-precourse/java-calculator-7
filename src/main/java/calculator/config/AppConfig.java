@@ -7,6 +7,7 @@ import calculator.application.ports.output.OutputWriter;
 import calculator.adapters.output.OutputWriterImpl;
 import calculator.application.service.CalculateStringCommand;
 import calculator.application.usecase.CalculateStringUseCase;
+import calculator.application.validation.InputValidator;
 
 public class AppConfig {
 
@@ -18,7 +19,9 @@ public class AppConfig {
     public AppConfig() {
         this.inputReader = new InputReaderImpl();
         this.outputWriter = new OutputWriterImpl();
-        this.calculateStringUseCase = new CalculateStringCommand();
+        this.calculateStringUseCase = new CalculateStringCommand(
+            new InputValidator()
+        );
         this.cliCalculationController = new CliCalculationController(
             inputReader,
             outputWriter,
