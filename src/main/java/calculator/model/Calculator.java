@@ -11,11 +11,11 @@ public class Calculator {
     public Integer add(String input){
         if (isEmpty(input)) return 0;
 
-        if (isNegative(input) || isNotNumber(input)) return -1;
-
         if (checkCustomSeparator(input) && isValidCustomDelimiterFormat(input)) {
             String customSeparator = getCustomSeparator(input);
             String newCalculation = processCustomSeparator(input, customSeparator);
+
+            if (isNegative(newCalculation) || isNotNumber(newCalculation)) return -1;
             if (isInvalidDelimiter(newCalculation)) return -1;
             return calculate(parseCustomSeparator(newCalculation));
         }
@@ -39,7 +39,7 @@ public class Calculator {
      * @return 분리된 수식
      */
     private String[] getParts(String input) {
-        return input.split("\n");
+        return input.split("\\\\n");
     }
 
     /**
@@ -133,7 +133,7 @@ public class Calculator {
      * @throws IllegalArgumentException 커스텀 구분자가 정확히 입력되지 않았을 경우 예외 발생
      */
     private boolean isValidCustomDelimiterFormat(String input) {
-        if (!input.matches("//.\n.*")) {
+        if (!input.matches("//.\\\\n.*")) {
             throw new IllegalArgumentException("커스텀 구분자 형식이 올바르지 않습니다.");
         }
         return true; // 형식이 올바르면 true 반환

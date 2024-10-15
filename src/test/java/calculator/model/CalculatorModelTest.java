@@ -34,7 +34,7 @@ class CalculatorModelTest extends NsTest {
 
     @Test
     public void 커스텀_지정자_포함_정상_계산한_경우_1(){
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
         Calculator calculator = new Calculator();
         Integer result = calculator.add(input);
         assertEquals(result, 6);
@@ -42,7 +42,7 @@ class CalculatorModelTest extends NsTest {
 
     @Test
     public void 커스텀_지정자_포함_정상_계산한_경우_2(){
-        String input = "//*\n1*2;13";
+        String input = "//*\\n1*2;13";
         Calculator calculator = new Calculator();
         Integer result = calculator.add(input);
         assertEquals(result, 16);
@@ -50,7 +50,7 @@ class CalculatorModelTest extends NsTest {
 
     @Test
     public void 커스텀_지정자_포함_정상_계산한_경우_3(){
-        String input = "//~\n1~2~3~4";
+        String input = "//~\\n1~2~3~4";
         Calculator calculator = new Calculator();
         Integer result = calculator.add(input);
         assertEquals(result, 10);

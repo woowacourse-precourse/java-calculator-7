@@ -13,7 +13,7 @@ class ValidationTest extends NsTest {
 
     @Test
     public void 커스텀구분자_선언된_경우_1() {
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
         assertSimpleTest(() -> {
             Calculator calculator = new Calculator();
             Assertions.assertEquals(6, calculator.add(input));
@@ -22,7 +22,7 @@ class ValidationTest extends NsTest {
 
     @Test
     public void 커스텀구분자_선언된_경우_2() {
-        String input = "//a\n1a2a3";
+        String input = "//a\\n1a2a3";
         assertSimpleTest(() -> {
             Calculator calculator = new Calculator();
             Assertions.assertEquals(6, calculator.add(input));
@@ -99,7 +99,7 @@ class ValidationTest extends NsTest {
     }
     @Test
     public void 커스텀_지정자가_올바르지_않은_경우_3(){
-        String input = "//--\n1+2;3";
+        String input = "//--\\n1+2;3";
         assertSimpleTest(() ->
             assertThatThrownBy(() -> new Calculator().add(input))
                 .isInstanceOf(IllegalArgumentException.class)
