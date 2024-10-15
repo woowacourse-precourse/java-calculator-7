@@ -37,9 +37,12 @@ public class Application {
             if ("".equals(number)) {
                 throw new IllegalArgumentException("구분자 사이에는 숫자가 입력되어야 합니다.");
             }
+
             int operand = Integer.parseInt(number);
             if (operand < 0) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException(
+                        String.format("(%s)는 음수입니다. 입력하는 숫자들은 반드시 양수 혹은 0이어야 합니다.", operand)
+                );
             }
             result += operand;
         }
