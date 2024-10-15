@@ -49,4 +49,17 @@ public class Calculator {
     private String[] parseCustomSeparator(String input){
         return input.split(",|;");
     }
+
+    /**
+     * 파싱이 된 수식을 통해 덧셈을 계산합니다.
+     * @param numbers 파싱된 문자열 타입의 숫자들
+     * @return 수들의 합
+     */
+    private Integer calculate(String[] numbers){
+        int result = 0;
+        for (String num : numbers){
+            result += Integer.parseInt(num);
+        }
+        return result;
+    }
 }
