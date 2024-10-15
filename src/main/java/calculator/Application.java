@@ -14,6 +14,6 @@ public class Application {
 
         int totalValue = numbers.calculateTotalValue();
 
-        System.out.println(totalValue);
+        new OutputHandler().showCalculateResult(totalValue);
     }
 }
