@@ -25,4 +25,21 @@ public class StringCalculatorTest {
         );
 
     }
+
+    @Test
+    void 커스텀_구분자_이후_문자열값_추출_테스트() {
+
+        // given
+        StringCalculator stringCalculator = new StringCalculator();
+        String value = "//;\\n1;2;3";
+
+        // when
+        String result = stringCalculator.removeValue(value);
+        String expect = "1;2;3";
+
+        // then
+
+        Assertions.assertEquals(result, expect);
+
+    }
 }
