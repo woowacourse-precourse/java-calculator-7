@@ -9,7 +9,10 @@ public class Application {
         String FullLine = Console.readLine();
         // 커스텀 구분자 및 기본 구분자로 문자열 분리
         int[] NumList = MakeSplitWordList(FullLine);
-
+        // NumList의 합 구한 후 결과 도출
+        int ResultValue = Result(NumList);
+        // 결과 도출
+        System.out.print("결과 : "+ ResultValue);
     }
     public static int[] MakeSplitWordList(String FullLine) {
         String[] SplitWords;
@@ -29,5 +32,12 @@ public class Application {
         }
 
         return NumList;
+    }
+    public static int Result(int[] NumList) {
+        int ResultValue = 0;
+        for (int Num : NumList) {
+            ResultValue += Num;
+        }
+        return ResultValue;
     }
 }
