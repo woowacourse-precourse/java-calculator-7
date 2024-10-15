@@ -4,9 +4,9 @@
 
 애플리케이션의 전반적인 동작을 담당한다.
 
-- [ ] Calculator 인스턴스 생성
-- [ ] View 입력 메시지 출력
-- [ ] View 결과 메시지 출력
+- [x] Calculator 인스턴스 생성
+- [x] View 입력 메시지 출력
+- [x] View 결과 메시지 출력
 
 ### View
 
