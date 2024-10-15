@@ -7,7 +7,7 @@ package calculator.domain;
  */
 public class CustomDividerFinder {
     private final static String OPENER = "//";
-    private final static String CLOSER = "\\n"; //todo \\n
+    private final static String CLOSER = "\\n"; //note : 줄바꿈 문자를 구분해줘야하는 거기 때문에 역슬래시를 2번 사용한다.(만약 1개면 줄바꿈)
     private final static Integer OPENER_INDEX = 0;
     private final static Integer CLOSER_INDEX = 3;
     private final static Integer CUSTOM_DIVIDER_INDEX = 2;
