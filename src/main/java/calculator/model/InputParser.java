@@ -1,7 +1,5 @@
 package calculator.model;
 
-import static java.util.regex.Pattern.quote;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,6 +11,9 @@ public class InputParser {
         }
         if (checkDefaultDelimiter(input)) {
             return convertDefaultDelimiter(input);
+        }
+        if (checkCustomDelimiter(input)) {
+            return convertCustomDelimiter(input);
         }
         throw new IllegalArgumentException();
     }
@@ -36,5 +37,18 @@ public class InputParser {
 
     protected boolean checkCustomDelimiter(String input) {
         return input.contains("//") && input.contains("\\n");
+    }
+
+    protected List<Integer> convertCustomDelimiter(String input) throws IllegalArgumentException{
+        try {
+            String custom = input.substring(2,3);
+            input = input.substring(input.indexOf("\\n") + 2);
+            String[] inputs = input.split(custom);
+            return Arrays.stream(inputs)
+                         .map(Integer::parseInt)
+                         .toList();
+        } catch (Exception e) {
+            throw new IllegalArgumentException();
+        }
     }
 }
