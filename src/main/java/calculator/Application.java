@@ -16,8 +16,15 @@ public class Application {
             separators =
                     new String[]{":", input.substring(2, 3)};
         }
-
         return separators;
+    }
+
+    public static String replace(String input) {
+        String replacedInput = input;
+        for (String sep: separators(input)) {
+            replacedInput = input.replace(sep,",");
+        }
+        return replacedInput;
     }
 
     public static void main(String[] args) {
