@@ -37,5 +37,6 @@ public class Calculator {
         distinctionDelimiter(formula);    // 기본 구분자, 커스텀 구분자 구분하기
         String[] refineFormula = InputValidation.validateDelimiter(iscustomDelimiter, formula);
         int result = sum(refineFormula[0], refineFormula[1]);   // 덧셈 구하는 함수
+        System.out.println("결과 : " + result);
     }
 }
