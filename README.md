@@ -1,13 +1,11 @@
 # java-calculator-precourse
 
----
 
 # 문자열 덧셈 계산기
 MVC 패턴을 적용해 구현한 문자열 덧셈 계산기
 
 ## 구현 기능 목록
 
----
 
 ### Main
 * Application
