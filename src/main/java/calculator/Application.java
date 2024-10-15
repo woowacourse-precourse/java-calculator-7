@@ -13,6 +13,17 @@ public class Application {
 
         String input = Console.readLine();
 
+        if (!isCustom(input)) {
+            System.out.println(!isCustom(input));
+            String defaultRegex = defaultDelimiter.getDefaultDelimiter();
+            String[] stringNumbers = input.split(defaultRegex);
+            int sum = 0;
+            for (String stringNumber : stringNumbers) {
+                sum += Integer.parseInt(stringNumber);
+            }
+            System.out.println("결과 : " + sum);
+        }
+
         if (isCustom(input)) {
             int customDelimiterEndIndex = input.indexOf("\\n");
             CustomDelimiter customDelimiter = new CustomDelimiter(input.substring(2, customDelimiterEndIndex));
@@ -35,15 +46,6 @@ public class Application {
             System.out.println("결과 : " + sum);
         }
 
-        if (!isCustom(input)) {
-            String defaultRegex = defaultDelimiter.getDefaultDelimiter();
-            String[] stringNumbers = input.split(defaultRegex);
-            int sum = 0;
-            for (String stringNumber : stringNumbers) {
-                sum += Integer.parseInt(stringNumber);
-            }
-            System.out.println("결과 : " + sum);
-        }
 
 
     }
