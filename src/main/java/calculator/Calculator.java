@@ -8,7 +8,7 @@ public class Calculator {
     private String userInput;
     private final OutputView outputView = new OutputView();
     private final InputView inputView = new InputView();
-    private String DELIMITER = ",|:|";
+    private String DELIMITER = ",|:";
     private Long resultNumber = 0L;
 
     public Calculator() {
@@ -17,7 +17,7 @@ public class Calculator {
 
     public void stringSummation() {
         if (hasCustomSpliter()) {
-            DELIMITER += getCustomSpliter();
+            DELIMITER += ("|" +getCustomSpliter());
         }
 
         try {
@@ -69,13 +69,13 @@ public class Calculator {
         return newDelimiter;
     }
 
-    private boolean isValidInput(){
-        String regexForValidInput = "[0-9" + escapeSetting() + "]*";
-        return userInput.matches(regexForValidInput);
-    }
-
-    private String escapeSetting() {
-        return DELIMITER.replaceAll("([\\W])", "\\\\$1");
-    }
+//    private boolean isValidInput(){
+//        String regexForValidInput = "[0-9" + escapeSetting() + "]*";
+//        return userInput.matches(regexForValidInput);
+//    }
+//
+//    private String escapeSetting() {
+//        return DELIMITER.replaceAll("([\\W])", "\\\\$1");
+//    }
 
 }
