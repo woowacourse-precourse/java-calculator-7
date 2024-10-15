@@ -116,5 +116,13 @@ public class Calculator {
         return input.matches("//.\n.*");
     }
 
+    /**
+     * 지정된 구분자 외의 문자가 포함 되었는지 확인합니다.
+     * @param input 사용자에게 입력 받은 수식
+     * @return 지정된 구분자 외의 문자가 포함 되었으면 true, 아니면 false
+     */
+    private boolean isInvalidDelimiter(String input) {
+        return input.matches(".*[^0-9,;].*");
+    }
 
 }
