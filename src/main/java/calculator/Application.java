@@ -10,6 +10,12 @@ public class Application {
         String input = readLine();
 
         // 1-1. 기본 구분자만 입력된 경우
+        int sum = add(input);
+
+        System.out.println(sum);
+    }
+
+    private static int add(String input) {
         String defaultDelimiter = ",|:";
         String[] tokens = input.split(defaultDelimiter);
         int sum = 0;
@@ -17,7 +23,6 @@ public class Application {
         for (String token : tokens) {
             sum += Integer.parseInt(token);
         }
-
-        System.out.println(sum);
+        return sum;
     }
 }
