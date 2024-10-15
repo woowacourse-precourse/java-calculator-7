@@ -3,6 +3,17 @@ package calculator;
 import java.util.Scanner;
 
 public class Application {
+    public static void main(String[] args) {
+        String input = getUserInput();
+
+        try {
+            int result = basicCalculateSum(input);
+            System.out.println("결과: " + result);
+        } catch (IllegalArgumentException e) {
+            System.out.println("IllegalArgumentException: " + e.getMessage());
+        }
+    }
+
     // 01. 사용자 입력 기능
     private static String getUserInput() {
         Scanner scanner = new Scanner(System.in);
@@ -37,15 +48,5 @@ public class Application {
             }
         }
         return sum;
-    }
-    public static void main(String[] args) {
-        String input = getUserInput();
-
-        try {
-            int result = basicCalculateSum(input);
-            System.out.println("결과: " + result);
-        } catch (IllegalArgumentException e) {
-            System.out.println("IllegalArgumentException: " + e.getMessage());
-        }
     }
 }
