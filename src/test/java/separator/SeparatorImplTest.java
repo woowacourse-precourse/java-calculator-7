@@ -1,5 +1,6 @@
 package separator;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -52,4 +53,27 @@ public class SeparatorImplTest {
         assertThat(separators).hasSize(2);
     }
 
+    @Test
+    @DisplayName("빈 문자열 구분자를 추가하는 경우, 무시")
+    void 빈_문자열_구분자_추가() {
+        // given
+        String emptySeparator = "";
+        // when
+        separator.addSeparator(emptySeparator);
+        Collection<String> separators = separator.getAllSeparator();
+        // then
+        assertThat(separators).doesNotContain("");
+    }
+
+    @Test
+    @DisplayName("null 구분자를 추가하는 경우, 무시")
+    void null_구분자_추가() {
+        // given
+        String nullSeparator = null;
+        // when
+        separator.addSeparator(nullSeparator);
+        Collection<String> separators = separator.getAllSeparator();
+        // then
+        assertThat(separators).doesNotContain((String) null);
+    }
 }
