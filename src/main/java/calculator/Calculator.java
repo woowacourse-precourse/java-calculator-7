@@ -20,17 +20,11 @@ public class Calculator {
         if (hasCustomSpliter()) {
             DELIMITER += ("|" +getCustomSpliter());
         }
-
-        try {
-            List<String> splitInput = splitString();
-            Long[] numberOfInputString = changeStringToNumber(splitInput);
-            sumNumber(numberOfInputString);
-            outputView.printResult(resultNumber);
-            inputView.closedConsole();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        }
-
+        List<String> splitInput = splitString();
+        Long[] numberOfInputString = changeStringToNumber(splitInput);
+        sumNumber(numberOfInputString);
+        outputView.printResult(resultNumber);
+        inputView.closedConsole();
 
     }
 
@@ -40,9 +34,14 @@ public class Calculator {
         }
     }
 
-    private Long[] changeStringToNumber(List<String> splitInput) throws IllegalArgumentException{
+    private Long[] changeStringToNumber(List<String> splitInput){
         Long[] numberOfInputString = new Long[splitInput.size()];
+
         for (int i=0; i< splitInput.size(); i++) {
+            Long number = Long.parseLong(splitInput.get(i));
+            if (number < 0) {
+                throw new IllegalArgumentException();
+            }
             numberOfInputString[i] = Long.parseLong(splitInput.get(i));
         }
         return numberOfInputString;
@@ -65,9 +64,9 @@ public class Calculator {
     }
 
     private String getCustomSpliter() {
-        int delimiterIndex = userInput.indexOf("\n");
+        int delimiterIndex = userInput.indexOf("\\n");
         String newDelimiter = userInput.substring(2, delimiterIndex);
-        userInput = userInput.substring(delimiterIndex + 1);
+        userInput = userInput.substring(delimiterIndex + 2);
         return newDelimiter;
     }
 
