@@ -41,7 +41,9 @@ public class Application {
                 separator.append(userInput.charAt(idx++));
                 if(userInput.charAt(idx) == '\n') break;
             }
-            numbers = userInput.substring(idx+1).split(separator.toString());
+            String regexSeparator = separator.toString().
+                    replaceAll("([\\\\.\\[\\](){}*+?^$|])", "\\\\$1");
+            numbers = userInput.substring(idx + 1).split(regexSeparator);
         }
         // 커스텀 구분자를 지정하지 않은 경우 - 기본 구분자: 쉼표(,), 콜론(:)
         else{
