@@ -37,7 +37,7 @@ public class InputStringSeparator {
         this.finalSeparator = "[" + "//" + "\n" + customSeparator + "]";
     }
 
-    private void setInputNumber(String inputString){
-       this.inputNumber =  inputString.split(this.finalSeparator);
+    private void setInputNumber(String inputString, String finalSeparator){
+       this.inputNumber =  inputString.split(finalSeparator);
     }
 }
