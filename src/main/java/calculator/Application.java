@@ -45,7 +45,7 @@ public class Application {
         }
         // 커스텀 구분자를 지정하지 않은 경우 - 기본 구분자: 쉼표(,), 콜론(:)
         else{
-            numbers = userInput.split(",|:");
+            numbers = userInput.split("[,:]");
         }
         validateInput();
     }
