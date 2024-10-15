@@ -16,7 +16,10 @@ public class Calculator {
 
     private void validator(String number){
         try{
-            Integer.parseInt(number);
+            long tmpRes = Long.parseLong(number);
+            if(tmpRes<=0){
+                throw new IllegalArgumentException();
+            }
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }
