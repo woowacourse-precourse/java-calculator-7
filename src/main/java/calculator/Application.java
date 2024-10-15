@@ -14,8 +14,7 @@ public class Application {
 
     // Solution
     public int solution(String str) {
-        String[] arr = splitByDelimiter(str);
-        return sum(arr);
+        return sum(splitByDelimiter(str));
     }
 
     // 구분자에 따라 문자열을 분리하는 메서드
@@ -37,8 +36,6 @@ public class Application {
         // '//'과 \n  사이의 구분자로 입력받은 문자열을 구분해서 배열에 담아서 반환
         int index = str.indexOf("\\n");
         String delimiter = str.substring(2, index);
-        // \n 구분자 이후에 ; 구분자 없이 숫자만 남았을 경우 처리 방법 구현
-
         return str.substring(index +2).split(delimiter);
     }
 
