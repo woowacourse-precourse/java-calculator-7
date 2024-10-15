@@ -16,9 +16,15 @@ public class CalculatorController {
     public void run() {
         String expression = inputAddition();
         Calculator calculator = new Calculator(expression);
+        Integer result = calculateExpression(calculator, expression);
     }
 
     private String inputAddition() { // 덧셈 문자열을 입력 받는다.
         return inputView.inputAdditionString();
+    }
+
+    private Integer calculateExpression(Calculator calculator,
+        String expression) { // 입력받은 문자열에 대해 계산을 진행한다.
+        return calculator.calculate(expression);
     }
 }
