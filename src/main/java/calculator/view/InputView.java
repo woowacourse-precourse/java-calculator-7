@@ -36,7 +36,7 @@ public class InputView {
             }
         }
         return numbersPart.split(divisionNumber);
-    }
+    } 
 
 
 }
