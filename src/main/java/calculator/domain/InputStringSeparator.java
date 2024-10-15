@@ -2,8 +2,9 @@ package calculator.domain;
 
 public class InputStringSeparator {
     private String inputString;
+    private String finalSeparator;
     private String customSeparator = null;
-    private int[] inputNumber; // int vs integear ??
+    private String[] inputNumber; // int vs integear ??
 
     public InputStringSeparator(String inputString) {
         this.inputString = inputString;
@@ -26,5 +27,17 @@ public class InputStringSeparator {
 
     private boolean isDefaultSeparatorContained(){
         return inputString.contains("//") && inputString.contains("\n");
+    }
+
+    private void setFinalSeparator(){
+        if(this.customSeparator.isEmpty()){
+            this.finalSeparator = "[" + "//" + "\n" + "]";
+            return;
+        }
+        this.finalSeparator = "[" + "//" + "\n" + customSeparator + "]";
+    }
+
+    private void setInputNumber(String inputString){
+       this.inputNumber =  inputString.split(this.finalSeparator);
     }
 }
