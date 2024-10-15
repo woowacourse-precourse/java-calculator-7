@@ -2,6 +2,8 @@ package calculator;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
+import java.util.regex.Pattern;
+
 public class Application {
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -24,20 +26,22 @@ public class Application {
         }
         // 1-1. 기본 구분자만 입력된 경우
         String delimiter = "[,:]";
+        String numberPart = "";
 
         /**
          * 1.2 커스텀 구분자를 포함하여 입력된 경우
          */
         if (input.startsWith("//")) {
-            int indexOfEndSign = input.indexOf("\\");
-            if (input.charAt(indexOfEndSign + 1) != 'n') { // \n이 아닌 단순히 \을 구분자로 하고자하는 경우
-                delimiter += "|\\\\"; // Escape 문자 처리
+            int indexOfEndSign = input.indexOf("\\n"); // 개행문자가 아닌 \n라는 문자를 찾는다
+            if (indexOfEndSign == -1) {
+                // 예외 던지기
             }
-            char customDelimiter = input.charAt(indexOfEndSign);
-            delimiter += "|" + customDelimiter;
+            String delimiterPart = input.substring(2, indexOfEndSign);
+            delimiter = "[,:]|" + Pattern.quote(delimiterPart);
+            numberPart = input.substring(indexOfEndSign + 2);
         }
 
-        String[] tokens = input.split(delimiter);
+        String[] tokens = numberPart.split(delimiter);
         int sum = 0;
 
         for (String token : tokens) {
