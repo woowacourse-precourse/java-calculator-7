@@ -28,7 +28,7 @@ public class Application {
          * 1-1. 기본 구분자만 입력된 경우
          */
         String delimiter = "[,:]";
-        String numberPart = "";
+        String numberPart = input;
 
         /**
          * 1.2 커스텀 구분자를 포함하여 입력된 경우
