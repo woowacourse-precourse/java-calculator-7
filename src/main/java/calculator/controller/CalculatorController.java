@@ -29,7 +29,6 @@ public class CalculatorController {
         inputValidator.validateStrip(input);
         String[] separated = inputParser.separate(input);
         inputValidator.validateInteger(separated);
-        // 임시로 input return
-        return input;
+
     }
 }

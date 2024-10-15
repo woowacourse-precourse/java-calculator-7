@@ -1,5 +1,6 @@
 package calculator.validator;
 
+import calculator.constants.ErrorMessage;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,7 @@ class InputValidatorTest {
         // when & then
         assertThatThrownBy(() -> inputValidator.validateStrip(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("문자열의 맨 앞 또는 맨 뒤에 공백이 포함되지 않아야 합니다.");
+                .hasMessageContaining(ErrorMessage.NOT_ALLOWED_FIRST_LAST_BLANK);
     }
 
     @Test
@@ -35,6 +36,6 @@ class InputValidatorTest {
         // when & then
         assertThatThrownBy(() -> inputValidator.validateInteger(elements))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("문자열에는 정수가 입력 되어야 합니다.");
+                .hasMessageContaining(ErrorMessage.ONLY_ALLOWED_INTEGER);
     }
 }
