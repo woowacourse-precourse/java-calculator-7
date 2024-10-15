@@ -14,14 +14,17 @@ public class Application {
 
     // Solution
     public int solution(String str) {
-        // Strig[] arr = defaultSplit(str);
-        String[] arr = customSplit(str);
+        String[] arr;
+        if (!str.startsWith("//")) arr = defaultSplit(str);
+        else arr = customSplit(str);
         return sum(arr);
     }
 
     // Exception
     public void validation(int N) {
-
+        if (N <= 0) {
+            throw new IllegalArgumentException();
+        }
     }
 
     // Default
