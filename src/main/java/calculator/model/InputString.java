@@ -2,22 +2,14 @@ package calculator.model;
 
 import java.util.List;
 
-public class InputString{
+public class InputString {
 
-    private String input;
+    private final String input;
     private char customChar;
     private List<Integer> numberList;
 
-    public void setInput(String input) {
+    public InputString(String input) {
         this.input = input;
-    }
-
-    public void setCustomChar(char customChar) {
-        this.customChar = customChar;
-    }
-
-    public void setNumberList(List<Integer> numberList) {
-        this.numberList = numberList;
     }
 
     public String getInput() {
@@ -30,5 +22,13 @@ public class InputString{
 
     public List<Integer> getNumberList() {
         return numberList;
+    }
+
+    public void setCustomChar(char customChar) {
+        this.customChar = customChar;
+    }
+
+    public void setNumberList(List<Integer> numberList) {
+        this.numberList = numberList;
     }
 }

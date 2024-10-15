@@ -24,4 +24,12 @@ public class ParsingInputString {
         inputString.setNumberList(numberList);
         return numberList;
     }
+
+    public void findCustomChar() {
+        String input = inputString.getInput();
+        if (input.charAt(0) == '/' && input.charAt(1) == '/'
+            && input.charAt(3) == '\\' && input.charAt(4) == 'n') {
+            inputString.setCustomChar(input.charAt(2));
+        }
+    }
 }

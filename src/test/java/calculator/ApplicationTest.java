@@ -32,8 +32,7 @@ class ApplicationTest extends NsTest {
     @Test
     void parsingInputTest() {
         //given
-        InputString inputString = new InputString();
-        inputString.setInput("12,3:4&6");
+        InputString inputString = new InputString("12,3:4&6");
         inputString.setCustomChar('&');
 
         //when
@@ -48,7 +47,7 @@ class ApplicationTest extends NsTest {
     @Test
     void calculateTest() {
         //given
-        InputString inputString = new InputString();
+        InputString inputString = new InputString("1,2,3:4");
         inputString.setNumberList(List.of(1, 2, 3, 4));
 
         //when
@@ -57,6 +56,19 @@ class ApplicationTest extends NsTest {
 
         //then
         assertThat(calculateResult).isEqualTo(10);
+    }
+
+    @Test
+    void findCustomTest() {
+        //given
+        InputString inputString = new InputString("//;\\n1,2,3:4;9");
+
+        //when
+        ParsingInputString parsingInputString = new ParsingInputString(inputString);
+
+        //then
+        parsingInputString.findCustomChar();
+        assertThat(inputString.getCustomChar()).isEqualTo(';');
     }
 
     @Override
