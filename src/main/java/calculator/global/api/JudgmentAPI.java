@@ -12,20 +12,6 @@ public class JudgmentAPI {
         return false;
     }
 
-    public boolean[] convertBooleans(String sentence) {
-        int sentenceLength = sentence.length();
-        boolean[] booleanArrayFromSentence = new boolean[sentenceLength+1];
-        char[] splitSentence = sentence.toCharArray();
-
-        for (char ch : splitSentence) {
-            for(int i = 0; i < sentenceLength; i++) {
-                booleanArrayFromSentence[i] = validNumber(ch);
-            }
-        }
-
-        return booleanArrayFromSentence;
-    }
-
     public int isNextTrue(Boolean[] booleans, int init) {
         int arrayLength = booleans.length;
         int continuousTrue = 0;

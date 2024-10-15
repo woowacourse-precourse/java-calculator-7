@@ -12,12 +12,4 @@ public class CalculatorAPI {
         return sum;
     }
 
-    public int[] convertNumbers(boolean[] booleans) {
-
-    }
-
-    public int[] selectNumbers(String sentence) {
-        boolean[] booleans = strInput.convertBooleans(sentence);
-        int[] numbers =
-    }
 }
