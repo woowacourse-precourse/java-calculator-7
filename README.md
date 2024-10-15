@@ -65,7 +65,7 @@
 
 |Method|Parameter| Return Type | Exception | Implementation |
 |------|---------|-------------|-----------|----------------|
-|sum();|x        | Integer     | -         | TODO           |
+|sum();|x        | Integer     | -         | <span style="color:GREEN">DONE ✅</span> |
 
 <br>
 

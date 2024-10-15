@@ -36,4 +36,16 @@ public class NumbersTest {
         );
         assertEquals(LOWER_THAN_ZERO, exception.getMessage());
     }
+
+    @Test
+    @DisplayName("덧셈 검증")
+    void validateAddNumbers() {
+        // given
+        List<Integer> source = List.of(1, 2, 3, 4, 5);
+        Numbers numbers = Numbers.of(source);
+        // when
+        Integer actual = numbers.sum();
+        // then
+        assertEquals(actual, 15);
+    }
 }
