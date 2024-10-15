@@ -6,13 +6,14 @@ import java.util.List;
 public class Divider {
     private final static String COMMA = ",";
     private final static String CLON = ":";
-    private final static List<String> customDivider = new ArrayList<>();
+    private String customDivider;
+
 
     public Divider() {
     }
 
-    public void addCustomDivider(List<String> customDivider) {
-        Divider.customDivider.addAll(customDivider);
+    public void setCustomDivider(String customDivider) {
+        this.customDivider = customDivider;
     }
 
     /**
