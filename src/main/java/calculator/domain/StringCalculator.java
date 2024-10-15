@@ -17,12 +17,13 @@ public class StringCalculator {
         return value.substring(5);
     }
 
-    public String[] createNewValue(String removeAfterValue) {
-        return removeAfterValue.split("");
+    public String[] createNewValue(String removeAfterValue, String separatorValue) {
+        return removeAfterValue.split(separatorValue);
     }
 
     public List<Integer> saveValue(String[] newValue) {
-        return Arrays.stream(newValue)
+        return Arrays
+                .stream(newValue)
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
     }
@@ -36,6 +37,4 @@ public class StringCalculator {
     public String[] separatorValue(String value) {
         return value.split(DISTINGUISHED);
     }
-
-
 }

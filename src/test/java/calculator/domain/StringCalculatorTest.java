@@ -1,6 +1,5 @@
 package calculator.domain;
 
-import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -52,15 +51,15 @@ public class StringCalculatorTest {
 
         // given
         StringCalculator stringCalculator = new StringCalculator();
-        String value ="1;2;3";
+        String value = "1;2;3";
         String customValue = ";";
 
         // when
-        String[] result = stringCalculator.createNewValue(value,customValue);
+        String[] result = stringCalculator.createNewValue(value, customValue);
         String[] expect = {"1", "2", "3"};
 
         // then
-        Assertions.assertArrayEquals(result,expect);
+        Assertions.assertArrayEquals(result, expect);
 
     }
 
@@ -76,7 +75,7 @@ public class StringCalculatorTest {
         List<Integer> expect = Arrays.asList(1, 2, 3);
 
         // then
-        Assertions.assertEquals(result,expect);
+        Assertions.assertEquals(result, expect);
 
     }
 
@@ -90,9 +89,13 @@ public class StringCalculatorTest {
         // when
         int result = stringCalculator.calculateSum(value);
         int expect = 6;
+        int incorrectExpect = 7;
 
         // then
-        Assertions.assertEquals(result,expect);
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(result, expect),
+                () -> Assertions.assertNotEquals(incorrectExpect, result)
+        );
 
     }
 }
