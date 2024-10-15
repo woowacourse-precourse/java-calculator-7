@@ -34,7 +34,7 @@ public class Application {
      */
     public void extractNumber(){
         // 커스텀 구분자를 지정한 경우
-        if(userInput.matches("//[\\D]+(\r?\n)[\\s\\S]+")){
+        if(userInput.matches("//\\D+(\r?\n)[\\s\\S]+")){
             String separator ="";
             int idx = 2;
             while(true){
