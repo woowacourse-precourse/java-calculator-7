@@ -5,7 +5,7 @@ public enum ViewConstants {
     INPUT_STRING("덧셈할 문자열을 입력해 주세요."),
 
     //output
-    OUTPUT_STRING("결과 : %d");
+    OUTPUT_STRING("결과 : %s");
 
     private final String message;
 
