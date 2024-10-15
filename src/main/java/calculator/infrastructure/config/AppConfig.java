@@ -1,5 +1,7 @@
 package calculator.infrastructure.config;
 
+import calculator.presentation.CalculationController;
+import calculator.presentation.CalculationUseCase;
 import calculator.view.input.InputReader;
 import calculator.view.input.InputReaderImpl;
 import calculator.view.output.OutputWriter;
@@ -9,21 +11,23 @@ public class AppConfig {
 
     private InputReader inputReader;
     private OutputWriter outputWriter;
+    private CalculationUseCase calculationUseCase;
+
+    public AppConfig() {
+        this.inputReader = new InputReaderImpl();
+        this.outputWriter = new OutputWriterImpl();
+        this.calculationUseCase = new CalculationController(inputReader, outputWriter);
+    }
 
     public InputReader inputReader() {
-        if (inputReader == null) {
-            inputReader = new InputReaderImpl();
-        }
-
         return inputReader;
     }
 
     public OutputWriter outputWriter() {
-        if (outputWriter == null) {
-            outputWriter = new OutputWriterImpl();
-        }
-
         return outputWriter;
     }
 
+    public CalculationUseCase calculationUseCase() {
+        return calculationUseCase;
+    }
 }
