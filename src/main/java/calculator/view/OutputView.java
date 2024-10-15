@@ -8,4 +8,7 @@ public class OutputView {
         System.out.println(START_MESSAGE);
     }
 
+    public void printResult(int sum) {
+        System.out.println("결과 : " + sum);
+    }
 }
