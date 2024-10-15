@@ -1,8 +1,6 @@
-package calculator.api;
+package calculator.global.api;
 
-import calculator.config.ApiObjectFactory;
-
-public class Calculator {
+public class CalculatorAPI {
 
     public int calculate(int[] extracted) {
         int sum = 0;
@@ -19,7 +17,6 @@ public class Calculator {
     }
 
     public int[] selectNumbers(String sentence) {
-        StrInput strInput = ApiObjectFactory.newStrInput();
         boolean[] booleans = strInput.convertBooleans(sentence);
         int[] numbers =
     }
