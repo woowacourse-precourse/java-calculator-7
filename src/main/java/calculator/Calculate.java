@@ -7,7 +7,7 @@ public class Calculate {
 
     public Calculate(String input) {
         Calculate.input = input;
-        delimiter = ",;";
+        delimiter = ",|:";
     }
 
     private static String[] toArray() {
@@ -31,6 +31,7 @@ public class Calculate {
                 int num = Integer.parseInt(arr[i]);
                 sum += num;
             } catch (IllegalArgumentException e) {
+                System.err.println("Invalid number: " + arr[i]);
                 e.printStackTrace();
             }
         }
