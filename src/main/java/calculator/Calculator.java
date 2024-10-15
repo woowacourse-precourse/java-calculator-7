@@ -4,10 +4,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Calculator {
-    public static int calculate(String input) {
-        String delimiter = "[,|:]";
-        int result = 0;
+    private static String delimiter = "[,|:]";
+    private static int result = 0;
 
+    public static int calculate(String input) {
         if ("".equals(input)) {
             return result;
         }
