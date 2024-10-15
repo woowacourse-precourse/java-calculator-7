@@ -14,7 +14,7 @@ public class Calculator {
 
     public Integer calculate(String expression) {
         String separator = "[,:]";
-        
+
         if (hasCustomSeparator(expression)) {
             String customSeparator = extractCustomSeparator(expression);
             expression = extractActualExpression(expression);
@@ -22,6 +22,7 @@ public class Calculator {
         }
 
         return Arrays.stream(expression.split(separator))
+            .map(part -> part.isEmpty() ? "0" : part)
             .mapToInt(Integer::parseInt)
             .sum();
     }
