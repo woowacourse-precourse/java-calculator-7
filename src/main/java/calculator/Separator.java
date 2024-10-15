@@ -13,14 +13,14 @@ public class Separator {
         symbols = COMMA + COLON;
     }
 
-    public List<Integer> getNumberList(String readString) {
+    public Numbers getNumberList(String readString) {
         String numberString = readString;
         if(hasCustomSeparator(readString)){
             addCustomSeparator(readString);
             numberString = getNumberString(readString);
         }
         List<Integer> numberList = split(numberString);
-        return numberList;
+        return new Numbers(numberList);
     }
 
     private List<Integer> split(String numberString) {
