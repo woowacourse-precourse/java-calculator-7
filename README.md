@@ -3,8 +3,8 @@
 ## 초기 기능 구현 목록
 
 ### 사용자에게 문자열을 입력받기
-- [ ] "덧셈할 문자열을 입력해 주세요."를 출력
-- [ ] 입력은 `camp.nextstep.edu.missionutils.Console`의 `readLine()`을 활용
+- [x] "덧셈할 문자열을 입력해 주세요."를 출력
+- [x] 입력은 `camp.nextstep.edu.missionutils.Console`의 `readLine()`을 활용
 
 ### 입력값 구분하기
 - [ ] 앞 부분에 커스텀 구분자가 있는지 확인
