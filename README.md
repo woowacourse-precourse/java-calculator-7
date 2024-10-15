@@ -32,7 +32,7 @@
 
 - `CalculatorLogic` : 계산기 내부 동작 구성
     - `extractDelimiter` : 기본 구분자, 사용자 정의 구분자 추출 기능 [O]
-    - `extractNumber` : 사용자 입력에서 숫자 추출 기능
+    - `extractNumber` : 사용자 입력에서 숫자 추출 기능 [O]
     - `calculate` : 구분자에 따른 연산 기능
 
 ## service package
