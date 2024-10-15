@@ -1,23 +1,26 @@
 package calculator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class Application {
 
-    private static Integer result = 0;
-    private static List<String> delimiterList = List.of(",", ":");
+    private static int result = 0;
+    private static List<String> delimiterList = new ArrayList<>(List.of(",", ":"));
     private static final String startCustom = "//";
     private static final String endCustom = "\\n";
 
     public static void main(String[] args) {
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = readLine();
         if (input.startsWith(startCustom)) {
             addCustomDelimiter(input);
         }
         valid(input);
-
+        calculate(input);
+        System.out.println("결과 : " + result);
     }
 
     private static void addCustomDelimiter(String input) {
@@ -39,10 +42,11 @@ public class Application {
     }
 
     private static void valid(String input) {
-        if (isThereWrongValue(input)) {
+        String substring = input.substring(input.indexOf("\\n") + 2);
+        if (isThereWrongValue(substring)) {
             throw new IllegalArgumentException("잘못된 값이 입력 되었습니다.");
         }
-        if (isWrongEquation(input)) {
+        if (isWrongEquation(substring)) {
             throw new IllegalArgumentException("잘못된 수식 입니다.");
         }
     }
@@ -97,6 +101,8 @@ public class Application {
     }
 
     private static void calculate(String input) {
-
+        for (char ch : input.toCharArray()) {
+            if (isDigit(ch)) result += ch - '0';
+        }
     }
 }
