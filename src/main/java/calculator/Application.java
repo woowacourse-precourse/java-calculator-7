@@ -44,11 +44,11 @@ public class Application {
         }
 
         String[] tokens = numberPart.split(delimiter);
-        int sum = 0;
+        int result = 0;
 
         for (String token : tokens) {
-            sum += Integer.parseInt(token);
+            result += Integer.parseInt(token);
         }
-        return sum;
+        return result;
     }
 }
