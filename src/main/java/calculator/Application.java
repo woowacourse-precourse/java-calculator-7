@@ -34,7 +34,9 @@ public class Application {
 
     private static char getCustomDelimiter(String input) {
         for (int i = 1; i <= 4; i++) {
-            if ((i == 1 || i == 3) && input.charAt(i) != '\\') {
+            if (i == 1 && input.charAt(i) != '/') {
+                throw new IllegalArgumentException();
+            } else if (i == 3 && input.charAt(i) != '\\') {
                 throw new IllegalArgumentException();
             } else if (i == 4 && input.charAt(i) != 'n') {
                 throw new IllegalArgumentException();
