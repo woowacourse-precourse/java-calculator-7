@@ -36,7 +36,7 @@ public class Application {
         if (input.startsWith("//")) {
             int indexOfEndSign = input.indexOf("\\n"); // 개행문자가 아닌 \n라는 문자를 찾는다
             if (indexOfEndSign == -1) {
-                // 예외 던지기
+                throw new IllegalArgumentException("커스텀 구분자 선언 후 '\\n'이 필요합니다.");
             }
             String customDelimiterPart = input.substring(2, indexOfEndSign);
             delimiter = "[,:]|" + Pattern.quote(customDelimiterPart);
