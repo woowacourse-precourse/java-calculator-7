@@ -14,6 +14,7 @@ public class Application {
         int result = 0;
         if(inputIsNotEmpty(input)) {
             List<String> delimiters = new ArrayList<>(List.of(",", ":"));
+
             boolean hasCustomDelimiter = false;
             if(isContainsCustomDelimiter(input)) {
                 int delimiterIdx = input.indexOf("\n");
@@ -21,18 +22,24 @@ public class Application {
                 delimiters.add(delimiter);
                 hasCustomDelimiter = true;
             }
+
             String numbersWithDelimiter;
             if(hasCustomDelimiter) {
                  numbersWithDelimiter = input.substring(input.indexOf("\n") + 1);
             } else {
                 numbersWithDelimiter = input;
             }
-            String[] splitNumbers = numbersWithDelimiter.split(String.join("|", delimiters));
+            String[] splitNumbers = numbersWithDelimiter.split(buildDelimiterRegex(delimiters));
+
             for (String number : splitNumbers) {
                 result += Integer.parseInt(number);
             }
         }
         System.out.println("결과 : " + result);
+    }
+
+    private static String buildDelimiterRegex(List<String> delimiters) {
+        return String.join("|", delimiters);
     }
 
     private static boolean isContainsCustomDelimiter(String input) {
