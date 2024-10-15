@@ -1,6 +1,7 @@
 package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,7 +24,7 @@ public class Calculator {
     public static void run() {
         String formula = input();   // 사용자 입력
         distinctionDelimiter(formula);    // 기본 구분자, 커스텀 구분자 구분하기
-        String numberStr = InputValidation.validateDelimiter(iscustomDelimiter, formula);
-        System.out.println(numberStr);
+        String[] numberStr = InputValidation.validateDelimiter(iscustomDelimiter, formula);
+        System.out.println(Arrays.toString(numberStr));
     }
 }
