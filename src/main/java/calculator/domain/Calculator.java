@@ -23,4 +23,8 @@ public class Calculator {
     public List<String> getSeparators() {
         return this.separators;
     }
+
+    public List<Integer> getNumbers() {
+        return this.numbers;
+    }
 }
