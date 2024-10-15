@@ -10,10 +10,9 @@ public class InputValidation {
         Pattern pattern = Pattern.compile("^(|([1-9][0-9]*([,:][1-9][0-9]*)*))$");
         Matcher matcher = pattern.matcher(formula);
         if (matcher.matches()) {
-            return new String[] {"[,:]", matcher.group(1)};
+            return new String[]{"[,:]", matcher.group(1)};
         }
-        System.out.println("잘못된 사용자 입력입니다.");
-        return new String[] {};
+        throw new IllegalArgumentException("잘못된 사용자 입력입니다.");
     }
 
     // 커스텀 구분자 검증 함수
@@ -21,11 +20,9 @@ public class InputValidation {
         Pattern pattern = Pattern.compile("^//(.)\\\\n(|([1-9][0-9]*(\\1[1-9][0-9]*)*))$");
         Matcher matcher = pattern.matcher(formula);
         if (matcher.matches()) {
-            return new String[] {matcher.group(1), matcher.group(2)};
-        } else {
-            System.out.println("잘못된 사용자 입력입니다.");
-            return new String[] {};
+            return new String[]{matcher.group(1), matcher.group(2)};
         }
+        throw new IllegalArgumentException("잘못된 사용자 입력입니다.");
     }
 
     static String[] validateDelimiter(boolean iscustomDelimiter, String formula) {
