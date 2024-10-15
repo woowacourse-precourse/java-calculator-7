@@ -22,6 +22,10 @@ public class Application {
             }
         }
 
+        String delimiters = String.join("|", parser);
+        String[] numbers = input.split(delimiters);
+
+
 
     }
 }
