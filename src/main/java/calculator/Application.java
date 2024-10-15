@@ -11,7 +11,9 @@ public class Application {
         List<Character> delimiters = new ArrayList<>();
         delimiters.add(','); delimiters.add(':');
         LineTokenizer lineTokenizer = new LineTokenizer(delimiters);
-        Calculator calculator = new DelimiterCalculator(lineTokenizer);
+        DelimiterExtractor delimiterExtractor = new DelimiterExtractor("//", "\\n");
+
+        Calculator calculator = new DelimiterCalculator(delimiterExtractor, lineTokenizer);
 
         // 1. 사용자로부터 입력을 받는다.
         ConsoleWriter consoleWriter = new ConsoleWriter();
