@@ -34,14 +34,17 @@ public class Separator {
     }
 
     private String getNumberString(String readString) {
-        String substring = readString.substring(readString.indexOf(CUSTOM_SEPARATOR_END)+ CUSTOM_SEPARATOR_END.length());
+        int subStringInt = readString.indexOf(CUSTOM_SEPARATOR_END) + CUSTOM_SEPARATOR_END.length();
+        String substring = readString.substring(subStringInt);
         return substring;
     }
 
     private void addCustomSeparator(String readString) {
         String substring = readString.substring(0, readString.indexOf(CUSTOM_SEPARATOR_END));
         substring = substring.replace(CUSTOM_SEPARATOR_START,"");
-        symbols = symbols + OR +substring;
+        if (!substring.equals("")) {
+            symbols = symbols + OR +substring;
+        }
     }
 
     private boolean hasCustomSeparator(String readString) {
