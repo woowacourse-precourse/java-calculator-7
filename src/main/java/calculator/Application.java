@@ -27,7 +27,10 @@ class Calculator {
         boolean hasPlusSeparator = checkPlusSeparator();
         System.out.println(hasPlusSeparator);
         //List 형태로 숫자가 분해된 것을 확인함.
-        System.out.println(Arrays.stream(separate(hasPlusSeparator)).toList());
+        String[] separatedStringArr = separate(hasPlusSeparator);
+        System.out.println(Arrays.stream(separatedStringArr).toList());
+        //숫자가 아닌 것이 남아 있는지 확인. 여기서 통과 여부는 throw 가 안되면 통과임.
+        hasNaN(separatedStringArr);
 
     }
     private boolean checkPlusSeparator() {
@@ -47,7 +50,18 @@ class Calculator {
         if(!hasPlusSeparator){
             return s.split("[:,]");
         }else{
+            if(plusSeparator.equals("\\"))
+                return s.split("[:,"+plusSeparator.repeat(2)+"]");
             return s.split("[:,"+plusSeparator+"]");
+        }
+    }
+    //숫자가 아닌 문자를 발견할 경우 throw new IllegalArgumentException(); 해버림
+    private void hasNaN(String[] separatedStringArr){
+        for(String s:separatedStringArr){
+            for(char c:s.toCharArray()){
+                if(c < 48 || c > 57)
+                    throw new IllegalArgumentException();
+            }
         }
     }
 }
