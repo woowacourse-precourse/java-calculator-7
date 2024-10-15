@@ -40,4 +40,13 @@ public class Calculator {
         String[] parts = getParts(input);
         return parts[1].replace(customSeparator, ",");
     }
+
+    /**
+     * 정규 구분자만 포함되어 있는 식을 정규 구분자를 기준으로 숫자만 파싱합니다.
+     * @param input 정규 구분자만 포함된 수식
+     * @return 수식에 포함된 숫자
+     */
+    private String[] parseCustomSeparator(String input){
+        return input.split(",|;");
+    }
 }
