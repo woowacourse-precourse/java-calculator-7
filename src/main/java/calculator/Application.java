@@ -23,7 +23,7 @@ public class Application {
             return 0;
         }
         // 1-1. 기본 구분자만 입력된 경우
-        String delimiter = ",|:";
+        String delimiter = "[,:]";
 
         /**
          * 1.2 커스텀 구분자를 포함하여 입력된 경우
