@@ -11,12 +11,15 @@ public class Calculator {
     public Integer add(String input){
         if (isEmpty(input)) return 0;
 
+        if (isNegative(input) || isNotNumber(input)) return -1;
 
-        if (checkCustomSeparator(input)){
+        if (checkCustomSeparator(input) && isValidCustomDelimiterFormat(input)) {
             String customSeparator = getCustomSeparator(input);
             String newCalculation = processCustomSeparator(input, customSeparator);
+            if (isInvalidDelimiter(newCalculation)) return -1;
             return calculate(parseCustomSeparator(newCalculation));
         }
+        if (isInvalidDelimiter(input)) return -1;
         return calculate(parseCustomSeparator(input));
     }
 
@@ -82,6 +85,7 @@ public class Calculator {
     }
 
     /*---------------------- 검증 로직 ----------------------*/
+
 
     /**
      * 입력값이 비어있는지 확인합니다.
