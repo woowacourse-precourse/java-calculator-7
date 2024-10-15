@@ -6,7 +6,7 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class Application {
 
-    private Integer result = 0;
+    private static Integer result = 0;
     private static List<String> delimiterList = List.of(",", ":");
     private static final String startCustom = "//";
     private static final String endCustom = "\\n";
@@ -17,6 +17,7 @@ public class Application {
             addCustomDelimiter(input);
         }
         valid(input);
+
     }
 
     private static void addCustomDelimiter(String input) {
@@ -37,9 +38,12 @@ public class Application {
         }
     }
 
-    private static void valid(String input){
+    private static void valid(String input) {
         if (isThereWrongValue(input)) {
             throw new IllegalArgumentException("잘못된 값이 입력 되었습니다.");
+        }
+        if (isWrongEquation(input)) {
+            throw new IllegalArgumentException("잘못된 수식 입니다.");
         }
     }
 
@@ -48,7 +52,7 @@ public class Application {
         for (int i = 0; i < input.length(); i++) {
             char c = input.charAt(i);
             // 1. 숫자인지 확인
-            if (c > 47 && c < 58) continue;
+            if (isDigit(c)) continue;
             // 2. 구분자인지 확인
             boolean pass = true;
             for (String delimiter : delimiterList) {
@@ -67,7 +71,32 @@ public class Application {
         return wrongValue;
     }
 
-    private static void isWrongEquation() {
+    private static boolean isWrongEquation(String input) {
+        boolean wrongEquation = false;
+        // 맨 처음과 끝이 숫자 인지 확인
+        if (!isDigit(input.charAt(0)) || !isDigit(input.charAt(input.length() - 1))) {
+            return true;
+        }
+        for (int i = 0; i < input.length(); i++) {
+            char ch = input.charAt(i);
+            if (!isDigit(ch)) { // 구분자가 나타났다면
+                for (String delimiter : delimiterList) {
+                    if (input.startsWith(delimiter, i)) {
+                        if (!isDigit(input.charAt(i - 1)) || !isDigit(input.charAt(i + delimiter.length()))) {
+                            wrongEquation = true;
+                        }
+                    }
+                }
+            }
+        }
+        return wrongEquation;
+    }
+
+    private static boolean isDigit(char c) {
+        return (c > 47 && c < 58) ? true : false;
+    }
+
+    private static void calculate(String input) {
 
     }
 }
