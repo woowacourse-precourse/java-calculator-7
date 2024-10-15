@@ -5,25 +5,25 @@ import calculator.application.ports.input.InputReader;
 import calculator.adapters.input.InputReaderImpl;
 import calculator.application.ports.output.OutputWriter;
 import calculator.adapters.output.OutputWriterImpl;
+import calculator.application.service.CalculateStringCommand;
+import calculator.application.usecase.CalculateStringUseCase;
 
 public class AppConfig {
 
     private InputReader inputReader;
     private OutputWriter outputWriter;
     private CliCalculationController cliCalculationController;
+    private CalculateStringUseCase calculateStringUseCase;
 
     public AppConfig() {
         this.inputReader = new InputReaderImpl();
         this.outputWriter = new OutputWriterImpl();
-        this.cliCalculationController = new CliCalculationController(inputReader, outputWriter);
-    }
-
-    public InputReader inputReader() {
-        return inputReader;
-    }
-
-    public OutputWriter outputWriter() {
-        return outputWriter;
+        this.calculateStringUseCase = new CalculateStringCommand();
+        this.cliCalculationController = new CliCalculationController(
+            inputReader,
+            outputWriter,
+            calculateStringUseCase
+        );
     }
 
     public CliCalculationController cliCalculationController() {
