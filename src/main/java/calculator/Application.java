@@ -32,7 +32,11 @@ public class Application {
             String[] splitNumbers = numbersWithDelimiter.split(buildDelimiterRegex(delimiters));
 
             for (String number : splitNumbers) {
-                result += Integer.parseInt(number);
+                int parsedNumber = Integer.parseInt(number);
+                if(parsedNumber < 0) {
+                    throw new IllegalArgumentException("입력값은 양수만 가능합니다.");
+                }
+                result += parsedNumber;
             }
         }
         System.out.println("결과 : " + result);
