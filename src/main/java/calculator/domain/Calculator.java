@@ -11,5 +11,7 @@ public class Calculator {
         this.separator.add(";");
     }
 
-
+    public void addSeparator(String separator) {
+        this.separator.add(separator);
+    }
 }
