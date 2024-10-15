@@ -4,24 +4,24 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
-        String delimiter = "";
+        // //;\n1,2:3;4
+        String delimiter = "[,:]";
+        String customDelimiter = "";
         String input = Console.readLine();
 
-        // 문자열이 //로 시작하는지 확인
         if(input.startsWith("//")){
-            // 커스텀하기위한 마지막이\n 이 끝나는 위치
             int delimiterEndIndex = input.indexOf("\\n");
-            System.out.println(delimiterEndIndex);
-            // //@\n
-            // @
-            delimiter = input.substring(2,delimiterEndIndex);
-            // \n의 숫자들
+            customDelimiter = input.substring(2,delimiterEndIndex);
             input = input.substring(delimiterEndIndex +2);
-            System.out.println(delimiter);
         }
 
+        String regex = delimiter.substring(0,delimiter.length()-1)+customDelimiter+"]";
+        System.out.println(regex);
+        String[] numbers = input.split(regex);
 
-
+        for (String number : numbers) {
+            System.out.print(number);
+        }
 
 
     }
