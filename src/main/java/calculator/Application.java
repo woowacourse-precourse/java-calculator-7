@@ -1,7 +1,11 @@
 package calculator;
 
+import java.util.Optional;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        CustomDelimiterExtractor customDelimiterExtractor = new CustomDelimiterExtractor();
+        Optional<String> customDelimiterOptional = customDelimiterExtractor.extractCustomDelimiterFrom("//1\n");
+        System.out.println(customDelimiterOptional.orElse(null));
     }
 }
