@@ -19,6 +19,17 @@ public class InputParser {
         String defaultDelimiterRegex = "(^[1-9]\\d*)((,|:)([1-9]\\d*))*$";
         return input.matches(defaultDelimiterRegex);
     }
-    
+
+    protected List<Integer> convertDefaultDelimiter(String input) throws IllegalArgumentException {
+        try {
+            input = input.replace(","," ").replace(":"," ");
+            String[] inputs = input.split(" ");
+            return Arrays.stream(inputs)
+                         .map(Integer::parseInt)
+                         .toList();
+        } catch (Exception e) {
+            throw new IllegalArgumentException();
+        }
     }
+
 }
