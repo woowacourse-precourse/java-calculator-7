@@ -6,7 +6,13 @@ public class Calculator {
 
     public int add(String input){
         int sum = 0;
+
+        if(input.isEmpty()){
+            return sum;
+        }
+
         String[] numbers = input.split(delimiter);
+
         for(String number : numbers){
             sum += Integer.parseInt(number);
         }
