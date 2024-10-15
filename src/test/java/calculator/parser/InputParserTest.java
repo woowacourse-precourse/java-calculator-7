@@ -59,7 +59,7 @@ class InputParserTest {
     @DisplayName("커스텀 구분자를 기준으로 숫자를 분리할 수 있다.")
     public void separateByCustomDelimiterTest() {
         // given
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
 
         // when
         String[] real = inputParser.separate(input);
