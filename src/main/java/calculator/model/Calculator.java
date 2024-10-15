@@ -12,4 +12,12 @@ public class Calculator {
         return input.startsWith("//");
     }
 
+    /**
+     * 커스텀 구분자 입력 시, 수식과 커스텀 구분자를 2개의 부분으로 분리합니다.
+     * @param input 입력 받은 기존 상태의 수식
+     * @return 분리된 수식
+     */
+    private String[] getParts(String input) {
+        return input.split("\n");
+    }
 }
