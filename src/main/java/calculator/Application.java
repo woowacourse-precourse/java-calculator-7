@@ -25,6 +25,18 @@ public class Application {
         String delimiters = String.join("|", parser);
         String[] numbers = input.split(delimiters);
 
+        for (String number : numbers) {
+            if (!number.isEmpty()) {
+                try {
+                    int num = Integer.parseInt(number);
+                    if (num < 0) {
+                        throw new IllegalArgumentException();
+                    }
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException();
+                }
+            }
+        }
 
 
     }
