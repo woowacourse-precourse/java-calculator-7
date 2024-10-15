@@ -15,6 +15,6 @@ public class Parser {
 
 
     public List<String> execute() {
-        return null;
+        return Arrays.stream(inputString.split(separator)).collect(Collectors.toList());
     }
 }
