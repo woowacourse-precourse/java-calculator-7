@@ -16,6 +16,7 @@ public class Application {
             if(limitIndex != -1){
                 String customParser = input.substring(2, limitIndex);
                 parser.add(customParser);
+                input = input.substring(limitIndex + 2);
             }
         }
     }
