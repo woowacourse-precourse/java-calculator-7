@@ -14,7 +14,7 @@ public class Application {
 
         if (isCustom(input)) {
             int delimiterEndIndex = findDelimiterEndIndex(input);
-            customDelimiter = input.substring(2, delimiterEndIndex);
+            customDelimiter = findCustomDelimiter(input, delimiterEndIndex);
             input = input.substring(delimiterEndIndex + 2);
         }
 
@@ -36,6 +36,12 @@ public class Application {
 
         System.out.println(sum);
 
+    }
+
+    private static String findCustomDelimiter(String input, int delimiterEndIndex) {
+        String customDelimiter;
+        customDelimiter = input.substring(2, delimiterEndIndex);
+        return customDelimiter;
     }
 
     private static int findDelimiterEndIndex(String input) {
