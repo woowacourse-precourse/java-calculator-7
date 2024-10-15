@@ -12,7 +12,7 @@ public class Application {
         String input = Console.readLine();
 
         if(input.equals("")){
-            System.out.println("0");
+            System.out.println("결과 : 0");
             return;
         }
 
