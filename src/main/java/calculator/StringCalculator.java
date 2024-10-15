@@ -39,9 +39,12 @@ public class StringCalculator {
      */
     private ArrayList<Integer> getNumbers(String input, ArrayList<String> separators) {
         ArrayList<Integer> numbers = new ArrayList<Integer>();
-
-        String number_string = input.split("\\n")[1];
-        System.out.println("number_string: " + number_string);
+        String number_string;
+        if (input.startsWith("//")) {
+            number_string = input.split("\\\\n")[1];
+        } else {
+            number_string = input;
+        }
 
         String separator = String.join("|", separators);
 
@@ -60,6 +63,34 @@ public class StringCalculator {
         return numbers;
     }
 
+    /**
+     * This method return sum of numbers separated by separators
+     * @param input The string to sum
+     * @return A sum of input numbers
+     */
+    public Integer calculate(String input) {
 
+        ArrayList<String> separators = new ArrayList<String>();
 
+        if (input.startsWith("//")) {
+            separators = getCustomSeparator(input);
+        } else {
+            separators = getDefaultSeparator();
+        }
+
+        try {
+            ArrayList<Integer> numbers = getNumbers(input, separators);
+
+            Integer sum = 0;
+
+            for (Integer number : numbers) {
+                sum += number;
+            }
+
+            return sum;
+
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(e.getMessage());
+        }
+    }
 }
