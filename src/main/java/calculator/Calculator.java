@@ -12,13 +12,13 @@ public class Calculator {
         this.calculator = calculator;
     }
 
-    public long calculate(String input) throws IllegalStateException {
+    public long calculate(String input) throws IllegalArgumentException {
         try{
             List<Long> list = parser.parse(input);
             ListValidator.validateIsPosList(list);
             return calculator.calculate(list);
         }catch (IllegalArgumentException e){
-            throw new IllegalStateException(e);
+            throw new IllegalArgumentException(e);
         }
     }
 }

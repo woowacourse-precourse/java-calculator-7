@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 public class InputStringParser {
 
-    public List<Long> parse(String input) throws IllegalStateException{
+    public List<Long> parse(String input) throws IllegalArgumentException{
 
         Optional<String> customIdentifier = parseCustomIdentifier(input);
         try {
@@ -21,7 +21,7 @@ public class InputStringParser {
             }
 
         } catch (Exception e) {
-            throw new IllegalStateException(e);
+            throw new IllegalArgumentException(e);
         }
 
     }
@@ -39,7 +39,7 @@ public class InputStringParser {
         if (matcher.find()) {
             return input.substring(matcher.end());
         } else {
-            throw new IllegalStateException();
+            throw new IllegalArgumentException();
         }
     }
 
