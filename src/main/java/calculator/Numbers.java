@@ -21,8 +21,9 @@ public class Numbers {
                 .toList();
     }
 
-    // TODO: Console Debugging 용도, 기능 개발 완료 후 사용하지 않으면 제거하기
-    public List<Number> getNumbers() {
-        return numbers;
+    public int calculateTotalValue() {
+        return numbers.stream()
+                .mapToInt(Number::value)
+                .sum();
     }
 }

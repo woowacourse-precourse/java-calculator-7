@@ -12,6 +12,8 @@ public class Application {
 
         Numbers numbers = Numbers.of(split);
 
-        System.out.println(numbers.getNumbers());
+        int totalValue = numbers.calculateTotalValue();
+
+        System.out.println(totalValue);
     }
 }
