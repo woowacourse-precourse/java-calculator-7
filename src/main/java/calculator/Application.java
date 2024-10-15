@@ -15,7 +15,10 @@ public class Application {
         if ("".equals(input)) {
             return result;
         }
-        result = Integer.parseInt(input);
+        String[] numbers = input.split(",");
+        for (String number : numbers) {
+            result += Integer.parseInt(number);
+        }
         return result;
     }
 }
