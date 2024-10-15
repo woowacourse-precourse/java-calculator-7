@@ -35,13 +35,13 @@ public class Application {
     public void extractNumber(){
         // 커스텀 구분자를 지정한 경우
         if(userInput.matches("//\\D+(\r?\n)[\\s\\S]+")){
-            String separator ="";
+            StringBuilder separator = new StringBuilder();
             int idx = 2;
             while(true){
-                separator += userInput.charAt(idx++);
+                separator.append(userInput.charAt(idx++));
                 if(userInput.charAt(idx) == '\n') break;
             }
-            numbers = userInput.substring(idx+1).split(separator);
+            numbers = userInput.substring(idx+1).split(separator.toString());
         }
         // 커스텀 구분자를 지정하지 않은 경우 - 기본 구분자: 쉼표(,), 콜론(:)
         else{
