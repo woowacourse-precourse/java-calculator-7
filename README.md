@@ -1,6 +1,14 @@
 # java-calculator-precourse
 
 
+### 기능 목록 단위 
+
+- 구분자로 숫자를 분리한다.
+  - 기본 구분자는 쉼표, 콜론이다.
+  - 문자열 앞부분의 "//"와 "\n" 사이에 위치하는 문자를 커스텀 구분자로 사용할 수 있다.
+
+- 분리된 각 숫자의 합을 반환한다.
+
 ### 커밋 규칙
 
 - [AngularJS Git Commit Message Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153#allowed-type)을 참고한다.
