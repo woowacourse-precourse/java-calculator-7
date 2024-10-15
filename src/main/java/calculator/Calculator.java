@@ -24,8 +24,10 @@ public class Calculator {
             throw new IllegalArgumentException("입력하신 문자열에는 공백이 포함될 수 없습니다.");
         }
 
-        input = extractByCustomDelimiter(input);
+        return sum(parseCustomDelimiter(input));
+    }
 
+    private static int sum(String input) {
         String[] numbers = input.split(delimiter);
         for (String number : numbers) {
             if (EMPTY_STRING.equals(number)) {
@@ -43,7 +45,7 @@ public class Calculator {
         return result;
     }
 
-    private static String extractByCustomDelimiter(String input) {
+    private static String parseCustomDelimiter(String input) {
         Pattern pattern = Pattern.compile(CUSTOM_REGEX);
         Matcher matcher = pattern.matcher(input);
         if (matcher.find()) {
