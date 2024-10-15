@@ -27,9 +27,9 @@ public class ParsingInputString {
 
     public void findCustomChar() {
         String input = inputString.getInput();
-        if (input.charAt(0) == '/' && input.charAt(1) == '/'
-            && input.charAt(3) == '\\' && input.charAt(4) == 'n') {
+        if (input.indexOf("//") == 0 && input.indexOf("\n") == 3) {
             inputString.setCustomChar(input.charAt(2));
         }
+        inputString.setInput(input.substring(5));
     }
 }

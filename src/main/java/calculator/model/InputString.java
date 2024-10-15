@@ -4,7 +4,7 @@ import java.util.List;
 
 public class InputString {
 
-    private final String input;
+    private String input;
     private char customChar;
     private List<Integer> numberList;
 
@@ -22,6 +22,10 @@ public class InputString {
 
     public List<Integer> getNumberList() {
         return numberList;
+    }
+
+    public void setInput(String input) {
+        this.input = input;
     }
 
     public void setCustomChar(char customChar) {
