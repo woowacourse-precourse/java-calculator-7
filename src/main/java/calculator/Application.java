@@ -12,8 +12,15 @@ public class Application {
     }
 
     public static int getResult(String input) {
-        String delimiter = ",|:";
+        String delimiter = "[,:]";
         int result=0;
+
+        if (input.startsWith("//")) {
+            int customDelimiterEndIndex = input.indexOf("\\n");
+            delimiter = input.substring(2, customDelimiterEndIndex);
+            input = input.substring(customDelimiterEndIndex + 2);
+        }
+
         String[] numbers = input.split(delimiter);
 
         for (String number : numbers) {
