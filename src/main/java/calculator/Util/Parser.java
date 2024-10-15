@@ -13,8 +13,7 @@ public class Parser {
     // 커스텀 구분자 파싱
     public static List<Integer> parseWithCustomDelimeter(String input) {
         // 정규식 패턴: "//"으로 시작하고, 그 뒤에 임의의 문자가 있으며, "\\n"으로 끝나는 패턴
-        Matcher matcher = Pattern.compile("^//(.*?)\\\\n" +
-                "(.*)").matcher(input);
+        Matcher matcher = Pattern.compile("^//(.*?)\\\\n" + "(.*)").matcher(input);
 
         // 정규식이 일치하지 않으면 예외 발생
         if (!matcher.matches()) {
@@ -41,12 +40,12 @@ public class Parser {
     private static List<Integer> splitAndConvert(String input, String delimiter) {
         String[] tokens = input.split(delimiter);
         List<Integer> numbers = new ArrayList<>();
-        try{
+        try {
             for (String token : tokens) {
                 // 문자열을 정수로 변환하여 리스트에 추가
                 numbers.add(Integer.parseInt(token));
             }
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException();
         }
         return numbers;

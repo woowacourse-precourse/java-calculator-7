@@ -8,10 +8,10 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         String input = InputView.getInput();
-        try{
+        try {
             int result = StringAddCalculator.calculate(input);
             ResultView.printResult(result);
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException();
         }
     }
