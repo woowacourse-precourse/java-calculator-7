@@ -37,4 +37,15 @@ public class ExceptionHandler {
             throw new IllegalArgumentException("기본 구분자는 커스텀 구분자로 설정할 수 없습니다.");
         }
     }
+
+
+    public void detectNonDigitElem(List<String> splitElems) {
+        for (String elem : splitElems) {
+            try {
+                Integer.parseInt(elem);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("구분자 사이에는 양의 정수만 입력할 수 있습니다.");
+            }
+        }
+    }
 }
