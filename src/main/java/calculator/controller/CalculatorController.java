@@ -18,6 +18,7 @@ public class CalculatorController {
         requestInput();
         String input = receiveInput();
         String result = processInput(input);
+        displayResult(result);
     }
 
     private void requestInput() {
@@ -36,5 +37,9 @@ public class CalculatorController {
         PositiveNumbers positiveNumbers = new PositiveNumbers(numbers);
         int sum = positiveNumbers.sum();
         return Integer.toString(sum);
+    }
+
+    private void displayResult(String result) {
+        outputView.displayResult(result);
     }
 }
