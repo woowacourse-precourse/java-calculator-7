@@ -42,7 +42,7 @@ public class MainController {
         try{
             customDividerFinder.findCustomDividers(calculatedValue,divider);
         }catch (IllegalArgumentException e){
-            Output.printError(e.getMessage());
+            throw new IllegalArgumentException();
         }
     }
 
