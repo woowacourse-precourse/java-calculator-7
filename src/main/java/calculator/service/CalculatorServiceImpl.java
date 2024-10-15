@@ -5,9 +5,9 @@ import java.util.List;
 
 public class CalculatorServiceImpl implements CalculatorService {
 
-    private final String startCustomDelimiter = "//";
-    private final String endCustomDelimiter = "\\n";
-    private final String basicDelimiter = ",|:";
+    private static final String START_CUSTOM_DELIMITER = "//";
+    private static final String END_CUSTOM_DELIMITER = "\\n";
+    private static final String BASIC_DELIMITER = ",|:";
 
     @Override
     public List<String> findValidNumber(String userInput) {
@@ -15,19 +15,19 @@ public class CalculatorServiceImpl implements CalculatorService {
         List<String> numbers;
         String customDelimiter = findCustomDelimiter(userInput);
         if (customDelimiter == null || customDelimiter.isEmpty()) {
-            numbers = Arrays.asList(userInput.split(basicDelimiter));
+            numbers = Arrays.asList(userInput.split(BASIC_DELIMITER));
             return numbers;
         }
-        String changedUserInput = userInput.substring(userInput.lastIndexOf(endCustomDelimiter) + 2,
+        String changedUserInput = userInput.substring(userInput.lastIndexOf(END_CUSTOM_DELIMITER) + 2,
                 userInput.length());
-        numbers = Arrays.asList(changedUserInput.split(basicDelimiter + "|" + customDelimiter));
+        numbers = Arrays.asList(changedUserInput.split(BASIC_DELIMITER + "|" + customDelimiter));
         return numbers;
     }
 
     private String findCustomDelimiter(String userInput) {
-        if (userInput.contains(startCustomDelimiter) && userInput.contains(endCustomDelimiter)) {
-            int idx1 = userInput.indexOf(startCustomDelimiter) + 2;
-            int idx2 = userInput.lastIndexOf(endCustomDelimiter);
+        if (userInput.contains(START_CUSTOM_DELIMITER) && userInput.contains(END_CUSTOM_DELIMITER)) {
+            int idx1 = userInput.indexOf(START_CUSTOM_DELIMITER) + 2;
+            int idx2 = userInput.lastIndexOf(END_CUSTOM_DELIMITER);
 
             StringBuilder sb = new StringBuilder();
             for (int i = idx1; i < idx2; i++) {
