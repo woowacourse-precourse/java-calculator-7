@@ -13,7 +13,7 @@ public class CalculateStringCommand implements CalculateStringUseCase {
 
     @Override
     public String calculate(String input) {
-        inputValidator.validate(input)
+        inputValidator.validate(input);
 
         return "6";
     }

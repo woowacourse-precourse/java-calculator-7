@@ -16,4 +16,10 @@ public class InputValidator implements Validator<String> {
             throw new IllegalArgumentException(INPUT_IS_NOT_TRIMMED.getMessage());
         }
     }
+
+    private void isEmpty(String target) {
+        if (target.isEmpty()) {
+            throw new IllegalArgumentException(INPUT_IS_EMPTY.getMessage());
+        }
+    }
 }
