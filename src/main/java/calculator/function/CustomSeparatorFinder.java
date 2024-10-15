@@ -10,6 +10,11 @@ public class CustomSeparatorFinder {
     }
 
     public Optional<Character> execute(){
-        return Optional.empty();
+        if(inputString.length() < 5) return Optional.empty();
+        if(inputString.charAt(0) != '/') return Optional.empty();
+        if(inputString.charAt(1) != '/') return Optional.empty();
+        if(inputString.charAt(3) != '\\') return Optional.empty();
+        if(inputString.charAt(4) != 'n') return Optional.empty();
+        return Optional.of(inputString.charAt(2));
     }
 }
