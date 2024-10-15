@@ -29,7 +29,7 @@ public class Application {
             int newLineIdx = inputStr.lastIndexOf("\\n");
 
             values[0] += "|"+inputStr.substring(2,newLineIdx);
-            values[1] = inputStr.substring(newLineIdx+2, inputStr.length());
+            values[1] = inputStr.substring(newLineIdx+2);
         }
 
         return values;
