@@ -3,12 +3,12 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Calculator {
 
-    static boolean customDelimiters = false;    // 기본 구분자, 커스텀 구분자 인지
+    static boolean iscustomDelimiter = false;    // 기본 구분자, 커스텀 구분자 인지
 
-    // 기본 구분자 or 커스텀 구분자 구분하는 함수
-    private static void isCustomDelimiters(String formula) {
+    // 기본 구분자 or 커스텀 구분자 구별하는 함수
+    private static void distinctionDelimiter(String formula) {
         if (formula.startsWith("//")) {
-            customDelimiters = true;
+            iscustomDelimiter = true;
         }
     }
 
@@ -19,6 +19,6 @@ public class Calculator {
 
     public static void run() {
         String formula = input();   // 사용자 입력
-        isCustomDelimiters(formula);    // 기본 구분자, 커스텀 구분자 구분하기
+        distinctionDelimiter(formula);    // 기본 구분자, 커스텀 구분자 구분하기
     }
 }
