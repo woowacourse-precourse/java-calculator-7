@@ -1,5 +1,7 @@
 package calculator.domain;
 
+import calculator.domain.exception.CalculatorException;
+import calculator.domain.exception.ErrorMessage;
 import java.util.List;
 
 public class Calculator {
@@ -11,8 +13,14 @@ public class Calculator {
     }
 
     public static Calculator of(List<Integer> numbers) {
-        //추후에 추가적인 검증 로직이 있다면 여기에 작성
+        validate(numbers);
         return new Calculator(numbers);
+    }
+
+    private static void validate(List<Integer> numbers) {
+        if (numbers.stream().anyMatch(number -> number <= 0)) {
+            throw CalculatorException.from(ErrorMessage.INVALID_RANGE_ERROR);
+        }
     }
 
     public int calculateSum() {
