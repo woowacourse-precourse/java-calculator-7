@@ -1,5 +1,8 @@
 package calculator.parser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class InputParser {
     public static final String DEFAULT_DELIMETER_FILTER = "[,:]";
     public static final String DELIMITER_PREFIX = "//";
@@ -13,5 +16,13 @@ public class InputParser {
             return numbersPart.split(customDelimiter);
         }
         return input.split(DEFAULT_DELIMETER_FILTER);
+    }
+
+    public List<Integer> toInteger(String[] elements) {
+        List<Integer> numbers = new ArrayList<>();
+        for (String element : elements) {
+            numbers.add(Integer.parseInt(element));
+        }
+        return numbers;
     }
 }
