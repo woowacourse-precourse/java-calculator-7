@@ -2,7 +2,7 @@ package calculator;
 
 public class CustomDelimiterCalculator {
     private final String CUSTOM_DELIMITER_PREFIX = "//";
-    private final String CUSTOM_DELIMITER_SUFFIX = "\n";
+    private final String CUSTOM_DELIMITER_SUFFIX = "\\n";
     private final int CUSTOM_DELIMITER_SIZE = 1;
 
     public boolean hasCustomDelimiter(String str) {
