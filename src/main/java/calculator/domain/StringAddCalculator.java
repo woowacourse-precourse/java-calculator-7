@@ -1,12 +1,16 @@
 package calculator.domain;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringAddCalculator {
     private static final String DELIMITER = ",|:";
-    private static final String CUSTOM_DELIMITER_START = "//";
-    private static final String CUSTOM_DELIMITER_END = "\\n";
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\\\\n(.*)");
     private static final String NUMBER_FORMAT_ERROR = "숫자값만 입력가능합니다.";
     private static final String MIN_VALUE_ERROR = "양수만 입력가능합니다.";
     private static final int DEFAULT_VALUE = 0;
+    private static final int CUSTOM_DELIMITER_INDEX = 1;
+    private static final int TARGET_STRING_INDEX = 2;
 
     public StringAddCalculator() {
     }
@@ -22,12 +26,11 @@ public class StringAddCalculator {
         return inputValue == null || inputValue.isBlank();
     }
 
-    private String[] splitString(final String inputValue) {
-        if (inputValue.startsWith(CUSTOM_DELIMITER_START) && inputValue.contains(CUSTOM_DELIMITER_END)) {
-            int delimiterEnd = inputValue.indexOf(CUSTOM_DELIMITER_END);
-            String customDelimiter = inputValue.substring(CUSTOM_DELIMITER_START.length(), delimiterEnd);
-            return inputValue.substring(delimiterEnd + CUSTOM_DELIMITER_END.length())
-                    .split(customDelimiter);
+    private String[] splitStringByRegx(final String inputValue) {
+        Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(inputValue);
+        if (matcher.find()) {
+            String customDelimiter = matcher.group(CUSTOM_DELIMITER_INDEX);
+            return matcher.group(TARGET_STRING_INDEX).split(customDelimiter);
         }
         return inputValue.split(DELIMITER);
     }
@@ -43,7 +46,7 @@ public class StringAddCalculator {
     }
 
     private int[] convertToInt(final String inputValue) {
-        String[] values = splitString(inputValue);
+        String[] values = splitStringByRegx(inputValue);
         int[] result = new int[values.length];
         for (int i = 0; i < values.length; i++) {
             validateNumberValue(values[i]);
