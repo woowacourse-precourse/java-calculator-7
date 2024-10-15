@@ -1,6 +1,7 @@
 # java-calculator-precourse
 
 기능 구현 목록
+
 #1 문자열을 받고 출력하는 VIEW를 구현
 
 #2 VIEW에서 받은 문자열을 MODEL에 전달하고 MODEL에서 받은 결과 값을 VIEW로 전달하는 CONTROLLER를 구현
