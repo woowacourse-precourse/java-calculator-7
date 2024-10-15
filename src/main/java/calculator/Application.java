@@ -32,10 +32,10 @@ public class Application {
             String combineDelimiter = defaultDelimiter.getDefaultDelimiter()
                     .substring(0, defaultDelimiter.getDefaultDelimiter().length() - 1)
                     + customDelimiter.getCustomDelimiter() + "]";
-            String[] stringNumbers = input.split(combineDelimiter);
+            NumberStrings stringNumbers = new NumberStrings(input.split(combineDelimiter));
 
             int sum = 0;
-            for (String stringNumber : stringNumbers) {
+            for (String stringNumber : stringNumbers.getStringNumbers()) {
                 if (stringNumber.equals("\"\"")) {
                     sum += 0;
                 }
