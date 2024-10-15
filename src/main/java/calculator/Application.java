@@ -19,23 +19,25 @@ public class Application {
         }
 
         String regex = updateCustomDelimiter(delimiter, customDelimiter);
-        System.out.println(regex);
         String[] inputs = input.split(regex);
 
-        // //;\n1,2:"";4
         int sum = 0;
         for (String number : inputs) {
             number = number.trim();
-            if (number.isEmpty() || number.equals("\"\"")) {
+            if (isStringEmpty(number)) {
                 sum += 0;
             }
-            if(!number.isEmpty() && !number.equals("\"\"")){
+            if(!isStringEmpty(number)){
                 sum += Integer.parseInt(number);
             }
         }
 
         System.out.println(sum);
 
+    }
+
+    private static boolean isStringEmpty(String number) {
+        return number.isEmpty() || number.equals("\"\"");
     }
 
     private static String updateCustomDelimiter(String delimiter, String customDelimiter) {
