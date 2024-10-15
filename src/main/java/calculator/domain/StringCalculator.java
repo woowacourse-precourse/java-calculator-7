@@ -9,16 +9,18 @@ public class StringCalculator {
 
     private static final String DISTINGUISHED = "[,;]";
 
+    public static final String BEGIN_DATA = "//";
+
     public String extractCustomValue(String value) {
-        if (value.startsWith("//")) {
+        if (value.startsWith(BEGIN_DATA)) {
             return value.substring(2, 3);
         }
         return DISTINGUISHED;
     }
 
     public String removeValue(String value) {
-        if (value.startsWith("//")) {
-            return value.substring(5);
+        if (value.startsWith(BEGIN_DATA)) {
+            return value.substring(value.indexOf("n") + 1);
         }
         return value;
     }
