@@ -1,5 +1,9 @@
 package calculator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Calculator {
     private String userInput;
     private final OutputView outputView = new OutputView();
@@ -16,24 +20,35 @@ public class Calculator {
             DELIMITER += getCustomSpliter();
         }
 
-        splitString();
-        changeStringToNumber();
-        sumNumber();
-        outputView.printResult(resultNumber);
+        try {
+            List<String> splitInput = splitString();
+            Long[] numberOfInputString = changeStringToNumber(splitInput);
+            sumNumber(numberOfInputString);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
-    private void sumNumber() {
-
-
-    }
-
-    private void changeStringToNumber() {
+    private Long sumNumber(Long[] numberArrays) {
 
     }
 
-    private void splitString() {
+    private Long[] changeStringToNumber(List<String> splitInput) throws IllegalArgumentException{
+        Long[] numberOfInputString = new Long[splitInput.size()];
+        for (int i=0; i< splitInput.size(); i++) {
+            numberOfInputString[i] = Long.parseLong(splitInput.get(i));
+        }
+        return numberOfInputString;
     }
+
+    private List<String> splitString() throws IllegalArgumentException {
+        List<String> splitInput;
+        splitInput = Arrays.stream(userInput.split(DELIMITER)).toList();
+        return splitInput;
+    }
+
 
     private boolean hasCustomSpliter(){
         if (userInput.length() >= 5 && userInput.startsWith("//")) {
