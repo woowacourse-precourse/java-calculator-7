@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Separator {
-    public static List<String> separators;
+    private List<String> separators;
     public Separator() {
         separators = new ArrayList<>();
         separators.add(";");
