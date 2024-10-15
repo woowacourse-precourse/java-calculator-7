@@ -9,11 +9,12 @@ import java.util.regex.Pattern;
 import static calculator.Constant.INPUT_NUMBER_MESSAGE;
 
 public class InputView {
-    private Validator validator;
+    private final Validator validator;
 
     public InputView() {
         this.validator = new Validator();
     }
+
     public String[] inputCalculateNumber() {
         System.out.println(INPUT_NUMBER_MESSAGE);
         String inputNumber = Console.readLine();
@@ -36,7 +37,7 @@ public class InputView {
             }
         }
         return numbersPart.split(divisionNumber);
-    } 
+    }
 
 
 }

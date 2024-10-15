@@ -4,13 +4,13 @@ import static calculator.Constant.CANNOT_INPUT_NEGATIVE_NUMBER;
 import static calculator.Constant.ONLY_CAN_INPUT_NUMBER;
 
 public class Validator {
-   public void validateInputNumber(String[] splitNumber) {
+    public void validateInputNumber(String[] splitNumber) {
         for (String number : splitNumber) {
             validateSingleNumber(number.trim());
         }
     }
 
-   public void validateSingleNumber(String number) {
+    public void validateSingleNumber(String number) {
         if (!isValidNumber(number)) {
             throw new IllegalArgumentException(ONLY_CAN_INPUT_NUMBER);
         }
