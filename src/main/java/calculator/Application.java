@@ -10,6 +10,8 @@ public class Application {
 
         if (input.startsWith("//")) {
             // //@\n1@2,3:4
+            // //@\n1@2,"":4
+            // //@\n1@2, :4
             int customDelimiterEndIndex = input.indexOf("\\n");
             CustomDelimiter customDelimiter = new CustomDelimiter(input.substring(2, customDelimiterEndIndex));
             input = input.substring(customDelimiterEndIndex + 2);
@@ -18,6 +20,12 @@ public class Application {
                     + customDelimiter.getCustomDelimiter() + "]";
             String[] stringNumbers = input.split(combineDelimiter);
 
+            int sum = 0;
+            for (String stringNumber : stringNumbers) {
+                if(stringNumber.equals("\"\"")){
+                    sum += 0;
+                }
+            }
 
         }
 
