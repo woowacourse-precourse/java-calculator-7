@@ -13,7 +13,7 @@ public class Calculator {
             return EMPTY_VALUE;
         }
 
-        int[] inputNumbers = Arrays.stream(input.split(","))
+        int[] inputNumbers = Arrays.stream(input.split(Delimiter.getRegularDelimiter()))
                 .mapToInt(Integer::parseInt)
                 .toArray();
 
@@ -32,7 +32,7 @@ public class Calculator {
 
     private void validateNumbers(int[] inputNumbers) {
         if (Arrays.stream(inputNumbers).anyMatch(n -> n < 0)) {
-            throw new IllegalArgumentException("음수는 허용되지 않습니다: " + Arrays.toString(inputNumbers));
+            throw new IllegalArgumentException("음수는 허용되지 않는다: " + Arrays.toString(inputNumbers));
         }
     }
 }

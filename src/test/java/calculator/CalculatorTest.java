@@ -36,9 +36,9 @@ class CalculatorTest {
     }
 
     @ParameterizedTest
-    @DisplayName("쉼표를 포함한 문자열이 주어지면, 쉼표를 기준으로 구분하여 숫자로 변환 후 더한다.")
-    @CsvSource(delimiter = '=', value = {"1,2,3=6", "0,1,2=3", "100,200,300=600", "1,2=3"})
-    void calculateByRest(String input, int expected) {
+    @DisplayName("쉼표나, 콜론을 포함한 문자열이 주어지면, 쉼포 혹은 콜론을 기준으로 구분하여 숫자로 변환 후 더한다.")
+    @CsvSource(delimiter = '=', value = {"1,2,3=6", "0,1,2=3", "100,200,300=600", "1,2=3", "1:2=3", "1:2,3=6", "100,200:300=600"})
+    void calculateByRestOrColon(String input, int expected) {
         Calculator calculator = new Calculator();
         int result = calculator.calculate(input);
         Assertions.assertThat(result).isEqualTo(expected);
@@ -46,7 +46,7 @@ class CalculatorTest {
 
     @ParameterizedTest
     @DisplayName("음수가 주어지면 예외가 발생한다.")
-    @ValueSource(strings = {"-1,-2,-3", "-1,5"})
+    @ValueSource(strings = {"-1:-2,-3", "-1,5"})
     void throwsExceptionWhenInputContainsNegative(String input) {
         Calculator calculator = new Calculator();
         assertThatThrownBy(() -> calculator.calculate(input))
