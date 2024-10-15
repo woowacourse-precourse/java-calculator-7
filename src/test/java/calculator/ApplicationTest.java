@@ -4,6 +4,7 @@ import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import calculator.controller.CalculateIntegerList;
 import calculator.controller.ParsingInputString;
 import calculator.model.InputString;
 import camp.nextstep.edu.missionutils.test.NsTest;
@@ -42,6 +43,20 @@ class ApplicationTest extends NsTest {
         //then
         assertThat(integers).isEqualTo(List.of(12, 3, 4, 6));
         assertThat(inputString.getNumberList()).isEqualTo(List.of(12, 3, 4, 6));
+    }
+
+    @Test
+    void calculateTest() {
+        //given
+        InputString inputString = new InputString();
+        inputString.setNumberList(List.of(1, 2, 3, 4));
+
+        //when
+        CalculateIntegerList calculateIntegerList = new CalculateIntegerList(inputString);
+        int calculateResult = calculateIntegerList.calculate();
+
+        //then
+        assertThat(calculateResult).isEqualTo(10);
     }
 
     @Override
