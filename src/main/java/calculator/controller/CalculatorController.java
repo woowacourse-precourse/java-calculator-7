@@ -1,13 +1,18 @@
 package calculator.controller;
 
+import calculator.service.Extractor;
 import calculator.view.InputView;
+
+import java.util.List;
 
 public class CalculatorController {
 
     private final InputView inputView;
+    private final Extractor extractor;
 
-    public CalculatorController(InputView inputView) {
+    public CalculatorController(InputView inputView, Extractor extractor) {
         this.inputView = inputView;
+        this.extractor = extractor;
     }
 
     public void start() {
@@ -19,7 +24,9 @@ public class CalculatorController {
             //  add하고
             //  return한다.(OutputView)
 
-            inputView.getUserInput();               // 사용자 입력 받기
+            String input = inputView.getUserInput();               // 사용자 입력 받기
+            List<Integer> extractedIntegers = extractor.extractNumbers(input);
+            System.out.println(extractedIntegers);
         }
     }
 }

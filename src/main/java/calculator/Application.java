@@ -1,12 +1,13 @@
 package calculator;
 
 import calculator.controller.CalculatorController;
+import calculator.service.Extractor;
 import calculator.view.InputView;
 
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        CalculatorController calculatorController = new CalculatorController(new InputView());
+        CalculatorController calculatorController = new CalculatorController(new InputView(), new Extractor());
         calculatorController.start();
     }
 }
