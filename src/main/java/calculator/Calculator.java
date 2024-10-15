@@ -2,6 +2,7 @@ package calculator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Calculator {
@@ -48,9 +49,10 @@ public class Calculator {
     }
 
     private List<String> splitString() throws IllegalArgumentException {
-        List<String> splitInput;
-        splitInput = Arrays.stream(userInput.split(DELIMITER)).toList();
-        return splitInput;
+        if (userInput == null || userInput.isEmpty()) {
+            return Collections.emptyList();
+        }
+        return Arrays.stream(userInput.split(DELIMITER)).toList();
     }
 
 
@@ -68,14 +70,5 @@ public class Calculator {
         userInput = userInput.substring(delimiterIndex + 1);
         return newDelimiter;
     }
-
-//    private boolean isValidInput(){
-//        String regexForValidInput = "[0-9" + escapeSetting() + "]*";
-//        return userInput.matches(regexForValidInput);
-//    }
-//
-//    private String escapeSetting() {
-//        return DELIMITER.replaceAll("([\\W])", "\\\\$1");
-//    }
 
 }
