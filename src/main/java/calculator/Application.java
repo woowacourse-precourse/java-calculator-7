@@ -1,9 +1,11 @@
 package calculator;
 
+import calculator.domain.StringAddCalculator;
 import calculator.view.InputView;
 
 public class Application {
     public static void main(String[] args) {
-        System.out.println(InputView.inputString());
+        final StringAddCalculator stringAddCalculator = new StringAddCalculator();
+        System.out.println(stringAddCalculator.splitAndSum(InputView.inputString()));
     }
 }
