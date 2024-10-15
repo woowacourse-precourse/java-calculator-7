@@ -18,7 +18,9 @@ public class Application {
         String regex = ",|:";
         if (checkWhetherInputUsingCustomDelimiter(input)) {
             regex = regex + '|' + getCustomDelimiter(input);
+            input = input.substring(5, input.length() - 1);
         }
+        String[] splited = input.split(regex);
     }
 
     private static boolean checkWhetherInputUsingCustomDelimiter(String input) {
