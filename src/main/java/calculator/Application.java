@@ -13,7 +13,7 @@ public class Application {
         String input = Console.readLine();
 
         if (isCustom(input)) {
-            int delimiterEndIndex = input.indexOf("\\n");
+            int delimiterEndIndex = findDelimiterEndIndex(input);
             customDelimiter = input.substring(2, delimiterEndIndex);
             input = input.substring(delimiterEndIndex + 2);
         }
@@ -36,6 +36,11 @@ public class Application {
 
         System.out.println(sum);
 
+    }
+
+    private static int findDelimiterEndIndex(String input) {
+        int delimiterEndIndex = input.indexOf("\\n");
+        return delimiterEndIndex;
     }
 
     private static boolean isCustom(String input) {
