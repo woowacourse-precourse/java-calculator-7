@@ -7,7 +7,7 @@ public class Application {
         String input = Console.readLine();
 
         if (input.isBlank()) {
-            System.out.println(0);
+            System.out.println("결과 : " + 0);
             return;
         }
         run(input);
@@ -20,7 +20,7 @@ public class Application {
             input = input.substring(5, input.length() - 1);
         }
         String[] splited = input.split(regex);
-        System.out.println(calculate(splited));
+        System.out.println("결과 : " + calculate(splited));
     }
 
     private static boolean checkWhetherInputUsingCustomDelimiter(String input) {
