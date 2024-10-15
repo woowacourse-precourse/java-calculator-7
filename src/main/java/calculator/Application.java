@@ -1,7 +1,31 @@
 package calculator;
 
+import camp.nextstep.edu.missionutils.Console;
+
 public class Application {
+
+    private static int parseNumber(String number) {
+        if (number.isEmpty()){
+            return 0;
+        }
+        return Integer.parseInt(number);
+    }
+
+    public static int getResult(String input) {
+        String delimiter = ",|:";
+        int result=0;
+        String[] numbers = input.split(delimiter);
+
+        for (String number : numbers) {
+            result += parseNumber(number);
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        String input = Console.readLine();
+
+        System.out.println("결과 : " + getResult(input));
     }
 }
