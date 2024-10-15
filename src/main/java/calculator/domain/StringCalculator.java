@@ -50,6 +50,7 @@ public class StringCalculator {
     }
 
     private static String[] splitInput(String input) {
+        // TODO : 콤마, 콜론 상수화
         if (!input.contains(",") && !input.contains(":")) {
             throw new IllegalArgumentException("잘못된 구분자입니다");
         }
