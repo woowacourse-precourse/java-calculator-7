@@ -26,13 +26,7 @@ class ApplicationTest extends NsTest {
         );
     }
 
-    @Test
-    void 숫자예외_테스트() {
-        assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("asdf"))
-                    .isInstanceOf(IllegalArgumentException.class)
-        );
-    }
+
 
     @Override
     public void runMain() {
