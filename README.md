@@ -16,7 +16,7 @@
 ---
 ## view package
  - `inputView` : 사용자 입력 요구, 값 입력받기 [O]
- - `outputView` : 계산 결과 출력
+ - `outputView` : 계산 결과 출력 [O]
 
 ## controller package
   - `CalculatorController` : 전체 프로그램 동작 제어
