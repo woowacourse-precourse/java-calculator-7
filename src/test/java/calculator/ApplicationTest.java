@@ -1,6 +1,7 @@
 package calculator;
 
 import calculator.view.InputView;
+import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
@@ -23,6 +24,21 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 문자열을_입력하였을_때_예외발생() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("a, 2, 3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void 문자열만_입력하였을_때_예외발생() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("안녕하세요"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
