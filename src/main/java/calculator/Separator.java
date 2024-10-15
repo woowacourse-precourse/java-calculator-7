@@ -11,19 +11,29 @@ public class Separator {
     private static final String CUSTOM_SEPARATOR_END= "\\n";
     private String symbols;
     public Separator() {
-        symbols = COMMA + OR + COLON;
+        symbols = COMMA + COLON;
     }
 
     public List<Integer> getNumberList(String readString) {
-        List<Integer> numberList = new ArrayList<>();
         String numberString = readString;
         if(hasCustomSeparator(readString)){
             addCustomSeparator(readString);
             numberString = getNumberString(readString);
         }
-        String[] split = numberString.split(symbols);
+        List<Integer> numberList = split(numberString);
+        return numberList;
+    }
+
+    private List<Integer> split(String numberString) {
+        List<Integer> numberList = new ArrayList<>();
+        String[] symbolArray = symbols.split("");
+        String replaceString = numberString;
+        for (String symbol : symbolArray) {
+            replaceString = replaceString.replace(symbol, COMMA);
+        }
+        String[] numberArray = replaceString.split(COMMA);
         try{
-            for(String s : split){
+            for(String s : numberArray){
                 int i = Integer.parseInt(s);
                 numberList.add(i);
             }
@@ -43,7 +53,7 @@ public class Separator {
         String substring = readString.substring(0, readString.indexOf(CUSTOM_SEPARATOR_END));
         substring = substring.replace(CUSTOM_SEPARATOR_START,"");
         if (!substring.equals("")) {
-            symbols = symbols + OR +substring;
+            symbols = symbols +substring;
         }
     }
 
