@@ -11,8 +11,8 @@
 
 ### Application 객체
 
-- [ ] 사용자로부터 문자열을 입력받은 후, 커스텀 구분자를 사용 여부에 따라 다른 Separator 구현체를 생성하여 Calculator의 생성자 인자로 넣어줌
-- [ ] Calculator 객체의 `printAnswer()` 메서드를 호출하여 결과를 출력한다.
+- [x] 사용자로부터 문자열을 입력받은 후, 커스텀 구분자를 사용 여부에 따라 다른 Separator 구현체를 생성하여 Calculator의 생성자 인자로 넣어줌
+- [x] Calculator 객체의 `calculate()` 메서드를 호출하여 계산기 애플리케이션을 실행한다.
 
 ### Calculator 객체
 
