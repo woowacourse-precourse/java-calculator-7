@@ -16,8 +16,13 @@ public class Application {
     public static int calculate(String input) {
         String delimiter = "[,|:]";
         int result = 0;
+
         if ("".equals(input)) {
             return result;
+        }
+
+        if (input.contains(" ")) {
+            throw new IllegalArgumentException("입력하신 문자열에는 공백이 포함될 수 없습니다.");
         }
 
         Pattern pattern = Pattern.compile("//(.)\\\\n(.*)");

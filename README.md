@@ -16,6 +16,6 @@
 - [x] "1,2,3"을 입력했을 때, 6을 반환하게 하라
 - [x] "1,2:3"을 입력했을 때, 6을 반환하게 하라
 - [x] 입력하는 문자열 앞에 커스텀 구분자를 지정하게 하라
-- [ ] 예외 처리
+- [x] 예외 처리
   - [x] 음수가 있는 경우, IllegalArgumentException 을 발생시켜라
-  - [ ] 문자열 안에 공백이 있는 경우, IllegalArgumentException 을 발생시켜라
+  - [x] 문자열 안에 공백이 있는 경우, IllegalArgumentException 을 발생시켜라
