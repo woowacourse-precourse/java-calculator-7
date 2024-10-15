@@ -6,15 +6,14 @@ import java.util.regex.Pattern;
 public class InputValidation {
 
     // 기본 구분자 검증 함수
-    private static String validateDefaultDelimiter(String formula) {
-        Pattern pattern = Pattern.compile("^([1-9][0-9]*([,:][1-9][0-9]*)*)$");
+    private static String[] validateDefaultDelimiter(String formula) {
+        Pattern pattern = Pattern.compile("^(|([1-9][0-9]*([,:][1-9][0-9]*)*))$");
         Matcher matcher = pattern.matcher(formula);
-
         if (matcher.matches()) {
-            return matcher.group(1);
+            return new String[] {"[,:]", matcher.group(1)};
         }
         System.out.println("잘못된 사용자 입력입니다.");
-        return "";
+        return new String[] {};
     }
 
     // 커스텀 구분자 검증 함수
