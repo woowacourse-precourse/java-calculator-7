@@ -21,6 +21,7 @@ public class Application {
         valid(input);
         calculate(input);
         System.out.println("결과 : " + result);
+        result = 0;
     }
 
     private static void addCustomDelimiter(String input) {
@@ -63,14 +64,20 @@ public class Application {
             boolean pass = true;
             for (String delimiter : delimiterList) {
                 for (int j = 0; j < delimiter.length(); j++) {
+                    // 구분자 리스트에 없는 경우
                     if (input.charAt(i + j) != delimiter.charAt(j)) {
                         pass = false;
                         break;
-                    } else {
+                    }
+                    // 구분자 리스트에 있는 경우
+                    else {
                         pass = true;
                     }
                 }
-                if (pass) break;
+                if (pass) {
+                    i += delimiter.length() -1;
+                    break;
+                }
             }
             if (pass) continue;
             wrongValue = true;
