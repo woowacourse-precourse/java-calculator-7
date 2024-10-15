@@ -4,14 +4,16 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
+        // //@\n1@2,3:4
+        // //@\n1@2,"":4
+        // //@\n1@2, :4
+
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         DefaultDelimiter defaultDelimiter = new DefaultDelimiter();
 
         String input = Console.readLine();
 
         if (input.startsWith("//")) {
-            // //@\n1@2,3:4
-            // //@\n1@2,"":4
-            // //@\n1@2, :4
             int customDelimiterEndIndex = input.indexOf("\\n");
             CustomDelimiter customDelimiter = new CustomDelimiter(input.substring(2, customDelimiterEndIndex));
             input = input.substring(customDelimiterEndIndex + 2);
@@ -22,14 +24,16 @@ public class Application {
 
             int sum = 0;
             for (String stringNumber : stringNumbers) {
-                if(stringNumber.equals("\"\"")){
+                if (stringNumber.equals("\"\"")) {
                     sum += 0;
                 }
+
+                if (!stringNumber.equals("\"\"")) {
+                    sum += Integer.parseInt(stringNumber);
+                }
             }
-
+            System.out.println("결과 : "+sum);
         }
-
-
 
 
     }
