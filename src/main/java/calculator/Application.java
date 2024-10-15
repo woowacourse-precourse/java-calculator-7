@@ -8,6 +8,9 @@ public class Application {
 
         String input = Console.readLine();
 
+        if(input.startsWith("//")){
+            
+        }
 
     }
 }
