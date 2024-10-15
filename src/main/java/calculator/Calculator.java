@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Calculator {
+    // 기본 구분자: , 또는 :
     private static String delimiter = "[,|:]";
     private static int result = 0;
 
@@ -11,6 +12,7 @@ public class Calculator {
     private static final String WHITESPACE = " ";
     private static final int CUSTOM_DELIMITER_ORDER = 1;
     private static final int ARITHMETIC_EXPRESSION_ORDER = 2;
+    // ex) 커스텀 구분자를 ;로 정했을 때, //;\n1;2;3
     private static final String CUSTOM_REGEX = "//(.)\\\\n(.*)";
 
     public static int calculate(String input) {
