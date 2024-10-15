@@ -16,15 +16,14 @@ public class Application {
         Calculator calculator = new DelimiterCalculator(delimiterExtractor, lineTokenizer);
 
         // 1. 사용자로부터 입력을 받는다.
-        ConsoleWriter consoleWriter = new ConsoleWriter();
-        consoleWriter.writeInputQuery();
+        ConsoleWriter.writeInputQuery();
         String input = Console.readLine();
 
         // 2. 계산을 수행한다.
         int result = calculator.calculate(input);
 
         // 3. 계산 결과를 출력한다.
-        consoleWriter.writeResult(result);
+        ConsoleWriter.writeResult(result);
         Console.close();
     }
 }
