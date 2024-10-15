@@ -10,6 +10,15 @@ public class Application {
             System.out.println(0);
             return;
         }
+
+        run(input);
+    }
+
+    private static void run(String input) {
+        String regex = ",|:";
+        if (checkWhetherInputUsingCustomDelimiter(input)) {
+            regex = regex + '|' + getCustomDelimiter(input);
+        }
     }
 
     private static boolean checkWhetherInputUsingCustomDelimiter(String input) {
