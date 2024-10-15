@@ -22,7 +22,7 @@ public class InputView {
         if (inputNumber.isEmpty()) {
             return new String[]{"0"};
         }
-        String[] splitNumber = splitInput(inputNumber);
+        String[] splitNumber = splitInputNumber(inputNumber);
 
         validator.validateInputNumber(splitNumber);
 
@@ -33,7 +33,7 @@ public class InputView {
         return inputNumber.trim();
     }
 
-    private String[] splitInput(String input) {
+    private String[] splitInputNumber(String input) {
         String divisionNumber = ",|:";
         String numbersPart = input;
 
