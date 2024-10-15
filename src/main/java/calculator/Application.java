@@ -42,11 +42,13 @@ public class Application {
     }
 
     private static void valid(String input) {
-        String substring = input.substring(input.indexOf("\\n") + 2);
-        if (isThereWrongValue(substring)) {
+        if(input.contains("\\n")){
+            input = input.substring(input.indexOf("\\n") + 2);
+        }
+        if (isThereWrongValue(input)) {
             throw new IllegalArgumentException("잘못된 값이 입력 되었습니다.");
         }
-        if (isWrongEquation(substring)) {
+        if (isWrongEquation(input)) {
             throw new IllegalArgumentException("잘못된 수식 입니다.");
         }
     }
@@ -68,6 +70,7 @@ public class Application {
                         pass = true;
                     }
                 }
+                if (pass) break;
             }
             if (pass) continue;
             wrongValue = true;
