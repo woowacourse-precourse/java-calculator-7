@@ -24,7 +24,7 @@
 
 ## 🐥 checkIsInt
 ### 역할
-전달받은 문자열을 Integer로 변경 가능하다면 반환, 아니라면 예외( IllegalArgumentException )를 던져준다.
+전달받은 문자열을 Integer로 변경 가능한 양수라면 반환, 아니라면 예외( IllegalArgumentException )를 던져준다.
 
 ### 작동 순서
 1. 메서드 구현시 예외 선언(throws IllegalArgumentException)을 해준다.
