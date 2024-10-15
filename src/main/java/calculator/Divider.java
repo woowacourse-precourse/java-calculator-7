@@ -16,6 +16,25 @@ public class Divider {
         this.customDivider = customDivider;
     }
 
+    public boolean isNoneCustomDivider(){
+        return customDivider == null;
+    }
+
+    public String getComma(){
+        return COMMA;
+    }
+
+    public String getClon(){
+        return CLON;
+    }
+
+    public String getCustomDivider(){
+        return customDivider;
+    }
+
+
+
+
     /**
      * 먼저 customDivider이 비어있는지부터 확인 한 후
      * 비어있으면 : comma, clon만
