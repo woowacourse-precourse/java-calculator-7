@@ -9,6 +9,21 @@ public class StrInput {
                 return true;
             }
         }
+
         return false;
+    }
+
+    public boolean[] saveBooleans(String sentence) {
+        int sentenceLength = sentence.length();
+        boolean[] booleanArrayFromSentence = new boolean[sentenceLength+1];
+        char[] splitSentence = sentence.toCharArray();
+
+        for (char ch : splitSentence) {
+            for(int i = 0; i < sentenceLength; i++) {
+                booleanArrayFromSentence[i] = validNumber(ch);
+            }
+        }
+
+        return booleanArrayFromSentence;
     }
 }
