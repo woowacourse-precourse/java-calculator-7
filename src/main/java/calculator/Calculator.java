@@ -25,6 +25,7 @@ public class Calculator {
 
     private void sumNumber() {
 
+
     }
 
     private void changeStringToNumber() {
@@ -32,11 +33,14 @@ public class Calculator {
     }
 
     private void splitString() {
-
     }
 
     private boolean hasCustomSpliter(){
-        return  true;
+        if (userInput.length() >= 5 && userInput.startsWith("//")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private String getCustomSpliter() {
