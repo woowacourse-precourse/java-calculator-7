@@ -56,4 +56,17 @@ class InputParserTest {
         assertThat(result1).isEqualTo(List.of(1, 2, 3));
         assertThat(result2).isEqualTo(List.of(1));
     }
+
+    @Test
+    @DisplayName("커스텀 구분자 사용확인 테스트")
+    public void checkCustomDelimiterTest() {
+        //given
+        String input = "//;\\n1";
+
+        //when
+        boolean hasCustomDelimiter1 = inputParser.checkCustomDelimiter(input);
+
+        //then
+        assertThat(hasCustomDelimiter1).isTrue();
+    }
 }
