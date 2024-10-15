@@ -8,7 +8,7 @@ public class Calculator {
     private String userInput;
     private final OutputView outputView = new OutputView();
     private String DELIMITER = ",|:|";
-    private final Long resultNumber = 0L;
+    private Long resultNumber = 0L;
 
     public Calculator() {
         InputView inputView = new InputView();
@@ -24,6 +24,7 @@ public class Calculator {
             List<String> splitInput = splitString();
             Long[] numberOfInputString = changeStringToNumber(splitInput);
             sumNumber(numberOfInputString);
+            outputView.printResult(resultNumber);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
@@ -31,8 +32,10 @@ public class Calculator {
 
     }
 
-    private Long sumNumber(Long[] numberArrays) {
-
+    private void sumNumber(Long[] numberArrays) {
+        for (Long num : numberArrays) {
+            resultNumber += num;
+        }
     }
 
     private Long[] changeStringToNumber(List<String> splitInput) throws IllegalArgumentException{
