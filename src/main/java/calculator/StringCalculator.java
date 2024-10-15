@@ -13,7 +13,7 @@ public class StringCalculator {
      * @return default separators
      */
     private ArrayList<String> getDefaultSeparator() {
-        return new ArrayList<String>(List.of(",", ":"));
+        return new ArrayList<>(List.of(",", ":"));
     }
 
     /**
@@ -38,7 +38,7 @@ public class StringCalculator {
      * @return A list of numbers
      */
     private ArrayList<Integer> getNumbers(String input, ArrayList<String> separators) {
-        ArrayList<Integer> numbers = new ArrayList<Integer>();
+        ArrayList<Integer> numbers = new ArrayList<>();
         String number_string;
         if (input.startsWith("//")) {
             number_string = input.split("\\\\n")[1];
@@ -54,7 +54,7 @@ public class StringCalculator {
                 if (number <= 0) {
                     throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
                 }
-                numbers.add(Integer.parseInt(num));
+                numbers.add(number);
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("구분자의 형식이 올바르지 않습니다.");
             }
@@ -70,7 +70,7 @@ public class StringCalculator {
      */
     public Integer calculate(String input) {
 
-        ArrayList<String> separators = new ArrayList<String>();
+        ArrayList<String> separators;
 
         if (input.startsWith("//")) {
             separators = getCustomSeparator(input);
