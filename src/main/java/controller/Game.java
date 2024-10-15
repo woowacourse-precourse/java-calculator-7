@@ -1,6 +1,7 @@
 package controller;
 
 import camp.nextstep.edu.missionutils.Console;
+import domain.Separators;
 import view.InputView;
 import view.OutputView;
 
@@ -13,7 +14,8 @@ public class Game {
 
     public void start() {
         String inputValue = getInputValue();
-        System.out.println(inputValue);
+        String separators = new Separators(inputValue).getSeparators();
+        System.out.println(separators);
     }
 
     public void end() {
