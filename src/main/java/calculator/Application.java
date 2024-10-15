@@ -24,12 +24,16 @@ public class Application {
         Matcher matcher = pattern.matcher(input);
         if (matcher.find()) {
             delimiter = matcher.group(1);
+            input = matcher.group(2);
         }
-        input = matcher.group(2);
-        String[] numbers = input.split(delimiter);
 
+        String[] numbers = input.split(delimiter);
         for (String number : numbers) {
-            result += Integer.parseInt(number);
+            int operand = Integer.parseInt(number);
+            if (operand < 0) {
+                throw new IllegalArgumentException();
+            }
+            result += operand;
         }
         return result;
     }
