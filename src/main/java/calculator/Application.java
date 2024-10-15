@@ -1,12 +1,11 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class Application {
     public static void main(String[] args) {
+
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         // //;\n1,2:3;4
         String delimiter = "[,:]";
         String customDelimiter = "";
@@ -27,12 +26,12 @@ public class Application {
             if (isStringEmpty(number)) {
                 sum += 0;
             }
-            if(!isStringEmpty(number)){
+            if (!isStringEmpty(number)) {
                 sum += Integer.parseInt(number);
             }
         }
 
-        System.out.println(sum);
+        System.out.println("결과 : " + sum);
 
     }
 
@@ -45,19 +44,15 @@ public class Application {
     }
 
     private static String findNumber(String input, int delimiterEndIndex) {
-        input = input.substring(delimiterEndIndex + 2);
-        return input;
+        return input.substring(delimiterEndIndex + 2);
     }
 
     private static String findCustomDelimiter(String input, int delimiterEndIndex) {
-        String customDelimiter;
-        customDelimiter = input.substring(2, delimiterEndIndex);
-        return customDelimiter;
+        return input.substring(2, delimiterEndIndex);
     }
 
     private static int findDelimiterEndIndex(String input) {
-        int delimiterEndIndex = input.indexOf("\\n");
-        return delimiterEndIndex;
+        return input.indexOf("\\n");
     }
 
     private static boolean isCustom(String input) {
