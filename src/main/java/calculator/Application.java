@@ -12,19 +12,21 @@ public class Application {
         String input = readLine();
 
         try {
-            int result = add(input);
+            int result = getResult(input);
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.out.println("잘못된 입력입니다: " + e.getMessage());
         }
     }
 
-    private static int add(String input) {
+    private static int getResult(String input) {
         // 비어있을 경우 0을 반환하자 (3.1 예외)
         if (input.isEmpty()) {
             return 0;
         }
-        // 1-1. 기본 구분자만 입력된 경우
+        /**
+         * 1-1. 기본 구분자만 입력된 경우
+         */
         String delimiter = "[,:]";
         String numberPart = "";
 
