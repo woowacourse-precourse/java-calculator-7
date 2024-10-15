@@ -5,6 +5,7 @@ import camp.nextstep.edu.missionutils.*;
 public class Application {
     public static String userInput;
     public static String[] numbers;
+    public static int answer;
 
     public static void main(String[] args) {
         // TODO: 프로그램 구현
@@ -16,6 +17,8 @@ public class Application {
         System.out.println(Message.START.getMessage());
         getUserInput();
         extractNumber();
+        calculator();
+        System.out.println(Message.END.getMessage() + answer);
     }
 
     /**
@@ -58,6 +61,15 @@ public class Application {
             } catch (NumberFormatException e) {
                 throw new InvalidNumberFormatException();
             }
+        }
+    }
+
+    /**
+     * 결과값 계산하는 함수
+     */
+    public void calculator(){
+        for(String number : numbers){
+            answer += Integer.parseInt(number);
         }
     }
 }
