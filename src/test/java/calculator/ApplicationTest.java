@@ -39,6 +39,15 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 7");
         });
     }
+
+    @Test
+    void 커스텀_구분자_점() {
+        assertSimpleTest(() -> {
+            run("//.\\n2.1.3.999"); // .을 구분자로 판단
+            assertThat(output()).contains("결과 : 1005");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
