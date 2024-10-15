@@ -1,11 +1,12 @@
 package calculator.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Calculator {
 
-    private List<String> separators;
-    private List<Integer> numbers;
+    private List<String> separators = new ArrayList<>();
+    private List<Integer> numbers = new ArrayList<>();
 
     public Calculator() {
         this.separators.add(",");

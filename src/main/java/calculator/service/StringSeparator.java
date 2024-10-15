@@ -8,6 +8,10 @@ public class StringSeparator {
 
     private Calculator calculator;
 
+    public StringSeparator(Calculator calculator) {
+        this.calculator = calculator;
+    }
+
     public void divideSeparator(String str) {
         String number = "";
         String divide = "";
