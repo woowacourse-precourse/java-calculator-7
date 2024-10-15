@@ -35,7 +35,7 @@ public class Controller {
 
     private Integer calc(String input){
         List<Integer> intList = parseToIntList(input);
-        return intList.isEmpty() ? INITIAL_NUMBER : null; //todo. TESTCODE
+        return intList.isEmpty() ? INITIAL_NUMBER : getIntListSum(intList);
     }
 
     private void output(Integer result){
@@ -78,6 +78,11 @@ public class Controller {
         }
 
         return input;
+    }
+
+    private Integer getIntListSum(List<Integer> numbers){
+        return numbers.stream()
+                .mapToInt(number -> number.intValue()).sum();
     }
 
 
