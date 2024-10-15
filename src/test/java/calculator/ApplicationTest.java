@@ -25,9 +25,41 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트() {
+    void 커스텀_구분자_사용_3() {
+        assertSimpleTest(() -> {
+            run("//;\\\\n1;\\2");
+            assertThat(output()).contains("결과 : 3");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_4() {
+        assertSimpleTest(() -> {
+            run("//-\\n1-2-3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 예외_테스트_음수존재() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_기본구분자_이외의특수문자존재() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,2,3*4"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_커스텀구분자_이외의특수문자존재() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\\n1;2;3*4"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
