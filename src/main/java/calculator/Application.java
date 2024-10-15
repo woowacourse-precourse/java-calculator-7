@@ -8,7 +8,14 @@ public class Application {
         if (number.isEmpty()){
             return 0;
         }
-        return Integer.parseInt(number);
+        try{
+            if (Integer.parseInt(number) < 0 ) {
+                throw new IllegalArgumentException("잘못된 입력입니다");
+            }
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e){
+            throw new IllegalArgumentException("잘못된 입력입니다");
+        }
     }
 
     public static int getResult(String input) {
@@ -17,6 +24,9 @@ public class Application {
 
         if (input.startsWith("//")) {
             int customDelimiterEndIndex = input.indexOf("\\n");
+            if (customDelimiterEndIndex == -1) {
+                throw new IllegalArgumentException("잘못된 입력입니다.");
+            }
             delimiter = input.substring(2, customDelimiterEndIndex);
             input = input.substring(customDelimiterEndIndex + 2);
         }
@@ -36,3 +46,4 @@ public class Application {
         System.out.println("결과 : " + getResult(input));
     }
 }
+
