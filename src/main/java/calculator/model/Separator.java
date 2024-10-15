@@ -11,6 +11,10 @@ public class Separator {
         separators.add(",");
     }
 
+    public Separator(List<String> separators) {
+        this.separators = separators;
+    }
+
     public void addSeparator(String separator) {
         separators.add(separator);
     }

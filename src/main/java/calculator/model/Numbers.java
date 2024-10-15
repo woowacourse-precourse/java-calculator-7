@@ -10,6 +10,11 @@ public class Numbers {
         this.numbers = new ArrayList<>();
     }
 
+
+    public List<String> getNumbers() {
+        return numbers;
+    }
+
     public void addNumbers(String number){
         numbers.add(number);
     }
