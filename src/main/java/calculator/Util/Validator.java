@@ -8,12 +8,9 @@ public class Validator {
             return;
         }
 
-        List<Integer> numbers;
-        if (input.startsWith("//")) {
-            numbers = Parser.parseWithCustomDelimeter(input);
-        } else {
-            numbers = Parser.parseWithDefaultDelimeter(input);
-        }
+        List<Integer> numbers = input.startsWith("//")
+                ? Parser.parseWithCustomDelimeter(input)
+                : Parser.parseWithDefaultDelimeter(input);
 
         for (Integer number : numbers) {
             if (number < 0) { //음수일 경우
