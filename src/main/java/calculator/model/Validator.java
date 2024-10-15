@@ -1,6 +1,9 @@
 package calculator.model;
 
-public class Validation {
+import static calculator.Constant.CANNOT_INPUT_NEGATIVE_NUMBER;
+import static calculator.Constant.ONLY_CAN_INPUT_NUMBER;
+
+public class Validator {
    public void validateInputNumber(String[] splitNumber) {
         for (String number : splitNumber) {
             validateSingleNumber(number.trim());
@@ -9,10 +12,10 @@ public class Validation {
 
    public void validateSingleNumber(String number) {
         if (!isValidNumber(number)) {
-            throw new IllegalArgumentException("숫자만 입력할 수 있습니다.");
+            throw new IllegalArgumentException(ONLY_CAN_INPUT_NUMBER);
         }
         if (Integer.parseInt(number) < 0) {
-            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            throw new IllegalArgumentException(CANNOT_INPUT_NEGATIVE_NUMBER);
         }
     }
 
