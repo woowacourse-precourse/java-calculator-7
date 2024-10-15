@@ -12,10 +12,10 @@ public class Calculate {
 
     private static String[] toArray() {
 
-        if (input.startsWith("//") && input.indexOf("\n") == 3) {
-            int delimiterIndex = input.indexOf("\n");
+        if (input.startsWith("//") && input.contains("\\n")) {
+            int delimiterIndex = input.indexOf("\\n");
             delimiter = input.substring(2, delimiterIndex);
-            input = input.substring(delimiterIndex + 1);
+            input = input.substring(delimiterIndex + 2);
         }
 
         return input.split(delimiter);
@@ -31,8 +31,8 @@ public class Calculate {
                 int num = Integer.parseInt(arr[i]);
                 sum += num;
             } catch (IllegalArgumentException e) {
-                System.err.println("Invalid number: " + arr[i]);
                 e.printStackTrace();
+                System.exit(1);
             }
         }
 
