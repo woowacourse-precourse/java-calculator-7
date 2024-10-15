@@ -41,4 +41,8 @@ public class Regex {
             }
         }
     }
+
+    public long sumNumbers(){
+        return numbers.stream().mapToLong(Integer::intValue).sum();
+    }
 }

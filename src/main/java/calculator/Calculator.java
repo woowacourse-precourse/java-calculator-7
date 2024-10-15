@@ -10,11 +10,17 @@ public class Calculator {
     private static final String CUSTOM_DELIMITER_REGEX = "^//(.)\\\\n(.*)";
     private static final String BASIC_DELIMITER = ",|:";
     private String customDelimiter;
+    private long result;
 
     public void calculate(){
         Regex regex = new Regex();
         inputExpression(regex);
         extractNumbers(regex);
+        circulateResult(regex);
+    }
+
+    private void circulateResult(Regex regex){
+        result = regex.sumNumbers();
     }
 
     private void extractNumbers(Regex regex) {
