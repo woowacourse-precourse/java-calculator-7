@@ -42,7 +42,13 @@ public class InputValue {
             }
         }
 
-
+        try{
+            for(String number : numbers) {
+                positiveIntegers.add(Integer.parseInt(number));
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("There is Wrong Delimiter");
+        }
     }
 
 
