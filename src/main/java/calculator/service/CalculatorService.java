@@ -11,7 +11,7 @@ public class CalculatorService {
             String delimiter = calculatorLogic.extractDelimiter(input);
             return calculatorLogic.calculate(calculatorLogic.extractNumbers(input, delimiter));
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(e);
+            throw new IllegalArgumentException(e.getMessage(), e);
         }
     }
 }
