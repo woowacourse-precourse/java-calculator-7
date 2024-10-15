@@ -46,9 +46,20 @@ public class StringCalculator {
         String separator = String.join("|", separators);
 
         for (String num : number_string.split(separator)) {
-            numbers.add(Integer.parseInt(num));
+            try {
+                int number = Integer.parseInt(num);
+                if (number <= 0) {
+                    throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+                }
+                numbers.add(Integer.parseInt(num));
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("구분자의 형식이 올바르지 않습니다.");
+            }
         }
 
         return numbers;
     }
+
+
+
 }
