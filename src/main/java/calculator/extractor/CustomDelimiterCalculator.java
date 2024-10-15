@@ -1,4 +1,4 @@
-package calculator;
+package calculator.extractor;
 
 public class CustomDelimiterCalculator {
     private final String CUSTOM_DELIMITER_PREFIX = "//";
