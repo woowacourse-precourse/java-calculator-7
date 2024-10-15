@@ -2,7 +2,7 @@ package calculator;
 
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 public class StringAddCalculatorTest {
 
@@ -31,5 +31,10 @@ public class StringAddCalculatorTest {
     void 커스텀_구분자_체크_테스트() {
         String delimiter = StringAddCalculator.checkCustomDelimiter("//;\n1;2;3");
         assertThat(delimiter).isEqualTo(";");
+    }
+
+    @Test
+    void 값이_잘못되었다면_예외처리() {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("t,2,3")).isInstanceOf(IllegalArgumentException.class);
     }
 }

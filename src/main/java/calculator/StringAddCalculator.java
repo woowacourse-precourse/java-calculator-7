@@ -14,13 +14,15 @@ public class StringAddCalculator {
         final String[] split = splitIncludeCustomDelimiter(str);
 
         for (String s : split) {
-            result += Integer.parseInt(s);
+            int no = parse(s);
+
+            result += no;
         }
 
         return result;
     }
 
-    private static String[] splitIncludeCustomDelimiter(final String str) {
+    public static String[] splitIncludeCustomDelimiter(final String str) {
         return str.substring(str.indexOf("\n") + 1).split(DEFAULT_DELIMITERS + "|" + checkCustomDelimiter(str));
     }
 
@@ -29,6 +31,14 @@ public class StringAddCalculator {
             return str.substring(2, str.indexOf("\n"));
         }
 
-        return "";
+        return null;
+    }
+
+    public static int parse(final String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("잘못된 값입니다.");
+        }
     }
 }
