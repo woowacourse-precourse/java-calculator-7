@@ -9,35 +9,44 @@ public class InputStringSeparator {
     public InputStringSeparator(String inputString) {
         this.inputString = inputString;
         setCustomSeparator(this.inputString);
+        setInputNumber(this.inputString, this.finalSeparator);
     }
 
-    private void validateInputString(String inputString){
+    private void validateInputString(String inputString) {
 
     }
 
-    private void setCustomSeparator(String inputString){
-        int startIndex = 0 ;
+    private void setInputString(String inputString) {
+        this.inputString = inputString;
+    }
+
+    private void setCustomSeparator(String inputString) {
+        int startIndex = 0;
         int lastIndex = 0;
-        if(isDefaultSeparatorContained()){ //this.inputString 으로 판단하는게 좋은가?
+        if (isDefaultSeparatorContained()) { //this.inputString 으로 판단하는게 좋은가?
             startIndex = inputString.indexOf("//");
             lastIndex = inputString.indexOf("\n");
-            this.customSeparator = inputString.substring(startIndex+2, lastIndex); //커스텀 구분자는 그럼 한 개만인가?
+            this.customSeparator = inputString.substring(startIndex + 2, lastIndex); //커스텀 구분자는 그럼 한 개만인가?
         }
     }
 
-    private boolean isDefaultSeparatorContained(){
+    private boolean isDefaultSeparatorContained() {
         return inputString.contains("//") && inputString.contains("\n");
     }
 
-    private void setFinalSeparator(){
-        if(this.customSeparator.isEmpty()){
+    private void setFinalSeparator() {
+        if (this.customSeparator.isEmpty()) {
             this.finalSeparator = "[" + "//" + "\n" + "]";
             return;
         }
         this.finalSeparator = "[" + "//" + "\n" + customSeparator + "]";
     }
 
-    private void setInputNumber(String inputString, String finalSeparator){
-       this.inputNumber =  inputString.split(finalSeparator);
+    private void setInputNumber(String inputString, String finalSeparator) {
+        this.inputNumber = inputString.split(finalSeparator);
+    }
+
+    public String[] getInputNumber(){
+        return this.inputNumber;
     }
 }
