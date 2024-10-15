@@ -31,6 +31,14 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 3.5");
         });
     }
+
+    @Test
+    void 커스텀_구분자_숫자() {
+        assertSimpleTest(() -> {
+            run("//1\\n21312"); // 1을 구분자로 판단
+            assertThat(output()).contains("결과 : 7");
+        });
+    }
     @Override
     public void runMain() {
         Application.main(new String[]{});
