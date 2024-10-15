@@ -14,16 +14,16 @@ public class Application {
 
     // Solution
     public int solution(String str) {
-        String[] arr;
-        if (!str.startsWith("//")) arr = defaultSplit(str);
-        else arr = customSplit(str);
+        String[] arr = splitByDelimiter(str);
         return sum(arr);
     }
 
-    // Exception
-    public void validation(int N) {
-        if (N <= 0) {
-            throw new IllegalArgumentException();
+    // 구분자에 따라 문자열을 분리하는 메서드
+    public String[] splitByDelimiter(String str) {
+        if (str.startsWith("//")) {
+            return customSplit(str);
+        } else {
+            return defaultSplit(str);
         }
     }
 
@@ -44,10 +44,21 @@ public class Application {
     public int sum(String[] arr) {
         int answer = 0;
         for (String x : arr) {
+            strValidation(x);
             int N = Integer.parseInt(x);
             validation(N);
             answer += N;
         }
         return answer;
+    }
+
+    // Exception
+    public void validation(int N) {
+        if (N <= 0) {
+            throw new IllegalArgumentException();
+        }
+    }
+    public void strValidation(String x) {
+        if (Character.isDigit(x.charAt(0))) throw new IllegalArgumentException("입력이 잘 못 되었습니다.");
     }
 }
