@@ -1,14 +1,14 @@
 package calculator;
 
-import calculator.infrastructure.config.AppConfig;
-import calculator.presentation.CalculationUseCase;
+import calculator.config.AppConfig;
+import calculator.adapters.input.cli.CliCalculationController;
 
 public class Application {
 
     public static void main(String[] args) {
         AppConfig appConfig = new AppConfig();
 
-        CalculationUseCase calculationUseCase = appConfig.calculationUseCase();
-        calculationUseCase.handleCalculation();
+        CliCalculationController cliCalculationController = appConfig.cliCalculationController();
+        cliCalculationController.handle();
     }
 }

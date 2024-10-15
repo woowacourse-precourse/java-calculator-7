@@ -1,4 +1,6 @@
-package calculator.view.output;
+package calculator.adapters.output;
+
+import calculator.application.ports.output.OutputWriter;
 
 public class OutputWriterImpl implements OutputWriter {
 

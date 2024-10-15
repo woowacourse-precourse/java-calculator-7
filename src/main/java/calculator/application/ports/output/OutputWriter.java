@@ -1,4 +1,4 @@
-package calculator.view.output;
+package calculator.application.ports.output;
 
 public interface OutputWriter {
 
