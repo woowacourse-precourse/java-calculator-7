@@ -28,6 +28,14 @@ public class Application {
         /**
          * 1.2 커스텀 구분자를 포함하여 입력된 경우
          */
+        if (input.startsWith("//")) {
+            int indexOfEndSign = input.indexOf("\\");
+            if (input.charAt(indexOfEndSign + 1) != 'n') { // \n이 아닌 단순히 \을 구분자로 하고자하는 경우
+                delimiter += "|\\\\"; // Escape 문자 처리
+            }
+            char customDelimiter = input.charAt(indexOfEndSign);
+            delimiter += "|" + customDelimiter;
+        }
 
         String[] tokens = input.split(delimiter);
         int sum = 0;
