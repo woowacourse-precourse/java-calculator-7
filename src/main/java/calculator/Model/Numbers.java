@@ -1,5 +1,6 @@
 package calculator.Model;
 
+import calculator.Constants.ErrorMessages;
 import java.util.ArrayList;
 
 
@@ -17,7 +18,7 @@ public class Numbers {
 
     private void isNumbersEmpty(ArrayList<Number> numbers) {
         if (numbers.isEmpty()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessages.INVALID_NUMBERS_EMPTY_MESSAGE.getErrorMessage());
         }
     }
 }
