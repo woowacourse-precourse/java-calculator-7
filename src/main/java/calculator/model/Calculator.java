@@ -107,5 +107,14 @@ public class Calculator {
         return input.matches(".*[a-zA-Z]+.*");
     }
 
+    /**
+     * 커스텀 구분자가 정확히 입력되었는지 확인합니다.
+     * @param input 사용자에게 입력 받은 수식
+     * @return 커스텀 구분자가 정확히 입력되었으면 true, 아니면 false
+     */
+    private boolean isValidCustomDelimiterFormat(String input) {
+        return input.matches("//.\n.*");
+    }
+
 
 }
