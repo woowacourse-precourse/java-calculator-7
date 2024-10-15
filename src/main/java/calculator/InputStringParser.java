@@ -12,12 +12,14 @@ public class InputStringParser {
 
         Optional<String> customIdentifier = parseCustomIdentifier(input);
         try {
+
             if (customIdentifier.isPresent()) {
                 String resizedSTring = resizeString(input);
                 return convertStringToList(resizedSTring, customIdentifier.get());
             } else {
                 return convertStringToList(input, ", | :");
             }
+
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }
@@ -34,7 +36,11 @@ public class InputStringParser {
     private String resizeString(String input) {
         Pattern pattern = Pattern.compile("^//(.*)\\\\n");
         Matcher matcher = pattern.matcher(input);
-        return input.substring(matcher.end());
+        if (matcher.find()) {
+            return input.substring(matcher.end());
+        } else {
+            throw new IllegalStateException();
+        }
     }
 
     private Optional<String> parseCustomIdentifier(String input) {
