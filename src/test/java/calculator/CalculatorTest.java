@@ -27,6 +27,15 @@ class CalculatorTest {
         Assertions.assertThat(calculated).isZero();
     }
 
+    @ParameterizedTest
+    @CsvSource(delimiter = '=', value =  {"1,  2=3", "      1=1", "   3 ,  1 : 2  =6"})
+    @DisplayName("숫자와 공백이 같이 주어지면 공백을 없애서 계산한다.")
+    void replaceEmptyString(String emptyInput, int expected) {
+        Calculator calculator = new Calculator();
+        int calculated = calculator.calculate(emptyInput);
+        Assertions.assertThat(calculated).isEqualTo(expected);
+    }
+
     @Test
     @DisplayName("null 이 들어오면 예외가 발생한다.")
     void whenNullStringIsGivenThenThrowsException() {

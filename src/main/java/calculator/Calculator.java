@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class Calculator {
+
     private static final int EMPTY_VALUE = 0;
 
     public int calculate(String input) {
@@ -13,7 +14,9 @@ public class Calculator {
             return EMPTY_VALUE;
         }
 
+        // TODO : 커스텀 구분자에도 " " 와 같이 공백이 들어 갈 수 있다. 따라서 순서에 유의한다.
         int[] inputNumbers = Arrays.stream(input.split(Delimiter.getRegularDelimiter()))
+                .map(each -> each.replace(" ", ""))
                 .mapToInt(Integer::parseInt)
                 .toArray();
 
