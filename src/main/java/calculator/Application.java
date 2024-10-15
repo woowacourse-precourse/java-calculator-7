@@ -7,6 +7,19 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String inputStr = Console.readLine();
 
+        int sum = 0;
+        if(!inputStr.trim().isEmpty()){
+            String[] values = checkDelimiter(inputStr);
+            try {
+                for (String value : values[1].split(values[0])) {
+                    sum += checkIsInt(value);
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.printf("잘못된 값을 입력했습니다. 프로그램을 종료합니다.");
+                return;
+            }
+        }
+        System.out.printf("결과 : %d", sum);
     }
 
     private static String[] checkDelimiter(String inputStr){
