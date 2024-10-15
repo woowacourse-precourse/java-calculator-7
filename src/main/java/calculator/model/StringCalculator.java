@@ -55,7 +55,7 @@ public class StringCalculator {
                 continue;
             } else {
                 System.out.println("모든 경우 수가 아닐떄 " + part);
-                result.add(part); // 유효한 부분은 리스트에 추가
+                result.add(part.trim()); // 유효한 부분은 리스트에 추가
             }
 
         }
