@@ -12,10 +12,14 @@ public class StringAddCalculator {
     }
 
     public int splitAndSum(final String inputValue) {
-        if (inputValue.isBlank()) {
+        if (isBlank(inputValue)) {
             return DEFAULT_VALUE;
         }
         return sum(inputValue);
+    }
+
+    private static boolean isBlank(final String inputValue) {
+        return inputValue == null || inputValue.isBlank();
     }
 
     private String[] splitString(final String inputValue) {
