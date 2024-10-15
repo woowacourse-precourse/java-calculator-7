@@ -19,6 +19,11 @@ public class Application {
     }
 
     private static int add(String input) {
+        // 비어있을 경우 0을 반환하자 (3.1 예외)
+        if (input.isEmpty()) {
+            return 0;
+        }
+
         String defaultDelimiter = ",|:";
         String[] tokens = input.split(defaultDelimiter);
         int sum = 0;
