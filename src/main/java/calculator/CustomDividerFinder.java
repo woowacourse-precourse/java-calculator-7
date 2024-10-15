@@ -10,9 +10,9 @@ import java.util.List;
  */
 public class CustomDividerFinder {
     private final static String OPENER = "//";
-    private final static String CLOSER = "\n"; //todo \\n
+    private final static String CLOSER = "\\n"; //todo \\n
     private final static Integer OPENER_INDEX = 0;
-    private final static Integer CLOSER_INDEX = 3;
+    private final static Integer CLOSER_INDEX = 4;
     private final static Integer CUSTOM_DIVIDER_INDEX = 2;
 
     public void findCustomDividers(String input, Divider divider) {
