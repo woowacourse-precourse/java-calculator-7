@@ -8,7 +8,6 @@ import java.util.List;
 
 public class StringCalculatorTest {
 
-
     @Test
     void 커스텀_구분자_추출_테스트() {
 
@@ -17,7 +16,7 @@ public class StringCalculatorTest {
         String value = "//;\\n1;2;3";
 
         // when
-        String result = stringCalculator.extractCustom(value);
+        String result = stringCalculator.extractCustomValue(value);
         String expect = ";";
         String incorrectExpect = ",";
 
