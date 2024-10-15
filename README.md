@@ -18,12 +18,12 @@
 6. 실제 덧셈 계산 결과 출력
 
 ## [패키지 설계]
-- view
-  [0] InputView : ‘덧셈할 문자열을 입력해주세요‘ 문구 출력
-  [0] ResultView : 계산 결과 출력
+1. view
+  - InputView : ‘덧셈할 문자열을 입력해주세요‘ 문구 출력
+  - ResultView : 계산 결과 출력
 
-- domain
-  [0] StringCalculator : 구분자로부터 숫자를 분리하여 덧셈 계산
+2. domain
+  - StringCalculator : 구분자로부터 숫자를 분리하여 덧셈 계산
 
-- Controller
-  [0] StringCalculatorController : InputView, StringCalculator, ResultView가 순서에 따라 동작하도록 함
+3. controller
+  - StringCalculatorController : InputView, StringCalculator, ResultView가 순서에 따라 동작하도록 함
