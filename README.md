@@ -23,14 +23,14 @@
 - 출력: ArrayList<Integer>
 - 설명: 입력받은 문자열을 파싱하여 기본 구분자와 커스텀 구분자를 ArrayList<String>형식으로 반환한다.
 
-### 2. 문자열 파싱 함수
+### 3. 문자열 파싱 함수
 
 - 입력: String
 - 출력: ArrayList<Integer>
 - 설명: 입력받은 문자열을 파싱하여 정수형 값들을 추출하고, 이를 ArrayList에 저장하여 반환합니다.
 
-### 3. 정수 리스트 합계 계산 함수
+### 4. 정수 리스트 합계 계산 함수
 
 - 입력: ArrayList<Integer>
-- 출력: int
+- 출력: Integer
 - 설명: 입력받은 정수 리스트(ArrayList)의 모든 요소를 더하여 그 합계를 반환합니다.
