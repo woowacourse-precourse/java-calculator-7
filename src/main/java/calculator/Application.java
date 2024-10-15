@@ -11,7 +11,10 @@ public class Application {
         if (input.startsWith("//")) {
             // //@\n1@2,3:4
             int customDelimiterEndIndex = input.indexOf("\\n");
+            CustomDelimiter customDelimiter = new CustomDelimiter(input.substring(2, customDelimiterEndIndex));
         }
+
+
 
 
     }
