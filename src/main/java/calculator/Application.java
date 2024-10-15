@@ -8,16 +8,26 @@ public class Application {
         System.out.print("덧셈할 문자열을 입력해 주세요.");
         String FullLine = Console.readLine();
         // 커스텀 구분자 및 기본 구분자로 문자열 분리
-        String[] SplitWord = MakeSplitWordList(FullLine);
+        int[] NumList = MakeSplitWordList(FullLine);
+
     }
-    public static String[] MakeSplitWordList(String FullLine) {
+    public static int[] MakeSplitWordList(String FullLine) {
+        String[] SplitWords;
         if (FullLine.startsWith("//")) {
             int EndIndex = FullLine.indexOf("\n");
             String CustomSplitWord = FullLine.substring(2, EndIndex);
             String RemainLine = FullLine.substring(EndIndex+1);
-            return RemainLine.split("[,|:]" + CustomSplitWord);
+            SplitWords =  RemainLine.split("[,|:]" + CustomSplitWord);
         } else {
-            return FullLine.split("[,|:]");
+            SplitWords =  FullLine.split("[,|:]");
         }
+
+        // int로 형변환
+        int[] NumList = new int[SplitWords.length];
+        for (int i = 0; i < NumList.length; i++){
+            NumList[i] = Integer.parseInt(SplitWords[i]);
+        }
+
+        return NumList;
     }
 }
