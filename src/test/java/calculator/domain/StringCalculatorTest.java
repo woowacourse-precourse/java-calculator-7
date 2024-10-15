@@ -1,7 +1,11 @@
 package calculator.domain;
 
+import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class StringCalculatorTest {
 
@@ -40,6 +44,39 @@ public class StringCalculatorTest {
         // then
 
         Assertions.assertEquals(result, expect);
+
+    }
+
+    @Test
+    void 배열_테스트() {
+
+        // given
+        StringCalculator stringCalculator = new StringCalculator();
+        String value ="1;2;3";
+        String customValue = ";";
+
+        // when
+        String[] result = stringCalculator.createNewValue(value,customValue);
+        String[] expect = {"1", "2", "3"};
+
+        // then
+        Assertions.assertArrayEquals(result,expect);
+
+    }
+
+    @Test
+    void 리스트_저장_테스트() {
+
+        // given
+        StringCalculator stringCalculator = new StringCalculator();
+        String[] value = {"1", "2", "3"};
+
+        // when
+        List<Integer> result = stringCalculator.saveValue(value);
+        List<Integer> expect = Arrays.asList(1, 2, 3);
+
+        // then
+        Assertions.assertEquals(result,expect);
 
     }
 }
