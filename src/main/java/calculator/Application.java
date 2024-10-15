@@ -13,4 +13,9 @@ public class Application {
     private static String getInput() {
         return Console.readLine();
     }
+
+    private static boolean isExitCommand(String input) {
+        // 대소문자 구분없이, input == exit 비교
+        return "exit".equalsIgnoreCase(input);
+    }
 }
