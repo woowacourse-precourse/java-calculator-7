@@ -30,4 +30,25 @@ public class StringCalculator {
 
         return separators;
     }
+
+    /**
+     * This method return numbers separated by separators
+     * @param input The string to get numbers
+     * @param separators The string to split numbers
+     * @return A list of numbers
+     */
+    private ArrayList<Integer> getNumbers(String input, ArrayList<String> separators) {
+        ArrayList<Integer> numbers = new ArrayList<Integer>();
+
+        String number_string = input.split("\\n")[1];
+        System.out.println("number_string: " + number_string);
+
+        String separator = String.join("|", separators);
+
+        for (String num : number_string.split(separator)) {
+            numbers.add(Integer.parseInt(num));
+        }
+
+        return numbers;
+    }
 }
