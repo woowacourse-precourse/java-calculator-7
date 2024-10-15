@@ -79,4 +79,20 @@ public class StringCalculatorTest {
         Assertions.assertEquals(result,expect);
 
     }
+
+    @Test
+    void 합산_테스트() {
+
+        // given
+        StringCalculator stringCalculator = new StringCalculator();
+        List<Integer> value = Arrays.asList(1, 2, 3);
+
+        // when
+        int result = stringCalculator.calculateSum(value);
+        int expect = 6;
+
+        // then
+        Assertions.assertEquals(result,expect);
+
+    }
 }
