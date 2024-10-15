@@ -12,7 +12,7 @@ public class Delimiter {
         delimiterSet.add(':');
     }
 
-    public void updateDelimiter(Character delimiter){
+    public static void updateDelimiter(Character delimiter){
         delimiterSet.add(delimiter);
     }
 }
