@@ -1,5 +1,6 @@
-package calculator;
+package calculator.controller;
 
+import calculator.domain.*;
 import calculator.view.Input;
 import calculator.view.Output;
 

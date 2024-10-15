@@ -1,7 +1,4 @@
-package calculator;
-
-import java.util.ArrayList;
-import java.util.List;
+package calculator.domain;
 
 public class Divider {
     private final static String COMMA = ",";
