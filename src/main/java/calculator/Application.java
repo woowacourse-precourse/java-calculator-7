@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.regex.Pattern;
+
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class Application {
@@ -11,6 +13,11 @@ public class Application {
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = readLine();
+
+        String pattern = "^(//.*\\\\n)*([0-9]+(.+[0-9]+)*|)$";
+        if(!Pattern.matches(pattern, input)) {
+            throw new IllegalArgumentException();
+        }
 
         String[] separatedInput = input.split("\\\\n");
         for (int i = 0; i < (separatedInput.length - 1); i++) {
@@ -28,6 +35,10 @@ public class Application {
         if (num.isBlank()) {
             return 0;
         }
-        return Integer.parseInt(num);
+        try {
+            return Integer.parseInt(num);
+        } catch (Exception e) {
+            throw new IllegalArgumentException();
+        }
     }
 }
