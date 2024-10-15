@@ -69,4 +69,34 @@ class InputParserTest {
         //then
         assertThat(hasCustomDelimiter1).isTrue();
     }
+
+    @Test
+    @DisplayName("커스텀 구분자 List 변환 테스트")
+    public void convertCustomDelimiterTest() {
+        //given
+        String input1 = "//;\\n1;2;3";
+        String input2 = "//;\\n1";
+
+        //when
+        List<Integer> result1 = inputParser.convertCustomDelimiter(input1);
+        List<Integer> result2 = inputParser.convertCustomDelimiter(input2);
+
+        //then
+        assertThat(result1).isEqualTo(List.of(1, 2, 3));
+        assertThat(result2).isEqualTo(List.of(1));
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자 List 변환 예외테스트")
+    public void convertCustomDelimiterExceptionTest() {
+        //given
+        String input1 = "//]\\n1;2;3";
+        String input2 = "/;\\n1;2;3";
+
+        //then
+        Assertions.assertThrows(IllegalArgumentException.class,
+            () -> inputParser.convertCustomDelimiter(input1));
+        Assertions.assertThrows(IllegalArgumentException.class,
+            () -> inputParser.convertCustomDelimiter(input2));
+    }
 }
