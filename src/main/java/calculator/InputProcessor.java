@@ -15,7 +15,7 @@ public class InputProcessor {
         return instance;
     }
 
-    public void getInput() {
+    public void getInputFromUser() {
         String input = Console.readLine();
     }
 }
