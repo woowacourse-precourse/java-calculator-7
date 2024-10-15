@@ -24,6 +24,13 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 실수_테스트() {
+        assertSimpleTest(() -> {
+            run("1.2;1.3,1"); // 실수도 계산 가능
+            assertThat(output()).contains("결과 : 3.5");
+        });
+    }
     @Override
     public void runMain() {
         Application.main(new String[]{});
