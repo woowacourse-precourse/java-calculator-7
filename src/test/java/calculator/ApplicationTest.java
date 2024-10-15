@@ -1,31 +1,44 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
+import java.util.List;
+import static org.junit.jupiter.api.Assertions.*;
 
-import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+class ApplicationTest {
 
-class ApplicationTest extends NsTest {
+    Application app = new Application();
     @Test
-    void 커스텀_구분자_사용() {
-        assertSimpleTest(() -> {
-            run("//;\\n1");
-            assertThat(output()).contains("결과 : 1");
-        });
+    void extractCustomSeparator_case1() {
+        String input = "//;\n1;2;3";
+        List<Character> separators = app.extractCustomSeparator(input);
+        assertEquals(1, separators.size());
+        assertEquals(';', separators.get(0));
     }
+
 
     @Test
-    void 예외_테스트() {
-        assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
-        );
+        void extractCustomSeparator_case2() {
+            String input = "//***\n1***2***3";
+            Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                app.extractCustomSeparator(input);
+            });
+            assertEquals("구분자는 반드시 하나의 문자여야 합니다.", exception.getMessage());
+        }
+
+        @Test
+        void extractCustomSeparator_case3() {
+            String input = "1,2:3";
+            List<Character> separators = app.extractCustomSeparator(input);
+            assertTrue(separators.isEmpty());
+        }
+
+        @Test
+        void extractCustomSeparator_case4() {
+            String input = "//\n\n1,2,3";
+            Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                app.extractCustomSeparator(input);
+            });
+            assertEquals("구분자는 반드시 하나의 문자여야 합니다.", exception.getMessage());
+        }
     }
 
-    @Override
-    public void runMain() {
-        Application.main(new String[]{});
-    }
-}
