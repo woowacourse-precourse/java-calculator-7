@@ -10,6 +10,5 @@ public class SeparatorValidation {
 
     private static boolean isNotSeparator(String input) {
         return !input.contains(":") && !input.contains(",") && (!input.contains("//") || !input.contains("\\n"));
-
     }
 }
