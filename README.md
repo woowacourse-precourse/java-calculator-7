@@ -37,7 +37,9 @@
 
 ## service package
 
-- `CalculatorService` : 계산기 동작 제어
+- `CalculatorService` : 계산기 동작 제어 [0]
+    - `calculate` : 계산기 동작 제어 [0]
+    - validation 내의 검증 기능 추가 필요
 
 ## validation package
 
