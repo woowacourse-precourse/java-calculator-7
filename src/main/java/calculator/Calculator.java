@@ -15,32 +15,21 @@ public class Calculator {
         if (input.length() == 1) {
             return Integer.parseInt(input);
         }
-        if (isDefaultDelimiter(input)) {
+        if (DelimiterParser.isDefaultDelimiter(input)) {
             return Arrays.stream(input.split(DEFAULT_REGEX))
                     .mapToInt(Integer::parseInt)
                     .sum();
         }
-        if (!isDefaultDelimiter(input)) {
+        if (!DelimiterParser.isDefaultDelimiter(input)) {
             String replaceInput = input.replace("//", "")
                     .replace("\\n", "")
                     .trim();
             String customDelimiter = replaceInput.substring(0, 1);
-            System.out.println("customDelimiter = " + customDelimiter);
             return Arrays.stream(replaceInput.substring(1)
                             .split(customDelimiter))
                     .mapToInt(Integer::parseInt)
                     .sum();
         }
         return 0;
-    }
-
-    private boolean isDefaultDelimiter(String input) {
-        String[] defaultDelimiterNumber = input.split(DEFAULT_REGEX);
-        try {
-            Integer.parseInt(defaultDelimiterNumber[0]);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
     }
 }
