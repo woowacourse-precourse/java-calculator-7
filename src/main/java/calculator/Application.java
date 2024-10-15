@@ -15,7 +15,7 @@ public class Application {
         if ("".equals(input)) {
             return result;
         }
-        String[] numbers = input.split(",");
+        String[] numbers = input.split("[,:]");
         for (String number : numbers) {
             result += Integer.parseInt(number);
         }
