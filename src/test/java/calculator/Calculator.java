@@ -4,23 +4,25 @@ import java.util.regex.Pattern;
 
 public class Calculator {
     private static final String DEFAULT_DELIMITER = ",|:";
-    private static final String NEGATIVE_OR_ZERO_ERROR = "음수 또는 0은 입력되면 안됩니다.";
+    private static final String NEGATIVE_OR_ZERO_ERROR = "양수가 아닌 수가 포함되어 있습니다.";
+    private static final String ZERO_STRING = "0";
+    private static final String NEGATIVE_SIGN = "-";
 
     int add (String inputString) {
         if(inputString.isEmpty()) return 0; // 공백 예외처리
 
         String delimiter = extractDelimiter(inputString); //조건 만족시 구분자 추가
-        inputString = removeCustomDelimiterInit(inputString); //조건 만족시 커스텀구분자 생성식 제거
+        inputString = removeCustomDelimiterDeclaration(inputString); //조건 만족시 커스텀구분자 생성식 제거
 
-        negativeOrZeroCheck(inputString,delimiter); // -값, 0 예외처리
+        validateNoNegativeOrZero(inputString,delimiter); // -값, 0 예외처리
 
         return calculateAdd(inputString, delimiter);
     }
 
-    void negativeOrZeroCheck(String inputString, String delimiter) {
+    void validateNoNegativeOrZero(String inputString, String delimiter) {
         String[] split = inputString.split(delimiter);
         for (String number : split) {
-            if(number.contains("-") || number.equals("0")) {
+            if(number.contains(NEGATIVE_SIGN) || number.equals(ZERO_STRING)) {
                 throw new IllegalArgumentException(NEGATIVE_OR_ZERO_ERROR);
             }
         }
@@ -34,7 +36,7 @@ public class Calculator {
         return DEFAULT_DELIMITER;
     }
 
-    String removeCustomDelimiterInit(String inputString) {
+    String removeCustomDelimiterDeclaration(String inputString) {
         if(inputString.startsWith("//")){
             return inputString.substring(inputString.indexOf("\n") + 1);
         }
