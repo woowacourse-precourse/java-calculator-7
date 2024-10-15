@@ -20,7 +20,7 @@ public class CalculatorController {
 
     public void applicationRun() {
         String value = inputView.receiveValue();
-        String customValue = stringCalculator.extractCustom(value);
+        String customValue = stringCalculator.extractCustomValue(value);
         String rawValue = stringCalculator.removeValue(value);
         String[] pureValue = stringCalculator.createNewValue(rawValue, customValue);
         List<Integer> saveValue = stringCalculator.saveValue(pureValue);
