@@ -16,10 +16,6 @@ public class Divider {
         this.customDivider = customDivider;
     }
 
-    public boolean isNoneCustomDivider(){
-        return customDivider == null;
-    }
-
     public String getComma(){
         return COMMA;
     }
