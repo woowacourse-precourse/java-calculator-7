@@ -2,5 +2,7 @@ package calculator.view;
 
 public class OutputView {
 
-    private static final String NEW_LINE = System.lineSeparator();
+    public void printAllAddedResult(int result) {
+        System.out.println("결과 : " + result);
+    }
 }
