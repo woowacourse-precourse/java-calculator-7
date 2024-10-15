@@ -44,11 +44,21 @@ public class InputParser {
             String custom = input.substring(2,3);
             input = input.substring(input.indexOf("\\n") + 2);
             String[] inputs = input.split(custom);
-            return Arrays.stream(inputs)
-                         .map(Integer::parseInt)
-                         .toList();
+            List<Integer> list = Arrays.stream(inputs)
+                .map(Integer::parseInt)
+                .toList();
+            checkPositiveNumber(list);
+            return list;
         } catch (Exception e) {
             throw new IllegalArgumentException();
+        }
+    }
+
+    protected void checkPositiveNumber(List<Integer> list) throws IllegalArgumentException{
+        for (Integer integer : list) {
+            if (integer <= 0) {
+                throw new IllegalArgumentException();
+            }
         }
     }
 }
