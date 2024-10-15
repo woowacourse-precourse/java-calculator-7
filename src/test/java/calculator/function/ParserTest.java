@@ -12,85 +12,85 @@ class ParserTest {
     void 파싱_성공(){
         //given
         String inputString = "1,2:3";
-        String separator = ",:";
+        String separator = "[,:]";
 
         //when
         Parser parser = new Parser(inputString, separator);
         List<String> result = parser.execute();
 
         //then
-        assertEquals(result.size(), 3);
-        assertEquals(result.getFirst(), "1");
-        assertEquals(result.get(1), "2");
-        assertEquals(result.get(2), "3");
+        assertEquals(3, result.size());
+        assertEquals("1", result.getFirst());
+        assertEquals("2", result.get(1));
+        assertEquals("3", result.get(2));
     }
 
     @Test
     void 파싱_2자릿수_성공(){
         //given
         String inputString = "1,2:345";
-        String separator = ",:";
+        String separator = "[,:]";
 
         //when
         Parser parser = new Parser(inputString, separator);
         List<String> result = parser.execute();
 
         //then
-        assertEquals(result.size(), 4);
-        assertEquals(result.getFirst(), "1");
-        assertEquals(result.get(1), "2");
-        assertEquals(result.get(2), "345");
+        assertEquals(3, result.size());
+        assertEquals("1", result.getFirst());
+        assertEquals("2", result.get(1));
+        assertEquals("345", result.get(2));
     }
 
     @Test
     void 파싱_커스텀구분자_성공(){
         //given
         String inputString = "1,2:3^4";
-        String separator = ",:^";
+        String separator = "[,:^]";
 
         //when
         Parser parser = new Parser(inputString, separator);
         List<String> result = parser.execute();
 
         //then
-        assertEquals(result.size(), 4);
-        assertEquals(result.getFirst(), "1");
-        assertEquals(result.get(1), "2");
-        assertEquals(result.get(2), "3");
-        assertEquals(result.get(3), "4");
+        assertEquals(4, result.size());
+        assertEquals("1", result.getFirst());
+        assertEquals("2", result.get(1));
+        assertEquals("3", result.get(2));
+        assertEquals("4", result.get(3));
     }
 
     @Test
     void 파싱_정수_성공(){
         //given
         String inputString = "1,2:3045";
-        String separator = ",:0";
+        String separator = "[,:0]";
 
         //when
         Parser parser = new Parser(inputString, separator);
         List<String> result = parser.execute();
 
         //then
-        assertEquals(result.size(), 4);
-        assertEquals(result.getFirst(), "1");
-        assertEquals(result.get(1), "2");
-        assertEquals(result.get(2), "3");
-        assertEquals(result.get(3), "45");
+        assertEquals(4, result.size());
+        assertEquals("1", result.getFirst());
+        assertEquals("2", result.get(1));
+        assertEquals("3", result.get(2));
+        assertEquals("45", result.get(3));
     }
     
     @Test
     void 파싱_빈_문자열(){
         //given
         String inputString = "";
-        String separator = ",:";
+        String separator = "[,:]";
 
         //when
         Parser parser = new Parser(inputString, separator);
         List<String> result = parser.execute();
 
         //then
-        assertEquals(result.size(), 1);
-        assertEquals(result.getFirst(), "");
+        assertEquals(1, result.size());
+        assertEquals("", result.getFirst());
         
     }
     
@@ -98,7 +98,7 @@ class ParserTest {
     void 파싱_연속_구분자(){
         //given
         String inputString = "1,2::3";
-        String separator = ",:";
+        String separator = "[,:]";
 
         //when
         Parser parser = new Parser(inputString, separator);
@@ -106,17 +106,17 @@ class ParserTest {
 
         //then
         assertEquals(result.size(), 4);
-        assertEquals(result.getFirst(), "1");
-        assertEquals(result.get(1), "2");
-        assertEquals(result.get(2), "");
-        assertEquals(result.get(3), "3");
+        assertEquals("1", result.getFirst());
+        assertEquals("2", result.get(1));
+        assertEquals("", result.get(2));
+        assertEquals("3", result.get(3));
     }
     
     @Test
     void 파싱_구분자로_끝남(){
         //given
         String inputString = "1,2:3,";
-        String separator = ",:";
+        String separator = "[,:]";
 
         //when
         Parser parser = new Parser(inputString, separator);
@@ -124,8 +124,8 @@ class ParserTest {
 
         //then
         assertEquals(result.size(), 3);
-        assertEquals(result.getFirst(), "1");
-        assertEquals(result.get(1), "2");
-        assertEquals(result.get(2), "3");
+        assertEquals("1", result.getFirst());
+        assertEquals("2", result.get(1));
+        assertEquals("3", result.get(2));
     }
 }
