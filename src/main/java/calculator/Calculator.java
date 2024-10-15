@@ -14,9 +14,19 @@ public class Calculator {
 
     public void calculate(){
         Regex regex = new Regex();
+        printInputMessage();
         inputExpression(regex);
         extractNumbers(regex);
         circulateResult(regex);
+        printResult();
+    }
+
+    private void printInputMessage(){
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+    }
+
+    private void printResult(){
+        System.out.println("결과 : " + result);
     }
 
     private void circulateResult(Regex regex){
