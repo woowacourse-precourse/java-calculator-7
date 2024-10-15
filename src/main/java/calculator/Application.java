@@ -4,8 +4,6 @@ import camp.nextstep.edu.missionutils.Console;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Application {
     public static void main(String[] args) {
@@ -21,8 +19,13 @@ public class Application {
         customDelimiters = Arrays.copyOfRange(customDelimiters, 0, customDelimiters.length - 1);
 
         if (customDelimiters.length > 0) {
-            delimiterRegex = "(" + delimiterRegex + "|" + String.join("|", customDelimiters) + ")";
+            delimiterRegex = String.format("(%s|%s)", delimiterRegex, String.join("|", customDelimiters));
             inputText = inputText.replaceAll(customDelimiterRegex, "");
+        }
+
+        String expressionRegex = String.format("^(%s)*(([0-9]+)%s)*[0-9]+$", customDelimiterRegex, delimiterRegex);
+        if (!inputText.matches(expressionRegex)) {
+            throw new IllegalArgumentException("입력 값이 올바르지 않습니다.");
         }
 
         List<Integer> values = Arrays.stream(inputText.split(delimiterRegex))
