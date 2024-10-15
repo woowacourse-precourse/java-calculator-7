@@ -6,33 +6,51 @@ public class Calculator {
 
     private final String DEFAULT_REGEX = "[,|:]";
 
+    // TODO : 메서드를 더 나눠야함. calculator 는 현재 parsing 및 덫셈 작업, validation을 하고있음
+    // TODO : validation -> (IAE 터트리게), parsing 작업 후 숫자만 반환, calculaator는 반환 된 숫자를 더할 수 있도록
+
     public int calculator(String input) {
-        // 입력이 비어있는 경우 처리
         if (input.isEmpty()) {
             return 0;
         }
-        //입력값이 하나일 경우
-        String trimNumber = input.trim();
-        if (trimNumber.length() == 1) {
-            return Integer.parseInt(trimNumber);
+        if (input.length() == 1) {
+            return Integer.parseInt(input);
         }
-        //기본 구분자에 해당 될 경우
         if (isDefaultDelimiter(input)) {
             return Arrays.stream(input.split(DEFAULT_REGEX))
                     .map(String::trim)
                     .mapToInt(Integer::parseInt)
                     .sum();
         }
-        //커스텀 구분자에 해당될 경우
         if (!isDefaultDelimiter(input)) {
-            String replaceInput = input.replace("//", "").replace("\\n", "").trim();
-            String customDelimiter = replaceInput.substring(0,1); // @
+            String replaceInput = input.replace("//", "")
+                    .replace("\\n", "")
+                    .trim();
+            String customDelimiter = replaceInput.substring(0, 1);
+            System.out.println("customDelimiter = " + customDelimiter);
             return Arrays.stream(replaceInput.substring(1).split(customDelimiter))
                     .map(String::trim)
                     .mapToInt(Integer::parseInt)
                     .sum();
         }
+
         return 0;
+    }
+
+    private int validateIfInputNotNumber(String input) {
+        try {
+            int number = Integer.parseInt(input);
+            validateIfInputNegative(number);
+            return number;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void validateIfInputNegative(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException();
+        }
     }
 
     private boolean isDefaultDelimiter(String input) {
