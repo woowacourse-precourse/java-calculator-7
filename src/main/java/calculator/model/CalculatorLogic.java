@@ -22,4 +22,10 @@ public class CalculatorLogic {
                 .toList();
     }
 
+    public int calculate(List<Integer> numbers) {
+        //Integer 객체에 대해서는 sum()사용 불가, int로 unboxing 필요
+        return numbers.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
 }
