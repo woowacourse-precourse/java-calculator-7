@@ -10,7 +10,8 @@ public class Application {
         UserInputConverter userInputConverter = new UserInputConverter();
         List<String> split = userInputConverter.split(userInput);
 
-        System.out.println(userInput);
-        System.out.println(split);
+        Numbers numbers = Numbers.of(split);
+
+        System.out.println(numbers.getNumbers());
     }
 }
