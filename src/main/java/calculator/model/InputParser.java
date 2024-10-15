@@ -1,5 +1,7 @@
 package calculator.model;
 
+import static java.util.regex.Pattern.quote;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,7 +18,7 @@ public class InputParser {
     }
 
     protected boolean checkDefaultDelimiter(String input) {
-        String defaultDelimiterRegex = "(^[1-9]\\d*)((,|:)([1-9]\\d*))*$";
+        String defaultDelimiterRegex = "^([1-9]\\d*)((,|:)([1-9]\\d*))*$";
         return input.matches(defaultDelimiterRegex);
     }
 
@@ -32,4 +34,7 @@ public class InputParser {
         }
     }
 
+    protected boolean checkCustomDelimiter(String input) {
+        return input.contains("//") && input.contains("\\n");
+    }
 }
