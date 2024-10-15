@@ -8,6 +8,7 @@ import calculator.parser.BasicMathematicalExpressionParser;
 import calculator.parser.BasicSeparatorParser;
 import calculator.parser.MathematicalExpressionParser;
 import calculator.parser.SeparatorParser;
+import camp.nextstep.edu.missionutils.Console;
 
 public class BasicCalculator implements Calculator {
 
@@ -52,4 +53,15 @@ public class BasicCalculator implements Calculator {
 
 		recentResult = result;
 	}
+
+	@Override
+	public void startCalculation() {
+		System.out.println("덧셈할 문자열을 입력해 주세요.");
+		String input = Console.readLine();
+
+		calculate(input);
+
+		System.out.printf("결과 : %d", recentResult);
+	}
+
 }
