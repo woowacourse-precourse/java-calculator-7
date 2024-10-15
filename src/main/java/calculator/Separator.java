@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Separator {
-    private static final String OR = "|";
     private static final String COMMA = ",";
     private static final String COLON = ":";
     private static final String CUSTOM_SEPARATOR_START= "//";
