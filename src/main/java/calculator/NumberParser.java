@@ -11,10 +11,12 @@ public class NumberParser {
         this.divider = divider;
     }
 
-    public List<Integer> parse(String input){
+    public List<Integer> parse(CalculatedValue calculatedValue){
         List<Integer> result = new ArrayList<>();
 
-        String[] splitWord = input.split("");
+        System.out.println(calculatedValue.getValue());
+
+        String[] splitWord = calculatedValue.getValue().split("");
         StringBuilder keepNumber = new StringBuilder();
 
         for (String s : splitWord) {
