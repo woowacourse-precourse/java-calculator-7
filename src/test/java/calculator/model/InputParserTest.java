@@ -2,6 +2,7 @@ package calculator.model;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.in;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
@@ -94,9 +95,20 @@ class InputParserTest {
         String input2 = "/;\\n1;2;3";
 
         //then
-        Assertions.assertThrows(IllegalArgumentException.class,
+        assertThrows(IllegalArgumentException.class,
             () -> inputParser.convertCustomDelimiter(input1));
-        Assertions.assertThrows(IllegalArgumentException.class,
+        assertThrows(IllegalArgumentException.class,
             () -> inputParser.convertCustomDelimiter(input2));
+    }
+
+    @Test
+    @DisplayName("양수 검사 테스트")
+    public void checkPositiveNumberTest() {
+        //given
+        List<Integer> list = List.of(1, 2, 3, -1);
+
+        //then
+        assertThrows(IllegalArgumentException.class,
+            () -> inputParser.checkPositiveNumber(list));
     }
 }
