@@ -1,5 +1,7 @@
 package calculator.model;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class Calculator {
@@ -8,6 +10,20 @@ public class Calculator {
     public Calculator(String expression) {
         validateExpression(expression);
         this.expression = expression;
+    }
+
+    public Integer calculate(String expression) {
+        String separator = "[,:]";
+        
+        if (hasCustomSeparator(expression)) {
+            String customSeparator = extractCustomSeparator(expression);
+            expression = extractActualExpression(expression);
+            separator = "[,:" + Pattern.quote(customSeparator) + "]";
+        }
+
+        return Arrays.stream(expression.split(separator))
+            .mapToInt(Integer::parseInt)
+            .sum();
     }
 
     private void validateExpression(String expression) {
