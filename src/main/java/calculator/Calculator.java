@@ -26,9 +26,11 @@ public class Calculator {
 
         for(String number : numbers){
             int num = Integer.parseInt((number));
-            if(num >= 0){
-                throw new IllegalStateException();
+
+            if(num < 0){
+                throw new IllegalArgumentException();
             }
+
             sum += num;
         }
         return sum;
