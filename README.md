@@ -91,3 +91,7 @@
 
 1. `Controller`의 `run()`을 실행한다.
 
+### 클래스 다이어그램
+
+<img src="https://github.com/user-attachments/assets/658ed659-43f4-4330-89ca-2d58ef0c15c4" width="700" alt="image">
+
