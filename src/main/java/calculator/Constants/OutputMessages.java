@@ -1,5 +1,5 @@
 package calculator.Constants;
 
 public class OutputMessages {
-    final static String RESULT = "결과 : ";
+    public final static String RESULT = "결과 : ";
 }
