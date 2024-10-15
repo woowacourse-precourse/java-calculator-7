@@ -16,7 +16,6 @@ public class AlphabetValidation {
             replaceInput = input.replace("\\n", "");
         }
         String[] inputStrings = replaceInput.split("");
-        System.out.println(Arrays.toString(inputStrings));
         for (String inputString : inputStrings) {
             if (isAlphabet(inputString)) {
                 return true;
