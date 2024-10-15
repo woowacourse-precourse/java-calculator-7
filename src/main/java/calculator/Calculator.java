@@ -7,11 +7,11 @@ import java.util.List;
 public class Calculator {
     private String userInput;
     private final OutputView outputView = new OutputView();
+    private final InputView inputView = new InputView();
     private String DELIMITER = ",|:|";
     private Long resultNumber = 0L;
 
     public Calculator() {
-        InputView inputView = new InputView();
         userInput = inputView.getInput();
     }
 
@@ -25,6 +25,7 @@ public class Calculator {
             Long[] numberOfInputString = changeStringToNumber(splitInput);
             sumNumber(numberOfInputString);
             outputView.printResult(resultNumber);
+            inputView.closedConsole();
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
