@@ -15,7 +15,7 @@ public class Application {
                     sum += checkIsInt(value);
                 }
             } catch (IllegalArgumentException e) {
-                System.out.printf("잘못된 값을 입력했습니다. 프로그램을 종료합니다.");
+                System.out.print("잘못된 값을 입력했습니다. 프로그램을 종료합니다.");
                 return;
             }
         }
@@ -36,6 +36,11 @@ public class Application {
     }
 
     private static int checkIsInt(String str) throws IllegalArgumentException{
-        return Integer.parseInt(str);
+        int intValue = Integer.parseInt(str);
+        if(intValue > 0) {
+            return  intValue;
+        }else{
+            throw  new IllegalArgumentException();
+        }
     }
 }
