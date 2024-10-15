@@ -28,6 +28,8 @@ public class Application {
             number = number.trim();
             if (number.isEmpty() || number.equals("\"\"")) {
                 sum += 0;
+            }else {
+                sum += Integer.parseInt(number);
             }
         }
 
