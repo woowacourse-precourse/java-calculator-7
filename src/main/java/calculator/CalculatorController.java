@@ -13,8 +13,9 @@ public class CalculatorController {
 
     public void start() {
 
+        str = this.model.check1(str);
+
         view.print(str);
 
     }
-
 }
