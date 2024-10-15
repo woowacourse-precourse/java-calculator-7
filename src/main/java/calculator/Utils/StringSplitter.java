@@ -13,4 +13,8 @@ public class StringSplitter {
         return Arrays.stream(splittedInput).toList();
     }
 
+    public static List<String> splitByCumstomDelimiter(String userInput, String customDelimiter) {
+        String[] splittedInput = userInput.split(customDelimiter);
+        return Arrays.stream(splittedInput).toList();
+    }
 }
