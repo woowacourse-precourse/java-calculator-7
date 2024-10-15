@@ -27,9 +27,10 @@ public class Parser {
 
     // 입력 문자열 중 숫자만 파싱
     private static List<Integer> splitAndConvert(String input, String delimiter) {
+        String escapedDelimiter = Pattern.quote(delimiter);
         List<Integer> numbers = new ArrayList<>();
         try {
-            for (String token : input.split(delimiter)) {
+            for (String token : input.split(escapedDelimiter)) {
                 numbers.add(Integer.parseInt(token));
             }
         } catch (IllegalArgumentException e) {
