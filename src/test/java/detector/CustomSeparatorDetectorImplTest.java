@@ -14,7 +14,7 @@ class CustomSeparatorDetectorImplTest {
     @DisplayName("커스텀 구분자 찾기")
     void detectSeparator() {
         // given
-        String input = "//;\\n1;2;3";
+        String input = "//;\n1;2;3";
         // when
         String customSeparator = detector.detectSeparator(input);
         // then
