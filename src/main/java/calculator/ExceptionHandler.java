@@ -31,13 +31,11 @@ public class ExceptionHandler {
         }
     }
 
-
     public void checkIncorrectDelim(char delim) {
         if (delim == ',' || delim == ':') {
             throw new IllegalArgumentException("기본 구분자는 커스텀 구분자로 설정할 수 없습니다.");
         }
     }
-
 
     public void detectNonDigitElem(List<String> splitElems) {
         for (String elem : splitElems) {
@@ -45,6 +43,14 @@ public class ExceptionHandler {
                 Integer.parseInt(elem);
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("구분자 사이에는 양의 정수만 입력할 수 있습니다.");
+            }
+        }
+    }
+
+    public void checkZeroAndNegativeDigit(List<Integer> nums) {
+        for (int num : nums) {
+            if (num <= 0) {
+                throw new IllegalArgumentException("0 또는 음수는 입력할 수 없습니다! 양수만 입력해주세요.");
             }
         }
     }
