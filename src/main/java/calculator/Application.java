@@ -33,13 +33,17 @@ public class Application {
 
             for (String number : splitNumbers) {
                 int parsedNumber = Integer.parseInt(number);
-                if(parsedNumber < 0) {
-                    throw new IllegalArgumentException("입력값은 양수만 가능합니다.");
-                }
+                validatePositiveNumber(parsedNumber);
                 result += parsedNumber;
             }
         }
         System.out.println("결과 : " + result);
+    }
+
+    private static void validatePositiveNumber(int parsedNumber) {
+        if(parsedNumber < 0) {
+            throw new IllegalArgumentException("입력값은 양수만 가능합니다.");
+        }
     }
 
     private static String buildDelimiterRegex(List<String> delimiters) {
