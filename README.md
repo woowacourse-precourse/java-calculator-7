@@ -22,9 +22,10 @@
   - `CalculatorController` : 전체 프로그램 동작 제어
 
 ## model package
- - `ExtractDelimiter` : 기본 구분자, 사용자 정의 구분자 추출 기능
- - `ExtractNumber` : 사용자 입력에서 숫자 추출 기능
- - `Calculate` : 구분자에 따른 연산 기능
+ - `CalculatorLogic` : 계산기 내부 동작 구성
+    - `extractDelimiter` : 기본 구분자, 사용자 정의 구분자 추출 기능
+    - `extractNumber` : 사용자 입력에서 숫자 추출 기능
+    - `calculate` : 구분자에 따른 연산 기능
 
 ## service package
  - `CalculatorService` : 계산기 동작 제어
