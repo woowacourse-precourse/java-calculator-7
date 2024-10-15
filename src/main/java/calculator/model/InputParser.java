@@ -9,6 +9,16 @@ public class InputParser {
         if (input == null) {
             return List.of(0,0);
         }
+        if (checkDefaultDelimiter(input)) {
+            return convertDefaultDelimiter(input);
+        }
+        throw new IllegalArgumentException();
+    }
+
+    protected boolean checkDefaultDelimiter(String input) {
+        String defaultDelimiterRegex = "(^[1-9]\\d*)((,|:)([1-9]\\d*))*$";
+        return input.matches(defaultDelimiterRegex);
     }
     
+    }
 }
