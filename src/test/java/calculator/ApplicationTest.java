@@ -61,7 +61,7 @@ class ApplicationTest extends NsTest {
     @Test
     void findCustomTest() {
         //given
-        InputString inputString = new InputString("//;\n1,2,3:4;9");
+        InputString inputString = new InputString("//;\\n1,2,3:4;9");
 
         //when
         ParsingInputString parsingInputString = new ParsingInputString(inputString);

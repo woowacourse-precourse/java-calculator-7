@@ -19,7 +19,7 @@ public class ParsingInputString {
         if (input.length() < 4) {
             return;
         }
-        if (input.indexOf("//") == 0 && input.indexOf("\n") == 3) {
+        if (input.indexOf("//") == 0 && input.indexOf("\\n") == 3) {
             inputString.setCustomChar(input.charAt(2));
             inputString.setInput(input.substring(beginIndex));
         }
