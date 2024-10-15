@@ -2,10 +2,10 @@
 ## 프로그램 구현 사항
 ### 입력
 - [ ] 사용자에게 문자열 입력받기
-- [ ] 커스텀 구분자 있는지 확인하기
-- [ ] 새롭게 등록된 구분자나, 쉼표(,)와 콜론(:)을 제외한 구분자가 있으면 IllegalArgumentException 발생 및 종료
-- [ ] 구분자로 parsing 하기
-- [ ] 양수를 제외한 다른 문자가 있으면 IllegalArgumentException 발생 및 종료
+- [X] 커스텀 구분자 있는지 확인하기
+- [X] 새롭게 등록된 구분자나, 쉼표(,)와 콜론(:)을 제외한 구분자가 있으면 IllegalArgumentException 발생 및 종료
+- [X] 구분자로 parsing 하기
+- [X] 양수를 제외한 다른 문자가 있으면 IllegalArgumentException 발생 및 종료
 
 ### 계산기 로직
 - [ ] 문자를 정수로 변환
