@@ -12,6 +12,7 @@ public class Application {
             // //@\n1@2,3:4
             int customDelimiterEndIndex = input.indexOf("\\n");
             CustomDelimiter customDelimiter = new CustomDelimiter(input.substring(2, customDelimiterEndIndex));
+            input = input.substring(customDelimiterEndIndex+2);
         }
 
 
