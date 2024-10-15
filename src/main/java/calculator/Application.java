@@ -5,47 +5,58 @@ import camp.nextstep.edu.missionutils.Console;
 public class Application {
     public static void main(String[] args) {
         // 문자열 입력
-        System.out.print("덧셈할 문자열을 입력해 주세요.");
-        String FullLine = Console.readLine();
-        // 커스텀 구분자 및 기본 구분자로 문자열 분리
-        int[] NumList = MakeSplitWordList(FullLine);
-        // NumList의 합 구한 후 결과 도출
-        int ResultValue = Result(NumList);
+        FullLine FullLine = new FullLine();
+        FullLine.LineInput();
+        // 형 변환
+        Numbers Numbers = new Numbers();
+        Numbers.ToInt(FullLine.MakeSplitWordList());
         // 결과 도출
-        System.out.print("결과 : "+ ResultValue);
+        Numbers.Result();
     }
-    public static int[] MakeSplitWordList(String FullLine) {
-        String[] SplitWords;
-        if (FullLine.startsWith("//")) {
-            int EndIndex = FullLine.indexOf("\\n");
-            String CustomSplitWord = FullLine.substring(2, EndIndex);
-            String RemainLine = FullLine.substring(EndIndex+2);
-            SplitWords =  RemainLine.split("[,:]" + CustomSplitWord);
-        } else {
-            SplitWords =  FullLine.split("[,:]");
-        }
+}
 
-        // int로 형변환 및 잘못된 입력값 구분
-        int[] NumList = new int[SplitWords.length];
-        for (int i = 0; i < NumList.length; i++){
-            try {
-                NumList[i] = Integer.parseInt(SplitWords[i]);
-                // 양수 확인
-                if (NumList[i] < 1) {
-                    throw new IllegalArgumentException("IllegalArgumentException");
-                }
-            //숫자가 아니면 에러 발생
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("IllegalArgumentException");
-            }
-        }
-        return NumList;
+class FullLine {
+    private String InputLine;
+    public void LineInput() {
+        System.out.print("덧셈할 문자열을 입력해 주세요.");
+        this.InputLine = Console.readLine();
     }
-    public static int Result(int[] NumList) {
-        int ResultValue = 0;
-        for (int Num : NumList) {
-            ResultValue += Num;
+    public String[] MakeSplitWordList() {
+        if (InputLine.startsWith("//")) {
+            int EndIndex = InputLine.indexOf("\\n");
+            String CustomSplitWord = InputLine.substring(2, EndIndex);
+            String RemainLine = InputLine.substring(EndIndex + 2);
+            return RemainLine.split("[,:]" + CustomSplitWord);
         }
-        return ResultValue;
+        return InputLine.split("[,:]");
+    }
+}
+class Numbers {
+    private int[] NumList;
+    public void ToInt(String[] WordList){
+        int[] NumList = new int[WordList.length];
+        for (int i = 0; i < WordList.length; i++){
+            NumList[i] = Parse(WordList[i]);
+        }
+        this.NumList = NumList;
+    }
+    private int Parse(String Word) {
+        int ParseInt ;
+        try {
+            ParseInt = Integer.parseInt(Word);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("IllegalArgumentException");
+        }
+        if (ParseInt < 1) {
+            throw new IllegalArgumentException("IllegalArgumentException");
+        }
+        return ParseInt;
+    }
+    public void Result() {
+        int Sum = 0;
+        for (int Num : NumList) {
+            Sum += Num;
+        }
+        System.out.print("결과 : " + Sum);
     }
 }
