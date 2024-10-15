@@ -2,17 +2,19 @@ package calculator.domain;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class StringAddCalculator {
     private static final String DELIMITER = ",|:";
+    private static final int DEFAULT_VALUE = 0;
 
     public StringAddCalculator() {
     }
 
     public int splitAndSum(final String inputValue) {
-        List<Integer> values = splitToInteger(inputValue);
-        return sum(values);
+        if (inputValue.isBlank()) {
+            return DEFAULT_VALUE;
+        }
+        return sum(splitToInteger(inputValue));
     }
 
     private List<Integer> splitToInteger(final String inputValue) {
