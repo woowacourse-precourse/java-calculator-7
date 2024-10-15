@@ -10,7 +10,6 @@ public class Application {
             System.out.println(0);
             return;
         }
-
         run(input);
     }
 
@@ -21,6 +20,7 @@ public class Application {
             input = input.substring(5, input.length() - 1);
         }
         String[] splited = input.split(regex);
+        System.out.println(calculate(splited));
     }
 
     private static boolean checkWhetherInputUsingCustomDelimiter(String input) {
@@ -41,5 +41,17 @@ public class Application {
             }
         }
         return input.charAt(2);
+    }
+
+    private static int calculate(String[] numbers) {
+        int sum = 0;
+        try {
+            for (String number : numbers) {
+                sum += Integer.parseInt(number);
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
+        return sum;
     }
 }
