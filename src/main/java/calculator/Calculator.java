@@ -1,10 +1,12 @@
 package calculator;
 
+import java.lang.reflect.Type;
+
 public class Calculator {
 
     private String delimiter = ",|:";
 
-    public int add(String input){
+    public int add(String input) throws IllegalStateException{
         int sum = 0;
 
         if(input.isEmpty()){
@@ -23,7 +25,11 @@ public class Calculator {
 
 
         for(String number : numbers){
-            sum += Integer.parseInt(number);
+            int num = Integer.parseInt((number));
+            if(num >= 0){
+                throw new IllegalStateException();
+            }
+            sum += num;
         }
         return sum;
     }
