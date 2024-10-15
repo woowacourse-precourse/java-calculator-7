@@ -15,7 +15,7 @@
 
 ---
 ## view package
- - `inputView` : 사용자 입력 요구, 값 입력받기
+ - `inputView` : 사용자 입력 요구, 값 입력받기 [O]
  - `outputView` : 계산 결과 출력
 
 ## controller package
