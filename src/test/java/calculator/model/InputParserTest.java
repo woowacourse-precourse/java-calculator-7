@@ -40,5 +40,20 @@ class InputParserTest {
         //then
         assertThat(hasDefaultDelimiter).isFalse();
     }
-    
+
+    @Test
+    @DisplayName("기본구분자 List 변환 테스트")
+    public void convertDefaultDelimiterTest() {
+        //given
+        String input = "1,2:3";
+        String input2 = "1";
+
+        //when
+        List<Integer> result1 = inputParser.convertDefaultDelimiter(input);
+        List<Integer> result2 = inputParser.convertDefaultDelimiter(input2);
+
+        //then
+        assertThat(result1).isEqualTo(List.of(1, 2, 3));
+        assertThat(result2).isEqualTo(List.of(1));
+    }
 }
