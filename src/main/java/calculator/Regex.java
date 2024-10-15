@@ -1,61 +1,22 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.Console;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Regex {
 
-    private static final String CUSTOM_DELIMITER_REGEX = "^//(.)\\\\n(.*)";
-    private static final String BASIC_DELIMITER = ",|:";
-    private String customDelimiter;
     private String expression;
     private List<Integer> numbers = new ArrayList<>();
 
-    public void inputExpression() {
-        String input = Console.readLine();
-        Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
-        Matcher matcher = pattern.matcher(input);
-
-        if(matcher.find()){
-            customDelimiter = matcher.group(1);
-            expression = matcher.group(2);
-            validateNotDigit();
-        } else {
-            expression = input;
-        }
-
-        Console.close();
+    public void setExpression(String expression){
+        this.expression = expression;
     }
 
-    private void validateNotDigit() {
-        if(Character.isDigit(customDelimiter.charAt(0))){
-            throw new IllegalArgumentException("잘못된 입력입니다.");
-        }
-    }
-
-    public void setNumbers(){
-        if(customDelimiter == null){
-            numbers = getList(BASIC_DELIMITER);
-        } else {
-            customDelimiter = customDelimiter + "|" + BASIC_DELIMITER;
-            numbers = getList(customDelimiter);
-        }
-
+    public void setNumbers(String delimiter){
+        numbers = getList(delimiter);
         validateIsPositive();
-    }
-
-    private void validateIsPositive() {
-        for(int number : numbers) {
-            if(number < 0) {
-                throw new IllegalArgumentException("잘못된 입력입니다.");
-            }
-        }
     }
 
     private List<Integer> getList(String delimiter) {
@@ -71,5 +32,13 @@ public class Regex {
                     }
                 })
                 .collect(Collectors.toList());
+    }
+
+    private void validateIsPositive() {
+        for(int number : numbers) {
+            if(number < 0) {
+                throw new IllegalArgumentException("잘못된 입력입니다.");
+            }
+        }
     }
 }
