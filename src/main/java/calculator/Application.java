@@ -10,5 +10,13 @@ public class Application {
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
+
+        if(input.startsWith("//")){
+            int limitIndex = input.indexOf("\\n");
+            if(limitIndex != -1){
+                String customParser = input.substring(2, limitIndex);
+                parser.add(customParser);
+            }
+        }
     }
 }
