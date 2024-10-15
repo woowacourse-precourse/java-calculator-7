@@ -82,10 +82,10 @@
 
 ### Numbers
 
-| Method                     | Parameter       | Return Type | Exception                   | Implementation |
-|----------------------------|-----------------|-------------|-----------------------------|----------------|
-| validateMinusNumber(x);    | List<Integer>   | void        | NotAllowedFormatException   | TODO           |
-
+| Method                  | Parameter     | Return Type | Exception                 | Implementation                          |
+|-------------------------|---------------|-------------|---------------------------|-----------------------------------------|
+| sum();                  | x             | Integer     | -                         | <span style="color:GREEN">DONE ✅</span> |
+| validateMinusNumber(x); | List<Integer> | void        | NotAllowedFormatException | <span style="color:GREEN">DONE ✅</span> |
 
 <br>
 
