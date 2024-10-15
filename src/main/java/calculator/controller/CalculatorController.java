@@ -29,6 +29,8 @@ public class CalculatorController {
 
             String input = inputView.getUserInput();               // 사용자 입력 받기
             List<Integer> extractedIntegers = extractor.extractNumbers(input);
+
+            // TODO 만약 추출했는데 null이라면 ?
             adder.addAllNumbers(extractedIntegers);
             System.out.println(adder.addAllNumbers(extractedIntegers));
         }

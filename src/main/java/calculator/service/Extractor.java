@@ -2,8 +2,11 @@ package calculator.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Extractor {
+
+    private static final Pattern ARGUMENT_VALIDATION_REGEX = Pattern.compile("^\\d+|^/");
 
     public List<Integer> extractNumbers(final String input) {
         List<Integer> integers = new ArrayList<>();
@@ -11,6 +14,8 @@ public class Extractor {
         if (input.isEmpty()) {
             return null;
         }
+
+        validateIllegalArgument(input);
 
         if (input.contains("//") && input.contains("\\n")) {
             String[] tokens = input.split("//|\\\\n");
@@ -41,6 +46,16 @@ public class Extractor {
             if (integer < 0) {
                 throw new IllegalArgumentException("값이 0보다 작습니다 !!");
             }
+        }
+    }
+
+    private void validateIllegalArgument(String input) {
+        if (input.isEmpty()) {
+            return;
+        }
+
+        if (!ARGUMENT_VALIDATION_REGEX.matcher(input).matches()) {
+            throw new IllegalArgumentException("[ERROR] 입력 형식이 맞지 않습니다.");
         }
     }
 }
