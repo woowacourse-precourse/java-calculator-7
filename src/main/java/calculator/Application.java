@@ -44,5 +44,20 @@ public class Application {
         else{
             numbers = userInput.split(",|:");
         }
+        validateInput();
+    }
+
+    /**
+     * 추출한 값의 유효성을 검사하는 함수
+     */
+    private void validateInput(){
+        for (String number : numbers) {
+            try {
+                int n = Integer.parseInt(number);
+                if (n < 0) throw new InvalidNumberFormatException();
+            } catch (NumberFormatException e) {
+                throw new InvalidNumberFormatException();
+            }
+        }
     }
 }
