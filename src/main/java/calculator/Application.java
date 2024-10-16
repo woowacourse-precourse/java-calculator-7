@@ -4,6 +4,7 @@ import calculator.tool1.StringChecker;
 import calculator.tool1.StringInput;
 import calculator.tool2.ExtractDelimiter;
 import calculator.tool2.ExtractNum;
+import calculator.tool3.Answer;
 import camp.nextstep.edu.missionutils.Console;
 
 import java.util.NoSuchElementException;
@@ -35,9 +36,16 @@ public class Application {
 
       long[] nums = ExtractNum.extractNum(numsString, delimiters);
 
-      for (long num : nums) {
-        System.out.print(num);
-      }
+      /*
+       * for (long num : nums) {
+       * System.out.print(num);
+       * }
+       */
+
+      Answer answer = new Answer(nums);
+
+      answer.calSum();
+      answer.printAns();
 
     } catch (NoSuchElementException |
              IllegalArgumentException noSuchElementException) {
