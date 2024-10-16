@@ -13,7 +13,7 @@ public class NumberValidation {
     }
 
     private static boolean isAlphabet(String input) {
-        return input.matches("[a-zA-Z]");
+        return input.matches("[a-zA-Z]+");
     }
 
     private static boolean isNotPositiveNumber(String input) {
