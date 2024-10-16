@@ -8,4 +8,10 @@ public class Exceptions {
         }
     }
 
+    public void validateColonDelimiter(String input) {
+        if(input.contains("::")) {
+            throw new IllegalArgumentException("[ERROR] 연속된 콜론(::)은 사용할 수 없습니다.");
+        }
+    }
+
 }
