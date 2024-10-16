@@ -20,4 +20,9 @@ public class DelimeterProcessor {
         String delimeter = Character.toString(input.charAt(2));
         return delimeter;
     }
+
+    public String discardCustomDelimeterRequest(String input){
+        String newInput = input.substring(4);
+        return newInput;
+    }
 }
