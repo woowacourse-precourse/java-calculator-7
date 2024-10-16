@@ -11,11 +11,17 @@ public class DelimiterService {
     private static final String CUSTOM_DELIMITERS = "//(.)\n(.*)";
 
     public String[] splitNumbers(String input) {
+        if (isDefaultDelimiters(input)) {
+            return splitByDefaultDelimiters(input);
+        }
         if (isCustomDelimiter(input)) {
             return splitByCustomDelimiters(input);
         }
+        return new String[]{input};
+    }
 
-        return splitByDefaultDelimiters(input);
+    private boolean isDefaultDelimiters(String input) {
+        return input.contains(",") || input.contains(":");
     }
 
     private boolean isCustomDelimiter(String input) {
