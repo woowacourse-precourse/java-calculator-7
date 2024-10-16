@@ -1,14 +1,17 @@
 package calculator;
 
+import calculator.io.output.OutputHandler;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Application {
 
+    private static final OutputHandler outputHandler = new OutputHandler(0);
+
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        outputHandler.showUserInputMessage();
         String input = Console.readLine();
         input = input.replace("\\n", "\n");
 
@@ -41,8 +44,9 @@ public class Application {
                     throw new IllegalArgumentException("숫자 이외의 값을 입력할 수 없습니다.");
                 }
             }
+            outputHandler.updateCalculateResult(result);
         }
-        System.out.println("결과 : " + result);
+        outputHandler.showAdditionResult();
     }
 
     private static void validatePositiveNumber(int parsedNumber) {
