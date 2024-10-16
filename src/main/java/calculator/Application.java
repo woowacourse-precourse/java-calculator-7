@@ -28,9 +28,21 @@ public class Application {
 
         String[] numberTokens = input.split(String.join("|", delimiters));
 
-        for (String token : numberTokens) {
-            int number = token.isEmpty() ? 0 : Integer.parseInt(token);
-            numbers.add(number);
+        for (String numberToken : numberTokens) {
+            if (numberToken.isEmpty()) {
+                numbers.add(0);
+                continue;
+            }
+
+            try {
+                int number = Integer.parseInt(numberToken);
+                if (number < 0) {
+                    throw new IllegalArgumentException("음수입니다.");
+                }
+                numbers.add(number);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("구분자가 아닌 문자가 포함되어 있습니다.");
+            }
         }
 
         int sum = numbers.stream().mapToInt(Integer::intValue).sum();
