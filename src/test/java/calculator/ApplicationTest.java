@@ -8,6 +8,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
+
+    @Test
+    void 사용자_입력_숫자_추출() {
+        String input = "1,2,3";
+        int result = Application.sum(input);
+        assertThat(result).isEqualTo(6);
+    }
+
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
