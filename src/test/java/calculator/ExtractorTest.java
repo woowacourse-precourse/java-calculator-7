@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 class ExtractorTest {
 
     @Test
-    public void 기본_구분자로_숫자를_추출할_수_있다() {
+    public void 기본_구분자로_숫자를_추출한다() {
         //given
         Extractor extractor = new Extractor();
         String input = "1,2,3";
