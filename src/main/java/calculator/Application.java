@@ -9,6 +9,7 @@ public class Application {
 
     public static void main(String[] args) {
         // 사용자로부터 문자열을 입력받음
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
         // 기본 구분자를 ArrayList 에 추가
