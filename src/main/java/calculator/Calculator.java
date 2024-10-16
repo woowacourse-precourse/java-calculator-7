@@ -27,4 +27,23 @@ public class Calculator {
             return str.split(",|:");
         }
     }
+
+    /**
+     * 숫자를 합하는 함수
+     * **/
+    private static int add(String[] strArr){
+        int sum = 0;
+        for(String i : strArr){
+            try {
+                int num = Integer.parseInt(i);
+                if (!i.matches("[+-]?\\d*(\\.\\d+)?") || num <= 0) {
+                    throw new IllegalArgumentException("0 또는 음수는 허용되지 않습니다.");
+                }
+                sum += num;
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("숫자가 올바르게 입력되지 않았습니다.");
+            }
+        }
+        return sum;
+    }
 }
