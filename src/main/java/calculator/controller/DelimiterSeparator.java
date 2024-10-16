@@ -21,10 +21,10 @@ public class DelimiterSeparator {
             throw new IllegalArgumentException("잘못된 형식입니다.");
         }
         Delimiter.updateDelimiter(userInput.charAt(index));
-        if(!userInput.substring(index+1,index+2).equals("\n")){
+        if(!userInput.substring(index+1,index+3).equals("\\n")){
             throw new IllegalArgumentException("잘못된 형식입니다.");
         }
-        return index + 2;
+        return index + 3;
     }
 
     public static void validateDelimiter(String str){

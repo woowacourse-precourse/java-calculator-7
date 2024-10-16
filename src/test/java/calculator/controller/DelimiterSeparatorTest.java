@@ -16,9 +16,9 @@ public class DelimiterSeparatorTest {
 
     @Test
     void 문자_시작_구분자_등록_성공(){
-        String userInput = "//;\n123";
+        String userInput = "//;\\n123";
         int index = registerDelimiter(userInput);
-        assertEquals(4,index);
+        assertEquals(5,index);
     }
 
     @Test
@@ -41,9 +41,9 @@ public class DelimiterSeparatorTest {
 
     @Test
     public void 구분자_등록_성공() {
-        String userInput = "//;\n123";
+        String userInput = "//;\\n123";
         int result = specifyingDelimiter(userInput);
-        assertEquals(4, result);
+        assertEquals(5, result);
     }
 
     @Test
