@@ -234,3 +234,8 @@
 4. `extractNumbers()`에서 구분자를 기준으로 숫자 추출 및 `BigDecimal`로 변환 (잘못된 숫자나 음수일 경우 예외 발생)
 5. `sumNumbers()`에서 추출된 숫자 배열을 더해 결과 반환
 6. `printResult()`에서 최종 결과를 출력
+
+---
+
+## Activity Diagram
+![image](https://github.com/user-attachments/assets/cb82955e-4201-4daf-9261-0c1d5a22bd90)
