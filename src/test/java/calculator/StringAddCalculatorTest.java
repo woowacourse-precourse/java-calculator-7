@@ -1,9 +1,8 @@
 package calculator;
 
+import calculator.model.StringNumberSumCalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -23,13 +22,7 @@ public class StringAddCalculatorTest {
     }
 
     private int delimiterSplit(String input) {
-        return sum(input.split("[,:]"));
-    }
-
-    private int sum(String[] split) {
-        return Arrays.stream(split)
-                .mapToInt(Integer::parseInt)
-                .sum();
+        return StringNumberSumCalculator.sum(input.split("[,:]"));
     }
 
 }
