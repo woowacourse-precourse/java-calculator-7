@@ -1,4 +1,4 @@
-package calculator.domain;
+package calculator.domain.model;
 
 import calculator.domain.exception.CalculatorException;
 import calculator.domain.exception.ErrorMessage;
