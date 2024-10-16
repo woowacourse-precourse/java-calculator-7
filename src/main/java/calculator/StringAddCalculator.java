@@ -37,7 +37,7 @@ public class StringAddCalculator {
         // 3. 추출된 숫자들 중 음수가 있는지 검증한다
         validateNumbers(numbers);
         // 4. 숫자들을 더한 값들을 반환한다
-        return 0;
+        return sum1(numbers);
     }
 
     private String[] extractCustomDelimiterAndNumbers(String input) {
@@ -72,6 +72,12 @@ public class StringAddCalculator {
                 );
             }
         }
+    }
+
+    private int sum1(List<Integer> numbers) {
+        return numbers.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
     private static int sum(String input) {
