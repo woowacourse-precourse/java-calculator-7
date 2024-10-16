@@ -19,12 +19,22 @@ public class CalculateController {
     private CalculateService calculateService;
     private SplitService splitService;
 
-    public CalculateController() {
+    private static CalculateController instance;
+
+    private CalculateController() {
         this.sep = new Separator();
         this.num = new Numbers();
-        this.calculateService = new CalculateService();
-        this.splitService = new SplitService();
+        this.calculateService = CalculateService.getInstance();
+        this.splitService = SplitService.getInstance();
     }
+
+    public static CalculateController getInstance() {
+        if (instance == null) {
+            instance = new CalculateController();
+        }
+        return instance;
+    }
+
 
     public String process(String input){
         InputValid.checkStringLength(input);

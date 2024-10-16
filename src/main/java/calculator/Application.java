@@ -6,7 +6,7 @@ import calculator.view.OutputView;
 
 public class Application {
     public static void main(String[] args) {
-        CalculateController controller = new CalculateController();
+        CalculateController controller = CalculateController.getInstance();
 
         try {
             OutputView.printStart();

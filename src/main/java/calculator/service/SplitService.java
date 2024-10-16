@@ -11,6 +11,17 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class SplitService {
+    private static SplitService instance;
+
+    private SplitService() {
+    }
+
+    public static SplitService getInstance() {
+        if (instance == null) {
+            instance = new SplitService();
+        }
+        return instance;
+    }
 
     public List<String> splitNumber(Separator sep, String numbersStr) {
         // 구분자들을 정규표현식 OR(|)로 연결
