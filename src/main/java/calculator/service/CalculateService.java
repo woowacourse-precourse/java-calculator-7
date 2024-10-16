@@ -10,8 +10,8 @@ public class CalculateService {
      * @param inputString : 사용자가 입력한 문자열
      * @return : 계산 결과를 리턴해줌
      */
-    public int calculate(String inputString) {
-        int sum = 0;
+    public long calculate(String inputString) {
+        long sum = 0;
 
         if(inputString.startsWith("//") && inputString.contains("\\n")) {
             // 커스텀 구분자를 사용하는 경우
@@ -26,7 +26,7 @@ public class CalculateService {
             try {
                 for (String s : split) {
                     System.out.println("s = " + s);
-                    int intValue = Integer.parseInt(s);
+                    long intValue = Long.parseLong(s);
                     if (intValue < 0) {
                         throw new IllegalArgumentException("양수만 입력해주세요.");
                     }
@@ -42,7 +42,7 @@ public class CalculateService {
             try {
                 for (String s : split) {
                     System.out.println("s = " + s);
-                    int intValue = Integer.parseInt(s);
+                    long intValue = Long.parseLong(s);
                     if (intValue < 0) {
                         throw new IllegalArgumentException("양수만 입력해주세요.");
                     }
