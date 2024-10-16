@@ -20,6 +20,18 @@ public class Application {
             }
         }
 
+        if(input.contains("//") && input.contains("\\n")) {
+            String custom = input.substring(input.indexOf("//")+2, input.indexOf("\\n"));
+            String newInput = input.substring(input.indexOf("\\n")+2);
+            for(int i = 0; i < newInput.length(); i++) {
+                if(String.valueOf(newInput.charAt(i)).equals(custom)) {
+                    continue;
+                }else {
+                    sum += Character.getNumericValue(newInput.charAt(i));
+                }
+            }
+        }
+
         System.out.println("결과 : " + sum);
     }
 }
