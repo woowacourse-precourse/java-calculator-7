@@ -24,6 +24,9 @@ public class CalculatorDisplay {
         if(matcher.find()){
             Character customSeparation = matcher.group().charAt(2);
             separationProcessor.addSeparation(customSeparation);
+
+            // 구분자 등록에 사용됐던 명령어 제거
+            input = input.replace(matcher.group(), "");
         }
 
         // 3. 구분자를 기준으로 숫자 분리하기
