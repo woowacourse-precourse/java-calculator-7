@@ -9,8 +9,8 @@ public class View {
         return readLine();
     }
 
-    public void print(String str) {
-        System.out.println(str);
+    public void print(int s) {
+        System.out.println(s);
     }
 
 }

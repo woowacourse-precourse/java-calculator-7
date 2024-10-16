@@ -12,10 +12,13 @@ public class CalModel {
 
     public String check1(String s) {
 
+
         int index1 = s.indexOf("//");
-        int index2 = s.indexOf("\n");
+        int index2 = s.indexOf("\\n");
+        s = s.replace("//", ",");
+        s = s.replace("\\n", ",");
         if (index1 != -1 && index1 < index2) {
-            return check2(s, s.charAt(2));
+            return check2(s, s.charAt(1));
         }
         else {
             return check2(s, ',');
@@ -33,7 +36,20 @@ public class CalModel {
             }
         }
 
-        return s;
+        return s.replace(':', ' ').strip().replaceAll(" +"," ");
+    }
+
+    public int intSum(String s) {
+
+        int result = 0;
+
+        String[] temp = s.split(" ");
+
+        for(String var : temp) {
+            result += Integer.parseInt(var);
+        }
+
+        return result;
     }
 
 }

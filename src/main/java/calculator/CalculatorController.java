@@ -15,7 +15,7 @@ public class CalculatorController {
 
         str = this.model.check1(str);
 
-        view.print(str);
+        view.print(model.intSum(str));
 
     }
 }
