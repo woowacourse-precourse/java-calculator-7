@@ -10,6 +10,8 @@ public class Application {
             String inputData = getInputData();
             boolean customStatus = isCustom(inputData);
             Data data = DataParser.parseData(inputData, customStatus);
+            int sum = Calculator.sum(data);
+            System.out.println("결과 : " + sum);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
             System.out.println("프로그램 종료");

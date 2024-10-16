@@ -33,13 +33,13 @@ public class DataParser {
 
     private static char[] createContents(String inputData, boolean isCustom) {
         if (isCustom) {
-
             String[] data = inputData.split("\\\\n");
+
             if (data.length == 1) {
                 return new char[0];
             }
-            String contents = data[1];
-            return contents.toCharArray();
+            String datum = data[1];
+            return datum.toCharArray();
         }
         return inputData.toCharArray();
     }
