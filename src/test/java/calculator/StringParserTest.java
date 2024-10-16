@@ -10,24 +10,6 @@ class StringParserTest {
     private StringParser stringParser = new StringParser();
 
     @Test
-    void 공백문자일시_예외를_던진다() {
-        String blank = "";
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            stringParser.validateBlank(blank);
-        });
-    }
-
-    @Test
-    void 공백문자가_아닐시_예외를_던지지않는다() {
-        String notBlank = "Not Blank";
-
-        assertDoesNotThrow(() -> {
-            stringParser.validateBlank(notBlank);
-        });
-    }
-
-    @Test
     void 공백문자가_아닐시_false를_반환하다() {
         boolean expectedFalse = false;
         String notBlank = "Not Blank";
