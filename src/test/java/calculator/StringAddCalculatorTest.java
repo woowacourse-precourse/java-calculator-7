@@ -2,12 +2,8 @@ package calculator;
 
 import calculator.service.CalculatorService;
 import calculator.service.DelimiterService;
-import calculator.util.StringNumberSumCalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -36,22 +32,10 @@ public class StringAddCalculatorTest {
         String input = "//;\n1;2;3";
 
         // when
-        int result = splitCustomDelimiter(input);
+        int result = calculatorService.calculateSum(input);
 
         // then
         assertThat(result).isEqualTo(6);
-    }
-
-    private int splitCustomDelimiter(String input) {
-        String regex = "//(.)\n(.*)";
-        Matcher matcher = Pattern.compile(regex).matcher(input);
-
-        if (!matcher.find()) {
-            throw new IllegalArgumentException("No match found");
-        }
-
-        String[] split = matcher.group(2).split(matcher.group(1));
-        return StringNumberSumCalculator.sum(split);
     }
 
 }
