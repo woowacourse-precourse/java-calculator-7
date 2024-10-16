@@ -26,5 +26,19 @@ public class StringAddCalculator {
         return sum(numbers);
     }
 
+    // 커스텀 구분자를 사용한 덧셈 처리
+    private static int addWithCustomDelimiter(String input) {
+        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException("잘못된 형식입니다.");
+        }
+
+        String customDelimiter = matcher.group(1); // 커스텀 구분자 추출
+        String numbersPart = matcher.group(2); // 숫자 부분 추출
+
+        String[] numbers = numbersPart.split(Pattern.quote(customDelimiter)); // 커스텀 구분자로 숫자를 분리
+        return sum(numbers);
+    }
+
 }
 
