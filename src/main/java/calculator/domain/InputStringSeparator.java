@@ -3,58 +3,58 @@ package calculator.domain;
 public class InputStringSeparator {
     private String inputString;
     private String finalSeparator;
-    private String customSeparator = null;
+    private String customSeparator = "";
     private String[] inputNumber; // int vs integear ??
+    private int startIndex;
+    private int lastIndex;
+
 
     public InputStringSeparator(String inputString) {
         setInputString(inputString);
-        setCustomSeparator(getInputString());
+        setCustomSeparator();
         setFinalSeparator();
-        // setInputNumber(inputString, this.finalSeparator);
+        setInputNumber();
     }
 
     private void validateInputString(String inputString) {
 
     }
 
-    private String getInputString() {
-        return this.inputString;
-    }
-
     private void setInputString(String inputString) {
-        inputString.replaceAll("\n", "\\n");
-        this.inputString = inputString;
+        this.inputString = inputString.replaceAll("\n", "\\n");
     }
 
-    private void setCustomSeparator(String inputString) {
-        int startIndex = 0;
-        int lastIndex = 0;
-        if (isDefaultSeparatorContained()) { //this.inputString 으로 판단하는게 좋은가?
-            startIndex = inputString.indexOf("//");
-            lastIndex = inputString.indexOf("\\n");
-            this.customSeparator = inputString.substring(startIndex + 2, lastIndex); //커스텀 구분자는 그럼 한 개만인가?
+    private void setCustomSeparator() {
+        if (isCustomSeparatorContained()) { //this.inputString 으로 판단하는게 좋은가?
+            startIndex = startIndex = inputString.indexOf("//") + 2;
+            lastIndex = lastIndex = inputString.indexOf("\\n");
+            this.customSeparator = inputString.substring(startIndex, lastIndex); //커스텀 구분자는 그럼 한 개만인가?
         }
-        // System.out.println(lastIndex);
-        // System.out.println(this.inputString.charAt(2));
-        // System.out.println(this.customSeparator);
     }
 
-    private boolean isDefaultSeparatorContained() {
+    private void extractNumberString() {
+
+    }
+
+    private boolean isCustomSeparatorContained() {
         return inputString.contains("//") && inputString.contains("\\n");
     }
 
-
     private void setFinalSeparator() {
         if (this.customSeparator.isEmpty()) {
-            this.finalSeparator = "[" + "//" + "\n" + "]";
+            this.finalSeparator = ",|:";
             return;
         }
-        this.finalSeparator = "[" + "//" + "\n" + customSeparator + "]";
-        System.out.println(this.finalSeparator);
+        this.finalSeparator = ",|:|" + this.customSeparator;
     }
 
-    private void setInputNumber(String inputString, String finalSeparator) {
-        this.inputNumber = inputString.split(finalSeparator);
+    private void setInputNumber() {
+        if (isCustomSeparatorContained()) {
+            this.inputString = inputString.substring(lastIndex + 2, inputString.length()); // \\n을 \n으로 인식하네..?
+        }
+        if (inputString.length() > 0) {
+            this.inputNumber = inputString.split(finalSeparator);
+        }
     }
 
     public String[] getInputNumber() {
