@@ -25,11 +25,9 @@ public class CalculatorParser {
     }
 
     private void checkCustomDelimiterEnd(String line) {
-        int start = CUSTOM_START.length() + CUSTOM_DELIMITER_LENGTH;
-        int end = start + CUSTOM_END.length();
-        String customDelimiterEnd = line.substring(start, end);
+        int customEndStart = CUSTOM_START.length() + CUSTOM_DELIMITER_LENGTH;
 
-        if (!customDelimiterEnd.equals(CUSTOM_END)) {
+        if (!line.startsWith(CUSTOM_END, customEndStart)) { // CUSTOM_END로 끝나지 않는다면
             throw new IllegalArgumentException();
         }
     }
