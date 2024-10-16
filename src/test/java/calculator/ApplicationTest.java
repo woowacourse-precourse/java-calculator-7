@@ -3,9 +3,10 @@ package calculator;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import calculator.exception.IllegalInputException;
 import camp.nextstep.edu.missionutils.test.NsTest;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
@@ -27,26 +28,26 @@ class ApplicationTest extends NsTest {
 
 
     @Test
-    void 문자열에서_숫자_추출하기_기본생성자_예외처리() {
+    void 문자열에서_숫자_추출하기_기본구분자_예외처리() {
         //given
         String input = "6;4,0";
         Extractor extractor = new Extractor(input);
 
         //when & then
         assertThatThrownBy(extractor::extractNumber)
-                .isInstanceOf(IllegalInputException.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("잘못된 구분자입니다.");
     }
 
     @Test
-    void 문자열에서_숫자_추출하기_커스텀생성자_예외처리() {
+    void 문자열에서_숫자_추출하기_커스텀구분자_예외처리() {
         //given
         String input = "//\n34";
         Extractor extractor = new Extractor(input);
 
         //when & then
         assertThatThrownBy(extractor::extractNumber)
-                .isInstanceOf(IllegalInputException.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("잘못된 구분자입니다.");
     }
 
@@ -58,8 +59,22 @@ class ApplicationTest extends NsTest {
 
         //when & then
         assertThatThrownBy(extractor::extractNumber)
-                .isInstanceOf(IllegalInputException.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("잘못된 구분자입니다.");
+    }
+
+
+    @Test
+    void 문자열에서_추출한_숫자_덧셈하기() {
+        //given
+        Set<Integer> numbers = Set.of(2, 3, 4);
+        Addition addition = new Addition(numbers);
+
+        //when
+        int result = addition.addNumber();
+
+        //then
+        assertEquals(9, result);
     }
 
     @Override
