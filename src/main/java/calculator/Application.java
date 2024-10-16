@@ -50,8 +50,8 @@ public class Application {
             try {
                 arrayInts[i] = Integer.parseInt(arrayStrings[i]);
             } catch (NumberFormatException ex) {
-                System.out.println("\"" + input + "\"" + "은(는) 유효하지 않은 입력값입니다.");
-                throw new IllegalArgumentException("\"" + input + "\"" + "은(는) 유효하지 않은 입력값입니다.", ex);
+                System.out.println(input + "은(는) 유효하지 않은 입력값입니다.");
+                throw new IllegalArgumentException(input + "은(는) 유효하지 않은 입력값입니다.", ex);
             }
         }
         return arrayInts;
@@ -78,7 +78,7 @@ public class Application {
 
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해주세요.");
-        // String input = "//\\n123"; //테스트용
+        //String input = "//\\n123"; //테스트용
         String input = Console.readLine();
         if (input.isEmpty()) { // ""일 때 0 나오게 예외처리
             System.out.println("결과 : " + 0);

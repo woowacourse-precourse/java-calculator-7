@@ -1,4 +1,5 @@
 ## New Features in This Release
+- fix(Application): change invalid input message
 - feat(Application): support empty separator
 - feat(Application): more flexible custom separator
 - feat(Application): add exception alert
