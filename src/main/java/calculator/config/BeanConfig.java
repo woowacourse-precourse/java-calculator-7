@@ -3,6 +3,7 @@ package calculator.config;
 import calculator.FrontController;
 import calculator.config.exception.BeanCreationException;
 import calculator.config.exception.BeanErrorMessage;
+import calculator.config.exception.BeanSearchException;
 import calculator.controller.CalculatorController;
 import calculator.service.CalculatorService;
 import calculator.service.CalculatorServiceImpl;
@@ -77,5 +78,13 @@ public class BeanConfig {
                     }
                     return registeredBeans.get(dependency);
                 }).toArray();
+    }
+
+    public static <T> T getBean(Class<T> clazz) {
+        Object bean = registeredBeans.get(clazz);
+        if (bean == null) {
+            throw BeanSearchException.from(BeanErrorMessage.BEAN_NOT_FOUND);
+        }
+        return clazz.cast(bean); // 타입 안전한 캐스팅
     }
 }
