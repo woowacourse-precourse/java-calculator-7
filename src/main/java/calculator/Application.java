@@ -1,7 +1,14 @@
 package calculator;
 
+import calculator.controller.CalculatorController;
+import calculator.view.InputView;
+
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
+        InputView inputView = new InputView();
+        CalculatorController calculatorController = new CalculatorController(inputView);
+
+        calculatorController.run();
     }
 }
