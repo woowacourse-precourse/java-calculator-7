@@ -1,6 +1,10 @@
 package calculator;
 
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ApplicationTest {
@@ -66,5 +70,15 @@ class ApplicationTest {
 
         String[] expectedArray = {"1", "12", "3", "4"};
         assertArrayEquals(expectedArray, removedSeparatorsArray);
+    }
+
+    @Test
+    void parseStringToInteger_case1() {
+        String[] removedSeparatorsArray = {"1", "12", "3", "4"};
+
+        List<Integer> parsedIntegers = app.parseStringToInteger(removedSeparatorsArray);
+
+        List<Integer> expectedArray = Arrays.asList(1, 12, 3, 4);
+        assertEquals(expectedArray, parsedIntegers);
     }
 }

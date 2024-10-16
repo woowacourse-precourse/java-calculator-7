@@ -7,6 +7,15 @@ import java.util.List;
 
 public class Application {
 
+    public List<Integer> parseStringToInteger(String[] removedSeparatorsArray) {
+        List<Integer> parsedIntegers = new ArrayList<>();
+        for (String str : removedSeparatorsArray) {
+            parsedIntegers.add(Integer.valueOf(str));
+        }
+
+        return parsedIntegers;
+    }
+
     public String[] removeSeparators(String removedDeclarePart, Character customSeparator) {
         String regex = "[,|:|" + customSeparator + "]";
         String[] removedSeparatorsArray = removedDeclarePart.split(regex);
@@ -42,6 +51,7 @@ public class Application {
         Character customSeparator = extractCustomSeparator(input);
         String removedDeclarePart = removeDeclarePart(input, customSeparator);
         String[] removedSeparatorsArray = removeSeparators(removedDeclarePart, customSeparator);
+        List<Integer> parsedIntegers = parseStringToInteger(removedSeparatorsArray);
         return 0;
     }
 
