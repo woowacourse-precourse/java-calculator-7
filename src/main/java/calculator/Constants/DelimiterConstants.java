@@ -6,4 +6,5 @@ public class DelimiterConstants {
     public final static String BASIC_DELIMITER = COMMA + "|" + COLONS;
     public final static String CUSTOM_DELIMITER_START = "//";
     public final static String CUSTOM_DELIMITER_END = "\\n";
+    public final static String CUSTOM_INDICATOR_REGEX = "//|\\\\n";
 }
