@@ -6,7 +6,8 @@ import calculator.View.OutputView;
 public class CalculatorService {
     private static String Separator = ",|:";
     private static final int CUSTOM_SEPARATOR_START_INDEX=2;
-    private static final int CUSTOM_SEPARATOR_END_INDEX=5;
+    private static final int CUSTOM_SEPARATOR_END_INDEX = 3;
+    private static final int CUSTOM_INPUT_INDEX=5;
 
 
     public static String Input_String_to_add(){
@@ -27,9 +28,8 @@ public class CalculatorService {
 
     }
     private static String Custom_Separator(String input){
-        int separatorIndex=input.indexOf("\\n");
-        Separator=input.substring(CUSTOM_SEPARATOR_START_INDEX, separatorIndex);
-        return input.substring(CUSTOM_SEPARATOR_END_INDEX);
+        Separator=input.substring(CUSTOM_SEPARATOR_START_INDEX, CUSTOM_SEPARATOR_END_INDEX);
+        return input.substring(CUSTOM_INPUT_INDEX);
     }
 
     private static void validateNumbers(String[] numbers){
