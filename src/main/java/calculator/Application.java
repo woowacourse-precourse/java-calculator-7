@@ -49,7 +49,7 @@ public class Application {
     }
 
     public static void printOutput(int answer) {
-        System.out.print(String.format("결과 : %d", answer));
+        System.out.println(String.format("결과 : %d", answer));
     }
 
     public static void main(String[] args) {
