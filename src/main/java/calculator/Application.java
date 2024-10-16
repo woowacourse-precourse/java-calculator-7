@@ -1,7 +1,9 @@
 package calculator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Application {
@@ -28,15 +30,18 @@ public class Application {
         String separatorsForSplit = makeSeparators(",", ":", type.isTypeB() ? customSeparator : "");
         String[] numbers = type.isTypeA() ? input.split(separatorsForSplit) : input.substring(5).split(separatorsForSplit);
 
+        List<String> numberList = new ArrayList<>(Arrays.asList(numbers));
+        numberList.removeIf(String::isBlank);
+
         int sum = 0;
-        for (String n : numbers) {
+        for (String n : numberList) {
             sum += Integer.parseInt(n);
         }
         return sum;
     }
 
     /**
-     * @description : 문자열이 패턴에 유효한지 검사하여 알맞은 타입 반환
+     * @description: 문자열이 패턴에 유효한지 검사하여 알맞은 타입 반환
      */
     private static InputType validateInputPattern(String input) {
         for (Map.Entry<Pattern, InputType> entry : PATTERN_MAP.entrySet()) {
@@ -44,23 +49,12 @@ public class Application {
                 return entry.getValue();
             }
         }
-        throw new IllegalArgumentException(input);
+        throw new IllegalArgumentException("Invalid input: " + input);
     }
 
     /**
-     * @description : custom separator를 문자열에서 정규식을 사용하여 반환
-     */
-    @Deprecated
-    private static String getCustomSeparator(String input) {
-        Pattern pattern = Pattern.compile(REGEX_B);
-        Matcher matcher = pattern.matcher(input);
-        return matcher.hasMatch() ? matcher.group(1) : null;
-    }
-
-
-    /**
-     * @return : "[,:]" or "[,:(custom separator)]"
-     * @description : input을 커스텀 구분자를 포함하여 split() 하기 위해 가변인수로 받아 처리
+     * @return: "[,:]" or "[,:(custom separator)]"
+     * @description: input을 커스텀 구분자를 포함하여 split() 하기 위해 가변인수로 받아 처리
      */
     private static String makeSeparators(String... separators) {
         StringBuilder combineStr = new StringBuilder();
