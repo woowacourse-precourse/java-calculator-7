@@ -3,10 +3,10 @@ package calculator.delimiter;
 public class Delimiter {
     private String del;
     private static final int CUSTOM_DEL_INDEX = 2;
-    private static final String DEFAULT_DELIMITER = "[,:]";
+    private static final String DEFAULT_DELIMITER = ",:";
 
     public Delimiter() {
-        this.del = DEFAULT_DELIMITER;
+        this.del = "[" + DEFAULT_DELIMITER + "]";
     }
 
     public String getDel() {
@@ -41,6 +41,7 @@ public class Delimiter {
     }
 
     private void updateDel(char customDel) {
-        this.del = this.del.substring(0, 3) + customDel + "]";
+        String escapeDel = DelimiterValidator.escapeSpecialCharacters(customDel);
+        this.del = "[" + DEFAULT_DELIMITER + escapeDel + "]";
     }
 }
