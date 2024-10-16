@@ -5,14 +5,14 @@ public class Delimiter {
     private final String delimiter;
 
     public Delimiter(String delimiter) {
+        validate(delimiter);
         this.delimiter = delimiter;
     }
 
-    public Delimiter validate() {
-        if (isChar(this.delimiter) && !isNumber(this.delimiter)) {
-            return this;
+    public void validate(String delimiter) {
+        if (!isChar(delimiter) || isNumber(delimiter)) {
+            throw new IllegalArgumentException();
         }
-        throw new IllegalArgumentException();
     }
 
     private boolean isChar(String string) {
