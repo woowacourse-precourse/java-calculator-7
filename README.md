@@ -1,6 +1,7 @@
 # java-calculator-precourse
 
-# 기능 목록 단위
+
+**기능 목록 단위**
 
 1. 사용자 입력
 2. 커스텀 구분자 식별
