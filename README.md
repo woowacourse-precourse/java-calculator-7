@@ -1,7 +1,7 @@
 # java-calculator-precourse
 
 ### 기능 목록
-- [ ] 입력 기능 (InputView)
+- [x] 입력 기능 (InputView)
 - [ ] 문자열 처리 기능 (StringProcessor)
     - [ ] 구분자 분리 기능
     - [ ] 커스텀 구분자 분리 기능
