@@ -15,7 +15,7 @@ public class Parser {
         int secondIndex = input.indexOf(SECOND_STANDARD.getStandard());
         if (firstIndex == -1 && secondIndex == -1) {
             return false;
-        } else if (firstIndex >= 0 && secondIndex >= 0) {
+        } else if (firstIndex == 0 && secondIndex >= 0) {
             return true;
         }
         throw new IllegalArgumentException();
@@ -24,9 +24,8 @@ public class Parser {
     // 구분자를 반환하는 메소드
     private List<Character> getSeparators(String input) {
         List<Character> separators = new ArrayList<>();
-        int firstIndex = input.indexOf(FIRST_STANDARD.getStandard());
         int secondIndex = input.indexOf(SECOND_STANDARD.getStandard());
-        for (int i = firstIndex + 1; i < secondIndex; i++) {
+        for (int i = 2; i < secondIndex; i++) {
             separators.add(input.charAt(i));
         }
         return separators;
