@@ -1,6 +1,6 @@
 package calculator;
 
-import calculator.model.StringNumberSumCalculator;
+import calculator.util.StringNumberSumCalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
