@@ -34,4 +34,15 @@ class InputValidatorTest {
                     .hasMessage(ErrorMessage.BLANK_INPUT_NOT_ALLOWED.getMessage());
         }
     }
+
+    @Test
+    void 입력_문자열의_첫_번째_문자가_공백인_경우_예외를_발생시킨다() {
+        // given
+        String blankInput = " 4,2:";
+
+        // when & then
+        assertThatThrownBy(() -> InputValidator.validateIsStartBlank(blankInput))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.FIRST_CHAR_CANNOT_BE_SPACE.getMessage());
+    }
 }
