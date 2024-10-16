@@ -1,5 +1,7 @@
 package calculator.domain.preprocess;
 
+import java.util.List;
+
 public class Preprocessor {
 
     private final DelimeterProcessor delimeterProcessor;
@@ -12,5 +14,15 @@ public class Preprocessor {
         this.splitManager = splitManager;
     }
 
+    private boolean validateDelimeterRequest(String input){
+        if(delimeterProcessor.checkCustomDelimeterRequest(input)){
+            validateDelimeterRequest(input);
+            if(inputManager.isInteger(delimeterProcessor.extractCustomDelimeter(input))){
+                throw new IllegalArgumentException("구분자로 숫자를 입력했습니다");
+            }
+            return true;
+        }
+        return false;
+    }
 
 }
