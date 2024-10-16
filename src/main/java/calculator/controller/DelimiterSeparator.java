@@ -4,18 +4,9 @@ import calculator.model.Delimiter;
 
 public class DelimiterSeparator {
 
-    public static boolean isNumber(String input){
-        try{
-            Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-        return true;
-    }
-
     public static int registerDelimiter(String userInput){
         int index = 0;
-        if(!isNumber(userInput.substring(0,1))){
+        if(!NumberChecker.isNumber(userInput.substring(0,1))){
             index = specifyingDelimiter(userInput);
         }
         return index;
@@ -34,7 +25,7 @@ public class DelimiterSeparator {
     }
 
     public static void separateDelimiter(String str){
-        if(isNumber(str)){
+        if(NumberChecker.isNumber(str)){
             throw new IllegalArgumentException("잘못된 형식입니다.");
         }
         // 구분자가 아니면 오류

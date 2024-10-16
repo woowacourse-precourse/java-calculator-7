@@ -1,6 +1,5 @@
 package calculator.controller;
 
-import calculator.model.Delimiter;
 import calculator.view.InputView;
 
 public class CalculatorController {
@@ -23,15 +22,6 @@ public class CalculatorController {
         // result 출력
     }
 
-    public boolean isNumber(String input){
-        try{
-            Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-        return true;
-    }
-
     public int calculateStringRemainder(int index, String userInput){
         boolean isPreviousValueNumeric = false;
         int sum = 0;
@@ -48,7 +38,7 @@ public class CalculatorController {
     }
 
     public int extractNumber(String str){
-        if(!isNumber(str)){
+        if(!NumberChecker.isNumber(str)){
             throw new IllegalArgumentException("잘못된 형식입니다.");
         }
         return Integer.parseInt(str);
