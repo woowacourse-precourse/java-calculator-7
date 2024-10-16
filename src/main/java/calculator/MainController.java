@@ -22,15 +22,13 @@ public class MainController {
             for (String part : customDelimiterSplitted) {
                 sum += Integer.parseInt(part);
             }
-            System.out.println(sum);
+            System.out.printf("결과 : %d",sum);
         }
 
-//        // 1. 기본 구분자로 분리
 //        List<String> defaultDelimterSplitted = Arrays.asList(inputString.split(",|:"));
-//        //1-1. 출력해서 확인
 //        for (String part : defaultDelimterSplitted) {
-//            System.out.println(part);
+//            sum += Integer.parseInt(part);
 //        }
-
+//        System.out.println(sum);
     }
 }
