@@ -26,6 +26,7 @@ public class NumCalculatorValidCheck {
             String[] numArr = numPartStr.split(splitter);
             for(String num : numArr){
                 if(!StringUtility.isNumeric(num)) return false;
+                if(!StringUtility.isInRange(num)) return false;
             }
             return true;
         }catch (RuntimeException runtimeException){

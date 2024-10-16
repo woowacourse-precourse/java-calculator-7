@@ -38,10 +38,19 @@ public class StringUtility {
         return input;
     }
 
-    public static boolean isNumeric(String num) {
+    public static boolean isNumeric(String numStr) {
         try{
-            Integer.parseInt(num);
+            Integer.parseInt(numStr);
             return true;
+        }catch (NumberFormatException e){
+            return false;
+        }
+    }
+
+    public static boolean isInRange(String numStr) {
+        try{
+            if(Integer.parseInt(numStr) >= 0) return true;
+            return false;
         }catch (NumberFormatException e){
             return false;
         }
