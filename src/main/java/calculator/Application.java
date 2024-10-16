@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 public class Application {
 
     private static final int EMPTY_INPUT_RETURN_VALUE = 0;
+    private static final int SIZE_OF_CUSTOM_DELIMITER_END_SIGN = 2;
 
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -41,6 +42,7 @@ public class Application {
             if (indexOfEndSign == -1) {
                 throw new IllegalArgumentException("커스텀 구분자 선언 후 '\\n'이 필요합니다.");
             }
+
             String customDelimiterPart = input.substring(2, indexOfEndSign);
             String[] customDelimiters = customDelimiterPart.split(""); // 여러 커스텀 구분자 받는 경우 포함
 
@@ -48,7 +50,7 @@ public class Application {
                 delimiterPart.append("|").append(toRegex(delim));
             }
 
-            numberPart = input.substring(indexOfEndSign + 2);
+            numberPart = input.substring(indexOfEndSign + SIZE_OF_CUSTOM_DELIMITER_END_SIGN);
         }
 
         String[] numbers = numberPart.split(delimiterPart.toString());
