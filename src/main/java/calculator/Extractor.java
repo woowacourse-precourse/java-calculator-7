@@ -46,4 +46,18 @@ public class Extractor {
             throw new IllegalInputException();
         }
     }
+
+    private void containBasicSeparator() {
+        strArr = input.split(",|:");
+
+        // 문자열 배열의 각 문자열이 숫자로만 이루어져 있는지 판별
+        for (String s : strArr) {
+            for (int i = 0; i < s.length(); i++) {
+                if (!Character.isDigit(s.charAt(i))) {
+                    throw new IllegalInputException();
+                }
+            }
+        }
+
+    }
 }
