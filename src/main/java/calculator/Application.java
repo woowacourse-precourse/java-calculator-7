@@ -2,6 +2,8 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.Arrays;
+
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
@@ -9,8 +11,10 @@ public class Application {
         if (isCustomSeparatorExist(input)) {
             String customSeparator = getCustomSeparator(input);
             String[] dividedNum = divideStringBy(input, customSeparator);
+            int sumArr = sum(dividedNum);
         }
         String[] dividedNum = divideStringBy(input);
+        int sumArr = sum(dividedNum);
     }
 
     public static String getInput() {
@@ -31,5 +35,9 @@ public class Application {
 
     public static String[] divideStringBy(String givenString, String customSeparator) {
         return givenString.substring(4).split("[:," + customSeparator + "]");
+    }
+
+    public static int sum(String[] numberArr) {
+        return Arrays.stream(numberArr).mapToInt(Integer::parseInt).sum();
     }
 }
