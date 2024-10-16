@@ -35,6 +35,6 @@ public class Application {
         for (Integer value : values)
             sum += value;
 
-        System.out.println(sum);
+        System.out.printf("결과 : %d\n", sum);
     }
 }
