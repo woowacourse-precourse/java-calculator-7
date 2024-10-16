@@ -19,8 +19,11 @@ public class Application {
 
         int[] num = new int[number.length];
 
+        int sum = 0;
+
         for(int i = 0; i < number.length; i++) {
             num[i] = Integer.parseInt(number[i]);
+            sum += num[i];
         }
 
     }
