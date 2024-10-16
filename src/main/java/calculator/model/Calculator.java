@@ -49,7 +49,10 @@ public class Calculator {
      */
     private String getCustomSeparator(String input){
         String[] parts = getParts(input);
-        return parts[0].substring(2);
+        String customSeparator = parts[0].substring(2);
+        if (customSeparator.length() != 1)
+            throw new IllegalArgumentException("커스텀 구분자는 1자리여야 합니다.");
+        return customSeparator;
     }
 
     /**

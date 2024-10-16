@@ -132,6 +132,15 @@ class ValidationTest extends NsTest {
         );
     }
 
+    @Test
+    public void 커스텀_구분자의_길이가_1이상인_경우(){
+        String input = "//;;;\n1;2;3";
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> new Calculator().add(input))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
