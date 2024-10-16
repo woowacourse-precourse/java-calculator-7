@@ -1,5 +1,6 @@
 package calculator;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -11,6 +12,7 @@ public class IntegersExtractor {
     public List<Integer> extractIntegers(String inputValue) {
         String delimiter = getDelimiter(inputValue);
         String numberString = removeDelimiterDeclaration(inputValue);
+        List<Integer> numbers = splitNumberString(numberString, delimiter);
         return Collections.emptyList();
     }
 
@@ -40,5 +42,16 @@ public class IntegersExtractor {
     private String removeDelimiterDeclaration(String inputValue) {
         int newLineIndex = inputValue.indexOf("\\n");
         return newLineIndex != -1 ? inputValue.substring(newLineIndex + 2) : inputValue;
+    }
+
+    private List<Integer> splitNumberString(String inputValue, String delimiter) {
+        try {
+            return Arrays.stream(inputValue.split(delimiter))
+                    .filter(s -> !s.isEmpty())
+                    .map(Integer::parseInt)
+                    .toList();
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("잘못된 입력입니다. 구분자 사이에는 숫자만 입력되어야 합니다.");
+        }
     }
 }
