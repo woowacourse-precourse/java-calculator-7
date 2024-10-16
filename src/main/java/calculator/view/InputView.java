@@ -5,11 +5,11 @@ import camp.nextstep.edu.missionutils.Console;
 public class InputView {
     private final static String START_MESSAGE = "덧셈할 문자열을 입력해 주세요.\n";
 
-    public String getInput() {
+    public static String getInput() {
         return Console.readLine();
     }
 
-    public void printStartMessage() {
+    public static void printStartMessage() {
         System.out.println(START_MESSAGE);
     }
 }
