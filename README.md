@@ -21,6 +21,8 @@
 #### 〰️ 전체 플로우 〰️
 - controller
   - CalculatorContorller
+  - DelimiterSeparator
+  - NumberChecker
 - model
   - Delimiter (구분자 등록, 구분자 판별)
 - view
