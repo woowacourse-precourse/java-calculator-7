@@ -3,6 +3,7 @@ package calculator.validator;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatNoException;
 
+import calculator.enums.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -30,7 +31,7 @@ class InputValidatorTest {
             // when & then
             assertThatThrownBy(() -> InputValidator.validateBlank(blankInput))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("입력 문자열은 공백으로만 구성될 수 없습니다.");
+                    .hasMessage(ErrorMessage.BLANK_INPUT_NOT_ALLOWED.getMessage());
         }
     }
 }

@@ -1,5 +1,7 @@
 package calculator.validator;
 
+import calculator.enums.ErrorMessage;
+
 public class InputValidator {
 
     private InputValidator() {
@@ -11,7 +13,7 @@ public class InputValidator {
 
     public static void validateBlank(String input) {
         if (!input.isEmpty() && input.isBlank()) {
-            throw new IllegalArgumentException("입력 문자열은 공백으로만 구성될 수 없습니다.");
+            throw new IllegalArgumentException(ErrorMessage.BLANK_INPUT_NOT_ALLOWED.getMessage());
         }
     }
 }
