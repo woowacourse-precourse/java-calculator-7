@@ -30,7 +30,6 @@ public class Extraction {
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException();
             }
-
             if (num < 0) {
                 throw new IllegalArgumentException();
             }
