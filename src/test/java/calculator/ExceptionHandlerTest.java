@@ -36,8 +36,8 @@ class ExceptionHandlerTest {
     @ParameterizedTest
     @DisplayName("입력된 문자열에 쉼표와 콜론 음수 부호와 정수 외의 문자가 들어가 있지 않을 경우 예외가 발생하지 않는다.")
     @ValueSource(strings = {"1:2:3", "1,2,3", "1:2,3", "1,2:3"})
-    void checkIncorrectInputWithoutCustomDelimNotThrowException() {
-        char[] input = "1,2:3".toCharArray();
-        assertThatCode(() -> exceptionHandler.checkIncorrectInputWithoutCustomDelim(input)).doesNotThrowAnyException();
+    void checkIncorrectInputWithoutCustomDelimNotThrowException(String input) {
+        char[] splitInput = input.toCharArray();
+        assertThatCode(() -> exceptionHandler.checkIncorrectInputWithoutCustomDelim(splitInput)).doesNotThrowAnyException();
     }
 }
