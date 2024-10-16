@@ -19,19 +19,20 @@ public abstract class DelimiterParser {
     public static List<Integer> getNumbersAfterParsing(String input) {
         List<Integer> numbers = new ArrayList<>();
         for (char number : input.toCharArray()) {
-            numbers.add(Character.getNumericValue(number));
+            numbers.add(Character.getNumericValue(number)); // - -1
         }
         return numbers;
     }
 
-    public static String splitInputAsString(String input) {
+    public static List<Integer> splitInputAsString(String input) {
         String[] split = input.split(DEFAULT_REGEX);
 
-        StringBuilder splitBuilder = new StringBuilder();
+        // 여기서 List<Integer>로 보내야 될거같음
+        List<Integer> list = new ArrayList<>();
         for (String splitNumber : split) {
-            splitBuilder.append(splitNumber);
+            Validator.validate(splitNumber);
+            list.add(Integer.parseInt(splitNumber));
         }
-
-        return splitBuilder.toString();
+        return list;
     }
 }
