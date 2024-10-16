@@ -26,6 +26,17 @@ public class Calculator {
                 .toList();
     }
 
+    public List<Integer> extractInteger(String inputData, char customDelimiter) {
+        List<String> separatedData = prompt.separate(inputData, customDelimiter);
+
+        return separatedData.stream()
+                .map(data -> {
+                    validateNumber(data);
+                    return Integer.valueOf(data);
+                })
+                .toList();
+    }
+
     private void validateNumber(String data) {
         if (data == null || data.isEmpty()) {
             throw new IllegalArgumentException();
