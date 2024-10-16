@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.Arrays;
 
 public class Application {
     public static void main(String[] args) {
@@ -8,31 +9,27 @@ public class Application {
         String input = Console.readLine();
         int sum = 0;
 
-        if(input.contains(",") || input.contains(":")) {
-            for(int i = 0; i < input.length(); i++){
-                if(String.valueOf(input.charAt(i)).equals(",")) {
-                    continue;
-                }else if(String.valueOf(input.charAt(i)).equals(":")) {
-                    continue;
-                }else {
-                    sum += Character.getNumericValue(input.charAt(i));
-                }
-            }
-        }
-
         if(input.contains("//") && input.contains("\\n")) {
             String custom = input.substring(input.indexOf("//")+2, input.indexOf("\\n"));
             String newInput = input.substring(input.indexOf("\\n")+2);
-            for(int i = 0; i < newInput.length(); i++) {
-                if(String.valueOf(newInput.charAt(i)).equals(custom)) {
-                    continue;
-                }else {
-                    sum += Character.getNumericValue(newInput.charAt(i));
+            String replacedInput = newInput.replace(custom, ",");
+
+            String[] strArrCustom = replacedInput.split("[,:]");
+
+            for(String str : strArrCustom) {
+                if(!str.isEmpty()) {
+                    sum += Integer.parseInt(str);
                 }
             }
-        }
+        }else if(input.contains(",") || input.contains(":")) {
+            String[] strArrBasic = input.split("[,:]");
 
-        if(input.isEmpty()) {
+            for(String str : strArrBasic) {
+                if(!str.isEmpty()) {
+                    sum += Integer.parseInt(str);
+                }
+            }
+        }else if(input.isEmpty()) {
             sum = 0;
         }
 
