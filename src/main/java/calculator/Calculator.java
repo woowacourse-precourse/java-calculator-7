@@ -12,7 +12,8 @@ public class Calculator {
     }
 
     public int sum() {
-        return operands.getOperands().stream()
+        return operands.getOperands()
+                .stream()
                 .mapToInt(Operand::getOperand)
                 .sum();
     }

@@ -8,7 +8,7 @@ public class Operand {
 
     public Operand(String element) {
         this.operand = parseToInt(element);
-        validatePositive(operand);
+        validatePositive(this.operand);
     }
 
     private int parseToInt(String element) {
