@@ -6,7 +6,7 @@ public class CustomDelimiterProcessor {
         return firstChar == '/';
     }
 
-    public void correctCustomDelimiterFormatOrThrow(String inputString) {
+    public static void correctCustomDelimiterFormatOrThrow(String inputString) {
         if (!checkCustomDelimiterFormatLength(inputString)) {
             throw new IllegalArgumentException();
         }
@@ -18,16 +18,16 @@ public class CustomDelimiterProcessor {
         }
     }
 
-    public boolean checkCustomDelimiterFormatLength(String inputString) {
+    public static boolean checkCustomDelimiterFormatLength(String inputString) {
         return inputString.length() >= 5;
     }
 
-    public boolean isCustomDelimiterFirstFormatCorrect(String inputString) {
+    public static boolean isCustomDelimiterFirstFormatCorrect(String inputString) {
         String firstFormat = inputString.substring(0, 1);
         return firstFormat.equals("//");
     }
 
-    public boolean isCustomDelimiterLastFormatCorrect(String inputString) {
+    public static boolean isCustomDelimiterLastFormatCorrect(String inputString) {
         String lastFormat = inputString.substring(3, 4);
         return lastFormat.equals("\n");
     }
