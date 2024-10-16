@@ -26,6 +26,8 @@ public class Application {
                         throw new IllegalArgumentException();
                     }
 
+                    seperators.add(input.charAt(index));
+
                     if(index + 2 >= input.length()){
                         throw new IllegalArgumentException();
                     }
