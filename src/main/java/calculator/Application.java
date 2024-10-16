@@ -1,21 +1,18 @@
 package calculator;
 
+import static calculator.Constant.BASIC_DELIMITER_1;
+import static calculator.Constant.BASIC_DELIMITER_2;
+import static calculator.Constant.CUSTOM_DELIMITER_END;
+import static calculator.Constant.CUSTOM_DELIMITER_START;
+import static calculator.Constant.INPUT_GUIDE;
+import static calculator.Constant.LEFT_SQUARE_BRACKET;
+import static calculator.Constant.OUTPUT_RESULT;
+import static calculator.Constant.REGEX_OR_OPERATOR;
+import static calculator.Constant.RIGHT_SQUARE_BRACKET;
+
 import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
-
-    private static final String INPUT_GUIDE = "덧셈할 문자열을 입력해 주세요.";
-    private static final String OUTPUT_RESULT = "결과 : ";
-
-    private static final String BASIC_DELIMITER_1 = ",";
-    private static final String BASIC_DELIMITER_2 = ":";
-
-    private static final String CUSTOM_DELIMITER_START = "//";
-    private static final String CUSTOM_DELIMITER_END = "\\n";
-
-    private static final String LEFT_SQUARE_BRACKET = "[";
-    private static final String RIGHT_SQUARE_BRACKET = "]";
-    private static final String REGEX_OR_OPERATOR = "|";
 
     public static void main(String[] args) {
         // 입력
