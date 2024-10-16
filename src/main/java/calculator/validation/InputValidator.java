@@ -44,11 +44,20 @@ public class InputValidator {
     }
 
     /**
-     * 입력된 문자열에서 숫자 자리에 숫자 이외의 문자가 포함된 경우 예외 발생
+     * 입력된 문자열에서 숫자 자리에 양의 정수 이외의 문자가 포함된 경우 예외 발생
      */
     public static void validateNumberOnly(String input) {
-        String[] delimiters;
+        String[] delimiters = splitCustomInput(input);
 
+        for (String delimiter : delimiters) {
+            delimiter = delimiter.trim();
+
+            validateIsNumber(delimiter);
+            validateNumberNegative(delimiter);
+        }
+    }
+
+    private static String[] splitCustomInput(String input) {
         // 커스텀 구분자를 사용하는 경우
         if (input.startsWith(CUSTOM_FIRST_DELIMITER)) {
             int delimiterEndIndex = input.indexOf(CUSTOM_SECOND_DELIMITER);
@@ -56,22 +65,28 @@ public class InputValidator {
             String customDelimiter = input.substring(2, delimiterEndIndex);
             String numbers = input.substring(delimiterEndIndex + 1);
 
-            delimiters = numbers.split(customDelimiter);
+            return numbers.split(customDelimiter);
         } else {
-            delimiters = input.split(DEFAULT_DELIMITERS);  // 기본 구분자를 사용하는 경우
+            return input.split(DEFAULT_DELIMITERS);  // 기본 구분자를 사용하는 경우
         }
-        for (String delimiter : delimiters) {
-            delimiter = delimiter.trim();
+    }
 
-            // 숫자인지 확인
-            if (!isNumber(delimiter)) {
-                throw new IllegalArgumentException(ErrorMessage.ONLY_NUMBER.getMessage());
-            }
+    /**
+     * 입력된 문자열에서 숫자 자리에 음수가 포함된 경우 예외 발생
+     */
+    private static void validateNumberNegative(String delimiter) {
+        // 음수 확인
+        if (Integer.parseInt(delimiter) < 0) {
+            throw new IllegalArgumentException(ErrorMessage.NOT_ALLOW_NEGATIVE.getMessage());
+        }
+    }
 
-            // 음수 확인
-            if (Integer.parseInt(delimiter) < 0) {
-                throw new IllegalArgumentException(ErrorMessage.NOT_ALLOW_NEGATIVE.getMessage());
-            }
+    /**
+     * 입력된 문자열에서 숫자 자리에 정수 이외의 문자가 포함된 경우 예외 발생
+     */
+    private static void validateIsNumber(String delimiter) {
+        if (!isNumber(delimiter)) {
+            throw new IllegalArgumentException(ErrorMessage.ONLY_NUMBER.getMessage());
         }
     }
 

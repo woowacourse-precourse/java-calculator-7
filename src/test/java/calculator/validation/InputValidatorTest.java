@@ -2,6 +2,7 @@ package calculator.validation;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import calculator.enums.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -49,9 +50,9 @@ class InputValidatorTest {
 
         //then
         assertThatThrownBy(() -> InputValidator.validateNumberOnly(input1)).isInstanceOf(
-                IllegalArgumentException.class);
+                IllegalArgumentException.class).hasMessage(ErrorMessage.ONLY_NUMBER.getMessage());
         assertThatThrownBy(() -> InputValidator.validateNumberOnly(input2)).isInstanceOf(
-                IllegalArgumentException.class);
+                IllegalArgumentException.class).hasMessage(ErrorMessage.ONLY_NUMBER.getMessage());
     }
 
     @DisplayName("입력된 문자열에 음수가 포함된 경우")
@@ -62,6 +63,6 @@ class InputValidatorTest {
 
         //then
         assertThatThrownBy(() -> InputValidator.validateNumberOnly(input)).isInstanceOf(
-                IllegalArgumentException.class);
+                IllegalArgumentException.class).hasMessage(ErrorMessage.NOT_ALLOW_NEGATIVE.getMessage());
     }
 }
