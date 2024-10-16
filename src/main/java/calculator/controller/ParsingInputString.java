@@ -9,6 +9,9 @@ public class ParsingInputString {
 
     private final InputString inputString;
     private static final int beginIndex = 5;
+    private static final int beginCustomIndex = 0;
+    private static final int endCustomIndex = 3;
+    private static final int CustomCharIndex = 2;
 
     public ParsingInputString(InputString inputString) {
         this.inputString = inputString;
@@ -19,16 +22,28 @@ public class ParsingInputString {
         if (input.length() < 4) {
             return;
         }
-        if (input.indexOf("//") == 0 && input.indexOf("\\n") == 3) {
-            inputString.setCustomChar(input.charAt(2));
+
+        if (input.indexOf("//") == beginCustomIndex && input.indexOf("\\n") == endCustomIndex) {
+            inputString.setCustomChar(input.charAt(CustomCharIndex));
             inputString.setInput(input.substring(beginIndex));
+        } else if (input.indexOf("//") == beginCustomIndex
+            && input.indexOf("\\n") == endCustomIndex - 1) {
+            inputString.setInput(input.substring(beginIndex - 1));
         }
     }
 
     public List<Integer> parsingInput() {
         String splitString = "[,:" + inputString.getCustomChar() + "]";
-        List<String> numberStringList = Arrays.stream(inputString.getInput().split(splitString))
+        String input = inputString.getInput();
+
+        if (Validation.VerifyStringEmpty(input)) {
+            inputString.setNumberList(List.of(0));
+            return List.of(0);
+        }
+
+        List<String> numberStringList = Arrays.stream(input.split(splitString))
             .toList();
+
         Validation.VerifyInput(numberStringList);
 
         List<Integer> numberList = new ArrayList<>();

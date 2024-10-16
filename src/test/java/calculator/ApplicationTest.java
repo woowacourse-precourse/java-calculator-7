@@ -78,10 +78,36 @@ class ApplicationTest extends NsTest {
     @Test
     @DisplayName("특정 케이스를 확인한다.")
     void edgeCaseTest() {
-        assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("//\\n"))
-                .isInstanceOf(IllegalArgumentException.class)
-        );
+        //given
+        InputString inputString1 = new InputString("//\\n");
+        ParsingInputString parsingInputString1 = new ParsingInputString(inputString1);
+        CalculateIntegerList calculateIntegerList1 = new CalculateIntegerList(inputString1);
+
+        InputString inputString2 = new InputString("");
+        ParsingInputString parsingInputString2 = new ParsingInputString(inputString2);
+        CalculateIntegerList calculateIntegerList2 = new CalculateIntegerList(inputString2);
+
+        InputString inputString3 = new InputString("//;\\n");
+        ParsingInputString parsingInputString3 = new ParsingInputString(inputString3);
+        CalculateIntegerList calculateIntegerList3 = new CalculateIntegerList(inputString3);
+
+        //when
+        parsingInputString1.findCustomChar();
+        parsingInputString1.parsingInput();
+        int calculate1 = calculateIntegerList1.calculate();
+
+        parsingInputString2.findCustomChar();
+        parsingInputString2.parsingInput();
+        int calculate2 = calculateIntegerList2.calculate();
+
+        parsingInputString3.findCustomChar();
+        parsingInputString3.parsingInput();
+        int calculate3 = calculateIntegerList3.calculate();
+
+        //then
+        assertThat(calculate1).isEqualTo(0);
+        assertThat(calculate2).isEqualTo(0);
+        assertThat(calculate3).isEqualTo(0);
     }
 
     @Override
