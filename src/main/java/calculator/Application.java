@@ -17,5 +17,10 @@ public class Application {
 
             customDelimiter = customDelimiterStr.charAt(0);
         }
+
+        String calculateStr = input;
+        if (customDelimiter != null) {
+            calculateStr = input.substring(input.lastIndexOf("\\n") + 2);
+        }
     }
 }
