@@ -9,7 +9,6 @@ import calculator.entity.SeparatorSet;
 
 public interface SeparatorService {
 
-
     NumList separateNum(RefinedInput refinedInput, RegexStr regex);
 
     SeparatorSet getCustomSeparators(Input input);

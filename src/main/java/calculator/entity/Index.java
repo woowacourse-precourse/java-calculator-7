@@ -10,7 +10,6 @@ import java.util.Objects;
 
 public class Index implements Comparable<Index> {
 
-    // 엔티티 계층에서 작업할 수 있도록
     private final Integer value;
 
     public Index(Integer value) {

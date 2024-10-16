@@ -20,7 +20,6 @@ public class RefinedInput {
         value.append(oneLetter);
     }
 
-
     public NumList toNumList(RegexStr regexStr) {
         String[] numStringArray = split(regexStr);
 

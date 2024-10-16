@@ -43,7 +43,7 @@ public class SeparatorServiceImpl implements SeparatorService {
 
     @Override
     public RefinedInput refineInput(Input input, IndexQueue idxQueue) {
-        // 커스텀 구분자의 앞뒤를 제거한 문자열을 만들어낸다.
+        // 커스텀 구분자의 앞뒤 구문을 제거한 문자열을 만들어낸다.
         // 커스텀 구분자의 문자 자체는 남는다.
 
         RefinedInput refinedInput = new RefinedInput();
@@ -68,9 +68,8 @@ public class SeparatorServiceImpl implements SeparatorService {
         return refinedInput;
     }
 
-
+    @Override
     public IndexQueue getAllCustomSepIdx(Input input) {
-        // 커스텀 구분자로 시작하는 인덱스들을 모아둔다.
         IndexQueue idxQueue = new IndexQueue();
 
         Index idx = new Index(0);

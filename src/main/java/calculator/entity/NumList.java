@@ -12,12 +12,12 @@ public class NumList {
         this.numLists = new ArrayList<>();
     }
 
-    public Integer sum() {
-        return Num.total(numLists);
-    }
-
     public void addNum(Num num) {
         numLists.add(num);
+    }
+
+    public Integer sum() {
+        return Num.total(numLists);
     }
 
     @Override

@@ -24,10 +24,6 @@ public class Input {
         return index.isEndCustomSep(value);
     }
 
-    public Separator toSeparatorByIndex(Index index) {
-        return new Separator(oneLetter(index));
-    }
-
     protected String oneLetter(Index index) {
         return index.oneLetter(value);
     }
@@ -39,6 +35,10 @@ public class Input {
 
     public Index maxIdx() {
         return new Index(value.length());
+    }
+
+    public Separator toSeparatorByIndex(Index index) {
+        return new Separator(oneLetter(index));
     }
 
 }
