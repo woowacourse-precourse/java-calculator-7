@@ -1,16 +1,25 @@
 package calculator.domain;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
+    private final List<String> numbers = new ArrayList<>();
+    private final List<String> delimiters = new ArrayList<>();
+
     public User(String userString) {
-        String[] userStringArray = substringUserStrings(userString);
+        charAtUserStrings(userString);
     }
 
-    private String[] substringUserStrings(String userString) {
-        String[] userStringArray = new String[userString.length()];
+    private void charAtUserStrings(String userString) {
         for (int i = 0; i < userString.length(); i++) {
-            userStringArray[i] = userString.substring(i, i + 1);
+            char charAt = userString.charAt(i);
+            if (Character.isDigit(charAt)) {
+                numbers.add(String.valueOf(charAt));
+            } else {
+                delimiters.add(String.valueOf(charAt));
+            }
         }
-        return userStringArray;
     }
 }
