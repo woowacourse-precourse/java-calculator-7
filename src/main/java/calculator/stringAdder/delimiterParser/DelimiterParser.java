@@ -5,8 +5,8 @@ package calculator.stringAdder.delimiterParser;
  * @since : 24. 10. 16.
  */
 public class DelimiterParser {
-  
+  private static final String[] DEFAULT_DELIMITERS = {",", ":"};
   public String[] getDelimiters(String input) {
-    return null;
+    return DEFAULT_DELIMITERS;
   }
 }
