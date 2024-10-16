@@ -1,14 +1,18 @@
 package calculator.Service;
 
+import calculator.View.OutputView;
+
 public class CalculatorService {
     private static String Separator = ",|:";
-    public static int add(String input){
+    public static void add(String input){
         if(input==null || input.isEmpty()){
-            return 0;
+            OutputView.Result(0);
+            return;
         }
         if(input.startsWith("//")) Custom_Separator(input);
         String[] numbers=input.split(Separator);
-        return sum(numbers);
+        int sum=sum(numbers);
+        OutputView.Result(sum);
 
     }
 
