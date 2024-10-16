@@ -1,6 +1,7 @@
 package separator;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -12,16 +13,40 @@ public class CustomSeparator implements Separator {
     private CustomSeparatorFormat customSeparatorFormat;
 
 
+
     public CustomSeparator(String inputData, CustomSeparatorFormat customSeparatorFormat) {
         this.inputData = inputData;
         this.customSeparatorFormat = customSeparatorFormat;
         this.customSeparators = List.of(findSeparator());
     }
 
-    public CustomSeparator(String inputData,List<String> customSeparators, CustomSeparatorFormat customSeparatorFormat) {
+    public CustomSeparator(String inputData, List<String> customSeparators, CustomSeparatorFormat customSeparatorFormat) {
         this.inputData = inputData;
         this.customSeparatorFormat = customSeparatorFormat;
         this.customSeparators = customSeparators;
+    }
+
+
+
+    public String findSeparator() {
+        Matcher matcher = customSeparatorFormat.getPattern().matcher(inputData);
+
+        if (matcher.find()) {
+            String group = matcher.group(1);
+            String validatedCustomSeparator = validateCustomSeparator(group);
+            return validatedCustomSeparator;
+        } else {
+            throw new IllegalArgumentException("커스텀문자를 찾을 수 없습니다.");
+        }
+    }
+
+    public String validateCustomSeparator(String separator) {
+        try {
+            Integer.parseInt(separator);
+            throw new IllegalArgumentException("커스텀 구분자에는 숫자가 올 수 없습니다.");
+        } catch (NumberFormatException e) {
+            return separator;
+        }
     }
 
     @Override
@@ -30,39 +55,20 @@ public class CustomSeparator implements Separator {
     }
 
     @Override
-    public List<BigInteger> getNumbers(String input) {
-        return null;
-    }
-
-    public String findSeparator() {
+    public List<BigInteger> getNumbers() {
         Matcher matcher = customSeparatorFormat.getPattern().matcher(inputData);
-
-        if(matcher.find()){
-            String group = matcher.group(1);
-            System.out.println("----- custom : " + group);
-            String validatedCustomSeparator = validateCustomSeparator(group);
-            return validatedCustomSeparator;
-        }else {
+        String group;
+        if (matcher.find()) {
+            group = matcher.group(2);
+        } else {
             throw new IllegalArgumentException("커스텀문자를 찾을 수 없습니다.");
         }
-
-
-
-    }
-
-//    String[] split = inputData.split(validatedCustomSeparator);
-//        for (int i = 0; i < split.length; i++) {
-//        System.out.println(i + " : " + split[i]);
-//    }
-
-
-    public String validateCustomSeparator(String separator){
-        try {
-            Integer.parseInt(separator);
-            throw new IllegalArgumentException("커스텀 구분자에는 숫자가 올 수 없습니다.");
-        }catch (NumberFormatException e){
-            return separator;
+        String[] split = group.split(customSeparators.get(0));
+        List<BigInteger> bigIntegerList = new ArrayList<>();
+        for (String str : split) {
+            bigIntegerList.add(new BigInteger(str));
         }
+        return bigIntegerList;
     }
 
 

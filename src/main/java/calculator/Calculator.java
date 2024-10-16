@@ -8,6 +8,7 @@ import separator.Separator;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,10 +24,20 @@ public class Calculator {
         this.defaultSeparator = new DefaultSeparator(separatorData);
     }
 
-    public void run(){
+    public BigInteger run(){
         String inputData = readCalculatorInput();
         Separator separator = generateSeparators(inputData);
+        BigInteger result = getSum(separator);
+        return result;
+    }
 
+    private BigInteger getSum(Separator separator) {
+        BigInteger result = BigInteger.valueOf(0);
+        for (BigInteger number:separator.getNumbers()) {
+            result = result.add(number);
+        }
+
+        return result;
     }
 
     public String readCalculatorInput(){
@@ -41,7 +52,7 @@ public class Calculator {
 
     public Separator generateSeparators(String inputData){
         if(validateStartChar(inputData)){
-            return this.defaultSeparator;
+            return new DefaultSeparator(inputData,defaultSeparator);
         }else {
             CustomSeparatorFormat customSeparatorFormat = new CustomSeparatorFormat();
             validateCustomSeparatorFormat(inputData,customSeparatorFormat.getPattern());

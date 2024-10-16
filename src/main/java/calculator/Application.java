@@ -8,6 +8,6 @@ public class Application {
         inputGuidelines.printInputGuidelines();
 
         Calculator calculator = new Calculator(inputGuidelines.getDefaultSeparator());
-        calculator.run();
+        System.out.println("결과 : "+calculator.run());
     }
 }
