@@ -9,7 +9,6 @@ public class InputValidator {
     }
 
     public static void validate(String input) {
-
     }
 
     public static void validateBlank(String input) {
@@ -21,6 +20,12 @@ public class InputValidator {
     public static void validateIsStartBlank(String input) {
         if (RegexPattern.BLANK_IN_START.matches(input)) {
             throw new IllegalArgumentException(ErrorMessage.FIRST_CHAR_CANNOT_BE_SPACE.getMessage());
+        }
+    }
+
+    public static void validateIsEndBlank(String input) {
+        if (RegexPattern.BLANK_IN_END.matches(input)) {
+            throw new IllegalArgumentException(ErrorMessage.LAST_CHAR_CANNOT_BE_SPACE.getMessage());
         }
     }
 }
