@@ -2,8 +2,8 @@ package calculator.application.service;
 
 import static calculator.infrastructure.constants.ResponseMessage.REQUEST_INPUT_MESSAGE;
 
-import calculator.application.ports.input.InputPort;
-import calculator.application.ports.output.OutputPort;
+import calculator.ports.input.InputPort;
+import calculator.ports.output.OutputPort;
 import calculator.application.usecase.CalculateStringUseCase;
 import calculator.application.validation.InputValidator;
 

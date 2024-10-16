@@ -1,4 +1,4 @@
-package calculator.application.ports.input;
+package calculator.ports.input;
 
 public interface InputPort {
 

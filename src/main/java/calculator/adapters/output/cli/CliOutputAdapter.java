@@ -1,6 +1,6 @@
 package calculator.adapters.output.cli;
 
-import calculator.application.ports.output.OutputPort;
+import calculator.ports.output.OutputPort;
 
 public class CliOutputAdapter implements OutputPort {
 

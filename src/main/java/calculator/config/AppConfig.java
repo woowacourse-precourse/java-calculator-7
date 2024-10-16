@@ -1,8 +1,8 @@
 package calculator.config;
 
-import calculator.application.ports.input.InputPort;
+import calculator.ports.input.InputPort;
 import calculator.adapters.input.cli.CliInputAdapter;
-import calculator.application.ports.output.OutputPort;
+import calculator.ports.output.OutputPort;
 import calculator.adapters.output.cli.CliOutputAdapter;
 import calculator.application.service.CalculateStringCommand;
 import calculator.application.usecase.CalculateStringUseCase;
