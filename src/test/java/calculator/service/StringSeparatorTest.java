@@ -13,7 +13,7 @@ public class StringSeparatorTest {
         Calculator calculator = new Calculator();
         StringSeparator stringSeparator = new StringSeparator(calculator);
 
-        String separator = stringSeparator.extractionSeparator("//]\n");
+        String separator = stringSeparator.extractionCustomSeparator("//]\n");
         assertTrue(separator.equals("]"));
     }
 
@@ -22,7 +22,7 @@ public class StringSeparatorTest {
         Calculator calculator = new Calculator();
         StringSeparator stringSeparator = new StringSeparator(calculator);
 
-        String separator = stringSeparator.extractionSeparator("//]\n");
+        String separator = stringSeparator.extractionCustomSeparator("//]\n");
         calculator.addSeparator(separator);
 
         List<String> separators = calculator.getSeparators();

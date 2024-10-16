@@ -16,13 +16,10 @@ public class StringSeparator {
         for (int i = 0; i < str.length(); i++) {
             if (isNumber(str.charAt(i))) {
                 if (!divide.isEmpty()) {
-                    if (divide.equals("-")) {
-                        number += divide;
-                        divide = "";
-                    } else if (isWrongInput(divide)) {
+                    if (isWrongInput(divide)) {
                         throw new IllegalArgumentException("잘못된 입력입니다.");
                     } else {
-                        String separator = extractionSeparator(divide);
+                        String separator = extractionCustomSeparator(divide);
                         calculator.addSeparator(separator);
                         divide = "";
                     }
@@ -55,13 +52,13 @@ public class StringSeparator {
         if (divide == null || divide.length() < 4) {
             return true;
         }
-        if (divide.charAt(0) != '/' || divide.charAt(1) != '/' || divide.charAt(divide.length() - 1) != '\n') {
+        if (!divide.startsWith("//") || !divide.contains("\n")) {
             return true;
         }
         return false;
     }
 
-    public String extractionSeparator(String divide) {
+    public String extractionCustomSeparator(String divide) {
         return divide.substring(2, divide.length() - 1);
     }
 
