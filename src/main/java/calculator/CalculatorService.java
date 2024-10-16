@@ -10,6 +10,15 @@ public class CalculatorService {
             return readInput.substring(startPos + 2, endPos);
         }
 
-        return null;
+        return "";
+    }
+
+    public String extractPositiveString(String readInput, String customDelimiter) {
+        if (!customDelimiter.isBlank()) {
+            String remove =  "//" + customDelimiter + "\\n";
+            return readInput.replace(remove, "");
+        }
+
+        return readInput;
     }
 }
