@@ -5,7 +5,7 @@ import calculator.separator.Separator;
 public class Calculator {
 
     private final Separator separator;
-    private final String line;
+    private String line;
 
     public Calculator(Separator separator, String line){
         this.separator = separator;
@@ -13,6 +13,6 @@ public class Calculator {
     }
 
     public void calculate() {
-
+        String[] strings = separator.splitLine(line);
     }
 }

@@ -10,7 +10,11 @@ public class Application {
         String line = Console.readLine();
         Separator separator = createSeparator(line);
         Calculator calculator = new Calculator(separator, line);
-        calculator.calculate();
+        try{
+            calculator.calculate();
+        } catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     private static Separator createSeparator(String line) {
