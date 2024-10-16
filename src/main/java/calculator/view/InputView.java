@@ -4,9 +4,6 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
 
-    // 생성자
-    public InputView() {
-    }
 
     // 사용자로부터 덧셈할 문자열을 입력받는 메서드
     public String input() {
