@@ -36,7 +36,7 @@ public class Application {
         /**
          * 1.2 커스텀 구분자를 포함하여 입력된 경우
          */
-        if (input.startsWith("//")) {
+        if (hasCustomDelimiter(input)) {
             int indexOfEndSign = input.indexOf("\\n"); // 개행문자가 아닌 \n라는 문자를 찾는다
             if (indexOfEndSign == -1) {
                 throw new IllegalArgumentException("커스텀 구분자 선언 후 '\\n'이 필요합니다.");
@@ -49,6 +49,10 @@ public class Application {
         String[] tokens = numberPart.split(delimiter);
 
         return add(tokens);
+    }
+
+    private static boolean hasCustomDelimiter(String input) {
+        return input.startsWith("//");
     }
 
     private static int add(String[] tokens) {
