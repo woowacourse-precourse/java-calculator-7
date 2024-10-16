@@ -12,8 +12,15 @@ public class Application {
         System.out.println(INPUT_GUIDE);
         String input = Console.readLine();
 
+        // 숫자 추출
+        String[] split = input.split("[,:]");
+        int result = 0;
+        for (String strNum : split) {
+            result += Integer.parseInt(strNum);
+        }
+
         // 출력
-        System.out.println(OUTPUT_RESULT + input);
+        System.out.println(OUTPUT_RESULT + result);
 
         // scanner 닫기
         Console.close();
