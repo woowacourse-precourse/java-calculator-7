@@ -12,4 +12,9 @@ public class CustomInput extends Input {
     public char getSeparator() {
         return separator;
     }
+
+    @Override
+    protected boolean isSeparator(char ch) {
+        return ch == separator;
+    }
 }

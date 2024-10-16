@@ -48,4 +48,33 @@ public class Input {
     private boolean isNum(char ch) {
         return '0' <= ch && ch <= '9';
     }
+
+    public int[] getNums() {
+        int[] numArr = new int[nums.length() + 1];
+        int idx = 0;
+        int cur = 0;
+        boolean isPrevSeparator = false;
+        for (int i = 0; i < nums.length(); i++) {
+            char ch = nums.charAt(i);
+            if (isSeparator(ch) && !isPrevSeparator) {
+                numArr[idx++] = cur;
+                cur = 0;
+                isPrevSeparator = true;
+                continue;
+            }
+            if (isNum(ch)) {
+                cur *= 10;
+                cur += ch - 48;
+                isPrevSeparator = false;
+                continue;
+            }
+            throw new IllegalArgumentException("구분자가 유효하지 않습니다.");
+        }
+        numArr[idx] = cur;
+        return numArr;
+    }
+
+    protected boolean isSeparator(char ch) {
+        return ch == SEPARATOR_COLON || ch == SEPARATOR_COMMA;
+    }
 }
