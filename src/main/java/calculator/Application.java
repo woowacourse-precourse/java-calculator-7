@@ -16,7 +16,7 @@ public class Application {
 
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        input = Console.readLine();
+        inputString();
 
         isCustomDelimiter();
 
@@ -36,5 +36,11 @@ public class Application {
             delimiter = matcher.group(1);
             input = matcher.group(2);
         }
+    }
+
+    private static void inputString() {
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+
+        input = Console.readLine();
     }
 }
