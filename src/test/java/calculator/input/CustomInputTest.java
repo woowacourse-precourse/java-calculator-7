@@ -24,7 +24,7 @@ class CustomInputTest {
         CustomInput customInput = (CustomInput) Input.of(inputStr);
         // then
         assertInstanceOf(CustomInput.class, customInput);
-        assertEquals(separator, customInput.getSeparator());
+        assertTrue(customInput.isSeparator(separator));
     }
 
 

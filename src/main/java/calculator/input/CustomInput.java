@@ -9,10 +9,6 @@ public class CustomInput extends Input {
         this.separator = separator;
     }
 
-    public char getSeparator() {
-        return separator;
-    }
-
     @Override
     protected boolean isSeparator(char ch) {
         return ch == separator;
