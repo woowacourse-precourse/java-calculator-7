@@ -1,7 +1,16 @@
 package calculator;
 
+import java.util.Arrays;
+import java.util.Scanner;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Please input the number.");
+        String input = sc.nextLine();
+
+        String number[] = input.split("[, ;]");
+
+        System.out.println("number : " + Arrays.toString(number));
     }
 }
