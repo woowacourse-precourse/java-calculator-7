@@ -58,6 +58,6 @@ public class Calculator {
         String[] array = str.split(separator);
 
         int result = calculate(array);
-
+        System.out.println("결과 : "+result);
     }
 }
