@@ -12,9 +12,8 @@ public class Application {
             Data data = DataParser.parseData(inputData, customStatus);
             int sum = Calculator.sum(data);
             System.out.println("결과 : " + sum);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-            System.out.println("프로그램 종료");
+        } catch (IllegalArgumentException e) {
+            throw e;
         } finally {
             Console.close();
         }
