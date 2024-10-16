@@ -1,7 +1,6 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.Arrays;
 
 public class Application {
     public static void main(String[] args) {
@@ -21,23 +20,18 @@ class Calculator {
         this.s = s;
     }
 
+    /** Run all logic step by step. */
     public void run() {
-        //hasPlusSeparator:추가 구분자가 있는가?
         boolean hasPlusSeparator = checkPlusSeparator();
-        //List 형태로 숫자가 분해.
         String[] separatedStringArr = separate(hasPlusSeparator);
-        //숫자가 아닌 것이 남아 있는지 확인. 여기서 통과 여부는 throw 가 안되면 통과임.
         hasNaN(separatedStringArr);
-        //숫자를 합한 뒤 출력
         System.out.println("결과 : " + sum(separatedStringArr));
     }
-
+    /**
+     * Check existence of another separator.
+     * @return if exist another separator, return true. Or return false.
+     */
     private boolean checkPlusSeparator() {
-        //추가 구분자가 있으려면 문자열 길이가 최소 5글자는 넘어야 됨.
-        //추가 구분자는 //로 시작함.
-        // "//<추가 구분자>\n 이므로 3,4 번째가 \n 인지 확인 해야됨.
-        //끝났으면 추가 구분자를 확인하는 부분을 제거한 문자열로 바꿈.
-        // IF 추가 구분자까지만 있고 숫자가 없다면 어떡함??
         if (s.length() >= 5 && s.startsWith("//") && s.startsWith("\\n", 3)) {
             plusSeparator = String.valueOf(s.charAt(2));
             s = s.substring(5);
@@ -46,6 +40,11 @@ class Calculator {
         return false;
     }
 
+    /**
+     * Separate input string. if escape string(\) added separator, need action.
+     * @param hasPlusSeparator if another separator exist, set true. Or false.
+     * @return separated string.
+     */
     private String[] separate(boolean hasPlusSeparator) {
         if (!hasPlusSeparator) {
             return s.split("[:,]");
@@ -56,7 +55,11 @@ class Calculator {
         return s.split("[:," + plusSeparator + "]");
     }
 
-    //숫자가 아닌 문자를 발견할 경우 throw new IllegalArgumentException(); 해버림
+    /**
+     * Check input string array contains not a number. if it contains NaN,
+     * throw IllegalArgumentException.
+     * @param separatedStringArr String separated by separator.
+     */
     private void hasNaN(String[] separatedStringArr) {
         for (String s : separatedStringArr) {
             for (char c : s.toCharArray()) {
@@ -67,6 +70,11 @@ class Calculator {
         }
     }
 
+    /**
+     * Sum all of them
+     * @param separatedStringArr clean integer string array.
+     * @return Sum
+     */
     private int sum(String[] separatedStringArr) {
         int sum = 0;
         for (String separatedString : separatedStringArr) {
