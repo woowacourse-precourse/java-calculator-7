@@ -1,7 +1,7 @@
 package calculator.service;
 
 import calculator.domain.data.DataManager;
-import calculator.domain.extractor.NumberExtractor;
+import calculator.util.extractor.NumberExtractor;
 
 public class CalculatorService {
     private final DataManager dataManager;

@@ -1,4 +1,4 @@
-package calculator;
+package calculator.presentation;
 
 import calculator.domain.data.DataManager;
 import calculator.domain.data.RawDataType;

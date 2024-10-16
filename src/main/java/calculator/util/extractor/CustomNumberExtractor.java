@@ -1,4 +1,4 @@
-package calculator.domain.extractor;
+package calculator.util.extractor;
 
 import java.util.ArrayList;
 import java.util.List;
