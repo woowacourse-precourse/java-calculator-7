@@ -14,4 +14,9 @@ public class Delimiter {
     public static void updateDelimiter(Character delimiter){
         delimiterSet.add(delimiter);
     }
+
+    public static boolean isDelimiter(String str){
+        char ch = str.charAt(0);
+        return delimiterSet.contains(ch);
+    }
 }
