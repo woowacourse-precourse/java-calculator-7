@@ -18,5 +18,13 @@ public class Application {
         }else {
                 strArr = str.split(",|:");
         }
+
+        // 구분자로 분리한 숫자들의 합 구하기
+        for(String i : strArr){
+            if(i.isEmpty() || !i.matches("[+-]?\\d*(\\.\\d+)?") || Integer.parseInt(i) <= 0){
+                throw new IllegalArgumentException();
+            }
+            sum += Integer.parseInt(i);
+        }
     }
 }
