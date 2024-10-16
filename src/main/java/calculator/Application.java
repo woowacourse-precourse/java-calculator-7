@@ -31,7 +31,12 @@ class Calculator {
         // 커스텀 구분자가 있을 경우 처리
         if (userInput.startsWith("//")) {
             customDelimiterIndex = userInput.indexOf("\\n");
-            delimiter = userInput.substring(2, customDelimiterIndex);
+            String customDelimiter = userInput.substring(2, customDelimiterIndex);
+
+            // 커스텀 구분자가 비어있는 경우 예외처리
+            Validation.validateProperCustomDelimiter(customDelimiter);
+
+            delimiter = customDelimiter;
             userInput = userInput.substring(customDelimiterIndex + 2);
         }
 
@@ -68,6 +73,13 @@ class Validation {
             if (Integer.parseInt(userInputNumber) < 0) {
                 throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
             }
+        }
+    }
+
+    // 커스텀 구분자가 비어있는 경우 예외 반환
+    public static void validateProperCustomDelimiter(String customDelimiter) {
+        if (customDelimiter.isEmpty()) {
+            throw new IllegalArgumentException("커스텀 구분자는 비어 있을 수 없습니다.");
         }
     }
 }
