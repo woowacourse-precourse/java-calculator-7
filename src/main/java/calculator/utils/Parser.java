@@ -31,5 +31,10 @@ public class Parser {
         return separators;
     }
 
+    // 커스텀 구분자를 제외한 순수 입력 값을 반환하는 메소드
+    private String getPureString(String input) {
+        int secondIndex = input.indexOf(SECOND_STANDARD.getStandard());
 
+        return input.substring(secondIndex + 2);
+    }
 }
