@@ -16,7 +16,7 @@ public class Application {
         delimiters.add(",");
         delimiters.add(":");
 
-        if (hasCustomDelimiter(input)) { // 커스텀 구분자가 지정되어 있는지 확인 후, 지정되어 있다면 커스텀 구분자를 ArrayList 에 추가
+        if (input.startsWith("//")) { // 커스텀 구분자가 지정되어 있는지 확인 후, 지정되어 있다면 커스텀 구분자를 ArrayList 에 추가
             String newDelimiter = getCustomDelimiter(input);
             delimiters.add(newDelimiter);
         }
@@ -25,10 +25,6 @@ public class Application {
         ArrayList<Integer> numbers = convertStringToIntArray(input);
         int sum = sumArray(numbers);
         System.out.println("결과 : " + sum);
-    }
-
-    static boolean hasCustomDelimiter(String input) { // 커스텀 구분자가 지정되어 있는지 확인하는 함수
-        return input.startsWith("//");
     }
 
     static String getCustomDelimiter(String input) { // 문자열에서 커스텀 구분자를 추출하고 반환하는 함수
@@ -61,7 +57,7 @@ public class Application {
 
     static ArrayList<Integer> convertStringToIntArray(String input) {
         int index = 0;
-        if (hasCustomDelimiter(input)) { // 구분자가 있다면 인덱스를 구분자 다음으로 조정
+        if (input.startsWith("//")) { // 구분자가 있다면 인덱스를 구분자 다음으로 조정
             index = input.indexOf("\\n") + 2;
         }
 
