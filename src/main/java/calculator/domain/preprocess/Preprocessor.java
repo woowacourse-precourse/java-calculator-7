@@ -46,4 +46,8 @@ public class Preprocessor {
         }
     }
 
+    public void validateInputString(List<String> delimeter, String input){
+        inputManager.findNoneDelimeterString(delimeter,input);
+    }
+
 }
