@@ -9,8 +9,6 @@ public class JudgmentAPI {
 		return true;
 	}
 
-	public
-
     public int isNextTrue(Boolean[] booleans, int init) {
         int arrayLength = booleans.length;
         int continuousTrue = 0;
