@@ -69,4 +69,18 @@ class CalculatorTest {
         //then
         assertEquals("20", result);
     }
+    @Test
+    void Carry가_중간에_발생하는_정수_덧셈(){
+        //given
+        List<String> inputStrings = new ArrayList<>();
+        inputStrings.add("13531");
+        inputStrings.add("741");
+
+        //when
+        Calculator calculator = new Calculator(inputStrings);
+        String result = calculator.execute();
+
+        //then
+        assertEquals("14272", result);
+    }
 }
