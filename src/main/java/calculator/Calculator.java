@@ -15,5 +15,6 @@ public class Calculator {
 
     public void run() {
         outputView.requestAdditionNumbers();
+        inputView.getAdditionNumbers();
     }
 }
