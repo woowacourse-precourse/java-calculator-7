@@ -16,26 +16,26 @@ public class CalculatorTest {
 
     @Test
     void 빈_문자열을_입력하면_0을_반환한다() {
-        assertEquals(0, calculator.add(""));
+        assertEquals(0, calculator.sumFromString(""));
     }
 
     @Test
     void 음수나_0이_있는_경우_예외를_던진다() {
         assertThrows(IllegalArgumentException.class, () ->
-            calculator.add("-1,2,3,10"));
+                calculator.sumFromString("-1,2,3,10"));
         assertThrows(IllegalArgumentException.class, () ->
-            calculator.add("0,2,3,10"));
+                calculator.sumFromString("0,2,3,10"));
     }
 
     @Test
     void 기본_구분자_더하기_테스트() {
-        assertEquals(13,calculator.add("1:2,10"));
+        assertEquals(13, calculator.sumFromString("1:2,10"));
     }
 
     @Test
     void 커스텀_구분자_더하기_테스트() {
-        assertEquals(13,calculator.add("//;\\n1;2,10"));
-        assertEquals(1,calculator.add("//;\\n1"));
+        assertEquals(13, calculator.sumFromString("//;\\n1;2,10"));
+        assertEquals(1, calculator.sumFromString("//;\\n1"));
 
     }
 }

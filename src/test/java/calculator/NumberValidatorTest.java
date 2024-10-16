@@ -1,4 +1,4 @@
-package refactor;
+package calculator;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

@@ -1,4 +1,4 @@
-package refactor;
+package calculator;
 
 public class NumberValidator {
     void NegativeOrZeroCheck(String[] delimitedNumbers) {
