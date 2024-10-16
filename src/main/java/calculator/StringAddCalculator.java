@@ -3,7 +3,7 @@ package calculator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Calculator {
+public class StringAddCalculator {
     // 기본 구분자: , 또는 :
     private static String delimiter = "[,|:]";
     private static int result = 0;
