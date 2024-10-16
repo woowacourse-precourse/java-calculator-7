@@ -55,6 +55,10 @@
 ## validation package
 
 - `inputValidator` : 입력 구문이 정상 연산 가능한지 판단 - 에러 반환
+  - `inputValidate` : 사용자의 string 입력이 정상인지 확인하는 메서드 집합
+    - `isBlank` : 입력이 공백인지 확인하는 메서드 [0]
+  - `numbersValidate` : 구분자 통해 분할된 Integer List가 정상인지 확인하는 메서드 집합
+    -  `isNegative` : 음수가 포함되어 있는지 확인하는 메서드 [0]
 
 ---
 
