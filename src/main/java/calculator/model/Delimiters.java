@@ -10,7 +10,7 @@ public class Delimiters {
     public Delimiters() {
         this.delimiters = new ArrayList<>();
         delimiters.add(',');
-        delimiters.add(';');
+        delimiters.add(':');
     }
 
     public List<Character> getDelimiters() {
