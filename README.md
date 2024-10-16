@@ -1,1 +1,5 @@
-# java-calculator-precourse
+# java-calculator 기능 목록
+
+- [ ] I/O 기능 구현
+- [ ] 기본 구분자(, 또는 :) 덧셈 기능 구현
+- [ ] 커스텀 구분자 덧셈 기능 구현
