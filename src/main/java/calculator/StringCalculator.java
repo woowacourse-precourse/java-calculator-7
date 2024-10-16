@@ -18,7 +18,7 @@ public class StringCalculator {
         String delimiterCandidates = splitString.getFirst();
 
         if (delimiterCandidates.isEmpty()) {
-            return null;
+            return "";
         }
 
         return delimiterCandidates.substring(2);
