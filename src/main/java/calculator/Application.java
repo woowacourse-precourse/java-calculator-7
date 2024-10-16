@@ -34,4 +34,14 @@ public class Application {
                 separatorsString.split(""))
                 .toList();
     }
+
+    private static String extractCommand(String inputString) {
+        if (!inputString.startsWith(CUSTOM_DELIMITER_PREFIX) || !inputString.contains(CUSTOM_DELIMITER_SUFFIX)) {
+            return inputString;
+        }
+
+        return inputString.substring(
+                inputString.indexOf(CUSTOM_DELIMITER_SUFFIX) + CUSTOM_DELIMITER_PREFIX.length()
+        );
+    }
 }
