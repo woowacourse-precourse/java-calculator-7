@@ -32,5 +32,7 @@ public class Application {
             int number = token.isEmpty() ? 0 : Integer.parseInt(token);
             numbers.add(number);
         }
+
+        int sum = numbers.stream().mapToInt(Integer::intValue).sum();
     }
 }
