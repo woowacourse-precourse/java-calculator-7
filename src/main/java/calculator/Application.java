@@ -5,58 +5,58 @@ import camp.nextstep.edu.missionutils.Console;
 public class Application {
     public static void main(String[] args) {
         // 문자열 입력
-        FullLine FullLine = new FullLine();
-        FullLine.LineInput();
+        FullLine fullLine = new FullLine();
+        fullLine.lineInput();
         // 형 변환
-        Numbers Numbers = new Numbers();
-        Numbers.ToInt(FullLine.MakeSplitWordList());
+        Numbers numbers = new Numbers();
+        numbers.toInt(fullLine.makeSplitWordList());
         // 결과 도출
-        Numbers.Result();
+        numbers.result();
     }
 }
 
 class FullLine {
-    private String InputLine;
-    public void LineInput() {
+    private String inputLine;
+    public void lineInput() {
         System.out.print("덧셈할 문자열을 입력해 주세요.");
-        this.InputLine = Console.readLine();
+        this.inputLine = Console.readLine();
     }
-    public String[] MakeSplitWordList() {
-        if (InputLine.startsWith("//")) {
-            int EndIndex = InputLine.indexOf("\\n");
-            String CustomSplitWord = InputLine.substring(2, EndIndex);
-            String RemainLine = InputLine.substring(EndIndex + 2);
-            return RemainLine.split("[,:]" + CustomSplitWord);
+    public String[] makeSplitWordList() {
+        if (inputLine.startsWith("//")) {
+            int endIndex = inputLine.indexOf("\\n");
+            String customSplitWord = inputLine.substring(2, endIndex);
+            String remainLine = inputLine.substring(endIndex + 2);
+            return remainLine.split("[,:]" + customSplitWord);
         }
-        return InputLine.split("[,:]");
+        return inputLine.split("[,:]");
     }
 }
 class Numbers {
-    private int[] NumList;
-    public void ToInt(String[] WordList){
-        int[] NumList = new int[WordList.length];
-        for (int i = 0; i < WordList.length; i++){
-            NumList[i] = Parse(WordList[i]);
+    private int[] numList;
+    public void toInt(String[] wordList){
+        int[] numList = new int[wordList.length];
+        for (int i = 0; i < wordList.length; i++){
+            numList[i] = Parse(wordList[i]);
         }
-        this.NumList = NumList;
+        this.numList = numList;
     }
-    private int Parse(String Word) {
-        int ParseInt ;
+    private int parse(String Word) {
+        int parseInt;
         try {
-            ParseInt = Integer.parseInt(Word);
+            parseInt = Integer.parseInt(Word);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("IllegalArgumentException");
         }
-        if (ParseInt < 1) {
+        if (parseInt < 1) {
             throw new IllegalArgumentException("IllegalArgumentException");
         }
-        return ParseInt;
+        return parseInt;
     }
-    public void Result() {
-        int Sum = 0;
-        for (int Num : NumList) {
-            Sum += Num;
+    public void result() {
+        int sum = 0;
+        for (int num : numList) {
+            sum += num;
         }
-        System.out.print("결과 : " + Sum);
+        System.out.print("결과 : " + sum);
     }
 }
