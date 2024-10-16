@@ -6,6 +6,18 @@ public class CustomDelimiterProcessor {
         return firstChar == '/';
     }
 
+    public void correctCustomDelimiterFormatOrThrow(String inputString) {
+        if (!checkCustomDelimiterFormatLength(inputString)) {
+            throw new IllegalArgumentException();
+        }
+        if (isCustomDelimiterFirstFormatCorrect(inputString)) {
+            throw new IllegalArgumentException();
+        }
+        if (isCustomDelimiterLastFormatCorrect(inputString)) {
+            throw new IllegalArgumentException();
+        }
+    }
+
     public boolean checkCustomDelimiterFormatLength(String inputString) {
         return inputString.length() >= 5;
     }
