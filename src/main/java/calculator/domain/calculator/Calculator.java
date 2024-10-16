@@ -4,7 +4,6 @@ import java.util.*;
 
 public class Calculator {
 
-    private static final ArrayList<String> DEFAULT_DELIMITERS = new ArrayList<>(Arrays.asList(",", ":"));
     private final Validator validator;
 
     public Calculator(String input) {
