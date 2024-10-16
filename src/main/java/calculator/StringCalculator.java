@@ -23,8 +23,11 @@ public class StringCalculator {
     }
 
     public List<Double> splitNumbersByDelimiter(String numberCandidates, String customDelimiter) {
-        String[] splitNumber = numberCandidates.split(",|:|" + customDelimiter);
+        NumberValidator numberValidator = new NumberValidator();
+        List<String> splitNumber = Arrays.stream(numberCandidates.split(",|:|" + customDelimiter)).toList();
 
-        return Arrays.stream(splitNumber).map(Double::parseDouble).toList();
+        numberValidator.validate(splitNumber);
+
+        return splitNumber.stream().map(number -> number.isBlank() ? 0.0 : Double.parseDouble(number)).toList();
     }
 }
