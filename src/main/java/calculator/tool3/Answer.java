@@ -13,7 +13,7 @@ public class Answer {
   }
 
   public void printAns(){
-    System.out.println("결과: " + this.calSum());
+    System.out.println("결과 : " + this.calSum());
   }
 
   public Answer(long[] nums) {
