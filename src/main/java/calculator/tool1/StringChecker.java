@@ -6,10 +6,7 @@ public class StringChecker {
     //문자열 유효성 체크
     if (!input.startsWith("//")) {
       return false;
-    } else if (input.endsWith("\n")) {
-      // "//\n"일 경우
-      return false;
-    } else if (!input.contains("//\n")) {
+    } else if (input.contains("//\n")) {
       return false;
     } else {
       return true;
