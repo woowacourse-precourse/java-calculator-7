@@ -1,5 +1,7 @@
 package calculator.service;
 
+import java.util.List;
+
 public class CalculateCustom {
 
     private static final String CUSTOM_PRE = "//";
@@ -15,5 +17,21 @@ public class CalculateCustom {
 
     public boolean checkContainCUSTOM(String userInput) {
         return checkContainCUSTOM_PRE(userInput) && checkContainCUSTOM_POST(userInput);
+    }
+
+    public Integer getCustomPreIndex(String userInput) {
+        return userInput.indexOf(CUSTOM_PRE);
+    }
+
+    public Integer getCustomPostIndex(String userInput) {
+        return userInput.indexOf(CUSTOM_POST);
+    }
+
+    public String getCustomPreToPost(String userInput) {
+        return userInput.substring(getCustomPreIndex(userInput), getCustomPostIndex(userInput));
+    }
+
+    public String getCustomSeparator(String userCustom) {
+        return userCustom.replaceAll(CUSTOM_PRE+CUSTOM_POST, "");
     }
 }
