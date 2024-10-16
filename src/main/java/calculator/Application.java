@@ -7,6 +7,14 @@ import java.util.List;
 
 public class Application {
 
+    public int sumInteger(List<Integer> parsedIntegers) {
+        int sumOfIntegers = 0;
+        for (int i : parsedIntegers) {
+            sumOfIntegers += i;
+        }
+        return sumOfIntegers;
+    }
+
     public List<Integer> parseStringToInteger(String[] removedSeparatorsArray) {
         List<Integer> parsedIntegers = new ArrayList<>();
         for (String str : removedSeparatorsArray) {

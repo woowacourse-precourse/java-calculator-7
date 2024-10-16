@@ -81,4 +81,13 @@ class ApplicationTest {
         List<Integer> expectedArray = Arrays.asList(1, 12, 3, 4);
         assertEquals(expectedArray, parsedIntegers);
     }
+
+    @Test
+    void sumInteger_case1() {
+        List<Integer> parsedIntegers = Arrays.asList(1, 12, 3, 4);
+
+        int sumOfIntegers = app.sumInteger(parsedIntegers);
+
+        assertEquals(20, sumOfIntegers);
+    }
 }
