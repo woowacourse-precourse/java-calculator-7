@@ -1,10 +1,18 @@
 package calculator.controller;
 
+import calculator.domain.Delimiter;
 import calculator.view.UserInput;
 
 public class UserInputController {
-    private final static UserInput userInput = new UserInput();
-    private final static String userInputMessage = userInput.promptUserInput();
+    private final UserInput userInput;
+    private final String userInputMessage;
+    private final Delimiter delimiter;
+
+    public UserInputController(UserInput userInput){
+        this.userInput = userInput;
+        userInputMessage = userInput.promptUserInput();
+        delimiter = updateDelimiter(userInputMessage);
+    }
 
     private void checkDelimiterAndNumber(String userInputMessage){
         boolean hasDelimiter = false;
@@ -25,7 +33,14 @@ public class UserInputController {
         return true;
     }
 
-    //사용자 입력 여기서 커스텀 구분자 설정 확인하고 도메인으로 값 넘겨주기
+    private Delimiter updateDelimiter(String userInputMessage){
+        if(checkCustomDelimiter(userInputMessage)){
+            return new Delimiter(userInputMessage);
+        }
+        else{
+            return new Delimiter();
+        }
+    }
 
     //커스텀 구분자 이용 사용자 입력이 정상적인지 확인
 
