@@ -16,20 +16,15 @@ public class Application {
         delimiters.add(",");
         delimiters.add(":");
 
-        try {
-            if (hasCustomDelimiter(input)) { // 커스텀 구분자가 지정되어 있는지 확인 후, 지정되어 있다면 커스텀 구분자를 ArrayList 에 추가
-                String newDelimiter = getCustomDelimiter(input);
-                delimiters.add(newDelimiter);
-            }
-
-            // 문자열에서 숫자 배열을 추출 후, 총합 계산
-            ArrayList<Integer> numbers = convertStringToIntArray(input);
-            int sum = sumArray(numbers);
-            System.out.println("결과 : " + sum);
-        } catch (IllegalArgumentException e) {
-            System.out.println("사용자가 잘못된 값을 입력했습니다."); // IllegalArgumentException 후 종료
-            throw e;
+        if (hasCustomDelimiter(input)) { // 커스텀 구분자가 지정되어 있는지 확인 후, 지정되어 있다면 커스텀 구분자를 ArrayList 에 추가
+            String newDelimiter = getCustomDelimiter(input);
+            delimiters.add(newDelimiter);
         }
+
+        // 문자열에서 숫자 배열을 추출 후, 총합 계산
+        ArrayList<Integer> numbers = convertStringToIntArray(input);
+        int sum = sumArray(numbers);
+        System.out.println("결과 : " + sum);
     }
 
     static boolean hasCustomDelimiter(String input) { // 커스텀 구분자가 지정되어 있는지 확인하는 함수
