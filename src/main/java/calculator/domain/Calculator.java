@@ -11,16 +11,28 @@ public class Calculator {
     private static final String CUSTOM_DELIMITER_PREFIX_FORMAT = "//";
     private static final String CUSTOM_DELIMITER_SUFFIX_FORMAT = "\n";
     private static final int CUSTOM_DELIMITER_BEGIN_INDEX = 2;
+    private static final String NUMBER_INCLUDE_REGEX = ".*[0-9].*";
 
-    public String getCustomDivisionMark(String stringWithDivisionMark) {
-        if (isRightCustomDelimiterFormat(stringWithDivisionMark)) {
-            return stringWithDivisionMark.substring(CUSTOM_DELIMITER_BEGIN_INDEX, stringWithDivisionMark.indexOf(CUSTOM_DELIMITER_SUFFIX_FORMAT));
+    public String getCustomDelimiter(String stringWithDivisionMark) {
+        if (stringWithDivisionMark.startsWith(CUSTOM_DELIMITER_PREFIX_FORMAT)) {
+            return extractCustomDelimiter(stringWithDivisionMark);
+        }
+        validateNumber(stringWithDivisionMark);
+        return null;
+    }
+
+    private String extractCustomDelimiter(String stringWithDivisionMark) {
+        int endIndex = stringWithDivisionMark.indexOf(CUSTOM_DELIMITER_SUFFIX_FORMAT);
+
+        if (stringWithDivisionMark.contains(CUSTOM_DELIMITER_SUFFIX_FORMAT)) {
+            return stringWithDivisionMark.substring(CUSTOM_DELIMITER_BEGIN_INDEX, endIndex);
         }
         throw new CalculatorException(WRONG_CUSTOM_DELIMITER_FORMAT);
     }
 
-    private boolean isRightCustomDelimiterFormat(String stringWithDivisionMark) {
-        return stringWithDivisionMark.startsWith(CUSTOM_DELIMITER_PREFIX_FORMAT)
-                && stringWithDivisionMark.contains(CUSTOM_DELIMITER_SUFFIX_FORMAT);
+    private void validateNumber(String stringWithDivisionMark) {
+        if (!stringWithDivisionMark.matches(NUMBER_INCLUDE_REGEX)) {
+            throw new CalculatorException(WRONG_CUSTOM_DELIMITER_FORMAT);
+        }
     }
 }

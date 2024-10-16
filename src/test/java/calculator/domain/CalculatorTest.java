@@ -10,51 +10,63 @@ class CalculatorTest {
 
     @DisplayName("문자열 앞부분의 \"//\"와 \"\\n\" 사이에 위치하는 문자를 커스텀 구분자로 사용한다.")
     @Test
-    void getCustomDivisionMark() {
+    void getCustomDelimiter() {
         //given
         Calculator calculator = new Calculator();
-        String stringWithDivisionMark = "//|\n1|2|3";
+        String stringWithDelimiter = "//|\n1|2|3";
         //when
-        String customDivisionMark = calculator.getCustomDivisionMark(stringWithDivisionMark);
+        String customDelimiter = calculator.getCustomDelimiter(stringWithDelimiter);
         //then
-        assertThat(customDivisionMark).isEqualTo("|");
+        assertThat(customDelimiter).isEqualTo("|");
     }
 
-    @DisplayName("문자열 앞부분의 \"//\"와 \"\\n\" 사이에 위치하는 문자가 없다면 WRONG_CUSTOM_DELIMITER_FORMAT 예외가 발생한다.")
+    @DisplayName("문자열 앞부분이 \"//\"로 시작하지 않으면 customDelimiter은 null을 반환한다.")
     @Test
-    void customDivisionMarkIsNull() {
+    void customDivisionMarkIsNul() {
         //given
         Calculator calculator = new Calculator();
-        String stringWithDivisionMark = "1,2:3";
+        String stringWithDelimiter = "1,2:3";
+        //when
+        String customDelimiter = calculator.getCustomDelimiter(stringWithDelimiter);
+        //then
+        assertThat(customDelimiter).isNull();
+    }
+
+    @DisplayName("문자열 앞부분은 \"//\"로 시작하지만 \"\\n\" 로 끝나지 않으면 WRONG_CUSTOM_DELIMITER_FORMAT 예외가 발생한다.")
+    @Test
+    void throwsExceptionWhenCustomDelimiterFormatIsWrong() {
+        //given
+        Calculator calculator = new Calculator();
+        String stringWithDelimiter = "//|\t1|2|3";
         //when
         //then
-        assertThatThrownBy(() -> calculator.getCustomDivisionMark(stringWithDivisionMark))
+        assertThatThrownBy(() -> calculator.getCustomDelimiter(stringWithDelimiter))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("잘못된 커스텀 구분자 형식입니다.");
     }
 
-    @DisplayName("문자열 앞부분은 \"//\"로 시작하지만 \"\\n\" 로 끝나지 않으면  WRONG_CUSTOM_DELIMITER_FORMAT 예외가 발생한다.")
+    @DisplayName("문자열 앞부분은 \"//\"로 시작하지만 \"\\n\" 로 끝나지 않으면 WRONG_CUSTOM_DELIMITER_FORMAT 예외가 발생한다.")
     @Test
-    void customDivisionMarkIsNull2() {
+    void throwsExceptionWhenCustomDelimiterFormatIsWrong2() {
         //given
         Calculator calculator = new Calculator();
-        String stringWithDivisionMark = "//|\t1|2|3";
+        String stringWithDelimiter = "//|1|2|3";
         //when
         //then
-        assertThatThrownBy(() -> calculator.getCustomDivisionMark(stringWithDivisionMark))
+        assertThatThrownBy(() -> calculator.getCustomDelimiter(stringWithDelimiter))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("잘못된 커스텀 구분자 형식입니다.");
     }
 
-    @DisplayName("문자열 앞부분은 \"//\"로 시작하지만 \"\\n\" 로 끝나지 않으면  WRONG_CUSTOM_DELIMITER_FORMAT 예외가 발생한다.")
+    @DisplayName("문자열 앞부분이 \"//\"로 시작하지 않으면 WRONG_CUSTOM_DELIMITER_FORMAT 예외가 발생한다.")
     @Test
-    void customDivisionMarkIsNull3() {
+    void throwsExceptionWhenCustomDelimiterFormatIsWrong3() {
         //given
         Calculator calculator = new Calculator();
-        String stringWithDivisionMark = "//|1|2|3";
+        String stringWithDelimiter = "/|\n1|2|3";
         //when
         //then
-        assertThatThrownBy(() -> calculator.getCustomDivisionMark(stringWithDivisionMark))
+        assertThatThrownBy(() -> calculator.getCustomDelimiter(stringWithDelimiter))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("잘못된 커스텀 구분자 형식입니다.");
     }
