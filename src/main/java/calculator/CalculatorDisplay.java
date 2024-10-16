@@ -15,15 +15,22 @@ public class CalculatorDisplay {
         String input = Console.readLine();
         Console.close();
 
+        SeparationProcessor separationProcessor = new SeparationProcessor(',', ':');
+
         // 2. 커스텀 구분자 등록 여부 확인
         Pattern pattern = Pattern.compile("^(\\/\\/.\\\\n)");
         Matcher matcher = pattern.matcher(input);
 
         if(matcher.find()){
-            System.out.println(matcher.group().charAt(2));
+            Character customSeparation = matcher.group().charAt(2);
+            separationProcessor.addSeparation(customSeparation);
         }
 
         // 3. 구분자를 기준으로 숫자 분리하기
+        String[] strings = separationProcessor.split(input);
+        for(String s : strings){
+            System.out.printf("%s ", s);
+        }
 
         // 4. 숫자의 합 계산하기
 
