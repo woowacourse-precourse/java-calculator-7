@@ -1,6 +1,6 @@
 # java-calculator-precourse
 
-### Input 과 output
+## Input 과 output
 
 `input`: 1,2,3 or 1:2,3 →  `output` : 6
 
@@ -8,28 +8,6 @@
 
 - 커스텀 구분자는 문자열 앞부분의 “//” 와 “\n” 사이에 위치하는 문자를 커스텀 구분자로 사용한다.
 - 따라서 “//;\n1;2;3” 의 경우에는 ;이다.
-
-## 입출력 요구사항
-
-### **입력**
-
-- 구분자와 양수로 구성된 문자열
-
-### **출력**
-
-- 덧셈 결과
-
-```
-결과 : 6
-```
-
-### **실행 결과 예시**
-
-```
-덧셈할 문자열을 입력해 주세요.
-1,2:3
-결과 : 6
-```
 
 ### 요구사항 분석
 
@@ -62,20 +40,21 @@
 
    EX) “/@/n1@2@3” → /이 하나밖에 없음
 
-### 클래스 다이어그램: MVC 패턴
+## 클래스 다이어그램: MVC 패턴 사용
 
-![java-calculator-6-class-diagram](..%2F..%2F%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202024-10-17%2002.11.43.png)
-**CaculateResultView**
+![java-calculator-6-class-diagram](/Users/vecherish/Desktop/woowacourse/java-calculator-7/java-calculator-6-class-diagram.png)
+
+### CaculateResultView
 
 사용자에게 계산된 값을 보여주는 역할을 한다.
 
 - 화면에 DTO를 출력한다.
 
-**CaculateResultDTO**
+### CaculateResultDTO
 
 - 결과 값을 DTO에 감싼다.
 
-**CalculatorController**
+### CalculatorController
 
 - 사용자의 입력 값을 모델과 뷰에 전달한다.
 
