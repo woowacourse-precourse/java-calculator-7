@@ -18,15 +18,37 @@ public class CalculateService {
             String delim = inputString.substring(firstIdx, secondIdx);
 
             String[] split = inputString.substring(secondIdx + 2, inputString.length()).split(delim);
-            for (String s : split) {
-                sum += Integer.parseInt(s);
+
+            try {
+                for (String s : split) {
+                    System.out.println("s = " + s);
+                    int intValue = Integer.parseInt(s);
+                    if (intValue < 0) {
+                        throw new IllegalArgumentException("양수만 입력해주세요.");
+                    }
+                    sum += intValue;
+                }
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("구분자(, 또는 :)와 숫자로만 입력해주세요.");
             }
+
         } else if (inputString.contains(",") || inputString.contains(":")){
             String[] split = inputString.split("[,:]");
 
-            for (String s : split) {
-                sum += Integer.parseInt(s);
+            try {
+                for (String s : split) {
+                    System.out.println("s = " + s);
+                    int intValue = Integer.parseInt(s);
+                    if (intValue < 0) {
+                        throw new IllegalArgumentException("양수만 입력해주세요.");
+                    }
+                    sum += intValue;
+                }
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("구분자(, 또는 :)와 숫자로만 입력해주세요.");
             }
+        } else {
+            throw new IllegalArgumentException("올바른 문자열을 입력해주세요.");
         }
         return sum;
     }
