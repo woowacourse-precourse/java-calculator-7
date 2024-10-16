@@ -11,7 +11,7 @@ public class Application {
         String userInput = new InputHandler().getUserInput();
 
         NumberExtractor numberExtractor = new NumberExtractor();
-        Numbers numbers = numberExtractor.extract(userInput);
+        Numbers numbers = numberExtractor.extractNumbers(userInput);
 
         int totalValue = numbers.calculateTotalValue();
 

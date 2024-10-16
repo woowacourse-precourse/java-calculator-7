@@ -1,37 +1,22 @@
 package calculator.extractor;
 
+import calculator.delimiter.Delimiter;
+import calculator.delimiter.Delimiters;
 import calculator.number.Numbers;
-import java.util.ArrayList;
 import java.util.List;
 
 public class NumberExtractor {
-    private static final List<String> DEFAULT_DELIMITERS = java.util.List.of(",", ":");
+    Delimiters delimiters = new Delimiters();
+    CustomDelimiterCalculator customDelimiterCalculator = new CustomDelimiterCalculator();
 
-    private final CustomDelimiterCalculator customDelimiterCalculator = new CustomDelimiterCalculator();
-    private final List<String> delimiters = new ArrayList<>(DEFAULT_DELIMITERS);
-
-    public Numbers extract(String str) {
-        if (customDelimiterCalculator.hasCustomDelimiter(str)) {
-            addCustomDelimiter(str);
-            str = customDelimiterCalculator.removeCustomDelimiterPrefix(str);
+    public Numbers extractNumbers(String input) {
+        if (customDelimiterCalculator.matches(input)) {
+            Delimiter customDelimiter = customDelimiterCalculator.extract(input);
+            delimiters.add(customDelimiter);
+            input = customDelimiterCalculator.removeCustomDelimiter(input);
         }
 
-        List<String> strNumbers = splitByDelimiters(str);
-        return Numbers.of(strNumbers);
-    }
-
-    private void addCustomDelimiter(String str) {
-        String customDelimiter = customDelimiterCalculator.extractCustomDelimiterFrom(str);
-        delimiters.add(customDelimiter);
-    }
-
-    private List<String> splitByDelimiters(String str) {
-        String regex = getRegex();
-        return List.of(str.split(regex));
-    }
-
-    private String getRegex() {
-        String joinedDelimiters = String.join("", delimiters);
-        return String.format("[%s]", joinedDelimiters);
+        List<String> splitNumbers = delimiters.split(input);
+        return Numbers.of(splitNumbers);
     }
 }
