@@ -1,9 +1,10 @@
 # java-calculator-precourse
 -----
 # 👷기능 요구사항 정의
-## Model
+## Util
 ### Validator (입력 체크)
 - 잘못된 입력인 경우 IllegalArgumentException 발생
+## Model
 ### Operator (입력 받은 문자열)
 - 사용자로부터 받은 입력을 구분자로 나누어진 정제된 문자열로 변경하여 저장
 ### Calculator (계산기)
