@@ -7,8 +7,8 @@ public class CalculatorService {
             return 0;
         }
         if(input.startsWith("//")) Custom_Separator(input);
-        String[] numbers = input.split(Separator);
 
+        return 0;
 
     }
 
