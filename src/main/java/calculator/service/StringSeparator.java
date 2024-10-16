@@ -30,7 +30,7 @@ public class StringSeparator {
                 }
                 number += str.charAt(i);
             } else {
-                if (calculator.getSeparators().contains(str.charAt(i))) {
+                if (calculator.getSeparators().contains(String.valueOf(str.charAt(i)))) {
                     if (!number.isEmpty()) {
                         calculator.addNumber(Integer.parseInt(number));
                     }
