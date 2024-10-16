@@ -80,6 +80,16 @@ stsrtWith함수를 통해 입력 값의 시작부가 '//'로 시작하는 지 �
 4. 연산 진행
 > 숫자를 제외한 구분자들이 구분자 배열 내부에 없다면, 예외를 발생 후 종료
 
+## 후기
+혼자 할 때는 github Desktop을 사용하여 commit을 진행하였기에 commit관련 오류가 많았음
+
+10-15일<br>
+특히 commit을 지우려다 오히려 과거의 commit이 복사되었다.<br>
+![](./img/error_001.png)<br>
+
+10-16일<br>
+파일을 저장하는 것을 까먹고 commit 해버림<br>
+![](./img/error_002.png)<br>
 
 ## 참고
 [문제 설명](https://apply.techcourse.co.kr/assignment/14/mission/43)<br>
