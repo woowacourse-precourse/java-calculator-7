@@ -4,6 +4,8 @@
 - [ ] Calculator Class
   - [ ] 전체적인 계산기 로직을 가지고 있는 코드.
   - [ ] 전체적인 로직 흐름만 감당한다.
+- [ ] CalculatorParam Class
+  - [ ] 계산기에 필요한 파라미터를 들고 있는 객체
 - [ ] InputParameter Class
   - [ ] '//', '\n'을 확인하는 메서드
     - [ ] 확인이 된다면 구분자를 저장
