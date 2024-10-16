@@ -1,6 +1,7 @@
 package calculator.service;
 
 import calculator.exception.InvalidInputException;
+import calculator.util.NumberValidator;
 
 import java.util.Arrays;
 
@@ -47,14 +48,7 @@ public class ParsingService {
     }
 
     private int parsePositiveNumber(String numberString) {
-        try {
-            int number = Integer.parseInt(numberString.trim());
-            if (number < 0) {
-                throw new InvalidInputException("음수는 허용되지 않습니다: " + number);
-            }
-            return number;
-        } catch (NumberFormatException e) {
-            throw new InvalidInputException("유효하지 않은 숫자 형식입니다: " + numberString);
-        }
+        NumberValidator.isValidNumber(numberString);
+        return Integer.parseInt(numberString);
     }
 }
