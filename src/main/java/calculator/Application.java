@@ -11,12 +11,13 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
         input = input.replace("\\n", "\n");
+
         int result = 0;
-        if(inputIsNotEmpty(input)) {
+        if (inputIsNotEmpty(input)) {
             List<String> delimiters = new ArrayList<>(List.of(",", ":"));
 
             boolean hasCustomDelimiter = false;
-            if(isContainsCustomDelimiter(input)) {
+            if (isContainsCustomDelimiter(input)) {
                 int delimiterIdx = input.indexOf("\n");
                 String delimiter = input.substring(2, delimiterIdx);
                 delimiters.add(delimiter);
@@ -24,8 +25,8 @@ public class Application {
             }
 
             String numbersWithDelimiter;
-            if(hasCustomDelimiter) {
-                 numbersWithDelimiter = input.substring(input.indexOf("\n") + 1);
+            if (hasCustomDelimiter) {
+                numbersWithDelimiter = input.substring(input.indexOf("\n") + 1);
             } else {
                 numbersWithDelimiter = input;
             }
@@ -36,7 +37,7 @@ public class Application {
                     int parsedNumber = Integer.parseInt(number);
                     validatePositiveNumber(parsedNumber);
                     result += parsedNumber;
-                } catch(NumberFormatException e) {
+                } catch (NumberFormatException e) {
                     throw new IllegalArgumentException("숫자 이외의 값을 입력할 수 없습니다.");
                 }
             }
@@ -45,7 +46,7 @@ public class Application {
     }
 
     private static void validatePositiveNumber(int parsedNumber) {
-        if(parsedNumber < 0) {
+        if (parsedNumber < 0) {
             throw new IllegalArgumentException("입력값은 양수만 가능합니다.");
         }
     }
@@ -61,4 +62,5 @@ public class Application {
     private static boolean inputIsNotEmpty(String input) {
         return input != null && !input.isEmpty();
     }
+
 }
