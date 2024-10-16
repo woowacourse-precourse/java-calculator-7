@@ -10,9 +10,10 @@ public final class DelimiterExtractor {
     private static final String DEFAULT_DELIMITERS = ",|:";
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
     private static final Pattern SINGLE_CHAR_DELIMITER_PATTERN = Pattern.compile("^//(.)\\\\n");
+    private static final int MIN_DELIMITER_LENGTH = 5;
 
     public static ExtractedInput extractDelimiters(String input) {
-        if (!input.startsWith(CUSTOM_DELIMITER_PREFIX) || input.length() < 5) {
+        if (!input.startsWith(CUSTOM_DELIMITER_PREFIX) || input.length() < MIN_DELIMITER_LENGTH) {
             return ExtractedInput.of(DEFAULT_DELIMITERS, input); // 기본 구분자 반환
         }
 
