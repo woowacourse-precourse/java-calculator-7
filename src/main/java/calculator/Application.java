@@ -68,6 +68,10 @@ public class Application {
                 throw new IllegalArgumentException();
             }
 
+            if (numberInt < 0) {
+                throw new IllegalArgumentException();
+            }
+
             result.add(numberInt);
         }
 
