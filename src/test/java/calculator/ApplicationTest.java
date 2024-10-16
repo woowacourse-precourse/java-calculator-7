@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import calculator.View.InputView;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,19 @@ class ApplicationTest extends NsTest {
 
 
     @Test
-    void 문자열에서_숫자_추출하기_기본구분자_예외처리() {
+    void 계산을_원하는_문자열_입력받기() {
+        //given
+        String input = "";
+        InputView inputView = new InputView();
+
+        //when & then
+        assertThatThrownBy(() -> inputView.hasValue(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("값을 입력해야 합니다.");
+    }
+
+    @Test
+    void 문자열에서_숫자_추출하기_기본구분자_잘못된입력() {
         //given
         String input = "6;4,0";
         Extractor extractor = new Extractor(input);
@@ -40,7 +53,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 문자열에서_숫자_추출하기_커스텀구분자_예외처리() {
+    void 문자열에서_숫자_추출하기_커스텀구분자_잘못된입력() {
         //given
         String input = "//\n34";
         Extractor extractor = new Extractor(input);
