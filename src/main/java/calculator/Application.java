@@ -1,9 +1,6 @@
 package calculator;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class Application {
@@ -16,9 +13,10 @@ public class Application {
     );
 
     public static void main(String[] args) {
-        for (String input : args) {
-            System.out.println("결과 : " + sum(input));
-        }
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+
+        System.out.println("결과 : " + sum(input));
     }
 
     /**
