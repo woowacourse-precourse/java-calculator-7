@@ -1,8 +1,10 @@
 package calculator.view;
 
+import camp.nextstep.edu.missionutils.Console;
+
 public class InputView {
     public String readInput() {
-        //TODO: 사용자 입력 받기 구현
-        return null;
+        System.out.println("문자열을 입력해주세요:");
+        return Console.readLine();
     }
 }
