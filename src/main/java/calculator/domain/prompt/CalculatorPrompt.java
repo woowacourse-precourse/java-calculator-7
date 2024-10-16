@@ -55,31 +55,4 @@ public class CalculatorPrompt extends Prompt {
         return separatedData;
     }
 
-    public List<Integer> extractInteger() {
-        List<String> separatedData = this.getInput();
-
-        return separatedData.stream()
-                .map(data -> {
-                    validateNumber(data);
-                    return Integer.valueOf(data);
-                })
-                .toList();
-    }
-
-    private void validateNumber(String data) {
-        if (data == null || data.isEmpty()) {
-            throw new IllegalArgumentException();
-        }
-
-        for (char word: data.toCharArray()) {
-            if (this.isNotDigit(word)) {
-                throw new IllegalArgumentException();
-            }
-        }
-    }
-
-    private boolean isNotDigit(char word) {
-        return !Character.isDigit(word);
-    }
-
 }

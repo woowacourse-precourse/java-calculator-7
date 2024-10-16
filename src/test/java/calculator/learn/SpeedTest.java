@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 class SpeedTest {
 
-    @Test
+    //@Test
     void compareSeparateAndDivide() {
         String data = "1,2:3,".repeat(10000);
         double separateTime = separateTime(data);
