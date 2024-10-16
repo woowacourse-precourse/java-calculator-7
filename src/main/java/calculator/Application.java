@@ -17,6 +17,8 @@ public class Application {
 
         List<Integer> numbers = getNumber(numberString, separators);
         int result = sumNumbers(numbers);
+
+        outputResult(result);
     }
 
     // 문자열 입력
@@ -82,4 +84,7 @@ public class Application {
     }
 
     // 결과 반환
+    public static void outputResult(int result) {
+        System.out.println("결과 : " + result);
+    }
 }
