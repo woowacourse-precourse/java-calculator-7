@@ -18,4 +18,11 @@ public class Calculator {
     private String extractNumbersPart(String input) {
         return input.substring(input.indexOf("\\n") + 2);
     }
+
+    private String[] splitNumbers(String input, String separator) {
+        for (char delimiter : separator.toCharArray()) {
+            input = input.replace(String.valueOf(delimiter), " ");
+        }
+        return input.split("\\s+");
+    }
 }
