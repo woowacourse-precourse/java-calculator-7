@@ -40,6 +40,12 @@ public class Validator {
         return input;
     }
 
+    /**
+     * number에 대해 해당 숫자가 양수인지 검증.
+     *
+     * @param number 구분자를 통해 분리된 개별 문자
+     * @return
+     */
     public void validatePositiveNumber(String number) {
         try {
             int value = Integer.parseInt(number);

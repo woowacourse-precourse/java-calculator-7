@@ -27,6 +27,9 @@ public class Calculator {
         return validator.extractNumbersPart(input);
     }
 
+    /**
+     * 입력된 문자열을 정의된 구분자들(커스텀 구분자 포함)을 통해 분리하는 기능.
+     */
     public String[] setSplitInput(String input) {
         input = setDelimitersAndFilteringInputText(input);
         // 구분자를 정규 표현식으로 변환 (특수문자 이스케이프 처리)
