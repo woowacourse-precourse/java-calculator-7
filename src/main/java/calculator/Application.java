@@ -11,8 +11,8 @@ public class Application {
             String inputString = InputView.printInputAddString();
             List<String> digits = Division.split(inputString);
             result(digits);
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
         }
 
     }

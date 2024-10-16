@@ -24,11 +24,18 @@ public class Division {
     }
 
     private static void validateFormat(String input) {
-        char[] charArray = input.toCharArray();
-        boolean isValidStart = input.isBlank() || Character.isDigit(charArray[0]) || input.startsWith(START_DELIMITER);
+        boolean isValidStart = input.isBlank() || isDigit(input) || input.startsWith(START_DELIMITER);
         if (!isValidStart) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_FORMAT);
         }
+    }
+
+    private static boolean isDigit(String input) {
+        char[] charArray = input.toCharArray();
+        if(charArray[0] == '-' && charArray.length > 1) {
+            return Character.isDigit(charArray[1]);
+        }
+        return Character.isDigit(charArray[0]);
     }
 
     private static void validateCustomDelimiter(String input) {
