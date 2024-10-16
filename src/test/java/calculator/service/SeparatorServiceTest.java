@@ -2,15 +2,12 @@ package calculator.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import calculator.entity.IndexQueue;
 import calculator.entity.Num;
+import calculator.entity.NumList;
 import calculator.entity.Separator;
+import calculator.entity.SeparatorSet;
 import calculator.service.impl.SeparatorServiceImpl;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -24,13 +21,13 @@ class SeparatorServiceTest {
         // given
         String input = "//5\\n//6\\n";
 
-        Set<Separator> expected = new HashSet<>();
-        expected.add(new Separator("5"));
-        expected.add(new Separator("6"));
+        SeparatorSet expected = new SeparatorSet();
+        expected.addSeparator(new Separator("5"));
+        expected.addSeparator(new Separator("6"));
 
-        Set<Separator> customSeparators = separatorService.getCustomSeparators(input);
+        SeparatorSet result = separatorService.getCustomSeparators(input);
 
-        assertThat(customSeparators).containsAll(expected);
+        assertThat(result).isEqualTo(expected);
 
     }
 
@@ -40,15 +37,15 @@ class SeparatorServiceTest {
         // given
         String input = "//5\\n//6\\n";
 
-        Queue<Integer> expected = new PriorityQueue<>();
+        IndexQueue expected = new IndexQueue();
         expected.offer(2);
         expected.offer(7);
 
         // when
-        Queue<Integer> result = separatorService.getAllCustomSepIdx(input);
+        IndexQueue result = separatorService.getAllCustomSepIdx(input);
 
         // then
-        assertThat(result).containsAll(expected);
+        assertThat(result).isEqualTo(expected);
     }
 
     @Test
@@ -56,7 +53,7 @@ class SeparatorServiceTest {
     void testRefineString1() {
         // given
         String input = "//u\\n//x\\n1,2,3,4,5";
-        Queue<Integer> idxQueue = new PriorityQueue<>();
+        IndexQueue idxQueue = new IndexQueue();
         idxQueue.offer(0);
         idxQueue.offer(5);
 
@@ -74,17 +71,18 @@ class SeparatorServiceTest {
     void testSeparateNum1() {
         //given
         String input = "1,2,3,4,5";
-        List<Num> expect = new ArrayList<>();
-        expect.add(new Num(1));
-        expect.add(new Num(2));
-        expect.add(new Num(3));
-        expect.add(new Num(4));
-        expect.add(new Num(5));
-        Set<Separator> separatorSet = new HashSet<>();
+        NumList expect = new NumList();
+        expect.addNum(new Num(1));
+        expect.addNum(new Num(2));
+        expect.addNum(new Num(3));
+        expect.addNum(new Num(4));
+        expect.addNum(new Num(5));
+
+        SeparatorSet separatorSet = new SeparatorSet();
 
         // when
-        List<Num> result = separatorService.separateNum(input,
-            Separator.getAllSeparators(separatorSet));
+        String regex = separatorSet.toRegexString();
+        NumList result = separatorService.separateNum(input, regex);
 
         assertThat(result).isEqualTo(expect);
     }
@@ -94,20 +92,22 @@ class SeparatorServiceTest {
     void testSeparateNum2() {
         //given
         String input = "1?2,3.4\\5";
-        List<Num> expect = new ArrayList<>();
-        expect.add(new Num(1));
-        expect.add(new Num(2));
-        expect.add(new Num(3));
-        expect.add(new Num(4));
-        expect.add(new Num(5));
-        Set<Separator> separatorSet = new HashSet<>();
-        separatorSet.add(new Separator("?"));
-        separatorSet.add(new Separator("."));
-        separatorSet.add(new Separator("\\"));
+        NumList expect = new NumList();
+        expect.addNum(new Num(1));
+        expect.addNum(new Num(2));
+        expect.addNum(new Num(3));
+        expect.addNum(new Num(4));
+        expect.addNum(new Num(5));
+
+        SeparatorSet separatorSet = new SeparatorSet();
+        separatorSet.addSeparator(new Separator("?"));
+        separatorSet.addSeparator(new Separator("."));
+        separatorSet.addSeparator(new Separator("\\"));
 
         // when
-        List<Num> result = separatorService.separateNum(input,
-            Separator.getAllSeparators(separatorSet));
+
+        String regex = separatorSet.toRegexString();
+        NumList result = separatorService.separateNum(input, regex);
 
         assertThat(result).isEqualTo(expect);
     }

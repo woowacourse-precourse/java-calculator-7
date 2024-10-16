@@ -7,6 +7,12 @@ public class Num {
 
     private final int number;
 
+    /**
+     * String 생성자
+     *
+     * @param numString 구분자에 대해 처리된 String 변수
+     */
+
     public Num(String numString) {
         if (numString.isEmpty()) {
             this.number = 0;
@@ -17,7 +23,8 @@ public class Num {
             throw new IllegalArgumentException("must be a number");
         }
 
-        this.number = Integer.parseInt(numString);
+        int number = Integer.parseInt(numString);
+        this.number = number;
     }
 
     public Num(int number) {
@@ -28,12 +35,13 @@ public class Num {
     }
 
 
-    public static int total(List<Num> numList) {
+    protected static int total(List<Num> numList) {
         int sum = 0;
 
         for (Num num : numList) {
             sum += num.number;
         }
+
         return sum;
     }
 

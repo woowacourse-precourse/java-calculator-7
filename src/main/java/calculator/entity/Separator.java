@@ -18,16 +18,17 @@ public class Separator {
         if (separator.length() > 2) {
             throw new IllegalArgumentException("Separator should be a single character");
         }
-        this.sep = separator;
+        String quote = Pattern.quote(separator);
+        this.sep = quote;
     }
 
-    public static String getAllSeparators(Set<Separator> separatorSet) {
+    protected static String getAllSeparatorsRegex(Set<Separator> separatorSet) {
         StringBuilder sb = new StringBuilder("[");
         sb.append(COLON);
         sb.append(COMMA);
         for (Separator separator : separatorSet) {
-            String regex = Pattern.quote(separator.sep);
-            sb.append(regex);
+            String v = separator.sep;
+            sb.append(v);
         }
         sb.append("]");
         return sb.toString();

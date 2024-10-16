@@ -1,18 +1,16 @@
 package calculator.service;
 
-import calculator.entity.Num;
-import calculator.entity.Separator;
-import java.util.List;
-import java.util.Queue;
-import java.util.Set;
+import calculator.entity.IndexQueue;
+import calculator.entity.NumList;
+import calculator.entity.SeparatorSet;
 
 public interface SeparatorService {
 
-    List<Num> separateNum(String refinedInput, String separatorString);
+    NumList separateNum(String refinedInput, String regex);
 
-    Set<Separator> getCustomSeparators(String input);
+    SeparatorSet getCustomSeparators(String input);
 
-    String refineString(String input, Queue<Integer> idxQueue);
+    String refineString(String input, IndexQueue idxQueue);
 
-    Queue<Integer> getAllCustomSepIdx(String input);
+    IndexQueue getAllCustomSepIdx(String input);
 }
