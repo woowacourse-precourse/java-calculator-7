@@ -1,19 +1,21 @@
 package calculator;
 
+import calculator.io.input.ConsoleInputHandler;
+import calculator.io.input.InputHandler;
 import calculator.io.output.ConsoleOutputHandler;
 import calculator.io.output.OutputHandler;
-import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Application {
 
+    private static final InputHandler inputHandler = new ConsoleInputHandler();
     private static final OutputHandler outputHandler = new ConsoleOutputHandler();
 
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         outputHandler.showUserInputMessage();
-        String input = Console.readLine();
+        String input = inputHandler.getUserInput();
         input = input.replace("\\n", "\n");
 
         int result = 0;
