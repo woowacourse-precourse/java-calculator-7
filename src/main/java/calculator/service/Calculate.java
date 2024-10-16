@@ -34,4 +34,8 @@ public class Calculate {
     public List<String> splitWithCOMMA(String userInput) {
         return List.of(userInput.split(COMMA));
     }
+
+    public boolean checkContainCOMMAAndCOLON(String userInput) {
+        return checkContainCOLON(userInput) && checkContainCOMMA(userInput);
+    }
 }
