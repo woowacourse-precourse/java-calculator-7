@@ -4,7 +4,6 @@ import java.util.regex.Pattern;
 
 public class Calculator {
     private static final String DEFAULT_DELIMITER = ",|:";
-    private static final String NEGATIVE_OR_ZERO_ERROR = "양수가 아닌 수가 포함되어 있습니다.";
     private static final String ZERO_STRING = "0";
     private static final String NEGATIVE_SIGN = "-";
 
@@ -23,7 +22,7 @@ public class Calculator {
         String[] split = inputString.split(delimiter);
         for (String number : split) {
             if(number.contains(NEGATIVE_SIGN) || number.equals(ZERO_STRING)) {
-                throw new IllegalArgumentException(NEGATIVE_OR_ZERO_ERROR);
+                throw new IllegalArgumentException();
             }
         }
     }
