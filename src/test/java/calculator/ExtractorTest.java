@@ -34,6 +34,19 @@ class ExtractorTest {
     }
 
     @Test
+    public void 문자열에서_커스텀_구분자를_추출한다2() {
+        //given
+        Extractor ex = new Extractor();
+        String input = "1,2;3";
+
+        //when
+        String result = ex.extractDelimiter(input);
+
+        //then
+        assertThat(result).isEqualTo("");
+    }
+
+    @Test
     public void 문자열을_Regex로_변경한다() {
         //given
 

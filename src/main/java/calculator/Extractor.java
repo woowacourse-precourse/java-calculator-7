@@ -20,6 +20,9 @@ public class Extractor {
         int beginIndex = delimitedNumbers.indexOf(header);
         int endIndex = delimitedNumbers.indexOf(footer);
 
+        if (beginIndex == -1 || endIndex == -1) {
+            return "";
+        }
         return delimitedNumbers.substring(beginIndex + header.length(), endIndex);
     }
 }
