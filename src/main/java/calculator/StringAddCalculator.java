@@ -13,12 +13,24 @@ public class StringAddCalculator {
     // ex) 커스텀 구분자를 ;로 정했을 때, //;\n1;2;3
     private static final String CUSTOM_REGEX = "//(.)\\\\n(.*)";
 
-    public static int calculate(String input) {
+    public static int add(String input) {
         if (input == null || input.isBlank()) {
             return 0;
         }
 
         return sum(parseCustomDelimiter(input));
+    }
+
+    public int add1(String input) {
+        if (input == null || input.isBlank()) {
+            return 0;
+        }
+
+        // 1. input 에서 커스텀 구분자와 계산식을 추출한다
+        // 2. 계산식에서 숫자들을 추출한다
+        // 3. 추출된 숫자들 중 음수가 있는지 검증한다
+        // 4. 숫자들을 더한 값들을 반환한다
+        return 0;
     }
 
     private static int sum(String input) {
