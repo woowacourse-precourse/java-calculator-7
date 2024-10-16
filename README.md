@@ -9,6 +9,8 @@
 ## 패키지 구조
 
 - domain
+    - Calculator
+    - Number
 
 - view
     - InputView
@@ -22,7 +24,7 @@
 
 - [x] 구분자와 양수로 구성된 문자열 입력 - InputView#readInput()
     - [x] 입력 받은 값이 숫자가 아닌 경우 예외처리 - Number#validateNumber()
-    - [ ] 입력 받은 숫자가 양수가 아닌 경우 예외처리
+    - [x] 입력 받은 숫자가 양수가 아닌 경우 예외처리 - Number#checkPositive()
 
 ### 출력
 
