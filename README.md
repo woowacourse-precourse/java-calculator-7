@@ -65,27 +65,30 @@
 
 |Method|Parameter| Return Type | Exception | Implementation |
 |------|---------|-------------|-----------|----------------|
-|sum();|x        | Integer     | -         | <span style="color:GREEN">DONE ✅</span> |
+|sum();|x        | Integer     | -         | DONE ✅         |
 
 <br>
 
 ### SeparateManager
 
-| Method                       | Parameter | Return Type  | Exception                  | Implementation |
-|------------------------------|-----------|--------------|----------------------------|----------------|
-| getAllDelimiters();          | x         | String       | -                          | TODO           |
-| extractCustomDelimiter(x);   | String    | void         | -                          | TODO           |
-| split(x);                    | String    | List<String> | -                          | TODO           |
-| validateRegex(x);            | x         | void         | NotAllowedFormatException  | TODO           |
+| Method                           | Parameter | Return Type   | Exception                     | Implementation  |
+|----------------------------------|-----------|---------------|-------------------------------|-----------------|
+| getAllDelimiters();              | x         | String        | -                             | TODO            |
+| extractCustomDelimiter(x);       | String    | void          | -                             | DONE ✅          |
+| parseCustomDelimiter(x);         | String    | String        | -                             | DONE ✅          |
+| split(x);                        | String    | List<Integer> | -                             | TODO            |
+| createMatcher(x,x)               | String    | Matcher       | -                             | DONE ✅          |
+| validateCustomDelimiterPosition; | String    | void          | NotAllowedPositionException   | DONE ✅          |
+| validateCustomDelimiterCount;    | String    | void          | MultiCustomDelimiterException | DONE ✅          |
 
 <br>
 
 ### Numbers
 
-| Method                  | Parameter     | Return Type | Exception                 | Implementation                          |
-|-------------------------|---------------|-------------|---------------------------|-----------------------------------------|
-| sum();                  | x             | Integer     | -                         | <span style="color:GREEN">DONE ✅</span> |
-| validateMinusNumber(x); | List<Integer> | void        | NotAllowedFormatException | <span style="color:GREEN">DONE ✅</span> |
+| Method                  | Parameter     | Return Type | Exception                 | Implementation |
+|-------------------------|---------------|-------------|---------------------------|----------------|
+| sum();                  | x             | Integer     | -                         | DONE ✅         |
+| validateMinusNumber(x); | List<Integer> | void        | NotAllowedFormatException | DONE ✅         |
 
 <br>
 
