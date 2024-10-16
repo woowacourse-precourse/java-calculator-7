@@ -1,9 +1,15 @@
 package calculator.service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 public class CalculatorService {
+
+    private static final String CUSTOM_SEPARATOR_REGEX = "//(.*?)\\\\n";
+    private static final String EMPTY = "";
+    private static final String POSITIVE_NUMBER_REGEX = "\\d+([.]\\d+)?";
 
     private final List<String> separators;
     private String input;
@@ -19,15 +25,31 @@ public class CalculatorService {
         }
         addCustomSeparatorIfPresent();
         String[] separatedValues = split();
+        Double[] values = convertToNumbers(separatedValues);
     }
 
     private void addCustomSeparatorIfPresent() {
         Optional<String> customSeparator = new CustomSeparatorManager(input).extract();
         customSeparator.ifPresent(separators::add);
-        this.input = input.replaceAll("//.*\\\\n", "");
+        this.input = input.replaceAll(CUSTOM_SEPARATOR_REGEX, EMPTY);
     }
 
     private String[] split() {
         return new SeparatorSplitter(separators, input).split();
+    }
+
+    private Double[] convertToNumbers(String[] separatedValues) {
+        List<Double> numbers = new ArrayList<>();
+        for (String value : separatedValues) {
+            validatePositiveNumber(value);
+            numbers.add(Double.parseDouble(value));
+        }
+        return numbers.toArray(new Double[0]);
+    }
+
+    private void validatePositiveNumber(String value) {
+        if (value.isEmpty() || !value.matches(POSITIVE_NUMBER_REGEX)) {
+            throw new IllegalArgumentException("양수만 허용됩니다: " + value);
+        }
     }
 }
