@@ -3,9 +3,9 @@ package calculator.view;
 import calculator.model.Calculator;
 
 public class OutputView {
-    Calculator calculator;
+    static Calculator calculator;
 
-    public void printResult() {
+    public static void printResult() {
         System.out.println("결과 : " + calculator.getResult());
     }
 }
