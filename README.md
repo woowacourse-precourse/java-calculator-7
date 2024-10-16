@@ -63,9 +63,10 @@
 
 ### CalculateSystem
 
-|Method|Parameter| Return Type | Exception | Implementation |
-|------|---------|-------------|-----------|----------------|
-|sum();|x        | Integer     | -         | DONE ✅         |
+| Method           | Parameter | Return Type | Exception                | Implementation |
+|------------------|-----------|-------------|--------------------------|----------------|
+| sum;             | x         | Integer     | -                        | DONE ✅         |
+| validateNotNull; | Numbers   | void        | ShouldNotBeNullException | DONE ✅         |
 
 <br>
 
@@ -73,33 +74,43 @@
 
 | Method                           | Parameter | Return Type   | Exception                     | Implementation  |
 |----------------------------------|-----------|---------------|-------------------------------|-----------------|
-| getAllDelimiters();              | x         | String        | -                             | TODO            |
-| extractCustomDelimiter(x);       | String    | void          | -                             | DONE ✅          |
-| parseCustomDelimiter(x);         | String    | String        | -                             | DONE ✅          |
-| split(x);                        | String    | List<Integer> | -                             | TODO            |
-| createMatcher(x,x)               | String    | Matcher       | -                             | DONE ✅          |
+| getAllDelimiters ;               | x         | String        | -                             | DONE ✅            |
+| extractCustomDelimiter;          | String    | void          | -                             | DONE ✅          |
+| parseCustomDelimiter;            | String    | String        | -                             | DONE ✅          |
+| split;                           | String    | List<Integer> | -                             | DONE ✅            |
+| createMatcher;                   | String    | Matcher       | -                             | DONE ✅          |
+| mergeDelimiters;                 | x         | List<Integer> | -                             | DONE ✅          |
+| isAddable;                       | String    | boolean       | -                             | DONE ✅          |
 | validateCustomDelimiterPosition; | String    | void          | NotAllowedPositionException   | DONE ✅          |
 | validateCustomDelimiterCount;    | String    | void          | MultiCustomDelimiterException | DONE ✅          |
+| tryParseToInt ;                  | String    | Integer       | ParseToIntegerFailedException | DONE ✅          |
 
 <br>
 
 ### Numbers
 
-| Method                  | Parameter     | Return Type | Exception                 | Implementation |
-|-------------------------|---------------|-------------|---------------------------|----------------|
-| sum();                  | x             | Integer     | -                         | DONE ✅         |
-| validateMinusNumber(x); | List<Integer> | void        | NotAllowedFormatException | DONE ✅         |
+| Method               | Parameter     | Return Type | Exception                 | Implementation |
+|----------------------|---------------|-------------|---------------------------|----------------|
+| sum;                 | x             | Integer     | -                         | DONE ✅         |
+| validateMinusNumber; | List<Integer> | void        | -                         | DONE ✅         |
+| checkIsMinus;        | Integer       | void        | NotAllowedFormatException | DONE ✅         |
 
 <br>
 
 ### InputManager
 
-| Method                       | Parameter     | Return Type   | Exception                     | Implementation |
-|------------------------------|---------------|---------------|-------------------------------|----------------|
-| enterString                  | x             | List<Integer> | -                             | TODO           |
-| validateCustomDelimiterCount | x             | void          | ExceedDelimiterCountException | TODO           |
-| validateIntParsing           | x             | void          | CannotParsingException        | TODO           |
+| Method             | Parameter     | Return Type   | Exception                     | Implementation |
+|--------------------|---------------|---------------|-------------------------------|----------------|
+| enterInput;        | x             | List<Integer> | -                             | DONE ✅           |
+| getInstance;       | x             | void          | ExceedDelimiterCountException | DONE ✅           |
 
+<br>
+
+### OutputManager
+
+| Method                 | Parameter   | Return Type | Exception                     | Implementation |
+|------------------------|-------------|-------------|-------------------------------|----------------|
+| offerCalculatedResult; | ResultView  | void        | -                             | DONE ✅        |
 
 
 
