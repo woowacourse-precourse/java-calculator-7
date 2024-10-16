@@ -10,12 +10,12 @@ public class Parser {
     public List<Number> parse(final String userInput) {
         String input = userInput;
         String regex = "//(.*?)\\\\n";
+        String delimiter = getDelimiter(input, regex);
 
         if (isCustomDelimiter(input)) {
             input = input.replaceAll(regex, "");
         }
 
-        String delimiter = getDelimiter(input, regex);
         String[] tokens = splitInput(input, delimiter);
 
         return getNumbers(tokens);
