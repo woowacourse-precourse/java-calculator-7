@@ -3,6 +3,7 @@ package calculator.validation;
 import calculator.view.ErrorView;
 
 public class Validation {
+    private static final int DELIMITER_LENGTH = 1;
 
     public static void validateStringArrToIntegerArr(String[] stringArr){
         for(String str : stringArr){
@@ -16,5 +17,11 @@ public class Validation {
         }
     }
 
+    public static void validateDelimiterLength(String delimiter){
+        if(delimiter.length() != DELIMITER_LENGTH){
+            ErrorView.delimiterLengthError();
+            throw new IllegalArgumentException();
+        }
+    }
 
 }

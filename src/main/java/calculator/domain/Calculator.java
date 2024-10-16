@@ -13,6 +13,8 @@ public class Calculator {
     private static final String CUSTOM_DELIMITER_START = "//";
     private static final String CUSTOM_DELIMITER_END = "\\n";
 
+    private static final int DELIMITER_START_INDEX = 2;
+
     private int[] numbers;
     public Calculator(String inputString) {
         String[] splitStringArr = splitStringToArray(inputString);
@@ -44,7 +46,9 @@ public class Calculator {
     private String getCustomDelimiterString(String input){
         if(hasCustomDelimiter(input)){
             int customDelimiterEndIndex = findCustomDelimiterEndIndex(input);
-            return input.substring(2, customDelimiterEndIndex);
+            String delimiter = input.substring(DELIMITER_START_INDEX, customDelimiterEndIndex);
+            Validation.validateDelimiterLength(delimiter);
+            return delimiter;
         }
         return "";
     }
@@ -54,7 +58,10 @@ public class Calculator {
     }
 
     private String deleteCustomDelimiterString(String input){
-        return input.substring(input.indexOf(CUSTOM_DELIMITER_END)+2);
+        return input.substring(getFirstIndexAfterDelimiter(input));
+    }
+    private int getFirstIndexAfterDelimiter(String input){
+        return input.indexOf(CUSTOM_DELIMITER_END)+2;
     }
 
     private int findCustomDelimiterEndIndex(String input){
