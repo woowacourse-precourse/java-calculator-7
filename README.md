@@ -1,3 +1,25 @@
+# ✔️ TODO List 
+
+- [ ] ConsoleInput 클래스 구현
+  - [ ] Input test 작성
+- [ ] Preprocessor 클래스 구현
+  - 띄워쓰기도 구분자로 사용가능 해야함 
+  - [ ] 구분자와 숫자+구분자 문자열을 담고 있는 DTO 구현
+    - 기본 구분자를 들고 있어야 함
+  - [ ] 커스텀 구분자를 확인하는 기능 구현
+  - [ ] Preprocessor test 작성
+- [ ] Parser 클래스 구현
+  - [ ] 구분자와 숫자+구분자 문자열을 담고 있는 DTO를 입력받아서 숫자 리스트로 변환하는 기능 구현
+  - [ ] Parser test 작성
+- [ ] Calculator 클래스 구현
+  - [ ] 숫자 리스트를 입력받아서 더하는 기능 구현
+  - [ ] Calculator test 작성
+- [ ] MultipleUseCase 구현체 (MultipleService) 클래스 구현
+  - [ ] Preprocessor, Parser, Calculator를 사용해서 결과를 반환하는 기능 구현
+  - [ ] MultipleService test 작성 
+- [ ] ConsoleOutput 클래스 구현
+- [ ] 전체적인 Output까지의 동작 과정을 확인하기 위한 통합 테스트 작성
+
 # ➕ 문자열 덧셈 계산기
 
 ## 📚 과제 진행 요구 사항
@@ -56,7 +78,7 @@
   - 사용자가 입력하는 값은 `camp.nextstep.edu.missionutils.Console` 의 `readLine()` 을 활용한다.
 
   
-# 요구사항 분석, 설계 
+# 🤔 요구사항 분석, 설계 
 
 ## 입력
 
@@ -88,4 +110,3 @@
     - Parser
     - Calculator
 ```
-
