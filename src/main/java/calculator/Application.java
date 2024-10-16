@@ -4,6 +4,11 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
 
 public class Application {
+    private static final String DELIMITER_COMMA = ",";
+    private static final String DELIMITER_DOT = ".";
+    private static final String CUSTOM_DELIMITER_START = "//";
+    private static final String CUSTOM_DELIMITER_END = "\\n";
+
     // 구분자를 저장하기 위한 ArrayList
     static ArrayList<String> delimiters = new ArrayList<>();
 
@@ -13,10 +18,10 @@ public class Application {
         String input = Console.readLine();
 
         // 기본 구분자를 ArrayList 에 추가
-        delimiters.add(",");
-        delimiters.add(":");
+        delimiters.add(DELIMITER_COMMA);
+        delimiters.add(DELIMITER_DOT);
 
-        if (input.startsWith("//")) { // 커스텀 구분자가 지정되어 있는지 확인 후, 지정되어 있다면 커스텀 구분자를 ArrayList 에 추가
+        if (input.startsWith(CUSTOM_DELIMITER_START)) { // 커스텀 구분자가 지정되어 있는지 확인 후, 지정되어 있다면 커스텀 구분자를 ArrayList 에 추가
             String newDelimiter = getCustomDelimiter(input);
             delimiters.add(newDelimiter);
         }
@@ -28,7 +33,7 @@ public class Application {
     }
 
     static String getCustomDelimiter(String input) { // 문자열에서 커스텀 구분자를 추출하고 반환하는 함수
-        int endIndex = input.indexOf("\\n");
+        int endIndex = input.indexOf(CUSTOM_DELIMITER_END);
         if (endIndex == -1) { // 찾지 못했을 경우 입력 값 오류이므로 IllegalArgumentException
             throw new IllegalArgumentException();
         }
@@ -57,8 +62,8 @@ public class Application {
 
     static ArrayList<Integer> convertStringToIntArray(String input) {
         int index = 0;
-        if (input.startsWith("//")) { // 구분자가 있다면 인덱스를 구분자 다음으로 조정
-            index = input.indexOf("\\n") + 2;
+        if (input.startsWith(CUSTOM_DELIMITER_START)) { // 구분자가 있다면 인덱스를 구분자 다음으로 조정
+            index = input.indexOf(CUSTOM_DELIMITER_END) + 2;
         }
 
         ArrayList<Integer> numbers = new ArrayList<>(); // 숫자 배열을 저장하는 ArrayList
