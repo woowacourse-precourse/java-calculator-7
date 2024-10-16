@@ -39,6 +39,18 @@ public class StringAddCalculator {
         String[] numbers = numbersPart.split(Pattern.quote(customDelimiter)); // 커스텀 구분자로 숫자를 분리
         return sum(numbers);
     }
+    // 문자열 배열의 숫자들을 합산하는 메소드
+    private static int sum(String[] numbers) {
+        int total = 0;
+        for (String number : numbers) {
+            int num = toInt(number);
+            if (num < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + num);
+            }
+            total += num;
+        }
+        return total;
+    }
 
 }
 
