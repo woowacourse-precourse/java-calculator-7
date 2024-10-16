@@ -1,4 +1,4 @@
-package calculator;
+package calculator.domain;
 
 public class Operand {
     private final static String NOT_STRING_MESSAGE = "숫자가 아닌 문자열이 입력되었습니다.";

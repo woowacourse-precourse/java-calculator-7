@@ -1,4 +1,4 @@
-package calculator;
+package calculator.domain;
 
 public class Calculator {
     private static final String defaultSeparator = "[,;]";
@@ -6,6 +6,7 @@ public class Calculator {
     private Operands operands;
 
     public Calculator(String input) {
+        System.out.println("입력된 문자열 : " + input);
         String[] splitInput = input.split(defaultSeparator);
 
         this.operands = new Operands(splitInput);
