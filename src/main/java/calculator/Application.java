@@ -26,5 +26,8 @@ public class Application {
             }
             sum += Integer.parseInt(i);
         }
+
+        // 결과 출력하기
+        System.out.printf("결과 : %d", sum);
     }
 }
