@@ -9,7 +9,6 @@ public class DelimiterService {
     private List<Delimiter> delimiters = new ArrayList<>();
 
     public void addDelimiter(String delimiter) {
-        Delimiter newDelimiter = new Delimiter(delimiter);
-        delimiters.add(newDelimiter.validate());
+        delimiters.add(new Delimiter(delimiter));
     }
 }
