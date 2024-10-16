@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 public class DelimiterExtractor {
     private static final String DEFAULT_DELIMITERS = ",|:";
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
-    private static final Pattern SINGLE_CHAR_DELIMITER_PATTERN = Pattern.compile("^//(.)\n");
+    private static final Pattern SINGLE_CHAR_DELIMITER_PATTERN = Pattern.compile("^//(.)\\\\n");
 
     public static ExtractedInput extractDelimiters(String input) {
         if (!input.startsWith(CUSTOM_DELIMITER_PREFIX) || input.length() < 5) {
