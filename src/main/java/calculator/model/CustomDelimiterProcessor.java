@@ -6,6 +6,10 @@ public class CustomDelimiterProcessor {
         return firstChar == '/';
     }
 
+    public boolean checkCustomDelimiterFormatLength(String inputString) {
+        return inputString.length() >= 5;
+    }
+
     public boolean isCustomDelimiterFirstFormatCorrect(String inputString) {
         String firstFormat = inputString.substring(0, 1);
         return firstFormat.equals("//");
