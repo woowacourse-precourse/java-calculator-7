@@ -16,15 +16,17 @@ public class Application {
         delimiters.add(",");
         delimiters.add(":");
 
-        // 커스텀 구분자가 지정되어 있는지 확인 후, 지정되어 있다면 커스텀 구분자를 ArrayList 에 추가
-        if (hasCustomDelimiter(input)) {
-            delimiters.add(getCustomDelimiter(input));
+        try {
+            if (hasCustomDelimiter(input)) { // 커스텀 구분자가 지정되어 있는지 확인 후, 지정되어 있다면 커스텀 구분자를 ArrayList 에 추가
+                delimiters.add(getCustomDelimiter(input));
+            }
+
+            // 문자열에서 숫자 배열을 추출 후, 총합 계산
+            int sum = sumArray(convertStringToIntArray(input));
+            System.out.println("결과 : " + sum);
+        } catch (IllegalArgumentException e) {
+            System.out.println("사용자가 잘못된 값을 입력했습니다."); // IllegalArgumentException 후 종료
         }
-
-        // 문자열에서 숫자 배열을 추출 후, 총합 계산
-        int sum = sumArray(convertStringToIntArray(input));
-        System.out.println("결과 : " + sum);
-
     }
 
     static boolean hasCustomDelimiter(String input) { // 커스텀 구분자가 지정되어 있는지 확인하는 함수
@@ -33,7 +35,20 @@ public class Application {
 
     static String getCustomDelimiter(String input) { // 문자열에서 커스텀 구분자를 추출하고 반환하는 함수
         int end_index = input.indexOf("\\n");
-        return input.substring(2, end_index);
+        if (end_index == -1) { // 찾지 못했을 경우 입력 값 오류이므로 IllegalArgumentException
+            throw new IllegalArgumentException();
+        }
+
+        String delimiter = input.substring(2, end_index);
+        if (delimiter.length() != 1) { // 구분자의 길이가 1이 아닌 경우 입력 값 오류이므로 IllegalArgumentException. 구분자의 길이가 0인 경우도 포함
+            throw new IllegalArgumentException();
+        }
+
+        if (Character.isDigit(delimiter.charAt(0))) { // 구분자가 숫자인 경우 입력 값 오류이므로 IllegalArgumentException
+            throw new IllegalArgumentException();
+        }
+
+        return delimiter;
     }
 
     static boolean isValidDelimiter(char input) { // 주어진 문자가 올바른 구분자인지 확인하는 함수
