@@ -67,6 +67,14 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 커스텀_구분자와_빈_문자열() {
+        assertSimpleTest(() -> {
+            run("//e\\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
