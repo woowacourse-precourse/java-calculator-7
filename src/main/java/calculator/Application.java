@@ -13,11 +13,13 @@ public class Application {
 class Calculator {
 
     static Str str;
+    static char[] delimiterArr;
 
     Calculator() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         str = new Str(Console.readLine());
     }
+
 }
 
 class Str {
@@ -26,5 +28,11 @@ class Str {
 
     Str(String string) {
         this.string = string;
+    }
+
+    boolean checkingCustomDelimiter() {
+        return (string.substring(0, 2).equals("//") && string.charAt(3) == '\\'
+            && string.charAt(4) == 'n');
+
     }
 }
