@@ -1,13 +1,12 @@
 package calculator.Model;
 
 import calculator.Constants.ErrorMessages;
-import java.util.ArrayList;
-
+import java.util.List;
 
 public class Numbers {
-    private final ArrayList<Number> numbers;
+    private final List<Number> numbers;
 
-    public Numbers(ArrayList<Number> numbers) {
+    public Numbers(List<Number> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers;
     }
@@ -18,11 +17,11 @@ public class Numbers {
                 .sum();
     }
 
-    private void validateNumbers(ArrayList<Number> numbers) {
+    private void validateNumbers(List<Number> numbers) {
         isNumbersEmpty(numbers);
     }
 
-    private void isNumbersEmpty(ArrayList<Number> numbers) {
+    private void isNumbersEmpty(List<Number> numbers) {
         if (numbers.isEmpty()) {
             throw new IllegalArgumentException(ErrorMessages.INVALID_NUMBERS_EMPTY_MESSAGE.getErrorMessage());
         }
