@@ -8,8 +8,16 @@ import calculator.stringAdder.inputvalidator.InputValidator;
  */
 public class StringAdder {
   public static void run() {
-    while (true){
+    try{
       InputValidator inputValidator = new InputValidator();
+      while (true){
+        String input = inputValidator.validateInput();
+      }
+    } catch (IllegalArgumentException e){
+      System.err.println(e.getMessage());
+    } finally{
+      System.out.println("애플리케이션을 종료합니다.");
     }
+
   }
 }
