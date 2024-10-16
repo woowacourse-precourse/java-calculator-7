@@ -19,6 +19,9 @@ public class Application {
                 Stream.of(input.substring(5, input.length())
                                 .split(String.valueOf(input.charAt(2))))
                         .forEach(e -> {
+                            int v = Integer.valueOf(e);
+                            if(v <= 0)
+                                throw new IllegalArgumentException();
                             answer += Integer.valueOf(e);
                         });
             }catch (NumberFormatException e) {
@@ -28,6 +31,9 @@ public class Application {
             // defualt 정규식!!
             try {
                 Stream.of(input.split("[,:]")).forEach(e -> {
+                    int v = Integer.valueOf(e);
+                    if(v <= 0)
+                        throw new IllegalArgumentException();
                     answer += Integer.valueOf(e);
                 });
             }catch (NumberFormatException e){
@@ -35,6 +41,6 @@ public class Application {
             }
         }
         Console.close();
-        return "answer : "+String.valueOf(answer);
+        return "결과 : "+String.valueOf(answer);
     }
 }
