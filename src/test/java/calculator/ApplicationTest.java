@@ -4,6 +4,7 @@ import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import calculator.controller.ApplicationController;
 import calculator.controller.CalculateIntegerList;
 import calculator.controller.ParsingInputString;
 import calculator.model.InputString;
@@ -38,8 +39,8 @@ class ApplicationTest extends NsTest {
         inputString.setCustomChar('&');
 
         //when
-        ParsingInputString parsingInputString = new ParsingInputString(inputString);
-        List<Integer> integers = parsingInputString.parsingInput();
+        ParsingInputString parsingInputString = new ParsingInputString();
+        List<Integer> integers = parsingInputString.parsingInput(inputString);
 
         //then
         assertThat(integers).isEqualTo(List.of(12, 3, 4, 6));
@@ -54,8 +55,8 @@ class ApplicationTest extends NsTest {
         inputString.setNumberList(List.of(1, 2, 3, 4));
 
         //when
-        CalculateIntegerList calculateIntegerList = new CalculateIntegerList(inputString);
-        int calculateResult = calculateIntegerList.calculate();
+        CalculateIntegerList calculateIntegerList = new CalculateIntegerList();
+        int calculateResult = calculateIntegerList.calculate(inputString);
 
         //then
         assertThat(calculateResult).isEqualTo(10);
@@ -68,10 +69,10 @@ class ApplicationTest extends NsTest {
         InputString inputString = new InputString("//;\\n1,2,3:4;9");
 
         //when
-        ParsingInputString parsingInputString = new ParsingInputString(inputString);
+        ParsingInputString parsingInputString = new ParsingInputString();
 
         //then
-        parsingInputString.findCustomChar();
+        parsingInputString.findCustomChar(inputString);
         assertThat(inputString.getCustomChar()).isEqualTo(';');
     }
 
@@ -80,29 +81,18 @@ class ApplicationTest extends NsTest {
     void edgeCaseTest() {
         //given
         InputString inputString1 = new InputString("//\\n");
-        ParsingInputString parsingInputString1 = new ParsingInputString(inputString1);
-        CalculateIntegerList calculateIntegerList1 = new CalculateIntegerList(inputString1);
+        ApplicationController applicationController1 = new ApplicationController(inputString1);
 
         InputString inputString2 = new InputString("");
-        ParsingInputString parsingInputString2 = new ParsingInputString(inputString2);
-        CalculateIntegerList calculateIntegerList2 = new CalculateIntegerList(inputString2);
+        ApplicationController applicationController2 = new ApplicationController(inputString2);
 
         InputString inputString3 = new InputString("//;\\n");
-        ParsingInputString parsingInputString3 = new ParsingInputString(inputString3);
-        CalculateIntegerList calculateIntegerList3 = new CalculateIntegerList(inputString3);
+        ApplicationController applicationController3 = new ApplicationController(inputString3);
 
         //when
-        parsingInputString1.findCustomChar();
-        parsingInputString1.parsingInput();
-        int calculate1 = calculateIntegerList1.calculate();
-
-        parsingInputString2.findCustomChar();
-        parsingInputString2.parsingInput();
-        int calculate2 = calculateIntegerList2.calculate();
-
-        parsingInputString3.findCustomChar();
-        parsingInputString3.parsingInput();
-        int calculate3 = calculateIntegerList3.calculate();
+        int calculate1 = applicationController1.ApplicationStart();
+        int calculate2 = applicationController2.ApplicationStart();
+        int calculate3 = applicationController3.ApplicationStart();
 
         //then
         assertThat(calculate1).isEqualTo(0);

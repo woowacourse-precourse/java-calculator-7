@@ -7,17 +7,12 @@ import java.util.List;
 
 public class ParsingInputString {
 
-    private final InputString inputString;
     private static final int beginIndex = 5;
     private static final int beginCustomIndex = 0;
     private static final int endCustomIndex = 3;
     private static final int CustomCharIndex = 2;
 
-    public ParsingInputString(InputString inputString) {
-        this.inputString = inputString;
-    }
-
-    public void findCustomChar() {
+    public void findCustomChar(InputString inputString) {
         String input = inputString.getInput();
         if (input.length() < 4) {
             return;
@@ -32,7 +27,7 @@ public class ParsingInputString {
         }
     }
 
-    public List<Integer> parsingInput() {
+    public List<Integer> parsingInput(InputString inputString) {
         String splitString = "[,:" + inputString.getCustomChar() + "]";
         String input = inputString.getInput();
 
