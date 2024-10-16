@@ -2,6 +2,8 @@ package calculator.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Parser {
     private final String userInput;
@@ -20,6 +22,18 @@ public class Parser {
         }
 
         return numbers;
+    }
+
+    private String getDelimiter() {
+        Pattern pattern = Pattern.compile("//(.*?)\\\\n");
+        Matcher matcher = pattern.matcher(userInput);
+        String delimiter = "[,:]";
+
+        if (matcher.find()) {
+            delimiter = matcher.group(1);
+        }
+
+        return delimiter;
     }
 
     private boolean isCustomDelimiter() {
