@@ -3,8 +3,7 @@ package calculator.domain;
 import java.util.List;
 
 public class StringParser {
-
-    private static final int INITIAL_NUMBER = 0;
+    
     private static final int SECOND_NUMBER = 2;
     private static final String STANDARD_DELIMITER = "[,|:]";
     private static final String FIRST_CUSTOM_STRING = "//";
@@ -15,6 +14,7 @@ public class StringParser {
     private final List<String> numbers;
 
     public StringParser(String inputStrings) {
+        validateEmptyString(inputStrings);
         this.numbers = parseStrings(inputStrings);
     }
 
@@ -23,8 +23,7 @@ public class StringParser {
     }
 
     private List<String> parseStrings(String inputStrings) {
-        validateEmptyString(inputStrings);
-        if (!paresFirstString(inputStrings).equals(FIRST_CUSTOM_STRING)) {
+        if (!inputStrings.startsWith(FIRST_CUSTOM_STRING)) {
             return parseStandardStrings(inputStrings);
         }
         validateCustomStrings(inputStrings);
@@ -44,10 +43,6 @@ public class StringParser {
 
     private String extractCustomDelimiter(String inputStrings) {
         return inputStrings.substring(SECOND_NUMBER, inputStrings.indexOf(CUSTOM_NUMBER_PART_DELIMITER));
-    }
-
-    private String paresFirstString(String inputStrings) {
-        return inputStrings.substring(INITIAL_NUMBER, SECOND_NUMBER);
     }
 
     private void validateEmptyString(String inputStrings) {
