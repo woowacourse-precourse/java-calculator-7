@@ -50,25 +50,10 @@ class CalculatorServiceTest {
         String input = "123";
 
         // when
-        int result = delimiterSplit(input);
+        int result = calculatorService.calculateSum(input);
 
         // then
         assertThat(result).isEqualTo(123);
-    }
-
-    private int delimiterSplit(String input) {
-        if (isNotDefaultDelimiter(input) && isNotCustomDelimiter(input)) {
-            return Integer.parseInt(input);
-        }
-        return 0;
-    }
-
-    private boolean isNotDefaultDelimiter(String input) {
-        return !(input.contains(",") || input.contains(":"));
-    }
-
-    private boolean isNotCustomDelimiter(String input) {
-        return !input.startsWith("//");
     }
 
 }
