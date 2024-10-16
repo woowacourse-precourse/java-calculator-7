@@ -15,7 +15,11 @@ public class Calculator {
         List<String> parsedNumbers = parseNumbers(input);
 
         return parsedNumbers.stream()
-                .mapToInt(Integer::parseInt)
+                .mapToInt(num -> {
+                    if (isInvalidInput(num)) throw new IllegalArgumentException("[ERROR] 올바르지 않은 입력입니다.");
+
+                    return Integer.parseInt(num);
+                })
                 .sum();
     }
 
@@ -39,6 +43,10 @@ public class Calculator {
 
         if(isDuplicatedDelimiter()) throw new IllegalArgumentException("[ERROR] 중복된 구분자 지정입니다.");
         if(isContainedDigit()) throw new IllegalArgumentException("[ERROR] 올바르지 않은 구분자 지정입니다.");
+    }
+
+    private static boolean isInvalidInput(String str) {
+        return !str.matches("\\d");
     }
 
     private static boolean isContainedDigit() {
