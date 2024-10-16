@@ -22,7 +22,21 @@ public class Application {
     }
 
     public static ArrayList<String> splitToArrayList(String input) {
-        String[] splitValues = input.split("[,;]");
+        String delimiter = ",|;"; // 기본 구분자: 쉼표와 세미콜론
+        String numbers = input;
+
+        // 커스텀 구분자 확인
+        if (input.startsWith("//")) {
+            // "//"와 "\n" 사이의 문자열을 구분자로 사용
+            int delimiterEndIndex = input.indexOf("\\n");
+            numbers = input.substring(delimiterEndIndex + 2);
+
+            for(int i = 2; i<delimiterEndIndex; i++){
+                delimiter += "|" + input.substring(i, i+1);
+            }
+        }
+
+        String[] splitValues = numbers.split(delimiter);
         return new ArrayList<>(Arrays.asList(splitValues));
     }
 }
