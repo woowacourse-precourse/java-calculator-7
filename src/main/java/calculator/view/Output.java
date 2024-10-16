@@ -10,7 +10,7 @@ public class Output {
         System.out.print("결과 : ");
     }
 
-    public static void result(Long result) {
+    public static void result(int result) {
         System.out.println(result);
     }
 }

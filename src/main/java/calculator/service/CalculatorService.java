@@ -3,6 +3,7 @@ package calculator.service;
 import calculator.view.Input;
 import calculator.view.Output;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 public class CalculatorService {
@@ -40,19 +41,24 @@ public class CalculatorService {
 
     public void deleteDelimiter() {
         String userInput = input.orElseThrow(() -> new IllegalArgumentException("입력값이 없습니다"));
+        System.out.println(userInput);
         String removeDelimiters = userInput.chars().filter(i -> {
                     char currentChar = (char) i;
+
+                    boolean isDelimiter = false;
                     for (char c : constantDelimiter) {
-                        if (currentChar != c) {
-                            return false;
+                        if (currentChar == c) {
+                            isDelimiter = true;
+                            break;
                         }
                     }
                     for (char c : customDelimiter.orElse(new char[]{})) {
-                        if (currentChar != c) {
-                            return false;
+                        if (currentChar == c) {
+                            isDelimiter = true;
+                            break;
                         }
                     }
-                    return true;
+                    return !isDelimiter;
                 }).mapToObj(c -> (char) c)
                 .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
                 .toString();
@@ -62,10 +68,17 @@ public class CalculatorService {
 
     private void isNumeric(String removeDelimiters) {
         numbersToCalculate = Optional.of(removeDelimiters.chars().filter(i -> {
-            if (i >= 0 && i <= 9) {
-                return true;
+            if(i < '0' || i > '9') {
+                throw new IllegalArgumentException("구분자나 숫자가 아닌 문자가 발견되었습니다: " + (char) i);
             }
-            return false;
-        }).toArray());
+            return true;
+        }).map(i -> i - '0').toArray());
+    }
+
+    public void output() {
+        int[] numbers = numbersToCalculate.orElseThrow(() -> new IllegalArgumentException("계산할 숫자가 없습니다"));
+        int result = Arrays.stream(numbers).sum();
+        Output.outputMessage();
+        Output.result(result);
     }
 }

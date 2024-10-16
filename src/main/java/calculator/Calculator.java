@@ -8,5 +8,9 @@ public class Calculator {
 
     public void run() {
         controller = new CalculatorController();
+
+        controller.input();
+        controller.calculate();
+        controller.output();
     }
 }

@@ -10,11 +10,12 @@ public class CalculatorController {
         service.input();
     }
 
-    public void getCustomDelimiter() {
+    public void calculate() {
         service.findCustomDelimiter();
+        service.deleteDelimiter();
     }
 
-    public void removeDelimiter() {
-        service.deleteDelimiter();
+    public void output() {
+        service.output();
     }
 }
