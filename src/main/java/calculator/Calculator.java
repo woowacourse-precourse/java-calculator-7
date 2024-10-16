@@ -18,6 +18,7 @@ public class  Calculator {
                 //입력값에 기본 구분자가 있을 경우
                 if (isDefaultDelimiter(input)) {
                     String[] splitedString = input.split(defaultDelimiter);
+                    validateNegativeNumber(splitedString);
                     int sum = 0;
                     for (String numberStr : splitedString) {
                         if (!numberStr.trim().isEmpty()) {
@@ -49,6 +50,13 @@ public class  Calculator {
             return true;
         }catch (NumberFormatException e){
             return false;
+        }
+    }
+    private static void validateNegativeNumber(String[] splitedString) {
+        for (String numberStr : splitedString) {
+            if (Integer.parseInt(numberStr.trim()) < 0) {
+                throw new IllegalArgumentException();
+            }
         }
     }
 }
