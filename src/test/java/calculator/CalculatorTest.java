@@ -185,4 +185,48 @@ public class CalculatorTest {
                 .hasMessage("커스텀 구분자가 비어 있습니다.");
     }
 
+    @Test
+    @DisplayName("기본 구분자로 문자열을 분리한다.")
+    void 기본_구분자로_문자열_분리() {
+        // Given
+        Calculator calculator = new Calculator();
+        String input = "1,2:3";
+        String[] expected = {"1", "2", "3"};
+
+        // When
+        String[] result = calculator.splitNumbers(input, null);
+
+        // Then
+        assertThat(result).containsExactly(expected);
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자로 문자열을 분리한다.")
+    void 커스텀_구분자로_문자열_분리() {
+        // Given
+        Calculator calculator = new Calculator();
+        String input = "//;\n1;2;3";
+        String delimiter = ";";
+        String[] expected = {"1", "2", "3"};
+
+        // When
+        String[] result = calculator.splitNumbers(input, delimiter);
+
+        // Then
+        assertThat(result).containsExactly(expected);
+    }
+
+    @Test
+    @DisplayName("구분자 사이에 숫자가 없는 경우 예외를 발생시킨다.")
+    void 구분자_사이에_숫자_없음_예외_발생() {
+        // Given
+        Calculator calculator = new Calculator();
+        String input = "1,,2";
+
+        // When & Then
+        assertThatThrownBy(() -> calculator.splitNumbers(input, null))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("구분자 사이에 숫자가 없습니다.");
+    }
+
 }

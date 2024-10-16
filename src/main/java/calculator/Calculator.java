@@ -44,4 +44,22 @@ public class Calculator {
         }
         return null;
     }
+
+    public String[] splitNumbers(String input, String delimiter) {
+        if (delimiter != null) {
+            int startIndex = delimiter.length() + 3;
+            input = input.substring(startIndex);
+        } else {
+            delimiter = ",|:";
+        }
+
+        String[] numbers = input.split(delimiter);
+
+        for (String number : numbers) {
+            if (number.isEmpty()) {
+                throw new IllegalArgumentException("구분자 사이에 숫자가 없습니다.");
+            }
+        }
+        return numbers;
+    }
 }
