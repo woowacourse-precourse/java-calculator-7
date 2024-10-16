@@ -30,4 +30,24 @@ public class CalculatorService {
 
         return positiveString.split(":");
     }
+
+    public int[] convertStringArrayToIntArray(String[] numbersString) {
+        int[] numbersInt = new int[numbersString.length];
+
+        for (int index = 0; index < numbersInt.length; index++) {
+            validString(numbersString[index]);
+            numbersInt[index] = Integer.parseInt(numbersString[index]);
+        }
+
+        return numbersInt;
+    }
+
+    private void validString(String str) {
+        if(isNumber(str))
+            throw new IllegalArgumentException();
+    }
+
+    private boolean isNumber(String str) {
+        return !str.matches("[+-]?\\d*(\\.\\d+)?");
+    }
 }
