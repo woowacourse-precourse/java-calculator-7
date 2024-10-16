@@ -1,6 +1,6 @@
 package calculator.application.ports.output;
 
-public interface OutputWriter {
+public interface OutputPort {
 
     void print(String message);
 

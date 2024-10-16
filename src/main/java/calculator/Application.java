@@ -1,14 +1,14 @@
 package calculator;
 
+import calculator.application.usecase.CalculateStringUseCase;
 import calculator.config.AppConfig;
-import calculator.adapters.input.cli.CliCalculationController;
 
 public class Application {
 
     public static void main(String[] args) {
         AppConfig appConfig = new AppConfig();
+        CalculateStringUseCase calculateStringUseCase = appConfig.getCalculateStringUseCase();
 
-        CliCalculationController cliCalculationController = appConfig.cliCalculationController();
-        cliCalculationController.handle();
+        calculateStringUseCase.calculate();
     }
 }

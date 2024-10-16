@@ -2,11 +2,8 @@ package calculator.application.validation;
 
 import static calculator.infrastructure.exception.ErrorCode.*;
 
-import calculator.application.Validator;
+public class InputValidator {
 
-public class InputValidator implements Validator<String> {
-
-    @Override
     public void validate(String target) {
         isEmpty(target);
         isNotTrimmed(target);

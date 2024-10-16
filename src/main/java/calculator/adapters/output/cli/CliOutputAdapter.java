@@ -1,8 +1,8 @@
-package calculator.adapters.output;
+package calculator.adapters.output.cli;
 
-import calculator.application.ports.output.OutputWriter;
+import calculator.application.ports.output.OutputPort;
 
-public class OutputWriterImpl implements OutputWriter {
+public class CliOutputAdapter implements OutputPort {
 
     @Override
     public void print(String message) {
