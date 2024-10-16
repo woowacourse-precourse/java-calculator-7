@@ -40,6 +40,7 @@ git clone -b as --single-branch https://github.com/pug9483/java-calculator-7.git
 - [x] 핸들러 기반 구분자 처리 기능을 구현한다.  
 - [x] 예외 처리를 한다. 
 - [x] 전략 패턴을 사용하여 출력 방법을 동적으로 변경할 수 있게 한다.
+- [x] 전략 패턴을 사용하여 입력 방법을 동적으로 변경할 수 있게 한다.
 
 --- 
 ## 패키지

@@ -4,7 +4,7 @@ import calculator.delimiter.handler.DelimiterHandler;
 import calculator.delimiter.factory.DelimiterHandlerFactory;
 
 public class Calculator {
-    private DelimiterHandlerFactory factory;
+    private final DelimiterHandlerFactory factory;
 
     public Calculator(DelimiterHandlerFactory factory) {
         this.factory = factory;

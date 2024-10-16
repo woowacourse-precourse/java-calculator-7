@@ -1,19 +1,20 @@
 package calculator;
 
 import calculator.delimiter.factory.DelimiterHandlerFactory;
+import calculator.input.InputContext;
+import calculator.input.strategy.ConsoleInputStrategy;
 import calculator.output.OutputContext;
 import calculator.output.strategy.ConsoleOutputStrategy;
 
-import java.util.Scanner;
-
 public class Application {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-
-        OutputContext output = new OutputContext(new ConsoleOutputStrategy());
+        InputContext inputContext = new InputContext(new ConsoleInputStrategy());
+        OutputContext outputContext = new OutputContext(new ConsoleOutputStrategy());
         DelimiterHandlerFactory factory = new DelimiterHandlerFactory();
+
+        String input = inputContext.execute();
         Calculator calculator = new Calculator(factory);
-        output.execute(String.valueOf(calculator.sum(input)));
+
+        outputContext.execute(String.valueOf(calculator.sum(input)));
     }
 }
