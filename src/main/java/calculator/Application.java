@@ -7,7 +7,6 @@ import static calculator.CalculatorFunctions.*;
 public class Application {
 
     public static void main(String[] args) {
-
         String str = Console.readLine();
         int result;
 
@@ -18,13 +17,9 @@ public class Application {
             } else {
                 throw new IllegalArgumentException("잘못된 형식 : 커스텀 구분자가 잘못 지정되었습니다.");
             }
-
         }
-
         // 각 숫자의 합을 구하기
         result = splitAndSum(str);
-
         System.out.println("결과 : " + result);
     }
-
 }

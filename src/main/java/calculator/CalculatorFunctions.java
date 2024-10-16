@@ -5,7 +5,6 @@ public class CalculatorFunctions {
     private static String DEFAULT_DELIMITER = ",|:";
 
     public static int splitAndSum(String str) {
-
         String[] token = str.split(DEFAULT_DELIMITER);
         return addToken(token);
     }
@@ -28,6 +27,7 @@ public class CalculatorFunctions {
 
             sum += Integer.parseInt(token);
         }
+
         return sum;
     }
 
@@ -41,6 +41,7 @@ public class CalculatorFunctions {
         if(customDelimiter.length() != 1) {
             throw new IllegalArgumentException("잘못된 형식 : 커스텀 구분자가 잘못 지정되었습니다.");
         }
+
         String str = input.substring(delimiterIndex + 2);
         addNewDelimiter(changeMetaCharacters(customDelimiter));
 
@@ -48,7 +49,6 @@ public class CalculatorFunctions {
     }
 
     public static String changeMetaCharacters(String customDelimiter) {
-        // 메타 문자들
         String[] metaCharacters = {".", "*", "+", "?", "^", "$", "(", ")", "[", "]", "{", "}", "|", "\\"};
 
         // 각 메타 문자를 이스케이프 처리
@@ -58,6 +58,7 @@ public class CalculatorFunctions {
                 break;
             }
         }
+
         return customDelimiter;
     }
 
