@@ -223,7 +223,7 @@ More : [Commit Message convention](https://gist.github.com/9941e89d80e2bc58a153.
 
 - 입력
     - 사용자
-        - [ ] 문자열을 입력한다.
+        - [x] 문자열을 입력한다.
 - 출력
     - 컴퓨터
         - [ ] 사용자 입력 전 `"덧셈할 문자열을 입력해 주세요."` 문구 출력
