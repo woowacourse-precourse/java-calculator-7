@@ -4,19 +4,26 @@ import camp.nextstep.edu.missionutils.Console;
 import org.junit.platform.commons.util.StringUtils;
 
 public class Application {
-    private static final String 구분자 = "([,:])";
 
     public static void main(String[] args) {
-        System.out.printf("결과: " + execute(Console.readLine()));
+        String separator = "([,:])";
+        String input = Console.readLine();
+
+        if (isCustomSeparator(input)) {
+            separator = findCustomSeparator(input);
+            input = findOriginalText(input);
+        }
+
+        System.out.println("결과 : " + execute(input, separator));
     }
 
-    private static String execute(String input) {
+    private static String execute(String input, String separator) {
         int sum = 0;
         if (StringUtils.isBlank(input)) {
             return String.valueOf(sum);
         }
 
-        return String.valueOf(sum(input.split(구분자)));
+        return String.valueOf(sum(input.split(separator)));
     }
 
     private static int sum(String[] strings) {
@@ -26,5 +33,21 @@ public class Application {
         }
 
         return sum;
+    }
+
+    private static String findCustomSeparator(String input) {
+        int separatorIndex = input.indexOf("\\n");
+
+        return input.substring(2, separatorIndex);
+    }
+
+    private static boolean isCustomSeparator(String input) {
+        return input.startsWith("//") && input.contains("\\n");
+    }
+
+    private static String findOriginalText(String input) {
+        int originalTextIndex = input.indexOf("\\n") + 2;
+        
+        return input.substring(originalTextIndex);
     }
 }
