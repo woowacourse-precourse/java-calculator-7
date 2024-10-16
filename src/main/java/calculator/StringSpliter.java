@@ -1,25 +1,26 @@
 package calculator;
 
+import static calculator.PrintText.COLON;
+import static calculator.PrintText.COMMA;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import static calculator.PrintText.COLON;
-import static calculator.PrintText.COMMA;
-
 public class StringSpliter {
+    
     private String userInput;
     private String customDel;
-
+    
     public StringSpliter(String userInput) {
         this.userInput = userInput;
     }
-
+    
     public StringSpliter(String userInput, String customDel) {
         this.userInput = userInput;
         this.customDel = customDel;
     }
-
+    
     public List<String> splitUserInput() {
         List<String> splitUserInputs = new ArrayList<>();
         StringTokenizer halfSplitUserInput = new StringTokenizer(userInput, COMMA.getValue());
@@ -31,7 +32,7 @@ public class StringSpliter {
         }
         return splitUserInputs;
     }
-
+    
     public List<String> splitCustomDelUserInput() {
         List<String> splitUserInputs = new ArrayList<>();
         StringTokenizer firstSplit = new StringTokenizer(userInput, customDel);
@@ -46,6 +47,4 @@ public class StringSpliter {
         }
         return splitUserInputs;
     }
-
-
 }
