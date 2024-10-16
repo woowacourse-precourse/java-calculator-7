@@ -1,5 +1,6 @@
 package calculator.service;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -7,8 +8,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class CalculatorServiceTest {
 
-    DelimiterService delimiterService = new DelimiterService();
-    CalculatorService calculatorService = new CalculatorService(delimiterService);
+    DelimiterService delimiterService;
+    CalculatorService calculatorService;
+
+    @BeforeEach
+    void setUp() {
+        delimiterService = new DelimiterService();
+        calculatorService = new CalculatorService(delimiterService);
+    }
 
     @Test
     @DisplayName("기본 구분자(콤마와 콜론)를 기준으로 숫자를 추출하여 합을 구한다.")
