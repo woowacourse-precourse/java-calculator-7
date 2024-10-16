@@ -2,6 +2,9 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class CalculatorDisplay {
 
     private static final String inputMessage = "덧셈할 문자열을 입력해 주세요.";
@@ -13,6 +16,12 @@ public class CalculatorDisplay {
         Console.close();
 
         // 2. 커스텀 구분자 등록 여부 확인
+        Pattern pattern = Pattern.compile("^(\\/\\/.\\\\n)");
+        Matcher matcher = pattern.matcher(input);
+
+        if(matcher.find()){
+            System.out.println(matcher.group().charAt(2));
+        }
 
         // 3. 구분자를 기준으로 숫자 분리하기
 
