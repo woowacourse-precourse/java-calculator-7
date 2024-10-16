@@ -32,10 +32,14 @@ public class CalculateCustom {
     }
 
     public static String getCustomSeparator(String userInput) {
-        return getCustomPreToPost(userInput).replaceAll(CUSTOM_PRE+CUSTOM_POST, "");
+        return getCustomPreToPost(userInput).substring(2, getCustomPreToPost(userInput).length() - 2);
+    }
+
+    public static String getUserInput(String userInput) {
+        return userInput.substring(getCustomPostIndex(userInput));
     }
 
     public static List<String> splitWithCustom(String userInput) {
-        return List.of(userInput.split(getCustomSeparator(userInput)));
+        return List.of(getUserInput(userInput).split(getCustomSeparator(userInput)));
     }
 }
