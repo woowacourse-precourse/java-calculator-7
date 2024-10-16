@@ -18,14 +18,14 @@ public class CalculatorController {
 
     public void calculate() {
         String input = inputView.inputString();
-        Separators separators = new Separators();
+        Delimiters delimiters = new Delimiters();
         Optional<String> customSeparator = findCustomSeparator(input);
         if (customSeparator.isPresent()) {
-            separators.add(new Separator(customSeparator.get()));
+            delimiters.add(new Delimiter(customSeparator.get()));
             input = input.substring(5);
         }
-        List<String> separate = separators.separate(input);
-        int sum = separate.stream()
+        List<String> numbers = delimiters.separate(input);
+        int sum = numbers.stream()
                 .map(Integer::parseInt)
                 .reduce(0, Integer::sum);
         outputView.printResult(sum);

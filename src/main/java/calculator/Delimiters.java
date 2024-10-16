@@ -6,15 +6,15 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-public class Separators {
+public class Delimiters {
 
-    private final Set<Separator> separators = new HashSet<>(Set.of(
-            new Separator(','),
-            new Separator(':')));
+    private final Set<Delimiter> delimiters = new HashSet<>(Set.of(
+            new Delimiter(','),
+            new Delimiter(':')));
 
 
-    public void add(Separator separator) {
-        separators.add(separator);
+    public void add(Delimiter separator) {
+        delimiters.add(separator);
     }
 
     // 입력 문자열을 구분자로 분리하는 메서드
@@ -30,12 +30,12 @@ public class Separators {
 
     private StringBuilder createRegexBuilder() {
         StringBuilder regexBuilder = new StringBuilder();
-        for (Separator separator : separators) {
+        for (Delimiter delimiter : delimiters) {
             if (!regexBuilder.isEmpty()) {
                 regexBuilder.append("|"); // OR 연산자 추가
             }
             // 구분자가 특수 문자일 경우를 대비해 이스케이프 처리
-            String quote = Pattern.quote(separator.toString());
+            String quote = Pattern.quote(delimiter.toString());
             regexBuilder.append(quote);
         }
         return regexBuilder;
