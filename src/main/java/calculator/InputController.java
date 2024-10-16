@@ -1,13 +1,11 @@
 package calculator;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class InputController {
 
-    public static InputString getInputString() throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        return new InputString(reader.readLine());
+    public static InputString getInputString(){
+       Scanner scanner = new Scanner(System.in);
+        return new InputString(scanner.nextLine());
     }
 }
