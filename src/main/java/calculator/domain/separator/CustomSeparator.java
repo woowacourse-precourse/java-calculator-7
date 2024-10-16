@@ -1,5 +1,6 @@
 package calculator.domain.separator;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class CustomSeparator implements Separator {
@@ -12,6 +13,45 @@ public class CustomSeparator implements Separator {
 
     @Override
     public List<String> separate(String value) {
-        return null;
+        return convert(validate(value));
+    }
+
+    private List<String> convert(String value) {
+        if (hasSeparatorIn(value)) {
+            return Arrays.stream(value.split(separator))
+                    .toList();
+        }
+
+        return List.of(value);
+    }
+
+    private boolean hasSeparatorIn(String value) {
+        return value.contains(separator);
+    }
+
+    private String validate(String value) {
+        validateEdgeSeparator(value);
+        validateContinuousSeparator(value);
+        return value;
+    }
+
+    private void validateEdgeSeparator(String value) {
+        if (hasEdgeSeparator(value)) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void validateContinuousSeparator(String value) {
+        if (isContinuousSeparator(value)) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private boolean hasEdgeSeparator(String value) {
+        return value.startsWith(separator) || value.endsWith(separator);
+    }
+
+    private boolean isContinuousSeparator(String value) {
+        return value.contains(separator.repeat(2));
     }
 }
