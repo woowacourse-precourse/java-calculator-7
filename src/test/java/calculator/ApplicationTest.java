@@ -38,7 +38,7 @@ class ApplicationTest extends NsTest {
 
     @Test
     @DisplayName("입력값 마지막에 구분자가 있을 때")
-    void lastCharIsSeperator() {
+    void lastCharIsSeperatorTest() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1,2,3-"))
                         .isInstanceOf(IllegalArgumentException.class)
@@ -47,10 +47,19 @@ class ApplicationTest extends NsTest {
 
     @Test
     @DisplayName("int 범위를 넘어가는 수를 입력받았을 때")
-    void beyondInteger() {
+    void beyondIntegerTest() {
         assertSimpleTest(() -> {
             run("//;\\n2147483648;2147483648");
             assertThat(output()).contains("결과 : 4294967296");
+        });
+    }
+
+    @Test
+    @DisplayName("long 범위를 넘어가는 수를 입력받았을 때")
+    void beyondLongTest() {
+        assertSimpleTest(() -> {
+            run("//;\\n9223372036854775807;3");
+            assertThat(output()).contains("결과 : 9223372036854775810");
         });
     }
 
