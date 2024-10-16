@@ -1,8 +1,12 @@
 package calculator.service;
 
 import java.util.List;
+import java.util.Set;
 
-import calculator.dto.FormulaReq;
+import calculator.constant.DrawConstant;
+import calculator.dto.request.FormulaReq;
+import calculator.dto.response.DelimitersRes;
+import calculator.factory.DelimitersFactory;
 import calculator.helper.ParseHelper;
 
 public class DrawService {
@@ -11,7 +15,18 @@ public class DrawService {
 	public DrawService() {
 		this.parseHelper = new ParseHelper();
 	}
-	public List<Long> drawNumbers(FormulaReq formulaReq) {
-		return parseHelper.extractNumber(formulaReq.formula());
+
+	public DelimitersRes generateDelimiters(FormulaReq formulaReq) {
+		Set<String> delimiters = DelimitersFactory.getDelimiters();
+		if (formulaReq.formula().startsWith(DrawConstant.CUSTOM_DELIMITER_START_SIGN)) {
+			String customDelimiter = parseHelper.extractCustomDelimiter(
+				formulaReq.formula().substring(DrawConstant.EXTRACT_START_INDEX));
+			delimiters.add(customDelimiter);
+		}
+		return DelimitersRes.from(delimiters);
+	}
+
+	public List<Long> drawNumbers(Set<String> delimiters, FormulaReq formulaReq) {
+		return parseHelper.extractNumber(delimiters, formulaReq.formula());
 	}
 }

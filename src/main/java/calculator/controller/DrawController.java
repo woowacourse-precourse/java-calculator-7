@@ -2,7 +2,8 @@ package calculator.controller;
 
 import java.util.List;
 
-import calculator.dto.FormulaReq;
+import calculator.dto.request.FormulaReq;
+import calculator.dto.response.DelimitersRes;
 import calculator.service.DrawService;
 import calculator.view.InputView;
 
@@ -15,6 +16,11 @@ public class DrawController {
 
 	public List<Long> requestNumberDraw() {
 		String formula = InputView.readLine();
-		return drawService.drawNumbers(FormulaReq.from(formula));
+
+		FormulaReq formulaReq = new FormulaReq(formula);
+
+		DelimitersRes delimiters = drawService.generateDelimiters(formulaReq);
+
+		return drawService.drawNumbers(delimiters.delimiters(), formulaReq);
 	}
 }
