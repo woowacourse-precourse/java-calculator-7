@@ -10,6 +10,7 @@ public class Calculator {
     private static String input;
     private static String delimiters;
     private static String[] numbers;
+    private static int sum = 0;
 
     public static void run(String inputValue) {
         setInput(inputValue);
@@ -17,6 +18,7 @@ public class Calculator {
         validateInput();
         parseInput();
         validateNumbers();
+        addNumbers();
     }
 
     private static void setInput(String inputValue) {
@@ -49,6 +51,12 @@ public class Calculator {
             if (number.isEmpty()) {
                 throw new IllegalArgumentException("구분자 사이에 숫자가 존재하지 않습니다.");
             }
+        }
+    }
+
+    private static void addNumbers() {
+        for (String number : numbers) {
+            sum += Integer.parseInt(number);
         }
     }
 }
