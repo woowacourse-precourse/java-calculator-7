@@ -3,8 +3,8 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
-    public static final String ASK_INPUT_MESSAGE = "덧셈할 문자열을 입력해 주세요.";
-    public static final String CALCULATE_RESULT_MESSAGE = "결과 : %d";
+    private static final String ASK_INPUT_MESSAGE = "덧셈할 문자열을 입력해 주세요.";
+    private static final String CALCULATE_RESULT_MESSAGE = "결과 : %d";
 
     public static void main(String[] args) {
         final String input;
