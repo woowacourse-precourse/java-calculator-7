@@ -61,11 +61,21 @@ public class Calculator {
     private void calculate() {
         for (String number : numbers) {
             try {
-                result = result + Integer.parseInt(number);
+                int numberInt = Integer.parseInt(number);
+                if (isPositiveNumber(numberInt)) {
+                    result = result + Integer.parseInt(number);
+                }
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException();
             }
         }
         System.out.println(OUTPUT_MESSAGE + result);
+    }
+
+    private boolean isPositiveNumber(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException();
+        }
+        return true;
     }
 }
