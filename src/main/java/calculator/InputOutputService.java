@@ -10,4 +10,13 @@ public class InputOutputService {
 
         return Console.readLine();
     }
+
+    public void printResult(Double result) {
+        if (Math.floor(result) == result) {
+            System.out.println("결과 : " + result.intValue());
+            return;
+        }
+
+        System.out.println("결과 : " + result);
+    }
 }
