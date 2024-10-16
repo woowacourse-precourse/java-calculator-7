@@ -26,9 +26,7 @@ public class InputParser {
         try {
             input = input.replace(","," ").replace(":"," ");
             String[] inputs = input.split(" ");
-            return Arrays.stream(inputs)
-                         .map(Integer::parseInt)
-                         .toList();
+            return convertToIntList(inputs);
         } catch (Exception e) {
             throw new IllegalArgumentException();
         }
@@ -43,14 +41,20 @@ public class InputParser {
                 String customDelimiter = matcher.group(1);
                 String inputNum = matcher.group(2);
                 String[] split = inputNum.split(customDelimiter);
-                return Arrays.stream(split)
-                    .map(Integer::parseInt)
-                    .toList();
+                List<Integer> list = convertToIntList(split);
+                checkPositiveNumber(list);
+                return list;
             }
             throw new IllegalArgumentException();
         } catch (Exception e) {
             throw new IllegalArgumentException();
         }
+    }
+
+    private static List<Integer> convertToIntList(String[] split) {
+        return Arrays.stream(split)
+            .map(Integer::parseInt)
+            .toList();
     }
 
     protected void checkPositiveNumber(List<Integer> list) throws IllegalArgumentException{
