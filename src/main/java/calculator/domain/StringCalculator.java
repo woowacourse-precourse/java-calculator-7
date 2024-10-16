@@ -19,7 +19,7 @@ public class StringCalculator {
         if (isEmpty(input)) {
             return Constants.ZERO;
         }
-        if (isContainsCustomDelimiter(input)) {
+        if (isContainsCustom(input)) {
             return calculateSumByMatcher(input);
         }
         if (isContainsBasicDelimiter(input)) {
@@ -35,7 +35,7 @@ public class StringCalculator {
         return input == null || input.isEmpty();
     }
 
-    private static boolean isContainsCustomDelimiter(String input) {
+    private static boolean isContainsCustom(String input) {
         return input.contains(DOUBLE_SLASH) && input.contains(ESCAPE);
     }
 
@@ -48,7 +48,7 @@ public class StringCalculator {
 
         StringValidator.checkNotExistCustom(matcher);
 
-        return calculateSum(splitInputByCustomDelimiter(matcher));
+        return calculateSum(splitInputByCustom(matcher));
     }
 
     private static Matcher getMatcher(String input) {
@@ -59,7 +59,7 @@ public class StringCalculator {
         return input.split(BASIC_DELIMITER);
     }
 
-    private static String[] splitInputByCustomDelimiter(Matcher matcher) {
+    private static String[] splitInputByCustom(Matcher matcher) {
         String delimiter = findDelimiterGroup(matcher);
         String string = findStringGroup(matcher, delimiter);
         return string.split(delimiter);
