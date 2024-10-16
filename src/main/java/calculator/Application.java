@@ -29,8 +29,14 @@ public class Application {
     }
 
     public static String[] splitBySeperator(String input, String customSeperator) {
-        input = input.replace("//" + customSeperator + "\\n", "");
-        String[] number = input.split(",|:|" + customSeperator);
+        String seperator = ",|:";
+
+        if (!customSeperator.equals("")) {
+            input = input.replace("//" + customSeperator + "\\n", "");
+            seperator = ",|:|" + customSeperator;
+        }
+
+        String[] number = input.split(seperator);
 
         return number;
     }
