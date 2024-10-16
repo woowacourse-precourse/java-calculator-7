@@ -4,25 +4,27 @@ import calculator.infra.view.ResultView;
 import calculator.model.CalculateSystem;
 import calculator.model.io.InputManager;
 import calculator.model.io.OutputManager;
-import calculator.model.separate.SeparateManager;
+import calculator.service.SeparateService;
 
 import java.util.List;
 
 public class MainController {
 
-    private MainController() { }
+    private final SeparateService separateService;
 
-    public static MainController initiate() {
-        return new MainController();
+    private MainController(SeparateService separateService) {
+        this.separateService = separateService;
+    }
+
+    public static MainController initiate(SeparateService separateService) {
+        return new MainController(separateService);
     }
 
     public void runCalculator() {
         InputManager inputManager = InputManager.getInstance();
         String input = inputManager.enterInput();
 
-        SeparateManager separateManager = SeparateManager.initiate();
-        separateManager.extractCustomDelimiter(input);
-        List<Integer> splittedInput = separateManager.split(input);
+        List<Integer> splittedInput = separateService.separateInput(input);
 
         CalculateSystem calculateSystem = CalculateSystem.of(splittedInput);
         ResultView resultView = ResultView.from(calculateSystem);

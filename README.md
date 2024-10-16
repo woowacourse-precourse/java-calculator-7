@@ -19,7 +19,6 @@
     - 커스텀 구분자란, // 와 \n 사이에 위치하는 구분자를 의미한다.
     - 문자열 바로 앞에 작성해줘야 한다. (Ex. "//;\n1;2;3")
     - Ex)  "//;\n1;2;3", "//;※\n1;※2;※3"
-- 입력 결과를 콘솔에서 확인할 수 있다.
 - 출력(덧셈) 결과를 콘솔에서 확인할 수 있다.
 
 <br>
@@ -81,6 +80,7 @@
 | createMatcher;                   | String    | Matcher       | -                             | DONE ✅          |
 | mergeDelimiters;                 | x         | List<Integer> | -                             | DONE ✅          |
 | isAddable;                       | String    | boolean       | -                             | DONE ✅          |
+| canParseCustomDelimiter;         | String    | boolean       | -                             | DONE ✅          |
 | validateCustomDelimiterPosition; | String    | void          | NotAllowedPositionException   | DONE ✅          |
 | validateCustomDelimiterCount;    | String    | void          | MultiCustomDelimiterException | DONE ✅          |
 | tryParseToInt ;                  | String    | Integer       | ParseToIntegerFailedException | DONE ✅          |
@@ -99,10 +99,10 @@
 
 ### InputManager
 
-| Method             | Parameter     | Return Type   | Exception                     | Implementation |
-|--------------------|---------------|---------------|-------------------------------|----------------|
-| enterInput;        | x             | List<Integer> | -                             | DONE ✅           |
-| getInstance;       | x             | void          | ExceedDelimiterCountException | DONE ✅           |
+| Method             | Parameter     | Return Type   | Exception | Implementation |
+|--------------------|---------------|---------------|-----------|----------------|
+| enterInput;        | x             | List<Integer> | -         | DONE ✅           |
+| getInstance;       | x             | void          | -         | DONE ✅           |
 
 <br>
 
@@ -111,6 +111,15 @@
 | Method                 | Parameter   | Return Type | Exception                     | Implementation |
 |------------------------|-------------|-------------|-------------------------------|----------------|
 | offerCalculatedResult; | ResultView  | void        | -                             | DONE ✅        |
+
+<br>
+
+### SeparateService
+
+| Method           | Parameter | Return Type   | Exception                     | Implementation |
+|------------------|-----------|---------------|-------------------------------|----------------|
+| separateInput;   | String    | List<Integer> | -                             | DONE ✅        |
+
 
 
 

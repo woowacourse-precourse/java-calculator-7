@@ -23,8 +23,6 @@ public class InputManager implements IOManager{
     // Method
     public String enterInput() {
         printMessage(ENTER_INPUT);
-        String input = Console.readLine();
-        printMessage(input);
-        return input;
+        return Console.readLine();
     }
 }

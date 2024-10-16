@@ -114,4 +114,9 @@ public class SeparateManager {
         }
         return true;
     }
+
+    public boolean canParseCustomDelimiter(String source) {
+        Matcher matcher = createMatcher(source, customDelimiterStartCondition());
+        return matcher.find();
+    }
 }
