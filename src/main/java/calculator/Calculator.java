@@ -13,6 +13,10 @@ public class Calculator {
         double result = 0;
 
         for (String token : expression.split(regex)) {
+            if (token.isEmpty()) {
+                continue;
+            }
+
             double toAdd = parseDouble(token);
             if (isNotPositive(toAdd)) {
                 throw new IllegalArgumentException();
