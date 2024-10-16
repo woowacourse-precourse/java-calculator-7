@@ -74,4 +74,19 @@ class PromptTest {
         assertThat(result).containsExactly(inputWithoutDelimiter);
     }
 
+    @Test
+    @DisplayName("기본 구분자 외 다른 구분자가 주어질 경우, 제거되지 않는다.")
+    void givenInputWithBaseDelimiter_whenSeparate_thenReturnListWithoutBaseDelimiters() {
+        // given
+        String input = "1,2:3+4";
+
+        // when
+        List<String> result = prompt.separate(input);
+
+        // then
+        String[] inputWithoutDelimiter = input.split("[,:]");
+        assertThat(result).containsExactly(inputWithoutDelimiter);
+        assertThat(result.get(2)).contains("+");
+    }
+
 }
