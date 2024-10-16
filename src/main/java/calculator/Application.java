@@ -41,6 +41,11 @@ public class Application {
         // 입력
         public void getInput(){
             // 입력 받기
+            System.out.println("덧셈할 문자열을 입력해 주세요.");
+            this.inputString = Console.readLine();
+
+            // input 확인
+            System.out.println("test::::입력받은 것:"+this.inputString);
 
             // 유효성 검사 -> isValidString()
 
