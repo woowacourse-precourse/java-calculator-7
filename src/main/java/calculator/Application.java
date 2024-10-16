@@ -28,9 +28,9 @@ public class Application {
             return EMPTY_INPUT_RETURN_VALUE;
         }
         /**
-         * 1-1. 기본 구분자만 입력된 경우
+         * 1.1 기본 구분자만 입력된 경우
          */
-        String delimiter = "[,:]";
+        String delimiterPart = "[,:]";
         String numberPart = input;
 
         /**
@@ -42,11 +42,11 @@ public class Application {
                 throw new IllegalArgumentException("커스텀 구분자 선언 후 '\\n'이 필요합니다.");
             }
             String customDelimiterPart = input.substring(2, indexOfEndSign);
-            delimiter = "[,:]|" + Pattern.quote(customDelimiterPart);
+            delimiterPart = "[,:]|" + Pattern.quote(customDelimiterPart);
             numberPart = input.substring(indexOfEndSign + 2);
         }
 
-        String[] tokens = numberPart.split(delimiter);
+        String[] tokens = numberPart.split(delimiterPart);
 
         return add(tokens);
     }
