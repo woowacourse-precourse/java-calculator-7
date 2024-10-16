@@ -4,10 +4,14 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class StringCalculator {
 
+    String separators = ",:";
+    boolean hasCustomSeparator;
+
     void run() {
         printInputMsg();
         String input = Console.readLine();
         checkCustomSeparator(input);
+
     }
 
     void printInputMsg() {
@@ -22,15 +26,21 @@ public class StringCalculator {
             } else {
                 if (input.indexOf("\\n") > 3) {
                     flag = 2;
-                }
-                if (isSeparatorNumeric(input.charAt(2))) {
+                } else if (isSeparatorNumeric(input.charAt(2))) {
                     flag = 3;
+                } else {
+                    addCustomSeparator(input.charAt(2));
                 }
             }
         }
         if (flag != 0) {
             throw new IllegalArgumentException("커스텀 구분자 에러");
         }
+    }
+
+    void addCustomSeparator(char customSeparator) {
+        hasCustomSeparator = true;
+        separators += customSeparator;
     }
 
     boolean beginTwoSlash(String input) {
