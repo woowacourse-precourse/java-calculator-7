@@ -36,6 +36,15 @@ public class Calculator {
         int suffixIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
 
         CUSTOM_DELIMITER = input.substring(prefixIndex + CUSTOM_DELIMITER_PREFIX.length(), suffixIndex);
+
+        if(isDuplicatedDelimiter()) throw new IllegalArgumentException("[ERROR] 중복된 구분자 지정");
+    }
+
+    private static boolean isDuplicatedDelimiter() {
+        return (CUSTOM_DELIMITER.equals(FIRST_DELIMITER)
+            || CUSTOM_DELIMITER.equals(SECOND_DELIMITER)
+            || CUSTOM_DELIMITER.equals(CUSTOM_DELIMITER_PREFIX)
+            || CUSTOM_DELIMITER.equals(CUSTOM_DELIMITER_SUFFIX));
     }
 
     private static boolean hasCustomDelimiter(final String input) {
