@@ -10,6 +10,10 @@ public class Number {
         this.number = number;
     }
 
+    public Integer getNumber() {
+        return number;
+    }
+
     private void validateNumber(int number) {
         isPositive(number);
     }
