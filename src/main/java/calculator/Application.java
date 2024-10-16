@@ -58,6 +58,8 @@ public class Application {
                 System.out.print("결과 : " + sum);
                 break;
             }
+
+            throw new IllegalArgumentException();
         }
     }
 
