@@ -43,4 +43,32 @@ class CalculatorServiceTest {
         assertThat(result).isEqualTo(6);
     }
 
+    @Test
+    @DisplayName("구분자가 입력되지 않고, 양수만 입력했을 때 숫자를 그대로 반환한다.")
+    void 구분자가_없고_양수만_있는_경우_양수만_반환한다() {
+        // given
+        String input = "123";
+
+        // when
+        int result = delimiterSplit(input);
+
+        // then
+        assertThat(result).isEqualTo(123);
+    }
+
+    private int delimiterSplit(String input) {
+        if (isNotDefaultDelimiter(input) && isNotCustomDelimiter(input)) {
+            return Integer.parseInt(input);
+        }
+        return 0;
+    }
+
+    private boolean isNotDefaultDelimiter(String input) {
+        return !(input.contains(",") || input.contains(":"));
+    }
+
+    private boolean isNotCustomDelimiter(String input) {
+        return !input.startsWith("//");
+    }
+
 }
