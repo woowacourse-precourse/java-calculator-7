@@ -1,15 +1,12 @@
-package calculator.delimiter.handler.impl;
+package calculator.delimiter.handler;
 
-import calculator.Calculator;
-import calculator.delimiter.factory.DelimiterHandlerFactory;
-import org.assertj.core.api.Assertions;
+import calculator.delimiter.handler.NoDelimiterHandler;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class NoDelimiterHandlerTest {
     @Test

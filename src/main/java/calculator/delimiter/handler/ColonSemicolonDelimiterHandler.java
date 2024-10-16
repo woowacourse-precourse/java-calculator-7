@@ -1,4 +1,4 @@
-package calculator.delimiter.handler.impl;
+package calculator.delimiter.handler;
 
 import calculator.delimiter.handler.DelimiterHandler;
 

@@ -3,8 +3,6 @@ package calculator;
 import calculator.delimiter.handler.DelimiterHandler;
 import calculator.delimiter.factory.DelimiterHandlerFactory;
 
-import java.util.List;
-
 public class Calculator {
     private DelimiterHandlerFactory factory;
 

@@ -1,4 +1,4 @@
-package calculator.delimiter.handler.impl;
+package calculator.delimiter.handler;
 
 import calculator.delimiter.handler.DelimiterHandler;
 
@@ -14,7 +14,7 @@ public class CustomDelimiterHandler implements DelimiterHandler {
     public List<String> split(String str) {
         String delimiter = extractDelimiter(str);
 
-        str = str.substring(str.indexOf("\n") + 1);
+        str = str.substring(str.indexOf("\\n") + 2);
 
         if (!str.matches("\\d+(?:" + Pattern.quote(delimiter) + "\\d+)*")) {
             throw new IllegalArgumentException("형식이 일치하지 않습니다");
@@ -26,11 +26,11 @@ public class CustomDelimiterHandler implements DelimiterHandler {
 
     @Override
     public boolean isSupport(String str) {
-        return str.contains("//") && str.contains("\n");
+        return str.contains("//") && str.contains("\\n");
     }
 
     public String extractDelimiter(String s) {
-        Pattern pattern = Pattern.compile("//(.*?)\\n");
+        Pattern pattern = Pattern.compile("//(.*?)\\\\n");
         Matcher matcher = pattern.matcher(s);
 
         if(matcher.find()) return matcher.group(1);

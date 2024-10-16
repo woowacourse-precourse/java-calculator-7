@@ -39,7 +39,7 @@ git clone -b as --single-branch https://github.com/pug9483/java-calculator-7.git
 - [x] 커스텀 구분자는 `//` 와 `\n`사이에 위치하는 문자다. 커스텀 구분자를 사용하여 문자열을 분리하고 합을 구한다.
 - [x] 핸들러 기반 구분자 처리 기능을 구현한다.  
 - [x] 예외 처리를 한다. 
-- [ ] `camp.nextstep.edu.missionutils`에서 제공하는 Console API를 사용하여 구현해야 한다. `camp.nextstep.edu.missionutils.Console`의 `readLine()`을 활용한다.
+- [x] 전략 패턴을 사용하여 출력 방법을 동적으로 변경할 수 있게 한다.
 
 --- 
 ## 패키지

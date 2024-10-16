@@ -1,9 +1,9 @@
 package calculator.delimiter.factory;
 
-import calculator.delimiter.handler.impl.ColonSemicolonDelimiterHandler;
-import calculator.delimiter.handler.impl.CustomDelimiterHandler;
+import calculator.delimiter.handler.ColonSemicolonDelimiterHandler;
+import calculator.delimiter.handler.CustomDelimiterHandler;
 import calculator.delimiter.handler.DelimiterHandler;
-import calculator.delimiter.handler.impl.NoDelimiterHandler;
+import calculator.delimiter.handler.NoDelimiterHandler;
 
 import java.util.ArrayList;
 import java.util.List;
