@@ -1,12 +1,16 @@
 package calculator;
 
-import calculator.util.StringNumberSumCalculator;
+import calculator.service.CalculatorService;
+import calculator.service.DelimiterService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StringAddCalculatorTest {
+
+    DelimiterService delimiterService = new DelimiterService();
+    CalculatorService calculatorService = new CalculatorService(delimiterService);
 
     @Test
     @DisplayName("기본 구분자(콤마와 콜론)를 기준으로 숫자를 추출하여 합을 구한다.")
@@ -15,14 +19,10 @@ public class StringAddCalculatorTest {
         String input = "1,2:3";
 
         // when
-        int result = delimiterSplit(input);
+        int result = calculatorService.calculateSum(input);
 
         // then
         assertThat(result).isEqualTo(6);
-    }
-
-    private int delimiterSplit(String input) {
-        return StringNumberSumCalculator.sum(input.split("[,:]"));
     }
 
 }
