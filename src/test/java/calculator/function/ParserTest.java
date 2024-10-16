@@ -12,7 +12,7 @@ class ParserTest {
     void 파싱_성공(){
         //given
         String inputString = "1,2:3";
-        String separator = "[,:]";
+        String separator = ",:";
 
         //when
         Parser parser = new Parser(inputString, separator);
@@ -29,7 +29,7 @@ class ParserTest {
     void 파싱_2자릿수_성공(){
         //given
         String inputString = "1,2:345";
-        String separator = "[,:]";
+        String separator = ",:";
 
         //when
         Parser parser = new Parser(inputString, separator);
@@ -46,7 +46,7 @@ class ParserTest {
     void 파싱_커스텀구분자_성공(){
         //given
         String inputString = "1,2:3^4";
-        String separator = "[,:^]";
+        String separator = ",:^";
 
         //when
         Parser parser = new Parser(inputString, separator);
@@ -64,7 +64,7 @@ class ParserTest {
     void 파싱_정수_성공(){
         //given
         String inputString = "1,2:3045";
-        String separator = "[,:0]";
+        String separator = ",:0";
 
         //when
         Parser parser = new Parser(inputString, separator);
@@ -82,7 +82,7 @@ class ParserTest {
     void 파싱_빈_문자열(){
         //given
         String inputString = "";
-        String separator = "[,:]";
+        String separator = ",:";
 
         //when
         Parser parser = new Parser(inputString, separator);
@@ -98,7 +98,7 @@ class ParserTest {
     void 파싱_연속_구분자(){
         //given
         String inputString = "1,2::3";
-        String separator = "[,:]";
+        String separator = ",:";
 
         //when
         Parser parser = new Parser(inputString, separator);
@@ -116,7 +116,7 @@ class ParserTest {
     void 파싱_구분자로_끝남(){
         //given
         String inputString = "1,2:3,";
-        String separator = "[,:]";
+        String separator = ",:";
 
         //when
         Parser parser = new Parser(inputString, separator);

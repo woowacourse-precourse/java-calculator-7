@@ -10,7 +10,7 @@ public class Parser {
 
     public Parser(String inputString, String separator) {
         this.inputString = inputString;
-        this.separator = separator;
+        this.separator = '[' + separator + ']';
     }
 
 
