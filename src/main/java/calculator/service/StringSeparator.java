@@ -49,8 +49,10 @@ public class StringSeparator {
     }
 
     private boolean isWrongInput(String divide) {
-        if (divide.charAt(0) != '/' || divide.charAt(1) != '/' || divide.charAt(divide.length() - 1) != '\n'
-                || divide.length() < 4) {
+        if (divide == null || divide.length() < 4) {
+            return true;
+        }
+        if (divide.charAt(0) != '/' || divide.charAt(1) != '/' || divide.charAt(divide.length() - 1) != '\n') {
             return true;
         }
         return false;
