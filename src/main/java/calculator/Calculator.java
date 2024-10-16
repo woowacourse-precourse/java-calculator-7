@@ -4,21 +4,22 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 
 public class Calculator {
-    static String separator = ",|:";
+    static final String SEPARATOR_1 = "//";
+    static final String SEPARATOR_2 = "\\n";
+    static String separators = ",|:";
 
     /**
      * 커스텀 구분자 존재 체크
      * @param str 입력받은 문자열
      */
     public void checkCustomSeparator(String str){
-        if (str.contains("//") && str.contains("\n")){
-            if(str.indexOf("//") != 0){
+        if (str.contains(SEPARATOR_1) && str.contains(SEPARATOR_2)){
+            if(str.indexOf(SEPARATOR_1) != 0){
                 throw new IllegalArgumentException();
             }
 
-            String pos = str.substring(1,str.indexOf("\n"));
-
-            separator = separator + "|" + pos;
+            String pos = str.substring(SEPARATOR_1.length(),str.indexOf(SEPARATOR_2));
+            separators = separators + "|" + pos ;
         }
 
     }
@@ -55,7 +56,7 @@ public class Calculator {
 
         checkCustomSeparator(str);
 
-        String[] array = str.split(separator);
+        String[] array = str.split(separators);
 
         int result = calculate(array);
         System.out.println("결과 : "+result);
