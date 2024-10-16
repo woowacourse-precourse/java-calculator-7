@@ -1,5 +1,6 @@
 package calculator.controller;
 
+import calculator.service.StringCalculate;
 import calculator.service.StringSplit;
 import calculator.view.InputView;
 
@@ -10,6 +11,7 @@ public class CalculatorOperation {
     public void operateCalculator() {
         getUserInputByView();
         splitDelimiterAndOperand();
+        int result = calculateAndGetResult();
     }
 
     private void getUserInputByView() {
@@ -21,5 +23,11 @@ public class CalculatorOperation {
         StringSplit stringSplit = new StringSplit(inputString);
         stringSplit.preprocessDelimiter();
         stringSplit.splitAndSaveOperands();
+    }
+
+    private int calculateAndGetResult() {
+        StringCalculate stringCalculate = new StringCalculate();
+        stringCalculate.calculate();
+        return stringCalculate.fetchResult();
     }
 }

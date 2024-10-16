@@ -22,4 +22,16 @@ public class Calculator {
     public void setOperands(ArrayList<Integer> operands) {
         this.operands = operands;
     }
+
+    public void saveResult() {
+        int sum = 0;
+        for (Integer operand : operands) {
+            sum += operand;
+        }
+        result = sum;
+    }
+
+    public int getResult() {
+        return result;
+    }
 }
