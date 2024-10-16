@@ -9,6 +9,11 @@ public class Application {
         Scanner scanner = new Scanner(System.in);
         String str = scanner.nextLine();
 
+        if (str.equals("")) {
+            System.out.println("0");
+            return;
+        }
+
         int ans = 0;
 
         String[] split = str.split("[,:]");
