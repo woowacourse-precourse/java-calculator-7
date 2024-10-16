@@ -10,6 +10,7 @@ public class IntegersExtractor {
 
     public List<Integer> extractIntegers(String inputValue) {
         String delimiter = getDelimiter(inputValue);
+        String numberString = removeDelimiterDeclaration(inputValue);
         return Collections.emptyList();
     }
 
@@ -34,5 +35,10 @@ public class IntegersExtractor {
 
     private String getCustomDelimiter(String inputValue, int firstCustomDelimiter, int secondCustomDelimiter) {
         return Pattern.quote(inputValue.substring(firstCustomDelimiter + 2, secondCustomDelimiter));
+    }
+
+    private String removeDelimiterDeclaration(String inputValue) {
+        int newLineIndex = inputValue.indexOf("\\n");
+        return newLineIndex != -1 ? inputValue.substring(newLineIndex + 2) : inputValue;
     }
 }
