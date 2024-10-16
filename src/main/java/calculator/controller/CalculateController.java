@@ -30,6 +30,7 @@ public class CalculateController {
         String userInput = getUserAction().value();
         Delimiters delimiters = Delimiters.fromInput(userInput);
         extractNumbers(userInput, delimiters);
+        showResult();
     }
 
     private UserInput getUserAction() {
@@ -46,15 +47,15 @@ public class CalculateController {
         numbers.addNumber(Integer.parseInt(userInput));
     }
 
+    private boolean doesInputContainsDelimiter(String userInput, Delimiters delimiters) {
+        return userInput.contains(delimiters.getRegex());
+    }
+
     private String extractString(String userInput, Delimiters delimiters) {
         if (delimiters.isCustomDelimiter()) {
             userInput = userInput.split("\\\\n")[1];
         }
         return userInput;
-    }
-
-    private boolean doesInputContainsDelimiter(String userInput, Delimiters delimiters) {
-        return userInput.contains(delimiters.getRegex());
     }
 
     private void addNumbersTo(String[] extractNumberString) {
@@ -69,6 +70,10 @@ public class CalculateController {
             return true;
         }
         throw new IllegalArgumentException("양수와 구분자만 입력 가능합니다.");
+    }
+
+    private void showResult() {
+        outputHandler.showResultMessage(numbers.totalSum());
     }
 
 }
