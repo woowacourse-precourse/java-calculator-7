@@ -10,6 +10,6 @@ public class Helper {
         System.out.println("  ex) 커스텀 구분자'\\' 등록");
         System.out.println("      입력: //\\\\n3\\2\\4");
         System.out.println("      출력: 9\n");
-        System.out.println("- 커스텀 구분자는 '-(마이너스)' 또는 공백 입력은 불가능합니다.");
+        System.out.println("- 커스텀 구분자는 '.', '-(마이너스)', 공백 입력은 불가능합니다.");
     }
 }
