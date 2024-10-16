@@ -25,4 +25,11 @@ class InputDataTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {",123","가0721","a2038"})
+    @DisplayName("입력 값의 처음이 / 나 숫자가 아니면 예외가 발생한다")
+    void checkStartInput(String input){
+        assertThatThrownBy(()->inputData.validate(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }

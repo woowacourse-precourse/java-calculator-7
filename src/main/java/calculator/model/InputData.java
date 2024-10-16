@@ -11,10 +11,17 @@ public class InputData {
     }
 
     public void validate(String input){
-        Pattern pattern = Pattern.compile(".*[0-9]$");
-        Matcher matcher = pattern.matcher(input);
+        Pattern endPattern = Pattern.compile(".*[0-9]$");
+        Matcher endMatcher = endPattern.matcher(input);
 
-        if(!matcher.matches()){
+        Pattern startPattern = Pattern.compile("^[0-9/].*");
+        Matcher startMatcher = startPattern.matcher(input);
+
+        if(!endMatcher.matches()){
+            throw new IllegalArgumentException();
+        }
+
+        if(!startMatcher.matches()){
             throw new IllegalArgumentException();
         }
     }
