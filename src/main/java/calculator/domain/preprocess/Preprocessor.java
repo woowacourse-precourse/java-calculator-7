@@ -38,5 +38,12 @@ public class Preprocessor {
         return delimeterList;
     }
 
+    public String preprocessString(String input) {
+        if (validateDelimeterRequest(input)) {
+            return delimeterProcessor.discardCustomDelimeterRequest(input);
+        } else {
+            return input;
+        }
+    }
 
 }
