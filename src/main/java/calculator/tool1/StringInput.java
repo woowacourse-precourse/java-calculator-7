@@ -6,15 +6,15 @@ import java.util.NoSuchElementException;
 
 public class StringInput {
 
-  public static String inputString() {
+  public static String[] inputString() {
 
     try {
       //입력을 \n 문자열 기준으로 받음
-      String input1 = Console.readLine();
-      String input2 = Console.readLine();
+      //System.out.println("덧셈할 문자열을 입력해 주세요.");
+      String delimiters = Console.readLine();
+      String nums = Console.readLine();
 
-      //문자열 2개를 \n 문자를 추가하여 합침
-      return input1 + "\n" + input2;
+      return new String[]{delimiters, nums};
 
     } catch (NoSuchElementException noSuchElementException) {
       throw new IllegalArgumentException();

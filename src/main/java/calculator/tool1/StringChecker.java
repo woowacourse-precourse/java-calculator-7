@@ -2,11 +2,11 @@ package calculator.tool1;
 
 public class StringChecker {
 
-  public static boolean checkString(String input) {
+  public static boolean checkString(String delimiter, String nums) {
     //문자열 유효성 체크
-    if (!input.startsWith("//")) {
+    if (!delimiter.startsWith("//")) {
       return false;
-    } else if (input.contains("//\n")) {
+    } else if (delimiter.length() < 3) {
       return false;
     } else {
       return true;
