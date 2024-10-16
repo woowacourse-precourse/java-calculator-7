@@ -3,11 +3,14 @@ package calculator.domain.calculator;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class CalculatorTest {
@@ -82,6 +85,32 @@ class CalculatorTest {
         // when, then
         assertThatThrownBy(() -> calculator.extractInteger(input))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("숫자 정보가 없을 경우, 0을 반환한다.")
+    void givenEmptyNumbers_whenSum_thenReturnZero() {
+        // given
+        List<Integer> numbers = new ArrayList<>();
+
+        // when, then
+        Integer sum = calculator.sum(numbers);
+
+        // then
+        assertThat(sum).isZero();
+    }
+
+    @Test
+    @DisplayName("올바른 숫자 정보가 입력되는 경우, 합을 반환한다.")
+    void givenNumbers_whenSum_thenReturnSumOfNumbers() {
+        // given
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5);
+
+        // when, then
+        Integer sum = calculator.sum(numbers);
+
+        // then
+        assertThat(sum).isEqualTo(15);
     }
 
 }

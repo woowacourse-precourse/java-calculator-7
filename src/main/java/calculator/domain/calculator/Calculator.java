@@ -10,6 +10,11 @@ public class Calculator {
         this.prompt = new Prompt();
     }
 
+    public Integer sum(List<Integer> numbers) {
+        return numbers.stream()
+                .reduce(0, Integer::sum);
+    }
+
     public List<Integer> extractInteger(String inputData) {
         List<String> separatedData = prompt.separate(inputData);
 
