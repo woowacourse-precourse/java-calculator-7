@@ -11,9 +11,12 @@ public class ValidatorUtilsTest {
   void 문자열_유효성() {
     String validInput  = "1,2";
     String invalidInput  = "";
+    String NotIncludeNumberInput = ",,,,";
 
     assertThat(Validator.isValidate(validInput)).isEqualTo(true);
     assertThatThrownBy(() -> Validator.isValidate(invalidInput))
+            .isInstanceOf(IllegalArgumentException.class);
+    assertThatThrownBy(() -> Validator.isValidate(NotIncludeNumberInput))
             .isInstanceOf(IllegalArgumentException.class);
   }
 
