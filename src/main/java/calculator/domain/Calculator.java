@@ -41,7 +41,10 @@ public class Calculator {
     private int sumNumbers(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
-            sum += Integer.parseInt(number.trim());
+            number = number.trim();
+            if (!number.isEmpty() && number.matches("[1-9]\\d*")) {
+                sum += Integer.parseInt(number);
+            }
         }
         return sum;
     }
