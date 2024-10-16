@@ -5,5 +5,5 @@
 - [ ] 문자열 처리 기능 (StringProcessor)
     - [ ] 구분자 분리 기능
     - [ ] 커스텀 구분자 분리 기능
-- [ ] 연산 기능 (Calculation)
+    - [ ] 덧셈 기능
 - [ ] 출력 기능 (ResultView)
