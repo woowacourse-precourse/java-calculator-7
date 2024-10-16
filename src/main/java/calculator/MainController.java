@@ -10,31 +10,48 @@ public class MainController {
     public static void run() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String inputString = Console.readLine();
-        int sum=0;
+        List<String> splittedValues ;
+        int sumResult = 0;
 
-        SplitbyCustomDelimiter(inputString);
+        if (checkCustomDelimter(inputString)){
+            splittedValues = SplitbyCustomDelimiter(inputString);
 
-        SplitbyDefaultDelimiter(inputString);
+            for (String part : splittedValues) {
+                sumResult += Integer.parseInt(part);
+            }
+            System.out.printf("결과 : %d", sumResult);
+            return;
+        };
+        splittedValues = SplitbyDefaultDelimiter(inputString);
+        for (String part : splittedValues) {
+            sumResult += Integer.parseInt(part);
+        }
+        System.out.printf("결과 : %d", sumResult);
+        return;
+    }
+
+    private static Boolean checkCustomDelimter(String inputString) {
+        String prefix = inputString.substring(0, 2);
+        String suffix = inputString.substring(3, 5);
+        return prefix.equals("//") && suffix.equals("\\n");
     }
 
     private static List<String> SplitbyDefaultDelimiter(String inputString) {
-        List<String> defaultDelimterSplitted = Arrays.asList(inputString.split(",|:"));
-        return defaultDelimterSplitted;
+        List<String> defaultSplitValues = Arrays.asList(inputString.split(",|:"));
+        return defaultSplitValues;
     }
 
     private static List<String> SplitbyCustomDelimiter(String inputString) {
         String prefix = inputString.substring(0, 2);
         String suffix = inputString.substring(3, 5);
-        List<String> customDelimiterSplitted = null;
+        String customDelimiter = "";
 
         if (prefix.equals("//") && suffix.equals("\\n")) {
-            String customDelimiter = String.valueOf(inputString.charAt(2));
-            String remainingInput = inputString.substring(5);
-            customDelimiterSplitted = Arrays.asList(remainingInput.split(customDelimiter));
+            customDelimiter = String.valueOf(inputString.charAt(2));
         }
-        return customDelimiterSplitted;
+        String remainingInput = inputString.substring(5);
+        List<String> customSplitValues = Arrays.asList(remainingInput.split(customDelimiter));
+        return customSplitValues;
     }
-//            for (String part : customDelimiterSplitted) {
-//                sum += Integer.parseInt(part);
-//            }
+
 }
