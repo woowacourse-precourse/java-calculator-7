@@ -6,8 +6,10 @@
 * CalculatorService
     * 기능: 문자열을 입력받아 숫자들을 분리하고 합산하는 기능을 수행한다.
     *  메서드:
-        * long sum(long numbers[]): 입력된 숫자 배열의 합계를 계산하여 반환한다.
-        * long parseNumber(String input): 입력된 문자열을 숫자로 변환하여 반환한다.
+        * long sum(String input): 입력된 문자열을 기반으로 숫자의 합계를 계산하여 반환한다.
+        * long calculateSum(long[] numbers): 입력된 숫자 배열의 합계를 계산하여 반환한다.
+        * long[] parseNumber(String input): 입력된 문자열을 숫자 배열로 변환하여 반환한다.
+        * String getDelimiter(String input): 입력된 문자열에서 커스텀 구분자, 기본 구분자를 추출한다.
 ### 2. 컨트롤러 클래스
 * CalculatorController
     * 기능: 사용자 입력을 처리하고 결과를 출력하는 역할을 담당한다.
