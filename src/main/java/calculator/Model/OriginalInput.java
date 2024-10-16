@@ -29,7 +29,7 @@ public class OriginalInput {
     }
 
     private void validateCustomIndicator(String originalInput) {
-        if (hasValidCustomDelimiter(originalInput)) {
+        if (!hasValidCustomDelimiter(originalInput)) {
             throw new IllegalArgumentException(INVALID_CUSTOM_INDICATOR_MESSAGE.getErrorMessage());
         }
     }
@@ -39,7 +39,7 @@ public class OriginalInput {
                 hasCustomDelimiter(originalInput) &&
                 isRightCustomIndicatorOrder(originalInput);
     }
-    
+
     private boolean hasCustomDelimiter(String originalInput) {
         return originalInput.contains(CUSTOM_DELIMITER_START) && originalInput.contains(CUSTOM_DELIMITER_END);
     }
