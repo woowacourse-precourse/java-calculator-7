@@ -12,6 +12,8 @@ public class Application {
         if (inputClass.existCustomSeparator(inputText)) {
             calculatorService.calculateContainCustomSeparator(inputText);
         }
-        calculatorService.calculateContainOriginalSeparator(inputText);
+        if (!inputClass.existCustomSeparator(inputText)){
+            calculatorService.calculateContainOriginalSeparator(inputText);
+        }
     }
 }
