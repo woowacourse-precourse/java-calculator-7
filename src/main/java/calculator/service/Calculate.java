@@ -7,6 +7,9 @@ package calculator.service;
 - 숫자 리스트의 합 구하기
 */
 
+import java.util.HashSet;
+import java.util.List;
+
 public class Calculate {
 
     private static final String COLON = ":";
@@ -20,5 +23,10 @@ public class Calculate {
     //문자열 분리 - 쉼표 판단
     public boolean checkContainCOMMA(String userInput) {
         return userInput.contains(COMMA);
+    }
+
+    //문자열 분리 - 콜론
+    public List<String> splitWithCOLON(String userInput) {
+        return List.of(userInput.split(COLON));
     }
 }
