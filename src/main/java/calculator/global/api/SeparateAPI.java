@@ -12,6 +12,7 @@ public class SeparateAPI {
 			separator.addSeparator(customSeparator);
 			return true;
 		}
+
 		return false;
 	}
 }
