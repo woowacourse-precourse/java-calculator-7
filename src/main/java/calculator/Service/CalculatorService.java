@@ -1,9 +1,15 @@
 package calculator.Service;
 
+import calculator.View.InputView;
 import calculator.View.OutputView;
 
 public class CalculatorService {
     private static String Separator = ",|:";
+
+    public static String Input_String_to_add(){
+        return InputView.ask_sum_string();
+    }
+
     public static void add(String input){
         if(input==null || input.isEmpty()){
             OutputView.Result(0);
@@ -11,6 +17,7 @@ public class CalculatorService {
         }
         if(input.startsWith("//")) Custom_Separator(input);
         String[] numbers=input.split(Separator);
+
         int sum=sum(numbers);
         OutputView.Result(sum);
 
@@ -21,7 +28,20 @@ public class CalculatorService {
         Separator=input.substring(2,separatorIndex);
         return input.substring(separatorIndex+1);
     }
+    private static void validateNumbers(String[] numbers){
+        for(String number:numbers){
+        }
+    }
 
+    private static boolean isNumberic(String number){
+        try{
+            Integer.parseInt(number);
+            return true;
+        }
+        catch(NumberFormatException e){
+            return false;
+        }
+    }
     private static int sum(String[] input){
         int sum=0;
         for(int i=0; i<input.length; i++){
