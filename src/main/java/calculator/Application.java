@@ -13,7 +13,7 @@ public class Application {
 
         String[] userInputNumbers = calculator.splitInput(userInput);
 
-        Validation.validatePositiveInput(userInputNumbers);
+        Validation.validateProperInput(userInputNumbers); //입력된 숫자가 양수가 아닌 경우 오류에 맞는 예외처리
 
         int result = calculator.sumInput(userInputNumbers);
 
@@ -56,9 +56,12 @@ class Validation {
         }
     }
 
-    //입력된 숫자가 양의 정수가 아닌 경우 예외 반환
-    public static void validatePositiveInput(String[] userInputNumbers) {
+    //입력된 숫자가 양의 정수가 아닌 경우 오류에 맞는 예외 반환
+    public static void validateProperInput(String[] userInputNumbers) {
         for (String userInputNumber : userInputNumbers) {
+            if (userInputNumber.isEmpty()) {
+                throw new IllegalArgumentException("구분자를 연속으로 입력할 수 없습니다.");
+            }
             if (!userInputNumber.matches("[0-9]+")) {
                 throw new IllegalArgumentException("계산식에는 숫자만 입력할 수 있습니다.");
             }
