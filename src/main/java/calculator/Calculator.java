@@ -1,13 +1,9 @@
 package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
-import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Calculator {
 
-    static boolean iscustomDelimiter = false;    // 기본 구분자, 커스텀 구분자 인지
+    static boolean isCustomDelimiter = false;    // 기본 구분자, 커스텀 구분자 인지
 
     // 덧셈 구하는 함수
     private static int sum(String delimiter, String numberFormula) {
@@ -23,7 +19,7 @@ public class Calculator {
     // 기본 구분자 or 커스텀 구분자 구별하는 함수
     private static void distinctionDelimiter(String formula) {
         if (formula.startsWith("//")) {
-            iscustomDelimiter = true;
+            isCustomDelimiter = true;
         }
     }
 
@@ -35,7 +31,7 @@ public class Calculator {
     public static void run() {
         String formula = input();   // 사용자 입력
         distinctionDelimiter(formula);    // 기본 구분자, 커스텀 구분자 구분하기
-        String[] refineFormula = InputValidation.validateDelimiter(iscustomDelimiter, formula);
+        String[] refineFormula = InputValidation.validateDelimiter(isCustomDelimiter, formula);
         int result = sum(refineFormula[0], refineFormula[1]);   // 덧셈 구하는 함수
         System.out.println("결과 : " + result);
     }

@@ -25,8 +25,8 @@ public class InputValidation {
         throw new IllegalArgumentException("잘못된 사용자 입력입니다.");
     }
 
-    static String[] validateDelimiter(boolean iscustomDelimiter, String formula) {
-        if (iscustomDelimiter) {
+    static String[] validateDelimiter(boolean isCustomDelimiter, String formula) {
+        if (isCustomDelimiter) {
             return validateCustomDelimiter(formula);
         }
         return validateDefaultDelimiter(formula);
