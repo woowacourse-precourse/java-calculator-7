@@ -1,6 +1,5 @@
 package calculator.view;
 
-import calculator.dto.request.SumStringRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,10 +21,10 @@ class InputViewTest {
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
         //when
-        SumStringRequest stringToAdd = inputView.getStringToAdd();
+        String stringToAdd = inputView.getStringToAdd();
         //then
         assertThat(out.toString()).contains("덧셈할 문자열을 입력해 주세요.");
-        assertThat(stringToAdd.toString()).contains(input);
+        assertThat(stringToAdd).contains(input);
     }
 
 }
