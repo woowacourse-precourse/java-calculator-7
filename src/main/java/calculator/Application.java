@@ -21,6 +21,8 @@ public class Application {
                 input = input_separated[1];
             }
 
+            delimiters = delimiters.replace("\\", "\\\\"); // 역슬래시(\)를 custom delimiter로 쓸때의 버그 수정
+
             String[] numbers = input.split("[" + delimiters + "]+");
 
             for (String number:numbers){
