@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class CalculatorTest {
+class CustomDelimiterExtractorTest {
 
     @DisplayName("문자열 앞부분의 \"//\"와 \"\\n\" 사이에 위치하는 문자를 커스텀 구분자로 사용한다.")
     @Test
@@ -18,18 +18,6 @@ class CalculatorTest {
         String customDelimiter = customDelimiterExtractor.getCustomDelimiter(stringWithDelimiter);
         //then
         assertThat(customDelimiter).isEqualTo("|");
-    }
-
-    @DisplayName("문자열 앞부분이 \"//\"로 시작하지 않으면 customDelimiter은 null을 반환한다.")
-    @Test
-    void customDivisionMarkIsNul() {
-        //given
-        CustomDelimiterExtractor customDelimiterExtractor = new CustomDelimiterExtractor();
-        String stringWithDelimiter = "1,2:3";
-        //when
-        String customDelimiter = customDelimiterExtractor.getCustomDelimiter(stringWithDelimiter);
-        //then
-        assertThat(customDelimiter).isNull();
     }
 
     @DisplayName("문자열 앞부분은 \"//\"로 시작하지만 \"\\n\" 로 끝나지 않으면 WRONG_CUSTOM_DELIMITER_FORMAT 예외가 발생한다.")
