@@ -9,11 +9,107 @@ import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
     @Test
-    void 커스텀_구분자_사용() {
+    void 커스텀_구분자_사용_정상1() {
         assertSimpleTest(() -> {
             run("//;\\n1");
             assertThat(output()).contains("결과 : 1");
         });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_정상2() {
+        assertSimpleTest(() -> {
+            run("//;\\n1;2;3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_정상3() {
+        assertSimpleTest(() -> {
+            run("//;\\n1;2:3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_정상4() {
+        assertSimpleTest(() -> {
+            run("//;\\n1;2,3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_정상5() {
+        assertSimpleTest(() -> {
+            run("//*\\n1");
+            assertThat(output()).contains("결과 : 1");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_정상6() {
+        assertSimpleTest(() -> {
+            run("//*\\n1*2*3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_정상7() {
+        assertSimpleTest(() -> {
+            run("//*\\n1:2*3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_정상8() {
+        assertSimpleTest(() -> {
+            run("//&\\n1&2&3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_정상9() {
+        assertSimpleTest(() -> {
+            run("//?\\n1?2?3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_예외1() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//?\\n1!2?3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_사용_예외2() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//*\\n1:2 3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_사용_예외3() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//\t\\n1\t2\b3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_사용_예외4() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//\'\\n1\'2\"3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Test
