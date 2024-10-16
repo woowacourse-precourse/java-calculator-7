@@ -30,4 +30,8 @@ public class StringCalculator {
 
         return splitNumber.stream().map(number -> number.isBlank() ? 0.0 : Double.parseDouble(number)).toList();
     }
+
+    public Double calculate(List<Double> numberList) {
+        return numberList.stream().mapToDouble(Double::doubleValue).sum();
+    }
 }
