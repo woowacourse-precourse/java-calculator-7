@@ -20,5 +20,11 @@ public class StringAddCalculator {
             return addWithDefaultDelimiters(input);
         }
 
+    // 기본 구분자(쉼표, 콜론)를 이용한 덧셈 처리
+    private static int addWithDefaultDelimiters(String input) {
+        String[] numbers = input.split("[,|:]"); // 쉼표 또는 콜론을 구분자로 분리
+        return sum(numbers);
+    }
+
 }
 
