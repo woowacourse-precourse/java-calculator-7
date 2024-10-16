@@ -15,8 +15,7 @@ public class Number {
     }
 
     public int getResult() {
-        //기능구현
-        return 0;
+        return ResultMaker.getResult(numberList);
     }
 
 }
