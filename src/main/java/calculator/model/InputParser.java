@@ -47,8 +47,7 @@ public class InputParser {
             if(matcher.matches()) {
                 String customDelimiter = matcher.group(CUSTOM_DELIMITER_GROUP);
                 String inputNum = matcher.group(INPUT_NUM_GROUP);
-                String[] split = inputNum.split(customDelimiter);
-                List<Integer> list = convertToIntList(split);
+                List<Integer> list = splitAndConvert(customDelimiter, inputNum);
                 checkPositiveNumber(list);
                 return list;
             }
@@ -56,6 +55,12 @@ public class InputParser {
         } catch (Exception e) {
             throw new IllegalArgumentException();
         }
+    }
+
+    private static List<Integer> splitAndConvert(String customDelimiter, String inputNum) {
+        String[] split = inputNum.split(customDelimiter);
+        List<Integer> list = convertToIntList(split);
+        return list;
     }
 
     private static List<Integer> convertToIntList(String[] split) {
