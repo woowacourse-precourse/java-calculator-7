@@ -13,7 +13,15 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("1");
             assertThat(output()).contains("덧셈할 문자열을 입력해 주세요.");
-            assertThat(output()).contains("1");
+            assertThat(output()).contains("결과 : 1");
+        });
+    }
+
+    @Test
+    void 빈_문자열_처리_테스트() {
+        assertSimpleTest(() -> {
+            run("");
+            assertThat(output()).contains("결과 : 0");
         });
     }
 
