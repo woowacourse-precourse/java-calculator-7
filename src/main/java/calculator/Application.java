@@ -1,7 +1,6 @@
 package calculator;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Console;
@@ -19,9 +18,10 @@ public class Application {
 
         input = Console.readLine();
         app.addSeparator(app.getCustomSeparator(input));
+        String[] lst = app.splitString();
 
-        for(int i=0;i< separators.size();i++){
-            System.out.println(separators.get(i));
+        for(int i=0;i< lst.length;i++){
+            System.out.println(lst[i]);
         }
     }
 
