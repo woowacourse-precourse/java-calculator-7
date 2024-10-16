@@ -10,12 +10,14 @@ public class Delimiter {
         this.value = value;
     }
 
-    public static Delimiter from(String value) {
-        return new Delimiter(value);
+    protected void validate(String value) {
+        if (value == null || value.length() != 1) {
+            throw new IllegalArgumentException();
+        }
     }
 
-    public String getValue() {
-        return value;
+    public static Delimiter from(String value) {
+        return new Delimiter(value);
     }
 
     @Override
