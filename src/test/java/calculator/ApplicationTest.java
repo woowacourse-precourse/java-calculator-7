@@ -90,4 +90,22 @@ class ApplicationTest {
 
         assertEquals(20, sumOfIntegers);
     }
+
+    @Test
+    void checkSeparatorException_missingNewline() {
+        String input = "//;1;2;3";
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            app.checkSeparatorException(input);
+        });
+        assertEquals("구분자 형식 오류: 구분자 선언부에 '\\n'이 없습니다.", exception.getMessage());
+    }
+
+    @Test
+    void checkSeparatorException_multipleCharactersInDelimiter() {
+        String input = "//;;\n1;2;3";
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            app.checkSeparatorException(input);
+        });
+        assertEquals("구분자 형식 오류: 구분자는 반드시 하나의 문자여야 합니다.", exception.getMessage());
+    }
 }
