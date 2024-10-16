@@ -18,12 +18,12 @@ public class DelimiterParser {
     public String replace(String input) {
         String result = input;
         for (String delimiter : delimiterList) {
-            if (delimiter.equals("//")) {
-                result = result.replace("//", "");
+            if (delimiter.equals(input.substring(0,2))) {
+                result = result.replace(input.substring(0,2), "");
                 continue;
             }
-            if (delimiter.equals("\\n")) {
-                result = result.replace("\\n", "");
+            if (delimiter.equals(input.substring(3,5))) {
+                result = result.replace(input.substring(3,5), "");
                 continue;
             }
             result = result.replace(delimiter, COMMON_DELIMITER);
