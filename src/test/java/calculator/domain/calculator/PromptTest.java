@@ -75,8 +75,8 @@ class PromptTest {
     }
 
     @Test
-    @DisplayName("기본 구분자 외 다른 구분자가 주어질 경우, 제거되지 않는다.")
-    void givenInputWithBaseDelimiter_whenSeparate_thenReturnListWithoutBaseDelimiters() {
+    @DisplayName("기본 구분자 외 다른 구분자가 주어질 경우, 다른 구분자는 제거되지 않는다.")
+    void givenInputOtherDelimiter_whenSeparate_thenReturnNotSeperatedOtherDelimiter() {
         // given
         String input = "1,2:3+4";
 
@@ -87,6 +87,37 @@ class PromptTest {
         String[] inputWithoutDelimiter = input.split("[,:]");
         assertThat(result).containsExactly(inputWithoutDelimiter);
         assertThat(result.get(2)).contains("+");
+    }
+
+    @Test
+    @DisplayName("기본 구분자와 커스텀 구분자가 주어질 경우, 모든 구분자를 제거한 결과를 반환한다.")
+    void givenInputWithCustomDelimiter_whenCustomSeparate_thenReturnListWithoutDelimiters() {
+        // given
+        String input = "1,2:3+4";
+        char customDelimiter = '+';
+
+        // when
+        List<String> result = prompt.separate(input, customDelimiter);
+
+        // then
+        String[] inputWithoutDelimiter = input.split("[,:+]");
+        assertThat(result).containsExactly(inputWithoutDelimiter);
+    }
+
+    @Test
+    @DisplayName("기본 구분자와 커스텀 구분자 외 다른 구분자가 주어질 경우, 다른 구분자는 제거되지 않는다.")
+    void givenInputWithOtherDelimiter_whenCustomSeparate_thenReturnNotSeperatedOtherDelimiter() {
+        // given
+        String input = "1,2:3+4-5";
+        char customDelimiter = '+';
+
+        // when
+        List<String> result = prompt.separate(input, customDelimiter);
+
+        // then
+        String[] inputWithoutDelimiter = input.split("[,:+]");
+        assertThat(result).containsExactly(inputWithoutDelimiter);
+        assertThat(result.get(3)).contains("-");
     }
 
 }

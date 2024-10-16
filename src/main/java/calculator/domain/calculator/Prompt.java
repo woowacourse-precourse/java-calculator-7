@@ -26,4 +26,21 @@ public class Prompt {
         return separatedData;
     }
 
+    public List<String> separate(String inputData, char customSeparator) {
+        List<String> separatedData = new ArrayList<>();
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (char word: inputData.toCharArray()) {
+            if (word == COMMA || word == COLON || word == customSeparator) {
+                separatedData.add(stringBuilder.toString());
+                stringBuilder.setLength(0);
+                continue;
+            }
+            stringBuilder.append(word);
+        }
+        separatedData.add(stringBuilder.toString());
+
+        return separatedData;
+    }
+
 }
