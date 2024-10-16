@@ -4,6 +4,7 @@ import calculator.model.Calculator;
 import calculator.model.NumberParser;
 import calculator.model.SeparatorParser;
 import calculator.view.InputView;
+import calculator.view.OutputView;
 import java.util.ArrayList;
 
 public class CalculatorController {
@@ -19,5 +20,8 @@ public class CalculatorController {
 
         Calculator calculator = new Calculator();
         int result = calculator.numberCalculator(operandList);
+
+        OutputView outputView = new OutputView();
+        outputView.printResult(result);
      }
 }
