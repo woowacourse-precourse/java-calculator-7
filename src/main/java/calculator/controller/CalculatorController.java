@@ -1,28 +1,27 @@
 package calculator.controller;
 
-import calculator.util.Utils;
+import calculator.domain.Calculator;
 import calculator.view.InputView;
-
-import java.lang.reflect.Array;
-import java.util.Arrays;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class CalculatorController {
+    private Calculator calculator;
 
-    public void start(){
-        beforeCalculate();
-
+    public void run(){
+        startCalculate();
+        
     }
 
-    public void beforeCalculate(){
-        String[] splitStringArr = Utils.splitStringToArray(inputString());
-        System.out.println(Arrays.toString(splitStringArr));
+    public void startCalculate(){
+        calculator = new Calculator(inputString());
     }
 
     private String inputString(){
         InputView.printInputCalculateStringMessage();
         return readLine().trim();
     }
+
+
 }
 
