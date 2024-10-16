@@ -12,7 +12,9 @@ public class Application {
                 {":"};
         if (catchCustomSeparator(input)) {
             separators =
-                    new String[]{":", input.substring(2, 3)};
+                    new String[]{":",
+                            input.substring(2,
+                                    input.indexOf("\\n"))};
         }
         return separators;
     }

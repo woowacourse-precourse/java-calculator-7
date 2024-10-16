@@ -1,4 +1,5 @@
 ## New Features in This Release
+- feat(Application): more flexible custom separator
 - feat(Application): add exception alert
 - feat(Application): add printing sum
 - feat(Application): add checking validity
