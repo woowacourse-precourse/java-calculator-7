@@ -25,9 +25,13 @@ public class Application {
         matcher = pattern.matcher(input);
 
         if (matcher.matches()) {
-            delimiter = matcher.group(1);   // setDelimiter로 대체할 예정
+            setDelimiter(matcher);
 
             input = matcher.group(2);
         }
+    }
+
+    private static void setDelimiter(Matcher matcher) {
+        delimiter = matcher.group(1);
     }
 }
