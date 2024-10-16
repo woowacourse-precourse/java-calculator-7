@@ -10,6 +10,11 @@ public class Delimiters {
         delimiters.add(',');
         delimiters.add(';');
     }
+    
+    public boolean usesCustomDelimiter(String inputString) {
+        char firstChar = inputString.charAt(0);
+        return firstChar == '/';
+    }
 
     public void correctCustomDelimiterOrThrow(String inputString) {
         if (usesCustomDelimiter(inputString)) {
@@ -24,11 +29,6 @@ public class Delimiters {
         if (!isCustomDelimiterDigit(inputString)) {
             throw new IllegalArgumentException();
         }
-    }
-
-    public boolean usesCustomDelimiter(String inputString) {
-        char firstChar = inputString.charAt(0);
-        return firstChar == '/';
     }
 
     public boolean isCustomDelimiterFirstFormatCorrect(String inputString) {
