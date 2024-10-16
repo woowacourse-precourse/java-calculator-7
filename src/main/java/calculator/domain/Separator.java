@@ -12,34 +12,40 @@ public class Separator {
         availableSeparators = new ArrayList<>(List.of(DEFAULT_COMMA, DEFAULT_COLON));
         validate(numbers);
     }
-
     private void validate(String numbers) {
         if(numbers.startsWith("//")) {
-            int newlineIndex;
-            if(numbers.contains("\\n")) {
-                newlineIndex = numbers.indexOf("\\n");
-            }
-            else {
-                newlineIndex = numbers.indexOf("\n");
-            }
-
-            if(newlineIndex == -1) {
-                throw new IllegalArgumentException();
-            }
-
-            String customSeparator = numbers.substring(2, newlineIndex);
-            availableSeparators.add(customSeparator);
-
-            numbers = numbers.substring(newlineIndex+2);
+            int newlineIndex = validateSpecialCase(numbers);
+            numbers = addCustomSeparator(numbers, newlineIndex);
         }
+        validateSeparators(numbers);
+    }
+    private int validateSpecialCase(String numbers) {
+        int newlineIndex;
+        if(numbers.contains("\\n")) {
+            newlineIndex = numbers.indexOf("\\n");
+        }
+        else {
+            newlineIndex = numbers.indexOf("\n");
+        }
+
+        if(newlineIndex == -1) {
+            throw new IllegalArgumentException();
+        }
+
+        return newlineIndex;
+    }
+
+    private String addCustomSeparator(String numbers, int newlineIndex) {
+        String customSeparator = numbers.substring(2, newlineIndex);
+        availableSeparators.add(customSeparator);
+        return numbers.substring(newlineIndex+2);
+    }
+
+    private void validateSeparators(String numbers) {
         for(char ch : numbers.toCharArray()) {
             if(!Character.isDigit(ch) && !availableSeparators.contains(String.valueOf(ch))) {
                 throw new IllegalArgumentException();
             }
         }
-    }
-
-    public List<String> getAvailableSeparators() {
-        return availableSeparators;
     }
 }

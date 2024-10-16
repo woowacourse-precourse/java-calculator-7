@@ -9,9 +9,10 @@ public class PlayerController {
     public PlayerController() {
         this.inputView = new InputView();
     }
-
     public void process() {
+        input();
+    }
+    private void input() {
         String numbers = inputView.inputNumbers();
-        Separator separator = new Separator(numbers);
     }
 }
