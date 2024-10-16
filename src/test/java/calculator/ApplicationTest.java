@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class ApplicationTest extends NsTest {
 
   @Test
-  void 입력_확인(){
+  void 입력_확인() {
     assertSimpleTest(() -> {
       run("//:,\n1:2:3");
       assertThat(output()).contains("덧셈할 문자열을 입력해 주세요.");
@@ -47,9 +47,9 @@ class ApplicationTest extends NsTest {
 
     assertSimpleTest(() -> {
       Extracts extracts =
-          new Extracts("1:2:3","//:,");
+          new Extracts("1:2:3", "//:,");
 
-      assertThat(extracts.extractDelimiter()).contains(":",",");
+      assertThat(extracts.extractDelimiter()).contains(":", ",");
     });
 
   }
@@ -58,19 +58,19 @@ class ApplicationTest extends NsTest {
   void 숫자_추출() {
     assertSimpleTest(() -> {
       Extracts extracts =
-          new Extracts("1:2:3","//:,");
+          new Extracts("1:2:3", "//:,");
 
-      assertThat(extracts.extractDelimiter()).contains(":",",");
-      assertThat(extracts.extractNum()).contains(1,2,3);
+      assertThat(extracts.extractDelimiter()).contains(":", ",");
+      assertThat(extracts.extractNum()).contains(1, 2, 3);
     });
   }
 
   @Test
-  void 정답_계산(){
+  void 정답_계산() {
     assertSimpleTest(() -> {
 
       Extracts extracts =
-          new Extracts("1:2:3","//:,");
+          new Extracts("1:2:3", "//:,");
       extracts.extractDelimiter();
       extracts.extractNum();
 
@@ -82,10 +82,10 @@ class ApplicationTest extends NsTest {
   }
 
   @Test
-  void 정답_출력(){
+  void 정답_출력() {
     assertSimpleTest(() -> {
       Extracts extracts =
-          new Extracts("1:2:3","//:,");
+          new Extracts("1:2:3", "//:,");
       extracts.extractDelimiter();
       extracts.extractNum();
 

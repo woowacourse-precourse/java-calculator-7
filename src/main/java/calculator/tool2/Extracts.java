@@ -10,7 +10,7 @@ public class Extracts {
   private long[] nums;
 
 
-  public long[] getNums(){
+  public long[] getNums() {
     return this.nums;
   }
 
@@ -24,7 +24,7 @@ public class Extracts {
     String regex = convertToRegex(delimiters);
 
     //regex로 숫자들을 추출하고 long 형 배열로 숫자들을 리턴합니다.
-    return this.nums =  Arrays.stream(numString.split(regex))
+    return this.nums = Arrays.stream(numString.split(regex))
         .mapToLong(Long::parseLong)
         .toArray();
   }

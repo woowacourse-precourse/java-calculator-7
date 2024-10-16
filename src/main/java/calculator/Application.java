@@ -23,7 +23,7 @@ public class Application {
       }
 
       Extracts extracts =
-          new Extracts(input.getNums(),input.getDelimiters());
+          new Extracts(input.getNums(), input.getDelimiters());
 
       extracts.extractDelimiter();
       extracts.extractNum();

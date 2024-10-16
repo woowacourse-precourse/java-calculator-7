@@ -12,7 +12,7 @@ public class Answer {
     return sum;
   }
 
-  public void printAns(){
+  public void printAns() {
     System.out.println("결과 : " + this.calSum());
   }
 
