@@ -25,4 +25,9 @@ public class Delimiters {
         String lastFormat = inputString.substring(3, 4);
         return lastFormat.equals("\n");
     }
+
+    public boolean isCustomDelimiterNotDigit(String inputString) {
+        char customDelimiter = inputString.charAt(2);
+        return Character.isDigit(customDelimiter);
+    }
 }
