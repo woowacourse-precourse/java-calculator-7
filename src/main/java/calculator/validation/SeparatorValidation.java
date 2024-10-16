@@ -6,6 +6,11 @@ public class SeparatorValidation {
         if (isNotSeparator(input)) {
             throw new IllegalArgumentException("잘못된 구분자입니다.");
         }
+        if (containCustomSeparator(input)) {
+            if (input.indexOf("//") != 0) {
+                throw new IllegalArgumentException("커스텀 구분자는 반드시 앞에 있어야합니다.");
+            }
+        }
     }
 
     private static boolean isNotSeparator(String input) {
