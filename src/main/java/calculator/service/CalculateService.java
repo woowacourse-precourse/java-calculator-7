@@ -24,8 +24,13 @@ public class CalculateService {
         } else if (inputString.contains(",") || inputString.contains(":")){
             String[] split = inputString.split("[,:]");
 
-            for (String s : split) {
-                sum += Integer.parseInt(s);
+            try {
+                for (String s : split) {
+                    System.out.println("s = " + s);
+                    sum += Integer.parseInt(s);
+                }
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("구분자(, 또는 :)와 숫자로만 입력해주세요.");
             }
         }
         return sum;

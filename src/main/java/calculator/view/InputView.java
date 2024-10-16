@@ -15,6 +15,6 @@ public class InputView {
         if (userInput.isBlank()) {
             throw new IllegalArgumentException("문자열을 입력해주세요.");
         }
-        return Console.readLine();
+        return userInput;
     }
 }
