@@ -53,7 +53,11 @@ public class Parser {
         String[] tokens = input.split(delimiter);
 
         if (tokens.length == 1 && tokens[0].equals(input)) {
-            throw new IllegalArgumentException("구분자를 사용하지 않았습니다. 프로그램을 종료합니다.");
+            try {
+                parseNumber(tokens[0]);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("구분자를 사용하지 않았습니다. 프로그램을 종료합니다.");
+            }
         }
 
         return tokens;
