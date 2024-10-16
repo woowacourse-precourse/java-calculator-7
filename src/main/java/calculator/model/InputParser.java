@@ -6,7 +6,7 @@ import java.util.List;
 public class InputParser {
 
     public List<Integer> checkAndParseInput(String input) throws IllegalArgumentException{
-        if (input == null) {
+        if (input.isEmpty()) {
             return List.of(0,0);
         }
         if (checkDefaultDelimiter(input)) {
