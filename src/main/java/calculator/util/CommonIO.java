@@ -7,7 +7,7 @@ public class CommonIO {
         System.out.println(message);
     }
 
-    public String receiveInput(String input){
+    public String receiveInput(){
         return Console.readLine();
     }
 }
