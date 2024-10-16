@@ -5,6 +5,7 @@ import java.util.List;
 
 public class CustomSeparator implements Separator {
 
+    private static final String PREFIX_STANDARD = "\\n";
     private final String separator;
 
     public CustomSeparator(String separator) {
@@ -13,7 +14,12 @@ public class CustomSeparator implements Separator {
 
     @Override
     public List<String> separate(String value) {
-        return convert(validate(value));
+        return convert(validate(removePrefix(value)));
+    }
+
+    private String removePrefix(String value) {
+        return value.substring(
+                value.indexOf(PREFIX_STANDARD) + PREFIX_STANDARD.length());
     }
 
     private List<String> convert(String value) {
