@@ -15,6 +15,7 @@ public class Parser {
         List<Character> separators = new ArrayList<>(List.of(COMMA.getSeparator(), COLON.getSeparator()));
         if (checkCustomSeparator(input)) {
             separators = getSeparators(input);
+            input = getPureString(input);
         }
         List<Integer> numbers = new ArrayList<>();
         StringBuilder number = new StringBuilder();
@@ -28,6 +29,9 @@ public class Parser {
             } else {
                 throw new IllegalArgumentException();
             }
+        }
+        if (!number.isEmpty()) {
+            numbers.add(Integer.parseInt(number.toString()));
         }
         return numbers;
     }
