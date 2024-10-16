@@ -13,6 +13,8 @@ public class InputView {
     public List<Integer> getAdditionNumbers() {
         String input = Console.readLine();
 
+        input = input.replace("\\n", "\n");
+
         if (input.isBlank()) {
             return Collections.emptyList();
         }
