@@ -23,7 +23,10 @@ public class CalculatorController {
             input = input.substring(5);
         }
         List<String> separate = separators.separate(input);
-        System.out.println("separate = " + separate);
+        int sum = separate.stream()
+                .map(Integer::parseInt)
+                .reduce(0, Integer::sum);
+        System.out.println("결과 : " + sum);
     }
 
     private static Optional<String> findCustomSeparator(String input) {
