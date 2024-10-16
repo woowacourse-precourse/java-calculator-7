@@ -13,14 +13,14 @@ public class Application {
             String ch = "";
             ch += user_input.charAt(i);
             if (separator.contains(ch)) {
-                if (num != "")
+                if (num.equals("") == false)
                     sum += Integer.parseInt(num);
                 num = "";
             } else {
                 num += ch;
             }
         }
-        if (num != "")
+        if (num.equals("") == false)
             sum += Integer.parseInt(num);
         return sum;
     }
