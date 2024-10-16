@@ -15,7 +15,7 @@ public class Numbers {
         return numbers;
     }
 
-    public void addNumbers(String number){
+    public void addNumber(String number){
         numbers.add(number);
     }
 }
