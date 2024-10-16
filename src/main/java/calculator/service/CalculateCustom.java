@@ -25,7 +25,8 @@ public class CalculateCustom extends CalculateSeparator {
     }
 
     public static String getCustomSeparator(String userInput) {
-        return substringUserInputWithSeparator(getCustomPreToPost(userInput), TWO, getUserInputLength(getCustomPreToPost(userInput)) - TWO);
+        String splitCustom = getCustomPreToPost(userInput);
+        return substringUserInputWithSeparator(splitCustom, TWO, getUserInputLength(splitCustom) - TWO);
     }
 
     public static String getUserInput(String userInput) {
@@ -33,6 +34,16 @@ public class CalculateCustom extends CalculateSeparator {
     }
 
     public static List<String> splitWithCustomSeparator(String userInput) {
-        return splitWithSeparator(getUserInput(userInput), getCustomSeparator(userInput));
+        String splitUserInput = getUserInput(userInput);
+        String splitCustomSeparator = getCustomSeparator(userInput);
+        if (checkNotContainSeparatorInUserInput(splitUserInput, splitCustomSeparator)) {
+            //예외 처리
+            throw new IllegalArgumentException("에러 처리-커스텀 구분자");
+        }
+        return splitWithSeparator(splitUserInput, splitCustomSeparator);
+    }
+
+    public static boolean checkNotContainSeparatorInUserInput(String userInput, String separator) {
+        return checkNotContainSeparator(userInput, separator);
     }
 }
