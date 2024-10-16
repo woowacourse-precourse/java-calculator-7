@@ -19,6 +19,10 @@ public class InputGuidelines {
         this.defaultSeparator = defaultSeparator;
     }
 
+    public Separator getDefaultSeparator() {
+        return defaultSeparator;
+    }
+
     private String joinWithDefaultSeparator(){
         String defaultSeparatorAsString = "";
         List<String> defaultSeparators = defaultSeparator.getDefaultSeparators();
