@@ -19,13 +19,14 @@ public class CalculatorService {
         this.input = input;
     }
 
-    public void calculate() {
+    public double calculate() {
         if (input.isEmpty()) {
             throw new IllegalArgumentException("입력값이 존재하지 않습니다.");
         }
         addCustomSeparatorIfPresent();
         String[] separatedValues = split();
         Double[] values = convertToNumbers(separatedValues);
+        return sum(values);
     }
 
     private void addCustomSeparatorIfPresent() {
@@ -51,5 +52,15 @@ public class CalculatorService {
         if (value.isEmpty() || !value.matches(POSITIVE_NUMBER_REGEX)) {
             throw new IllegalArgumentException("양수만 허용됩니다: " + value);
         }
+    }
+
+    private double sum(Double[] values) {
+        double result = Arrays.stream(values)
+                .mapToDouble(Double::doubleValue)
+                .sum();
+        if (Double.isInfinite(result)) {
+            throw new ArithmeticException("계산 결과가 너무 큽니다. 오버플로우 발생");
+        }
+        return result;
     }
 }

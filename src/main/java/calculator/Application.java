@@ -9,6 +9,6 @@ public class Application {
         ConsoleView view = new ConsoleView();
         String input = view.requestInput();
         CalculatorService service = new CalculatorService(input);
-        service.calculate();
+        double result = service.calculate();
     }
 }
