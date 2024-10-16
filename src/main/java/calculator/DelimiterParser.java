@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class DelimiterParser {
-    private static final String DEFAULT_REGEX = "[,:]";
-
+    private static final String COMMON_DELIMITER = ",";
     public static boolean isDefaultDelimiter(String input) {
-        String[] defaultDelimiterNumber = input.split(DEFAULT_REGEX);
+        String[] defaultDelimiterNumber = input.split(COMMON_DELIMITER);
         try {
             Integer.parseInt(defaultDelimiterNumber[0]);
             return true;
@@ -25,7 +24,7 @@ public abstract class DelimiterParser {
     }
 
     public static List<Integer> splitInputAsString(String input) {
-        String[] split = input.split(DEFAULT_REGEX);
+        String[] split = input.split(COMMON_DELIMITER);
 
         // 여기서 List<Integer>로 보내야 될거같음
         List<Integer> list = new ArrayList<>();
