@@ -32,14 +32,20 @@ public class Separator {
         }
         String[] numberArray = replaceString.split(COMMA);
         try{
-            for(String s : numberArray){
-                int i = Integer.parseInt(s);
-                numberList.add(i);
-            }
+            addNumberToNumberList(numberArray, numberList);
         }catch (Exception e){
             throw new IllegalArgumentException("[ERROR] 구분자와 숫자만 입력해주세요");
         }
         return numberList;
+    }
+
+    private void addNumberToNumberList(String[] numberArray, List<Integer> numberList) {
+        for(String s : numberArray){
+            if(!s.isEmpty()){
+                int i = Integer.parseInt(s);
+                numberList.add(i);
+            }
+        }
     }
 
     private String getNumberString(String readString) {
