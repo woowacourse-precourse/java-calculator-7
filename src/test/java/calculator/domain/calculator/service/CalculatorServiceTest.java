@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import java.math.BigInteger;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CalculatorServiceTest {
 
@@ -22,16 +21,29 @@ public class CalculatorServiceTest {
         assertThat(result).isEqualTo(0);
     }
 
-    //TODO : 구현 필요
     @Test
-    void TDD_빈_문자열이_아닐때_예외() {
+    void TDD_기본_구분자_쉼표_문자열_계산() {
         //given
         String input = "1,2,3";
 
         //when
         CalculatorService calculatorService = new CalculatorService();
+        BigInteger sum = calculatorService.sum(input);
 
         //then
-        assertThatThrownBy(() -> calculatorService.sum(input)).isInstanceOf(UnsupportedOperationException.class);
+        assertThat(sum).isEqualTo(6);
+    }
+
+    @Test
+    void 기본_구분자_혼합_문자열_계산() {
+        //given
+        String input = "1:2,3";
+
+        //when
+        CalculatorService calculatorService = new CalculatorService();
+        BigInteger sum = calculatorService.sum(input);
+
+        //then
+        assertThat(sum).isEqualTo(6);
     }
 }
