@@ -16,6 +16,8 @@ public class CalculatorController {
 
         String[] numbers = extractNumbers(input, separator);
         CustomCalculator customCalculator = new CustomCalculator(numbers);
+
+        customCalculator.calculateSum();
     }
 
     private String findSeparator(String input) {
