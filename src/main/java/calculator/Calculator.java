@@ -52,7 +52,7 @@ public class Calculator {
         if(matcher.find()){
             customDelimiter = matcher.group(1);
             expression = matcher.group(2);
-            validateNotDigit();
+            validateNonZeroDigit();
         } else {
             expression = input;
         }
@@ -61,8 +61,9 @@ public class Calculator {
         regex.setExpression(expression);
     }
 
-    private void validateNotDigit() {
-        if(Character.isDigit(customDelimiter.charAt(0))){
+    private void validateNonZeroDigit() {
+        char c = customDelimiter.charAt(0);
+        if(Character.isDigit(c) && c != '0'){
             throw new IllegalArgumentException("잘못된 입력입니다.");
         }
     }

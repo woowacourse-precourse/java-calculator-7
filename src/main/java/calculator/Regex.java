@@ -16,7 +16,6 @@ public class Regex {
 
     public void setNumbers(String delimiter){
         numbers = getList(delimiter);
-        validateIsPositive();
     }
 
     private List<Integer> getList(String delimiter) {
@@ -26,7 +25,9 @@ public class Regex {
                         return 0;
                     }
                     try {
-                        return Integer.parseInt(value);
+                        int number = Integer.parseInt(value);
+                        validateIsPositive(number);
+                        return number;
                     } catch (IllegalArgumentException e) {
                         throw new IllegalArgumentException("잘못된 입력값입니다.");
                     }
@@ -34,11 +35,9 @@ public class Regex {
                 .collect(Collectors.toList());
     }
 
-    private void validateIsPositive() {
-        for(int number : numbers) {
-            if(number < 0) {
-                throw new IllegalArgumentException("잘못된 입력입니다.");
-            }
+    private void validateIsPositive(int value) {
+        if(value <= 0){
+            throw new IllegalArgumentException("잘못된 입력입니다.");
         }
     }
 
