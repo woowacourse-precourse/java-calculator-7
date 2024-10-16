@@ -7,6 +7,17 @@ import java.util.List;
 
 public class Application {
 
+
+    public String removeDeclarePart(String input, Character customSeparator) {
+        if (customSeparator == null) {
+            return input;
+        }
+        else {
+            return input.substring(3);
+        }
+    }
+
+
     public Character extractCustomSeparator(String input) {
         if (!input.startsWith("//")) {
             return null;
@@ -23,6 +34,7 @@ public class Application {
 
     public int calculateSum(String input) {
         Character customSeparator = extractCustomSeparator(input);
+        String removedDeclarePart = removeDeclarePart(input, customSeparator);
         return 0;
     }
 
