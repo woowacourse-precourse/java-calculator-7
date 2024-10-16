@@ -11,7 +11,7 @@ public class Application {
         if (!isCustom(input)) {
             DelimiterResult regex = new DelimiterResult(defaultDelimiter.getDefaultDelimiter());
             InputNumberStrings numberStrings = new InputNumberStrings(input, regex);
-            Numbers numbers = new Numbers(numberStrings.split(regex.getDelimiterResult()));
+            Numbers numbers = new Numbers(numberStrings.splitByDelimiter(regex.getDelimiterResult()));
 
             int sum = 0;
             for (String number : numbers.getNumbers()) {
@@ -32,14 +32,13 @@ public class Application {
             int customDelimiterEndIndex = input.indexOf("\\n");
 
             CustomDelimiter customDelimiter = new CustomDelimiter(input.substring(2, customDelimiterEndIndex));
-
             DelimiterResult customRegex = new DelimiterResult(defaultDelimiter.getDefaultDelimiter()
                     .substring(0, defaultDelimiter.getDefaultDelimiter().length() - 1)
                     + customDelimiter.getCustomDelimiter() + "]");
 
             InputNumberStrings numberStrings = new InputNumberStrings(input.substring(customDelimiterEndIndex + 2),
                     customRegex);
-            Numbers numbers = new Numbers(numberStrings.split(customRegex.getDelimiterResult()));
+            Numbers numbers = new Numbers(numberStrings.splitByDelimiter(customRegex.getDelimiterResult()));
 
             int sum = 0;
             for (String number : numbers.getNumbers()) {
