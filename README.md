@@ -1,7 +1,7 @@
 # ✔️ TODO List 
 
 - [x] ConsoleInput 클래스 구현
-  - [ ] Input test 작성
+  - [x] Input test 작성
 - [ ] Preprocessor 클래스 구현
   - 띄워쓰기도 구분자로 사용가능 해야함 
   - [ ] 구분자와 숫자+구분자 문자열을 담고 있는 DTO 구현
