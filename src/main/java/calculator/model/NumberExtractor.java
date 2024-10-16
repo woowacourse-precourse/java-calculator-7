@@ -1,12 +1,15 @@
 package calculator.model;
 
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
 public class NumberExtractor {
     public static void extractNumber(String inputString, Delimiters delimiters, Calculator calculator) {
         if (!isStartingWithDigit(inputString)) {
             throw new IllegalArgumentException();
         }
-        String[] splitedStringArray = splitByDelimiters(delimiters, inputString);
-        for (String str : splitedStringArray) {
+        ArrayList<String> splitedStringList = splitByDelimiters(delimiters, inputString);
+        for (String str : splitedStringList) {
             validateNumberString(str);
             int number = Integer.parseInt(str);
             calculator.saveNumber(number);
@@ -18,13 +21,17 @@ public class NumberExtractor {
         return Character.isDigit(firstChar);
     }
 
-    private static String[] splitByDelimiters(Delimiters delimiters, String inputString) {
-        String delimiterRegex = createDelimiterRegex(delimiters);
-        String[] splitedStringArray = inputString.split(delimiterRegex);
-        return splitedStringArray;
+    private static ArrayList<String> splitByDelimiters(Delimiters delimiters, String inputString) {
+        String delimitersString = createDelimitersString(delimiters);
+        StringTokenizer tokenizer = new StringTokenizer(inputString, delimitersString);
+        ArrayList<String> splitedStringList = new ArrayList<>();
+        while (tokenizer.hasMoreTokens()) {
+            splitedStringList.add(tokenizer.nextToken());
+        }
+        return splitedStringList;
     }
 
-    private static String createDelimiterRegex(Delimiters delimiters) {
+    private static String createDelimitersString(Delimiters delimiters) {
         StringBuilder stringBuilder = new StringBuilder();
         for (char c : delimiters.getDelimiters()) {
             stringBuilder.append(c);
