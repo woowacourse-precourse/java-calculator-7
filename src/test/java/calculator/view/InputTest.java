@@ -3,6 +3,7 @@ package calculator.view;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
+import java.io.ByteArrayInputStream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -17,8 +18,11 @@ public class InputTest {
     class Input_string_test {
         @ParameterizedTest
         @DisplayName("문자열을 입력받을 수 있다")
-        @ValueSource(strings = {"1,2:3", "///\n1/2/3", "//\\n1\2\3", "//n\n1n2n3", "// \n1 2 3"})
+        @ValueSource(strings = {"1,2:3", "///\\n1/2/3", "//\\\\n1\\2\\3", "//n\\n1n2n3", "// \\n1 2 3"})
         void when_input_string_then_return_string(String input) {
+            //given
+            System.setIn(new ByteArrayInputStream(input.getBytes()));
+
             //when - then
             assertThat(inputView.inputString()).isEqualTo(input);
         }
@@ -27,7 +31,6 @@ public class InputTest {
     @Nested
     @DisplayName("문자열 입력 검증 테스트")
     class Input_string_validation_test {
-
         @Test
         @DisplayName("구분자가 연속해서 나오는 경우에는 예외가 발생한다")
         void when_input_consecutive_delimiter_then_throw_exception() {
