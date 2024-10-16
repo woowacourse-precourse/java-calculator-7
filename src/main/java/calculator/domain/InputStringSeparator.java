@@ -7,8 +7,10 @@ public class InputStringSeparator {
     private String[] inputNumber; // int vs integear ??
     private int startIndex;
     private int lastIndex;
+    private boolean isCustomSeparatorContained = false;
 
     public InputStringSeparator(String inputString) {
+        validateInputString(inputString);
         setInputString(inputString);
         setCustomSeparator();
         setFinalSeparator();
@@ -16,7 +18,14 @@ public class InputStringSeparator {
     }
 
     private void validateInputString(String inputString) {
-
+        boolean isFirstCustomSeparator = inputString.contains("//");
+        boolean isLastCustomSeparator = inputString.contains("\\n");
+        if (isFirstCustomSeparator != isLastCustomSeparator){
+            throw new IllegalArgumentException("형식을 지켜 커스텀 구분자를 지정해야 합니다.");
+        }
+        if (isFirstCustomSeparator && isLastCustomSeparator){
+            this.isCustomSeparatorContained = true;
+        }
     }
 
     private void setInputString(String inputString) {
@@ -24,16 +33,13 @@ public class InputStringSeparator {
     }
 
     private void setCustomSeparator() {
-        if (isCustomSeparatorContained()) {
+        if (isCustomSeparatorContained) {
             startIndex = inputString.indexOf("//") + 2;
             lastIndex = inputString.indexOf("\\n");
             this.customSeparator = inputString.substring(startIndex, lastIndex); //커스텀 구분자는 그럼 한 개만인가?
         }
     }
 
-    private boolean isCustomSeparatorContained() {
-        return inputString.contains("//") && inputString.contains("\\n");
-    }
 
     private void setFinalSeparator() {
         if (this.customSeparator.isEmpty()) {
@@ -44,7 +50,7 @@ public class InputStringSeparator {
     }
 
     private void setInputNumber() {
-        if (isCustomSeparatorContained()) {
+        if (isCustomSeparatorContained) {
             this.inputString = inputString.substring(lastIndex + 2);
         }
         if (inputString.length() > 0) {
