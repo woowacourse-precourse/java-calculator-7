@@ -8,7 +8,7 @@ public class Delimiter {
     }
 
     // 커스텀 구분자를 추출하고 유효성 확인
-    public String getCustomDelimiter(String input) {
+    public static String getCustomDelimiter(String input) {
         if (hasCustomDelimiter(input)) {
             int delimiterIndex = input.indexOf("\n");
             String delimiter = input.substring(2, delimiterIndex);
