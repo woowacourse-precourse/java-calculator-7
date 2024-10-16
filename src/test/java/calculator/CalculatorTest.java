@@ -229,4 +229,44 @@ public class CalculatorTest {
                 .hasMessage("구분자 사이에 숫자가 없습니다.");
     }
 
+    @Test
+    @DisplayName("숫자 문자열을 정수로 변환하고 합산한다.")
+    void 숫자_문자열을_정수로_변환하고_합산() {
+        // Given
+        Calculator calculator = new Calculator();
+        String[] numbers = {"1", "2", "3"};
+
+        // When
+        int result = calculator.calculateSum(numbers);
+
+        // Then
+        assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("음수가 포함된 경우 예외를 발생시킨다.")
+    void 음수_포함_예외_발생() {
+        // Given
+        Calculator calculator = new Calculator();
+        String[] numbers = {"1", "-2", "3"};
+
+        // When & Then
+        assertThatThrownBy(() -> calculator.calculateSum(numbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("음수는 허용되지 않습니다.");
+    }
+
+    @Test
+    @DisplayName("숫자가 아닌 문자가 포함된 경우 예외를 발생시킨다.")
+    void 숫자_아닌_문자_포함_예외_발생() {
+        // Given
+        Calculator calculator = new Calculator();
+        String[] numbers = {"1", "a", "3"};
+
+        // When & Then
+        assertThatThrownBy(() -> calculator.calculateSum(numbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("숫자가 아닌 값이 포함되어 있습니다.");
+    }
+
 }
