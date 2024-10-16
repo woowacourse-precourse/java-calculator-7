@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.delimiter.DelimiterChecker;
 import calculator.io.input.ConsoleInputHandler;
 import calculator.io.input.InputHandler;
 import calculator.io.output.ConsoleOutputHandler;
@@ -11,19 +12,19 @@ public class Application {
 
     private static final InputHandler inputHandler = new ConsoleInputHandler();
     private static final OutputHandler outputHandler = new ConsoleOutputHandler();
+    private static final DelimiterChecker delimiterChecker = new DelimiterChecker();
 
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         outputHandler.showUserInputMessage();
         String input = inputHandler.getUserInput();
-        input = input.replace("\\n", "\n");
 
         int result = 0;
         if (inputIsNotEmpty(input)) {
             List<String> delimiters = new ArrayList<>(List.of(",", ":"));
 
             boolean hasCustomDelimiter = false;
-            if (isContainsCustomDelimiter(input)) {
+            if (isCustomDelimiter(input)) {
                 int delimiterIdx = input.indexOf("\n");
                 String delimiter = input.substring(2, delimiterIdx);
                 delimiters.add(delimiter);
@@ -61,8 +62,8 @@ public class Application {
         return String.join("|", delimiters);
     }
 
-    private static boolean isContainsCustomDelimiter(String input) {
-        return input.startsWith("//") && input.contains("\n");
+    private static boolean isCustomDelimiter(String input) {
+        return delimiterChecker.isCustomDelimiter(input);
     }
 
     private static boolean inputIsNotEmpty(String input) {
