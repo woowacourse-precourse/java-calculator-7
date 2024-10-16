@@ -1,11 +1,17 @@
 package calculator;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Application {
 
     public static void main(String[] args) throws IOException {
         printInstructions();
+
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+
+        System.out.println(input);
     }
 
     private static void printInstructions() {
