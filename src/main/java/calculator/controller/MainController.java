@@ -25,14 +25,13 @@ public class MainController {
 
 
     private Integer getCalculatedResult(CalculatedValue calculatedValue,NumberParser numberParser){
-        System.out.println("wefwef"+calculatedValue.getValue());
-        List<Integer> numbers = getNumberFromNumberParser(calculatedValue,numberParser);
-        return AddCalculator.add(numbers);
+        updateCalculatedNumberValues(calculatedValue,numberParser);
+        return AddCalculator.add(calculatedValue.getNumberValueToken());
     }
 
 
-    private List<Integer> getNumberFromNumberParser(CalculatedValue calculatedValue,NumberParser numberParser){
-        return numberParser.parse(calculatedValue);
+    private void updateCalculatedNumberValues(CalculatedValue calculatedValue,NumberParser numberParser){
+        numberParser.parse(calculatedValue);
     }
 
     private NumberParser createNumberParser(Divider divider) {
@@ -44,7 +43,7 @@ public class MainController {
         try{
             customDividerFinder.findCustomDividers(calculatedValue,divider);
         }catch (IllegalArgumentException e){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 

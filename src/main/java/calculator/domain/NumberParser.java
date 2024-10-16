@@ -11,7 +11,13 @@ public class NumberParser {
         this.divider = divider;
     }
 
-    public List<Integer> parse(CalculatedValue calculatedValue){
+    /**
+     * 이거를 아예 여기서 계산할 수 있돍? 근데 parser인데...
+     * @param calculatedValue
+     * @return
+     */
+
+    public void parse(CalculatedValue calculatedValue){
         List<Integer> result = new ArrayList<>();
 
         System.out.println(calculatedValue.getValue());
@@ -37,7 +43,7 @@ public class NumberParser {
         int number = Integer.parseInt(keepNumber.toString());
         result.add(number);
 
-        return result;
+        calculatedValue.setNumberValueToken(result);
     }
 
 

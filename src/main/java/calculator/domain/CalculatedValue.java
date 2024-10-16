@@ -23,4 +23,8 @@ public class CalculatedValue {
     public String getValue() {
         return value;
     }
+
+    public List<Integer> getNumberValueToken() {
+        return NumberValueToken;
+    }
 }
