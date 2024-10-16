@@ -9,7 +9,6 @@ public class StringSplitter {
         if (input.startsWith("//")) {
             int endDelimiter = input.indexOf("\n");
             delimiter = input.substring(2, endDelimiter);
-            System.out.println(delimiter);
             input = input.substring(endDelimiter + 1);
         }
 
