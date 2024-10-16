@@ -6,7 +6,7 @@ public class StringCalculator {
             return 0;
         }
 
-        String[] tokens = numbers.split("[,;]");
+        String[] tokens = numbers.split("[,|;]");
         int sum = 0;
 
         for (String token : tokens) {
