@@ -2,19 +2,22 @@ package controller;
 
 import camp.nextstep.edu.missionutils.Console;
 import domain.StringCalculator;
+import view.ConsoleView;
 
 public class StringCalculatorController {
     private final StringCalculator calculator;
+    private final ConsoleView consoleView;
 
     public StringCalculatorController() {
         this.calculator = new StringCalculator();
+        this.consoleView = new ConsoleView();
     }
 
     public void run(){
-        System.out.println("덧셈할 문자열을 입력해 주세요:");
-        String input = Console.readLine();
+        String input = consoleView.getInput();
 
         int result = calculator.add(input);
-        System.out.println("결과 : " + result);
+
+        consoleView.displayResult(result);
     }
 }
