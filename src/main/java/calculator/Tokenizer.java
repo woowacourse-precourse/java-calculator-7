@@ -8,4 +8,12 @@ public class Tokenizer {
         }
         return str.split(String.valueOf(separators[0]));
     }
+
+    public static int[] tokensToNums(String[] tokens) {
+        int[] nums = new int[tokens.length];
+        for (int i=0; i< tokens.length; i++) {
+            nums[i] = Integer.valueOf(tokens[i]);
+        }
+        return nums;
+    }
 }
