@@ -9,8 +9,24 @@ public class NumberCalculator {
 
         Numbers numbers = new Numbers();
         for (String temp : split) {
-            numbers.add(Integer.parseInt(temp));
+            int number = toInt(temp);
+            validateNumber(number);
+            numbers.add(number);
         }
         return numbers;
+    }
+
+    private int toInt(String temp) {
+        try {
+            return Integer.parseInt(temp);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void validateNumber(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException();
+        }
     }
 }
