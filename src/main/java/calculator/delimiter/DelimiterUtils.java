@@ -11,6 +11,6 @@ public class DelimiterUtils {
     }
 
     public static String replaceSpecialCharacters(String input) {
-        return input.replace("|", "\\|");
+        return input.replaceAll("([.*+?^$(){}\\[\\]|\\\\])", "\\\\$1");
     }
 }
