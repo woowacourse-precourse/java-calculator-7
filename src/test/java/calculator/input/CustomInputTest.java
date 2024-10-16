@@ -24,25 +24,6 @@ class CustomInputTest {
         CustomInput customInput = (CustomInput) Input.of(inputStr);
         // then
         assertInstanceOf(CustomInput.class, customInput);
-        assertTrue(customInput.isSeparator(separator));
-    }
-
-    @Test
-    void 정수배열_테스트() {
-        // given & when
-        Input input = Input.of("//;\\n1;2;3");
-        // then
-        int[] nums = input.getNums();
-        assertEquals(1, nums[0]);
-        assertEquals(2, nums[1]);
-        assertEquals(3, nums[2]);
-    }
-
-    @Test
-    void 정수배열_예외_구분자_다름() {
-        // given
-        Input input = Input.of("//;\\n1?2");
-        // when & then
-        assertThrows(IllegalArgumentException.class, () -> input.getNums());
+        assertTrue(customInput.isSeparatorEqual(separator));
     }
 }

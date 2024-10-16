@@ -14,33 +14,4 @@ class InputTest {
         assertFalse(input instanceof CustomInput);
         assertNotNull(input);
     }
-
-    @Test
-    void 정수배열_테스트_콜론() {
-        // given & when
-        Input input = Input.of("1:2:3");
-        // then
-        int[] nums = input.getNums();
-        assertEquals(1, nums[0]);
-        assertEquals(2, nums[1]);
-        assertEquals(3, nums[2]);
-    }
-
-    @Test
-    void 정수배열_테스트_콤마() {
-        // given & when
-        Input input = Input.of("1,3");
-        // then
-        int[] nums = input.getNums();
-        assertEquals(1, nums[0]);
-        assertEquals(3, nums[1]);
-    }
-
-    @Test
-    void 정수배열_예외_구분자_오류() {
-        // given & when
-        Input input = Input.of("1,3?2");
-        // then
-        assertThrows(IllegalArgumentException.class, () -> input.getNums());
-    }
 }

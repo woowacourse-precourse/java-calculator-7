@@ -1,5 +1,6 @@
 package calculator.core;
 
+import calculator.utils.NumUtil;
 import calculator.input.Input;
 
 public class Calculator {
@@ -14,8 +15,8 @@ public class Calculator {
         return new Calculator(Input.of(consoleInput));
     }
 
-    public int getResult() {
-        int[] nums = input.getNums();
+    public int sum() {
+        int[] nums = NumUtil.toIntArray(input);
         int sum = 0;
         for (int num : nums) {
             sum += num;

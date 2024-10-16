@@ -1,6 +1,6 @@
 package calculator.input;
 
-import calculator.Utils.NumUtil;
+import calculator.utils.NumUtil;
 
 public class InputFilter {
 

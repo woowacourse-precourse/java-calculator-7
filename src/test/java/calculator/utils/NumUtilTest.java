@@ -1,7 +1,8 @@
-package calculator.Utils;
+package calculator.utils;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import calculator.input.Input;
 import org.junit.jupiter.api.Test;
 
 class NumUtilTest {
@@ -80,5 +81,50 @@ class NumUtilTest {
         char invalidChar = '9' + 1;
         // when & then
         assertThrows(IllegalArgumentException.class, () -> NumUtil.toInt(invalidChar));
+    }
+
+    @Test
+    void 정수배열_테스트() {
+        // given & when
+        int[] nums = NumUtil.toIntArray(Input.of("//;\\n1;2;3"));
+        // then
+        assertEquals(1, nums[0]);
+        assertEquals(2, nums[1]);
+        assertEquals(3, nums[2]);
+    }
+
+    @Test
+    void 정수배열_예외_구분자_다름() {
+        // given
+        Input input = Input.of("//;\\n1?2");
+        // when & then
+        assertThrows(IllegalArgumentException.class, () -> NumUtil.toIntArray(input));
+    }
+
+    @Test
+    void 정수배열_예외_기본_구분자_오류() {
+        // given & when
+        Input input = Input.of("1,3?2");
+        // then
+        assertThrows(IllegalArgumentException.class, () ->  NumUtil.toIntArray(input));
+    }
+
+    @Test
+    void 정수배열_테스트_콜론() {
+        // given & when
+        int[] nums = NumUtil.toIntArray(Input.of("1:2:3"));
+        // then
+        assertEquals(1, nums[0]);
+        assertEquals(2, nums[1]);
+        assertEquals(3, nums[2]);
+    }
+
+    @Test
+    void 정수배열_테스트_콤마() {
+        // given & when
+        int[] nums = NumUtil.toIntArray(Input.of("1,3"));
+        // then
+        assertEquals(1, nums[0]);
+        assertEquals(3, nums[1]);
     }
 }
