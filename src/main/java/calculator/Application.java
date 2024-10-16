@@ -20,6 +20,19 @@ public class Application {
                 System.out.println("결과 : " + input);
                 break;
             }
+
+            // 쉼표, 콜론 구분자 처리
+            if (input.contains(",") || input.contains(":")) {
+                String[] commaSplit = input.split(",");
+                for (String part : commaSplit) {
+                    String[] colonSplit = part.split(":");
+                    for (String number : colonSplit) {
+                        sum += Integer.parseInt(number);
+                    }
+                }
+                System.out.println("결과 : " + sum);
+                break;
+            }
         }
     }
 
