@@ -22,7 +22,10 @@ public class Application {
     }
 
     public static String extractCustomSeperator(String input) {
-        return null;
+        int start = input.indexOf("//") + 2; // 커스텀 문자 인덱스 시작
+        int end = input.indexOf("\\n"); // 커스텀 문자 인덱스 끝
+
+        return input.substring(start, end);
     }
 
     public static String[] splitBySeperator(String input, String customSeperator) {
