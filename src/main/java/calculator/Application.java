@@ -21,6 +21,15 @@ public class Application {
 class Calculator {
     public String[] splitInput(String userInput) {
         String delimiter = ",|:"; // 기본 구분자
+        int customDelimiterIndex;
+
+        // 커스텀 구분자가 있을 경우 처리
+        if (userInput.startsWith("//")) {
+            customDelimiterIndex = userInput.indexOf("\\n");
+            delimiter = userInput.substring(2, customDelimiterIndex);
+            userInput = userInput.substring(customDelimiterIndex + 2);
+        }
+
         return userInput.split(delimiter);
     }
 }
