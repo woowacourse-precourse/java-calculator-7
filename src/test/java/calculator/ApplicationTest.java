@@ -81,8 +81,17 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    @DisplayName("커스텀 구분자 사용 시 // 또는 \\n 둘 중 하나라도 사용하지 않으면 예외를 발생한다.")
+    @DisplayName("입력에 특수문자가 입력되면 예외를 발생한다.")
     void inputExceptionTest7() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,2,3,4,?"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자 사용 시 // 또는 \\n 둘 중 하나라도 사용하지 않으면 예외를 발생한다.")
+    void inputExceptionTest8() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//?1?2?3"))
                         .isInstanceOf(IllegalArgumentException.class)
