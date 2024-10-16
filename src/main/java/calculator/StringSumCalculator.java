@@ -5,11 +5,9 @@ import calculator.view.OutputView;
 
 import java.util.List;
 
-
 public class StringSumCalculator {
 
     public void run() {
-        OutputView.startingMessage();
         String inputValue = InputView.getInputValue();
         IntegersExtractor integersExtractor = new IntegersExtractor();
         List<Integer> integers = integersExtractor.extractIntegers(inputValue);
