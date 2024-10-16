@@ -18,12 +18,12 @@ public class PatternParser {
         return toPattern(regex).matcher(input);
     }
 
-    private boolean isCustomPattern(String input){
+    public boolean isCustomPattern(String input){
         Matcher matcher = toMatcher(CUSTOM_PATTERN, input);
         return matcher.find() && (matcher.start() == 0);
     }
 
-    private boolean isReservePattern(String input){
+    public boolean isReservePattern(String input){
         Matcher matcher = toMatcher(RESERVE_PATTERN, input);
 
         Set<String> delimiters = new HashSet<>();
