@@ -51,9 +51,9 @@ public class Application {
             numberPart = input.substring(indexOfEndSign + 2);
         }
 
-        String[] tokens = numberPart.split(delimiterPart.toString());
+        String[] numbers = numberPart.split(delimiterPart.toString());
 
-        return add(tokens);
+        return add(numbers);
     }
 
     private static String toRegex(String delim) {
@@ -64,11 +64,11 @@ public class Application {
         return input.startsWith("//");
     }
 
-    private static int add(String[] tokens) {
+    private static int add(String[] numbers) {
         int result = 0;
 
-        for (String token : tokens) {
-            result += Integer.parseInt(token);
+        for (String number : numbers) {
+            result += Integer.parseInt(number);
         }
         return result;
     }
