@@ -11,7 +11,7 @@ public class DelimiterService {
     public static final int CUSTOM_DELIMITER_END_INDEX = 3;
     private List<Delimiter> delimiters = new ArrayList<>();
     private final Pattern customDelimiterPattern = Pattern.compile("^//.\\n.*");
-    private final Pattern defaultDelimiterPattern = Pattern.compile("[0-9:,]*]");
+    private final Pattern defaultDelimiterPattern = Pattern.compile("[0-9:,]*");
 
     public void addDelimiter(String delimiter) {
         delimiters.add(new Delimiter(delimiter));
