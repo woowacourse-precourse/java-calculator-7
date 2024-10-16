@@ -1,11 +1,12 @@
 package calculator.validator;
 
+import calculator.constant.ValidConstants;
 import calculator.exception.InputValidationException;
 
 public class InputValid {
     // 전체 글자 길이 제한 1 -100
     public static void checkStringLength(String str) {
-        if (str.length() > 100) {
+        if (str.length() > ValidConstants.MAX_TOTAL_LENGTH) {
             throw new IllegalArgumentException(InputValidationException.TOO_LONG_STRING.getMessage());
         }
         if (str.isEmpty()) {
@@ -13,18 +14,15 @@ public class InputValid {
         }
     }
 
-    // '// \n으로 시작하는지 정규식으로 확인
-    public static boolean checkStartWithCustomSeparator(String str) {
-        String regex = "^//.*?\n.*";
-        if (!str.matches(regex)) {
-            return true;
-        }
-        return false;
+    public static boolean isValidCustomSeparatorFormat(String input) {
+        return ValidConstants.CUSTOM_SEPARATOR_PATTERN.matcher(input).matches();
     }
+
+
 
     // 커스텀 구분자 길이 제한
     public static void checkCustomSeparatorLength(String separator) {
-        if (separator.length() > 5) {
+        if (separator.length() > ValidConstants.MAX_SEPARATOR_LENGTH) {
             throw new IllegalArgumentException(InputValidationException.TOO_LONG_CUSTOM_SEPARATOR.getMessage());
         }
         if (separator.isEmpty()) {
@@ -33,11 +31,11 @@ public class InputValid {
     }
 
     // 구분자 기준으로 잘랐을 때 내부 글자 -  숫자만 있는가? / 숫자의 길이는?
-    public static void checkNumber(String number) {
-        String regex = "^\\d{1,20}$";
-        if (!number.matches(regex)) {
+    public static String checkNumber(String number) {
+        if (!number.matches(ValidConstants.NUMBER_PATTERN)) {
             throw new IllegalArgumentException(InputValidationException.INVALID_NUMBER_FORMAT.getMessage());
         }
+        return number;
     }
 
     // 숫자 개수 제한
@@ -45,7 +43,7 @@ public class InputValid {
         if (count == 0) {
             throw new IllegalArgumentException(InputValidationException.NO_NUMBERS.getMessage());
         }
-        if (count > 100) {
+        if (count > ValidConstants.MAX_NUMBER_COUNT) {
             throw new IllegalArgumentException(InputValidationException.TOO_MANY_NUMBERS.getMessage());
         }
     }

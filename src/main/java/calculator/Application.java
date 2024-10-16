@@ -1,13 +1,19 @@
 package calculator;
 
+import calculator.controller.CalculateController;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        CalculateController controller = CalculateController.getInstance();
 
-        OutputView.printStart();
-        OutputView.printResult("20");
+        try {
+            OutputView.printStart();
+            String result = controller.process(InputView.inputNumbers());
+            OutputView.printResult(result);
+        }catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }

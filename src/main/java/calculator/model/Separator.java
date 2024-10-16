@@ -1,4 +1,5 @@
 package calculator.model;
+import calculator.validator.InputValid;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +8,7 @@ public class Separator {
     private List<String> separators;
     public Separator() {
         separators = new ArrayList<>();
-        separators.add(";");
+        separators.add(":");
         separators.add(",");
     }
 
@@ -15,7 +16,8 @@ public class Separator {
         return separators;
     }
 
-    public void addSeparator(String separator) {
+    public void registerSeparator(String separator) {
+        InputValid.checkCustomSeparatorLength(separator);
         separators.add(separator);
     }
 }
