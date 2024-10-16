@@ -17,6 +17,8 @@ class Calculator {
     private String plusSeparator;
 
     public Calculator(String s) {
+        if(s.isEmpty())
+            throw new IllegalArgumentException();
         this.s = s;
     }
 
