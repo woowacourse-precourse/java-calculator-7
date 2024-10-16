@@ -6,8 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
-    // 기본 구분자: , 또는 :
-    private static final String delimiter = "[,|:]";
+    private static final String delimiter = ",|:";
 
     private static final int CUSTOM_DELIMITER_ORDER = 1;
     private static final int ARITHMETIC_EXPRESSION_ORDER = 2;
@@ -19,15 +18,11 @@ public class StringAddCalculator {
             return 0;
         }
 
-        // 1. input 에서 커스텀 구분자와 계산식을 추출한다
         String[] delimiterAndNumbers = extractCustomDelimiterAndNumbers(input);
         String delimiters = delimiterAndNumbers[0];
         String numbersString = delimiterAndNumbers[1];
-        // 2. 계산식에서 숫자들을 추출한다
         List<Integer> numbers = splitNumbers(delimiters, numbersString);
-        // 3. 추출된 숫자들 중 음수가 있는지 검증한다
         validateNumbers(numbers);
-        // 4. 숫자들을 더한 값들을 반환한다
         return sum(numbers);
     }
 
