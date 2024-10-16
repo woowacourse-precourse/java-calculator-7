@@ -20,11 +20,10 @@ public class Application {
             delimiters.add(getCustomDelimiter(input));
         }
 
-        // convertStringToIntArray() 함수 테스트
-        ArrayList<Integer> list = convertStringToIntArray(input);
-        for (Integer integer : list) {
-            System.out.println(integer);
-        }
+        // 문자열에서 숫자 배열을 추출 후, 총합 계산
+        int sum = sumArray(convertStringToIntArray(input));
+        System.out.println("결과 : " + sum);
+
     }
 
     static boolean hasCustomDelimiter(String input) { // 커스텀 구분자가 지정되어 있는지 확인하는 함수
@@ -42,6 +41,7 @@ public class Application {
                 return true;
             }
         }
+
         return false;
     }
 
@@ -57,9 +57,9 @@ public class Application {
         for (int i = index; i < input.length(); i++) {
             char current_char = input.charAt(i); // 현재 인덱스의 문자
 
-            if (Character.isDigit(current_char)) { // 현재 문자가 숫자일 경우, current_number 에 추가
+            if (Character.isDigit(current_char)) { // 현재 문자가 숫자일 경우, current_number(버퍼) 에 추가
                 current_number.append(current_char);
-            } else if (isValidDelimiter(current_char) && !current_number.isEmpty()) { // 현재 문자가 구분자고, current_number 가 비어있지 않다면
+            } else if (isValidDelimiter(current_char) && !current_number.isEmpty()) { // 현재 문자가 구분자고, 버퍼가 비어있지 않다면
                 numbers.add(Integer.parseInt(current_number.toString()));
                 current_number.setLength(0);
             } else { // 숫자도 구분자도 아니거나, 숫자 이전에 구분자가 나온 경우 잘못된 값이므로 IllegalArgumentException
@@ -75,5 +75,14 @@ public class Application {
         }
 
         return numbers;
+    }
+
+    static int sumArray(ArrayList<Integer> numbers) {
+        int sum = 0;
+        for (Integer number : numbers) {
+            sum += number;
+        }
+
+        return sum;
     }
 }
