@@ -12,10 +12,34 @@ public class StringCalculator {
         String input = Console.readLine();
         checkCustomSeparator(input);
 
+        String str = input;
+        if (hasCustomSeparator) {
+            int strStartIdx = input.indexOf("\\n") + 2;
+            str = input.substring(strStartIdx);
+        }
+        validateString(str);
     }
 
     void printInputMsg() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
+    }
+
+    void validateString(String str) {
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (!isSeparator(c) && !Character.isDigit(c)) {
+                throw new IllegalArgumentException("문자열 에러");
+            }
+        }
+    }
+
+    boolean isSeparator(char c) {
+        for (int i = 0; i < separators.length(); i++) {
+            if (c == separators.charAt(i)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     void checkCustomSeparator(String input) {
