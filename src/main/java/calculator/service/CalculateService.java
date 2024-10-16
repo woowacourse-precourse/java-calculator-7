@@ -1,6 +1,7 @@
 package calculator.service;
 
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 public class CalculateService {
 
@@ -31,7 +32,7 @@ public class CalculateService {
                     }
                     sum += intValue;
                 }
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException | PatternSyntaxException e) {
                 throw new IllegalArgumentException("구분자(, 또는 :)와 숫자로만 입력해주세요.");
             }
 
