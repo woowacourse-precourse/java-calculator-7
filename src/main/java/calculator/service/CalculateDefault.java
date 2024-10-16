@@ -7,10 +7,9 @@ package calculator.service;
 - 숫자 리스트의 합 구하기
 */
 
-import java.util.HashSet;
 import java.util.List;
 
-public class Calculate {
+public class CalculateDefault {
 
     private static final String COLON = ":";
     private static final String COMMA = ",";
