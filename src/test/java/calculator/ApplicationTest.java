@@ -29,6 +29,16 @@ class ApplicationTest extends NsTest {
     });
   }
 
+  @Test
+  void 구분자_추출() {
+
+    assertSimpleTest(() -> {
+      run("//:,\n1:2:3");
+      assertThat(output()).isEqualTo(":,");
+    });
+
+  }
+
 
   @Override
   public void runMain() {
