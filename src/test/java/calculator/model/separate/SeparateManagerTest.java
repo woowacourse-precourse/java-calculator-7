@@ -82,7 +82,7 @@ public class SeparateManagerTest {
             SeparateManager manager = SeparateManager.initiate();
             manager.extractCustomDelimiter(source);
             // when
-            List<Integer> actual = manager.split(source);
+            List<Integer> actual = manager.separate(source);
             // then
             assertThat(actual.size()).isEqualTo(4);
         }
@@ -95,7 +95,7 @@ public class SeparateManagerTest {
             SeparateManager manager = SeparateManager.initiate();
             manager.extractCustomDelimiter(source);
             // when
-            List<Integer> actual = manager.split(source);
+            List<Integer> actual = manager.separate(source);
             // then
             assertThat(actual.size()).isEqualTo(4);
         }
@@ -108,7 +108,7 @@ public class SeparateManagerTest {
             SeparateManager manager = SeparateManager.initiate();
             manager.extractCustomDelimiter(source);
             // when
-            List<Integer> actual = manager.split(source);
+            List<Integer> actual = manager.separate(source);
             // then
             assertThat(actual.size()).isEqualTo(4);
         }
@@ -121,7 +121,7 @@ public class SeparateManagerTest {
             SeparateManager manager = SeparateManager.initiate();
             manager.extractCustomDelimiter(source);
             // when
-            List<Integer> actual = manager.split(source);
+            List<Integer> actual = manager.separate(source);
             // then
             assertThat(actual.size()).isEqualTo(4);
         }
@@ -134,9 +134,21 @@ public class SeparateManagerTest {
             SeparateManager manager = SeparateManager.initiate();
             manager.extractCustomDelimiter(source);
             // when
-            List<Integer> actual = manager.split(source);
+            List<Integer> actual = manager.separate(source);
             // then
             assertThat(actual.size()).isEqualTo(4);
+        }
+
+        @Test
+        @DisplayName("커스텀 딜리미터 없고, 공백이 있는 경우")
+        void onlyCustomDelimiterTest7() {
+            // given
+            String source = "1, 2 , 3 3";
+            SeparateManager manager = SeparateManager.initiate();
+            // when
+            List<Integer> actual = manager.separate(source);
+            // then
+            assertThat(actual).containsAll(List.of(1,2,33));
         }
     }
 
@@ -151,7 +163,7 @@ public class SeparateManagerTest {
             SeparateManager manager = SeparateManager.initiate();
             manager.extractCustomDelimiter(source);
             // when
-            List<Integer> actual = manager.split(source);
+            List<Integer> actual = manager.separate(source);
             // then
             assertThat(actual.size()).isEqualTo(4);
         }
@@ -164,7 +176,7 @@ public class SeparateManagerTest {
             SeparateManager manager = SeparateManager.initiate();
             manager.extractCustomDelimiter(source);
             // when
-            List<Integer> actual = manager.split(source);
+            List<Integer> actual = manager.separate(source);
             // then
             assertThat(actual.size()).isEqualTo(4);
         }
@@ -177,7 +189,7 @@ public class SeparateManagerTest {
             SeparateManager manager = SeparateManager.initiate();
             manager.extractCustomDelimiter(source);
             // when
-            List<Integer> actual = manager.split(source);
+            List<Integer> actual = manager.separate(source);
             // then
             assertThat(actual.size()).isEqualTo(4);
         }

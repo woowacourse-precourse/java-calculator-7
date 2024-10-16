@@ -17,6 +17,6 @@ public class SeparateService {
         if (separateManager.canParseCustomDelimiter(input)) {
             separateManager.extractCustomDelimiter(input);
         }
-        return separateManager.split(input);
+        return separateManager.separate(input);
     }
 }

@@ -4,7 +4,8 @@ public enum BusinessRegex {
     CUSTOM_DELIMITER_COUNT_REGEX("(//.*?)\\\\n"),
     CUSTOM_DELIMITER_POSITION_REGEX("^(//.*?)\\\\n"),
     CUSTOM_DELIMITER_PARSE_REGEX("^//(.*?)\\\\n"),
-    CUSTOM_DELIMITER_PARSE_CONDITION_REGEX("^//.*?")
+    CUSTOM_DELIMITER_PARSE_CONDITION_REGEX("^//.*?"),
+    WHITE_SPACE("\\s")
     ;
 
     private final String value;
@@ -27,5 +28,9 @@ public enum BusinessRegex {
 
     public static String customDelimiterStartCondition() {
         return CUSTOM_DELIMITER_PARSE_CONDITION_REGEX.value;
+    }
+
+    public static String whiteSpaceRegex() {
+        return WHITE_SPACE.value;
     }
 }

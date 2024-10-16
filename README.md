@@ -73,14 +73,15 @@
 
 | Method                           | Parameter | Return Type   | Exception                     | Implementation  |
 |----------------------------------|-----------|---------------|-------------------------------|-----------------|
-| getAllDelimiters ;               | x         | String        | -                             | DONE ✅            |
+| getAllDelimiters ;               | x         | String        | -                             | DONE ✅          |
 | extractCustomDelimiter;          | String    | void          | -                             | DONE ✅          |
 | parseCustomDelimiter;            | String    | String        | -                             | DONE ✅          |
-| split;                           | String    | List<Integer> | -                             | DONE ✅            |
+| separate;                        | String    | List<Integer> | -                             | DONE ✅          |
 | createMatcher;                   | String    | Matcher       | -                             | DONE ✅          |
 | mergeDelimiters;                 | x         | List<Integer> | -                             | DONE ✅          |
 | isAddable;                       | String    | boolean       | -                             | DONE ✅          |
 | canParseCustomDelimiter;         | String    | boolean       | -                             | DONE ✅          |
+| processReplacing;                | String    | String        | -                             | DONE ✅          |
 | validateCustomDelimiterPosition; | String    | void          | NotAllowedPositionException   | DONE ✅          |
 | validateCustomDelimiterCount;    | String    | void          | MultiCustomDelimiterException | DONE ✅          |
 | tryParseToInt ;                  | String    | Integer       | ParseToIntegerFailedException | DONE ✅          |

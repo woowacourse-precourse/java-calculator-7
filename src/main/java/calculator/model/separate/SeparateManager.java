@@ -83,14 +83,18 @@ public class SeparateManager {
         }
     }
 
-    //FIXME : 네이밍 개선 필요 (mainSource, splitted)
-    public List<Integer> split(String source) {
-        String mainSource = source.replaceAll(customDelimiterParseRegex(), emptyString());
-        String[] splitted = mainSource.split(getAllDelimiters());
-        return Arrays.stream(splitted)
+    public List<Integer> separate(String source) {
+        String sourceReplacedByRegexes = processReplacing(source);
+        String[] tokens = sourceReplacedByRegexes.split(getAllDelimiters());
+        return Arrays.stream(tokens)
                 .filter(StringUtils::isNotBlank)
                 .map(this::tryParseToInt)
                 .toList();
+    }
+
+    private String processReplacing(String source) {
+        return source.replaceAll(whiteSpaceRegex(), emptyString())
+                .replaceAll(customDelimiterParseRegex(), emptyString());
     }
 
     public String getAllDelimiters() {
