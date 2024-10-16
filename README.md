@@ -1,6 +1,26 @@
 # 기능명세서 
 
 ---
+## 클래스 구조
+### 1. 서비스 클래스
+* CalculatorService
+    * 기능: 문자열을 입력받아 숫자들을 분리하고 합산하는 기능을 수행한다.
+    *  메서드:
+        * long sum(long numbers[]): 입력된 숫자 배열의 합계를 계산하여 반환한다.
+        * long parseNumber(String input): 입력된 문자열을 숫자로 변환하여 반환한다.
+### 2. 컨트롤러 클래스
+* CalculatorController
+    * 기능: 사용자 입력을 처리하고 결과를 출력하는 역할을 담당한다.
+    * 메서드:
+        * void start(): 프로그램의 시작점을 정의하고, 사용자로부터 입력을 받는다.
+
+### 3. InputView 클래스
+* CalculatorInputView
+    * 기능: 사용자로부터 입력을 받는 UI 관련 기능을 담당한다.
+    *   메서드:
+        * String readInput(): 사용자로부터 덧셈할 문자열을 입력받는다.
+        * void displayResult(long result): 계산 결과를 출력한다.
+---
 ## 기능요구사항
 
 * 쉼표(,) 또는 콜론(:)을 구분자로 가지는 문자열을 전달하는 경우 구분자를 기준으로 분리한 각 숫자의 합을 반환한다.
