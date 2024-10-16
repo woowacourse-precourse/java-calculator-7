@@ -11,18 +11,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class ValidatorTest {
 
-    private CalculatorParam calculatorParam;
+    private CalculatorParamDomain domain;
     private Validator validator;
 
     @BeforeEach
     void 테스트_전_세팅() {
-        this.calculatorParam = CalculatorParam.of();
+        this.domain = CalculatorParamDomain.of();
         this.validator = Validator.of();
     }
 
     @Test
     void 구분자_검증_확인() {
-
         String 구분자 = "//; \n1;2;3\n";
 
         List<Character> result = List.of(';',' ');
@@ -30,15 +29,13 @@ class ValidatorTest {
         List<String> inputDataList = splitInputString(구분자);
 
         if(validator.validDelimiters(구분자)) {
-
-            calculatorParam.changeDelimiters(findDelimiters(inputDataList));
-            assertThat(calculatorParam.getDelimiters()).isEqualTo(result);
+            domain.changeUserDelimiters(findDelimiters(inputDataList));
+            assertThat(domain.getDelimiters()).isEqualTo(result);
         }
     }
 
     @Test
     void 입력값_검증() {
-
         String input = "1,2:3\n";
 
         List<Integer> expected = List.of(1, 2, 3);
@@ -46,27 +43,24 @@ class ValidatorTest {
         List<String> inputDataList = splitInputString(input);
 
         if(validator.validDelimiters(input)) {
-
-            calculatorParam.changeDelimiters(findDelimiters(inputDataList));
+            domain.changeUserDelimiters(findDelimiters(inputDataList));
         }
 
-        List<Integer> result = findNumbers(inputDataList.get(0), calculatorParam.getDelimiters());
+        List<Integer> result = findNumbers(inputDataList.get(0), domain.getDelimiters());
         assertThat(result).isEqualTo(expected);
     }
 
     private List<Integer> findNumbers(String inputNumberData, List<Character> delimiters) {
-
         List<String> stringNumberList = new ArrayList<>(List.of(inputNumberData));
         for (Character delimiter : delimiters) {
             stringNumberList = splitNumber(stringNumberList, delimiter);
         }
-        calculatorParam.splitStringNumbers(stringNumberList);
-        calculatorParam.changeNumbers(validator.tryParseInteger(calculatorParam.getStringNumbers()));
-        return calculatorParam.getNumbers();
+        domain.splitStringNumbers(stringNumberList);
+        domain.parseUserNumbers(validator.tryParseInteger(domain.getStringNumbers()));
+        return domain.getNumbers();
     }
 
     private List<String> splitNumber(List<String> inputNumberData, Character delimiters) {
-
         List<String> stringNumberList = new ArrayList<>();
         inputNumberData.forEach(i -> {
             stringNumberList.addAll(splitString(i, delimiters.toString()));
@@ -75,7 +69,6 @@ class ValidatorTest {
     }
 
     private List<String> splitInputString(String inputData) {
-
         List<String> splitEnter = splitString(inputData, "\n");
         List<String> splitSlash = new ArrayList<>();
 
@@ -86,14 +79,12 @@ class ValidatorTest {
     }
 
     private List<Character> findDelimiters(List<String> splitSlash) {
-
         validator.isNullDelimiters(splitSlash);
 
         return splitSlash.get(2).chars().mapToObj(c -> (char) c).toList();
     }
 
     private List<String> splitString(String input, String regex) {
-
         return Arrays.stream(input.split(regex)).toList();
     }
 }

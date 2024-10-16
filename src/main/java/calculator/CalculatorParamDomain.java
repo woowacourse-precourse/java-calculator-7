@@ -3,23 +3,23 @@ package calculator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CalculatorParam {
+public class CalculatorParamDomain {
 
     private List<Character> delimiters;
     private List<String> stringNumbers;
     private List<Integer> numbers;
 
-    protected CalculatorParam() {
+    protected CalculatorParamDomain() {
         this.delimiters = List.of(',', ':');
         this.numbers = new ArrayList<>();
         this.stringNumbers = new ArrayList<>();
     }
 
-    public static CalculatorParam of() {
-        return new CalculatorParam();
+    public static CalculatorParamDomain of() {
+        return new CalculatorParamDomain();
     }
 
-    public void changeDelimiters(List<Character> delimiters) {
+    public void changeUserDelimiters(List<Character> delimiters) {
         this.delimiters = delimiters;
     }
 
@@ -27,7 +27,7 @@ public class CalculatorParam {
         this.stringNumbers = stringNumbers;
     }
 
-    public void changeNumbers(List<Integer> numbers) {
+    public void parseUserNumbers(List<Integer> numbers) {
         this.numbers = numbers;
     }
 
