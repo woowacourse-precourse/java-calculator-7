@@ -4,7 +4,6 @@ import calculator.util.Utils;
 import calculator.validation.Validation;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class Calculator {
     private static final String DEFAULT_DELIMITERS = ",:";
@@ -58,7 +57,7 @@ public class Calculator {
     }
 
     private String deleteCustomDelimiterString(String input){
-        return input.substring(getFirstIndexAfterDelimiter(input));
+        return hasCustomDelimiter(input) ? input.substring(getFirstIndexAfterDelimiter(input)) : input;
     }
     private int getFirstIndexAfterDelimiter(String input){
         return input.indexOf(CUSTOM_DELIMITER_END)+2;
