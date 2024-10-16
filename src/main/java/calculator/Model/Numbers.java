@@ -12,6 +12,12 @@ public class Numbers {
         this.numbers = numbers;
     }
 
+    public int getSum() {
+        return numbers.stream()
+                .mapToInt(Number::getNumber)
+                .sum();
+    }
+
     private void validateNumbers(ArrayList<Number> numbers) {
         isNumbersEmpty(numbers);
     }
