@@ -51,7 +51,7 @@ public class DataParser {
             throw new IllegalArgumentException();
         }
         char separator = prefix.charAt(2);
-        return new char[]{separator};
+        return new char[]{separator, ':', ','};
     }
 
     private static void checkValidContents(char[] separators, char[] contents) {
