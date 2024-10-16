@@ -17,10 +17,24 @@ public class Application {
             System.out.println("잘못된 입력입니다." + e.getMessage());
         }
     }
+    // 입력받은 문자열로 덧셈을 수행하는 메소드
     public static int calculate(String input) {
         if (input == null || input.isEmpty()) {
             return 0;
         }
 
+        String delimiter = ",|;"; // 구분자
+        String numbers = input; // 아직은 input이 문자열 타입이다.
+
+
+        String[] tokens = numbers.split(delimiter);
+        int sum = 0;
+
+        for (String token : tokens) {
+            int number = Integer.parseInt(token); // 양수로 변환해주기
+
+            sum += number;
+        }
+        return sum;
     }
 }
