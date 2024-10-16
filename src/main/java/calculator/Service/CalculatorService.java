@@ -8,8 +8,7 @@ public class CalculatorService {
         }
         if(input.startsWith("//")) Custom_Separator(input);
         String[] numbers=input.split(Separator);
-
-        return 0;
+        return sum(numbers);
 
     }
 
@@ -17,6 +16,14 @@ public class CalculatorService {
         int separatorIndex = input.indexOf("\n");
         Separator=input.substring(2,separatorIndex);
         return input.substring(separatorIndex+1);
+    }
+
+    private static int sum(String[] input){
+        int sum=0;
+        for(int i=0; i<input.length; i++){
+            sum+=Integer.parseInt(input[i]);
+        }
+        return sum;
     }
 
 }
