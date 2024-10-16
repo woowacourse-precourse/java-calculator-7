@@ -15,7 +15,7 @@ public class ParseHelper {
 		return String.valueOf(formula.charAt(DrawConstant.CUSTOM_DELIMITER_INDEX));
 	}
 
-	public List<Long> extractNumber(Set<String> delimiters, String formula) {
+	public List<Long> extractNumbers(Set<String> delimiters, String formula) {
 		List<Long> numbers = new ArrayList<>();
 
 	}

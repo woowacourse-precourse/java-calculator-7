@@ -27,6 +27,6 @@ public class DrawService {
 	}
 
 	public List<Long> drawNumbers(Set<String> delimiters, FormulaReq formulaReq) {
-		return parseHelper.extractNumber(delimiters, formulaReq.formula());
+		return parseHelper.extractNumbers(delimiters, formulaReq.formula());
 	}
 }
