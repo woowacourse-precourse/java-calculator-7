@@ -17,6 +17,7 @@ public class IndexQueue {
         queue.offer(index.value);
     }
 
+
     public void poll() {
         queue.poll();
     }

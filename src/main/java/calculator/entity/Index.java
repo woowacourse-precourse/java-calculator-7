@@ -9,9 +9,6 @@ public class Index {
     protected int value;
 
     public Index(int value) {
-        if (value < 0) {
-            throw new IllegalArgumentException("index must be positive");
-        }
         this.value = value;
     }
 
@@ -63,4 +60,6 @@ public class Index {
             "value=" + value +
             '}';
     }
+
+
 }

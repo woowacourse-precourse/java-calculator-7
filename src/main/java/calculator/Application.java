@@ -21,8 +21,9 @@ public class Application {
 
         Input input = new Input(Console.readLine());
 
-        SeparatorSet customSeparators = separatorService.getCustomSeparators(input);
-        RegexStr regexStr = customSeparators.toRegexStr();
+        SeparatorSet separatorSet = separatorService.getCustomSeparators(input);
+
+        RegexStr regexStr = separatorSet.toRegexStr();
 
         IndexQueue idxQueue = separatorService.getAllCustomSepIdx(input);
         RefinedInput refinedInput = separatorService.refineInput(input, idxQueue);

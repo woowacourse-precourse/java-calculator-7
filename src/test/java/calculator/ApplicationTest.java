@@ -69,7 +69,7 @@ class ApplicationTest extends NsTest {
     @DisplayName("빈값 테스트")
     void test5() {
         assertSimpleTest(() -> {
-            run("");
+            run("\n");
             assertThat(output()).contains("결과 : 0");
         });
     }

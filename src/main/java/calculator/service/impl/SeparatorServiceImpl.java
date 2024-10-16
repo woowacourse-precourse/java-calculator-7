@@ -29,8 +29,8 @@ public class SeparatorServiceImpl implements SeparatorService {
         while (idx.isLessThanOrEqual(maxIdx)) {
             if (input.isCustomSep(idx)) {
                 Index customSeparatorIdx = idx.customSeparatorIdx();
-                String sep = input.oneLetter(customSeparatorIdx);
-                separatorSet.addSeparator(new Separator(sep));
+                Separator separator = input.toSeparatorByIndex(customSeparatorIdx);
+                separatorSet.addSeparator(separator);
             }
 
             idx.increase();
@@ -44,7 +44,7 @@ public class SeparatorServiceImpl implements SeparatorService {
         // 커스텀 구분자의 앞뒤를 제거한 문자열을 만들어낸다.
         // 커스텀 구분자의 문자 자체는 남는다.
 
-        StringBuilder sb = new StringBuilder();
+        RefinedInput refinedInput = new RefinedInput();
 
         Index idx = new Index(0);
         Index maxIdx = input.maxIdx();
@@ -52,20 +52,18 @@ public class SeparatorServiceImpl implements SeparatorService {
         while (idx.isLess(maxIdx)) {
             if (idxQueue.isIndexProcess(idx)) {
                 Index customSeparatorIdx = idx.customSeparatorIdx();
-                String customSeparator = input.oneLetter(customSeparatorIdx);
-                sb.append(customSeparator);
+                refinedInput.append(input, customSeparatorIdx);
                 idx.plus(CUSTOM_SEPARATOR_LENGTH);
                 idxQueue.poll();
                 continue;
             }
 
-            String oneLetter = input.oneLetter(idx);
-            sb.append(oneLetter);
+            refinedInput.append(input, idx);
 
             idx.increase();
         }
 
-        return new RefinedInput(sb.toString());
+        return refinedInput;
     }
 
 
