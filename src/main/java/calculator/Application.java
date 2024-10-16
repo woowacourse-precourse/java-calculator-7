@@ -29,7 +29,10 @@ public class Application {
     }
 
     public static String[] splitBySeperator(String input, String customSeperator) {
-        return null;
+        input = input.replace("//" + customSeperator + "\\n", "");
+        String[] number = input.split(",|:|" + customSeperator);
+
+        return number;
     }
 
     public static int sumCalculate(String[] number) {
