@@ -10,7 +10,6 @@ public class Application {
 
         Tokenization tokenizer = new Tokenization(input);
         List<Integer> tokens = tokenizer.tokenize();
-        System.out.println(tokens);
         Calculation calculation = new Calculation(tokens);
         int result = calculation.Calculate();
 
