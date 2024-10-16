@@ -8,7 +8,9 @@ public class Application {
         String input = getInput();
         if (isCustomSeparatorExist(input)) {
             String customSeparator = getCustomSeparator(input);
+            String[] dividedNum = divideStringBy(input, customSeparator);
         }
+        String[] dividedNum = divideStringBy(input);
     }
 
     public static String getInput() {
@@ -23,4 +25,11 @@ public class Application {
         return given.substring(2, 3);
     }
 
+    public static String[] divideStringBy(String givenString) {
+        return givenString.split("[:,]");
+    }
+
+    public static String[] divideStringBy(String givenString, String customSeparator) {
+        return givenString.substring(4).split("[:," + customSeparator + "]");
+    }
 }
