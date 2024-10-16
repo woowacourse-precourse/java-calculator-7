@@ -19,7 +19,7 @@ public class Calculator {
             }
 
             String pos = str.substring(SEPARATOR_1.length(),str.indexOf(SEPARATOR_2));
-            separators = separators + "|" + pos ;
+            separators = separators + "|" + pos + "|" + SEPARATOR_1 + "|" + SEPARATOR_2;
         }
 
     }
