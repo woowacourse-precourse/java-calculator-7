@@ -1,6 +1,16 @@
 package calculator.model;
 
 public class CustomDelimiterProcessor {
+    public static String addCustomDelimiters(String inputString, Delimiters delimiters) {
+        while (usesCustomDelimiter(inputString)) {
+            correctCustomDelimiterFormatOrThrow(inputString);
+            char customDelimiter = inputString.charAt(2);
+            delimiters.addCustomDelimiter(customDelimiter);
+            inputString = inputString.substring(5);
+        }
+        return inputString;
+    }
+
     public static boolean usesCustomDelimiter(String inputString) {
         if (inputString.length() == 0) {
             return false;
