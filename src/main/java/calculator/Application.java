@@ -18,11 +18,13 @@ public class Application {
 
         try {
             if (hasCustomDelimiter(input)) { // 커스텀 구분자가 지정되어 있는지 확인 후, 지정되어 있다면 커스텀 구분자를 ArrayList 에 추가
-                delimiters.add(getCustomDelimiter(input));
+                String newDelimiter = getCustomDelimiter(input);
+                delimiters.add(newDelimiter);
             }
 
             // 문자열에서 숫자 배열을 추출 후, 총합 계산
-            int sum = sumArray(convertStringToIntArray(input));
+            ArrayList<Integer> numbers = convertStringToIntArray(input);
+            int sum = sumArray(numbers);
             System.out.println("결과 : " + sum);
         } catch (IllegalArgumentException e) {
             System.out.println("사용자가 잘못된 값을 입력했습니다."); // IllegalArgumentException 후 종료
@@ -35,12 +37,12 @@ public class Application {
     }
 
     static String getCustomDelimiter(String input) { // 문자열에서 커스텀 구분자를 추출하고 반환하는 함수
-        int end_index = input.indexOf("\\n");
-        if (end_index == -1) { // 찾지 못했을 경우 입력 값 오류이므로 IllegalArgumentException
+        int endIndex = input.indexOf("\\n");
+        if (endIndex == -1) { // 찾지 못했을 경우 입력 값 오류이므로 IllegalArgumentException
             throw new IllegalArgumentException();
         }
 
-        String delimiter = input.substring(2, end_index);
+        String delimiter = input.substring(2, endIndex);
         if (delimiter.length() != 1) { // 구분자의 길이가 1이 아닌 경우 입력 값 오류이므로 IllegalArgumentException. 구분자의 길이가 0인 경우도 포함
             throw new IllegalArgumentException();
         }
@@ -69,7 +71,7 @@ public class Application {
         }
 
         ArrayList<Integer> numbers = new ArrayList<>(); // 숫자 배열을 저장하는 ArrayList
-        StringBuilder current_number = new StringBuilder(); // 현재 숫자를 임시로 저장하는 StringBuilder
+        StringBuilder currentNumber = new StringBuilder(); // 현재 숫자를 임시로 저장하는 StringBuilder
 
         // 엣지 케이스: 아무 숫자도 입력되지 않았을 경우 처리 (커스텀 구분자가 지정되었을 경우에도)
         if (input.isEmpty() || input.length() == index) {
@@ -77,22 +79,23 @@ public class Application {
         }
 
         for (int i = index; i < input.length(); i++) {
-            char current_char = input.charAt(i); // 현재 인덱스의 문자
+            char currentChar = input.charAt(i); // 현재 인덱스의 문자
 
-            if (Character.isDigit(current_char)) { // 현재 문자가 숫자일 경우, current_number(버퍼) 에 추가
-                current_number.append(current_char);
-            } else if (isValidDelimiter(current_char) && !current_number.isEmpty()) { // 현재 문자가 구분자고, 버퍼가 비어있지 않다면
-                numbers.add(Integer.parseInt(current_number.toString()));
-                current_number.setLength(0);
+            if (Character.isDigit(currentChar)) { // 현재 문자가 숫자일 경우, currentNumber(버퍼) 에 추가
+                currentNumber.append(currentChar);
+            } else if (isValidDelimiter(currentChar) && !currentNumber.isEmpty()) { // 현재 문자가 구분자고, 버퍼가 비어있지 않다면
+                int convertedNumber = Integer.parseInt(currentNumber.toString());
+                numbers.add(convertedNumber);
+                currentNumber.setLength(0);
             } else { // 숫자도 구분자도 아니거나, 숫자 이전에 구분자가 나온 경우 잘못된 값이므로 IllegalArgumentException
                 throw new IllegalArgumentException();
             }
         }
 
         // loop 종료 이후 버퍼에 남은 마지막 숫자 처리
-        if (!current_number.isEmpty()) {
-            numbers.add(Integer.parseInt(current_number.toString()));
-        } else { // current_number 가 비어있다면, 구분자 이후에 숫자를 입력하지 않았으므로 IllegalArgumentException
+        if (!currentNumber.isEmpty()) {
+            numbers.add(Integer.parseInt(currentNumber.toString()));
+        } else { // currentNumber 가 비어있다면, 구분자 이후에 숫자를 입력하지 않았으므로 IllegalArgumentException
             throw new IllegalArgumentException();
         }
 
