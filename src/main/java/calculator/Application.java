@@ -1,6 +1,5 @@
 package calculator;
 
-
 import calculator.controller.Calculator;
 
 public class Application {
