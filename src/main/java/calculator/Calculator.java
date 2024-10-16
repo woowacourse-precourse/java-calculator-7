@@ -4,6 +4,21 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Calculator {
     /**
+     * 문자열 계산기를 실행하는 함수
+     * **/
+    public static void run(){
+        int sum = 0;
+        String str = input();
+        // 빈 문자열이면 "0"을 반환
+        if(!str.isEmpty()) {
+            String[] strArr = operator(str);
+            sum = add(strArr);
+        }
+        // 결과 출력하기
+        System.out.printf("결과 : %d", sum);
+    }
+
+    /**
      * 문자열 입력받기
      * **/
     private static String input(){
