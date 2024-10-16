@@ -4,10 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Delimiter {
-    private static Set<Character> delimiterSet;
+    private static Set<Character> delimiterSet = new HashSet<>();
 
     public Delimiter(){
-        delimiterSet = new HashSet<>();
         delimiterSet.add(',');
         delimiterSet.add(':');
     }
