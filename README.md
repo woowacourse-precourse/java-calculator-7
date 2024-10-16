@@ -1,6 +1,6 @@
 # java-calculator-precourse
 
-- [ ] I/O Formater Class 구현
+- [ ] I/O Formatter Class 구현
 - [ ] 문자열에서 숫자 추출 기능
 - [ ] 커스텀 구분자 추출
 - [ ] 추출된 숫자 더하기
