@@ -8,7 +8,7 @@ public class Calculator {
         User user = new User();
         String userInput = user.inputString();
 
-        int[] basicNumberSeparator = getCustomSeparatorNumbers(userInput);
+        int[] basicNumberSeparator = getBasicSeparatorNumbers(userInput);
 
         for (int i : basicNumberSeparator) {
             result += i;
@@ -23,6 +23,9 @@ public class Calculator {
         int[] basicNumberSeparator = new int[basicSeparator.length];
         for (int i = 0; i < basicSeparator.length; i++) {
             basicNumberSeparator[i] = Integer.valueOf(basicSeparator[i]);
+            if(basicNumberSeparator[i] < 0){
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            }
         }
         return basicNumberSeparator;
     }
@@ -35,6 +38,9 @@ public class Calculator {
         int[] customNumberSeparator = new int[customSeparator.length];
         for (int i = 0; i < customSeparator.length; i++) { // 숫자는 양수!! 예외 처리
             customNumberSeparator[i] = Integer.valueOf(customSeparator[i]);
+            if (customNumberSeparator[i] <0){
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            }
         }
         return customNumberSeparator;
     }
