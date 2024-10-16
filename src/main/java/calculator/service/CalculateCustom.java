@@ -8,7 +8,7 @@ public class CalculateCustom extends CalculateSeparator {
     private static final String CUSTOM_POST = "\\n";
     private static final Integer TWO = 2;
 
-    public static boolean checkContainCUSTOM(String userInput) {
+    public static boolean checkContainCustom(String userInput) {
         return checkContainSeparator(userInput, CUSTOM_PRE) || checkContainSeparator(userInput, CUSTOM_POST);
     }
 
