@@ -39,4 +39,18 @@ class InputValidatorTest {
         assertThatThrownBy(() -> InputValidator.validateCustomLength(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("입력된 문자열에 숫자 이외의 문자가 포함된 경우")
+    @Test
+    public void validateNumberOnlyTest() {
+        //given
+        String input1 = "//%\n1%2% %4";  // 공백이 포함됨
+        String input2 = "1,a,3:4";  // 문자가 포함됨
+
+        //then
+        assertThatThrownBy(() -> InputValidator.validateNumberOnly(input1)).isInstanceOf(
+                IllegalArgumentException.class);
+        assertThatThrownBy(() -> InputValidator.validateNumberOnly(input2)).isInstanceOf(
+                IllegalArgumentException.class);
+    }
 }
