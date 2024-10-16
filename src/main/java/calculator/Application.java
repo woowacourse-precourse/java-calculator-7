@@ -11,7 +11,10 @@ public class Application {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-        System.out.println(input);
+        Calculator calculator = new Calculator(new Spliterator("[,:]"));
+        int result = calculator.calculate(input);
+
+        System.out.println("결과 : " + result);
     }
 
     private static void printInstructions() {
