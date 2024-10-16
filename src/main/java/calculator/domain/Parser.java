@@ -20,8 +20,15 @@ public class Parser {
     }
 
     private static boolean isIncludeDelimiter(String input) {
-        return input.contains(",") || input.contains(":") || input.contains(
-                Objects.requireNonNull(getCustomDelimiter(input)));
+        try {
+            if (!Objects.equals(input, "")) {
+                return input.contains(",") || input.contains(":") || input.contains(
+                        Objects.requireNonNull(getCustomDelimiter(input)));
+            }
+        } catch (Exception e) {
+            throw new IllegalArgumentException();
+        }
+        return true;
     }
 
     private static String makeDelimiter(String input) {
