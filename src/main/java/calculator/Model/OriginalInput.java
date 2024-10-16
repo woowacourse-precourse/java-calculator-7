@@ -15,19 +15,22 @@ public class OriginalInput {
     }
 
     public String separateDelimiter() {
-        if (isValidPrefix(this.originalInput) &&
-                hasCustomDelimiter(this.originalInput) &&
-                isRightCustomDelimiterOrder(this.originalInput)) {
+        if (hasValidCustomDelimiter(this.originalInput)) {
             return StringSplitter.getCustomDelimiter(this.originalInput);
         }
-
         return BASIC_DELIMITER;
     }
 
     public List<String> separateNumbers(Delimiter delimiter) {
-        return StringSplitter.splitByDelimiter(this.originalInput, delimiter);
+        String inputWithoutIndicator = StringSplitter.deleteIndicator(this.originalInput);
+        return StringSplitter.splitByDelimiter(inputWithoutIndicator, delimiter);
     }
 
+    private static boolean hasValidCustomDelimiter(String originalInput) {
+        return isValidPrefix(originalInput) &&
+                hasCustomDelimiter(originalInput) &&
+                isRightCustomDelimiterOrder(originalInput);
+    }
 
     private static boolean hasCustomDelimiter(String originalInput) {
         return originalInput.contains(CUSTOM_DELIMITER_START) && originalInput.contains(CUSTOM_DELIMITER_END);
