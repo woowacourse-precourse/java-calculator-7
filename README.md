@@ -22,10 +22,10 @@
 ### 문자 배열를 숫자 배열로 변환
 - [ ] 배열안에 담긴 문자를 숫자로 변환 후 반환
 - [ ] 숫자인지 검증 예외 처리 `IllegalArgumentException`
-- [ ] 양수인지 검증 예외 처리 `IllegalArgumentException`
 
 ### 계산
 - [ ] 숫자 배열로 합산 결과를 반환
+- [ ] 양수인지 검증 예외 처리 `IllegalArgumentException`
 
 ### 입력
 - [x] 사용자 입력 기능 ex) `//;\n1;2;3`, `1,2:3`
