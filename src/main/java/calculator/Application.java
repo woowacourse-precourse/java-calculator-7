@@ -10,8 +10,7 @@ public class Application {
         String input = inputOutputService.fetchUserInput();
         List<String> splitString = stringCalculator.splitDelimiterAndNumbers(input);
 
-        String delimiterCandidates = splitString.get(0);
-        String customDelimiter = stringCalculator.extractDelimiter(delimiterCandidates);
+        String customDelimiter = stringCalculator.extractDelimiter(splitString);
 
         String numbersCandidates = splitString.get(1);
         List<Double> numberList = stringCalculator.splitNumbersByDelimiter(numbersCandidates, customDelimiter);

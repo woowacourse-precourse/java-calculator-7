@@ -14,7 +14,9 @@ public class StringCalculator {
         return List.of("", formula);
     }
 
-    public String extractDelimiter(String delimiterCandidates) {
+    public String extractDelimiter(List<String> splitString) {
+        String delimiterCandidates = splitString.getFirst();
+
         if (delimiterCandidates.isEmpty()) {
             return null;
         }
