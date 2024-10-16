@@ -1,21 +1,11 @@
 package calculator;
 
-public enum Delimiter {
-    REST(","),
-    COLON(":"),
-    CUSTOM_DELIMITER_START_POINT("//"),
-    CUSTOM_DELIMITER_END_POINT("\n")
-    ;
+import java.util.List;
 
-    private static final String SEPARATOR = "|";
+public interface Delimiter {
 
-    private final String symbol;
+    List<Integer> extractNumbers(String input);
 
-    Delimiter(String symbol) {
-        this.symbol = symbol;
-    }
+    boolean applicable(String input);
 
-    public static String getRegularDelimiter(){
-        return REST.symbol + SEPARATOR + COLON.symbol;
-    }
 }
