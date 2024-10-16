@@ -54,13 +54,11 @@ public class Application {
         if (customSeparator == null) {
             regex = "[,:]";
         } else {
-            regex = "[,:|" + Pattern.quote(customSeparator.toString()) + "]";
+            regex = "[,:" + Pattern.quote(customSeparator.toString()) + "]";
         }
 
         String[] removedSeparatorsArray = removedDeclarePart.split(regex);
-
         checkNumberException(removedSeparatorsArray);
-
         return removedSeparatorsArray;
     }
 
