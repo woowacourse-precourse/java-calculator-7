@@ -1,10 +1,9 @@
 package calculator.model.separate;
 
 public enum BusinessRegex {
-    COMMON_GROUP_NAME("CUSTOM"),
-    CUSTOM_DELIMITER_COUNT_REGEX("//.*(?=\n)"),
-    CUSTOM_DELIMITER_POSITION_REGEX("^//.*(?=\n)"),
-    CUSTOM_DELIMITER_PARSE_REGEX("^//(.*?)\\n")
+    CUSTOM_DELIMITER_COUNT_REGEX("(//.*?)\\\\n"),
+    CUSTOM_DELIMITER_POSITION_REGEX("^(//.*?)\\\\n"),
+    CUSTOM_DELIMITER_PARSE_REGEX("^//(.*?)\\\\n")
     ;
 
     private final String value;

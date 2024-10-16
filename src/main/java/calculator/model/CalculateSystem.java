@@ -2,6 +2,7 @@ package calculator.model;
 
 import calculator.model.exception.ShouldNotBeNullException;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -14,7 +15,8 @@ public class CalculateSystem {
         this.numbers = Objects.requireNonNull(numbers);
     }
 
-    public static CalculateSystem of(Numbers numbers) {
+    public static CalculateSystem of(List<Integer> source) {
+        Numbers numbers = Numbers.of(source);
         return new CalculateSystem(numbers);
     }
 

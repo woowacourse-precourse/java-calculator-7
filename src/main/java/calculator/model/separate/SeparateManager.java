@@ -20,16 +20,12 @@ import static org.junit.platform.commons.util.StringUtils.isNotBlank;
 public class SeparateManager {
 
     private final List<String> basicDelimiters;
-    private final List<String> customCheckers;
-    private final String orDelimiter;
     private String customDelimiter;
 
 
     // Constructor
     private SeparateManager() {
         basicDelimiters = Delimiter.basic();
-        customCheckers = Delimiter.customChecker();
-        orDelimiter = Delimiter.or();
     }
 
     public static SeparateManager initiate() {
