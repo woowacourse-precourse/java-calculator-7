@@ -5,6 +5,7 @@ import static calculator.Constants.DelimiterConstants.CUSTOM_DELIMITER_END;
 import static calculator.Constants.DelimiterConstants.CUSTOM_DELIMITER_START;
 
 import calculator.Utils.StringSplitter;
+import java.util.List;
 
 public class OriginalInput {
     private final String originalInput;
@@ -13,7 +14,7 @@ public class OriginalInput {
         this.originalInput = originalInput;
     }
 
-    public String classifyDelimiter() {
+    public String separateDelimiter() {
         if (isValidPrefix(this.originalInput) &&
                 hasCustomDelimiter(this.originalInput) &&
                 isRightCustomDelimiterOrder(this.originalInput)) {
@@ -23,7 +24,9 @@ public class OriginalInput {
         return BASIC_DELIMITER;
     }
 
-    public String
+    public List<String> separateNumbers(Delimiter delimiter) {
+        return StringSplitter.splitByDelimiter(this.originalInput, delimiter);
+    }
 
 
     private static boolean hasCustomDelimiter(String originalInput) {
