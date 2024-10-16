@@ -57,7 +57,7 @@ public class StringAddCalculator {
         if (!negativeNumbers.isEmpty()) {
             //음수가 여러개 일때 List형태로 받고 데이터 변환 후 출력
             String negatives = negativeNumbers.stream().map(String::valueOf).collect(Collectors.joining(", "));
-            throw new IllegalArgumentException("음수는 허용되지 않습니다." + negatives);
+            throw new IllegalArgumentException("음수는 허용되지 않습니다: " + negatives);
         }
         return total;
     }

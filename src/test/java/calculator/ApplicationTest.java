@@ -46,7 +46,7 @@ class ApplicationTest extends NsTest {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             StringAddCalculator.add("-1,-2,3");
         });
-        assertEquals("음수는 허용되지 않습니다: -1,-2", exception.getMessage());
+        assertEquals("음수는 허용되지 않습니다: -1, -2", exception.getMessage());
     }
 
     @Override
