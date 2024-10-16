@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CustomDelimiterManager {
-    public static final String CUSTOM_DELIMITER_PATTERN = "^//.+\\\\n";
+    public static final String CUSTOM_DELIMITER_PATTERN = "^//.+?\\\\n";
     public static final Pattern PATTERN = Pattern.compile(CUSTOM_DELIMITER_PATTERN);
 
     public Optional<String> findCustomSeparator(String input) {
@@ -32,7 +32,7 @@ public class CustomDelimiterManager {
         return true;
     }
 
-    public String subStringCustomDelimiter(String input) {
+    public String extractAfterCustomDelimiter(String input) {
         Matcher matcher = PATTERN.matcher(input);
 
         if (!matcher.find()) {

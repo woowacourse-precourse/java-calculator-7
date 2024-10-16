@@ -19,9 +19,12 @@ public class CalculatorController {
 
     public void calculate() {
         String input = inputView.inputString();
+
         Delimiters delimiters = new Delimiters();
-        customDelimiterManager.add(input, delimiters);
-        input = customDelimiterManager.subStringCustomDelimiter(input);
+
+        while (customDelimiterManager.add(input, delimiters)) {
+            input = customDelimiterManager.extractAfterCustomDelimiter(input);
+        }
 
         List<String> numbers = delimiters.separate(input);
         int sum = numbers.stream()
