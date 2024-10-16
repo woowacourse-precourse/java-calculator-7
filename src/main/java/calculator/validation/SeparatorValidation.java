@@ -6,7 +6,10 @@ public class SeparatorValidation {
         if (isNotSeparator(input)) {
             throw new IllegalArgumentException("잘못된 구분자입니다.");
         }
-        if (containCustomSeparator(input)) {
+        if (input.contains("//") || input.contains("\\n")) {
+            if (!containCustomSeparator(input)) {
+                throw new IllegalArgumentException("커스텀 구분자를 사용하려면 반드시 //과 \\n 모두 사용해야 합니다.");
+            }
             if (input.indexOf("//") != 0) {
                 throw new IllegalArgumentException("커스텀 구분자는 반드시 앞에 있어야합니다.");
             }
