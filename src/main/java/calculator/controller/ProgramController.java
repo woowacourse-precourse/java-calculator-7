@@ -12,11 +12,13 @@ public class ProgramController {
 	}
 
 	public void run() {
-		List<Long> numbers = drawNumber();
+		while(true) {
+			List<Long> numbers = drawNumber();
+		}
 	}
 
 	private List<Long> drawNumber() {
-		drawController.requestNumberDraw();
+		return drawController.requestNumberDraw();
 	}
 
 }
