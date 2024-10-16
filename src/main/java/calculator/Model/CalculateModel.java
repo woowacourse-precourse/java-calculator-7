@@ -13,17 +13,13 @@ public class CalculateModel {
             return 0;
         }
 
-        //custom 구분자 있는지 확인
+        //custom 구분자 있는지 확인하고 구분자로 나누기
         String regex = "//(.*?)\\\\n(.*)";
         Matcher matcher = Pattern.compile(regex).matcher(input);
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
             numbers = matcher.group(2).split(customDelimiter);
-            System.out.println("customDelimiter : " + customDelimiter);
-            System.out.println("numbers : " + numbers);
-
         } else {
-            //없으면 , : 기준으로 split
             numbers = input.split(",|:");
         }
         return sum(numbers);
