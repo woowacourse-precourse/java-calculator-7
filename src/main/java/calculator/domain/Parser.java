@@ -11,7 +11,17 @@ public class Parser {
 
         String numbers = removeCustomDelimiterPart(input);
 
+        if (!isIncludeDelimiter(input)) {
+            throw new IllegalArgumentException("구분자를 입력해 주세요.");
+        }
+
         return Arrays.asList(numbers.split(delimiter));
+    }
+
+    private static boolean isIncludeDelimiter(String input) {
+        String delimiter = makeDelimiter(input);
+
+        return input.contains(delimiter);
     }
 
     private static String makeDelimiter(String input) {
