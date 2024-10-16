@@ -2,7 +2,6 @@ package calculator;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 public class CalculatorController {
 
@@ -21,11 +20,9 @@ public class CalculatorController {
     public void calculate() {
         String input = inputView.inputString();
         Delimiters delimiters = new Delimiters();
-        Optional<String> customSeparator = customDelimiterManager.findCustomSeparator(input);
-        if (customSeparator.isPresent()) {
-            delimiters.add(new Delimiter(customSeparator.get()));
-            input = input.substring(5);
-        }
+        customDelimiterManager.add(input, delimiters);
+        input = customDelimiterManager.subStringCustomDelimiter(input);
+
         List<String> numbers = delimiters.separate(input);
         int sum = numbers.stream()
                 .map(Integer::parseInt)
