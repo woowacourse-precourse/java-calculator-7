@@ -1,5 +1,7 @@
 package calculator.service;
 
+import java.util.regex.Pattern;
+
 public class CalculateService {
 
     /***
@@ -17,7 +19,8 @@ public class CalculateService {
             int secondIdx = inputString.indexOf("\\n");
             String delim = inputString.substring(firstIdx, secondIdx);
 
-            String[] split = inputString.substring(secondIdx + 2, inputString.length()).split(delim);
+            String regex = Pattern.quote(delim) + "|,|:";
+            String[] split = inputString.substring(secondIdx + 2, inputString.length()).split(regex);
 
             try {
                 for (String s : split) {
