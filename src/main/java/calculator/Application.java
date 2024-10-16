@@ -10,17 +10,14 @@ public class Application {
         if(S==null||S.isEmpty())
             return 0;
 
-        System.out.println(S.charAt(2));
-        System.out.println(S.charAt(3));
-
         String str = S;
         // 커스텀 구분자 확인 (구분자가 한 개만 입력된다는 가정)
         if(S.startsWith("//"))
         {
-            char customSeparators = S.charAt(3);
-            if(S.charAt(4)=='\n')
+            char customSeparators = S.charAt(2);
+            if(S.substring(3,4)=="\n")
             {
-                str=S.substring(4);
+                str=S.substring(5);
                 // 구분자가 두 개 일 경우를 위해 추후 수정 가능하게 코드를 짬
                 char[] temp = new char[separators.length+1];
                 System.arraycopy(separators, 0, temp, 0, separators.length);
@@ -31,7 +28,6 @@ public class Application {
             {
                 throw new IllegalArgumentException();
             }
-            
         }
 
         
