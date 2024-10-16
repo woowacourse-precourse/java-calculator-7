@@ -15,4 +15,9 @@ public class Delimiters {
         char firstChar = inputString.charAt(0);
         return firstChar == '/';
     }
+
+    public boolean isCustomDelimiterFirstFormatCorrect(String inputString) {
+        String firstFormat = inputString.substring(0, 1);
+        return firstFormat.equals("//");
+    }
 }
