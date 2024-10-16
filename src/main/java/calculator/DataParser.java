@@ -3,7 +3,7 @@ package calculator;
 import calculator.dto.Data;
 
 public class DataParser {
-    public static Data parseData(String inputData, boolean isCustom) throws IllegalAccessException {
+    public static Data parseData(String inputData, boolean isCustom) {
         if (isCustom) {
             checkValidCustomFormat(inputData);
         }
@@ -13,18 +13,18 @@ public class DataParser {
         return new Data(separators, contents);
     }
 
-    private static void checkValidCustomFormat(String inputData) throws IllegalAccessException {
+    private static void checkValidCustomFormat(String inputData) {
         if (!inputData.contains("\\n")) {
-            throw new IllegalAccessException();
+            throw new IllegalArgumentException();
         }
         String[] splitData = inputData.split("\\\\n");
         int count = splitData.length;
         if (!(count == 1 || count == 2)) {
-            throw new IllegalAccessException();
+            throw new IllegalArgumentException();
         }
     }
 
-    private static char[] createSeparators(String inputData, boolean isCustom) throws IllegalAccessException {
+    private static char[] createSeparators(String inputData, boolean isCustom) {
         if (isCustom) {
             return getCustomSeparator(inputData);
         }
@@ -44,22 +44,22 @@ public class DataParser {
         return inputData.toCharArray();
     }
 
-    private static char[] getCustomSeparator(String inputData) throws IllegalAccessException {
+    private static char[] getCustomSeparator(String inputData) {
         String[] split = inputData.split("\\\\n");
         String prefix = split[0];
         if (prefix.length() != 3) {
-            throw new IllegalAccessException();
+            throw new IllegalArgumentException();
         }
         char separator = prefix.charAt(2);
         return new char[]{separator};
     }
 
-    private static void checkValidContents(char[] separators, char[] contents) throws IllegalAccessException {
+    private static void checkValidContents(char[] separators, char[] contents) {
         int index = 0;
         while (index < contents.length) {
             char c = contents[index];
             if (!(isSeparators(c, separators) || isNumber(c))) {
-                throw new IllegalAccessException();
+                throw new IllegalArgumentException();
             }
             index++;
         }
