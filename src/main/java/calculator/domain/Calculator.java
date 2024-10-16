@@ -7,7 +7,9 @@ import java.util.regex.Pattern;
 
 public class Calculator {
 
+    private static final String REGEX = "//(.)\n(.*)";
     private static final String DEFAULT_DELIMITERS = ",|;";
+    private static final String ILLEGAL_ARGUMENT_EXCEPTION_CONTENT = "구분자와 양수만 입력 가능합니다.";
 
     private final List<Integer> numbers;
 
@@ -23,7 +25,7 @@ public class Calculator {
 
     public static Calculator from(String input) {
         input = input.replace("\\n", "\n");
-        Matcher matcher = Pattern.compile("//(.)\n(.*)", Pattern.DOTALL).matcher(input);
+        Matcher matcher = Pattern.compile(REGEX, Pattern.DOTALL).matcher(input);
 
         String delimiters = DEFAULT_DELIMITERS;
         String inputNumbers = input;
@@ -43,10 +45,10 @@ public class Calculator {
             try {
                 result.add(Integer.parseInt(token));
                 if (result.getLast() <= 0) {
-                    throw new IllegalArgumentException("구분자와 양수만 입력 가능합니다.");
+                    throw new IllegalArgumentException(ILLEGAL_ARGUMENT_EXCEPTION_CONTENT);
                 }
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("구분자와 양수만 입력 가능합니다.");
+                throw new IllegalArgumentException(ILLEGAL_ARGUMENT_EXCEPTION_CONTENT);
             }
         }
         return result;
