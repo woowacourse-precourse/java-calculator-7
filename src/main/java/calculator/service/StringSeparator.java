@@ -16,7 +16,10 @@ public class StringSeparator {
         for (int i = 0; i < str.length(); i++) {
             if (isNumber(str.charAt(i))) {
                 if (!divide.isEmpty()) {
-                    if (isWrongInput(divide)) {
+                    if (divide.equals("-")) {
+                        number += divide;
+                        divide = "";
+                    } else if (isWrongInput(divide)) {
                         throw new IllegalArgumentException("잘못된 입력입니다.");
                     } else {
                         String separator = extractionSeparator(divide);
