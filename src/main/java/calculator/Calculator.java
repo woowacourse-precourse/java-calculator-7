@@ -6,7 +6,7 @@ public class Calculator {
             return 0;
         }
         String[] numbers;
-        // 커스텀 구분자가 있는지 확인
+        // 문자열 앞부분에 // 있으면 커스텀 구분자 특정
         if (input.startsWith("//")) {
             // 커스텀 구분자가 있는 경우 처리
             numbers = customizeSeparator(input);
@@ -25,11 +25,12 @@ public class Calculator {
         }
         // "//"와 "\n" 사이에 있는 커스텀 구분자를 추출
         String customDelimiter = "";
+
         // 유효한 인덱스 확인 후 문자열 추출
         if (delimiterStartIndex < delimiterEndIndex) {
             customDelimiter = input.substring(delimiterStartIndex+2, delimiterEndIndex);
         } else {
-            System.out.println("유효한 입력이 아닙니다.");
+            throw new IllegalArgumentException("유효한 입력이 아닙니다.");
         }
         // "\n" 이후의 숫자 부분을 추출하고 커스텀 구분자로 분리
         String numbersPart = input.substring(delimiterEndIndex + 2);
