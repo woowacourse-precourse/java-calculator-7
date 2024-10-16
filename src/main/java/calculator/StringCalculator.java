@@ -27,7 +27,7 @@ public class StringCalculator {
     public List<Double> extractNumbersByDelimiter(List<String> splitString, String customDelimiter) {
         String numberCandidates = splitString.get(1);
         NumberValidator numberValidator = new NumberValidator();
-        List<String> splitNumber = Arrays.stream(numberCandidates.split(",|:|" + customDelimiter)).toList();
+        List<String> splitNumber = Arrays.stream(numberCandidates.split(",|:|" + customDelimiter, -1)).toList();
 
         numberValidator.validate(splitNumber);
 
