@@ -1,13 +1,15 @@
 package calculator;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
 
 public class Application {
 
     public static void main(String[] args) {
 
         Set<String> delimiters = new HashSet<>(Set.of(",", ":"));
-        List<Integer> numbers = new LinkedList<>();
+        Calculator calculator = new Calculator();
         Scanner scanner = new Scanner(System.in);
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = scanner.nextLine();
@@ -27,25 +29,8 @@ public class Application {
         }
 
         String[] numberTokens = input.split(String.join("|", delimiters));
+        int sum = calculator.sum(numberTokens);
 
-        for (String numberToken : numberTokens) {
-            if (numberToken.isEmpty()) {
-                numbers.add(0);
-                continue;
-            }
-
-            try {
-                int number = Integer.parseInt(numberToken);
-                if (number < 0) {
-                    throw new IllegalArgumentException("음수입니다.");
-                }
-                numbers.add(number);
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("구분자가 아닌 문자가 포함되어 있습니다.");
-            }
-        }
-
-        int sum = numbers.stream().mapToInt(Integer::intValue).sum();
         System.out.print("결과 : " + sum);
     }
 }
