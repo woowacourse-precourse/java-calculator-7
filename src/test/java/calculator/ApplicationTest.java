@@ -24,6 +24,15 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 문자열의_첫5글자를_자르는_테스트() {
+       String inputStr = "//+\n12,3+4:5";
+       InputStringProcessor inputStringProcessor = new InputStringProcessor();
+       String slicedInputStr = inputStringProcessor.removeFirstFiveCharacters(inputStr);
+       assertThat(slicedInputStr).isEqualTo("12,3+4:5");
+    }
+
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
