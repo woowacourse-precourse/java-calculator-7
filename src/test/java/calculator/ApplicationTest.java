@@ -99,6 +99,24 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    @DisplayName("영어만 입력이 들어오면 예외를 발생한다.")
+    void inputExceptionTest9() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("abc"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    @DisplayName("특수문자만 입력이 들어오면 예외를 발생한다.")
+    void inputExceptionTest10() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("&^%"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
     @DisplayName("입력에 공백이 들어오면 0을 반환한다.")
     void inputTest1() {
         String userInput = "";
