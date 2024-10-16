@@ -2,6 +2,10 @@ package calculator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StringAddCalculator {
         // 문자열 덧셈 계산기 메인 메소드
@@ -42,12 +46,18 @@ public class StringAddCalculator {
     // 문자열 배열의 숫자들을 합산하는 메소드
     private static int sum(String[] numbers) {
         int total = 0;
+        List<Integer> negativeNumbers = new ArrayList<>();
         for (String number : numbers) {
             int num = toInt(number);
             if (num < 0) {
-                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + num);
+                negativeNumbers.add(num);
             }
             total += num;
+        }
+        if (!negativeNumbers.isEmpty()) {
+            //음수가 여러개 일때 List형태로 받고 데이터 변환 후 출력
+            String negatives = negativeNumbers.stream().map(String::valueOf).collect(Collectors.joining(", "));
+            throw new IllegalArgumentException("음수는 허용되지 않습니다." + negatives);
         }
         return total;
     }
