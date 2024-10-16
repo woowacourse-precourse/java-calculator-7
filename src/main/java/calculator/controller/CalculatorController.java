@@ -16,6 +16,7 @@ public class CalculatorController {
         String userInput = inputView.inputUserString();
         if (userInput.isEmpty()) {
             outputView.printResult(0);
+            return;
         }
         int result = calculateStringRemainder(DelimiterSeparator.registerDelimiter(userInput), userInput);
         outputView.printResult(result);
