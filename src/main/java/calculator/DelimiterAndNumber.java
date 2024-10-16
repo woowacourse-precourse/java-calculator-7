@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.Arrays;
+
 public class DelimiterAndNumber {
 
     private static final String DEFAULT_DELIMITER = "[,:]";
@@ -25,6 +27,22 @@ public class DelimiterAndNumber {
             return new DelimiterAndNumber(delimiter, numbers);
         }
         throw new IllegalArgumentException("잘못된 구분자 사용법입니다.");
+    }
+
+    public int sum() {
+        return Arrays.stream(numbers.split(delimiter))
+                .mapToInt(token -> {
+                    try {
+                        int num = Integer.parseInt(token);
+                        if (num < 0) {
+                            throw new IllegalArgumentException("음수는 계산할 수 없습니다.");
+                        }
+                        return num;
+                    } catch (NumberFormatException e) {
+                        throw new IllegalArgumentException("추출할 수 없는 숫자가 존재합니다.");
+                    }
+                })
+                .sum();
     }
 
     public String getDelimiter() {
