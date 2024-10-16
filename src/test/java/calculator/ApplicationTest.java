@@ -9,6 +9,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
 
+
     @Test
     void 기본_구분자_사용() {
         assertSimpleTest(() -> {
@@ -30,6 +31,26 @@ class ApplicationTest extends NsTest {
 
 
     @Test
+    void 입력값이_없을_때() {
+        assertSimpleTest(() -> {
+            run("");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void isPositiveNum_예외_테스트(){
+        //given
+        Calculator calculator = new Calculator("10");
+        String toBeChecked = "-1";
+
+        //when & then
+        assertThatThrownBy(() -> calculator.isPositiveNum(toBeChecked))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+
+    @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1");
@@ -47,13 +68,6 @@ class ApplicationTest extends NsTest {
         });
     }
 
-    @Test
-    void 입력값이_없을_때() {
-        assertSimpleTest(() -> {
-            run();
-            assertThat(output()).contains("결과 : 0");
-        });
-    }
 
     @Test
     void 커스텀_구분자가_숫자() {
@@ -93,31 +107,6 @@ class ApplicationTest extends NsTest {
         );
     }
 
-//    @Test
-//    void checkType_null_입력_테스트(){
-//        //given
-//        Calculator calculator = new Calculator();
-//
-//        //when&then
-//        assertSimpleTest(() -> {
-//            calculator.checkType(null);
-//            assertThat(output()).contains("결과 : 0");
-//        });
-//
-//    }
-
-    
-//    @Test
-//    void isPositiveNum_예외_테스트(){
-//        //given
-//        Calculator calculator = new Calculator();
-//        String toBeChecked = "-1";
-//
-//        //when & then
-//        assertSimpleTest(() ->
-//                assertThatThrownBy(() -> calculator.isPositiveNum(toBeChecked))
-//                        .isInstanceOf(IllegalArgumentException.class));
-//    }
 
 
     @Override
