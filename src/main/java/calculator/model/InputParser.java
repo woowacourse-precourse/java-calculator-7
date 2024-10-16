@@ -7,9 +7,18 @@ import java.util.regex.Pattern;
 
 public class InputParser {
 
+    public static final String DEFAULT_DELIMITER_REGEX = "^([1-9]\\d*)((,|:)([1-9]\\d*))*$";
+    public static final String CUSTOM_DELIMITER_REGEX = "//(.)\\\\n(.+)";
+    public static final int ZERO = 0;
+    public static final int CUSTOM_DELIMITER_GROUP = 1;
+    public static final int INPUT_NUM_GROUP = 2;
+    public static final String COMMA_DELIMITER = ",";
+    public static final String COLON_DELIMITER = ":";
+    public static final String SPACE = " ";
+
     public List<Integer> checkAndParseInput(String input) throws IllegalArgumentException{
         if (input.isEmpty()) {
-            return List.of(0,0);
+            return List.of(ZERO,ZERO);
         }
         if (checkDefaultDelimiter(input)) {
             return convertDefaultDelimiter(input);
@@ -18,14 +27,13 @@ public class InputParser {
     }
 
     protected boolean checkDefaultDelimiter(String input) {
-        String defaultDelimiterRegex = "^([1-9]\\d*)((,|:)([1-9]\\d*))*$";
-        return input.matches(defaultDelimiterRegex);
+        return input.matches(DEFAULT_DELIMITER_REGEX);
     }
 
     protected List<Integer> convertDefaultDelimiter(String input) throws IllegalArgumentException {
         try {
-            input = input.replace(","," ").replace(":"," ");
-            String[] inputs = input.split(" ");
+            input = input.replace(COMMA_DELIMITER, SPACE).replace(COLON_DELIMITER , SPACE);
+            String[] inputs = input.split(SPACE);
             return convertToIntList(inputs);
         } catch (Exception e) {
             throw new IllegalArgumentException();
@@ -34,12 +42,11 @@ public class InputParser {
 
     protected List<Integer> convertCustomDelimiter(String input) throws IllegalArgumentException{
         try {
-            String customDelimiterRegex = "//(.)\\\\n(.+)";
-            Pattern p = Pattern.compile(customDelimiterRegex);
+            Pattern p = Pattern.compile(CUSTOM_DELIMITER_REGEX);
             Matcher matcher = p.matcher(input);
             if(matcher.matches()) {
-                String customDelimiter = matcher.group(1);
-                String inputNum = matcher.group(2);
+                String customDelimiter = matcher.group(CUSTOM_DELIMITER_GROUP);
+                String inputNum = matcher.group(INPUT_NUM_GROUP);
                 String[] split = inputNum.split(customDelimiter);
                 List<Integer> list = convertToIntList(split);
                 checkPositiveNumber(list);
