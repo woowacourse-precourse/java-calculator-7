@@ -14,4 +14,8 @@ public class SepartorMananger {
     public boolean exists(String separator) {
         return separators.contains(separator);
     }
+
+    public void add(String separator) {
+        separators.add(separator);
+    }
 }
