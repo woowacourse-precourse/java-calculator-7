@@ -3,6 +3,7 @@ package calculator.Controller;
 import calculator.Model.CalculateModel;
 import calculator.View.Input;
 import calculator.View.InputImpl;
+import calculator.View.Output;
 import calculator.View.OutputImpl;
 
 public class CalculatorController {
@@ -16,7 +17,7 @@ public class CalculatorController {
         int result = calculateModel.calculate(inputString);
 
         //Output 호출
-        OutputImpl output = new OutputImpl();
+        Output output = new OutputImpl();
         output.printResult(result);
 
     }
