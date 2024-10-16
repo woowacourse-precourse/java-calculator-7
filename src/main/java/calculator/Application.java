@@ -16,8 +16,10 @@ public class Application {
                 if (num.equals("") == false)
                     sum += Integer.parseInt(num);
                 num = "";
-            } else {
+            } else if ('0' <= ch.charAt(0) && '9' >= ch.charAt(0)) {
                 num += ch;
+            } else {
+                throw new IllegalArgumentException();
             }
         }
         if (num.equals("") == false)
