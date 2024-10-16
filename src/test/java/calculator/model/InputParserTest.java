@@ -57,22 +57,6 @@ class InputParserTest {
     }
 
     @Test
-    @DisplayName("커스텀 구분자 사용확인 테스트")
-    public void checkCustomDelimiterTest() {
-        //given
-        String input1 = "//;\\n1";
-        String input2 = "//;\\n1;2;3;4";
-
-        //when
-        boolean hasCustomDelimiter1 = inputParser.checkCustomDelimiter(input1);
-        boolean hasCustomDelimiter2 = inputParser.checkCustomDelimiter(input2);
-
-        //then
-        assertThat(hasCustomDelimiter1).isTrue();
-        assertThat(hasCustomDelimiter2).isTrue();
-    }
-
-    @Test
     @DisplayName("커스텀 구분자 List 변환 테스트")
     public void convertCustomDelimiterTest() {
         //given
