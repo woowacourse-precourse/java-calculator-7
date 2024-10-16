@@ -40,7 +40,7 @@ public class Separator {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] Separator: 에러 메시지 추천");
+            throw new IllegalArgumentException("[ERROR] Separator: 숫자로 변환할 수 없는 값입니다.");
         }
     }
 
