@@ -1,7 +1,7 @@
 package calculator.service.util;
 
 import calculator.domain.exception.CalculatorException;
-import calculator.domain.exception.ErrorMessage;
+import calculator.domain.exception.CalculatorErrorMessage;
 import calculator.domain.model.ExtractedInput;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ public final class InputParser {
         try {
             return Integer.parseInt(numberString.trim());
         } catch (NumberFormatException e) {
-            throw CalculatorException.from(ErrorMessage.NOT_NUMBER_ERROR);
+            throw CalculatorException.from(CalculatorErrorMessage.NOT_NUMBER_ERROR);
         }
     }
 }

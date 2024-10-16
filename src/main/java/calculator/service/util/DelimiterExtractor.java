@@ -1,7 +1,7 @@
 package calculator.service.util;
 
 import calculator.domain.exception.CalculatorException;
-import calculator.domain.exception.ErrorMessage;
+import calculator.domain.exception.CalculatorErrorMessage;
 import calculator.domain.model.ExtractedInput;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,7 +20,7 @@ public final class DelimiterExtractor {
         Matcher matcher = SINGLE_CHAR_DELIMITER_PATTERN.matcher(input);
 
         if (!matcher.find()) {
-            throw CalculatorException.from(ErrorMessage.INVALID_CUSTOM_DELIMITER_ERROR);
+            throw CalculatorException.from(CalculatorErrorMessage.INVALID_CUSTOM_DELIMITER_ERROR);
         }
 
         String customDelimiter = matcher.group(1);

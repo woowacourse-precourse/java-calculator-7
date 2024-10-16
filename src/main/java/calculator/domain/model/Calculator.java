@@ -1,7 +1,7 @@
 package calculator.domain.model;
 
 import calculator.domain.exception.CalculatorException;
-import calculator.domain.exception.ErrorMessage;
+import calculator.domain.exception.CalculatorErrorMessage;
 import java.util.List;
 
 public class Calculator {
@@ -19,7 +19,7 @@ public class Calculator {
 
     private static void validate(List<Integer> numbers) {
         if (numbers.stream().anyMatch(number -> number <= 0)) {
-            throw CalculatorException.from(ErrorMessage.INVALID_RANGE_ERROR);
+            throw CalculatorException.from(CalculatorErrorMessage.INVALID_RANGE_ERROR);
         }
     }
 
