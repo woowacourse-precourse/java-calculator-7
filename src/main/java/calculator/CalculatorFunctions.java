@@ -18,8 +18,12 @@ public class CalculatorFunctions {
                 throw new IllegalArgumentException("잘못된 형식: 구분자를 연속으로 사용하였습니다.");
             }
 
-            if(!token.matches("\\d+")) {
+            if(!token.matches("-?\\d+")) {
                 throw new IllegalArgumentException("잘못된 형식 : 숫자가 아닌 값이 포함되었습니다.");
+            }
+
+            if(Integer.parseInt(token) < 0) {
+                throw new IllegalArgumentException("잘못된 형식 : 음수가 입력되었습니다.");
             }
 
             sum += Integer.parseInt(token);
