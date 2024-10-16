@@ -20,5 +20,6 @@ public class CalculatorOperation {
     private void splitDelimiterAndOperand() {
         StringSplit stringSplit = new StringSplit(inputString);
         stringSplit.preprocessDelimiter();
+        stringSplit.splitAndSaveOperands();
     }
 }

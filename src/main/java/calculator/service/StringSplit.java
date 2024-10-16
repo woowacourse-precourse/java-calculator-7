@@ -2,8 +2,6 @@ package calculator.service;
 
 import calculator.model.Delimiter;
 
-import java.util.ArrayList;
-
 public class StringSplit {
 
     private String inputString;
@@ -30,5 +28,20 @@ public class StringSplit {
         if (inputString.startsWith("//")) {
             inputString = inputString.substring(5);
         }
+    }
+
+    public void splitAndSaveOperands() {
+        String[] stringOperands = splitOperands();
+    }
+
+    private String[] splitOperands() {
+        String reg = "";
+        for (Character delimiter : delimiter.getDelimiters()) {
+            reg += ("\\" + delimiter + "|");
+        }
+        if (!reg.isEmpty()) {
+            reg = reg.substring(0, reg.length() - 1);
+        }
+        return inputString.split(reg);
     }
 }

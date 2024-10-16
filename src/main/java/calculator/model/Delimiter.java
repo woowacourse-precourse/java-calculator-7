@@ -10,4 +10,8 @@ public class Delimiter {
     public void addCustomDelimiter(char newDelimiter) {
         delimiters.add(newDelimiter);
     }
+
+    public ArrayList<Character> getDelimiters() {
+        return delimiters;
+    }
 }
