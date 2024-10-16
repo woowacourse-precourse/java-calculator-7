@@ -14,8 +14,15 @@ public class Application {
             Numbers numbers = new Numbers(numberStrings.split(regex.getDelimiterResult()));
 
             int sum = 0;
-            for (String stringNumber : numbers.getNumbers()) {
-                sum += Integer.parseInt(stringNumber);
+            for (String number : numbers.getNumbers()) {
+                Number calculateNumber = new Number(number);
+                if (calculateNumber.getNumber().equals("\"\"")) {
+                    sum += 0;
+                }
+
+                if (!calculateNumber.getNumber().equals("\"\"")) {
+                    sum += Integer.parseInt(calculateNumber.getNumber());
+                }
             }
 
             System.out.println("결과 : " + sum);
@@ -23,22 +30,27 @@ public class Application {
 
         if (isCustom(input)) {
             int customDelimiterEndIndex = input.indexOf("\\n");
+
             CustomDelimiter customDelimiter = new CustomDelimiter(input.substring(2, customDelimiterEndIndex));
+
             DelimiterResult customRegex = new DelimiterResult(defaultDelimiter.getDefaultDelimiter()
                     .substring(0, defaultDelimiter.getDefaultDelimiter().length() - 1)
                     + customDelimiter.getCustomDelimiter() + "]");
+
             InputNumberStrings numberStrings = new InputNumberStrings(input.substring(customDelimiterEndIndex + 2),
                     customRegex);
             Numbers numbers = new Numbers(numberStrings.split(customRegex.getDelimiterResult()));
 
             int sum = 0;
-            for (String stringNumber : numbers.getNumbers()) {
-                if (stringNumber.equals("\"\"")) {
+            for (String number : numbers.getNumbers()) {
+
+                Number calculateNumber = new Number(number);
+                if (calculateNumber.getNumber().equals("\"\"")) {
                     sum += 0;
                 }
 
-                if (!stringNumber.equals("\"\"")) {
-                    sum += Integer.parseInt(stringNumber);
+                if (!calculateNumber.getNumber().equals("\"\"")) {
+                    sum += Integer.parseInt(calculateNumber.getNumber());
                 }
             }
             System.out.println("결과 : " + sum);
