@@ -16,7 +16,6 @@ public class BasicCalculator implements Calculator {
 	private static final String[] BASIC_SEPARATORS = {",", ":"};
 	private SeparatorParser separatorParser;
 	private MathematicalExpressionParser mathematicalExpressionParser;
-	private int recentResult;
 
 	public BasicCalculator() {
 		this(null, null);
@@ -39,19 +38,12 @@ public class BasicCalculator implements Calculator {
 		}
 		separators = new HashSet<>(Arrays.asList(BASIC_SEPARATORS));
 	}
-
-	@Override
-	public void calculate(String expression) {
+	private long calculate(String expression) {
 		String mathematicalExpression = separatorParser.parse(expression, separators);
 		String separatorRegex = separatorParser.generateRegex(separators);
-		int[] numbers = mathematicalExpressionParser.parse(mathematicalExpression, separatorRegex);
+		long[] numbers = mathematicalExpressionParser.parse(mathematicalExpression, separatorRegex);
 
-		int result = 0;
-		for (int number : numbers) {
-			result += number;
-		}
-
-		recentResult = result;
+		return Arrays.stream(numbers).sum();
 	}
 
 	@Override
@@ -59,9 +51,9 @@ public class BasicCalculator implements Calculator {
 		System.out.println("덧셈할 문자열을 입력해 주세요.");
 		String input = Console.readLine();
 
-		calculate(input);
+		long result = calculate(input);
 
-		System.out.printf("결과 : %d", recentResult);
+		System.out.printf("결과 : %d", result);
 	}
 
 }
