@@ -55,7 +55,11 @@ public class Application {
             // 숫자 변환 및 추가
             for (String pureNumber : numbers) {
                 if (!pureNumber.trim().isEmpty()) {
-                    changedNumber.add(Integer.parseInt(pureNumber.trim()));
+                    try {
+                        changedNumber.add(Integer.parseInt(pureNumber.trim()));
+                    } catch (NumberFormatException e) {
+                        throw new IllegalArgumentException("A non-numeric value is included.");
+                    }
                 }
             }
         } else {
@@ -65,7 +69,11 @@ public class Application {
             // 숫자 변환 및 추가
             for (String pureNumber : numbers) {
                 if (!pureNumber.trim().isEmpty()) {
-                    changedNumber.add(Integer.parseInt(pureNumber.trim()));
+                    try {
+                        changedNumber.add(Integer.parseInt(pureNumber.trim()));
+                    } catch (NumberFormatException e) {
+                        throw new IllegalArgumentException("A non-numeric value is included.");
+                    }
                 }
             }
         }
