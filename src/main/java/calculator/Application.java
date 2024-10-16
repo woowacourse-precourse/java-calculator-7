@@ -47,6 +47,19 @@ public class Application {
     }
 
 
+    // 정수 배열의 유효성을 검사하는 메서드
+    public static void validateInput(int[] integerArray) {
+        for (int value : integerArray) {
+            if (value <= 0) {
+                // 유효하지 않은 값이 포함된 경우 예외 처리
+                System.out.println("유효하지 않은 입력값입니다.");
+                throw new IllegalArgumentException(value + "은(는) 유효하지 않은 입력값입니다. (expected)");
+            }
+        }
+    }
+
+
+
 
 
 
@@ -76,7 +89,8 @@ public class Application {
         // 문자열을 정수 배열로 변환
         int[] numbers = convertToIntegers(input);
 
-
+        // 배열의 유효성 검사
+        validateInput(numbers);
 
 
 
