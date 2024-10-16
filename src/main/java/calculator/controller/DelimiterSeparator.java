@@ -27,10 +27,12 @@ public class DelimiterSeparator {
         return index + 2;
     }
 
-    public static void separateDelimiter(String str){
+    public static void validateDelimiter(String str){
         if(NumberChecker.isNumber(str)){
             throw new IllegalArgumentException("잘못된 형식입니다.");
         }
-        // 구분자가 아니면 오류
+        if(!Delimiter.isDelimiter(str)){
+            throw new IllegalArgumentException("잘못된 형식입니다.");
+        }
     }
 }

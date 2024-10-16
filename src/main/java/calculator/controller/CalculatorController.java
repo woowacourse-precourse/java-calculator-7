@@ -27,7 +27,7 @@ public class CalculatorController {
         int sum = 0;
         for(String str:userInput.substring(index).split("")){
             if(isPreviousValueNumeric){
-                DelimiterSeparator.separateDelimiter(str);
+                DelimiterSeparator.validateDelimiter(str);
                 isPreviousValueNumeric = false;
                 continue;
             }
