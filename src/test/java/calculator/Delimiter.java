@@ -3,7 +3,7 @@ package calculator;
 import java.util.regex.Pattern;
 
 public class Delimiter {
-    private static final String DEFAULT_DELIMITER = ",|:";
+    private static final String DEFAULT_DELIMITER = "[,:]";
     private String delimiter = DEFAULT_DELIMITER;
     private String[] delimitedNumbers;
 
