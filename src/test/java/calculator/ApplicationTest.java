@@ -11,7 +11,7 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 사용자_입력_숫자_추출() {
-        String input = "1,2,3";
+        int[] input = {1, 2, 3};
         int result = Application.sum(input);
         assertThat(result).isEqualTo(6);
     }
