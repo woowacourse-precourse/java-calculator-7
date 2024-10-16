@@ -6,7 +6,7 @@
 ---
 
 ### [ Input 받기 ]
-- `Console` API의 `readLine()` 사용해 `String input` 를 받는다.
+✅`Console` API의 `readLine()` 사용해 `String input` 를 받는다.
   - 🔺구분자 앞 뒤로 숫자 없는 공백이면 이는 예외가 아닌 0으로 간주한다. ( “” 결과가 0이기 때문 ) 
       - ex1 ) “1,2:3: “ ⇒ 6, “1,3: “ ⇒ 4
       - ex2 ) “ ,1,3” ⇒ 4, “ :3,4” ⇒ 7
@@ -38,7 +38,8 @@
 
 
 ✅ `extractCustomDelimiter()` : input에서 커스텀 구분자를 추출하는 메서드
-  - input String의 index 2 문자를 리턴
+  - input String에서 `//`와 `\n` 사이 있는 문자를 추출
+  - 추출된 커스텀 구분자인 `String` 리턴
 
 
 ✅ `parseNumbersFromInput()` : input에서 구분자를 기준으로 숫자를 추출하는 메서드
@@ -57,8 +58,8 @@
 
 ### [ 계산 결과 출력하기 ]
 
-- `parseNumbersFromInput()` 으로 추출한 모든 숫자들의 합 구해 출력하기
-- 추출한 숫자들을 담은 List size가 0일 경우, 숫자가 없었다는 의미이므로 `answer = 0;`
+✅ `parseNumbersFromInput()` 으로 추출한 모든 숫자들의 합 구해 출력하기
+  - 추출한 숫자들을 담은 List size가 0일 경우, 숫자가 없었다는 의미이므로 `answer = 0;`
 
 
 
