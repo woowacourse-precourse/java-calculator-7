@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.Arrays;
 
 public class Application {
     public static void main(String[] args) {
@@ -48,12 +49,11 @@ class Calculator {
     private String[] separate(boolean hasPlusSeparator) {
         if (!hasPlusSeparator) {
             return s.split("[:,]");
-        } else {
-            if (plusSeparator.equals("\\")) {
-                return s.split("[:," + plusSeparator.repeat(2) + "]");
-            }
-            return s.split("[:," + plusSeparator + "]");
         }
+        if (plusSeparator.equals("\\")) {
+            return s.split("[:," + plusSeparator.repeat(2) + "]");
+        }
+        return s.split("[:," + plusSeparator + "]");
     }
 
     //숫자가 아닌 문자를 발견할 경우 throw new IllegalArgumentException(); 해버림
