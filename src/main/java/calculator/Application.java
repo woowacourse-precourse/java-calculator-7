@@ -23,10 +23,16 @@ public class Application {
             return String.valueOf(sum);
         }
 
-        return String.valueOf(sum(input.split(separator)));
+        try {
+            sum = sum(input.split(separator));
+        } catch (Exception e) {
+            throw new IllegalArgumentException();
+        }
+
+        return String.valueOf(sum);
     }
 
-    private static int sum(String[] strings) {
+    private static int sum(String[] strings) throws Exception {
         int sum = 0;
         for (String str : strings) {
             sum += Integer.parseUnsignedInt(str);
@@ -47,7 +53,7 @@ public class Application {
 
     private static String findOriginalText(String input) {
         int originalTextIndex = input.indexOf("\\n") + 2;
-        
+
         return input.substring(originalTextIndex);
     }
 }
