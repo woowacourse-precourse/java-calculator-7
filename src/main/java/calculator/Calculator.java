@@ -9,6 +9,7 @@ public class Calculator {
     private final Pattern customSeparatorCmdPattern;
     private final int customSeparatorIdx;
     private final String minusDigitRegex = "-[0-9]*";
+    private final String positiveDigitRegex = "\\d*";
 
     public Calculator (){
         this.separatorProcessor = new SeparatorProcessor(',', ':');
@@ -49,6 +50,9 @@ public class Calculator {
     private boolean validateNumber(String str){
         if(str.matches(minusDigitRegex)){
             throw new IllegalArgumentException("음수 계산 불가");
+        }
+        if(!str.matches(positiveDigitRegex)){
+            throw new IllegalArgumentException("숫자 이외의 값은 계산 불가");
         }
 
         return true;
