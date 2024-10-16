@@ -17,8 +17,8 @@ public class CalculatorService implements Service{
 
     @Override
     public void run() {
-        List<String> tokens = parser.parse();
-        Calculator calculator = new StringCalculator(tokens);
-        View.output(calculator.sum());
+        List<Double> numbers = parser.parse();
+        Calculator calculator = new StringCalculator(numbers);
+        View.output(calculator.calculate());
     }
 }
