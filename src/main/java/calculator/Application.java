@@ -7,12 +7,9 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();  // 사용자 입력
 
-        try {
-            int result = add(input);
-            System.out.println("결과 : " + result);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+        int result = add(input);
+        System.out.println("결과 : " + result);
+
     }
 
     public static int add(String input) {
@@ -32,10 +29,10 @@ public class Application {
         }
 
         String[] numbers = input.split(delimiter);
-        
+
         // 잘못된 형식을 확인 (숫자가 아닌 경우 예외 처리)
         for (String number : numbers) {
-            if (!number.matches("\\d+")) {
+            if (!number.matches("-?\\d+")) {
                 throw new IllegalArgumentException("잘못된 형식입니다.");
             }
         }
@@ -48,7 +45,7 @@ public class Application {
             if (number.isEmpty()) {
                 continue;
             }
-            int num = Integer.parseInt(number.trim());
+            int num = Integer.parseInt(number);
             if (num < 0) {
                 throw new IllegalArgumentException("음수는 허용되지 않습니다.");
             }
