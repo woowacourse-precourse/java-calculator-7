@@ -9,6 +9,6 @@ public class CalculatorController {
         String inputString = inputView.readString();
 
         SeparatorParser separatorParser = new SeparatorParser();
-        String separator = separatorParser.separatorParse(inputString);
+        String[] separatoredString = separatorParser.separatorParse(inputString);
      }
 }

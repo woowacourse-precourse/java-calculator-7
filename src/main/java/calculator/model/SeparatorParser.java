@@ -7,7 +7,7 @@ public class SeparatorParser {
     private final String SEPARATOR_FORMAT_STRING = "//|\\\\n";
     private final String BASIC_SEPERATOR = "\\,|\\:";
 
-    public String separatorParse(String input) {
+    public String[] separatorParse(String input) {
         List<String> inputSeparatorList = Arrays.stream(input.split(SEPARATOR_FORMAT_STRING))
                 .map(String::trim)
                 .filter(s -> (!s.isEmpty()))
@@ -29,6 +29,9 @@ public class SeparatorParser {
                 separator += ("|\\" + inputSeparator);
             }
         }
-        return separator;
+        String[] separatedString = new String[2];
+        separatedString[0] = separator;
+        separatedString[1] = inputSeparatorList.getLast();
+        return separatedString;
     }
 }
