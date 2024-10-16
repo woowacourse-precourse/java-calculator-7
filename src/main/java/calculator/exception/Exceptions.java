@@ -14,4 +14,10 @@ public class Exceptions {
         }
     }
 
+    public void validateLeadingDelimiter(String input) {
+        if((input.charAt(0) == ',') || (input.charAt(0) == ':')) {
+            throw new IllegalArgumentException("[ERROR] 문자열의 처음에 구분자가 올 수 없습니다.");
+        }
+    }
+
 }
