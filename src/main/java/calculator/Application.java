@@ -13,7 +13,7 @@ public class Application {
             return input;
         }
         else {
-            return input.substring(3);
+            return input.substring(4);
         }
     }
 
