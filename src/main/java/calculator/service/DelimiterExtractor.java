@@ -1,6 +1,6 @@
 package calculator.service;
 
-import java.util.Collections;
+import calculator.domain.DelimiterSet;
 import java.util.List;
 
 public class DelimiterExtractor {
@@ -9,13 +9,15 @@ public class DelimiterExtractor {
     private static final String SUFFIX = "\\n";
     private static final String EMPTY = "";
     
-    public List<String> extractDelimiter(String input) {
+    public DelimiterSet extractDelimiter(String input) {
+        DelimiterSet delimiterSet = new DelimiterSet();
         if (!input.startsWith(PREFIX)) {
-            return Collections.emptyList();
+            return delimiterSet;
         }
         String firstHalf = getFistHalf(input);
         String[] delimiters = firstHalf.split(EMPTY);
-        return List.of(delimiters);
+        delimiterSet.addAll(List.of(delimiters));
+        return delimiterSet;
     }
 
     private String getFistHalf(String input) {

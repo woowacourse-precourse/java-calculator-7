@@ -4,7 +4,6 @@ import calculator.domain.DelimiterSet;
 import calculator.domain.OriginalString;
 import calculator.io.InputManager;
 import calculator.service.DelimiterExtractor;
-import java.util.List;
 
 public class Controller {
 
@@ -16,10 +15,8 @@ public class Controller {
 
     public void run() {
         OriginalString originalString = InputManager.readInput();
+        DelimiterSet delimiterSet = delimiterExtractor.extractDelimiter(originalString.value());
 
-        DelimiterSet delimiterSet = new DelimiterSet();
-        List<String> delimiters = delimiterExtractor.extractDelimiter(originalString.value());
-        delimiterSet.addAll(delimiters);
     }
 
 }
