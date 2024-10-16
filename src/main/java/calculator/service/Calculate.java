@@ -29,4 +29,9 @@ public class Calculate {
     public List<String> splitWithCOLON(String userInput) {
         return List.of(userInput.split(COLON));
     }
+
+    //문자열 분리 - 쉼표
+    public List<String> splitWithCOMMA(String userInput) {
+        return List.of(userInput.split(COMMA));
+    }
 }
