@@ -1,5 +1,9 @@
 package calculator.domain.preprocess;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class DelimeterProcessor {
 
     public boolean checkCustomDelimeterRequest(String input) {
@@ -24,5 +28,11 @@ public class DelimeterProcessor {
     public String discardCustomDelimeterRequest(String input){
         String newInput = input.substring(4);
         return newInput;
+    }
+
+    public List<String> makeDelimeterList(String delimeter){
+        List<String> delimeterList = new ArrayList<>(Arrays.asList(",",":"));
+        delimeterList.add(delimeter);
+        return delimeterList;
     }
 }
