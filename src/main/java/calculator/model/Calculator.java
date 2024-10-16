@@ -8,4 +8,10 @@ public class Calculator {
     public void saveNumber(int number) {
         numbers.add(number);
     }
+
+    public int calculate() {
+        return numbers.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
 }
