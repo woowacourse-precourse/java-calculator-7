@@ -24,5 +24,7 @@ public class ApplicationController {
         String separatorRegex = separatorModel.getRegex();
         String[] numbers = userInput.split(separatorRegex);
         int sum = NumberModel.getSum(numbers);
+
+        ApplicationView.printOutput(sum);
     }
 }
