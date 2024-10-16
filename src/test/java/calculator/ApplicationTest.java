@@ -83,18 +83,13 @@ class ApplicationTest extends NsTest {
     void edgeCaseTest() {
         //given
         InputString inputString1 = new InputString("//\\n");
-        ScenarioRunner scenarioRunner1 = new ScenarioRunner(inputString1);
-
         InputString inputString2 = new InputString("");
-        ScenarioRunner scenarioRunner2 = new ScenarioRunner(inputString2);
-
         InputString inputString3 = new InputString("//;\\n");
-        ScenarioRunner scenarioRunner3 = new ScenarioRunner(inputString3);
 
         //when
-        int calculate1 = scenarioRunner1.runScenario();
-        int calculate2 = scenarioRunner2.runScenario();
-        int calculate3 = scenarioRunner3.runScenario();
+        int calculate1 = ScenarioRunner.runScenario(inputString1);
+        int calculate2 = ScenarioRunner.runScenario(inputString2);
+        int calculate3 = ScenarioRunner.runScenario(inputString3);
 
         //then
         assertThat(calculate1).isEqualTo(0);

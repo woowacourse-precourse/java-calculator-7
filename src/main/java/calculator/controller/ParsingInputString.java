@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ParsingInputString {
 
-    public List<String> parsingInput(InputString inputString) {
+    public static List<String> parsingInput(InputString inputString) {
         String splitString = "[,:" + inputString.getCustomChar() + "]";
         List<String> numberStringList = Arrays.stream(inputString.getInput().split(splitString))
             .toList();
@@ -15,7 +15,7 @@ public class ParsingInputString {
         return numberStringList;
     }
 
-    public List<Integer> getNumberList(InputString inputString, List<String> numberStringList) {
+    public static List<Integer> getNumberList(InputString inputString, List<String> numberStringList) {
         List<Integer> numberList = new ArrayList<>();
         for (String s : numberStringList) {
             numberList.add(Integer.valueOf(s));

@@ -9,7 +9,7 @@ public class FindCustomChar {
     private static final int END_CUSTOM_INDEX = 3;
     private static final int CUSTOM_CHAR_INDEX = 2;
 
-    public void setCustomChar(InputString inputString) {
+    public static void setCustomChar(InputString inputString) {
         String input = inputString.getInput();
         if (input.length() < 4) {
             return;

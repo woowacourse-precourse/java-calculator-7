@@ -10,8 +10,7 @@ public class Application {
     public static void main(String[] args) {
         InputString inputString = new InputString(InputView.input());
 
-        ScenarioRunner scenarioRunner = new ScenarioRunner(inputString);
-        int calculateResult = scenarioRunner.runScenario();
+        int calculateResult = ScenarioRunner.runScenario(inputString);
 
         OutputView.printResult(calculateResult);
     }
