@@ -1,12 +1,19 @@
 package calculator;
 
+import calculator.dto.Data;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
 
     public static void main(String[] args) {
-        String inputData = getInputData();
-        boolean customStatus = isCustom(inputData);
+        try {
+            String inputData = getInputData();
+            boolean customStatus = isCustom(inputData);
+            Data data = DataParser.parseData(inputData, customStatus);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            System.out.println("프로그램 종료");
+        }
     }
 
     private static String getInputData() {
