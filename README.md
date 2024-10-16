@@ -2,10 +2,10 @@
 
 # 구현 내용
 
-- [ ]  입력을 받아오는 View에 해당하는 객체 정의
-- [ ]  View에서 유저의 입력을 받은 다음에 Validator를 이용하여 null인지 확인
+- [X]  입력을 받아오는 View에 해당하는 객체 정의
+- [X]  View에서 유저의 입력을 받은 후 null인지 확인
   → 입력이 null인 경우 IllegalArgumentException를 발생
-- [ ]  입력이 null이 아닌 경우 Model에 해당하는 DTO를 이용하여 데이터를 Controller로 전달
+- [X]  입력이 null이 아닌 경우 Model에 해당하는 DTO를 이용하여 데이터를 Controller로 전달
   → DTO(request) 객체와 Controller 객체 생성
 - [ ]  이렇게 전달된 Controller에서 Service를 호출하여 핵심 비즈니스 로직(계산)을 실행
   → Service 객체 생성
