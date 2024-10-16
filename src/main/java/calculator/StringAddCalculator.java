@@ -6,13 +6,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+    private static final int DEFAULT_VALUE = 0;
     private static final String DEFAULT_DELIMITER = ",|:";
     private static final int CUSTOM_DELIMITER_ORDER = 1;
     private static final int ARITHMETIC_EXPRESSION_ORDER = 2;
 
     public int add(String input) {
         if (input == null || input.isBlank()) {
-            return 0;
+            return DEFAULT_VALUE;
         }
 
         DelimiterAndNumber delimiterAndNumber = extractCustomDelimiterAndNumbers(input);
