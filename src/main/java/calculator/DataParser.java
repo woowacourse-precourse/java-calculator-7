@@ -9,6 +9,7 @@ public class DataParser {
         }
         char[] separators = createSeparators(inputData, isCustom);
         char[] contents = createContents(inputData, isCustom);
+        checkValidContents(separators, contents);
         return new Data(separators, contents);
     }
 
@@ -46,5 +47,32 @@ public class DataParser {
             throw new IllegalAccessException();
         }
         return new char[]{arr[--index]};
+    }
+
+    private static void checkValidContents(char[] separators, char[] contents) throws IllegalAccessException {
+        int index = 0;
+        while (index < contents.length) {
+            char c = contents[index];
+            if (!(isSeparators(c, separators) || isNumber(c))) {
+                throw new IllegalAccessException();
+            }
+            index++;
+        }
+    }
+
+    private static boolean isSeparators(char c, char[] separators) {
+        for (int i = 0; i < separators.length; i++) {
+            if (c == separators[i]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isNumber(char c) {
+        if ('0' <= c && c <= '9') {
+            return true;
+        }
+        return false;
     }
 }
