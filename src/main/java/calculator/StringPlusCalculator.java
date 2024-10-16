@@ -1,5 +1,8 @@
 package calculator;
 
+import static calculator.CheckForm.checkFormOfCustomSeparator;
+import static calculator.CheckForm.checkFormOfOperands;
+
 public class StringPlusCalculator {
 
     private Calculation calculation = new Calculation();
@@ -9,8 +12,8 @@ public class StringPlusCalculator {
         inputParser.getCustomParser(inputString);
         inputParser.getIntegerList(inputString);
 
-        CheckForm.checkFormOfCustomSeparator(inputString);
-        CheckForm.checkFormOfOperands(inputString);
+        checkFormOfCustomSeparator(inputString);
+        checkFormOfOperands(inputString);
 
         return calculation.addOperands(inputString);
     }

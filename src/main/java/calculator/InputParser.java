@@ -1,13 +1,15 @@
 package calculator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class InputParser {
 
     public void getCustomParser(InputString inputString) {
-        String separator = null;
+        Character separator = null;
         String input = inputString.getInput();
         if (input.startsWith("//")) {
-            int indexOfNewline = input.indexOf("\n");
-            separator = input.substring(2, indexOfNewline);
+            separator = input.charAt(2);
         }
         inputString.setSeparator(separator);
     }
@@ -15,9 +17,19 @@ public class InputParser {
     public void getIntegerList(InputString inputString){
         String input = inputString.getInput();
         if (input.startsWith("//")) {
-            input = input.substring(2);
+            input = input.substring(5);
         }
-        String[] parsedOperand = input.split(inputString.getSeparator());
+
+        List<String> parsedOperand = new ArrayList<>();
+        for (char character : input.toCharArray()) {
+            if(inputString.getSeparator().contains(character)) {
+                String operand = input.substring(0, input.indexOf(character));
+                parsedOperand.add(operand);
+                input = input.substring(input.indexOf(character) + 1);
+            }
+        }
+        parsedOperand.add(input);
+
         try{
             for(String s : parsedOperand){
                 inputString.addOperand((Integer.parseInt(s)));
@@ -26,5 +38,4 @@ public class InputParser {
             CheckForm.throwException();
         }
     }
-
 }

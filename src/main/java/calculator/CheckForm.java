@@ -16,6 +16,7 @@ public class CheckForm {
 
         if(isStartsWithTwoSlash(input)){
             checkContainNewLine(input);
+            checkSeparatorIsCharacter(input);
             checkIsCustomSeparatorEmpty(input);
         }
     }
@@ -24,16 +25,13 @@ public class CheckForm {
         String input = inputString.getInput();
 
         if(isStartsWithTwoSlash(input)){
-            input = input.substring(0, input.indexOf("/n"));
+            input = input.substring(input.indexOf("\\n")+2);
         }
 
-        Set<String> separators = new HashSet<>();
-        separators.add(",");
-        separators.add(":");
-        separators.add(inputString.getSeparator());
+        Set<Character> separators = inputString.getSeparator();
 
         for(char character : input.toCharArray()){
-            if(!separators.contains(String.valueOf(character)) && (character < '0' || character > '9')){
+            if(!separators.contains(character) && (character < '0' || character > '9')){
                 throwException();
             }
         }
@@ -44,13 +42,19 @@ public class CheckForm {
     }
 
     private static void checkContainNewLine(String input){
-        if(!input.contains("/n")){
+        if(!input.contains("\\n")) {
+            throwException();
+        }
+    }
+
+    private static void checkSeparatorIsCharacter(String input){
+        if(input.indexOf("\\n") != 3){
             throwException();
         }
     }
 
     private static void checkIsCustomSeparatorEmpty(String input){
-        if(input.substring(0, input.indexOf("/n")).isEmpty()){
+        if(input.substring(0, input.indexOf("\\n")).isEmpty()){
             throwException();
         }
     }
