@@ -11,7 +11,18 @@ public class Application {
 
     private static int calculator(String input) throws IllegalArgumentException{
 
-        String[] numbers = input.split("[,;]");
+        String delimiter = "[,;]";
+
+        if (input.startsWith("//")) {
+
+            if (!input.contains("\\n")) {
+                throw new IllegalArgumentException();
+            }
+            delimiter = input.substring("//".length(), input.indexOf("\\n"));
+            input = input.substring(input.indexOf("\\n") + "\\n".length());
+        }
+
+        String[] numbers = input.split(delimiter);
 
         int sum = 0;
         for (String number : numbers) {
@@ -27,5 +38,4 @@ public class Application {
         }
         return sum;
     }
-
 }
