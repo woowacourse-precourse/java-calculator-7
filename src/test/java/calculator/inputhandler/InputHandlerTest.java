@@ -11,11 +11,12 @@ class InputHandlerTest extends NsTest {
     @Test
     void getInput() {
         String userInput = "1,2";
+
         assertSimpleTest(() -> {
             run(userInput);
             InputHandler inputHandler = new InputHandler();
 
-            String result = inputHandler.getInput("덧셈할 문자열을 입력해 주세요.");
+            String result = inputHandler.getInput("덧셈할 문자열을 입력해 주세요.\n");
             assertThat(result).isEqualTo(userInput);
         });
     }
