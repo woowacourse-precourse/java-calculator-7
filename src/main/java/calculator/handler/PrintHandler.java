@@ -6,4 +6,8 @@ public class PrintHandler {
     public void printStartMessage() {
         System.out.println(PRINT_START_MESSAGE);
     }
+
+    public void printEndMessage(int sum) {
+        System.out.println("결과 : " + sum);
+    }
 }

@@ -23,5 +23,6 @@ public class Controller {
         String tempString = inputHandler.inputString();
         User user = new User(tempString);
         int sum = calculator.sum(user.getNumbers());
+        printHandler.printEndMessage(sum);
     }
 }
