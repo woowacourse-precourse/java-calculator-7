@@ -5,13 +5,16 @@ import calculator.dto.Data;
 public class Calculator {
 
     public static int sum(Data data) {
-
         int sum = 0;
-        String contentString = new String(data.getContents());
+        String contentString = getContentString(data.getContents(), data.getSeparators());
         String separatorString = getSeparatorsString(data.getSeparators());
         String[] nums = contentString.split("[" + separatorString + "]");
-        for (int i = 0; i < nums.length; i++) {
-            sum += Integer.parseInt(nums[i]);
+        try {
+            for (int i = 0; i < nums.length; i++) {
+                sum += Integer.parseInt(nums[i]);
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
         }
         return sum;
     }
@@ -23,6 +26,18 @@ public class Calculator {
             }
         }
         return false;
+    }
+
+    private static String getContentString(char[] contents, char[] separator) {
+        StringBuilder sb = new StringBuilder();
+        int index = 0;
+        if (isSeparator(contents[0], separator)) {
+            index = 1;
+        }
+        for (int i = index; i < contents.length; i++) {
+            sb.append(contents[i]);
+        }
+        return sb.toString();
     }
 
     private static String getSeparatorsString(char[] separators) {
