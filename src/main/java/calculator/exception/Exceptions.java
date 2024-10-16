@@ -16,6 +16,13 @@ public class Exceptions {
         }
     }
 
+    public void validateCustomDelimiter(String input, String customDelimiter) {
+        String consecutiveDelimiter = customDelimiter + customDelimiter;
+        if(input.contains(consecutiveDelimiter)) {
+            throw new IllegalArgumentException("[ERROR] 연속된 커스텀 구분자는 사용할 수 없습니다.");
+        }
+    }
+
     public void validateLeadingDelimiter(String input) {
         if ((input.charAt(0) == ',') || (input.charAt(0) == ':')) {
             throw new IllegalArgumentException("[ERROR] 문자열의 처음에 구분자가 올 수 없습니다.");
