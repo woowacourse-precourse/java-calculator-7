@@ -1,5 +1,6 @@
-package calculator.handler;
+package calculator.delimiter.handler;
 
+import calculator.delimiter.handler.impl.CustomDelimiterHandler;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -24,12 +25,10 @@ class CustomDelimiterHandlerTest {
         String s = "//;\n1;2;3";
         CustomDelimiterHandler handler = new CustomDelimiterHandler();
 
-        List<Integer> integerList = handler.split(s);
+        List<String> stringList = handler.split(s);
 
-        assertThat(integerList).hasSize(3);
-        assertThat(integerList.get(0)).isEqualTo(1);
-        assertThat(integerList.get(1)).isEqualTo(2);
-        assertThat(integerList.get(2)).isEqualTo(3);
+        assertThat(stringList).hasSize(3)
+                .containsExactly("1", "2", "3");
     }
 
     @Test
@@ -38,11 +37,9 @@ class CustomDelimiterHandlerTest {
         String s = "//||\n1||2||3";
         CustomDelimiterHandler handler = new CustomDelimiterHandler();
 
-        List<Integer> integerList = handler.split(s);
+        List<String> stringList = handler.split(s);
 
-        assertThat(integerList).hasSize(3);
-        assertThat(integerList.get(0)).isEqualTo(1);
-        assertThat(integerList.get(1)).isEqualTo(2);
-        assertThat(integerList.get(2)).isEqualTo(3);
+        assertThat(stringList).hasSize(3)
+                .containsExactly("1", "2", "3");
     }
 }

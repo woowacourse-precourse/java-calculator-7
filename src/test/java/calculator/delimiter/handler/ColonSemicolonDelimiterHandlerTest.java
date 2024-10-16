@@ -1,5 +1,6 @@
-package calculator.handler;
+package calculator.delimiter.handler;
 
+import calculator.delimiter.handler.impl.ColonSemicolonDelimiterHandler;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,13 +16,11 @@ class ColonSemicolonDelimiterHandlerTest {
         ColonSemicolonDelimiterHandler handler = new ColonSemicolonDelimiterHandler();
 
         // when
-        List<Integer> nums = handler.split(s);
+        List<String> stringList = handler.split(s);
 
         // then
-        Assertions.assertThat(nums).hasSize(3);
-        Assertions.assertThat(nums.get(0)).isEqualTo(1);
-        Assertions.assertThat(nums.get(1)).isEqualTo(2);
-        Assertions.assertThat(nums.get(2)).isEqualTo(3);
+        Assertions.assertThat(stringList).hasSize(3)
+                .containsExactly("1", "2", "3");
     }
 
     @Test
@@ -30,12 +29,10 @@ class ColonSemicolonDelimiterHandlerTest {
         String s = "1:2:3";
 
         ColonSemicolonDelimiterHandler handler = new ColonSemicolonDelimiterHandler();
-        List<Integer> nums = handler.split(s);
+        List<String> stringList = handler.split(s);
 
-        Assertions.assertThat(nums).hasSize(3);
-        Assertions.assertThat(nums.get(0)).isEqualTo(1);
-        Assertions.assertThat(nums.get(1)).isEqualTo(2);
-        Assertions.assertThat(nums.get(2)).isEqualTo(3);
+        Assertions.assertThat(stringList).hasSize(3)
+                .containsExactly("1", "2", "3");
     }
 
     @Test
@@ -44,12 +41,9 @@ class ColonSemicolonDelimiterHandlerTest {
         String s = "1:2:3,4";
 
         ColonSemicolonDelimiterHandler handler = new ColonSemicolonDelimiterHandler();
-        List<Integer> nums = handler.split(s);
+        List<String> stringList = handler.split(s);
 
-        Assertions.assertThat(nums).hasSize(4);
-        Assertions.assertThat(nums.get(0)).isEqualTo(1);
-        Assertions.assertThat(nums.get(1)).isEqualTo(2);
-        Assertions.assertThat(nums.get(2)).isEqualTo(3);
-        Assertions.assertThat(nums.get(3)).isEqualTo(4);
+        Assertions.assertThat(stringList).hasSize(4)
+                .containsExactly("1", "2", "3", "4");
     }
 }

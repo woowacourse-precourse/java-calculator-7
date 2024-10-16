@@ -1,19 +1,26 @@
 package calculator;
 
-import calculator.handler.ColonSemicolonDelimiterHandler;
+import calculator.delimiter.handler.DelimiterHandler;
+import calculator.delimiter.factory.DelimiterHandlerFactory;
 
 import java.util.List;
 
-// 숫자들의 합을 계산해주는 역할을 한다.
 public class Calculator {
-    private ColonSemicolonDelimiterHandler handler;
+    private DelimiterHandlerFactory factory;
 
-    public Calculator(ColonSemicolonDelimiterHandler handler) {
-        this.handler = handler;
+    public Calculator(DelimiterHandlerFactory factory) {
+        this.factory = factory;
     }
 
     public Integer sum(String str) {
-        List<Integer> integerList = handler.split(str);
-        return integerList.parallelStream().mapToInt(Integer::intValue).sum();
+        DelimiterHandler handler = factory.getHandler(str);
+
+        List<String> split = handler.split(str);
+        int ret = 0;
+        for (String s : split) {
+            if(s.contains("-")) throw new IllegalArgumentException("음수를 입력할 수 없습니다.");
+            ret += Integer.parseInt(s);
+        }
+        return ret;
     }
 }

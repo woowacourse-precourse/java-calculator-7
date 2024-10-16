@@ -1,17 +1,18 @@
 package calculator;
 
-import calculator.handler.ColonSemicolonDelimiterHandler;
+import calculator.delimiter.factory.DelimiterHandlerFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+
 class CalculatorTest {
     @Test
-    @DisplayName(":와 ,구분자로 나누어진 문자열의 합을 구한다.")
-    void calculate_sum_with_colonAndComma_delimiters() {
-        String s = "1:2,3:4";
-        ColonSemicolonDelimiterHandler colonSemicolonDelimiterHandler = new ColonSemicolonDelimiterHandler();
-        Calculator calculator = new Calculator(colonSemicolonDelimiterHandler);
+    @DisplayName("문자열을 받아 계산값을 반환한다.")
+    void calculate_sum_with_string() {
+        DelimiterHandlerFactory factory = new DelimiterHandlerFactory();
+        Calculator calculator = new Calculator(factory);
+        String s = "1,2:3,4";
 
         int sum = calculator.sum(s);
 
