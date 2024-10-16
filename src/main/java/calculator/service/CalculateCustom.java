@@ -2,44 +2,37 @@ package calculator.service;
 
 import java.util.List;
 
-public class CalculateCustom {
+public class CalculateCustom extends CalculateSeparator {
 
     private static final String CUSTOM_PRE = "//";
     private static final String CUSTOM_POST = "\\n";
-
-    public static boolean checkContainCUSTOM_PRE(String userInput) {
-        return userInput.contains(CUSTOM_PRE);
-    }
-
-    public static boolean checkContainCUSTOM_POST(String userInput) {
-        return userInput.contains(CUSTOM_POST);
-    }
+    private static final Integer TWO = 2;
 
     public static boolean checkContainCUSTOM(String userInput) {
-        return checkContainCUSTOM_PRE(userInput) && checkContainCUSTOM_POST(userInput);
+        return checkContainSeparator(userInput, CUSTOM_PRE) || checkContainSeparator(userInput, CUSTOM_POST);
     }
 
     public static Integer getCustomPreIndex(String userInput) {
-        return userInput.indexOf(CUSTOM_PRE);
+        return getIndexNumberOfSeparator(userInput, CUSTOM_PRE);
     }
 
     public static Integer getCustomPostIndex(String userInput) {
-        return userInput.indexOf(CUSTOM_POST) + 2;
+        return getIndexNumberOfSeparator(userInput, CUSTOM_POST) + TWO;
     }
 
     public static String getCustomPreToPost(String userInput) {
-        return userInput.substring(getCustomPreIndex(userInput), getCustomPostIndex(userInput));
+        return substringUserInputWithSeparator(userInput, getCustomPreIndex(userInput), getCustomPostIndex(userInput));
     }
 
     public static String getCustomSeparator(String userInput) {
-        return getCustomPreToPost(userInput).substring(2, getCustomPreToPost(userInput).length() - 2);
+        return substringUserInputWithSeparator(getCustomPreToPost(userInput), TWO, getUserInputLength(getCustomPreToPost(userInput)) - TWO);
     }
 
     public static String getUserInput(String userInput) {
-        return userInput.substring(getCustomPostIndex(userInput));
+        return substringUserInputWithSeparator(userInput, getCustomPostIndex(userInput), getUserInputLength(userInput));
     }
 
-    public static List<String> splitWithCustom(String userInput) {
-        return List.of(getUserInput(userInput).split(getCustomSeparator(userInput)));
+    public static List<String> splitWithCustomSeparator(String userInput) {
+        return splitWithSeparator(getUserInput(userInput), getCustomSeparator(userInput));
     }
 }
