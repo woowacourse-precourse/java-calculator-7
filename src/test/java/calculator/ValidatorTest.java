@@ -17,4 +17,14 @@ class ValidatorTest {
     void 커스텀_구분자가_없다면_False_반환() {
         assertFalse(validator.hasCustomSeparator("1:2:3"));
     }
+
+    @Test
+    void 숫자로_시작한다면_True_반환() {
+        assertTrue(validator.isStartWithDigit("1;2;3"));
+    }
+
+    @Test
+    void 숫자로_시작하지_않으면_False_반환() {
+        assertFalse(validator.isStartWithDigit("//;\n"));
+    }
 }
