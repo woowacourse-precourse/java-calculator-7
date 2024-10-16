@@ -6,6 +6,19 @@ import calculator.view.OutputView;
 public class CalculatorController {
     public void run() {
         OutputView.printInputStringMessage();
-        InputView.readInputString();
+
+        String input = InputView.readInputString();
+
+        String separator = findSeparator(input);
+    }
+
+    private String findSeparator(String input) {
+        if (input.startsWith("//")) {
+            int index = input.indexOf("\\n");
+
+            return input.substring(2, index);
+        } else {
+            return "[,:]";
+        }
     }
 }
