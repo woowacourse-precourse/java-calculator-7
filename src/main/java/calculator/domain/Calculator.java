@@ -1,38 +1,31 @@
 package calculator.domain;
 
-import calculator.exception.input.CalculatorException;
-
-import static calculator.exception.input.CalculatorExceptionMessage.WRONG_CUSTOM_DELIMITER_FORMAT;
+import calculator.validator.CalculatorValidator;
 
 public class Calculator {
 
-    private static final String COMMA = ",";
-    private static final String COLON = ";";
-    private static final String CUSTOM_DELIMITER_PREFIX_FORMAT = "//";
-    private static final String CUSTOM_DELIMITER_SUFFIX_FORMAT = "\n";
-    private static final int CUSTOM_DELIMITER_BEGIN_INDEX = 2;
-    private static final String NUMBER_INCLUDE_REGEX = ".*[0-9].*";
+    private final CalculatorValidator validator;
+    private final NumberStringExtractor numberStringExtractor;
 
-    public String getCustomDelimiter(String stringWithDivisionMark) {
-        if (stringWithDivisionMark.startsWith(CUSTOM_DELIMITER_PREFIX_FORMAT)) {
-            return extractCustomDelimiter(stringWithDivisionMark);
-        }
-        validateNumber(stringWithDivisionMark);
-        return null;
+    public Calculator(CalculatorValidator validator, NumberStringExtractor numberStringExtractor) {
+        this.validator = validator;
+        this.numberStringExtractor = numberStringExtractor;
     }
 
-    private String extractCustomDelimiter(String stringWithDivisionMark) {
-        int endIndex = stringWithDivisionMark.indexOf(CUSTOM_DELIMITER_SUFFIX_FORMAT);
-
-        if (stringWithDivisionMark.contains(CUSTOM_DELIMITER_SUFFIX_FORMAT)) {
-            return stringWithDivisionMark.substring(CUSTOM_DELIMITER_BEGIN_INDEX, endIndex);
+    public int getSum(String stringWithoutFormat) {
+        if (stringWithoutFormat.isEmpty()) {
+            return 0;
         }
-        throw new CalculatorException(WRONG_CUSTOM_DELIMITER_FORMAT);
+        String[] stringsToNumber = numberStringExtractor.getStrings(stringWithoutFormat);
+        return sumNumbers(stringsToNumber);
     }
 
-    private void validateNumber(String stringWithDivisionMark) {
-        if (!stringWithDivisionMark.matches(NUMBER_INCLUDE_REGEX)) {
-            throw new CalculatorException(WRONG_CUSTOM_DELIMITER_FORMAT);
+    private int sumNumbers(String[] stringToNumber) {
+        int sum = 0;
+        for (String str : stringToNumber) {
+            validator.validatePositivity(str);
+            sum += Integer.parseInt(str);
         }
+        return sum;
     }
 }
