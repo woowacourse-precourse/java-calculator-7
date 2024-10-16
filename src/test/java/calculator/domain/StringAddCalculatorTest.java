@@ -1,11 +1,16 @@
 package calculator.domain;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class StringAddCalculatorTest {
+
+    private final StringAddCalculator stringAddCalculator;
+
+    public StringAddCalculatorTest() {
+        this.stringAddCalculator = new StringAddCalculator(new InputParser(new Delimiter()),new Calculator());
+    }
 
     @Test
     void 문자열이_null_인경우() {
@@ -13,7 +18,7 @@ public class StringAddCalculatorTest {
         final String str = null;
 
         // when
-        int resultNull = StringAddCalculator.splitAndSum(str);
+        int resultNull = stringAddCalculator.splitAndSum(str);
 
         // then
         assertThat(resultNull).isEqualTo(0);
@@ -25,7 +30,7 @@ public class StringAddCalculatorTest {
         final String str = "";
 
         // when
-        int resultEmpty = StringAddCalculator.splitAndSum(str);
+        int resultEmpty = stringAddCalculator.splitAndSum(str);
 
         // then
         assertThat(resultEmpty).isEqualTo(0);
@@ -37,7 +42,7 @@ public class StringAddCalculatorTest {
         final String str = "1,2:3";
 
         // when
-        int result = StringAddCalculator.splitAndSum(str);
+        int result = stringAddCalculator.splitAndSum(str);
 
         // then
         assertThat(result).isEqualTo(6);
@@ -49,22 +54,10 @@ public class StringAddCalculatorTest {
         final String str = "//;\n1;2;3";
 
         // when
-        int result = StringAddCalculator.splitAndSum(str);
+        int result = stringAddCalculator.splitAndSum(str);
 
         // then
         assertThat(result).isEqualTo(6);
-    }
-
-    @Test
-    void 커스텀_구분자_체크_테스트() {
-        // given
-        final String str = "//;\n1;2;3";
-
-        // when
-        String delimiter = StringAddCalculator.checkCustomDelimiter(str);
-
-        // then
-        assertThat(delimiter).isEqualTo(";");
     }
 
     @Test
@@ -74,7 +67,7 @@ public class StringAddCalculatorTest {
 
         // when & then
         assertThatThrownBy(() -> {
-            StringAddCalculator.splitAndSum(str);
+            stringAddCalculator.splitAndSum(str);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }
