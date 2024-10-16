@@ -1,5 +1,6 @@
 package calculator.function;
 
+import calculator.dto.CSFResult;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -14,10 +15,11 @@ class CustomSeparatorFinderTest {
         String input = "1,3,5";
         //when
         CustomSeparatorFinder customSeparatorFinder = new CustomSeparatorFinder(input);
-        Optional<Character> result = customSeparatorFinder.execute();
+        CSFResult result = customSeparatorFinder.execute();
 
         //then
-        assertTrue(result.isEmpty());
+        assertTrue(result.getCustomSeparator().isEmpty());
+        assertEquals(input, result.getResult());
     }
     
     @Test
@@ -26,10 +28,11 @@ class CustomSeparatorFinderTest {
         String input = "1,3,5:7";
         //when
         CustomSeparatorFinder customSeparatorFinder = new CustomSeparatorFinder(input);
-        Optional<Character> result = customSeparatorFinder.execute();
+        CSFResult result = customSeparatorFinder.execute();
 
         //then
-        assertTrue(result.isEmpty());
+        assertTrue(result.getCustomSeparator().isEmpty());
+        assertEquals(input, result.getResult());
     }
     
     @Test
@@ -39,10 +42,11 @@ class CustomSeparatorFinderTest {
         String input = "//" + separator  + "\\n1,3,5:7";
         //when
         CustomSeparatorFinder customSeparatorFinder = new CustomSeparatorFinder(input);
-        Optional<Character> result = customSeparatorFinder.execute();
+        CSFResult result = customSeparatorFinder.execute();
 
         //then
-        assertTrue(result.isPresent());
-        assertEquals(separator, result.get());
+        assertTrue(result.getCustomSeparator().isPresent());
+        assertEquals(separator, result.getCustomSeparator().get());
+        assertEquals(input.substring(5), result.getResult());
     }
 }
