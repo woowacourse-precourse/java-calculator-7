@@ -12,4 +12,12 @@ public class StringCalculator {
 
         return List.of("", formula);
     }
+
+    public String extractDelimiter(String delimiterCandidates) {
+        if (delimiterCandidates.isEmpty()) {
+            return null;
+        }
+
+        return delimiterCandidates.substring(2);
+    }
 }
