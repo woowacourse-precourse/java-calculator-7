@@ -23,6 +23,10 @@ public class NumberValidator {
     }
 
     private void validatePositiveNumber(String number) {
+        if (number.isBlank()) {
+            return;
+        }
+
         if (Double.parseDouble(number) < 0) {
             throw new IllegalArgumentException("양수를 입력해주세요.");
         }
