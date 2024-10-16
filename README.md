@@ -29,4 +29,11 @@
 - 계산기를 실행한다.
 - Operator에서 발생 한 예외 처리 (종료)
 
+# 프로그래밍 요구 사항 
+## camp.nextstep.edu.missionutils 에서 제공하는 Console API 사용
+- readline을 쓰면 클라이언트에서 Scanner 생성하는 일이 사라짐
+- useDelimiter를 사용하지 못하게 하는 용?
+- scanner 객체를 하나로 유지
+
+
 
