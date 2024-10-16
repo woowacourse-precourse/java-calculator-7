@@ -13,6 +13,16 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class ApplicationTest extends NsTest {
 
   @Test
+  void 입력_확인(){
+    assertSimpleTest(() -> {
+      run("//:,\n1:2:3");
+      assertThat(output()).contains("덧셈할 문자열을 입력해 주세요.");
+
+    });
+  }
+
+
+  @Test
   void 입력값_유효성_검사() {
     assertSimpleTest(() -> {
 
@@ -52,6 +62,38 @@ class ApplicationTest extends NsTest {
 
       assertThat(extracts.extractDelimiter()).contains(":",",");
       assertThat(extracts.extractNum()).contains(1,2,3);
+    });
+  }
+
+  @Test
+  void 정답_계산(){
+    assertSimpleTest(() -> {
+
+      Extracts extracts =
+          new Extracts("1:2:3","//:,");
+      extracts.extractDelimiter();
+      extracts.extractNum();
+
+      Answer answer = new Answer(extracts.getNums());
+
+      assertThat(answer.calSum()).isEqualTo(6);
+
+    });
+  }
+
+  @Test
+  void 정답_출력(){
+    assertSimpleTest(() -> {
+      Extracts extracts =
+          new Extracts("1:2:3","//:,");
+      extracts.extractDelimiter();
+      extracts.extractNum();
+
+      Answer answer = new Answer(extracts.getNums());
+
+      answer.printAns();
+
+      assertThat(output()).isEqualTo("결과 : 6");
     });
   }
 
