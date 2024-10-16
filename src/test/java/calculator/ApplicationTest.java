@@ -48,15 +48,15 @@ class ApplicationTest extends NsTest {
         void 실패_커스텀구분자_숫자로만이루어진구분자() {
             assertSimpleTest(() ->
                     assertThatThrownBy(() -> runException("//5\\n15253"))
-                            .isInstanceOf(IllegalArgumentException.class)
+                            .isExactlyInstanceOf(IllegalArgumentException.class)
             );
         }
 
         @Test
         void 실패_커스텀구분자_기본구분자가포함된구분자() {
             assertSimpleTest(() ->
-                    assertThatThrownBy(() -> runException("//,2\\n1,22,23"))
-                            .isInstanceOf(IllegalArgumentException.class)
+                    assertThatThrownBy(() -> runException("//,!\\n1,!22,!23"))
+                            .isExactlyInstanceOf(IllegalArgumentException.class)
             );
         }
     }
@@ -67,15 +67,15 @@ class ApplicationTest extends NsTest {
         void 실패_음수() {
             assertSimpleTest(() ->
                     assertThatThrownBy(() -> runException("-1,2,3"))
-                            .isInstanceOf(IllegalArgumentException.class)
+                            .isExactlyInstanceOf(IllegalArgumentException.class)
             );
         }
 
         @Test
         void 실패_소수() {
             assertSimpleTest(() ->
-                    assertThatThrownBy(() -> runException("1.5,2,3"))
-                            .isInstanceOf(IllegalArgumentException.class)
+                    assertThatThrownBy(() -> runException("//(\\n1(2.2,23"))
+                            .isExactlyInstanceOf(IllegalArgumentException.class)
             );
         }
 
@@ -83,7 +83,7 @@ class ApplicationTest extends NsTest {
         void 실패_범위를넘어가는수() {
             assertSimpleTest(() ->
                     assertThatThrownBy(() -> runException((long) Math.pow(2, 32) + ",2,3"))
-                            .isInstanceOf(IllegalArgumentException.class)
+                            .isExactlyInstanceOf(IllegalArgumentException.class)
             );
         }
 
@@ -91,7 +91,7 @@ class ApplicationTest extends NsTest {
         void 실패_숫자로변환되지않은문자() {
             assertSimpleTest(() ->
                     assertThatThrownBy(() -> runException("a,2,3"))
-                            .isInstanceOf(IllegalArgumentException.class)
+                            .isExactlyInstanceOf(IllegalArgumentException.class)
             );
         }
     }
@@ -101,16 +101,8 @@ class ApplicationTest extends NsTest {
         @Test
         void 실패_결과값오버플로우() {
             assertSimpleTest(() ->
-                    assertThatThrownBy(() -> runException((int) Math.pow(2, 31) - 1 + ",2,3"))
-                            .isInstanceOf(IllegalStateException.class)
-            );
-        }
-
-        @Test
-        void 실패_결과값언더플로우() {
-            assertSimpleTest(() ->
-                    assertThatThrownBy(() -> runException((int) Math.pow(2, -31) + ",-2,-3"))
-                            .isInstanceOf(IllegalStateException.class)
+                    assertThatThrownBy(() -> runException((int) (Math.pow(2, 31) - 1) + ",2,3"))
+                            .isExactlyInstanceOf(IllegalStateException.class)
             );
         }
     }
