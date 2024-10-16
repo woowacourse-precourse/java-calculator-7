@@ -18,7 +18,7 @@ public class Application {
         // TODO: 프로그램 구현
         input = Console.readLine();
 
-        isCustomSeparator();
+        isCustomDelimiter();
 
         String[] arr = splitDelimiter(input, delimiter);
         System.out.println(Arrays.toString(arr));
@@ -28,7 +28,7 @@ public class Application {
         return input.split(delimiter);
     }
 
-    private static void isCustomSeparator() {
+    private static void isCustomDelimiter() {
         pattern = Pattern.compile(regex);
         matcher = pattern.matcher(input);
 
