@@ -14,36 +14,33 @@ public class Delimiter {
     }
 
     public String addCustomDelimiter(String input) {
+        DelimiterValidator.validateInputLength(input);
+
         String customDelHeader = getCustomDelHeader(input);
-        validateCustomDelHeader(customDelHeader);
+        DelimiterValidator.validateCustomDelHeader(customDelHeader);
 
-        char customDel = customDelHeader.charAt(CUSTOM_DEL_INDEX);
-        validateCustomDel(customDel);
+        char customDel = extractCustomDel(customDelHeader);
+        DelimiterValidator.validateCustomDel(customDel, DEFAULT_DELIMITER);
 
-        this.del = this.del.substring(0, 3) + customDel + "]";
-        return input.length() == 5 ? "" : input.substring(5);
+        updateDel(customDel);
+        return removeCustomDelHeader(input);
     }
 
+    private static char extractCustomDel(String customDelHeader) {
+        return customDelHeader.charAt(CUSTOM_DEL_INDEX);
+    }
+
+
     private String getCustomDelHeader(String input) {
-        if (input.length() < 5) {
-            throw new IllegalArgumentException("잘못된 입력입니다.");
-        }
         return input.substring(0, 5);
     }
 
-    private void validateCustomDelHeader(String customDelHeader) {
-        if (!customDelHeader.endsWith("\\n")) {
-            throw new IllegalArgumentException("커스텀 구분자 설정은 \\n 으로 끝나야합니다.");
-        }
+
+    private static String removeCustomDelHeader(String input) {
+        return input.length() == 5 ? "" : input.substring(5);
     }
 
-    private void validateCustomDel(char customDel) {
-        if (isDefaultDel(customDel)) {
-            throw new IllegalArgumentException("기본 구분자와 중복되는 커스텀 구분자입니다.");
-        }
-    }
-
-    private boolean isDefaultDel(char customDel) {
-        return customDel == ':' || customDel == ',';
+    private void updateDel(char customDel) {
+        this.del = this.del.substring(0, 3) + customDel + "]";
     }
 }

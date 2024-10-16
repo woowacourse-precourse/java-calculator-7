@@ -21,15 +21,15 @@ public class Adder {
         return calculateSum(inputList);
     }
 
-    private String[] splitInput(String input) {
-        return input.split(delimiter.getDel());
-    }
-
     private String processCustomDelimiter(String input) {
         if (input.startsWith("//")) {
             input = delimiter.addCustomDelimiter(input);
         }
         return input;
+    }
+
+    private String[] splitInput(String input) {
+        return input.split(delimiter.getDel());
     }
 
     private BigInteger calculateSum(String[] inputList) {
