@@ -2,18 +2,20 @@ package calculator;
 
 import calculator.io.InputHandler;
 import calculator.io.OutputHandler;
+import calculator.service.CalculatorService;
 
 public class Application {
 
-  private static final InputHandler INPUT_HANDLER = new InputHandler();
-  private static final OutputHandler OUTPUT_HANDLER = new OutputHandler();
+    private static InputHandler inputHandler = new InputHandler();
+    private static OutputHandler outputHandler = new OutputHandler();
+    private static CalculatorService calculatorService = new CalculatorService();
 
-  public static void main(String[] args) {
-    String input = INPUT_HANDLER.consoleInput();
+    public static void main(String[] args) {
+        String input = inputHandler.consoleInput();
 
-    int result = 1;
+        int result = calculatorService.add(input);
 
-    OUTPUT_HANDLER.printOutput(result);
-  }
+        outputHandler.printOutput(result);
+    }
 
 }
