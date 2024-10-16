@@ -67,7 +67,7 @@ class Validation {
             if (userInputNumber.isEmpty()) {
                 throw new IllegalArgumentException("구분자를 연속으로 입력할 수 없습니다.");
             }
-            if (!userInputNumber.matches("[0-9]+")) {
+            if (!userInputNumber.matches("-?[0-9]+")) {
                 throw new IllegalArgumentException("계산식에는 숫자만 입력할 수 있습니다.");
             }
             if (Integer.parseInt(userInputNumber) < 0) {
