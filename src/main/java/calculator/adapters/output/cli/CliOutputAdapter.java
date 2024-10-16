@@ -1,6 +1,5 @@
 package calculator.adapters.output.cli;
 
-import calculator.application.dto.response.CalculationResponse;
 import calculator.application.dto.response.Response;
 import calculator.port.output.OutputPort;
 

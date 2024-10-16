@@ -9,16 +9,16 @@ import calculator.port.input.InputPort;
 
 import calculator.application.usecase.CalculateStringUseCase;
 import calculator.application.validation.InputValidator;
+import calculator.port.output.OutputPort;
 
 public class CalculateStringCommand implements CalculateStringUseCase {
 
     private AdditionService additionService;
     private InputValidator inputValidator;
     private InputPort<CalculationRequest> inputPort;
-    private calculator.port.output.OutputPort<CalculationResponse> outputPort;
+    private OutputPort<CalculationResponse> outputPort;
 
-    public CalculateStringCommand(InputPort inputPort, calculator.port.output.OutputPort outputPort,
-        InputValidator inputValidator, AdditionService additionService) {
+    public CalculateStringCommand(InputPort inputPort, OutputPort outputPort, InputValidator inputValidator, AdditionService additionService) {
         this.inputPort = inputPort;
         this.outputPort = outputPort;
         this.inputValidator = inputValidator;

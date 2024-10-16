@@ -1,7 +1,7 @@
 package calculator.infrastructure.constants;
 
 public enum ResponseMessage {
-    REQUEST_INPUT_MESSAGE("덧셈할 문자열을 입력해주세요.");
+    REQUEST_INPUT_MESSAGE("덧셈할 문자열을 입력해 주세요.");
 
     private final String message;
 

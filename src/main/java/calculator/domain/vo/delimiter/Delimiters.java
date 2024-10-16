@@ -5,6 +5,7 @@ import static calculator.infrastructure.exception.ErrorCode.*;
 
 import calculator.domain.vo.number.Number;
 import calculator.domain.vo.number.Numbers;
+import calculator.infrastructure.exception.ErrorCode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class Delimiters {
 
     protected void validate(List<Delimiter> values) {
         if (values == null || values.isEmpty()) {
-            throw new IllegalArgumentException(INVALID_DELIMITERS.getMessage());
+            throw new IllegalArgumentException(INVALID_COLLECTION.getMessage());
         }
     }
 
