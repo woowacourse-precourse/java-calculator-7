@@ -1,76 +1,62 @@
 package calculator.model;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.regex.Pattern;
 
 public class Calculator {
-    private final String expression;
+    private final Expression expression;
+    private final String operation;
 
-    public Calculator(String expression) {
-        validateExpression(expression);
+    public Calculator(Expression expression, String operation) {
         this.expression = expression;
+        this.operation = operation;
     }
 
-    public Integer calculate(String expression) {
-        String separator = "[,:]";
+    private String extractSeparator(Expression expression) {
+        return expression.extractSeparator();
+    }
 
-        if (hasCustomSeparator(expression)) {
-            String customSeparator = extractCustomSeparator(expression);
-            expression = extractActualExpression(expression);
-            separator = "[,:" + Pattern.quote(customSeparator) + "]";
+    private String actualExpression(Expression expression) {
+        return expression.extractActualExpression();
+    }
+
+    public Integer calculate() {
+        String expressionValue = actualExpression(expression);
+
+        switch (operation) {
+            case "add":
+                return addCalculate(expressionValue);
+            case "multiply":
+                return multiplyCalculate(expressionValue);
+            case "subtract":
+                return subtractCalculate(expressionValue);
+            default:
+                throw new IllegalArgumentException("잘못된 operation입니다.");
         }
+    }
 
-        return Arrays.stream(expression.split(separator))
+    private Integer addCalculate(final String expressionValue) {
+
+        return Arrays.stream(expressionValue.split(extractSeparator(expression)))
             .map(part -> part.isEmpty() ? "0" : part)
             .mapToInt(Integer::parseInt)
             .sum();
     }
 
-    private void validateExpression(String expression) {
-        if (hasCustomSeparator(expression)) {
-            validateCustomExpression(expression);
-            return;
-        }
-        validateNotCustomExpression(expression);
+    private Integer multiplyCalculate(final String expressionValue) {
+
+        return Arrays.stream(expressionValue.split(extractSeparator(expression)))
+            .map(part -> part.isEmpty() ? "1" : part)
+            .mapToInt(Integer::parseInt)
+            .reduce(1, (a, b) -> a * b);
     }
 
-    private boolean hasCustomSeparator(String expression) {
-        return expression.startsWith("//") && expression.contains("\\n");
+    private Integer subtractCalculate(final String expressionValue) {
+
+        return Arrays.stream(expressionValue.split(extractSeparator(expression)))
+            .map(part -> part.isEmpty() ? "0" : part)
+            .mapToInt(Integer::parseInt)
+            .reduce((a, b) -> a - b)
+            .orElseThrow(() -> new IllegalArgumentException("표현식이 비어 있습니다."));
     }
 
-    private void validateCustomExpression(String expression) {
-        if (hasInvalidCustomInput(expression)) {
-            throw new IllegalArgumentException("유효하지 않은 문자열이 포함되어 있습니다.");
-        }
-    }
-
-    private boolean hasInvalidCustomInput(String expression) {
-        String customSeparator = extractCustomSeparator(expression);
-        String actualExpression = extractActualExpression(expression);
-        String regex = "[0-9,: " + customSeparator + "]*";
-        return !actualExpression.matches(regex);
-    }
-
-    private String extractCustomSeparator(String expression) {
-        int start = expression.indexOf("//") + 2;
-        int end = expression.indexOf("\\n");
-        return expression.substring(start, end);
-    }
-
-    private String extractActualExpression(String expression) {
-        int start = expression.indexOf("\\n") + 2;
-        return expression.substring(start);
-    }
-
-    private void validateNotCustomExpression(String expression) {
-        if (hasInvalidinput(expression)) {
-            throw new IllegalArgumentException("유효하지 않은 문자가 포함되어 있습니다.");
-        }
-    }
-
-    private boolean hasInvalidinput(String expression) {
-        String regex = "[0-9,:]*";
-        return !expression.matches(regex);
-    }
 }
