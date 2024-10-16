@@ -28,8 +28,10 @@ public class Parser {
                 index++;
                 continue;
             }
-            //if /
-            //if \
+            if (curChar == '/') {
+                index = addSeparator(index, inputArray);
+                continue;
+            }
         }
     }
 
@@ -47,5 +49,27 @@ public class Parser {
 
     public List<Integer> getNums() {
         return nums;
+    }
+
+    private int addSeparator(int index, char[] inputArray) {
+        index++;
+        //add exception
+        if (inputArray[index] == '/') {
+            index++;
+        }
+        //add exception
+        char separator = inputArray[index];
+        index++;
+
+        if (inputArray[index] == '\\') {
+            //add exception
+            index++;
+        }
+        if (inputArray[index] == 'n') {
+            //add exception
+            separators.add(separator);
+            index++;
+        }
+        return index;
     }
 }
