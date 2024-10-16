@@ -23,6 +23,7 @@ public class DelimiterSet {
 
     public void addAll(List<String> delimiters) {
         for (String delimiter : delimiters) {
+            System.out.println("delimiter = " + delimiter);
             validateDelimiter(delimiter);
             delimiterSet.add(delimiter);
         }

@@ -1,5 +1,6 @@
 package calculator.service;
 
+import java.util.Collections;
 import java.util.List;
 
 public class DelimiterExtractor {
@@ -9,23 +10,22 @@ public class DelimiterExtractor {
     private static final String EMPTY = "";
     
     public List<String> extractDelimiter(String input) {
-        String[] split = getSplitSuffix(input);
-        String firstHalf = getSplitPrefix(split[0]);
+        if (!input.startsWith(PREFIX)) {
+            return Collections.emptyList();
+        }
+        String firstHalf = getFistHalf(input);
         String[] delimiters = firstHalf.split(EMPTY);
         return List.of(delimiters);
     }
 
-    private String getSplitPrefix(String split) {
-        if (!split.startsWith(PREFIX)) {
+    private String getFistHalf(String input) {
+        int indexOfSplitDelimiter = input.indexOf(SUFFIX);
+        if (indexOfSplitDelimiter == -1) {
+            return EMPTY;
+        }
+        if (!input.startsWith(PREFIX)) {
             throw new IllegalArgumentException("// 로 시작되어야 합니다.");
         }
-        return split.replaceAll(PREFIX, EMPTY);
-    }
-
-    private String[] getSplitSuffix(String input) {
-        if (!input.contains(SUFFIX)) {
-            throw new IllegalArgumentException("\\n 으로 분리되어야 합니다.");
-        }
-        return input.split(SUFFIX);
+        return input.substring(2, indexOfSplitDelimiter);
     }
 }
