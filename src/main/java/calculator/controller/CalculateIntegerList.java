@@ -5,7 +5,7 @@ import java.util.List;
 
 public class CalculateIntegerList {
 
-    public int calculate(InputString inputString) {
+    public int calculateResult(InputString inputString) {
         List<Integer> numberList = inputString.getNumberList();
         int sum = 0;
         for (Integer number : numberList) {

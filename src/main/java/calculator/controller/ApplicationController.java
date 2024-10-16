@@ -14,8 +14,9 @@ public class ApplicationController {
     public int ApplicationStart() {
         ParsingInputString parsingInputString = new ParsingInputString();
         CalculateIntegerList calculateIntegerList = new CalculateIntegerList();
+        FindCustomChar findCustomChar = new FindCustomChar();
+        findCustomChar.setCustomChar(inputString);
 
-        parsingInputString.findCustomChar(inputString);
         if (inputString.getInput().isEmpty()) {
             inputString.setNumberList(List.of(0));
         } else {
@@ -23,6 +24,6 @@ public class ApplicationController {
             parsingInputString.getNumberList(inputString, numberStringList);
         }
 
-        return calculateIntegerList.calculate(inputString);
+        return calculateIntegerList.calculateResult(inputString);
     }
 }

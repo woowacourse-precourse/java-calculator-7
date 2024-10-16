@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import calculator.controller.ApplicationController;
 import calculator.controller.CalculateIntegerList;
+import calculator.controller.FindCustomChar;
 import calculator.controller.ParsingInputString;
 import calculator.model.InputString;
 import camp.nextstep.edu.missionutils.test.NsTest;
@@ -57,7 +58,7 @@ class ApplicationTest extends NsTest {
 
         //when
         CalculateIntegerList calculateIntegerList = new CalculateIntegerList();
-        int calculateResult = calculateIntegerList.calculate(inputString);
+        int calculateResult = calculateIntegerList.calculateResult(inputString);
 
         //then
         assertThat(calculateResult).isEqualTo(10);
@@ -70,10 +71,10 @@ class ApplicationTest extends NsTest {
         InputString inputString = new InputString("//;\\n1,2,3:4;9");
 
         //when
-        ParsingInputString parsingInputString = new ParsingInputString();
+        FindCustomChar findCustomChar = new FindCustomChar();
+        findCustomChar.setCustomChar(inputString);
 
         //then
-        parsingInputString.findCustomChar(inputString);
         assertThat(inputString.getCustomChar()).isEqualTo(';');
     }
 
