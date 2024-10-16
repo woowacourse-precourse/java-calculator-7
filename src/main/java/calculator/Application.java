@@ -9,5 +9,10 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
         String[] splitInputNumber = input.split(",|:");
+        int result = 0;
+        for (String number : splitInputNumber) {
+            result += Integer.parseInt(number);
+        }
+        System.out.println(result);
     }
 }
