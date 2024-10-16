@@ -9,6 +9,15 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
     @Test
+    void 문자열_입력_테스트() {
+        assertSimpleTest(() -> {
+            run("1");
+            assertThat(output()).contains("덧셈할 문자열을 입력해 주세요.");
+            assertThat(output()).contains("1");
+        });
+    }
+
+    @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1");
