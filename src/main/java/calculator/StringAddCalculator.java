@@ -8,20 +8,14 @@ public class StringAddCalculator {
     private static String delimiter = "[,|:]";
     private static int result = 0;
 
-    private static final String EMPTY_STRING = "";
-    private static final String WHITESPACE = " ";
     private static final int CUSTOM_DELIMITER_ORDER = 1;
     private static final int ARITHMETIC_EXPRESSION_ORDER = 2;
     // ex) 커스텀 구분자를 ;로 정했을 때, //;\n1;2;3
     private static final String CUSTOM_REGEX = "//(.)\\\\n(.*)";
 
     public static int calculate(String input) {
-        if (EMPTY_STRING.equals(input)) {
-            return result;
-        }
-
-        if (input.contains(WHITESPACE)) {
-            throw new IllegalArgumentException("입력하신 문자열에는 공백이 포함될 수 없습니다.");
+        if (input == null || input.isBlank()) {
+            return 0;
         }
 
         return sum(parseCustomDelimiter(input));
@@ -30,7 +24,7 @@ public class StringAddCalculator {
     private static int sum(String input) {
         String[] numbers = input.split(delimiter);
         for (String number : numbers) {
-            if (EMPTY_STRING.equals(number)) {
+            if (number == null || number.isBlank()) {
                 throw new IllegalArgumentException("구분자 사이에는 숫자가 입력되어야 합니다.");
             }
 
