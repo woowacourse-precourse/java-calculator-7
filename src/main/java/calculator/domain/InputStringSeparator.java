@@ -20,10 +20,15 @@ public class InputStringSeparator {
     private void validateInputString(String inputString) {
         boolean isFirstCustomSeparator = inputString.contains("//");
         boolean isLastCustomSeparator = inputString.contains("\\n");
-        if (isFirstCustomSeparator != isLastCustomSeparator){
+        if (isFirstCustomSeparator != isLastCustomSeparator) {
             throw new IllegalArgumentException("형식을 지켜 커스텀 구분자를 지정해야 합니다.");
         }
-        if (isFirstCustomSeparator && isLastCustomSeparator){
+        if (isFirstCustomSeparator) {
+            if (inputString.indexOf("//") != 0) {
+                throw new IllegalArgumentException("커스텀 구분자를 먼저 지정한 후 숫자를 입력하세요.");
+            }
+        }
+        if (isFirstCustomSeparator && isLastCustomSeparator) {
             this.isCustomSeparatorContained = true;
         }
     }
