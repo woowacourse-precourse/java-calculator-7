@@ -24,10 +24,8 @@
 ````
 
 ## 기능 구현 목록
-- isCustomSeparator
-  - 커스텀 구분자인지 확인한다.
-- setDelimiter
-  - 커스텀 구분자일 경우, 구분자를 재설정한다.
+- isCustomDelimiter
+  - 커스텀 구분자라면, 구분자와 입력을 재설정한다.
 - splitDelimiter
   - 구분자를 기준으로 문자열을 잘라서 배열을 생성한다.
 - isNumeric
