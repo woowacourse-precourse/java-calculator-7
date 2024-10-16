@@ -44,6 +44,10 @@ public class Application {
         }
 
         String[] tokens = numberPart.split(delimiter);
+        return add(tokens);
+    }
+
+    private static int add(String[] tokens) {
         int result = 0;
 
         for (String token : tokens) {
