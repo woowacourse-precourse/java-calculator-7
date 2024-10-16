@@ -10,11 +10,9 @@ class ApplicationTest {
     @Test
     void extractCustomSeparator_case1() {
         String input = "//;\n1;2;3";
-        List<Character> separators = app.extractCustomSeparator(input);
-        assertEquals(1, separators.size());
-        assertEquals(';', separators.get(0));
+        Character separator = app.extractCustomSeparator(input);
+        assertEquals(';', separator.charValue());
     }
-
 
     @Test
         void extractCustomSeparator_case2() {
@@ -27,14 +25,7 @@ class ApplicationTest {
 
         @Test
         void extractCustomSeparator_case3() {
-            String input = "1,2:3";
-            List<Character> separators = app.extractCustomSeparator(input);
-            assertTrue(separators.isEmpty());
-        }
-
-        @Test
-        void extractCustomSeparator_case4() {
-            String input = "//\n\n1,2,3";
+            String input = "//<.\n1,2,3";
             Exception exception = assertThrows(IllegalArgumentException.class, () -> {
                 app.extractCustomSeparator(input);
             });
