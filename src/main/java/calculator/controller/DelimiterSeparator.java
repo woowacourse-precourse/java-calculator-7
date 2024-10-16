@@ -17,6 +17,9 @@ public class DelimiterSeparator {
             throw new IllegalArgumentException("잘못된 형식입니다.");
         }
         int index = 2;
+        if(userInput.substring(index).length() < 3 ){
+            throw new IllegalArgumentException("잘못된 형식입니다.");
+        }
         Delimiter.updateDelimiter(userInput.charAt(index));
         if(!userInput.substring(index+1,index+3).equals("\n")){
             throw new IllegalArgumentException("잘못된 형식입니다.");
