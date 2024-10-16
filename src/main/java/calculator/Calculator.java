@@ -10,8 +10,10 @@ public class Calculator {
     public int calculator(String input) {
         if (DelimiterParser.isDefaultDelimiter(input)) {
             String splitInput = DelimiterParser.splitInputAsString(input);
+            Validator.validateIfInputNotNumber(splitInput);
             List<Integer> listAsInteger = DelimiterParser.getNumbersAfterParsing(splitInput);
             Validator.validateIfInputNegative(listAsInteger);
+
             return listAsInteger.stream()
                     .mapToInt(Integer::valueOf)
                     .sum();
@@ -23,7 +25,9 @@ public class Calculator {
             String customDelimiter = replaceInput.substring(0, 1);// 구분자 ;
             String splitString = Arrays.toString(replaceInput.substring(1).split(customDelimiter));
             String splitInput = DelimiterParser.splitInputAsString(splitString);
+            Validator.validateIfInputNotNumber(splitInput);
             List<Integer> listAsInteger = DelimiterParser.getNumbersAfterParsing(splitInput);
+
             return listAsInteger.stream()
                     .mapToInt(Integer::valueOf)
                     .sum();

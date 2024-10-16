@@ -9,4 +9,12 @@ public abstract class Validator {
             throw new IllegalArgumentException();
         }
     }
+
+    public static void validateIfInputNotNumber(String splitInput) {
+        try {
+            Integer.parseInt(splitInput);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
+    }
 }

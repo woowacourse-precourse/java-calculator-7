@@ -25,11 +25,13 @@ public abstract class DelimiterParser {
     }
 
     public static String splitInputAsString(String input) {
-        StringBuilder sb = new StringBuilder();
         String[] split = input.split(DEFAULT_REGEX);
+
+        StringBuilder splitBuilder = new StringBuilder();
         for (String splitNumber : split) {
-            sb.append(splitNumber);
+            splitBuilder.append(splitNumber);
         }
-        return sb.toString();
+
+        return splitBuilder.toString();
     }
 }

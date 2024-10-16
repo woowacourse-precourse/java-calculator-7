@@ -19,4 +19,14 @@ class ValidatorTest {
             Validator.validateIfInputNegative(numbersAfterParsing);
         });
     }
+    @Test
+    void validateIfInputNotNumber() {
+        //given
+        String input = "1@2#3";
+        //when
+        //then
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Validator.validateIfInputNotNumber(input);
+        });
+    }
 }
