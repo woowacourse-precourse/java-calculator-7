@@ -21,7 +21,12 @@ public class StringParser {
         return List.of(standardStrings);
     }
 
-    private String extractCustomDelimiter(){
+    private List<String> parseCustomStrings() {
+        String[] customStrings = inputStrings.split(extractCustomDelimiter());
+        return List.of(customStrings);
+    }
+
+    private String extractCustomDelimiter() {
         return inputStrings.substring(SECOND_NUMBER, THIRD_NUMBER);
     }
 
