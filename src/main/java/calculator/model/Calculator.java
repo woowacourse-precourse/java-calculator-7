@@ -3,7 +3,7 @@ package calculator.model;
 public class Calculator {
     private static int result;
 
-    private void setResult(int result) {
+    public void setResult(int result) {
         this.result = result;
     }
 
