@@ -37,7 +37,21 @@ public class Application {
     * 형식이 잘못된 경우 'IllegalArgumentException을 발생시킨다.
     */
     public static void validateInput(String input){
-        throw new UnsupportedOperationException("validateInput() 아직 구현되지 않았습니다.");
+        // 기본 구분자와 숫자만 있을 경우 return
+        if(input.matches("[0-9,:]+")){
+            return;
+        }
+        // 커스텀 구분자를 가질 경우
+        if(input.startsWith("//") && input.contains("\n")){
+            String Delimiter = input.substring(2, input.indexOf("\n"));
+            String regex = "[0-9" + Delimiter + "]+";
+            String subInput = input.substring(input.indexOf("\n") + 1);
+            // 구분자가 숫자를 포함하지 않고, 구분자 정의 섹션 외의 문자열에 구분자와 숫자만 갖는지 확인
+            if (!Delimiter.matches(".*[0-9].*") && subInput.matches(regex)){
+                return;
+            }
+        }
+        throw new IllegalArgumentException("올바르지 않은 입력값입니다.");
     }
 
     /*
@@ -45,7 +59,7 @@ public class Application {
     * 기본 구분자 (,), (:) 또는 커스텀 구분자를 반환한다.
      */
     public static String getDelimiter(String input) {
-        throw new UnsupportedOperationException("getDelimiter() 아직 구현되지 않았습니다.");
+        throw new IllegalArgumentException("getDelimiter() 아직 구현되지 않았습니다.");
     }
 
     /*
