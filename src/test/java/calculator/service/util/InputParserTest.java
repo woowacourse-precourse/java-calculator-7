@@ -1,7 +1,7 @@
 package calculator.service.util;
 
 import calculator.domain.exception.CalculatorException;
-import calculator.domain.exception.ErrorMessage;
+import calculator.domain.exception.CalculatorErrorMessage;
 import calculator.domain.model.ExtractedInput;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,7 +31,7 @@ class InputParserTest {
 
         assertThatThrownBy(() -> InputParser.parseByDelimiters(input))
                 .isInstanceOf(CalculatorException.class)
-                .hasMessage(ErrorMessage.NOT_NUMBER_ERROR.getMessage());
+                .hasMessage(CalculatorErrorMessage.NOT_NUMBER_ERROR.getMessage());
     }
 
     @Test
