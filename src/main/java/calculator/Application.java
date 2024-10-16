@@ -1,6 +1,7 @@
 package calculator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Console;
@@ -18,11 +19,7 @@ public class Application {
 
         input = Console.readLine();
         app.addSeparator(app.getCustomSeparator(input));
-        String[] lst = app.splitString();
-
-        for(int i=0;i< lst.length;i++){
-            System.out.println(lst[i]);
-        }
+        System.out.println(app.calc(app.splitString()));
     }
 
     private void initSeparator(){
@@ -59,5 +56,23 @@ public class Application {
 
     private String[] splitString(){
         return input.split(String.join("|", separators));
+    }
+
+    private int calc(String[] lst){
+        int result=0;
+
+        for(String separator : lst){
+            try{
+                int parseNumber = Integer.parseInt(separator);
+                if(parseNumber < 0){
+                    throw new IllegalArgumentException();
+                }
+                result += parseNumber;
+            }catch(NumberFormatException ex){
+                throw new NumberFormatException();
+            }
+        }
+
+        return result;
     }
 }
