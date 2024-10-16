@@ -2,6 +2,7 @@ package calculator.domain;
 
 import calculator.domain.exception.CalculatorException;
 import calculator.domain.exception.ErrorMessage;
+import calculator.domain.model.ExtractedInput;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,9 +11,9 @@ public class DelimiterExtractor {
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
     private static final Pattern SINGLE_CHAR_DELIMITER_PATTERN = Pattern.compile("^//(.)\n");
 
-    public String extractDelimiters(String input) {
+    public static ExtractedInput extractDelimiters(String input) {
         if (!input.startsWith(CUSTOM_DELIMITER_PREFIX) || input.length() < 5) {
-            return DEFAULT_DELIMITERS; // 기본 구분자 반환
+            return ExtractedInput.of(DEFAULT_DELIMITERS, input); // 기본 구분자 반환
         }
 
         Matcher matcher = SINGLE_CHAR_DELIMITER_PATTERN.matcher(input);
@@ -22,6 +23,9 @@ public class DelimiterExtractor {
         }
 
         String customDelimiter = matcher.group(1);
-        return DEFAULT_DELIMITERS + "|" + Pattern.quote(customDelimiter); // 커스텀 구분자 추가 후 반환
+        String remainingInput = input.substring(matcher.end()); // 구분자 선언 부분을 제거한 나머지 입력 값
+
+        return ExtractedInput.of(DEFAULT_DELIMITERS + "|" + Pattern.quote(customDelimiter),
+                remainingInput);
     }
 }
