@@ -9,6 +9,7 @@ import calculator.controller.ParsingInputString;
 import calculator.model.InputString;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import java.util.List;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
@@ -30,6 +31,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    @DisplayName("커스텀 문자 파싱을 확인한다.")
     void parsingInputTest() {
         //given
         InputString inputString = new InputString("12,3:4&6");
@@ -45,6 +47,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    @DisplayName("계산 메서드의 동작을 확인한다.")
     void calculateTest() {
         //given
         InputString inputString = new InputString("1,2,3:4");
@@ -59,6 +62,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    @DisplayName("커스텀 구분자 파싱 메서드를 확인한다.")
     void findCustomTest() {
         //given
         InputString inputString = new InputString("//;\\n1,2,3:4;9");
@@ -69,6 +73,15 @@ class ApplicationTest extends NsTest {
         //then
         parsingInputString.findCustomChar();
         assertThat(inputString.getCustomChar()).isEqualTo(';');
+    }
+
+    @Test
+    @DisplayName("특정 케이스를 확인한다.")
+    void edgeCaseTest() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("//\\n"))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Override
