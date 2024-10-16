@@ -8,17 +8,6 @@ import java.util.regex.Pattern;
 
 public class Application {
 
-    public void checkNumberException(String[] removedSeparatorsArray){
-        for (String number : removedSeparatorsArray){
-            if (!number.isEmpty()) {
-                int num = Integer.parseInt(number);
-                if (num < 0) {
-                    throw new IllegalArgumentException("입력 값에 음수가 포함될 수 없습니다.");
-                }
-            }
-        }
-    }
-
     public void checkSeparatorException(String input){
         if (input.startsWith("//")) {
             int customSeparatorNextIndex = input.indexOf("\n");
@@ -40,12 +29,21 @@ public class Application {
         return sumOfIntegers;
     }
 
-    public List<Integer> parseStringToInteger(String[] removedSeparatorsArray) {
+    public List<Integer> parseStringToInteger(String[] removedSeparatorsArray){
         List<Integer> parsedIntegers = new ArrayList<>();
-        for (String str : removedSeparatorsArray) {
-            parsedIntegers.add(Integer.valueOf(str));
+        for (String number : removedSeparatorsArray){
+            if (!number.isEmpty()) {
+                try {
+                    int num = Integer.parseInt(number);
+                    if (num < 0) {
+                        throw new IllegalArgumentException("입력 값에 음수가 포함될 수 없습니다: " + number);
+                    }
+                    parsedIntegers.add(num);
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("잘못된 숫자 입력입니다: " + number);
+                }
+            }
         }
-
         return parsedIntegers;
     }
 
@@ -57,9 +55,7 @@ public class Application {
             regex = "[,:" + Pattern.quote(customSeparator.toString()) + "]";
         }
 
-        String[] removedSeparatorsArray = removedDeclarePart.split(regex);
-        checkNumberException(removedSeparatorsArray);
-        return removedSeparatorsArray;
+        return removedDeclarePart.split(regex);
     }
 
 
@@ -71,7 +67,6 @@ public class Application {
             return input.substring(4);
         }
     }
-
 
     public Character extractCustomSeparator(String input) {
         checkSeparatorException(input);
@@ -98,7 +93,11 @@ public class Application {
         String input = Console.readLine();
         input = input.replace("\\n", "\n");
 
-        int sum = T.calculateSum(input);
-        System.out.println("결과 : " + sum);
+        try {
+            int sum = T.calculateSum(input);
+            System.out.println("결과 : " + sum);
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+        }
     }
 }
