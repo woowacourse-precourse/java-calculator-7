@@ -21,7 +21,7 @@ public class Delimiters {
         if (!isCustomDelimiterLastFormatCorrect(inputString)) {
             throw new IllegalArgumentException();
         }
-        if (!isCustomDelimiterNotDigit(inputString)) {
+        if (!isCustomDelimiterDigit(inputString)) {
             throw new IllegalArgumentException();
         }
     }
@@ -41,7 +41,7 @@ public class Delimiters {
         return lastFormat.equals("\n");
     }
 
-    public boolean isCustomDelimiterNotDigit(String inputString) {
+    public boolean isCustomDelimiterDigit(String inputString) {
         char customDelimiter = inputString.charAt(2);
         return Character.isDigit(customDelimiter);
     }
