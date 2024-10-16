@@ -40,6 +40,14 @@ class ApplicationTest extends NsTest {
         assertThat(slicedInputStr).isEqualTo("//+\n");
     }
 
+    @Test
+    void 자른_5글자가_유효한_커스텀_구분자를_포함하는지_확인하고_커스텀_구분자를_반환하는데_성공하는_테스트() {
+        String firstFiveCharacters = "//+\n";
+        InputStringProcessor inputStringProcessor = new InputStringProcessor();
+        Character separator = inputStringProcessor.getSeparator(firstFiveCharacters);
+        assertThat(separator).isEqualTo('+');
+    }
+
 
     @Override
     public void runMain() {
