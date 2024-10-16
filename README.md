@@ -105,8 +105,10 @@
 - controller
   - MultipleController
 - domain
-    - MultipleUseCase
-    - Preprocessor
-    - Parser
-    - Calculator
+  - model 
+    - PreprocessedInput
+  - MultipleUseCase
+  - Preprocessor
+  - Parser
+  - Calculator
 ```
