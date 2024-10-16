@@ -2,8 +2,6 @@ package calculator.service;
 
 import calculator.domain.Calculator;
 
-import java.util.List;
-
 public class StringSeparator {
 
     private Calculator calculator;
@@ -16,7 +14,6 @@ public class StringSeparator {
         String number = "";
         String divide = "";
         for (int i = 0; i < str.length(); i++) {
-            System.out.println(str.charAt(i));
             if (isNumber(str.charAt(i))) {
                 if (!divide.isEmpty()) {
                     if (isWrongInput(divide)) {
@@ -52,15 +49,15 @@ public class StringSeparator {
     }
 
     private boolean isWrongInput(String divide) {
-        if (divide.charAt(0) != '/' || divide.charAt(1) != '/' || divide.charAt(divide.length() - 1) != 'n' || divide.charAt(divide.length() - 2) != '\\'
-                || divide.length() < 5) {
+        if (divide.charAt(0) != '/' || divide.charAt(1) != '/' || divide.charAt(divide.length() - 1) != '\n'
+                || divide.length() < 4) {
             return true;
         }
         return false;
     }
 
-    private String extractionSeparator(String divide) {
-        return divide.substring(2, divide.length() - 2);
+    public String extractionSeparator(String divide) {
+        return divide.substring(2, divide.length() - 1);
     }
 
     private boolean isSeparator(char ch) {
