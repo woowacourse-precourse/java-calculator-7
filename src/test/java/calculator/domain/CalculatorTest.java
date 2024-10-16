@@ -12,10 +12,10 @@ class CalculatorTest {
     @Test
     void getCustomDelimiter() {
         //given
-        Calculator calculator = new Calculator();
-        String stringWithDelimiter = "//|\n1|2|3";
+        CustomDelimiterExtractor customDelimiterExtractor = new CustomDelimiterExtractor();
+        String stringWithDelimiter = "//|\\n1|2|3";
         //when
-        String customDelimiter = calculator.getCustomDelimiter(stringWithDelimiter);
+        String customDelimiter = customDelimiterExtractor.getCustomDelimiter(stringWithDelimiter);
         //then
         assertThat(customDelimiter).isEqualTo("|");
     }
@@ -24,10 +24,10 @@ class CalculatorTest {
     @Test
     void customDivisionMarkIsNul() {
         //given
-        Calculator calculator = new Calculator();
+        CustomDelimiterExtractor customDelimiterExtractor = new CustomDelimiterExtractor();
         String stringWithDelimiter = "1,2:3";
         //when
-        String customDelimiter = calculator.getCustomDelimiter(stringWithDelimiter);
+        String customDelimiter = customDelimiterExtractor.getCustomDelimiter(stringWithDelimiter);
         //then
         assertThat(customDelimiter).isNull();
     }
@@ -36,11 +36,11 @@ class CalculatorTest {
     @Test
     void throwsExceptionWhenCustomDelimiterFormatIsWrong() {
         //given
-        Calculator calculator = new Calculator();
-        String stringWithDelimiter = "//|\t1|2|3";
+        CustomDelimiterExtractor customDelimiterExtractor = new CustomDelimiterExtractor();
+        String stringWithDelimiter = "//|\\t1|2|3";
         //when
         //then
-        assertThatThrownBy(() -> calculator.getCustomDelimiter(stringWithDelimiter))
+        assertThatThrownBy(() -> customDelimiterExtractor.getCustomDelimiter(stringWithDelimiter))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("잘못된 커스텀 구분자 형식입니다.");
     }
@@ -49,11 +49,11 @@ class CalculatorTest {
     @Test
     void throwsExceptionWhenCustomDelimiterFormatIsWrong2() {
         //given
-        Calculator calculator = new Calculator();
+        CustomDelimiterExtractor customDelimiterExtractor = new CustomDelimiterExtractor();
         String stringWithDelimiter = "//|1|2|3";
         //when
         //then
-        assertThatThrownBy(() -> calculator.getCustomDelimiter(stringWithDelimiter))
+        assertThatThrownBy(() -> customDelimiterExtractor.getCustomDelimiter(stringWithDelimiter))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("잘못된 커스텀 구분자 형식입니다.");
     }
@@ -62,11 +62,11 @@ class CalculatorTest {
     @Test
     void throwsExceptionWhenCustomDelimiterFormatIsWrong3() {
         //given
-        Calculator calculator = new Calculator();
-        String stringWithDelimiter = "/|\n1|2|3";
+        CustomDelimiterExtractor customDelimiterExtractor = new CustomDelimiterExtractor();
+        String stringWithDelimiter = "/|\\n1|2|3";
         //when
         //then
-        assertThatThrownBy(() -> calculator.getCustomDelimiter(stringWithDelimiter))
+        assertThatThrownBy(() -> customDelimiterExtractor.getCustomDelimiter(stringWithDelimiter))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("잘못된 커스텀 구분자 형식입니다.");
     }
