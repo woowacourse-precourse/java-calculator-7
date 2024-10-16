@@ -13,6 +13,26 @@ public class Application {
         return sumNumbers(parts);
     }
 
+    private String[] parseInput(String input) {
+
+        if (input.length() > 50) {
+            throw new IllegalArgumentException("입력 길이 제한을 초과했습니다.");
+        }
+
+        String delimiter = extractDelimiter(input);
+        String numbersPart = extractNumbersPart(input);
+
+        // split 결과를 배열로 받음
+        String[] parts = numbersPart.split(delimiter, -1);
+
+        for (String part : parts) {
+            if (part.isEmpty()) {
+                throw new IllegalArgumentException("잘못된 입력 형식: 연속된 구분자는 허용되지 않습니다.");
+            }
+        }
+
+        return parts;
+    }
 
     public static void main(String[] args) {
         Application calculator = new Application();
