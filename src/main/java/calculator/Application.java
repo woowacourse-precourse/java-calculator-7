@@ -1,7 +1,7 @@
 package calculator;
 
 import calculator.application.usecase.CalculateStringUseCase;
-import calculator.config.AppConfig;
+import calculator.infrastructure.config.AppConfig;
 
 public class Application {
 

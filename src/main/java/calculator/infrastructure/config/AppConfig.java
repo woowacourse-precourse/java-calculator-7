@@ -1,5 +1,6 @@
-package calculator.config;
+package calculator.infrastructure.config;
 
+import calculator.domain.service.AdditionService;
 import calculator.ports.input.InputPort;
 import calculator.adapters.input.cli.CliInputAdapter;
 import calculator.ports.output.OutputPort;
@@ -13,14 +14,16 @@ public class AppConfig {
     private InputPort inputPort;
     private OutputPort outputPort;
     private InputValidator inputValidator;
+    private AdditionService additionService;
     private CalculateStringUseCase calculateStringUseCase;
 
     public AppConfig() {
         this.inputPort = new CliInputAdapter();
         this.outputPort = new CliOutputAdapter();
         this.inputValidator = new InputValidator();
+        this.additionService = new AdditionService();
         this.calculateStringUseCase = new CalculateStringCommand(inputPort, outputPort,
-            inputValidator);
+            inputValidator, additionService);
     }
 
     public CalculateStringUseCase getCalculateStringUseCase() {
