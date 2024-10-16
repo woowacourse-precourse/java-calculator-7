@@ -6,13 +6,16 @@ public class Number {
 
     private String userInput;
 
+    private final List<String> stringList;
+
     public Number(String userInput) {
         this.userInput = userInput;
+        stringList = Division.getStringList(userInput);
     }
 
     public int getResult() {
-        List<Integer> numbers = NumberDivision.getNumber(userInput);
-        return ResultMaker.getResult(numbers);
+        //기능구현
+        return 0;
     }
 
 }
