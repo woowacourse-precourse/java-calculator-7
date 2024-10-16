@@ -12,12 +12,18 @@ public class CalculatorController {
 
         String input = InputView.readInputString();
 
-        String separator = findSeparator(input);
+        if (input.isEmpty()) {
+            OutputView.printResult(0);
+        } else {
+            String separator = findSeparator(input);
 
-        String[] numbers = extractNumbers(input, separator);
-        CustomCalculator customCalculator = new CustomCalculator(numbers);
+            String[] numbers = extractNumbers(input, separator);
+            CustomCalculator customCalculator = new CustomCalculator(numbers);
 
-        customCalculator.calculateSum();
+            customCalculator.calculateSum();
+
+            OutputView.printResult(customCalculator.getResult());
+        }
     }
 
     private String findSeparator(String input) {
