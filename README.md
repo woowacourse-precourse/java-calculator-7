@@ -6,7 +6,7 @@
     - 사용자의 입력은 `camp.nextstep.edu.missionutils.Console`의 `readLine()`을 활용
 
 
-- [ ] 기본 구분자를 통해 숫자를 추출하는 기능
+- [x] 기본 구분자를 통해 숫자를 추출하는 기능
     - 기본 구분자는 쉼표(,)와 콜론(,)이다.
 
 
