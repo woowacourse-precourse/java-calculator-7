@@ -5,9 +5,9 @@ import calculator.Constants.ErrorMessages;
 public class Number {
     private final int number;
 
-    public Number(int number) {
-        validateNumber(number);
-        this.number = number;
+    public Number(String number) {
+        validateNumber(Integer.parseInt(number));
+        this.number = Integer.parseInt(number);
     }
 
     public Integer getNumber() {
