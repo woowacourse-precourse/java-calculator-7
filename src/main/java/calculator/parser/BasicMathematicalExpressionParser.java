@@ -6,11 +6,11 @@ public class BasicMathematicalExpressionParser implements MathematicalExpression
 		try {
 			int number = Integer.parseInt(stringNumber);
 			if (number <= 0) {
-				throw new IllegalArgumentException("입력된 값이 양수가 아닙니다.");
+				throw new IllegalArgumentException(ParserError.INVALID_POSITIVE_NUMBER.getMessage());
 			}
 			return number;
 		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException("잘못된 문자로된 숫자입니다.");
+			throw new IllegalArgumentException(ParserError.INVALID_FORMAT_NUMBER.getMessage());
 		}
 
 	}

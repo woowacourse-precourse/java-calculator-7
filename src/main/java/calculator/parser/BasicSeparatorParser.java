@@ -9,7 +9,7 @@ public class BasicSeparatorParser implements SeparatorParser {
 		if (text.length() > 2 && text.startsWith("//")) {
 			return true;
 		} else {
-			throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
+			throw new IllegalArgumentException(ParserError.INVALID_FORMAT_SEPARATOR.getMessage());
 		}
 	}
 
@@ -22,7 +22,7 @@ public class BasicSeparatorParser implements SeparatorParser {
 			if (isValid(now)) {
 				String separator = now.substring(2, now.length());
 				if (!separators.add(separator)) {
-					throw new IllegalArgumentException("중복된 구분자입니다.");
+					throw new IllegalArgumentException(ParserError.DUPLICATION_SEPARATOR.getMessage());
 				}
 			}
 		}
