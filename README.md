@@ -21,7 +21,7 @@
 
 ### 계산기 입력 기능
 
-- [ ] camp.nextstep.edu.missionutils에서 제공하는 Console API를 사용하여 숫자를 입력받고 문자열을 반환하는 메서드 구현
+- [X] camp.nextstep.edu.missionutils에서 제공하는 Console API를 사용하여 숫자를 입력받고 문자열을 반환하는 메서드 구현
 
 ### 계산 기능
 
