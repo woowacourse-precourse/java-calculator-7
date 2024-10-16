@@ -14,6 +14,7 @@ public class Calculate {
 
     private static final String COLON = ":";
     private static final String COMMA = ",";
+    private static final String OR = "|";
 
     //문자열 분리 - 콜론 판단
     public boolean checkContainCOLON(String userInput) {
@@ -37,5 +38,9 @@ public class Calculate {
 
     public boolean checkContainCOMMAAndCOLON(String userInput) {
         return checkContainCOLON(userInput) && checkContainCOMMA(userInput);
+    }
+
+    public List<String> splitWithCOMMAAndCOLON(String userInput) {
+        return List.of(userInput.split(COMMA + OR + COLON));
     }
 }
