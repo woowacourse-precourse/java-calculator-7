@@ -3,6 +3,7 @@ package calculator;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -57,6 +58,22 @@ class ExceptionHandlerTest {
     void checkIncorrectInputWithCustomDelimNotThrowException(String input) {
         char[] splitInput = input.toCharArray();
         assertThatCode(() -> exceptionHandler.checkIncorrectInputWithCustomDelim(splitInput, ';'))
+                .doesNotThrowAnyException();
+    }
+
+    @ParameterizedTest
+    @DisplayName("커스텀 구분자로 지정할 문자에 기본 구분자를 입력하면 예외가 발생한다.")
+    @ValueSource(chars = {',', ':'})
+    void checkIncorrectDelimThrowException(char delim) {
+        assertThatThrownBy(() -> exceptionHandler.checkIncorrectDelim(delim))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @DisplayName("커스텀 구분자로 지정할 문자에 기본 구분자가 아닌것을 입력하면 예외가 발생하지 않는다.")
+    @ValueSource(chars = {'|', ';', '*'})
+    void checkIncorrectDelimNotThrowException(char delim) {
+        assertThatCode(()->exceptionHandler.checkIncorrectDelim(delim))
                 .doesNotThrowAnyException();
     }
 }
