@@ -12,11 +12,9 @@ public class Calculator {
     private static String CUSTOM_DELIMITER = "";
 
     public static int calculate(final String input) {
-        if (input.isEmpty()) throw new IllegalArgumentException("[ERROR] 올바르지 않은 입력입니다.");
+        if (input.isEmpty()) throw new IllegalArgumentException("[ERROR] 입력이 비어 있습니다. 값을 입력해 주세요.");
 
         List<String> parsedNumbers = parseNumbers(input);
-
-        if (parsedNumbers.isEmpty()) throw new IllegalArgumentException("[ERROR] 올바르지 않은 입력입니다.");
 
         return parsedNumbers.stream()
                 .mapToInt(num -> {
@@ -48,7 +46,7 @@ public class Calculator {
         CUSTOM_DELIMITER = input.substring(prefixIndex + CUSTOM_DELIMITER_PREFIX.length(), suffixIndex);
 
         if(isDuplicatedDelimiter()) throw new IllegalArgumentException("[ERROR] 중복된 구분자 지정입니다.");
-        if(isContainedDigit()) throw new IllegalArgumentException("[ERROR] 올바르지 않은 구분자 지정입니다.");
+        if(isContainedDigit()) throw new IllegalArgumentException("[ERROR] 숫자를 포함한 구분자는 지정할 수 없습니다.");
     }
 
     private static boolean isEndWithDigit(final String input) {
