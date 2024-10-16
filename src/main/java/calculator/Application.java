@@ -1,4 +1,5 @@
 package calculator;
+import calculator.domain.Calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
@@ -15,8 +16,11 @@ public class Application {
                     break;
                 }
 
-            } catch (IllegalArgumentException e) {
+                int result = Calculator.performAddition(input);
+                System.out.println("결과 : " + result);
 
+            } catch (IllegalArgumentException e) {
+                System.out.println("입력 오류 : " + e.getMessage());
             }
         }
     }
