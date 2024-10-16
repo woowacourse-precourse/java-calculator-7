@@ -45,7 +45,7 @@ class CalculatorLogicTest {
     @DisplayName("dangling 문자 구분자 사용시 숫자 추출 테스트")
     void extractDanglingNumbers() {
         String input = "1+2+3";
-        String delimiter = "+";
+        String delimiter = "\\+";
         assertThat(calculatorLogic.extractNumbers(input, delimiter)).isEqualTo(List.of(1, 2, 3));
     }
 
