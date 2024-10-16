@@ -12,7 +12,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 사용자_입력_숫자_추출() {
         String input = "1,2,3";
-        int[] result = Application.extractNumbers(input);
+        int[] result = Application.extractNumbers(input, Application.separator);
         assertThat(result).contains(1, 2, 3);
     }
 
