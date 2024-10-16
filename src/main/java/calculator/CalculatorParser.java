@@ -21,6 +21,10 @@ public class CalculatorParser {
     }
 
     private void parseCustomDelimiter(String line) {
+        if (line.length() == CUSTOM_START.length()) { // 커스텀 구분자가 없다면
+            throw new IllegalArgumentException();
+        }
+
         this.customDelimiter = line.charAt(CUSTOM_START.length()) + "";
     }
 
