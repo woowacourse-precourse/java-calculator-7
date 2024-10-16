@@ -50,4 +50,7 @@ public class Preprocessor {
         inputManager.findNoneDelimeterString(delimeter,input);
     }
 
+    public List<String> extractSumNumbers(List<String> delimeterList, String input){
+        return splitManager.extractNumbers(delimeterList,input);
+    }
 }
