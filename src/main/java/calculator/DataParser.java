@@ -17,6 +17,11 @@ public class DataParser {
         if (!inputData.contains("\\n")) {
             throw new IllegalAccessException();
         }
+        String[] splitData = inputData.split("\\\\n");
+        int count = splitData.length;
+        if (!(count == 1 || count == 2)) {
+            throw new IllegalAccessException();
+        }
     }
 
     private static char[] createSeparators(String inputData, boolean isCustom) throws IllegalAccessException {
@@ -28,8 +33,13 @@ public class DataParser {
 
     private static char[] createContents(String inputData, boolean isCustom) {
         if (isCustom) {
-            String splitData = inputData.split("\\\\n")[1];
-            return splitData.toCharArray();
+
+            String[] data = inputData.split("\\\\n");
+            if (data.length == 1) {
+                return new char[0];
+            }
+            String contents = data[1];
+            return contents.toCharArray();
         }
         return inputData.toCharArray();
     }
