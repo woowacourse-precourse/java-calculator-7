@@ -12,7 +12,6 @@ public class BasicSeparatorParser implements SeparatorParser {
 	public static final String BASIC_VALID_CUSTOM_SEPARATOR_PATTERN = "^(/{2}\\D\\\\n)+(\\d+\\D)*\\d+$";
 	private static final Pattern PATTERN = Pattern.compile(BASIC_CUSTOM_SEPARATOR_PATTERN);
 	private static final List<Character> BASIC_SEPARATORS = Arrays.asList(new Character[] {',', ':'});
-	private Matcher matcher;
 
 	private static void isValid(String expression) {
 		if (!expression.matches(BASIC_VALID_CUSTOM_SEPARATOR_PATTERN)) {
@@ -23,7 +22,7 @@ public class BasicSeparatorParser implements SeparatorParser {
 	@Override
 	public String parse(String expression, Set<Character> separators) {
 		isValid(expression);
-		matcher = PATTERN.matcher(expression);
+		Matcher matcher = PATTERN.matcher(expression);
 		separators.addAll(BASIC_SEPARATORS);
 
 		while (matcher.find()) {
