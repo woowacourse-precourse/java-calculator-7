@@ -34,4 +34,8 @@ public class CalculateCustom {
     public String getCustomSeparator(String userInput) {
         return getCustomPreToPost(userInput).replaceAll(CUSTOM_PRE+CUSTOM_POST, "");
     }
+
+    public List<String> splitWithCustom(String userInput) {
+        return List.of(userInput.split(getCustomSeparator(userInput)));
+    }
 }
