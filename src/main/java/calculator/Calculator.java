@@ -1,6 +1,8 @@
 package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.Arrays;
+
 public class Calculator {
     static String separator = ",|:";
 
@@ -10,26 +12,52 @@ public class Calculator {
      */
     public void checkCustomSeparator(String str){
         if (str.contains("//") && str.contains("\n")){
-            // 문자열 앞부분이 "//" 아닌 경우
             if(str.indexOf("//") != 0){
                 throw new IllegalArgumentException();
             }
-            // 커스텀 구분자 추출
+
             String pos = str.substring(1,str.indexOf("\n"));
-            // 추출한 커스텀 구분자를 구분자에 추가
+
             separator = separator + "|" + pos;
         }
 
     }
 
+    /**
+     * 커스텀 구분자 존재 체크
+     * @param array 구분자 기준으로 분리한 배열
+     * @return 정수 배열의 각 원소들 합
+     */
+    public int calculate(String[] array){
+        // 각 문자열을 정수로 변환하여 정수 배열 생성
+        int[] numArray = Arrays.stream(array).mapToInt(str ->
+            {
+                try {
+                    if(str.isEmpty()){
+                        return 0;
+                    }
+                    if(Integer.parseInt(str)<0){
+                        throw new IllegalArgumentException();
+                    }
+                    return Integer.parseInt(str);
+                }catch (NumberFormatException e){
+                    throw new IllegalArgumentException();
+                }
+            }).toArray();
+
+        return Arrays.stream(numArray).sum();
+    }
+
     // 시작 함수
     public void start(){
-        // 문자열 입력
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String str = Console.readLine();
 
         checkCustomSeparator(str);
 
-        String[] separateArray = str.split(separator);
+        String[] array = str.split(separator);
+
+        int result = calculate(array);
+
     }
 }
