@@ -18,13 +18,24 @@ class StringCalculator {
             return 0;
         }
         // 쉼표(,) 또는 콜론(:)을 구분자로 분리
-        String[] numbers = input.split("[,:]");
+        String delimiter = "[,:]";
+        String[] numbers = input.split(delimiter);
 
-        int sum = 0;
-        for(String number : numbers) {
-            sum += Integer.parseInt(number.trim()); // 공백 제거 후 정수 변환 및 더하기
+
+        if (input.startsWith("//")) {
+            int delimiterIndex = input.indexOf("\\n");
+            delimiter = input.substring(2, delimiterIndex);  // 커스텀 구분자 추출
+            numbers = input.substring(delimiterIndex + 2).split(delimiter);
         }
 
-        return sum;
+        return sum(numbers);
     }
-}
+
+        private int sum(String[] numbers) {
+            int sum = 0;
+            for (String number : numbers) {
+                sum += Integer.parseInt(number.trim()); // 공백 제거 후 정수 변환 및 더하기
+            }
+            return sum;
+        }
+    }
