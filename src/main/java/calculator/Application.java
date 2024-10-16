@@ -25,6 +25,22 @@ public class Application {
         return sum;
     }
 
+    public static String findSeparator(String user_input) {
+        if (user_input.substring(0, 2).equals("//") == false)
+            return user_input;
+        if (user_input.indexOf("\\n") == -1)
+            return user_input;
+
+        int i;
+        for (i = 2; i < user_input.length(); i++) {
+            if (user_input.substring(i, i + 2).equals("\\n"))
+                break;
+            separator += user_input.charAt(i);
+        }
+
+        return user_input.substring(i + 2);
+    }
+
     public static String inputByUser() {
         System.out.println("덧셈할 문자열을 입력해주세요");
         return readLine();
@@ -32,6 +48,7 @@ public class Application {
 
     public static void main(String[] args) {
         String user_input = inputByUser();
+        user_input = findSeparator(user_input);
         System.out.println(calculateValue(user_input));
     }
 }
