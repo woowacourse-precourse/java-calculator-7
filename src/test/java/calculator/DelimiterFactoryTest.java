@@ -3,7 +3,7 @@ package calculator;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import calculator.delimiter.Delimiter;
+import calculator.calculator.Delimiter;
 import calculator.delimiter.DelimiterFactory;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
