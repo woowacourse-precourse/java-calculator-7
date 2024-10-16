@@ -1,13 +1,11 @@
-package calculator;
+package calculator.service;
 
-import calculator.service.CalculatorService;
-import calculator.service.DelimiterService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class StringAddCalculatorTest {
+class CalculatorServiceTest {
 
     DelimiterService delimiterService = new DelimiterService();
     CalculatorService calculatorService = new CalculatorService(delimiterService);
