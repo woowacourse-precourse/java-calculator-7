@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,6 +20,7 @@ public class Application {
             str = getCustomSeparator(str);
         }
         System.out.println("커스텀 구분자 제거: " + str);
+        System.out.println("추출된 구분자: " + sepeartor);
 
         // 유효성 검사 & 숫자 반환
         String[] numbers = parseAndValidateNumbers(str);
@@ -34,11 +36,19 @@ public class Application {
      * @return 커스텀 구분자 지정 문자를 모두 제거한 문자열
      */
     private static String getCustomSeparator(String str) {
-        Pattern pattern = Pattern.compile("//(.*?)\\\\\\n");
+        Pattern pattern = Pattern.compile("//(.*?)\\\\n");
         Matcher matcher = pattern.matcher(str);
 
         while (matcher.find()) { //일치하는 게 있다면
-            sepeartor += "|" + matcher.group(1);
+            String customSeparator = matcher.group(1);
+
+            // 특수 문자는 정규식에서 사용되기 때문에 이스케이프 처리
+            customSeparator = customSeparator.replaceAll("([\\[\\]{}()*+?^$|])", "\\\\$1");
+
+            // 구분자에 백슬래시가 포함되어 있으면 불필요한 이스케이프 문자를 제거
+            customSeparator = customSeparator.replace("\\", "");
+
+            sepeartor += "|" + customSeparator;
             //System.out.println("추출된 구분자: " + sepeartor);
         }
 
@@ -57,6 +67,7 @@ public class Application {
     private static String[] parseAndValidateNumbers(String str) {
         //구분자를 기준으로 문자열을 분리
         String[] numbers = str.split(sepeartor);
+        System.out.println("분리된 숫자 배열: " + Arrays.toString(numbers));
 
         for (String number : numbers) {
             //각 부분이 숫자로만 이루어져 있는지 확인 (빈 문자열 무시)
