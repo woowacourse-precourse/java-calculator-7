@@ -55,8 +55,13 @@ public class Application {
         if (string.isEmpty()) {
             return 0;
         } else {
-            int number = Integer.parseInt(string);
-            return number;
+            try {
+                int number = Integer.parseInt(string);
+                return number;
+            } catch (NumberFormatException e) {
+                System.out.println("잘못된 입력입니다.");
+                throw new IllegalArgumentException();
+            }
         }
     }
 
