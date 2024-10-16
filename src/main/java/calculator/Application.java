@@ -11,5 +11,9 @@ public class Application {
         String input = Console.readLine();
 
         StringTokenizer st = new StringTokenizer(input, ",:");
+        int sum = 0;
+        while(st.hasMoreTokens()) {
+            sum += Integer.parseInt(st.nextToken());
+        }
     }
 }
