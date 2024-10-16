@@ -1,5 +1,7 @@
-package calculator.service;
+package calculator.model;
 
+import calculator.service.CalculateCustom;
+import calculator.service.CalculateDefault;
 import java.util.List;
 
 public class Calculate {
