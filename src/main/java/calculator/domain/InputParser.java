@@ -6,7 +6,6 @@ public class InputParser {
 
     private static final String CUSTOM_DELIMITER_END_SEPARATOR = "\n";
     private static final int INDEX_PUSH_RIGHT = 1;
-    private static final String INVALID_VALUE_ERROR_MESSAGE = "잘못된 값입니다.";
 
     private final Delimiter delimiter;
 
@@ -20,15 +19,15 @@ public class InputParser {
                 .split(delimiter.getAllDelimiters(input));
 
         return Arrays.stream(inputSplitCustomDelimiter)
-                .map(InputParser::parse)
+                .map(this::parse)
                 .toArray(Integer[]::new);
     }
 
-    private static int parse(final String input) {
+    private int parse(final String input) {
         try {
             return Integer.parseInt(input);
         } catch (Exception e) {
-            throw new IllegalArgumentException(INVALID_VALUE_ERROR_MESSAGE);
+            throw new IllegalArgumentException("잘못된 값입니다.");
         }
     }
 }
