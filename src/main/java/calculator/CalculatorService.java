@@ -21,4 +21,13 @@ public class CalculatorService {
 
         return readInput;
     }
+
+    public String[] splitByPositiveString(String positiveString, String customDelimiter) {
+        positiveString = positiveString.replace(",", ":");
+
+        if (!customDelimiter.isBlank())
+            positiveString = positiveString.replace(customDelimiter, ":");
+
+        return positiveString.split(":");
+    }
 }
