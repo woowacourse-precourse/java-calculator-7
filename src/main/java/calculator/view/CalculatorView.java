@@ -13,7 +13,9 @@ public class CalculatorView {
         System.out.print("결과 : " + result);
     }
 
-    public void printError(String message){
+    public void printError(String message) {
         System.out.println("에러 " + message);
+        throw new IllegalArgumentException(message);  // 예외를 실제로 던짐
     }
+
 }
