@@ -9,10 +9,13 @@ public class Application {
     public static ArrayList<String> seperatorList = new ArrayList<>(List.of(".", ":"));
 
     public static void getCustomSeperator(String input) {
-        String customSeperator = "";
+        String customSeperator;
         System.out.println("input:" + input);
         if (input.contains("\\n") && input.contains("//")) {
             customSeperator = input.substring(input.indexOf("//") + 2, input.indexOf("\\n"));
+            if (customSeperator.length() > 1) {
+                throw new IllegalArgumentException("한개의 커스텀 구분자만 추가할 수 있습니다.");
+            }
             seperatorList.add(customSeperator);
         }
     }
