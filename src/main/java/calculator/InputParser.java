@@ -7,7 +7,8 @@ import java.util.regex.Pattern;
 
 public class InputParser {
     private static final String DEFAULT_DELIMITERS = ",|:";
-    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\\\\n(.*)");
+
 
     public static List<Integer> parse(String input) {
         Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
@@ -20,7 +21,6 @@ public class InputParser {
             numbersString = matcher.group(2);
 
         }
-
 
         String[] tokens = numbersString.split(delimiters);
         List<Integer> numbers = new ArrayList<>();
