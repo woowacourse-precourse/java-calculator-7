@@ -11,6 +11,5 @@ public class Solution {
         int res = calculation.calculate(extraction.extract());
 
         System.out.println("결과 : " + res);
-
     }
 }
