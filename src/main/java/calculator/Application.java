@@ -42,7 +42,12 @@ public class Application {
                 throw new IllegalArgumentException("커스텀 구분자 선언 후 '\\n'이 필요합니다.");
             }
             String customDelimiterPart = input.substring(2, indexOfEndSign);
-            delimiterPart = "[,:]|" + Pattern.quote(customDelimiterPart);
+            String[] eachCustomDelimiters = customDelimiterPart.split("");
+
+            for (String delim : eachCustomDelimiters) {
+                delimiterPart += "|" + Pattern.quote(delim);
+            }
+
             numberPart = input.substring(indexOfEndSign + 2);
         }
 
