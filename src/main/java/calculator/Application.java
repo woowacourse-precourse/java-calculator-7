@@ -17,6 +17,11 @@ public class Application {
 
         String[] number = numbers.split(delimiter);
 
+        int[] num = new int[number.length];
+
+        for(int i = 0; i < number.length; i++) {
+            num[i] = Integer.parseInt(number[i]);
+        }
 
     }
 }
