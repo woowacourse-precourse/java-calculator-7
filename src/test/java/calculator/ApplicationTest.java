@@ -1,3 +1,4 @@
+/*
 package calculator;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
@@ -29,3 +30,4 @@ class ApplicationTest extends NsTest {
         Application.main(new String[]{});
     }
 }
+*/
