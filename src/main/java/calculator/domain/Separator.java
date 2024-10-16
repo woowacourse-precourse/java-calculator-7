@@ -1,22 +1,16 @@
 package calculator.domain;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+public class Separator {
 
-public class UserString {
-    private static final String REGEX_PATTERN = "^//(.)(\\\\n.*)";
+    private static String separators = "[,:]";
 
-    public static boolean checkCustomSeparator(String inputString){
-        return Pattern.matches(REGEX_PATTERN,inputString);
+
+    public static void addSeparator(String customSeparator){
+        separators += "|";
+        separators += customSeparator;
     }
 
-    public static String getCustomSeparator(String inputString){
-        Pattern pattern = Pattern.compile(REGEX_PATTERN);
-        Matcher matcher = pattern.matcher(inputString);
-        String separator = "";
-        if(matcher.matches()){
-            separator =  matcher.group(1);
-        }
-        return separator;
+    public static String getSeparators(){
+        return separators;
     }
 }
