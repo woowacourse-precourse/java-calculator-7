@@ -26,4 +26,18 @@ public class InputValidator {
             }
         }
     }
+
+    /**
+     * 커스텀 구분자 형식에서 구분자가 2개 이상일 경우 예외를 발생
+     */
+    public static void validateCustomLength(String input) {
+        if (input.startsWith(CUSTOM_FIRST_DELIMITER)) {
+            int delimiterEndIndex = input.indexOf(CUSTOM_SECOND_DELIMITER);
+            String customDelimiter = input.substring(2, delimiterEndIndex);
+
+            if (customDelimiter.length() > 1) {
+                throw new IllegalArgumentException(ErrorMessage.NOT_ALLOW_SEPARATOR_OVER_TWO.getMessage());
+            }
+        }
+    }
 }

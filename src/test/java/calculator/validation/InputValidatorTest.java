@@ -28,4 +28,15 @@ class InputValidatorTest {
         assertThatThrownBy(() -> InputValidator.validateCustomSecond(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("커스텀 구분자 형식에서 구분자가 2개 이상일 경우 예외를 발생")
+    @Test
+    public void validateCustomLengthTest() {
+        //given
+        String input = "// -\n1 2 3 4";
+
+        //then
+        assertThatThrownBy(() -> InputValidator.validateCustomLength(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
