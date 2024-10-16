@@ -42,7 +42,7 @@ public class CustomDividerFinder {
 
     private void validateChar(int closerIndex){
         if(closerIndex > CLOSER_INDEX){
-            throw new IllegalArgumentException("문자만 입력 가능합니다. 문자열은 불가능 합니다.");
+            throw new IllegalArgumentException("커스텀 구분자는 문자만 입력 가능합니다. 문자열은 불가능 합니다.");
         }
     }
 
