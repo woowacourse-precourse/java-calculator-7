@@ -1,10 +1,11 @@
 package calculator.learn;
 
-import calculator.domain.calculator.Prompt;
+import calculator.domain.prompt.CalculatorPrompt;
+import org.junit.jupiter.api.Test;
 
 class SpeedTest {
 
-    //@Test
+    @Test
     void compareSeparateAndDivide() {
         String data = "1,2:3,".repeat(10000);
         double separateTime = separateTime(data);
@@ -15,10 +16,8 @@ class SpeedTest {
     }
 
     private double separateTime(String data) {
-        Prompt prompt = new Prompt();
-
         long start = System.nanoTime();
-        prompt.separate(data);
+        new CalculatorPrompt(data);
         long end = System.nanoTime();
 
         return (end - start) / 1_000_000.0;
