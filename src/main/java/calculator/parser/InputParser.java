@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InputParser {
-    public static final String DEFAULT_DELIMETER_FILTER = "[,:]";
+    public static final String DEFAULT_DELIMITER_FILTER = "[,:]";
     public static final String DELIMITER_PREFIX = "//";
     public static final String DELIMITER_SUFFIX = "\\n";
 
@@ -15,7 +15,7 @@ public class InputParser {
             String numbersPart = input.substring(startIndex + 2);
             return numbersPart.split(customDelimiter);
         }
-        return input.split(DEFAULT_DELIMETER_FILTER);
+        return input.split(DEFAULT_DELIMITER_FILTER);
     }
 
     public List<Integer> toInteger(String[] elements) {
