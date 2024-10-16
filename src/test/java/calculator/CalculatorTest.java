@@ -269,4 +269,24 @@ public class CalculatorTest {
                 .hasMessage("숫자가 아닌 값이 포함되어 있습니다.");
     }
 
+    @Test
+    @DisplayName("결과를 출력한다.")
+    void 결과_출력() {
+        // Given
+        Calculator calculator = new Calculator();
+        int result = 6;
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outputStream));
+
+        // When
+        calculator.printResult(result);
+
+        // Then
+        assertThat(outputStream.toString()).isEqualTo("결과: 6\n");
+
+        // Cleanup
+        System.setOut(originalOut);
+    }
+
 }
