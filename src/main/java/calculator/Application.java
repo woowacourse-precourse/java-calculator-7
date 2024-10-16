@@ -1,14 +1,13 @@
 package calculator;
 
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class Application {
 
     public static void main(String[] args) {
 
         Set<String> delimiters = new HashSet<>(Set.of(",", ":"));
+        List<Integer> numbers = new LinkedList<>();
         Scanner scanner = new Scanner(System.in);
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = scanner.nextLine();
@@ -28,5 +27,10 @@ public class Application {
         }
 
         String[] numberTokens = input.split(String.join("|", delimiters));
+
+        for (String token : numberTokens) {
+            int number = token.isEmpty() ? 0 : Integer.parseInt(token);
+            numbers.add(number);
+        }
     }
 }
