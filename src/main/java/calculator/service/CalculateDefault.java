@@ -16,30 +16,30 @@ public class CalculateDefault {
     private static final String OR = "|";
 
     //문자열 분리 - 콜론 판단
-    public boolean checkContainColon(String userInput) {
+    public static boolean checkContainColon(String userInput) {
         return userInput.contains(COLON);
     }
 
     //문자열 분리 - 쉼표 판단
-    public boolean checkContainComma(String userInput) {
+    public static boolean checkContainComma(String userInput) {
         return userInput.contains(COMMA);
     }
 
     //문자열 분리 - 콜론
-    public List<String> splitWithColon(String userInput) {
+    public static List<String> splitWithColon(String userInput) {
         return List.of(userInput.split(COLON));
     }
 
     //문자열 분리 - 쉼표
-    public List<String> splitWithComma(String userInput) {
+    public static List<String> splitWithComma(String userInput) {
         return List.of(userInput.split(COMMA));
     }
 
-    public boolean checkContainCommaAndColon(String userInput) {
+    public static boolean checkContainCommaAndColon(String userInput) {
         return checkContainColon(userInput) && checkContainComma(userInput);
     }
 
-    public List<String> splitWithCommaAndColon(String userInput) {
+    public static List<String> splitWithCommaAndColon(String userInput) {
         return List.of(userInput.split(COMMA + OR + COLON));
     }
 }
