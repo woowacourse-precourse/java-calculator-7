@@ -54,3 +54,38 @@
 
 - `camp.nextstep.edu.missionutils` 에서 제공하는 `Console` API를 사용하여 구현해야 한다.
   - 사용자가 입력하는 값은 `camp.nextstep.edu.missionutils.Console` 의 `readLine()` 을 활용한다.
+
+  
+# 요구사항 분석, 설계 
+
+## 입력
+
+1. **"1,2:3" => 6**이 가능하다면 구분자를 여러 개 받을 수 있는 것으로 추측됨
+2. \\ \n 사이에 커스텀 구분자를 추가 할 수도 안할 수도 있음
+3. **"" => 0**을 봤을 때 입력이 없는 경우 예외처리를 해줘야 함
+   2-1. **"1" => 1**이 된다면, while loop을 돌면서 sum에 poll 되는 모든 값을 더해주는 식으로 구현 가능할 것으로 보임
+4. Java SE 프로젝트에서 IllegalArgumentException이 발생했을 때 자동으로 종료되는지 확인 필요
+5. 기본 구분자는 , : 임
+
+## 아키텍처
+
+1. 인풋, 아웃풋을 Console로 하는 것으로 추측됨
+    - MVC 패턴에서 View에 해당하는 부분을 Console input output으로 구현하면 될 것으로 보임
+2. UseCase는 MultipleUseCase 하나만 구현하면 될 것 같음
+3. 도메인은 구분자를 확인할 수 있는 전처리기, 구분자를 통해서 더해야 할 숫자를 파싱하는 파서, 숫자를 더하는 계산기로 구성되면 될 것 같음
+
+```bash
+- view
+  - ConsoleInput
+  - ConsoleOutput
+- service 
+  - MultipleService
+- controller
+  - MultipleController
+- domain
+    - MultipleUseCase
+    - Preprocessor
+    - Parser
+    - Calculator
+```
+
