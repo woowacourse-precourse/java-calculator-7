@@ -2,7 +2,6 @@ package calculator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.List;
