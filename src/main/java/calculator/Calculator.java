@@ -9,27 +9,25 @@ public class Calculator {
 
     public int calculator(String input) {
         if (DelimiterParser.isDefaultDelimiter(input)) {
-            List<Integer> listAsInteger = DelimiterParser.getNumbersAfterParsing(input);
+            String splitInput = DelimiterParser.splitInputAsString(input);
+            List<Integer> listAsInteger = DelimiterParser.getNumbersAfterParsing(splitInput);
             Validator.validateIfInputNegative(listAsInteger);
+            return listAsInteger.stream()
+                    .mapToInt(Integer::valueOf)
+                    .sum();
         }
         if (!DelimiterParser.isDefaultDelimiter(input)) {
-            List<Integer> listAsInteger = DelimiterParser.getNumbersAfterParsing(input);
-            Validator.validateIfInputNegative(listAsInteger);
             String replaceInput = input.replace("//", "")
                     .replace("\\n", "")
-                    .trim();
-            String customDelimiter = replaceInput.substring(0, 1);
-            return Arrays.stream(replaceInput.substring(1)
-                            .split(customDelimiter))
-                    .mapToInt(Integer::parseInt)
+                    .trim(); // ;1;2;3
+            String customDelimiter = replaceInput.substring(0, 1);// 구분자 ;
+            String splitString = Arrays.toString(replaceInput.substring(1).split(customDelimiter));
+            String splitInput = DelimiterParser.splitInputAsString(splitString);
+            List<Integer> listAsInteger = DelimiterParser.getNumbersAfterParsing(splitInput);
+            return listAsInteger.stream()
+                    .mapToInt(Integer::valueOf)
                     .sum();
         }
         return 0;
-        /*if (input.isEmpty()) {
-            return 0;
-        }
-        if (input.length() == 1) {
-            return Integer.parseInt(input);
-        }*/
     }
 }
