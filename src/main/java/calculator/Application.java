@@ -11,6 +11,9 @@ public class Application {
         String input = getInput();
         String[] strings = splitInput(input);
         int[] numbers = parseToIntArray(strings);
+        int result = calculateSum(numbers);
+
+        System.out.println("결과 : " + result);
     }
 
     public static String getInput() {
@@ -55,5 +58,15 @@ public class Application {
             int number = Integer.parseInt(string);
             return number;
         }
+    }
+
+    private static int calculateSum(int[] numbers) {
+        int sum = 0;
+
+        for (int number : numbers) {
+            sum += number;
+        }
+
+        return sum;
     }
 }
