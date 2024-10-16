@@ -1,7 +1,5 @@
 package calculator.dto;
 
-import java.util.Arrays;
-
 public class Data {
 
     private final char[] separators;
@@ -18,13 +16,5 @@ public class Data {
 
     public char[] getContents() {
         return contents;
-    }
-
-    @Override
-    public String toString() {
-        return "Data{" +
-                "separators=" + Arrays.toString(separators) +
-                ", contents=" + Arrays.toString(contents) +
-                '}';
     }
 }
