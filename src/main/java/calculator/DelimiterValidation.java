@@ -3,7 +3,7 @@ package calculator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class InputValidation {
+public class DelimiterValidation {
 
     // 기본 구분자 검증 함수
     private static String[] validateDefaultDelimiter(String formula) {

@@ -31,7 +31,7 @@ public class Calculator {
     public static void run() {
         String formula = input();   // 사용자 입력
         distinctionDelimiter(formula);    // 기본 구분자, 커스텀 구분자 구분하기
-        String[] refineFormula = InputValidation.validateDelimiter(isCustomDelimiter, formula);
+        String[] refineFormula = DelimiterValidation.validateDelimiter(isCustomDelimiter, formula); // 구분자 검증 함수
         int result = sum(refineFormula[0], refineFormula[1]);   // 덧셈 구하는 함수
         System.out.println("결과 : " + result);
     }
