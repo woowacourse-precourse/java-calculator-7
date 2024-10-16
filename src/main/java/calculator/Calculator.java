@@ -19,6 +19,7 @@ public class Calculator {
         parseInput();
         validateNumbers();
         addNumbers();
+        printResult();
     }
 
     private static void setInput(String inputValue) {
@@ -58,5 +59,9 @@ public class Calculator {
         for (String number : numbers) {
             sum += Integer.parseInt(number);
         }
+    }
+
+    private static void printResult() {
+        System.out.println("결과 : " + sum);
     }
 }
