@@ -33,6 +33,26 @@ public class Application {
                 System.out.println("결과 : " + sum);
                 break;
             }
+
+            // 커스텀 구분자 처리
+            if (input.contains("//")) {
+                int start = input.lastIndexOf("/");
+                int end = input.indexOf("\\n");
+                String separator = input.substring(start + 1, end);
+                String part = input.split("n")[1];
+
+                // 파이프(|) 문자 처리
+                if ("|".equals(separator)) {
+                    separator = "\\|";
+                }
+
+                String[] numbers = part.split(separator);
+                for (String number : numbers) {
+                    sum += Integer.parseInt(number);
+                }
+                System.out.print("결과 : " + sum);
+                break;
+            }
         }
     }
 
