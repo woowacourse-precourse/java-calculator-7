@@ -22,7 +22,8 @@ class InputDataTest {
     @DisplayName("마지막 입력 값이 숫자가 아니면 예외가 발생한다")
     void checkLastInputIsNotDigit(String input){
         assertThatThrownBy(()->inputData.validate(input))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[F0001]");
     }
 
     @ParameterizedTest
@@ -38,7 +39,8 @@ class InputDataTest {
     @DisplayName("입력 값의 처음이 / 나 숫자가 아니면 예외가 발생한다")
     void checkStartInputIsInvalid(String input){
         assertThatThrownBy(()->inputData.validate(input))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[F0002]");
     }
 
     @ParameterizedTest

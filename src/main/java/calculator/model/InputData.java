@@ -18,11 +18,11 @@ public class InputData {
         Matcher startMatcher = startPattern.matcher(input);
 
         if(!endMatcher.matches()){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("[ERROR][F0001] 마지막 입력값은 숫자여야 합니다.");
         }
 
         if(!startMatcher.matches()){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("[ERROR][F0002] 시작 입력값은 슬래시(/)나 숫자여야 합니다.");
         }
     }
 }
