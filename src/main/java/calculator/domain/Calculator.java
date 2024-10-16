@@ -10,4 +10,8 @@ public class Calculator {
                 .mapToInt(Integer::parseInt)
                 .sum();
     }
+
+    private static boolean isValidNumberString(List<String> numbers) {
+        return numbers.stream().allMatch(num -> num.matches("\\d+"));
+    }
 }
