@@ -6,7 +6,7 @@ public class SplitManager {
 
     public List<String> discardBlankSpace(List<String> input){
         input.removeIf(String::isBlank);
-        return input
+        return input;
     }
 
 
