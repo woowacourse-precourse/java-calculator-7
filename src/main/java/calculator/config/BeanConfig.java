@@ -45,6 +45,14 @@ public class BeanConfig {
         if (registeredBeans.containsKey(clazz)) {
             return;
         }
+        //빈이 아닌 클래스가 들어오면 예외 처리
+        if (!abstractToConcreteClassMap.containsKey(clazz)) {
+            throw BeanCreationException.from(BeanErrorMessage.INVALID_BEAN_ERROR);
+        }
+        // 순환 참조에 대한 예외 처리
+        if (beansInCreation.contains(clazz)) {
+            throw BeanCreationException.from(BeanErrorMessage.CIRCULAR_REFERENCE_DETECTED);
+        }
 
         beansInCreation.add(clazz); // 클래스 등록 과정 시작
 
