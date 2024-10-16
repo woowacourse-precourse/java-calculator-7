@@ -11,14 +11,15 @@ public class Application {
 
         String[] userInputNumbers = calculator.splitInput(userInput);
 
-        for (String userInputNumber : userInputNumbers) {
-            System.out.println(userInputNumber);
-        }
+        int result = calculator.sumInput(userInputNumbers);
+
+        System.out.println("결과 : " + result);
     }
 }
 
 //계산을 수행하는 클래스 분리
 class Calculator {
+    //  사용자의 입력을 구분자오 파싱하는 메서드
     public String[] splitInput(String userInput) {
         String delimiter = ",|:"; // 기본 구분자
         int customDelimiterIndex;
@@ -32,5 +33,13 @@ class Calculator {
 
         return userInput.split(delimiter);
     }
-    
+
+    //문자열에서 구분한 숫자를 더하는 메서드
+    public int sumInput(String[] userInputNumbers) {
+        int sum = 0;
+        for (String userInputNumber : userInputNumbers) {
+            sum += Integer.parseInt(userInputNumber);
+        }
+        return sum;
+    }
 }
