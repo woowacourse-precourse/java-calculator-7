@@ -21,6 +21,7 @@ public class CalculatorController {
     public void run() {
         String str = inputView.inputString();
         stringSeparator.divideSeparator(str);
+        System.out.println(calculator.getNumbers());
         outputView.outputResult(calculator);
     }
 }

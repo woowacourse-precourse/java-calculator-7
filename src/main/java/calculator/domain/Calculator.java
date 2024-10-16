@@ -10,7 +10,7 @@ public class Calculator {
 
     public Calculator() {
         this.separators.add(",");
-        this.separators.add(";");
+        this.separators.add(":");
     }
 
     public void addSeparator(String separator) {

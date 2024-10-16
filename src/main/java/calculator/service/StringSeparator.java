@@ -17,7 +17,7 @@ public class StringSeparator {
         String divide = "";
         for (int i = 0; i < str.length(); i++) {
             System.out.println(str.charAt(i));
-            if (str.charAt(i) >= '0' && str.charAt(i) <= '9') {
+            if (isNumber(str.charAt(i))) {
                 if (!divide.isEmpty()) {
                     if (divide.charAt(0) != '/' || divide.charAt(1) != '/' || divide.charAt(divide.length() - 1) != 'n'|| divide.charAt(divide.length() - 2) != '\\'
                     || divide.length() < 5) {
@@ -33,12 +33,23 @@ public class StringSeparator {
                 if (calculator.getSeparators().contains(String.valueOf(str.charAt(i)))) {
                     if (!number.isEmpty()) {
                         calculator.addNumber(Integer.parseInt(number));
+                        number = "";
                     }
                 } else {
                     divide += str.charAt(i);
                 }
             }
         }
+        if (!number.isEmpty()) {
+            calculator.addNumber(Integer.parseInt(number));
+        }
+    }
+
+    private boolean isNumber(char ch) {
+        if (ch >= '0' && ch <= '9') {
+            return true;
+        }
+        return false;
     }
 
 }
