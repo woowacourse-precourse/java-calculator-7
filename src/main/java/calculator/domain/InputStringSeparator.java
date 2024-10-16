@@ -1,6 +1,8 @@
 package calculator.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class InputStringSeparator {
     private String inputString;
@@ -44,7 +46,7 @@ public class InputStringSeparator {
         if (isCustomSeparatorContained) {
             startIndex = inputString.indexOf("//") + 2;
             lastIndex = inputString.indexOf("\\n");
-            this.customSeparator = inputString.substring(startIndex, lastIndex); //커스텀 구분자는 그럼 한 개만인가?
+            this.customSeparator = inputString.substring(startIndex, lastIndex);
         }
     }
 
@@ -84,7 +86,8 @@ public class InputStringSeparator {
         }
     }
 
-    public ArrayList<Integer> getInputNumber() {
-        return this.inputNUmberInt;
+    public List<Integer> getInputNumber() {
+        return Collections.unmodifiableList(inputNUmberInt);
     }
+
 }
