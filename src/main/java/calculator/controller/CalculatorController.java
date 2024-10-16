@@ -7,25 +7,25 @@ public class CalculatorController {
     private final InputView inputView;
     private final OutputView outputView;
 
-    public CalculatorController(InputView inputView, OutputView outputView){
+    public CalculatorController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
     }
 
-    public void proceed(){
+    public void proceed() {
         String userInput = inputView.inputUserString();
-        if(userInput.equals("")){
+        if (userInput.isEmpty()) {
             outputView.printResult(0);
         }
-        int result = calculateStringRemainder(DelimiterSeparator.registerDelimiter(userInput),userInput);
+        int result = calculateStringRemainder(DelimiterSeparator.registerDelimiter(userInput), userInput);
         outputView.printResult(result);
     }
 
-    public int calculateStringRemainder(int index, String userInput){
+    public int calculateStringRemainder(int index, String userInput) {
         boolean isPreviousValueNumeric = false;
         int sum = 0;
-        for(String str:userInput.substring(index).split("")){
-            if(isPreviousValueNumeric){
+        for (String str : userInput.substring(index).split("")) {
+            if (isPreviousValueNumeric) {
                 DelimiterSeparator.validateDelimiter(str);
                 isPreviousValueNumeric = false;
                 continue;
@@ -36,8 +36,8 @@ public class CalculatorController {
         return sum;
     }
 
-    public int extractNumber(String str){
-        if(!NumberChecker.isNumber(str)){
+    public int extractNumber(String str) {
+        if (!NumberChecker.isNumber(str)) {
             throw new IllegalArgumentException("잘못된 형식입니다.");
         }
         return Integer.parseInt(str);
