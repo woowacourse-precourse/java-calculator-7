@@ -32,6 +32,10 @@ public class Application {
             }
         }
 
+        if(input.isEmpty()) {
+            sum = 0;
+        }
+
         System.out.println("결과 : " + sum);
     }
 }
