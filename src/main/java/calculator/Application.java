@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+// //;\\n1//]\\n1-
 public class Application {
     static String sepeartor = ",|:";
 
@@ -14,13 +15,16 @@ public class Application {
         String str = Console.readLine();
 
         // 커스텀 구분자
-        boolean isCustomSeparator = false;
         if (str.contains("//") && str.contains("\\n")) {
-            isCustomSeparator = getCustomSeparator(str);
+            getCustomSeparator(str);
+
+            //커스텀 구분자를 위한 문자 제거
+            str = str.replaceAll("//", "");
+            str = str.replaceAll("\\\\n", "");
         }
 
-        // 숫자 추출
-        str = getNumbers(str);
+        // 유효성 검사 & 숫자 반환
+        String[] numbers = parseAndValidateNumbers(str);
 
         // 결과 출력
         System.out.println("결과 : " + str);
@@ -32,22 +36,32 @@ public class Application {
      * @param str 입력받은 문자열
      * @return 커스텀 구분자의 유무
      */
-    private static boolean getCustomSeparator(String str) {
+    private static void getCustomSeparator(String str) {
         Pattern pattern = Pattern.compile("//(.*?)\\\\n");
         Matcher matcher = pattern.matcher(str);
 
-        boolean found = false;
-
         while (matcher.find()) { //일치하는 게 있다면
-            found = true;
-
             sepeartor += "|" + matcher.group(1);
             //System.out.println("추출된 구분자: " + sepeartor);
         }
-        return found;
     }
 
-    private static String getNumbers(String str) {
-        return str;
+    /**
+     * 입력한 문자열의 유효성을 검사하고 유효하다면 숫자로된 문자열 배열 반환
+     *
+     * @param str 커스텀 구분자를 나타내는 문자를 제거한 문자열
+     * @return 숫자 문자열 배열
+     */
+    private static String[] parseAndValidateNumbers(String str) {
+        //구분자를 기준으로 문자열을 분리
+        String[] numbers = str.split(sepeartor);
+
+        for (String number : numbers) {
+            //각 부분이 숫자로만 이루어져 있는지 확인 (빈 문자열 무시)
+            if (!number.trim().isEmpty() && !number.matches("\\d+")) {
+                throw new IllegalArgumentException("잘못된 입력입니다. ");
+            }
+        }
+        return numbers;
     }
 }
