@@ -57,4 +57,14 @@ class ApplicationTest {
 
         assertEquals(input, "1,1,5");
     }
+    @Test
+    void removeSeparators_case1() {
+        String input = "1,12:3;4";
+        char customSeparator = ';';
+
+        String[] removedSeparatorsArray = app.removeSeparators(input, customSeparator);
+
+        String[] expectedArray = {"1", "12", "3", "4"};
+        assertArrayEquals(expectedArray, removedSeparatorsArray);
+    }
 }

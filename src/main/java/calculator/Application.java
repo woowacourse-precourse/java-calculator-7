@@ -7,6 +7,12 @@ import java.util.List;
 
 public class Application {
 
+    public String[] removeSeparators(String removedDeclarePart, Character customSeparator) {
+        String regex = "[,|:|" + customSeparator + "]";
+        String[] removedSeparatorsArray = removedDeclarePart.split(regex);
+
+        return removedSeparatorsArray;
+    }
 
     public String removeDeclarePart(String input, Character customSeparator) {
         if (customSeparator == null) {
@@ -35,6 +41,7 @@ public class Application {
     public int calculateSum(String input) {
         Character customSeparator = extractCustomSeparator(input);
         String removedDeclarePart = removeDeclarePart(input, customSeparator);
+        String[] removedSeparatorsArray = removeSeparators(removedDeclarePart, customSeparator);
         return 0;
     }
 
