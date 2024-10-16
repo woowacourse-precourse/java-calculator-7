@@ -2,7 +2,6 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
-
 public class Application {
     public static void main(String[] args) {
         StringCalculator calculator = new StringCalculator();
@@ -18,6 +17,14 @@ class StringCalculator {
         if (input.isEmpty()) {
             return 0;
         }
-        return 1; // 빈문자열이 아닐 떄 임시 리턴값
+        // 쉼표(,) 또는 콜론(:)을 구분자로 분리
+        String[] numbers = input.split("[,:]");
+
+        int sum = 0;
+        for(String number : numbers) {
+            sum += Integer.parseInt(number.trim()); // 공백 제거 후 정수 변환 및 더하기
+        }
+
+        return sum;
     }
 }
