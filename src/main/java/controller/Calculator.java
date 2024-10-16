@@ -20,6 +20,7 @@ public class Calculator {
         String separators = new Separators(inputValue).getSeparators();
         List<Integer> numbers = new Numbers(inputValue, separators).getNumbers();
         int result = sum(numbers);
+        OutputView.printResult(result);
     }
 
     private int sum(final List<Integer> numbers) {
