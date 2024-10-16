@@ -1,9 +1,5 @@
 package calculator;
 
-import calculator.domain.calculator.Calculator;
-import calculator.domain.view.InputView;
-import calculator.domain.view.OutputView;
-import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
