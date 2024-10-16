@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.exception.SeparatorNotExistException;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
@@ -46,6 +47,14 @@ class ApplicationTest extends NsTest {
         InputStringProcessor inputStringProcessor = new InputStringProcessor();
         Character separator = inputStringProcessor.getSeparator(firstFiveCharacters);
         assertThat(separator).isEqualTo('+');
+    }
+
+    @Test
+    void 자른_5글자가_유효한_커스텀_구분자를_포함하는지_확인하고_형식이_맞지않아_예외가_발생하는_테스트() {
+        String firstFiveCharacters = "/*8/n";
+        InputStringProcessor inputStringProcessor = new InputStringProcessor();
+        assertThatThrownBy(() -> inputStringProcessor.getSeparator(firstFiveCharacters))
+            .isInstanceOf(SeparatorNotExistException.class);
     }
 
 
