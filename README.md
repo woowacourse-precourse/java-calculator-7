@@ -18,15 +18,11 @@
 
 ## 시작하기
 
----
-
 레포지토리를 Clone 하고 IDE에서 애플리케이션을 실행합니다.
 
 ```git
 git clone -b as --single-branch https://github.com/ruudska6/java-calculator-7
 ```
-
----
 
 ## 기능 목록
 
