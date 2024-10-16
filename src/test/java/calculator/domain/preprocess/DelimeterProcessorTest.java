@@ -32,5 +32,10 @@ class DelimeterProcessorTest {
         assertEquals(e.getMessage(),"구분자로 사용할 문자가 두 글자 이상");
     }
 
-
+    @Test
+    @DisplayName("한 글자의 경우 예외 없음")
+    void right_custom_delimeter(){
+        assertDoesNotThrow(
+                ()->delimeterProcessor.validateCutomDelimeterRequest("//;\n2,3,4"));
+    }
 }
