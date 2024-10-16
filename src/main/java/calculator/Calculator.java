@@ -8,10 +8,16 @@ public class Calculator {
         User user = new User();
         String userInput = user.inputString();
 
-        int[] basicNumberSeparator = getBasicSeparatorNumbers(userInput);
-
-        for (int i : basicNumberSeparator) {
-            result += i;
+        if(!userInput.contains("//") || userInput.contains("\n")) {
+            int[] basicNumberSeparator = getBasicSeparatorNumbers(userInput);
+            for (int i : basicNumberSeparator) {
+                result += i;
+            }
+        }else{
+            int[] customNumberSeparator = getCustomSeparatorNumbers(userInput);
+            for (int i : customNumberSeparator) {
+                result += i;
+            }
         }
 
         System.out.println("결과 : " + result);
