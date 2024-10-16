@@ -2,8 +2,6 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
-import java.util.Arrays;
-
 public class Application {
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -22,7 +20,7 @@ class Calculator {
         this.s = s;
     }
 
-    public void run(){
+    public void run() {
         //hasPlusSeparator:추가 구분자가 있는가?
         boolean hasPlusSeparator = checkPlusSeparator();
         //List 형태로 숫자가 분해.
@@ -30,8 +28,9 @@ class Calculator {
         //숫자가 아닌 것이 남아 있는지 확인. 여기서 통과 여부는 throw 가 안되면 통과임.
         hasNaN(separatedStringArr);
         //숫자를 합한 뒤 출력
-        System.out.println("결과 : "+sum(separatedStringArr));
+        System.out.println("결과 : " + sum(separatedStringArr));
     }
+
     private boolean checkPlusSeparator() {
         //추가 구분자가 있으려면 문자열 길이가 최소 5글자는 넘어야 됨.
         //추가 구분자는 //로 시작함.
@@ -45,27 +44,32 @@ class Calculator {
         }
         return false;
     }
-    private String[] separate(boolean hasPlusSeparator){
-        if(!hasPlusSeparator){
+
+    private String[] separate(boolean hasPlusSeparator) {
+        if (!hasPlusSeparator) {
             return s.split("[:,]");
-        }else{
-            if(plusSeparator.equals("\\"))
-                return s.split("[:,"+plusSeparator.repeat(2)+"]");
-            return s.split("[:,"+plusSeparator+"]");
+        } else {
+            if (plusSeparator.equals("\\")) {
+                return s.split("[:," + plusSeparator.repeat(2) + "]");
+            }
+            return s.split("[:," + plusSeparator + "]");
         }
     }
+
     //숫자가 아닌 문자를 발견할 경우 throw new IllegalArgumentException(); 해버림
-    private void hasNaN(String[] separatedStringArr){
-        for(String s:separatedStringArr){
-            for(char c:s.toCharArray()){
-                if(c < 48 || c > 57)
+    private void hasNaN(String[] separatedStringArr) {
+        for (String s : separatedStringArr) {
+            for (char c : s.toCharArray()) {
+                if (c < 48 || c > 57) {
                     throw new IllegalArgumentException();
+                }
             }
         }
     }
-    private int sum(String[] separatedStringArr){
+
+    private int sum(String[] separatedStringArr) {
         int sum = 0;
-        for(String separatedString:separatedStringArr){
+        for (String separatedString : separatedStringArr) {
             sum += Integer.parseInt(separatedString);
         }
         return sum;
