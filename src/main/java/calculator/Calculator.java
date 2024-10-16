@@ -5,14 +5,14 @@ import java.util.regex.Pattern;
 
 public class Calculator {
 
-    private final SeparationProcessor separationProcessor;
-    private final Pattern customSeparationCmdPattern;
-    private final int customSeparationIdx;
+    private final SeparatorProcessor separatorProcessor;
+    private final Pattern customSeparatorCmdPattern;
+    private final int customSeparatorIdx;
 
     public Calculator (){
-        this.separationProcessor = new SeparationProcessor(',', ':');
-        this.customSeparationCmdPattern = Pattern.compile("^(\\/\\/.\\\\n)");
-        this.customSeparationIdx = 2;
+        this.separatorProcessor = new SeparatorProcessor(',', ':');
+        this.customSeparatorCmdPattern = Pattern.compile("^(\\/\\/.\\\\n)");
+        this.customSeparatorIdx = 2;
     }
 
     public int sum(String cmd){
@@ -20,17 +20,17 @@ public class Calculator {
             return 0;
         }
 
-        Matcher matcher = customSeparationCmdPattern.matcher(cmd);
-        boolean containsCustomSeparationCmd = matcher.find();
-        if(containsCustomSeparationCmd){
-            registerCustomSeparation(matcher);
+        Matcher matcher = customSeparatorCmdPattern.matcher(cmd);
+        boolean containsCustomSeparatorCmd = matcher.find();
+        if(containsCustomSeparatorCmd){
+            registerCustomSeparator(matcher);
 
             // 구분자 등록에 사용됐던 명령어 제거
             cmd = cmd.replace(matcher.group(), "");
         }
 
         int result = 0;
-        String[] rawNumbers = separationProcessor.split(cmd);
+        String[] rawNumbers = separatorProcessor.split(cmd);
         for(String rawNum : rawNumbers){
             result += Integer.parseInt(rawNum);
         }
@@ -38,8 +38,8 @@ public class Calculator {
         return result;
     }
 
-    private void registerCustomSeparation(Matcher matcher){
-        Character customSeparation = matcher.group().charAt(customSeparationIdx);
-        separationProcessor.addSeparation(customSeparation);
+    private void registerCustomSeparator(Matcher matcher){
+        Character customSeparator = matcher.group().charAt(customSeparatorIdx);
+        separatorProcessor.addSeparator(customSeparator);
     }
 }
