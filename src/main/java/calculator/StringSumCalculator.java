@@ -1,18 +1,20 @@
 package calculator;
 
 import calculator.view.InputView;
+import calculator.view.OutputView;
 
 import java.util.List;
+
 
 public class StringSumCalculator {
 
     public void run() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        OutputView.startingMessage();
         String inputValue = InputView.getInputValue();
         IntegersExtractor integersExtractor = new IntegersExtractor();
         List<Integer> integers = integersExtractor.extractIntegers(inputValue);
-        int sum = getSum(integers);
-        System.out.println("결과 : " + sum);
+        int result = getSum(integers);
+        OutputView.showResultMessage(result);
     }
 
     private int getSum(List<Integer> integers) {
