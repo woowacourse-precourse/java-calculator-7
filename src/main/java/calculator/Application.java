@@ -28,13 +28,12 @@ public class Application {
             throw new IllegalArgumentException("입력 값이 올바르지 않습니다.");
         }
 
-        List<Integer> values = Arrays.stream(inputText.split(delimiterRegex))
-                .map(Integer::parseInt).toList();
-        Integer sum = 0;
-
-        for (Integer value : values)
-            sum += value;
+        Integer sum = Arrays.stream(inputText.split(delimiterRegex))
+                .map(Integer::parseInt)
+                .reduce(Integer::sum)
+                .orElse(0);
 
         System.out.printf("결과 : %d\n", sum);
+
     }
 }
