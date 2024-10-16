@@ -4,7 +4,7 @@ import java.util.List;
 
 public class CalculateSeparator {
 
-    public static boolean checkContainSeparator(String userInput, String separator) {
+    public static boolean checkNotContainSeparator(String userInput, String separator) {
         return !userInput.contains(separator);
     }
 

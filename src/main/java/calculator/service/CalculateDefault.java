@@ -8,7 +8,7 @@ public class CalculateDefault extends CalculateSeparator {
     private static final String COMMA = ",";
     private static final String OR = "|";
 
-    public static boolean checkContainDefault(String userInput) {
+    public static boolean checkNotContainDefault(String userInput) {
         return checkContainSeparator(userInput, COLON) || checkContainSeparator(userInput, COMMA);
     }
 
