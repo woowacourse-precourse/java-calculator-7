@@ -12,6 +12,8 @@ public class Calculator {
     private static String CUSTOM_DELIMITER = "";
 
     public static int calculate(final String input) {
+        if (input.isEmpty()) throw new IllegalArgumentException("[ERROR] 올바르지 않은 입력입니다.");
+
         List<String> parsedNumbers = parseNumbers(input);
 
         if (parsedNumbers.isEmpty()) throw new IllegalArgumentException("[ERROR] 올바르지 않은 입력입니다.");
