@@ -1,15 +1,11 @@
 package calculator;
 
-public class Calculator {
+import calculator.io.ConsoleInput;
+import calculator.io.ConsoleOutput;
 
-    private final ConsoleInput consoleInput = new ConsoleInput();
-    private final ConsoleOutput consoleOutput = new ConsoleOutput();
-    private final Validator validator = new Validator();
 
-    public void run(){
-        consoleOutput.showFirstComments();
-        String inputString = consoleInput.getUserInput();
-        validator.isCustom(inputString);
-        consoleOutput.showResult(6);
-    }
+public interface Calculator {
+
+    int calculate(String inputString);
+
 }

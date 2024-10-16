@@ -1,12 +1,12 @@
-package calculator;
+package calculator.io;
 
 public class ConsoleOutput {
 
-    public void showFirstComments(){
+    public void printFirstComments(){
         System.out.println("덧셈할 문자열을 입력해 주세요.");
     }
 
-    public void showResult(int result){
+    public void printResult(int result){
         System.out.println("결과 : " + result);
     }
 }
