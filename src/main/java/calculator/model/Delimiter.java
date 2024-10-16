@@ -6,7 +6,7 @@ import java.util.Set;
 public class Delimiter {
     private static Set<Character> delimiterSet = new HashSet<>();
 
-    public Delimiter(){
+    static {
         delimiterSet.add(',');
         delimiterSet.add(':');
     }

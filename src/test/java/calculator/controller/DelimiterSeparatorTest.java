@@ -2,8 +2,7 @@ package calculator.controller;
 
 import org.junit.jupiter.api.Test;
 
-import static calculator.controller.DelimiterSeparator.registerDelimiter;
-import static calculator.controller.DelimiterSeparator.specifyingDelimiter;
+import static calculator.controller.DelimiterSeparator.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DelimiterSeparatorTest {
@@ -47,4 +46,29 @@ public class DelimiterSeparatorTest {
         assertEquals(4, result);
     }
 
+    @Test
+    public void 구분자_에러() {
+        String userInput = "3";
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            validateDelimiter(userInput);
+        });
+        assertEquals("잘못된 형식입니다.", exception.getMessage());
+    }
+
+    @Test
+    public void 구분자_에러2() {
+        String userInput = "[";
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            validateDelimiter(userInput);
+        });
+        assertEquals("잘못된 형식입니다.", exception.getMessage());
+    }
+
+    @Test
+    public void 올바른_구분자() {
+        String userInput = ":";
+        assertDoesNotThrow(() -> {
+            validateDelimiter(userInput);
+        });
+    }
 }
