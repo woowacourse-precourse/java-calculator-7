@@ -33,7 +33,8 @@ public class Application {
             try {
                 arrayInts[i] = Integer.parseInt(arrayStrings[i]);
             } catch (NumberFormatException ex) {
-                throw new IllegalArgumentException();
+                System.out.println("\"" + input + "\"" + "은(는) 유효하지 않은 입력값입니다.");
+                throw new IllegalArgumentException("\"" + input + "\"" + "은(는) 유효하지 않은 입력값입니다.", ex);
             }
         }
         return arrayInts;
@@ -41,8 +42,9 @@ public class Application {
 
     public static void checkValidity(int[] arrayInts) {
         for (int arrayInt : arrayInts) {
-            if (arrayInt < 0) {
-                throw new IllegalArgumentException();
+            if (arrayInt <= 0) {
+                System.out.println("유효하지 않은 입력값입니다.");
+                throw new IllegalArgumentException(arrayInt + "은(는) 유효하지 않은 입력값입니다. (expected)");
             }
 
         }
