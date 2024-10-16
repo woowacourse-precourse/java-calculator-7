@@ -40,10 +40,11 @@ class ApplicationTest extends NsTest {
 
         //when
         ParsingInputString parsingInputString = new ParsingInputString();
-        List<Integer> integers = parsingInputString.parsingInput(inputString);
+        List<String> numberStringList = parsingInputString.parsingInput(inputString);
+        List<Integer> numberList = parsingInputString.getNumberList(inputString, numberStringList);
 
         //then
-        assertThat(integers).isEqualTo(List.of(12, 3, 4, 6));
+        assertThat(numberList).isEqualTo(List.of(12, 3, 4, 6));
         assertThat(inputString.getNumberList()).isEqualTo(List.of(12, 3, 4, 6));
     }
 

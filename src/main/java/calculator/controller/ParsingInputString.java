@@ -27,20 +27,15 @@ public class ParsingInputString {
         }
     }
 
-    public List<Integer> parsingInput(InputString inputString) {
+    public List<String> parsingInput(InputString inputString) {
         String splitString = "[,:" + inputString.getCustomChar() + "]";
-        String input = inputString.getInput();
-
-        if (Validation.VerifyStringEmpty(input)) {
-            inputString.setNumberList(List.of(0));
-            return List.of(0);
-        }
-
-        List<String> numberStringList = Arrays.stream(input.split(splitString))
+        List<String> numberStringList = Arrays.stream(inputString.getInput().split(splitString))
             .toList();
-
         Validation.VerifyInput(numberStringList);
+        return numberStringList;
+    }
 
+    public List<Integer> getNumberList(InputString inputString, List<String> numberStringList) {
         List<Integer> numberList = new ArrayList<>();
         for (String s : numberStringList) {
             numberList.add(Integer.valueOf(s));

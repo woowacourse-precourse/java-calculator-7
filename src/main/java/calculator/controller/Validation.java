@@ -16,8 +16,4 @@ public class Validation {
             }
         }
     }
-
-    public static boolean VerifyStringEmpty(String input) {
-        return input.isEmpty();
-    }
 }
