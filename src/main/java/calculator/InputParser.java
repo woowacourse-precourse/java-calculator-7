@@ -18,7 +18,9 @@ public class InputParser {
             String customDelimiter = Pattern.quote(matcher.group(1));
             delimiters = DEFAULT_DELIMITERS + "|" + customDelimiter;
             numbersString = matcher.group(2);
+
         }
+
 
         String[] tokens = numbersString.split(delimiters);
         List<Integer> numbers = new ArrayList<>();
