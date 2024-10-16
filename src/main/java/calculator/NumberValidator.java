@@ -5,11 +5,12 @@ import java.util.List;
 public class NumberValidator {
     public void validate(List<String> splitNumber) {
         for (String candidate : splitNumber) {
-            validParseNumber(candidate);
+            validateParseNumber(candidate);
+            validatePositiveNumber(candidate);
         }
     }
 
-    private void validParseNumber(String number) {
+    private void validateParseNumber(String number) {
         if (number.isBlank()) {
             return;
         }
@@ -18,6 +19,12 @@ public class NumberValidator {
             Double.parseDouble(number);
         } catch (NumberFormatException exception) {
             throw new IllegalArgumentException("숫자를 입력해주세요.");
+        }
+    }
+
+    private void validatePositiveNumber(String number) {
+        if (Double.parseDouble(number) < 0) {
+            throw new IllegalArgumentException("양수를 입력해주세요.");
         }
     }
 }
