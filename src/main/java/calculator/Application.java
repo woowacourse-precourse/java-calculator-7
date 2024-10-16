@@ -26,6 +26,7 @@ public class Application {
             System.out.println("결과 : " + sum);
         } catch (IllegalArgumentException e) {
             System.out.println("사용자가 잘못된 값을 입력했습니다."); // IllegalArgumentException 후 종료
+            throw e;
         }
     }
 
