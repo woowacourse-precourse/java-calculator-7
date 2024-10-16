@@ -12,6 +12,10 @@ public class Spliterator {
     }
 
     public String[] split(String input, String extraRegex) {
-        return input.split(extraRegex.isBlank() ? defaultRegex : defaultRegex + "|" + extraRegex);
+        return input.split(extraRegex.isBlank() ? defaultRegex : addCustomRegex(extraRegex));
+    }
+
+    private String addCustomRegex(String extraRegex) {
+        return defaultRegex + "|" + extraRegex;
     }
 }
