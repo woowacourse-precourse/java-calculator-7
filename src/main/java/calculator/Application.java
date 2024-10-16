@@ -7,12 +7,8 @@ public class Application {
         StringCalculator calculator = new StringCalculator();
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
-        try {
-            int result = calculator.calculate(input);
-            System.out.println("결과 : " + result);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage()); // 예외 메시지 출력
-        }
+        int result = calculator.calculate(input);
+        System.out.println("결과 : " + result);
     }
 }
 
@@ -41,11 +37,18 @@ class StringCalculator {
             for (String number : numbers) {
                 String trimmedNumber = number.trim();
 
+                //숫자 아닌 문자면 예외처리
                 if(!isNumeric(trimmedNumber)){
-                    throw new IllegalArgumentException("입력 값에 숫자가 아닌 값이 포함되어 있습니다: " + trimmedNumber);
+                    throw new IllegalArgumentException();
+                }
+                int num = Integer.parseInt(trimmedNumber);
+
+                // 음수면 예외처리
+                if(num < 0){
+                    throw new IllegalArgumentException();
                 }
 
-                sum += Integer.parseInt(number.trim()); // 공백 제거 후 정수 변환 및 더하기
+                sum += num; // 공백 제거 후 정수 변환 및 더하기
             }
             return sum;
         }
@@ -54,7 +57,7 @@ class StringCalculator {
         private boolean isNumeric(String str) {
             try {
                 Integer.parseInt(str); // 정수로 변환 시도
-                return true; // 변환 성공
+                    return true; // 변환 성공
             } catch (NumberFormatException e) {
                 return false; // 변환 실패
             }
