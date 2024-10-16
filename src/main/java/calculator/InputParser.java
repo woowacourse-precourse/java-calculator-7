@@ -1,8 +1,5 @@
 package calculator;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class InputParser {
 
     public void getCustomParser(InputString inputString) {
@@ -21,8 +18,12 @@ public class InputParser {
             input = input.substring(2);
         }
         String[] parsedOperand = input.split(inputString.getSeparator());
-        for(int i=0;i<parsedOperand.length;i++){
-            inputString.addOperand((Integer.parseInt(parsedOperand[i])));
+        try{
+            for(String s : parsedOperand){
+                inputString.addOperand((Integer.parseInt(s)));
+            }
+        }catch (NumberFormatException e){
+            CheckForm.throwException();
         }
     }
 

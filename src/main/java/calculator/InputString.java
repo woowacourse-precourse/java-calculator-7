@@ -6,7 +6,7 @@ import java.util.List;
 public class InputString {
 
     private final String input;
-    private String Customseparator;
+    private String customSeparator;
     private final List<Integer> operands;
 
     public InputString(String input){
@@ -19,11 +19,11 @@ public class InputString {
     }
 
     public void setSeparator(String separator) {
-        this.Customseparator = separator;
+        this.customSeparator = separator;
     }
 
     public String getSeparator() {
-        return Customseparator;
+        return customSeparator;
     }
 
     public void addOperand(Integer operand) {
