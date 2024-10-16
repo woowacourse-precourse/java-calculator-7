@@ -15,11 +15,32 @@ class SplitManagerTest {
 
     @Test
     @DisplayName("discardBlanckSpace 기능 테스트")
-    void discardBlankSpace_test(){
-        List<String> result = splitManager.discardBlankSpace(new ArrayList<>(Arrays.asList("1","2","")));
-        List<String> expected = Arrays.asList("1","2");
+    void discardBlankSpace_test() {
+        List<String> result = splitManager.discardBlankSpace(new ArrayList<>(Arrays.asList("1", "2", "")));
+        List<String> expected = Arrays.asList("1", "2");
 
         assertTrue(expected.containsAll(result));
     }
 
+    @Test
+    @DisplayName("extractNumbers 빈칸 제거까지 있는 기능 테스트")
+    void extractNumbers_withblank() {
+        List<String> delimeterList = new ArrayList<>(Arrays.asList(",", ":", "<"));
+
+        List<String> result = splitManager.extractNumbers(delimeterList, "2,3:4<");
+        List<String> expected = new ArrayList<>(Arrays.asList("2", "3", "4"));
+
+        assertTrue(expected.containsAll(result));
+    }
+
+    @Test
+    @DisplayName("extractNumbers 빈칸 발생 없는 기능 테스트")
+    void extractNumbers_withoutblank() {
+        List<String> delimeterList = new ArrayList<>(Arrays.asList(",", ":", "<"));
+
+        List<String> result = splitManager.extractNumbers(delimeterList, "2,3:4<5");
+        List<String> expected = new ArrayList<>(Arrays.asList("2", "3", "4", "5"));
+
+        assertTrue(expected.containsAll(result));
+    }
 }
