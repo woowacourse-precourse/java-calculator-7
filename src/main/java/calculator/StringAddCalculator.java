@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,6 +33,7 @@ public class StringAddCalculator {
         String delimiters = delimiterAndNumbers[0];
         String numbersString = delimiterAndNumbers[1];
         // 2. 계산식에서 숫자들을 추출한다
+        List<Integer> numbers = splitNumbers(delimiters, numbersString);
         // 3. 추출된 숫자들 중 음수가 있는지 검증한다
         // 4. 숫자들을 더한 값들을 반환한다
         return 0;
@@ -49,6 +52,15 @@ public class StringAddCalculator {
             delimiters += "|" + Pattern.quote(customDelimiter);
         }
         return new String[]{delimiters, numbersString};
+    }
+
+    private List<Integer> splitNumbers(String delimiters, String numbersString) {
+        List<Integer> numbers = new ArrayList<>();
+        String[] splitNumbers = numbersString.split(delimiters);
+        for (String splitNumber : splitNumbers) {
+            numbers.add(Integer.parseInt(splitNumber));
+        }
+        return numbers;
     }
 
     private static int sum(String input) {
