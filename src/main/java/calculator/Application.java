@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.ArrayList;
 
 public class Application {
     public static void main(String[] args) {
@@ -12,7 +13,10 @@ public class Application {
         String str = Console.readLine();
 
         // 커스텀 구분자 찾기
+        // 기능 상 예시 커스텀 입력
+        String custom = ":";
 
+        ArrayList<String> nums = splitNums.splitNums(str, custom);
         // 잘못된 문자열인지 오류 탐색 or 합 출력
     }
 }
