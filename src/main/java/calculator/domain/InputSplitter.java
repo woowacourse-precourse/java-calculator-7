@@ -10,6 +10,9 @@ public class InputSplitter {
     private static final int START_INDEX_EXCEPT_REGEX = 4;
 
     public String[] splitByDelimeter(String input) {
+        if (input.isEmpty()) {
+            return new String[]{"0"};
+        }
         if (containsCustomDelimeter(input)) {
             String customDelimeter = getCustomDelimeter(input);
             input = input.substring(START_INDEX_EXCEPT_REGEX);
