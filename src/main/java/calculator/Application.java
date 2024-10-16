@@ -2,15 +2,15 @@ package calculator;
 
 import java.io.IOException;
 
+import static calculator.InputController.getInputString;
+import static calculator.PrintOutput.printOutput;
+
 public class Application {
 
     public static void main(String[] args) throws IOException {
-        InputController inputController = new InputController();
-        PrintOutput printOutput = new PrintOutput();
         StringPlusCalculator calculator = new StringPlusCalculator();
 
-        InputString inputString = inputController.getInputString();
-        Integer result = calculator.plusCalculate(inputString);
-        printOutput.printOutput(result);
+        Integer result = calculator.plusCalculate(getInputString());
+        printOutput(result);
     }
 }
