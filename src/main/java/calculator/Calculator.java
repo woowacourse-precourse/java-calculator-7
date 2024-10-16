@@ -64,10 +64,10 @@ public class Calculator {
     }
 
     private static boolean isDuplicatedDelimiter() {
-        return (CUSTOM_DELIMITER.equals(FIRST_DELIMITER)
-            || CUSTOM_DELIMITER.equals(SECOND_DELIMITER)
-            || CUSTOM_DELIMITER.equals(CUSTOM_DELIMITER_PREFIX)
-            || CUSTOM_DELIMITER.equals(CUSTOM_DELIMITER_SUFFIX));
+        return (CUSTOM_DELIMITER.contains(FIRST_DELIMITER)
+            || CUSTOM_DELIMITER.contains(SECOND_DELIMITER)
+            || CUSTOM_DELIMITER.contains(CUSTOM_DELIMITER_PREFIX)
+            || CUSTOM_DELIMITER.contains(CUSTOM_DELIMITER_SUFFIX));
     }
 
     private static boolean hasCustomDelimiter(final String input) {
