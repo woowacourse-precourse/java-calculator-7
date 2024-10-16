@@ -5,7 +5,8 @@ import java.util.List;
 
 public class Separator {
 
-	private List<Character> separators;
+	private static final Separator INSTANCE = new Separator();
+	private final List<Character> separators;
 
 	private Separator() {
 		this.separators = new ArrayList<>();
@@ -22,6 +23,6 @@ public class Separator {
 	}
 
 	public static Separator getInstance() {
-		return new Separator();
+		return INSTANCE;
 	}
 }

@@ -3,7 +3,8 @@ package calculator.global.api;
 import calculator.domain.Number;
 
 public class CalculatorAPI {
-    public int calculate(int[] extracted) {
+
+    public int calculate() {
 	    Number number = Number.getInstance();
 		int sum = 0;
 

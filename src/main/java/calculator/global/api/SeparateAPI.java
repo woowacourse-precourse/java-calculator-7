@@ -3,7 +3,7 @@ package calculator.global.api;
 import calculator.domain.Separator;
 
 public class SeparateAPI {
-	private Separator separator = Separator.getInstance();
+	private final Separator separator = Separator.getInstance();
 	private final String regexPattern = "^//(.)\\n.*$";
 
 	public boolean findCustomSeparator(String sentence) {

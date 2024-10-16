@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Number {
 
-	private List<Integer> numbers;
+	private final List<Integer> numbers;
 	private int size;
 
 	private Number() {
