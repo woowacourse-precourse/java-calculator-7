@@ -16,4 +16,9 @@ public class Calculate {
     public boolean checkContainCOLON(String userInput) {
         return userInput.contains(COLON);
     }
+
+    //문자열 분리 - 쉼표 판단
+    public boolean checkContainCOMMA(String userInput) {
+        return userInput.contains(COMMA);
+    }
 }
