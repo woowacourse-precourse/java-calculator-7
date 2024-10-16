@@ -15,7 +15,8 @@ public class Application {
     public static void main(String[] args) {
         String inputString = readLine();
 
-        List<String> delimiters = extractDelimiter(inputString);
+        extractDelimiter(inputString).forEach(
+                calculatorService::addSeparator);
     }
 
     private static List<String> extractDelimiter(String command) {
