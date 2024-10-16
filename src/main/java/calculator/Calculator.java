@@ -14,6 +14,8 @@ public class Calculator {
     public static int calculate(final String input) {
         List<String> parsedNumbers = parseNumbers(input);
 
+        if (parsedNumbers.isEmpty()) throw new IllegalArgumentException("[ERROR] 올바르지 않은 입력입니다.");
+
         return parsedNumbers.stream()
                 .mapToInt(num -> {
                     if (isInvalidInput(num)) throw new IllegalArgumentException("[ERROR] 올바르지 않은 입력입니다.");
@@ -24,6 +26,8 @@ public class Calculator {
     }
 
     private static List<String> parseNumbers(final String input) {
+        if (!isEndWithDigit(input)) throw new IllegalArgumentException("[ERROR] 올바르지 않은 입력입니다.");
+
         if (hasCustomDelimiter(input)) {
             setCustomDelimiter(input);
 
@@ -45,7 +49,13 @@ public class Calculator {
         if(isContainedDigit()) throw new IllegalArgumentException("[ERROR] 올바르지 않은 구분자 지정입니다.");
     }
 
-    private static boolean isInvalidInput(String str) {
+    private static boolean isEndWithDigit(final String input) {
+        char lastChar = input.charAt(input.length() - 1);
+
+        return Character.isDigit(lastChar);
+    }
+
+    private static boolean isInvalidInput(final String str) {
         return !str.matches("\\d");
     }
 
