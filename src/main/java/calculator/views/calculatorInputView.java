@@ -11,4 +11,8 @@ public class calculatorInputView {
     return sc.nextLine();
   }
 
+  public static void displayResult(long result) {
+    System.out.println("결과: " + result);
+  }
+
 }
