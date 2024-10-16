@@ -1,7 +1,6 @@
 package calculator;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -13,7 +12,8 @@ public class IntegersExtractor {
         String delimiter = getDelimiter(inputValue);
         String numberString = removeDelimiterDeclaration(inputValue);
         List<Integer> numbers = splitNumberString(numberString, delimiter);
-        return Collections.emptyList();
+        containsOnlyPositives(numbers);
+        return numbers;
     }
 
     private String getDelimiter(String inputValue) {
@@ -52,6 +52,12 @@ public class IntegersExtractor {
                     .toList();
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("잘못된 입력입니다. 구분자 사이에는 숫자만 입력되어야 합니다.");
+        }
+    }
+
+    private void containsOnlyPositives(List<Integer> numbers) {
+        if (numbers.stream().anyMatch(num -> num < 1)) {
+            throw new IllegalArgumentException("잘못된 입력입니다. 구분자 사이에 숫자는 양수여야 합니다.");
         }
     }
 }
