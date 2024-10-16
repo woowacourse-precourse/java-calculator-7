@@ -21,7 +21,7 @@ public class DelimiterParser {
         return customDelimiters;
       }
       else {
-        throw new IllegalArgumentException("커스텀 구분자를 찾을 수 없습니다.");
+        throw new IllegalArgumentException(this.getClass().getSimpleName()+ ": 커스텀 구분자를 찾을 수 없습니다.");
       }
     }
     return DEFAULT_DELIMITERS;
