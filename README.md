@@ -79,7 +79,7 @@ graph
       - 0으로 시작하지 않고, 
       - 문자열 구분자를 포함하지 않으며, 
       - 정수 형태가 아닌 문자가 없는지 검사한다.
-    - 만약 모든 정상 조건을 만족하지 못한다면, IllegalStateException 을 던진다.
+    - 만약 모든 정상 조건을 만족하지 못한다면, IllegalArgumentException 을 던진다.
   - 사후조건
     - 아무것도 반환하지 않는다.
 - calculator

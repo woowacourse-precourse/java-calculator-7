@@ -16,7 +16,7 @@ class CheckerTest {
         String separator = "[,:]";
         //when, then
         Checker checker = new Checker(inputString, separator);
-        assertThrows(IllegalStateException.class, checker::execute);
+        assertThrows(IllegalArgumentException.class, checker::execute);
 
         
     }
@@ -29,7 +29,7 @@ class CheckerTest {
         String separator = "[,:4]";
         //when, then
         Checker checker = new Checker(inputString, separator);
-        assertThrows(IllegalStateException.class, checker::execute);
+        assertThrows(IllegalArgumentException.class, checker::execute);
         
     }
     
@@ -41,7 +41,7 @@ class CheckerTest {
         String separator = "[,:]";
         //when, then
         Checker checker = new Checker(inputString, separator);
-        assertThrows(IllegalStateException.class, checker::execute);
+        assertThrows(IllegalArgumentException.class, checker::execute);
     }
     
     @Test
