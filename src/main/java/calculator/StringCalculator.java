@@ -1,5 +1,8 @@
 package calculator;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class StringCalculator {
     public int calculate(String input) {
         Character customDelimiter = null;
@@ -28,6 +31,24 @@ public class StringCalculator {
         }
 
         String[] parsedCalculateStr = calculateStr.split(splitRegex);
+
+        //정수로 변환 및 계산
+        for (String str : parsedCalculateStr) {
+            int num;
+            try {
+                num = Integer.parseInt(str);
+            } catch (NumberFormatException e) {
+                if (!str.equals("")) { //입력 없을 시 0 / 구분자와 구분자 사이 입력이 없을 시는? TODO
+                    throw new IllegalArgumentException("구분자와 양수 이외 다른 문자는 입력x");
+                }
+
+                num = 0;
+            }
+
+            if (num < 0) {
+                throw new IllegalArgumentException("양수만 입력");
+            }
+        }
 
         return 0; //TODO
     }
