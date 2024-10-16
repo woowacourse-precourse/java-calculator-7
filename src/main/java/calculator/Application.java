@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class Application {
 
-    private static final int ZERO = 0;
+    private static final int EMPTY_INPUT_RETURN_VALUE = 0;
 
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -25,7 +25,7 @@ public class Application {
     private static int getResult(String input) {
         // 비어있을 경우 0을 반환하자 (3.1 예외)
         if (input.isEmpty()) {
-            return ZERO;
+            return EMPTY_INPUT_RETURN_VALUE;
         }
         /**
          * 1-1. 기본 구분자만 입력된 경우
