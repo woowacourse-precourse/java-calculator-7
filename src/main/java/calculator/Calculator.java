@@ -20,5 +20,7 @@ public class Calculator {
 
         int result = additionNumbers.stream()
                 .reduce(0, Integer::sum);
+
+        outputView.printResult(result);
     }
 }
