@@ -30,7 +30,7 @@ public class Application {
         /**
          * 1.1 기본 구분자만 입력된 경우
          */
-        String delimiterPart = "[,:]";
+        StringBuilder delimiterPart = new StringBuilder("[,:]");
         String numberPart = input;
 
         /**
@@ -42,18 +42,22 @@ public class Application {
                 throw new IllegalArgumentException("커스텀 구분자 선언 후 '\\n'이 필요합니다.");
             }
             String customDelimiterPart = input.substring(2, indexOfEndSign);
-            String[] eachCustomDelimiters = customDelimiterPart.split("");
+            String[] customDelimiters = customDelimiterPart.split(""); // 여러 커스텀 구분자 받는 경우 포함
 
-            for (String delim : eachCustomDelimiters) {
-                delimiterPart += "|" + Pattern.quote(delim);
+            for (String delim : customDelimiters) {
+                delimiterPart.append("|").append(toRegex(delim));
             }
 
             numberPart = input.substring(indexOfEndSign + 2);
         }
 
-        String[] tokens = numberPart.split(delimiterPart);
+        String[] tokens = numberPart.split(delimiterPart.toString());
 
         return add(tokens);
+    }
+
+    private static String toRegex(String delim) {
+        return Pattern.quote(delim);
     }
 
     private static boolean hasCustomDelimiter(String input) {
