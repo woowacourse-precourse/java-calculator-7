@@ -8,6 +8,17 @@ import java.util.regex.Pattern;
 
 public class Application {
 
+    public void checkNumberException(String[] removedSeparatorsArray){
+        for (String number : removedSeparatorsArray){
+            if (!number.isEmpty()) {
+                int num = Integer.parseInt(number);
+                if (num < 0) {
+                    throw new IllegalArgumentException("입력 값에 음수가 포함될 수 없습니다.");
+                }
+            }
+        }
+    }
+
     public void checkSeparatorException(String input){
         if (input.startsWith("//")) {
             int customSeparatorNextIndex = input.indexOf("\n");
@@ -45,7 +56,12 @@ public class Application {
         } else {
             regex = "[,:|" + Pattern.quote(customSeparator.toString()) + "]";
         }
-        return removedDeclarePart.split(regex);
+
+        String[] removedSeparatorsArray = removedDeclarePart.split(regex);
+
+        checkNumberException(removedSeparatorsArray);
+
+        return removedSeparatorsArray;
     }
 
 

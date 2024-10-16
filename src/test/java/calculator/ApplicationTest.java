@@ -21,35 +21,13 @@ class ApplicationTest {
     }
 
     @Test
-    void extractCustomSeparator_case2() {
-        String input = "//***\n1***2***3";
-
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            app.extractCustomSeparator(input);
-        });
-
-        assertEquals("구분자는 반드시 하나의 문자여야 합니다.", exception.getMessage());
-    }
-
-    @Test
-    void extractCustomSeparator_case3() {
-        String input = "//<.\n1,2,3";
-
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            app.extractCustomSeparator(input);
-        });
-
-        assertEquals("구분자는 반드시 하나의 문자여야 합니다.", exception.getMessage());
-    }
-
-    @Test
     void removeDeclarePart_case1() {
         String input = "//-\n1-5-15";
         Character customSeparator = '-';
 
         String removedDeclarePart = app.removeDeclarePart(input, customSeparator);
 
-        assertEquals(customSeparator, "1-5-15");
+        assertEquals("1-5-15", removedDeclarePart);  // 수정됨: 비교 대상이 잘못됨
     }
 
     @Test
@@ -59,8 +37,9 @@ class ApplicationTest {
 
         String removedDeclarePart = app.removeDeclarePart(input, customSeparator);
 
-        assertEquals(input, "1,1,5");
+        assertEquals("1,1,5", removedDeclarePart);  // 수정됨: 비교 대상이 잘못됨
     }
+
     @Test
     void removeSeparators_case1() {
         String input = "1,12:3;4";
@@ -92,7 +71,7 @@ class ApplicationTest {
     }
 
     @Test
-    void checkSeparatorException_missingNewline() {
+    void checkSeparatorException_case1() {
         String input = "//;1;2;3";
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             app.checkSeparatorException(input);
@@ -101,11 +80,21 @@ class ApplicationTest {
     }
 
     @Test
-    void checkSeparatorException_multipleCharactersInDelimiter() {
+    void checkSeparatorException_case2() {
         String input = "//;;\n1;2;3";
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             app.checkSeparatorException(input);
         });
         assertEquals("구분자 형식 오류: 구분자는 반드시 하나의 문자여야 합니다.", exception.getMessage());
     }
+
+    @Test
+    void checkNumberException_case1() {
+        String[] input = {"1", "-2", "3"};
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            app.checkNumberException(input);
+        });
+        assertEquals("입력 값에 음수가 포함될 수 없습니다.", exception.getMessage());
+    }
+
 }
