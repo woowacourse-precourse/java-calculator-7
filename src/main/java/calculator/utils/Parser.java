@@ -1,6 +1,8 @@
 package calculator.utils;
 
 
+import static calculator.constant.DefaultSeparator.COLON;
+import static calculator.constant.DefaultSeparator.COMMA;
 import static calculator.constant.StandardIndex.FIRST_STANDARD;
 import static calculator.constant.StandardIndex.SECOND_STANDARD;
 
@@ -8,6 +10,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Parser {
+
+    public List<Integer> parseInput(String input) {
+        List<Character> separators = new ArrayList<>(List.of(COMMA.getSeparator(), COLON.getSeparator()));
+        if (checkCustomSeparator(input)) {
+            separators = getSeparators(input);
+        }
+        List<Integer> numbers = new ArrayList<>();
+        StringBuilder number = new StringBuilder();
+        for (int i = 0; i < input.length(); i++) {
+            char current = input.charAt(i);
+            if (current >= '0' && current <= '9') {
+                number.append(current);
+            } else if (separators.contains(current)) {
+                numbers.add(Integer.parseInt(number.toString()));
+                number.setLength(0);
+            } else {
+                throw new IllegalArgumentException();
+            }
+        }
+        return numbers;
+    }
+
 
     // 커스텀 구분자가 있는지 확인하는 메소드
     private boolean checkCustomSeparator(String input) {
