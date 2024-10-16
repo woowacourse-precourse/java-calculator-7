@@ -51,6 +51,10 @@ public class StringAddCalculator {
         }
         return total;
     }
+    // 문자열을 정수로 변환
+    private static int toInt(String number) {
+        return Integer.parseInt(number);
+    }
 
 }
 
