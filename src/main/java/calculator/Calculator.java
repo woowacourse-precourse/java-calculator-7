@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 public class Calculator {
 
 	private static final String DEFAULT_SEPARATOR = "[,:]";
-	private static final Pattern CUSTOM_SEPARATOR_PATTERN = Pattern.compile("//(.*)\n(.*)");
+	private static final Pattern CUSTOM_SEPARATOR_PATTERN = Pattern.compile("//(.*)\\\\n(.*)");
 
 	private static final String EMPTY_ERROR_MSG = "값을 입력해주세요.";
 	private static final String NEGATIVE_ERROR_MSG = "음수는 허용되지않습니다.";
