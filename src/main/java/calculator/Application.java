@@ -1,6 +1,8 @@
 package calculator;
 
 
+import camp.nextstep.edu.missionutils.Console;
+
 public class Application {
 
     /*
@@ -26,7 +28,8 @@ public class Application {
     * 사용자로부터 입력을 받는 메서드
     */
     public static String getUserInput(){
-        throw new UnsupportedOperationException("getUserInput() 아직 구현되지 않았습니다.");
+        System.out.println("덧셈할 문자열을 입력해주세요.");
+        return Console.readLine();
     }
 
     /*
