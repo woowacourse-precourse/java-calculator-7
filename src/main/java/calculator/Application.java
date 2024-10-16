@@ -55,6 +55,11 @@ public class Application {
         ArrayList<Integer> numbers = new ArrayList<>(); // 숫자 배열을 저장하는 ArrayList
         StringBuilder current_number = new StringBuilder(); // 현재 숫자를 임시로 저장하는 StringBuilder
 
+        // 엣지 케이스: 아무 숫자도 입력되지 않았을 경우 처리 (커스텀 구분자가 지정되었을 경우에도)
+        if (input.isEmpty() || input.length() == index) {
+            return numbers;
+        }
+
         for (int i = index; i < input.length(); i++) {
             char current_char = input.charAt(i); // 현재 인덱스의 문자
 
