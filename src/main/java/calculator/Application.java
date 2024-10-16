@@ -18,10 +18,7 @@ public class Application {
         // TODO: 프로그램 구현
         input = Console.readLine();
 
-        isCustomSeparator(input);
-
-        System.out.println("delimiter : " + delimiter);
-        System.out.println("input : " + input);
+        isCustomSeparator();
 
         String[] arr = splitDelimiter(input, delimiter);
         System.out.println(Arrays.toString(arr));
@@ -31,22 +28,13 @@ public class Application {
         return input.split(delimiter);
     }
 
-    private static void isCustomSeparator(String input) {
+    private static void isCustomSeparator() {
         pattern = Pattern.compile(regex);
         matcher = pattern.matcher(input);
 
         if (matcher.matches()) {
-
-            setDelimiter(matcher);
-
-
-            System.out.println("delimiter : " + delimiter);
-            System.out.println("input : " + input);
+            delimiter = matcher.group(1);
+            input = matcher.group(2);
         }
-    }
-
-    private static void setDelimiter(Matcher matcher) {
-        delimiter = matcher.group(1);
-        input = matcher.group(2);
     }
 }
