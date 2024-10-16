@@ -21,6 +21,8 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("음수는 허용되지 않습니다.")
+
         );
     }
 
