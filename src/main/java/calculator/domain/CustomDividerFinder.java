@@ -7,6 +7,7 @@ public class CustomDividerFinder {
     private final static Integer CLOSER_INDEX = 3;
     private final static Integer CUSTOM_DIVIDER_INDEX = 2;
     private final static Integer CALCULATED_VALUE_START_INDEX = 5;
+    private final static Integer NONE_CUSTOM_DIVIDER = -1;
 
     /**
      * 만약 커스텀 문자가 1개가 아닐 경우(null or 문자열) - 커스텀 양식의 길이를 측정
@@ -14,8 +15,16 @@ public class CustomDividerFinder {
      */
     public void findCustomDividers(CalculatedValue calculatedValue, Divider divider) { //todo 인수를 생성자로?
         String inputValue = calculatedValue.getValue();
+        int openerIndex = inputValue.indexOf(OPENER);
+        int closerIndex = inputValue.indexOf(CLOSER);
 
-        if (hasCustomDivider(inputValue)) {
+
+        System.out.println("오픈 인덱스   " + openerIndex); //note 0
+        System.out.println("클로저 인덱스   " + closerIndex); //note 3
+
+        if(isNonexistentCustomDivider(openerIndex, closerIndex)) {
+            return;
+        }else if(hasCustomDivider(openerIndex, closerIndex)) {
             char charCustomDivider = inputValue.charAt(CUSTOM_DIVIDER_INDEX);
             String onlyCalculatedValue = extractCalculatedValue(inputValue);
 
@@ -38,16 +47,14 @@ public class CustomDividerFinder {
         divider.setCustomDivider(String.valueOf(charCustomDivider));
     }
 
-    private boolean hasCustomDivider(String inputValue) {
-        int openerIndex = inputValue.indexOf(OPENER);
-        int closerIndex = inputValue.indexOf(CLOSER);
-
-        System.out.println("오픈 인덱스   " + openerIndex); //note 0
-        System.out.println("클로저 인덱스   " + closerIndex); //note 3
-
+    private boolean hasCustomDivider(int openerIndex,int closerIndex) {
         validateStringCustomDivider(closerIndex);
         validateNullCustomDivider(closerIndex);
         return openerIndex == OPENER_INDEX && closerIndex == CLOSER_INDEX;
+    }
+
+    private boolean isNonexistentCustomDivider(int openerIndex,int closerIndex){
+        return openerIndex == NONE_CUSTOM_DIVIDER && closerIndex == NONE_CUSTOM_DIVIDER;
     }
 
     private void validateStringCustomDivider(int closerIndex){
