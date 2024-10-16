@@ -7,9 +7,11 @@ public class Separator {
     private static final String DEFAULT_COMMA = ",";
     private static final String DEFAULT_COLON = ":";
     private final List<String> availableSeparators;
+    private final List<Integer> extractedNumbers;
 
     public Separator(String numbers) {
         availableSeparators = new ArrayList<>(List.of(DEFAULT_COMMA, DEFAULT_COLON));
+        extractedNumbers = new ArrayList<>();
         validate(numbers);
     }
     private void validate(String numbers) {
@@ -47,5 +49,18 @@ public class Separator {
                 throw new IllegalArgumentException();
             }
         }
+        extractNumbers(numbers);
+    }
+
+    private void extractNumbers(String numbers) {
+        for(char ch : numbers.toCharArray()) {
+            if(Character.isDigit(ch)) {
+                extractedNumbers.add(Character.getNumericValue(ch));
+            }
+        }
+    }
+
+    public List<Integer> getExtractedNumbers() {
+        return extractedNumbers;
     }
 }
