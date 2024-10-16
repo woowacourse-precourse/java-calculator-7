@@ -39,6 +39,14 @@ class ApplicationTest extends NsTest {
 
   }
 
+  @Test
+  void 숫자_추출() {
+    assertSimpleTest(() -> {
+      run("//:,\n1:2:3");
+      assertThat(output()).isEqualTo("123");
+    });
+  }
+
 
   @Override
   public void runMain() {
