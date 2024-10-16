@@ -6,12 +6,14 @@ public class Application {
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String userInput = Console.readLine();
-        Validation.validateEmpty(userInput);
+        Validation.validateEmptyInput(userInput); //입력이 비어있는 경우 예외처리
 
 //     계산을 수행하는 Calculator 생성
         Calculator calculator = new Calculator();
 
         String[] userInputNumbers = calculator.splitInput(userInput);
+
+        Validation.validatePositiveInput(userInputNumbers);
 
         int result = calculator.sumInput(userInputNumbers);
 
@@ -40,9 +42,7 @@ class Calculator {
     public int sumInput(String[] userInputNumbers) {
         int sum = 0;
         for (String userInputNumber : userInputNumbers) {
-            int tempInputNumber = Integer.parseInt(userInputNumber);
-            Validation.validateNegativeNumber(tempInputNumber);
-            sum += tempInputNumber;
+            sum += Integer.parseInt(userInputNumber);
         }
         return sum;
     }
@@ -50,16 +50,21 @@ class Calculator {
 
 class Validation {
     //입력이 비어있는 경우 예외 반환
-    public static void validateEmpty(String userInput) {
+    public static void validateEmptyInput(String userInput) {
         if (userInput.isEmpty()) {
             throw new IllegalArgumentException("빈 문자열은 입력할 수 없습니다.");
         }
     }
 
-    //입력된 숫자에 음수가 있는 경우 예외 반환
-    public static void validateNegativeNumber(int userInputNumber) {
-        if (userInputNumber < 0) {
-            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+    //입력된 숫자가 양의 정수가 아닌 경우 예외 반환
+    public static void validatePositiveInput(String[] userInputNumbers) {
+        for (String userInputNumber : userInputNumbers) {
+            if (!userInputNumber.matches("[0-9]+")) {
+                throw new IllegalArgumentException("계산식에는 숫자만 입력할 수 있습니다.");
+            }
+            if (Integer.parseInt(userInputNumber) < 0) {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            }
         }
     }
 }
