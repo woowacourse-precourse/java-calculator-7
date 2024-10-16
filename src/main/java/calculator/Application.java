@@ -52,6 +52,12 @@ public class Application {
 
         String[] numbers = numberPart.split(delimiterPart.toString());
 
+        for (String number : numbers) {
+            if (Integer.parseInt(number) < 0) {
+                throw new IllegalArgumentException("음수가 입력 되었습니다.");
+            }
+        }
+
         return add(numbers);
     }
 
