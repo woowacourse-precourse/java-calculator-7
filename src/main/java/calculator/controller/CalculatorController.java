@@ -1,25 +1,24 @@
 package calculator.controller;
 
 import calculator.view.InputView;
+import calculator.view.OutputView;
 
 public class CalculatorController {
     private final InputView inputView;
+    private final OutputView outputView;
 
-    public CalculatorController(InputView inputView){
+    public CalculatorController(InputView inputView, OutputView outputView){
         this.inputView = inputView;
-    }
-
-    public void run(){
-
+        this.outputView = outputView;
     }
 
     public void proceed(){
         String userInput = inputView.inputUserString();
         if(userInput.equals("")){
-            // 0 출력 (OutputView 구현)
+            outputView.printResult(0);
         }
         int result = calculateStringRemainder(DelimiterSeparator.registerDelimiter(userInput),userInput);
-        // result 출력
+        outputView.printResult(result);
     }
 
     public int calculateStringRemainder(int index, String userInput){
