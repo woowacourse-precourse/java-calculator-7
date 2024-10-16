@@ -1,8 +1,5 @@
 package calculator;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
 public class StringCalculator {
     public int calculate(String input) {
         Character customDelimiter = null;
@@ -33,6 +30,8 @@ public class StringCalculator {
         String[] parsedCalculateStr = calculateStr.split(splitRegex);
 
         //정수로 변환 및 계산
+        int ret = 0;
+
         for (String str : parsedCalculateStr) {
             int num;
             try {
@@ -48,8 +47,10 @@ public class StringCalculator {
             if (num < 0) {
                 throw new IllegalArgumentException("양수만 입력");
             }
+
+            ret += num;
         }
 
-        return 0; //TODO
+        return ret; //TODO
     }
 }
