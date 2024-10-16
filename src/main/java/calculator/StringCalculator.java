@@ -1,5 +1,6 @@
 package calculator;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class StringCalculator {
@@ -19,5 +20,11 @@ public class StringCalculator {
         }
 
         return delimiterCandidates.substring(2);
+    }
+
+    public List<Double> splitNumbersByDelimiter(String numberCandidates, String customDelimiter) {
+        String[] splitNumber = numberCandidates.split(",|:|" + customDelimiter);
+
+        return Arrays.stream(splitNumber).map(Double::parseDouble).toList();
     }
 }
