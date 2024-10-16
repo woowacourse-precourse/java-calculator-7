@@ -1,5 +1,6 @@
 package calculator.controller;
 
+import calculator.domain.Calculator;
 import calculator.domain.User;
 import calculator.handler.InputHandler;
 import calculator.handler.PrintHandler;
