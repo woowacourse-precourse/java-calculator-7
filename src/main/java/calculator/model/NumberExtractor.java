@@ -1,6 +1,18 @@
 package calculator.model;
 
 public class NumberExtractor {
+    public void extractNumber(String inputString, Delimiters delimiters, Calculator calculator) {
+        if (!isStartingWithDigit(inputString)) {
+            throw new IllegalArgumentException();
+        }
+        String[] splitedStringArray = splitByDelimiters(delimiters, inputString);
+        for (String str : splitedStringArray) {
+            validateNumberString(str);
+            int number = Integer.parseInt(str);
+            calculator.saveNumber(number);
+        }
+    }
+
     private boolean isStartingWithDigit(String inputString) {
         char firstChar = inputString.charAt(0);
         return Character.isDigit(firstChar);
