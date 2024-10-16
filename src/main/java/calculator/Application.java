@@ -7,19 +7,13 @@ import java.util.Set;
 
 public class Application {
 
-    public static Set<String> seperators;
     public static void main(String[] args) {
         // TODO: 프로그램 구현
 
-        // 1. "," ";" 구분자 추가
-        init();
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        String input = Console.readLine();
+        int result = 0;
+        System.out.println("결과 : " + result);
 
-
-    }
-
-    private static void init() {
-        seperators = new HashSet<>();
-        seperators.add(",");
-        seperators.add(";");
     }
 }
