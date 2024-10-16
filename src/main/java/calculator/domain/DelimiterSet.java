@@ -37,4 +37,12 @@ public class DelimiterSet {
             throw new IllegalArgumentException("문자는 구분자로 사용 불가능합니다.");
         }
     }
+
+    public boolean hasCustom() {
+        return delimiterSet.size() > 2;
+    }
+
+    public String getSplitForm() {
+        return String.join("|", delimiterSet);
+    }
 }
