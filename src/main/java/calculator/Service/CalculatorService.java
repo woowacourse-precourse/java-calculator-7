@@ -5,6 +5,9 @@ import calculator.View.OutputView;
 
 public class CalculatorService {
     private static String Separator = ",|:";
+    private static final int CUSTOM_SEPARATOR_START_INDEX=2;
+    private static final int CUSTOM_SEPARATOR_END_INDEX=5;
+
 
     public static String Input_String_to_add(){
         return InputView.ask_sum_string();
@@ -15,19 +18,20 @@ public class CalculatorService {
             OutputView.Result(0);
             return;
         }
-        if(input.startsWith("//")) Custom_Separator(input);
-        String[] numbers=input.split(Separator);
-
+        if(input.startsWith("//")&&input.contains("\\n")) input=Custom_Separator(input);
+        String[] numbers = input.split(Separator);
+        System.out.println(numbers);
+        validateNumbers(numbers);
         int sum=sum(numbers);
         OutputView.Result(sum);
 
     }
-
     private static String Custom_Separator(String input){
-        int separatorIndex = input.indexOf("\n");
-        Separator=input.substring(2,separatorIndex);
-        return input.substring(separatorIndex+1);
+        int separatorIndex=input.indexOf("\\n");
+        Separator=input.substring(CUSTOM_SEPARATOR_START_INDEX, separatorIndex);
+        return input.substring(CUSTOM_SEPARATOR_END_INDEX);
     }
+
     private static void validateNumbers(String[] numbers){
         for(String number:numbers){
             if(!isNumberic(number)){
