@@ -1,8 +1,8 @@
 package calculator.validator;
 
-import calculator.exception.input.CalculatorException;
+import calculator.exception.calculator.CalculatorException;
 
-import static calculator.exception.input.CalculatorExceptionMessage.MINUS_OR_ZERO_NUMBER;
+import static calculator.exception.calculator.CalculatorExceptionMessage.MINUS_OR_ZERO_NUMBER;
 
 public class CalculatorValidator {
 

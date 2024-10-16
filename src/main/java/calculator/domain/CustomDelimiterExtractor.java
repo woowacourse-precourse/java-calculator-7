@@ -1,8 +1,8 @@
 package calculator.domain;
 
-import calculator.exception.input.CalculatorException;
+import calculator.exception.calculator.CalculatorException;
 
-import static calculator.exception.input.CalculatorExceptionMessage.WRONG_CUSTOM_DELIMITER_FORMAT;
+import static calculator.exception.calculator.CalculatorExceptionMessage.WRONG_CUSTOM_DELIMITER_FORMAT;
 
 public class CustomDelimiterExtractor {
 

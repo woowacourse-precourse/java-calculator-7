@@ -1,4 +1,4 @@
-package calculator.exception.input;
+package calculator.exception.calculator;
 
 public enum CalculatorExceptionMessage {
 
