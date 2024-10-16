@@ -39,4 +39,12 @@ class CalculatorServiceTest {
         int result = calculatorService.calculate(input);
         assertThat(result).isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("숫자 하나 입력 테스트")
+    void testCalculateWithOneNumber() {
+        String input = "//;\n1";
+        int result = calculatorService.calculate(input);
+        assertThat(result).isEqualTo(1);
+    }
 }

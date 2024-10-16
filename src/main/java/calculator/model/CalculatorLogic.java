@@ -13,6 +13,10 @@ public class CalculatorLogic {
     }
 
     public List<Integer> extractNumbers(String input, String delimiter) {
+        if(input.matches("^[0-9]+$")) {
+            return List.of(Integer.parseInt(input));
+        }
+
         String[] numbers = input.split(delimiter);
         //arr to stream -> Integer 변환 후 다시 list로 변환
         //toList()로 인해 List 불변이지만 단순 덧셈에 사용되기에 문제 없다고 판단
