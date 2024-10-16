@@ -9,6 +9,26 @@ public class SeparatorValidation {
     }
 
     private static boolean isNotSeparator(String input) {
-        return !input.contains(":") && !input.contains(",") && (!input.contains("//") || !input.contains("\\n"));
+        if (!input.contains(",") && !input.contains(":")) {
+            if (containCustomSeparator(input) || notContainSpecialCharacters(input)) {
+                return false;
+            }
+            return true;
+        }
+        if (!input.contains(",") || !input.contains(":")) {
+            if (notContainSpecialCharacters(input)) {
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean containCustomSeparator(String input) {
+        return input.contains("//") && input.contains("\\n");
+    }
+
+    private static boolean notContainSpecialCharacters(String input) {
+        return !input.matches(".*[^a-zA-Z0-9가-힣,: ].*");
     }
 }

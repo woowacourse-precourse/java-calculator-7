@@ -12,6 +12,11 @@ public class Division {
 
     public static List<String> getStringList(String input){
         SeparatorValidation.separator(input); // 구분자가 있는지 검사
+        // 빈 문자열이 들어왔을 경우
+        if (input.isBlank()) {
+            return Collections.emptyList();
+        }
+
         return getList(input);
     }
 
