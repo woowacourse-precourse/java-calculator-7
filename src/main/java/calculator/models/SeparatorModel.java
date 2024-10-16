@@ -15,4 +15,13 @@ public class SeparatorModel {
         String newItem = prefix.substring(2, 3);
         this.items.add(newItem);
     }
+
+    public String removeSeparatorPrefix(String string) {
+        return string.substring(5);
+    }
+
+    public String getRegex() {
+        String[] array = this.items.toArray(new String[0]);
+        return "(" + String.join("|", array) + ")";
+    }
 }
