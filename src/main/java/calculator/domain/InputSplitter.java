@@ -18,7 +18,7 @@ public class InputSplitter {
             input = input.substring(START_INDEX_EXCEPT_REGEX);
             return input.split(customDelimeter);
         }
-        return input.split("[,:]");
+        return validateCommaAndColonDelimiter(input);
     }
 
     private boolean containsCustomDelimeter(String input) {
@@ -29,5 +29,12 @@ public class InputSplitter {
 
     private String getCustomDelimeter(String input) {
         return input.substring(CUSTOM_DELIMETER_START_INDEX, CUSTOM_DELIMETER_END_INDEX);
+    }
+
+    private String[] validateCommaAndColonDelimiter(String input) {
+        if (!input.matches("^[0-9]+([,:][0-9]+)*$")) {
+            throw new IllegalArgumentException("쉼표(,) 또는 콜론(:) 외의 다른 구분자는 사용할 수 없으며, 숫자 사이에만 올 수 있습니다.");
+        }
+        return input.split("[,:]");
     }
 }
