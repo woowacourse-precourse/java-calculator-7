@@ -13,14 +13,17 @@ class SumCalculatorTest {
 
     @Test
     @DisplayName("list 합계 구하기 테스트")
-    public void sumTest() {
+    public void calculateTest() {
         //given
-        List<Integer> input = List.of(1, 2, 3);
+        List<Integer> input1 = List.of(1, 2, 3);
+        List<Integer> input2 = List.of(0, 0);
 
         //when
-        int result = sumCalculator.sum(input);
+        int result1 = sumCalculator.calculate(input1);
+        int result2 = sumCalculator.calculate(input2);
 
         //then
-        assertThat(result).isEqualTo(6);
+        assertThat(result1).isEqualTo(6);
+        assertThat(result2).isEqualTo(0);
     }
 }
