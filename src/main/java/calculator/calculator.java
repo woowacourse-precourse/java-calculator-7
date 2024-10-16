@@ -11,8 +11,8 @@ public class calculator {
         String input2=input.replace(":",",");
         String[] splitname=input2.split(",");
         int sum=0;
-        for(int i=0;i<splitname.length;i++){
-            sum+=Integer.parseInt(splitname[i]);
+        for (String s : splitname) {
+            sum += Integer.parseInt(s);
         }
         System.out.println(sum);
     }
