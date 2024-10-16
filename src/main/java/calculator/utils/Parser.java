@@ -6,22 +6,45 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    private final String userInput;
-    private final List<String> numbers = new ArrayList<>();
 
-    public Parser(String userInput) {
-        this.userInput = userInput;
+    public List<Number> parse(final String userInput) {
+        String input = userInput;
+        String regex = "//(.*?)\\\\n";
+
+        if (isCustomDelimiter(input)) {
+            input = input.replaceAll(regex, "");
+        }
+
+        String delimiter = getDelimiter(input, regex);
+        String[] tokens = splitInput(input, delimiter);
+
+        return getNumbers(tokens);
     }
 
-    private List<String> parseWithDefaultDelimiter() {
-        String defaultDelimiter = "[,:]";
-        String[] tokens = userInput.split(defaultDelimiter);
+    private List<Number> getNumbers(final String[] tokens) {
+        List<Number> numbers = new ArrayList<>();
 
         for (String token : tokens) {
-            numbers.add(token);
+            numbers.add(parseNumber(token));
         }
 
         return numbers;
+    }
+
+    private Number parseNumber(String token) {
+        if (token.isEmpty()) {
+            return 0;
+        }
+
+        try {
+            if (token.contains(".")) {
+                return Double.parseDouble(token);
+            } else {
+                return Integer.parseInt(token);
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("잘못된 값을 입력하였습니다. 프로그램을 종료합니다.");
+        }
     }
 
     private String[] splitInput(String input, String delimiter) {
@@ -34,19 +57,19 @@ public class Parser {
         return tokens;
     }
 
-    private String getDelimiter() {
-        Pattern pattern = Pattern.compile("//(.*?)\\\\n");
-        Matcher matcher = pattern.matcher(userInput);
+    private String getDelimiter(String input, String regex) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input);
         String delimiter = "[,:]";
 
         if (matcher.find()) {
-            delimiter = matcher.group(1);
+            delimiter = Pattern.quote(matcher.group(1));
         }
 
         return delimiter;
     }
 
-    private boolean isCustomDelimiter() {
+    private boolean isCustomDelimiter(String userInput) {
         return userInput.startsWith("//") && userInput.startsWith("\\n", 3);
     }
 }
