@@ -11,9 +11,7 @@ public class Application {
         List<String> splitString = stringCalculator.splitDelimiterAndNumbers(input);
 
         String customDelimiter = stringCalculator.extractDelimiter(splitString);
-
-        String numbersCandidates = splitString.get(1);
-        List<Double> numberList = stringCalculator.splitNumbersByDelimiter(numbersCandidates, customDelimiter);
+        List<Double> numberList = stringCalculator.extractNumbersByDelimiter(splitString, customDelimiter);
 
         Double sum = stringCalculator.calculate(numberList);
         inputOutputService.printResult(sum);
