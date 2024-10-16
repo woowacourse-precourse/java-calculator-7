@@ -16,6 +16,7 @@ public class Calculator {
         setDelimiter();
         validateInput();
         parseInput();
+        validateNumbers();
     }
 
     private static void setInput(String inputValue) {
@@ -41,5 +42,13 @@ public class Calculator {
 
     private static void parseInput() {
         numbers = input.split(delimiters);
+    }
+
+    private static void validateNumbers() {
+        for (String number : numbers) {
+            if (number.isEmpty()) {
+                throw new IllegalArgumentException("구분자 사이에 숫자가 존재하지 않습니다.");
+            }
+        }
     }
 }
