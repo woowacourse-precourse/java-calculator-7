@@ -1,12 +1,13 @@
 package calculator;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Calculator {
     String userInput;
     String customPattern = "^//(.+)\\\\n";  // 줄바꿈 문자
-    String commonPattern = "[,:]+";  // 쉼표와 콜론을 기본 구분자로 설정
+    String commonPattern = "[,:\"\\s]+";  // 쉼표와 콜론을 기본 구분자로 설정
 
     public Calculator(String userInput) {
         this.userInput = userInput;
@@ -46,7 +47,12 @@ public class Calculator {
             return numbers;
 
         }
-        String[] numbers = userInput.split(commonPattern);
+
+        String[] numbers = Arrays.stream(userInput.split(commonPattern))  // split 수행
+                .map(String::trim)  // 각 요소의 앞뒤 공백 제거
+                .filter(str -> !str.isEmpty())  // 빈 문자열 제거
+                .toArray(String[]::new);  // 배열로 변환
+
         return numbers;
 
     }
