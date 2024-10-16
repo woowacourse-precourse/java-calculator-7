@@ -3,7 +3,31 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.*;
 
+record StringSliceResult(String input, String delimiters) {
+
+}
+
 public class Application {
+    private static StringSliceResult getCustomDelimiters(String input, String delimiters) {
+        String[] input_separated = input.split("//", 2)[1].split("\\\\n", 2);
+
+        delimiters += input_separated[0];
+        delimiters = delimiters.replace("\\", "\\\\"); // 역슬래시(\)를 custom delimiter로 쓸때의 버그 수정
+
+        input = input_separated[1];
+
+        return new StringSliceResult(input, delimiters);
+    }
+
+    private static boolean isPositive(String[] numbers) {
+        for (String number:numbers){
+            if (Integer.parseInt(number) <= 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     public static void main(String[] args) {
         String delimiters = ",:";
@@ -15,20 +39,15 @@ public class Application {
 
         try {
             if (input.startsWith("//")) {
-                String[] input_separated = input.split("//", 2)[1].split("\\\\n", 2);
-
-                delimiters += input_separated[0];
-                input = input_separated[1];
+                StringSliceResult slices = getCustomDelimiters(input, delimiters);
+                input = slices.input();
+                delimiters = slices.delimiters();
             }
-
-            delimiters = delimiters.replace("\\", "\\\\"); // 역슬래시(\)를 custom delimiter로 쓸때의 버그 수정
 
             String[] numbers = input.split("[" + delimiters + "]+");
 
-            for (String number:numbers){
-                if (Integer.parseInt(number) <= 0) {
-                    throw new IllegalArgumentException("모든 숫자는 양수여야 합니다.");
-                }
+            if (!isPositive(numbers)) {
+                throw new IllegalArgumentException("모든 숫자는 양수여야 합니다.");
             }
 
             int sum = Arrays.stream(numbers).mapToInt(Integer::parseInt).sum();
