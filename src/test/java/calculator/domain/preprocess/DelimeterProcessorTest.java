@@ -3,6 +3,10 @@ package calculator.domain.preprocess;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class DelimeterProcessorTest {
@@ -51,5 +55,14 @@ class DelimeterProcessorTest {
     void discard_custom_delimeter_request() {
         String newInput = delimeterProcessor.discardCustomDelimeterRequest("//;\n1,2,3");
         assertEquals(newInput, "1,2,3");
+    }
+
+    @Test
+    @DisplayName("구분자 리스트 생성 테스트")
+    void make_delimter_list(){
+        List<String> delimeterList = delimeterProcessor.makeDelimeterList(">");
+        List<String> expectedList = new ArrayList<>(Arrays.asList(",",":",">"));
+        assertEquals(delimeterList.size(),3);
+        assertTrue(delimeterList.containsAll(expectedList));
     }
 }
