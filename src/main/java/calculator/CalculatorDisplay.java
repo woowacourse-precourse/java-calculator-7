@@ -8,6 +8,8 @@ import java.util.regex.Pattern;
 public class CalculatorDisplay {
 
     private static final String inputMessage = "덧셈할 문자열을 입력해 주세요.";
+    private static final String outputMessage = "결과: ";
+
 
     public void show(){
         // 1. 사용자 입력 받기
@@ -33,8 +35,11 @@ public class CalculatorDisplay {
         Calculator calculator = new Calculator(separationProcessor);
         int result = calculator.sum(input);
 
-        System.out.println(result);
-
         // 5. 결과 출력하기
+        printResult(result);
+    }
+
+    private void printResult(int result){
+        System.out.println(outputMessage + result);
     }
 }
