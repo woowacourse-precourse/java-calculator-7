@@ -1,5 +1,6 @@
 package calculator.controller;
 
+import calculator.model.Calculator;
 import calculator.model.NumberParser;
 import calculator.model.SeparatorParser;
 import calculator.view.InputView;
@@ -15,5 +16,8 @@ public class CalculatorController {
 
         NumberParser numberParser = new NumberParser();
         ArrayList<String> operandList = numberParser.inputNumberParse(separatoredString);
+
+        Calculator calculator = new Calculator();
+        int result = calculator.numberCalculator(operandList);
      }
 }
