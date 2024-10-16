@@ -11,4 +11,8 @@ public class DelimiterService {
     public void addDelimiter(String delimiter) {
         delimiters.add(new Delimiter(delimiter));
     }
+
+    public void addDelimiters(List<String> delimiters) {
+        delimiters.forEach(this::addDelimiter);
+    }
 }
