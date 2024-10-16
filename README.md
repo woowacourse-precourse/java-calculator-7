@@ -24,8 +24,8 @@
 - [x] 숫자인지 검증 예외 처리 `IllegalArgumentException`
 
 ### 계산
-- [ ] 숫자 배열로 합산 결과를 반환
-- [ ] 양수인지 검증 예외 처리 `IllegalArgumentException`
+- [x] 숫자 배열로 합산 결과를 반환
+- [x] 양수인지 검증 예외 처리 `IllegalArgumentException`
 
 ### 입력
 - [x] 사용자 입력 기능 ex) `//;\n1;2;3`, `1,2:3`

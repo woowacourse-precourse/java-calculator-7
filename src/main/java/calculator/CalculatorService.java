@@ -42,8 +42,23 @@ public class CalculatorService {
         return numbersInt;
     }
 
+    public int calculatorNumbers(int[] numbers) {
+        int total = 0;
+        for (int number : numbers) {
+            validPositive(number);
+            total += number;
+        }
+
+        return total;
+    }
+
     private void validString(String str) {
         if(isNumber(str))
+            throw new IllegalArgumentException();
+    }
+
+    private void validPositive(int number) {
+        if (number < 0)
             throw new IllegalArgumentException();
     }
 
