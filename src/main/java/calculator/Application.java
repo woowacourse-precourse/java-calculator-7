@@ -43,5 +43,24 @@ public class Application {
 
         String[] nums = input.split(regex.toString());
 
+        int sum = 0;
+
+        for (String token : nums) {
+            if (!token.isEmpty()) {
+                try {
+                    int num = Integer.parseInt(token.trim());
+
+                    if (num < 0) {
+                        throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+                    }
+
+                    sum += num;
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("숫자가 입력되지 않았습니다.");
+                }
+            }
+        }
+
+        System.out.println("결과 : " + sum);
     }
 }
