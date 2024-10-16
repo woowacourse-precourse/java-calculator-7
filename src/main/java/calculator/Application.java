@@ -41,6 +41,9 @@ public class Application {
         String[] split = input.split(regex);
         int result = 0;
         for (String strNum : split) {
+            if (strNum.isBlank()) {
+                continue;
+            }
             result += Integer.parseInt(strNum);
         }
 
