@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Application {
 
-    private static final OutputHandler outputHandler = new OutputHandler(0);
+    private static final OutputHandler outputHandler = new OutputHandler();
 
     public static void main(String[] args) {
         // TODO: 프로그램 구현
@@ -44,9 +44,8 @@ public class Application {
                     throw new IllegalArgumentException("숫자 이외의 값을 입력할 수 없습니다.");
                 }
             }
-            outputHandler.updateCalculateResult(result);
         }
-        outputHandler.showAdditionResult();
+        outputHandler.showAdditionResult(result);
     }
 
     private static void validatePositiveNumber(int parsedNumber) {
