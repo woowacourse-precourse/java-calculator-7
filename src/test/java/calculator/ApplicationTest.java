@@ -58,10 +58,13 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 커스텀_구분자_예외() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//\\n")) // substring으로 자르면, OutOfBounds가 생긴다.
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//\\n")) // substring으로 자르면, OutOfBounds가 생긴다.
+                    .isInstanceOf(IllegalArgumentException.class);
+
+            assertThatThrownBy(() -> runException("//"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
     }
 
     @Override
