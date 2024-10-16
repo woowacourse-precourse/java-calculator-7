@@ -11,8 +11,9 @@ public class InputViewValidator {
         return inputName.substring(1, inputName.length() - 1);
     }
 
-    public void validateCustom(String inputName) {
+    public Boolean validateCustom(String inputName) {
 
+        return false;
     }
 
     public void validateDuplicationCustom(String inputName) {
