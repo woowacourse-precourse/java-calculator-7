@@ -2,6 +2,8 @@ package calculator.service;
 
 import calculator.model.Delimiter;
 
+import java.util.ArrayList;
+
 public class StringSplit {
 
     private String inputString;
@@ -32,6 +34,7 @@ public class StringSplit {
 
     public void splitAndSaveOperands() {
         String[] stringOperands = splitOperands();
+        ArrayList<Integer> intOperands = convertOperandsToInt(stringOperands);
     }
 
     private String[] splitOperands() {
@@ -43,5 +46,13 @@ public class StringSplit {
             reg = reg.substring(0, reg.length() - 1);
         }
         return inputString.split(reg);
+    }
+
+    private ArrayList<Integer> convertOperandsToInt(String[] stringOperands) {
+        ArrayList<Integer> intOperands = new ArrayList<>();
+        for (String stringOperand : stringOperands) {
+            intOperands.add(Integer.valueOf(stringOperand));
+        }
+        return intOperands;
     }
 }
