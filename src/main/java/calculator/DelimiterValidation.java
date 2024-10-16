@@ -5,10 +5,15 @@ import java.util.regex.Pattern;
 
 public class DelimiterValidation {
 
+    // regexMatcher 반환 함수
+    private static Matcher regexMatcher(String formula, String regex) {
+        Pattern pattern = Pattern.compile(regex);
+        return pattern.matcher(formula);
+    }
+
     // 기본 구분자 검증 함수
     private static String[] validateDefaultDelimiter(String formula) {
-        Pattern pattern = Pattern.compile("^(|([1-9][0-9]*([,:][1-9][0-9]*)*))$");
-        Matcher matcher = pattern.matcher(formula);
+        Matcher matcher = regexMatcher(formula, "^(|([1-9][0-9]*([,:][1-9][0-9]*)*))$");
         if (matcher.matches()) {
             return new String[]{"[,:]", matcher.group(1)};
         }
@@ -17,8 +22,7 @@ public class DelimiterValidation {
 
     // 커스텀 구분자 검증 함수
     private static String[] validateCustomDelimiter(String formula) {
-        Pattern pattern = Pattern.compile("^//(.)\\\\n(|([1-9][0-9]*(\\1[1-9][0-9]*)*))$");
-        Matcher matcher = pattern.matcher(formula);
+        Matcher matcher = regexMatcher(formula, "^//(.)\\\\n(|([1-9][0-9]*(\\1[1-9][0-9]*)*))$");
         if (matcher.matches()) {
             return new String[]{matcher.group(1), matcher.group(2)};
         }
