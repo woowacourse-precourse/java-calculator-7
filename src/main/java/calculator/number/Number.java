@@ -6,11 +6,12 @@ public class Number {
 
     private String userInput;
 
-    private final List<String> stringList;
+    private final List<Integer> numberList;
 
     public Number(String userInput) {
         this.userInput = userInput;
-        stringList = Division.getStringList(userInput);
+        List<String> stringList = Division.getStringList(userInput);
+        numberList = IntegerListMaker.getNumberList(stringList);
     }
 
     public int getResult() {
