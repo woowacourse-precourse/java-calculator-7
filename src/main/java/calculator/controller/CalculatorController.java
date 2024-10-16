@@ -15,5 +15,6 @@ public class CalculatorController {
     public void run() {
         String userInput = inputView.input("덧셈할 문자열을 입력해 주세요.");
         delimiterService.addDelimiters(initialDelimiters);
+        delimiterService.addCustomDelimiter(userInput);
     }
 }
