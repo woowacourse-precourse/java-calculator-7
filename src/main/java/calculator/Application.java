@@ -15,7 +15,7 @@ public class Application {
                 System.out.println();
                 continue;
             } else if (formula == "") {
-                System.out.println(0);
+                System.out.println("결과 : 0");
             } else {
                 Calculator calculator = new Calculator(formula);
             }
