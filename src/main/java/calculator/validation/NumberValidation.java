@@ -12,12 +12,11 @@ public class NumberValidation {
         return input.matches("[가-힣]+");
     }
 
-    private static boolean isNotPositiveNumber(String input) {
-        int inputNumber = Integer.parseInt(input);
-        return inputNumber <= 0;
-    }
-
     private static boolean isAlphabet(String input) {
         return input.matches("[a-zA-Z]");
+    }
+
+    private static boolean isNotPositiveNumber(String input) {
+        return input.contains("0") || input.contains("-");
     }
 }
