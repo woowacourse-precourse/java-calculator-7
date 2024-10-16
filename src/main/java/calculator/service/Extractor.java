@@ -54,7 +54,11 @@ public class Extractor {
             return;
         }
 
-        if (ARGUMENT_VALIDATION_REGEX.matcher(input).matches()) {
+        if (ARGUMENT_VALIDATION_REGEX.matcher(input).find()) {
+            throw new IllegalArgumentException("[ERROR] 입력 형식이 맞지 않습니다.");
+        }
+
+        if (!input.startsWith("/")) {
             throw new IllegalArgumentException("[ERROR] 입력 형식이 맞지 않습니다.");
         }
     }
