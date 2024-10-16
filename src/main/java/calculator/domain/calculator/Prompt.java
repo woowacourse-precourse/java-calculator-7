@@ -1,8 +1,9 @@
-package calculator.domain.prompt;
+package calculator.domain.calculator;
 
 import java.util.ArrayList;
 import java.util.List;
 
+// Calculator 에서 prompt 입력받는 식으로 진행하기
 public class Prompt {
 
     private static final char COMMA = ',';
