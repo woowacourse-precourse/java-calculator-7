@@ -177,6 +177,17 @@ class ApplicationTest extends NsTest {
         assertThat(result).isEqualTo(10);
     }
 
+    @Test
+    @DisplayName("커스텀 구분자가 여러 개일 경우 해당 커스텀 구분자들을 통해 숫자를 구분한 뒤 결과값을 반환한다.")
+    void inputTest9() {
+        String userInput = "//?.\\n1?2?3.4";
+        calculator.number.Number number = new Number(userInput);
+
+        int result = number.getResult();
+
+        assertThat(result).isEqualTo(10);
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
