@@ -22,7 +22,7 @@ public class StringSeparator {
                     if (isWrongInput(divide)) {
                         throw new IllegalArgumentException("잘못된 입력입니다.");
                     } else {
-                        String separator = divide.substring(2, divide.length() - 2);
+                        String separator = extractionSeparator(divide);
                         calculator.addSeparator(separator);
                         divide = "";
                     }
@@ -57,6 +57,10 @@ public class StringSeparator {
             return true;
         }
         return false;
+    }
+
+    private String extractionSeparator(String divide) {
+        return divide.substring(2, divide.length() - 2);
     }
 
 }
