@@ -8,13 +8,17 @@ import camp.nextstep.edu.missionutils.Console;
 public class Application {
     /** 구분자 목록 */
     public static List<String> separators = new ArrayList<>();
+    public static String input="";
+    public static final String customSeparatorSymbol1 = "//";
+    public static final String customSeparatorSymbol2 = "\\n";
 
     public static void main(String[] args) {
         Application app = new Application();
         app.initSeparator();
 
-        String input = Console.readLine();
+        input = Console.readLine();
         app.getCustomSeparator(input);
+        System.out.println(input);
     }
 
     private void initSeparator(){
@@ -22,7 +26,28 @@ public class Application {
         separators.add(":");
     }
 
-    private void getCustomSeparator(String input){
-        System.out.println(input);
+    private char getCustomSeparator(String input){
+        int firstTokenIdx = input.indexOf(customSeparatorSymbol1);
+        int lastTokenIdx = input.lastIndexOf(customSeparatorSymbol2);
+
+        if(firstTokenIdx == -1 || lastTokenIdx == -1){
+            throw new IllegalArgumentException();
+        }
+
+        if(((firstTokenIdx+1) - (lastTokenIdx-1))>1){
+            throw new IllegalArgumentException();
+        }
+
+        char customSeparator = input.charAt(lastTokenIdx-1);
+        removeRangeString(firstTokenIdx,lastTokenIdx+2);
+        return customSeparator;
     }
+
+    private void removeRangeString(int start, int end){
+        StringBuilder sb = new StringBuilder(input);
+        sb.delete(start, end);
+        input = sb.toString();
+    }
+
+
 }
