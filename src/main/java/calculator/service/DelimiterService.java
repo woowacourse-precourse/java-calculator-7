@@ -20,6 +20,16 @@ public class DelimiterService {
     public void addDelimiters(List<String> delimiters) {
         delimiters.forEach(this::addDelimiter);
     }
+
+    public void addCustomDelimiter(String string) {
+        if (validateCustomDelimiterFormat(string)) {
+            addDelimiter(customDelimiterParser(string));
+        }
+        if (validateDefaultDelimiterFormat(string)) {
+            throw new IllegalArgumentException();
+        }
+    }
+
     public boolean validateCustomDelimiterFormat(String string) {
         return customDelimiterPattern.matcher(string).matches();
     }
