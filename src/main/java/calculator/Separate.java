@@ -1,2 +1,6 @@
-package calculator;public class Separate {
+package calculator;
+
+public class Separate {
+
+
 }

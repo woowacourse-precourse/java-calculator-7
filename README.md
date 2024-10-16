@@ -1,6 +1,6 @@
 # java-calculator-precourse
 
-1. [ ] input 값 받는 클래스 생성
+1. [x] input 값 받는 클래스 생성
 
 2. [ ] 커스텀 구분자 확인
     - [ ] 문자열 앞부분에 "//" 와 "\n" 이 존재 하는가
