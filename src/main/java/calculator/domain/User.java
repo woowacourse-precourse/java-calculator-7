@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
+    private static final String NEW_DELIMITER_PATTERN = "//\\n";
+    private static final int START_INDEX = 0;
+    private static final int MIN_NUMBER_SIZE = 0;
+
     private final List<String> numbers = new ArrayList<>();
     private final List<String> delimiters = new ArrayList<>();
 
@@ -13,7 +17,6 @@ public class User {
         charAtUserStrings(userString);
         validateNumbers(numbers);
         checkDelimiters(delimiters);
-
     }
 
     private void checkDelimiters(List<String> delimiters) {
@@ -36,7 +39,7 @@ public class User {
 
     private void validateNewDelimiters(List<String> delimiters) {
         String str = delimiters.get(0) + delimiters.get(1) + delimiters.get(3) + delimiters.get(4);
-        if (str.equals("//\\n")) {
+        if (str.equals(NEW_DELIMITER_PATTERN)) {
             delimiters.removeFirst();
             delimiters.removeFirst();
             delimiters.removeFirst();
@@ -48,7 +51,7 @@ public class User {
     }
 
     private void charAtUserStrings(String userString) {
-        for (int i = 0; i < userString.length(); i++) {
+        for (int i = START_INDEX; i < userString.length(); i++) {
             char charAt = userString.charAt(i);
             if (Character.isDigit(charAt)) {
                 numbers.add(String.valueOf(charAt));
@@ -60,7 +63,7 @@ public class User {
 
     private void validateNumbers(List<String> numbers) {
         for (String number : numbers) {
-            if (Integer.parseInt(number) <= 0) {
+            if (Integer.parseInt(number) <= MIN_NUMBER_SIZE) {
                 throw new IllegalArgumentException();
             }
         }
