@@ -2,6 +2,8 @@ package calculator.domain.vo.delimiter;
 
 import static calculator.domain.vo.delimiter.constants.DelimiterPattern.*;
 
+import calculator.domain.vo.number.Number;
+import calculator.domain.vo.number.Numbers;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,4 +49,24 @@ public class Delimiters {
         }
         return EMPTY.getValue();
     }
+
+    public Numbers extractNumbers(String input) {
+        String[] values = input.split(getDelimiterRegex());
+        List<Number> numbers = new ArrayList<>();
+        for (String value : values) {
+            numbers.add(Number.from(value));
+        }
+        return Numbers.from(numbers);
+    }
+
+    private String getDelimiterRegex() {
+        StringBuilder regex = new StringBuilder();
+        for (Delimiter delimiter : values) {
+            regex.append(delimiter.getValue());
+            regex.append(PIPE.getValue());
+        }
+        regex.deleteCharAt(regex.length() - 1);
+        return regex.toString();
+    }
+
 }

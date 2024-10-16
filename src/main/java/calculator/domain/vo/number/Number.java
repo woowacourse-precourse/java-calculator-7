@@ -28,6 +28,10 @@ public class Number {
         return new Number(value);
     }
 
+    public BigInteger getValue() {
+        return value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Number)) {
