@@ -25,11 +25,19 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 문자열의_첫5글자를_자르는_테스트() {
+    void 커스텀_구분자가_있는_경우_이를_제거하여_반환하는_테스트() {
        String inputStr = "//+\n12,3+4:5";
        InputStringProcessor inputStringProcessor = new InputStringProcessor();
        String slicedInputStr = inputStringProcessor.removeFirstFiveCharacters(inputStr);
        assertThat(slicedInputStr).isEqualTo("12,3+4:5");
+    }
+
+    @Test
+    void 문자열의_첫5글자를_반환하는_테스트() {
+        String inputStr = "//+\n12,3+4:5";
+        InputStringProcessor inputStringProcessor = new InputStringProcessor();
+        String slicedInputStr = inputStringProcessor.getFirstFiveCharacters(inputStr);
+        assertThat(slicedInputStr).isEqualTo("//+\n");
     }
 
 
