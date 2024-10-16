@@ -8,7 +8,7 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
-        tokenization tokenizer = new tokenization(input);
+        Tokenization tokenizer = new Tokenization(input);
         List<Integer> tokens = tokenizer.tokenize();
         Calculation calculation = new Calculation(tokens);
         int result = calculation.Calculate();

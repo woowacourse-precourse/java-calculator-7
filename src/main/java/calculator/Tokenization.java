@@ -3,13 +3,13 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class tokenization {
+public class Tokenization {
     String str;
     List<Integer> numberlist;
     List<String> characterfordivide;
     boolean isOkay = true;
 
-    public tokenization(String str) {
+    public Tokenization(String str) {
         this.str = str;
         numberlist = new ArrayList<Integer>();
         characterfordivide = new ArrayList<String>();
