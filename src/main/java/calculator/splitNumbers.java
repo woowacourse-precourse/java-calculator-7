@@ -3,7 +3,7 @@ package calculator;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class splitNums {
+public class splitNumbers {
     // arrayList 사용
     // 사용 안하는 경우 기능분리 측면에서 이상해질 우려가 있음
     public static ArrayList<String> splitNums(String str, String custom) {
@@ -15,7 +15,7 @@ public class splitNums {
             str = str.substring(0, stardIdx) + str.substring(endIdx + 1);
         }
 
-        if (custom == "") {
+        if (custom.isEmpty()) {
             // custom 문자열이 없는 경우
             String regex = "[,:]";
 

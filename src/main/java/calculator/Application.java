@@ -16,7 +16,7 @@ public class Application {
         // 기능 상 예시 커스텀 입력
         String custom = ":";
 
-        ArrayList<String> nums = splitNums.splitNums(str, custom);
+        ArrayList<String> nums = splitNumbers.splitNums(str, custom);
         // 잘못된 문자열인지 오류 탐색 or 합 출력
     }
 }
