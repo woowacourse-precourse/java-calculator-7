@@ -5,7 +5,7 @@ import java.util.List;
 
 public class NumberParser {
     private final Divider divider;
-
+    private final static String SPLIT_CRITERIA = "";
 
     public NumberParser(Divider divider) {
         this.divider = divider;
@@ -19,7 +19,7 @@ public class NumberParser {
     }
 
     private void extractNumberValue(CalculatedValue calculatedValue, List<Integer> result) {
-        String[] splitWord = calculatedValue.getValue().split("");
+        String[] splitWord = calculatedValue.getValue().split(SPLIT_CRITERIA);
         StringBuilder temporaryNumber = new StringBuilder();
 
         for (String value : splitWord) {
