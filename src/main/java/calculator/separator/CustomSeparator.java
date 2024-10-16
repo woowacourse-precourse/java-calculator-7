@@ -5,7 +5,10 @@ public class CustomSeparator implements Separator {
     @Override
     public String[] splitLine(String line) {
         String delimiter = validateLine(line);
-        String updatedLine = line.split("\\\\n")[1];
+        String updatedLine = line.substring(("//" + delimiter + "\\n").length());
+        if (updatedLine.equals("")) {
+            return null;
+        }
         return updatedLine.split(delimiter + "|:|,");
     }
 
