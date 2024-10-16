@@ -22,13 +22,14 @@ class StringCalculator {
             return 0;
         }
         // 쉼표(,) 또는 콜론(:)을 구분자로 분리
-        String delimiter = "[,:]";
+        String delimiter = ",|:";
         String[] numbers = input.split(delimiter);
 
 
         if (input.startsWith("//")) {
             int delimiterIndex = input.indexOf("\\n");
-            delimiter = input.substring(2, delimiterIndex);  // 커스텀 구분자 추출
+            String customDelimiter = input.substring(2, delimiterIndex);  // 커스텀 구분자 추출
+            delimiter += '|' + escapeDelimiter(customDelimiter);  // 기존 구분자에 커스텀 구분자를 추가
             numbers = input.substring(delimiterIndex + 2).split(delimiter);
         }
 
@@ -58,4 +59,21 @@ class StringCalculator {
                 return false; // 변환 실패
             }
         }
+
+    // 커스텀 구분자를 정규 표현식에 맞게 이스케이프하는 메서드
+    private String escapeDelimiter(String delimiter) {
+        return delimiter.replace("\\", "\\\\")
+                .replace(".", "\\.")
+                .replace("?", "\\?")
+                .replace("+", "\\+")
+                .replace("*", "\\*")
+                .replace("^", "\\^")
+                .replace("$", "\\$")
+                .replace("(", "\\(")
+                .replace(")", "\\)")
+                .replace("[", "\\[")
+                .replace("]", "\\]")
+                .replace("{", "\\{")
+                .replace("}", "\\}");
+    }
     }
