@@ -6,8 +6,9 @@ public class ResultMaker {
 
     public static int getResult(List<Integer> numbers) {
         int result = 0;
-        //기능구현
-
+        for (Integer number : numbers) {
+            result += number;
+        }
         return result;
     }
 }
