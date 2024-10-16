@@ -27,7 +27,7 @@ class ApplicationTest extends NsTest {
         );
     }
 
-    @Test
+    @Test()
     @DisplayName("커스텀 구분자가 2글자 이상일 때")
     void splitLengthTest() {
         assertSimpleTest(() -> {
@@ -43,6 +43,15 @@ class ApplicationTest extends NsTest {
                 assertThatThrownBy(() -> runException("1,2,3-"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+    @Test
+    @DisplayName("int 범위를 넘어가는 수를 입력받았을 때")
+    void beyondInteger() {
+        assertSimpleTest(() -> {
+            run("//;\\n2147483648;2147483648");
+            assertThat(output()).contains("결과 : 4294967296");
+        });
     }
 
     @Override
