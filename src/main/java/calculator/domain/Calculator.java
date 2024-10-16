@@ -1,17 +1,17 @@
 package calculator.domain;
 
-import calculator.domain.prompt.CalculatorPrompt;
+import calculator.domain.prompt.Prompt;
 
 public class Calculator {
 
-    private final CalculatorPrompt calculatorPrompt;
+    private final Prompt prompt;
 
-    public Calculator(String inputData) {
-        this.calculatorPrompt = new CalculatorPrompt(inputData);
+    public Calculator(Prompt prompt) {
+        this.prompt = prompt;
     }
 
     public int sum() {
-        return this.calculatorPrompt
+        return this.prompt
                 .extractInteger()
                 .stream()
                 .reduce(0, Integer::sum);

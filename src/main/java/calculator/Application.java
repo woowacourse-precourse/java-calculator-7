@@ -1,11 +1,14 @@
 package calculator;
 
 import calculator.domain.Calculator;
+import calculator.domain.prompt.CalculatorPrompt;
+import calculator.domain.prompt.Prompt;
 
 public class Application {
 
     public static void main(String[] args) {
-        Calculator calculator = new Calculator("1,2:3");
+        Prompt prompt = new CalculatorPrompt("1,2:3");
+        Calculator calculator = new Calculator(prompt);
         int sum = calculator.sum();
         System.out.println(sum);
     }
