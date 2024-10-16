@@ -11,6 +11,9 @@ public class InputValidator {
   public String validateInput() {
     System.out.println("덧셈할 문자열을 입력해주세요.");
     String input = Console.readLine();
-    return null;
+    if (input == null){
+      throw new IllegalArgumentException();
+    }
+    return input;
   }
 }
