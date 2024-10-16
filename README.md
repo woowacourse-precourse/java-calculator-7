@@ -9,7 +9,7 @@
 - [x] 커스텀 구분자 처리
   - "//"와 "\n" 사이의 문자를 커스텀 구분자로 인식한다.
   - 커스텀 구분자를 사용했을 때 문자열 분리 및 덧셈
-- [ ] 예외 처리
+- [x] 예외 처리
   - 음수나 잘못된 입력값이 들어왔을 때 `IllegalArgumentException`으로 처리
 - [ ] 사용자 인터페이스 구현
   - `camp.nextstep.edu.missionutils`에서 제공하는 `Console`API를 사용하여 구현
