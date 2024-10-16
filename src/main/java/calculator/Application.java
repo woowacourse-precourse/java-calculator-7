@@ -14,8 +14,8 @@ public class Application {
             int result = Calculator.performAddition(input);
             System.out.println("결과 : " + result);
 
-            System.out.println();
-
+            Console.close();
+            
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException();
         }

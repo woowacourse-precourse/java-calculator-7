@@ -68,4 +68,34 @@ public class StringInputTest {
 
         assertThat(result).isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("문자열에 구분자가 2개 연속으로 입력되면 IllegalArgumentException 발생")
+    void 구분자_연속으로_입력() {
+        String input = "1:2::3:";
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            int result = Calculator.performAddition(input);
+        });
+    }
+
+    @Test
+    @DisplayName("지정된 구분자 이외의 문자열이 입력되면 IllegalArgumentException 발생")
+    void 지정구분자_이외의_문자_입력() {
+        String input = "1,2a3";
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            int result = Calculator.performAddition(input);
+        });
+    }
+
+    @Test
+    @DisplayName("\\n이 문자열에서 두번 등장하는 경우 IllegalArgumentException 발생")
+    void 커스텀구분자_지정_문자열_두번_등장() {
+        String input = "//;\\n1;2,3:4\\n5";
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            int result = Calculator.performAddition(input);
+        });
+    }
 }
