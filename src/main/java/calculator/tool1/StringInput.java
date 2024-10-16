@@ -6,25 +6,33 @@ import java.util.NoSuchElementException;
 
 public class StringInput {
 
-  public static String[] inputString() {
+  private String delimiters;
+
+  private String nums;
+
+  public String getDelimiters() {
+    return delimiters;
+  }
+
+  public String getNums() {
+    return nums;
+  }
+
+  public StringInput() {
 
     try {
       //입력을 \n 문자열 기준으로 받음
-      //System.out.println("덧셈할 문자열을 입력해 주세요.");
-      String delimiters = Console.readLine();
-      String nums = Console.readLine();
-
-      return new String[]{delimiters, nums};
+      System.out.println("덧셈할 문자열을 입력해 주세요.");
+      this.delimiters = Console.readLine();
+      this.nums = Console.readLine();
 
     } catch (NoSuchElementException noSuchElementException) {
       throw new IllegalArgumentException();
     } catch (IllegalArgumentException illegalArgumentException) {
       throw new IllegalArgumentException();
-    }
-    finally {
+    } finally {
       Console.close();
     }
-
 
   }
 
