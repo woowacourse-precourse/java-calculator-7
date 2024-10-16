@@ -11,9 +11,10 @@
   - 커스텀 구분자를 사용했을 때 문자열 분리 및 덧셈
 - [x] 예외 처리
   - 음수나 잘못된 입력값이 들어왔을 때 `IllegalArgumentException`으로 처리
-- [ ] 사용자 인터페이스 구현
+- [x] 사용자 인터페이스 구현
   - `camp.nextstep.edu.missionutils`에서 제공하는 `Console`API를 사용하여 구현
   - 사용자가 입력하는 값은 `camp.nextstep.edu.missionutils.Console`의 `readLine()`을 활용
+  - (추가): Console에서 한글 깨짐 현상이 발생하여 UTF8ConsoleWriter 구현
 - [ ] 메인 로직 구현
   - 위의 기능을 사용하여 전체 로직 구현
 - [ ] 테스트 코드 작성
