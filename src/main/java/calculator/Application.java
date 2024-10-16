@@ -20,7 +20,7 @@ public class Application {
                 System.out.println("결과 : " + result);
 
             } catch (IllegalArgumentException e) {
-                System.out.println("입력 오류 : " + e.getMessage());
+                throw new IllegalArgumentException();
             }
         }
     }
