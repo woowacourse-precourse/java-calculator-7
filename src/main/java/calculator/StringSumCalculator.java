@@ -6,10 +6,14 @@ import calculator.view.OutputView;
 import java.util.List;
 
 public class StringSumCalculator {
+    private final IntegersExtractor integersExtractor;
+
+    public StringSumCalculator(IntegersExtractor integersExtractor) {
+        this.integersExtractor = integersExtractor;
+    }
 
     public void run() {
         String inputValue = InputView.getInputValue();
-        IntegersExtractor integersExtractor = new IntegersExtractor();
         List<Integer> integers = integersExtractor.extractIntegers(inputValue);
         int result = getSum(integers);
         OutputView.showResultMessage(result);
