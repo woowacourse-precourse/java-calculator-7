@@ -48,9 +48,13 @@ public class Application {
         return readLine();
     }
 
+    public static void printOutput(int answer) {
+        System.out.print(String.format("결과 : %d", answer));
+    }
+
     public static void main(String[] args) {
         String user_input = inputByUser();
         user_input = findSeparator(user_input);
-        System.out.println(calculateValue(user_input));
+        printOutput(calculateValue(user_input));
     }
 }
