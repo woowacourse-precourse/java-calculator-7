@@ -35,7 +35,7 @@
 
 ## controller package
 
-- `CalculatorController` : 전체 프로그램 동작 제어
+- `CalculatorController` : 전체 프로그램 동작 제어 [O]
 
 ## model package
 
