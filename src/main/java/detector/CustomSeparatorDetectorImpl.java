@@ -13,4 +13,9 @@ public class CustomSeparatorDetectorImpl implements CustomSeparatorDetector {
         }
         return "";
     }
+
+    @Override
+    public String removeCustomFormat(String text, String separator) {
+        return text.replace(START_TEXT + separator + END_TEXT,"");
+    }
 }
