@@ -29,7 +29,7 @@ public class StringSeparator {
                 }
                 number += str.charAt(i);
             } else {
-                if (calculator.getSeparators().contains(String.valueOf(str.charAt(i)))) {
+                if (isSeparator(str.charAt(i))) {
                     if (!number.isEmpty()) {
                         calculator.addNumber(Integer.parseInt(number));
                         number = "";
@@ -61,6 +61,13 @@ public class StringSeparator {
 
     private String extractionSeparator(String divide) {
         return divide.substring(2, divide.length() - 2);
+    }
+
+    private boolean isSeparator(char ch) {
+        if (calculator.getSeparators().contains(String.valueOf(ch))) {
+            return true;
+        }
+        return false;
     }
 
 }
