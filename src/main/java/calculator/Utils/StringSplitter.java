@@ -1,7 +1,7 @@
 package calculator.Utils;
 
 import static calculator.Constants.DelimiterConstants.CUSTOM_DELIMITER_END;
-import static calculator.Constants.DelimiterConstants.CUSTOM_DELIMITER_START;
+import static calculator.Constants.DelimiterConstants.CUSTOM_INDICATOR_REGEX;
 
 import calculator.Model.Delimiter;
 import java.util.Arrays;
@@ -14,6 +14,10 @@ public class StringSplitter {
     }
 
     public static String getCustomDelimiter(String userInput) {
-        return userInput.substring(userInput.indexOf(CUSTOM_DELIMITER_START), userInput.indexOf(CUSTOM_DELIMITER_END));
+        return userInput.substring(2, userInput.indexOf(CUSTOM_DELIMITER_END));
+    }
+
+    public static String deleteIndicator(String userInput) {
+        return userInput.replaceAll(CUSTOM_INDICATOR_REGEX, "");
     }
 }
