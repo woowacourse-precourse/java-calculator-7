@@ -7,7 +7,7 @@ import java.util.StringTokenizer;
 public class Decoder {
 
     private static final String DELIMITER_START = "//";
-    private static final String DELIMITER_END = "\n";
+    private static final String DELIMITER_END = "\\n";
     private static final String DEFAULT_DELIMITER = ",:";
     private final List<Integer> decodedNumbers;
 
@@ -28,7 +28,7 @@ public class Decoder {
     }
 
     private String findStringToAdd(String input) {
-        return input.substring(input.indexOf(DELIMITER_END) + 1);
+        return input.substring(input.indexOf(DELIMITER_END) + 2);
     }
 
     // 커스텀 구분자 찾기
