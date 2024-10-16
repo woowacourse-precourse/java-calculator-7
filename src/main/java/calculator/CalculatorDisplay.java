@@ -29,13 +29,11 @@ public class CalculatorDisplay {
             input = input.replace(matcher.group(), "");
         }
 
-        // 3. 구분자를 기준으로 숫자 분리하기
-        String[] strings = separationProcessor.split(input);
-        for(String s : strings){
-            System.out.printf("%s ", s);
-        }
-
         // 4. 숫자의 합 계산하기
+        Calculator calculator = new Calculator(separationProcessor);
+        int result = calculator.sum(input);
+
+        System.out.println(result);
 
         // 5. 결과 출력하기
     }
