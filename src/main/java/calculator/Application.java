@@ -58,6 +58,14 @@ public class Application {
         return DEFAULT_DELIMITERS;  // 기본 구분자 사용
     }
 
+    private String extractNumbersPart(String input) {
+        if (input.startsWith("//")) {
+            int delimiterEndIndex = input.indexOf("\\n");
+            return input.substring(delimiterEndIndex + 2);
+        }
+        return input.trim();
+    }
+
     public static void main(String[] args) {
         Application calculator = new Application();
 
