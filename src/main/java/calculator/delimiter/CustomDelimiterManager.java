@@ -1,4 +1,4 @@
-package calculator;
+package calculator.delimiter;
 
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -28,7 +28,7 @@ public class CustomDelimiterManager {
             return false;
         }
 
-        delimiters.add(new Delimiter(customSeparator.get()));
+        delimiters.add(new CustomDelimiter(customSeparator.get()));
         return true;
     }
 

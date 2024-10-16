@@ -1,14 +1,14 @@
-package calculator;
+package calculator.delimiter;
 
-public class Delimiter {
+public class CustomDelimiter implements Delimiter {
 
     private final char value;
 
-    public Delimiter(char value) {
+    public CustomDelimiter(char value) {
         this.value = value;
     }
 
-    public Delimiter(String str) {
+    public CustomDelimiter(String str) {
         if (str.length() != 1) {
             throw new IllegalArgumentException("구분자는 문자만 가능합니다.");
         }
@@ -24,7 +24,7 @@ public class Delimiter {
             return false;
         }
 
-        Delimiter separator = (Delimiter) o;
+        CustomDelimiter separator = (CustomDelimiter) o;
         return value == separator.value;
     }
 
