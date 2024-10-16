@@ -20,7 +20,7 @@ class CalculatorTest {
         // given & when
         Calculator calculator = Calculator.of("1,2:3");
         // then
-        assertEquals(6, calculator.getResult());
+        assertEquals(6, calculator.sum());
     }
 
     @Test
@@ -28,6 +28,6 @@ class CalculatorTest {
         // given & when
         Calculator calculator = Calculator.of("//;\\n1;2;3");
         // then
-        assertEquals(6, calculator.getResult());
+        assertEquals(6, calculator.sum());
     }
 }

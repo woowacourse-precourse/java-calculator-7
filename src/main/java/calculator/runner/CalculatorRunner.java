@@ -11,6 +11,6 @@ public class CalculatorRunner {
         Console.close();
 
         Calculator calculator = Calculator.of(input);
-        System.out.println("결과 : " + calculator.getResult());
+        System.out.println("결과 : " + calculator.sum());
     }
 }

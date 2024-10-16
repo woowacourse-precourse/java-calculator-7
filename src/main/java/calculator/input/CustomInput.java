@@ -10,7 +10,7 @@ public class CustomInput extends Input {
     }
 
     @Override
-    protected boolean isSeparator(char ch) {
+    public boolean isSeparatorEqual(char ch) {
         return ch == separator;
     }
 }
