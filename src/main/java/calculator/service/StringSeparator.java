@@ -14,7 +14,8 @@ public class StringSeparator {
         String number = "";
         String divide = "";
         for (int i = 0; i < str.length(); i++) {
-            if (isNumber(str.charAt(i))) {
+            char nowChar = str.charAt(i);
+            if (isNumber(nowChar)) {
                 if (!divide.isEmpty()) {
                     if (isWrongInput(divide)) {
                         throw new IllegalArgumentException("잘못된 입력입니다.");
@@ -24,15 +25,15 @@ public class StringSeparator {
                         divide = "";
                     }
                 }
-                number += str.charAt(i);
+                number += nowChar;
             } else {
-                if (isSeparator(str.charAt(i))) {
+                if (isSeparator(nowChar)) {
                     if (!number.isEmpty()) {
                         calculator.addNumber(Integer.parseInt(number));
                         number = "";
                     }
                 } else {
-                    divide += str.charAt(i);
+                    divide += nowChar;
                 }
             }
         }

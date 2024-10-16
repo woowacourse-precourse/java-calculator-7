@@ -11,11 +11,12 @@ public class CalculatorController {
     private OutputView outputView;
     private Calculator calculator;
 
-    public CalculatorController() {
-        this.calculator = new Calculator();
-        this.stringSeparator = new StringSeparator(this.calculator);
-        this.inputView = new InputView();
-        this.outputView = new OutputView();
+    public CalculatorController(Calculator calculator, StringSeparator stringSeparator, InputView inputView,
+                                OutputView outputView) {
+        this.calculator = calculator;
+        this.stringSeparator = stringSeparator;
+        this.inputView = inputView;
+        this.outputView = outputView;
     }
 
     public void run() {
