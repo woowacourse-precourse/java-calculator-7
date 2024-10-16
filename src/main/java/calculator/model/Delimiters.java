@@ -1,6 +1,8 @@
 package calculator.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Delimiters {
     private final ArrayList<Character> delimiters;
@@ -9,6 +11,10 @@ public class Delimiters {
         this.delimiters = new ArrayList<>();
         delimiters.add(',');
         delimiters.add(';');
+    }
+
+    public List<Character> getDelimiters() {
+        return Collections.unmodifiableList(delimiters);
     }
 
     public void addCustomDelimiter(char customDelimiter) {
