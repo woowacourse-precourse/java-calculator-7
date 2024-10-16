@@ -11,7 +11,13 @@ public class CalculatorService {
     }
 
     public int calculateSum(String input) {
-        return StringNumberSumCalculator.sum(delimiterService.splitNumbers(input));
+        String[] numbers = delimiterService.splitNumbers(input);
+
+        if (numbers.length == 1) {
+            return Integer.parseInt(numbers[0]);
+        }
+
+        return StringNumberSumCalculator.sum(numbers);
     }
 
 }
