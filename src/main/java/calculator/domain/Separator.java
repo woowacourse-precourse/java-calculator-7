@@ -17,8 +17,8 @@ public class Separator {
 		this.separators.add(customSeparator);
 	}
 
-	public List<Character> getSeparators() {
-		return separators;
+	public Character getSeparators(int index) {
+		return separators.get(index);
 	}
 
 	public static Separator getInstance() {

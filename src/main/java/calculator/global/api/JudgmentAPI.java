@@ -20,6 +20,7 @@ public class JudgmentAPI {
                 return continuousTrue;
             }
         }
+
         return continuousTrue;
     }
 }
