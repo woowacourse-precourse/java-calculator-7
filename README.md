@@ -70,4 +70,21 @@
 - 숫자가 int형 혹은 long형의 범위를 넘는가?
 - 잘못된 입력값에 IllegalArgumentException을 발생시키는가?
 
+#### 클래스 정의 및 시퀀스 다이어그램
+사용자와 시스템(클래스)은 다음과 같은 시퀀스에 따라 동작한다.
+- MVC 패턴 적용
+- Validator 적용
+- Model -> SeparatorParser, NumberParser, Calculator
+  - SeparatorParser: 구분자를 파싱한다.
+  - NumberParser: 숫자를 파싱한다.
+  - Calculator: 숫자를 덧셈한다.
+- View -> InputView, OutputView
+  - InputView: 문자열을 입력받는다.
+  - OutputView: 결과를 출력한다.
+- Validator -> InputValidator, SeparatorValidator, NumberValidator
+  - InputValidator: 입력값 검증
+  - SeparatorValidator: 구분자 검증
+  - NumberValidator: 숫자 검증
+- Validator는 위에서 정의한 예외사항을 검증한다.
 
+![sequenceDiagram.png](sequenceDiagram.png)
