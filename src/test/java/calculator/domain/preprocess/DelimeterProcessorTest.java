@@ -38,4 +38,11 @@ class DelimeterProcessorTest {
         assertDoesNotThrow(
                 ()->delimeterProcessor.validateCutomDelimeterRequest("//;\n2,3,4"));
     }
+
+    @Test
+    @DisplayName("구분자 추출 테스트")
+    void extract_custom_delimeter(){
+        String delimeter = delimeterProcessor.extractCustomDelimeter("//;\n");
+        assertEquals(delimeter,";");
+    }
 }
