@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Calculation {
 
-    public Integer addOperrands(InputString inputString){
+    public Integer addOperands(InputString inputString){
         List<Integer> operands = inputString.getOperands();
         Integer result = 0;
 
