@@ -1,6 +1,5 @@
 package calculator.service;
 
-import calculator.exception.InvalidInputException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -37,21 +36,21 @@ class ParsingServiceTest {
     //======================= Exception =======================//
     @Test
     void 커스텀_구분자_형식_오류시_예외_발생() {
-        assertThrows(InvalidInputException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             parsingService.parseNumbers("//\n1,2,3");
         });
     }
 
     @Test
     void 음수_입력시_예외_발생() {
-        assertThrows(InvalidInputException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             parsingService.parseNumbers("1,-2,3");
         });
     }
 
     @Test
     void 유효하지_않은_숫자_형식_예외_발생() {
-        assertThrows(InvalidInputException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             parsingService.parseNumbers("1,2,a");
         });
     }

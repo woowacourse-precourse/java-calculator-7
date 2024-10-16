@@ -1,6 +1,5 @@
 package calculator.service;
 
-import calculator.exception.InvalidInputException;
 import calculator.view.InputView;
 import camp.nextstep.edu.missionutils.Console;
 import org.junit.jupiter.api.AfterEach;
@@ -45,7 +44,7 @@ class InputServiceTest {
     void 빈_문자열_입력시_예외_발생() {
         provideInput("");
 
-        assertThrows(InvalidInputException.class, () -> inputService.getValidInput());
+        assertThrows(IllegalArgumentException.class, () -> inputService.getValidInput());
     }
 
     @Test
@@ -63,7 +62,7 @@ class InputServiceTest {
         String input = "//\\n1,2,3";
         provideInput(input);
 
-        assertThrows(InvalidInputException.class, () -> inputService.getValidInput());
+        assertThrows(IllegalArgumentException.class, () -> inputService.getValidInput());
     }
 
     @Test
@@ -71,6 +70,6 @@ class InputServiceTest {
         String input = "//;1;2;3";
         provideInput(input);
 
-        assertThrows(InvalidInputException.class, () -> inputService.getValidInput());
+        assertThrows(IllegalArgumentException.class, () -> inputService.getValidInput());
     }
 }

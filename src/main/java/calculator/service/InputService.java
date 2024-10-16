@@ -1,7 +1,7 @@
 package calculator.service;
 
-import calculator.exception.InvalidInputException;
 import calculator.view.InputView;
+import java.lang.IllegalArgumentException;
 
 public class InputService {
 
@@ -19,7 +19,7 @@ public class InputService {
             return input;
         }
         catch (Exception e){
-            throw new InvalidInputException("입력값이 비어있습니다.");
+            throw new IllegalArgumentException("입력값이 비어있습니다.");
         }
     }
 
@@ -29,13 +29,13 @@ public class InputService {
             int newlineIndex = input.indexOf("\\n");
 
             if (newlineIndex == -1) {
-                throw new InvalidInputException("\\n 가 존재하지 않습니다.");
+                throw new IllegalArgumentException("\\n 가 존재하지 않습니다.");
             }
 
             String delimiter = input.substring(2, newlineIndex);
 
             if (delimiter.isEmpty()) {
-                throw new InvalidInputException("커스텀 구분자가 존재하지 않습니다.");
+                throw new IllegalArgumentException("커스텀 구분자가 존재하지 않습니다.");
             }
         }
     }

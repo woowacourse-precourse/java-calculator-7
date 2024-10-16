@@ -1,8 +1,6 @@
 package calculator.service;
 
-import calculator.exception.InvalidInputException;
 import calculator.util.NumberValidator;
-
 import java.util.Arrays;
 
 public class ParsingService {
@@ -35,7 +33,7 @@ public class ParsingService {
         int newlineIndex = input.indexOf("\\n");
 
         if (newlineIndex == -1) {
-            throw new InvalidInputException("\\n 가 존재하지 않습니다.");
+            throw new IllegalArgumentException("\\n 가 존재하지 않습니다.");
         }
 
         return "|" + input.substring(2, newlineIndex);
