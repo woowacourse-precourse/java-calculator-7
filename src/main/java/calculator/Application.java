@@ -15,7 +15,8 @@ public class Application {
         List<String> separators = List.of(",", ":", numberStringAndCustomSeparator.get(1));
         String numberString = numberStringAndCustomSeparator.get(0);
 
-        getNumber(numberString, separators);
+        List<Integer> numbers = getNumber(numberString, separators);
+        int result = sumNumbers(numbers);
     }
 
     // 문자열 입력
@@ -60,7 +61,6 @@ public class Application {
         for (String number : numbers) {
             int numberInt;
             try {
-                System.out.println(number);
                 numberInt = Integer.parseInt(number);
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException();
@@ -73,5 +73,13 @@ public class Application {
     }
 
     // 숫자 합 계산
+    public static int sumNumbers(List<Integer> numbers) {
+        int result = 0;
+        for (int number : numbers) {
+            result = result + number;
+        }
+        return result;
+    }
+
     // 결과 반환
 }
