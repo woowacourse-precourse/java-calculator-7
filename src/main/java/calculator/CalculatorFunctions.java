@@ -14,7 +14,9 @@ public class CalculatorFunctions {
         int sum = 0;
 
         for (String token : tokens) {
-            if(token.isEmpty()) continue;
+            if(token.isEmpty()) {
+                throw new IllegalArgumentException("잘못된 형식: 구분자를 연속으로 사용하였습니다.");
+            }
 
             if(!token.matches("\\d+")) {
                 throw new IllegalArgumentException("잘못된 형식 : 숫자가 아닌 값이 포함되었습니다.");
