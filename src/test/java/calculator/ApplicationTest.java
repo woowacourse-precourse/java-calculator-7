@@ -8,31 +8,32 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
-    @Test
-    void 입력값_유효성_검사(){
-        assertSimpleTest(() -> {
 
-            assertSimpleTest(() ->
-                    assertThatThrownBy(() -> runException("-1,2,3"))
-                            .isInstanceOf(IllegalArgumentException.class)
+  @Test
+  void 입력값_유효성_검사() {
+    assertSimpleTest(() -> {
 
-            );
+      assertSimpleTest(() ->
+          assertThatThrownBy(() -> runException("-1,2,3"))
+              .isInstanceOf(IllegalArgumentException.class)
 
-            assertSimpleTest(() ->
-                    assertThatThrownBy(() -> runException("//\n"))
-                            .isInstanceOf(IllegalArgumentException.class)
+      );
 
-            );
+      assertSimpleTest(() ->
+          assertThatThrownBy(() -> runException("//\n"))
+              .isInstanceOf(IllegalArgumentException.class)
 
-
-        });
-    }
+      );
 
 
-    @Override
-    public void runMain() {
-        Application.main(new String[]{});
-    }
+    });
+  }
+
+
+  @Override
+  public void runMain() {
+    Application.main(new String[]{});
+  }
 
 
 }
