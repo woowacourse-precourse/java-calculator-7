@@ -59,7 +59,14 @@ public class Application {
     }
 
 
-
+    // 정수 배열의 합을 계산하는 메서드
+    public static int sum(int[] integerArray) {
+        int total = 0;
+        for (int number : integerArray) {
+            total += number; // 각 값을 더함
+        }
+        return total;
+    }
 
 
 
@@ -92,6 +99,9 @@ public class Application {
         // 배열의 유효성 검사
         validateInput(numbers);
 
+        // 합 계산 및 결과 출력
+        int totalSum = sum(numbers);
+        System.out.println("결과 : " + totalSum);
 
 
     }
