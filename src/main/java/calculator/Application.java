@@ -2,8 +2,7 @@ package calculator;
 
 import calculator.tool1.StringChecker;
 import calculator.tool1.StringInput;
-import calculator.tool2.ExtractDelimiter;
-import calculator.tool2.ExtractNum;
+import calculator.tool2.Extracts;
 import calculator.tool3.Answer;
 import camp.nextstep.edu.missionutils.Console;
 
@@ -15,37 +14,25 @@ public class Application {
 
     try {
       //입력값 받기
-      String[] input = StringInput.inputString();
-
-      String delimitersString = input[0];
-      String numsString = input[1];
+      StringInput input = new StringInput();
 
       //문자열 유효성 검사
-      if (!StringChecker.checkString(delimitersString,numsString)) {
+      if (!StringChecker.checkString
+          (input.getDelimiters(), input.getNums())) {
         throw new IllegalArgumentException("문자열이 유효하지 않습니다");
       }
 
-      String[] delimiters =  ExtractDelimiter.
-          extractDelimiter(delimitersString);
+      Extracts extracts =
+          new Extracts(input.getNums(),input.getDelimiters());
 
-      /*
-       * for (String delimiter: delimiters) {
-       *   System.out.print(delimiter);
-       * }
-       */
+      extracts.extractDelimiter();
+      extracts.extractNum();
 
-      long[] nums = ExtractNum.extractNum(numsString, delimiters);
-
-      /*
-       * for (long num : nums) {
-       * System.out.print(num);
-       * }
-       */
-
-      Answer answer = new Answer(nums);
+      Answer answer = new Answer(extracts.getNums());
 
       answer.calSum();
       answer.printAns();
+
 
     } catch (NoSuchElementException |
              IllegalArgumentException noSuchElementException) {
