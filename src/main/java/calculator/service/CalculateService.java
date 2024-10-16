@@ -27,7 +27,11 @@ public class CalculateService {
             try {
                 for (String s : split) {
                     System.out.println("s = " + s);
-                    sum += Integer.parseInt(s);
+                    int intValue = Integer.parseInt(s);
+                    if (intValue < 0) {
+                        throw new IllegalArgumentException("양수만 입력해주세요.");
+                    }
+                    sum += intValue;
                 }
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("구분자(, 또는 :)와 숫자로만 입력해주세요.");
