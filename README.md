@@ -40,8 +40,7 @@ AngularJS Git Commit Message Conventions을 참고해 커밋 메시지를 작성
 커스텀 구분자는 문자열 앞부분의 "//"와 "\n" 사이에 위치하는 문자를 커스텀 구분자로 사용한다.
 예를 들어 "//;\n1;2;3"과 같이 값을 입력할 경우 커스텀 구분자는 세미콜론(;)이며, 결과 값은 6이 반환되어야 한다.
 사용자가 잘못된 값을 입력할 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료되어야 한다.
-입출력 요구 사항
-![image](https://github.com/user-attachments/assets/5247617c-69ea-4d06-a642-aa414ca755b2)
+입출력 요구 사항![image](https://github.com/user-attachments/assets/5247617c-69ea-4d06-a642-aa414ca755b2)
 
 
 ## 프로그래밍 요구 사항
