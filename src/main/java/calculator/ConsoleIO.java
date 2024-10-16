@@ -9,4 +9,8 @@ public class ConsoleIO {
         return Console.readLine();
     }
 
+    public void printResult(int result) {
+        System.out.println("결과: " + result);
+    }
+
 }
