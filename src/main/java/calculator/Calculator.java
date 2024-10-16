@@ -9,7 +9,7 @@ public class Calculator {
         int sum = 0;
         String contentString = new String(data.getContents());
         String separatorString = getSeparatorsString(data.getSeparators());
-        String[] nums = contentString.split(separatorString);
+        String[] nums = contentString.split("[" + separatorString + "]");
         for (int i = 0; i < nums.length; i++) {
             sum += Integer.parseInt(nums[i]);
         }
@@ -29,14 +29,9 @@ public class Calculator {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < separators.length - 1; i++) {
             sb.append(separators[i]);
-            sb.append("|");
         }
         char lastElement = separators[separators.length - 1];
         sb.append(lastElement);
         return sb.toString();
-    }
-
-    public static int charToInt(char c) {
-        return c - '0';
     }
 }
