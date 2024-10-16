@@ -1,7 +1,11 @@
 package calculator;
 
+import calculator.view.ConsoleView;
+
 public class Application {
+
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        ConsoleView view = new ConsoleView();
+        String input = view.requestInput();
     }
 }
