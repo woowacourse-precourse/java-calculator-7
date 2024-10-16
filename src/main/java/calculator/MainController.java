@@ -12,23 +12,29 @@ public class MainController {
         String inputString = Console.readLine();
         int sum=0;
 
+        SplitbyCustomDelimiter(inputString);
+
+        SplitbyDefaultDelimiter(inputString);
+    }
+
+    private static List<String> SplitbyDefaultDelimiter(String inputString) {
+        List<String> defaultDelimterSplitted = Arrays.asList(inputString.split(",|:"));
+        return defaultDelimterSplitted;
+    }
+
+    private static List<String> SplitbyCustomDelimiter(String inputString) {
         String prefix = inputString.substring(0, 2);
         String suffix = inputString.substring(3, 5);
+        List<String> customDelimiterSplitted = null;
+
         if (prefix.equals("//") && suffix.equals("\\n")) {
             String customDelimiter = String.valueOf(inputString.charAt(2));
-            String newInputString = inputString.substring(5);
-            String[] customDelimiterSplitted = newInputString.split(customDelimiter);
-
-            for (String part : customDelimiterSplitted) {
-                sum += Integer.parseInt(part);
-            }
-            System.out.printf("결과 : %d",sum);
+            String remainingInput = inputString.substring(5);
+            customDelimiterSplitted = Arrays.asList(remainingInput.split(customDelimiter));
         }
-
-//        List<String> defaultDelimterSplitted = Arrays.asList(inputString.split(",|:"));
-//        for (String part : defaultDelimterSplitted) {
-//            sum += Integer.parseInt(part);
-//        }
-//        System.out.println(sum);
+        return customDelimiterSplitted;
     }
+//            for (String part : customDelimiterSplitted) {
+//                sum += Integer.parseInt(part);
+//            }
 }
