@@ -15,7 +15,7 @@ public class Delimiter {
 
     public String addCustomDelimiter(String input) {
         String customDelHeader = getCustomDelHeader(input);
-        validateInputHeader(customDelHeader);
+        validateCustomDelHeader(customDelHeader);
 
         char customDel = customDelHeader.charAt(CUSTOM_DEL_INDEX);
         validateCustomDel(customDel);
@@ -31,11 +31,8 @@ public class Delimiter {
         return input.substring(0, 5);
     }
 
-    private void validateInputHeader(String inputHeader) {
-        if (!inputHeader.startsWith("//")) {
-            throw new IllegalArgumentException("커스텀 구분자 설정은 // 로 시작되어야합니다.");
-        }
-        if (!inputHeader.endsWith("\\n")) {
+    private void validateCustomDelHeader(String customDelHeader) {
+        if (!customDelHeader.endsWith("\\n")) {
             throw new IllegalArgumentException("커스텀 구분자 설정은 \\n 으로 끝나야합니다.");
         }
     }
