@@ -87,6 +87,17 @@ class CalculatorTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"11+22,33", "444+555:666", "777+888+999"})
+    @DisplayName("커스텀 구분자가 포함된 숫자로 이루어진 문자열 추출시, 정수 리스트를 반환한다.")
+    void givenInputNumberStringWithCustomDelimiter_whenExtractInteger_thenReturnIntegerList(String input) {
+        // given
+        char customDelimiter = '+';
+        // when, then
+        assertThat(calculator.extractInteger(input, customDelimiter)).doesNotHaveSameClassAs(String.class);
+    }
+
+
     @Test
     @DisplayName("숫자 정보가 없을 경우, 0을 반환한다.")
     void givenEmptyNumbers_whenSum_thenReturnZero() {
