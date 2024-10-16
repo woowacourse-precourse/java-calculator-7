@@ -11,4 +11,4 @@
 3. 결과 출력
 
 ## 유스케이스 다이어그램
-
+![첫주차미션_유스케이스_다이어그램](https://github.com/user-attachments/assets/f0f818d0-6ee7-40fc-bb6d-8f81956f2dec)
