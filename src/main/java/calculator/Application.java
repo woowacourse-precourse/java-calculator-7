@@ -4,38 +4,35 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
-        // //@\n1@2,3:4
-        // //@\n1@2,"":4
-
-        // //@\n1@2, :4
-
         System.out.println("덧셈할 문자열을 입력해 주세요.");
+        String input = Console.readLine();
         DefaultDelimiter defaultDelimiter = new DefaultDelimiter();
 
-        String input = Console.readLine();
-
         if (!isCustom(input)) {
-            System.out.println(!isCustom(input));
-            String defaultRegex = defaultDelimiter.getDefaultDelimiter();
-            String[] stringNumbers = input.split(defaultRegex);
+            DelimiterResult regex = new DelimiterResult(defaultDelimiter.getDefaultDelimiter());
+            InputNumberStrings numberStrings = new InputNumberStrings(input, regex);
+            Numbers numbers = new Numbers(numberStrings.split(regex.getDelimiterResult()));
+
             int sum = 0;
-            for (String stringNumber : stringNumbers) {
+            for (String stringNumber : numbers.getNumbers()) {
                 sum += Integer.parseInt(stringNumber);
             }
+
             System.out.println("결과 : " + sum);
         }
 
         if (isCustom(input)) {
             int customDelimiterEndIndex = input.indexOf("\\n");
             CustomDelimiter customDelimiter = new CustomDelimiter(input.substring(2, customDelimiterEndIndex));
-            input = input.substring(customDelimiterEndIndex + 2);
-            String combineDelimiter = defaultDelimiter.getDefaultDelimiter()
+            DelimiterResult customRegex = new DelimiterResult(defaultDelimiter.getDefaultDelimiter()
                     .substring(0, defaultDelimiter.getDefaultDelimiter().length() - 1)
-                    + customDelimiter.getCustomDelimiter() + "]";
-            NumberStrings stringNumbers = new NumberStrings(input.split(combineDelimiter));
+                    + customDelimiter.getCustomDelimiter() + "]");
+            InputNumberStrings numberStrings = new InputNumberStrings(input.substring(customDelimiterEndIndex + 2),
+                    customRegex);
+            Numbers numbers = new Numbers(numberStrings.split(customRegex.getDelimiterResult()));
 
             int sum = 0;
-            for (String stringNumber : stringNumbers.getStringNumbers()) {
+            for (String stringNumber : numbers.getNumbers()) {
                 if (stringNumber.equals("\"\"")) {
                     sum += 0;
                 }
@@ -46,9 +43,6 @@ public class Application {
             }
             System.out.println("결과 : " + sum);
         }
-
-
-
     }
 
     private static boolean isCustom(String input) {

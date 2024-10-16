@@ -1,7 +1,7 @@
 package calculator;
 
 public class DefaultDelimiter {
-    String defaultDelimiter;
+    private final String defaultDelimiter;
 
     public DefaultDelimiter() {
         this.defaultDelimiter = "[,:]";
