@@ -1,10 +1,15 @@
 package calculator.application.validation;
 
+import static calculator.domain.vo.delimiter.constants.DelimiterPattern.*;
 import static calculator.infrastructure.exception.ErrorCode.*;
+
+import calculator.application.dto.request.CalculationRequest;
 
 public class InputValidator {
 
-    public void validate(String target) {
+    public void validate(final CalculationRequest calculationRequest) {
+        String target = calculationRequest.input();
+
         isEmpty(target);
         isNotTrimmed(target);
         isNotEndedWithNumber(target);
@@ -30,14 +35,12 @@ public class InputValidator {
     }
 
     private void isProperCustomDelimiter(String target) {
-        if (target.contains("//") && target.contains("\n")) {
-            String[] startRange = target.split("//");
-            String[] endRange = startRange[1].split("\n");
-            if (endRange[0].length() > 1 || !Character.isLetter(endRange[0].charAt(0))) {
-	throw new IllegalArgumentException(
-	    INPUT_IS_NOT_PROPER_CUSTOM_DELIMITER.getMessage());
-            }
+        if(target.contains(CUSTOM_DELIMITER_PREFIX.getValue()) && !target.contains(CUSTOM_DELIMITER_SUFFIX.getValue())) {
+            throw new IllegalArgumentException(INPUT_IS_NOT_PROPER_CUSTOM_DELIMITER.getMessage());
+        }
+
+        if(target.contains(CUSTOM_DELIMITER_SUFFIX.getValue()) && !target.contains(CUSTOM_DELIMITER_PREFIX.getValue())) {
+            throw new IllegalArgumentException(INPUT_IS_NOT_PROPER_CUSTOM_DELIMITER.getMessage());
         }
     }
 }
-

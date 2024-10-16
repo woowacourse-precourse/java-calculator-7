@@ -1,9 +1,9 @@
 package calculator.infrastructure.config;
 
 import calculator.domain.service.AdditionService;
-import calculator.ports.input.InputPort;
+import calculator.port.input.InputPort;
 import calculator.adapters.input.cli.CliInputAdapter;
-import calculator.ports.output.OutputPort;
+import calculator.port.output.OutputPort;
 import calculator.adapters.output.cli.CliOutputAdapter;
 import calculator.application.service.CalculateStringCommand;
 import calculator.application.usecase.CalculateStringUseCase;

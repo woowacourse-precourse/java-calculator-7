@@ -2,20 +2,22 @@ package calculator.application.service;
 
 import static calculator.infrastructure.constants.ResponseMessage.REQUEST_INPUT_MESSAGE;
 
+import calculator.application.dto.request.CalculationRequest;
+import calculator.application.dto.response.CalculationResponse;
 import calculator.domain.service.AdditionService;
-import calculator.ports.input.InputPort;
-import calculator.ports.output.OutputPort;
+import calculator.port.input.InputPort;
+
 import calculator.application.usecase.CalculateStringUseCase;
 import calculator.application.validation.InputValidator;
 
 public class CalculateStringCommand implements CalculateStringUseCase {
 
-    private final InputPort inputPort;
-    private final OutputPort outputPort;
-    private final InputValidator inputValidator;
-    private final AdditionService additionService;
+    private AdditionService additionService;
+    private InputValidator inputValidator;
+    private InputPort<CalculationRequest> inputPort;
+    private calculator.port.output.OutputPort<CalculationResponse> outputPort;
 
-    public CalculateStringCommand(InputPort inputPort, OutputPort outputPort,
+    public CalculateStringCommand(InputPort inputPort, calculator.port.output.OutputPort outputPort,
         InputValidator inputValidator, AdditionService additionService) {
         this.inputPort = inputPort;
         this.outputPort = outputPort;
@@ -25,10 +27,12 @@ public class CalculateStringCommand implements CalculateStringUseCase {
 
     @Override
     public void calculate() {
-        outputPort.printLine(REQUEST_INPUT_MESSAGE.getMessage());
-        String input = inputPort.readLine();
-        inputValidator.validate(input);
+        outputPort.writeMessage(REQUEST_INPUT_MESSAGE.getMessage());
+        CalculationRequest request = inputPort.readRequest();
 
-        additionService.compute(input);
+        inputValidator.validate(request);
+        CalculationResponse response = additionService.compute(request);
+
+        outputPort.writeResponse(response);
     }
 }
