@@ -6,10 +6,9 @@ import calculator.view.InputView;
 import calculator.view.OutputView;
 
 public class CalculatorController {
-    private InputView inputView;
-    private OutputView outputView;
-    private InputStringSeparator inputStringSeparator;
-    private SumCalculator sumCalculator;
+    private final InputView inputView;
+    private final OutputView outputView;
+    private final SumCalculator sumCalculator;
 
     public CalculatorController() {
         inputView = new InputView();
@@ -19,7 +18,7 @@ public class CalculatorController {
 
     public void startCalculator() {
         outputView.printStartMessage();
-        inputStringSeparator = new InputStringSeparator(inputView.getString());
+        InputStringSeparator inputStringSeparator = new InputStringSeparator(inputView.getString());
         outputView.printResult(sumCalculator.getResult(inputStringSeparator.getInputNumber()));
     }
 }
