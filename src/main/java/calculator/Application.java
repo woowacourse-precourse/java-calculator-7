@@ -3,6 +3,7 @@ package calculator;
 import camp.nextstep.edu.missionutils.*;
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,6 +19,16 @@ public class Application {
         input = Console.readLine();
 
         isCustomSeparator(input);
+
+        System.out.println("delimiter : " + delimiter);
+        System.out.println("input : " + input);
+
+        String[] arr = splitDelimiter(input, delimiter);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    private static String[] splitDelimiter(String input, String delimiter) {
+        return input.split(delimiter);
     }
 
     private static void isCustomSeparator(String input) {
@@ -25,13 +36,17 @@ public class Application {
         matcher = pattern.matcher(input);
 
         if (matcher.matches()) {
+
             setDelimiter(matcher);
 
-            input = matcher.group(2);
+
+            System.out.println("delimiter : " + delimiter);
+            System.out.println("input : " + input);
         }
     }
 
     private static void setDelimiter(Matcher matcher) {
         delimiter = matcher.group(1);
+        input = matcher.group(2);
     }
 }
