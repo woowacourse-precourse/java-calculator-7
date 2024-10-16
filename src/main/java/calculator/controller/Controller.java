@@ -4,6 +4,7 @@ import calculator.domain.DelimiterSet;
 import calculator.domain.Numbers;
 import calculator.domain.OriginalString;
 import calculator.io.InputManager;
+import calculator.io.OutputManager;
 import calculator.service.DelimiterExtractor;
 import calculator.service.NumberCalculator;
 import calculator.service.StringParser;
@@ -28,6 +29,7 @@ public class Controller {
         String numberPart = stringParser.parseInput(originalString, delimiterSet.hasCustom());
         Numbers numbers = numberCalculator.calculateNumbers(numberPart, delimiterSet.getSplitForm());
 
+        OutputManager.printSum(numbers.getSum());
     }
 
 }

@@ -6,7 +6,8 @@ public class StringParser {
 
     public String parseInput(OriginalString originalString, boolean hasCustom) {
         if (hasCustom) {
-            return originalString.value().split("\\n")[1];
+            int indexOfSplitDelimiter = originalString.value().indexOf("\\n");
+            return originalString.value().substring(indexOfSplitDelimiter + 2);
         }
         return originalString.value();
     }
