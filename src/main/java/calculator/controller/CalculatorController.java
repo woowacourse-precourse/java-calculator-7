@@ -14,7 +14,7 @@ public class CalculatorController {
     public void run() {
         String input = InputView.readNumbers();
         List<Integer> numList = inputParser.checkAndParseInput(input);
-        int sum = sumCalculator.sum(numList);
+        int sum = sumCalculator.calculate(numList);
         OutputView.printResult(sum);
     }
 
