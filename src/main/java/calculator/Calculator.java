@@ -36,9 +36,9 @@ public class Calculator {
             int subStringLength = CUSTOM_DELIMITER_PREFIX.length() + CUSTOM_DELIMITER.length() + CUSTOM_DELIMITER_SUFFIX.length();
             String newInput = input.substring(subStringLength);
 
-            return List.of(newInput.split(format("[%s|%s|%s]", FIRST_DELIMITER, SECOND_DELIMITER, CUSTOM_DELIMITER)));
+            return List.of(newInput.split(format("%s|%s|%s", FIRST_DELIMITER, SECOND_DELIMITER, CUSTOM_DELIMITER)));
         }
-        return List.of(input.split(format("[%s|%s]", FIRST_DELIMITER, SECOND_DELIMITER)));
+        return List.of(input.split(format("%s|%s", FIRST_DELIMITER, SECOND_DELIMITER)));
     }
 
     private static void setCustomDelimiter(final String input) {
