@@ -15,12 +15,9 @@ public class Application {
         // Get input
         String input = readLine();
 
-        try {
-            int result = getResult(input);
-            System.out.println("결과 : " + result);
-        } catch (IllegalArgumentException e) {
-            System.out.println("잘못된 입력입니다: " + e.getMessage());
-        }
+        int result = getResult(input);
+
+        System.out.println("결과 : " + result);
     }
 
     private static int getResult(String input) {
