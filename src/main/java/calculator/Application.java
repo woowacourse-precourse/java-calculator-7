@@ -6,6 +6,8 @@ public class Application {
     public static void main(String[] args) {
         //문자열 입력받기
         String input = Console.readLine();
+        Calculator calculator = new Calculator();
+        int result = calculator.add(input);
 
     }
 }
