@@ -45,4 +45,15 @@ class InputValidatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.FIRST_CHAR_CANNOT_BE_SPACE.getMessage());
     }
+
+    @Test
+    void 입력_문자열의_마지막_문자가_공백인_경우_예외를_발생시킨다() {
+        // given
+        String blankInput = "1:2, ";
+
+        // when & then
+        assertThatThrownBy(() -> InputValidator.validateIsEndBlank(blankInput))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.LAST_CHAR_CANNOT_BE_SPACE.getMessage());
+    }
 }
