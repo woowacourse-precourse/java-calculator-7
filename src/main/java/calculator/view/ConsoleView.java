@@ -10,4 +10,16 @@ public class ConsoleView {
         System.out.println(INPUT_MESSAGE);
         return Console.readLine();
     }
+
+    public void printResult(double result) {
+        Number number = checkNumber(result);
+        System.out.println("결과 : " + number);
+    }
+
+    private Number checkNumber(double result) {
+        if (result % 1 == 0) {
+            return (int) result;
+        }
+        return result;
+    }
 }

@@ -10,5 +10,6 @@ public class Application {
         String input = view.requestInput();
         CalculatorService service = new CalculatorService(input);
         double result = service.calculate();
+        view.printResult(result);
     }
 }
