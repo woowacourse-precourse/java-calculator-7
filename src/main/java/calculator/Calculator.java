@@ -3,7 +3,6 @@ package calculator;
 import java.util.Arrays;
 
 public class Calculator {
-
     private final String DEFAULT_REGEX = "[,|:]";
 
     // TODO : 메서드를 더 나눠야함. calculator 는 현재 parsing 및 덫셈 작업, validation을 하고있음
@@ -18,7 +17,6 @@ public class Calculator {
         }
         if (isDefaultDelimiter(input)) {
             return Arrays.stream(input.split(DEFAULT_REGEX))
-                    .map(String::trim)
                     .mapToInt(Integer::parseInt)
                     .sum();
         }
@@ -28,29 +26,12 @@ public class Calculator {
                     .trim();
             String customDelimiter = replaceInput.substring(0, 1);
             System.out.println("customDelimiter = " + customDelimiter);
-            return Arrays.stream(replaceInput.substring(1).split(customDelimiter))
-                    .map(String::trim)
+            return Arrays.stream(replaceInput.substring(1)
+                            .split(customDelimiter))
                     .mapToInt(Integer::parseInt)
                     .sum();
         }
-
         return 0;
-    }
-
-    private int validateIfInputNotNumber(String input) {
-        try {
-            int number = Integer.parseInt(input);
-            validateIfInputNegative(number);
-            return number;
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    private void validateIfInputNegative(int number) {
-        if (number < 0) {
-            throw new IllegalArgumentException();
-        }
     }
 
     private boolean isDefaultDelimiter(String input) {
