@@ -38,6 +38,12 @@ public class Application {
     public static String extractCustomDelimiter(String input) {
         int delimiterEndIndex = input.indexOf("\\n");
         String customDelimiter = input.substring(2, delimiterEndIndex);
+
+        if (customDelimiter.isEmpty()) {
+            System.out.println("커스텀 구분자를 입력하지 않았습니다.");
+            throw new IllegalArgumentException();
+        }
+
         return customDelimiter;
     }
 
