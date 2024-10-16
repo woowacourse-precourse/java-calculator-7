@@ -2,6 +2,7 @@ package calculator;
 
 import calculator.view.InputView;
 import calculator.view.OutputView;
+import java.util.List;
 
 public class Calculator {
 
@@ -15,6 +16,9 @@ public class Calculator {
 
     public void run() {
         outputView.requestAdditionNumbers();
-        inputView.getAdditionNumbers();
+        List<Integer> additionNumbers = inputView.getAdditionNumbers();
+
+        int result = additionNumbers.stream()
+                .reduce(0, Integer::sum);
     }
 }
