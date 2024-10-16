@@ -3,15 +3,15 @@ package calculator.controller;
 import calculator.model.InputString;
 import java.util.List;
 
-public class ApplicationController {
+public class ScenarioRunner {
 
     private final InputString inputString;
 
-    public ApplicationController(InputString inputString) {
+    public ScenarioRunner(InputString inputString) {
         this.inputString = inputString;
     }
 
-    public int ApplicationStart() {
+    public int runScenario() {
         ParsingInputString parsingInputString = new ParsingInputString();
         CalculateIntegerList calculateIntegerList = new CalculateIntegerList();
         FindCustomChar findCustomChar = new FindCustomChar();

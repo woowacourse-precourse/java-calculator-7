@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Validation {
 
-    public static void VerifyInput(List<String> numberStringList) {
+    public static void verifyInput(List<String> numberStringList) {
         for (String numberString : numberStringList) {
             try {
                 Integer.valueOf(numberString);

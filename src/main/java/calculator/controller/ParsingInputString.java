@@ -11,7 +11,7 @@ public class ParsingInputString {
         String splitString = "[,:" + inputString.getCustomChar() + "]";
         List<String> numberStringList = Arrays.stream(inputString.getInput().split(splitString))
             .toList();
-        Validation.VerifyInput(numberStringList);
+        Validation.verifyInput(numberStringList);
         return numberStringList;
     }
 
