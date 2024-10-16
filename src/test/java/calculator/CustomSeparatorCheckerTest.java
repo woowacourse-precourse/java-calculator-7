@@ -15,7 +15,7 @@ class CustomSeparatorCheckerTest {
     @DisplayName("//로 시작하고 \\n으로 끝나는 문자열 안에 커스텀 구분자가 있는지 확인한다")
     @MethodSource("generateCustomSeparatorStringData")
     void hasCustomSeparator(String inputString, boolean expected) {
-        assertThat(CustomSeparatorChecker.hasCustomSeparator(inputString)).isEqualTo(expected);
+        assertThat(CustomSeparatorManager.hasCustomSeparator(inputString)).isEqualTo(expected);
     }
 
     static Stream<Arguments> generateCustomSeparatorStringData() {
