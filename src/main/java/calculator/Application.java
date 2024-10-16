@@ -1,7 +1,13 @@
 package calculator;
 
+import calculator.controller.CalculateController;
+import calculator.io.InputHandler;
+import calculator.io.OutputHandler;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        CalculateController calculateController = new CalculateController(new InputHandler(), new OutputHandler());
+        calculateController.initialize();
+        calculateController.run();
     }
 }
