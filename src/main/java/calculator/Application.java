@@ -14,6 +14,21 @@ public class Application {
                 System.out.println("결과 : " + sum);
                 break;
             }
+
+            // 단일 숫자 입력
+            if (isInteger(input)) {
+                System.out.println("결과 : " + input);
+                break;
+            }
+        }
+    }
+
+    private static boolean isInteger(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
 }
