@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.exception.IllegalInputException;
 import java.util.Set;
 
 public class Extractor {
@@ -23,6 +24,26 @@ public class Extractor {
 
         for (String str : strArr) {
             numbers.add(Integer.valueOf(str));
+        }
+    }
+
+    private void containCustomSeparator() {
+        if (input.startsWith("//")) {
+            int separatorStartIdx = input.indexOf("//") + 2;
+            int separatorEndIdx = input.indexOf("\n");
+
+            saveCustomSeparator(separatorStartIdx, separatorEndIdx);
+        }
+    }
+
+    private void saveCustomSeparator(int separatorStartIdx, int separatorEndIdx) {
+        if (separatorEndIdx == -1) {
+            throw new IllegalInputException();
+        }
+        customSeparator = input.substring(separatorStartIdx, separatorEndIdx);
+
+        if (customSeparator.isEmpty()) {
+            throw new IllegalInputException();
         }
     }
 }
