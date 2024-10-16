@@ -23,8 +23,8 @@ public class RegexStr {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        RegexStr regexStr = (RegexStr) o;
-        return Objects.equals(regex, regexStr.regex);
+        String compareRegex = ((RegexStr) o).regex;
+        return Objects.equals(regex, compareRegex);
     }
 
     @Override

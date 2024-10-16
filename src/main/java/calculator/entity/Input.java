@@ -16,11 +16,13 @@ public class Input {
     }
 
     public boolean isCustomSep(Index index) {
-        if (!value.startsWith("//", index.value)) {
+        Integer idx = index.value;
+
+        if (!value.startsWith("//", idx)) {
             return false;
         }
 
-        return value.startsWith("\\n", index.value + CUSTOM_SEPARATOR_END);
+        return value.startsWith("\\n", idx + CUSTOM_SEPARATOR_END);
     }
 
     public Separator toSeparatorByIndex(Index index) {
@@ -28,12 +30,13 @@ public class Input {
     }
 
     protected String oneLetter(Index index) {
-        char charLetter = value.charAt(index.value);
+        Integer idx = index.value;
+
+        char charLetter = value.charAt(idx);
         return String.valueOf(charLetter);
     }
 
     public Index maxSepStringIdx() {
-
         return new Index(value.length() - CUSTOM_SEPARATOR_LENGTH);
     }
 

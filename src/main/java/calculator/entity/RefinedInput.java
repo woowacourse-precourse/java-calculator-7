@@ -26,7 +26,6 @@ public class RefinedInput {
 
         NumList numList = new NumList();
         for (String numString : numStringArray) {
-            System.out.println(numString);
             numList.addNum(new Num(numString));
         }
 

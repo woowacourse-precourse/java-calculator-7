@@ -84,6 +84,15 @@ class ApplicationTest extends NsTest {
 
     }
 
+    @Test
+    @DisplayName("예외 테스트 : 커스텀 구문자 안에 기본 구문자")
+    void exceptionTest2() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("//:\\n"))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
 
     @Override
     public void runMain() {

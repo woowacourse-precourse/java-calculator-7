@@ -30,8 +30,8 @@ public class SeparatorSet {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        SeparatorSet that = (SeparatorSet) o;
-        return Objects.equals(separators, that.separators);
+        Set<Separator> compareSeparators = ((SeparatorSet) o).separators;
+        return Objects.equals(separators, compareSeparators);
     }
 
     @Override

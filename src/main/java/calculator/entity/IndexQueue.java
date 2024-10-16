@@ -14,7 +14,8 @@ public class IndexQueue {
 
 
     public void offer(Index index) {
-        queue.offer(index.value);
+        Integer idx = index.value;
+        queue.offer(idx);
     }
 
 
@@ -27,7 +28,10 @@ public class IndexQueue {
             return false;
         }
 
-        return index.value == queue.peek();
+        Integer idx = index.value;
+        Integer peekIdx = queue.peek();
+
+        return idx.equals(peekIdx);
     }
 
 
@@ -36,11 +40,13 @@ public class IndexQueue {
         if (this == o) {
             return true;
         }
+
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        IndexQueue that = (IndexQueue) o;
-        return Objects.equals(queue, that.queue);
+
+        Queue<Integer> compareQueue = ((IndexQueue) o).queue;
+        return Objects.equals(queue, compareQueue);
     }
 
     @Override

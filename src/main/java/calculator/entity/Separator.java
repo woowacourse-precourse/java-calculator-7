@@ -11,13 +11,16 @@ public class Separator {
     private final String sep;
 
     public Separator(String separator) {
-        if (separator.equals(COMMA) || separator.equals(COLON)) {
+        Set<String> validSeparators = Set.of(COMMA, COLON);
+
+        if (validSeparators.contains(separator)) {
             throw new IllegalArgumentException("Separator should not be comma or colon");
         }
 
         if (separator.length() > 2) {
             throw new IllegalArgumentException("Separator should be a single character");
         }
+
         String quote = Pattern.quote(separator);
         this.sep = quote;
     }
@@ -48,8 +51,8 @@ public class Separator {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Separator separator = (Separator) o;
-        return Objects.equals(sep, separator.sep);
+        String compareSep = ((Separator) o).sep;
+        return Objects.equals(sep, compareSep);
     }
 
     @Override

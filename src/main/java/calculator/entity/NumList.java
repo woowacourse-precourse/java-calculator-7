@@ -12,7 +12,7 @@ public class NumList {
         this.numLists = new ArrayList<>();
     }
 
-    public int sum() {
+    public Integer sum() {
         return Num.total(numLists);
     }
 
@@ -28,8 +28,8 @@ public class NumList {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        NumList numList = (NumList) o;
-        return Objects.equals(numLists, numList.numLists);
+        List<Num> compareNumlist = ((NumList) o).numLists;
+        return Objects.equals(numLists, compareNumlist);
     }
 
     @Override

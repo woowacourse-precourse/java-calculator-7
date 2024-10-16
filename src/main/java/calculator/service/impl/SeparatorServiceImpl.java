@@ -33,7 +33,7 @@ public class SeparatorServiceImpl implements SeparatorService {
                 separatorSet.addSeparator(separator);
             }
 
-            idx.increase();
+            idx = idx.increase();
         }
 
         return separatorSet;
@@ -53,14 +53,14 @@ public class SeparatorServiceImpl implements SeparatorService {
             if (idxQueue.isIndexProcess(idx)) {
                 Index customSeparatorIdx = idx.customSeparatorIdx();
                 refinedInput.append(input, customSeparatorIdx);
-                idx.plus(CUSTOM_SEPARATOR_LENGTH);
+                idx = idx.plus(CUSTOM_SEPARATOR_LENGTH);
                 idxQueue.poll();
                 continue;
             }
 
             refinedInput.append(input, idx);
 
-            idx.increase();
+            idx = idx.increase();
         }
 
         return refinedInput;
@@ -79,7 +79,7 @@ public class SeparatorServiceImpl implements SeparatorService {
                 idxQueue.offer(idx);
             }
 
-            idx.increase();
+            idx = idx.increase();
         }
 
         return idxQueue;

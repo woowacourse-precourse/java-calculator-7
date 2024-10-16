@@ -6,27 +6,23 @@ import java.util.Objects;
 
 public class Index {
 
-    protected int value;
+    // 엔티티 계층에서 작업할 수 있도록
+    protected final Integer value;
 
-    public Index(int value) {
+    public Index(Integer value) {
         this.value = value;
     }
 
-    public void increase() {
-        this.value++;
+    public Index increase() {
+        return new Index(value + 1);
     }
-
-    public void decrease() {
-        this.value--;
-    }
-
 
     public Index customSeparatorIdx() {
         return new Index(value + CUSTOM_SEPARATOR_IDX);
     }
 
-    public void plus(int plusValue) {
-        this.value += plusValue;
+    public Index plus(Integer plusValue) {
+        return new Index(value + plusValue);
     }
 
     public boolean isLessThanOrEqual(Index index) {
@@ -37,6 +33,9 @@ public class Index {
         return value < index.value;
     }
 
+    //TODO Index 값을 사용하는 것을 Index 에서 작업하도록 하자.
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -45,8 +44,8 @@ public class Index {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Index index = (Index) o;
-        return value == index.value;
+        Integer index = ((Index) o).value;
+        return Objects.equals(value, index);
     }
 
     @Override

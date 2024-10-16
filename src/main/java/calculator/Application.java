@@ -1,37 +1,19 @@
 package calculator;
 
-import calculator.entity.IndexQueue;
-import calculator.entity.Input;
-import calculator.entity.NumList;
-import calculator.entity.RefinedInput;
-import calculator.entity.RegexStr;
-import calculator.entity.SeparatorSet;
+import calculator.controller.CalculatorController;
 import calculator.service.SeparatorService;
 import calculator.service.impl.SeparatorServiceImpl;
-import camp.nextstep.edu.missionutils.Console;
+import calculator.viewer.ConsoleView;
 
 public class Application {
 
 
     public static void main(String[] args) {
 
+        ConsoleView consoleView = new ConsoleView();
         SeparatorService separatorService = new SeparatorServiceImpl();
+        CalculatorController controller = new CalculatorController(separatorService, consoleView);
 
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-
-        Input input = new Input(Console.readLine());
-
-        SeparatorSet separatorSet = separatorService.getCustomSeparators(input);
-
-        RegexStr regexStr = separatorSet.toRegexStr();
-
-        IndexQueue idxQueue = separatorService.getAllCustomSepIdx(input);
-        RefinedInput refinedInput = separatorService.refineInput(input, idxQueue);
-
-        NumList numList = separatorService.separateNum(refinedInput, regexStr);
-        int total = numList.sum();
-
-        System.out.println("결과 : " + total);
-
+        controller.run();
     }
 }
