@@ -24,7 +24,7 @@ public class DelimiterValidation {
     private static String[] validateCustomDelimiter(String formula) {
         Matcher matcher = regexMatcher(formula, "^//(.)\\\\n(|([1-9][0-9]*(\\1[1-9][0-9]*)*))$");
         if (matcher.matches()) {
-            return new String[]{matcher.group(1), matcher.group(2)};
+            return new String[]{Pattern.quote(matcher.group(1)), matcher.group(2)};
         }
         throw new IllegalArgumentException("잘못된 사용자 입력입니다.");
     }
