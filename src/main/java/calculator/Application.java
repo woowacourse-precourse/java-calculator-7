@@ -1,12 +1,10 @@
 package calculator;
 
-import calculator.model.inputValue.InputValue;
+
+import calculator.controller.Calculator;
 
 public class Application {
     public static void main(String[] args) {
-        System.out.println("Application start!");
-
-        InputValue inputValue = new InputValue("//&&\n1:2,3&&4");
-
+        Calculator calculator = new Calculator();
     }
 }

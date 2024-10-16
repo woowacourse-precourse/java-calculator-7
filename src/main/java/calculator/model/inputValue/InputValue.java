@@ -13,23 +13,18 @@ public class InputValue {
         uncheckedInput = inputValue;
         checkCustomSeparator();
         extractNumber();
-
-//        System.out.println(positiveIntegers.toString());
     }
 
     private void checkCustomSeparator(){
         if (uncheckedInput.startsWith("//")){
-            int indexOfDelimiter = uncheckedInput.indexOf("\n");
+            int indexOfDelimiter = uncheckedInput.indexOf("n");
             if (indexOfDelimiter == -1) {
                 throw new IllegalArgumentException("Wrong format");
             }
-            customDelimiter = uncheckedInput.substring(2,indexOfDelimiter);
+            customDelimiter = uncheckedInput.substring(2,indexOfDelimiter-1);
             delimiter = delimiter.concat("|").concat(customDelimiter);
             uncheckedInput = uncheckedInput.substring(indexOfDelimiter+1);
         }
-
-        System.out.println("customSeparator is " + customDelimiter);
-        System.out.println("All delimiter is = " + delimiter);
     }
 
     private void extractNumber(){
@@ -51,5 +46,11 @@ public class InputValue {
         }
     }
 
-
+    public String calculateSum() {
+        int sum = 0;
+        for (int number : positiveIntegers){
+            sum += number;
+        }
+        return Integer.toString(sum);
+    }
 }
