@@ -9,7 +9,16 @@ import org.junit.jupiter.api.Test;
 public class StringSeparatorTest {
 
     @Test
-    public void 구분자_커스텀_메소드_확인() {
+    public void 구분자_추출() {
+        Calculator calculator = new Calculator();
+        StringSeparator stringSeparator = new StringSeparator(calculator);
+
+        String separator = stringSeparator.extractionSeparator("//]\n");
+        assertTrue(separator.equals("]"));
+    }
+
+    @Test
+    public void 구분자_커스텀() {
         Calculator calculator = new Calculator();
         StringSeparator stringSeparator = new StringSeparator(calculator);
 
