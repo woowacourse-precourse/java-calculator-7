@@ -1,5 +1,8 @@
-package calculator;
+package calculator.calculator;
 
+import calculator.delimiter.Delimiter;
+import calculator.delimiter.DelimiterFactory;
+import calculator.delimiter.DelimiterUtils;
 import java.util.List;
 import java.util.Objects;
 
