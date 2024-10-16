@@ -21,7 +21,7 @@ public class CalculatorController {
     public void calculate() {
         outputView.printStartMessage();
         String readString = inputView.readString();
-        numbers = separator.getNumberList(readString);
+        numbers = separator.getNumbers(readString);
         outputView.printResult(numbers);
     }
 }

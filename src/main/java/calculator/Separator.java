@@ -13,7 +13,7 @@ public class Separator {
         symbols = COMMA + COLON;
     }
 
-    public Numbers getNumberList(String readString) {
+    public Numbers getNumbers(String readString) {
         String numberString = readString;
         if(hasCustomSeparator(readString)){
             addCustomSeparator(readString);
@@ -51,7 +51,7 @@ public class Separator {
     private void addCustomSeparator(String readString) {
         String substring = readString.substring(0, readString.indexOf(CUSTOM_SEPARATOR_END));
         substring = substring.replace(CUSTOM_SEPARATOR_START,"");
-        if (!substring.equals("")) {
+        if (!substring.isEmpty()) {
             symbols = symbols +substring;
         }
     }
