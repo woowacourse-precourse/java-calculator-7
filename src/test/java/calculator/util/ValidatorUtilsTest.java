@@ -11,8 +11,9 @@ public class ValidatorUtilsTest {
   void 문자열_유효성() {
     String validInput  = "1,2";
     String invalidInput  = ",1,2";
-    assertThat(Validator.isValidate(input)).isEqualTo(True);
-    assertThat(Validator.isValidate(input)).isEqualTo(True);
+
+    assertThat(Validator.isValidate(validInput)).isEqualTo(true);
+    assertThat(Validator.isValidate(invalidInput)).isEqualTo(false);
   }
 
 }
