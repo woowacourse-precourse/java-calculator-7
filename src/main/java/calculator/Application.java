@@ -3,18 +3,16 @@ package calculator;
 import calculator.extractor.NumberExtractor;
 import calculator.io.InputHandler;
 import calculator.io.OutputHandler;
-import calculator.number.Numbers;
 
 public class Application {
 
     public static void main(String[] args) {
-        String userInput = new InputHandler().getUserInput();
-
+        InputHandler inputHandler = new InputHandler();
+        OutputHandler outputHandler = new OutputHandler();
         NumberExtractor numberExtractor = new NumberExtractor();
-        Numbers numbers = numberExtractor.extractNumbers(userInput);
 
-        int totalValue = numbers.calculateTotalValue();
+        Calculator calculator = new Calculator(inputHandler, outputHandler, numberExtractor);
 
-        new OutputHandler().showCalculateResult(totalValue);
+        calculator.run();
     }
 }

@@ -6,8 +6,8 @@ import calculator.number.Numbers;
 import java.util.List;
 
 public class NumberExtractor {
-    Delimiters delimiters = new Delimiters();
-    CustomDelimiterCalculator customDelimiterCalculator = new CustomDelimiterCalculator();
+    private final Delimiters delimiters = new Delimiters();
+    private final CustomDelimiterCalculator customDelimiterCalculator = new CustomDelimiterCalculator();
 
     public Numbers extractNumbers(String input) {
         if (customDelimiterCalculator.matches(input)) {
