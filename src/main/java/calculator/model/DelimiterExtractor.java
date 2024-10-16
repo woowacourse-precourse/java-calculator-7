@@ -1,7 +1,7 @@
 package calculator.model;
 
 
-public class DelimiterProcessor {
+public class DelimiterExtractor {
 
     private static final String COMMA = ",";
     private static final String COLON = ":";

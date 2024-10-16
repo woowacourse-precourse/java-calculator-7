@@ -1,18 +1,15 @@
 package calculator.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-import calculator.view.InputView;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class DelimiterProcessorTest {
+class DelimiterExtractorTest {
 
-    DelimiterProcessor delimiterProcessor = new DelimiterProcessor();
+    DelimiterExtractor delimiterExtractor = new DelimiterExtractor();
 
     @Test
     @DisplayName("기본 구분자를 사용한 입력에서 구분자를 추출")
@@ -21,7 +18,7 @@ class DelimiterProcessorTest {
         InputStream in = new ByteArrayInputStream(userInput.getBytes());
         System.setIn(in);
 
-        String result = delimiterProcessor.determineDelimiter(userInput);
+        String result = delimiterExtractor.determineDelimiter(userInput);
 
         assertThat(result).contains(",", ":");
     }
@@ -33,7 +30,7 @@ class DelimiterProcessorTest {
         InputStream in = new ByteArrayInputStream(userInput.getBytes());
         System.setIn(in);
 
-        String result = delimiterProcessor.determineDelimiter(userInput);
+        String result = delimiterExtractor.determineDelimiter(userInput);
 
         System.out.println("result = " + result);
 
@@ -47,7 +44,7 @@ class DelimiterProcessorTest {
         InputStream in = new ByteArrayInputStream(userInput.getBytes());
         System.setIn(in);
 
-        String result = delimiterProcessor.determineDelimiter(userInput);
+        String result = delimiterExtractor.determineDelimiter(userInput);
 
         System.out.println("result = " + result);
 
@@ -62,7 +59,7 @@ class DelimiterProcessorTest {
         InputStream in = new ByteArrayInputStream(userInput.getBytes());
         System.setIn(in);
 
-        String result = delimiterProcessor.determineDelimiter(userInput);
+        String result = delimiterExtractor.determineDelimiter(userInput);
 
         System.out.println("result = " + result);
 
