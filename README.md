@@ -64,7 +64,7 @@
 
 ### 클래스 다이어그램: MVC 패턴
 
-![스크린샷 2024-10-17 02.11.43.png](..%2F..%2F%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202024-10-17%2002.11.43.png)
+![java-calculator-6-class-diagram](..%2F..%2F%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202024-10-17%2002.11.43.png)
 **CaculateResultView**
 
 사용자에게 계산된 값을 보여주는 역할을 한다.
