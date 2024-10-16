@@ -16,7 +16,7 @@ public class IntegerListMaker {
 
         for (String string : stringList) {
             NumberValidation.validation(string); // 양수인지 검증
-            numberList.add(Integer.parseInt(string));
+            numberList.add(Integer.parseInt(string.trim()));
         }
         return numberList;
     }
