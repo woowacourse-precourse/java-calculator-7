@@ -1,6 +1,5 @@
 package calculator.number;
 
-import calculator.validation.AlphabetValidation;
 import calculator.validation.NumberValidation;
 
 import java.util.ArrayList;
@@ -11,8 +10,7 @@ public class IntegerListMaker {
     public static List<Integer> getNumberList(List<String> stringList) {
         List<Integer> numberList = new ArrayList<>();
         for (String string : stringList) {
-            AlphabetValidation.alphabet(string);
-            NumberValidation.number(string);
+            NumberValidation.validation(string); // 양수인지 검증
             numberList.add(Integer.parseInt(string));
         }
         return numberList;
