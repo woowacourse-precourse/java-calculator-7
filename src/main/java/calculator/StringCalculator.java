@@ -21,10 +21,19 @@ public class StringCalculator {
         validateString(str);
 
         String[] separatedNumbers = str.split('[' + separators + ']');
+        calculateSumValue(separatedNumbers);
+        System.out.println("결과 : " + sumValue);
     }
 
     void printInputMsg() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
+    }
+
+    void calculateSumValue(String[] separatedNumbers) {
+        sumValue = 0;
+        for (String number : separatedNumbers) {
+            sumValue += Integer.parseInt(number);
+        }
     }
 
     void validateString(String str) {
