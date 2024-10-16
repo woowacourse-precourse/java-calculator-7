@@ -25,12 +25,21 @@ public class CalculatorService {
         return intArrays;
     }
 
+    public String[] splitInputByDelimiter(String input) {
+        if (Character.isDigit(input.charAt(0))) {
+            return splitByDefaultDelimiter(input);
+        }
+        if (input.startsWith("//") && input.contains("\n")) {
+            return splitByCustomDelimiter(input);
+        }
+        throw new IllegalArgumentException("잘못된 입력 형식입니다.");
+    }
 
-    public String[] splitByDefaultDelimiter(String input) {
+    private String[] splitByDefaultDelimiter(String input) {
         return input.split(getDelimiter(input));
     }
 
-    public String[] splitByCustomDelimiter(String input) {
+    private String[] splitByCustomDelimiter(String input) {
         String exceptDelimiter = input.substring(input.indexOf("\n") + 1);
         return exceptDelimiter.split(getDelimiter(input));
     }
@@ -43,9 +52,13 @@ public class CalculatorService {
         return sum;
     }
 
-    public void ensureValidInput(String input) {
-        //구분자가 존재하지 않는 경우
-        if (!input.contains(getDelimiter(input))) {
+    public int ensureValidInput(String input) {
+        //""로 입력했을 경우
+        if (input == "") {
+            return 0;
+        }
+        //기본 구분자가 존재하지 않는 경우
+        if (!defaultDelimiterExistCheck(input)) {
             throw new IllegalArgumentException("구분자가 존재하지 않습니다.");
         }
         //커스텀 구분자 중 \n을 사용하지 않음
@@ -53,10 +66,48 @@ public class CalculatorService {
             throw new IllegalArgumentException("커스텀 구분자 사용이 잘못되었습니다.");
         }
         //문자열 시작이 숫자 혹은 // 이 아닌 경우
-        if (Character.isDigit(input.charAt(0)) || input.startsWith("//")) {
-            throw new IllegalArgumentException("잘못된 문자열 입력입니다.");
+        if (!Character.isDigit(input.charAt(0)) && !input.startsWith("//")) {
+            throw new IllegalArgumentException("잘못된 문자열 입력입니다");
         }
         //문자열 중 구분자와 다른 문자가 섞여있을 경우
+        if (!isArrayNumeric(input)) {
+            throw new IllegalArgumentException("잘못된 문자열 입력입니다.");
+        }
+        if (isArrayNumeric(input)) {
+            return plus(convertIntArray(splitInputByDelimiter(input)));
+        }
+        throw new IllegalArgumentException("추가 오류 발생");
+    }
+
+    private boolean isArrayNumeric(String input) {
+        String[] stringArray = splitInputByDelimiter(input);
+        for (String s : stringArray) {
+            if (!numberCheck(s)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean defaultDelimiterExistCheck(String input) {
+        if (Character.isDigit(input.charAt(0))) {
+            return input.contains(",") || input.contains(":");
+        }
+        if (input.startsWith("//") && input.contains("\n")) {
+            String exceptDelimiter = input.substring(input.indexOf("\n") + 1);
+            String delimiter = getDelimiter(input);
+            return exceptDelimiter.contains(delimiter);
+        }
+        throw new IllegalArgumentException("구분자 오류입니다.");
+    }
+
+    private boolean numberCheck(String s) {
+        for (int i = 0; i < s.length(); i++) {
+            if (!Character.isDigit(s.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }
