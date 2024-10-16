@@ -4,8 +4,8 @@
 
 ### 📌 사용자 입력 처리
 
-- [ ] 계산 할 문자열은 구분자와 양수로 구성된 문자열을 입력한다.
-- [ ] 사용자가 입력하는 값은 `camp.nextstep.edu.missionutils.Console`의 `readLine()`을 활용한다.
+- [x] 계산 할 문자열은 구분자와 양수로 구성된 문자열을 입력한다.
+- [x] 사용자가 입력하는 값은 `camp.nextstep.edu.missionutils.Console`의 `readLine()`을 활용한다.
 
 ---
 
