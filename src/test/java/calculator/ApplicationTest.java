@@ -48,6 +48,13 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 빈_문자열() { // Console.readLine()에서 오류가 나는디?
+        assertSimpleTest(() -> {
+            run("");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
     @Override
     public void runMain() {
         Application.main(new String[]{});
