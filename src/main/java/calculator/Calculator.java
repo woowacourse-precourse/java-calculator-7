@@ -14,4 +14,10 @@ public class Calculator {
             this.operands.add(Integer.parseInt(element));
         }
     }
+
+    public int sum() {
+        return operands.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
 }
