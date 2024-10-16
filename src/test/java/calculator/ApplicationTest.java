@@ -112,7 +112,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    @DisplayName("기본 구분자를 통해 숫자를 구분한 뒤 결과값을 반환한다.")
+    @DisplayName("기본 구분자들을 통해 숫자를 구분한 뒤 결과값을 반환한다.")
     void inputTest3() {
         String userInput = "1,2,3:4";
         calculator.number.Number number = new Number(userInput);
@@ -148,6 +148,17 @@ class ApplicationTest extends NsTest {
     @DisplayName("커스텀 구분자를 사용하더라도 기본 구분자를 통해 숫자를 구분한 뒤 결과값을 반환한다.")
     void inputTest6() {
         String userInput = "//?\\n1,2,3,4";
+        calculator.number.Number number = new Number(userInput);
+
+        int result = number.getResult();
+
+        assertThat(result).isEqualTo(10);
+    }
+
+    @Test
+    @DisplayName("기본 구분자를 통해 숫자를 구분한 뒤 결과값을 반환한다.")
+    void inputTest7() {
+        String userInput = "1,2,3,4";
         calculator.number.Number number = new Number(userInput);
 
         int result = number.getResult();

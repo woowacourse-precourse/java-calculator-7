@@ -37,7 +37,7 @@ public class SeparatorValidation {
     }
 
     private static boolean notContainSpecialCharacters(String input) {
-        return !input.matches(".*[^a-zA-Z0-9가-힣,:\\- ].*");
+        return !input.matches("[^\\w가-힣,:\\-]");
     }
 
     private static boolean test(String input) {
