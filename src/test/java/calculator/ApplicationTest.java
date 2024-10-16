@@ -55,6 +55,15 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 0");
         });
     }
+
+    @Test
+    void 커스텀_구분자_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//\\n")) // substring으로 자르면, OutOfBounds가 생긴다.
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
