@@ -45,7 +45,6 @@ public class CustomDividerFinder {
         System.out.println("오픈 인덱스   " + openerIndex); //note 0
         System.out.println("클로저 인덱스   " + closerIndex); //note 3
 
-        //todo validate
         validateStringCustomDivider(closerIndex);
         validateNullCustomDivider(closerIndex);
         return openerIndex == OPENER_INDEX && closerIndex == CLOSER_INDEX;
