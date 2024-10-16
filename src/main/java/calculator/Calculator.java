@@ -9,11 +9,13 @@ public class Calculator {
 
     private static String input;
     private static String delimiters;
+    private static String[] numbers;
 
     public static void run(String inputValue) {
         setInput(inputValue);
         setDelimiter();
         validateInput();
+        parseInput();
     }
 
     private static void setInput(String inputValue) {
@@ -35,5 +37,9 @@ public class Calculator {
         if (!Pattern.matches(regex, input)) {
             throw new IllegalArgumentException("허용되지 않은 문자가 포함되어 있습니다.");
         }
+    }
+
+    private static void parseInput() {
+        numbers = input.split(delimiters);
     }
 }
