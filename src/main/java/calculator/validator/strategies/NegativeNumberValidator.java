@@ -32,7 +32,11 @@ public class NegativeNumberValidator implements ValidationStrategy {
 
     // 음수인지 확인
     private boolean isNegative(String number) {
-        return number.startsWith("-");
+        try {
+            return Integer.parseInt(number) < 0;
+        } catch (NumberFormatException e) {
+            return false;  // 숫자가 아닌 경우 음수로 처리되지 않음
+        }
     }
 
 }
