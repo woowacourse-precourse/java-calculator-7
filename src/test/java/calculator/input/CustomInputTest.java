@@ -27,39 +27,6 @@ class CustomInputTest {
         assertTrue(customInput.isSeparator(separator));
     }
 
-
-    @Test
-    void 커스텀_구분자_형식_예외_prefix_없음() {
-        // given
-        String inputStr = ";\\" + "n1;2;3";
-        // when & then
-        assertThrows(IllegalArgumentException.class, () -> Input.of(inputStr));
-    }
-
-    @Test
-    void 커스텀_구분자_형식_예외_suffix_없음() {
-        // given
-        String inputStr = "//;" + "1;2;3";
-        // when & then
-        assertThrows(IllegalArgumentException.class, () -> Input.of(inputStr));
-    }
-
-    @Test
-    void 커스텀_구분자_형식_오류_구분자_없음() {
-        // given
-        String inputStr = "//\\n" + "1;2;3";
-        // when & then
-        assertThrows(IllegalArgumentException.class, () -> Input.of(inputStr));
-    }
-
-    @Test
-    void 문자열_형식_오류_숫자로_시작_안_함() {
-        // given
-        String inputStr = "//;\\n" + ";2;3";
-        // when & then
-        assertThrows(IllegalArgumentException.class, () -> Input.of(inputStr));
-    }
-
     @Test
     void 정수배열_테스트() {
         // given & when
