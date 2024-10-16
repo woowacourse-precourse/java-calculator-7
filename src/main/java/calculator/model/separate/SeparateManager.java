@@ -22,7 +22,6 @@ public class SeparateManager {
     private final List<String> basicDelimiters;
     private String customDelimiter;
 
-
     // Constructor
     private SeparateManager() {
         basicDelimiters = Delimiter.basic();
@@ -32,7 +31,34 @@ public class SeparateManager {
         return new SeparateManager();
     }
 
-    // Validation
+    // Method
+    private Matcher createMatcher(String source, String regex) {
+        Pattern pattern = Pattern.compile(regex);
+        return pattern.matcher(source);
+    }
+
+    public boolean canParseCustomDelimiter(String source) {
+        Matcher matcher = createMatcher(source, customDelimiterStartCondition());
+        return matcher.find();
+    }
+
+    public void extractCustomDelimiter(String source) {
+        String delimiter = parseCustomDelimiter(source);
+        if (isNotBlank(delimiter)) {
+            this.customDelimiter = delimiter;
+        }
+    }
+
+    public String parseCustomDelimiter(String source) {
+        validateCustomDelimiterPosition(source);
+        validateCustomDelimiterCount(source);
+        Matcher matcher = createMatcher(source, customDelimiterParseRegex());
+        if (matcher.find()) {
+            return matcher.group(1);
+        }
+        return emptyString();
+    }
+
     public void validateCustomDelimiterCount(String source) {
         Matcher matcher = createMatcher(source, customDelimiterCountRegex());
 
@@ -52,37 +78,6 @@ public class SeparateManager {
         }
     }
 
-    public Integer tryParseToInt(String source) {
-        try {
-            return Integer.parseInt(source);
-        } catch (NumberFormatException e) {
-            throw new ParseToIntegerFailedException();
-        }
-    }
-
-    // Domain Logic - public
-    private Matcher createMatcher(String source, String regex) {
-        Pattern pattern = Pattern.compile(regex);
-        return pattern.matcher(source);
-    }
-
-    public String parseCustomDelimiter(String source) {
-        validateCustomDelimiterPosition(source);
-        validateCustomDelimiterCount(source);
-        Matcher matcher = createMatcher(source, customDelimiterParseRegex());
-        if (matcher.find()) {
-            return matcher.group(1);
-        }
-        return emptyString();
-    }
-
-    public void extractCustomDelimiter(String source) {
-        String delimiter = parseCustomDelimiter(source);
-        if (isNotBlank(delimiter)) {
-            this.customDelimiter = delimiter;
-        }
-    }
-
     public List<Integer> separate(String source) {
         String sourceReplacedByRegexes = processReplacing(source);
         String[] tokens = sourceReplacedByRegexes.split(getAllDelimiters());
@@ -95,6 +90,14 @@ public class SeparateManager {
     private String processReplacing(String source) {
         return source.replaceAll(whiteSpaceRegex(), emptyString())
                 .replaceAll(customDelimiterParseRegex(), emptyString());
+    }
+
+    public Integer tryParseToInt(String source) {
+        try {
+            return Integer.parseInt(source);
+        } catch (NumberFormatException e) {
+            throw new ParseToIntegerFailedException();
+        }
     }
 
     public String getAllDelimiters() {
@@ -117,10 +120,5 @@ public class SeparateManager {
             return false;
         }
         return true;
-    }
-
-    public boolean canParseCustomDelimiter(String source) {
-        Matcher matcher = createMatcher(source, customDelimiterStartCondition());
-        return matcher.find();
     }
 }
