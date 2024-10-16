@@ -166,6 +166,17 @@ class ApplicationTest extends NsTest {
         assertThat(result).isEqualTo(10);
     }
 
+    @Test
+    @DisplayName("기본 구분자를 통해 숫자를 구분한 뒤 결과값을 반환한다.")
+    void inputTest8() {
+        String userInput = "1  ,  2   ,   3   ,  4";
+        calculator.number.Number number = new Number(userInput);
+
+        int result = number.getResult();
+
+        assertThat(result).isEqualTo(10);
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
