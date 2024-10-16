@@ -57,6 +57,12 @@ public class Application {
         } else {
             try {
                 int number = Integer.parseInt(string);
+
+                if (number <= 0) {
+                    System.out.println("양수만 입력할 수 있습니다.");
+                    throw new IllegalArgumentException();
+                }
+
                 return number;
             } catch (NumberFormatException e) {
                 System.out.println("잘못된 입력입니다.");
