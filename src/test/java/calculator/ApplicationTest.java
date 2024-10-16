@@ -24,6 +24,14 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void testEmptyInputReturnsZero() {
+        assertSimpleTest(() -> {
+            run("\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
