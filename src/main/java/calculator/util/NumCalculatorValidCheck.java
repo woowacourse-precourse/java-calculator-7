@@ -2,8 +2,6 @@ package calculator.util;
 
 import calculator.helper.InputHelper;
 
-import javax.management.RuntimeErrorException;
-
 public class NumCalculatorValidCheck {
     /**
      *
@@ -25,8 +23,8 @@ public class NumCalculatorValidCheck {
             String numPartStr = StringUtility.getNumPart(input,isCustomSplitterExists);
             String[] numArr = numPartStr.split(splitter);
             for(String num : numArr){
-                if(!StringUtility.isNumeric(num)) return false;
-                if(!StringUtility.isInRange(num)) return false;
+                if(!isNumeric(num)) return false;
+                if(!isInRange(num)) return false;
             }
             return true;
         }catch (RuntimeException runtimeException){
@@ -35,4 +33,21 @@ public class NumCalculatorValidCheck {
     }
 
 
+    public static boolean isNumeric(String numStr) {
+        try{
+            Integer.parseInt(numStr);
+            return true;
+        }catch (NumberFormatException e){
+            return false;
+        }
+    }
+
+    public static boolean isInRange(String numStr) {
+        try{
+            if(Integer.parseInt(numStr) >= 0) return true;
+            return false;
+        }catch (NumberFormatException e){
+            return false;
+        }
+    }
 }
