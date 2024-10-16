@@ -3,30 +3,37 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Application {
+
+    private static final Pattern pattern = Pattern.compile("//(.*)\n(.*)");
+
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         String input = getInput();
-        if (isCustomSeparatorExist(input)) {
-            String customSeparator = getCustomSeparator(input);
-            String[] dividedNum = divideStringBy(input, customSeparator);
+        Matcher matcher = pattern.matcher(input);
+
+        if (isCustomSeparatorExist(matcher)) {
+            String customSeparator = getCustomSeparator(matcher);
+            String[] dividedNum = divideStringBy(matcher.group(2), customSeparator);
             int sumArr = sum(dividedNum);
         }
         String[] dividedNum = divideStringBy(input);
         int sumArr = sum(dividedNum);
     }
 
+    public static boolean isCustomSeparatorExist(Matcher matcher) {
+        return matcher.find();
+    }
+
     public static String getInput() {
         return Console.readLine();
     }
 
-    public static boolean isCustomSeparatorExist(String given) {
-        return given.startsWith("//") && given.charAt(3) == '\n';
-    }
-
-    public static String getCustomSeparator(String given) {
-        return given.substring(2, 3);
+    public static String getCustomSeparator(Matcher matcher) {
+        return matcher.group(1);
     }
 
     public static String[] divideStringBy(String givenString) {
@@ -34,7 +41,7 @@ public class Application {
     }
 
     public static String[] divideStringBy(String givenString, String customSeparator) {
-        return givenString.substring(4).split("[:," + customSeparator + "]");
+        return givenString.split(":|,|" + customSeparator);
     }
 
     public static int sum(String[] numberArr) {
