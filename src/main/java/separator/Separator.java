@@ -1,8 +1,8 @@
 package separator;
 
-import java.util.Collection;
+import java.util.Set;
 
 public interface Separator {
     void addSeparator(String separator);
-    Collection<String> getAllSeparator();
+    Set<String> getAllSeparator();
 }
