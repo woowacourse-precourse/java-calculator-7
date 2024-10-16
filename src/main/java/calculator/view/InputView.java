@@ -1,6 +1,7 @@
 package calculator.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.NoSuchElementException;
 
 public class InputView {
 
@@ -14,11 +15,16 @@ public class InputView {
     }
 
     /**
-     * 사용자에게 계산할 문자열을 입력 받습ㄴ디ㅏ.
+     * 사용자에게 계산할 문자열을 입력 받습니다.
      * @return 입력 받은 문자열
      */
     public static String getInput() {
-        return Console.readLine();
+        try {
+            return Console.readLine();
+        } catch (NoSuchElementException e) {
+            // 예외가 발생하면 빈 문자열을 반환
+            return "";
+        }
     }
 
 }

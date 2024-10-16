@@ -94,10 +94,7 @@ public class Calculator {
      * @throws IllegalArgumentException 입력값이 비어있는 경우 예외 발생
      */
     private boolean isEmpty(String input) {
-        if (input.isEmpty()) {
-            throw new IllegalArgumentException("입력값이 비어 있습니다.");
-        }
-        return false; // 비어있지 않으면 false 반환
+        return input.isEmpty() || input.matches("//.\\\\n");// 비어있지 않으면 false 반환
     }
 
     /**
