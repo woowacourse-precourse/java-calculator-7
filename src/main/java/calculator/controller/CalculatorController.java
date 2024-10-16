@@ -9,7 +9,7 @@ import java.util.List;
 public class CalculatorController {
     private final NumCalculator numCalculator;
     private final Preprocessor preprocessor;
-    private final ViewManager viewManager
+    private final ViewManager viewManager;
 
     public CalculatorController(NumCalculator numCalculator, Preprocessor preprocessor, ViewManager viewManager) {
         this.numCalculator = numCalculator;
