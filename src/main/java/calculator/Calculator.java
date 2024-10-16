@@ -1,23 +1,19 @@
 package calculator;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Calculator {
+    private static final String defaultSeparator = "[,;]";
 
-    private final List<Integer> operands = new ArrayList<>();
+    private Operands operands;
 
     public Calculator(String input) {
-        String[] results = input.split("[,;]");
+        String[] splitInput = input.split(defaultSeparator);
 
-        for (String element : results) {
-            this.operands.add(Integer.parseInt(element));
-        }
+        this.operands = new Operands(splitInput);
     }
 
     public int sum() {
-        return operands.stream()
-                .mapToInt(Integer::intValue)
+        return operands.getOperands().stream()
+                .mapToInt(Operand::getOperand)
                 .sum();
     }
 }
