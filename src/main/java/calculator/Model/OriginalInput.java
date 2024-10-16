@@ -3,6 +3,7 @@ package calculator.Model;
 import static calculator.Constants.DelimiterConstants.BASIC_DELIMITER;
 import static calculator.Constants.DelimiterConstants.CUSTOM_DELIMITER_END;
 import static calculator.Constants.DelimiterConstants.CUSTOM_DELIMITER_START;
+import static calculator.Constants.ErrorMessages.INVALID_CUSTOM_INDICATOR_MESSAGE;
 
 import calculator.Utils.StringSplitter;
 import java.util.List;
@@ -16,6 +17,7 @@ public class OriginalInput {
 
     public String separateDelimiter() {
         if (hasValidCustomDelimiter(this.originalInput)) {
+            validateCustomIndicator(this.originalInput);
             return StringSplitter.getCustomDelimiter(this.originalInput);
         }
         return BASIC_DELIMITER;
@@ -26,21 +28,27 @@ public class OriginalInput {
         return StringSplitter.splitByDelimiter(inputWithoutIndicator, delimiter);
     }
 
-    private static boolean hasValidCustomDelimiter(String originalInput) {
-        return isValidPrefix(originalInput) &&
-                hasCustomDelimiter(originalInput) &&
-                isRightCustomDelimiterOrder(originalInput);
+    private void validateCustomIndicator(String originalInput) {
+        if (hasValidCustomDelimiter(originalInput)) {
+            throw new IllegalArgumentException(INVALID_CUSTOM_INDICATOR_MESSAGE.getErrorMessage());
+        }
     }
 
-    private static boolean hasCustomDelimiter(String originalInput) {
+    private boolean hasValidCustomDelimiter(String originalInput) {
+        return isValidPrefix(originalInput) &&
+                hasCustomDelimiter(originalInput) &&
+                isRightCustomIndicatorOrder(originalInput);
+    }
+    
+    private boolean hasCustomDelimiter(String originalInput) {
         return originalInput.contains(CUSTOM_DELIMITER_START) && originalInput.contains(CUSTOM_DELIMITER_END);
     }
 
-    private static boolean isRightCustomDelimiterOrder(String originalInput) {
+    private boolean isRightCustomIndicatorOrder(String originalInput) {
         return originalInput.indexOf(CUSTOM_DELIMITER_END) > originalInput.indexOf(CUSTOM_DELIMITER_START);
     }
 
-    private static boolean isValidPrefix(String originalInput) {
+    private boolean isValidPrefix(String originalInput) {
         return originalInput.startsWith(CUSTOM_DELIMITER_START);
     }
 }
