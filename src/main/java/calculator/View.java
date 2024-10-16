@@ -10,7 +10,7 @@ public class View {
     }
 
     public void print(int s) {
-        System.out.println(s);
+        System.out.println("결과 : " + s);
     }
 
 }
