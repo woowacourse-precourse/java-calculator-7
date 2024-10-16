@@ -37,6 +37,6 @@ public class Number {
     }
 
     private boolean isNull(String number) {
-        return number.isEmpty();
+        return number.isEmpty() || number.isBlank();
     }
 }
