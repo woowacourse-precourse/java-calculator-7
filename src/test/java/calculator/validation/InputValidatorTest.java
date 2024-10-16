@@ -53,4 +53,15 @@ class InputValidatorTest {
         assertThatThrownBy(() -> InputValidator.validateNumberOnly(input2)).isInstanceOf(
                 IllegalArgumentException.class);
     }
+
+    @DisplayName("입력된 문자열에 음수가 포함된 경우")
+    @Test
+    public void validateNumberNegativeTest() {
+        //given
+        String input = "//%\n-1%2%3%4";
+
+        //then
+        assertThatThrownBy(() -> InputValidator.validateNumberOnly(input)).isInstanceOf(
+                IllegalArgumentException.class);
+    }
 }

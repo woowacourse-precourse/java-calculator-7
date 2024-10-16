@@ -22,7 +22,7 @@
 - [x] 커스텀 구분자의 형식에서 "//"와 "\n"의 사이에 커스텀 구분자 문자가 2개 이상 입력된 경우 ``IllegalArgumentException``을 발생시킨다. ex) ``"//;%\n1;2;3"``
 - [x] 입력된 문자열의 숫자가 들어가야 하는 부분에 숫자 이외의 문자(공백 포함)가 포함된 경우 ``IllegalArgumentException``을 발생시킨다.
   ex) ``"1,a,3"``, ``"1,2 ,3"``
-    - [ ] 입력된 문자열의 숫자 자리(양수)에 음수가 들어간 경우 ``IllegalArgumentException``을 발생시킨다. ex) ``"1,-2,3"``
+    - [x] 입력된 문자열의 숫자 자리(양수)에 음수가 들어간 경우 ``IllegalArgumentException``을 발생시킨다. ex) ``"1,-2,3"``
 - [ ] 구분자 없이 숫자만 연속으로 입력한 경우 ``IllegalArgumentException``을 발생시킨다. ex) ``"123"``
 - [ ] 커스텀 구분자를 지정하지 않고 기본 구분자 이외의 다른 문자가 포함된 경우 ``IllegalArgumentException``을 발생시킨다. ex) ``"1|2|3"``
 - [ ] 입력된 문자열에 숫자 0이 단독으로 포함된 경우 ``IllegalArgumentException``을 발생시킨다. ex) ``"1,0,3"``

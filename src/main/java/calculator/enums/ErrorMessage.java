@@ -8,7 +8,8 @@ public enum ErrorMessage {
     NOT_DEFINE_CUSTOM_SEPARATOR("커스텀 구분자 또는 기본 구분자만 사용할 수 있습니다."),
     NOT_ALLOW_ONLY_ZERO("숫자 0을 단독으로 입력할 수 없습니다."),
     NOT_ALLOW_DUPLICATION_SEPARATOR("구분자를 연속으로 사용할 수 없습니다."),
-    NOT_ALLOW_BLANK("입력은 공백으로 시작할 수 없습니다.");
+    NOT_ALLOW_BLANK("입력은 공백으로 시작할 수 없습니다."),
+    NOT_ALLOW_NEGATIVE("숫자 자리에 음수는 허용하지 않습니다.");
 
     private final String message;
 

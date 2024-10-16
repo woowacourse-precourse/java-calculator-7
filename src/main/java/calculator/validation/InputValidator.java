@@ -63,8 +63,14 @@ public class InputValidator {
         for (String delimiter : delimiters) {
             delimiter = delimiter.trim();
 
+            // 숫자인지 확인
             if (!isNumber(delimiter)) {
                 throw new IllegalArgumentException(ErrorMessage.ONLY_NUMBER.getMessage());
+            }
+
+            // 음수 확인
+            if (Integer.parseInt(delimiter) < 0) {
+                throw new IllegalArgumentException(ErrorMessage.NOT_ALLOW_NEGATIVE.getMessage());
             }
         }
     }
