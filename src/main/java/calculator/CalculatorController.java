@@ -9,9 +9,11 @@ import java.util.regex.Pattern;
 public class CalculatorController {
 
     private final InputView inputView;
+    private final OutputView outputView;
 
-    public CalculatorController(InputView inputView) {
+    public CalculatorController(InputView inputView, OutputView outputView) {
         this.inputView = Objects.requireNonNull(inputView);
+        this.outputView = Objects.requireNonNull(outputView);
     }
 
     public void calculate() {
@@ -26,7 +28,7 @@ public class CalculatorController {
         int sum = separate.stream()
                 .map(Integer::parseInt)
                 .reduce(0, Integer::sum);
-        System.out.println("결과 : " + sum);
+        outputView.printResult(sum);
     }
 
     private static Optional<String> findCustomSeparator(String input) {
