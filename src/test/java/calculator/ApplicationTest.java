@@ -1,5 +1,8 @@
 package calculator;
 
+import calculator.tool1.StringInput;
+import calculator.tool2.Extracts;
+import calculator.tool3.Answer;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
@@ -33,8 +36,10 @@ class ApplicationTest extends NsTest {
   void 구분자_추출() {
 
     assertSimpleTest(() -> {
-      run("//:,\n1:2:3");
-      assertThat(output()).isEqualTo(":,");
+      Extracts extracts =
+          new Extracts("1:2:3","//:,");
+
+      assertThat(extracts.extractDelimiter()).contains(":",",");
     });
 
   }
@@ -42,8 +47,11 @@ class ApplicationTest extends NsTest {
   @Test
   void 숫자_추출() {
     assertSimpleTest(() -> {
-      run("//:,\n1:2:3");
-      assertThat(output()).isEqualTo("123");
+      Extracts extracts =
+          new Extracts("1:2:3","//:,");
+
+      assertThat(extracts.extractDelimiter()).contains(":",",");
+      assertThat(extracts.extractNum()).contains(1,2,3);
     });
   }
 
