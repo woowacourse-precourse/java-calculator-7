@@ -27,7 +27,7 @@ class ApplicationTest {
 
         String removedDeclarePart = app.removeDeclarePart(input, customSeparator);
 
-        assertEquals("1-5-15", removedDeclarePart);  // 수정됨: 비교 대상이 잘못됨
+        assertEquals("1-5-15", removedDeclarePart);
     }
 
     @Test
@@ -37,7 +37,7 @@ class ApplicationTest {
 
         String removedDeclarePart = app.removeDeclarePart(input, customSeparator);
 
-        assertEquals("1,1,5", removedDeclarePart);  // 수정됨: 비교 대상이 잘못됨
+        assertEquals("1,1,5", removedDeclarePart);
     }
 
     @Test
@@ -112,5 +112,23 @@ class ApplicationTest {
         });
 
         assertEquals("구분자 형식 오류: 구분자는 반드시 하나의 문자여야 합니다.", exception.getMessage());
+    }
+
+    @Test
+    void calculateSum_case1() {
+        String input = "";
+
+        int sum = app.calculateSum(input);
+
+        assertEquals(0, sum);
+    }
+
+    @Test
+    void calculateSum_case2() {
+        String input = "3";
+
+        int sum = app.calculateSum(input);
+
+        assertEquals(3, sum);
     }
 }
