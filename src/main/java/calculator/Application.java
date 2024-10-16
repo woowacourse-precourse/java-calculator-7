@@ -35,6 +35,7 @@ public class Application {
             System.out.println("결과 : " + sum);
         }catch (Exception e){
             System.out.println(e.getMessage());
+            throw e;
         }
     }
 }
