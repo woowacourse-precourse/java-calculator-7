@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class InputViewTest {
     @DisplayName("덧셈할 문자열을 입력 받을 수 있다.")
     @Test
-    void getStringToAdd() {
+    void readStringToSum() {
         //given
         String input = "1;2;3";
         InputView inputView = new InputView();
@@ -21,7 +21,7 @@ class InputViewTest {
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
         //when
-        String stringToAdd = inputView.getStringToAdd();
+        String stringToAdd = inputView.readStringToSum();
         //then
         assertThat(out.toString()).contains("덧셈할 문자열을 입력해 주세요.");
         assertThat(stringToAdd).contains(input);
