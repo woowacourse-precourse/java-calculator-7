@@ -66,6 +66,20 @@ public class Application {
         return input.trim();
     }
 
+    private long sumNumbers(String[] numbers) {
+        long sum = 0L;  // long 타입으로 초기화
+
+        try {
+            for (String number : numbers) {
+                long num = parseNumber(number);
+                sum = Math.addExact(num, sum);  // long 타입의 덧셈 사용
+            }
+        } catch (ArithmeticException e) { // 오버플로우 예외 처리
+            throw new IllegalArgumentException("덧셈 중 오버플로우가 발생했습니다.", e);
+        }
+        return sum;
+    }
+
     public static void main(String[] args) {
         Application calculator = new Application();
 
