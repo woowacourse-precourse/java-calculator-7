@@ -8,6 +8,7 @@ public class Calculator {
     private final SeparatorProcessor separatorProcessor;
     private final Pattern customSeparatorCmdPattern;
     private final int customSeparatorIdx;
+    private final String minusDigitRegex = "-[0-9]*";
 
     public Calculator (){
         this.separatorProcessor = new SeparatorProcessor(',', ':');
@@ -32,6 +33,8 @@ public class Calculator {
         int result = 0;
         String[] rawNumbers = separatorProcessor.split(cmd);
         for(String rawNum : rawNumbers){
+            validateNumber(rawNum);
+
             result += Integer.parseInt(rawNum);
         }
 
@@ -41,5 +44,13 @@ public class Calculator {
     private void registerCustomSeparator(Matcher matcher){
         Character customSeparator = matcher.group().charAt(customSeparatorIdx);
         separatorProcessor.addSeparator(customSeparator);
+    }
+
+    private boolean validateNumber(String str){
+        if(str.matches(minusDigitRegex)){
+            throw new IllegalArgumentException("음수 계산 불가");
+        }
+
+        return true;
     }
 }
