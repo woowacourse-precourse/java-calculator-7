@@ -4,25 +4,19 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
         DefaultDelimiter defaultDelimiter = new DefaultDelimiter();
 
         if (!isCustom(input)) {
             DelimiterResult regex = new DelimiterResult(defaultDelimiter.getDefaultDelimiter());
+            System.out.println(input);
             InputNumberStrings numberStrings = new InputNumberStrings(input, regex);
-            Numbers numbers = new Numbers(numberStrings.splitByDelimiter(regex.getDelimiterResult()));
+            Numbers numbers = new Numbers(numberStrings.split(regex.getDelimiterResult()));
 
             int sum = 0;
             for (String number : numbers.getNumbers()) {
                 Number calculateNumber = new Number(number);
-                if (calculateNumber.getNumber().equals("\"\"")) {
-                    sum += 0;
-                }
-
-                if (!calculateNumber.getNumber().equals("\"\"")) {
                     sum += Integer.parseInt(calculateNumber.getNumber());
-                }
             }
 
             System.out.println("결과 : " + sum);
@@ -38,19 +32,12 @@ public class Application {
 
             InputNumberStrings numberStrings = new InputNumberStrings(input.substring(customDelimiterEndIndex + 2),
                     customRegex);
-            Numbers numbers = new Numbers(numberStrings.splitByDelimiter(customRegex.getDelimiterResult()));
+            Numbers numbers = new Numbers(numberStrings.split(customRegex.getDelimiterResult()));
 
             int sum = 0;
             for (String number : numbers.getNumbers()) {
-
                 Number calculateNumber = new Number(number);
-                if (calculateNumber.getNumber().equals("\"\"")) {
-                    sum += 0;
-                }
-
-                if (!calculateNumber.getNumber().equals("\"\"")) {
-                    sum += Integer.parseInt(calculateNumber.getNumber());
-                }
+                sum += Integer.parseInt(calculateNumber.getNumber());
             }
             System.out.println("결과 : " + sum);
         }
