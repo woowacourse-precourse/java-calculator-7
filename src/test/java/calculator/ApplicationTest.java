@@ -64,6 +64,46 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 커스텀_구분자_사용1() {
+        assertSimpleTest(() -> {
+            run("//&\\n1&2&5");
+            assertThat(output()).contains("결과 : 8");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용2() {
+        assertSimpleTest(() -> {
+            run("//12345\\n1123455");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용3() {
+        assertSimpleTest(() -> {
+            run("//seahwanKim\\n1seahwanKim1seahwanKim1");
+            assertThat(output()).contains("결과 : 3");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용4() {
+        assertSimpleTest(() -> {
+            run("//%$#$^\\n11%$#$^12%$#$^13");
+            assertThat(output()).contains("결과 : 36");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용5() {
+        assertSimpleTest(() -> {
+            run("//안녕\\n11안녕12안녕13");
+            assertThat(output()).contains("결과 : 36");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
