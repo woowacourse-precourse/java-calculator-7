@@ -10,6 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
     @Test
+    @DisplayName("커스텀 구분자 한개, 숫자 한개일 때")
     void useCustomSplit() {
         assertSimpleTest(() -> {
             run("//;\\n1");
@@ -33,6 +34,15 @@ class ApplicationTest extends NsTest {
             run("//;;;\\n1;;;2");
             assertThat(output()).contains("결과 : 3");
         });
+    }
+
+    @Test
+    @DisplayName("입력값 마지막에 구분자가 있을 때")
+    void lastCharIsSeperator() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,2,3-"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Override
