@@ -8,6 +8,18 @@ public class Application {
         String input = Console.readLine();
         int sum = 0;
 
+        if(input.contains(",") || input.contains(":")) {
+            for(int i = 0; i < input.length(); i++){
+                if(String.valueOf(input.charAt(i)).equals(",")) {
+                    continue;
+                }else if(String.valueOf(input.charAt(i)).equals(":")) {
+                    continue;
+                }else {
+                    sum += Character.getNumericValue(input.charAt(i));
+                }
+            }
+        }
+
         System.out.println("결과 : " + sum);
     }
 }
