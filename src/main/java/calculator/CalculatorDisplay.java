@@ -17,6 +17,11 @@ public class CalculatorDisplay {
         String input = Console.readLine();
         Console.close();
 
+        if(input.isEmpty()){
+            printResult(0);
+            return;
+        }
+
         SeparationProcessor separationProcessor = new SeparationProcessor(',', ':');
 
         // 2. 커스텀 구분자 등록 여부 확인
