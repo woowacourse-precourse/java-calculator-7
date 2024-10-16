@@ -15,15 +15,15 @@ public class StringAddCalculator {
             return 0;
         }
 
-        String[] delimiterAndNumbers = extractCustomDelimiterAndNumbers(input);
-        String delimiters = delimiterAndNumbers[0];
-        String numbersString = delimiterAndNumbers[1];
+        DelimiterAndNumber delimiterAndNumber = extractCustomDelimiterAndNumbers(input);
+        String delimiters = delimiterAndNumber.delimiters();
+        String numbersString = delimiterAndNumber.numbersString();
         List<Integer> numbers = splitNumbers(delimiters, numbersString);
         validateNumbers(numbers);
         return sum(numbers);
     }
 
-    private String[] extractCustomDelimiterAndNumbers(String input) {
+    private DelimiterAndNumber extractCustomDelimiterAndNumbers(String input) {
         String delimiters = DEFAULT_DELIMITER;
         String numbersString = input;
         Matcher matcher = CustomRegexMatcher.getMatcher(input);
@@ -33,7 +33,7 @@ public class StringAddCalculator {
             // TODO: Pattern.quote() 로직을 검증하라
             delimiters += "|" + Pattern.quote(customDelimiter);
         }
-        return new String[]{delimiters, numbersString};
+        return new DelimiterAndNumber(delimiters, numbersString);
     }
 
     private List<Integer> splitNumbers(String delimiters, String numbersString) {
