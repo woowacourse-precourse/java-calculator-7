@@ -1,10 +1,36 @@
 package calculator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public abstract class DelimiterParser {
+public class DelimiterParser {
     private static final String COMMON_DELIMITER = ",";
+
+    private final List<String> delimiterList = new ArrayList<>();
+
+    public DelimiterParser(String delimiter) {
+        delimiterList.add(delimiter);
+    }
+    public DelimiterParser(String... delimiterList) {
+        this.delimiterList.addAll(Arrays.asList(delimiterList));
+    }
+    public String replace(String input) {
+        String result = input;
+        for (String delimiter : delimiterList) {
+            if (delimiter.equals("//")) {
+                result = result.replace("//", "");
+                continue;
+            }
+            if (delimiter.equals("\\n")) {
+                result = result.replace("\\n", "");
+                continue;
+            }
+            result = result.replace(delimiter, COMMON_DELIMITER);
+        }
+        return result;
+    }
+
     public static boolean isDefaultDelimiter(String input) {
         String[] defaultDelimiterNumber = input.split(COMMON_DELIMITER);
         try {
@@ -23,10 +49,9 @@ public abstract class DelimiterParser {
         return numbers;
     }
 
-    public static List<Integer> splitInputAsString(String input) {
+    public static List<Integer> parseToIntList(String input) {
         String[] split = input.split(COMMON_DELIMITER);
 
-        // 여기서 List<Integer>로 보내야 될거같음
         List<Integer> list = new ArrayList<>();
         for (String splitNumber : split) {
             Validator.validate(splitNumber);
