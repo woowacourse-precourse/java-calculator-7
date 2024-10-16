@@ -21,7 +21,7 @@ public class CalculatorController {
 
     public void start() {
         outputView.writeln(INPUT_MESSAGE);
-        String stringToAdd = inputView.readStringToSum();
+        String stringToAdd = inputView.readLine();
         int sum = calculator.getSum(stringToAdd);
         outputView.writeln(RESULT_MESSAGE + sum);
     }

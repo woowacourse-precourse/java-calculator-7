@@ -12,11 +12,11 @@ public class Calculator {
         this.numberStringExtractor = numberStringExtractor;
     }
 
-    public int getSum(String stringWithoutFormat) {
-        if (stringWithoutFormat.isEmpty()) {
+    public int getSum(String stringToAdd) {
+        if (stringToAdd.isEmpty()) {
             return 0;
         }
-        String[] stringsToNumber = numberStringExtractor.getStrings(stringWithoutFormat);
+        String[] stringsToNumber = numberStringExtractor.getStrings(stringToAdd);
         return sumNumbers(stringsToNumber);
     }
 

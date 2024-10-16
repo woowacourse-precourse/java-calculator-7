@@ -14,13 +14,13 @@ public class NumberStringExtractor {
         this.customDelimiterExtractor = customDelimiterExtractor;
     }
 
-    public String[] getStrings(String stringWithoutFormat) {
+    public String[] getStrings(String stringToAdd) {
         String customDelimiter = null;
-        if (!isUsingOriginalDelimiter(stringWithoutFormat)) {
-            customDelimiter = customDelimiterExtractor.getCustomDelimiter(stringWithoutFormat);
-            stringWithoutFormat = changeStringWithoutFormat(stringWithoutFormat);
+        if (!isUsingOriginalDelimiter(stringToAdd)) {
+            customDelimiter = customDelimiterExtractor.getCustomDelimiter(stringToAdd);
+            stringToAdd = changeStringWithoutFormat(stringToAdd);
         }
-        return stringWithoutFormat.split("[" + customDelimiter + COLON + COMMA + "]");
+        return stringToAdd.split("[" + customDelimiter + COLON + COMMA + "]");
     }
 
     private String changeStringWithoutFormat(String stringWithDelimiter) {

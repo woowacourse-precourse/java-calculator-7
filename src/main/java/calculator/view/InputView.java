@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
 
-    public String readStringToSum() {
+    public String readLine() {
         return Console.readLine().trim();
     }
 }
