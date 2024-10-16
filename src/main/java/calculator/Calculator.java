@@ -37,7 +37,12 @@ public class Calculator {
 
         CUSTOM_DELIMITER = input.substring(prefixIndex + CUSTOM_DELIMITER_PREFIX.length(), suffixIndex);
 
-        if(isDuplicatedDelimiter()) throw new IllegalArgumentException("[ERROR] 중복된 구분자 지정");
+        if(isDuplicatedDelimiter()) throw new IllegalArgumentException("[ERROR] 중복된 구분자 지정입니다.");
+        if(isContainedDigit()) throw new IllegalArgumentException("[ERROR] 올바르지 않은 구분자 지정입니다.");
+    }
+
+    private static boolean isContainedDigit() {
+        return CUSTOM_DELIMITER.matches(".*\\d.*");
     }
 
     private static boolean isDuplicatedDelimiter() {
