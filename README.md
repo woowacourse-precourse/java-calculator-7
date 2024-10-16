@@ -7,6 +7,5 @@
 - [ ] 예외 처리 기능
 
 ### 설계
-![image](https://gist.github.com/user-attachments/assets/6b625320-d8e1-4657-9083-e1511e417d66)
-
+![image](https://github.com/user-attachments/assets/6de619fd-def6-4819-951b-03f4223bff25)
 
