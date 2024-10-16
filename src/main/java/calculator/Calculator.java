@@ -1,31 +1,22 @@
 package calculator;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class Calculator {
-    private String userInput;
     private final OutputView outputView = new OutputView();
     private final InputView inputView = new InputView();
-    private String DELIMITER = ",|:";
+    private final Splitter splitter;
     private Long resultNumber = 0L;
 
     public Calculator() {
-        userInput = inputView.getInput();
+        String userInput = inputView.getInput();
+        splitter = new Splitter(userInput);
     }
 
     public void stringSummation() {
-        if (hasCustomSpliter()) {
-            DELIMITER += ("|" +getCustomSpliter());
-        }
-        List<String> splitInput = splitString();
+        List<String> splitInput = splitter.splitString();
         Long[] numberOfInputString = changeStringToNumber(splitInput);
         sumNumber(numberOfInputString);
-        outputView.printResult(resultNumber);
-        inputView.closedConsole();
-
     }
 
     private void sumNumber(Long[] numberArrays) {
@@ -34,40 +25,26 @@ public class Calculator {
         }
     }
 
-    private Long[] changeStringToNumber(List<String> splitInput){
+    private Long[] changeStringToNumber(List<String> splitInput) throws IllegalArgumentException {
         Long[] numberOfInputString = new Long[splitInput.size()];
-
-        for (int i=0; i< splitInput.size(); i++) {
-            Long number = Long.parseLong(splitInput.get(i));
-            if (number < 0) {
-                throw new IllegalArgumentException();
-            }
-            numberOfInputString[i] = Long.parseLong(splitInput.get(i));
+        for (int i = 0; i < splitInput.size(); i++) {
+            long number = Long.parseLong(splitInput.get(i));
+            checkNegativeNumber(number);
+            numberOfInputString[i] = number;
         }
         return numberOfInputString;
     }
 
-    private List<String> splitString() throws IllegalArgumentException {
-        if (userInput == null || userInput.isEmpty()) {
-            return Collections.emptyList();
-        }
-        return Arrays.stream(userInput.split(DELIMITER)).toList();
-    }
-
-
-    private boolean hasCustomSpliter(){
-        if (userInput.length() >= 5 && userInput.startsWith("//")) {
-            return true;
-        } else {
-            return false;
+    private void checkNegativeNumber(long number) {
+        if (number <= 0) {
+            throw new IllegalArgumentException();
         }
     }
 
-    private String getCustomSpliter() {
-        int delimiterIndex = userInput.indexOf("\\n");
-        String newDelimiter = userInput.substring(2, delimiterIndex);
-        userInput = userInput.substring(delimiterIndex + 2);
-        return newDelimiter;
+    public void getResult() {
+        outputView.printResult(resultNumber);
+        inputView.closedConsole();
     }
+
 
 }
