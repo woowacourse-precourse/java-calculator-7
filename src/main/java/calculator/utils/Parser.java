@@ -24,6 +24,16 @@ public class Parser {
         return numbers;
     }
 
+    private String[] splitInput(String input, String delimiter) {
+        String[] tokens = input.split(delimiter);
+
+        if (tokens.length == 1 && tokens[0].equals(input)) {
+            throw new IllegalArgumentException("구분자를 사용하지 않았습니다. 프로그램을 종료합니다.");
+        }
+
+        return tokens;
+    }
+
     private String getDelimiter() {
         Pattern pattern = Pattern.compile("//(.*?)\\\\n");
         Matcher matcher = pattern.matcher(userInput);
