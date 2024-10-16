@@ -24,10 +24,20 @@ public class Calculator {
         this.numbers = convertToNumbers(parts);
     }
 
-    public int calculate() {
-        return numbers.stream()
-                .mapToInt(Integer::intValue)
-                .sum();
+    private boolean hasCustomSeparator() {
+        return exp.length() >= 5
+                && exp.startsWith("//")
+                && exp.indexOf("\\n") == 3
+                && !isNumeric(exp.charAt(2));
+    }
+
+    private boolean isNumeric(char c) {
+        try {
+            Double.parseDouble(String.valueOf(c));
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     private List<Integer> convertToNumbers(final String[] parts) {
@@ -53,19 +63,9 @@ public class Calculator {
         return list;
     }
 
-    private boolean hasCustomSeparator() {
-        return exp.length() >= 5
-                && exp.startsWith("//")
-                && exp.indexOf("\\n") == 3
-                && !isNumeric(exp.charAt(2));
-    }
-
-    private boolean isNumeric(char c) {
-        try {
-            Double.parseDouble(String.valueOf(c));
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
+    public int calculate() {
+        return numbers.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 }
