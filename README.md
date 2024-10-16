@@ -11,5 +11,9 @@
 - 입력값 Validator
     - [ ]  구분자로  처리 된 값들 이외의 숫자가 아닌 문자가 있는 경우 `IllegalArgumentException` 을 Throw ( 오류 사유 작성 )
     - [ ]  문자로 된 숫자가 숫자가 맞는지 확인하는 isInteger
+- split processor
+  - [ ]  문자열을 구분자로 잘라줌
+
+
 - 계산기
     - [ ]  List<Integer>을 받으면 계산해주는 계산기
