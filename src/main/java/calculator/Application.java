@@ -16,5 +16,18 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         input = Console.readLine();
+
+        isCustomSeparator(input);
+    }
+
+    private static void isCustomSeparator(String input) {
+        pattern = Pattern.compile(regex);
+        matcher = pattern.matcher(input);
+
+        if (matcher.matches()) {
+            delimiter = matcher.group(1);   // setDelimiter로 대체할 예정
+
+            input = matcher.group(2);
+        }
     }
 }
