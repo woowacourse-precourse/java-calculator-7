@@ -19,18 +19,19 @@ public class Application {
                 calculatorService::addSeparator);
     }
 
-    private static List<String> extractDelimiter(String command) {
+    private static List<String> extractDelimiter(String inputString) {
         // "//"로 시작하지 않거나 "\n"가 존재하지 않으면 커스텀 구분자가 없는거라 판단해 빈 배열을 보냄
-        if (!command.startsWith(CUSTOM_DELIMITER_PREFIX) || !command.contains(CUSTOM_DELIMITER_SUFFIX)) {
+        if (!inputString.startsWith(CUSTOM_DELIMITER_PREFIX) || !inputString.contains(CUSTOM_DELIMITER_SUFFIX)) {
             return new ArrayList<>();
         }
 
         //구분자 목록들을 한 문자열로 가져옴("//" 이후 부터 "\n" 전까지)
-        String separatorsString = command.substring(
+        String separatorsString = inputString.substring(
                 CUSTOM_DELIMITER_PREFIX.length(),
-                command.indexOf(CUSTOM_DELIMITER_SUFFIX));
+                inputString.indexOf(CUSTOM_DELIMITER_SUFFIX));
 
-        return Arrays.stream(separatorsString.split(""))
+        return Arrays.stream(
+                separatorsString.split(""))
                 .toList();
     }
 }
