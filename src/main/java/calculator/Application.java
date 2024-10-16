@@ -3,6 +3,7 @@ package calculator;
 import calculator.tool1.StringChecker;
 import calculator.tool1.StringInput;
 import calculator.tool2.ExtractDelimiter;
+import calculator.tool2.ExtractNum;
 import camp.nextstep.edu.missionutils.Console;
 
 import java.util.NoSuchElementException;
@@ -25,6 +26,18 @@ public class Application {
 
       String[] delimiters =  ExtractDelimiter.
           extractDelimiter(delimitersString);
+
+      /*
+       * for (String delimiter: delimiters) {
+       *   System.out.print(delimiter);
+       * }
+       */
+
+      long[] nums = ExtractNum.extractNum(numsString, delimiters);
+
+      for (long num : nums) {
+        System.out.print(num);
+      }
 
     } catch (NoSuchElementException |
              IllegalArgumentException noSuchElementException) {
