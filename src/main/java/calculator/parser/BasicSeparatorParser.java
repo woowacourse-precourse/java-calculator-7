@@ -2,32 +2,29 @@ package calculator.parser;
 
 import java.util.Set;
 import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class BasicSeparatorParser implements SeparatorParser {
 
-	private boolean isValid(String text) {
-		if (text.length() > 2 && text.startsWith("//")) {
-			return true;
-		} else {
-			throw new IllegalArgumentException(ParserError.INVALID_FORMAT_SEPARATOR.getMessage());
-		}
-	}
+
+	public static final String BASIC_CUSTOM_SEPARATOR_PATTERN = "(/{2})(\\D)(\\\\n)";
+	private static final Pattern PATTERN = Pattern.compile(BASIC_CUSTOM_SEPARATOR_PATTERN);
+	private Matcher matcher;
 
 	@Override
 	public String parse(String text, Set<Character> separators) {
-		StringTokenizer tokenizer = new StringTokenizer(text, "\\n");
-		while (tokenizer.countTokens() > 1) {
-			String now = tokenizer.nextToken();
+		matcher = PATTERN.matcher(text);
 
-			if (isValid(now)) {
-				String separator = now.substring(2, now.length());
-				if (!separators.add(separator)) {
-					throw new IllegalArgumentException(ParserError.DUPLICATION_SEPARATOR.getMessage());
-				}
+		while (matcher.find()) {
+			char customSeparator = matcher.group(2).charAt(0);
+
+			if(!separators.add(customSeparator)){
+				throw new IllegalArgumentException(ParserError.DUPLICATION_SEPARATOR.getMessage());
 			}
 		}
 
-		String mathematicalExpression = tokenizer.nextToken();
+		String mathematicalExpression = text.replaceAll(BASIC_CUSTOM_SEPARATOR_PATTERN, "");
 		return mathematicalExpression;
 	}
 
