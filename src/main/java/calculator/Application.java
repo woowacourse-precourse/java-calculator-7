@@ -4,13 +4,10 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static boolean catchCustomSeparator(String input) {
-        String left = input.substring(0, 2);
-        String right = input.substring(3, 5);
-
-        return left.equals("//") && right.equals("\\n");
+        return input.startsWith("//") && input.contains("\\n");
     }
 
-    public static String[] separators(String input) {
+    public static String[] getSeparators(String input) {
         String[] separators = new String[]
                 {":"};
         if (catchCustomSeparator(input)) {
@@ -20,17 +17,17 @@ public class Application {
         return separators;
     }
 
-    public static String replace(String input) {
+    public static String replace(String input, String[] separators) {
         String replacedInput = input;
-        for (String sep : separators(input)) {
-            replacedInput = input.replace(sep, ",");
+        for (String sep : separators) {
+            replacedInput = replacedInput.replace(sep, ",");
         }
         return replacedInput;
     }
 
     public static int[] split(String input) {
         String[] arrayStrings = input.split(",");
-        int len = input.length();
+        int len = arrayStrings.length;
         int[] arrayInts = new int[len];
         for (int i = 0; i < len; i++) {
             try {
@@ -42,21 +39,42 @@ public class Application {
         return arrayInts;
     }
 
-    public static boolean checkValidity(int[] arrayInts) {
-        int len = arrayInts.length;
+    public static void checkValidity(int[] arrayInts) {
         for (int arrayInt : arrayInts) {
             if (arrayInt < 0) {
                 throw new IllegalArgumentException();
             }
 
         }
-        return true;
+
     }
 
+    public static int calculateSum(int[] arrayInts) {
+        int result = 0;
+        for (int nat : arrayInts) {
+            result += nat;
+        }
+        return result;
+    }
 
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해주세요.");
         String input = Console.readLine();
+        if (input.isEmpty()) { // ""일 때 0 나오게 예외처리
+            System.out.println("결과 : " + 0);
+            return;
+        }
+        String[] separators = getSeparators(input);
 
+        if (catchCustomSeparator(input)) {
+            input = input.substring(input.indexOf("\\n") + 2);
+        }
+        input = replace(input, separators);
+
+        int[] container = split(input);
+
+        checkValidity(container);
+        int sum = calculateSum(container);
+        System.out.println("결과 : " + sum);
     }
 }
