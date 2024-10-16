@@ -15,6 +15,8 @@ public class Application {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
             System.out.println("프로그램 종료");
+        } finally {
+            Console.close();
         }
     }
 
