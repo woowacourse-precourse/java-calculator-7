@@ -15,8 +15,8 @@ public class CalculatorController {
             int result = calculatorService.calculate(input);
             outputView.outputMessage(result);
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());//outputView 기능으로 추가할 것
-            throw new IllegalArgumentException(e.getMessage(), e); //기능 요구사항에 따라 jvm까지 에러 throw -> 종료될 것
+            outputView.outputErrorMessage(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage(), e); //기능 요구사항에 따라 에러 throw -> 종료될 것
         }
     }
 }

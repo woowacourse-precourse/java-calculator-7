@@ -6,4 +6,8 @@ public class OutputView {
     public void outputMessage(int result) {
         System.out.printf(OUTPUT_MESSAGE_RESULT, result);
     }
+
+    public void outputErrorMessage(String input) {
+        System.out.println(input);
+    }
 }

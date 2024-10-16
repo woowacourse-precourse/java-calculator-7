@@ -12,20 +12,14 @@ public class InputValidator {
 
     public void inputValidate(String input) {
         validateInput = input;
-        try {
-            isEmpty();
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(e.getMessage(), e);
-        }
+        isEmpty();
+
     }
 
     public void numbersValidate(List<Integer> numbers) {
         validateNumbers = numbers;
-        try {
-            isNegative();
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(e.getMessage(), e);
-        }
+        isNegative();
+
     }
 
     private void isEmpty() {

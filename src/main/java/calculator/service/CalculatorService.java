@@ -15,26 +15,23 @@ public class CalculatorService {
     public int calculate(String input) {
         Scanner sc = new Scanner(input);
         List<Integer> validateNumbers;
-        try {
-            inputValidator.inputValidate(input);
-            String delimiter = calculatorLogic.extractDelimiter(sc.nextLine());
-            Matcher matcher = DANGLING_PATTERN.matcher(delimiter);
-            if (matcher.find()) {
-                delimiter = "\\" + delimiter; //dangling 오류 발생 문자 처리
-            }
 
-            if (sc.hasNext()) {
-                validateNumbers = calculatorLogic.extractNumbers(sc.nextLine(), delimiter);
-            } else if (input.contains("\\n")) { //ApplicationTest 커스텀 구분자 테스트 위한 기능 - \\n의 의미를 알 수 없다...
-                validateNumbers = calculatorLogic.extractNumbers(input.substring(input.indexOf("\\n") + 2), delimiter);
-            } else {
-                validateNumbers = calculatorLogic.extractNumbers(input, delimiter);
-            }
-
-            inputValidator.numbersValidate(validateNumbers);
-            return calculatorLogic.calculate(validateNumbers);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(e.getMessage(), e);
+        inputValidator.inputValidate(input);
+        String delimiter = calculatorLogic.extractDelimiter(sc.nextLine());
+        Matcher matcher = DANGLING_PATTERN.matcher(delimiter);
+        if (matcher.find()) {
+            delimiter = "\\" + delimiter; //dangling 오류 발생 문자 처리
         }
+
+        if (sc.hasNext()) {
+            validateNumbers = calculatorLogic.extractNumbers(sc.nextLine(), delimiter);
+        } else if (input.contains("\\n")) { //ApplicationTest 커스텀 구분자 테스트 위한 기능 - \\n의 의미를 알 수 없다...
+            validateNumbers = calculatorLogic.extractNumbers(input.substring(input.indexOf("\\n") + 2), delimiter);
+        } else {
+            validateNumbers = calculatorLogic.extractNumbers(input, delimiter);
+        }
+
+        inputValidator.numbersValidate(validateNumbers);
+        return calculatorLogic.calculate(validateNumbers);
     }
 }
