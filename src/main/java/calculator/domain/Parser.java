@@ -2,7 +2,6 @@ package calculator.domain;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import static calculator.domain.Delimiter.getCustomDelimiter;
 
