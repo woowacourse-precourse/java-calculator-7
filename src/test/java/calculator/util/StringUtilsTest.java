@@ -1,10 +1,10 @@
-package calculator.domain.input.utils;
+package calculator.util;
 
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class InputValidateUtilsTest {
+public class StringUtilsTest {
 
     @Test
     void TDD_빈_문자열_검증_아닐때() {
@@ -12,7 +12,7 @@ public class InputValidateUtilsTest {
         String input = "1,2,3";
 
         //when
-        boolean hasText = InputValidateUtils.hasText(input);
+        boolean hasText = StringUtils.hasText(input);
 
         //then
         assertThat(hasText).isTrue();
@@ -24,7 +24,7 @@ public class InputValidateUtilsTest {
         String input = "";
 
         //when
-        boolean hasText = InputValidateUtils.hasText(input);
+        boolean hasText = StringUtils.hasText(input);
 
         //then
         assertThat(hasText).isFalse();

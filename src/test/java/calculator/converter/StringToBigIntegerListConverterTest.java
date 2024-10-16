@@ -1,4 +1,4 @@
-package calculator.domain.calculator.utils;
+package calculator.converter;
 
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +8,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class CalculatorConverterUtilsTest {
+public class StringToBigIntegerListConverterTest {
 
     @Test
     void TDD_문자열_쉼표_구분자_리스트_반환() {
@@ -16,7 +16,7 @@ public class CalculatorConverterUtilsTest {
         String input = "1,2,3";
 
         //when
-        List<BigInteger> list = CalculatorConverterUtils.convert(input);
+        List<BigInteger> list = StringToBigIntegerListConverter.convert(input);
 
         //then
         assertThat(list).containsExactly(BigInteger.valueOf(1), BigInteger.valueOf(2), BigInteger.valueOf(3));
@@ -28,7 +28,7 @@ public class CalculatorConverterUtilsTest {
         String input = "1:2:3";
 
         //when
-        List<BigInteger> list = CalculatorConverterUtils.convert(input);
+        List<BigInteger> list = StringToBigIntegerListConverter.convert(input);
 
         //then
         assertThat(list).containsExactly(BigInteger.valueOf(1), BigInteger.valueOf(2), BigInteger.valueOf(3));
@@ -40,7 +40,7 @@ public class CalculatorConverterUtilsTest {
         String input = "1:2,3";
 
         //when
-        List<BigInteger> list = CalculatorConverterUtils.convert(input);
+        List<BigInteger> list = StringToBigIntegerListConverter.convert(input);
 
         //then
         assertThat(list).containsExactly(BigInteger.valueOf(1), BigInteger.valueOf(2), BigInteger.valueOf(3));

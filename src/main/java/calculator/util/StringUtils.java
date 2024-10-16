@@ -1,6 +1,6 @@
-package calculator.domain.input.utils;
+package calculator.util;
 
-public class InputValidateUtils {
+public class StringUtils {
 
     public static boolean hasText(String input) {
         return !input.isEmpty();

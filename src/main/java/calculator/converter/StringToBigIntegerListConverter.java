@@ -1,10 +1,10 @@
-package calculator.domain.calculator.utils;
+package calculator.converter;
 
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 
-public class CalculatorConverterUtils {
+public class StringToBigIntegerListConverter {
 
     private static final String BASIC_SEPARATOR_REGEX = "[,:]";
 
