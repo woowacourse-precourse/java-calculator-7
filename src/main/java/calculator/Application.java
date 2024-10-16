@@ -12,15 +12,20 @@ public class Application {
         System.out.println("Please input the number.");
         String input = sc.nextLine();
 
-        String[] number = input.split("[, :]");
-
-        for (String pureNumber : number) {
-            changedNumber.add(Integer.parseInt(pureNumber.trim()));
-        }
-
         int sum = 0;
-        for (int i = 0; i < changedNumber.size(); i++) {
-            sum += changedNumber.get(i);
+
+        if (input.trim().isEmpty()) {
+            sum = 0;
+        } else {
+            String[] number = input.split("[, :]");
+
+            for (String pureNumber : number) {
+                changedNumber.add(Integer.parseInt(pureNumber.trim()));
+            }
+
+            for (int i = 0; i < changedNumber.size(); i++) {
+                sum += changedNumber.get(i);
+            }
         }
 
         System.out.println(sum);
