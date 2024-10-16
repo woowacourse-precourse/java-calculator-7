@@ -21,4 +21,8 @@ public class Calculator {
 
         return 0;
     }
+
+    public String preprocess(String input) {
+        return input.replaceAll("\\s", "");
+    }
 }

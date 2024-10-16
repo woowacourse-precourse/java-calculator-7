@@ -75,4 +75,19 @@ public class CalculatorTest {
         // Then
         assertThat(result).isEqualTo(0);
     }
+
+    @Test
+    @DisplayName("입력 문자열에서 모든 공백을 제거한다.")
+    void 입력_문자열_공백_제거() {
+        // Given
+        Calculator calculator = new Calculator();
+        String input = "1, 2:   3";
+
+        // When
+        String result = calculator.preprocess(input);
+
+        // Then
+        assertThat(result).isEqualTo("1,2:3");
+    }
+
 }
