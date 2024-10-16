@@ -27,10 +27,28 @@ public class StringAddCalculator {
         }
 
         // 1. input 에서 커스텀 구분자와 계산식을 추출한다
+        String[] delimiterAndNumbers = extractCustomDelimiterAndNumbers(input);
+        String delimiters = delimiterAndNumbers[0];
+        String numbersString = delimiterAndNumbers[1];
         // 2. 계산식에서 숫자들을 추출한다
         // 3. 추출된 숫자들 중 음수가 있는지 검증한다
         // 4. 숫자들을 더한 값들을 반환한다
         return 0;
+    }
+
+    private String[] extractCustomDelimiterAndNumbers(String input) {
+        String delimiters = delimiter;
+        String numbersString = input;
+
+        Pattern pattern = Pattern.compile(CUSTOM_REGEX);
+        Matcher matcher = pattern.matcher(input);
+        if (matcher.find()) {
+            String customDelimiter = matcher.group(CUSTOM_DELIMITER_ORDER);
+            numbersString = matcher.group(ARITHMETIC_EXPRESSION_ORDER);
+            // TODO: Pattern.quote() 로직을 검증하라
+            delimiters += "|" + Pattern.quote(customDelimiter);
+        }
+        return new String[]{delimiters, numbersString};
     }
 
     private static int sum(String input) {
