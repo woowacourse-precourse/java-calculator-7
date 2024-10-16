@@ -6,7 +6,7 @@ import calculator.domain.model.ExtractedInput;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DelimiterExtractor {
+public final class DelimiterExtractor {
     private static final String DEFAULT_DELIMITERS = ",|:";
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
     private static final Pattern SINGLE_CHAR_DELIMITER_PATTERN = Pattern.compile("^//(.)\\\\n");
