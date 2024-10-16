@@ -10,4 +10,15 @@ public class Calculator {
     public String getInput() {
         return Console.readLine();
     }
+
+    public int add(String input) {
+        if (input == null) {
+            throw new IllegalArgumentException("입력 값이 null입니다.");
+        }
+        if (input.isEmpty()) {
+            return 0;
+        }
+
+        return 0;
+    }
 }
