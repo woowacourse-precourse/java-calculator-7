@@ -1,13 +1,17 @@
 package calculator.entity;
 
-import static calculator.service.SeparatorService.CUSTOM_SEPARATOR_IDX;
+
+import static calculator.utils.Constants.CUSTOM_SEPARATOR_END_IDX;
+import static calculator.utils.Constants.CUSTOM_SEPARATOR_IDX;
+import static calculator.utils.Constants.CUSTOM_SEP_END_STRING;
+import static calculator.utils.Constants.CUSTOM_SEP_START_STRING;
 
 import java.util.Objects;
 
-public class Index {
+public class Index implements Comparable<Index> {
 
     // 엔티티 계층에서 작업할 수 있도록
-    protected final Integer value;
+    private final Integer value;
 
     public Index(Integer value) {
         this.value = value;
@@ -18,11 +22,15 @@ public class Index {
     }
 
     public Index customSeparatorIdx() {
-        return new Index(value + CUSTOM_SEPARATOR_IDX);
+        return new Index(value + CUSTOM_SEPARATOR_IDX.value);
     }
 
-    public Index plus(Integer plusValue) {
-        return new Index(value + plusValue);
+    public Index plus(Index plusValue) {
+        return new Index(value + plusValue.value);
+    }
+
+    public Index minus(Index minusValue) {
+        return new Index(value - minusValue.value);
     }
 
     public boolean isLessThanOrEqual(Index index) {
@@ -33,7 +41,18 @@ public class Index {
         return value < index.value;
     }
 
-    //TODO Index 값을 사용하는 것을 Index 에서 작업하도록 하자.
+    protected boolean isStartCustomSep(String value) {
+        return value.startsWith(CUSTOM_SEP_START_STRING, this.value);
+    }
+
+    protected boolean isEndCustomSep(String value) {
+        return value.startsWith(CUSTOM_SEP_END_STRING, this.value + CUSTOM_SEPARATOR_END_IDX.value);
+    }
+
+    protected String oneLetter(String value) {
+        char charLetter = value.charAt(this.value);
+        return String.valueOf(charLetter);
+    }
 
 
     @Override
@@ -61,4 +80,8 @@ public class Index {
     }
 
 
+    @Override
+    public int compareTo(Index compareIdx) {
+        return Integer.compare(this.value, compareIdx.value);
+    }
 }

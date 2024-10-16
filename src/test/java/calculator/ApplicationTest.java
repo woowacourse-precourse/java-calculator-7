@@ -75,6 +75,15 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    @DisplayName("커스텀 구문자 안에 탈출 문자")
+    void Test6() {
+        assertSimpleTest(() -> {
+            run("//\\\\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
     @DisplayName("예외 테스트 : 중첩 커스텀 구문자")
     void exceptionTest1() {
         assertSimpleTest(() ->
@@ -89,6 +98,15 @@ class ApplicationTest extends NsTest {
     void exceptionTest2() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("//:\\n"))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    @DisplayName("예외 테스트 : 커스텀 구문자 사이에 값 미존재")
+    void exceptionTest3() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("//\\n"))
                 .isInstanceOf(IllegalArgumentException.class)
         );
     }

@@ -1,13 +1,15 @@
 package calculator.entity;
 
+import static calculator.utils.Constants.COLON;
+import static calculator.utils.Constants.COMMA;
+
 import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
 
 public class Separator {
 
-    private static final String COMMA = ",";
-    private static final String COLON = ":";
+
     private final String sep;
 
     public Separator(String separator) {

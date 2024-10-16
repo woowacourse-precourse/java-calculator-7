@@ -11,7 +11,7 @@ public class ConsoleView {
     }
 
     public void result(Integer total) {
-        System.out.println("결과 : " + total.toString());
+        System.out.println("결과 : " + total);
     }
 
     public Input input() {

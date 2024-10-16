@@ -1,5 +1,7 @@
 package calculator.service.impl;
 
+import static calculator.utils.Constants.CUSTOM_SEPARATOR_LENGTH;
+
 import calculator.entity.Index;
 import calculator.entity.IndexQueue;
 import calculator.entity.Input;

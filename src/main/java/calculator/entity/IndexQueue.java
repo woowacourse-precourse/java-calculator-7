@@ -6,7 +6,7 @@ import java.util.Queue;
 
 public class IndexQueue {
 
-    private final Queue<Integer> queue;
+    private final Queue<Index> queue;
 
     public IndexQueue() {
         this.queue = new PriorityQueue<>();
@@ -14,8 +14,11 @@ public class IndexQueue {
 
 
     public void offer(Index index) {
-        Integer idx = index.value;
-        queue.offer(idx);
+        queue.offer(index);
+    }
+
+    public Index peek() {
+        return queue.peek();
     }
 
 
@@ -28,25 +31,20 @@ public class IndexQueue {
             return false;
         }
 
-        Integer idx = index.value;
-        Integer peekIdx = queue.peek();
-
-        return idx.equals(peekIdx);
+        Index peekIdx = this.peek();
+        return index.equals(peekIdx);
     }
-
 
     @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-
-        Queue<Integer> compareQueue = ((IndexQueue) o).queue;
-        return Objects.equals(queue, compareQueue);
+        IndexQueue that = (IndexQueue) o;
+        return Objects.equals(queue, that.queue);
     }
 
     @Override

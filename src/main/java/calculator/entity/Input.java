@@ -1,7 +1,7 @@
 package calculator.entity;
 
-import static calculator.service.SeparatorService.CUSTOM_SEPARATOR_END;
-import static calculator.service.SeparatorService.CUSTOM_SEPARATOR_LENGTH;
+
+import static calculator.utils.Constants.CUSTOM_SEPARATOR_LENGTH;
 
 public class Input {
 
@@ -16,13 +16,12 @@ public class Input {
     }
 
     public boolean isCustomSep(Index index) {
-        Integer idx = index.value;
 
-        if (!value.startsWith("//", idx)) {
+        if (!index.isStartCustomSep(value)) {
             return false;
         }
 
-        return value.startsWith("\\n", idx + CUSTOM_SEPARATOR_END);
+        return index.isEndCustomSep(value);
     }
 
     public Separator toSeparatorByIndex(Index index) {
@@ -30,14 +29,12 @@ public class Input {
     }
 
     protected String oneLetter(Index index) {
-        Integer idx = index.value;
-
-        char charLetter = value.charAt(idx);
-        return String.valueOf(charLetter);
+        return index.oneLetter(value);
     }
 
     public Index maxSepStringIdx() {
-        return new Index(value.length() - CUSTOM_SEPARATOR_LENGTH);
+        Index index = new Index(value.length());
+        return index.minus(CUSTOM_SEPARATOR_LENGTH);
     }
 
     public Index maxIdx() {
