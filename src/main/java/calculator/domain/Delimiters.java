@@ -11,16 +11,13 @@ public class Delimiters {
     private static final Set<String> INITIAL_DELIMITER = Set.of(",", ":");
 
     private final Set<String> delimiters;
-    private final boolean isCustomDelimiter;
 
     public Delimiters() {
         this.delimiters = new HashSet<>(INITIAL_DELIMITER);
-        this.isCustomDelimiter = false;
     }
 
     public Delimiters(String delimiter) {
         this.delimiters = new HashSet<>(Set.of(delimiter));
-        this.isCustomDelimiter = true;
     }
 
     public static Delimiters fromInput(String input) {
@@ -36,6 +33,6 @@ public class Delimiters {
     }
 
     public boolean isCustomDelimiter() {
-        return isCustomDelimiter;
+        return !this.delimiters.equals(INITIAL_DELIMITER);
     }
 }
