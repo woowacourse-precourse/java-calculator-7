@@ -25,19 +25,38 @@ class ExceptionHandlerTest {
     }
 
     @ParameterizedTest
-    @DisplayName("입력된 문자열에 쉼표와 콜론 음수 부호와 정수 외의 문자가 들어가 있을 경우 예외가 발생한다.")
+    @DisplayName("입력된 문자열에 쉼표와 콜론, 음수 부호와 정수 외의 문자가 들어가 있을 경우 예외가 발생한다.")
     @ValueSource(strings = {"1|2:3", "1,2}3", "1(2)3"})
     void checkIncorrectInputWithoutCustomDelimThrowException(String input) {
         char[] splitInput = input.toCharArray();
-        assertThatThrownBy(() -> exceptionHandler.checkIncorrectInputWithoutCustomDelim(splitInput)).isInstanceOf(
-                IllegalArgumentException.class);
+        assertThatThrownBy(() -> exceptionHandler.checkIncorrectInputWithoutCustomDelim(splitInput))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
-    @DisplayName("입력된 문자열에 쉼표와 콜론 음수 부호와 정수 외의 문자가 들어가 있지 않을 경우 예외가 발생하지 않는다.")
+    @DisplayName("입력된 문자열에 쉼표와 콜론, 음수 부호와 정수 외의 문자가 들어가 있지 않을 경우 예외가 발생하지 않는다.")
     @ValueSource(strings = {"1:2:3", "1,2,3", "1:2,3", "1,2:3"})
     void checkIncorrectInputWithoutCustomDelimNotThrowException(String input) {
         char[] splitInput = input.toCharArray();
-        assertThatCode(() -> exceptionHandler.checkIncorrectInputWithoutCustomDelim(splitInput)).doesNotThrowAnyException();
+        assertThatCode(() -> exceptionHandler.checkIncorrectInputWithoutCustomDelim(splitInput))
+                .doesNotThrowAnyException();
+    }
+
+    @ParameterizedTest
+    @DisplayName("입력된 문자열에 쉼표와 콜론, 커스텀 구분자, 음수 부호와 정수 외의 문자가 들어가 있을 경우 예외가 발생한다.")
+    @ValueSource(strings = {"1|2:3", "1,2}3", "1(2)3"})
+    void checkIncorrectInputWithCustomDelimThrowException(String input) {
+        char[] splitInput = input.toCharArray();
+        assertThatThrownBy(() -> exceptionHandler.checkIncorrectInputWithCustomDelim(splitInput, ';'))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @DisplayName("입력된 문자열에 쉼표와 콜론, 커스텀 구분자, 음수 부호와 정수 외의 문자가 들어가 있지 않을 경우 예외가 발생하지 않는다.")
+    @ValueSource(strings = {"1:2:3", "1,2,3", "1:2,3", "1,2:3", "1;2;3"})
+    void checkIncorrectInputWithCustomDelimNotThrowException(String input) {
+        char[] splitInput = input.toCharArray();
+        assertThatCode(() -> exceptionHandler.checkIncorrectInputWithCustomDelim(splitInput, ';'))
+                .doesNotThrowAnyException();
     }
 }
