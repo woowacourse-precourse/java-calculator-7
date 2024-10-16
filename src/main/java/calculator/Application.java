@@ -46,5 +46,6 @@ public class Application {
         }
 
         int sum = numbers.stream().mapToInt(Integer::intValue).sum();
+        System.out.print("결과 : " + sum);
     }
 }
