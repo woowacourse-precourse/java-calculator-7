@@ -1,8 +1,6 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.NoSuchElementException;
 
@@ -15,7 +13,7 @@ public class Application {
         String input = "";
         try {
             input = Console.readLine();
-        } catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
         }
 
         int result = calc(input);
@@ -44,7 +42,7 @@ public class Application {
 
     private static int getResult(String input, int result) {
         String[] numbers = splitInput(input);
-        if(isCustom(input)) {
+        if (isCustom(input)) {
             numbers = splitInput(input.substring(5));
         }
 
@@ -86,9 +84,9 @@ public class Application {
         throw new IllegalArgumentException("잘못된 기호가 들어갔습니다.");
     }
 
-    public static int validValue(String value){
+    public static int validValue(String value) {
         int integerValue = Integer.parseInt(value);
-        if(integerValue >= 0){
+        if (integerValue >= 0) {
             return integerValue;
         }
         throw new IllegalArgumentException("음수의 값이 들어왔습니다.");
