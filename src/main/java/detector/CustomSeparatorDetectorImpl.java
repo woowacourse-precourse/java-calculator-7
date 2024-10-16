@@ -2,7 +2,7 @@ package detector;
 
 public class CustomSeparatorDetectorImpl implements CustomSeparatorDetector {
     private static final String START_TEXT = "//";
-    private static final String END_TEXT = "\n";
+    private static final String END_TEXT = "\\n";
 
     @Override
     public String detectSeparator(String text) {
