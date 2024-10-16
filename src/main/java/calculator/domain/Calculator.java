@@ -1,8 +1,5 @@
 package calculator.domain;
 
-import java.util.Arrays;
-import java.util.Iterator;
-
 public class Calculator {
 
     private static Integer CUSTOM_SEPARATOR_END_INDEX = 3;
@@ -24,18 +21,17 @@ public class Calculator {
     }
 
     public String removeCustomReserveWord(String inputText) {
-        return inputText.substring(6);
+        return inputText.substring(5);
     }
+
 
     public void sum(String[] arr) {
         int sum = 0;
-        for (Iterator<String> it = Arrays.stream(arr).iterator(); it.hasNext(); ) {
-            sum += validateNumber(Integer.parseInt(it.next()));
-//            try {
-//
-//            } catch (Exception e) {
-//                throw new IllegalArgumentException();
-//            }
+        try {
+            for (String str : arr) {
+                sum += validateNumber(Integer.parseInt(str));
+            }
+        } catch (NumberFormatException e) {
         }
         System.out.println("결과 : " + sum);
     }
