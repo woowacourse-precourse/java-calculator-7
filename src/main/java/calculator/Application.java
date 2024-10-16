@@ -13,7 +13,7 @@ public class Application {
     public static void main(String[] args) {
         String input = inputHandler.consoleInput();
 
-        int result = calculatorService.add(input);
+        int result = calculatorService.calculator(input);
 
         outputHandler.printOutput(result);
     }

@@ -15,7 +15,13 @@ class CalculatorServiceTest {
 
     @Test
     void 기본구분자_더하기_테스트() {
-        int add = calculatorService.add("1:2,3");
+        int add = calculatorService.defaultAdd("1:2,3");
+        assertEquals(6, add);
+    }
+
+    @Test
+    void 커스텀구분자_더하기_테스트() {
+        int add = calculatorService.customAdd("//;\\n1;2;3");
         assertEquals(6, add);
     }
 
