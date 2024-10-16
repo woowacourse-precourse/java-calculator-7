@@ -18,9 +18,28 @@ public class SumCalculator {
 
     if(matcher.find() && input.startsWith("//")){
       System.out.println("커스텀 구분자 처리");
-      return 2; //커스텀 구분자
+      return customSum(input); //커스텀 구분자
     }
-    System.out.println("기본 구분자 처리");
-    return 1; // 기본 구분자
+    return normalSum(input); // 기본 구분자
+  }
+
+  private int normalSum(String input){
+    // 기본 구분자는 쉼표와 콜론으로, 받은 문자열은 이것을 기준으로 숫자의 합을 수행한다.
+    int answer = 0;
+    String[] number = input.split("[,|:]");
+    try{
+      for(int i = 0; i<number.length; i++){
+        answer += Integer.parseInt(number[i]);
+      }
+    } catch (NumberFormatException e){
+      throw new IllegalArgumentException();
+    }
+    return answer;
+  }
+
+  private int customSum(String input){
+    int answer = 0;
+    // To-do
+    return answer;
   }
 }
