@@ -1,6 +1,7 @@
 package calculator.domain;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,30 +12,28 @@ public class Calculator {
             return 0;
         }
 
-        Optional<String> customDelimiter = getCustomDelimiter(input);
-        String numbers = removeCustomDelimiterPart(input, customDelimiter.isPresent());
+        List<String> delimiters = getCustomDelimiters(input);
+        String numbers = removeCustomDelimiterPart(input, delimiters.size());
 
-        if (customDelimiter.isEmpty()) {
-            return sumNumbers(numbers.split(",|:"));
-        }
-
-        return sumNumbers(numbers.split(customDelimiter.get() + "|,|:"));
+        String delimiterPattern = String.join("|", delimiters);
+        return sumNumbers(numbers.split(delimiterPattern + "|,|:"));
     }
 
-    private Optional<String> getCustomDelimiter(String input) {
+    private List<String> getCustomDelimiters(String input) {
+        List<String> delimiters = new ArrayList<>();
         Matcher matcher = Pattern.compile("//(.)\\n").matcher(input);
 
-        if (matcher.find()) {
+        while (matcher.find()) {
             String delimiter = matcher.group(1);
-            return Optional.of(Pattern.quote(delimiter));
+            delimiters.add(Pattern.quote(delimiter));
         }
-
-        return Optional.empty();
+        return delimiters;
     }
 
-    private String removeCustomDelimiterPart(String input, boolean hasCustomDelimiter) {
-        if (hasCustomDelimiter) {
-            return input.substring(input.indexOf("\n") + 1);
+    private String removeCustomDelimiterPart(String input, int delimiterCount) {
+        if (delimiterCount > 0) {
+            int lastDelimiterIndex = input.lastIndexOf("\n");
+            return input.substring(lastDelimiterIndex + 1);
         }
         return input;
     }
