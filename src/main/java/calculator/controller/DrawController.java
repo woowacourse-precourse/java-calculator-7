@@ -2,6 +2,7 @@ package calculator.controller;
 
 import java.util.List;
 
+import calculator.dto.FormulaReq;
 import calculator.service.DrawService;
 import calculator.view.InputView;
 
@@ -14,6 +15,6 @@ public class DrawController {
 
 	public List<Long> requestNumberDraw() {
 		String formula = InputView.readLine();
-		return drawService.drawNumbers();
+		return drawService.drawNumbers(FormulaReq.from(formula));
 	}
 }
