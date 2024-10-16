@@ -8,7 +8,7 @@ public class StringParser {
     }
 
     private String getCustomDelimiter(String string) {
-        return string.substring(1,2);
+        return string.substring(2, 3);
     }
 
     public String[] parseString(String string) {
