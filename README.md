@@ -197,7 +197,7 @@ More : [Commit Message convention](https://gist.github.com/9941e89d80e2bc58a153.
 ### 기능 구현 리스트
 
 - 컴퓨터
-    - [ ] 계산기를 호출한다.
+    - [x] 계산기를 호출한다.
     - [ ] 계산기에서 덧셈 결과를 받는다.
     - [ ] 받은 덧셈 결과를 화면에 출력한다.
 - 계산기
