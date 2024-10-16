@@ -8,7 +8,7 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
- class OutputViewTest {
+class OutputViewTest {
 
     private final OutputView outputView = new OutputView();
 
@@ -21,6 +21,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
         outputView.displayInputMessage();
 
         assertEquals(expectedOutput, outContent.toString());
+
+        System.setOut(System.out);
+    }
+
+    @Test
+    void 결과값을_출력한다() {
+        String expectedOutput = "결과 : ";
+        String number = "6";
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        outputView.displayResultMessage(number);
+
+        assertEquals(expectedOutput + number, outContent.toString());
 
         System.setOut(System.out);
     }
