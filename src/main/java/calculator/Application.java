@@ -17,7 +17,8 @@ public class Application {
     }
 
     public static boolean isCustomSeperator(String input) {
-        return true;
+        if (input.contains("//") && input.contains("\n")) return true;
+        return false;
     }
 
     public static String extractCustomSeperator(String input) {
