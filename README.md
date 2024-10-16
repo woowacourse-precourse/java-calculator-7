@@ -28,8 +28,8 @@
 
 ### 더하기
 
--[ ] `int[]`로 구성된 숫자들을 더해서 `int`로 결과 내기
-    - [ ] 음수가 존재하는 경우 `IllegalArgumentException`을 발생시킨다.
+-[x] `int[]`로 구성된 숫자들을 더해서 `int`로 결과 내기
+    - [x] 음수가 존재하는 경우 `IllegalArgumentException`을 발생시킨다.
 
 ### 입출력
 
