@@ -76,6 +76,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 숫자_사이_공백문자() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("    1.1, 1 :  9  "))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
     void 공백문자() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("       "))
