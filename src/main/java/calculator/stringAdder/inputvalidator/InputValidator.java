@@ -12,7 +12,7 @@ public class InputValidator {
     System.out.println("덧셈할 문자열을 입력해주세요.");
     String input = Console.readLine();
     if (input == null || input.isEmpty()){
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException(this.getClass().getSimpleName()+ ": 입력한 문자열이 비었습니다.");
     }
     return input;
   }
