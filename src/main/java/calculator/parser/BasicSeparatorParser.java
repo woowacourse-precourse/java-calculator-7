@@ -1,5 +1,8 @@
 package calculator.parser;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
@@ -7,19 +10,20 @@ import java.util.regex.Pattern;
 
 public class BasicSeparatorParser implements SeparatorParser {
 
-
 	public static final String BASIC_CUSTOM_SEPARATOR_PATTERN = "(/{2})(\\D)(\\\\n)";
 	private static final Pattern PATTERN = Pattern.compile(BASIC_CUSTOM_SEPARATOR_PATTERN);
+	private static final List<Character> BASIC_SEPARATORS = Arrays.asList(new Character[] {',', ':'});
 	private Matcher matcher;
 
 	@Override
 	public String parse(String text, Set<Character> separators) {
 		matcher = PATTERN.matcher(text);
+		separators.addAll(BASIC_SEPARATORS);
 
 		while (matcher.find()) {
 			char customSeparator = matcher.group(2).charAt(0);
 
-			if(!separators.add(customSeparator)){
+			if (!separators.add(customSeparator)) {
 				throw new IllegalArgumentException(ParserError.DUPLICATION_SEPARATOR.getMessage());
 			}
 		}

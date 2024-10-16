@@ -12,8 +12,7 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class BasicCalculator implements Calculator {
 
-	private Set<Character> separators;
-	private static final Character[] BASIC_SEPARATORS = {',', ':'};
+	private static final Set<Character> separators = new HashSet<>();
 	private SeparatorParser separatorParser;
 	private MathematicalExpressionParser mathematicalExpressionParser;
 
@@ -36,12 +35,11 @@ public class BasicCalculator implements Calculator {
 		if (mathematicalExpressionParser == null) {
 			this.mathematicalExpressionParser = new BasicMathematicalExpressionParser();
 		}
-		separators = new HashSet<>(Arrays.asList(BASIC_SEPARATORS));
 	}
 	private long calculate(String expression) {
 		String mathematicalExpression = separatorParser.parse(expression, separators);
-		String separatorRegex = separatorParser.generateRegex(separators);
-		long[] numbers = mathematicalExpressionParser.parse(mathematicalExpression, separatorRegex);
+		String separatorPattern = separatorParser.generateRegex(separators);
+		long[] numbers = mathematicalExpressionParser.parse(mathematicalExpression, separatorPattern);
 
 		return Arrays.stream(numbers).sum();
 	}
@@ -53,6 +51,7 @@ public class BasicCalculator implements Calculator {
 
 		long result = calculate(input);
 
+		separators.clear();
 		System.out.printf("결과 : %d", result);
 	}
 
