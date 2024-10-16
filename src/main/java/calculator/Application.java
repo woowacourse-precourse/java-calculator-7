@@ -4,6 +4,9 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static boolean catchCustomSeparator(String input) {
+//        if (input.startsWith("//\\n")) { // empty separator 비허용 시
+//            return false;
+//        }
         return input.startsWith("//") && input.contains("\\n");
     }
 
@@ -19,16 +22,28 @@ public class Application {
         return separators;
     }
 
+    public static String trimSeparator(String input) {
+        String trimedInput = input;
+        if (catchCustomSeparator(input)) {
+            trimedInput = input.substring(input.indexOf("\\n") + 2);
+        }
+        return trimedInput;
+    }
+
     public static String replace(String input, String[] separators) {
-        String replacedInput = input;
+        String replacedInput = trimSeparator(input);
         for (String sep : separators) {
             replacedInput = replacedInput.replace(sep, ",");
+            if (sep.isEmpty()) {//empty separator 고려
+                replacedInput = replacedInput.
+                        substring(1, replacedInput.length() - 1);
+            }
         }
         return replacedInput;
     }
 
-    public static int[] split(String input) {
-        String[] arrayStrings = input.split(",");
+    public static int[] split(String input, String[] separators) {
+        String[] arrayStrings = replace(input, separators).split(",");
         int len = arrayStrings.length;
         int[] arrayInts = new int[len];
         for (int i = 0; i < len; i++) {
@@ -63,6 +78,7 @@ public class Application {
 
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해주세요.");
+        // String input = "//\\n123"; //테스트용
         String input = Console.readLine();
         if (input.isEmpty()) { // ""일 때 0 나오게 예외처리
             System.out.println("결과 : " + 0);
@@ -70,12 +86,7 @@ public class Application {
         }
         String[] separators = getSeparators(input);
 
-        if (catchCustomSeparator(input)) {
-            input = input.substring(input.indexOf("\\n") + 2);
-        }
-        input = replace(input, separators);
-
-        int[] container = split(input);
+        int[] container = split(input, separators);
 
         checkValidity(container);
         int sum = calculateSum(container);

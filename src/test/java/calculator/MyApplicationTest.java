@@ -46,6 +46,23 @@ class MyApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void emptySeparator() {
+        assertSimpleTest(() -> {
+            run("//\\n1234");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
+    void emptySeparatorWithException() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//\\n-1234"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
