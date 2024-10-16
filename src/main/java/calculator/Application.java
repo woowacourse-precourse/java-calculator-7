@@ -1,9 +1,11 @@
 package calculator;
 
+import calculator.controller.CalculatorController;
+
 public class Application {
 
     public static void main(String[] args) {
-        Calculator calc = new Calculator("1,2;3");
-        System.out.println(calc.sum());
+        CalculatorController calculatorController = new CalculatorController();
+        calculatorController.run();
     }
 }
