@@ -1,5 +1,6 @@
 package calculator.service;
 
+import calculator.model.Calculator;
 import calculator.model.Delimiter;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ public class StringSplit {
 
     private String inputString;
     Delimiter delimiter = new Delimiter();
-
+    Calculator calculator = Calculator.getInstance();
 
     public StringSplit(String inputString) {
         this.inputString = inputString;
@@ -35,6 +36,7 @@ public class StringSplit {
     public void splitAndSaveOperands() {
         String[] stringOperands = splitOperands();
         ArrayList<Integer> intOperands = convertOperandsToInt(stringOperands);
+        saveOperands(intOperands);
     }
 
     private String[] splitOperands() {
@@ -54,5 +56,9 @@ public class StringSplit {
             intOperands.add(Integer.valueOf(stringOperand));
         }
         return intOperands;
+    }
+
+    private void saveOperands(ArrayList<Integer> intOperands) {
+        calculator.setOperands(intOperands);
     }
 }
