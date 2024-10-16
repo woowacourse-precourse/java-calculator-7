@@ -11,23 +11,31 @@ public class Calculator {
             return 0;
         }
         if (DelimiterParser.isDefaultDelimiter(input)) {
-            String replace = input.replace(",", ",")
-                    .replace(":", ",");
-            System.out.println("replace = " + replace); // 1,2,3
-            List<Integer> inputNums = DelimiterParser.splitInputAsString(replace);
+            DelimiterParser delimiterParser = new DelimiterParser(":");
+            String replace = delimiterParser.replace(input);
+
+            List<Integer> inputNums = DelimiterParser.parseToIntList(replace);
             Validator.validateIfInputNegative(inputNums);
+
             return inputNums.stream()
                     .mapToInt(Integer::valueOf)
                     .sum();
         }
 
         if (!DelimiterParser.isDefaultDelimiter(input)) {
-            String replaceInput = input.replace("//", "")
-                    .replace("\\n", "");
+            DelimiterParser delimiterParser = new DelimiterParser("//", "\\n");
+            // ,;,1;20;33
+            String replaceInput = delimiterParser.replace(input);
             String customDelimiter = replaceInput.substring(0, 1);// 구분자 ;
-            String[] split = replaceInput.substring(1).split(customDelimiter);
+            String numberPart = replaceInput.substring(1);
+            String[] split = numberPart.split(customDelimiter);
+
+            // ; 1;20;30
             String splitString = String.join(",", split);
-            List<Integer> inputNums = DelimiterParser.splitInputAsString(splitString); // -> 123 백이십삼
+            // ; 1;20;33
+            List<Integer> inputNums = DelimiterParser.parseToIntList(splitString); // -> 123 백이십삼
+            Validator.validateIfInputNegative(inputNums);
+
             return inputNums.stream()
                     .mapToInt(Integer::valueOf)
                     .sum();
