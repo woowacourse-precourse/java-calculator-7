@@ -35,6 +35,7 @@ public class StringAddCalculator {
         // 2. 계산식에서 숫자들을 추출한다
         List<Integer> numbers = splitNumbers(delimiters, numbersString);
         // 3. 추출된 숫자들 중 음수가 있는지 검증한다
+        validateNumbers(numbers);
         // 4. 숫자들을 더한 값들을 반환한다
         return 0;
     }
@@ -61,6 +62,16 @@ public class StringAddCalculator {
             numbers.add(Integer.parseInt(splitNumber));
         }
         return numbers;
+    }
+
+    private void validateNumbers(List<Integer> numbers) {
+        for (Integer number : numbers) {
+            if (number < 0) {
+                throw new IllegalArgumentException(
+                        String.format("(%s)는 음수입니다. 입력하는 숫자들은 반드시 양수 혹은 0이어야 합니다.", number)
+                );
+            }
+        }
     }
 
     private static int sum(String input) {
