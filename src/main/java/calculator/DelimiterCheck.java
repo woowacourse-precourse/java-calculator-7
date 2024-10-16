@@ -76,6 +76,15 @@ public class DelimiterCheck {
         }
     }
 
+    // 저장된 배열을 계산기에서 메서드로 호출
+    public double[] getDoubleNumArray() {
+        return doubleNumArray;
+    }
+
+    public int[] getIntNumArray() {
+        return intNumArray;
+    }
+
 }
 
 
