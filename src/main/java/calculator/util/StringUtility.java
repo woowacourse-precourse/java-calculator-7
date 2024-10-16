@@ -15,10 +15,8 @@ public class StringUtility {
         if(splitterEndCount == 0 && splitterStartCount == 0) return "";
 
         if(splitterEndCount == 1 && splitterStartCount == 1){
-            System.out.println(input.indexOf(InputHelper.SPLITTER_END));
             if(input.indexOf(InputHelper.SPLITTER_START) != InputHelper.SPLITTED_START_IDX) throw new IllegalArgumentException(InputHelper.INVALID_CUSTOM_SPLITTER);
             if(input.indexOf(InputHelper.SPLITTER_END) != InputHelper.SPLITTED_END_IDX) throw new IllegalArgumentException(InputHelper.INVALID_CUSTOM_SPLITTER);
-            System.out.println(input);
             char splitter = input.charAt(InputHelper.SPLITTED_END_IDX-1);
             if(Character.isDigit(splitter)) throw new IllegalArgumentException(InputHelper.INVALID_CUSTOM_SPLITTER);
             return splitter + "";

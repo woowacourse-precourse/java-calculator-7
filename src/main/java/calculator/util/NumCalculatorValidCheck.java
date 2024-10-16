@@ -9,11 +9,11 @@ public class NumCalculatorValidCheck {
      *
      * @param input
      * @return
-     *
+     * TODO refactoring spliter valid와 numPart valid 분리하여 메소드화 하기
      */
     public static boolean isValid(String input) {
         try{
-            if(input.isEmpty()) return false;
+            if(input.isEmpty()) return true;
             String splitter = InputHelper.BASE_SPLITTER;
             String customSplitter = StringUtility.getCustomSplitter(input);
 
@@ -24,12 +24,11 @@ public class NumCalculatorValidCheck {
 
             String numPartStr = StringUtility.getNumPart(input,isCustomSplitterExists);
             String[] numArr = numPartStr.split(splitter);
-            System.out.println(splitter);
             for(String num : numArr){
                 if(!StringUtility.isNumeric(num)) return false;
             }
             return true;
-        }catch (RuntimeErrorException runtimeErrorException){
+        }catch (RuntimeException runtimeException){
             return false;
         }
     }
