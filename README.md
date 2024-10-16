@@ -13,3 +13,4 @@
 ## 2. 리펙토링 정리
 - checkNumberException() 메서드 제거 후 해당 예외처리 역할을 parseStringToInteger() 메서드 안에서 try-catch 문으로 처리.
 - main() 메서드에 try-catch 문 추가.
+- 공백 문자+정수로 이루어진(ex:4, 3,2) 경우도 정상처리하기 위해 parseStringToInteger() 에 number.trim() 메서드 추가.
