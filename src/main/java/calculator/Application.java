@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// //;\\n1//]\\n1-
+// //;\\n1//]\\n;1-
 public class Application {
     static String sepeartor = ",|:";
 
@@ -16,12 +16,9 @@ public class Application {
 
         // 커스텀 구분자
         if (str.contains("//") && str.contains("\\n")) {
-            getCustomSeparator(str);
-
-            //커스텀 구분자를 위한 문자 제거
-            str = str.replaceAll("//", "");
-            str = str.replaceAll("\\\\n", "");
+            str = getCustomSeparator(str);
         }
+        System.out.println("커스텀 구분자 제거: " + str);
 
         // 유효성 검사 & 숫자 반환
         String[] numbers = parseAndValidateNumbers(str);
@@ -34,16 +31,21 @@ public class Application {
      * 커스텀 구분자를 추출하는 함수 정규식을 활용함
      *
      * @param str 입력받은 문자열
-     * @return 커스텀 구분자의 유무
+     * @return 커스텀 구분자 지정 문자를 모두 제거한 문자열
      */
-    private static void getCustomSeparator(String str) {
-        Pattern pattern = Pattern.compile("//(.*?)\\\\n");
+    private static String getCustomSeparator(String str) {
+        Pattern pattern = Pattern.compile("//(.*?)\\\\\\n");
         Matcher matcher = pattern.matcher(str);
 
         while (matcher.find()) { //일치하는 게 있다면
             sepeartor += "|" + matcher.group(1);
             //System.out.println("추출된 구분자: " + sepeartor);
         }
+
+        // 문자열에서 //로 시작하고 \\n으로 끝나는 모든 패턴을 제거
+        str = str.replaceAll("//.*?\\\\n", "");
+
+        return str;
     }
 
     /**
