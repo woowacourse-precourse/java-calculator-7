@@ -1,4 +1,5 @@
 # java-calculator-precourse
+
 ### 기능 목록
 
 - [x]  문자열 입력받기
@@ -18,14 +19,16 @@
     - [x] 구분자 아닌 문자 끼어있으면 에러
 
 ---
+
 #### 〰️ 전체 플로우 〰️
+
 - controller
-  - CalculatorContorller
-  - DelimiterSeparator
-  - NumberChecker
+    - CalculatorController
+    - DelimiterSeparator
+    - NumberChecker
 - model
-  - Delimiter (구분자 등록, 구분자 판별)
+    - Delimiter (구분자 등록, 구분자 판별)
 - view
-  - InputView
-  - OutputView
+    - InputView
+    - OutputView
 - Application
