@@ -23,25 +23,44 @@ public class CaculatorMachine {
         String defaultDelimiter = ",|:";
         String customDelimiter = "";
 
-        // 커스텀 구분자일 경우
+        // 커스텀 구분자
+        // 5-2. "\n"만 존재하는 경우
+        if (userInput.contains("\\n")) {
+            if (!userInput.contains("//")) {
+                throw new IllegalArgumentException("질못된 입력입니다.");
+            }
+        }
+
+        // 5-3. "\n"이 "//"보다 더 앞에 있는 경우
+        if (userInput.indexOf("\\n") < userInput.indexOf("//")) {
+            throw new IllegalArgumentException("질못된 입력입니다.");
+        }
+
+        // 5-5. "//"와 "\n"이 문자열 맨 앞에 존재하지 않는 경우
+        if (userInput.contains("//") && userInput.contains("\n")) {
+            if (!userInput.startsWith("//")) {
+                throw new IllegalArgumentException("질못된 입력입니다.");
+            }
+        }
+
         if (userInput.startsWith("//")) {
-            // "//"가 2번 이상 존재하는 경우
+            // 5-6. "//"가 2번 이상 존재하는 경우
             if (userInput.indexOf("//", 2) != -1) {
                 throw new IllegalArgumentException("잘못된 입력입니다.");
             }
 
             int delimiterEndIndex = userInput.indexOf("\\n");
-            // "//"만 존재하는 경우
+            // 5-1. "//"만 존재하는 경우
             if (delimiterEndIndex == -1) {
                 throw new IllegalArgumentException("잘못된 입력입니다.");
             }
-            // "\n"이 2번 이상 존재하는 경우
+            // 5-7. "\n"이 2번 이상 존재하는 경우
             if (userInput.indexOf("\\n", delimiterEndIndex + 1) != -1) {
                 throw new IllegalArgumentException("잘못된 입력입니다.");
             }
 
             customDelimiter = userInput.substring(2, delimiterEndIndex);
-            // 커스텀 구분자가 1개가 아닌 경우
+            // 5-4. 커스텀 구분자가 1개가 아닌 경우
             if (customDelimiter.length() != 1) {
                 throw new IllegalArgumentException("잘못된 입력입니다.");
             }
@@ -53,16 +72,16 @@ public class CaculatorMachine {
 
         }
 
-        // 구분자로 시작하거나 끝나는 경우
+        // 4. 문자열이 구분자로 시작하거나 끝나는 경우
         if (userInput.startsWith(defaultDelimiter) || userInput.endsWith(defaultDelimiter)) {
             throw new IllegalArgumentException("잘못된 입력입니다.");
         }
-        // 구분자가 연속으로 나오는 경우 예외 처리
+        // 3. 구분자가 연속으로 2번 이상 나온 경우
         if (userInput.contains(",,") || userInput.contains("::") || userInput.contains(",:") || userInput.contains(
                 ":,")) {
             throw new IllegalArgumentException("잘못된 입력입니다.");
         }
-        // 커스텀 구분자가 연속으로 나오는 경우 예외 처리
+        // 3. 구분자가 연속으로 2번 이상 나온 경우
         if (!customDelimiter.isEmpty() && userInput.contains(customDelimiter + customDelimiter)) {
             throw new IllegalArgumentException("잘못된 입력입니다.");
         }
@@ -80,12 +99,12 @@ public class CaculatorMachine {
 
                 try {
                     int num = Integer.parseInt(number);
-                    // 숫자가 음수일 경우
+                    // 2. 음수가 입력된 경우
                     if (num < 0) {
                         throw new IllegalArgumentException("잘못된 입력입니다.");
                     }
                     sum += num;
-                    // 숫자가 아닐 경우
+                    // 1. 정해진 구분자나 숫자가 아닌 다른 문자가 입력된 경우
                 } catch (NumberFormatException e) {
                     throw new IllegalArgumentException("잘못된 입력입니다.");
                 }
