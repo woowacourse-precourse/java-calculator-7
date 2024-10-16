@@ -1,7 +1,7 @@
 package calculator.controller;
 
 public class StringSplitter {
-    public String[] splitter(String input) {
+    public static String[] splitter(String input) {
         String delimiter = "[,:]";
 
         if (input.startsWith("//")) {
