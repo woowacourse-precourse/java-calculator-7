@@ -1,6 +1,11 @@
 package calculator.parser;
 
+import java.util.Arrays;
+
 public class BasicMathematicalExpressionParser implements MathematicalExpressionParser {
+
+
+	public static final String BASIC_MATHEMATICAL_EXPRESSION_PATTERN = "^(\\d)(\\D*\\d)*";
 
 	private long stringNumberToNumber(String stringNumber) {
 		try {
@@ -15,15 +20,19 @@ public class BasicMathematicalExpressionParser implements MathematicalExpression
 
 	}
 
-	@Override
-	public long[] parse(String text, String separatorRegex) {
-		String[] stringNumbers = text.split(separatorRegex);
-		long[] numbers = new long[stringNumbers.length];
-
-		for (int i = 0; i < stringNumbers.length; i++) {
-			numbers[i] = stringNumberToNumber(stringNumbers[i]);
+	private void isValid(String expression){
+		if(!expression.matches(BASIC_MATHEMATICAL_EXPRESSION_PATTERN)){
+			throw new IllegalArgumentException("수식의 형태가 유효하지 않습니다.");
 		}
+	}
 
-		return numbers;
+	@Override
+	public long[] parse(String expression, String separatorPattern) {
+		isValid(expression);
+		String[] stringNumbers = expression.split(separatorPattern);
+
+		return Arrays.stream(stringNumbers)
+			.mapToLong(this::stringNumberToNumber)
+			.toArray();
 	}
 }
