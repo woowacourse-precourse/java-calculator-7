@@ -11,12 +11,17 @@ public class CostomDelimiter {
     public static void findDelimiter(String inputMessage) {
         int start = 0;
         int end = 2;
-        String pre = inputMessage.substring(start, end);
-        int next = inputMessage.indexOf("\\n", end);
 
-        if (!(pre.equals("//") && next == 3)) {
-            throw new IllegalArgumentException("입력 값이 올바르지 않습니다.");
+        String pre = inputMessage.substring(start, end);
+        if (!(pre.equals("//"))) {
+            return;
         }
+
+        int next = inputMessage.indexOf("\\n", end);
+        if (!(next == 3)) {
+            throw new IllegalArgumentException("커스텀 구분자 입력 값이 올바르지 않습니다.");
+        }
+
         validateAndAddDelimiter(inputMessage.charAt(2));
     }
 
