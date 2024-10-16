@@ -20,7 +20,7 @@
   - 커스텀 구분자 parsing
   - 연산의 대상 숫자 parsing
 -  CheckForm
-  - input에 대해서 적절한 입력인지 판단하고 exception 발생을 담당한다.
+    - input에 대해서 적절한 입력인지 판단하고 exception 발생을 담당한다.
 - Calculation
   - 대상 연산자들에 대해서 연산 수행을 담당한다.
 - PrintOutput
