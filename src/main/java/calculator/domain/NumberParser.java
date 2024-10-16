@@ -11,45 +11,49 @@ public class NumberParser {
         this.divider = divider;
     }
 
-    /**
-     * 이거를 아예 여기서 계산할 수 있돍? 근데 parser인데...
-     * @param calculatedValue
-     * @return
-     */
-
-    public void parse(CalculatedValue calculatedValue){
+    public void parse(CalculatedValue calculatedValue) {
         List<Integer> result = new ArrayList<>();
 
-        System.out.println(calculatedValue.getValue());
-
-        String[] splitWord = calculatedValue.getValue().split("");
-        StringBuilder keepNumber = new StringBuilder();
-
-
-        //todo 구조 변경하기
-        for (String s : splitWord) {
-            if(s.equals(divider.getComma()) || s.equals(divider.getClon()) || s.equals(divider.getCustomDivider())){
-                int number = Integer.parseInt(keepNumber.toString());
-                result.add(number);
-                keepNumber = new StringBuilder();
-                continue;
-            }
-            if (s.matches("^[0-9]+$")) {
-                keepNumber.append(s);
-                continue;
-            }
-            throw new IllegalArgumentException("입력값이 잘못되었습니다.");
-        }
-        int number = Integer.parseInt(keepNumber.toString());
-        result.add(number);
-
+        extractNumberValue(calculatedValue, result);
         calculatedValue.setNumberValueToken(result);
     }
 
+    private void extractNumberValue(CalculatedValue calculatedValue, List<Integer> result) {
+        String[] splitWord = calculatedValue.getValue().split("");
+        StringBuilder temporaryNumber = new StringBuilder();
 
+        for (String value : splitWord) {
+            if (handleCorrectValue(value, temporaryNumber, result)) {
+                continue;
+            }
+            throw new IllegalArgumentException("등록되지 않는 구분자가 있습니다." + value);
+        }
+        saveTemporaryNumberToList(temporaryNumber, result);
+    }
 
+    private boolean handleCorrectValue(String value, StringBuilder temporaryNumber, List<Integer> result) {
+        if (isDivider(value)) {
+            saveTemporaryNumberToList(temporaryNumber, result);
+            temporaryNumber.setLength(0);
+            return true;
+        } else if (isNumber(value)) {
+            temporaryNumber.append(value);
+            return true;
+        }
+        return false;
+    }
 
+    private void saveTemporaryNumberToList(StringBuilder temporaryNumber, List<Integer> result) {
+        int number = Integer.parseInt(temporaryNumber.toString());
+        result.add(number);
+    }
 
+    private boolean isDivider(String value) {
+        return value.equals(divider.getComma()) || value.equals(divider.getClon()) || value.equals(divider.getCustomDivider());
+    }
 
+    private boolean isNumber(String value) {
+        return value.matches("^[0-9]+$");
+    }
 
 }
