@@ -12,8 +12,8 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class BasicCalculator implements Calculator {
 
-	private Set<String> separators;
-	private static final String[] BASIC_SEPARATORS = {",", ":"};
+	private Set<Character> separators;
+	private static final Character[] BASIC_SEPARATORS = {',', ':'};
 	private SeparatorParser separatorParser;
 	private MathematicalExpressionParser mathematicalExpressionParser;
 

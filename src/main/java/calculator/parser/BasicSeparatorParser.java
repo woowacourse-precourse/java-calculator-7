@@ -14,7 +14,7 @@ public class BasicSeparatorParser implements SeparatorParser {
 	}
 
 	@Override
-	public String parse(String text, Set<String> separators) {
+	public String parse(String text, Set<Character> separators) {
 		StringTokenizer tokenizer = new StringTokenizer(text, "\\n");
 		while (tokenizer.countTokens() > 1) {
 			String now = tokenizer.nextToken();
@@ -32,13 +32,13 @@ public class BasicSeparatorParser implements SeparatorParser {
 	}
 
 	@Override
-	public String generateRegex(Set<String> separators) {
+	public String generateRegex(Set<Character> separators) {
 		if (separators.isEmpty()) {
 			return "";
 		}
 		StringBuilder separatorRegex = new StringBuilder();
 
-		for (String separator : separators) {
+		for (char separator : separators) {
 			separatorRegex.append("|").append(separator);
 		}
 
