@@ -30,6 +30,12 @@ public class CalculatorService {
     }
     private static void validateNumbers(String[] numbers){
         for(String number:numbers){
+            if(!isNumberic(number)){
+                throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
+            }
+            if(Integer.parseInt(number)<0){
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            }
         }
     }
 
