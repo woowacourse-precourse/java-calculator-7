@@ -22,6 +22,10 @@ public class Application {
             input = input.substring(input.indexOf("\\n") + "\\n".length());
         }
 
+        return sum(input, delimiter);
+    }
+
+    private static int sum(String input, String delimiter) {
         String[] numbers = input.split(delimiter);
 
         int sum = 0;
