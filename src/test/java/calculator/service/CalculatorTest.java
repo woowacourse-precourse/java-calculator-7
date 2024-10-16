@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class CalculatorTest {
-    private static final Calculator calculator = new Calculator();
+    private final Calculator calculator = new Calculator();
 
     @Test
     @DisplayName("더하기 - 올바른 입력이 주어질 때 올바른 계산을 한다.")
