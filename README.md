@@ -16,12 +16,12 @@
 
 - [X] 계산기 시작 문구 상수화
 - [X] 계산기 결과 문구 상수화
-- [] 시작 문구 출력
+- [X] 시작 문구 출력
 - [] 결과 문구 출력
 
 ### 계산기 입력 기능
 
-- [] camp.nextstep.edu.missionutils에서 제공하는 Console API를 사용하여 숫자를 입력받고 문자열을 반환하는 메서드 구현
+- [ ] camp.nextstep.edu.missionutils에서 제공하는 Console API를 사용하여 숫자를 입력받고 문자열을 반환하는 메서드 구현
 
 ### 계산 기능
 
