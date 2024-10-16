@@ -20,4 +20,9 @@ public class Delimiters {
         String firstFormat = inputString.substring(0, 1);
         return firstFormat.equals("//");
     }
+
+    public boolean isCustomDelimiterLastFormatCorrect(String inputString) {
+        String lastFormat = inputString.substring(3, 4);
+        return lastFormat.equals("\n");
+    }
 }
