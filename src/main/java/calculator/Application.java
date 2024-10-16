@@ -1,17 +1,20 @@
 package calculator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Application {
 
+    public static ArrayList<String> seperatorList = new ArrayList<>(List.of(".", ":"));
 
-    public static String getCustomSeperator(String input) {
+    public static void getCustomSeperator(String input) {
         String customSeperator = "";
         System.out.println("input:" + input);
         if (input.contains("\\n") && input.contains("//")) {
             customSeperator = input.substring(input.indexOf("//") + 2, input.indexOf("\\n"));
+            seperatorList.add(customSeperator);
         }
-        return customSeperator;
     }
 
     public static String getUserInput() {
@@ -26,5 +29,6 @@ public class Application {
         // TODO: 프로그램 구현
         System.out.println("덧셈할 문자열을 입력해주세요");
         getCustomSeperator(getUserInput());
+        System.out.println(seperatorList);
     }
 }
