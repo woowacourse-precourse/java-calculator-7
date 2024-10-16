@@ -14,8 +14,8 @@ public class Numbers {
         }
         return sum;
     }
-
-    public long getSum() {
-        return sum;
+    @Override
+    public String toString() {
+        return String.valueOf(sum);
     }
 }
