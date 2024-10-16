@@ -4,6 +4,21 @@ import camp.nextstep.edu.missionutils.Console;
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
+
+        while (true) {
+            try {
+                promptUserForInput();
+                String input = getInput();
+
+                if (isExitCommand(input)) {
+                    System.out.println("프로그램을 종료합니다.");
+                    break;
+                }
+
+            } catch (IllegalArgumentException e) {
+
+            }
+        }
     }
 
     private static void promptUserForInput() {
