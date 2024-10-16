@@ -5,7 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -58,4 +60,23 @@ class PreprocessorTest {
         assertEquals(preprocessor.preprocessString(given),"//2,3,4");
     }
 
+
+    @Test
+    @DisplayName("validateInputString 예외 발생 테스트")
+    void validateInputString_exception_o(){
+        String input = "//2,3,4";
+        List<String> delimeterList = new ArrayList<>(Arrays.asList(",",":"));
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, ()->{
+            preprocessor.validateInputString(delimeterList,input);
+        });
+        assertEquals(e.getMessage(),"구분자 이외의 문자가 있습니다.");
+    }
+
+    @Test
+    @DisplayName("validateInputString 예외 발생 x 테스트")
+    void validateInputString_exception_x(){
+        String input = "2,3:4";
+        List<String> delimeterList = new ArrayList<>(Arrays.asList(",",":"));
+        assertDoesNotThrow(()->preprocessor.validateInputString(delimeterList,input));
+    }
 }
