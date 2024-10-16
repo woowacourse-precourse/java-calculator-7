@@ -56,7 +56,7 @@ public class Calculator {
     }
 
     private static boolean isInvalidInput(final String str) {
-        return !str.matches("\\d");
+        return !str.matches("(\\d)+");
     }
 
     private static boolean isContainedDigit() {
