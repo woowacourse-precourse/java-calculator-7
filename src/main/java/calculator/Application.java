@@ -32,7 +32,7 @@ public class Application {
             numbers = input.substring(delimiterEndIndex + 2);
 
             for(int i = 2; i<delimiterEndIndex; i++){
-                delimiter.append("|").append(input.substring(i, i + 1));
+                delimiter.append("|").append(input.charAt(i));
             }
         }
 
