@@ -20,7 +20,7 @@ public class CalculatorController {
      */
     public void run() {
         String inputString = readInputStringFromInputView();
-        int sum = calculateService.calculate(inputString);
+        long sum = calculateService.calculate(inputString);
         outputView.printResult(sum);
     }
 
