@@ -37,7 +37,14 @@ public class MyCalculator {
         int parseToInt;
         int result = 0;
         for (String number : numbers) {
-            parseToInt = Integer.parseInt(number.trim());
+            try {
+                parseToInt = Integer.parseInt(number.trim());
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("숫자로 변환할 수 없습니다. : " + number);
+            }
+            if (parseToInt < 0) {
+                throw new IllegalArgumentException("음수를 입력할 수 없습니다. : " + number);
+            }
             result += parseToInt;
         }
         return result;
