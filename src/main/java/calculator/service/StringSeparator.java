@@ -19,8 +19,7 @@ public class StringSeparator {
             System.out.println(str.charAt(i));
             if (isNumber(str.charAt(i))) {
                 if (!divide.isEmpty()) {
-                    if (divide.charAt(0) != '/' || divide.charAt(1) != '/' || divide.charAt(divide.length() - 1) != 'n'|| divide.charAt(divide.length() - 2) != '\\'
-                    || divide.length() < 5) {
+                    if (isWrongInput(divide)) {
                         throw new IllegalArgumentException("잘못된 입력입니다.");
                     } else {
                         String separator = divide.substring(2, divide.length() - 2);
@@ -47,6 +46,14 @@ public class StringSeparator {
 
     private boolean isNumber(char ch) {
         if (ch >= '0' && ch <= '9') {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isWrongInput(String divide) {
+        if (divide.charAt(0) != '/' || divide.charAt(1) != '/' || divide.charAt(divide.length() - 1) != 'n' || divide.charAt(divide.length() - 2) != '\\'
+                || divide.length() < 5) {
             return true;
         }
         return false;
