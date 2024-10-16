@@ -1,7 +1,6 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,11 +18,14 @@ public class Application {
         if (str.contains("//") && str.contains("\\n")) {
             str = getCustomSeparator(str);
         }
-        System.out.println("커스텀 구분자 제거: " + str);
-        System.out.println("추출된 구분자: " + sepeartor);
+        //System.out.println("커스텀 구분자 제거: " + str);
+        //System.out.println("추출된 구분자: " + sepeartor);
 
         // 유효성 검사 & 숫자 반환
         String[] numbers = parseAndValidateNumbers(str);
+
+        // 제대로 된 입력시 분리된 숫자를 더한 결과 반환
+        int result = addNumbers(numbers);
 
         // 결과 출력
         System.out.println("결과 : " + str);
@@ -67,7 +69,7 @@ public class Application {
     private static String[] parseAndValidateNumbers(String str) {
         //구분자를 기준으로 문자열을 분리
         String[] numbers = str.split(sepeartor);
-        System.out.println("분리된 숫자 배열: " + Arrays.toString(numbers));
+        //System.out.println("분리된 숫자 배열: " + Arrays.toString(numbers));
 
         for (String number : numbers) {
             //각 부분이 숫자로만 이루어져 있는지 확인 (빈 문자열 무시)
@@ -76,5 +78,14 @@ public class Application {
             }
         }
         return numbers;
+    }
+
+    private static int addNumbers(String[] numbers) {
+        int sum = 0;
+        for (String number : numbers) {
+            sum += Integer.parseInt(number);
+        }
+
+        return sum;
     }
 }
