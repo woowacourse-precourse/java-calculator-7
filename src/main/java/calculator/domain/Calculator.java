@@ -73,7 +73,8 @@ public class Calculator {
             numbers = input.split(",|:");
         } else {
             input = input.substring(START_NUMBER_INDEX);
-            numbers = input.split(customDivision);
+            String regexSafeDivision = customDivision.replaceAll("([\\\\.*+?^${}()|\\[\\]])", "\\\\$1");
+            numbers = input.split(regexSafeDivision);
         }
         return numbers;
     }
