@@ -4,11 +4,11 @@
 ## Util
 ### Validator (입력 체크)
 - 잘못된 입력인 경우 IllegalArgumentException 발생
-~~- 입력이 empty~~
+- ~~- 입력이 empty~~
+- ~~- 숫자가 없는 경우~~
 - 숫자 없이 구분자 (입력의 시작 위치)
   - 커스텀 구분자를 설정하는 경우면 OK
   - 그 외 Exception 
-- 숫자가 없는 경우
 - 잘못된 커스텀 구분자
 - 커스텀 구분자 지정 없이 커스텀 구분자 사용
 ## Model
