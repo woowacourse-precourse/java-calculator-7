@@ -11,9 +11,7 @@ public class CalculatorService {
     }
 
     public int calculateSum(String input) {
-        String[] numbers = delimiterService.splitNumbers(input);
-
-        return StringNumberSumCalculator.sum(numbers);
+        return StringNumberSumCalculator.sum(delimiterService.splitNumbers(input));
     }
 
 }
