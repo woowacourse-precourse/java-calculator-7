@@ -40,17 +40,26 @@ class Calculator {
     public int sumInput(String[] userInputNumbers) {
         int sum = 0;
         for (String userInputNumber : userInputNumbers) {
-            sum += Integer.parseInt(userInputNumber);
+            int tempInputNumber = Integer.parseInt(userInputNumber);
+            Validation.validateNegativeNumber(tempInputNumber);
+            sum += tempInputNumber;
         }
         return sum;
     }
 }
 
 class Validation {
-    //    입력이 비어있는 경우 예외 반환
+    //입력이 비어있는 경우 예외 반환
     public static void validateEmpty(String userInput) {
         if (userInput.isEmpty()) {
             throw new IllegalArgumentException("빈 문자열은 입력할 수 없습니다.");
+        }
+    }
+
+    //입력된 숫자에 음수가 있는 경우 예외 반환
+    public static void validateNegativeNumber(int userInputNumber) {
+        if (userInputNumber < 0) {
+            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
         }
     }
 }
