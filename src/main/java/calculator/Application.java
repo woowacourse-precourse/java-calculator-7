@@ -6,11 +6,7 @@ import java.util.regex.Pattern;
 
 public class Application {
     private static final String REGEX_A = "[0-9,:]*$";
-    private static final String REGEX_B = ""; // todo 정규식 만들기
-
-    private enum InputType {
-        typeA, typeB
-    }
+    private static final String REGEX_B = "^//(.)\\\\n([0-9,:]|\\1)*$";
 
     private static final Map<Pattern, InputType> PATTERN_MAP = Map.of(
             Pattern.compile(REGEX_A), InputType.typeA,
@@ -18,57 +14,19 @@ public class Application {
     );
 
     public static void main(String[] args) {
-        if (args.length != 1) {
-            throw new IllegalArgumentException();
+        for (String input : args) {
+            System.out.println("결과 : " + sum(input));
         }
-        String input = args[0];
-        InputType type = classifyStringPattern(input);
-
-        int result = -1;
-        if (type.equals(InputType.typeA)) {
-            result = sum(input, ",", ":");
-        } else if (type.equals(InputType.typeB)) {
-//            String customSeparator = getCustomSeparator(input);
-            result = sum(input.substring(5), ",", ":", String.valueOf(input.charAt(2)));
-        }
-
-        System.out.println("결과 : " + result);
     }
 
     /**
-     * @param input
-     * @return
-     * @description : 정규식을 통해 문자열이 패턴에 부합한지 판별 후 type return
-     */
-    private static InputType classifyStringPattern(String input) {
-        for (Map.Entry<Pattern, InputType> entry : PATTERN_MAP.entrySet()) {
-            if (entry.getKey().matcher(input).matches()) {
-                return entry.getValue();
-            }
-        }
-        throw new IllegalArgumentException();
-    }
-
-    /**
-     * @param input
-     * @return
-     * @description : custom separator를 문자열에서 정규식을 사용하여 반환
-     */
-    private static String getCustomSeparator(String input) {
-        Pattern pattern = Pattern.compile(REGEX_B);
-        Matcher matcher = pattern.matcher(input);
-        return matcher.hasMatch() ? matcher.group(1) : null;
-    }
-
-    /**
-     * @param input
-     * @param separators
-     * @return
      * @description : input 값과 구분자를 받아 합산 처리
      */
-    public static int sum(String input, String... separators) {
-        String separatorsForSplit = makeSeparators(separators);
-        String[] numbers = input.split(separatorsForSplit);
+    public static int sum(String input) {
+        InputType type = validateInputPattern(input);
+        String customSeparator = type.isTypeB() ? String.valueOf(input.charAt(2)) : "";
+        String separatorsForSplit = makeSeparators(",", ":", type.isTypeB() ? customSeparator : "");
+        String[] numbers = type.isTypeA() ? input.split(separatorsForSplit) : input.substring(5).split(separatorsForSplit);
 
         int sum = 0;
         for (String n : numbers) {
@@ -78,8 +36,30 @@ public class Application {
     }
 
     /**
-     * @param separators : 구분자
-     * @return : "[,:]" or "[,:(custom)]"
+     * @description : 문자열이 패턴에 유효한지 검사하여 알맞은 타입 반환
+     */
+    private static InputType validateInputPattern(String input) {
+        for (Map.Entry<Pattern, InputType> entry : PATTERN_MAP.entrySet()) {
+            if (entry.getKey().matcher(input).matches()) {
+                return entry.getValue();
+            }
+        }
+        throw new IllegalArgumentException(input);
+    }
+
+    /**
+     * @description : custom separator를 문자열에서 정규식을 사용하여 반환
+     */
+    @Deprecated
+    private static String getCustomSeparator(String input) {
+        Pattern pattern = Pattern.compile(REGEX_B);
+        Matcher matcher = pattern.matcher(input);
+        return matcher.hasMatch() ? matcher.group(1) : null;
+    }
+
+
+    /**
+     * @return : "[,:]" or "[,:(custom separator)]"
      * @description : input을 커스텀 구분자를 포함하여 split() 하기 위해 가변인수로 받아 처리
      */
     private static String makeSeparators(String... separators) {
@@ -90,6 +70,19 @@ public class Application {
         }
         combineStr.append("]");
         return combineStr.toString();
+    }
+
+
+    private enum InputType {
+        typeA, typeB;
+
+        public boolean isTypeA() {
+            return this.equals(typeA);
+        }
+
+        public boolean isTypeB() {
+            return this.equals(typeB);
+        }
     }
 
 }
