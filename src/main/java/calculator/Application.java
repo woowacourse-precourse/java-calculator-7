@@ -34,7 +34,7 @@ public class Application {
         for (String number : removedSeparatorsArray){
             if (!number.isEmpty()) {
                 try {
-                    int num = Integer.parseInt(number);
+                    int num = Integer.parseInt(number.trim());
                     if (num < 0) {
                         throw new IllegalArgumentException("입력 값에 음수가 포함될 수 없습니다: " + number);
                     }
