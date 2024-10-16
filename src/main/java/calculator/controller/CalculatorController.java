@@ -1,23 +1,30 @@
 package calculator.controller;
 
 import calculator.model.Calculator;
+import calculator.view.InputView;
+import calculator.view.OutputView;
 
 public class CalculatorController {
     private final Calculator calculator = new Calculator();
+    private final InputView inputView = new InputView();
+    private final OutputView outputView = new OutputView();
 
-    public void startCalculator() {
-
+    public void startCalculate() {
+        String expression = inputView.inputExpressionString();
+        int[] extractNumberAry = extractNumbers(expression);
+        calculator.sum(extractNumberAry);
+        outputView.printCalculateResult(calculator.getTotal());
     }
 
-    private String[] extractNumbers(String input) {
+    private int[] extractNumbers(String input) {
         String delimiter = "[,:]";
         if (input.startsWith("//")) {
-            int delimiterIndex = input.indexOf("/n");
+            int delimiterIndex = input.indexOf("\\n");
             delimiter = input.substring(2, delimiterIndex);
             input = input.substring(delimiterIndex + 1);
         }
 
-        return input.split(delimiter);
+        return toPositiveNumberArray(input.split(delimiter));
     }
 
     private int[] toPositiveNumberArray(String[] extractNumbers) {
@@ -30,11 +37,6 @@ public class CalculatorController {
     }
 
     private int verifyPositive(String extractNumber) {
-        int number = Integer.parseInt(extractNumber);
-        if (number < 0) {
-            throw new IllegalArgumentException("음수는 입력될 수 없습니다.");
-        }
-
-        return number;
+        return Integer.parseInt(extractNumber);
     }
 }
