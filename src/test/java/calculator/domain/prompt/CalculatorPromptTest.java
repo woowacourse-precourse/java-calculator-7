@@ -174,9 +174,7 @@ class CalculatorPromptTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {
-            "1,2.3", "1.2.3", "1 2 3", "1, 2, 3", "1+2+3", "123 ", " 1,2,3 ", " 123", ",", ":", ", ,", ""
-    })
+    @ValueSource(strings = {"1,2.3", "1.2.3", "1 2 3", "1, 2, 3", "1+2+3", "123 ", " 1,2,3 ", " 123", ",", ":", ", ,"})
     @DisplayName("기본 구분자 외에 다른 문자가 포함되면 예외가 발생한다.")
     void givenInvalidPrompt_whenExtractInteger_thenReturnError(String input) {
         // given

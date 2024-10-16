@@ -16,6 +16,10 @@ public class CalculatorPrompt extends Prompt {
     @Override
     protected List<String> separate(String inputData) {
         List<String> separatedData = new ArrayList<>();
+        if (inputData == null || inputData.isEmpty()) {
+            return separatedData;
+        }
+
         StringBuilder stringBuilder = new StringBuilder();
         for (char word: inputData.toCharArray()) {
             if (word == DELIMITER_COMMA || word == DELIMITER_COLON) {
@@ -33,6 +37,10 @@ public class CalculatorPrompt extends Prompt {
     @Override
     protected List<String> separate(String inputData, char customDelimiter) {
         List<String> separatedData = new ArrayList<>();
+        if (inputData == null || inputData.isEmpty()) {
+            return separatedData;
+        }
+
         StringBuilder stringBuilder = new StringBuilder();
         for (char word: inputData.toCharArray()) {
             if (word == DELIMITER_COMMA || word == DELIMITER_COLON || word == customDelimiter) {
