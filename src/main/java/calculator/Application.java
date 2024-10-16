@@ -16,13 +16,13 @@ public class Application {
             }
             //changing custom divider by ,
             String customdivider = input.substring(2, newlineidx);
-            input = input.substring(newlineidx + 2);
-            input = input.replace(customdivider, ",");
+            input=input.substring(newlineidx+2);
+            input=input.replace(customdivider,",");
         }
         // changing every divider to ,
         for (char divider : dividers.toCharArray()) {
-            input = input.replace(divider, ',');
+            input=input.replace(divider,',');
         }
-        int answer = 0;
+        int answer=0;
     }
 }
