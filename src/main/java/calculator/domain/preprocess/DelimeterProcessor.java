@@ -15,4 +15,9 @@ public class DelimeterProcessor {
         if (input.indexOf("\n") > 3)
             throw new IllegalArgumentException("구분자로 사용할 문자가 두 글자 이상");
     }
+
+    public String extractCustomDelimeter(String input) {
+        String delimeter = Character.toString(input.charAt(2));
+        return delimeter;
+    }
 }
