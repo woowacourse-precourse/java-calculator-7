@@ -6,6 +6,7 @@ public class StringCalculator {
 
     String separators = ",:";
     boolean hasCustomSeparator;
+    int sumValue;
 
     void run() {
         printInputMsg();
@@ -18,6 +19,8 @@ public class StringCalculator {
             str = input.substring(strStartIdx);
         }
         validateString(str);
+
+        String[] separatedNumbers = str.split('[' + separators + ']');
     }
 
     void printInputMsg() {
