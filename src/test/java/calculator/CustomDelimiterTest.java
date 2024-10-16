@@ -24,9 +24,9 @@ class CustomDelimiterTest {
     private static Stream<Arguments> provideCustomDelimiterTestCases() {
         return Stream.of(
                 // 정상적인 커스텀 구분자
-                Arguments.of("//;\n1;2", true),
-                Arguments.of("//|\n3|4", true),
-                Arguments.of("//:\n7:8", true),
+                Arguments.of("//;\\n1;2", true),
+                Arguments.of("//|\\n3|4", true),
+                Arguments.of("//:\\n7:8", true),
 
                 // 엣지 케이스: 빈 문자열
                 Arguments.of("", false),
@@ -35,9 +35,9 @@ class CustomDelimiterTest {
                 Arguments.of(";;1;2", false),
                 Arguments.of("1,2", false),
 
-                // 엣지 케이스: 시작은 맞지만 \n 없이 종료
+                // 엣지 케이스: 시작은 맞지만 \\n 없이 종료
                 Arguments.of("//;", false),
-                Arguments.of("//;\n", true)
+                Arguments.of("//;\\n", true)
         );
     }
 
@@ -49,16 +49,16 @@ class CustomDelimiterTest {
 
         assertThatThrownBy(() -> customDelimiter.extractNumbers(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessage(expectedMessage);
+                .hasMessage(expectedMessage);
     }
 
     private static Stream<Arguments> provideInvalidInputTestCases() {
         return Stream.of(
                 Arguments.of(";;1;2", "커스텀 구분자는 // 로 시작해야 한다."),
                 Arguments.of("1,2,3", "커스텀 구분자는 // 로 시작해야 한다."),
-                Arguments.of("//;", "커스텀 구분자는 // 로 시작해서 \n 으로 끝나야 한다."),
+                Arguments.of("//;", "커스텀 구분자는 // 로 시작해서 \\n 으로 끝나야 한다."),
                 Arguments.of("", "커스텀 구분자는 // 로 시작해야 한다."),
-                Arguments.of("1\n2", "커스텀 구분자는 // 로 시작해야 한다.")
+                Arguments.of("1\\n2", "커스텀 구분자는 // 로 시작해야 한다.")
         );
     }
 
@@ -74,18 +74,18 @@ class CustomDelimiterTest {
     private static Stream<Arguments> provideExtractNumbersTestCases() {
         return Stream.of(
                 // 기본적인 커스텀 구분자
-                Arguments.of("//;\n1;2;3", List.of(1, 2, 3)),
-                Arguments.of("//|\n4|5|6", List.of(4, 5, 6)),
-                Arguments.of("//:\n7:8:9", List.of(7, 8, 9)),
+                Arguments.of("//;\\n1;2;3", List.of(1, 2, 3)),
+                Arguments.of("//|\\n4|5|6", List.of(4, 5, 6)),
+                Arguments.of("//:\\n7:8:9", List.of(7, 8, 9)),
 
                 // 공백 포함 처리
-                Arguments.of("//;\n1; 2; 3", List.of(1, 2, 3)),
+                Arguments.of("//;\\n1; 2; 3", List.of(1, 2, 3)),
 
                 // 단일 숫자
-                Arguments.of("//;\n1", List.of(1)),
+                Arguments.of("//;\\n1", List.of(1)),
 
                 // 큰 숫자 처리
-                Arguments.of("//;\n1000;2000;3000", List.of(1000, 2000, 3000))
+                Arguments.of("//;\\n1000;2000;3000", List.of(1000, 2000, 3000))
         );
     }
 }

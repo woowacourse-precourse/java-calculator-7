@@ -29,9 +29,8 @@ class DelimiterFactoryTest {
     void testGetDelimiter_InvalidInput() {
         String invalidInput = "abc";
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            delimiterFactory.getDelimiter(invalidInput);
-        });
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> delimiterFactory.getDelimiter(invalidInput));
 
         assertThat(exception.getMessage()).isEqualTo("구분자가 적절하지 않다.");
     }
@@ -39,7 +38,7 @@ class DelimiterFactoryTest {
     // 메서드 소스 제공
     private static Stream<Arguments> provideDelimiterTestCases() {
         return Stream.of(
-                Arguments.of("//;\n1;2;3", "CustomDelimiter"),   // 커스텀 구분자
+                Arguments.of("//;\\n1;2;3", "CustomDelimiter"),   // 커스텀 구분자
                 Arguments.of("1,2,3", "RegularDelimiter"),       // 정규 구분자 (쉼표)
                 Arguments.of("4:5:6", "RegularDelimiter"),       // 정규 구분자 (콜론)
                 Arguments.of("1", "DefaultDelimiter"),           // 디폴트 구분자 (단일 숫자)
