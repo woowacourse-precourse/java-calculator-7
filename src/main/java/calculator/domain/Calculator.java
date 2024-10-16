@@ -7,7 +7,7 @@ public class Calculator {
         List<String> numbers = Parser.splitInput(input);
 
         if (!isValidNumberString(numbers)) {
-            throw new IllegalArgumentException("숫자와 구분자 외의 문자가 포함되어 있습니다.");
+            throw new IllegalArgumentException();
         }
 
         return numbers.stream()
