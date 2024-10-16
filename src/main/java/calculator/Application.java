@@ -5,32 +5,40 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Application {
-    static String cutomDelimStart = "//";
-    static String cutomDelimEnd = "\\n";
-    static String regexDelim = "|";
+    static String cutomSeparatorStart = "//";
+    static String cutomSeparatorEnd = "\\n";
+    static String or = "|";
+    static String numberRegex = "-?\\d+";
 
     public static void main(String[] args) {
-        StringBuilder regex = new StringBuilder(",|:");
+        StringBuilder separatorRegex = new StringBuilder(",|:");
         String input = Console.readLine();
 
-        if (input.substring(0, 2).equals(cutomDelimStart)) {
-            if (input.contains(cutomDelimEnd)) {
-                String customDelim = input.substring(2, input.indexOf(cutomDelimEnd));
+        if (input.substring(0, 2).equals(cutomSeparatorStart)) {
+            if (input.contains(cutomSeparatorEnd)) {
+                String customDelim = input.substring(2, input.indexOf(cutomSeparatorEnd));
 
-                regex.append(regexDelim + customDelim);
+                separatorRegex.append(or + customDelim);
             } else {
                 // error
             }
-            input = input.substring(input.indexOf(cutomDelimEnd) + cutomDelimEnd.length());
+            input = input.substring(input.indexOf(cutomSeparatorEnd) + cutomSeparatorEnd.length());
         }
 
-        List<String> strs = Arrays.stream(input.split(regex.toString()))
-                .filter(s -> !s.isEmpty())
-                .collect(Collectors.toCollection(ArrayList::new));
+        List<String> strs = Arrays.stream(input.split(separatorRegex.toString())).toList();
+        List<Integer> numbers = new ArrayList<>();
 
+        for (String s: strs) {
+            if (s.isEmpty() || !s.matches(numberRegex)) {
+                // error
+            } else {
+                numbers.add(Integer.parseInt(s));
+            }
+        }
         System.out.println(strs);
+
+        System.out.println(numbers.stream().reduce(0, Integer::sum));
     }
 }
