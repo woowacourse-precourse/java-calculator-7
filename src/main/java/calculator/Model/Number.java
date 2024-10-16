@@ -17,8 +17,8 @@ public class Number {
         if (isNull(number)) {
             return 0;
         } else {
-            int parsedNumber = Integer.parseInt(number);
             isDigit(number);
+            int parsedNumber = Integer.parseInt(number);
             isPositive(parsedNumber);
             return parsedNumber;
         }
