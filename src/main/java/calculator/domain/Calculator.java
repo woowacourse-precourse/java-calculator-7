@@ -23,6 +23,8 @@ public class Calculator {
         String customDivision = extractDivision(input);
         checkInputString(input, customDivision);
 
+        String[] numbers = splitString(input, customDivision);
+
         return num;
     }
 
@@ -63,5 +65,16 @@ public class Calculator {
             }
         }
         return false;
+    }
+
+    public String[] splitString(String input, String customDivision) {
+        String[] numbers;
+        if (customDivision.isEmpty()) {
+            numbers = input.split(",|:");
+        } else {
+            input = input.substring(START_NUMBER_INDEX);
+            numbers = input.split(customDivision);
+        }
+        return numbers;
     }
 }
