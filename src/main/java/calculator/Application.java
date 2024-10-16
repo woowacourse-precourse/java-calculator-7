@@ -1,5 +1,6 @@
 package calculator;
 
+import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,6 +15,13 @@ public class Application {
     public static final Long MAXIMUM_NUMBER = Long.MAX_VALUE;
 
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        // 2. 문자열 입력 받기
+        System.out.println(INPUT_MESSAGE);
+        String inputString = Console.readLine();
+
+
+
+
+
     }
 }
