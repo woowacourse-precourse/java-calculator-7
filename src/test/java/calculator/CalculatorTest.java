@@ -90,4 +90,99 @@ public class CalculatorTest {
         assertThat(result).isEqualTo("1,2:3");
     }
 
+    @Test
+    @DisplayName("올바른 형식의 커스텀 구분자를 추출한다.")
+    void 올바른_형식의_커스텀_구분자_추출() {
+        // Given
+        Calculator calculator = new Calculator();
+        String input = "//;\n1;2;3";
+
+        // When
+        String delimiter = calculator.extractCustomDelimiter(input);
+
+        // Then
+        assertThat(delimiter).isEqualTo(";");
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자가 두 글자 이상인 경우에도 추출한다.")
+    void 커스텀_구분자_두_글자_이상_추출() {
+        // Given
+        Calculator calculator = new Calculator();
+        String input = "//delimiter\n1;;2;;3";
+
+        // When
+        String delimiter = calculator.extractCustomDelimiter(input);
+
+        // Then
+        assertThat(delimiter).isEqualTo("delimiter");
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자가 특수문자인 경우에도 추출한다.")
+    void 커스텀_구분자_특수문자_추출() {
+        // Given
+        Calculator calculator = new Calculator();
+        String input = "//.\n1.2.3";
+
+        // When
+        String delimiter = calculator.extractCustomDelimiter(input);
+
+        // Then
+        assertThat(delimiter).isEqualTo(".");
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자가 없을 경우 null을 반환한다.")
+    void 커스텀_구분자_없음() {
+        // Given
+        Calculator calculator = new Calculator();
+        String input = "1,2,3";
+
+        // When
+        String delimiter = calculator.extractCustomDelimiter(input);
+
+        // Then
+        assertThat(delimiter).isNull();
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자가 숫자인 경우에는 예외를 발생시킨다.")
+    void 커스텀_구분자_숫자_예외_발생() {
+        // Given
+        Calculator calculator = new Calculator();
+        String input = "//1\n1,2,3";  // 숫자로 시작하는 구분자
+
+        // When & Then
+        assertThatThrownBy(() -> calculator.extractCustomDelimiter(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("커스텀 구분자는 숫자가 될 수 없습니다.");
+    }
+
+    @Test
+    @DisplayName("올바르지 않은 형식의 커스텀 구분자 사용 시 예외를 발생시킨다.")
+    void 잘못된_형식의_커스텀_구분자_예외_발생() {
+        // Given
+        Calculator calculator = new Calculator();
+        String input = "//;\1;2;3";  // 올바르지 않은 형식
+
+        // When & Then
+        assertThatThrownBy(() -> calculator.extractCustomDelimiter(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("커스텀 구분자 형식이 올바르지 않습니다.");
+    }
+
+    @Test
+    @DisplayName("비어있는 커스텀 구분자 사용 시 예외를 발생시킨다.")
+    void 비어있는_커스텀_구분자_예외_발생() {
+        // Given
+        Calculator calculator = new Calculator();
+        String input = "//\n1,2,3";  // 비어 있는 구분자
+
+        // When & Then
+        assertThatThrownBy(() -> calculator.extractCustomDelimiter(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("커스텀 구분자가 비어 있습니다.");
+    }
+
 }
