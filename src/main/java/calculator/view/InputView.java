@@ -11,6 +11,10 @@ public class InputView {
      */
     public String readInputString() {
         System.out.println(START_MESSAGE);
+        String userInput = Console.readLine();
+        if (userInput.isBlank()) {
+            throw new IllegalArgumentException("문자열을 입력해주세요.");
+        }
         return Console.readLine();
     }
 }
