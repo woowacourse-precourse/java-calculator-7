@@ -2,7 +2,11 @@ package calculator.model.separate;
 
 import calculator.model.exception.MultiCustomDelimiterException;
 import calculator.model.exception.NotAllowedPositionException;
+import calculator.model.exception.ParseToIntegerFailedException;
+import org.junit.platform.commons.util.StringUtils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,6 +14,7 @@ import java.util.regex.Pattern;
 import static calculator.common.SystemConstant.emptyString;
 import static calculator.common.SystemConstant.maxCustomDelimiterCount;
 import static calculator.model.separate.BusinessRegex.*;
+import static org.junit.platform.commons.util.StringUtils.isBlank;
 import static org.junit.platform.commons.util.StringUtils.isNotBlank;
 
 public class SeparateManager {
@@ -51,6 +56,14 @@ public class SeparateManager {
         }
     }
 
+    public Integer tryParseToInt(String source) {
+        try {
+            return Integer.parseInt(source);
+        } catch (NumberFormatException e) {
+            throw new ParseToIntegerFailedException();
+        }
+    }
+
     // Domain Logic - public
     private Matcher createMatcher(String source, String regex) {
         Pattern pattern = Pattern.compile(regex);
@@ -68,9 +81,41 @@ public class SeparateManager {
     }
 
     public void extractCustomDelimiter(String source) {
-        String customDelimiter = parseCustomDelimiter(source);
-        if (isNotBlank(customDelimiter)) {
-            this.customDelimiter = customDelimiter;
+        String delimiter = parseCustomDelimiter(source);
+        if (isNotBlank(delimiter)) {
+            this.customDelimiter = delimiter;
         }
+    }
+
+    //FIXME : 네이밍 개선 필요 (mainSource, splitted)
+    public List<Integer> split(String source) {
+        String mainSource = source.replaceAll(customDelimiterParseRegex(), emptyString());
+        String[] splitted = mainSource.split(getAllDelimiters());
+        return Arrays.stream(splitted)
+                .filter(StringUtils::isNotBlank)
+                .map(this::tryParseToInt)
+                .toList();
+    }
+
+    public String getAllDelimiters() {
+        return mergeDelimiters().toString();
+    }
+
+    public List<String> mergeDelimiters() {
+        List<String> mergedDelimiters = new ArrayList<>(basicDelimiters);
+        if (isAddable(customDelimiter)) {
+            mergedDelimiters.add(customDelimiter);
+        }
+        return mergedDelimiters;
+    }
+
+    private boolean isAddable(String customDelimiter) {
+        if (isBlank(customDelimiter)) {
+            return false;
+        }
+        if (basicDelimiters.contains(customDelimiter)) {
+            return false;
+        }
+        return true;
     }
 }
