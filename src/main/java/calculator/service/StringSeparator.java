@@ -49,17 +49,17 @@ public class StringSeparator {
     }
 
     private boolean isWrongInput(String divide) {
-        if (divide == null || divide.length() < 4) {
+        if (divide == null || divide.length() < 5) {
             return true;
         }
-        if (!divide.startsWith("//") || !divide.contains("\n")) {
+        if (!divide.startsWith("//") || !divide.contains("\\n")) {
             return true;
         }
         return false;
     }
 
     public String extractionCustomSeparator(String divide) {
-        return divide.substring(2, divide.length() - 1);
+        return divide.substring(2, divide.length() - 2);
     }
 
     private boolean isSeparator(char ch) {
