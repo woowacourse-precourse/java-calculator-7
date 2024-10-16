@@ -10,6 +10,8 @@ public class User {
 
     public User(String userString) {
         charAtUserStrings(userString);
+        validateNumbers(numbers);
+        validateDelimiters(delimiters);
     }
 
     private void charAtUserStrings(String userString) {
@@ -19,6 +21,22 @@ public class User {
                 numbers.add(String.valueOf(charAt));
             } else {
                 delimiters.add(String.valueOf(charAt));
+            }
+        }
+    }
+
+    private void validateNumbers(List<String> numbers) {
+        for (String number : numbers) {
+            if (Integer.parseInt(number) <= 0) {
+                throw new IllegalArgumentException();
+            }
+        }
+    }
+
+    private void validateDelimiters(List<String> delimiters) {
+        for (String delimiter : delimiters) {
+            if (!delimiter.equals(",") && !delimiter.equals(":")) {
+                throw new IllegalArgumentException();
             }
         }
     }
