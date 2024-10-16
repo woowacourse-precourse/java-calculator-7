@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import static calculator.PrintText.COLON;
+import static calculator.PrintText.COMMA;
+
 public class StringSpliter {
     private String userInput;
     private String customDel;
@@ -19,9 +22,9 @@ public class StringSpliter {
 
     public List<String> splitUserInput() {
         List<String> splitUserInputs = new ArrayList<>();
-        StringTokenizer halfSplitUserInput = new StringTokenizer(userInput, COMMA);
+        StringTokenizer halfSplitUserInput = new StringTokenizer(userInput, COMMA.getValue());
         while (halfSplitUserInput.hasMoreTokens()) {
-            StringTokenizer lastSplit = new StringTokenizer(halfSplitUserInput.nextToken(), COLON);
+            StringTokenizer lastSplit = new StringTokenizer(halfSplitUserInput.nextToken(), COLON.getValue());
             while (lastSplit.hasMoreTokens()) {
                 splitUserInputs.add(lastSplit.nextToken());
             }
@@ -33,9 +36,9 @@ public class StringSpliter {
         List<String> splitUserInputs = new ArrayList<>();
         StringTokenizer firstSplit = new StringTokenizer(userInput, customDel);
         while (firstSplit.hasMoreTokens()) {
-            StringTokenizer secondSplit = new StringTokenizer(firstSplit.nextToken(), COMMA);
+            StringTokenizer secondSplit = new StringTokenizer(firstSplit.nextToken(), COMMA.getValue());
             while (secondSplit.hasMoreTokens()) {
-                StringTokenizer lastSplit = new StringTokenizer(secondSplit.nextToken(), COLON);
+                StringTokenizer lastSplit = new StringTokenizer(secondSplit.nextToken(), COLON.getValue());
                 while (lastSplit.hasMoreTokens()) {
                     splitUserInputs.add(lastSplit.nextToken());
                 }
@@ -44,7 +47,5 @@ public class StringSpliter {
         return splitUserInputs;
     }
 
-    private final String COMMA = ",";
-    private final String COLON = ":";
 
 }
