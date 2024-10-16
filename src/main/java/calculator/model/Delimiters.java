@@ -10,10 +10,16 @@ public class Delimiters {
         delimiters.add(',');
         delimiters.add(';');
     }
-    
+
     public boolean usesCustomDelimiter(String inputString) {
         char firstChar = inputString.charAt(0);
         return firstChar == '/';
+    }
+
+    public void addCustomDelimiter(String inputString) {
+        correctCustomDelimiterOrThrow(inputString);
+        char customDelimiter = inputString.charAt(2);
+        delimiters.add(customDelimiter);
     }
 
     public void correctCustomDelimiterOrThrow(String inputString) {
