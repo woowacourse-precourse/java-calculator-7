@@ -8,7 +8,7 @@ public class DataParser {
             checkValidCustomFormat(inputData);
         }
         char[] separators = createSeparators(inputData, isCustom);
-        char[] contents = new char[3];
+        char[] contents = createContents(inputData, isCustom);
         return new Data(separators, contents);
     }
 
@@ -23,6 +23,14 @@ public class DataParser {
             return getCustomSeparator(inputData);
         }
         return new char[]{',', ':'};
+    }
+
+    private static char[] createContents(String inputData, boolean isCustom) {
+        if (isCustom) {
+            String splitData = inputData.split("\n")[1];
+            return splitData.toCharArray();
+        }
+        return inputData.toCharArray();
     }
 
     private static char[] getCustomSeparator(String inputData) throws IllegalAccessException {
