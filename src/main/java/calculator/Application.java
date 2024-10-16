@@ -4,8 +4,21 @@ import camp.nextstep.edu.missionutils.Console;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Application {
+
+    public void inputCheckException(String input) {
+        for (int i = 0; i < input.length(); i++) {
+            char currentChar = input.charAt(i);
+
+            if (Character.isDigit(currentChar)) {
+                if (Character.getNumericValue(currentChar) < 1) {
+                    throw new IllegalArgumentException("숫자는 양수만 가능합니다.");
+                }
+            }
+        }
+    }
 
     public int sumInteger(List<Integer> parsedIntegers) {
         int sumOfIntegers = 0;
@@ -25,11 +38,18 @@ public class Application {
     }
 
     public String[] removeSeparators(String removedDeclarePart, Character customSeparator) {
-        String regex = "[,|:|" + customSeparator + "]";
-        String[] removedSeparatorsArray = removedDeclarePart.split(regex);
-
-        return removedSeparatorsArray;
+        String regex;
+        if (customSeparator == null) {
+            // 쉼표(,)와 콜론(:)만 구분자로 사용
+            regex = "[,:]";
+        } else {
+            // 기본 구분자와 커스텀 구분자를 포함한 정규 표현식
+            regex = "[,:|" + Pattern.quote(customSeparator.toString()) + "]";
+        }
+        // 정규 표현식에 따라 문자열을 분리
+        return removedDeclarePart.split(regex);
     }
+
 
     public String removeDeclarePart(String input, Character customSeparator) {
         if (customSeparator == null) {
@@ -60,7 +80,7 @@ public class Application {
         String removedDeclarePart = removeDeclarePart(input, customSeparator);
         String[] removedSeparatorsArray = removeSeparators(removedDeclarePart, customSeparator);
         List<Integer> parsedIntegers = parseStringToInteger(removedSeparatorsArray);
-        return 0;
+        return sumInteger(parsedIntegers);
     }
 
     public static void main(String[] args) {
@@ -68,6 +88,7 @@ public class Application {
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
+        input = input.replace("\\n", "\n");
 
         int sum = T.calculateSum(input);
         System.out.println("결과 : " + sum);
