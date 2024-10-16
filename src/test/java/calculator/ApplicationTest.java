@@ -41,20 +41,21 @@ class ApplicationTest extends NsTest {
     @Test
     void test(){
         String s = "//;\n4;5;6;7!#!#@;//;dw\n//;55\n//;e34\n//;g45\n";
+        String s1 = "//dd\n4;5;6;7!#!#@;dw;55;e34;g45";
         String input = "hello beautiful world";
 
 //        Pattern pattern = Pattern.compile("^//+.*+\\n$");
         Pattern pattern = Pattern.compile("^//+(.*)\\n+(.*)");
-        Matcher matcher = pattern.matcher(s);
+        Matcher matcher = pattern.matcher(s1);
 
         if (matcher.find()) {
             String group = matcher.group(1);
             System.out.println("----- custom : "+group);
 
-            String[] split = s.split(group);
-            for(int i = 0; i < split.length; i++) {
-                System.out.println(i + " : " + split[i]);
-            }
+//            String[] split = s.split(group);
+//            for(int i = 0; i < split.length; i++) {
+//                System.out.println(i + " : " + split[i]);
+//            }
         }else {
             System.out.println("----- No found -----");
         }

@@ -7,6 +7,7 @@ public class Application {
         InputGuidelines inputGuidelines = new InputGuidelines(stringList);
         inputGuidelines.printInputGuidelines();
 
-
+        Calculator calculator = new Calculator(inputGuidelines.getDefaultSeparator());
+        calculator.run();
     }
 }
