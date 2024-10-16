@@ -21,6 +21,11 @@ public class Application {
                 break;
             }
 
+            // 음수 입력 예외 처리
+            if (input.contains("-")) {
+                throw new IllegalArgumentException();
+            }
+
             // 쉼표, 콜론 구분자 처리
             if (input.contains(",") || input.contains(":")) {
                 String[] commaSplit = input.split(",");
