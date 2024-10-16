@@ -14,4 +14,8 @@ public class Calculator {
         String customSeparator = input.substring(2, newlineIndex);
         return separator + customSeparator;
     }
+
+    private String extractNumbersPart(String input) {
+        return input.substring(input.indexOf("\\n") + 2);
+    }
 }
