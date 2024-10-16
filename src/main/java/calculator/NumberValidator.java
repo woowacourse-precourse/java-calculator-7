@@ -1,7 +1,6 @@
 package calculator;
 
 import java.util.List;
-import java.util.Objects;
 
 public class NumberValidator {
     public void validate(List<String> splitNumber) {
@@ -11,7 +10,7 @@ public class NumberValidator {
     }
 
     private void validParseNumber(String number) {
-        if (Objects.equals(number, "")) {
+        if (number.isBlank()) {
             return;
         }
 
