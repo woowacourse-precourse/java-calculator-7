@@ -2,6 +2,8 @@ package calculator.model;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class InputParser {
 
@@ -12,10 +14,7 @@ public class InputParser {
         if (checkDefaultDelimiter(input)) {
             return convertDefaultDelimiter(input);
         }
-        if (checkCustomDelimiter(input)) {
-            return convertCustomDelimiter(input);
-        }
-        throw new IllegalArgumentException();
+        return convertCustomDelimiter(input);
     }
 
     protected boolean checkDefaultDelimiter(String input) {
@@ -35,20 +34,20 @@ public class InputParser {
         }
     }
 
-    protected boolean checkCustomDelimiter(String input) {
-        return input.contains("//") && input.contains("\\n");
-    }
-
     protected List<Integer> convertCustomDelimiter(String input) throws IllegalArgumentException{
         try {
-            String custom = input.substring(2,3);
-            input = input.substring(input.indexOf("\\n") + 2);
-            String[] inputs = input.split(custom);
-            List<Integer> list = Arrays.stream(inputs)
-                .map(Integer::parseInt)
-                .toList();
-            checkPositiveNumber(list);
-            return list;
+            String customDelimiterRegex = "//(.)\\\\n(.+)";
+            Pattern p = Pattern.compile(customDelimiterRegex);
+            Matcher matcher = p.matcher(input);
+            if(matcher.matches()) {
+                String customDelimiter = matcher.group(1);
+                String inputNum = matcher.group(2);
+                String[] split = inputNum.split(customDelimiter);
+                return Arrays.stream(split)
+                    .map(Integer::parseInt)
+                    .toList();
+            }
+            throw new IllegalArgumentException();
         } catch (Exception e) {
             throw new IllegalArgumentException();
         }
