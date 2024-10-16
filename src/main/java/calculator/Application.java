@@ -36,6 +36,10 @@ public class Application {
     }
 
     public static int sumCalculate(String[] number) {
-        return 0;
+        int result = 0;
+        for (String s : number) {
+            result += Integer.parseInt(s);
+        }
+        return result;
     }
 }
