@@ -10,7 +10,7 @@ public class ColonSemicolonDelimiterHandler implements DelimiterHandler {
     @Override
     public List<String> split(String str) {
         if (str.matches(".*[^0-9,:].*")) {
-            throw new IllegalArgumentException("지원되지 않는 구분자입니다.");
+            throw new IllegalArgumentException("형식이 일치하지 않습니다.");
         }
 
         String[] splits = str.split("[,:]");
@@ -20,8 +20,7 @@ public class ColonSemicolonDelimiterHandler implements DelimiterHandler {
     }
 
     @Override
-    public boolean isSupport(String string) {
-        return string.contains(",") || string.contains(":");
+    public boolean isSupport(String str) {
+        return str.contains(",") || str.contains(":");
     }
 }
-

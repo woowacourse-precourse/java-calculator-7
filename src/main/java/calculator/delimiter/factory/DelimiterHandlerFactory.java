@@ -3,6 +3,7 @@ package calculator.delimiter.factory;
 import calculator.delimiter.handler.impl.ColonSemicolonDelimiterHandler;
 import calculator.delimiter.handler.impl.CustomDelimiterHandler;
 import calculator.delimiter.handler.DelimiterHandler;
+import calculator.delimiter.handler.impl.NoDelimiterHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ public class DelimiterHandlerFactory {
         handlers = new ArrayList<>();
         handlers.add(new ColonSemicolonDelimiterHandler());
         handlers.add(new CustomDelimiterHandler());
+        handlers.add(new NoDelimiterHandler());
     }
 
     public DelimiterHandler getHandler(String str) {

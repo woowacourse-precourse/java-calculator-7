@@ -1,5 +1,6 @@
 package calculator.delimiter.handler;
 
+import calculator.delimiter.handler.impl.ColonSemicolonDelimiterHandler;
 import calculator.delimiter.handler.impl.CustomDelimiterHandler;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -7,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class CustomDelimiterHandlerTest {
     @Test
@@ -41,5 +43,16 @@ class CustomDelimiterHandlerTest {
 
         assertThat(stringList).hasSize(3)
                 .containsExactly("1", "2", "3");
+    }
+
+    @Test
+    @DisplayName("음수가 입력되면 IllegalArgumentException을 발생시킨다.")
+    void test() {
+        String s = "//||\n1||2||-3||4";
+
+        CustomDelimiterHandler handler = new CustomDelimiterHandler();
+
+        assertThatThrownBy(() -> handler.split(s))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
