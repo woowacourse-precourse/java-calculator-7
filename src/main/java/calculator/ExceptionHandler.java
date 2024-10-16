@@ -46,16 +46,6 @@ public class ExceptionHandler {
         }
     }
 
-    public void detectNonDigitElem(List<String> splitElems) {
-        for (String elem : splitElems) {
-            try {
-                Integer.parseInt(elem);
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("구분자 사이에는 양의 정수만 입력할 수 있습니다.");
-            }
-        }
-    }
-
     public void checkZeroAndNegativeDigit(List<Integer> nums) {
         for (int num : nums) {
             if (num <= 0) {
