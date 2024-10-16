@@ -36,7 +36,7 @@ class Numbers {
     public void toInt(String[] wordList){
         int[] numList = new int[wordList.length];
         for (int i = 0; i < wordList.length; i++){
-            numList[i] = Parse(wordList[i]);
+            numList[i] = parse(wordList[i]);
         }
         this.numList = numList;
     }
