@@ -7,7 +7,7 @@ import static calculator.domain.Delimiter.getCustomDelimiter;
 
 public class Parser {
     public static List<String> splitInput(String input) {
-        StringBuilder delimiterBuilder = new StringBuilder("[,:");
+        StringBuilder delimiterBuilder = new StringBuilder("[:,");
 
         if (getCustomDelimiter(input) != null) {
             delimiterBuilder.append(getCustomDelimiter(input));
@@ -22,7 +22,8 @@ public class Parser {
 
     public static String removeCustomDelimiterPart(String input) {
         if (Delimiter.getCustomDelimiter(input) != null) {
-            int delimiterEndIndex = input.indexOf("\n");
+            int delimiterEndIndex = input.indexOf("\\n") + 1;
+
             return input.substring(delimiterEndIndex + 1);
         }
 
