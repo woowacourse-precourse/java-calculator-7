@@ -1,5 +1,6 @@
 package separator;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -26,6 +27,11 @@ public class CustomSeparator implements Separator {
     @Override
     public List<String> getSeparator() {
         return customSeparators;
+    }
+
+    @Override
+    public List<BigInteger> getNumbers(String input) {
+        return null;
     }
 
     public String findSeparator() {

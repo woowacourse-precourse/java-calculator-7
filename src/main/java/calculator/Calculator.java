@@ -14,18 +14,19 @@ import java.util.regex.Pattern;
 
 public class Calculator {
 
-    private Separator separator;
+    private Separator defaultSeparator;
 
-    public Calculator(DefaultSeparator separator) {
-        this.separator = separator;
+    public Calculator(DefaultSeparator defaultSeparator) {
+        this.defaultSeparator = defaultSeparator;
     }
     public Calculator(List<String> separatorData) {
-        this.separator = new DefaultSeparator(separatorData);
+        this.defaultSeparator = new DefaultSeparator(separatorData);
     }
 
     public void run(){
         String inputData = readCalculatorInput();
-        generateSeparators(inputData);
+        Separator separator = generateSeparators(inputData);
+
     }
 
     public String readCalculatorInput(){
@@ -40,7 +41,7 @@ public class Calculator {
 
     public Separator generateSeparators(String inputData){
         if(validateStartChar(inputData)){
-            return this.separator;
+            return this.defaultSeparator;
         }else {
             CustomSeparatorFormat customSeparatorFormat = new CustomSeparatorFormat();
             validateCustomSeparatorFormat(inputData,customSeparatorFormat.getPattern());
