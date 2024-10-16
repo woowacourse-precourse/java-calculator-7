@@ -4,6 +4,7 @@ import static calculator.domain.Delimiter.getCustomDelimiter;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class Parser {
     public static List<String> splitInput(String input) {
@@ -19,9 +20,8 @@ public class Parser {
     }
 
     private static boolean isIncludeDelimiter(String input) {
-        String delimiter = makeDelimiter(input);
-
-        return input.contains(delimiter);
+        return input.contains(",") || input.contains(":") || input.contains(
+                Objects.requireNonNull(getCustomDelimiter(input)));
     }
 
     private static String makeDelimiter(String input) {
