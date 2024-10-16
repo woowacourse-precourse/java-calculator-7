@@ -1,6 +1,7 @@
 package calculator.domain.vo.delimiter;
 
 import static calculator.domain.vo.delimiter.constants.DelimiterPattern.*;
+import static calculator.infrastructure.exception.ErrorCode.*;
 
 import calculator.domain.vo.number.Number;
 import calculator.domain.vo.number.Numbers;
@@ -18,7 +19,7 @@ public class Delimiters {
 
     protected void validate(List<Delimiter> values) {
         if (values == null || values.isEmpty()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(INVALID_DELIMITERS.getMessage());
         }
     }
 
@@ -30,19 +31,19 @@ public class Delimiters {
         return new Delimiters(values);
     }
 
-    private static void addDefaultDelimiters(List<Delimiter> values) {
+    private static void addDefaultDelimiters(final List<Delimiter> values) {
         values.add(Delimiter.from(COMMA.getValue()));
         values.add(Delimiter.from(COLON.getValue()));
     }
 
-    private static void addCustomDelimiter(List<Delimiter> values, String input) {
+    private static void addCustomDelimiter(final List<Delimiter> values, final String input) {
         String customDelimiter = parseCustomDelimiter(input);
         if (!customDelimiter.isEmpty()) {
             values.add(Delimiter.from(customDelimiter));
         }
     }
 
-    private static String parseCustomDelimiter(String input) {
+    private static String parseCustomDelimiter(final String input) {
         if (input.startsWith(CUSTOM_DELIMITER_PREFIX.getValue()) && input.contains(
             CUSTOM_DELIMITER_SUFFIX.getValue())) {
             return input.substring(2, input.indexOf(CUSTOM_DELIMITER_SUFFIX.getValue()));
@@ -50,7 +51,7 @@ public class Delimiters {
         return EMPTY.getValue();
     }
 
-    public Numbers extractNumbers(String input) {
+    public Numbers extractNumbers(final String input) {
         String[] values = input.split(getDelimiterRegex());
         List<Number> numbers = new ArrayList<>();
         for (String value : values) {

@@ -22,8 +22,11 @@ public class AppConfig {
         this.outputPort = new CliOutputAdapter();
         this.inputValidator = new InputValidator();
         this.additionService = new AdditionService();
-        this.calculateStringUseCase = new CalculateStringCommand(inputPort, outputPort,
-            inputValidator, additionService);
+        this.calculateStringUseCase = new CalculateStringCommand(
+            inputPort,
+            outputPort,
+            inputValidator,
+            additionService);
     }
 
     public CalculateStringUseCase getCalculateStringUseCase() {

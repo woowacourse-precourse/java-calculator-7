@@ -1,15 +1,19 @@
 package calculator.domain.service;
 
+import calculator.application.dto.request.CalculationRequest;
+import calculator.application.dto.response.CalculationResponse;
 import calculator.domain.vo.delimiter.Delimiters;
+
 import calculator.domain.vo.number.Numbers;
-import java.math.BigInteger;
 
 public class AdditionService {
 
-    public BigInteger compute(String input) {
+    public CalculationResponse compute(final CalculationRequest calculationRequest) {
+        String input = calculationRequest.input();
+
         Delimiters delimiters = Delimiters.from(input);
         Numbers numbers = delimiters.extractNumbers(input);
 
-        return numbers.reduce();
+        return new CalculationResponse(numbers.reduce());
     }
 }

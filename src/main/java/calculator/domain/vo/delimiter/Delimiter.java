@@ -1,22 +1,25 @@
 package calculator.domain.vo.delimiter;
 
+import static calculator.infrastructure.exception.ErrorCode.*;
+
 import java.util.Objects;
 
 public class Delimiter {
 
     private final String value;
 
-    private Delimiter(String value) {
+    private Delimiter(final String value) {
+        validate(value);
         this.value = value;
     }
 
-    protected void validate(String value) {
+    protected void validate(final String value) {
         if (value == null || value.length() != 1) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(INVALID_DELIMITER.getMessage());
         }
     }
 
-    public static Delimiter from(String value) {
+    public static Delimiter from(final String value) {
         return new Delimiter(value);
     }
 
@@ -36,5 +39,10 @@ public class Delimiter {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Delimiter = '%s'", value);
     }
 }

@@ -1,5 +1,8 @@
 package calculator.domain.vo.number;
 
+import static calculator.infrastructure.exception.ErrorCode.*;
+
+import calculator.infrastructure.exception.ErrorCode;
 import java.math.BigInteger;
 import java.util.List;
 
@@ -14,7 +17,7 @@ public class Numbers {
 
     private void validate(final List<Number> values) {
         if (values == null || values.isEmpty()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(INVALID_COLLECTION.getMessage());
         }
     }
 
