@@ -6,7 +6,7 @@ public class OutputHandler {
     }
 
     public void printSum(int sum) {
-        System.out.println("결과 : " + 6);
+        System.out.println("결과 : " + sum);
     }
 
     // 구분자와 숫자 배열을 출력하는 함수
