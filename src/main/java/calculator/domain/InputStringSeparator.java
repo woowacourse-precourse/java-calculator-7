@@ -8,7 +8,6 @@ public class InputStringSeparator {
     private int startIndex;
     private int lastIndex;
 
-
     public InputStringSeparator(String inputString) {
         setInputString(inputString);
         setCustomSeparator();
@@ -25,15 +24,11 @@ public class InputStringSeparator {
     }
 
     private void setCustomSeparator() {
-        if (isCustomSeparatorContained()) { //this.inputString 으로 판단하는게 좋은가?
-            startIndex = startIndex = inputString.indexOf("//") + 2;
-            lastIndex = lastIndex = inputString.indexOf("\\n");
+        if (isCustomSeparatorContained()) {
+            startIndex = inputString.indexOf("//") + 2;
+            lastIndex = inputString.indexOf("\\n");
             this.customSeparator = inputString.substring(startIndex, lastIndex); //커스텀 구분자는 그럼 한 개만인가?
         }
-    }
-
-    private void extractNumberString() {
-
     }
 
     private boolean isCustomSeparatorContained() {
@@ -50,7 +45,7 @@ public class InputStringSeparator {
 
     private void setInputNumber() {
         if (isCustomSeparatorContained()) {
-            this.inputString = inputString.substring(lastIndex + 2, inputString.length()); // \\n을 \n으로 인식하네..?
+            this.inputString = inputString.substring(lastIndex + 2);
         }
         if (inputString.length() > 0) {
             this.inputNumber = inputString.split(finalSeparator);
