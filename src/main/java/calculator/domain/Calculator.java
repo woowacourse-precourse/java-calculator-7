@@ -19,10 +19,7 @@ public class Calculator {
 		return sum;
 	}
 
-	public void addCalculationNumber(long num){
-		calculationNumbers.add(num);
-	}
-	public void addNumber(Long addNum){
+	private void addNumber(Long addNum){
 		sum += addNum;
 	}
 }
