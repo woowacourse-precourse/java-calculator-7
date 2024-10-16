@@ -2,14 +2,11 @@ package calculator;
 
 public class CalculatorFunctions {
 
-    private static final String DEFAULT_DELIMITER = ",|:";
+    private static String DEFAULT_DELIMITER = ",|:";
 
-    public static int splitAndSum(String str , String delimiter) {
+    public static int splitAndSum(String str) {
 
-        // 만약 delimiter의 입력값이 없으면 DEFAULT_DELIMITER 사용
-        String useDelimiter = delimiter.isEmpty() ? DEFAULT_DELIMITER : delimiter;
-
-        String[] token = str.split(useDelimiter);
+        String[] token = str.split(DEFAULT_DELIMITER);
         return addToken(token);
 
     }
@@ -25,11 +22,16 @@ public class CalculatorFunctions {
         return sum;
     }
 
-    public static int useCustomDelimiter(String input) {
+    public static String customDelimiter(String input) {
         int delimiterIndex = input.indexOf("\\n");
-
         String customDelimiter = input.substring(2, delimiterIndex);
         String str = input.substring(delimiterIndex + 2);
-        return splitAndSum(str, customDelimiter);
+        addNewDelimiter(customDelimiter);
+
+        return str;
+    }
+
+    public static void addNewDelimiter(String customDelimiter) {
+         DEFAULT_DELIMITER = DEFAULT_DELIMITER + "|" + customDelimiter;
     }
 }
