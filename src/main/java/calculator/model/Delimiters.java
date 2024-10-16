@@ -11,6 +11,21 @@ public class Delimiters {
         delimiters.add(';');
     }
 
+    public void correctCustomDelimiterOrThrow(String inputString) {
+        if (usesCustomDelimiter(inputString)) {
+            return;
+        }
+        if (!isCustomDelimiterFirstFormatCorrect(inputString)) {
+            throw new IllegalArgumentException();
+        }
+        if (!isCustomDelimiterLastFormatCorrect(inputString)) {
+            throw new IllegalArgumentException();
+        }
+        if (!isCustomDelimiterNotDigit(inputString)) {
+            throw new IllegalArgumentException();
+        }
+    }
+
     public boolean usesCustomDelimiter(String inputString) {
         char firstChar = inputString.charAt(0);
         return firstChar == '/';
