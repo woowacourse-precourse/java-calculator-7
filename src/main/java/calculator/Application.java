@@ -7,24 +7,25 @@ public class Application {
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         // Console.readLine()을 사용하여 사용자 입력 받기
-        String input = Console.readLine();
-        int sum = 0;   //합계
-        StringBuilder number = new StringBuilder(); //숫자를 저장할 임시 변수
+        String input = Console.readLine(); //입력받을 문자열
 
-        for (int i = 0; i < input.length(); i++) { //input의 글자수만큼 반복
-            char a = input.charAt(i);  //하나하나 확인
-            if (a == ',') { // ','를만났을때
-                sum += Integer.parseInt(number.toString()); //합계에 그전까지 나왔던 숫자를 더한다
-                number.setLength(0);  //더한후 숫자를 저장한 임시 변수의 길이를 0으로 초기화
+        int sum = 0;   //합계를 저장할 변수
+        StringBuilder number = new StringBuilder(); //임시로 숫자를 저장할 변수
+
+        for (int i = 0; i < input.length(); i++) { // input 문자열의 길이만큼 반복
+            char a = input.charAt(i);  // 현재 문자를 하나씩 가져온다
+            if (a == ',' || a == ':') { // 구분자를 만났을 때
+                sum += Integer.parseInt(number.toString()); // 지금까지 저장한 숫자를 정수로 변환 후 합계에 더한다
+                number.setLength(0);   // 숫자를 저장하던 임시 변수를 초기화
             } else {
-                number.append(a);  //,가 나오지 않았다면 임시저장할 변수에 숫자 저장
+                number.append(a);  // 구분자가 아니라면 임시 변수에 숫자를 이어 붙인다
             }
         }
-        if (number.length() > 0) {
-            sum += Integer.parseInt(number.toString()); //input의 길이만큼 다하고 구분자가 나오지않고 끝났을시 더한다
+        if (number.length() > 0) { // 마지막 숫자가 남아 있을 경우 처리
+            sum += Integer.parseInt(number.toString()); // 마지막 남은 숫자를 합계에 더한다
         }
 
-        System.out.println(" 합계 : " + sum);
+        System.out.println(" 합계 : " + sum); // 최종 합계를 출력
 
     }
 }
