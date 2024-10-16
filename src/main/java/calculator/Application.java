@@ -1,20 +1,20 @@
 package calculator;
 
+import camp.nextstep.edu.missionutils.Console;
+
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Application {
 
     public static void main(String[] args) throws IOException {
         printInstructions();
 
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
+        String input = Console.readLine();
 
         Calculator calculator = new Calculator(new Spliterator("[,:]"));
-        int result = calculator.calculate(input);
+        System.out.println("결과 : " + calculator.calculate(input));
 
-        System.out.println("결과 : " + result);
+        Console.close();
     }
 
     private static void printInstructions() {
