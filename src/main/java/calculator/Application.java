@@ -36,16 +36,27 @@ public class Application {
             try {
                 arrayInts[i] = Integer.parseInt(arrayStrings[i]);
             } catch (NumberFormatException ex) {
-                throw new IllegalArgumentException("유효하지 않은 입력입니다.");
+                throw new IllegalArgumentException();
             }
         }
         return arrayInts;
     }
 
+    public static boolean checkValidity(int[] arrayInts) {
+        int len = arrayInts.length;
+        for (int arrayInt : arrayInts) {
+            if (arrayInt < 0) {
+                throw new IllegalArgumentException();
+            }
+
+        }
+        return true;
+    }
+
+
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해주세요.");
-        String input = camp.nextstep.edu.
-                missionutils.Console.readLine();
+        String input = Console.readLine();
 
     }
 }
