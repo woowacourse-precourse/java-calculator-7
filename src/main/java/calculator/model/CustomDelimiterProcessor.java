@@ -2,6 +2,9 @@ package calculator.model;
 
 public class CustomDelimiterProcessor {
     public static boolean usesCustomDelimiter(String inputString) {
+        if (inputString.length() == 0) {
+            return false;
+        }
         char firstChar = inputString.charAt(0);
         return firstChar == '/';
     }
