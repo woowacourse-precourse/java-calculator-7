@@ -1,5 +1,8 @@
 package calculator.helper;
 
+/**
+ * 입력에 관련된 상수들을 정리
+ */
 public class InputHelper {
     public static final String SPLITTER_START = "//";
     public static final String SPLITTER_START_REGEX = "//";
