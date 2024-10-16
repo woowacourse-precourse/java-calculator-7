@@ -31,7 +31,7 @@ public class CalculateCustom {
         return userInput.substring(getCustomPreIndex(userInput), getCustomPostIndex(userInput));
     }
 
-    public String getCustomSeparator(String userCustom) {
-        return userCustom.replaceAll(CUSTOM_PRE+CUSTOM_POST, "");
+    public String getCustomSeparator(String userInput) {
+        return getCustomPreToPost(userInput).replaceAll(CUSTOM_PRE+CUSTOM_POST, "");
     }
 }
