@@ -25,6 +25,8 @@ public class Parser {
         List<Number> numbers = new ArrayList<>();
 
         for (String token : tokens) {
+            Number number = parseNumber(token);
+            validateNegative(number);
             numbers.add(parseNumber(token));
         }
 
@@ -71,5 +73,11 @@ public class Parser {
 
     private boolean isCustomDelimiter(String userInput) {
         return userInput.startsWith("//") && userInput.startsWith("\\n", 3);
+    }
+
+    private void validateNegative(Number number) {
+        if (number.doubleValue() < 0) {
+            throw new IllegalArgumentException("음수를 입력하였습니다. 프로그램을 종료합니다.");
+        }
     }
 }
