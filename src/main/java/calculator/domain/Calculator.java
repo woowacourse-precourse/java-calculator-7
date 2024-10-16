@@ -5,6 +5,7 @@ import java.util.List;
 public class Calculator {
     // 계산기에서는 숫자만 다룬다.
     private final List<Integer> numbers;
+    private int sum;
 
     private Calculator(List<Integer> numbers) {
         this.numbers = numbers;
@@ -17,6 +18,7 @@ public class Calculator {
 
     // 리스트에 담긴 숫자들의 합을 구하는 메서드
     public int calculateSum() {
-        return numbers.stream().mapToInt(Integer::intValue).sum();
+        sum = numbers.stream().mapToInt(Integer::intValue).sum();
+        return sum;
     }
 }
