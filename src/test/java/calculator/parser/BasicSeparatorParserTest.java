@@ -69,7 +69,7 @@ public class BasicSeparatorParserTest extends NsTest {
 	}
 
 	@Test
-	@DisplayName("입력값의 마지막에 '\\n'이 있는 입력이 들어오는 테스트")
+	@DisplayName("입력값의 가장 앞에 '\\n\\n'이 있는 입력이 들어오는 테스트")
 	public void hasFirstDoubleLineBreakerTest() {
 		String input = "\\n\\n1,2,3";
 
