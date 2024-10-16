@@ -17,8 +17,7 @@ public class CalculatorService {
         return delimiter;
     }
 
-    public int[] splitByDefaultDelimiter(String input) {
-        String[] stringArray = input.split(getDelimiter(input));
+    public int[] convertIntArray(String[] stringArray) {
         int[] intArrays = new int[stringArray.length];
         for (int i = 0; i < intArrays.length; i++) {
             intArrays[i] = Integer.parseInt(stringArray[i]);
@@ -26,14 +25,14 @@ public class CalculatorService {
         return intArrays;
     }
 
-    public int[] splitByCustomDelimiter(String input) {
+
+    public String[] splitByDefaultDelimiter(String input) {
+        return input.split(getDelimiter(input));
+    }
+
+    public String[] splitByCustomDelimiter(String input) {
         String exceptDelimiter = input.substring(input.indexOf("\n") + 1);
-        String[] stringArray = exceptDelimiter.split(getDelimiter(input));
-        int[] intArrays = new int[stringArray.length];
-        for (int i = 0; i < intArrays.length; i++) {
-            intArrays[i] = Integer.parseInt(stringArray[i]);
-        }
-        return intArrays;
+        return exceptDelimiter.split(getDelimiter(input));
     }
 
     public int plus(int[] input) {
