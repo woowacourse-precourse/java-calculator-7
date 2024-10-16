@@ -7,6 +7,9 @@ public class Application {
         String input = Console.readLine();
 
         StringCalculator stringCalculator = new StringCalculator();
-        stringCalculator.calculate(input);
+        int result = stringCalculator.calculate(input);
+
+        System.out.println("결과 : " + result);
+        Console.close();
     }
 }
