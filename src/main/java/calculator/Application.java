@@ -15,6 +15,7 @@ public class Application {
         String cuttingMark = ",|:";
 
         int sum = 0;
+        int previousSum =0;
 
         // 입력이 비어 있는 경우 처리
         if (input == null || input.trim().isEmpty()) {
@@ -71,7 +72,12 @@ public class Application {
 
         // 합계 계산
         for (int num : changedNumber) {
+            previousSum = sum;  // 이전 합계를 저장
             sum += num;
+
+            if (sum < previousSum) {
+                throw new IllegalArgumentException("양수의 숫자만 입력 할 수 있습니다.");
+            }
         }
 
         System.out.println("결과 : " + sum);
