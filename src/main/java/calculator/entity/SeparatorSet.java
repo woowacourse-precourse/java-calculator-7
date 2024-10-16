@@ -12,8 +12,10 @@ public class SeparatorSet {
         this.separators = new HashSet<>();
     }
 
-    public String toRegexString() {
-        return Separator.getAllSeparatorsRegex(separators);
+    public RegexStr toRegexStr() {
+        String regexString = Separator.toSeparatorsRegex(separators);
+
+        return new RegexStr(regexString);
     }
 
     public void addSeparator(Separator separator) {

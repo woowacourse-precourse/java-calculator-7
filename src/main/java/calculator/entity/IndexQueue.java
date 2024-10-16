@@ -12,24 +12,21 @@ public class IndexQueue {
         this.queue = new PriorityQueue<>();
     }
 
-    public void offer(Integer integer) {
-        if (integer < 0) {
-            throw new IllegalArgumentException("Index must be positive");
-        }
 
-        queue.offer(integer);
+    public void offer(Index index) {
+        queue.offer(index.value);
     }
 
     public void poll() {
         queue.poll();
     }
 
-    public boolean isIndexProcess(int idx) {
+    public boolean isIndexProcess(Index index) {
         if (queue.isEmpty()) {
             return false;
         }
 
-        return idx == queue.peek();
+        return index.value == queue.peek();
     }
 
 
@@ -48,5 +45,10 @@ public class IndexQueue {
     @Override
     public int hashCode() {
         return Objects.hashCode(queue);
+    }
+
+    @Override
+    public String toString() {
+        return "IndexQueue{" + "queue=" + queue + '}';
     }
 }

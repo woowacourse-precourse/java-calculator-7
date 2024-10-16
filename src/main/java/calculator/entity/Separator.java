@@ -22,15 +22,14 @@ public class Separator {
         this.sep = quote;
     }
 
-    protected static String getAllSeparatorsRegex(Set<Separator> separatorSet) {
-        StringBuilder sb = new StringBuilder("[");
+    protected static String toSeparatorsRegex(Set<Separator> separatorSet) {
+        StringBuilder sb = new StringBuilder();
         sb.append(COLON);
         sb.append(COMMA);
         for (Separator separator : separatorSet) {
             String v = separator.sep;
             sb.append(v);
         }
-        sb.append("]");
         return sb.toString();
     }
 

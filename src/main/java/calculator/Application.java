@@ -1,7 +1,10 @@
 package calculator;
 
 import calculator.entity.IndexQueue;
+import calculator.entity.Input;
 import calculator.entity.NumList;
+import calculator.entity.RefinedInput;
+import calculator.entity.RegexStr;
 import calculator.entity.SeparatorSet;
 import calculator.service.SeparatorService;
 import calculator.service.impl.SeparatorServiceImpl;
@@ -15,15 +18,16 @@ public class Application {
         SeparatorService separatorService = new SeparatorServiceImpl();
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = Console.readLine();
+
+        Input input = new Input(Console.readLine());
 
         SeparatorSet customSeparators = separatorService.getCustomSeparators(input);
-        String allSeparators = customSeparators.toRegexString();
+        RegexStr regexStr = customSeparators.toRegexStr();
 
         IndexQueue idxQueue = separatorService.getAllCustomSepIdx(input);
-        String refineString = separatorService.refineString(input, idxQueue);
+        RefinedInput refinedInput = separatorService.refineInput(input, idxQueue);
 
-        NumList numList = separatorService.separateNum(refineString, allSeparators);
+        NumList numList = separatorService.separateNum(refinedInput, regexStr);
         int total = numList.sum();
 
         System.out.println("결과 : " + total);
