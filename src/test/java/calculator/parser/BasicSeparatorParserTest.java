@@ -17,12 +17,12 @@ import camp.nextstep.edu.missionutils.test.NsTest;
 
 public class BasicSeparatorParserTest extends NsTest {
 
-	private Set<String> separators;
-	private List<String> defaultSeparators;
+	private Set<Character> separators;
+	private List<Character> defaultSeparators;
 	private BasicSeparatorParser basicSeparatorParser;
 
 	public BasicSeparatorParserTest() {
-		defaultSeparators = Arrays.asList(new String[] {",", ":"});
+		defaultSeparators = Arrays.asList(new Character[] {',', ':'});
 		basicSeparatorParser = new BasicSeparatorParser();
 	}
 
@@ -79,16 +79,16 @@ public class BasicSeparatorParserTest extends NsTest {
 	}
 
 	@Test
-	@DisplayName("커스텀 구분자로 '/', '//'가 입력되는 테스트")
+	@DisplayName("커스텀 구분자로 '/', ';'가 입력되는 테스트")
 	public void hasSlashCustomSeparatorTest() {
-		String input = "///\\n////\\n1/2//3/4";
+		String input = "///\\n//;\\n1/2;3/4";
 		String result = basicSeparatorParser.parse(input, separators);
 
 		assertSimpleTest(() -> {
-				assertThat(result).isEqualTo("1/2//3/4");
+				assertThat(result).isEqualTo("1/2;3/4");
 				assertThat(separators)
-					.contains("/")
-					.contains("//");
+					.contains('/')
+					.contains(';');
 			}
 		);
 	}
@@ -97,12 +97,12 @@ public class BasicSeparatorParserTest extends NsTest {
 	@DisplayName("올바른 정규식 테스트")
 	public void generateRegexTest() {
 		String result = basicSeparatorParser.generateRegex(separators);
-		String separator1 = defaultSeparators.get(0);
-		String separator2 = defaultSeparators.get(1);
-		assertSimpleTest(() ->
+		char separator1 = defaultSeparators.get(0);
+		char separator2 = defaultSeparators.get(1);
+		assertSimpleTest(() -> {
 			assertThat(result)
-				.contains(separator1)
-				.contains(separator2));
+				.containsPattern(separator1 + "|" + separator2);
+		});
 	}
 
 	@Override
