@@ -45,7 +45,6 @@ public class InputStringSeparator {
         }
     }
 
-
     private void setFinalSeparator() {
         if (this.customSeparator.isEmpty()) {
             this.finalSeparator = ",|:";
