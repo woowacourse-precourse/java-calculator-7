@@ -41,7 +41,7 @@ class ClassifierTest {
     @DisplayName("커스텀 구분자를 포함한 문자열을 숫자 리스트로 변환")
     void parseNumbersWithCustomDelimiter() {
         // given
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
 
         // when
         Classifier classifier = new Classifier(input);
@@ -55,7 +55,7 @@ class ClassifierTest {
     @DisplayName("혼합된 구분자(기본 + 커스텀)를 포함한 문자열을 숫자 리스트로 변환")
     void parseNumbersWithMixedDelimiters() {
         // given
-        String input = "//;\n1;2:3,4";
+        String input = "//;\\n1;2:3,4";
 
         // when
         Classifier classifier = new Classifier(input);

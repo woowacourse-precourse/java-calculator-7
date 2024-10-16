@@ -53,7 +53,7 @@ public class Classifier {
         }
         String customRegexForSplit = "["+ DEFAULT_DELIMITERS + customDelimiter + "]";
 
-        return splitAndConvertInput(input.substring(4), customRegexForSplit);
+        return splitAndConvertInput(input.substring(5), customRegexForSplit);
     }
 
     /**
@@ -90,7 +90,7 @@ public class Classifier {
      * @return
      */
     private boolean isCustomDelimiterPresent(String input) {
-        String regex = "^//[^a-zA-Z0-9]\\n.*";
+        String regex = "^//[^a-zA-Z0-9]\\Q\\n\\E.*";
         return input.matches(regex);
     }
 
@@ -99,10 +99,10 @@ public class Classifier {
      * @param input
      */
     private void isCustomStringValid(String input) {
-        String excludedString = input.substring(4);
+        String excludedString = input.substring(5);
         String customRegex = "^[0-9]+([" + DEFAULT_DELIMITERS + customDelimiter + "][0-9]+)*$";
         if(!excludedString.matches(customRegex)) {
-            throw new IllegalArgumentException("Invalid custom delimiter: ");
+            throw new IllegalArgumentException("Invalid custom delimiter");
         }
     }
 

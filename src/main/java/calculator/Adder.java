@@ -23,6 +23,6 @@ public class Adder {
 
     @Override
     public String toString() {
-        return "결과: " + sum;
+        return "결과 : " + sum;
     }
 }
