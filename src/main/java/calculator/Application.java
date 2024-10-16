@@ -8,9 +8,6 @@ public class Application {
         // TODO: 프로그램 구현
         InputView inputView = new InputView();
         Separator separator = new Separator(inputView.inputMessage());
-
-        for (String str : separator.getElements()) {
-            System.out.println(str);
-        }
+        
     }
 }
