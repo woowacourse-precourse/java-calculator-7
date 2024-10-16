@@ -1,10 +1,13 @@
 package calculator.domain;
 
+import java.util.ArrayList;
+
 public class InputStringSeparator {
     private String inputString;
     private String finalSeparator;
     private String customSeparator = "";
-    private String[] inputNumber; // int vs integear ??
+    private String[] inputNumberString;
+    private ArrayList<Integer> inputNUmberInt = new ArrayList<>();
     private int startIndex;
     private int lastIndex;
     private boolean isCustomSeparatorContained = false;
@@ -54,15 +57,34 @@ public class InputStringSeparator {
     }
 
     private void setInputNumber() {
+        extractInputNumber();
+        separateInputNumber();
+        changeToInt();
+    }
+
+    private void extractInputNumber() {
         if (isCustomSeparatorContained) {
             this.inputString = inputString.substring(lastIndex + 2);
         }
+    }
+
+    private void separateInputNumber() {
         if (inputString.length() > 0) {
-            this.inputNumber = inputString.split(finalSeparator);
+            this.inputNumberString = inputString.split(finalSeparator);
         }
     }
 
-    public String[] getInputNumber() {
-        return this.inputNumber;
+    private void changeToInt() {
+        for (String num : inputNumberString) {
+            int parseInt = Integer.parseInt(num);
+            if (parseInt < 0) {
+                throw new IllegalArgumentException("숫자는 양수를 입력해야 합니다.");
+            }
+            this.inputNUmberInt.add(parseInt);
+        }
+    }
+
+    public ArrayList<Integer> getInputNumber() {
+        return this.inputNUmberInt;
     }
 }
