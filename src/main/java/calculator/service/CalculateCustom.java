@@ -9,7 +9,7 @@ public class CalculateCustom extends CalculateSeparator {
     private static final Integer TWO = 2;
 
     public static boolean checkNotContainCustom(String userInput) {
-        return checkContainSeparator(userInput, CUSTOM_PRE) || checkContainSeparator(userInput, CUSTOM_POST);
+        return checkNotContainSeparator(userInput, CUSTOM_PRE) || checkNotContainSeparator(userInput, CUSTOM_POST);
     }
 
     public static Integer getCustomPreIndex(String userInput) {
