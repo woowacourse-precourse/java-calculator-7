@@ -12,11 +12,18 @@ public class User {
     public User(String userString) {
         charAtUserStrings(userString);
         validateNumbers(numbers);
-        if (delimiters.get(0).equals('/')) {
-            String newDelimiters = validateNewDelimiters(delimiters);
-            validateDelimiters(delimiters, newDelimiters);
+        checkDelimiters(delimiters);
+
+    }
+
+    private void checkDelimiters(List<String> delimiters) {
+        if (delimiters.isEmpty()) {
+            throw new IllegalArgumentException();
+        } else if (delimiters.contains("/")) {
+            validateNewDelimiters(delimiters);
+        } else {
+            validateDelimiters(delimiters);
         }
-        validateDelimiters(delimiters);
     }
 
     private void validateDelimiters(List<String> delimiters) {
@@ -27,10 +34,14 @@ public class User {
         }
     }
 
-    private String validateNewDelimiters(List<String> delimiters) {
+    private void validateNewDelimiters(List<String> delimiters) {
         String str = delimiters.get(0) + delimiters.get(1) + delimiters.get(3) + delimiters.get(4);
         if (str.equals("//\\n")) {
-            return delimiters.get(2);
+            delimiters.removeFirst();
+            delimiters.removeFirst();
+            delimiters.removeFirst();
+            delimiters.removeFirst();
+            delimiters.removeFirst();
         } else {
             throw new IllegalArgumentException();
         }
@@ -50,14 +61,6 @@ public class User {
     private void validateNumbers(List<String> numbers) {
         for (String number : numbers) {
             if (Integer.parseInt(number) <= 0) {
-                throw new IllegalArgumentException();
-            }
-        }
-    }
-
-    private void validateDelimiters(List<String> delimiters, String newDelimiters) {
-        for (String delimiter : delimiters) {
-            if (!delimiter.equals(",") && !delimiter.equals(":") && !delimiter.equals(newDelimiters)) {
                 throw new IllegalArgumentException();
             }
         }
