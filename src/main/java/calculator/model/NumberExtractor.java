@@ -19,4 +19,12 @@ public class NumberExtractor {
         }
         return stringBuilder.toString();
     }
+
+    private void validateNumberString(String inputString) {
+        for (char c : inputString.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                throw new IllegalArgumentException();
+            }
+        }
+    }
 }
