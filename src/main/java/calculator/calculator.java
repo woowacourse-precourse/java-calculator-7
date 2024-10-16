@@ -8,6 +8,12 @@ public class calculator {
         Scanner sc = new Scanner(System.in);
         System.out.print("문자열을 입력해주세요");
         input=sc.next();
-        System.out.println(input);
+        String input2=input.replace(":",",");
+        String[] splitname=input2.split(",");
+        int sum=0;
+        for(int i=0;i<splitname.length;i++){
+            sum+=Integer.parseInt(splitname[i]);
+        }
+        System.out.println(sum);
     }
 }
