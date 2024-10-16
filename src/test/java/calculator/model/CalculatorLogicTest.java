@@ -20,9 +20,9 @@ class CalculatorLogicTest {
     @Test
     @DisplayName("사용자 정의 구분자 추출 테스트")
     void testCustomDelimiter() {
-        String input = "//;\n1;2;3";
+        String input = "//+\n1+2+3";
         String delimiter = calculatorLogic.extractDelimiter(input);
-        assertThat(delimiter).isEqualTo(";");
+        assertThat(delimiter).isEqualTo("+");
     }
 
     @Test
@@ -38,6 +38,14 @@ class CalculatorLogicTest {
     void extractCustomNumbers() {
         String input = "1;2;3";
         String delimiter = ";";
+        assertThat(calculatorLogic.extractNumbers(input, delimiter)).isEqualTo(List.of(1, 2, 3));
+    }
+
+    @Test
+    @DisplayName("dangling 문자 구분자 사용시 숫자 추출 테스트")
+    void extractDanglingNumbers() {
+        String input = "1+2+3";
+        String delimiter = "+";
         assertThat(calculatorLogic.extractNumbers(input, delimiter)).isEqualTo(List.of(1, 2, 3));
     }
 
