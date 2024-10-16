@@ -36,4 +36,12 @@ public class Numbers {
     public boolean compareSplitInputToZero(String splitInput) {
         return splitInput.equals(ZERO_STRING);
     }
+
+    public Integer calculateNumbersSum() {
+        Integer numbersSum = 0;
+        for (Integer number : numbers) {
+            numbersSum += number;
+        }
+        return numbersSum;
+    }
 }
