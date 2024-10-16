@@ -35,7 +35,21 @@ class ApplicationTest extends NsTest {
         //when & then
         assertThatThrownBy(extractor::extractNumber)
                 .isInstanceOf(IllegalInputException.class)
-                .hasMessageContaining("잘못된 구분자입니다");
+                .hasMessageContaining("잘못된 구분자입니다.");
+    }
+
+    @Test
+    void 문자열에서_숫자_추출하기_커스텀생성자_예외처리() {
+        //given
+        String input = "//\n34";
+        Extractor extractor = new Extractor(input);
+    
+        //when
+        assertThatThrownBy(extractor::extractNumber)
+                .isInstanceOf(IllegalInputException.class)
+                .hasMessageContaining("잘못된 구분자입니다.");
+
+        //then
     }
 
     @Override
