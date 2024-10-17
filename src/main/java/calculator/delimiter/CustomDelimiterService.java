@@ -20,6 +20,14 @@ public class CustomDelimiterService {
         return Optional.of(new Delimiter(extracted));
     }
 
+    public String trimCustomDelimiter(String input) {
+        if (!hasCustomDelimiter(input)) {
+            return input;
+        }
+        int newLineIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
+        return input.substring(newLineIndex + CUSTOM_DELIMITER_SUFFIX.length());
+    }
+
     private boolean hasCustomDelimiter(String input) {
         return input.contains(CUSTOM_DELIMITER_PREFIX) && input.contains(CUSTOM_DELIMITER_SUFFIX);
     }
