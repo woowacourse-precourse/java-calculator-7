@@ -18,27 +18,42 @@ public class Application {
             return 0;
         }
 
+        String delimiter = getDelimiter(input);
+        input = getNumbersString(input);
+
+        String[] numbers = input.split(delimiter);
+
+        validateNumbers(numbers);
+        return calculateSum(numbers);
+    }
+
+    private static String getDelimiter(String input) {
         String delimiter = ",|:";  // 기본 구분자
         if (input.startsWith("//")) {
-            // 커스텀 구분자 파싱
             int newlineIndex = input.indexOf("\\n");
             if (newlineIndex == -1) {
                 throw new IllegalArgumentException("잘못된 형식입니다.");
             }
-            String customDelimiter = input.substring(2, newlineIndex);  // 커스텀 구분자 추출
-            delimiter += "|" + Pattern.quote(customDelimiter);  // 커스텀 구분자를 정규 표현식으로 안전하게 처리
-            input = input.substring(newlineIndex + 2);  // 숫자 부분 추출
+            String customDelimiter = input.substring(2, newlineIndex);
+            delimiter += "|" + Pattern.quote(customDelimiter);
         }
+        return delimiter;
+    }
 
-        String[] numbers = input.split(delimiter);
+    private static String getNumbersString(String input) {
+        if (input.startsWith("//")) {
+            int newlineIndex = input.indexOf("\\n");
+            return input.substring(newlineIndex + 2);
+        }
+        return input;
+    }
 
-        // 잘못된 형식을 확인 (숫자가 아닌 경우 예외 처리)
+    private static void validateNumbers(String[] numbers) {
         for (String number : numbers) {
             if (!number.matches("-?\\d+")) {
                 throw new IllegalArgumentException("잘못된 형식입니다.");
             }
         }
-        return calculateSum(numbers);
     }
 
     private static int calculateSum(String[] numbers) {
