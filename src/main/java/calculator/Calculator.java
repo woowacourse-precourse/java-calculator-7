@@ -6,8 +6,12 @@ public class Calculator {
         int sum = 0;
 
         for(String s : nums) {
-            int number = Integer.parseInt(s);
-            sum += number;
+            try {
+                int number = Integer.parseInt(s);
+                sum += number;
+            } catch (Exception e) {
+                throw new IllegalArgumentException();
+            }
         }
 
         return sum;
