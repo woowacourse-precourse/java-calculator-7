@@ -21,15 +21,16 @@ public class Parser {
             char curChar = inputArray[index];
 
             charCheck(curChar);
-            if (curChar >= '1' && curChar <= '9') { //Character.isDisit()
+            if (Character.isDigit(curChar)) {
                 index = parseNumber(curChar, index, inputArray);
-                index++;
                 continue;
             }
+
             if (curChar == '/') {
                 index = addSeparator(index, inputArray);
                 continue;
             }
+
             if (separators.contains(curChar)) {
                 index++;
                 continue;
@@ -38,8 +39,8 @@ public class Parser {
     }
 
     private void charCheck(char curChar) {
-        if (!Character.isDigit(curChar) && !(curChar == '/')) {
-            throw new IllegalArgumentException("올바르지 않은 입력");
+        if (!Character.isDigit(curChar) && curChar != '/' && !separators.contains(curChar)) {
+            throw new IllegalArgumentException("올바르지 않은 입력입니다");
         }
     }
 
@@ -47,7 +48,7 @@ public class Parser {
         String numStr = "";
         numStr += curChar;
         index++;
-        while (index < inputArray.length && inputArray[index] >= '1' && inputArray[index] <= '9') {
+        while (index < inputArray.length && Character.isDigit(inputArray[index])) {
             numStr += inputArray[index];
             index++;
         }
