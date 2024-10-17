@@ -9,14 +9,22 @@ import calculator.view.OutputView;
 
 public class CalculatorController {
 
-    public static void run() {
-        String str = InputView.inputStringToAdd();
+    private final InputView inputView;
+    private final OutputView outputView;
+
+    public CalculatorController(InputView inputView, OutputView outputView) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+    }
+
+    public void run() {
+        String str = inputView.inputStringToAdd();
 
         if (SeparatorValidator.hasCustomSeparator(str)) {
             Separator.addCustomSeparator(str);
         }
 
         Numbers numbers = new Numbers(NumberConvertor.stringToInt(str));
-        OutputView.printResult(numbers.sum());
+        outputView.printResult(numbers.sum());
     }
 }
