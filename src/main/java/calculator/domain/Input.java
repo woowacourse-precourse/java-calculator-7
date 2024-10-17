@@ -29,5 +29,7 @@ public class Input {
         return firstInput;
     }
 
-
+    public String getSecondInput() { //???
+        return secondInput;
+    }
 }

@@ -18,6 +18,9 @@ public class Calculator {
                 // 기본 구분자 기능 실행
 
                 separator.validateSeparators(input.getFirstInput()); // 구분자 검증 메소드 호출
+
+                //계산 문자열을 구분자로 구분한다.
+                separator.splitCalculationString(input.getFirstInput()); //String[] 반환
             } else {
                 // 커스텀 구분자 기능 실행
                 input.readSecondInput();
@@ -29,6 +32,9 @@ public class Calculator {
 
                 //예외처리 없이 정상흐름이면 커스텀 구분자를 리스트에 넣어준다.
                 separator.addCustomSeparator(input.getFirstInput());
+                
+                //계산 문자열을 구분자로 구분한다.
+                separator.splitCalculationString(input.getSecondInput()); //String[] 반환
             }
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());

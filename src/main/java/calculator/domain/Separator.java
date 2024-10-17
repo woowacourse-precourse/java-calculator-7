@@ -71,4 +71,16 @@ public class Separator {
     public void addCustomSeparator(String input) {
         separatorList.add(input);
     }
+
+    //계산 문자열을 구분자로 구분한다.
+    public String[] splitCalculationString(String expression) {
+        String regex = String.join("|", separatorList);
+        String[] parts = expression.split(regex);
+        // 각 요소의 앞 공백 제거
+        for (int i = 0; i < parts.length; i++) {
+            parts[i] = parts[i].trim();
+        }
+
+        return parts;
+    }
 }
