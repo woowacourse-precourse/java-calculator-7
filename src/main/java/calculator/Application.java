@@ -30,17 +30,16 @@ public class Application {
     public static String findSeparator(String user_input) {
         if (user_input.substring(0, 2).equals("//") == false)
             return user_input;
-        if (user_input.indexOf("\\n") == -1)
+
+        int limit = user_input.lastIndexOf("\\n"); 
+        if (limit == -1)
             return user_input;
 
-        int i;
-        for (i = 2; i < user_input.length(); i++) {
-            if (user_input.substring(i, i + 2).equals("\\n"))
-                break;
+        for (int i = 2; i < limit; i++) {
             separator += user_input.charAt(i);
         }
 
-        return user_input.substring(i + 2);
+        return user_input.substring(limit + 2);
     }
 
     public static String inputByUser() {
