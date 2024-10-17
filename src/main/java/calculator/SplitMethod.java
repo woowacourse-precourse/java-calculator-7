@@ -5,29 +5,33 @@ public class SplitMethod {
 
         int sum = 0;
 
-        if(input.contains(",") || input.contains(":")) {
-            String newStr = input.replaceAll(",", "").replaceAll(":", "");
-            String[] seperated = newStr.split("");
+        if (input.startsWith("//")) { // 커스텀 구분자
 
-            for (int i = 0; i < seperated.length; i++) {
-                sum += Integer.parseInt(seperated[i]);
+            int endOfCustom = input.indexOf("\\");   // '\n'의 시작 위치
+
+            String customDelimiter = input.substring(2, endOfCustom); // 커스텀 구분자: '//'과 '\n'의 사이
+
+            String seperated = input.substring(endOfCustom+2); // '\n' 뒤에 위치하는 문자열
+
+            String[] tokens = seperated.split(customDelimiter);
+
+            for (String token : tokens) {
+                sum += Integer.parseInt(token);
             }
         }
-        else if (input.startsWith("//")) {
-            int find = input.indexOf("\\");
-            String id = input.substring(2, find);
-//            System.out.println(id);
-            String s = input.replaceAll("/", "").replace("\\n", "").replaceAll(";","");
-//            System.out.println(s);
-            String[] tokens = s.split("");
+        else {
+            if(input.contains(",") || input.contains(":")){ // 기본 구분자
 
-            for (int i = 0; i < tokens.length; i++) {
-                sum += Integer.parseInt(tokens[i]);
+                String[] tokens = input.split("[,:]");
+
+                for (String token : tokens) {
+                    if(Integer.parseInt(token) < 0){
+                        throw new IllegalArgumentException();
+                    }
+                    sum += Integer.parseInt(token);
+                }
             }
-
-            System.out.println("결과 : " + sum);
         }
-
         return sum;
     }
 }
