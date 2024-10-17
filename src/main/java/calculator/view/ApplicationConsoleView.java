@@ -20,7 +20,7 @@ public class ApplicationConsoleView implements ApplicationView{
     }
 
     @Override
-    public void printResult(String result) {
+    public void printResult(int result) {
 
     }
 

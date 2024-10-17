@@ -1,6 +1,6 @@
 package calculator.controller;
 
-import calculator.model.calculator.Calculator;
+import calculator.model.Calculator;
 import calculator.view.ApplicationView;
 
 public class StringCalculatorApplication implements CalculatorApplication {
@@ -16,8 +16,8 @@ public class StringCalculatorApplication implements CalculatorApplication {
     @Override
     public void run() {
         try {
-            String value = applicationView.requestValue();
-            String result = caclulator.calculate(value);
+            String responseValue = applicationView.requestValue();
+            int result = caclulator.calculate(responseValue);
             applicationView.printResult(result);
         } catch (IllegalArgumentException e) {
             applicationView.printError(e.getMessage());

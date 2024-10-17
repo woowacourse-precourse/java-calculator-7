@@ -4,7 +4,7 @@ public interface ApplicationView {
 
     String requestValue();
 
-    void printResult(String result);
+    void printResult(int result);
 
     void printError(String message);
 }
