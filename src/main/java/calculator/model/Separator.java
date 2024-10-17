@@ -13,6 +13,9 @@ public class Separator {
             int start = expression.indexOf("//") + 2;
             int end = expression.indexOf("\\n");
             String customSeparator = expression.substring(start, end);
+            if (customSeparator.contains("\\")) {
+                customSeparator += "\\";
+            }
             return defaultSeparator + customSeparator;
         }
         return defaultSeparator;

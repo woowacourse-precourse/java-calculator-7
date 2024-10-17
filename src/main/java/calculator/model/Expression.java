@@ -1,6 +1,7 @@
 package calculator.model;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Expression {
     private final String NUMBER_REGEX = "1-9";
@@ -30,7 +31,7 @@ public class Expression {
 
     private boolean hasInvalidinput(String expression) {
         String totalSeparator = separator.getSeparator();
-        String regex = "[" + NUMBER_REGEX + totalSeparator + "]*";
+        String regex = "[" + NUMBER_REGEX + Pattern.quote(totalSeparator) + "]*";
         return !expression.matches(regex);
     }
 
