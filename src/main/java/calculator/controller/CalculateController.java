@@ -17,8 +17,8 @@ public class CalculateController {
     }
 
     public void start() {
-        outputView.printStartMessage();
-        Integer result = service.getResult(inputView.getString());
+        String input = inputView.getString();
+        Integer result = service.getResult(input);
         outputView.printResultMessage(result);
     }
 }
