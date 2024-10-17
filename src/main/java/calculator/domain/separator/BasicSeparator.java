@@ -11,27 +11,65 @@ public class BasicSeparator implements Separator {
 
     @Override
     public List<Number> separate(String value) {
-        return convert(validate(value));
-    }
-
-    private List<Number> convert(String values) {
-        if (hasSeparatorIn(values)) {
-            return Arrays.stream(values.split(COMMA + "|" + COLON))
+        if (hasSeparatorIn(value)) {
+            return convert(validate(value)).stream()
                     .map(Number::new)
                     .toList();
         }
 
-        return List.of(new Number(values));
+        return List.of(new Number(parse(value)));
+    }
+
+    private int parse(String value) {
+        if (isBlank(value)) {
+            return 0;
+        }
+        validateNumber(List.of(value));
+
+        return Integer.parseInt(value);
+    }
+
+    private boolean isBlank(String value) {
+        return value.isBlank();
     }
 
     private boolean hasSeparatorIn(String value) {
         return value.contains(COMMA) || value.contains(COLON);
     }
 
-    private String validate(String value) {
+    private List<Integer> convert(List<String> values) {
+        return values.stream()
+                .map(Integer::parseInt)
+                .toList();
+    }
+
+    private List<String> divideBySeparator(String value) {
+        return Arrays.stream(value.split(COMMA + "|" + COLON))
+                .toList();
+    }
+
+    private List<String> validate(String value) {
+        List<String> values = validateOfSeparator(value);
+        validateNumber(values);
+
+        return values;
+    }
+
+    private List<String> validateOfSeparator(String value) {
         validateEdgeSeparator(value);
         validateContinuousSeparator(value);
-        return value;
+        return divideBySeparator(value);
+    }
+
+    private void validateNumber(List<String> value) {
+        value.stream()
+                .filter(this::isNotNumeric)
+                .findAny()
+                .ifPresent(IllegalArgumentException::new);
+    }
+
+    private boolean isNotNumeric(String value) {
+        return !value.matches("\\d+");
     }
 
     private void validateEdgeSeparator(String value) {

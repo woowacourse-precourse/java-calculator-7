@@ -14,8 +14,29 @@ public class CustomSeparator implements Separator {
     }
 
     @Override
-    public List<Number> separate(String value) {
-        return convert(validate(removePrefix(value)));
+    public List<Number> separate(String input) {
+        String value = removePrefix(input);
+
+        if (!isBlank(value)) {
+            return convert(validate(value)).stream()
+                    .map(Number::new)
+                    .toList();
+        }
+
+        return List.of(new Number(parse(value)));
+    }
+
+    private int parse(String value) {
+        if (isBlank(value)) {
+            return 0;
+        }
+        validateNumber(List.of(value));
+
+        return Integer.parseInt(value);
+    }
+
+    private boolean isBlank(String value) {
+        return value.isBlank();
     }
 
     private String removePrefix(String value) {
@@ -23,24 +44,37 @@ public class CustomSeparator implements Separator {
                 value.indexOf(PREFIX_STANDARD) + PREFIX_STANDARD.length());
     }
 
-    private List<Number> convert(String value) {
-        if (hasSeparatorIn(value)) {
-            return Arrays.stream(value.split(separator))
-                    .map(Number::new)
-                    .toList();
-        }
-
-        return List.of(new Number(value));
+    private List<String> divideBySeparator(String value) {
+        return Arrays.stream(value.split(separator)).toList();
     }
 
-    private boolean hasSeparatorIn(String value) {
-        return value.contains(separator);
+    private List<Integer> convert(List<String> values) {
+        return values.stream()
+                .map(Integer::parseInt)
+                .toList();
     }
 
-    private String validate(String value) {
+    private List<String> validate(String value) {
+        List<String> values = validateSeparator(value);
+        validateNumber(values);
+        return values;
+    }
+
+    private List<String> validateSeparator(String value) {
         validateEdgeSeparator(value);
         validateContinuousSeparator(value);
-        return value;
+        return divideBySeparator(value);
+    }
+
+    private void validateNumber(List<String> values) {
+        values.stream()
+                .filter(this::isNotNumeric)
+                .findAny()
+                .ifPresent(IllegalArgumentException::new);
+    }
+
+    private boolean isNotNumeric(String value) {
+        return !value.matches("\\d+");
     }
 
     private void validateEdgeSeparator(String value) {
