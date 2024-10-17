@@ -1,5 +1,7 @@
 package calculator.sumCalculator.domain;
 
+import calculator.sumCalculator.util.Validator;
+
 import java.util.List;
 
 public class Calculator {
@@ -11,6 +13,7 @@ public class Calculator {
     }
 
     public static Calculator of(List<Integer> numbers) {
+        Validator.validatePositive(numbers);
         return new Calculator(numbers);
     }
 

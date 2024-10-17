@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class CalculatorServiceTest {
 
@@ -23,8 +24,26 @@ class CalculatorServiceTest {
     void successCalculate() {
         List<Integer> numberList = List.of(1, 2, 3);
         int inputSum = numberList.stream().mapToInt(i -> i).sum();
-        Integer caculatorResult = calculatorService.sumNumbers(Calculator.of(numberList));
-        assertThat(inputSum).isEqualTo(caculatorResult);
+        Integer result = calculatorService.sumNumbers(Calculator.of(numberList));
+        assertThat(inputSum).isEqualTo(result);
+    }
+
+    @Test
+    @DisplayName("예외_케이스_음수를_포함하여_덧셈을_실패한다")
+    void failContainNegative() {
+        List<Integer> numbersContainNegative = List.of(-1, 2, 3);
+        assertThatThrownBy(() -> calculatorService.sumNumbers(Calculator.of(numbersContainNegative)))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("입력 값에는 음수가 포함될 수 없습니다.");
+    }
+
+    @Test
+    @DisplayName("예외_케이스_0을_포함하여_덧셈을_실패한다")
+    void failContainZero() {
+        List<Integer> numbersContainNegative = List.of(0, 2, 3);
+        assertThatThrownBy(() -> calculatorService.sumNumbers(Calculator.of(numbersContainNegative)))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("입력 값에는 0이 포함될 수 없습니다.");
     }
 
 }
