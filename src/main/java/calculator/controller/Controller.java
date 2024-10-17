@@ -2,6 +2,7 @@ package calculator.controller;
 
 import calculator.exception.Exceptions;
 import calculator.model.InputString;
+import calculator.model.ResultNumbers;
 import calculator.service.MainService;
 import calculator.view.InputMessage;
 import camp.nextstep.edu.missionutils.Console;
@@ -11,10 +12,12 @@ public class Controller {
     private MainService mainService = new MainService();
     private Exceptions exceptions = new Exceptions();
     private InputString inputString;
+    private ResultNumbers resultNumbers;
 
     public void start() {
         try {
             getString();
+            getNumberList();
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
@@ -32,7 +35,8 @@ public class Controller {
     }
 
     private void getNumberList() {
-        String refinedInput = inputString.getInputString();
+        resultNumbers = new ResultNumbers();
+        mainService.extractNumbersFromString(inputString, resultNumbers);
     }
 
 

@@ -4,6 +4,7 @@ import calculator.exception.Exceptions;
 import calculator.model.InputString;
 import calculator.model.ResultNumbers;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class MainService {
@@ -21,14 +22,14 @@ public class MainService {
 
         exceptions.validateCustomDelimiterSize(inputString.getCustomDelimiter().size());
 
-        if(input.startsWith("//")) { //
+        if (input.startsWith("//")) { //
             int customLastMark = input.indexOf("\\n"); // //로 시작하지만 \n가 없다면 -1 출력 있다면 해당 인덱스값 반환
-            if(customLastMark != -1) {
+            if (customLastMark != -1) {
 
                 String customDelimiter = input.substring(2, customLastMark); // 자르기
                 inputString.addCustomDelimiter(customDelimiter);
 
-                String refiendString = input.substring(customLastMark+2);
+                String refiendString = input.substring(customLastMark + 2);
                 inputString.setInputString(refiendString); // 하나의 커스텀 문자열이 빠진 새로운 String 저장
 
                 return getCustomDelimiter(inputString);
@@ -38,5 +39,27 @@ public class MainService {
         return input;
     }
 
+    public void extractNumbersFromString(InputString input, ResultNumbers resultNumbers) {
+
+        List<String> customDelimiter = input.getCustomDelimiter();
+
+        StringBuilder defaultRegex = new StringBuilder("[,|:]"); // 만약 커스텀 문자열이 추출된다음 정제된 문자열이 ////1,2,3,4 라면 //는 어떻게 처리할것인가?
+
+        if (!customDelimiter.isEmpty()) {
+            for (String delimiter : customDelimiter) {
+                defaultRegex.append("|").append(delimiter);
+            }
+        }
+
+        // 배열에 문자열이 있는지 체크
+        // 배열에 음수가 있는지 체크
+
+        String[] numberList = input.getInputString().split(defaultRegex.toString());
+
+        for(String num : numberList) {
+            resultNumbers.addNumberList(Integer.parseInt(num));
+        }
+
+    }
 
 }
