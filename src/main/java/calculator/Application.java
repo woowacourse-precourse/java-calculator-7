@@ -20,13 +20,7 @@ public class Application {
     }
 
     private static boolean isPositive(String[] numbers) {
-        for (String number:numbers){
-            if (Integer.parseInt(number) <= 0) {
-                return false;
-            }
-        }
-
-        return true;
+        return Arrays.stream(numbers).allMatch(n -> Integer.parseInt(n) > 0);
     }
 
     public static void main(String[] args) {
@@ -34,10 +28,9 @@ public class Application {
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
 
-        String input = Console.readLine();
-        Console.close();
-
         try {
+            String input = Console.readLine();
+
             if (input.startsWith("//")) {
                 StringSliceResult slices = getCustomDelimiters(input, delimiters);
                 input = slices.input();
@@ -54,6 +47,8 @@ public class Application {
             System.out.println("결과 : " + sum);
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e){
             throw new IllegalArgumentException("잘못된 값입니다. 원래의 예외: " + e);
+        } finally {
+            Console.close();
         }
     }
 }
