@@ -13,9 +13,6 @@ public class SplitInputString {
         List<String> numberStringList = Arrays.stream(input.origin().split(
                         input.separator()))
                 .toList();
-        if (!input.isNumber(numberStringList)) {
-            throw new IllegalArgumentException("잘못된 입력값 입니다.");
-        }
         return new Input(input.origin(), input.separator(),
                 numberStringList);
     }

@@ -27,6 +27,9 @@ public record Input(
     }
 
     public List<Integer> getNumbers() {
+        if (!isNumber(numbers)) {
+            throw new IllegalArgumentException("잘못된 입력값 입니다.");
+        }
         List<Integer> result = new ArrayList<>();
         for (String number : numbers) {
             result.add(Integer.parseInt(number));
