@@ -14,7 +14,20 @@ public class Application {
         String delimiter = ",|:";
         String numbers = input;
 
+        // 커스텀 구분자 처리("//"으로 시작하는 값)
+        if(input.startsWith("//")) {
+            int customIndex = input.indexOf("\\n");
+            // 커스텀 구분자가 없을 때 예외 처리
+            if (customIndex == -1) {
+                throw new IllegalArgumentException("잘못된 형식입니다. 알맞는 커스텀 형식을 입력해주세요.");
+            }
 
+            // 커스텀 문자 추출하여 구분자에 추가
+            String customDelimiter = input.substring(2, customIndex);
+            delimiter = delimiter + "|" + customDelimiter;
+            numbers = input.substring(customIndex + 2); // 커스텀 뒷 부분 추출
+
+        }
 
         return numbers.split(delimiter);
     }
@@ -34,6 +47,9 @@ public class Application {
         // 사용자 입력 받기
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
+
+        int customIndex = input.indexOf("\\n");
+        System.out.println(customIndex);
 
         Application application = new Application();
 
