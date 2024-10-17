@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 public class Calculate {
 
 
-    public void splitString(String input) {
+    public int splitString(String input) {
         String customSeparator = "";
         Pattern pattern = Pattern.compile("//(.*?)\n");
         Matcher matcher = pattern.matcher(input);
@@ -17,10 +17,10 @@ public class Calculate {
         }
         input = input.replaceAll("//(.*?)\n", "");
         String numbers = input.replaceAll("[,:]", "");
-        addition(customSeparator, numbers);
+        return addition(customSeparator, numbers);
     }
 
-    private static int addition(String customSeparator, String numbers) {
+    private int addition(String customSeparator, String numbers) {
         int sum = 0;
         for(int i = 0; i < numbers.length(); i++) {
             if(isCustomSeparator(customSeparator, numbers.charAt(i))) {
@@ -31,11 +31,11 @@ public class Calculate {
         return sum;
     }
 
-    private static boolean isCustomSeparator(String customSeparator, char num) {
+    private boolean isCustomSeparator(String customSeparator, char num) {
         return num == customSeparator.charAt(0);
     }
 
-    private static int isPositiveNumber(char num) {
+    private int isPositiveNumber(char num) {
         if(Character.isDigit(num) && num - '0' > 0) {
             return num - '0';
         }
