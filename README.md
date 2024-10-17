@@ -4,10 +4,11 @@
 
 ### 1. 사용자로부터 문자열 입력받는다. (input 패키지)
 
-- [ ] 입력 전 메시지를 출력하고, 문자열을 입력받는 기능
-- [ ] 입력받은 문자열이 null일 경우 IllegalArgumentException을 던지는 기능
-- [ ] 입력받은 문자열이 "//"로 시작하지 않으면 IllegalArgumentException을 던지는 기능
-- [ ] 입력받은 문자열에 "\n"이 없으면 IllegalArgumentException을 던지는 기능
+- [ ] 입력 전 메시지를 출력하고, 문자열을 입력받는 기능(getInput)
+- [ ] 입력받은 문자열의 유효성을 검증하는 기능(validateInput)
+  - 입력받은 문자열이 null이거나 빈 경우 IllegalArgumentException을 던진다.
+  - 입력받은 문자열이 "//"로 시작하지 않으면 IllegalArgumentException을 던진다.
+  - 입력받은 문자열에 "\n"이 없으면 IllegalArgumentException을 던진다.
 
 ### 2. "\n"을 기준으로 입력받은 문자열을 2개로 나눈다 (split 패키지)
 
