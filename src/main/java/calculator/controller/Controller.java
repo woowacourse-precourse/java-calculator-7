@@ -4,7 +4,7 @@ import calculator.View;
 
 public class Controller {
     private static final String START = "덧셈할 문자열을 입력해 주세요.";
-    private static final String RESULT = "결과: ";
+    private static final String RESULT = "결과 : ";
 
     public void calculate() {
         printStartMessage();
