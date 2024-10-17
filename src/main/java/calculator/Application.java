@@ -5,12 +5,12 @@ import static calculator.Constant.BASIC_DELIMITER_2;
 import static calculator.Constant.CUSTOM_DELIMITER_END;
 import static calculator.Constant.CUSTOM_DELIMITER_START;
 import static calculator.Constant.INPUT_GUIDE;
-import static calculator.Constant.LEFT_SQUARE_BRACKET;
 import static calculator.Constant.OUTPUT_RESULT;
-import static calculator.Constant.REGEX_OR_OPERATOR;
-import static calculator.Constant.RIGHT_SQUARE_BRACKET;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class Application {
 
@@ -33,12 +33,16 @@ public class Application {
             input = input.substring(customEndIndex + 2);
         }
 
-        // 구분자 배열을 정규식 패턴으로 변환
-        // ex. {",", ":", ";"} -> [,|:|;]
-        String regex = LEFT_SQUARE_BRACKET + String.join(REGEX_OR_OPERATOR, delimiter) + RIGHT_SQUARE_BRACKET;
+        // 구분자 배열을 안전하게 정규식 패턴으로 변환
+        // ex. {",", ":", null} -> \Q,\E|\Q:\E
+        String delimiterRegex = Arrays.stream(delimiter)
+                .filter(Objects::nonNull)
+                .map(Pattern::quote)
+                .reduce((d1, d2) -> d1 + "|" + d2)
+                .orElse("");
 
         // 숫자 추출
-        String[] split = input.split(regex);
+        String[] split = input.split(delimiterRegex);
         int result = 0;
         for (String strNum : split) {
             if (strNum.isBlank()) {

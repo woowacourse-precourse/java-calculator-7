@@ -13,9 +13,4 @@ public class Constant {
     // 커스텀 구분자 지정
     public static final String CUSTOM_DELIMITER_START = "//";
     public static final String CUSTOM_DELIMITER_END = "\\n";
-
-    // 정규표현식 구성
-    public static final String LEFT_SQUARE_BRACKET = "[";
-    public static final String RIGHT_SQUARE_BRACKET = "]";
-    public static final String REGEX_OR_OPERATOR = "|";
 }
