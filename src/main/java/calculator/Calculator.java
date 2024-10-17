@@ -43,7 +43,8 @@ public class Calculator {
 
 
     private void basicDelimiter() {
-
+        String[] strArr = input.split(",|:");
+        calculate(strArr, ",|:");
     }
 
 
@@ -52,10 +53,14 @@ public class Calculator {
     }
 
     private void isNull(){
-
+        result = 0;
     }
 
     public void isPositiveNum(String s, String delimiter){
+
+    }
+
+    private void calculate(String[] strArr, String delimiter){
 
     }
 
