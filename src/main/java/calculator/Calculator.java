@@ -28,8 +28,8 @@ public class Calculator {
 
     public void on() {
         String input = getInput();
-        int calculation.calculate(input);
-        output.print(calculation);
+        int result = calculation.calculate(input);
+        output.print(result);
     }
 
     public String getInput() {
