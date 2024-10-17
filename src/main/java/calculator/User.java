@@ -37,7 +37,7 @@ public class User {
             throw new IllegalArgumentException("입력값은 공백으로 시작할 수 없습니다.");
         }
     }
-    
+
     public String getUser() {
         return user;
     }
