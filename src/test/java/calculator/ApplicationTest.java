@@ -1,5 +1,10 @@
 package calculator;
 
+import static calculator.constant.ErrorMessages.INVAILD_CHAR_MESSAGE;
+import static calculator.constant.ErrorMessages.INVALID_DELIMITER_MESSAGE;
+import static calculator.constant.ErrorMessages.NUMBER_ASSIGN_ERROR_MESSAGE;
+import static calculator.constant.OutputMessages.FIRST_MESSAGE;
+import static calculator.constant.OutputMessages.RESULT_MESSAGE;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -12,7 +17,7 @@ class ApplicationTest extends NsTest {
     void 빈_입력_상태() {
         assertSimpleTest(() -> {
             run("\n");
-            assertThat(output()).contains("결과 : 0");
+            assertThat(output()).contains(FIRST_MESSAGE, RESULT_MESSAGE + "0");
         });
     }
 
@@ -20,7 +25,7 @@ class ApplicationTest extends NsTest {
     void 기본_구분자_사용() {
         assertSimpleTest(() -> {
             run("1,2:3");
-            assertThat(output()).contains("결과 : 6");
+            assertThat(output()).contains(FIRST_MESSAGE, RESULT_MESSAGE + "6");
         });
     }
 
@@ -28,7 +33,7 @@ class ApplicationTest extends NsTest {
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
             run("//;@\\n1;2@3");
-            assertThat(output()).contains("결과 : 6");
+            assertThat(output()).contains(FIRST_MESSAGE, RESULT_MESSAGE + "6");
         });
     }
 
@@ -36,7 +41,7 @@ class ApplicationTest extends NsTest {
     void 커스텀_구분자_중복_등록() {
         assertSimpleTest(() -> {
             run("//;;\\n1;2;3");
-            assertThat(output()).contains("결과 : 6");
+            assertThat(output()).contains(FIRST_MESSAGE, RESULT_MESSAGE + "6");
         });
     }
 
@@ -45,7 +50,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//1\\n1,2,3:1"))
                         .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessage("커스텀 구분자에 숫자는 등록할 수 없습니다")
+                        .hasMessage(NUMBER_ASSIGN_ERROR_MESSAGE)
         );
     }
 
@@ -54,7 +59,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("///\\n1,2,3:1"))
                         .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessage("'/'와'\\'는 커스텀 구분자를 등록하는 데에만 사용할 수 있습니다")
+                        .hasMessage(INVAILD_CHAR_MESSAGE)
         );
     }
 
@@ -63,7 +68,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//\\\\n1,2,3:1"))
                         .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessage("'/'와'\\'는 커스텀 구분자를 등록하는 데에만 사용할 수 있습니다")
+                        .hasMessage(INVAILD_CHAR_MESSAGE)
         );
     }
 
@@ -72,7 +77,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("/1:2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessage("'/'와'\\'는 커스텀 구분자를 등록하는 데에만 사용할 수 있습니다")
+                        .hasMessage(INVAILD_CHAR_MESSAGE)
         );
     }
 
@@ -81,7 +86,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//[\\n-1:2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessage("구분자나 숫자가 아닌 문자가 발견되었습니다: " + '-')
+                        .hasMessage(INVALID_DELIMITER_MESSAGE + '-')
         );
     }
 
@@ -89,7 +94,7 @@ class ApplicationTest extends NsTest {
     void 구분자_중복_사용() {
         assertSimpleTest(() -> {
             run("1,,2::34,:5");
-            assertThat(output()).contains("결과 : 15");
+            assertThat(output()).contains(FIRST_MESSAGE, RESULT_MESSAGE + "15");
         });
     }
 
@@ -98,7 +103,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessage("구분자나 숫자가 아닌 문자가 발견되었습니다: " + '-')
+                        .hasMessage(INVALID_DELIMITER_MESSAGE + '-')
         );
     }
 
