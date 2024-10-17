@@ -12,7 +12,7 @@ public class StringAdder {
     private String extractDelimiter(String input) {
         String defaultDelimiter = ",|:";
         if (input.startsWith("//")) {
-            int delimiterEndIndex = input.indexOf("\n");
+            int delimiterEndIndex = input.indexOf("\\n");
             return input.substring(2, delimiterEndIndex);
         }
         return defaultDelimiter;
@@ -20,8 +20,8 @@ public class StringAdder {
 
     private String removeDelimiterSection(String input) {
         if (input.startsWith("//")) {
-            int delimiterEndIndex = input.indexOf("\n");
-            return input.substring(delimiterEndIndex + 1);
+            int delimiterEndIndex = input.indexOf("\\n");
+            return input.substring(delimiterEndIndex + 2);
         }
         return input;
     }
