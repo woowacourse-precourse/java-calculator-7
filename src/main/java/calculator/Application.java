@@ -25,8 +25,7 @@ public class Application {
 
         Optional<Delimiter> delimiter = customDelimiterService.extract(input);
         if (delimiter.isPresent()) {
-            int newLineIndex = input.indexOf(CustomDelimiterService.CUSTOM_DELIMITER_SUFFIX);
-            input = input.substring(newLineIndex + CustomDelimiterService.CUSTOM_DELIMITER_SUFFIX.length());
+            input = customDelimiterService.trimCustomDelimiter(input);
             delimiterList.add(delimiter.get());
         }
 
