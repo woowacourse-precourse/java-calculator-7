@@ -20,14 +20,16 @@ class SplitServiceTest {
         List<String> numbers = splitService.split(input);
         assertEquals(expected, numbers.toString());
     }
-    static Stream<Arguments> basicSplit(){
+
+    static Stream<Arguments> basicSplit() {
         return Stream.of(
-                Arguments.of("3,4,5","[3, 4, 5]"),
-                Arguments.of("3:4:5","[3, 4, 5]"),
-                Arguments.of("3,4:5","[3, 4, 5]"),
-                Arguments.of("3","[3]")
+                Arguments.of("3,4,5", "[3, 4, 5]"),
+                Arguments.of("3:4:5", "[3, 4, 5]"),
+                Arguments.of("3,4:5", "[3, 4, 5]"),
+                Arguments.of("3", "[3]")
         );
     }
+
     @DisplayName("커스텀 구분자 분할 확인")
     @ParameterizedTest(name = "{displayName}: {0}")
     @MethodSource("customSplit")
@@ -36,14 +38,22 @@ class SplitServiceTest {
         List<String> numbers = splitService.split(input);
         assertEquals(expected, numbers.toString());
     }
-    static Stream<Arguments> customSplit(){
+
+    static Stream<Arguments> customSplit() {
         return Stream.of(
-                Arguments.of("//;\\n3;4;5","[3, 4, 5]"),
-                Arguments.of("//;\\n3;4,5","[3, 4, 5]"),
-                Arguments.of("// \\n3 4 5","[3, 4, 5]"),
-                Arguments.of("//\\s\\n3 4 5","[3, 4, 5]"),
-                Arguments.of("//and\\n3and4and5","[3, 4, 5]"),
-                Arguments.of("//;\\n3","[3]")
+                Arguments.of("//;\\n3;4;5", "[3, 4, 5]"),
+                Arguments.of("//;\\n3;4,5", "[3, 4, 5]"),
+                Arguments.of("// \\n3 4 5", "[3, 4, 5]"),
+                Arguments.of("//\\s\\n3 4 5", "[3, 4, 5]"),
+                Arguments.of("//and\\n3and4and5", "[3, 4, 5]"),
+                Arguments.of("//;\\n3", "[3]")
         );
+    }
+
+    @DisplayName("커스텀 구분자 입력 비어있을시 예외")
+    @Test
+    void checkInvalidDelimiter() {
+        SplitService splitService = new SplitService();
+        assertThrows(IllegalArgumentException.class, () -> splitService.split("//\\n3;4;5"));
     }
 }
