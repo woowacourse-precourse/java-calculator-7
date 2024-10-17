@@ -67,4 +67,8 @@ public class Separator {
         }
     }
 
+    //올바른 커스텀 구분자를 구분자 리스트에 추가한다.
+    public void addCustomSeparator(String input) {
+        separatorList.add(input);
+    }
 }

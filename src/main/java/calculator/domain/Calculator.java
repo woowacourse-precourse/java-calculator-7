@@ -28,6 +28,7 @@ public class Calculator {
                 separator.validateDuplicateCustom(input.getFirstInput()); // 커스텀 구분자가 중복되었는지 확인
 
                 //예외처리 없이 정상흐름이면 커스텀 구분자를 리스트에 넣어준다.
+                separator.addCustomSeparator(input.getFirstInput());
             }
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
