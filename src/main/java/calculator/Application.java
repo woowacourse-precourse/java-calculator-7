@@ -50,5 +50,8 @@ public class Application {
         if (splitString.length() != 1) {
             throw new IllegalArgumentException("구분자를 기준으로 문자열을 분리하였을 때, 분리된 대상은 문자열이 아니라 문자여야 합니다.");
         }
+        if (!splitString.matches("[0-9]")) {
+            throw new IllegalArgumentException("분리된 문자는 숫자(0, 1, ..., 9 중 하나)여야 합니다.");
+        }
     }
 }
