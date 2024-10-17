@@ -34,10 +34,32 @@ public class CalculatorModel {
     public void setDelimiter(String delimiter) {
         delimiterList.add(delimiter);
     }
-    
+
     // 숫자 목록 초기화 시키기
     public void resetNumberList() {
         numberList.clear();
     }
+
+    //숫자와 구분자 필터링하기
+    public void filterInput(String input) {
+        StringBuilder numberString = new StringBuilder();
+
+        for (char ch : input.toCharArray()) {
+            if (delimiterList.contains(String.valueOf(ch)) && (!numberString.isEmpty())) {
+                numberList.add(Integer.parseInt(numberString.toString()));
+                numberString.setLength(0);
+            } else if (!Character.isDigit(ch)) {
+                throw new IllegalArgumentException("Invalid input");
+            } else {
+                numberString.append(ch);
+            }
+        }
+
+        if (!numberList.isEmpty()) {
+            numberList.add(Integer.parseInt(numberString.toString()));
+            numberString.setLength(0);
+        }
+    }
+
 
 }
