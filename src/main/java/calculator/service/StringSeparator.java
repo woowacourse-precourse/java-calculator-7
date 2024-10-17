@@ -11,30 +11,40 @@ public class StringSeparator {
     }
 
     public void divideSeparator(String str) {
+        if (str.startsWith("//")) {
+            String divide = "";
+            int customEndIndex = 0;
+            for (int i = 0; i < str.length(); i++) {
+                divide += str.charAt(i);
+                if (divide.contains("\\n")) {
+                    break;
+                }
+            }
+            if (!isWrongInput(divide)) {
+                customEndIndex = divide.length();
+            } else {
+                throw new IllegalArgumentException("잘못된 입력입니다.");
+            }
+            String customSeparator = extractionCustomSeparator(divide);
+            calculator.addSeparator(customSeparator);
+            str = str.substring(customEndIndex);
+        }
         String number = "";
-        String divide = "";
+        String separator = "";
         for (int i = 0; i < str.length(); i++) {
             char nowChar = str.charAt(i);
             if (isNumber(nowChar)) {
-                if (!divide.isEmpty()) {
-                    if (isWrongInput(divide)) {
-                        throw new IllegalArgumentException("잘못된 입력입니다.");
-                    } else {
-                        String separator = extractionCustomSeparator(divide);
-                        calculator.addSeparator(separator);
-                        divide = "";
-                    }
+                if (!separator.isEmpty() && !isSeparator(separator)) {
+                    calculator.addSeparator(separator);
+                    separator = "";
                 }
                 number += nowChar;
             } else {
-                if (isSeparator(nowChar)) {
-                    if (!number.isEmpty()) {
-                        calculator.addNumber(Integer.parseInt(number));
-                        number = "";
-                    }
-                } else {
-                    divide += nowChar;
+                if (!number.isEmpty()) {
+                    calculator.addNumber(Integer.parseInt(number));
+                    number = "";
                 }
+                separator += nowChar;
             }
         }
         if (!number.isEmpty()) {
@@ -60,11 +70,11 @@ public class StringSeparator {
     }
 
     public String extractionCustomSeparator(String divide) {
-        return divide.substring(2, divide.length() - 2);
+        return divide.substring(2, divide.indexOf("\\n"));
     }
 
-    private boolean isSeparator(char ch) {
-        if (calculator.getSeparators().contains(String.valueOf(ch))) {
+    private boolean isSeparator(String str) {
+        if (calculator.getSeparators().contains(String.valueOf(str))) {
             return true;
         }
         return false;
