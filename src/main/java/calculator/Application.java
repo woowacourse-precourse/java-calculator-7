@@ -20,7 +20,7 @@ public class Application {
     }
 
     private static boolean isAllPositive(String[] numbers) {
-        return Arrays.stream(numbers).allMatch(n -> Double.parseDouble(n) > 0);
+        return Arrays.stream(numbers).filter(n -> !n.isEmpty()).allMatch(n -> Double.parseDouble(n) > 0);
     }
 
     public static void main(String[] args) {
@@ -43,7 +43,11 @@ public class Application {
                 throw new IllegalArgumentException("모든 숫자는 양수여야 합니다.");
             }
 
-            BigDecimal sum = Arrays.stream(numbers).map(BigDecimal::new).reduce(BigDecimal.ZERO, BigDecimal::add);
+            BigDecimal sum = Arrays.stream(numbers)
+                                   .filter(n -> !n.isEmpty())
+                                   .map(BigDecimal::new)
+                                   .reduce(BigDecimal.ZERO, BigDecimal::add);
+
             System.out.println("결과 : " + sum);
 
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e){
