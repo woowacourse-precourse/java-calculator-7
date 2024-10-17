@@ -1,12 +1,27 @@
 package calculator.delimiter;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class DelimiterUtilsTest {
+
+    @Test
+    @DisplayName("유틸 클래스의 생성자가 호출되면 예외가 발생한다.")
+    void testPrivateConstructor() throws Exception {
+        Constructor<DelimiterUtils> constructor = DelimiterUtils.class.getDeclaredConstructor();
+        constructor.setAccessible(true);
+
+        assertThatThrownBy(constructor::newInstance)
+                .isInstanceOf(InvocationTargetException.class)  // 래핑된 예외
+                .hasCauseInstanceOf(UnsupportedOperationException.class);
+    }
 
     @ParameterizedTest
     @CsvSource({
