@@ -6,9 +6,9 @@ import static calculator.common.exception.Messages.*;
 
 public class CustomDelimiterService {
 
-    public final static String CUSTOM_DELIMITER_PREFIX = "//";
-    public final static String CUSTOM_DELIMITER_SUFFIX = "\\n";
-    public final String ESCAPE_CHARACTER = "\\";
+    private final String CUSTOM_DELIMITER_PREFIX = "//";
+    private final String CUSTOM_DELIMITER_SUFFIX = "\\n";
+    private final String ESCAPE_CHARACTER = "\\";
     private final String INTEGER_REGEX = ".*\\d.*";
 
     public Optional<Delimiter> extract(String input) {
