@@ -23,12 +23,12 @@ class StringSplitterTest {
         assert list.get(2).equals("3");
     }
 
-    @DisplayName("커스텀 구분자 포함 문자열 분리")
+    @DisplayName("커스텀 구분자 포함 문자열(//;\n1;2;3) 분리")
     @Test
     void splitTest_CustomDelimiters() {
         // given
         StringSplitter splitter = new StringSplitter();
-        String str = "//;\n1;2;3";
+        String str = "//;\\n1;2;3";
 
         // when
         List<String> list = splitter.split(str);
@@ -38,6 +38,21 @@ class StringSplitterTest {
         assert list.get(0).equals("1");
         assert list.get(1).equals("2");
         assert list.get(2).equals("3");
+    }
+
+    @DisplayName("커스텀 구분자 포함 문자열(//;\\n1) 분리")
+    @Test
+    void splitTest_CustomDelimiters2() {
+        // given
+        StringSplitter splitter = new StringSplitter();
+        String str = "//;\\n1";
+
+        // when
+        List<String> list = splitter.split(str);
+
+        // then
+        assert list.size() == 1;
+        assert list.get(0).equals("1");
     }
 
 }
