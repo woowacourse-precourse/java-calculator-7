@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.ArrayList;
 
 public class Application {
     public static void main(String[] args) {
@@ -10,6 +11,13 @@ public class Application {
         if (input.startsWith("//")) {
             SeparatorManager separatorManager = new SeparatorManager();
             separatorManager.processInput(input);
+
+            String numberString = separatorManager.getNumberString();
+            ArrayList<String> separators = separatorManager.getSeparators();
+
+            NumberManager numberManager = new NumberManager();
+            numberManager.numberInput(numberString, separators);
         }
+
     }
 }
