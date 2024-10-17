@@ -17,11 +17,17 @@ public class StringSplitter {
         if(input.startsWith("//")){
             int endPoint = input.lastIndexOf("\\n");
             if(endPoint == -1){
-                throw new IllegalArgumentException(); // 예외발생
+                throw new IllegalArgumentException("\\n가 없다면 커스텀 구분자를 사용할 수 없습니다."); // 예외발생
             }
 
             String customSeparators = input.substring(2,endPoint);
-
+            for(char c : customSeparators.toCharArray()){
+                if(Character.isWhitespace(c)){
+                    throw new IllegalArgumentException("구분자에는 빈칸이 불가능합니다.");
+                }else if(Character.isDigit(c)){
+                    throw new IllegalArgumentException("구분자에는 숫자가 들어갈 수 없습니다.");
+                }
+            }
             if(customSeparators.length() > 1){
                 String[] splited = customSeparators.split("");
                 for(String str : splited){
