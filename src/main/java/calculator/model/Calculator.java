@@ -1,19 +1,23 @@
 package calculator.model;
 
+import java.util.Objects;
+
 public class Calculator {
 
-    private String result;
+    private int result;
 
     public void calculate(String input) {
-        if (input == "") {
-            result = "0";
+        if (Objects.equals(input, "")) {
+            result = 0;
             return;
         }
-
-
+        if (input.startsWith("//")) {
+            String customDelimiter = String.valueOf(input.charAt(2));
+            String[] numbers = input.substring(5).split(customDelimiter);
+        }
     }
 
-    public String getResult() {
+    public int getResult() {
         return result;
     }
 }

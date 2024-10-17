@@ -14,7 +14,7 @@ public class CalculatorController {
         outputView.printInputMessage();
         String input = inputView.readLine();
         calculator.calculate(input);
-        String result = calculator.getResult();
+        int result = calculator.getResult();
         outputView.printResultMessage(result);
     }
 }
