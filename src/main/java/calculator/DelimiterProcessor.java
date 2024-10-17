@@ -10,6 +10,7 @@ public class DelimiterProcessor {
     private static final String DEFAULT_NUMBER_PATTERN = "[0-9]+([,|:][0-9]+)*";
 
     public String[] extractNumberStrings(String input) {
+        input = input.replace("\\n", "\n");
         Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_AND_NUMBER_PATTERN).matcher(input);
         if (!matcher.matches()) {
             validateNumberPattern(input, DEFAULT_NUMBER_PATTERN);
