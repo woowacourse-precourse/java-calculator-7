@@ -45,4 +45,48 @@ class StringParserTest {
         assertFalse(stringParser.isSeparator("1"));
         assertFalse(stringParser.isSeparator(" "));
     }
+
+    @Test
+    void 커스텀_구분자_추출_성공() {
+        String input = "//;\n1;2;3";
+        String customSeparator = stringParser.extractCustomSeparator(input);
+        assertEquals(";", customSeparator);
+    }
+
+    @Test
+    void 커스텀_구분자가_없을_때_null_반환() {
+        String input = "1,2,3";
+        String customSeparator = stringParser.extractCustomSeparator(input);
+        assertNull(customSeparator);
+    }
+
+    @Test
+    void 잘못된_커스텀_구분자_형식_예외_발생() {
+        String input = "//;n1;2;3";
+        assertThrows(IllegalArgumentException.class, () -> {
+            stringParser.extractCustomSeparator(input);
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_정의_제거_성공() {
+        String input = "//;\n1;2;3";
+        String result = stringParser.removeCustomSeparatorDefinition(input);
+        assertEquals("1;2;3", result);
+    }
+
+    @Test
+    void 커스텀_구분자가_없을_때_원본_문자열_반환() {
+        String input = "1,2,3";
+        String result = stringParser.removeCustomSeparatorDefinition(input);
+        assertEquals(input, result);
+    }
+
+    @Test
+    void 잘못된_커스텀_구분자_정의_제거시_예외_발생() {
+        String input = "//;1;2;3";
+        assertThrows(IllegalArgumentException.class, () -> {
+            stringParser.removeCustomSeparatorDefinition(input);
+        });
+    }
 }
