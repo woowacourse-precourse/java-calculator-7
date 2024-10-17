@@ -5,10 +5,10 @@ import java.util.List;
 
 public class Delimiters {
 
-    private final List<Delimiter> delimiters;
+    private final List<Delimiter> values;
 
     public Delimiters(List<Delimiter> delimiters) {
-        this.delimiters = delimiters;
+        this.values = delimiters;
     }
 
     public List<String> split(String input) {
@@ -16,6 +16,6 @@ public class Delimiters {
     }
 
     private String join(String delimiter) {
-        return String.join(delimiter, delimiters.stream().map(Delimiter::value).toList());
+        return String.join(delimiter, values.stream().map(Delimiter::value).toList());
     }
 }

@@ -8,8 +8,8 @@ public class CustomDelimiterService {
 
     private final String CUSTOM_DELIMITER_PREFIX = "//";
     private final String CUSTOM_DELIMITER_SUFFIX = "\\n";
-    private final String ESCAPE_CHARACTER = "\\";
-    private final String INTEGER_REGEX = ".*\\d.*";
+    private final String ESCAPE = "\\";
+    private final String NUMBER_REGEX = ".*\\d.*";
 
     public Optional<Delimiter> extract(String input) {
         if (!hasCustomDelimiter(input)) {
@@ -53,13 +53,13 @@ public class CustomDelimiterService {
     }
 
     private void validateEscapeCharacter(String customDelimiter) {
-        if (customDelimiter.contains(ESCAPE_CHARACTER)) {
+        if (customDelimiter.contains(ESCAPE)) {
             throw new IllegalArgumentException(CUSTOM_DELIMITER_CONTAINS_ESCAPE);
         }
     }
 
     private void validateForDigits(String customDelimiter) {
-        if (customDelimiter.matches(INTEGER_REGEX)) {
+        if (customDelimiter.matches(NUMBER_REGEX)) {
             throw new IllegalArgumentException(CUSTOM_DELIMITER_CONTAINS_NUMBER);
         }
     }
