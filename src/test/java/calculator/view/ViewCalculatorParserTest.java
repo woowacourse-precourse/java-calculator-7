@@ -1,21 +1,22 @@
-package calculator.service.util;
+package calculator.view;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import calculator.domain.model.ExtractedInput;
+import calculator.domain.exception.CalculatorException;
+import calculator.dto.request.CalculatorRequest;
 import java.util.regex.Pattern;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class DelimiterExtractorTest {
+class ViewCalculatorParserTest {
     @Test
     @DisplayName("기본 구분자 반환 테스트")
     void testDefaultDelimiters() {
         String input = "1,2:3";
         String expectedDelimiters = ",|:";
-        ExtractedInput extractedInput = DelimiterExtractor.extractDelimiters(input);
-        assertThat(extractedInput.getDelimiters()).isEqualTo(expectedDelimiters);
+        CalculatorRequest calculatorRequest = ViewCalculatorParser.parseDelimitersAndInput(input);
+        assertThat(calculatorRequest.delimiters()).isEqualTo(expectedDelimiters);
     }
 
     @Test
@@ -23,8 +24,8 @@ class DelimiterExtractorTest {
     void testSingleCustomDelimiter() {
         String input = "//^\\n1^2^3";
         String expectedDelimiters = ",|:|" + Pattern.quote("^"); // ",|:|^"
-        ExtractedInput extractedInput = DelimiterExtractor.extractDelimiters(input);
-        assertThat(extractedInput.getDelimiters()).isEqualTo(expectedDelimiters);
+        CalculatorRequest calculatorRequest = ViewCalculatorParser.parseDelimitersAndInput(input);
+        assertThat(calculatorRequest.delimiters()).isEqualTo(expectedDelimiters);
     }
 
     @Test
@@ -32,8 +33,8 @@ class DelimiterExtractorTest {
     void testInvalidMultiCustomDelimiters() {
         String invalidInput = "//^*\\n1^2^3"; // 구분자가 여러개인 상황
 
-        assertThatThrownBy(() -> DelimiterExtractor.extractDelimiters(invalidInput))
-                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> ViewCalculatorParser.parseDelimitersAndInput(invalidInput))
+                .isInstanceOf(CalculatorException.class);
     }
 
     @Test
@@ -41,8 +42,8 @@ class DelimiterExtractorTest {
     void testInvalidCustomDelimiterFormat() {
         String invalidInput = "//^1^2^3"; // \n 없음
 
-        assertThatThrownBy(() -> DelimiterExtractor.extractDelimiters(invalidInput))
-                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> ViewCalculatorParser.parseDelimitersAndInput(invalidInput))
+                .isInstanceOf(CalculatorException.class);
     }
 
     @Test
@@ -51,8 +52,8 @@ class DelimiterExtractorTest {
         String emptyInput = ""; // \n 없음
 
         String expectedDelimiters = ",|:";
-        ExtractedInput extractedInput = DelimiterExtractor.extractDelimiters(emptyInput);
-        assertThat(extractedInput.getDelimiters()).isEqualTo(expectedDelimiters);
+        CalculatorRequest calculatorRequest = ViewCalculatorParser.parseDelimitersAndInput(emptyInput);
+        assertThat(calculatorRequest.delimiters()).isEqualTo(expectedDelimiters);
     }
 
     @Test
@@ -60,7 +61,7 @@ class DelimiterExtractorTest {
     void testTooShortInput() {
         String input = "//\\n";
         String expectedDelimiters = ",|:";
-        ExtractedInput extractedInput = DelimiterExtractor.extractDelimiters(input);
-        assertThat(extractedInput.getDelimiters()).isEqualTo(expectedDelimiters);
+        CalculatorRequest calculatorRequest = ViewCalculatorParser.parseDelimitersAndInput(input);
+        assertThat(calculatorRequest.delimiters()).isEqualTo(expectedDelimiters);
     }
 }
