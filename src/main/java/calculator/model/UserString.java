@@ -2,7 +2,7 @@ package calculator.model;
 
 public class UserString {
 
-    private String[] splitValue;
+    private final String[] splitValue;
 
     public UserString(String userInput) {
 
