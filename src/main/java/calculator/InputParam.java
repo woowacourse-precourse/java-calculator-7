@@ -19,6 +19,9 @@ public class InputParam {
     }
 
     public String getInput() {
+        System.out.println("다음과 같이 입력해주세요\n");
+        System.out.println("//구분자 \\n 계산할 숫자들을 구분자로 구별해주세요.\n");
+
         return readLine();
     }
 
