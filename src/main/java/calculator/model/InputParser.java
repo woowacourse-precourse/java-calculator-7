@@ -7,18 +7,13 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 
 public class InputParser {
-	private final String input;
 	List<String> delimiters;
 
 	public InputParser(String input) {
-		// 원본 문자열에서 커스텀 구분자를 빼고, delimiters 에 추가한다.
-		this.input = removeCustomDelimiter(input);
-
 		// 만약 사용자가 커스텀 구분자를 입력했다면, 커스텀 구분자를 따로 추출해서 구분자 목록에 추가한다..
-		List<String> delimiters = Arrays.asList(",", ":");
-		extractCustomDelimiter(input).ifPresent(delimiters::add);
-		this.delimiters = delimiters;
-		validateDelimiter(this.input);
+		List<String> delimiter = Arrays.asList(",", ":");
+		extractCustomDelimiter(input).ifPresent(delimiter::add);
+		this.delimiters = delimiter;
 	}
 
 	/**
@@ -33,13 +28,16 @@ public class InputParser {
 
 	// 구분자들을 이용해 정규식을 만들고, 이를 이용해 입력값을 분리
 	private String[] splitInput(String input, List<String> delimiters) {
+		String processedInput = removeCustomDelimiter(input);
+		validateDelimiter(processedInput);
+
 		String regex = String.join("|",
 			delimiters.stream()
 				.map(Pattern::quote) // 구분자를 정규식에 안전하게 포함 (특수 문자의 경우 혼동의 여지가 있음)
 				.toArray(String[]::new)
 		);
 
-		return input.split(regex);
+		return processedInput.split(regex);
 	}
 
 	// 분리된 각 부분에서 숫자로 변환하여 리스트에 추가
