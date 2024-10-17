@@ -1,8 +1,8 @@
 package calculator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.math.BigInteger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,27 +15,31 @@ public class CalculatorTest {
     }
 
     @Test
-    void 빈_문자열을_입력하면_0을_반환한다() {
-        assertEquals(0, calculator.sumFromString(""));
-    }
-
-    @Test
-    void 음수나_0이_있는_경우_예외를_던진다() {
-        assertThrows(IllegalArgumentException.class, () ->
-                calculator.sumFromString("-1,2,3,10"));
-        assertThrows(IllegalArgumentException.class, () ->
-                calculator.sumFromString("0,2,3,10"));
+    void 빈_문자열_테스트() {
+        assertEquals(new BigInteger("0"), calculator.sumFromString(""));
     }
 
     @Test
     void 기본_구분자_더하기_테스트() {
-        assertEquals(13, calculator.sumFromString("1:2,10"));
+        assertEquals(new BigInteger("13"), calculator.sumFromString("1:2,10"));
     }
 
     @Test
     void 커스텀_구분자_더하기_테스트() {
-        assertEquals(13, calculator.sumFromString("//;\\n1;2,10"));
-        assertEquals(1, calculator.sumFromString("//;\\n1"));
+        assertEquals(new BigInteger("13"), calculator.sumFromString("//;\\n1;2,10"));
+        assertEquals(new BigInteger("13"), calculator.sumFromString("//;.!\\n1;.!2;.!10"));
+        assertEquals(new BigInteger("1"), calculator.sumFromString("//;\\n1"));
+    }
 
+    @Test
+    void 단일_문자_테스트() {
+        assertEquals(new BigInteger("1"), calculator.sumFromString("1"));
+    }
+
+    @Test
+    void 아주_큰_숫자_테스트() {
+        assertEquals(new BigInteger("10000000000000000000000000000000000000"),
+                calculator.sumFromString(
+                        "5000000000000000000000000000000000000:5000000000000000000000000000000000000"));
     }
 }

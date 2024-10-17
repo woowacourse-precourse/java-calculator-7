@@ -1,13 +1,11 @@
 package calculator;
 
 public class NumberValidator {
-    void NegativeOrZeroCheck(String[] delimitedNumbers) {
+    void positiveNumberCheck(String[] delimitedNumbers) {
         for (String delimitedNumber : delimitedNumbers) {
-            if (delimitedNumber.contains("-") || delimitedNumber.equals("0")) {
+            if (!delimitedNumber.matches("^[1-9]\\d*$")) {
                 throw new IllegalArgumentException();
             }
         }
     }
-
-
 }

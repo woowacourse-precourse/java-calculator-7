@@ -33,4 +33,11 @@ public class NumberValidatorTest {
         assertThrows(IllegalArgumentException.class, () ->
                 validator.positiveNumberCheck(new String[]{"1 ", "2", "3"}));
     }
+
+    @Test
+    void 숫자_문자_혼합_테스트() {
+        NumberValidator validator = new NumberValidator();
+        assertThrows(IllegalArgumentException.class, () ->
+                validator.positiveNumberCheck(new String[]{"a1", "b2", "c3"}));
+    }
 }

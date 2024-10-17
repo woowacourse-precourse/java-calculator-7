@@ -16,7 +16,7 @@ public class CalculatorTest {
 
     @Test
     void 빈_문자열_테스트() {
-        assertEquals(0, calculator.sumFromString(""));
+        assertEquals(new BigInteger("0"), calculator.sumFromString(""));
     }
 
     @Test
@@ -38,7 +38,6 @@ public class CalculatorTest {
 
     @Test
     void 아주_큰_숫자_테스트() {
-        // 매우 큰 숫자 테스트
         assertEquals(new BigInteger("10000000000000000000000000000000000000"),
                 calculator.sumFromString(
                         "5000000000000000000000000000000000000:5000000000000000000000000000000000000"));
