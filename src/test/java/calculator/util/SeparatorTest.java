@@ -79,15 +79,16 @@ public class SeparatorTest {
     }
 
     @Test
-    @DisplayName("커스텀 구분자의 앞부분과 뒷부분이 매칭되지 않는 상황에서 예외를 던진다.")
+    @DisplayName("커스텀 구분자의 앞부분과 뒷부분이 매칭되지 않는 상황에서 숫자로 파싱되지 않은 결과를 반환한다.")
     public void invalidCustomTest() {
         // GIVEN
-        String input = "\\n1//2abc3";
+        String input = "\\n1//213";
 
-        // WHEN - THEN
-        assertThrows(IllegalArgumentException.class, () -> {
-            Separator.separate(input);
-        });
+        // WHEN
+        List<String> stringNumbers = Separator.separate(input);
+
+        // THEN
+        assertThat(stringNumbers).contains(input);
     }
 
     @Test
@@ -108,7 +109,7 @@ public class SeparatorTest {
     @DisplayName("String으로 된 숫자를 파싱한다.")
     public void parseNumberTest() {
         // GIVEN
-        List<String> stringNumbers = List.of("1", "2,", "3", "4", "5");
+        List<String> stringNumbers = List.of("1", "2", "3", "4", "5");
 
         // WHEN
         List<Long> numbers = Separator.parseEachNumber(stringNumbers);
