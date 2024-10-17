@@ -25,4 +25,17 @@ class ParserTest {
         boolean result = Parser.hasCustomDelimiter(delimiter);
         assertThat(result).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "//a\\n1a2a3a1 . a",
+            "//||\\n1||2||3||1 . ||",
+            "// \\n1 2 4 . ' '"},
+            delimiter = '.'
+    )
+    @DisplayName("커스텀 구분자 추출 테스트")
+    void extractCustomDelimiter(String string, String expected){
+        String result = Parser.extractCustomDelimiter(string);
+        assertThat(result).isEqualTo(expected);
+    }
 }
