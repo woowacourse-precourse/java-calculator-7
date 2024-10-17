@@ -47,12 +47,19 @@ public class Application {
 
             for (String delim : customDelimiters) {
                 delimiterPart.append("|").append(toRegex(delim));
+                System.out.println(delimiterPart);
             }
 
             numberPart = input.substring(indexOfEndSign + CUSTOM_DELIMITER_END_SIGN_LENGTH);
         }
 
         String[] numbers = numberPart.split(delimiterPart.toString());
+        /*
+        여러개의 구분자가 연속될 경우 빈 문자열이 리스트에 들어갈 수 있다.
+        e.g. 1,,2,3의 경우 numbers List에는 [1, "", 2, 3] 이 들어가게 된다.
+
+        -> validateNoNegativeNumbers, add 메서드에서 빈 문자열에 대한 처리로직을 추가해주어야한다.
+        */
 
         validateNoNegativeNumbers(numbers); // 음수 있으면 예외 발생 (3.8 예외)
 
@@ -61,10 +68,15 @@ public class Application {
 
     private static void validateNoNegativeNumbers(String[] numbers) {
         if (Arrays.stream(numbers)
+                .filter(Application::isNotEmpty)
                 .mapToInt(Integer::parseInt)
                 .anyMatch(n -> n < 0)) {
             throw new IllegalArgumentException("음수가 입력되었습니다.");
         }
+    }
+
+    private static boolean isNotEmpty(String n) {
+        return !n.trim().isEmpty();
     }
 
     private static String toRegex(String delim) {
@@ -79,6 +91,8 @@ public class Application {
         int result = 0;
 
         for (String number : numbers) {
+            if (number.isEmpty()) continue; // 빈 문자열 무시
+
             result += Integer.parseInt(number);
         }
         return result;
