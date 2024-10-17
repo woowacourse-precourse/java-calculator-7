@@ -39,4 +39,21 @@ class CustomSeparatorTest {
         assertThatThrownBy(() -> customSeparator.separate(value))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = "//;\\n1;a;2")
+    void 문자포함예외(String value) {
+        assertThatThrownBy(() -> customSeparator.separate(value))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = "//;\\n")
+    void 커스텀구분자빈문자열(String value) {
+        List<Number> numbers = customSeparator.separate(value);
+        Number number = numbers.getFirst();
+
+        assertThat(numbers.size()).isEqualTo(1);
+        assertThat(number.getValue()).isEqualTo(0);
+    }
 }

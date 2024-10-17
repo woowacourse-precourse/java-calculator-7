@@ -40,4 +40,21 @@ class BasicSeparatorTest {
         assertThatThrownBy(() -> basicSeparator.separate(value))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = "1.a.2")
+    void 문자포함예외(String value) {
+        assertThatThrownBy(() -> basicSeparator.separate(value))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = "")
+    void 빈문자열(String value) {
+        List<Number> numbers = basicSeparator.separate(value);
+        Number number = numbers.getFirst();
+
+        assertThat(numbers.size()).isEqualTo(1);
+        assertThat(number.getValue()).isEqualTo(0);
+    }
 }
