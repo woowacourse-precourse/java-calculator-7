@@ -53,5 +53,8 @@ public class Application {
         if (!splitString.matches("[0-9]")) {
             throw new IllegalArgumentException("분리된 문자는 숫자(0, 1, ..., 9 중 하나)여야 합니다.");
         }
+        if (splitString.equals("0")) {
+            throw new IllegalArgumentException("구분자와 양수로만 이루어진 문자열을 입력해야 합니다.");
+        }
     }
 }
