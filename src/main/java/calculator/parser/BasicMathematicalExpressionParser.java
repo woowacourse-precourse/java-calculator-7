@@ -1,11 +1,13 @@
 package calculator.parser;
 
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 public class BasicMathematicalExpressionParser implements MathematicalExpressionParser {
 
 
 	public static final String BASIC_VALID_MATHEMATICAL_EXPRESSION_PATTERN = "(\\d+\\D)*\\d+$";
+	private static final Pattern VALID_PATTERN = Pattern.compile(BASIC_VALID_MATHEMATICAL_EXPRESSION_PATTERN);
 
 	private long stringNumberToNumber(String stringNumber) {
 		try {
@@ -21,7 +23,7 @@ public class BasicMathematicalExpressionParser implements MathematicalExpression
 	}
 
 	private void isValid(String expression){
-		if(!expression.matches(BASIC_VALID_MATHEMATICAL_EXPRESSION_PATTERN)){
+		if(!VALID_PATTERN.matcher(expression).matches()){
 			throw new IllegalArgumentException("수식의 형태가 유효하지 않습니다.");
 		}
 	}
