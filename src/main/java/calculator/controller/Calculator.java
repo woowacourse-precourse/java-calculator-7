@@ -23,10 +23,10 @@ public class Calculator {
     public void run() {
         String userInput = getUserInput();
 
-        Delimiters delimiters = Delimiters.fromInput(userInput);
+        Delimiters delimiters = Delimiters.from(userInput);
         Numbers numbers = extractNumbers(userInput, delimiters);
 
-        outputHandler.showResultMessage(numbers.totalSum());
+        outputHandler.showResultMessageWith(numbers.totalSum());
     }
 
     private Numbers extractNumbers(String userInput, Delimiters delimiters) {

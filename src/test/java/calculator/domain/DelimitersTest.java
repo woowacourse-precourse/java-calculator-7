@@ -15,7 +15,7 @@ class DelimitersTest {
         //given
         String customDelimiterString = "//;\\n1;2;3";
         //when
-        Delimiters delimiters = Delimiters.fromInput(customDelimiterString);
+        Delimiters delimiters = Delimiters.from(customDelimiterString);
         //then
         assertThat(delimiters)
             .extracting("delimiters").isEqualTo(Set.of(";"));
@@ -27,7 +27,7 @@ class DelimitersTest {
         //given
         String defaultDelimiterString = "1,2:3";
         //when
-        Delimiters delimiters = Delimiters.fromInput(defaultDelimiterString);
+        Delimiters delimiters = Delimiters.from(defaultDelimiterString);
         //then
         assertThat(delimiters)
             .extracting("delimiters").isEqualTo(Set.of(",", ":"));

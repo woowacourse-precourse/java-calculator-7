@@ -9,7 +9,7 @@ public class OutputHandler {
         System.out.println(INITIAL_MESSAGE);
     }
 
-    public void showResultMessage(int result) {
+    public void showResultMessageWith(int result) {
         System.out.println(RESULT_MESSAGE + result);
     }
 

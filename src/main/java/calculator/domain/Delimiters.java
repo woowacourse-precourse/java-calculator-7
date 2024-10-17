@@ -20,7 +20,7 @@ public class Delimiters {
         this.delimiters = new HashSet<>(Set.of(delimiter));
     }
 
-    public static Delimiters fromInput(String input) {
+    public static Delimiters from(String input) {
         Matcher matcher = CUSTOM_REGEX_PATTERN.matcher(input);
         if (matcher.find()) {
             return new Delimiters(matcher.group(1));
