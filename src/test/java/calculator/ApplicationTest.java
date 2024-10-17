@@ -49,6 +49,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 연속된_숫자_입력_공백_포함() {
+        assertSimpleTest(() -> {
+            run(" 123");
+            assertThat(output()).contains("결과 : 123");
+        });
+    }
+
+    @Test
     void 기본_구분자_쉼표_사용() {
         assertSimpleTest(() -> {
             run("1,2,3");
@@ -97,6 +105,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자_마이너스_사용() {
+        assertSimpleTest(() -> {
+            run("//-\\n1-2-3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
     void 예외_음수_포함() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))
@@ -105,9 +121,25 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 예외_연속된_숫자_음수() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("-123"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
     void 예외_문자_포함() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1,a,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_커스텀_구분자_마이너스_음수() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//-\\n-1-2-3"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
