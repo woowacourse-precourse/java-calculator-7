@@ -16,7 +16,7 @@ public class DelimiterParser {
             String customDelimiter = parts[0].substring(2);
             inputValidator.validateCustomDelimiter(customDelimiter);
             inputValidator.validateInputContent(parts[1], customDelimiter);
-            return parts[1].split(customDelimiter);
+            return inputValidator.splitByDelimiter(parts[1], customDelimiter);
         }
 
         inputValidator.validateDefaultDelimiterContent(input);
