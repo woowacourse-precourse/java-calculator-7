@@ -5,14 +5,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CalculatorModel {
-    private ArrayList<String> delimiterList;
-    private final String customDelimiterRegex = "//(.)\n";
-    private ArrayList<Integer> numberList;
+    private static ArrayList<Character> delimiterList;
+    private static final String customDelimiterRegex = "^//(.)\\\\n";
+    private static ArrayList<Integer> numberList;
 
     public CalculatorModel() {
         delimiterList = new ArrayList<>();
-        delimiterList.add(",");
-        delimiterList.add(":");
+        delimiterList.add(',');
+        delimiterList.add(';');
         numberList = new ArrayList<>();
     }
 
@@ -22,7 +22,7 @@ public class CalculatorModel {
         Matcher matcher = pattern.matcher(input);
 
         if (matcher.matches()) {
-            String delimiter = matcher.group(1);
+            char delimiter = matcher.group(1).toCharArray()[0];
             setDelimiter(delimiter);
             return matcher.group(2);
         } else {
@@ -31,7 +31,7 @@ public class CalculatorModel {
     }
 
     //구분자 추가하기
-    public void setDelimiter(String delimiter) {
+    public void setDelimiter(char delimiter) {
         delimiterList.add(delimiter);
     }
 
@@ -45,9 +45,11 @@ public class CalculatorModel {
         StringBuilder numberString = new StringBuilder();
 
         for (char ch : input.toCharArray()) {
-            if (delimiterList.contains(String.valueOf(ch)) && (!numberString.isEmpty())) {
-                numberList.add(Integer.parseInt(numberString.toString()));
-                numberString.setLength(0);
+            if (delimiterList.contains(ch)) {
+                if (!numberString.isEmpty()) {
+                    numberList.add(Integer.parseInt(numberString.toString()));
+                    numberString.setLength(0);
+                }
             } else if (!Character.isDigit(ch)) {
                 throw new IllegalArgumentException("Invalid input");
             } else {
@@ -55,7 +57,7 @@ public class CalculatorModel {
             }
         }
 
-        if (!numberList.isEmpty()) {
+        if (!numberString.isEmpty()) {
             numberList.add(Integer.parseInt(numberString.toString()));
             numberString.setLength(0);
         }
