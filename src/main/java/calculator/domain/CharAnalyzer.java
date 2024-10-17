@@ -26,23 +26,24 @@ public class CharAnalyzer {
 
         if (input.startsWith("//", currentIndex)) {
             processCustomDelimiter();
-        } else {
-            char currentChar = input.charAt(currentIndex);
-            currentIndex++;
+            return;
+        }
 
-            if (isPositiveNumber(currentChar)) {
-                System.out.println(currentChar + "는 양수입니다.");
-            } else if (isDelimiter(currentChar)) {
-                System.out.println(currentChar + "는 구분자입니다.");
-            } else {
-                throw new IllegalArgumentException(currentChar + "는 유효하지 않은 입력입니다.");
-            }
+        char currentChar = input.charAt(currentIndex);
+        currentIndex++;
+
+        if (isPositiveNumber(currentChar)) {
+            System.out.println(currentChar + "는 양수입니다.");
+        } else if (isDelimiter(currentChar)) {
+            System.out.println(currentChar + "는 구분자입니다.");
+        } else {
+            System.out.println(currentChar + "는 양수, 구분자가 아닙니다");
         }
     }
 
     private void processCustomDelimiter() {
         customDelimiter.registerCustomDelimiter(input.substring(currentIndex), delimiter);
-        currentIndex = input.indexOf("\n", currentIndex) + 1;
+        currentIndex = input.indexOf("\\n", currentIndex) + 1;
     }
 
     private boolean isPositiveNumber(char ch) {
