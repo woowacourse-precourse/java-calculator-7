@@ -45,11 +45,10 @@ class ApplicationTest extends NsTest {
     @Test
     void isPositiveNum_예외_테스트(){
         //given
-        Calculator calculator = new Calculator("10");
         String toBeChecked = "-1";
 
         //when & then
-        assertThatThrownBy(() -> calculator.isPositiveNum(toBeChecked))
+        assertThatThrownBy(() -> CheckIsPositiveNum.isPositiveNum(toBeChecked))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
