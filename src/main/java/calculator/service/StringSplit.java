@@ -53,7 +53,11 @@ public class StringSplit {
     private ArrayList<Integer> convertOperandsToInt(String[] stringOperands) {
         ArrayList<Integer> intOperands = new ArrayList<>();
         for (String stringOperand : stringOperands) {
-            intOperands.add(Integer.valueOf(stringOperand));
+            if (stringOperand.equals("")) {
+                intOperands.add(0);
+            } else {
+                intOperands.add(Integer.valueOf(stringOperand));
+            }
         }
         return intOperands;
     }
