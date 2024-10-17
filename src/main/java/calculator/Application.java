@@ -2,6 +2,8 @@ package calculator;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        // 1. 입력받기
+        InputHandler inputHandler = new InputHandler();
+        String input = inputHandler.getInput();
     }
 }
