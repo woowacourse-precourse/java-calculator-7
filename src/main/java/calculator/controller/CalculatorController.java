@@ -22,6 +22,11 @@ public class CalculatorController {
     }
 
     public List<String> getNumbersList(String consoleInput) {
+        if (consoleInput.startsWith("//")) {
+            int customIndex = consoleInput.indexOf("\\n");
+            String customSeperator = consoleInput.substring(2, customIndex + 1);
+            return List.of(consoleInput.split(customSeperator));
+        }
         return List.of(consoleInput.split("[,:]"));
     }
 }
