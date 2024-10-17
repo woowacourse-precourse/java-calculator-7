@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class Calculator {
 
     private static final String REGEX = "//(.)\n(.*)";
-    private static final String DEFAULT_DELIMITERS = ",|;";
+    private static final String DEFAULT_DELIMITERS = ",|:";
     private static final String ILLEGAL_ARGUMENT_EXCEPTION_CONTENT = "구분자와 양수만 입력 가능합니다.";
 
     private final List<Integer> numbers;
