@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class ApplicationTest extends NsTest {
 
     @Test
-    void 사용자_입력_숫자_추출() {
+    void 숫자_추출() {
         String input = "1,2,3";
         int[] result = Application.extractNumbers(input, Application.separators);
         assertThat(result).contains(1, 2, 3);
@@ -45,6 +45,14 @@ class ApplicationTest extends NsTest {
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+    @Test
+    void 출력_형식() {
+        assertSimpleTest(() -> {
+            run("///\\n1/2,3;4");
+            assertThat(output()).contains("1/2,3;4\n" + "결과 : 10");
+        });
     }
 
     @Override
