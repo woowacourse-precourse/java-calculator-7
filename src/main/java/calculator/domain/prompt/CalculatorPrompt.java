@@ -1,6 +1,7 @@
 package calculator.domain.prompt;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CalculatorPrompt extends Prompt {
@@ -21,6 +22,7 @@ public class CalculatorPrompt extends Prompt {
         }
 
         if (splitData[0].startsWith("//")) {
+            System.out.println(Arrays.toString(splitData));
             return this.separate(splitData[1], inputData.charAt(2));
         }
         return this.separate(splitData[0]);
