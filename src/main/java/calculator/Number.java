@@ -27,7 +27,8 @@ public class Number {
     }
 
     public Number plus(Number number) {
-        this.value = value.add(number.value);
+        value = value.add(number.value);
+        validateDigits(value);
         return this;
     }
 
