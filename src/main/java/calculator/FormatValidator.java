@@ -63,7 +63,7 @@ public class FormatValidator {
         }
 
         return !Character.isDigit(formula.charAt(customSeparateIdx))
-            && formula.indexOf("\\n") == lastFormatStartIdx
+            && CustomFormulaFormat.hasLastFormat(formula, lastFormatStartIdx)
             && Character.isDigit(formula.charAt(formulaStartIdx));
     }
 
@@ -77,6 +77,6 @@ public class FormatValidator {
     }
 
     private boolean isCustomStart(String formula) {
-        return formula.startsWith("//");
+        return CustomFormulaFormat.hasFirstFormat(formula);
     }
 }

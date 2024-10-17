@@ -28,7 +28,7 @@ public class FormulaSeparator {
     }
 
     private boolean hasCustomSeparate(String formula) {
-        return formula.startsWith("//");
+        return CustomFormulaFormat.hasFirstFormat(formula);
     }
 
     private List<Integer> parseNumbers(String formula) {
