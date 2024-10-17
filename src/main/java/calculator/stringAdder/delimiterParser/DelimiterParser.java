@@ -1,29 +1,28 @@
 package calculator.stringAdder.delimiterParser;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * @author : jiffyin7@gmail.com
  * @since : 24. 10. 16.
  */
 public class DelimiterParser {
   private static final String[] DEFAULT_DELIMITERS = {",", ":"};
-  private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)n(.*)");
+  private static final String CUSTOM_DELIMITER_PREFIX = "//";
+  private static final int CUSTOM_DELIMITER_INDEX = 2;
+  private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
 
   public String[] getDelimiters(String input) {
-    if (input.startsWith("//")){
-      Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
-      if (matcher.matches()) {
-        String[] customDelimiters = new String[]{ DEFAULT_DELIMITERS[0],
-                                                      DEFAULT_DELIMITERS[1],
-                                                      matcher.group(1)};
-        return customDelimiters;
-      }
-      else {
-        throw new IllegalArgumentException(this.getClass().getSimpleName()+ ": 커스텀 구분자를 찾을 수 없습니다.");
-      }
+    if (!input.startsWith(CUSTOM_DELIMITER_PREFIX)){
+      return DEFAULT_DELIMITERS;
     }
-    return DEFAULT_DELIMITERS;
+
+    if (input.length() <= 3 || input.charAt(3) != CUSTOM_DELIMITER_SUFFIX.charAt(0)) {
+      throw new IllegalArgumentException(this.getClass().getSimpleName() + ": 올바르지 않은 커스텀 구분자 설정입니다.");
+    }
+
+    String[] customDelimiters = new String[]{ DEFAULT_DELIMITERS[0],
+                                              DEFAULT_DELIMITERS[1],
+                                              String.valueOf(input.charAt(CUSTOM_DELIMITER_INDEX))};
+
+    return customDelimiters;
   }
 }
