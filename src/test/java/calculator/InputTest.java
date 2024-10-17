@@ -34,7 +34,7 @@ public class InputTest {
     @Test
     public void inputContainEnter() {
         // given
-        Input input = new Input("//1\n2,3");
+        Input input = new Input("//;\n2,3");
 
         // when
         boolean isStart = input.getInput().startsWith("//");
