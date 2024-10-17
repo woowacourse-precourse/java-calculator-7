@@ -31,7 +31,14 @@ public class Separator {
     // 구분자 검증 메소드 추가
     public void validateSeparators(String input) {
         if (!isOnlyDefaultSeparators(input)) {
-            throw new IllegalArgumentException("입력에서 커스텀 구분자 지정이 이루어지지 않았습니다.");
+            throw new IllegalArgumentException("올바르지 않은 입력입니다.");
+        }
+    }
+
+    //구분자가 공백인지 확인한다.
+    public void validateCustomEmpty(String input) {
+        if (input.isEmpty()) {
+            throw new IllegalArgumentException("커스텀 문자가 공백입니다.");
         }
     }
 }

@@ -4,21 +4,29 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Input {
 
-    private String firstInput;
-    private String secondInput;
+    private static String firstInput;
+    private static String secondInput;
 
 
     public void readFirstInput() {
         firstInput = Console.readLine();
     }
 
-    public String getFirstInput() { //???
-        return firstInput;
+    public void readSecondInput() {
+        secondInput = Console.readLine();
     }
 
     // 입력이 기본 형식인지 커스텀 형식인지 판단하는 메소드
     public boolean isDefaultInput() {
-        return !firstInput.startsWith("//");
+        if (firstInput.startsWith("//")) {
+            firstInput = firstInput.substring(2);
+            return false;
+        }
+        return true;
+    }
+
+    public String getFirstInput() { //???
+        return firstInput;
     }
 
 
