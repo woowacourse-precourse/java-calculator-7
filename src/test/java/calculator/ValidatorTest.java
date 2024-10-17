@@ -13,5 +13,11 @@ class ValidatorTest {
             Validator.validateIfInputNegative(List.of(1, -1, 1));
         });
     }
+    @Test
+    void validateIfNotNumber() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Validator.validateIfNotNumber("@");
+        });
+    }
 
 }
