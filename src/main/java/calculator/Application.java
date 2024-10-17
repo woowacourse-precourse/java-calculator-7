@@ -35,18 +35,18 @@ public class Application {
     public static List<Long> extractNumber(String calcFormula, String customSeparator) {
         String substring = calcFormula.substring(customSeparator.length() * 5);
 
-        List<Long> numbers = Arrays.stream(substring.split("[" + customSeparator + ":,]"))
+        return Arrays.stream(substring.split("[" + customSeparator + ":,]"))
                 .map(Long::parseLong)
+                .filter(n -> {
+                    if (checkNegativeNumber(n))
+                        throw new IllegalArgumentException("음수는 입력으로 들어오지 못합니다.");
+                    return true;
+                })
                 .toList();
+    }
 
-        numbers.stream()
-                .filter(n -> n < 0L)
-                .findAny()
-                .ifPresent(e -> {
-                    throw new IllegalArgumentException("음수는 입력으로 들어오지 못합니다.");
-                });
-
-        return numbers;
+    public static boolean checkNegativeNumber(long number) {
+        return number < 0;
     }
 
     public static long calcNumbers(List<Long> numbers) {
