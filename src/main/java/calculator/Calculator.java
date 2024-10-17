@@ -34,12 +34,13 @@ public class Calculator {
     }
 
     private static int[] getCustomSeparatorNumbers(String input){
-        char custom = input.charAt(2);
-        String customString = input.substring(5);
-        String[] customSeparator = customString.split(String.valueOf(custom));
+        input = input.replace("//","").replace("\\n","");
+        String separator = input.substring(0, 1);
+        input = input.substring(1);
+        String[] customSeparator = input.split(separator);
 
         int[] customNumberSeparator = new int[customSeparator.length];
-        for (int i = 0; i < customSeparator.length; i++) { // 숫자는 양수!! 예외 처리
+        for (int i = 0; i < customSeparator.length; i++) {
             customNumberSeparator[i] = Integer.parseInt(customSeparator[i]);
             isPositiveNumber(customNumberSeparator, i);
         }
