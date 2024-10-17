@@ -2,8 +2,8 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
-public class Application {
 
+public class Application {
     public static void main(String[] args) {
         Application app = new Application();
         // 사용자의 입력을 받는다.
@@ -19,11 +19,8 @@ public class Application {
 
     // 구분자에 따라 문자열을 분리하는 메서드
     public String[] splitByDelimiter(String str) {
-        if (str.startsWith("//")) {
-            return customSplit(str);
-        } else {
-            return defaultSplit(str);
-        }
+        if (str.startsWith("//")) return customSplit(str);
+        else return defaultSplit(str);
     }
 
     // Default
