@@ -14,4 +14,8 @@ public class Application {
     private String getUserInput() {
         return Console.readLine();
     }
+
+    public String removeNumber(String initialStr) {
+        return initialStr.replaceAll("[0-9]", "");
+    }
 }
