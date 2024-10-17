@@ -28,7 +28,7 @@ public class StringCalculator {
             }
             return sum;
         } catch (NumberFormatException e) {
-            throw new NumberFormatException(EXCEPTION_STRING_NUMBER);
+            throw new IllegalArgumentException(EXCEPTION_STRING_NUMBER);
         }
     }
 
