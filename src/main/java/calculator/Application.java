@@ -9,6 +9,7 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         Calculator calc = new Calculator();
+        //System.out.println("결과 : "+calc.sum());
     }
 }
 
@@ -16,13 +17,14 @@ class Calculator {
 
     static Str str;
     static Delimiters delimiters;
-    //static Numbers numbers;
+    static Numbers numbers;
 
     Calculator() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         str = new Str(Console.readLine());
         delimiters = getDelimiter();
-        //numbers = getNumbers();
+        StrArr strArr = str.getSplitString();
+        numbers = strArr.strArrToNumbers();
     }
 
     public static Delimiters getDelimiter() {
@@ -36,12 +38,11 @@ class Calculator {
         delimiterList.add(':');
         return new Delimiters(delimiterList);
     }
-
     /*
-    public static Numbers getNumbers(){
-
+    public int sum(){
+        return numbers.sum();
     }
-     */
+    */
 }
 
 class Str {
@@ -50,7 +51,6 @@ class Str {
 
     Str(String string) {
         this.string = string;
-        //getSplitString().checkingRightInput();
     }
 
     boolean checkingCustomDelimiter() {
@@ -63,20 +63,19 @@ class Str {
         return string.charAt(2);
     }
 
-    /*
     StrArr getSplitString() {
         String[] strings;
 
         if (checkingCustomDelimiter()) {
+            char customDelimiter = getCustomDelimiter();
             string = string.substring(5);
-            strings = string.split(String.valueOf(getCustomDelimiter()));
+            strings = string.split(String.valueOf(customDelimiter));
             return new StrArr(strings);
         }
 
         strings = string.split(",|:");
         return new StrArr(strings);
     }
-     */
 
 }
 
@@ -112,9 +111,21 @@ class StrArr {
         return true;
     }
 
+    public Numbers strArrToNumbers() {
+        if (!checkingRightInput()) {
+            throw new IllegalArgumentException();
+        }
+
+        List<Integer> numberList = new ArrayList<>();
+        for (String string : stringArr) {
+            numberList.add(Integer.parseInt(string));
+        }
+
+        return new Numbers(numberList);
+    }
 }
 
-/*
+
 class Numbers {
 
     private List<Integer> numberList;
@@ -122,6 +133,11 @@ class Numbers {
     public Numbers(List<Integer> numberList) {
         this.numberList = numberList;
     }
+
+    /*
+    public int sum(){
+        return numberList.stream().mapToInt(i->i).sum();
+    }
+    */
 }
 
- */
