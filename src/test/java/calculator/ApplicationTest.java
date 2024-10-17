@@ -224,4 +224,12 @@ class ApplicationTest extends NsTest {
                 assertThatThrownBy(() -> runException("1.5,2.3"))
                         .isInstanceOf(IllegalArgumentException.class));
     }
+
+    @Test
+    void 빈문자열_사이_숫자() {
+        assertSimpleTest(() -> {
+            run("   1:2:3:4:   ");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
 }
