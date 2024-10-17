@@ -10,7 +10,12 @@ public class Application {
         int sum = 0;
 
         if (!userText.isEmpty() && !userText.isBlank()) {
-            // TODO: 입력값이 빈 문자열이 아닐 때
+            String[] splitTexts = userText.split(",|:");
+
+            for (String text : splitTexts) {
+                int numberText = Integer.parseInt(text);
+                sum += numberText;
+            }
         }
 
         System.out.println("결과 : " + sum);
