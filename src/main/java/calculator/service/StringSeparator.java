@@ -34,9 +34,13 @@ public class StringSeparator {
         for (int i = 0; i < str.length(); i++) {
             char nowChar = str.charAt(i);
             if (isNumber(nowChar)) {
-                if (!separator.isEmpty() && !isSeparator(separator)) {
-                    calculator.addSeparator(separator);
-                    separator = "";
+                if (!separator.isEmpty()) {
+                    if (isSeparator(separator)) {
+                        calculator.addSeparator(separator);
+                        separator = "";
+                    } else {
+                        throw new IllegalArgumentException("잘못된 입력입니다.");
+                    }
                 }
                 number += nowChar;
             } else {
