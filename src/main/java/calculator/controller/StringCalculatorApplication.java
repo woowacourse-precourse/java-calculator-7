@@ -6,18 +6,18 @@ import calculator.view.ApplicationView;
 public class StringCalculatorApplication implements CalculatorApplication {
 
     private final ApplicationView applicationView;
-    private final Calculator caclulator;
+    private final Calculator caculator;
 
-    public StringCalculatorApplication(ApplicationView applicationView, Calculator caclulator) {
+    public StringCalculatorApplication(ApplicationView applicationView, Calculator caculator) {
         this.applicationView = applicationView;
-        this.caclulator = caclulator;
+        this.caculator = caculator;
     }
 
     @Override
     public void run() {
         try {
             String responseValue = applicationView.requestValue();
-            int result = caclulator.calculate(responseValue);
+            int result = caculator.calculate(responseValue);
             applicationView.printResult(result);
         } catch (IllegalArgumentException e) {
             applicationView.printError(e.getMessage());
