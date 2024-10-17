@@ -8,7 +8,7 @@ public class Application {
         String input = Console.readLine(); //사용자입력
 
         String[] parts = splitInput(input); // 입력을 구분자로 나누기
-        int sum = sumNumbers(parts); // 숫자들을 더하기
+        int sum = sumNumbers(parts);
         System.out.println("합계: " + sum);
     }
 
@@ -25,6 +25,18 @@ public class Application {
             sum += Integer.parseInt(part);
         }
         return sum;
+    }
+
+    //나눠진 문자들이 전부 숫자인지 확인하는 메서드
+    public static boolean isNum(String[] parts) {
+        for (String part : parts) {
+            for (char c : part.toCharArray()) {
+                if (!Character.isDigit(c)) {
+                    return false; // 숫자가 아닌 문자가 있으면 false
+                }
+            }
+        }
+        return true;
     }
 
 
