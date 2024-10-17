@@ -32,6 +32,7 @@ public class Application {
 
         String customDelimiterPattern= null;
         List<Long> values = new ArrayList<>();
+        Long result = 0L;
 
         // 3. 커스텀 구분자 저장
         while (inputString.startsWith(CUSTOM_DELIMITER_PREFIX)) { //  "//"로 시작하는지 확인 -> 무조건 뒤에 "\n"이 있어야함
@@ -87,6 +88,16 @@ public class Application {
                 throw new IllegalArgumentException();
             values.add(longValue);
         }
+
+
+        for (Long value : values) {
+            result += value;
+        }
+        if(result < 0)
+            throw new IllegalArgumentException();
+
+        System.out.println(OUTPUT_MESSAGE + result);
+
 
     }
 }
