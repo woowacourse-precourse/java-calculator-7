@@ -9,6 +9,7 @@
 - Adder 클래스 : 토큰화한 숫자들을 더하는 부분
 - Numberlist 클래스 : 숫자들을 리스트로 저장하는 부분
 - Divider 클래스 : 구분자들을 리스트로 저장하고 올바른지 확인하는 부분
+- IsError 클래스 : 문자열을 확인하고 오류가 있는지 확인하는 부분
 
 ### 커밋 해야할 기능 목록
 1. Readme 작성
@@ -18,5 +19,5 @@
 5. Calculation 클래스 구현
 6. Adder 클래스 구현
 7. Tokenizer 클래스 구현
-8. numberlist, divider 클래스 구현
+8. numberlist, divider, IsError 클래스 구현
 
