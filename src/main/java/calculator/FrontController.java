@@ -5,7 +5,6 @@ import calculator.controller.CalculatorController;
 import calculator.dto.CalculationResultDTO;
 import calculator.view.InputView;
 import calculator.view.OutputView;
-import camp.nextstep.edu.missionutils.Console;
 
 public final class FrontController {
     private final CalculatorController calculatorController;
@@ -18,6 +17,5 @@ public final class FrontController {
         String input = InputView.enterNumbers();
         CalculationResultDTO resultDTO = calculatorController.calculate(input);
         OutputView.printResult(resultDTO);
-        Console.close();
     }
 }
