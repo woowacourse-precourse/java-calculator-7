@@ -11,7 +11,7 @@ public class InputService {
     private char customDelimiter; // 사용자가 입력한 커스텀 구분자
 
     public InputService() {
-        this.userInput = "1:2:3,,,,4:,:,:,1";
+        this.userInput = "//:\n";
     }
 
     // 사용자의 입력을 받는다.
@@ -32,28 +32,36 @@ public class InputService {
     }
 
     // 커스텀 구분자가 없을 때, 문자열에서 숫자들을 분리해서 저장한다.
-    public String[] separateNumberWithDefaultDelimiter() {
-
-        List<String> numbers = new ArrayList<>();
+    public String[] separateNumberWithDefaultDelimiter() throws IllegalArgumentException {
         // ,와 :를 사용해서 분리한다.
         String[] parts = userInput.split("[,:]");
 
-        // 분리한 각 String이 숫자인지 확인한다.
-        for (String part : parts) {
-            if (part.matches("\\d+"))
-                numbers.add(part);
-        }
-
-        return numbers.toArray(String[]::new);
+        // 분리한 각 String이 올바른 입력 형태의 숫자인지 확인한다.
+        return isWrongInput(parts);
     }
 
     // 커스텀 구분자 이후의 문자열에서 숫자들을 분리해서 저장한다.
     public String[] separateNumberWithCustomDelimiter() {
         String afterCustomDelimiter = this.userInput.substring(4);
-        return afterCustomDelimiter.split(String.valueOf(customDelimiter));
+        String[] parts = afterCustomDelimiter.split(String.valueOf(customDelimiter));
+
+        // 분리한 각 String이 올바른 입력 형태의 숫자인지 확인한다.
+        return isWrongInput(parts);
     }
 
-    public char getCustomDelimiter() {
-        return this.customDelimiter;
+    // 기능 4-1 : 구분자를 제외한 다른 문자가 있는지 확인한다.
+    private String[] isWrongInput(String[] parts) {
+        List<String> numbers = new ArrayList<>();
+        for (String part : parts) {
+            // 구분자로 분리하는 과정에서 빈 문자열이 생길 수도 있으니, 제외한다.
+            if (!part.isEmpty()) {
+                if (part.matches("\\d+")) {
+                    numbers.add(part);
+                } else {
+                    throw new IllegalArgumentException("구분자가 아닌 문자가 포함되어 있습니다");
+                }
+            }
+        }
+        return numbers.toArray(String[]::new);
     }
 }
