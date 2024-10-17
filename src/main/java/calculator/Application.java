@@ -75,4 +75,24 @@ class Machine {
 
         return string.split(regex);
     }
+
+    private static int sum(String[] strArray) {
+        int result = 0;
+
+        for (String str : strArray) {
+            // 빈 문자열은 0으로 취급
+            if (str.isEmpty()) {
+                continue;
+            }
+            // 양수 형식이 아닌 문자열일 시 예외 처리
+            if (!str.matches("[0-9.]+")) {
+                throw new IllegalArgumentException("양수가 아닌 형태의 문자열");
+            }
+
+            int num;
+            num = Integer.parseInt(str);
+            result += num;
+        }
+        return result;
+    }
 }
