@@ -29,6 +29,11 @@ class ApplicationTest extends NsTest {
         assertThat(Application.isStringWithCustomDelimiter("//a\\n1a2a3")).isEqualTo(true);
     }
 
+    @Test
+    void 입력받은_문자열이_커스텀_구분자를_고려해야_하는_문자열이_아닌_경우() {
+        assertThat(Application.isStringWithCustomDelimiter("1,2,3")).isEqualTo(false);
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
