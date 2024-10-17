@@ -9,7 +9,7 @@ public class Application {
         String inputString = readLine();
 
         if(!checkEmpty(inputString)){
-            System.exit(1);
+            return;
         }
     }
 
