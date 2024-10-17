@@ -1,17 +1,13 @@
 package calculator.util;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ValidationUtils {
 
+    private static final List<String> DISALLOWED_CHARACTERS = List.of("\n", "\t", "\r");
+
     private ValidationUtils() {
         throw new IllegalStateException("Utility class");
-    }
-
-    public static void validateNumbers(List<Integer> numbers) {
-        validateNegativeNumbers(numbers);
-        validateZero(numbers);
     }
 
     public static void validateCustomDelimiter(String delimiter) {
@@ -28,24 +24,18 @@ public class ValidationUtils {
         }
     }
 
-    private static void validateNegativeNumbers(List<Integer> numbers) {
-        List<Integer> negativeNumbers = new ArrayList<>();
+    public static void validatePositiveNumbers(List<Integer> numbers) {
+        List<Integer> invalidNumbers = findNonPositiveNumbers(numbers);
 
-        for (int number : numbers) {
-            if (number < 0) {
-                negativeNumbers.add(number);
-            }
-        }
-
-        if (!negativeNumbers.isEmpty()) {
-            throw new IllegalArgumentException("음수는 허용되지 않습니다. 문제가 되는 입력값: " + negativeNumbers);
+        if (!invalidNumbers.isEmpty()) {
+            throw new IllegalArgumentException("구분자와 양수만 입력 가능합니다. 문제가 되는 입력값: " + invalidNumbers);
         }
     }
 
-    private static void validateZero(List<Integer> numbers) {
-        if (numbers.contains(0)) {
-            throw new IllegalArgumentException("0은 허용되지 않습니다. 문제가 되는 입력값: [0]");
-        }
+    private static List<Integer> findNonPositiveNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .filter(number -> number <= 0)
+                .toList();
     }
 
     private static void validateNullOrEmpty(String delimiter) {
@@ -61,9 +51,7 @@ public class ValidationUtils {
     }
 
     private static void validateAllowedCharacters(String delimiter) {
-        List<String> disallowedCharacters = List.of("\n", "\t", "\r");
-
-        if (disallowedCharacters.stream().anyMatch(delimiter::contains)) {
+        if (DISALLOWED_CHARACTERS.stream().anyMatch(delimiter::contains)) {
             throw new IllegalArgumentException("유효하지 않은 커스텀 구분자입니다. 허용되지 않는 문자가 포함되어 있습니다. 문제가 되는 입력값: [" + delimiter + "]");
         }
     }

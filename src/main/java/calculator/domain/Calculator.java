@@ -12,7 +12,7 @@ public class Calculator {
     private static final String DEFAULT_DELIMITER_COMMA = ",";
     private static final String DEFAULT_DELIMITER_COLON = ":";
     private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\\\\n";
-    private static final int CUSTOM_DELIMITER_THRESHOLD = 2;
+    private static final int DEFAULT_DELIMITER_COUNT = 2;
 
     public int splitAndSum(String input) {
         if (isEmptyInput(input)) {
@@ -50,7 +50,7 @@ public class Calculator {
     }
 
     private String extractNumbers(String input, int delimiterCount) {
-        if (delimiterCount > CUSTOM_DELIMITER_THRESHOLD) {
+        if (delimiterCount > DEFAULT_DELIMITER_COUNT) {
             int lastDelimiterIndex = input.lastIndexOf("\\n");
             return input.substring(lastDelimiterIndex + 2);
         }
@@ -69,7 +69,7 @@ public class Calculator {
             }
         }
 
-        ValidationUtils.validateNumbers(parsedNumbers);
+        ValidationUtils.validatePositiveNumbers(parsedNumbers);
         return sum;
     }
 
