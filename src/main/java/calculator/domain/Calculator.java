@@ -39,12 +39,15 @@ public class Calculator {
             if (checkOtherDivision(input, customDivision)) {
                 throw new IllegalArgumentException("기본 구분자 외 구분자가 포함되어있습니다.");
             }
-        } else {
-            if (input.substring(PREFIX_DIVISION_INDEX, NEXT_DIVISION_INDEX + 1).equals("\\n")) {
-                throw new IllegalArgumentException("커스텀 구분자가 누락되었습니다.");
-            } else if (checkOtherDivision(input, customDivision)) {
-                throw new IllegalArgumentException("커스텀 구분자 외 구분자가 포함되어있습니다.");
-            }
+            return;
+        }
+
+        if (input.substring(PREFIX_DIVISION_INDEX, NEXT_DIVISION_INDEX + 1).equals("\\n")) {
+            throw new IllegalArgumentException("커스텀 구분자가 누락되었습니다.");
+        }
+
+        if (checkOtherDivision(input, customDivision)) {
+            throw new IllegalArgumentException("커스텀 구분자 외 구분자가 포함되어있습니다.");
         }
     }
 
@@ -55,14 +58,16 @@ public class Calculator {
                     return true;
                 }
             }
-        } else {
-            input = input.substring(START_NUMBER_INDEX);
-            for (char ch : input.toCharArray()) {
-                if (!Character.isDigit(ch) && customDivision.charAt(0) != ch) {
-                    return true;
-                }
+            return false;
+        }
+
+        input = input.substring(START_NUMBER_INDEX);
+        for (char ch : input.toCharArray()) {
+            if (!Character.isDigit(ch) && customDivision.charAt(0) != ch) {
+                return true;
             }
         }
+
         return false;
     }
 
@@ -70,11 +75,11 @@ public class Calculator {
         String[] numbers;
         if (customDivision.isEmpty()) {
             numbers = input.split(",|:");
-        } else {
-            input = input.substring(START_NUMBER_INDEX);
-            String regexSafeDivision = customDivision.replaceAll("([\\\\.*+?^${}()|\\[\\]])", "\\\\$1");
-            numbers = input.split(regexSafeDivision);
         }
+
+        input = input.substring(START_NUMBER_INDEX);
+        String regexSafeDivision = customDivision.replaceAll("([\\\\.*+?^${}()|\\[\\]])", "\\\\$1");
+        numbers = input.split(regexSafeDivision);
         return numbers;
     }
 
