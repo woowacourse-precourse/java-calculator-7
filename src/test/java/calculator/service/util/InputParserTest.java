@@ -44,4 +44,14 @@ class InputParserTest {
         assertThat(result)
                 .isEmpty();
     }
+
+    @Test
+    @DisplayName("기본 구분자가 포함된 입력에 대한 예외 테스트")
+    void parseInvalidWithDefaultDelimitersTest() {
+        CalculatorRequest request = CalculatorRequest.of(",|:", "1,2,");
+
+        assertThatThrownBy(() -> InputParser.parseByDelimiters(request))
+                .isInstanceOf(CalculatorException.class)
+                .hasMessage(CalculatorErrorMessage.NOT_NUMBER_ERROR.getMessage());
+    }
 }
