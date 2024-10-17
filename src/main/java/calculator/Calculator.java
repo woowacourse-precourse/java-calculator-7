@@ -41,8 +41,12 @@ public class Calculator {
     private Integer sum() {
         String[] numbers = input.split(separators.toString());
 
-        return Arrays.stream(numbers)
-                .mapToInt(Integer::parseInt)
-                .sum();
+        try {
+            return Arrays.stream(numbers)
+                    .mapToInt(Integer::parseInt)
+                    .sum();
+        } catch (Exception e) {
+            throw new IllegalArgumentException();
+        }
     }
 }
