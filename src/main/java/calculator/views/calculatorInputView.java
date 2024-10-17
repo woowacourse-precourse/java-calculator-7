@@ -8,8 +8,10 @@ public class calculatorInputView {
     private static final String RESULT_MESSAGE = "결과: ";
 
     public static String readInput() {
-        System.out.println(INPUT_PROMPT);
         return Console.readLine();
+    }
+    private static void displayInputPrompt() {
+        System.out.println(INPUT_PROMPT);
     }
 
     public static void displayResult(long result) {
