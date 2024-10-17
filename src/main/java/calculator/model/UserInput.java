@@ -5,13 +5,16 @@ import java.util.Arrays;
 import java.util.List;
 
 public abstract class UserInput {
+    private static final String DEFAULT_DELIMITER_COMMA = ",";
+    private static final String DEFAULT_DELIMITER_COLON = ":";
+
     protected final List<String> delimiters;
     protected long[] inputNumbers;
 
     protected UserInput(String userInput) {
         delimiters = new ArrayList<>();
-        delimiters.add(",");
-        delimiters.add(":");
+        delimiters.add(DEFAULT_DELIMITER_COMMA);
+        delimiters.add(DEFAULT_DELIMITER_COLON);
 
         parseInputForCalculate(userInput);
         checkInputNumsIsPositive();
