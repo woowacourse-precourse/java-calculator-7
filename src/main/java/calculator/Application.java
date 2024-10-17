@@ -8,14 +8,24 @@ public class Application {
         outputHandler.guideComment();
 
         InputHandler inputHandler = new InputHandler();
-        Calculator cal = new Calculator(inputHandler.getUserInput());
+        String userInput = inputHandler.getUserInput();
 
+        ExceptionHandler exceptionHandler = new ExceptionHandler(userInput);
+        // 빈 문자열이면 0을 출력 후 종료
+        if (!exceptionHandler.validateInput()) {
+            outputHandler.printSum(0);
+            return;
+        }
+        Calculator cal = new Calculator(userInput);
+
+        //exceptionHandler.validateCommonInput();
         String delimiter = cal.extractDelimiter();
+
         String[] numbers = cal.extractNumbers(delimiter);
 
         int sum = cal.sumStringArray(numbers);
 
-        //outputHandler.printExtractedValues(delimiter, numbers);
+        outputHandler.printExtractedValues(delimiter, numbers);
 
         outputHandler.printSum(sum);
 
