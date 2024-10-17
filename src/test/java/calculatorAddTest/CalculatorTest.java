@@ -21,19 +21,19 @@ public class CalculatorTest {
 
     @Test
     void 기본_구분자_더하기_테스트() {
-        assertEquals(13, calculator.sumFromString("1:2,10"));
+        assertEquals(new BigInteger("13"), calculator.sumFromString("1:2,10"));
     }
 
     @Test
     void 커스텀_구분자_더하기_테스트() {
-        assertEquals(13, calculator.sumFromString("//;\\n1;2,10"));
-        assertEquals(13, calculator.sumFromString("//;.!\\n1;.!2;.!10"));
-        assertEquals(1, calculator.sumFromString("//;\\n1"));
+        assertEquals(new BigInteger("13"), calculator.sumFromString("//;\\n1;2,10"));
+        assertEquals(new BigInteger("13"), calculator.sumFromString("//;.!\\n1;.!2;.!10"));
+        assertEquals(new BigInteger("1"), calculator.sumFromString("//;\\n1"));
     }
 
     @Test
     void 단일_문자_테스트() {
-        assertEquals(1, calculator.sumFromString("1"));
+        assertEquals(new BigInteger("1"), calculator.sumFromString("1"));
     }
 
     @Test
