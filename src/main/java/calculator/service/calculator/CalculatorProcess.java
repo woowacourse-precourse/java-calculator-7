@@ -1,16 +1,17 @@
-package calculator.service;
+package calculator.service.calculator;
 
+import calculator.constant.ErrorMessage;
 import calculator.number.domain.Number;
-import calculator.separator.domain.Separator;
-import calculator.util.Convertor;
-
-import java.util.Arrays;
 
 public class CalculatorProcess {
-    public int sum(Number number, Separator customSeparator) {
-        return Arrays.stream(number.getNumber()
-                        .split(customSeparator.getSeparator()))
-                .mapToInt(Convertor::stringToIntBlankIsZero)
-                .sum();
+    public Long sum(Number number) {
+        try {
+            return number.getNumbers()
+                    .stream()
+                    .mapToLong(Long::longValue)
+                    .reduce(0L, Math::addExact);
+        } catch (ArithmeticException arithmeticException) {
+            throw new IllegalArgumentException(ErrorMessage.MAX_VALUE_ERROR);
+        }
     }
 }
