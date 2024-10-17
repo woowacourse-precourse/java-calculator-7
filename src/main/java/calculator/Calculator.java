@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Calculator {
-    private final String inputString;
+    private String inputString;
     private int sum = 0;
     private String delimiter = "[,:]";
     private List<Integer> numbers = new ArrayList<>();
 
-    private Calculator() {
+    Calculator() {
         this.inputString = Input.input();
     }
 
@@ -17,11 +17,26 @@ public class Calculator {
         System.out.println("결과 : " + this.sum);
     }
 
+    private void addDelimiter() {
+        int delimiterIndex = inputString.indexOf("\\n");
+        String customDelimiter = this.inputString.substring(2, delimiterIndex);
+        this.delimiter = "[" + delimiter.substring(1, delimiter.length() - 1) + customDelimiter + "]";
+        inputString = inputString.substring(delimiterIndex + 2);
+    }
+
     private void splitString() {
+        if (this.inputString.startsWith("//")) {
+            addDelimiter();
+        }
         String[] numbersStr = inputString.split(delimiter);
-        for (int i = 0; i < numbersStr.length; i++) {
-            int number = Integer.parseInt(numbersStr[i].trim());
+        for (String s : numbersStr) {
+            int number = Integer.parseInt(s.trim());
             numbers.add(number);
         }
+    }
+
+    public void run() {
+        splitString();
+        printResult();
     }
 }
