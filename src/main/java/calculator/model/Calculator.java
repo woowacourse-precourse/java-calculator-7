@@ -1,20 +1,25 @@
 package calculator.model;
 
 import static calculator.model.Mode.DELI;
+import static calculator.model.Mode.NUM;
 import static calculator.model.Mode.WRONG_DELI;
+
+import java.util.List;
 
 public class Calculator {
     private String inputValue;
     private int sum;
     private InputNumber inputNumber;
     private InputDelimiter inputDelimiter;
+    private List<String> regDelimiters;
     private Mode mode;
 
-    public Calculator(String inputValue, int valueStartIdx) {
-        this.inputValue = setInputValue(inputValue, valueStartIdx);
+    public Calculator(String inputValue, RegDelimiter regDelimiter) {
+        this.inputValue = setInputValue(inputValue, regDelimiter);
         this.sum = 0;
         this.inputNumber = new InputNumber();
         this.inputDelimiter = new InputDelimiter();
+        this.regDelimiters = setRegDelimiters(regDelimiter);
         this.mode = Mode.NONE;
     }
 
@@ -38,15 +43,17 @@ public class Calculator {
         return mode;
     }
 
-    /**
-     * 테스트용
-     */
     public void updateMode(Mode mode) {
         this.mode = mode;
     }
 
-    private String setInputValue(String inputValue, int valueStartIdx) {
+    private String setInputValue(String inputValue, RegDelimiter regDelimiter) {
+        int valueStartIdx = regDelimiter.getCustomDeliEndIdx() + 1;
         return inputValue.substring(valueStartIdx);
+    }
+
+    private List<String> setRegDelimiters(RegDelimiter regDelimiter) {
+        return regDelimiter.getDelimiters();
     }
 
     public void calculate() {
@@ -57,20 +64,40 @@ public class Calculator {
     }
 
     private void calculateEach(int idx) {
-        String value = this.inputValue.substring(idx, idx+1);
+        String value = inputValue.substring(idx, idx+1);
         if (isNumber(value)) {
             calculateNumber(idx, value);
-            return;
+        } else {
+            calculateDelimiter(idx, value);
         }
     }
 
     private void calculateNumber(int idx, String value) {
         validateWrongDelimiter();
-        if (this.mode == DELI) {
+        if (mode == DELI) {
             validatePositiveNumber(value);
-            this.inputDelimiter.initialize();
+            inputDelimiter.initialize();
         }
         inputNumber.addNumber(value);
+        updateMode(NUM);
+    }
+
+    private void calculateDelimiter(int idx, String value) {
+        if (mode == NUM) {
+            addSum(inputNumber.getNumber());
+            inputNumber.initialize();
+        }
+        inputDelimiter.addDelimiter(value);
+        if (inputDelimiter.isDelimiter(regDelimiters)) {
+            updateMode(DELI);
+            inputDelimiter.initialize();
+        } else {
+            updateMode(WRONG_DELI);
+        }
+    }
+
+    private void addSum(int number) {
+        this.sum += number;
     }
 
     public boolean isNumber(String value) {
@@ -79,7 +106,7 @@ public class Calculator {
     }
 
     private void validateWrongDelimiter() {
-        if (this.mode == WRONG_DELI) {
+        if (mode == WRONG_DELI) {
             throw new IllegalArgumentException("잘못된 구분자입니다. ',', ':' 또는 커스텀 구분자를 사용해주세요.");
         }
     }
