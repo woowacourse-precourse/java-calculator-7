@@ -23,8 +23,8 @@ class ApplicationTest extends NsTest {
     @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
@@ -36,7 +36,6 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 15");
         });
     }
-
 
     @Test
     @DisplayName("숫자 구문자 테스트")
@@ -84,11 +83,30 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    @DisplayName("자릿수가 큰 숫자 합")
+    void test7() {
+        assertSimpleTest(() -> {
+            run("100:200");
+            assertThat(output()).contains("결과 : 300");
+        });
+    }
+
+    @Test
+    @DisplayName("커스텀구분자 0")
+    void test8() {
+        assertSimpleTest(() -> {
+            run("//0\\n0100:200");
+            assertThat(output()).contains("결과 : 3");
+        });
+    }
+
+
+    @Test
     @DisplayName("예외 테스트 : 중첩 커스텀 구문자")
     void exceptionTest1() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("////5\\n\\n1,2,3,4,5"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("////5\\n\\n1,2,3,4,5"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
 
     }
@@ -97,8 +115,8 @@ class ApplicationTest extends NsTest {
     @DisplayName("예외 테스트 : 커스텀 구문자 안에 기본 구문자")
     void exceptionTest2() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("//:\\n"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("//:\\n"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
@@ -106,8 +124,17 @@ class ApplicationTest extends NsTest {
     @DisplayName("예외 테스트 : 커스텀 구문자 사이에 값 미존재")
     void exceptionTest3() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("//\\n"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("//\\n"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    @DisplayName("예외 테스트 : 입력에 양수가 아닌 0추가")
+    void exceptionTest4() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("0100:0200"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
