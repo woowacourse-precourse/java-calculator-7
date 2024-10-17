@@ -84,7 +84,10 @@ public class Application {
             delimiters = "[,:" + additionalDelimiter + "]";
         }
 
-        String[] numbers = input.split(delimiters);
+        // extended 모드일 경우 5번째 문자부터 처리
+        String substringToProcess = extendedMode && input.length() > 5 ? input.substring(5) : input;
+
+        String[] numbers = substringToProcess.split(delimiters);
         BigInteger sum = BigInteger.ZERO;
         for (String number : numbers) {
             sum = sum.add(new BigInteger(number));
