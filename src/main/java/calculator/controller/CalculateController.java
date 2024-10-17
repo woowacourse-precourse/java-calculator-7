@@ -1,6 +1,6 @@
 package calculator.controller;
 
-import calculator.utils.Parser;
+import calculator.service.CalculatorService;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -8,17 +8,17 @@ public class CalculateController {
 
     private final OutputView outputView;
     private final InputView inputView;
-    private final Parser parser;
+    private final CalculatorService service;
 
-    public CalculateController(OutputView outputView, InputView inputView, Parser parser) {
+    public CalculateController(OutputView outputView, InputView inputView, CalculatorService calculatorService) {
         this.outputView = outputView;
         this.inputView = inputView;
-        this.parser = parser;
+        this.service = calculatorService;
     }
 
     public void start() {
-//        outputView.printStartMessage();
-//        Numbers numbers = new Numbers(parser.parseInput(inputView.getString()));
-//        outputView.printResultMessage(numbers.sumNumbers());
+        outputView.printStartMessage();
+        Integer result = service.getResult(inputView.getString());
+        outputView.printResultMessage(result);
     }
 }
