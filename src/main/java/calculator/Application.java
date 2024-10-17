@@ -36,7 +36,7 @@ public class Application {
         if (user_input.substring(0, 2).equals("//") == false)
             return user_input;
 
-        int limit = user_input.lastIndexOf("\\n");
+        int limit = user_input.indexOf("\\n");
         if (limit == -1) {
             return user_input;
         }
