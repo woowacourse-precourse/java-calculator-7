@@ -7,24 +7,24 @@ public class CustomSeparatorManager {
     private static final String CUSTOM_SEPARATOR_REGEX = "^//(\\S+)\\\\n";
     private static final Pattern PATTERN = Pattern.compile(CUSTOM_SEPARATOR_REGEX);
     private static final String BLANK = "";
+    private final Matcher matcher;
+    private final boolean hasCustomSeparator;
 
-    private CustomSeparatorManager() {
+    public CustomSeparatorManager(String targetString) {
+        this.matcher = PATTERN.matcher(targetString);
+        this.hasCustomSeparator = matcher.find();
     }
 
-    public static boolean hasCustomSeparator(String inputString) {
-        return PATTERN.matcher(inputString)
-                .find();
+    public boolean hasCustomSeparator() {
+        return hasCustomSeparator;
     }
 
-    public static Separator getCustomSeparator(String inputString) {
-        Matcher matcher = PATTERN.matcher(inputString);
-        matcher.find();
+    public Separator getCustomSeparator() {
         String customSeparatorString = matcher.group(1);
         return new Separator(customSeparatorString);
     }
 
-    public static String removeSeparatorDeclarationFrom(String inputString) {
-        return PATTERN.matcher(inputString)
-                .replaceFirst(BLANK);
+    public String removeSeparatorDeclarationFrom() {
+        return matcher.replaceFirst(BLANK);
     }
 }

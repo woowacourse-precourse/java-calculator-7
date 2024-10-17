@@ -5,9 +5,10 @@ public class SeparatorExpressionCalculator {
 
     public void operate() {
         String input = getInputFromConsole();
-        boolean hasCustomSeparator = CustomSeparatorManager.hasCustomSeparator(input);
+        CustomSeparatorManager manager = new CustomSeparatorManager(input);
+        boolean hasCustomSeparator = manager.hasCustomSeparator();
         if(hasCustomSeparator) {
-            Separator customSeparator = CustomSeparatorManager.getCustomSeparator(input);
+            Separator customSeparator = manager.getCustomSeparator();
             operatorMap.registerSeparatorToOperand(customSeparator, OperatorEnum.PLUS);
         }
     }
