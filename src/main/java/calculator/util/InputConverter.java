@@ -21,6 +21,10 @@ public class InputConverter {
         String delimiter = delimiterAndInput[0];
         String input = delimiterAndInput[1];
 
+        if(isOnlyOneDelimiter(delimiter, input)){
+            return new ArrayList<>();
+        }
+
         isValidateDelimiter(delimiter, input);
 
         String[] letters = input.split(delimiter);
@@ -35,6 +39,17 @@ public class InputConverter {
         }
 
         return convertedNumber;
+    }
+
+    private static boolean isOnlyOneDelimiter(String delimiter, String input) {
+        Pattern pattern = Pattern.compile(delimiter);
+        Matcher matcher = pattern.matcher(input);
+
+        if(matcher.matches()) {
+            return true;
+        }
+
+        return false;
     }
 
     private static int convertToInt(String letter) {
