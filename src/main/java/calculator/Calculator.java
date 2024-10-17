@@ -56,6 +56,9 @@ public class Calculator {
 
 		// 커스텀 구분자 저장
 		separator[2] = newSeparator;
+
+		// 커스텀 구분자 지정 부분 문자열 제거
+		inputStr = inputStr.substring(5);
 	}
 
 	private void parsingNumsAndCalculate(String str) {
