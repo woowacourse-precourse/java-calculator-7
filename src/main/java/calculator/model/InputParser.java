@@ -2,17 +2,41 @@ package calculator.model;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class InputParser {
-	List<String> delimiters = Arrays.asList(",", ":");
+	private final String input;
+	List<String> delimiters;
 
-	private String addCustomDelimiter(String input) {
-		int delimiterStart = input.indexOf("//") + 2;
-		int delimiterEnd = input.indexOf("\n");
+	public InputParser(String input) {
+		// 원본 문자열에서 커스텀 구분자를 빼고, delimiters 에 추가한다.
+		this.input = removeCustomDelimiter(input);
 
-		return input.substring(delimiterStart, delimiterEnd);
+		// 만약 사용자가 커스텀 구분자를 입력했다면, 커스텀 구분자를 따로 추출해서 구분자 목록에 추가한다..
+		List<String> delimiters = Arrays.asList(",", ":");
+		extractCustomDelimiter(input).ifPresent(delimiters::add);
+		this.delimiters = delimiters;
+		validateDelimiter(this.input);
 	}
 
+	/**
+	 * 문자열 전처리
+	 */
+	// 입력값에서 커스텀 구분자를 추출 (없을 수 있음)
+	private Optional<String> extractCustomDelimiter(String input) {
+		Optional<String> customDelimiter = Optional.empty();
+
+		if (hasCustomDelimiter(input)) {
+			int delimiterStart = input.indexOf("//") + 2;
+			int delimiterEnd = input.indexOf("\n");
+
+			customDelimiter = Optional.of(input.substring(delimiterStart, delimiterEnd));
+		}
+
+		return customDelimiter;
+	}
+
+	// 입력값에서 커스텀 구분자를 제거한 문자열을 반환
 	public String removeCustomDelimiter(String input) {
 		if (hasCustomDelimiter(input)) {
 			int delimiterEnd = input.indexOf("\n");
@@ -23,7 +47,15 @@ public class InputParser {
 		return input; // 커스텀 구분자가 없을 경우 원본 문자열 반환
 	}
 
+	// 입력값에 커스텀 구분자가 있는지 확인
 	private boolean hasCustomDelimiter(String input) {
 		return input.startsWith("//");
+	}
+
+	private void validateDelimiter(String input) {
+		if (input.chars()
+			.anyMatch(c -> !delimiters.contains(String.valueOf((char)c)))) {
+			throw new IllegalArgumentException("입력값에 약속되지 않은 구분자가 포함되어 있습니다.");
+		}
 	}
 }
