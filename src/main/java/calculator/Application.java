@@ -4,12 +4,16 @@ public class Application {
     public static void main(String[] args) {
         Input inputHandler = new Input();
         Output outputHandler = new Output();
+        Validator validator = new Validator();
+        Delimiter delimiter = new Delimiter();
+        Converter converter = new Converter();
+        Adder adder = new Adder();
+        Calculator calculator = new Calculator(validator, delimiter, converter, adder);
 
         // 입력
         String input = inputHandler.getInput();
 
         // 계산
-        Calculator calculator = new Calculator(input);
         int result = calculator.calculate(input);
 
         // 출력

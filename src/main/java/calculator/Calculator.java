@@ -4,14 +4,16 @@ import java.util.List;
 
 public class Calculator {
 
-    private final String input;
-    private final Validator validator = new Validator();
-    private final Delimiter delimiter = new Delimiter();
-    private final Converter converter = new Converter();
-    private final Adder adder = new Adder();
+    private final Validator validator;
+    private final Delimiter delimiter;
+    private final Converter converter;
+    private final Adder adder;
 
-    public Calculator(String input) {
-        this.input = input;
+    public Calculator(Validator validator, Delimiter delimiter, Converter converter, Adder adder) {
+        this.validator = validator;
+        this.delimiter = delimiter;
+        this.converter = converter;
+        this.adder = adder;
     }
 
     /**
@@ -35,15 +37,15 @@ public class Calculator {
             return adder.sum(numbers);
         }
 
+        // 음수 입력 예외 처리
+        validator.isNegative(input);
+
         // 기본 구분자(쉼표, 콜론) 처리
         if (input.contains(",") || input.contains(":")) {
             String[] tokens = delimiter.defaultDelimiter(input);
             List<Integer> numbers = converter.convertToNumbers(tokens);
             return adder.sum(numbers);
         }
-
-        // 음수 입력 예외 처리
-        validator.isNegative(input);
 
         throw new IllegalArgumentException();
     }
