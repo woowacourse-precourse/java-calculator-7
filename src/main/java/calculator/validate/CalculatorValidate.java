@@ -2,6 +2,13 @@ package calculator.validate;
 
 public class CalculatorValidate {
     /**
+     * 공백 입력 체크
+     */
+    public boolean isUsingBlank(String userInput)
+    {
+        return userInput.isEmpty();
+    }
+    /**
      * 커스텀 구분자 사용 유무 체크
      */
     public boolean isUsingCustomSeparator(String userInput)

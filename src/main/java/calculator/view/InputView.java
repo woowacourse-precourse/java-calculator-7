@@ -30,6 +30,10 @@ public class InputView {
     public int[] getUserInput()
     {
         String invalidateString = Console.readLine();
+        if (calculatorValidate.isUsingBlank(invalidateString))
+        {
+            return new int[1];
+        }
         String separtors = ",:";
         if(calculatorValidate.isUsingCustomSeparator(invalidateString))
         {
