@@ -13,8 +13,13 @@ public class Application {
             String[] splitTexts = userText.split(",|:");
 
             for (String text : splitTexts) {
-                int numberText = Integer.parseInt(text);
-                sum += numberText;
+                try {
+                    int numberText = Integer.parseInt(text);    // 구분자 사이의 값이 숫자가 아니라면 예외 발생(NumberFormatException)
+                    if (numberText < 0) throw new IllegalArgumentException();   // 구분자 사이의 숫자가 0보다 작으면 예외 발생
+                    sum += numberText;
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException();   // IllegalArgumentException 예외로 발생
+                }
             }
         }
 
