@@ -26,4 +26,9 @@ public class Numbers {
 				throw new IllegalArgumentException(ErrorMessage.NUMBERS_POSITIVE.getMessage());
 			});
 	}
+
+	Long sum() {
+		return numbers.stream()
+			.reduce(0L, Long::sum);
+	}
 }
