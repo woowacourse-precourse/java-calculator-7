@@ -41,6 +41,8 @@ public class CalculatorService {
 
     public int calculateList() {
         for (String i : numList) {
+            int n = Integer.parseInt(i);
+            if(n<0) throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
             result += Integer.parseInt(i);
         }
         return result;
