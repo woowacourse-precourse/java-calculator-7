@@ -4,8 +4,8 @@ import calculator.utils.NumUtil;
 
 public class InputFilter {
 
-    private static final String CUSTOM_PREFIX = "//";
-    private static final String CUSTOM_SUFFIX = "\\n";
+    private static final String CUSTOM_REGEX = "^//.\\\\n.*";
+    private static final int CUSTOM_PREFIX_LENGTH = 2;
     private static final int CUSTOM_LENGTH = 5;
 
     public static Input parseInput(String value) {
@@ -16,16 +16,7 @@ public class InputFilter {
     }
 
     private static boolean isCustom(String value) {
-        if (value.length() < CUSTOM_LENGTH) {
-            return false;
-        }
-        return isCustomFormat(value);
-    }
-
-    private static boolean isCustomFormat(String value) {
-        String customPrefix = value.substring(0, CUSTOM_PREFIX.length());
-        String customSuffix = value.substring(CUSTOM_PREFIX.length() + 1, CUSTOM_LENGTH);
-        return customPrefix.equals(CUSTOM_PREFIX) && customSuffix.equals(CUSTOM_SUFFIX);
+        return value.matches(CUSTOM_REGEX);
     }
 
     private static String getCleanedNumStr(String value) {
@@ -40,6 +31,6 @@ public class InputFilter {
     }
 
     private static char getCustomSeparator(String value) {
-        return value.charAt(CUSTOM_PREFIX.length());
+        return value.charAt(CUSTOM_PREFIX_LENGTH);
     }
 }
