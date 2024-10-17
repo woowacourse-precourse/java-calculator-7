@@ -30,4 +30,8 @@ public class Calculator {
         }
         return sum;
     }
+
+    private void printSum(int result){
+        System.out.println("결과 : " + result);
+    }
 }
