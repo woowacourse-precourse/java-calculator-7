@@ -68,5 +68,46 @@ public class Calculator {
 
 	private void parsingNumsAndCalculate(String str) {
 
+		// 처음과 끝에 구분자가 나올 때
+		if (!Character.isDigit(str.charAt(0))
+				|| !Character.isDigit(str.charAt(str.length() - 1))) {
+			throw new IllegalArgumentException();
+		}
+
+		int startIdx = 0, endIdx = 0, strLen = str.length();
+
+		while (endIdx < strLen) {
+			while (endIdx < strLen && Character.isDigit(str.charAt(endIdx))) {
+				endIdx++;
+			}
+
+			// 구분자 2개 이상
+			if (startIdx == endIdx) {
+				throw new IllegalArgumentException();
+			}
+
+			long num = stringToLong(str.substring(startIdx, endIdx));
+
+			if (endIdx == strLen) {
+				calculateNums(num);
+				return;
+			}
+
+			// 구분자 이외의 문자 입력 시 에러
+			int idx = 0;
+			while (idx < separatorCnt) {
+				if (str.charAt(endIdx) == separator[idx]) {
+					break;
+				}
+				idx++;
+			}
+			if (idx == separatorCnt) {
+				throw new IllegalArgumentException();
+			}
+
+			calculateNums(num);
+			endIdx++;
+			startIdx = endIdx;
+		}
 	}
 }
