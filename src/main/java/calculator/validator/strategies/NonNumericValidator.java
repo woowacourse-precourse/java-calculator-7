@@ -1,22 +1,34 @@
 package calculator.validator.strategies;
 
+import calculator.util.DelimiterUtils;
 import calculator.view.ErrorMessage;
 
-// 입력값에 숫자 외의 문자가 포함되어 있는지 확인하는 클래스
+// 숫자가 아닌 입력값을 검증하는 클래스
 public class NonNumericValidator implements ValidationStrategy {
-
-    private static final String VALID_INPUT_PATTERN = "[0-9,;:]*";
 
     @Override
     public void validate(String input) {
-        if (isNotNumeric(input)) {
+        // 입력 문자열이 숫자와 구분자로만 이루어져 있는지 확인
+        if (!containsOnlyValidCharacters(input)) {
             throw new IllegalArgumentException(ErrorMessage.NON_NUMERIC_INPUT_ERROR.getMessage());
         }
     }
 
-    // 입력이 숫자와 허용된 구분자로만 이루어져 있는지 확인
-    private boolean isNotNumeric(String input) {
-        return !input.matches(VALID_INPUT_PATTERN);
+    // 입력이 숫자와 구분자로만 이루어져 있는지 확인
+    private boolean containsOnlyValidCharacters(String input) {
+        String[] numbers = DelimiterUtils.splitInput(input);
+        // 숫자 배열을 확인하여 유효한지 판단
+        for (String number : numbers) {
+            if (!isValidNumber(number)) {
+                return false;
+            }
+        }
+        return true; // 모든 숫자가 유효할 경우
+    }
+
+    // 숫자가 유효한지 확인하는 헬퍼 메서드
+    private boolean isValidNumber(String number) {
+        return number.matches("[0-9]*"); // 숫자만 포함된 문자열인지 확인
     }
 
 }
