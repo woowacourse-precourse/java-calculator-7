@@ -36,8 +36,17 @@ public class Application {
         String[] numbers = inputExpression.split(delimeter);
 
         // 추출된 숫자들의 합 구하기
+        int cnt = 0;
+        for (String nowStr : numbers) {
+            int nowInt = Integer.parseInt(nowStr);
+            if (nowInt <= 0) {
+                throw new IllegalArgumentException();
+            }
+            cnt += nowInt;
+        }
 
         // 결과 출력
+        System.out.println("결과 : " + cnt);
     }
 }
 
