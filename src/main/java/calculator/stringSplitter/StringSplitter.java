@@ -15,7 +15,7 @@ public class StringSplitter {
         separator.add(":");
         String number = input;
         if(input.startsWith("//")){
-            int endPoint = input.indexOf("\\n");
+            int endPoint = input.lastIndexOf("\\n");
             if(endPoint == -1){
                 throw new IllegalArgumentException(); // 예외발생
             }
