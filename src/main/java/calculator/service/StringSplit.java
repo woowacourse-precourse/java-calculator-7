@@ -2,6 +2,7 @@ package calculator.service;
 
 import calculator.model.Calculator;
 import calculator.model.Delimiter;
+import calculator.validator.OperandValidator;
 
 import java.util.ArrayList;
 
@@ -35,6 +36,7 @@ public class StringSplit {
 
     public void splitAndSaveOperands() {
         String[] stringOperands = splitOperands();
+        OperandValidator.validateStringOperand(stringOperands);
         ArrayList<Integer> intOperands = convertOperandsToInt(stringOperands);
         saveOperands(intOperands);
     }
