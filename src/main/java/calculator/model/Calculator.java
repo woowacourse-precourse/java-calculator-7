@@ -1,11 +1,12 @@
 package calculator.model;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class Calculator {
 
     public Number add(List<Number> numbers) {
-        double sum = 0.0;
+        BigDecimal sum = BigDecimal.ZERO;
         boolean hasFloatingPoint = false;
 
         for (Number number : numbers) {
@@ -13,13 +14,13 @@ public class Calculator {
                 hasFloatingPoint = true;
             }
 
-            sum += number.doubleValue();
+            sum = sum.add(BigDecimal.valueOf(number.doubleValue()));
         }
 
         if (hasFloatingPoint) {
-            return Double.parseDouble(String.format("%.1f", sum));
+            return sum.stripTrailingZeros();
         } else {
-            return (int) sum;
+            return sum.intValue();
         }
     }
 }
