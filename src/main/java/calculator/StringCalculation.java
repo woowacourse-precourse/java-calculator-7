@@ -11,7 +11,9 @@ public class StringCalculation {
     }
 
     public void startCalculate() {
-        inputView.inputString();
+        StringProcessor stringProcessor = new StringProcessor();
+
+        String[] splitedString = stringProcessor.splitWithDelimiter(inputView.inputString());
     }
 
 }
