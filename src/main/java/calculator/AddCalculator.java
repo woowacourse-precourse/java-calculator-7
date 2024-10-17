@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.List;
+
 public class AddCalculator {
 
     private static Double sum;
@@ -14,5 +16,9 @@ public class AddCalculator {
 
     public static double sum() {
         return sum;
+    }
+
+    public static void add(List<Double> numbers) {
+        sum = numbers.stream().mapToDouble(AddCalculator::add).sum();
     }
 }

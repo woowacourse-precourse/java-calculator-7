@@ -1,9 +1,24 @@
 package calculator;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class AddCalculatorTest {
+
+    @Test
+    void 숫자_여러_개를_더할_수_있다() {
+        List<Double> numbers = new ArrayList<>();
+        numbers.add((double) 1);
+        numbers.add((double) 2);
+        numbers.add((double) 3);
+
+        AddCalculator.add(numbers);
+
+        assertEquals(6, AddCalculator.sum());
+    }
 
     @Test
     void 숫자_두_개를_더할_수_있다() {
