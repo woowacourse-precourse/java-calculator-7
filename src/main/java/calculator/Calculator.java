@@ -28,4 +28,8 @@ public class Calculator {
 	private void print() {
 		System.out.println("결과 : " + totalSum);
 	}
+
+	private void calculateNums(long num) {
+		totalSum += num;
+	}
 }
