@@ -1,5 +1,7 @@
 package calculator.calculator;
 
+import calculator.validator.InputValidator;
+
 public class NumberCalculator {
     public static int calc(String[] numbers){
         int sum = 0;
@@ -11,7 +13,7 @@ public class NumberCalculator {
     }
 
     private static int parseNumber(String number){
-        // TODO: num 숫자 형식 검증
+        InputValidator.validateNumber(number);
         return Integer.parseInt(number);
     }
 }
