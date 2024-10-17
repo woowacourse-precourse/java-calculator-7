@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 package calculator;
 
 import camp.nextstep.edu.missionutils.test.Assertions;
@@ -23,11 +18,13 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트() {
+    void 커스텀_구분자_복수_문자_예외처리() {
         Assertions.assertSimpleTest(() -> {
+            // 커스텀 구분자로 두 개 이상의 문자를 사용한 경우 예외 발생 확인
             org.assertj.core.api.Assertions.assertThatThrownBy(() -> {
-                this.runException(new String[]{"-1,2,3"});
-            }).isInstanceOf(IllegalArgumentException.class);
+                        this.runException(new String[]{"//;;\\n1;;2;;3"});
+                    }).isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("커스텀 구분자는 한 문자만 입력해야 합니다.");
         });
     }
 
