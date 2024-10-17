@@ -18,4 +18,44 @@ public class StringChecker {
         }
         return BASIC_SEPARATOR;
     }
+
+
+    public List<Integer> checkExpressionValidation(String string, List<Character> separatorList) { //구분자를 기준으로 하여
+        ArrayList<Integer> positiveNumberList = new ArrayList<>();
+        StringBuilder numberBuilder = new StringBuilder();
+        try {
+            for (int i = 0; i < string.length(); i++) {
+                char ch = string.charAt(i);
+
+                if (separatorList.contains(ch)) {
+                    int number = Integer.parseInt(numberBuilder.toString());
+                    if (number <= 0) {
+                        throw new Exception();
+                    }
+                    positiveNumberList.add(number);
+                    numberBuilder.setLength(0);
+                    continue;
+                } else if (Character.isDigit(ch)) {
+                    numberBuilder.append(ch);
+                    continue;
+                }
+
+                throw new Exception();
+            }
+            if (numberBuilder.isEmpty()) {
+                return positiveNumberList;
+            }
+            int number = Integer.parseInt(numberBuilder.toString());
+            if (number <= 0) {
+                throw new Exception();
+            }
+            positiveNumberList.add(number);
+            return positiveNumberList;
+
+        } catch (Exception exception) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+
 }
