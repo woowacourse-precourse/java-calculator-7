@@ -3,13 +3,21 @@ package calculator;
 public class MyCalculator {
     private String numString;
 
-    public static String customDelimiter(String str) {
+    private static String customDelimiter(String str) {
         String newStr = "";
+
         if (str.matches("^//[\\D]*\\\\n.*$")) {
-            System.out.println("문자열 시작 인덱스: " + (str.indexOf("n") + 1));
             newStr += str.substring(str.indexOf("n") + 1);
         }
-        return newStr;
+        return newStr.equals("") ? str : newStr;
+    }
+
+    public static String[] splitString(String str) {
+        String newStr = customDelimiter(str);
+
+        String[] splitNumber = newStr.split("[\\D]+");
+
+        return splitNumber;
     }
 
 //    public String findDelimiter(String str) {
@@ -23,41 +31,41 @@ public class MyCalculator {
 //        return delimiter;
 //    }
 
-    public MyCalculator(String numString) {
-        this.numString = numString;
-    }
+//    public MyCalculator(String numString) {
+//        this.numString = numString;
+//    }
 
-    private String customSeparator(String str) {
-        if (str.startsWith("//") && str.contains("\n")) {
-            return Character.toString(str.charAt(2));
-        }
-        return " ";
-    }
+//    private String customSeparator(String str) {
+//        if (str.startsWith("//") && str.contains("\n")) {
+//            return Character.toString(str.charAt(2));
+//        }
+//        return " ";
+//    }
+//
+//    private String[] makeArray() {
+//        if (numString.contains(customSeparator(numString))) {
+//            numString = numString.substring(4);
+//            numString = numString.replace(customSeparator(numString), " ");
+//        }
+//        numString = numString.replace(",", " ");
+//        numString = numString.replace(":", " ");
+//
+//        String[] numArray = numString.split(" ");
+//
+//        return numArray;
+//    }
 
-    private String[] makeArray() {
-        if (numString.contains(customSeparator(numString))) {
-            numString = numString.substring(4);
-            numString = numString.replace(customSeparator(numString), " ");
-        }
-        numString = numString.replace(",", " ");
-        numString = numString.replace(":", " ");
-
-        String[] numArray = numString.split(" ");
-
-        return numArray;
-    }
-
-    public int getSum() {
-        if (numString.equals("")) {
-            return 0;
-        }
-        String[] array = makeArray();
-        int sum = 0;
-
-        for (int i = 0; i < array.length; i++) {
-            sum += Integer.parseInt(array[i]);
-        }
-
-        return sum;
-    }
+//    public int getSum() {
+//        if (numString.equals("")) {
+//            return 0;
+//        }
+//        String[] array = makeArray();
+//        int sum = 0;
+//
+//        for (int i = 0; i < array.length; i++) {
+//            sum += Integer.parseInt(array[i]);
+//        }
+//
+//        return sum;
+//    }
 }
