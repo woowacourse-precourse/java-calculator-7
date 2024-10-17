@@ -17,9 +17,11 @@ public class CalculatorApplication {
         Delimiters delimiters = new Delimiters();
         Calculator calculator = new Calculator();
         Numbers numbers = new Numbers();
+
         DelimiterService delimiterService = new DelimiterService(delimiters);
         NumberService numberService = new NumberService(numbers, delimiterService);
         CalculatorService calculatorService = new CalculatorService(calculator, numberService);
+        
         return new Controller(delimiterService, numberService, calculatorService);
     }
 }

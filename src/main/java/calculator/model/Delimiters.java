@@ -18,6 +18,7 @@ public class Delimiters {
     }
 
     public void addCustomDelimiter(char customDelimiter) {
+
         if (isCustomDelimiterDigit(customDelimiter)) {
             throw new IllegalArgumentException();
         }

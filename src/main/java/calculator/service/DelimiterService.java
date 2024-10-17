@@ -4,10 +4,10 @@ import calculator.model.Delimiters;
 import java.util.List;
 
 public class DelimiterService {
-    private static final char CUSTOM_DELIMITER_PREFIX = '/';
     private static final String CUSTOM_DELIMITER_FIRST_FORMAT = "//";
     private static final String CUSTOM_DELIMITER_LAST_FORMAT = "\n";
     private static final int CUSTOM_DELIMITER_FORMAT_MIN_LENGTH = 5;
+    private static final char CUSTOM_DELIMITER_PREFIX = '/';
 
     private final Delimiters delimiters;
 
@@ -55,11 +55,13 @@ public class DelimiterService {
 
     private boolean isCustomDelimiterFirstFormatCorrect(String inputString) {
         String firstFormat = inputString.substring(0, 1);
+
         return firstFormat.equals(CUSTOM_DELIMITER_FIRST_FORMAT);
     }
 
     private boolean isCustomDelimiterLastFormatCorrect(String inputString) {
         String lastFormat = inputString.substring(3, 4);
+
         return lastFormat.equals(CUSTOM_DELIMITER_LAST_FORMAT);
     }
 }
