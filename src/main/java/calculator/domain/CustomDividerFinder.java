@@ -24,18 +24,23 @@ public class CustomDividerFinder {
 
         if(isNonexistentCustomDivider(openerIndex, closerIndex)) {
             return;
-        }else if(hasCustomDivider(openerIndex, closerIndex)) {
-            char charCustomDivider = inputValue.charAt(CUSTOM_DIVIDER_INDEX);
-            String onlyCalculatedValue = extractCalculatedValue(inputValue);
-
-            System.out.println("문자열   " +charCustomDivider);
-            System.out.println("커스텀 양식을 뺀 계산식    " + onlyCalculatedValue);
-
-            updateCalculatedValueAndDivider(calculatedValue, divider, onlyCalculatedValue, charCustomDivider);
+        }else if(hasCustomDivider(openerIndex, closerIndex)) { //todo handle로 뺴기
+            handleCustomDivider(calculatedValue, divider, inputValue);
             return;
         }
         throw new IllegalArgumentException("커스텀 구분자 사용시 양식을 지켜주세요. //커스텀문자\\n");
     }
+
+    private void handleCustomDivider(CalculatedValue calculatedValue, Divider divider, String inputValue) {
+        char charCustomDivider = inputValue.charAt(CUSTOM_DIVIDER_INDEX);
+        String onlyCalculatedValue = extractCalculatedValue(inputValue);
+
+        System.out.println("문자열   " +charCustomDivider);
+        System.out.println("커스텀 양식을 뺀 계산식    " + onlyCalculatedValue);
+
+        updateCalculatedValueAndDivider(calculatedValue, divider, onlyCalculatedValue, charCustomDivider);
+    }
+
 
     private String extractCalculatedValue(String inputValue){
         return inputValue.substring(CALCULATED_VALUE_START_INDEX);
