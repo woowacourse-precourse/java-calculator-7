@@ -13,6 +13,7 @@ public class Application {
         }
         catch (IllegalArgumentException e){
             System.out.println("잘못된 입력입니다: " + e.getMessage());
+            throw e;
         }
     }
 
@@ -42,8 +43,8 @@ public class Application {
         for (String number : numbers){
             if(!number.isEmpty()){
                 int num = Integer.parseInt(number);
-                if (num < 0){
-                    throw new IllegalArgumentException("음수는 허용되지 않습니다");
+                if(num < 0){
+                    throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
                 }
                 sum += num;
             }
