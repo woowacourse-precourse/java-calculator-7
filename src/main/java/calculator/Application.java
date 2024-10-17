@@ -47,7 +47,6 @@ public class Application {
 
             for (String delim : customDelimiters) {
                 delimiterPart.append("|").append(toRegex(delim));
-                System.out.println(delimiterPart);
             }
 
             numberPart = input.substring(indexOfEndSign + CUSTOM_DELIMITER_END_SIGN_LENGTH);
