@@ -25,7 +25,7 @@ class InputSplitterTest {
     @DisplayName("커스텀 구분자로 분할이 되는지 테스트")
     void splitByCustomDelimiter() {
         //given
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
         InputSplitter inputSplitter = new InputSplitter();
         String[] actualStrings = inputSplitter.splitByDelimeter(input);
 

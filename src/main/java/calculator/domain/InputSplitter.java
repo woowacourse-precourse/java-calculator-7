@@ -4,20 +4,24 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InputSplitter {
-    private static final String REGEX = "^//(.)\\n";
+    private static final String REGEX = "^//(.)\\\\n";
     private static final int CUSTOM_DELIMETER_START_INDEX = 2;
     private static final int CUSTOM_DELIMETER_END_INDEX = 3;
-    private static final int START_INDEX_EXCEPT_REGEX = 4;
+    private static final int START_INDEX_EXCEPT_REGEX = 5;
 
     public String[] splitByDelimeter(String input) {
         if (input.isEmpty()) {
             return new String[]{"0"};
         }
         if (containsCustomDelimeter(input)) {
+            System.out.println("커스텀 구분자 감지");
             String customDelimeter = getCustomDelimeter(input);
+            System.out.println("customDelimeter = " + customDelimeter);
             input = input.substring(START_INDEX_EXCEPT_REGEX);
+            System.out.println("input = " + input);
             return input.split(customDelimeter);
         }
+        System.out.println("기본 구분자 감지");
         return validateCommaAndColonDelimiter(input);
     }
 
