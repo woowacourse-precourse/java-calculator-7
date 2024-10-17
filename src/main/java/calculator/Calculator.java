@@ -1,7 +1,10 @@
 package calculator;
 
+import java.util.Arrays;
+
 public class Calculator {
     private int sum;
+    private String delimiterPattern = "[,:]";
 
     private static final Calculator instance = new Calculator();
 
@@ -18,6 +21,8 @@ public class Calculator {
             sum = 0;
             return sum;
         }
-        return sum;
+        return Arrays.stream(trimmedInput.split(delimiterPattern))
+                .mapToInt(Integer::parseInt)
+                .sum();
     }
 }
