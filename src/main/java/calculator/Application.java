@@ -12,6 +12,7 @@ public class Application {
 
         int sum = 0;
 
+
         if (input.trim().isEmpty()) {
             System.out.println("결과 : 0");
             return;
@@ -45,8 +46,14 @@ public class Application {
 
     private static int calculateSum(String[] numbers) {
         int sum = 0;
+        int prevSum = 0;
         for (String number : numbers) {
+            prevSum = sum;
             sum += Integer.parseInt(number);
+
+            if (sum < prevSum) {
+                throw new IllegalArgumentException("양수의 숫자만 입력 할 수 있습니다.");
+            }
         }
         return sum;
     }
