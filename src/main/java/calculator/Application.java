@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.math.BigInteger;
 import java.util.Set;
 import java.util.HashSet;
 
@@ -16,6 +17,8 @@ public class Application {
         String inputValue = inputConsole.readLine();
         try {
             Set<Character> delimiters = extractDelimiter(inputValue);
+            long result = calcNumbers(delimiters);
+            System.out.println("결과 : " + result);
         } catch (IllegalArgumentException expected) {
             throw expected;
         } finally {
@@ -66,5 +69,35 @@ public class Application {
         }
 
         return delimiterSet;
+    }
+
+    /**
+     * 사용자가 입력한 문자열에서 설정한 구분자를 기준으로 분리한 각 숫자의 합을 반환합니다.
+     *
+     * @param delimiters 구분자를 저장한 Set
+     * @throws IllegalArgumentException 올바르지 않는 형식의 문자열 입력입니다.
+     * @return long 계산 결과
+     *
+     */
+    private static long calcNumbers(Set<Character> delimiters) {
+        if (numberInputString == null || numberInputString.isEmpty()) {
+            return 0;
+        }
+
+        long result = 0;
+        boolean isNumber = true;
+        for (int i = 0; i < numberInputString.length(); i++) {
+            char character = numberInputString.charAt(i);
+            if(isNumber && Character.isDigit(character)) {
+                isNumber = false;
+                result += (long)(character - '0');
+            } else if (!isNumber && !Character.isDigit(character) && delimiters.contains(character)) {
+                isNumber = true;
+            } else {
+                throw new IllegalArgumentException("올바르지 않는 형식의 문자열 입력입니다.");
+            }
+        }
+
+        return result;
     }
 }
