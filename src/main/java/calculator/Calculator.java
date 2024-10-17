@@ -16,10 +16,15 @@ public class Calculator {
 
 	public void run() {
 		enter();
+		print();
 	}
 
 	private void enter() {
 		System.out.println("덧셈할 문자열을 입력해 주세요.");
 		str = Console.readLine();
+	}
+
+	private void print() {
+		System.out.println("결과 : " + totalSum);
 	}
 }
