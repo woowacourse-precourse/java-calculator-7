@@ -21,4 +21,15 @@ public class NumberParserTest {
         assertNotEquals(invalid, result);
     }
 
+    @Test
+    public void testSumNumber() throws Exception{
+        //given
+        String[] inputArr = {"3","45","2"};
+
+        //when
+        int result = numberParser.sumNumber(inputArr);
+
+        //then
+        assertEquals(50,result);
+    }
 }
