@@ -16,6 +16,10 @@ public class Application {
     }
 
     private static int calculateSum(String input) {
+        if (input.isEmpty()) {
+            return 0;
+        }
+
         input = input.replace("\\n", "\n");
 
         String delimiter = "[,:]";
