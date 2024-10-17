@@ -1,5 +1,7 @@
 package calculator.model;
 
+import static calculator.validate.NumberValidator.validateNumber;
+
 import java.util.Objects;
 
 public class Calculator {
@@ -17,15 +19,20 @@ public class Calculator {
             String customDelimiter = String.valueOf(input.charAt(2));
             numbers = input.substring(5).split(customDelimiter);
             calculateSum(numbers);
+            return;
         }
-        if (input.charAt(0) - '0' >= 0) {
-            numbers = input.split(DEFAULT_DELIMITER);
-            calculateSum(numbers);
-        }
+        numbers = input.split(DEFAULT_DELIMITER);
+        calculateSum(numbers);
     }
 
     private void calculateSum(String[] numbers) {
         for (String number : numbers) {
+            try {
+                validateNumber(number);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+                throw e;
+            }
             result += Integer.parseInt(number);
         }
     }
