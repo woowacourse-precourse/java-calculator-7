@@ -12,14 +12,14 @@ public class Input {
         return input;
     }
 
-    String[] separatorInput(Separator separator) {
+    public String[] separatorInput(Separator separator) {
         String regex = separator.getRegex();
         String[] splitStr = input.split(regex);
 
         return splitStr;
     }
 
-    static int[] changeInteger(String[] splitStr) {
+    public int[] changeInteger(String[] splitStr) {
         int[] numbers = new int[splitStr.length];
         for (int i = 0; i < splitStr.length; i++) {
             numbers[i] = Integer.parseInt(splitStr[i]);
