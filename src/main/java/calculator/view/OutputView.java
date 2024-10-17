@@ -2,7 +2,9 @@ package calculator.view;
 
 public class OutputView {
 
-    public void writeln(String message) {
-        System.out.println(message);
+    private static final String RESULT_MESSAGE = "결과 : ";
+
+    public void printResultOfSum(int sum) {
+        System.out.println(RESULT_MESSAGE + sum);
     }
 }
