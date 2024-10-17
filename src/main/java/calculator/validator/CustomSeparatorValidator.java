@@ -1,7 +1,7 @@
 package calculator.validator;
 
 public class CustomSeparatorValidator {
-    String input;
+    private String input;
     public CustomSeparatorValidator(String input) {
         this.input = input;
         if('0'<= input.charAt(0) || input.charAt(0) <= '9') return;

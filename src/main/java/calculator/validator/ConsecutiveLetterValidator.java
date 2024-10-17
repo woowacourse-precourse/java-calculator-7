@@ -1,7 +1,7 @@
 package calculator.validator;
 
 public class ConsecutiveLetterValidator {
-    String input;
+    private String input;
     public ConsecutiveLetterValidator(String input) {
         this.input = input;
         validateConsecutiveLetters();
