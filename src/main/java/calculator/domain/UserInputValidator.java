@@ -10,9 +10,21 @@ public class UserInputValidator {
     private static final int NUMBER_OVER_BOUND = 58;
 
     public static void validateDelimiter(String input) {
-        if (!input.contains(Constants.COMMA) && !input.contains(Constants.COLON) && input.length() > ONE) {
+        if (!containsComma(input) && !containsColon(input) && isLongerThanOne(input)) {
             throw new IllegalArgumentException(Constants.WRONG_DELIMITER);
         }
+    }
+
+    private static boolean containsComma(String input) {
+        return input.contains(Constants.COMMA);
+    }
+
+    private static boolean containsColon(String input) {
+        return input.contains(Constants.COMMA);
+    }
+
+    private static boolean isLongerThanOne(String input) {
+        return input.length() > ONE;
     }
 
     public static void validateCustomPresence(Matcher matcher) {
