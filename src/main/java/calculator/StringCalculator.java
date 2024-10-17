@@ -10,6 +10,15 @@ public class StringCalculator {
         String delimiter = "[,;]";
         String[] tokens = input.split(delimiter);
 
-        return 0;
+        return sumTokens(tokens);
+    }
+
+    // 문자열 덧셈 계산
+    private int sumTokens(String[] tokens) {
+        int sum = 0;
+        for (String token : tokens) {
+            sum += Integer.parseInt(token);
+        }
+        return sum;
     }
 }
