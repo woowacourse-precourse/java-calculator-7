@@ -71,7 +71,16 @@ public class Application {
     // 유효성 검사
     private void validateInput(String value, String separator) {
         for (String number : value.split(separator)) {
-            // String -> int 변환 메서드
+            convertStringToInt(number);
+        }
+    }
+
+    // String -> int 변환
+    private void convertStringToInt(String str){
+        if (str.isEmpty()) { return; }
+        int number = Integer.parseInt(str.trim());
+        if(number < 0){
+            throw new IllegalArgumentException("양수만 입력 가능합니다.");
         }
     }
 
