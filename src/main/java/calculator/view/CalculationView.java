@@ -8,4 +8,8 @@ public class CalculationView {
         System.out.println(Message.INPUT_MESSAGE);
         return Console.readLine();
     }
+
+    public static void output(long sum) {
+        System.out.printf(Message.OUTPUT_MESSAGE, sum);
+    }
 }

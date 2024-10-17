@@ -16,4 +16,8 @@ public class Number {
             throw new IllegalArgumentException();
         }
     }
+
+    public long add(long sum) {
+        return number + sum;
+    }
 }

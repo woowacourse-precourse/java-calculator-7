@@ -13,4 +13,16 @@ public class Numbers {
     public void add(String numberStr) {
         numbers.add(new Number(numberStr));
     }
+
+    public int size() {
+        return numbers.size();
+    }
+
+    public long sum() {
+        long sum = 0;
+        for (Number number : numbers) {
+            sum = number.add(sum);
+        }
+        return sum;
+    }
 }

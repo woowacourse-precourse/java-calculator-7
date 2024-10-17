@@ -51,4 +51,8 @@ public class InputData {
     private boolean isStartOrEndSeparator(String input) {
         return separators.contain(input.charAt(0)) || separators.contain(input.charAt(input.length() - 1));
     }
+
+    public long sum() {
+        return numbers.sum();
+    }
 }
