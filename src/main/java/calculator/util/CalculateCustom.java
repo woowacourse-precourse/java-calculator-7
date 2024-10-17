@@ -21,16 +21,16 @@ public class CalculateCustom extends CalculateSeparator {
     }
 
     public static String getCustomPreToPost(String userInput) {
-        return substringUserInputWithSeparator(userInput, getCustomPreIndex(userInput), getCustomPostIndex(userInput));
+        return substringUserInputWithSeparator(userInput, makeIndexList(getCustomPreIndex(userInput), getCustomPostIndex(userInput)));
     }
 
     public static String getCustomSeparator(String userInput) {
         String splitCustom = getCustomPreToPost(userInput);
-        return substringUserInputWithSeparator(splitCustom, TWO, getUserInputLength(splitCustom) - TWO);
+        return substringUserInputWithSeparator(splitCustom, makeIndexList(TWO, getUserInputLength(splitCustom) - TWO));
     }
 
     public static String getUserInput(String userInput) {
-        return substringUserInputWithSeparator(userInput, getCustomPostIndex(userInput), getUserInputLength(userInput));
+        return substringUserInputWithSeparator(userInput, makeIndexList(getCustomPostIndex(userInput), getUserInputLength(userInput)));
     }
 
     public static List<String> splitWithCustomSeparator(String userInput) {
