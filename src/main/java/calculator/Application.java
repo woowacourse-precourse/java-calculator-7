@@ -27,12 +27,8 @@ public class Application {
     }
 
     public static String[] operationSetting(String operationInput, ArrayList<String> separate){
-        if(operationInput.isEmpty())
-            return new String[0];
-        else{
             String separatorPattern = String.join("|", separate);
             return operationInput.split(separatorPattern);
-        }
     }
 
     public static void main(String[] args) {
@@ -46,6 +42,8 @@ public class Application {
             for(String number: operationSetting(str.substring(str.indexOf("\\n")+2), separate)){
                 if (number.matches("[1-9]\\d*"))
                     result += Integer.parseInt(number);
+                else if (number.isEmpty())
+                    result += 0;
                 else throw new IllegalArgumentException();
             }
             System.out.println("결과 : " + result);
@@ -55,6 +53,8 @@ public class Application {
             for(String number: operationSetting(str, separate)){
                 if (number.matches("[1-9]\\d*"))
                     result += Integer.parseInt(number);
+                else if (number.isEmpty())
+                    result += 0;
                 else throw new IllegalArgumentException();
             }
             System.out.println("결과 : " + result);
