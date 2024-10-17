@@ -28,6 +28,9 @@ public class MyCalculator {
     }
 
     public int getSum() {
+        if (numString.equals("")) {
+            return 0;
+        }
         String[] array = makeArray();
         int sum = 0;
 
