@@ -39,12 +39,6 @@ public class Calculator {
                 .toArray(String[]::new);
     }
 
-    private String getSplitRegex(String customDelimiter){
-        return REGEX_OPEN_BRACKET
-                + customDelimiter + DEFAULT_DELIMITERS
-                + REGEX_CLOSE_BRACKET;
-    }
-
     private String getCustomDelimiterString(String input){
         if(hasCustomDelimiter(input)){
             int customDelimiterEndIndex = findCustomDelimiterEndIndex(input);
@@ -59,15 +53,21 @@ public class Calculator {
         return hasCustomDelimiterStart(input) && hasCustomDelimiterEnd(input);
     }
 
+    private int findCustomDelimiterEndIndex(String input){
+        return input.indexOf(CUSTOM_DELIMITER_END);
+    }
+
+    private String getSplitRegex(String customDelimiter){
+        return REGEX_OPEN_BRACKET + customDelimiter
+                + DEFAULT_DELIMITERS + REGEX_CLOSE_BRACKET;
+    }
+
     private String deleteCustomDelimiterString(String input){
-        return hasCustomDelimiter(input) ? input.substring(getFirstIndexAfterDelimiter(input)) : input;
+        return hasCustomDelimiter(input) ?
+                input.substring(getFirstIndexAfterDelimiter(input)) : input;
     }
     private int getFirstIndexAfterDelimiter(String input){
         return input.indexOf(CUSTOM_DELIMITER_END)+CUSTOM_DELIMITER_END_LENGTH;
-    }
-
-    private int findCustomDelimiterEndIndex(String input){
-        return input.indexOf(CUSTOM_DELIMITER_END);
     }
 
     private boolean hasCustomDelimiterEnd(String input){

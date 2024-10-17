@@ -10,16 +10,7 @@ public class Utils {
     }
 
     public static int calculateArraySum(int[] numbers){
-        if (numbers == null || numbers.length == 0) {
-            return 0;
-        }
-
-        int sum = 0;
-        for (int number : numbers) {
-            sum += number;
-        }
-
-        return sum;
+        return (numbers == null) ? 0 : Arrays.stream(numbers).sum();
     }
 
 }
