@@ -18,11 +18,11 @@ public class CalculatorController {
             outputView.printResult(0);
             return;
         }
-        int result = calculateStringRemainder(DelimiterSeparator.registerDelimiter(userInput), userInput);
+        int result = calculateString(DelimiterSeparator.registerDelimiter(userInput), userInput);
         outputView.printResult(result);
     }
 
-    public int calculateStringRemainder(int index, String userInput) {
+    public int calculateString(int index, String userInput) {
         boolean isPreviousValueNumeric = false;
         int sum = 0;
         for (String str : userInput.substring(index).split("")) {
