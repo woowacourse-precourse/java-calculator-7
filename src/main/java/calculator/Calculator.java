@@ -6,12 +6,14 @@ public class Calculator {
 	private String inputStr;
 	private long totalSum;
 	private char[] separator = new char[3];
+	private int separatorCnt;
 
 	public Calculator() {
 		inputStr = "";
 		totalSum = 0;
 		separator[0] = ',';
 		separator[1] = ':';
+		separatorCnt = 2;
 	}
 
 	public void run() {
@@ -59,6 +61,9 @@ public class Calculator {
 
 		// 커스텀 구분자 지정 부분 문자열 제거
 		inputStr = inputStr.substring(5);
+
+		// 구분자 개수 추가
+		separatorCnt++;
 	}
 
 	private void parsingNumsAndCalculate(String str) {
