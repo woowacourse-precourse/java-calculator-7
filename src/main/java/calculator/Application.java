@@ -14,16 +14,10 @@ public class Application {
 
     public static void main(String[] args) {
         String input = readLine();
-        if (isCustomSeparator(input)) {
-            try {
-                input = extractCustomSeparator(input, separators);
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-                return;
-            }
-        }
-        System.out.println(separators);
 
+        if (isCustomSeparator(input)) {
+            input = extractCustomSeparator(input, separators);
+        }
         int[] numbers = extractNumbers(input, separators);
         int sumValue = sum(numbers);
 
@@ -36,9 +30,14 @@ public class Application {
 
     public static int[] extractNumbers(String input, List<String> separators) {
         String separatorsRegex = String.join("|", separators);
-        System.out.println(input);
-        System.out.println(Arrays.toString(input.split(separatorsRegex)));
-        return Arrays.stream(input.split(separatorsRegex)).mapToInt(Integer::parseInt).toArray();
+        int[] numbers = Arrays.stream(input.split(separatorsRegex)).mapToInt(Integer::parseInt).toArray();
+
+        for (int number : numbers) {
+            if (number < 0) {
+                throw new IllegalArgumentException("문자열 형식이 틀렸습니다.");
+            }
+        }
+        return numbers;
     }
 
     public static boolean isCustomSeparator(String input) {
@@ -60,7 +59,7 @@ public class Application {
 
             return extractNumber;
         } else {
-            throw new IllegalArgumentException("커스텀 구분자를 찾을 수 없습니다.");
+            throw new IllegalArgumentException("커스텀 구분자 형식이 틀렸습니다.");
         }
     }
 }
