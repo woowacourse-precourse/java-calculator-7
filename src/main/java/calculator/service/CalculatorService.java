@@ -1,5 +1,10 @@
 package calculator.service;
 
+import static calculator.constant.ErrorMessages.EMPTY_INPUT_MESSAGE;
+import static calculator.constant.ErrorMessages.INVAILD_CHAR_MESSAGE;
+import static calculator.constant.ErrorMessages.INVALID_DELIMITER_MESSAGE;
+import static calculator.constant.ErrorMessages.NUMBER_ASSIGN_ERROR_MESSAGE;
+
 import calculator.view.Input;
 import calculator.view.Output;
 import java.util.Arrays;
@@ -19,7 +24,7 @@ public class CalculatorService {
     }
 
     public void findCustomDelimiter() {
-        String userInput = input.orElseThrow(() -> new IllegalArgumentException("입력값이 없습니다"));
+        String userInput = input.orElseThrow(() -> new IllegalArgumentException(EMPTY_INPUT_MESSAGE));
         if (userInput.startsWith("//") && userInput.contains("\\n")) {
             int delimiterEndIndex = userInput.indexOf("\\n");
             customDelimiter = Optional.of(userInput.substring(2, delimiterEndIndex).toCharArray());
@@ -36,17 +41,17 @@ public class CalculatorService {
 
     private void validFormatInput(String formatInput) {
         if (formatInput.contains("/") || formatInput.contains("\\")) {
-            throw new IllegalArgumentException("'/'와'\\'는 커스텀 구분자를 등록하는 데에만 사용할 수 있습니다");
+            throw new IllegalArgumentException(INVAILD_CHAR_MESSAGE);
         }
     }
 
     private void validCustomDelimiter(char[] customDelimiterChars) {
         for (char c : customDelimiterChars) {
             if (Character.isDigit(c)) {
-                throw new IllegalArgumentException("커스텀 구분자에 숫자는 등록할 수 없습니다");
+                throw new IllegalArgumentException(NUMBER_ASSIGN_ERROR_MESSAGE);
             }
             if (c == '\\' || c == '/') {
-                throw new IllegalArgumentException("'/'와'\\'는 커스텀 구분자를 등록하는 데에만 사용할 수 있습니다");
+                throw new IllegalArgumentException(INVAILD_CHAR_MESSAGE);
             }
         }
     }
@@ -81,7 +86,7 @@ public class CalculatorService {
     private void isNumeric(String removeDelimiters) {
         numbersToCalculate = Optional.of(removeDelimiters.chars().filter(i -> {
             if (i < '0' || i > '9') {
-                throw new IllegalArgumentException("구분자나 숫자가 아닌 문자가 발견되었습니다: " + (char) i);
+                throw new IllegalArgumentException(INVALID_DELIMITER_MESSAGE + (char) i);
             }
             return true;
         }).map(i -> i - '0').toArray());
