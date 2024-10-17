@@ -22,7 +22,7 @@ public class DelimiterValidation {
 
     // 커스텀 구분자 검증 함수
     private static String[] validateCustomDelimiter(String formula) {
-        Matcher matcher = regexMatcher(formula, "^//(.)\\\\n(|([1-9][0-9]*(\\1[1-9][0-9]*)*))$");
+        Matcher matcher = regexMatcher(formula, "^//([^0-9])\\\\n(|([1-9][0-9]*(\\1[1-9][0-9]*)*))$");
         if (matcher.matches()) {
             return new String[]{Pattern.quote(matcher.group(1)), matcher.group(2)};
         }
