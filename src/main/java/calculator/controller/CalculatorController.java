@@ -16,7 +16,8 @@ public class CalculatorController {
         CustomDelimiterProcessor customDelimiterProcessor = new CustomDelimiterProcessor(delimiters);
         inputString = customDelimiterProcessor.addCustomDelimiters(inputString);
         Calculator calculator = new Calculator();
-        NumberExtractor.extractNumber(inputString, delimiters, calculator);
+        NumberExtractor numberExtractor = new NumberExtractor(delimiters, calculator);
+        numberExtractor.extractNumber(inputString);
         int result = calculator.calculate();
         OutputView.printResultMessage(result);
     }
