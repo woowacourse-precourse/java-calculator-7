@@ -6,9 +6,6 @@ public class Calculator {
     private final String delimiter1 = ",";
     private final String delimiter2 = ":";
 
-
-    public Calculator() {};
-
     public int calculateResult(String input) {
         String delimeters = delimiter1 + delimiter2;
         if (input.startsWith("//")) {
