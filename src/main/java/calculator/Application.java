@@ -7,8 +7,16 @@ public class Application {
         Scanner sc = new Scanner(System.in);
         String st = sc.next();
         String[] arr = st.split("[:;]");
-        for (String s : arr) {
-            System.out.print(s);
+
+        if(st.contains("//") && st.contains("\\n")) {
+            String[] arr1 = st.split("\\D");
+            for (String s : arr1) {
+                System.out.print(s);
+            }
+        } else {
+            for (String s : arr) {
+                System.out.print(s);
+            }
         }
     }
 }
