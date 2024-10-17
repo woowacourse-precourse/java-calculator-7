@@ -10,9 +10,9 @@ import java.util.List;
 
 public class Application {
 
-    private static final InputHandler inputHandler = new ConsoleInputHandler();
-    private static final OutputHandler outputHandler = new ConsoleOutputHandler();
-    private static final DelimiterChecker delimiterChecker = new DelimiterChecker();
+    private static final InputHandler INPUT_HANDLER = new ConsoleInputHandler();
+    private static final OutputHandler OUTPUT_HANDLER = new ConsoleOutputHandler();
+    private static final DelimiterChecker DELIMITER_CHECKER = new DelimiterChecker();
 
     public static void main(String[] args) {
         // TODO: 프로그램 구현
@@ -48,12 +48,12 @@ public class Application {
                 }
             }
         }
-        outputHandler.showAdditionResult(result);
+        OUTPUT_HANDLER.showAdditionResult(result);
     }
 
     private static String getUserInput() {
-        outputHandler.showUserInputMessage();
-        return inputHandler.getUserInput();
+        OUTPUT_HANDLER.showUserInputMessage();
+        return INPUT_HANDLER.getUserInput();
     }
 
     private static void validatePositiveNumber(int parsedNumber) {
@@ -67,7 +67,7 @@ public class Application {
     }
 
     private static boolean isCustomDelimiter(String input) {
-        return delimiterChecker.isCustomDelimiter(input);
+        return DELIMITER_CHECKER.isCustomDelimiter(input);
     }
 
     private static boolean inputIsNotEmpty(String input) {
