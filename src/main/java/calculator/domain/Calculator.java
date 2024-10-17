@@ -23,6 +23,7 @@ public class Calculator {
                 input.readSecondInput();
 
                 separator.validateCustomEmpty(input.getFirstInput()); // 커스텀 구분자가 비어있는지 확인
+                separator.validateCustomSize(input.getFirstInput()); // 커스텀 구분자의 길이를 확인
             }
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());

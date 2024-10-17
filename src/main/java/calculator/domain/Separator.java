@@ -41,4 +41,11 @@ public class Separator {
             throw new IllegalArgumentException("커스텀 문자가 공백입니다.");
         }
     }
+
+    //커스텀 구분자의 크기가 최대 길이(2) 범위인지 확인한다.
+    public void validateCustomSize(String input) {
+        if (input.length() > 2) {
+            throw new IllegalArgumentException("커스텀 문자의 최대 길이는 2입니다.");
+        }
+    }
 }
