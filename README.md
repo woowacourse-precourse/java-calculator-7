@@ -40,7 +40,7 @@
     - [ ] CustomSepParser 커스텀 구분자 처리 클래스
     - [ ] Validator 토큰 검증 클래스
     - [ ] Tokenizer 문자열을 토큰화 하는 클래스
-    - [ ] TokensToDoublesConverter 토큰들을 Double로 변환하는 클래스
+    - [ ] TokensToIntConverter 토큰들을 Int로 변환하는 클래스
 
 ## 2. Calculator
 
@@ -80,7 +80,6 @@
 
 - 피연산자의 숫자가 표현 범위를 초과할 경우, 에러를 발생시킨다.
 - 피연산자에 문자가 포함되어 있을 경우, 에러를 발생시킨다.
-    - 소수점을 표현하기 위한 '.'과 'E'는 제외한다.
 
 #### Calculation
 
