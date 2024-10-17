@@ -32,6 +32,24 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 음수_입력_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,-2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining("음수는 입력할 수 없습니다.")
+        );
+    }
+
+    @Test
+    void 제로_입력_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("0,1,2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining("0은 입력할 수 없습니다.")
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
