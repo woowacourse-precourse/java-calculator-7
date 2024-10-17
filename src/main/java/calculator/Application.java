@@ -38,6 +38,11 @@ public class Application {
         while (tokens.hasMoreTokens()) {
             // 분리된 문자열을 모두 `정수` 로 `파싱` 하고 숫자들을 등록한다.
             int number = Integer.parseInt(tokens.nextToken());
+            // 분리된 문자열이 모두 `양의 숫자값` 인지 확인한다.
+            if (number < 0) {
+                // 아닌 경우 예외를 throw 한다.
+                throw new IllegalArgumentException("숫자는 양수여야 합니다.");
+            }
         }
     }
 }
