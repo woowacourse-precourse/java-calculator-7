@@ -20,8 +20,13 @@ public class Application {
     }
 
     private static String[] parseNumbersFromExpression(String expression) {
-        String[] numList = expression.split(",|:");
-        return numList;
+        if (expression.startsWith("//")) { // //로 시작하는 경우 커스텀 구분자 사용
+            String seperator = expression.substring(2, expression.indexOf("\\n")); // 커스텀 구분자
+            String numberExpression = expression.substring(expression.indexOf("\\n") + 2); // 숫자 문자열
+            return numberExpression.split(seperator); // 커스텀 구분자로 숫자 문자열 분리
+        } else {
+            return expression.split(",|:");
+        }
     }
 
     private static String getExpression() {
