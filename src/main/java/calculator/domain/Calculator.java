@@ -9,6 +9,11 @@ import java.util.regex.Pattern;
 
 public class Calculator {
 
+    private static final String DEFAULT_DELIMITER_COMMA = ",";
+    private static final String DEFAULT_DELIMITER_COLON = ":";
+    private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\\\\n";
+    private static final int CUSTOM_DELIMITER_THRESHOLD = 2;
+
     public int splitAndSum(String input) {
         if (isEmptyInput(input)) {
             return 0;
@@ -26,14 +31,15 @@ public class Calculator {
 
     private List<String> buildDelimiters(String input) {
         List<String> delimiters = new ArrayList<>();
-        delimiters.add(",");
+        delimiters.add(DEFAULT_DELIMITER_COMMA);
+        delimiters.add(DEFAULT_DELIMITER_COLON);
         delimiters.addAll(getCustomDelimiters(input));
         return delimiters;
     }
 
     private List<String> getCustomDelimiters(String input) {
         List<String> delimiters = new ArrayList<>();
-        Matcher matcher = Pattern.compile("//(.)\\\\n").matcher(input);
+        Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(input);
 
         while (matcher.find()) {
             String delimiter = matcher.group(1);
@@ -44,7 +50,7 @@ public class Calculator {
     }
 
     private String extractNumbers(String input, int delimiterCount) {
-        if (delimiterCount > 2) {
+        if (delimiterCount > CUSTOM_DELIMITER_THRESHOLD) {
             int lastDelimiterIndex = input.lastIndexOf("\\n");
             return input.substring(lastDelimiterIndex + 2);
         }
