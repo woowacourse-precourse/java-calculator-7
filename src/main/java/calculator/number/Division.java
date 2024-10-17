@@ -36,13 +36,8 @@ public class Division {
     }
 
     private static String getPatten(String input) {
-        StringBuilder customPatten = new StringBuilder();
-        String customSeparator = input.substring(input.indexOf("//") + 2, input.indexOf("\\n"));
-        String[] separators = customSeparator.split("");
-        for (String separator : separators) {
-            customPatten.append("\\").append(separator).append("|");
-        }
-        return customPatten  + DEFAULT_SEPARATOR;
+        String customPattern = CustomPatternMaker.getCustomPattern(input);
+        return customPattern + DEFAULT_SEPARATOR;
     }
 
     private static List<String> makeList(String input, String patten, List<String> list) {
