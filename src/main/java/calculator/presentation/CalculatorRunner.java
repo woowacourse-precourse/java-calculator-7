@@ -22,8 +22,8 @@ public class CalculatorRunner {
     }
     private static NumberExtractor getProperExtractor(final RawDataType dataType) {
         if (dataType == RawDataType.NORMAL) {
-            return new NormalNumberExtractor();
+            return NormalNumberExtractor.getInstance();
         }
-        return new CustomNumberExtractor();
+        return CustomNumberExtractor.getInstance();
     }
 }
