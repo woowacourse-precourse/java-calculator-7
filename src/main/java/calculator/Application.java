@@ -15,7 +15,12 @@ public class Application {
         return Console.readLine();
     }
 
-    public String removeNumber(String initialStr) {
-        return initialStr.replaceAll("[0-9]", "");
+    public String removeNumber(String str) {
+        return str.replaceAll("[0-9]", "");
+    }
+
+    public String removeSeparator(String str, String separator) {
+        String formattedSeparator = "[" + separator + "]";
+        return str.replaceAll(formattedSeparator, "");
     }
 }
