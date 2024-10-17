@@ -11,31 +11,38 @@
 
 <br/>
 
-### 2. 입력 요구사항 확인
+### 2. 입력 요구사항 확인 및 구분자와 숫자 추출
 
 <br/>
 
 #### 입력 조건
 
 1. 기본 구분자
-   - 쉼표(,)
-   - 콜론(;)
+    - 쉼표(,)
+    - 콜론(;)
 
 
 2. 커스텀 구분자
-   - 원하는 문자를 구분자로 설정
-   - "//" + "원하는 문자" + "\n"
-   - 입력 문자열의 맨 앞에 위치
+    - 원하는 문자를 구분자로 설정
+    - "//" + "원하는 문자" + "\n"
+    - 입력 문자열의 맨 앞에 위치
 
 
 3. 가능한 숫자 범위
-   - 양수
+    - 양수
 
 <br/>
 
 #### 잘못된 입력 경우
 
 - `IllegalArgumentException` 발생 후 애플리케이션 종료
+
+<br/>
+
+#### 구현하면서 추가적으로 생각한 것
+
+- 입력 문자열 앞뒤 공백 제거
+- 숫자 계산이기 때문에 구분자로 숫자는 불가
 
 <br/>
 
@@ -50,6 +57,7 @@
     결과 : 6
 
 ---
+
 ## 설정 및 진행시 지킬 것
 
 - JDK 21 버전으로 진행
@@ -58,5 +66,6 @@
 - `System.exit()` 호출 금지
 - 파일 및 패키지 등의 이름 변경 및 이동 금지
 - 입력 받을 시 `camp.nextstep.edu.missionutils.Console`의 `readLine()`을 활용
-- [AngularJS Git Commit Message Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153) 참고해서 커밋 메세지 작성하기
+- [AngularJS Git Commit Message Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153) 참고해서 커밋 메세지
+  작성하기
 - [Java Style Guide](https://github.com/woowacourse/woowacourse-docs/tree/main/styleguide/java) 에 맞춰 코드 컨벤션 지키기
