@@ -6,16 +6,17 @@ public class Delimiter {
 
     public String extractDelimiter(String input) {
         if (validateStartsWith(input) && validateEndsWith(input)) {
-            return String.valueOf(input.charAt(DelimiterSyntaxIndex.SPLITTER_INDEX.getKey()));
+            return String.valueOf(input.charAt(DelimiterSyntaxIndex.DELIMITER_INDEX.getKey()));
         }
-        return null;
+        return "";
+    }
+
+    public String removeDelimiterSyntax(String input) {
+        return input.substring(DelimiterSyntaxIndex.DELIMITER_AFTER.getKey());
     }
 
     public boolean validateHasDefaultOrCustomDelimiter(String input, String customDelimiter) {
-        if (!input.matches("[0-9,:" + customDelimiter + "]*")) {
-            throw new IllegalArgumentException("허용되지 않는 형식입니다.");
-        }
-        return true;
+        return input.matches("[0-9,:" + customDelimiter + "]*");
     }
 
     private boolean validateStartsWith(String input) {

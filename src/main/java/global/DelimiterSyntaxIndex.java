@@ -2,14 +2,15 @@ package global;
 
 public enum DelimiterSyntaxIndex {
 
-    SPLITTER_INDEX(2),
+    DELIMITER_INDEX(2),
     FIRST_END(3),
-    SECOND_END(4);
+    SECOND_END(4),
+    DELIMITER_AFTER(5);
 
     private final int key;
 
-    DelimiterSyntaxIndex(int i) {
-        this.key = i;
+    DelimiterSyntaxIndex(int key) {
+        this.key = key;
     }
 
     public int getKey() {
