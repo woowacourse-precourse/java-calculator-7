@@ -1,5 +1,7 @@
 package calculator.domain;
 
+import calculator.util.ValidationUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -25,6 +27,7 @@ public class Calculator {
 
         while (matcher.find()) {
             String delimiter = matcher.group(1);
+            ValidationUtils.validateCustomDelimiter(delimiter);
             delimiters.add(Pattern.quote(delimiter));
         }
         return delimiters;
@@ -40,13 +43,19 @@ public class Calculator {
 
     private int sumNumbers(String[] numbers) {
         int sum = 0;
+        List<Integer> parsedNumbers = new ArrayList<>();
+
         for (String number : numbers) {
             number = number.trim();
-            if (!number.isEmpty() && number.matches("[1-9]\\d*")) {
+            if (!number.isEmpty()) {
+                ValidationUtils.validateValidInteger(number);
                 int parsedNumber = Integer.parseInt(number);
+                parsedNumbers.add(parsedNumber);
                 sum = safeSum(sum, parsedNumber);
             }
         }
+
+        ValidationUtils.validateNumbers(parsedNumbers);
         return sum;
     }
 

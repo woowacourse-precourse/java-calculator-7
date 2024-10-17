@@ -5,6 +5,10 @@ import java.util.List;
 
 public class ValidationUtils {
 
+    private ValidationUtils() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static void validateNumbers(List<Integer> numbers) {
         validateNegativeNumbers(numbers);
         validateZero(numbers);
