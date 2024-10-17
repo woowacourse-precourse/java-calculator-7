@@ -1,7 +1,5 @@
 package calculator;
 
-import java.util.List;
-
 public class Input {
 
     private final String input;
@@ -14,8 +12,8 @@ public class Input {
         return input;
     }
 
-    String[] separatorInput(List<String> separator) {
-        String regex = String.join("|", separator);
+    String[] separatorInput(Separator separator) {
+        String regex = separator.getRegex();
         String[] splitStr = input.split(regex);
 
         return splitStr;
