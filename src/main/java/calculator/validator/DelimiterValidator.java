@@ -8,10 +8,14 @@ public class DelimiterValidator {
         if (str.length() >= 5) {
             str = str.substring(0, 5);
 
-            return str.startsWith(PREFIX) && str.endsWith(SUFFIX);
+            return isCustomDelimiter(str);
         }
 
         return false;
+    }
+
+    private static boolean isCustomDelimiter(String str) {
+        return str.startsWith(PREFIX) && str.endsWith(SUFFIX);
     }
 
     public static String validRequireEscapeCharacter(String customDelimiter) {
