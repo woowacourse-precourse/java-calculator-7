@@ -17,9 +17,9 @@ public class StringAddCalculator {
             return DEFAULT_SUM_RESULT;
         }
 
-        final Integer[] inputValue = inputParser.splitIncludeCustomDelimiter(input);
+        final Integer[] extractNumbers = inputParser.extractNumbersFromInput(input);
 
-        return calculator.sumAll(inputValue);
+        return calculator.sumAll(extractNumbers);
     }
 
     private boolean nullOrEmptyString(final String input) {

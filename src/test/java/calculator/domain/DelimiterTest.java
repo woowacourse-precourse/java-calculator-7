@@ -2,11 +2,14 @@ package calculator.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class DelimiterTest {
 
-    private final Delimiter delimiter = new Delimiter();
+    private final Delimiters delimiters = new Delimiters();
 
     @Test
     void 모든_split_구분자를_확인() {
@@ -14,10 +17,10 @@ public class DelimiterTest {
         String input = "//=\n1=2=3";
 
         // when
-        final String allDelimiters = delimiter.getAllDelimiters(input);
+        final List<String> allDelimiters = delimiters.getAllDelimiters(input);
 
         // then
-        assertThat(allDelimiters).isEqualTo(",|:|=");
+        assertThat(allDelimiters).containsExactly(",", ":", "=");
     }
 
     @Test
@@ -26,9 +29,9 @@ public class DelimiterTest {
         String input = "1,2,3";
 
         // when
-        final String defaultDelimiters = delimiter.getAllDelimiters(input);
+        final List<String> allDelimiters = delimiters.getAllDelimiters(input);
 
         // then
-        assertThat(defaultDelimiters).isEqualTo(",|:");
+        assertThat(allDelimiters).containsExactly(",",":");
     }
 }

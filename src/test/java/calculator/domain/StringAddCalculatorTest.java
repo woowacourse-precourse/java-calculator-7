@@ -9,7 +9,7 @@ public class StringAddCalculatorTest {
     private final StringAddCalculator stringAddCalculator;
 
     public StringAddCalculatorTest() {
-        this.stringAddCalculator = new StringAddCalculator(new InputParser(new Delimiter()),new Calculator());
+        this.stringAddCalculator = new StringAddCalculator(new InputParser(new Delimiters()),new Calculator());
     }
 
     @Test
