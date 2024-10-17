@@ -1,6 +1,7 @@
 package calculator.controller;
 
 
+import calculator.service.CalculatorService;
 import calculator.view.CalculatorInputer;
 import calculator.view.CalculatorOutputer;
 
@@ -14,7 +15,7 @@ public class CalculatorController {
         String inputString = calculatorInputer.getInput();
 
         CalculatorService calculatorService = new CalculatorService();
-        result = calculatorService.calculateSumString(inputString);
+        int result = calculatorService.calculateSumString(inputString);
 
         calculatorOutputer.printResult(result);
     }
