@@ -21,50 +21,61 @@ public class CalculatorService {
     public void findCustomDelimiter() {
         String userInput = input.orElseThrow(() -> new IllegalArgumentException("입력값이 없습니다"));
         if (userInput.startsWith("//") && userInput.contains("\\n")) {
-            customDelimiter = Optional.of(userInput.substring(2, userInput.indexOf("\\n")).toCharArray());
+            int delimiterEndIndex = userInput.indexOf("\\n");
+            customDelimiter = Optional.of(userInput.substring(2, delimiterEndIndex).toCharArray());
             char[] customDelimiterChars = customDelimiter.orElse(new char[0]);
-            for (char c : customDelimiterChars) {
-                if (c >= '0' && c <= '9') {
-                    throw new IllegalArgumentException("커스텀 구분자에 숫자는 등록할 수 없습니다");
-                }
-                if (c == '\\' || c == '/') {
-                    throw new IllegalArgumentException("'/'와'\\'는 커스텀 구분자를 등록하는 데에만 사용할 수 있습니다");
-                }
-            }
-            formatInput = userInput.substring(userInput.indexOf("\\n") + 2);
+            validCustomDelimiter(customDelimiterChars);
+            formatInput = userInput.substring(delimiterEndIndex + 2);
         }
 
         formatInput = Optional.ofNullable(formatInput).orElse(userInput);
-        if (formatInput.contains("/") || formatInput.contains("\\")) {
-            throw new IllegalArgumentException("'/'와'\\'는 커스텀 구분자를 등록하는 데에만 사용할 수 있습니다");
-        }
+        validFormatInput(formatInput);
 
         customDelimiter = Optional.ofNullable(customDelimiter).orElse(Optional.empty());
     }
 
-    public void deleteDelimiter() {
-        String removeDelimiters = formatInput.chars().filter(i -> {
-                    char currentChar = (char) i;
+    private void validFormatInput(String formatInput) {
+        if (formatInput.contains("/") || formatInput.contains("\\")) {
+            throw new IllegalArgumentException("'/'와'\\'는 커스텀 구분자를 등록하는 데에만 사용할 수 있습니다");
+        }
+    }
 
-                    boolean isDelimiter = false;
-                    for (char c : constantDelimiter) {
-                        if (currentChar == c) {
-                            isDelimiter = true;
-                            break;
-                        }
-                    }
-                    for (char c : customDelimiter.orElse(new char[0])) {
-                        if (currentChar == c) {
-                            isDelimiter = true;
-                            break;
-                        }
-                    }
-                    return !isDelimiter;
-                }).mapToObj(c -> (char) c)
+    private void validCustomDelimiter(char[] customDelimiterChars) {
+        for (char c : customDelimiterChars) {
+            if (Character.isDigit(c)) {
+                throw new IllegalArgumentException("커스텀 구분자에 숫자는 등록할 수 없습니다");
+            }
+            if (c == '\\' || c == '/') {
+                throw new IllegalArgumentException("'/'와'\\'는 커스텀 구분자를 등록하는 데에만 사용할 수 있습니다");
+            }
+        }
+    }
+
+    public void deleteDelimiter() {
+        String removeDelimiters = formatInput.chars()
+                .filter(i -> !isDelimiter((char) i))
+                .mapToObj(c -> (char) c)
                 .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
                 .toString();
 
         isNumeric(removeDelimiters);
+    }
+
+    private boolean isDelimiter(char currentChar) {
+        boolean isDelimiter = false;
+        for (char c : constantDelimiter) {
+            if (currentChar == c) {
+                isDelimiter = true;
+                break;
+            }
+        }
+        for (char c : customDelimiter.orElse(new char[0])) {
+            if (currentChar == c) {
+                isDelimiter = true;
+                break;
+            }
+        }
+        return !isDelimiter;
     }
 
     private void isNumeric(String removeDelimiters) {
