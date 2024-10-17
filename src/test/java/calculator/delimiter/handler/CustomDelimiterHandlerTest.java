@@ -1,22 +1,23 @@
 package calculator.delimiter.handler;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.List;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
 class CustomDelimiterHandlerTest {
     private CustomDelimiterHandler handler = new CustomDelimiterHandler();
+
     @Test
     @DisplayName("//와 \n 사이에 하나 이상의 구분자 문자가 포함되어야 한다.")
     void when_custom_delimiter_is_between_double_slash_and_newline_then_support_is_true() {
         assertThat(handler.isSupport("//;\\n1;2;3")).isTrue();
         assertThat(handler.isSupport("//;\\n1")).isTrue();
-        assertThat(handler.isSupport("//;\\n")).isTrue();
+        assertThat(handler.isSupport("//;\\n")).isFalse();
         assertThat(handler.isSupport("//\\n")).isFalse();
+        assertThat(handler.isSupport("")).isFalse();
     }
 
     @Test
