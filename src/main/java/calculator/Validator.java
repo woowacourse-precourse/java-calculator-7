@@ -10,9 +10,9 @@ public abstract class Validator {
         }
     }
 
-    public static void validateIfNotNumber(String splitInput) {
+    public static int validateIfNotNumber(String splitInput) {
         try {
-            Integer.parseInt(splitInput);
+            return Integer.parseInt(splitInput);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }

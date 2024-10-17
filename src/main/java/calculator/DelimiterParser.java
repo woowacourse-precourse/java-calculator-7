@@ -54,8 +54,7 @@ public class DelimiterParser {
 
         List<Integer> list = new ArrayList<>();
         for (String splitNumber : split) {
-            Validator.validateIfNotNumber(splitNumber);
-            list.add(Integer.parseInt(splitNumber));
+            list.add(Validator.validateIfNotNumber(splitNumber));
         }
         return list;
     }
