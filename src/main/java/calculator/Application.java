@@ -10,16 +10,18 @@ public class Application {
         String input = Console.readLine();
 
         String str = "";
-        if(input.charAt(0) == '/') {
+        if (input.charAt(0) == '/') {
             str = String.valueOf(input.charAt(2));
+            input = input.substring(5);
         }
 
         StringTokenizer st;
-        st = new StringTokenizer(input.substring(5),",:"+str);
-        
+        st = new StringTokenizer(input, ",:" + str);
+
         int sum = 0;
-        while(st.hasMoreTokens()) {
+        while (st.hasMoreTokens()) {
             sum += Integer.parseInt(st.nextToken());
         }
+
     }
 }
