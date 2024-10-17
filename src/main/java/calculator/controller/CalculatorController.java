@@ -14,9 +14,16 @@ public class CalculatorController {
         int[] numbers = Arrays.stream(nums).mapToInt(Integer::parseInt).toArray();
         int sum = 0;
         for (int i : numbers) {
+            isPositive(i);
             sum += i;
         }
         calculator.setResult(sum);
         OutputView.printResult(calculator);
+    }
+
+    private static void isPositive(int num) {
+        if (num < 0) {
+            throw new IllegalArgumentException("양수만 입력 가능합니다. 입력된 값 : " + num);
+        }
     }
 }
