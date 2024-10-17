@@ -38,4 +38,10 @@ public class Exceptions {
         }
     }
 
+    public void validateCustomDelimiterSize(int count) {
+        if(count > 3) {
+            throw new IllegalArgumentException("[ERROR] 커스텀 구분자는 3개까지 가능합니다.");
+        }
+    }
+
 }

@@ -23,9 +23,13 @@ public class Controller {
     private void getString() {
         InputMessage.inputString();
         String input = Console.readLine().trim();
+
         exceptions.validateColonDelimiter(input);
         exceptions.validateCommaDelimiter(input);
+
         inputString = new InputString(input);
         mainService.getCustomDelimiter(inputString);
     }
+
+
 }

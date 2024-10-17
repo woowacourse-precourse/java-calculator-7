@@ -14,12 +14,20 @@ public class InputString {
         this.inputString = inputString;
     }
 
+    public void setInputString(String inputString) {
+        this.inputString = inputString;
+    }
+
     public String getInputString() {
         return inputString;
     }
 
     public void setRefinedString(String refinedString) {
         this.refinedString = refinedString;
+    }
+
+    public List<String> getCustomDelimiter() {
+        return customDelimiter;
     }
 
     public void addCustomDelimiter(String input) {
