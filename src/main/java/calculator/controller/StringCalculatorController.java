@@ -4,6 +4,7 @@ import calculator.domain.StringCalculator;
 import calculator.domain.StringParser;
 import calculator.view.InputView;
 import calculator.view.OutputView;
+import java.util.List;
 
 public class StringCalculatorController {
 
@@ -17,7 +18,9 @@ public class StringCalculatorController {
 
     public void startCalculator() {
         StringParser parser = new StringParser(inputView.getString());
-        StringCalculator calculator = new StringCalculator(parser.getNumbers());
-        outputView.printResult(calculator.getResult());
+        String delimiter = parser.extractDelimiter();
+        List<String> numbers = parser.parseStrings(delimiter);
+        StringCalculator calculator = new StringCalculator(numbers);
+        outputView.printResult(calculator.calculateStrings());
     }
 }
