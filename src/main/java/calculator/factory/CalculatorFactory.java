@@ -9,10 +9,10 @@ import calculator.splitter.NormalSplitter;
 public class CalculatorFactory {
 
     public Calculator calculator() {
-        return new Calculator(normalSplliter());
+        return new Calculator(normalSplitter());
     }
 
-    private NormalSplitter normalSplliter() {
+    private NormalSplitter normalSplitter() {
         return new NormalSplitter();
     }
 }
