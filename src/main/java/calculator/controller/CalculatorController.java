@@ -19,6 +19,7 @@ public class CalculatorController {
             view.printResult(result);
         } catch (IllegalArgumentException e) {
             view.printError(e.getMessage());
+            e.printStackTrace();
         }
     }
 }
