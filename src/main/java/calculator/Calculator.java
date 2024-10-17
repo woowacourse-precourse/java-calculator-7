@@ -66,6 +66,15 @@ public class Calculator {
 		separatorCnt++;
 	}
 
+	private long stringToLong(String strNum) {
+		long num = Long.parseLong(strNum);
+
+		if (num < Integer.MIN_VALUE || Integer.MAX_VALUE < num) {
+			throw new IllegalArgumentException();
+		}
+		return num;
+	}
+
 	private void parsingNumsAndCalculate(String str) {
 
 		// 처음과 끝에 구분자가 나올 때
