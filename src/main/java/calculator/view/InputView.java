@@ -1,10 +1,12 @@
 package calculator.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.Arrays;
-import java.util.List;
+import java.util.regex.Pattern;
 
 public class InputView {
+    private static final Pattern INPUT_PATTERN = Pattern.compile("^//[^\\d,:]\\n\\d+([,:]\\d+)*$");
+    private static final String INPUT_ERROR_MESSAGE = "[ERROR] 유효하지 않은 입력 형식입니다";
+
     public String inputString() {
         String input = Console.readLine();
         Console.close();
@@ -14,12 +16,8 @@ public class InputView {
     }
 
     public void validateString(String input) {
-        List<String> invalidInputs = Arrays.asList(
-                "1,,2", "-1,2,3", "1,2,a", "1[2[3", "/\n1", "//]]\n1", "1,2,3,", ",1,2,3", "//,\n1,2,3"
-        );
-
-        if (invalidInputs.contains(input)) {
-            throw new IllegalArgumentException();
+        if (!INPUT_PATTERN.matcher(input).matches()) {
+            throw new IllegalArgumentException(INPUT_ERROR_MESSAGE);
         }
     }
 }
