@@ -16,7 +16,8 @@ public class Application {
         DelimiterParser delimiterParser = new DelimiterParser(input);
         String[] stringArray = delimiterParser.splitString();
         int[] intArray = convertStringArrayToIntArray(stringArray);
-        System.out.println(sumIntArray(intArray));
+        int result = sumIntArray(intArray);
+        System.out.println("결과 : " + result);
     }
 
     public static int[] convertStringArrayToIntArray(String[] stringArray) {
