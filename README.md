@@ -1,6 +1,9 @@
 # 1주차 미션 - 문자열 덧셈 계산기
 
 ---
+Github: https://github.com/sso9594/java-calculator-7.git
+
+Notion: https://bit.ly/403pBxN
 ## 📝기능 구현 목록
 
 ---
