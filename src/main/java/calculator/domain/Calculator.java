@@ -4,6 +4,7 @@ public class Calculator {
 
     private Input input;
     private Separator separator;
+    private Numbers number;
 
     public void start() {
         //!!추후에 이 기능은 다른 객체에서 실행 해야할까?
@@ -20,7 +21,14 @@ public class Calculator {
                 separator.validateSeparators(input.getFirstInput()); // 구분자 검증 메소드 호출
 
                 //계산 문자열을 구분자로 구분한다.
-                separator.splitCalculationString(input.getFirstInput()); //String[] 반환
+                String[] parts = separator.splitCalculationString(
+                    input.getFirstInput());//String[] 반환
+
+                //Number 객체 생성
+                number = new Numbers(parts);
+
+                number.validateOnlyNumber(); //숫자로만 구성되어있는지 확인
+                
             } else {
                 // 커스텀 구분자 기능 실행
                 input.readSecondInput();
@@ -32,9 +40,15 @@ public class Calculator {
 
                 //예외처리 없이 정상흐름이면 커스텀 구분자를 리스트에 넣어준다.
                 separator.addCustomSeparator(input.getFirstInput());
-                
+
                 //계산 문자열을 구분자로 구분한다.
-                separator.splitCalculationString(input.getSecondInput()); //String[] 반환
+                String[] parts = separator.splitCalculationString(
+                    input.getSecondInput());//String[] 반환
+
+                //Number 객체 생성
+                number = new Numbers(parts);
+
+                number.validateOnlyNumber(); //숫자로만 구성되어있는지 확인
             }
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
