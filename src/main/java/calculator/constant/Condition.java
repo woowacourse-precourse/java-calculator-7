@@ -6,4 +6,12 @@ public class Condition {
 
     public static final char COMMA = ',';
     public static final char SEMICOLON = ';';
+    public static final String LEFT_SQUARE_BRACKET = "[";
+    public static final String RIGHT_SQUARE_BRACKET = "]";
+    public static final String BACKSLASH = "\\";
+
+    public static final String BACKSLASH_ESCAPE = "\\\\\\";
+    public static final String SQUARE_BRACKETS_ESCAPE = "\\";
+
+    public static final int NUMBER_MIN_VALUE = 1;
 }

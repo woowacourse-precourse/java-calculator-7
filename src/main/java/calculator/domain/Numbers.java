@@ -9,4 +9,8 @@ public class Numbers {
     public Numbers() {
         numbers = new ArrayList<>();
     }
+
+    public void add(String numberStr) {
+        numbers.add(new Number(numberStr));
+    }
 }

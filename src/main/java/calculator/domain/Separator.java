@@ -9,6 +9,10 @@ public class Separator {
         this.separator = separator;
     }
 
+    public boolean isSame(char separator) {
+        return this.separator == separator;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
