@@ -22,4 +22,12 @@ public class Calculator {
         }
         return "[,:]";
     }
+
+    private int sumArray(int[] intArray) {
+        int sum = 0;
+        for (int number : intArray) {
+            sum += number;
+        }
+        return sum;
+    }
 }
