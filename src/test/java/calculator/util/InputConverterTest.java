@@ -29,12 +29,12 @@ class InputConverterTest {
     }
 
     @Test
-    @DisplayName("기본 구분자로 문자열 분리 후 숫자 리스트 리턴")
+    @DisplayName("문자열에 구분자 한 개만 있는 경우")
     void testConvertNumberWithDefaultDelimiter(){
-        String extractedInput = ",|: 1,2:3,4:5";
+        String extractedInput = ",|: ,";
         List<Integer> expectDelimiterAndInput = InputConverter.convert(extractedInput);
 
-        assertThat(expectDelimiterAndInput).hasSize(5).containsExactly(1, 2, 3, 4, 5);
+        assertThat(expectDelimiterAndInput).hasSize(0);
     }
 
     @Test
