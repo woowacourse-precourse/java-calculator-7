@@ -98,6 +98,18 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 24");
         });
 
+        // 구분자가 공백일 경우 1: " "
+        assertSimpleTest(() -> {
+            run("// \\n2 22");
+            assertThat(output()).contains("결과 : 24");
+        });
+
+        // 구분자가 공백일 경우 2: "  "
+        assertSimpleTest(() -> {
+            run("//  \\n2  22");
+            assertThat(output()).contains("결과 : 24");
+        });
+
     }
 
 
@@ -160,6 +172,11 @@ class ApplicationTest extends NsTest {
 
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//||\\n||2||3|"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//  \\n2  3 4"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
