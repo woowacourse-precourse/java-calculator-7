@@ -12,9 +12,15 @@ public class StringParser {
     }
 
     public String[] parseString(String string) {
-        if (isCustomDelimiter(string)) {
+        if (string.isEmpty()) {
+            return new String[]{"0"};
+        }
+        if (string.length() >= 5 && isCustomDelimiter(string)) {
             String delimiter = getCustomDelimiter(string);
             String input = string.substring(5);
+            if (input.isEmpty()) {
+                return new String[]{"0"};
+            }
             return input.split(delimiter);
         }
         return string.split("[,|:]");
