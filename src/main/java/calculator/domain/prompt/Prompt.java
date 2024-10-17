@@ -32,14 +32,21 @@ public abstract class Prompt {
     }
 
     private void validateNumber(String data) {
-        if (data == null || data.isEmpty()) {
-            throw new IllegalArgumentException();
-        }
+        validateNotNullOrEmpty(data);
+        validateOnlyDigits(data);
+    }
 
+    private void validateOnlyDigits(String data) {
         for (char word: data.toCharArray()) {
             if (this.isNotDigit(word)) {
                 throw new IllegalArgumentException();
             }
+        }
+    }
+
+    private void validateNotNullOrEmpty(String data) {
+        if (data == null || data.isEmpty()) {
+            throw new IllegalArgumentException();
         }
     }
 
