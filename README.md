@@ -7,7 +7,7 @@
   → 입력이 null인 경우 IllegalArgumentException를 발생
 - [X]  입력이 null이 아닌 경우 Model에 해당하는 DTO를 이용하여 데이터를 Controller로 전달
   → DTO(request) 객체와 Controller 객체 생성
-- [ ]  이렇게 전달된 Controller에서 Service를 호출하여 핵심 비즈니스 로직(계산)을 실행
+- [x]  이렇게 전달된 Controller에서 Service를 호출하여 핵심 비즈니스 로직(계산)을 실행
   → Service 객체 생성
 - [ ]  Service에서는 우선 문자열을 파싱하여 커스텀 연산자를 뽑아내고, 이를 Set or List에 담아둠
   → 커스텀 연산자 등록 부분을 제외한 String을 반환함.

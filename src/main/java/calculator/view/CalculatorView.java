@@ -5,6 +5,7 @@ import static calculator.util.CustomStringUtils.printStringLineFeed;
 
 import calculator.controller.CalculatorController;
 import calculator.dto.request.CalculateRequest;
+import calculator.dto.response.CalculateResultResponse;
 import calculator.util.SingletonObjectProvider;
 import camp.nextstep.edu.missionutils.Console;
 
@@ -24,6 +25,8 @@ public class CalculatorView {
             throw new IllegalArgumentException("입력값이 없습니다.");
         }
 
-        calculatorController.calculate(CalculateRequest.from(input));
+        CalculateResultResponse response = calculatorController.calculate(CalculateRequest.from(input));
+
+        printStringLineFeed(String.valueOf(response.result()));
     }
 }
