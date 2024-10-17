@@ -13,4 +13,13 @@ class CalculatorTest {
         assertThat(Calculator.calculate("1:2:3")).isEqualTo(6);
         assertThat(Calculator.calculate("1,2,3")).isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("커스텀 구분자를 기준으로 한 각 숫자들의 합 계산")
+    void custom_separator() {
+        assertThat(Calculator.calculate("//;\\n1;2;3")).isEqualTo(6);
+        assertThat(Calculator.calculate("// \\n1 2 3")).isEqualTo(6);
+        assertThat(Calculator.calculate("///\\n1/2/3")).isEqualTo(6);
+        assertThat(Calculator.calculate("//\\\\n1\\2\\3")).isEqualTo(6);
+    }
 }
