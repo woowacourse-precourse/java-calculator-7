@@ -11,4 +11,6 @@ public class Separator {
         seperatorList.add(',');
         seperatorList.add(';');
     }
+
+
 }
