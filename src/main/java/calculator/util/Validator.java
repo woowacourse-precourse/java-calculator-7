@@ -16,7 +16,14 @@ public class Validator {
     private static void validNumberFormat(String text){
         try{
             int number = Integer.parseInt(text);
+            validPositiveNumber(number);
         }catch (IllegalArgumentException e){
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private static void validPositiveNumber(int number){
+        if(number<0){
             throw new IllegalArgumentException();
         }
     }
