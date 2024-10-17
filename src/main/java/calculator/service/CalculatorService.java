@@ -15,5 +15,6 @@ public class CalculatorService {
     public void run()
     {
         inputView.printMessage(DESCRIPTION);
+        inputView.getUserInput();
     }
 }
