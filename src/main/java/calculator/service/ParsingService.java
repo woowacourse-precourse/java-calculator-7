@@ -12,6 +12,8 @@ public class ParsingService {
         if(checkIFStringEmpty(operandStr)){
             operandList.add(0);
         }
+
+
     }
 
     //입력받은 문자열이 없을 때 true return
