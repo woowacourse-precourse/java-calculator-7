@@ -209,7 +209,6 @@ public class MakeNewArrayTest extends NsTest {
     }
 
     @Test
-    @DisplayName("실제 코드 적용시 정상여부 테스트 1번")
     public void 실제코드_적용_1번() {
         assertSimpleTest(() -> {
             run("//>\\n1:2,3");
@@ -219,6 +218,6 @@ public class MakeNewArrayTest extends NsTest {
 
     @Override
     protected void runMain() {
-
+        Application.main(new String[]{});
     }
 }
