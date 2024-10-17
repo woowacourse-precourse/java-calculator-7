@@ -1,4 +1,5 @@
 package calculator.view.output;
 
-public interface InfoOutput {
+public interface InfoService {
+    void info();
 }
