@@ -13,6 +13,7 @@ public class ValidationUtils {
     public static void validateCustomDelimiter(String delimiter) {
         validateNullOrEmpty(delimiter);
         validateSingleCharacter(delimiter);
+        validateAllowedCharacters(delimiter);
     }
 
     public static void validateNumber(String input) {
@@ -52,6 +53,14 @@ public class ValidationUtils {
     private static void validateSingleCharacter(String delimiter) {
         if (delimiter.length() != 1) {
             throw new IllegalArgumentException("유효하지 않은 커스텀 구분자입니다. 구분자는 단일 문자여야 합니다. 문제가 되는 입력값: [" + delimiter + "]");
+        }
+    }
+
+    private static void validateAllowedCharacters(String delimiter) {
+        List<String> disallowedCharacters = List.of("\n", "\t", "\r");
+
+        if (disallowedCharacters.stream().anyMatch(delimiter::contains)) {
+            throw new IllegalArgumentException("유효하지 않은 커스텀 구분자입니다. 허용되지 않는 문자가 포함되어 있습니다. 문제가 되는 입력값: [" + delimiter + "]");
         }
     }
 }
