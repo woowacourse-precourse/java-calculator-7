@@ -15,6 +15,7 @@ public class Application {
         validateInput(input);
         // 기본 구분자 또는 커스텀 구분자 추출
         String delimiter = getDelimiter(input);
+        System.out.println("delimiter="+delimiter);
         // 문자열에서 커스텀 구분자 정의 섹션 제거
         input = removeDelimiterSection(input);
         // 구분자로 문자열을 분리
@@ -59,7 +60,10 @@ public class Application {
     * 기본 구분자 (,), (:) 또는 커스텀 구분자를 반환한다.
      */
     public static String getDelimiter(String input) {
-        throw new IllegalArgumentException("getDelimiter() 아직 구현되지 않았습니다.");
+        if (input.startsWith("//")){
+            return input.substring(2, input.indexOf("\n"));
+        }
+        return "[,|:]";
     }
 
     /*
