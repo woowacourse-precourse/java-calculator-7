@@ -30,4 +30,20 @@ public class Application {
 
         return res;
     }
+
+    private static int checkValueCorrect(String value){
+        int intValue;
+
+        try {
+            intValue = Integer.parseInt(value);
+        }catch (IllegalArgumentException e){
+            throw new IllegalArgumentException("정수가 아닌 입력이 감지되었습니다.\n");
+        }
+
+        if(intValue < 0) {
+            throw new IllegalArgumentException("음수를 입력했습니다.\n");
+        }
+
+        return intValue;
+    }
 }
