@@ -13,8 +13,11 @@ class StringSplitterTest {
         StringSplitter splitter = new StringSplitter();
         String str = "1,2:3";
 
+        DelimiterExtractor extractor = new DelimiterExtractor();
+
         // when
-        List<String> list = splitter.split(str);
+        String regex = extractor.extractDelimiterRegex(str);
+        List<String> list = splitter.split(str, regex);
 
         // then
         assert list.size() == 3;
@@ -30,8 +33,11 @@ class StringSplitterTest {
         StringSplitter splitter = new StringSplitter();
         String str = "//;\\n1;2;3";
 
+        DelimiterExtractor extractor = new DelimiterExtractor();
+
         // when
-        List<String> list = splitter.split(str);
+        String regex = extractor.extractDelimiterRegex(str);
+        List<String> list = splitter.split(str, regex);
 
         // then
         assert list.size() == 3;
@@ -47,8 +53,11 @@ class StringSplitterTest {
         StringSplitter splitter = new StringSplitter();
         String str = "//;\\n1";
 
+        DelimiterExtractor extractor = new DelimiterExtractor();
+
         // when
-        List<String> list = splitter.split(str);
+        String regex = extractor.extractDelimiterRegex(str);
+        List<String> list = splitter.split(str, regex);
 
         // then
         assert list.size() == 1;
@@ -62,8 +71,11 @@ class StringSplitterTest {
         StringSplitter splitter = new StringSplitter();
         String str = "//[\\n1[2,3";
 
+        DelimiterExtractor extractor = new DelimiterExtractor();
+
         // when
-        List<String> list = splitter.split(str);
+        String regex = extractor.extractDelimiterRegex(str);
+        List<String> list = splitter.split(str, regex);
 
         // then
         assert list.size() == 3;
