@@ -19,6 +19,32 @@ class CalculatorTest {
     }
 
     @Test
+    void 문자열이_null일_경우() {
+        //given
+        final Calculator calculator = new Calculator();
+        final String str = null;
+
+        //when
+        int result = calculator.sum(str);
+
+        //Then
+        assertThat(result).isEqualTo(0);
+    }
+
+    @Test
+    void 문자열이_비었을_경우() {
+        //given
+        final Calculator calculator = new Calculator();
+        final String str = "";
+
+        //when
+        int result = calculator.sum(str);
+
+        //Then
+        assertThat(result).isEqualTo(0);
+    }
+
+    @Test
     void 예외_다른_문자가_있을_경우() {
         //given
         final Calculator calculator = new Calculator();
