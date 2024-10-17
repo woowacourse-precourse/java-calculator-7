@@ -39,4 +39,12 @@ public class Calculator {
         }
         return result;
     }
+
+    public String getExp() {
+        return exp;
+    }
+
+    public String getRegex() {
+        return regex;
+    }
 }
