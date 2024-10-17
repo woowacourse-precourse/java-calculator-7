@@ -5,11 +5,12 @@ import camp.nextstep.edu.missionutils.Console;
 public class Controller {
 
     private final StringAddCalculator calculator = new StringAddCalculator();
+
     public void run() {
         promptForInputString();
         String input = Console.readLine();
 
-        int add = calculator.add(input);
+        double add = calculator.add(input);
         printResult(add);
     }
 
@@ -17,7 +18,7 @@ public class Controller {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
     }
 
-    private void printResult(int add) {
+    private void printResult(double add) {
         System.out.println("결과 : " + add);
     }
 }
