@@ -7,6 +7,7 @@ public class PasingString {
 
     public static String pasingString(String input, String delimiter) {
         findStartIndex(input, delimiter);
+        input = emptyString(input);
         String substring = input.substring(findStartIndex);
         String[] list = substring.split(delimiter);
 
@@ -24,4 +25,10 @@ public class PasingString {
         }
     }
 
+    public static String emptyString(String input) {
+        if (input.equals("")) {
+            input = "0";
+        }
+        return input;
+    }
 }

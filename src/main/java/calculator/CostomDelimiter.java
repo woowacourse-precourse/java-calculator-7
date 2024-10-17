@@ -4,7 +4,9 @@ public class CostomDelimiter {
     private static String delimiters = ",|:";
 
     public static String parseDelimiters(String inputMessage) {
-        findDelimiter(inputMessage);
+        if (inputMessage.length() >= 4) {
+            findDelimiter(inputMessage);
+        }
         return delimiters;
     }
 
