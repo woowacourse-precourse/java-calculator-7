@@ -21,28 +21,20 @@ public class Calculator {
             return sum(split);
         }
 
-        StringBuilder delimiter = new StringBuilder(",:");
-
-        int prev = 0;
-        for (int idx = 5; idx < userInput.length(); idx += 5) {
-            String split = userInput.substring(prev, idx);
-
-            if (split.startsWith("//") && split.endsWith("\\n")) {
-                delimiter.append(split.charAt(2));
-                prev = idx;
-                continue;
-            }
-
-            if (split.startsWith("//") || split.endsWith("\\n")) {
-                throw new IllegalArgumentException("잘못된 커스텀 구분자 에러");
-            }
-
-            break;
-        }
-
-        String[] split = userInput.substring(prev).split("[" + delimiter + "]");
+        String delimiter = ",:";
+        int endIdx = userInput.indexOf("\\n");
+        validateWrongCustom(endIdx);
+        String custom = userInput.substring(2, endIdx);
+        delimiter += custom;
+        String[] split = userInput.substring(endIdx + 2).split("[" + delimiter + "]");
         validatePositiveNumber(split);
         return sum(split);
+    }
+
+    private static void validateWrongCustom(int endIdx) {
+        if (endIdx == -1 || endIdx - 2 > 1) {
+            throw new IllegalArgumentException();
+        }
     }
 
     private static void validatePositiveNumber(String[] split) {
