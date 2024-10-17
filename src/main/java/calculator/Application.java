@@ -95,4 +95,14 @@ class Machine {
         }
         return result;
     }
+
+    public void run() {
+        this.string = getString();
+        setDelimiter(this.string);
+        
+        String[] temp = splitString(this.string);
+        int result = sum(temp);
+
+        printResult(result);
+    }
 }
