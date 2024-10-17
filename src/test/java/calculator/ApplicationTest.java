@@ -31,9 +31,30 @@ class ApplicationTest extends NsTest {
         System.setIn(new ByteArrayInputStream("1".getBytes()));
 
         assertSimpleTest(() ->
-                assertThat(calculator.setStr()).isEqualTo("1")
+                assertThat(calculator.inputStr()).isEqualTo("1")
         );
+    }
 
+    @Test
+    void 커스텀구분자_테스트() {
+        Calculator calculator = new Calculator();
+        System.setIn(new ByteArrayInputStream("//a1b2.c\\n".getBytes()));
+        calculator.inputStr();
+
+        assertSimpleTest(() ->
+                assertThat(calculator.checkCustomDelim()).get().isEqualTo("a1b2.c")
+        );
+    }
+
+    @Test
+    void 커스텀구분자_없음_테스트() {
+        Calculator calculator = new Calculator();
+        System.setIn(new ByteArrayInputStream("a1b2.c".getBytes()));
+        calculator.inputStr();
+
+        assertSimpleTest(() ->
+                assertThat(calculator.checkCustomDelim()).isEmpty()
+        );
     }
 
     @Override
