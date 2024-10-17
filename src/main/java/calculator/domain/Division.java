@@ -1,7 +1,7 @@
 package calculator.domain;
 
-import static calculator.util.CalculatorConst.END_DELIMITER;
-import static calculator.util.CalculatorConst.START_DELIMITER;
+import static calculator.util.CalculatorConst.END_CUSTOM_DELIMITER;
+import static calculator.util.CalculatorConst.START_CUSTOM_DELIMITER;
 
 import calculator.util.ErrorMessage;
 import java.util.Arrays;
@@ -16,7 +16,7 @@ public class Division {
 
     public List<String> split(String input) {
         validateFormat(input);
-        if (input.startsWith(START_DELIMITER)) {
+        if (isCustomFormat(input)) {
             String customDelimiter = getCustomDelimiter(input);
             String digits = getDigits(input);
             validateCustomDelimiter(customDelimiter, digits);
@@ -27,18 +27,23 @@ public class Division {
     }
 
     private static String getDigits(String input) {
-        return input.substring(input.indexOf(END_DELIMITER) + START_NUMBER_INDEX);
+        return input.substring(input.indexOf(END_CUSTOM_DELIMITER) + START_NUMBER_INDEX);
     }
 
     private static String getCustomDelimiter(String input) {
-        return input.substring(input.indexOf(START_DELIMITER)+CUSTOM_DELIMITER_START_INDEX , input.indexOf(END_DELIMITER));
+        return input.substring(input.indexOf(START_CUSTOM_DELIMITER)+CUSTOM_DELIMITER_START_INDEX , input.indexOf(
+                END_CUSTOM_DELIMITER));
     }
 
     private void validateFormat(String input) {
-        boolean isValidStart = input.isBlank() || isDigit(input) || input.startsWith(START_DELIMITER);
+        boolean isValidStart = input.isBlank() || isDigit(input) || isCustomFormat(input);
         if (!isValidStart) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_FORMAT);
         }
+    }
+
+    private static boolean isCustomFormat(String input) {
+        return input.startsWith(START_CUSTOM_DELIMITER) && input.contains(END_CUSTOM_DELIMITER);
     }
 
     private boolean isDigit(String input) {
@@ -56,7 +61,7 @@ public class Division {
 
     private void validateCustomFormat(String customDelimiter, String digits) {
         if (customDelimiter.isEmpty() || !isDigit(digits)) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_CUSTOM_DELIMITER);
+            throw new IllegalArgumentException(ErrorMessage.INVALID_CUSTOM_DELIMITER_FORMAT);
         }
     }
 
