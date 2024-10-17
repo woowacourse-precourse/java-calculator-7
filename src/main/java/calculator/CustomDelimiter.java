@@ -11,7 +11,10 @@ public class CustomDelimiter {
 			return defaultDelimiter;
 		}
 		if (beginIndex != 0 || endIndex == -1 || errIndex == 0) { // 커스텀 구분자를 위한 포맷이 지켜지지 않았을 때
-			throw new IllegalArgumentException("Invalid input");
+			throw new IllegalArgumentException("틀린 커스텀 구분자 포맷");
+		}
+		if (beginIndex + 2 == endIndex){
+			throw new IllegalArgumentException("빈 커스텀 구분자");
 		}
 		return input.substring(beginIndex + 2, endIndex);
 	}
