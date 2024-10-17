@@ -33,8 +33,8 @@ public class Application {
                 delimiterHandler = new DefaultDelimiterHandler();
             }
 
-            String numbersWithDelimiter = delimiterHandler.getNumbersWithDelimiter(input);
-            String[] splitNumbers = numbersWithDelimiter.split(buildDelimiterRegex());
+            String numbersWithDelimiter = extractNumbersWithDelimiter(delimiterHandler, input);
+            String[] splitNumbers = extractNumbersWithRegex(numbersWithDelimiter);
 
             for (String number : splitNumbers) {
                 try {
@@ -47,6 +47,14 @@ public class Application {
             }
         }
         OUTPUT_HANDLER.showAdditionResult(result);
+    }
+
+    private static String extractNumbersWithDelimiter(DelimiterHandler delimiterHandler, String input) {
+        return delimiterHandler.getNumbersWithDelimiter(input);
+    }
+
+    private static String[] extractNumbersWithRegex(String numbersWithDelimiter) {
+        return numbersWithDelimiter.split(buildDelimiterRegex());
     }
 
     private static String extractCustomDelimiter(String input) {
