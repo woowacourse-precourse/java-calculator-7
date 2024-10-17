@@ -7,7 +7,7 @@ public class Validator {
             input = "0";
         }
 
-        return input;
+        return input.trim();
     }
 
     public static String validateConvertedInput(String input, String delimiterRegex) {
