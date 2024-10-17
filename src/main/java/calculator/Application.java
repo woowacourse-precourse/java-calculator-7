@@ -7,14 +7,19 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해주세요");
         String input_str = Console.readLine();
 
+        String delimiter = ",|:";
+
         if(input_str.startsWith("//")){
             String[] split_str = input_str.split("\n");
             if(split_str.length ==2){
                 String customDelimiter = split_str[0].substring(2);
+                delimiter += "|" + customDelimiter;
                 input_str = split_str[1];
             }else {
                 throw new IllegalArgumentException("커스텀 구분자는 //와 \\n사이에 존재해야합니다. ");
             }
         }
+
+        String[] nums = input_str.split(delimiter);
     }
 }
