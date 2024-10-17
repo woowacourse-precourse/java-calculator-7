@@ -10,11 +10,28 @@ public class InputView {
      * @return : 입력받은 문자열을 반환합니다.
      */
     public String readInputString() {
-        System.out.println(START_MESSAGE);
+        printStartMessage();
+
         String userInput = Console.readLine();
-        if (userInput.isBlank()) {
-            throw new IllegalArgumentException("문자열을 입력해주세요.");
-        }
+        checkInputIsNullOrBlank(userInput);
+
         return userInput;
+    }
+
+    /***
+     * 계산기 프로그램 시작 메시지를 출력합니다.
+     */
+    private void printStartMessage() {
+        System.out.println(START_MESSAGE);
+    }
+
+    /***
+     * 입력값의 NULL 체크 및 공백 체크
+     * @param userInput : 사용자의 입력
+     */
+    private void checkInputIsNullOrBlank(String userInput) {
+        if (userInput == null || userInput.isBlank()) {
+            throw new IllegalArgumentException("형식에 맞춰 입력해주세요.");
+        }
     }
 }

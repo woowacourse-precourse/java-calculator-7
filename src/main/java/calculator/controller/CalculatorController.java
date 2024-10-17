@@ -1,5 +1,8 @@
 package calculator.controller;
 
+import calculator.model.CustomInput;
+import calculator.model.DefaultInput;
+import calculator.model.UserInput;
 import calculator.service.CalculateService;
 import calculator.view.InputView;
 import calculator.view.OutputView;
@@ -20,8 +23,13 @@ public class CalculatorController {
      */
     public void run() {
         String inputString = readInputStringFromInputView();
-        long sum = calculateService.calculate(inputString);
-        outputView.printResult(sum);
+
+        UserInput userInput = inputString.startsWith("//")
+                ? new CustomInput(inputString)
+                : new DefaultInput(inputString);
+
+        long calculateResult = calculateService.calculate(userInput);
+        outputView.printResult(calculateResult);
     }
 
     /***
