@@ -22,31 +22,37 @@ public class Validator {
 
         // 문자열이 문자로 시작되는 경우
         if (!input.matches("^\\d.*")) {
-            System.out.println(input);
             isValidPattern(input);
         }
         
 
         // 문자열이 문자로 시작되는 경우
         if (input.matches("^\\d.*")) {
-            System.out.println("문자열이 숫자로 시작됩니다.");
-            System.out.println(input);
+            checkValidString(input);
+            String[] delimiters = input.split("\\d+");
+            String validDelimiter = ":,";
+            isValidDelimiter(delimiters, validDelimiter);
         }
 
         return true;
     }
 
     private static void isValidPattern(String input) {
-
-        String[] parts = input.split("(?<=\\D)(?=\\d)", 2);
+        final String pattern = "(?<=\\D)(?=\\d)";
+        String[] parts = input.split(pattern, 2);
 
         checkCustomDelimiter(parts[0]);
+        checkValidString(parts[1]);
 
-        String customDelimiters = isValidDelimiter(input).toString();
+        String customDelimiters = getAllDelimiter(input).toString();
         String validDelimiter = ",:" + customDelimiters;
         // 숫자 사이에 사용된 구분자가 올바른지 체크
-        String[] numbersAndDelimiters = input.split("\\d+");
+        String[] delimiters = input.split("\\d+");
 
+        isValidDelimiter(delimiters, validDelimiter);
+    }
+
+    private static void isValidDelimiter(String[] numbersAndDelimiters, String validDelimiter) {
         // 첫 번째 인덱스는 빈 문자열일 수 있으므로 1부터 시작
         for (int i = 1; i < numbersAndDelimiters.length; i++) {
             String delimiter = numbersAndDelimiters[i];
@@ -55,24 +61,25 @@ public class Validator {
         }
     }
 
+    // 커스텀 구분자를 제외한 문자열 패턴 체크
+    private static void checkValidString(String input) {
+        String pattern = "(\\d[\\p{L}\\p{Punct}])*\\d";
+
+        if (!input.matches(pattern)) {
+            throw new IllegalArgumentException("Input Invalid case5: 잘못된 계산 문자열");
+        }
+    }
+
+    // 커스텀 구분자 생성하는 부분 패턴 체크
     private static void checkCustomDelimiter(String customDelimiter) {
-        String pattern = "^//(.)\\n.*";
+        final String pattern = "^//(.)\\n.*";
 
         if (!customDelimiter.matches(pattern)) {
-            System.out.println("pattern = " + pattern);
-            System.out.println("customDelimiter = " + customDelimiter);
             throw new IllegalArgumentException("Input Invalid case4: 커스텀 구분자 생성 오류");
         }
     }
 
-
-    private static void checkDelimiter(boolean isContain) {
-        if (!isContain) {
-            throw new IllegalArgumentException("Input Invalid case4: 잘못된 구분자 사용");
-        }
-    }
-
-    private static StringBuilder isValidDelimiter(String input) {
+    private static StringBuilder getAllDelimiter(String input) {
         char[] charArray = input.toCharArray();
         StringBuilder delimiterString = new StringBuilder();
         for (int i = 1; i < charArray.length; i++) {
@@ -82,13 +89,21 @@ public class Validator {
         return delimiterString;
     }
 
-    private static boolean parseDelimiter(char[] input,int index) {
-        return input[index - 1] == '/' && input[index + 1] == '\\';
+    private static void checkDelimiter(boolean isContain) {
+        if (!isContain) {
+            throw new IllegalArgumentException("Input Invalid case4: 잘못된 구분자 사용");
+        }
     }
+
 
     private static void addDelimiter(char[] input,int index,StringBuilder delimiterString) {
         if (parseDelimiter(input,index)) {
             delimiterString.append(input[index]);
         }
     }
+
+    private static boolean parseDelimiter(char[] input,int index) {
+        return input[index - 1] == '/' && input[index + 1] == '\\';
+    }
+
 }
