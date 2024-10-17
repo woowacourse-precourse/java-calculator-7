@@ -3,18 +3,19 @@ package calculator;
 public class StringCalculation {
 
     private final InputView inputView;
-    private final OutputView outputView;
+    private final ResultView resultView;
 
-    StringCalculation(InputView inputView, OutputView outputView) {
+    StringCalculation(InputView inputView, ResultView resultView) {
         this.inputView = inputView;
-        this.outputView = outputView;
+        this.resultView = resultView;
     }
 
     public void startCalculate() {
         StringProcessor stringProcessor = new StringProcessor();
 
         String[] splitedString = stringProcessor.splitWithDelimiter(inputView.inputString());
-        stringProcessor.calculate(splitedString);
+        resultView.printResult(stringProcessor.calculate(splitedString));
+
     }
 
 }
