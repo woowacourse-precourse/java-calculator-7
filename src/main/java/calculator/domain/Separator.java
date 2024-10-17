@@ -29,8 +29,7 @@ public class Separator {
         }
         return currentString.split(separator);
     }
-
-
+    
     //커스텀 구분자가 존재할경우 실행됨
     private String customSeparator() {
         StringBuilder sb = new StringBuilder();
