@@ -50,4 +50,17 @@ public class Application {
     private String formatSeparator(String separator) {
         return "[" + separator + "]";
     }
+
+    public int sum(String formattedStr, String separator) {
+        if (formattedStr == "") {
+            return 0;
+        }
+
+        String[] nums = formattedStr.split(formatSeparator(separator));
+        int result = 0;
+        for (String num : nums) {
+            result += Integer.parseInt(num);
+        }
+        return result;
+    }
 }
