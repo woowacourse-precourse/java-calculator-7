@@ -1,6 +1,11 @@
 package calculator;
 
 public class CalculatorService {
+    private final NumberValidator numberValidator;
+
+    public CalculatorService() {
+        this.numberValidator = new NumberValidator();
+    }
 
     public char[] removeDelimiterAndToCharArray(String positiveString, String customDelimiter) {
         String positives = removeDelimiter(positiveString, customDelimiter);
@@ -12,14 +17,13 @@ public class CalculatorService {
         return positiveString.replace(customDelimiter, "");
     }
 
-    public int[] convertStringArrayToIntArray(String[] numbersString) {
-        int[] numbersInt = new int[numbersString.length];
-
+    public int[] convertCharArrayToIntArray(char[] positiveCharArray) { // todo : 리팩토링
         numberValidator.validateNoDigits(positiveCharArray);
-        for (int index = 0; index < positiveArray.length; index++)
-            positiveArray[index] = Character.getNumericValue(positiveCharArray[index]);
 
-        return numbersInt;
+        return new String(positiveCharArray)
+                .chars()
+                .map(Character::getNumericValue)
+                .toArray();
     }
 
     public int calculatorNumbers(int[] numbers) {
@@ -28,11 +32,7 @@ public class CalculatorService {
         numberValidator.validatorNoNegatives(numbers);
         for (int number : numbers)
             total += number;
-        }
 
         return total;
     }
-
-
-
 }
