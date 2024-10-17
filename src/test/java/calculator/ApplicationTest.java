@@ -121,4 +121,107 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 공백_포함_구분자() {
+        assertSimpleTest(() -> {
+            run("// ?\\n11,2 ?3:4");
+            assertThat(output()).contains("결과 : 20");
+        });
+    }
+
+    @Test
+    void 이스케이프를_구분자로() {
+        assertSimpleTest(() -> {
+            run("//?\\n123?123");
+            assertThat(output()).contains("결과 : 246");
+        });
+    }
+
+    @Test
+    void 이스케이프를_구분자로_X2() {
+        assertSimpleTest(() -> {
+            run("//??\\n123??123??123");
+            assertThat(output()).contains("결과 : 369");
+        });
+    }
+
+    @Test
+    void 음수를_포함한_입력_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,-2,3"))
+                        .isInstanceOf(IllegalArgumentException.class));
+    }
+
+    @Test
+    void 빈_문자열_입력() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(" "))
+                        .isInstanceOf(IllegalArgumentException.class));
+    }
+
+    @Test
+    void 매우_큰_숫자_입력() {
+        assertSimpleTest(() -> {
+            run("1000000,2000000,3000000");
+            assertThat(output()).contains("결과 : 6000000");
+        });
+    }
+
+    @Test
+    void 공백만_입력_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("   "))
+                        .isInstanceOf(IllegalArgumentException.class));
+    }
+
+    @Test
+    void 특수문자_구분자_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//[*][*]\\n1*2*3"))
+                        .isInstanceOf(IllegalArgumentException.class));
+    }
+
+    @Test
+    void 구분자로_빈_문자열_입력_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//\\n\\n1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class));
+    }
+
+    @Test
+    void 숫자만_연속으로_입력() {
+        assertSimpleTest(() -> {
+            run("123456789");
+            assertThat(output()).contains("결과 : 123456789");
+        });
+    }
+
+    @Test
+    void 여러_줄의_입력() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,2:3\\n4,5:6\\n7,8:9"))
+                        .isInstanceOf(IllegalArgumentException.class));
+    }
+
+    @Test
+    void 구분자_없는_연속된_공백_입력_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1 2 3"))
+                        .isInstanceOf(IllegalArgumentException.class));
+    }
+
+    @Test
+    void 매우_긴_입력() {
+        assertSimpleTest(() -> {
+            run("1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1");
+            assertThat(output()).contains("결과 : 30");
+        });
+    }
+
+    @Test
+    void 소수_포함_입력_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1.5,2.3"))
+                        .isInstanceOf(IllegalArgumentException.class));
+    }
 }
