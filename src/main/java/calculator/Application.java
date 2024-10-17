@@ -8,6 +8,8 @@ import calculator.util.integer.IntegerUtils;
 
 import java.util.List;
 
+import static calculator.common.exception.Messages.NOT_DELIMITER;
+
 public class Application {
 
     private static final CustomDelimiterService customDelimiterService = new CustomDelimiterService();
@@ -26,7 +28,7 @@ public class Application {
             int sum = IntegerUtils.sum(numbers);
             IOConsole.print("결과 : " + sum);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("구분자가 아닌 문자가 포함되어 있습니다.");
+            throw new IllegalArgumentException(NOT_DELIMITER);
         }
     }
 

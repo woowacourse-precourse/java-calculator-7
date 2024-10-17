@@ -2,6 +2,8 @@ package calculator.util.integer;
 
 import java.util.List;
 
+import static calculator.common.exception.Messages.NEGATIVE_NUMBER;
+
 public class IntegerUtils {
 
     public static int sum(List<Integer> numbers) {
@@ -18,7 +20,7 @@ public class IntegerUtils {
 
     private static void validatePositiveInteger(int number) {
         if (number < 0) {
-            throw new IllegalArgumentException("음수입니다.");
+            throw new IllegalArgumentException(NEGATIVE_NUMBER);
         }
     }
 }

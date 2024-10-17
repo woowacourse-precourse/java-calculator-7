@@ -2,6 +2,8 @@ package calculator.delimiter;
 
 import java.util.Optional;
 
+import static calculator.common.exception.Messages.*;
+
 public class CustomDelimiterService {
 
     public final static String CUSTOM_DELIMITER_PREFIX = "//";
@@ -34,7 +36,7 @@ public class CustomDelimiterService {
 
     private void validateFormat(String input) {
         if (!input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
-            throw new IllegalArgumentException("잘못된 형식입니다.");
+            throw new IllegalArgumentException(CUSTOM_DELIMITER_FORMAT_WRONG);
         }
     }
 
@@ -46,19 +48,19 @@ public class CustomDelimiterService {
 
     private void validateEmptyDelimiter(String customDelimiter) {
         if (customDelimiter.isEmpty()) {
-            throw new IllegalArgumentException("커스텀 구분자가 비어있습니다.");
+            throw new IllegalArgumentException(CUSTOM_DELIMITER_EMPTY);
         }
     }
 
     private void validateEscapeCharacter(String customDelimiter) {
         if (customDelimiter.contains(ESCAPE_CHARACTER)) {
-            throw new IllegalArgumentException("이스케이프 문자가 포함되었습니다.");
+            throw new IllegalArgumentException(CUSTOM_DELIMITER_CONTAINS_ESCAPE);
         }
     }
 
     private void validateForDigits(String customDelimiter) {
         if (customDelimiter.matches(INTEGER_REGEX)) {
-            throw new IllegalArgumentException("커스텀 구분자엔 숫자가 포함될 수 없습니다.");
+            throw new IllegalArgumentException(CUSTOM_DELIMITER_CONTAINS_NUMBER);
         }
     }
 }
