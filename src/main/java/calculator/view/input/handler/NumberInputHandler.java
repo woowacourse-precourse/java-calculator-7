@@ -1,25 +1,19 @@
-package calculator.view.inputView.handler;
+package calculator.view.input.handler;
 
-import calculator.number.domain.Number;
-import calculator.number.validator.NumberValidator;
-import calculator.view.inputView.service.InputService;
+import calculator.view.input.service.InputService;
 
-import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public class NumberInputHandler {
+public class NumberInputHandler implements InputHandlerService {
     private final InputService inputService;
+
     public NumberInputHandler(InputService inputService) {
         this.inputService = inputService;
     }
-    public <R extends Number> R retryReceive(BiFunction<String, NumberValidator, R > function, NumberValidator numberValidator) {
-            try {
-                String input = inputService.input();
-                return function.apply(input, numberValidator);
-            }
-            catch (IllegalArgumentException exception) {
-                System.out.println(exception.getMessage());
-                return retryReceive(function, numberValidator);
-            }
+
+    @Override
+    public <R> R receive(Function<String, R> function) {
+        String input = inputService.input();
+        return function.apply(input);
     }
 }
