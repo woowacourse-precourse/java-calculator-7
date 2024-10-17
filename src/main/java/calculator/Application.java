@@ -1,7 +1,6 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,7 +23,19 @@ public class Application {
 
         isNumeric(stringArray, intArray);
 
-        System.out.println(Arrays.toString(intArray));
+        int answer = calculateNumber(intArray);
+
+        System.out.println("결과 : " + answer);
+    }
+
+    private static int calculateNumber(int[] num) {
+        int sum = 0;
+
+        for (int i = 0; i < num.length; i++) {
+            sum += num[i];
+        }
+
+        return sum;
     }
 
     private static void isNumeric(String[] word, int[] num) {
