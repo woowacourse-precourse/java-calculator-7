@@ -1,15 +1,17 @@
 package calculator;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Extractor {
 
-    final String ERROR_MESSAGE = "잘못된 구분자입니다.";
+    private static final String DEFAULT_DELIMITERS = ",|:";
+    private static final String CUSTOM_DELIMITERS = "//(.*?)\n";
 
-    private final String input;
-    private String[] strArr;
-    private String customSeparator;
-    private Set<Integer> numbers; // 계산할 숫자만이 저장된 Set
+    private String input;
+    private final List<Integer> numbers = new ArrayList<>();
 
     public Extractor(String input) {
         this.input = input.trim();
@@ -19,51 +21,54 @@ public class Extractor {
     /**
      * 문자열에서 숫자 추출
      */
-    public void extractNumber() {
-        containCustomSeparator();
+    public void extractNumbers() {
 
-        // TODO: 커스텀, 기본 구분자 동시에 존재할 때의 예외 처리
-//        customSeparatorRemovedString = input.substring(5);
-
-        containBasicSeparator();
-
-        for (String str : strArr) {
-            numbers.add(Integer.valueOf(str));
-        }
+        String delimiters = getDelimiter();
+        String[] numberData = splitByDelimiter(delimiters);
+        addNumber(numberData);
+        validatePositiveNumber();
     }
 
-    private void containCustomSeparator() {
-        if (input.startsWith("//")) {
-            int separatorStartIdx = input.indexOf("//") + 2;
-            int separatorEndIdx = input.indexOf("\n");
+    private String getDelimiter() {
+        Matcher matcher = Pattern.compile(CUSTOM_DELIMITERS).matcher(input);
+        if (matcher.find()) {
+            String customDelimiter = matcher.group(1);
 
-            saveCustomSeparator(separatorStartIdx, separatorEndIdx);
+            if (customDelimiter.isEmpty()) {
+                throw new IllegalArgumentException("잘못된 구분자입니다.");
+            }
+
+            input = input.substring(matcher.end());
+            return "[" + Pattern.quote(customDelimiter) + "]|" + DEFAULT_DELIMITERS;
         }
+        return DEFAULT_DELIMITERS;
     }
 
-    private void saveCustomSeparator(int separatorStartIdx, int separatorEndIdx) {
-        if (separatorEndIdx == -1) {
-            throw new IllegalArgumentException(ERROR_MESSAGE);
-        }
-        customSeparator = input.substring(separatorStartIdx, separatorEndIdx);
-
-        if (customSeparator.isEmpty()) {
-            throw new IllegalArgumentException(ERROR_MESSAGE);
-        }
+    private String[] splitByDelimiter(String delimiters) {
+        return input.split(delimiters);
     }
 
-    private void containBasicSeparator() {
-        strArr = input.split(",|:");
-
-        // 문자열 배열의 각 문자가 양수로만 이루어져 있는지 판별
-        for (String s : strArr) {
-            for (int i = 0; i < s.length(); i++) {
-                char targetChar = s.charAt(i);
-                if (!Character.isDigit(targetChar) && Character.getNumericValue(targetChar) <= 0) {
-                    throw new IllegalArgumentException(ERROR_MESSAGE);
+    private void addNumber(String[] numberData) {
+        // 문자열의 각 요소가 숫자인지 판별하고 리스트에 저장
+        for (String data : numberData) {
+            if (!data.isEmpty()) {
+                try {
+                    Integer value = Integer.valueOf(data);
+                    numbers.add(value);
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("잘못된 구분자입니다.");
                 }
             }
         }
+    }
 
+
+    private void validatePositiveNumber() {
+        // 정수 배열의 각 요소가 양수인지 판별
+        for (int number : numbers) {
+            if (number < 0) {
+                throw new IllegalArgumentException("양수만 입력할 수 있습니다.");
+            }
+        }
     }
 }
