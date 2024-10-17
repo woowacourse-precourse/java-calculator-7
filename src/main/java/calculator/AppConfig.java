@@ -3,8 +3,9 @@ package calculator;
 import calculator.controller.CalculatorController;
 import calculator.model.Calculator;
 import calculator.model.CalculatorImpl;
-import calculator.model.DelimiterParser;
-import calculator.model.InputValidator;
+import calculator.parser.DelimiterParser;
+import calculator.validator.DelimiterValidator;
+import calculator.validator.InputValidator;
 import calculator.view.CalculatorView;
 import calculator.view.CalculatorViewImpl;
 
@@ -26,7 +27,11 @@ public class AppConfig {
         return new InputValidator();
     }
 
+    private DelimiterValidator delimiterValidator() {
+        return new DelimiterValidator();
+    }
+
     private DelimiterParser delimiterParser() {
-        return new DelimiterParser(inputValidator());
+        return new DelimiterParser(delimiterValidator());
     }
 }
