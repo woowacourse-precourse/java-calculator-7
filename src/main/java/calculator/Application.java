@@ -9,6 +9,20 @@ public class Application {
 
         int sum = 0;
 
+        if(!inputValue.isEmpty()){
+            try{
+                String[] delimiterAndSplitStr = checkDelimiter(inputValue);
+
+                for(String value : delimiterAndSplitStr[1].split(delimiterAndSplitStr[0])){
+                    if(!value.equals("")) {
+                        sum += checkValueCorrect(value);
+                    }
+                }
+            }catch (IllegalArgumentException e){
+                System.out.println(e.getMessage()+"프로그램을 종료합니다.");
+                throw new IllegalArgumentException();
+            }
+        }
 
         System.out.printf("결과 : %d", sum);
     }
