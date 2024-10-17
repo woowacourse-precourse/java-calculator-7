@@ -1,7 +1,7 @@
 package calculator;
 
 import calculator.controller.CalculatorController;
-import calculator.controller.CalculatorControllerFactory;
+import calculator.controller.service.CalculatorControllerFactory;
 
 public class Application {
     public static void main(String[] args) {
@@ -10,3 +10,4 @@ public class Application {
         calculatorController.run();
     }
 }
+
