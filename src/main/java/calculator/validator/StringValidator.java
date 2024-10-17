@@ -9,5 +9,7 @@ public class StringValidator{
         return input.isEmpty();
     }
 
-
+    public static boolean hasCustomDelimiter(String input) {
+        return input.startsWith("//") && input.contains("\\n");
+    }
 }
