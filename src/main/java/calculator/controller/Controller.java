@@ -1,13 +1,14 @@
 package calculator.controller;
 
-import java.util.Arrays;
-
-import static camp.nextstep.edu.missionutils.Console.readLine;
+import calculator.View;
 
 public class Controller {
+    private static final String START = "덧셈할 문자열을 입력해 주세요.";
+    private static final String RESULT = "결과: ";
+
     public void calculate() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        var text = readLine();
+        printStartMessage();
+        var text = View.read();
         var regex = ",|:";
         String[] nums;
         if (text.indexOf("//") != -1) {
@@ -23,8 +24,6 @@ public class Controller {
             nums = text.split(regex);
         }
 
-        System.out.println(Arrays.toString(nums));
-
         var total = 0;
         for (String num_text : nums) {
             int num;
@@ -38,6 +37,14 @@ public class Controller {
             }
             total += num;
         }
-        System.out.println("결과 : " + total);
+        printResult(total);
+    }
+
+    private void printStartMessage() {
+        View.printMessage(START);
+    }
+
+    private void printResult(int result) {
+        View.printMessage(RESULT + result);
     }
 }
