@@ -11,7 +11,11 @@ public class OutputView {
     }
 
     public void printResult(Numbers numbers) {
-        int sum = numbers.getSum();
-        System.out.println("결과 : " + sum);
+        Double sum = numbers.getSum();
+        if(sum%1 == 0) {
+            String result = String.format("%.0f", sum);
+            System.out.println("결과 : " + result);
+        }
+        if(sum%1 != 0) System.out.println("결과 : " + sum);
     }
 }

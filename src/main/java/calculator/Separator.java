@@ -21,12 +21,12 @@ public class Separator {
             addCustomSeparator(readString);
             numberString = getNumberString(readString);
         }
-        List<Integer> numberList = split(numberString);
+        List<Double> numberList = split(numberString);
         return new Numbers(numberList);
     }
 
-    private List<Integer> split(String numberString) {
-        List<Integer> numberList = new ArrayList<>();
+    private List<Double> split(String numberString) {
+        List<Double> numberList = new ArrayList<>();
         String[] symbolArray = symbols.split(CUSTOM_SEPARATOR_CENTER_REGEX);
         String replaceString = numberString;
         for (String symbol : symbolArray) {
@@ -41,10 +41,10 @@ public class Separator {
         return numberList;
     }
 
-    private void addNumberToNumberList(String[] numberArray, List<Integer> numberList) {
+    private void addNumberToNumberList(String[] numberArray, List<Double> numberList) {
         for(String s : numberArray){
             if(!s.isEmpty()){
-                int i = Integer.parseInt(s);
+                Double i = Double.parseDouble(s);
                 numberList.add(i);
             }
         }
