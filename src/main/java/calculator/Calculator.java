@@ -1,5 +1,7 @@
 package calculator;
 
+import camp.nextstep.edu.missionutils.Console;
+
 public class Calculator {
 	private String str;
 	private long totalSum;
@@ -13,6 +15,10 @@ public class Calculator {
 	}
 
 	public void run() {
+		enter();
 	}
 
+	private void enter() {
+		str = Console.readLine();
+	}
 }
