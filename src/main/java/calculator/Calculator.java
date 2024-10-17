@@ -16,14 +16,34 @@ public class Calculator {
             String delimiter = ",:";
             String[] split = userInput.split("[" + delimiter + "]");
 
-            int sum = 0;
-            for (String c : split) {
-                sum += Integer.parseInt(c);
-            }
-
-            return sum;
+            return sum(split);
         }
 
-        return 0;
+        StringBuilder delimiter = new StringBuilder(",:");
+
+        int prev = 0;
+        for (int idx = 5; idx < userInput.length(); idx += 5) {
+            String split = userInput.substring(prev, idx);
+
+            if (split.startsWith("//") && split.endsWith("\\n")) {
+                delimiter.append(split.charAt(2));
+                prev = idx;
+                continue;
+            }
+
+            break;
+        }
+
+        String[] split = userInput.substring(prev).split("[" + delimiter + "]");
+        return sum(split);
+    }
+
+    private static int sum(String[] split) {
+        int sum = 0;
+        for (String c : split) {
+            sum += Integer.parseInt(c);
+        }
+
+        return sum;
     }
 }
