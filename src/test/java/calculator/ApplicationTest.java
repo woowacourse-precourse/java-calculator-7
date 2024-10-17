@@ -50,7 +50,7 @@ class ApplicationTest extends NsTest {
 	@Test
 	public void blankTest(){
 		// given
-		String input = "";
+		String input = "\n";
 
 		// when
 		assertSimpleTest(() -> {
