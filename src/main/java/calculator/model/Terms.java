@@ -1,9 +1,13 @@
 package calculator.model;
 
+import static calculator.constants.Symbol.END_BRACKET;
+import static calculator.constants.Symbol.START_BRACKET;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Terms {
+    private final String ZERO = "0";
     private final List<Term> terms = new ArrayList<>();
 
     public Terms(String expression, Separator separator) {
@@ -11,8 +15,8 @@ public class Terms {
     }
 
     private void extractTerms(String expression, Separator separator) {
-        for (String part : expression.split("[" + separator.getSeparator() + "]")) {
-            terms.add(new Term(part.isEmpty() ? "0" : part));
+        for (String part : expression.split(START_BRACKET + separator.getSeparator() + END_BRACKET)) {
+            terms.add(new Term(part.isEmpty() ? ZERO : part));
         }
     }
 

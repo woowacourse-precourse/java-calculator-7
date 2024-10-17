@@ -1,10 +1,18 @@
 package calculator.model;
 
+import static calculator.constants.Symbol.ASTERISK;
+import static calculator.constants.Symbol.CUSTOM_DELIMITER_PREFIX;
+import static calculator.constants.Symbol.CUSTOM_DELIMITER_SUFFIX;
+import static calculator.constants.Symbol.END_BRACKET;
+import static calculator.constants.Symbol.PREFIX_OFFSET;
+import static calculator.constants.Symbol.START_BRACKET;
+
 import java.util.List;
 import java.util.regex.Pattern;
 
 public class Expression {
     private final String NUMBER_REGEX = "1-9";
+    private final String ERROR_MESSAGE = "유효하지 않은 문자가 포함되어 있습니다.";
     private final String expression;
     private final Separator separator;
     private final Terms terms;
@@ -24,23 +32,23 @@ public class Expression {
 
     private String validateExpression(String expression) {
         if (hasInvalidinput(expression)) {
-            throw new IllegalArgumentException("유효하지 않은 문자가 포함되어 있습니다.");
+            throw new IllegalArgumentException(ERROR_MESSAGE);
         }
         return expression;
     }
 
     private boolean hasInvalidinput(String expression) {
         String totalSeparator = separator.getSeparator();
-        String regex = "[" + NUMBER_REGEX + Pattern.quote(totalSeparator) + "]*";
+        String regex = START_BRACKET + NUMBER_REGEX + Pattern.quote(totalSeparator) + END_BRACKET + ASTERISK;
         return !expression.matches(regex);
     }
 
     private boolean hasCustomSeparator(String expression) {
-        return expression.startsWith("//") && expression.contains("\\n");
+        return expression.startsWith(CUSTOM_DELIMITER_PREFIX) && expression.contains(CUSTOM_DELIMITER_SUFFIX);
     }
 
     private String extractActualExpression(String expression) {
-        int start = expression.indexOf("\\n") + 2;
+        int start = expression.indexOf(CUSTOM_DELIMITER_SUFFIX) + PREFIX_OFFSET;
         return expression.substring(start);
     }
 

@@ -3,6 +3,9 @@ package calculator.model;
 import java.util.List;
 
 public class Calculator {
+    private final String ADDITION = "add";
+    private final String SUBTRACT = "subtract";
+    private final String MULTIPLY = "multiply";
     private final Expression expression;
     private final String operation;
 
@@ -15,14 +18,14 @@ public class Calculator {
         List<Term> terms = expression.getTerms();
 
         switch (operation) {
-            case "add":
+            case ADDITION:
                 return addCalculate(terms);
-            case "subtract":
+            case SUBTRACT:
                 return subtractCalculate(terms);
-            case "multiply":
+            case MULTIPLY:
                 return multiplyCalculate(terms);
             default:
-                throw new IllegalArgumentException("잘못된 operation입니다.");
+                throw new IllegalArgumentException();
 
         }
     }
@@ -33,7 +36,7 @@ public class Calculator {
 
     private Integer subtractCalculate(List<Term> terms) {
         return terms.stream().mapToInt(Term::getValue).reduce((a, b) -> a - b)
-                .orElseThrow(() -> new IllegalArgumentException("표현식이 비어 있습니다."));
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     private Integer multiplyCalculate(List<Term> terms) {

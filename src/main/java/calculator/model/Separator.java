@@ -1,6 +1,12 @@
 package calculator.model;
 
+import static calculator.constants.Symbol.BACKSLASH;
+import static calculator.constants.Symbol.CUSTOM_DELIMITER_PREFIX;
+import static calculator.constants.Symbol.CUSTOM_DELIMITER_SUFFIX;
+import static calculator.constants.Symbol.PREFIX_OFFSET;
+
 public class Separator {
+    private final String DEFAULT_SEPARATOR = ",:";
     private final String separator;
 
     public Separator(String expression) {
@@ -8,13 +14,13 @@ public class Separator {
     }
 
     public String extractSeparator(String expression) {
-        String defaultSeparator = ",:";
-        if (expression.startsWith("//")) {
-            int start = expression.indexOf("//") + 2;
-            int end = expression.indexOf("\\n");
+        String defaultSeparator = DEFAULT_SEPARATOR;
+        if (expression.startsWith(CUSTOM_DELIMITER_PREFIX)) {
+            int start = expression.indexOf(BACKSLASH) + PREFIX_OFFSET;
+            int end = expression.indexOf(CUSTOM_DELIMITER_SUFFIX);
             String customSeparator = expression.substring(start, end);
-            if (customSeparator.contains("\\")) {
-                customSeparator += "\\";
+            if (customSeparator.contains(BACKSLASH)) {
+                customSeparator += BACKSLASH;
             }
             return defaultSeparator + customSeparator;
         }

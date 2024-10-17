@@ -1,6 +1,8 @@
 package calculator.model;
 
 public class Term {
+    private final String ERROR_MESSAGE = "유효하지 않은 숫자 항입니다: ";
+    private final String POSTIVE_REGEX = "\\d+";
     private final int value;
 
     public Term(String value) {
@@ -9,8 +11,8 @@ public class Term {
     }
 
     private void validate(String value) {
-        if (!value.matches("\\d+")) {
-            throw new IllegalArgumentException("유효하지 않은 숫자 항입니다: " + value);
+        if (!value.matches(POSTIVE_REGEX)) {
+            throw new IllegalArgumentException(ERROR_MESSAGE);
         }
     }
 
