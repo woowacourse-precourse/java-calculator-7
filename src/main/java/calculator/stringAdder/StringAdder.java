@@ -13,19 +13,24 @@ import calculator.stringAdder.calculator.Calculator;
 public class StringAdder {
   public static void run() {
     try{
+
       InputValidator inputValidator = new InputValidator();
+      String input = inputValidator.validateInput();
+
       DelimiterParser delimiterParser = new DelimiterParser();
+      String[] delimiters = delimiterParser.getDelimiters(input);
+
       NumberParser numberParser = new NumberParser();
+      String[] numbers = numberParser.getNumbers(input, delimiters);
+
       Calculator calculator = new Calculator();
-      while (true){
-        String input = inputValidator.validateInput();
-        String[] delimiters = delimiterParser.getDelimiters(input);
-        String[] numbers = numberParser.getNumbers(input, delimiters);
-        String result = calculator.sum(numbers);
-        System.out.println("결과 : "+ result);
-      }
+      String result = calculator.sum(numbers);
+
+      System.out.println("결과 : "+ result);
+
     } catch (IllegalArgumentException e){
       System.err.println(e.getMessage());
+      throw new IllegalArgumentException();
     } finally{
       System.out.println("애플리케이션을 종료합니다.");
     }
