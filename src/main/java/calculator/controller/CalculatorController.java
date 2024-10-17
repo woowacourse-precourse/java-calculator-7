@@ -10,7 +10,6 @@ public class CalculatorController {
     private final OutputView outputView;
     private final Calculator calculator;
 
-    private static final String INPUT_MESSAGE = "덧셈할 문자열을 입력해 주세요.";
     private static final String RESULT_MESSAGE = "결과 : ";
 
     public CalculatorController(InputView inputView, OutputView outputView, Calculator calculator) {
@@ -20,8 +19,7 @@ public class CalculatorController {
     }
 
     public void start() {
-        outputView.writeln(INPUT_MESSAGE);
-        String stringToAdd = inputView.readLine();
+        String stringToAdd = inputView.readStringToAdd();
         int sum = calculator.getSum(stringToAdd);
         outputView.writeln(RESULT_MESSAGE + sum);
     }
