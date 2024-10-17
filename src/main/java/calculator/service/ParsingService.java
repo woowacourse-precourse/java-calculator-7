@@ -9,6 +9,7 @@ public class ParsingService {
     private static final char DEFAULT_DELIMITER1 = ',';
     private static final char DEFAULT_DELIMITER2 = ':';
 
+    private char customDelimiter;
     private ArrayList<Integer> operandList = new ArrayList<>();
 
     public OperandDTO parseOperandStr(String operandStr) {
@@ -42,5 +43,11 @@ public class ParsingService {
         char endOfString = operandStr.charAt(operandStr.length() - 1);
         if(!Character.isDigit(endOfString))
             throw new IllegalArgumentException();
+    }
+
+    private static void checkFrontAndBackOfCustomDelimiter(String operandStr){
+        if(operandStr.startsWith("//") && !operandStr.substring(3, 5).equals("\\n")){
+            throw new IllegalArgumentException();
+        }
     }
 }
