@@ -2,6 +2,7 @@ package calculator.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -43,6 +44,9 @@ public class Calculator {
         List<Integer> result = new ArrayList<>();
         for (String token : numbers.split(delimiters)) {
             try {
+                if (Objects.equals(token, "")) {
+                    continue;
+                }
                 result.add(Integer.parseInt(token));
                 if (result.getLast() <= 0) {
                     throw new IllegalArgumentException(ILLEGAL_ARGUMENT_EXCEPTION_CONTENT);
