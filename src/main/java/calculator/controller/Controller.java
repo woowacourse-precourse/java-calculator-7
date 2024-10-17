@@ -10,9 +10,6 @@ public class Controller {
     private final NumberExtractionService numberExtractionService;
     private final CalculatorService calculatorService;
 
-    private String inputString;
-    private String processedString;
-    private int result;
 
     public Controller(CustomDelimiterService customDelimiterService, NumberExtractionService numberExtractionService,
                       CalculatorService calculatorService) {
@@ -22,32 +19,22 @@ public class Controller {
     }
 
     public void run(String inputString) {
-        this.inputString = inputString;
-
-        progress();
-        finish();
-    }
-
-    private void progress() {
-        customDelimiterProgress();
-        numberExtractProgress();
-        calculateProgress();
-    }
-
-    private void customDelimiterProgress() {
-        processedString = customDelimiterService.addCustomDelimiters(inputString);
-    }
-
-    private void numberExtractProgress() {
-        numberExtractionService.extractNumber(processedString);
-    }
-
-    private void calculateProgress() {
-        result = calculatorService.calculate();
-    }
-
-    private void finish() {
+        String processedString = customDelimiterProgress(inputString);
+        numberExtractProgress(processedString);
+        int result = calculateProgress();
         OutputView.printResultMessage(result);
+    }
+
+    private String customDelimiterProgress(String inputString) {
+        return customDelimiterService.addCustomDelimiters(inputString);
+    }
+
+    private void numberExtractProgress(String inputString) {
+        numberExtractionService.extractNumber(inputString);
+    }
+
+    private int calculateProgress() {
+        return calculatorService.calculate();
     }
 
 }
