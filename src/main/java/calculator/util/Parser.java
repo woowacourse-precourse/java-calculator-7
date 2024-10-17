@@ -22,11 +22,15 @@ public class Parser {
 
     // 구분자를 기준으로 문자열을 나눠서 리스트에 저장
     public static List<String> splitByDelimiter(String str) {
+        checkAndApplyCustomDelimiter();
+
+        return Arrays.asList(str.split(DELIMITERS));
+    }
+
+    private static void checkAndApplyCustomDelimiter() {
         if (CUSTOM_DELIMITER != null && !CUSTOM_DELIMITER.isEmpty()) {
             DELIMITERS += "|" + CUSTOM_DELIMITER;
         }
-
-        return Arrays.asList(str.split(DELIMITERS));
     }
 
     // 문자열 리스트를 정수 리스트로 변환
