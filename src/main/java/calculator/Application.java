@@ -14,5 +14,6 @@ public class Application {
         AddCalculator calculator = new AddCalculator(userInput, inputInfo.getSeparator(), inputInfo.getFormat());
         int result = calculator.calculate();
 
+        System.out.println("결과 : " + result);
     }
 }
