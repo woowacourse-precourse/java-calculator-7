@@ -18,6 +18,13 @@ public class Application {
             for (String str : splitStrings) {
                 System.out.println(str);
             }
+        } else {
+            inputString = inputString.substring(5);
+            splitStrings = inputString.split("[,:" + customDelimiter + "]");
+            System.out.println("기본 구분자 + 커스텀 구분자로 분리한 결과 : ");
+            for (String str : splitStrings) {
+                System.out.println(str);
+            }
         }
     }
 
