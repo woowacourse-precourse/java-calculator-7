@@ -21,20 +21,15 @@ public class DelimiterParser {
         return true;
     }
 
-    /*public String splitByDelimiter(String input) {
-        return replaceDelimiters(input, delimiterList.getFirst(), delimiterList.getLast());
-    }*/
-
-    public String replaceDelimiters(String input) {
+    public String replace(String input) {
         String result = input;
-
         for (String delimiter : delimiterList) {
-            if (delimiter.equals(getPrefix())) {
-                result = result.replace(getPrefix(), "");
+            if (delimiter.equals(input.substring(0,2))) {
+                result = result.replace(input.substring(0,2), "");
                 continue;
             }
-            if (delimiter.equals(getSuffix())) {
-                result = result.replace(getSuffix(), "");
+            if (delimiter.equals(input.substring(3,5))) {
+                result = result.replace(input.substring(3,5), "");
                 continue;
             }
             result = result.replace(delimiter, COMMON_DELIMITER);
@@ -42,15 +37,15 @@ public class DelimiterParser {
         return result;
     }
 
+
     public List<Integer> parseToIntList(String input) {
+        String[] split = input.split(COMMON_DELIMITER);
+        for (String result : split) {
+            System.out.println("result = " + result);
+        }
         return Arrays.stream(input.split(COMMON_DELIMITER))
                 .map(Validator::validateIfNotNumber)
                 .collect(Collectors.toList());
     }
-    private String getPrefix() {
-        return delimiterList.getFirst();
-    }
-    private String getSuffix() {
-        return delimiterList.getLast();
-    }
+
 }

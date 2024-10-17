@@ -14,7 +14,8 @@ public class Calculator {
         if (DelimiterParser.isDefaultDelimiter(input)) {
             delimiterParser = new DelimiterParser(":");
 
-            List<Integer> inputNums = delimiterParser.parseToIntList(input);
+            String result = delimiterParser.replace(input);
+            List<Integer> inputNums = delimiterParser.parseToIntList(result);
             Validator.validateIfInputNegative(inputNums);
 
             return inputNums.stream()
@@ -28,13 +29,12 @@ public class Calculator {
             String delimiter2 = input.substring(3, 5);
             delimiterParser = new DelimiterParser(delimiter1, delimiter2);
 
-            // 중복된 로직을 공통 메서드로 대체
-            String result = delimiterParser.replaceDelimiters(input);
-            String customDelimiter = result.substring(0, 1);
-            String numberPart = result.substring(1);
+            String replaceInput = delimiterParser.replace(input);
+            String customDelimiter = replaceInput.substring(0, 1);
+            String numberPart = replaceInput.substring(1);
             String[] split = numberPart.split(customDelimiter);
-            String splitString = String.join(",", split);
 
+            String splitString = String.join(",", split);
             List<Integer> inputNums = delimiterParser.parseToIntList(splitString);
             Validator.validateIfInputNegative(inputNums);
 
