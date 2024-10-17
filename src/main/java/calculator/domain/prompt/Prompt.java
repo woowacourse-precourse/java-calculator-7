@@ -20,9 +20,8 @@ public abstract class Prompt {
     protected abstract List<String> separate(String inputData, char customDelimiter);
 
     public List<Integer> extractInteger() {
-        List<String> separatedData = this.getInput();
-
-        return separatedData.stream()
+        return this.getInput()
+                .stream()
                 .map(this::parseNumber)
                 .toList();
     }
