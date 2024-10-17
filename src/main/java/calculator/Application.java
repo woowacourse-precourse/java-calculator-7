@@ -48,14 +48,13 @@ public class Application {
         input = Validator.validateConvertedInput(input, delimiterRegex);
 
         // 숫자 추출
-        String[] split = input.split(delimiterRegex);
-        int result = 0;
-        for (String strNum : split) {
-            if (strNum.isBlank()) {
-                continue;
-            }
-            result += Integer.parseInt(strNum);
-        }
+        String[] strNumArray = input.split(delimiterRegex);
+
+        // 결과 추출
+        int result = Arrays.stream(strNumArray)
+                .filter(s -> !s.isBlank())
+                .mapToInt(Integer::parseInt)
+                .sum();
 
         // 출력
         System.out.println(OUTPUT_RESULT + result);
