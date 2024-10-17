@@ -54,7 +54,7 @@ public class Calculator {
     public boolean checkOtherDivision(String input, String customDivision) {
         if (customDivision.isEmpty()) {
             for (char ch : input.toCharArray()) {
-                if (!Character.isDigit(ch) && ch != ';' && ch != ':') {
+                if (!Character.isDigit(ch) && ch != ',' && ch != ':') {
                     return true;
                 }
             }
@@ -75,12 +75,20 @@ public class Calculator {
         String[] numbers;
         if (customDivision.isEmpty()) {
             numbers = input.split(",|:");
+            return numbers;
         }
 
         input = input.substring(START_NUMBER_INDEX);
-        String regexSafeDivision = customDivision.replaceAll("([\\\\.*+?^${}()|\\[\\]])", "\\\\$1");
-        numbers = input.split(regexSafeDivision);
+        if(checkMetacharacters(customDivision)){
+            customDivision = customDivision.replaceAll("([\\\\.*+?^${}()|\\[\\]])", "\\\\$1");
+        }
+        numbers = input.split(customDivision);
         return numbers;
+    }
+
+    public boolean checkMetacharacters(String customDivision){
+        String regex = "[.*+?^${}()|\\[\\]\\\\]";
+        return customDivision.matches(".*" + regex + ".*");
     }
 
     public int parsingAndSum(String[] numbers) {
