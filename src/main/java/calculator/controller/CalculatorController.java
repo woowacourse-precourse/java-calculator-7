@@ -1,9 +1,9 @@
 package calculator.controller;
 
 import calculator.domain.Numbers;
-import calculator.domain.Separator;
+import calculator.domain.Delimiter;
 import calculator.util.NumberConvertor;
-import calculator.validator.SeparatorValidator;
+import calculator.validator.DelimiterValidator;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -20,8 +20,8 @@ public class CalculatorController {
     public void run() {
         String str = inputView.inputStringToAdd();
 
-        if (SeparatorValidator.hasCustomSeparator(str)) {
-            Separator.addCustomSeparator(str);
+        if (DelimiterValidator.hasCustomDelimiter(str)) {
+            Delimiter.addCustomDelimiter(str);
         }
 
         Numbers numbers = new Numbers(NumberConvertor.stringToInt(str));
