@@ -4,17 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * - input을 받아서 커스텀 구분자와 숫자 분류
- * - 제대로 된 입력을 받아야 함
- * - 더 나은 구조가 분명 있을 것 같음. 리팩토링 필요. 일단 기능 구현을 마친 후에 다시 리팩토링
+ * - 역할: 입력된 문자열을 구분자로 분류하여 숫자를 추출
+ * - 책임: 문자열의 유효성을 검사하고, 올바른 형식이면 숫자를 분류
  */
 public class Classifier {
-    private static final String DEFAULT_DELIMITERS = ":|,";
-    private String customDelimiter = "|";
+    private final Delimiters delimiters;
     private final List<Integer> numbers;
 
 
-    public Classifier(String input) {
+    /**
+     * 생성자: 입력 문자열과 구분자를 받아 유효성을 검사한 후 숫자를 분류
+     * @param input 입력 문자열
+     * @param delimiters Delimiters 객체 (구분자 처리)
+     */
+    public Classifier(String input, Delimiters delimiters) {
+        this.delimiters = delimiters;
         isValid(input);
         this.numbers = classifyNumbers(input);
     }
@@ -24,44 +28,42 @@ public class Classifier {
     }
 
     /**
-     * 전체 validation 처리 함수
-     * @param input
+     * 입력 문자열의 전체 유효성을 검사
+     * - 커스텀 구분자 여부에 따라 각각의 유효성 검사 실행
+     * @param input 입력 문자열
      */
     private void isValid(String input) {
-        if(isCustomDelimiterPresent(input)){
-            this.customDelimiter = "|" + getCustomDelimiter(input);
+        if(delimiters.isCustomDelimiterPresent()){
             isCustomStringValid(input);
         }
-        if(!isCustomDelimiterPresent(input)){
+        if(!delimiters.isCustomDelimiterPresent()){
             isStringValid(input);
         }
     }
 
 
     /**
-     * 숫자를 분류해내는 함수
-     * @param input
-     * @return
+     * 입력 문자열을 분류하여 숫자를 추출
+     * - 구분자에 따라 다르게 처리
+     * @param input 입력 문자열
+     * @return 분류된 숫자 리스트
      */
     private List<Integer> classifyNumbers(String input) {
         if(input.isEmpty()){
             return List.of(0);
         }
-        if(customDelimiter.equals("|")) {
-            String noCustomRegexForSplit = "[" + DEFAULT_DELIMITERS + "]";
-            return splitAndConvertInput(input, noCustomRegexForSplit);
+        if(!delimiters.isCustomDelimiterPresent()) {
+            return splitAndConvertInput(input, delimiters.generateDefaultDelimiterRegex());
         }
-        String customRegexForSplit = "["+ DEFAULT_DELIMITERS + customDelimiter + "]";
-
-        return splitAndConvertInput(getExcludedString(input), customRegexForSplit);
+        return splitAndConvertInput(getExcludedString(input), delimiters.generateCustomDelimiterRegex());
     }
 
     /**
-     * 이 함수의 기능이 너무 많지 않은지 한번 더 생각해봐야 함
-     *
-     * @param input
-     * @param delimiter 구분자를 기준으로 정규표현식으로 쪼갬
-     * @return
+     * 문자열을 구분자로 나누고 숫자로 변환
+     * - 이 함수의 기능이 너무 많지 않은지 한번 더 생각해봐야 함
+     * @param input 입력 문자열
+     * @param delimiter 구분자 (정규 표현식)
+     * @return 숫자로 변환된 리스트
      */
     private List<Integer> splitAndConvertInput(String input, String delimiter) {
         String[] numbersString = input.split(delimiter);
@@ -72,51 +74,35 @@ public class Classifier {
         return numbersInteger;
     }
 
-    /**
-     * custom delimiter 추출
-     * @param input
-     * @return
-     */
-    private String getCustomDelimiter(String input) {
-        String regex = "//|\\Q\\n\\E";
-        String[] customString = input.split(regex);
-        return customString[1];
-    }
-
 
     /**
-     * 현재는 커스텀 문자열 선언 부분의 문자를 숫자, 문자 입력 금지로 함.
-     * 다른 예외처리 고려해봐야 함.
-     * @param input
-     * @return
-     */
-    private boolean isCustomDelimiterPresent(String input) {
-        String regex = "^//[^a-zA-Z0-9]\\Q\\n\\E.*";
-        return input.matches(regex);
-    }
-
-    /**
-     * custom delimiter을 제외한 문자열의 형식이 맞는지 확인
-     * @param input
+     * 커스텀 구분자를 제외한 문자열의 형식이 맞는지 확인
+     * @param input 입력 문자열
      */
     private void isCustomStringValid(String input) {
-        String customRegex = "^[0-9]+([" + DEFAULT_DELIMITERS + customDelimiter + "][0-9]+)*$";
-        if(!getExcludedString(input).matches(customRegex)) {
+        if(!getExcludedString(input).matches(delimiters.regexForCustomPatten())) {
             throw new IllegalArgumentException("Invalid custom delimiter");
         }
     }
 
+    /**
+     * 커스텀 구분자를 제외한 문자열 가져오기
+     * - 특정 구분자에 대한 regex가 들어감. 이건 Delimiter의 책임도 아니고 Classifier의 책임도 아니라고 생각.
+     * - 이건 따로 설정 클래스를 만들던지 해서 빼야 할 것 같음.
+     * @param input 입력 문자열
+     * @return 커스텀 구분자를 제외한 문자열
+     */
     private String getExcludedString(String input) {
         return input.split("\\Q\\n\\E")[1];
     }
 
     /**
-     * 커스텀 구분자가 없는 문자열의 validation 처리
-     * @param input
+     * 커스텀 구분자가 없는 경우 문자열 형식을 확인
+     * - 기본 구분자로 나뉘어진 문자열이 올바른 형식인지 확인
+     * @param input 입력 문자열
      */
     private void isStringValid(String input) {
-        String regex = "^[0-9]+(([,:])[0-9]+)*$";
-        if(!input.isEmpty() && !input.matches(regex)) {
+        if(!input.isEmpty() && !input.matches(delimiters.regexForDefaultPattern())) {
             throw new IllegalArgumentException("Invalid string");
         }
     }

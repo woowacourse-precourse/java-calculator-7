@@ -14,9 +14,11 @@ class ClassifierTest {
     void parseNumbersWithDefaultCommaDelimiter() {
         // given
         String input = "1,2,3";
+        List<String> defaultDelimiters = Arrays.asList(",", ":");
+        Delimiters delimiters = new Delimiters(defaultDelimiters, input);
 
         // when
-        Classifier classifier = new Classifier(input);
+        Classifier classifier = new Classifier(input, delimiters);
         List<Integer> numbers = classifier.getNumbers();
 
         // then
@@ -28,9 +30,11 @@ class ClassifierTest {
     void parseNumbersWithDefaultColonDelimiter() {
         // given
         String input = "1:2:3";
+        List<String> defaultDelimiters = Arrays.asList(",", ":");
+        Delimiters delimiters = new Delimiters(defaultDelimiters, input);
 
         // when
-        Classifier classifier = new Classifier(input);
+        Classifier classifier = new Classifier(input, delimiters);
         List<Integer> numbers = classifier.getNumbers();
 
         // then
@@ -42,9 +46,11 @@ class ClassifierTest {
     void parseNumbersWithCustomDelimiter() {
         // given
         String input = "//;\\n1;2;3";
+        List<String> defaultDelimiters = Arrays.asList(",", ":");
+        Delimiters delimiters = new Delimiters(defaultDelimiters, input);
 
         // when
-        Classifier classifier = new Classifier(input);
+        Classifier classifier = new Classifier(input, delimiters);
         List<Integer> numbers = classifier.getNumbers();
 
         // then
@@ -56,9 +62,11 @@ class ClassifierTest {
     void parseNumbersWithMixedDelimiters() {
         // given
         String input = "//;\\n1;2:3,4";
+        List<String> defaultDelimiters = Arrays.asList(",", ":");
+        Delimiters delimiters = new Delimiters(defaultDelimiters, input);
 
         // when
-        Classifier classifier = new Classifier(input);
+        Classifier classifier = new Classifier(input, delimiters);
         List<Integer> numbers = classifier.getNumbers();
 
         // then
@@ -70,9 +78,11 @@ class ClassifierTest {
     void throwExceptionForEmptyString() {
         // given
         String emptyInput = "";
+        List<String> defaultDelimiters = Arrays.asList(",", ":");
+        Delimiters delimiters = new Delimiters(defaultDelimiters, emptyInput);
 
-        //when
-        Classifier classifier = new Classifier(emptyInput);
+        // when
+        Classifier classifier = new Classifier(emptyInput, delimiters);
         List<Integer> numbers = classifier.getNumbers();
 
         // then
@@ -84,9 +94,11 @@ class ClassifierTest {
     void parseSingleNumber() {
         // given
         String input = "1";
+        List<String> defaultDelimiters = Arrays.asList(",", ":");
+        Delimiters delimiters = new Delimiters(defaultDelimiters, input);
 
         // when
-        Classifier classifier = new Classifier(input);
+        Classifier classifier = new Classifier(input, delimiters);
         List<Integer> numbers = classifier.getNumbers();
 
         // then
@@ -98,10 +110,12 @@ class ClassifierTest {
     void throwExceptionForInvalidInput() {
         // given
         String invalidInput = "1,a,3";
+        List<String> defaultDelimiters = Arrays.asList(",", ":");
+        Delimiters delimiters = new Delimiters(defaultDelimiters, invalidInput);
 
         // when & then
         assertThrows(IllegalArgumentException.class, () -> {
-            new Classifier(invalidInput);
+            new Classifier(invalidInput, delimiters);
         });
     }
 
@@ -110,10 +124,12 @@ class ClassifierTest {
     void throwExceptionForInvalidCustomDelimiter() {
         // given
         String invalidCustomDelimiterInput = "//\n1;2;3";
+        List<String> defaultDelimiters = Arrays.asList(",", ":");
+        Delimiters delimiters = new Delimiters(defaultDelimiters, invalidCustomDelimiterInput);
 
         // when & then
         assertThrows(IllegalArgumentException.class, () -> {
-            new Classifier(invalidCustomDelimiterInput);
+            new Classifier(invalidCustomDelimiterInput, delimiters);
         });
     }
 
