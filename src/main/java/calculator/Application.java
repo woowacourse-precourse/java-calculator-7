@@ -12,11 +12,14 @@ public class Application {
 
         String input = getInput();
         validation(input);
-
-        long result = calculator.sumOfString(input);
-        System.out.println("결과 : " + result);
+        logic(calculator, input);
 
         Console.close();
+    }
+
+    private static void logic(Calculator calculator, String input) {
+        long result = calculator.sumOfString(input);
+        System.out.println("결과 : " + result);
     }
 
     private static String getInput() {
