@@ -23,8 +23,9 @@ public class CalculatorController {
 
         String userInput = view.getUserInput();
 
-        model.findCustomSeparator(userInput);
         try {
+            model.findCustomSeparator(userInput);
+
             model.parseNumbersFromString(userInput);
 
             long result = model.addNumbers();

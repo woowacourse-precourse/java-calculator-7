@@ -1,11 +1,12 @@
 package calculator.mvc.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CalculatorImpl implements Calculator {
     private List<Character> separators = new ArrayList<>();
-    private List<String> customSeparators = List.of("//", "\n");
+    private List<String> customSeparators = List.of("//", "\\n");
     private List<Long> numbers = new ArrayList<>();
     private static Calculator instance = new CalculatorImpl();
 
@@ -49,8 +50,31 @@ public class CalculatorImpl implements Calculator {
     }
 
     @Override
-    public void parseNumbersFromString(String input) {
+    public void parseNumbersFromString(String input) throws IllegalStateException {
+        boolean hasCustomSeparator = existCustomSeparator(input);
 
+        StringBuilder regExTmp = new StringBuilder();
+
+        regExTmp.append("[");
+        for (int i = 0; i < separators.size(); i++) {
+            regExTmp.append(separators.get(i));
+        }
+        regExTmp.append("]");
+
+        if (hasCustomSeparator) {
+            input = input.substring(5);
+        }
+
+        String[] tokens = input.split(regExTmp.toString());
+
+        for (String s : tokens) {
+            try {
+                Long num = Long.valueOf(s);
+                numbers.add(num);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("피연산자가 숫자가 아닙니다.");
+            }
+        }
     }
 
     @Override
