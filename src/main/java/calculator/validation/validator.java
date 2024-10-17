@@ -1,7 +1,5 @@
 package calculator.validation;
 
-import calculator.Type.MessageType;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,8 +11,6 @@ public class Validator {
         checkCustomInPlace(input);
 
     }
-
-
 
 
     // // \n이 가장 처음에 하나만 존재한다
@@ -29,12 +25,21 @@ public class Validator {
             //checkIfDuplicate(input); //두개 이상 존재한다
 
         }else{ //문자열 가장 앞에 // \n이 없다
-
+            //음수를 입력한 경우
+            checkIfNegative(input);
             //문자열에 // \n이 없고 쉼표와 콜론 외 문자가 있을 때
             checkIfUnsigned(input);
 
 
         }
+    }
+
+    //음수를 입력
+    private static void checkIfNegative(String input) {
+        Pattern pattern=Pattern.compile("-[0-9]");
+        Matcher matcher=pattern.matcher(input);
+
+        if (matcher.find()) throw new IllegalArgumentException(MessageType.NEGATIVE_INPUT.getMessage());
     }
 
     private static void checkIfUnsigned(String input) {
@@ -47,12 +52,7 @@ public class Validator {
             }
         }
 
-
-
-
     }
-
-
     private static void checkIfNumber(String customSeperator) {
         if (customSeperator.matches("[0-9]")){
             throw new IllegalArgumentException(MessageType.NUMBER_SEPERATOR.getMessage());
