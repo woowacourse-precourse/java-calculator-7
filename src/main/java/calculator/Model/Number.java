@@ -16,12 +16,11 @@ public class Number {
     private int parseAndValidate(String number) {
         if (isNull(number)) {
             return 0;
-        } else {
-            isDigit(number);
-            int parsedNumber = Integer.parseInt(number);
-            isPositive(parsedNumber);
-            return parsedNumber;
         }
+        isDigit(number);
+        int parsedNumber = Integer.parseInt(number);
+        isPositive(parsedNumber);
+        return parsedNumber;
     }
 
     private void isPositive(int number) {
