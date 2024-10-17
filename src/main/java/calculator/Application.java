@@ -20,6 +20,7 @@ public class Application {
             }
         }
 
+        int sum = 0;
         String[] str_nums = input_str.split(delimiter);
         for(String str_num : str_nums){
             try{
@@ -27,9 +28,12 @@ public class Application {
                 if (int_num < 0) {
                     throw new IllegalArgumentException("음수는 허용되지 않습니다.");
                 }
+                sum+=int_num;
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("잘못된 숫자 형태입니다.");
             }
         }
+
+        System.out.println("결과 : "+sum);
     }
 }
