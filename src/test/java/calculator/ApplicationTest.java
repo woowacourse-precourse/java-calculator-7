@@ -44,6 +44,16 @@ class ApplicationTest extends NsTest {
         assertThat(Application.splitString("//@\\n3,4:5@6")).isEqualTo(new String[]{"3", "4", "5", "6"});
     }
 
+    @Test
+    void 커스텀_구분자가_기본_구분자와_동일한_경우() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//,\\n1,2:3"))
+                    .isInstanceOf(IllegalArgumentException.class);
+            assertThatThrownBy(() -> runException("//:\\n1,2:3"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
