@@ -1,5 +1,9 @@
 package calculator.operation;
 
+import calculator.operation.constants.BasicDelimiter;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class StringAdditionCalculator {
@@ -16,6 +20,25 @@ public class StringAdditionCalculator {
 
     public int calculateSum() {
         return 0;
+    }
+
+    /**
+     * 최종 구분자 생성
+     */
+    private String getFinalDelimiter() {
+        // 기본 구분자 리스트
+        List<String> basicDelimiters = Arrays.stream(BasicDelimiter.values())
+                .map(BasicDelimiter::getDelimiter)
+                .toList();
+
+        // 커스텀 구분자 추가 가능한 리스트
+        delimiters = new ArrayList<>(basicDelimiters);
+
+        // 커스텀 구분자 추출 (recursive)
+        this.extractCustomDelimiter();
+
+        // 최종 구분자 반환
+        return String.join("|", delimiters);
     }
 
     /**
