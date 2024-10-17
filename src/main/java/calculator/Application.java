@@ -1,15 +1,24 @@
 package calculator;
 
 import calculator.controller.InputController;
-import camp.nextstep.edu.missionutils.Console;
+import calculator.service.CalculatorService;
+import calculator.view.ConsoleView;
 
 public class Application {
+
     public static void main(String[] args) {
-        InputController inputController = new InputController();
+        String input = InputController.getInput();
 
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = Console.readLine();
+        CalculatorService calculatorService = new CalculatorService();
 
-        inputController.run(input);
+        if (input.startsWith("//")) {
+            InputController.addCustomDelimiter(input);
+        }
+
+        calculatorService.validate(input);
+        calculatorService.calculate(input);
+
+        ConsoleView.showResult(calculatorService.getResult());
+        calculatorService.resetResult();
     }
 }
