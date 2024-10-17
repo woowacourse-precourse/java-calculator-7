@@ -31,7 +31,16 @@ public class Application {
     }
 
     public static String getInput() {
-        return Console.readLine();
+        String input = Console.readLine();
+        checkValidation(input);
+        return input;
+    }
+
+    private static void checkValidation(String input) {
+        if (!input.startsWith("/") && !Character.isDigit(input.charAt(0))) {
+            throw new IllegalArgumentException("문자의 시작이 / 이 아닙니다.");
+        }
+
     }
 
     public static String getCustomSeparator(Matcher matcher) {
