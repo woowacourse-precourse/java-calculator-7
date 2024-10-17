@@ -7,6 +7,7 @@ public class StringCalculator {
 
     String inputString = ""; // 입력받는 문자열
     Character customSeparator = null; // 커스텀 구분자
+    Calculation calculation = new Calculation(); // 연산 클래스
 
     //사용자로부터 문자열을 입력받음
     public void input(){
@@ -40,9 +41,13 @@ public class StringCalculator {
 
     //덧셈 결과를 출력
     public void outputAdd(){
-        //Todo: Calculations 클래스에서 add 함수 가져오기
+        //Calculations 클래스에서 add 함수 가져오기
+        int result = calculation.Add(inputString);
+
         //Todo: 결과 출력하기
     }
+
+
 
     //문자열 입력받기
     private void readString(){
