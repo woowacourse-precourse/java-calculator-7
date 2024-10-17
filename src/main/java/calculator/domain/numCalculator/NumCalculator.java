@@ -5,10 +5,10 @@ import java.util.List;
 public class NumCalculator {
 
     public Integer calculate(List<String> numbers){
-        Integer asnwer = 0;
+        Integer answer = 0;
         for(String num:numbers){
-            asnwer+=Integer.parseInt(num);
+            answer+=Integer.parseInt(num);
         }
-        return asnwer;
+        return answer;
     }
 }
