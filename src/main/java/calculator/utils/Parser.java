@@ -1,6 +1,7 @@
 package calculator.utils;
 
 import calculator.model.Numbers;
+import calculator.validators.NumberValidator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class Parser {
         if (!number.isEmpty()) {
             numbers.add(Integer.parseInt(number.toString()));
         }
+        NumberValidator.numberValidate(numbers);
         return new Numbers(numbers);
     }
 
