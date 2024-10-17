@@ -10,7 +10,7 @@ public abstract class Validator {
         }
     }
 
-    public static void validate(String splitInput) {
+    public static void validateIfNotNumber(String splitInput) {
         try {
             Integer.parseInt(splitInput);
         } catch (NumberFormatException e) {

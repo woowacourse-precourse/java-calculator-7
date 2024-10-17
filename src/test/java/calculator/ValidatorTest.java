@@ -7,7 +7,7 @@ import java.util.List;
 
 class ValidatorTest {
     @Test
-    void validateIfInputNegative() {
+    void validateIfNotNumberIfInputNegative() {
         //given
         String input = "1,-2:3";
         List<Integer> numbersAfterParsing = DelimiterParser.getNumbersAfterParsing(input);
@@ -17,13 +17,13 @@ class ValidatorTest {
         });
     }
     @Test
-    void validate() {
+    void validateIfNotNumber() {
         //given
         String input = "1@2#3";
         //when
         //then
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            Validator.validate(input);
+            Validator.validateIfNotNumber(input);
         });
     }
 }
