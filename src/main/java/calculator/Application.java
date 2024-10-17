@@ -23,8 +23,7 @@ public class Application {
         if (inputIsNotEmpty(input)) {
             boolean hasCustomDelimiter = false;
             if (isCustomDelimiter(input)) {
-                int delimiterIdx = input.indexOf("\n");
-                String delimiter = input.substring(2, delimiterIdx);
+                String delimiter = extractCustomDelimiter(input);
                 DELIMITERS.add(delimiter);
                 hasCustomDelimiter = true;
             }
@@ -48,6 +47,11 @@ public class Application {
             }
         }
         OUTPUT_HANDLER.showAdditionResult(result);
+    }
+
+    private static String extractCustomDelimiter(String input) {
+        int delimiterIdx = input.indexOf("\n");
+        return input.substring(2, delimiterIdx);
     }
 
     private static String getUserInput() {
