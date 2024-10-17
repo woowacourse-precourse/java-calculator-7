@@ -14,15 +14,8 @@ public class CalculatorController {
     }
 
     public void run() {
-        while (true) {
-            String input = view.getInput();
-
-            if (input.equalsIgnoreCase("end")) {
-                System.out.println("프로그램을 종료합니다.");
-                break;
-            }
-            int result = calculator.calculate(input);
-            view.showResult(result);
-        }
+        String input = view.getInput();
+        int result = calculator.calculate(input);
+        view.showResult(result);
     }
 }
