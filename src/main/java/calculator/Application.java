@@ -1,6 +1,7 @@
 package calculator;
 
 import calculator.controller.CalculatorController;
+import calculator.service.Calculate;
 import calculator.service.StringParser;
 import calculator.view.InputView;
 
@@ -9,7 +10,8 @@ public class Application {
         // TODO: 프로그램 구현
         InputView inputView = new InputView();
         StringParser stringParser = new StringParser();
-        CalculatorController calculatorController = new CalculatorController(inputView, stringParser);
+        Calculate calculate = new Calculate();
+        CalculatorController calculatorController = new CalculatorController(inputView, stringParser, calculate);
 
         calculatorController.run();
     }
