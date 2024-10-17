@@ -19,6 +19,9 @@ public class Application {
         System.out.println(INPUT_GUIDE);
         String input = Console.readLine();
 
+        // 입력 문자열이 올바른 형태인지 검증한다.
+        input = Validator.validateInput(input);
+
         // 구분자 정의
         String[] delimiter = new String[3];
         delimiter[0] = BASIC_DELIMITER_1;
@@ -40,6 +43,9 @@ public class Application {
                 .map(Pattern::quote)
                 .reduce((d1, d2) -> d1 + "|" + d2)
                 .orElse("");
+
+        // 커스텀 구분자가 제거된 문자열이 올바른 형태인지 검증한다.
+        input = Validator.validateConvertedInput(input, delimiterRegex);
 
         // 숫자 추출
         String[] split = input.split(delimiterRegex);
