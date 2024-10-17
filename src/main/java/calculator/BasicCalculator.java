@@ -8,34 +8,30 @@ import calculator.parser.BasicMathematicalExpressionParser;
 import calculator.parser.BasicSeparatorParser;
 import calculator.parser.MathematicalExpressionParser;
 import calculator.parser.SeparatorParser;
+import calculator.view.AdditionCalculatorView;
 import camp.nextstep.edu.missionutils.Console;
 
 public class BasicCalculator implements Calculator {
 
 	private static final Set<Character> separators = new HashSet<>();
-	private SeparatorParser separatorParser;
-	private MathematicalExpressionParser mathematicalExpressionParser;
+	private final SeparatorParser separatorParser;
+	private final MathematicalExpressionParser mathematicalExpressionParser;
+	private final AdditionCalculatorView additionCalculatorView;
 
 	public BasicCalculator() {
-		this(null, null);
+		this(new BasicSeparatorParser(), new BasicMathematicalExpressionParser(), new AdditionCalculatorView());
 	}
 
-	public BasicCalculator(SeparatorParser separatorParser) {
-		this(separatorParser, null);
+	public BasicCalculator(
+		SeparatorParser separatorParser,
+		MathematicalExpressionParser mathematicalExpressionParser,
+		AdditionCalculatorView additionCalculatorView
+	) {
+		this.separatorParser = separatorParser;
+		this.mathematicalExpressionParser = mathematicalExpressionParser;
+		this.additionCalculatorView = additionCalculatorView;
 	}
 
-	public BasicCalculator(MathematicalExpressionParser mathematicalExpressionParser) {
-		this(null, mathematicalExpressionParser);
-	}
-
-	public BasicCalculator(SeparatorParser separatorParser, MathematicalExpressionParser mathematicalExpressionParser) {
-		if (separatorParser == null) {
-			this.separatorParser = new BasicSeparatorParser();
-		}
-		if (mathematicalExpressionParser == null) {
-			this.mathematicalExpressionParser = new BasicMathematicalExpressionParser();
-		}
-	}
 	private long calculate(String expression) {
 		String mathematicalExpression = separatorParser.parse(expression, separators);
 		String separatorPattern = separatorParser.generateRegex(separators);
@@ -46,16 +42,15 @@ public class BasicCalculator implements Calculator {
 
 	@Override
 	public void startCalculation() {
-		System.out.println("덧셈할 문자열을 입력해 주세요.");
-		String input = Console.readLine();
+		String input = additionCalculatorView.input();
 
 		long result = 0;
-		if(!input.equals("")){
+		if (!input.equals("")) {
 			result = calculate(input);
 		}
 
 		separators.clear();
-		System.out.printf("결과 : %d", result);
+		additionCalculatorView.output(result);
 	}
 
 }
