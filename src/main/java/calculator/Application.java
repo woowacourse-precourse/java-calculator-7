@@ -19,6 +19,11 @@ public class Application {
             }
         }
 
-        System.out.println(numbers);
+        int sum = 0;
+        for (int num : numbers) {
+            sum += num;
+        }
+
+        System.out.println("결과 : " + sum);
     }
 }
