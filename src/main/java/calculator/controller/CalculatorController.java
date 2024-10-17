@@ -11,6 +11,7 @@ public class CalculatorController {
 
     public void input(String s){
         int sum = calculatorService.sum(s);
-        System.out.println(sum);
+        System.out.println("결과 : "+sum);
     }
+
 }

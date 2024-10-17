@@ -5,10 +5,11 @@ public class CalculatorService {
     private String plusSeparator;
 
     public int sum(String s){
+        this.s = s;
         boolean hasPlusSeparator = checkPlusSeparator();
         String[] separatedString = separate(hasPlusSeparator);
         hasNaN(separatedString);
-
+        return sumSeparatedStringArr(separatedString);
     }
 
     private boolean checkPlusSeparator() {
@@ -37,5 +38,12 @@ public class CalculatorService {
                     throw new IllegalArgumentException();
             }
         }
+    }
+    private int sumSeparatedStringArr(String[] separatedStringArr){
+        int sum = 0;
+        for(String separatedString:separatedStringArr){
+            sum += Integer.parseInt(separatedString);
+        }
+        return sum;
     }
 }
