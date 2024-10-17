@@ -19,9 +19,14 @@ class ApplicationTest extends NsTest {
     @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+    @Test
+    void 입력받은_문자열이_커스텀_구분자를_고려해야_하는_문자열인_경우() {
+        assertThat(Application.isStringWithCustomDelimiter("//a\\n1a2a3")).isEqualTo(true);
     }
 
     @Override

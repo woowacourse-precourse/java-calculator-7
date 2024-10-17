@@ -24,7 +24,7 @@ public class Application {
         System.out.printf("결과 : %d", sum);
     }
 
-    private static boolean isStringWithCustomDelimiter(String str) {
+    public static boolean isStringWithCustomDelimiter(String str) {
         if (str.length() < 5) {
             return false;
         }
