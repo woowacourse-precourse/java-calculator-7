@@ -1,5 +1,6 @@
 package calculator.model;
 
+import calculator.exception.CalculateException;
 import calculator.service.CalculateCustom;
 import calculator.service.CalculateDefault;
 import java.util.List;
@@ -16,10 +17,7 @@ public class Calculate {
     }
 
     public void isValidate(String userInput) {
-        if (CalculateDefault.checkNotContainDefault(userInput) && CalculateCustom.checkNotContainCustom(userInput)) {
-            //예외처리
-            throw new IllegalArgumentException("에러 메시지");
-        }
+        CalculateException.catchWrongNumberSeparator(userInput);
     }
 
     public boolean checkContainCustom(String userInput) {

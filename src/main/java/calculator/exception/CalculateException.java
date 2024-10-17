@@ -1,5 +1,8 @@
 package calculator.exception;
 
+import calculator.service.CalculateCustom;
+import calculator.service.CalculateDefault;
+
 public class CalculateException {
 
     private static final Integer ZERO = 0;
@@ -21,5 +24,15 @@ public class CalculateException {
             throwException(ExceptionMessage.INPUT_IS_NOT_NUMBER_EXCEPTION);
         }
         return null;
+    }
+
+    public static void catchWrongNumberSeparator(String userInput) {
+        if (checkNotContainSeparator(userInput)) {
+            throwException(ExceptionMessage.INPUT_IS_WRONG_EXCEPTION);
+        }
+    }
+
+    public static boolean checkNotContainSeparator(String userInput) {
+        return CalculateDefault.checkNotContainDefault(userInput) && CalculateCustom.checkNotContainCustom(userInput);
     }
 }
