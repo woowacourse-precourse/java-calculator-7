@@ -30,28 +30,33 @@ public class Calculator {
         private static boolean isValidString(String str) {}
     }
 
-    private class DelimeterManager {
+    private class DelimiterManager {
 
         private static final int MAX_CUSTOM_DELIMITERS = 3;
         private String[] delimiters;
         private int count;
 
-        private DelimeterManager() {
+        private DelimiterManager() {
             delimiters = new String[2];
             delimiters[0] = ",";
             delimiters[1] = ":";
             count = 2;
         }
 
-        public void addDelimeter(String delimeter) {
+        public void addDelimiter(String delimiter) {
+
+            if (delimiter.equals(",") || delimiter.equals(":")) {
+                throw new IllegalArgumentException("Custom delimiter cannot be a default delimiter (',' or ':').");
+            }
+
             if (count >= MAX_CUSTOM_DELIMITERS) {
                 throw new IllegalArgumentException("Only one custom delimiter is allowed.");
             }
 
-            String[] newDelimeters = new String[count + 1];
-            System.arraycopy(delimiters, 0, newDelimeters, 0, count);
-            delimiters = newDelimeters;
-            delimiters[count++] = delimeter;
+            String[] newDelimiters = new String[count + 1];
+            System.arraycopy(delimiters, 0, newDelimiters, 0, count);
+            delimiters = newDelimiters;
+            delimiters[count++] = delimiter;
         }
 
         public String[] getDelimiters() {
