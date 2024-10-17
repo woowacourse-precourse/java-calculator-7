@@ -22,11 +22,11 @@ public class InputValidator {
     }
 
     private static void validateCustomDelimiterFormat(String input) {
-        if(!input.contains("\n")){
+        if(!input.contains("\\n")){
             throw new IllegalArgumentException("불가능한 custom delimiter 형식");
         }
 
-        String[] parts = input.split("\n", 2);
+        String[] parts = input.split("\\n", 2);
         if (parts[0].length() <=2){
             throw new IllegalArgumentException("불가능한 custom delimiter 형식");
         }

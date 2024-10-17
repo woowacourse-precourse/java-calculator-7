@@ -6,7 +6,7 @@ import calculator.validator.InputValidator;
 public class StringParser {
     private static final String DEFAULT_DELIMITERS = ",|:";
     private static final String CUSTOM_DELEMITER_PREFIX = "//";
-    private static final String CUSTOM_DELEMITER_SUFFIX = "\n";
+    private static final String CUSTOM_DELEMITER_SUFFIX = "\\n";
 
     public static ParseResult parse(String input) {
         InputValidator.validateInput(input);
