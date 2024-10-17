@@ -57,6 +57,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 기본_구분자_쉼표_사용_공백_포함() {
+        assertSimpleTest(() -> {
+            run("1, 2,3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
     void 기본_구분자_콜론_사용() {
         assertSimpleTest(() -> {
             run("1:2:3");
@@ -100,14 +108,6 @@ class ApplicationTest extends NsTest {
     void 예외_문자_포함() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1,a,3"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
-    }
-
-    @Test
-    void 예외_공백_포함() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("1, 2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
