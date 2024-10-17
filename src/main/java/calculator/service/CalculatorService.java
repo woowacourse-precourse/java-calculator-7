@@ -59,7 +59,8 @@ public class CalculatorService {
     private int sumSeparatedStringArr(String[] separatedStringArr){
         int sum = 0;
         for(String separatedString:separatedStringArr){
-            sum += Integer.parseInt(separatedString);
+            if(!separatedString.isEmpty())
+                sum += Integer.parseInt(separatedString);
         }
         return sum;
     }
