@@ -1,6 +1,6 @@
 package calculator;
 import java.util.ArrayList;
-public class Scanner {
+public class AdderScanner {
 
     private ArrayList<Integer> output;
     private char customDelimiter=',';
@@ -11,10 +11,11 @@ public class Scanner {
         DELIMITER,
         END
     }
+
     ArrayList<Integer> getOutput() {
         return output;
     }
-    public Scanner(String input)  {
+    public AdderScanner(String input)  {
         State state= State.START;
         output=new ArrayList<>();
         StringBuilder cur_num=new StringBuilder();
@@ -27,8 +28,8 @@ public class Scanner {
                 input=input.substring(delimiterEndIndex+2);
             }
         }
-        System.out.println("customDeliiter: " + customDelimiter);
-        System.out.println("input:" + input);
+        //System.out.println("customDeliiter: " + customDelimiter);
+        //System.out.println("input:" + input);
 
 
         for(char ch: input.toCharArray()) {
@@ -69,6 +70,13 @@ public class Scanner {
         } else if(output.isEmpty()) {
             output.add(0);
         }
+        /*
+        for(int i=0;i<output.size();i++) {
+            System.out.print(output.get(i) +" ");
+        }
+        System.out.println();
+
+         */
     }
 
     private static boolean isDelimiter(char ch,char custom_char) {

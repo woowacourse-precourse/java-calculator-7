@@ -3,15 +3,16 @@ package calculator;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 public class Application {
     static String input;
-    private static Scanner scanner;
+    private static AdderScanner adderScanner;
+    private static Adder adder;
 
     static void Input() throws IOException {
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         input=br.readLine();
+        //System.out.println("input:" +input);
 
 
     }
@@ -20,16 +21,15 @@ public class Application {
 
         Input();
         try {
-            scanner = new Scanner(input);
+            adderScanner = new AdderScanner(input);
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
 
 
         }
-        ArrayList<Integer> a=scanner.getOutput();
+        adder=new Adder(adderScanner);
 
-        for(int i=0;i<a.size();i++) {
-            System.out.print(a.get(i) +" ");
-        }
+
+
     }
 }
