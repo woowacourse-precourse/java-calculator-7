@@ -34,9 +34,10 @@ public class Application {
             app.validateInput(additionFormula,separator);
 
             int result = app.calculateFormula(additionFormula,separator);
+            app.printResult(result);
 
         } catch (NoSuchElementException e) {
-            // Console.readLine()이 "" 일 경우 0 출력
+            app.printResult(0);
 
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("잘못된 값을 입력하였습니다");
@@ -94,6 +95,11 @@ public class Application {
             sum += convertStringToInt(number);
         }
         return sum;
+    }
+
+    // 결과 출력
+    private void printResult(int result){
+        System.out.println("결과 : " + result);
     }
 
     // 구분자가 기본인지 커스텀인지 판단
