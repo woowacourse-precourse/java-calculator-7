@@ -10,4 +10,12 @@ public class StringAddCalculator {
         this.formula = formula;
         delimeter = CommonConstant.NORMAL_DELIMETER_PATTERN;
     }
+
+    public String getFormula() {
+        return formula;
+    }
+
+    public String getDelimeter() {
+        return delimeter;
+    }
 }
