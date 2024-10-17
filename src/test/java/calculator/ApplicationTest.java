@@ -48,6 +48,15 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 커스텀_구분자_선언_후_개행_문자_없을_경우_예외_발생() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//;1;2;3"))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("커스텀 구분자 선언 후 '\\n'이 필요합니다");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
