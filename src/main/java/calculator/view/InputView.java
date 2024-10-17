@@ -7,4 +7,6 @@ public class InputView {
     public static String inputNumbers(){
         return Console.readLine();
     }
+
+
 }
