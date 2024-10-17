@@ -43,8 +43,14 @@ public class Input {
         return rawText;
     }
 
+    public void validInputText(char endChar) {
+        if (!('0' <= endChar && endChar <= '9')) {
+            throw new IllegalArgumentException("입력이 올바르지 않습니다. 마지막 문자는 숫자여야 합니다.");
+        }
+    }
+
     public void getInputText(String rawText) {
-        // 추후 기능 추가
+        validInputText(rawText.charAt(rawText.length()-1));
         int customDelimiterEndIndex = checkHasCustomDelimiter(rawText);
         this.delimiter = splitCustomDelimiter(customDelimiterEndIndex, rawText);
         this.text = splitText(customDelimiterEndIndex, rawText);

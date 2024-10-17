@@ -34,4 +34,6 @@ public class InputTest {
             input.getInputText(testText);
         });
     }
+
+    // 공백, 띄어쓰기와 같은 커스텀 구분자 테스트 추후 추가
 }
