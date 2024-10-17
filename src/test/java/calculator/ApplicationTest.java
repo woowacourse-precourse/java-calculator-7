@@ -11,8 +11,16 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
-            run("//;\\n1");
-            assertThat(output()).contains("결과 : 1");
+            run("//;\\n1;2");
+            assertThat(output()).contains("결과 : 3");
+        });
+    }
+
+    @Test
+    void 기본_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("1:2,3");
+            assertThat(output()).contains("결과 : 6");
         });
     }
 
@@ -27,7 +35,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 십의_자리_수_인식() {
         assertSimpleTest(() -> {
-            run("10,2;3");
+            run("10,2:3");
             assertThat(output()).contains("결과 : 15");
         });
     }
@@ -76,6 +84,14 @@ class ApplicationTest extends NsTest {
     void 예외_테스트_커스텀4() { // 기본/커스텀 외의 구분자
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//^\\n1^2+3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_커스텀5() { // 2개 이상의 커스텀 구분자
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//^;\\n1^2;3"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
