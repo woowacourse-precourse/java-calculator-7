@@ -1,5 +1,6 @@
 package calculator.model;
 
+import static calculator.common.constant.Constants.SEPARATOR_SIZE;
 import static calculator.common.exception.ErrorMessage.SEPARATOR_FORMAT_ERROR;
 
 public record Separator(String separator) {
@@ -15,7 +16,7 @@ public record Separator(String separator) {
         }
 
         private static void validateLength(String separator) {
-            if (separator.length() != 1) {
+            if (separator.length() != SEPARATOR_SIZE) {
                 throw new IllegalArgumentException(SEPARATOR_FORMAT_ERROR);
             }
         }
