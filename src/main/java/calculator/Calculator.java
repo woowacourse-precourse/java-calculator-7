@@ -28,8 +28,18 @@ public class Calculator {
     }
 
 
-    public void isValid(){
+    public void isValid() throws IllegalArgumentException{
+        for(int i=2; i<operator.length(); i++){
+           if(operator.charAt(i)>= '0' && operator.charAt(i)<= '9'){
+               throw new IllegalArgumentException("Invalid operator");
+           }
+        }
 
+        for(String str : splitStr){
+            if(!str.matches("[0-9]")){
+                throw new IllegalArgumentException("Invalid number");
+            }
+        }
     }
 
 }
