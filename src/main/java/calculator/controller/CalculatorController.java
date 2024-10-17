@@ -15,7 +15,8 @@ public class CalculatorController {
     }
 
     public void run() {
-        postCalculator();
+        Calculator calculator = postCalculator();
+        getCalculator(calculator);
     }
 
     private Calculator postCalculator() {
@@ -23,5 +24,10 @@ public class CalculatorController {
         RegDelimiter regDelimiter = new RegDelimiter();
         regDelimiter.findCustomDelimiter(inputValue);
         return new Calculator(inputValue, regDelimiter);
+    }
+
+    private void getCalculator(Calculator calculator) {
+        calculator.calculate();
+        outputView.outputResult(calculator);
     }
 }
