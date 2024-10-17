@@ -33,6 +33,7 @@ public class Application {
         }
 
         // 구분자로 문자열 자르기
+        String[] numbers = inputExpression.split(delimeter);
 
         // 추출된 숫자들의 합 구하기
 
