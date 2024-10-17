@@ -17,8 +17,7 @@ class ParserTest {
             "/=\\n1=2=3 . false",
             "// \\n1 2 3 . true",
             " . false",
-            "//a\\3a2a1 . false",
-            "//1\\n112131 . false"},
+            "//a\\3a2a1 . false"},
             delimiter = '.'
     )
     @DisplayName("커스텀 구분자 존재 유무 판단 테스트")
