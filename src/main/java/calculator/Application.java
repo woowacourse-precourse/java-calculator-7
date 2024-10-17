@@ -12,7 +12,6 @@ public class Application {
 
         int sum = 0;
 
-
         if (input.trim().isEmpty()) {
             System.out.println("결과 : 0");
             return;
@@ -48,15 +47,15 @@ public class Application {
         int sum = 0;
         int prevSum = 0;
         for (String number : numbers) {
-            try{
-            prevSum = sum;
-            sum += Integer.parseInt(number);
+            try {
+                prevSum = sum;
+                sum += Integer.parseInt(number);
 
-            if (sum < prevSum) {
-                throw new IllegalArgumentException("양수의 숫자만 입력 할 수 있습니다.");
-            }
+                if (sum < prevSum) {
+                    throw new IllegalArgumentException("양수의 숫자만 입력 할 수 있습니다.");
+                }
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("숫자 이외의 값이 입력 되었습니다." );
+                throw new IllegalArgumentException("숫자 이외의 값이 입력 되었습니다.");
             }
         }
         return sum;
