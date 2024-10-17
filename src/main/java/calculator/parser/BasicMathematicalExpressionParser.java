@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class BasicMathematicalExpressionParser implements MathematicalExpressionParser {
 
 
-	public static final String BASIC_VALID_MATHEMATICAL_EXPRESSION_PATTERN = "^(\\d)(\\D*\\d)*";
+	public static final String BASIC_VALID_MATHEMATICAL_EXPRESSION_PATTERN = "(\\d+\\D)*\\d+$";
 
 	private long stringNumberToNumber(String stringNumber) {
 		try {
