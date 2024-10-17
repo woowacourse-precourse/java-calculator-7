@@ -5,12 +5,13 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringAddCalculator {
+public class StringAddCalculator implements StringCalculator {
     private static final int DEFAULT_VALUE = 0;
     private static final String DEFAULT_DELIMITER = ",|:";
     private static final int CUSTOM_DELIMITER_ORDER = 1;
     private static final int ARITHMETIC_EXPRESSION_ORDER = 2;
 
+    @Override
     public int add(String input) {
         if (input == null || input.isBlank()) {
             return DEFAULT_VALUE;
