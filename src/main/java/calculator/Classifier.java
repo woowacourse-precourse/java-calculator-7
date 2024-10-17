@@ -53,7 +53,7 @@ public class Classifier {
         }
         String customRegexForSplit = "["+ DEFAULT_DELIMITERS + customDelimiter + "]";
 
-        return splitAndConvertInput(input.substring(5), customRegexForSplit);
+        return splitAndConvertInput(getExcludedString(input), customRegexForSplit);
     }
 
     /**
@@ -74,12 +74,13 @@ public class Classifier {
 
     /**
      * custom delimiter 추출
-     * substring 부분은 너무 한정적임. 다른 방식을 고려해야 함
      * @param input
      * @return
      */
     private String getCustomDelimiter(String input) {
-        return input.substring(2,3);
+        String regex = "//|\\Q\\n\\E";
+        String[] customString = input.split(regex);
+        return customString[1];
     }
 
 
@@ -99,11 +100,14 @@ public class Classifier {
      * @param input
      */
     private void isCustomStringValid(String input) {
-        String excludedString = input.substring(5);
         String customRegex = "^[0-9]+([" + DEFAULT_DELIMITERS + customDelimiter + "][0-9]+)*$";
-        if(!excludedString.matches(customRegex)) {
+        if(!getExcludedString(input).matches(customRegex)) {
             throw new IllegalArgumentException("Invalid custom delimiter");
         }
+    }
+
+    private String getExcludedString(String input) {
+        return input.split("\\Q\\n\\E")[1];
     }
 
     /**
