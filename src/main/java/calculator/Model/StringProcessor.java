@@ -17,7 +17,14 @@ public class StringProcessor {
 //        return convertToIntArray(parsedInput);
         return new int[0];
     }
-    
+
+    public String getSeparator() {
+        // 구분자 정의하기
+        if (hasCustomSeparator()) {
+            return getCustomSeparator();
+        }
+        return ",|:";
+    }
 
     private boolean hasCustomSeparator() {
         return input.contains("//") || input.contains("\n");
