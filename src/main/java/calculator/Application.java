@@ -73,10 +73,19 @@ public class Application {
         return BigInteger.valueOf(input);
     }
 
+    public static void addNum() {
+        BigInteger answer = BigInteger.ZERO;
+        for (int i = 0; i < usernumList.size(); i++) {
+            answer = answer.add(convertLongToBigInt(usernumList.get(i)));
+        }
+        System.out.println("결과 : " + answer);
+    }
+
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해주세요");
         userInput = getUserInput();
         getCustomSeperator(userInput);
         getNumber(userInput);
+        addNum();
     }
 }
