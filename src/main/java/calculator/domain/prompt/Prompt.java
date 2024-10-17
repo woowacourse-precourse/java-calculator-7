@@ -11,13 +11,10 @@ public abstract class Prompt {
     private final List<String> input;
 
     protected Prompt(String inputData) {
-        this.input = this.separate(inputData);
+        this.input = parseInput(inputData);
     }
 
-    protected Prompt(String inputData, char customDelimiter) {
-        this.input = this.separate(inputData, customDelimiter);
-    }
-
+    protected abstract List<String> parseInput(String inputData);
     protected abstract List<String> separate(String inputData);
     protected abstract List<String> separate(String inputData, char customDelimiter);
 

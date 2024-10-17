@@ -36,7 +36,7 @@ class CalculatorTest {
 
     @Test
     @DisplayName("올바른 숫자 정보가 입력되는 경우, 합을 반환한다.")
-    void givenNumbers_whenSum_thenReturnSumOfNumbers() {
+    void givenAnyInput_whenSum_thenReturnSumOfNumbers() {
         // given
         Calculator calculator = new Calculator(new FakePrompt("any"));
 
@@ -48,10 +48,10 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("올바른 숫자와 구분자가 정보가 입력되는 경우, 합을 반환한다.")
-    void givenNumbersWithDelimiter_whenSum_thenReturnSumOfNumbers() {
+    @DisplayName("커스텀 구분자 입력이 주어질 경우, 숫자의 합을 반환한다.")
+    void givenCustomDelimiterInput_whenSum_thenReturnSumOfNumbers() {
         // given
-        Calculator calculator = new Calculator(new FakePrompt("any", '?'));
+        Calculator calculator = new Calculator(new FakePrompt("custom"));
 
         // when, then
         int sum = calculator.sum();

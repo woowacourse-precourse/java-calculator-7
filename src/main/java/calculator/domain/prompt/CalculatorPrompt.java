@@ -9,18 +9,28 @@ public class CalculatorPrompt extends Prompt {
         super(input);
     }
 
-    public CalculatorPrompt(String input, char customDelimiter) {
-        super(input, customDelimiter);
+    @Override
+    protected List<String> parseInput(String inputData) {
+        if (inputData == null || inputData.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        String[] splitData = inputData.split("\n");
+        if (splitData.length > 2) {
+            throw new IllegalArgumentException();
+        }
+
+        if (splitData[0].startsWith("//")) {
+            return this.separate(splitData[1], inputData.charAt(2));
+        }
+        return this.separate(splitData[0]);
     }
 
     @Override
     protected List<String> separate(String inputData) {
         List<String> separatedData = new ArrayList<>();
-        if (inputData == null || inputData.isEmpty()) {
-            return separatedData;
-        }
-
         StringBuilder stringBuilder = new StringBuilder();
+
         for (char word: inputData.toCharArray()) {
             if (word == DELIMITER_COMMA || word == DELIMITER_COLON) {
                 separatedData.add(stringBuilder.toString());
@@ -37,11 +47,8 @@ public class CalculatorPrompt extends Prompt {
     @Override
     protected List<String> separate(String inputData, char customDelimiter) {
         List<String> separatedData = new ArrayList<>();
-        if (inputData == null || inputData.isEmpty()) {
-            return separatedData;
-        }
-
         StringBuilder stringBuilder = new StringBuilder();
+
         for (char word: inputData.toCharArray()) {
             if (word == DELIMITER_COMMA || word == DELIMITER_COLON || word == customDelimiter) {
                 separatedData.add(stringBuilder.toString());

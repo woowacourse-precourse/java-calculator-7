@@ -86,14 +86,13 @@ class CalculatorPromptTest {
     @DisplayName("기본 구분자와 커스텀 구분자가 주어질 경우, 모든 구분자를 제거한 결과를 반환한다.")
     void givenInputWithCustomDelimiter_whenCustomSeparate_thenReturnListWithoutDelimiters() {
         // given
-        String input = "1,2:3+4";
-        char customDelimiter = '+';
+        String input = "//+\n1,2:3+4";
 
         // when
-        CalculatorPrompt prompt = new CalculatorPrompt(input, customDelimiter);
+        CalculatorPrompt prompt = new CalculatorPrompt(input);
 
         // then
-        String[] inputWithoutDelimiter = input.split("[,:+]");
+        String[] inputWithoutDelimiter = "1,2:3+4".split("[,:+]");
         assertThat(prompt.getInput()).containsExactly(inputWithoutDelimiter);
     }
 
@@ -101,14 +100,13 @@ class CalculatorPromptTest {
     @DisplayName("기본 구분자와 커스텀 구분자 외 다른 구분자가 주어질 경우, 다른 구분자는 제거되지 않는다.")
     void givenInputWithOtherDelimiter_whenCustomSeparate_thenReturnNotSeperatedOtherDelimiter() {
         // given
-        String input = "1,2:3+4-5";
-        char customDelimiter = '+';
+        String input = "//+\n1,2:3+4-5";
 
         // when
-        CalculatorPrompt prompt = new CalculatorPrompt(input, customDelimiter);
+        CalculatorPrompt prompt = new CalculatorPrompt(input);
 
         // then
-        String[] inputWithoutDelimiter = input.split("[,:+]");
+        String[] inputWithoutDelimiter = "1,2:3+4-5".split("[,:+]");
         assertThat(prompt.getInput()).containsExactly(inputWithoutDelimiter);
         assertThat(prompt.getInput().get(3)).contains("-");
     }
@@ -186,12 +184,12 @@ class CalculatorPromptTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"11+22,33", "444+555:666", "777+888+999"})
+    @ValueSource(strings = {"//+\n11+22,33", "//+\n444+555:666", "//+\n777+888+999", "//s\n12s3", "// \n1 2"})
     @DisplayName("커스텀 구분자가 포함된 숫자로 이루어진 문자열 추출시, 정수 리스트를 반환한다.")
     void givenInputNumberStringWithCustomDelimiter_whenExtractInteger_thenReturnIntegerList(String input) {
         // given
         char customDelimiter = '+';
-        CalculatorPrompt prompt = new CalculatorPrompt(input, customDelimiter);
+        CalculatorPrompt prompt = new CalculatorPrompt(input);
 
         // when, then
         assertThat(prompt.extractInteger()).doesNotHaveSameClassAs(String.class);
