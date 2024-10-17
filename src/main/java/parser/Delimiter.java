@@ -1,10 +1,12 @@
 package parser;
 
+import global.DelimiterSyntaxIndex;
+
 public class Delimiter {
 
     public String extractDelimiter(String input) {
         if (validateStartsWith(input) && validateEndsWith(input)) {
-            return String.valueOf(input.charAt(2));
+            return String.valueOf(input.charAt(DelimiterSyntaxIndex.SPLITTER_INDEX.getKey()));
         }
         return null;
     }
@@ -21,6 +23,7 @@ public class Delimiter {
     }
 
     private boolean validateEndsWith(String input) {
-        return input.charAt(3) == '\\' && input.charAt(4) == 'n';
+        return input.charAt(DelimiterSyntaxIndex.FIRST_END.getKey()) == '\\'
+                && input.charAt(DelimiterSyntaxIndex.SECOND_END.getKey()) == 'n';
     }
 }
