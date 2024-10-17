@@ -1,13 +1,19 @@
 package calculator;
 
+import calculator.model.Calculator;
+import calculator.model.Number;
 import camp.nextstep.edu.missionutils.test.NsTest;
+
 import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.List;
+
 class ApplicationTest extends NsTest {
+
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
@@ -22,6 +28,25 @@ class ApplicationTest extends NsTest {
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+    @Test
+    void 잘못된_형식의_값을_입력하면_예외가_발생한다() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("-one,2,3"))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 계산기_테스트() {
+        Calculator calculator = new Calculator();
+        int sum = calculator.sum(List.of(
+            new Number(-1),
+            new Number(3),
+            new Number(2)
+        ));
+        assertThat(sum).isEqualTo(4);
     }
 
     @Override
