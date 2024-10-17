@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.checkMethod.CheckIsPositiveNum;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
