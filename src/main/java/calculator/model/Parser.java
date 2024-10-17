@@ -6,6 +6,14 @@ import java.util.regex.Pattern;
 
 public class Parser {
 
+    public List<String> parseInput(String input){
+        if(input.startsWith("//")){
+            return parseCustomSeparator(input);
+        }
+
+        return parseBasicSeparator(input);
+    }
+
     private List<String> parseBasicSeparator(String input){
         List<String> splitString = List.of(input.split(",|:"));
 
