@@ -12,4 +12,7 @@ public class Calculator {
 		separator[1] = ':';
 	}
 
+	public void run() {
+	}
+
 }
