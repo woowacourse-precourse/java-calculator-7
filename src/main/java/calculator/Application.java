@@ -9,7 +9,7 @@ public class Application {
     public static void main(String[] args) {
         String line = Console.readLine();
         Separator separator = createSeparator(line);
-        Calculator calculator = new Calculator(separator, line);
+        Calculator calculator = new Calculator(separator);
         try{
             calculator.calculate();
         } catch (IllegalArgumentException e){
@@ -19,8 +19,8 @@ public class Application {
 
     private static Separator createSeparator(String line) {
         if (line.startsWith("//")) {
-            return new CustomSeparator();
+            return new CustomSeparator(line);
         }
-        return new DefaultSeparator();
+        return new DefaultSeparator(line);
     }
 }

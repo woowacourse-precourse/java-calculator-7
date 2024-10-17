@@ -7,16 +7,14 @@ import java.util.List;
 public class Calculator {
 
     private final Separator separator;
-    private String line;
 
-    public Calculator(Separator separator, String line) {
+    public Calculator(Separator separator) {
         this.separator = separator;
-        this.line = line;
     }
 
     public void calculate() {
-        String[] strings = separator.splitLine(line);
-        if (strings == null) {
+        String[] strings = separator.splitLine();
+        if (strings == null || strings.length == 0) {
             System.out.println(0);
             return;
         }
