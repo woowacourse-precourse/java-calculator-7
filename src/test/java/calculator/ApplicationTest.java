@@ -1,11 +1,16 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.io.*;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ApplicationTest extends NsTest {
     @Test
@@ -24,8 +29,20 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void emptyInput(){
+        Boolean check = Application.checkEmpty(" ");
+
+        assertEquals(false, check);
+    }
+
     @Override
     public void runMain() {
-        Application.main(new String[]{});
+        try {
+            Application.main(new String[]{});
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
+
 }
