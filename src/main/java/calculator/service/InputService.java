@@ -11,7 +11,7 @@ public class InputService {
     private char customDelimiter; // 사용자가 입력한 커스텀 구분자
 
     public InputService() {
-        this.userInput = "//:\n9223372036854775807";
+        this.userInput = "//-\n-9223372036854775807-1";
     }
 
     // 사용자의 입력을 받는다.
@@ -61,7 +61,7 @@ public class InputService {
                         long value = Long.parseLong(part);
                         numbers.add(part);
                     } catch (NumberFormatException e) {
-                        throw new IllegalArgumentException("범위를 넘어서는 값을 입력했습니다. 잘못된 입력입니다.");
+                        throw new IllegalArgumentException("제한 범위를 넘어서는 값을 입력했습니다. 잘못된 입력입니다.");
                     }
                 } else {
                     throw new IllegalArgumentException("구분자가 아닌 문자가 포함되어 있습니다. 잘못된 입력입니다.");
