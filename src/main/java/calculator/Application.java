@@ -23,6 +23,13 @@ public class Application {
             throw new IllegalArgumentException("입력 문자열에 2개 이상의 연속된 숫자가 아닌 문자가 포함되어 있습니다.");
         }
         
+        // 문자열을 한 자리씩 순환하면서 , 또는 : 외의 문자가 있을 경우 오류 발생
+        for (char c : input.toCharArray()) {
+            if (!Character.isDigit(c) && c != ',' && c != ':') {
+                throw new IllegalArgumentException("입력 문자열에 허용되지 않은 문자가 포함되어 있습니다: " + c);
+            }
+        }
+        
         // 이후 로직 추가 예정
         return 0; // 기본 반환값
     }
