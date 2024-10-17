@@ -13,28 +13,9 @@ public class CalculatorModel {
         return customSeparator == null ? ",|:" : ",|:|" + Pattern.quote(customSeparator);
     }
 
-    private String getCustomSeparator(){
-        String customSeparator = null;
-        if(input.startsWith("//")){
-            int customEndIdx = input.indexOf("\n");
-            int separatorLength = 1;
+    private ArrayList<String> createSeparatorList(){
 
-            if(customEndIdx == -1){
-                customEndIdx = input.indexOf("\\n");
-                separatorLength = 2;
-            }
-            customSeparator = input.substring(2, customEndIdx);
-            input = input.substring(customEndIdx + separatorLength);
-
-        }
-        return customSeparator;
-    }
-
-    public ParsedInputDTO parseInput(String input){
-        this.input = input;
         ArrayList<String> separators = new ArrayList<>();
-        ArrayList<Integer> numbers = new ArrayList<>();
-
         String customSeparator = getCustomSeparator();
 
         separators.add(",");
@@ -44,14 +25,51 @@ public class CalculatorModel {
             separators.add(customSeparator);
         }
 
-        String tokenSeparator = createTokenSeparator(customSeparator);
+        return separators;
+    }
 
+    private ArrayList<Integer> createNumberList(){
+
+        ArrayList<Integer> numbers = new ArrayList<>();
+
+        String tokenSeparator = createTokenSeparator(getCustomSeparator());
 
         String[] tokens = this.input.split(tokenSeparator);
 
         for(String token : tokens){
             numbers.add(Integer.parseInt(token));
         }
+
+        return numbers;
+    }
+
+    private String getCustomSeparator(){
+
+        String customSeparator = null;
+
+        if(input.startsWith("//")){
+            int customEndIdx = input.indexOf("\n");
+            int separatorLength = 1;
+
+            if(customEndIdx == -1){
+                customEndIdx = input.indexOf("\\n");
+                separatorLength = 2;
+            }
+
+            customSeparator = input.substring(2, customEndIdx);
+            input = input.substring(customEndIdx + separatorLength);
+
+        }
+
+        return customSeparator;
+    }
+
+    public ParsedInputDTO parseInput(String input){
+
+        this.input = input;
+
+        ArrayList<String> separators = createSeparatorList();
+        ArrayList<Integer> numbers = createNumberList();
 
         return new ParsedInputDTO(separators, numbers);
     }
