@@ -19,9 +19,30 @@ public class Application {
 
     public static String extractCustomSeparator(String calcFormula) {
         String regex = "/{2}.\\\\n";
-        Pattern pattern = Pattern.compile(regex);
 
-        Matcher matcher = pattern.matcher(calcFormula);
+        int index;
+        for (index = 0; index < calcFormula.length(); index++) {
+            char c = calcFormula.charAt(index);
+            if (c - '0' >= 0 && c - '0' <= 9) {
+                break;
+            }
+        }
+
+        if (index == 0) {
+            return "";
+        }
+        if (index % 5 != 0) {
+            throw new IllegalArgumentException("커스텀 구분자 지정 규칙이 틀렸습니다.");
+        }
+
+        String substring = calcFormula.substring(0, index);
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(substring);
+
+        if (matcher.groupCount() != (index / 5)) {
+            throw new IllegalArgumentException("커스텀 구분자 지정 규칙이 틀렸습니다.");
+        }
 
         StringBuilder customSeparator = new StringBuilder();
 
