@@ -27,4 +27,15 @@ public class Application {
         return input.split(delimiter);
     }
 
+    public static int sumNumbers(String[] numbers){
+        int sum = 0;
+
+        for (String number : numbers){
+            if(!number.isEmpty()){
+                int num = Integer.parseInt(number);
+                sum += num;
+            }
+        }
+        return sum;
+    }
 }
