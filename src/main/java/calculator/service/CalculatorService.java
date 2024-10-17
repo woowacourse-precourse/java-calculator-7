@@ -1,22 +1,29 @@
-package calculator;
+package calculator.service;
 
+import calculator.command.Command;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringCalculator {
+public class CalculatorService {
 
     private static final List<String> DEFAULT_DELIMITERS = List.of(",", ":");
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.*?)\\\\n");
 
-    public int sum(final String input) {
+    private Command calculator;
+
+    public void setCommand(Command calculator) {
+        this.calculator = calculator;
+    }
+
+    public int calculate(final String input) {
         if (isEmpty(input)) {
             return 0;
         }
 
         String[] numbers = split(input);
-        return calculateSum(numbers);
+        return calculator.execute(numbers);
     }
 
     private boolean isEmpty(String input) {
@@ -40,8 +47,7 @@ public class StringCalculator {
             return input;
         }
 
-        Pattern pattern = Pattern.compile("//(.*?)\\\\n");
-        Matcher matcher = pattern.matcher(input);
+        Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
         int startNumberIndex = 0;
 
         while (matcher.find()) {
@@ -51,31 +57,5 @@ public class StringCalculator {
         }
 
         return input.substring(startNumberIndex);
-    }
-
-    private int parsePositiveNumber(String number) {
-        int num = parseInt(number);
-        validatePositive(num);
-        return num;
-    }
-
-    private int parseInt(String number) {
-        try {
-            return Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("올바르지 않은 형식입니다: " + number);
-        }
-    }
-
-    private void validatePositive(int num) {
-        if (num < 0) {
-            throw new IllegalArgumentException("음수 입력은 불가능합니다: " + num);
-        }
-    }
-
-    private int calculateSum(String[] numbers) {
-        return Arrays.stream(numbers)
-                .mapToInt(this::parsePositiveNumber)
-                .sum();
     }
 }
