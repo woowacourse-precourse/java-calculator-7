@@ -1,32 +1,25 @@
 package calculator.domain;
 
 import java.util.List;
-import java.util.Set;
 
 public class Calculator {
 	private final List<Long> calculationNumbers;
-	private final Set<String> delimiters;
-	private double sum;
+	private Long sum;
 
-	public Calculator(List<Long> calculationNumbers, Set<String> delimiters) {
+	public Calculator(List<Long> calculationNumbers) {
 		this.calculationNumbers = calculationNumbers;
-		this.delimiters = delimiters;
 		this.sum = 0L;
-	}
-
-	public Set<String> getDelimiters() {
-		return delimiters;
 	}
 
 	public List<Long> getCalculationNumbers() {
 		return calculationNumbers;
 	}
 
-	public double getSum() {
+	public Long getSum() {
 		return sum;
 	}
 
-	private void addNumber(Long addNum){
-		sum += addNum;
+	public void calculateSum(){
+		calculationNumbers.forEach(number -> sum += number);
 	}
 }
