@@ -12,6 +12,8 @@ public class StringCalculator {
     //사용자로부터 문자열을 입력받음
     public void input(){
 
+
+
         //문자열 입력받기
         readString();
         inputString = inputString.trim();
@@ -44,7 +46,7 @@ public class StringCalculator {
         //Calculations 클래스에서 add 함수 가져오기
         int result = calculation.Add(inputString);
 
-        //Todo: 결과 출력하기
+        System.out.println("결과 : "+result);
     }
 
 
