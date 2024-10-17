@@ -1,25 +1,25 @@
 package calculator;
 
-import calculator.controller.CalculatorController;
+import calculator.controller.Controller;
 import calculator.model.Calculator;
 import calculator.model.Delimiters;
 import calculator.model.Numbers;
 import calculator.service.CalculatorService;
 import calculator.service.DelimiterService;
-import calculator.service.NumberExtractorService;
+import calculator.service.NumberService;
 
 public class CalculatorApplication {
     public static void run() {
         initializeDependencies().start();
     }
 
-    private static CalculatorController initializeDependencies() {
+    private static Controller initializeDependencies() {
         Delimiters delimiters = new Delimiters();
         Calculator calculator = new Calculator();
         Numbers numbers = new Numbers();
         DelimiterService delimiterService = new DelimiterService(delimiters);
-        NumberExtractorService numberExtractorService = new NumberExtractorService(numbers, delimiterService);
-        CalculatorService calculatorService = new CalculatorService(calculator, numberExtractorService);
-        return new CalculatorController(delimiterService, numberExtractorService, calculatorService);
+        NumberService numberService = new NumberService(numbers, delimiterService);
+        CalculatorService calculatorService = new CalculatorService(calculator, numberService);
+        return new Controller(delimiterService, numberService, calculatorService);
     }
 }

@@ -3,19 +3,19 @@ package calculator.controller;
 
 import calculator.service.CalculatorService;
 import calculator.service.DelimiterService;
-import calculator.service.NumberExtractorService;
+import calculator.service.NumberService;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
-public class CalculatorController {
+public class Controller {
     private final DelimiterService delimiterService;
-    private final NumberExtractorService numberExtractorService;
+    private final NumberService numberService;
     private final CalculatorService calculatorService;
 
-    public CalculatorController(DelimiterService delimiterService, NumberExtractorService numberExtractorService,
-                                CalculatorService calculatorService) {
+    public Controller(DelimiterService delimiterService, NumberService numberService,
+                      CalculatorService calculatorService) {
         this.delimiterService = delimiterService;
-        this.numberExtractorService = numberExtractorService;
+        this.numberService = numberService;
         this.calculatorService = calculatorService;
     }
 
@@ -23,7 +23,7 @@ public class CalculatorController {
         InputView.printStartMessage();
         String inputString = InputView.getInput();
         inputString = delimiterService.addCustomDelimiters(inputString);
-        numberExtractorService.extractNumber(inputString);
+        numberService.extractNumber(inputString);
         int result = calculatorService.calculate();
         OutputView.printResultMessage(result);
     }

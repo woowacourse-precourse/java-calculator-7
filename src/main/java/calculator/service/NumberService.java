@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class NumberExtractorService {
+public class NumberService {
     private final Numbers numbers;
     private final DelimiterService delimiterService;
 
-    public NumberExtractorService(Numbers numbers, DelimiterService delimiterService) {
+    public NumberService(Numbers numbers, DelimiterService delimiterService) {
         this.numbers = numbers;
         this.delimiterService = delimiterService;
     }

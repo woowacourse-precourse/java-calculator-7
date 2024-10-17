@@ -5,15 +5,15 @@ import java.util.List;
 
 public class CalculatorService {
     private final Calculator calculator;
-    private final NumberExtractorService numberExtractorService;
+    private final NumberService numberService;
 
-    public CalculatorService(Calculator calculator, NumberExtractorService numberExtractorService) {
+    public CalculatorService(Calculator calculator, NumberService numberService) {
         this.calculator = calculator;
-        this.numberExtractorService = numberExtractorService;
+        this.numberService = numberService;
     }
 
     public int calculate() {
-        List<Integer> numbers = numberExtractorService.getNumbers();
+        List<Integer> numbers = numberService.getNumbers();
         return calculator.calculate(numbers);
     }
 }
