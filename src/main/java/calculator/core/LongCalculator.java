@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 import calculator.operation.AdditionalLongCalculatorOperation;
 import calculator.operation.LongCalculatorOperation;
-import calculator.parser.BasicMathematicalExpressionParser;
+import calculator.parser.LongMathematicalExpressionParser;
 import calculator.parser.BasicSeparatorParser;
 import calculator.parser.MathematicalExpressionParser;
 import calculator.parser.SeparatorParser;
@@ -22,7 +22,7 @@ public class LongCalculator implements Calculator {
 	private final LongCalculatorOperation longCalculatorOperation;
 
 	public LongCalculator() {
-		this(new BasicSeparatorParser(), new BasicMathematicalExpressionParser(),
+		this(new BasicSeparatorParser(), new LongMathematicalExpressionParser(),
 			new AdditionCalculatorView(), new AdditionalLongCalculatorOperation());
 	}
 

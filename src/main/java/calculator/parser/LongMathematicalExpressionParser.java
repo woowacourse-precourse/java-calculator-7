@@ -3,7 +3,7 @@ package calculator.parser;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
-public class BasicMathematicalExpressionParser implements MathematicalExpressionParser {
+public class LongMathematicalExpressionParser implements MathematicalExpressionParser {
 
 
 	public static final String BASIC_VALID_MATHEMATICAL_EXPRESSION_PATTERN = "(\\d+\\D)*\\d+$";
