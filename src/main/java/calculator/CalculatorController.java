@@ -30,10 +30,8 @@ public class CalculatorController {
             input = customSeparatorManager.extractAfterCustomSeparator(input);
         }
 
-        List<String> numbers = separators.separate(input);
-        int sum = numbers.stream()
-                .map(Integer::parseInt)
-                .reduce(0, Integer::sum);
+        List<String> inputs = separators.separate(input);
+        int sum = Calculator.calculate(inputs);
         outputView.printResult(sum);
     }
 }
