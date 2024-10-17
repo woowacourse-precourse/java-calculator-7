@@ -11,11 +11,11 @@ public class Delimiters {
         this.values = delimiters;
     }
 
-    public List<String> split(String input) {
-        return Arrays.stream(input.split(join("|"))).toList();
+    public List<String> split(String source) {
+        return Arrays.stream(source.split(join("|"))).toList();
     }
 
-    private String join(String delimiter) {
-        return String.join(delimiter, values.stream().map(Delimiter::value).toList());
+    private String join(String delimiterString) {
+        return String.join(delimiterString, values.stream().map(Delimiter::value).toList());
     }
 }

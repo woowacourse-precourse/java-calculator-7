@@ -11,9 +11,9 @@ public class DelimiterFactory {
             new Delimiter(":")
     );
 
-    public static Delimiters createDelimiters(Delimiter... delimiter) {
+    public static Delimiters createDelimiters(Delimiter... additionalDelimiters) {
         List<Delimiter> delimiters = new ArrayList<>(DEFAULT_DELIMITERS);
-        delimiters.addAll(Arrays.asList(delimiter));
+        delimiters.addAll(Arrays.asList(additionalDelimiters));
         return new Delimiters(delimiters);
     }
 }
