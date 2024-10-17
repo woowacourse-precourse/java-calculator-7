@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.List;
+
 public class Calculator {
 
     private final Operands operands;
@@ -10,7 +12,8 @@ public class Calculator {
 
     public void enter(String input) {
         BasicNumberConverter converter = new BasicNumberConverter(input);
-        converter.convert();
+        List<Long> numbers = converter.convert();
+        operands.add(numbers);
     }
 
 }
