@@ -26,10 +26,22 @@ public class Application {
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
 
-        String additionFormula = Console.readLine();
-        String separator = app.getSeparator(additionFormula);
+        try {
+            String additionFormula = Console.readLine();
+            String separator = app.getSeparator(additionFormula);
 
-        additionFormula = app.extractFormula(additionFormula);
+            additionFormula = app.extractFormula(additionFormula);
+            app.validateInput(additionFormula,separator);
+
+        } catch (NoSuchElementException e) {
+            // Console.readLine()이 "" 일 경우 0 출력
+
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("잘못된 값을 입력하였습니다");
+
+        } finally {
+            Console.close();
+    }
 
     }
 
@@ -54,6 +66,13 @@ public class Application {
             return value.substring(formulaStartIndex);
         }
         return value.replaceAll(",", BASIC_SEPARATOR);
+    }
+
+    // 유효성 검사
+    private void validateInput(String value, String separator) {
+        for (String number : value.split(separator)) {
+            // String -> int 변환 메서드
+        }
     }
 
     // 구분자가 기본인지 커스텀인지 판단
