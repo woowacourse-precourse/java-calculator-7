@@ -10,4 +10,10 @@ public class StringHandler {
         int end = input.indexOf("\n");
         return input.substring(start, end);
     }
+
+    public List<String> getNumbers(List<String> separators, String input) {
+        List<String> splitInput = new ArrayList<>(Arrays.asList(input.split("")));
+        splitInput.removeAll(separators);
+        return splitInput;
+    }
 }
