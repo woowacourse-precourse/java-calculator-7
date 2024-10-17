@@ -15,4 +15,11 @@ public class Operands {
         operands.addAll(numbers);
     }
 
+    public boolean isEmpty() {
+        return operands.isEmpty();
+    }
+
+    public List<Long> getOperands() {
+        return operands;
+    }
 }

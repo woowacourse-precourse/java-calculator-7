@@ -16,4 +16,15 @@ public class Calculator {
         operands.add(numbers);
     }
 
+    public Long addAll() {
+        if (operands.isEmpty()) {
+            return 0L;
+        }
+        List<Long> numbers = operands.getOperands();
+        Long sum = 0L;
+        for (Long number : numbers) {
+            sum += number;
+        }
+        return sum;
+    }
 }

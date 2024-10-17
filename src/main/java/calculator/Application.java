@@ -7,6 +7,8 @@ public class Application {
         Calculator calculator = new Calculator();
         String userInput = getUserInput();
         calculator.enter(userInput);
+        Long sum = calculator.addAll();
+        System.out.printf("결과 : %d", sum);
     }
 
     private static String getUserInput() {
