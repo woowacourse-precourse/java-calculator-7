@@ -17,6 +17,9 @@ public class CalculatorController {
     private static List<String> basicSeparators = new ArrayList<>();
     private static List<String> customSeparators = new ArrayList<>();
 
+    /**
+     * 계산기 실행
+     */
     public void start() {
         String input = InputView.readLine();
 
