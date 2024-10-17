@@ -1,26 +1,21 @@
 package calculator.core;
 
-import calculator.utils.NumUtil;
 import calculator.input.Input;
+import java.util.List;
 
 public class Calculator {
 
-    private final Input input;
+    private final List<Long> numList;
 
-    private Calculator(Input input) {
-        this.input = input;
+    private Calculator(List<Long> numList) {
+        this.numList = numList;
     }
 
     public static Calculator of(String consoleInput) {
-        return new Calculator(Input.of(consoleInput));
+        return new Calculator(Input.of(consoleInput).toLongList());
     }
 
-    public int sum() {
-        int[] nums = NumUtil.toIntArray(input);
-        int sum = 0;
-        for (int num : nums) {
-            sum += num;
-        }
-        return sum;
+    public long sum() {
+        return numList.stream().mapToLong(x -> x).sum();
     }
 }
