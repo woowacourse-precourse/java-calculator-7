@@ -7,7 +7,7 @@ public class OutputView {
         System.out.print(OutputMessages.RESULT);
     }
 
-    public static void printResult(int result) {
+    public static void printResult(Double result) {
         System.out.println(result);
     }
 }
