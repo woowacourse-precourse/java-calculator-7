@@ -31,7 +31,6 @@ public class Application {
         for (String i : inputToArr){
             sum += Integer.parseInt(i) ;
         }
-
         return sum;
     }
 }
