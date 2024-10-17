@@ -12,6 +12,7 @@ public class Calculator {
         System.out.println("결과 : " + result);
     }
 
+
     private void sum(String userInput) {
         if(userInput.startsWith("//") || userInput.contains("\n")) {
             int[] customNumberSeparator = getCustomSeparatorNumbers(userInput);
@@ -44,12 +45,12 @@ public class Calculator {
     }
 
     private static int[] stringToInt(String[] separator) {
-        int[] basicNumberSeparator = new int[separator.length];
+        int[] numberSeparator = new int[separator.length];
         for (int i = 0; i < separator.length; i++) {
-            basicNumberSeparator[i] = Integer.parseInt(separator[i]);
-            isPositiveNumber(basicNumberSeparator, i);
+            numberSeparator[i] = Integer.parseInt(separator[i]);
+            isPositiveNumber(numberSeparator, i);
         }
-        return basicNumberSeparator;
+        return numberSeparator;
     }
 
     private static void isPositiveNumber(int[] numberSeparator, int i) {
