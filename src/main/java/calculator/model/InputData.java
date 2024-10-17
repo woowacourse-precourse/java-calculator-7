@@ -1,5 +1,6 @@
 package calculator.model;
 
+import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,7 +28,10 @@ public class InputData {
     }
 
     public boolean isDelimiter(){
-        return false;
+        Pattern delimiterPattern = Pattern.compile("^//(.*)\\n(.*)");
+        Matcher delimiterMatcher = delimiterPattern.matcher(input);
+
+        return delimiterMatcher.matches();
     }
 
 }
