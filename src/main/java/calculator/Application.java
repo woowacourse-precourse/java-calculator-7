@@ -2,6 +2,7 @@ package calculator;
 
 import calculator.domain.*;
 import calculator.input.InputHandler;
+import calculator.output.OutputHandler;
 
 public class Application {
     public static void main(String[] args) {
@@ -18,7 +19,7 @@ public class Application {
         CharAnalyzer charAnalyzer = new CharAnalyzer(input, delimiter, customDelimiter, numberGenerator);
         charAnalyzer.analyzeAllChars();
 
-        System.out.println(sumCalculator.getResult());
-
+        OutputHandler outputHandler = new OutputHandler(sumCalculator);
+        outputHandler.output();
     }
 }
