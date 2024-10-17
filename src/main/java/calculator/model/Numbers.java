@@ -1,5 +1,6 @@
 package calculator.model;
 
+import calculator.exception.CalculateException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,12 +26,7 @@ public class Numbers {
         if (compareSplitInputToZero(splitInput)) {
             return ZERO;
         }
-
-        try {
-            return Integer.parseInt(splitInput);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("에러 메시지-정수 변환");
-        }
+        return CalculateException.catchNumberFormatException(splitInput);
     }
 
     public boolean compareSplitInputToZero(String splitInput) {
