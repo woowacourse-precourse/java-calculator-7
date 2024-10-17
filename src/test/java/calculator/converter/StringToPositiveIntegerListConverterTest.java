@@ -7,15 +7,16 @@ import java.math.BigInteger;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
-public class StringToBigIntegerListConverterTest {
+public class StringToPositiveIntegerListConverterTest {
 
-    StringToBigIntegerListConverter converter;
+    StringToPositiveIntegerListConverter converter;
 
     @BeforeEach
     void before() {
-        converter = new StringToBigIntegerListConverter();
+        converter = new StringToPositiveIntegerListConverter();
     }
 
     @Test
@@ -84,5 +85,27 @@ public class StringToBigIntegerListConverterTest {
                 BigInteger.valueOf(6),
                 BigInteger.valueOf(7),
                 BigInteger.valueOf(8));
+    }
+
+    @Test
+    void TDD_입력값_양수가_아닌_문자_포함시_예외처리() {
+        //given
+        String input = "1,2,//";
+        List<String> delimiters = List.of(",");
+
+        //when
+        assertThatThrownBy(() -> converter.convert(input, delimiters))
+                .isExactlyInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void TDD_입력값_양수가_아닌_정수가_포함시_예외처리() {
+        //given
+        String input = "1,-1,3";
+        List<String> delimiters = List.of(",");
+
+        //when
+        assertThatThrownBy(() -> converter.convert(input, delimiters))
+                .isExactlyInstanceOf(IllegalArgumentException.class);
     }
 }

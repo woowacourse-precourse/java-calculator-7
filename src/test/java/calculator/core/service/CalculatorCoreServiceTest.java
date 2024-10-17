@@ -1,12 +1,21 @@
 package calculator.core.service;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigInteger;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CalculatorCoreServiceTest {
+
+    CalculatorCoreService calculatorCoreService;
+
+    @BeforeEach
+    void before() {
+        calculatorCoreService = new CalculatorCoreService();
+    }
 
     @Test
     void TDD_빈_문자열_일때_0을_반환() {
@@ -14,11 +23,10 @@ public class CalculatorCoreServiceTest {
         String input = "";
 
     	//when
-        CalculatorCoreService calculatorCoreService = new CalculatorCoreService();
-        BigInteger result = calculatorCoreService.sum(input);
+        BigInteger sum = calculatorCoreService.sum(input);
 
         //then
-        assertThat(result).isEqualTo(0);
+        assertThat(sum).isEqualTo(0);
     }
 
     @Test
@@ -27,7 +35,6 @@ public class CalculatorCoreServiceTest {
         String input = "1,2,3";
 
         //when
-        CalculatorCoreService calculatorCoreService = new CalculatorCoreService();
         BigInteger sum = calculatorCoreService.sum(input);
 
         //then
@@ -40,7 +47,6 @@ public class CalculatorCoreServiceTest {
         String input = "1:2,3";
 
         //when
-        CalculatorCoreService calculatorCoreService = new CalculatorCoreService();
         BigInteger sum = calculatorCoreService.sum(input);
 
         //then
@@ -53,7 +59,6 @@ public class CalculatorCoreServiceTest {
         String input = "//|\n4|2|3";
 
         //when
-        CalculatorCoreService calculatorCoreService = new CalculatorCoreService();
         BigInteger sum = calculatorCoreService.sum(input);
 
         //then
@@ -66,10 +71,27 @@ public class CalculatorCoreServiceTest {
         String input = "//|\n5:6|7,8";
 
         //when
-        CalculatorCoreService calculatorCoreService = new CalculatorCoreService();
         BigInteger sum = calculatorCoreService.sum(input);
 
         //then
         assertThat(sum).isEqualTo(26);
+    }
+
+    @Test
+    void 기본_잘못된_입력값_양수아닐떄_예외처리() {
+        //given
+        String input = "1:2,a";
+
+        //when
+        assertThatThrownBy(() -> calculatorCoreService.sum(input)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 커스텀_잘못된_입력값_양수아닐떄_예외처리() {
+        //given
+        String input = "//|\\n1|2|-3";
+
+        //when
+        assertThatThrownBy(() -> calculatorCoreService.sum(input)).isInstanceOf(IllegalArgumentException.class);
     }
 }

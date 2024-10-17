@@ -1,6 +1,6 @@
 package calculator.core.service;
 
-import calculator.converter.StringToBigIntegerListConverter;
+import calculator.converter.StringToPositiveIntegerListConverter;
 import calculator.parser.DelimiterParser;
 
 import java.math.BigInteger;
@@ -12,11 +12,11 @@ import static java.math.BigInteger.ZERO;
 public class CalculatorCoreService {
 
     private final DelimiterParser parser;
-    private final StringToBigIntegerListConverter converter;
+    private final StringToPositiveIntegerListConverter converter;
 
     public CalculatorCoreService() {
-        parser = new DelimiterParser();
-        converter = new StringToBigIntegerListConverter();
+        this.parser = new DelimiterParser();
+        this.converter = new StringToPositiveIntegerListConverter();
     }
 
     public BigInteger sum(String input) {
