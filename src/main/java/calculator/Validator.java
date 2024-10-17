@@ -3,16 +3,12 @@ package calculator;
 public class Validator {
 
     private static final String target = "\\\\n";
-    private static final String end = "end";
+    private static final String end = "e";
 
     public static void checkValidCustomFormat(String inputData) {
         String replaceData = inputData.replaceAll(target, end);
-        if (!replaceData.contains(end)) {
-            throw new IllegalArgumentException();
-        }
-        String[] splitData = replaceData.split(end);
-        int count = splitData.length;
-        if (!(count == 1 || count == 2)) {
+        int count = getEndCount(replaceData);
+        if (count != 1) {
             throw new IllegalArgumentException();
         }
     }
@@ -42,5 +38,17 @@ public class Validator {
             return true;
         }
         return false;
+    }
+
+    private static int getEndCount(String replaceData) {
+        int count = 0;
+        char[] arr = replaceData.toCharArray();
+        char target = end.charAt(0);
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == target) {
+                count++;
+            }
+        }
+        return count;
     }
 }
