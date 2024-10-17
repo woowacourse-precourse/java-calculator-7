@@ -10,7 +10,6 @@ import java.util.*;
 // 커스텀 구분자만 있고 출력 없으면 0 출력?
 // 음수, 0 입력 시 예외처리 후 앱 종료
 
-
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
@@ -22,7 +21,8 @@ public class Application {
         String inputString = "";
         // - 커스텀 구분자
         String customDivider = "";
-
+        // - 정수의 합
+        int result = 0;
 
         // divier에 기본 구분자 추가
         divider.add(":"); divider.add(",");
@@ -48,13 +48,13 @@ public class Application {
             for (String number : numbers) {
                 numArrayList.add(Integer.parseInt(number.trim()));
             }
-
         }
 
         // - 출력
-        System.out.println("결과 : " + inputString);
-        System.out.println(divider);
-        System.out.println(numArrayList);
+        result = numArrayList.stream().mapToInt(Integer::intValue).sum();
+        System.out.println("결과 : " + result);
+//        System.out.println(divider);
+//        System.out.println(numArrayList);
 
         // Scanner 자원 해제
         Console.close();
@@ -64,10 +64,8 @@ public class Application {
     public static String findDivider(String input) {
         if (input.startsWith("//")) {
             int lastLineIndex = input.indexOf("\\n");
-            System.out.println("lastLineIndex>>" + lastLineIndex);
-            // 커스텀 구분자가 char가 아닐수 있음(2자 이상)
-            if (lastLineIndex != -1 && lastLineIndex > 2) {
 
+            if (lastLineIndex != -1 && lastLineIndex > 2) {
                 return input.substring(2, lastLineIndex);
             }
         }
