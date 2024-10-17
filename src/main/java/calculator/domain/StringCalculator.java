@@ -19,7 +19,7 @@ public class StringCalculator {
 
     public static int calculate(String input) {
         if (isEmpty(input)) {
-            return Constants.ZERO;
+            return 0;
         }
         if (containsCustom(input)) {
             return calculateSumByMatcher(input);
