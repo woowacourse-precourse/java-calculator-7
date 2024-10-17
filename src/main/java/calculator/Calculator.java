@@ -36,7 +36,7 @@ public class Calculator {
         }
 
         for(String str : splitStr){
-            if(!str.matches("[0-9]")){
+            if(!str.matches("^[0-9]*$")){
                 throw new IllegalArgumentException("Invalid number");
             }
         }
@@ -48,6 +48,13 @@ public class Calculator {
             result += Integer.parseInt(str);
         }
         return result;
+    }
+
+    public int initialize(){
+        readLine();
+        splitInput();
+        isValid();
+        return getResult();
     }
 
 }
