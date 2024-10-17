@@ -1,27 +1,29 @@
 package calculator.service;
 
 import calculator.view.InputView;
-
-import java.util.Arrays;
+import calculator.view.OutputView;
 
 public class CalculatorService {
 
-    static final String DESCRIPTION = "덧셈할 문자 열을 입력해 주세요.";
+    static final String INPUT_DESCRIPTION = "덧셈할 문자 열을 입력해 주세요.";
 
     private final InputView inputView;
+    private final OutputView outputView;
 
-    public CalculatorService(InputView inputView) {
+    public CalculatorService(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
+        this.outputView = outputView;
     }
 
     public void run()
     {
-        inputView.printMessage(DESCRIPTION);
+        inputView.printMessage(INPUT_DESCRIPTION);
         int[] validateIntArray = inputView.getUserInput();
 
         if (validateIntArray != null)
         {
-            System.out.println("null이 아닙니당");
+
+            System.out.println(outputView.sumElements(validateIntArray));
         }
         else
         {
