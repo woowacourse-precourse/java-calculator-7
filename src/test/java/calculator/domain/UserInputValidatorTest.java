@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import calculator.constants.Constants;
 import org.junit.jupiter.api.Test;
 
-public class StringValidatorTest {
+public class UserInputValidatorTest {
 
     @Test
     void 음수_포함() {
