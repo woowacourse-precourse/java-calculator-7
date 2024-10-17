@@ -122,4 +122,19 @@ public class InputValidator {
             }
         }
     }
+
+    /**
+     * 입력된 문자열에 숫자 0이 포함된 경우 예외 발생
+     */
+    public static void validateZero(String input) {
+        String[] numbers = splitCustomInput(input);
+
+        for (String number : numbers) {
+            number = number.trim();
+
+            if (number.matches("0+")) {
+                throw new IllegalArgumentException(ErrorMessage.NOT_ALLOW_ONLY_ZERO.getMessage());
+            }
+        }
+    }
 }

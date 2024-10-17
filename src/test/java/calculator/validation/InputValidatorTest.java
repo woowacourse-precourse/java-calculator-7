@@ -90,4 +90,18 @@ class InputValidatorTest {
         assertThatThrownBy(() -> InputValidator.validateInvalidDelimiter(input2)).isInstanceOf(
                 IllegalArgumentException.class).hasMessage(ErrorMessage.NOT_DEFINE_CUSTOM_SEPARATOR.getMessage());
     }
+
+    @DisplayName("입력된 문자열에 숫자 0이 포함된 경우")
+    @Test
+    public void splitCustomInput() {
+        //given
+        String input1 = "1,13,0:4";  // 0이 단독으로 입력된 경우
+        String input2 = "//%\n1%13%000%4";  // 000처럼 0이 연속으로 입력된 경우
+
+        //then
+        assertThatThrownBy(() -> InputValidator.validateZero(input1)).isInstanceOf(
+                IllegalArgumentException.class).hasMessage(ErrorMessage.NOT_ALLOW_ONLY_ZERO.getMessage());
+        assertThatThrownBy(() -> InputValidator.validateZero(input2)).isInstanceOf(
+                IllegalArgumentException.class).hasMessage(ErrorMessage.NOT_ALLOW_ONLY_ZERO.getMessage());
+    }
 }
