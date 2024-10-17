@@ -3,9 +3,15 @@ package calculator.model;
 import java.util.List;
 
 public class CalculatorService {
-    private InputParser inputParser = new InputParser();
-    private SumCalculator sumCalculator = new SumCalculator();
+    private InputParser inputParser;
+    private Calculator calculator;
+
     public static final int ZERO = 0;
+
+    public CalculatorService(InputParser inputParser, Calculator calculator) {
+        this.inputParser = inputParser;
+        this.calculator = calculator;
+    }
 
     public List<Integer> checkAndParseInput(String input) throws IllegalArgumentException {
         if (input.isEmpty()) {
@@ -20,6 +26,6 @@ public class CalculatorService {
     }
 
     public int calculate(List<Integer> numList) {
-        return sumCalculator.calculate(numList);
+        return calculator.calculate(numList);
     }
 }
