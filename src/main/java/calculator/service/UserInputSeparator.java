@@ -14,7 +14,10 @@ public class UserInputSeparator {
 
     public static UserInputSeparator of(final String message) {
         if (message.startsWith("//")) {
-            final int idx = message.indexOf("\\n");
+            final int idx = message.lastIndexOf("\\n");
+            if (idx == -1) {
+                throw new IllegalArgumentException("커스텀 구분자 종료되지 않음");
+            }
             return new UserInputSeparator(message.substring(2, idx));
         }
         return null;
