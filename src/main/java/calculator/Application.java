@@ -34,7 +34,7 @@ public class Application {
     public static List<Long> extractNumber(String calcFormula, String customSeparator) {
         String substring = calcFormula.substring(customSeparator.length() * 5);
 
-        return Arrays.stream(substring.split(customSeparator + "|:" + "|,"))
+        return Arrays.stream(substring.split("[" + customSeparator + ":,]"))
                 .map(Long::parseLong)
                 .toList();
     }
