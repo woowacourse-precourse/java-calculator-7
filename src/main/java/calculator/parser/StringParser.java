@@ -1,15 +1,15 @@
 package calculator.parser;
 
 
+import calculator.validator.InputValidator;
+
 public class StringParser {
     private static final String DEFAULT_DELIMITERS = ",|:";
     private static final String CUSTOM_DELEMITER_PREFIX = "//";
     private static final String CUSTOM_DELEMITER_SUFFIX = "\n";
 
     public static ParseResult parse(String input) {
-        if (input == null || input.isEmpty()) {
-            return new ParseResult(null, null);
-        }
+        InputValidator.validateInput(input);
 
         if (input.startsWith(CUSTOM_DELEMITER_PREFIX)) {
             return parseWithCustomDelimiter(input);
