@@ -8,6 +8,7 @@ public class Application {
         InputHandler inputHandler = new InputHandler();
         inputHandler.setInputString(); // 문자열 받는 메서드
 
-        
+        inputHandler.ensureCustomSeparator();// 커스텀 구분자가 있는 지 확인
+
     }
 }
