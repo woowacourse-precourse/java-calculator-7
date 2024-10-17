@@ -46,22 +46,33 @@ public class User {
         if (delimiters.isEmpty()) {
             throw new IllegalArgumentException();
         } else if (delimiters.contains("/")) {
-            validateNewDelimiters(delimiters);
+            String newDelimiter = validateNewDelimiters(delimiters);
+            validateDelimiters(delimiters, newDelimiter);
         } else {
             validateDelimiters(delimiters);
         }
     }
 
-    private void validateNewDelimiters(List<String> delimiters) {
+    private String validateNewDelimiters(List<String> delimiters) {
         String str = delimiters.get(0) + delimiters.get(1) + delimiters.get(3) + delimiters.get(4);
         if (str.equals(NEW_DELIMITER_PATTERN)) {
+            String newDelimiter = delimiters.get(2);
             delimiters.removeFirst();
             delimiters.removeFirst();
             delimiters.removeFirst();
             delimiters.removeFirst();
             delimiters.removeFirst();
+            return newDelimiter;
         } else {
             throw new IllegalArgumentException();
+        }
+    }
+
+    private void validateDelimiters(List<String> delimiters, String newDelimiter) {
+        for (String delimiter : delimiters) {
+            if (!delimiter.equals(",") && !delimiter.equals(":") && !delimiter.equals(newDelimiter)) {
+                throw new IllegalArgumentException();
+            }
         }
     }
 
