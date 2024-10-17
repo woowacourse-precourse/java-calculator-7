@@ -45,7 +45,7 @@ public class Application {
         return str.replaceAll(formatSeparator(separator), "");
     }
 
-    public Boolean isStringWithDefaultSeparator(String input) {
+    public boolean isStringWithDefaultSeparator(String input) {
         String str = removeNumber(input);
         str = removeSeparator(str, defaultSeparator);
         return str.isEmpty();
@@ -60,7 +60,7 @@ public class Application {
         return input.substring(3 + getCustomSeparator(input).length());
     }
 
-    public Boolean isStringWithCustomSeparator(String input) {
+    public boolean isStringWithCustomSeparator(String input) {
         String str = removeSeparatorInitializer(input);
         str = removeNumber(str);
         str = removeSeparator(str, getCustomSeparator(input));
