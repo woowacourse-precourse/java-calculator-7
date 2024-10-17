@@ -1,4 +1,4 @@
-package calculator;
+package calculator.core;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -41,9 +41,6 @@ public class LongCalculator implements Calculator {
 	private long calculate(String expression, Set<Character> separators) {
 		String[] expressions = splitBySeparatorExpressionAndMathematicalExpression(expression);
 
-		System.out.println(expressions[0]);
-		System.out.println(expressions[1]);
-
 		separatorParser.parse(expressions[0], separators);
 		String separatorPattern = separatorParser.generateRegex(separators);
 
@@ -53,20 +50,19 @@ public class LongCalculator implements Calculator {
 		return result;
 	}
 
-	private String[] splitBySeparatorExpressionAndMathematicalExpression(String expression){
+	private String[] splitBySeparatorExpressionAndMathematicalExpression(String expression) {
 		Matcher matcher = VALID_PATTERN.matcher(expression);
-		if(matcher.find()){
+		if (matcher.find()) {
 			String separatorExpression = matcher.group(1);
 			String mathematicalExpression = matcher.group(3);
-			return new String[]{separatorExpression, mathematicalExpression};
-		}
-		else{
+			return new String[] {separatorExpression, mathematicalExpression};
+		} else {
 			throw new IllegalArgumentException("유효하지 않은 입력값입니다.");
 		}
 	}
 
-	private void isValid(String expression){
-		if(!VALID_PATTERN.matcher(expression).matches()){
+	private void isValid(String expression) {
+		if (!VALID_PATTERN.matcher(expression).matches()) {
 			throw new IllegalArgumentException("유효하지 않은 입력값입니다.");
 		}
 	}
