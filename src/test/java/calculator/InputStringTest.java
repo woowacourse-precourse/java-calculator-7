@@ -30,4 +30,52 @@ public class InputStringTest {
         assertThat(result).isEqualTo(0);
     }
 
+    @Test
+    void 숫자_하나() {
+        // given
+        var inputString = new InputString("1");
+
+        // when
+        var result = inputString.getSum();
+
+        // then
+        assertThat(result).isEqualTo(1);
+    }
+
+    @Test
+    void 쉼표_구분자() {
+        // given
+        var inputString = new InputString("1,2,3");
+
+        // when
+        var result = inputString.getSum();
+
+        // then
+        assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    void 콜론_구분자() {
+        // given
+        var inputString = new InputString("1:2:3");
+
+        // when
+        var result = inputString.getSum();
+
+        // then
+        assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    void 쉼표_콜론_구분자() {
+        // given
+        var inputString = new InputString("1,2:3");
+
+        // when
+        var result = inputString.getSum();
+
+        // then
+        assertThat(result).isEqualTo(6);
+    }
+
 }
