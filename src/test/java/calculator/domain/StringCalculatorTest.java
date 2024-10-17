@@ -9,20 +9,26 @@ import java.util.List;
 public class StringCalculatorTest {
 
     @Test
-    void 커스텀_구분자_추출_테스트() {
+    void 구분자_추출_테스트() {
 
         // given
         StringCalculator stringCalculator = new StringCalculator();
         String value = "//;\\n1;2;3";
+        String basicValue = "1,2;3";
+        String basicExpectValue= "[,;]";
+
 
         // when
         String result = stringCalculator.extractCustomValue(value);
+        String basicResult = stringCalculator.extractCustomValue(basicValue);
+
         String expect = ";";
         String incorrectExpect = ",";
 
         // then
         Assertions.assertAll(
                 () -> Assertions.assertEquals(result, expect),
+                () -> Assertions.assertEquals(basicResult,basicExpectValue),
                 () -> Assertions.assertNotEquals(incorrectExpect, result)
         );
 
@@ -95,6 +101,5 @@ public class StringCalculatorTest {
                 () -> Assertions.assertEquals(result, expect),
                 () -> Assertions.assertNotEquals(incorrectExpect, result)
         );
-
     }
 }
