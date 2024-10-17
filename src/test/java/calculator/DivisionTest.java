@@ -8,7 +8,6 @@ import calculator.util.ErrorMessage;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -60,32 +59,40 @@ class DivisionTest {
     private static Stream<Arguments> providedWrongFormat() {
         return Stream.of(
                 Arguments.arguments(",1,2:3"),
-                Arguments.arguments("z//\\n1q2:3")
+                Arguments.arguments("z//\\n1q2:3"),
+                Arguments.arguments("/\\n1q2:3"),
+                Arguments.arguments("//\\1q2:3"),
+                Arguments.arguments("//\\a1q2:3")
         );
     }
 
     @ParameterizedTest
-    @DisplayName("커스텀 구분자가 올바르지 않으면 에러가 난다 ")
-    @MethodSource("providedWrongCustomDelimiter")
-    void invalidCustomDelimiter(String input) throws Exception {
+    @DisplayName("커스텀 구분 포맷에 맞지 않으면 에러를 반환한다")
+    @MethodSource("providedWrongCustomDelimiterFormat")
+    void invalidCustomDelimiterFormat(String input) throws Exception {
         // given
         Division division = new Division();
+
+        // when
 
         // then
         assertThatThrownBy(() -> division.split(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.INVALID_CUSTOM_DELIMITER);
+                .hasMessage(ErrorMessage.INVALID_CUSTOM_DELIMITER_FORMAT);
     }
 
-    private static Stream<Arguments> providedWrongCustomDelimiter() {
+    private static Stream<Arguments> providedWrongCustomDelimiterFormat() {
         return Stream.of(
+                Arguments.arguments("//\\n1q2:3"),
+                Arguments.arguments("//c\\nn1q2:3"),
+                Arguments.arguments("//n\\n-a1q2:3"),
                 Arguments.arguments("//\\n1,2 3"),
                 Arguments.arguments("//\\n1q2:3")
         );
     }
 
     @ParameterizedTest
-    @DisplayName("구분자를 또 입력하면 에러를 반환한다 ")
+    @DisplayName("기본 구분자를 또 입력하면 에러를 반환한다 ")
     @MethodSource("providedDuplicateDelimiter")
     void DuplicateCustomDelimiter(String input) throws Exception {
         // given
