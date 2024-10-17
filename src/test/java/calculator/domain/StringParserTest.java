@@ -32,10 +32,11 @@ class StringParserTest {
             //given
             String input = "//;1;2;3";
             String expected = "올바른 형식으로 입력하세요.";
+            StringParser parser = new StringParser(input);
 
             //when
             IllegalArgumentException actual = assertThrows(IllegalArgumentException.class,
-                    () -> new StringParser(input));
+                    parser::extractDelimiter);
 
             //then
             assertEquals(expected, actual.getMessage());
@@ -51,9 +52,10 @@ class StringParserTest {
             String input = "1,2:3";
             List<String> expected = List.of("1", "2", "3");
             StringParser parser = new StringParser(input);
+            String delimiter = parser.extractDelimiter();
 
             //when
-            List<String> actual = parser.getNumbers();
+            List<String> actual = parser.parseStrings(delimiter);
 
             //then
             assertEquals(expected, actual);
@@ -65,9 +67,10 @@ class StringParserTest {
             String input = "//;;;\\n1;;;2;;;3";
             List<String> expected = List.of("1", "2", "3");
             StringParser parser = new StringParser(input);
+            String delimiter = parser.extractDelimiter();
 
             //when
-            List<String> actual = parser.getNumbers();
+            List<String> actual = parser.parseStrings(delimiter);
 
             //then
             assertEquals(expected, actual);
