@@ -28,16 +28,8 @@ public class CalculateService {
                 delimeter += "|" + del;
 
                 String cutFormula = str.substring(5);
-                String[] number = cutFormula.split(delimeter);
 
-                int sum = 0;
-                for(String num : number) {
-                    int part = Integer.parseInt(num);
-                    if (part < 0) {
-                        throw new IllegalArgumentException();
-                    }
-                    sum += part;
-                }
+                int sum = sumAll(cutFormula, delimeter);
 
                 return sum;
             }
@@ -47,18 +39,23 @@ public class CalculateService {
             }
         }
         else {
-            String[] number = str.split(delimeter);
-
-            int sum = 0;
-            for(String num : number) {
-                int part = Integer.parseInt(num);
-                if (part < 0) {
-                    throw new IllegalArgumentException();
-                }
-                sum += part;
-            }
+            int sum = sumAll(str, delimeter);
 
             return sum;
         }
+    }
+
+    private int sumAll(String str, String delimeter) {
+        String[] number = str.split(delimeter);
+
+        int sum = 0;
+        for(String num : number) {
+            int part = Integer.parseInt(num);
+            if (part < 0) {
+                throw new IllegalArgumentException();
+            }
+            sum += part;
+        }
+        return sum;
     }
 }
