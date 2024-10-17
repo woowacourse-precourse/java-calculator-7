@@ -12,6 +12,10 @@ public class Controller {
     private final NumberService numberService;
     private final CalculatorService calculatorService;
 
+    private String inputString;
+    private String processedString;
+    private int result;
+
     public Controller(DelimiterService delimiterService, NumberService numberService,
                       CalculatorService calculatorService) {
         this.delimiterService = delimiterService;
@@ -19,12 +23,38 @@ public class Controller {
         this.calculatorService = calculatorService;
     }
 
-    public void start() {
+    public void run() {
+        start();
+        progress();
+        finish();
+    }
+
+    private void start() {
         InputView.printStartMessage();
-        String inputString = InputView.getInput();
-        inputString = delimiterService.addCustomDelimiters(inputString);
-        numberService.extractNumber(inputString);
-        int result = calculatorService.calculate();
+        inputString = InputView.getInput();
+    }
+
+    private void progress() {
+        customDelimiterProgress();
+        numberExtractProgress();
+        calculateProgress();
+    }
+
+    private void customDelimiterProgress() {
+        processedString = delimiterService.addCustomDelimiters(inputString);
+    }
+
+    private void numberExtractProgress() {
+        numberService.extractNumber(processedString);
+    }
+
+    private void calculateProgress() {
+        result = calculatorService.calculate();
+    }
+
+
+    private void finish() {
         OutputView.printResultMessage(result);
     }
+
 }

@@ -10,7 +10,7 @@ import calculator.service.NumberService;
 
 public class CalculatorApplication {
     public static void run() {
-        initializeDependencies().start();
+        initializeDependencies().run();
     }
 
     private static Controller initializeDependencies() {
