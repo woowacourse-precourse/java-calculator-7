@@ -148,6 +148,9 @@
   },
   "active": "9ab754e65b8b2b70",
   "lastOpenFiles": [
+    "src/main/java/calculator/Application.java~",
+    "out/production/classes/calculator/Application.class",
+    "out/production/classes/calculator",
     "gitmessage.txt",
     "새 텍스트 문서.txt",
     "build/reports/tests/test/js/report.js",
@@ -155,9 +158,6 @@
     "build/reports/tests/test/css/base-style.css",
     "build/reports/tests/test/css/style.css",
     "build/reports/tests/test/css",
-    "build/reports/tests/test/index.html",
-    "build/test-results/test/binary/results.bin",
-    "build/test-results/test/binary/output.bin.idx",
-    "build/reports/tests/test/packages/calculator.html"
+    "build/reports/tests/test/index.html"
   ]
 }
