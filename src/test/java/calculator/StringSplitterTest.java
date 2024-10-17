@@ -55,4 +55,21 @@ class StringSplitterTest {
         assert list.get(0).equals("1");
     }
 
+    @DisplayName("커스텀 구분자 포함 문자열(//[\\n1) 분리")
+    @Test
+    void splitTest_CustomDelimiters3() {
+        // given
+        StringSplitter splitter = new StringSplitter();
+        String str = "//[\\n1[2,3";
+
+        // when
+        List<String> list = splitter.split(str);
+
+        // then
+        assert list.size() == 3;
+        assert list.get(0).equals("1");
+        assert list.get(1).equals("2");
+        assert list.get(2).equals("3");
+    }
+
 }
