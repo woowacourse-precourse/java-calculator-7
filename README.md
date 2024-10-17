@@ -20,6 +20,8 @@
     - ex ) "// \n 3 2" ⇒ 5
   - 🔺기본 구분자 사용 시, 공백 문자가 포함된 input은 공백을 제거하고 계산한다.
       - ex) "3  ,2:1" ⇒ ("3,2:1") ⇒ 6
+  - 🔺커스텀 구분자로 숫자는 불가능하다.
+    - ex ) "//1\n112131" ⇒ exception
 
 ### [ Input ErrorException ]
 ✅ `validateInput()` : input이 유효한지 확인하는 메서드
