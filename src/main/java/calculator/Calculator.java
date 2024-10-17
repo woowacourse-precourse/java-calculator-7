@@ -20,10 +20,23 @@ public class Calculator {
     private int calculateSum(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
-            int num = Integer.parseInt(number);
+            int num = validateAndParse(number);
             sum += num;
         }
         return sum;
+    }
+
+    // 유효성 검사 및 숫자 변환
+    private int validateAndParse(String number) {
+        try {
+            int num = Integer.parseInt(number);
+            if (num < 0) {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + num);
+            }
+            return num;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("잘못된 입력 값입니다: " + number);
+        }
     }
 
 }

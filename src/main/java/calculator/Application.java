@@ -5,6 +5,10 @@ public class Application {
         // TODO: 프로그램 구현
         Calculator calculator = new Calculator();
 
-        System.out.println("결과 : " + calculator.add("//;\\n1"));
+        try {
+            System.out.println("결과 : " + calculator.add("-1,2,3"));
+        } catch (IllegalArgumentException e) {
+            System.out.println("예외 발생: " + e.getMessage());
+        }
     }
 }
