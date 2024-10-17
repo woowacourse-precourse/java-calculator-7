@@ -12,9 +12,10 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         StringCalculatorController stringCalculatorController = new StringCalculatorController(
-                new InputService(new InputView()),
+                new InputService(),
                 new CalculationService(),
                 new ParsingService(),
+                new InputView(),
                 new OutputView()
         );
 

@@ -1,6 +1,5 @@
 package calculator.service;
 
-import calculator.view.InputView;
 import camp.nextstep.edu.missionutils.Console;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +16,7 @@ class InputServiceTest {
 
     @BeforeEach
     void setUp() {
-        inputService = new InputService(new InputView());
+        inputService = new InputService();
     }
 
     @AfterEach
@@ -35,7 +34,7 @@ class InputServiceTest {
         String input = "1,2:3";
         provideInput(input);
 
-        String result = inputService.getValidInput();
+        String result = inputService.readInput();
 
         assertEquals(input, result);
     }
@@ -44,7 +43,7 @@ class InputServiceTest {
     void 빈_문자열_입력시_예외_발생() {
         provideInput("");
 
-        assertThrows(IllegalArgumentException.class, () -> inputService.getValidInput());
+        assertThrows(IllegalArgumentException.class, () -> inputService.readInput());
     }
 
     @Test
@@ -52,7 +51,7 @@ class InputServiceTest {
         String input = "//;\\n1;2;3";
         provideInput(input);
 
-        String result = inputService.getValidInput();
+        String result = inputService.readInput();
 
         assertEquals(input, result);
     }
@@ -62,7 +61,7 @@ class InputServiceTest {
         String input = "//\\n1,2,3";
         provideInput(input);
 
-        assertThrows(IllegalArgumentException.class, () -> inputService.getValidInput());
+        assertThrows(IllegalArgumentException.class, () -> inputService.readInput());
     }
 
     @Test
@@ -70,6 +69,6 @@ class InputServiceTest {
         String input = "//;1;2;3";
         provideInput(input);
 
-        assertThrows(IllegalArgumentException.class, () -> inputService.getValidInput());
+        assertThrows(IllegalArgumentException.class, () -> inputService.readInput());
     }
 }
