@@ -3,12 +3,9 @@ package calculator.service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 public class CalculatorService {
 
-    private static final String CUSTOM_SEPARATOR_REGEX = "//(.*?)\\\\n";
-    private static final String EMPTY = "";
     private static final String POSITIVE_NUMBER_REGEX = "\\d+([.]\\d+)?";
 
     private final List<String> separators;
@@ -18,23 +15,18 @@ public class CalculatorService {
     }
 
     public double calculate(String input) {
-        if (input.isEmpty()) {
-            throw new IllegalArgumentException("입력값이 존재하지 않습니다.");
+        Command command = new Command(input);
+        if (command.hasCustomSeparator()) {
+            separators.add(command.getCustomSeparator());
         }
-        addCustomSeparatorIfPresent(input);
-        String formula = input.replaceAll(CUSTOM_SEPARATOR_REGEX, EMPTY);
-        String[] separatedValues = split(formula);
+        String expression = command.getExpression();
+        String[] separatedValues = split(expression);
         Double[] values = convertToNumbers(separatedValues);
         return sum(values);
     }
 
-    private void addCustomSeparatorIfPresent(String input) {
-        Optional<String> customSeparator = new CustomSeparatorManager(input).extract();
-        customSeparator.ifPresent(separators::add);
-    }
-
-    private String[] split(String formula) {
-        return new SeparatorSplitter(separators, formula).split();
+    private String[] split(String expression) {
+        return new SeparatorSplitter(separators, expression).split();
     }
 
     private Double[] convertToNumbers(String[] separatedValues) {
