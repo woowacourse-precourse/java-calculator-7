@@ -52,8 +52,8 @@ public class Parser {
     private String[] splitInput(String input, String delimiter) {
         String[] tokens = input.split(delimiter);
 
-        if (tokens.length == 1 && tokens[0].equals(input)) {
-            parseNumber(tokens[0]);
+        if (tokens.length == 0) {
+            throw new IllegalArgumentException("구분자로만 이루어진 입력값은 허용되지 않습니다. 프로그램을 종료합니다.");
         }
 
         return tokens;
