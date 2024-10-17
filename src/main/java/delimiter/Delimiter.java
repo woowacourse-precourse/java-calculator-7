@@ -3,7 +3,7 @@ package delimiter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class Delimiter {
+public class Delimiter {
     private static final String DEFAULT_DELIMITERS = "[,:]";
     private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\\\\n(.*)";
 
