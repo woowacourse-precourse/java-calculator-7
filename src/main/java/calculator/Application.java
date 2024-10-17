@@ -23,5 +23,7 @@ public class Application {
             sum += Integer.parseInt(st.nextToken());
         }
 
+        System.out.println("결과 : "+sum);
+        
     }
 }
