@@ -17,10 +17,15 @@
   - [X] 기본 구분자를 사용해서 숫자를 분리한다. - InputValidator#separate
 
 ### 숫자 유효성 검사
-- [ ] 분리된 숫자가 모두 양수인지 검사한다.
+- [X] 분리된 숫자가 모두 양수인지 검사한다. - NumberValidator#isPositiveNumber
 
 ### 계산기
-- [ ] 분리된 숫자를 모두 더한다.
+- [X] 분리된 숫자를 모두 더한다. - Calculator#add
 
 ### 출력
 - [X] "결과 : result" 형식으로 계산된 덧셈 결과를 출력한다. - OutputView#printResult
+
+### 컨트롤러
+- [X] 기본 구분자(쉼표, 콜론)를 설정한다. - CalculatorController#initBasicSeparators
+- [X] 기본 구분자와 커스텀 구분자를 하나로 합친다. - CalculatorController#getTotalSeparator
+- [X] 덧셈 계산기를 실행한다. - CalculatorController#start
