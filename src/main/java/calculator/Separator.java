@@ -6,11 +6,13 @@ import java.util.List;
 public class Separator {
     private static final String COMMA = ",";
     private static final String COLON = ":";
-    private static final String CUSTOM_SEPARATOR_START= "//";
-    private static final String CUSTOM_SEPARATOR_END= "\\n";
+    private static final String CUSTOM_SEPARATOR_START = "//";
+    private static final String CUSTOM_SEPARATOR_CENTER = "|";
+    private static final String CUSTOM_SEPARATOR_CENTER_REGEX = "\\|";
+    private static final String CUSTOM_SEPARATOR_END = "\\n";
     private String symbols;
     public Separator() {
-        symbols = COMMA +"|"+ COLON;
+        symbols = COMMA + CUSTOM_SEPARATOR_CENTER + COLON;
     }
 
     public Numbers getNumbers(String readString) {
@@ -25,7 +27,7 @@ public class Separator {
 
     private List<Integer> split(String numberString) {
         List<Integer> numberList = new ArrayList<>();
-        String[] symbolArray = symbols.split("\\|");
+        String[] symbolArray = symbols.split(CUSTOM_SEPARATOR_CENTER_REGEX);
         String replaceString = numberString;
         for (String symbol : symbolArray) {
             replaceString = replaceString.replace(symbol, COMMA);
@@ -58,7 +60,7 @@ public class Separator {
         String substring = readString.substring(0, readString.indexOf(CUSTOM_SEPARATOR_END));
         substring = substring.replace(CUSTOM_SEPARATOR_START,"");
         if (!substring.isEmpty()) {
-            symbols = symbols +"|"+substring;
+            symbols = symbols + CUSTOM_SEPARATOR_CENTER +substring;
         }
     }
 
