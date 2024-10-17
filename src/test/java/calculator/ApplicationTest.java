@@ -3,6 +3,7 @@ package calculator;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -20,7 +21,7 @@ class ApplicationTest extends NsTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"\\n1", "\\n//1", "//"})
+    @CsvFileSource(resources = "/customDelimiterExceptionTestFile.csv")
     void 커스텀_구분자_예외_테스트(String inputValue) {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException(inputValue))
