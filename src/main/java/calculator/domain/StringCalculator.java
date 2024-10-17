@@ -26,7 +26,7 @@ public class StringCalculator {
             return calculateSum(splitInput(input));
         }
 
-        UserInputValidator.wrongDelimiter(input);
+        UserInputValidator.validateDelimiter(input);
 
         return stringToInteger(input);
     }
@@ -46,7 +46,7 @@ public class StringCalculator {
     private static int calculateSumByMatcher(String input) {
         Matcher matcher = getMatcher(input);
 
-        UserInputValidator.checkNotExistCustom(matcher);
+        UserInputValidator.validateCustomPresence(matcher);
 
         return calculateSum(splitInputByCustom(matcher));
     }
@@ -55,7 +55,7 @@ public class StringCalculator {
         int sum = 0;
         for (String str : strArr) {
             int number = stringToInteger(str);
-            UserInputValidator.checkNumberNegative(number);
+            UserInputValidator.validatePositive(number);
             sum += number;
         }
         return sum;
@@ -91,12 +91,12 @@ public class StringCalculator {
 
         for (int i = 0; i < string.length(); i++) {
             letter = string.charAt(i);
-            UserInputValidator.checkNotDefinedCustom(letter, asciiOfDelimiter);
+            UserInputValidator.validateDefinedCustom(letter, asciiOfDelimiter);
         }
     }
 
     private static int stringToInteger(String string) {
-        UserInputValidator.checkNotContainsNumber(string);
+        UserInputValidator.validateHasNumber(string);
         return Integer.parseInt(string);
     }
 }
