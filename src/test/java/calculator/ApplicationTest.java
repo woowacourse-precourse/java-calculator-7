@@ -102,6 +102,14 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 분리된_문자가_숫자면서_양수가_아닌_경우() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("0,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
