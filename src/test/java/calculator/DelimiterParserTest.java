@@ -10,10 +10,9 @@ class DelimiterParserTest {
     @Test
     void parsingDelimiterResultTrue() {
         //given
-        DelimiterParser delimiterParser = new DelimiterParser();
         String input = "1,2:3";
         //when
-        boolean result = delimiterParser.isDefaultDelimiter(input);
+        boolean result = DelimiterParser.isDefaultDelimiter(input);
         //then
         Assertions.assertTrue(result);
     }
@@ -21,10 +20,9 @@ class DelimiterParserTest {
     @Test
     void parsingDelimiterResultFalse() {
         //given
-        DelimiterParser delimiterParser = new DelimiterParser();
         String input = "//;\n1;2;3";
         //when
-        boolean result = delimiterParser.isDefaultDelimiter(input);
+        boolean result = DelimiterParser.isDefaultDelimiter(input);
         //then
         Assertions.assertFalse(result);
     }
@@ -35,7 +33,7 @@ class DelimiterParserTest {
         DelimiterParser delimiterParser = new DelimiterParser(delimiter);
         String input = "1,2:3";
         //when
-        String result = delimiterParser.splitByDelimiter(input);
+        String result = delimiterParser.replace(input);
         //then
         Assertions.assertEquals("1,2,3", result);
     }
@@ -47,14 +45,12 @@ class DelimiterParserTest {
         DelimiterParser delimiterParser = new DelimiterParser(delimiter1,delimiter2);
         String input = "//;\\n10;20;30";
 
-        String result = delimiterParser.splitByDelimiter(input);
+        String result = delimiterParser.replace(input);
         String numberPart = result.substring(1);
         String customDelimiter = result.substring(0, 1);
         String[] split = numberPart.split(customDelimiter);
         String splitString = String.join(",", split);
-        //when
-
-        //then
+        //when //then
         Assertions.assertEquals("10,20,30", splitString);
     }
     @Test
@@ -64,7 +60,7 @@ class DelimiterParserTest {
         DelimiterParser delimiterParser = new DelimiterParser(delimiter);
         String input = "1,2:3";
         //when
-        String result = delimiterParser.splitByDelimiter(input);
+        String result = delimiterParser.replace(input);
         List<Integer> list = delimiterParser.parseToIntList(result);
         //then
         Assertions.assertEquals(3, list.size());
