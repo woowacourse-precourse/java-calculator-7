@@ -20,6 +20,9 @@ public class Application {
         String extraction = customInput.substring(customInput.indexOf("//") + 2, customInput.indexOf("\\n"));
         if (extraction.length() > 1 || extraction.matches("\\d+"))
             throw new IllegalArgumentException();
+        else if (extraction.isEmpty()) {
+            return null;
+        }
         return extraction;
     }
 
