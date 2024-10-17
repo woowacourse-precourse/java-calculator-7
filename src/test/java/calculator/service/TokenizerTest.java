@@ -44,6 +44,33 @@ class TokenizerTest {
                                         new Number("511")
                                 )
                         )
+                ),
+                Arguments.of(
+                        "",
+                        new Numbers(
+                                List.of(
+                                        new Number("0")
+                                )
+                        )
+                ),
+                Arguments.of(
+                        ",",
+                        new Numbers(
+                                List.of(
+                                        new Number("0"),
+                                        new Number("0")
+                                )
+                        )
+                ),
+                Arguments.of(
+                        ",:",
+                        new Numbers(
+                                List.of(
+                                        new Number("0"),
+                                        new Number("0"),
+                                        new Number("0")
+                                )
+                        )
                 )
         );
     }

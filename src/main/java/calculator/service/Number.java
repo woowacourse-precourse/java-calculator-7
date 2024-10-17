@@ -11,6 +11,9 @@ class Number {
     }
 
     private static String parse(final String number) {
+        if (number.isBlank()) {
+            return "0";
+        }
         for (int i = 0; i < number.length(); i++) {
             if (!Character.isDigit(number.charAt(i))) {
                 throw new IllegalArgumentException("등록되지 않은 구분자 존재" + number);
