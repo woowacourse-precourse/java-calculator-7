@@ -4,7 +4,18 @@ import calculator.dto.Data;
 
 public class Calculator {
 
-    public static int sum(Data data) {
+    public static void run() {
+        try {
+            String inputData = InputDataReader.getInputData();
+            Data data = DataParser.parseData(inputData);
+            int result = sum(data);
+            Logger.printResult(result);
+        } finally {
+            InputDataReader.close();
+        }
+    }
+
+    private static int sum(Data data) {
         int sum = 0;
         String contents = data.getContents();
         String separators = data.getSeparators();
