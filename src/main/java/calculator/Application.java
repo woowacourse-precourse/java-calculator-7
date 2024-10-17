@@ -5,6 +5,6 @@ public class Application {
         // TODO: 프로그램 구현
         Calculator calculator = new Calculator();
 
-        System.out.println("결과 : " + calculator.add("1,2:3"));
+        System.out.println("결과 : " + calculator.add("//;\\n1"));
     }
 }
