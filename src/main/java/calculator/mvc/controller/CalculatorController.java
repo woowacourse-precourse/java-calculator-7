@@ -28,7 +28,7 @@ public class CalculatorController {
             model.parseNumbersFromString(userInput);
 
             long result = model.addNumbers();
-            
+
             view.showResultMsg(result);
         } catch (IllegalArgumentException e) {
             view.showResultMsg(e);
