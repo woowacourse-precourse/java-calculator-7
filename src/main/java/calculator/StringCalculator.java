@@ -27,11 +27,15 @@ public class StringCalculator {
     private int sumTokens(String[] tokens) {
         int sum = 0;
         for (String token : tokens) {
-            int number = Integer.parseInt(token);
-            if (number < 0) {
-                throw new IllegalArgumentException("음수는 허용되지 않는 값입니다:" + number);
+            try {
+                int number = Integer.parseInt(token);
+                if (number < 0) {
+                    throw new IllegalArgumentException("음수는 허용되지 않는 값입니다:" + number);
+                }
+                sum += number;
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("유효하지 않은 값입니다:" + token);
             }
-            sum += number;
         }
         return sum;
     }
