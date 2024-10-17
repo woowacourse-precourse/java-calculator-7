@@ -10,9 +10,9 @@ public class Calculator {
         }
         if (DelimiterParser.isDefaultDelimiter(input)) {
             DelimiterParser delimiterParser = new DelimiterParser(":");
-            String replace = delimiterParser.replace(input);
+            String result = delimiterParser.splitByDelimiter(input);
 
-            List<Integer> inputNums = DelimiterParser.parseToIntList(replace);
+            List<Integer> inputNums = DelimiterParser.parseToIntList(result);
             Validator.validateIfInputNegative(inputNums);
 
             return inputNums.stream()
@@ -24,7 +24,7 @@ public class Calculator {
             String delimiter1 = input.substring(0, 2);
             String delimiter2 = input.substring(3, 5);
             DelimiterParser delimiterParser = new DelimiterParser(delimiter1, delimiter2);
-            String replaceInput = delimiterParser.replace(input);
+            String replaceInput = delimiterParser.splitByDelimiter(input);
             String customDelimiter = replaceInput.substring(0, 1);
             String numberPart = replaceInput.substring(1);
             String[] split = numberPart.split(customDelimiter);

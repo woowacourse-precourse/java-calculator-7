@@ -15,7 +15,7 @@ public class DelimiterParser {
     public DelimiterParser(String... delimiterList) {
         this.delimiterList.addAll(Arrays.asList(delimiterList));
     }
-    public String replace(String input) {
+    public String splitByDelimiter(String input) {
         String result = input;
         for (String delimiter : delimiterList) {
             if (delimiter.equals(input.substring(0,2))) {
