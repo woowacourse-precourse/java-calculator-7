@@ -23,6 +23,25 @@ public class User {
         checkDelimiters(delimiters);
     }
 
+    private void charAtUserStrings(String userString) {
+        for (int i = START_INDEX; i < userString.length(); i++) {
+            char charAt = userString.charAt(i);
+            if (Character.isDigit(charAt)) {
+                numbers.add(String.valueOf(charAt));
+            } else {
+                delimiters.add(String.valueOf(charAt));
+            }
+        }
+    }
+
+    private void validateNumbers(List<String> numbers) {
+        for (String number : numbers) {
+            if (Integer.parseInt(number) <= MIN_NUMBER_SIZE) {
+                throw new IllegalArgumentException();
+            }
+        }
+    }
+
     private void checkDelimiters(List<String> delimiters) {
         if (delimiters.isEmpty()) {
             throw new IllegalArgumentException();
@@ -30,14 +49,6 @@ public class User {
             validateNewDelimiters(delimiters);
         } else {
             validateDelimiters(delimiters);
-        }
-    }
-
-    private void validateDelimiters(List<String> delimiters) {
-        for (String delimiter : delimiters) {
-            if (!delimiter.equals(",") && !delimiter.equals(":")) {
-                throw new IllegalArgumentException();
-            }
         }
     }
 
@@ -54,20 +65,9 @@ public class User {
         }
     }
 
-    private void charAtUserStrings(String userString) {
-        for (int i = START_INDEX; i < userString.length(); i++) {
-            char charAt = userString.charAt(i);
-            if (Character.isDigit(charAt)) {
-                numbers.add(String.valueOf(charAt));
-            } else {
-                delimiters.add(String.valueOf(charAt));
-            }
-        }
-    }
-
-    private void validateNumbers(List<String> numbers) {
-        for (String number : numbers) {
-            if (Integer.parseInt(number) <= MIN_NUMBER_SIZE) {
+    private void validateDelimiters(List<String> delimiters) {
+        for (String delimiter : delimiters) {
+            if (!delimiter.equals(",") && !delimiter.equals(":")) {
                 throw new IllegalArgumentException();
             }
         }
