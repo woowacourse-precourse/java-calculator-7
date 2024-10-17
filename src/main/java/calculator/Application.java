@@ -28,6 +28,7 @@ public class Application {
 
         if(input.startsWith("//")){
             int delimiterEndIndex = input.indexOf("\\n");
+            if (delimiterEndIndex == -1) throw new IllegalArgumentException("잘못된 구분자 형식");
 
             delimiter = input.substring(2, delimiterEndIndex);
             delimiter = Pattern.quote(delimiter);
