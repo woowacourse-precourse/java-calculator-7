@@ -12,14 +12,16 @@ public class Decoder {
     private final List<Integer> decodedNumbers;
 
     public Decoder(String input) {
-        decodedNumbers = decode(input);
+        decodedNumbers = new LinkedList<>();
+        decode(input);
     }
 
-    private List<Integer> decode(String input) {
+    private void decode(String input) {
         if (hasCustomDelimiter(input)) {
-            return separateByDelimiter(findStringToAdd(input), findCustomDelimiter(input));
+            collectNumbers(findEncodedString(input), findCustomDelimiter(input));
+            return;
         }
-        return separateByDelimiter(input, DEFAULT_DELIMITER);
+        collectNumbers(input, DEFAULT_DELIMITER);
     }
 
     // 입력값이 "//"로 시작하고 "\n"을 포함하는 지 확인
@@ -27,56 +29,65 @@ public class Decoder {
         return input.startsWith(DELIMITER_START) && input.contains(DELIMITER_END);
     }
 
-    private String findStringToAdd(String input) {
-        return input.substring(input.indexOf(DELIMITER_END) + 2);
+    private String findEncodedString(String input) {
+        int start = input.indexOf(DELIMITER_END) + DELIMITER_END.length();
+        return input.substring(start);
     }
 
     // 커스텀 구분자 찾기
     private String findCustomDelimiter(String input) {
-        String delimiter = input.substring(input.indexOf(DELIMITER_START) + 2, input.indexOf(DELIMITER_END));
+        int start = input.indexOf(DELIMITER_START) + DELIMITER_START.length();
+        int end = input.indexOf(DELIMITER_END);
+        String customDelimiter = input.substring(start, end);
         // 유효성 검사
-        validateDelimiterIsBlank(delimiter);
-        validateDelimiterIsNumber(delimiter);
-        return delimiter;
+        validateCustomDelimiter(customDelimiter);
+        return customDelimiter;
     }
 
-    // 커스텀 구분자가 비어있는지 확인
-    private void validateDelimiterIsBlank(String delimiter) {
-        if(delimiter.isBlank()) {
+    private void validateCustomDelimiter(String customDelimiter) {
+        if (isBlank(customDelimiter) || isInt(customDelimiter)) {
             throw new IllegalArgumentException();
         }
     }
 
-    // 커스텀 구분자가 숫자인지 확인
-    private void validateDelimiterIsNumber(String delimiter) {
-        try {
-            Integer.parseInt(delimiter);
-            throw new IllegalArgumentException();
-        } catch (NumberFormatException ignored) {
+    // 커스텀 구분자가 비어있는지 확인
+    private boolean isBlank(String customDelimiter) {
+        return customDelimiter.isBlank();
+    }
 
+    // 커스텀 구분자가 숫자인지 확인
+    private boolean isInt(String customDelimiter) {
+        try {
+            Integer.parseInt(customDelimiter);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
 
     // 덧셈할 숫자 뽑기
-    private List<Integer> separateByDelimiter(String input, String delimiter) {
-        List<Integer> numbers = new LinkedList<>();
-        StringTokenizer st = new StringTokenizer(input, delimiter);
-        while(st.hasMoreTokens()) {
-            numbers.add(validateNumber(st.nextToken()));
+    private void collectNumbers(String encodedString, String delimiter) {
+        StringTokenizer st = new StringTokenizer(encodedString, delimiter);
+        while (st.hasMoreTokens()) {
+            String token = st.nextToken();
+            try {
+                int number = Integer.parseInt(token);
+                validateNumber(number);
+                decodedNumbers.add(number);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException();
+            }
         }
-        return numbers;
     }
 
-    private int validateNumber(String s) {
-        try {
-            int number = Integer.parseInt(s);
-            if(number >= 0) {
-                return number;
-            }
-            throw new IllegalArgumentException();
-        } catch (NumberFormatException e) {
+    private void validateNumber(int number) {
+        if (isNegativeInt(number)) {
             throw new IllegalArgumentException();
         }
+    }
+
+    private boolean isNegativeInt(int number) {
+        return number < 0;
     }
 
     public List<Integer> getDecodedNumbers() {
