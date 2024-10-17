@@ -35,4 +35,17 @@ public class Number {
             }
         }
     }
+
+    public int addCalculator() {
+        stringToInt(); // addCalculator() 메서드가 먼저 호출되면 numbers 에 아무 문자열이 없으므로 내부에 선언
+
+        if (isNullString()) {
+            return sum;
+        }
+
+        for (int num : numbers) {
+            sum += num;
+        }
+        return sum;
+    }
 }
