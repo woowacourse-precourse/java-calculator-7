@@ -9,12 +9,12 @@ record StringSliceResult(String input, String delimiters) {
 
 public class Application {
     private static StringSliceResult getCustomDelimiters(String input, String delimiters) {
-        String[] input_separated = input.split("//", 2)[1].split("\\\\n", 2);
+        String[] inputSeparated = input.split("//", 2)[1].split("\\\\n", 2);
 
-        delimiters += input_separated[0];
+        delimiters += inputSeparated[0];
         delimiters = delimiters.replace("\\", "\\\\"); // 역슬래시(\)를 custom delimiter로 쓸때의 버그 수정
 
-        input = input_separated[1];
+        input = inputSeparated[1];
 
         return new StringSliceResult(input, delimiters);
     }
