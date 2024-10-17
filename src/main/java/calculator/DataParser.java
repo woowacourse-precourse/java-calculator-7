@@ -3,7 +3,10 @@ package calculator;
 import calculator.dto.Data;
 
 public class DataParser {
-    public static Data parseData(String inputData, boolean isCustom) {
+    public static Data parseData(String inputData) {
+
+        boolean isCustom = isCustom(inputData);
+
         if (isCustom) {
             checkValidCustomFormat(inputData);
         }
@@ -79,5 +82,9 @@ public class DataParser {
             return true;
         }
         return false;
+    }
+
+    private static boolean isCustom(String inputData) {
+        return inputData.startsWith("//");
     }
 }

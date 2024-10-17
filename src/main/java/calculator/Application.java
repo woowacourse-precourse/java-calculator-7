@@ -8,17 +8,11 @@ public class Application {
     public static void main(String[] args) {
         try {
             String inputData = InputDataReader.getInputData();
-            boolean customStatus = isCustom(inputData);
-            Data data = DataParser.parseData(inputData, customStatus);
+            Data data = DataParser.parseData(inputData);
             int sum = Calculator.sum(data);
             System.out.println("결과 : " + sum);
         } finally {
             Console.close();
         }
-    }
-
-
-    private static boolean isCustom(String inputData) {
-        return inputData.startsWith("//");
     }
 }
