@@ -10,6 +10,7 @@ public class ViewManager {
     public String printInputMessage(){
         System.out.println(INPUT_MESSAGE);
         String input = readLine();
+        input = input.replace("\\n", "\n");
         return input;
     }
 
