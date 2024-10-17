@@ -45,3 +45,11 @@
 - 프로그래밍 요구 사항에서 명시하지 않는 한 파일, 패키지 등의 이름을 바꾸거나 이동 금지
 - 자바 코드 컨벤션을 지키면서 프로그래밍
 - 원칙: [Java Style Guide](https://github.com/woowacourse/woowacourse-docs/tree/main/styleguide/java)
+
+
+## 패키지 구조
+ - 계층형 구조
+   - controller
+   - service
+   - dto
+   - domain
