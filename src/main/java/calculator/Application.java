@@ -8,16 +8,28 @@ public class Application {
         System.out.print("덧셈할 문자열을 입력해주세요." + "\n");
         String Input = Console.readLine();
 
-        int sum = 0;
+        try {
+            int sum = 0;
 
-        String[] tokens = Input.split("[,:]");
+            String[] tokens = Input.split("[,:]");
 
-        for (String token : tokens) {
-            if (token.isEmpty()) {
-                token = "0";
+            for (String token : tokens) {
+                if (token.isEmpty()) {
+                    token = "0";
+                }
+                int number = Integer.parseInt(token);
+
+                if (number < 0) {
+                    throw new IllegalArgumentException();
+                }
+
+                sum += number;
             }
-            sum += Integer.parseInt(token);
+            System.out.println("결과 : " + sum);
         }
-        System.out.println("결과 : " + sum);
+        catch (IllegalArgumentException e) {
+            System.exit(1);
         }
+
+    }
     }
