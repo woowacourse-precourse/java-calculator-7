@@ -29,22 +29,29 @@ public class InputParser {
         }
     }
 
-    public List<Integer> convertCustomDelimiter(String input)
-        throws IllegalArgumentException {
+    public List<Integer> convertCustomDelimiter(String input) throws IllegalArgumentException {
         try {
-            Pattern p = Pattern.compile(CUSTOM_DELIMITER_REGEX);
-            Matcher matcher = p.matcher(input);
+            Matcher matcher = getMatcher(input);
             if(matcher.matches()) {
-                String customDelimiter = matcher.group(CUSTOM_DELIMITER_GROUP);
-                String inputNum = matcher.group(INPUT_NUM_GROUP);
-                List<Integer> list = splitAndConvert(customDelimiter, inputNum);
-                checkPositiveNumber(list);
-                return list;
+                return parseAndConvert(matcher);
             }
             throw new IllegalArgumentException();
         } catch (Exception e) {
             throw new IllegalArgumentException();
         }
+    }
+
+    private static Matcher getMatcher(String input) {
+        Pattern p = Pattern.compile(CUSTOM_DELIMITER_REGEX);
+        Matcher matcher = p.matcher(input);
+        return matcher;
+    }
+
+    private static List<Integer> parseAndConvert(Matcher matcher) {
+        String customDelimiter = matcher.group(CUSTOM_DELIMITER_GROUP);
+        String inputNum = matcher.group(INPUT_NUM_GROUP);
+        List<Integer> list = splitAndConvert(customDelimiter, inputNum);
+        return list;
     }
 
     private static List<Integer> splitAndConvert(String customDelimiter, String inputNum) {
@@ -59,8 +66,7 @@ public class InputParser {
             .toList();
     }
 
-    public static void checkPositiveNumber(List<Integer> list)
-        throws IllegalArgumentException {
+    public void checkPositiveNumber(List<Integer> list) throws IllegalArgumentException {
         for (Integer integer : list) {
             if (integer <= 0) {
                 throw new IllegalArgumentException();

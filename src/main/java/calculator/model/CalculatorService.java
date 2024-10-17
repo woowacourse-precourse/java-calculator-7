@@ -12,7 +12,9 @@ public class CalculatorService {
             return List.of(ZERO,ZERO);
         }
         if (inputParser.checkDefaultDelimiter(input)) {
-            return inputParser.convertDefaultDelimiter(input);
+            List<Integer> list = inputParser.convertDefaultDelimiter(input);
+            inputParser.checkPositiveNumber(list);
+            return list;
         }
         return inputParser.convertCustomDelimiter(input);
     }
