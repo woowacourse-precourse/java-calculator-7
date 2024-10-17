@@ -10,6 +10,13 @@ public class CalculatorInput {
 
     public static String getString() {
         System.out.println(WELCOME_MESSAGE);
-        return Console.readLine();
+
+        String line = "";
+        try {
+            line = Console.readLine();
+        } catch (Exception e) {
+            // 아무것도 하지 않는다.
+        }
+        return line;
     }
 }
