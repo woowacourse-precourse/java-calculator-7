@@ -1,9 +1,9 @@
 package calculator;
 
+import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
@@ -73,19 +73,16 @@ public class Application {
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         String input;
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        input = scanner.nextLine();
+        input = Console.readLine();
 
         input = checkCustomSep(input);
 
-        try {
-            int result = getSum(input);
-            System.out.printf("결과 : %d\n", result);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+        int result = getSum(input);
+        System.out.printf("결과 : %d\n", result);
+
+        Console.close();
     }
 }
