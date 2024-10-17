@@ -29,4 +29,17 @@ public class CalculatorServiceTest {
         //then
         assertThat(list).isEqualTo(List.of(0, 0));
     }
+
+    @Test
+    @DisplayName("calculate 테스트")
+    public void calculateTest() {
+        //given
+        List<Integer> list = List.of(1, 2, 3);
+
+        //when
+        int result = calculatorService.calculate(list);
+
+        //then
+        assertThat(result).isEqualTo(6);
+    }
 }
