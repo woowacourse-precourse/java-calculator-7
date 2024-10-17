@@ -21,6 +21,13 @@ public class StringCalculator {
         }
     }
 
+    // 음수를 체크하는 메서드
+    private void checkNegative(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException("Negative numbers are forbidden : " + number);
+        }
+    }
+
     // 문자열을 더하는 메서드
     public int add() {
         String numbers = str;
@@ -33,6 +40,7 @@ public class StringCalculator {
                 //limit:-1로 설정하면, 공백이어도 문자열의 끝까지 탐색해서 null로 저장한다.
                 .map(String::trim)
                 .mapToInt(this::parseInt)
+                .peek(this::checkNegative)
                 .sum();
     }
 }
