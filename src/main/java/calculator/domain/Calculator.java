@@ -26,6 +26,8 @@ public class Calculator {
                 separator.validateCustomSize(input.getFirstInput()); // 커스텀 구분자의 길이를 확인
                 separator.validateNumberInCustom(input.getFirstInput()); // 커스텀 구분자 내에 숫자가 있는지 확인
                 separator.validateDuplicateCustom(input.getFirstInput()); // 커스텀 구분자가 중복되었는지 확인
+
+                //예외처리 없이 정상흐름이면 커스텀 구분자를 리스트에 넣어준다.
             }
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());

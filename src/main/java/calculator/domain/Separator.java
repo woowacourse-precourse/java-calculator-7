@@ -5,12 +5,12 @@ import java.util.List;
 
 public class Separator {
 
-    private static List<Character> separatorList;
+    private static List<String> separatorList;
 
     public Separator() {
         separatorList = new ArrayList<>();
-        separatorList.add(',');
-        separatorList.add(';');
+        separatorList.add(String.valueOf(','));
+        separatorList.add(String.valueOf(';'));
     }
 
     /*
@@ -60,10 +60,11 @@ public class Separator {
 
     //커스텀 구분자가 중복되는지 확인한다.
     public void validateDuplicateCustom(String input) {
-        for (Character c : separatorList) {
-            if (String.valueOf(c).equals(input)) {
+        for (String separator : separatorList) {
+            if (separator.equals(input)) {
                 throw new IllegalArgumentException("커스텀 구분자가 중복되었습니다.");
             }
         }
     }
+
 }
