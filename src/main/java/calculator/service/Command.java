@@ -15,16 +15,20 @@ public class Command {
             throw new IllegalArgumentException("입력값이 존재하지 않습니다.");
         }
         this.customSeparator = parseCustomSeparator(input);
-        this.expression = parseFormula(input);
-    }
-
-    private String parseFormula(String input) {
-        return input.replaceAll(CUSTOM_SEPARATOR_REGEX, NO_VALUE);
+        this.expression = parseExpression(input);
     }
 
     private String parseCustomSeparator(String input) {
         Optional<String> customSeparator = new CustomSeparatorManager(input).extract();
         return customSeparator.orElse(NO_VALUE);
+    }
+
+    private String parseExpression(String input) {
+        String expression = input.replaceAll(CUSTOM_SEPARATOR_REGEX, NO_VALUE);
+        if (expression.isEmpty()) {
+            throw new IllegalArgumentException("식이 존재하지 않습니다.");
+        }
+        return expression;
     }
 
     public boolean hasCustomSeparator() {
