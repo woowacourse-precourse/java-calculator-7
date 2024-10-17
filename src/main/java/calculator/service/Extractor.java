@@ -8,6 +8,9 @@ public class Extractor {
     private static final String NUMERIC_REGEX = "[0-9]+";
 
     public List<Integer> extractNumbers(String input, String delimiter) {
+        if(input.isEmpty()) {
+            return List.of(0);
+        }
         String[] extractNumberString = input.split(delimiter);
         return Arrays.stream(extractNumberString)
             .filter(this::isPositiveNumber)
