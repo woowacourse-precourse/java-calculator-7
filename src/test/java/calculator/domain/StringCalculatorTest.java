@@ -1,8 +1,7 @@
-package calculator;
+package calculator.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import calculator.domain.StringCalculator;
 import org.junit.jupiter.api.Test;
 
 public class StringCalculatorTest {

@@ -1,9 +1,8 @@
-package calculator;
+package calculator.domain;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import calculator.constants.Constants;
-import calculator.domain.StringCalculator;
 import org.junit.jupiter.api.Test;
 
 public class StringValidatorTest {
