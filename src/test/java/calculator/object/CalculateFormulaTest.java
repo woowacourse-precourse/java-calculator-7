@@ -81,6 +81,14 @@ class CalculateFormulaTest {
     }
 
     @Test
+    void 숫자0을_입력시도하면_예외발생() {
+        assertThatThrownBy(() -> CalculateFormula.from("0"))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> CalculateFormula.from("0.0"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     void 이스케이프문자를_커스텀구분자로_입력시도하면_예외발생() {
         assertThatThrownBy(() -> CalculateFormula.from("//\\n1234"))
                 .isInstanceOf(IllegalArgumentException.class);

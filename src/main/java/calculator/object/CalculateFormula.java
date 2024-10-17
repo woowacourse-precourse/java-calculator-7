@@ -29,7 +29,6 @@ public record CalculateFormula(
 
         String customSeparator = inputFormula.substring(CUSTOM_SEPARATOR_HEADER.length(), inputFormula.indexOf(CUSTOM_SEPARATOR_FOOTER));
         if (customSeparator.length() != 1) {
-            System.out.println("customSeparator = " + customSeparator);
             throw new IllegalArgumentException("잘못된 커스텀 구분자가 입력되었습니다.");
         }
 
@@ -86,7 +85,15 @@ public record CalculateFormula(
     }
 
     private static BigDecimal convertFrom(StringBuilder numberAccumulator) {
-        return numberAccumulator.isEmpty() ? BigDecimal.ZERO : new BigDecimal(numberAccumulator.toString());
+        if (numberAccumulator.isEmpty()) {
+            return BigDecimal.ZERO;
+        }
+
+        BigDecimal converted = new BigDecimal(numberAccumulator.toString());
+        if (BigDecimal.ZERO.compareTo(converted) == 0) {
+            throw new IllegalArgumentException("숫자는 양수만 입력할 수 있습니다.");
+        }
+        return converted;
     }
 
 }
