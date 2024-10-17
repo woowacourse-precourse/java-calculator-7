@@ -30,12 +30,12 @@ public class Application {
 
     public static String[] splitBySeperator(String input, String customSeperator) {
         String seperator = ",|:";
+        if (input.equals("")) return new String[]{"0"};
 
         if (!customSeperator.equals("")) {
             input = input.replace("//" + customSeperator + "\\n", "");
             seperator = ",|:|" + customSeperator;
         }
-
         String[] number = input.split(seperator);
 
         return number;
