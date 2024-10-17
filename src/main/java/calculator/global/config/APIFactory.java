@@ -18,7 +18,7 @@ public class APIFactory {
 	}
 
 	public final SeparateAPI separate() {
-		return new SeparateAPI();
+		return SeparateAPI.getInstance();
 	}
 
 	public static APIFactory getInstance() {

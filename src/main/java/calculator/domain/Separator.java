@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Separator {
-
 	private static final Separator INSTANCE = new Separator();
 	private final List<Character> separators;
 

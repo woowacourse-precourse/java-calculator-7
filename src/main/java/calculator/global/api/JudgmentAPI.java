@@ -1,8 +1,6 @@
 package calculator.global.api;
 
 public class JudgmentAPI {
-//    private boolean validNumber(char ch) {
-//    }
 
 	public boolean isExitCustomSeparator() {
 		return true;

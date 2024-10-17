@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Number {
-
+	private static final Number INSTANCE = new Number();
 	private final List<Integer> numbers;
 	private int size;
 
@@ -27,6 +27,6 @@ public class Number {
 	}
 
 	public static Number getInstance() {
-		return new Number();
+		return INSTANCE;
 	}
 }
