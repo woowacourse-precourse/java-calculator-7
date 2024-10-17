@@ -10,7 +10,7 @@ public class Application {
 
         // 계산
         Calculator calculator = new Calculator(input);
-        int result = calculator.add(input);
+        int result = calculator.calculate(input);
 
         // 출력
         outputHandler.printResult(result);
