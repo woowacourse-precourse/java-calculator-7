@@ -1,7 +1,12 @@
 package calculator;
 
 public class CalculatorController {
+
     public void run() {
-        String input = View.printStartView();
+        final StringCalculator calculator = new StringCalculator();
+
+        final String input = View.printStartView();
+
+        View.printEndView(calculator.sum(input));
     }
 }
