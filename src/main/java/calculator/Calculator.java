@@ -20,14 +20,18 @@ public class Calculator {
             input = customResult[1];
         }
 
+        List<Integer> numbers = extractNumbers(input, delimeter);
+        int sum = sumCalculator(numbers);
 
+        return sum;
     }
 
     //커스텀 구분자 추출 후 커스텀 구분자와 커스텀 구분자를 제거한 입력값을 반환
     public String[] customDelimeter(String input) {
-        int index = input.indexOf('\n');
+        int index = input.indexOf("\\n");
+        System.out.println(index);
         String delimiter = input.substring(2, index);
-        String newInput = input.substring(index + 1);
+        String newInput = input.substring(index + 2);
         return new String[]{delimiter, newInput};
     }
 
@@ -49,6 +53,14 @@ public class Calculator {
             }
         }
         return numbers;
+    }
+
+    public int sumCalculator(List<Integer> numbers) {
+        int sum = 0;
+        for (int number : numbers) {
+            sum += number;
+        }
+        return sum;
     }
 
 }
