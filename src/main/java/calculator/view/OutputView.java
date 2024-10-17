@@ -1,7 +1,9 @@
 package calculator.view;
 
 public class OutputView {
-    public void printResult(Integer result){
-        System.out.println("결과 : "+result);
+    private final String RESULT_MESSAGE = "결과 : ";
+
+    public void printResult(Integer result) {
+        System.out.println(RESULT_MESSAGE + result);
     }
 }
