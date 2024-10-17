@@ -5,9 +5,7 @@
 - 기본 구분자 입력에 대한 덧셈 연산 수행
 - 가장 처음 입력된 값이 "//" 라면 "\n" 전까지의 문자를 구분자로 사용하여 덧셈 연산 수행 (사용자 정의 구분자)
 - 비정상 입력에 대해 예외처리 후 종료
-
 ---
-
 ## 2. 구현 기능 목록
 
 - 사용자 입력 요구, 값 입력받기
@@ -18,50 +16,50 @@
 - 예외처리하기
 
 ---
-
 ## 3. 해결 필요한 예외 사항
 
 - 개행문자 입력으로 인한 비정상 동작 수정 [O]
 - 프로젝트 파일 인코딩 오류로 인한 테스트코드 동작 실패 수정 [O]
 - 일부 특수문자를 구분자로 사용할 경우 예외 구분자 처리 [0]
-- 공백 입력시 exception 처리 [O]
-
 ---
 
-## view package
+## 기술 문서
 
-- `inputView` : 사용자 입력 요구, 값 입력받기 [O]
-- `outputView` : 계산 결과 출력 [O]
+### view 패키지
 
-## controller package
+- **InputView**: 사용자 입력 요구 및 값 입력받기 기능 구현
+  - `inputMessage`: 사용자에게 덧셈할 문자열을 입력하라는 메시지를 출력하고, 입력된 문자열을 반환하는 메서드.
 
-- `CalculatorController` : 전체 프로그램 동작 제어 [O]
+- **OutputView**: 계산 결과 출력 기능 구현
+  - `outputMessage`: 계산 결과를 출력하는 메서드.
+  - `outputErrorMessage`: 에러 메시지를 출력하는 메서드.
 
-## model package
+### controller 패키지
+- **CalculatorController**: 전체 프로그램 동작 제어
+  - `run()`: 프로그램의 주요 흐름을 제어하며, 사용자 입력을 받고 계산 결과를 출력함. 예외 발생 시 에러 메시지를 출력하고 예외를 던짐.
 
-- `CalculatorLogic` : 계산기 내부 동작 구성 [0]
-    - `extractDelimiter` : 기본 구분자, 사용자 정의 구분자 추출 기능 [O]
-    - `extractNumber` : 사용자 입력에서 숫자 추출 기능 [O]
-    - `calculate` : 구분자에 따른 연산 기능 [0]
+### model 패키지
+- **CalculatorLogic**: 계산기 내부 동작 구성
+  - `extractDelimiter`: 기본 구분자 및 사용자 정의 구분자를 추출하는 기능.
+  - `extractNumbers`: 사용자 입력에서 숫자를 추출하는 기능.
+  - `calculate`: 숫자 리스트의 합계를 계산하는 기능.
 
-## service package
+### service 패키지
+- **CalculatorService**: 계산기 동작 제어
+  - `calculate`: 입력값을 검증하고, 구분자를 기반으로 숫자를 추출하여 계산하는 메서드.
+    - **`inputValidator.inputValidate`**: 입력값이 비어 있거나 유효하지 않은지 확인.
+    - **`getValidatedDelimiter`**: 입력에서 구분자를 추출하고, 필요시 특수 문자를 이스케이프 처리.
+    - **`extractValidatedNumbers`**: 입력된 문자열에서 유효한 숫자 리스트를 추출하는 기능.
+    - **`inputValidator.numbersValidate`**: 추출한 숫자 리스트가 음수를 포함하지 않는지 확인.
+    - **`calculatorLogic.calculate`**: 유효한 숫자 리스트의 합계를 계산하여 반환.
 
-- `CalculatorService` : 계산기 동작 제어 [0]
-    - `calculate` : 계산기 동작 제어 [0]
-    
-    - validation 내의 검증 기능 추가 필요
+### validation 패키지
+- **InputValidator**: 입력 구문이 정상 연산 가능한지 판단하고 에러를 반환
+  - `inputValidate`: 사용자의 문자열 입력이 정상인지 확인하는 메서드.
+    - **isEmpty()**: 입력값이 비어 있는지 확인하는 메서드.
+  - `numbersValidate`: 구분자를 통해 분할된 Integer 리스트가 정상인지 확인하는 메서드.
+    - **isNegative()**: 리스트에 음수가 포함되어 있는지 확인하는 메서드.
 
-## validation package
+----
 
-- `inputValidator` : 입력 구문이 정상 연산 가능한지 판단 - 에러 반환
-  - `inputValidate` : 사용자의 string 입력이 정상인지 확인하는 메서드 집합
-    - `isBlank` : 입력이 공백인지 확인하는 메서드 [0]
-  - `numbersValidate` : 구분자 통해 분할된 Integer List가 정상인지 확인하는 메서드 집합
-    -  `isNegative` : 음수가 포함되어 있는지 확인하는 메서드 [0]
 
----
-
-- 각 class 주요 메서드 구현 시 단위 테스트 진행
-- git commit 컨벤션 지킬 것
-- `README.md` 파일에 구현 기능 목록 최신화
-- 자바 코드 컨벤션 지킬 것
