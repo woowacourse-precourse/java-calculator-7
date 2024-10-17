@@ -1,5 +1,6 @@
 package calculator.view;
 
+import static calculator.util.ConstantVariable.PROGRAM_END_RESULT;
 import static calculator.util.ConstantVariable.PROGRAM_START;
 import static calculator.util.CustomStringUtils.printStringLineFeed;
 
@@ -27,6 +28,6 @@ public class CalculatorView {
 
         CalculateResultResponse response = calculatorController.calculate(CalculateRequest.from(input));
 
-        printStringLineFeed(String.valueOf(response.result()));
+        printStringLineFeed(PROGRAM_END_RESULT.value().concat(String.valueOf(response.result())));
     }
 }
