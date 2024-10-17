@@ -6,7 +6,8 @@ public class Application {
         Calculator calculator = new Calculator();
 
         try {
-            System.out.println("결과 : " + calculator.add("-1,2,3"));
+//            System.out.println("결과 : " + calculator.add(""));
+            System.out.println("결과 : " + calculator.add("//;\\n"));
         } catch (IllegalArgumentException e) {
             System.out.println("예외 발생: " + e.getMessage());
         }
