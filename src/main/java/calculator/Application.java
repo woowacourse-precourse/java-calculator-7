@@ -7,6 +7,8 @@ import java.util.regex.Pattern;
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
+        Machine machine = new Machine();
+        machine.run();
     }
 }
 
@@ -99,7 +101,7 @@ class Machine {
     public void run() {
         this.string = getString();
         setDelimiter(this.string);
-        
+
         String[] temp = splitString(this.string);
         int result = sum(temp);
 
