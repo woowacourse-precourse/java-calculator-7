@@ -33,7 +33,7 @@ public class DelimiterService {
         Matcher matcher = Pattern.compile(CUSTOM_DELIMITERS).matcher(input);
 
         if (!matcher.find()) {
-            throw new IllegalArgumentException(ErrorMessage.NOT_MATCH_FOUND.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.NOT_MATCH_FOUND_DELIMITER.getMessage());
         }
 
         return matcher.group(2).split(matcher.group(1));
