@@ -1,8 +1,10 @@
 package calculator.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 public class InputParser {
 	private final String input;
@@ -17,6 +19,20 @@ public class InputParser {
 		extractCustomDelimiter(input).ifPresent(delimiters::add);
 		this.delimiters = delimiters;
 		validateDelimiter(this.input);
+	}
+
+	/**
+	 * 핵심 로직
+	 */
+	// 구분자들을 이용해 정규식을 만들고, 이를 이용해 입력값을 분리
+	private String[] splitInput(String input, List<String> delimiters) {
+		String regex = String.join("|",
+			delimiters.stream()
+				.map(Pattern::quote) // 구분자를 정규식에 안전하게 포함 (특수 문자의 경우 혼동의 여지가 있음)
+				.toArray(String[]::new)
+		);
+
+		return input.split(regex);
 	}
 
 	/**
