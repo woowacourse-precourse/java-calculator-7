@@ -1,4 +1,4 @@
-package calculator;
+package calculator.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class Extractor {
 
     private static final String DEFAULT_DELIMITERS = ",|:";
-    private static final String CUSTOM_DELIMITERS = "//(.*?)\n";
+    private static final String CUSTOM_DELIMITERS = "//(.*?)(\\n|$)";
 
     private String input;
     private final List<Integer> numbers = new ArrayList<>();
@@ -17,6 +17,10 @@ public class Extractor {
         this.input = input.trim();
     }
 
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
+    // TODO: 기본 구분자 사이에 어떤 값도 입력되지 않은 경우 → 예외처리하기
 
     /**
      * 문자열에서 숫자 추출
