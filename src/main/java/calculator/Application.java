@@ -9,11 +9,21 @@ public class Application {
 
         String input = Console.readLine();
         int sum = 0;
+        boolean customized = false;
+        char custom = ',';
+
+        if (input.charAt(0) == '/' && input.charAt(1) == '/' && input.charAt(3) == '\\' && input.charAt(4) == 'n') {
+            customized = true;
+            custom = input.charAt(2);
+            input = input.substring(5, input.length());
+        }
 
         for (byte value : input.getBytes()) {
             if (value >= '0' && value <= '9') {
                 sum += value - '0';
-            } else if (value != ',' && value != ':') {
+            } else if (customized && value != (byte) custom) {
+                throw new IllegalArgumentException();
+            } else if (!customized && (value != ',' && value != ':')) {
                 throw new IllegalArgumentException();
             }
         }
