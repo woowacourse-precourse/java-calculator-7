@@ -27,7 +27,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 입력이_주어지지_않은_경우() {
         assertSimpleTest(() -> {
-            run("");
+            run("\n");
             assertThat(output()).contains("결과 : 0");
         });
     }
