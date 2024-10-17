@@ -19,6 +19,13 @@ public class CalculatorService {
         inputView.printMessage(DESCRIPTION);
         int[] validateIntArray = inputView.getUserInput();
 
-        System.out.println(Arrays.toString(validateIntArray));
+        if (validateIntArray != null)
+        {
+            System.out.println("null이 아닙니당");
+        }
+        else
+        {
+            System.out.println("예외처리로 인한 null 출력");
+        }
     }
 }

@@ -11,7 +11,7 @@ public class CalculatorValidate {
 
     /**
      * 숫자로 변환 가능 체크
-     * 숫자로 변환 불가능 할 시 빈 Array 반환
+     * 숫자로 변환 불가능 하거나 양수가 아닐 경우 null 반환
      */
     public int[] isIntegerParsable(String[] userInput)
     {
@@ -21,12 +21,18 @@ public class CalculatorValidate {
             int index = 0;
             for (String element : userInput)
             {
+                int number = Integer.parseInt(element);
+                if (number < 1)
+                {
+                    throw new IllegalArgumentException("음수가 입력되었습니다.");
+                }
                 validateIntArray[index] = Integer.parseInt(element);
                 index++;
             }
             return validateIntArray;
         }catch(IllegalArgumentException e){
-            return validateIntArray;
+            System.err.println("숫자로 변환할 수 없습니다.");
+            return null;
         }
     }
 }
