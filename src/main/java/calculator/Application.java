@@ -44,7 +44,7 @@ public class Application {
 
         } finally {
             Console.close();
-    }
+        }
 
     }
 
