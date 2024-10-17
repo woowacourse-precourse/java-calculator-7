@@ -64,6 +64,10 @@ public class Application {
     private int calc(String[] lst) {
         int result = 0;
 
+        if (lst.length == 1 && lst[0] == "") {
+            return result;
+        }
+
         for (String separator : lst) {
             try {
                 int parseNumber = Integer.parseInt(separator);
