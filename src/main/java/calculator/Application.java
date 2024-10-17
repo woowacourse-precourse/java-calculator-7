@@ -5,9 +5,29 @@ import camp.nextstep.edu.missionutils.Console;
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
+        Application app = new Application();
+        app.Calculator();
     }
 
     static String defaultSeparator = ",:";
+
+    public void Calculator() {
+        printUserInputMessage();
+        String userInput = getUserInput();
+
+        if (isStringWithDefaultSeparator(userInput)) {
+            int result = sum(userInput, defaultSeparator);
+            printResult(result);
+        }
+        else if(isStringWithCustomSeparator(userInput)) {
+            String str = removeSeparatorInitializer(userInput);
+            int result = sum(str, getCustomSeparator(userInput));
+            printResult(result);
+        }
+        else {
+            throw new IllegalArgumentException("잘못된 입력입니다.");
+        }
+    }
 
     private void printUserInputMessage() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -25,10 +45,10 @@ public class Application {
         return str.replaceAll(formatSeparator(separator), "");
     }
 
-    public Boolean isStringWithDefaultSeparator(String input, String separator) {
+    public Boolean isStringWithDefaultSeparator(String input) {
         String str = removeNumber(input);
         str = removeSeparator(str, defaultSeparator);
-        return str == "";
+        return str.isEmpty();
     }
 
     public String getCustomSeparator(String input) {
@@ -40,7 +60,7 @@ public class Application {
         return input.substring(3 + getCustomSeparator(input).length());
     }
 
-    public Boolean isStringWithCustomSeparator(String input, String separator) {
+    public Boolean isStringWithCustomSeparator(String input) {
         String str = removeSeparatorInitializer(input);
         str = removeNumber(str);
         str = removeSeparator(str, getCustomSeparator(input));
@@ -51,12 +71,12 @@ public class Application {
         return "[" + separator + "]";
     }
 
-    public int sum(String formattedStr, String separator) {
-        if (formattedStr.isEmpty()) {
+    public int sum(String str, String separator) {
+        if (str.isEmpty()) {
             return 0;
         }
 
-        String[] nums = formattedStr.split(formatSeparator(separator));
+        String[] nums = str.split(formatSeparator(separator));
         int result = 0;
         for (String num : nums) {
             result += Integer.parseInt(num);
