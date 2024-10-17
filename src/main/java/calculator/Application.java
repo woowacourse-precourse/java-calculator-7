@@ -4,18 +4,18 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
-record StringSliceResult(String input, String delimiters) {
+record InputSliceResult(String input, String delimiters) {
 
 }
 
 public class Application {
-    private static StringSliceResult getCustomDelimiters(String input, String delimiters) {
-        String[] inputSeparated = input.split("//", 2)[1].split("\\\\n", 2);
+    private static InputSliceResult getCustomDelimiters(String input, String delimiters) {
+        String[] inputSliced = input.split("//", 2)[1].split("\\\\n", 2);
 
-        delimiters += Pattern.quote(inputSeparated[0]);
-        input = inputSeparated[1];
+        delimiters += Pattern.quote(inputSliced[0]);
+        input = inputSliced[1];
 
-        return new StringSliceResult(input, delimiters);
+        return new InputSliceResult(input, delimiters);
     }
 
     private static boolean isPositive(String[] numbers) {
@@ -31,7 +31,7 @@ public class Application {
             String input = Console.readLine();
 
             if (input.startsWith("//")) {
-                StringSliceResult slices = getCustomDelimiters(input, delimiters);
+                InputSliceResult slices = getCustomDelimiters(input, delimiters);
                 input = slices.input();
                 delimiters = slices.delimiters();
             }
