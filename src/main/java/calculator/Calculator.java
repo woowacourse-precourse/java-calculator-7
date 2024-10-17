@@ -6,6 +6,7 @@ public class  Calculator {
     public int calculate(String input) {
 
         StringFilter stringFilter = new StringFilter();
+
         if (input.isEmpty())
             return 0;
 
