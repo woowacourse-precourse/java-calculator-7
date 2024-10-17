@@ -10,7 +10,6 @@ public class User {
 
     private void validate(String input) {
         int customSettingIndex = input.indexOf("\\n");
-
         if (customSettingIndex != -1) {
             String prefix = input.substring(0, customSettingIndex);
             if (!prefix.startsWith("//")) {
@@ -21,7 +20,7 @@ public class User {
             throw new IllegalArgumentException("잘못된 커스텀 구분자 형식입니다 올바른 형식은 '//'로 시작해야 합니다.");
         }
 
-        if (customSettingIndex == -1) {
+        if (input.startsWith("//") && customSettingIndex == -1) {
             throw new IllegalArgumentException("커스텀 구분자 정의 후 \\n 이 필요합니다.");
         }
 
@@ -38,6 +37,7 @@ public class User {
         }
     }
 
+
     public String getUser() {
         return user;
     }
@@ -45,5 +45,7 @@ public class User {
     public boolean isCustom() {
         return user.startsWith("//");
     }
+
+
 
 }
