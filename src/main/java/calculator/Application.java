@@ -13,7 +13,7 @@ public class Application {
         String calcFormula = readLine();
         String customSeparator = extractCustomSeparator(calcFormula);
         List<Long> numbers = extractNumber(calcFormula, customSeparator);
-        numbers.forEach(System.out::println);
+        long sum = calcNumbers(numbers);
     }
 
     public static String extractCustomSeparator(String calcFormula) {
@@ -37,5 +37,15 @@ public class Application {
         return Arrays.stream(substring.split(customSeparator + "|:" + "|,"))
                 .map(Long::parseLong)
                 .toList();
+    }
+
+    public static long calcNumbers(List<Long> numbers) {
+        long sum = 0L;
+
+        for (long number : numbers) {
+            sum += number;
+        }
+
+        return sum;
     }
 }
