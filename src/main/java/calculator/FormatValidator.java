@@ -37,7 +37,7 @@ public class FormatValidator {
 
     private static boolean isNumberStartFormat(String formula) {
         for(char ch : formula.toCharArray()) {
-            if (!Character.isDigit(ch) || !DefaultSeparate.getSeparates().contains(ch)) {
+            if (!Character.isDigit(ch) && !DefaultSeparate.getSeparates().contains(ch)) {
                 return false;
             }
         }
