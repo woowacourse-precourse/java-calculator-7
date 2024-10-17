@@ -10,8 +10,8 @@ public class Application {
      */
     public static List<String> separators = new ArrayList<>();
     public static String input = "";
-    public static final String customSeparatorSymbol1 = "//";
-    public static final String customSeparatorSymbol2 = "\\n";
+    public static final String CUSTOM_SEPARATOR_PREFIX = "//";
+    public static final String CUSTOM_SEPARATOR_SUFFIX = "\\n";
 
     public static void main(String[] args) {
         Application app = new Application();
@@ -28,8 +28,8 @@ public class Application {
     }
 
     private char getCustomSeparator(String input) {
-        int firstTokenIdx = input.indexOf(customSeparatorSymbol1);
-        int lastTokenIdx = input.lastIndexOf(customSeparatorSymbol2);
+        int firstTokenIdx = input.indexOf(CUSTOM_SEPARATOR_PREFIX);
+        int lastTokenIdx = input.lastIndexOf(CUSTOM_SEPARATOR_SUFFIX);
 
         if (firstTokenIdx == -1 || lastTokenIdx == -1) {
             throw new IllegalArgumentException();
