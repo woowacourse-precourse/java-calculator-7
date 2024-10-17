@@ -33,6 +33,8 @@ public class Application {
             additionFormula = app.extractFormula(additionFormula);
             app.validateInput(additionFormula,separator);
 
+            int result = app.calculateFormula(additionFormula,separator);
+
         } catch (NoSuchElementException e) {
             // Console.readLine()이 "" 일 경우 0 출력
 
@@ -76,12 +78,22 @@ public class Application {
     }
 
     // String -> int 변환
-    private void convertStringToInt(String str){
-        if (str.isEmpty()) { return; }
+    private int convertStringToInt(String str){
+        if (str.isEmpty()) { return 0; }
         int number = Integer.parseInt(str.trim());
         if(number < 0){
             throw new IllegalArgumentException("양수만 입력 가능합니다.");
         }
+        return number;
+    }
+
+    // 수식 계산
+    private int calculateFormula(String value, String separator){
+        int sum = 0;
+        for (String number : value.split(separator)) {
+            sum += convertStringToInt(number);
+        }
+        return sum;
     }
 
     // 구분자가 기본인지 커스텀인지 판단
