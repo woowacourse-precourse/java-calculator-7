@@ -2,8 +2,19 @@ package calculator;
 
 public class PlusCalculator {
 
-    public static int calculate(String input) {
+    private PlusCalculator() {}
 
-        return 0;
+    public static int calculate(String input) {
+        String separatorRegex = CalculatorUtil.getSeparatorRegex(input);
+        String expression = CalculatorUtil.getExpression(input);
+        String[] operands = expression.split(separatorRegex);
+        int result = 0;
+        for (String operand : operands) {
+            if (operand.length() != 0)
+                result += Integer.parseInt(operand);
+        }
+
+        return result;
     }
+
 }
