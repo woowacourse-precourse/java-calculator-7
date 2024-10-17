@@ -1,4 +1,4 @@
-package DTO;
+package calculator.DTO;
 
 import java.util.ArrayList;
 

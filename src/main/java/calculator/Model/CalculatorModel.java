@@ -1,16 +1,15 @@
 package calculator.Model;
 
-import DTO.ParsedInputDTO;
-import calculator.Validator.InputValidator;
+import calculator.DTO.ParsedInputDTO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.regex.Pattern;
 
 public class CalculatorModel {
 
     public String createTokenSeparator(String customSeparator){
-        return customSeparator == null ? "[,;]" : "[,;" + customSeparator + "]";
+        return customSeparator == null ? ",|:" : ",|:|" + Pattern.quote(customSeparator);
     }
 
     private String getCustomSeparator(String input){
@@ -40,8 +39,9 @@ public class CalculatorModel {
         }
 
         String tokenSeparator = createTokenSeparator(customSeparator);
-        String[] tokens = input.split(tokenSeparator);
 
+
+        String[] tokens = input.split(tokenSeparator);
 
         for(String token : tokens){
             numbers.add(Integer.parseInt(token));

@@ -2,6 +2,7 @@ package calculator.Validator;
 
 import calculator.Model.CalculatorModel;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -43,20 +44,27 @@ public class InputValidator {
 
         if(input.startsWith("//")){
             customSeparator = input.substring(2, input.indexOf("\\n"));
+            input = input.substring(input.indexOf("\\n") + 2);
         }
 
         String divider = calculatorModel.createTokenSeparator(customSeparator);
 
         String[] numberTokens = input.split(divider);
 
+        System.out.println(divider);
+        System.out.println(input);
+        for(String i : numberTokens){
+            System.out.println(i);
+        };
+
         for(String token : numberTokens){
             token = token.trim();
             if(!isNumeric(token)){
-                return false;
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 
 

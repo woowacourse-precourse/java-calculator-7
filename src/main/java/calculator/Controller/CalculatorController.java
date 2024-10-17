@@ -1,5 +1,5 @@
 package calculator.Controller;
-import DTO.ParsedInputDTO;
+import calculator.DTO.ParsedInputDTO;
 import calculator.Model.CalculatorModel;
 import calculator.Validator.InputValidator;
 import calculator.View.InputView;
@@ -20,6 +20,9 @@ public class CalculatorController {
         boolean isValid = inputValidator.isValidInput(userInput);
 
         ParsedInputDTO parsedInputDTO = calculatorModel.parseInput(userInput);
+
+        System.out.println(parsedInputDTO.getNumbers());
+        System.out.println(parsedInputDTO.getSeparators());
 
     }
 }
