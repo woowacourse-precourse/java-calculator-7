@@ -7,6 +7,8 @@ import static calculator.common.constant.Constants.CUSTOM_SEPARATOR_SUFFIX;
 import static calculator.common.constant.Constants.SEPARATOR_SIZE;
 
 import calculator.common.util.CustomSeparatorParser;
+import calculator.common.util.OperandExtractor;
+import calculator.model.Operand;
 import calculator.model.Separators;
 import calculator.view.InputView;
 import java.util.List;
@@ -28,6 +30,10 @@ public class StringCalculator {
             separators.addSeparator(CustomSeparatorParser.extractSeparator(operationString));
             operationString = stripCustomSeparator(operationString);
         }
+
+        OperandExtractor operandExtractor = new OperandExtractor(separators);
+        List<Operand> operands = operandExtractor.extractOperands(operationString);
+
     }
 
     private String stripCustomSeparator(String operationString) {

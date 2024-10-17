@@ -11,4 +11,6 @@ public final class Constants {
     public static final String CUSTOM_SEPARATOR_SUFFIX = "\n";
 
     public static final int SEPARATOR_SIZE = 1;
+
+    public static final String REGEX_OR = "|";
 }
