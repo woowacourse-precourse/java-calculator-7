@@ -5,42 +5,29 @@ import camp.nextstep.edu.missionutils.Console;
 public class Application {
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String inputStr = Console.readLine();
+        String inputValue = Console.readLine().strip(); // 스페이스를 제외한 모든 공백 관련 문자 제거
 
         int sum = 0;
-        if(!inputStr.trim().isEmpty()){
-            String[] values = checkDelimiter(inputStr);
-            try {
-                for (String value : values[1].split(values[0])) {
-                    sum += checkIsInt(value);
-                }
-            } catch (IllegalArgumentException e) {
-                System.out.print("잘못된 값을 입력했습니다. 프로그램을 종료합니다.");
-                return;
-            }
-        }
+
+
         System.out.printf("결과 : %d", sum);
     }
 
-    private static String[] checkDelimiter(String inputStr){
-        String[] values = {",|:", inputStr};
+    private static String[] checkDelimiter(String inputValue){
+        String[] res = {",|:", inputValue};
 
-        if(inputStr.contains("//") && inputStr.contains("\\n")){
-            int newLineIdx = inputStr.lastIndexOf("\\n");
+        if(inputValue.contains("//") && inputValue.contains("\\n")){
+            int slashIdx = inputValue.indexOf("//");
+            int newLineIdx = inputValue.indexOf("\\n");
 
-            values[0] += "|"+inputStr.substring(2,newLineIdx);
-            values[1] = inputStr.substring(newLineIdx+2);
+            if(slashIdx!=0 || slashIdx>newLineIdx || newLineIdx-slashIdx>3){
+                throw new IllegalArgumentException("커스텀 구분자가 문자열 앞부분의 //와 \\n 사이에 위치하는지, 또는 커스텀 문자가 두 글자 이상인지 확인이 필요합니다.\n");
+            }
+
+            res[0] += "|\\"+inputValue.substring(slashIdx+2,newLineIdx);
+            res[1] = inputValue.substring(newLineIdx+2);
         }
 
-        return values;
-    }
-
-    private static int checkIsInt(String str) throws IllegalArgumentException{
-        int intValue = Integer.parseInt(str);
-        if(intValue > 0) {
-            return  intValue;
-        }else{
-            throw  new IllegalArgumentException();
-        }
+        return res;
     }
 }
