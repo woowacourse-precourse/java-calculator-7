@@ -3,8 +3,11 @@ package calculator.controller;
 import calculator.View;
 
 public class Controller {
-    private static final String START = "덧셈할 문자열을 입력해 주세요.";
-    private static final String RESULT = "결과 : ";
+    private final String START = "덧셈할 문자열을 입력해 주세요.";
+    private final String RESULT = "결과 : ";
+
+    private final String CUSTOM_REG_START = "//";
+    private final String CUSTOM_REG_END = "\\n";
 
     public void calculate() {
         printStartMessage();
@@ -30,20 +33,20 @@ public class Controller {
 
     private String extractRegex(String text) {
         var regex = ",|:";
-        if (!text.contains("//")) {
+        if (!text.contains(CUSTOM_REG_START)) {
             return regex;
         }
-        if (!text.contains("\\n")) {
+        if (!text.contains(CUSTOM_REG_END)) {
             throw new IllegalArgumentException();
         }
-        return regex + "|" + text.substring(2, text.indexOf("\\n"));
+        return regex + "|" + text.substring(2, text.indexOf(CUSTOM_REG_END));
     }
 
     private String[] splitNumbers(String text, String regex) {
-        if (!text.contains("\\n")) {
+        if (!text.contains(CUSTOM_REG_END)) {
             return text.split(regex);
         }
-        return text.substring(text.indexOf("\\n") + 2).split(regex);
+        return text.substring(text.indexOf(CUSTOM_REG_END) + CUSTOM_REG_END.length()).split(regex);
     }
 
     private void printStartMessage() {
