@@ -54,13 +54,11 @@ public class StringCalculator {
     }
 
     private static int calculateSum(String[] strings) {
-        return Arrays.stream(strings).mapToInt(
-                string -> {
-                    int number = toInteger(string);
-                    UserInputValidator.validatePositive(number);
-                    return number;
-                }
-        ).sum();
+        return Arrays.stream(strings).mapToInt(string -> {
+            int number = toInteger(string);
+            UserInputValidator.validatePositive(number);
+            return number;
+        }).sum();
     }
 
     private static Matcher getMatcher(String input) {
