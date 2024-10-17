@@ -15,9 +15,19 @@ public class Application {
         }
 
         DelimiterParser delimiterParser = new DelimiterParser(input);
-        String[] result = delimiterParser.splitString();
-        System.out.println(Arrays.toString(result));
+        String[] stringArray = delimiterParser.splitString();
+        int[] intArray = convertStringArrayToIntArray(stringArray);
+        System.out.println(Arrays.toString(intArray));
+    }
 
-        Console.close();
+    public static int[] convertStringArrayToIntArray(String[] stringArray) {
+        int[] intArray = new int[stringArray.length];
+
+        for (int i = 0; i < stringArray.length; i++) {
+            intArray[i] = Integer.parseInt(stringArray[i]);
+        }
+
+        return intArray;
+
     }
 }
