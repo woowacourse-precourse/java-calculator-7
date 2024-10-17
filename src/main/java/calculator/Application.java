@@ -39,6 +39,8 @@ public class Application {
         int limit = user_input.indexOf("\\n");
         if (limit == -1) {
             return user_input;
+        } else if (limit == 2) {
+            throw new IllegalArgumentException();
         }
 
         for (int i = 2; i < limit; i++) {
