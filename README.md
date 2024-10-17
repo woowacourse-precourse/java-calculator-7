@@ -16,11 +16,17 @@
             ㄴ calculator
                 ㄴ controller
                     ㄴ CalcController
-                        * calculator : make Instance to calculate
+                        * calculator : make Instance of calculatorCustom / calculator to calculate
                         - void run() : Run Main WorkFlow
                 ㄴ model
-                    ㄴ Calculator
-                        - int calcResult(String) : calculate the answer by delimiter
+                    ㄴ Calculator - Interface
+                        - int calculate() 
+                    ㄴ CalculatorImpl - Class
+                        * String string : User Input
+                        - int calculate() : calculate the answer by default-delimiter
+                    ㄴ CalculatorCustom - Class
+                        * String string : User Input
+                        - int calculate() : calculate the answer by custom-delimiter
                 ㄴ view
                     ㄴ View
                         - static String getStringFromUser() : Print announcement and Get String Input from user
@@ -61,6 +67,11 @@
 
 
     ✅ 구현 후 느낀점 / 추가 개선사항 
+    ㄴ 기존의 Model을 하나만 구성하는 것에 비해 각각의 Calculator가 계산을 한다는 역할은 동일하지만 세부 역할을 분할하였다.
+        ㄴ 확실히 인터페이스로 역할을 지정하고, 각각의 대상에 따라서 클래스를 따로 작성하니 뭔가 더 효율적으로 분리되어서 로직을 작성할 수 있었다.
+    ㄴ Calculate Method를 작성하면서 생각보다 오류 처리가 많이 발생한다는 것을 느꼈다. 
+        ㄴ 특히 커스텀 구분자의 경우 특수문자가 구분자로 들어오면 정규식에서 이스케이프 처리를 하지않으면 문제가 생기는 것을 파악했다.
+        ㄴ 추가적으로 커스텀 구분자가 있는 경우에는 기존의 Default 구분자는 역할을 하지 않을 것인지에 대한 고민을 해보아야겠다.
     
         
 ```
