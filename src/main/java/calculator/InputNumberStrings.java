@@ -11,7 +11,7 @@ public class InputNumberStrings {
     }
 
     private static void ValidateContainsDelimiter(String stringNumbers, DelimiterResult regex) {
-        String[] validDelimiters = generateValidateRegex(regex);
+        String[] validDelimiters = makeValidateRegex(regex);
 
         for (char c : stringNumbers.toCharArray()) {
             if (!Arrays.asList(validDelimiters).contains(String.valueOf(c)) && !Character.isDigit(c)
@@ -21,15 +21,15 @@ public class InputNumberStrings {
         }
     }
 
-    private static String[] generateValidateRegex(DelimiterResult regex) {
+    private static String[] makeValidateRegex(DelimiterResult regex) {
         String delimiterResult = regex.getDelimiterResult();
-        String delimiters = delimiterResult.substring(1, delimiterResult.length() - 1);
-        String[] validDelimiters = delimiters.split("");
-        return validDelimiters;
+        String delimiters = regex.getDelimiterResult().substring(1, delimiterResult.length() - 1);
+        return delimiters.split("");
     }
 
 
     public String[] split(String delimiterResult) {
         return stringNumbers.split(delimiterResult);
     }
+
 }

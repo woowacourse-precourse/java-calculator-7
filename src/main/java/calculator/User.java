@@ -4,7 +4,7 @@ public class User {
     private final String user;
 
     public User(String user) {
-        if(user.isBlank()){
+        if (user.isBlank()) {
             throw new IllegalArgumentException("공백만 입력할수 없습니다");
         }
 
@@ -17,4 +17,5 @@ public class User {
     public String getUser() {
         return user;
     }
+
 }

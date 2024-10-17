@@ -1,19 +1,19 @@
 package calculator;
 
 public class Number {
-    private String number;
+    private final String number;
 
     public Number(String number) {
         validate(number);
         this.number = number;
     }
 
-    private static void validate(String number) {
-        if(number.equals("\"\"")){
+    private void validate(String number) {
+        if (number.equals("\"\"")) {
             number = "0";
         }
 
-        if(!number.matches("\\d+")){
+        if (!number.matches("\\d+")) {
             throw new IllegalArgumentException("숫자 외의 문자는 입력할수 없습니디");
         }
 

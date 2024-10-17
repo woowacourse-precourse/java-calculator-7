@@ -10,4 +10,5 @@ public class DelimiterResult {
     public String getDelimiterResult() {
         return delimiterResult;
     }
+
 }
