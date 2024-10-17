@@ -50,8 +50,8 @@ public class StringAdditionCalculator {
     private String getFinalDelimiter() {
         // 기본 구분자 리스트
         List<String> basicDelimiters = Arrays.stream(BasicDelimiter.values())
-                .map(BasicDelimiter::getDelimiter)
-                .toList();
+            .map(BasicDelimiter::getDelimiter)
+            .toList();
 
         // 커스텀 구분자 추가 가능한 리스트
         delimiters = new ArrayList<>(basicDelimiters);
