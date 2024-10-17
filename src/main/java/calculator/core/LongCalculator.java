@@ -57,13 +57,13 @@ public class LongCalculator implements Calculator {
 			String mathematicalExpression = matcher.group(3);
 			return new String[] {separatorExpression, mathematicalExpression};
 		} else {
-			throw new IllegalArgumentException("유효하지 않은 입력값입니다.");
+			throw new IllegalArgumentException(CalculatorError.INVALID_INPUT.getMessage());
 		}
 	}
 
 	private void isValid(String expression) {
 		if (!VALID_PATTERN.matcher(expression).matches()) {
-			throw new IllegalArgumentException("유효하지 않은 입력값입니다.");
+			throw new IllegalArgumentException(CalculatorError.INVALID_INPUT.getMessage());
 		}
 	}
 
