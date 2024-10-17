@@ -1,43 +1,38 @@
 package calculator;
 
-import java.lang.reflect.Type;
+
 
 public class Calculator {
 
-
-
-
-
-    public int add(String input) {
+    public int add(String input) throws IllegalArgumentException{ // 런타임 예외는 따로 선언하지 않아도 되지만 명시적으로 예외 발생 가능성 명시
         int sum = 0;
 
         if(input.isEmpty()){
             return sum;
         }
-        boolean isNewDelimiter = checkNewDelimiter(input);
+        boolean CustomDelimiter = InputUtils.isCustomDelimiter(input);
 
         String[] stringNumbers;
-        if(isNewDelimiter){
-            String newDelimiter = Character.toString(input.charAt(2));
-            input = input.substring(5);
-            stringNumbers = input.split(newDelimiter);
+
+        if(CustomDelimiter){
+            String customDelimiter = InputUtils.extractDelimiter(input);
+            input = InputUtils.extractNumbers(input);
+            stringNumbers = input.split(customDelimiter);
         }else{
-            stringNumbers = InputUtils.splitInputs(input);
+            stringNumbers = InputUtils.splitInputs(input, InputUtils.DEFAULT_DELIMITER);
         }
+
         int[] numbers = InputUtils.StringToNumber(stringNumbers);
 
-        for(int num : numbers){
-           if(num < 0){
-                throw new IllegalArgumentException("잘못된 입력을 하셨습니다.");
-            }
-
-            sum += num;
+        for(int number : numbers){
+            sum += number;
         }
+
         return sum;
     }
 
 
-    private boolean checkNewDelimiter(String input){
-        return input.startsWith("//");
-    }
+
+
+
 }
