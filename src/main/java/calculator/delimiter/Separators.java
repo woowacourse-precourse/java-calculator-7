@@ -9,8 +9,19 @@ import java.util.stream.Collectors;
 
 public class Separators {
 
-    private final Set<Separator> separatorStore = new HashSet<>(
-            Set.of(new Separator(':'), new Separator(',')));
+    public static final Set<Separator> DEFAULT_SEPARATORS = Set.of(
+            new Separator(':'),
+            new Separator(','));
+
+    private final Set<Separator> separatorStore;
+
+    public Separators(Set<Separator> separatorStore) {
+        this.separatorStore = separatorStore;
+    }
+
+    public static Separators createCalculatorSeparators() {
+        return new Separators(new HashSet<>(DEFAULT_SEPARATORS));
+    }
 
     public void add(Separator separator) {
         separatorStore.add(separator);

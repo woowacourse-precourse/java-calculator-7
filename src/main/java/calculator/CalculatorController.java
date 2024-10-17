@@ -24,7 +24,7 @@ public class CalculatorController {
     public void calculate() {
         String input = inputView.inputString();
 
-        Separators separators = new Separators();
+        Separators separators = Separators.createCalculatorSeparators();
 
         while (customSeparatorManager.add(input, separators)) {
             input = customSeparatorManager.extractAfterCustomSeparator(input);
