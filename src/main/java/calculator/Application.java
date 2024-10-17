@@ -18,7 +18,6 @@ public class Application {
 
     private static final InputHandler INPUT_HANDLER = new ConsoleInputHandler();
     private static final OutputHandler OUTPUT_HANDLER = new ConsoleOutputHandler();
-    private static final DelimiterChecker DELIMITER_CHECKER = new DelimiterChecker();
 
     public static void main(String[] args) {
         // TODO: 프로그램 구현
@@ -27,9 +26,11 @@ public class Application {
         int result = 0;
         List<String> defaultDelimiters = List.of(",", ":");
         Delimiter delimiter = new Delimiter(defaultDelimiters);
+        DelimiterChecker delimiterChecker = new DelimiterChecker("//", "\n");
+
         if (inputIsNotEmpty(input)) {
             DelimiterHandler delimiterHandler;
-            if (isCustomDelimiter(input)) {
+            if (isCustomDelimiter(input, delimiterChecker)) {
                 String customDelimiter = extractCustomDelimiter(input);
                 delimiter.addDelimiter(customDelimiter);
                 delimiterHandler = new CustomDelimiterHandler();
@@ -70,8 +71,8 @@ public class Application {
         return INPUT_HANDLER.getUserInput();
     }
 
-    private static boolean isCustomDelimiter(String input) {
-        return DELIMITER_CHECKER.isCustomDelimiter(input);
+    private static boolean isCustomDelimiter(String input, DelimiterChecker delimiterChecker) {
+        return delimiterChecker.isCustomDelimiter(input);
     }
 
     private static boolean inputIsNotEmpty(String input) {

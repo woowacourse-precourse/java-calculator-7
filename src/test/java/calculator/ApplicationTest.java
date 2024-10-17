@@ -40,7 +40,9 @@ class ApplicationTest extends NsTest {
         String userInput = "1,2,3";
         userInput = getUserInput(userInput); // 콘솔 환경 적용
 
-        DelimiterChecker delimiterChecker = new DelimiterChecker();
+        String prefix = "//";
+        String suffix = "\n";
+        DelimiterChecker delimiterChecker = new DelimiterChecker(prefix, suffix);
 
         // when
         boolean isCustomDelimiter = delimiterChecker.isCustomDelimiter(userInput);
@@ -56,7 +58,9 @@ class ApplicationTest extends NsTest {
         String userInput = "1,2:3";
         userInput = getUserInput(userInput); // 콘솔 환경 적용
 
-        DelimiterChecker delimiterChecker = new DelimiterChecker();
+        String prefix = "//";
+        String suffix = "\n";
+        DelimiterChecker delimiterChecker = new DelimiterChecker(prefix, suffix);
 
         // when
         boolean isCustomDelimiter = delimiterChecker.isCustomDelimiter(userInput);
@@ -72,7 +76,9 @@ class ApplicationTest extends NsTest {
         String userInput = "//t\\n1t2t3";
         userInput = getUserInput(userInput); // 콘솔 환경 적용
 
-        DelimiterChecker delimiterChecker = new DelimiterChecker();
+        String prefix = "//";
+        String suffix = "\n";
+        DelimiterChecker delimiterChecker = new DelimiterChecker(prefix, suffix);
 
         // when
         boolean isCustomDelimiter = delimiterChecker.isCustomDelimiter(userInput);
