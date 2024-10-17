@@ -15,14 +15,14 @@ public class NumbersTest {
 	@DisplayName("숫자는 양수이어야 한다.")
 	@ParameterizedTest
 	@MethodSource("negativeOrZeroNumbers")
-	void validatePositive(List<Integer> invalidData) {
+	void validatePositive(List<Long> invalidData) {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> Numbers.from(invalidData));
 	}
 
 	static Stream<Arguments> negativeOrZeroNumbers() {
 		return Stream.of(
-			Arguments.of(Arrays.asList(1, 2, -3)),
-			Arguments.of(Arrays.asList(1, 0))
+			Arguments.of(Arrays.asList(1L, 2L, -3L)),
+			Arguments.of(Arrays.asList(1L, 0L))
 		);
 	}
 }

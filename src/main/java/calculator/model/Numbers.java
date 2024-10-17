@@ -5,20 +5,20 @@ import java.util.List;
 import calculator.constant.ErrorMessage;
 
 public class Numbers {
-	private final static int MIN = 1;
+	private final static long MIN = 1;
 
-	private final List<Integer> numbers;
+	private final List<Long> numbers;
 
-	private Numbers(List<Integer> numbers) {
+	private Numbers(List<Long> numbers) {
 		validatePositive(numbers);
 		this.numbers = numbers;
 	}
 
-	public static Numbers from(List<Integer> numbers) {
+	public static Numbers from(List<Long> numbers) {
 		return new Numbers(numbers);
 	}
 
-	private void validatePositive(List<Integer> numbers) {
+	private void validatePositive(List<Long> numbers) {
 		numbers.stream()
 			.filter(number -> number < MIN)
 			.findAny()
