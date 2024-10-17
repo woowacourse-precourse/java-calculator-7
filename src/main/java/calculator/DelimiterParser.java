@@ -11,4 +11,12 @@ public class DelimiterParser {
         }
         return DELIMITERS;
     }
+
+    public String extractNumbers(String input){
+        if(input.startsWith("//")){
+            int index = input.indexOf("\\n");
+            return input.substring(index + 2);
+        }
+        return input;
+    }
 }

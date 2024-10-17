@@ -16,7 +16,9 @@ public class StringAdd {
         }
 
         String delimiters = delimiterParser.parseDelimiter(input);
+        String numbers = delimiterParser.extractNumbers(input);
         System.out.println(delimiters);
+        System.out.println(numbers);
 
         return 0;
     }
