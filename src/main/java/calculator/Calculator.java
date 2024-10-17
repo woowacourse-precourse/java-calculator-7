@@ -27,12 +27,12 @@ public class Calculator {
     }
 
     public void on() {
-        String input = getinput();
+        String input = getInput();
         int calculation.calculate(input);
         output.print(calculation);
     }
 
-    public String getinput() {
-        return Input.getinput();
+    public String getInput() {
+        return input.getInput();
     }
 }
