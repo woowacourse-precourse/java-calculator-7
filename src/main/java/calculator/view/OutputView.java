@@ -1,9 +1,9 @@
 package calculator.view;
 
-import calculator.dto.CalculationResultDTO;
+import calculator.dto.response.CalculatorResponse;
 
 public class OutputView {
-    public static void printResult(CalculationResultDTO resultDTO) {
-        System.out.printf(ViewMessages.RESULT_MESSAGE + resultDTO.result());
+    public static void printResult(CalculatorResponse response) {
+        System.out.printf(ViewMessages.RESULT_MESSAGE + response.result());
     }
 }
