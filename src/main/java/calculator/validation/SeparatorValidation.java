@@ -4,6 +4,8 @@ import calculator.number.CustomPatternMaker;
 
 public class SeparatorValidation {
 
+    private static final String NOT_SPECIAL_CHARACTERS = "^\\wㄱ-ㅎ가-힣,:\\-";
+
     public static void separator(String input) {
         if (isNotSeparator(input)) {
             throw new IllegalArgumentException("잘못된 구분자입니다.");
@@ -43,13 +45,13 @@ public class SeparatorValidation {
     }
 
     private static boolean notContainSpecialCharacters(String input) {
-        return !input.matches("[^\\w가-힣,:\\-]");
+        return !input.matches("[" + NOT_SPECIAL_CHARACTERS + " ]+");
     }
 
     private static boolean isNotCustomPattern(String input) {
         String customPattern = CustomPatternMaker.getCustomPattern(input);
         customPattern = customPattern.replaceAll("\\|", "");
-        String pattern = "[^\\wㄱ-ㅎ가-힣,:\\-" + customPattern + " ]";
+        String pattern = "[" + NOT_SPECIAL_CHARACTERS + customPattern + " ]+";
         input = input.substring(input.indexOf("\\n") + 2);
         String[] inputStrings = input.split("");
         for (String inputString : inputStrings) {
