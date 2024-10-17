@@ -14,7 +14,7 @@ public class SplitService {
 
     public List<String> split(String input) {
         String numbers = addDelimiter(input);
-        String[] splitNumbers = numbers.split(delimiterSet.toString());
+        String[] splitNumbers = numbers.split(delimiterSetToString());
         return Arrays.stream(splitNumbers).toList();
     }
 
@@ -28,8 +28,12 @@ public class SplitService {
         }
         return input;
     }
-
-    public void printSet() {
-        System.out.println(delimiterSet);
+    private String delimiterSetToString(){
+        StringBuilder builder = new StringBuilder();
+        for (String delimiter : delimiterSet) {
+            builder.append(delimiter).append("|");
+        }
+        builder.setLength(builder.length()-1);
+        return builder.toString();
     }
 }
