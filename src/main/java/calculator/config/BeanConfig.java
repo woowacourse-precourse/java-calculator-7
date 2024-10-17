@@ -61,11 +61,9 @@ public class BeanConfig {
         // specificClass의 모든 생성자를 배열로 반환한 후, 첫 번째 생성자([0])를 가져오기
         // -> 사실 이 부분은 생성자가 여러 개일 수도 있는 상황에 대응하지 못하기 때문에 한계가 존재함
         Constructor<?> constructor = specificClass.getConstructors()[0];
-
         Class<?>[] parameterTypes = constructor.getParameterTypes();
 
         Object[] dependencies = resolveDependencies(parameterTypes);
-
         Object beanInstance = constructor.newInstance(dependencies);
         registeredBeans.put(clazz, beanInstance);
 
