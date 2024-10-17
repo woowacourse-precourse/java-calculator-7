@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class Application {
     public static int stringCalculator(String input) {
-        if(input == null || input.isEmpty()) {
+        if(input == null || input.isEmpty() || input.isBlank()) {
             return 0;
         }
 
