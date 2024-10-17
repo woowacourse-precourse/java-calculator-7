@@ -23,7 +23,7 @@ public class StringAddCalculator {
     }
 
     private static boolean isBlank(final String inputValue) {
-        return inputValue == null || inputValue.isBlank();
+        return inputValue == null || inputValue.isEmpty();
     }
 
     private String[] splitStringByRegx(final String inputValue) {
