@@ -20,6 +20,16 @@ public class Application {
             }
         }
 
-        String[] nums = input_str.split(delimiter);
+        String[] str_nums = input_str.split(delimiter);
+        for(String str_num : str_nums){
+            try{
+                int int_num = Integer.parseInt(str_num.trim());
+                if (int_num < 0) {
+                    throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+                }
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("잘못된 숫자 형태입니다.");
+            }
+        }
     }
 }
