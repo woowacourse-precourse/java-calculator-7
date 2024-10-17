@@ -1,5 +1,7 @@
 package calculator.service.separator;
 
+import calculator.domain.number.Number;
+import calculator.domain.number.Numbers;
 import calculator.domain.separator.BasicSeparator;
 import calculator.domain.separator.CustomSeparator;
 import calculator.domain.separator.Separator;
@@ -11,11 +13,11 @@ public class SeparatorService {
     private static final String PREFIX_CUSTOM_SEPARATOR = "//";
     private static final String SUFFIX_CUSTOM_SEPARATOR = "\\\\n";
 
-    public List<String> separate(String input) {
-        return divideNumber(generate(input), input);
+    public Numbers separate(String input) {
+        return new Numbers(divideNumber(generate(input), input));
     }
 
-    private List<String> divideNumber(Separator separator, String value) {
+    private List<Number> divideNumber(Separator separator, String value) {
         return separator.separate(value);
     }
 

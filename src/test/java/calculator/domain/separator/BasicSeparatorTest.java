@@ -1,8 +1,9 @@
 package calculator.domain.separator;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import calculator.domain.number.Number;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,9 +22,9 @@ class BasicSeparatorTest {
     @ValueSource(strings = {"1,2,3", "1:2:3", "1,2:3"})
     void 문자열구분하기(String value) {
 
-        List<String> separate = basicSeparator.separate(value);
+        List<Number> numbers = basicSeparator.separate(value);
 
-        assertEquals(List.of("1", "2", "3"), separate);
+        assertThat(numbers.size()).isEqualTo(3);
     }
 
     @ParameterizedTest

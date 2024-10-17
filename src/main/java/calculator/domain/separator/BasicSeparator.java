@@ -1,8 +1,8 @@
 package calculator.domain.separator;
 
+import calculator.domain.number.Number;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class BasicSeparator implements Separator {
 
@@ -10,17 +10,18 @@ public class BasicSeparator implements Separator {
     private static final String COLON = ":";
 
     @Override
-    public List<String> separate(String value) {
+    public List<Number> separate(String value) {
         return convert(validate(value));
     }
 
-    private List<String> convert(String value) {
-        if (hasSeparatorIn(value)) {
-            return Arrays.stream(value.split(COMMA + "|" + COLON))
-                    .collect(Collectors.toList());
+    private List<Number> convert(String values) {
+        if (hasSeparatorIn(values)) {
+            return Arrays.stream(values.split(COMMA + "|" + COLON))
+                    .map(Number::new)
+                    .toList();
         }
 
-        return List.of(value);
+        return List.of(new Number(values));
     }
 
     private boolean hasSeparatorIn(String value) {
