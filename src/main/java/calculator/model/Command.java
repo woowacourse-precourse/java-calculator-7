@@ -1,4 +1,4 @@
-package calculator;
+package calculator.model;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,8 +22,8 @@ public record Command(
         return new Command(header, content);
     }
 
-    public List<Integer> extractNumbers() {
+    public List<Number> extractNumbers() {
         String splitter = String.format("[%s,:]", header);
-        return Arrays.stream(content.split(splitter)).mapToInt(Integer::parseInt).boxed().toList();
+        return Arrays.stream(content.split(splitter)).map(Number::from).toList();
     }
 }
