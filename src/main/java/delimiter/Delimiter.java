@@ -14,7 +14,7 @@ public class Delimiter {
                 String customDelimiter = Pattern.quote(matcher.group(1));
                 String numbers = matcher.group(2);
                 return numbers.split(customDelimiter);
-            } else {
+            }else {
                 throw new IllegalArgumentException("잘못된 형식입니다.");
             }
         }

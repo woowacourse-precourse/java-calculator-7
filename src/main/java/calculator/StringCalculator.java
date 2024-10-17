@@ -9,14 +9,14 @@ import java.util.List;
 
 public class StringCalculator {
     private final Delimiter delimiter;
-    private final IntegerParser parser;
-    private final IntegerValidator validator;
+    private final IntegerParser integerParser;
+    private final IntegerValidator integerValidator;
     private final Calculator calculator;
 
     public StringCalculator() {
         this.delimiter = new Delimiter();
-        this.parser = new IntegerParser();
-        this.validator = new IntegerValidator();
+        this.integerParser = new IntegerParser();
+        this.integerValidator = new IntegerValidator();
         this.calculator = new Calculator();
     }
 
@@ -29,8 +29,8 @@ public class StringCalculator {
         List<Integer> validNumbers = new ArrayList<>();
 
         for (String number : numbers) {
-            int parsedNumber = parser.parse(number.trim());
-            validator.validate(parsedNumber);
+            int parsedNumber = integerParser.parse(number.trim());
+            integerValidator.validate(parsedNumber);
             validNumbers.add(parsedNumber);
         }
 

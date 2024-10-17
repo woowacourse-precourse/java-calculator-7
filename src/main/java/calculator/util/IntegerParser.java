@@ -5,6 +5,10 @@ public class IntegerParser {
         if (number.isEmpty()) {
             return 0;
         }
-        return Integer.parseInt(number);
+        try {
+            return Integer.parseInt(number);
+        }catch (NumberFormatException e) {
+            throw new NumberFormatException(number);
+        }
     }
 }

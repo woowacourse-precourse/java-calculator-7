@@ -18,5 +18,11 @@ class IntegerParserTest {
         assertThat(parser.parse("")).isEqualTo(0);
     }
 
+    @Test
+    void 커스텀_문자가_아닌_문자가_파싱된_테스트() {
+        assertThatThrownBy(() -> parser.parse("2a3"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 }
 

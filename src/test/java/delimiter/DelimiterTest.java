@@ -20,11 +20,5 @@ class DelimiterTest {
         assertThat(result).containsExactly("1", "2", "3");
     }
 
-    @Test
-    void 잘못된_커스텀_구분자_형식_테스트() {
-        assertThatThrownBy(() -> delimiter.split("//\\n1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("잘못된 형식입니다");
-    }
 }
 

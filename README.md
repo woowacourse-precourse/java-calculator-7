@@ -12,3 +12,7 @@ Feature
 - [ ] 숫자를 더하는 Calculator
 
 - [ ] 최종적으로 계산을 수행하는 StringCalculator
+
+Refactoring
+
+- [ ] Delimiter에서 커스텀문자가 아닌 문자가 파싱된 경우를 예외처리 하는 로직을 IntegerParser에 추가했습니다.  
