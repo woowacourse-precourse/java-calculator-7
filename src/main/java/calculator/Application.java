@@ -36,4 +36,8 @@ public class Application {
         String[] arr = input.split("//|\\n");
         return arr[1];
     }
+
+    public String removeSeparatorInitializer(String input) {
+        return input.substring(3 + getCustomSeparator(input).length());
+    }
 }
