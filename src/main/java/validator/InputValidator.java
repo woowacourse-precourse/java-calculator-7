@@ -12,9 +12,16 @@ public class InputValidator {
     private static final String MINUS_NUMBER = "-";
 
     public static void checkInput(final String input) {
+        hasNumberAndSeparator(input);
         hasNumber(input);
         hasSeparator(input);
         hasMinusNumber(input);
+    }
+
+    private static void hasNumberAndSeparator(final String inputs) {
+        if(inputs.length() == 0 || inputs.contains(" ")) {
+            throw new IllegalArgumentException("올바른 구분자와 양수를 입력해야 합니다.");
+        }
     }
 
     private static void hasNumber(final String input) {
