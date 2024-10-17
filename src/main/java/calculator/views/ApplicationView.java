@@ -8,7 +8,7 @@ public class ApplicationView {
 
     public static String getInput() {
         System.out.println(INPUT_PROMPT);
-        return Console.readLine();
+        return Console.readLine().strip();
     }
 
     public static void printOutput(int sum) {
