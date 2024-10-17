@@ -1,10 +1,9 @@
 package calculator;
 
+import java.util.Arrays;
+
 public class OutputHandler {
-    public String getOutPut(String input) {
-        if (input.isEmpty()) {
-            return "결과 : 0";
-        }
-        return "결과 : " + input;
+    public String getOutPut(int[] input) {
+        return "결과 : " + Arrays.toString(input);
     }
 }

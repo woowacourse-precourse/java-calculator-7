@@ -1,17 +1,18 @@
 package calculator;
 
+import java.util.stream.Stream;
+
 public class StringParser {
     public int[] parse(String input) {
 
-        String delimiter = ", | :";
-        String numbers = input;
-
+        String delimiter = "[,:]";
         if (input.startsWith("//")) {
-            int delimiterEndIndex = input.indexOf('\n');
+            int delimiterEndIndex = input.indexOf("\\n");
             String customDelimiter = input.substring(2, delimiterEndIndex);
-            delimiter = customDelimiter + delimiter;
-            numbers = input.substring(delimiterEndIndex + 1);
+            delimiter = "[" + customDelimiter + "," + ":" + "]";
+            String numbersStr = input.substring(delimiterEndIndex + 2);
+            return Stream.of(numbersStr.split(delimiter)).mapToInt(Integer::parseInt).toArray();
         }
-        return null;
+        return Stream.of(input.split(delimiter)).mapToInt(Integer::parseInt).toArray();
     }
 }
