@@ -7,17 +7,17 @@ public class Calculator {
 
     public Number add(List<Number> numbers) {
         BigDecimal sum = BigDecimal.ZERO;
-        boolean hasFloatingPoint = false;
+        boolean containsFloat = false;
 
         for (Number number : numbers) {
             if (number instanceof Double) {
-                hasFloatingPoint = true;
+                containsFloat = true;
             }
 
             sum = sum.add(BigDecimal.valueOf(number.doubleValue()));
         }
 
-        if (hasFloatingPoint) {
+        if (containsFloat) {
             return sum.stripTrailingZeros();
         } else {
             return sum.intValue();
