@@ -17,7 +17,7 @@ public class ApplicationController {
 
         if (userInput.startsWith(CUSTOM_PREFIX)) {
             separatorModel.addSeparator(userInput);
-            userInput = separatorModel.removeSeparatorPrefix((userInput));
+            userInput = separatorModel.removeCustomPrefix((userInput));
         }
 
         String separatorRegex = separatorModel.getRegex();
