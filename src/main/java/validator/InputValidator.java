@@ -74,15 +74,15 @@ public class InputValidator {
         }
     }
 
-    private static void checkMinusNumber(final char firstValue, final char secondValue) {
-        if (Character.isDigit(firstValue)) {
-            if (!isMinusDelimiter && MINUS_DELIMITER.equals(String.valueOf(secondValue))) {
+    private static void checkMinusNumber(final char currentValue, final char beforeValue) {
+        if (Character.isDigit(currentValue)) {
+            if (!isMinusDelimiter && MINUS_DELIMITER.equals(String.valueOf(beforeValue))) {
                 throw new IllegalArgumentException("양수를 입력해야 합니다.");
             }
         }
 
-        if (MINUS_DELIMITER.equals(String.valueOf(firstValue))) {
-            if (isMinusDelimiter && MINUS_DELIMITER.equals(String.valueOf(secondValue))) {
+        if (MINUS_DELIMITER.equals(String.valueOf(currentValue))) {
+            if (isMinusDelimiter && MINUS_DELIMITER.equals(String.valueOf(beforeValue))) {
                 throw new IllegalArgumentException("양수를 입력해야 합니다,");
             }
         }
