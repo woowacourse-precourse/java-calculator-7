@@ -14,6 +14,13 @@ public class Calculator {
         if (input.startsWith("//")) {
             String customDelimiter = String.valueOf(input.charAt(2));
             String[] numbers = input.substring(5).split(customDelimiter);
+            calculateSum(numbers);
+        }
+    }
+
+    private void calculateSum(String[] numbers) {
+        for (String number : numbers) {
+            result += Integer.parseInt(number);
         }
     }
 
