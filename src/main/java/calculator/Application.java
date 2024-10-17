@@ -12,12 +12,19 @@ public class Application {
         }
     }
 
+    private static void checkCustomStyle(String str) {
+        if (!str.startsWith("//")) {
+            throw new IllegalArgumentException("커스텀 구분자의 입력 양식이 맞지 않습니다.");
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
         int sum = 0;
 
         if (input.contains("//") && input.contains("\\n")) {
+            checkCustomStyle(input);
             String custom = input.substring(input.indexOf("//") + 2, input.indexOf("\\n"));
             String newInput = input.substring(input.indexOf("\\n") + 2);
             String replacedInput = newInput.replace(custom, ",");
