@@ -7,7 +7,18 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
         // System.out.println("입력된 문자열 : " + input); // 입력된 문자열 확인용 코드
-
+        if (input.isEmpty()) {
+            System.out.println("결과 : 0");
+            return;
+        }
+        try {
+            validateInput(input);  // 유효성 검사
+            int[] numbers = extractNumbers(input);  // 숫자 분리
+            int result = addNumbers(numbers);
+            System.out.println("결과 : " + result);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private static int addNumbers(int[] input) {
@@ -17,7 +28,6 @@ public class Application {
         }
         return total;
     }
-
 
     private static void validateInput(String input) {
         // 유효성 case 1: "//"로 시작하는 경우
@@ -37,8 +47,6 @@ public class Application {
                 }
             }
         }
-
-
     }
 
     private static int[] extractNumbers(String input) {
