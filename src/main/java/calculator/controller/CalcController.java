@@ -1,11 +1,11 @@
 package calculator.controller;
 
-import calculator.model.Calculator;
+import calculator.model.Calculator1;
 import calculator.view.View;
 
 public class CalcController {
 
-    private final Calculator calculator = new Calculator();
+    private final Calculator1 calculator = new Calculator1();
 
     public void run(){
         String userInput = View.getStringFromUser();
