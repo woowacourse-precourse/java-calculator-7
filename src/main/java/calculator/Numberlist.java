@@ -20,4 +20,7 @@ public class Numberlist {
         temp = 0;
     }
 
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
 }

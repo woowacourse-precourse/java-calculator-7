@@ -32,6 +32,7 @@ public class Tokenizer {
 
         isError.checkError(divider.getProblemMatcher());
 
+        numbers = numberlist.getNumbers();
         return numbers;
     }
 }

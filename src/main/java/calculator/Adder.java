@@ -3,11 +3,9 @@ package calculator;
 import java.util.*;
 
 public class Adder {
-    List<Integer> numberlist;
     int result;
 
     public Adder() {
-        numberlist = new ArrayList<Integer>();
         result = 0;
     }
 

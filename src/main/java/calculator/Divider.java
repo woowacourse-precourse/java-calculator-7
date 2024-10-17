@@ -12,7 +12,7 @@ public class Divider {
         divider = new ArrayList<Character>();
         divider.add(',');
         divider.add(':');
-        problemMatcher = new ArrayList<Character>()
+        problemMatcher = new ArrayList<Character>();
 
         slashstarted = false;
         append = false;
