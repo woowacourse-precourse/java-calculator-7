@@ -19,17 +19,17 @@ public class StringCalculator {
     }
 
     private int calculateStrings(List<String> numbers) {
+        int sum = INITIAL_NUMBER;
         try {
-            int sum = INITIAL_NUMBER;
             for (String number : numbers) {
                 int realNumber = Integer.parseInt(number);
                 validateMinusNumber(realNumber);
                 sum += realNumber;
             }
-            return sum;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(EXCEPTION_STRING_NUMBER);
         }
+        return sum;
     }
 
     private void validateMinusNumber(int number) {
