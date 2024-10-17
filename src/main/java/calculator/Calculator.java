@@ -48,33 +48,32 @@ public class Calculator implements AutoCloseable {
     private class DelimiterManager {
 
         private static final int MAX_CUSTOM_DELIMITERS = 3;
-        private String[] delimiters;
+        private String delimiters;
         private int count;
 
         private DelimiterManager() {
-            delimiters = new String[2];
-            delimiters[0] = ",";
-            delimiters[1] = ":";
+            String delimiters = ",:";
             count = 2;
+//            delimiters = new String[2];
+//            delimiters[0] = ",";
+//            delimiters[1] = ":";
         }
 
         public void addDelimiter(String delimiter) {
-
-            if (delimiter.equals(",") || delimiter.equals(":")) {
-                throw new IllegalArgumentException("Custom delimiter cannot be a default delimiter (',' or ':').");
-            }
 
             if (count >= MAX_CUSTOM_DELIMITERS) {
                 throw new IllegalArgumentException("Only one custom delimiter is allowed.");
             }
 
-            String[] newDelimiters = new String[count + 1];
-            System.arraycopy(delimiters, 0, newDelimiters, 0, count);
-            delimiters = newDelimiters;
-            delimiters[count++] = delimiter;
+            if (delimiters.contains(delimiter)) {
+                throw new IllegalArgumentException("Custom delimiter cannot be a default delimiter (',' or ':').");
+            }
+
+            delimiters += delimiter;
+            count++;
         }
 
-        public String[] getDelimiters() {
+        public String getDelimiters() {
             return delimiters;
         }
     }
