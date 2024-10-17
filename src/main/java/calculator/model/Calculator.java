@@ -5,36 +5,47 @@ public class Calculator {
 
     /**
      * 수식을 입력받아 덧셈을 진행합니다.
+     *
      * @param input 사용자에게 입력 받은 수식
      * @return 덧셈 결과
      */
-    public Integer add(String input){
-        if (isEmpty(input)) return 0;
+    public Integer add(String input) {
+        if (isEmpty(input)) {
+            return 0;
+        }
 
         if (checkCustomSeparator(input) && isValidCustomDelimiterFormat(input)) {
             String customSeparator = getCustomSeparator(input);
             String newCalculation = processCustomSeparator(input, customSeparator);
 
-            if (isNegative(newCalculation) || isNotNumber(newCalculation)) return -1;
-            if (isInvalidDelimiter(newCalculation)) return -1;
+            if (isNegative(newCalculation) || isNotNumber(newCalculation)) {
+                return -1;
+            }
+            if (isInvalidDelimiter(newCalculation)) {
+                return -1;
+            }
             return calculate(parseCustomSeparator(newCalculation));
         }
-        if (isInvalidDelimiter(input)) return -1;
+        if (isInvalidDelimiter(input)) {
+            return -1;
+        }
         return calculate(parseCustomSeparator(input));
     }
 
 
     /**
      * 입력 받은 수식이 커스텀 구분자를 포함하고 있는지 확인합니다.
+     *
      * @param input 사용자에게 입력 받은 수식
      * @return 커스텀 구분자를 포함하면 true, 아니면 false
      */
-    private boolean checkCustomSeparator(String input){
+    private boolean checkCustomSeparator(String input) {
         return input.startsWith("//");
     }
 
     /**
      * 커스텀 구분자 입력 시, 수식과 커스텀 구분자를 2개의 부분으로 분리합니다.
+     *
      * @param input 입력 받은 기존 상태의 수식
      * @return 분리된 수식
      */
@@ -44,44 +55,49 @@ public class Calculator {
 
     /**
      * 커스텀 구분자를 가져옵니다.
+     *
      * @param input 사용자에게 입력 받은 수식
      * @return 커스텀 구분자
      */
-    private String getCustomSeparator(String input){
+    private String getCustomSeparator(String input) {
         String[] parts = getParts(input);
         String customSeparator = parts[0].substring(2);
-        if (customSeparator.length() != 1)
+        if (customSeparator.length() != 1) {
             throw new IllegalArgumentException("커스텀 구분자는 1자리여야 합니다.");
+        }
         return customSeparator;
     }
 
     /**
      * 커스텀 구분자를 정규 구분자인 ","로 변환합니다.
+     *
      * @param input 입력 받은 기존 상태의 수식
      * @return 변환된 수식
      */
-    private String processCustomSeparator(String input, String customSeparator){
+    private String processCustomSeparator(String input, String customSeparator) {
         String[] parts = getParts(input);
         return parts[1].replace(customSeparator, ",");
     }
 
     /**
      * 정규 구분자만 포함되어 있는 식을 정규 구분자를 기준으로 숫자만 파싱합니다.
+     *
      * @param input 정규 구분자만 포함된 수식
      * @return 수식에 포함된 숫자
      */
-    private String[] parseCustomSeparator(String input){
+    private String[] parseCustomSeparator(String input) {
         return input.split(",|;");
     }
 
     /**
      * 파싱이 된 수식을 통해 덧셈을 계산합니다.
+     *
      * @param numbers 파싱된 문자열 타입의 숫자들
      * @return 수들의 합
      */
-    private Integer calculate(String[] numbers){
+    private Integer calculate(String[] numbers) {
         int result = 0;
-        for (String num : numbers){
+        for (String num : numbers) {
             result += Integer.parseInt(num);
         }
         return result;
@@ -92,6 +108,7 @@ public class Calculator {
 
     /**
      * 입력값이 비어있는지 확인합니다.
+     *
      * @param input 사용자에게 입력 받은 수식
      * @return 입력값이 비어있으면 true, 아니면 false
      * @throws IllegalArgumentException 입력값이 비어있는 경우 예외 발생
@@ -102,6 +119,7 @@ public class Calculator {
 
     /**
      * 입력값에 음수가 존재하는지 확인합니다.
+     *
      * @param input 사용자에게 입력 받은 수식
      * @return 입력값이 음수이면 true
      * @throws IllegalArgumentException 음수가 존재할 경우 예외 발생
@@ -115,6 +133,7 @@ public class Calculator {
 
     /**
      * 입력값에 숫자가 아닌 문자가 존재하는지 확인합니다.
+     *
      * @param input 사용자에게 입력 받은 수식
      * @return 입력값에 숫자가 아닌 문자가 존재하면 true
      * @throws IllegalArgumentException 숫자 이외의 문자가 존재할 경우 예외 발생
@@ -128,6 +147,7 @@ public class Calculator {
 
     /**
      * 커스텀 구분자가 정확히 입력되었는지 확인합니다.
+     *
      * @param input 사용자에게 입력 받은 수식
      * @return 커스텀 구분자가 정확히 입력되었으면 true
      * @throws IllegalArgumentException 커스텀 구분자가 정확히 입력되지 않았을 경우 예외 발생
@@ -141,6 +161,7 @@ public class Calculator {
 
     /**
      * 지정된 구분자 외의 문자가 포함되었는지 확인합니다.
+     *
      * @param input 사용자에게 입력 받은 수식
      * @return 지정된 구분자 외의 문자가 포함되지 않은 경우 false
      * @throws IllegalArgumentException 지정된 구분자 외의 문자가 포함되었을 경우 예외 발생
