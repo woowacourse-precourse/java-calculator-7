@@ -148,16 +148,16 @@
   },
   "active": "9ab754e65b8b2b70",
   "lastOpenFiles": [
+    "src/test/java/calculator/ApplicationTest.java~",
+    "src/main/java/calculator/Application.java~",
     "out/production/classes/calculator/Application.class",
     "out/production/classes/calculator",
-    "src/main/java/calculator/Application.java~",
+    "out/test/classes/calculator/ApplicationTest.class",
+    "out/test/classes/calculator",
+    "out/test/classes",
+    "out/test",
     "gitmessage.txt",
     "새 텍스트 문서.txt",
-    "build/reports/tests/test/js/report.js",
-    "build/reports/tests/test/js",
-    "build/reports/tests/test/css/base-style.css",
-    "build/reports/tests/test/css/style.css",
-    "build/reports/tests/test/css",
-    "build/reports/tests/test/index.html"
+    "build/reports/tests/test/js/report.js"
   ]
 }
