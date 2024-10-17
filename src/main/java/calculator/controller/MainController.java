@@ -8,45 +8,35 @@ import java.util.List;
 
 public class MainController {
     public void main(){
-        CalculatedValue calculatedValue = createCalculatedValue();
         Divider divider = createDivider();
-        CustomDividerFinder customDividerFinder = createCustomDividerFinder();
-        updateCustomDivider(calculatedValue, divider, customDividerFinder);
+        CalculatedValue calculatedValue = createCalculatedValue();
 
         NumberParser numberParser = createNumberParser(divider);
+        CustomDividerFinder customDividerFinder = createCustomDividerFinder();
 
+        updateCustomDivider(calculatedValue, divider, customDividerFinder);
+        extractNumberValue(calculatedValue,numberParser);
 
+        int result = getCalculatedResult(calculatedValue);
 
-        int result = getCalculatedResult(calculatedValue, numberParser);
-
-        Output.printResult(result);
-
+        printCalculatedResult(result);
     }
 
-
-    private Integer getCalculatedResult(CalculatedValue calculatedValue,NumberParser numberParser){
-        updateCalculatedNumberValues(calculatedValue,numberParser);
+    private Integer getCalculatedResult(CalculatedValue calculatedValue){
         return AddCalculator.add(calculatedValue.getNumberValueToken());
     }
 
-
-    private void updateCalculatedNumberValues(CalculatedValue calculatedValue,NumberParser numberParser){
+    private void extractNumberValue(CalculatedValue calculatedValue,NumberParser numberParser){
         numberParser.parse(calculatedValue);
+    }
+
+    private void updateCustomDivider(CalculatedValue calculatedValue, Divider divider,CustomDividerFinder customDividerFinder){
+        customDividerFinder.findCustomDividers(calculatedValue,divider);
     }
 
     private NumberParser createNumberParser(Divider divider) {
         return new NumberParser(divider);
     }
-
-    //todo 이거를 클래스에서 처리하기 위해서는? - 서비스로
-    private void updateCustomDivider(CalculatedValue calculatedValue, Divider divider,CustomDividerFinder customDividerFinder){
-        try{
-            customDividerFinder.findCustomDividers(calculatedValue,divider);
-        }catch (IllegalArgumentException e){
-            throw new IllegalArgumentException(e.getMessage());
-        }
-    }
-
 
     private CustomDividerFinder createCustomDividerFinder(){
         return new CustomDividerFinder();
@@ -62,6 +52,10 @@ public class MainController {
 
     private String inputStringToAdd(){
         return Input.inputStringToAdd();
+    }
+
+    private void printCalculatedResult(int result) {
+        Output.printResult(result);
     }
 
 }
