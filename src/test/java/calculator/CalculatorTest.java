@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import calculator.calculator.Calculator;
 import calculator.utils.ErrorMessage;
+import java.math.BigInteger;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -31,7 +32,7 @@ class CalculatorTest {
     @ValueSource(strings = {"", " ", "   ", "  ,   ,   ,"})
     @DisplayName("빈 값이 들어오면 0을 반환한다.")
     void whenEmptyStringIsGivenThenReturnZero(String emptyInput) {
-        int calculated = calculator.calculate(emptyInput);
+        BigInteger calculated = calculator.calculate(emptyInput);
         Assertions.assertThat(calculated).isZero();
     }
 
@@ -39,7 +40,7 @@ class CalculatorTest {
     @CsvSource(delimiter = '=', value = {"1,  2=3", "      1=1", "   3 ,  1 : 2  =6"})
     @DisplayName("숫자와 공백이 같이 주어지면 공백을 없애서 계산한다.")
     void replaceEmptyString(String emptyInput, int expected) {
-        int calculated = calculator.calculate(emptyInput);
+        BigInteger calculated = calculator.calculate(emptyInput);
         Assertions.assertThat(calculated).isEqualTo(expected);
     }
 
@@ -56,7 +57,7 @@ class CalculatorTest {
     @CsvSource(delimiter = '=', value = {"1,2,3=6", "0,1,2=3", "100,200,300=600", "1,2=3", "1:2=3", "1:2,3=6",
             "100,200:300=600"})
     void calculateByRestOrColon(String input, int expected) {
-        int result = calculator.calculate(input);
+        BigInteger result = calculator.calculate(input);
         Assertions.assertThat(result).isEqualTo(expected);
     }
 

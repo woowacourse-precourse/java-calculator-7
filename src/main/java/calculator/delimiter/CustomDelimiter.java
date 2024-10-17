@@ -29,7 +29,6 @@ public class CustomDelimiter implements Delimiter {
         // 구분자가 정규식에서 특수 문자일 경우 이스케이프 처리
         String escapedDelimiter = DelimiterUtils.replaceSpecialCharacters(delimiter);
 
-        // 계산을 위한 부분
         String targetString = getTargetPart(input);
         return Arrays.stream(targetString.split(escapedDelimiter))
                 .toList();

@@ -79,7 +79,7 @@ class CustomDelimiterTest {
                 // 기본적인 커스텀 구분자
                 Arguments.of("//;|,:\\n1;|,:2;|,:3", List.of("1", "2", "3")),
                 Arguments.of("//|구분자,\\n4|구분자,5|구분자,6", List.of("4", "5", "6")),
-                Arguments.of("//:\\n7:8:9", List.of("7", "8", "9")),
+                Arguments.of("//:\\n7:8:9:", List.of("7", "8", "9")),
 
                 // 공백 포함 처리
                 Arguments.of("//;\\n1;2;3", List.of("1", "2", "3")),

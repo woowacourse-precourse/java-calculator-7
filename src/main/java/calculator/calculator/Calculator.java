@@ -3,6 +3,7 @@ package calculator.calculator;
 import calculator.delimiter.DelimiterFactory;
 import calculator.utils.DelimiterUtils;
 import calculator.utils.ErrorMessage;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,11 +11,9 @@ public class Calculator {
 
     private static final String POSITIVE_INTEGER_REGEX = "\\d+";
 
-    private static final Integer ZERO = 0;
-
     private final DelimiterFactory delimiterFactory = new DelimiterFactory();
 
-    public int calculate(String rawInput) {
+    public BigInteger calculate(String rawInput) {
         validateInput(rawInput);
 
         Delimiter delimiter = delimiterFactory.getDelimiter(rawInput);
@@ -24,18 +23,18 @@ public class Calculator {
                 .toList();
 
         if (spaceRemoved.stream().allMatch(String::isBlank)) {
-            return ZERO;
+            return BigInteger.ZERO;
         }
 
         validateString(spaceRemoved);
 
-        List<Integer> inputNumbers = spaceRemoved.stream()
-                .map(Integer::parseInt)
+        List<Long> inputNumbers = spaceRemoved.stream()
+                .map(Long::parseLong)
                 .toList();
 
         return inputNumbers.stream()
-                .mapToInt(Integer::intValue)
-                .sum();
+                .map(BigInteger::valueOf)
+                .reduce(BigInteger.ZERO, BigInteger::add);
     }
 
     private void validateInput(String input) {
