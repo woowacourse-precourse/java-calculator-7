@@ -1,0 +1,163 @@
+{
+  "main": {
+    "id": "11d535afd434be32",
+    "type": "split",
+    "children": [
+      {
+        "id": "f5429c5641b5fb36",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9ab754e65b8b2b70",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "7d094b4b97674f9a",
+    "type": "split",
+    "children": [
+      {
+        "id": "56832e959541005a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "00661b9adb53d089",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "9c01abaaac59b2c1",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "00aac881f8e067d7",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "040889ff26cecc0a",
+    "type": "split",
+    "children": [
+      {
+        "id": "7b4eeacee34c61d2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3bf27bbbcae2ec23",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "README.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "363fce4c3a96ab89",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "README.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "dfe1b0266e59667e",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "ed7f7adc7e80472e",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "README.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "9ab754e65b8b2b70",
+  "lastOpenFiles": [
+    "gitmessage.txt",
+    "새 텍스트 문서.txt",
+    "build/reports/tests/test/js/report.js",
+    "build/reports/tests/test/js",
+    "build/reports/tests/test/css/base-style.css",
+    "build/reports/tests/test/css/style.css",
+    "build/reports/tests/test/css",
+    "build/reports/tests/test/index.html",
+    "build/test-results/test/binary/results.bin",
+    "build/test-results/test/binary/output.bin.idx",
+    "build/reports/tests/test/packages/calculator.html"
+  ]
+}
