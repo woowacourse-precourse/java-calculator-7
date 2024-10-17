@@ -24,8 +24,6 @@ public class Calculator {
         }
 
         return commonDelimiter;
-
-        //return regex;
     }
 
     // 구분자를 사용하여 숫자배열을 추출하는 함수
@@ -48,7 +46,6 @@ public class Calculator {
         int sum = 0;
         for (String number : arr) {
             sum += Integer.parseInt(number);  // 문자열을 정수로 변환하여 더하기
-
         }
         return sum;
     }
