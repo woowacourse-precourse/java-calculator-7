@@ -12,30 +12,20 @@ public class CalculatorController {
     public void start() {
         String input = InputView.getDelimiterAndNumbers();
 
-        Stream<Integer> numbers = Stream.empty();
+        Stream<Integer> numbers;
         List<String> delimiters = new ArrayList<>();
         List<String> numStrs = new ArrayList<>();
 
 
         if (startsWithNumber(input)) {
-            String[] stringArray = input
+            String[] stringNums = input
                     .replaceAll("[,|:]", " ")
                     .split(" ");
 
-            for (int i = 0; i < stringArray.length; i++) {
-                if (i % 2 == 0) {
-                    numStrs.add(stringArray[i]);
-                } else {
-                    delimiters.add(stringArray[i]);
-                }
-            }
-
-            boolean useProperDelimiter = delimiters.stream()
-                    .allMatch(delimiter -> delimiter.equals(",") || delimiter.equals(":"));
-            if(useProperDelimiter) {
-                numbers = convertToInt(numStrs);
-            } else {
-                throw new IllegalArgumentException("잘못된 형식의 입력입니다.");
+            try {
+                numbers = Arrays.stream(stringNums).map(Integer::parseInt);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("숫자가 아닌 입력값이 있습니다.");
             }
         } else {
             // check the format of "//;\n1;2;3"
