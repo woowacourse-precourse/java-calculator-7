@@ -8,7 +8,7 @@ public class PatternParserTest {
     private final PatternParser patternParser = new PatternParser();
 
     @Test
-    public void testIsCustomPattern_validCustomPattern() throws Exception{
+    public void testValidIsCustomPattern() throws Exception{
         //given
         String input = "//;\n1;2;3";
 
@@ -20,7 +20,7 @@ public class PatternParserTest {
     }
 
     @Test
-    void testIsCustomPattern_invalidCustomPattern() throws Exception{
+    void testInvalidIsCustomPattern() throws Exception{
         //given
         String input = "1,2:3";
 
@@ -32,7 +32,7 @@ public class PatternParserTest {
     }
 
     @Test
-    public void testIsReservePattern_validReservePattern() throws Exception{
+    public void testValidIsReservePattern() throws Exception{
         //given
         String input = "1,2:3";
 
@@ -45,7 +45,7 @@ public class PatternParserTest {
     }
 
     @Test
-    public void testIsReservePattern_invalidReservePattern() throws Exception{
+    public void testInvalidIsReservePattern() throws Exception{
         //given
         String input = "//;\n1;2;3";
 
@@ -67,5 +67,43 @@ public class PatternParserTest {
         //then
         assertEquals(";", result);
     }
-    
+
+    @Test
+    public void testCustomSplitPattern() throws Exception{
+        //given
+        String input = "//;\n1;2;3";
+
+        //when
+        String[] result = patternParser.splitPattern(input);
+
+        //then
+        String[] valid = {"1", "2", "3"};
+        assertArrayEquals(valid, result);
+    }
+
+    @Test
+    public void testReserveSplitPattern() throws Exception{
+        //given
+        String input = "1,2:3";
+
+        //when
+        String[] result = patternParser.splitPattern(input);
+
+        //then
+        String[] valid = {"1", "2", "3"};
+        assertArrayEquals(valid, result);
+    }
+
+    @Test
+    public void testNotSplitPattern() throws Exception{
+        //given
+        String input = "1*23(4)54";
+
+        //when
+        String[] result = patternParser.splitPattern(input);
+
+        //then
+        String[] valid = {};
+        assertArrayEquals(valid, result);
+    }
 }
