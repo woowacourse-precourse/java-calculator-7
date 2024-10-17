@@ -28,4 +28,44 @@ class ApplicationTest extends NsTest {
     public void runMain() {
         Application.main(new String[]{});
     }
+
+    @Test
+    public void 숫자_구분자_사용(){
+        assertSimpleTest(()->{
+            run("//1\\n2:213");
+            assertThat(output()).contains("결과 : 7");
+        });
+    }
+
+    @Test
+    public void 탈출_문자_사용(){
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("1\\2:3"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
+    public void 탈출_문자_구분자_사용(){
+        assertSimpleTest(() -> {
+            run("//\\\\n1\\2:3,4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
+    public void 마침표_구분자_사용(){
+        assertSimpleTest(()->{
+            run("//.\\n1.2.4:3");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
+    public void 따옴표_구분자_사용(){
+        assertSimpleTest(()->{
+            run("//\"\\n1\"2\"4:3");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
 }
