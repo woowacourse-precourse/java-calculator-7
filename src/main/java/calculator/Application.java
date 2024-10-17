@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Application {
     private static final String DELIMITER_COMMA = ",";
-    private static final String DELIMITER_DOT = ".";
+    private static final String DELIMITER_COLON = ":";
     private static final String CUSTOM_DELIMITER_START = "//";
     private static final String CUSTOM_DELIMITER_END = "\\n";
 
@@ -19,7 +19,7 @@ public class Application {
 
         // 기본 구분자를 ArrayList 에 추가
         delimiters.add(DELIMITER_COMMA);
-        delimiters.add(DELIMITER_DOT);
+        delimiters.add(DELIMITER_COLON);
 
         if (input.startsWith(CUSTOM_DELIMITER_START)) { // 커스텀 구분자가 지정되어 있는지 확인 후, 지정되어 있다면 커스텀 구분자를 ArrayList 에 추가
             String newDelimiter = getCustomDelimiter(input);
