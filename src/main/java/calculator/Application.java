@@ -49,7 +49,9 @@ public class Application {
         }
 
         // 문자열을 한 자리씩 순환하면서 구분자 배열을 기반으로 검사
-        for (char c : input.toCharArray()) {
+        int startIndex = extendedMode ? 5 : 0;
+        for (int i = startIndex; i < input.length(); i++) {
+            char c = input.charAt(i);
             if (!Character.isDigit(c) && delimiters.indexOf(c) == -1) {
                 throw new IllegalArgumentException("입력 문자열에 허용되지 않은 문자가 포함되어 있습니다: " + c);
             }
