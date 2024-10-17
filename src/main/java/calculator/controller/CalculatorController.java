@@ -13,7 +13,8 @@ public class CalculatorController {
         InputView.printStartMessage();
         String inputString = InputView.getInput();
         Delimiters delimiters = new Delimiters();
-        inputString = CustomDelimiterProcessor.addCustomDelimiters(inputString, delimiters);
+        CustomDelimiterProcessor customDelimiterProcessor = new CustomDelimiterProcessor(delimiters);
+        inputString = customDelimiterProcessor.addCustomDelimiters(inputString);
         Calculator calculator = new Calculator();
         NumberExtractor.extractNumber(inputString, delimiters, calculator);
         int result = calculator.calculate();
