@@ -5,7 +5,6 @@ import java.util.NoSuchElementException;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
 
         String line;
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -27,9 +26,10 @@ public class Application {
             return;
         }
 
-        Parser parse = new Parser(line);
+        Parser parser = new Parser(line);
+        parser.parse();
 
         //계산된 합계 반환
-        Printer.printResult(parse.getResult());
+        Printer.printResult(parser.getResult());
     }
 }
