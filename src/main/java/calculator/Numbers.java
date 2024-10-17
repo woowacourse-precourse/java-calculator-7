@@ -1,5 +1,6 @@
 package calculator;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Numbers {
@@ -12,6 +13,10 @@ public class Numbers {
     private Numbers(List<Number> values) {
         validateNumberCount(values.size());
         this.values = values;
+    }
+
+    public static Numbers empty() {
+        return new Numbers(Collections.emptyList());
     }
 
     public static Numbers of(List<Number> values) {
