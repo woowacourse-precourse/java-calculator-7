@@ -14,6 +14,7 @@ public class SeparatorService {
         if(isCustomSeparatorExist(userInput)){
             String customSeparator = extractCustomSeparator(userInput);
             addSeparator(customSeparator);
+            ValueService.removeMarking();
         }
     }
 
