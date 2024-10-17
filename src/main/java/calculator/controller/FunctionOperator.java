@@ -1,4 +1,7 @@
-package calculator;
+package calculator.controller;
+
+import calculator.view.InputView;
+import calculator.view.OutputView;
 
 public class FunctionOperator {
     InputView inputView = new InputView();
