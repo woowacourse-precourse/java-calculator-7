@@ -1,5 +1,6 @@
-package calculator.controller;
+package calculator.controller.service;
 
+import calculator.controller.CalculatorController;
 import calculator.number.service.PositiveNumberGenerator;
 import calculator.service.generator.CreateProcess;
 import calculator.service.generator.ExtractProcess;
