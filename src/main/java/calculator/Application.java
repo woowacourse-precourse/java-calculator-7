@@ -13,6 +13,8 @@ public class Application {
         for (byte value : input.getBytes()) {
             if (value >= '0' && value <= '9') {
                 sum += value - '0';
+            } else if (value != ',' && value != ':') {
+                throw new IllegalArgumentException();
             }
         }
 
