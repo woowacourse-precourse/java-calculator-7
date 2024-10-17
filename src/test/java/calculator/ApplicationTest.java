@@ -84,4 +84,12 @@ class ApplicationTest extends NsTest {
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
+
+    @Test
+    void 정수_범위_초과인_경우() {
+        assertSimpleTest(() -> {
+            run("2147483647,1");
+            assertThat(output()).contains("결과 : 2147483648");
+        });
+    }
 }
