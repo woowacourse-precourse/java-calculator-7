@@ -2,8 +2,9 @@ package calculator.service;
 
 public class CalculatorService {
     public int calculator(String input) {
-        inValidInput(input);
+        inValidDefaultInput(input);
         if (defaultOrCustomDelimeter(input)) {
+            inValidCustomDelimiter(input);
             return customAdd(input);
         } else {
             return defaultAdd(input);
@@ -15,6 +16,7 @@ public class CalculatorService {
 
         int sum = 0;
         for (String s : str) {
+            isDigitNegative(s);
             sum += Integer.parseInt(s);
         }
 
@@ -32,6 +34,7 @@ public class CalculatorService {
             String[] customSplit = newInput.split(customDelimeter);
 
             for (String s : customSplit) {
+                isDigitNegative(s);
                 sum += Integer.parseInt(s);
             }
         }
@@ -46,8 +49,8 @@ public class CalculatorService {
         }
     }
 
-    // 3) 예외 처리
-    private void inValidInput(String input) {
+    /** [공통] Input 값에 대한 공통 예외 처리 */
+    private void inValidDefaultInput(String input) {
         if (isInputEmpty(input)) {
             throw new IllegalArgumentException("입력된 값이 없습니다");
         }
@@ -55,7 +58,18 @@ public class CalculatorService {
         if (isNotExistDigit(input)) {
             throw new IllegalArgumentException("입력된 문자열에 숫자가 존재하지 않습니다");
         }
+    }
 
+    /** [공통] 구분자로 분리 후 Digit 이 음수가 있을 경우  */
+    private void isDigitNegative(String s) {
+        int digit = Integer.parseInt(s);
+        if (digit < 0) {
+            throw new IllegalArgumentException("양수가 아닌 음수가 존재 합니다. 프로그램을 종료합니다");
+        }
+    }
+
+    // 커스텀 구분자 예외 처리
+    private void inValidCustomDelimiter(String input) {
         if (isInvalidCustomDelimiter(input)) {
             throw new IllegalArgumentException("잘못된 커스텀 지정자가 존재 합니다.");
         }
@@ -73,7 +87,7 @@ public class CalculatorService {
         if (!input.startsWith("//")) {
             return true;
         }
-        if (input.contains("\n")) {
+        if (!input.contains("\\n")) {
             return true;
         }
         return false;
