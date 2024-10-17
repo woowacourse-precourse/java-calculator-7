@@ -27,8 +27,12 @@ public class Application {
     }
 
     public static String[] operationSetting(String operationInput, ArrayList<String> separate){
-        String separatorPattern = String.join("|", separate);
-        return operationInput.split(separatorPattern);
+        if(operationInput.isEmpty())
+            return new String[0];
+        else{
+            String separatorPattern = String.join("|", separate);
+            return operationInput.split(separatorPattern);
+        }
     }
 
     public static void main(String[] args) {
