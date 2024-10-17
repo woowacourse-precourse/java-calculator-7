@@ -12,31 +12,29 @@ public class CalculatorService {
     private static final String POSITIVE_NUMBER_REGEX = "\\d+([.]\\d+)?";
 
     private final List<String> separators;
-    private String input;
 
-    public CalculatorService(String input) {
+    public CalculatorService() {
         separators = SeparatorType.getDefaults();
-        this.input = input;
     }
 
-    public double calculate() {
+    public double calculate(String input) {
         if (input.isEmpty()) {
             throw new IllegalArgumentException("입력값이 존재하지 않습니다.");
         }
-        addCustomSeparatorIfPresent();
-        String[] separatedValues = split();
+        addCustomSeparatorIfPresent(input);
+        String formula = input.replaceAll(CUSTOM_SEPARATOR_REGEX, EMPTY);
+        String[] separatedValues = split(formula);
         Double[] values = convertToNumbers(separatedValues);
         return sum(values);
     }
 
-    private void addCustomSeparatorIfPresent() {
+    private void addCustomSeparatorIfPresent(String input) {
         Optional<String> customSeparator = new CustomSeparatorManager(input).extract();
         customSeparator.ifPresent(separators::add);
-        this.input = input.replaceAll(CUSTOM_SEPARATOR_REGEX, EMPTY);
     }
 
-    private String[] split() {
-        return new SeparatorSplitter(separators, input).split();
+    private String[] split(String formula) {
+        return new SeparatorSplitter(separators, formula).split();
     }
 
     private Double[] convertToNumbers(String[] separatedValues) {

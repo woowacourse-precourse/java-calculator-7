@@ -7,9 +7,9 @@ public class Application {
 
     public static void main(String[] args) {
         ConsoleView view = new ConsoleView();
+        CalculatorService service = new CalculatorService();
         String input = view.requestInput();
-        CalculatorService service = new CalculatorService(input);
-        double result = service.calculate();
+        double result = service.calculate(input);
         view.printResult(result);
     }
 }
