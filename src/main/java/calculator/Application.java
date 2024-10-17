@@ -18,7 +18,7 @@ public class Application {
         
         try {
             // 입력된 문자열을 처리하고 결과를 출력
-            BigInteger result = processInput(input);
+            BigInteger result = processInput(input, extendedMode);
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
@@ -26,7 +26,7 @@ public class Application {
     }
     
     // 입력 문자열을 처리하는 함수
-    private static BigInteger processInput(String input) {
+    private static BigInteger processInput(String input, boolean extendedMode) {
         // 입력 문자열의 길이가 0일 경우 0 반환
         if (input.length() == 0) {
             return BigInteger.ZERO;
@@ -50,12 +50,21 @@ public class Application {
         }
         
         // 올바른 문자열을 기준으로 숫자의 합을 계산
-        return sumNumbers(input);
+        return sumNumbers(input, extendedMode);
     }
     
     // 쉼표(,) 또는 콜론(:)을 구분자로 가지는 문자열을 분리하고 합을 계산하는 함수
-    private static BigInteger sumNumbers(String input) {
-        String[] numbers = input.split("[,:]");
+    private static BigInteger sumNumbers(String input, boolean extendedMode) {
+        // 기본 구분자 배열
+        String delimiters = "[,:]";
+        
+        // extended 모드일 경우 추가 구분자 설정
+        if (extendedMode && input.length() > 2) {
+            char additionalDelimiter = input.charAt(2);
+            delimiters = "[,:" + additionalDelimiter + "]";
+        }
+        
+        String[] numbers = input.split(delimiters);
         BigInteger sum = BigInteger.ZERO;
         for (String number : numbers) {
             sum = sum.add(new BigInteger(number));
