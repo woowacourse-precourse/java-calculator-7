@@ -1,6 +1,5 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.test.Assertions;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,13 +13,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-public class MakeNewArrayTest extends NsTest {
+class MakeNewArrayTest extends NsTest {
 
     @Test
     @DisplayName("원하는대로 구분자가 분리될까?")
     void 커스텀_구분자_테스트() {
         assertSimpleTest(() -> {
-            //String testVal = "//(\\n1";
             String testVal2 = "//()\\n1";
 
             String customSymbol = "";
@@ -83,7 +81,7 @@ public class MakeNewArrayTest extends NsTest {
     }
 
     @Test
-    @DisplayName(",과 :만 있는 기본 문자열이 들어왔을 때 정상적인 배열 생성이 돼야한다.")
+    @DisplayName(",과 :만 있는 기본 문자열이 들어왔을 때 정상적인 합이 구해진다.")
     void 기본_덧셈_테스트() {
         String testVal = "1,2:3";
         String[] testArray = testVal.split("[,:]");
@@ -150,12 +148,8 @@ public class MakeNewArrayTest extends NsTest {
         String[] testArray = testVal.split("[:|,|"+ customSymbol + "]");
         System.out.println("testArray = " + Arrays.toString(testArray));
 
-        int[] numArray = new int[testArray.length];
-        for (int i = 0; i < numArray.length; i++) {
-            numArray[i] = Integer.parseInt(testArray[i]);
-        }
 
-        assertThat(numArray[1]).isSameAs(4);
+        assertThat(testArray[1]).isEqualTo("4");
     }
 
     @Test
@@ -167,26 +161,20 @@ public class MakeNewArrayTest extends NsTest {
             String[] testArray = testVal2.split("[:|,]"); // 기본 기호를 기준으로 문자열 배열 생성
             System.out.println("testArray = " + Arrays.toString(testArray));
 
-            int[] numArray = new int[testArray.length];
-            for (int i = 0; i < numArray.length; i++) {
-                numArray[i] = Integer.parseInt(testArray[i]);
-            }
-            System.out.println("Arrays.toString(numArray) = " + Arrays.toString(numArray));
-
-            assertThat(numArray[3]).isSameAs(4);
+            assertThat(testArray[3]).isEqualTo("4");
         });
     }
 
     @Test
-    @DisplayName("숫자형 배열만들기 기능 최종 테스트 코드")
-    void 숫자형_배열_만들기_최종_테스트() {
+    @DisplayName("문자형 배열만들기 기능 최종 테스트 코드")
+    void 문자형_배열_만들기_최종_테스트() {
         assertDoesNotThrow(() -> { // 예외를 던지면 안된다!
-            String[] testValArray = {"1:5,3,10", "//<\\n10,15<30:200", "//^\\n99^23^18^10","<//>\\n12>23,15:19"};
+            String[] testValArray = {"1:5,3,10", "//<\\n10,15<30:200", "//^\\n99^23^18^10", "<//>\\n12>23,15:19"};
             String customSymbol = "";
 
             for (int i = 0; i < testValArray.length; i++) {
                 String[] testArray;
-                if(testValArray[i].startsWith("//")){// 커스텀 기호 포함!
+                if (testValArray[i].startsWith("//")) {// 커스텀 기호 포함!
                     // 우선 특수기호를 구한다.
                     Pattern pattern = Pattern.compile("//(.*?)\\\\n");
                     Matcher matcher = pattern.matcher(testValArray[i]);
@@ -198,18 +186,20 @@ public class MakeNewArrayTest extends NsTest {
                     testValArray[i] = testValArray[i].replaceAll("//.*?\\\\n", "");
                 }
 
-                if(customSymbol.equals("")){
+                if (customSymbol.equals("")) {
                     testArray = testValArray[i].split("[:|,]");
-                }else{
-                    testArray = testValArray[i].split("[:|,|"+ customSymbol + "]");
+                } else {
+                    testArray = testValArray[i].split("[:|,|" + customSymbol + "]");
                 }
-                System.out.println((i+1) + "번째 숫자형 배열 : " + Arrays.toString(testArray)); // return testArray;
+                // return testArray;
+                System.out.println((i + 1) + "번째 숫자형 배열 : " + Arrays.toString(testArray));
             }
         });
     }
 
     @Test
-    public void 실제코드_적용_1번() {
+    @DisplayName("정상적인 값이 들어갔을때 실제 코드에서 원하는 값이 출력되어야함")
+    void 실제코드_적용_1번() {
         assertSimpleTest(() -> {
             run("//>\\n1:2,3");
             assertThat(output()).contains("[1, 2, 3]");

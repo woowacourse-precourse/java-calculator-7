@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ArrayFunction {
-    public static int[] parseNumbersFromString(String inputVal) {
+    public static String[] parseNumbersFromString(String inputVal) {
 
         String[] parseArray;
         String customSymbol = "";
@@ -26,16 +26,7 @@ public class ArrayFunction {
             parseArray = inputVal.split("[:|,|"+ customSymbol + "]");
         }
 
-        int[] numberArray = new int[parseArray.length];
-        for (int i = 0; i < numberArray.length; i++) {
-            try {
-                numberArray[i] = Integer.parseInt(parseArray[i].trim());
-            } catch (NumberFormatException numberFormatException) { // 숫자에 지정기호 외 값이 있다! / 음수는 통과돼야함
-                throw new IllegalArgumentException("숫자 사이에 지정하지 않은 기호가 있습니다.");
-            }
-        }
-
-        return numberArray;
+        return parseArray;
     }
 
 }
