@@ -47,6 +47,6 @@
 
 **🚫 예외 처리**
 
-- [x]  문자열이 정수가 아니라면 `IllegaArgumentException`
+- [x]  문자열이 양수가 아니라면 `IllegaArgumentException`
 
 ---
