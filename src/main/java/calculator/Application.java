@@ -8,6 +8,16 @@ public class Application {
         System.out.print("덧셈할 문자열을 입력해주세요." + "\n");
         String Input = Console.readLine();
 
-        System.out.print("결과 : " + Input);
+        int sum = 0;
+
+        String[] tokens = Input.split("[,:]");
+
+        for (String token : tokens) {
+            if (token.isEmpty()) {
+                token = "0";
+            }
+            sum += Integer.parseInt(token);
+        }
+        System.out.println("결과 : " + sum);
+        }
     }
-}
