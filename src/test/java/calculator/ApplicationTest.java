@@ -28,10 +28,10 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 6");
 
             run("1:2:3");
-            assertThat(output()).contains("결과: 6");
+            assertThat(output()).contains("결과 : 6");
 
             run("1,3:2");
-            assertThat(output()).contains("결과: 6");
+            assertThat(output()).contains("결과 : 6");
         });
     }
 
@@ -42,22 +42,22 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 1");
 
             run("//;\\n1;2;3");
-            assertThat(output()).contains("결과: 6");
+            assertThat(output()).contains("결과 : 6");
 
             run("//3\\n333");
-            assertThat(output()).contains("결과: 6");
+            assertThat(output()).contains("결과 : 6");
 
             run("//3\\n43331");
-            assertThat(output()).contains("결과: 6");
+            assertThat(output()).contains("결과 : 6");
 
             run("//o\\n1o2o3");
-            assertThat(output()).contains("결과: 6");
+            assertThat(output()).contains("결과 : 6");
 
             run("//-3\\n2-33-32");
-            assertThat(output()).contains("결과: 7");
+            assertThat(output()).contains("결과 : 7");
 
             run("// \\n2 3 4");
-            assertThat(output()).contains("결과: 9");
+            assertThat(output()).contains("결과 : 9");
 
         });
     }
