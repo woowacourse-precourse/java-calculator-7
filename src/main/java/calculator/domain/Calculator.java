@@ -24,11 +24,10 @@ public class Calculator {
                 String[] parts = separator.splitCalculationString(
                     input.getFirstInput());//String[] 반환
 
-                //Number 객체 생성
+                //Number 객체 생성을 통한 구분 작업 및 검증
                 number = new Numbers(parts);
 
-                number.validateOnlyNumber(); //숫자로만 구성되어있는지 확인
-                
+
             } else {
                 // 커스텀 구분자 기능 실행
                 input.readSecondInput();
@@ -45,10 +44,9 @@ public class Calculator {
                 String[] parts = separator.splitCalculationString(
                     input.getSecondInput());//String[] 반환
 
-                //Number 객체 생성
+                //Number 객체 생성을 통한 구분 작업 및 검증
                 number = new Numbers(parts);
 
-                number.validateOnlyNumber(); //숫자로만 구성되어있는지 확인
             }
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
