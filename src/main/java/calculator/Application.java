@@ -15,7 +15,6 @@ public class Application {
         validateInput(input);
         // 기본 구분자 또는 커스텀 구분자 추출
         String delimiter = getDelimiter(input);
-        System.out.println("delimiter="+delimiter);
         // 문자열에서 커스텀 구분자 정의 섹션 제거
         input = removeDelimiterSection(input);
         // 구분자로 문자열을 분리
@@ -71,7 +70,10 @@ public class Application {
     * 커스텀 구분자가 없으면 원본 문자열을 반환한다.
      */
     public static String removeDelimiterSection(String input){
-        throw new UnsupportedOperationException("removeDelimiterSection() 아직 구현되지 않았습니다.");
+        if (input.startsWith("//")){
+            return input.substring(input.indexOf("\n") + 1);
+        }
+        return input;
     }
 
 
