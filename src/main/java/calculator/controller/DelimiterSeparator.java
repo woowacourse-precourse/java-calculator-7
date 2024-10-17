@@ -26,8 +26,8 @@ public class DelimiterSeparator {
         return index + 3;
     }
 
-    public static void validateDelimiter(String str) {
-        if (!Delimiter.isDelimiter(str)) {
+    public static void validateDelimiter(char ch) {
+        if (!Delimiter.isDelimiter(ch)) {
             throw new IllegalArgumentException("잘못된 형식입니다.");
         }
     }
