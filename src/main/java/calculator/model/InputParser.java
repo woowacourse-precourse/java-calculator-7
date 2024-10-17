@@ -48,7 +48,7 @@ public class InputParser {
     }
 
     private static List<Integer> parseAndConvert(Matcher matcher) {
-        String customDelimiter = matcher.group(CUSTOM_DELIMITER_GROUP);
+        String customDelimiter = Pattern.quote(matcher.group(CUSTOM_DELIMITER_GROUP));
         String inputNum = matcher.group(INPUT_NUM_GROUP);
         List<Integer> list = splitAndConvert(customDelimiter, inputNum);
         return list;
