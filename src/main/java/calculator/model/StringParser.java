@@ -67,10 +67,6 @@ public class StringParser {
         return input.equals(BLANK);
     }
 
-    public boolean isSeparator(String potentialSeparator) {
-        return separators.contains(potentialSeparator);
-    }
-
     public String extractCustomSeparator(String input) {
         int endIndex = findCustomSeparatorEndIndex(input);
         if (endIndex == -1) {

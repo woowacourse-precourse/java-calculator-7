@@ -104,23 +104,6 @@ class StringParserTest {
     }
 
     @Test
-    void 쉼표는_구분자로_인식된다() {
-        assertTrue(stringParser.isSeparator(","));
-    }
-
-    @Test
-    void 콜론은_구분자로_인식된다() {
-        assertTrue(stringParser.isSeparator(":"));
-    }
-
-    @Test
-    void 구분자가_아닌_문자열은_false를_반환한다() {
-        assertFalse(stringParser.isSeparator("a"));
-        assertFalse(stringParser.isSeparator("1"));
-        assertFalse(stringParser.isSeparator(" "));
-    }
-
-    @Test
     void 커스텀_구분자_추출_성공() {
         String input = "//;\n1;2;3";
         String customSeparator = stringParser.extractCustomSeparator(input);
