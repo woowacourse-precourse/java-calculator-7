@@ -1,18 +1,14 @@
 package calculator.exception;
 
-import calculator.util.CalculateCustom;
-import calculator.util.CalculateDefault;
-
+import calculator.util.Calculate;
 public class CalculateException {
-
-    private static final Integer ZERO = 0;
 
     public static void throwException(ExceptionMessage exceptionMessage) {
         throw new IllegalArgumentException(exceptionMessage.getExceptionMessage());
     }
 
     public static void catchNumberNotPositiveException(Integer number) {
-        if (number < ZERO) {
+        if (Calculate.checkIsNumberPositive(number)) {
             throwException(ExceptionMessage.INPUT_IS_NOT_POSITIVE_EXCEPTION);
         }
     }
@@ -27,12 +23,8 @@ public class CalculateException {
     }
 
     public static void catchWrongNumberSeparator(String userInput) {
-        if (checkNotContainSeparator(userInput)) {
+        if (Calculate.checkNotContainAllSeparator(userInput)) {
             throwException(ExceptionMessage.INPUT_IS_WRONG_EXCEPTION);
         }
-    }
-
-    public static boolean checkNotContainSeparator(String userInput) {
-        return CalculateDefault.checkNotContainDefault(userInput) && CalculateCustom.checkNotContainCustom(userInput);
     }
 }
