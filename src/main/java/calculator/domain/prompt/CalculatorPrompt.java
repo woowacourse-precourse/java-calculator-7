@@ -23,25 +23,7 @@ public class CalculatorPrompt extends Prompt {
         if (splitData[0].startsWith("//")) {
             return this.separate(splitData[1], inputData.charAt(2));
         }
-        return this.separate(splitData[0]);
-    }
-
-    @Override
-    protected List<String> separate(String inputData) {
-        List<String> separatedData = new ArrayList<>();
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (char word: inputData.toCharArray()) {
-            if (word == DELIMITER_COMMA || word == DELIMITER_COLON) {
-                separatedData.add(stringBuilder.toString());
-                stringBuilder.setLength(0);
-                continue;
-            }
-            stringBuilder.append(word);
-        }
-        separatedData.add(stringBuilder.toString());
-
-        return separatedData;
+        return this.separate(splitData[0], '\0'); //커스텀 구분자가 없는 경우
     }
 
     @Override

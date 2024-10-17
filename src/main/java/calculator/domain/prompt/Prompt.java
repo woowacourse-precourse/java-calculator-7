@@ -16,7 +16,6 @@ public abstract class Prompt {
     }
 
     protected abstract List<String> parseInput(String inputData);
-    protected abstract List<String> separate(String inputData);
     protected abstract List<String> separate(String inputData, char customDelimiter);
 
     public List<Integer> extractInteger() {
