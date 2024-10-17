@@ -10,4 +10,8 @@ public class ConsoleView {
         return inputCalculationFormula;
     }
 
+    public void showResult(String result) {
+        System.out.printf("결과 : %s\n", result);
+    }
+
 }
