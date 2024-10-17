@@ -35,6 +35,23 @@ public class Application {
         ArrayList<String> separate = new ArrayList<>(Arrays.asList(",", ":"));
         if (CustomDiscrimination(str)){
             separate.add(CustomExtraction(str));
+            int result = 0;
+            for(String number: operationSetting(str.substring(str.indexOf("\\n")+2), separate)){
+                if (number.matches("\\d+"))
+                    result += Integer.parseInt(number);
+                else throw new IllegalArgumentException();
+            }
+            System.out.println("결과 : " + result);
         }
+        else{
+            int result = 0;
+            for(String number: operationSetting(str, separate)){
+                if (number.matches("\\d+"))
+                    result += Integer.parseInt(number);
+                else throw new IllegalArgumentException();
+            }
+            System.out.println("결과 : " + result);
+        }
+
     }
 }
