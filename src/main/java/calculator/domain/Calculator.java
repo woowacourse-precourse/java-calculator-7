@@ -43,9 +43,18 @@ public class Calculator {
         for (String number : numbers) {
             number = number.trim();
             if (!number.isEmpty() && number.matches("[1-9]\\d*")) {
-                sum += Integer.parseInt(number);
+                int parsedNumber = Integer.parseInt(number);
+                sum = safeSum(sum, parsedNumber);
             }
         }
         return sum;
+    }
+
+    private int safeSum(int sum, int nextNumber) {
+        try {
+            return Math.addExact(sum, nextNumber);
+        } catch (ArithmeticException e) {
+            throw new IllegalArgumentException("입력한 값의 계산 결과가 정수형 범위를 초과했습니다.");
+        }
     }
 }

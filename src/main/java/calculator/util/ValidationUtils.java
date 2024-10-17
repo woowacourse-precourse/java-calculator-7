@@ -16,11 +16,11 @@ public class ValidationUtils {
         validateAllowedCharacters(delimiter);
     }
 
-    public static void validateNumber(String input) {
+    public static void validateValidInteger(String value) {
         try {
-            Integer.parseInt(input.trim());
+            Integer.parseInt(value);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("유효하지 않은 숫자 형식입니다. 문제가 되는 입력값: [" + input + "]");
+            throw new IllegalArgumentException("입력된 값이 유효한 정수가 아닙니다. 문제가 되는 입력값: [" + value + "]");
         }
     }
 
@@ -45,7 +45,7 @@ public class ValidationUtils {
     }
 
     private static void validateNullOrEmpty(String delimiter) {
-        if (delimiter == null || delimiter.isEmpty()) {
+        if (delimiter == null || delimiter.trim().isEmpty()) {
             throw new IllegalArgumentException("유효하지 않은 커스텀 구분자입니다. 문제가 되는 입력값: [" + delimiter + "]");
         }
     }
