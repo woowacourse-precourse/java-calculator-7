@@ -21,7 +21,7 @@ public class Controller {
     public void run() {
         printHandler.printStartMessage();
         String tempString = inputHandler.inputString();
-        User user = new User(tempString);
+        User user = User.userString(tempString);
         int sum = calculator.sum(user.getNumbers());
         printHandler.printEndMessage(sum);
     }

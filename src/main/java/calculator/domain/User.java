@@ -13,7 +13,11 @@ public class User {
     private final List<String> delimiters = new ArrayList<>();
 
 
-    public User(String userString) {
+    public static User userString(String userString) {
+        return new User(userString);
+    }
+
+    private User(String userString) {
         charAtUserStrings(userString);
         validateNumbers(numbers);
         checkDelimiters(delimiters);
