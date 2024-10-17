@@ -13,7 +13,7 @@ class InputSplitterTest {
     void splitByCommaOrColon(String input) {
         //given
         InputSplitter inputSplitter = new InputSplitter();
-        String[] actualStrings = inputSplitter.splitByDelimeter(input);
+        String[] actualStrings = inputSplitter.splitByDelimiter(input);
 
         //when
         String[] expectedStrings = {"4", "5", "6"};
@@ -31,7 +31,7 @@ class InputSplitterTest {
     void splitByCustomDelimiter(String input) {
         //given
         InputSplitter inputSplitter = new InputSplitter();
-        String[] actualStrings = inputSplitter.splitByDelimeter(input);
+        String[] actualStrings = inputSplitter.splitByDelimiter(input);
 
         //when
         String[] expectedStrings = {"1", "2", "3"};
@@ -49,7 +49,7 @@ class InputSplitterTest {
 
         //when
         IllegalArgumentException exception =
-                assertThrows(IllegalArgumentException.class, () -> inputSplitter.splitByDelimeter(input));
+                assertThrows(IllegalArgumentException.class, () -> inputSplitter.splitByDelimiter(input));
 
         //then
         assertEquals("쉼표(,) 또는 콜론(:) 외의 다른 구분자는 사용할 수 없으며, 숫자 사이에만 올 수 있습니다.", exception.getMessage());

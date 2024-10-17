@@ -5,30 +5,30 @@ import java.util.regex.Pattern;
 
 public class InputSplitter {
     private static final String REGEX = "^//(.)\\\\n";
-    private static final int CUSTOM_DELIMETER_START_INDEX = 2;
-    private static final int CUSTOM_DELIMETER_END_INDEX = 3;
+    private static final int CUSTOM_DELIMITER_START_INDEX = 2;
+    private static final int CUSTOM_DELIMITER_END_INDEX = 3;
     private static final int START_INDEX_EXCEPT_REGEX = 5;
 
-    public String[] splitByDelimeter(String input) {
+    public String[] splitByDelimiter(String input) {
         if (input.isEmpty()) {
             return new String[]{"0"};
         }
-        if (containsCustomDelimeter(input)) {
-            String customDelimeter = escapeMetacharacter(getCustomDelimeter(input));
+        if (containsCustomDelimiter(input)) {
+            String customDelimiter = escapeMetacharacter(getCustomDelimiter(input));
             input = input.substring(START_INDEX_EXCEPT_REGEX);
-            return input.split(customDelimeter);
+            return input.split(customDelimiter);
         }
         return validateCommaAndColonDelimiter(input);
     }
 
-    private boolean containsCustomDelimeter(String input) {
+    private boolean containsCustomDelimiter(String input) {
         Pattern pattern = Pattern.compile(REGEX);
         Matcher matcher = pattern.matcher(input);
         return matcher.find();
     }
 
-    private String getCustomDelimeter(String input) {
-        return input.substring(CUSTOM_DELIMETER_START_INDEX, CUSTOM_DELIMETER_END_INDEX);
+    private String getCustomDelimiter(String input) {
+        return input.substring(CUSTOM_DELIMITER_START_INDEX, CUSTOM_DELIMITER_END_INDEX);
     }
 
     private String[] validateCommaAndColonDelimiter(String input) {
@@ -38,7 +38,7 @@ public class InputSplitter {
         return input.split("[,:]");
     }
 
-    private String escapeMetacharacter(String delimeter) {
-        return Pattern.quote(delimeter);
+    private String escapeMetacharacter(String delimiter) {
+        return Pattern.quote(delimiter);
     }
 }

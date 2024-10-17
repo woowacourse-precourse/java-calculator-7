@@ -10,7 +10,7 @@ public class CalculatorController {
     private final Calculator calculator = new Calculator();
 
     public void operatePlusCalculator() {
-        String[] numbers = inputSplitter.splitByDelimeter(InputView.inputString());
+        String[] numbers = inputSplitter.splitByDelimiter(InputView.inputString());
         int sum = calculator.calculateSum(numbers);
         OutputView.printResult(sum);
     }
