@@ -7,8 +7,29 @@ public class JudgmentAPI {
 
 	private JudgmentAPI() {}
 
-	public boolean judgmentNumber(Character ch) {
-		return true;
+	private boolean judgmentNumber(Character ch) {
+		for(char c = '0'; c <= '9'; c++) {
+			if(ch.equals(c)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean[] booleanTypeNumbers(Character[] charArrays) {
+		boolean[] booleans = new boolean[charArrays.length];
+		int idx = 0;
+
+		for(char c : charArrays) {
+			if(judgmentNumber(c)) {
+				booleans[idx] = true;
+			} else {
+				booleans[idx] = false;
+			}
+			idx++;
+		}
+
+		return booleans;
 	}
 
 	public boolean judgmentFormat(String sentence) {
