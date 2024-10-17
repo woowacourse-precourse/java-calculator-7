@@ -22,11 +22,11 @@ public class InputData {
 
     private String findSeparator(String input) {
         Pattern pattern = Pattern.compile(Condition.CUSTOM_SEPARATOR_INPUT);
-        Matcher matcher = pattern.matcher(input);
 
-        if (matcher.find()) {
+        Matcher matcher;
+        while ((matcher = pattern.matcher(input)).find()) {
             separators.add(matcher.group().charAt(Condition.CUSTOM_SEPARATOR_POSITION));
-            return matcher.replaceFirst("");
+            input = matcher.replaceFirst("");
         }
 
         return input;
