@@ -44,6 +44,21 @@ class ApplicationTest extends NsTest {
             run("//;\\n1;2;3");
             assertThat(output()).contains("결과: 6");
 
+            run("//3\\n333");
+            assertThat(output()).contains("결과: 6");
+
+            run("//3\\n43331");
+            assertThat(output()).contains("결과: 6");
+
+            run("//o\\n1o2o3");
+            assertThat(output()).contains("결과: 6");
+
+            run("//-3\\n2-33-32");
+            assertThat(output()).contains("결과: 7");
+
+            run("// \\n2 3 4");
+            assertThat(output()).contains("결과: 9");
+
         });
     }
 
@@ -52,6 +67,11 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
+        );
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1, 2  ,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
