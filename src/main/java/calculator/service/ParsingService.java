@@ -1,19 +1,23 @@
 package calculator.service;
 
+import calculator.dto.OperandDTO;
 import java.util.ArrayList;
 
 public class ParsingService {
     private static final int CUSTOM_START_INDEX = 2;
     private static final int CUSTOM_END_INDEX = 5;
+    private static final char DEFAULT_DELIMITER1 = ',';
+    private static final char DEFAULT_DELIMITER2 = ':';
 
     private ArrayList<Integer> operandList = new ArrayList<>();
 
-    public void parseOperandStr(String operandStr) {
+    public OperandDTO parseOperandStr(String operandStr) {
         if(checkIFStringEmpty(operandStr)){
             operandList.add(0);
+            return new OperandDTO(operandList);
         }
 
-
+        return new OperandDTO(operandList);
     }
 
     //입력받은 문자열이 없을 때 true return
@@ -24,6 +28,7 @@ public class ParsingService {
 
     private static void errorCheck(String operandStr){
         checkStartingPoint(operandStr);
+        checkEndPoint(operandStr);
     }
 
     // 문자열의 처음이 숫자이거나 // 가 아니라면 에러 발생
@@ -32,4 +37,10 @@ public class ParsingService {
             throw new IllegalArgumentException();
     }
 
+    //문자열의 마지막이 숫자로 끝나지 않으면 에러 발생
+    private static void checkEndPoint(String operandStr){
+        char endOfString = operandStr.charAt(operandStr.length() - 1);
+        if(!Character.isDigit(endOfString))
+            throw new IllegalArgumentException();
+    }
 }
