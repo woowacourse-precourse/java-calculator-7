@@ -1,6 +1,6 @@
 package calculator;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,13 +15,8 @@ public class StringAddCalculator {
         if (input == null || input.isBlank()) {
             return DEFAULT_VALUE;
         }
-
-        // TODO: 한 줄로 나타내기
         DelimiterAndNumber delimiterAndNumber = extractCustomDelimiterAndNumbers(input);
-        String delimiters = delimiterAndNumber.delimiters();
-        String numbersString = delimiterAndNumber.numbersString();
-
-        List<Integer> numbers = splitNumbers(delimiters, numbersString);
+        List<Integer> numbers = splitNumbers(delimiterAndNumber);
         validateNumbers(numbers);
         return sum(numbers);
     }
@@ -39,13 +34,13 @@ public class StringAddCalculator {
         return new DelimiterAndNumber(delimiters, numbersString);
     }
 
-    private List<Integer> splitNumbers(String delimiters, String numbersString) {
-        List<Integer> numbers = new ArrayList<>();
+    private List<Integer> splitNumbers(DelimiterAndNumber delimiterAndNumber) {
+        String delimiters = delimiterAndNumber.delimiters();
+        String numbersString = delimiterAndNumber.numbersString();
         String[] splitNumbers = numbersString.split(delimiters);
-        for (String splitNumber : splitNumbers) {
-            numbers.add(Integer.parseInt(splitNumber));
-        }
-        return numbers;
+        return Arrays.stream(splitNumbers)
+                .map(Integer::parseInt)
+                .toList();
     }
 
     private void validateNumbers(List<Integer> numbers) {
