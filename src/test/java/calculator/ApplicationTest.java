@@ -9,6 +9,29 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
     @Test
+    void 콤마_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("1,2");
+            assertThat(output()).contains("결과 : 3");
+        });
+    }
+    @Test
+    void 콤마_콜론_구분자_사용_한자릿수() {
+        assertSimpleTest(() -> {
+            run("1,2:3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+    @Test
+    void 콤마_콜론_구분자_사용_두자릿수() {
+        assertSimpleTest(() -> {
+            run("11,22:33");
+            assertThat(output()).contains("결과 : 66");
+        });
+    }
+
+
+    @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1");
