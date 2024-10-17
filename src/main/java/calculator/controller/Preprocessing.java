@@ -1,22 +1,23 @@
 package calculator.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Preprocessing {
     // 첫 글자가 "/"로 시작하는지 아닌지에 따라 메소드 실행
-    public void firstLetter(String given) {
+    public boolean firstLetter(String given) {
         String firstLetter = given.substring(0,1);
 
-        if (firstLetter == "/") {
-
-        } else {
-            separation(given);
+        if (firstLetter == "/") { // 커스텀 구분자 추출해야 됨
+            return true;
+        } else { // 바로 계산 ㄱㄱ
+            return false;
         }
     }
 
     // <숫자 - 숫자 외 모든것> 분리
-    private List<String> separation(String given) {
+    public List<String> separation(String given) {
         // 결괏값으로 반환할 분리된 List
         List<String> separated = new ArrayList<>();
 
@@ -35,4 +36,21 @@ public class Preprocessing {
     }
 
     // 커스텀 구분자 저장
+    public List<String> findCustomSeparator(String given) {
+        String temp = null;
+        String customSeparator = null;
+        int endIdx = -1; // 커스텀 지정 끝나는 지점 인덱스
+
+        for (int i = 2; i < given.length(); i++) {
+            if (given.substring(i - 1, i + 1).equals("\n")) {
+                customSeparator = temp.substring(0, temp.length() - 1);
+                endIdx = i;
+                break;
+            } else {
+                temp += given.substring(i, i + 1);
+            }
+        }
+
+        return Arrays.asList(customSeparator, given.substring(endIdx + 1));
+    }
 }
