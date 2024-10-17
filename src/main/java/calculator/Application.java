@@ -11,7 +11,7 @@ public class Application {
             return 0;
         }
 
-        String delimiter = ",;";
+        String delimiter = ",|:";
 
         if (input.startsWith("//")) {
             Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
