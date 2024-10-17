@@ -6,9 +6,9 @@ import calculator.delimiter.Delimiters;
 import calculator.util.console.Console;
 import calculator.util.integer.IntegerUtils;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 public class Application {
 
@@ -16,22 +16,12 @@ public class Application {
 
     public static void main(String[] args) {
 
-        List<Delimiter> delimiterList = new LinkedList<>();
-        delimiterList.add(new Delimiter(","));
-        delimiterList.add(new Delimiter(":"));
-
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
-        Optional<Delimiter> delimiter = customDelimiterService.extract(input);
-        if (delimiter.isPresent()) {
-            input = customDelimiterService.trimCustomDelimiter(input);
-            delimiterList.add(delimiter.get());
-        }
+        Delimiters delimiters = new Delimiters(getDelimiters(input));
 
-        Delimiters delimiters = new Delimiters(delimiterList);
-
-        List<String> numberTokens = delimiters.split(input);
+        List<String> numberTokens = delimiters.split(customDelimiterService.trimCustomDelimiter(input));
         try {
             List<Integer> numbers = IntegerUtils.parsePositiveIntegers(numberTokens);
             int sum = IntegerUtils.sum(numbers);
@@ -39,5 +29,18 @@ public class Application {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("구분자가 아닌 문자가 포함되어 있습니다.");
         }
+    }
+
+    private static List<Delimiter> getDelimiters(String input) {
+        List<Delimiter> delimiters = new ArrayList<>(getDefaultDelimiters());
+        customDelimiterService.extract(input).ifPresent(delimiters::add);
+        return delimiters;
+    }
+
+    private static List<Delimiter> getDefaultDelimiters() {
+        List<Delimiter> delimiters = new LinkedList<>();
+        delimiters.add(new Delimiter(","));
+        delimiters.add(new Delimiter(":"));
+        return delimiters;
     }
 }
