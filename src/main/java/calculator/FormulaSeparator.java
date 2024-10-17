@@ -10,7 +10,7 @@ public class FormulaSeparator {
     private static final int CUSTOM_SEPARATE_IDX = 2;
     private static final int CUSTOM_FORMULA_START_IDX = 5;
     private final FormatValidator formatValidator = new FormatValidator();
-    private final Set<Character> separators = new HashSet<>(Set.of(',', ':'));
+    private final Set<Character> separators = new HashSet<>(DefaultSeparate.getSeparates());
 
     public List<Integer> getNumbers(String formula) {
         formatValidator.validateFormula(formula);
