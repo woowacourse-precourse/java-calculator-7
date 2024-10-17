@@ -9,7 +9,7 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 import java.util.List;
 
 public class Application {
-    
+
     public static void main(String[] args) {
         UserInputValidator validator = new UserInputValidator();
         System.out.println(START_TEXT.getValue());
@@ -20,7 +20,7 @@ public class Application {
             System.out.println(RESULT_TEXT.getValue() + 0);
             return;
         }
-        
+
         if (validator.containCustomValidator(userInput)) {
             stringSpliter = new StringSpliter(userInput.substring(
                     userInput.indexOf(CUSTOM_DEL_POST_SEPERATOR.getValue()) + SEPERATED_NUMBER_INDEX),
@@ -32,8 +32,8 @@ public class Application {
         if (validator.isNumber(splitUserInput)) {
             System.out.println(RESULT_TEXT.getValue() + calculateNumber(splitUserInput));
         }
-        
+
     }
-    
+
     private static final int SEPERATED_NUMBER_INDEX = 2;
 }

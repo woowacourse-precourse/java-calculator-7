@@ -7,14 +7,13 @@ public enum PrintText {
     CUSTOM_DEL_POST_SEPERATOR("\\n"),
     COMMA(","),
     COLON(":");
-    
+
     private final String value;
-    
+
     PrintText(String value) {
         this.value = value;
-        
     }
-    
+
     public String getValue() {
         return value;
     }

@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 public class StringSpliter {
-    
+
     private String userInput;
     private String customDel;
-    
+
     public StringSpliter(String userInput) {
         this.userInput = userInput;
     }
@@ -20,7 +20,7 @@ public class StringSpliter {
         this.userInput = userInput;
         this.customDel = customDel;
     }
-    
+
     public List<String> splitUserInput() {
         List<String> splitUserInputs = new ArrayList<>();
         StringTokenizer halfSplitUserInput = new StringTokenizer(userInput, COMMA.getValue());
@@ -32,7 +32,7 @@ public class StringSpliter {
         }
         return splitUserInputs;
     }
-    
+
     public List<String> splitCustomDelUserInput() {
         List<String> splitUserInputs = new ArrayList<>();
         StringTokenizer firstSplit = new StringTokenizer(userInput, customDel);
