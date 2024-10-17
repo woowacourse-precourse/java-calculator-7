@@ -1,6 +1,7 @@
 package calculator.controller;
 
 import calculator.service.CalculatorService;
+import calculator.validators.DelimiterValidator;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -18,6 +19,7 @@ public class CalculateController {
 
     public void start() {
         String input = inputView.getString();
+        DelimiterValidator.validateDelimiterFormat(input);
         Integer result = service.getResult(input);
         outputView.printResultMessage(result);
     }
