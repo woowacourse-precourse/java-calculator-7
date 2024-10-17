@@ -1,6 +1,11 @@
 package calculator.model;
 
 public class CustomDelimiterProcessor {
+    private final static char CUSTOM_DELIMITER_PREFIX = '/';
+    private static final String CUSTOM_DELIMITER_FIRST_FORMAT = "//";
+    private static final String CUSTOM_DELIMITER_LAST_FORMAT = "\n";
+    private static final int CUSTOM_DELIMITER_FORMAT_MIN_LENGTH = 5;
+
     public static String addCustomDelimiters(String inputString, Delimiters delimiters) {
         while (usesCustomDelimiter(inputString)) {
             correctCustomDelimiterFormatOrThrow(inputString);
@@ -16,7 +21,7 @@ public class CustomDelimiterProcessor {
             return false;
         }
         char firstChar = inputString.charAt(0);
-        return firstChar == '/';
+        return firstChar == CUSTOM_DELIMITER_PREFIX;
     }
 
     private static void correctCustomDelimiterFormatOrThrow(String inputString) {
@@ -32,16 +37,16 @@ public class CustomDelimiterProcessor {
     }
 
     private static boolean checkCustomDelimiterFormatLength(String inputString) {
-        return inputString.length() >= 5;
+        return inputString.length() >= CUSTOM_DELIMITER_FORMAT_MIN_LENGTH;
     }
 
     private static boolean isCustomDelimiterFirstFormatCorrect(String inputString) {
         String firstFormat = inputString.substring(0, 1);
-        return firstFormat.equals("//");
+        return firstFormat.equals(CUSTOM_DELIMITER_FIRST_FORMAT);
     }
 
     private static boolean isCustomDelimiterLastFormatCorrect(String inputString) {
         String lastFormat = inputString.substring(3, 4);
-        return lastFormat.equals("\n");
+        return lastFormat.equals(CUSTOM_DELIMITER_LAST_FORMAT);
     }
 }
