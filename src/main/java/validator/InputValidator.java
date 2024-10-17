@@ -21,7 +21,7 @@ public class InputValidator {
     }
 
     private static void hasNumberAndSeparator(final String inputs) {
-        if(inputs.length() == 0 || inputs.contains(" ")) {
+        if (inputs.length() == 0 || inputs.contains(" ")) {
             throw new IllegalArgumentException("올바른 구분자와 양수를 입력해야 합니다.");
         }
     }
@@ -37,7 +37,7 @@ public class InputValidator {
     }
 
     private static void hasSeparator(final String inputs) {
-        if(inputs.contains(REGEX_CUSTOM_DELIMITER_START) && inputs.contains(REGEX_CUSTOM_DELIMITER_END)) {
+        if (inputs.contains(REGEX_CUSTOM_DELIMITER_START) && inputs.contains(REGEX_CUSTOM_DELIMITER_END)) {
             hasCustomSeparator(inputs);
             return;
         }
@@ -46,10 +46,10 @@ public class InputValidator {
     }
 
     private static void hasCustomSeparator(String inputs) {
-        inputs = inputs.replace(REGEX_CUSTOM_DELIMITER_START,"").replace(REGEX_CUSTOM_DELIMITER_END,"");
+        inputs = inputs.replace(REGEX_CUSTOM_DELIMITER_START, "").replace(REGEX_CUSTOM_DELIMITER_END, "");
         for (String input : inputs.split("")) {
             if (input.matches(REGEX_CUSTOM_DELIMITER)) {
-                if(input.contains(MINUS_DELIMITER)) isMinusDelimiter = true;
+                if (input.contains(MINUS_DELIMITER)) isMinusDelimiter = true;
                 return;
             }
         }
@@ -69,20 +69,20 @@ public class InputValidator {
 
     private static void hasMinusNumber(final String inputs) {
         String[] inputArray = inputs.split("");
-        for(int i = 1; i < inputArray.length; i++){
-            checkMinusNumber(inputArray[i].charAt(0), inputArray[i-1].charAt(0));
+        for (int i = 1; i < inputArray.length; i++) {
+            checkMinusNumber(inputArray[i].charAt(0), inputArray[i - 1].charAt(0));
         }
     }
 
     private static void checkMinusNumber(final char firstValue, final char secondValue) {
-        if(Character.isDigit(firstValue)) {
-            if(!isMinusDelimiter && MINUS_DELIMITER.equals(String.valueOf(secondValue))) {
+        if (Character.isDigit(firstValue)) {
+            if (!isMinusDelimiter && MINUS_DELIMITER.equals(String.valueOf(secondValue))) {
                 throw new IllegalArgumentException("양수를 입력해야 합니다.");
             }
         }
 
-        if(MINUS_DELIMITER.equals(String.valueOf(firstValue))) {
-            if(isMinusDelimiter && MINUS_DELIMITER.equals(String.valueOf(secondValue))) {
+        if (MINUS_DELIMITER.equals(String.valueOf(firstValue))) {
+            if (isMinusDelimiter && MINUS_DELIMITER.equals(String.valueOf(secondValue))) {
                 throw new IllegalArgumentException("양수를 입력해야 합니다,");
             }
         }

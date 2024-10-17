@@ -27,7 +27,7 @@ public class Calculator {
 
     private int sum(final List<Integer> numbers) {
         int result = 0;
-        for(Integer number : numbers) {
+        for (Integer number : numbers) {
             result += number;
         }
 
