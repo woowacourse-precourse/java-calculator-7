@@ -1,6 +1,6 @@
 package calculator.view;
 
-import static calculator.common.exception.ErrorMessage.BLANK_INPUT_ERROR;
+import static calculator.common.exception.ErrorMessage.INPUT_BLANK_ERROR;
 
 import camp.nextstep.edu.missionutils.Console;
 
@@ -21,7 +21,7 @@ public class InputView {
 
         private static void validateBlank(String message) {
             if (message.isBlank()) {
-                throw new IllegalArgumentException(BLANK_INPUT_ERROR);
+                throw new IllegalArgumentException(INPUT_BLANK_ERROR);
             }
         }
     }
