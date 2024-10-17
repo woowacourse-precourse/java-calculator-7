@@ -219,9 +219,16 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 소수_포함_입력_예외() {
+    void 소수_입력_의도_예외() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1.5,2.3"))
+                        .isInstanceOf(IllegalArgumentException.class));
+    }
+
+    @Test
+    void 소수_입력_의도_예외2() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("// \n1.5:2.5:2.3"))
                         .isInstanceOf(IllegalArgumentException.class));
     }
 
