@@ -9,10 +9,10 @@ public class InputParser {
     public InputParser(String userInputMessage, Delimiter delimiter){
         this.delimiter = delimiter;
         this.userInputMessage = userInputMessage;
-        checkAllowedDelimiters();
+        checkAllowedDelimiters(userInputMessage, delimiter);
     }
 
-    private void checkAllowedDelimiters(){
+    public static void checkAllowedDelimiters(String userInputMessage, Delimiter delimiter){
         for(int i = 0; i < userInputMessage.length(); i++){
             if(userInputMessage.charAt(i) == '.'){
                 if(0 < i && !UserInputController.checkNumber(userInputMessage.charAt(i-1))){
