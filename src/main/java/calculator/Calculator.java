@@ -25,11 +25,7 @@ public class Calculator {
     private static int[] getBasicSeparatorNumbers(String input) {
         String[] basicSeparator = input.split(",|:");
 
-        int[] basicNumberSeparator = new int[basicSeparator.length];
-        for (int i = 0; i < basicSeparator.length; i++) {
-            basicNumberSeparator[i] = Integer.parseInt(basicSeparator[i]);
-            isPositiveNumber(basicNumberSeparator, i);
-        }
+        int[] basicNumberSeparator = stringToInt(basicSeparator);
         return basicNumberSeparator;
     }
 
@@ -39,12 +35,17 @@ public class Calculator {
         input = input.substring(1);
         String[] customSeparator = input.split(separator);
 
-        int[] customNumberSeparator = new int[customSeparator.length];
-        for (int i = 0; i < customSeparator.length; i++) {
-            customNumberSeparator[i] = Integer.parseInt(customSeparator[i]);
-            isPositiveNumber(customNumberSeparator, i);
-        }
+        int[] customNumberSeparator = stringToInt(customSeparator);
         return customNumberSeparator;
+    }
+
+    private static int[] stringToInt(String[] separator) {
+        int[] basicNumberSeparator = new int[separator.length];
+        for (int i = 0; i < separator.length; i++) {
+            basicNumberSeparator[i] = Integer.parseInt(separator[i]);
+            isPositiveNumber(basicNumberSeparator, i);
+        }
+        return basicNumberSeparator;
     }
 
     private static void isPositiveNumber(int[] numberSeparator, int i) {
