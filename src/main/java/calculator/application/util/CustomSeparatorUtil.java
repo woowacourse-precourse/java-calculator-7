@@ -8,4 +8,13 @@ public final class CustomSeparatorUtil {
         return text.contains("//") && text.contains("\\n");
     }
 
+    public static String extractCustomSeparator(String text) {
+        String separator = text.substring(2,3);
+        return separator;
+    }
+
+    public static String extractExcludeCustomSeparator(String text) {
+        String numbersInput = text.substring(5);
+        return numbersInput;
+    }
 }
