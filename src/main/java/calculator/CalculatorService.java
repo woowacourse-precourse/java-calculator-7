@@ -2,13 +2,14 @@ package calculator;
 
 public class CalculatorService {
 
-    public String[] splitByPositiveString(String positiveString, String customDelimiter) {
-        positiveString = positiveString.replace(",", ":");
+    public char[] removeDelimiterAndToCharArray(String positiveString, String customDelimiter) {
+        String positives = removeDelimiter(positiveString, customDelimiter);
+        return positives.toCharArray();
+    }
 
-        if (!customDelimiter.isBlank())
-            positiveString = positiveString.replace(customDelimiter, ":");
-
-        return positiveString.split(":");
+    private String removeDelimiter(String positiveString, String customDelimiter) {
+        positiveString = positiveString.replaceAll("[:|,]", "");
+        return positiveString.replace(customDelimiter, "");
     }
 
     public int[] convertStringArrayToIntArray(String[] numbersString) {
