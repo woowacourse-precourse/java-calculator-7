@@ -31,7 +31,7 @@
 ![첫주차미션_유스케이스_다이어그램](https://github.com/user-attachments/assets/f0f818d0-6ee7-40fc-bb6d-8f81956f2dec)
 
 ## MVC
-### Model
+### 🔵 Model
 #### Calculator
 👉 **입력 받은 숫자로 구성된 문자열을 계산하기 위한 클래스**
 - **Field**
@@ -42,7 +42,7 @@
   - `plus()` : 모든 숫자 더하기
   - `checkSeparator()` : 구분자 여부 확인하기
 
-### View
+### 🟡 View
 #### InputView
 👉 **입력을 받기 위한 클래스**
 - **Field**
@@ -58,7 +58,7 @@
 - **Method**
   - `printSumToUser()` : 계산 결과를 출력하기
 
-### Controller
+### 🟢 Controller
 #### MainController
 👉 **전체 시스템에서 사용자의 요청을 처리하고, 모델과 상호작용을 위한 클래스**
 - **Method**
@@ -67,7 +67,7 @@
   - `calculate()` : 입력 받은 숫자를 계산하기
   - `printSumToUser()` : 계산 결과를 사용자에게 출력하기
 
-### Validation
+### 🔴 Validation
 #### InputValidator  
 👉 **예외를 확인하기 위한 클래스**
 - **Field**
