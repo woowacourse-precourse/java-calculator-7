@@ -24,7 +24,8 @@ public class ParsingService {
         }
 
         errorCheck(operandStr);
-
+        parse(operandStr);
+        
         return new OperandDTO(operandList);
     }
 
@@ -60,15 +61,29 @@ public class ParsingService {
     }
 
     private void parse(String operandStr){
+        //custom 구분자 추출
         if(operandStr.startsWith("//")){
             delimiters.add(operandStr.charAt(CUSTOM_DELIMITER_INDEX));
         }
-
         operandStr = operandStr.substring(EXCEPT_CUSTOM_DELIMITER_INDEX);
 
-
+        //구분자로 구분
+        for(char ch : operandStr.toCharArray()){
+            StringBuilder sb = new StringBuilder();
+            if(delimiters.contains(ch) && !sb.isEmpty()){  //구분자 바로 다음에 또 구분자 나온다면 error
+                operandList.add(Integer.parseInt(sb.toString()));
+                sb.setLength(0);
+            }
+            else if(sb.isEmpty()){
+                throw new IllegalArgumentException();
+            }
+            else {
+                checkInteger(ch);
+                sb.append(ch);
+            }
+        }
     }
-    
+
     private static void checkInteger(char ch){
         if(!Character.isDigit(ch))
             throw new IllegalArgumentException();
