@@ -2,6 +2,7 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
@@ -18,14 +19,15 @@ class ApplicationTest extends NsTest {
 	}
 
 	@Test
+	@DisplayName("int를 벗어나는 큰 숫자 입력 테스트")
 	public void longNumberTest() {
-		// given
-		long num1 = 100_000_000_000L;
-		long num2 = 200_000_000_000L;
-		long num3 = 200_000_000_000L;
-
-		// when
 		assertSimpleTest(() -> {
+			// given
+			long num1 = 100_000_000_000L;
+			long num2 = 200_000_000_000L;
+			long num3 = 200_000_000_000L;
+
+			// when
 			run(num1 + ":" + num2 + ":" + num3);
 
 			// then
@@ -34,12 +36,13 @@ class ApplicationTest extends NsTest {
 	}
 
 	@Test
+	@DisplayName("여러개의 커스텀 구분자 입력 테스트")
 	public void severalCustomSeparatorTest() {
-		// given
-		String input = "//;\\n//-\\n1;2-3";
-
-		// when
 		assertSimpleTest(() -> {
+			// given
+			String input = "//;\\n//-\\n1;2-3";
+
+			// when
 			run(input);
 
 			// then
@@ -48,12 +51,13 @@ class ApplicationTest extends NsTest {
 	}
 
 	@Test
+	@DisplayName("공백 입력 테스트")
 	public void blankTest(){
-		// given
-		String input = "\n";
-
-		// when
 		assertSimpleTest(() -> {
+			// given
+			String input = "\n";
+
+			// when
 			run(input);
 
 			// then
@@ -62,12 +66,13 @@ class ApplicationTest extends NsTest {
 	}
 
 	@Test
+	@DisplayName("구분자 없는 숫자 입력 테스트")
 	public void hasNotSeparatorTest(){
-		 // given
-		String input = "1";
-
-		// when
 		assertSimpleTest(() -> {
+			// given
+			String input = "1";
+
+			// when
 			run(input);
 
 			//then
@@ -76,12 +81,13 @@ class ApplicationTest extends NsTest {
 	}
 
 	@Test
+	@DisplayName("구분자가 없으면서 커스텀 구분자가 있는 입력 테스트")
 	public void hasNotSeparatorAndHasCustomCeparatorTest(){
-		// given
-		String input = "//;\\n1";
-
-		// when
 		assertSimpleTest(() -> {
+			// given
+			String input = "//;\\n1";
+
+			// when
 			run(input);
 
 			//then
