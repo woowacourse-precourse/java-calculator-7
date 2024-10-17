@@ -109,4 +109,17 @@ public class InputValidator {
             throw new IllegalArgumentException(ErrorMessage.MISS_SEPARATOR.getMessage());
         }
     }
+
+    /**
+     * 기본 구분자와 커스텀 구분자 외의 구분자가 포함된 경우 예외 발생
+     */
+    public static void validateInvalidDelimiter(String input) {
+        String[] numbers = splitCustomInput(input);
+
+        for (String number : numbers) {
+            if (!number.matches("\\d+")) {
+                throw new IllegalArgumentException(ErrorMessage.NOT_DEFINE_CUSTOM_SEPARATOR.getMessage());
+            }
+        }
+    }
 }

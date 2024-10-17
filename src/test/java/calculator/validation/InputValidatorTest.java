@@ -76,4 +76,18 @@ class InputValidatorTest {
         assertThatThrownBy(() -> InputValidator.validateContinuousNumbers(input)).isInstanceOf(
                 IllegalArgumentException.class).hasMessage(ErrorMessage.MISS_SEPARATOR.getMessage());
     }
+
+    @DisplayName("기본 구분자와 커스텀 구분자 외의 구분자가 포함된 경우")
+    @Test
+    public void validateInvalidDelimiterTest() {
+        //given
+        String input1 = "//%\n1%3%2@4";  // 커스텀 구분자 사용
+        String input2 = "1,2:3@4";  // 기본 구분자 사용
+
+        //then
+        assertThatThrownBy(() -> InputValidator.validateInvalidDelimiter(input1)).isInstanceOf(
+                IllegalArgumentException.class).hasMessage(ErrorMessage.NOT_DEFINE_CUSTOM_SEPARATOR.getMessage());
+        assertThatThrownBy(() -> InputValidator.validateInvalidDelimiter(input2)).isInstanceOf(
+                IllegalArgumentException.class).hasMessage(ErrorMessage.NOT_DEFINE_CUSTOM_SEPARATOR.getMessage());
+    }
 }

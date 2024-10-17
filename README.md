@@ -25,7 +25,7 @@
     - [x] 입력된 문자열의 숫자 자리(양수)에 음수가 들어간 경우 ``IllegalArgumentException``을 발생시킨다. ex) ``"1,-2,3"``
 - [x] 구분자 없이 숫자만 연속으로 입력한 경우 ``IllegalArgumentException``을 발생시킨다.(입출력 요구사항에 구분자와 양수로 구성된 문자열: 숫자만 단독으로 입력 불가)
   ex) ``"123"``
-- [ ] 커스텀 구분자를 지정하지 않고 기본 구분자 이외의 다른 문자가 포함된 경우 ``IllegalArgumentException``을 발생시킨다. ex) ``"1|2|3"``
+- [x] 커스텀 구분자를 지정하지 않고 기본 구분자 이외의 다른 문자가 포함된 경우 ``IllegalArgumentException``을 발생시킨다. ex) ``"1|2|3"``
 - [ ] 입력된 문자열에 숫자 0이 단독으로 포함된 경우 ``IllegalArgumentException``을 발생시킨다. ex) ``"1,0,3"``
 - [ ] (커스텀)구분자가 여러 번 중복해서 입력된 경우 ``IllegalArgumentException``을 발생시킨다. ex) ``"//;\n1;;2;3"``
 
