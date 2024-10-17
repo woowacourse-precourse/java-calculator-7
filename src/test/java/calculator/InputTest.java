@@ -2,8 +2,6 @@ package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Arrays;
-import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class InputTest {
@@ -13,8 +11,7 @@ public class InputTest {
     @Test
     void inputSplit() {
         // given
-
-        List<String> separator = Arrays.asList(",", ";");
+        Separator separator = new Separator();
 
         // when
         final int[] numbers = separatorInput(separator);
@@ -23,8 +20,8 @@ public class InputTest {
         assertThat(numbers).containsExactly(1, 2, 3);
     }
 
-    private int[] separatorInput(List<String> separator) {
-        String regex = String.join("|", separator);
+    private int[] separatorInput(Separator separator) {
+        String regex = separator.getRegex();
         String[] splitStr = input.getInput().split(regex);
 
         int[] numbers = new int[splitStr.length];
