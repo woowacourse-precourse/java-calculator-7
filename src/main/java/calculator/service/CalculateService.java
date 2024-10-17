@@ -1,5 +1,6 @@
 package calculator.service;
 
+import calculator.model.PositiveNumbers;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +17,8 @@ public class CalculateService {
     public Long calculate(final String userInput) {
 
         addDelimeter(userInput);
+        PositiveNumbers positiveNumbers = getPositiveNumbersByDelimeter(userInput);
+
         return null;
     }
 
@@ -24,10 +27,9 @@ public class CalculateService {
 
         int firstIndexOfPrefix = userInput.indexOf(customDelimeterPrefix);
         int firstIndexOfPostfix = userInput.indexOf(customDelimeterPostfix);
-
         checkDelimterForm(firstIndexOfPrefix, firstIndexOfPostfix);
 
-        if (hasCustomDelimeter(firstIndexOfPrefix, firstIndexOfPostfix)) {
+        if (hasCustomDelimeter(userInput)) {
             delimeters.add(userInput.substring(firstIndexOfPrefix + 2, firstIndexOfPostfix));
         }
 
@@ -39,13 +41,36 @@ public class CalculateService {
 
     }
 
-    private boolean hasCustomDelimeter(int firstIndexOfPrefix, int firstIndexOfPostfix) {
+    //customDelimber 존재 여부 확인
+    private boolean hasCustomDelimeter(final String userInput) {
+
+        int firstIndexOfPrefix = userInput.indexOf(customDelimeterPrefix);
+        int firstIndexOfPostfix = userInput.indexOf(customDelimeterPostfix);
 
         if (firstIndexOfPrefix == -1 && firstIndexOfPostfix == -1) {
             return false;
         }
 
         return true;
+    }
+
+    private PositiveNumbers getPositiveNumbersByDelimeter(final String userInput) {
+
+        String numberAndDelimeters = hasCustomDelimeter(userInput) ?
+                userInput.substring(userInput.indexOf(customDelimeterPostfix) + 2)
+                : userInput.substring(0);
+
+        String regexString = "";
+        for (String regex : delimeters) {
+            regexString += regex;
+        }
+
+        String[] numbers = numberAndDelimeters.split("[" + regexString + "]");
+
+        PositiveNumbers positiveNumbers = new PositiveNumbers();
+        Arrays.stream(numbers).forEach(number -> positiveNumbers.addNumber(Integer.valueOf(number)));
+
+        return positiveNumbers;
     }
 
 
