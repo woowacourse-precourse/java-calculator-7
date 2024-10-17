@@ -37,8 +37,16 @@ public class Calculator {
         List<Integer> numbers = new ArrayList<>();
         //정수형 리스트로 변환
         for (String a : extracted) {
-            int number = Integer.parseInt(a);
-            numbers.add(number);
+            //예외 처리 - 음수, 숫자가 아닌경우
+            try {
+                int number = Integer.parseInt(a);
+                if (number < 0) {
+                    throw new IllegalArgumentException();
+                }
+                numbers.add(number);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException();
+            }
         }
         return numbers;
     }
