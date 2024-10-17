@@ -70,22 +70,22 @@ public class StringCalculator {
     }
 
     private static String[] splitInputByCustom(Matcher matcher) {
-        String delimiter = findDelimiterGroup(matcher);
-        String string = findStringGroup(matcher, delimiter);
-        return string.split(delimiter);
+        String custom = findCustomGroup(matcher);
+        String string = findStringGroup(matcher, custom);
+        return string.split(custom);
     }
 
-    private static String findDelimiterGroup(Matcher matcher) {
+    private static String findCustomGroup(Matcher matcher) {
         return matcher.group(FIRST);
     }
 
-    private static String findStringGroup(Matcher matcher, String delimiter) {
+    private static String findStringGroup(Matcher matcher, String custom) {
         String string = matcher.group(SECOND);
-        checkNotDefinedCustom(string, delimiter);
+        checkUndefinedDelimiter(string, custom);
         return string;
     }
 
-    private static void checkNotDefinedCustom(String string, String delimiter) {
+    private static void checkUndefinedDelimiter(String string, String delimiter) {
         char asciiOfDelimiter = delimiter.charAt(FIRST_LETTER);
         char letter;
 
