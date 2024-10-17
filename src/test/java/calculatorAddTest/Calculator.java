@@ -1,10 +1,12 @@
 package calculatorAddTest;
 
+import java.math.BigInteger;
+
 public class Calculator {
 
-    int sumFromString(String inputString) {
+    BigInteger sumFromString(String inputString) {
         if (inputString.isEmpty()) {
-            return 0;
+            return BigInteger.ZERO;
         }
 
         Delimiter delimiter = new Delimiter(inputString);
@@ -16,10 +18,10 @@ public class Calculator {
         return addingNumbers(delimitedNumbers);
     }
 
-    private int addingNumbers(String[] delimitedNumbers) {
-        int result = 0;
+    private BigInteger addingNumbers(String[] delimitedNumbers) {
+        BigInteger result = BigInteger.ZERO;
         for (String delimitedNumber : delimitedNumbers) {
-            result += Integer.parseInt(delimitedNumber);
+            result = result.add(new BigInteger(delimitedNumber));
         }
         return result;
     }

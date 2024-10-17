@@ -2,6 +2,7 @@ package calculatorAddTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.math.BigInteger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -33,5 +34,13 @@ public class CalculatorTest {
     @Test
     void 단일_문자_테스트() {
         assertEquals(1, calculator.sumFromString("1"));
+    }
+
+    @Test
+    void 아주_큰_숫자_테스트() {
+        // 매우 큰 숫자 테스트
+        assertEquals(new BigInteger("10000000000000000000000000000000000000"),
+                calculator.sumFromString(
+                        "5000000000000000000000000000000000000:5000000000000000000000000000000000000"));
     }
 }
