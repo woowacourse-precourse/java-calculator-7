@@ -1,7 +1,7 @@
 package calculator.model;
 
 public class CustomDelimiterProcessor {
-    private final static char CUSTOM_DELIMITER_PREFIX = '/';
+    private static final char CUSTOM_DELIMITER_PREFIX = '/';
     private static final String CUSTOM_DELIMITER_FIRST_FORMAT = "//";
     private static final String CUSTOM_DELIMITER_LAST_FORMAT = "\n";
     private static final int CUSTOM_DELIMITER_FORMAT_MIN_LENGTH = 5;
