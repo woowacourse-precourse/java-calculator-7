@@ -11,7 +11,7 @@ public class Application {
     private static final int SIZE_OF_CUSTOM_DELIMITER_END_SIGN = 2;
 
     public static void main(String[] args) {
-        System.out.println("덧셈할 문자열을 입력해 주세요."); // 여기도 메서드로 빼자
+        printInputMessage();
 
         // Get input
         String input = readLine();
@@ -81,6 +81,10 @@ public class Application {
             result += Integer.parseInt(number);
         }
         return result;
+    }
+
+    private static void printInputMessage() {
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
     }
 
     private static void printResult(int result) {
