@@ -78,6 +78,14 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 분리된_대상이_빈_문자열인_경우() {
+        assertSimpleTest(() -> {
+            run("1::::1");
+            assertThat(output()).contains("결과 : 2");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
