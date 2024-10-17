@@ -8,5 +8,6 @@ public class Application {
                 appConfig.parser(),
                 appConfig.adder()
         );
+        calculator.calculate();
     }
 }
