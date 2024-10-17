@@ -18,9 +18,7 @@
 
 - 입력된 문자열이 유효한지 검증한다.
 - 다양한 예외 상황을 처리하고 상세한 에러 메시지를 반환한다.
-- **빈 입력 및 공백 처리**: 입력이 비어 있거나 공백일 경우 `IllegalArgumentException`을 발생시킨다.
-    - **예시**: `""` → `IllegalArgumentException("입력이 비어있습니다.")` 발생
-    - **예시**: `" "` → `IllegalArgumentException("입력이 비어있습니다.")` 발생
+-
 - **숫자가 아닌 문자의 포함 여부**: 숫자가 아닌 문자가 포함된 경우 `IllegalArgumentException`을 발생시킨다.
     - **예시**: `"1,a:3"` → `IllegalArgumentException("숫자가 아닌 문자가 포함되었습니다.")` 발생
 - **음수 처리**: 음수가 포함된 경우 `IllegalArgumentException`을 발생시킨다.
