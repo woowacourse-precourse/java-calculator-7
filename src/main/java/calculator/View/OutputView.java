@@ -1,6 +1,7 @@
 package calculator.View;
 
 import calculator.Constants.OutputMessages;
+import calculator.Utils.NumberUtils;
 
 public class OutputView {
     public static void printResultMessage() {
@@ -8,6 +9,12 @@ public class OutputView {
     }
 
     public static void printResult(Double result) {
-        System.out.println(result);
+        if (NumberUtils.isInt(result)) {
+            System.out.println((long) (double) result);
+        }
+
+        if (!NumberUtils.isInt(result)) {
+            System.out.println(result);
+        }
     }
 }
