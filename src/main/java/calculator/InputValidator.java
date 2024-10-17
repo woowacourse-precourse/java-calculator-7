@@ -5,7 +5,7 @@ public class InputValidator {
 
         String[] stringArray = userInput.split("[,:]");
         for (String s : stringArray) {
-            if (!s.matches("[+-]?\\d*(\\.\\d+)?")) {
+            if (!s.matches("[+]?\\d*(\\.\\d+)?")) {
                 return false;
             }
         }
