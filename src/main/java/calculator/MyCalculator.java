@@ -2,19 +2,26 @@ package calculator;
 
 public class MyCalculator {
     private String numString;
-    private String[] delimiters = {",", ":", "`", "~", "!", "@", "#", "$", "%", "^", "&", "*", ";", ".", "/", "-", "=",
-            "_", "+"};
 
-    private String findDelimiter(String str) {
-        String delimiter = "";
-        for (int i = 0; i < delimiters.length; i++) {
-            if (!str.matches("//(s)\n(.*)")) {
-                throw new IllegalArgumentException("잘못된 값을 입력하셨습니다.");
-            }
-            delimiter = delimiters[i];
+    public static String customDelimiter(String str) {
+        String newStr = "";
+        if (str.matches("^//[\\D]*\\\\n.*$")) {
+            System.out.println("문자열 시작 인덱스: " + (str.indexOf("n") + 1));
+            newStr += str.substring(str.indexOf("n") + 1);
         }
-        return delimiter;
+        return newStr;
     }
+
+//    public String findDelimiter(String str) {
+//        String delimiter = "";
+//        for (int i = 0; i < delimiters.length; i++) {
+//            if (str.matches("//(s)\n(.*)")) {
+//                throw new IllegalArgumentException("잘못된 값을 입력하셨습니다.");
+//            }
+//            delimiter = delimiters[i];
+//        }
+//        return delimiter;
+//    }
 
     public MyCalculator(String numString) {
         this.numString = numString;
