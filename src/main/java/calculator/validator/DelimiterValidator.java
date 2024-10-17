@@ -19,7 +19,7 @@ public class DelimiterValidator {
     }
 
     public static String validRequireEscapeCharacter(String customDelimiter) {
-        if (customDelimiter.equals("|")) {
+        if (customDelimiter.equals("|") || customDelimiter.equals(".")) {
             customDelimiter = "\\" + customDelimiter;
         }
         return customDelimiter;
