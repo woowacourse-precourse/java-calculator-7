@@ -23,6 +23,11 @@ public class Application {
         return extraction;
     }
 
+    public static String[] operationSetting(String operationInput, ArrayList<String> separate){
+        String separatorPattern = String.join("|", separate);
+        return operationInput.split(separatorPattern);
+    }
+
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -31,7 +36,5 @@ public class Application {
         if (CustomDiscrimination(str)){
             separate.add(CustomExtraction(str));
         }
-
-
     }
 }
