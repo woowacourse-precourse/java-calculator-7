@@ -1,13 +1,11 @@
 package calculator;
 
 import calculator.delimiter.CustomDelimiterService;
-import calculator.delimiter.Delimiter;
+import calculator.delimiter.DelimiterFactory;
 import calculator.delimiter.Delimiters;
 import calculator.util.console.IOConsole;
 import calculator.util.integer.IntegerUtils;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Application {
@@ -19,9 +17,10 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = IOConsole.readLine();
 
-        Delimiters delimiters = new Delimiters(getDelimiters(input));
+        Delimiters delimiters = getDelimiters(input);
 
         List<String> numberTokens = delimiters.split(customDelimiterService.trimCustomDelimiter(input));
+
         try {
             List<Integer> numbers = IntegerUtils.parsePositiveIntegers(numberTokens);
             int sum = IntegerUtils.sum(numbers);
@@ -31,16 +30,9 @@ public class Application {
         }
     }
 
-    private static List<Delimiter> getDelimiters(String input) {
-        List<Delimiter> delimiters = new ArrayList<>(getDefaultDelimiters());
-        customDelimiterService.extract(input).ifPresent(delimiters::add);
-        return delimiters;
-    }
-
-    private static List<Delimiter> getDefaultDelimiters() {
-        List<Delimiter> delimiters = new LinkedList<>();
-        delimiters.add(new Delimiter(","));
-        delimiters.add(new Delimiter(":"));
-        return delimiters;
+    private static Delimiters getDelimiters(String input) {
+        return customDelimiterService.extract(input)
+                .map(DelimiterFactory::createDelimiters)
+                .orElseGet(DelimiterFactory::createDelimiters);
     }
 }
