@@ -7,33 +7,44 @@ import java.util.regex.Matcher;
 // 커스텀 구분자를 검증하는 클래스
 public class CustomDelimiterValidator implements ValidationStrategy {
 
+    private static final String INVALID_ESCAPE_CHARACTER = "\\";
+
     @Override
     public void validate(String input) {
-        if (isCustomDelimiter(input)) {
-            validateCustomDelimiter(input);
+        if (hasCustomDelimiter(input)) {
+            Matcher matcher = extractCustomDelimiter(input);
+            validateDelimiter(matcher);
         }
     }
 
-    private void validateCustomDelimiter(String input) {
+    // 입력 문자열이 커스텀 구분자(//)로 시작하는지 확인하는 메서드
+    private boolean hasCustomDelimiter(String input) {
+        return input.startsWith("//");
+    }
+
+    // 커스텀 구분자를 추출하는 메서드
+    private Matcher extractCustomDelimiter(String input) {
         Matcher matcher = DelimiterUtils.getCustomDelimiterPattern().matcher(input);
 
-        // 구분자 패턴이 잘못되었거나 구분자가 없으면 예외 발생
         if (!matcher.find()) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_CUSTOM_DELIMITER_ERROR.getMessage());
         }
 
-        // 구분자를 올바르게 추출하여 처리
+        return matcher;
+    }
+
+    // 추출한 구분자를 검증하는 메서드
+    private void validateDelimiter(Matcher matcher) {
         String customDelimiter = matcher.group(1);
 
-        // 커스텀 구분자가 비어있거나 이스케이프된 구분자일 경우 예외 처리
-        if (customDelimiter == null || customDelimiter.trim().isEmpty() || customDelimiter.equals("\\")) {
+        if (isInvalidDelimiter(customDelimiter)) {
             throw new IllegalArgumentException(ErrorMessage.MISSING_DELIMITER_ERROR.getMessage());
         }
     }
 
-    // 입력 문자열이 커스텀 구분자로 시작하는지 확인하는 메서드
-    private boolean isCustomDelimiter(String input) {
-        return input.startsWith("//");
+    // 구분자가 유효하지 않은지 검사하는 메서드
+    private boolean isInvalidDelimiter(String delimiter) {
+        return delimiter == null || delimiter.trim().isEmpty() || delimiter.equals(INVALID_ESCAPE_CHARACTER);
     }
 
 }
