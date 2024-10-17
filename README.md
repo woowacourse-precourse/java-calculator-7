@@ -8,12 +8,13 @@
 
 ### 문자열 전처리
 - [X] 커스텀 구분자가 존재하는지 검사한다. - InputValidator#isExistCustomSeparator
-- [ ] 커스텀 구분자가 있는 경우
-  - [X] 문자열 속에서 "//"와 "\n" 사이에 존재하는 구분자를 찾는다.
-  - [ ] 문자열 속에서 숫자만 분리시킨다.
-  - [ ] 커스텀 구분자와 기본 구분자를 사용해서 숫자를 분리한다.
-- [ ] 커스텀 구분자가 없는 경우
-  - [ ] 기본 구분자를 사용해서 숫자를 분리한다.
+- [X] 커스텀 구분자가 있는 경우
+  - [X] 문자열 속에서 "//"와 "\n" 사이에 존재하는 구분자를 찾는다. - InputValidator#getCustomSeparator
+  - [X] 문자열 속에서 커스텀 구분자 정보를 제거한다. - InputValidator#removeSeparatorInfo
+  - [X] 구분자 리스트를 1개의 문자열로 변환한다. - InputValidator#convertString
+  - [X] 커스텀 구분자와 기본 구분자를 사용해서 숫자를 분리한다. - InputValidator#separate
+- [X] 커스텀 구분자가 없는 경우
+  - [X] 기본 구분자를 사용해서 숫자를 분리한다. - InputValidator#separate
 
 ### 숫자 유효성 검사
 - [ ] 분리된 숫자가 모두 양수인지 검사한다.
