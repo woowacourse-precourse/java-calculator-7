@@ -1,5 +1,6 @@
 package calculator.ui;
 
+import calculator.service.UserInputNumbers;
 import calculator.service.UserInputSeparator;
 
 public class UserInputMessage {
@@ -17,5 +18,9 @@ public class UserInputMessage {
 
     public UserInputSeparator getUserInputSeparator() {
         return UserInputSeparator.of(this.message);
+    }
+
+    public UserInputNumbers getUserInputNumber() {
+        return UserInputNumbers.of(this.message);
     }
 }

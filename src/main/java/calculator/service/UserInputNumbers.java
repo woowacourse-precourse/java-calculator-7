@@ -4,8 +4,16 @@ public class UserInputNumbers {
 
     private final String numbers;
 
-    public UserInputNumbers(final String inputNumbers) {
+    private UserInputNumbers(final String inputNumbers) {
         this.numbers = inputNumbers;
+    }
+
+    public static UserInputNumbers of(final String message) {
+        if (message.startsWith("//")) {
+            final int index = message.lastIndexOf("\\n");
+            return new UserInputNumbers(message.substring(index + 2));
+        }
+        return new UserInputNumbers(message);
     }
 
     public Tokenizer getTokenizer(final SeparatorFactory separatorFactory) {
@@ -14,5 +22,10 @@ public class UserInputNumbers {
 
     public Tokenizer getTokenizer() {
         return new Tokenizer(this.numbers);
+    }
+
+    @Override
+    public String toString() {
+        return numbers;
     }
 }
