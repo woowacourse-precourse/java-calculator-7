@@ -1,9 +1,7 @@
-package calculator.service.generator;
+package calculator.separator.service;
 
 import calculator.sentence.domain.Sentence;
 import calculator.separator.domain.Separator;
-import calculator.separator.service.SeparatorCreateService;
-import calculator.separator.service.SeparatorExtractService;
 
 public class SeparatorGenerator {
     private final SeparatorExtractService extractor;
