@@ -21,4 +21,17 @@ public class Parser {
 
         return true;
     }
+
+    public static String extractCustomDelimiter(String string){
+        StringBuilder delimiter = new StringBuilder();
+
+        for(int index = 2; index < string.length()-1; index++){
+            if(string.startsWith(CUSTOM_DELIMITER_SUFFIX, index))
+                break;
+
+            delimiter.append(string.charAt(index));
+        }
+
+        return delimiter.toString();
+    }
 }
