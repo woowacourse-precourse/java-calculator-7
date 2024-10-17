@@ -3,6 +3,7 @@ package controller;
 import camp.nextstep.edu.missionutils.Console;
 import domain.Numbers;
 import domain.Separators;
+import validator.InputValidator;
 import view.InputView;
 import view.OutputView;
 
@@ -17,6 +18,7 @@ public class Calculator {
 
     public void start() {
         String inputValue = getInputValue();
+        InputValidator.checkInput(inputValue);
         String separators = new Separators(inputValue).getSeparators();
         List<Integer> numbers = new Numbers(inputValue, separators).getNumbers();
         int result = sum(numbers);
