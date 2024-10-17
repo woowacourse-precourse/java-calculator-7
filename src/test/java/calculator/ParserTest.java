@@ -57,4 +57,31 @@ class ParserTest {
         //then
         Assertions.assertThat(sum).isEqualTo(6);
     }
+
+    @Test
+    public void 커스텀구분자테스트1() throws Exception {
+        //given
+        String inputString = "//;\\n1;2,3:4";
+        //when
+        Parser parser = new Parser();
+        parser.parse(inputString);
+        List<Integer> nums = parser.getNums();
+        int sum = Calculator.sum(nums);
+        //then
+        Assertions.assertThat(sum).isEqualTo(10);
+    }
+
+    @Test
+    public void 커스텀구분자테스트2() throws Exception {
+        //given
+        String inputString = "//;\\n//$\\n1;2,3$4";
+        //when
+        Parser parser = new Parser();
+        parser.parse(inputString);
+        List<Integer> nums = parser.getNums();
+        int sum = Calculator.sum(nums);
+        //then
+        Assertions.assertThat(sum).isEqualTo(10);
+    }
+
 }
