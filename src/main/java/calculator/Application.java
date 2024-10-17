@@ -8,11 +8,8 @@ import java.util.regex.Pattern;
 
 public class Application {
     public static void main(String[] args) {
-//        System.out.println("//(.*?)\\n");
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
-        // TODO 커스텀 구분자 추출하고 -> 분리기능에 추출한 구분자 추가하기
-        // 입력받은 // 와 \n 의 사이의 구분자 값 추출하기
         String defaultDelimiter = ",|:";
         String[] splitInputNumber;
         Pattern pattern = Pattern.compile("^//(.)\\\\n");
@@ -25,6 +22,12 @@ public class Application {
             splitInputNumber = input.split(delimiter);
         } else {
             splitInputNumber = input.split(defaultDelimiter);
+        }
+        
+        for (String number : splitInputNumber) {
+            if (!number.matches("\\d+")) {
+                throw new IllegalArgumentException();
+            }
         }
 
         int result = 0;
