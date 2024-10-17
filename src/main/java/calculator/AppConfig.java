@@ -2,7 +2,11 @@ package calculator;
 
 public class AppConfig {
     public InputManager inputManager(){
-        return new InputManager();
+        return new InputManager(validator());
+    }
+
+    public Validator validator(){
+        return new Validator();
     }
 
     public Parser parser(){

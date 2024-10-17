@@ -24,7 +24,6 @@ public class Validator {
     }
 
     private boolean isDelimiter(char currentChar) {
-        System.out.println(currentChar);
         for(char ch : DEFAULT_DELIMITERS){
             if(ch==currentChar || ch==customDelimiter){
                 return true;
