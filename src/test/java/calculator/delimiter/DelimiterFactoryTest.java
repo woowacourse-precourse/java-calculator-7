@@ -42,8 +42,8 @@ class DelimiterFactoryTest {
                 Arguments.of("//;\\n1;2;3", "CustomDelimiter"),   // 커스텀 구분자
                 Arguments.of("1,2,3", "RegularDelimiter"),       // 정규 구분자 (쉼표)
                 Arguments.of("4:5:6", "RegularDelimiter"),       // 정규 구분자 (콜론)
-                Arguments.of("1", "DefaultDelimiter"),           // 디폴트 구분자 (단일 숫자)
-                Arguments.of(" ", "DefaultDelimiter")            // 디폴트 구분자 (공백)
+                Arguments.of("1", "FallbackDelimiter"),           // 디폴트 구분자 (단일 숫자)
+                Arguments.of(" ", "FallbackDelimiter")            // 디폴트 구분자 (공백)
         );
     }
 }
