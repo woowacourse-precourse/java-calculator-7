@@ -12,7 +12,6 @@ public class Calculation {
         String[] numbs = str.split(",");
 
         for(String num : numbs){
-
             // 문자열 형태의 숫자를 int형으로 변경 후 sum에 더함
             sum += Integer.parseInt(num);
         }

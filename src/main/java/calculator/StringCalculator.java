@@ -69,7 +69,7 @@ public class StringCalculator {
         }
 
         // 문자열이 //<구분자>\n 형식을 띄는지 확인
-        if(this.inputString.charAt(3)!='\\' || this.inputString.charAt(4)!='\n'){
+        if(this.inputString.charAt(3)!='\\' || this.inputString.charAt(4)!='n'){
 
             throw new IllegalArgumentException("잘못된 커스텀 구분자 문자열 형식입니다.");
 
@@ -118,7 +118,7 @@ public class StringCalculator {
             return true;
         }
 
-        if(c==';'){
+        if(c==':'){
             return true;
         }
 
