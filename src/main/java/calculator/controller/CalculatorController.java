@@ -7,7 +7,9 @@ import calculator.view.OutputView;
 public class CalculatorController {
 
     public void callCalculator() {
-        endCalculate(doCalculate(startCalculate()));
+        String userInput = startCalculate();
+        Integer userInputSum = doCalculate(userInput);
+        endCalculate(userInputSum);
     }
 
     public String startCalculate() {
