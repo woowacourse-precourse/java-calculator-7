@@ -52,13 +52,17 @@ public class Application {
 
         String[] numbers = numberPart.split(delimiterPart.toString());
 
+        validateNoNegativeNumbers(numbers); // 음수 있으면 예외 발생 (3.8 예외)
+
+        return add(numbers);
+    }
+
+    private static void validateNoNegativeNumbers(String[] numbers) {
         for (String number : numbers) {
             if (Integer.parseInt(number) < 0) {
                 throw new IllegalArgumentException("음수가 입력 되었습니다.");
             }
         }
-
-        return add(numbers);
     }
 
     private static String toRegex(String delim) {
