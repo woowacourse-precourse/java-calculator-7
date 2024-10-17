@@ -9,6 +9,13 @@ public class Delimiter {
         return null;
     }
 
+    public boolean validateHasDefaultOrCustomDelimiter(String input, String customDelimiter) {
+        if (!input.matches("[0-9,:" + customDelimiter + "]*")) {
+            throw new IllegalArgumentException("허용되지 않는 형식입니다.");
+        }
+        return true;
+    }
+
     private boolean validateStartsWith(String input) {
         return input.startsWith("//");
     }
