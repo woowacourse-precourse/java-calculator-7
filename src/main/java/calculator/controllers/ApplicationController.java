@@ -6,17 +6,16 @@ import calculator.models.SeparatorModel;
 import calculator.views.ApplicationView;
 
 public class ApplicationController {
-    private static SeparatorModel separatorModel = new SeparatorModel();
+    private static final SeparatorModel separatorModel = new SeparatorModel();
+    private static final String CUSTOM_PREFIX = "/";
+    private static final String ERROR_MSG = "잘못된 입력 형식입니다.";
 
     public static void run() {
         String userInput = ApplicationView.getInput();
 
-        boolean isValidInput = InputValidator.isValid(userInput);
-        if (!isValidInput) {
-            throw new IllegalArgumentException();
-        }
+        validateInput(userInput);
 
-        if (userInput.startsWith("//")) {
+        if (userInput.startsWith(CUSTOM_PREFIX)) {
             separatorModel.addSeparator(userInput);
             userInput = separatorModel.removeSeparatorPrefix((userInput));
         }
@@ -26,5 +25,12 @@ public class ApplicationController {
         int sum = NumberModel.getSum(numbers);
 
         ApplicationView.printOutput(sum);
+    }
+
+    private static void validateInput(String input) {
+        boolean isValidInput = InputValidator.isValid(input);
+        if (!isValidInput) {
+            throw new IllegalArgumentException(ERROR_MSG);
+        }
     }
 }
