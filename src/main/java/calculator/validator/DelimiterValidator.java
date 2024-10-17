@@ -1,8 +1,9 @@
 package calculator.validator;
 
-public class DelimiterValidator {
+public class DelimiterValidator implements Validator {
 
-    public void validateCustomDelimiter(String customDelimiter) {
+    @Override
+    public void validate(String customDelimiter) {
         if (customDelimiter == null || customDelimiter.trim().isEmpty()) {
             throw new IllegalArgumentException("잘못된 커스텀 구분자: 구분자는 빈 값일 수 없습니다.");
         }

@@ -13,28 +13,29 @@
  │   └── java
  │       └── calculator
  │           ├── model
- │           │   ├── Calculator.java                // 계산 로직에 대한 인터페이스
- │           │   ├── CalculatorImpl.java            // 문자열 덧셈 로직을 처리하는 구현 클래스
- │           │   ├── InputValidator.java            // 입력값의 유효성을 검증하는 클래스
- │           │   └── DelimiterParser.java           // 구분자를 처리하는 클래스
+ │           │   ├── Calculator.java               // 계산 로직에 대한 인터페이스
+ │           │   ├── CalculatorImpl.java           // 문자열 덧셈 로직을 처리하는 구현 클래스
+ │           │   └── ExtractNumber.java            // 구분자를 처리하는 클래스
  │           ├── controller
- │           │   └── CalculatorController.java      // 컨트롤러 클래스
+ │           │   └── CalculatorController.java     // 컨트롤러 클래스
  │           ├── view
- │           │    ├── CalculatorView.java           // 사용자 입력과 출력을 담당하는 인터페이스
- │           │    └── CalculatorViewImpl.java       // 사용자 입력과 출력을 처리하는 구현 클래스
- │           └── config
+ │           │    ├── CalculatorView.java          // 사용자 입력과 출력을 담당하는 인터페이스
+ │           │    └── CalculatorViewImpl.java      // 사용자 입력과 출력을 처리하는 구현 클래스
+ │           ├── validator
+ │           │    ├── Validator.java               // 검증 로직에 대한 인터페이스
+ │           │    ├── ValueValidator.java          // 분리된 값의 유효성을 검증하는 클래스
+ │           │    └── DelimiterValidator.java      // 구분자 검증을 처리하는 클래스
+ │           ├── config
  │           │    └── AppConfig.java                // 객체 생성 및 의존성 주입을 담당하는 클래스
  │           └── util
- │               └── Constants.java                 // 공통 상수를 정의한 클래스
+ │                └── Constants.java                // 공통 상수를 정의한 클래스
  └── test
      └── java
          └── calculator
              ├── model
-             │   ├── CalculatorTest.java            // Calculator 클래스의 테스트 코드
-             │   ├── InputValidatorTest.java        // InputValidator 클래스의 테스트 코드
-             │   └── DelimiterParserTest.java       // DelimiterParser 클래스의 테스트 코드
+             │   ├── CalculatorTest.java           // Calculator 클래스의 테스트 코드
              └── controller
-                 └── CalculatorControllerTest.java  // CalculatorController 테스트 코드
+                 └── CalculatorControllerTest.java // CalculatorController 테스트 코드
 ```
 
 ## 3. 기능 목록
