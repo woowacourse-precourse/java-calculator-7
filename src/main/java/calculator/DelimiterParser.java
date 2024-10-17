@@ -31,7 +31,7 @@ public class DelimiterParser {
         return result;
     }
 
-    public static boolean isDefaultDelimiter(String input) {
+    public boolean isDefaultDelimiter(String input) {
         String[] defaultDelimiterNumber = input.split(COMMON_DELIMITER);
         try {
             Integer.parseInt(defaultDelimiterNumber[0]);
@@ -41,7 +41,7 @@ public class DelimiterParser {
         }
     }
 
-    public static List<Integer> parseToIntList(String input) {
+    public List<Integer> parseToIntList(String input) {
         String[] split = input.split(COMMON_DELIMITER);
 
         List<Integer> list = new ArrayList<>();
