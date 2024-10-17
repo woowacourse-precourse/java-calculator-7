@@ -1,18 +1,17 @@
 package calculator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Calculator {
 
     private final String input;
+    private final Validator validator = new Validator();
+    private final Delimiter delimiter = new Delimiter();
+    private final Converter converter = new Converter();
 
     public Calculator(String input) {
         this.input = input;
     }
-
-    private final Validator validator = new Validator();
-    private final Delimiter delimiter = new Delimiter();
 
     /**
      * 숫자의 합 계산
@@ -34,29 +33,18 @@ public class Calculator {
         // 기본 구분자(쉼표, 콜론) 처리
         if (input.contains(",") || input.contains(":")) {
             String[] tokens = delimiter.defaultDelimiter(input);
-            List<Integer> numbers = convertToNumbers(tokens);
+            List<Integer> numbers = converter.convertToNumbers(tokens);
             return sum(numbers);
         }
 
         // 커스텀 구분자 처리
         if (input.startsWith("//")) {
             String[] tokens = delimiter.customDelimiter(input);
-            List<Integer> numbers = convertToNumbers(tokens);
+            List<Integer> numbers = converter.convertToNumbers(tokens);
             return sum(numbers);
         }
 
         throw new IllegalArgumentException();
-    }
-
-    /**
-     * 문자열 배열을 정수 리스트로 변환하는 메서드
-     */
-    private List<Integer> convertToNumbers(String[] tokens) {
-        List<Integer> numbers = new ArrayList<>();
-        for (String token : tokens) {
-            numbers.add(Integer.parseInt(token.trim()));
-        }
-        return numbers;
     }
 
     /**
