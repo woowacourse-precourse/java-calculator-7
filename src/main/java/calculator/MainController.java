@@ -11,6 +11,8 @@ public class MainController {
     public static void run() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String inputString = Console.readLine();
+        //입력받은 문자열에 숫자가 없는지 검증.
+        checkHasDigit(inputString);
 
         List<String> splittedValues ;
         int sumResult = 0;
@@ -32,6 +34,15 @@ public class MainController {
             sumResult += Integer.parseInt(part);
         }
         System.out.printf("결과 : %d", sumResult);
+    }
+
+    private static void checkHasDigit(String inputString) {
+        String rex = "^[^0-9]*$";
+        Pattern pattern = Pattern.compile(rex);
+        Matcher matcher = pattern.matcher(inputString);
+        if (matcher.find()) {
+            throw new IllegalArgumentException("입력된 문자열에 숫자가 존재하지않습니다");
+        }
     }
 
     private static void checkNagativeInt(int part) {
