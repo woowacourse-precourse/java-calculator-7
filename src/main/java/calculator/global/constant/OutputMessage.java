@@ -2,7 +2,7 @@ package calculator.global.constant;
 
 public enum OutputMessage {
 
-    OUTPUT_PREFIX("결과: ")
+    OUTPUT_PREFIX("결과 : ")
     ;
 
     private final String message;
