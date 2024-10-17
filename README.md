@@ -17,7 +17,7 @@
 ---
 # 기능 목록 
 
-## checkDelimiter
+## 🍁 checkDelimiter
 ### 정의
 커스텀 구분자가 있는지 확인하고, 구분자와 분할할 문자열을 반환한다.
 
@@ -44,7 +44,7 @@
    4. 배열[1]: //, 커스텀 문자, \n를 제외한 나머지 문자열로 바꿔준다.
 3. 문자열 배열을 반환한다.
 
-## checkValueCorrect
+## 🍁 checkValueCorrect
 ### 정의
 전달받은 문자열이 Integer로 변경 가능한 '양수'라면 반환, 아니라면 예외를 발생시킨다.
 
@@ -62,7 +62,7 @@
    1. 양수 &rarr; 값을 반환한다.
    2. 음수 &rarr; 예외를 발생시킨다. 
 
-## main
+## 🍁 main
 ### 정의
 메인 메서드로, 사용자로부터 값을 입력받고 위에서 구현한 기능들을 이용해 값과 예외를 처리한다.
 
@@ -86,10 +86,10 @@
     1. 공백이라면, 아무런 처리 없이 sum(=0)을 출력한다.
     2. 공백이 아니라면 try-catch문으로 아래의 과정을 감싸고, 예외 처리를 고려해 작업을 수행한다.
        
-       1. checkDelimiter(#checkDelimiter)를 이용해 구분자와 분할할 문자열을 배열에 저장한다.
+       1. [checkDelimiter](#🍁-checkDelimiter)를 이용해 구분자와 분할할 문자열을 배열에 저장한다.
           1. 예외 발생 O &rarr; 프로그램을 종료한다.
           2. 예외 발생 X &rarr; 문자열을 구분자를 이용해 분할한다.
-       2. 분할된 값이 공백이 아니라면 checkValueCorrect(#checkValueCorrect)를 이용해 정수로 변환한다.
+       2. 분할된 값이 공백이 아니라면 [checkValueCorrect](#🍁-checkValueCorrect)를 이용해 정수로 변환한다.
           1. 예외 발생 O &rarr; 프로그램을 종료한다.
           2. 예외 발생 X &rarr; sum 변수에 정수 값을 더한다.
 4. 변수 sum을 출력한다.
