@@ -19,8 +19,8 @@ public class StringAdder {
       Calculator calculator = new Calculator();
       while (true){
         String input = inputValidator.validateInput();
-        String[] delimeters = delimiterParser.getDelimiters(input);
-        String[] numbers = numberParser.getNumbers(input, delimeters);
+        String[] delimiters = delimiterParser.getDelimiters(input);
+        String[] numbers = numberParser.getNumbers(input, delimiters);
         String result = calculator.sum(numbers);
         System.out.println("결과 : "+ result);
       }
