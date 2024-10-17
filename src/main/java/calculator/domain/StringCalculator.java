@@ -51,6 +51,16 @@ public class StringCalculator {
         return calculateSum(splitInputByCustom(matcher));
     }
 
+    private static int calculateSum(String[] strArr) {
+        int sum = 0;
+        for (String str : strArr) {
+            int number = stringToInteger(str);
+            UserInputValidator.checkNumberNegative(number);
+            sum += number;
+        }
+        return sum;
+    }
+
     private static Matcher getMatcher(String input) {
         return PATTERN.matcher(input);
     }
@@ -63,6 +73,10 @@ public class StringCalculator {
         String delimiter = findDelimiterGroup(matcher);
         String string = findStringGroup(matcher, delimiter);
         return string.split(delimiter);
+    }
+
+    private static String findDelimiterGroup(Matcher matcher) {
+        return matcher.group(FIRST);
     }
 
     private static String findStringGroup(Matcher matcher, String delimiter) {
@@ -79,20 +93,6 @@ public class StringCalculator {
             letter = string.charAt(i);
             UserInputValidator.checkNotDefinedCustom(letter, asciiOfDelimiter);
         }
-    }
-
-    private static String findDelimiterGroup(Matcher matcher) {
-        return matcher.group(FIRST);
-    }
-
-    private static int calculateSum(String[] strArr) {
-        int sum = 0;
-        for (String str : strArr) {
-            int number = stringToInteger(str);
-            UserInputValidator.checkNumberNegative(number);
-            sum += number;
-        }
-        return sum;
     }
 
     private static int stringToInteger(String string) {
