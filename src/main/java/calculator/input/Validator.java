@@ -24,9 +24,14 @@ public class Validator {
     }
 
     private void checkString(String input, String customDelimiter) {
+        int startIndex = 0;
+        if (customDelimiter != null) {
+            startIndex = input.indexOf(CUSTOM_DELIMITER_END) + 2; // 검사 시작 인덱스를 커스텀 지정자 선언 문구 이후로 설정
+        }
+
         boolean isDelimiterAllowed = false;
 
-        for (int i = 0; i < input.length(); i++) {
+        for (int i = startIndex; i < input.length(); i++) {
             char current_char = input.charAt(i);
             if (Character.isDigit(current_char)) { // 숫자가 나왔다면
                 isDelimiterAllowed = true; // 다음에 구분자가 나와도 된다고 표시
