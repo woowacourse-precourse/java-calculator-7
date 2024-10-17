@@ -3,8 +3,7 @@ package calculator;
 public class Calculator {
     private int sum;
 
-    public Calculator(int sum) {
-        this.sum = sum;
+    public Calculator() {
     }
 
     public int add(String delimiter, String digit) {

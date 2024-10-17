@@ -11,9 +11,8 @@ public class InputOutputManager {
         return Console.readLine();
     }
 
-    public static void outputMessage(String message) {
+    public static void outputMessage(int message) {
         System.out.print(RESULT_MESSAGE);
         System.out.println(message);
-
     }
 }

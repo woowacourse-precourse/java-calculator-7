@@ -15,7 +15,6 @@ public class PasingString {
                 throw new IllegalArgumentException("입력 값이 올바르지 않습니다.");
             }
         }
-
         return input.substring(findStartIndex);
     }
 
@@ -24,6 +23,5 @@ public class PasingString {
             findStartIndex = 5;
         }
     }
-
 
 }
