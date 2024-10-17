@@ -6,6 +6,13 @@ public class Application {
 
     static String separator = ",:";
 
+    public static int stringToNum(String num) {
+        if (num.equals("")) {
+            return 0;
+        }
+        return Integer.parseInt(num);
+    }
+
     public static int calculateValue(String user_input) {
         String num = "";
         int sum = 0;
@@ -13,9 +20,7 @@ public class Application {
             String ch = "";
             ch += user_input.charAt(i);
             if (separator.contains(ch)) {
-                if (num.equals("") == false) {
-                    sum += Integer.parseInt(num);
-                }
+                sum += stringToNum(num);
                 num = "";
             } else if ('0' <= ch.charAt(0) && '9' >= ch.charAt(0)) {
                 num += ch;
@@ -23,9 +28,7 @@ public class Application {
                 throw new IllegalArgumentException(ch);
             }
         }
-        if (num.equals("") == false) {
-            sum += Integer.parseInt(num);
-        }
+        sum += stringToNum(num);
 
         return sum;
     }
