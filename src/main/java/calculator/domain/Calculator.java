@@ -1,18 +1,20 @@
 package calculator.domain;
 
 import calculator.global.ui.InputView;
+import calculator.global.ui.OutView;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Calculator {
 
     InputView inputView = new InputView();
+    OutView outView = new OutView();
 
     public Calculator() {
     }
 
     public void run() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        System.out.println("결과 : " + sum(inputView.splitNumbers(Console.readLine())));
+        outView.startMessage();
+        outView.resultMessage(sum(inputView.splitNumbers(Console.readLine())));
     }
 
     private int sum(String[] numbers) {
