@@ -1,8 +1,10 @@
 package calculator;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class SepartorManangerTest {
@@ -18,4 +20,9 @@ class SepartorManangerTest {
         assertFalse(separtorMananger.exists("!"));
     }
 
+    @Test
+    void 받은_구분자_리스트의_수정_불가한지_확인() {
+        assertThatThrownBy(() -> separtorMananger.getSeparators().remove(0))
+                .isInstanceOf(UnsupportedOperationException.class);
+    }
 }

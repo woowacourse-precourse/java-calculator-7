@@ -2,6 +2,7 @@ package calculator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class SepartorMananger {
@@ -17,5 +18,9 @@ public class SepartorMananger {
 
     public void add(String separator) {
         separators.add(separator);
+    }
+
+    public List<String> getSeparators() {
+        return Collections.unmodifiableList(separators);
     }
 }
