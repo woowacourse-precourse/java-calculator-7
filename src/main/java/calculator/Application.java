@@ -5,7 +5,7 @@ import camp.nextstep.edu.missionutils.Console;
 public class Application {
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String inputValue = Console.readLine().strip(); // 스페이스를 제외한 모든 공백 관련 문자 제거
+        String inputValue = Console.readLine().strip();
 
         int sum = 0;
 
