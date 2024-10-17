@@ -13,8 +13,18 @@ public class Application {
         // camp.nextstep.edu.missionutils.Console의 readLine()을 사용해 문자열을 String으로 저장
         String input = readLine();
 
-        //쉼표(,)와 콜론(:)을 구분자로 하여 각 숫자로 분리한다.
-        String[] strArr = input.split("[,:]");
+        // 구분자
+        String delimiter = ",|:";
+
+        // 커스텀 구분자 확인
+        if (input.startsWith("//")) {
+            int idx = input.indexOf("\\n");
+            delimiter += "|" + input.substring(2, idx); // 커스텀 구분자
+            input = input.substring(idx + 2); // 커스텀 구분자를 제외한 입력
+        }
+
+        //구분자를 기준으로 각 숫자로 분리한다.
+        String[] strArr = input.split(delimiter);
 
         // strArr의 숫자들을 더한 결과를 answer에 할당
         for (String str : strArr) {
