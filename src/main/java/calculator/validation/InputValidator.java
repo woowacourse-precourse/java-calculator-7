@@ -100,17 +100,6 @@ public class InputValidator {
     }
 
     /**
-     * 구분자 없이 숫자만 연속으로 입력된 경우 예외 발생
-     */
-    public static void validateContinuousNumbers(String input) {
-        String[] numbers = splitCustomInput(input);
-
-        if (numbers.length == 1 && numbers[0].matches("\\d+")) {
-            throw new IllegalArgumentException(ErrorMessage.MISS_SEPARATOR.getMessage());
-        }
-    }
-
-    /**
      * 기본 구분자와 커스텀 구분자 외의 구분자가 포함된 경우 예외 발생
      */
     public static void validateInvalidDelimiter(String input) {

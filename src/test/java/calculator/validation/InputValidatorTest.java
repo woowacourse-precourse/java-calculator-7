@@ -66,17 +66,6 @@ class InputValidatorTest {
                 IllegalArgumentException.class).hasMessage(ErrorMessage.NOT_ALLOW_NEGATIVE.getMessage());
     }
 
-    @DisplayName("구분자 없이 숫자만 연속으로 입력된 경우")
-    @Test
-    public void validateContinuousNumbersTest() {
-        //given
-        String input = "//%\n1324";
-
-        //then
-        assertThatThrownBy(() -> InputValidator.validateContinuousNumbers(input)).isInstanceOf(
-                IllegalArgumentException.class).hasMessage(ErrorMessage.MISS_SEPARATOR.getMessage());
-    }
-
     @DisplayName("기본 구분자와 커스텀 구분자 외의 구분자가 포함된 경우")
     @Test
     public void validateInvalidDelimiterTest() {
