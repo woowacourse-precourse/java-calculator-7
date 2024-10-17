@@ -19,7 +19,8 @@ public class Calculator {
             }
 
             String pos = str.substring(SEPARATOR_1.length(),str.indexOf(SEPARATOR_2));
-            separators = separators + "|" + pos + "|" + SEPARATOR_1 + "|" + SEPARATOR_2;
+            // 정규 표현식 처리로 인해 \n에서 \\로 이스케이프
+            separators = separators + "|" + pos + "|" + SEPARATOR_1 + "|" + "\\" + SEPARATOR_2;
         }
 
     }
