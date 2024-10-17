@@ -1,6 +1,8 @@
 package calculator.controller;
 
 import calculator.domain.StringCalculator;
+
+import calculator.domain.vo.CalculationValues;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -24,6 +26,7 @@ public class CalculatorController {
         String rawValue = stringCalculator.removeValue(value);
         String[] pureValue = stringCalculator.createNewValue(rawValue, customValue);
         List<Integer> saveValue = stringCalculator.saveValue(pureValue);
+        new CalculationValues(saveValue);
         int result = stringCalculator.calculateSum(saveValue);
         outputView.outputResult(result);
     }
