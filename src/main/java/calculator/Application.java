@@ -16,6 +16,11 @@ public class Application {
         for (String splitString : splitStrings) {
             validateSplitString(splitString);
         }
+
+        int sum = 0;
+        for (String splitString : splitStrings) {
+            sum += Integer.parseInt(splitString);
+        }
     }
 
     private static boolean isStringWithCustomDelimiter(String str) {
