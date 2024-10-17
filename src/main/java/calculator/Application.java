@@ -1,7 +1,7 @@
 package calculator;
 
 import calculator.controller.CalculateApplication;
-import calculator.model.InputString;
+import calculator.model.Input;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 import java.util.ArrayList;
@@ -9,9 +9,9 @@ import java.util.ArrayList;
 public class Application {
 
     public static void main(String[] args) {
-        InputString inputString = new InputString(InputView.input(), "[,:]", new ArrayList<>());
+        Input input = new Input(InputView.read(), "[,:]", new ArrayList<>());
 
-        int calculateResult = CalculateApplication.run(inputString);
+        int calculateResult = CalculateApplication.doCalculate(input);
 
         OutputView.printResult(calculateResult);
     }

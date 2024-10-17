@@ -6,8 +6,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import calculator.controller.CalculateApplication;
 import calculator.controller.CalculateIntegerList;
-import calculator.controller.CustomCharStrategy;
-import calculator.model.InputString;
+import calculator.controller.CustomSeparator;
+import calculator.model.Input;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,13 +37,13 @@ class ApplicationTest extends NsTest {
     @DisplayName("커스텀 문자 파싱을 확인한다.")
     void parsingInputTest() {
         //given
-        InputString inputString = new InputString("//&\\n12,3:46", "[,:]", new ArrayList<>());
+        Input input = new Input("//&\\n12,3:46", "[,:]", new ArrayList<>());
 
         //when
-        InputString afterInputString = CustomCharStrategy.findCustomChar(inputString);
+        Input afterInput = CustomSeparator.findCustomSeparator(input);
 
         //then
-        assertThat(afterInputString.splitString()).isEqualTo("[,:&]");
+        assertThat(afterInput.separator()).isEqualTo("[,:&]");
     }
 
     @Test
@@ -51,10 +51,10 @@ class ApplicationTest extends NsTest {
     void calculateTest() {
         //given
         List<String> numberList = new ArrayList<>(Arrays.asList("1", "2", "3", "4"));
-        InputString inputString = new InputString("1,2,3:4", "[,:]", numberList);
+        Input input = new Input("1,2,3:4", "[,:]", numberList);
 
         //when
-        int calculateResult = CalculateIntegerList.calculateResult(inputString);
+        int calculateResult = CalculateIntegerList.calculateResult(input);
 
         //then
         assertThat(calculateResult).isEqualTo(10);
@@ -64,14 +64,14 @@ class ApplicationTest extends NsTest {
     @DisplayName("특정 케이스를 확인한다.")
     void edgeCaseTest() {
         //given
-        InputString inputString1 = new InputString("//\\n","[,:]", new ArrayList<>());
-        InputString inputString2 = new InputString("","[,:]", new ArrayList<>());
-        InputString inputString3 = new InputString("//;\\n","[,:]", new ArrayList<>());
+        Input input1 = new Input("//\\n","[,:]", new ArrayList<>());
+        Input input2 = new Input("","[,:]", new ArrayList<>());
+        Input input3 = new Input("//;\\n","[,:]", new ArrayList<>());
 
         //when
-        int calculate1 = CalculateApplication.run(inputString1);
-        int calculate2 = CalculateApplication.run(inputString2);
-        int calculate3 = CalculateApplication.run(inputString3);
+        int calculate1 = CalculateApplication.doCalculate(input1);
+        int calculate2 = CalculateApplication.doCalculate(input2);
+        int calculate3 = CalculateApplication.doCalculate(input3);
 
         //then
         assertThat(calculate1).isEqualTo(0);

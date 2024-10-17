@@ -1,11 +1,12 @@
 package calculator.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public record InputString(
-    String input,
-    String splitString,
-    List<String> numberList) {
+public record Input(
+        String origin,
+        String separator,
+        List<String> numbers) {
 
     public boolean isNumber(List<String> numberList) {
         for (String number : numberList) {
@@ -22,6 +23,14 @@ public record InputString(
     }
 
     public boolean isEmpty() {
-        return input.isEmpty();
+        return origin.isEmpty();
+    }
+
+    public List<Integer> getNumbers() {
+        List<Integer> result = new ArrayList<>();
+        for (String number : numbers) {
+            result.add(Integer.parseInt(number));
+        }
+        return result;
     }
 }

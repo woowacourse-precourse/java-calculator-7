@@ -1,12 +1,12 @@
 package calculator.controller;
 
-import calculator.model.InputString;
+import calculator.model.Input;
 
 public class CalculateApplication {
 
-    public static int run(InputString inputString) {
-        InputString afterCustom = CustomCharStrategy.findCustomChar(inputString);
-        InputString afterParsing = ParsingInputString.parsingInput(afterCustom);
-        return CalculateIntegerList.calculateResult(afterParsing);
+    public static int doCalculate(Input input) {
+        Input afterCustom = CustomSeparator.findCustomSeparator(input);
+        Input afterSplit = SplitInputString.SplitString(afterCustom);
+        return CalculateIntegerList.calculateResult(afterSplit);
     }
 }
