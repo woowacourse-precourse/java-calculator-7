@@ -7,7 +7,6 @@ public class Validator {
 
     public static void checkValidCustomFormat(String inputData) {
         String replaceData = inputData.replaceAll(target, end);
-        System.out.println(replaceData);
         if (!replaceData.contains(end)) {
             throw new IllegalArgumentException();
         }
