@@ -3,6 +3,7 @@ package calculator.domain;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.List;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -38,6 +39,38 @@ class StringParserTest {
 
             //then
             assertEquals(expected, actual.getMessage());
+        }
+    }
+
+    @Nested
+    class 정상_동작_테스트를_진행한다 {
+
+        @Test
+        void 기본_구분자로_문자열을_분리한다() {
+            //given
+            String input = "1,2:3";
+            List<String> expected = List.of("1", "2", "3");
+            StringParser parser = new StringParser(input);
+
+            //when
+            List<String> actual = parser.getNumbers();
+
+            //then
+            assertEquals(expected, actual);
+        }
+
+        @Test
+        void 커스텀_구분자로_문자열을_분리한다() {
+            //given
+            String input = "//;;;\\n1;;;2;;;3";
+            List<String> expected = List.of("1", "2", "3");
+            StringParser parser = new StringParser(input);
+
+            //when
+            List<String> actual = parser.getNumbers();
+
+            //then
+            assertEquals(expected, actual);
         }
     }
 }
