@@ -42,8 +42,16 @@ public class InputValue {
         positiveIntegers = new ArrayList<>();
         String[] numbers = uncheckedInput.split(delimiter);
 
+        int operand;
+
         for(String number : numbers) {
-            if (Integer.parseInt(number) < 0) {
+            try{
+                operand = Integer.parseInt(number);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("올바르지 않은 구분자를 사용하거나 숫자가 아닌 피연산자가 있습니다!");
+            }
+
+            if (operand < 0) {
                 throw new IllegalArgumentException("입력값 중에 음수가 있습니다!");
             }
         }
