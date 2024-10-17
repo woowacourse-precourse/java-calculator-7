@@ -1,7 +1,6 @@
 package util;
 
 public class DelimiterParser {
-    // 구분자를 반환하는 메서드
     public String getDelimiter(String input) throws IllegalArgumentException{
         isValidDelimiter(input);
 
@@ -9,7 +8,14 @@ public class DelimiterParser {
         if (input.startsWith("//")) {
             int newlineIndex = input.indexOf("\\n");
             String customDelimiter = input.substring(2, newlineIndex);
-            return customDelimiter + "|,|:";
+
+            // 특수 문자면 이스케이프 처리
+            if (customDelimiter.matches("[\\\\.*+\\[\\](){}^$?|]")) {
+                customDelimiter = "\\" + customDelimiter;
+            }
+
+            // 커스텀 구분자가 존재 할 시
+            if(!customDelimiter.isEmpty()) return customDelimiter + "|,|:";
         }
 
         // 커스텀 구분자가 없을 경우 기본 구분자만 반환
@@ -27,7 +33,7 @@ public class DelimiterParser {
         if(input.startsWith("//")){
             int newlineIndex = input.indexOf("\\n");
             if(newlineIndex == -1) {
-                throw new IllegalArgumentException("\n 없음");
+                throw new IllegalArgumentException("\\n가 존재하지 않음");
             }
         }
     }
