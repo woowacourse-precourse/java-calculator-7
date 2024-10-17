@@ -49,4 +49,18 @@ public class InputValidator {
         }
         return separators;
     }
+
+    /**
+     * 문자열에서 커스텀 구분자 정보를 제거
+     */
+    public static String removeSeparatorInfo(String input) {
+        String splitedString = "";
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i+1) == SEPARATOR_END.charAt(0) && input.charAt(i+2) == SEPARATOR_END.charAt(1)) {
+                splitedString = input.substring(i+3, input.length());
+                break;
+            }
+        }
+        return splitedString;
+    }
 }
