@@ -12,6 +12,7 @@ public class InputParser {
         if (input.startsWith(DELIMITER_PREFIX)) {
             int startIndex = input.indexOf(DELIMITER_SUFFIX);
             String customDelimiter = input.substring(2, startIndex);
+            customDelimiter = escapeDelimiter(customDelimiter);
             String numbersPart = input.substring(startIndex + 2);
             return numbersPart.split(customDelimiter);
         }
@@ -24,5 +25,12 @@ public class InputParser {
             numbers.add(Integer.parseInt(element));
         }
         return numbers;
+    }
+
+    private String escapeDelimiter(String customDelimiter) {
+        if (customDelimiter.equals("\\")) {
+            customDelimiter = customDelimiter.replace("\\", "\\\\");
+        }
+        return customDelimiter;
     }
 }
