@@ -20,6 +20,9 @@
 3. 구분자로 분리한 문자열에서 양의 정수가 아닌 것이 추출되었을 때
 ```
 
+&emsp;▪️ `CalculateService`을 통해 정수들을 모두 더한 값을 반환한다.
+
+
 ## 🖥️ View
 
 &emsp;▪️ `InputView`클래스를 통해 사용자에게 문자열을 입력 받은 후, `CalculateController`로 전달한다.
