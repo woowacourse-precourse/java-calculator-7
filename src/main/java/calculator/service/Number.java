@@ -14,6 +14,9 @@ class Number {
         if (number.isBlank()) {
             return "0";
         }
+        if (number.startsWith("-")) {
+            throw new IllegalArgumentException("입력으로 음수는 들어올 수 없습니다.");
+        }
         for (int i = 0; i < number.length(); i++) {
             if (!Character.isDigit(number.charAt(i))) {
                 throw new IllegalArgumentException("등록되지 않은 구분자 존재" + number);

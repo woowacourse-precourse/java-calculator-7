@@ -19,6 +19,24 @@ class TokenizerTest {
         Assertions.assertThat(tokenizer.tokenize()).isEqualTo(numbers);
     }
 
+    @ParameterizedTest
+    @MethodSource("음수입력")
+    void 음수(final String input) {
+        final Tokenizer tokenizer = new Tokenizer(input);
+        tokenizer.addSeparator(new CharacterSequenceSeparator(","));
+        tokenizer.addSeparator(new CharacterSequenceSeparator(":"));
+        Assertions.assertThatThrownBy(() -> tokenizer.tokenize())
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    static Stream<Arguments> 음수입력() {
+        return Stream.of(
+                Arguments.of("-102"),
+                Arguments.of("102,,-103"),
+                Arguments.of("-102")
+        );
+    }
+
     static Stream<Arguments> provideLegalSource() {
         return Stream.of(
                 Arguments.of(

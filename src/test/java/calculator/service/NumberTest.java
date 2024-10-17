@@ -11,4 +11,9 @@ class NumberTest {
         Assertions.assertThatThrownBy(() -> new Number("qwe"));
         Assertions.assertThatThrownBy(() -> new Number("2131232w"));
     }
+
+    @Test
+    void 음수() {
+        Assertions.assertThatThrownBy(() -> new Number("-2131232w"));
+    }
 }
