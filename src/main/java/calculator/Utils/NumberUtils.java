@@ -11,4 +11,8 @@ public class NumberUtils {
             System.out.println(ErrorMessages.INVALID_NUMBER_MESSAGE.getErrorMessage());
         }
     }
+
+    public static boolean isInt(Double number) {
+        return number == (long) (double) number;
+    }
 }
