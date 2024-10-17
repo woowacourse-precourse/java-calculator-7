@@ -6,7 +6,7 @@ public class Application {
     public static void main(String[] args) {
         //setting dividers, getting inputs
         System.out.println("덧셈할 문자열을 입력해주세요.");
-        String dividers = ",:";
+        StringBuilder dividers =new StringBuilder(",:");
         String input = readLine();
         if (input.startsWith("//")) {
             int newlineidx = input.indexOf("\\n");
@@ -17,12 +17,13 @@ public class Application {
             //changing custom divider by ,
             String customdivider = input.substring(2, newlineidx);
             input=input.substring(newlineidx+2);
-            input=input.replace(customdivider,",");
+            dividers.append(customdivider);
         }
         // changing every divider to ,
-        for (char divider : dividers.toCharArray()) {
-            input=input.replace(divider,',');
+        for (int i=0;i<dividers.length();i++) {
+            input=input.replace(dividers.charAt(i),',');
         }
         int answer=0;
-    }
+
+}
 }
