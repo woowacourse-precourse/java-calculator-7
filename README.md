@@ -15,7 +15,8 @@
 2. 전체적인 구조 생성
 3. Calculator 클래스 구현
 4. input, output 클래스 구현
-5. Adder 클래스 구현
-6. Tokenizer 클래스 구현
-7. numberlist, divider 클래스 구현
+5. Calculation 클래스 구현
+6. Adder 클래스 구현
+7. Tokenizer 클래스 구현
+8. numberlist, divider 클래스 구현
 
