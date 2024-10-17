@@ -31,7 +31,7 @@ public class CalculatorController {
                 isPreviousValueNumeric = false;
                 continue;
             }
-            // 만약 테스트 실패나오면 while 문으로 여러자리 숫자 포함해서 더해주기..
+            // 만약 테스트 실패나오면 while 문으로 다음 문자가 숫자가 아닐때까지 돌린 후 숫자로 변환하고 덧셈
             sum += extractNumber(String.valueOf(userInput.charAt(i)));
             isPreviousValueNumeric = true;
         }
