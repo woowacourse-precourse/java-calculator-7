@@ -60,7 +60,7 @@ public class StringCalculator {
             if (!input.contains("\\n")) {
                 flag = 1;
             } else {
-                if (input.indexOf("\\n") > 3) {
+                if (input.indexOf("\\n") != 3) {
                     flag = 2;
                 } else if (isSeparatorNumeric(input.charAt(2))) {
                     flag = 3;
