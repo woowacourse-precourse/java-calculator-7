@@ -2,6 +2,8 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.regex.Pattern;
+
 public class Application {
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -28,6 +30,7 @@ public class Application {
             int delimiterEndIndex = input.indexOf("\\n");
 
             delimiter = input.substring(2, delimiterEndIndex);
+            delimiter = Pattern.quote(delimiter);
             input = input.substring(delimiterEndIndex + 2);
         }
         return splitNumbers(input, delimiter);
