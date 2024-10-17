@@ -10,6 +10,10 @@ public class InputView {
 
     public static String inputString() {
         String input = Console.readLine();
+        if (input.isEmpty()) {
+            return "0";
+        }
+        input = processInput(input);
         InputValidator.validateStartBlank(input);
         InputValidator.validateCustomSecond(input);
         InputValidator.validateCustomLength(input);
@@ -18,5 +22,9 @@ public class InputView {
         InputValidator.validateZero(input);
         InputValidator.validateMixedDelimiters(input);
         return input;
+    }
+
+    private static String processInput(String input) {
+        return input.replace("\\n", "\n");
     }
 }
