@@ -1,21 +1,50 @@
 package calculator.domain;
 
 public class Separator {
-    String[] elements;
+    private static final String customStart = "//";
+    private static final String customEnd = "\\n";
+
+    private String separator = ",|:";
+    private String currentString;
 
     public Separator() {
-        this.elements = cut("");
+        this.currentString = "";
     }
 
     public Separator(String input) {
-        this.elements = cut(input);
+        this.currentString = input;
     }
 
-    public String[] getElements() {
-        return elements;
+    public String getCurrentString() {
+        return currentString;
     }
 
-    private String[] cut(String input) {
-        return input.split("[,|:]");
+    public String getSeparator() {
+        return separator;
+    }
+
+    public String[] cut() {
+        if (currentString.startsWith(customStart) && currentString.contains(customEnd)) {
+            separator = customSeparator();
+        }
+        return currentString.split(separator);
+    }
+
+
+    //커스텀 구분자가 존재할경우 실행됨
+    private String customSeparator() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("|");
+
+        for (int i = 2; i < currentString.length(); i++) {
+            if (currentString.charAt(i) == '\\' && currentString.charAt(i + 1) == 'n') {
+                currentString = currentString.substring(i + 2);
+                break;
+            }
+
+            sb.append(currentString.charAt(i));
+        }
+
+        return separator + sb.toString();
     }
 }
