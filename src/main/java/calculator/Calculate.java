@@ -23,12 +23,16 @@ public class Calculate {
     private static int addition(String customSeparator, String numbers) {
         int sum = 0;
         for(int i = 0; i < numbers.length(); i++) {
-            if(numbers.charAt(i) == customSeparator.charAt(0)) {
+            if(isCustomSeparator(customSeparator, numbers.charAt(i))) {
                 continue;
             }
             sum += isPositiveNumber(numbers.charAt(i));
         }
         return sum;
+    }
+
+    private static boolean isCustomSeparator(String customSeparator, char num) {
+        return num == customSeparator.charAt(0);
     }
 
     private static int isPositiveNumber(char num) {
