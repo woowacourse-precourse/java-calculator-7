@@ -3,7 +3,7 @@ package calculator;
 public class SetSeparator {
     public static void setSeparator(String input){
 
-        if ((input.trim().startsWith("//")) && (input.trim().indexOf("\n") != 2)) {
+        if ((input.trim().startsWith("//")) && input.trim().contains("\n")) {
             Application.separator = input.trim().substring(2, input.indexOf("\n"));
         }
 

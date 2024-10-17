@@ -21,7 +21,7 @@ public class Application {
             return;
         }
 
-        System.out.println(Calculate.sumString(userInput));
+        System.out.println("결과 : " + Calculate.sumString(userInput));
     }
 }
 
