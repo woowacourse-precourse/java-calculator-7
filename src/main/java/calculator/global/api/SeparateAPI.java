@@ -1,6 +1,7 @@
 package calculator.global.api;
 
 import calculator.domain.Separator;
+import calculator.global.config.APIFactory;
 
 import static calculator.global.constants.StaticString.REGEX_PATTERN;
 
@@ -12,18 +13,15 @@ public class SeparateAPI {
 		separator = Separator.getInstance();
 	}
 
-	public boolean findCustomSeparator(String sentence) {
-		if(sentence.matches(REGEX_PATTERN.getString())) {
+	public void findCustomSeparator(String sentence) {
+		if(APIFactory.judgement().judgmentFormat(sentence)) {
 			char customSeparator = sentence.replaceAll(REGEX_PATTERN.getString(), "$1").charAt(0);
 			separator.addSeparator(customSeparator);
-			return true;
 		}
-
-		return false;
 	}
 
-	public Separator getSeparator() {
-		return separator;
+	public void findNumberAndSave() {
+
 	}
 
 	public static SeparateAPI getInstance() {

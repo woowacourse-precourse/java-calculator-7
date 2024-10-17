@@ -13,8 +13,8 @@ public class APIFactory {
 		return new CalculatorAPI();
 	}
 
-	public final JudgmentAPI judgement() {
-		return new JudgmentAPI();
+	public static JudgmentAPI judgement() {
+		return JudgmentAPI.getInstance();
 	}
 
 	public final SeparateAPI separate() {
