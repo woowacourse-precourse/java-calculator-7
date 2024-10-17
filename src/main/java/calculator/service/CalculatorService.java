@@ -10,7 +10,7 @@ public class CalculatorService {
         }
     }
 
-    public int defaultAdd(String input) {
+    private int defaultAdd(String input) {
         String[] str = input.split("[,:]");
 
         int sum = 0;
@@ -21,7 +21,7 @@ public class CalculatorService {
         return sum;
     }
 
-    public int customAdd(String input) {
+    private int customAdd(String input) {
         String prefix = input.substring(0, 2);
         String suffix = input.substring(3, 5);
         int sum = 0;
@@ -38,7 +38,7 @@ public class CalculatorService {
         return sum;
     }
 
-    public boolean defaultOrCustomDelimeter(String input) {
+    private boolean defaultOrCustomDelimeter(String input) {
         if (input.startsWith("//")) {
             return true;
         } else {
@@ -47,7 +47,7 @@ public class CalculatorService {
     }
 
     // 3) 예외 처리
-    public void inValidInput(String input) {
+    private void inValidInput(String input) {
         if (isInputEmpty(input)) {
             throw new IllegalArgumentException("입력된 값이 없습니다");
         }
