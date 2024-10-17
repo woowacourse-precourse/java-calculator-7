@@ -5,7 +5,7 @@ import camp.nextstep.edu.missionutils.Console;
 public class Application {
     public static void main(String[] args) {
         String input = Console.readLine();
-        calculateNum(input);
+        System.out.println(calculateNum(input));
     }
 
     private static int calculateNum(String input) {
@@ -13,15 +13,21 @@ public class Application {
             return 0;
         }
 
-        String seperator = ",|:";
+        String separator = ",|:";
 
-        if (input.startsWith("//")) {
-            String[] parts = input.split("\n", 2);
-            seperator = parts[0].substring(2);
-            input = parts[1];
+        int customSepStartIndex = input.indexOf("//");
+        if (customSepStartIndex != -1) {
+            int customSepEndIndex = input.indexOf("\n", customSepStartIndex);
+
+            if (customSepEndIndex != -1) {
+                String customSep = input.substring(customSepStartIndex + 2, customSepEndIndex);
+                separator = customSep;
+
+                input = input.substring(0, customSepStartIndex) + input.substring(customSepEndIndex + 1);
+            }
         }
 
-        String[] numbers = input.split(seperator);
+        String[] numbers = input.split(separator);
 
         int sum = 0;
         for (String number : numbers) {
