@@ -3,6 +3,7 @@ import calculator.DTO.ParsedInputDTO;
 import calculator.Model.CalculatorModel;
 import calculator.Validator.InputValidator;
 import calculator.View.InputView;
+import calculator.View.OutputView;
 public class CalculatorController {
 
     private final CalculatorModel calculatorModel;
@@ -15,18 +16,18 @@ public class CalculatorController {
 
     public void run(){
 
-        while(true){
-            String userInput = InputView.userInput();
 
-            boolean isValid = inputValidator.isValidInput(userInput);
+        String userInput = InputView.userInput();
 
+        boolean isValid = inputValidator.isValidInput(userInput);
+
+        if(isValid) {
             ParsedInputDTO parsedInputDTO = calculatorModel.parseInput(userInput);
-
             int result = calculatorModel.addNumbers(parsedInputDTO.getNumbers());
-
-            System.out.println(result);
+            OutputView.userOutput(result);
+        }else{
+            throw new IllegalArgumentException("틀린 입력 입니다.");
         }
-
 
     }
 }
