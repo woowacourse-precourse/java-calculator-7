@@ -14,12 +14,6 @@ import calculator.service.SeparatorService;
 
 public class SeparatorServiceImpl implements SeparatorService {
 
-
-    @Override
-    public NumList separateNum(RefinedInput refinedInput, RegexStr regexStr) {
-        return refinedInput.toNumList(regexStr);
-    }
-
     @Override
     public SeparatorSet getCustomSeparators(Input input) {
 
@@ -41,32 +35,7 @@ public class SeparatorServiceImpl implements SeparatorService {
         return separatorSet;
     }
 
-    @Override
-    public RefinedInput refineInput(Input input, IndexQueue idxQueue) {
-        // 커스텀 구분자의 앞뒤 구문을 제거한 문자열을 만들어낸다.
-        // 커스텀 구분자의 문자 자체는 남는다.
 
-        RefinedInput refinedInput = new RefinedInput();
-
-        Index idx = new Index(0);
-        Index maxIdx = input.maxIdx();
-
-        while (idx.isLess(maxIdx)) {
-            if (idxQueue.isIndexProcess(idx)) {
-                Index customSeparatorIdx = idx.customSeparatorIdx();
-                refinedInput.append(input, customSeparatorIdx);
-                idx = idx.plus(CUSTOM_SEPARATOR_LENGTH);
-                idxQueue.poll();
-                continue;
-            }
-
-            refinedInput.append(input, idx);
-
-            idx = idx.increase();
-        }
-
-        return refinedInput;
-    }
 
     @Override
     public IndexQueue getAllCustomSepIdx(Input input) {
@@ -85,5 +54,38 @@ public class SeparatorServiceImpl implements SeparatorService {
 
         return idxQueue;
     }
+
+
+
+    @Override
+    public RefinedInput refineInput(Input input, IndexQueue idxQueue) {
+
+        RefinedInput refinedInput = new RefinedInput();
+
+        Index idx = new Index(0);
+        Index maxIdx = input.maxIdx();
+
+        while (idx.isLess(maxIdx)) {
+            if (idxQueue.isIndexProcess(idx)) {
+                Index customSeparatorIdx = idx.customSeparatorIdx();
+                refinedInput.appendLetter(input, customSeparatorIdx);
+                idx = idx.plus(CUSTOM_SEPARATOR_LENGTH);
+                idxQueue.poll();
+                continue;
+            }
+
+            refinedInput.appendLetter(input, idx);
+
+            idx = idx.increase();
+        }
+
+        return refinedInput;
+    }
+
+    @Override
+    public NumList separateNum(RefinedInput refinedInput, RegexStr regexStr) {
+        return refinedInput.toNumList(regexStr);
+    }
+
 
 }

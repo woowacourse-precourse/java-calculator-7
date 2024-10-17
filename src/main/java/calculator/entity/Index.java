@@ -40,20 +40,6 @@ public class Index implements Comparable<Index> {
         return value < index.value;
     }
 
-    protected boolean isStartCustomSep(String value) {
-        return value.startsWith(CUSTOM_SEP_START_STRING, this.value);
-    }
-
-    protected boolean isEndCustomSep(String value) {
-        return value.startsWith(CUSTOM_SEP_END_STRING, this.value + CUSTOM_SEPARATOR_END_IDX.value);
-    }
-
-    protected String oneLetter(String value) {
-        char charLetter = value.charAt(this.value);
-        return String.valueOf(charLetter);
-    }
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -74,13 +60,27 @@ public class Index implements Comparable<Index> {
     @Override
     public String toString() {
         return "Index{" +
-            "value=" + value +
-            '}';
+                "value=" + value +
+                '}';
     }
-
 
     @Override
     public int compareTo(Index compareIdx) {
         return Integer.compare(this.value, compareIdx.value);
     }
+
+    protected boolean isStartCustomSep(String value) {
+        return value.startsWith(CUSTOM_SEP_START_STRING, this.value);
+    }
+
+    protected boolean isEndCustomSep(String value) {
+        return value.startsWith(CUSTOM_SEP_END_STRING, this.value + CUSTOM_SEPARATOR_END_IDX.value);
+    }
+
+    protected String oneLetter(String value) {
+        char charLetter = value.charAt(this.value);
+        return String.valueOf(charLetter);
+    }
+
+
 }

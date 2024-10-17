@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 
 public class Separator {
 
-
     private final String sep;
 
     public Separator(String separator) {
@@ -27,14 +26,17 @@ public class Separator {
         this.sep = quote;
     }
 
-    protected static String toSeparatorsRegex(Set<Separator> separatorSet) {
+    protected static String toRegexString(Set<Separator> separatorSet) {
         StringBuilder sb = new StringBuilder();
+
         sb.append(COLON);
         sb.append(COMMA);
+
         for (Separator separator : separatorSet) {
             String v = separator.sep;
             sb.append(v);
         }
+
         return sb.toString();
     }
 

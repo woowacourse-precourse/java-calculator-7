@@ -12,7 +12,6 @@ public class IndexQueue {
         this.queue = new PriorityQueue<>();
     }
 
-
     public void offer(Index index) {
         queue.offer(index);
     }
@@ -20,7 +19,6 @@ public class IndexQueue {
     public Index peek() {
         return queue.peek();
     }
-
 
     public void poll() {
         queue.poll();
@@ -43,8 +41,8 @@ public class IndexQueue {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        IndexQueue that = (IndexQueue) o;
-        return Objects.equals(queue, that.queue);
+        Queue<Index> comapereQueue = ((IndexQueue) o).queue;
+        return Objects.equals(queue, comapereQueue);
     }
 
     @Override

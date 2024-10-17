@@ -40,7 +40,6 @@ public class Num {
         this.number = number;
     }
 
-
     protected static int total(List<Num> numList) {
         int sum = 0;
 

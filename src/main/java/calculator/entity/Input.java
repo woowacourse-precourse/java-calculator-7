@@ -24,10 +24,6 @@ public class Input {
         return index.isEndCustomSep(value);
     }
 
-    protected String oneLetter(Index index) {
-        return index.oneLetter(value);
-    }
-
     public Index maxSepStringIdx() {
         Index index = new Index(value.length());
         return index.minus(CUSTOM_SEPARATOR_LENGTH);
@@ -39,6 +35,10 @@ public class Input {
 
     public Separator toSeparatorByIndex(Index index) {
         return new Separator(oneLetter(index));
+    }
+
+    protected String oneLetter(Index index) {
+        return index.oneLetter(value);
     }
 
 }

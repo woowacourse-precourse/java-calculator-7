@@ -14,7 +14,7 @@ public class RefinedInput {
         this.value = new StringBuilder();
     }
 
-    public void append(Input input, Index index) {
+    public void appendLetter(Input input, Index index) {
         String oneLetter = input.oneLetter(index);
 
         value.append(oneLetter);

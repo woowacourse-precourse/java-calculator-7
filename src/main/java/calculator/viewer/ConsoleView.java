@@ -15,7 +15,11 @@ public class ConsoleView {
     }
 
     public Input input() {
-        return new Input(Console.readLine());
+        try {
+            return new Input(Console.readLine());
+        } catch (Exception e) {
+            throw new IllegalArgumentException("잘못된 입력입니다.");
+        }
     }
 
 }

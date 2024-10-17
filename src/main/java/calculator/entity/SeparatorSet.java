@@ -13,7 +13,7 @@ public class SeparatorSet {
     }
 
     public RegexStr toRegexStr() {
-        String regexString = Separator.toSeparatorsRegex(separators);
+        String regexString = Separator.toRegexString(separators);
 
         return new RegexStr(regexString);
     }
