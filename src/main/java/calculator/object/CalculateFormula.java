@@ -22,6 +22,15 @@ public record CalculateFormula(
         return new CalculateFormula(customSeparator, numbers);
     }
 
+    public String addAll() {
+        BigDecimal reduce = numbers.stream()
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        if (reduce.remainder(BigDecimal.ONE).compareTo(BigDecimal.ZERO) == 0) {
+            return reduce.toBigInteger().toString();
+        }
+        return reduce.toString();
+    }
+
     private static String findCustomSeparator(String inputFormula) {
         if (!inputFormula.contains(CUSTOM_SEPARATOR_HEADER) || inputFormula.indexOf(CUSTOM_SEPARATOR_FOOTER) <= 0) {
             return "";

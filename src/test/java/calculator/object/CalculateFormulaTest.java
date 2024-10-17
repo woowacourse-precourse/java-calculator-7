@@ -114,4 +114,21 @@ class CalculateFormulaTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
+    void 양의정수로_모두더하기_연산을_시도하면_덧셈결과를_반환한다() {
+        CalculateFormula actual = CalculateFormula.from("//.\n1,2:3.4");
+        assertThat(actual.addAll()).isEqualTo(String.valueOf(1 + 2 + 3 + 4));
+    }
+
+    @Test
+    void 양의소수를더해도_모두더하기_연산을_시도하면_덧셈결과를_반환한다() {
+        CalculateFormula actual = CalculateFormula.from("//#\n1,2:3.4");
+        assertThat(actual.addAll()).isEqualTo(String.valueOf(1 + 2 + 3.4D));
+    }
+
+    @Test
+    void 소수덧셈으로_소수점이하가_0이면_덧셈의_정수부만_반환한다() {
+        CalculateFormula actual = CalculateFormula.from("//#\n1,2:3.4,5.6");
+        assertThat(actual.addAll()).isEqualTo(BigDecimal.valueOf(1 + 2 + 3.4D + 5.6D).toBigInteger().toString());
+    }
 }
