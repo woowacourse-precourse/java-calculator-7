@@ -1,1 +1,1 @@
-# java-calculator-precourse
+# 프리코스 1주차 기능 구현 목록 정리
