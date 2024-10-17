@@ -8,7 +8,10 @@ import calculator.io.input.ConsoleInputHandler;
 import calculator.io.input.InputHandler;
 import calculator.io.output.ConsoleOutputHandler;
 import calculator.io.output.OutputHandler;
+import calculator.operations.AdditionStrategy;
+import calculator.operations.Calculator;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Application {
@@ -36,17 +39,16 @@ public class Application {
             String numbersWithDelimiter = extractNumbersWithDelimiter(delimiterHandler, input);
             String[] splitNumbers = extractNumbersWithRegex(numbersWithDelimiter);
 
-            for (String number : splitNumbers) {
-                try {
-                    int parsedNumber = Integer.parseInt(number);
-                    validatePositiveNumber(parsedNumber);
-                    result += parsedNumber;
-                } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("숫자 이외의 값을 입력할 수 없습니다.");
-                }
-            }
+            Calculator calculator = new Calculator(new AdditionStrategy());
+            result = calculator.execute(convertToIntArray(splitNumbers));
         }
         OUTPUT_HANDLER.showAdditionResult(result);
+    }
+
+    private static int[] convertToIntArray(String[] splitNumbers) {
+        return Arrays.stream(splitNumbers)
+                .mapToInt(Integer::valueOf)
+                .toArray();
     }
 
     private static String extractNumbersWithDelimiter(DelimiterHandler delimiterHandler, String input) {
@@ -65,12 +67,6 @@ public class Application {
     private static String getUserInput() {
         OUTPUT_HANDLER.showUserInputMessage();
         return INPUT_HANDLER.getUserInput();
-    }
-
-    private static void validatePositiveNumber(int parsedNumber) {
-        if (parsedNumber < 0) {
-            throw new IllegalArgumentException("입력값은 양수만 가능합니다.");
-        }
     }
 
     private static String buildDelimiterRegex() {
