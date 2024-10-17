@@ -18,28 +18,31 @@ public class CalculatorValidate {
 
     /**
      * 숫자로 변환 가능 체크
-     * 숫자로 변환 불가능 하거나 양수가 아닐 경우 null 반환
+     * 숫자로 변환 불가능 하거나 양수가 아닐 경우 예외처리
      */
     public int[] isIntegerParsable(String[] userInput)
     {
         int[] validateIntArray = new int[userInput.length];
-        try
+        int index = 0;
+        for (String element : userInput)
         {
-            int index = 0;
-            for (String element : userInput)
+            System.out.println(element);
+            int number = 0;
+            try{
+                number = Integer.parseInt(element);
+            }catch(IllegalArgumentException e)
             {
-                int number = Integer.parseInt(element);
-                if (number < 1)
-                {
-                    throw new IllegalArgumentException("음수가 입력되었습니다.");
-                }
-                validateIntArray[index] = Integer.parseInt(element);
-                index++;
+                throw new IllegalArgumentException("숫자로 변환할 수 없습니다.");
             }
-            return validateIntArray;
-        }catch(IllegalArgumentException e){
-            System.err.println("숫자로 변환할 수 없습니다.");
-            return null;
+
+            if (number < 1)
+            {
+                throw new IllegalArgumentException("음수가 입력되었습니다.");
+            }
+            validateIntArray[index] = Integer.parseInt(element);
+            index++;
         }
+        return validateIntArray;
+
     }
 }

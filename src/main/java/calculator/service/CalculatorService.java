@@ -20,11 +20,7 @@ public class CalculatorService {
     {
         inputView.printMessage(INPUT_DESCRIPTION);
         int[] validateIntArray = inputView.getUserInput();
-
-        if (validateIntArray != null)
-        {
-            int sum = outputView.sumElements(validateIntArray);
-            outputView.printResult(OUTPUT_DESCRIPTION, sum);
-        }
+        int sum = outputView.sumElements(validateIntArray);
+        outputView.printResult(OUTPUT_DESCRIPTION, sum);
     }
 }
