@@ -28,7 +28,7 @@ public class DelimiterFilter {
         return new ArrayList<>(List.of(COMMA.getSeparator(), COLON.getSeparator()));
     }
 
-    private String getPureString(String input) {
+    public String getPureString(String input) {
         int secondIndex = input.indexOf(SECOND_STANDARD.getStandard());
 
         return input.substring(secondIndex + 2);
