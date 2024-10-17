@@ -16,7 +16,7 @@ public class StringSplitter {
         String number = input;
         if(input.startsWith("//")){
             int endPoint = input.indexOf("\\n");
-            if(input.indexOf("\\n") == -1){
+            if(endPoint == -1){
                 throw new IllegalArgumentException(); // 예외발생
             }
 
@@ -30,7 +30,7 @@ public class StringSplitter {
             }else{
                 separator.add(Pattern.quote(customSeparators));
             }
-            number = input.substring(endPoint+1);
+            number = input.substring(endPoint+2);
         }
         String calculateSeparator = separator.stream().collect(Collectors.joining("|"));
         return number.split(calculateSeparator);
@@ -39,6 +39,8 @@ public class StringSplitter {
     public static void main(String[] args) {
         StringSplitter stp = new StringSplitter();
         String tmp = Console.readLine();
+        System.out.println("입력받은 문자의 수 " + tmp.length());
+        System.out.println(tmp);
         String[] test = stp.splitsString(tmp);
         System.out.println("test = " + Arrays.toString(test));
     }
