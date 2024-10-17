@@ -19,6 +19,9 @@ public final class InputParser {
         List<Integer> numbers = new ArrayList<>();
 
         for (String token : tokens) {
+            if (token.isEmpty()) {  // 빈 문자열에 대해 처리
+                throw CalculatorException.from(CalculatorErrorMessage.NOT_NUMBER_ERROR);
+            }
             int number = parseToInt(token);
             numbers.add(number);
         }
@@ -27,7 +30,7 @@ public final class InputParser {
     }
 
     private static String[] splitByDelimiters(String targetInput, String delimiters) {
-        return targetInput.split(delimiters);
+        return targetInput.split(delimiters, -1);
     }
 
     private static int parseToInt(String numberString) {
