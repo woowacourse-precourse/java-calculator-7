@@ -69,4 +69,18 @@ class StringCalculatorTest {
             assertEquals(expected, actual.getMessage());
         }
     }
+
+    @Test
+    void 올바른_숫자의_합을_반환한다() {
+        //given
+        List<String> numbers = List.of("1", "2", "3");
+        int expected = 6;
+        StringCalculator calculator = new StringCalculator(numbers);
+
+        //when
+        int actual = calculator.getResult();
+
+        //then
+        assertEquals(expected, actual);
+    }
 }
