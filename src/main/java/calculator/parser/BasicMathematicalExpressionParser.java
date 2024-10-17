@@ -13,7 +13,7 @@ public class BasicMathematicalExpressionParser implements MathematicalExpression
 		try {
 			long number = Long.parseLong(stringNumber);
 			if (number <= 0) {
-				throw new IllegalArgumentException(ParserError.INVALID_POSITIVE_NUMBER.getMessage());
+				throw new IllegalArgumentException(ParserError.INVALID_FORMAT_NUMBER.getMessage());
 			}
 			return number;
 		} catch (NumberFormatException e) {
@@ -24,7 +24,7 @@ public class BasicMathematicalExpressionParser implements MathematicalExpression
 
 	private void isValid(String expression){
 		if(!VALID_PATTERN.matcher(expression).matches()){
-			throw new IllegalArgumentException("수식의 형태가 유효하지 않습니다.");
+			throw new IllegalArgumentException(ParserError.INVALID_MATHEMATICAL_EXPRESSION.getMessage());
 		}
 	}
 
