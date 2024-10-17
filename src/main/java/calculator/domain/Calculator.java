@@ -56,19 +56,20 @@ public class Calculator {
         List<Integer> parsedNumbers = new ArrayList<>();
 
         for (String number : numbers) {
-            number = number.trim();
-
-            if (!number.isEmpty()) {
-                ValidationUtils.validateValidInteger(number);
-                int parsedNumber = Integer.parseInt(number);
+            if (!number.trim().isEmpty()) {
+                int parsedNumber = parseAndValidateNumber(number);
                 parsedNumbers.add(parsedNumber);
-
                 sum = safeSum(sum, parsedNumber);
             }
         }
 
         ValidationUtils.validateNumbers(parsedNumbers);
         return sum;
+    }
+
+    private int parseAndValidateNumber(String number) {
+        ValidationUtils.validateValidInteger(number);
+        return Integer.parseInt(number);
     }
 
     private int safeSum(int sum, int nextNumber) {
