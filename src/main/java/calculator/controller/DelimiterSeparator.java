@@ -28,9 +28,6 @@ public class DelimiterSeparator {
     }
 
     public static void validateDelimiter(String str) {
-        if (NumberChecker.isNumber(str)) {
-            throw new IllegalArgumentException("잘못된 형식입니다.");
-        }
         if (!Delimiter.isDelimiter(str)) {
             throw new IllegalArgumentException("잘못된 형식입니다.");
         }
