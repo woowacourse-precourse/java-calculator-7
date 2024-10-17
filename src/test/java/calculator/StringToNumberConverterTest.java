@@ -1,6 +1,6 @@
 package calculator;
 
-import static calculator.StringToNumberConverter.convert;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
@@ -12,7 +12,7 @@ class StringToNumberConverterTest {
         List<String> list = List.of("100", "0", "10000", "92", "7", "-1", "1999999999");
         List<Integer> expected = List.of(100, 0, 10000, 92, 7, -1, 1999999999);
 
-        List<Integer> actual = convert(list);
+        List<Integer> actual = new StringToNumberConverter().convert(list);
 
         assertThat(actual).isEqualTo(expected);
     }
