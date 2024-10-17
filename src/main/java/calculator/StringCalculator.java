@@ -1,5 +1,8 @@
 package calculator;
 
+import static calculator.Validator.validateCustomSeparator;
+import static calculator.Validator.validateString;
+
 import camp.nextstep.edu.missionutils.Console;
 
 public class StringCalculator {
@@ -24,7 +27,7 @@ public class StringCalculator {
             int strStartIdx = input.indexOf("\\n") + 2;
             str = input.substring(strStartIdx);
         }
-        validateString(str);
+        validateString(str, separators);
 
         String[] separatedNumbers = str.split('[' + separators + ']');
         calculateSumValue(separatedNumbers);
@@ -54,33 +57,5 @@ public class StringCalculator {
         separators += customSeparator;
     }
 
-    void validateString(String str) {
-        for (int i = 0; i < str.length(); i++) {
-            char c = str.charAt(i);
-            if (!isSeparator(c) && !Character.isDigit(c)) {
-                throw new IllegalArgumentException("문자열 에러");
-            }
-        }
-    }
 
-    boolean isSeparator(char c) {
-        for (int i = 0; i < separators.length(); i++) {
-            if (c == separators.charAt(i)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    boolean validateCustomSeparator(String input) {
-        if (input.indexOf("\\n") != 3) {
-            return false;
-        } else {
-            return !isSeparatorNumeric(input.charAt(2));
-        }
-    }
-
-    boolean isSeparatorNumeric(char separator) {
-        return Character.isDigit(separator);
-    }
 }
