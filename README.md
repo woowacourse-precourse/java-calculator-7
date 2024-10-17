@@ -1,4 +1,4 @@
-# java-calculator-precourse
+# java-calculatorController-precourse
 ---
 **구현 기능 리스트**
 ---
