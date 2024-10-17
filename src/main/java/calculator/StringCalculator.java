@@ -6,7 +6,7 @@ import java.util.List;
 public class StringCalculator {
     public List<String> splitDelimiterAndNumbers(String formula) {
         if (formula.startsWith("//") && formula.contains("\\n")) {
-            String[] split = formula.split("\\\\n");
+            String[] split = formula.split("\\\\n", 2);
 
             return List.of(split);
         }
