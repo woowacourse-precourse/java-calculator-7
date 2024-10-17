@@ -33,6 +33,22 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 앞_뒤_공백() {
+        assertSimpleTest(() -> {
+            run("  //;\\n1;2;3  ");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 이스케이프_필요한_특수문자_구분자() {
+        assertSimpleTest(() -> {
+            run("//?\\n1?2?3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
     void 예외_테스트_음수() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))

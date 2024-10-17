@@ -18,10 +18,11 @@ public class Calculator {
             return ;
 
         if (isSpecialRegex(additionalSeparator)) {
-            this.separatorRegex = Delimiter.SPECIAL.getValue()
-                    + additionalSeparator
+            this.separatorRegex = this.separatorRegex
                     + Delimiter.OR.getValue()
-                    + this.separatorRegex;
+                    + Delimiter.BRACKET_OPEN.getValue()
+                    + additionalSeparator
+                    + Delimiter.BRACKET_CLOSE.getValue();
         } else {
             this.separatorRegex = this.separatorRegex
                     + Delimiter.OR.getValue()

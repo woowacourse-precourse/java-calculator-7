@@ -4,7 +4,8 @@ public enum Delimiter {
     CUSTOM_SEPARATOR_START("//"),
     CUSTOM_SEPARATOR_END("\\n"),
     OR("|"),
-    SPECIAL("\\\\");
+    BRACKET_OPEN("["),
+    BRACKET_CLOSE("]");
 
     private final String value;
 
