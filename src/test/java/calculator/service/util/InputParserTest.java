@@ -2,7 +2,7 @@ package calculator.service.util;
 
 import calculator.domain.exception.CalculatorException;
 import calculator.domain.exception.CalculatorErrorMessage;
-import calculator.domain.model.ExtractedInput;
+import calculator.dto.request.CalculatorRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,9 +15,9 @@ class InputParserTest {
     @Test
     @DisplayName("문자열 입력을 구분자로 분리하여 숫자 리스트로 변환 테스트")
     void parseValidInputReturnsListOfIntegers() {
-        ExtractedInput input = ExtractedInput.of(",|:", "1,2,3,4");
+        CalculatorRequest request = CalculatorRequest.of(",|:", "1,2,3,4");
 
-        List<Integer> result = InputParser.parseByDelimiters(input);
+        List<Integer> result = InputParser.parseByDelimiters(request);
 
         assertThat(result)
                 .hasSize(4)
@@ -27,9 +27,9 @@ class InputParserTest {
     @Test
     @DisplayName("구분자로 숫자를 잘못된 값이 포함된 경우 예외 발생 테스트")
     void parseInvalidNumberThrowsCalculatorException() {
-        ExtractedInput input = ExtractedInput.of(",|:", "1,2,a,4");
+        CalculatorRequest request = CalculatorRequest.of(",|:", "1,2,a,4");
 
-        assertThatThrownBy(() -> InputParser.parseByDelimiters(input))
+        assertThatThrownBy(() -> InputParser.parseByDelimiters(request))
                 .isInstanceOf(CalculatorException.class)
                 .hasMessage(CalculatorErrorMessage.NOT_NUMBER_ERROR.getMessage());
     }
@@ -37,9 +37,9 @@ class InputParserTest {
     @Test
     @DisplayName("빈 문자열 입력 시 빈 리스트 반환 테스트")
     void parseEmptyInputReturnsEmptyList() {
-        ExtractedInput input = ExtractedInput.of(",|:", "");
+        CalculatorRequest request = CalculatorRequest.of(",|:", "");
 
-        List<Integer> result = InputParser.parseByDelimiters(input);
+        List<Integer> result = InputParser.parseByDelimiters(request);
 
         assertThat(result)
                 .isEmpty();
