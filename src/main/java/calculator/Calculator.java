@@ -9,34 +9,57 @@ public class Calculator {
     List<String> separators = List.of(",", ":");
 
     public int run(String input) {
-        List<String> numberStringAndCustomSeparator = findCustomSeparator(input);
-        List<String> separators = List.of(",", ":", numberStringAndCustomSeparator.get(1));
-        String numberString = numberStringAndCustomSeparator.get(0);
-
-        List<Integer> numbers = getNumber(numberString, separators);
-        int result = sumNumbers(numbers);
-
-        return result;
+        input = findCustomSeparator(input);
+//        List<String> separators = List.of(",", ":", numberStringAndCustomSeparator.get(1));
+//        String numberString = numberStringAndCustomSeparator.get(0);
+//
+//        List<Integer> numbers = getNumber(numberString, separators);
+//        int result = sumNumbers(numbers);
+//
+//        return result;
     }
 
-    // 커스텀 구분자 저장
-    // return[0] : 커스텀 구분자 부분을 없앤 문자열
-    // return[1] : //와 \n을 없앤 커스텀 구분자
-    public List<String> findCustomSeparator(String input) {
-        // //구분자\n
-        int customSeparatorStart = input.indexOf("//");
-        int customSeparatorEnd = input.indexOf("\\n");
-
-        if (customSeparatorStart == -1) {
-            return List.of(input, "");
-        } else if (customSeparatorStart != 0 || customSeparatorEnd == -1) {
-            throw (new IllegalArgumentException());
+    /**
+     * 커스텀 구분자를 찾는 메서드
+     *
+     * @return 커스텀 구분자를 제외한 String
+     */
+    public String findCustomSeparator(String input) {
+        while (hasCustomSeparator(input)) {
+            input = extractCustomSeparator(input);
         }
 
-        String customSeparator = input.substring(2, customSeparatorEnd);
-        String numberString = input.substring(customSeparatorEnd + 2);
+        return input;
+    }
 
-        return List.of(numberString, customSeparator);
+    /**
+     * 커스텀 구분자가 있는지 검사하는 메서드
+     *
+     * @return boolean
+     */
+    private boolean hasCustomSeparator(String input) {
+
+        if (!input.contains("//")) {
+            return false;
+        }
+
+        if (input.indexOf("//") > 0 || !input.contains("\\n")) {
+            throw new IllegalArgumentException();
+        }
+
+        return true;
+    }
+
+    /**
+     * 맨 앞 커스텀 구분자를 추출하여 빼 separators에 저장하고, 커스텀 구분자를 뺸 문자열을 반환하는 메서드
+     *
+     * @return 맨 앞의 커스텀 구분자를 뺀 문자열
+     */
+    private String extractCustomSeparator(String input) {
+        int customSeparatorEnd = input.indexOf("\\n");
+        String customSeparator = input.substring(2, customSeparatorEnd);
+        separators.add(customSeparator);
+        return input.substring(customSeparatorEnd + 2);
     }
 
     // 구분자로 문자열에서 숫자 추출
