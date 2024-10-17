@@ -9,7 +9,8 @@ public enum ErrorMessages {
     INVALID_CUSTOM_INDICATOR_MESSAGE("유효하지 않은 커스텀 구분자 지시자입니다."),
     INVALID_CUSTOM_SEPARATOR_BLANK_MESSAGE("잘못된 커스텀 구분자 입니다.(공백)"),
     INVALID_CUSTOM_SEPARATOR_EMPTY_MESSAGE("잘못된 커스텀 구분자 입니다.(비어있음)"),
-    INVALID_CUSTOM_SEPARATOR_DIGIT_MESSAGE("잘못된 커스텀 구분자 입니다.(숫자)");
+    INVALID_CUSTOM_SEPARATOR_DIGIT_MESSAGE("잘못된 커스텀 구분자 입니다.(숫자)"),
+    INVALID_CUSTOM_SEPARATOR_DOT_MESSAGE("잘못된 커스텀 구분자 입니다.(점)");
 
     private String message;
 
