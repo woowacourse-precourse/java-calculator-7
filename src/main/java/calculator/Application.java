@@ -8,9 +8,15 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String expression = getExpression();
         String[] numList = parseNumbersFromExpression(expression);
-        for (String s : numList) {
-            System.out.println("num = " + s);
+        System.out.println("결과 : " + getResult(numList));
+    }
+
+    private static int getResult(String[] list) {
+        int result = 0;
+        for (String num : list) {
+            result += Integer.parseInt(num);
         }
+        return result;
     }
 
     private static String[] parseNumbersFromExpression(String expression) {
