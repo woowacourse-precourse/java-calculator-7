@@ -18,17 +18,21 @@ public class Application {
             return 0;
         }
 
-        String delimiter = getDelimiter(input);
-        input = getNumbersString(input);
+        String[] parts = parseInput(input);
+        String delimiter = parts[0];
+        String numbersString = parts[1];
 
-        String[] numbers = input.split(delimiter);
+        String[] numbers = numbersString.split(delimiter);
 
         validateNumbers(numbers);
         return calculateSum(numbers);
     }
 
-    private static String getDelimiter(String input) {
+    // 내부에서만 사용하는 메서드이므로 private으로 설정
+    private static String[] parseInput(String input) {
         String delimiter = ",|:";  // 기본 구분자
+        String numbersString = input;
+
         if (input.startsWith("//")) {
             int newlineIndex = input.indexOf("\\n");
             if (newlineIndex == -1) {
@@ -36,18 +40,13 @@ public class Application {
             }
             String customDelimiter = input.substring(2, newlineIndex);
             delimiter += "|" + Pattern.quote(customDelimiter);
+            numbersString = input.substring(newlineIndex + 2);
         }
-        return delimiter;
+
+        return new String[]{delimiter, numbersString};
     }
 
-    private static String getNumbersString(String input) {
-        if (input.startsWith("//")) {
-            int newlineIndex = input.indexOf("\\n");
-            return input.substring(newlineIndex + 2);
-        }
-        return input;
-    }
-
+    // 내부에서만 사용하는 메서드이므로 private으로 설정
     private static void validateNumbers(String[] numbers) {
         for (String number : numbers) {
             if (!number.matches("-?\\d+")) {
