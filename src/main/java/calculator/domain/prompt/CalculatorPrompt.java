@@ -1,7 +1,6 @@
 package calculator.domain.prompt;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CalculatorPrompt extends Prompt {

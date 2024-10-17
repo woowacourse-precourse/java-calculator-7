@@ -1,7 +1,6 @@
 package calculator.learn;
 
 import calculator.domain.prompt.CalculatorPrompt;
-import org.junit.jupiter.api.Test;
 
 class SpeedTest {
 
