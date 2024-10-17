@@ -2,6 +2,7 @@ package calculator;
 
 import calculator.delimiter.Delimiter;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -33,7 +34,7 @@ public class Application {
         }
 
         String[] numberTokens = input.split(String.join("|", delimiters.stream().map(Delimiter::value).toList()));
-        int sum = calculator.sum(numberTokens);
+        int sum = calculator.sum(Arrays.stream(numberTokens).toList());
 
         System.out.print("결과 : " + sum);
     }
