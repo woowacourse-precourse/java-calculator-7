@@ -54,6 +54,18 @@ public class Application {
     }
 
     public static long calcNumbers(List<Long> numbers) {
-        return numbers.stream().reduce(0L, Long::sum);
+        long sum = 0L;
+        long maxValue = Long.MAX_VALUE;
+
+        for (long number : numbers) {
+            if (maxValue - number < 0) {
+                throw new IllegalArgumentException("결과값이 long 범위를 넘어갔습니다.");
+            } else {
+                sum += number;
+                maxValue -= number;
+            }
+        }
+
+        return sum;
     }
 }
