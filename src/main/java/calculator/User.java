@@ -4,18 +4,46 @@ public class User {
     private final String user;
 
     public User(String user) {
-        if (user.isBlank()) {
-            throw new IllegalArgumentException("공백만 입력할수 없습니다");
-        }
-
-        if (Character.isWhitespace(user.charAt(0))) {
-            throw new IllegalArgumentException("입력값은 공백으로 시작할 수 없습니다");
-        }
+        validate(user);
         this.user = user;
     }
 
+    private void validate(String input) {
+        int customSettingIndex = input.indexOf("\\n");
+
+        if (customSettingIndex != -1) {
+            String prefix = input.substring(0, customSettingIndex);
+            if (!prefix.startsWith("//")) {
+                throw new IllegalArgumentException("잘못된 커스텀 구분자 형식입니다 올바른 형식은 '//'로 시작해야 합니다.");
+            }
+        }
+        if (input.startsWith("/") && !input.startsWith("//")) {
+            throw new IllegalArgumentException("잘못된 커스텀 구분자 형식입니다 올바른 형식은 '//'로 시작해야 합니다.");
+        }
+
+        if (customSettingIndex == -1) {
+            throw new IllegalArgumentException("커스텀 구분자 정의 후 \\n 이 필요합니다.");
+        }
+
+        if (customSettingIndex + 1 >= input.length()) {
+            throw new IllegalArgumentException("구분자 정의 후 숫자들이 필요합니다.");
+        }
+
+        if (input.isBlank()) {
+            throw new IllegalArgumentException("공백만 입력할 수 없습니다.");
+        }
+
+        if (Character.isWhitespace(input.charAt(0))) {
+            throw new IllegalArgumentException("입력값은 공백으로 시작할 수 없습니다.");
+        }
+    }
+    
     public String getUser() {
         return user;
+    }
+
+    public boolean isCustom() {
+        return user.startsWith("//");
     }
 
 }
