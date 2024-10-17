@@ -16,19 +16,24 @@ public class CustomDelimiterValidator implements ValidationStrategy {
 
     private void validateCustomDelimiter(String input) {
         Matcher matcher = DelimiterUtils.getCustomDelimiterPattern().matcher(input);
-        if (!matcher.matches() || isMissingNumbers(matcher.group(2))) {
+
+        // 구분자 패턴이 잘못되었거나 구분자가 없으면 예외 발생
+        if (!matcher.find()) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_CUSTOM_DELIMITER_ERROR.getMessage());
+        }
+
+        // 구분자를 올바르게 추출하여 처리
+        String customDelimiter = matcher.group(1);
+
+        // 커스텀 구분자가 비어있거나 이스케이프된 구분자일 경우 예외 처리
+        if (customDelimiter == null || customDelimiter.trim().isEmpty() || customDelimiter.equals("\\")) {
+            throw new IllegalArgumentException(ErrorMessage.MISSING_DELIMITER_ERROR.getMessage());
         }
     }
 
-    // 입력 문자열이 커스텀 구분자로 시작하는지 확인
+    // 입력 문자열이 커스텀 구분자로 시작하는지 확인하는 메서드
     private boolean isCustomDelimiter(String input) {
         return input.startsWith("//");
-    }
-
-    // 숫자가 없는지 확인
-    private boolean isMissingNumbers(String numberPart) {
-        return numberPart.trim().isEmpty(); // 숫자 부분이 빈 문자열인 경우
     }
 
 }
