@@ -19,8 +19,8 @@ public class Application {
 
         Pattern customDelimiterPattern = Pattern.compile("//(.)\\\\n(.*)");
         if (Pattern.matches("//(.)\\\\n(.*)", input)) { // 입력값이랑 정규표현식이랑 일치하는지 확인
-            Matcher matcher = customDelimiterPattern.matcher(input); //
-            if (matcher.matches()) { // 입력값이 해당 정규표현식과 완벽하게 일치하는지 확인
+            Matcher matcher = customDelimiterPattern.matcher(input);
+            if (matcher.matches() && !"-".equals(matcher.group(1))) { // 입력값이 해당 정규표현식과 완벽하게 일치하는지 확인, 음수기호 안되게
                 delimiter += "|" + matcher.group(1);
                 values += matcher.group(2);
             }
