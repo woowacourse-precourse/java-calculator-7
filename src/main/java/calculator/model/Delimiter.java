@@ -15,8 +15,7 @@ public class Delimiter {
         delimiterSet.add(delimiter);
     }
 
-    public static boolean isDelimiter(String str) {
-        char ch = str.charAt(0);
+    public static boolean isDelimiter(char ch) {
         return delimiterSet.contains(ch);
     }
 }
