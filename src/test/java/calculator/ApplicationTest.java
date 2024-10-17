@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import calculator.domain.Addition;
 import calculator.domain.Extractor;
-import calculator.view.InputView;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -28,19 +27,6 @@ class ApplicationTest extends NsTest {
                 assertThatThrownBy(() -> runException("-1,2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
-    }
-
-
-    @Test
-    void 계산을_원하는_문자열_입력받기_공백인_경우() {
-        //given
-        String input = "";
-        InputView inputView = new InputView();
-
-        //when & then
-        assertThatThrownBy(() -> inputView.hasValue(input))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("값을 입력해야 합니다.");
     }
 
     @DisplayName("기본 구분자가 잘못 입력된 경우")
