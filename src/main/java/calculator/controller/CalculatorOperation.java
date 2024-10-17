@@ -2,6 +2,7 @@ package calculator.controller;
 
 import calculator.service.StringCalculate;
 import calculator.service.StringSplit;
+import calculator.validator.InputValidator;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -11,6 +12,7 @@ public class CalculatorOperation {
 
     public void operateCalculator() {
         getUserInputByView();
+        validateUserInput();
         splitDelimiterAndOperand();
         int result = calculateAndGetResult();
         fetchResultToView(result);
@@ -19,6 +21,10 @@ public class CalculatorOperation {
     private void getUserInputByView() {
         InputView inputView = new InputView();
         inputString = inputView.getUserInput();
+    }
+
+    private void validateUserInput() {
+        InputValidator.validateInput(inputString);
     }
 
     private void splitDelimiterAndOperand() {
