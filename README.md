@@ -2,13 +2,10 @@
 
 ## 1. 문자열 덧셈 계산기 소개
 
-- - -
 문자열 덧셈 계산기는 입력된 문자열에서 숫자를 추출하고, 다양한 구분자(쉼표, 콜론, 커스텀 구분자)를 사용하여 숫자들의 합을 계산하는 프로그램입니다. 입력 값이 없는 경우 0을 반환하며, 음수가 입력되면 예외를
 발생시킵니다. 사용자는 직접 구분자를 지정할 수 있으며, 지정하지 않으면 기본 구분자인 쉼표(,)와 콜론(:)을 사용합니다.
 
 ## 2. 패키지 목록 (클래스 포함)
-
-- - -
 
 ```  
  src
@@ -16,15 +13,19 @@
  │   └── java
  │       └── calculator
  │           ├── model
- │           │   ├── Calculator.java            // 문자열 덧셈 로직을 처리하는 클래스
- │           │   ├── InputValidator.java        // 입력값의 유효성을 검증하는 클래스
- │           │   └── DelimiterParser.java       // 구분자를 처리하는 클래스
+ │           │   ├── Calculator.java                // 계산 로직에 대한 인터페이스
+ │           │   ├── CalculatorImpl.java            // 문자열 덧셈 로직을 처리하는 구현 클래스
+ │           │   ├── InputValidator.java            // 입력값의 유효성을 검증하는 클래스
+ │           │   └── DelimiterParser.java           // 구분자를 처리하는 클래스
  │           ├── controller
- │           │   └── CalculatorController.java  // 컨트롤러 클래스
+ │           │   └── CalculatorController.java      // 컨트롤러 클래스
  │           ├── view
- │           │    └── CalculatorView.java        // 사용자 입력과 출력을 담당하는 클래스
+ │           │    ├── CalculatorView.java           // 사용자 입력과 출력을 담당하는 인터페이스
+ │           │    └── CalculatorViewImpl.java       // 사용자 입력과 출력을 처리하는 구현 클래스
+ │           └── config
+ │           │    └── AppConfig.java                // 객체 생성 및 의존성 주입을 담당하는 클래스
  │           └── util
- │               └── Constants.java             // 공통 상수를 정의한 클래스
+ │               └── Constants.java                 // 공통 상수를 정의한 클래스
  └── test
      └── java
          └── calculator
@@ -37,8 +38,6 @@
 ```
 
 ## 3. 기능 목록
-
-- - -
 
 1. **빈 문자열 또는 null 입력 시 0을 반환**
     * 빈 문자열이나 null을 입력할 경우 결과 값으로 0을 반환한다.
@@ -56,8 +55,6 @@
     * 계산 결과를 콘솔에 출력한다.
 
 ## 4. 실행 결과 예시
-
-- - -
 
 ```
 덧셈할 문자열을 입력해 주세요.  
@@ -86,8 +83,6 @@
 ```
 
 ## 5. 테스트 목록
-
-- - -
 
 1. **빈 문자열 또는 null 입력 시 0을 반환**
     * 입력이 "" 또는 null일 때 0을 반환하는지 테스트.
