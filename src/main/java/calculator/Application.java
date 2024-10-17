@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
-        CalculatorController controller = new CalculatorController();
-        controller.run();
+        CalculatorService service = new CalculatorService();
+        CalculatorController controller = new CalculatorController(service);
+        controller.app();
     }
 }
