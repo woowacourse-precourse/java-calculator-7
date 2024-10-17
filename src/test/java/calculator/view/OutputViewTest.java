@@ -1,4 +1,4 @@
-package calculator;
+package calculator.view;
 
 import calculator.view.OutputView;
 import org.junit.jupiter.api.Test;
