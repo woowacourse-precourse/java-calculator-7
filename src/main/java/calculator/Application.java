@@ -2,6 +2,7 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 
 public class Application {
@@ -16,6 +17,8 @@ public class Application {
         validateInput(input);
 
         ArrayList<Integer> tokens = inputParse(input);
+
+        printAnswer(calculate(tokens));
 
     }
 
@@ -96,5 +99,14 @@ public class Application {
         return tokens;
     }
 
+    public static BigInteger calculate(ArrayList<Integer> tokens){
+        return tokens.stream()
+                .map(BigInteger::valueOf)
+                .reduce(BigInteger.ZERO, BigInteger::add);
+    }
+
+    public static void printAnswer(BigInteger ans){
+        System.out.println("결과 : " + ans);
+    }
 
 }
