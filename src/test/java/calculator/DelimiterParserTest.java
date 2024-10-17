@@ -26,24 +26,44 @@ class DelimiterParserTest {
         //then
         Assertions.assertFalse(result);
     }
-    /*@Test
-    void splitInputAsString() {
+    @Test
+    void splitByDelimiter_defaultDelimiter() {
         //given
+        String delimiter = ":";
+        DelimiterParser delimiterParser = new DelimiterParser(delimiter);
         String input = "1,2:3";
         //when
-        String result = DelimiterParser.splitInputAsString(input);
+        String result = delimiterParser.splitByDelimiter(input);
         //then
-        Assertions.assertEquals("123", result);
+        Assertions.assertEquals("1,2,3", result);
+    }
+    @Test
+    void splitByDelimiter_customDelimiter() {
+        //given
+        String delimiter1 = "//";
+        String delimiter2 = "\\n";
+        DelimiterParser delimiterParser = new DelimiterParser(delimiter1,delimiter2);
+        String input = "//;\\n10;20;30";
+        //when
+        String result = delimiterParser.splitByDelimiter(input);
+        String numberPart = result.substring(1);
+        String customDelimiter = result.substring(0, 1);
+        String[] split = numberPart.split(customDelimiter);
+        String splitString = String.join(",", split);
+        //then
+        Assertions.assertEquals("10,20,30", splitString);
     }
     @Test
     void getNumbersAfterParsing() {
         //given
+        String delimiter = ":";
+        DelimiterParser delimiterParser = new DelimiterParser(delimiter);
         String input = "1,2:3";
         //when
-        String result = DelimiterParser.splitInputAsString(input);
-        List<Integer> list = DelimiterParser.getNumbersAfterParsing(result);
+        String result = delimiterParser.splitByDelimiter(input);
+        List<Integer> list = DelimiterParser.parseToIntList(result);
         //then
         Assertions.assertEquals(3, list.size());
         Assertions.assertEquals(Integer.valueOf(1), list.getFirst());
-    }*/
+    }
 }

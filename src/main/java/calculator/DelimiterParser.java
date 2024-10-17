@@ -41,14 +41,6 @@ public class DelimiterParser {
         }
     }
 
-    public static List<Integer> getNumbersAfterParsing(String input) {
-        List<Integer> numbers = new ArrayList<>();
-        for (char number : input.toCharArray()) {
-            numbers.add(Character.getNumericValue(number)); // - -1
-        }
-        return numbers;
-    }
-
     public static List<Integer> parseToIntList(String input) {
         String[] split = input.split(COMMON_DELIMITER);
 
