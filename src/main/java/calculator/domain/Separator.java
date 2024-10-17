@@ -8,7 +8,7 @@ public class Separator {
     private static final String DEFAULT_COMMA = ",";
     private static final String DEFAULT_COLON = ":";
     private final List<String> availableSeparators;
-    private final List<Integer> extractedNumbers;
+    private final List<String> extractedNumbers;
 
     public Separator(String numbers) {
         availableSeparators = new ArrayList<>(List.of(DEFAULT_COMMA, DEFAULT_COLON));
@@ -66,13 +66,13 @@ public class Separator {
                 number += numbers.charAt(i);
                 continue;
             }
-            extractedNumbers.add(Integer.parseInt(number));
+            extractedNumbers.add(number);
             number = "";
         }
-        extractedNumbers.add(Integer.parseInt(number));
+        extractedNumbers.add(number);
     }
 
-    public List<Integer> getExtractedNumbers() {
+    public List<String> getExtractedNumbers() {
         return extractedNumbers;
     }
 }

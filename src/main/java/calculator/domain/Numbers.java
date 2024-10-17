@@ -7,10 +7,10 @@ public class Numbers {
     public Numbers(Separator separator) {
         this.sum = sum(separator.getExtractedNumbers());
     }
-    private long sum(List<Integer> numbers) {
+    private long sum(List<String> numbers) {
         long sum = 0;
-        for(int number : numbers) {
-            sum += number;
+        for(String number : numbers) {
+            sum += Long.parseLong(number);
         }
         return sum;
     }
