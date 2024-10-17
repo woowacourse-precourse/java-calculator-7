@@ -9,6 +9,23 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
     @Test
+    void 공백입력() {
+        assertSimpleTest(() -> {
+            run("");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 숫자_1개_입력() {
+        assertSimpleTest(() -> {
+            run("123");
+            assertThat(output()).contains("결과 : 123");
+        });
+    }
+
+
+    @Test
     void 콤마_구분자_사용() {
         assertSimpleTest(() -> {
             run("1,2");
