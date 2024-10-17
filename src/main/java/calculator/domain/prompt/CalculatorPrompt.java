@@ -16,14 +16,18 @@ public class CalculatorPrompt extends Prompt {
         }
 
         String[] splitData = inputData.split("\\\\n");
-        if (splitData.length > 2) {
-            throw new IllegalArgumentException();
-        }
+        validateParse(splitData);
 
         if (splitData[0].startsWith("//")) {
             return this.separate(splitData[1], inputData.charAt(2));
         }
         return this.separate(splitData[0], '\0'); //커스텀 구분자가 없는 경우
+    }
+
+    private void validateParse(String[] splitData) {
+        if (splitData.length > 2) {
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
