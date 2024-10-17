@@ -28,11 +28,11 @@ public class Delimiters {
         return new Delimiters();
     }
 
-    public String getRegex() {
-        return String.join("|", this.delimiters);
+    public boolean isCustomDelimiter() {
+        return !(INITIAL_DELIMITER.equals(this.delimiters));
     }
 
-    public boolean isCustomDelimiter() {
-        return !this.delimiters.equals(INITIAL_DELIMITER);
+    public String getRegex() {
+        return String.join("|", this.delimiters);
     }
 }

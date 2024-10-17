@@ -1,13 +1,12 @@
 package calculator.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Numbers {
-    private final List<Integer> numbers = new ArrayList<>();
+    private final List<Integer> numbers;
 
-    public void addNumber(int number) {
-        numbers.add(number);
+    public Numbers(List<Integer> numbers) {
+        this.numbers = numbers;
     }
 
     public Integer totalSum() {
