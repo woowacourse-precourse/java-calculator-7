@@ -44,6 +44,9 @@ public class Application {
         String[] numbers = parsedInput.split(divider);
         int sum = 0;
         for (String number : numbers) {
+            if (number.isEmpty()) {
+                throw new IllegalArgumentException("구분자 사이의 문자열이 비어있으면 안됩니다.");
+            }
             if (!number.chars().allMatch(Character::isDigit)) {
                 throw new IllegalArgumentException("덧셈할 문자열이 양수로만 이루어져야 합니다.");
             }
