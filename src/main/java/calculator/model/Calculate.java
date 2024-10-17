@@ -1,8 +1,8 @@
 package calculator.model;
 
 import calculator.exception.CalculateException;
-import calculator.service.CalculateCustom;
-import calculator.service.CalculateDefault;
+import calculator.util.CalculateCustom;
+import calculator.util.CalculateDefault;
 import java.util.List;
 
 public class Calculate {
