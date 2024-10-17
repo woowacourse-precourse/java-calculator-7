@@ -20,7 +20,7 @@ public class StringAdder {
 
     private String removeDelimiterSection(String input) {
         if (input.startsWith("//")) {
-            int delimiterEndIndex = input.indexOf("/n");
+            int delimiterEndIndex = input.indexOf("\n");
             return input.substring(delimiterEndIndex + 1);
         }
         return input;
