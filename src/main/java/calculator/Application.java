@@ -22,7 +22,7 @@ public class Application {
             return new String[]{"0"};
         }
 
-        String delimiter = ",|;";
+        String delimiter = ",|:";
 
         if(input.startsWith("//")){
             int delimiterEndIndex = input.indexOf("\\n");
