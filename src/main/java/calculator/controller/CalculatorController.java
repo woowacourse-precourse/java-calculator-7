@@ -1,10 +1,8 @@
 package calculator.controller;
 
-import calculator.model.StringNumbers;
-import calculator.model.Numbers;
+import calculator.util.Calculate;
 import calculator.view.InputView;
 import calculator.view.OutputView;
-import java.util.List;
 
 public class CalculatorController {
 
@@ -18,8 +16,7 @@ public class CalculatorController {
     }
 
     public Integer doCalculate(String userInput) {
-        List<String> calculate = new StringNumbers(userInput).getSplitUserInput();
-        return new Numbers(calculate).calculateNumbersSum();
+        return Calculate.calculateUserInputSum(userInput);
     }
 
     public void endCalculate(Integer numbersSum) {
