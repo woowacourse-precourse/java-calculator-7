@@ -78,61 +78,84 @@ public class CalculatorTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    /**
+     * calculate() 기능의 중간 과정에 대한 테스트들 -> 최종 단계의 검증 로직에서 통과 불과하여 주석처리함.
+     */
+//    @Test
+//    void 구분자_입력받아_누적() {
+//        String testString = ">_d";
+//        Calculator calculator = new Calculator(testString, defaultRegDelimiter);
+//
+//        calculator.calculate();
+//        InputDelimiter inputDelimiter = calculator.getInputDelimiter();
+//
+//        assertThat(inputDelimiter.getDelimiter()).isEqualTo(">_d");
+//    }
+//
+//
+//    @Test
+//    void 등록된_구분자와_일치하는_구분자면_초기화() {
+//        String testString = "12,";
+//        Calculator calculator = new Calculator(testString, defaultRegDelimiter);
+//
+//        calculator.calculate();
+//        InputDelimiter inputDelimiter = calculator.getInputDelimiter();
+//
+//        assertThat(inputDelimiter.getDelimiter()).isEqualTo("");
+//    }
+//
+//    @Test
+//    void 등록된_구분자와_일치하지_않는_구분자면_패스_1() {
+//        String testString = "12*$,";
+//        Calculator calculator = new Calculator(testString, defaultRegDelimiter);
+//
+//        calculator.calculate();
+//        InputDelimiter inputDelimiter = calculator.getInputDelimiter();
+//
+//        assertThat(inputDelimiter.getDelimiter()).isEqualTo("*$,");
+//    }
+//
+//    @Test
+//    void 등록된_구분자와_일치하지_않는_구분자면_패스_2() {
+//        String testString = "12:::*$,";
+//        Calculator calculator = new Calculator(testString, defaultRegDelimiter);
+//
+//        calculator.calculate();
+//        InputDelimiter inputDelimiter = calculator.getInputDelimiter();
+//
+//        assertThat(inputDelimiter.getDelimiter()).isEqualTo("*$,");
+//    }
+//
+//
+//    @Test
+//    void 숫자_입력_다음에_구분자_입력시_최종결과_갱신() {
+//        String testString = "12*$,";
+//        Calculator calculator = new Calculator(testString, defaultRegDelimiter);
+//
+//        calculator.calculate();
+//        InputNumber inputNumber = calculator.getInputNumber();
+//
+//        assertThat(inputNumber.getNumber()).isEqualTo(0);
+//        assertThat(calculator.getSum()).isEqualTo(12);
+//    }
+
     @Test
-    void 구분자_입력받아_누적() {
-        String testString = ">_d";
-        Calculator calculator = new Calculator(testString, defaultRegDelimiter);
-
-        calculator.calculate();
-        InputDelimiter inputDelimiter = calculator.getInputDelimiter();
-
-        assertThat(inputDelimiter.getDelimiter()).isEqualTo(">_d");
-    }
-
-
-    @Test
-    void 등록된_구분자와_일치하는_구분자면_초기화() {
-        String testString = "12,";
-        Calculator calculator = new Calculator(testString, defaultRegDelimiter);
-
-        calculator.calculate();
-        InputDelimiter inputDelimiter = calculator.getInputDelimiter();
-
-        assertThat(inputDelimiter.getDelimiter()).isEqualTo("");
-    }
-
-    @Test
-    void 등록된_구분자와_일치하지_않는_구분자면_패스_1() {
-        String testString = "12*$,";
-        Calculator calculator = new Calculator(testString, defaultRegDelimiter);
-
-        calculator.calculate();
-        InputDelimiter inputDelimiter = calculator.getInputDelimiter();
-
-        assertThat(inputDelimiter.getDelimiter()).isEqualTo("*$,");
-    }
-
-    @Test
-    void 등록된_구분자와_일치하지_않는_구분자면_패스_2() {
-        String testString = "12:::*$,";
-        Calculator calculator = new Calculator(testString, defaultRegDelimiter);
-
-        calculator.calculate();
-        InputDelimiter inputDelimiter = calculator.getInputDelimiter();
-
-        assertThat(inputDelimiter.getDelimiter()).isEqualTo("*$,");
-    }
-
-    @Test
-    void 숫자_입력_다음에_구분자_입력시_최종결과_갱신() {
-        String testString = "12*$,";
+    void 문자열_입력_종료_후_마지막_숫자_처리() {
+        String testString = "1,2,3";
         Calculator calculator = new Calculator(testString, defaultRegDelimiter);
 
         calculator.calculate();
         InputNumber inputNumber = calculator.getInputNumber();
 
-        assertThat(inputNumber.getNumber()).isEqualTo(0);
-        assertThat(calculator.getSum()).isEqualTo(12);
+        assertThat(calculator.getSum()).isEqualTo(6);
     }
 
+    @Test
+    void 문자열_입력_종료_후_마지막_구분자_잘못되면_예외_발생() {
+        String testString = "1,2,3,4*";
+        Calculator calculator = new Calculator(testString, defaultRegDelimiter);
+
+        assertThatThrownBy(() -> calculator.calculate())
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }

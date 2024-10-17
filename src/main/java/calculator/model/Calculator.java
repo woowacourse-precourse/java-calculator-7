@@ -61,18 +61,19 @@ public class Calculator {
         for (int i=0; i<inputValues.length; i++) {
             calculateEach(i);
         }
+        calculateLeftValue();
     }
 
     private void calculateEach(int idx) {
         String value = inputValue.substring(idx, idx+1);
         if (isNumber(value)) {
-            calculateNumber(idx, value);
+            calculateNumber(value);
         } else {
-            calculateDelimiter(idx, value);
+            calculateDelimiter(value);
         }
     }
 
-    private void calculateNumber(int idx, String value) {
+    private void calculateNumber(String value) {
         validateWrongDelimiter();
         if (mode == DELI) {
             validatePositiveNumber(value);
@@ -82,7 +83,7 @@ public class Calculator {
         updateMode(NUM);
     }
 
-    private void calculateDelimiter(int idx, String value) {
+    private void calculateDelimiter(String value) {
         if (mode == NUM) {
             addSum(inputNumber.getNumber());
             inputNumber.initialize();
@@ -94,6 +95,11 @@ public class Calculator {
         } else {
             updateMode(WRONG_DELI);
         }
+    }
+
+    private void calculateLeftValue() {
+        validateWrongDelimiter();
+        addSum(inputNumber.getNumber());
     }
 
     private void addSum(int number) {
