@@ -13,11 +13,11 @@ public class OperatorMap {
         return INSTANCE;
     }
 
-    public void registerSeparatorToOperand(Separator separator, OperatorEnum operator) {
+    public void registerSeparatorToOperator(Separator separator, OperatorEnum operator) {
         operatorMapBySeparator.put(separator, operator);
     }
 
-    public OperatorEnum getOperandBySeparator(Separator separator) {
+    public OperatorEnum getOperatorBySeparator(Separator separator) {
         return operatorMapBySeparator.get(separator);
     }
 }

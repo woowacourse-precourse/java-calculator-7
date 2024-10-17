@@ -9,7 +9,7 @@ public class SeparatorExpressionCalculator {
         boolean hasCustomSeparator = manager.hasCustomSeparator();
         if(hasCustomSeparator) {
             Separator customSeparator = manager.getCustomSeparator();
-            operatorMap.registerSeparatorToOperand(customSeparator, OperatorEnum.PLUS);
+            operatorMap.registerSeparatorToOperator(customSeparator, OperatorEnum.PLUS);
         }
     }
 
