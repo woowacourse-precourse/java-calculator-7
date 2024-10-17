@@ -2,10 +2,14 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
+        List<String> processedInput = new ArrayList<>();
+
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
@@ -23,12 +27,17 @@ public class Application {
                     delimiter = delimiter.replace("//", "");
                 }
                 String leftInput = input.substring(escapeIdx + 2);
-                String splitInput = Arrays.toString(leftInput.split(delimiter));
-                System.out.println(splitInput);
+                String[] splitInput = leftInput.split(delimiter);
+                processedInput.addAll(Arrays.asList(splitInput));
             } else {
                 String delimiter = "[,:]";
-                String splitInput = Arrays.toString(input.split(delimiter));
-                System.out.println(splitInput);
+                String[] splitInput = input.split(delimiter);
+                processedInput.addAll(Arrays.asList(splitInput));
+            }
+        }
+        for (String number : processedInput) {
+            if (Integer.parseInt(number) < 0) {
+                throw new IllegalArgumentException();
             }
         }
     }
