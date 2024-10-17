@@ -29,4 +29,12 @@ public class StringAdder {
     private String[] splitNumbers(String input, String delimiter) {
         return input.split(delimiter);
     }
+
+    private int sumNumbers(String[] numbers) {
+        int sum = 0;
+        for (String number : numbers) {
+            sum += Integer.parseInt(number);
+        }
+        return sum;
+    }
 }
