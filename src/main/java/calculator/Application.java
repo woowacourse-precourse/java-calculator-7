@@ -48,4 +48,26 @@ public class Application {
         }
         return sum;
     }
+
+    // "//" 와 "\n" 사이에 있는 문자를 커스텀구분자로 추가
+    public static void addSepartor(String str, List<Character> separatorList) {
+        int startIdx = -1;
+
+        for (int i = 0; i < str.length(); i++) {
+            if (i < str.length() - 1 && str.charAt(i) == '/' && str.charAt(i + 1) == '/') {
+                startIdx = i + 2;
+                continue;
+            }
+            if (str.charAt(i) == '\n' && startIdx != -1) {
+                for (int j = startIdx; j < i; j++) {
+                    separatorList.add(str.charAt(j));
+                }
+                startIdx = -1;
+            }
+        }
+        if (startIdx != -1) {
+            throw new IllegalArgumentException("잘못된 입력값입니다.");
+        }
+    }
+
 }
