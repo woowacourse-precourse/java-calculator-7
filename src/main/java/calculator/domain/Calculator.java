@@ -1,5 +1,8 @@
 package calculator.domain;
 
+import calculator.exception.Validator;
+import calculator.util.SeparatorExtractor;
+
 public class Calculator {
 
     public int add(String input) {
@@ -8,10 +11,10 @@ public class Calculator {
             return 0;
         }
 
-        if (isCustomSeparator(input)) {
-            separator = extractCustomSeparator(input, separator);
-            input = extractNumbersPart(input);
-        }
+        String separator = SeparatorExtractor.extractSeparators(input);
+        input = SeparatorExtractor.extractNumbersPart(input);
+
+        Validator.validateInput(input, separator);
 
         String[] numbers = splitNumbers(input, separator);
         return calculateSum(numbers);
