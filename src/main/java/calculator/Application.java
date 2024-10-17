@@ -31,11 +31,7 @@ public class Application {
         int firstTokenIdx = input.indexOf(CUSTOM_SEPARATOR_PREFIX);
         int lastTokenIdx = input.lastIndexOf(CUSTOM_SEPARATOR_SUFFIX);
 
-        if (firstTokenIdx == -1 || lastTokenIdx == -1) {
-            throw new IllegalArgumentException();
-        }
-
-        if (((firstTokenIdx + 1) - (lastTokenIdx - 1)) > 1) {
+        if (firstTokenIdx == -1 || lastTokenIdx == -1 || ((firstTokenIdx + 1) - (lastTokenIdx - 1)) > 1) {
             throw new IllegalArgumentException();
         }
 
