@@ -91,7 +91,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_사용4() {
         assertSimpleTest(() -> {
-            run("//%$#$^\\n11%$#$^12%$#$^13");
+            run("//%\\$#\\$\\^\\n11%$#$^12%$#$^13");
             assertThat(output()).contains("결과 : 36");
         });
     }
