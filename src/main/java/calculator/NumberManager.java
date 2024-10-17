@@ -3,8 +3,9 @@ package calculator;
 import java.util.ArrayList;
 
 public class NumberManager {
+    private ArrayList<Integer> numbers = new ArrayList<>();
+
     public void numberInput(String numberString, ArrayList<String> separators) {
-        ArrayList<Integer> numbers = new ArrayList<>();
 
         // 구분자들을 이스케이프 처리
         ArrayList<String> escapedSeparators = new ArrayList<>();
@@ -27,9 +28,13 @@ public class NumberManager {
                 }
             }
         }
+    }
 
+    public void calculateSum() {
+        int sum = 0;
         for (int number : numbers) {
-            System.out.println(number);
+            sum += number;
         }
+        System.out.println("결과 : " + sum);
     }
 }
