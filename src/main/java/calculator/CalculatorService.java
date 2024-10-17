@@ -2,6 +2,7 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.math.BigInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,7 +12,7 @@ public class CalculatorService {
     private String inputString;
     private String transedString;
     private final String endString = "결과 : ";
-    private int result;
+    private BigInteger result;
     private String[] numList;
     public void printStartString(){
         System.out.println(startString);
@@ -51,13 +52,13 @@ public class CalculatorService {
         return transedString.split(",");
     }
 
-    public int calculateList() {
+    public BigInteger calculateList() {
+        BigInteger result = new BigInteger("0");
         for (String i : numList) {
-            int n=0;
+            BigInteger n= new BigInteger(i);
             try{
-                n = Integer.parseInt(i);
-                if(n<0) throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
-                result += n;
+                if(n.compareTo(new BigInteger("0"))<0) throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+                result = result.add(n);
             }catch (NumberFormatException e){
                 throw new IllegalArgumentException("등록되지 않은 구분자가 포함되어 있습니다.");
             }
