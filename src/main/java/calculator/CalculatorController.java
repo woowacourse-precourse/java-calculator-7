@@ -24,14 +24,20 @@ public class CalculatorController {
     public void calculate() {
         String input = inputView.inputString();
 
-        Separators separators = Separators.withDefault()
-                .merge(customSeparatorManager.findAllCustomSeparators(input));
-
-        input = customSeparatorManager.sliceCustomSeparators(input);
-
-        List<String> inputs = separators.split(input);
+        Separators separators = getSeparators(input);
+        List<String> inputs = split(input, separators);
         int sum = Calculator.calculate(inputs);
 
         outputView.printResult(sum);
+    }
+
+    private Separators getSeparators(String input) {
+        return Separators.withDefault()
+                .merge(customSeparatorManager.findAllCustomSeparators(input));
+    }
+
+    private List<String> split(String input, Separators separators) {
+        input = customSeparatorManager.sliceCustomSeparators(input);
+        return separators.split(input);
     }
 }
