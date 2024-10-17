@@ -26,6 +26,12 @@ public class CustomDelimiter implements Delimiter {
         validate(rawInput);
 
         String delimiter = extractDelimiter(rawInput);
+
+        // " " 가 아닌, "" 로 완전히 비어있을 때는 예외이다.
+        if (delimiter.isEmpty()) {
+            throw new IllegalArgumentException(ErrorMessage.EMPTY_STRING_IS_NOT_ALLOWED.getMessage());
+        }
+
         // 구분자가 정규식에서 특수 문자일 경우 이스케이프 처리
         String escapedDelimiter = DelimiterUtils.replaceSpecialCharacters(delimiter);
 

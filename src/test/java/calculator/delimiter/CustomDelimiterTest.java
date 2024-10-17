@@ -60,7 +60,8 @@ class CustomDelimiterTest {
                 Arguments.of("1,2,3", ErrorMessage.CUSTOM_DELIMITER_START_POINT_NOT_ALLOWED.getMessage()),
                 Arguments.of("//;", ErrorMessage.CUSTOM_DELIMITER_END_POINT_NOT_ALLOWED.getMessage()),
                 Arguments.of("", ErrorMessage.CUSTOM_DELIMITER_START_POINT_NOT_ALLOWED.getMessage()),
-                Arguments.of("1\\n2", ErrorMessage.CUSTOM_DELIMITER_START_POINT_NOT_ALLOWED.getMessage())
+                Arguments.of("1\\n2", ErrorMessage.CUSTOM_DELIMITER_START_POINT_NOT_ALLOWED.getMessage()),
+                Arguments.of("//\\n123", ErrorMessage.EMPTY_STRING_IS_NOT_ALLOWED.getMessage())
         );
     }
 
