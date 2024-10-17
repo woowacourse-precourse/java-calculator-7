@@ -1,6 +1,10 @@
 package calculator;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
 public class PatternParserTest {
@@ -8,9 +12,9 @@ public class PatternParserTest {
     private final PatternParser patternParser = new PatternParser();
 
     @Test
-    public void testValidIsCustomPattern() throws Exception{
+    public void testValidIsCustomPattern() throws Exception {
         //given
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
 
         //when
         boolean result = patternParser.isCustomPattern(input);
@@ -20,7 +24,7 @@ public class PatternParserTest {
     }
 
     @Test
-    void testInvalidIsCustomPattern() throws Exception{
+    void testInvalidIsCustomPattern() throws Exception {
         //given
         String input = "1,2:3";
 
@@ -32,7 +36,7 @@ public class PatternParserTest {
     }
 
     @Test
-    public void testValidIsReservePattern() throws Exception{
+    public void testValidIsReservePattern() throws Exception {
         //given
         String input = "1,2:3";
 
@@ -45,7 +49,7 @@ public class PatternParserTest {
     }
 
     @Test
-    public void testInvalidIsReservePattern() throws Exception{
+    public void testInvalidIsReservePattern() throws Exception {
         //given
         String input = "//;\n1;2;3";
 
@@ -55,9 +59,9 @@ public class PatternParserTest {
         //then
         assertFalse(result);
     }
-    
+
     @Test
-    public void testParseCustomPattern() throws Exception{
+    public void testParseCustomPattern() throws Exception {
         //given
         String input = "//;\n1;2;3";
 
@@ -69,7 +73,7 @@ public class PatternParserTest {
     }
 
     @Test
-    public void testCustomSplitPattern() throws Exception{
+    public void testCustomSplitPattern() throws Exception {
         //given
         String input = "//;\n1;2;3";
 
@@ -82,7 +86,7 @@ public class PatternParserTest {
     }
 
     @Test
-    public void testReserveSplitPattern() throws Exception{
+    public void testReserveSplitPattern() throws Exception {
         //given
         String input = "1,2:3";
 
@@ -95,7 +99,7 @@ public class PatternParserTest {
     }
 
     @Test
-    public void testNotSplitPattern() throws Exception{
+    public void testNotSplitPattern() throws Exception {
         //given
         String input = "1*23(4)54";
 
