@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_사용() {
-        assertThat(Calculator.add("//;\n1;2")).isEqualTo(3); // 결과가 3이어야 함
+        assertThat(Calculator.add("//;\n1;2")).isEqualTo(3);
     }
 
     @Test
