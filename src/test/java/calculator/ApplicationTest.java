@@ -20,6 +20,30 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자_사용시_다른_구분자를_사용하면_예외가_발생한다() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> parser.parse("//,\\n1,2;3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_사용선언시_커스텀_구분자를_포함해야한다() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> parser.parse("//\\n1;2;3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_지정없이_커스텀_구분자_사용시_예외가_발생해야한다() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> parser.parse("1.2.3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1");
