@@ -7,13 +7,16 @@ import calculator.model.Numbers;
 import calculator.service.CalculatorService;
 import calculator.service.CustomDelimiterService;
 import calculator.service.NumberExtractionService;
+import calculator.view.InputView;
 
 public class CalculatorApplication {
     public static void run() {
-        initializeDependencies().run();
+        InputView.printStartMessage();
+        String inputString = InputView.getInput();
+        initialize().run(inputString);
     }
 
-    private static Controller initializeDependencies() {
+    private static Controller initialize() {
         Delimiters delimiters = new Delimiters();
         Calculator calculator = new Calculator();
         Numbers numbers = new Numbers();

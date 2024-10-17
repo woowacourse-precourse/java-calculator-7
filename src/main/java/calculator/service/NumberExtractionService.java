@@ -20,6 +20,9 @@ public class NumberExtractionService {
     }
 
     public void extractNumber(String inputString) {
+        if (inputString.length() == 0) {
+            return;
+        }
         if (!isStartingWithDigit(inputString)) {
             throw new IllegalArgumentException();
         }

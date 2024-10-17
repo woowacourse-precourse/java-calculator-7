@@ -12,4 +12,5 @@ public class InputView {
     public static void printStartMessage() {
         System.out.println(START_MESSAGE);
     }
+
 }

@@ -6,7 +6,8 @@ import java.util.List;
 public class CustomDelimiterService {
     private static final String CUSTOM_DELIMITER_FIRST_FORMAT = "//";
     private static final String CUSTOM_DELIMITER_LAST_FORMAT = "\n";
-    private static final int CUSTOM_DELIMITER_FORMAT_MIN_LENGTH = 5;
+    private static final int CUSTOM_DELIMITER_FORMAT_LENGTH = 5;
+    private static final int CUSTOM_DELIMITER_INDEX = 2;
     private static final char CUSTOM_DELIMITER_PREFIX = '/';
 
     private final Delimiters delimiters;
@@ -22,9 +23,9 @@ public class CustomDelimiterService {
     public String addCustomDelimiters(String inputString) {
         while (usesCustomDelimiter(inputString)) {
             correctCustomDelimiterFormatOrThrow(inputString);
-            char customDelimiter = inputString.charAt(2);
+            char customDelimiter = inputString.charAt(CUSTOM_DELIMITER_INDEX);
             delimiters.addCustomDelimiter(customDelimiter);
-            inputString = inputString.substring(5);
+            inputString = inputString.substring(CUSTOM_DELIMITER_FORMAT_LENGTH);
         }
         return inputString;
     }
@@ -50,7 +51,7 @@ public class CustomDelimiterService {
     }
 
     private boolean checkCustomDelimiterFormatLength(String inputString) {
-        return inputString.length() >= CUSTOM_DELIMITER_FORMAT_MIN_LENGTH;
+        return inputString.length() >= CUSTOM_DELIMITER_FORMAT_LENGTH;
     }
 
     private boolean isCustomDelimiterFirstFormatCorrect(String inputString) {

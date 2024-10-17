@@ -3,7 +3,6 @@ package calculator.controller;
 import calculator.service.CalculatorService;
 import calculator.service.CustomDelimiterService;
 import calculator.service.NumberExtractionService;
-import calculator.view.InputView;
 import calculator.view.OutputView;
 
 public class Controller {
@@ -22,15 +21,11 @@ public class Controller {
         this.calculatorService = calculatorService;
     }
 
-    public void run() {
-        start();
+    public void run(String inputString) {
+        this.inputString = inputString;
+
         progress();
         finish();
-    }
-
-    private void start() {
-        InputView.printStartMessage();
-        inputString = InputView.getInput();
     }
 
     private void progress() {
@@ -50,7 +45,6 @@ public class Controller {
     private void calculateProgress() {
         result = calculatorService.calculate();
     }
-
 
     private void finish() {
         OutputView.printResultMessage(result);
