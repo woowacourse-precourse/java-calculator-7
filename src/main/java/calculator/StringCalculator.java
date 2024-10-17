@@ -56,7 +56,7 @@ public class StringCalculator {
 
     void checkCustomSeparator(String input) {
         int flag = 0;
-        if (beginTwoSlash(input)) {
+        if (input.startsWith("//")) {
             if (!input.contains("\\n")) {
                 flag = 1;
             } else {
@@ -77,10 +77,6 @@ public class StringCalculator {
     void addCustomSeparator(char customSeparator) {
         hasCustomSeparator = true;
         separators += customSeparator;
-    }
-
-    boolean beginTwoSlash(String input) {
-        return input.indexOf("//") == 0;
     }
 
     boolean isSeparatorNumeric(char separator) {
