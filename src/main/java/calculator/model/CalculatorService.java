@@ -18,11 +18,11 @@ public class CalculatorService {
             return List.of(ZERO,ZERO);
         }
         if (inputParser.checkDefaultDelimiter(input)) {
-            List<Integer> list = inputParser.convertDefaultDelimiter(input);
-            inputParser.checkPositiveNumber(list);
-            return list;
+            return inputParser.convertDefaultDelimiter(input);
         }
-        return inputParser.convertCustomDelimiter(input);
+        List<Integer> list = inputParser.convertCustomDelimiter(input);
+        inputParser.checkPositiveNumber(list);
+        return list;
     }
 
     public int calculate(List<Integer> numList) {
