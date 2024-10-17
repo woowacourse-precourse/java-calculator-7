@@ -51,6 +51,7 @@ public class CalculatorServiceTest {
     void 구분자_존재_X() {
         String input1 = "12345";
         String input2 = "//a\\n12345";
+        String input3 = "//an1a2a3a4";
         assertThrows(IllegalArgumentException.class,
                 () -> {
                     cal.ensureValidInput(input1);
@@ -60,6 +61,11 @@ public class CalculatorServiceTest {
                 () -> {
                     cal.ensureValidInput(input2);
                 });
+        assertThrows(IllegalArgumentException.class,
+                () -> {
+                    cal.ensureValidInput(input3);
+                });
+
     }
 
     @Test
