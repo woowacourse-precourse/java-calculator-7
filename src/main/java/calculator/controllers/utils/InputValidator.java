@@ -1,4 +1,4 @@
-package calculator.controller.utils;
+package calculator.controllers.utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

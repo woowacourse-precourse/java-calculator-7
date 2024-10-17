@@ -1,9 +1,9 @@
-package calculator.controller;
+package calculator.controllers;
 
-import calculator.controller.utils.InputValidator;
+import calculator.controllers.utils.InputValidator;
 import calculator.models.NumberModel;
 import calculator.models.SeparatorModel;
-import calculator.view.ApplicationView;
+import calculator.views.ApplicationView;
 
 public class ApplicationController {
     private static SeparatorModel separatorModel = new SeparatorModel();

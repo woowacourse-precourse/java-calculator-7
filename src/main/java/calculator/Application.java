@@ -1,6 +1,6 @@
 package calculator;
 
-import calculator.controller.ApplicationController;
+import calculator.controllers.ApplicationController;
 
 public class Application {
     public static void main(String[] args) {
