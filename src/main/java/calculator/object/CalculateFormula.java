@@ -13,8 +13,7 @@ public record CalculateFormula(
     private static final List<Character> DEFAULT_SEPARATORS = List.of(',', ':');
     private static final char DECIMAL_POINT = '.';
     private static final String CUSTOM_SEPARATOR_HEADER = "//";
-    private static final String CUSTOM_SEPARATOR_FOOTER = "\n";
-
+    private static final String CUSTOM_SEPARATOR_FOOTER = "\\n";
 
     public static CalculateFormula from(String inputFormula) {
         String customSeparator = findCustomSeparator(inputFormula);
@@ -47,7 +46,8 @@ public record CalculateFormula(
     private static List<BigDecimal> findNumbers(String customSeparator, String inputFormula) {
         String targetFormula = inputFormula;
         if (!customSeparator.isEmpty()) {
-            targetFormula = inputFormula.split("\n")[1];
+            targetFormula = inputFormula.substring(
+                    inputFormula.indexOf(CUSTOM_SEPARATOR_FOOTER) + CUSTOM_SEPARATOR_FOOTER.length());
         }
 
         List<Character> separators = DEFAULT_SEPARATORS;
