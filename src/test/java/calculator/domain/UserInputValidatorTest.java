@@ -25,7 +25,7 @@ public class UserInputValidatorTest {
     void 정의되지_않은_커스텀_구분자() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> StringCalculator.calculate("//;\\n1;2.3"))
-                .withMessageMatching(Constants.NOT_DEFINED_CUSTOM);
+                .withMessageMatching(Constants.UNDEFINED_CUSTOM);
     }
 
     @Test
