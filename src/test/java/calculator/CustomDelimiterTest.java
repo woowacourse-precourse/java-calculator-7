@@ -3,6 +3,7 @@ package calculator;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import calculator.delimiter.CustomDelimiter;
+import calculator.utils.ErrorMessage;
 import java.util.List;
 import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
@@ -55,11 +56,11 @@ class CustomDelimiterTest {
 
     private static Stream<Arguments> provideInvalidInputTestCases() {
         return Stream.of(
-                Arguments.of(";;1;2", "커스텀 구분자는 // 로 시작해야 한다."),
-                Arguments.of("1,2,3", "커스텀 구분자는 // 로 시작해야 한다."),
-                Arguments.of("//;", "커스텀 구분자는 // 로 시작해서 \\n 으로 끝나야 한다."),
-                Arguments.of("", "커스텀 구분자는 // 로 시작해야 한다."),
-                Arguments.of("1\\n2", "커스텀 구분자는 // 로 시작해야 한다.")
+                Arguments.of(";;1;2", ErrorMessage.CUSTOM_DELIMITER_START_POINT_NOT_ALLOWED.getMessage()),
+                Arguments.of("1,2,3", ErrorMessage.CUSTOM_DELIMITER_START_POINT_NOT_ALLOWED.getMessage()),
+                Arguments.of("//;", ErrorMessage.CUSTOM_DELIMITER_END_POINT_NOT_ALLOWED.getMessage()),
+                Arguments.of("", ErrorMessage.CUSTOM_DELIMITER_START_POINT_NOT_ALLOWED.getMessage()),
+                Arguments.of("1\\n2", ErrorMessage.CUSTOM_DELIMITER_START_POINT_NOT_ALLOWED.getMessage())
         );
     }
 

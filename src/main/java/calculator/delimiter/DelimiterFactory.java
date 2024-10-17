@@ -1,6 +1,7 @@
 package calculator.delimiter;
 
 import calculator.calculator.Delimiter;
+import calculator.utils.ErrorMessage;
 
 public class DelimiterFactory {
 
@@ -24,6 +25,6 @@ public class DelimiterFactory {
             return defaultDelimiter;
         }
 
-        throw new IllegalArgumentException("구분자가 적절하지 않다.");
+        throw new IllegalArgumentException(ErrorMessage.INVALID_DELIMITER.getMessage());
     }
 }

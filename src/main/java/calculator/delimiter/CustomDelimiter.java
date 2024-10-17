@@ -2,6 +2,7 @@ package calculator.delimiter;
 
 import calculator.calculator.Delimiter;
 import calculator.utils.DelimiterUtils;
+import calculator.utils.ErrorMessage;
 import java.util.Arrays;
 import java.util.List;
 
@@ -45,11 +46,11 @@ public class CustomDelimiter implements Delimiter {
 
     private void validate(String input) {
         if (!input.startsWith(DELIMITER_START_POINT)) {
-            throw new IllegalArgumentException("커스텀 구분자는 // 로 시작해야 한다.");
+            throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_START_POINT_NOT_ALLOWED.getMessage());
         }
 
         if (!input.contains(ESCAPED_DELIMITER_END_POINT)) {
-            throw new IllegalArgumentException("커스텀 구분자는 // 로 시작해서 \\n 으로 끝나야 한다.");
+            throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_END_POINT_NOT_ALLOWED.getMessage());
         }
     }
 }

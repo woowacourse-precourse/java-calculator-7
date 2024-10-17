@@ -3,6 +3,7 @@ package calculator;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import calculator.calculator.Calculator;
+import calculator.utils.ErrorMessage;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -46,7 +47,8 @@ class CalculatorTest {
     @DisplayName("null 이 들어오면 예외가 발생한다.")
     void whenNullStringIsGivenThenThrowsException() {
         assertThatThrownBy(() -> calculator.calculate(null))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.NULL_NOT_ALLOWED.getMessage());
     }
 
     @ParameterizedTest
@@ -63,6 +65,7 @@ class CalculatorTest {
     @ValueSource(strings = {"-1:-2,-3", "-1,5"})
     void throwsExceptionWhenInputContainsNegative(String input) {
         assertThatThrownBy(() -> calculator.calculate(input))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.ONLY_POSITIVE_NUMBERS_ALLOWED.getMessage());
     }
 }

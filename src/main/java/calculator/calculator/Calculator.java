@@ -2,6 +2,7 @@ package calculator.calculator;
 
 import calculator.delimiter.DelimiterFactory;
 import calculator.utils.DelimiterUtils;
+import calculator.utils.ErrorMessage;
 import java.util.List;
 import java.util.Objects;
 
@@ -32,13 +33,13 @@ public class Calculator {
 
     private void validateInput(String input) {
         if (Objects.isNull(input)) {
-            throw new IllegalArgumentException("null 값은 허용되지 않는다.");
+            throw new IllegalArgumentException(ErrorMessage.NULL_NOT_ALLOWED.getMessage());
         }
     }
 
     private void validateString(List<String> extractString) {
         if (extractString.stream().anyMatch(s -> !s.matches(POSITIVE_INTEGER_REGEX))) {
-            throw new IllegalArgumentException("음수 혹은 숫자 외 값은 허용되지 않는다.");
+            throw new IllegalArgumentException(ErrorMessage.ONLY_POSITIVE_NUMBERS_ALLOWED.getMessage());
         }
     }
 }
