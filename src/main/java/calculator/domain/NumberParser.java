@@ -32,29 +32,32 @@ public class NumberParser {
         return result;
     }
 
-    private int translateStringToInteger(String value){
-        try{
+    private int translateStringToInteger(String value) {
+        try {
             return Integer.parseInt(value);
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             validateCustomDividerMinusAndNumberValueNegative(value);
             throw new IllegalArgumentException("등록되지 않는 구분자가 있습니다." + value);
         }
     }
 
-    private void validateCustomDividerMinusAndNumberValueNegative(String value){
-        if("-".equals(divider.getCustomDivider()) && value.isEmpty()){
+    private void validateCustomDividerMinusAndNumberValueNegative(String value) {
+        if ("-".equals(divider.getCustomDivider()) && value.isEmpty()) {
             throw new IllegalArgumentException("음수는 계산이 불가능합니다.");
         }
     }
 
-    private void validateNumberValueNegative(int numberValue){
-        if(numberValue < 0){
+    private void validateNumberValueNegative(int numberValue) {
+        if (numberValue < 0) {
             throw new IllegalArgumentException("음수는 계산이 불가능합니다.");
         }
     }
 
-    private String formatDividerSplit(){
-        return String.format(DIVIDER_SPLIT_FORMAT, divider.getClon(),divider.getComma(),divider.getCustomDivider());
+    private String formatDividerSplit() {
+        return String.format(DIVIDER_SPLIT_FORMAT,
+                divider.getClon(),
+                divider.getComma()
+                , divider.getCustomDivider());
     }
 
 }
