@@ -49,8 +49,12 @@ public class Application {
             String[] numbers = input.split(input_seperators);
 
             for(int i = 0; i < numbers.length; i++){
-                int num = Integer.parseInt(numbers[i]);
-                result += num;
+                try{
+                    int num = Integer.parseInt(numbers[i]);
+                    result += num;
+                }catch(NumberFormatException e){
+                    throw new IllegalArgumentException();
+                }
             }
 
             System.out.print("결과 : " + result);
