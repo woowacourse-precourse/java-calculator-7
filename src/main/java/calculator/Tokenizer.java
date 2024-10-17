@@ -10,7 +10,7 @@ public class Tokenizer {
         String numbers = message;
 
         if (message.startsWith("//")) {
-            Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(message);
+            Matcher matcher = Pattern.compile("//(.)\\\\n(.*)").matcher(message);
 
             if (!matcher.matches()) {
                 throw new IllegalArgumentException("잘못된 입력 형식입니다.");
