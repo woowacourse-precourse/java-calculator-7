@@ -6,6 +6,7 @@ import calculator.model.Operand;
 import calculator.model.Separator;
 import calculator.model.Separators;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class OperandExtractor {
@@ -26,6 +27,7 @@ public class OperandExtractor {
     private String makeSplitRegex() {
         return separators.separators().stream()
                 .map(Separator::separator)
+                .map(Pattern::quote)
                 .collect(Collectors.joining(REGEX_OR));
     }
 }
