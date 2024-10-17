@@ -48,3 +48,19 @@
         -> 현재는 아직 예외처리 부분과 Custom Delimiter에 대한 부분이 없지만 구현 이후에는 Test Code를 작성해보아야겠다.
         
 ```
+### 2024.10.17 Thu
+``` 
+    
+    오늘의 구현 목표 : "역할과 구현을 분리하라"
+
+    ㄴ Calculator Interface 구현
+    ㄴ CalculatorImpl 과 CalculatorCustom으로 두 개의 Model 클래스를 Calculator Interface를 상속받아서 구현하기
+    ㄴ CalculatorImpl 는 기존에 구현해둔 Calculator.Java 클래스파일의 내용과 비슷한 로직이지만 내부 parameter로 문자열로 저장하는 방식으로 변경
+    ㄴ CalculatorCustomd 은 기존과는 다르게 Custom Delimiter를 기반으로 연산이 가능하도록 구현
+    ㄴ 파일 디렉토리 구조 또한 UML의 형식에 맞춰서 수정하기
+
+
+    ✅ 구현 후 느낀점 / 추가 개선사항 
+    
+        
+```
