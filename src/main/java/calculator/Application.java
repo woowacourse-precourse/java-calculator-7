@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.NoSuchElementException;
 
 /**
  * packageName    : calculator
@@ -15,10 +16,21 @@ import camp.nextstep.edu.missionutils.Console;
  */
 
 public class Application {
+
+    private static final String CUSTOM_SEPARATOR_PREFIX = "//";
+    private static final String NEWLINE_INDICATOR = "\\n";
+
     public static void main(String[] args) {
+        Application app = new Application();
+
         System.out.println("덧셈할 문자열을 입력해 주세요.");
 
         String additionFormula = Console.readLine();
 
+    }
+
+    // 구분자가 기본인지 커스텀인지 판단
+    private boolean isCustom(String value) {
+        return (value.startsWith(CUSTOM_SEPARATOR_PREFIX) && value.contains(NEWLINE_INDICATOR));
     }
 }
