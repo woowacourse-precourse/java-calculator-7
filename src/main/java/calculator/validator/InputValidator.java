@@ -1,6 +1,6 @@
-package calculator.exception;
+package calculator.validator;
 
-public class Validator {
+public class InputValidator {
     public static void validateInput(String input, String separator) {
         if (input.isEmpty()) {
             return;
@@ -14,12 +14,6 @@ public class Validator {
             if (!Character.isDigit(c) && !Character.isWhitespace(c) && separator.indexOf(c) == -1) {
                 throw new IllegalArgumentException("구분자가 아닌 값이 있습니다: " + "\"" + c + "\"");
             }
-        }
-    }
-
-    public static void validateNegativeNumber(int number) {
-        if (number < 0) {
-            throw new IllegalArgumentException("음수는 유효한 입력이 아닙니다: " + "\"" + number + "\"");
         }
     }
 }

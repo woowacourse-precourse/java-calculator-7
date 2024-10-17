@@ -1,6 +1,7 @@
 package calculator.domain;
 
-import calculator.exception.Validator;
+import calculator.validator.InputValidator;
+import calculator.validator.NegativeNumberValidator;
 import calculator.util.SeparatorExtractor;
 
 public class Calculator {
@@ -13,7 +14,7 @@ public class Calculator {
         String separator = SeparatorExtractor.extractSeparators(input);
         input = SeparatorExtractor.extractNumbersPart(input);
 
-        Validator.validateInput(input, separator);
+        InputValidator.validateInput(input, separator);
 
         String[] numbers = splitNumbers(input, separator);
         return calculateSum(numbers);
@@ -34,7 +35,7 @@ public class Calculator {
         int sum = 0;
         for (String number : numbers) {
             int parseNumber = Integer.parseInt(number);
-            Validator.validateNegativeNumber(parseNumber);
+            NegativeNumberValidator.validateNegativeNumber(parseNumber);
             sum += parseNumber;
         }
         return sum;
