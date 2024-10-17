@@ -12,12 +12,12 @@ import org.junit.jupiter.api.Test;
 class ApplicationTest extends NsTest {
 
     @Test
-    void 커스텀_구분자_사용() {
+    void 커스텀_구분자_사용_2() {
         String str = "//;\n1;2,3";
         List<Character> separatorList = new ArrayList<>();
         separatorList.add(':');
         separatorList.add(',');
-        Application.addSepartor(str, separatorList);
+        Application.addSeparator(str, separatorList);
         assertThat(separatorList).containsExactly(':', ',', ';');
     }
 
@@ -40,6 +40,14 @@ class ApplicationTest extends NsTest {
 
         long sum = Application.sumNumbers(numberList);
         assertThat(sum).isEqualTo(6);
+    }
+
+    @Test
+    void 커스텀_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("//;\\n1");
+            assertThat(output()).contains("결과 : 1");
+        });
     }
 
     @Test

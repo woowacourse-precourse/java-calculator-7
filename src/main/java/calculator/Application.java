@@ -8,10 +8,20 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         String str = Console.readLine();
+        List<Character> separatorList = new ArrayList<>();
 
+        // 구분자 추가
+        addSeparator(str, separatorList);
+
+        // 숫자 추출
+        List<Integer> numbers = extractNumbers(str, separatorList);
+
+        // 숫자 합계 계산
+        long sum = sumNumbers(numbers);
+        System.out.println("합계: " + sum);
     }
 
-    //숫자 추출함수
+    // 숫자 추출 함수
     public static List<Integer> extractNumbers(String str, List<Character> separatorList) {
         List<Integer> numberList = new ArrayList<>();
 
@@ -31,9 +41,13 @@ public class Application {
                 if (!part.isEmpty()) {
                     try {
                         int number = Integer.parseInt(part);
+                        // 음수 처리
+                        if (number < 0 && !separatorList.contains('-')) {
+                            throw new IllegalArgumentException("음수는 허용되지 않습니다: " + part);
+                        }
                         numberList.add(number);
                     } catch (NumberFormatException e) {
-                        System.out.println("잘못된 입력 : " + part);
+                        throw new IllegalArgumentException("잘못된 입력: " + part);
                     }
                 }
             }
@@ -49,8 +63,8 @@ public class Application {
         return sum;
     }
 
-    // "//" 와 "\n" 사이에 있는 문자를 커스텀구분자로 추가
-    public static void addSepartor(String str, List<Character> separatorList) {
+    // "//" 와 "\n" 사이에 있는 문자를 커스텀 구분자로 추가
+    public static void addSeparator(String str, List<Character> separatorList) {
         int startIdx = -1;
 
         for (int i = 0; i < str.length(); i++) {
@@ -65,9 +79,15 @@ public class Application {
                 startIdx = -1;
             }
         }
+
+        // '//'로 시작하고 '\n'으로 끝나지 않는 경우 예외 발생
         if (startIdx != -1) {
-            throw new IllegalArgumentException("잘못된 입력값입니다.");
+            throw new IllegalArgumentException("잘못된 입력: '//'로 시작하지만 '\\n'으로 끝나지 않습니다.");
+        }
+
+        // 구분자가 없고 문자열에 숫자가 포함된 경우 예외 발생
+        if (separatorList.isEmpty() && str.contains(",")) {
+            throw new IllegalArgumentException("구분자가 추가되지 않았습니다.");
         }
     }
-
 }
