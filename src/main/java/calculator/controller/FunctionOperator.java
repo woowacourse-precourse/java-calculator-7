@@ -14,7 +14,7 @@ public class FunctionOperator {
     Validation validation = new Validation();
 
     public void operator() {
-        // outputView.입력해주세요();
+        outputView.askInput();
         String input = inputView.input();
 
         List<String> separated = new ArrayList<>();
@@ -34,6 +34,9 @@ public class FunctionOperator {
 
         // 구분자 유효하면 sum
         int answer = validation.validatingSeparator(separators, separated);
+
+        // 결과 출력
+        outputView.printAnswer(answer);
     }
 
 }

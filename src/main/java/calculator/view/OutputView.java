@@ -8,5 +8,4 @@ public class OutputView {
     public void printAnswer(int answer){
         System.out.print("결과 : " + answer);
     }
-
 }
