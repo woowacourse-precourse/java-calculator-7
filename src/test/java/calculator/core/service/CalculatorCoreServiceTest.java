@@ -46,4 +46,30 @@ public class CalculatorCoreServiceTest {
         //then
         assertThat(sum).isEqualTo(6);
     }
+
+    @Test
+    void 커스텀_구분자_혼합_문자열_계산() {
+        //given
+        String input = "//|\n4|2|3";
+
+        //when
+        CalculatorCoreService calculatorCoreService = new CalculatorCoreService();
+        BigInteger sum = calculatorCoreService.sum(input);
+
+        //then
+        assertThat(sum).isEqualTo(9);
+    }
+
+    @Test
+    void 기본_커스텀_구분자_혼합_문자열_계산() {
+        //given
+        String input = "//|\n5:6|7,8";
+
+        //when
+        CalculatorCoreService calculatorCoreService = new CalculatorCoreService();
+        BigInteger sum = calculatorCoreService.sum(input);
+
+        //then
+        assertThat(sum).isEqualTo(26);
+    }
 }
