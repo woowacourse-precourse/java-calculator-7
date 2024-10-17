@@ -12,6 +12,18 @@ public class Calculator {
             return 0;
         }
 
+        if (!userInput.startsWith("//")) {
+            String delimiter = ",:";
+            String[] split = userInput.split("[" + delimiter + "]");
+
+            int sum = 0;
+            for (String c : split) {
+                sum += Integer.parseInt(c);
+            }
+
+            return sum;
+        }
+
         return 0;
     }
 }
