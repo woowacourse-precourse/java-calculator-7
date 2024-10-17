@@ -1,22 +1,24 @@
 package calculator;
 
+import java.text.DecimalFormat;
+
 public class  Calculator {
-    public int calculate(String input) {
+    public String calculate(String input) {
 
         StringFilter stringFilter = new StringFilter();
-
+        DecimalFormat df = new DecimalFormat("#.##");
         if (input.isEmpty())
-            return 0;
+            return df.format(0);
 
         if (input.length() == 1)
-            return Integer.parseInt(input);
+            return df.format(Double.parseDouble(input));
 
         String[] numbers = stringFilter.StringController(input);
-        int sum = 0;
+        Double sum = 0.D;
 
         for (String numberStr : numbers) {
-            sum += Integer.parseInt(numberStr);
+            sum += Double.parseDouble(numberStr);
         }
-        return sum;
+        return df.format(sum);
     }
 }
