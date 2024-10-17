@@ -60,12 +60,23 @@ public class Application {
             return Arrays.stream(substring.split("[" + customSeparator + ":,]"))
                     .map(Long::parseLong)
                     .filter(n -> {
-                        if (checkNegativeNumber(n))
+                        if (checkNegativeNumber(n)) {
                             throw new IllegalArgumentException("음수는 입력으로 들어오지 못합니다.");
+                        }
                         return true;
                     })
                     .toList();
         } catch (NumberFormatException e) {
+            String message = e.getMessage();
+            String errorInput = message.substring(message.indexOf(':') + 3, message.length() - 1);
+
+            for (int i = 0; i < errorInput.length(); i++) {
+                char c = errorInput.charAt(i);
+                if (c - '0' < 0 || c - '0' > 9) {
+                    throw new IllegalArgumentException("구분자 이외의 문자가 수식에 포함되있습니다.");
+                }
+            }
+
             throw new IllegalArgumentException("입력값이 long 범위를 넘어갔습니다.");
         }
     }
