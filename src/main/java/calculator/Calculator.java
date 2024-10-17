@@ -21,8 +21,21 @@ public class Calculator {
         }
 
         String[] split = userInput.split("[" + delimiter + "]");
+        validateWrongFormat(split);
         validatePositiveNumber(split);
         return sum(split);
+    }
+
+    private void validateWrongFormat(String[] split) {
+        // 구분자 사이 숫자가 아닌 입력의 예외처리
+        // 커스텀구분자, 기본구분자에 포함 안되는 구분자 사용
+        for (String s : split) {
+            try {
+                Integer.parseInt(s);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("잘못된 포맷");
+            }
+        }
     }
 
     private static void validateWrongCustom(int endIdx) {
