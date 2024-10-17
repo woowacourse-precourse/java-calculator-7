@@ -2,6 +2,8 @@ package calculator.splitter;
 
 import calculator.calc.CalculatorConst;
 
+import java.util.regex.Pattern;
+
 public class NormalSplitter implements Splitter { //todo -> Make Regex splitter
 
     public String[] split(String input) {
@@ -13,8 +15,8 @@ public class NormalSplitter implements Splitter { //todo -> Make Regex splitter
                 throw new IllegalArgumentException();
             }
 
-            String token = input.substring(2, idx); // 커스텀 구분자 추출
-            delimiter += "|" + token;               // 커스텀 구분자를 구분자 문자열에 추가
+            String token = input.substring(2, idx);     // 커스텀 구분자 추출
+            delimiter += "|" + escapeRegex(token);      // 특수 문자를 Escape 처리 후 구분자에 추가
 
             return input.substring(idx + 2)
                     .split(delimiter); //커스텀 구분자가 맞다면 '\n' 이후 문자열로부터 분리
@@ -22,4 +24,7 @@ public class NormalSplitter implements Splitter { //todo -> Make Regex splitter
         return input.split(delimiter); //커스텀 구분자가 아니면 기본 구분자를 통해 분리
     }
 
+    private String escapeRegex(String input) {
+        return Pattern.quote(input); //특수 문자 Escape 처리
+    }
 }
