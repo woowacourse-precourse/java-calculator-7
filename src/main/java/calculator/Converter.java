@@ -9,9 +9,17 @@ public class Converter {
         List<Integer> numbers = new ArrayList<>();
         for (String s : strings) {
             isInteger(s);
-            numbers.add(Integer.parseInt(s));
+            Integer num = isPositive(Integer.parseInt(s));
+            numbers.add(num);
         }
         return numbers;
+    }
+
+    private static Integer isPositive(int i) {
+        if (i < 0) {
+            throw new IllegalArgumentException("음수를 계산할 수 없습니다.");
+        }
+        return i;
     }
 
     private static void isInteger(String s) {

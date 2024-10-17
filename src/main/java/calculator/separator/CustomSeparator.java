@@ -20,6 +20,7 @@ public class CustomSeparator implements Separator {
 
     private String extractDelimiter() {
         Matcher matcher = Pattern.compile("//(.)\\\\n(.*)").matcher(line);
+
         if (matcher.find()) {
             String delimiter = matcher.group(1);
             line = matcher.group(2);

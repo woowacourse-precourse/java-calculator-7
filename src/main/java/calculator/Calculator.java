@@ -12,12 +12,12 @@ public class Calculator {
         this.separator = separator;
     }
 
-    public void calculate() {
+    public int calculate() {
         String[] strings = separator.splitLine();
         if (strings == null || strings.length == 0) {
-            System.out.println(0);
-            return;
+            return 0;
         }
         List<Integer> numbers = Converter.convert(strings);
+        return Aggregator.add(numbers);
     }
 }
