@@ -16,7 +16,6 @@ class StringInputTest {
 
         String result1 = validateInput(input1);
         String result2 = validateInput(input2);
-
         assertEquals(input1, result1);
         assertEquals(input2, result2);
     }
