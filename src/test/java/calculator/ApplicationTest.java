@@ -161,10 +161,17 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 매우_큰_숫자_입력() {
-        assertSimpleTest(() -> {
-            run("1000000,2000000,3000000");
-            assertThat(output()).contains("결과 : 6000000");
-        });
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> run("20000000000000000000,20000000000000000000,20000000000000000000"))
+                        .isInstanceOf(IllegalArgumentException.class));
+    }
+
+    @Test
+    void 매우_큰_숫자_입력_커스텀_구분자() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() ->
+                        run("//??\\n20000000000000000000??20000000000000000000,20000000000000000000:"))
+                        .isInstanceOf(IllegalArgumentException.class));
     }
 
     @Test
