@@ -13,7 +13,6 @@ public class Application {
     public static void main(String[] args) {
         printInputMessage();
 
-        // Get input
         String input = readLine();
 
         int result = getResult(input);
