@@ -61,5 +61,12 @@ public class CalculatorModel {
         }
     }
 
-
+    // 숫자들의 합 계산하기
+    public int addNumber() {
+        int sum = 0;
+        for (int number : numberList) {
+            sum += number;
+        }
+        return sum;
+    }
 }
