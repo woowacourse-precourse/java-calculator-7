@@ -34,8 +34,11 @@ class ArrayFunction {
     static int resultSumValue(String[] parseArray) {
         int[] numArray = Arrays.stream(parseArray).mapToInt(value -> {
             try {
-                int idNum = Integer.parseInt(value.replace(" ", ""));
+                if (value.isEmpty()) {
+                    return 0;
+                }
 
+                int idNum =  Integer.parseInt(value.replace(" ", ""));
                 if (idNum > 0) {
                     return idNum;
                 } else {

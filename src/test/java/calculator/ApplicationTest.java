@@ -30,8 +30,8 @@ class ApplicationTest extends NsTest {
     @DisplayName("정상적인 값이 들어갔을때 실제 코드에서 원하는 값이 출력되어야함")
     void 실제코드_적용_1번() {
         assertSimpleTest(() -> {
-            run("//>\\n1:2,3");
-            assertThat(output()).contains("[1, 2, 3]");
+            run("//>\\n1::2,3");
+            assertThat(output()).contains("결과 : 6");
         });
     }
 
