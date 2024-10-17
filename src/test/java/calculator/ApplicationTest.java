@@ -25,14 +25,6 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 구분자_가_처음_또는_끝에_위치한_경우() {
-        assertSimpleTest(() -> {
-            run(",1:2,");
-            assertThat(output()).contains("결과 : 0");
-        });
-    }
-
-    @Test
     void 입력이_주어지지_않은_경우() {
         assertSimpleTest(() -> {
             run("");
@@ -113,6 +105,12 @@ class ApplicationTest extends NsTest {
                         .isInstanceOf(IllegalArgumentException.class));
     }
 
+    @Test
+    void 예외_테스트_구분자_가_처음_또는_끝에_위치한_경우() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(",1:2,"))
+                        .isInstanceOf(IllegalArgumentException.class));
+    }
 
     @Override
     public void runMain() {
