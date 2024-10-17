@@ -22,6 +22,7 @@ public class Division {
 
     private static List<String> getList(String input) {
         List<String> list = new ArrayList<>();
+        // 기본 구분자를 사용했을 경우
         if (isDefaultSeparator(input)) {
             return makeList(input, DEFAULT_SEPARATOR, list);
         }

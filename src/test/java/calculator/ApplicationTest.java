@@ -117,6 +117,15 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    @DisplayName("커스텀 구분자의 순서가 잘못 되면 예외를 발생한다.")
+    void inputExceptionTest11() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("\\n?//1?23?4?5"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
     @DisplayName("입력에 공백이 들어오면 0을 반환한다.")
     void inputTest1() {
         String userInput = "";

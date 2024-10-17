@@ -50,9 +50,13 @@ public class SeparatorValidation {
 
     private static boolean isNotCustomPattern(String input) {
         String customPattern = CustomPatternMaker.getCustomPattern(input);
+        // 커스텀 구분자는 뒤에 | 이 붙으므로 제거해준다.
         customPattern = customPattern.replaceAll("\\|", "");
+        // 커스텀 구분자와 특수문자 아닌 문자들을 정규표현식으로 묶어준다.
         String pattern = "[" + NOT_SPECIAL_CHARACTERS + customPattern + " ]+";
+        // 커스텀 구분자를 제외 시켜준다.
         input = input.substring(input.indexOf("\\n") + 2);
+        // 문자열 안에 커스텀 구분자와 기본 구분자 외의 특수문자가 있는지 검사한다.
         String[] inputStrings = input.split("");
         for (String inputString : inputStrings) {
             if (inputString.matches(pattern)) {
