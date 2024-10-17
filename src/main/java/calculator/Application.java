@@ -38,6 +38,11 @@ public class Application {
             for (int i : integerList) {
                 System.out.println(i);
             }
+            int sum = 0;
+            for (int i : integerList) {
+                sum += i;
+            }
+            System.out.println("결과 : " + sum);
         } else {
             System.out.println("숫자가 아닌 문자열이 존재합니다.");
         }
