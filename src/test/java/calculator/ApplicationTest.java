@@ -68,4 +68,12 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 10");
         });
     }
+
+    @Test
+    public void 구분자_사이에_문자열_없음(){
+        assertSimpleTest(() -> {
+            run("1,:2");
+            assertThat(output()).contains("결과 : 3");
+        });
+    }
 }
