@@ -72,7 +72,7 @@ public class Application {
                 }
                 result += parseNumber;
             } catch (NumberFormatException ex) {
-                throw new NumberFormatException();
+                throw new IllegalArgumentException();
             }
         }
 
