@@ -24,8 +24,8 @@ public class SeparatorServiceImpl implements SeparatorService {
 
         while (idx.isLessThanOrEqual(maxIdx)) {
             if (input.isCustomSep(idx)) {
-                Index customSeparatorIdx = idx.customSeparatorIdx();
-                Separator separator = input.toSeparatorByIndex(customSeparatorIdx);
+                Index customSeparatorIdx = idx.customSepIdx();
+                Separator separator = input.toSepByIdx(customSeparatorIdx);
                 separatorSet.addSeparator(separator);
             }
 
@@ -34,8 +34,6 @@ public class SeparatorServiceImpl implements SeparatorService {
 
         return separatorSet;
     }
-
-
 
     @Override
     public IndexQueue getAllCustomSepIdx(Input input) {
@@ -55,8 +53,6 @@ public class SeparatorServiceImpl implements SeparatorService {
         return idxQueue;
     }
 
-
-
     @Override
     public RefinedInput refineInput(Input input, IndexQueue idxQueue) {
 
@@ -67,8 +63,6 @@ public class SeparatorServiceImpl implements SeparatorService {
 
         while (idx.isLess(maxIdx)) {
             if (idxQueue.isIndexProcess(idx)) {
-                Index customSeparatorIdx = idx.customSeparatorIdx();
-                refinedInput.appendLetter(input, customSeparatorIdx);
                 idx = idx.plus(CUSTOM_SEPARATOR_LENGTH);
                 idxQueue.poll();
                 continue;
@@ -84,6 +78,7 @@ public class SeparatorServiceImpl implements SeparatorService {
 
     @Override
     public NumList separateNum(RefinedInput refinedInput, RegexStr regexStr) {
+        System.out.println(refinedInput);
         return refinedInput.toNumList(regexStr);
     }
 

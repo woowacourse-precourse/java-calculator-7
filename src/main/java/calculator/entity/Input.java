@@ -1,13 +1,16 @@
 package calculator.entity;
 
-
 import static calculator.utils.Constants.CUSTOM_SEPARATOR_LENGTH;
 
 public class Input {
 
-    protected final String value;
+    private final String value;
 
     public Input(String value) {
+        if (value == null) {
+            throw new IllegalArgumentException("Input value cannot be null.");
+        }
+
         this.value = value;
     }
 
@@ -33,7 +36,7 @@ public class Input {
         return new Index(value.length());
     }
 
-    public Separator toSeparatorByIndex(Index index) {
+    public Separator toSepByIdx(Index index) {
         return new Separator(oneLetter(index));
     }
 

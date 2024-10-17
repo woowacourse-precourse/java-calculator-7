@@ -1,6 +1,5 @@
 package calculator.entity;
 
-
 import static calculator.utils.Constants.CUSTOM_SEPARATOR_END_IDX;
 import static calculator.utils.Constants.CUSTOM_SEPARATOR_IDX;
 import static calculator.utils.Constants.CUSTOM_SEP_END_STRING;
@@ -20,7 +19,7 @@ public class Index implements Comparable<Index> {
         return new Index(value + 1);
     }
 
-    public Index customSeparatorIdx() {
+    public Index customSepIdx() {
         return new Index(value + CUSTOM_SEPARATOR_IDX.value);
     }
 
@@ -48,8 +47,8 @@ public class Index implements Comparable<Index> {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Integer index = ((Index) o).value;
-        return Objects.equals(value, index);
+        Integer compareValue = ((Index) o).value;
+        return Objects.equals(value, compareValue);
     }
 
     @Override

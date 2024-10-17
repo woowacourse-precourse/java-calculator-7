@@ -21,7 +21,7 @@ public class Num {
             return;
         }
 
-        if (numLen >= 2 && numString.startsWith("0")) {
+        if (numString.startsWith("0")) {
             throw new IllegalArgumentException("must be a number");
         }
 

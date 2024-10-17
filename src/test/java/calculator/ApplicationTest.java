@@ -100,24 +100,22 @@ class ApplicationTest extends NsTest {
         });
     }
 
-
     @Test
-    @DisplayName("예외 테스트 : 중첩 커스텀 구문자")
-    void exceptionTest1() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("////5\\n\\n1,2,3,4,5"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
-
+    @DisplayName("커스텀구분자 숫자")
+    void test9() {
+        assertSimpleTest(() -> {
+            run("1//1\\n111111111111");
+            assertThat(output()).contains("결과 : 0");
+        });
     }
 
     @Test
-    @DisplayName("예외 테스트 : 커스텀 구문자 안에 기본 구문자")
-    void exceptionTest2() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//:\\n"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
+    @DisplayName("커스텀 구분자 옆에 숫자")
+    void test10() {
+        assertSimpleTest(() -> {
+            run("51//1\\n15");
+            assertThat(output()).contains("결과 : 10");
+        });
     }
 
     @Test
@@ -136,6 +134,14 @@ class ApplicationTest extends NsTest {
                 assertThatThrownBy(() -> runException("0100:0200"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+    @DisplayName("커스텀 구분자 옆에 숫자 - 2")
+    void test11() {
+        assertSimpleTest(() -> {
+            run("5//1\\n5");
+            assertThat(output()).contains("결과 : 55");
+        });
     }
 
     @Override

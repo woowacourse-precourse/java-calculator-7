@@ -29,10 +29,11 @@ class SeparatorServiceTest {
         expected.addSeparator(new Separator("5"));
         expected.addSeparator(new Separator("6"));
 
+        // when
         SeparatorSet result = separatorService.getCustomSeparators(input);
 
+        // then
         assertThat(result).isEqualTo(expected);
-
     }
 
     @Test
@@ -95,7 +96,6 @@ class SeparatorServiceTest {
     @DisplayName("문자열 분리 테스트2 : 특수문자 처리")
     void testSeparateNum2() {
         //given
-
         RefinedInput input = new RefinedInput("1?2,3.4\\5");
         NumList expect = new NumList();
         expect.addNum(new Num(1));
@@ -113,6 +113,8 @@ class SeparatorServiceTest {
         RegexStr regexStr = separatorSet.toRegexStr();
         NumList result = separatorService.separateNum(input, regexStr);
 
+
+        // then
         assertThat(result).isEqualTo(expect);
     }
 
