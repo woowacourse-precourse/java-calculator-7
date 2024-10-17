@@ -8,7 +8,9 @@ import java.util.regex.Pattern;
 public class Application {
 
     private static final int EMPTY_INPUT_RETURN_VALUE = 0;
-    private static final int SIZE_OF_CUSTOM_DELIMITER_END_SIGN = 2;
+    private static final String CUSTOM_DELIMITER_START_SIGN = "//";
+    private static final String CUSTOM_DELIMITER_END_SIGN = "\\n";
+    private static final int CUSTOM_DELIMITER_END_SIGN_LENGTH = CUSTOM_DELIMITER_END_SIGN.length();
 
     public static void main(String[] args) {
         printInputMessage();
@@ -35,7 +37,7 @@ public class Application {
          * 1.2 커스텀 구분자를 포함하여 입력된 경우
          */
         if (hasCustomDelimiter(input)) {
-            int indexOfEndSign = input.indexOf("\\n"); // 개행문자가 아닌 \n라는 문자를 찾는다
+            int indexOfEndSign = input.indexOf(CUSTOM_DELIMITER_END_SIGN); // 개행문자가 아닌 \n라는 문자를 찾는다
             if (indexOfEndSign == -1) {
                 throw new IllegalArgumentException("커스텀 구분자 선언 후 '\\n'이 필요합니다.");
             }
@@ -47,7 +49,7 @@ public class Application {
                 delimiterPart.append("|").append(toRegex(delim));
             }
 
-            numberPart = input.substring(indexOfEndSign + SIZE_OF_CUSTOM_DELIMITER_END_SIGN);
+            numberPart = input.substring(indexOfEndSign + CUSTOM_DELIMITER_END_SIGN_LENGTH);
         }
 
         String[] numbers = numberPart.split(delimiterPart.toString());
@@ -70,7 +72,7 @@ public class Application {
     }
 
     private static boolean hasCustomDelimiter(String input) {
-        return input.startsWith("//");
+        return input.startsWith(CUSTOM_DELIMITER_START_SIGN);
     }
 
     private static int add(String[] numbers) {
