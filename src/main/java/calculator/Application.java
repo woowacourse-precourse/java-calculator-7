@@ -35,8 +35,15 @@ public class Application {
                 processedInput.addAll(Arrays.asList(splitInput));
             }
         }
+
         for (String number : processedInput) {
             if (Integer.parseInt(number) < 0) {
+                throw new IllegalArgumentException();
+            }
+        }
+
+        for (String number : processedInput) {
+            if (Character.isDigit(Integer.parseInt(number))) {
                 throw new IllegalArgumentException();
             }
         }
