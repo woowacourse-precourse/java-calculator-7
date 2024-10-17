@@ -1,5 +1,5 @@
 package calculator;
-
+import calculator.GlobalConstant;
 public class Checkdelemeter {
 
     char[] delemeter = new char[3];
@@ -18,6 +18,7 @@ public class Checkdelemeter {
         if(slash == check_slash && line == check_line){
             adding_delemeter = input.charAt(2);
             delemeter[2] = adding_delemeter;
+            GlobalConstant.StartIndex = 5;
             // delemeter가 유효한 char인지 예외처리
         }
         return delemeter;

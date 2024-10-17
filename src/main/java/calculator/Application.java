@@ -1,7 +1,5 @@
 package calculator;
 import camp.nextstep.edu.missionutils.Console;
-import calculator.Checkdelemeter;
-import calculator.InputView;
 public class Application {
 
     public static void main(String[] args) {
@@ -10,7 +8,8 @@ public class Application {
         String input = input_view.getInput();
         char[] delemeter = new char[3];
         delemeter = check_delemeter.AddDelemeter(input);
-
+        Parsing parsing = new Parsing(delemeter);
+        parsing.MakeNumList(input);
     }
 
 }
