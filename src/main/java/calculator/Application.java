@@ -15,7 +15,12 @@ public class Application {
         int sum = 0;
 
         for(String token : tokens) {
-            sum += Integer.parseInt(token);
+            try {
+                sum += Integer.parseInt(token);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid number format");
+            }
+
         }
         return sum;
     }
