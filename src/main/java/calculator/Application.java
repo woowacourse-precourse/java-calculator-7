@@ -34,7 +34,7 @@ public class Application {
         return prefix.equals("//") && suffix.equals("\\n");
     }
 
-    private static String[] splitString(String str) {
+    public static String[] splitString(String str) {
         if (isStringWithCustomDelimiter(str)) {
             char customDelimiter = str.charAt(2);
             validateCustomDelimiter(customDelimiter);

@@ -34,6 +34,11 @@ class ApplicationTest extends NsTest {
         assertThat(Application.isStringWithCustomDelimiter("1,2,3")).isEqualTo(false);
     }
 
+    @Test
+    void 기본_구분자를_기준으로_입력받은_문자열을_분리하는_경우() {
+        assertThat(Application.splitString("3,4:5")).isEqualTo(new String[]{"3", "4", "5"});
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
