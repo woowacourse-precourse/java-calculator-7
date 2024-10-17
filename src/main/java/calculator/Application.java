@@ -41,12 +41,6 @@ public class Application {
     }
 
     public static long calcNumbers(List<Long> numbers) {
-        long sum = 0L;
-
-        for (long number : numbers) {
-            sum += number;
-        }
-
-        return sum;
+        return numbers.stream().reduce(0L, Long::sum);
     }
 }
