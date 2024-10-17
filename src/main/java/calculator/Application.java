@@ -9,7 +9,15 @@ public class Application {
             return 0;
         }
 
-        return 0;
+        String delimiter = ",;";
+
+        String[] tokens = input.split(delimiter);
+        int sum = 0;
+
+        for(String token : tokens) {
+            sum += Integer.parseInt(token);
+        }
+        return sum;
     }
     public static void main(String[] args) {
         // TODO: 프로그램 구현
