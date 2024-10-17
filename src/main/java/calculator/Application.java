@@ -26,11 +26,9 @@ public class Application {
                 }
 
             }else{  //구분자 미사용
-                System.out.println("gkgk");
                 if(startAndEndWithNumber(input) && !containsInvalidCharacters(input)){
                     throw new IllegalArgumentException("올바른 입력이 아닙니다. 입력값 : "+input);
                 }else{
-                    System.out.println("gkgk");
                     sum = calculate(input);
                 }
             }
