@@ -14,6 +14,7 @@ public class Application {
         String customSeparator = extractCustomSeparator(calcFormula);
         List<Long> numbers = extractNumber(calcFormula, customSeparator);
         long sum = calcNumbers(numbers);
+        System.out.print("결과 : " + sum);
     }
 
     public static String extractCustomSeparator(String calcFormula) {
