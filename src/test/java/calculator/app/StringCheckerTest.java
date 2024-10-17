@@ -2,6 +2,7 @@ package calculator.app;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import calculator.Application;
 import camp.nextstep.edu.missionutils.test.NsTest;
@@ -50,6 +51,22 @@ class StringCheckerTest extends NsTest {
         assertSimpleTest(() -> {
             assertThat(stringChecker.checkCustomSeparator("//n\\n") == List.of(':', ',', 'n'));
         });
+    }
+
+    @Test
+    void 유효성_검증_함수_유효한경우() {
+        assertSimpleTest(() -> {
+            assertThat(stringChecker.checkExpressionValidation("1,2,3", List.of(':', ',', 'n')));
+        });
+    }
+
+    @Test
+    void 유효성_검증_함수_유효하지않음() {
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> stringChecker.checkExpressionValidation("1,2.3", List.of(':', ',', 'n'))
+        );
+        assertThat(exception).isInstanceOf(IllegalArgumentException.class);
     }
 
 }
