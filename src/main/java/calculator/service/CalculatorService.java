@@ -11,5 +11,10 @@ public class CalculatorService {
 
 
     public int caculate(String input) {
+        if (input == null || input.isEmpty()) {
+            return 0;
+        }
+
+        return 0;
     }
 }
