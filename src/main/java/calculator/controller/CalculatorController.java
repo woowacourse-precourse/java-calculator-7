@@ -1,6 +1,6 @@
 package calculator.controller;
 
-import calculator.model.Calculate;
+import calculator.model.StringNumbers;
 import calculator.model.Numbers;
 import calculator.view.InputView;
 import calculator.view.OutputView;
@@ -18,7 +18,7 @@ public class CalculatorController {
     }
 
     public Integer doCalculate(String userInput) {
-        List<String> calculate = new Calculate(userInput).getSplitUserInput();
+        List<String> calculate = new StringNumbers(userInput).getSplitUserInput();
         return new Numbers(calculate).calculateNumbersSum();
     }
 

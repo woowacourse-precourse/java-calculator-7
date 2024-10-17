@@ -5,11 +5,11 @@ import calculator.util.CalculateCustom;
 import calculator.util.CalculateDefault;
 import java.util.List;
 
-public class Calculate {
+public class StringNumbers {
 
     private final List<String> splitUserInput;
 
-    public Calculate(String userInput) {
+    public StringNumbers(String userInput) {
         //검증 - 기본 구분자나 커스텀 구분자를 포함하지 않았을 경우
         isValidate(userInput);
         //기본 or 커스텀인지 판단해 분리된 문자열 저장
