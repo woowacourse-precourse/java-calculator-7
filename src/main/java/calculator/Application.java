@@ -10,6 +10,15 @@ public class Application {
 
         String customDelimiter = getCustomDelimiter(inputString);
         System.out.println("커스텀 구분자 : " + (customDelimiter == null ? "없음" : customDelimiter));
+
+        String[] splitStrings;
+        if (customDelimiter == null) {
+            splitStrings = inputString.split("[,:]");
+            System.out.println("기본 구분자로 분리한 결과 : ");
+            for (String str : splitStrings) {
+                System.out.println(str);
+            }
+        }
     }
 
     private static String getCustomDelimiter(String string) {
