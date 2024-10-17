@@ -22,6 +22,8 @@ public class Application {
                 return;
             }
         }
+        System.out.println(separators);
+
         int[] numbers = extractNumbers(input, separators);
         int sumValue = sum(numbers);
 
@@ -34,6 +36,8 @@ public class Application {
 
     public static int[] extractNumbers(String input, List<String> separators) {
         String separatorsRegex = String.join("|", separators);
+        System.out.println(input);
+        System.out.println(Arrays.toString(input.split(separatorsRegex)));
         return Arrays.stream(input.split(separatorsRegex)).mapToInt(Integer::parseInt).toArray();
     }
 
@@ -48,7 +52,11 @@ public class Application {
             String customSeparator = matcher.group(1);  // 커스텀 구분자
             String extractNumber = matcher.group(2);  // 나머지 문자열
 
-            separators.add(customSeparator);
+            if (Objects.equals(customSeparator, ".")) {
+                separators.add("\\.");
+            } else {
+                separators.add(customSeparator);
+            }
 
             return extractNumber;
         } else {
