@@ -42,8 +42,9 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 빈문자_입력_예외_테스트() {
+
         assertSimpleTest(() -> {
-            run("");
+            run("\n");
             assertThat(output()).contains("결과 : 0");
         });
     }
@@ -61,6 +62,22 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("4,5//%\\n6%7//,\\n8,9");
             assertThat(output()).contains("결과 : 147");
+        });
+    }
+
+    @Test
+    void 공백이_구분자인_입력_예외_테스트() {
+        assertSimpleTest(() -> {
+            run("12//\\n3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀구분자가_여러_문자인_입력_예외_테스트() {
+        assertSimpleTest(() -> {
+            run("4:;4//;:\\n");
+            assertThat(output()).contains("결과 : 8");
         });
     }
 
