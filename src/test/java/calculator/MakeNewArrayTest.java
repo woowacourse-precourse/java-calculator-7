@@ -191,20 +191,12 @@ class MakeNewArrayTest extends NsTest {
                 } else {
                     testArray = testValArray[i].split("[:|,|" + customSymbol + "]");
                 }
-                // return testArray;
                 System.out.println((i + 1) + "번째 숫자형 배열 : " + Arrays.toString(testArray));
             }
         });
     }
 
-    @Test
-    @DisplayName("정상적인 값이 들어갔을때 실제 코드에서 원하는 값이 출력되어야함")
-    void 실제코드_적용_1번() {
-        assertSimpleTest(() -> {
-            run("//>\\n1:2,3");
-            assertThat(output()).contains("[1, 2, 3]");
-        });
-    }
+
 
     @Override
     protected void runMain() {

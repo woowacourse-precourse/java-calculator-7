@@ -12,5 +12,6 @@ public class Application {
         Console.close();
         String[] parseStringArray = ArrayFunction.parseNumbersFromString(inputVal);
         System.out.println("parseStringArray = " + Arrays.toString(parseStringArray));
+        System.out.println("결과 : " + ArrayFunction.resultSumValue(parseStringArray));
     }
 }
