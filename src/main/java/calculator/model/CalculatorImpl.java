@@ -12,10 +12,7 @@ public class CalculatorImpl implements Calculator {
 
     @Override
     public int calculate(String input) {
-        if (validator.isEmptyOrNull(input)) {
-            return 0;
-        }
-
+        validator.validateEmptyOrNull(input);
         String[] numbers = delimiterParser.parse(input);
         return sum(numbers);
     }
