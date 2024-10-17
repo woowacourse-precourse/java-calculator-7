@@ -8,6 +8,10 @@ public class Application {
         for (char x : str.toCharArray()) {
             if (!Character.isDigit(x)) {
                 throw new IllegalArgumentException("문자열에 음수 혹은 숫자가 아닌 것은 포함될 수 없습니다.");
+            } else {
+                if (Integer.parseInt(str) == 0) {
+                    throw new IllegalArgumentException("문자열에 양수만 포함될 수 있습니다");
+                }
             }
         }
     }
