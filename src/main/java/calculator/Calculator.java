@@ -32,7 +32,7 @@ public class Calculator {
         return result;
     }
 
-    private boolean containsSpace(String token) {
+    private static boolean containsSpace(String token) {
         for (int i = 0; i < token.length(); ++i) {
             if (isSpace(token.charAt(i))) {
                 return true;
@@ -42,15 +42,15 @@ public class Calculator {
         return false;
     }
 
-    private boolean isSpace(char ch) {
+    private static boolean isSpace(char ch) {
         return ch <= ' '; // trim이 자르는 문자
     }
 
-    private boolean isNotPositive(double value) {
+    private static boolean isNotPositive(double value) {
         return value <= 0;
     }
 
-    private double parseDouble(String token) {
+    private static double parseDouble(String token) {
         try {
             return Double.parseDouble(token);
         } catch (Exception e) {

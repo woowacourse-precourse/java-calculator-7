@@ -28,7 +28,7 @@ public class CalculatorParser {
         this.customDelimiter = line.charAt(CUSTOM_START.length()) + "";
     }
 
-    private void checkEndsWithCustomEnd(String line) {
+    private static void checkEndsWithCustomEnd(String line) {
         int customEndStart = CUSTOM_START.length() + CUSTOM_DELIMITER_LENGTH;
 
         if (!line.startsWith(CUSTOM_END, customEndStart)) { // CUSTOM_END로 끝나지 않는다면
@@ -36,7 +36,7 @@ public class CalculatorParser {
         }
     }
 
-    private boolean startsWithCustomStart(String line) {
+    private static boolean startsWithCustomStart(String line) {
         return line.startsWith(CUSTOM_START);
     }
 
