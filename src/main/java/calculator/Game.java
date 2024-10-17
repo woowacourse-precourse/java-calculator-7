@@ -13,6 +13,4 @@ public class Game {
         int[] numbers = input1.changeInteger(splitStr);
         System.out.println(Arrays.stream(numbers).sum());
     }
-
-
 }
