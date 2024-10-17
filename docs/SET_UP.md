@@ -13,7 +13,7 @@
 | Java  | 21.0.5 (2024-10-15 LTS) |
 | Build | Gradle 8.7              |
 | Test  | JUnit                   |
-| IDEA  | IntelliJ                |
+| IDE   | IntelliJ 2024.02.03     |
 | OS    | Windows 11 (10.0 amd64) |
 
 ## 코드 컨벤션
