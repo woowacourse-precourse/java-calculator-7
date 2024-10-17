@@ -17,7 +17,7 @@ class ApplicationTest extends NsTest {
     // 테스트 케이스: 커스텀 구분자 적용
     @Test
     public void testCustomDelimiter() {
-        assertEquals(6, application.calculate("//;\n1;2;3")); // 1 + 2 + 3 = 6
+        assertEquals(6, application.calculate("//;\\n1;2;3")); // 1 + 2 + 3 = 6
     }
 
     @Override
