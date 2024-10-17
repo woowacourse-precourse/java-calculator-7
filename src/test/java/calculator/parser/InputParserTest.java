@@ -64,7 +64,7 @@ class InputParserTest {
         // when
         String[] real = inputParser.separate(input);
 
-        // then:
+        // then
         assertThat(real).isEqualTo(expected);
     }
 }
