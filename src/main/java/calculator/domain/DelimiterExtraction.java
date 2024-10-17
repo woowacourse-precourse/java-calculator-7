@@ -4,7 +4,7 @@ import java.util.regex.*;
 
 public class DelimiterExtraction {
     private static final String DEFAULT_DELIMITER = ",|:";
-    private static final Pattern CUSTOM_DELIMITER = Pattern.compile("//(.)\n(.*)");
+    private static final Pattern CUSTOM_DELIMITER = Pattern.compile("//(.)\\\\n(.*)");
 
     public String[] Extraction(String input){
         Matcher matcher = CUSTOM_DELIMITER.matcher(input);
