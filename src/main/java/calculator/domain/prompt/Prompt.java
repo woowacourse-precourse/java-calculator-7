@@ -22,11 +22,13 @@ public abstract class Prompt {
         List<String> separatedData = this.getInput();
 
         return separatedData.stream()
-                .map(data -> {
-                    validateNumber(data);
-                    return Integer.valueOf(data);
-                })
+                .map(this::parseNumber)
                 .toList();
+    }
+
+    private Integer parseNumber(String data) {
+        validateNumber(data);
+        return Integer.valueOf(data);
     }
 
     private void validateNumber(String data) {
