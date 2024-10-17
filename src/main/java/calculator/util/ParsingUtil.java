@@ -11,14 +11,14 @@ public final class ParsingUtil {
     }
 
     public static List<String> parseWithDefault(String input) {
-        if (isInputNull(input)) {
+        if (isInputIsNullOrEmpty(input)) {
             throw new IllegalArgumentException(CalculatorError.INPUT_IS_NULL_OR_EMPTY.getMessage());
         }
 
         return Arrays.asList(input.split(DEFAULT_DELIMITER));
     }
 
-    private static boolean isInputNull(String input) {
-        return input == null || input.isEmpty();
+    private static boolean isInputIsNullOrEmpty(String input) {
+        return input == null || input.isEmpty() || input.isBlank();
     }
 }
