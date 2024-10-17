@@ -5,10 +5,6 @@ import java.util.ArrayList;
 
 public class Parser {
     public static ArrayList<BigInteger> inputParse(String input, Separator separator){
-        int idx = input.indexOf("\\n");
-        if(idx!=-1){
-            input = input.substring(idx+2);
-        }
 
         ArrayList<BigInteger> tokens = new ArrayList<>();
         StringBuilder tmp = new StringBuilder();

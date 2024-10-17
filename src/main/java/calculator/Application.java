@@ -1,7 +1,5 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.Console;
-
 import java.math.BigInteger;
 import java.util.ArrayList;
 
@@ -18,12 +16,7 @@ public class Application {
 
         ArrayList<BigInteger> tokens = Parser.inputParse(input.getFormulaString(), separator);
 
-        IOController.outputAnswer(adder(tokens));
+        IOController.printAnswer(Calculator.adder(tokens));
 
     }
-
-    public static BigInteger adder(ArrayList<BigInteger> tokens){
-        return tokens.stream().reduce(BigInteger.ZERO, BigInteger::add);
-    }
-
 }
