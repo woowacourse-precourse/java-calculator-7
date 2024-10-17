@@ -17,15 +17,14 @@ public class Application {
         String num = "";
         int sum = 0;
         for (int i = 0; i < user_input.length(); i++) {
-            String ch = "";
-            ch += user_input.charAt(i);
-            if (separator.contains(ch)) {
+            char ch = user_input.charAt(i);
+            if (separator.contains(Character.toString(ch))) {
                 sum += stringToNum(num);
                 num = "";
-            } else if ('0' <= ch.charAt(0) && '9' >= ch.charAt(0)) {
+            } else if ('0' <= ch && '9' >= ch) {
                 num += ch;
             } else {
-                throw new IllegalArgumentException(ch);
+                throw new IllegalArgumentException();
             }
         }
         sum += stringToNum(num);
