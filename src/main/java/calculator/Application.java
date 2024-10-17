@@ -12,7 +12,14 @@ public class Application {
     }
 
     static void registerCustom(String str) {
-
+        int customStart = hasCustom(str);
+        for (int i = customStart + 2; i < str.length() - 2; i++) {
+            if (str.substring(i, i + 2).equals("\\n")) {
+                delimeter += "|" + str.substring(customStart + 2, i);
+                inputExpression = inputExpression.substring(i + 2);
+                break;
+            }
+        }
     }
 
     public static void main(String[] args) {
