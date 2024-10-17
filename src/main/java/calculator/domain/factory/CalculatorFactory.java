@@ -1,7 +1,7 @@
-package calculator.factory;
+package calculator.domain.factory;
 
-import calculator.calc.Calculator;
-import calculator.splitter.NormalSplitter;
+import calculator.domain.calc.Calculator;
+import calculator.domain.splitter.NormalSplitter;
 
 /**
  * Calculator Config

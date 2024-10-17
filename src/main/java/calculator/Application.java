@@ -1,8 +1,8 @@
 package calculator;
 
-import calculator.calc.Calculator;
-import calculator.common.ValidationUtils;
-import calculator.factory.CalculatorFactory;
+import calculator.domain.calc.Calculator;
+import calculator.common.validator.ValidationUtils;
+import calculator.domain.factory.CalculatorFactory;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Application {

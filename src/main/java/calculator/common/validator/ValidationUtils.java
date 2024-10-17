@@ -1,4 +1,4 @@
-package calculator.common;
+package calculator.common.validator;
 
 public class ValidationUtils {
 

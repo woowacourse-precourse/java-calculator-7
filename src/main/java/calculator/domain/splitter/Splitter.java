@@ -1,4 +1,4 @@
-package calculator.splitter;
+package calculator.domain.splitter;
 
 public interface Splitter {
     String[] split(String exp);

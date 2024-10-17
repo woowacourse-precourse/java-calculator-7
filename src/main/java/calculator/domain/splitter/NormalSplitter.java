@@ -1,6 +1,6 @@
-package calculator.splitter;
+package calculator.domain.splitter;
 
-import calculator.calc.CalculatorConst;
+import calculator.common.constant.CalculatorConst;
 
 import java.util.regex.Pattern;
 

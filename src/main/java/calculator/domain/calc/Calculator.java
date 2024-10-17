@@ -1,6 +1,6 @@
-package calculator.calc;
+package calculator.domain.calc;
 
-import calculator.splitter.Splitter;
+import calculator.domain.splitter.Splitter;
 
 public class Calculator implements Calculatable {
 
