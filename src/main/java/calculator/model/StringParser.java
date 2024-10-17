@@ -13,7 +13,7 @@ public class StringParser {
     private static final String DEFAULT_SEPARATOR_COMMA = ",";
     private static final String DEFAULT_SEPARATOR_COLON = ":";
     private static final String CUSTOM_SEPARATOR_DEFINITION_PREFIX = "//";
-    private static final String CUSTOM_SEPARATOR_DEFINITION_SUFFIX = "\n";
+    private static final String CUSTOM_SEPARATOR_DEFINITION_SUFFIX = "\\n";
     private static List<String> separators = Arrays.asList(DEFAULT_SEPARATOR_COMMA, DEFAULT_SEPARATOR_COLON);
 
     public List<Integer> extractNumbers(String input) {

@@ -1,6 +1,5 @@
 package calculator.model;
 
-import calculator.model.StringParser;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -28,7 +27,7 @@ class StringParserTest {
 
     @Test
     void 커스텀_구분자_입력시_올바른_숫자_반환() {
-        List<Integer> result = stringParser.extractNumbers("//;\n1;2;3");
+        List<Integer> result = stringParser.extractNumbers("//;\\n1;2;3");
         assertEquals(Arrays.asList(1, 2, 3), result);
     }
 
@@ -42,7 +41,7 @@ class StringParserTest {
 
     @Test
     void 혼합_구분자_입력시_올바른_숫자_반환() {
-        List<Integer> result = stringParser.extractNumbers("//;\n1,2:3;4");
+        List<Integer> result = stringParser.extractNumbers("//;\\n1,2:3;4");
         assertEquals(Arrays.asList(1, 2, 3, 4), result);
     }
 
@@ -67,7 +66,7 @@ class StringParserTest {
 
     @Test
     void 여러_자리_커스텀_구분자_입력시_올바른_숫자_반환() {
-        List<Integer> result = stringParser.extractNumbers("//***\n1***2***3");
+        List<Integer> result = stringParser.extractNumbers("//***\\n1***2***3");
         assertEquals(Arrays.asList(1, 2, 3), result);
     }
 
@@ -113,7 +112,7 @@ class StringParserTest {
 
     @Test
     void 커스텀_구분자_추출_성공() {
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
         String customSeparator = stringParser.extractCustomSeparator(input);
         assertEquals(";", customSeparator);
     }
@@ -135,7 +134,7 @@ class StringParserTest {
 
     @Test
     void 커스텀_구분자_정의_제거_성공() {
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
         String result = stringParser.removeCustomSeparatorDefinition(input);
         assertEquals("1;2;3", result);
     }
