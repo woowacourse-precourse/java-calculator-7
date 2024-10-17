@@ -1,51 +1,34 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.ArrayList;
 
 public class Application {
+    private Delimiters delimiters = new Delimiters();
+
     public static void main(String[] args) {
+        Application application = new Application();
+        application.run();
+    }
+
+    public void run() {
         System.out.println("덧셈할 문자열을 입력해주세요.");
 
-        ArrayList<Character> sep = new ArrayList<>();
-        sep.add(':');
-        sep.add(',');
+        String inputString = Console.readLine();
 
-        String input = Console.readLine();
+        String numberString = extractNumberString(inputString);
 
-        if (input.startsWith("//")) {
-            sep.clear();
-
-            int index = 2;
-
-            while (!(input.charAt(index) == '\\' && input.charAt(index + 1) == 'n')) {
-                index++;
-            }
-
-            for (int i = 2; i < index; i++) {
-                sep.add(input.charAt(i));
-            }
-
-            if (sep.size() != 1) {
-                throw new IllegalArgumentException("커스텀 구분자는 하나여야 합니다.");
-            }
-
-            input = input.substring(index + 2);
+        StringBuilder delimiterExpression = new StringBuilder();
+        for (char delimiter : delimiters.getDelimiters()) {
+            appendDelimiter(delimiterExpression, delimiter);
         }
 
-        StringBuilder regex = new StringBuilder();
-        for (char c : sep) {
-            if (!regex.isEmpty()) {
-                regex.append("|");
-            }
-            regex.append("\\").append(c);
-        }
+        String delimiterStr = delimiterExpression.toString();
 
-        String[] nums = input.split(regex.toString());
+        String[] numList = numberString.split(delimiterStr);
 
         int sum = 0;
 
-        for (String token : nums) {
+        for (String token : numList) {
             if (!token.isEmpty()) {
                 try {
                     int num = Integer.parseInt(token.trim());
@@ -62,5 +45,59 @@ public class Application {
         }
 
         System.out.println("결과 : " + sum);
+    }
+
+    private String extractNumberString(String inputString) {
+        // 기본 구분자 추가
+        delimiters.addDelimiter(':');
+        delimiters.addDelimiter(',');
+
+        if (inputString.startsWith("//")) {
+            delimiters = new Delimiters();
+            int index = findLastDelimiterIndex(inputString);
+
+            extractDelimiters(inputString, index);
+
+            validateSingleDelimiter();
+
+            return inputString.substring(index + 2);
+        }
+
+        return inputString;
+    }
+
+    private void validateSingleDelimiter() {
+        if (!delimiters.hasSingleDelimiter()) {
+            throw new IllegalArgumentException("커스텀 구분자는 하나여야 합니다.");
+        }
+    }
+
+    private void extractDelimiters(String inputString, int index) {
+        for (int i = 2; i < index; i++) {
+            delimiters.addDelimiter(inputString.charAt(i));
+        }
+    }
+
+    private static int findLastDelimiterIndex(String inputString) {
+        int index = 2;
+        int length = inputString.length();
+
+        while (index < length - 1) {
+            char currentChar = inputString.charAt(index);
+            char nextChar = inputString.charAt(index + 1);
+
+            if (currentChar == '\\' && nextChar == 'n') {
+                return index;
+            }
+            index++;
+        }
+        return index;
+    }
+
+    private void appendDelimiter(StringBuilder expression, char delimiter) {
+        if (!expression.isEmpty()) {
+            expression.append("|");
+        }
+        expression.append("\\").append(delimiter);
     }
 }
