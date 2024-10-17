@@ -44,12 +44,19 @@ public class Application {
     }
 
     public static void checkForInvalidInput(ArrayList<String> values) {
+        ArrayList<String> negativeNumbers = new ArrayList<>();
         for (String value : values) {
             try {
-                Integer.parseInt(value);
+                int number = Integer.parseInt(value);
+                if (number < 0) {
+                    negativeNumbers.add(value);
+                }
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Invalid input: "+value);
+                throw new IllegalArgumentException("Invalid input: "+ value);
             }
+        }
+        if (!negativeNumbers.isEmpty()) {
+            throw new IllegalArgumentException("Negatives not allowed: " + negativeNumbers);
         }
     }
 }
