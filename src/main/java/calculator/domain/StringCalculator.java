@@ -1,6 +1,7 @@
 package calculator.domain;
 
 import calculator.constants.Constants;
+import calculator.util.UserInputValidator;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

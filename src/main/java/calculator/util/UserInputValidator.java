@@ -1,4 +1,4 @@
-package calculator.domain;
+package calculator.util;
 
 import calculator.constants.Constants;
 import java.util.regex.Matcher;
