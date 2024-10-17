@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +16,7 @@ public class StringCalculatorTest {
         StringCalculator stringCalculator = new StringCalculator();
         String value = "//;\\n1;2;3";
         String basicValue = "1,2;3";
-        String basicExpectValue= "[,;]";
+        String basicExpectValue = "[,;]";
 
 
         // when
@@ -28,7 +29,7 @@ public class StringCalculatorTest {
         // then
         Assertions.assertAll(
                 () -> Assertions.assertEquals(result, expect),
-                () -> Assertions.assertEquals(basicResult,basicExpectValue),
+                () -> Assertions.assertEquals(basicResult, basicExpectValue),
                 () -> Assertions.assertNotEquals(incorrectExpect, result)
         );
 
@@ -57,14 +58,20 @@ public class StringCalculatorTest {
         // given
         StringCalculator stringCalculator = new StringCalculator();
         String value = "1;2;3";
+        String basicValue = "1,2;3";
         String customValue = ";";
+        String basicCustomValue = "[,;]";
 
         // when
         String[] result = stringCalculator.createNewValue(value, customValue);
+        String[] basicResult = stringCalculator.createNewValue(basicValue, basicCustomValue);
         String[] expect = {"1", "2", "3"};
 
         // then
-        Assertions.assertArrayEquals(result, expect);
+        Assertions.assertAll(
+                () -> Assertions.assertArrayEquals(basicResult, expect),
+                () -> Assertions.assertArrayEquals(result, expect)
+        );
 
     }
 
