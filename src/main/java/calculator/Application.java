@@ -16,8 +16,7 @@ public class Application {
 
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        outputHandler.showUserInputMessage();
-        String input = inputHandler.getUserInput();
+        String input = getUserInput();
 
         int result = 0;
         if (inputIsNotEmpty(input)) {
@@ -50,6 +49,11 @@ public class Application {
             }
         }
         outputHandler.showAdditionResult(result);
+    }
+
+    private static String getUserInput() {
+        outputHandler.showUserInputMessage();
+        return inputHandler.getUserInput();
     }
 
     private static void validatePositiveNumber(int parsedNumber) {
