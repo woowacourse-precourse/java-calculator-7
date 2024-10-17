@@ -34,7 +34,7 @@ public class StringCalculator {
         checkString();
 
         //구분자를 통일시킴
-        inputString = inputString.replace(';', ',');
+        inputString = inputString.replace(':', ',');
         if(customSeparator != null) {
             inputString = inputString.replace(customSeparator, ',');
         }
