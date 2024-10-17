@@ -11,6 +11,9 @@ public class Application {
         String input = readLine();
         if(!isEmpty(input)){
             ArrayList<String> str = splitToArrayList(input);
+
+            checkForInvalidInput(str);
+
             System.out.println(str);
         } else {
             System.out.println("결과 : 0");
@@ -38,5 +41,15 @@ public class Application {
 
         String[] splitValues = numbers.split(delimiter.toString());
         return new ArrayList<>(Arrays.asList(splitValues));
+    }
+
+    public static void checkForInvalidInput(ArrayList<String> values) {
+        for (String value : values) {
+            try {
+                Integer.parseInt(value);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid input: "+value);
+            }
+        }
     }
 }
