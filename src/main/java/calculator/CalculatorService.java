@@ -22,6 +22,18 @@ public class CalculatorService {
         return inputString;
     }
 
+    public boolean checkStartOrEndCharIsNumber(String expression){
+        boolean result = true;
+        int len = expression.length();
+        String startChar = expression.substring(0,1);
+        String endChar = expression.substring(len-1,len);
+        int startInt = 0;
+        if(!Character.isDigit(expression.charAt(0)) || !Character.isDigit(expression.charAt(len-1))){
+            throw new IllegalArgumentException("계산식의 처음과 마지막에는 숫자만 입력할 수 있습니다.");
+        }
+        return result;
+    }
+
     public String transCustomSeperator(Matcher matcher){
         String customMatcher = matcher.group();
         String customSeperator = customMatcher.substring(2, customMatcher.length()-2);
@@ -41,10 +53,11 @@ public class CalculatorService {
 
     public int calculateList() {
         for (String i : numList) {
+            int n=0;
             try{
-                int n = Integer.parseInt(i);
+                n = Integer.parseInt(i);
                 if(n<0) throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
-                result += Integer.parseInt(i);
+                result += n;
             }catch (NumberFormatException e){
                 throw new IllegalArgumentException("등록되지 않은 구분자가 포함되어 있습니다.");
             }
@@ -64,6 +77,7 @@ public class CalculatorService {
         }else{
             transedString = transBasicSeperator();
         }
+        checkStartOrEndCharIsNumber(transedString);
         numList = getNumList();
         result = calculateList();
     }
