@@ -1,4 +1,4 @@
-# java-calculator-precourse
+# java-numbers-precourse
 
 ## 💪 프로젝트 개요
 
@@ -25,8 +25,8 @@
 
 ### 계산 기능
 
-- [ ] Vector<Integer>에 있는 값을 모두 더함
-- [ ] 비어 있을 경우 모든 합은 0
+- [X] Vector<Integer>에 있는 값을 모두 더함
+- [X] 비어 있을 경우 모든 합은 0
 
 ### 문자열 파싱 기능
 
