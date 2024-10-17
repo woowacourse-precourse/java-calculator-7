@@ -50,6 +50,24 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 커스텀_구분자_누락_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//\n1;2;3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining("잘못된 커스텀 구분자 형식입니다.")
+        );
+    }
+
+    @Test
+    void 잘못된_커스텀_구분자_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\\n1$2$3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining("올바르지 않은 구분자입니다.")
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
