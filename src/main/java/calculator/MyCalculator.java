@@ -1,7 +1,6 @@
 package calculator;
 
 public class MyCalculator {
-    private String numString;
 
     private static String customDelimiter(String str) {
         String newStr = "";
@@ -12,12 +11,25 @@ public class MyCalculator {
         return newStr.equals("") ? str : newStr;
     }
 
-    public static String[] splitString(String str) {
+    private static String[] splitString(String str) {
         String newStr = customDelimiter(str);
 
         String[] splitNumber = newStr.split("[\\D]+");
 
         return splitNumber;
+    }
+
+    public static int getSum(String str) {
+        String newStr = customDelimiter(str);
+        String[] strArray = splitString(newStr);
+
+        int sum = 0;
+
+        for (String s : strArray) {
+            sum += Integer.parseInt(s);
+        }
+
+        return sum;
     }
 
 //    public String findDelimiter(String str) {
