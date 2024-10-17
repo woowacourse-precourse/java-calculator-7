@@ -1,6 +1,7 @@
 package calculator.model;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
@@ -90,10 +91,24 @@ class InputParserTest {
     @DisplayName("양수 검사 테스트")
     public void checkPositiveNumberTest() {
         //given
-        List<Integer> list = List.of(1, 2, 3, -1);
+        List<Integer> list = List.of(1, 2, 3);
+
+        //then
+        assertDoesNotThrow(() -> inputParser.checkPositiveNumber(list));
+    }
+
+    @Test
+    @DisplayName("양수 검사 예외 테스트")
+    public void checkPositiveNumberExceptionTest() {
+        //given
+        List<Integer> list1 = List.of(-1, 2, 3);
+        List<Integer> list2 = List.of(0, 2, 3);
 
         //then
         assertThrows(IllegalArgumentException.class,
-            () -> inputParser.checkPositiveNumber(list));
+            () -> inputParser.checkPositiveNumber(list1));
+        assertThrows(IllegalArgumentException.class,
+            () -> inputParser.checkPositiveNumber(list2));
+
     }
 }
