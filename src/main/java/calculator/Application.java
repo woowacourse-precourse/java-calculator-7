@@ -40,4 +40,11 @@ public class Application {
     public String removeSeparatorInitializer(String input) {
         return input.substring(3 + getCustomSeparator(input).length());
     }
+
+    public Boolean isStringWithCustomSeparator(String input, String separator) {
+        String str = removeSeparatorInitializer(input);
+        str = removeNumber(str);
+        str = removeSeparator(str, getCustomSeparator(input));
+        return input.indexOf("//") == 0 && str == "";
+    }
 }
