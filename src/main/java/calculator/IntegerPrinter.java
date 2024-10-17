@@ -1,19 +1,14 @@
 package calculator;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class IntegerPrinter {
-    private String userInput;
-    private List<String> delimiters = new ArrayList<>(Arrays.asList(",", ";"));
-    private ArrayList<Integer> integers;
 
-    public IntegerPrinter(String userInput) {
-        this.userInput = userInput;
+    public IntegerPrinter() {
+        System.out.println("덧셈할 문자열을 입력해주세요.");
+        String userInput = readLine();
+        Calculator calculator = new Calculator(userInput);
+        System.out.println(calculator.print());
     }
 
-    public ArrayList<Integer> print() {
-        return integers;
-    }
 }
