@@ -8,20 +8,49 @@ import calculator.view.OutputView;
 import java.util.ArrayList;
 
 public class CalculatorController {
+    private final Calculator calculator;
+    private final InputView inputView;
+    private final OutputView outputView;
+    private final SeparatorParser separatorParser;
+    private final NumberParser numberParser;
+
+    public CalculatorController() {
+        this.calculator = new Calculator();
+        this.inputView = new InputView();
+        this.outputView = new OutputView();
+        this.separatorParser = new SeparatorParser();
+        this.numberParser = new NumberParser();
+    }
+
     public void calculatorRun() {
-        InputView inputView = new InputView();
-        String inputString = inputView.readString();
+        String inputString = getInputString();
 
-        SeparatorParser separatorParser = new SeparatorParser();
-        String[] separatoredString = separatorParser.separatorParse(inputString);
+        String[] separatedString = getSeparatedString(inputString);
 
-        NumberParser numberParser = new NumberParser();
-        ArrayList<String> operandList = numberParser.inputNumberParse(separatoredString);
+        ArrayList<String> operandList = getOperandList(separatedString);
 
-        Calculator calculator = new Calculator();
-        int result = calculator.numberCalculator(operandList);
+        int result = getResult(operandList);
 
-        OutputView outputView = new OutputView();
+        printResult(result);
+    }
+
+    private String getInputString() {
+        return inputView.readString();
+    }
+
+    private String[] getSeparatedString(String inputString) {
+        return separatorParser.separatorParse(inputString);
+    }
+
+    private ArrayList<String> getOperandList(String[] separatoredString) {
+        return numberParser.inputNumberParse(separatoredString);
+    }
+
+    private int getResult(ArrayList<String> operandList) {
+        return calculator.numberCalculator(operandList);
+    }
+
+    private void printResult(int result) {
         outputView.printResult(result);
-     }
+    }
 }
