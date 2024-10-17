@@ -21,17 +21,23 @@ public class Application {
         for (int i = startindex; i < input.length(); i++) { // input 문자열의 길이만큼 반복
             char a = input.charAt(i);  // 현재 문자를 하나씩 가져온다
             if (a == ',' || a == ':' || a == custom) { // 구분자를 만났을 때
-                sum += Integer.parseInt(number.toString()); // 지금까지 저장한 숫자를 정수로 변환 후 합계에 더한다
+                try {
+                    sum += Integer.parseInt(number.toString()); // 지금까지 저장한 숫자를 정수로 변환 후 합계에 더한다
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("잘못된 입력값입니다. 숫자가 아닌 값이 포함되었습니다: " + number.toString());
+                }
                 number.setLength(0);   // 숫자를 저장하던 임시 변수를 초기화
             } else {
                 number.append(a);  // 구분자가 아니라면 임시 변수에 숫자를 이어 붙인다
             }
         }
         if (number.length() > 0) { // 마지막 숫자가 남아 있을 경우 처리
-            sum += Integer.parseInt(number.toString()); // 마지막 남은 숫자를 합계에 더한다
+            try {
+                sum += Integer.parseInt(number.toString()); // 마지막 남은 숫자를 합계에 더한다
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("잘못된 입력값입니다. 숫자가 아닌 값이 포함되었습니다: " + number.toString());
+            }
         }
-
         System.out.println(" 합계 : " + sum); // 최종 합계를 출력
-
     }
 }
