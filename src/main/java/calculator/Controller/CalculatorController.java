@@ -15,6 +15,7 @@ public class CalculatorController {
 
         OriginalInput originalInput = new OriginalInput(userInput);
         Delimiter delimiter = new Delimiter(originalInput.separateDelimiter());
+
         List<String> originalNumbers = originalInput.separateNumbers(delimiter);
         List<Number> numberSet = originalNumbers.stream()
                 .map(Number::new)

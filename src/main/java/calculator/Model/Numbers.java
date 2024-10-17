@@ -15,7 +15,6 @@ public class Numbers {
         return numbers.stream()
                 .mapToDouble(Number::getNumber)
                 .sum();
-
     }
 
     private void validateNumbers(List<Number> numbers) {
