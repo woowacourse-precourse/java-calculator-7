@@ -20,6 +20,7 @@ public class DelimiterCheck {
     private void getCustomDelimiter() {
         if (inputString.startsWith("//") && (inputString.substring(3).equals("\\n"))) {
             String customDelimiter = Character.toString(inputString.charAt(2));
+            // 커스텀 문자열로 사용할 수 없는 문자들 예외처리
 //            if (customDelimiter.equals(" ") || customDelimiter.equals(".") || customDelimiter.equals("-")) {
 //                throw new IllegalAccessException();
 //            }
@@ -44,7 +45,7 @@ public class DelimiterCheck {
         }
         // 배열 내 공백 재검증
         for (int i = 0; i < splitFormulaArray.length; i++) {
-            String afterTrimBlank = splitFormulaArray[i].trim().replace(" ","");
+            String afterTrimBlank = splitFormulaArray[i].trim().replace("\r\n","");
             splitFormulaArray[i] = afterTrimBlank;
         }
         // 다 분리된 문자열 내 실수 검증로직으로 이동
