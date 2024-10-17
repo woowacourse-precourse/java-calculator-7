@@ -25,4 +25,9 @@ public class InputData {
             throw new IllegalArgumentException("[ERROR][F0002] 시작 입력값은 슬래시(/)나 숫자여야 합니다.");
         }
     }
+
+    public boolean isDelimiter(){
+        return false;
+    }
+
 }

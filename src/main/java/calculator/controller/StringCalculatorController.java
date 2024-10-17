@@ -1,5 +1,8 @@
 package calculator.controller;
 
+import calculator.model.CustomDelimiter;
+import calculator.model.DefaultDelimiter;
+import calculator.model.Delimiter;
 import calculator.model.InputData;
 import calculator.view.InputView;
 
@@ -13,5 +16,13 @@ public class StringCalculatorController {
     public InputData handoverInput(){
         String input = inputView.InputData();
         return new InputData(input);
+    }
+
+    public Delimiter splitDelimiterPart(InputData inputData){
+        if(inputData.isDelimiter()) {
+            return new CustomDelimiter();
+        }
+
+        return new DefaultDelimiter();
     }
 }

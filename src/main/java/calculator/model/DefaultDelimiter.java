@@ -1,4 +1,4 @@
 package calculator.model;
 
-public class DefaultDelimiter {
+public class DefaultDelimiter extends Delimiter{
 }

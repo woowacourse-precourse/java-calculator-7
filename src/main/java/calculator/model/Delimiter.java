@@ -1,4 +1,4 @@
 package calculator.model;
 
-public class Delimiter {
+public abstract class Delimiter {
 }
