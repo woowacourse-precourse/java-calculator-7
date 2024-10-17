@@ -1,5 +1,6 @@
 package calculator;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CustomSeparatorManager {
@@ -16,8 +17,10 @@ public class CustomSeparatorManager {
     }
 
     public static Separator getCustomSeparator(String inputString) {
-        return new Separator(PATTERN.matcher(inputString)
-                .group(1));
+        Matcher matcher = PATTERN.matcher(inputString);
+        matcher.find();
+        String customSeparatorString = matcher.group(1);
+        return new Separator(customSeparatorString);
     }
 
     public static String removeSeparatorDeclarationFrom(String inputString) {
