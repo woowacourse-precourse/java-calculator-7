@@ -26,10 +26,42 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀_구분자_사용() {
+    void 기본_구분자_쉼표_처리_테스트() {
         assertSimpleTest(() -> {
-            run("//;\\n1");
-            assertThat(output()).contains("결과 : 1");
+            run("1,2,3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 기본_구분자_콜론_처리_테스() {
+        assertSimpleTest(() -> {
+            run("1:2:3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 쉼표_콜론_혼합_구분자_처리_테스트() {
+        assertSimpleTest(() -> {
+            run("1,2:3,4:5");
+            assertThat(output()).contains("결과 : 15");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_처리_테스트() {
+        assertSimpleTest(() -> {
+            run("//;\n1;2;3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_기본_구분자_혼합_처리_테스트() {
+        assertSimpleTest(() -> {
+            run("//;\n1;2:3");
+            assertThat(output()).contains("결과 : 6");
         });
     }
 
