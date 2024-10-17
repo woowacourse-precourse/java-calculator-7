@@ -25,7 +25,7 @@ public class Parser {
         String delimiter;
         if (isCustomDelimiter(input)) {
             int delimiterIndex = input.indexOf(CUSTOM_DELIMITER_END);
-            delimiter = input.substring(2, delimiterIndex);
+            delimiter = input.substring(CUSTOM_DELIMITER_START_INDEX, delimiterIndex);
             input = input.substring(delimiterIndex + 1);
         } else {
             delimiter = DEFAULT_DELIMITERS;
