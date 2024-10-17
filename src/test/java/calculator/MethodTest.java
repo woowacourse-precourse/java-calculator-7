@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MethodTest {
-    private static final Pattern pattern = Pattern.compile("//(.*)\n(.*)");
+    private static final Pattern pattern = Pattern.compile("//(.*)\\\\n(.*)");
 
     @Test
     @DisplayName("입력값이 정상적으로 들어오게 되는지")
@@ -28,7 +28,7 @@ class MethodTest {
     @DisplayName("시작에 커스텀 구분자(//\n)를 지정할경우 해당 커스텀 구분자를 존재여부 파악(존재할 경우)")
     @Test
     void test1() {
-        String given = "//;\n1;2;3";
+        String given = "//;\\n1;2;3";
         boolean expected = true;
         Matcher matcher = pattern.matcher(given);
 
@@ -52,7 +52,7 @@ class MethodTest {
     @DisplayName("시작에 커스텀 구분자(//\n)를 지정할경우 해당 커스텀 구분자를 리턴하기")
     @Test
     void test3() {
-        String given = "//ㅋ\n1;2;3";
+        String given = "//ㅋ\\n1;2;3";
         String expected = "ㅋ";
         Matcher matcher = pattern.matcher(given);
         matcher.find();
@@ -65,7 +65,7 @@ class MethodTest {
     @DisplayName("시작에 커스텀 구분자(//\n)를 지정할경우 해당 커스텀 구분자를 리턴하기")
     @Test
     void test3_1() {
-        String given = "//ㅋㅋㅋ\n1;2;3";
+        String given = "//ㅋㅋㅋ\\n1;2;3";
         String expected = "ㅋㅋㅋ";
         Matcher matcher = pattern.matcher(given);
         matcher.find();

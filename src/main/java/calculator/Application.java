@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 public class Application {
 
-    private static final Pattern pattern = Pattern.compile("//(.*)\n(.*)");
+    private static final Pattern pattern = Pattern.compile("//(.*)\\\\n(.*)");
 
     public static void main(String[] args) {
         // TODO: 프로그램 구현
@@ -19,9 +19,11 @@ public class Application {
             String customSeparator = getCustomSeparator(matcher);
             String[] dividedNum = divideStringBy(matcher.group(2), customSeparator);
             int sumArr = sum(dividedNum);
+            System.out.println("결과 : " + sumArr);
         }
         String[] dividedNum = divideStringBy(input);
         int sumArr = sum(dividedNum);
+        System.out.println("결과 : " + sumArr);
     }
 
     public static boolean isCustomSeparatorExist(Matcher matcher) {
