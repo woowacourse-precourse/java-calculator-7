@@ -5,9 +5,25 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.regex.Pattern;
 
 public class Application {
     public static List<Character> sep = new ArrayList<>(Arrays.asList(',', ':'));
+
+    /*
+     * 입력에서 커스텀 구분자 설정을 확인해서 존재하면 구분자 리스트에 커스텀 구분자를 넣어준다.
+     * 입력을 커스텀 구분자 이후의 문자열만 남겨서 반환한다.
+     */
+    public static String checkCustomSep(String input) {
+        String regex = "^//.\\\\n.*";
+
+        if ( Pattern.matches(regex, input)) {
+            sep.add(input.charAt(2));
+            input = input.substring(5);
+        }
+
+        return input;
+    }
 
     /*
      * 스택에 저장된 숫자들을 자릿수에 맞게 더해 최종 숫자를 구하는 메서드.
@@ -62,6 +78,8 @@ public class Application {
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         input = scanner.nextLine();
+
+        input = checkCustomSep(input);
 
         int result = getSum(input);
 
