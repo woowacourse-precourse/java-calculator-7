@@ -2,6 +2,6 @@ package calculator.util;
 
 public interface CalculatorConst {
 
-    String START_DELIMITER = "//";
-    String END_DELIMITER = "\\n";
+    String START_CUSTOM_DELIMITER = "//";
+    String END_CUSTOM_DELIMITER = "\\n";
 }
