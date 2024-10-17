@@ -36,19 +36,12 @@
 
 ## 1. Parser
 
-문자열(사용자 입력)을 파싱 상위 클래스
-
-#### CustomSepParser
-
-커스텀 구분자 처리 클래스
-
-#### Validator
-
-토큰 검증 클래스
-
-#### Tokenizer
-
-문자열을 토큰화하 하여 숫자를 추출 클래스
+- [ ] 문자열(사용자 입력)을 파싱 상위 클래스
+    - [ ] CustomSepParser 커스텀 구분자 처리 클래스
+    - [ ] Validator 토큰 검증 클래스
+    - [ ] Tokenizer 문자열을 토큰화 하는 클래스
+    - [ ] Token들의 값이 유효한지 검증하는 클래스
+    - [ ] TokensToDoublesConverter 토큰들을 Double로 변환하는 클래스
 
 ## 2. Calculator
 
