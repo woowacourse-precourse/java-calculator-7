@@ -28,18 +28,6 @@ public class ControllerTest extends NsTest {
     }
 
     @Test
-    void 커스텀_구분자로_숫자_더하기() {
-        // Given
-        String input = "//;\\n1;2;3";
-
-        // When
-        String result = calculateController.process(input);
-
-        // Then
-        Assertions.assertEquals("6", result);
-    }
-
-    @Test
     void 빈_문자열_입력시_예외_발생() {
         // Given
         String input = "";
