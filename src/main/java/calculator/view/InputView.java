@@ -1,10 +1,12 @@
 package calculator.view;
 
+import calculator.dto.request.CalculatorRequest;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
-    public static String enterNumbers() {
+    public static CalculatorRequest enterRequest() {
         System.out.println(ViewMessages.NUMBERS_REQUEST_MESSAGE);
-        return Console.readLine();
+        String input = Console.readLine();
+        return ViewCalculatorParser.parseDelimitersAndInput(input);
     }
 }
