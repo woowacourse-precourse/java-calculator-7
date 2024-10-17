@@ -11,7 +11,7 @@ public class Calculation {
         return INSTANCE;
     }
 
-    public Integer calculate(String[] numbers) {
+    public int calculate(String[] numbers) {
         int sum = 0;
         for(String number : numbers) {
             sum += Integer.parseInt(number);
