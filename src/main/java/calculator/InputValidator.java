@@ -1,2 +1,4 @@
-package calculator;public class InputValidator {
+package calculator;
+
+public class InputValidator {
 }

@@ -1,2 +1,4 @@
-package calculator;public class OutputView {
+package calculator;
+
+public class OutputView {
 }
