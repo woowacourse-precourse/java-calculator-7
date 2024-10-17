@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class InputView {
 
@@ -28,9 +29,7 @@ public class InputView {
     private List<Integer> splitAndParseNumbers(String separators, String numbers) {
         String[] inputTokens = numbers.split(separators);
 
-        return Arrays.stream(inputTokens)
-                .map(this::parseNumber)
-                .toList();
+        return Arrays.stream(inputTokens).map(this::parseNumber).toList();
     }
 
     private int parseNumber(String token) {
@@ -56,7 +55,7 @@ public class InputView {
 
             String customSeparator = getCustomSeparator(input, separatorEndIndex);
 
-            return COMMA + "|" + COLON + "|" + customSeparator;
+            return COMMA + "|" + COLON + "|" + Pattern.quote(customSeparator);
         }
 
         return COMMA + "|" + COLON;
