@@ -77,7 +77,13 @@ public class Parser {
     }
 
     private boolean isCustomDelimiter(String userInput) {
-        return userInput.startsWith("//") && userInput.startsWith("\\n", 3);
+        boolean isCustomDelimiter = userInput.startsWith("//") && userInput.startsWith("\\n", 3);
+
+        if (userInput.startsWith("//") && !userInput.contains("\\n")) {
+            throw new IllegalArgumentException("커스텀 구분자 선언 형식이 잘못되었습니다. 올바른 형식은 //구분자\\n 입니다. 프로그램을 종료합니다.");
+        }
+
+        return isCustomDelimiter;
     }
 
     private void validateNegative(Number number) {
