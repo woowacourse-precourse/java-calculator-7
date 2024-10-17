@@ -16,7 +16,7 @@ public class Application {
 
         validateInput(input);
 
-        ArrayList<Integer> tokens = inputParse(input);
+        ArrayList<BigInteger> tokens = inputParse(input);
 
         printAnswer(calculate(tokens));
 
@@ -74,35 +74,32 @@ public class Application {
         return ('0'<=c && c<='9');
     }
 
-    public static ArrayList<Integer> inputParse(String str){
-        int idx = str.indexOf("\\n");
+    public static ArrayList<BigInteger> inputParse(String input){
+        int idx = input.indexOf("\\n");
         if(idx!=-1){
-            str = str.substring(idx+2);
+            input = input.substring(idx+2);
         }
 
-        ArrayList<Integer> tokens = new ArrayList<>();
+        ArrayList<BigInteger> tokens = new ArrayList<>();
         StringBuilder tmp = new StringBuilder();
-        for(char c : str.toCharArray()){
+        for(char c : input.toCharArray()){
             if(separator.isSeparator(c)){
-                tokens.add(Integer.parseInt(tmp.toString()));
+                tokens.add(new BigInteger(tmp.toString()));
                 tmp.setLength(0);
-            }
-            else{
+            } else{
                 tmp.append(c);
             }
         }
 
         if(!tmp.isEmpty()){
-            tokens.add(Integer.parseInt(tmp.toString()));
+            tokens.add(new BigInteger(tmp.toString()));
         }
 
         return tokens;
     }
 
-    public static BigInteger calculate(ArrayList<Integer> tokens){
-        return tokens.stream()
-                .map(BigInteger::valueOf)
-                .reduce(BigInteger.ZERO, BigInteger::add);
+    public static BigInteger calculate(ArrayList<BigInteger> tokens){
+        return tokens.stream().reduce(BigInteger.ZERO, BigInteger::add);
     }
 
     public static void printAnswer(BigInteger ans){
