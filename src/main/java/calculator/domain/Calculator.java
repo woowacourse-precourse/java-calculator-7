@@ -14,11 +14,15 @@ public class Calculator {
             return 0;
         }
 
-        List<String> delimiters = getCustomDelimiters(input);
+        List<String> delimiters = new ArrayList<>();
+        delimiters.add(",");
+        delimiters.add(":");
+
+        delimiters.addAll(getCustomDelimiters(input));
         String numbers = removeCustomDelimiterPart(input, delimiters.size());
 
         String delimiterPattern = String.join("|", delimiters);
-        return sumNumbers(numbers.split(delimiterPattern + "|,|:"));
+        return sumNumbers(numbers.split(delimiterPattern));
     }
 
     private List<String> getCustomDelimiters(String input) {
@@ -47,10 +51,12 @@ public class Calculator {
 
         for (String number : numbers) {
             number = number.trim();
+
             if (!number.isEmpty()) {
                 ValidationUtils.validateValidInteger(number);
                 int parsedNumber = Integer.parseInt(number);
                 parsedNumbers.add(parsedNumber);
+
                 sum = safeSum(sum, parsedNumber);
             }
         }
