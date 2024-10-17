@@ -8,4 +8,13 @@ public class StringAdder {
         this.consoleIO = consoleIO;
         this.validator = validator;
     }
+
+    private String extractDelimiter(String input) {
+        String defaultDelimiter = ",|:";
+        if (input.startsWith("//")) {
+            int delimiterEndIndex = input.indexOf("\n");
+            return input.substring(2, delimiterEndIndex);
+        }
+        return defaultDelimiter;
+    }
 }
