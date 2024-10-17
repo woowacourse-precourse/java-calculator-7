@@ -16,6 +16,8 @@ public class Calculator {
             String delimiter = ",:";
             String[] split = userInput.split("[" + delimiter + "]");
 
+            validatePositiveNumber(split);
+
             return sum(split);
         }
 
@@ -31,11 +33,24 @@ public class Calculator {
                 continue;
             }
 
+            if (split.startsWith("//") || split.endsWith("\\n")) {
+                throw new IllegalArgumentException("잘못된 커스텀 구분자 에러");
+            }
+
             break;
         }
 
         String[] split = userInput.substring(prev).split("[" + delimiter + "]");
+        validatePositiveNumber(split);
         return sum(split);
+    }
+
+    private static void validatePositiveNumber(String[] split) {
+        for (String s : split) {
+            if (Integer.parseInt(s) <= 0) {
+                throw new IllegalArgumentException("음수 입력 x");
+            }
+        }
     }
 
     private static int sum(String[] split) {
