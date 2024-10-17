@@ -1,7 +1,15 @@
 package calculator;
 
+import calculator.input.InputString;
+
+import java.util.List;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        InputString input = new InputString();
+        String st = input.input();
+
+        List<String> separators = input.findSeparator(st);
+
     }
 }

@@ -24,6 +24,14 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 입력_테스트(){ //입력이 제대로 받아지는지 테스트
+        assertSimpleTest(() -> {
+            run("//;\\n1");
+            assertThat(output()).contains("입력 문자열 : " + "//;\\n1");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
