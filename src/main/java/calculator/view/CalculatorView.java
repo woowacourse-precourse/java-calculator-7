@@ -12,8 +12,4 @@ public class CalculatorView {
     public void showResult(int result) {
         System.out.println("결과 : " + result);
     }
-
-    public void showError(String message) {
-        System.out.println("에러 = " + message);
-    }
 }
