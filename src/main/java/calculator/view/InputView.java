@@ -1,7 +1,7 @@
 package view;
 
 
-import utils.Custom;
+import model.Custom;
 import utils.InputViewValidator;
 import camp.nextstep.edu.missionutils.Console;
 
