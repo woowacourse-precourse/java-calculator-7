@@ -12,11 +12,11 @@ public class Delimiters {
 
     private final Set<String> delimiters;
 
-    public Delimiters() {
+    private Delimiters() {
         this.delimiters = new HashSet<>(INITIAL_DELIMITER);
     }
 
-    public Delimiters(String delimiter) {
+    private Delimiters(String delimiter) {
         this.delimiters = new HashSet<>(Set.of(delimiter));
     }
 

@@ -38,7 +38,8 @@ class DelimitersTest {
     @Test
     void isCustomDelimiter() {
         //given
-        Delimiters delimiters = new Delimiters(";");
+        String input = "//;\\n1;2;3";
+        Delimiters delimiters = Delimiters.from(input);
         //when
         //then
         assertThat(delimiters.isCustomDelimiter()).isTrue();
@@ -48,7 +49,8 @@ class DelimitersTest {
     @Test
     void isDefaultDelimiter() {
         //given
-        Delimiters delimiters = new Delimiters();
+        String input = "1,2:3";
+        Delimiters delimiters = Delimiters.from(input);
         //when
         //then
         assertThat(delimiters.isCustomDelimiter()).isFalse();
@@ -58,7 +60,8 @@ class DelimitersTest {
     @Test
     void getDefaultRegex() {
         //given
-        Delimiters delimiters = new Delimiters();
+        String input = "1,2:3";
+        Delimiters delimiters = Delimiters.from(input);
         //when
         String regex = delimiters.getRegex();
         //then
@@ -69,7 +72,8 @@ class DelimitersTest {
     @Test
     void getCustomRegex() {
         //given
-        Delimiters delimiters = new Delimiters(";");
+        String input = "//;\\n1;2;3";
+        Delimiters delimiters = Delimiters.from(input);
         //when
         String regex = delimiters.getRegex();
         //then
