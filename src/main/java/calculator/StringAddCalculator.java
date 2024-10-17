@@ -16,9 +16,11 @@ public class StringAddCalculator {
             return DEFAULT_VALUE;
         }
 
+        // TODO: 한 줄로 나타내기
         DelimiterAndNumber delimiterAndNumber = extractCustomDelimiterAndNumbers(input);
         String delimiters = delimiterAndNumber.delimiters();
         String numbersString = delimiterAndNumber.numbersString();
+
         List<Integer> numbers = splitNumbers(delimiters, numbersString);
         validateNumbers(numbers);
         return sum(numbers);
