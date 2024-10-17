@@ -5,4 +5,8 @@ public class OutputView {
         System.out.println(END.getMessage() + result);
     }
 
+    public static void userOutput(String result){
+        System.out.println(END.getMessage() + result);
+    }
+
 }

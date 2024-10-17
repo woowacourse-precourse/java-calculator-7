@@ -5,6 +5,9 @@ import calculator.Service.InputParser;
 import calculator.Validator.InputValidator;
 import calculator.View.InputView;
 import calculator.View.OutputView;
+
+import java.util.Arrays;
+
 public class CalculatorController {
 
     private final CalculatorModel calculatorModel;
@@ -24,15 +27,13 @@ public class CalculatorController {
 
             String[] tokens = inputParser.getTokens();
 
-
             inputValidator.validateTokens(tokens);
 
-            long result = calculatorModel.calculateSum(tokens);
+            String result = calculatorModel.calculateSum(tokens);
 
             OutputView.userOutput(result);
 
         }catch (IllegalArgumentException e){
-            System.out.println(e.getMessage());
             throw new IllegalArgumentException();
         }
 

@@ -57,8 +57,23 @@ class CustomTest extends NsTest {
         });
     }
 
+    @Test
+    void Very_Big_Number(){
+        assertSimpleTest(() -> {
+            run("100000000000000000000000000000000000000000000000000000:1");
+            assertThat(output()).contains("결과 : 100000000000000000000000000000000000000000000000000001");
+        });
+    }
 
+    @Test
+    void Negative_Number_Exception(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("-1:2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
 
+    
     @Override
     protected void runMain() {
         Application.main(new String[]{});
