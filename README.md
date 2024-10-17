@@ -6,4 +6,4 @@
 - [x] parser module
     - [x] custom delimiter
     - [x] throw error on invalid input
-- [ ] command line interface
+- [x] command line interface
