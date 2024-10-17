@@ -13,7 +13,7 @@
 - [ ] 잘못된 값이 입력되면 IllegalArgumentException을 발생시킨다.
 
 ## Calculate
-- [ ] 숫자 더하기
+- [X] 숫자 더하기
 
 ## Output
 - [ ] 결과값 출력

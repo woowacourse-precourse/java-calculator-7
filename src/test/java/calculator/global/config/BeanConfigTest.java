@@ -1,6 +1,22 @@
 package calculator.global.config;
 
+import calculator.calculate.service.CalculateService;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
 class BeanConfigTest {
 
-    //TODO bean container는 주입될 bean이 없어 테스트할 수 없으므로 bean이 추가되면 테스트 예정
+    @ParameterizedTest
+    @ValueSource(classes = {CalculateService.class})
+    void 빈_생성_테스트(Class<?> beanClass) {
+        // given
+        Object bean = BeanConfig.getBean(beanClass);
+        //when
+
+        //then
+        Assertions.assertThat(bean)
+                .isNotNull()
+                .isInstanceOf(beanClass);
+    }
 }
