@@ -39,14 +39,14 @@ public class DefaultSeparator implements Separator {
     }
 
     public String createOrString(){
-        String orString = "";
+        StringBuilder orString = new StringBuilder();
         for (int i = 0; i < defaultSeparators.size(); i++) {
             if(i<defaultSeparators.size()-1){
-                orString+=defaultSeparators.get(i)+"|";
+                orString.append(defaultSeparators.get(i)).append("|");
             }else{
-                orString+=defaultSeparators.get(i);
+                orString.append(defaultSeparators.get(i));
             }
         }
-        return orString;
+        return orString.toString();
     }
 }

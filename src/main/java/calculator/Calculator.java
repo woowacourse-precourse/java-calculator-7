@@ -1,5 +1,6 @@
 package calculator;
 
+import camp.nextstep.edu.missionutils.Console;
 import separator.CustomSeparator;
 import separator.CustomSeparatorFormat;
 import separator.DefaultSeparator;
@@ -15,7 +16,7 @@ import java.util.regex.Pattern;
 
 public class Calculator {
 
-    private Separator defaultSeparator;
+    private final Separator defaultSeparator;
 
     public Calculator(DefaultSeparator defaultSeparator) {
         this.defaultSeparator = defaultSeparator;
@@ -27,8 +28,7 @@ public class Calculator {
     public BigInteger run(){
         String inputData = readCalculatorInput();
         Separator separator = generateSeparators(inputData);
-        BigInteger result = getSum(separator);
-        return result;
+        return getSum(separator);
     }
 
     private BigInteger getSum(Separator separator) {
@@ -41,13 +41,7 @@ public class Calculator {
     }
 
     public String readCalculatorInput(){
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            String inputData = br.readLine();
-            return inputData;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        return Console.readLine();
     }
 
     public Separator generateSeparators(String inputData){

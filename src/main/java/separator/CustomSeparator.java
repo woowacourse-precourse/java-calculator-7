@@ -9,8 +9,8 @@ import java.util.regex.Pattern;
 
 public class CustomSeparator implements Separator {
     private final String inputData;
-    private List<String> customSeparators;
-    private CustomSeparatorFormat customSeparatorFormat;
+    private final List<String> customSeparators;
+    private final CustomSeparatorFormat customSeparatorFormat;
 
 
 
@@ -33,8 +33,7 @@ public class CustomSeparator implements Separator {
 
         if (matcher.find()) {
             String group = matcher.group(1);
-            String validatedCustomSeparator = validateCustomSeparator(group);
-            return validatedCustomSeparator;
+            return validateCustomSeparator(group);
         } else {
             throw new IllegalArgumentException("커스텀문자를 찾을 수 없습니다.");
         }

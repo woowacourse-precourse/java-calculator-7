@@ -28,17 +28,17 @@ public class InputGuidelines {
     }
 
     private String joinWithDefaultSeparator(){
-        String defaultSeparatorAsString = "";
+        StringBuilder defaultSeparatorAsString = new StringBuilder();
         List<String> defaultSeparators = defaultSeparator.getSeparator();
 
         for (int i = 0; i < defaultSeparators.size(); i++) {
             if(i<defaultSeparators.size()-1){
-                defaultSeparatorAsString += "( " + defaultSeparators.get(i) + " ),";
+                defaultSeparatorAsString.append("( ").append(defaultSeparators.get(i)).append(" ),");
             }else {
-                defaultSeparatorAsString += "( " + defaultSeparators.get(i) + " )";
+                defaultSeparatorAsString.append("( ").append(defaultSeparators.get(i)).append(" )");
             }
         }
-        return defaultSeparatorAsString;
+        return defaultSeparatorAsString.toString();
     }
 
     public String getJoinWithDefaultSeparator(){
