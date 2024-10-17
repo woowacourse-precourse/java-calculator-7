@@ -16,10 +16,10 @@ class NumberTest {
     @DisplayName("숫자의 기본 값은 0이여야 한다.")
     void defaultNumberZeroTest() {
         // given
-        Number zero = Number.ofZero();
+        Number zero = Number.zero();
 
         // then
-        assertThat(zero).isEqualTo(Number.of("0"));
+        assertThat(zero).isEqualTo(Number.from("0"));
     }
 
     @ParameterizedTest
@@ -27,7 +27,7 @@ class NumberTest {
     @DisplayName("숫자가 아닌 다른 형식이라면 예외가 발생해야 한다.")
     void invalidNumberFormatExceptionTest(String value) {
         // when, then
-        assertThatThrownBy(() -> Number.of(value))
+        assertThatThrownBy(() -> Number.from(value))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -38,8 +38,8 @@ class NumberTest {
         String originValue = "123";
         String compareValue = "123";
 
-        Number originNumber = Number.of(originValue);
-        Number compareNumber = Number.of(compareValue);
+        Number originNumber = Number.from(originValue);
+        Number compareNumber = Number.from(compareValue);
 
         // then
         assertThat(originNumber).isEqualTo(compareNumber);
@@ -52,7 +52,7 @@ class NumberTest {
         String negativeValue = "-123";
 
         // when, then
-        assertThatThrownBy(() -> Number.of(negativeValue))
+        assertThatThrownBy(() -> Number.from(negativeValue))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -63,7 +63,7 @@ class NumberTest {
         String bigDigitsValue = "1".repeat(MAX_NUMBER_DIGITS + 1);
 
         // when, then
-        assertThatThrownBy(() -> Number.of(bigDigitsValue))
+        assertThatThrownBy(() -> Number.from(bigDigitsValue))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -72,14 +72,14 @@ class NumberTest {
     void plusZeroTest() {
         // given
         String value = "1";
-        Number number = Number.of(value);
-        Number zero = Number.ofZero();
+        Number number = Number.from(value);
+        Number zero = Number.zero();
 
         // when
         number.plus(zero);
 
         // then
-        assertThat(number).isEqualTo(Number.of(value));
+        assertThat(number).isEqualTo(Number.from(value));
     }
 
     @Test
@@ -88,14 +88,14 @@ class NumberTest {
         // given
         String value = "1";
         String addValue = "99";
-        Number number = Number.of(value);
-        Number addNumber = Number.of(addValue);
+        Number number = Number.from(value);
+        Number addNumber = Number.from(addValue);
 
         // when
         number.plus(addNumber);
 
         // then
-        assertThat(number).isEqualTo(Number.of("100"));
+        assertThat(number).isEqualTo(Number.from("100"));
     }
 
     @Test
@@ -104,8 +104,8 @@ class NumberTest {
         // given
         String oneValue = "1";
         String bigDigitsValue = "9".repeat(MAX_NUMBER_DIGITS);
-        Number one = Number.of(oneValue);
-        Number maxNumber = Number.of(bigDigitsValue);
+        Number one = Number.from(oneValue);
+        Number maxNumber = Number.from(bigDigitsValue);
 
         // when, then
         assertThatThrownBy(() -> one.plus(maxNumber))

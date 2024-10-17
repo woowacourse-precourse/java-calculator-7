@@ -14,11 +14,11 @@ public class Number {
         this.value = value;
     }
 
-    public static Number ofZero() {
+    public static Number zero() {
         return new Number(BigInteger.ZERO);
     }
 
-    public static Number of(String value) {
+    public static Number from(String value) {
         try {
             return new Number(new BigInteger(value));
         } catch (NumberFormatException ex) {
