@@ -31,4 +31,9 @@ public class Application {
         str = removeSeparator(str, defaultSeparator);
         return str == "";
     }
+
+    public String getCustomSeparator(String input) {
+        String[] arr = input.split("//|\\n");
+        return arr[1];
+    }
 }
