@@ -1,17 +1,30 @@
 package calculator;
 
 public class Calculate {
-    public static void sumString(String input) {
-        String regex = ",+|:+";
-        if ((input.trim().startsWith("//")) && (input.trim().indexOf("\n") != 2)) {
-            regex = input.trim().substring(2, input.indexOf("\n"));
-            String[] inputToArr = input.trim().split(regex);
-            double sum = 0;
-            for (String i : inputToArr) {
-                sum += Double.parseDouble(i);
-            }
+    public static Number sumString(String input) {
 
-            System.out.println(sum);
+        double sum = 0;
+        String[] inputToArr = input.trim().split(Application.separator);
+
+        for (String i : inputToArr) {
+            if (!i.isEmpty()) {
+                try {
+                    double num = Double.parseDouble(i);
+                    if (num <= 0) {
+                        throw new IllegalArgumentException("양수가 아닌 값이 있습니다: " + i);
+                    }
+                    sum += num;
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("숫자가 아닌 값이 있습니다: " + i);
+                }
+            }
         }
+
+        if (sum == (int) sum) {
+            return (int) sum;
+        } else {
+            return sum;
+        }
+
     }
 }
