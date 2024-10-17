@@ -9,7 +9,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
 
-
     @Test
     void 기본_구분자_사용() {
         assertSimpleTest(() -> {
@@ -24,6 +23,11 @@ class ApplicationTest extends NsTest {
 
         assertSimpleTest(() -> {
             run(",:");
+            assertThat(output()).contains("결과 : 0");
+        });
+
+        assertSimpleTest(() -> {
+            run(":1:2,3");
             assertThat(output()).contains("결과 : 0");
         });
 
@@ -45,7 +49,7 @@ class ApplicationTest extends NsTest {
         String toBeChecked = "-1";
 
         //when & then
-        assertThatThrownBy(() -> calculator.isPositiveNum(toBeChecked))
+        assertThatThrownBy(() -> calculator.isPositiveNum(toBeChecked, ""))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -58,27 +62,65 @@ class ApplicationTest extends NsTest {
         });
 
         assertSimpleTest(() -> {
-            run("//;\n1;2,3:4");
+            run("//;\\n1;2,3:4");
             assertThat(output()).contains("결과 : 10");
         });
 
         assertSimpleTest(() -> {
-            run("//\n\n1\n23\n5");
-            assertThat(output()).contains("결과 : 29");
+            run("//\\n1235");
+            assertThat(output()).contains("결과 : 11");
         });
+
+        assertSimpleTest(() -> {
+            run("//;\\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+
+        // 커스텀 구분자로 시작할 때
+        assertSimpleTest(() -> {
+            run("//;\\n;2");
+            assertThat(output()).contains("결과 : 2");
+        });
+
+        // |라는 문자가 포함되었을 때
+        assertSimpleTest(() -> {
+            run("//|\\n|2|3");
+            assertThat(output()).contains("결과 : 5");
+        });
+
+        assertSimpleTest(() -> {
+            run("//||\\n||2||3");
+            assertThat(output()).contains("결과 : 5");
+        });
+
+        assertSimpleTest(() -> {
+            run("//-\\n2--22");
+            assertThat(output()).contains("결과 : 24");
+        });
+
     }
 
 
     @Test
     void 커스텀_구분자가_숫자() {
         assertSimpleTest(() -> {
-            run("//22\n122322");
+            run("//22\\n122322");
             assertThat(output()).contains("결과 : 4");
         });
 
         assertSimpleTest(() -> {
-            run("//22\n222");
+            run("//22\\n222");
             assertThat(output()).contains("결과 : 2");
+        });
+
+        assertSimpleTest(() -> {
+            run("//0\\n2022");
+            assertThat(output()).contains("결과 : 24");
+        });
+
+        assertSimpleTest(() -> {
+            run("//00\\n00");
+            assertThat(output()).contains("결과 : 0");
         });
 
     }
@@ -102,11 +144,25 @@ class ApplicationTest extends NsTest {
         );
 
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("@//*\n1*33*1"))
+                assertThatThrownBy(() -> runException("@//*\\n1*33*1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//*\\n1*-1*3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//00\\n1002000"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//||\\n||2||3|"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
-
 
 
     @Override
