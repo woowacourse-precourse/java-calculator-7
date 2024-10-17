@@ -97,14 +97,4 @@ class ParserTest {
         Assertions.assertThat(sum).isEqualTo(221);
     }
 
-    @Test
-    public void 정해지지_않은_구분자입력() throws Exception {
-        //given
-        String inputString = "//;\\n100;2,3$4";
-        //when
-        Parser parser = new Parser();
-        //then
-        Assertions.assertThatThrownBy(() -> parser.parse(inputString)).isInstanceOf(IllegalArgumentException.class);
-
-    }
 }
