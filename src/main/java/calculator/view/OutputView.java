@@ -8,7 +8,6 @@ public class OutputView {
 
     public void outputResult(Calculator calculator) {
         System.out.print(RESULT_MSG);
-        System.out.println(calculator.getNumbers());
         System.out.println(calculator.getSumNumbers());
     }
 }

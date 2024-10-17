@@ -35,8 +35,4 @@ public class Calculator {
         }
         return sum;
     }
-
-    public List<Integer> getNumbers() {
-        return this.numbers;
-    }
 }
