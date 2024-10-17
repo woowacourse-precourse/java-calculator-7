@@ -1,5 +1,6 @@
 package calculator.service;
 
+import calculator.model.Calculator;
 import calculator.model.PositiveNumbers;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,8 +19,10 @@ public class CalculateService {
 
         addDelimeter(userInput);
         PositiveNumbers positiveNumbers = getPositiveNumbersByDelimeter(userInput);
+        Calculator calculator = new Calculator();
 
-        return null;
+        return calculator.addCalculate(positiveNumbers);
+
     }
 
     //custom Delimeter 존재시 delimeter 에 넣기
@@ -54,6 +57,7 @@ public class CalculateService {
         return true;
     }
 
+    //input 으로 부터 Delimeter 로 PositiveNumbers 추출 및 반환
     private PositiveNumbers getPositiveNumbersByDelimeter(final String userInput) {
 
         String numberAndDelimeters = hasCustomDelimeter(userInput) ?
