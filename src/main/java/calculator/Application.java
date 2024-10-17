@@ -1,6 +1,9 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
@@ -26,6 +29,18 @@ public class Application {
                 System.out.println(str);
             }
         }
+
+        List<String> stringList = new ArrayList<>(Arrays.asList(splitStrings));
+        stringList.removeIf(String::isEmpty);
+        List<Integer> integerList = convertStringsToIntegers(stringList);
+        if (integerList != null) {
+            System.out.println("빈 문자열을 제외한 모든 문자열이 숫자입니다.");
+            for (int i : integerList) {
+                System.out.println(i);
+            }
+        } else {
+            System.out.println("숫자가 아닌 문자열이 존재합니다.");
+        }
     }
 
     private static String getCustomDelimiter(String string) {
@@ -39,5 +54,23 @@ public class Application {
             return null;
         }
         return string.substring(2, 3);
+    }
+
+    private static List<Integer> convertStringsToIntegers(List<String> stringList) {
+        boolean isAllDigits = true;
+        List<Integer> integerList = new ArrayList<>();
+
+        for (String str : stringList) {
+            if (str.length() != 1 || !Character.isDigit(str.charAt(0))) {
+                isAllDigits = false;
+                break;
+            }
+            integerList.add(Integer.parseInt(str));
+        }
+
+        if (isAllDigits) {
+            return integerList;
+        }
+        return null;
     }
 }
