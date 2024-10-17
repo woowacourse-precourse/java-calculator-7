@@ -44,6 +44,15 @@ public class DelimiterSeparatorTest {
     }
 
     @Test
+    public void 구분자_숫자_등록_에러() {
+        String userInput = "//2\\n123";
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            registerCustomDelimiter(userInput);
+        });
+        assertEquals("숫자는 커스텀 구분자로 등록하지 못합니다.", exception.getMessage());
+    }
+
+    @Test
     public void 구분자_등록_성공() {
         String userInput = "//;\\n123";
         int result = registerCustomDelimiter(userInput);
