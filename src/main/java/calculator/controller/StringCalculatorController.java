@@ -18,7 +18,7 @@ public class StringCalculatorController {
         return new InputData(input);
     }
 
-    public Delimiter splitDelimiterPart(InputData inputData){
+    public Delimiter createDelimiterPart(InputData inputData){
         if(inputData.isDelimiter()) {
             return new CustomDelimiter();
         }
