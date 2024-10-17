@@ -7,4 +7,12 @@ public class NumberParser {
         }
         return inputArr;
     }
+
+    public int sumNumber(String[] inputArr){
+        int sum = 0;
+        for(int i=0; i<inputArr.length; i++){
+            sum += Integer.parseInt(inputArr[i]);
+        }
+        return sum;
+    }
 }
