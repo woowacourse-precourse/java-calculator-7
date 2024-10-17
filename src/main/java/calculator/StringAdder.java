@@ -48,7 +48,7 @@ public class StringAdder {
 
         String[] numbers = splitNumbers(input, delimiter);
 
-        // 검증 단계
+        validator.validate(numbers);
 
         return sumNumbers(numbers);
     }
