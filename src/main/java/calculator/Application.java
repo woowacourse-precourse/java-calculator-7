@@ -58,7 +58,9 @@ public class Application {
         regex = ".*[^" + regex + "].*";
         return input.matches(regex);
     }
-
-
+    
+    private static boolean startAndEndWithNumber(String input){
+        return input.matches("^[0-9].*[0-9]$");
+    }
 
 }
