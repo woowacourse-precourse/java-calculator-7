@@ -17,6 +17,10 @@ public class CustomDelimiterParser {
         return Optional.empty();
     }
 
+    public String excludeFromPrefixToSuffixBy(String input) {
+        return input.substring(getSuffixIndex(input) + SUFFIX.length());
+    }
+
     public boolean hasCustomDelimiter(String input) {
         if (!input.startsWith(PREFIX)) {
             return false;
