@@ -1,8 +1,8 @@
 package calculator.service;
 
-import calculator.util.NumberValidator;
-
 import java.util.Arrays;
+
+import static calculator.util.Validator.isValidNumber;
 
 public class ParsingService {
 
@@ -47,7 +47,7 @@ public class ParsingService {
     }
 
     private int parsePositiveNumber(String numberString) {
-        NumberValidator.isValidNumber(numberString);
+        isValidNumber(numberString);
         return Integer.parseInt(numberString);
     }
 }
