@@ -12,9 +12,11 @@ public class ProgramController {
 	}
 
 	public void run() {
-		while(true) {
-			List<Long> numbers = drawNumber();
-		}
+			Calculator calculator = new Calculator(drawNumber());
+			System.out.println(calculator.getCalculationNumbers());
+			calculator.calculateSum();
+			System.out.println(calculator.getSum());
+
 	}
 
 	private List<Long> drawNumber() {
