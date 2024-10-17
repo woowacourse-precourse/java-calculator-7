@@ -1,6 +1,6 @@
 package calculator;
 
-import static calculator.input.stringInput.getInput;
+import static calculator.input.StringInput.getInput;
 
 public class Application {
     public static void main(String[] args) {
