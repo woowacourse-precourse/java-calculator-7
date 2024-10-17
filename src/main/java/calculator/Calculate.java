@@ -26,12 +26,15 @@ public class Calculate {
             if(numbers.charAt(i) == customSeparator.charAt(0)) {
                 continue;
             }
-            if(Character.isDigit(numbers.charAt(i)) && numbers.charAt(i) - '0' > 0) {
-                sum += numbers.charAt(i) - '0';
-            } else {
-                throw new IllegalArgumentException();
-            }
+            sum += isPositiveNumber(numbers.charAt(i));
         }
         return sum;
+    }
+
+    private static int isPositiveNumber(char num) {
+        if(Character.isDigit(num) && num - '0' > 0) {
+            return num - '0';
+        }
+        throw new IllegalArgumentException();
     }
 }
