@@ -3,7 +3,7 @@ package calculator;
 public class Application {
 
     public static String defaultSeparator = ",+|:+";
-    public static String separator = "";
+    public static String separator = null;
 
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을  입력해 주세요.");
@@ -12,7 +12,7 @@ public class Application {
         // 애플리케이션 종료
 
         try {
-            SetSeparator.setSeparator(userInput);
+            userInput = SetSeparator.setSeparator(userInput);
             StringValidator.nullValidate(userInput);
             StringValidator.emptyValidate(userInput);
             StringValidator.numValidate(userInput);
