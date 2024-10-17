@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NumberService {
+    private static final String CANNOT_INPUT_NEGATIVE_NUM = "음수는 입력할 수 없습니다.";
+    private static final String CANNOT_INPUT_CHARACTER = "구분자 외의 문자는 입력 불가능합니다.";
 
     public static void extractNum(){
         String[] separatedVals = ValueService.getSeparatedValue();
@@ -17,7 +19,7 @@ public class NumberService {
         for(String separatedVal : separatedVals){
             int num = convertToInteger(separatedVal);
             if(num<0){
-                throw new IllegalArgumentException("Invalid number format");
+                throw new IllegalArgumentException(CANNOT_INPUT_NEGATIVE_NUM);
             }else{
                 numbers.add(num);
             }
@@ -29,7 +31,7 @@ public class NumberService {
         try {
             return Integer.parseInt(separatedVal);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid number format");
+            throw new IllegalArgumentException(CANNOT_INPUT_CHARACTER);
         }
     }
 
