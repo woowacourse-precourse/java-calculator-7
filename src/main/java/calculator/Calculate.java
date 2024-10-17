@@ -16,8 +16,11 @@ public class Calculate {
             customSeparator = matcher.group(1);
         }
         input = input.replaceAll("//(.*?)\n", "");
-
         String numbers = input.replaceAll("[,:]", "");
+        addition(customSeparator, numbers);
+    }
+
+    private static int addition(String customSeparator, String numbers) {
         int sum = 0;
         for(int i = 0; i < numbers.length(); i++) {
             if(numbers.charAt(i) == customSeparator.charAt(0)) {
@@ -29,6 +32,6 @@ public class Calculate {
                 throw new IllegalArgumentException();
             }
         }
-        System.out.println(sum);
+        return sum;
     }
 }
