@@ -39,6 +39,12 @@ public class Separator {
 
     private String addCustomSeparator(String numbers, int newlineIndex) {
         String customSeparator = numbers.substring(2, newlineIndex);
+        if(Character.isDigit(customSeparator.charAt(0))) {
+            throw new IllegalArgumentException();
+        }
+        if(customSeparator.length() > 1) {
+            throw new IllegalArgumentException();
+        }
         availableSeparators.add(customSeparator);
         return numbers.substring(newlineIndex+2);
     }
