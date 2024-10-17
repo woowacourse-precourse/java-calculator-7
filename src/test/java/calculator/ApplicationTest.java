@@ -24,6 +24,23 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 기본_구분자로_문자열_분리() {
+        String input = "1,2:3";
+        String Delimiter = "[,|:]";
+        String[] result = Application.splitByDelimiter(input, Delimiter);
+        String[] answer = {"1", "2", "3"};
+        assertThat(result).isEqualTo(answer);
+    }
+    @Test
+    void 커스텀_구분자로_문자열_분리() {
+        String input = "1;2;3";
+        String Delimiter = ";";
+        String[] result = Application.splitByDelimiter(input, Delimiter);
+        String[] answer = {"1", "2", "3"};
+        assertThat(result).isEqualTo(answer);
+    }
+
 
     // 커스텀 구분자가 문자열일 경우 subString에서의 구분자들이 모두 커스텀 구분자 문자열을 포함해야하는 테스트
 

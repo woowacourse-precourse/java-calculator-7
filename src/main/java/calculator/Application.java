@@ -80,8 +80,8 @@ public class Application {
     /*
     * 문자열을 주어진 구분자를 기준으로 분리하여 배열로 변환하는 메서드
      */
-    public static String[] splitByDelimiter(String input, String Delimiter){
-        throw new UnsupportedOperationException("splitByDelimiter() 아직 구현되지 않았습니다.");
+    public static String[] splitByDelimiter(String input, String delimiter){
+        return input.split(delimiter);
     }
 
 
