@@ -25,4 +25,8 @@ public class StringAdder {
         }
         return input;
     }
+
+    private String[] splitNumbers(String input, String delimiter) {
+        return input.split(delimiter);
+    }
 }
