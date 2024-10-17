@@ -15,4 +15,7 @@ public class InputDataReader {
         System.out.println(INPUT_MESSAGE);
     }
 
+    public static void close() {
+        Console.close();
+    }
 }
