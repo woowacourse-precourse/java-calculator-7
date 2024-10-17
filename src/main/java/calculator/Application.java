@@ -1,7 +1,10 @@
 package calculator;
 
-import calculator.model.Delimiter;
+import calculator.model.DelimiterHandler;
+import calculator.model.ExpressionHandler;
 import calculator.view.ConsoleView;
+
+import java.util.StringTokenizer;
 
 public class Application {
     public static void main(String[] args) {
@@ -11,11 +14,16 @@ public class Application {
         String expression = consoleView.getExpression();
 
         // 2. custom 구분자 확인
-        Delimiter delimiter = new Delimiter();
-        char customDelimiter = delimiter.getDelimiter(expression);
+        DelimiterHandler delimiterHandler = new DelimiterHandler();
+        char customDelimiter = delimiterHandler.getDelimiter(expression); // 사용되지 않는 문제 발생
+        boolean customDelimiterFlag = delimiterHandler.getCustomDelimiterFlag();
 
-        // 테스트용 커스텀 구분자 출력
-        System.out.println(customDelimiter);
+        // 3. 문자열 tokenizing
+        ExpressionHandler expressionHandler = new ExpressionHandler();
+        expression = expressionHandler.filterExpression(expression, customDelimiterFlag);
+
+        StringTokenizer tokenizedExpression = expressionHandler.tokenizeExpression(expression);
+
 
 
     }
