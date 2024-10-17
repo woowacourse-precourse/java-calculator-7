@@ -10,15 +10,15 @@ public class Value {
         originalValue = userInput;
     }
 
-    public static void saveParts(String[] parts){
-        separatedValue = Arrays.copyOf(parts, parts.length);
-    }
-
     public static String getOriginalInput(){
         return originalValue;
     }
 
     public static String[] getSeparatedValue(){
         return separatedValue;
+    }
+
+    public static void saveParts(String[] parts){
+        separatedValue = Arrays.copyOf(parts, parts.length);
     }
 }

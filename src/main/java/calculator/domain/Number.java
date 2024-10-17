@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Number {
-    private static List<Integer> numbers = new ArrayList<>();
+    private static List<Integer> numbers;
 
-    public static void setNumbers(List<Integer> nums){
-        List<Integer> copy = new ArrayList<>(nums);  // 복사본 생성
+    public static void setNumbers(List<Integer> originalNumbers){
+        numbers = new ArrayList<>();
+        List<Integer> copy = new ArrayList<>(originalNumbers);
         for (Integer number : copy) {
             numbers.add(number);
         }
