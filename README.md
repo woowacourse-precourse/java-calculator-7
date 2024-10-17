@@ -36,7 +36,7 @@
 - 사용자의 입력에 대해 예외처리
   - [x] 숫자가 아닌 문자를 입력한 경우`IllegalArgumentException 발생`
   - [X] 잘못된 구분자를 사용하였을 경우`IllegalArgumentException 발생`
-  - [ ] 커스텀 구분자 등록 시 2개 이상의 특수문자를 입력할 경우`IllegalArgumentException 발생`
+  - [X] 커스텀 구분자 등록 시 2개 이상의 특수문자를 입력할 경우`IllegalArgumentException 발생`
   - [X] 커스텀 구분자 등록 시 `-`또는 공백을 입력하려 할 경우`IllegalArgumentException 발생`
   `잘못된 구분자를 입력하셨습니다.'`
   - [x] 공백만 입력 시 0을 반환
