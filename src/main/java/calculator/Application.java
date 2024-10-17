@@ -13,6 +13,7 @@ public class Application {
     public static List<String> separators = new ArrayList<>(Arrays.asList(",", ":"));
 
     public static void main(String[] args) {
+        displayHelp();
         String input = readLine();
 
         if (isCustomSeparator(input)) {
@@ -21,7 +22,7 @@ public class Application {
         int[] numbers = extractNumbers(input, separators);
         int sumValue = sum(numbers);
 
-        System.out.println(sumValue);
+        displayResult(sumValue);
     }
 
     public static int sum(int[] numbers) {
@@ -61,5 +62,13 @@ public class Application {
         } else {
             throw new IllegalArgumentException("커스텀 구분자 형식이 틀렸습니다.");
         }
+    }
+
+    public static void displayHelp() {
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+    }
+
+    public static void displayResult(int sumValue) {
+        System.out.println("결과 : " + sumValue);
     }
 }
