@@ -7,11 +7,11 @@ public class InputStructure {
     public InputStructure(String str){
         if(str.startsWith("//")){
             int idx = str.indexOf("\\n");
-            if(idx == -1){
+            if(idx != 2 && idx != 3){
                 throw new IllegalArgumentException();
             }
-            this.customSeparator = str.charAt(3);
             this.formulaString = str.substring(idx+2);
+            if(idx==3) this.customSeparator = str.charAt(2);
         } else{
             this.formulaString = str;
         }
