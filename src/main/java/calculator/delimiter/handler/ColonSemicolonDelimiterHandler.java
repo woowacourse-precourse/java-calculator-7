@@ -1,7 +1,5 @@
 package calculator.delimiter.handler;
 
-import calculator.delimiter.handler.DelimiterHandler;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +19,6 @@ public class ColonSemicolonDelimiterHandler implements DelimiterHandler {
 
     @Override
     public boolean isSupport(String str) {
-        return str.contains(",") || str.contains(":");
+        return str.matches("[\\d,:]*");
     }
 }

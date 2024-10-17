@@ -16,8 +16,12 @@ public class CustomDelimiterHandler implements DelimiterHandler {
 
         str = str.substring(str.indexOf("\\n") + 2);
 
+        if (str.matches(".*-\\d+.*")) {
+            throw new IllegalArgumentException("음수가 포함되어 있습니다.");
+        }
+
         if (!str.matches("\\d+(?:" + Pattern.quote(delimiter) + "\\d+)*")) {
-            throw new IllegalArgumentException("형식이 일치하지 않습니다");
+            throw new IllegalArgumentException("형식이 일치하지 않습니다.");
         }
 
         return Arrays.stream(str.split(Pattern.quote(delimiter)))
@@ -26,7 +30,7 @@ public class CustomDelimiterHandler implements DelimiterHandler {
 
     @Override
     public boolean isSupport(String str) {
-        return str.contains("//") && str.contains("\\n");
+        return str.matches("//.+\\\\n.*");
     }
 
     public String extractDelimiter(String s) {

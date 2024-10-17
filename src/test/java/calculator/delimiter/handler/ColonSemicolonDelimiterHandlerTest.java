@@ -6,55 +6,33 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ColonSemicolonDelimiterHandlerTest {
+    private ColonSemicolonDelimiterHandler handler = new ColonSemicolonDelimiterHandler();
+
     @Test
-    @DisplayName(", 구분자를 사용하여 문자열을 나눈다.")
-    void when_split_by_comma_then_return_list() {
-        // given
-        String s = "1,2,3";
-
-        ColonSemicolonDelimiterHandler handler = new ColonSemicolonDelimiterHandler();
-
-        // when
-        List<String> stringList = handler.split(s);
-
-        // then
-        Assertions.assertThat(stringList).hasSize(3)
-                .containsExactly("1", "2", "3");
+    @DisplayName("support() 메서드는 구분자로 ,와 :만 들어올 수 있다.")
+    void when_delimiter_is_comma_or_colon_then_return_true() {
+        assertThat(handler.isSupport(",,,")).isTrue();
+        assertThat(handler.isSupport(":::")).isTrue();
+        assertThat(handler.isSupport(",:")).isTrue();
+        assertThat(handler.isSupport(",:;")).isFalse();
+        assertThat(handler.isSupport("!@#$%^&*()")).isFalse();
     }
 
     @Test
-    @DisplayName(": 구분자를 사용하여 문자열을 나눈다.")
-    void when_split_by_colon_then_return_list() {
+    @DisplayName(",와 :구분자를 사용하여 나눈 문자열을 문자열 리스트로 반환한다.")
+    void returns_string_list_by_splitting_using_comma_and_colon_delimiters() {
         // given
-        String s = "1:2:3";
-
-        ColonSemicolonDelimiterHandler handler = new ColonSemicolonDelimiterHandler();
+        String s = "1,2,3,4:5";
 
         // when
         List<String> stringList = handler.split(s);
 
         // then
-        Assertions.assertThat(stringList).hasSize(3)
-                .containsExactly("1", "2", "3");
-    }
-
-    @Test
-    @DisplayName(",와 : 구분자를 사용하여 문자열을 나눈다.")
-    void when_split_by_commaAndColon_then_return_list() {
-        // given
-        String s = "1111:2222:3333,4444";
-
-        ColonSemicolonDelimiterHandler handler = new ColonSemicolonDelimiterHandler();
-
-        // when
-        List<String> stringList = handler.split(s);
-
-        // then
-        Assertions.assertThat(stringList).hasSize(4)
-                .containsExactly("1111", "2222", "3333", "4444");
+        assertThat(stringList).hasSize(5).containsExactly("1", "2", "3", "4", "5");
     }
 
     @Test
@@ -62,8 +40,6 @@ class ColonSemicolonDelimiterHandlerTest {
     void test() {
         // given
         String s = "1:2:-3,4";
-
-        ColonSemicolonDelimiterHandler handler = new ColonSemicolonDelimiterHandler();
 
         // when, then
         assertThatThrownBy(() -> handler.split(s))

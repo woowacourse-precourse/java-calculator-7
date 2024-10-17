@@ -1,7 +1,5 @@
 package calculator.delimiter.handler;
 
-import calculator.delimiter.handler.DelimiterHandler;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +11,6 @@ public class NoDelimiterHandler implements DelimiterHandler {
 
     @Override
     public boolean isSupport(String str) {
-        return true;
+        return str.isEmpty();
     }
 }
