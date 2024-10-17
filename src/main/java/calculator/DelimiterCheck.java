@@ -1,7 +1,5 @@
 package calculator;
 
-import java.util.StringTokenizer;
-
 public class DelimiterCheck {
 
     // Application에서 사용자가 입력한 수식에 대해서 구분자만 제외하고 숫자만 추출
@@ -20,12 +18,13 @@ public class DelimiterCheck {
 
     //커스텀 구분자 커맨드 입력여부 검증 로직
     private void getCustomDelimiter() {
-        if (inputString.startsWith("//") && (inputString.indexOf("\\n",3)!= -1)) {
+        if (inputString.startsWith("//") && (inputString.substring(3, 5).equals("\\n"))) {
             String customDelimiter = Character.toString(inputString.charAt(2));
+
             // 커스텀 문자열로 사용할 수 없는 문자들 예외처리
-//            if (customDelimiter.equals(" ") || customDelimiter.equals(".") || customDelimiter.equals("-")) {
-//                throw new IllegalAccessException();
-//            }
+            if (customDelimiter.equals(" ") || customDelimiter.equals(".") || customDelimiter.equals("-")) {
+                throw new IllegalArgumentException("잘못된 구분자를 입력하셨습니다.");
+            }
             delimiter = ",|:|" + customDelimiter;
             // 커맨드 입력 이후의 문자열만 inputString 지정
             inputString = inputString.substring(inputString.indexOf("\\n")+2);
@@ -67,9 +66,12 @@ public class DelimiterCheck {
         intNumArray = new int[splitFormulaArray.length];
         for (int i = 0; i < splitFormulaArray.length; i++) {
             String beforeConvert = splitFormulaArray[i];
-            intNumArray[i] = Integer.parseInt(beforeConvert);
+            try {
+                intNumArray[i] = Integer.parseInt(beforeConvert);
+            } catch (NumberFormatException e){
+                throw new IllegalArgumentException("잘못된 형식입니다.");
+            }
         }
-
     }
 
     // String으로 저장되어있는 배열을 Double 배열로 변환

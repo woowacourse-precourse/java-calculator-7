@@ -8,21 +8,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
-//    @Test
-//    void 커스텀_구분자_사용() {
-//        assertSimpleTest(() -> {
-//            run("//;\n1");
-//            assertThat(output()).contains("결과 : 1");
-//            System.out.println(output());
-//        });
-//    }
+    @Test
+    void 커스텀_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("//;\\n1");
+            assertThat(output()).contains("결과 : 1");
+        });
+    }
 
     @Test
     void 정수_사용() {
         assertSimpleTest(() -> {
             run("1,2:3");
             assertThat(output()).contains("결과 : 6");
-            System.out.println(output());
         });
     }
 
@@ -30,8 +28,7 @@ class ApplicationTest extends NsTest {
     void 음수_사용() {
         assertSimpleTest(() -> {
             run("-1,2,3");
-            assertThat(output()).contains("4");
-            System.out.println(output());
+            assertThat(output()).contains("결과 : 4");
         });
     }
 
@@ -40,17 +37,22 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("1.1,2,3");
             assertThat(output()).contains("결과 : 6.1");
-            System.out.println(output());
         });
     }
 
+    @Test
+    void 공백_입력() {
+        assertSimpleTest(() -> {
+            run("\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
 
     @Test
     void 예외_테스트1() {
         assertSimpleTest(() -> {
             run(",1   1");
-            assertThat(output()).contains("11");
-            System.out.println(output());
+            assertThat(output()).contains("결과 : 11");
         });
     }
 
@@ -58,37 +60,40 @@ class ApplicationTest extends NsTest {
     void 예외_테스트2() {
         assertSimpleTest(() -> {
             run("1 , 1, 1  1");
-            assertThat(output()).contains("14");
-            System.out.println(output());
+            assertThat(output()).contains("결과 : 13");
         });
     }
-//
-//    @Test
-//    void 예외_테스트3() {
-//        assertSimpleTest(() -> {
-//            run("");
-//            assertThat(output()).contains("");
-//            System.out.println(output());
-//        });
-//    }
-//
-//
-//    @Test
-//    void 예외_테스트4() {
-//        assertSimpleTest(() -> {
-//            run("");
-//            assertThat(output()).contains("");
-//            System.out.println(output());
-//        });
-//    }
-//
+
+    @Test
+    void 예외_테스트3() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("////가나다라"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트4() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//-\\n1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트5() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//..\\n1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
 //
 //    @Test
 //    void 예외_테스트5() {
 //        assertSimpleTest(() -> {
 //            run("");
 //            assertThat(output()).contains("");
-//            System.out.println(output());
 //        });
 //    }
 //
