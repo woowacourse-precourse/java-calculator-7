@@ -11,7 +11,8 @@ public class StringCalculator {
     private static final String BASIC_DELIMITER = Constants.COMMA + "|" + Constants.COLON;
     private static final String REGEX = "\\//(.)\\\\n(.*)";
     private static final Pattern PATTERN = Pattern.compile(REGEX);
-    private static final int FIRST_LETTER = 0;
+    private static final int FIRST_LETTER_INDEX
+            = 0;
     private static final int FIRST = 1;
     private static final int SECOND = 2;
 
@@ -86,7 +87,7 @@ public class StringCalculator {
     }
 
     private static void checkUndefinedDelimiter(String string, String delimiter) {
-        char asciiOfDelimiter = delimiter.charAt(FIRST_LETTER);
+        char asciiOfDelimiter = delimiter.charAt(FIRST_LETTER_INDEX);
         char letter;
 
         for (int i = 0; i < string.length(); i++) {
