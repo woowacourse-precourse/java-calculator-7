@@ -11,9 +11,9 @@ public class CalculatorLogic {
 
     public String extractDelimiter(String input) {
         if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
-            return String.valueOf(input.charAt(DELIMITER_INDEX));
+            return String.valueOf(input.charAt(DELIMITER_INDEX)); // //이후 입력된 첫번째 문자는 구분자
         }
-        return DEFAULT_DELIMITER;
+        return DEFAULT_DELIMITER;  //정규식 문법으로 , 또는 :를 구분자로 인식함(|는 or)
     }
 
     public List<Integer> extractNumbers(String input, String delimiter) {
@@ -29,6 +29,6 @@ public class CalculatorLogic {
     public int calculate(List<Integer> numbers) {
         return numbers.stream()
                 .mapToInt(Integer::intValue)
-                .sum();
+                .sum();//Integer 객체에 대해서는 sum()사용 불가, int로 unboxing 필요
     }
 }

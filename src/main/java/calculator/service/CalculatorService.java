@@ -28,11 +28,11 @@ public class CalculatorService {
     private String getValidatedDelimiter(Scanner scanner) {
         String delimiter = calculatorLogic.extractDelimiter(scanner.nextLine());
         if (containsSpecialCharacter(delimiter)) {
-            delimiter = ESCAPE_PREFIX + delimiter;
+            delimiter = ESCAPE_PREFIX + delimiter; //dangling 오류 발생 문자 처리
         }
         return delimiter;
     }
-
+    //ApplicationTest 커스텀 구분자 테스트 위한 기능 - 구분자 뒤에 개행이 아닌 \\n가 입력됨
     private boolean containsSpecialCharacter(String delimiter) {
         Matcher matcher = SPECIAL_CHARACTERS_PATTERN.matcher(delimiter);
         return matcher.find();
