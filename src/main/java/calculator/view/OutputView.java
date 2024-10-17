@@ -6,10 +6,10 @@ public class OutputView {
     }
 
     public static void printCalculateStartMessage() {
-        System.out.println(CalculateMessage.INPUT_STRING);
+        System.out.println(CalculateMessage.INPUT_STRING.getMessage());
     }
 
-    public static void printResultMessage() {
-        System.out.println(CalculateMessage.RESULT);
+    public static void printResultMessage(int result) {
+        System.out.println(CalculateMessage.RESULT.getMessage() + result);
     }
 }

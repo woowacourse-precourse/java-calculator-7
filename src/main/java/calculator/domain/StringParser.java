@@ -14,8 +14,7 @@ public class StringParser {
     public static int calculateInput(String input) {
         String[] numbers = splitCustomInput(input);
         List<Integer> intNumbers = convertIntList(numbers);
-        int result = 0;
-        return result;
+        return intNumbers.stream().mapToInt(Integer::intValue).sum();
     }
 
     public static String[] splitCustomInput(String input) {

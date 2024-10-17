@@ -15,5 +15,6 @@ public class CalculatorController {
         } else {
             result = StringParser.calculateInput(input);
         }
+        OutputView.printResultMessage(result);
     }
 }
