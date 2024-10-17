@@ -9,20 +9,11 @@ import java.util.regex.Pattern;
 public class BasicSeparatorParser implements SeparatorParser {
 
 	public static final String BASIC_CUSTOM_SEPARATOR_PATTERN = "(/{2})(\\D)(\\\\n)";
-	public static final String BASIC_VALID_CUSTOM_SEPARATOR_PATTERN = "^(/{2}\\D\\\\n)*(\\d+\\D)*\\d+$";
 	private static final Pattern PATTERN = Pattern.compile(BASIC_CUSTOM_SEPARATOR_PATTERN);
-	private static final Pattern VALID_PATTERN = Pattern.compile(BASIC_VALID_CUSTOM_SEPARATOR_PATTERN);
 	private static final List<Character> BASIC_SEPARATORS = Arrays.asList(new Character[] {',', ':'});
 
-	private static void isValid(String expression) {
-		if (!VALID_PATTERN.matcher(expression).matches()) {
-			throw new IllegalArgumentException(ParserError.INVALID_FORMAT_SEPARATOR.getMessage());
-		}
-	}
-
 	@Override
-	public String parse(String expression, Set<Character> separators) {
-		isValid(expression);
+	public void parse(String expression, Set<Character> separators) {
 		Matcher matcher = PATTERN.matcher(expression);
 		separators.addAll(BASIC_SEPARATORS);
 
@@ -33,9 +24,6 @@ public class BasicSeparatorParser implements SeparatorParser {
 				throw new IllegalArgumentException(ParserError.DUPLICATION_SEPARATOR.getMessage());
 			}
 		}
-
-		String mathematicalExpression = expression.replaceAll(BASIC_CUSTOM_SEPARATOR_PATTERN, "");
-		return mathematicalExpression;
 	}
 
 	@Override
