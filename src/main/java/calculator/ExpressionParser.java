@@ -20,23 +20,23 @@ public class ExpressionParser {
         if (!validator.isValidateExpression(expression)) {
             throw new IllegalArgumentException("Invalid expression: " + expression);
         }
-        Queue<Integer> operandQueue = parseOperand(expression);
-        Queue<Separator> separatorQueue = parseSeparator(expression);
+        Deque<Integer> operandQueue = parseOperand(expression);
+        Deque<Separator> separatorQueue = parseSeparator(expression);
         return new Expression(separatorQueue, operandQueue);
     }
 
-    private Queue<Integer> parseOperand(String expression) {
+    private Deque<Integer> parseOperand(String expression) {
         return Arrays.stream(expression.split(separators.toRegexAllowOneOfSeparator()))
                 .map(Integer::parseInt)
                 .collect(Collectors.toCollection(LinkedList::new));
     }
 
-    private Queue<Separator> parseSeparator(String expression) {
-        Queue<Separator> separatorQueue = new LinkedList<>();
+    private Deque<Separator> parseSeparator(String expression) {
+        Deque<Separator> separatorDeque = new LinkedList<>();
         Matcher matcher = pattern.matcher(expression);
         while (matcher.find()) {
-            separatorQueue.add(new Separator(matcher.group()));
+            separatorDeque.add(new Separator(matcher.group()));
         }
-        return separatorQueue;
+        return separatorDeque;
     }
 }

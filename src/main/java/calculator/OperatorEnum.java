@@ -1,17 +1,18 @@
 package calculator;
 
-import java.util.function.BinaryOperator;
+import calculator.arithmeticUnit.ArithmeticFunction;
+import calculator.arithmeticUnit.PlusFunction;
 
 public enum OperatorEnum {
-    PLUS((leftOperand, rightOperand) -> leftOperand + rightOperand);
+    PLUS(PlusFunction.getInstance());
 
-    private final BinaryOperator<Integer> biFunction;
+    private final ArithmeticFunction arithmeticFunction;
 
-    OperatorEnum(BinaryOperator<Integer> biFunction) {
-        this.biFunction = biFunction;
+    OperatorEnum(ArithmeticFunction arithmeticFunction) {
+        this.arithmeticFunction = arithmeticFunction;
     }
 
-    public int operate(int leftOperand, int rightOperand) {
-        return biFunction.apply(leftOperand, rightOperand);
+    public ArithmeticFunction getArithmeticFunction() {
+        return arithmeticFunction;
     }
 }

@@ -1,5 +1,7 @@
 package calculator;
 
+import calculator.arithmeticUnit.ExpressionExecutor;
+
 import java.util.Set;
 
 public class SeparatorExpressionCalculator {
@@ -15,6 +17,8 @@ public class SeparatorExpressionCalculator {
     public void operate() {
         String input = getInputFromConsole();
         Expression expression = parseToExpression(input);
+        ExpressionExecutor expressionExecutor = new ExpressionExecutor(operatorMap);
+        int result = expressionExecutor.calculate(expression);
     }
 
     private Expression parseToExpression(String input) {
