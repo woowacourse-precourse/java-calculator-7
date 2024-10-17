@@ -12,7 +12,7 @@ public class Parser {
 
         int endIndex = 2;
         for(; endIndex < string.length()-1; endIndex++){
-            if(string.substring(endIndex,endIndex+2).equals(CUSTOM_DELIMITER_SUFFIX))
+            if(string.startsWith(CUSTOM_DELIMITER_SUFFIX, endIndex))
                break;
         }
 
