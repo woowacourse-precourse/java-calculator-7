@@ -37,6 +37,10 @@ public class Application {
         return input.matches("\\d");
     }
 
+    public static boolean isLongOverflow(Long inputNum) {
+        return (inputNum < 0);
+    }
+
     public static void getNumber(String userInput) {
         StringBuilder numberBuffer = new StringBuilder();
         for (int i = 0; i < userInput.length(); i++) {
