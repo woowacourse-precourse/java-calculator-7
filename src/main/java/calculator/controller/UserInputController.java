@@ -11,14 +11,22 @@ public class UserInputController {
     public UserInputController(UserInput userInput){
         this.userInput = userInput;
         userInputMessage = userInput.promptUserInput();
+        checkDelimiterAndNumber(userInputMessage);
         delimiter = updateDelimiter(userInputMessage);
+    }
+
+    public static boolean checkNumber(char targetChar){
+        if(0 <= targetChar - '0' && targetChar - '0'<= 9){
+            return true;
+        }
+        else return false;
     }
 
     private void checkDelimiterAndNumber(String userInputMessage){
         boolean hasDelimiter = false;
         boolean hasNumber = false;
         for(int i = 0; i < userInputMessage.length(); i++){
-            if(0 <= userInputMessage.charAt(i) - '0' && userInputMessage.charAt(i) - '0'<= 9){
+            if(checkNumber(userInputMessage.charAt(i))){
                 hasNumber = true;
             }
             else hasDelimiter = true;
