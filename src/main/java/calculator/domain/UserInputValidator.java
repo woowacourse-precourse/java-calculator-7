@@ -39,7 +39,7 @@ public class UserInputValidator {
 
     public static void validateDefinedCustom(char letter, char asciiOfDelimiter) {
         if (!canBeNumber(letter) && isDifferentCharacter(letter, asciiOfDelimiter)) {
-            throw new IllegalArgumentException(Constants.NOT_DEFINED_CUSTOM);
+            throw new IllegalArgumentException(Constants.UNDEFINED_CUSTOM);
         }
     }
 
