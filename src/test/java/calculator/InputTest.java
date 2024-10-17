@@ -15,6 +15,7 @@ public class InputTest {
         input.getInputText(testText);
         assertTrue(input.hasText());
     }
+
     @Test
     @DisplayName("커스텀 구분자가 없이 올바르게 입력된다.")
     public void 커스텀_구분자_있는_올바른_입력_값1() {
