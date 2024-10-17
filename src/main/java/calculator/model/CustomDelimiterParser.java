@@ -1,5 +1,7 @@
 package calculator.model;
 
+import java.util.Optional;
+
 public class CustomDelimiterParser {
     private static final String PREFIX = "//";
     private static final String SUFFIX = "\\n";
@@ -8,11 +10,11 @@ public class CustomDelimiterParser {
         return new CustomDelimiterParser();
     }
 
-    public String parse(String input) {
+    public Optional<String> parse(String input) {
         if (hasCustomDelimiter(input)) {
-            return input.substring(PREFIX.length(), getSuffixIndex(input));
+            return Optional.of(input.substring(PREFIX.length(), getSuffixIndex(input)));
         }
-        return "";
+        return Optional.empty();
     }
 
     public boolean hasCustomDelimiter(String input) {
