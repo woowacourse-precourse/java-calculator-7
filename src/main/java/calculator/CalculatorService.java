@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.Arrays;
+
 public class CalculatorService {
     private final NumberValidator numberValidator;
 
@@ -17,7 +19,7 @@ public class CalculatorService {
         return positiveString.replace(customDelimiter, "");
     }
 
-    public int[] convertCharArrayToIntArray(char[] positiveCharArray) { // todo : 리팩토링
+    public int[] convertCharArrayToIntArray(char[] positiveCharArray) {
         numberValidator.validateNoDigits(positiveCharArray);
 
         return new String(positiveCharArray)
@@ -27,12 +29,9 @@ public class CalculatorService {
     }
 
     public int calculatorNumbers(int[] numbers) {
-        int total = 0;
-
         numberValidator.validatorNoNegatives(numbers);
-        for (int number : numbers)
-            total += number;
 
-        return total;
+        return Arrays.stream(numbers)
+                .sum();
     }
 }
