@@ -42,5 +42,5 @@ class InputValidatorTest {
     void inputExceptionTest() {
         assertThatThrownBy(() -> inputValidator.validate("-2"))
                 .isInstanceOf(IllegalArgumentException.class);
-    } // inputExecptionTest
+    } // inputExceptionTest
 } // class
