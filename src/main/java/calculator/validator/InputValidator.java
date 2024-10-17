@@ -1,7 +1,6 @@
 package calculator.validator;
 
-public class InputValidator implements Validator {
-    @Override
+public class InputValidator {
     public int validate(String input) {
         int result = 0;
 
