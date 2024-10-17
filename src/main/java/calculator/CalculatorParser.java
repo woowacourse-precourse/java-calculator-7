@@ -41,10 +41,10 @@ public class CalculatorParser {
     }
 
     public String getCustomDelimiter() {
-        return customDelimiter;
+        return this.customDelimiter;
     }
 
     public String getExpression() {
-        return expression;
+        return this.expression;
     }
 }
