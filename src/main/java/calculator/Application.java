@@ -1,14 +1,15 @@
 package calculator;
 
-import java.util.HashSet;
+import calculator.delimiter.Delimiter;
+
+import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
 public class Application {
 
     public static void main(String[] args) {
 
-        Set<String> delimiters = new HashSet<>(Set.of(",", ":"));
+        List<Delimiter> delimiters = List.of(new Delimiter(","), new Delimiter(":"));
         Calculator calculator = new Calculator();
         Scanner scanner = new Scanner(System.in);
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -27,11 +28,11 @@ public class Application {
             } else if (customDelimiter.matches(".*\\d.*")) {
                 throw new IllegalArgumentException("커스텀 구분자엔 숫자가 포함될 수 없습니다.");
             }
-            delimiters.add(customDelimiter);
+            delimiters.add(new Delimiter(customDelimiter));
             input = input.split("\\\\n")[1];
         }
 
-        String[] numberTokens = input.split(String.join("|", delimiters));
+        String[] numberTokens = input.split(String.join("|", delimiters.stream().map(Delimiter::value).toList()));
         int sum = calculator.sum(numberTokens);
 
         System.out.print("결과 : " + sum);
