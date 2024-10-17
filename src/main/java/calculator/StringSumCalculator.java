@@ -1,7 +1,9 @@
 package calculator;
 
 public class StringSumCalculator {
+    private static final String START_MESSAGE = "덧셈할 문자열을 입력해 주세요.";
+
     public void start() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        System.out.println(START_MESSAGE);
     }
 }
