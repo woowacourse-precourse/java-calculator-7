@@ -1,22 +1,21 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.HashSet;
-import java.util.Arrays;
 
 public class Application {
-    private static Console inputConsole;
     private static final String START_DELIMITER = "//";
     private static final String END_DELIMITER = "\\n";
+    private static final char[] DEFAULT_DELIMITERS = {',', ':'};
 
+    private static Console inputConsole;
     private static String numberInputString = null;
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         String inputValue = inputConsole.readLine();
         try {
-            char[] delimiters = extractDelimiter(inputValue);
+            Set<Character> delimiters = extractDelimiter(inputValue);
         } catch (IllegalArgumentException expected) {
             throw expected;
         } finally {
@@ -30,9 +29,10 @@ public class Application {
      *
      * @param inputValue 사용자가 입력한 문자열
      * @throws IllegalArgumentException 올바르지 않는 형식의 문자열 입력입니다.
-     * @return 구분자 문자 배열 혹은 null
+     * @return Set<Character>
+     *
      */
-    private static char[] extractDelimiter(String inputValue) {
+    private static Set<Character> extractDelimiter(String inputValue) {
         Set<Character> delimiterSet = new HashSet<>();
         int startIdx = inputValue.indexOf(START_DELIMITER);
         int endIdx = inputValue.indexOf(END_DELIMITER);
@@ -40,7 +40,7 @@ public class Application {
         // 구분자를 정의하지 않는 문자열 양식인 경우, null을 반환한다.
         if (startIdx == -1 && endIdx == -1) {
             numberInputString = inputValue;
-            return null;
+            return delimiterSet;
         } else if (startIdx > 0) {
             // 구분자 정의를 시작하는 "//"의 위치가 0이 아닌 경우. 즉, "//"의 앞에 다른 문자가 있는 경우.
             throw new IllegalArgumentException("올바르지 않는 형식의 문자열 입력입니다.");
@@ -53,16 +53,18 @@ public class Application {
         numberInputString = inputValue.substring(endIdx + END_DELIMITER.length());
 
         for (int i = 0; i < delimiterString.length(); i++) {
-            delimiterSet.add(delimiterString.charAt(i));
+            char delimiter = delimiterString.charAt(i);
+
+            // 구분자로 숫자가 입력되었을 경우
+            if (Character.isDigit(delimiter)) {
+                throw new IllegalArgumentException("올바르지 않는 형식의 문자열 입력입니다.");
+            } else delimiterSet.add(delimiter);
         }
 
-        int index = 0;
-        char[] returnArray = new char[delimiterSet.size()];
-
-        for (Character character : delimiterSet) {
-            returnArray[index++] = character;
+        for (char defaultDelimiter : DEFAULT_DELIMITERS) {
+            delimiterSet.add(defaultDelimiter);
         }
 
-        return returnArray;
+        return delimiterSet;
     }
 }
