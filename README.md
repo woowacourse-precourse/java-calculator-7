@@ -12,9 +12,9 @@
 # 예외 상황
 - [ ] 커스텀 구분자에 숫자가 들어가면 exception
 - [ ] 커스텀 구분자에 `//` 와 `\n` 이 들어가면 exception
-- [ ] 숫자가 음수일 경우 exception
-- [ ] 0이 들어가면 exception
-- [ ] 커스텀 구분자가 아닌 문자가 문자열에 있는 경우 exception
+- [x] 숫자가 음수일 경우 exception
+- [x] 0이 들어가면 exception
+- [x] 커스텀 구분자가 아닌 문자가 문자열에 있는 경우 exception
 - [ ] 커스텀 구분자 사이에 숫자가 없는 경우 exception
 - [ ] 커스텀 구분자 만드는 문법이 잘못됐을경우
 
