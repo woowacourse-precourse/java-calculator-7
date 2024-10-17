@@ -1,6 +1,9 @@
 package calculator;
 
+import calculator.delimiter.CustomDelimiterHandler;
+import calculator.delimiter.DefaultDelimiterHandler;
 import calculator.delimiter.DelimiterChecker;
+import calculator.delimiter.DelimiterHandler;
 import calculator.io.input.ConsoleInputHandler;
 import calculator.io.input.InputHandler;
 import calculator.io.output.ConsoleOutputHandler;
@@ -21,19 +24,16 @@ public class Application {
 
         int result = 0;
         if (inputIsNotEmpty(input)) {
-            boolean hasCustomDelimiter = false;
+            DelimiterHandler delimiterHandler;
             if (isCustomDelimiter(input)) {
-                String delimiter = extractCustomDelimiter(input);
-                DELIMITERS.add(delimiter);
-                hasCustomDelimiter = true;
+                String customDelimiter = extractCustomDelimiter(input);
+                DELIMITERS.add(customDelimiter);
+                delimiterHandler = new CustomDelimiterHandler();
+            } else {
+                delimiterHandler = new DefaultDelimiterHandler();
             }
 
-            String numbersWithDelimiter;
-            if (hasCustomDelimiter) {
-                numbersWithDelimiter = input.substring(input.indexOf("\n") + 1);
-            } else {
-                numbersWithDelimiter = input;
-            }
+            String numbersWithDelimiter = delimiterHandler.getNumbersWithDelimiter(input);
             String[] splitNumbers = numbersWithDelimiter.split(buildDelimiterRegex());
 
             for (String number : splitNumbers) {
