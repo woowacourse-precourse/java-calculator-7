@@ -5,7 +5,6 @@ import java.util.regex.Matcher;
 
 public class UserInputValidator {
 
-    private static final int ONE = 1;
     private static final int NUMBER_UNDER_BOUND = 47;
     private static final int NUMBER_OVER_BOUND = 58;
 
@@ -24,7 +23,7 @@ public class UserInputValidator {
     }
 
     private static boolean isLongerThanOne(String input) {
-        return input.length() > ONE;
+        return input.length() > 1;
     }
 
     public static void validateCustomPresence(Matcher matcher) {
@@ -60,7 +59,7 @@ public class UserInputValidator {
     }
 
     public static void validatePositive(int number) {
-        if (number < Constants.ZERO) {
+        if (number < 0) {
             throw new IllegalArgumentException(Constants.CONTAINS_NEGATIVE);
         }
     }
