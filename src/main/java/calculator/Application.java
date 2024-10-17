@@ -1,6 +1,6 @@
 package calculator;
 
-import calculator.delimiter.CustomSeparatorManager;
+import calculator.separator.CustomSeparatorManager;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 

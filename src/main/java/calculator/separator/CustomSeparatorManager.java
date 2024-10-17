@@ -1,4 +1,4 @@
-package calculator.delimiter;
+package calculator.separator;
 
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -19,6 +19,18 @@ public class CustomSeparatorManager {
         return true;
     }
 
+    public Separators findAllCustomSeparators(String input) {
+        Separators separators = Separators.empty();
+
+        Optional<Separator> separator;
+        while ((separator = findCustomSeparator(input)).isPresent()) {
+            separators.add(separator.get());
+            input = extractAfterCustomSeparator(input);
+        }
+
+        return separators;
+    }
+
     private Optional<Separator> findCustomSeparator(String input) {
         Matcher matcher = PATTERN.matcher(input);
 
@@ -33,7 +45,7 @@ public class CustomSeparatorManager {
         return Optional.of(new Separator(inputSeparator));
     }
 
-    public String extractAfterCustomSeparator(String input) {
+    private String extractAfterCustomSeparator(String input) {
         Matcher matcher = PATTERN.matcher(input);
 
         if (!matcher.find()) {
@@ -41,5 +53,15 @@ public class CustomSeparatorManager {
         }
 
         return input.substring(matcher.end());
+    }
+
+    public String sliceCustomSeparators(String input) {
+        Matcher matcher = PATTERN.matcher(input);
+
+        while (matcher.find()) {
+            input = input.substring(matcher.end());
+        }
+
+        return input;
     }
 }

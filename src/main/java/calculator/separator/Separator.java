@@ -1,4 +1,4 @@
-package calculator.delimiter;
+package calculator.separator;
 
 public class Separator {
 

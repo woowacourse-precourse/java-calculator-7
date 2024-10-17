@@ -1,7 +1,7 @@
 package calculator;
 
-import calculator.delimiter.CustomSeparatorManager;
-import calculator.delimiter.Separators;
+import calculator.separator.CustomSeparatorManager;
+import calculator.separator.Separators;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 import java.util.List;
@@ -24,14 +24,14 @@ public class CalculatorController {
     public void calculate() {
         String input = inputView.inputString();
 
-        Separators separators = Separators.createCalculatorSeparators();
+        Separators separators = Separators.withDefault()
+                .merge(customSeparatorManager.findAllCustomSeparators(input));
 
-        while (customSeparatorManager.add(input, separators)) {
-            input = customSeparatorManager.extractAfterCustomSeparator(input);
-        }
+        input = customSeparatorManager.sliceCustomSeparators(input);
 
-        List<String> inputs = separators.separate(input);
+        List<String> inputs = separators.split(input);
         int sum = Calculator.calculate(inputs);
+
         outputView.printResult(sum);
     }
 }

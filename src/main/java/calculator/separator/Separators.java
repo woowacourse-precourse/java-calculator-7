@@ -1,4 +1,4 @@
-package calculator.delimiter;
+package calculator.separator;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Separators {
 
@@ -19,19 +20,32 @@ public class Separators {
         this.separatorStore = separatorStore;
     }
 
-    public static Separators createCalculatorSeparators() {
-        return new Separators(new HashSet<>(DEFAULT_SEPARATORS));
+    public static Separators empty() {
+        return new Separators(new HashSet<>());
+    }
+
+    public static Separators withDefault() {
+        return new Separators(DEFAULT_SEPARATORS);
+    }
+
+    public Separators merge(Separators separators) {
+        HashSet<Separator> mergedSeparatorStore = Stream.concat(
+                        this.separatorStore.stream(),
+                        separators.separatorStore.stream()
+                )
+                .collect(Collectors.toCollection(HashSet::new));
+
+        return new Separators(mergedSeparatorStore);
     }
 
     public void add(Separator separator) {
         separatorStore.add(separator);
     }
 
-    public List<String> separate(String input) {
+    public List<String> split(String input) {
         String regex = createRegex();
 
         return Arrays.stream(input.split(regex))
-                .map(String::trim)
                 .toList();
     }
 
