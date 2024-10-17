@@ -12,8 +12,6 @@ public class Application {
             Data data = DataParser.parseData(inputData, customStatus);
             int sum = Calculator.sum(data);
             System.out.println("결과 : " + sum);
-        } catch (IllegalArgumentException e) {
-            throw e;
         } finally {
             Console.close();
         }
