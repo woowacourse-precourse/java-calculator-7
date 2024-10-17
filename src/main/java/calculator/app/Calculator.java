@@ -19,5 +19,16 @@ public class Calculator {
         } catch (Exception e) {
             throw new IllegalArgumentException();
         }
+        int sum = getListSum(integerList);
+        System.out.printf("결과 : %s", sum);
     }
+
+    private int getListSum(List<Integer> integerList) {
+        return integerList
+                .stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
+
+
 }
