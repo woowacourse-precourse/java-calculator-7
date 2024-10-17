@@ -1,6 +1,6 @@
 package calculator;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import util.InputUtil;
 import util.MessageUtil;
@@ -27,23 +27,36 @@ public class CalculatorRun {
     }
 
     private List<Integer> splitInitialString(String initialString) {
-        List<Character> seporators = Arrays.asList(',', ':');
+//        List<Character> seporators = Arrays.asList(',', ':');
+        String seporators = ",|:";
 
+//        !@#$%^&* 특수문자 고려
         if (initialString.startsWith("//")) {
-            seporators.add(setExtraSeparator(initialString));
+            seporators = seporators + "|" + setExtraSeparator(initialString);
             initialString = initialString.substring(5);
         }
 //        for (Character c : seporators) {
+////            구분자 어떻게 처리할건지...
 //            String[] s = initialString.split(Character.toString(c));
 //        }
 
-        int startIndex = 0;
-        int endIndex = 0;
-        for (char c : initialString.toCharArray()) {
-            if ((Character.isDigit(c))) {
+        String[] numList = initialString.split(seporators);
+        List<Integer> integerList = new ArrayList<>();
 
-            }
-        }
+        return integerList;
+//        for (String s : numList) {
+//            integerList.add(Integer.valueOf(s));
+////            if (Character.isDigit(c)) {
+//
+////            }
+//        }
+//        int startIndex = 0;
+//        int endIndex = 0;
+//        for (char c : initialString.toCharArray()) {
+//            if ((Character.isDigit(c))) {
+//
+//            }
+//        }
     }
 
     private Character setExtraSeparator(String initialString) {
