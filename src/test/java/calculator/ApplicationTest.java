@@ -66,7 +66,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트_커스텀_구분자_공백() {
+    void 예외_테스트_커스텀_구분자_빈_문자열() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//\\n12,3"))
                         .isInstanceOf(IllegalArgumentException.class)

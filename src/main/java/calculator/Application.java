@@ -18,6 +18,12 @@ public class Application {
         }
     }
 
+    private static void checkCustomEmpty(String str) {
+        if (str.isEmpty()) {
+            throw new IllegalArgumentException("커스텀 구분자는 빈 문자열이 될 수 없습니다");
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
@@ -26,6 +32,7 @@ public class Application {
         if (input.contains("//") && input.contains("\\n")) {
             checkCustomStyle(input);
             String custom = input.substring(input.indexOf("//") + 2, input.indexOf("\\n"));
+            checkCustomEmpty(custom);
             String newInput = input.substring(input.indexOf("\\n") + 2);
             String replacedInput = newInput.replace(custom, ",");
 
