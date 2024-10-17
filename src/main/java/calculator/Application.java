@@ -18,7 +18,7 @@ public class Application {
 
         int result = getResult(input);
 
-        printResult(result);
+        printResultMessage(result);
     }
 
     private static int getResult(String input) {
@@ -87,7 +87,7 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
     }
 
-    private static void printResult(int result) {
+    private static void printResultMessage(int result) {
         System.out.println("결과 : " + result);
     }
 }
