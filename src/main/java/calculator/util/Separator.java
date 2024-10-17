@@ -1,6 +1,7 @@
 package calculator.util;
 
 import calculator.constant.ErrorStatus;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,5 +27,22 @@ public class Separator {
         return Arrays.stream(input.split(","))
                 .filter(s -> !s.isBlank())
                 .toList();
+    }
+
+    public static List<Long> parseEachNumber(List<String> stringNumbers) {
+        List<Long> parsedNumbers = new ArrayList<>();
+        for (String stringNumber : stringNumbers) {
+            try {
+                long number = Long.parseLong(stringNumber);
+                if (number <= 0) {
+                    throw new IllegalArgumentException(ErrorStatus.NON_POSITIVE.getMessage());
+                }
+                parsedNumbers.add(number);
+            } catch (NumberFormatException e) {
+                System.out.println(e.getMessage());
+                throw new IllegalArgumentException(ErrorStatus.NO_NUMBER.getMessage());
+            }
+        }
+        return parsedNumbers;
     }
 }
