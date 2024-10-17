@@ -52,7 +52,7 @@ public class DelimiterSeparatorTest {
 
     @Test
     public void 구분자_에러() {
-        String userInput = "3";
+        char userInput = '3';
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             validateDelimiter(userInput);
         });
@@ -61,7 +61,7 @@ public class DelimiterSeparatorTest {
 
     @Test
     public void 구분자_에러2() {
-        String userInput = "[";
+        char userInput = '[';
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             validateDelimiter(userInput);
         });
@@ -70,7 +70,7 @@ public class DelimiterSeparatorTest {
 
     @Test
     public void 올바른_구분자() {
-        String userInput = ":";
+        char userInput = ':';
         assertDoesNotThrow(() -> {
             validateDelimiter(userInput);
         });
