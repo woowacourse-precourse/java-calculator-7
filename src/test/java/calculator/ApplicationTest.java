@@ -10,18 +10,34 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class ApplicationTest extends NsTest {
 
     @Test
-    void 입력_테스트() {
+    void 기본_구분자_사용_1() {
         assertSimpleTest(() -> {
-            run("//;\\n1");
-            assertThat(output()).contains("//;\\n1");
+           run("");
+           assertThat(output()).contains("0");
         });
     }
 
     @Test
-    void 커스텀_구분자_사용() {
+    void 기본_구분자_사용_2() {
         assertSimpleTest(() -> {
-            run("//;\\n1");
-            assertThat(output()).contains("결과 : 1");
+            run("1,2:3");
+            assertThat(output()).contains("6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_1() {
+        assertSimpleTest(() -> {
+            run("//;\\n1;2;3");
+            assertThat(output()).contains("6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_2() {
+        assertSimpleTest(() -> {
+            run("//tapo\\n1tapo2tapo3:4,5");
+            assertThat(output()).contains("15");
         });
     }
 
