@@ -8,17 +8,13 @@ public class StringCalculator {
     private final static String EXCEPTION_MINUS_NUMBER = "음수는 입력 불가합니다.";
     private final static String EXCEPTION_STRING_NUMBER = "올바른 숫자 형식이 아닙니다.";
 
-    private final int result;
+    private final List<String> numbers;
 
     public StringCalculator(List<String> numbers) {
-        this.result = calculateStrings(numbers);
+        this.numbers = numbers;
     }
 
-    public int getResult() {
-        return result;
-    }
-
-    private int calculateStrings(List<String> numbers) {
+    public int calculateStrings() {
         int sum = INITIAL_NUMBER;
         try {
             for (String number : numbers) {
