@@ -2,11 +2,16 @@ package calculator;
 
 public class Validator {
 
+    private static final String target = "\\\\n";
+    private static final String end = "end";
+
     public static void checkValidCustomFormat(String inputData) {
-        if (!inputData.contains("\\n")) {
+        String replaceData = inputData.replaceAll(target, end);
+        System.out.println(replaceData);
+        if (!replaceData.contains(end)) {
             throw new IllegalArgumentException();
         }
-        String[] splitData = inputData.split("\\\\n");
+        String[] splitData = replaceData.split(end);
         int count = splitData.length;
         if (!(count == 1 || count == 2)) {
             throw new IllegalArgumentException();
