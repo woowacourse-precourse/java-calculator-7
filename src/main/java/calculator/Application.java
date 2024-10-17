@@ -7,6 +7,9 @@ import java.util.regex.Pattern;
 
 public class Application {
     private static final String DEFAULT_DELIMITER = ",|:";
+    private static final String CUSTOM_DELIMITER_PREFIX = "//";
+    private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
+
 
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -37,10 +40,10 @@ public class Application {
         String delimiter = DEFAULT_DELIMITER;
         String numbersString = input;
 
-        if (input.startsWith("//")) {
-            int newlineIndex = input.indexOf("\\n");
+        if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
+            int newlineIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
             if (newlineIndex == -1) {
-                throw new IllegalArgumentException("커스텀 구분자 형식이 잘못되었습니다.");
+                throw new IllegalArgumentException("커스텀 구분자 형식이 잘못되었습니다. '//구분자\\n' 형식을 사용해야 합니다.");
             }
             String customDelimiter = extractCustomDelimiter(input, newlineIndex);
             delimiter += "|" + customDelimiter;
