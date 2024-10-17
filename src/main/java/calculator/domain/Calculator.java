@@ -11,13 +11,16 @@ public class Calculator {
     private static final String REGEX_CLOSE_BRACKET = "]";
     private static final String CUSTOM_DELIMITER_START = "//";
     private static final String CUSTOM_DELIMITER_END = "\\n";
+    private static final String NOT_DELIMITER = "";
 
-    private static final int DELIMITER_START_INDEX = 2;
+    private static final int CUSTOM_DELIMITER_START_INDEX = 2;
+    private static final int CUSTOM_DELIMITER_END_LENGTH = 2;
+    private static final int NOT_FOUND_INDEX = -1;
 
     private int[] numbers;
     public Calculator(String inputString) {
         String[] splitStringArr = splitStringToArray(inputString);
-        Validation.validateStringArrToIntegerArr(splitStringArr);
+        Validation.validateStringArrayToIntegerArray(splitStringArr);
         this.numbers = Utils.stringToIntegerArray(splitStringArr);
     }
 
@@ -45,11 +48,11 @@ public class Calculator {
     private String getCustomDelimiterString(String input){
         if(hasCustomDelimiter(input)){
             int customDelimiterEndIndex = findCustomDelimiterEndIndex(input);
-            String delimiter = input.substring(DELIMITER_START_INDEX, customDelimiterEndIndex);
-            Validation.validateDelimiterLength(delimiter);
+            String delimiter = input.substring(CUSTOM_DELIMITER_START_INDEX, customDelimiterEndIndex);
+            Validation.validateDelimiter(delimiter);
             return delimiter;
         }
-        return "";
+        return NOT_DELIMITER;
     }
 
     private boolean hasCustomDelimiter(String input){
@@ -60,7 +63,7 @@ public class Calculator {
         return hasCustomDelimiter(input) ? input.substring(getFirstIndexAfterDelimiter(input)) : input;
     }
     private int getFirstIndexAfterDelimiter(String input){
-        return input.indexOf(CUSTOM_DELIMITER_END)+2;
+        return input.indexOf(CUSTOM_DELIMITER_END)+CUSTOM_DELIMITER_END_LENGTH;
     }
 
     private int findCustomDelimiterEndIndex(String input){
@@ -68,7 +71,7 @@ public class Calculator {
     }
 
     private boolean hasCustomDelimiterEnd(String input){
-        return findCustomDelimiterEndIndex(input) != -1;
+        return findCustomDelimiterEndIndex(input) != NOT_FOUND_INDEX;
     }
 
     private boolean hasCustomDelimiterStart(String input){

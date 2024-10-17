@@ -15,8 +15,8 @@ public class Utils {
         }
 
         int sum = 0;
-        for (int num : numbers) {
-            sum += num;
+        for (int number : numbers) {
+            sum += number;
         }
 
         return sum;
