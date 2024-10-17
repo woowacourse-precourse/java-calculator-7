@@ -46,7 +46,8 @@ public class Application {
             String[] customDelimiters = customDelimiterPart.split(""); // 여러 커스텀 구분자 받는 경우 포함
 
             for (String delim : customDelimiters) {
-                delimiterPart.append("|").append(toRegex(delim));
+                delimiterPart.append("|")
+                        .append(toRegex(delim.trim()));
             }
 
             numberPart = input.substring(indexOfEndSign + CUSTOM_DELIMITER_END_SIGN_LENGTH);
@@ -68,6 +69,7 @@ public class Application {
     private static void validateNoNegativeNumbers(String[] numbers) {
         if (Arrays.stream(numbers)
                 .filter(Application::isNotEmpty)
+                .map(String::trim) // 공백 포함 시 예외 처리 3.9
                 .mapToInt(Integer::parseInt)
                 .anyMatch(n -> n < 0)) {
             throw new IllegalArgumentException("음수가 입력되었습니다.");
@@ -90,10 +92,13 @@ public class Application {
         int result = 0;
 
         for (String number : numbers) {
-            if (number.isEmpty()) continue; // 빈 문자열 무시
+            if (number.isEmpty()) {
+                continue; // 빈 문자열 무시
+            }
 
-            result += Integer.parseInt(number);
+            result += Integer.parseInt(number.trim()); // 공백 포함 시 예외 처리 3.9
         }
+
         return result;
     }
 
