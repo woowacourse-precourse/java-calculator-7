@@ -68,6 +68,15 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 잘못된_구분자_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1$2$3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining("올바르지 않은 구분자입니다.")
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
