@@ -34,7 +34,7 @@ public class Parser {
     }
 
     private Number parseNumber(String token) {
-        if (token.isEmpty()) {
+        if (token.isEmpty() || token.equals(" ")) {
             return 0;
         }
 
