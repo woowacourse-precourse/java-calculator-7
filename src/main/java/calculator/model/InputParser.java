@@ -47,9 +47,10 @@ public class InputParser {
 		List<Integer> numbers = new ArrayList<>();
 		Arrays.stream(splitParts)
 			.map(String::trim)
-			.filter(s -> !s.isEmpty())
+			.filter(part -> !part.isEmpty())
 			.forEach(part -> {
 				validateNumber(part);
+				validateNumberPositive(part);
 				numbers.add(Integer.parseInt(part));
 			});
 
@@ -61,6 +62,12 @@ public class InputParser {
 			Integer.parseInt(s);
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException("구분자 사이에 숫자가 아닌 값이 포함되어 있습니다.");
+		}
+	}
+
+	private void validateNumberPositive(String s) {
+		if (Integer.parseInt(s) <= 0) {
+			throw new IllegalArgumentException("음수는 계산할 수 없습니다.");
 		}
 	}
 
