@@ -48,4 +48,13 @@ public class Separator {
             throw new IllegalArgumentException("커스텀 문자의 최대 길이는 2입니다.");
         }
     }
+
+    //커스텀 구분자에 숫자가 포함되어 있는지 확인한다.
+    public void validateNumberInCustom(String input) {
+        for (int i = 0; i < input.length(); i++) {
+            if (Character.isDigit(input.charAt(i))) {
+                throw new IllegalArgumentException("커스텀 문자 내에 숫자가 포함되어 있습니다.");
+            }
+        }
+    }
 }
