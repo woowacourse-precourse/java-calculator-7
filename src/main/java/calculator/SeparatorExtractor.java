@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Extractor {
+public class SeparatorExtractor {
 
     public String extractCustomSeparator(String value, List<String> customSeparators) {
         if (!value.contains("//")) {
