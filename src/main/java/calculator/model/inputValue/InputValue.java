@@ -11,15 +11,26 @@ public class InputValue {
 
     public InputValue(String inputValue){
         uncheckedInput = inputValue;
+        isValidInput();
         checkCustomSeparator();
         extractNumber();
+    }
+
+    private void isValidInput() {
+        if(uncheckedInput.isEmpty() || uncheckedInput == null){
+            throw new IllegalArgumentException("입력값이 null이거나 비었습니다!");
+        }
+
+        if(Character.isLetter(uncheckedInput.charAt(0))){
+            throw new IllegalArgumentException("알파벳으로 시작했습니다!");
+        }
     }
 
     private void checkCustomSeparator(){
         if (uncheckedInput.startsWith("//")){
             int indexOfDelimiter = uncheckedInput.indexOf("n");
             if (indexOfDelimiter == -1) {
-                throw new IllegalArgumentException("Wrong format");
+                throw new IllegalArgumentException("잘못된 형식으로 커스텀 구분자를 지정했습니다!");
             }
             customDelimiter = uncheckedInput.substring(2,indexOfDelimiter-1);
             delimiter = delimiter.concat("|").concat(customDelimiter);
@@ -33,7 +44,7 @@ public class InputValue {
 
         for(String number : numbers) {
             if (Integer.parseInt(number) < 0) {
-                throw new IllegalArgumentException("The number is negative");
+                throw new IllegalArgumentException("입력값 중에 음수가 있습니다!");
             }
         }
 
@@ -42,7 +53,7 @@ public class InputValue {
                 positiveIntegers.add(Integer.parseInt(number));
             }
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("There is Wrong Delimiter");
+            throw new IllegalArgumentException("잘못된 구분자를 사용했습니다!");
         }
     }
 
