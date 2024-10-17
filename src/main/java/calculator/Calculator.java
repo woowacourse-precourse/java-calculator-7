@@ -12,21 +12,15 @@ public class Calculator {
             return 0;
         }
 
-        if (!userInput.startsWith("//")) {
-            String delimiter = ",:";
-            String[] split = userInput.split("[" + delimiter + "]");
-
-            validatePositiveNumber(split);
-
-            return sum(split);
+        String delimiter = ",:";
+        if (userInput.startsWith("//")) {
+            int endIdx = userInput.indexOf("\\n");
+            validateWrongCustom(endIdx);
+            delimiter += userInput.substring(2, endIdx);
+            userInput = userInput.substring(endIdx + 2);
         }
 
-        String delimiter = ",:";
-        int endIdx = userInput.indexOf("\\n");
-        validateWrongCustom(endIdx);
-        String custom = userInput.substring(2, endIdx);
-        delimiter += custom;
-        String[] split = userInput.substring(endIdx + 2).split("[" + delimiter + "]");
+        String[] split = userInput.split("[" + delimiter + "]");
         validatePositiveNumber(split);
         return sum(split);
     }
