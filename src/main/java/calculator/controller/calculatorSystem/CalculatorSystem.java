@@ -1,4 +1,4 @@
-package calculator.controller;
+package calculator.controller.calculatorSystem;
 
 import calculator.model.inputValue.InputValue;
 import calculator.view.screen.Screen;

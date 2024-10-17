@@ -1,9 +1,9 @@
 package calculator;
 
-import calculator.controller.Calculator;
+import calculator.controller.calculatorSystem.CalculatorSystem;
 
 public class Application {
     public static void main(String[] args) {
-        Calculator calculator = new Calculator();
+        CalculatorSystem calculatorSystem = new CalculatorSystem();
     }
 }
