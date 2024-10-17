@@ -1,6 +1,5 @@
 package calculator;
 
-
 import calculator.util.CalculatorStarter;
 
 public class Application {

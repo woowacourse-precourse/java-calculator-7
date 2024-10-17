@@ -1,7 +1,7 @@
 package calculator.view;
 
 import static calculator.util.ConstantVariable.PROGRAM_START;
-import static calculator.util.PrintStringUtils.printString;
+import static calculator.util.CustomStringUtils.printStringLineFeed;
 
 import calculator.controller.CalculatorController;
 import calculator.dto.request.CalculateRequest;
@@ -17,10 +17,10 @@ public class CalculatorView {
     }
 
     public void startCalculateProgram() {
-        printString(PROGRAM_START.value());
+        printStringLineFeed(PROGRAM_START.value());
         String input = Console.readLine();
 
-        if (input.isEmpty()) {
+        if (input == null) {
             throw new IllegalArgumentException("입력값이 없습니다.");
         }
 

@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public abstract class SingletonObjectProvider {
-    public static final Map<Class<?>, Object> SINGLETON_OBJECT_MAP = new ConcurrentHashMap<>();
+    private static final Map<Class<?>, Object> SINGLETON_OBJECT_MAP = new ConcurrentHashMap<>();
 
     // 주어진 클래스의 싱글톤 객체를 반환
     public static <T> T getSingletonObject(Class<T> clazz) {
