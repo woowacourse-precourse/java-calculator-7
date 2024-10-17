@@ -18,7 +18,7 @@ public class InputTest {
     class Input_string_test {
         @ParameterizedTest
         @DisplayName("문자열을 입력받을 수 있다")
-        @ValueSource(strings = {"1,2:3", "///\\n1/2/3", "//\\\\n1\\2\\3", "//n\\n1n2n3", "// \\n1 2 3"})
+        @ValueSource(strings = {"//n\\n1n2n3", "// \\n1 2 3","//\\\\n1\\2\\3", "///\\n1/2/3", "1,2:3", "//^\\n1^2^3", "//;\\n1;2;3"})
         void when_input_string_then_return_string(String input) {
             //given
             System.setIn(new ByteArrayInputStream(input.getBytes()));
@@ -68,7 +68,7 @@ public class InputTest {
         @DisplayName("지정하지 않은 커스텀 구분자를 사용하는 경우에는 예외가 발생한다")
         void when_use_unspecified_custom_separator_then_throw_exception() {
             //given
-            String input = "1[2[3";
+            String input = "//[\n1[2[3";
 
             //when - then
             assertThatThrownBy(() -> inputView.validateString(input))
