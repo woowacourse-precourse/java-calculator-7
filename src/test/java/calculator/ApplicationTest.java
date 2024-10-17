@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
     @Test
-    void 기본_구분자_사용_semicolon만() {
+    void 기본_구분자_사용_colon만() {
         assertSimpleTest(() -> {
-            run("1;2;3;4");
+            run("1:2:3:4");
             assertThat(output()).contains("결과 : 10");
         });
     }
@@ -27,7 +27,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 기본_구분자_사용_혼용사용() {
         assertSimpleTest(() -> {
-            run("2,3;4");
+            run("2,3:4");
             assertThat(output()).contains("결과 : 9");
         });
     }
@@ -43,7 +43,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 큰_수_입력_테스트() {
         assertSimpleTest(() -> {
-            run("10000000000000000000;10000000");
+            run("10000000000000000000:10000000");
             assertThat(output()).contains("결과 : 10000000000010000000");
         });
     }
@@ -64,10 +64,11 @@ class ApplicationTest extends NsTest {
         );
     }
 
+
     @Test
     void 구문자_위치오류_예외_테스트() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException(";1;2;3"))
+                assertThatThrownBy(() -> runException(":1:2:3"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
@@ -75,7 +76,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 구문자_중복사용_예외_테스트() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("1;2;;3"))
+                assertThatThrownBy(() -> runException("1:2::3"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
