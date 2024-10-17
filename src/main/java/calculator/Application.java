@@ -13,6 +13,9 @@ public class Application {
         for (String splitString : splitStrings) {
             System.out.println(splitString);
         }
+        for (String splitString : splitStrings) {
+            validateSplitString(splitString);
+        }
     }
 
     private static boolean isStringWithCustomDelimiter(String str) {
@@ -40,6 +43,12 @@ public class Application {
     private static void validateCustomDelimiter(char customDelimiter) {
         if (customDelimiter == ',' || customDelimiter == ':') {
             throw new IllegalArgumentException("커스텀 구분자는 기본 구분자에 해당하는 문자(쉼표, 콜론)와 동일할 수 없습니다.");
+        }
+    }
+
+    private static void validateSplitString(String splitString) {
+        if (splitString.length() != 1) {
+            throw new IllegalArgumentException("구분자를 기준으로 문자열을 분리하였을 때, 분리된 대상은 문자열이 아니라 문자여야 합니다.");
         }
     }
 }
