@@ -19,7 +19,17 @@ public class StringAdditionCalculator {
     }
 
     public int calculateSum() {
-        return 0;
+        return this.getSum();
+    }
+
+    /**
+     * 합계 구하기
+     */
+    private int getSum() {
+        // 최종 구분자
+        String finalDelimiter = getFinalDelimiter();
+        // 합계 반환
+        return Arrays.stream(numberString.split(finalDelimiter)).mapToInt(Integer::parseInt).sum();
     }
 
     /**
