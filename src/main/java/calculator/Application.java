@@ -34,11 +34,23 @@ public class Application {
 
                     index++;
                 }
+                input = input.substring(index + 2);
             }
-
             //커스텀 구분자가 존재하지 않음에도 시작 char이 문자열이 아님
             if(!Character.isDigit(input.charAt(0))){
                 throw new IllegalArgumentException();
+            }
+            String input_seperators = "[";
+            for(int i = 0; i < seperators.size(); i++){
+                input_seperators += seperators.get(i);
+            }
+            input_seperators += "]";
+
+            String[] numbers = input.split(input_seperators);
+
+            for(int i = 0; i < numbers.length; i++){
+                int num = Integer.parseInt(numbers[i]);
+                result += num;
             }
 
             System.out.print("결과 : " + result);
