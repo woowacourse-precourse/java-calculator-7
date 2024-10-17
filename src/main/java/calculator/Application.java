@@ -7,6 +7,15 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
         
+        // extended 모드 확인
+        boolean extendedMode = false;
+        if (input.length() >= 5 && input.charAt(0) == '/' && input.charAt(1) == '/' &&
+            input.charAt(3) == '\\' && input.charAt(4) == 'n') {
+            extendedMode = true;
+        }
+        
+        System.out.println("Extended Mode: " + extendedMode);
+        
         try {
             // 입력된 문자열을 처리하고 결과를 출력
             BigInteger result = processInput(input);
