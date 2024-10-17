@@ -2,6 +2,7 @@ package calculator.model;
 
 import static calculator.common.exception.ErrorMessage.SEPARATOR_DUPLICATION_ERROR;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,9 +12,11 @@ public record Separators(List<Separator> separators) {
         return new Separators(Validator.validate(separators));
     }
 
-    public void addSeparator(Separator separator) {
-        this.separators.add(separator);
-        Validator.validate(separators);
+    public Separators addSeparator(Separator separator) {
+        List<Separator> updatedSeparators = new ArrayList<>(this.separators);
+        updatedSeparators.add(separator);
+        Validator.validate(updatedSeparators);
+        return new Separators(updatedSeparators);
     }
 
     private static class Validator {

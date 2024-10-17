@@ -27,7 +27,7 @@ public class StringCalculator {
         String operationString = inputView.inputOperationString();
 
         if (CustomSeparatorParser.hasCustomSeparator(operationString)) {
-            separators.addSeparator(CustomSeparatorParser.extractSeparator(operationString));
+            separators = separators.addSeparator(CustomSeparatorParser.extractSeparator(operationString));
             operationString = stripCustomSeparator(operationString);
         }
 
