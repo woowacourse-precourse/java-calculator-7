@@ -5,7 +5,7 @@ public class Condition {
     public static final int CUSTOM_SEPARATOR_POSITION = 2;
 
     public static final char COMMA = ',';
-    public static final char SEMICOLON = ';';
+    public static final char COLON = ':';
     public static final String LEFT_SQUARE_BRACKET = "[";
     public static final String RIGHT_SQUARE_BRACKET = "]";
     public static final String BACKSLASH = "\\";

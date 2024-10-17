@@ -10,7 +10,7 @@ public class Separators {
     public Separators() {
         separators = new HashSet<>();
         separators.add(new Separator(Condition.COMMA));
-        separators.add(new Separator(Condition.SEMICOLON));
+        separators.add(new Separator(Condition.COLON));
     }
 
     public void add(char ch) {
