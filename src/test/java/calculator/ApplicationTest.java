@@ -33,10 +33,10 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 공백_문지열_입력() {
+    void 공백_문자열_입력() {
         assertSimpleTest(() -> {
             run("");
-            assertThat(output().equals(0));
+            assertThat(output()).contains("결과 : 0");
         });
     }
 

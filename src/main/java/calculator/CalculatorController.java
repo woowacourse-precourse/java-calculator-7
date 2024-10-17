@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.NoSuchElementException;
+
 public class CalculatorController {
     private final Calculator calculator;
     private final InputView view;
@@ -15,8 +17,11 @@ public class CalculatorController {
         try {
             String input = view.getInput();
             int result = calculator.add(input);
+            view.printResult(result);
         } catch (IllegalArgumentException e) {
 
+        } catch (NoSuchElementException e) {
+            view.printResult(0); // 빈 입력에 대해 기본 값 반환
         }
     }
 }
