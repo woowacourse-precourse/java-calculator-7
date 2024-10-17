@@ -11,18 +11,18 @@ public class Separators {
         this.seperatorSet = seperatorSet;
     }
 
-    public String toRegex() {
-        StringBuilder regexBuilder = new StringBuilder();
-        seperatorSet.iterator().forEachRemaining(separator -> {
-            generateSeparatorRegex(regexBuilder);
-            regexBuilder.append(separator.getSeparatorString());
+    public String toRegexAllowOneOfSeparator() {
+        StringBuilder allowOneOfSeparatorRegexBuilder = new StringBuilder();
+        seperatorSet.forEach(separator -> {
+            putPipeIfNotEmpty(allowOneOfSeparatorRegexBuilder);
+            allowOneOfSeparatorRegexBuilder.append(separator.getSeparatorString());
         });
-        return regexBuilder.toString();
+        return allowOneOfSeparatorRegexBuilder.toString();
     }
 
-    private void generateSeparatorRegex(StringBuilder regexBuilder) {
-        if (!regexBuilder.isEmpty()) {
-            regexBuilder.append(PIPE);
+    private void putPipeIfNotEmpty(StringBuilder builder) {
+        if (!builder.isEmpty()) {
+            builder.append(PIPE);
         }
     }
 

@@ -13,7 +13,7 @@ public class ExpressionParser {
     public ExpressionParser(ExpressionValidator validator, Separators separators) {
         this.validator = validator;
         this.separators = separators;
-        this.pattern = Pattern.compile(separators.toRegex());
+        this.pattern = Pattern.compile(separators.toRegexAllowOneOfSeparator());
     }
 
     public Expression parse(String expression) {
@@ -26,7 +26,7 @@ public class ExpressionParser {
     }
 
     private Queue<Integer> parseOperand(String expression) {
-        return Arrays.stream(expression.split(separators.toRegex()))
+        return Arrays.stream(expression.split(separators.toRegexAllowOneOfSeparator()))
                 .map(Integer::parseInt)
                 .collect(Collectors.toCollection(LinkedList::new));
     }
