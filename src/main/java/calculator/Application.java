@@ -1,6 +1,8 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
@@ -41,9 +43,22 @@ public class Application {
             String regexWithCustomDelimiter = ",|:|" + customDelimiter;
             String strContent = str.substring(5);
 
-            return strContent.split(regexWithCustomDelimiter);
+            return removeEmptyElement(strContent.split(regexWithCustomDelimiter));
         }
-        return str.split("[,:]");
+        return removeEmptyElement(str.split("[,:]"));
+    }
+
+    private static String[] removeEmptyElement(String[] strings) {
+        List<String> list = new ArrayList<>();
+
+        for (String str : strings) {
+            if (str.isEmpty()) {
+                continue;
+            }
+            list.add(str);
+        }
+
+        return list.toArray(new String[0]);
     }
 
     private static void validateCustomDelimiter(char customDelimiter) {
