@@ -14,7 +14,7 @@ public class InputSplitter {
             return new String[]{"0"};
         }
         if (containsCustomDelimeter(input)) {
-            String customDelimeter = getCustomDelimeter(input);
+            String customDelimeter = escapeMetacharacter(getCustomDelimeter(input));
             input = input.substring(START_INDEX_EXCEPT_REGEX);
             return input.split(customDelimeter);
         }
@@ -36,5 +36,9 @@ public class InputSplitter {
             throw new IllegalArgumentException("쉼표(,) 또는 콜론(:) 외의 다른 구분자는 사용할 수 없으며, 숫자 사이에만 올 수 있습니다.");
         }
         return input.split("[,:]");
+    }
+
+    private String escapeMetacharacter(String delimeter) {
+        return Pattern.quote(delimeter);
     }
 }
