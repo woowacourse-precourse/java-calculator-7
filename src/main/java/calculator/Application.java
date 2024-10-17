@@ -8,10 +8,22 @@ public class Application {
         System.out.print("덧셈할 문자열을 입력해주세요." + "\n");
         String Input = Console.readLine();
 
+        Input = Input.replace("\\n", "\n");
+
         try {
             int sum = 0;
+            String Separator = "[,:]";
 
-            String[] tokens = Input.split("[,:]");
+            if (Input.startsWith("//")) {
+                int SeparatorEnd = Input.indexOf("\n");
+
+                String CustomSeparator = Input.substring(2, SeparatorEnd);
+                Separator += "|" + CustomSeparator;
+
+                Input = Input.substring(SeparatorEnd + 1);
+            }
+
+            String[] tokens = Input.split(Separator);
 
             for (String token : tokens) {
                 if (token.isEmpty()) {
