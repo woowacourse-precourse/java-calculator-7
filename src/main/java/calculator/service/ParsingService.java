@@ -25,7 +25,7 @@ public class ParsingService {
 
         errorCheck(operandStr);
         parse(operandStr);
-        
+
         return new OperandDTO(operandList);
     }
 
