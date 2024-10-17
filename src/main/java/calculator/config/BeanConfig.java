@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class BeanConfig {
-    // 컴파일 타임에 모든 의존성이 정리되며, 런타임에 의존성이 변경되는 일은 없다.
+    // 스태틱 초기화 블록은 클래스 로딩 시 단일 스레드에 의해 실행, 그 이후 실행 과정에서 빈이 등록되는 일은 없다.
     // -> 동시성을 고려하여 설계하지 않아도 된다고 생각됨
     private static final Map<Class<?>, Class<?>> abstractToConcreteClassMap = new HashMap<>();
     private static final Map<Class<?>, Object> registeredBeans = new HashMap<>();
