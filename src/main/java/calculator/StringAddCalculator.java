@@ -33,7 +33,7 @@ public class StringAddCalculator {
         if (matcher.find()) {
             String customDelimiter = matcher.group(CUSTOM_DELIMITER_ORDER);
             numbersString = matcher.group(ARITHMETIC_EXPRESSION_ORDER);
-            // TODO: Pattern.quote() 로직을 검증하라
+            // 주의!!! "|"는 기본 구분자에 커스텀 구분자를 추가하려면 반드시 더해주어야 함.
             delimiters += "|" + Pattern.quote(customDelimiter);
         }
         return new DelimiterAndNumber(delimiters, numbersString);
