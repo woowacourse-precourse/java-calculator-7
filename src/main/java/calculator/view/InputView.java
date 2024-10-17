@@ -3,8 +3,6 @@ package calculator.view;
 import calculator.validate.CalculatorValidate;
 import camp.nextstep.edu.missionutils.Console;
 
-import java.util.Arrays;
-
 public class InputView {
 
     private final CalculatorValidate calculatorValidate;
@@ -16,8 +14,7 @@ public class InputView {
     /**
      * 고정 메세지 출력
      */
-    public void printMessage(String message)
-    {
+    public void printMessage(String message) {
         System.out.println(message);
     }
 
@@ -27,16 +24,13 @@ public class InputView {
      * 커스텀 구분자를 사용 시 기존 구분자에 커스텀 구분자 추가
      * 수정된 구분자로 문자열 분리
      */
-    public int[] getUserInput()
-    {
+    public int[] getUserInput() {
         String invalidateString = Console.readLine();
-        if (calculatorValidate.isUsingBlank(invalidateString))
-        {
+        if (calculatorValidate.isUsingBlank(invalidateString)) {
             return new int[1];
         }
         String separtors = ",:";
-        if(calculatorValidate.isUsingCustomSeparator(invalidateString))
-        {
+        if (calculatorValidate.isUsingCustomSeparator(invalidateString)) {
             separtors += invalidateString.charAt(2);
             invalidateString = invalidateString.substring(5);
         }

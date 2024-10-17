@@ -16,10 +16,20 @@ public class CalculatorService {
         this.outputView = outputView;
     }
 
-    public void run()
-    {
+    public void run() {
+        /**
+         * InputView
+         * 1. 사용자에게 입력 받음
+         * 2. 입력 받은 문자열 검증
+         * 3. 검증 과정이 끝난 문자열을 정수 배열로 변환
+         */
         inputView.printMessage(INPUT_DESCRIPTION);
         int[] validateIntArray = inputView.getUserInput();
+        /**
+         * OutputView
+         * 1. InputView에서 검증을 마친 정수 배열을 합산
+         * 2. 합산한 결과 출력
+         */
         int sum = outputView.sumElements(validateIntArray);
         outputView.printResult(OUTPUT_DESCRIPTION, sum);
     }
