@@ -6,6 +6,10 @@ public class CalculateException {
         throw new IllegalArgumentException(exceptionMessage.getExceptionMessage());
     }
 
+    public static void catchNumberNotPositiveException() {
+        throwException(ExceptionMessage.INPUT_IS_NOT_POSITIVE_EXCEPTION);
+    }
+
     public static Integer catchNumberFormatException(String number) {
         try {
             return Integer.parseInt(number);

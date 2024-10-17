@@ -26,7 +26,15 @@ public class Numbers {
         if (compareSplitInputToZero(splitInput)) {
             return ZERO;
         }
-        return CalculateException.catchNumberFormatException(splitInput);
+        Integer number = CalculateException.catchNumberFormatException(splitInput);
+        if (compareNumberWithZero(number)) {
+            CalculateException.catchNumberNotPositiveException();
+        }
+        return number;
+    }
+
+    public boolean compareNumberWithZero(Integer number) {
+        return number < ZERO;
     }
 
     public boolean compareSplitInputToZero(String splitInput) {
