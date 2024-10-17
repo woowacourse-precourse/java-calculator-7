@@ -1,9 +1,11 @@
-package calculator;
+package calculator.domain;
 
 import calculator.util.ErrorMessage;
 import java.util.List;
 
 public class Calculator {
+
+    private static final int MINIMUM_VALUE = 0;
 
     public static int sumPositiveNumbers(List<String> digits) {
         if(isEmpty(digits)) return 0;
@@ -19,7 +21,7 @@ public class Calculator {
     private static int parsePositiveInteger(String s) {
         try {
             int number = Integer.parseInt(s);
-            if (number < 0) {
+            if (number < MINIMUM_VALUE) {
                 throw new IllegalArgumentException(ErrorMessage.INVALID_POSITIVE_NUMBER);
             }
             return number;

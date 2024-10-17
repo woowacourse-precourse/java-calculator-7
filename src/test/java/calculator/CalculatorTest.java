@@ -2,8 +2,8 @@ package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
+import calculator.domain.Calculator;
 import calculator.util.ErrorMessage;
 import java.util.List;
 import java.util.stream.Stream;
