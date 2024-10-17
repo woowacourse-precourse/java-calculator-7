@@ -20,7 +20,9 @@ public class Calculator {
     private static void distinctionDelimiter(String formula) {
         if (formula.startsWith("//")) {
             isCustomDelimiter = true;
+            return;
         }
+        isCustomDelimiter = false;
     }
 
     private static String input() {
