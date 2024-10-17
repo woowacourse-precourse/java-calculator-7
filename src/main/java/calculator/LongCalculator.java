@@ -12,8 +12,6 @@ import calculator.parser.SeparatorParser;
 import calculator.view.AdditionCalculatorView;
 
 public class LongCalculator implements Calculator {
-
-	private static final Set<Character> separators = new HashSet<>();
 	private final SeparatorParser separatorParser;
 	private final MathematicalExpressionParser mathematicalExpressionParser;
 	private final AdditionCalculatorView additionCalculatorView;
@@ -36,7 +34,7 @@ public class LongCalculator implements Calculator {
 		this.longCalculatorOperation = longCalculatorOperation;
 	}
 
-	private long calculate(String expression) {
+	private long calculate(String expression, Set<Character> separators) {
 		String mathematicalExpression = separatorParser.parse(expression, separators);
 		String separatorPattern = separatorParser.generateRegex(separators);
 		long[] numbers = mathematicalExpressionParser.parse(mathematicalExpression, separatorPattern);
@@ -50,10 +48,9 @@ public class LongCalculator implements Calculator {
 
 		long result = 0;
 		if (!input.equals("")) {
-			result = calculate(input);
+			result = calculate(input, new HashSet<>());
 		}
 
-		separators.clear();
 		additionCalculatorView.output(result);
 	}
 
