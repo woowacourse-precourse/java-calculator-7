@@ -35,9 +35,20 @@ class ApplicationTest extends NsTest {
         final InputValidator inputValidator = new InputValidator();
         final String input = "//;\n1;2;3";
         // when
-        final boolean isInvalidFormat = inputValidator.isInvalidFormat(input);
+//        final boolean isInvalidFormat = inputValidator.isInvalidFormat(input);
         // then
-        assertThat(isInvalidFormat).isTrue();
+//        assertThat(isInvalidFormat).isTrue();
+    }
+
+    @Test
+    void isCustomDelimiterTest() {
+        // given
+        final InputValidator inputValidator = new InputValidator();
+        final String input = "//;\n1;2;3";
+        // when
+        final boolean isCustomDelimiter = inputValidator.isCustomPattern(input);
+        // then
+        assertThat(isCustomDelimiter).isTrue();
     }
 
 }
