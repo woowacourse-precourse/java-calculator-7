@@ -6,11 +6,18 @@ public class InputNumberStrings {
     private final String stringNumbers;
 
     public InputNumberStrings(String stringNumbers, DelimiterResult regex) {
-        ValidateContainsDelimiter(stringNumbers, regex);
+        validate(stringNumbers, regex);
         this.stringNumbers = stringNumbers;
     }
 
-    private static void ValidateContainsDelimiter(String stringNumbers, DelimiterResult regex) {
+    private void validate(String stringNumbers, DelimiterResult regex) {
+        if (stringNumbers.equals("\"\"")) {
+            return;
+        }
+        validateContainsDelimiter(stringNumbers, regex);
+    }
+
+    private void validateContainsDelimiter(String stringNumbers, DelimiterResult regex) {
         String[] validDelimiters = makeValidateRegex(regex);
 
         for (char c : stringNumbers.toCharArray()) {
@@ -21,7 +28,7 @@ public class InputNumberStrings {
         }
     }
 
-    private static String[] makeValidateRegex(DelimiterResult regex) {
+    private String[] makeValidateRegex(DelimiterResult regex) {
         String delimiterResult = regex.getDelimiterResult();
         String delimiters = regex.getDelimiterResult().substring(1, delimiterResult.length() - 1);
         return delimiters.split("");
