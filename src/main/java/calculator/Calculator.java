@@ -3,22 +3,21 @@ package calculator;
 import java.text.DecimalFormat;
 
 public class  Calculator {
-    public String calculate(String input) {
+    public int calculate(String input) {
 
         StringFilter stringFilter = new StringFilter();
-        DecimalFormat df = new DecimalFormat("#.##");
         if (input.isEmpty())
-            return df.format(0);
+            return 0;
 
         if (input.length() == 1)
-            return df.format(Double.parseDouble(input));
+            return Integer.parseInt(input);
 
         String[] numbers = stringFilter.StringController(input);
-        Double sum = 0.D;
+        int sum = 0;
 
         for (String numberStr : numbers) {
-            sum += Double.parseDouble(numberStr);
+            sum += Integer.parseInt(numberStr);
         }
-        return df.format(sum);
+        return sum;
     }
 }
