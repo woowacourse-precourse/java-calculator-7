@@ -1,14 +1,8 @@
 package calculator.model;
 
+import static calculator.Utils.DelimiterConstants.*;
 
 public class DelimiterExtractor {
-
-    private static final String COMMA = ",";
-    private static final String COLON = ":";
-    private static final String CUSTOM_DELIMITER_PREFIX = "//";
-    private static final String CUSTOM_DELIMITER_SUFFIX = "\n";
-    private static final int CUSTOM_DELIMITER_PREFIX_LENGTH = 2;
-    private static final int CUSTOM_DELIMITER_SUFFIX_LENGTH = 1;
 
     public String determineDelimiter(String userInput) {
         return extractBasicDelimiters(userInput) + extractCustomDelimiters(userInput);
@@ -16,15 +10,8 @@ public class DelimiterExtractor {
 
     private String extractBasicDelimiters(String userInput) {
         StringBuilder basicDelimiters = new StringBuilder();
-
-        if (userInput.contains(COMMA)) {
-            basicDelimiters.append(COMMA);
-        }
-
-        if (userInput.contains(COLON)) {
-            basicDelimiters.append(COLON);
-        }
-
+        basicDelimiters.append(hasDelimiter(userInput, String.valueOf(COMMA)));
+        basicDelimiters.append(hasDelimiter(userInput, String.valueOf(COLON)));
         return basicDelimiters.toString();
     }
 
@@ -34,18 +21,23 @@ public class DelimiterExtractor {
         while (userInput.contains(CUSTOM_DELIMITER_PREFIX)) {
             int startIndex = userInput.indexOf(CUSTOM_DELIMITER_PREFIX) + CUSTOM_DELIMITER_PREFIX_LENGTH;
             int endIndex = userInput.indexOf(CUSTOM_DELIMITER_SUFFIX);
-
             if (endIndex == -1) {
                 break;
             }
-
             if (startIndex < endIndex) {
                 customDelimiters.append(userInput, startIndex, endIndex);
             }
             userInput = userInput.substring(endIndex + CUSTOM_DELIMITER_SUFFIX_LENGTH);
         }
-
         return customDelimiters.toString();
+    }
+
+    private String hasDelimiter(String userInput, String delimiter) {
+        if (userInput.contains(delimiter)) {
+            return delimiter;
+        } else {
+            return "";
+        }
     }
 
 }
