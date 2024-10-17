@@ -7,7 +7,7 @@ public class Application {
         // TODO: 프로그램 구현
         String input = Console.readLine();
         Calculator calculator = new Calculator(input);
-        calculator.add();
-        System.out.println("결과 : " + calculator.getResult());
+        int result = calculator.add();
+        System.out.println("결과 : " + result);
     }
 }
