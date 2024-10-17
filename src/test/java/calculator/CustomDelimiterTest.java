@@ -29,6 +29,7 @@ class CustomDelimiterTest {
                 Arguments.of("//;\\n1;2", true),
                 Arguments.of("//|\\n3|4", true),
                 Arguments.of("//:\\n7:8", true),
+                Arguments.of("// \\n", true),
 
                 // 엣지 케이스: 빈 문자열
                 Arguments.of("", false),

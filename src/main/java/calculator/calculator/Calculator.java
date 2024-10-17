@@ -10,15 +10,22 @@ public class Calculator {
 
     private static final String POSITIVE_INTEGER_REGEX = "\\d+";
 
+    private static final Integer ZERO = 0;
+
     private final DelimiterFactory delimiterFactory = new DelimiterFactory();
 
     public int calculate(String rawInput) {
         validateInput(rawInput);
 
-        String cleanedInput = DelimiterUtils.removeSpaces(rawInput);
-        Delimiter delimiter = delimiterFactory.getDelimiter(cleanedInput);
-        List<String> numberStrings = delimiter.extractString(cleanedInput);
-        List<String> spaceRemoved = numberStrings.stream().map(DelimiterUtils::removeSpaces).toList();
+        Delimiter delimiter = delimiterFactory.getDelimiter(rawInput);
+        List<String> numberStrings = delimiter.extractString(rawInput);
+        List<String> spaceRemoved = numberStrings.stream()
+                .map(DelimiterUtils::removeSpaces)
+                .toList();
+
+        if (spaceRemoved.stream().allMatch(String::isBlank)) {
+            return ZERO;
+        }
 
         validateString(spaceRemoved);
 

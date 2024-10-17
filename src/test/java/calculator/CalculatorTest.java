@@ -28,7 +28,7 @@ class CalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"", " ", "   "})
+    @ValueSource(strings = {"", " ", "   ", "  ,   ,   ,"})
     @DisplayName("빈 값이 들어오면 0을 반환한다.")
     void whenEmptyStringIsGivenThenReturnZero(String emptyInput) {
         int calculated = calculator.calculate(emptyInput);
