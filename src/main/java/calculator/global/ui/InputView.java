@@ -1,5 +1,9 @@
 package calculator.global.ui;
 
+import javax.swing.text.NumberFormatter;
+import java.util.ArrayList;
+import java.util.List;
+
 public class InputView {
 
     private String delimiter = "[,;]";
@@ -24,5 +28,31 @@ public class InputView {
         }
 
         return input.split(delimiter);
+    }
+
+    public List<Integer> parseIntNumbers(String input) {
+        String[] numbers = splitNumbers(input);
+        List<Integer> numberList = new ArrayList<>();
+
+        for (String number : numbers) {
+            int i = numberVerify(number);
+            numberList.add(i);
+        }
+
+        return numberList;
+    }
+
+    private int numberVerify(String number) {
+        try {
+            int i = Integer.parseInt(number);
+
+            if (i < 0) {
+                throw new IllegalArgumentException();
+            }
+
+            return i;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
     }
 }
