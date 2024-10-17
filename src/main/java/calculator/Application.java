@@ -31,6 +31,18 @@ public class Application {
             return operationInput.split(separatorPattern);
     }
 
+    public static int sumCalculator(String operationInput, ArrayList<String> separateList){
+        int result = 0;
+        for(String number: operationSetting(operationInput, separateList)){
+            if (number.matches("[1-9]\\d*"))
+                result += Integer.parseInt(number);
+            else if (number.isEmpty())
+                result += 0;
+            else throw new IllegalArgumentException();
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -38,26 +50,10 @@ public class Application {
         ArrayList<String> separate = new ArrayList<>(Arrays.asList(",", ":"));
         if (CustomDiscrimination(str)){
             separate.add(CustomExtraction(str));
-            int result = 0;
-            for(String number: operationSetting(str.substring(str.indexOf("\\n")+2), separate)){
-                if (number.matches("[1-9]\\d*"))
-                    result += Integer.parseInt(number);
-                else if (number.isEmpty())
-                    result += 0;
-                else throw new IllegalArgumentException();
-            }
-            System.out.println("결과 : " + result);
+            System.out.println("결과 : " + sumCalculator(str.substring(str.indexOf("\\n") + 2), separate));
         }
         else{
-            int result = 0;
-            for(String number: operationSetting(str, separate)){
-                if (number.matches("[1-9]\\d*"))
-                    result += Integer.parseInt(number);
-                else if (number.isEmpty())
-                    result += 0;
-                else throw new IllegalArgumentException();
-            }
-            System.out.println("결과 : " + result);
+            System.out.println("결과 : " + sumCalculator(str, separate));
         }
 
     }
