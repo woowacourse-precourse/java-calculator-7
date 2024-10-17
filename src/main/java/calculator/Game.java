@@ -2,8 +2,8 @@ package calculator;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
-public class Calculator {
-    public void calculate() {
+public class Game {
+    public void start() {
         String input = readLine();
     }
 }
