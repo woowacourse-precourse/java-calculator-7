@@ -247,6 +247,63 @@ public class InputValidator {
     }
 }
 ```
+## 프로젝트 구조
+
+```
+src
+├── main
+│   └── java
+│       └── com
+│           └── example
+│               ├── Application.java
+│               ├── controller
+│               │   └── Controller.java
+│               ├── model
+│               │   ├── Model.java
+│               │   ├── DefaultModel.java
+│               │   └── ModelFactory.java
+│               ├── view
+│               │   ├── input
+│               │   │   ├── InputView.java
+│               │   │   └── ConsoleInputView.java
+│               │   └── output
+│               │       ├── OutputView.java
+│               │       └── ConsoleOutputView.java
+│               └── util
+│                   └── InputValidator.java
+└── test
+    └── java
+        └── com
+            └── example
+                ├── controller
+                ├── model
+                ├── view
+                └── util
+```
+
+## 패키지 설명
+
+1. `com.example`: 프로젝트의 루트 패키지
+   - `Application.java`: 프로그램의 진입점
+
+2. `com.example.controller`: 컨트롤러 관련 클래스
+   - `Controller.java`: 주요 게임 로직을 관리하고 Model과 View를 조정
+
+3. `com.example.model`: 모델 관련 클래스
+   - `Model.java`: 모델 인터페이스
+   - `DefaultModel.java`: 기본 모델 구현
+   - `ModelFactory.java`: 모델 객체 생성을 담당하는 팩토리 클래스
+
+4. `com.example.view`: 뷰 관련 클래스
+   - `input`: 입력 관련 클래스
+      - `InputView.java`: 입력 뷰 인터페이스
+      - `ConsoleInputView.java`: 콘솔 기반 입력 뷰 구현
+   - `output`: 출력 관련 클래스
+      - `OutputView.java`: 출력 뷰 인터페이스
+      - `ConsoleOutputView.java`: 콘솔 기반 출력 뷰 구현
+
+5. `com.example.util`: 유틸리티 클래스
+   - `InputValidator.java`: 사용자 입력 유효성 검사 클래스
 
 ## ✨ 주요 특징
 
