@@ -2,7 +2,7 @@
 
 ## Features
 
-- [ ] calculation module
+- [x] calculation module
 - [ ] parser module
     - [ ] custom delimiter
     - [ ] throw error on invalid input
