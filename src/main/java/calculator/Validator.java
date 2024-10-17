@@ -18,7 +18,7 @@ public class Validator {
 
     public void isNullDelimiters(List<String> splitSlash) {
         if(splitSlash.size() != 4 || splitSlash.get(2).isEmpty()) {
-            throw new IllegalStateException("입력이 잘못되었습니다. 다시 입력해주세요.\n");
+            throw new IllegalArgumentException("입력이 잘못되었습니다. 다시 입력해주세요.\n");
         }
     }
 
@@ -28,7 +28,7 @@ public class Validator {
             try {
                 numbers.add(Integer.parseInt(oneNumber));
             } catch(NumberFormatException e) {
-                throw new IllegalStateException("숫자만 입력해주세요.");
+                throw new IllegalArgumentException("숫자만 입력해주세요.\n");
             }
         });
         return numbers;

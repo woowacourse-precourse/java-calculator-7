@@ -42,4 +42,10 @@ public class CalculatorParamDomain {
     public List<Character> getDelimiters() {
         return this.delimiters;
     }
+
+    public Long getSumNumbers() {
+        return this.numbers.stream()
+                .mapToLong(Integer::longValue)
+                .sum();
+    }
 }

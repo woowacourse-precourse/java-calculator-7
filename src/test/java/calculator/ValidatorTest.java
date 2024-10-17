@@ -6,48 +6,51 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ValidatorTest {
 
-    private CalculatorParamDomain domain;
     private Validator validator;
-    private InputParam inputParam;
 
     @BeforeEach
     void 테스트_전_세팅() {
-        this.domain = CalculatorParamDomain.of();
         this.validator = Validator.of();
-        this.inputParam = InputParam.of();
     }
 
     @Test
     void 구분자_검증_확인() {
-        String 구분자 = "//; \n1;2;3\n";
+        String userInput = "//; \n1;2;3\n";
 
-        List<Character> result = List.of(';',' ');
+        assertThat(validator.validDelimiters(userInput)).isTrue();
+    }
 
-        List<String> inputDataList = inputParam.splitInputString(구분자);
+    @Test
+    void 구분자_검증_구분자가_입력안되었을때() {
+        List<String> splitEnterInput = List.of("", "", "", "1,2,3,4");
 
-        if(validator.validDelimiters(구분자)) {
-            domain.changeUserDelimiters(inputParam.findDelimiters(inputDataList));
-            assertThat(domain.getDelimiters()).isEqualTo(result);
-        }
+        assertThatThrownBy(() -> {
+            validator.isNullDelimiters(splitEnterInput);
+        })
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("입력이 잘못되었습니다. 다시 입력해주세요.\n");
     }
 
     @Test
     void 입력값_검증() {
-        String input = "1,2:3\n";
+        List<String> splitStringNumbers = List.of("1", "3", "3", "35");
+        List<Integer> expect = List.of(1, 3, 3, 35);
 
-        List<Integer> expected = List.of(1, 2, 3);
+        assertThat(validator.tryParseInteger(splitStringNumbers)).isEqualTo(expect);
+    }
 
-        List<String> inputDataList = inputParam.splitInputString(input);
-        domain.splitStringNumbers(inputDataList);
+    @Test
+    void 입력값_검증_문자_입력() {
+        List<String> splitStringNumbers = List.of("1", "q", "3", "d");
 
-        if(validator.validDelimiters(input)) {
-            domain.changeUserDelimiters(inputParam.findDelimiters(inputDataList));
-        }
-
-        domain = inputParam.findNumbers(domain);
-        assertThat(domain.getNumbers()).isEqualTo(expected);
+        assertThatThrownBy(() -> {
+            validator.tryParseInteger(splitStringNumbers);
+        })
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("숫자만 입력해주세요.\n");
     }
 }
