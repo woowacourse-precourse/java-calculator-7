@@ -28,11 +28,18 @@ public class Application {
     private static String[] splitString(String str) {
         if (isStringWithCustomDelimiter(str)) {
             char customDelimiter = str.charAt(2);
+            validateCustomDelimiter(customDelimiter);
             String regexWithCustomDelimiter = ",|:|" + customDelimiter;
             String strContent = str.substring(5);
 
             return strContent.split(regexWithCustomDelimiter);
         }
         return str.split("[,:]");
+    }
+
+    private static void validateCustomDelimiter(char customDelimiter) {
+        if (customDelimiter == ',' || customDelimiter == ':') {
+            throw new IllegalArgumentException("커스텀 구분자는 기본 구분자에 해당하는 문자(쉼표, 콜론)와 동일할 수 없습니다.");
+        }
     }
 }
