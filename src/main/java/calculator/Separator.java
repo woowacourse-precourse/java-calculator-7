@@ -15,9 +15,9 @@ public class Separator {
         return separator;
     }
 
-    public Separator(List<String> separator) {
+    public Separator(String customSeparator) {
         List<String> separators = Arrays.asList(",", ";");
-        separators.addAll(separator);
+        separators.add(customSeparator);
         this.separator = separators;
     }
 
