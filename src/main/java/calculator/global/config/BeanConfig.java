@@ -1,5 +1,6 @@
 package calculator.global.config;
 
+import calculator.calculate.controller.CalculateController;
 import calculator.calculate.service.CalculateService;
 import calculator.calculate.service.CalculateServiceImpl;
 import java.lang.reflect.Constructor;
@@ -27,6 +28,7 @@ public class BeanConfig {
 
     // bean에 추가할 객체가 생길 때마다 작성 필요
     private static void registerInterfaceImplementation() {
+        interfaceImplementationMap.put(CalculateController.class, CalculateController.class);
         interfaceImplementationMap.put(CalculateService.class, CalculateServiceImpl.class);
     }
 
