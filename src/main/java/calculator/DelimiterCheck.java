@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.StringTokenizer;
+
 public class DelimiterCheck {
 
     // Application에서 사용자가 입력한 수식에 대해서 구분자만 제외하고 숫자만 추출
@@ -25,7 +27,7 @@ public class DelimiterCheck {
 //                throw new IllegalAccessException();
 //            }
             delimiter = ",|:|" + customDelimiter;
-            // 커맨드 입력 이후의 문자열만 formula로 지정
+            // 커맨드 입력 이후의 문자열만 inputString 지정
             inputString = inputString.substring(inputString.indexOf("\\n")+2);
         }
         getSplitFormula();
@@ -35,22 +37,16 @@ public class DelimiterCheck {
     private void getSplitFormula() {
         // 분리된 문자열을 splitFormula[] 배열로 저장, 추가) trim()으로 공백문자 지워줌
         splitFormulaArray = inputString.trim().split("\\s*"+delimiter+"\\s*");
-        removeBlank();
-    }
-
-    private void removeBlank() {
-        // 문자열 가장 앞에 구분자 입력으로 공백이 배열내로 들어가는 것을 방지
-        if (splitFormulaArray[0].startsWith("")) {
-            splitFormulaArray[0].replaceFirst("", "0");
+        if (splitFormulaArray[0].isBlank()); {
+            splitFormulaArray[0] = "0";
         }
-        // 배열 내 공백 재검증
         for (int i = 0; i < splitFormulaArray.length; i++) {
             String afterTrimBlank = splitFormulaArray[i].trim().replace("\r\n","");
             splitFormulaArray[i] = afterTrimBlank;
         }
-        // 다 분리된 문자열 내 실수 검증로직으로 이동
         checkFloatingPointNum();
     }
+
 
     // 입력된 수들 중에서 실수가 포함되어있는지 점검 후 각 메서드로 보냄
     private void checkFloatingPointNum() {
@@ -90,7 +86,6 @@ public class DelimiterCheck {
     public int[] getIntNumArray() {
         return intNumArray;
     }
-
 }
 
 

@@ -26,6 +26,14 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 음수_사용() {
+        assertSimpleTest(() -> {
+            run("-1,2,3");
+            assertThat(output()).contains("4");
+            System.out.println(output());
+        });
+    }
 
     @Test
     void 실수_사용() {
@@ -85,14 +93,6 @@ class ApplicationTest extends NsTest {
 //    }
 //
 //
-//    @Test
-//    void 예외_테스트6() {
-//        assertSimpleTest(() -> {
-//            run("");
-//            assertThat(output()).contains("");
-//            System.out.println(output());
-//        });
-//    }
 //
 //    @Test
 //    void 예외_테스트() {
