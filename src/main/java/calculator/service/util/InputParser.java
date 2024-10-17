@@ -2,20 +2,20 @@ package calculator.service.util;
 
 import calculator.domain.exception.CalculatorException;
 import calculator.domain.exception.CalculatorErrorMessage;
-import calculator.domain.model.ExtractedInput;
+import calculator.dto.request.CalculatorRequest;
 import java.util.ArrayList;
 import java.util.List;
 
 public final class InputParser {
-    public static List<Integer> parseByDelimiters(ExtractedInput extractedInput) {
-        String remainingInput = extractedInput.getRemainingInput();
-        String delimiters = extractedInput.getDelimiters();
+    public static List<Integer> parseByDelimiters(CalculatorRequest request) {
+        String targetInput = request.targetInput();
+        String delimiters = request.delimiters();
 
-        if (remainingInput.isEmpty()) {
+        if (targetInput.isEmpty()) {
             return new ArrayList<>();
         }
 
-        String[] tokens = splitByDelimiters(remainingInput, delimiters);
+        String[] tokens = splitByDelimiters(targetInput, delimiters);
         List<Integer> numbers = new ArrayList<>();
 
         for (String token : tokens) {
@@ -26,8 +26,8 @@ public final class InputParser {
         return numbers;
     }
 
-    private static String[] splitByDelimiters(String input, String delimiters) {
-        return input.split(delimiters);
+    private static String[] splitByDelimiters(String targetInput, String delimiters) {
+        return targetInput.split(delimiters);
     }
 
     private static int parseToInt(String numberString) {
