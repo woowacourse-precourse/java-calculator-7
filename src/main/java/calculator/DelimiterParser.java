@@ -17,13 +17,18 @@ public class DelimiterParser {
     }
     public String splitByDelimiter(String input) {
         String result = input;
+
+        final String prefix = input.substring(0,2);
+        final String suffix = input.substring(3,5);
+        final String space = "";
+
         for (String delimiter : delimiterList) {
-            if (delimiter.equals(input.substring(0,2))) {
-                result = result.replace(input.substring(0,2), "");
+            if (delimiter.equals(prefix)) {
+                result = result.replace(prefix, space);
                 continue;
             }
-            if (delimiter.equals(input.substring(3,5))) {
-                result = result.replace(input.substring(3,5), "");
+            if (delimiter.equals(suffix)) {
+                result = result.replace(suffix, space);
                 continue;
             }
             result = result.replace(delimiter, COMMON_DELIMITER);
