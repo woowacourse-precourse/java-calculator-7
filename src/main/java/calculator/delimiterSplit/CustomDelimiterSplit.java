@@ -1,4 +1,4 @@
-package calculator;
+package calculator.delimiterSplit;
 
 public class CustomDelimiterSplit {
 

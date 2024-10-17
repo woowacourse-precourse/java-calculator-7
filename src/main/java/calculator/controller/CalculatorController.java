@@ -1,15 +1,17 @@
-package calculator;
+package calculator.controller;
 
+import calculator.checkMethod.CheckInputType;
+import calculator.checkMethod.CheckIsPositiveNum;
 import camp.nextstep.edu.missionutils.Console;
 
 import java.util.NoSuchElementException;
 
-public class Calculator {
+public class CalculatorController {
     private int result;
     private static final String basicDelimiter = ",|:";
 
 
-    public Calculator() {
+    public CalculatorController() {
         try {
             String input = Console.readLine();
             int inputLen = input.length();

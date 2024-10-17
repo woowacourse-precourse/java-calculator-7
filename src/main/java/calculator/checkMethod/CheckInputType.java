@@ -1,4 +1,7 @@
-package calculator;
+package calculator.checkMethod;
+
+import calculator.delimiterSplit.BasicDelimiterSplit;
+import calculator.delimiterSplit.CustomDelimiterSplit;
 
 public class CheckInputType {
 
