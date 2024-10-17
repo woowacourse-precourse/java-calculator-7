@@ -36,10 +36,14 @@ public class Controller {
         if (!text.contains(CUSTOM_REG_START)) {
             return regex;
         }
+        validateCustomReg(text);
+        return regex + "|" + text.substring(2, text.indexOf(CUSTOM_REG_END));
+    }
+
+    private void validateCustomReg(String text) {
         if (!text.contains(CUSTOM_REG_END)) {
             throw new IllegalArgumentException();
         }
-        return regex + "|" + text.substring(2, text.indexOf(CUSTOM_REG_END));
     }
 
     private String[] splitNumbers(String text, String regex) {
