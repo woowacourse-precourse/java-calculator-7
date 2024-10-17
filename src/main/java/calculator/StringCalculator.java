@@ -29,6 +29,13 @@ public class StringCalculator {
 
         //잘못된 문자열을 입력받았을 경우, 예외처리
         checkString();
+
+        //구분자를 통일시킴
+        inputString = inputString.replace(';', ',');
+        if(customSeparator != null) {
+            inputString = inputString.replace(customSeparator, ',');
+        }
+
     }
 
     //덧셈 결과를 출력
