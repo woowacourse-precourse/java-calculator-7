@@ -1,7 +1,9 @@
 package calculator.domain.model;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
+import calculator.domain.exception.CalculatorErrorMessage;
+import calculator.domain.exception.CalculatorException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import java.util.Collections;
@@ -35,5 +37,15 @@ class CalculatorTest {
         Calculator calculator = Calculator.of(numbers);
         long result = calculator.calculateSum();
         assertThat(result).isEqualTo(100);
+    }
+
+    @Test
+    @DisplayName("음수가 포함된 리스트는 예외 처리")
+    void testMinusElement() {
+        List<Integer> numbers = Arrays.asList(10, 20, 30, -40);
+
+        assertThatThrownBy(() -> Calculator.of(numbers))
+                .isInstanceOf(CalculatorException.class)
+                .hasMessage(CalculatorErrorMessage.INVALID_RANGE_ERROR.getMessage());
     }
 }
