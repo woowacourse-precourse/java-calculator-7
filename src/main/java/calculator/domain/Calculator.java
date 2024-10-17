@@ -4,8 +4,6 @@ import calculator.global.ui.InputView;
 import calculator.global.ui.OutView;
 import camp.nextstep.edu.missionutils.Console;
 
-import java.util.List;
-
 public class Calculator {
 
     InputView inputView = new InputView();
@@ -16,7 +14,7 @@ public class Calculator {
         outView.resultMessage(sum(inputView.parseIntNumbers(Console.readLine())));
     }
 
-    private int sum(List<Integer> numbers) {
+    private int sum(int[] numbers) {
         int sum = 0;
         for (Integer number : numbers) {
             sum += number;

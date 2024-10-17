@@ -1,8 +1,6 @@
 package calculator.global.ui;
 
-import javax.swing.text.NumberFormatter;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 public class InputView {
 
@@ -30,27 +28,17 @@ public class InputView {
         return input.split(delimiter);
     }
 
-    public List<Integer> parseIntNumbers(String input) {
+    public int[] parseIntNumbers(String input) {
         String[] numbers = splitNumbers(input);
-        List<Integer> numberList = new ArrayList<>();
-
-        for (String number : numbers) {
-            int i = numberVerify(number);
-            numberList.add(i);
-        }
-
-        return numberList;
-    }
-
-    private int numberVerify(String number) {
         try {
-            int i = Integer.parseInt(number);
-
-            if (i < 0) {
-                throw new IllegalArgumentException();
-            }
-
-            return i;
+            return Arrays.stream(numbers)
+                .mapToInt(Integer::parseInt)
+                .peek(num -> {
+                    if (num < 0) {
+                        throw new IllegalArgumentException();
+                    }
+                })
+                .toArray();
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }
