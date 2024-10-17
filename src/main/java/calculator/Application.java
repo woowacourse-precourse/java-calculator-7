@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.StringTokenizer;
 
 public class Application {
 
@@ -31,5 +32,8 @@ public class Application {
             input = input.substring(3);
         }
         separatorBuilder.append("]");
+
+        // 등록된 구분자로 문자열을 분리한다.
+        StringTokenizer tokens = new StringTokenizer(input, separatorBuilder.toString());
     }
 }
