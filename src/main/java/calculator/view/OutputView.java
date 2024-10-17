@@ -7,4 +7,8 @@ public class OutputView {
     public static void printResult(int result) {
         System.out.println(OUTPUT_PROMPT + result);
     }
+
+    public static void printError(String error) {
+        System.out.println(error);
+    }
 }
