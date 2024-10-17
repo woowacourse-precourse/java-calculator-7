@@ -41,9 +41,13 @@ public class CalculatorService {
 
     public int calculateList() {
         for (String i : numList) {
-            int n = Integer.parseInt(i);
-            if(n<0) throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
-            result += Integer.parseInt(i);
+            try{
+                int n = Integer.parseInt(i);
+                if(n<0) throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+                result += Integer.parseInt(i);
+            }catch (NumberFormatException e){
+                throw new IllegalArgumentException("등록되지 않은 구분자가 포함되어 있습니다.");
+            }
         }
         return result;
     }
