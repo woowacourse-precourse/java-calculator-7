@@ -1,15 +1,16 @@
 package calculator.util;
-
 public class Util {
     private final String BASIC_SEPARATOR = "[,:]";
-    private String[] extractList;
+
     public void extract(String text){
-        basicSeparatorExtract(text);
+        separatorExtract(text);
+    }
+    private String[] separatorExtract(String text){
+        return basicSeparatorExtract(text);
     }
 
-    private void basicSeparatorExtract(String text){
-        extractList = text.split(BASIC_SEPARATOR);
+    private String[] basicSeparatorExtract(String text){
+        return text.split(BASIC_SEPARATOR);
     }
-
 
 }
