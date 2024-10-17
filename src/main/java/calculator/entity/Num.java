@@ -10,13 +10,19 @@ public class Num {
     /**
      * String 생성자
      *
-     * @param numString 구분자에 대해 처리된 String 변수
+     * @param numString 구분자에 대해 처리된 String 양수
      */
 
     public Num(String numString) {
-        if (numString.isEmpty()) {
+        int numLen = numString.length();
+
+        if (numLen == 0) {
             this.number = 0;
             return;
+        }
+
+        if (numLen >= 2 && numString.startsWith("0")) {
+            throw new IllegalArgumentException("must be a number");
         }
 
         if (!numString.matches("\\d+")) {
@@ -28,7 +34,7 @@ public class Num {
     }
 
     public Num(int number) {
-        if (number < 0) {
+        if (number <= 0) {
             throw new IllegalArgumentException("number must be positive");
         }
         this.number = number;
