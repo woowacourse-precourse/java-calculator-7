@@ -1,8 +1,7 @@
-package calculator;
+package calculator.calculator;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import calculator.calculator.Calculator;
 import calculator.utils.ErrorMessage;
 import java.math.BigInteger;
 import org.assertj.core.api.Assertions;

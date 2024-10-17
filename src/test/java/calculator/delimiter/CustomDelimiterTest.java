@@ -1,8 +1,7 @@
-package calculator;
+package calculator.delimiter;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import calculator.delimiter.CustomDelimiter;
 import calculator.utils.ErrorMessage;
 import java.util.List;
 import java.util.stream.Stream;

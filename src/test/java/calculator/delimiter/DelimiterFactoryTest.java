@@ -1,10 +1,9 @@
-package calculator;
+package calculator.delimiter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import calculator.calculator.Delimiter;
-import calculator.delimiter.DelimiterFactory;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
