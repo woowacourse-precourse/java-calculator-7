@@ -3,10 +3,16 @@ package calculator;
 public class Calculator {
 
     private int result = 0;
+
     public void calculate(){
         User user = new User();
         String userInput = user.inputString();
 
+        sum(userInput);
+        System.out.println("결과 : " + result);
+    }
+
+    private void sum(String userInput) {
         if(userInput.startsWith("//") || userInput.contains("\n")) {
             int[] customNumberSeparator = getCustomSeparatorNumbers(userInput);
             for (int i : customNumberSeparator) {
@@ -18,9 +24,7 @@ public class Calculator {
                 result += i;
             }
         }
-        System.out.println("결과 : " + result);
     }
-
 
     private static int[] getBasicSeparatorNumbers(String input) {
         String[] basicSeparator = input.split(",|:");
@@ -49,7 +53,7 @@ public class Calculator {
     }
 
     private static void isPositiveNumber(int[] numberSeparator, int i) {
-        if (numberSeparator[i] <0){
+        if (numberSeparator[i] < 0){
             throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
         }
     }
