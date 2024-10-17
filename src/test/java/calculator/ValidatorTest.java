@@ -7,5 +7,11 @@ import java.util.List;
 
 class ValidatorTest {
 
+    @Test
+    void validateIfInputNegative() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Validator.validateIfInputNegative(List.of(1, -1, 1));
+        });
+    }
 
 }
