@@ -14,4 +14,8 @@ public class Adder {
             answer += Integer.parseInt(number);
         }
     }
+
+    public int getAnswer() {
+        return answer;
+    }
 }
