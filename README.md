@@ -2,6 +2,7 @@
 
 ## Config
 - [X] IoC를 위한 DI 기능 
+- [X] FrontController
 
 ## Input
 - [X] 사용자로 부터 숫자를 포함한 문자열을 입력받는다.

@@ -3,6 +3,7 @@ package calculator.global.config;
 import calculator.calculate.controller.CalculateController;
 import calculator.calculate.service.CalculateService;
 import calculator.calculate.service.CalculateServiceImpl;
+import calculator.global.frontController.FrontController;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
@@ -28,6 +29,7 @@ public class BeanConfig {
 
     // bean에 추가할 객체가 생길 때마다 작성 필요
     private static void registerInterfaceImplementation() {
+        interfaceImplementationMap.put(FrontController.class, FrontController.class);
         interfaceImplementationMap.put(CalculateController.class, CalculateController.class);
         interfaceImplementationMap.put(CalculateService.class, CalculateServiceImpl.class);
     }
