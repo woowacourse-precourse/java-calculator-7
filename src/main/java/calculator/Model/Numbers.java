@@ -11,10 +11,11 @@ public class Numbers {
         this.numbers = numbers;
     }
 
-    public int getSum() {
+    public Double getSum() {
         return numbers.stream()
-                .mapToInt(Number::getNumber)
+                .mapToDouble(Number::getNumber)
                 .sum();
+
     }
 
     private void validateNumbers(List<Number> numbers) {
