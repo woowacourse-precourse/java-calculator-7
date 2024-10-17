@@ -41,7 +41,14 @@ public class Application {
     }
 
     private static int calculateSum(String parsedInput) {
-        // TODO
-        return 0;
+        String[] numbers = parsedInput.split(divider);
+        int sum = 0;
+        for (String number : numbers) {
+            if (!number.chars().allMatch(Character::isDigit)) {
+                throw new IllegalArgumentException("덧셈할 문자열이 양수로만 이루어져야 합니다.");
+            }
+            sum = sum + Integer.parseInt(number);
+        }
+        return sum;
     }
 }
