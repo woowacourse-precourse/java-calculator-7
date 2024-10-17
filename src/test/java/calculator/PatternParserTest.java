@@ -55,4 +55,17 @@ public class PatternParserTest {
         //then
         assertFalse(result);
     }
+    
+    @Test
+    public void testParseCustomPattern() throws Exception{
+        //given
+        String input = "//;\n1;2;3";
+
+        //when
+        String result = patternParser.parseCustomPattern(input);
+
+        //then
+        assertEquals(";", result);
+    }
+    
 }
