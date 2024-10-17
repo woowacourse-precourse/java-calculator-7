@@ -1,15 +1,13 @@
 package calculator.service;
 
 import calculator.domain.model.Calculator;
-import calculator.domain.model.ExtractedInput;
-import calculator.dto.CalculationResultDTO;
-import calculator.service.util.DelimiterExtractor;
+import calculator.dto.response.CalculatorResponse;
+import calculator.dto.request.CalculatorRequest;
 import calculator.service.util.InputParser;
 
 public class CalculatorServiceImpl implements CalculatorService {
-    public CalculationResultDTO calculateSum(String input) {
-        ExtractedInput extractedInput = DelimiterExtractor.extractDelimiters(input);
-        Calculator calculator = Calculator.of(InputParser.parseByDelimiters(extractedInput));
-        return new CalculationResultDTO(calculator.calculateSum());
+    public CalculatorResponse calculateSum(CalculatorRequest request) {
+        Calculator calculator = Calculator.of(InputParser.parseByDelimiters(request));
+        return new CalculatorResponse(calculator.calculateSum());
     }
 }
