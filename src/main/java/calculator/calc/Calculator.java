@@ -15,12 +15,23 @@ public class Calculator implements Calculatable {
         String[] numbers = splitter.split(exp);       //커스텀 스플리터로 분리
         long sum = 0;
 
-        for (String number : numbers) {
-            if (!number.isEmpty()) {
-                sum += Integer.parseInt(number.trim());
-            }
+        for (int i = 0; i < numbers.length; i++) {
+            sum = getSum(numbers, i, numbers[i], sum);
         }
+        return sum;
+    }
 
+    private static long getSum(String[] numbers, int i, String number, long sum) {
+        if (!number.isEmpty()) {
+            int num = Integer.parseInt(number.trim());
+            if (num >= 0) {
+                sum += num;
+            } else {
+                throw new IllegalArgumentException();
+            }
+        } else if (i != 0 && i != numbers.length - 1) {
+            throw new IllegalArgumentException();
+        }
         return sum;
     }
 }
