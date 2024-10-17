@@ -35,5 +35,9 @@ public class Application {
 
         // 등록된 구분자로 문자열을 분리한다.
         StringTokenizer tokens = new StringTokenizer(input, separatorBuilder.toString());
+        while (tokens.hasMoreTokens()) {
+            // 분리된 문자열을 모두 `정수` 로 `파싱` 하고 숫자들을 등록한다.
+            int number = Integer.parseInt(tokens.nextToken());
+        }
     }
 }
