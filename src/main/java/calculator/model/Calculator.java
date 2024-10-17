@@ -17,7 +17,7 @@ public class Calculator {
         }
 
         if (hasFloatingPoint) {
-            return sum;
+            return Double.parseDouble(String.format("%.1f", sum));
         } else {
             return (int) sum;
         }
