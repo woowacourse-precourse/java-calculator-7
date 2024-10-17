@@ -30,6 +30,11 @@ public class Application {
             }
         }
         
+        // 문자열의 맨 앞과 맨 뒷 부분이 숫자인지 확인
+        if (!Character.isDigit(input.charAt(0)) || !Character.isDigit(input.charAt(input.length() - 1))) {
+            throw new IllegalArgumentException("입력 문자열의 맨 앞과 맨 뒷 부분은 숫자여야 합니다.");
+        }
+        
         // 이후 로직 추가 예정
         return 0; // 기본 반환값
     }
