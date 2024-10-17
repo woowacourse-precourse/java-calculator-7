@@ -30,4 +30,18 @@ public class InputTest {
         }
         return numbers;
     }
+
+    @Test
+    public void inputContainEnter() {
+        // given
+        Input input = new Input("//1\n2,3");
+
+        // when
+        boolean isStart = input.getInput().startsWith("//");
+        boolean contains = input.getInput().contains("\n");
+
+        // then
+        assertThat(isStart).isTrue();
+        assertThat(contains).isTrue();
+    }
 }
