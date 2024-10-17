@@ -1,17 +1,13 @@
 package calculator.models;
 
-import java.util.Objects;
-
 public class NumberModel {
-    public static int getSum(String[] numbers) {
+    public static int getSum(String input, String regex) {
+        String[] numbers = input.split(regex);
         int sum = 0;
 
         for (String number : numbers) {
-            if (Objects.equals(number, "")) {
-                continue;
-            }
-            int num = Integer.parseInt(number);
-            sum += num;
+            int value = number.isEmpty() ? 0 : Integer.parseInt(number);
+            sum += value;
         }
 
         return sum;
