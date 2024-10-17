@@ -23,6 +23,7 @@ public class Calculator {
                 return multiplyCalculate(terms);
             default:
                 throw new IllegalArgumentException("잘못된 operation입니다.");
+
         }
     }
 

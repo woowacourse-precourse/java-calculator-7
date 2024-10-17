@@ -1,18 +1,17 @@
 package calculator.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Expression {
     private final String NUMBER_REGEX = "1-9";
     private final String expression;
     private final Separator separator;
-    private final List<Term> terms = new ArrayList<>();
+    private final Terms terms;
 
     public Expression(String expression) {
         this.separator = new Separator(expression);
         this.expression = validateExpression(extractformularExpression(expression));
-        extractTerms(expression);
+        this.terms = new Terms(this.expression, this.separator);
     }
 
     public String extractformularExpression(String expression) {
@@ -44,14 +43,7 @@ public class Expression {
         return expression.substring(start);
     }
 
-    private void extractTerms(String expression) {
-        String formularExpression = extractformularExpression(expression);
-        for (String part : formularExpression.split("[" + separator.getSeparator() + "]")) {
-            terms.add(new Term(part.isEmpty() ? "0" : part));
-        }
-    }
-
     public List<Term> getTerms() {
-        return terms;
+        return terms.getTerms();
     }
 }
