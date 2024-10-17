@@ -8,6 +8,7 @@ public class Application {
     static String input;
     private static AdderScanner adderScanner;
     private static Adder adder;
+    private static Printer printer;
 
     static void Input() throws IOException {
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
@@ -28,7 +29,10 @@ public class Application {
 
         }
         adder=new Adder(adderScanner);
+        printer=new Printer(adder);
 
+        //결과값 출력
+        printer.PrintOutput();
 
 
     }
