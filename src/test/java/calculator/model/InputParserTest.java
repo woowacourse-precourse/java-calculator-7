@@ -37,7 +37,7 @@ class InputParserTest {
 
         //when
         boolean result1 = inputParser.checkDefaultDelimiter(input1);
-        boolean result2 = inputParser.checkDefaultDelimiter(input1);
+        boolean result2 = inputParser.checkDefaultDelimiter(input2);
 
         //then
         assertThat(result1).isFalse();
