@@ -11,9 +11,10 @@
 - Divider 클래스 : 구분자들을 리스트로 저장하고 올바른지 확인하는 부분
 
 ### 커밋 해야할 기능 목록
-1. 전체적인 구조 생성
-2. input, output 클래스 구현
-3. Adder 클래스 구현
-4. Tokenizer 클래스 구현
-5. numberlist, divider 클래스 구현
+1. Readme 작성
+2. 전체적인 구조 생성
+3. input, output 클래스 구현
+4. Adder 클래스 구현
+5. Tokenizer 클래스 구현
+6. numberlist, divider 클래스 구현
 
