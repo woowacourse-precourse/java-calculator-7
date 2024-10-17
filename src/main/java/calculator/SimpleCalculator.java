@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class SimpleCalculator{
 
-    private static final String DEFAULT_SPLIT_REGEX = ",|;";
+    private static final String DEFAULT_SPLIT_REGEX = "[,:]";
 
     public int simpleCalculate(String inputString) {
         if (inputString.isEmpty()){
