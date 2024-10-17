@@ -4,8 +4,8 @@ import static calculator.common.exception.ErrorMessage.SEPARATOR_FORMAT_ERROR;
 
 public record Separator(String separator) {
 
-    public Separator(String separator) {
-        this.separator = Validator.validate(separator);
+    public static Separator from(String separator) {
+        return new Separator(Validator.validate(separator));
     }
 
     private static class Validator {
