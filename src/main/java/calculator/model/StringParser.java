@@ -1,20 +1,13 @@
 package calculator.model;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import calculator.util.DelimiterUtils;
 
+// 입력 문자열을 파싱하는 클래스
 public class StringParser {
-    private static final String DEFAULT_DELIMITER_REGEX = "[,:]";
-    private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
 
+    // 입력 문자열을 파싱하여 숫자 배열을 반환하는 메서드
     public String[] parseInput(String input) {
-
-        Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(input);
-        if (matcher.matches()) {
-            String customDelimiter = matcher.group(1);
-            return matcher.group(2).split(Pattern.quote(customDelimiter));
-        }
-        return input.split(DEFAULT_DELIMITER_REGEX);
+        return DelimiterUtils.splitInput(input); // DelimiterUtils의 메서드를 호출하여 구분 처리
     }
 
 }
