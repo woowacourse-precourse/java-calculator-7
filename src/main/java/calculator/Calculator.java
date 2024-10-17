@@ -1,5 +1,6 @@
 package calculator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Calculator {
@@ -33,7 +34,13 @@ public class Calculator {
     public List<Integer> extractNumbers(String input, String delimiter) {
         //입력값에서 구분자를 기준으로 숫자 추출
         String[] extracted = input.split("[,:" + delimiter + "]");
-
+        List<Integer> numbers = new ArrayList<>();
+        //정수형 리스트로 변환
+        for (String a : extracted) {
+            int number = Integer.parseInt(a);
+            numbers.add(number);
+        }
+        return numbers;
     }
 
 }
