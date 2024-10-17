@@ -8,7 +8,7 @@ public class Application {
         User input = new User(Console.readLine());
         DefaultDelimiter defaultDelimiter = new DefaultDelimiter();
 
-        if (!isCustom(input.getUser())) {
+        if (!input.isCustom()) {
             DelimiterResult regex = new DelimiterResult(defaultDelimiter.getDefaultDelimiter());
             InputNumberStrings numberStrings = new InputNumberStrings(input.getUser(), regex);
             Numbers numbers = new Numbers(numberStrings.split(regex.getDelimiterResult()));
@@ -22,7 +22,7 @@ public class Application {
             System.out.println("결과 : " + sum);
         }
 
-        if (isCustom(input.getUser())) {
+        if (input.isCustom()) {
             int customDelimiterEndIndex = input.getUser().indexOf("\\n");
 
             CustomDelimiter customDelimiter = new CustomDelimiter(
@@ -44,7 +44,5 @@ public class Application {
         }
     }
 
-    private static boolean isCustom(String input) {
-        return input.startsWith("//");
-    }
+
 }
