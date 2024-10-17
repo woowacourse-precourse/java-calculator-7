@@ -7,16 +7,17 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class Application {
     public static void main(String[] args) {
+        int result = 0;
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = readLine();
+
         if(!isEmpty(input)){
             ArrayList<String> str = splitToArrayList(input);
-
             checkForInvalidInput(str);
-
-            System.out.println(str);
+            result = sumOfNumbers(str);
+            System.out.println("결과 : " + result);
         } else {
-            System.out.println("결과 : 0");
+            System.out.println("결과 : " + result);
         }
     }
 
@@ -59,4 +60,13 @@ public class Application {
             throw new IllegalArgumentException("Negatives not allowed: " + negativeNumbers);
         }
     }
+
+    public static int sumOfNumbers(ArrayList<String> values){
+        int sum = 0;
+        for (String value: values){
+            sum += Integer.parseInt(value);
+        }
+        return sum;
+    }
+
 }
