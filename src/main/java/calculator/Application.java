@@ -18,7 +18,19 @@ public class Application {
     }
 
     private static int generateSum(String userText, int sum) {
-        String[] splitTexts = userText.split(",|:");
+        String separator = ",|:";
+
+        int firstIdx = userText.indexOf("//");
+        int lastIdx = userText.indexOf("\\n");
+
+        if (firstIdx > -1 && lastIdx > -1) {
+            String customSeparator = "|" + userText.substring(firstIdx + 2, lastIdx);
+            userText = userText.substring(lastIdx + 2);
+
+            separator += customSeparator;
+        }
+
+        String[] splitTexts = userText.split(separator);
 
         for (String text : splitTexts) {
             try {
