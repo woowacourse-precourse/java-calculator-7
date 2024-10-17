@@ -3,7 +3,7 @@
 ## Features
 
 - [x] calculation module
-- [ ] parser module
+- [x] parser module
     - [ ] custom delimiter
     - [ ] throw error on invalid input
 - [ ] command line interface
