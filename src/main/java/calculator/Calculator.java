@@ -3,12 +3,16 @@ package calculator;
 import java.util.ArrayList;
 import java.util.List;
 
+
 class Calculator {
 
     private List<Character> separators;
     private String input;
     private int result;
 
+    final static int CUSTOM_START_IDX = 0;
+    final static int CUSTOM_END_IDX = 3;
+    final static int CUSTOM_IDX = 2;
 
     Calculator(String s) {
         separators = new ArrayList<Character>();
@@ -68,13 +72,28 @@ class Calculator {
         throw new IllegalArgumentException();
     }
 
+    private void checkInputHaveCustom() {
+        //1.커스텀 사용 여부 확인
+        //커스텀 문자는 `//(커스텀)\n으로 이루어져 있음`
+        //예외상황:커스텀 문자에 숫자가 들어갈 수 없음
+        int custom_idx_start = input.indexOf("//");
+        int custom_idx_end = input.indexOf("\\n");
+        if (custom_idx_start == CUSTOM_START_IDX && custom_idx_end == CUSTOM_END_IDX) {
+            char custom_seperator = input.charAt(CUSTOM_IDX);
+            separators.add(custom_seperator);
+            input = input.substring(custom_idx_end + 2);
+            return;
+        }
+        if (custom_idx_end == -1 && custom_idx_start == -1) {
+            return;
+        }
+        throw new IllegalArgumentException("잘못된 커스텀 패턴");
+
+    }
 
     private boolean isItNum(Character c) {
-        int input = c;
         return c >= 48 && c <= 57;
     }
 
-    public int getResult() {
-        return result;
-    }
+
 }
