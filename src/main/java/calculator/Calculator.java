@@ -5,16 +5,13 @@ import java.util.regex.Pattern;
 
 public class Calculator {
 
-    String userInput;
-
-    public Calculator(String userInput) {
-        this.userInput = userInput;
-    }
+    private int sum;
 
     // 입력 받은 문자열을 구분자로부터 구분
-    public String[] separateNumber(String input) {
+    public String[] separateArr(String input) {
+
         // 커스텀 구분자를 사용하는 경우
-        if(input.startsWith("//") && input.contains("\\n")) {
+        if (input.startsWith("//") && input.contains("\\n")) {
             int startIndex = input.indexOf("//");
             int endIndex = input.indexOf("\\n");
 
@@ -25,13 +22,17 @@ public class Calculator {
         }
 
         // 일반 구분자를 사용하는 경우
-        return userInput.split("[,:]");
+        return input.split("[,:]");
     }
 
     // 구분된 숫자의 합 계산
-    public int getSum() {
-        return Arrays.stream(separateNumber(userInput))
+    public int addArr(String input) {
+        return sum = Arrays.stream(separateArr(input))
                        .mapToInt(Integer::parseInt)
                        .sum();
+    }
+
+    public int getSum() {
+        return sum;
     }
 }
