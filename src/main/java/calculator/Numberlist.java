@@ -12,7 +12,7 @@ public class Numberlist {
     }
 
     public void pushtemp(int number) {
-        temp = temp*10 + number;
+        temp = temp*10 + number - '0';
     }
 
     public void push() {
