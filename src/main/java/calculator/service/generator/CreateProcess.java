@@ -1,8 +1,9 @@
-package calculator.separator.service;
+package calculator.service.generator;
 
-import calculator.number.domain.service.NumberCrateService;
+import calculator.number.service.NumberCrateService;
 import calculator.sentence.domain.Sentence;
 import calculator.separator.domain.Separator;
+import calculator.separator.service.SeparatorCreateService;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
