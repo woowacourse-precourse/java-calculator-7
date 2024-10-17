@@ -33,6 +33,10 @@ public class Delimiter {
         return List.copyOf(delimiters);
     }
 
+    public boolean hasCustomDelimiter() {
+        return delimiters.size() > DEFAULT_DELIMITERS.size();
+    }
+
     private void validate(String value) {
         validateIsNumeric(value);
         validateIsBasicDelimiter(value);
