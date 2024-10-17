@@ -1,6 +1,7 @@
 package calculator.controller;
 
 
+import calculator.model.Calculator;
 import calculator.service.DelimiterService;
 import calculator.service.NumberExtractorService;
 import calculator.view.InputView;
@@ -20,7 +21,7 @@ public class CalculatorController {
         String inputString = InputView.getInput();
         inputString = delimiterService.addCustomDelimiters(inputString);
         numberExtractorService.extractNumber(inputString);
-        int result = calculator.calculate();
+        int result = calculatorService
         OutputView.printResultMessage(result);
     }
 }

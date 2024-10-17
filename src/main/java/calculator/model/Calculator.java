@@ -1,15 +1,9 @@
 package calculator.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Calculator {
-    private final ArrayList<Integer> numbers = new ArrayList<>();
-
-    public void saveNumber(int number) {
-        numbers.add(number);
-    }
-
-    public int calculate() {
+    public int calculate(List<Integer> numbers) {
         return numbers.stream()
                 .mapToInt(Integer::intValue)
                 .sum();

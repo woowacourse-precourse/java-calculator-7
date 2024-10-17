@@ -1,17 +1,22 @@
 package calculator.service;
 
-import calculator.model.Calculator;
-import calculator.model.Delimiters;
+
+import calculator.model.Numbers;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 public class NumberExtractorService {
-    private final Delimiters delimiters;
-    private final Calculator calculator;
+    private final Numbers numbers;
+    private final DelimiterService delimiterService;
 
-    public NumberExtractorService(Delimiters delimiters, Calculator calculator) {
-        this.delimiters = delimiters;
-        this.calculator = calculator;
+    public NumberExtractorService(Numbers numbers, DelimiterService delimiterService) {
+        this.numbers = numbers;
+        this.delimiterService = delimiterService;
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers.getNumbers();
     }
 
     public void extractNumber(String inputString) {
@@ -22,7 +27,7 @@ public class NumberExtractorService {
         for (String str : splitedStringList) {
             validateNumberString(str);
             int number = Integer.parseInt(str);
-            calculator.saveNumber(number);
+            numbers.saveNumber(number);
         }
     }
 
@@ -42,8 +47,9 @@ public class NumberExtractorService {
     }
 
     private String createDelimitersString() {
+        List<Character> delimiters = delimiterService.getDelimiters();
         StringBuilder stringBuilder = new StringBuilder();
-        for (char c : delimiters.getDelimiters()) {
+        for (char c : delimiters) {
             stringBuilder.append(c);
         }
         return stringBuilder.toString();

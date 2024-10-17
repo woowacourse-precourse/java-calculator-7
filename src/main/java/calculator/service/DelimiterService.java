@@ -1,6 +1,7 @@
 package calculator.service;
 
 import calculator.model.Delimiters;
+import java.util.List;
 
 public class DelimiterService {
     private static final char CUSTOM_DELIMITER_PREFIX = '/';
@@ -12,6 +13,10 @@ public class DelimiterService {
 
     public DelimiterService(Delimiters delimiters) {
         this.delimiters = delimiters;
+    }
+
+    public List<Character> getDelimiters() {
+        return delimiters.getDelimiters();
     }
 
     public String addCustomDelimiters(String inputString) {
