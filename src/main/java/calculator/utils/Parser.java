@@ -11,23 +11,23 @@ public class Parser {
         List<Integer> numbers = new ArrayList<>();
         StringBuilder number = new StringBuilder();
         for (char current : input.toCharArray()) {
-            if (current >= '0' && current <= '9') {
-                number.append(current);
-            } else if (delimiter.contains(current)) {
+            if (delimiter.contains(current)) {
                 tryToChangeStringToNumber(numbers, number);
-                number.setLength(0);
+                continue;
             }
+            number.append(current);
         }
-        if (!number.isEmpty()) {
-            numbers.add(Integer.parseInt(number.toString()));
-        }
+        tryToChangeStringToNumber(numbers, number);
         NumberValidator.numberValidate(numbers);
         return new Numbers(numbers);
     }
 
     private void tryToChangeStringToNumber(List<Integer> numbers, StringBuilder number) {
         try {
-            numbers.add(Integer.parseInt(number.toString()));
+            if (!number.isEmpty()) {
+                numbers.add(Integer.parseInt(number.toString()));
+                number.setLength(0);
+            }
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }
