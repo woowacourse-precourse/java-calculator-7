@@ -19,10 +19,10 @@ public class StringCalculator {
         if (isEmpty(input)) {
             return Constants.ZERO;
         }
-        if (isContainsCustom(input)) {
+        if (containsCustom(input)) {
             return calculateSumByMatcher(input);
         }
-        if (isContainsBasicDelimiter(input)) {
+        if (containsBasicDelimiter(input)) {
             return calculateSum(splitInput(input));
         }
 
@@ -35,11 +35,11 @@ public class StringCalculator {
         return input == null || input.isEmpty();
     }
 
-    private static boolean isContainsCustom(String input) {
+    private static boolean containsCustom(String input) {
         return input.contains(DOUBLE_SLASH) && input.contains(ESCAPE);
     }
 
-    private static boolean isContainsBasicDelimiter(String input) {
+    private static boolean containsBasicDelimiter(String input) {
         return input.contains(Constants.COMMA) || input.contains(Constants.COLON);
     }
 
