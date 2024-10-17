@@ -107,7 +107,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 개행_문자가_커스텀_구분자인_경우() {
+    void 예외_테스트_개행_문자가_커스텀_구분자인_경우() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//\\n\\n1//2,3:4"))
                         .isInstanceOf(IllegalArgumentException.class));
