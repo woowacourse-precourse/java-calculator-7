@@ -15,10 +15,7 @@ public class DelimiterParser {
     }
 
     public static boolean isDefaultDelimiter(String input) {
-        if (!input.contains(":") && !input.contains(",")) {
-            return false;
-        }
-        return true;
+        return input.contains(":") || input.contains(",");
     }
 
     public String replace(String input) {
@@ -36,16 +33,9 @@ public class DelimiterParser {
         }
         return result;
     }
-
-
     public List<Integer> parseToIntList(String input) {
-        String[] split = input.split(COMMON_DELIMITER);
-        for (String result : split) {
-            System.out.println("result = " + result);
-        }
         return Arrays.stream(input.split(COMMON_DELIMITER))
                 .map(Validator::validateIfNotNumber)
                 .collect(Collectors.toList());
     }
-
 }
