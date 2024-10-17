@@ -6,6 +6,7 @@ import calculator.view.OutputView;
 public class CalculatorService {
 
     static final String INPUT_DESCRIPTION = "덧셈할 문자 열을 입력해 주세요.";
+    static final String OUTPUT_DESCRIPTION = "결과 : ";
 
     private final InputView inputView;
     private final OutputView outputView;
@@ -22,12 +23,8 @@ public class CalculatorService {
 
         if (validateIntArray != null)
         {
-
-            System.out.println(outputView.sumElements(validateIntArray));
-        }
-        else
-        {
-            System.out.println("예외처리로 인한 null 출력");
+            int sum = outputView.sumElements(validateIntArray);
+            outputView.printResult(OUTPUT_DESCRIPTION, sum);
         }
     }
 }

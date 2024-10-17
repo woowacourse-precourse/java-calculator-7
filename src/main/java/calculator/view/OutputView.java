@@ -15,4 +15,12 @@ public class OutputView {
 
         return result;
     }
+
+    /**
+     * 고정 메세지 및 결과값 출력
+     */
+    public void printResult(String message, int result)
+    {
+        System.out.println(message + result);
+    }
 }
