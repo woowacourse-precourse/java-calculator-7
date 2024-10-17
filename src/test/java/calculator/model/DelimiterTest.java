@@ -20,4 +20,11 @@ class DelimiterTest {
 	void validateLength(String invalidData) {
 		assertThrows(IllegalArgumentException.class, () -> Delimiter.from(invalidData));
 	}
+
+	@DisplayName("구분자는 숫자가 될 수 없다")
+	@ParameterizedTest
+	@ValueSource(strings = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"})
+	void validateNotNumber(String invalidData) {
+		assertThrows(IllegalArgumentException.class, () -> Delimiter.from(invalidData));
+	}
 }
