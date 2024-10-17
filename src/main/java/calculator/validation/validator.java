@@ -1,61 +1,71 @@
 package calculator.validation;
 
-import calculator.domain.Seperator;
-import calculator.exception.ManyGroupException;
+import calculator.Type.MessageType;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class validator {
+public class Validator {
 
     public static void validateUserInput(String input){
 
-        checkCustomAtFirst(input);
-
-
+        // 문자열 가장 앞에 // \n이 존재한다
+        checkCustomInPlace(input);
 
     }
+
+
+
+
     // // \n이 가장 처음에 하나만 존재한다
-    private static void checkCustomAtFirst(String input) {
+    private static void checkCustomInPlace(String input) {
         Pattern pattern= Pattern.compile("^//(.)\\\\n{1}");
         Matcher matcher = pattern.matcher(input);
 
-        if (!matcher.find() || matcher.groupCount()>=2){ // // \n이 존재하지 않거나 존재하지만 조건을 만족하지 않는다
-            checkPatternExist(input);
-        }
-        else{
+        if (matcher.find()){ // 문자열 가장 앞에 // \n이 있을 때
             String customSperator=matcher.group(1);
-            checkCustomSeperator(customSperator);
+            checkIfMinus(customSperator);
+            checkIfNumber(customSperator);
+            //checkIfDuplicate(input); //두개 이상 존재한다
+
+        }else{ //문자열 가장 앞에 // \n이 없다
+
+            //문자열에 // \n이 없고 쉼표와 콜론 외 문자가 있을 때
+            checkIfUnsigned(input);
 
 
         }
-
     }
 
-    //중간에 구분자가 존재하면 exception 발생
-    private static void checkPatternExist(String input) {
-        Pattern pattern= Pattern.compile("^//(.*)\\\\n");
-        Matcher matcher = pattern.matcher(input);
+    private static void checkIfUnsigned(String input) {
+        String[] numbers=input.split(",|:");
 
-        if (matcher.find()){
-            throw new ManyGroupException("구분자가 제일 앞에 들어가지 않았습니다");
+        String REGEXP_ONLY_NUM = "^[\\d]*$";
+        for (String number:numbers){
+            if (!Pattern.matches(REGEXP_ONLY_NUM,number)){
+                throw new IllegalArgumentException(MessageType.INVALID_SEPERATOR.getMessage());
+            }
         }
 
-    }
 
-    // 커스텀 표식이 있는 경우, 구분자에 - 을 입력한 경우 | 구분자에 숫자를 입력한 경우를 확인한다 |  // \n이 제일 앞에 있지 않는 경우
-    private static void checkCustomSeperator(String customSeperator) {
 
-        Pattern pattern= Pattern.compile("//(.*)\\\\n");
-
-        //마이너스 입력한경우 예외를 던진다
-
-        MinusValidator.isMinusSeperator(customSeperator);
-        //숫자 입력한 경우 예외를 던진다
-        NumberValidator.isNumberSeperator(customSeperator);
-
-        //구분자를 추가한다
-        Seperator.addSeperator(customSeperator);
 
     }
+
+
+    private static void checkIfNumber(String customSeperator) {
+        if (customSeperator.matches("[0-9]")){
+            throw new IllegalArgumentException(MessageType.NUMBER_SEPERATOR.getMessage());
+        }
+    }
+
+    private static void checkIfMinus(String customSeperator) {
+        if (customSeperator.equals("-")){
+            throw new IllegalArgumentException(MessageType.MINUS_SEPERATOR.getMessage());
+        }
+    }
+
+
+
+
 }
