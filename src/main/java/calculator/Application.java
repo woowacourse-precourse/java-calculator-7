@@ -9,14 +9,8 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
-        try {
-            int result = sumNumbers(extractNumbers(input));
-            System.out.println("결과 : " + result);
-        }
-        catch (IllegalArgumentException e){
-            System.out.println("잘못된 입력입니다: " + e.getMessage());
-            throw e;
-        }
+        int result = sumNumbers(extractNumbers(input));
+        System.out.println("결과 : " + result);
     }
 
     public static String[] extractNumbers(String input){
@@ -28,7 +22,7 @@ public class Application {
 
         if(input.startsWith("//")){
             int delimiterEndIndex = input.indexOf("\\n");
-            if (delimiterEndIndex == -1) throw new IllegalArgumentException("잘못된 구분자 형식");
+            if (delimiterEndIndex == -1) throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
 
             delimiter = input.substring(2, delimiterEndIndex);
             delimiter = Pattern.quote(delimiter);
