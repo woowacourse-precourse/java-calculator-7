@@ -9,6 +9,7 @@ import java.util.List;
 public class Application {
     public static void main(String[] args) {
         List<String> processedInput = new ArrayList<>();
+        int total = 0;
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
@@ -46,6 +47,10 @@ public class Application {
             if (Character.isDigit(Integer.parseInt(number))) {
                 throw new IllegalArgumentException();
             }
+        }
+
+        for (String number : processedInput) {
+            total += Integer.parseInt(number);
         }
     }
 }
