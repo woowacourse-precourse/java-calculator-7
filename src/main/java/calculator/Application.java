@@ -1,9 +1,9 @@
 package calculator;
 
-import calculator.domain.Calculator;
-import calculator.domain.Delimiters;
-import calculator.domain.InputParser;
-import calculator.domain.StringAddCalculator;
+import calculator.domain.calculator.Calculator;
+import calculator.domain.delimiter.Delimiters;
+import calculator.domain.input.InputParser;
+import calculator.domain.calculator.StringAddCalculator;
 import calculator.ui.ViewManager;
 
 public class Application {

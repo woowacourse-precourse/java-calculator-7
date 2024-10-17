@@ -1,4 +1,4 @@
-package calculator.domain;
+package calculator.domain.delimiter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,10 +7,8 @@ import java.util.Optional;
 public class Delimiters {
 
     private static final int BEGIN_INDEX = 2;
-    private static final String CUSTOM_DELIMITER_END_SEPARATOR = "\n";
-    private static final String DEFAULT_DELIMITER_COMMA = ",";
-    private static final String DEFAULT_DELIMITER_COLON = ":";
     private static final String CUSTOM_DELIMITER_START_SEPARATOR = "//";
+    private static final String CUSTOM_DELIMITER_END_SEPARATOR = "\n";
 
     private final List<String> delimiters;
 
@@ -20,8 +18,8 @@ public class Delimiters {
     }
 
     private void addDefaultDelimiters() {
-        delimiters.add(DEFAULT_DELIMITER_COMMA);
-        delimiters.add(DEFAULT_DELIMITER_COLON);
+        delimiters.add(DelimiterType.COMMA.getDelimiter());
+        delimiters.add(DelimiterType.COLON.getDelimiter());
     }
 
     public List<String> getAllDelimiters(final String input) {

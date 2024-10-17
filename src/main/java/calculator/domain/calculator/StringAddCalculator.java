@@ -1,4 +1,6 @@
-package calculator.domain;
+package calculator.domain.calculator;
+
+import calculator.domain.input.InputParser;
 
 public class StringAddCalculator {
 

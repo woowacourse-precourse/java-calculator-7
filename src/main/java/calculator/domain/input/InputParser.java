@@ -1,4 +1,6 @@
-package calculator.domain;
+package calculator.domain.input;
+
+import calculator.domain.delimiter.Delimiters;
 
 import java.util.Arrays;
 import java.util.List;

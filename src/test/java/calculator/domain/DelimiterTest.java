@@ -1,11 +1,11 @@
 package calculator.domain;
 
+import calculator.domain.delimiter.Delimiters;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class DelimiterTest {
 
@@ -33,5 +33,17 @@ public class DelimiterTest {
 
         // then
         assertThat(allDelimiters).containsExactly(",",":");
+    }
+
+    @Test
+    void 커스텀_구분자가_존재하는지_여부_확인() {
+        // given
+        String input = "//-\n1-2-3";
+
+        // when
+        final boolean result = delimiters.hasCustomDelimiter(input);
+
+        // then
+        assertThat(result).isTrue();
     }
 }
