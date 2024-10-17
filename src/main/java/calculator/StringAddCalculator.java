@@ -40,8 +40,8 @@ public class StringAddCalculator {
     // 숫자 합산 method
     private static int sum(String[] splitString) {
         int sum = 0;
-        for (int i = 0; i < splitString.length; i++) {
-            sum += Integer.parseInt(splitString[i]);
+        for (String s : splitString) {
+            sum += Integer.parseInt(s);
         }
         return sum;
     }
