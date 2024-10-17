@@ -12,7 +12,7 @@ public class CustomDelimiterParser {
 
     public Optional<String> parse(String input) {
         if (hasCustomDelimiter(input)) {
-            return Optional.of(input.substring(PREFIX.length(), getSuffixIndex(input)));
+            return Optional.of(input.substring(getPrefixIndex(), getSuffixIndex(input)));
         }
         return Optional.empty();
     }
@@ -23,6 +23,10 @@ public class CustomDelimiterParser {
         }
         int suffixIndex = getSuffixIndex(input);
         return suffixIndex != -1;
+    }
+
+    private int getPrefixIndex() {
+        return PREFIX.length();
     }
 
     private int getSuffixIndex(String input) {
