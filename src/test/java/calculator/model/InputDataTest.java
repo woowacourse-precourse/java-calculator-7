@@ -36,17 +36,17 @@ class InputDataTest {
 
     @ParameterizedTest
     @ValueSource(strings = {",123","가0721","a2038"})
-    @DisplayName("입력 값의 처음이 / 나 숫자가 아니면 예외가 발생한다")
-    void checkStartInputIsInvalid(String input){
+    @DisplayName("커스텀 구분자가 없고 입력 값의 처음이 숫자가 아니면 예외가 발생한다")
+    void checkInputStartsWithoutCustomDelimiterIsInvalid(String input){
         assertThatThrownBy(()->inputData.validate(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[F0002]");
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"/,123","1가0721","/!/a2038"})
-    @DisplayName("입력 값의 처음이 / 나 숫자라면 예외가 발생하지 않는다")
-    void checkStartInputIsValid(String input){
+    @ValueSource(strings = {"1/,123","1가0721","2/!/a2038"})
+    @DisplayName("커스텀 구분자가 없고 입력 값의 처음이 숫자라면 예외가 발생하지 않는다")
+    void checkInputStartsWithoutCustomDelimiterIsValid(String input){
         assertThatCode(()->inputData.validate(input))
                 .doesNotThrowAnyException();
     }
