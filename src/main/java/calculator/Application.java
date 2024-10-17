@@ -3,7 +3,7 @@ package calculator;
 import calculator.delimiter.CustomDelimiterService;
 import calculator.delimiter.Delimiter;
 import calculator.delimiter.Delimiters;
-import calculator.util.console.Console;
+import calculator.util.console.IOConsole;
 import calculator.util.integer.IntegerUtils;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class Application {
     public static void main(String[] args) {
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = Console.readLine();
+        String input = IOConsole.readLine();
 
         Delimiters delimiters = new Delimiters(getDelimiters(input));
 
@@ -25,7 +25,7 @@ public class Application {
         try {
             List<Integer> numbers = IntegerUtils.parsePositiveIntegers(numberTokens);
             int sum = IntegerUtils.sum(numbers);
-            Console.print("결과 : " + sum);
+            IOConsole.print("결과 : " + sum);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("구분자가 아닌 문자가 포함되어 있습니다.");
         }

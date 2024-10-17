@@ -1,6 +1,8 @@
 package calculator.util.console;
 
-public class Console {
+import camp.nextstep.edu.missionutils.Console;
+
+public class IOConsole {
 
     public static String readLine() {
         return Console.readLine();
