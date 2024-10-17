@@ -2,6 +2,7 @@ package calculator;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class Application {
@@ -58,10 +59,10 @@ public class Application {
     }
 
     private static void validateNoNegativeNumbers(String[] numbers) {
-        for (String number : numbers) {
-            if (Integer.parseInt(number) < 0) {
-                throw new IllegalArgumentException("음수가 입력 되었습니다.");
-            }
+        if (Arrays.stream(numbers)
+                .mapToInt(Integer::parseInt)
+                .anyMatch(n -> n < 0)) {
+            throw new IllegalArgumentException("음수가 입력되었습니다.");
         }
     }
 
