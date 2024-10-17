@@ -1,6 +1,5 @@
 package calculator.model;
 
-import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,5 +31,27 @@ public class InputData {
         Matcher delimiterMatcher = delimiterPattern.matcher(input);
 
         return delimiterMatcher.matches();
+    }
+
+    public String convertDelimiterPart(){
+        Pattern delimiterPattern = Pattern.compile("^//(.*)\\\\n(.*)");
+        Matcher delimiterMatcher = delimiterPattern.matcher(input);
+        String delimiter = "";
+
+        if(delimiterMatcher.matches()){
+            delimiter = delimiterMatcher.group(1);
+        }
+        return delimiter;
+    }
+
+    public String convertCalculatorPart() {
+        Pattern delimiterPattern = Pattern.compile("^//(.*)\\\\n(.*)");
+        Matcher delimiterMatcher = delimiterPattern.matcher(input);
+        String calculator = "";
+
+        if(delimiterMatcher.matches()){
+            calculator = delimiterMatcher.group(2);
+        }
+        return calculator;
     }
 }

@@ -42,7 +42,7 @@ class StringCalculatorControllerTest extends NsTest {
     @Test
     @DisplayName("커스텀 구분자가 없는 데이터 객체를 받아 기본 구분자 객체를 생성한다")
     void createDefaultDelimiterInstance() {
-        InputData inputData = new InputData("1;2;3");
+        InputData inputData = new InputData("1,2,3");
         assertThat(stringCalculatorController.createDelimiterPart(inputData))
                 .isInstanceOf(DefaultDelimiter.class);
     }

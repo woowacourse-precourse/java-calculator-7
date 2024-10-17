@@ -9,5 +9,7 @@ public class Application {
         StringCalculatorController stringCalculatorController = new StringCalculatorController();
         InputData inputData = stringCalculatorController.handoverInput();
 
+        System.out.println(inputData.convertDelimiterPart());
+
     }
 }
