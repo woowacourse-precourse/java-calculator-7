@@ -37,9 +37,18 @@ public class Application {
             throw new IllegalArgumentException("입력 문자열에 2개 이상의 연속된 숫자가 아닌 문자가 포함되어 있습니다.");
         }
         
-        // 문자열을 한 자리씩 순환하면서 , 또는 : 외의 문자가 있을 경우 오류 발생
+        // 기본 구분자 배열
+        String delimiters = ",:";
+        
+        // extended 모드일 경우 추가 구분자 설정
+        if (extendedMode && input.length() > 2) {
+            char additionalDelimiter = input.charAt(2);
+            delimiters += additionalDelimiter;
+        }
+        
+        // 문자열을 한 자리씩 순환하면서 구분자 배열을 기반으로 검사
         for (char c : input.toCharArray()) {
-            if (!Character.isDigit(c) && c != ',' && c != ':') {
+            if (!Character.isDigit(c) && delimiters.indexOf(c) == -1) {
                 throw new IllegalArgumentException("입력 문자열에 허용되지 않은 문자가 포함되어 있습니다: " + c);
             }
         }
