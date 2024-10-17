@@ -1,6 +1,6 @@
 package calculator;
 
-import java.util.Scanner;
+import camp.nextstep.edu.missionutils.Console;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,8 +10,7 @@ public class Application {
     private static int total;
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        inputString = scanner.nextLine();
+        inputString = Console.readLine();
 
         // 기본 값 설정
         total = 0;
@@ -43,12 +42,12 @@ public class Application {
 
                     // 음수 입력에 대한 예외 처리
                     if (number < 0) {
-                        throw new IllegalArgumentException("음수는 입력할 수 없습니다. 입력된 음수: " + number);
+                        throw new IllegalArgumentException("음수는 입력 불가능합니다.");
                     }
 
                     total += number; // 합산
                 } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("잘못된 구분자가 있습니다. 발견된 문자열: " + s); // 숫자 형식 오류 시 예외 발생
+                    throw new IllegalArgumentException("잘못된 구분자가 있습니다."); // 숫자 형식 오류 시 예외 발생
                 }
             }
 
@@ -57,7 +56,6 @@ public class Application {
 
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
-            System.exit(1); // 명시적으로 종료
         }
     }
 }
