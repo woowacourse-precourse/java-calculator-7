@@ -5,7 +5,16 @@ import java.util.List;
 public class Numbers {
     private final long sum;
     public Numbers(Separator separator) {
-        this.sum = sum(separator.getExtractedNumbers());
+        List<String> numbers = separator.getExtractedNumbers();
+        validate(numbers);
+        this.sum = sum(numbers);
+    }
+    private void validate(List<String> numbers) {
+        for(String number : numbers) {
+            if(number.isEmpty()) {
+                throw new IllegalArgumentException();
+            }
+        }
     }
     private long sum(List<String> numbers) {
         long sum = 0;
