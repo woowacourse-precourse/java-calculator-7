@@ -11,9 +11,10 @@ public class Calculator {
 
         if (userInput == null || userInput.isEmpty()) {
             OutputView.printSum(0);
+        } else {
+            String[] tokens = Tokenizer.tokenization(userInput);
+            add(Tokenizer.convertToNumber(tokens));
         }
-        String[] tokens = Tokenizer.tokenization(userInput);
-        add(Tokenizer.convertToNumber(tokens));
     }
 
     public static void add(int[] numbers) {
