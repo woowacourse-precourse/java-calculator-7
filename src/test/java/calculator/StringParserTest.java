@@ -15,7 +15,7 @@ class StringParserTest {
 
 
     @Test
-    void 빈_입력시_0을_포함한_리스트_반환() {
+    void 공백문자_입력시_0을_포함한_리스트_반환() {
         List<Integer> result = stringParser.extractNumbers("");
         assertEquals(Collections.singletonList(0), result);
     }
