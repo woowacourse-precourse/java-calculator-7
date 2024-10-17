@@ -8,30 +8,43 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CalculatorService {
-    private static final Pattern DANGLING_PATTERN = Pattern.compile( "[?*+()\\[\\]{}]"); //구분자 사용시 오류 발생 문자 확인 정규식
+
+    private static final Pattern SPECIAL_CHARACTERS_PATTERN = Pattern.compile("[?*+()\\[\\]{}]");
+    private static final String CUSTOM_DELIMITER_MARKER = "\\n";
+    private static final String ESCAPE_PREFIX = "\\";
+
     private final CalculatorLogic calculatorLogic = new CalculatorLogic();
     private final InputValidator inputValidator = new InputValidator();
 
     public int calculate(String input) {
-        Scanner sc = new Scanner(input);
-        List<Integer> validateNumbers;
-
         inputValidator.inputValidate(input);
-        String delimiter = calculatorLogic.extractDelimiter(sc.nextLine());
-        Matcher matcher = DANGLING_PATTERN.matcher(delimiter);
-        if (matcher.find()) {
-            delimiter = "\\" + delimiter; //dangling 오류 발생 문자 처리
-        }
-
-        if (sc.hasNext()) {
-            validateNumbers = calculatorLogic.extractNumbers(sc.nextLine(), delimiter);
-        } else if (input.contains("\\n")) { //ApplicationTest 커스텀 구분자 테스트 위한 기능 - \\n의 의미를 알 수 없다...
-            validateNumbers = calculatorLogic.extractNumbers(input.substring(input.indexOf("\\n") + 2), delimiter);
-        } else {
-            validateNumbers = calculatorLogic.extractNumbers(input, delimiter);
-        }
-
+        Scanner scanner = new Scanner(input);
+        String delimiter = getValidatedDelimiter(scanner);
+        List<Integer> validateNumbers = extractValidatedNumbers(input, delimiter, scanner);
         inputValidator.numbersValidate(validateNumbers);
         return calculatorLogic.calculate(validateNumbers);
+    }
+
+    private String getValidatedDelimiter(Scanner scanner) {
+        String delimiter = calculatorLogic.extractDelimiter(scanner.nextLine());
+        if (containsSpecialCharacter(delimiter)) {
+            delimiter = ESCAPE_PREFIX + delimiter;
+        }
+        return delimiter;
+    }
+
+    private boolean containsSpecialCharacter(String delimiter) {
+        Matcher matcher = SPECIAL_CHARACTERS_PATTERN.matcher(delimiter);
+        return matcher.find();
+    }
+
+    private List<Integer> extractValidatedNumbers(String input, String delimiter, Scanner scanner) {
+        if (scanner.hasNextLine()) {
+            return calculatorLogic.extractNumbers(scanner.nextLine(), delimiter);
+        } else if (input.contains(CUSTOM_DELIMITER_MARKER)) {
+            return calculatorLogic.extractNumbers(input.substring(input.indexOf(CUSTOM_DELIMITER_MARKER) + 2), delimiter);
+        } else {
+            return calculatorLogic.extractNumbers(input, delimiter);
+        }
     }
 }

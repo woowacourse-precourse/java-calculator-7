@@ -13,13 +13,11 @@ public class InputValidator {
     public void inputValidate(String input) {
         validateInput = input;
         isEmpty();
-
     }
 
     public void numbersValidate(List<Integer> numbers) {
         validateNumbers = numbers;
         isNegative();
-
     }
 
     private void isEmpty() {
@@ -33,5 +31,4 @@ public class InputValidator {
             throw new IllegalArgumentException(ERROR_PREFIX + NEGATIVE_NUMBER);
         }
     }
-
 }
