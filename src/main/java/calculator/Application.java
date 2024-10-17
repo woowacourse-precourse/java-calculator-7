@@ -16,4 +16,16 @@ public class Application {
     public static String[] splitInput(String input) {
         return input.split("[,:]"); // 콤마와 콜론을 구분자로 사용하여 문자열을 나눔
     }
+
+    //나눠진 문자를 합하는 메서드
+    public static int sumNumbers(String[] parts) {
+        int sum = 0;
+
+        for (String part : parts) {
+            sum += Integer.parseInt(part);
+        }
+        return sum;
+    }
+
+
 }
