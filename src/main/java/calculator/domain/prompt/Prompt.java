@@ -1,5 +1,6 @@
 package calculator.domain.prompt;
 
+import calculator.global.utility.CharacterUtils;
 import java.util.Collections;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public abstract class Prompt {
 
     private void validateOnlyDigits(String data) {
         for (char word: data.toCharArray()) {
-            if (this.isNotDigit(word)) {
+            if (CharacterUtils.isNotDigit(word)) {
                 throw new IllegalArgumentException();
             }
         }
@@ -48,10 +49,6 @@ public abstract class Prompt {
         if (data == null || data.isEmpty()) {
             throw new IllegalArgumentException();
         }
-    }
-
-    private boolean isNotDigit(char word) {
-        return !Character.isDigit(word);
     }
 
     public List<String> getInput() {
