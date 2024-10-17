@@ -18,14 +18,22 @@ public class InputNumberStrings {
     }
 
     private void validateContainsDelimiter(String stringNumbers, DelimiterResult regex) {
-        String[] validDelimiters = makeValidateRegex(regex);
+        if (stringNumbers.contains("\"\"")) {
+            return;
+        }
 
+        if (stringNumbers.matches("\\d+")) {
+            return;
+        }
+
+        String[] validDelimiters = makeValidateRegex(regex);
         for (char c : stringNumbers.toCharArray()) {
             if (!Arrays.asList(validDelimiters).contains(String.valueOf(c)) && !Character.isDigit(c)
                     && !Character.isWhitespace(c)) {
                 throw new IllegalArgumentException("입력된 구분자 중 잘못된 구분자가 있습니다");
             }
         }
+
     }
 
     private String[] makeValidateRegex(DelimiterResult regex) {
