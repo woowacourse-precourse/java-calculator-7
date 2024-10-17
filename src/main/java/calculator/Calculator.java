@@ -2,6 +2,7 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class Calculator {
     static final String SEPARATOR_1 = "//";
@@ -31,21 +32,23 @@ public class Calculator {
      * @return 정수 배열의 각 원소들 합
      */
     public int calculate(String[] array){
+        Stream<String> stream = Arrays.stream(array);
         // 각 문자열을 정수로 변환하여 정수 배열 생성
-        int[] numArray = Arrays.stream(array).mapToInt(str ->
-            {
-                try {
-                    if(str.isEmpty()){
-                        return 0;
-                    }
-                    if(Integer.parseInt(str)<0){
+        int[] numArray = stream.mapToInt(
+                str -> {
+                    try{
+                        if(str.isEmpty()){
+                            return 0;
+                        }
+                        if(Integer.parseInt(str)<0){
+                            throw new IllegalArgumentException();
+                        }
+                        return Integer.parseInt(str);
+                    }catch (NumberFormatException e){
                         throw new IllegalArgumentException();
                     }
-                    return Integer.parseInt(str);
-                }catch (NumberFormatException e){
-                    throw new IllegalArgumentException();
                 }
-            }).toArray();
+        ).toArray();
 
         return Arrays.stream(numArray).sum();
     }
