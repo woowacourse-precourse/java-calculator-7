@@ -1,7 +1,7 @@
 package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
 import org.junit.jupiter.api.Test;
 
@@ -40,19 +40,15 @@ public class ParserTest {
     void throw_on_invalid_strings() {
         String wrongDelimiter = "1;2;3";
         String floatNumber = "1.2,3.5";
-        String invalidDelimiter = "//;1;2,3";
+        String invalidDelimiter = "//;\n1;2,3";
 
-        assertThatThrownBy(() -> {
-            parser.parse(wrongDelimiter);
-        }).hasCause(new IllegalArgumentException());
+        Throwable wrongDelimiterException = catchThrowable(() -> { parser.parse(wrongDelimiter); });
+        Throwable floatNumberException = catchThrowable(() -> { parser.parse(floatNumber); });
+        Throwable invalidDelimiterException = catchThrowable(() -> { parser.parse(invalidDelimiter); });
 
-        assertThatThrownBy(() -> {
-            parser.parse(floatNumber);
-        }).hasCause(new IllegalArgumentException());
-
-        assertThatThrownBy(() -> {
-            parser.parse(invalidDelimiter);
-        }).hasCause(new IllegalArgumentException());
+        assertThat(wrongDelimiterException).isInstanceOf(IllegalArgumentException.class);
+        assertThat(floatNumberException).isInstanceOf(IllegalArgumentException.class);
+        assertThat(invalidDelimiterException).isInstanceOf(IllegalArgumentException.class);
     }
 
 }
