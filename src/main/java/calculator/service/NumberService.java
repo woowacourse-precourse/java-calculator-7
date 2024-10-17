@@ -15,7 +15,7 @@ public class NumberService {
         this.delimiterService = delimiterService;
     }
 
-    public List<Integer> getNumbers() {
+    protected List<Integer> getNumbers() {
         return numbers.getNumbers();
     }
 

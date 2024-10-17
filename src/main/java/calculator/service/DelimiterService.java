@@ -15,7 +15,7 @@ public class DelimiterService {
         this.delimiters = delimiters;
     }
 
-    public List<Character> getDelimiters() {
+    protected List<Character> getDelimiters() {
         return delimiters.getDelimiters();
     }
 
