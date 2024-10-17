@@ -10,19 +10,25 @@ import java.util.regex.Pattern;
 public class Calculator {
 
     public int splitAndSum(String input) {
-        if (input == null || input.trim().isEmpty()) {
+        if (isEmptyInput(input)) {
             return 0;
         }
 
+        List<String> delimiters = buildDelimiters(input);
+        String numbers = extractNumbers(input, delimiters.size());
+
+        return sumNumbers(numbers.split(String.join("|", delimiters)));
+    }
+
+    private boolean isEmptyInput(String input) {
+        return input == null || input.trim().isEmpty();
+    }
+
+    private List<String> buildDelimiters(String input) {
         List<String> delimiters = new ArrayList<>();
         delimiters.add(",");
-        delimiters.add(":");
-
         delimiters.addAll(getCustomDelimiters(input));
-        String numbers = removeCustomDelimiterPart(input, delimiters.size());
-
-        String delimiterPattern = String.join("|", delimiters);
-        return sumNumbers(numbers.split(delimiterPattern));
+        return delimiters;
     }
 
     private List<String> getCustomDelimiters(String input) {
@@ -37,7 +43,7 @@ public class Calculator {
         return delimiters;
     }
 
-    private String removeCustomDelimiterPart(String input, int delimiterCount) {
+    private String extractNumbers(String input, int delimiterCount) {
         if (delimiterCount > 2) {
             int lastDelimiterIndex = input.lastIndexOf("\\n");
             return input.substring(lastDelimiterIndex + 2);
@@ -69,7 +75,7 @@ public class Calculator {
         try {
             return Math.addExact(sum, nextNumber);
         } catch (ArithmeticException e) {
-            throw new IllegalArgumentException("입력한 값의 계산 결과가 정수형 범위를 초과했습니다.");
+            throw new IllegalArgumentException("입력한 값의 계산 결과가 정수 범위를 초과했습니다.");
         }
     }
 }
