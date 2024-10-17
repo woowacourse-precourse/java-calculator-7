@@ -9,6 +9,7 @@ public class Calculator {
     private String input;
     private int result;
     private int inputLen;
+    private static final String basicDelimiter = ",|:";
 
     // 생성자에서 입력 받기
     public Calculator() {
@@ -30,27 +31,28 @@ public class Calculator {
     }
 
     private void checkType(String input) {
-        if (input == ""){
+        if (input.equals("")){
             isNull();
         }
 
         if (input.startsWith("//")){
-            customDelimiter();
+            customDelimiterSplit();
         } else{
-            basicDelimiter();
+            basicDelimiterSplit();
         }
     }
 
 
-    private void basicDelimiter() {
-        String[] strArr = input.split(",|:");
-        calculate(strArr, ",|:");
+    private void basicDelimiterSplit() {
+        String[] operandArr = input.split(basicDelimiter);
+        calculate(operandArr);
     }
 
 
-    private void customDelimiter() {
+    private void customDelimiterSplit() {
         int idx = input.indexOf("\\n", 2);
-        String delimiter = ",|:|";
+        String customDelimiter = basicDelimiter + "|";
+        String operandStr = "";
 
         if (inputLen == idx+2){
             isNull();
@@ -59,16 +61,14 @@ public class Calculator {
 
         if (idx == -1) {
             throw new IllegalArgumentException("잘못된 입력값입니다.");
-        } else if(idx == 2){
-            String[] strArr = input.split(delimiter+"|");
         } else{
-            delimiter += input.substring(2, idx).replace("|", "\\|");
+            // |가 커스텀구분자에 포함되었을 경우에 \\|로 치환하여 문자로 인식하도록
+            customDelimiter += input.substring(2, idx).replace("|", "\\|");
         }
 
-        String checkStr = input.substring(idx+2, inputLen);
-
-        String[] strArr = checkStr.split(delimiter);
-        calculate(strArr, delimiter);
+        operandStr = input.substring(idx+2, inputLen);
+        String[] operandArr = operandStr.split(customDelimiter);
+        calculate(operandArr);
     }
 
 
@@ -77,15 +77,15 @@ public class Calculator {
     }
 
 
-    public int isPositiveNum(String s, String delimiter){
+    public int isPositiveNum(String operand){
         int num;
 
-        if (s.equals("")){
+        if (operand.equals("")){
             return 0;
         }
 
         try{
-            num = Integer.parseInt(s);
+            num = Integer.parseInt(operand);
         } catch (NumberFormatException e){
             throw new IllegalArgumentException("잘못된 입력값입니다.");
         }
@@ -98,10 +98,10 @@ public class Calculator {
     }
 
 
-    private void calculate(String[] strArr, String delimiter){
-        for (String s : strArr) {
-            if (s != null){
-                result += isPositiveNum(s, delimiter);
+    private void calculate(String[] operandArr){
+        for (String operand : operandArr) {
+            if (operand != null){
+                result += isPositiveNum(operand);
             }
         }
     }

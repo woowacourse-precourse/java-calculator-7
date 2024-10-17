@@ -49,7 +49,7 @@ class ApplicationTest extends NsTest {
         String toBeChecked = "-1";
 
         //when & then
-        assertThatThrownBy(() -> calculator.isPositiveNum(toBeChecked, ""))
+        assertThatThrownBy(() -> calculator.isPositiveNum(toBeChecked))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
