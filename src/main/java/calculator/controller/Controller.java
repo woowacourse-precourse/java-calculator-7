@@ -9,20 +9,8 @@ public class Controller {
     public void calculate() {
         printStartMessage();
         var text = View.read();
-        var regex = ",|:";
-        String[] nums;
-        if (text.indexOf("//") != -1) {
-            if (text.indexOf("\\n") == -1) {
-                throw new IllegalArgumentException();
-            }
-            var custom = text.substring(2, text.indexOf("\\n"));
-            if (!custom.equals("")) {
-                regex += "|" + custom;
-            }
-            nums = text.substring(text.indexOf("\\n") + 2, text.length()).split(regex);
-        } else {
-            nums = text.split(regex);
-        }
+        var regex = extractRegex(text);
+        String[] nums = splitNumbers(text, regex);
 
         var total = 0;
         for (String num_text : nums) {
@@ -38,6 +26,24 @@ public class Controller {
             total += num;
         }
         printResult(total);
+    }
+
+    private String extractRegex(String text) {
+        var regex = ",|:";
+        if (!text.contains("//")) {
+            return regex;
+        }
+        if (!text.contains("\\n")) {
+            throw new IllegalArgumentException();
+        }
+        return regex + "|" + text.substring(2, text.indexOf("\\n"));
+    }
+
+    private String[] splitNumbers(String text, String regex) {
+        if (!text.contains("\\n")) {
+            return text.split(regex);
+        }
+        return text.substring(text.indexOf("\\n") + 2).split(regex);
     }
 
     private void printStartMessage() {
