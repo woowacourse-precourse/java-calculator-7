@@ -3,6 +3,7 @@ package calculator.model;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class RegDelimiterTest {
@@ -59,15 +60,19 @@ public class RegDelimiterTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
-    void 커스텀_구분자_종료_문자_입력() {
-        RegDelimiter regDelimiter = new RegDelimiter();
-        String testString = "//%%\\n1%2,3";
-
-        int customDeliEndIdx = regDelimiter.findCustomDelimiter(testString);
-
-        assertThat(customDeliEndIdx).isEqualTo(5);
-    }
+    /**
+     * Deprecated
+     * 함수 구현 중간 단계에서 테스트한 메서드로, 함수의 최종 반환값과 일치하지 않아 주석 처리함.
+     */
+//    @Test
+//    void 커스텀_구분자_종료_문자_입력() {
+//        RegDelimiter regDelimiter = new RegDelimiter();
+//        String testString = "//%%\\n1%2,3";
+//
+//        int customDeliEndIdx = regDelimiter.findCustomDelimiter(testString);
+//
+//        assertThat(customDeliEndIdx).isEqualTo(5);
+//    }
 
     @Test
     void 커스텀_구분자_종료_문자_없으면_예외_발생() {
@@ -76,5 +81,39 @@ public class RegDelimiterTest {
 
         assertThatThrownBy(() -> regDelimiter.findCustomDelimiter(testString))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 최종_커스텀_구분자_입력_성공_1() {
+        RegDelimiter regDelimiter = new RegDelimiter();
+        String testString = "//%$\\n1%2,3";
+
+        regDelimiter.findCustomDelimiter(testString);
+
+        int customDeliEndIdx = regDelimiter.getCustomDeliEndIdx();
+        List<String> delimiters = regDelimiter.getDelimiters();
+
+        assertThat(customDeliEndIdx).isEqualTo(5);
+        assertThat(delimiters.size()).isEqualTo(3);
+        assertThat(delimiters.get(0)).isEqualTo(",");
+        assertThat(delimiters.get(1)).isEqualTo(":");
+        assertThat(delimiters.get(2)).isEqualTo("%$");
+    }
+
+    @Test
+    void 최종_커스텀_구분자_입력_성공_2() {
+        RegDelimiter regDelimiter = new RegDelimiter();
+        String testString = "//%\\n1%2,3";
+
+        regDelimiter.findCustomDelimiter(testString);
+
+        int customDeliEndIdx = regDelimiter.getCustomDeliEndIdx();
+        List<String> delimiters = regDelimiter.getDelimiters();
+
+        assertThat(customDeliEndIdx).isEqualTo(4);
+        assertThat(delimiters.size()).isEqualTo(3);
+        assertThat(delimiters.get(0)).isEqualTo(",");
+        assertThat(delimiters.get(1)).isEqualTo(":");
+        assertThat(delimiters.get(2)).isEqualTo("%");
     }
 }
