@@ -30,6 +30,24 @@ public class Calculator {
     }
 
     private void checkType(String input) {
+        if (input == ""){
+            isNull();
+        }
+
+        if (input.startsWith("//")){
+            customDelimiter();
+        } else{
+            basicDelimiter();
+        }
+    }
+
+
+    private void basicDelimiter() {
+
+    }
+
+
+    private void customDelimiter() {
 
     }
 
