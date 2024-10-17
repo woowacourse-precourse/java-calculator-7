@@ -40,11 +40,10 @@ class ApplicationTest extends NsTest {
         Calculator calculator = new Calculator();
         System.setIn(new ByteArrayInputStream("//a1b2.c\\n".getBytes()));
         calculator.inputStr();
-        System.
 
-                assertSimpleTest(() ->
-                        assertThat(calculator.checkCustomDelim()).get().isEqualTo("a1b2.c")
-                );
+        assertSimpleTest(() ->
+                assertThat(calculator.checkCustomDelim()).get().isEqualTo("a1b2.c")
+        );
     }
 
     @Test

@@ -15,6 +15,7 @@ public class Calculator {
 
     public String inputStr() {
         str = Console.readLine().trim();
+        Console.close();
         return str;
     }
 
