@@ -63,4 +63,8 @@ public class Application {
         }
         return result;
     }
+
+    public void printResult(int result) {
+        System.out.println("결과 : " + result);
+    }
 }
