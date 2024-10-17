@@ -73,6 +73,14 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 안되는_케이스_발견() {
+        assertSimpleTest(() -> {
+            run("//^^^^;;;:\\n1;;2,   3: ^^^^^^^^^^^^^^^4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
