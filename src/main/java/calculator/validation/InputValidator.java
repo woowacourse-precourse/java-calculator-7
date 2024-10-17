@@ -65,7 +65,7 @@ public class InputValidator {
             String customDelimiter = input.substring(2, delimiterEndIndex);
             String numbers = input.substring(delimiterEndIndex + 1);
 
-            return numbers.split(customDelimiter);
+            return numbers.split(customDelimiter + "|" + DEFAULT_DELIMITERS);
         } else {
             return input.split(DEFAULT_DELIMITERS);  // 기본 구분자를 사용하는 경우
         }
@@ -134,6 +134,20 @@ public class InputValidator {
 
             if (number.matches("0+")) {
                 throw new IllegalArgumentException(ErrorMessage.NOT_ALLOW_ONLY_ZERO.getMessage());
+            }
+        }
+    }
+
+    /**
+     * 기본 구분자와 커스텀 구분자가 연속으로 사용된 경우 예외 발생
+     */
+    public static void validateMixedDelimiters(String input) {
+        String[] numbers = splitCustomInput(input);
+
+        for (int i = 0; i < numbers.length - 1; i++) {
+            // 연속된 숫자가 구분자인지 확인(숫자가 아닌 경우 예외 발생)
+            if (numbers[i].isEmpty()) {
+                throw new IllegalArgumentException(ErrorMessage.NOT_ALLOW_DUPLICATION_SEPARATOR.getMessage());
             }
         }
     }

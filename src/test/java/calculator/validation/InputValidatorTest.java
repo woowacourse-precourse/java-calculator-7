@@ -93,7 +93,7 @@ class InputValidatorTest {
 
     @DisplayName("입력된 문자열에 숫자 0이 포함된 경우")
     @Test
-    public void splitCustomInput() {
+    public void validateZeroTest() {
         //given
         String input1 = "1,13,0:4";  // 0이 단독으로 입력된 경우
         String input2 = "//%\n1%13%000%4";  // 000처럼 0이 연속으로 입력된 경우
@@ -103,5 +103,19 @@ class InputValidatorTest {
                 IllegalArgumentException.class).hasMessage(ErrorMessage.NOT_ALLOW_ONLY_ZERO.getMessage());
         assertThatThrownBy(() -> InputValidator.validateZero(input2)).isInstanceOf(
                 IllegalArgumentException.class).hasMessage(ErrorMessage.NOT_ALLOW_ONLY_ZERO.getMessage());
+    }
+
+    @DisplayName("기본 구분자와 커스텀 구분자가 연속으로 사용된 경우 예외 발생")
+    @Test
+    public void validateMixedDelimiters() {
+        //given
+        String input1 = "//#\n1,2,3#,4#5";
+        String input2 = "//#\n1,2,3#,4:%5";
+
+        //then
+        assertThatThrownBy(() -> InputValidator.validateMixedDelimiters(input1)).isInstanceOf(
+                IllegalArgumentException.class).hasMessage(ErrorMessage.NOT_ALLOW_DUPLICATION_SEPARATOR.getMessage());
+        assertThatThrownBy(() -> InputValidator.validateMixedDelimiters(input2)).isInstanceOf(
+                IllegalArgumentException.class).hasMessage(ErrorMessage.NOT_ALLOW_DUPLICATION_SEPARATOR.getMessage());
     }
 }
