@@ -1,7 +1,13 @@
 package calculator;
 
+import calculator.config.ApplicationConfiguration;
+import calculator.controller.Controller;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        ApplicationConfiguration applicationConfiguration = new ApplicationConfiguration();
+        Controller controller = applicationConfiguration.controller();
+        controller.service();
     }
 }
+
