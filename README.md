@@ -39,19 +39,20 @@
    - tokenize expression
      > delimiters에 따라 문자열을 자르고 반환
      
-4. error check
-    - 잘못된 입력 검사
-      > 옳은 입력에는 3가지 조건 존재
+4. 덧셈
+    - 잘못된 입력 검사하며 token 더하기
+      > 옳은 입력에는 몇 가지 조건 존재
       >
       > - 시작은 숫자
-      > - 구분자는 ',' or ':' or '{customDelimiter}'
       > - 끝은 숫자
+      > - 구분자 뒤에는 숫자
+      > - 숫자는 모두 양의 정수
+      > - 구분자는 ',' or ':' or '{customDelimiter}'
       >
-      > 이 조건을 벗어나는 입력은 IllegalArgumentException
-
-5. 덧셈
-    > 숫자 배열에 있는 숫자를 모두 합하여 결과를 계산함
-
-6. 결과 출력
+      > 이 조건을 벗어나는 입력은 IllegalArgumentException 처리
+      >
+      > 숫자는 모두 합하여 최종 결과 계산
+      
+5. 결과 출력
    > 결과를 옳은 형식으로 출력
    
