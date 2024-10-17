@@ -4,7 +4,7 @@ public class AddCalculator {
     public int calculateSum(String[] numbers){
         int sum = 0;
         for(String number : numbers){
-            sum += Integer.parseInt(number);
+            sum += Integer.parseInt(number.trim());
 
         }
         return sum;
