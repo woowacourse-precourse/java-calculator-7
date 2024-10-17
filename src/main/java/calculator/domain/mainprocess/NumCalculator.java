@@ -1,4 +1,4 @@
-package calculator.domain.numCalculator;
+package calculator.domain.mainprocess;
 
 import java.util.List;
 

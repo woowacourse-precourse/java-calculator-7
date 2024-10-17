@@ -1,6 +1,6 @@
 package calculator.controller;
 
-import calculator.domain.numCalculator.NumCalculator;
+import calculator.domain.mainprocess.NumCalculator;
 import calculator.domain.preprocess.Preprocessor;
 import calculator.view.ViewManager;
 

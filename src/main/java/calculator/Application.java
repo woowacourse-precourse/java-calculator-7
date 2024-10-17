@@ -1,7 +1,7 @@
 package calculator;
 
 import calculator.controller.CalculatorController;
-import calculator.domain.numCalculator.NumCalculator;
+import calculator.domain.mainprocess.NumCalculator;
 import calculator.domain.preprocess.DelimeterProcessor;
 import calculator.domain.preprocess.InputManager;
 import calculator.domain.preprocess.Preprocessor;
