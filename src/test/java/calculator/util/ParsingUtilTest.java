@@ -7,6 +7,8 @@ import calculator.exception.CalculatorError;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class ParsingUtilTest {
 
@@ -47,12 +49,13 @@ class ParsingUtilTest {
     }
 
 
-    @Test
+    @ParameterizedTest(name = "{0} 파싱 테스트")
+    @ValueSource(strings = {"1,2,3", "1:2:3", "1:2,3", "1,2:3"})
     @DisplayName("Default 구분자로 입력 값이 기본 구분자로로 구분된 문자열을 List로 반환")
-    void parseWithDefault_CommaDelimiter() {
-        // given
-        final String input = "1,2:3";
-        final var expected = List.of("1", "2", "3");
+    void parseWithDefault_CommaDelimiter(String input) {
+        //given
+        final List<String> expected = List.of("1", "2", "3");
+
         // when
         var result = ParsingUtil.parseWithDefault(input);
 
