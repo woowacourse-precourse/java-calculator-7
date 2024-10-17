@@ -19,7 +19,7 @@ public class Application {
     }
 
     private static boolean isPositive(String[] numbers) {
-        return Arrays.stream(numbers).allMatch(n -> Integer.parseInt(n) > 0);
+        return Arrays.stream(numbers).allMatch(n -> Double.parseDouble(n) > 0);
     }
 
     public static void main(String[] args) {
@@ -42,7 +42,7 @@ public class Application {
                 throw new IllegalArgumentException("모든 숫자는 양수여야 합니다.");
             }
 
-            int sum = Arrays.stream(numbers).mapToInt(Integer::parseInt).sum();
+            double sum = Arrays.stream(numbers).mapToDouble(Double::parseDouble).sum();
             System.out.println("결과 : " + sum);
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e){
             throw new IllegalArgumentException("잘못된 값입니다. 원래의 예외: " + e);
