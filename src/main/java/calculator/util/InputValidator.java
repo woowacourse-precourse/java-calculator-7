@@ -1,6 +1,6 @@
 package calculator.util;
 
-import calculator.exception.inputValidate.InputValidateErrorMessage;
+import calculator.exception.util.InputValidateErrorMessage;
 
 public class InputValidator {
     public static String validate(String str) {

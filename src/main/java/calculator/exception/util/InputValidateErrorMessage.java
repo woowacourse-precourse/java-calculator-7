@@ -1,4 +1,4 @@
-package calculator.exception.inputValidate;
+package calculator.exception.util;
 
 public enum InputValidateErrorMessage {
     INVALID_INPUT("// 또는 숫자로 시작하는 입력을 해야 합니다.")
