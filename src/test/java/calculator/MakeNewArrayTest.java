@@ -94,7 +94,7 @@ public class MakeNewArrayTest extends NsTest {
             int returnVal = 0; // 리턴할 정답
 
             for (String number : testArray) {// 숫자 더하기
-                returnVal += Integer.parseInt(number);
+                returnVal += Integer.parseInt(number.trim()); // 각 값에 대한 공백을 제거
             }
 
             assertThat(returnVal).isEqualTo(6);
@@ -105,7 +105,7 @@ public class MakeNewArrayTest extends NsTest {
     @DisplayName("커스텀 기호가 있을 때 정상적인 배열생성이 되어야한다.")
     void 커스텀기호_숫자형_배열_만들기() {
         assertSimpleTest(() -> {
-            String testVal1 = "//(\\n1(2(3";
+            String testVal1 = "//(\\n1( 2 (3";
 
             // 우선 특수기호를 구한다.
             String customSymbol = "";
@@ -125,7 +125,7 @@ public class MakeNewArrayTest extends NsTest {
 
             int[] numArray = new int[testArray.length];
             for (int i = 0; i < numArray.length; i++) {
-                numArray[i] = Integer.parseInt(testArray[i]);
+                numArray[i] = Integer.parseInt(testArray[i].trim());
             }
             assertThat(numArray[0]).isSameAs(1);
         });

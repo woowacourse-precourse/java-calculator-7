@@ -10,7 +10,7 @@ public class Application {
         String inputVal = Console.readLine();
         System.out.println("inputVal = " + inputVal);
         Console.close();
-        String[] parseStringArray = ArrayFunction.parseNumbersFromString(inputVal);
+        int[] parseStringArray = ArrayFunction.parseNumbersFromString(inputVal);
         System.out.println("parseStringArray = " + Arrays.toString(parseStringArray));
     }
 }
