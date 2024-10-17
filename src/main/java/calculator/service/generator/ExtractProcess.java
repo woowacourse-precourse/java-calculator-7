@@ -1,6 +1,8 @@
-package calculator.separator.service;
+package calculator.service.generator;
 
 import calculator.separator.domain.RegexPattern;
+import calculator.number.service.NumberExtractService;
+import calculator.separator.service.SeparatorExtractService;
 
 public class ExtractProcess implements SeparatorExtractService, NumberExtractService {
     @Override
