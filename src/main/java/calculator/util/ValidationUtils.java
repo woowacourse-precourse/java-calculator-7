@@ -15,7 +15,13 @@ public class ValidationUtils {
         }
 
         if (!negativeNumbers.isEmpty()) {
-            throw new IllegalArgumentException("음수는 허용되지 않습니다. 입력 값: " + negativeNumbers);
+            throw new IllegalArgumentException("음수는 허용되지 않습니다. 문제가 되는 값: " + negativeNumbers);
+        }
+    }
+
+    public static void validateZero(List<Integer> numbers) {
+        if (numbers.contains(0)) {
+            throw new IllegalArgumentException("0은 허용되지 않습니다. 문제가 되는 값: [0]");
         }
     }
 }
