@@ -18,7 +18,7 @@ public class InputHandler {
 
         // Validator 을 통해서 검증
         if (validator.hasCustomDelimiter(input)) {
-            String customDelimiter = stringParser.getCustomDelimiter();
+            String customDelimiter = stringParser.getCustomDelimiter(input);
             validator.check(input, customDelimiter);
         } else {
             validator.check(input);
