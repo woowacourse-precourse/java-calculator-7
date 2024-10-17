@@ -24,6 +24,40 @@ public class Application {
             input=input.replace(dividers.charAt(i),',');
         }
         int answer=0;
-
+    //parsing numbers
+    StringBuilder numbers = new StringBuilder();
+    for (char c : input.toCharArray()) {
+        //number given
+        if (Character.isDigit(c)) {
+            numbers.append(c);
+        }
+        //divider given
+        else if  (c==','){
+            answer+=numberCalc(numbers);
+            numbers= new StringBuilder("");
+        }
+        //wrong character given
+        else{
+            throw new IllegalArgumentException("Not a available character given");
+        }
+    }
+    answer += numberCalc(numbers);
+    // Printing out
+        System.out.println("결과 : " + answer);
 }
+
+//Function numberCalc
+//Role: When Ran into divider, returns number for it.
+//Parameter: StringBuilder
+//Return: int
+private static int numberCalc (StringBuilder numbers) {
+    if (numbers.length() == 0) {
+        throw new IllegalArgumentException("Null Given");
+    }
+    int actualnumber = Integer.parseInt(numbers.toString());
+    if (actualnumber <= 0) {
+        throw new IllegalArgumentException("Negative Number");
+    }
+    return actualnumber;
+    }
 }
