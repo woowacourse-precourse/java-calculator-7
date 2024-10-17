@@ -2,6 +2,7 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 record StringSliceResult(String input, String delimiters) {
 
@@ -11,9 +12,7 @@ public class Application {
     private static StringSliceResult getCustomDelimiters(String input, String delimiters) {
         String[] inputSeparated = input.split("//", 2)[1].split("\\\\n", 2);
 
-        delimiters += inputSeparated[0];
-        delimiters = delimiters.replace("\\", "\\\\"); // 역슬래시(\)를 custom delimiter로 쓸때의 버그 수정
-
+        delimiters += Pattern.quote(inputSeparated[0]);
         input = inputSeparated[1];
 
         return new StringSliceResult(input, delimiters);
