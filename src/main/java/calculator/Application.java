@@ -17,5 +17,10 @@ public class Application {
         if (input.isBlank()) {
             System.out.println("결과: 0");
         }
+
+        // `쉼표(,)`와 `콜론(:)` 를 구분자로 등록한다.
+        StringBuilder separatorBuilder = new StringBuilder();
+        separatorBuilder.append("[,:");
+        separatorBuilder.append("]");
     }
 }
