@@ -43,8 +43,19 @@ public class Calculator {
             count = 2;
         }
 
-        public void addDelimeter(String delimeter) {}
+        public void addDelimeter(String delimeter) {
+            if (count >= MAX_CUSTOM_DELIMITERS) {
+                throw new IllegalArgumentException("Only one custom delimiter is allowed.");
+            }
 
-        public String[] getDelimiters() {}
+            String[] newDelimeters = new String[count + 1];
+            System.arraycopy(delimiters, 0, newDelimeters, 0, count);
+            delimiters = newDelimeters;
+            delimiters[count++] = delimeter;
+        }
+
+        public String[] getDelimiters() {
+            return delimiters;
+        }
     }
 }
