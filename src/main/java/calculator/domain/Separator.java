@@ -38,14 +38,14 @@ public class Separator {
     //구분자가 공백인지 확인한다.
     public void validateCustomEmpty(String input) {
         if (input.isEmpty()) {
-            throw new IllegalArgumentException("커스텀 문자가 공백입니다.");
+            throw new IllegalArgumentException("커스텀 구분자가 공백입니다.");
         }
     }
 
     //커스텀 구분자의 크기가 최대 길이(2) 범위인지 확인한다.
     public void validateCustomSize(String input) {
         if (input.length() > 2) {
-            throw new IllegalArgumentException("커스텀 문자의 최대 길이는 2입니다.");
+            throw new IllegalArgumentException("커스텀 구분자의 최대 길이는 2입니다.");
         }
     }
 
@@ -53,7 +53,16 @@ public class Separator {
     public void validateNumberInCustom(String input) {
         for (int i = 0; i < input.length(); i++) {
             if (Character.isDigit(input.charAt(i))) {
-                throw new IllegalArgumentException("커스텀 문자 내에 숫자가 포함되어 있습니다.");
+                throw new IllegalArgumentException("커스텀 구분자 내에 숫자가 포함되어 있습니다.");
+            }
+        }
+    }
+
+    //커스텀 구분자가 중복되는지 확인한다.
+    public void validateDuplicateCustom(String input) {
+        for (Character c : separatorList) {
+            if (String.valueOf(c).equals(input)) {
+                throw new IllegalArgumentException("커스텀 구분자가 중복되었습니다.");
             }
         }
     }
