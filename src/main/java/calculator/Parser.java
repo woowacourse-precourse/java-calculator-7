@@ -4,8 +4,8 @@ public class Parser {
 
     private static final String DEFAULT_DELIMITERS = ",|:";
     private static final String CUSTOM_DELIMITER_START = "//";
-    private static final String CUSTOM_DELIMITER_END = "\n";
-    private static final int CUSTOM_DELIMITER_START_INDEX = 2;
+    private static final String CUSTOM_DELIMITER_END = "\\n";
+    private static final int CUSTOM_STRING_LENGTH= 2;
 
     // 구분자를 기준으로 문자열 파싱하기
     public String[] parse(String input) {
@@ -25,8 +25,8 @@ public class Parser {
         String delimiter;
         if (isCustomDelimiter(input)) {
             int delimiterIndex = input.indexOf(CUSTOM_DELIMITER_END);
-            delimiter = input.substring(CUSTOM_DELIMITER_START_INDEX, delimiterIndex);
-            input = input.substring(delimiterIndex + 1);
+            delimiter = input.substring(CUSTOM_STRING_LENGTH, delimiterIndex);
+            input = input.substring(delimiterIndex + CUSTOM_STRING_LENGTH);
         } else {
             delimiter = DEFAULT_DELIMITERS;
         }

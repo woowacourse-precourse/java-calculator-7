@@ -1,5 +1,6 @@
 package calculator;
 
+import camp.nextstep.edu.missionutils.Console;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,15 +36,15 @@ public class ParserTest {
     @DisplayName("커스텀 구분자를 기준으로 숫자 분리하기 테스트")
     @Test
     void customDelimiterParsingTest() {
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
         String[] expectedNumbers = {"1", "2", "3"};
         assertThat(parser.parse(input)).isEqualTo(expectedNumbers);
     }
 
-    @DisplayName("커스텀 구분자 지정하기 테스트")
+    @DisplayName("커스텀 구분자 사용되었는지 여부 테스트")
     @Test
     void isCustomDelimiterTest() {
-        boolean isCustom = parser.isCustomDelimiter("//;\n");
+        boolean isCustom = parser.isCustomDelimiter("//;\\n1;2;3");
         assertThat(isCustom).isTrue();
     }
 }
