@@ -28,4 +28,16 @@ class ApplicationTest extends NsTest {
     public void runMain() {
         Application.main(new String[]{});
     }
+
+    @Test
+    void isInvalidFormatTest() {
+        // given
+        final InputValidator inputValidator = new InputValidator();
+        final String input = "//;\n1;2;3";
+        // when
+        final boolean isInvalidFormat = inputValidator.isInvalidFormat(input);
+        // then
+        assertThat(isInvalidFormat).isTrue();
+    }
+
 }
