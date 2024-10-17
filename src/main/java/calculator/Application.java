@@ -10,6 +10,15 @@ public class Application {
 
     }
 
+    private static int addNumbers(int[] input) {
+        int total = 0;
+        for (int number : input) {
+            total += number;
+        }
+        return total;
+    }
+
+
     private static void validateInput(String input) {
         // 유효성 case 1: "//"로 시작하는 경우
         if (input.startsWith("//")) {
