@@ -84,4 +84,27 @@ class ParserTest {
         Assertions.assertThat(sum).isEqualTo(10);
     }
 
+    @Test
+    public void 커스텀구분자테스트3() throws Exception {
+        //given
+        String inputString = "//;\\n//$\\n1;200,13$04//*\\n*3";
+        //when
+        Parser parser = new Parser();
+        parser.parse(inputString);
+        List<Integer> nums = parser.getNums();
+        int sum = Calculator.sum(nums);
+        //then
+        Assertions.assertThat(sum).isEqualTo(221);
+    }
+
+    @Test
+    public void 정해지지_않은_구분자입력() throws Exception {
+        //given
+        String inputString = "//;\\n100;2,3$4";
+        //when
+        Parser parser = new Parser();
+        //then
+        Assertions.assertThatThrownBy(() -> parser.parse(inputString)).isInstanceOf(IllegalArgumentException.class);
+
+    }
 }
