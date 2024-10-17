@@ -9,10 +9,7 @@ public class CustomDividerFinder {
     private final static Integer CALCULATED_VALUE_START_INDEX = 5;
     private final static Integer NONE_CUSTOM_DIVIDER = -1;
 
-    /**
-     * 만약 커스텀 문자가 1개가 아닐 경우(null or 문자열) - 커스텀 양식의 길이를 측정
-     *
-     */
+
     public void findCustomDividers(CalculatedValue calculatedValue, Divider divider) { //todo 인수를 생성자로?
         String inputValue = calculatedValue.getValue();
         int openerIndex = inputValue.indexOf(OPENER);
@@ -69,8 +66,8 @@ public class CustomDividerFinder {
     }
 
     private void validateNullCustomDivider(int closerIndex){
-        if(closerIndex < CLOSER_INDEX){
-            throw new IllegalArgumentException("커스텀 구분자를 문자로 입력해 주세요.");
+        if(closerIndex == CUSTOM_DIVIDER_INDEX){
+            throw new IllegalArgumentException("커스텀 구분자가 비어있어요.");
         }
     }
 
