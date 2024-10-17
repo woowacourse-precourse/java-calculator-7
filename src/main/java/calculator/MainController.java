@@ -16,8 +16,7 @@ public class MainController {
 
         List<String> splittedValues ;
         int sumResult = 0;
-
-        if (checkCustomDelimter(inputString)){
+        if (checkCustomDelimiterFormat(inputString)){
             splittedValues = SplitbyCustomDelimiter(inputString);
 
             for (String part : splittedValues) {
@@ -26,7 +25,7 @@ public class MainController {
             }
             System.out.printf("결과 : %d", sumResult);
             return;
-        };
+        }
 
         splittedValues = SplitbyDefaultDelimiter(inputString);
         for (String part : splittedValues) {
@@ -51,10 +50,13 @@ public class MainController {
         }
     }
 
-    private static Boolean checkCustomDelimter(String inputString) {
-        String prefix = inputString.substring(0, 2);
-        String suffix = inputString.substring(3, 5);
-        return prefix.equals("//") && suffix.equals("\\n");
+    private static boolean checkCustomDelimiterFormat(String inputString) {
+        String rex =  "^//[\\D ]\\\\n.*$";
+        Pattern p = Pattern.compile(rex);
+        Matcher matcher = p.matcher(inputString);
+
+        return matcher.find();
+
     }
 
     private static List<String> SplitbyDefaultDelimiter(String inputString) {
