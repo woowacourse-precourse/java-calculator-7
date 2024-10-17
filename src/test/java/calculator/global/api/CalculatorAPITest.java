@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CalculatorAPITest {
 
 	@Test
-	@DisplayName("기능 검사")
+	@DisplayName("기능 테스트")
 	void answerTest() {
 		APIFactory apiFactory = APIFactory.getInstance();
 		CalculatorAPI calculatorAPI = apiFactory.calculator();

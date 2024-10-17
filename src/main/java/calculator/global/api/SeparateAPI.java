@@ -21,7 +21,6 @@ public class SeparateAPI {
 	}
 
 	public void findNumberAndSave() {
-
 	}
 
 	public static SeparateAPI getInstance() {

@@ -14,7 +14,7 @@ public class Separator {
 	}
 
 	public void addSeparator(Character customSeparator) {
-		this.separators.add(customSeparator);
+		separators.add(customSeparator);
 	}
 
 	public Character getSeparators(int index) {
