@@ -1,11 +1,6 @@
 package calculator;
 
-import java.util.regex.Pattern;
-
 public class FormatValidator {
-
-    private static final String NUMBER_FORMAT = "^[0-9,:]*$";
-    private static final Pattern NUMBER_FORMAT_PATTERN = Pattern.compile(NUMBER_FORMAT);
 
     /**
      * 주어진 수식(formula)을 유효성 검사하는 메서드입니다.
@@ -33,33 +28,43 @@ public class FormatValidator {
 
     // 숫자로 시작하는 수식에서 허용되지 않은 문자가 있는지 검증
     private void validateNumberStartFormat(String formula) {
-        if (isNotNumberStartFormat(formula)) {
-            throw new IllegalArgumentException("수식에는 쉼표 또는 콜론 이외의 문자가 포함될 수 없습니다.");
+        if (isNumberStartFormat(formula)) {
+            return;
         }
+
+        throw new IllegalArgumentException("수식에는 쉼표 또는 콜론 이외의 문자가 포함될 수 없습니다.");
     }
 
-    private static boolean isNotNumberStartFormat(String formula) {
-        return !NUMBER_FORMAT_PATTERN.matcher(formula).matches();
+    private static boolean isNumberStartFormat(String formula) {
+        for(char ch : formula.toCharArray()) {
+            if (!Character.isDigit(ch) || !DefaultSeparate.getSeparates().contains(ch)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     // 커스텀 구분자 형식을 검증
     private void validateCustomStartFormat(String formula) {
-        if (isNotCustomStartFormat(formula)) {
-            throw new IllegalArgumentException("잘못된 커스텀 구분자 형식입니다. 올바른 형식은 //<숫자가 아닌 문자>\\n입니다.");
+        if (isCustomStartFormat(formula)) {
+            return;
         }
+
+        throw new IllegalArgumentException("잘못된 커스텀 구분자 형식입니다. 올바른 형식은 //<숫자가 아닌 문자>\\n입니다.");
     }
 
-    private boolean isNotCustomStartFormat(String formula) {
-        int formatLength = 5;
+    private boolean isCustomStartFormat(String formula) {
+        int formulaStartIdx = 5;
         int customSeparateIdx = 2;
         int lastFormatStartIdx = 3;
 
-        if (formula.length() < formatLength) {
-            return true;
+        if (formula.length() < formulaStartIdx) {
+            return false;
         }
 
-        return Character.isLetter(formula.charAt(customSeparateIdx))
-            && formula.startsWith("\\n", lastFormatStartIdx);
+        return !Character.isDigit(formula.charAt(customSeparateIdx))
+            && formula.indexOf("\\n") == lastFormatStartIdx
+            && Character.isDigit(formula.charAt(formulaStartIdx));
     }
 
     private boolean isNullOrEmpty(String str) {
