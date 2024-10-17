@@ -46,6 +46,7 @@ public class StringCalculator {
         return Arrays.stream(numbers.split("[" + delimiter + "]", -1))
                 //limit:-1로 설정하면, 공백이어도 문자열의 끝까지 탐색해서 null로 저장한다.
                 .map(String::trim)
+                .peek(this::checkNull)
                 .mapToInt(this::parseInt)
                 .peek(this::checkNegative)
                 .sum();
