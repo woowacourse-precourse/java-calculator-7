@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.regex.Pattern;
 
 public class InputView {
-    private static final Pattern INPUT_PATTERN = Pattern.compile("^//[^\\d,:]\\n\\d+([,:]\\d+)*$");
+    private static final Pattern INPUT_PATTERN = Pattern.compile("(//(.)\\n)?(.*)");
     private static final String INPUT_ERROR_MESSAGE = "[ERROR] 유효하지 않은 입력 형식입니다";
 
     public String inputString() {
