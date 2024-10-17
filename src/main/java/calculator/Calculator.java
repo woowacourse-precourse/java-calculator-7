@@ -18,6 +18,9 @@ public class Calculator {
     }
 
     public String[] customDelimeter(String input) {
-
+        int index = input.indexOf('\n');
+        String delimiter = input.substring(2, index);
+        String newInput = input.substring(index + 1);
+        return new String[]{delimiter, newInput};
     }
 }
