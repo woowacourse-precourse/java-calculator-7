@@ -16,16 +16,18 @@ class Calculator {
 
     static Str str;
     static Delimiters delimiters;
+    //static Numbers numbers;
 
     Calculator() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         str = new Str(Console.readLine());
         delimiters = getDelimiter();
+        //numbers = getNumbers();
     }
 
     public static Delimiters getDelimiter() {
         List<Character> delimiterList = new ArrayList<>();
-        if(str.checkingCustomDelimiter()){
+        if (str.checkingCustomDelimiter()) {
             delimiterList.add(str.getCustomDelimiter());
             return new Delimiters(delimiterList);
         }
@@ -34,6 +36,12 @@ class Calculator {
         delimiterList.add(':');
         return new Delimiters(delimiterList);
     }
+
+    /*
+    public static Numbers getNumbers(){
+
+    }
+     */
 }
 
 class Str {
@@ -42,6 +50,7 @@ class Str {
 
     Str(String string) {
         this.string = string;
+        //getSplitString().checkingRightInput();
     }
 
     boolean checkingCustomDelimiter() {
@@ -50,14 +59,69 @@ class Str {
 
     }
 
-    Character getCustomDelimiter(){
+    Character getCustomDelimiter() {
         return string.charAt(2);
     }
+
+    /*
+    StrArr getSplitString() {
+        String[] strings;
+
+        if (checkingCustomDelimiter()) {
+            string = string.substring(5);
+            strings = string.split(String.valueOf(getCustomDelimiter()));
+            return new StrArr(strings);
+        }
+
+        strings = string.split(",|:");
+        return new StrArr(strings);
+    }
+     */
+
 }
 
-class Delimiters{
+class Delimiters {
+
     private List<Character> delimiterList;
-    public Delimiters(List<Character> delimiterList){
+
+    public Delimiters(List<Character> delimiterList) {
         this.delimiterList = delimiterList;
     }
 }
+
+class StrArr {
+
+    private String[] stringArr;
+
+    public StrArr(String[] stringArr) {
+        this.stringArr = stringArr;
+    }
+
+    public boolean checkingRightInput() {
+        int number;
+        for (int i = 0; i < stringArr.length; i++) {
+            try {
+                number = Integer.parseInt(stringArr[i]);
+                if (number < 0) {
+                    return false;
+                }
+            } catch (Exception e) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+}
+
+/*
+class Numbers {
+
+    private List<Integer> numberList;
+
+    public Numbers(List<Integer> numberList) {
+        this.numberList = numberList;
+    }
+}
+
+ */
