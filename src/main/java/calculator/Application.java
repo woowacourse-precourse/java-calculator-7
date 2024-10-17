@@ -5,6 +5,12 @@ import camp.nextstep.edu.missionutils.Console;
 import java.lang.reflect.Array;
 import java.util.*;
 
+// 생각해야 할 경우의 수
+// 아무 입력 없으면 0 출력
+// 커스텀 구분자만 있고 출력 없으면 0 출력?
+// 음수, 0 입력 시 예외처리 후 앱 종료
+
+
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
@@ -34,8 +40,9 @@ public class Application {
             divider.add(customDivider);
             // 구분자로 문자열 분리
             // customDivider를 기준으로 문자열을 분리
-            // TODO: 현재 커스텀 구분자로만 문자열을 구분함. 커스텀, 기존 구분자 둘다 사용하여 구분할 수 있도록 수정 필요
-            String[] numbers = tmpNum.split(customDivider);
+
+            String combinedDividers = String.join("|", divider) + "|" + customDivider;
+            String[] numbers = tmpNum.split(combinedDividers);
 
             // 각 숫자를 정수로 변환하여 리스트에 추가
             for (String number : numbers) {
@@ -52,7 +59,6 @@ public class Application {
         // Scanner 자원 해제
         Console.close();
     }
-
 
     // - 정수, 구분자를 구분하는 함수
     public static String findDivider(String input) {
