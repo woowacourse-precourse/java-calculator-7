@@ -41,4 +41,46 @@ public class StringProcessorTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("커스텀 구분자가 올바르게 정의되지 않았습니다.");
     }
+
+    @Test
+    void 숫자_배열_출력_기본_구분자() {
+        assertSimpleTest(() -> {
+            StringProcessor processor = new StringProcessor("1,2:3");
+            assertThat(processor.getAdditionNumbers()).isEqualTo(new int[]{1, 2, 3});
+        });
+    }
+
+    @Test
+    void 숫자_배열_출력_커스텀_구분자() {
+        assertSimpleTest(() -> {
+            StringProcessor processor = new StringProcessor("//*\n1*2*3");
+            assertThat(processor.getAdditionNumbers()).isEqualTo(new int[]{1, 2, 3});
+        });
+    }
+
+    @Test
+    void 숫자_배열_출력_커스텀_구분자_빈문자() {
+        assertSimpleTest(() -> {
+            StringProcessor processor = new StringProcessor("//&\n1&&2&3");
+            assertThat(processor.getAdditionNumbers()).isEqualTo(new int[]{1, 0, 2, 3});
+        });
+    }
+
+    @Test
+    void 숫자_배열_출력_커스텀_구분자_기호() {
+        assertThatThrownBy(() -> {
+            StringProcessor processor = new StringProcessor("//&\n1&(2&3");
+            processor.getAdditionNumbers();
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("숫자가 아닌 값이 포함되어 있습니다: (2");
+    }
+
+    @Test
+    void 숫자_배열_출력_커스텀_구분자_음수() {
+        assertThatThrownBy(() -> {
+            StringProcessor processor = new StringProcessor("//&\n1&-2&3");
+            processor.getAdditionNumbers();
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("음수 값이 포함되어 있습니다: -2");
+    }
 }
