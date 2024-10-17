@@ -48,7 +48,7 @@ public class Application {
     // 사용자 입력을 검증하는 함수
     private static void validateInput(String input) {
         // 0보다 큰지 확인. 그리고 숫자 형식인지 확인
-        if (!input.matches("^[1-9]\\d+$")) {
+        if (!input.matches("^[1-9]\\d*$")) {
             throw new IllegalArgumentException("잘못된 값을 입력하였습니다.");
         }
     }
