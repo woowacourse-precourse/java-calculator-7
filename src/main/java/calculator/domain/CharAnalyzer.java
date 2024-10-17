@@ -4,12 +4,14 @@ public class CharAnalyzer {
     private final String input;
     private final Delimiter delimiter;
     private final CustomDelimiter customDelimiter;
+    private final SumCalculator sumCalculator;
     private int currentIndex;
 
-    public CharAnalyzer(String input, Delimiter delimiter, CustomDelimiter customDelimiter) {
+    public CharAnalyzer(String input, Delimiter delimiter, CustomDelimiter customDelimiter, SumCalculator sumCalculator) {
         this.input = input;
         this.delimiter = delimiter;
         this.customDelimiter = customDelimiter;
+        this.sumCalculator = sumCalculator;
         this.currentIndex = 0;
     }
 
@@ -33,11 +35,7 @@ public class CharAnalyzer {
         currentIndex++;
 
         if (isPositiveNumber(currentChar)) {
-            System.out.println(currentChar + "는 양수입니다.");
-        } else if (isDelimiter(currentChar)) {
-            System.out.println(currentChar + "는 구분자입니다.");
-        } else {
-            System.out.println(currentChar + "는 양수, 구분자가 아닙니다");
+            sumCalculator.sum(currentChar);
         }
     }
 
