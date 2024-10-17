@@ -1,6 +1,6 @@
 package calculator;
 
-import calculator.delimiter.CustomDelimiterManager;
+import calculator.delimiter.CustomSeparatorManager;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -9,7 +9,7 @@ public class Application {
         CalculatorController calculatorController = new CalculatorController(
                 new InputView(),
                 new OutputView(),
-                new CustomDelimiterManager());
+                new CustomSeparatorManager());
         calculatorController.calculate();
     }
 }
