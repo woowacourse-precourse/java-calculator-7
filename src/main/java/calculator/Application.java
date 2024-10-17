@@ -24,7 +24,14 @@ public class Application {
         int[] intArray = new int[stringArray.length];
 
         for (int i = 0; i < stringArray.length; i++) {
-            intArray[i] = Integer.parseInt(stringArray[i]);
+            try {
+                intArray[i] = Integer.parseInt(stringArray[i]);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("숫자가 아닌 문자가 포함되어 있습니다." + stringArray[i]);
+            }
+            if (intArray[i] <= 0) {
+                throw new IllegalArgumentException("음수 혹은 0으로 숫자가 구성되어 있습니다." + intArray[i]);
+            }
         }
 
         return intArray;
