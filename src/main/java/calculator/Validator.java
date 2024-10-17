@@ -7,7 +7,7 @@ public class Validator {
         if(hasCustomDelimiter(input)){
             customDelimiter = input.charAt(2);
             validateCustomDelimiter();
-            validateInputCharacters(input, 4);
+            validateInputCharacters(input, 5);
         }
         else{
             validateInputCharacters(input,0);
@@ -24,6 +24,7 @@ public class Validator {
     }
 
     private boolean isDelimiter(char currentChar) {
+        System.out.println(currentChar);
         for(char ch : DEFAULT_DELIMITERS){
             if(ch==currentChar || ch==customDelimiter){
                 return true;
@@ -38,7 +39,7 @@ public class Validator {
         }
     }
     private boolean hasCustomDelimiter(String input) {
-        String pattern = "^//.\\n.*";
+        String pattern = "^//.\\\\n.*";
         return input.matches(pattern);
     }
 
