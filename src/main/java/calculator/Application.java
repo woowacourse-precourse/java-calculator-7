@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.model.Delimiter;
 import calculator.view.ConsoleView;
 
 public class Application {
@@ -10,12 +11,12 @@ public class Application {
         String expression = consoleView.getExpression();
 
         // 2. custom 구분자 확인
+        Delimiter delimiter = new Delimiter();
+        char customDelimiter = delimiter.getDelimiter(expression);
 
+        // 테스트용 커스텀 구분자 출력
+        System.out.println(customDelimiter);
 
-        // 3. 덧셈
-
-
-        // 4. 결과 출력
 
     }
 }
