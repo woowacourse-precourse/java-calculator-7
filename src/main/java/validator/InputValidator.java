@@ -4,12 +4,14 @@ public class InputValidator {
 
     private static final String REGEX_DELIMITER = "[,:]";
 
-    private static final String REGEX_CUSTOM_DELIMITER = "[\'\",;:\\.\\*\\+\\?\\[\\]\\{\\}\\(\\)" +
+    private static final String REGEX_CUSTOM_DELIMITER = "[\'\",;:\\-\\.\\*\\+\\?\\[\\]\\{\\}\\(\\)" +
             "\\\\\\|\\^\\$\\!\\@\\#\\$\\`\\~]";
 
     private static final String REGEX_CUSTOM_DELIMITER_START = "//";
     private static final String REGEX_CUSTOM_DELIMITER_END = "\\n";
-    private static final String MINUS_NUMBER = "-";
+    private static final String MINUS_DELIMITER = "-";
+
+    private static boolean isMinusDelimiter = false;
 
     public static void checkInput(final String input) {
         hasNumberAndSeparator(input);
@@ -47,6 +49,7 @@ public class InputValidator {
         inputs = inputs.replace(REGEX_CUSTOM_DELIMITER_START,"").replace(REGEX_CUSTOM_DELIMITER_END,"");
         for (String input : inputs.split("")) {
             if (input.matches(REGEX_CUSTOM_DELIMITER)) {
+                if(input.contains(MINUS_DELIMITER)) isMinusDelimiter = true;
                 return;
             }
         }
@@ -73,8 +76,14 @@ public class InputValidator {
 
     private static void checkMinusNumber(final char firstValue, final char secondValue) {
         if(Character.isDigit(firstValue)) {
-            if(MINUS_NUMBER.equals(String.valueOf(secondValue))) {
+            if(!isMinusDelimiter && MINUS_DELIMITER.equals(String.valueOf(secondValue))) {
                 throw new IllegalArgumentException("양수를 입력해야 합니다.");
+            }
+        }
+
+        if(MINUS_DELIMITER.equals(String.valueOf(firstValue))) {
+            if(isMinusDelimiter && MINUS_DELIMITER.equals(String.valueOf(secondValue))) {
+                throw new IllegalArgumentException("양수를 입력해야 합니다,");
             }
         }
     }
