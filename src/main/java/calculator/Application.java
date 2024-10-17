@@ -14,7 +14,7 @@ public class Application {
                 String[] delimiterAndSplitStr = checkDelimiter(inputValue);
 
                 for(String value : delimiterAndSplitStr[1].split(delimiterAndSplitStr[0])){
-                    if(!value.equals("")) {
+                    if(!value.isEmpty()) {
                         sum += checkValueCorrect(value);
                     }
                 }
