@@ -62,6 +62,22 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 커스텀_구분자를_지정하지_않고_빈_문자열을_입력하는_경우() {
+        assertSimpleTest(() -> {
+            run("\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자를_지정하고_빈_문자열을_입력하는_경우() {
+        assertSimpleTest(() -> {
+            run("//a\\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
