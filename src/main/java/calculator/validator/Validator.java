@@ -1,7 +1,9 @@
 package calculator.validator;
 
 public class Validator {
+
     private String input;
+
     public Validator(String input){
         this.input = input;
     }
@@ -27,8 +29,16 @@ public class Validator {
         }
     }
     //구분자로 분리 후, 양수인지 확인한다.
-    public boolean contentIsPosNum(String[] input) {
-        //구현중
+    public boolean contentIsPosNum(String[] input){
+        for(String s : input){
+            if(!s.matches("[0-9]+")){
+                throw new IllegalArgumentException("입력이 잘못되었습니다.(입력이 숫자가 아닙니다.)");
+            }
+            int num = Integer.parseInt(s);
+            if (num <= 0) {
+                throw new IllegalArgumentException("입력이 잘못되었습니다.(숫자는 양수여야 합니다)");
+            }
+        }
         return true;
     }
 }
