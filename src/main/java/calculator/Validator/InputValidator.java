@@ -10,6 +10,7 @@ public class InputValidator {
         for(String token : tokens){
 
             token = token.trim();
+
             if(token.isEmpty()){
                 throw new IllegalArgumentException("빈 값은 허용되지 않습니다.");
             }

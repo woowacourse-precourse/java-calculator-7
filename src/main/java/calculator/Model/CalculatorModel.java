@@ -2,10 +2,10 @@ package calculator.Model;
 
 public class CalculatorModel {
 
-    public int calculateSum(String[] tokens){
-        int sum = 0;
+    public long calculateSum(String[] tokens){
+        long sum = 0;
         for(String token : tokens){
-            int number = Integer.parseInt(token);
+            long number = (long) Integer.parseInt(token);
             sum += number;
         }
         return sum;

@@ -1,11 +1,12 @@
 package calculator.Service;
 
-import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.util.List;
 
 public class InputParser {
 
     private String input;
-    private String customSeparator;
+    private List<String> customSeparator = new ArrayList<>();
 
     public InputParser(String input){
         this.input = input;
@@ -13,15 +14,28 @@ public class InputParser {
     }
 
     private void parseCustomSeparator(){
+
         if(input.startsWith("//")){
             int customEndIdx = input.indexOf("\\n");
             if(customEndIdx == -1){
                 throw new IllegalArgumentException("잘못된 입력");
             }
 
-            customSeparator = input.substring(2,customEndIdx);
+            String separatorPart = input.substring(2,customEndIdx);
+
+            for(char ch : separatorPart.toCharArray()){
+                customSeparator.add(escapeSpecialCharacter(String.valueOf(ch)));
+            }
+
             input = input.substring(customEndIdx + 2);
         }
+    }
+
+    private String escapeSpecialCharacter(String separator){
+        if("\\.[]{}()^$?*+|".contains(separator)){
+            return "\\"+separator;
+        }
+        return separator;
     }
 
     public String[] getTokens(){
@@ -31,17 +45,22 @@ public class InputParser {
         }
 
         String tokenSeparator = createTokenSeparator();
+
         return input.split(tokenSeparator);
     }
 
     public String createTokenSeparator(){
+        StringBuilder separatorPattern = new StringBuilder();
 
         String defaultSeparator = ",|:";
 
-        if(customSeparator != null){
-            return defaultSeparator + "|" + Pattern.quote(customSeparator);
+        separatorPattern.append(defaultSeparator);
+
+        for(String custom: customSeparator){
+            separatorPattern.append("|").append(custom);
         }
 
-        return defaultSeparator;
+
+        return separatorPattern.toString();
     }
 }

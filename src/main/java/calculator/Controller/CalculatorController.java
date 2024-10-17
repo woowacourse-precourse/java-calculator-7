@@ -27,7 +27,7 @@ public class CalculatorController {
 
             inputValidator.validateTokens(tokens);
 
-            int result = calculatorModel.calculateSum(tokens);
+            long result = calculatorModel.calculateSum(tokens);
 
             OutputView.userOutput(result);
 

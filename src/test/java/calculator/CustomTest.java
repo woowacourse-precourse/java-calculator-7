@@ -41,6 +41,24 @@ class CustomTest extends NsTest {
         );
     }
 
+    @Test
+    void Two_Or_More_Separator(){
+        assertSimpleTest(() -> {
+            run("//;.\\n1;2.3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void Same_Two_Separator(){
+        assertSimpleTest(() -> {
+            run("//,,\\n1:2,3,4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+
+
     @Override
     protected void runMain() {
         Application.main(new String[]{});
