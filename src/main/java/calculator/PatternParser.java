@@ -43,4 +43,19 @@ public class PatternParser {
 
         return null;
     }
+
+    public String[] splitPattern(String input){
+
+        if(isCustomPattern(input)){
+            String delimiter = parseCustomPattern(input);
+            input = input.substring(input.indexOf("\n")+1);
+            return input.split(delimiter);
+        }
+
+        if (isReservePattern(input)){
+            return input.split(RESERVE_PATTERN);
+        }
+
+        return new String[0];
+    }
 }
