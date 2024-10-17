@@ -51,6 +51,9 @@ public class Application {
             for(int i = 0; i < numbers.length; i++){
                 try{
                     int num = Integer.parseInt(numbers[i]);
+                    if(num < 0){
+                        throw new IllegalArgumentException();
+                    }
                     result += num;
                 }catch(NumberFormatException e){
                     throw new IllegalArgumentException();
