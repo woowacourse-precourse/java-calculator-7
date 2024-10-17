@@ -13,14 +13,25 @@ public class CalculatorController {
     public CalculatorController() {
         this.delimiterCalculator = new DelimiterCalculator();
     }
-    
+
     public void run() {
-        try {
-            String input = InputView.requestInput();
-            int result = delimiterCalculator.calculate(input);
-            OutputView.printResult(result);
-        } catch (Exception e) {
-            OutputView.printError(UNDEFINED_ERROR);
+        boolean isRunning = true;
+
+        while (isRunning) {
+            try {
+                OutputView.printInput();
+                String input = InputView.requestInput();
+                int result = delimiterCalculator.calculate(input);
+                OutputView.printResult(result);
+
+                OutputView.printRepeat();
+                String repeatInput = InputView.requestInput();
+                if ("2".equals(repeatInput)) {
+                    isRunning = false;
+                }
+            } catch (Exception e) {
+                OutputView.printError(UNDEFINED_ERROR);
+            }
         }
     }
 }
