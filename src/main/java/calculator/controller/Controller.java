@@ -31,5 +31,9 @@ public class Controller {
         mainService.getCustomDelimiter(inputString);
     }
 
+    private void getNumberList() {
+        String refinedInput = inputString.getInputString();
+    }
+
 
 }

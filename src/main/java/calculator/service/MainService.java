@@ -2,6 +2,7 @@ package calculator.service;
 
 import calculator.exception.Exceptions;
 import calculator.model.InputString;
+import calculator.model.ResultNumbers;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ public class MainService {
 
     Exceptions exceptions = new Exceptions();
     private InputString inputString;
+    private ResultNumbers resultNumbers;
 
     // 커스텀 구분자가 두 개 이상일 수 있다
     // 커스텀 구분자가 / 일 수 있고 // 일 수 있다. 이때 어떻게 처리할 것인가?
@@ -35,5 +37,6 @@ public class MainService {
         }
         return input;
     }
+
 
 }
