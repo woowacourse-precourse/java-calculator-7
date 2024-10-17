@@ -1,6 +1,7 @@
 package calculator;
 
-import calculator.domain.CharExtractor;
+import calculator.domain.CharAnalyzer;
+import calculator.domain.CustomDelimiter;
 import calculator.domain.Delimiter;
 import calculator.input.InputHandler;
 
@@ -11,25 +12,15 @@ public class Application {
         inputHandler.showMessage();
         String input = inputHandler.input();
 
-        CharExtractor charExtractor = new CharExtractor(input);
-
-        while (charExtractor.hasNext()) {
-            Character currentChar = charExtractor.nextChar();
-            System.out.println("현재 문자: " + currentChar);
-        }
-
         Delimiter delimiter = new Delimiter();
+        CustomDelimiter customDelimiter = new CustomDelimiter();
+        CharAnalyzer charAnalyzer = new CharAnalyzer(input, delimiter, customDelimiter);
 
-        System.out.println("기본 구분자: " + delimiter.getDelimiterSet());
-
-        delimiter.addCustomDelimiter('@');
-        System.out.println("커스텀 구분자 추가 후: " + delimiter.getDelimiterSet());
-
-        char testDelimiter = '/';
-        if (delimiter.isRegisteredDelimiter(testDelimiter)) {
-            System.out.println(testDelimiter + "는 등록된 구분자입니다.");
-        } else {
-            System.out.println(testDelimiter + "는 등록되지 않은 구분자입니다.");
+        try {
+            charAnalyzer.analyzeAllChars();
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
         }
+
     }
 }
