@@ -1,6 +1,7 @@
 package calculator.model;
 
 public class Calculator {
+
     private String result;
 
     public void calculate(String input) {
@@ -8,6 +9,8 @@ public class Calculator {
             result = "0";
             return;
         }
+
+
     }
 
     public String getResult() {
