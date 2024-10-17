@@ -1,5 +1,6 @@
 package calculator.service;
 
+import calculator.enums.ErrorMessages;
 import calculator.view.InputView;
 
 public class InputService {
@@ -17,7 +18,7 @@ public class InputService {
             validateCustomDelimiter(input);
             return input;
         } catch (Exception e) {
-            throw new IllegalArgumentException("입력값이 비어있습니다.");
+            throw new IllegalArgumentException(ErrorMessages.EMPTY_INPUT.getMessage());
         }
     }
 
@@ -27,13 +28,13 @@ public class InputService {
             int newlineIndex = input.indexOf("\\n");
 
             if (newlineIndex == -1) {
-                throw new IllegalArgumentException("\\n 가 존재하지 않습니다.");
+                throw new IllegalArgumentException(ErrorMessages.MISSING_NEWLINE.getMessage());
             }
 
             String delimiter = input.substring(2, newlineIndex);
 
             if (delimiter.isEmpty()) {
-                throw new IllegalArgumentException("커스텀 구분자가 존재하지 않습니다.");
+                throw new IllegalArgumentException(ErrorMessages.MISSING_CUSTOM_DELIMITER.getMessage());
             }
         }
     }
