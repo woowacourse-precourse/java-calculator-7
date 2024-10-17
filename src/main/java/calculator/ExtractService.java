@@ -8,14 +8,26 @@ public class ExtractService {
     public static final int CUSTOM_PREFIX_LENGTH = CUSTOM_PREFIX.length();
 
     public String extractCustomDelimiter(String readInput) {
-        if (readInput.contains(CUSTOM_PREFIX) && readInput.contains(CUSTOM_SUFFIX)) {
-            int startPos = readInput.indexOf(CUSTOM_PREFIX);
-            int endPos = readInput.indexOf(CUSTOM_SUFFIX);
-
-            return readInput.substring(startPos + CUSTOM_PREFIX_LENGTH, endPos);
+        if (hasCustomDelimiter(readInput)) {
+            int[] position = findCustomDelimiterPosition(readInput);
+            return extractDelimiter(readInput, position);
         }
-
         return EMPTY;
+    }
+
+    private String extractDelimiter(String readInput, int[] position) {
+        return readInput.substring(position[0] + CUSTOM_PREFIX_LENGTH, position[1]);
+    }
+
+    private int[] findCustomDelimiterPosition(String readInput) {
+        int startPos = readInput.indexOf(CUSTOM_PREFIX);
+        int endPos = readInput.indexOf(CUSTOM_SUFFIX);
+
+        return new int[] {startPos, endPos};
+    }
+
+    private boolean hasCustomDelimiter(String readInput) {
+        return readInput.contains(CUSTOM_PREFIX) && readInput.contains(CUSTOM_SUFFIX);
     }
 
     public String extractPositiveString(String readInput, String customDelimiter) {
