@@ -3,11 +3,11 @@ package calculator.controller;
 import calculator.model.inputValue.InputValue;
 import calculator.view.screen.Screen;
 
-public class Calculator {
+public class CalculatorSystem {
     private InputValue inputValue;
     private Screen screen = new Screen();
 
-    public Calculator(){
+    public CalculatorSystem(){
         inputValue = new InputValue(screen.getUserInput());
         screen.showResult(inputValue.calculateSum());
     }

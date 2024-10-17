@@ -1,4 +1,10 @@
 # java-calculator-precourse
+## Class 다이어그램
+![class 다이어그램](https://github.com/user-attachments/assets/80b759ed-8398-44bb-b040-b34a6ef527ed)
+
+## 동작 과정
+![Working Process](https://github.com/user-attachments/assets/d8435f0a-e42f-442c-bfa4-c5c1aade570a)
+
 ## 프로그램 구현 사항
 ### 입력
 - [X] 사용자에게 문자열 입력받기
@@ -13,7 +19,7 @@
 
 ### 출력
 - [X] 계산된 값 보여주기
-- [X] 종료 로직 구현 
+- [X] 종료 로직 구현
 
 ## 궁금한 점 및 판단
 - 올바른 입력이 주어졌을 때 프로그램 종료 조건이 제시되어있지 않음
