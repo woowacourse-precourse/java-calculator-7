@@ -15,14 +15,15 @@ public class Application {
         // 기능 1 : 문자열 앞부분에 커스텀 구분자가 있는지 확인한다.
         // 기능 2 : 커스텀 구분자가 있을 때 값을 계산한다.
         if (inputService.isCustomDelimiter()) {
-            String[] numbers = inputService.separateString();
+            String[] numbers = inputService.separateNumberWithCustomDelimiter();
             calculateService = new CalculateService(numbers);
-            calculateService.calculate();
-
-            System.out.println("결과 : " + calculateService.getSum());
         }
         // 기능 3 : 커스텀 구분자가 없을 때 값을 계산한다.
         else {
+            String[] numbers = inputService.separateNumberWithDefaultDelimiter();
+            calculateService = new CalculateService(numbers);
         }
+        calculateService.calculate();
+        System.out.println("결과 : " + calculateService.getSum());
     }
 }
