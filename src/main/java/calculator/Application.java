@@ -18,13 +18,20 @@ public class Application {
         app.initSeparator();
 
         input = Console.readLine();
-        app.addSeparator(app.getCustomSeparator(input));
+        if (app.hasCustomSeparator()) {
+            app.addSeparator(app.getCustomSeparator(input));
+        }
+
         System.out.println(app.calc(app.splitString()));
     }
 
     private void initSeparator() {
         separators.add(",");
         separators.add(":");
+    }
+
+    private Boolean hasCustomSeparator() {
+        return input.contains(CUSTOM_SEPARATOR_PREFIX) && input.contains(CUSTOM_SEPARATOR_SUFFIX);
     }
 
     private char getCustomSeparator(String input) {
