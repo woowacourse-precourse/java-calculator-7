@@ -22,8 +22,7 @@ public class Application {
     }
 
     public String removeSeparator(String str, String separator) {
-        String formattedSeparator = "[" + separator + "]";
-        return str.replaceAll(formattedSeparator, "");
+        return str.replaceAll(formatSeparator(separator), "");
     }
 
     public Boolean isStringWithDefaultSeparator(String input, String separator) {
@@ -46,5 +45,9 @@ public class Application {
         str = removeNumber(str);
         str = removeSeparator(str, getCustomSeparator(input));
         return input.indexOf("//") == 0 && str == "";
+    }
+
+    private String formatSeparator(String separator) {
+        return "[" + separator + "]";
     }
 }
