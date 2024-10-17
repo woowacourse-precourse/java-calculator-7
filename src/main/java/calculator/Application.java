@@ -1,5 +1,7 @@
 package calculator;
-
+import calculator.option.Calculator;
+import calculator.option.Custom;
+import calculator.option.Default;
 import calculator.optionchecker.Optionchecker;
 import camp.nextstep.edu.missionutils.Console;
 
@@ -16,11 +18,14 @@ public class Application {
         op.optioncheck();
 
         if(op.getoption() == 1){
-            System.out.println("기본 구분자");
+            Calculator def_cal = new Default(input);
+            result = def_cal.getSum();
         }
         else if(op.getoption() == 2){
-            System.out.println("커스텀 구분자");
+            Calculator custom_cal = new Custom(input);
+            result = custom_cal.getSum();
         }
+
         System.out.println("결과 : " + result);
     }
 }
