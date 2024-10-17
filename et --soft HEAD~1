@@ -1,0 +1,29 @@
+[33mcommit 98a0b08eef560df372a6707700390e4b370f26cb[m[33m ([m[1;36mHEAD -> [m[1;32mgarden14[m[33m)[m
+Author: garden14 <ci667@dgu.ac.kr>
+Date:   Thu Oct 17 23:53:07 2024 +0900
+
+    docs: 숫자 추출
+
+[33mcommit fdfd0602c2b150a01ab36a8b59bbc2e0888b8c5f[m
+Author: garden14 <ci667@dgu.ac.kr>
+Date:   Thu Oct 17 22:26:08 2024 +0900
+
+    docs: README.md 수정
+
+[33mcommit f51e9e5316bf26f6b3c2b57d83c8ae2d20ee3117[m
+Author: garden14 <ci667@dgu.ac.kr>
+Date:   Wed Oct 16 20:34:57 2024 +0900
+
+    feat: 문자열 입력 기능 구현
+
+[33mcommit 4ffca351b324b9d95776246ef25ccb77c7fbbaea[m
+Author: garden14 <ci667@dgu.ac.kr>
+Date:   Wed Oct 16 19:52:43 2024 +0900
+
+    docs: 구현 기능 목록 정리
+
+[33mcommit d0a82b7d11bbabce3253514c307545ccb608c384[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: woowabrie <buyong.jo@woowahan.com>
+Date:   Tue Oct 15 09:30:11 2024 +0900
+
+    feat: setup project
