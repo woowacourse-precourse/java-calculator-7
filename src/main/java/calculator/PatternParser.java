@@ -34,6 +34,13 @@ public class PatternParser {
         return delimiters.contains(",") || delimiters.contains(":");
     }
 
+    public String parseCustomPattern(String input){
+        Matcher matcher = toMatcher(CUSTOM_PATTERN, input);
 
+        if(matcher.find()){
+            return matcher.group(1);
+        }
 
+        return null;
+    }
 }
