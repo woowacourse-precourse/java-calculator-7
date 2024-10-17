@@ -28,11 +28,15 @@ public class Application {
         return tokens;
     }
 
+    private static Integer[] detectChar(String[] tokens) {
+        return null;
+    }
+
     public static void main(String[] args) {
 //         TODO: 프로그램 구현
         String inputStr = Console.readLine();
-//        String inputStr = "//;\n1;2;3";
-        String separations = ",;";
+//        String inputStr = //;\n1;2;3,4:5,q
+        String separations = ",:";
 
         String customSeparation = extractCustomSeparation(inputStr);
         separations += customSeparation;
@@ -44,6 +48,6 @@ public class Application {
             inputStr = inputStr.substring(SeparationEndIndex + 1);
         }
 
-        String[] strings = extractInteger(inputStr, separations);
+        String[] tokens = extractInteger(inputStr, separations);
     }
 }
