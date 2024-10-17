@@ -3,10 +3,12 @@ package calculator;
 import calculator.dto.Data;
 
 public class DataParser {
+
+    private static final String regex = "\\\\n";
+
     public static Data parseData(String inputData) {
 
         boolean isCustom = isCustom(inputData);
-
         if (isCustom) {
             Validator.checkValidCustomFormat(inputData);
         }
@@ -26,19 +28,21 @@ public class DataParser {
 
     private static char[] createContents(String inputData, boolean isCustom) {
         if (isCustom) {
-            String[] data = inputData.split("\\\\n");
-
+            String[] data = inputData.split(regex);
             if (data.length == 1) {
-                return new char[0];
+                return new char[]{'0'};
             }
             String datum = data[1];
             return datum.toCharArray();
+        }
+        if (inputData.isEmpty()) {
+            return new char[]{'0'};
         }
         return inputData.toCharArray();
     }
 
     private static char[] getCustomSeparator(String inputData) {
-        String[] split = inputData.split("\\\\n");
+        String[] split = inputData.split(regex);
         String prefix = split[0];
         if (prefix.length() != 3) {
             throw new IllegalArgumentException();
