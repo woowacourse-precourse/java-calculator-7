@@ -1,7 +1,8 @@
 package calculator.service;
 
-import calculator.dto.CalculationResultDTO;
+import calculator.dto.response.CalculatorResponse;
+import calculator.dto.request.CalculatorRequest;
 
 public interface CalculatorService {
-    CalculationResultDTO calculateSum(String input);
+    CalculatorResponse calculateSum(CalculatorRequest request);
 }
