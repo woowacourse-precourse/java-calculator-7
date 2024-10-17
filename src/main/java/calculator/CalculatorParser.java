@@ -11,9 +11,9 @@ public class CalculatorParser {
     public CalculatorParser(String line) {
         int expressionStartIdx = 0;
 
-        if (hasCustomDelimiter(line)) {
+        if (startsWithCustomStart(line)) {
             parseCustomDelimiter(line);
-            checkCustomDelimiterEnd(line);
+            checkEndsWithCustomEnd(line);
             expressionStartIdx = CUSTOM_START.length() + CUSTOM_DELIMITER_LENGTH + CUSTOM_END.length(); // TODO: 포맷하기
         }
 
@@ -28,7 +28,7 @@ public class CalculatorParser {
         this.customDelimiter = line.charAt(CUSTOM_START.length()) + "";
     }
 
-    private void checkCustomDelimiterEnd(String line) {
+    private void checkEndsWithCustomEnd(String line) {
         int customEndStart = CUSTOM_START.length() + CUSTOM_DELIMITER_LENGTH;
 
         if (!line.startsWith(CUSTOM_END, customEndStart)) { // CUSTOM_END로 끝나지 않는다면
@@ -36,7 +36,7 @@ public class CalculatorParser {
         }
     }
 
-    private boolean hasCustomDelimiter(String line) {
+    private boolean startsWithCustomStart(String line) {
         return line.startsWith(CUSTOM_START);
     }
 

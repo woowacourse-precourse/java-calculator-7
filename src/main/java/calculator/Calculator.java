@@ -3,16 +3,16 @@ package calculator;
 public class Calculator {
     private static final String DEFAULT_DELIMITERS = ":,";
 
-    private final String regex;
+    private final String delimitersRegex;
 
     public Calculator(String customDelimiter) {
-        regex = "[" + DEFAULT_DELIMITERS + customDelimiter + "]";
+        this.delimitersRegex = "[" + DEFAULT_DELIMITERS + customDelimiter + "]";
     }
 
     public double getResult(String expression) {
         double result = 0;
 
-        for (String token : expression.split(regex)) {
+        for (String token : expression.split(this.delimitersRegex)) {
             if (token.isEmpty()) {
                 continue;
             }
