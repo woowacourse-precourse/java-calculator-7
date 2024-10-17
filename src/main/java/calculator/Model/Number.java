@@ -1,37 +1,32 @@
 package calculator.Model;
 
 import calculator.Constants.ErrorMessages;
+import calculator.Utils.NumberUtils;
 
 public class Number {
-    private final int number;
+    private final Double number;
 
     public Number(String number) {
         this.number = parseAndValidate(number);
     }
 
-    public Integer getNumber() {
+    public Double getNumber() {
         return number;
     }
 
-    private int parseAndValidate(String number) {
+    private Double parseAndValidate(String number) {
         if (isNull(number)) {
-            return 0;
+            return 0.0;
         }
-        isDigit(number);
-        int parsedNumber = Integer.parseInt(number);
+        NumberUtils.isDouble(number);
+        Double parsedNumber = Double.parseDouble(number);
         isPositive(parsedNumber);
         return parsedNumber;
     }
 
-    private void isPositive(int number) {
+    private void isPositive(Double number) {
         if (number < 0) {
             throw new IllegalArgumentException(ErrorMessages.INVALID_NUMBER_RANGE_MESSAGE.getErrorMessage());
-        }
-    }
-
-    private void isDigit(String number) {
-        if (!number.chars().allMatch(Character::isDigit)) {
-            throw new IllegalArgumentException(ErrorMessages.INVALID_NUMBER_MESSAGE.getErrorMessage());
         }
     }
 
