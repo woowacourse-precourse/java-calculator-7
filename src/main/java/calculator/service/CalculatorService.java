@@ -19,7 +19,7 @@ public class CalculatorService {
     private Optional<int[]> numbersToCalculate;
 
     public void input() {
-        Output.inputMessage();
+        Output.firstMessage();
         input = Input.input();
     }
 
@@ -95,7 +95,7 @@ public class CalculatorService {
     public void output() {
         int[] numbers = numbersToCalculate.orElse(new int[]{});
         int result = Arrays.stream(numbers).sum();
-        Output.outputMessage();
+        Output.resultMessage();
         Output.result(result);
     }
 }

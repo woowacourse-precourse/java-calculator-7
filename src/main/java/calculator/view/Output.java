@@ -1,13 +1,16 @@
 package calculator.view;
 
+import static calculator.constant.OutputMessages.FIRST_MESSAGE;
+import static calculator.constant.OutputMessages.RESULT_MESSAGE;
+
 public class Output {
 
-    public static void inputMessage() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
+    public static void firstMessage() {
+        System.out.println(FIRST_MESSAGE);
     }
 
-    public static void outputMessage() {
-        System.out.print("결과 : ");
+    public static void resultMessage() {
+        System.out.print(RESULT_MESSAGE);
     }
 
     public static void result(int result) {
