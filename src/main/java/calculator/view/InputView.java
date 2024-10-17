@@ -27,7 +27,7 @@ public class InputView {
      * 커스텀 구분자를 사용 시 기존 구분자에 커스텀 구분자 추가
      * 수정된 구분자로 문자열 분리
      */
-    public void getUserInput()
+    public int[] getUserInput()
     {
         String invalidateString = Console.readLine();
         String separtors = ",:";
@@ -38,7 +38,7 @@ public class InputView {
         }
         String[] invalidateStringArray = invalidateString.split("[" + separtors + "]");
 
-        System.out.println(Arrays.toString(invalidateStringArray));
+        return calculatorValidate.isIntegerParsable(invalidateStringArray);
     }
 }
 
