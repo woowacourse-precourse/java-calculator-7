@@ -1,7 +1,7 @@
 package calculator;
 
 import calculator.controller.CalculatorController;
-import calculator.controller.StringParser;
+import calculator.service.StringParser;
 import calculator.view.InputView;
 
 public class Application {

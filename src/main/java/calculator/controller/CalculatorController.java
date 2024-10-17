@@ -2,6 +2,7 @@ package calculator.controller;
 
 import calculator.model.Numbers;
 import calculator.model.UserInput;
+import calculator.service.StringParser;
 import calculator.view.InputView;
 
 public class CalculatorController {

@@ -1,4 +1,4 @@
-package calculator.controller;
+package calculator.service;
 
 import calculator.model.Numbers;
 import calculator.model.UserInput;
