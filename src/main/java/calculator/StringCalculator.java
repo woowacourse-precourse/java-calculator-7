@@ -6,10 +6,20 @@ public class StringCalculator {
             return 0;
         }
 
-        // 구분자 처리해 숫자 나누기
+        // 구분자 정의
         String delimiter = "[,;]";
+
+        // 커스텀 구분자 처리
+        if (input.startsWith("//")) {
+            int delimiterIndex = input.indexOf("\n");
+            delimiter = input.substring(2, delimiterIndex);
+            input = input.substring(delimiterIndex + 1);
+        }
+
+        // 정의된 구분자로 문자열 처리
         String[] tokens = input.split(delimiter);
 
+        // 처리된 문자열 덧셈 계산
         return sumTokens(tokens);
     }
 
