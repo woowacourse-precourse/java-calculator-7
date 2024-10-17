@@ -13,6 +13,7 @@ public class Application {
     private static final InputHandler INPUT_HANDLER = new ConsoleInputHandler();
     private static final OutputHandler OUTPUT_HANDLER = new ConsoleOutputHandler();
     private static final DelimiterChecker DELIMITER_CHECKER = new DelimiterChecker();
+    private static final List<String> DELIMITERS = new ArrayList<>(List.of(",", ":"));
 
     public static void main(String[] args) {
         // TODO: 프로그램 구현
@@ -20,13 +21,11 @@ public class Application {
 
         int result = 0;
         if (inputIsNotEmpty(input)) {
-            List<String> delimiters = new ArrayList<>(List.of(",", ":"));
-
             boolean hasCustomDelimiter = false;
             if (isCustomDelimiter(input)) {
                 int delimiterIdx = input.indexOf("\n");
                 String delimiter = input.substring(2, delimiterIdx);
-                delimiters.add(delimiter);
+                DELIMITERS.add(delimiter);
                 hasCustomDelimiter = true;
             }
 
@@ -36,7 +35,7 @@ public class Application {
             } else {
                 numbersWithDelimiter = input;
             }
-            String[] splitNumbers = numbersWithDelimiter.split(buildDelimiterRegex(delimiters));
+            String[] splitNumbers = numbersWithDelimiter.split(buildDelimiterRegex(DELIMITERS));
 
             for (String number : splitNumbers) {
                 try {
@@ -62,8 +61,8 @@ public class Application {
         }
     }
 
-    private static String buildDelimiterRegex(List<String> delimiters) {
-        return String.join("|", delimiters);
+    private static String buildDelimiterRegex() {
+        return String.join("|", DELIMITERS);
     }
 
     private static boolean isCustomDelimiter(String input) {
