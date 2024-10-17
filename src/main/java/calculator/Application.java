@@ -47,7 +47,7 @@ public class Application {
             System.out.println("결과 : " + sum);
 
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e){
-            throw new IllegalArgumentException("잘못된 값입니다. 원래의 예외: " + e);
+            throw new IllegalArgumentException("올바르지 않은 숫자 형식입니다. 원래의 예외 메시지: " + e);
         } finally {
             Console.close();
         }
