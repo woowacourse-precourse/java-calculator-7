@@ -6,11 +6,11 @@ public class Application {
     public static void main(String[] args) {
         try{
             System.out.println("덧셈할 문자열을 입력해주세요.");
-            String r = Console.readLine();
-            String[] all = r.split("[,;]");
+            String input = Console.readLine();
+            String[] splitInputs = input.split("[,;]");
             Integer result = 0;
 
-            for (String s : all) {
+            for (String s : splitInputs) {
                 if(s.equals("")) {
                     result += 0;
                 } else {
