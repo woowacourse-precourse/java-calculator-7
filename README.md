@@ -22,7 +22,8 @@
 
 ### 입력
 
-- [x] 구분자와 양수로 구성된 문자열 입력 - InputView#readInput()
+- [x] 구분자와 양수로 구성된 문자열 입력 - InputView#readNumbers()
+    - [x] 커스텀 구분자가 있는지 확인 - InputHandler#isCustomDelimiter()
     - [x] 입력 받은 값이 숫자가 아닌 경우 예외처리 - Number#validateNumber()
     - [x] 입력 받은 숫자가 양수가 아닌 경우 예외처리 - Number#checkPositive()
 

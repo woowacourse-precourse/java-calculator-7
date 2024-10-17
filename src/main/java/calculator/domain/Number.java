@@ -10,6 +10,10 @@ public class Number {
         checkPositive();
     }
 
+    public BigInteger getValue() {
+        return value;
+    }
+
     private BigInteger validateNumber(String value) {
         try {
             return new BigInteger(value);
