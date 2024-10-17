@@ -7,8 +7,16 @@ public class Application {
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String expression = getExpression();
-        System.out.println("결과 : " + expression);
 
+        String[] numList = getNumList(expression);
+        for (String s : numList) {
+            System.out.println("num = " + s);
+        }
+    }
+
+    private static String[] getNumList(String expression) {
+        String[] numList = expression.split(",|:");
+        return numList;
     }
 
     private static String getExpression() {
