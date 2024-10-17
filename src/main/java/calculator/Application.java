@@ -8,6 +8,7 @@ public class Application {
 
     public static ArrayList<String> seperatorList = new ArrayList<>(List.of(".", ":"));
     public static String userInput;
+    public static ArrayList<Long> usernumList = new ArrayList<Long>();
 
     public static void getCustomSeperator(String input) {
         String customSeperator;
@@ -32,10 +33,35 @@ public class Application {
         return userInput;
     }
 
+    public static boolean isNumber(String input) {
+        return input.matches("\\d");
+    }
+
+    public static void getNumber(String userInput) {
+        StringBuilder numberBuffer = new StringBuilder();
+        for (int i = 0; i < userInput.length(); i++) {
+            String curChar = userInput.substring(i, i + 1);
+            if (seperatorList.contains(curChar)) {
+                if (!numberBuffer.isEmpty()) {
+                    usernumList.add(Long.parseLong(numberBuffer.toString()));
+                    numberBuffer = new StringBuilder();
+                }
+                continue;
+            }
+            if (!isNumber(curChar)) {
+                throw new IllegalArgumentException("구분자, 양수, //, \\n 이외의 문자는 입력할 수 없습니다.");
+            }
+            numberBuffer.append(curChar);
+        }
+        if (!numberBuffer.isEmpty()) {
+            usernumList.add(Long.parseLong(numberBuffer.toString()));
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해주세요");
         userInput = getUserInput();
         getCustomSeperator(userInput);
-        System.out.println(seperatorList);
+        getNumber(userInput);
     }
 }
