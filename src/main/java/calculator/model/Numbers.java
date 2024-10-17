@@ -27,14 +27,8 @@ public class Numbers {
             return ZERO;
         }
         Integer number = CalculateException.catchNumberFormatException(splitInput);
-        if (compareNumberWithZero(number)) {
-            CalculateException.catchNumberNotPositiveException();
-        }
+        CalculateException.catchNumberNotPositiveException(number);
         return number;
-    }
-
-    public boolean compareNumberWithZero(Integer number) {
-        return number < ZERO;
     }
 
     public boolean compareSplitInputToZero(String splitInput) {
