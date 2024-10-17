@@ -16,7 +16,7 @@ public class CalculatorController {
 
     public void run() {
         String expression = inputAddition();
-        Calculator calculator = new Calculator(new Expression(expression), "add");
+        Calculator calculator = new Calculator(new Expression(expression));
         Integer result = calculateExpression(calculator);
         outputResult(result);
     }
@@ -26,7 +26,7 @@ public class CalculatorController {
     }
 
     private Integer calculateExpression(Calculator calculator) { // 입력받은 문자열에 대해 계산을 진행한다.
-        return calculator.calculate();
+        return calculator.addCalculate();
     }
 
     private void outputResult(Integer result) { // 결과를 출력한다.

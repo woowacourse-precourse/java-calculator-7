@@ -16,7 +16,7 @@ public class Separator {
     public String extractSeparator(String expression) {
         String defaultSeparator = DEFAULT_SEPARATOR;
         if (expression.startsWith(CUSTOM_DELIMITER_PREFIX)) {
-            int start = expression.indexOf(BACKSLASH) + PREFIX_OFFSET;
+            int start = expression.indexOf(CUSTOM_DELIMITER_PREFIX) + PREFIX_OFFSET;
             int end = expression.indexOf(CUSTOM_DELIMITER_SUFFIX);
             String customSeparator = expression.substring(start, end);
             if (customSeparator.contains(BACKSLASH)) {
