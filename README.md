@@ -32,37 +32,37 @@
 5. 결과 출력
     - [ ] System.out.printIn()을 사용하여 결과 출력
 
+
 # 세부적인 구현 목록
 
-1. 사용자 입력
-    - [ ] readLine() 메서드를 이용하여 사용자 입력
-        - inputView 클래스에 구현
-        - 상수들은 모두 final static 변수로 선언
-        - readLine() 및 System.out.printIn() 같은 I/O는 Util 클래스에 구현
-            - commandReader 클래스에 구현
-            - final 클래스로 선언해서 상속 막고 예측 가능하게 구현
-            - static 메서드로 유지보수성 높이기
-2. 입력된 문자 검증 (Validation)
-    - [ ] 빈 문자열 입력 시 예외처리
-        - IllregalArgumentException의 메시지는 ErrorMessage 클래스에 상수화
-3. 입력된 문자열 파싱
-    - [ ] 커스텀 구분자 확인
-        - [ ] 커스텀 구분자가 없을 경우 쉼표(,) 또는 콜론(:) 사용
-        - [ ] 커스텀 구분자 사용 시 커스텀 구분자 체크
-        - [ ] 커스텀 구분자가 빈 값일 경우 예외처리 or 기본 값으로 처리
-    - [ ] 구분자 기준으로 문자열 정리
-4. 숫자 추출 및 덧셈
-    - [ ] 추출된 숫자 덧셈
-        - [ ] 추출된 숫자 중에 음수가 있을 경우 예외처리
-        - [ ] 숫자가 아닌 다른 값이 들어올 경우 예외처리
-5. 결과 출력
-    - [ ] 결과 출력
-        - outputView 클래스에 구현
-        - 상수들은 모두 final static 변수로 선언
-        - readLine() 및 System.out.printIn() 같은 I/O는 Util 클래스에 구현
-            - commandWriter 클래스에 구현
-            - final 클래스로 선언해서 상속 막고 예측 가능하게 구현
-            - static 메서드로 유지보수성 높이기
+1. 도메인 계층
+    - [ ] StringCalculator 클래스 구현
+        - [ ] 문자열을 숫자로 변환하는 메서드 구현
+        - [ ] 숫자 배열의 합을 계산하는 메서드 구현
+    - [ ] Delimiter 클래스 구현 (값 객체)
+        - [ ] 기본 구분자와 커스텀 구분자 관리
+2. 서비스 계층
+    - [ ] CalculatorService 클래스 구현
+        - [ ] 문자열 파싱 로직 구현
+        - [ ] StringCalculator를 이용한 계산 로직 구현
+        - [ ] 예외 처리 로직 구현
+3. 프레젠테이션 계층
+    - [ ] CalculatorConsole 클래스 구현 (기존의 InputView, OutputView 역할)
+        - [ ] 사용자 입력 받기 메서드 구현
+        - [ ] 결과 출력 메서드 구현
+    - [ ] CalculatorController 클래스 구현
+        - [ ] CalculatorConsole과 CalculatorService 연결
+        - [ ] 전체 실행 흐름 제어
+4. 유틸리티
+    - [ ] StringParser 클래스 구현
+        - [ ] 커스텀 구분자 추출 메서드 구현
+        - [ ] 문자열 분할 메서드 구현
+5. 예외 처리
+    - [ ] CalculatorException 클래스 구현 (사용자 정의 예외)
+    - [ ] 각 예외 상황에 대한 구체적인 예외 메시지 정의
+6. 애플리케이션 실행
+    - [ ] Application 클래스에 main 메서드 구현
+        - [ ] CalculatorController 생성 및 실행
     
 
 # 체크 목록
