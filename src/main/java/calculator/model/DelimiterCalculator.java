@@ -38,7 +38,7 @@ public class DelimiterCalculator {
      */
     private String[] splitInput(String input) {
         if (input.startsWith("//")) {
-            String[] parts = input.split("\n", 2);
+            String[] parts = input.split("\\\\n");
             String delimiter = parts[0].substring(2);
             return parts[1].split(delimiter);
         }
