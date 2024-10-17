@@ -1,6 +1,22 @@
 package calculator.domain;
 
 public class Calculator {
+
+    public int add(String input) {
+        String separator = ",:";
+        if (isInputEmpty(input)) {
+            return 0;
+        }
+
+        if (isCustomSeparator(input)) {
+            separator = extractCustomSeparator(input, separator);
+            input = extractNumbersPart(input);
+        }
+
+        String[] numbers = splitNumbers(input, separator);
+        return calculateSum(numbers);
+    }
+
     private boolean isInputEmpty(String input) {
         return input == null || input.isEmpty();
     }
