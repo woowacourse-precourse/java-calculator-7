@@ -34,8 +34,10 @@ public class DelimiterParser {
         return result;
     }
     public List<Integer> parseToIntList(String input) {
-        return Arrays.stream(input.split(COMMON_DELIMITER))
+        List<Integer> list = Arrays.stream(input.split(COMMON_DELIMITER))
                 .map(Validator::validateIfNotNumber)
-                .collect(Collectors.toList());
+                .toList();
+        Validator.validateIfInputNegative(list);
+        return list;
     }
 }
