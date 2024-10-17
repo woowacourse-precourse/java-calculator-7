@@ -1,12 +1,12 @@
-package calculator;
+package calculator.domain;
 
-import java.util.Set;
+import java.util.List;
 
 public class Addition {
 
-    private final Set<Integer> numbers;
+    private final List<Integer> numbers;
 
-    public Addition(Set<Integer> numbers) {
+    public Addition(List<Integer> numbers) {
         this.numbers = numbers;
     }
 
