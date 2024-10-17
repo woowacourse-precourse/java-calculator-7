@@ -25,6 +25,14 @@ public class Application {
 
         List<String> customDelimiters = new ArrayList<>();
 
+
+        String defaultDelimiterPattern = DEFAULT_DELIMITER.stream()
+                .map(Pattern::quote)
+                .collect(Collectors.joining("|"));
+
+        String customDelimiterPattern= null;
+        List<Long> values = new ArrayList<>();
+
         // 3. 커스텀 구분자 저장
         while (inputString.startsWith(CUSTOM_DELIMITER_PREFIX)) { //  "//"로 시작하는지 확인 -> 무조건 뒤에 "\n"이 있어야함
             int i = inputString.indexOf(CUSTOM_DELIMITER_SUFFIX); //    "\n"이 있는 위치를 찾고 그 사이를 분리
@@ -33,9 +41,6 @@ public class Application {
 
             String subString = inputString.substring(CUSTOM_DELIMITER_PREFIX.length(), i);
             inputString = inputString.substring(i + CUSTOM_DELIMITER_SUFFIX.length(), inputString.length());    //첫 번째 커스텀 구분자 지정 부분 삭제
-            String defaultDelimiterPattern = DEFAULT_DELIMITER.stream()
-                    .map(Pattern::quote)
-                    .collect(Collectors.joining("|"));
 
             String[] splitByDefaultDelimiter = subString.split(defaultDelimiterPattern);
             for (String customDelimiter : splitByDefaultDelimiter) {
@@ -51,6 +56,36 @@ public class Application {
                 }
             }
 
+        }
+
+        if(!customDelimiters.isEmpty()){
+            customDelimiterPattern = customDelimiters.stream()
+                    .map(Pattern::quote)
+                    .collect(Collectors.joining("|"));
+        }
+
+        String delimiterPattern = null;
+
+        if(customDelimiterPattern == null)
+            delimiterPattern = defaultDelimiterPattern;
+        else if(customDelimiterPattern != null  )
+            delimiterPattern = defaultDelimiterPattern + "|" + customDelimiterPattern;
+
+        // 4. 받은 문자열 분리하여 숫자로 저장
+        String[] stringValues = inputString.split(delimiterPattern);
+        for (String stringValue : stringValues) {
+            long longValue;
+            try {
+                longValue = Long.parseLong(stringValue);
+            }catch (NumberFormatException e) {
+                throw new IllegalArgumentException();
+            }
+            if(longValue > MAXIMUM_NUMBER)
+                throw new IllegalArgumentException();
+
+            if(longValue < 0)
+                throw new IllegalArgumentException();
+            values.add(longValue);
         }
 
     }
