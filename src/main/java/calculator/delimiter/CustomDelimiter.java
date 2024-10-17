@@ -1,6 +1,7 @@
 package calculator.delimiter;
 
 import calculator.calculator.Delimiter;
+import calculator.utils.DelimiterUtils;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class CustomDelimiter implements Delimiter {
     }
 
     @Override
-    public List<Integer> extractNumbers(String input) {
+    public List<String> extractString(String input) {
         validate(input);
 
         String delimiter = extractDelimiter(input);
@@ -30,8 +31,6 @@ public class CustomDelimiter implements Delimiter {
         // 계산을 위한 부분
         String targetString = getTargetPart(input);
         return Arrays.stream(targetString.split(escapedDelimiter))
-                .map(DelimiterUtils::removeSpaces)
-                .map(Integer::parseInt)
                 .toList();
     }
 

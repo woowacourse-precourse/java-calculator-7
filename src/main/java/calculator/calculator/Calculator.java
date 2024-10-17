@@ -1,25 +1,33 @@
 package calculator.calculator;
 
 import calculator.delimiter.DelimiterFactory;
-import calculator.delimiter.DelimiterUtils;
+import calculator.utils.DelimiterUtils;
 import java.util.List;
 import java.util.Objects;
 
 public class Calculator {
 
+    private static final String POSITIVE_INTEGER_REGEX = "\\d+";
+
     private final DelimiterFactory delimiterFactory = new DelimiterFactory();
 
-    public int calculate(String input) {
-        validateInput(input);
-        String removedSpaces = DelimiterUtils.removeSpaces(input);
+    public int calculate(String rawInput) {
+        validateInput(rawInput);
 
-        Delimiter delimiter = delimiterFactory.getDelimiter(removedSpaces);
-        List<Integer> extractNumbers = delimiter.extractNumbers(removedSpaces);
-        validateNumbers(extractNumbers);
+        String cleanedInput = DelimiterUtils.removeSpaces(rawInput);
+        Delimiter delimiter = delimiterFactory.getDelimiter(cleanedInput);
+        List<String> numberStrings = delimiter.extractString(cleanedInput);
+        List<String> spaceRemoved = numberStrings.stream().map(DelimiterUtils::removeSpaces).toList();
 
-        return extractNumbers
-                .stream()
-                .reduce(0, Integer::sum);
+        validateString(spaceRemoved);
+
+        List<Integer> inputNumbers = spaceRemoved.stream()
+                .map(Integer::parseInt)
+                .toList();
+
+        return inputNumbers.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
     private void validateInput(String input) {
@@ -28,9 +36,9 @@ public class Calculator {
         }
     }
 
-    private void validateNumbers(List<Integer> inputNumbers) {
-        if (inputNumbers.stream().anyMatch(n -> n < 0)) {
-            throw new IllegalArgumentException("음수는 허용되지 않는다");
+    private void validateString(List<String> extractString) {
+        if (extractString.stream().anyMatch(s -> !s.matches(POSITIVE_INTEGER_REGEX))) {
+            throw new IllegalArgumentException("음수 혹은 숫자 외 값은 허용되지 않는다.");
         }
     }
 }

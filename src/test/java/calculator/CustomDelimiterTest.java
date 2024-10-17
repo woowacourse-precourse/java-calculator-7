@@ -48,7 +48,7 @@ class CustomDelimiterTest {
     void validateInvalidInputs(String input, String expectedMessage) {
         CustomDelimiter customDelimiter = new CustomDelimiter();
 
-        assertThatThrownBy(() -> customDelimiter.extractNumbers(input))
+        assertThatThrownBy(() -> customDelimiter.extractString(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(expectedMessage);
     }
@@ -65,28 +65,28 @@ class CustomDelimiterTest {
 
     @ParameterizedTest
     @DisplayName("주어진 문자열에서 숫자를 올바르게 분리하여 리턴한다.")
-    @MethodSource("provideExtractNumbersTestCases")
-    void extractNumbers(String input, List<Integer> expectedNumbers) {
+    @MethodSource("provideExtractStringTestCases")
+    void extractString(String input, List<String> expectedNumbers) {
         CustomDelimiter customDelimiter = new CustomDelimiter();
-        List<Integer> numbers = customDelimiter.extractNumbers(input);
+        List<String> numbers = customDelimiter.extractString(input);
         Assertions.assertThat(numbers).isEqualTo(expectedNumbers);
     }
 
-    private static Stream<Arguments> provideExtractNumbersTestCases() {
+    private static Stream<Arguments> provideExtractStringTestCases() {
         return Stream.of(
                 // 기본적인 커스텀 구분자
-                Arguments.of("//;|,:\\n1;|,:2;|,:3", List.of(1, 2, 3)),
-                Arguments.of("//|구분자,\\n4|구분자,5|구분자,6", List.of(4, 5, 6)),
-                Arguments.of("//:\\n7:8:9", List.of(7, 8, 9)),
+                Arguments.of("//;|,:\\n1;|,:2;|,:3", List.of("1", "2", "3")),
+                Arguments.of("//|구분자,\\n4|구분자,5|구분자,6", List.of("4", "5", "6")),
+                Arguments.of("//:\\n7:8:9", List.of("7", "8", "9")),
 
                 // 공백 포함 처리
-                Arguments.of("//;\\n1; 2; 3", List.of(1, 2, 3)),
+                Arguments.of("//;\\n1;2;3", List.of("1", "2", "3")),
 
                 // 단일 숫자
-                Arguments.of("//;\\n1", List.of(1)),
+                Arguments.of("//;\\n1", List.of("1")),
 
                 // 큰 숫자 처리
-                Arguments.of("//;\\n1000;2000;3000", List.of(1000, 2000, 3000))
+                Arguments.of("//;\\n1000;2000;3000", List.of("1000", "2000", "3000"))
         );
     }
 }

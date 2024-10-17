@@ -1,6 +1,7 @@
 package calculator.delimiter;
 
 import calculator.calculator.Delimiter;
+import calculator.utils.DelimiterUtils;
 import java.util.List;
 
 /**
@@ -9,18 +10,15 @@ import java.util.List;
  */
 public class DefaultDelimiter implements Delimiter {
 
-    private static final Integer EMPTY_VALUE = 0;
-
     private static final String INTEGER_REGEX = "\\d+";
 
     @Override
-    public List<Integer> extractNumbers(String input) {
+    public List<String> extractString(String input) {
         if (input.isEmpty()) {
-            return List.of(EMPTY_VALUE);
+            return List.of();
         }
 
-        int parsedInt = Integer.parseInt(input);
-        return List.of(parsedInt);
+        return List.of(input);
     }
 
     @Override

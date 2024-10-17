@@ -1,7 +1,6 @@
 package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import calculator.delimiter.DefaultDelimiter;
 import java.util.List;
@@ -15,10 +14,10 @@ class DefaultDelimiterTest {
 
     @Test
     @DisplayName("공백 문자열은 0을 반환한다.")
-    void testExtractNumbers_EmptyOrWhitespaceInput() {
+    void testExtractString_EmptyOrWhitespaceInput() {
         DefaultDelimiter defaultDelimiter = new DefaultDelimiter();
-        List<Integer> result = defaultDelimiter.extractNumbers("");
-        assertThat(result).isEqualTo(List.of(0));
+        List<String> result = defaultDelimiter.extractString("");
+        assertThat(result).isEqualTo(List.of());
     }
 
     @ParameterizedTest
@@ -28,18 +27,10 @@ class DefaultDelimiterTest {
             "999=999"
     })
     @DisplayName("단일 숫자는 그대로 반환한다.")
-    void testExtractNumbers_SingleNumber(String input, int expected) {
+    void testExtractString_SingleNumber(String input, String expected) {
         DefaultDelimiter defaultDelimiter = new DefaultDelimiter();
-        List<Integer> result = defaultDelimiter.extractNumbers(input);
+        List<String> result = defaultDelimiter.extractString(input);
         assertThat(result).isEqualTo(List.of(expected));
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"abc", "1a", "$12"})
-    @DisplayName("숫자가 아닌 입력은 NumberFormatException을 발생시킨다.")
-    void testExtractNumbers_InvalidInput(String input) {
-        DefaultDelimiter defaultDelimiter = new DefaultDelimiter();
-        assertThrows(NumberFormatException.class, () -> defaultDelimiter.extractNumbers(input));
     }
 
     @ParameterizedTest

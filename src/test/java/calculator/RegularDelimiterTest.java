@@ -17,18 +17,18 @@ class RegularDelimiterTest {
     private final RegularDelimiter regularDelimiter = new RegularDelimiter();
 
     @ParameterizedTest
-    @MethodSource("provideExtractNumbersTestCases")
+    @MethodSource("provideExtractStringTestCases")
     @DisplayName("쉼표와 콜론 구분자로 숫자를 분리하여 리턴한다.")
-    void testExtractNumbers(String input, List<Integer> expectedNumbers) {
-        List<Integer> result = regularDelimiter.extractNumbers(input);
+    void testExtractString(String input, List<String> expectedNumbers) {
+        List<String> result = regularDelimiter.extractString(input);
         assertThat(result).isEqualTo(expectedNumbers);
     }
 
-    private static Stream<Arguments> provideExtractNumbersTestCases() {
+    private static Stream<Arguments> provideExtractStringTestCases() {
         return Stream.of(
-                arguments("1,2,3", List.of(1, 2, 3)),   // 쉼표 구분자
-                arguments("4:5:6", List.of(4, 5, 6)),   // 콜론 구분자
-                arguments("7,8:9", List.of(7, 8, 9))    // 쉼표와 콜론 혼합
+                arguments("1,2,3", List.of("1", "2", "3")),   // 쉼표 구분자
+                arguments("4:5:6", List.of("4", "5", "6")),   // 콜론 구분자
+                arguments("7,8:9", List.of("7", "8", "9"))    // 쉼표와 콜론 혼합
         );
     }
 

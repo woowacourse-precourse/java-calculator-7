@@ -13,9 +13,8 @@ public class RegularDelimiter implements Delimiter {
     private static final String REGULAR_DELIMITERS = "[,:]";
 
     @Override
-    public List<Integer> extractNumbers(String input) {
+    public List<String> extractString(String input) {
         return Arrays.stream(input.split(REGULAR_DELIMITERS))
-                .map(Integer::parseInt)
                 .toList();
     }
 
