@@ -4,17 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Tokenizer {
-    List<Integer> numberlist;
+    Numberlist numberlist;
+    Divider divider;
+    List<Integer> numbers;
 
     public Tokenizer() {
-        numberlist = new ArrayList<Integer>();
+        numberlist = new Numberlist();
+        divider = new Divider();
+        numbers = new ArrayList<>();
     }
 
     public List<Integer> tokenize(String input) {
-        numberlist.clear();
+        numbers.clear();
         
-        //주요 로직 작성
+        for(int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            if(Character.isDigit(c)) {
+                numberlist.push(c);
+            }
+            else {
+                divider.judge(c);
+            }
+        }
 
-        return numberlist;
+        return numbers;
     }
 }
