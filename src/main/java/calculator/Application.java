@@ -44,7 +44,7 @@ public class Application {
         String str = removeSeparatorInitializer(input);
         str = removeNumber(str);
         str = removeSeparator(str, getCustomSeparator(input));
-        return input.indexOf("//") == 0 && str == "";
+        return input.indexOf("//") == 0 && str.isEmpty();
     }
 
     private String formatSeparator(String separator) {
@@ -52,7 +52,7 @@ public class Application {
     }
 
     public int sum(String formattedStr, String separator) {
-        if (formattedStr == "") {
+        if (formattedStr.isEmpty()) {
             return 0;
         }
 
