@@ -67,7 +67,12 @@ public class CalculatorService {
     }
 
     public void printResult(){
-        System.out.println(endString+result);
+        String ret = String.valueOf(result);
+        StringBuffer buf = new StringBuffer(ret);
+        for(int i=ret.length()-3;i>=1;i=i-3){
+            buf.insert(i, ",");
+        }
+        System.out.println(endString+buf);
         Console.close();
     }
 
