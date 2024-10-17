@@ -22,11 +22,7 @@ public class StringCalculator {
             }
         }
 
-        String str = input;
-        if (hasCustomSeparator) {
-            int strStartIdx = input.indexOf("\\n") + 2;
-            str = input.substring(strStartIdx);
-        }
+        String str = initString(input);
         validateString(str, separators);
 
         String[] separatedNumbers = str.split('[' + separators + ']');
@@ -57,5 +53,12 @@ public class StringCalculator {
         separators += customSeparator;
     }
 
-
+    String initString(String input) {
+        String str = input;
+        if (hasCustomSeparator) {
+            int strStartIdx = input.indexOf("\\n") + 2;
+            str = input.substring(strStartIdx);
+        }
+        return str;
+    }
 }
