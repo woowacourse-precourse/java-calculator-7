@@ -26,6 +26,22 @@ class SplitterTest {
 
     }
 
-   
+    @Test
+    void 커스텀구분자_쪼개기() {
+        //given
+        String input = "1--3;4--8;7&&&8&&&9";
+        Splitter splitter = new Splitter();
+        List<String> customSeparator = new ArrayList<>();
+        customSeparator.add(";");
+        customSeparator.add("--");
+        customSeparator.add("&&&");
+
+        //when
+        List<String> result = splitter.splitByCustomSeparator(input, customSeparator);
+
+        // 결과 출력
+        assertThat(result).containsExactly("1", "3", "4", "8", "7", "8", "9");
+
+    }
 
 }
