@@ -19,7 +19,7 @@ public class Application {
         return new InputSliceResult(input, delimiters);
     }
 
-    private static boolean isPositive(String[] numbers) {
+    private static boolean isAllPositive(String[] numbers) {
         return Arrays.stream(numbers).allMatch(n -> Double.parseDouble(n) > 0);
     }
 
@@ -39,7 +39,7 @@ public class Application {
 
             String[] numbers = input.split("[" + delimiters + "]+");
 
-            if (!isPositive(numbers)) {
+            if (!isAllPositive(numbers)) {
                 throw new IllegalArgumentException("모든 숫자는 양수여야 합니다.");
             }
 
