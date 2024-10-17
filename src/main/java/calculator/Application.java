@@ -10,7 +10,7 @@ public class Application {
         String delimiter = ",|:";
 
         if(input_str.startsWith("//")){
-            String[] split_str = input_str.split("\n");
+            String[] split_str = input_str.split("\\\\n");
             if(split_str.length ==2){
                 String customDelimiter = split_str[0].substring(2);
                 delimiter += "|" + customDelimiter;
