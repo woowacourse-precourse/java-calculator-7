@@ -25,6 +25,41 @@ class Number {
         return number;
     }
 
+    public Number add(final Number number) {
+        return new Number(addLargeNumbers(number.number, this.number));
+    }
+
+    public String addLargeNumbers(String num1, String num2) {
+        final int maxLength = Math.max(num1.length(), num2.length());
+        num1 = padWithZeros(num1, maxLength);
+        num2 = padWithZeros(num2, maxLength);
+
+        final StringBuilder result = new StringBuilder();
+        int carry = 0;
+
+        for (int i = maxLength - 1; i >= 0; i--) {
+            final int digit1 = num1.charAt(i) - '0';
+            final int digit2 = num2.charAt(i) - '0';
+
+            final int sum = digit1 + digit2 + carry;
+
+            carry = sum / 10;
+            result.append(sum % 10);
+        }
+        if (carry != 0) {
+            result.append(carry);
+        }
+        return result.reverse().toString();
+    }
+
+    private String padWithZeros(final String str, int length) {
+        final StringBuilder padded = new StringBuilder(str);
+        while (padded.length() < length) {
+            padded.insert(0, '0');
+        }
+        return padded.toString();
+    }
+
     @Override
     public String toString() {
         return "number='" + number + '\'';
