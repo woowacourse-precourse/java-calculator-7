@@ -28,6 +28,13 @@ public class StringCalculator {
         }
     }
 
+    //split 이후 빈 문자열이 있는지 체크하는 메서드
+    private void checkNull(String str) {
+        if (str == null) {
+            throw new IllegalArgumentException("Wrong usage of delimiter");
+        }
+    }
+
     // 문자열을 더하는 메서드
     public int add() {
         String numbers = str;
