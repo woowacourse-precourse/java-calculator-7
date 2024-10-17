@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.model.DelimiterHandler;
 import calculator.model.ExpressionHandler;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
@@ -32,8 +33,9 @@ class ApplicationTest extends NsTest {
     @Test
     void getCustomDelimiterTest(){
         assertSimpleTest(() -> {
-           run("//;\\n");
-           assertThat(output()).contains(";");
+            DelimiterHandler delimiterHandler = new DelimiterHandler();
+            delimiterHandler.setDelimiter("//.\\n1,2");
+            assertThat(delimiterHandler.getAllDelimiters().contains("."));
         });
     }
 
@@ -51,13 +53,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void tokenizeExpressionTest(){
-        String expression = "//;\\n1,2:33";
+    void tokenizeExpressionTest1(){
+        String expression = "1,2:33";
+
         ExpressionHandler expressionHandler = new ExpressionHandler();
-        expression = expressionHandler.filterExpression(expression, true);
+        expression = expressionHandler.filterExpression(expression, false);
 
         StringTokenizer tokenizedExpression = expressionHandler.tokenizeExpression(expression);
-        String[] expectedTokens = {"1", "2", "33"};
+        String[] expectedTokens = {"1", ",", "2", ":", "33"};
 
         int index = 0;
         while (tokenizedExpression.hasMoreTokens()) {
@@ -65,6 +68,65 @@ class ApplicationTest extends NsTest {
             assertThat(token).isEqualTo(expectedTokens[index++]);
         }
     }
+
+    @Test
+    void getSumTest1(){
+        String expression = "1,2:33";
+
+        ExpressionHandler expressionHandler = new ExpressionHandler();
+        expression = expressionHandler.filterExpression(expression, false);
+
+        StringTokenizer tokenizedExpression = expressionHandler.tokenizeExpression(expression);
+        int result = expressionHandler.getSum(tokenizedExpression);
+
+        assertThat(result).isEqualTo(1+2+33);
+    }
+
+    // input case test
+    @Test
+    void inputErrorCaseTest1(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(",1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void inputErrorCaseTest2(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,2,3:"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void inputErrorCaseTest3(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(","))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void inputErrorCaseTest4(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("-1,-2,-3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void inputErrorCaseTest5(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("///\n1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void inputWellCaseTest1() {
+        assertSimpleTest(() -> {
+            run("//;\\n1");
+            assertThat(output()).contains("결과 : 1");
+        });
+    }
+
 
     @Override
     public void runMain() {

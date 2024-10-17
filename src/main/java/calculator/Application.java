@@ -15,7 +15,7 @@ public class Application {
 
         // 2. custom 구분자 확인
         DelimiterHandler delimiterHandler = new DelimiterHandler();
-        char customDelimiter = delimiterHandler.getDelimiter(expression); // 사용되지 않는 문제 발생
+        delimiterHandler.setDelimiter(expression);
         boolean customDelimiterFlag = delimiterHandler.getCustomDelimiterFlag();
 
         // 3. 문자열 tokenizing
@@ -24,7 +24,8 @@ public class Application {
 
         StringTokenizer tokenizedExpression = expressionHandler.tokenizeExpression(expression);
 
-
+        // 4. 덧셈
+        int result = expressionHandler.getSum(tokenizedExpression);
 
     }
 }
