@@ -18,7 +18,7 @@ public class Application {
     }
 
     public static String[] extractNumbers(String input){
-        if(input == null || input.isEmpty()){
+        if(input.isBlank()){
             return new String[]{"0"};
         }
 
