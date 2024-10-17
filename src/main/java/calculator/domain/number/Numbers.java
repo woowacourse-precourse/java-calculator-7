@@ -9,4 +9,8 @@ public class Numbers {
     public Numbers(List<Number> numbers) {
         this.numbers = numbers;
     }
+
+    public List<Number> getNumbers() {
+        return numbers;
+    }
 }

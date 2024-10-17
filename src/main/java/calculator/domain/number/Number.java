@@ -8,6 +8,10 @@ public class Number {
         this.value = validate(value);
     }
 
+    public int getValue() {
+        return value;
+    }
+
     private int validate(String value) {
         if (isBlank(value)) {
             return 0;
