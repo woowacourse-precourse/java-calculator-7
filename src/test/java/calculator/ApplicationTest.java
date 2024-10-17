@@ -54,6 +54,14 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 커스텀_구분자가_기본_구분자와_동일하지_않은_경우() {
+        assertSimpleTest(() -> {
+            run("//@\\n1,2:3@4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
