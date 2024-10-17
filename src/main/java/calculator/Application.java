@@ -19,36 +19,94 @@ public class Application {
         // 계산기 인스턴스 생성
         Calculator calculator = new Calculator();
 
-        // 구분자 등록
-        ArrayList<String> seperators = findSeperators(input);
-        input = modifyInput(seperators, input);
-        for(String seperator : seperators) {
-            calculator.addSeperator(seperator);
-        }
-        
-        // 입력을 토대로 숫자 추가
-        calculator.addNumbers(input);
-        // 계산 진행
-        calculator.calculate();
+        // 문자열 검사 및 계산기 인스턴스 업데이트
+        int index = 0;
+        for(int i = 0; i < input.length(); i++) {
+            String letter = String.valueOf(input.charAt(i));
 
-        System.out.println("결과 : " + calculator.getResult());
-    }
-
-    private static ArrayList<String> findSeperators(String input) {
-        ArrayList<String> seperators = new ArrayList<>();
-
-        if(String.valueOf(input.charAt(0)).equals("/")){
-            for(int i = 2; i < input.length(); i++) {
-                if(String.valueOf(input.charAt(i)).equals("\\")) break;
-                seperators.add(String.valueOf(input.charAt(i)));
+            if(!isInteger(letter)){
+                // 구분자 추가 등록
+                if(letter.equals("/")){
+                    if(i != 0){
+                        String number = input.substring(index, i);
+                        addNumber(calculator, number);
+                    }
+                    String seperators = findSeperators(i, input);
+                    addSeperators(calculator, seperators);
+                    i += seperators.length() + 3;
+                    index = i + 1;
+                } else {
+                    // 구분자 이전의 숫자 등록
+                    if(calculator.seperators.contains(letter)){
+                        String number = input.substring(index, i);
+                        addNumber(calculator, number);
+                        index = i + 1;
+                    } else {
+                        throw new IllegalArgumentException("등록되지 않은 구분자입니다." + letter);
+                    }
+                }
             }
         }
-        return seperators;
+
+        // 문자열에서 마지막 숫자 추가
+        String lastNumber = input.substring(index);
+        if(isInteger(lastNumber)){
+            addNumber(calculator, lastNumber);
+        }
+
+        // 계산 진행
+        int result = calculator.calculate();
+
+        System.out.println("결과 : " + result);
     }
 
-    private static String modifyInput(ArrayList<String> seperators, String input) {
-        int start = seperators.size() + 4;
-        return input.substring(start);
+    private static void addNumber(Calculator calculator, String number) {
+        if(isInteger(number)){
+            if(Integer.parseInt(number) > 0){
+                calculator.addNumber(number);
+            } else {
+                throw new IllegalArgumentException("입력된 숫자가 음수입니다.");
+            }
+        } else {
+            throw new IllegalArgumentException("올바르지 않은 숫자 형식입니다.");
+        }
+    }
+
+    private static boolean isInteger(String letter) {
+        try {
+            Integer.parseInt(letter);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private static String findSeperators(int startIndex, String input) {
+        if(!input.substring(startIndex, startIndex + 2).equals("//")){
+            throw new IllegalArgumentException("잘못된 입력입니다.");
+        }
+
+        int endIndex = 0;
+        for(int i = startIndex + 2; i < input.length(); i++) {
+            char ch = input.charAt(i);
+            if(String.valueOf(ch).equals("n")){
+                endIndex = i;
+                break;
+            }
+        }
+
+        if(!input.substring(endIndex-1, endIndex + 1).equals("\\n")){
+            throw new IllegalArgumentException("잘못된 입력입니다.");
+        }
+
+        return input.substring(startIndex+2, endIndex-1);
+    }
+
+    private static void addSeperators(Calculator calculator, String seperators) {
+        for(int i = 0; i < seperators.length(); i++) {
+            char ch = seperators.charAt(i);
+            calculator.addSeperator(String.valueOf(ch));
+        }
     }
 
     // 계산기 클래스 정의
@@ -66,38 +124,18 @@ public class Application {
             seperators.add(":");
         }
 
-        private void addNumbers(String input) {
-            int index = 0;
-            for(int i = 0; i < input.length(); i++) {
-                char ch = input.charAt(i);
-                if(seperators.contains(String.valueOf(ch))) {
-                    String number = input.substring(index, i);
-                    addNumber(number);
-                    index = i + 1;
-                }
-            }
-            addNumber(input.substring(index));
-        }
-
         private void addNumber(String number) {
-            try{
-                numbers.add(Integer.parseInt(number));
-            } catch(NumberFormatException e) {
-                System.out.println("유효하지 않은 숫자: " + number);
-            }
+            numbers.add(Integer.parseInt(number));
         }
 
         private void addSeperator(String seperator) {
             seperators.add(seperator);
         }
 
-        private void calculate() {
+        private int calculate() {
             for(int number : numbers) {
                 result += number;
             }
-        }
-
-        private int getResult() {
             return result;
         }
     }
