@@ -14,6 +14,7 @@ public class StringCalculation {
         StringProcessor stringProcessor = new StringProcessor();
 
         String[] splitedString = stringProcessor.splitWithDelimiter(inputView.inputString());
+        stringProcessor.calculate(splitedString);
     }
 
 }
