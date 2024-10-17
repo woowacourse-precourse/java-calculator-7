@@ -4,9 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class InputValidator {
-	List<String> delimiters = Arrays.asList(",", ":");
+	List<String> delimiters;
 
 	public void validateInput(String input) {
+		delimiters = Arrays.asList(",", ":");
 		validateHasNumber(input);
 		validateHasDelimiter(input);
 	}
