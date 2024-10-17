@@ -64,6 +64,24 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "//^\\n5^10^15^20",
+            "//$\\n5$10$15$20",
+            "//+\\n5+10+15+20",
+            "//.\\n5.10.15.20",
+            "//?\\n5?10?15?20",
+            "//|\\n5|10|15|20",
+            "//*\\n5*10*15*20",
+            "//!\\n5!10!15!20"
+    })
+    void 커스텀_구분자가_정규표현식_메타문자로_인식되어선_안된다(String input) {
+        assertSimpleTest(() -> {
+            run(input);
+            assertThat(output()).contains("결과 : 50");
+        });
+    }
+
     @Test
     void 빈_문자열을_입력하면_0이_반환되어야한다() {
         List<Number> result = parser.parse("");
