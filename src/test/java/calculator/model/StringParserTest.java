@@ -1,4 +1,4 @@
-package calculator;
+package calculator.model;
 
 import calculator.model.StringParser;
 import org.junit.jupiter.api.Test;
