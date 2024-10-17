@@ -31,18 +31,14 @@ class ApplicationTest extends NsTest {
 
     @Test
     void emptyInput(){
-        Boolean check = Application.checkEmpty(" ");
+        Boolean check = Application.checkEmpty("");
 
         assertEquals(false, check);
     }
 
     @Override
     public void runMain() {
-        try {
-            Application.main(new String[]{});
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Application.main(new String[]{});
     }
 
 }

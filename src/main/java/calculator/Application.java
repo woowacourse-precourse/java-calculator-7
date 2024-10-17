@@ -1,15 +1,14 @@
 package calculator;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+
+import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class Application {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String string = br.readLine();
+    public static void main(String[] args) {
 
-        if(!checkEmpty(string)){
+        String inputString = readLine();
+
+        if(!checkEmpty(inputString)){
             System.exit(1);
         }
     }
@@ -25,5 +24,9 @@ public class Application {
         }
 
         return true;
+    }
+
+    static void checkCustom(String string){ // 구분자 표시 : //(구분자)\n
+
     }
 }
