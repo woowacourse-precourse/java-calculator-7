@@ -1,68 +1,35 @@
 package calculator.utils;
 
-
-import static calculator.constant.DefaultSeparator.COLON;
-import static calculator.constant.DefaultSeparator.COMMA;
-import static calculator.constant.StandardIndex.FIRST_STANDARD;
-import static calculator.constant.StandardIndex.SECOND_STANDARD;
-
+import calculator.model.Numbers;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Parser {
 
-    public List<Integer> parseInput(String input) {
-        List<Character> separators = new ArrayList<>(List.of(COMMA.getSeparator(), COLON.getSeparator()));
-        if (checkCustomSeparator(input)) {
-            separators = getSeparators(input);
-            input = getPureString(input);
-        }
+    public Numbers parseInput(List<Character> delimiter, String input) {
         List<Integer> numbers = new ArrayList<>();
         StringBuilder number = new StringBuilder();
-        for (int i = 0; i < input.length(); i++) {
-            char current = input.charAt(i);
+        for (char current : input.toCharArray()) {
             if (current >= '0' && current <= '9') {
                 number.append(current);
-            } else if (separators.contains(current)) {
-                numbers.add(Integer.parseInt(number.toString()));
+            } else if (delimiter.contains(current)) {
+                tryToChangeStringToNumber(numbers, number);
                 number.setLength(0);
-            } else {
-                throw new IllegalArgumentException();
             }
         }
         if (!number.isEmpty()) {
             numbers.add(Integer.parseInt(number.toString()));
         }
-        return numbers;
+        return new Numbers(numbers);
     }
 
-
-    // 커스텀 구분자가 있는지 확인하는 메소드
-    private boolean checkCustomSeparator(String input) {
-        int firstIndex = input.indexOf(FIRST_STANDARD.getStandard());
-        int secondIndex = input.indexOf(SECOND_STANDARD.getStandard());
-        if (firstIndex == -1 && secondIndex == -1) {
-            return false;
-        } else if (firstIndex == 0 && secondIndex >= 0) {
-            return true;
+    private void tryToChangeStringToNumber(List<Integer> numbers, StringBuilder number) {
+        try {
+            numbers.add(Integer.parseInt(number.toString()));
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
         }
-        throw new IllegalArgumentException();
     }
 
-    // 구분자를 반환하는 메소드
-    private List<Character> getSeparators(String input) {
-        List<Character> separators = new ArrayList<>();
-        int secondIndex = input.indexOf(SECOND_STANDARD.getStandard());
-        for (int i = 2; i < secondIndex; i++) {
-            separators.add(input.charAt(i));
-        }
-        return separators;
-    }
 
-    // 커스텀 구분자를 제외한 순수 입력 값을 반환하는 메소드
-    private String getPureString(String input) {
-        int secondIndex = input.indexOf(SECOND_STANDARD.getStandard());
-
-        return input.substring(secondIndex + 2);
-    }
 }
