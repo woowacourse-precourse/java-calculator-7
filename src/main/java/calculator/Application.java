@@ -34,7 +34,7 @@ public class Application {
             } else {
                 numbersWithDelimiter = input;
             }
-            String[] splitNumbers = numbersWithDelimiter.split(buildDelimiterRegex(DELIMITERS));
+            String[] splitNumbers = numbersWithDelimiter.split(buildDelimiterRegex());
 
             for (String number : splitNumbers) {
                 try {
