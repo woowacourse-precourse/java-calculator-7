@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class Application {
 
     public static ArrayList<String> seperatorList = new ArrayList<>(List.of(".", ":"));
+    public static String userInput;
 
     public static void getCustomSeperator(String input) {
         String customSeperator;
@@ -19,6 +20,7 @@ public class Application {
                 throw new IllegalArgumentException("커스텀 구분자는 문자열 처음에서만 추가할 수 있습니다.");
             }
             seperatorList.add(customSeperator);
+            userInput = userInput.substring((input.indexOf("\\n") + 2));
         }
     }
 
@@ -32,7 +34,8 @@ public class Application {
 
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해주세요");
-        getCustomSeperator(getUserInput());
+        userInput = getUserInput();
+        getCustomSeperator(userInput);
         System.out.println(seperatorList);
     }
 }
