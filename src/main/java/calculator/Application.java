@@ -40,7 +40,7 @@ public class Application {
             separate.add(CustomExtraction(str));
             int result = 0;
             for(String number: operationSetting(str.substring(str.indexOf("\\n")+2), separate)){
-                if (number.matches("\\d+"))
+                if (number.matches("[1-9]\\d*"))
                     result += Integer.parseInt(number);
                 else throw new IllegalArgumentException();
             }
@@ -49,7 +49,7 @@ public class Application {
         else{
             int result = 0;
             for(String number: operationSetting(str, separate)){
-                if (number.matches("\\d+"))
+                if (number.matches("[1-9]\\d*"))
                     result += Integer.parseInt(number);
                 else throw new IllegalArgumentException();
             }
