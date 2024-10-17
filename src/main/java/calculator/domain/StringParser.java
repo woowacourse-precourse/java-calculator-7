@@ -1,9 +1,7 @@
 package calculator.domain;
 
-import java.util.List;
-
 public class StringParser {
-    
+
     private static final int SECOND_NUMBER = 2;
     private static final String STANDARD_DELIMITER = "[,|:]";
     private static final String FIRST_CUSTOM_STRING = "//";
@@ -11,37 +9,18 @@ public class StringParser {
     private static final String EXCEPTION_EMPTY_STRING = "빈 값을 입력하셨습니다.";
     private static final String EXCEPTION_CUSTOM_STRING = "올바른 형식으로 입력하세요.";
 
-    private final List<String> numbers;
+    private final String inputStrings;
 
     public StringParser(String inputStrings) {
         validateEmptyString(inputStrings);
-        this.numbers = parseStrings(inputStrings);
+        this.inputStrings = inputStrings;
     }
 
-    public List<String> getNumbers() {
-        return numbers;
-    }
-
-    private List<String> parseStrings(String inputStrings) {
+    public String extractDelimiter() {
         if (!inputStrings.startsWith(FIRST_CUSTOM_STRING)) {
-            return parseStandardStrings(inputStrings);
+            return STANDARD_DELIMITER;
         }
         validateCustomStrings(inputStrings);
-        return parseCustomStrings(inputStrings);
-    }
-
-    private List<String> parseStandardStrings(String inputStrings) {
-        String[] standardStrings = inputStrings.split(STANDARD_DELIMITER);
-        return List.of(standardStrings);
-    }
-
-    private List<String> parseCustomStrings(String inputStrings) {
-        String numberParts = inputStrings.substring(inputStrings.indexOf(CUSTOM_NUMBER_PART_DELIMITER) + SECOND_NUMBER);
-        String[] customStrings = numberParts.split(extractCustomDelimiter(inputStrings));
-        return List.of(customStrings);
-    }
-
-    private String extractCustomDelimiter(String inputStrings) {
         return inputStrings.substring(SECOND_NUMBER, inputStrings.indexOf(CUSTOM_NUMBER_PART_DELIMITER));
     }
 
