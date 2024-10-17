@@ -1,4 +1,4 @@
 package calculator;
 
-public class divider {
+public class Divider {
 }
