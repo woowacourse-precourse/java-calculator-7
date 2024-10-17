@@ -36,7 +36,11 @@ public class Application {
     private int sumNumbers(String[] numbers){
         int sum = 0;
         for (String number: numbers){
+            if(!number.matches("\\d+")){ // 양수만 허용
+                throw new IllegalArgumentException("올바른 형식으로 입력해주세요.");
+            }
             int num = Integer.parseInt(number);
+
             sum += num;
         }
         return sum;
@@ -44,19 +48,18 @@ public class Application {
 
 
     public static void main(String[] args) {
-        // 사용자 입력 받기
+        // 1. 입력 받기
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
         int customIndex = input.indexOf("\\n");
-        System.out.println(customIndex);
 
         Application application = new Application();
 
-        // 1. 사용자 입력 구분자 기준 배열로 나누기
+        // 2. 사용자 입력 구분자 기준 배열로 나누기
         String[] splitNumbers = application.splitNumbers(input);
 
-        // 2. 나누어진 배열 값 더하기
+        // 3. 나누어진 배열 값 더하기
         int result = application.sumNumbers(splitNumbers);
 
 
