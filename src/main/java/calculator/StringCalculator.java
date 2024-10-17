@@ -37,9 +37,9 @@ public class StringCalculator {
 
     // 커스텀 구분자 처리 메서드
     private String extractNumbersWithCustomDelimiter() {
-        int index = str.indexOf("\n");
+        int index = str.indexOf("\\n"); // '\'추가로 특수 문자 이스케이프
         if (index == -1) {
-            throw new IllegalArgumentException("Missing \n after custom delimiter");
+            throw new IllegalArgumentException("Missing \\n after custom delimiter");
         }
 
         // "//" 이후 "\n" 전까지가 커스텀 구분자
@@ -66,8 +66,8 @@ public class StringCalculator {
             numbers = extractNumbersWithCustomDelimiter();
         }
 
+        // limit:-1로 설정하면, 공백이어도 문자열의 끝까지 탐색해서 null로 저장한다.
         return Arrays.stream(numbers.split("[" + delimiter + "]", -1))
-                //limit:-1로 설정하면, 공백이어도 문자열의 끝까지 탐색해서 null로 저장한다.
                 .map(String::trim)  //공백 제거
                 .peek(this::checkNull)
                 .mapToInt(this::parseInt)
