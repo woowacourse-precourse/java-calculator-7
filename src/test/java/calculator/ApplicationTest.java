@@ -35,7 +35,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 빈_문자열이_입력된_경우() {
         assertSimpleTest(() -> {
-            run("");
+            run("\n");
             assertThat(output()).contains("결과 : 0");
         });
     }
