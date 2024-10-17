@@ -1,6 +1,7 @@
 # java-calculator-precourse
 
 ## 기능 요구 사항
+
 입력한 문자열에서 숫자를 추출하여 더하는 계산기를 구현한다.
 
 쉼표(,) 또는 콜론(:)을 구분자로 가지는 문자열을 전달하는 경우 구분자를 기준으로 분리한 각 숫자의 합을 반환한다.
@@ -10,7 +11,8 @@
 사용자가 잘못된 값을 입력할 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료되어야 한다.
 
 ## 기능명세서(구현할 기능 목록)
-- [ ] camp.nextstep.edu.missionutils.Console의 readLine() 을 사용해 사용자에게 문자열을 입력받는다.
+
+- [x] camp.nextstep.edu.missionutils.Console의 readLine() 을 사용해 사용자에게 문자열을 입력받는다.
 - [ ] 입력 문자열이 올바른 형식으로 입력되었는지 확인한다.
 - [ ] 입력 문자열이 올바른 형식이 아니라면 IllegalArgumentException을 발생시키고 프로그램을 종료시킨다.
 - [ ] 입력 문자열을 구분자를 기준으로 분리하여 숫자를 추출하고 더한다.
