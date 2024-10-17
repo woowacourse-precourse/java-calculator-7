@@ -20,7 +20,7 @@ public class CalculatorServiceTest {
 
     @Test
     void 기본_구분자_처리() {
-        String input = "1,2,3";
+        String input = "1,2,3,";
         int expected = cal.ensureValidInput(input);
         assertEquals(expected, 6);
 
@@ -59,6 +59,24 @@ public class CalculatorServiceTest {
         assertThrows(IllegalArgumentException.class,
                 () -> {
                     cal.ensureValidInput(input2);
+                });
+    }
+
+    @Test
+    void 구분자_중복_사용() {
+        String input = "1,,2,;3";
+        assertThrows(IllegalArgumentException.class,
+                () -> {
+                    cal.ensureValidInput(input);
+                });
+    }
+
+    @Test
+    void 공백_처리() {
+        String input = "1, 2; 3";
+        assertThrows(IllegalArgumentException.class,
+                () -> {
+                    cal.ensureValidInput(input);
                 });
     }
 

@@ -14,9 +14,13 @@ public class CalculatorService {
         if (input.startsWith("//") && !input.contains("\\n")) {
             throw new IllegalArgumentException("커스텀 구분자 사용이 잘못되었습니다.");
         }
+        //구분자 연달아 중복 사용
+        if (!duplicateUseDelimiter(input)) {
+            throw new IllegalArgumentException("구분자를 연달아 사용하는 것은 불가능합니다.");
+        }
         //문자열 시작이 숫자 혹은 // 이 아닌 경우
         if (!Character.isDigit(input.charAt(0)) && !input.startsWith("//")) {
-            throw new IllegalArgumentException("잘못된 문자열 입력입니다1");
+            throw new IllegalArgumentException("잘못된 문자열 입력입니다.");
         }
         //문자열 중 구분자와 다른 문자가 섞여있을 경우
         if (!isArrayNumeric(input)) {
@@ -26,7 +30,7 @@ public class CalculatorService {
         if (isArrayNumeric(input)) {
             return plus(convertIntArray(splitInputByDelimiter(input)));
         }
-        throw new IllegalArgumentException("추가 오류 발생");
+        throw new IllegalArgumentException("오류 발생");
     }
 
     private int emptyOrSingleNumberInput(String input) {
@@ -86,6 +90,15 @@ public class CalculatorService {
     private String[] splitByCustomDelimiter(String input) {
         String exceptDelimiter = input.substring(input.indexOf("n") + 1);
         return exceptDelimiter.split(getDelimiter(input));
+    }
+
+    private boolean duplicateUseDelimiter(String input) {
+        for (String s : splitInputByDelimiter(input)) {
+            if (s.isEmpty()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public int[] convertIntArray(String[] stringArray) {
