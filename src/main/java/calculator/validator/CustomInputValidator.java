@@ -8,27 +8,29 @@ public class CustomInputValidator implements InputValidator{
     }
 
     if(input.startsWith("//")){
-      validateCustomDelimiter(input);
+      char customDelimiter = extractCustomDelimiter(input);
+      validateAllowedCharacters(input.substring(input.indexOf("\n") + 1), customDelimiter);
     }
     else{
-      validateDefaultDelimiter(input);
+      validateAllowedCharacters(input, ',');
     }
   }
 
-  private void validateCustomDelimiter(String input) {
+  private char extractCustomDelimiter(String input) {
     if(!input.contains("\n")){
       throw new IllegalArgumentException("커스텀 구분자 형식 오류: '\\n'이 필요합니다.");
     }
 
     char delimiter = input.charAt(2);
     if(Character.isDigit(delimiter) || delimiter == '.' || delimiter == 'e' || delimiter == 'E'){
-      throw  new IllegalArgumentException("커스텀 구분자 내용 오류: 숫자('0-9'), '.', 'e', 'E'는 사용할 수 없습니다.");
+      throw new IllegalArgumentException("커스텀 구분자 내용 오류: 숫자('0-9'), '.', 'e', 'E'는 사용할 수 없습니다.");
     }
+    return delimiter;
   }
 
-  private void validateDefaultDelimiter(String input) {
+  private void validateAllowedCharacters(String input, char customDelimiter) {
     for (char ch : input.toCharArray()) {
-      if(!Character.isDigit(ch) && ch != ',' && ch != ':'){
+      if(!Character.isDigit(ch) && ch != customDelimiter && ch != ',' && ch != ':'){
         throw new IllegalArgumentException("허용되지 않는 문자: " + ch + "가 포함되어 있습니다.");
       }
     }
