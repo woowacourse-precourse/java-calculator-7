@@ -25,4 +25,20 @@ public class Calculator {
         }
         return input.split("\\s+");
     }
+
+    private int calculateSum(String[] numbers) {
+        int sum = 0;
+        for (String number : numbers) {
+            sum += parseAndValidateNumber(number);
+        }
+        return sum;
+    }
+
+    private int parseAndValidateNumber(String number) {
+        int parsedNumber = Integer.parseInt(number.trim());
+        if (parsedNumber < 0) {
+            throw new IllegalArgumentException("음수는 허용되지 않습니다: " + parsedNumber);
+        }
+        return parsedNumber;
+    }
 }
