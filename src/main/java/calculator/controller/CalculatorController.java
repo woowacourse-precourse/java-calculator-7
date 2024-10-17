@@ -1,25 +1,25 @@
 package calculator.controller;
 
 
-import calculator.model.CustomDelimiterProcessor;
-import calculator.model.NumberExtractor;
+import calculator.service.DelimiterService;
+import calculator.service.NumberExtractorService;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
 public class CalculatorController {
-    private final CustomDelimiterProcessor customDelimiterProcessor;
-    private final NumberExtractor numberExtractor;
+    private final DelimiterService delimiterService;
+    private final NumberExtractorService numberExtractorService;
 
-    public CalculatorController(CustomDelimiterProcessor customDelimiterProcessor, NumberExtractor numberExtractor) {
-        this.customDelimiterProcessor = customDelimiterProcessor;
-        this.numberExtractor = numberExtractor;
+    public CalculatorController(DelimiterService delimiterService, NumberExtractorService numberExtractorService) {
+        this.delimiterService = delimiterService;
+        this.numberExtractorService = numberExtractorService;
     }
 
     public void start() {
         InputView.printStartMessage();
         String inputString = InputView.getInput();
-        inputString = customDelimiterProcessor.addCustomDelimiters(inputString);
-        numberExtractor.extractNumber(inputString);
+        inputString = delimiterService.addCustomDelimiters(inputString);
+        numberExtractorService.extractNumber(inputString);
         int result = calculator.calculate();
         OutputView.printResultMessage(result);
     }

@@ -1,6 +1,8 @@
-package calculator.model;
+package calculator.service;
 
-public class CustomDelimiterProcessor {
+import calculator.model.Delimiters;
+
+public class DelimiterService {
     private static final char CUSTOM_DELIMITER_PREFIX = '/';
     private static final String CUSTOM_DELIMITER_FIRST_FORMAT = "//";
     private static final String CUSTOM_DELIMITER_LAST_FORMAT = "\n";
@@ -8,7 +10,7 @@ public class CustomDelimiterProcessor {
 
     private final Delimiters delimiters;
 
-    public CustomDelimiterProcessor(Delimiters delimiters) {
+    public DelimiterService(Delimiters delimiters) {
         this.delimiters = delimiters;
     }
 

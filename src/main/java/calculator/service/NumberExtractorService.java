@@ -1,13 +1,15 @@
-package calculator.model;
+package calculator.service;
 
+import calculator.model.Calculator;
+import calculator.model.Delimiters;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-public class NumberExtractor {
+public class NumberExtractorService {
     private final Delimiters delimiters;
     private final Calculator calculator;
 
-    public NumberExtractor(Delimiters delimiters, Calculator calculator) {
+    public NumberExtractorService(Delimiters delimiters, Calculator calculator) {
         this.delimiters = delimiters;
         this.calculator = calculator;
     }
