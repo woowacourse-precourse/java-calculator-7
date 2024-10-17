@@ -3,7 +3,8 @@ package calculator.constant;
 import java.util.List;
 
 public enum ErrorMessage {
-	NUMBERS_POSITIVE("양수 값만 계산할 수 있습니다.");
+	NUMBERS_POSITIVE("양수 값만 계산할 수 있습니다."),
+	DELIMITER_LENGTH("구분자의 길이는 1 이어야 합니다.");
 
 	private static final String SPACE = " ";
 	private static final String PREFIX = "[ERROR] ";
