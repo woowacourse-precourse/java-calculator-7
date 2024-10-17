@@ -15,15 +15,19 @@ public class Application {
 
         String[] numbers = input.split(cuttingMark);
 
-        for (String number : numbers) {
-            intNumber.add(Integer.parseInt(number));
-        }
+        if (input.trim().isEmpty()) {
+            System.out.println("결과 : 0");
+        } else {
+            for (String number : numbers) {
+                intNumber.add(Integer.parseInt(number));
+            }
 
-        int sum = 0;
-        for (int i = 0; i < intNumber.size(); i++) {
-            sum += intNumber.get(i);
-        }
+            int sum = 0;
+            for (int i = 0; i < intNumber.size(); i++) {
+                sum += intNumber.get(i);
+            }
 
-        System.out.println("결과 : " + sum);
+            System.out.println("결과 : " + sum);
+        }
     }
 }
