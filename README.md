@@ -30,3 +30,50 @@
 ## Use Case  다이어그램
 ![첫주차미션_유스케이스_다이어그램](https://github.com/user-attachments/assets/f0f818d0-6ee7-40fc-bb6d-8f81956f2dec)
 
+## MVC
+### Model
+#### Calculator
+👉 **입력 받은 숫자로 구성된 문자열을 계산하기 위한 클래스**
+- **Field**
+  - `numbers` : 입력받은 숫자로 구성된 문자열
+
+- **Method**
+  - `calculator()` : 생성자
+  - `plus()` : 모든 숫자 더하기
+  - `checkSeparator()` : 구분자 여부 확인하기
+
+### View
+#### InputView
+👉 **입력을 받기 위한 클래스**
+- **Field**
+  - `USER_NUMBERS` : "덧셈할 문자열을 입력해 주세요."
+
+- **Method**
+  - `readUserNumbers()` : 숫자로 구성된 문자열 입력 받기
+#### OutputView
+👉 **출력하기 위한 클래스**
+- **Field**
+  - `RESULT_MESSAGE` : "결과 : "
+
+- **Method**
+  - `printSumToUser()` : 계산 결과를 출력하기
+
+### Controller
+#### MainController
+👉 **전체 시스템에서 사용자의 요청을 처리하고, 모델과 상호작용을 위한 클래스**
+- **Method**
+  - `start()` : 애플리케이션 시작하기
+  - `readUserNumbers()` : 사용자로부터 입력 받기
+  - `calculate()` : 입력 받은 숫자를 계산하기
+  - `printSumToUser()` : 계산 결과를 사용자에게 출력하기
+
+### Validation
+#### InputValidator  
+👉 **예외를 확인하기 위한 클래스**
+- **Field**
+  - `NON_NATURAL_NUMBER` : "자연수가 아닙니다."
+  - `INVALID_CUSTOM_DELIMITER` : "커스텀 구분자가 정상적으로 입력되지 않았습니다."
+
+- **Method**
+  - `validateNaturalNumber()` : 사용자가 제시한 문자열 유효성 검사
+  - `validateCustomDelimiter()` : 사용자가 제시한 커스텀 구분자 유효성 검사
