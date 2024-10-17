@@ -16,13 +16,12 @@ public class CalculatorPrompt extends Prompt {
             return new ArrayList<>();
         }
 
-        String[] splitData = inputData.split("\n");
+        String[] splitData = inputData.split("\\\\n");
         if (splitData.length > 2) {
             throw new IllegalArgumentException();
         }
 
         if (splitData[0].startsWith("//")) {
-            System.out.println(Arrays.toString(splitData));
             return this.separate(splitData[1], inputData.charAt(2));
         }
         return this.separate(splitData[0]);
