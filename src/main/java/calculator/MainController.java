@@ -3,6 +3,8 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MainController {
 
@@ -17,6 +19,7 @@ public class MainController {
             splittedValues = SplitbyCustomDelimiter(inputString);
 
             for (String part : splittedValues) {
+                checkNagativeInt(Integer.parseInt(part));
                 sumResult += Integer.parseInt(part);
             }
             System.out.printf("결과 : %d", sumResult);
@@ -25,9 +28,16 @@ public class MainController {
 
         splittedValues = SplitbyDefaultDelimiter(inputString);
         for (String part : splittedValues) {
+            checkNagativeInt(Integer.parseInt(part));
             sumResult += Integer.parseInt(part);
         }
         System.out.printf("결과 : %d", sumResult);
+    }
+
+    private static void checkNagativeInt(int part) {
+        if (part < 0) {
+            throw new IllegalArgumentException("음수값은 덧셈 할 수 없습니다.");
+        }
     }
 
     private static Boolean checkCustomDelimter(String inputString) {
