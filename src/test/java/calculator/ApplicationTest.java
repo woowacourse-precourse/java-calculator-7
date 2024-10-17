@@ -8,9 +8,61 @@ import calculator.utils.Parser;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class ApplicationTest extends NsTest {
     Parser parser = new Parser();
+
+    @Test
+    void 정수와_실수가_포함된_계산일시_실수를_출력해야한다() {
+        assertSimpleTest(() -> {
+            run("1,2.5,4,10.7");
+            assertThat(output()).contains("결과 : 18.2");
+        });
+    }
+
+    @Test
+    void 숫자만_입력한_경우_그대로_반환되어야한다() {
+        assertSimpleTest(() -> {
+            run("1234567");
+            assertThat(output()).contains("결과 : 1234567");
+        });
+    }
+
+    @Test
+    void 정수의_덧셈인_경우_정수_결과를_출력해야한다() {
+        assertSimpleTest(() -> {
+            run("1,2,5:5,10");
+            assertThat(output()).contains("결과 : 23");
+        });
+    }
+
+    @Test
+    void 실수의_덧셈인_경우_실수_결과를_출력해야한다() {
+        assertSimpleTest(() -> {
+            run("3,9:5.4:7.2,10");
+            assertThat(output()).contains("결과 : 34.6");
+        });
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//t\\n1t2t3t4", "//,\\n1,2,3,4"})
+    void 커스텀_구분자_사용시에도_정수_덧셈_기능을_수행가능해야한다(String input) {
+        assertSimpleTest(() -> {
+            run(input);
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//t\\n1.2t2.3t3.4t4.5", "//,\\n1.2,2.3,3.4,4.5"})
+    void 커스텀_구분자_사용시에도_실수_덧셈_기능을_수행가능해야한다(String input) {
+        assertSimpleTest(() -> {
+            run(input);
+            assertThat(output()).contains("결과 : 11.4");
+        });
+    }
 
     @Test
     void 빈_문자열을_입력하면_0이_반환되어야한다() {
