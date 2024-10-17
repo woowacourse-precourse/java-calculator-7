@@ -9,18 +9,18 @@ public class Input {
     private static final char SEPARATOR_COMMA = ',';
     private static final char SEPARATOR_COLON = ':';
 
-    private final String nums;
+    private final String numStr;
     private List<Long> numList = null;
 
-    protected Input(String nums) {
-        this.nums = nums;
+    protected Input(String numStr) {
+        this.numStr = numStr;
     }
 
-    public static Input of(String input) {
-        return InputFilter.from(input);
+    public static Input from(String value) {
+        return InputFilter.parseInput(value);
     }
 
-    protected boolean isSeparatorEqual(char ch) {
+    protected boolean matchesSeparator(char ch) {
         return ch == SEPARATOR_COLON || ch == SEPARATOR_COMMA;
     }
 
@@ -30,18 +30,18 @@ public class Input {
         }
         this.numList = new ArrayList<>();
         long cur = 0L;
-        boolean isPrevSeparator = false;
-        for (int i = 0; i < nums.length(); i++) {
-            char ch = nums.charAt(i);
-            if (isSeparatorEqual(ch) && !isPrevSeparator) {
+        boolean isLastSeparator = false;
+        for (int i = 0; i < numStr.length(); i++) {
+            char ch = numStr.charAt(i);
+            if (matchesSeparator(ch) && !isLastSeparator) {
                 this.numList.add(cur);
                 cur = 0L;
-                isPrevSeparator = true;
+                isLastSeparator = true;
                 continue;
             }
             cur *= 10;
             cur += NumUtil.toInt(ch);
-            isPrevSeparator = false;
+            isLastSeparator = false;
         }
         this.numList.add(cur);
         return this.numList;

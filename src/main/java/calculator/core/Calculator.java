@@ -11,8 +11,8 @@ public class Calculator {
         this.numList = numList;
     }
 
-    public static Calculator of(String consoleInput) {
-        return new Calculator(Input.of(consoleInput).toLongList());
+    public static Calculator enterValue(String value) {
+        return new Calculator(Input.from(value).toLongList());
     }
 
     public long sum() {

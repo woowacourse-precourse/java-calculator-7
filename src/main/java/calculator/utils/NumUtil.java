@@ -6,11 +6,11 @@ public class NumUtil {
         return '0' <= ch && ch <= '9';
     }
 
-    public static boolean isValidFirstNum(String nums) {
-        if (nums.isEmpty()) {
+    public static boolean isValidFirstNum(String numStr) {
+        if (numStr.isEmpty()) {
             return true; // 빈 문자열 허용
         }
-        return isNum(nums.charAt(0));
+        return isNum(numStr.charAt(0));
     }
 
     public static int toInt(char ch) {

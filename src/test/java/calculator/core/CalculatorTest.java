@@ -10,7 +10,7 @@ class CalculatorTest {
     @Test
     void 객체_테스트() {
         // given & when
-        Calculator calculator = Calculator.of("1,2:3");
+        Calculator calculator = Calculator.enterValue("1,2:3");
         // then
         assertNotNull(calculator);
     }
@@ -18,7 +18,7 @@ class CalculatorTest {
     @Test
     void 기본_결과_테스트() {
         // given & when
-        Calculator calculator = Calculator.of("1,2:3");
+        Calculator calculator = Calculator.enterValue("1,2:3");
         // then
         assertEquals(6, calculator.sum());
     }
@@ -26,7 +26,7 @@ class CalculatorTest {
     @Test
     void 커스텀_결과_테스트() {
         // given & when
-        Calculator calculator = Calculator.of("//;\\n1;2;3");
+        Calculator calculator = Calculator.enterValue("//;\\n1;2;3");
         // then
         assertEquals(6, calculator.sum());
     }

@@ -11,7 +11,7 @@ class InputFilterTest {
         // given
         String customInput = "//;\\n1;2;3";
         // when & then
-        assertInstanceOf(CustomInput.class, InputFilter.from(customInput));
+        assertInstanceOf(CustomInput.class, InputFilter.parseInput(customInput));
     }
 
     @Test
@@ -19,7 +19,7 @@ class InputFilterTest {
         // given
         String defaultInput = "1,2:3";
         // when
-        Input defaultInputInstance = InputFilter.from(defaultInput);
+        Input defaultInputInstance = InputFilter.parseInput(defaultInput);
         // then
         assertInstanceOf(Input.class, defaultInputInstance);
         assertFalse(defaultInputInstance instanceof CustomInput);
@@ -30,7 +30,7 @@ class InputFilterTest {
         // given
         String customInput = "//;\\n" + ";2;3";
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> InputFilter.from(customInput));
+        assertThrows(IllegalArgumentException.class, () -> InputFilter.parseInput(customInput));
     }
 
     @Test
@@ -38,7 +38,7 @@ class InputFilterTest {
         // given
         String customInput = "//\\n" + "1;2;3";
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> InputFilter.from(customInput));
+        assertThrows(IllegalArgumentException.class, () -> InputFilter.parseInput(customInput));
     }
 
     @Test
@@ -46,7 +46,7 @@ class InputFilterTest {
         // given
         String customInput = ";\\" + "n1;2;3";
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> InputFilter.from(customInput));
+        assertThrows(IllegalArgumentException.class, () -> InputFilter.parseInput(customInput));
     }
 
     @Test
@@ -54,7 +54,7 @@ class InputFilterTest {
         // given
         String customInput = "//;" + "1;2;3";
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> InputFilter.from(customInput));
+        assertThrows(IllegalArgumentException.class, () -> InputFilter.parseInput(customInput));
     }
 
     @Test
@@ -62,6 +62,6 @@ class InputFilterTest {
         // given
         String defaultInput = ";2;3";
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> InputFilter.from(defaultInput));
+        assertThrows(IllegalArgumentException.class, () -> InputFilter.parseInput(defaultInput));
     }
 }

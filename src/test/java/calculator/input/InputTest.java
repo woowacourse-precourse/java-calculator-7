@@ -10,7 +10,7 @@ class InputTest {
     @Test
     void 객체_테스트() {
         // given & when
-        Input input = Input.of("1;2;3");
+        Input input = Input.from("1;2;3");
         // then
         assertFalse(input instanceof CustomInput);
         assertNotNull(input);
@@ -19,7 +19,7 @@ class InputTest {
     @Test
     void 정수배열_테스트_콜론() {
         // given
-        Input input = Input.of("1:2:3");
+        Input input = Input.from("1:2:3");
         // when
         List<Long> longList = input.toLongList();
         // then
@@ -31,7 +31,7 @@ class InputTest {
     @Test
     void 정수배열_테스트_콤마() {
         // given
-        Input input = Input.of("1,3");
+        Input input = Input.from("1,3");
         // when
         List<Long> longList = input.toLongList();
         // then
@@ -42,7 +42,7 @@ class InputTest {
     @Test
     void 정수배열_예외_기본_구분자_오류() {
         // given
-        Input input = Input.of("1,3?2");
+        Input input = Input.from("1,3?2");
         // when & then
         assertThrows(IllegalArgumentException.class, input::toLongList);
     }

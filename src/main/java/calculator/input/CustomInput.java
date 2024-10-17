@@ -4,13 +4,13 @@ public class CustomInput extends Input {
 
     private final char separator;
 
-    public CustomInput(String nums, char separator) {
-        super(nums);
+    protected CustomInput(String numStr, char separator) {
+        super(numStr);
         this.separator = separator;
     }
 
     @Override
-    public boolean isSeparatorEqual(char ch) {
-        return ch == separator;
+    public boolean matchesSeparator(char ch) {
+        return ch == this.separator;
     }
 }
