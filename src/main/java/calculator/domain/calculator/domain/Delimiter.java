@@ -18,6 +18,9 @@ public class Delimiter {
         return new Delimiter(pattern);
     }
 
+    /*
+    TO-DO: util 클래스로 나중에 옮겨야함
+     */
     public static Delimiter parse(String input) {
         boolean startsWithCustom = input.startsWith("//");
         if (startsWithCustom) {
