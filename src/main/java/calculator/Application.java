@@ -29,16 +29,20 @@ public class Application {
         String additionFormula = Console.readLine();
         String separator = app.getSeparator(additionFormula);
 
-
-
     }
 
     // 구분자 추출
     private String getSeparator(String value){
         if (isCustom(value)) {
-            // 커스텀 구분자 추출 메서드
+            return getCustomSeparator(value);
         }
         return BASIC_SEPARATOR;
+    }
+
+    // 커스텀 구분자 추출
+    private String getCustomSeparator(String value){
+        int separatorEndIndex = value.indexOf(NEWLINE_INDICATOR);
+        return value.substring(2, separatorEndIndex);
     }
 
     // 구분자가 기본인지 커스텀인지 판단
