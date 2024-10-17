@@ -86,6 +86,14 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 분리된_대상이_길이가_2_이상인_문자열인_경우() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("34,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
