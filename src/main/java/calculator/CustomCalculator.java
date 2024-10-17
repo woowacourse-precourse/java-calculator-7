@@ -1,21 +1,21 @@
 package calculator;
 
-import calculator.utils.CalculatorUtils;
-
 import java.util.Arrays;
 
-public class CustomCalculator implements Calculator{
+public class CustomCalculator{
 
     private static final String META_CHARS = "*+?$^.()|\\{}[";
 
-    @Override
-    public int calculate(String inputString){
+    public int customCalculate(String inputString){
         String targetString = inputString.substring(5);
         if (isTargetStringEmpty(targetString)){
             return 0;
         }
-        String[] split = targetString.split(getSplitRegex(inputString.charAt(2)));
-        return CalculatorUtils.sumSplitArray(split);
+        String[] elements = targetString.split(getSplitRegex(inputString.charAt(2)));
+        int[] intArray = Validator.validateToIntArray(elements);
+        Validator.checkHasNotPositive(intArray);
+        return Arrays.stream(intArray)
+                .sum();
     }
 
     private String getSplitRegex(Character separator) {
