@@ -9,7 +9,7 @@ public class Application {
 
 //      while문으로 돌리는건 폐기, Console의 메모리 처리방식 미흡
 
-        System.out.println("숫자를 입력해 주세요.\n(H : 도움말, X : 프로그램 종료 | 기본 구분자 : ',' 또는 ':')");
+        System.out.println("숫자를 입력해 주세요.\n(H : 도움말 | 기본 구분자 : ',' 또는 ':')");
         String inputString = Console.readLine().trim();
 
         // h를 눌러 도움말 호출

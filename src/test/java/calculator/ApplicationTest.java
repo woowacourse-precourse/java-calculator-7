@@ -38,8 +38,8 @@ class ApplicationTest extends NsTest {
     @Test
     void 실수_사용() {
         assertSimpleTest(() -> {
-            run("-1,2,3");
-            assertThat(output()).contains("결과 : 4");
+            run("1.1,2,3");
+            assertThat(output()).contains("결과 : 6.1");
             System.out.println(output());
         });
     }

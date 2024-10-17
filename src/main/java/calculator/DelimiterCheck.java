@@ -20,7 +20,7 @@ public class DelimiterCheck {
 
     //커스텀 구분자 커맨드 입력여부 검증 로직
     private void getCustomDelimiter() {
-        if (inputString.startsWith("//") && (inputString.substring(3).equals("\\n"))) {
+        if (inputString.startsWith("//") && (inputString.indexOf("\\n",3)!= -1)) {
             String customDelimiter = Character.toString(inputString.charAt(2));
             // 커스텀 문자열로 사용할 수 없는 문자들 예외처리
 //            if (customDelimiter.equals(" ") || customDelimiter.equals(".") || customDelimiter.equals("-")) {
@@ -36,13 +36,17 @@ public class DelimiterCheck {
     // String 계산식에서 구분자로 숫자들을 분리
     private void getSplitFormula() {
         // 분리된 문자열을 splitFormula[] 배열로 저장, 추가) trim()으로 공백문자 지워줌
+        inputString = inputString.replaceAll(" ", "");
+
+        // 구분자 없이 하나만 입력되었을 때 하나의 배열로만 입력
         splitFormulaArray = inputString.trim().split("\\s*"+delimiter+"\\s*");
-        if (splitFormulaArray[0].isBlank()); {
-            splitFormulaArray[0] = "0";
-        }
+
         for (int i = 0; i < splitFormulaArray.length; i++) {
-            String afterTrimBlank = splitFormulaArray[i].trim().replace("\r\n","");
-            splitFormulaArray[i] = afterTrimBlank;
+            if (splitFormulaArray[i].isBlank()) {
+                splitFormulaArray[i] = "0";
+            }
+//            String afterTrimBlank = splitFormulaArray[i].trim().replace("\r\n","");
+//            splitFormulaArray[i] = afterTrimBlank;
         }
         checkFloatingPointNum();
     }
