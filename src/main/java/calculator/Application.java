@@ -9,7 +9,7 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         Calculator calc = new Calculator();
-        //System.out.println("결과 : "+calc.sum());
+        System.out.println("결과 : "+calc.sum());
     }
 }
 
@@ -38,11 +38,11 @@ class Calculator {
         delimiterList.add(':');
         return new Delimiters(delimiterList);
     }
-    /*
+
     public int sum(){
         return numbers.sum();
     }
-    */
+
 }
 
 class Str {
@@ -134,10 +134,10 @@ class Numbers {
         this.numberList = numberList;
     }
 
-    /*
+
     public int sum(){
         return numberList.stream().mapToInt(i->i).sum();
     }
-    */
+
 }
 
