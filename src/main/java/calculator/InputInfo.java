@@ -42,7 +42,6 @@ public class InputInfo {
         String[] numbers = str.split("[" + separator + "]");
 
         for(String number : numbers) {
-            System.out.println(number);
             if (!number.isEmpty()) {
                 int num = Integer.parseInt(number);
                 if (num <= 0) throw new IllegalArgumentException("양의 정수만 가능합니다.");

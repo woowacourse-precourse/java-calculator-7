@@ -11,9 +11,8 @@ public class Application {
         InputInfo inputInfo = new InputInfo();
         inputInfo.validateFormat(userInput);
 
-        /*
-            AddCalculator 객체에 inputInfo field 전달 후, format에 맞게 계산
-         */
+        AddCalculator calculator = new AddCalculator(userInput, inputInfo.getSeparator(), inputInfo.getFormat());
+        int result = calculator.calculate();
 
     }
 }
