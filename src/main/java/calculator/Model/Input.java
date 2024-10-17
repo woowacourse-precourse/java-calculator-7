@@ -11,4 +11,9 @@ public class Input {
     public boolean hasText() {
         return text != null;
     }
+
+    public void getInputText(String inputText) {
+        // 추후 기능 추가
+        this.text = inputText;
+    }
 }
