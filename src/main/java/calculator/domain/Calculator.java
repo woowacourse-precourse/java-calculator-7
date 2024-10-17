@@ -27,7 +27,8 @@ public class Calculator {
                 //Number 객체 생성을 통한 구분 작업 및 검증
                 number = new Numbers(parts);
 
-
+                //결과 출력
+                System.out.println("결과 :" + number.calculate());
             } else {
                 // 커스텀 구분자 기능 실행
                 input.readSecondInput();
@@ -47,6 +48,8 @@ public class Calculator {
                 //Number 객체 생성을 통한 구분 작업 및 검증
                 number = new Numbers(parts);
 
+                //결과 출력
+                System.out.println("결과 : " + number.calculate());
             }
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());

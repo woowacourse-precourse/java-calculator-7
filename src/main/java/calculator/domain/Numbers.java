@@ -11,7 +11,7 @@ public class Numbers {
         parseAndValidateNumbers();
     }
 
-    // 문자열 배열을 숫자로 변환하고, 문자가 포함되어 있으면 예외를 발생시킴
+    // String 배열을 int 배열로 변환하고, 문자가 포함되어 있거나 숫자의 범위가 벗어나면 예외를 발생시킴
     private void parseAndValidateNumbers() {
         for (int i = 0; i < parts.length; i++) {
             String number = parts[i];
@@ -32,5 +32,16 @@ public class Numbers {
         }
     }
 
+    public int calculate() {
+        int sum = 0;
+        for (int i = 0; i < numbers.length; i++) {
+            try {
+                sum = Math.addExact(sum, numbers[i]);
+            } catch (ArithmeticException e) {
+                throw new IllegalArgumentException("더하기 연산에서 오버플로우가 발생했습니다.");
+            }
+        }
 
+        return sum;
+    }
 }
