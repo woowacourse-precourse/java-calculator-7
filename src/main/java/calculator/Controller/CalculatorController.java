@@ -1,6 +1,7 @@
 package calculator.Controller;
-import calculator.DTO.ParsedInputDTO;
+
 import calculator.Model.CalculatorModel;
+import calculator.Service.InputParser;
 import calculator.Validator.InputValidator;
 import calculator.View.InputView;
 import calculator.View.OutputView;
@@ -9,23 +10,30 @@ public class CalculatorController {
     private final CalculatorModel calculatorModel;
     private final InputValidator inputValidator;
 
-    public CalculatorController(CalculatorModel calculatorModel, InputValidator inputValidator){
-        this.calculatorModel = calculatorModel;
-        this.inputValidator = inputValidator;
+    public CalculatorController(){
+        this.calculatorModel = new CalculatorModel();
+        this.inputValidator = new InputValidator();
     }
 
     public void run(){
 
-
         String userInput = InputView.userInput();
+        try{
 
-        boolean isValid = inputValidator.isValidInput(userInput);
-        if(isValid) {
-            ParsedInputDTO parsedInputDTO = calculatorModel.parseInput(userInput);
-            int result = calculatorModel.addNumbers(parsedInputDTO.getNumbers());
+            InputParser inputParser = new InputParser(userInput);
+
+            String[] tokens = inputParser.getTokens();
+
+
+            inputValidator.validateTokens(tokens);
+
+            int result = calculatorModel.calculateSum(tokens);
+
             OutputView.userOutput(result);
-        }else{
-            throw new IllegalArgumentException("틀린 입력 입니다.");
+
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            throw new IllegalArgumentException();
         }
 
     }

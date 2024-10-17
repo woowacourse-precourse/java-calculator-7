@@ -1,86 +1,41 @@
 package calculator.Validator;
 
-import calculator.Model.CalculatorModel;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-
 public class InputValidator {
 
-    private String input;
+    public void validateTokens(String[] tokens){
 
-    private boolean isNull(){
-        return input == null;
-    }
-
-    private final CalculatorModel calculatorModel;
-
-    public InputValidator(CalculatorModel calculatorModel){
-        this.calculatorModel = calculatorModel;
-    }
-
-    private boolean isEmpty(){
-        return input.trim().isEmpty();
-    }
-
-    private boolean isNumericOrNegative(String token){
-        if(token == null || token.isEmpty()){
-            return false;
+        if(tokens.length < 1){
+            throw new IllegalArgumentException("빈 값은 허용되지 않습니다.");
         }
-        try{
-            int intToken = Integer.parseInt(token);
-            return intToken >= 0;
-        }catch(NumberFormatException e){
-            return false;
-        }
-    }
+        for(String token : tokens){
 
-    private boolean hasInvalidSeparator(){
-
-        String customSeparator = null;
-
-        if(input.startsWith("//")){
-            int customEndIdx = input.indexOf('\n');
-            int separatorLength = 1;
-
-            if (customEndIdx == -1) {
-                customEndIdx = input.indexOf("\\n");
-                separatorLength = 2;
-            }
-            customSeparator = input.substring(2, customEndIdx);
-            input = input.substring(customEndIdx + separatorLength);
-        }
-
-        String divider = calculatorModel.createTokenSeparator(customSeparator);
-
-        String[] numberTokens = input.split(divider);
-
-        for(String token : numberTokens){
             token = token.trim();
-            if(!isNumericOrNegative(token)){
-                return true;
+            if(token.isEmpty()){
+                throw new IllegalArgumentException("빈 값은 허용되지 않습니다.");
+            }
+
+            if(!isNumeric(token)){
+                throw new IllegalArgumentException("숫자가 아닙니다");
+            }
+
+            if(!isNonNegative(token)){
+                throw new IllegalArgumentException("음수는 허용되지 않습니다.");
             }
         }
-
-        return false;
     }
 
-
-
-    public boolean isValidInput(String input){
-
-        this.input = input;
-
-        if(isNull() || isEmpty()){
-            throw new IllegalArgumentException("입력이 null 혹은 빈 문자열 입니다.");
+    private boolean isNumeric(String token){
+        try{
+            Integer.parseInt(token);
+            return true;
+        }catch(NumberFormatException e){
+            throw new IllegalArgumentException("숫자 형식이 아닙니다.");
         }
+    }
 
-        if(hasInvalidSeparator()){
-            throw new IllegalArgumentException("틀린 입력 입니다.");
-        }
-
-        return true;
+    private boolean isNonNegative(String token){
+        int intToken = Integer.parseInt(token);
+        return intToken >= 0;
     }
 
 }
