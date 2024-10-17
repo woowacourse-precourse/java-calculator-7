@@ -1,14 +1,13 @@
 package calculator;
 
-import calculator.calc.Calculatable;
 import calculator.calc.Calculator;
+import calculator.factory.CalculatorFactory;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
 
     public static void main(String[] args) {
-        Calculatable calculator = new Calculator();
-
+        Calculator calculator = new CalculatorFactory().calculator();
         String input = getInput();
 
         long result = calculator.sumOfString(input);

@@ -1,12 +1,14 @@
 package calculator.calc;
 
-import calculator.splitter.NormalSplitter;
 import calculator.splitter.Splitter;
-
 
 public class Calculator implements Calculatable {
 
-    private final Splitter splitter = new NormalSplitter();
+    private final Splitter splitter;
+
+    public Calculator(Splitter splitter) {
+        this.splitter = splitter;
+    }
 
     @Override
     public long sumOfString(String exp) {
