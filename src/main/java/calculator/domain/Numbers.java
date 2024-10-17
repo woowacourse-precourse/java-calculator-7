@@ -19,14 +19,18 @@ public class Numbers {
             if (number.isEmpty()) {
                 numbers[i] = 0;
             } else {
+                if (!number.matches("-?\\d+")) {
+                    throw new IllegalArgumentException("계산식의 형태가 올바르지 않습니다.");
+                }
+
                 try {
                     numbers[i] = Integer.parseInt(number);
                 } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("계산식의 형태가 올바르지 않습니다.");
+                    throw new IllegalArgumentException("숫자의 범위가 범위 밖입니다.");
                 }
             }
         }
     }
 
-    // 구분한 문자열들(숫자들)이 모두 범위(0 이상이며 `Integer.MAX_VALUE` 이하) 이내인지 확인한다.
+
 }
