@@ -27,8 +27,11 @@ public class Application {
 
     private static String[] splitString(String str) {
         if (isStringWithCustomDelimiter(str)) {
-            // FIXME. 기본 구분자와 커스텀 구분자 모두 고려하여, 입력받은 문자열을 분리하도록 수정
-            return new String[]{};
+            char customDelimiter = str.charAt(2);
+            String regexWithCustomDelimiter = ",|:|" + customDelimiter;
+            String strContent = str.substring(5);
+
+            return strContent.split(regexWithCustomDelimiter);
         }
         return str.split("[,:]");
     }
