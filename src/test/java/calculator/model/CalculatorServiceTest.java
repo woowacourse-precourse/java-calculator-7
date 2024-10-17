@@ -31,6 +31,22 @@ public class CalculatorServiceTest {
     }
 
     @Test
+    @DisplayName("기본 구분자 변환 테스트")
+    public void checkAndParseInputConvertDefaultDelimiterTest() {
+        //given
+        String input1 = "1,2:3";
+        String input2 = "1";
+
+        //when
+        List<Integer> result1 = calculatorService.checkAndParseInput(input1);
+        List<Integer> result2 = calculatorService.checkAndParseInput(input2);
+
+        //then
+        assertThat(result1).isEqualTo(List.of(1, 2, 3));
+        assertThat(result2).isEqualTo(List.of(1));
+    }
+
+    @Test
     @DisplayName("커스텀 구분자 양수 검사 예외발생 테스트")
     public void checkAndParseInputPositiveNumberExceptionTest() {
         //given
