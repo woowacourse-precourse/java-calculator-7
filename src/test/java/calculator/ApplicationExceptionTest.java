@@ -108,6 +108,15 @@ class ApplicationExceptionTest extends NsTest {
         );
     }
 
+    @Test
+    @DisplayName("예외 테스트 : 특수문자 \\0")
+    void exceptionTest13() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("\01//\0\\n"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});

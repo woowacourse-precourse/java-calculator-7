@@ -47,6 +47,15 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    @DisplayName("숫자 구문자 테스트2")
+    void test2_2() {
+        assertSimpleTest(() -> {
+            run("//5\\n151515");
+            assertThat(output()).contains("결과 : 3");
+        });
+    }
+
+    @Test
     @DisplayName("커스텀 구문자 판단들을 모두 허용")
     void test3() {
         assertSimpleTest(() -> {
@@ -136,11 +145,39 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
     @DisplayName("커스텀 구분자 옆에 숫자 - 2")
     void test11() {
         assertSimpleTest(() -> {
             run("5//1\\n5");
             assertThat(output()).contains("결과 : 55");
+        });
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자 옆에 숫자 - 3")
+    void test12() {
+        assertSimpleTest(() -> {
+            run("25//2\\n525");
+            assertThat(output()).contains("결과 : 60");
+        });
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자가 특수문자")
+    void test13() {
+        assertSimpleTest(() -> {
+            run("1\b//\b\\n2\b3\b4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자가 특수문자 - 2")
+    void test14() {
+        assertSimpleTest(() -> {
+            run("1\t//\t\\n2\t3\t4");
+            assertThat(output()).contains("결과 : 10");
         });
     }
 
