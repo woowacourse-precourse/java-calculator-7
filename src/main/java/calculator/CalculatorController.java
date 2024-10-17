@@ -17,7 +17,7 @@ public class CalculatorController {
         try {
             String input = view.getInput();
             int result = calculator.add(input);
-            view.printResult(result);
+            view.printResult(result); // 출력
         } catch (IllegalArgumentException e) {
 
         } catch (NoSuchElementException e) {
