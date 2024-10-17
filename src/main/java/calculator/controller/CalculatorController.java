@@ -25,13 +25,14 @@ public class CalculatorController {
     public int calculateString(int index, String userInput) {
         boolean isPreviousValueNumeric = false;
         int sum = 0;
-        for (String str : userInput.substring(index).split("")) {
+        for (int i = index; i < userInput.length(); i++) {
             if (isPreviousValueNumeric) {
-                DelimiterSeparator.validateDelimiter(str);
+                DelimiterSeparator.validateDelimiter(userInput.charAt(i));
                 isPreviousValueNumeric = false;
                 continue;
             }
-            sum += extractNumber(str);
+            // 만약 테스트 실패나오면 while 문으로 여러자리 숫자 포함해서 더해주기..
+            sum += extractNumber(String.valueOf(userInput.charAt(i)));
             isPreviousValueNumeric = true;
         }
         return sum;
