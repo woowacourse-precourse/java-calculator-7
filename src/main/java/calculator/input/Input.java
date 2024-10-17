@@ -20,11 +20,11 @@ public class Input {
         return InputFilter.from(input);
     }
 
-    public boolean isSeparatorEqual(char ch) {
+    protected boolean isSeparatorEqual(char ch) {
         return ch == SEPARATOR_COLON || ch == SEPARATOR_COMMA;
     }
 
-    public List<Long> toLongList() {
+    public final List<Long> toLongList() {
         if (this.numList != null) {
             return this.numList;
         }
