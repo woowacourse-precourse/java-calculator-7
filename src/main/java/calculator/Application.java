@@ -29,6 +29,8 @@ public class Application {
         String additionFormula = Console.readLine();
         String separator = app.getSeparator(additionFormula);
 
+        additionFormula = app.extractFormula(additionFormula);
+
     }
 
     // 구분자 추출
@@ -43,6 +45,15 @@ public class Application {
     private String getCustomSeparator(String value){
         int separatorEndIndex = value.indexOf(NEWLINE_INDICATOR);
         return value.substring(2, separatorEndIndex);
+    }
+
+    // 실사용할 수식 추출
+    private String extractFormula(String value) {
+        if (isCustom(value)) {
+            int formulaStartIndex = value.indexOf(NEWLINE_INDICATOR) + NEWLINE_INDICATOR.length();
+            return value.substring(formulaStartIndex);
+        }
+        return value.replaceAll(",", BASIC_SEPARATOR);
     }
 
     // 구분자가 기본인지 커스텀인지 판단
