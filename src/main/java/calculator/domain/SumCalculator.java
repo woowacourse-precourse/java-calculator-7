@@ -3,9 +3,8 @@ package calculator.domain;
 public class SumCalculator {
     private int result = 0;
 
-    public void sum(char number) {
-        int numericValue = Character.getNumericValue(number);
-        result += numericValue;
+    public void sum(int number) {
+        result += number;
     }
 
     public int getResult() {

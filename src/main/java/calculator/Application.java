@@ -1,9 +1,6 @@
 package calculator;
 
-import calculator.domain.CharAnalyzer;
-import calculator.domain.CustomDelimiter;
-import calculator.domain.Delimiter;
-import calculator.domain.SumCalculator;
+import calculator.domain.*;
 import calculator.input.InputHandler;
 
 public class Application {
@@ -16,10 +13,12 @@ public class Application {
         Delimiter delimiter = new Delimiter();
         CustomDelimiter customDelimiter = new CustomDelimiter();
         SumCalculator sumCalculator = new SumCalculator();
+        NumberGenerator numberGenerator = new NumberGenerator(sumCalculator);
 
-        CharAnalyzer charAnalyzer = new CharAnalyzer(input, delimiter, customDelimiter, sumCalculator);
+        CharAnalyzer charAnalyzer = new CharAnalyzer(input, delimiter, customDelimiter, numberGenerator);
         charAnalyzer.analyzeAllChars();
 
         System.out.println(sumCalculator.getResult());
+
     }
 }
