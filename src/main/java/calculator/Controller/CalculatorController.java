@@ -20,7 +20,6 @@ public class CalculatorController {
         String userInput = InputView.userInput();
 
         boolean isValid = inputValidator.isValidInput(userInput);
-
         if(isValid) {
             ParsedInputDTO parsedInputDTO = calculatorModel.parseInput(userInput);
             int result = calculatorModel.addNumbers(parsedInputDTO.getNumbers());

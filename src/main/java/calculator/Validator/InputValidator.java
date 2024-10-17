@@ -14,8 +14,6 @@ public class InputValidator {
         return input == null;
     }
 
-
-
     private final CalculatorModel calculatorModel;
 
     public InputValidator(CalculatorModel calculatorModel){
@@ -43,8 +41,15 @@ public class InputValidator {
         String customSeparator = null;
 
         if(input.startsWith("//")){
-            customSeparator = input.substring(2, input.indexOf("\\n"));
-            input = input.substring(input.indexOf("\\n") + 2);
+            int customEndIdx = input.indexOf('\n');
+            int separatorLength = 1;
+
+            if (customEndIdx == -1) {
+                customEndIdx = input.indexOf("\\n");
+                separatorLength = 2;
+            }
+            customSeparator = input.substring(2, customEndIdx);
+            input = input.substring(customEndIdx + separatorLength);
         }
 
         String divider = calculatorModel.createTokenSeparator(customSeparator);
