@@ -6,6 +6,7 @@ public class Application {
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
         String userInput = getUserInput();
+        calculator.enter(userInput);
     }
 
     private static String getUserInput() {
