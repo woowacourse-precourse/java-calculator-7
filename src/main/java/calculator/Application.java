@@ -46,8 +46,8 @@ public class Application {
             String Delimiter = input.substring(2, input.indexOf("\n"));
             String regex = "[0-9" + Delimiter + "]+";
             String subInput = input.substring(input.indexOf("\n") + 1);
-            // 구분자가 숫자를 포함하지 않고, 구분자 정의 섹션 외의 문자열에 구분자와 숫자만 갖는지 확인
-            if (!Delimiter.matches(".*[0-9].*") && subInput.matches(regex)){
+            // 구분자의 길이가 1이며 숫자를 포함하지 않고, 구분자 정의 섹션 외의 문자열에 구분자와 숫자만 갖는지 확인
+            if (Delimiter.length() == 1 && !Delimiter.matches(".*[0-9].*") && subInput.matches(regex)){
                 return;
             }
         }
