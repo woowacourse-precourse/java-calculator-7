@@ -4,25 +4,24 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
-        System.out.print("문자열 입력 : ");
+        // TODO 1. 덧셈할 문자열을 입력받음
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         String inputString = Console.readLine();
-        System.out.printf("입력받은 문자열 : %s\n", inputString);
 
+        // TODO 2. 구분자를 기준으로 입력받은 문자열을 분리함 (커스텀 구분자의 경우, 유효성도 검증함)
         String[] splitStrings = splitString(inputString);
-        System.out.println("[입력받은 문자열을 분리한 결과]");
-        for (String splitString : splitStrings) {
-            System.out.println(splitString);
-        }
+
+        // TODO 3. 분리된 문자열들이 유효한 문자인지 검증함
         for (String splitString : splitStrings) {
             validateSplitString(splitString);
         }
 
+        // TODO 4. 분리된 문자들의 덧셈을 수행하여, 그 결과를 출력함
         int sum = 0;
         for (String splitString : splitStrings) {
             sum += Integer.parseInt(splitString);
         }
-        System.out.println("[분리된 문자들의 덧셈 결과]");
-        System.out.println(sum);
+        System.out.printf("결과 : %d", sum);
     }
 
     private static boolean isStringWithCustomDelimiter(String str) {
