@@ -17,7 +17,7 @@ public class CalculatorRun {
         List<Integer> integerList = getIntegerListInfo();
         Integer result = computeResult(integerList);
 
-        messageUtil.printResult();
+        messageUtil.printResult(result);
     }
 
     private List<Integer> getIntegerListInfo() {
@@ -27,7 +27,6 @@ public class CalculatorRun {
     }
 
     private List<Integer> splitInitialString(String initialString) {
-//        List<Character> seporators = Arrays.asList(',', ':');
         String seporators = ",|:";
 
 //        !@#$%^&* 특수문자 고려
@@ -35,6 +34,7 @@ public class CalculatorRun {
             seporators = seporators + "|" + setExtraSeparator(initialString);
             initialString = initialString.substring(5);
         }
+        System.out.println(seporators);
 //        for (Character c : seporators) {
 ////            구분자 어떻게 처리할건지...
 //            String[] s = initialString.split(Character.toString(c));
@@ -43,20 +43,11 @@ public class CalculatorRun {
         String[] numList = initialString.split(seporators);
         List<Integer> integerList = new ArrayList<>();
 
+        for (String s : numList) {
+            integerList.add(Integer.valueOf(s));
+        }
         return integerList;
-//        for (String s : numList) {
-//            integerList.add(Integer.valueOf(s));
-////            if (Character.isDigit(c)) {
-//
-////            }
-//        }
-//        int startIndex = 0;
-//        int endIndex = 0;
-//        for (char c : initialString.toCharArray()) {
-//            if ((Character.isDigit(c))) {
-//
-//            }
-//        }
+
     }
 
     private Character setExtraSeparator(String initialString) {
