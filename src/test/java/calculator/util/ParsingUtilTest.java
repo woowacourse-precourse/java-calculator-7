@@ -19,4 +19,16 @@ class ParsingUtilTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(CalculatorError.INPUT_IS_NULL_OR_EMPTY.getMessage());
     }
+
+    @Test
+    @DisplayName("입력 값이 빈 문자열일 경우 IllegalArgumentException 발생")
+    void parseWithDefault_Empty() {
+        // given
+        final String input = "";
+
+        // when & then
+        assertThatThrownBy(() -> ParsingUtil.parseWithDefault(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(CalculatorError.INPUT_IS_NULL_OR_EMPTY.getMessage());
+    }
 }
