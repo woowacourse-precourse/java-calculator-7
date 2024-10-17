@@ -6,7 +6,10 @@ package calculator;
 public class Calculator {
 
     public int addNumbers(int[] numbers) {
-        // TODO: implement method
-        return 0;
+        int sum = 0;
+        for (int number : numbers) {
+            sum += number;
+        }
+        return sum;
     }
 }
