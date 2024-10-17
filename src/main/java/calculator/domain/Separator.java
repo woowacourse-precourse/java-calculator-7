@@ -1,6 +1,7 @@
 package calculator.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Separator {
@@ -59,11 +60,16 @@ public class Separator {
     }
 
     private void extractNumbers(String numbers) {
-        for(char ch : numbers.toCharArray()) {
-            if(Character.isDigit(ch)) {
-                extractedNumbers.add(Character.getNumericValue(ch));
+        String number = "";
+        for(int i = 0; i < numbers.length(); i ++) {
+            if(Character.isDigit(numbers.charAt(i))) {
+                number += numbers.charAt(i);
+                continue;
             }
+            extractedNumbers.add(Integer.parseInt(number));
+            number = "";
         }
+        extractedNumbers.add(Integer.parseInt(number));
     }
 
     public List<Integer> getExtractedNumbers() {
