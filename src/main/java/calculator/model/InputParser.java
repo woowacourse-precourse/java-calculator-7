@@ -25,7 +25,7 @@ public class InputParser {
 	 * 핵심 로직
 	 */
 	// 1차 가공된 입력값에서 숫자를 추출
-	public List<Integer> extractNumbers(String input, List<String> delimiters) {
+	public List<Integer> extractNumbers(String input) {
 		String[] splitParts = splitInput(input, delimiters);
 
 		return saveNumbers(splitParts);
