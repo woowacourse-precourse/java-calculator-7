@@ -1,4 +1,4 @@
-package calculator;
+package calculator.provider;
 
 import camp.nextstep.edu.missionutils.Console;
 

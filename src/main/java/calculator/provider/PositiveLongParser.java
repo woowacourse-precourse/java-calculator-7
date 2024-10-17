@@ -1,4 +1,4 @@
-package calculator;
+package calculator.provider;
 
 public class PositiveLongParser {
 
