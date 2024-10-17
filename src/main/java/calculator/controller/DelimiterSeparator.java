@@ -3,7 +3,6 @@ package calculator.controller;
 import calculator.model.Delimiter;
 
 public class DelimiterSeparator {
-
     public static int registerDelimiter(String userInput) {
         int index = 0;
         if (!NumberChecker.isNumber(userInput.substring(0, 1))) {
