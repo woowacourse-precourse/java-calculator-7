@@ -32,7 +32,7 @@ public class Calculator {
             String[] split = numberPart.split(customDelimiter);
 
             String splitString = String.join(",", split);
-            List<Integer> inputNums = DelimiterParser.parseToIntList(splitString); // -> 123 백이십삼
+            List<Integer> inputNums = DelimiterParser.parseToIntList(splitString);
             Validator.validateIfInputNegative(inputNums);
 
             return inputNums.stream()
