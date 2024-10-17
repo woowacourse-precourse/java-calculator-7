@@ -13,13 +13,13 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 /**
  * parse한 배열을 더하여 최종값을 구하는 기능에 대한 테스트 클래스
- * 음수에 대한 예외를 발생시키며
+ * 음수에 대한 예외를 발생시키며, 공백값은 0으로 더하게끔해야한다.
  */
-public class ListValAddTest extends NsTest {
+class ListValAddTest extends NsTest {
 
     @Test
     @DisplayName("trim은 양 끝의 공백만 없앤다. replaceAll을 사용하여 공백값 삭제")
-    public void 공백값_삭제_적용() {
+    void 공백값_삭제_적용() {
         assertDoesNotThrow(() -> {
             String testVal = "1  : 2 , 3    4";
 
@@ -40,7 +40,7 @@ public class ListValAddTest extends NsTest {
 
     @Test
     @DisplayName("공백값이 숫자 사이에 있거나, 문자열 중간에 있을 시 trim은 재역할을 못한다.")
-    public void 공백_처리_오류_테스트() {
+    void 공백_처리_오류_테스트() {
         assertThatThrownBy(() -> {
             String testVal = "1  : 2 , 3    4";
 
