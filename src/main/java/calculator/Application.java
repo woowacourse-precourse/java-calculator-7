@@ -43,7 +43,7 @@ public class Application {
     }
 
     private static void valid(String input) {
-        if(input.contains("\\n")){
+        if (input.contains("\\n")) {
             input = input.substring(input.indexOf("\\n") + 2);
         }
         if (isThereWrongValue(input)) {
@@ -75,7 +75,7 @@ public class Application {
                     }
                 }
                 if (pass) {
-                    i += delimiter.length() -1;
+                    i += delimiter.length() - 1;
                     break;
                 }
             }
