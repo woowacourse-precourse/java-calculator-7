@@ -32,13 +32,16 @@ class InputParserTest {
     @DisplayName("기본구분자 사용확인 예외 테스트")
     public void checkDefaultDelimiterExceptionTest() {
         //given
-        String input = "1;2,3";
+        String input1 = "1;2,3";
+        String input2 = "-1,2,3";
 
         //when
-        boolean hasDefaultDelimiter = inputParser.checkDefaultDelimiter(input);
+        boolean result1 = inputParser.checkDefaultDelimiter(input1);
+        boolean result2 = inputParser.checkDefaultDelimiter(input1);
 
         //then
-        assertThat(hasDefaultDelimiter).isFalse();
+        assertThat(result1).isFalse();
+        assertThat(result2).isFalse();
     }
 
     @Test
@@ -73,7 +76,7 @@ class InputParserTest {
         //then
         assertThat(result1).isEqualTo(List.of(1, 2, 3));
         assertThat(result2).isEqualTo(List.of(1));
-        assertThat(result3).isEqualTo(List.of(4,5,6));
+        assertThat(result3).isEqualTo(List.of(4, 5, 6));
     }
 
     @Test
