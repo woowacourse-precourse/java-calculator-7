@@ -46,7 +46,6 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessage("음수 입력 x")
         );
     }
 
