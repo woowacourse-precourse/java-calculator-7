@@ -27,12 +27,19 @@ public class Application {
         int sum = 0;
 
         for(String token : tokens) {
+            int num;
             try {
-                sum += Integer.parseInt(token);
+                num = Integer.parseInt(token);
+
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("Invalid number format");
             }
 
+            if (num < 0) {
+                throw new IllegalArgumentException("Negative numbers are not allowed");
+            }
+
+            sum += num;
         }
         return sum;
     }
