@@ -2,7 +2,7 @@ package calculator;
 
 public class StringCheck {
     String checkSeparator(String str) {
-        String separator = ",|;";
+        String separator = ",|:";
 
         int startIndex = str.indexOf("//");
         int endIndex = str.indexOf("\\n");
