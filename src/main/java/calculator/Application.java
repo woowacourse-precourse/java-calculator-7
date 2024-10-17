@@ -1,7 +1,11 @@
 package calculator;
 
+import calculator.view.StringReader;
+
 public class Application {
+
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        StringReader reader = new StringReader();
+        System.out.println(reader.read());
     }
 }
