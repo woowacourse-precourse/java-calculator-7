@@ -55,3 +55,5 @@
 
 - Separator (구분자)
     - [X] 쉼표(,)와 콜론(:)을 구분자로 등록
+- CustomDelimiterPattern (구분자 검증 패턴)
+    - [X] "//"와 "\n"을 구분자 검증 패턴으로 등록
