@@ -65,4 +65,15 @@ class InputValidatorTest {
         assertThatThrownBy(() -> InputValidator.validateNumberOnly(input)).isInstanceOf(
                 IllegalArgumentException.class).hasMessage(ErrorMessage.NOT_ALLOW_NEGATIVE.getMessage());
     }
+
+    @DisplayName("구분자 없이 숫자만 연속으로 입력된 경우")
+    @Test
+    public void validateContinuousNumbersTest() {
+        //given
+        String input = "//%\n1324";
+
+        //then
+        assertThatThrownBy(() -> InputValidator.validateContinuousNumbers(input)).isInstanceOf(
+                IllegalArgumentException.class).hasMessage(ErrorMessage.MISS_SEPARATOR.getMessage());
+    }
 }

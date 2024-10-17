@@ -98,4 +98,15 @@ public class InputValidator {
             return false;
         }
     }
+
+    /**
+     * 구분자 없이 숫자만 연속으로 입력된 경우 예외 발생
+     */
+    public static void validateContinuousNumbers(String input) {
+        String[] numbers = splitCustomInput(input);
+
+        if (numbers.length == 1 && numbers[0].matches("\\d+")) {
+            throw new IllegalArgumentException(ErrorMessage.MISS_SEPARATOR.getMessage());
+        }
+    }
 }
