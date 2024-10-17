@@ -35,6 +35,14 @@ public class InputParser {
 		return input.split(regex);
 	}
 
+	private void validateNumber(String s) {
+		try {
+			Integer.parseInt(s);
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException("구분자 사이에 숫자가 아닌 값이 포함되어 있습니다.");
+		}
+	}
+
 	/**
 	 * 문자열 전처리
 	 */
