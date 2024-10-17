@@ -8,4 +8,8 @@ public class InputHandler {
         System.out.println("문자열을 입력해주세요");
         return Console.readLine();
     }
+
+    public void closeInput() {
+        Console.close();
+    }
 }
