@@ -7,6 +7,8 @@ public class Application {
         // TODO: 프로그램 구현
     }
 
+    static String defaultSeparator = ",:";
+
     private void printUserInputMessage() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
     }
@@ -22,5 +24,11 @@ public class Application {
     public String removeSeparator(String str, String separator) {
         String formattedSeparator = "[" + separator + "]";
         return str.replaceAll(formattedSeparator, "");
+    }
+
+    public Boolean isStringWithDefaultSeparator(String input, String separator) {
+        String str = removeNumber(input);
+        str = removeSeparator(str, defaultSeparator);
+        return str == "";
     }
 }
