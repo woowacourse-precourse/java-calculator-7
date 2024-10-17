@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class InputString {
-    private List<Integer> numbers;
+    private final List<Integer> numbers;
 
     public InputString(String input) {
         this.numbers = inputToList(input);
@@ -20,16 +20,20 @@ public class InputString {
         }
 
         if(input.startsWith("//")) {
-            int delimiterIndex = input.indexOf("\n");
-            String delimiter = input.substring(2, delimiterIndex);
-            input = input.substring(delimiterIndex + 1);
-
-            return Arrays.stream(input.split(delimiter))
-                    .map(Integer::valueOf)
-                    .toList();
+            return inputToListByCustomDelimiter(input);
         }
 
         return Arrays.stream(input.split("[,:]"))
+                .map(Integer::valueOf)
+                .toList();
+    }
+
+    private List<Integer> inputToListByCustomDelimiter(String input) {
+        int delimiterIndex = input.indexOf("\n");
+        String delimiter = input.substring(2, delimiterIndex);
+        input = input.substring(delimiterIndex + 1);
+
+        return Arrays.stream(input.split(delimiter))
                 .map(Integer::valueOf)
                 .toList();
     }
