@@ -10,7 +10,7 @@ public class Application {
             String inputData = InputDataReader.getInputData();
             Data data = DataParser.parseData(inputData);
             int sum = Calculator.sum(data);
-            System.out.println("결과 : " + sum);
+            Logger.printResult(sum);
         } finally {
             Console.close();
         }
