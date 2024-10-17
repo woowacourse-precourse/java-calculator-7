@@ -9,9 +9,7 @@ public class Application {
         DefaultDelimiter defaultDelimiter = new DefaultDelimiter();
 
         if (!input.isCustom()) {
-            DelimiterResult regex = new DelimiterResult(defaultDelimiter.getDefaultDelimiter());
-            InputNumberStrings numberStrings = new InputNumberStrings(input.getUser(), regex);
-            Numbers numbers = new Numbers(numberStrings.split(regex.getDelimiterResult()));
+            Numbers numbers = crateNumbers(defaultDelimiter, input);
 
             int sum = 0;
             for (String number : numbers.getNumbers()) {
@@ -42,6 +40,13 @@ public class Application {
             }
             System.out.println("결과 : " + sum);
         }
+    }
+
+    private static Numbers crateNumbers(DefaultDelimiter defaultDelimiter, User input) {
+        DelimiterResult regex = new DelimiterResult(defaultDelimiter.getDefaultDelimiter());
+        InputNumberStrings numberStrings = new InputNumberStrings(input.getUser(), regex);
+        Numbers numbers = new Numbers(numberStrings.split(regex.getDelimiterResult()));
+        return numbers;
     }
 
 
