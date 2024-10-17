@@ -1,5 +1,6 @@
 package calculator;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -60,6 +61,16 @@ public class Application {
         if (!numberBuffer.isEmpty()) {
             usernumList.add(Long.parseLong(numberBuffer.toString()));
         }
+    }
+
+    public static BigInteger convertLongToBigInt(long input) {
+        if (isLongOverflow(input)) {
+            BigInteger longToBigInt = BigInteger.valueOf(input);
+            BigInteger overflowAmount = BigInteger.valueOf(input - Long.MIN_VALUE + 1);
+            longToBigInt = longToBigInt.negate().add(overflowAmount.multiply(BigInteger.valueOf(2)));
+            return longToBigInt;
+        }
+        return BigInteger.valueOf(input);
     }
 
     public static void main(String[] args) {
