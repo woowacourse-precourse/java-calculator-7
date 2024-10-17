@@ -3,7 +3,7 @@ package calculator.service;
 import calculator.model.Delimiters;
 import java.util.List;
 
-public class DelimiterService {
+public class CustomDelimiterService {
     private static final String CUSTOM_DELIMITER_FIRST_FORMAT = "//";
     private static final String CUSTOM_DELIMITER_LAST_FORMAT = "\n";
     private static final int CUSTOM_DELIMITER_FORMAT_MIN_LENGTH = 5;
@@ -11,7 +11,7 @@ public class DelimiterService {
 
     private final Delimiters delimiters;
 
-    public DelimiterService(Delimiters delimiters) {
+    public CustomDelimiterService(Delimiters delimiters) {
         this.delimiters = delimiters;
     }
 

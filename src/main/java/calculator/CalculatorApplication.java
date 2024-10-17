@@ -5,8 +5,8 @@ import calculator.model.Calculator;
 import calculator.model.Delimiters;
 import calculator.model.Numbers;
 import calculator.service.CalculatorService;
-import calculator.service.DelimiterService;
-import calculator.service.NumberService;
+import calculator.service.CustomDelimiterService;
+import calculator.service.NumberExtractionService;
 
 public class CalculatorApplication {
     public static void run() {
@@ -18,10 +18,10 @@ public class CalculatorApplication {
         Calculator calculator = new Calculator();
         Numbers numbers = new Numbers();
 
-        DelimiterService delimiterService = new DelimiterService(delimiters);
-        NumberService numberService = new NumberService(numbers, delimiterService);
-        CalculatorService calculatorService = new CalculatorService(calculator, numberService);
-        
-        return new Controller(delimiterService, numberService, calculatorService);
+        CustomDelimiterService customDelimiterService = new CustomDelimiterService(delimiters);
+        NumberExtractionService numberExtractionService = new NumberExtractionService(numbers, customDelimiterService);
+        CalculatorService calculatorService = new CalculatorService(calculator, numberExtractionService);
+
+        return new Controller(customDelimiterService, numberExtractionService, calculatorService);
     }
 }

@@ -1,24 +1,24 @@
 package calculator.controller;
 
 import calculator.service.CalculatorService;
-import calculator.service.DelimiterService;
-import calculator.service.NumberService;
+import calculator.service.CustomDelimiterService;
+import calculator.service.NumberExtractionService;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
 public class Controller {
-    private final DelimiterService delimiterService;
-    private final NumberService numberService;
+    private final CustomDelimiterService customDelimiterService;
+    private final NumberExtractionService numberExtractionService;
     private final CalculatorService calculatorService;
 
     private String inputString;
     private String processedString;
     private int result;
 
-    public Controller(DelimiterService delimiterService, NumberService numberService,
+    public Controller(CustomDelimiterService customDelimiterService, NumberExtractionService numberExtractionService,
                       CalculatorService calculatorService) {
-        this.delimiterService = delimiterService;
-        this.numberService = numberService;
+        this.customDelimiterService = customDelimiterService;
+        this.numberExtractionService = numberExtractionService;
         this.calculatorService = calculatorService;
     }
 
@@ -40,11 +40,11 @@ public class Controller {
     }
 
     private void customDelimiterProgress() {
-        processedString = delimiterService.addCustomDelimiters(inputString);
+        processedString = customDelimiterService.addCustomDelimiters(inputString);
     }
 
     private void numberExtractProgress() {
-        numberService.extractNumber(processedString);
+        numberExtractionService.extractNumber(processedString);
     }
 
     private void calculateProgress() {

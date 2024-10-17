@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class NumberService {
+public class NumberExtractionService {
     private final Numbers numbers;
-    private final DelimiterService delimiterService;
+    private final CustomDelimiterService customDelimiterService;
 
-    public NumberService(Numbers numbers, DelimiterService delimiterService) {
+    public NumberExtractionService(Numbers numbers, CustomDelimiterService customDelimiterService) {
         this.numbers = numbers;
-        this.delimiterService = delimiterService;
+        this.customDelimiterService = customDelimiterService;
     }
 
     protected List<Integer> getNumbers() {
@@ -47,7 +47,7 @@ public class NumberService {
     }
 
     private String createDelimitersString() {
-        List<Character> delimiters = delimiterService.getDelimiters();
+        List<Character> delimiters = customDelimiterService.getDelimiters();
         StringBuilder stringBuilder = new StringBuilder();
         for (char c : delimiters) {
             stringBuilder.append(c);
