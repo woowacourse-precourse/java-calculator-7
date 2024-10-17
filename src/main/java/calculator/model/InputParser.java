@@ -24,6 +24,13 @@ public class InputParser {
 	/**
 	 * 핵심 로직
 	 */
+	// 1차 가공된 입력값에서 숫자를 추출
+	public List<Integer> extractNumbers(String input, List<String> delimiters) {
+		String[] splitParts = splitInput(input, delimiters);
+
+		return saveNumbers(splitParts);
+	}
+
 	// 구분자들을 이용해 정규식을 만들고, 이를 이용해 입력값을 분리
 	private String[] splitInput(String input, List<String> delimiters) {
 		String regex = String.join("|",
@@ -33,6 +40,20 @@ public class InputParser {
 		);
 
 		return input.split(regex);
+	}
+
+	// 분리된 각 부분에서 숫자로 변환하여 리스트에 추가
+	private List<Integer> saveNumbers(String[] splitParts) {
+		List<Integer> numbers = new ArrayList<>();
+		Arrays.stream(splitParts)
+			.map(String::trim)
+			.filter(s -> !s.isEmpty())
+			.forEach(part -> {
+				validateNumber(part);
+				numbers.add(Integer.parseInt(part));
+			});
+
+		return numbers;
 	}
 
 	private void validateNumber(String s) {
