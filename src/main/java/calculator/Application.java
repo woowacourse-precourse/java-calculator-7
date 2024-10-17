@@ -2,6 +2,8 @@ package calculator;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,6 +12,8 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String calcFormula = readLine();
         String customSeparator = extractCustomSeparator(calcFormula);
+        List<Long> numbers = extractNumber(calcFormula, customSeparator);
+        numbers.forEach(System.out::println);
     }
 
     public static String extractCustomSeparator(String calcFormula) {
@@ -25,5 +29,13 @@ public class Application {
         }
 
         return customSeparator.toString();
+    }
+
+    public static List<Long> extractNumber(String calcFormula, String customSeparator) {
+        String substring = calcFormula.substring(customSeparator.length() * 5);
+
+        return Arrays.stream(substring.split(customSeparator + "|:" + "|,"))
+                .map(Long::parseLong)
+                .toList();
     }
 }
