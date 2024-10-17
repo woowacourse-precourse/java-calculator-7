@@ -21,6 +21,8 @@ public class Application {
         for (String splitString : splitStrings) {
             sum += Integer.parseInt(splitString);
         }
+        System.out.println("[분리된 문자들의 덧셈 결과]");
+        System.out.println(sum);
     }
 
     private static boolean isStringWithCustomDelimiter(String str) {
