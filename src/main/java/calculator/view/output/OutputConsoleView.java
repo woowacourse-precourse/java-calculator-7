@@ -1,4 +1,6 @@
-package calculator;
+package calculator.view.output;
+
+import calculator.common.ConsoleMessage;
 
 public class OutputConsoleView implements OutputView {
 

@@ -1,4 +1,12 @@
-package calculator;
+package calculator.common;
+
+import calculator.controller.StringCalculatorApplication;
+import calculator.model.calculator.Calculator;
+import calculator.model.calculator.StringCalculator;
+import calculator.view.ApplicationConsoleView;
+import calculator.view.ApplicationView;
+import calculator.view.input.InputConsoleView;
+import calculator.view.output.OutputConsoleView;
 
 public class CalculatorAppConfig {
 

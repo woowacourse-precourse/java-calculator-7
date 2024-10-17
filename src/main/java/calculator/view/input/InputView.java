@@ -1,4 +1,4 @@
-package calculator;
+package calculator.view.input;
 
 public interface InputView {
 

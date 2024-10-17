@@ -1,4 +1,4 @@
-package calculator;
+package calculator.controller;
 
 public interface CalculatorApplication {
 

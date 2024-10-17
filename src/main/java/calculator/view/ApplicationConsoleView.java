@@ -1,4 +1,7 @@
-package calculator;
+package calculator.view;
+
+import calculator.view.input.InputView;
+import calculator.view.output.OutputView;
 
 public class ApplicationConsoleView implements ApplicationView{
 
