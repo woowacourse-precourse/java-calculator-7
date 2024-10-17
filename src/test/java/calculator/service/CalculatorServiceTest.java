@@ -1,5 +1,6 @@
 package calculator.service;
 
+import calculator.validation.DelimiterNumberValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,12 +11,14 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class CalculatorServiceTest {
 
     DelimiterService delimiterService;
+    DelimiterNumberValidator delimiterNumberValidator;
     CalculatorService calculatorService;
 
     @BeforeEach
     void setUp() {
         delimiterService = new DelimiterService();
-        calculatorService = new CalculatorService(delimiterService);
+        delimiterNumberValidator = new DelimiterNumberValidator();
+        calculatorService = new CalculatorService(delimiterService, delimiterNumberValidator);
     }
 
     @Test
@@ -58,13 +61,13 @@ class CalculatorServiceTest {
     }
     
     @Test
-    @DisplayName("구분자가 입력되지 않고, 문자가 입력되었을 때 예외가 발생한다.")
-    void 구분자가_없고_문자가_입력된_경우_예외_발생() {
+    @DisplayName("구분자가 입력되지 않고, 문자만 입력되었을 때 예외가 발생한다.")
+    void 구분자가_없고_문자만_입력된_경우_예외_발생() {
         // given
         String input = "a";
 
         // when, then
-        assertThatThrownBy(() -> delimiterSplit(input))
+        assertThatThrownBy(() -> calculatorService.calculateSum(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("구분자와 숫자를 정확하게 입력해주세요.");
     }
