@@ -29,7 +29,7 @@ public class ParserTest {
 
     @Test
     void parse_string_with_custom_delimiter() {
-        String custom = "//;\n1;2;3";
+        String custom = "//;\\n1;2;3";
 
         int[] customNumbers = parser.parse(custom);
 
@@ -40,15 +40,18 @@ public class ParserTest {
     void throw_on_invalid_strings() {
         String wrongDelimiter = "1;2;3";
         String floatNumber = "1.2,3.5";
-        String invalidDelimiter = "//;\n1;2,3";
+        String invalidDelimiter = "//;\\n1;2,3";
+        String negativeNumber = "-1,-2";
 
         Throwable wrongDelimiterException = catchThrowable(() -> { parser.parse(wrongDelimiter); });
         Throwable floatNumberException = catchThrowable(() -> { parser.parse(floatNumber); });
         Throwable invalidDelimiterException = catchThrowable(() -> { parser.parse(invalidDelimiter); });
+        Throwable negativeNumberException = catchThrowable(() -> { parser.parse(negativeNumber); });
 
         assertThat(wrongDelimiterException).isInstanceOf(IllegalArgumentException.class);
         assertThat(floatNumberException).isInstanceOf(IllegalArgumentException.class);
         assertThat(invalidDelimiterException).isInstanceOf(IllegalArgumentException.class);
+        assertThat(negativeNumberException).isInstanceOf(IllegalArgumentException.class);
     }
 
 }
