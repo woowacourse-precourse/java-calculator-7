@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 // view에서 들어오는 입력을 파싱하여 구분자와 계산하고자하는 문자열을 저장하는 CalculatorRequest로 반환하도록 하는 메서드 구현
 final class ViewCalculatorParser {
-    private static final String DEFAULT_DELIMITERS = ",|:";
+    private static final String DEFAULT_DELIMITERS = DefaultDelimiters.joinAllDelimiters();
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
     private static final Pattern SINGLE_CHAR_DELIMITER_PATTERN = Pattern.compile("^//(.)\\\\n");
     private static final int MIN_DELIMITER_LENGTH = 5;
