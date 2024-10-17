@@ -9,6 +9,7 @@ public class DataParser {
     public static Data parseData(String inputData) {
 
         boolean isCustom = isCustom(inputData);
+
         if (isCustom) {
             Validator.checkValidCustomFormat(inputData);
         }
@@ -16,7 +17,10 @@ public class DataParser {
         char[] separators = createSeparators(inputData, isCustom);
         char[] contents = createContents(inputData, isCustom);
         Validator.checkValidContents(separators, contents);
-        return new Data(separators, contents);
+
+        String contentsString = getContentString(contents, separators);
+        String separatorsString = getSeparatorsString(separators);
+        return new Data(separatorsString, contentsString);
     }
 
     private static char[] createSeparators(String inputData, boolean isCustom) {
@@ -54,5 +58,36 @@ public class DataParser {
 
     private static boolean isCustom(String inputData) {
         return inputData.startsWith("//");
+    }
+
+    private static String getContentString(char[] contents, char[] separator) {
+        StringBuilder sb = new StringBuilder();
+        int index = 0;
+        if (isSeparator(contents[0], separator)) {
+            index = 1;
+        }
+        for (int i = index; i < contents.length; i++) {
+            sb.append(contents[i]);
+        }
+        return sb.toString();
+    }
+
+    private static String getSeparatorsString(char[] separators) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < separators.length - 1; i++) {
+            sb.append(separators[i]);
+        }
+        char lastElement = separators[separators.length - 1];
+        sb.append(lastElement);
+        return "[" + sb.toString() + "]";
+    }
+
+    private static boolean isSeparator(char c, char[] separator) {
+        for (int i = 0; i < separator.length; i++) {
+            if (c == separator[i]) {
+                return true;
+            }
+        }
+        return false;
     }
 }

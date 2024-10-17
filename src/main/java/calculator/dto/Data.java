@@ -2,19 +2,19 @@ package calculator.dto;
 
 public class Data {
 
-    private final char[] separators;
-    private final char[] contents;
+    private final String separators;
+    private final String contents;
 
-    public Data(char[] separators, char[] contents) {
+    public Data(String separators, String contents) {
         this.separators = separators;
         this.contents = contents;
     }
 
-    public char[] getSeparators() {
+    public String getSeparators() {
         return separators;
     }
 
-    public char[] getContents() {
+    public String getContents() {
         return contents;
     }
 }
