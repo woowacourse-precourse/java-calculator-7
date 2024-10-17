@@ -13,17 +13,20 @@ public class Application {
             String ch = "";
             ch += user_input.charAt(i);
             if (separator.contains(ch)) {
-                if (num.equals("") == false)
+                if (num.equals("") == false) {
                     sum += Integer.parseInt(num);
+                }
                 num = "";
             } else if ('0' <= ch.charAt(0) && '9' >= ch.charAt(0)) {
                 num += ch;
             } else {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException(ch);
             }
         }
-        if (num.equals("") == false)
+        if (num.equals("") == false) {
             sum += Integer.parseInt(num);
+        }
+
         return sum;
     }
 
@@ -31,9 +34,10 @@ public class Application {
         if (user_input.substring(0, 2).equals("//") == false)
             return user_input;
 
-        int limit = user_input.lastIndexOf("\\n"); 
-        if (limit == -1)
+        int limit = user_input.lastIndexOf("\\n");
+        if (limit == -1) {
             return user_input;
+        }
 
         for (int i = 2; i < limit; i++) {
             separator += user_input.charAt(i);
