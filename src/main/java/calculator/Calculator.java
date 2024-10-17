@@ -1,6 +1,8 @@
 package calculator;
 
-public class Calculator {
+import camp.nextstep.edu.missionutils.Console;
+
+public class Calculator implements AutoCloseable {
 
     public static final String PROMPT_MESSAGE = "덧셈할 문자열을 입력해 주세요.";
     private String input;
@@ -18,11 +20,16 @@ public class Calculator {
     public Calculator sum() {}
 
     public void printSum() {
-        System.out.println("결과값  :  " + sum);
+        System.out.println("결과값 : " + sum);
     }
 
     public void displayPrompt() {
         System.out.println(PROMPT_MESSAGE);
+    }
+
+    @Override
+    public void close() throws Exception {
+        Console.close();
     }
 
 
