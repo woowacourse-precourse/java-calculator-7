@@ -20,13 +20,9 @@ public class InputParser {
     }
 
     public List<Integer> convertDefaultDelimiter(String input) throws IllegalArgumentException {
-        try {
-            input = input.replace(COMMA_DELIMITER, SPACE).replace(COLON_DELIMITER , SPACE);
-            String[] inputs = input.split(SPACE);
-            return convertToIntList(inputs);
-        } catch (Exception e) {
-            throw new IllegalArgumentException();
-        }
+        input = input.replace(COMMA_DELIMITER, SPACE).replace(COLON_DELIMITER , SPACE);
+        String[] inputs = input.split(SPACE);
+        return convertToIntList(inputs);
     }
 
     public List<Integer> convertCustomDelimiter(String input) throws IllegalArgumentException {
