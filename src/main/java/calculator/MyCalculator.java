@@ -26,4 +26,15 @@ public class MyCalculator {
 
         return numArray;
     }
+
+    public int getSum() {
+        String[] array = makeArray();
+        int sum = 0;
+
+        for (int i = 0; i < array.length; i++) {
+            sum += Integer.parseInt(array[i]);
+        }
+
+        return sum;
+    }
 }
