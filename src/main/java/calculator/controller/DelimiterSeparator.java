@@ -3,15 +3,15 @@ package calculator.controller;
 import calculator.model.Delimiter;
 
 public class DelimiterSeparator {
-    public static int registerDelimiter(String userInput) {
+    public static int detectCustomDelimiter(String userInput) {
         int index = 0;
         if (!NumberChecker.isNumber(userInput.substring(0, 1))) {
-            index = specifyingDelimiter(userInput);
+            index = registerCustomDelimiter(userInput);
         }
         return index;
     }
 
-    public static int specifyingDelimiter(String userInput) {
+    public static int registerCustomDelimiter(String userInput) {
         if (!userInput.startsWith("//")) {
             throw new IllegalArgumentException("잘못된 형식입니다.");
         }

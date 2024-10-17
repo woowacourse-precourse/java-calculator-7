@@ -18,7 +18,7 @@ public class CalculatorController {
             outputView.printResult(0);
             return;
         }
-        int result = calculateString(DelimiterSeparator.registerDelimiter(userInput), userInput);
+        int result = calculateString(DelimiterSeparator.detectCustomDelimiter(userInput), userInput);
         outputView.printResult(result);
     }
 

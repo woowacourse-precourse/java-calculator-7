@@ -1,31 +1,35 @@
 package calculator.controller;
 
-import org.junit.jupiter.api.Test;
+import static calculator.controller.DelimiterSeparator.detectCustomDelimiter;
+import static calculator.controller.DelimiterSeparator.registerCustomDelimiter;
+import static calculator.controller.DelimiterSeparator.validateDelimiter;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import static calculator.controller.DelimiterSeparator.*;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 public class DelimiterSeparatorTest {
 
     @Test
-    void 숫자_시작_구분자_등록_안함(){
+    void 숫자_시작_구분자_등록_안함() {
         String userInput = "123";
-        int index = registerDelimiter(userInput);
-        assertEquals(0,index);
+        int index = detectCustomDelimiter(userInput);
+        assertEquals(0, index);
     }
 
     @Test
-    void 문자_시작_구분자_등록_성공(){
+    void 문자_시작_구분자_등록_성공() {
         String userInput = "//;\\n123";
-        int index = registerDelimiter(userInput);
-        assertEquals(5,index);
+        int index = detectCustomDelimiter(userInput);
+        assertEquals(5, index);
     }
 
     @Test
     public void 구분자_등록_형식_에러() {
         String userInput = ";123";
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            specifyingDelimiter(userInput);
+            registerCustomDelimiter(userInput);
         });
         assertEquals("잘못된 형식입니다.", exception.getMessage());
     }
@@ -34,7 +38,7 @@ public class DelimiterSeparatorTest {
     public void 구분자_등록_형식_에러2() {
         String userInput = "//;123";
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            specifyingDelimiter(userInput);
+            registerCustomDelimiter(userInput);
         });
         assertEquals("잘못된 형식입니다.", exception.getMessage());
     }
@@ -42,7 +46,7 @@ public class DelimiterSeparatorTest {
     @Test
     public void 구분자_등록_성공() {
         String userInput = "//;\\n123";
-        int result = specifyingDelimiter(userInput);
+        int result = registerCustomDelimiter(userInput);
         assertEquals(5, result);
     }
 
