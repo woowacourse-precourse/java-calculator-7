@@ -1,27 +1,22 @@
 package calculator.controller;
 
 import calculator.model.InputString;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class ParsingInputString {
 
-    public static List<String> parsingInput(InputString inputString) {
-        String splitString = "[,:" + inputString.getCustomChar() + "]";
-        List<String> numberStringList = Arrays.stream(inputString.getInput().split(splitString))
-            .toList();
-        Validation.verifyInput(numberStringList);
-        return numberStringList;
-    }
-
-    public static List<Integer> getNumberList(InputString inputString, List<String> numberStringList) {
-        List<Integer> numberList = new ArrayList<>();
-        for (String s : numberStringList) {
-            numberList.add(Integer.valueOf(s));
+    public static InputString parsingInput(InputString inputString) {
+        if (inputString.isEmpty()) {
+            return new InputString(inputString.input(), inputString.splitString(), List.of("0"));
         }
-
-        inputString.setNumberList(numberList);
-        return numberList;
+        List<String> numberStringList = Arrays.stream(inputString.input().split(
+                inputString.splitString()))
+            .toList();
+        if (!inputString.isNumber(numberStringList)) {
+            throw new IllegalArgumentException("잘못된 입력값 입니다.");
+        }
+        return new InputString(inputString.input(), inputString.splitString(),
+            numberStringList);
     }
 }

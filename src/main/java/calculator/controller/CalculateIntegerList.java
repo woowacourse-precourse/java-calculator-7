@@ -6,10 +6,10 @@ import java.util.List;
 public class CalculateIntegerList {
 
     public static int calculateResult(InputString inputString) {
-        List<Integer> numberList = inputString.getNumberList();
+        List<String> numberList = inputString.numberList();
         int sum = 0;
-        for (Integer number : numberList) {
-            sum += number;
+        for (String number : numberList) {
+            sum += Integer.parseInt(number);
         }
         return sum;
     }
