@@ -1,6 +1,7 @@
 package calculator.service;
 
 import calculator.util.NumberValidator;
+
 import java.util.Arrays;
 
 public class ParsingService {
@@ -10,7 +11,7 @@ public class ParsingService {
         //TODO: 입력 문자열 파싱 로직 구현
         String delimiter = ",|:";
 
-        if(input.startsWith("//")){
+        if (input.startsWith("//")) {
             delimiter += extractCustomDelimiter(input);
             input = preprocessingInput(input);
         }
@@ -18,7 +19,7 @@ public class ParsingService {
         String[] numberStrings = splitString(input, delimiter);
 
         return Arrays.stream(numberStrings)
-                .mapToInt(this :: parsePositiveNumber)
+                .mapToInt(this::parsePositiveNumber)
                 .toArray();
     }
 
@@ -40,7 +41,7 @@ public class ParsingService {
     }
 
     //====================== builder ======================//
-    private String preprocessingInput(String input){
+    private String preprocessingInput(String input) {
         int newlineIndex = input.indexOf("\\n");
         return input.substring(newlineIndex + 2);
     }
