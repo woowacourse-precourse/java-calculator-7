@@ -42,4 +42,12 @@ public class Calculator {
         }
     }
 
+    public Integer getResult(){
+        int result = 0;
+        for(String str : splitStr){
+            result += Integer.parseInt(str);
+        }
+        return result;
+    }
+
 }
