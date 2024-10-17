@@ -10,7 +10,7 @@ public class StringCalculator {
 
     private static final List<String> DEFAULT_DELIMITERS = List.of(",", ":");
 
-    public int sum(String input) {
+    public int sum(final String input) {
         if (isEmpty(input)) {
             return 0;
         }
@@ -40,7 +40,7 @@ public class StringCalculator {
             return input;
         }
 
-        Pattern pattern = Pattern.compile("//(.*)\n");
+        Pattern pattern = Pattern.compile("//(.*?)\\\\n");
         Matcher matcher = pattern.matcher(input);
         int startNumberIndex = 0;
 

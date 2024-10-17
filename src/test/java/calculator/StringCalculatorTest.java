@@ -21,23 +21,23 @@ class StringCalculatorTest {
 
     @Test
     void 커스텀_구분자_처리_테스트() {
-        assertEquals(6, calculator.sum("//#\n1#2#3"));
+        assertEquals(6, calculator.sum("//#\\n1#2#3"));
     }
 
     @Test
     void 긴_커스텀_구분자_처리_테스트() {
-        assertEquals(6, calculator.sum("//qq\n1qq2qq3"));
+        assertEquals(6, calculator.sum("//qq\\n1qq2qq3"));
     }
 
 
     @Test
     void 기본_커스텀_구분자_처리_테스트() {
-        assertEquals(6, calculator.sum("//#\n1#2:3"));
+        assertEquals(6, calculator.sum("//#\\n1#2:3"));
     }
 
     @Test
     void 여러개의_커스텀_구분자_처리_테스트() {
-        assertEquals(6, calculator.sum("//#\n//$\n1#2$3"));
+        assertEquals(6, calculator.sum("//#\\n//$\\n1#2$3"));
     }
 
     @Test
