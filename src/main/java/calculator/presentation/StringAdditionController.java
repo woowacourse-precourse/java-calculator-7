@@ -1,4 +1,9 @@
-package calculator;
+package calculator.presentation;
+
+import calculator.application.DelimiterProcessor;
+import calculator.application.StringSumCalculator;
+import calculator.io.InputHandler;
+import calculator.io.ResultPrinter;
 
 public class StringAdditionController {
 

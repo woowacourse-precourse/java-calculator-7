@@ -1,4 +1,10 @@
-package calculator;
+package calculator.config;
+
+import calculator.presentation.StringAdditionController;
+import calculator.application.DelimiterProcessor;
+import calculator.application.StringSumCalculator;
+import calculator.io.InputHandler;
+import calculator.io.ResultPrinter;
 
 public class ApplicationContext {
 

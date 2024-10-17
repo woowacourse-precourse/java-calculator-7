@@ -1,4 +1,4 @@
-package calculator;
+package calculator.application;
 
 public class StringSumCalculator {
 
