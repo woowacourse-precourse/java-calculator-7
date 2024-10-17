@@ -65,7 +65,12 @@ public class Parser {
         String delimiter = "[,:]";
 
         if (matcher.find()) {
-            delimiter = Pattern.quote(matcher.group(1));
+            String customDelimiter = matcher.group(1);
+
+            if (customDelimiter.isEmpty()) {
+                throw new IllegalArgumentException("구분자가 지정되지 않았습니다. 프로그램을 종료합니다.");
+            }
+            delimiter = Pattern.quote(customDelimiter);
         }
 
         return delimiter;
