@@ -9,13 +9,13 @@ public class UserInputValidator {
     private static final int NUMBER_UNDER_BOUND = 47;
     private static final int NUMBER_OVER_BOUND = 58;
 
-    public static void wrongDelimiter(String input) {
+    public static void validateDelimiter(String input) {
         if (!input.contains(Constants.COMMA) && !input.contains(Constants.COLON) && input.length() > ONE) {
             throw new IllegalArgumentException(Constants.WRONG_DELIMITER);
         }
     }
 
-    public static void checkNotExistCustom(Matcher matcher) {
+    public static void validateCustomPresence(Matcher matcher) {
         if (!canFindRegex(matcher)) {
             throw new IllegalArgumentException(Constants.NOT_EXIST_CUSTOM);
         }
@@ -25,7 +25,7 @@ public class UserInputValidator {
         return matcher.find();
     }
 
-    public static void checkNotDefinedCustom(char letter, char asciiOfDelimiter) {
+    public static void validateDefinedCustom(char letter, char asciiOfDelimiter) {
         if (!canBeNumber(letter) && isDifferentCharacter(letter, asciiOfDelimiter)) {
             throw new IllegalArgumentException(Constants.NOT_DEFINED_CUSTOM);
         }
@@ -39,7 +39,7 @@ public class UserInputValidator {
         return letter != asciiOfDelimiter;
     }
 
-    public static void checkNotContainsNumber(String string) {
+    public static void validateHasNumber(String string) {
         try {
             Integer.parseInt(string);
         } catch (NumberFormatException numberFormatException) {
@@ -47,7 +47,7 @@ public class UserInputValidator {
         }
     }
 
-    public static void checkNumberNegative(int number) {
+    public static void validatePositive(int number) {
         if (number < Constants.ZERO) {
             throw new IllegalArgumentException(Constants.CONTAINS_NEGATIVE);
         }
