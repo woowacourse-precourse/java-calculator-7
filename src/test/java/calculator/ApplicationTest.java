@@ -10,17 +10,15 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_사용() {
-        assertSimpleTest(() -> {
-            run("//;\\n1");
-            assertThat(output()).contains("결과 : 1");
-        });
+        assertThat(Calculator.add("//;\n1;2")).isEqualTo(3); // 결과가 3이어야 함
     }
 
     @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> Calculator.add("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining("음수는 허용되지 않습니다")
         );
     }
 

@@ -13,7 +13,7 @@ public class Calculator {
         String num = input;
 
         if (input.startsWith("//")) {
-            Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
+            Matcher m = Pattern.compile("//(.*?)\n(.*)").matcher(input);
             if (m.find()) {
                 delimiter = Pattern.quote(m.group(1));
                 num = m.group(2);
@@ -35,6 +35,7 @@ public class Calculator {
                 throw new IllegalArgumentException("잘못된 숫자 형식입니다.");
             }
         }
+        System.out.println("결과 : " + sum);
         return sum;
     }
 }
