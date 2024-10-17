@@ -39,11 +39,18 @@ public class MainService {
         return input;
     }
 
+    public void extractSlashFromString(InputString inputString) {
+        if (inputString.getInputString().startsWith("/")) {
+            String refinedString = inputString.getInputString().replaceFirst("^/+", "");
+            inputString.setInputString(refinedString);
+        }
+    }
+
     public void extractNumbersFromString(InputString input, ResultNumbers resultNumbers) {
 
         List<String> customDelimiter = input.getCustomDelimiter();
 
-        StringBuilder defaultRegex = new StringBuilder("[,|:]"); // 만약 커스텀 문자열이 추출된다음 정제된 문자열이 ////1,2,3,4 라면 //는 어떻게 처리할것인가?
+        StringBuilder defaultRegex = new StringBuilder("[,|:]");
 
         if (!customDelimiter.isEmpty()) {
             for (String delimiter : customDelimiter) {
@@ -60,6 +67,9 @@ public class MainService {
             resultNumbers.addNumberList(Integer.parseInt(num));
         }
 
+        System.out.println(Arrays.toString(resultNumbers.getNumberList().toArray()));
+
     }
+
 
 }

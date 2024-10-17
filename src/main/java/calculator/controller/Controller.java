@@ -36,6 +36,7 @@ public class Controller {
 
     private void getNumberList() {
         resultNumbers = new ResultNumbers();
+        mainService.extractSlashFromString(inputString);
         mainService.extractNumbersFromString(inputString, resultNumbers);
     }
 
