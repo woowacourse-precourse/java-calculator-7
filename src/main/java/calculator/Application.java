@@ -11,8 +11,11 @@ public class Application {
         // TODO: 프로그램 구현
         String input = Console.readLine();
 
-        validateCustomSep(input);
+        if (input.isEmpty()){
+            System.out.println("0");
+        }
 
+        //validateCustomSep(input);
         //calculate();
 
     }
@@ -39,4 +42,23 @@ public class Application {
 
         return matcher.find();
     }
+
+    private static boolean containsInvalidCharacters(String input, String... customSep) {
+        String regex = "0-9:.";
+
+        if (customSep.length > 0) {
+
+            String sep = customSep[0];
+            if ("+*?[](){}|.^$".contains(sep)) {
+                sep = "\\\\" + sep;  // 자바에서 \\는 정규식에서 \로 인식된다. 정규식에서 \\를 만들어야되니까 자바에서 \\\\를 추가하는 것
+            }
+            regex += sep;
+        }
+
+        regex = ".*[^" + regex + "].*";
+        return input.matches(regex);
+    }
+
+
+
 }
