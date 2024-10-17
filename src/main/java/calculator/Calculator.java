@@ -16,7 +16,7 @@ public class Calculator {
 
 	public void run() {
 		enter();
-		checkPersonalSeperator(inputStr);
+		checkPersonalSaperator(inputStr);
 		print();
 	}
 
@@ -34,7 +34,7 @@ public class Calculator {
 		totalSum += num;
 	}
 
-	private void checkPersonalSeperator(String str) {
+	private void checkPersonalSaperator(String str) {
 		int startPos = str.indexOf("//");
 		int endPos = str.indexOf("\n");
 
@@ -55,4 +55,5 @@ public class Calculator {
 		// 커스텀 구분자 저장
 		separator[2] = newSeparator;
 	}
+
 }
