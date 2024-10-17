@@ -108,7 +108,7 @@ public class Calculator {
 
 
     public void printResult(){
-
+        System.out.println("결과 : " + result);
     }
 
 
