@@ -7,14 +7,14 @@ public class Calculator {
         User user = new User();
         String userInput = user.inputString();
 
-        if(!userInput.startsWith("//") || userInput.contains("\n")) {
-            int[] basicNumberSeparator = getBasicSeparatorNumbers(userInput);
-            for (int i : basicNumberSeparator) {
+        if(userInput.startsWith("//") || userInput.contains("\n")) {
+            int[] customNumberSeparator = getCustomSeparatorNumbers(userInput);
+            for (int i : customNumberSeparator) {
                 result += i;
             }
         }else{
-            int[] customNumberSeparator = getCustomSeparatorNumbers(userInput);
-            for (int i : customNumberSeparator) {
+            int[] basicNumberSeparator = getBasicSeparatorNumbers(userInput);
+            for (int i : basicNumberSeparator) {
                 result += i;
             }
         }
