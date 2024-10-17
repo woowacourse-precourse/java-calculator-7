@@ -17,11 +17,21 @@ public class InputTest {
     }
 
     @Test
-    @DisplayName("커스텀 구분자가 없이 올바르게 입력된다.")
+    @DisplayName("커스텀 구분자와 함께 올바르게 입력된다.")
     public void 커스텀_구분자_있는_올바른_입력_값1() {
         String testText = "//;\n1,2";
         Input input = new Input();
         input.getInputText(testText);
         assertTrue(input.hasDelimiter());
+    }
+
+    @Test
+    @DisplayName("올바르지 않은 입력 값으로, 예외가 발생한다.")
+    public void 마지막_값이_숫자가_아닌_입력_값() {
+        String testText = "//;\n1,2,";
+        Input input = new Input();
+        assertThrows(IllegalArgumentException.class, () -> {
+            input.getInputText(testText);
+        });
     }
 }
