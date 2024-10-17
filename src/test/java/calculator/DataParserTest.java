@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class DataParserTest {
 
     @Test
-    void 올바른_데이터_파싱() {
+    void 올바른_기본_데이터_파싱() {
         String inputData = "1,2,3";
         Data data = DataParser.parseData(inputData);
 
@@ -17,5 +17,17 @@ class DataParserTest {
 
         assertThat(contents).isEqualTo("1,2,3");
         assertThat(separators).isEqualTo("[,:]");
+    }
+
+    @Test
+    void 올바른_커스텀_데이터_파싱() {
+        String inputData = "//;\\n1;2;3";
+        Data data = DataParser.parseData(inputData);
+
+        String contents = data.getContents();
+        String separators = data.getSeparators();
+
+        assertThat(contents).isEqualTo("1;2;3");
+        assertThat(separators).isEqualTo("[;:,]");
     }
 }
