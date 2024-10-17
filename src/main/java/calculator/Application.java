@@ -27,5 +27,7 @@ public class Application {
         // 4. 덧셈
         int result = expressionHandler.getSum(tokenizedExpression);
 
+        // 5. 출력
+        consoleView.showResult(result);
     }
 }

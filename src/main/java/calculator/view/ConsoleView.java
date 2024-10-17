@@ -9,4 +9,8 @@ public class ConsoleView {
         return readLine();
     }
 
+    public void showResult(int result){
+        System.out.println("결과 : " + result);
+    }
+
 }
