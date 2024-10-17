@@ -12,7 +12,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 사용자_입력_숫자_추출() {
         String input = "1,2,3";
-        int[] result = Application.extractNumbers(input, Application.separator);
+        int[] result = Application.extractNumbers(input, Application.separators);
         assertThat(result).contains(1, 2, 3);
     }
 
@@ -26,7 +26,15 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
-            run("//;\\n1");
+                run("//;\\n1");
+            assertThat(output()).contains("결과 : 1");
+        });
+    }
+
+    @Test
+    void 정규식_문자_사용() {
+        assertSimpleTest(() -> {
+            run("//.\\n1");
             assertThat(output()).contains("결과 : 1");
         });
     }
