@@ -40,14 +40,14 @@ public class Application {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(substring);
 
-        if (matcher.groupCount() != (index / 5)) {
-            throw new IllegalArgumentException("커스텀 구분자 지정 규칙이 틀렸습니다.");
-        }
-
         StringBuilder customSeparator = new StringBuilder();
 
         while (matcher.find()) {
             customSeparator.append(matcher.group().charAt(2));
+        }
+
+        if (customSeparator.length() != (index / 5)) {
+            throw new IllegalArgumentException("커스텀 구분자 지정 규칙이 틀렸습니다.");
         }
 
         return customSeparator.toString();
