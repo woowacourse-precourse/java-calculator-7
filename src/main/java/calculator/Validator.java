@@ -35,7 +35,10 @@ public class Validator {
             throw new IllegalArgumentException("커스텀 구분자 형식이 올바르지 않습니다.");
         }
 
-        checkCustomSeparatorFormat(value.substring(end + 2));
+        if (end + 2 < value.length()) {
+            checkCustomSeparatorFormat(value.substring(end + 2));
+        }
+
     }
 
 
