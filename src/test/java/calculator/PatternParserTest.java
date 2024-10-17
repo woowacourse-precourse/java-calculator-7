@@ -19,12 +19,38 @@ public class PatternParserTest {
         assertTrue(result);
     }
 
-    @Test void testIsCustomPattern_invalidCustomPattern() throws Exception{
+    @Test
+    void testIsCustomPattern_invalidCustomPattern() throws Exception{
         //given
         String input = "1,2:3";
 
         //when
         boolean result = patternParser.isCustomPattern(input);
+
+        //then
+        assertFalse(result);
+    }
+
+    @Test
+    public void testIsReservePattern_validReservePattern() throws Exception{
+        //given
+        String input = "1,2:3";
+
+        //when
+        boolean result = patternParser.isReservePattern(input);
+
+        //then
+        assertTrue(result);
+
+    }
+
+    @Test
+    public void testIsReservePattern_invalidReservePattern() throws Exception{
+        //given
+        String input = "//;\n1;2;3";
+
+        //when
+        boolean result = patternParser.isReservePattern(input);
 
         //then
         assertFalse(result);

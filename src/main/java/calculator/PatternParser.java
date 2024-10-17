@@ -31,10 +31,7 @@ public class PatternParser {
             delimiters.add(matcher.group());
         }
 
-        if (delimiters.contains(",") || delimiters.contains(":")){
-            return true;
-        }
-        return false;
+        return delimiters.contains(",") || delimiters.contains(":");
     }
 
 
