@@ -45,10 +45,10 @@ public class Application {
      * 숫자일 경우 스택에 저장한다.
      * 구분자(쉼표, 콜론)를 만나면 스택에 쌓인 숫자를 getStackNum() 메서드로 계산하고 sum에 더한다.
      * 문자열 끝에 도달하면 스택에 남은 숫자를 계산해 sum에 더한다.
-     * 숫자나 구분자가 아닌 경우 "잘못된 입력"을 출력한다.
+     * 숫자나 구분자가 아닌 경우 IllegalArgumentException을 발생시킨다.
      * 최종적으로 모든 숫자의 합을 반환한다.
      */
-    public static int getSum(String input) {
+    public static int getSum(String input) throws IllegalArgumentException {
         int sum = 0;
         Stack<Integer> stack = new Stack<>();
 
@@ -60,7 +60,7 @@ public class Application {
             } else if (sep.contains(curVal)) {
                 sum += getStackNum(stack);
             } else {
-                System.out.println("잘못된 입력");
+                throw new IllegalArgumentException("잘못된 입력입니다.");
             }
         }
 
@@ -81,8 +81,11 @@ public class Application {
 
         input = checkCustomSep(input);
 
-        int result = getSum(input);
-
-        System.out.printf("결과 : %d\n", result);
+        try {
+            int result = getSum(input);
+            System.out.printf("결과 : %d\n", result);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
