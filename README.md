@@ -7,10 +7,10 @@
 - [ ] 사용자로 부터 숫자를 포함한 문자열을 입력받는다.
 
 ## Parsing
-- [ ] 유효한 문자 구분
-- [ ] 커스텀 구분자 구분
-- [ ] 유효한 숫자 구분
-- [ ] 잘못된 값이 입력되면 IllegalArgumentException을 발생시킨다.
+- [X] 유효한 문자 구분
+- [X] 커스텀 구분자 구분
+- [X] 유효한 숫자 구분
+- [X] 잘못된 값이 입력되면 IllegalArgumentException을 발생시킨다.
 
 ## Calculate
 - [X] 숫자 더하기
