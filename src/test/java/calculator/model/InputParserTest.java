@@ -63,14 +63,17 @@ class InputParserTest {
         //given
         String input1 = "//;\\n1;2;3";
         String input2 = "//;\\n1";
+        String input3 = "//*\\n4*5*6";
 
         //when
         List<Integer> result1 = inputParser.convertCustomDelimiter(input1);
         List<Integer> result2 = inputParser.convertCustomDelimiter(input2);
+        List<Integer> result3 = inputParser.convertCustomDelimiter(input3);
 
         //then
         assertThat(result1).isEqualTo(List.of(1, 2, 3));
         assertThat(result2).isEqualTo(List.of(1));
+        assertThat(result3).isEqualTo(List.of(4,5,6));
     }
 
     @Test
