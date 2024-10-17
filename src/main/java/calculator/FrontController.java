@@ -1,5 +1,7 @@
 package calculator;
 
 public class FrontController {
-    public void run() {}
+    public void run() {
+        AppConfig appConfig = AppConfig.getInstance();
+    }
 }
