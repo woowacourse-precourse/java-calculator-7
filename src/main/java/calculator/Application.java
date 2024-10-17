@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
-        //문자열 입력받기
+        // 문자열 입력받기
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
@@ -17,13 +17,13 @@ public class Application {
     }
 
     public static int add(String input) {
-        //입력 된 값이 없을 경우
+        // 입력된 값이 없을 경우
         if (input == null || input.isEmpty()) {
             return 0;
         }
 
         String[] num;
-        String delimiter = ",|:";
+        String delimiter = ",|:";  // 기본 구분자 쉼표, 콜론
         if (input.startsWith("//")) {
             // 커스텀 구분자 추출
             int delimiterIndex = input.indexOf("\n");
@@ -43,7 +43,11 @@ public class Application {
 
     private static int parseNumber(String number) {
         try {
-            return Integer.parseInt(number);
+            int result = Integer.parseInt(number);
+            if (result < 0) {  // 음수 값 처리
+                throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+            }
+            return result;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
         }
