@@ -49,12 +49,33 @@ public class Calculator {
 
 
     private void customDelimiter() {
+        int idx = input.indexOf("\\n", 2);
+        String delimiter = ",|:|";
 
+        if (inputLen == idx+2){
+            isNull();
+            return;
+        }
+
+        if (idx == -1) {
+            throw new IllegalArgumentException("잘못된 입력값입니다.");
+        } else if(idx == 2){
+            String[] strArr = input.split(delimiter+"|");
+        } else{
+            delimiter += input.substring(2, idx).replace("|", "\\|");
+        }
+
+        String checkStr = input.substring(idx+2, inputLen);
+
+        String[] strArr = checkStr.split(delimiter);
+        calculate(strArr, delimiter);
     }
+
 
     private void isNull(){
         result = 0;
     }
+
 
     public int isPositiveNum(String s, String delimiter){
 
@@ -68,6 +89,7 @@ public class Calculator {
             }
         }
     }
+
 
     public void printResult(){
 
