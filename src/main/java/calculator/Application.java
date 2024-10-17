@@ -1,7 +1,14 @@
 package calculator;
 
+import java.util.Scanner;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        Scanner sc = new Scanner(System.in);
+        String st = sc.next();
+        String[] arr = st.split("[:;]");
+        for (String s : arr) {
+            System.out.print(s);
+        }
     }
 }
