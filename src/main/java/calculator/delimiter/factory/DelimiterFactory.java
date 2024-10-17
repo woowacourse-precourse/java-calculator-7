@@ -1,4 +1,7 @@
-package calculator.delimiter;
+package calculator.delimiter.factory;
+
+import calculator.delimiter.domain.Delimiter;
+import calculator.delimiter.domain.Delimiters;
 
 import java.util.ArrayList;
 import java.util.Arrays;

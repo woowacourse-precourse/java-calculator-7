@@ -1,4 +1,4 @@
-package calculator.delimiter;
+package calculator.delimiter.domain;
 
 public record Delimiter(String value) {
 

@@ -1,4 +1,4 @@
-package calculator.util.console;
+package calculator.util.io;
 
 import camp.nextstep.edu.missionutils.Console;
 

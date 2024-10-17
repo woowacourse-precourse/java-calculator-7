@@ -1,4 +1,6 @@
-package calculator.delimiter;
+package calculator.delimiter.service;
+
+import calculator.delimiter.domain.Delimiter;
 
 import java.util.Optional;
 

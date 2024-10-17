@@ -1,10 +1,10 @@
 package calculator;
 
-import calculator.delimiter.CustomDelimiterService;
-import calculator.delimiter.DelimiterFactory;
-import calculator.delimiter.Delimiters;
-import calculator.util.console.IOConsole;
+import calculator.delimiter.domain.Delimiters;
+import calculator.delimiter.factory.DelimiterFactory;
+import calculator.delimiter.service.CustomDelimiterService;
 import calculator.util.integer.IntegerUtils;
+import calculator.util.io.IOConsole;
 
 import java.util.List;
 
