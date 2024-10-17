@@ -1,7 +1,6 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.Arrays;
 
 public class Application {
     public static void main(String[] args) {
@@ -17,7 +16,7 @@ public class Application {
         DelimiterParser delimiterParser = new DelimiterParser(input);
         String[] stringArray = delimiterParser.splitString();
         int[] intArray = convertStringArrayToIntArray(stringArray);
-        System.out.println(Arrays.toString(intArray));
+        System.out.println(sumIntArray(intArray));
     }
 
     public static int[] convertStringArrayToIntArray(String[] stringArray) {
@@ -29,5 +28,14 @@ public class Application {
 
         return intArray;
 
+    }
+
+    public static int sumIntArray(int[] intArray) {
+        int sum = 0;
+
+        for (int j : intArray) {
+            sum += j;
+        }
+        return sum;
     }
 }
