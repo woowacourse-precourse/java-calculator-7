@@ -1,8 +1,6 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.*;
 import camp.nextstep.edu.missionutils.Console;
-
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,8 +18,23 @@ public class Application {
 
         isCustomDelimiter();
 
-        String[] arr = splitDelimiter(input, delimiter);
-        System.out.println(Arrays.toString(arr));
+        String[] stringArray = splitDelimiter(input, delimiter);
+
+        int[] intArray = new int[stringArray.length];
+
+        isNumeric(stringArray, intArray);
+
+        System.out.println(Arrays.toString(intArray));
+    }
+
+    private static void isNumeric(String[] word, int[] num) {
+        for (int i = 0; i < word.length; i++) {
+            if (!word[i].matches("[0-9]+")) {
+                throw new IllegalArgumentException("숫자가 아닙니다.");
+            }
+
+            num[i] = Integer.parseInt(word[i]);
+        }
     }
 
     private static String[] splitDelimiter(String input, String delimiter) {
