@@ -24,7 +24,7 @@ public class Delimiters {
         delimiters.add(customDelimiter);
     }
 
-    public boolean isCustomDelimiterDigit(char customDelimiter) {
+    private boolean isCustomDelimiterDigit(char customDelimiter) {
         return Character.isDigit(customDelimiter);
     }
 }
