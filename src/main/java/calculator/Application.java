@@ -25,6 +25,10 @@ public class Application {
                 String leftInput = input.substring(escapeIdx + 2);
                 String splitInput = Arrays.toString(leftInput.split(delimiter));
                 System.out.println(splitInput);
+            } else {
+                String delimiter = "[,:]";
+                String splitInput = Arrays.toString(input.split(delimiter));
+                System.out.println(splitInput);
             }
         }
     }
