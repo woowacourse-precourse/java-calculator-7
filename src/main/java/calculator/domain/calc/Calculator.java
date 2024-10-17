@@ -23,7 +23,11 @@ public class Calculator implements Calculatable {
 
     private static long getSum(String[] numbers, int i, String number, long sum) {
         if (!number.isEmpty()) {
-            int num = Integer.parseInt(number.trim());
+            String trimmed = number.trim();
+            if (trimmed.length() >= 20) {
+                throw new IllegalArgumentException();
+            }
+            long num = Long.parseLong(trimmed);
             if (num >= 0) {
                 sum += num;
             } else {
