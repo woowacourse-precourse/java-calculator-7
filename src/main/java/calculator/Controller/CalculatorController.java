@@ -15,14 +15,18 @@ public class CalculatorController {
 
     public void run(){
 
-        String userInput = InputView.userInput();
+        while(true){
+            String userInput = InputView.userInput();
 
-        boolean isValid = inputValidator.isValidInput(userInput);
+            boolean isValid = inputValidator.isValidInput(userInput);
 
-        ParsedInputDTO parsedInputDTO = calculatorModel.parseInput(userInput);
+            ParsedInputDTO parsedInputDTO = calculatorModel.parseInput(userInput);
 
-        System.out.println(parsedInputDTO.getNumbers());
-        System.out.println(parsedInputDTO.getSeparators());
+            int result = calculatorModel.addNumbers(parsedInputDTO.getNumbers());
+
+            System.out.println(result);
+        }
+
 
     }
 }

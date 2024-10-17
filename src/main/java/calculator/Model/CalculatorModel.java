@@ -50,5 +50,11 @@ public class CalculatorModel {
         return new ParsedInputDTO(separators, numbers);
     }
 
+    public int addNumbers(ArrayList<Integer> numbers){
+        int sum = 0;
+        for(int num : numbers) sum += num;
+        return sum;
+    }
+
 
 }

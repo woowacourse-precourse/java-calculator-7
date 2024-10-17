@@ -26,13 +26,13 @@ public class InputValidator {
         return input.trim().isEmpty();
     }
 
-    private boolean isNumeric(String token){
+    private boolean isNumericOrNegative(String token){
         if(token == null || token.isEmpty()){
             return false;
         }
         try{
-            Integer.parseInt(token);
-            return true;
+            int intToken = Integer.parseInt(token);
+            return intToken >= 0;
         }catch(NumberFormatException e){
             return false;
         }
@@ -51,15 +51,9 @@ public class InputValidator {
 
         String[] numberTokens = input.split(divider);
 
-        System.out.println(divider);
-        System.out.println(input);
-        for(String i : numberTokens){
-            System.out.println(i);
-        };
-
         for(String token : numberTokens){
             token = token.trim();
-            if(!isNumeric(token)){
+            if(!isNumericOrNegative(token)){
                 return true;
             }
         }
