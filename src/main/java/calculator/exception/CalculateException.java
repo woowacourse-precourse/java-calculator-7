@@ -1,6 +1,6 @@
 package calculator.exception;
 
-import calculator.util.CalculatorValidation;
+import calculator.util.CalculateValidation;
 
 public class CalculateException {
 
@@ -9,7 +9,7 @@ public class CalculateException {
     }
 
     public static void catchNumberNotPositiveException(Integer number) {
-        if (CalculatorValidation.checkIsNumberPositive(number)) {
+        if (CalculateValidation.checkIsNumberPositive(number)) {
             throwException(ExceptionMessage.INPUT_IS_NOT_POSITIVE_EXCEPTION);
         }
     }
@@ -24,7 +24,7 @@ public class CalculateException {
     }
 
     public static void catchWrongNumberSeparator(String userInput) {
-        if (CalculatorValidation.checkNotContainAllSeparator(userInput)) {
+        if (CalculateValidation.checkNotContainAllSeparator(userInput)) {
             throwException(ExceptionMessage.INPUT_IS_WRONG_EXCEPTION);
         }
     }

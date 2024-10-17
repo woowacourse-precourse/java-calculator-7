@@ -1,6 +1,6 @@
 package calculator.util;
 
-public class CalculatorValidation {
+public class CalculateValidation {
 
     private static final Integer ZERO = 0;
 
