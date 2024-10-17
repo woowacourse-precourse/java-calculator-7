@@ -1,5 +1,6 @@
 package parser;
 
+import global.DefaultDelimiter;
 import global.DelimiterSyntaxIndex;
 
 public class Delimiter {
@@ -16,7 +17,8 @@ public class Delimiter {
     }
 
     public boolean validateHasDefaultOrCustomDelimiter(String input, String customDelimiter) {
-        return input.matches("[0-9,:" + customDelimiter + "]*");
+        String delimiters = DefaultDelimiter.COLON.getKey() + DefaultDelimiter.COMMA.getKey() + customDelimiter;
+        return input.matches("[0-9" + delimiters + "]*");
     }
 
     private boolean validateStartsWith(String input) {
