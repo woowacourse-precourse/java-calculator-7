@@ -1,8 +1,9 @@
 package calculator;
 
 import calculator.delimiter.Delimiter;
+import calculator.delimiter.Delimiters;
 
-import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,7 +11,10 @@ public class Application {
 
     public static void main(String[] args) {
 
-        List<Delimiter> delimiters = List.of(new Delimiter(","), new Delimiter(":"));
+        List<Delimiter> delimiterList = new LinkedList<>();
+        delimiterList.add(new Delimiter(","));
+        delimiterList.add(new Delimiter(":"));
+
         Calculator calculator = new Calculator();
         Scanner scanner = new Scanner(System.in);
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -29,12 +33,14 @@ public class Application {
             } else if (customDelimiter.matches(".*\\d.*")) {
                 throw new IllegalArgumentException("커스텀 구분자엔 숫자가 포함될 수 없습니다.");
             }
-            delimiters.add(new Delimiter(customDelimiter));
+            delimiterList.add(new Delimiter(customDelimiter));
             input = input.split("\\\\n")[1];
         }
 
-        String[] numberTokens = input.split(String.join("|", delimiters.stream().map(Delimiter::value).toList()));
-        int sum = calculator.sum(Arrays.stream(numberTokens).toList());
+        Delimiters delimiters = new Delimiters(delimiterList);
+
+        List<String> numberTokens = delimiters.split(input);
+        int sum = calculator.sum(numberTokens);
 
         System.out.print("결과 : " + sum);
     }
