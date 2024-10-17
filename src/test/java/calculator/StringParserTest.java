@@ -33,6 +33,14 @@ class StringParserTest {
     }
 
     @Test
+    void 잘못된_커스텀_구분자_입력시_예외_발생() {
+        String input = "//;1;2;3";
+        assertThrows(IllegalArgumentException.class, () -> {
+            stringParser.extractCustomSeparator(input);
+        });
+    }
+
+    @Test
     void 혼합_구분자_입력시_올바른_숫자_반환() {
         List<Integer> result = stringParser.extractNumbers("//;\n1,2:3;4");
         assertEquals(Arrays.asList(1, 2, 3, 4), result);
@@ -137,13 +145,5 @@ class StringParserTest {
         String input = "1,2,3";
         String result = stringParser.removeCustomSeparatorDefinition(input);
         assertEquals(input, result);
-    }
-
-    @Test
-    void 잘못된_커스텀_구분자_정의_제거시_예외_발생() {
-        String input = "//;1;2;3";
-        assertThrows(IllegalArgumentException.class, () -> {
-            stringParser.removeCustomSeparatorDefinition(input);
-        });
     }
 }
