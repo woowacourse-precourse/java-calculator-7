@@ -50,8 +50,13 @@ public class CalculateService {
 
         int sum = 0;
         for(String num : number) {
-            int part = Integer.parseInt(num);
-            if (part < 0) {
+            int part;
+            try {
+                part = Integer.parseInt(num);
+                if (part < 0) {
+                    throw new IllegalArgumentException();
+                }
+            } catch (NumberFormatException e) {
                 throw new IllegalArgumentException();
             }
             sum += part;
