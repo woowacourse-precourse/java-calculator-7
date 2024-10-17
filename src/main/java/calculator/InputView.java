@@ -1,6 +1,5 @@
 package calculator;
 
-import java.util.Arrays;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Console;
@@ -13,8 +12,6 @@ public class InputView {
     }
 
     public List<Integer> readNumbers() {
-        Command command = readCommand();
-        String splitter = String.format("[%s,:]", command.header());
-        return Arrays.stream(command.content().split(splitter)).mapToInt(Integer::parseInt).boxed().toList();
+        return readCommand().extractNumbers();
     }
 }

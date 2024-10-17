@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,5 +20,10 @@ public record Command(
             content = matcher.replaceAll("");
         }
         return new Command(header, content);
+    }
+
+    public List<Integer> extractNumbers() {
+        String splitter = String.format("[%s,:]", header);
+        return Arrays.stream(content.split(splitter)).mapToInt(Integer::parseInt).boxed().toList();
     }
 }
