@@ -11,7 +11,13 @@ public class StringCalculator {
     void run() {
         printInputMsg();
         String input = Console.readLine();
-        checkCustomSeparator(input);
+        if (hasCustomPart(input)) {
+            if (validateCustomSeparator(input)) {
+                addCustomSeparator(input.charAt(2));
+            } else {
+                throw new IllegalArgumentException("커스텀 구분자 에러");
+            }
+        }
 
         String str = input;
         if (hasCustomSeparator) {
@@ -36,6 +42,18 @@ public class StringCalculator {
         }
     }
 
+    boolean hasCustomPart(String input) {
+        if (input.startsWith("//")) {
+            return input.contains("\\n");
+        }
+        return false;
+    }
+
+    void addCustomSeparator(char customSeparator) {
+        hasCustomSeparator = true;
+        separators += customSeparator;
+    }
+
     void validateString(String str) {
         for (int i = 0; i < str.length(); i++) {
             char c = str.charAt(i);
@@ -54,29 +72,12 @@ public class StringCalculator {
         return false;
     }
 
-    void checkCustomSeparator(String input) {
-        int flag = 0;
-        if (input.startsWith("//")) {
-            if (!input.contains("\\n")) {
-                flag = 1;
-            } else {
-                if (input.indexOf("\\n") != 3) {
-                    flag = 2;
-                } else if (isSeparatorNumeric(input.charAt(2))) {
-                    flag = 3;
-                } else {
-                    addCustomSeparator(input.charAt(2));
-                }
-            }
+    boolean validateCustomSeparator(String input) {
+        if (input.indexOf("\\n") != 3) {
+            return false;
+        } else {
+            return !isSeparatorNumeric(input.charAt(2));
         }
-        if (flag != 0) {
-            throw new IllegalArgumentException("커스텀 구분자 에러");
-        }
-    }
-
-    void addCustomSeparator(char customSeparator) {
-        hasCustomSeparator = true;
-        separators += customSeparator;
     }
 
     boolean isSeparatorNumeric(char separator) {
