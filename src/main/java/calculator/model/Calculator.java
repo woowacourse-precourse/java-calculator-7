@@ -1,6 +1,7 @@
 package calculator.model;
 
 import static calculator.model.Mode.DELI;
+import static calculator.model.Mode.NONE;
 import static calculator.model.Mode.NUM;
 import static calculator.model.Mode.WRONG_DELI;
 
@@ -57,6 +58,9 @@ public class Calculator {
     }
 
     public void calculate() {
+        if (inputValue.isEmpty()) {
+            return;
+        }
         String[] inputValues = inputValue.split("");
         for (int i=0; i<inputValues.length; i++) {
             calculateEach(i);
@@ -75,7 +79,7 @@ public class Calculator {
 
     private void calculateNumber(String value) {
         validateWrongDelimiter();
-        if (mode == DELI) {
+        if (mode == DELI || mode == NONE) {
             validatePositiveNumber(value);
             inputDelimiter.initialize();
         }

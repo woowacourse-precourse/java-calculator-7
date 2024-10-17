@@ -1,6 +1,5 @@
 package calculator.model;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,6 +25,20 @@ public class RegDelimiter {
         return new ArrayList<>(Arrays.asList(",", ":"));
     }
 
+    private void updateDelimiters(String customDeli) {
+        this.delimiters.add(customDeli);
+    }
+
+    private void updateCustomDeliEndIdx(int idx) {
+        this.customDeliEndIdx = idx;
+    }
+
+    public void findCustomDelimiter(String value) {
+        if (includesCustomDelimiter(value)) {
+            addCustomDelimiter(value);
+        }
+    }
+
     public boolean includesCustomDelimiter(String value) {
         if (value.length() >= 2) {
             if (value.charAt(0) == '/' && value.charAt(1) == '/') {
@@ -35,7 +48,7 @@ public class RegDelimiter {
         return false;
     }
 
-    public void findCustomDelimiter(String value) {
+    public void addCustomDelimiter(String value) {
         String customDeli = "";
         int valueLength = value.length();
         int customDeliEndIdx = -1;
@@ -51,7 +64,7 @@ public class RegDelimiter {
         validateIfCustomDeliEnds(customDeliEndIdx);
         validateCustomDelimiter(customDeli);
 
-        addCustomDelimiter(customDeli);
+        updateDelimiters(customDeli);
         updateCustomDeliEndIdx(customDeliEndIdx);
     }
 
@@ -80,13 +93,5 @@ public class RegDelimiter {
                 throw new IllegalArgumentException("잘못된 구분자입니다. '//', '\\n', '-', ',', ':' 또는 숫자를 제외한 문자를 입력해주세요.");
             }
         }
-    }
-
-    private void addCustomDelimiter(String customDeli) {
-        this.delimiters.add(customDeli);
-    }
-
-    private void updateCustomDeliEndIdx(int idx) {
-        this.customDeliEndIdx = idx;
     }
 }
