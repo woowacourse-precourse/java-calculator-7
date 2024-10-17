@@ -32,5 +32,22 @@ public class Application {
 
         String regex = createSepRegex(",:" + customSeparator);
         String[] numbers = input.split(regex);
+
+        int sum = 0;
+        for (String number : numbers) {
+            try {
+                int num = number.isEmpty() ? 0 : Integer.parseInt(number);
+
+                if (num < 0) {
+                    throw new IllegalArgumentException("음수는 입력 불가능");
+                }
+
+                sum += num;
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("잘못된 문자열 형식 - input: " + input);
+            }
+        }
+
+        System.out.println("결과 : " + sum);
     }
 }
