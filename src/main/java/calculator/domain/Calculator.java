@@ -27,7 +27,7 @@ public class Calculator {
 
     private List<String> getCustomDelimiters(String input) {
         List<String> delimiters = new ArrayList<>();
-        Matcher matcher = Pattern.compile("//(.)\\n").matcher(input);
+        Matcher matcher = Pattern.compile("//(.)\\\\n").matcher(input);
 
         while (matcher.find()) {
             String delimiter = matcher.group(1);
@@ -38,9 +38,9 @@ public class Calculator {
     }
 
     private String removeCustomDelimiterPart(String input, int delimiterCount) {
-        if (delimiterCount > 0) {
-            int lastDelimiterIndex = input.lastIndexOf("\n");
-            return input.substring(lastDelimiterIndex + 1);
+        if (delimiterCount > 2) {
+            int lastDelimiterIndex = input.lastIndexOf("\\n");
+            return input.substring(lastDelimiterIndex + 2);
         }
         return input;
     }
