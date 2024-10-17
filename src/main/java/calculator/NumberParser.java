@@ -21,6 +21,9 @@ public class NumberParser {
     }
 
     public Numbers parse(String value) {
+        if (value.isEmpty() || value.isBlank()) {
+            return Numbers.empty();
+        }
         if (delimiter.hasCustomDelimiter()) {
             value = extractNumberSection(value);
         }
