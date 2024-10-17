@@ -5,11 +5,12 @@ public class CustomDelimiter {
 		String defaultDelimiter = ",:";
 		int beginIndex = input.indexOf("//");
 		int endIndex = input.indexOf("\\n");
+		int errIndex = input.indexOf("///");
 
 		if (beginIndex == -1) {
 			return defaultDelimiter;
 		}
-		if (endIndex == -1) {
+		if (beginIndex != 0 || endIndex == -1 || errIndex == 0) { // 커스텀 구분자를 위한 포맷이 지켜지지 않았을 때
 			throw new IllegalArgumentException("Invalid input");
 		}
 		return input.substring(beginIndex + 2, endIndex);
