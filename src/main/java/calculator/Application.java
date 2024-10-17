@@ -18,5 +18,6 @@ public class Application {
 
         ArrayList<String> nums = splitNumbers.splitNums(str, custom);
         // 잘못된 문자열인지 오류 탐색 or 합 출력
+
     }
 }

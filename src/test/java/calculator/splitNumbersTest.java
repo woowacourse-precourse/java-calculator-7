@@ -47,4 +47,12 @@ class SplitNumbersTest {
         ArrayList<String> expected = new ArrayList<>(Arrays.asList("1", "2", "3"));
         assertEquals(expected, splitNumbers.splitNums(input, custom));
     }
+
+    @Test
+    void testSplitNumsIsNone() {
+        String input = "";
+        String custom = "";
+        ArrayList<String> expected = new ArrayList<>(Arrays.asList(""));
+        assertEquals(expected, splitNumbers.splitNums(input, custom));
+    }
 }
