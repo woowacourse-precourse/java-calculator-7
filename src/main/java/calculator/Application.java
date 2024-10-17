@@ -2,6 +2,9 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Application {
 
     public static Boolean CustomDiscrimination(String input){
@@ -13,11 +16,22 @@ public class Application {
             throw new IllegalArgumentException();
     }
 
+    public static String CustomExtraction(String customInput){
+        String extraction = customInput.substring(customInput.indexOf("//") + 2, customInput.indexOf("\\n"));
+        if (extraction.length() > 1 || extraction.matches("\\d+"))
+            throw new IllegalArgumentException();
+        return extraction;
+    }
+
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String str = Console.readLine();
-        Boolean isCustom = CustomDiscrimination(str);
+        ArrayList<String> separate = new ArrayList<>(Arrays.asList(",", ":"));
+        if (CustomDiscrimination(str)){
+            separate.add(CustomExtraction(str));
+        }
+
+
     }
 }
-// //;\n1,2:3
