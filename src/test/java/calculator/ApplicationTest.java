@@ -62,7 +62,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀_구분자가_마침표만으로_이루어져_있을_경우_예외가_발생한다() {
+    void 커스텀_구분자가_마침표_하나만으로_이루어져_있을_경우_예외가_발생한다() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//.\\n1"))
                         .isInstanceOf(IllegalArgumentException.class)
@@ -70,11 +70,19 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀_구분자가_무리수_기호만으로_이루어져_있을_경우_예외가_발생한다() {
+    void 커스텀_구분자가_무리수_기호를_포함하고_있을_경우_예외가_발생한다() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//π\\n1"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+    @Test
+    void 커스텀_구분자가_빈_문자열만으로_이루어져_있을_경우_예외가_발생한다() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//\\n1"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
     }
 
     @Test
