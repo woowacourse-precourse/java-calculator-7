@@ -1,6 +1,8 @@
 package calculator.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class StringTokenizer implements Tokenizer {
@@ -13,12 +15,12 @@ public class StringTokenizer implements Tokenizer {
     }
 
     private void addDelimiter(String delimiter) {
-        if (delimiters.isEmpty()) {
-            delimiters.append(delimiter);
-        } else {
-            delimiters.append("|");
-            delimiters.append(delimiter);
+        if (isSpecialDelimiter(delimiter)) {
+            delimiters.append("\\");
         }
+
+        delimiters.append(delimiter);
+        delimiters.append("|");
     }
 
     @Override
@@ -29,7 +31,14 @@ public class StringTokenizer implements Tokenizer {
             string = addCustomDelimiter(string);
         }
 
-        return Arrays.stream(string.split(delimiters.toString())).toList();
+        java.util.StringTokenizer st = new java.util.StringTokenizer(string, delimiters.toString());
+        List<String> stringList = new ArrayList<>();
+
+        while(st.hasMoreTokens()) {
+            stringList.add(st.nextToken());
+        }
+
+        return stringList;
     }
 
     private String addCustomDelimiter(String input) {
@@ -41,5 +50,15 @@ public class StringTokenizer implements Tokenizer {
 
     private boolean customDelimiterContains(String input) {
         return input.startsWith("//");
+    }
+
+    private boolean isSpecialDelimiter(String string) {
+        if (string.equals("\"") || string.equals("\'") || string.equals("\\") || string.equals("(") ||
+                string.equals(")") || string.equals("[") || string.equals("]") || string.equals("}") ||
+                string.equals("{") || string.equals("?") || string.equals("*") || string.equals("|")) {
+            return true;
+        }
+
+        return false;
     }
 }
