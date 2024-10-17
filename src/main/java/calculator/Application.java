@@ -10,8 +10,32 @@ public class Application {
         // TODO: 프로그램 구현
         String input = Console.readLine();
         // 함수 통합, 프로그램 구현
-        
+        if (input.isEmpty()){
+            System.out.println("0");
+        }else if(input.matches("^[0-9]*$")){
+            System.out.println(Integer.parseInt(input));
+        }else{
+            int sum = 0;
+            if (validateCustomSep(input)){
+                String[] custom = extractCustomSepAndInputString(input);
 
+                if(startAndEndWithNumber(custom[1]) && !containsInvalidCharacters(custom[1], custom[0])){
+                    throw new IllegalArgumentException("올바른 입력이 아닙니다. 입력값 : "+custom[1]);
+                }else{
+                    sum = calculate(custom[1], custom[0]);
+                }
+
+            }else{  //구분자 미사용
+                System.out.println("gkgk");
+                if(startAndEndWithNumber(input) && !containsInvalidCharacters(input)){
+                    throw new IllegalArgumentException("올바른 입력이 아닙니다. 입력값 : "+input);
+                }else{
+                    System.out.println("gkgk");
+                    sum = calculate(input);
+                }
+            }
+            System.out.println(sum);
+        }
     }
     // 올바른 입력형태 (ex. 11:22,33)
     // 커스텀 구분자 입력 가능
