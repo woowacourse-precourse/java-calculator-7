@@ -78,9 +78,11 @@ class StringParserTest {
     }
 
     @Test
-    void 중복된_구분자_입력시_올바른_숫자_반환() {
-        List<Integer> result = stringParser.extractNumbers("1,,2,:3");
-        assertEquals(Arrays.asList(1, 2, 3), result);
+    void 중복된_구분자_입력시_예외_발생() {
+        assertThrows(IllegalArgumentException.class, () -> {
+                    stringParser.extractNumbers("1,,2,:3");
+                }
+        );
     }
 
     @Test
