@@ -3,7 +3,7 @@ package calculator;
 import calculator.delimiter.CustomDelimiterService;
 import calculator.delimiter.Delimiter;
 import calculator.delimiter.Delimiters;
-import calculator.util.IntegerUtils;
+import calculator.util.integer.IntegerUtils;
 
 import java.util.LinkedList;
 import java.util.List;
