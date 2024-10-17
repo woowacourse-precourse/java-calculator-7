@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface Delimiter {
 
-    List<String> extractString(String input);
+    List<String> extractString(String rawInput);
 
-    boolean applicable(String input);
+    boolean applicable(String rawInput);
 
 }

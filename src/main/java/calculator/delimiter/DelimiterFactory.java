@@ -11,17 +11,17 @@ public class DelimiterFactory {
 
     private final DefaultDelimiter defaultDelimiter = new DefaultDelimiter();
 
-    public Delimiter getDelimiter(String input) {
+    public Delimiter getDelimiter(String rawInput) {
         // 커스텀 먼저 반드시 확인되어야 한다.
-        if (customDelimiter.applicable(input)) {
+        if (customDelimiter.applicable(rawInput)) {
             return customDelimiter;
         }
 
-        if (regularDelimiter.applicable(input)) {
+        if (regularDelimiter.applicable(rawInput)) {
             return regularDelimiter;
         }
 
-        if (defaultDelimiter.applicable(input)) {
+        if (defaultDelimiter.applicable(rawInput)) {
             return defaultDelimiter;
         }
 
