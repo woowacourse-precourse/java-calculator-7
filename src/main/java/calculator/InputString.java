@@ -1,23 +1,26 @@
 package calculator;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class InputString {
-    private int sum;
+    private List<Integer> numbers;
 
     public InputString(String input) {
         if(input == null || input.isEmpty()) {
-            sum = 0;
+            this.numbers = List.of();
             return;
         }
         String[] numbers = input.split("[,:]");
-        sum = Arrays.stream(numbers)
-                .mapToInt(Integer::parseInt)
-                .sum();
+        this.numbers = Arrays.stream(numbers)
+                .map(Integer::valueOf)
+                .toList();
     }
 
     public int getSum() {
-        return sum;
+        return numbers.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
 }
