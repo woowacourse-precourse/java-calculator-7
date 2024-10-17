@@ -12,6 +12,7 @@ public class Application {
 
 
 class Machine {
+    static final String baseRegex = "[,;]";
     static final String metaChars = ".^$*+?()[]{}|\\";
 
     String custom;
@@ -59,5 +60,19 @@ class Machine {
             this.custom = escapeMetaChars(matcher.group(1));
             this.string = string.substring(matcher.end());
         }
+    }
+
+    private String[] splitString(String string) {
+        String regex = baseRegex;
+
+        if (string.isEmpty()) {
+            return new String[0];
+        }
+
+        if (this.custom != null) {
+            regex = regex + "|" + this.custom;
+        }
+
+        return string.split(regex);
     }
 }
