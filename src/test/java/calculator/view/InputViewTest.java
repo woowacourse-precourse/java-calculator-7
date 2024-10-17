@@ -15,11 +15,10 @@ public class InputViewTest {
     @BeforeEach
     public void setUp() {
         inputView = new InputView();
-        StringCalculator stringCalculator = new StringCalculator();
     }
 
-    InputStream createStringInput(String input) {
-        return new ByteArrayInputStream(input.getBytes());
+    InputStream createStringInput(String inputString) {
+        return new ByteArrayInputStream(inputString.getBytes());
     }
 
     @Test
@@ -30,16 +29,5 @@ public class InputViewTest {
 
         // when, then
         assertThat(inputView.inputString()).isEqualTo("1:2,3");
-    }
-
-    @Test
-    @DisplayName("허용된 문자열 양식 검증 테스트")
-    public void InputStringFromTest() {
-        // given
-        String input = "1:2,3";
-        String allowedFrom = stringClaculator.ALLOWED_FORM;
-
-        // when, then
-        assertThat(input.matches(allowedFrom)).isTrue();
     }
 }
