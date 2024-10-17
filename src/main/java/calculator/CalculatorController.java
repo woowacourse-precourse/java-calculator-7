@@ -17,7 +17,7 @@ public class CalculatorController {
         outputView.printStartMessage();
         String readInput = inputView.readInput();
 
-        String customDelimiter = extractService.extractCustomDelimiter(readInput);
+        String customDelimiter = extractService.getCustomDelimiter(readInput);
         String positiveString = extractService.extractPositiveString(readInput, customDelimiter);
 
         String[] strings = calculatorService.splitByPositiveString(positiveString, customDelimiter);
