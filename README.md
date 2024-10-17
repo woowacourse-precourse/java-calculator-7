@@ -71,8 +71,8 @@
 </br>예: "1,-2,3" → IllegalArgumentException 발생시켜 프로그램 종료
 
 6. 공백 및 잘못된 입력에 대한 예외 처리:
-> 쉼표 또는 콜론 사이에 공백이나 잘못된 값이 있을 경우
-예: "1,,3" → IllegalArgumentException 발생시켜 프로그램 종료
+> 구분자 사이에 공백이나 잘못된 값이 있을 경우
+</br> 예: "1,,3" → IllegalArgumentException 발생시켜 프로그램 종료
 
 7. 숫자 합산 기능:
 > 구분자를 제외한 숫자들을 합산해서 반환
