@@ -5,12 +5,15 @@ import java.util.Collections;
 import java.util.List;
 
 public class Delimiters {
+    private static final char DEFAULT_COMMA_DELIMITER = ',';
+    private static final char DEFAULT_COLON_DELIMITER = ':';
+
     private final ArrayList<Character> delimiters;
 
     public Delimiters() {
         this.delimiters = new ArrayList<>();
-        delimiters.add(',');
-        delimiters.add(':');
+        delimiters.add(DEFAULT_COMMA_DELIMITER);
+        delimiters.add(DEFAULT_COLON_DELIMITER);
     }
 
     public List<Character> getDelimiters() {
