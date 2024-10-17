@@ -27,6 +27,8 @@ public class Application {
             // `커스텀 구분자` 가 있다면 구분자로 등록한다.
             // 이때, `커스텀 구분자`는 문자열 앞부분의 `//`와 `\n` 사이에 위치하는 `특정 문자` 를 추출해서 등록한다.
             separatorBuilder.append(input.charAt(2));
+            input = input.replace("\\n", "");
+            input = input.substring(3);
         }
         separatorBuilder.append("]");
     }
