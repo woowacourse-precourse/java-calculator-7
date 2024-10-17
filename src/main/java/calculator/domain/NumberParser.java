@@ -1,59 +1,60 @@
 package calculator.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class NumberParser {
     private final Divider divider;
-    private final static String SPLIT_CRITERIA = "";
+    private static String DIVIDER_SPLIT_FORMAT = "%s|%s|%s";
 
     public NumberParser(Divider divider) {
         this.divider = divider;
     }
 
     public void parse(CalculatedValue calculatedValue) {
-        List<Integer> result = new ArrayList<>();
-
-        extractNumberValue(calculatedValue, result);
-        calculatedValue.setNumberValueToken(result);
+        List<Integer> numberValue = extractNumberValue(calculatedValue);
+        calculatedValue.setNumberValueToken(numberValue);
     }
 
-    private void extractNumberValue(CalculatedValue calculatedValue, List<Integer> result) {
-        String[] splitWord = calculatedValue.getValue().split(SPLIT_CRITERIA);
-        StringBuilder temporaryNumber = new StringBuilder();
+    private List<Integer> extractNumberValue(CalculatedValue calculatedValue) {
+        List<Integer> result = new ArrayList<>();
+        String dividers = formatDividerSplit();
+        String[] values = calculatedValue.getValue().split(dividers);
 
-        for (String value : splitWord) {
-            if (handleCorrectValue(value, temporaryNumber, result)) {
-                continue;
-            }
+        for (String value : values) {
+            int numberValue = translateStringToInteger(value);
+            validateNumberValueNegative(numberValue);
+
+            result.add(numberValue);
+        }
+        return result;
+    }
+
+    private int translateStringToInteger(String value){
+        try{
+            return Integer.parseInt(value);
+        }catch (IllegalArgumentException e){
+            validateCustomDividerMinusAndNumberValueNegative(value);
             throw new IllegalArgumentException("등록되지 않는 구분자가 있습니다." + value);
         }
-        saveTemporaryNumberToList(temporaryNumber, result);
     }
 
-    private boolean handleCorrectValue(String value, StringBuilder temporaryNumber, List<Integer> result) {
-        if (isDivider(value)) {
-            saveTemporaryNumberToList(temporaryNumber, result);
-            temporaryNumber.setLength(0);
-            return true;
-        } else if (isNumber(value)) {
-            temporaryNumber.append(value);
-            return true;
+    private void validateCustomDividerMinusAndNumberValueNegative(String value){
+        if("-".equals(divider.getCustomDivider()) && value.isEmpty()){
+            throw new IllegalArgumentException("음수는 계산이 불가능합니다.");
         }
-        return false;
     }
 
-    private void saveTemporaryNumberToList(StringBuilder temporaryNumber, List<Integer> result) {
-        int number = Integer.parseInt(temporaryNumber.toString());
-        result.add(number);
+    private void validateNumberValueNegative(int numberValue){
+        if(numberValue < 0){
+            throw new IllegalArgumentException("음수는 계산이 불가능합니다.");
+        }
     }
 
-    private boolean isDivider(String value) {
-        return value.equals(divider.getComma()) || value.equals(divider.getClon()) || value.equals(divider.getCustomDivider());
-    }
-
-    private boolean isNumber(String value) {
-        return value.matches("^[0-9]+$");
+    private String formatDividerSplit(){
+        return String.format(DIVIDER_SPLIT_FORMAT, divider.getClon(),divider.getComma(),divider.getCustomDivider());
     }
 
 }
