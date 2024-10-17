@@ -19,7 +19,7 @@ public class OperandExtractor {
     public List<Operand> extractOperands(String message) {
         List<String> operandCandidates = List.of(message.split(makeSplitRegex()));
         return operandCandidates.stream()
-                .map(candidate -> Operand.from(Integer.parseInt(candidate)))
+                .map(Operand::from)
                 .toList();
     }
 
