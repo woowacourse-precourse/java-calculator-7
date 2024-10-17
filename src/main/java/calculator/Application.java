@@ -1,12 +1,15 @@
 package calculator;
 
-import calculator.cli.InputView;
+import calculator.cli.View;
+import calculator.domain.Calculator;
 import calculator.domain.Separator;
 
 public class Application {
     public static void main(String[] args) {
-        InputView inputView = new InputView();
-        Separator separator = new Separator(inputView.inputMessage());
+        View view = new View();
+        Separator separator = new Separator(view.inputMessage());
+        Calculator calculator = new Calculator();
 
+        view.outputMessage(calculator.sum(separator.cut()));
     }
 }
