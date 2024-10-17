@@ -1,7 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.*;
+import java.util.Arrays;
 
 record StringSliceResult(String input, String delimiters) {
 
