@@ -78,4 +78,28 @@ public class InputStringTest {
         assertThat(result).isEqualTo(6);
     }
 
+    @Test
+    void 커스텀_구분자_여러_숫자() {
+        // given
+        var inputString = new InputString("//;\n1;2;3");
+
+        // when
+        var result = inputString.getSum();
+
+        // then
+        assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    void 커스텀_구분자_단일_숫자() {
+        //given
+        var inputString = new InputString("//;\n1");
+
+        //when
+        var result = inputString.getSum();
+
+        //then
+        assertThat(result).isEqualTo(1);
+    }
+
 }
