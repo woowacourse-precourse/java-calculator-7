@@ -4,6 +4,6 @@
 
 - [x] calculation module
 - [x] parser module
-    - [ ] custom delimiter
+    - [x] custom delimiter
     - [ ] throw error on invalid input
 - [ ] command line interface
