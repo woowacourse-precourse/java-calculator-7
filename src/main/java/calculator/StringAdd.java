@@ -20,10 +20,7 @@ public class StringAdd {
         String delimiters = delimiterParser.parseDelimiter(input);
         String numbers = delimiterParser.extractNumbers(input);
         List<Integer> numberList = numberParser.parseNumbers(numbers, delimiters);
-        System.out.println(delimiters);
-        System.out.println(numbers);
-        System.out.println(numberList);
 
-        return 0;
+        return numberList.stream().mapToInt(Integer::intValue).sum();
     }
 }

@@ -15,6 +15,7 @@ public class Calculator {
         String inputStr = Console.readLine();
 
         int result = stringAdd.add(inputStr);
+        System.out.println(result);
     }
 
 }
