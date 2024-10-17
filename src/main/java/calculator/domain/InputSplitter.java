@@ -14,14 +14,10 @@ public class InputSplitter {
             return new String[]{"0"};
         }
         if (containsCustomDelimeter(input)) {
-            System.out.println("커스텀 구분자 감지");
             String customDelimeter = getCustomDelimeter(input);
-            System.out.println("customDelimeter = " + customDelimeter);
             input = input.substring(START_INDEX_EXCEPT_REGEX);
-            System.out.println("input = " + input);
             return input.split(customDelimeter);
         }
-        System.out.println("기본 구분자 감지");
         return validateCommaAndColonDelimiter(input);
     }
 
