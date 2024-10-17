@@ -42,9 +42,25 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 단일_숫자_문자열_입력() {
+        assertSimpleTest(() -> {
+            run("123");
+            assertThat(output()).contains("결과 : 123");
+        });
+    }
+
+    @Test
     void 예외_테스트_음수() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_0() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("0,1,2"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
@@ -58,9 +74,25 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트_커스텀_양식() {
+    void 예외_테스트_커스텀_위치() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1;2,3//;\\n"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_커스텀_일부() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("/;\\n1;2;3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_커스텀_없이_다른_구분자() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1.2.3"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
