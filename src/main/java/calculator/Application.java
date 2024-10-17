@@ -54,8 +54,14 @@ public class Application {
         }
         
         // 문자열의 맨 앞과 맨 뒷 부분이 숫자인지 확인
-        if (!Character.isDigit(input.charAt(0)) || !Character.isDigit(input.charAt(input.length() - 1))) {
-            throw new IllegalArgumentException("입력 문자열의 맨 앞과 맨 뒷 부분은 숫자여야 합니다.");
+        if (extendedMode) {
+            if (input.length() <= 5 || !Character.isDigit(input.charAt(5)) || !Character.isDigit(input.charAt(input.length() - 1))) {
+                throw new IllegalArgumentException("Extended 모드에서는 5번째 자리와 맨 끝의 문자가 숫자여야 합니다.");
+            }
+        } else {
+            if (!Character.isDigit(input.charAt(0)) || !Character.isDigit(input.charAt(input.length() - 1))) {
+                throw new IllegalArgumentException("입력 문자열의 맨 앞과 맨 뒷 부분은 숫자여야 합니다.");
+            }
         }
         
         // 올바른 문자열을 기준으로 숫자의 합을 계산
