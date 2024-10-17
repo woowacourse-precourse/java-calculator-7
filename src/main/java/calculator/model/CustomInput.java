@@ -1,13 +1,12 @@
 package calculator.model;
 
+import calculator.common.CustomDelimiter;
+
 import java.util.Arrays;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 public class CustomInput extends UserInput {
-    private static final String CUSTOM_START_FORMAT = "//";
-    private static final String CUSTOM_END_FORMAT = "\\n";
-
     public CustomInput(String userInput) {
         super(userInput);
     }
@@ -16,8 +15,8 @@ public class CustomInput extends UserInput {
     protected void parseInputForCalculate(String userInput) {
         checkCustomDelimFormat(userInput);
 
-        int delimiterStartIdx = userInput.indexOf(CUSTOM_START_FORMAT) + 2;
-        int delimiterEndIdx = userInput.indexOf(CUSTOM_END_FORMAT);
+        int delimiterStartIdx = userInput.indexOf(CustomDelimiter.START_FORMAT.getValue()) + 2;
+        int delimiterEndIdx = userInput.indexOf(CustomDelimiter.END_FORMAT.getValue());
 
         extractCustomDelimiterAndAdd(userInput, delimiterStartIdx, delimiterEndIdx);
 
