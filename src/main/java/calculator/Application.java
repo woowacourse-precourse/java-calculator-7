@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.common.exception.ExceptionFactory;
 import calculator.delimiter.domain.Delimiters;
 import calculator.delimiter.factory.DelimiterFactory;
 import calculator.delimiter.service.CustomDelimiterService;
@@ -8,7 +9,7 @@ import calculator.util.io.IOConsole;
 
 import java.util.List;
 
-import static calculator.common.exception.Messages.NOT_DELIMITER;
+import static calculator.common.exception.ExceptionType.NOT_DELIMITER;
 
 public class Application {
 
@@ -28,7 +29,7 @@ public class Application {
             int sum = IntegerUtils.sum(numbers);
             IOConsole.print("결과 : " + sum);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(NOT_DELIMITER);
+            throw ExceptionFactory.createException(NOT_DELIMITER);
         }
     }
 

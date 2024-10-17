@@ -1,10 +1,11 @@
 package calculator.delimiter.service;
 
+import calculator.common.exception.ExceptionFactory;
 import calculator.delimiter.domain.Delimiter;
 
 import java.util.Optional;
 
-import static calculator.common.exception.Messages.*;
+import static calculator.common.exception.ExceptionType.*;
 
 public class CustomDelimiterService {
 
@@ -38,7 +39,7 @@ public class CustomDelimiterService {
 
     private void validateFormat(String value) {
         if (!value.startsWith(CUSTOM_DELIMITER_PREFIX)) {
-            throw new IllegalArgumentException(CUSTOM_DELIMITER_FORMAT_WRONG);
+            throw ExceptionFactory.createException(CUSTOM_DELIMITER_FORMAT_WRONG);
         }
     }
 
@@ -50,19 +51,19 @@ public class CustomDelimiterService {
 
     private void validateEmptyDelimiter(String customDelimiter) {
         if (customDelimiter.isEmpty()) {
-            throw new IllegalArgumentException(CUSTOM_DELIMITER_EMPTY);
+            throw ExceptionFactory.createException(CUSTOM_DELIMITER_EMPTY);
         }
     }
 
     private void validateEscapeCharacter(String customDelimiter) {
         if (customDelimiter.contains(ESCAPE)) {
-            throw new IllegalArgumentException(CUSTOM_DELIMITER_CONTAINS_ESCAPE);
+            throw ExceptionFactory.createException(CUSTOM_DELIMITER_CONTAINS_ESCAPE);
         }
     }
 
     private void validateForDigits(String customDelimiter) {
         if (customDelimiter.matches(NUMBER_REGEX)) {
-            throw new IllegalArgumentException(CUSTOM_DELIMITER_CONTAINS_NUMBER);
+            throw ExceptionFactory.createException(CUSTOM_DELIMITER_CONTAINS_NUMBER);
         }
     }
 }

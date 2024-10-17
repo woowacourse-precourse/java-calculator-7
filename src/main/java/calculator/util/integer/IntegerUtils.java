@@ -1,8 +1,10 @@
 package calculator.util.integer;
 
+import calculator.common.exception.ExceptionFactory;
+
 import java.util.List;
 
-import static calculator.common.exception.Messages.NEGATIVE_NUMBER;
+import static calculator.common.exception.ExceptionType.NEGATIVE_NUMBER;
 
 public class IntegerUtils {
 
@@ -20,7 +22,7 @@ public class IntegerUtils {
 
     private static void validatePositiveInteger(int number) {
         if (number < 0) {
-            throw new IllegalArgumentException(NEGATIVE_NUMBER);
+            throw ExceptionFactory.createException(NEGATIVE_NUMBER);
         }
     }
 }
