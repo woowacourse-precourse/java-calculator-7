@@ -27,8 +27,8 @@ public class StringCalculator {
             inputString = inputString.substring(5);
         }
 
-        //Todo: 잘못된 문자열을 입력받았을 경우, 예외처리
-
+        //잘못된 문자열을 입력받았을 경우, 예외처리
+        checkString();
     }
 
     //덧셈 결과를 출력
@@ -71,7 +71,12 @@ public class StringCalculator {
     }
 
     private void checkString(){
-
+        // 문자열의 모든 문자가 숫자 혹은 구분자인지 확인한 후, 아니라면 예외처리
+        for(int i=0;i<inputString.length();i++){
+            if(!isNum(inputString.charAt(i)) && !isSep(inputString.charAt(i))){
+                throw new IllegalArgumentException("숫자, 구분자 이외 다른 문자가 있습니다.");
+            }
+        }
     }
 
     // 문자가 숫자에 해당하는지 판별
@@ -88,6 +93,25 @@ public class StringCalculator {
         }
 
         return ret;
+    }
+
+
+    // 문자가 구분자인지 확인
+    private boolean isSep(char c){
+
+        if(c==','){
+            return true;
+        }
+
+        if(c==';'){
+            return true;
+        }
+
+        if(customSeparator!=null && c==customSeparator){
+            return true;
+        }
+
+        return false;
     }
 
 }
