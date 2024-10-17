@@ -44,12 +44,14 @@ class DelimiterParserTest {
         String delimiter2 = "\\n";
         DelimiterParser delimiterParser = new DelimiterParser(delimiter1,delimiter2);
         String input = "//;\\n10;20;30";
-        //when
+
         String result = delimiterParser.splitByDelimiter(input);
         String numberPart = result.substring(1);
         String customDelimiter = result.substring(0, 1);
         String[] split = numberPart.split(customDelimiter);
         String splitString = String.join(",", split);
+        //when
+
         //then
         Assertions.assertEquals("10,20,30", splitString);
     }
@@ -65,5 +67,15 @@ class DelimiterParserTest {
         //then
         Assertions.assertEquals(3, list.size());
         Assertions.assertEquals(Integer.valueOf(1), list.getFirst());
+    }
+    @Test
+    void parseToIntList() {
+        //given
+        String delimiter = ",";
+        String input = "1,2,3";
+        //when
+        List<Integer> result = DelimiterParser.parseToIntList(input);
+        //then
+        Assertions.assertEquals(3, result.size());
     }
 }
