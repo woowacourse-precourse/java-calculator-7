@@ -34,7 +34,7 @@ class StringCalculatorControllerTest extends NsTest {
     @Test
     @DisplayName("커스텀 구분자가 있는 데이터 객체를 받아 커스텀 구분자 객체를 생성한다")
     void createCustomDelimiterInstance() {
-        InputData inputData = new InputData("//;\n1;2;3");
+        InputData inputData = new InputData("//;\\n1;2;3");
         assertThat(stringCalculatorController.createDelimiterPart(inputData))
                 .isInstanceOf(CustomDelimiter.class);
     }

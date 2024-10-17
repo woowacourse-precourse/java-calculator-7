@@ -28,10 +28,9 @@ public class InputData {
     }
 
     public boolean isDelimiter(){
-        Pattern delimiterPattern = Pattern.compile("^//(.*)\\n(.*)");
+        Pattern delimiterPattern = Pattern.compile("^//(.*)\\\\n(.*)");
         Matcher delimiterMatcher = delimiterPattern.matcher(input);
 
         return delimiterMatcher.matches();
     }
-
 }
