@@ -1,16 +1,11 @@
 package calculator.separator.domain;
 
-public class CustomSeparator {
+public class Separator {
     private final String customSeparator;
-    public CustomSeparator(String customSeparator) {
-        System.out.println("sep: "  + customSeparator);
+    public Separator(String customSeparator) {
         this.customSeparator = customSeparator;
     }
-    public String getCustomSeparator() {
+    public String getSeparator() {
         return customSeparator;
     }
-    public boolean isBlank() {
-        return customSeparator.isBlank();
-    }
-
 }
