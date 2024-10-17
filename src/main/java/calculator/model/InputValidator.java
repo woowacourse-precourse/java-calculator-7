@@ -6,7 +6,12 @@ import java.util.List;
 public class InputValidator {
 	List<String> delimiters = Arrays.asList(",", ":");
 
-	public void validateHasNumber(String input) {
+	public void validateInput(String input) {
+		validateHasNumber(input);
+		validateHasDelimiter(input);
+	}
+
+	private void validateHasNumber(String input) {
 		if (!hasNumber(input)) {
 			throw new IllegalArgumentException("입력값에 숫자가 포함되어 있지 않습니다.");
 		}
@@ -17,7 +22,7 @@ public class InputValidator {
 			.anyMatch(Character::isDigit);
 	}
 
-	public void validateHasDelimiter(String input) {
+	private void validateHasDelimiter(String input) {
 		if (!hasDelimiter(input)) {
 			throw new IllegalArgumentException("입력값에 구분자가 포함되어 있지 않습니다.");
 		}
