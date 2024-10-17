@@ -56,15 +56,20 @@ public class Calculator {
         result = 0;
     }
 
-    public void isPositiveNum(String s, String delimiter){
+    public int isPositiveNum(String s, String delimiter){
 
     }
+
 
     private void calculate(String[] strArr, String delimiter){
-
+        for (String s : strArr) {
+            if (s != null){
+                result += isPositiveNum(s, delimiter);
+            }
+        }
     }
 
-    public int printResult(){
+    public void printResult(){
 
     }
 
