@@ -10,5 +10,6 @@ public class CalculatorController {
 
     public void start() {
         outputView.printInputMessage();
+        String input = inputView.readLine();
     }
 }
