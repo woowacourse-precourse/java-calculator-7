@@ -10,38 +10,34 @@ public class Application {
 
         Input = Input.replace("\\n", "\n");
 
-        try {
-            int sum = 0;
-            String Separator = "[,:]";
 
-            if (Input.startsWith("//")) {
-                int SeparatorEnd = Input.indexOf("\n");
+        int sum = 0;
+        String Separator = "[,:]";
 
-                String CustomSeparator = Input.substring(2, SeparatorEnd);
-                Separator += "|" + CustomSeparator;
+        if (Input.startsWith("//")) {
+            int SeparatorEnd = Input.indexOf("\n");
 
-                Input = Input.substring(SeparatorEnd + 1);
-            }
+            String CustomSeparator = Input.substring(2, SeparatorEnd);
+            Separator += "|" + CustomSeparator;
 
-            String[] tokens = Input.split(Separator);
-
-            for (String token : tokens) {
-                if (token.isEmpty()) {
-                    token = "0";
-                }
-                int number = Integer.parseInt(token);
-
-                if (number < 0) {
-                    throw new IllegalArgumentException();
-                }
-
-                sum += number;
-            }
-            System.out.println("결과 : " + sum);
-        }
-        catch (IllegalArgumentException e) {
-            System.exit(1);
+            Input = Input.substring(SeparatorEnd + 1);
         }
 
+        String[] tokens = Input.split(Separator);
+
+        for (String token : tokens) {
+            if (token.isEmpty()) {
+                token = "0";
+            }
+            int number = Integer.parseInt(token);
+
+            if (number < 0) {
+                throw new IllegalArgumentException();
+            }
+
+            sum += number;
+        }
+        System.out.println("결과 : " + sum);
+
     }
-    }
+}
