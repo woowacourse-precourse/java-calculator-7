@@ -18,6 +18,11 @@ public class Application {
             return 0;
         }
         
+        // 2개 이상의 연속된 문자가 숫자가 아닐 경우 오류 발생
+        if (input.matches(".*[^0-9]{2,}.*")) {
+            throw new IllegalArgumentException("입력 문자열에 2개 이상의 연속된 숫자가 아닌 문자가 포함되어 있습니다.");
+        }
+        
         // 이후 로직 추가 예정
         return 0; // 기본 반환값
     }
