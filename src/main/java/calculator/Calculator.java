@@ -5,24 +5,28 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Calculator {
-    final static String cutomSeparatorStart = "//";
-    final static String cutomSeparatorEnd = "\\n";
-    final static String or = "|";
-    final static String numberRegex = "\\d+"; // s.matches(numberRegex)
-
     private String input;
     private String separatorRegex;
 
     Calculator(String input) {
-        this.input = input;
-        this.separatorRegex = ",|:";
+        this.input = input.trim();
+        this.separatorRegex = Regex.DEFAULT_SEPARATOR_REGEX.getValue();
     }
 
     public void setSeparatorRegex(String additionalSeparator) {
         if (additionalSeparator.isEmpty())
             return ;
 
-        this.separatorRegex = this.separatorRegex + or + additionalSeparator;
+        if (isSpecialRegex(additionalSeparator)) {
+            this.separatorRegex = Delimiter.SPECIAL.getValue()
+                    + additionalSeparator
+                    + Delimiter.OR.getValue()
+                    + this.separatorRegex;
+        } else {
+            this.separatorRegex = this.separatorRegex
+                    + Delimiter.OR.getValue()
+                    + additionalSeparator;
+        }
     }
 
     public void setInput(String input) {
@@ -31,7 +35,6 @@ public class Calculator {
 
     public Integer caculate() {
         List<String> strings = extract();
-        System.out.println(strings);
 
         List<Integer> numbers = stringToInteger(strings);
 
@@ -46,12 +49,16 @@ public class Calculator {
         if (input.isEmpty())
             return strings;
 
-        if (input.startsWith(cutomSeparatorStart)) {
-            if (input.contains(cutomSeparatorEnd)) {
-                String customDelim = input.substring(2, input.indexOf(cutomSeparatorEnd));
+        if (input.startsWith(Delimiter.CUSTOM_SEPARATOR_START.getValue())) {
+            if (input.contains(Delimiter.CUSTOM_SEPARATOR_END.getValue())) {
+                String customDelim = input.substring(
+                        2,
+                        input.indexOf(Delimiter.CUSTOM_SEPARATOR_END.getValue())
+                );
                 setSeparatorRegex(customDelim);
 
-                int startIdx = input.indexOf(cutomSeparatorEnd) + cutomSeparatorEnd.length();
+                int startIdx = input.indexOf(Delimiter.CUSTOM_SEPARATOR_END.getValue())
+                        + Delimiter.CUSTOM_SEPARATOR_END.getValue().length();
                 setInput(input.substring(startIdx));
             } else {
                 throw new IllegalArgumentException("\n지정 구분자는 //와 \\n 사이에 입력해주세요");
@@ -68,7 +75,7 @@ public class Calculator {
         List<Integer> numbers = strs.stream()
                 .filter(s -> !s.isEmpty() && !s.isBlank())
                 .map(s -> {
-                    if (!s.matches(numberRegex))
+                    if (!s.matches(Regex.NUMBER_REGEX.getValue()))
                         throw new IllegalArgumentException(s + " 는 허용되지 않는 문자입니다");
                     return Integer.parseInt(s);
                 })
@@ -84,5 +91,12 @@ public class Calculator {
                 .reduce(result, Integer::sum);
 
         return result;
+    }
+
+    private boolean isSpecialRegex(String str) {
+        if (str.matches(Regex.SPECIAL_CHARACTER_REGEX.getValue()))
+            return true;
+        else
+            return false;
     }
 }
