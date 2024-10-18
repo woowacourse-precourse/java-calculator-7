@@ -25,6 +25,7 @@
 - [ ] 잘못된 입력 시 예외를 처리한다.
 - [ ] 결과를 출력한다.
 - [x] 등록된 구분자인지 확인한다.
+- [ ] 구분자들을 조합하여 정규표현식을 생성한다.
 
 ## 추가 객체 도출
 추가 기능으로부터 객체를 도출한다.
@@ -41,6 +42,7 @@
 ## 객체 및 메서드
 - DelimiterParser
   - parse()
+  - buildDelimiterRegex()
 - Calculator
   - sumNumbers()
 - DelimiterManager
