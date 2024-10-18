@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.regex.Pattern;
+
 public class StringAdder {
     private final ConsoleIO consoleIO;
     private final InputValidator validator;
@@ -25,5 +27,13 @@ public class StringAdder {
         }
         return input;
     }
+
+    private String[] splitNumbers(String input, String delimiter) {
+        if (delimiter.equals(",|:")) {
+            return input.split(delimiter);
+        }
+        return input.split(Pattern.quote(delimiter));
+    }
+
 
 }
