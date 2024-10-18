@@ -29,10 +29,18 @@ public class NumberList {
         }
     }
 
+    public String[] removeDelimiter(String rawNumber, String customDelimiter) {
+        rawNumber = rawNumber.replace(":", ",");
+        if (customDelimiter != null) {
+            rawNumber = rawNumber.replace(customDelimiter, ",");
+        }
+        return rawNumber.split(",");
+    }
+
     public void makeNumberList(String rawNumber, String customDelimiter) {
-        StringTokenizer inputNumber = new StringTokenizer(rawNumber, ",:"+customDelimiter);
-        while (inputNumber.hasMoreTokens()) {
-            registerNumber(inputNumber.nextToken());
+        String[] inputNumber = removeDelimiter(rawNumber, customDelimiter);
+        for (String number: inputNumber) {
+            registerNumber(number);
         }
     }
 }
