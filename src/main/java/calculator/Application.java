@@ -41,6 +41,10 @@ public class Application {
 
         // 각 숫자에 대해 처리
         for (String number : numbers) {
+            // 음수가 포함되어 있으면 예외 발생
+            if (number.contains("-")) {
+                throw new IllegalArgumentException("음수 기능은 지원하지 않습니다.");
+            }
             // 문자열을 정수로 변환하고 합산
             sum += Integer.parseInt(number);
         }
