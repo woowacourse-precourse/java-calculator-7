@@ -15,7 +15,7 @@ public class InputViewTest {
         String input = "//;\\n1";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
 
-        String inputValue = InputView.scanString();
-        assertThat(inputValue).isEqualTo("//;\\n1");
+        String inputValue = InputView.input();
+        assertThat(inputValue).isEqualTo("//;\n1;2;3");
     }
 }

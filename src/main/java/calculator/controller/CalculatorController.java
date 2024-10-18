@@ -10,7 +10,7 @@ import calculator.view.OutputView;
 public class CalculatorController {
 
     public static void calculate(){
-        String userInput = InputView.scanString();
+        String userInput = InputView.input();
         ValueService.saveUserInput(userInput);
         if(ValueService.isEmpty()){
             OutputView.printResult(0);
