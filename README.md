@@ -50,6 +50,7 @@
 
  ```text
 1.DataParser class 가 기본 포멧과 커스텀 포멧을 모두 처리해 로직의 흐름을 한눈에 파악하기 어려움
+2. Validator 가 커스텀 포멧과 기본 포멧을 모두 검증
 ```
 
 - 변경사항
@@ -58,6 +59,13 @@
 - DataParser 를 CustomDataParser 와 DefaultDataParser 로 분리
 - 기존 DataParser 를 interface 로 변경
 - 입력받은 문자열에 대해 적절한 DataParser 를 실행시키는 ParseManager 생성
+- Parser 들은 정수 리스트를 반환하도록 변경
+
+- Data Dto 삭제
+
+- 기존 커스텀 포멧과 기본 포멧을 함께 검증하는 Validator 역할을 분할
+
+- Calculator 는 기존 문자열을 정수형으로 변환하는 로직을 삭제하고 오로지 리스트 내부의 정수를 더하는 역할만 하도록 변경
 ```
 
 - 역할
@@ -69,7 +77,7 @@
     
 - Calculator class
 
-    - Data dto 기반으로 더하기 연산을 하는 역할
+    - 리스트 내부의 정수를 더하는 역할
     
 - InputDataReader class
 
@@ -81,20 +89,17 @@
     
 - DataParser Interface
 
-    - DefaultDataParser : 커스텀 구분자가 없는 문자열을 Data dto 로 변환하는 역할
-    - CustomDataParser : 커스텀 구분자가 존재하는 문자열을 Data dto 로 변환하는 역할
+    - DefaultDataParser : 커스텀 구분자가 없는 문자열을 정수 리스트로 변환하는 역할
+    - CustomDataParser : 커스텀 구분자가 존재하는 문자열을 정수 리스트로 변환하는 역할
     
-- Validator class
+- DefaultDataValidator : 커스텀 구분자가 없는 문자열을 검증하는 역할
 
-    - 문자열을 검증하는 역할
+- CustomDataValidator : 커스텀 구분자가 존재하는 문자열을 검증하는 역할
     
 - Logger class
 
     - 결과를 정해진 포멧으로 출력하는 역할
     
-- Data class
-
-    - 구분자 배열과 피 연산 데이터 배열을 가진 DTO
 ```
 
 ### v 0.0.2
@@ -153,7 +158,7 @@
 - todo
 
 ```text
- [x] DataParser 를 기본 포맷과 커스텀 포멧 처리를 따로 하도록 분리
+ [x] DataParser 와 Validator를 기본 포맷과 커스텀 포멧 처리를 따로 하도록 분리
 ```
 
 ### v 0.0.1
