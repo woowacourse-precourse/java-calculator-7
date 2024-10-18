@@ -23,7 +23,7 @@ class CalculatorServiceTest {
     void executeAddWithCustomSeparator() {
         // given
         // when
-        Integer answer = calculatorService.executeAdd("//;\n1;2;3");
+        Integer answer = calculatorService.executeAdd("//;\\n1;2;3");
         // then
         assertEquals(6, answer);
     }

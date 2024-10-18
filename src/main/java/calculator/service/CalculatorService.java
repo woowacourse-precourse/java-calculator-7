@@ -11,24 +11,26 @@ public class CalculatorService {
     }
 
     private List<Integer> extractNumber(String inputString) {
-        String separator = detectSeparator(inputString);
-        if (!separator.equals(",|:")) { // 기본 구분자가 아닌 경우 \n 이후를 문자열로 사용
-            inputString = inputString.split("\n")[1];
-        }
-        return Stream.of(inputString.split(separator))
+        String[] splittedString = detectSeparator(inputString);
+        String separator = splittedString[0];
+        return Stream.of(splittedString[1].split(separator))
                 .map(Integer::parseInt)
                 .toList();
     }
 
     // 구분자를 찾는 메서드
-    private String detectSeparator(String inputString) {
+    // idx 0: 구분자, idx 1: 문자열
+    private String[] detectSeparator(String inputString) {
         // 커스텀 구분자가 있는 경우
         if (inputString.startsWith("//")) {
-            return inputString.split("\n")[0].substring(2);
+            String[] split = inputString.replace("\\n", "\n").split("\n");
+            split[0] = split[0].substring(2);
+            return split;
         }
         // 커스텀 구분자가 없는 경우
-        return ",|:";
+        return new String[]{",|:", inputString};
     }
+
 
     private Integer add(List<Integer> numbers) {
         return numbers.stream()
