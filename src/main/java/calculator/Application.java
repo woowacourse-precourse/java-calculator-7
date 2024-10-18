@@ -12,17 +12,12 @@ public class Application {
         Calculator calculator = new Calculator();
 
         getUserInput(calculator);
+        checkIsInputEmpty(calculator);
 
         List<String> processedInput = new ArrayList<>();
         int total = 0;
 
-        if (input == null) {
-            throw new IllegalArgumentException();
-        }
-
-        if (input.isEmpty()) {
-            System.out.println("결과: " + 0);
-        } else {
+        else {
             int escapeIdx = input.indexOf("\\n");
             if(escapeIdx > 0) {
                 String delimiter = input.substring(0, escapeIdx);
@@ -61,5 +56,11 @@ public class Application {
     static void getUserInput(Calculator calculator) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         calculator.userInput = Console.readLine();
+    }
+
+    static void checkIsInputEmpty(Calculator calculator) {
+        if (calculator.userInput.isEmpty()) {
+            System.out.println("결과 : " + 0);
+        }
     }
 }
