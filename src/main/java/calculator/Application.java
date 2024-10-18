@@ -28,12 +28,14 @@ public class Application {
         // 커스텀 문자 또는 기본 구분자로 분리
         String[] numbers = str.split(customDelimiter);
 
-        int sum = 0;
-        for (String number : numbers) {
-            sum += Integer.parseInt(number);
+        try {
+            int sum = 0;
+            for (String number : numbers) {
+                sum += Integer.parseInt(number);
+            }
+            System.out.println("결과 : " + sum);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("잘못된 값을 입력하였습니다.");
         }
-        System.out.println("결과 : " + sum);
-
-
     }
 }
