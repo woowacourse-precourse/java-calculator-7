@@ -22,7 +22,8 @@
 ### Parser
 
 - `parseString()` : 입력된 문자열이 유효한 문자열인지 검사합니다.
-- `removeDelimiterPrefix()` : 해당 문자열이 커스텀 문자열로 시작하는지 확인하고 삭제합니다.
+- `removeDelimiterPrefix()` : 해당 문자열이 커스텀 구분자 정의 문자열로 시작하는지 확인하고 삭제합니다.
+- `removeDelimiterSuffix()` : 해당 문자열이 커스텀 구분자 정의 문자열로 끝나는지 확인하고 삭제합니다.
 
 ### DelimeterManager
 
