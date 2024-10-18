@@ -4,13 +4,7 @@ import calculator.domain.Calculator;
 
 public class CalculatorService {
 
-    private final Calculator calculator;
-
-    public CalculatorService(Calculator calculator) {
-        this.calculator = calculator;
-    }
-
-    public Long getSumResult() {
+    public Long getSumResult(Calculator calculator) {
         return calculator.getOperands().stream()
                 .mapToLong(Long::valueOf)
                 .sum();

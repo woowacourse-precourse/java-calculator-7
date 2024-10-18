@@ -3,29 +3,19 @@ package calculator.service;
 import calculator.domain.Calculator;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ParsingService {
 
-    private Calculator calculator;
-
-    public ParsingService(Calculator calculator) {
-        this.calculator = calculator;
-    }
-
-    public Calculator parsing(String input) {
-        char identifier = parseIdentifier(input);
+    public void parsing(Calculator calculator, String input) {
+        char identifier = parseIdentifier(calculator, input);
         String expression = parseExpression(identifier, input);
-        System.out.println("identifier: " + identifier);
-        System.out.println("expression: " + expression);
-        List<Long> operands = extractOperands(expression);
+        List<Long> operands = extractOperands(calculator, expression);
         calculator.addOperands(operands);
-        return calculator;
     }
 
-    private char parseIdentifier(String input) {
-        if(input.matches("^//.\\n.*")) {
+    private char parseIdentifier(Calculator calculator, String input) {
+        if(input.matches("^//.\\\\n.*")) {
             calculator.addIdenfitier(input.charAt(2));
             return input.charAt(2);
         }
@@ -34,12 +24,12 @@ public class ParsingService {
 
     private String parseExpression(char identifier, String input) {
         if(identifier != '\0') {
-            return input.substring(4, input.length() - 1);
+            return input.substring(5);
         }
         return input;
     }
 
-    private List<Long> extractOperands(String expression) {
+    private List<Long> extractOperands(Calculator calculator, String expression) {
         List<Long> operands = new ArrayList<>();
         String[] numbers = expression.split(calculator.identifiersToString());
 
@@ -48,6 +38,7 @@ public class ParsingService {
                 operands.add(Long.parseLong(number));
             }
         } catch (NumberFormatException e) {
+            e.printStackTrace();
             throw new IllegalArgumentException("식에는 숫자와 구분자만 입력 가능합니다.");
         }
 
