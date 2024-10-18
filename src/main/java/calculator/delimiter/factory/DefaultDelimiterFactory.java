@@ -2,7 +2,7 @@ package calculator.delimiter.factory;
 
 import calculator.delimiter.domain.Delimiter;
 import calculator.delimiter.domain.Delimiters;
-import calculator.delimiter.validator.CustomDelimiterValidator;
+import calculator.delimiter.validator.DelimiterValidator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,8 +15,8 @@ public class DefaultDelimiterFactory extends DelimiterFactory {
             new Delimiter(":")
     );
 
-    public DefaultDelimiterFactory(CustomDelimiterValidator customDelimiterValidator) {
-        super(customDelimiterValidator);
+    public DefaultDelimiterFactory(DelimiterValidator delimiterValidator) {
+        super(delimiterValidator);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class DefaultDelimiterFactory extends DelimiterFactory {
 
     @Override
     public Delimiter createDelimiter(String value) {
-        customDelimiterValidator.validate(value);
+        delimiterValidator.validate(value);
         return new Delimiter(value);
     }
 }

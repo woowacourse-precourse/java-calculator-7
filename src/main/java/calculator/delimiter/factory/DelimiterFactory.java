@@ -2,14 +2,14 @@ package calculator.delimiter.factory;
 
 import calculator.delimiter.domain.Delimiter;
 import calculator.delimiter.domain.Delimiters;
-import calculator.delimiter.validator.CustomDelimiterValidator;
+import calculator.delimiter.validator.DelimiterValidator;
 
 public abstract class DelimiterFactory {
 
-    protected final CustomDelimiterValidator customDelimiterValidator;
+    protected final DelimiterValidator delimiterValidator;
 
-    public DelimiterFactory(CustomDelimiterValidator customDelimiterValidator) {
-        this.customDelimiterValidator = customDelimiterValidator;
+    public DelimiterFactory(DelimiterValidator delimiterValidator) {
+        this.delimiterValidator = delimiterValidator;
     }
 
     public abstract Delimiters createDelimiters(Delimiter... additionalDelimiters);
