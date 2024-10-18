@@ -12,13 +12,13 @@ public class Application {
     }
 
     public static String[] StringSplit(String input) {
-        String s = CustomSeparator(input);
-        if (s != null) {
+        String Separator = CustomSeparator(input);
+        if (Separator != null) {
             input = input.substring(5);
         } else {
-            s = ",|:";
+            Separator = ",|:";
         }
-        return input.split(s);
+        return input.split(Separator);
     }
 
     public static int calculator(String input) {
@@ -29,7 +29,7 @@ public class Application {
         String[] number = StringSplit(input);
         for (String numbers : number) {
             if (numbers.contains("-")) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("음수 기능은 지원하지 않습니다.");
             }
             sum += Integer.parseInt(numbers);
         }
@@ -39,11 +39,11 @@ public class Application {
 
     public static void main(String[] args) {
         // TODO: 프로그램 구현
+
         String SeparatorWithNum = Console.readLine();
-
         int sum = calculator(SeparatorWithNum);
-
         System.out.println("결과 : " + sum);
+
     }
 }
 

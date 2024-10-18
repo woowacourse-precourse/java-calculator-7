@@ -33,7 +33,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트1() {
+    void 기본_구분자_음수_예외_테스트() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
@@ -41,7 +41,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트2() {
+    void 특수_구분자_음수_예외_테스트() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//~\\n-1~2~3"))
                         .isInstanceOf(IllegalArgumentException.class)
@@ -49,7 +49,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트3() {
+    void 특수_구분자_예외_테스트() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//~~\\n-1~~2~~3"))
                         .isInstanceOf(IllegalArgumentException.class)
@@ -60,6 +60,14 @@ class ApplicationTest extends NsTest {
     void 기본_구분자_예외_테스트() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1:2;3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 문자_입력_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("abc"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
