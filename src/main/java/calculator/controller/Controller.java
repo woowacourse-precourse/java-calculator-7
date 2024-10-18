@@ -1,6 +1,9 @@
 package calculator.controller;
 
-import calculator.View;
+import calculator.view.View;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Controller {
     private final String START = "덧셈할 문자열을 입력해 주세요.";
@@ -13,19 +16,10 @@ public class Controller {
         printStartMessage();
         var text = View.read();
         var regex = extractRegex(text);
-        String[] nums = splitNumbers(text, regex);
+        var nums = convertInt(splitNumbers(text, regex));
 
         var total = 0;
-        for (String num_text : nums) {
-            int num;
-            try {
-                num = Integer.parseInt(num_text);
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException();
-            }
-            if (num < 0) {
-                throw new IllegalArgumentException();
-            }
+        for (int num : nums) {
             total += num;
         }
         printResult(total);
@@ -51,6 +45,23 @@ public class Controller {
             return text.split(regex);
         }
         return text.substring(text.indexOf(CUSTOM_REG_END) + CUSTOM_REG_END.length()).split(regex);
+    }
+
+    private List<Integer> convertInt(String[] numbers) {
+        List<Integer> list = new ArrayList<>();
+        for (String number : numbers) {
+            int num;
+            try {
+                num = Integer.parseInt(number);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException();
+            }
+            if (num < 0) {
+                throw new IllegalArgumentException();
+            }
+            list.add(num);
+        }
+        return list;
     }
 
     private void printStartMessage() {
