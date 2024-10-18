@@ -80,6 +80,22 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 숫자_커스텀_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("//2\n123");
+            assertThat(output()).contains("결과 : 4");
+        });
+    }
+
+    @Test
+    void 여러_커스텀_구분자() {
+        assertSimpleTest(() -> {
+            run("//2\n//4\n12345");
+            assertThat(output()).contains("결과 : 9");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
