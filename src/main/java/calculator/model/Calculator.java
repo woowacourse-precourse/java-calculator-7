@@ -4,8 +4,12 @@ import static calculator.validate.NumberValidator.validateNumber;
 
 public class Calculator {
 
-    private static int result;
-    private final InputParser parser = new InputParser();
+    private int result;
+    private final InputParser parser;
+
+    public Calculator() {
+        this.parser = new InputParser();
+    }
 
     public void calculate(String input) {
         String[] numbers = parser.parseInput(input);

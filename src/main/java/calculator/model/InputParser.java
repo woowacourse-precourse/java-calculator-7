@@ -2,7 +2,11 @@ package calculator.model;
 
 public class InputParser {
 
-    DelimiterExtractor extractor = new DelimiterExtractor();
+    private final DelimiterExtractor extractor;
+
+    public InputParser() {
+        this.extractor = new DelimiterExtractor();
+    }
 
     public String[] parseInput(String input) {
         if (input.isEmpty()) {
