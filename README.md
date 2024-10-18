@@ -36,7 +36,7 @@
 - Calculator
   - 덧셈 계산을 실행하는 객체(문자열과 구분자 비교)
 - Separator
-  - 기본 구분자와 커스텀 구분자를 생성하는 객체
+  - 기본 구분자와 커스텀 구분자를 모아두는 저장소 역할
 ### View
 - InputView
 - OutputView
