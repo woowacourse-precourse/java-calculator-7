@@ -36,7 +36,18 @@ public class Application {
         return splitInput;
     }
 
+    public static int sumArguments (String[] splitInput) {
+        int sum = 0;
+        for (String input : splitInput) {
+            sum += Integer.parseInt(input);
+        }
+        return sum;
+    }
+
     public static void main(String[] args) {
-        ;
+        StringBuilder delimiter = new StringBuilder("[,:");
+        String input = Console.readLine();
+        String[] splitInput = checkInput(input, delimiter);
+        System.out.println("결과 : " + sumArguments(splitInput));
     }
 }
