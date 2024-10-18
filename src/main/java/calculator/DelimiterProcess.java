@@ -1,4 +1,4 @@
-package calculator.calculator;
+package calculator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +26,14 @@ public class DelimiterProcess {
     //addDelimiter(): 문자열에서 커스텀 구분자를 분리 -> 구분자 리스트에 추가
     private void addDelimiter(){
         if (userInput.startsWith("//")) {
-            int customDelimiterIndex = userInput.indexOf("\n");
+            int customDelimiterIndex = userInput.indexOf("\\n");
+            if (customDelimiterIndex == -1) {
+                throw new IllegalArgumentException("잘못된 구분자 형식입니다. \\n이 누락되었습니다.");
+            }
+
             String customDelimiter = userInput.substring(2, customDelimiterIndex);
             delimiters.add(customDelimiter);
-            userInput = userInput.substring(customDelimiterIndex + 1);
+            userInput = userInput.substring(customDelimiterIndex + 2);
         }
     }
 

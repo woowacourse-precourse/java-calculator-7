@@ -1,6 +1,5 @@
 package calculator;
 
-import calculator.calculator.DelimiterProcess;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -43,6 +42,7 @@ public class Calculator {
     //print(): 결과인 합을 계산
     public int print() {
         int sum = 0;
+
         for (Integer integer : getIntegers()) {
             sum += integer;
         }
