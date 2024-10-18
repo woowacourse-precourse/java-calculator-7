@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public enum InputPattern {
-    TYPE_A(Pattern.compile("[0-9,:]*$"), -1, -1),
+    TYPE_A(Pattern.compile("[0-9,:]*$"), -1, -1), // -1은 쓰지 않음을 의미
     TYPE_B(Pattern.compile("^//(.)\\\\n([0-9,:]|\\1)*$"), 5, 2);
 
     private final Pattern pattern;
@@ -35,16 +35,19 @@ public enum InputPattern {
         return Arrays.stream(InputPattern.values())
                 .filter(inputType -> inputType.matches(input))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Unknown input pattern"));
+                .orElseThrow(() -> new IllegalArgumentException("Unknown input pattern: Value does not belong to any type."));
     }
 
     public String extractNumbers(String input) {
         if (this.equals(TYPE_A)) {
+            validate(input);
             return input;
         } else if (this.equals(TYPE_B)) {
-            return input.substring(getNumberIndex());
+            String numbers = input.substring(getNumberIndex());
+            validate(numbers);
+            return numbers;
         }
-        throw new IllegalArgumentException("Unknown input pattern");
+        throw new IllegalArgumentException("Unknown input pattern: Value does not belong to any type.");
     }
 
     public List<String> getSeparators(String input) {
@@ -53,5 +56,13 @@ public enum InputPattern {
             separators.add(String.valueOf(input.charAt(getSeparatorIndex())));
         }
         return separators;
+    }
+
+    private void validate(String numbers) { // 구분자가 연속으로 등장할 경우 exception
+        for (int i = 0; i < numbers.length() - 1; i++) {
+            if (!Character.isDigit(numbers.charAt(i)) && !Character.isDigit(numbers.charAt(i + 1))) {
+                throw new IllegalArgumentException("Unknown input pattern: Separators appear consecutively.");
+            }
+        }
     }
 }

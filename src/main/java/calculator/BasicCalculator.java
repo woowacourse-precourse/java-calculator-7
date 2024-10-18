@@ -1,5 +1,9 @@
 package calculator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class BasicCalculator implements Calculator {
     private final Separator separator;
     private final Numbers numbers;
@@ -10,27 +14,34 @@ public class BasicCalculator implements Calculator {
     }
 
     public int calculate(String operation) {
-        switch (operation) {
-            case "add":
-                return add();
-            case "sub":
-                return sub();
-            default:
-                throw new IllegalArgumentException("Invalid operation: " + operation);
-        }
+        return switch (operation) {
+            case "add" -> add();
+            case "sub" -> sub();
+            default -> throw new IllegalArgumentException("Invalid operation: " + operation);
+        };
     }
 
     private int add() {
-        String[] nums = numbers.getNumbers().split(separator.makeSeparatorsForSplit());
-        int sum = 0;
-        for (String n : nums) {
-            sum += Integer.parseInt(n);
-        }
-        return sum;
+        return Arrays.stream(splitAndParseNumbers()).sum();
     }
 
     private int sub() {
-        return 0;
+        int[] nums = splitAndParseNumbers();
+        int result = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            result -= nums[i];
+        }
+        return result;
+    }
+
+    private int[] splitAndParseNumbers() {
+        String[] nums = numbers.getNumbers().split(separator.makeSeparatorsForSplit());
+        List<String> numberList = new ArrayList<>(Arrays.asList(nums));
+        numberList.removeIf(String::isBlank);
+
+        return numberList.stream()
+                .mapToInt(Integer::parseInt)
+                .toArray();
     }
 
 }
