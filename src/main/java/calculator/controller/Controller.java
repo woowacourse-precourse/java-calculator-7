@@ -5,6 +5,7 @@ import calculator.model.InputString;
 import calculator.model.ResultNumbers;
 import calculator.service.MainService;
 import calculator.view.InputMessage;
+import calculator.view.OutputMessage;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Controller {
@@ -48,6 +49,7 @@ public class Controller {
 
     private void getResultNum() {
         mainService.setResultNumbers(resultNumbers);
+        OutputMessage.resultMessage(resultNumbers.getResult());
     }
 
 
