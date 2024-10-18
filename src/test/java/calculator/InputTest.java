@@ -84,6 +84,30 @@ public class InputTest {
         input.getInputText(testText);
         assertTrue(input.hasDelimiter());
     }
+    @Test
+    @DisplayName("커스텀 구분자와 함께 올바르게 입력된다.")
+    public void 커스텀_구분자_있는_올바른_입력_값2() {
+        String testText = "//;\n1,2:3";
+        Input input = new Input();
+        input.getInputText(testText);
+        assertTrue(input.hasDelimiter());
+    }
+    @Test
+    @DisplayName("커스텀 구분자와 함께 올바르게 입력된다.")
+    public void 커스텀_구분자_있는_올바른_입력_값3() {
+        String testText = "//;\n1;2;3;4";
+        Input input = new Input();
+        input.getInputText(testText);
+        assertTrue(input.hasDelimiter());
+    }
+    @Test
+    @DisplayName("커스텀 구분자와 함께 올바르게 입력된다.")
+    public void 커스텀_구분자_있는_올바른_입력_값4() {
+        String testText = "//;?\n1;?2;?3";
+        Input input = new Input();
+        input.getInputText(testText);
+        assertTrue(input.hasDelimiter());
+    }
 
     @Test
     @DisplayName("올바르지 않은 입력 값으로, 예외가 발생한다.")
