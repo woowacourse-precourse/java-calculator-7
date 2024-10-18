@@ -1,11 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Application {
 
@@ -33,10 +29,9 @@ public class Application {
         ArrayList<Integer> numbers = new ArrayList<>();
         for (String token : tokens) {
             System.out.println("token = " + token);
-            if(isDigit(token)) {
+            if (isDigit(token)) {
                 numbers.add(Integer.parseInt(token));
-            }
-            else {
+            } else {
                 errorFlag = true;
 //                break;
             }
@@ -67,11 +62,8 @@ public class Application {
             String customSeparation = extractCustomSeparation(inputStr);
             separations += customSeparation;
 
-
             if (customSeparation != null) {
 //            System.out.println(customSeparation);
-            int SeparationEndIndex = inputStr.indexOf("n");
-            inputStr = inputStr.substring(SeparationEndIndex + 1);
                 int SeparationEndIndex = inputStr.indexOf("n");
                 inputStr = inputStr.substring(SeparationEndIndex + 1);
             }
@@ -80,6 +72,8 @@ public class Application {
             if (errorFlag) {
                 throw new IllegalArgumentException();
             }
+            int sum = integers.stream().mapToInt(Integer::intValue).sum();
+            System.out.println("결과 : " + sum);
         } catch (IllegalArgumentException e) {
             System.out.println("Error: 잘못된 입력입니다.");
             System.exit(1);
