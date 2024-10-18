@@ -12,14 +12,13 @@ public class StringAdder {
     }
 
     private String extractDelimiter(String input) {
-        String defaultDelimiter = ",|:";
+        String delimiter = ",|:";
         if (input.startsWith("//") && input.contains("\\n")) {
             int delimiterEndIndex = input.indexOf("\\n");
-            String customDelimiter = input.substring(2, delimiterEndIndex);
-            validator.delimiterValidate(customDelimiter);
-            return customDelimiter;
+            delimiter = input.substring(2, delimiterEndIndex);
+            validator.delimiterValidate(delimiter);
         }
-        return defaultDelimiter;
+        return delimiter;
     }
 
     private String removeDelimiterSection(String input) {
