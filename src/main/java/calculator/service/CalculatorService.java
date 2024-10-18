@@ -1,11 +1,17 @@
 package calculator.service;
 
-public class CalculatorService {
+import calculator.model.Calculator;
 
-    public static int calculate(String input) {
+public class CalculatorService {
+    public int calculate(String input) {
+        Calculator calculator = new Calculator();
+
         if (input.isEmpty()) {
-            return 0;
+            calculator.setNumbers(new int[]{0});
+        } else {
+            calculator.setNumbers(new int[]{Integer.parseInt(input)});
         }
-        return Integer.parseInt(input);
+        calculator.doSum();
+        return calculator.getSum();
     }
 }
