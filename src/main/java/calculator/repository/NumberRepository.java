@@ -1,5 +1,6 @@
 package calculator.repository;
 
+import calculator.dto.NumberDto;
 import java.util.ArrayList;
 
 public class NumberRepository {
@@ -10,8 +11,8 @@ public class NumberRepository {
         numberRepository.add(number);
     }
 
-    public ArrayList<Integer> getNumberRepository() {
-        return new ArrayList<>(numberRepository);
+    public NumberDto getNumberDto() {
+        return new NumberDto(new ArrayList<>(numberRepository));
 
     }
 
