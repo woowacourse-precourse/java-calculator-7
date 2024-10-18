@@ -11,7 +11,7 @@ public class Number {
     }
 
     private boolean isNullString() {
-        if (numString == null) {
+        if (numString == null || numString.length == 0) {
             return true;
         }
         return false;

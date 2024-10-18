@@ -32,12 +32,15 @@ public class Delimiter {
 
     // Controller 에서 Delimiter 객체 생성 후 사용 (커스텀 구분자 존재 여부 확인)
     public void checkCustomDelimiter() {
-        if(inputString.startsWith("//")) {
+        if (inputString.startsWith("//")) {
             setCustomDelimiter();
         }
     }
 
     public String[] splitString() {
+        if (inputString == null || inputString.trim().isEmpty()) {
+            return new String[]{};
+        }
         String delimiterRegex = String.join("|", delimiterList); // ",|:|customDeli"
         return inputString.split(delimiterRegex);
     }
