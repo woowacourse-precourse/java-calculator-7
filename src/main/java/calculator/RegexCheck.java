@@ -1,15 +1,27 @@
 package calculator;
 
 public abstract class RegexCheck {
-  protected String sort = ",:";
-  protected String regex = "^([1-9][0-9]*[" + sort + "]|[" + sort + "][1-9][0-9]*)+$";
   private static final String SORT = "^//[^0-9\\\\n]\\\\n([^\\\\n]+)$";
+  protected String input;
   private String strNumber;
-  private String strSort;
-  private String input;
+  private String sort = ",:";
+
   protected int[] numbers;
+
   RegexCheck(String input) {
     this.input = input;
+  }
+
+  public void setSort(String sort) {
+    this.sort = sort;
+  }
+
+  public String getStrNumber(){
+    return strNumber;
+  }
+
+  private String getRegex(){
+    return "^[" + sort + "]?[1-9][0-9]*([" + sort + "][1-9][0-9]*)*$";
   }
 
   public Boolean isSort() {
@@ -17,14 +29,15 @@ public abstract class RegexCheck {
   }
 
   public Boolean isBasic() {
-    return input.matches(regex);
+    return input.matches(getRegex());
   }
 
   public void sortCheck(String input) {
     String[] split = input.split("\\\\n");
-    strSort = split[0];
+    String strSort = split[0];
     strNumber = split[1];
-    sort=String.valueOf(strSort.charAt(2));
+    setSort(String.valueOf(strSort.charAt(2)));
+    String regex = getRegex();
     if(strNumber.matches(regex)){
       intChange(strNumber.split(sort));
     }else{
@@ -32,12 +45,11 @@ public abstract class RegexCheck {
     };
   }
 
-  public int[] intChange(String[] args){
+  public void intChange(String[] args){
     numbers = new int[args.length];
-    for(String num : args){
-      numbers[Integer.parseInt(num)]++;
+    for(int i=0;i<args.length;i++){
+      numbers[i] = Integer.parseInt(args[i]);
     }
-    return numbers;
   }
 
 
