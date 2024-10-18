@@ -11,7 +11,7 @@ public class NumberList {
     }
 
     public boolean checkValidNumber(int number) {
-        return 0 <= number && number <= Integer.MAX_VALUE;
+        return Integer.MIN_VALUE <= number && number <= Integer.MAX_VALUE;
     }
 
     public int parseInt(String numberString) {
