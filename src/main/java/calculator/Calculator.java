@@ -35,8 +35,15 @@ public class Calculator {
         }
     }
 
+    private void addSum() {
+        for (Integer number : numbers) {
+            sum += number;
+        }
+    }
+
     public void run() {
         splitString();
+        addSum();
         printResult();
     }
 }
