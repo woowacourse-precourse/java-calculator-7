@@ -41,6 +41,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 물음표_커스텀_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("//?\\n1");
+            assertThat(output()).contains("결과 : 1");
+        });
+    }
+
+    @Test
     void 커스텀_구분자_비어있음() {
         assertSimpleTest(() -> {
             run("//\\n1");
@@ -53,6 +61,30 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_음수() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,-2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_음수2() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("-1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_음수3() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1-"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
