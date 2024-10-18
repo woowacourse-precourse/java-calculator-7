@@ -1,6 +1,6 @@
 package calculator.controller;
 
-import calculator.common.config.NumberCalculatorDependencyRegistry;
+import calculator.common.di.NumberCalculatorDependencyRegistry;
 import calculator.model.delimiter.service.DelimiterService;
 import calculator.view.InputView;
 import calculator.view.OutputView;

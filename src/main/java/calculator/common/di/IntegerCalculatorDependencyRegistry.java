@@ -1,4 +1,4 @@
-package calculator.common.config;
+package calculator.common.di;
 
 import calculator.model.custom_delimiter.pattern_matcher.CustomDelimiterPatternMatcher;
 import calculator.model.custom_delimiter.pattern_matcher.DefaultCustomDelimiterPatternMatcher;

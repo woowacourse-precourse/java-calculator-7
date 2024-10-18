@@ -1,7 +1,7 @@
 package calculator;
 
-import calculator.common.config.IntegerCalculatorDependencyRegistry;
-import calculator.common.config.NumberCalculatorDependencyRegistry;
+import calculator.common.di.IntegerCalculatorDependencyRegistry;
+import calculator.common.di.NumberCalculatorDependencyRegistry;
 import calculator.controller.NumberCalculatorController;
 
 public class Application {

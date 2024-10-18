@@ -1,4 +1,4 @@
-package calculator.common.config;
+package calculator.common.di;
 
 public interface NumberCalculatorDependencyRegistry extends CalculatorDependencyRegistry {
 

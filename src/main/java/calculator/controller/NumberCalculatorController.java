@@ -1,6 +1,6 @@
 package calculator.controller;
 
-import calculator.common.config.NumberCalculatorDependencyRegistry;
+import calculator.common.di.NumberCalculatorDependencyRegistry;
 import calculator.util.number.NumberUtils;
 
 import java.util.List;

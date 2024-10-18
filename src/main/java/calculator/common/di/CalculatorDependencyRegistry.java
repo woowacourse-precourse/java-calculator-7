@@ -1,4 +1,4 @@
-package calculator.common.config;
+package calculator.common.di;
 
 import calculator.model.delimiter.service.DelimiterService;
 import calculator.view.InputView;
