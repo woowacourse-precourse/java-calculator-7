@@ -10,7 +10,7 @@ public class Application {
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String a = readLine();
-        System.out.println("결과 : "+ Calculator(a));
+        System.out.println("결과 : " + Calculator(a));
 
     }
 
@@ -31,6 +31,9 @@ public class Application {
         String[] x = str.split(separator);
         for (String string : x) {
             int z = Integer.parseInt(string);
+            if(z < 0){
+                throw new IllegalArgumentException("음수가 입력되었습니다.");
+            }
             sum += z;
         }
         return sum;
