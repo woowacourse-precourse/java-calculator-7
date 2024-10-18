@@ -1,5 +1,6 @@
 package calculator.service;
 
+import calculator.constant.Constant;
 import calculator.model.Calculator;
 import calculator.validator.InputValidator;
 
@@ -7,11 +8,8 @@ import java.util.ArrayList;
 
 public class StringCalculate {
 
-    private static final String BLANK = "";
-    private static final int ZERO = 0;
     private static final String REGEX_START = "\\";
     private static final String REGEX_OR = "|";
-    private static final String CUSTOM_DELIMITER_PREFIX = "//";
 
     private String inputString;
     Calculator calculator = Calculator.getInstance();
@@ -26,14 +24,14 @@ public class StringCalculate {
     }
 
     private void findCustomDelimiter() {
-        if (inputString.startsWith(CUSTOM_DELIMITER_PREFIX)) {
+        if (inputString.startsWith(Constant.CUSTOM_DELIMITER_PREFIX)) {
             char newDelimiter = inputString.charAt(2);
             calculator.addCustomDelimiter(newDelimiter);
         }
     }
 
     private void takeOffCustomDelimiter() {
-        if (inputString.startsWith(CUSTOM_DELIMITER_PREFIX)) {
+        if (inputString.startsWith(Constant.CUSTOM_DELIMITER_PREFIX)) {
             inputString = inputString.substring(5);
         }
     }
@@ -59,8 +57,8 @@ public class StringCalculate {
     private ArrayList<Integer> convertOperandsToInt(String[] stringOperands) {
         ArrayList<Integer> intOperands = new ArrayList<>();
         for (String stringOperand : stringOperands) {
-            if (stringOperand.equals(BLANK)) {
-                intOperands.add(ZERO);
+            if (stringOperand.equals(Constant.BLANK)) {
+                intOperands.add(Constant.ZERO);
             } else {
                 intOperands.add(Integer.valueOf(stringOperand));
             }
