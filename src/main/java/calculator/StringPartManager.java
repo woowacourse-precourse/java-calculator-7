@@ -21,11 +21,10 @@ public class StringPartManager {
     }
 
     static String initString(String input, boolean hasCustomSeparator) {
-        String str = input;
-        if (hasCustomSeparator) {
-            int strStartIdx = input.indexOf("\\n") + 2;
-            str = input.substring(strStartIdx);
+        if (!hasCustomSeparator) {
+            return input;
         }
-        return str;
+        int strStartIdx = input.indexOf("\\n") + 2;
+        return input.substring(strStartIdx);
     }
 }
