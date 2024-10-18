@@ -1,7 +1,9 @@
 package calculator.service;
 
+import calculator.dto.CalculatorDTO;
+
 public interface CalculatorService {
 
-    int calculate();
+    int calculate(CalculatorDTO calculatorDTO);
 
 }

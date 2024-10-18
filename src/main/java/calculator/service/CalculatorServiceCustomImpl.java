@@ -1,23 +1,24 @@
 package calculator.service;
 
+import calculator.dto.CalculatorDTO;
+
 import java.util.regex.Pattern;
 
 public class CalculatorServiceCustomImpl implements CalculatorService {
 
-    private final String string;
-
-    public CalculatorServiceCustomImpl(String string) {
-        this.string = string;
-    }
-
     @Override
-    public int calculate() {
+    public int calculate(CalculatorDTO calculatorDTO) {
         int calcResult = 0;
 
-        String[] firstSplit = string.split("\\\\n");
-        String customDelim = firstSplit[0].split("//")[1].trim();
-        String[] calcList = firstSplit[1].split(Pattern.quote(customDelim));
+        // get need parameter by dto
+        String str = calculatorDTO.getStr();
+        String customDelimiter = calculatorDTO.getDelim();
 
+        // process the arguments for use
+        String escapeCustomDelimiter = Pattern.quote(customDelimiter);
+        String[] calcList = str.split(escapeCustomDelimiter);
+
+        // iterate to calculate by custom delimiters
         for (String eachList : calcList) {
             calcResult += Integer.parseInt(eachList);
         }

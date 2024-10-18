@@ -1,23 +1,16 @@
 package calculator.service;
 
+import calculator.dto.CalculatorDTO;
+
 import java.util.StringTokenizer;
 
 public class CalculatorServiceImpl implements CalculatorService {
 
-    private final String string;
-
-    public CalculatorServiceImpl(String string) {
-        this.string = string;
-    }
-
     @Override
-    public int calculate() {
+    public int calculate(CalculatorDTO calculatorDTO) {
         int calcResult = 0;
 
-        // 10.16 Ver 1
-        // First It doesn't matter about custom delimiter
-        // Just Only , and :
-        StringTokenizer st = new StringTokenizer(this.string,",:");
+        StringTokenizer st = new StringTokenizer(calculatorDTO.getStr(),calculatorDTO.getDelim());
         while (st.hasMoreTokens()){
             calcResult += Integer.parseInt(st.nextToken());
         }
