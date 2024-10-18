@@ -83,6 +83,17 @@ public class Calculator {
         }
     }
 
+    private Long sumPositiveNumbers() {
+        long sum = 0L;
+        for (Long number : positiveNumbers) {
+            if (sum > Long.MAX_VALUE - number) {
+                throw new IllegalArgumentException();
+            }
+            sum += number;
+        }
+        return sum;
+    }
+
     public void operate() {
         equation = readFromConsole();
         separateCustomDelimiter();
