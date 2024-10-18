@@ -12,9 +12,7 @@ public class Application {
 
     public static void main(String[] args) {
         String[] splitStringArray = inputString();
-
         int sum = calculateNumber(splitStringArray);
-
         System.out.println(getAnswer(sum));
         return;
     }
@@ -25,25 +23,23 @@ public class Application {
 
     private static int calculateNumber(String[] words) {
         int[] nums = isNumeric(words);
-
         int sum = 0;
+
         for (int i = 0; i < nums.length; i++) {
             sum += nums[i];
         }
-
         return sum;
     }
 
     private static int[] isNumeric(String[] words) {
         int[] nums = new int[words.length];
+
         for (int i = 0; i < words.length; i++) {
             if (!words[i].matches("[0-9]+")) {
                 throw new IllegalArgumentException("잘못된 값을 입력하였습니다.");
             }
-
             nums[i] = Integer.parseInt(words[i]);
         }
-
         return nums;
     }
 
@@ -68,7 +64,6 @@ public class Application {
 
     private static String[] inputString() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-
         return splitDelimiter(Console.readLine());
     }
 }
