@@ -74,9 +74,9 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 안되는_케이스_발견() {
+    void 공백포함_여러개의_여러문자_커스텀_구분자_사용() {
         assertSimpleTest(() -> {
-            run("//^^^^;;;:\\n1;;2,   3: ^^^^^^^^^^^^^^^4");
+            run("//^^   % %%&/^^; ;; :\\n1;;2,   3: ^%^^^/^&&  ^^^    ^^^^^ ^^4");
             assertThat(output()).contains("결과 : 10");
         });
     }
