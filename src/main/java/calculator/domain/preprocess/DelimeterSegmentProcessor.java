@@ -27,8 +27,7 @@ public class DelimeterSegmentProcessor {
     }
 
     public String extractCalculationSegment(String input) {
-        String newInput = input.substring(4);
-        return newInput;
+        return input.substring(4);
     }
 
     public List<String> extractDelimeterList(String input) {
