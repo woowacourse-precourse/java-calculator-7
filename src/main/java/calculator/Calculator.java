@@ -13,6 +13,10 @@ public class Calculator {
         if(input.startsWith("//")){
             String customSeparator = findCustomSeparator(input);
             String letters = input.substring(5);
+            if (letters.length() == 1) {
+                System.out.println("결과 : " + letters);
+                return;
+            }
             assert customSeparator != null;
             tmp = letters.split(customSeparator);
         }else{
