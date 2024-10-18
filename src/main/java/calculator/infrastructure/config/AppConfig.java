@@ -18,18 +18,16 @@ public class AppConfig {
     private CalculateStringUseCase calculateStringUseCase;
 
     public AppConfig() {
-        this.inputPort = new CliInputAdapter();
         this.outputPort = new CliOutputAdapter();
         this.inputValidator = new InputValidator();
         this.additionService = new AdditionService();
         this.calculateStringUseCase = new CalculateStringCommand(
-            inputPort,
-            outputPort,
             inputValidator,
             additionService);
+        this.inputPort = new CliInputAdapter(outputPort, calculateStringUseCase);
     }
 
-    public CalculateStringUseCase getCalculateStringUseCase() {
-        return calculateStringUseCase;
+    public CliInputAdapter getCliInputAdapter() {
+        return (CliInputAdapter) inputPort;
     }
 }

@@ -1,8 +1,9 @@
 package calculator.port.input;
 
-import calculator.application.dto.request.Request;
+import calculator.application.dto.request.CalculationRequest;
+import calculator.application.dto.response.CalculationResponse;
 
-public interface InputPort <T extends Request> {
+public interface InputPort {
 
-    T readRequest();
+    CalculationResponse process(CalculationRequest request);
 }
