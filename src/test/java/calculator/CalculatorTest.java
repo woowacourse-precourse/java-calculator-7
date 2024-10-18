@@ -14,4 +14,9 @@ class CalculatorTest {
         assertThat(calculator.splitAndSum("")).isZero();
         assertThat(calculator.splitAndSum(null)).isZero();
     }
+
+    @Test
+    void 기본_구분자_사용() {
+        assertThat(calculator.splitAndSum("1,2:3")).isEqualTo(6);
+    }
 }
