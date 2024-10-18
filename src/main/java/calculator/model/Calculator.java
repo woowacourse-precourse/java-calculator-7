@@ -28,7 +28,7 @@ public class Calculator {
     public boolean checkCustomDelimiter(){
         String[] splitedNumbers = numbers.split("[,;]");
         String engraftedNumbers = String.join("", splitedNumbers);  
-        if (engraftedNumbers.matches("\\d+")){
+        if (!engraftedNumbers.matches("\\d+")){
             return true;
         }
         return false;
