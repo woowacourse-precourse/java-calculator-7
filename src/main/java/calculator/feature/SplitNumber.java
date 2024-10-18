@@ -13,6 +13,11 @@ public class SplitNumber {
     }
 
     public int[] getNumber(){
+
+        if(str.isEmpty()){
+            return new int[]{0};
+        }
+
         StringBuilder sb = new StringBuilder(); // 정규표현식 만들기
         sb.append(",|:"); // 정규표현식에 ,: 추가
         for (Character delimiter : delimiters) {
@@ -28,7 +33,7 @@ public class SplitNumber {
                 result[i] = Integer.parseInt(split[i]); // 분리한 문자열을 정수 배열에 추가
             }
         } catch (NumberFormatException e) { // 숫자와 구분자 외에 다른 문자를 입력했을 경우 예외 발생
-            throw new IllegalStateException(e);
+            throw new IllegalArgumentException();
         }
 
         return result;
