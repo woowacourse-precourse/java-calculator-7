@@ -29,14 +29,20 @@ public class StringCalculatorController {
         String input = inputView.input();
 
         if (isBlank(input)) {
-            // 0 이면 바로 출력하고 프로그램 종료
-            outputView.printResult(0);
+            handleBlankInput();
             return;
         }
 
+        processValidInput(input);
+    }
+
+    private void handleBlankInput() {
+        outputView.printResult(0);
+    }
+
+    private void processValidInput(String input) {
         int result = calculateResult(input);
         outputView.printResult(result);
-
     }
 
     private int calculateResult(String input) {
