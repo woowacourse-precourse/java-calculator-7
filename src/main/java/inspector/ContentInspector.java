@@ -1,25 +1,17 @@
 package inspector;
 
-public abstract class ContentInspector {
-    private String targetContent;
-    private String delimiterGroup;
+import java.util.regex.Pattern;
 
-    public abstract String getDelimiterGroup();
+public abstract class ContentInspector {
+
+    public abstract String getParsingDelimiter();
 
     public abstract String getContent();
 
-    protected void inspecting() {
-        for (int i = 0; i < targetContent.length(); i++) {
-            if (!charcterCheck(targetContent.charAt(i))) {
-                throw new IllegalArgumentException();
-            }
+    protected void inspecting(String content, String parsingDelimiter) {
+        if (!Pattern.matches("^(" + parsingDelimiter + "|[0-9])*$", content)) {
+            System.out.println("매칭되지 않음");
+            throw new IllegalArgumentException();
         }
-    }
-
-    private boolean charcterCheck(char inputCharacter) {
-        if (Character.isDigit(inputCharacter)) {
-            return true;
-        }
-        return false;
     }
 }
