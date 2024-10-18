@@ -7,11 +7,11 @@ import java.util.StringTokenizer;
 
 public class Application {
     static StringBuilder delim = new StringBuilder(",:");
+    static final String input = input();
     static List<String> tokens;
     static List<Long> nums;
 
     public static void main(String[] args) {
-        final String input = input();
         if (input.isEmpty()) {
             System.out.println("결과 : 0");
             return;
@@ -19,8 +19,7 @@ public class Application {
         tokens = new ArrayList<>();
         nums = new ArrayList<>();
 
-        splitInput(input);
-
+        System.out.println("결과 : " + calculateSum());
     }
 
     private static String input() {
@@ -62,6 +61,7 @@ public class Application {
     }
 
     private static long calculateSum() {
+        splitInput(input);
         strToNumber();
 
         return 0;
