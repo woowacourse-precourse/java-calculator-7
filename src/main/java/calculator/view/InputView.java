@@ -24,4 +24,8 @@ public class InputView {
     public String deleteCustomDelimiter(String additionInput) {
         return additionInput.substring(5);
     }
+
+    public String getDefaultDelimiters() {
+        return DEFAULT_DELIMITERS;
+    }
 }
