@@ -6,9 +6,10 @@ import calculator.parser.ParseManager;
 public class Calculator {
 
     public static void run() {
+        ParseManager parseManager = new ParseManager();
         try {
             String inputData = InputDataReader.getInputData();
-            Data data = ParseManager.parseData(inputData);
+            Data data = parseManager.parseData(inputData);
             int result = sum(data);
             Logger.printResult(result);
         } finally {
