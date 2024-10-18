@@ -129,6 +129,18 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void validateInput_ContainingPositive_Delimiter() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException(";,kk333333")).isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("피연산자에 숫자가 아닌 다른 문자가 있습니다");
+        });
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("1 000;1,55")).isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("피연산자에 숫자가 아닌 다른 문자가 있습니다");
+        });
+    }
+
+    @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1");
