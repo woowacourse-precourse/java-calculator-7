@@ -69,6 +69,19 @@ class InputParserTest {
     }
 
     @Test
+    @DisplayName("이스케이프 문자가 포함된 커스텀 구분자를 기준으로 숫자를 분리할 수 있다.")
+    public void customDelimiterTest() {
+        // given
+        String input = "//,\\\\n1,\\2,\\3";
+
+        // when
+        String[] real = inputParser.separate(input);
+
+        // then
+        assertThat(real).isEqualTo(expected);
+    }
+
+    @Test
     @DisplayName("빈 입력이 입력 되면, 이를 0으로 바꾸는 데 성공 한다.")
     public void changeBlankToZeroTest() {
         // given
