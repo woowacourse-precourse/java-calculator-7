@@ -8,10 +8,9 @@
 
 ### Calculator 인터페이스
 
-- `insertInfo(String input)`
 - `extractNumber();`
 - `sum();`
-- `validateExpression();`
+- `validateValues();`
 
 ### DefaultCalculator
 
