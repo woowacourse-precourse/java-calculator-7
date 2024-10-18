@@ -42,4 +42,9 @@ public class Application {
     private static boolean hasCustomDelimiter(String input) {
         return input.startsWith("//") && input.contains("\n");
     }
+
+    private static String extractNumbers(String input) {
+        int delimiterEndIndex = input.indexOf("\n");
+        return input.substring(delimiterEndIndex + 1);
+    }
 }
