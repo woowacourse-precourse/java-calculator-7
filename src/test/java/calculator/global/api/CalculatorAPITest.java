@@ -1,7 +1,7 @@
 package calculator.global.api;
 
 import calculator.domain.Number;
-import calculator.global.config.APIFactory;
+import calculator.global.config.BeanFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,9 +12,8 @@ class CalculatorAPITest {
 	@Test
 	@DisplayName("기능 테스트")
 	void answerTest() {
-		APIFactory apiFactory = APIFactory.getInstance();
-		CalculatorAPI calculatorAPI = apiFactory.calculator();
-		Number number = Number.getInstance();
+		CalculatorAPI calculatorAPI = BeanFactory.calculator();
+		Number number = BeanFactory.number();
 
 		//given
 		number.addNumber(1);

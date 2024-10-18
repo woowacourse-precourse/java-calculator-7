@@ -1,9 +1,13 @@
 package calculator.global.api;
 
 import calculator.domain.Number;
+import calculator.global.config.BeanFactory;
 
 public class CalculatorAPI {
-	private final Number number = Number.getInstance();
+	private static final CalculatorAPI INSTANCE = new CalculatorAPI();
+	private final Number number = BeanFactory.number();
+
+	private CalculatorAPI() {}
 
 	public int answer() {
 		int sum = 0;
@@ -14,5 +18,9 @@ public class CalculatorAPI {
 
 		return sum;
     }
+
+	public static CalculatorAPI getInstance() {
+		return INSTANCE;
+	}
 
 }

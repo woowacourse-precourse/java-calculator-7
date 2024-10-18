@@ -1,16 +1,16 @@
 package calculator.global.api;
 
 import calculator.domain.Separator;
-import calculator.global.config.APIFactory;
-import jdk.jfr.Description;
+import calculator.global.config.BeanFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class SeparateAPITest {
-	private final APIFactory apiFactory = APIFactory.getInstance();
-	private final Separator separator = Separator.getInstance();
+	private final SeparateAPI separateAPI = BeanFactory.separate();
+	private final Separator separator = BeanFactory.separator();
+	private final CalculatorAPI calculatorAPI = BeanFactory.calculator();
 
 	@Test
 	@DisplayName("커스텀 구분자가 있을 경우")
@@ -19,7 +19,7 @@ class SeparateAPITest {
 		String sentence = "//;\n1;2;3";
 
 		//when
-		apiFactory.separate().findCustomSeparator(sentence);
+		separateAPI.findCustomSeparator(sentence);
 		Character c = separator.getSeparators(2);
 
 		//then
@@ -38,7 +38,7 @@ class SeparateAPITest {
 		String sentence = "//;;\n1;2;3";
 
 		//when
-		apiFactory.separate().findCustomSeparator(sentence);
+		separateAPI.findCustomSeparator(sentence);
 
 		//then
 		assertThrows(IndexOutOfBoundsException.class,
@@ -52,7 +52,7 @@ class SeparateAPITest {
 		String sentence = "//\n1;2;3";
 
 		//when
-		apiFactory.separate().findCustomSeparator(sentence);
+		separateAPI.findCustomSeparator(sentence);
 
 		//then
 		assertThrows(IndexOutOfBoundsException.class,
@@ -60,7 +60,17 @@ class SeparateAPITest {
 	}
 
 	@Test
+	@DisplayName("숫자 추출 기능 테스트")
 	void findNumberAndSave() {
+		//given
+		String sentence = "13;235;33";
+
+		//when
+		separateAPI.findNumberAndSave(sentence);
+		int answer = calculatorAPI.answer();
+
+		//then
+		assertEquals(281, answer);
 	}
 
 }

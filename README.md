@@ -18,7 +18,7 @@ java-calculator-precourse
 - [x] `` 커스텀 구분자의 유무 ``
 - [ ] `` 어떤식으로 숫자를 판별할건지 ``
   - [x] `` 하나하나 쪼개서 숫자인지 확인 후 true를 반환하는 boolean[] ``
-  - [ ] `` boolean[]을 가지고 연속된 true면 그 자리에 있는 Chars를 추출``
+  - [ ] `` boolean[]을 가지고 연속된 true면 그 자리에 있는 Chars를 추출 ``
 
 ###### 계산 API (CalculatorAPI)
 - [x] `` 숫자들의 합은 어떻게 구현할건지 ``

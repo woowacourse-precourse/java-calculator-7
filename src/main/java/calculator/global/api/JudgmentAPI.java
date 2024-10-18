@@ -16,7 +16,7 @@ public class JudgmentAPI {
 		return false;
 	}
 
-	public boolean[] booleanTypeNumbers(Character[] charArrays) {
+	public boolean[] convertBooleanTypeNumbers(char[] charArrays) {
 		boolean[] booleans = new boolean[charArrays.length];
 		int idx = 0;
 
@@ -36,7 +36,7 @@ public class JudgmentAPI {
 		return sentence.matches(REGEX_PATTERN.getString());
 	}
 
-    public int isNextTrue(Boolean[] booleans, int init) {
+    public int isNextTrue(boolean[] booleans, int init) {
 		int arrayLength = booleans.length;
 		int continuousTrue = 0;
 
