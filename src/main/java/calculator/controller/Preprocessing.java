@@ -7,9 +7,9 @@ import java.util.List;
 public class Preprocessing {
     // 첫 글자가 "/"로 시작하는지 아닌지에 따라 메소드 실행
     public boolean firstLetter(String given) {
-        String firstLetter = given.substring(0,1);
+        char firstLetter = given.charAt(0);
 
-        if (firstLetter == "/") { // 커스텀 구분자 추출해야 됨
+        if (firstLetter == '/') { // 커스텀 구분자 추출해야 됨
             return true;
         } else { // 바로 계산 ㄱㄱ
             return false;
@@ -33,6 +33,7 @@ public class Preprocessing {
             }
         }
         separated.add(temp);
+        System.out.println(separated);
         return separated;
     }
 
