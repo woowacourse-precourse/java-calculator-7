@@ -46,7 +46,7 @@ public class BasicSeparatorParser implements SeparatorParser {
 			separatorPattern.append("|\\").append(separator);
 		}
 
-		separatorPattern.delete(0, 2);
+		separatorPattern.deleteCharAt(0);
 		return separatorPattern.toString();
 	}
 
