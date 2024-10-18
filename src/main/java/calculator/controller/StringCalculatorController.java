@@ -20,7 +20,7 @@ public class StringCalculatorController {
 
     public Delimiter createDelimiterPart(InputData inputData){
         if(inputData.isDelimiter()) {
-            return new CustomDelimiter();
+            return new CustomDelimiter(inputData.convertDelimiterPart());
         }
 
         return new DefaultDelimiter();
