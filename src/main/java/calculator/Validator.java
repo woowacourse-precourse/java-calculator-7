@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Validator {
 
-    public static String validateInput(String input) {
+    public static String makeCorrectInput(String input) {
         if (input.isBlank()) {
             input = "0";
         }
@@ -13,9 +13,6 @@ public class Validator {
     }
 
     public static String validateConvertedInput(String input, String delimiterRegex, String[] strNumArray) {
-        if (input.isBlank()) {
-            input = "0";
-        }
         if (!Character.isDigit(input.charAt(0)) || !Character.isDigit(input.charAt(input.length() - 1))) {
             throw new IllegalArgumentException("문자열의 시작과 끝에는 숫자가 와야 합니다.");
         }

@@ -19,8 +19,8 @@ public class Application {
         System.out.println(INPUT_GUIDE);
         String input = Console.readLine();
 
-        // 입력 문자열이 올바른 형태인지 검증한다.
-        input = Validator.validateInput(input);
+        // 입력 문자열을 올바른 형태로 교정한다.
+        input = Validator.makeCorrectInput(input);
 
         // 구분자 정의
         String[] delimiter = new String[3];
@@ -44,11 +44,16 @@ public class Application {
                 .reduce((d1, d2) -> d1 + "|" + d2)
                 .orElse("");
 
+        // 문자열이 빈 경우 0으로 처리
+        if (input.isBlank()) {
+            input = "0";
+        }
+
         // 숫자 추출
         String[] strNumArray = input.split(delimiterRegex);
 
         // 커스텀 구분자가 제거된 문자열이 올바른 형태인지 검증한다.
-        input = Validator.validateConvertedInput(input, delimiterRegex, strNumArray);
+        Validator.validateConvertedInput(input, delimiterRegex, strNumArray);
 
         // 결과 추출
         int result = Arrays.stream(strNumArray)
