@@ -37,7 +37,12 @@ public class Application {
             // 커스텀 구분자가 있을때
             String inputDelimiter = matcher.group(1);
             inputNumber = matcher.replaceFirst("");
-            String delimiter = defaultDelimiter + "|" + "[" + inputDelimiter + "]";
+            String delimiter;
+            if (inputDelimiter.equals("\\")) {
+                delimiter = defaultDelimiter + "|" + "[" + "\\\\" + "]";
+            } else {
+                delimiter = defaultDelimiter + "|" + "[" + inputDelimiter + "]";
+            }
             splitInputNumber = inputNumber.split(delimiter);
         } else {
             // 커스텀 구분자가 없을때
