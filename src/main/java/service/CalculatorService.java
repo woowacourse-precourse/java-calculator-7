@@ -30,6 +30,16 @@ public class CalculatorService {
 
     }
 
+    public String getDelimiter(String input){
+        if(input.matches("//.+\n[0-9(.+)]")){
+            String delimiter = input.substring(2, input.lastIndexOf("\n"));
+            return delimiter;
+        }
+        else{
+            throw new IllegalArgumentException("형식이 올바르지 않거나 잘못된 구분자가 포함되어 있습니다.");
+        }
+    }
+
     public int[] splitByDelimiter(String input){
         String[] arr;
         int[] numbers;
