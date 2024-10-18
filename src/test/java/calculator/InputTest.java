@@ -53,7 +53,7 @@ public class InputTest {
         Input input = new Input(splitInputWithSeparator);
 
         // when
-        String[] splitStr = input.separatorInput(separator);
+        String[] splitStr = input.splitBySeparator(separator);
 
         // then
         for (int i = 0; i < splitStr.length; i++) {

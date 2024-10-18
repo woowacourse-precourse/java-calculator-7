@@ -13,8 +13,8 @@ public class Game {
 
         Input input1 = new Input(splitInputWithSeparator);
 
-        String[] splitStr = input1.separatorInput(separator);
-        int[] numbers = input1.changeInteger(splitStr);
+        String[] splitStr = input1.splitBySeparator(separator);
+        int[] numbers = input1.convertToIntArray(splitStr);
         System.out.println(Arrays.stream(numbers).sum());
     }
 }
