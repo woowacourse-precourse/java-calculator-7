@@ -3,19 +3,21 @@ import java.util.regex.Pattern;
 
 
 public class Splitter {
-    private String numbers;
+    private String[] splitterNumbers;
 
-    public Splitter(){
-        this.numbers = numbers;
+    public Splitter(CustomDelimiter customDelimiter){
+        this.splitterNumbers = splitNumbers(customDelimiter);
     }
 
-    public String[] splitNumbers(){
-        String customDelimiter = "";
-        if(checkCustomDelimiter()){
-            customDelimiter = getCustomDelimiter();
-            this.numbers = SplitDelimiter(numbers);
-            return numbers.split("[,;]|" + Pattern.quote(customDelimiter));
+    public String[] splitNumbers(CustomDelimiter customDelimiter){
+        String delimiter = "";
+        String numbers = customDelimiter.getFormula();
+        if(customDelimiter.checkCustomDelimiter()){
+            delimiter = customDelimiter.getCustomDelimiter();
+            numbers = customDelimiter.SplitDelimiter();
+            return numbers.split("[,;]|" + Pattern.quote(delimiter));
         }
             return numbers.split("[,;]");
     }
+
 }
