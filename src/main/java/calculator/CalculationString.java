@@ -11,17 +11,19 @@ public class CalculationString {
         this.value = calculationString;
     }
 
-    public List<SumValue> getSumValues(CustomDelimiter customDelimiter) {
+    public SumValues getSumValues(CustomDelimiter customDelimiter) {
         String splitRegex = ":|,";
 
         if (customDelimiter != null) {
             splitRegex = splitRegex + "|" + customDelimiter.getCustomDelimiter();
         }
 
-        return Arrays.stream(value.split(splitRegex))
+        List<SumValue> sumValues =  Arrays.stream(value.split(splitRegex))
                 .map(str -> stringToInteger(str))
                 .map(SumValue::new)
                 .collect(Collectors.toList());
+
+        return new SumValues(sumValues);
     }
 
     private int stringToInteger(String str) { //TODO
