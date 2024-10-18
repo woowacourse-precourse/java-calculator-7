@@ -115,9 +115,10 @@ public class InputParser {
 
 	private void validateInvalidDelimiter(String input) {
 		String regex = "[\\d" + String.join("", delimiters) + "]*";
+		String filteredInput = input.replaceAll(regex, "");
 
 		if (!input.matches(regex)) {
-			throw new IllegalArgumentException("허용되지 않은 구분자가 포함되어 있습니다.");
+			throw new IllegalArgumentException("허용되지 않은 구분자가 포함되어 있습니다: " + filteredInput);
 		}
 	}
 }
