@@ -12,22 +12,30 @@ public class DefaultNumberExtractor implements NumberExtractor {
 
         String[] splitDefaultDelimiter = input.split(defaultDelimiter);
         NumberRepository numberRepository = new NumberRepository();
-
-        for (String splitDefault : splitDefaultDelimiter) {
-            int parseInt = 0;
-
-            try {
-                parseInt = Integer.parseInt(splitDefault);
-                Validator.validate(parseInt);
-                numberRepository.saveNumber(parseInt);
-
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException();
-            }
-
-        }
+        saveValidatedNumber(splitDefaultDelimiter, numberRepository);
         return numberRepository.getNumberDto();
 
+    }
+
+
+    private static void saveValidatedNumber(String[] splitDefaultDelimiter, NumberRepository numberRepository) {
+        for (String splitDefault : splitDefaultDelimiter) {
+
+            int parseNumber = parseNumber(splitDefault);
+            numberRepository.saveNumber(parseNumber);
+
+        }
+    }
+
+    private static int parseNumber(String splitDefault) {
+
+        try {
+            int parseInt = Integer.parseInt(splitDefault);
+            Validator.validate(parseInt);
+            return parseInt;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
     }
 
 }
