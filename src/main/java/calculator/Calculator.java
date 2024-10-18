@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Calculator {
 
-    private final Delimiters delimiters = new Delimiters();
+    private final Delimiter delimiter = new Delimiter();
     private final Converter converter = new Converter();
 
     public void startCalculate() {
@@ -14,11 +14,11 @@ public class Calculator {
 
         converter.validateInputString(inputString);
 
-        String numberString = delimiters.extractNumberString(inputString);
+        String numberString = delimiter.extractNumberString(inputString);
 
         StringBuilder delimiterExpression = new StringBuilder();
-        for (char delimiter : delimiters.getDelimiters()) {
-            delimiters.appendDelimiter(delimiterExpression, delimiter);
+        for (char delimiter : delimiter.getDelimiters()) {
+            this.delimiter.appendDelimiter(delimiterExpression, delimiter);
         }
 
         String delimiterStr = delimiterExpression.toString();

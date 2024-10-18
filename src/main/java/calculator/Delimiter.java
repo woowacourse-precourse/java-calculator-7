@@ -3,7 +3,7 @@ package calculator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Delimiters {
+public class Delimiter {
     private final List<Character> delimiters = new ArrayList<>();
     private int index = 2;
 
