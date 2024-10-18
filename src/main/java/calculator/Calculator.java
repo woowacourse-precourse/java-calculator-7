@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Calculator {
-    private List<String> division = new ArrayList<>();
-    private List<Integer> numbers = new ArrayList<>();
+    private final List<String> division = new ArrayList<>();
+    private final List<Integer> numbers = new ArrayList<>();
 
-    public List<String> getDivision(/*입력 받은 문자열*/) {
-        return null; //구분자 리스트 반환
+    public void getDivision(/*입력 받은 문자열*/) {
+
     }
 
-    public List<Integer> getNumbers(/*입력 받은 문자열*/) {
-        return null; //숫자 리스트 반환
+    public void getNumbers(/*입력 받은 문자열*/) {
+
     }
 
     public int calculator() {

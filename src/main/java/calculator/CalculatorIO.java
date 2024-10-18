@@ -5,7 +5,7 @@ public class CalculatorIO {
         return null; // 입력 받은 문자열 반환
     }
 
-    public String output() {
-        return null; // 계산한 결과값 출력
+    public void output(/*계산한 결과*/) {
+
     }
 }
