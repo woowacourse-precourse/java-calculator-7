@@ -41,10 +41,12 @@ public class Separators {
         separatorStore.add(separator);
     }
 
-    public List<String> split(String input) {
+    public List<String> split(String separatedStr) {
         String regex = createRegex();
 
-        return Arrays.stream(input.split(regex))
+        return Arrays.stream(separatedStr.split(regex))
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
                 .toList();
     }
 
