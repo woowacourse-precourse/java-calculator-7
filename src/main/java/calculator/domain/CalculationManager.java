@@ -2,20 +2,23 @@ package calculator.domain;
 
 import calculator.input.InputHandler;
 import calculator.output.OutputHandler;
+import calculator.view.OutputView;
 
 public class CalculationManager {
 
+    private final OutputView outputView;
     private final InputHandler inputHandler;
     private final OutputHandler outputHandler;
     private final Delimiter delimiter;
     private final CustomDelimiter customDelimiter;
     private final NumberGenerator numberGenerator;
 
-    public CalculationManager(InputHandler inputHandler,
+    public CalculationManager(OutputView outputView, InputHandler inputHandler,
                               OutputHandler outputHandler,
                               Delimiter delimiter,
                               CustomDelimiter customDelimiter,
                               NumberGenerator numberGenerator) {
+        this.outputView = outputView;
         this.inputHandler = inputHandler;
         this.outputHandler = outputHandler;
         this.delimiter = delimiter;
@@ -30,7 +33,7 @@ public class CalculationManager {
     }
 
     private String handleInput() {
-        inputHandler.showMessage();
+        outputView.displayInputPrompt();
         return inputHandler.input();
     }
 
