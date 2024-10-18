@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         // 기본(쉼표, 콜론) 구분자로 각 숫자의 합을 반환하는 기능
