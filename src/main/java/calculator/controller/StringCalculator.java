@@ -25,7 +25,7 @@ public class StringCalculator {
 
     public void run(){
         // "덧셈할 문자열을 입력해 주세요." 출력
-        outputView.print(OutputMessage.INPUT_MESSAGE);
+        outputView.println(OutputMessage.INPUT_MESSAGE);
 
         // 문자열 입력
         String input = inputView.getInput();
