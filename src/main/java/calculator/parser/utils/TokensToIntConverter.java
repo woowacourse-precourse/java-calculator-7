@@ -13,6 +13,10 @@ public class TokensToIntConverter {
                 throw new IllegalArgumentException("Token contains invalid characters: " + token);
             }
 
+            if (token.isEmpty()) {
+                throw new IllegalArgumentException("Token is empty");
+            }
+            
             BigInteger bigIntValue = new BigInteger(token);
             if (bigIntValue.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) > 0 ||
                     bigIntValue.compareTo(BigInteger.valueOf(Integer.MIN_VALUE)) < 0) {
