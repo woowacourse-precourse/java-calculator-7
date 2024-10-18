@@ -1,12 +1,12 @@
 package calculator.view;
 
-import calculator.util.CommonIO;
+import calculator.util.CommonIo;
 
 public class InputView {
-    private final CommonIO io;
+    private final CommonIo io;
 
     public InputView() {
-        this.io = new CommonIO();
+        this.io = new CommonIo();
     }
 
     public String InputData() {
