@@ -10,6 +10,7 @@ public class Application {
     private static int total;
 
     public static void main(String[] args) {
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         inputString = Console.readLine();
 
         // 기본 값 설정
@@ -52,10 +53,11 @@ public class Application {
             }
 
             // 결과 출력
-            System.out.println(total);
+            System.out.println("결과 : " + total);
 
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
+            throw e;
         }
     }
 }
