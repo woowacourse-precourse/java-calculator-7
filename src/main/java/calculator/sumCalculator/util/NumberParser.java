@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class NumberParser {
 
-    private final static String REGEXP_DEFAULT_DELIMITER_PATTERN = "[^,;]+(?=[,;]|$)|(?<=^|[,;])[^,;]+";
+    private final static String REGEXP_DEFAULT_DELIMITER_PATTERN = "[^,;]+(?=[,;]|$)|(?<=^|[,;])[^,;]+\n";
 
     public List<Integer> extractNumbers(String expression, boolean hasCustomDelimiter, String customDelimiter) {
         if (hasCustomDelimiter) {
