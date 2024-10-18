@@ -32,7 +32,10 @@ public class Calculator {
         } else if (a.equals("]")) {
             a = "\\]";
         }
+        System.out.println("dsdsds");
         return a;
+
+
     }
 
     //사용자의 입력을 받는 메서드
