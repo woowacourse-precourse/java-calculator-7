@@ -10,4 +10,9 @@ public class Separators {
         this.defaultSeparators = Separator.getDefaultSeparators();
         this.customSeparator = null;
     }
+
+    public Separators(Separator customSeparator) {
+        this.defaultSeparators = Separator.getDefaultSeparators();
+        this.customSeparator = customSeparator;
+    }
 }

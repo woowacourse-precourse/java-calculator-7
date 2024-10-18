@@ -6,8 +6,15 @@ import calculator.dto.SeparatorsResult;
 
 public final class CustomSeparatorExtractor {
     private static final String CUSTOM_SEPARATOR_FORMAT = "^//.\\\\n.*";
+    private static final int CUSTOM_SEPARATOR_DEFINITION_LENGTH = 5;
 
     public SeparatorsResult getSeparatorsResult(String input) {
+        if (hasCustomSeparator(input)) {
+            Separator customSeparator = getCustomSeparator(input);
+            return new SeparatorsResult(
+                    new Separators(customSeparator), input.substring(CUSTOM_SEPARATOR_DEFINITION_LENGTH)
+            );
+        }
         return new SeparatorsResult(new Separators(), input);
     }
 
