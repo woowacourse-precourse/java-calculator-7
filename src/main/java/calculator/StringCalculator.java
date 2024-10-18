@@ -32,13 +32,18 @@ public class StringCalculator {
     private int sumTokens(String[] tokens) {
         int sum = 0;
         for (String token : tokens) {
+            // 구분자만 입력한 경우
+            if (token.trim().isEmpty()) {
+                continue;
+            }
             try {
                 int number = Integer.parseInt(token);
+                // 음수인 경우
                 if (number < 0) {
                     throw new IllegalArgumentException("음수는 허용되지 않는 값입니다:" + number);
                 }
                 sum += number;
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException e) { // 숫자가 아닌 경우
                 throw new IllegalArgumentException("유효하지 않은 값입니다:" + token);
             }
         }
