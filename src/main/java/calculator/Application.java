@@ -11,6 +11,11 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해주세요");
         Scanner sc = new Scanner(System.in);
 
+        if (!sc.hasNextLine()) {
+            System.out.print("결과 : 0");
+            return;
+        }
+
         String user_input = sc.nextLine();
 
         sc.close();
