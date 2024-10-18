@@ -18,7 +18,6 @@ public class CustomPartManager {
             if (!validateCustomSeparator(input)) {
                 throw new IllegalArgumentException("커스텀 구분자 에러");
             }
-            //addCustomSeparator(input.charAt(2));
             return true;
         }
         return false;
