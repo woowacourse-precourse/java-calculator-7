@@ -59,7 +59,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 구분자_혼합_사용_테스트() {
         assertSimpleTest(() -> {
-            run("//::\\n1:3::5,2");
+            run("//'\\n1:3'5,2");
             assertThat(output()).contains("결과 : 11");
         });
     }
