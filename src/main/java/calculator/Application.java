@@ -21,6 +21,11 @@ class StringCalculator {
             return 0;
         }
 
+        // 숫자 하나만 입력되었을 경우 해당 숫자를 반환
+        if (input.length() == 1 && Character.isDigit(input.charAt(0))) {
+            return Integer.parseInt(input);
+        }
+
         // 기본 동작 추가 예정
         return -1;  // 임시값
     }
