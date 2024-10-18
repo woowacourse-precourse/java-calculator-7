@@ -28,5 +28,10 @@ public class Calculator {
         this.sum = sum;
     }
 
+    public String addSeparator(String str) {
+        this.separator.add(str.substring(2, 3));
+        return str.substring(5);
+    }
+
 
 }
