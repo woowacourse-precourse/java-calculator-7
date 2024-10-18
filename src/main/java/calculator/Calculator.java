@@ -5,12 +5,12 @@ import java.util.List;
 public class Calculator {
     public static int calculateString(String valueString, List<Character> delimiters) {
         String[] tokens = splitString(valueString, delimiters);
-        if (tokens.length == 0) {
-            return 0;
-        }
 
         int sum = 0;
         for (String token : tokens) {
+            if (token.isEmpty()) {
+                continue;
+            }
             try {
                 int tokenValue = Integer.parseInt(token);
                 if (tokenValue < 0) {
