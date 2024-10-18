@@ -17,6 +17,10 @@ public class Separator {
     public Character parseCustomSeparator(String string) {
         Character customSeparator = null;
 
+        if(string.substring(0, 4).equals("//\\n")){
+            return customSeparator;
+        }
+
         customSeparator = string.charAt(2);
 
         return customSeparator;
