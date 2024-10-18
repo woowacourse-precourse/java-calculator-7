@@ -3,6 +3,21 @@ package calculator;
 import java.util.Arrays;
 
 public class StringCalculator {
+    public static int add(String data){
+        String[] split;
+        if(isExistCustomDelim(data)) {
+            split = data.replaceAll(Delimiter.CUSTOM_REPLACE.getRegex(), "") // 커스텀구분점 부분 제거
+                        .split(getCustomDelim(data));
+        }
+        else {
+            split = data.split(Delimiter.DEFAULT.getRegex());
+        }
+
+        int[] numbers = convertStringArrayToIntArray(split);
+
+        return Arrays.stream(numbers).sum();
+    }
+
     private static boolean isExistCustomDelim(String data){
         return data.matches(Delimiter.CUSTOM.getRegex());
     }
