@@ -24,5 +24,8 @@ public class CalculatorController {
             delimiter.addDelimiter(service.getCustomDelimiter());
             userInput.setUserInput(service.getPureExpression());
         }
+
+        service.calculateSum(userInput.getUserInput(), delimiter.getDelimiter());
+        int sum = service.getSum();
     }
 }
