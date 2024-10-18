@@ -30,14 +30,14 @@ class ApplicationTest extends NsTest {
     @Test
     void 빈_문자열일_경우_0_반환(){
         String input = "";
-        int result = Application.isEmpty(input);
-        assertThat(result).isEqualTo(0);
+        Boolean result = Application.isEmpty(input);
+        assertThat(result).isEqualTo(true);
     }
     @Test
     void 빈_문자열이_아닐_경우_1_반환(){
         String input = "1,2";
-        int result = Application.isEmpty(input);
-        assertThat(result).isEqualTo(1);
+        Boolean result = Application.isEmpty(input);
+        assertThat(result).isEqualTo(false);
     }
 
     /*

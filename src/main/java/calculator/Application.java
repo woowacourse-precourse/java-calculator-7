@@ -12,8 +12,7 @@ public class Application {
         // 사용자로부터 문자열을 입력 받음
         String input = getUserInput();
         // 입력값이 빈 문자열인지 확인
-        int is_empty = isEmpty(input);
-        if (is_empty == 0){
+        if (isEmpty(input)){
             System.out.println(0);
             return;
         }
@@ -41,10 +40,10 @@ public class Application {
     /*
      * 빈 문자열인지 확인하는 메서드
      */
-    public static int isEmpty(String input){
+    public static Boolean isEmpty(String input){
         if (input == null || input.isEmpty()){
-            return 0;
-        } else return 1;
+            return true;
+        } else return false;
     }
 
     /*
