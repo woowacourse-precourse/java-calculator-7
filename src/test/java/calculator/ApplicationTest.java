@@ -27,14 +27,14 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 구분자_사이_숫자없음() {
-        assertSimpleTest(() -> {
-            run("1:,3:4,5:6,10");
-            assertThat(output()).contains("결과 : 29");
-        });
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1:,3:4,5:6,10"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Test
-    void 공백_입력_예외_테스트() {
+    void 공백_입력() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException(" "))
                         .isInstanceOf(IllegalArgumentException.class)
