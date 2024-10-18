@@ -1,8 +1,10 @@
 package calculator.validator;
 
 import calculator.validator.strategies.CustomDelimiterValidator;
+import calculator.validator.strategies.DuplicateDelimiterValidator;
+import calculator.validator.strategies.EmptyNumberValidator;
 import calculator.validator.strategies.NegativeNumberValidator;
-import calculator.validator.strategies.NonNumericValidator;
+import calculator.validator.strategies.NumericValidator;
 import calculator.validator.strategies.ValidationStrategy;
 import java.util.Arrays;
 import java.util.List;
@@ -15,19 +17,23 @@ public class ValidatorFactory {
      * @return InputValidator - 검증 전략들이 포함된 InputValidator 객체
      */
     public static InputValidator createInputValidator() {
-        // 검증 전략들을 리스트로 구성
         List<ValidationStrategy> validators = Arrays.asList(
-                // 1. NegativeNumberValidator: 입력값에 음수가 포함되어 있는지 검증
-                new NegativeNumberValidator(),
 
-                // 2. CustomDelimiterValidator: 입력 문자열에서 커스텀 구분자가 올바르게 정의되었는지 검증
+                // 1. EmptyNumberValidator : 빈 입력과 숫자가 없는 경우 검증
+                new EmptyNumberValidator(),
+
+                // 2. DuplicateDelimiterValidator: 연속된 구분자가 있는지 검증
+                new DuplicateDelimiterValidator(),
+
+                // 3. CustomDelimiterValidator: 커스텀 구분자가 올바르게 정의되었는지 검증
                 new CustomDelimiterValidator(),
 
-                // 3. NonNumericValidator: 입력값이 숫자와 허용된 구분자로만 이루어져 있는지 검증
-                new NonNumericValidator()
-        );
+                // 4. NegativeNumberValidator: 음수가 포함되어 있는지 검증
+                new NegativeNumberValidator(),
 
-        // 생성된 검증 전략 리스트를 사용하여 InputValidator 객체를 반환
+                // 5. NumericValidator: 숫자와 허용된 구분자만 있는지 검증
+                new NumericValidator());
+
         return new InputValidator(validators);
     }
 
