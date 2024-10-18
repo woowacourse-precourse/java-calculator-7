@@ -45,9 +45,17 @@ class StringCalculator {
         for (String number : numbers) {
             String[] splitNumbers = number.split(delimiters[1]);  // 콜론으로 분리
             for (String num : splitNumbers) {
+                validateNumber(num);  // 음수 체크
                 sum += Integer.parseInt(num);
             }
         }
         return sum;
+    }
+
+    private void validateNumber(String num) {
+        int value = Integer.parseInt(num);
+        if (value < 0) {
+            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+        }
     }
 }
