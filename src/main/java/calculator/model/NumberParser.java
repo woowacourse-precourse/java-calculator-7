@@ -16,9 +16,7 @@ public class NumberParser {
         final String target = extractTargetString(input);
         final String regex = String.join("|", delimiterParser.getDelimiters());
         final List<Number> numbers = new ArrayList<>();
-        System.out.println(target);
         for (String num : target.split(regex)) {
-            System.out.println(num);
             numbers.add(new Number(num));
         }
         return numbers;
