@@ -1,22 +1,22 @@
 package calculator.io;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.Optional;
 
 public class InputHandler {
 
     private static final String INPUT_PROMPT_MESSAGE = "덧셈할 문자열을 입력해 주세요.";
-    private static final String ZERO = "0";
 
-    public String input() {
+    public Optional<String> input() {
         System.out.println(INPUT_PROMPT_MESSAGE);
         String input = Console.readLine();
         return processInput(input);
     }
 
-    public String processInput(String input) {
+    private Optional<String> processInput(String input) {
         if (input == null || input.isBlank()) {
-            return ZERO;
+            return Optional.empty();
         }
-        return input.trim().replace("\\n", "\n");
+        return Optional.of(input.trim().replace("\\n", "\n"));
     }
 }

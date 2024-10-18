@@ -4,11 +4,11 @@ import calculator.application.DelimiterProcessor;
 import calculator.application.StringSumCalculator;
 import calculator.io.InputHandler;
 import calculator.io.ResultPrinter;
+import java.util.Optional;
 
 public class StringAdditionController {
 
-    private final static String ZERO_STRING = "0";
-    private final static int ZERO_INT = 0;
+    private final static int ZERO = 0;
     private final InputHandler inputHandler;
     private final DelimiterProcessor delimiterProcessor;
     private final StringSumCalculator stringSumCalculator;
@@ -23,14 +23,14 @@ public class StringAdditionController {
     }
 
     public void run() {
-        String input = inputHandler.input();
+        Optional<String> input = inputHandler.input();
 
-        if (ZERO_STRING.equals(input)) {
-            resultPrinter.printResult(ZERO_INT);
+        if (input.isEmpty()) {
+            resultPrinter.printResult(ZERO);
             return;
         }
 
-        String[] stringNumbers = delimiterProcessor.extractNumberStrings(input);
+        String[] stringNumbers = delimiterProcessor.extractNumberStrings(input.get());
         int sum = stringSumCalculator.sumStringNumbers(stringNumbers);
         resultPrinter.printResult(sum);
     }
