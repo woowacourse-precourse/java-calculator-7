@@ -18,14 +18,14 @@ public class NumberExtractor {
         List<Integer> numbers = new ArrayList<>();
 
         for (String token : tokens) {
-            validateToken(token, delimiters);
+            validateToken(token);
             numbers.add(Integer.parseInt(token));
         }
 
         return numbers.stream().mapToInt(i -> i).toArray();
     }
 
-    private static void validateToken(String token, String[] delimiters) {
+    private static void validateToken(String token) {
         token = token.trim(); // 공백 제거
 
         // 빈 문자열 검사
