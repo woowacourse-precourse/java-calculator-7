@@ -6,16 +6,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ValidatorTest {
 
+    private final Validator validator = new Validator(Constant.CUSTOM_SEPARATOR_END_STR_TEST);
 
     @Test
     void 문자열_유효성_검사_성공() {
         //given
-        String[] input = {"//*\n1,2:3*4", "//*\n", "1,2,3:4", "1,2,3:4//*\n"};
+        String[] input = {"//*\n1,2:3*4", "//*\n", "1,2,3:4", "1,2,3:4//*\n", "//;\n2;3;4"};
+
         //when
 
         //then
         for (String str : input) {
-            assertDoesNotThrow(() -> Validator.validate(str));
+            assertDoesNotThrow(() -> validator.validate(str));
         }
 
     }
@@ -28,12 +30,12 @@ class ValidatorTest {
 
         //then
         for (String str : input1) {
-            assertThrows(IllegalArgumentException.class, () -> Validator.validate(str),
+            assertThrows(IllegalArgumentException.class, () -> validator.validate(str),
                     "문자열의 시작은 커스텀 구분자 선언 또는 양수여야 합니다");
         }
 
         for (String str : input2) {
-            assertThrows(IllegalArgumentException.class, () -> Validator.validate(str),
+            assertThrows(IllegalArgumentException.class, () -> validator.validate(str),
                     "문자열의 끝은 커스텀 구분자 종료 선언 또는 양수여야 합니다.");
         }
     }
@@ -45,7 +47,7 @@ class ValidatorTest {
 
         //then
         for (String str : input) {
-            assertThrows(IllegalArgumentException.class, () -> Validator.validate(str),
+            assertThrows(IllegalArgumentException.class, () -> validator.validate(str),
                     "커스텀 구분자 형식이 올바르지 않습니다.");
         }
 
