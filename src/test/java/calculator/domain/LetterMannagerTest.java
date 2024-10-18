@@ -1,7 +1,8 @@
 package calculator.domain;
 
 
-import calculator.global.constant.ErrorMessage;
+import static calculator.global.constant.ErrorMessage.CUSTOM_SEPARATOR_INDEX_ERROR_MESSAGE;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +19,22 @@ class LetterMannagerTest {
         //then
         Assertions.assertThatThrownBy(letterMannager::splitCustomSeparator)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.CUSTOM_SEPARATOR_INDEX_ERROR_MESSAGE);
+                .hasMessage(CUSTOM_SEPARATOR_INDEX_ERROR_MESSAGE);
+    }
+
+    @Test
+    void 커스텀_구분자를_추출() {
+        //given
+        String separator = ";";
+        String letters = "//" + separator + "\n";
+        LetterMannager letterMannager;
+
+        //when
+        letterMannager = new LetterMannager(letters);
+        letterMannager.splitCustomSeparator();
+
+        //then
+        Assertions.assertThat(letterMannager.getSeparators().contains(separator)).isEqualTo(true);
     }
 
 }
