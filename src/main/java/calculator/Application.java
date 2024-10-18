@@ -21,6 +21,10 @@ public class Application {
 
     // 입력된 문자열을 처리하는 메서드
     private static int Add_Process(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            return 0; // 입력이 비어있거나 null이면 0을 반환
+        }
+        
         String[] nums = Refine_Input(input); // 입력을 정제하여 숫자 배열로 반환
 
         System.out.println(Arrays.toString(nums));
