@@ -67,4 +67,21 @@ class CalculatorUtilTest {
         assertFalse(resulTwiceDeclare2);
         assertTrue(resultNoneDeclare);
     }
+
+    @Test
+    @DisplayName("추출한 delimiter 외 다른 '문자' 또는 '공백을 포함하는 지 확인합니다.")
+    void isContainInvalidChar() {
+        // when
+        Boolean invalidDeclare = CalculatorUtil.isContainInvalidChar("//:\n//:\n1:2:3,4|5|//:\n6");
+        Boolean containSpace = CalculatorUtil.isContainInvalidChar("//-\n1 2:3-4:5,6");
+        Boolean validResult1 = CalculatorUtil.isContainInvalidChar("1:2:3,4:5:6");
+        Boolean validResult2 = CalculatorUtil.isContainInvalidChar("//-\n1-2:3-4:5,6");
+
+        // then
+        assertTrue(invalidDeclare);
+        assertTrue(containSpace);
+
+        assertFalse(validResult1);
+        assertFalse(validResult2);
+    }
 }

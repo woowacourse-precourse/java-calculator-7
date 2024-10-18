@@ -56,4 +56,23 @@ public class CalculatorUtil {
 
         return !matcher.find();
     }
+
+
+    public static Boolean isContainInvalidChar(String inputValue) {
+
+        // TODO : 추출한 delimiter 외 다른 '문자' 또는 '공백'을 포함하는 지 확인합니다.
+
+        List<String> delimiters = extractDelimiter(inputValue);
+
+        String formattingString = formattingString(inputValue);
+
+        for (String delimiter : delimiters) {
+            formattingString = formattingString.replaceAll(Pattern.quote(delimiter), "");
+        }
+
+        for (char s : formattingString.toCharArray()) {
+            if (!Character.isDigit(s)) return true;
+        }
+        return false;
+    }
 }
