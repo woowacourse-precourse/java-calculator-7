@@ -1,7 +1,13 @@
 package calculator;
 
+import calculator.config.AppConfig;
+import calculator.controller.StringAddCalculatorController;
+import camp.nextstep.edu.missionutils.Console;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        AppConfig appConfig = new AppConfig();
+        StringAddCalculatorController calculatorController = new StringAddCalculatorController(appConfig.calculatorService());
+        calculatorController.playCalculator(Console.readLine());
     }
 }
