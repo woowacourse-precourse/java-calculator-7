@@ -9,37 +9,22 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         Calculator calc = new Calculator();
-        System.out.println("결과 : "+calc.sum());
+        System.out.println("결과 : " + calc.sum());
     }
 }
 
 class Calculator {
 
     static Str str;
-    static Delimiters delimiters;
     static Numbers numbers;
 
     Calculator() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         str = new Str(Console.readLine());
-        delimiters = getDelimiter();
-        StrArr strArr = str.getSplitString();
-        numbers = strArr.strArrToNumbers();
+        numbers = str.strToNumbers();
     }
 
-    public static Delimiters getDelimiter() {
-        List<Character> delimiterList = new ArrayList<>();
-        if (str.checkingCustomDelimiter()) {
-            delimiterList.add(str.getCustomDelimiter());
-            return new Delimiters(delimiterList);
-        }
-
-        delimiterList.add(',');
-        delimiterList.add(':');
-        return new Delimiters(delimiterList);
-    }
-
-    public int sum(){
+    public int sum() {
         return numbers.sum();
     }
 
@@ -59,34 +44,34 @@ class Str {
 
     }
 
+
     Character getCustomDelimiter() {
         return string.charAt(2);
     }
 
+
     StrArr getSplitString() {
         String[] strings;
+        final String defaultDelimiter = ",|:";
 
         if (checkingCustomDelimiter()) {
-            char customDelimiter = getCustomDelimiter();
+            String customDelimiter = String.valueOf(getCustomDelimiter());
             string = string.substring(5);
-            strings = string.split(String.valueOf(customDelimiter));
+            strings = string.split(customDelimiter);
             return new StrArr(strings);
         }
 
-        strings = string.split(",|:");
+        strings = string.split(defaultDelimiter);
         return new StrArr(strings);
     }
 
-}
-
-class Delimiters {
-
-    private List<Character> delimiterList;
-
-    public Delimiters(List<Character> delimiterList) {
-        this.delimiterList = delimiterList;
+    Numbers strToNumbers() {
+        StrArr strArr = getSplitString();
+        return strArr.strArrToNumbers();
     }
+
 }
+
 
 class StrArr {
 
@@ -135,8 +120,8 @@ class Numbers {
     }
 
 
-    public int sum(){
-        return numberList.stream().mapToInt(i->i).sum();
+    public int sum() {
+        return numberList.stream().mapToInt(i -> i).sum();
     }
 
 }
