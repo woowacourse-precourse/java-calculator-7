@@ -1,7 +1,9 @@
 package calculator.service;
 
 import calculator.calculator.Calculator;
+import calculator.constants.StringConst;
 import calculator.delimiterExtractor.DelimiterExtractor;
+import calculator.dto.DelimiterDto;
 import calculator.dto.NumberDto;
 import calculator.numberExtractor.NumberExtractor;
 import java.util.ArrayList;
@@ -10,8 +12,8 @@ public class Service {
 
 
     public String extractDelimiter(DelimiterExtractor extractor, String input) {
-
-        return extractor.extractDelimiter(input);
+        DelimiterDto delimiterDto = extractor.extractDelimiter(input);
+        return delimiterDto.getDelimiter();
 
     }
 
@@ -25,14 +27,12 @@ public class Service {
 
     public String checkTypeOfInput(String input) {
         char[] inputToCharArray = input.toCharArray();
-        String firstString = String.valueOf(inputToCharArray[0]);
-        String secondString = String.valueOf(inputToCharArray[1]);
 
-        if (firstString.equals("/") && secondString.equals("/")) {
+        if (input.startsWith(StringConst.CUSTOM_START_STRING) && input.contains(StringConst.LINE_SEPARATOR_STRING)) {
             return "CustomInput";
         }
 
-        if (input.contains(",") || input.contains(":")) {
+        if (input.contains(StringConst.COMMA) || input.contains(StringConst.COLON)) {
             return "DefaultInput";
         }
 

@@ -8,7 +8,7 @@ public class DefaultDelimiterExtractor implements DelimiterExtractor {
 
 
     public DelimiterDto extractDelimiter(String input) {
-        Delimiter delimiter = new Delimiter(StringConst.DEFAULT_DELiMITER);
+        Delimiter delimiter = new Delimiter(StringConst.DEFAULT_DELiMITER_REGEX);
         return delimiter.toDto();
     }
 

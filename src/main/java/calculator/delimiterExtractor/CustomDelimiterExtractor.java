@@ -10,7 +10,7 @@ public class CustomDelimiterExtractor implements DelimiterExtractor {
 
     public DelimiterDto extractDelimiter(String input) {
 
-        String[] firstSecondInput = input.split(StringConst.LINE_SEPARATOR);
+        String[] firstSecondInput = input.split(StringConst.LINE_SEPARATOR_REGEX);
         String firstInput = firstSecondInput[0];
         String delimiterString = firstInput.substring(2);
         delimiterString = escapeDelimiter(delimiterString);

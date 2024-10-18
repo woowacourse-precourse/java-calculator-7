@@ -20,7 +20,7 @@ public class CustomNumberExtractor implements NumberExtractor {
     }
 
     private static String[] splitNextToken(String input, String customDelimiter) {
-        return input.split(StringConst.LINE_SEPARATOR)[1].split(customDelimiter);
+        return input.split(StringConst.LINE_SEPARATOR_REGEX)[1].split(customDelimiter);
     }
 
 

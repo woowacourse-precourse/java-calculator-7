@@ -16,7 +16,7 @@ public class Validator {
 
     public static boolean isHaveNextToken(String input) {
 
-        if (input.split(StringConst.LINE_SEPARATOR).length == 1) {
+        if (input.split(StringConst.LINE_SEPARATOR_REGEX).length == 1) {
             throw new IllegalArgumentException("[FORMAT_ERROR] NextToken의 입력값이 없습니다");
         }
 
