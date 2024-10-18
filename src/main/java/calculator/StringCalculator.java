@@ -25,11 +25,15 @@ public class StringCalculator {
 
         String[] separatedNumbers = str.split('[' + separators + ']');
         int sumValue = calculateSumValue(separatedNumbers);
-        System.out.println("결과 : " + sumValue);
+        printOutputMsg(sumValue);
     }
 
     void printInputMsg() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
+    }
+
+    void printOutputMsg(int sumValue) {
+        System.out.println("결과 : " + sumValue);
     }
 
     int calculateSumValue(String[] separatedNumbers) {
