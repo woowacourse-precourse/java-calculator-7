@@ -4,6 +4,7 @@ import calculator.domain.delimiter.Delimiters;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class InputParser {
 
@@ -29,9 +30,9 @@ public class InputParser {
     }
 
     private String getDelimiterPattern(String input) {
-        List<String> allDelimiters = delimiters.getAllDelimiters(input);
-
-        return String.join("|", allDelimiters);
+        return delimiters.getAllDelimiters(input)
+                .stream().filter(delimiter -> !delimiter.isBlank())
+                .collect(Collectors.joining("|"));
     }
 
     private int parse(final String input) {

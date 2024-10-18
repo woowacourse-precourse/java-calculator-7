@@ -26,23 +26,23 @@ public class Delimiters {
     }
 
     public List<String> getAllDelimiters(final String input) {
-        final Optional<String> customDelimiter = findCustomDelimiter(input);
+        final String customDelimiter = findCustomDelimiter(input);
 
-        customDelimiter.ifPresent(delimiter -> {
-            validateSingleDelimiter(delimiter);
-            delimiters.add(delimiter);
-        });
+        if (!customDelimiter.isBlank()) {
+            validateSingleDelimiter(customDelimiter);
+            delimiters.add(customDelimiter);
+        }
 
         return delimiters;
     }
 
-    public Optional<String> findCustomDelimiter(final String input) {
+    public String findCustomDelimiter(final String input) {
         if (hasCustomDelimiter(input)) {
             final int endIndex = input.indexOf(CUSTOM_DELIMITER_END_SEPARATOR);
-            return Optional.of(input.substring(BEGIN_INDEX, endIndex));
+            return input.substring(BEGIN_INDEX, endIndex);
         }
 
-        return Optional.empty();
+        return "";
     }
 
     private void validateSingleDelimiter(final String delimiter) {

@@ -1,7 +1,5 @@
 package calculator.ui;
 
-import camp.nextstep.edu.missionutils.Console;
-
 public class OutputView {
 
     private static final String OUTPUT_MESSAGE = "결과 : ";
