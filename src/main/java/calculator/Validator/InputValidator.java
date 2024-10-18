@@ -7,9 +7,6 @@ public class InputValidator implements Validator {
     @Override
     public void validateTokens(String[] tokens){
 
-        if(tokens.length < 1){
-            throw new IllegalArgumentException("빈 값은 허용되지 않습니다.");
-        }
         for(String token : tokens){
 
             if(token.contains(" ")){

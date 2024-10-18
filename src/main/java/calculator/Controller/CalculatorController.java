@@ -6,8 +6,6 @@ import calculator.Interface.Validator;
 import calculator.View.InputView;
 import calculator.View.OutputView;
 
-import java.util.Arrays;
-
 public class CalculatorController {
 
     private final Calculator calculator;
@@ -27,18 +25,12 @@ public class CalculatorController {
         try{
             parser.setInput(userInput);
 
-            // 구분자, 숫자 분리
             parser.parseCustomSeparator();
 
-            // 구분자로 숫자 분리
             String[] tokens = parser.getTokens();
 
-            System.out.println(Arrays.toString(tokens));
-
-            //공백, 빈값, 음수, 숫자에 대한 validation
             validator.validateTokens(tokens);
 
-            // string addition
             String result = calculator.calculateSum(tokens);
 
             OutputView.userOutput(result);

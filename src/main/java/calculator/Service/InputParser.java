@@ -3,6 +3,7 @@ package calculator.Service;
 import calculator.Interface.Parser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class InputParser implements Parser {
@@ -23,7 +24,9 @@ public class InputParser implements Parser {
 
         if(input.startsWith(SEPARATOR_PREFIX)){
             int customEndIdx = input.indexOf(END_OF_SEPARATOR);
-
+            if(customEndIdx == -1){
+                throw new IllegalArgumentException();
+            }
             String separatorPart = input.substring(2,customEndIdx);
 
             for(char ch : separatorPart.toCharArray()){
@@ -43,7 +46,7 @@ public class InputParser implements Parser {
 
         String tokenSeparator = createTokenSeparator();
 
-        return input.split(tokenSeparator);
+        return trimTokens(input.split(tokenSeparator));
     }
 
     @Override
@@ -57,6 +60,13 @@ public class InputParser implements Parser {
         }
 
         return separatorPattern.toString();
+    }
+
+    private String[] trimTokens(String[] tokens){
+        return Arrays.stream(tokens)
+                .map(String::trim)
+                .filter(token -> !token.isEmpty())
+                .toArray(String[]::new);
     }
 
     private String escapeSpecialCharacter(String separator){

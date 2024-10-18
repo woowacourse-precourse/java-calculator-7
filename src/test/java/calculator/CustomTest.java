@@ -18,17 +18,17 @@ class CustomTest extends NsTest {
     }
 
     @Test
-    void Empty_Input_Exception(){
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException(" "))
-                        .isInstanceOf(IllegalArgumentException.class)
-                );
+    void Empty_Input(){
+        assertSimpleTest(() -> {
+            run(" ");
+            assertThat(output()).contains("결과 : 0");
+        });
     }
 
     @Test
     void Non_Numeric_Value_Exception(){
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("1,a,3"))
+                assertThatThrownBy(() -> runException("1;a,3"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
@@ -73,6 +73,24 @@ class CustomTest extends NsTest {
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
+
+    @Test
+    void Begin_With_Slash_No_End_Exception(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//1:2:3:4"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void No_Slash_End_Line_Exception(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("\\n1:2:3:4"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+
 
 
     @Override

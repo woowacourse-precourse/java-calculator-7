@@ -6,8 +6,13 @@ public class CalculatorModel implements Calculator {
 
     @Override
     public String calculateSum(String[] tokens){
+
+
         String sum = "0";
         for(String token : tokens){
+            if(token == null || token.isEmpty()){
+                continue;
+            }
             sum = addStrings(sum, token);
         }
         return sum;
