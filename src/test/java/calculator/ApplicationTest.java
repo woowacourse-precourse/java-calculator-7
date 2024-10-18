@@ -32,7 +32,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 정규식_문자_사용() {
+    void 커스텀_구분자_정규식_문자_사용() {
         assertSimpleTest(() -> {
             run("//.\\n1");
             assertThat(output()).contains("결과 : 1");
@@ -48,11 +48,17 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀_문자_이스케이프문자_사용() {
+    void 커스텀_구분자_이스케이프문자_사용() {
         assertSimpleTest(() -> {
             run("//\\t\\n1\\t2\\t3,4");
             assertThat(output()).contains("결과 : 10");
         });
+    }
+
+    @Test
+    void 커스텀_구분자_숫자_사용() {
+        assertThatThrownBy(() -> runException("//3\\n13233"))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
