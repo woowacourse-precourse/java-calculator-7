@@ -1,25 +1,16 @@
 package calculator.checkMethod;
 
-import calculator.delimiterSplit.BasicDelimiterSplit;
-import calculator.delimiterSplit.CustomDelimiterSplit;
-
 public class CheckInputType {
 
-    public static String[] checkType(String input, int inputLen, String basicDelimiter){
-        if (input.equals("")){
-            return null;
+    public String checkType(String input){
+
+        String type;
+        if (input.startsWith("//")){
+            type = "custom";
+        } else{
+            type = "basic";
         }
 
-        if (input.startsWith("//")){
-            String[] operandArr = CustomDelimiterSplit.splitInput(input, inputLen, basicDelimiter);
-            if (operandArr == null){
-                return null;
-            } else{
-                return operandArr;
-            }
-        } else{
-            String[] operandArr = BasicDelimiterSplit.splitInput(input, basicDelimiter);
-            return operandArr;
-        }
+        return type;
     }
 }
