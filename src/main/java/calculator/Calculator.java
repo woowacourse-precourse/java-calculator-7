@@ -75,8 +75,10 @@ public class Calculator {
 		savePersonalSeparator(newSeparator);
 	}
 
+	/*
+		커스텀 구분자 저장
+	 */
 	private void savePersonalSeparator(char personalSeparator) {
-		// 커스텀 구분자 저장 및 구분자 개수 추가
 		separator[2] = personalSeparator;
 		separatorCnt++;
 	}
