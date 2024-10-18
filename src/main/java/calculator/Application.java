@@ -2,67 +2,90 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Application {
+    
+    //구분자
+    static final String DEFAULT_DELIMITER = "[,:]"; // 기본 구분자: 콤마(,) 및 콜론(:)
+    static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)"; // 커스텀 구분자
+    
+    //메시지
+    static final String EMPTY_STRING_ERROR = "빈 문자열은 허용되지 않습니다."; // 빈 문자열 에러 메시지
+    static final String NEGATIVE_NUMBER_ERROR = "음수는 허용되지 않습니다: "; // 음수 에러 메시지
+    static final String INVALID_NUMBER_ERROR = "유효한 숫자를 입력해야 합니다: "; // 유효하지 않는 메시지
+
+    // TODO: 프로그램 구현
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
-        String input = Console.readLine(); // 사용자 입력을 받음
-        int result = add(input); // 입력 처리
-        System.out.println("결과 : " + result); // 결과 출력
+        System.out.println("덧셈할 문자열을 입력해 주세요."); //입력
+        String input = Console.readLine();
+        run(input); // 입력값 처리 및 결과 출력
     }
 
-    // 입력된 문자열에서 숫자를 추출하여 더하는 메서드
-    public static int add(String input) {
-        if (input == null || input.isEmpty()) {
-            return 0; // 빈 문자열 또는 null이면 0 반환
-        }
-
-        // 커스텀 구분자 처리
-        if (input.startsWith("//")) {
-            return sumWithCustomDelimiter(input);
-        }
-
-        // 기본 구분자 처리
-        return sumWithDefaultDelimiter(input);
+    // TODO: 입력된 문자열을 기반으로 덧셈 결과를 계산하는 메서드
+    public static long calculate(String input) {
+        Calculator calculator = new Calculator(); // Calculator 객체 생성
+        return calculator.add(input); // 입력값을 사용하여 덧셈 결과 반환
     }
 
-    // 기본 구분자로 문자열을 분리하여 합산하는 메서드
-    private static int sumWithDefaultDelimiter(String input) {
-        String[] numbers = input.split("[,|:]"); // 쉼표와 콜론으로 분리
-        return calculateSum(numbers);
-    }
-
-    // 커스텀 구분자로 문자열을 분리하여 합산하는 메서드
-    private static int sumWithCustomDelimiter(String input) {
-        String[] parts = input.split("\\n", 2); // 구분자를 설정한 줄과 숫자 부분 분리
-        String delimiter = parts[0].substring(2); // "//" 이후의 문자
-        String[] numbers = parts[1].split(delimiter); // 커스텀 구분자로 분리
-        return calculateSum(numbers);
-    }
-
-    // 주어진 문자열 배열의 합산을 계산하는 메서드
-    private static int calculateSum(String[] numbers) {
-        int sum = 0;
-        for (String number : numbers) {
-            if (isNumeric(number)) {
-                int num = Integer.parseInt(number);
-                if (num < 0) {
-                    throw new IllegalArgumentException("음수는 입력할 수 없습니다"); // 음수 예외 처리
-                }
-                sum += num;
-            } else {
-                throw new IllegalArgumentException("잘못된 입력입니다. 숫자만 입력할 수 있습니다."); // 잘못된 입력 처리
-            }
-        }
-        return sum;
-    }
-
-    // 주어진 문자열이 숫자인지 확인하는 메서드
-    private static boolean isNumeric(String str) {
+    // TODO: 입력 값을 처리하고 결과를 출력하는 메서드
+    public static void run(String input) {
         try {
-            Integer.parseInt(str); // 문자열을 정수로 변환 시도
-            return true; // 변환 성공 시 true 반환
+            long result = calculate(input); // 입력값을 기반으로 계산
+            System.out.println("결과 : " + result); // 결과 출력
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage()); // 예외 발생 출력
+
+        }
+    }
+}
+
+class Calculator {
+    // TODO: 입력값에 대한 덧셈을 처리하는 메서드
+    public long add(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            return 0; // 빈 문자열 또는 null일 경우 0 반환
+        }
+
+        // 입력값을 구분자에 따라 나누고 합산 처리
+        String[] tokens = splitInput(input); // 구분자에 따라 입력값 분리
+        return calculateSum(tokens); // 분리된 값을 기반으로 합계 계산
+    }
+
+    // TODO: 입력 문자열을 구분자에 따라 분리하는 메서드
+    private String[] splitInput(String input) {
+        Matcher matcher = Pattern.compile(Application.CUSTOM_DELIMITER_PATTERN).matcher(input); //구분
+        if (matcher.find()) {
+            var customDelimiter = matcher.group(1); // 커스텀 구분자 추출
+            var numbers = matcher.group(2); // 나머지 숫자 문자열 추출
+            return numbers.split(Pattern.quote(customDelimiter)); // 커스텀 구분자로 분리하여 반환
+        }
+        return input.split(Application.DEFAULT_DELIMITER); // 기본 구분자로 분리하여 반환
+    }
+
+    // 숫자 합산 처리
+    private long calculateSum(String[] tokens) {
+        return Arrays.stream(tokens)
+                .mapToLong(this::parseNumber) // 각 토큰을 숫자로 변환
+                .sum(); // 변환된 숫자들의 합계 계산
+    }
+
+    // TODO: 문자열을 숫자로 변환하는 메서드
+    private long parseNumber(String token) {
+        if (token == null || token.trim().isEmpty()) {
+            throw new IllegalArgumentException(Application.EMPTY_STRING_ERROR); // 빈 문자열 처리
+        }
+
+        try {
+            long number = Long.parseLong(token); // Long 타입으로 변환
+            if (number < 0) {
+                throw new IllegalArgumentException(Application.NEGATIVE_NUMBER_ERROR + number); // 음수 처리
+            }
+            return number; // 유효한 숫자 반환
         } catch (NumberFormatException e) {
-            return false; // 변환 실패 시 false 반환
+            throw new IllegalArgumentException(Application.INVALID_NUMBER_ERROR + token); // 유효하지 않은 숫자 처리
         }
     }
 }
