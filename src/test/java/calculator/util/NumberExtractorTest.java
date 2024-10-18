@@ -46,7 +46,7 @@ public class NumberExtractorTest {
         // when & then
         assertThatThrownBy(() -> NumberExtractor.extract(input, delimiters))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(NumberExtractorErrorMessage.INVALID_DELIMITER.getMessage());
+                .hasMessageContaining(NumberExtractorErrorMessage.INVALID_CHARACTER.getMessage());
     }
 
     @Test
@@ -72,6 +72,45 @@ public class NumberExtractorTest {
         // when & then
         assertThatThrownBy(() -> NumberExtractor.extract(input, delimiters))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(NumberExtractorErrorMessage.NEGATIVE_OR_ZERO_NUMBER.getMessage());
+                .hasMessageContaining(NumberExtractorErrorMessage.INVALID_CHARACTER.getMessage());
+    }
+
+    @Test
+    @DisplayName("분리할 수 없는 문자일 경우 예외 처리")
+    void 분리할_수_없는_문자열() {
+        // given
+        String input = "4:3, ,";
+        String[] delimiters = {",", ":", "&"};
+
+        // when & then
+        assertThatThrownBy(() -> NumberExtractor.extract(input, delimiters))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(NumberExtractorErrorMessage.INVALID_SPLIT.getMessage());
+    }
+
+    @Test
+    @DisplayName("int 범위를 벗어나는 숫자일 경우 예외 처리")
+    void int_범위를_벗어나는_숫자() {
+        // given
+        String input = "2147483648:4,5";
+        String[] delimiters = {",", ":", "&"};
+
+        // when & then
+        assertThatThrownBy(() -> NumberExtractor.extract(input, delimiters))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(NumberExtractorErrorMessage.OUT_OF_INT_RANGE.getMessage());
+    }
+
+    @Test
+    @DisplayName("정수가 아닌 숫자가 포함된 경우 예외 처리")
+    void 정수가_아닌_숫자() {
+        // given
+        String input = "1.5:3,4";
+        String[] delimiters = {",", ":", "&"};
+
+        // when & then
+        assertThatThrownBy(() -> NumberExtractor.extract(input, delimiters))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(NumberExtractorErrorMessage.INVALID_CHARACTER.getMessage());
     }
 }

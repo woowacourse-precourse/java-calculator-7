@@ -2,11 +2,10 @@ package calculator.util;
 
 import calculator.exception.util.CustomDelimiterExtractorErrorMessage;
 
-public class CustomDelimiterExtractor {
-    private static final String DEFAULT_DELIMITER_1 = ",";
-    private static final String DEFAULT_DELIMITER_2 = ":";
-    private static final String CUSTOM_DELIMITER_END = "\n";
+import static calculator.util.DelimiterConstants.CUSTOM_DELIMITER_END;
+import static calculator.util.DelimiterConstants.DEFAULT_DELIMITERS;
 
+public class CustomDelimiterExtractor {
     public static String extract(String input) {
         int delimiterEndIndex = input.indexOf(CUSTOM_DELIMITER_END);
 
@@ -30,7 +29,7 @@ public class CustomDelimiterExtractor {
             throw new IllegalArgumentException(CustomDelimiterExtractorErrorMessage.CUSTOM_DELIMITER_IS_SPACE.getMessage());
         }
 
-        if (delimiter.equals(DEFAULT_DELIMITER_1) || delimiter.equals(DEFAULT_DELIMITER_2)) {
+        if (delimiter.equals(DEFAULT_DELIMITERS[0]) || delimiter.equals(DEFAULT_DELIMITERS[1])) {
             throw new IllegalArgumentException(CustomDelimiterExtractorErrorMessage.CUSTOM_DUPLICATE_CUSTOM_DELIMITER.getMessage());
         }
     }
