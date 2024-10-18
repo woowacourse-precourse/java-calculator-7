@@ -52,5 +52,7 @@ public class Application {
         for (String number : processedInput) {
             total += Integer.parseInt(number);
         }
+
+        System.out.println("결과 : " + total);
     }
 }
