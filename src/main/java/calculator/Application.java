@@ -59,6 +59,8 @@ public class Application {
             }
         } else if (input.isEmpty()) {
             sum = 0;
+        } else if (input.matches("[0-9]+")) {
+            sum = Integer.parseInt(input);
         }
 
         System.out.println("결과 : " + sum);
