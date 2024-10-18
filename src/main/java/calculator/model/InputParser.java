@@ -100,9 +100,9 @@ public class InputParser {
 	// 입력값에서 커스텀 구분자를 제거한 문자열을 반환
 	private String removeCustomDelimiter(String input) {
 		if (hasCustomDelimiter(input)) {
-			int delimiterEnd = input.indexOf("\n");
+			int delimiterEnd = input.indexOf("\\n");
 
-			return input.substring(delimiterEnd + 1); // \n 이후의 문자열 반환
+			return input.substring(delimiterEnd + 2); // \n 이후의 문자열 반환
 		}
 
 		return input; // 커스텀 구분자가 없을 경우 원본 문자열 반환
