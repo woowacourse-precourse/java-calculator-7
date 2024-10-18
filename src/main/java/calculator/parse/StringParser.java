@@ -8,20 +8,20 @@ import java.util.List;
 
 public class StringParser {
     public String getCustomDelimiter(String input) {
-        int end_index = input.indexOf(CUSTOM_DELIMITER_END);
-        return input.substring(2, end_index);
+        int endIndex = input.indexOf(CUSTOM_DELIMITER_END);
+        return input.substring(2, endIndex);
     }
 
     public int[] convertStringToIntArray(String input) {
-        int start_index = 0;
+        int startIndex = 0;
         if (input.startsWith(CUSTOM_DELIMITER_START)) { // 커스텀 구분자가 있는 경우
-            start_index = input.indexOf(CUSTOM_DELIMITER_END) + 2; // 그 이후부터 탐색하도록 인덱스 조정
+            startIndex = input.indexOf(CUSTOM_DELIMITER_END) + 2; // 그 이후부터 탐색하도록 인덱스 조정
         }
 
         List<Integer> numbers = new ArrayList<>();
         StringBuilder currentNumber = new StringBuilder(); // 현재 숫자를 임시로 저장하는 StringBuilder
 
-        for (int i = start_index; i < input.length(); i++) {
+        for (int i = startIndex; i < input.length(); i++) {
             char currentChar = input.charAt(i); // 현재 인덱스의 문자
 
             if (Character.isDigit(currentChar)) { // 현재 문자가 숫자일 경우, currentNumber(버퍼) 에 추가
