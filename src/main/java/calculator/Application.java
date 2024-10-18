@@ -18,4 +18,13 @@ public class Application {
             return;
         }
     }
+    public int add(String input) {
+        //입력 x or 빈 문자열
+        if (input == null || input.isEmpty()) {
+            return 0;
+        }
+        int sum = 0;
+
+        return sum;
+    }
 }
