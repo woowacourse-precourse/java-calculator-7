@@ -29,8 +29,4 @@ public class CalculatorController {
     public boolean containsDefaultSeparator(String input) {
         return input.contains(",") || input.contains(":");
     } // containsDefaultSeparator
-
-    public static void main(String[] args) {
-        new CalculatorController().run();
-    }
 } // class
