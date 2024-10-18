@@ -25,15 +25,18 @@ public class StringCalculator {
 
         for (String str : parsedCalculateStr) {
             int num = stringToInteger(str);
-
-            if (num < 0) {
-                throw new IllegalArgumentException("양수만 입력");
-            }
+            validateNumPositive(num);
 
             ret += num;
         }
 
         return ret; //TODO
+    }
+
+    private void validateNumPositive(int num) {
+        if (num < 0) {
+            throw new IllegalArgumentException("양수만 입력");
+        }
     }
 
     private int stringToInteger(String str) {
