@@ -48,4 +48,13 @@ public class StringProcessorTest {
         Assertions.assertThat(stringProcessor.splitWithCustomDelimiter("")).containsExactly("");
     }
 
+    @Test
+    @DisplayName("빈문자열 입력 시 결과가 0")
+    void 빈문자열의_연산결과는_0(){
+        StringProcessor stringProcessor = new StringProcessor();
+
+        Assertions.assertThat(stringProcessor.calculate(
+                stringProcessor.splitWithCustomDelimiter(""))).isEqualTo(0);
+    }
+
 }

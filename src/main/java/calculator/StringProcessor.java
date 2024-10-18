@@ -21,6 +21,9 @@ public class StringProcessor {
     }
 
     public static int calculate(String[] expression) {
+        if(expression[0].isEmpty()) {
+            return 0;
+        }
         int sum = 0;
         for (String s : expression) {
             int operand = Integer.parseInt(s);
