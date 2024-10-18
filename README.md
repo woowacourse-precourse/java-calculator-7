@@ -28,13 +28,13 @@
 
 ### InputManager
 * **입력된 문자열을 관리**
-  * [ ] `Delimiters`에 있는 구분자들을 문자열에서 제거한다.
-  * [ ] 문자를 숫자로 변환하여 리스트로 반환할 수 있다.
-    * [ ] 변환 과정에서 유효하지 않은 문자가 포함되면 `IllegalArgumentException`을 발생시킨다.
+  * [x] `Delimiters`에 있는 구분자들을 문자열에서 제거한다.
+  * [x] 문자를 숫자로 변환하여 리스트로 반환할 수 있다.
+    * [x] 변환 과정에서 유효하지 않은 문자가 포함되면 `IllegalArgumentException`을 발생시킨다.
 
 ### Calculator
 * **계산 로직**
-  * [ ] `InputManager`에서 준 리스트를 덧셈한다.
+  * [x] `InputManager`에서 준 리스트를 덧셈한다.
 
 ### InputView
 * **입력**
