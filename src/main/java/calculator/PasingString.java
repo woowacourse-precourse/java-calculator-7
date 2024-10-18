@@ -21,12 +21,12 @@ public class PasingString {
 
     public static void findStartIndex(String input, String delimiter) {
         if (delimiter.length() > BASIC_DELIMITER_SIZE) {
-            findStartIndex = 5;
+            findStartIndex = delimiter.length();
         }
     }
 
     public static String emptyString(String input) {
-        if (input.equals("")) {
+        if (input.isEmpty()) {
             input = "0";
         }
         return input;
