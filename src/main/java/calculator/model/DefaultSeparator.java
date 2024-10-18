@@ -20,7 +20,7 @@ public class DefaultSeparator {
     } // addInitialValue
 
     public List<Integer> separate(String input) {
-        new DefaultSeparatorValidator().validate(defaultSeparators, input);
+        new DefaultSeparatorValidator().validate(input);
 
         String numbers = defaultSeparators.stream()
                 .reduce(input, (result, defaultSeparator) -> result.replaceAll(defaultSeparator, " "));
