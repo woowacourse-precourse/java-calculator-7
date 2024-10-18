@@ -102,6 +102,15 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    @DisplayName("커스텀과 기본 구분자 같이 사용")
+    void 커스텀과_기본() {
+        assertSimpleTest(() -> {
+            run("//i\\n1i2,3:4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
