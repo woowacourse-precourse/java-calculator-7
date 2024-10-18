@@ -74,11 +74,15 @@ public class Application {
     }
 
     private static int parseAndValidateNumber(String token) {
-        int number = Integer.parseInt(token);
-        if (number < 0) {
-            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+        try {
+            int number = Integer.parseInt(token);
+            if (number < 0) {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            }
+            return number;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("잘못된 입력 값: " + token);
         }
-        return number;
     }
 
     private static int calculateSum(String[] tokens) {
