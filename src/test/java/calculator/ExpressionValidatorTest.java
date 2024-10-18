@@ -29,7 +29,9 @@ class ExpressionValidatorTest {
                 Arguments.of(generateSeparatorsFrom(List.of(":", ",")), "1,2:3,", false),
                 Arguments.of(generateSeparatorsFrom(List.of(":", ",")), "1,2::3,", false),
                 Arguments.of(generateSeparatorsFrom(List.of(":", ",", "aa")), "1,2:4aa3", true),
-                Arguments.of(generateSeparatorsFrom(List.of(":", ",", "aa")), ",1,2:aa3", false)
+                Arguments.of(generateSeparatorsFrom(List.of(":", ",", "aa")), ",1,2:aa3", false),
+                Arguments.of(generateSeparatorsFrom(List.of(":", ",", "aa")), "1", true),
+                Arguments.of(generateSeparatorsFrom(List.of(":", ",", "aa")), "Z", true)
         );
     }
 

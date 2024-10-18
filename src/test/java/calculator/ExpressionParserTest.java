@@ -33,13 +33,24 @@ class ExpressionParserTest {
         );
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("올바른 계산식 parse시 IllegalArgumentException을 던지지 않는지 확인")
-    void testParse() {
-        ExpressionParser parser = generateParserFrom(generateSeparatorsFrom(List.of(":", ",", "customSeparator")));
-        String validExpression = "11:12,13customSeparator4";
+    @MethodSource("generateLegalExpressionData")
+    void testParseNotThrowIllegalArgumentException(Separators separators, String expressionString) {
+        ExpressionParser parser = generateParserFrom(separators);
 
-        assertThatNoException().isThrownBy(() -> parser.parse(validExpression));
+        assertThatNoException().isThrownBy(() -> parser.parse(expressionString));
+    }
+
+    static Stream<Arguments> generateLegalExpressionData() {
+        return Stream.of(
+                Arguments.of(generateSeparatorsFrom(List.of(":", ",")), "1,2:3"),
+                Arguments.of(generateSeparatorsFrom(List.of(":", ",")), "1,2:3"),
+                Arguments.of(generateSeparatorsFrom(List.of(":", ",", "aa")), "1,2aa3"),
+                Arguments.of(generateSeparatorsFrom(List.of(":", ",", "aa")), "1"),
+                Arguments.of(generateSeparatorsFrom(List.of(":", ",", "aa")), ""),
+                Arguments.of(generateSeparatorsFrom(List.of(":", ",", "aa")), "")
+        );
     }
 
     private static ExpressionParser generateParserFrom(Separators separators) {
