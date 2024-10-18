@@ -24,6 +24,14 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 쉼표_구분자만_존재() {
+        assertSimpleTest(() -> {
+            run("1,2,3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
