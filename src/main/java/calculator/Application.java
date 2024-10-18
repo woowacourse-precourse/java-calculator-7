@@ -103,7 +103,7 @@ public class Application {
                 }
 
             } catch (Exception e) {
-                System.err.println(e);
+                throw e;
             }
             System.out.println(extractedNumArr.toString());
             return true;
