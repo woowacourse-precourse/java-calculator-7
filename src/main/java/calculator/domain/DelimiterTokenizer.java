@@ -6,10 +6,10 @@ import java.util.Set;
 
 public class DelimiterTokenizer {
 
-    public List<Integer> getNumbers(ExtractResult extractResult) {
+    public List<Integer> getNumbers(DelimiterResult delimiterResult) {
         List<Integer> numbers = new ArrayList<>();
-        String numberInput = extractResult.getNumberString();
-        Set<Character> delimiters = extractResult.getDelimiters();
+        String numberInput = delimiterResult.getNumberString();
+        Set<Character> delimiters = delimiterResult.getDelimiters();
         String buffer = "";
 
         for (int i = 0; i < numberInput.length(); i++) {

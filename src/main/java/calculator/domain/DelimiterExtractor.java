@@ -20,7 +20,7 @@ public class DelimiterExtractor {
         }
     }
 
-    public ExtractResult getDelimiters(String input){
+    public DelimiterResult getDelimiters(String input){
         Set<Character> delimiters = new HashSet<>(defaultDelimiters);
         int numberIndex = 0;
         while(numberIndex < input.length()){
@@ -31,7 +31,7 @@ public class DelimiterExtractor {
 
         numberIndex = Math.min(numberIndex, input.length() - 1);
 
-        return new ExtractResult(input.substring(numberIndex), delimiters);
+        return new DelimiterResult(input.substring(numberIndex), delimiters);
     }
 
 

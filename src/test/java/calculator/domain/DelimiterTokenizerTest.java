@@ -19,11 +19,11 @@ class DelimiterTokenizerTest {
         List<Character> delimiterList = new ArrayList<>(Arrays.asList('\\', 'u', ':', ','));
         Set<Character> delimiters = new HashSet<>(delimiterList);
         String numberString = "3\\32u32u111:3444,65"; // 3 32 32 111 3444 65
-        ExtractResult extractResult = new ExtractResult(numberString, delimiters);
+        DelimiterResult delimiterResult = new DelimiterResult(numberString, delimiters);
 
         List<Integer> expected = Arrays.asList(3, 32, 32, 111, 3444, 65);
 
-        Assertions.assertThat(delimiterTokenizer.getNumbers(extractResult)).isEqualTo(expected);
+        Assertions.assertThat(delimiterTokenizer.getNumbers(delimiterResult)).isEqualTo(expected);
     }
 
     @Test
@@ -36,9 +36,9 @@ class DelimiterTokenizerTest {
 
         String numberString = "3\\32u32u111:3444,65a"; // 문자열 맨 끝이 구분자
 
-        ExtractResult extractResult = new ExtractResult(numberString, delimiters);
+        DelimiterResult delimiterResult = new DelimiterResult(numberString, delimiters);
 
-        Assertions.assertThatThrownBy(() -> delimiterTokenizer.getNumbers(extractResult))
+        Assertions.assertThatThrownBy(() -> delimiterTokenizer.getNumbers(delimiterResult))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("입력이 올바르지 않습니다.");
     }
@@ -51,9 +51,9 @@ class DelimiterTokenizerTest {
         List<Character> delimiterList = new ArrayList<>(Arrays.asList('\\', 'u', ':', ','));
         Set<Character> delimiters = new HashSet<>(delimiterList);
         String numberString = "3\\32u32u111a3444a65"; // a라는 구분자는 존재하지 X
-        ExtractResult extractResult = new ExtractResult(numberString, delimiters);
+        DelimiterResult delimiterResult = new DelimiterResult(numberString, delimiters);
 
-        Assertions.assertThatThrownBy(() -> delimiterTokenizer.getNumbers(extractResult))
+        Assertions.assertThatThrownBy(() -> delimiterTokenizer.getNumbers(delimiterResult))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("입력이 올바르지 않습니다.");
     }
