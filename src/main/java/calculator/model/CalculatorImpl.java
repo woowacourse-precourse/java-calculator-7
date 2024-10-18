@@ -10,7 +10,10 @@ public class CalculatorImpl implements Calculator {
 
     @Override
     public int calculate(String input) {
-        checkEmptyInput(input);
+
+        if (isEmptyInput(input)) {
+            return 0;
+        }
         String[] numbers = extractNumber.extractNumberFromInput(input);
         return sum(numbers);
     }
@@ -25,10 +28,8 @@ public class CalculatorImpl implements Calculator {
         return total;
     }
 
-    private void checkEmptyInput(String input) {
-        if (input == null || input.trim().isEmpty()) {
-            throw new IllegalArgumentException("입력값이 없습니다. 빈 문자열 또는 null 입력은 허용되지 않습니다.");
-        }
+    private boolean isEmptyInput(String input) {
+        return input == null || input.trim().isEmpty();
     }
 
     public void checkNegativeNumber(int number) {
