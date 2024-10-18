@@ -44,10 +44,10 @@ public class BasicSeparatorParser implements SeparatorParser {
 		StringBuilder separatorPattern = new StringBuilder();
 
 		for (char separator : separators) {
-			separatorPattern.append("|").append(separator);
+			separatorPattern.append("|\\").append(separator);
 		}
 
-		separatorPattern.deleteCharAt(0);
+		separatorPattern.delete(0, 2);
 		return separatorPattern.toString();
 	}
 
