@@ -8,17 +8,14 @@ import java.util.regex.Pattern;
 
 public class InputStringParser {
 
+    private static final String DEFAULT_DELIMITER_REGEX = ", | :";
+
     public List<Long> parse(String input) throws IllegalArgumentException{
 
-        Optional<String> customIdentifier = parseCustomIdentifier(input);
-        if (customIdentifier.isPresent()) {
-            String resizedString = resizeString(input);
-            String customIdentifierRegex = createRegexfromString(customIdentifier.get());
-            System.out.println(resizedString);
-                return convertStringToList(resizedString, customIdentifierRegex);
-        } else {
-                return convertStringToList(input, ", | :");
-        }
+        Optional<String> customDelimiter= extractCustomDelimiter(input);
+        String removedDelimiterInput = customDelimiter.isPresent() ? removeCustomDelimiterFromOriginal(input) : input;
+        String delimiterRegex = customDelimiter.isPresent() ? createDelimeterRegex(customDelimiter.get()) : DEFAULT_DELIMITER_REGEX;
+        return convertStringToList(removedDelimiterInput, delimiterRegex);
     }
 
     private List<Long> convertStringToList(String input, String regex) {
@@ -27,24 +24,19 @@ public class InputStringParser {
                     .stream(input.split(regex))
                     .map(Long::parseLong)
                     .toList();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }
     }
 
-    private String createRegexfromString(String input) {
-        StringBuilder regexStringBuilder = new StringBuilder();
-        for (int i = 0; i < input.length(); i++) {
-            regexStringBuilder.append("\\");
-            regexStringBuilder.append(input.charAt(i));
-        }
-        return regexStringBuilder.toString();
+    private String createDelimeterRegex(String input) {
+        return input.chars()
+                .mapToObj(c -> "\\" + (char) c)
+                .reduce("", (s1,s2) -> s1 + s2);
     }
 
-    private String resizeString(String input) {
-
-        Matcher matcher = regexMatcherCustomIdentifier(input);
+    private String removeCustomDelimiterFromOriginal(String input) {
+        Matcher matcher = getCustomDelimiterMatcher(input);
         if (matcher.find()) {
             return input.substring(matcher.end());
         } else {
@@ -52,18 +44,12 @@ public class InputStringParser {
         }
     }
 
-    private Optional<String> parseCustomIdentifier(String input) {
-
-        Matcher matcher = regexMatcherCustomIdentifier(input);
-
-        if(matcher.find()) {
-            return Optional.of(matcher.group(1));
-        } else {
-            return Optional.empty();
-        }
+    private Optional<String> extractCustomDelimiter(String input) {
+        Matcher matcher = getCustomDelimiterMatcher(input);
+        return matcher.find() ? Optional.of(matcher.group(1)) : Optional.empty();
     }
 
-    private Matcher regexMatcherCustomIdentifier(String input) {
+    private Matcher getCustomDelimiterMatcher(String input) {
         Pattern pattern = Pattern.compile("^//(.*)\\\\n");
         return pattern.matcher(input);
     }
