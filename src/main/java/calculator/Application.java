@@ -10,14 +10,15 @@ public class Application {
         int sum = 0;
 
         if (!userText.isEmpty() && !userText.isBlank()) {
-            sum = generateSum(userText, sum);
+            String[] stringTokens = getStringTokens(userText);
+            sum = generateSum(stringTokens, sum);
         }
 
         System.out.println("결과 : " + sum);
 
     }
 
-    private static int generateSum(String userText, int sum) {
+    private static String[] getStringTokens(String userText) {
         String separator = ",|:";
 
         int firstIdx = userText.indexOf("//");
@@ -30,9 +31,12 @@ public class Application {
             separator += customSeparator;
         }
 
-        String[] splitTexts = userText.split(separator);
+        return userText.split(separator);
+    }
 
-        for (String text : splitTexts) {
+    private static int generateSum(String[] stringTokens, int sum) {
+
+        for (String text : stringTokens) {
             try {
                 int numberText = Integer.parseInt(text);    // 구분자 사이의 값이 숫자가 아니라면 예외 발생(NumberFormatException)
                 if (numberText < 0) throw new IllegalArgumentException();   // 구분자 사이의 숫자가 0보다 작으면 예외 발생
