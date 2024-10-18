@@ -1,5 +1,6 @@
 package calculator.delimiter.service;
 
+import calculator.delimiter.custom.service.CustomDelimiterService;
 import calculator.delimiter.factory.DelimiterFactory;
 
 public abstract class NumberDelimiterService extends DelimiterService {

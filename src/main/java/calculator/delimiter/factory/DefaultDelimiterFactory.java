@@ -1,8 +1,8 @@
 package calculator.delimiter.factory;
 
+import calculator.delimiter.custom.validator.DelimiterValidator;
 import calculator.delimiter.domain.Delimiter;
 import calculator.delimiter.domain.Delimiters;
-import calculator.delimiter.validator.DelimiterValidator;
 
 import java.util.ArrayList;
 import java.util.Arrays;

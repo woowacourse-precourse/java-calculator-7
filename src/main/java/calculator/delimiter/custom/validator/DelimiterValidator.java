@@ -1,4 +1,4 @@
-package calculator.delimiter.validator;
+package calculator.delimiter.custom.validator;
 
 @FunctionalInterface
 public interface DelimiterValidator {
