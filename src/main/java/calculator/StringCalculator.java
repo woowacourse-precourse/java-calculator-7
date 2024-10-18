@@ -8,17 +8,14 @@ public class StringCalculator {
             return 0;
         }
         // 구분자 "," 입력
-        if(input.contains(",")){
+
             String[] values =  input.split(",");
             int sum = 0;
             for(String value : values){
                 sum += Integer.parseInt(value);
             }
             return sum;
-        }
 
-        //  a number input
-        return Integer.parseInt(input);
     }
 
 
