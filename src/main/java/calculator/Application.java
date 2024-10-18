@@ -37,7 +37,7 @@ public class Application {
         try 
         {
             for (String i : number) 
-                if (!i.isEmpty()) 
+                if (!i.trim().isEmpty()) 
                     total += Integer.parseInt(i);
         }
         catch (NumberFormatException e) 
@@ -53,7 +53,7 @@ public class Application {
 
         try 
         {
-            System.out.println(sol(input));
+            System.out.println("결과 : "+sol(input));
         } 
         catch (IllegalArgumentException e) 
         {
