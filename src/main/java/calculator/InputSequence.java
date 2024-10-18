@@ -12,7 +12,7 @@ public class InputSequence {
         this.sequence = Arrays.stream(input.split(delimiter))
                             .map(part -> {
                                 validateSplit(part);
-                                return Long.parseLong(part);
+                                return castingElementToLong(part);
                             })
                             .toList();
     }
@@ -27,9 +27,18 @@ public class InputSequence {
         }
         return "[,:]";
     }
+
     private void validateSplit(String input) {
         if (!input.chars().allMatch(Character::isDigit)) {
             throw new IllegalArgumentException("구분자 외의 문자가 존재합니다.");
+        }
+    }
+
+    private long castingElementToLong (String input) {
+        try {
+            return Long.parseLong(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("더 하는 값 중 너무 큰 수가 존재합니다.");
         }
     }
 }

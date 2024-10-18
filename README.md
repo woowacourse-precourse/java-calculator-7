@@ -10,7 +10,8 @@
   
   - 입력 시 커스텀 구분자가 있는지 validation하는 기능
   - 문자열이 잘못된 문자열인지 validation하는 기능
-  - 추출한 숫자가 양수, long의 범위 안의 수로 구성되어 있는지 validation 하는 기능
+  - 추출한 숫자가 long의 범위 안의 수로 구성되어 있는지 validation 하는 기능
+  - 추출한 숫자에 음수가 존재하는지 validation하는 기능
   
 - 계산기 기능
 
