@@ -12,7 +12,7 @@ class NumUtilTest {
         char c = '0';
         // when & then
         for (int i = 0; i < 10; i++) {
-            assertTrue(NumUtil.isNum(String.valueOf((char) (c + i))));
+            assertTrue(NumUtil.isPositiveNum(String.valueOf((char) (c + i))));
         }
     }
 
@@ -21,7 +21,7 @@ class NumUtilTest {
         // given
         String invalidChar = "1.";
         // when & then
-        assertFalse(NumUtil.isNum(invalidChar));
+        assertFalse(NumUtil.isPositiveNum(invalidChar));
     }
 
     @Test
@@ -29,7 +29,7 @@ class NumUtilTest {
         // given
         String invalidChar = "3,2";
         // when & then
-        assertFalse(NumUtil.isNum(invalidChar));
+        assertFalse(NumUtil.isPositiveNum(invalidChar));
     }
 
     @Test
@@ -57,7 +57,7 @@ class NumUtilTest {
     }
 
     @Test
-    void char_을_정수로_변환() {
+    void 문자열을_숫자로_변환() {
         // given
         char c = '0';
         // when & then
@@ -67,18 +67,35 @@ class NumUtilTest {
     }
 
     @Test
-    void 정수_변환_예외_숫자가_아닌_경우1() {
+    void 숫자_변환_예외_구분자가_포함된_경우() {
         // given
-        String invalidChar = "3.2";
+        String invalidNum = "3.2";
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> NumUtil.toLong(invalidChar));
+        assertThrows(IllegalArgumentException.class, () -> NumUtil.toLong(invalidNum));
     }
 
     @Test
-    void 정수_변환_예외_숫자가_아닌_경우2() {
+    void 숫자_변환_예외_공백인_경우() {
         // given
-        String invalidChar = " ";
+        String invalidNum = " ";
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> NumUtil.toLong(invalidChar));
+        assertThrows(IllegalArgumentException.class, () -> NumUtil.toLong(invalidNum));
+    }
+
+    @Test
+    void 정수_범위가_넘는_경우_확인() {
+        // given
+        long longValue = 2147483648L;
+        // when & then
+        long result = NumUtil.toLong(String.valueOf(longValue));
+        assertEquals(longValue, result);
+    }
+
+    @Test
+    void 숫자_변환_예외_음수인_경우() {
+        // given
+        long negative = -1L;
+        // when & then
+        assertThrows(IllegalArgumentException.class, () -> NumUtil.toLong(String.valueOf(negative)));
     }
 }

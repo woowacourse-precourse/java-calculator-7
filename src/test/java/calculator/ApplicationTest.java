@@ -96,7 +96,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 숫자로_끝나지_않는_경우() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//[\\n1[2["))
+                assertThatThrownBy(() -> runException("//[\\n1[2;"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }

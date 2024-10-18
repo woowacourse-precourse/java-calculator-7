@@ -26,7 +26,7 @@ class InputTest {
     }
 
     @Test
-    void 정수배열_테스트_콜론() {
+    void 숫자_배열_테스트_콜론() {
         // given
         Input input = Input.from("1:2:3");
         // when
@@ -38,7 +38,7 @@ class InputTest {
     }
 
     @Test
-    void 정수배열_테스트_콤마() {
+    void 숫자_배열_테스트_콤마() {
         // given
         Input input = Input.from("1,3");
         // when
@@ -49,7 +49,7 @@ class InputTest {
     }
 
     @Test
-    void 정수배열_예외_기본_구분자_오류() {
+    void 숫자_배열_예외_기본_구분자_오류() {
         // given
         Input input = Input.from("1,3?2");
         // when & then

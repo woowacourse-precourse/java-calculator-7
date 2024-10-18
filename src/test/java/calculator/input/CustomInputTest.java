@@ -29,7 +29,7 @@ class CustomInputTest {
     }
 
     @Test
-    void 정수배열_테스트() {
+    void 숫자_배열_테스트() {
         // given
         Input input = Input.from("//;\\n1;2;3");
         // when
@@ -41,7 +41,7 @@ class CustomInputTest {
     }
 
     @Test
-    void 정수배열_예외_구분자_다름() {
+    void 숫자배열_예외_구분자_다름() {
         // given
         Input input = Input.from("//;\\n1?2");
         // when & then

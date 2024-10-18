@@ -4,8 +4,8 @@ public class NumUtil {
 
     private NumUtil() {}
 
-    public static boolean isNum(String num) {
-        return num.matches("^[0-9]*$"); // 0~9 사이의 숫자
+    public static boolean isPositiveNum(String num) {
+        return num.matches("^[0-9]*$"); // 양의 숫자
     }
 
     public static boolean startWithNum(String numStr) {
@@ -18,9 +18,9 @@ public class NumUtil {
 
 
     public static long toLong(String num) {
-        if (isNum(num)) {
+        if (isPositiveNum(num)) {
             return Long.parseLong(num);
         }
-        throw new IllegalArgumentException("숫자가 아닌 문자가 포함되어 있습니다.");
+        throw new IllegalArgumentException("음수 혹은 문자가 포함되어 있습니다.");
     }
 }
