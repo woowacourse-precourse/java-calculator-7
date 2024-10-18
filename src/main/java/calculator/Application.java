@@ -34,10 +34,13 @@ public class Application {
     	if(Character.isDigit(str.charAt(0))) {
     		arr = str.replaceAll(":", ",").split(",");
     	}
-    	if(str.charAt(0) == '/') {
+    	else if(str.charAt(0) == '/') {
     		String custom = String.valueOf(str.charAt(2));
     		str = str.substring(5, str.length());
     		arr = str.split(custom);
+    	}
+    	else {
+    		throw new IllegalArgumentException();
     	}
 		return arr;
     }
