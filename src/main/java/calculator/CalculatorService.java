@@ -6,7 +6,7 @@ public class CalculatorService {
     public static final String EMPTY = "";
     public static final String BASE_REGEX = "[:,]";
 
-    public char[] removeDelimiterAndToCharArray(String positiveString, String customDelimiter) {
+    public char[] toCharArrayWithoutDelimiter(String positiveString, String customDelimiter) {
         String positives = removeDelimiter(positiveString, customDelimiter);
         return positives.toCharArray();
     }

@@ -22,13 +22,13 @@ public class CalculatorProcess {
         String customDelimiter = extractService.extractCustomDelimiter(readInput);
         String positiveString = extractService.extractPositiveString(readInput, customDelimiter);
 
-        char[] chars = calculatorService.removeDelimiterAndToCharArray(positiveString, customDelimiter);
-        numberValidator.validateNoDigits(chars); // 숫자 변환 가능한 문자 검사
+        char[] positiveCharacters = calculatorService.toCharArrayWithoutDelimiter(positiveString, customDelimiter);
+        numberValidator.validateNoDigits(positiveCharacters); // 숫자 변환 가능한 문자 검사
 
-        int[] intArray = calculatorService.convertCharArrayToIntArray(chars);
-        numberValidator.validatorNoNegatives(intArray); // 양수 검사
+        int[] positives = calculatorService.convertCharArrayToIntArray(positiveCharacters);
+        numberValidator.validatorNoNegatives(positives); // 양수 검사
 
-        int result = calculatorService.calculatorNumbers(intArray);
+        int result = calculatorService.calculatorNumbers(positives);
         outputView.printResultMessage(result);
     }
 }
