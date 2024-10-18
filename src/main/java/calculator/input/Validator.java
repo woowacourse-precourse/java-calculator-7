@@ -32,10 +32,10 @@ public class Validator {
         boolean isDelimiterAllowed = false;
 
         for (int i = startIndex; i < input.length(); i++) {
-            char current_char = input.charAt(i);
-            if (Character.isDigit(current_char)) { // 숫자가 나왔다면
+            char currentChar = input.charAt(i);
+            if (Character.isDigit(currentChar)) { // 숫자가 나왔다면
                 isDelimiterAllowed = true; // 다음에 구분자가 나와도 된다고 표시
-            } else if (isValidDelimiter(current_char, customDelimiter) && isDelimiterAllowed
+            } else if (isValidDelimiter(currentChar, customDelimiter) && isDelimiterAllowed
                     && i != input.length() - 1) { // 올바르게 구분자가 나왔다면
                 isDelimiterAllowed = false; // 다음에는 구분자가 나오면 안된다고 표시
             } else { // 올바르지 않은 구분자가 나왔으면 exception
