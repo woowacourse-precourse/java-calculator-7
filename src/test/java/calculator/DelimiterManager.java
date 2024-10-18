@@ -18,4 +18,10 @@ public class DelimiterManager {
         customDelimiters.add(delimiter);
     }
 
+    public boolean isValidDelimiter(String delimiter) {
+        if (defaultDelimiters.contains(delimiter) || customDelimiters.contains(delimiter)) {
+            return true;
+        }
+        return false;
+    }
 }
