@@ -4,15 +4,15 @@
 
 ***
 
-### [1. 기능 요구 사항](#기능 요구 사항)
+### [1. 기능 요구 사항](#functional-requirements)
 
-### [2. 입출력 요구 사항](#입출력 요구 사항)
+### [2. 입출력 요구 사항](#io-requirements)
 
-### [3. 프로그래밍 요구 사항](#프로그래밍 요구 사항)
+### [3. 프로그래밍 요구 사항](#programming-requirements)
 
-### [4. 기능 구현 목록](#기능 구현 목록)
+### [4. 기능 구현 목록](#implement-list)
 
-## ✅ 기능 요구 사항 <a id= "기능 요구 사항"></a>
+## ✅ 기능 요구 사항 <a id="functional-requirements"></a>
 
 * * *
 
@@ -27,7 +27,7 @@
 
 - 사용자가 잘못된 값을 입력할 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료되어야 한다.
 
-## ✅ 입출력 요구 사항 <a id= "입출력 요구 사항"></a>
+## ✅ 입출력 요구 사항 <a id="io-requirements"></a>
 
 ***
 
@@ -45,7 +45,7 @@
     1,2:3
     결과 : 6
 
-## ✅ 프로그래밍 요구 사항 <a id= "프로그래밍 요구 사항"></a>
+## ✅ 프로그래밍 요구 사항 <a id="programming-requirements"></a>
 
 ***
 
@@ -62,7 +62,7 @@
 - camp.nextstep.edu.missionutils에서 제공하는 Console API를 사용하여 구현해야 한다.
     - 사용자가 입력하는 값은 camp.nextstep.edu.missionutils.Console의 readLine()을 활용한다.
 
-## 📚 기능 구현 목록 <a id= "기능 구현 목록"></a>
+## 📚 기능 구현 목록 <a id="implement-list"></a>
 
 ***
 
