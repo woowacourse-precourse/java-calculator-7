@@ -29,13 +29,11 @@
 
 #### 예외처리
 
-- [ ] 분리하는 중 구분자와 숫자 이외의 문자 확인 및 예외 처리 (IllegalArgumentException 발생)
-- [ ] 음수 값이 입력된 경우 예외 처리 (IllegalArgumentException 발생)
-- [ ] 커스텀 구분자의 자리에 문자가 존재하지 않는 경우 예외 처리 (IllegalArgumentException 예외 발생)
-- [ ] 구분자로 허용되지 않은 문자가 구분자로 사용되는 경우 예외 처리 (IllegalArgumentException 예외 발생)
-- [ ] 숫자가 없이 구분자만 존재하는 경우 예외처리 (IllegalArgumentException 예외 발생)
-- [ ] 입력값이 null일 경우 예외 처리 (IllegalArgumentException 발생)
-- [ ] 커스텀 구분자가 제대로 지정되지 않았을 경우 예외 처리 (IllegalArgumentException 발생)
+- [x] 커스텀 구분자에서 정규식에서 이스케이프가 필요한 메타문자들을 사용하는 경우 예외 처리
+- [x] 구분자로 허용되지 않은 문자가 구분자로 사용되는 경우 예외 처리
+- [x] 음수 값이 입력된 경우 예외 처리
+- [x] 커스텀 구분자에 두 개 이상의 구분자가 존재하는 경우 예외 처리
+- [x] 입력값이 null일 경우 예외 처리
 
 #### 기타
 
