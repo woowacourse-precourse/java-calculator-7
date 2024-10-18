@@ -41,6 +41,15 @@ public class Adder {
         }
     }
 
+    public boolean isAllPositiveInteger(ArrayList<Integer> numbers){
+        for (int number: numbers){
+            if(number < 0){
+                return false;
+            }
+        }
+        return true;
+    }
+
     public ArrayList<String> parseStringWithSeparators(String calculationFormula){
 
         ArrayList<String> parsedString = new ArrayList<>();
@@ -116,5 +125,6 @@ public class Adder {
 
         return numbers;
     }
+
 
 }

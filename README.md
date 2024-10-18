@@ -32,7 +32,7 @@
   - 반환값 형식: ArrayList<Integer>
   - 설명: 숫자와 구분자가 들어있는 ArrayList를 정수만 들어있는 ArrayList로 추출하여 반환한다.
   
-- ### 양수 판단 기능
+- ### ☑ 양수 판단 기능
   - 입력값 형식: ArrayList<Integer>
   - 반환값 형식: boolean
   - 설명: 정수 ArrayList가 모두 0 이상인 정수인지 판별한다.
