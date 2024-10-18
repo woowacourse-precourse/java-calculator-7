@@ -6,6 +6,8 @@ import calculator.application.dto.request.CalculationRequest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 @DisplayName("InputValidator 테스트")
 class InputValidatorTest {
@@ -82,5 +84,16 @@ class InputValidatorTest {
         Assertions.assertThatThrownBy(() -> inputValidator.validate(calculationRequest))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(INPUT_IS_NOT_PROPER_CUSTOM_DELIMITER.getMessage());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//@\n1@2@3", "//*\n1*2*3", "1,2:3"})
+    void 제대로된_입력값이_주어졌을때_예외가_발생하지_않는다(String input) {
+        // given
+        CalculationRequest calculationRequest = new CalculationRequest(input);
+
+        // when & then
+        Assertions.assertThatCode(() -> inputValidator.validate(calculationRequest))
+            .doesNotThrowAnyException();
     }
 }

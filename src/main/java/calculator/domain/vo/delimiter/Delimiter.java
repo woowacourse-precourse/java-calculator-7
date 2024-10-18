@@ -43,6 +43,6 @@ public class Delimiter {
 
     @Override
     public String toString() {
-        return String.format("Delimiter = '%s'", value);
+        return value;
     }
 }

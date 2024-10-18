@@ -5,6 +5,7 @@ import static calculator.infrastructure.exception.ErrorCode.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Delimiters {
 
@@ -51,10 +52,13 @@ public class Delimiters {
 
     public String getDelimiterRegex() {
         StringBuilder regex = new StringBuilder();
+
         for (Delimiter delimiter : delimiters) {
-            regex.append(delimiter.getValue());
+            String escapedDelimiter = Pattern.quote(delimiter.getValue());
+            regex.append(escapedDelimiter);
             regex.append(PIPE.getValue());
         }
+
         regex.deleteCharAt(regex.length() - 1);
         return regex.toString();
     }

@@ -1,5 +1,6 @@
 package calculator.domain.vo.delimiter;
 
+import static calculator.infrastructure.exception.ErrorCode.*;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
@@ -19,7 +20,7 @@ class DelimitersTest {
         Delimiters delimiters = Delimiters.from(input);
 
         // then
-        assertThat(delimiters.getDelimiterRegex()).isEqualTo(",|:");
+        assertThat(delimiters.getDelimiterRegex()).isEqualTo("\\Q,\\E|\\Q:\\E");
     }
 
     @ParameterizedTest
@@ -31,5 +32,14 @@ class DelimitersTest {
 
         // then
         assertThat(delimiters.getDelimiterRegex()).containsAnyOf(";", "#", "*");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//;;\n1;2;3", "//##\n1#2#3", "//**\n1*2*3"})
+    void 유효하지않은_Custom_Delimiter_시_예외를_발생(String input) {
+        // given & when
+        assertThatThrownBy(() -> Delimiters.from(input))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage(INVALID_DELIMITER.getMessage());
     }
 }

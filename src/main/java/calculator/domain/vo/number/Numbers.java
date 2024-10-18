@@ -3,7 +3,6 @@ package calculator.domain.vo.number;
 import static calculator.infrastructure.exception.ErrorCode.*;
 
 import calculator.domain.vo.delimiter.Delimiters;
-import calculator.infrastructure.exception.ErrorCode;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +32,8 @@ public class Numbers {
     }
 
     private static List<Number> distinguishNumberByDelimiters(String input, Delimiters delimiters) {
+        input = normalizeInput(input);
+
         String[] values = input.split(delimiters.getDelimiterRegex());
 
         List<Number> numbers = new ArrayList<>();
@@ -41,6 +42,14 @@ public class Numbers {
         }
 
         return numbers;
+    }
+
+    private static String normalizeInput(String input) {
+        if (input.startsWith("//")) {
+            input = input.substring(input.indexOf("\n") + 1);
+        }
+
+        return input;
     }
 
     public BigInteger reduce() {
