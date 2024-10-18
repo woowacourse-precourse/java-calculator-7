@@ -4,7 +4,7 @@ import java.util.List;
 
 import static calculator.utils.Util.isInteger;
 
-public class InputManager {
+public class CalculationSegmentProcessor {
 
 
     public void findNoneDelimeterString(List<String>delimterList, String input){

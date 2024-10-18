@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PreprocessorTest {
 
-    private InputManager inputManager;
+    private CalculationSegmentProcessor calculationSegmentProcessor;
     private DelimeterSegmentProcessor delimeterSegmentProcessor;
     private SplitManager splitManager;
     private Preprocessor preprocessor;
@@ -21,7 +21,7 @@ class PreprocessorTest {
     void setUp() {
         preprocessor = new Preprocessor(
                 new DelimeterSegmentProcessor(),
-                new InputManager(),
+                new CalculationSegmentProcessor(),
                 new SplitManager());
     }
 

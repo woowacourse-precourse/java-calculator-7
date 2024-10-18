@@ -7,12 +7,12 @@ import java.util.List;
 public class Preprocessor {
 
     private final DelimeterSegmentProcessor delimeterSegmentProcessor;
-    private final InputManager inputManager;
+    private final CalculationSegmentProcessor calculationSegmentProcessor;
     private final SplitManager splitManager;
 
-    public Preprocessor(DelimeterSegmentProcessor delimeterSegmentProcessor, InputManager inputManager, SplitManager splitManager) {
+    public Preprocessor(DelimeterSegmentProcessor delimeterSegmentProcessor, CalculationSegmentProcessor calculationSegmentProcessor, SplitManager splitManager) {
         this.delimeterSegmentProcessor = delimeterSegmentProcessor;
-        this.inputManager = inputManager;
+        this.calculationSegmentProcessor = calculationSegmentProcessor;
         this.splitManager = splitManager;
     }
 
@@ -43,7 +43,7 @@ public class Preprocessor {
     }
 
     public void validateInputString(List<String> delimeter, String input){
-        inputManager.findNoneDelimeterString(delimeter,input);
+        calculationSegmentProcessor.findNoneDelimeterString(delimeter,input);
     }
 
     public List<String> extractSumNumbers(List<String> delimeterList, String input){
