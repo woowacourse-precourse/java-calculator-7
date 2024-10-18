@@ -1,8 +1,11 @@
 package calculator.service;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class CalculatorService {
+
+    private final String ERROR_MESSAGE = "잘못된 값이 입력되었습니다.";
 
     /**
      * 입력된 문자열이 기본 구분자([,:])를 사용하는지 또는 커스텀 구분자를 사용하는지 확인한 후, 해당 구분자를 기준으로 문자열을 분리하여 배열로 반환합니다.
@@ -22,7 +25,21 @@ public class CalculatorService {
      * @return 숫자 리스트
      */
     public List<Integer> convertToNumbers(String[] parts) {
-        return List.of();
+        return Arrays.stream(parts).
+                map(part -> {
+                    try {
+                        int value = 0;
+                        if (!part.isEmpty()) {
+                            value = Integer.parseInt(part);
+                        }
+                        if (value < 0) {
+                            throw new IllegalArgumentException(ERROR_MESSAGE);
+                        }
+                        return value;
+                    } catch (NumberFormatException e) {
+                        throw new IllegalArgumentException(ERROR_MESSAGE);
+                    }
+                }).toList();
     }
 
     /**
