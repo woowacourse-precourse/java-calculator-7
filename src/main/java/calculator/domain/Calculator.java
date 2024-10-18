@@ -16,4 +16,12 @@ public class Calculator {
 				throw new IllegalArgumentException("입력값이 양수가 아닙니다.");
 		}
 	}
+
+	public int getSum() {
+		int sum = 0;
+		for (int number : numbers) {
+			sum += number;
+		}
+		return sum;
+	}
 }
