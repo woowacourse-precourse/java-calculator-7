@@ -32,6 +32,8 @@ public class CalculatorController {
     private String processInput(String input) {
         inputValidator.validateStrip(input);
         String[] separated = inputParser.separate(input);
+        inputValidator.validateZero(separated);
+        inputParser.blankToZero(separated);
         inputValidator.validateInteger(separated);
         List<Integer> numbers = inputParser.toInteger(separated);
         PositiveNumbers positiveNumbers = new PositiveNumbers(numbers);

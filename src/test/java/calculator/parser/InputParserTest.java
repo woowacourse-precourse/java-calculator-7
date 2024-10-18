@@ -67,4 +67,19 @@ class InputParserTest {
         // then
         assertThat(real).isEqualTo(expected);
     }
+
+    @Test
+    @DisplayName("빈 입력이 입력 되면, 이를 0으로 바꾸는 데 성공 한다.")
+    public void changeBlankToZeroTest() {
+        // given
+        String[] input = new String[]{""};
+        int expected = 0;
+
+        // when
+        inputParser.blankToZero(input);
+
+        // then
+        int real = Integer.parseInt(input[0]);
+        assertThat(real).isEqualTo(expected);
+    }
 }

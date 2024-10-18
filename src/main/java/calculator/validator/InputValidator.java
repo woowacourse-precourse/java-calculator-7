@@ -20,4 +20,12 @@ public class InputValidator {
             }
         }
     }
+
+    public void validateZero(String[] separated) {
+        for (String element : separated) {
+            if (element.equals("0")) {
+                throw new IllegalArgumentException(ErrorMessage.ONLY_ALLOWED_POSITIVE_NUMBER);
+            }
+        }
+    }
 }

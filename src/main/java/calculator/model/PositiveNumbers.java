@@ -18,7 +18,7 @@ public class PositiveNumbers {
 
     private void validatePositive(List<Integer> numbers) {
         numbers.forEach((number) -> {
-            if (number <= 0) {
+            if (number < 0) {
                 throw new IllegalArgumentException(ErrorMessage.ONLY_ALLOWED_POSITIVE_NUMBER);
             }
         });

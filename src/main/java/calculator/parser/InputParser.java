@@ -33,4 +33,12 @@ public class InputParser {
         }
         return customDelimiter;
     }
+
+    public void blankToZero(String[] separated) {
+        for (int i = 0; i < separated.length; i++) {
+            if (separated[i].isEmpty()) {
+                separated[i] = "0";
+            }
+        }
+    }
 }

@@ -11,10 +11,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class PositiveNumbersTest {
     @Test
-    @DisplayName("양수가 아닌 경우, 예외가 발생한다.")
+    @DisplayName("음수인 경우, 예외가 발생한다.")
     public void validatePositive() {
         // given
-        List<Integer> numbers = new ArrayList<>(List.of(0, 1, 2));
+        List<Integer> numbers = new ArrayList<>(List.of(-1, 1, 2));
 
         // when & then
         assertThatThrownBy(() -> new PositiveNumbers(numbers))

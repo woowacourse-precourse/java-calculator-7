@@ -38,4 +38,16 @@ class InputValidatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorMessage.ONLY_ALLOWED_INTEGER);
     }
+
+    @Test
+    @DisplayName("0 이 입력되는 경우, 예외가 발생한다.")
+    public void validateZeroTest() {
+        // given
+        String[] separated = new String[]{ "0", "1", "2" };
+
+        // when & then
+        assertThatThrownBy(() -> inputValidator.validateZero(separated))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ErrorMessage.ONLY_ALLOWED_POSITIVE_NUMBER);
+    }
 }
