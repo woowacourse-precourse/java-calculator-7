@@ -7,14 +7,16 @@ import java.util.List;
 
 public class CalculatorService {
 
+    private final CommandExtractor commandExtractor;
     private final Separators separators;
 
     public CalculatorService() {
+        commandExtractor = CommandExtractor.init();
         separators = Separators.init();
     }
 
     public Number calculate(String input) {
-        Command command = new Command(input);
+        Command command = commandExtractor.extract(input);
         if (command.hasCustomSeparator()) {
             separators.add(command.getCustomSeparator());
         }
