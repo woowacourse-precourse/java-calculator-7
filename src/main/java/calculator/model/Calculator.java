@@ -2,8 +2,6 @@ package calculator.model;
 
 import static calculator.validate.NumberValidator.validateNumber;
 
-import calculator.parser.InputParser;
-
 public class Calculator {
 
     private static int result;
