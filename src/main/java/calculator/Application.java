@@ -4,10 +4,13 @@ import camp.nextstep.edu.missionutils.Console;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
+
     }
 
     private static String getInput() {
@@ -82,5 +85,13 @@ public class Application {
         return List.of(tokens).stream()
                 .mapToInt(Application::parseAndValidateNumber)
                 .sum();
+    }
+
+    private static String[] splitNumbers(String numbers, List<String> delimiters) {
+        String delimiterPattern = delimiters.stream()
+                .map(Pattern::quote)
+                .collect(Collectors.joining("|"));
+
+        return numbers.split(delimiterPattern);
     }
 }
