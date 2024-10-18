@@ -10,6 +10,7 @@ public class Calculator {
     private static String SEPERATOR_REGEX=",|:";
     private String input;
 
+
     public Calculator(String input){
         this.input=input;
     }
@@ -65,6 +66,11 @@ public class Calculator {
 
 
     private static void addRegex(String customSeperator) {
+        //커스텀 구분자가 | 이라면 이스케이프문자를 추가해햐 한다
+        if (customSeperator.equals("|")){
+            customSeperator="\\"+customSeperator;
+        }
+
         SEPERATOR_REGEX=SEPERATOR_REGEX+"|"+customSeperator;
     }
 
