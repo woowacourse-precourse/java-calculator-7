@@ -18,7 +18,6 @@ public class Application {
         // 구분자 추출
         if(separator.validateCustomSeparatorForParsing(input)){
             Character customSeparator = separator.parseCustomSeparator(input);
-            separator.addNewSeparators(customSeparator);
             calculatorFormula = separator.parseString(input);
         }
 

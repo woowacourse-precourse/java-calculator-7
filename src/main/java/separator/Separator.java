@@ -10,7 +10,10 @@ public class Separator {
         separators.add(':');
     }
 
-    public void addNewSeparators(char separator) {
+    public void addNewSeparator(Character separator) {
+        if(separator == null){
+            return;
+        }
         separators.add(separator);
     }
 
