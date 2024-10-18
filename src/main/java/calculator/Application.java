@@ -25,7 +25,7 @@ public class Application {
     private static String getCustomDelimiter(String input){
         if(input.startsWith("//")){
             int Nindex = input.indexOf("\\n");
-            return input.substring(2,Nindex);//커스텀 구분자
+            return input.substring(2,Nindex)+"|[,;]";//커스텀 구분자
         }
         return "[,;]";//기본 구분자
     }
