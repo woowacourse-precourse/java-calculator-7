@@ -11,6 +11,8 @@ import calculator.view.OutputView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static calculator.constant.Message.*;
+
 public class CalculatorController {
     public void run() {
         OutputView.displayStart();
@@ -39,11 +41,12 @@ public class CalculatorController {
     } // getNumbers
 
     public boolean containsCustomSeparator(String input) {
-        return input.matches("^//(.*)\\\\n(.*)");
+        return input.matches(CUSTOM_SEPARATE_REGEX);
     } // containsCustomSeparator
 
     public boolean containsDefaultSeparator(String input) {
-        return !containsCustomSeparator(input) && (input.contains(",") || input.contains(":"));
+        return !containsCustomSeparator(input)
+                && (input.contains(FIRST_DEFAULT_SEPARATOR) || input.contains(SECOND_DEFAULT_SEPARATOR));
     } // containsDefaultSeparator
 
     public boolean notContainsSeparator(String input) {
