@@ -14,7 +14,16 @@ public class CalculatorService {
      * @return 분리된 숫자 리스트
      */
     public String[] paresInput(String line) {
-        return new String[]{};
+        String delimiter = "[,:]";
+        String number = line;
+
+        if (line.startsWith("//")) {
+            int lastIndexOf = line.lastIndexOf("\\n");
+            delimiter = "[" + line.substring(2, lastIndexOf) + "]";
+            number = line.substring(lastIndexOf + 2);
+        }
+
+        return number.split(delimiter);
     }
 
     /**
