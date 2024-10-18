@@ -6,6 +6,8 @@ import java.util.regex.Pattern;
 public class Separator {
     private static final String CUSTOM_PATTERN = "^//(.*)\\\\n(.*)";
     private static final String DEFALUT_PATTERN = "[,:]";
+    private static final String COMMA = ",";
+    private static final String DELIMITER = ":";
     private static final Pattern COMPILE_PATTERN = Pattern.compile(CUSTOM_PATTERN);
     private static final int CUSTOM_DELIMITER_GROUP_INDEX = 1;
     private static final int VALUES_GROUP_INDEX = 2;
@@ -22,11 +24,7 @@ public class Separator {
     }
 
     private static Matcher compliMatcher(String input) {
-        return compliePattern().matcher(input);
-    }
-
-    private static Pattern compliePattern() {
-        return COMPILE_PATTERN;
+        return COMPILE_PATTERN.matcher(input);
     }
 
     private static boolean isFindMatcher(Matcher matcherPattern) {
@@ -46,6 +44,19 @@ public class Separator {
     }
 
     private static String[] splitInputByDefaultDelimiter(String input) {
+        validateDelimiter(input);
+
         return input.split(DEFALUT_PATTERN);
+    }
+
+
+    private static void validateDelimiter(String input) {
+        if (isNotDefaultDelimiter(input)) {
+            throw new IllegalArgumentException("유효하지 않은 입력입니다.");
+        }
+    }
+
+    private static boolean isNotDefaultDelimiter(String input) {
+        return !input.contains(COMMA) && !input.contains(DELIMITER);
     }
 }
