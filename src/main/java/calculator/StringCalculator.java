@@ -1,6 +1,7 @@
 package calculator;
 
 import static calculator.CustomPartManager.validateCustomSeparator;
+import static calculator.StringPartManager.initString;
 import static calculator.StringPartManager.validateString;
 
 import camp.nextstep.edu.missionutils.Console;
@@ -20,7 +21,7 @@ public class StringCalculator {
             addCustomSeparator(input.charAt(2));
         }
 
-        String str = initString(input);
+        String str = initString(input, hasCustomSeparator);
         validateString(str, separators);
 
         String[] separatedNumbers = str.split('[' + separators + ']');
@@ -52,14 +53,5 @@ public class StringCalculator {
     void addCustomSeparator(char customSeparator) {
         hasCustomSeparator = true;
         separators += customSeparator;
-    }
-
-    String initString(String input) {
-        String str = input;
-        if (hasCustomSeparator) {
-            int strStartIdx = input.indexOf("\\n") + 2;
-            str = input.substring(strStartIdx);
-        }
-        return str;
     }
 }

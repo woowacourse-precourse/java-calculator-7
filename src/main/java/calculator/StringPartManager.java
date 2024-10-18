@@ -19,4 +19,13 @@ public class StringPartManager {
         }
         return false;
     }
+
+    static String initString(String input, boolean hasCustomSeparator) {
+        String str = input;
+        if (hasCustomSeparator) {
+            int strStartIdx = input.indexOf("\\n") + 2;
+            str = input.substring(strStartIdx);
+        }
+        return str;
+    }
 }
