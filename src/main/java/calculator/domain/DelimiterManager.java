@@ -30,7 +30,15 @@ public class DelimiterManager {
 
     // 커스텀 구분자를 추출하는 메서드
     private String extractCustomDelimiter(String input) {
-        return "";
+        // 입력 문자열에서 "//"와 "\n" 사이의 커스텀 구분자를 찾음
+        if (input.startsWith("//")) {
+            int delimiterEndIndex = input.indexOf("\\n");
+            if (delimiterEndIndex != -1) {
+                // 커스텀 구분자를 "//"와 "\n" 사이에서 추출
+                return input.substring(2, delimiterEndIndex);
+            }
+        }
+        return null;  // 커스텀 구분자가 없을 경우 null 반환
     }
 
     // 현재 커스텀 구분자를 반환하는 메서드
