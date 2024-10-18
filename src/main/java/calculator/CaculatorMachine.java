@@ -1,11 +1,10 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import delimiter.base.BaseDelimiter;
+import delimiter.custom.CustomDelimiter;
 
 public class CaculatorMachine {
-
-	private static final String START_CUSTOMDELIMITER = "//";
-	private static final String END_CUSTOMDELIMITER = "\\n";
 
 	public void run() {
 		System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -23,7 +22,7 @@ public class CaculatorMachine {
 			return 0;
 		}
 		// 구분자 선언
-		String defaultDelimiter = ",|:";
+		String baseDelimiter = BaseDelimiter.COMMA.getDescription() + "|" + BaseDelimiter.COLON.getDescription();
 		String customDelimiter = "";
 
 		// 커스텀 구분자
@@ -57,7 +56,7 @@ public class CaculatorMachine {
 				throw new IllegalArgumentException("잘못된 입력입니다.");
 			}
 
-            int delimiterEndIndex = userInput.indexOf(END_CUSTOMDELIMITER);
+            int delimiterEndIndex = userInput.indexOf(CustomDelimiter.END.getDescripton());
 			// 5-7. "\n"이 2번 이상 존재하는 경우
 			if (hasTwoEndDelimiter(userInput, delimiterEndIndex)) {
 				throw new IllegalArgumentException("잘못된 입력입니다.");
@@ -69,7 +68,7 @@ public class CaculatorMachine {
 				throw new IllegalArgumentException("잘못된 입력입니다.");
 			}
 
-			defaultDelimiter = defaultDelimiter + "|" + customDelimiter;
+			baseDelimiter = baseDelimiter + "|" + customDelimiter;
 
 			// 커스텀 구분자 생성하는 부분 제외한 입력 부분 추출
 			userInput = userInput.substring(delimiterEndIndex + 2);
@@ -77,7 +76,7 @@ public class CaculatorMachine {
 		}
 
 		// 4. 문자열이 구분자로 시작하거나 끝나는 경우
-		if (startsOrEndsWithDelimiter(userInput, defaultDelimiter)) {
+		if (startsOrEndsWithDelimiter(userInput, baseDelimiter)) {
 			throw new IllegalArgumentException("잘못된 입력입니다.");
 		}
 		// 3. 구분자가 연속으로 2번 이상 나온 경우
@@ -86,8 +85,8 @@ public class CaculatorMachine {
 		}
 
 		// 구분자를 기준으로 문자열 분리
-		if (hasDelimiter(userInput, defaultDelimiter)) {
-			return caculateSum(userInput, defaultDelimiter);
+		if (hasDelimiter(userInput, baseDelimiter)) {
+			return caculateSum(userInput, baseDelimiter);
 		} else {
 			// 커스텀 구분자 선언은 존재하나, 사용하지 않은 경우
 			return Integer.parseInt(userInput);
@@ -149,17 +148,17 @@ public class CaculatorMachine {
 
     // "\n"이 2번 이상 존재할 때
     private static boolean hasTwoEndDelimiter(String userInput, int delimiterEndIndex) {
-        return userInput.indexOf(END_CUSTOMDELIMITER, delimiterEndIndex + 1) != -1;
+        return userInput.indexOf(CustomDelimiter.END.getDescripton(), delimiterEndIndex + 1) != -1;
     }
 
     // "//"가 2번 이상 존재할 때
 	private static boolean hasTwoStartDelimiter(String userInput) {
-		return userInput.indexOf(START_CUSTOMDELIMITER, 2) != -1;
+		return userInput.indexOf(CustomDelimiter.START.getDescripton(), 2) != -1;
 	}
 
 	// "//"로 시작할 때
 	private static boolean isStartWithStartDelimiter(String userInput) {
-		return userInput.startsWith(START_CUSTOMDELIMITER);
+		return userInput.startsWith(CustomDelimiter.START.getDescripton());
 	}
 
 	// "//"로 시작하지 않을 때
@@ -169,12 +168,12 @@ public class CaculatorMachine {
 
 	// "//"를 갖고 있을 때
 	private static boolean hasStartDelimiter(String userInput) {
-		return userInput.contains(START_CUSTOMDELIMITER);
+		return userInput.contains(CustomDelimiter.START.getDescripton());
 	}
 
 	// "\n"을 갖고 있을 때
 	private static boolean hasEndDelimiter(String userInput) {
-		return userInput.contains(END_CUSTOMDELIMITER);
+		return userInput.contains(CustomDelimiter.END.getDescripton());
 	}
 
     // "\n"을 갖고 있지 않을 때
@@ -189,7 +188,7 @@ public class CaculatorMachine {
 
 	// "\n"이 "//"보다 더 앞에 있는지 판단
 	private static boolean isEndDelimiterBeforStartDelimiter(String userInput) {
-		return userInput.indexOf(END_CUSTOMDELIMITER) < userInput.indexOf(START_CUSTOMDELIMITER);
+		return userInput.indexOf(CustomDelimiter.END.getDescripton()) < userInput.indexOf(CustomDelimiter.START.getDescripton());
 	}
 
 	// 문자열이 공백인지 판단
