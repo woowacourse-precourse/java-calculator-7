@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -9,51 +10,55 @@ import java.util.regex.Pattern;
 public class MainController {
 
     public static void run() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String inputString = Console.readLine();
+        String inputString = readString();
+        int sumResult = getSplittedValuesSum(inputString);
+        printResult(sumResult);
+    }
 
-        List<String> splittedValues ;
-        int sumResult = 0;
+    private static void printResult(int sumResult) {
+         System.out.printf("결과 : %d", sumResult);
+    }
 
+    private static int getSplittedValuesSum(String inputString) {
+        List<String> splittedValues;
+        int sumResult = 0 ;
 
         if(checkDefaultDelimterFormat(inputString)){
             splittedValues = SplitbyDefaultDelimiter(inputString);
-            for (String part : splittedValues) {
-                checkNagativeInt(Integer.parseInt(part));
-                sumResult += Integer.parseInt(part);
-            }
-            System.out.printf("결과 : %d", sumResult);
-            return;
+            return getSumResult(splittedValues);
         }
 
         if (checkCustomDelimiterFormat(inputString)){
             splittedValues = SplitbyCustomDelimiter(inputString);
-
-            for (String part : splittedValues) {
-                checkNagativeInt(Integer.parseInt(part));
-                sumResult += Integer.parseInt(part);
-            }
-            System.out.printf("결과 : %d", sumResult);
-            return;
+            sumResult = getSumResult(splittedValues);
         }
-        throw new IllegalArgumentException("(기본 구분자를 활용한 입력 포맷) 또는 (커스텀 구분자 지정 포맷)이 잘못되었습니다.");
+        return sumResult;
+    }
 
+    private static String readString() {
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        String inputString = Console.readLine();
+        if (!checkDefaultDelimterFormat(inputString) && !checkCustomDelimiterFormat(inputString)){
+            throw new IllegalArgumentException("(기본 구분자를 활용한 입력 포맷) 또는 (커스텀 구분자 지정 포맷)이 잘못되었습니다.");
+        }
+
+        return inputString;
+    }
+    private static int getSumResult(List<String> splittedValues) {
+        int sumResult = 0;
+        for (String part : splittedValues) {
+            checkNagativeInt(Integer.parseInt(part));
+            sumResult += Integer.parseInt(part);
+        }
+        return sumResult;
     }
 
     private static boolean checkDefaultDelimterFormat(String inputString) {
-        String rex = "^[0-9]*([,:]\\d*)*$";
+        String rex = "^[0-9]+([,:]\\d*)*$";
         Pattern pattern = Pattern.compile(rex);
         Matcher matcher = pattern.matcher(inputString);
 
         return matcher.find();
-    }
-
-
-
-    private static void checkNagativeInt(int part) {
-        if (part < 0) {
-            throw new IllegalArgumentException("음수값은 덧셈 할 수 없습니다.");
-        }
     }
 
     private static boolean checkCustomDelimiterFormat(String inputString) {
@@ -62,22 +67,17 @@ public class MainController {
         Matcher matcher = p.matcher(inputString);
 
         return matcher.find();
+    }
 
+    private static void checkNagativeInt(int part) {
+        if (part < 0) {
+            throw new IllegalArgumentException("음수값은 덧셈 할 수 없습니다.");
+        }
     }
 
     private static List<String> SplitbyDefaultDelimiter(String inputString) {
-        //inputString에 기본구분자가 없는경우 예외처리
-        containsDefaultDelimiter(inputString);
-
         List<String> defaultSplitValues = Arrays.asList(inputString.split(",|:"));
-
         return defaultSplitValues;
-    }
-
-    private static void containsDefaultDelimiter(String inputString) {
-        if (!inputString.contains(",") && !inputString.contains(":")) {
-            throw new IllegalArgumentException("기본 구분자가 포함되어 있지 않습니다.");
-        }
     }
 
     private static List<String> SplitbyCustomDelimiter(String inputString) {
@@ -92,7 +92,7 @@ public class MainController {
     }
 
     private static Boolean checkRemainStringFormat(String remainingInput, String customDelimiter) {
-        String rex = "^[0-9]*([" + customDelimiter + "]\\d*)*$";
+        String rex = "^[0-9]+([" + customDelimiter + "]\\d*)*$";
         Pattern pattern = Pattern.compile(rex);
         Matcher matcher = pattern.matcher(remainingInput);
 
