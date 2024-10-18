@@ -29,7 +29,11 @@ class NumberExtractor {
 
     private int parseNumber(String numberString) {
         try {
-            return Integer.parseInt(numberString.trim());
+            int number = Integer.parseInt(numberString.trim());
+            if (number < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+            }
+            return number;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다: " + numberString);
         }
