@@ -14,7 +14,7 @@ public class Delimiter {
     }
 
     public static void addCustomDelimiter(String str) {
-        str = str.substring(0, 5);
+        str = str.substring(0, str.lastIndexOf(SUFFIX)+2);
         str = str.replace(PREFIX, "");
         String customDelimiter = str.replace(SUFFIX, "");
 
