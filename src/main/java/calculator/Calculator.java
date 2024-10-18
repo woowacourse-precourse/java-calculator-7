@@ -16,9 +16,13 @@ public class Calculator {
     public String[] splitInput(){
         Pattern pattern = Pattern.compile("//.\\\\n");
         Matcher matcher = pattern.matcher(input);
-
         while(matcher.find()){
-            operator += matcher.group(0).charAt(2);
+            char c = matcher.group(0).charAt(2);
+            if(c == '\\'){
+                operator += "\\\\";
+            }else {
+                operator += c;
+            }
         }
 
         String[] temp = input.split(pattern.pattern());
