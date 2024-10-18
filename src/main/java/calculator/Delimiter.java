@@ -13,15 +13,18 @@ public class Delimiter {
 
     private static String[] defaultDelimiter(String words) {
         String[] numbers = words.split("[,:]");
+        Validator.validateNumbers(numbers);
         return numbers;
     }
 
     private static String[] customDelimiter(String words) {
+        Validator.validateCustomDelimiterFormat(words);
 
         String regex = words.substring(2, 3);
         String numbersPart = words.substring(5);
 
         String[] numbers = numbersPart.split(regex);
+        Validator.validateNumbers(numbers);
         return numbers;
 
     }
