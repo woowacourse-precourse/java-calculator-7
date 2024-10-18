@@ -31,12 +31,12 @@ public class CalculatorService {
     }
 
     public String getDelimiter(String input){
-        if(input.matches("//.+\n[0-9(.+)]")){
+        if(input.matches("//.+\n.*")){
             String delimiter = input.substring(2, input.lastIndexOf("\n"));
             return delimiter;
         }
         else{
-            throw new IllegalArgumentException("형식이 올바르지 않거나 잘못된 구분자가 포함되어 있습니다.");
+            throw new IllegalArgumentException("구분자를 지정하는 형식이 올바르지 않습니다.");
         }
     }
 
