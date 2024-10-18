@@ -22,7 +22,30 @@ public class Separator {
         return customSeparator;
     }
 
+    public boolean validateCustomSeparatorForParsing(String string){
 
+        if(string.length() < 4){
+            return false;
+        }
 
+        String separatorWithPadding = string.substring(0, 4);
+        if(separatorWithPadding.equals("//\\n")){
+            return true;
+        }
+
+        if(string.length() < 5){
+            return false;
+        }
+
+        separatorWithPadding = string.substring(0, 5);
+        System.out.println("separatorWithPadding = " + separatorWithPadding);
+        boolean hasStartPadding = separatorWithPadding.substring(0, 2).equals("//");
+        boolean hasEndPadding = separatorWithPadding.substring(3, 5).equals("\\n");
+        if(hasStartPadding && hasEndPadding){
+            return true;
+        }
+
+        return false;
+    }
 
 }
