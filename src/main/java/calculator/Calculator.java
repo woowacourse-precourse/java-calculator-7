@@ -24,12 +24,6 @@ public class Calculator {
         sumNumber(numberOfInputString);
     }
 
-    private void sumNumber(Long[] numberArrays) {
-        for (Long num : numberArrays) {
-            resultNumber += num;
-        }
-    }
-
     private Long[] changeStringToNumber(List<String> splitInput) throws IllegalArgumentException {
         Long[] numberOfInputString = new Long[splitInput.size()];
         for (int i = 0; i < splitInput.size(); i++) {
@@ -40,10 +34,14 @@ public class Calculator {
         return numberOfInputString;
     }
 
+    private void sumNumber(Long[] numberArrays) {
+        for (Long num : numberArrays) {
+            resultNumber += num;
+        }
+    }
+
     public void getResult() {
         outputView.printResult(resultNumber);
         inputView.closedConsole();
     }
-
-
 }
