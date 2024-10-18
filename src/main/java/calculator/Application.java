@@ -5,10 +5,7 @@ import camp.nextstep.edu.missionutils.Console;
 public class Application {
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String inputValue="";
-        try{
-            inputValue = Console.readLine().strip();
-        } catch (RuntimeException e) { }
+        String inputValue = Console.readLine().strip();
 
         int sum = 0;
 
@@ -22,12 +19,12 @@ public class Application {
                     }
                 }
             }catch (IllegalArgumentException e){
-                System.out.println(e.getMessage()+"프로그램을 종료합니다.\n---------------------------\n");
+                System.out.println(e.getMessage()+"프로그램을 종료합니다.");
                 throw new IllegalArgumentException();
             }
         }
 
-        System.out.printf("결과 : %d\n", sum);
+        System.out.printf("결과 : %d", sum);
     }
 
     private static String[] checkDelimiter(String inputValue){
@@ -38,7 +35,7 @@ public class Application {
             int newLineIdx = inputValue.indexOf("\\n");
 
             if(slashIdx!=0 || slashIdx>newLineIdx || newLineIdx-slashIdx>3){
-                throw new IllegalArgumentException("---------------------------\n커스텀 구분자가 문자열 앞부분의 //와 \\n 사이에 위치하는지, 또는 커스텀 문자가 두 글자 이상인지 확인이 필요합니다.\n");
+                throw new IllegalArgumentException("커스텀 구분자가 문자열 앞부분의 //와 \\n 사이에 위치하는지, 또는 커스텀 문자가 두 글자 이상인지 확인이 필요합니다.\n");
             }
 
             res[0] += "|\\"+inputValue.substring(slashIdx+2,newLineIdx);
@@ -54,11 +51,11 @@ public class Application {
         try {
             intValue = Integer.parseInt(value);
         }catch (IllegalArgumentException e){
-            throw new IllegalArgumentException("---------------------------\n정수가 아닌 입력이 감지되었습니다.\n");
+            throw new IllegalArgumentException("정수가 아닌 입력이 감지되었습니다.\n");
         }
 
         if(intValue < 0) {
-            throw new IllegalArgumentException("---------------------------\n음수를 입력했습니다.\n");
+            throw new IllegalArgumentException("음수를 입력했습니다.\n");
         }
 
         return intValue;
