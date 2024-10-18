@@ -19,5 +19,4 @@ public class CalculatorController {
 
         calculatorOutputer.printResult(result);
     }
-
 }
