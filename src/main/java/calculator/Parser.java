@@ -15,5 +15,5 @@ public interface Parser {
      * @param input input string to parse
      * @return list of numbers parsed from input string
      */
-    List<Integer> parse(String input);
+    List<Double> parse(String input);
 }

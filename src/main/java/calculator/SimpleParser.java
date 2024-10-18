@@ -16,10 +16,10 @@ public class SimpleParser implements Parser {
     public static final String DEFAULT_DELIMITERS = "[,:]";
 
     public static final String ERR_MSG_WHEN_NEGATIVE_NUMBER = "음수는 입력할 수 없습니다.";
-    public static final String ERR_MSG_WHEN_FAIL_TO_PARSE_INT = "숫자가 아닌 값이 입력되었습니다.";
+    public static final String ERR_MSG_WHEN_FAIL_TO_PARSE_NUMBER = "숫자가 아닌 값이 입력되었습니다.";
 
     @Override
-    public List<Integer> parse(String input) {
+    public List<Double> parse(String input) {
         DelimitersAndNumbers delimitersAndNumbers = separateInput(input);
         String delimiters = delimitersAndNumbers.delimiters();
         String numbers = delimitersAndNumbers.numbers();
@@ -29,7 +29,7 @@ public class SimpleParser implements Parser {
         }
 
         List<String> numbersStr = Arrays.stream(numbers.split(delimiters, -1)).toList();
-        List<Integer> numbersInt = mapNumbersFromStrToInt(numbersStr);
+        List<Double> numbersInt = mapNumbersFromStrToDouble(numbersStr);
 
         validateNumbers(numbersInt);
         return numbersInt;
@@ -51,17 +51,17 @@ public class SimpleParser implements Parser {
         return new DelimitersAndNumbers(delimiters, numbers);
     }
 
-    private List<Integer> mapNumbersFromStrToInt(List<String> numbersStr) {
+    private List<Double> mapNumbersFromStrToDouble(List<String> numbersStr) {
         try {
             return numbersStr.stream()
-                    .map(Integer::parseInt)
+                    .map(Double::parseDouble)
                     .toList();
         } catch (NumberFormatException _ignored) {
-            throw new IllegalArgumentException(ERR_MSG_WHEN_FAIL_TO_PARSE_INT);
+            throw new IllegalArgumentException(ERR_MSG_WHEN_FAIL_TO_PARSE_NUMBER);
         }
     }
 
-    private void validateNumbers(List<Integer> numbers) {
+    private void validateNumbers(List<Double> numbers) {
         if (numbers.stream().anyMatch(n -> n < 0)) {
             throw new IllegalArgumentException(ERR_MSG_WHEN_NEGATIVE_NUMBER);
         }
