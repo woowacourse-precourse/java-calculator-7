@@ -21,18 +21,27 @@ public class Calculator {
 
     public Optional<String> checkCustomDelim() {
         if (!str.startsWith("//")) {
+            delims = ",|:";
             return Optional.empty();
         }
 
         String customDelim = str.substring(2, str.indexOf("\\n"));
-        str = str.substring(str.indexOf("\\n") + 2);
-        delims = delims.concat("|" + customDelim);
+        delims = ",|:" + "|" + customDelim;
         return Optional.of(customDelim);
     }
 
     public int calculate() {
+        checkCustomDelim();
+
+        String str2;
+        if (str.matches("//.*\\\\n.*")) {
+            str2 = str.substring(str.indexOf("\\n") + 2);
+        } else {
+            str2 = str;
+        }
+
         String[] nums;
-        nums = str.split(delims);
+        nums = str2.split(delims);
         int sum = 0;
         for (String num : nums) {
             sum += Integer.parseInt(num);
