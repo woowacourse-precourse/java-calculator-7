@@ -4,6 +4,7 @@ import calculator.service.CalculatorService;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
+// 사용자의 입력을 받고 처리한 후 결과를 출력
 public class StringCalculatorController {
 
     private final InputView inputView;
@@ -16,6 +17,7 @@ public class StringCalculatorController {
         this.calculatorService = calculatorService;
     }
 
+    // 프로그램 실행
     public void run() {
         try {
             handleUserInput();
@@ -25,6 +27,7 @@ public class StringCalculatorController {
         }
     }
 
+    // 사용자 입력 처리하는 메소드
     private void handleUserInput() {
         String input = inputView.input();
 
@@ -36,15 +39,18 @@ public class StringCalculatorController {
         processValidInput(input);
     }
 
+    // 빈 입력일 경우 0을 출력하는 메소드
     private void handleBlankInput() {
         outputView.printResult(0);
     }
 
+    // 유효한 입력일 경우 계산을 처리하는 메소드
     private void processValidInput(String input) {
         int result = calculateResult(input);
         outputView.printResult(result);
     }
 
+    // 입력된 문자열을 계산하는 메소드
     private int calculateResult(String input) {
         return calculatorService.calculate(input);
     }
