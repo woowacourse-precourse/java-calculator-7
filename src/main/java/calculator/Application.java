@@ -1,6 +1,5 @@
 package calculator;
 
-import calculator.domain.Calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 import java.util.Arrays;
@@ -8,11 +7,12 @@ import java.util.Arrays;
 public class Application {
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
+        CalculatorIO calculatorIO = new CalculatorIO();
 
-        getUserInput(calculator);
+        calculatorIO.getUserInput();
         checkIsInputEmpty(calculator);
 
-        int escapeIdx = calculator.userInput.indexOf("\\n");
+        int escapeIdx = calculatorIO.userInput.indexOf("\\n");
         if (escapeIdx > 0) {
             splitWithCustomSeparator(calculator, escapeIdx);
         } else {
@@ -22,13 +22,10 @@ public class Application {
         checkIsPositiveNumber(calculator);
         checkHasNumberFormat(calculator);
         getTotal(calculator);
-        printResult(calculator);
+        calculatorIO.printResult(calculator);
     }
 
-    static void getUserInput(Calculator calculator) {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        calculator.userInput = Console.readLine();
-    }
+
 
     static void checkIsInputEmpty(Calculator calculator) {
         if (calculator.userInput.isEmpty()) {
@@ -76,7 +73,5 @@ public class Application {
         }
     }
 
-    static void printResult(Calculator calculator) {
-        System.out.println("결과 : " + calculator.total);
-    }
+
 }
