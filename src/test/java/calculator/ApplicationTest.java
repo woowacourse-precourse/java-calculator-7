@@ -81,6 +81,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자_사용_정상10() {
+        assertSimpleTest(() -> {
+            run("//^\\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
     void 커스텀_구분자_사용_예외1() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//?\\n1!2?3"))
@@ -108,6 +116,22 @@ class ApplicationTest extends NsTest {
     void 커스텀_구분자_사용_예외4() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//\'\\n1\'2\"3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_사용_예외5() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//^\\n^"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_사용_예외6() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//abc\\n1abc2"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
@@ -156,6 +180,22 @@ class ApplicationTest extends NsTest {
     void 기본_구분자_사용_예외3() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("10,,20"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 기본_구분자_사용_예외4() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(","))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 기본_구분자_사용_예외5() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("101:202 ,303"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
