@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class CalculatorService {
 
     private final SeparatorCheck separatorCheck = new SeparatorCheck();
+    //    public final SplitWordValidator splitWordValidator = new SplitWordValidator();
     private final SumCalculator sumCalculator = new SumCalculator();
 
     // 최종 계산 결과를 return 해야 하는 부분
@@ -16,13 +17,13 @@ public class CalculatorService {
             return 0;
         }
 
-        // input 값이 음수이면 안됨!!
-
         // 구분자로 나눠줌
-        String[] nums = separatorCheck.split(input);
-        System.out.println("The number that needs to be calculated is " + Arrays.toString(nums));
+        String[] splitWords = separatorCheck.split(input);
+        System.out.println(Arrays.toString(splitWords));
+
+//        String[] nums = splitWordValidator.check(splitWords);
 
         // 계산 결과 return
-        return sumCalculator.sum(nums);
+        return sumCalculator.sum(splitWords);
     }
 }

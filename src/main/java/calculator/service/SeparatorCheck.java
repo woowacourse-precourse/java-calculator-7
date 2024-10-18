@@ -1,10 +1,9 @@
 package calculator.service;
 
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// 구분자를 찾아내서 return에 숫자만 넘겨주기
+// 구분자로 split한 값을 return
 public class SeparatorCheck {
     private static final String DEFAULT_DELIMITER = ",|:";
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\\\\n(.*)");
@@ -18,12 +17,12 @@ public class SeparatorCheck {
             String nums = matcher.group(2).replace("\"", ""); // 구분자 정의 뒷 부분
 
             String finalDelimiter = customDelimiter + "|" + DEFAULT_DELIMITER;
-            System.out.println(finalDelimiter);
-            System.out.println(Arrays.toString(nums.split(finalDelimiter)));
+//            System.out.println(finalDelimiter);
+//            System.out.println(Arrays.toString(nums.split(finalDelimiter)));
 
 //            return numbers.split(combinedDelimiter); // 커스텀 구분자로 분리
             return nums.split(finalDelimiter);
-        } else{
+        } else {
             System.out.println("There is no user-specified delimiter.");
         }
         return input.split(DEFAULT_DELIMITER);
