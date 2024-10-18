@@ -53,4 +53,18 @@ class CalculatorUtilTest {
         assertThat(resultA).isEqualTo("1:2:3,4|5|6");
         assertThat(resultB).isEqualTo("1:2:3,4|5|6");
     }
+
+    @Test
+    @DisplayName("커스텀 구분자 선언부가 1개인지 확인합니다.")
+    void isOnlyOneCustomDeclare() {
+        // when
+        Boolean resultOneDeclare = CalculatorUtil.isOnlyOneCustomDeclare("//:\n1:2:3,4|5|6");
+        Boolean resulTwiceDeclare2 = CalculatorUtil.isOnlyOneCustomDeclare("//:\n//:\n1:2:3,4|5|//:\n6");
+        Boolean resultNoneDeclare = CalculatorUtil.isOnlyOneCustomDeclare("1:2:3,4|5|6");
+
+        // then
+        assertTrue(resultOneDeclare);
+        assertFalse(resulTwiceDeclare2);
+        assertTrue(resultNoneDeclare);
+    }
 }

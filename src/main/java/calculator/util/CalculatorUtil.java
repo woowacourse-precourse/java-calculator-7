@@ -45,4 +45,15 @@ public class CalculatorUtil {
     public static String formattingString(String inputValue) {
         return inputValue.replaceAll(CUSTOM_DELIMITER_REGEX, "");
     }
+
+    public static Boolean isOnlyOneCustomDeclare(String inputValue) {
+        // TODO : 커스텀 구분자 선언부가 1개만 존재하는 지 확인합니다.
+
+        String formattingString = formattingString(inputValue);
+
+        Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
+        Matcher matcher = pattern.matcher(formattingString);
+
+        return !matcher.find();
+    }
 }
