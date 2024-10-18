@@ -37,7 +37,9 @@ public class StringCalculator {
     void calculateSumValue(String[] separatedNumbers) {
         sumValue = 0;
         for (String number : separatedNumbers) {
-            sumValue += Integer.parseInt(number);
+            if (!number.isEmpty()) {
+                sumValue += Integer.parseInt(number);
+            }
         }
     }
 
