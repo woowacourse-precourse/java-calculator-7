@@ -5,10 +5,11 @@ import static calculator.exception.IllegalArgumentExceptionEnum.INVALID_LENGTH;
 import static calculator.exception.IllegalArgumentExceptionEnum.MULTIPLE_DELIMITERS;
 
 import calculator.exception.ExceptionUtils;
-import calculator.regex.RegexPatternMatcher;
+import calculator.pattern.PatternMatcher;
+import calculator.pattern.RegexPatternMatcher;
 
 public class CustomDelimiterParser {
-    private final RegexPatternMatcher delimiterMatcher;
+    private final PatternMatcher delimiterMatcher;
 
     public CustomDelimiterParser(String prefix, String suffix) {
         prefix = prefix.replace("\\", "\\\\");

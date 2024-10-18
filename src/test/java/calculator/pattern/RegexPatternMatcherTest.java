@@ -1,4 +1,4 @@
-package calculator.regex;
+package calculator.pattern;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
