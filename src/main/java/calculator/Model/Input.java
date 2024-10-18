@@ -17,7 +17,7 @@ public class Input {
     }
 
     public int getCustomDelimiterEndIndex(String rawText) {
-        return rawText.indexOf("\n");
+        return rawText.lastIndexOf("\n");
     }
 
     public int checkHasCustomDelimiter(String rawText) {
