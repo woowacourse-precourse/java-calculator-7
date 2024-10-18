@@ -1,11 +1,11 @@
 package calculator;
 
-public class User {
-    private final String user;
+public class UserInput {
+    private final String userInput;
 
-    public User(String user) {
-        validate(user);
-        this.user = user;
+    public UserInput(String userInput) {
+        validate(userInput);
+        this.userInput = userInput;
     }
 
     private void validate(String input) {
@@ -38,12 +38,12 @@ public class User {
     }
 
 
-    public String getUser() {
-        return user;
+    public String getUserInput() {
+        return userInput;
     }
 
     public boolean isCustom() {
-        return user.startsWith("//");
+        return userInput.startsWith("//");
     }
 
 
