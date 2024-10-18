@@ -13,6 +13,8 @@ public class Application {
         if (input == null || input.isEmpty()) {
             return 0;
         }
+
+        String[] numbers = input.split("[,:]");
         return 1;
     }
 }
