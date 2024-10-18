@@ -8,11 +8,16 @@ public class CalculatorService {
 
         if (input.isEmpty()) {
             calculator.setNumbers(new int[]{0});
-        } else if (input.equals("3:3,2")) {
-          calculator.setNumbers(new int[]{3, 3, 2});
         } else {
-            calculator.setNumbers(new int[]{Integer.parseInt(input)});
+            String[] splitInput = input.split("[,|:]");
+            int[] splitNum = new int[splitInput.length];
+
+            for (int i = 0; i < splitInput.length; i++) {
+                splitNum[i] = Integer.parseInt(splitInput[i]);
+            }
+            calculator.setNumbers(splitNum);
         }
+
         calculator.doSum();
         return calculator.getSum();
     }
