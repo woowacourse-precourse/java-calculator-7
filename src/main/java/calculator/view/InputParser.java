@@ -13,10 +13,8 @@ public class InputParser {
     private static final String CUSTOM_END = "\\n";
 
     public Numbers parseNumbers(Delimiters delimiters, String input) {
-        String delimiterRegex = String.join("|", delimiters.getElements());
         String numberInput = removeCustomDelimiter(input);
-        return new Numbers(Arrays.stream(numberInput.split(delimiterRegex))
-                .toList());
+        return new Numbers(Arrays.stream(numberInput.split(delimiters.getRegex())).toList());
     }
 
     private String removeCustomDelimiter(String input) {

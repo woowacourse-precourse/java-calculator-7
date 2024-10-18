@@ -10,11 +10,16 @@ import java.util.regex.Pattern;
 public class Delimiters {
 
     private static final Collection<String> DEFAULT_DELIMITERS = List.of(",", ":");
+    private static final String REGEX_DELIMITER = "|";
     private final Collection<String> elements;
 
     public Delimiters() {
         this.elements = new ArrayList<>();
         this.elements.addAll(DEFAULT_DELIMITERS);
+    }
+
+    public String getRegex() {
+        return String.join(REGEX_DELIMITER, elements);
     }
 
     public Collection<String> getElements() {
