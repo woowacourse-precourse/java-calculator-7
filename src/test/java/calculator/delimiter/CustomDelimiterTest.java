@@ -6,6 +6,7 @@ import calculator.utils.ErrorMessage;
 import java.util.List;
 import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,11 +15,17 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class CustomDelimiterTest {
 
+    private CustomDelimiter customDelimiter;
+
+    @BeforeEach
+    void setUp() {
+        this.customDelimiter = new CustomDelimiter();
+    }
+
     @ParameterizedTest
     @DisplayName("커스텀 구분자에 해당하는 지 판별 할 수 있다.")
     @MethodSource("provideCustomDelimiterTestCases")
     void applicable(String input, boolean expected) {
-        CustomDelimiter customDelimiter = new CustomDelimiter();
         boolean applicable = customDelimiter.applicable(input);
         Assertions.assertThat(applicable).isEqualTo(expected);
     }
@@ -49,7 +56,6 @@ class CustomDelimiterTest {
     void emptyDelimiterNotAllowed() {
         String input = "//\\n123";
         String expectedMessage = ErrorMessage.EMPTY_STRING_IS_NOT_ALLOWED.getMessage();
-        CustomDelimiter customDelimiter = new CustomDelimiter();
 
         assertThatThrownBy(() -> customDelimiter.tokenize(input))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -60,7 +66,7 @@ class CustomDelimiterTest {
     @DisplayName("주어진 문자열에서 숫자를 올바르게 분리하여 리턴한다.")
     @MethodSource("provideTokenizeTestCases")
     void tokenize(String input, List<String> expectedNumbers) {
-        CustomDelimiter customDelimiter = new CustomDelimiter();
+
         List<String> numbers = customDelimiter.tokenize(input);
         Assertions.assertThat(numbers).isEqualTo(expectedNumbers);
     }

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import calculator.calculator.Delimiter;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,7 +14,12 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class DelimiterFactoryTest {
 
-    private final DelimiterFactory delimiterFactory = new DelimiterFactory();
+    private DelimiterFactory delimiterFactory;
+
+    @BeforeEach
+    void setUp() {
+        delimiterFactory = new DelimiterFactory();
+    }
 
     @ParameterizedTest
     @MethodSource("provideDelimiterTestCases")

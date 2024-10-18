@@ -5,6 +5,7 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.util.List;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -13,7 +14,12 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class RegularDelimiterTest {
 
-    private final RegularDelimiter regularDelimiter = new RegularDelimiter();
+    private RegularDelimiter regularDelimiter;
+
+    @BeforeEach
+    void setUp() {
+        this.regularDelimiter = new RegularDelimiter();
+    }
 
     @ParameterizedTest
     @MethodSource("provideTokenizeTestCases")
