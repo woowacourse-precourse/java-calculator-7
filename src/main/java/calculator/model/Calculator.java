@@ -1,6 +1,5 @@
 package calculator.model;
 
-import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class Calculator {
@@ -13,7 +12,7 @@ public class Calculator {
     public String[] splitNumbers(){
         String customDelimiter = "";
         String[] splitedNumbers;
-        customDelimiter = checkCustomDelimiter(numbers);
+        customDelimiter = checkCustomDelimiter();
         if(!customDelimiter.isEmpty()){
            splitedNumbers = numbers.split("[,;]|" + Pattern.quote(customDelimiter));
            return splitedNumbers;
@@ -21,4 +20,17 @@ public class Calculator {
         splitedNumbers = numbers.split("[,;]");
            return splitedNumbers;
     }
+
+    private boolean checkCustomDelimiter(){
+        String[] splitedNumbers = numbers.split("[,;]");
+        String engraftedNumbers = String.join("", splitedNumbers);  
+        if (engraftedNumbers.matches("\\d+")){
+            return true;
+        }
+        return false;
+    }
+
+
+
+
 }
