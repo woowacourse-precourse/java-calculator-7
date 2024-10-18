@@ -60,8 +60,10 @@ public class Application {
             result += number;
         }
 
+        // 덧셈 결과를 출력한다. (예시: `결과: 6`)
         System.out.println("결과 : " + result);
 
+        // `Scanner` 를 닫는다.
         Console.close();
     }
 }
