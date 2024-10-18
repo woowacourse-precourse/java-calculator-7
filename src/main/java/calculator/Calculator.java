@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.domain.Result;
 import calculator.ui.InputView;
 import calculator.ui.OutputView;
 
@@ -11,13 +12,9 @@ public class Calculator {
         this.outputView = outputView;
     }
     public void run(){
-        while(true) {
-            try {
-                outputView.printCalculatorStartMessage();
-                inputView.readText();
-            }catch (IllegalArgumentException e){
-                break;
-            }
-        }
+        outputView.printCalculatorStartMessage();
+        Result result = inputView.readText();
+        int total = result.getTotal();
+        outputView.printCalculatorsRESULTMessage(total);
     }
 }
