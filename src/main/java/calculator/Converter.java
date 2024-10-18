@@ -14,7 +14,11 @@ public class Converter {
     public List<Integer> convertToNumbers(String[] tokens) {
         List<Integer> numbers = new ArrayList<>();
         for (String token : tokens) {
-            numbers.add(Integer.parseInt(token.trim()));
+            try {
+                numbers.add(Integer.parseInt(token.trim()));
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException();
+            }
         }
         return numbers;
     }
