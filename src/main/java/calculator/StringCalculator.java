@@ -23,7 +23,7 @@ public class StringCalculator {
 
         DelimitedNumbers delimitedNumbers = new DelimitedNumbers(input, delimiterResult);
 
-        String[] separatedNumbers = delimitedNumbers.getStringNumbers().split(delimiterResult.getDelimiterResult());
+        String[] separatedNumbers = generateSepartedNumbers(delimitedNumbers, delimiterResult);
         Numbers numbers = new Numbers(separatedNumbers);
 
         int sum = 0;
@@ -34,6 +34,10 @@ public class StringCalculator {
 
         System.out.println("결과 : " + sum);
 
+    }
+
+    private static String[] generateSepartedNumbers(DelimitedNumbers delimitedNumbers, DelimiterResult delimiterResult) {
+        return delimitedNumbers.getStringNumbers().split(delimiterResult.getDelimiterResult());
     }
 
     private String generateCombinedInput(UserInput userInput, int customDelimiterEndIndex) {
