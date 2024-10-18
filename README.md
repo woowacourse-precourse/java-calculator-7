@@ -6,8 +6,8 @@
 
 ### `Calculator`
 
-- [ ] 전달받은 `숫자 리스트`를 이용해 `덧셈 연산`을 한다.
-- [ ] 계산한 결과 값을 `CalculatorController`에게 반환한다.
+- [x] 전달받은 `숫자 리스트`를 이용해 `덧셈 연산`을 한다.
+    - [x] 계산한 결과 값을 `CalculatorController`에게 반환한다.
 
 ### `CalculationString` (계산 문자열)
 
