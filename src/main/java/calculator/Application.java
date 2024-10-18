@@ -27,8 +27,11 @@ public class Application {
         String delimiter = ",|:"; // 기본 구분자 (쉼표와 콜론)
         if (input.startsWith("//")) {
             int delimiterIndex = input.indexOf("\n");
-            delimiter = input.substring(2, delimiterIndex);
-            input = input.substring(delimiterIndex + 1);
+            if (delimiterIndex == -1) {
+                throw new IllegalArgumentException("잘못된 구분자 형식입니다."); // 구분자가 잘못된 경우 예외 처리
+            }
+            delimiter = input.substring(2, delimiterIndex); // 커스텀 구분자 추출
+            input = input.substring(delimiterIndex + 1); // 구분자 이후의 입력값 추출
         }
 
         // 구분자를 기준으로 숫자를 분리하고 더하기
