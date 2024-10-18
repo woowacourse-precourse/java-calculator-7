@@ -3,7 +3,7 @@ package calculator;
 import java.util.Scanner;
 
 public class Calculator {
-    public void start() {
+    void start() {
         final String START_MESSAGE = "덧셈할 문자열을 입력해 주세요.";
         System.out.println(START_MESSAGE);
         work();
@@ -11,8 +11,7 @@ public class Calculator {
 
     private void work() {
         String input = inputString();
-//        System.out.println(input);
-        printResult();
+        printResult(0);
     }
 
     private String inputString() {
@@ -20,6 +19,7 @@ public class Calculator {
         return sc.next();
     }
 
-    private void printResult() {
+    private void printResult(int result) {
+        System.out.println("결과 : " + result);
     }
 }
