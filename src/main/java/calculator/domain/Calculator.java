@@ -6,4 +6,5 @@ import java.util.List;
 public class Calculator {
     public String userInput;
     public List<String> processedInput = new ArrayList<>();
+    public int total;
 }
