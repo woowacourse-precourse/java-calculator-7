@@ -30,7 +30,7 @@ public class NumberList {
     }
 
     public void makeNumberList(String rawNumber, String customDelimiter) {
-        StringTokenizer inputNumber = new StringTokenizer(rawNumber, ",;"+customDelimiter);
+        StringTokenizer inputNumber = new StringTokenizer(rawNumber, ",:"+customDelimiter);
         while (inputNumber.hasMoreTokens()) {
             registerNumber(inputNumber.nextToken());
         }
