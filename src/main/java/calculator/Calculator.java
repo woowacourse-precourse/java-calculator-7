@@ -12,13 +12,21 @@ public class Calculator {
 //        System.out.println("input = " + input);
 
         String[] results = getNumberLists(input);
-        for (String result : results) {
-            System.out.println("result = " + result);
-        }
+
+        int answer = getAnswer(results);
+        System.out.println("answer = " + answer);
     }
 
     private String[] getNumberLists(String str) {
         return str.split("[,:]");
+    }
+
+    private static int getAnswer(String[] results) {
+        int answer = 0;
+        for (String result : results) {
+            answer += Integer.parseInt(result);
+        }
+        return answer;
     }
 
 
