@@ -26,7 +26,8 @@
   * InputView : input을 담당하는 클래스
   * OutputView: output을 담당하는 클래스
 * domain
-  * Numbers: 숫자에 대한 기능을 처리해주는 클래스
+  * Numbers: 숫자에 대한 기능을 처리해주는 클래스 (+ 음수 여부 체크)
+  * AddNumber: 숫자를 더하는 클래스
 * util
   * SplitNumber: 구분자에 따라 숫자를 나눈다
 * controller
