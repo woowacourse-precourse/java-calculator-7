@@ -53,7 +53,7 @@ class InputValidatorTest {
     @Test
     void 입력_값에_제대로_된_커스텀_구분자_Prefix_값이_없을때_예외를_발생() {
         // given
-        String input = ";\n1;2;3";
+        String input = ";\\n1;2;3";
         CalculationRequest calculationRequest = new CalculationRequest(input);
 
         // when & then
@@ -87,7 +87,7 @@ class InputValidatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"//@\n1@2@3", "//*\n1*2*3", "1,2:3"})
+    @ValueSource(strings = {"//@\\n1@2@3", "//*\\n1*2*3", "1,2:3"})
     void 제대로된_입력값이_주어졌을때_예외가_발생하지_않는다(String input) {
         // given
         CalculationRequest calculationRequest = new CalculationRequest(input);
