@@ -1,17 +1,18 @@
 package calculator.parser;
 
+import java.util.regex.Pattern;
+
 public class InputParser {
 
     DelimiterExtractor extractor = new DelimiterExtractor();
-
-    private static final int BEGIN_INDEX = 5;
 
     public String[] parseInput(String input) {
         if (input.isEmpty()) {
             return new String[]{};
         }
         if (input.startsWith("//")) {
-            return input.substring(BEGIN_INDEX).split(extractor.extractCustomDelimiter(input));
+            String customDelimiter = Pattern.quote(extractor.extractCustomDelimiter(input));
+            return input.substring(extractor.getBeginIndex()).split(customDelimiter);
         }
         return input.split(extractor.getDefaultDelimiter());
     }
