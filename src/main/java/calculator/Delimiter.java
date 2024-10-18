@@ -13,6 +13,7 @@ public enum Delimiter {
     INVALID_DOUBLE_SLASH("//",false),
     INVALID_NEWLINE("\\n",false),
     INVALID_BLANK(" ",false),
+    INVALID_NULL("",false),
     INVALID_NUMBER("[0-9]", false);
 
     private final String delimiter;
