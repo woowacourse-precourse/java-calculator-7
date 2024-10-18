@@ -17,12 +17,15 @@ public class Calculator {
         List<String> parsedNumbers = parseNumbers(input);
 
         return parsedNumbers.stream()
-                .mapToInt(num -> {
-                    if(num.isEmpty()) return 0;
+                .mapToInt(str -> {
+                    if(str.isEmpty()) return 0;
 
-                    if(isContainedLetter(num)) throw new IllegalArgumentException("[ERROR] 지정되지 않은 구분자입니다.");
+                    if(isContainedLetter(str)) throw new IllegalArgumentException("[ERROR] 지정되지 않은 구분자입니다.");
 
-                    return Integer.parseInt(num);
+                    int num = Integer.parseInt(str);
+                    if(isNegative(num)) throw new IllegalArgumentException("[ERROR] 음수는 입력할 수 없습니다.");
+
+                    return num;
                 })
                 .sum();
     }
@@ -52,6 +55,10 @@ public class Calculator {
 
         if(!isValidLength()) throw new IllegalArgumentException("[ERROR] 한 글자의 문자만 구분자로 지정할 수 있습니다.");
         if(isContainedDigit()) throw new IllegalArgumentException("[ERROR] 숫자를 구분자로 지정할 수 없습니다.");
+    }
+
+    private static boolean isNegative(int num) {
+        return num < 0;
     }
 
     private static boolean isValidLength() {
