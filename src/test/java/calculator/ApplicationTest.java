@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
     @Test
-    void 커스텀_구분자_사용() {
+    void 커스텀_구분자_사용_성공() {
         assertSimpleTest(() -> {
             run("//;\\n1");
             assertThat(output()).contains("결과 : 1");
@@ -17,10 +17,26 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트() {
+    void 커스텀_구분자_사용_실패() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("//1"))
+                    .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 음수_예외_테스트() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 숫자가_아닌_형태_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("-1,^,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
