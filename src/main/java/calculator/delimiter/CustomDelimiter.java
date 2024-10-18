@@ -23,7 +23,6 @@ public class CustomDelimiter implements Delimiter {
 
     @Override
     public List<String> tokenize(String rawInput) {
-        validate(rawInput);
         String delimiter = extractDelimiter(rawInput);
 
         if (delimiter.isEmpty()) {
@@ -47,13 +46,4 @@ public class CustomDelimiter implements Delimiter {
         return rawInput.substring(CUSTOM_DELIMITER_PREFIX.length(), rawInput.indexOf(CUSTOM_DELIMITER_SUFFIX));
     }
 
-    private void validate(String rawInput) {
-        if (!rawInput.startsWith(CUSTOM_DELIMITER_PREFIX)) {
-            throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_START_POINT_NOT_ALLOWED.getMessage());
-        }
-
-        if (!rawInput.contains(CUSTOM_DELIMITER_SUFFIX)) {
-            throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_END_POINT_NOT_ALLOWED.getMessage());
-        }
-    }
 }

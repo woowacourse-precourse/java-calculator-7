@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -43,28 +44,17 @@ class CustomDelimiterTest {
         );
     }
 
-    @ParameterizedTest
-    @DisplayName("잘못된 입력이 들어오면 예외가 발생한다.")
-    @MethodSource("provideInvalidInputTestCases")
-    void validateInvalidInputs(String input, String expectedMessage) {
+    @Test
+    @DisplayName("커스텀 구분자는 공백(길이가0)일 수 없다.")
+    void emptyDelimiterNotAllowed() {
+        String input = "//\\n123";
+        String expectedMessage = ErrorMessage.EMPTY_STRING_IS_NOT_ALLOWED.getMessage();
         CustomDelimiter customDelimiter = new CustomDelimiter();
 
         assertThatThrownBy(() -> customDelimiter.tokenize(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(expectedMessage);
     }
-
-    private static Stream<Arguments> provideInvalidInputTestCases() {
-        return Stream.of(
-                Arguments.of(";;1;2", ErrorMessage.CUSTOM_DELIMITER_START_POINT_NOT_ALLOWED.getMessage()),
-                Arguments.of("1,2,3", ErrorMessage.CUSTOM_DELIMITER_START_POINT_NOT_ALLOWED.getMessage()),
-                Arguments.of("//;", ErrorMessage.CUSTOM_DELIMITER_END_POINT_NOT_ALLOWED.getMessage()),
-                Arguments.of("", ErrorMessage.CUSTOM_DELIMITER_START_POINT_NOT_ALLOWED.getMessage()),
-                Arguments.of("1\\n2", ErrorMessage.CUSTOM_DELIMITER_START_POINT_NOT_ALLOWED.getMessage()),
-                Arguments.of("//\\n123", ErrorMessage.EMPTY_STRING_IS_NOT_ALLOWED.getMessage())
-        );
-    }
-
 
     @ParameterizedTest
     @DisplayName("주어진 문자열에서 숫자를 올바르게 분리하여 리턴한다.")
