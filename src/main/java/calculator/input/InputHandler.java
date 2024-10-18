@@ -14,6 +14,7 @@ public class InputHandler {
     }
 
     public String getInput() {
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine(); // 사용자에게 값을 입력 받음
 
         // Validator 을 통해서 검증
