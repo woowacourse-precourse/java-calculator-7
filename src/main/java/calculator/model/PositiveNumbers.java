@@ -11,10 +11,17 @@ public class PositiveNumbers {
     }
 
     private PositiveNumbers(int[] numbers) {
+        Arrays.stream(numbers).forEach(number -> validatePositive(number));
         this.numbers = Arrays.copyOf(numbers, numbers.length);
     }
 
     public int sum() {
         return Arrays.stream(numbers).sum();
+    }
+
+    private void validatePositive(Integer number) {
+        if (number <= 0) {
+            throw new IllegalArgumentException("양수가 아닙니다.");
+        }
     }
 }
