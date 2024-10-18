@@ -1,6 +1,7 @@
 package calculator.domain;
 
 import calculator.view.InputView;
+import calculator.view.OutputView;
 
 public class Calculator {
 
@@ -8,9 +9,11 @@ public class Calculator {
     private Separator separator;
     private Numbers number;
     private InputView inputView;
+    private OutputView outputView;
 
     public void start() {
         inputView = new InputView();
+        outputView = new OutputView();
         inputView.showStartMessage();
 
         input = new Input();
@@ -31,7 +34,7 @@ public class Calculator {
                 number = new Numbers(parts);
 
                 //결과 출력
-                System.out.println("결과 :" + number.calculate());
+                outputView.showResult(number.calculate());
             } else {
                 // 커스텀 구분자 기능 실행
                 input.splitCustomSeparator();
@@ -52,7 +55,7 @@ public class Calculator {
                 number = new Numbers(parts);
 
                 //결과 출력
-                System.out.println("결과 : " + number.calculate());
+                outputView.showResult(number.calculate());
             }
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
