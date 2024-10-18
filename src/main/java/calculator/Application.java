@@ -1,5 +1,7 @@
 package calculator;
 
+import static calculator.calculate.Calculator.getResult;
+import static calculator.calculate.Calculator.printResult;
 import static calculator.input.StringInput.getInput;
 import static calculator.split.StringSplit.getBackString;
 import static calculator.split.StringSplit.getFrontString;
@@ -14,9 +16,14 @@ public class Application {
         String backString = getBackString(input);
 
         int[] numArr;
+        int result;
+
         if (validateFrontString(frontString)) {
             numArr = splitStringBySeparator(backString, frontString);
+            result = getResult(numArr);
+            printResult(result);
         }
+
     }
 
 }
