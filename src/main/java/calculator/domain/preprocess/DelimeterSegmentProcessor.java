@@ -10,13 +10,13 @@ public class DelimeterSegmentProcessor {
 
     public boolean checkCustomDelimeterRequest(String input) {
         if (input.startsWith("//") && input.contains("\n")) {
-            validateCutomDelimeterRequest(input);
+            validateCustomDelimeterRequest(input);
             return true;
         } else
             return false;
     }
 
-    private void validateCutomDelimeterRequest(String input) {
+    private void validateCustomDelimeterRequest(String input) {
         if (input.indexOf("\n") == 2)
             throw new IllegalArgumentException("구분자로 사용할 문자 미입력");
         if (input.indexOf("\n") > 3)
