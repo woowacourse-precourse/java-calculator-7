@@ -2,11 +2,14 @@ package calculator.domain.calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.ArrayList;
+
 public class Calculator {
 
     private final Delimiter delimiter;
 
     private String inputStr;
+    private ArrayList<Integer> numberList = new ArrayList<>();
 
     public Calculator(Delimiter delimiter){
         this.delimiter = delimiter;
@@ -33,6 +36,23 @@ public class Calculator {
             }
         }
         this.inputStr = s;
+    }
+
+    public void extractNumberList(){
+        int num = 0;
+        for(char ch: this.inputStr.toCharArray()){
+            if(delimiter.isDelimiter(ch)){
+                numberList.add(num);
+                num = 0;
+            }else{
+                num *= 10;
+                num += (ch-'0');
+                if(num >= CalculatorConstant.LIMIT_NUMBER){
+                    throw new IllegalArgumentException();
+                }
+            }
+        }
+        numberList.add(num);
     }
 
 }
