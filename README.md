@@ -10,7 +10,7 @@ mvc 패턴으로 구현을 한다
     1) InputView 클래스
         * readBuffer 함수 - 문자열을 사용자로부터 입력 받는 함수
         * validateInput 함수 - 입력된 문자열의 유효성을 체크하는 함수
-        * printErrorMessage 함수 - input 에러 메세지를 출력하는 함수
+        * printErrorMessage 함수 - 공백 입력시 input 에러 메세지를 출력하는 함수
     2) OutputView 클래스
         * writeSumResult 함수 - 덧셈의 결과를 출력하는 함수 
     
@@ -19,5 +19,7 @@ mvc 패턴으로 구현을 한다
         * run 함수 - 전반적인 시스템 구동을 돕는 메소드/ InputView 로 사용자 입력을 받고 Calculator Service 로 계산해서 OutputView 로 결과 출력
 4. service 패키지
     1) CalculatorService 클래스
-        * tokenize 함수 - 입력 받은 문자열에서 구분자를 기준으로 숫자를 추출하는 메소드
+        * tokenizeInput 함수 - 입력 받은 문자열에서 구분자를 기준으로 숫자를 추출하는 메소드
+        * splitByCustomDelimiter 함수 - 유저가 설정한 구분자를 기준으로 split 하는 메소드
+        * splitByDelimiter 함수 - 주어진 구분자로 split 하는 메소드
         * sum 함수 - 모든 숫자들을 더해서 결과를 반환하는 함수
