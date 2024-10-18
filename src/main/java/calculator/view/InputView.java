@@ -2,6 +2,9 @@ package calculator.view;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class InputView {
     private final static String ADDITION_INPUT_PROMPT_MESSAGE = "덧셈할 문자열을 입력해 주세요.";
     private final static String DEFAULT_DELIMITERS = ",:";
@@ -27,5 +30,19 @@ public class InputView {
 
     public String getDefaultDelimiters() {
         return DEFAULT_DELIMITERS;
+    }
+
+    public List<Integer> getOperands(String additionInput, String delimiters) {
+        List<String> separatedInput = separateStringToList(additionInput, delimiters);
+        List<Integer> operands = new ArrayList<>();
+        for(String token : separatedInput) {
+            operands.add(Integer.parseInt(token));
+        }
+        return operands;
+    }
+
+    private List<String> separateStringToList(String s, String delimiters) {
+        List<String> tokens = List.of(s.split(delimiters));
+        return tokens;
     }
 }
