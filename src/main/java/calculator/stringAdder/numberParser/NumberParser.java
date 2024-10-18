@@ -31,5 +31,8 @@ public class NumberParser {
     if (number.startsWith("-")) {
       throw new IllegalArgumentException(this.getClass().getSimpleName()+ ": 음수는 허용되지 않습니다: " + number);
     }
+    if (number.contains(".")){
+      throw new IllegalArgumentException(this.getClass().getSimpleName()+ ": 소수는 허용되지 않습니다: " + number);
+    }
   }
 }
