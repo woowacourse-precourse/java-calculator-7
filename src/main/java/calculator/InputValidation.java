@@ -21,10 +21,14 @@ public class InputValidation {
             numbers = userNumbers.split(separator);
         }
 
-        if (!userNumbers.startsWith("//")) {
+        if (userNumbers.startsWith("//")) {
             if ((userNumbers.substring(0, 2) + userNumbers.substring(3, 5)).equals("//\\n")) {
-                separator = "[" + normalSeparator + userNumbers.charAt(2) + "]";
-                numbers = userNumbers.substring(5).split(separator);
+                if (!Character.isDigit(userNumbers.charAt(2))) {
+                    separator = "[" + normalSeparator + userNumbers.charAt(2) + "]";
+                    numbers = userNumbers.substring(5).split(separator);
+                } else {
+                    throw new IllegalArgumentException();
+                }
             } else {
                 throw new IllegalArgumentException();
             }
