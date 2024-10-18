@@ -10,7 +10,7 @@ public enum RegexPattern {
     ONLY_NUMBER_SEPARATOR(RegexConstant.ONLY_NUMBER_SEPARATOR_REGEX),
     CUSTOM_SEPARATOR(RegexConstant.CUSTOM_SEPARATOR_REGEX) {
         @Override
-        public String extractCustomSeparator(String input) {
+        public String extractSeparator(String input) {
             int startWith = SeparatorConvertor.forWardSlashStartWithIndex(input);
             int endWith = SeparatorConvertor.slashNextLineEndWithIndex(input);
             String customSeparator = SeparatorConvertor.createCustomSeparator(input, startWith, endWith);
@@ -41,18 +41,18 @@ public enum RegexPattern {
                 .map((regexPattern) -> regexPattern.extractNumber(input))
                 .orElseThrow(() -> new IllegalArgumentException("[ERROR] 발생"));
     }
-    public static String extractCustomSeparatorProcess(String input) {
+    public static String extractSeparatorProcess(String input) {
         return Arrays.stream(REGEX_PATTERNS)
                 .filter((regexPattern) -> regexPattern.match(input))
                 .findFirst()
-                .map((regexPattern) -> regexPattern.extractCustomSeparator(input))
+                .map((regexPattern) -> regexPattern.extractSeparator(input))
                 .orElseThrow(() -> new IllegalArgumentException("[ERROR] 발생"));
     }
     private boolean match(String input) {
         return pattern.matcher(input).matches();
     }
 
-    public String extractCustomSeparator(String input) {
+    public String extractSeparator(String input) {
         return SeparatorConvertor.defaultSeparator();
     }
     public String extractNumber(String input) {
