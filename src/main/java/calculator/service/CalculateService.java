@@ -42,6 +42,12 @@ public class CalculateService {
     //올바른 Deliter 형식인지 판단할 것!
     private void checkDelimterForm(int firstIndexOfPrefix, int firstIndexOfPostfix) {
 
+        if (!((firstIndexOfPrefix == 0 && firstIndexOfPostfix == 3) || (firstIndexOfPrefix == -1
+                && firstIndexOfPostfix == -1))) {
+            
+            throw new IllegalArgumentException("올바른 형식이 아니거나 이스케이프 문자가 포함되어 있습니다");
+        }
+
     }
 
     //customDelimber 존재 여부 확인
@@ -65,7 +71,7 @@ public class CalculateService {
                 : userInput.substring(0);
 
         List<String> numbers = delimters.getNumbersFromCalculationFormula(calculationFormula);
-        
+
         PositiveNumbers positiveNumbers = new PositiveNumbers();
 
         try {
