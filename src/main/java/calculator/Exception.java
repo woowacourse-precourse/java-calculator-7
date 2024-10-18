@@ -6,7 +6,7 @@ public class Exception {
     public int[] validate(String input){
         String[] operand=delimiterParser.parse(input);
 
-        if (operand.length == 0 || (operand.length == 1 && operand[0].isEmpty())) {
+        if (operand.length == 0) {
             return new int[]{0}; // 공백일 경우 0을 포함한 배열 반환
         }
 
