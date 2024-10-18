@@ -1,6 +1,5 @@
 package calculator.domain.preprocess;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,14 +13,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class PreprocessorTest {
 
     private InputManager inputManager;
-    private DelimeterProcessor delimeterProcessor;
+    private DelimeterSegmentProcessor delimeterSegmentProcessor;
     private SplitManager splitManager;
     private Preprocessor preprocessor;
 
     @BeforeEach
     void setUp() {
         preprocessor = new Preprocessor(
-                new DelimeterProcessor(),
+                new DelimeterSegmentProcessor(),
                 new InputManager(),
                 new SplitManager());
     }

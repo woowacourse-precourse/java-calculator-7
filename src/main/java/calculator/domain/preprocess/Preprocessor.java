@@ -6,20 +6,20 @@ import java.util.List;
 
 public class Preprocessor {
 
-    private final DelimeterProcessor delimeterProcessor;
+    private final DelimeterSegmentProcessor delimeterSegmentProcessor;
     private final InputManager inputManager;
     private final SplitManager splitManager;
 
-    public Preprocessor(DelimeterProcessor delimeterProcessor, InputManager inputManager, SplitManager splitManager) {
-        this.delimeterProcessor = delimeterProcessor;
+    public Preprocessor(DelimeterSegmentProcessor delimeterSegmentProcessor, InputManager inputManager, SplitManager splitManager) {
+        this.delimeterSegmentProcessor = delimeterSegmentProcessor;
         this.inputManager = inputManager;
         this.splitManager = splitManager;
     }
 
     private boolean validateDelimeterRequest(String input) {
-        if (delimeterProcessor.checkCustomDelimeterRequest(input)) {
-            delimeterProcessor.validateCutomDelimeterRequest(input);
-            if (inputManager.isInteger(delimeterProcessor.extractCustomDelimeter(input))) {
+        if (delimeterSegmentProcessor.checkCustomDelimeterRequest(input)) {
+            delimeterSegmentProcessor.validateCutomDelimeterRequest(input);
+            if (inputManager.isInteger(delimeterSegmentProcessor.extractCustomDelimeter(input))) {
                 throw new IllegalArgumentException("구분자로 숫자를 입력했습니다");
             }
             return true;
@@ -32,7 +32,7 @@ public class Preprocessor {
         List<String> delimeterList = new ArrayList<>(Arrays.asList(",", ":"));
 
         if (validateDelimeterRequest(input)) {
-            return delimeterProcessor.makeDelimeterList(delimeterProcessor.extractCustomDelimeter(input));
+            return delimeterSegmentProcessor.makeDelimeterList(delimeterSegmentProcessor.extractCustomDelimeter(input));
         }
 
         return delimeterList;
@@ -40,7 +40,7 @@ public class Preprocessor {
 
     public String preprocessString(String input) {
         if (validateDelimeterRequest(input)) {
-            return delimeterProcessor.extractPartTobeProcessed(input);
+            return delimeterSegmentProcessor.extractPartTobeProcessed(input);
         } else {
             return input;
         }

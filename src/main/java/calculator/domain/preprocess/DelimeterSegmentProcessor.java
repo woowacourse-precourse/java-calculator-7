@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class DelimeterProcessor {
+public class DelimeterSegmentProcessor {
 
     public boolean checkCustomDelimeterRequest(String input) {
         if (input.startsWith("//") && input.contains("\n"))

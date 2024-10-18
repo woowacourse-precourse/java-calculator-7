@@ -2,7 +2,7 @@ package calculator;
 
 import calculator.controller.CalculatorController;
 import calculator.domain.mainprocess.NumCalculator;
-import calculator.domain.preprocess.DelimeterProcessor;
+import calculator.domain.preprocess.DelimeterSegmentProcessor;
 import calculator.domain.preprocess.InputManager;
 import calculator.domain.preprocess.Preprocessor;
 import calculator.domain.preprocess.SplitManager;
@@ -13,7 +13,7 @@ public class Application {
         CalculatorController calculatorController = new CalculatorController(
                 new NumCalculator(),
                 new Preprocessor(
-                        new DelimeterProcessor(),
+                        new DelimeterSegmentProcessor(),
                         new InputManager(),
                         new SplitManager()),
                 new ViewManager());
