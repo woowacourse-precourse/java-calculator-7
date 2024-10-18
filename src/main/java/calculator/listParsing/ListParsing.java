@@ -17,7 +17,11 @@ public class ListParsing {
         List<Integer> numbersList = new ArrayList<>();
 
         for (String numStr : parsedNumbers) {
-            numbersList.add(Integer.parseInt(numStr));
+            try {
+                numbersList.add(Integer.parseInt(numStr));
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid number format: " + numStr);
+            }
         }
 
         return numbersList;
