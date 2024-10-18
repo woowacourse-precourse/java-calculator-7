@@ -13,6 +13,7 @@ public class NumberExtractor {
                 if (int_num < 0) {
                     throw new IllegalArgumentException("음수는 허용되지 않습니다.");
                 }
+                numbers.add(int_num);
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("잘못된 숫자 형태입니다.");
             }
