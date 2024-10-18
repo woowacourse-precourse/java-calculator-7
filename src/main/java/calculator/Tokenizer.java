@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.regex.Pattern;
+
 public class Tokenizer {
 
     public static String[] tokenize(char[] separators, String str) {
@@ -15,5 +17,9 @@ public class Tokenizer {
             nums[i] = Integer.valueOf(tokens[i]);
         }
         return nums;
+    }
+
+    public static String removeHeader(String user_input) {
+        return user_input.replaceAll("^(//).*\\\\n", "");
     }
 }
