@@ -15,6 +15,12 @@ public class Application {
         }
 
         String[] numbers = input.split("[,:]");
-        return 1;
+        int sum = 0;
+
+        for (String number : numbers) {
+            sum += Integer.parseInt(number);
+        }
+
+        return sum;
     }
 }
