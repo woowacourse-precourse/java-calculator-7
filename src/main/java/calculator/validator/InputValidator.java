@@ -51,7 +51,7 @@ public class InputValidator {
                 try {
                     Integer.valueOf(operand);
                 } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException(e.getMessage());
+                    throw new IllegalArgumentException(INPUT_ERROR);
                 } catch (Exception e) {
                     throw new IllegalArgumentException(INPUT_ERROR);
                 }
