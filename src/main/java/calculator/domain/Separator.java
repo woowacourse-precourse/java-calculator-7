@@ -12,20 +12,24 @@ public class Separator {
 
     // 문자를 새로운 구분자로 추가
     public void addSeperator(String separator) {
-        if (this.separators.contains(separator)) {
-            throw new IllegalArgumentException(ErrorMessages.EXIST_SEPARTOR.getMessage());
-        }
+        validateSeparator(separator);
         this.separators.add(separator);
     }
-    
+
     // 외부에 구분자들을 전달하는 getter 메서드
     public List<String> getSeparators() {
         return this.separators;
     }
 
     // 추출한 구분자들을 정규표현식 형태로 변경
-    public String getSeparatorsRegex(){
-        return "["+this.separators.stream()
-                .collect(Collectors.joining("|"))+"]";
+    public String getSeparatorsRegex() {
+        return "[" + this.separators.stream()
+                .collect(Collectors.joining("|")) + "]";
+    }
+
+    private void validateSeparator(String separator) {
+        if (this.separators.contains(separator)) {
+            throw new IllegalArgumentException(ErrorMessages.EXIST_SEPARTOR.getMessage());
+        }
     }
 }
