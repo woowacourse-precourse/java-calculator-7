@@ -1,18 +1,18 @@
 package calculator.object;
 
-public class CalculateFormula {
+public class CalculationFormula {
 
     private final Numbers numbers;
 
-    private CalculateFormula(Numbers numbers) {
+    private CalculationFormula(Numbers numbers) {
         this.numbers = numbers;
     }
 
-    public static CalculateFormula from(String inputFormula) {
+    public static CalculationFormula from(String inputFormula) {
         Separators separators = new Separators(inputFormula);
         String formulaPart = getFormulaPart(inputFormula, separators);
         Numbers numbers = new Numbers(formulaPart, separators);
-        return new CalculateFormula(numbers);
+        return new CalculationFormula(numbers);
     }
 
     public String calculate() {
