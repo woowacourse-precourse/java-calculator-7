@@ -30,6 +30,7 @@ public class SeparatorValidation {
         if (hasNotAllDefaultSeparator(input) || hasNotOneDefaultSeparator(input)) {
             return hasSpecialCharacters(input);
         }
+        // 검사를 통과한건 구분자에 문제가 없거나 특수문자가 없다는 의미이다.
         return false;
     }
 
@@ -50,7 +51,7 @@ public class SeparatorValidation {
     }
 
     private static boolean isNotCustomPattern(String input) {
-        List<String> customPattern = CustomPatternMaker.makeCustomPattern(input);
+        List<String> customPattern = CustomPatternMaker.createCustomPattern(input);
         String pattern = "[" + SPECIAL_CHARACTERS + customPattern + " ]+";
         // 커스텀 구분자를 제외 시켜준다.
         input = input.substring(input.indexOf("\\n") + 2);
