@@ -11,6 +11,9 @@ public class CalculatorService {
     public int calculate(String input){
         InputValidator.validate(input);
 
+        if(!Parser.hasCustomDelimiter(input))
+            input = input.replace(" ","");
+
         List<String> delimiters = getDelimitersList(input);
         List<Integer> numbers = Parser.parseNumbersFromInput(input, delimiters);
         return Adder.add(numbers);
