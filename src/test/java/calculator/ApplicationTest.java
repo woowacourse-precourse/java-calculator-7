@@ -48,6 +48,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_문자_이스케이프문자_사용() {
+        assertSimpleTest(() -> {
+            run("//\\t\\n1\\t2\\t3,4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
     void 출력_형식() {
         assertSimpleTest(() -> {
             run("///\\n1/2,3:4");
