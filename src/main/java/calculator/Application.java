@@ -1,5 +1,7 @@
 package calculator;
 
+import camp.nextstep.edu.missionutils.Console;
+
 public class Application {
     private String processNull(String input) {
         if (input == null || input.isEmpty()) {
@@ -51,5 +53,15 @@ public class Application {
             }
         }
         return sum;
+    }
+
+    public void run() {
+        String input = Console.readLine();
+        String result = processNull(input);
+        String custom = extractCustomSymbols(result);
+        validateInput(result, custom);
+        String[] temp = splitString(result, custom);
+        int sum = sumArray(temp);
+        System.out.println("결과 : " + sum);
     }
 }
