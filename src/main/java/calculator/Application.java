@@ -6,7 +6,6 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-//        System.out.println(input);
         String input = Console.readLine();
         
         if (input == null || input.isEmpty()) {
@@ -17,8 +16,6 @@ public class Application {
         if (input.startsWith("//")) {
             int indexOfDoubleSlash = input.indexOf("//");
             int indexOfReveredSlashN = input.indexOf("\\n");
-//            System.out.println("\\n의 인덱스 : " + indexOfReveredSlashN);
-//            System.out.println(customDelimiter);
             
             customDelimiter = input.substring(indexOfDoubleSlash + 2, indexOfReveredSlashN);
             if (customDelimiter.matches(".*[+*?^$().{}|\\[\\]].*")) {
@@ -26,9 +23,7 @@ public class Application {
             }
             
             input = input.substring(indexOfReveredSlashN + 2);
-//            System.out.println("3 : " + input);
         }
-//        System.out.println(customDelimiter);
         
         String[] split = input.split(customDelimiter + "|[,:]");
         if (split.length == 0) {
@@ -43,7 +38,6 @@ public class Application {
                 }
                 result += Integer.parseInt(s);
             }
-//            System.err.println(e.getMessage());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("잘못된 숫자 형식이 입력되었습니다: " + e.getMessage());
         }
