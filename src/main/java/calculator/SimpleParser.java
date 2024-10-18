@@ -14,9 +14,11 @@ import java.util.regex.Pattern;
 public class SimpleParser implements Parser {
     public static final String INPUT_DELIMITERS_PATTERN = "^//.*\\\\n";
     public static final String DEFAULT_DELIMITERS = "[,:]";
+    public static final String RESERVED_CHARACTERS = "[0-9eE.-]";
 
     public static final String ERR_MSG_WHEN_NEGATIVE_NUMBER = "음수는 입력할 수 없습니다.";
     public static final String ERR_MSG_WHEN_FAIL_TO_PARSE_NUMBER = "숫자가 아닌 값이 입력되었습니다.";
+    public static final String ERR_MSG_WHEN_DELIMITER_CONSISTS_OF_RESERVED_CHAR = "수 표기에 사용하는 문자는 구분자로 사용할 수 없습니다.";
 
     @Override
     public List<Double> parse(String input) {
@@ -46,9 +48,10 @@ public class SimpleParser implements Parser {
         // TODO: improve readability
         // It's hard to understand why the first two letters and the last one have to be removed.
         String matched = delimiterMatcher.group();
-        String delimiters = "[" + matched.substring(2, matched.length() - 2) + "]";
+        String delimiters = matched.substring(2, matched.length() - 2);
+        validateDelimiters(delimiters);
         String numbers = input.substring(matched.length());
-        return new DelimitersAndNumbers(delimiters, numbers);
+        return new DelimitersAndNumbers("[" + delimiters + "]", numbers);
     }
 
     private List<Double> mapNumbersFromStrToDouble(List<String> numbersStr) {
@@ -58,6 +61,15 @@ public class SimpleParser implements Parser {
                     .toList();
         } catch (NumberFormatException _ignored) {
             throw new IllegalArgumentException(ERR_MSG_WHEN_FAIL_TO_PARSE_NUMBER);
+        }
+    }
+
+    private void validateDelimiters(String delimiters) {
+        Pattern reservedCharactersPattern = Pattern.compile(RESERVED_CHARACTERS);
+        Matcher reservedCharactersMatcher = reservedCharactersPattern.matcher(delimiters);
+
+        if (reservedCharactersMatcher.find()) {
+            throw new IllegalArgumentException(ERR_MSG_WHEN_DELIMITER_CONSISTS_OF_RESERVED_CHAR);
         }
     }
 
