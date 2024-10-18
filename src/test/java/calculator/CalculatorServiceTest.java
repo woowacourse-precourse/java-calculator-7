@@ -2,6 +2,8 @@ package calculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,4 +37,19 @@ class CalculatorServiceTest {
         // Then
         assertThat(result).isTrue();
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "'1,2,3', ''",
+            "'//k\\n1;2;3k4', 'k'"
+    })
+    @DisplayName("커스텀 구분자 추출 테스트")
+    void parseCustomSeparator(String input, String customSeparator) {
+        // Given & When
+        String result = calculatorService.parseCustomSeparator(input);
+
+        // Then
+        assertThat(result).isEqualTo(customSeparator);
+    }
+
 }
