@@ -10,7 +10,6 @@ public class Delimiters {
     private final List<String> delimiters;
     private final String customDelimiter;
 
-
     /**
      * 생성자: 기본 구분자 리스트와 입력된 문자열을 받아 커스텀 구분자를 설정
      * @param defaultDelimiters 기본 구분자 리스트
