@@ -1,7 +1,9 @@
 package calculator;
 
 public class StringCalculator {
-	public static int splitAndSum(String[] splitString){
+	private static final String ORIGINAL_SPLITTER_REGEX = ",|:";
+	public static int splitAndSum(String input){
+		String[] splitString = input.split(ORIGINAL_SPLITTER_REGEX);
 		if (splitString.length >= 1) {
 			return calculateSum(splitString);
 		}
