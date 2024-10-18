@@ -4,10 +4,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class CalculatorServiceTest {
 
@@ -78,6 +80,26 @@ class CalculatorServiceTest {
         // Then
         assertThrowsExactly(IllegalArgumentException.class,
                 () -> CalculatorService.validate(userInput, customSeparator));
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideInputAndExpectedAndCustomSeparator")
+    void splitBySeparatorTest(String input, String[] expected, String customSeparator) {
+
+        // Given & When
+        String[] strings = calculatorService.splitBySeparator(input, customSeparator);
+        // Then
+        assertThat(strings).isEqualTo(expected);
+    }
+
+    static Stream<Object[]> provideInputAndExpectedAndCustomSeparator() {
+        return Stream.of(
+                new Object[]{"//k\\n1:2:3k4", new String[]{"1", "2", "3", "4"}, "k"},
+                new Object[]{"//;\\n5;6:7", new String[]{"5", "6", "7"}, ";"},
+                new Object[]{"//o\\n8,9,10", new String[]{"8", "9", "10"}, "o"},
+                new Object[]{"//.\\n11.12.13", new String[]{"11", "12", "13"}, "."},
+                new Object[]{"14,1:5,1,6", new String[]{"14", "1", "5", "1", "6"}, ""}
+        );
     }
 
 }
