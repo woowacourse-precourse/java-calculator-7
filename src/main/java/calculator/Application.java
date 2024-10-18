@@ -38,8 +38,10 @@ public class Application {
         String[] tokens = input.split(delimiter);
         int sum = 0;
         for (String token : tokens) {
-            int number = toPositiveInt(token);
-            sum += number;
+            if (!token.isEmpty()) { // 빈 문자열이 아닌 경우만 처리
+                int number = toPositiveInt(token);
+                sum += number;
+            }
         }
 
         return sum;
@@ -47,9 +49,15 @@ public class Application {
 
     // 음수 값이 들어오면 예외 처리
     private static int toPositiveInt(String token) {
-        int number = Integer.parseInt(token);
+        int number;
+        try {
+            number = Integer.parseInt(token); // 숫자 변환
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("잘못된 숫자 형식입니다: " + token); // 숫자가 아닐 경우 예외 처리
+        }
+
         if (number < 0) {
-            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            throw new IllegalArgumentException("음수는 입력할 수 없습니다."); // 음수일 경우 예외 처리
         }
         return number;
     }
