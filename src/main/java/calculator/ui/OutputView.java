@@ -2,8 +2,6 @@ package calculator.ui;
 
 import static calculator.global.constant.Message.*;
 
-import calculator.global.constant.Message;
-
 
 public class OutputView {
 

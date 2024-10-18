@@ -31,5 +31,13 @@ public class Validator {
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException(UNREGISTERED_SEPARATOR_ERROR_MESSAGE);
         }
+        validateDashNumber(number);
+    }
+
+    private static void validateDashNumber(String number) {
+        int absNum = Math.abs(Integer.parseInt(number));
+        if(Integer.parseInt(number) != absNum){
+            throw new IllegalArgumentException(UNREGISTERED_SEPARATOR_ERROR_MESSAGE);
+        }
     }
 }
