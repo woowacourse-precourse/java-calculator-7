@@ -19,7 +19,7 @@ public class Calculator {
 	public void run() {
 		enter();
 		checkPersonalSeparator(inputStr);
-		parsingNumsAndCalculate(inputStr);
+		parsingNumsAndGetSum(inputStr);
 		print();
 	}
 
@@ -98,7 +98,7 @@ public class Calculator {
 	/*
 		문자열 파싱 및 계산
 	 */
-	private void parsingNumsAndCalculate(String str) {
+	private void parsingNumsAndGetSum(String str) {
 		if (str.length() == 0) {
 			return;
 		}
