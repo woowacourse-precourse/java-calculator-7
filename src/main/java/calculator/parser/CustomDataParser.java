@@ -1,13 +1,16 @@
 package calculator.parser;
 
-import calculator.Validator;
-import calculator.dto.Data;
+import calculator.validator.CustomDataValidator;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 public class CustomDataParser implements DataParser {
 
-    private static final String REGEX = "\\\\n";
+    private static final String DELIM= "\\n";
     private static final String PREFIX = "//";
     private static final String INVALID_SEPARATOR_LENGTH_ERROR_MESSAGE = "커스텀 구분자는 1개만 입력할 수 있습니다.";
+    private static final String NOT_INTEGER_DATA_ERROR_MESSAGE = "정수형 범위의 데이터가 아닙니다.";
 
     @Override
     public boolean isSupport(String inputData) {
@@ -15,37 +18,50 @@ public class CustomDataParser implements DataParser {
     }
 
     @Override
-    public Data parseData(String inputData) {
-        Validator.checkValidCustomFormat(inputData);
+    public List<Integer> parseData(String inputData) {
+        List<Integer> result = new ArrayList<>();
 
-        char[] separators = getCustomSeparator(inputData);
-        char[] contents = getContents(inputData);
+        CustomDataValidator.checkValidCustomFormat(inputData);
 
-        Validator.checkValidContents(separators, contents);
+        String separators = getCustomSeparator(inputData);
+        String contents = getContents(inputData);
 
-        String contentsString = getContentString(contents, separators);
-        String separatorsString = getSeparatorsString(separators);
-        return new Data(separatorsString, contentsString);
+        CustomDataValidator.checkValidContents(contents, separators);
 
+        StringTokenizer st = new StringTokenizer(contents, separators);
+
+        try {
+            while (st.hasMoreTokens()) {
+                int number = Integer.parseInt(st.nextToken());
+                result.add(number);
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(NOT_INTEGER_DATA_ERROR_MESSAGE);
+        }
+        return result;
     }
 
-    private char[] getCustomSeparator(String inputData) {
-        String[] split = inputData.split(REGEX);
-        String prefix = split[0];
+    private String getCustomSeparator(String inputData) {
+        StringTokenizer st = new StringTokenizer(inputData, DELIM);
+        String prefix = st.nextToken();
         if (prefix.length() != 3) {
             throw new IllegalArgumentException(INVALID_SEPARATOR_LENGTH_ERROR_MESSAGE);
         }
         char separator = prefix.charAt(2);
-        return new char[]{separator, ':', ','};
+        return separator + ":,";
     }
 
-    private char[] getContents(String inputData) {
-
-        String[] data = inputData.split(REGEX);
-        if (data.length == 1) {
-            return new char[]{'0'};
+    private String getContents(String inputData) {
+        StringTokenizer st = new StringTokenizer(inputData, DELIM);
+        int count = st.countTokens();
+        if (count == 1) {
+            return "";
         }
-        String datum = data[1];
-        return datum.toCharArray();
+        return getSecondToken(st);
+    }
+
+    private static String getSecondToken(StringTokenizer st) {
+        st.nextToken();
+        return  st.nextToken();
     }
 }

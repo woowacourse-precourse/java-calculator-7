@@ -1,11 +1,15 @@
 package calculator.parser;
 
-import calculator.Validator;
-import calculator.dto.Data;
+import calculator.validator.DefaultDataValidator;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 public class DefaultDataParser implements DataParser {
 
+    private static final String SEPARATORS = ",:";
     private static final String PREFIX = "//";
+    private static final String NOT_INTEGER_DATA_ERROR_MESSAGE = "정수형 범위의 데이터가 아닙니다.";
 
     @Override
     public boolean isSupport(String inputData) {
@@ -13,24 +17,22 @@ public class DefaultDataParser implements DataParser {
     }
 
     @Override
-    public Data parseData(String inputData) {
-        char[] separators = getSeparator(inputData);
-        char[] contents = getContents(inputData);
-        Validator.checkValidContents(separators, contents);
+    public List<Integer> parseData(String inputData) {
+        List<Integer> result = new ArrayList<>();
+        DefaultDataValidator.checkValidContents(inputData);
+        StringTokenizer st = new StringTokenizer(inputData, SEPARATORS);
 
-        String contentsString = getContentString(contents, separators);
-        String separatorsString = getSeparatorsString(separators);
-        return new Data(separatorsString, contentsString);
-    }
-
-    private static char[] getSeparator(String inputData) {
-        return new char[]{',', ':'};
-    }
-
-    private char[] getContents(String inputData) {
-        if (inputData.isEmpty()) {
-            return new char[]{'0'};
+        try {
+            while (st.hasMoreTokens()) {
+                String s = st.nextToken();
+                int number = Integer.parseInt(s);
+                result.add(number);
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(NOT_INTEGER_DATA_ERROR_MESSAGE);
         }
-        return inputData.toCharArray();
+
+        return result;
     }
+
 }

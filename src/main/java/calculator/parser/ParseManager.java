@@ -1,6 +1,5 @@
 package calculator.parser;
 
-import calculator.dto.Data;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +13,7 @@ public class ParseManager {
         this.parsers.add(new CustomDataParser());
     }
 
-    public Data parseData(String inputData) {
+    public List<Integer> parseData(String inputData) {
 
         DataParser targetParser = null;
         for (DataParser dataParser : parsers) {
