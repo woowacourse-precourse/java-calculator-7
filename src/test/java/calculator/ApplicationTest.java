@@ -126,6 +126,15 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    @DisplayName("커스텀 구분자가 문자이면 예외를 발생한다.")
+    void inputExceptionTest12() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("\\X\\n1X2X3X4"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
     @DisplayName("입력에 공백이 들어오면 0을 반환한다.")
     void inputTest1() {
         String userInput = "";
