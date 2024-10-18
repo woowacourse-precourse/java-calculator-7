@@ -7,11 +7,13 @@ import java.util.regex.Pattern;
 
 public class StringProcessor {
     private List<String> readStringList;
+    private List<Double> numberList;
 
     public StringProcessor(String readString) {
         String[] stringArray = splitString(readString);
         readStringList = new ArrayList<>();
         validateString(stringArray);
+        stringTONumber(readStringList);
     }
 
     private String[] splitString(String readString) {
@@ -24,6 +26,13 @@ public class StringProcessor {
             return readString.split("["+basic+custom+"]");
         }
         return readString.split("["+basic+"]");
+    }
+
+    private void stringTONumber(List<String> readStringList) {
+        numberList = new ArrayList<>();
+        for (String s : readStringList){
+            this.numberList.add(Double.parseDouble(s));
+        }
     }
 
     private void validateString(String[] stringArray) {
