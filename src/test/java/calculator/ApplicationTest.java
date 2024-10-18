@@ -57,6 +57,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 구분자_연속_사용() {
+        assertSimpleTest(() -> {
+            run(",,,3,::5:");
+            assertThat(output()).contains("결과 : 8");
+        });
+    }
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))
