@@ -31,12 +31,12 @@ public class Calculator {
                 System.out.println("결과 :" + number.calculate());
             } else {
                 // 커스텀 구분자 기능 실행
-                input.readSecondInput();
+                input.splitCustomSeparator();
 
                 separator.validateCustomEmpty(input.getFirstInput()); // 커스텀 구분자가 비어있는지 확인
                 separator.validateCustomSize(input.getFirstInput()); // 커스텀 구분자의 길이를 확인
                 separator.validateNumberInCustom(input.getFirstInput()); // 커스텀 구분자 내에 숫자가 있는지 확인
-                separator.validateDuplicateCustom(input.getFirstInput()); // 커스텀 구분자가 중복되었는지 확인
+                //separator.validateDuplicateCustom(input.getFirstInput()); // 커스텀 구분자가 중복되었는지 확인
 
                 //예외처리 없이 정상흐름이면 커스텀 구분자를 리스트에 넣어준다.
                 separator.addCustomSeparator(input.getFirstInput());
