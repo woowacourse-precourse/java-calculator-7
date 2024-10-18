@@ -37,7 +37,7 @@
 
 
 - StringCalculatorApp
-    - [ ] 프로그램의 전체적인 흐름을 관리하고 진행한다.
+    - [x] 프로그램의 전체적인 흐름을 관리하고 진행한다.
 
 
 - Validator
