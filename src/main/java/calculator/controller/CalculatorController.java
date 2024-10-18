@@ -14,7 +14,7 @@ public class CalculatorController {
     public static void run(){
         OutputView.printRequireOperandStringMessage();
         String operandStr = InputView.getOperandInput();
-        
+
         OperandDTO operandDTO = parsingService.parseOperandStr(operandStr);
         ResultDTO resultDTO = CalculateService.addOperand(operandDTO);
 
