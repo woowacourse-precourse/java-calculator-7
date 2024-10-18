@@ -4,19 +4,19 @@ import java.util.List;
 
 public class Calculator {
 
-    private long result;
+    private double result;
 
-    public long calculatePlusNumber(List<String> numbers){
+    public double calculatePlusNumber(List<String> numbers){
         for(String num : numbers){
             validator(num);
-            result += Long.parseLong(num);
+            result += Double.parseDouble(num);
         }
         return result;
     }
 
     private void validator(String number){
         try{
-            long tmpRes = Long.parseLong(number);
+            double tmpRes = Double.parseDouble(number);
             if(tmpRes<=0){
                 throw new IllegalArgumentException();
             }
