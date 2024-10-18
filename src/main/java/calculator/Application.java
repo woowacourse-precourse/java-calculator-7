@@ -46,8 +46,11 @@ public class Application {
             String[] customDelimiters = customDelimiterPart.split(""); // 여러 커스텀 구분자 받는 경우 포함
 
             for (String delim : customDelimiters) {
-                delimiterPart.append("|")
-                        .append(toRegex(delim.trim()));
+                delim = delim.trim();
+                if (!delim.isEmpty()) {
+                    delimiterPart.append("|")
+                            .append(toRegex(delim.trim()));
+                }
             }
 
             numberPart = input.substring(indexOfEndSign + CUSTOM_DELIMITER_END_SIGN_LENGTH);
