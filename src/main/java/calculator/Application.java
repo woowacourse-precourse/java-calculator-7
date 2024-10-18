@@ -21,6 +21,6 @@ public class Application {
         // 문자열을 구분자를 기준으로 분리한 후 덧셈 연산을 할 수 있다.
         int result = Calculator.calculateString(valueString, delimiters);
 
-        System.out.println("result: " + result);
+        System.out.println("결과 : " + result);
     }
 }
