@@ -3,7 +3,7 @@ package calculator.split;
 import static calculator.split.StringSplit.getBackString;
 import static calculator.split.StringSplit.getFrontString;
 import static calculator.split.StringSplit.getSeperatorArray;
-import static calculator.split.StringSplit.validateFrontString;
+import static calculator.validate.StringValidate.validateFrontString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

@@ -1,13 +1,13 @@
-package calculator.input;
+package calculator.validate;
 
-import static calculator.input.StringInput.validateInput;
+import static calculator.validate.StringValidate.validateInput;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class StringInputTest {
+class StringValidateTest {
     @Test
     @DisplayName("유효한 입력 테스트")
     void validInput() {
@@ -49,4 +49,5 @@ class StringInputTest {
 
         assertThrows(IllegalArgumentException.class, () -> validateInput(input));
     }
+
 }
