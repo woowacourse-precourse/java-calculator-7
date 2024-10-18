@@ -6,7 +6,7 @@ public class OutputView {
     /**
      * 결과 출력 함수
      * **/
-    public static void output(int sum){
+    public void output(int sum){
         System.out.printf("%s %d", OUTPUT_MESSAGE, sum);
     }
 }
