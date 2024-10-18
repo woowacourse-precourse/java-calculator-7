@@ -18,8 +18,8 @@
 > 
 >
 > 3. `for-each`문을 사용하여 문자열 배열의 각 값이 숫자로 변환 가능한지 확인한다.
->    1. `try-catch`문을 사용해 문자열 값을 `Integer`로 변환을 시도한다. 변환이 성공하더라도 값이 음수일 경우 
->    `IllegalArgumentException` 예외를 발생시킨다. 양수이거나 0인 경우, 변환된 값을 미리 생성한 변수 `sum`에 더한다.
+>    1. `try-catch`문을 사용해 문자열 값을 `Integer`로 변환을 시도한다. 변환이 성공하더라도 값이 0 또는 음수일 경우 
+>    `IllegalArgumentException` 예외를 발생시킨다. 양수인 경우, 변환된 값을 미리 생성한 변수 `sum`에 더한다.
 >    2. 만약 `Integer`로 변환하는 과정에서 `NumberFormatException`이 발생하면, 이를 `IllegalArgumentException`으로 다시 던진다.
 > 
 > 
