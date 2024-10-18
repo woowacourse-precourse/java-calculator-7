@@ -22,9 +22,10 @@ public class CustomStringParser{
         String suffix = temp.substring(0, 2);
         String prefix = temp.substring(3, 5);
 
-        if (input.matches("\\d+"))
-            return CUSTOM_SEPARATOR_PREFIX.equals(prefix) && CUSTOM_SEPARATOR_SUFFIX.equals(suffix);
-        throw new IllegalArgumentException("커스텀 구분자는 숫자가 아니여야 합니다");
+        if (input.matches("\\d+")) {
+            throw new IllegalArgumentException("커스텀 구분자는 숫자가 아니여야 합니다");
+        }
+        return CUSTOM_SEPARATOR_PREFIX.equals(prefix) && CUSTOM_SEPARATOR_SUFFIX.equals(suffix);
     }
 
     private static char getCustomSeparator(String string) {
