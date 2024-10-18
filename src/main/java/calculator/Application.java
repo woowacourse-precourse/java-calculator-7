@@ -9,8 +9,8 @@ public class Application {
 
         // 입력을 구분자로 나누기
         try {
-            String[] parts = splitInput(input);
-            isNum(parts);
+            String[] parts = splitInput(input); //배열화된 입력된 숫자
+            isNum(parts); //
             int sum = sumNumbers(parts);
             System.out.println("합계: " + sum);
         } catch (IllegalArgumentException e) {
@@ -21,8 +21,8 @@ public class Application {
 
     // 입력된 문자열을 구분자로 나누는 메서드
     public static String[] splitInput(String input) {
-        input.replaceAll(" ", "");
-        return input.split(delimiter(input)); // 콤마와 콜론을 구분자로 사용하여 문자열을 나눔
+        String numbers = removePdelimiter(input);
+        return numbers.split(delimiter(input)); // 콤마와 콜론을 구분자로 사용하여 문자열을 나눔
     }
 
     //나눠진 문자를 합하는 메서드
@@ -58,6 +58,7 @@ public class Application {
         }
     }
 
+    //
     public static String delimiter(String input) {
         if (input.startsWith("//") && input.contains("\\n")) {
             int index = input.indexOf("\\n");
@@ -65,6 +66,15 @@ public class Application {
 
         }
         return "[,:]";
+    }
+
+    public static String removePdelimiter(String input) {
+        if (input.startsWith("//") && input.contains("\\n")) {
+            int index = input.indexOf("\\n");
+            String substring = input.substring(index + 2, input.length());
+            return substring;
+        }
+        return input;
     }
 
 }
