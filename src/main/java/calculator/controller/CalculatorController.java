@@ -1,37 +1,43 @@
 package calculator.controller;
 
-import calculator.dto.ExpressionDTO;
 import calculator.model.Calculator;
 import calculator.model.Parser;
 import calculator.model.StringCalculator;
 import calculator.model.StringParser;
-import calculator.view.StringCalculatorView;
-import calculator.view.View;
 import java.math.BigDecimal;
 
 public class CalculatorController {
 
-    private final View view;
-
-    public CalculatorController() {
-        this.view = new StringCalculatorView();
+    public static String sum(double initialValue, String expression) {
+        Parser<Double> parser = new StringParser<>(expression);
+        Calculator<Double> calculator = new StringCalculator<>(
+                initialValue,
+                Double::sum,
+                validNumber -> Double.compare(validNumber, 0) > 0);
+        Double total = calculator.calculate(parser.parse(Double::parseDouble));
+        return getResult(total.toString());
     }
 
-    public void run() {
-        Parser<BigDecimal> parser = new StringParser<>(new ExpressionDTO(view.displayInput()));
+    // Double형보다 큰 범위에서 덧셈 연산을 수행할 때 사용
+    public static String sum(BigDecimal initialValue, String expression) {
+        Parser<BigDecimal> parser = new StringParser<>(expression);
         Calculator<BigDecimal> calculator = new StringCalculator<>(
-                BigDecimal.ZERO,
+                initialValue,
                 BigDecimal::add,
-                bigDecimal -> bigDecimal.compareTo(BigDecimal.ZERO) > 0);
+                validNumber -> validNumber.compareTo(BigDecimal.ZERO) > 0);
 
         BigDecimal total = calculator.calculate(parser.parse(BigDecimal::new));
-        view.displayOutput(getResult(total.toString()));
+        return getResult(total.toString());
     }
 
-    private String getResult(String result) {
+    private static String getResult(String result) {
         BigDecimal[] intAndDecimals = new BigDecimal(result).divideAndRemainder(BigDecimal.ONE);
-        if (intAndDecimals[1].equals(BigDecimal.ZERO)) {
-            return intAndDecimals[0].toBigInteger().toString();
+        BigDecimal integer = intAndDecimals[0];
+        BigDecimal decimals = intAndDecimals[1];
+
+        // 소수점 이하의 유효한 값이 존재하는지 확인
+        if (decimals.equals(BigDecimal.ZERO)) {
+            return integer.toBigInteger().toString();
         }
         return result;
     }
