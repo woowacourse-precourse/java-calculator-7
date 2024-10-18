@@ -41,10 +41,18 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀_구분자_지정_문자_사용_커스텀_구분자_입력_X() {
+    void 커스텀_구분자_지정_문자_사용_커스텀_구분자_입력X() {
         assertSimpleTest(() -> {
             run("//\\n1,2,3");
             assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_지정_문자_사용_커스텀_구분자_입력X_연산_문자열_입력_X() {
+        assertSimpleTest(() -> {
+            run("//\\n");
+            assertThat(output()).contains("결과 : 0");
         });
     }
 
