@@ -65,7 +65,7 @@ public class ValidateTest {
     void validate_validInput_doesNotThrowException() {
         // given
         String input1 = "1,2:3";
-        String input2 = "//;\n1;2:3";
+        String input2 = "//;\\n1;2:3";
 
         // when & then
         assertDoesNotThrow(() -> InputValidator.validate(input1));
