@@ -2,6 +2,7 @@ package calculator.domain;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class StringParser {
 
@@ -24,7 +25,7 @@ public class StringParser {
             return STANDARD_DELIMITER;
         }
         validateCustomStrings(inputStrings);
-        return inputStrings.substring(SECOND_NUMBER, inputStrings.indexOf(CUSTOM_NUMBER_PART_DELIMITER));
+        return Pattern.quote(inputStrings.substring(SECOND_NUMBER, inputStrings.indexOf(CUSTOM_NUMBER_PART_DELIMITER)));
     }
 
     public List<String> parseStrings(String delimiter) {
