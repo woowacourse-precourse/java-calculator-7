@@ -8,9 +8,13 @@ public class CalculateController {
     private final CalculateService calculateService = new CalculateService();
 
     // userInput 을 받아 caculateService 에 넘김.
-    public void insertUserInput(final String userInput) {
+    public long insertUserInput(final String userInput) {
 
-        Long calculateResult = calculateService.calculate(userInput);
+        if (userInput.isEmpty()) {
+            return 0L;
+        }
+
+        return calculateService.calculate(userInput);
 
     }
 }
