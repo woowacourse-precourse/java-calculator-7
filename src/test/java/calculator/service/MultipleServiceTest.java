@@ -16,7 +16,7 @@ class MultipleServiceTest {
         int expect = 10;
 
         // when
-        int result = multipleService.process(args);
+        int result = multipleService.calculate(args);
 
         // then
         assertEquals(expect, result);

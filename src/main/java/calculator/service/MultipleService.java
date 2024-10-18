@@ -1,16 +1,16 @@
 package calculator.service;
 
 import calculator.domain.Calculator;
-import calculator.domain.MultipleUseCase;
+import calculator.domain.CalculatorUseCase;
 import calculator.domain.Parser;
 import calculator.domain.Preprocessor;
 import calculator.domain.model.PreprocessedInput;
 
 import java.util.List;
 
-public class MultipleService implements MultipleUseCase {
+public class MultipleService implements CalculatorUseCase {
     @Override
-    public int process(String args) {
+    public int calculate(String args) {
         // 전처리
         Preprocessor preprocessor = new Preprocessor(args);
         PreprocessedInput preprocessedInput = preprocessor.preprocess();

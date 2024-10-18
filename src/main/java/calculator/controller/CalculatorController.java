@@ -1,6 +1,6 @@
 package calculator.controller;
 
-import calculator.domain.MultipleUseCase;
+import calculator.domain.CalculatorUseCase;
 import calculator.service.MultipleService;
 import calculator.view.ConsoleInput;
 import calculator.view.ConsoleOutPut;
@@ -16,8 +16,8 @@ public class CalculatorController {
 
     public void run() {
         String input = consoleInput.input();
-        MultipleUseCase multipleUseCase = new MultipleService();
-        int result = multipleUseCase.process(input);
+        CalculatorUseCase multipleUseCase = new MultipleService();
+        int result = multipleUseCase.calculate(input);
         consoleOutPut.printResult(result);
     }
 }
