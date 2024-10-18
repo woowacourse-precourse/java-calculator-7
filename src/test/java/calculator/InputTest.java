@@ -61,4 +61,19 @@ public class InputTest {
         }
         assertThat(splitStr).containsExactly("1", "2", "3");
     }
+
+    @Test
+    public void inputIsNULL() {
+        // given
+        Separator separator = new Separator();
+        String splitInputWithSeparator = separator.containCustomSeparator("");
+        Input input1 = new Input(splitInputWithSeparator);
+
+        // when
+        String[] splitStr = input1.splitBySeparator(separator);
+        int[] numbers = input1.convertToIntArray(splitStr);
+
+        // then
+        assertThat(numbers).isEmpty();
+    }
 }

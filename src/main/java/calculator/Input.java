@@ -13,13 +13,19 @@ public class Input {
     }
 
     public String[] splitBySeparator(Separator separator) {
-        String regex = separator.getRegex();
-        String[] splitStr = input.split(regex);
+        if (input.isEmpty() || input == null) {
+            return new String[0];
+        }
 
-        return splitStr;
+        String regex = separator.getRegex();
+        return input.split(regex);
     }
 
     public int[] convertToIntArray(String[] splitStr) {
+        if (splitStr.length == 0) {
+            return new int[0];
+        }
+
         int[] numbers = new int[splitStr.length];
         for (int i = 0; i < splitStr.length; i++) {
             numbers[i] = Integer.parseInt(splitStr[i]);

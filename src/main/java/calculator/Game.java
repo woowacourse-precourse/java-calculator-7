@@ -18,6 +18,11 @@ public class Game {
 
         String[] splitStr = input1.splitBySeparator(separator);
         int[] numbers = input1.convertToIntArray(splitStr);
+
+        if (numbers.length == 0) {
+            OutputPrint.printResult(0);
+            return;
+        }
         OutputPrint.printResult(Arrays.stream(numbers).sum());
     }
 }
