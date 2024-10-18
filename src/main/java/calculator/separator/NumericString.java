@@ -45,6 +45,6 @@ public class NumericString {
 
     @Override
     public String toString() {
-        return String.valueOf(number);
+        return number.toString();
     }
 }

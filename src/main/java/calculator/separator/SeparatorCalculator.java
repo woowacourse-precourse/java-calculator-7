@@ -1,7 +1,5 @@
-package calculator;
+package calculator.separator;
 
-import calculator.separator.NumericString;
-import calculator.separator.Separators;
 import java.util.List;
 
 public class SeparatorCalculator {

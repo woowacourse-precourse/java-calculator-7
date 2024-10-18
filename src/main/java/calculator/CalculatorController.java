@@ -2,6 +2,7 @@ package calculator;
 
 import calculator.separator.CustomSeparatorManager;
 import calculator.separator.NumericString;
+import calculator.separator.SeparatorCalculator;
 import calculator.separator.Separators;
 import calculator.view.InputView;
 import calculator.view.OutputView;
