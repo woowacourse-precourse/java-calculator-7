@@ -3,7 +3,7 @@ package calculator.inputData;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputData {
-    public static String input;
+    protected static String input;
 
     private InputData(){
     }
