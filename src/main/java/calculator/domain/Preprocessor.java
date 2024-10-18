@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class Preprocessor {
     private static final String DELIMITER_PREFIX = "//";
     private static final String DELIMITER_SUFFIX = "\n";
-    private static final ArrayList<Character> DELIMITERS = new ArrayList<>(Arrays.asList(',', ';'));
+    private static final ArrayList<Character> DELIMITERS = new ArrayList<>(Arrays.asList(',', ':'));
     // TODO: 여기가 final일 경우 코드가 좀 더 더러워 지는데, 여기가 final이 아니면 어떤 문제가 생길지 생각해보기
     private String input;
 
