@@ -17,11 +17,16 @@ public class Calculator {
         this.customSeparatorIdx = 2;
     }
 
+    /**
+     * 문자열에서 구분자를 기준으로 숫자를 추출하여 합 계산
+     * @return 구분자로 분리된 숫자의 합
+     */
     public int sum(String cmd){
         if(cmd.isEmpty()){
             return 0;
         }
 
+        // 커스텀 구분자 등록
         Matcher matcher = customSeparatorCmdPattern.matcher(cmd);
         boolean containsCustomSeparatorCmd = matcher.find();
         if(containsCustomSeparatorCmd){
@@ -31,6 +36,7 @@ public class Calculator {
             cmd = cmd.replace(matcher.group(), "");
         }
 
+        // 합 계산
         int result = 0;
         String[] rawNumbers = separatorProcessor.split(cmd);
         for(String rawNum : rawNumbers){
@@ -42,6 +48,10 @@ public class Calculator {
         return result;
     }
 
+    /**
+     * 커스텀 구분자 등록
+     * @throws IllegalArgumentException 숫자를 커스텀 구분자로 등록하려는 경우
+     */
     private void registerCustomSeparator(Matcher matcher){
         char customSeparator = matcher.group().charAt(customSeparatorIdx);
 
@@ -52,6 +62,10 @@ public class Calculator {
         separatorProcessor.addSeparator(customSeparator);
     }
 
+    /**
+     * 올바른 숫자인지 검사
+     * @throws IllegalArgumentException 음수이거나, 숫자 이외의 값일 경우
+     */
     private boolean validateNumber(String str){
         if(str.matches(minusDigitRegex)){
             throw new IllegalArgumentException("음수 계산 불가");
