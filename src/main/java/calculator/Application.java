@@ -13,8 +13,8 @@ public class Application {
 
         getUserInput(calculator);
         checkIsInputEmpty(calculator);
+        splitWithDefaultSeparator(calculator);
 
-        List<String> processedInput = new ArrayList<>();
         int total = 0;
 
         else {
@@ -26,10 +26,6 @@ public class Application {
                 }
                 String leftInput = input.substring(escapeIdx + 2);
                 String[] splitInput = leftInput.split(delimiter);
-                processedInput.addAll(Arrays.asList(splitInput));
-            } else {
-                String delimiter = "[,:]";
-                String[] splitInput = input.split(delimiter);
                 processedInput.addAll(Arrays.asList(splitInput));
             }
         }
@@ -62,5 +58,11 @@ public class Application {
         if (calculator.userInput.isEmpty()) {
             System.out.println("결과 : " + 0);
         }
+    }
+
+    static void splitWithDefaultSeparator(Calculator calculator) {
+        String delimiter = "[,:]";
+        String[] splitInput = calculator.userInput.split(delimiter);
+        calculator.processedInput.addAll(Arrays.asList(splitInput));
     }
 }
