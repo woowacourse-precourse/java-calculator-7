@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ApplicationTest extends NsTest {
     @Test
@@ -15,6 +16,17 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 1");
         });
     }
+
+
+    @Test
+    void 기본_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("1,2,3");
+            assertThat(output().contains("결과 : 6"));
+
+        });
+    }
+
 
     @Test
     void 예외_테스트() {
