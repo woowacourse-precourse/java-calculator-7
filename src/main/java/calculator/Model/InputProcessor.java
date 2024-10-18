@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class InputProcessor {
-    public int[] getAdditionNumbers(String input) {
+    public int[] processInput(String input) {
         if (input.isEmpty()) {
             return new int[]{0};
         }
