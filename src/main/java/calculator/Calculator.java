@@ -35,7 +35,8 @@ public class Calculator {
         InputValidator.validateCustomDelimiterFormat(input);
         int delimiterIndex = input.indexOf("\\n");
         String customDelimiter = input.substring(2, delimiterIndex);
-        delimiterPattern = customDelimiter + "|" + delimiterPattern;
+        InputValidator.validateCustomDelimiter(customDelimiter);
+        delimiterPattern = Pattern.quote(customDelimiter) + "|" + delimiterPattern;
         return input.substring(delimiterIndex + 2);
     }
 }
