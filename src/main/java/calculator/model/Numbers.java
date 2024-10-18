@@ -1,11 +1,14 @@
 package calculator.model;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
+import calculator.constant.CommonPattern;
 import calculator.constant.ErrorMessage;
 
 public class Numbers {
 	private final static long MIN = 1;
+	private static final Pattern NUMBER_PATTERN = Pattern.compile(CommonPattern.NUMBER);
 
 	private final List<Long> numbers;
 
@@ -18,6 +21,18 @@ public class Numbers {
 		return new Numbers(numbers);
 	}
 
+	public static Numbers parseNumbers(List<String> stringNumbers) {
+		validateNumber(stringNumbers);
+
+		try {
+			return new Numbers(
+				stringNumbers.stream().map(Long::parseLong).toList()
+			);
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException(ErrorMessage.NUMBERS_OVERFLOW.getMessage());
+		}
+	}
+
 	private void validatePositive(List<Long> numbers) {
 		numbers.stream()
 			.filter(number -> number < MIN)
@@ -25,6 +40,14 @@ public class Numbers {
 			.ifPresent(number -> {
 				throw new IllegalArgumentException(ErrorMessage.NUMBERS_POSITIVE.getMessage());
 			});
+	}
+
+	private static void validateNumber(List<String> stringNumbers) {
+		if (!stringNumbers.stream().allMatch(
+			stringNumber -> NUMBER_PATTERN.matcher(stringNumber).matches()
+		)) {
+			throw new IllegalArgumentException(ErrorMessage.NUMBERS_NUMBER_FORMAT.getMessage());
+		}
 	}
 
 	Long sum() {

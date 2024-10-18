@@ -1,5 +1,6 @@
 package calculator.model;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -11,6 +12,7 @@ public class NumberSeparator {
 	private static final int EQUATION_POSITION = 2;
 	private static final String CUSTOM_DELIMITER_PREFIX = "//";
 	private static final String CUSTOM_DELIMITER_POSTFIX = "\\n";
+
 	private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile(
 		CommonPattern.START_WITH +
 		CUSTOM_DELIMITER_PREFIX +
@@ -50,5 +52,13 @@ public class NumberSeparator {
 
 	private String extractEquation(String input) {
 		return CUSTOM_DELIMITER_PATTERN.matcher(input).group(EQUATION_POSITION);
+	}
+
+	Numbers separate() {
+		return Numbers.parseNumbers(
+			Arrays.stream(
+				equation.split(Delimiter.toRegex(delimiters))
+			).toList()
+		);
 	}
 }
