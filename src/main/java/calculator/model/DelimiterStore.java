@@ -22,6 +22,10 @@ public class DelimiterStore {
         delimiterStore.addAll(delimiters);
     }
 
+    public List<String> getAllDelimiters() {
+        return new ArrayList<>(delimiterStore);
+    }
+
     public boolean containsDelimiter(String delimiter) {
         return delimiterStore.contains(delimiter);
     }

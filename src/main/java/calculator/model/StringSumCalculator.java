@@ -1,5 +1,7 @@
 package calculator.model;
 
+import java.util.List;
+
 public class StringSumCalculator implements Calculator {
 
     private final DelimiterManager delimiterManager;
@@ -11,9 +13,13 @@ public class StringSumCalculator implements Calculator {
     }
 
     @Override
-    public int calculate(String value) {
-        delimiterManager.registerCustomDelimiters(value);
-
+    public int calculate(String inputValue) {
+        String targetValue = inputValue;
+        if (delimiterManager.existCustomDelimiter(inputValue)) {
+            delimiterManager.registerCustomDelimiters(inputValue);
+            targetValue = stringParser.splitTarget(inputValue);
+        }
+        List<Integer> extractedNumbers = stringParser.parseToNumbers(targetValue);
         return 0;
     }
 }

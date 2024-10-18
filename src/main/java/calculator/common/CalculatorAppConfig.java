@@ -38,7 +38,7 @@ public class CalculatorAppConfig {
     }
 
     private StringParser stringParser() {
-        return new StringParser();
+        return new StringParser(DelimiterStore.getInstance());
     }
 
     private DelimiterManager delimiterManager() {
