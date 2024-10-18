@@ -1,4 +1,4 @@
-package calculator;
+package delimiter;
 
 import java.util.Objects;
 

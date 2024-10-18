@@ -1,7 +1,13 @@
 package calculator;
 
+import calculator.adder.IntegerAdder;
 import calculator.io.ConsoleInputHandler;
 import calculator.io.ConsoleOutputHandler;
+import calculator.util.DelimiterExtractor;
+import calculator.util.NumberConverter;
+import calculator.util.RegexGenerator;
+import calculator.util.Splitter;
+import delimiter.Delimiters;
 
 public class Application {
 

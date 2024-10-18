@@ -1,4 +1,6 @@
-package calculator;
+package calculator.util;
+
+import delimiter.Delimiters;
 
 public class Splitter {
 
