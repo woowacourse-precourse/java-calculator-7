@@ -50,6 +50,59 @@
 
 ## 버전 로그
 
+### v 0.0.3
+
+- 이전 버전의 문제점
+
+ ```text
+1.DataParser class 가 기본 포멧과 커스텀 포멧을 모두 처리해 로직의 흐름을 한눈에 파악하기 어려움
+```
+
+- 변경사항
+
+```text
+- DataParser 를 CustomDataParser 와 DefaultDataParser 로 분리
+- 기존 DataParser 를 interface 로 변경
+- 입력받은 문자열에 대해 적절한 DataParser 를 실행시키는 ParseManager 생
+```
+
+- 역할
+
+```text
+- Application class
+
+    - Calculator 를 호출하는 역할
+    
+- Calculator class
+
+    - Data dto 기반으로 더하기 연산을 하는 역할
+    
+- InputDataReader class
+
+    - 사용자에게 입력을 받는 역할
+    
+- ParseManager class
+
+    - 입력 받은 문자열을 파싱할 수 있는 파서를 찾고 실행하는 역할
+    
+- DataParser Interface
+
+    - DefaultDataParser : 커스텀 구분자가 없는 문자열을 Data dto 로 변환하는 역할
+    - CustomDataParser : 커스텀 구분자가 존재하는 문자열을 Data dto 로 변환하는 역할
+    
+- Validator class
+
+    - 문자열을 검증하는 역할
+    
+- Logger class
+
+    - 결과를 정해진 포멧으로 출력하는 역할
+    
+- Data class
+
+    - 구분자 배열과 피 연산 데이터 배열을 가진 DTO
+```
+
 ### v 0.0.2
 
 - 이전 버전의 문제점
@@ -98,12 +151,15 @@
 
     - 결과를 정해진 포멧으로 출력하는 역할
     
+- Data class
+
+    - 구분자 배열과 피 연산 데이터 배열을 가진 DTO
 ```
 
 - todo
 
 ```text
- [ ] DataParser 와 Validator 을 기본 포맷과 커스텀 포멧 처리를 따로 하도록 분리
+ [x] DataParser 를 기본 포맷과 커스텀 포멧 처리를 따로 하도록 분리
 ```
 
 ### v 0.0.1
