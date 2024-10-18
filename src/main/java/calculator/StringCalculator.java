@@ -7,13 +7,14 @@ public class StringCalculator {
 		if (splitString.length > 1) {
 			return calculateSum(splitString);
 		}
-		return 0;
+		return calculateSum(splitWithCustomSplitter(input));
 	}
 
-	private static String findCustomSplitter(String input){
-		int splitterIndex = input.indexOf("\n");
-		String customSplitter = input.substring(2, splitterIndex);
-		return customSplitter;
+	private static String[] splitWithCustomSplitter(String input){
+		int splitterFindStartIndex = input.indexOf("\\n");
+		String customSplitter = input.substring(2, splitterFindStartIndex);
+		String inputSubString = input.substring(splitterFindStartIndex + 2);
+		return inputSubString.split(customSplitter);
 	}
 
 	private static int calculateSum(String[] splitString){
