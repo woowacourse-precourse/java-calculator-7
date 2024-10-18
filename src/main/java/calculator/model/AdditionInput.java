@@ -8,11 +8,16 @@ public class AdditionInput {
     private static final String customDelimiterFormat = "^//.*\\\\n";
     private static final Pattern customDelimiterPattern = Pattern.compile("^//(.*)\\\\n.*$");
     private final String customDelimiter;
-    private String[] numbers;
+    private Number[] numbers;
     public AdditionInput(String input){
         customDelimiter = findCustomDelimiter(input).orElse("");
         if (customDelimiter.isBlank()){
             input = removeCustomDelimiter(input);
+        }
+        String[] strings = splitStrings(input, customDelimiter);
+        numbers = new Number[strings.length];
+        for (int i = 0; i< strings.length; i++){
+            numbers[i] = new Number(strings[i]);
         }
     }
 
