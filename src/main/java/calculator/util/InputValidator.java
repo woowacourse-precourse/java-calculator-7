@@ -1,5 +1,6 @@
 package calculator.util;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,6 +13,16 @@ public class InputValidator {
             if (count != 1) {
                 throw new IllegalArgumentException("잘못된 입력입니다.");
             }
+        }
+    }
+
+    public void validateParsingStringToLong(List<String> arguments) {
+        try {
+            for (String argument : arguments) {
+                Long.parseLong(argument);
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자가 아닌 값이 있습니다.");
         }
     }
 
