@@ -10,10 +10,11 @@ public class DelimiterParser {
             return new String[]{"0"}; // 0을 포함한 배열 반환
         }
         String[] inputs = new String[100];
-        if ((input.startsWith("//"))&&(input.contains("\n"))) {
-            int newLineIndex = input.indexOf("\n");
+        if (input.startsWith("//") && input.contains("\\n")){
+            int newLineIndex = input.indexOf("\\n");
             delimiter=input.substring(2,newLineIndex);
-            input=input.substring(newLineIndex+1);
+            input=input.substring(newLineIndex+2);
+            return input.split(delimiter);
         }
         else if((input.contains(","))||(input.contains(":"))){
            inputs= input.split(delimiter);
