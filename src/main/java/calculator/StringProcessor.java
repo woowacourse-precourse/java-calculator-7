@@ -61,4 +61,7 @@ public class StringProcessor {
         }
     }
 
+    public List<Double> getNumberList() {
+        return numberList;
+    }
 }
