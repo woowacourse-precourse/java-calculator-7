@@ -15,7 +15,7 @@ public class CalculatorController {
         String userInput = inputView.userInput();
 
         Calculator calculator = new Calculator(userInput);
-        String[] strNumbers = calculator.getStrNumbers();
+        int result = calculator.sum();
 
     }
 

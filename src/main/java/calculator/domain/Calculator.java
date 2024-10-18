@@ -8,7 +8,21 @@ public class Calculator {
         this.expression = expression;
     }
 
-    public String[] getStrNumbers() {
+    public int sum() {
+        int result = 0;
+
+        for (int number : getIntNumbers()) {
+            result += number;
+        }
+
+        return result;
+    }
+
+    private int[] getIntNumbers() {
+        return new Numbers().parseToIntArray(getStrNumbers());
+    }
+
+    private String[] getStrNumbers() {
         processDelimiters();
         return expression.split(":");
     }
