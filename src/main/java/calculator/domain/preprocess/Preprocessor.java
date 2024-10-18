@@ -28,7 +28,7 @@ public class Preprocessor {
         List<String> delimeterList = new ArrayList<>(Arrays.asList(",", ":"));
 
         if (validateDelimeterRequest(input)) {
-            return delimeterSegmentProcessor.extractDelimeterList(delimeterSegmentProcessor.extractCustomDelimeter(input));
+            return delimeterSegmentProcessor.extractDelimeterList(input);
         }
 
         return delimeterList;

@@ -25,17 +25,13 @@ public class DelimeterSegmentProcessor {
             throw new IllegalArgumentException("구분자로 숫자를 사용할 수 없습니다");
     }
 
-    public String extractCustomDelimeter(String input) {
-        String delimeter = Character.toString(input.charAt(2));
-        return delimeter;
-    }
-
     public String extractCalculationSegment(String input) {
         String newInput = input.substring(4);
         return newInput;
     }
 
-    public List<String> extractDelimeterList(String delimeter) {
+    public List<String> extractDelimeterList(String input) {
+        String delimeter = Character.toString(input.charAt(2));
         List<String> delimeterList = new ArrayList<>(Arrays.asList(",", ":"));
         delimeterList.add(delimeter);
         return delimeterList;
