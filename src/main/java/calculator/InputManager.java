@@ -9,11 +9,10 @@ public class InputManager {
         this.input = input;
     }
 
-    public boolean validate() {
-        if(input.startsWith("//") && input.contains("\\n")) {
-            return true;
+    public void validate() {
+        if(!(input.startsWith("//") && input.contains("\\n")) || input.matches("[1-9,:]+")) {
+            throw new IllegalArgumentException("입력 형식이 유효하지 않습니다.");
         }
-        return input.matches("[1-9,:]+");
     }
 
     public boolean isCustomSeparatorCandidateExisted() {
