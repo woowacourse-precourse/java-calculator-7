@@ -22,4 +22,16 @@ public class DelimiterExtractor {
 
         return DelimiterType.BASIC;
     }
+
+    public String remove(String regex) {
+        if (DelimiterType.BASIC.equals(this.type())) {
+            return remove(regex, this.text);
+        }
+
+        return remove(regex, "");
+    }
+
+    private String remove(String regex, String target) {
+        return target.replaceAll(regex, " ");
+    }
 }
