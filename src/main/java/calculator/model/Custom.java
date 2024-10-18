@@ -15,9 +15,8 @@ public class Custom {
     }
 
     public void addCustomSet(String customData) {
-        if(!customSet.isEmpty()) {
+        if (!customSet.isEmpty()) {
             customSet.add(customData);
-            System.out.println("customDataSet" + customSet);
         }
     }
 
