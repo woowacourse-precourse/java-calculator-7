@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.List;
 
 public class Calculator {
 
@@ -14,20 +15,9 @@ public class Calculator {
         input_str = result[0];
         delimiter = result[1];
 
-        int sum = 0;
-        String[] str_nums = input_str.split(delimiter);
-        for(String str_num : str_nums){
-            try{
-                int int_num = Integer.parseInt(str_num.trim());
-                if (int_num < 0) {
-                    throw new IllegalArgumentException("음수는 허용되지 않습니다.");
-                }
-                sum+=int_num;
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("잘못된 숫자 형태입니다.");
-            }
-        }
+        List<Integer> nums = NumberExtractor.extractNums(input_str,delimiter);
 
+        int sum = nums.stream().mapToInt(Integer::intValue).sum();
         System.out.println("결과 : "+sum);
     }
 }
