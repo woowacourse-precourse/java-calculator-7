@@ -14,9 +14,9 @@ public class Calculator {
 
         String delimeter = "";
 
-        //입력값 앞부분이 '//'인 경우 customDelimeter 실행함
+        //입력값 앞부분이 '//'인 경우 customDelimiter 실행함
         if (input.startsWith("//")) {
-            String[] customResult = customDelimeter(input);
+            String[] customResult = customDelimiter(input);
             delimeter = customResult[0];
             input = customResult[1];
         }
@@ -28,7 +28,7 @@ public class Calculator {
     }
 
     //커스텀 구분자 추출 후 커스텀 구분자와 커스텀 구분자를 제거한 입력값을 반환
-    public String[] customDelimeter(String input) {
+    public String[] customDelimiter(String input) {
         int index = input.indexOf("\\n");
         String delimiter = input.substring(2, index);
         String newInput = input.substring(index + 2);
