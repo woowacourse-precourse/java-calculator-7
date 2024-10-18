@@ -1,8 +1,10 @@
 package calculator.validate;
 
+import static calculator.validate.StringValidate.validateBackString;
 import static calculator.validate.StringValidate.validateInput;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -48,6 +50,33 @@ class StringValidateTest {
         String input = "//test";
 
         assertThrows(IllegalArgumentException.class, () -> validateInput(input));
+    }
+
+    @Test
+    @DisplayName("계산해야 하는 문자열에 숫자, 구분자 외 다른 문자가 있으면 IllegalArgumentException가 발생한다.")
+    void otherCharInBackString() {
+        String string = "1a2B3c";
+        String seperator = "abc";
+
+        assertThrows(IllegalArgumentException.class, () -> validateBackString(string, seperator));
+    }
+
+    @Test
+    @DisplayName("계산해야 하는 문자열에 숫자만 있는 경우")
+    void onlyNumberInBackString() {
+        String string = "123456";
+        String seperator = "abc";
+
+        assertTrue(validateBackString(string, seperator));
+    }
+
+    @Test
+    @DisplayName("계산해야 하는 문자열에 구분자만 있는 경우")
+    void onlySeperatorInBackString() {
+        String string = "abcabc";
+        String seperator = "abc";
+
+        assertTrue(validateBackString(string, seperator));
     }
 
 }
