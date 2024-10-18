@@ -1,11 +1,13 @@
 package calculator.numberExtractor;
 
+import calculator.validator.Validator;
 import java.util.ArrayList;
 
 public class DefaultNumberExtractor implements NumberExtractor {
 
 
     public ArrayList<Integer> extractNumbers(String input, String defaultDelimiter) {
+
         String[] splitDefaultDelimiter = input.split(defaultDelimiter);
         ArrayList<Integer> repository = new ArrayList<>();
         for (String splitDefault : splitDefaultDelimiter) {
@@ -13,6 +15,7 @@ public class DefaultNumberExtractor implements NumberExtractor {
 
             try {
                 parseInt = Integer.parseInt(splitDefault);
+                Validator.validate(parseInt);
                 repository.add(parseInt);
 
             } catch (NumberFormatException e) {
