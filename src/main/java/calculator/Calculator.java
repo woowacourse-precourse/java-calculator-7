@@ -13,7 +13,6 @@ public class Calculator {
 
     public static int calculate(final String input) {
         if (input.isEmpty()) throw new IllegalArgumentException("[ERROR] 입력이 비어 있습니다. 값을 입력해 주세요.");
-
         List<String> parsedNumbers = parseNumbers(input);
 
         return parsedNumbers.stream()
@@ -32,7 +31,11 @@ public class Calculator {
             setCustomDelimiter(input);
 
             int subStringLength = CUSTOM_DELIMITER_PREFIX.length() + CUSTOM_DELIMITER.length() + CUSTOM_DELIMITER_SUFFIX.length();
+
+            if(CUSTOM_DELIMITER.equals("\\\\")) subStringLength -= 1;
+
             String newInput = input.substring(subStringLength);
+
 
             return List.of(newInput.split(format("%s|%s|%s", FIRST_DELIMITER, SECOND_DELIMITER, CUSTOM_DELIMITER)));
         }
@@ -44,6 +47,8 @@ public class Calculator {
         int suffixIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
 
         CUSTOM_DELIMITER = input.substring(prefixIndex + CUSTOM_DELIMITER_PREFIX.length(), suffixIndex);
+
+        if(CUSTOM_DELIMITER.equals("\\")) CUSTOM_DELIMITER += "\\";
 
         if(isDuplicatedDelimiter()) throw new IllegalArgumentException("[ERROR] 중복된 구분자 지정입니다.");
         if(isContainedDigit()) throw new IllegalArgumentException("[ERROR] 숫자를 포함한 구분자는 지정할 수 없습니다.");
