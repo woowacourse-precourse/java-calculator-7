@@ -46,6 +46,7 @@ public class Calculator {
         if (expression.startsWith("//")) {
             int startIdx = expression.indexOf("//");
             int endIdx = expression.indexOf("\\n");
+            validateCustomDelimiterPresence(startIdx, endIdx);
 
             String customDelimiter = expression.substring(startIdx + 2, endIdx);
 
@@ -54,6 +55,12 @@ public class Calculator {
 
             expression = (beforeCustomDelimiter + afterCustomDelimiter)
                     .replaceAll(Pattern.quote(customDelimiter), ":");
+        }
+    }
+
+    private void validateCustomDelimiterPresence(int startIdx, int endIdx) {
+        if (startIdx == -1 || endIdx == -1) {
+            throw new IllegalArgumentException("커스텀 구분자를 지정하지 못했습니다.");
         }
     }
 
