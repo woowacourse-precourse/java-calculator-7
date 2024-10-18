@@ -1,5 +1,9 @@
 package calculator.controller;
 
+import calculator.common.CustomDelimiter;
+import calculator.model.CustomInput;
+import calculator.model.DefaultInput;
+import calculator.model.UserInput;
 import calculator.service.CalculateService;
 import calculator.view.InputView;
 import calculator.view.OutputView;
@@ -16,12 +20,17 @@ public class CalculatorController {
     }
 
     /***
-     * 계산기 프로그램의 작동을 위해 제일 먼저 실행되는 메서드입니다.
+     * 계산기 프로그램의 작동을 위해 실행되는 메서드입니다.
      */
     public void run() {
         String inputString = readInputStringFromInputView();
-        long sum = calculateService.calculate(inputString);
-        outputView.printResult(sum);
+
+        UserInput userInput = inputString.startsWith(CustomDelimiter.START_FORMAT.getValue())
+                ? new CustomInput(inputString)
+                : new DefaultInput(inputString);
+
+        long calculateResult = calculateService.calculate(userInput);
+        outputView.printResult(calculateResult);
     }
 
     /***
