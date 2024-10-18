@@ -10,8 +10,8 @@ import java.util.List;
 
 public class StringSplitter {
     public static List<String> splitByDelimiter(String userInput, Delimiter delimiter) {
-        String[] splitedInput = userInput.split(delimiter.getDelimiter());
-        return Arrays.stream(splitedInput).toList();
+        String[] splittedInput = userInput.split(delimiter.getDelimiter());
+        return Arrays.stream(splittedInput).toList();
     }
 
     public static String getCustomDelimiter(String userInput) {
