@@ -66,6 +66,21 @@ class NumberParserTest {
   }
 
   @Test
+  void getNumbers_zeroNumber_fail() {
+    String input = String.valueOf(Long.MAX_VALUE)+",0,2,3";
+    String[] delimiters = {",", ":","$"};
+
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+      numberParser.getNumbers(input, delimiters);
+    });
+
+    String expectedMessage = "NumberParser: 0은 허용되지 않습니다: 0";
+    String actualMessage = exception.getMessage();
+
+    assertTrue(actualMessage.contains(expectedMessage));
+  }
+
+  @Test
   void getNumbers_DecimalNumber_fail() {
     String input = String.valueOf(Long.MAX_VALUE)+",3.5,2,3";
     String[] delimiters = {",", ":","$"};
