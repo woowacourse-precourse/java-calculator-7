@@ -7,7 +7,7 @@ import java.util.List;
 public class Application {
     public static void main(String[] args) {
 
-        // 문자열을 입력 받아 저장한다.
+        // 문자열을 입력 받아 저장할 수 있다.
         System.out.println("덧셈할 문자열을 입력해주세요.");
         String inputString = Console.readLine();
         Console.close();
@@ -21,6 +21,7 @@ public class Application {
         // 문자열을 구분자를 기준으로 분리한 후 덧셈 연산을 할 수 있다.
         int result = Calculator.calculateString(valueString, delimiters);
 
+        // 덧셈 결과를 출력할 수 있다.
         System.out.println("결과 : " + result);
     }
 }

@@ -12,6 +12,12 @@ public class DelimiterParser {
         while (inputString.startsWith("//", currentIndex)) {
             int delimiterStartIndex = currentIndex + 2;
             int delimiterEndIndex = inputString.indexOf("\\n", delimiterStartIndex);
+            if (delimiterEndIndex == -1) {
+                throw new IllegalArgumentException();
+            }
+            if (delimiterEndIndex - delimiterStartIndex != 1) {
+                throw new IllegalArgumentException();
+            }
             delimiters.add(inputString.charAt(delimiterStartIndex));
             currentIndex = delimiterEndIndex + 2;
         }
