@@ -10,10 +10,10 @@ public class InputParser {
 
     public String[] separate(String input) {
         if (input.startsWith(DELIMITER_PREFIX)) {
-            int startIndex = input.indexOf(DELIMITER_SUFFIX);
-            String customDelimiter = input.substring(2, startIndex);
+            int suffixIndex = input.indexOf(DELIMITER_SUFFIX);
+            String customDelimiter = input.substring(2, suffixIndex);
             customDelimiter = escapeDelimiter(customDelimiter);
-            String numbersPart = input.substring(startIndex + 2);
+            String numbersPart = input.substring(suffixIndex + 2);
             return numbersPart.split(customDelimiter);
         }
         return input.split(DEFAULT_DELIMITER_FILTER);
