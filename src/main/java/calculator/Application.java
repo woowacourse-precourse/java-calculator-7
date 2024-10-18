@@ -47,9 +47,10 @@ public class Application {
         }
     }
 
-    public int convertToInteger(String token) {
+    public int convertToValidInteger(String token) {
         try {
-            int num = Integer.parseInt(token);
+            String trimToken = (token.trim());
+            int num = Integer.parseInt(trimToken);
 
             validateNonNegative(num);
             return num;
@@ -57,18 +58,6 @@ public class Application {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자가 입력되지 않았습니다.");
         }
-
-    }
-
-    private int convertToValidInteger(String token) {
-        if (isEmptyToken(token)) {
-            return 0;
-        }
-        return convertToInteger(token.trim());
-    }
-
-    private boolean isEmptyToken(String token) {
-        return token.trim().isEmpty();
     }
 
     private void validateNonNegative(int num) {
