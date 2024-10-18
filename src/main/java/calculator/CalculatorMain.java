@@ -2,7 +2,7 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 import inspector.ContentInspector;
-import inspector.DefaultInspector;
+import inspector.InspectorSelector;
 import java.math.BigInteger;
 import parser.ContentParser;
 
@@ -13,9 +13,10 @@ public class CalculatorMain {
 
     public void startCalculator() {
         setInputContent();
-        ContentInspector contentInspector = new DefaultInspector(inputContent);
+        ContentInspector contentInspector = InspectorSelector.selection(inputContent);
         String parsingDelimiter = contentInspector.getDelimiterGroup();
-        ContentParser contentParser = new ContentParser(parsingDelimiter, inputContent);
+        String convertedContent = contentInspector.getContent();
+        ContentParser contentParser = new ContentParser(parsingDelimiter, convertedContent);
         parsedContent = contentParser.getParsedContent();
         Calculation();
         getCalculateResult();
