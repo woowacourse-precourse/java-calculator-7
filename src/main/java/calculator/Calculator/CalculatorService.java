@@ -7,6 +7,7 @@ import java.util.List;
 public class CalculatorService {
     List<String> separatorList = new ArrayList<>();
     List<String> numberList = new ArrayList<>();
+    int sum = 0;
 
     public void calculateSum(String formula, String customSeparator) {
         // 구분자 설정
@@ -23,6 +24,9 @@ public class CalculatorService {
         // 숫자 또는 구분자가 아닌 값이 입력된 경우
         if (!checkValidNumber())
             throw new IllegalArgumentException("올바르지 않은 문자열이 입력됐습니다.");
+
+        // 덧셈 연산 수행
+        addNumbers();
     }
 
     public void separatorFormula(String formula) {
@@ -42,5 +46,15 @@ public class CalculatorService {
                 return false;
         }
         return true;
+    }
+
+    public void addNumbers() {
+        for (String number : numberList) {
+            sum += Integer.parseInt(number);
+        }
+    }
+
+    public int getSum() {
+        return sum;
     }
 }
