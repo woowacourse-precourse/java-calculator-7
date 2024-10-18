@@ -13,6 +13,6 @@ public class Application {
         if (input == null || input.isEmpty()) {
             return 0;
         }
-        return 0; // 기본 반환값
+        return 0;
     }
 }
