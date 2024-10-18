@@ -1,0 +1,36 @@
+package calculator.delimiter.service;
+
+import calculator.delimiter.domain.Delimiter;
+import calculator.delimiter.domain.Delimiters;
+import calculator.delimiter.factory.DelimiterFactory;
+
+import java.util.List;
+
+public class DelimiterService {
+
+    private final DelimiterFactory delimiterFactory;
+    private final CustomDelimiterService customDelimiterService;
+
+    public DelimiterService(
+            DelimiterFactory delimiterFactory,
+            CustomDelimiterService customDelimiterService) {
+        this.delimiterFactory = delimiterFactory;
+        this.customDelimiterService = customDelimiterService;
+    }
+
+    public List<String> extractNumberStrings(String input) {
+        Delimiters delimiters = getDelimiters(input);
+        String strippedInput = customDelimiterService.stripCustomDelimiter(input);
+        return delimiters.split(strippedInput);
+    }
+
+    private Delimiters getDelimiters(String input) {
+        return customDelimiterService.extractCustomDelimiter(input)
+                .map(this::createDelimiters)
+                .orElseGet(this::createDelimiters);
+    }
+
+    private Delimiters createDelimiters(Delimiter... additionalDelimiters) {
+        return delimiterFactory.createDelimiters(additionalDelimiters);
+    }
+}

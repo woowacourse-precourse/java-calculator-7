@@ -1,11 +1,9 @@
 package calculator.delimiter.service;
 
 import calculator.delimiter.domain.Delimiter;
-import calculator.delimiter.domain.Delimiters;
 import calculator.delimiter.factory.DelimiterFactory;
 import calculator.delimiter.pattern.CustomDelimiterPatternMatcher;
 
-import java.util.List;
 import java.util.Optional;
 
 public class CustomDelimiterService {
@@ -21,29 +19,13 @@ public class CustomDelimiterService {
         this.customDelimiterPatternMatcher = customDelimiterPatternMatcher;
     }
 
-    public List<String> extractNumberStrings(String input) {
-        Delimiters delimiters = getDelimiters(input);
-        String strippedInput = stripCustomDelimiter(input);
-        return delimiters.split(strippedInput);
-    }
-
-    private Delimiters getDelimiters(String input) {
-        return extractCustomDelimiter(input)
-                .map(this::createDelimiters)
-                .orElseGet(this::createDelimiters);
-    }
-
-    private Optional<Delimiter> extractCustomDelimiter(String value) {
+    public Optional<Delimiter> extractCustomDelimiter(String value) {
         return Optional.ofNullable(value)
                 .flatMap(customDelimiterPatternMatcher::extractDelimiterGroup)
                 .map(delimiterFactory::createDelimiter);
     }
 
-    private Delimiters createDelimiters(Delimiter... additionalDelimiters) {
-        return delimiterFactory.createDelimiters(additionalDelimiters);
-    }
-
-    private String stripCustomDelimiter(String value) {
+    public String stripCustomDelimiter(String value) {
         return Optional.ofNullable(value)
                 .flatMap(customDelimiterPatternMatcher::extractTrimmedGroup)
                 .orElse(value);
