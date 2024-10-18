@@ -16,7 +16,7 @@ public class StringCalculator {
         if (userInput.isCustom()) {
             int customDelimiterEndIndex = findCustomDelimiterEndIndex(userInput);
             String customDelimiter = findCustomDelimiter(userInput, customDelimiterEndIndex);
-            String updateDelimiter = delimiterResult.getDelimiterResult().replace("]", customDelimiter + "]");
+            String updateDelimiter = generateUpdateDelimiter(delimiterResult, customDelimiter);
             delimiterResult = new DelimiterResult(updateDelimiter);
             String combinedInput = userInput.getUserInput().substring(customDelimiterEndIndex + 2);
             input = combinedInput;
@@ -35,6 +35,10 @@ public class StringCalculator {
 
         System.out.println("결과 : " + sum);
 
+    }
+
+    private static String generateUpdateDelimiter(DelimiterResult delimiterResult, String customDelimiter) {
+        return delimiterResult.getDelimiterResult().replace("]", customDelimiter + "]");
     }
 
     private static String findCustomDelimiter(UserInput userInput, int customDelimiterEndIndex) {
