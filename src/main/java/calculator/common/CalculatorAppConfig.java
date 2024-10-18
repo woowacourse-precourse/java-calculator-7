@@ -18,7 +18,6 @@ public final class CalculatorAppConfig {
     private static final CalculatorAppConfig calculatorAppConfig = new CalculatorAppConfig();
 
     private CalculatorAppConfig() {
-
     }
 
     public static CalculatorAppConfig getInstance() {
