@@ -8,4 +8,9 @@ public class Application {
     private static void printMessage(String output) {
         System.out.println(output);
     }
+
+    private static void printError(String errorMessage) {
+        System.err.println(errorMessage);
+    }
+
 }
