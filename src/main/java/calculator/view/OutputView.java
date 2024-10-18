@@ -3,6 +3,12 @@ package calculator.view;
 import calculator.global.OutputMessage;
 
 public class OutputView {
+
+    public void printResult(long result){
+        print(OutputMessage.RESULT_OUTPUT);
+        System.out.println(result);
+
+    }
     public void print(OutputMessage message){
         System.out.print(message.getMessage());
     }

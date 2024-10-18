@@ -41,6 +41,7 @@ public class StringCalculator {
         // Integer 리스트에서 전체 합을 계산
         long result = resultCalculator.getSum(numbers);
 
-
+        // 결과 값 출력
+        outputView.printResult(result);
     }
 }
