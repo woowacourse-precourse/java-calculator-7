@@ -3,6 +3,7 @@ package calculator.delimiter.domain;
 import calculator.util.pattern.PatternUtils;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static calculator.util.pattern.PatternUtils.SPLIT_DELIMITER;
 
@@ -17,6 +18,10 @@ public class Delimiters {
 
     public String splitRegex() {
         return join(SPLIT_DELIMITER);
+    }
+
+    public Pattern pattern() {
+        return Pattern.compile(splitRegex());
     }
 
     private String join(String delimiterString) {
