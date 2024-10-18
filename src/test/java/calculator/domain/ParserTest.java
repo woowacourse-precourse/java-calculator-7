@@ -40,4 +40,17 @@ class ParserTest {
         assertThrows(IllegalArgumentException.class, parser::parse);
     }
 
+    @Test
+    @DisplayName("음수 들어오는 경우 IllegalArgumentException 발생")
+    void validateNegativeNumber() {
+        // given
+        String string = "-1,2:3";
+        List<Character> delimiters = List.of(',', ':');
+        PreprocessedInput preprocessedInput = new PreprocessedInput(string, delimiters);
+        Parser parser = new Parser(preprocessedInput);
+
+        // when
+        // then
+        assertThrows(IllegalArgumentException.class, parser::parse);
+    }
 }
