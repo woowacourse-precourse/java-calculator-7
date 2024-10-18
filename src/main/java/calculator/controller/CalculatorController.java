@@ -18,8 +18,6 @@ public class CalculatorController {
     } // run
 
     public boolean containsCustomSeparator(String input) {
-        Pattern pattern = Pattern.compile("^//(.*)\\\\n(.*)");
-        Matcher matcher = pattern.matcher(input);
-        return matcher.matches();
+        return input.matches("^//(.*)\\\\n(.*)");
     } // containsCustomSeparator
 } // class
