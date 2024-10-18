@@ -18,8 +18,7 @@ public class StringCalculator {
             String customDelimiter = findCustomDelimiter(userInput, customDelimiterEndIndex);
             String updateDelimiter = generateUpdateDelimiter(delimiterResult, customDelimiter);
             delimiterResult = new DelimiterResult(updateDelimiter);
-            String combinedInput = userInput.getUserInput().substring(customDelimiterEndIndex + 2);
-            input = combinedInput;
+            input = generateCombinedInput(userInput, customDelimiterEndIndex);
         }
 
         DelimitedNumbers delimitedNumbers = new DelimitedNumbers(input, delimiterResult);
@@ -37,16 +36,20 @@ public class StringCalculator {
 
     }
 
-    private static String generateUpdateDelimiter(DelimiterResult delimiterResult, String customDelimiter) {
+    private String generateCombinedInput(UserInput userInput, int customDelimiterEndIndex) {
+        return userInput.getUserInput().substring(customDelimiterEndIndex + 2);
+    }
+
+    private String generateUpdateDelimiter(DelimiterResult delimiterResult, String customDelimiter) {
         return delimiterResult.getDelimiterResult().replace("]", customDelimiter + "]");
     }
 
-    private static String findCustomDelimiter(UserInput userInput, int customDelimiterEndIndex) {
+    private String findCustomDelimiter(UserInput userInput, int customDelimiterEndIndex) {
         String customDelimiter = userInput.getUserInput().substring(2, customDelimiterEndIndex);
         return customDelimiter;
     }
 
-    private static int findCustomDelimiterEndIndex(UserInput userInput) {
+    private int findCustomDelimiterEndIndex(UserInput userInput) {
         int customDelimiterEndIndex = userInput.getUserInput().indexOf("\\n");
         return customDelimiterEndIndex;
     }
