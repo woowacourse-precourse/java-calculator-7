@@ -33,7 +33,6 @@ public class Preprocessing {
             }
         }
         separated.add(temp);
-        System.out.println(separated);
         return separated;
     }
 

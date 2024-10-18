@@ -18,7 +18,7 @@ public class FunctionOperator {
         String input = inputView.input();
 
         List<String> separated = new ArrayList<>();
-        List<String> separators = Arrays.asList(",", ":");
+        List<String> separators = new ArrayList<>(Arrays.asList(",", ":"));
         // 전처리
         if (preprocessing.firstLetter(input)) {
             // 커스텀 구분자 추출
@@ -31,6 +31,8 @@ public class FunctionOperator {
             // 숫자 - !숫자 구분
             separated = preprocessing.separation(input);
         }
+        System.out.println(separated);
+        System.out.println(separators);
 
         // 구분자 유효하면 sum
         int answer = validation.validatingSeparator(separators, separated);
