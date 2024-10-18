@@ -17,6 +17,8 @@ public class Application {
 
         extractDelimiter(inputString).forEach(
                 calculatorService::addSeparator);
+
+        System.out.println("결과 : " +calculatorService.calculate(extractCommand(inputString)));
     }
 
     private static List<String> extractDelimiter(String inputString) {
