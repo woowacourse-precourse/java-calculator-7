@@ -119,6 +119,20 @@ class ApplicationTest extends NsTest {
                         .isInstanceOf(IllegalArgumentException.class));
     }
 
+    @Test
+    void 예외_테스트_유효하지_않은_문자가_중간에_위치한_경우() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1//.\\n.2:3"))
+                        .isInstanceOf(IllegalArgumentException.class));
+    }
+
+    @Test
+    void 예외_테스트_유효하지_않은_문자가_중간에_위치한_경우2() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1//.\\n2:3"))
+                        .isInstanceOf(IllegalArgumentException.class));
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
