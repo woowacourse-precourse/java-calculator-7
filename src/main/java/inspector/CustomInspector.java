@@ -1,34 +1,41 @@
 package inspector;
 
 public class CustomInspector extends ContentInspector {
-    protected String targetContent;
-    protected String parsingDelimiter = ",|:";
+    protected String originalContent;
+    private String parsingSeparator = ",|:";
 
-    public CustomInspector(String targetContent) {
-        this.targetContent = targetContent;
-        findCustomDelimiter();
+
+    public CustomInspector(String originalContent) {
+        this.originalContent = originalContent;
+        findCustomSeparator();
     }
 
     @Override
-    public String getParsingDelimiter() {
-        return parsingDelimiter;
+    public String getParsingSeparator() {
+        return parsingSeparator;
     }
 
     @Override
-    public String getContent() {
-        return targetContent;
+    public String getConvertedContent() {
+        return originalContent;
     }
 
-    private void findCustomDelimiter() {
-        if (!targetContent.substring(0, 2).equals("//") || !targetContent.substring(3, 5).equals("\\n")) {
-            throw new IllegalArgumentException();
+    private void findCustomSeparator() {
+        String separatorPrefix = originalContent.substring(0, 2);
+        String separatorSuffix = originalContent.substring(3, 5);
+        if (!separatorPrefix.equals("//") || !separatorSuffix.equals("\\n")) {
+            throw new IllegalArgumentException("커스텀 구분자의 생성 형식에 맞지 않음");
         }
-        parsingDelimiter = parsingDelimiter.concat("|" + targetContent.charAt(2));
-        targetContent = changeContent(targetContent);
-        inspecting(targetContent, parsingDelimiter);
+        separatorRegistration();
+        String convertedContent = convertContent(originalContent);
+        inspecting(convertedContent, parsingSeparator);
     }
 
-    private String changeContent(String targetContent) {
-        return targetContent.substring(5);
+    private void separatorRegistration() {
+        parsingSeparator = parsingSeparator.concat("|" + originalContent.charAt(2));
+    }
+
+    private String convertContent(String originalContent) {
+        return originalContent.substring(5);
     }
 }

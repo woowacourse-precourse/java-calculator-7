@@ -1,18 +1,18 @@
 package parser;
 
 public class ContentParser {
-    private String contentDelimiter;
+    private String contentSeparator;
     private String targetContent;
     private String[] parsedContent;
 
-    public ContentParser(String contentDelimiter, String targetContent) {
+    public ContentParser(String contentSeparator, String targetContent) {
         this.targetContent = targetContent;
-        this.contentDelimiter = contentDelimiter;
+        this.contentSeparator = contentSeparator;
         parsing();
     }
 
     private void parsing() {
-        parsedContent = targetContent.split(contentDelimiter);
+        parsedContent = targetContent.split(contentSeparator);
     }
 
     public String[] getParsedContent() {

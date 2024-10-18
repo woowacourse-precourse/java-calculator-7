@@ -6,19 +6,19 @@ import inspector.InspectorSelector;
 import java.math.BigInteger;
 import parser.ContentParser;
 
-public class CalculatorMain {
-    private BigInteger calculateResult = BigInteger.ZERO;
+public class MainCalculator {
+    private BigInteger calculationResult = BigInteger.ZERO;
     private String inputContent;
     private String convertedContent;
-    private String parsingDelimiter;
+    private String parsingSeparator;
     private String[] parsedContent;
 
     public void startCalculator() {
         setInputContent();
         ContentInspector contentInspector = InspectorSelector.selection(inputContent);
-        parsingDelimiter = contentInspector.getParsingDelimiter();
-        convertedContent = contentInspector.getContent();
-        ContentParser contentParser = new ContentParser(parsingDelimiter, convertedContent);
+        parsingSeparator = contentInspector.getParsingSeparator();
+        convertedContent = contentInspector.getConvertedContent();
+        ContentParser contentParser = new ContentParser(parsingSeparator, convertedContent);
         parsedContent = contentParser.getParsedContent();
         calculation();
         getCalculateResult();
@@ -27,24 +27,24 @@ public class CalculatorMain {
     private void setInputContent() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         inputContent = Console.readLine();
-        if (inputContent.isBlank()) {
+        if (inputContent.isEmpty()) {
             getCalculateResult();
         }
     }
 
     private void getCalculateResult() {
-        System.out.println("결과 : " + calculateResult);
+        System.out.println("결과 : " + calculationResult);
     }
 
     private void calculation() {
         for (String content : parsedContent) {
-            BigInteger addedBigInteger = convertToBigInteger(content);
-            makeNegativeException(addedBigInteger);
-            calculateResult = calculateResult.add(addedBigInteger);
+            BigInteger addedBigInteger = convertStringToBigInteger(content);
+            detectNegativeValueException(addedBigInteger);
+            calculationResult = calculationResult.add(addedBigInteger);
         }
     }
 
-    private BigInteger convertToBigInteger(String content) {
+    private BigInteger convertStringToBigInteger(String content) {
         if (content.isEmpty()) {
             return BigInteger.ZERO;
         } else {
@@ -52,7 +52,7 @@ public class CalculatorMain {
         }
     }
 
-    private void makeNegativeException(BigInteger bigInteger) {
+    private void detectNegativeValueException(BigInteger bigInteger) {
         if (bigInteger.compareTo(BigInteger.ZERO) == -1) {
             throw new IllegalArgumentException();
         }

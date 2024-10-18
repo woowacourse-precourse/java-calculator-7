@@ -1,21 +1,21 @@
 package inspector;
 
 public class DefaultInspector extends ContentInspector {
-    private String targetContent;
-    private String parsingDelimiter = ",|:";
+    private String originalContent;
+    private String parsingSeparator = ",|:";
 
-    public DefaultInspector(String targetContent) {
-        this.targetContent = targetContent;
-        inspecting(targetContent, parsingDelimiter);
+    public DefaultInspector(String originalContent) {
+        this.originalContent = originalContent;
+        inspecting(originalContent, parsingSeparator);
     }
 
     @Override
-    public String getParsingDelimiter() {
-        return parsingDelimiter;
+    public String getParsingSeparator() {
+        return parsingSeparator;
     }
 
     @Override
-    public String getContent() {
-        return targetContent;
+    public String getConvertedContent() {
+        return originalContent;
     }
 }
