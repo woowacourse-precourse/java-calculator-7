@@ -13,6 +13,15 @@ public class Application {
         Set<Character> set = new HashSet<>();
         set.add(':');
         set.add(',');
+        if (input.charAt(0) == '/' && input.charAt(1) == '/') {
+            int idx = 2;
+            while (input.charAt(idx) != '\"' && input.charAt(idx+1) != 'n') {
+                idx++;
+            }
+            for (int i=2;i<idx;i++) {
+                set.add(input.charAt(i));
+            }
+        }
         StringBuilder tmp = new StringBuilder();
         for (int i = 0; i < input.length(); i++) {
             char c = input.charAt(i);
