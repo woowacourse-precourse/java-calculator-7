@@ -3,10 +3,14 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Input {
-    private String input;
-    public Input(){
-        input =  Console.readLine();
+    static String input;
+    static String[] token;
+    public String inputCal(){
+        input = Console.readLine();
+        return input;
     }
-
+    public void inputSplit(){
+        token = input.split("[,:]");
+    }
 
 }
