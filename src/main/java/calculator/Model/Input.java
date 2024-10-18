@@ -2,14 +2,14 @@ package calculator.Model;
 
 public class Input {
     String delimiter;
-    String text;
+    NumberList numberList;
 
     public boolean hasDelimiter() {
         return delimiter != null;
     }
 
     public boolean hasText() {
-        return text != null;
+        return numberList.isEmpty();
     }
 
     public int getCustomDelimiterStartIndex(String rawText) {
@@ -52,7 +52,12 @@ public class Input {
     public void getInputText(String rawText) {
         validInputText(rawText.charAt(rawText.length()-1));
         int customDelimiterEndIndex = checkHasCustomDelimiter(rawText);
-        this.delimiter = splitCustomDelimiter(customDelimiterEndIndex, rawText);
-        this.text = splitText(customDelimiterEndIndex, rawText);
+
+        String customDelimiter = splitCustomDelimiter(customDelimiterEndIndex, rawText);
+        this.delimiter = customDelimiter;
+
+        String rawNumber = splitText(customDelimiterEndIndex, rawText);
+        this.numberList = new NumberList();
+        this.numberList.makeNumberList(rawNumber, customDelimiter);
     }
 }
