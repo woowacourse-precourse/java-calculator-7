@@ -7,6 +7,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class InputValidatorTest {
 
     @Test
+    void isEmptyTest(){
+        InputValidator inputValidator = new InputValidator();
+        DelimiterType result;
+
+        result = inputValidator.isValidInput("");
+        assertThat(result).isEqualTo(DelimiterType.EMPTY);
+
+    }
+
+    @Test
     void isDefaultDelimiterTest() {
         InputValidator inputValidator = new InputValidator();
         DelimiterType result;
@@ -46,6 +56,9 @@ public class InputValidatorTest {
         assertThat(result).isEqualTo(DelimiterType.CUSTOM);
 
         result = inputValidator.isValidInput("// \\n2 3 4");
+        assertThat(result).isEqualTo(DelimiterType.CUSTOM);
+
+        result = inputValidator.isValidInput("//abcd\\n2abcd3abcd4");
         assertThat(result).isEqualTo(DelimiterType.CUSTOM);
 
     }
