@@ -73,7 +73,7 @@ class DefaultDelimiterValidationTest extends NsTest {
     }
 
     @Override
-    protected void runMain() {
+    public void runMain() {
         Application.main(new String[]{});
     }
 }
