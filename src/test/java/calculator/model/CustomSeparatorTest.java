@@ -50,7 +50,7 @@ public class CustomSeparatorTest {
                 Arguments.of("//\\n1234", "공백일 때"),
                 Arguments.of("//\\\\n1\\2\\3\\4", "\\일 때"),
                 Arguments.of("//0\\n1020304", "숫자일 때"),
-                Arguments.of("//!@#\\n1!2", "커스텀 구분자의 개수가 2개 이상일 때")
+                Arguments.of("//!@#\\n1!2", "커스텀 구분자의 개수가 2개 초과일 때")
                 );
     } // generateExceptionData
 } // class

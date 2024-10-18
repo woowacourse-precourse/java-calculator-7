@@ -15,7 +15,7 @@ public class CustomSeparatorValidator {
     public static final String WHITE_SPACE_CANNOT_USE_AS_CUSTOM = "공백은 커스텀 구분자로 사용 불가합니다.";
     public static final String BACKTICK_CANNOT_USE_AS_CUSTOM = "'\\'는 커스텀 구분자로 사용 불가합니다.";
     public static final String NUMBER_CANNOT_USE_AS_CUSTOM = "숫자는 커스텀 구분자로 사용 불가합니다.";
-    public static final String CUSTOM_CANNOT_MORE_THAN_LIMIT = "커스텀 구분자는 2개 이상일 수 없습니다.";
+    public static final String CUSTOM_CANNOT_MORE_THAN_LIMIT = "커스텀 구분자는 2개까지만 사용 가능합니다.";
 
     public void validate(List<String> customSeparator) {
         if (customSeparator.contains(EMPTY) || customSeparator.contains(WHITE_SPACE)) {
