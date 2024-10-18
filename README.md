@@ -43,8 +43,6 @@
 
 -[X] **IllegalArgumentException** : 사용자가 잘못된 값을 입력한 경우
 
--[ ] **InvalidDelimiterException** : 구분자가 쉼표나 콜론, 커스텀 구분자가 아닐 경우
-
--[ ] **NegativeNumberException** : 문자열이 양수가 아닐 경우
+-[X] **NumberFormatException** : 구분자가 쉼표나 콜론, 커스텀 구분자가 아닐 경우
 
 -[X] **EmptyException** : 아무 것도 입력되지 않을 경우

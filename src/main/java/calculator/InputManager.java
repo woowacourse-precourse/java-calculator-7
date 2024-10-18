@@ -24,7 +24,7 @@ public class InputManager {
             System.out.print("잘못된 값을 입력하였습니다.");
         } catch (EmptyException e){
             System.out.print(0);
-            return str = "Empty";
+            Application.flag = true;
         }
         return str;
     }

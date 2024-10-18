@@ -24,7 +24,6 @@ public class NumberExtractor {
                 }
             }
         }
-
         return delimiter;
     }
 
@@ -32,8 +31,13 @@ public class NumberExtractor {
         String [] extractedString = str.split(",|:");
         ArrayList<Integer> result = new ArrayList<>();
 
-        for(String text : extractedString){
-            result.add(Integer.parseInt(text));
+        try{
+            for(String text : extractedString){
+                result.add(Integer.parseInt(text));
+            }
+        } catch (NumberFormatException e){
+            System.out.print("입력이 잘못되었습니다.");
+            Application.flag = true;
         }
 
         return result;
@@ -44,8 +48,13 @@ public class NumberExtractor {
         String [] extractedString = removedString.split(",|:|"+delimiter);
         ArrayList<Integer> result = new ArrayList<>();
 
-        for(String text : extractedString){
-            result.add(Integer.parseInt(text));
+        try{
+            for(String text : extractedString){
+                result.add(Integer.parseInt(text));
+            }
+        } catch (NumberFormatException e){
+            System.out.print("입력이 잘못되었습니다.");
+            Application.flag = true;
         }
 
         return result;
