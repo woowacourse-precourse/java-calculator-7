@@ -9,13 +9,16 @@ public class Calculator {
     private static final String OUTPUT_RESULT_MESSAGE = "결과 : ";
 
     Converter converter;
+    Validator validator;
 
     public Calculator() {
         this.converter = new Converter("[,:]", "//", "\\n");
+        this.validator = new Validator("[,:]", "//", "\\n");
     }
 
     public void run() {
         String input = inputString();
+        validator.validateDelimiter(input);
         List<Integer> integers = converter.convertNumbersFromString(input);
         PositiveNumbers positiveNumbers = PositiveNumbers.from(integers);
         printResult(positiveNumbers.calculateSum());
