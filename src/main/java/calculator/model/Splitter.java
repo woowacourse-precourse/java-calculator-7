@@ -3,10 +3,14 @@ import java.util.regex.Pattern;
 
 
 public class Splitter {
-    private String[] splitterNumbers;
+    private String[] splittedNumbers;
 
     public Splitter(CustomDelimiter customDelimiter){
-        this.splitterNumbers = splitNumbers(customDelimiter);
+        this.splittedNumbers = splitNumbers(customDelimiter);
+    }
+
+    public String[] getSplittedNumbers(){
+        return this.splittedNumbers;
     }
 
     public String[] splitNumbers(CustomDelimiter customDelimiter){
