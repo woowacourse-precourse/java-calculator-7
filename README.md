@@ -18,7 +18,7 @@
     - [Model](#model)
     - [View](#view)
     - [Controller](#controller)
-    - [Service](#service)
+    - [Util](#util)
     - [Exception](#exception)
 - [구현 리스트](#-구현-리스트)
     - [기능 구현 리스트](#기능-구현-리스트)
@@ -150,13 +150,15 @@ More : [Commit Message convention](https://gist.github.com/9941e89d80e2bc58a153.
 
 ### Model
 
-- Number
-    - `숫자 생성` 기능
-    - `숫자 검증` 기능
-
 - Numbers
+    - `숫자 검증` 기능
     - `숫자 리스트 생성` 기능
     - `덧셈` 기능
+
+- StringNumbers
+    - `문자열 검증` 기능
+    - `문자열에 포함된 구분자 판단` 기능
+    - `구분자로 분리한 문자열 리스트 생성` 기능
 
 ### View
 
@@ -166,7 +168,11 @@ More : [Commit Message convention](https://gist.github.com/9941e89d80e2bc58a153.
     - `입력 문구 출력` 기능
 
 - OutputView
+    - `덧셈 결과 문구 출력` 기능
     - `덧셈 결과 출력` 기능
+
+- PrintMessage
+    - `출력 문구` 제공
 
 ### Controller
 
@@ -175,18 +181,34 @@ More : [Commit Message convention](https://gist.github.com/9941e89d80e2bc58a153.
     - `계산` 기능 : 숫자 리스트의 총 합을 계산
     - `계산 종료` 기능 : 계산된 덧셈 결과를 반환
 
-### Service
+### Util
 
 - Calculate
     - `계산기 생성` 기능
-    - `덧셈 결과 생성` 기능
-- CalculateResult
-    - `덧셈 결과 처리` 기능
+    - `덧셈 결과 생성 및 처리` 기능
+
+- CalculateSeparator(Parent)
+    - `분리자 구분에 사용되는 공통 함수` 정의
+
+- CalculateDefault(Child)
+    - `기본 구분자(쉼표, 콜론) 포함 판단` 기능
+    - `기본 구분자(쉼표, 콜론)로 문자열 분리` 기능
+
+- CalculateCustom(Child)
+    - `커스텀 구분자(//\n) 포함 판단` 기능 
+    - `커스텀 구분자(//\n)로 문자열 분리` 기능
+
+- CalculateValidation
+    - `계산기 입력 검증` 기능
 
 ### Exception
 
-- `예외 메시지` 제공
-- `예외 처리` 기능
+- CalculateException
+    - `예외 처리` 기능
+
+- ExceptionMessage
+    - `예외 메시지` 제공
+
 
 <br>
 
