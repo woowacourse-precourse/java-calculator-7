@@ -13,10 +13,6 @@ public class StringAdd {
     }
 
     public int add(String input){
-        if(input.isEmpty()){
-            return 0;
-        }
-
         String delimiters = delimiterParser.parseDelimiter(input);
         String numbers = delimiterParser.extractNumbers(input);
         List<Integer> numberList = numberParser.parseNumbers(numbers, delimiters);
