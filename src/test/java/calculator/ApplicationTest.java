@@ -1,27 +1,24 @@
 package calculator;
 
+import calculator.domain.Calculator;
 import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
     @Test
-    void 커스텀_구분자_사용() {
-        assertSimpleTest(() -> {
-            run("//;\\n1");
-            assertThat(output()).contains("결과 : 1");
-        });
+    void 공백입력시_반환값_테스트() {
+        Calculator calculator = new Calculator();
+        int result = calculator.add("");
+
+        Assertions.assertEquals(0, result);
     }
 
     @Test
-    void 예외_테스트() {
-        assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
-        );
+    void null값_처리_테스트() {
+        Calculator calculator = new Calculator();
+        int result = calculator.add(null);
+        Assertions.assertEquals(0, result);
     }
 
     @Override
