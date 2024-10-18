@@ -56,44 +56,44 @@ class StringValidateTest {
     @DisplayName("계산해야 하는 문자열에 숫자, 구분자 외 다른 문자가 있으면 IllegalArgumentException가 발생한다.")
     void otherCharInBackString() {
         String string = "1a2B3c";
-        String seperator = "abc";
+        String separator = "abc";
 
-        assertThrows(IllegalArgumentException.class, () -> validateBackString(string, seperator));
+        assertThrows(IllegalArgumentException.class, () -> validateBackString(string, separator));
     }
 
     @Test
     @DisplayName("계산해야 하는 문자열에 숫자만 있는 경우")
     void onlyNumberInBackString() {
         String string = "123456";
-        String seperator = "abc";
+        String separator = "abc";
 
-        assertTrue(validateBackString(string, seperator));
+        assertTrue(validateBackString(string, separator));
     }
 
     @Test
     @DisplayName("계산해야 하는 문자열에 구분자만 있는 경우")
-    void onlySeperatorInBackString() {
+    void onlyseparatorInBackString() {
         String string = "abcabc";
-        String seperator = "abc";
+        String separator = "abc";
 
-        assertTrue(validateBackString(string, seperator));
+        assertTrue(validateBackString(string, separator));
     }
 
     @Test
     @DisplayName("계산해야 하는 문자열이 빈 문자열인 경우")
     void emptyBackString() {
         String string = "";
-        String seperator = "abc";
+        String separator = "abc";
 
-        assertTrue(validateBackString(string, seperator));
+        assertTrue(validateBackString(string, separator));
     }
 
     @Test
     @DisplayName("구분자가 없는 경우")
-    void emptySeperator() {
+    void emptyseparator() {
         String string = "1234";
-        String seperator = "";
+        String separator = "";
 
-        assertTrue(validateBackString(string, seperator));
+        assertTrue(validateBackString(string, separator));
     }
 }

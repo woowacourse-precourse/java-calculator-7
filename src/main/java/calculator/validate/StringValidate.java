@@ -25,7 +25,7 @@ public class StringValidate {
         return true;
     }
 
-    public static boolean validateBackString(String string, String seperator) {
+    public static boolean validateBackString(String string, String separator) {
         if (Objects.equals(string, "")) {
             return true;
         }
@@ -34,7 +34,7 @@ public class StringValidate {
             if (Character.isDigit(s.charAt(0))) {
                 continue;
             }
-            if (!seperator.contains(s)) {
+            if (!separator.contains(s)) {
                 throw new IllegalArgumentException("계산해야 하는 문자열에 구분자가 아닌 문자가 있습니다.");
             }
         }
