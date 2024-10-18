@@ -50,8 +50,9 @@ class ApplicationTest extends NsTest {
     @Test
     void 출력_형식() {
         assertSimpleTest(() -> {
-            run("///\\n1/2,3;4");
-            assertThat(output()).contains("1/2,3;4\n" + "결과 : 10");
+            run("///\\n1/2,3:4");
+            assertThat(output()).contains("덧셈할 문자열을 입력해 주세요.");
+            assertThat(output()).contains("결과 : 10");
         });
     }
 
