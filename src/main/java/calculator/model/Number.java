@@ -1,18 +1,19 @@
 package calculator.model;
 
 public class Number {
+    private static final int ZERO = 0;
     private final int number;
 
-    public Number(String number) {
+    protected Number(String number) {
         this.number = convertNumberToInt(number);
     }
 
-    public int getNumber() {
+    protected int getNumber() {
         return number;
     }
 
     private int validateNumber(int number) {
-        if (number < 0) {
+        if (number <= ZERO) {
             throw new IllegalArgumentException("양수인 숫자를 입력해주세요.");
         }
         return number;

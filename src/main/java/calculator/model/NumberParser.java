@@ -2,27 +2,33 @@ package calculator.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class NumberParser {
     private final List<Number> numbers;
+    private final DelimiterParser delimiterParser;
 
-    public NumberParser( final DelimiterParser delimiterParser) {
-        this.numbers = new ArrayList<>();
-        parseNumber(delimiterParser);
+    protected NumberParser(final String input) {
+        delimiterParser = new DelimiterParser(input);
+        numbers = parseNumber(input);
     }
 
-    private void parseNumber(final DelimiterParser delimiterParser) {
-        final String input = delimiterParser.getInput();
-        Set<String> delimiters = delimiterParser.getDelimiters();
-        String regex = String.join("|", delimiters);
-        String[] splitNumbers = input.split(regex);
-        for (String num : splitNumbers) {
+    private List<Number> parseNumber(final String input) {
+        final String target = extractTargetString(input);
+        final String regex = String.join("|", delimiterParser.getDelimiters());
+        final List<Number> numbers = new ArrayList<>();
+        System.out.println(target);
+        for (String num : target.split(regex)) {
+            System.out.println(num);
             numbers.add(new Number(num));
         }
+        return numbers;
     }
 
-    public List<Number> getNumbers() {
+    private String extractTargetString(final String input) {
+        return input.substring(delimiterParser.getDelimiterEnd() + 2);
+    }
+
+    protected List<Number> getNumbers() {
         return numbers;
     }
 }

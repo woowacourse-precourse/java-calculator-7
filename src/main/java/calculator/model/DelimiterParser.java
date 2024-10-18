@@ -8,29 +8,28 @@ public class DelimiterParser {
     private static final String[] DEFAULT_DELIMITERS = new String[]{",", ":"};
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
     private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
-    private String input;
+    private static final int DEFAULT_DELIMITER_END = -2;
     private final Set<String> delimiters;
+    private final int delimiterEnd;
 
-    public DelimiterParser(String input) {
-        this.input = input;
-        this.delimiters = new HashSet<>();
-        parseDelimiters(input);
+    protected DelimiterParser(final String input) {
+        this.delimiterEnd = initDelimiterEnd(input);
+        this.delimiters = parseDelimiters(input);
     }
 
-    public Set<String> getDelimiters() {
+    protected Set<String> getDelimiters() {
         return delimiters;
     }
 
-    public String getInput() {
-        return input;
+    protected int getDelimiterEnd() {
+        return delimiterEnd;
     }
 
-    private void parseDelimiters(final String input) {
+    private Set<String> parseDelimiters(final String input) {
         if (containsDefaultDelimiters(input)) {
-            defaultDelimiters();
-        } else {
-            findCustomDelimiters(input);
+            return defaultDelimiters();
         }
+        return findCustomDelimiters(input);
     }
 
     private boolean containsDefaultDelimiters(final String input) {
@@ -42,26 +41,28 @@ public class DelimiterParser {
         return false;
     }
 
-    private void defaultDelimiters() {
-        delimiters.addAll(Arrays.asList(DEFAULT_DELIMITERS));
+    private int initDelimiterEnd(final String input) {
+        if (containsDefaultDelimiters(input)) {
+            return DEFAULT_DELIMITER_END;
+        }
+        return input.indexOf(CUSTOM_DELIMITER_SUFFIX);
     }
 
-    private void findCustomDelimiters(final String input) {
+    private Set<String> defaultDelimiters() {
+        return new HashSet<>(Arrays.asList(DEFAULT_DELIMITERS));
+    }
+
+    private Set<String> findCustomDelimiters(final String input) {
+        final Set<String> customDelimiter = new HashSet<>();
         final int delimiterStart = input.indexOf(CUSTOM_DELIMITER_PREFIX);
-        final int delimiterEnd = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
-        validateCustomDelimiterPostion(delimiterStart, delimiterEnd);
-        String customDelimiter = input.substring(delimiterStart + 2, delimiterEnd);
-        delimiters.add(customDelimiter);
-        updateInputString(delimiterEnd);
+        validateCustomDelimiterPostion(delimiterStart);
+        customDelimiter.add(input.substring(delimiterStart + 2, delimiterEnd));
+        return customDelimiter;
     }
 
-    private void validateCustomDelimiterPostion(final int delimiterStart, final int delimiterEnd) {
+    private void validateCustomDelimiterPostion(final int delimiterStart) {
         if (delimiterEnd == -1 || delimiterStart == -1) {
             throw new IllegalArgumentException("커스텀 구분자는 //와 \\n 사이에 위치하여야 합니다.");
         }
-    }
-
-    private void updateInputString(final int delimiterEnd) {
-        this.input = input.substring(delimiterEnd + 2);
     }
 }

@@ -1,11 +1,16 @@
 package calculator.model;
 
-import java.util.List;
-
 public class NumberAdder {
-    public static int addNumber(final List<Number> numbers) {
-        int sum = 0;
-        for (Number n : numbers) {
+    private static final int DEFAULT_RESULT = 0;
+    private final NumberParser numberParser;
+
+    public NumberAdder(String input) {
+        this.numberParser = new NumberParser(input);
+    }
+
+    public int calculate() {
+        int sum = DEFAULT_RESULT;
+        for (Number n : numberParser.getNumbers()) {
             sum += n.getNumber();
         }
         return sum;
