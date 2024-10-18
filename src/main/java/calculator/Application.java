@@ -11,7 +11,13 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         //....
-        System.out.println("\"//|\\n 1 | 2 | 3 | 4 | 5 \": "+ cal("//|\\n 1 | 2 | 3 | 4 | 5 "));
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        String str = Console.readLine();
+        String strDelim = insertSeparator(selectDelimiter(str), "|");
+        String addStr = addString(str);
+        int answer = cal(strDelim, addStr);
+        System.out.println("결과 : "+answer);
+
     }
     public static String selectDelimiter(String str){
         //구분자가 한번에 안들어올 수 있다.
@@ -25,7 +31,7 @@ public class Application {
                 customDelimiter += str.substring(idxStart+2, idxEnd).trim();
             }
         }
-        System.out.println("selectDelimiter:"+customDelimiter);
+        //System.out.println("selectDelimiter:"+customDelimiter);
         return customDelimiter;
     }
     public static String insertSeparator(String original, String separator) {
@@ -53,10 +59,32 @@ public class Application {
                 str = str1+str2;
             }
         }
-        System.out.println("addString:"+str);
+        //System.out.println("addString:"+str);
         return str;
     }
-    public static int cal(String str) {
+
+    public static int cal(String delim, String str){
+        String[] strArr = str.replace(" ","").split(delim);
+        int sum = 0;
+        for (String s : strArr) {
+            try {
+                int a = Integer.parseInt(s.trim());
+                System.out.println("a:" + a);
+                if (a > 0) {
+                    sum += a;
+                    //System.out.println("::if::");
+                } else {
+                    //System.out.println(":::else:::");
+                    throw new IllegalArgumentException("Non-positive numbers are not allowed");
+                }
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("invalid number:"+ str);
+            }
+
+        }
+        return sum;
+    }
+    public static int cal2(String str) {
         String delimiter = selectDelimiter(str);
         String delimRegex = insertSeparator(delimiter, "|");
         String summingStr = addString(str);
@@ -83,7 +111,7 @@ public class Application {
 
         }
         return sum;
-        //String split을 여러 문자로?-> 정규식 이용
+        //String split을 여러 문자로?-> 정규식 이용 ...
 
     }
 }
