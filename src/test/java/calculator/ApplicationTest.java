@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
     @Test
-    void 커스텀_구분자_사용() {
+    void 커스텀_구분자_사용1() {
         assertSimpleTest(() -> {
             run("//;\\n1");
             assertThat(output()).contains("결과 : 1");
@@ -21,7 +21,16 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("-1: 음수는 입력할 수 없습니다.")
         );
+    }
+
+    @Test
+    void 문자를_더하면_에러가_발생한다() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//]\\n1]a"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage("a: 양의 정수가 아닙니다."));
     }
 
     @Override
