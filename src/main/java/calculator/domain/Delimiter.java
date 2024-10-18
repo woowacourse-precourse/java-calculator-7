@@ -27,6 +27,10 @@ public class Delimiter {
     }
 
     public static String removeEnrollmentChar(String str) {
+        if (str.length() <= 5) {
+            return str;
+        }
+
         str = str.replace(PREFIX, "");
         str = str.replace(SUFFIX, "");
         return str.replaceFirst(separator, "");
