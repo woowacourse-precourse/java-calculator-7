@@ -23,6 +23,18 @@ public class Application {
         if (input == null || input.isEmpty()) {
             return 0;
         }
+
+        String division = ",|:";
+        String numbers = input;
+
+        if (input.startsWith("//")) {
+            int division_index = input.indexOf("\n");
+            if (division_index == -1) {
+                throw new IllegalArgumentException("잘못된 입력 형식입니다.");
+            }
+            division = input.substring(2, division_index); //구분자 추출
+            numbers = input.substring(division_index + 1); //구분자 이후 숫자 추출
+        }
         int sum = 0;
 
         return sum;
