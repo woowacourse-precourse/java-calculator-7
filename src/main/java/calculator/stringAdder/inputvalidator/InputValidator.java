@@ -13,13 +13,12 @@ public class InputValidator {
     System.out.println("덧셈할 문자열을 입력해주세요.");
     try{
       String input = Console.readLine();
-      if (input == null || input.isEmpty()){
+      if (input == null){
         throw new IllegalArgumentException(this.getClass().getSimpleName()+ ": 입력한 문자열이 비었습니다.");
       }
       return input;
     } catch (NoSuchElementException e){ //테스트용
-      throw new IllegalArgumentException(this.getClass().getSimpleName()+ ": NoSuchElementException, 입력한 문자열이 비었습니다.");
+      return "";
     }
-
   }
 }

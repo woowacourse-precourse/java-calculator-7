@@ -19,6 +19,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 /**
@@ -31,6 +32,7 @@ class InputValidatorTest extends NsTest{
   private final InputStream standardIn = System.in;
   private final PrintStream standardOut = System.out;
   private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+  private String capturedResult;
 
   @BeforeEach
   void setUp(){
@@ -45,58 +47,28 @@ class InputValidatorTest extends NsTest{
     System.setOut(standardOut);
   }
 
-  @Test
-  void validateInput_validInput_success() {
-    String input = "1,2,3";
+  @ParameterizedTest
+  @CsvSource({
+      "1;2;3",
+      "10;20;30",
+      "5;15;25;35",
+  })
+  void validateInput_validInput_success(String input) {
     provideInput(input);
-
     String result = inputValidator.validateInput();
-
     assertEquals(input, result);
     assertTrue(outputStreamCaptor.toString().contains("덧셈할 문자열을 입력해주세요."));
   }
 
-  @ParameterizedTest
-  @ValueSource(strings = {"", "\n"})
-  void validateInput_emptyInput_fail(String input) {
-    provideInput(input);
-
-    Exception exception = assertThrows(IllegalArgumentException.class,
-        () -> inputValidator.validateInput());
-
-    String expectedMessage = "InputValidator: NoSuchElementException, 입력한 문자열이 비었습니다.";
-    String actualMessage = exception.getMessage();
-    assertTrue(actualMessage.contains(expectedMessage));
-  }
-
-  @ParameterizedTest
-  @ValueSource(strings = {"", "\n"})
-  void validateInput_emptyInput_fail_usingAssertSimpleTest(String input) {
-    assertSimpleTest(() -> {
-      assertThatThrownBy(() -> run(input))
-          .isInstanceOf(IllegalArgumentException.class)
-          .hasMessageContaining("입력한 문자열이 비었습니다.");
-    });
-  }
-
   @Test
-  void validateInput_nullInput_fail() {
-    provideInput(null);
+  void validateInput_emptyStringvalidInput_success() {
+    String input = "";
+    final String[] result = new String[1];
+    //provideInput(input);
 
-    Exception exception = assertThrows(IllegalArgumentException.class,
-        () -> inputValidator.validateInput());
-
-    String expectedMessage = "InputValidator: NoSuchElementException, 입력한 문자열이 비었습니다.";
-    String actualMessage = exception.getMessage();
-    assertTrue(actualMessage.contains(expectedMessage));
-  }
-
-  @Test
-  void validateInput_nullInput_fail_usingAssertSimpleTest() {
     assertSimpleTest(() -> {
-      assertThatThrownBy(() -> run())
-          .isInstanceOf(IllegalArgumentException.class)
-          .hasMessageContaining("입력한 문자열이 비었습니다.");
+      run(input);
+      assertEquals("", this.capturedResult);
     });
   }
 
@@ -110,8 +82,13 @@ class InputValidatorTest extends NsTest{
     System.setIn(testIn);
   }
 
+  protected  void setCapturedResult(String result){
+    this.capturedResult = result;
+  }
+
   @Override
   protected void runMain() {
-    inputValidator.validateInput();
+    String result = inputValidator.validateInput();
+    setCapturedResult(result);
   }
 }
