@@ -17,5 +17,5 @@ for java-calculator-precourse
   - [ ] 숫자의 형식이 잘못된 경우 `IllegalArgumentException`을 발생시킨다.
     - [ ] 양수가 아닌 경우
 - [X] 주어진 숫자들의 합을 구한다.
-- [ ] 계산 결과를 출력한다.
+- [X] 계산 결과를 출력한다.
 - `IllegalArgumentException`이 발생하면 애플리케이션을 종료한다.
