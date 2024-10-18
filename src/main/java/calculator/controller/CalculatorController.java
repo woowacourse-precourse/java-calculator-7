@@ -24,6 +24,7 @@ public class CalculatorController {
         CalculationString calculationString = readInput();
         int[] parsedNumbers = parseInput(calculationString);
         String result = calculateResult(parsedNumbers);
+        printResult(result);
     }
 
     private CalculationString readInput() {
@@ -36,5 +37,9 @@ public class CalculatorController {
 
     private String calculateResult(int[] intArray) {
         return calculator.calculate(intArray);
+    }
+
+    private void printResult(String result) {
+        outputView.printResult(result);
     }
 }
