@@ -20,4 +20,13 @@ class StringSumCalculatorTest {
             assertThat(result).isEqualTo(0);
         });
     }
+
+    @DisplayName("구분자를 사용하지 않고 숫자만 입력하였다면 입력한 숫자 그대로 반환한다.")
+    @Test
+    void isRawNumberThenReturnInputValue() {
+        assertSimpleTest(() -> {
+            int result = stringSumCalculator.calculate("123");
+            assertThat(result).isEqualTo(123);
+        });
+    }
 }
