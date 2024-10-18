@@ -25,7 +25,7 @@ public class CalculatorView {
     }
 
     public void showResultMsg(IllegalArgumentException e) {
-        e.getMessage();
+        System.out.println(e.getMessage());
     }
 
     public void finishProgram() {

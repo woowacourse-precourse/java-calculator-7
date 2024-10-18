@@ -23,18 +23,28 @@ public class CalculatorController {
 
         String userInput = view.getUserInput();
 
-        try {
-            model.findCustomSeparator(userInput);
+        model.findCustomSeparator(userInput);
 
-            model.parseNumbersFromString(userInput);
+        model.parseNumbersFromString(userInput);
 
-            long result = model.addNumbers();
+        long result = model.addNumbers();
 
-            view.showResultMsg(result);
-        } catch (IllegalArgumentException e) {
-            view.showResultMsg(e);
-        } finally {
-            view.finishProgram();
-        }
+        view.showResultMsg(result);
+
+        view.finishProgram();
+
+//        try {
+//            model.findCustomSeparator(userInput);
+//
+//            model.parseNumbersFromString(userInput);
+//
+//            long result = model.addNumbers();
+//
+//            view.showResultMsg(result);
+//        } catch (IllegalArgumentException e) {
+//            view.showResultMsg(e);
+//        } finally {
+//            view.finishProgram();
+//        }
     }
 }
