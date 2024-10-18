@@ -20,6 +20,10 @@ public class CalculatorController {
         String readString = inputView.readUserString();
         StringProcessor processor = new StringProcessor(readString);
         result = manager.plus(processor.getNumberList());
-
+        if (result % 1 == 0) {
+            outputView.resultIntegerMessage(result);
+            return;
+        }
+        outputView.resultDoubleMessage(result);
     }
 }
