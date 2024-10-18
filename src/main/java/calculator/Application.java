@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 public class Application {
     public static void main(String[] args) {
         String input = null;
+        String delimiter = ",|:";
         try {
             input = Console.readLine();  // 사용자로부터 입력 받음
         } catch (NoSuchElementException e) {
@@ -17,7 +18,11 @@ public class Application {
             System.out.println("결과 : 0");  // 빈 문자열이 입력되면 0 출력
             return;
         }
-
-
+        String[] numbers = input.split(delimiter);
+        int sum = 0;
+        for (String number : numbers) {
+            sum += Integer.parseInt(number);
+        }
+        System.out.println("결과 : " + sum);
     }
 }
