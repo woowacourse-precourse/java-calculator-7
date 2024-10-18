@@ -15,12 +15,8 @@ public class StringCalculatorApplication implements CalculatorApplication {
 
     @Override
     public void run() {
-        try {
             String responseValue = applicationView.requestValue();
             int result = caculator.calculate(responseValue);
             applicationView.printResult(result);
-        } catch (IllegalArgumentException e) {
-            applicationView.printError(e.getMessage());
-        }
     }
 }

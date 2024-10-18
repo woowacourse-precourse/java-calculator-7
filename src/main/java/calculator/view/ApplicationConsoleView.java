@@ -24,9 +24,4 @@ public class ApplicationConsoleView implements ApplicationView{
     public void printResult(int result) {
         outputView.printMessage(ConsoleMessage.RESULT_PREFIX + result);
     }
-
-    @Override
-    public void printError(String message) {
-        outputView.printMessage(ConsoleMessage.ERROR_PREFIX + message);
-    }
 }
