@@ -18,7 +18,6 @@ public class Application {
 
         if (input.startsWith("//")) {
             int delimiterIndex = input.indexOf("\\n");
-            System.out.println(delimiter);
 
             if (delimiterIndex != -1) {
                 delimiter = input.substring(2, delimiterIndex);
