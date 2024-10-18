@@ -21,20 +21,24 @@ public class Application {
     }
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-
-        //문자열 데이터의 숫자를 분리
         try {
             Input();
+
+            //문자열 데이터의 숫자를 분리
             adderScanner = new AdderScanner(input);
+
+            // 분리된 숫자 데이터를 모두 더함
+            adder=new Adder(adderScanner);
 
         } catch (IllegalArgumentException e) {
             //문자열을 분리할 때 잘못된 문자가 들어가면 예외 처리 한다.
             System.err.println(e.getMessage());
             throw e;
+        } catch (Adder.OverflowException e) {
+            //총 합이 오버플로루 날 경우 예외처리
+            System.err.println(e.getMessage());
+            throw e;
         }
-
-        // 분리된 숫자 데이터를 모두 더함
-        adder=new Adder(adderScanner);
 
         // 모두 더한 값을 출력
         printer=new Printer(adder);
