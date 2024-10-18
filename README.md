@@ -32,4 +32,7 @@
 더해진 결과값을 출력하는 클래스
 
 4. IllegalArgumentException
-예외 처리 클래스
+토큰 분리시 이용하는 예외 처리 클래스
+
+5. OverflowException
+총합을 구할 때 이용하는 예외 처리 클래스
