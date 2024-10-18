@@ -52,7 +52,6 @@ class ApplicationTest extends NsTest {
         assertThat(cal.splitString("//;\\n1;2;3")).isEqualTo(customarr);
     }
 
-
     @Test
     void 예외_테스트_0() {
         assertSimpleTest(() ->
@@ -79,7 +78,6 @@ class ApplicationTest extends NsTest {
                         .hasMessageContaining("사용자가 잘못된 값을 입력하였습니다.")
         );
     }
-
 
     @Override
     public void runMain() {
