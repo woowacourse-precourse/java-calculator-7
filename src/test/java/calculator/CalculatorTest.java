@@ -17,10 +17,9 @@ class CalculatorTest {
     void validateStartChar(){
     //given
         List<String> defaultseparator = List.of(",",":");
-        Calculator calculator = new Calculator(defaultseparator);
-
         String inputData = "//@!\n2341@!2031@!22122";
         String inputData2 = "2341,2031,22122";
+        Calculator calculator = new Calculator(defaultseparator,inputData);
     //when
         Boolean result = calculator.validateStartChar(inputData);
         Boolean result2 = calculator.validateStartChar(inputData2);
@@ -37,10 +36,9 @@ class CalculatorTest {
     void validateCustomSeparatorFormat(){
         //given
         List<String> defaultseparator = List.of(",",":");
-        Calculator calculator = new Calculator(defaultseparator);
-
         CustomSeparatorFormat customSeparatorFormat = new CustomSeparatorFormat();
         String inputData = "//@!\n2341@!2031@!22122";
+        Calculator calculator = new Calculator(defaultseparator,inputData);
         //when
         boolean b = calculator.validateCustomSeparatorFormat(inputData, customSeparatorFormat.getPattern());
 
@@ -53,10 +51,9 @@ class CalculatorTest {
     void validateCustomSeparatorFormat2(){
         //given
         List<String> defaultseparator = List.of(",",":");
-        Calculator calculator = new Calculator(defaultseparator);
-
         CustomSeparatorFormat customSeparatorFormat = new CustomSeparatorFormat();
         String inputData = "#@!/n2341@!2031@!22122";
+        Calculator calculator = new Calculator(defaultseparator,inputData);
         //when
 
 

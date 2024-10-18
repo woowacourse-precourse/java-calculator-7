@@ -1,11 +1,8 @@
 package separator;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 public class CustomSeparator implements Separator {
     private final String inputData;
@@ -54,7 +51,7 @@ public class CustomSeparator implements Separator {
     }
 
     @Override
-    public List<BigInteger> getNumbers() {
+    public String[] splitInputDataBySeparator() {
         Matcher matcher = customSeparatorFormat.getPattern().matcher(inputData);
         String group;
         if (matcher.find()) {
@@ -63,11 +60,13 @@ public class CustomSeparator implements Separator {
             throw new IllegalArgumentException("커스텀문자를 찾을 수 없습니다.");
         }
         String[] split = group.split(customSeparators.get(0));
-        List<BigInteger> bigIntegerList = new ArrayList<>();
-        for (String str : split) {
-            bigIntegerList.add(new BigInteger(str));
-        }
-        return bigIntegerList;
+
+        return split;
+    }
+
+    @Override
+    public String getInputData() {
+        return inputData;
     }
 
 
