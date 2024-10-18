@@ -18,13 +18,12 @@ public class Application {
         if (isStringWithDefaultSeparator(userInput, defaultSeparator)) {
             int result = sum(userInput, defaultSeparator);
             printResult(result);
-        }
-        else if(isStringWithCustomSeparator(userInput)) {
-            String str = removeSeparatorInitializer(userInput);
-            int result = sum(str, getCustomSeparator(userInput));
+        } else if (isStringWithCustomSeparator(userInput)) {
+            String formattedInput = formatBackslash(userInput);
+            String refinedInput = removeSeparatorInitializer(formattedInput);
+            int result = sum(refinedInput, getCustomSeparator(userInput));
             printResult(result);
-        }
-        else {
+        } else {
             throw new IllegalArgumentException("잘못된 입력입니다.");
         }
     }
@@ -52,35 +51,42 @@ public class Application {
     }
 
     private String formatBackslash(String input) {
-        return input.replace("\\", "\\\\");
+        String str = input.replace("\\", "\\\\");
+        return str.replace("\n", "\\n");
     }
 
     private String getCustomSeparator(String input) {
-        String[] arr = input.split("//|\\n");
-        return arr[1];
+        int idx = input.indexOf("\\n");
+        return input.substring(2, idx);
     }
 
     private String removeSeparatorInitializer(String input) {
-        return input.substring(3 + getCustomSeparator(input).length());
+        return input.substring(4 + getCustomSeparator(input).length());
     }
 
     private boolean isStringWithCustomSeparator(String input) {
-        String str = removeSeparatorInitializer(input);
+        String str = formatBackslash(input);
+
+        int idx = str.indexOf("\\n");
+        if (idx == -1) {
+            throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
+        }
+        str = removeSeparatorInitializer(str);
         str = removeNumber(str);
         str = removeSeparator(str, getCustomSeparator(input));
         return input.indexOf("//") == 0 && str.isEmpty();
     }
 
     private String formatSeparator(String separator) {
-        return "[" + separator + "]";
+        return "[" + separator.replace("\\", "\\\\") + "]";
     }
 
-    private int sum(String str, String separator) {
-        if (str.isEmpty()) {
+    private int sum(String input, String separator) {
+        if (input.isEmpty()) {
             return 0;
         }
 
-        String[] nums = str.split(formatSeparator(separator));
+        String[] nums = input.split(formatSeparator(separator));
         int result = 0;
         for (String num : nums) {
             result += Integer.parseInt(num);
