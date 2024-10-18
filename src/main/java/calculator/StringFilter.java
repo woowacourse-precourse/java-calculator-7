@@ -2,7 +2,6 @@ package calculator;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 
 public class StringFilter {
     private final String DEFAULT_DELIMITER = "[,:]";
@@ -15,7 +14,6 @@ public class StringFilter {
             return sanitizedInput;
         }
         else return customDelimiter(sanitizedInput);
-
     }
 
     //문자열 나누기
@@ -28,16 +26,6 @@ public class StringFilter {
                 .toArray(String[]::new);
     }
 
-    //구분자 검증
-    private boolean validateDelimiter(String[] splitedString) {
-        try{
-            Integer.parseInt(splitedString[0]);
-            return true;
-        }catch (NumberFormatException e){
-            return false;
-        }
-    }
-    
     //입력값에 대한 음수,양수 검증
     private static void validateNegativeNumber(String[] splitedString) {
         for (String numberStr : splitedString) {
@@ -47,23 +35,24 @@ public class StringFilter {
         }
     }
 
+    //구분자 검증
+    private boolean validateDelimiter(String[] splitedString) {
+        try{
+            Integer.parseInt(splitedString[0]);
+            return true;
+        }catch (NumberFormatException e){
+            return false;
+        }
+    }
+
     //커스텀 구분자 추출
     private String[] customDelimiter(String[] filteredString) {
         String s = String.join("", filteredString);
         String replaceInput = s.replace("//", "").replace("\\n", "").trim();
         String customDelimiter = replaceInput.substring(0, 1);
-        customDelimiter = validateMetaCharacter(customDelimiter);
 
-        return replaceInput.substring(1).split(customDelimiter);
+        return replaceInput.substring(1).split(Pattern.quote(customDelimiter));
     }
 
-    //커스텀 구분자 추출시 입력된 메타문자 검증
-    private static String validateMetaCharacter(String customDelimiter) {
-        try {
-            Pattern.compile(customDelimiter);
-        } catch (PatternSyntaxException e) {
-            customDelimiter = new StringBuilder().append("\\").append(customDelimiter).toString();
-        }
-        return customDelimiter;
-    }
+
 }

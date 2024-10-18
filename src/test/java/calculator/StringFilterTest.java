@@ -1,12 +1,7 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.Console;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.util.Scanner;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class StringFilterTest {
     StringFilter stringFilter = new StringFilter();
@@ -30,7 +25,7 @@ class StringFilterTest {
         Assertions.assertEquals(6,result3);
         Assertions.assertEquals(6,result4);
     }
-//"\n1"2"3
+
     @Test
     void 커스텀_구분자_입력(){
         String input1 = "//+\\n1+2+3";
