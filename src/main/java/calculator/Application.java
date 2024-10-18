@@ -8,19 +8,27 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
+        // 입력이 null일 경우 0 반환
+        if (input == null) {
+            System.out.println("결과 : 0");
+            return;
+        }
+
         // extended 모드 확인
         boolean extendedMode = false;
+
         if (input.length() >= 5 && input.charAt(0) == '/' && input.charAt(1) == '/' &&
                 input.charAt(3) == '\\' && input.charAt(4) == 'n') {
             extendedMode = true;
         }
 
-        System.out.println("Extended Mode: " + extendedMode);
+        // System.out.println("Extended Mode: " + extendedMode);
 
         try {
             // 입력된 문자열을 처리하고 결과를 출력
             BigInteger result = processInput(input, extendedMode);
             System.out.println("결과 : " + result);
+
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
         }
@@ -29,7 +37,7 @@ public class Application {
     // 입력 문자열을 처리하는 함수
     private static BigInteger processInput(String input, boolean extendedMode) {
         // 입력 문자열의 길이가 0일 경우 0 반환
-        if (input.length() == 0) {
+        if (input.isEmpty()) {
             return BigInteger.ZERO;
         }
 
