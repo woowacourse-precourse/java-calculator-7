@@ -1,5 +1,6 @@
 package calculator.delimiterExtractor;
 
+import calculator.dto.DelimiterDto;
 import java.util.regex.Pattern;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +24,9 @@ public class DelimiterExtractorTest {
 
     @Test
     void 기본구분자추출() {
-        String extractDelimiter = defaultDelimiterExtractor.extractDelimiter("1,2:3");
+        DelimiterDto delimiterDto = defaultDelimiterExtractor.extractDelimiter("1,2:3");
+
+        String extractDelimiter = delimiterDto.getDelimiter();
         String expected = ",|:";
         Assertions.assertEquals(expected, extractDelimiter);
     }
@@ -31,7 +34,9 @@ public class DelimiterExtractorTest {
 
     @Test
     void 커스텀구분자추출() {
-        String extractDelimiter = customDelimiterExtractor.extractDelimiter("//;\\n1;2;3");
+        DelimiterDto delimiterDto = customDelimiterExtractor.extractDelimiter("//;\\n1;2;3");
+
+        String extractDelimiter = delimiterDto.getDelimiter();
         String expected = ";";
         expected = Pattern.quote(expected);
         Assertions.assertEquals(expected, extractDelimiter);
@@ -46,7 +51,9 @@ public class DelimiterExtractorTest {
             "  '//;\\+{2}\\n1;\\+{2}2;\\+{2}3'    , ';\\+{2}'   "
     })
     void 커스텀구분자추출_여러개(String input, String expected) {
-        String extractDelimiter = customDelimiterExtractor.extractDelimiter(input);
+        DelimiterDto delimiterDto = customDelimiterExtractor.extractDelimiter(input);
+
+        String extractDelimiter = delimiterDto.getDelimiter();
         expected = Pattern.quote(expected);
 
         System.out.println("extractDelimiter = " + extractDelimiter);
