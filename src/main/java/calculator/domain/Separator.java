@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Separator {
@@ -22,6 +23,32 @@ public class Separator {
 
     // 구분자를 사용하여 숫자를 분리하는 메서드
     private String splitByDelimiters(String input, List<String> delimiters) {
-        return "";
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            if (Character.isDigit(c) || c == '-') {
+                // 첫 숫자가 발견되면 해당 위치부터 끝까지의 문자열을 반환
+                input = input.substring(i);
+                break;
+            }
+        }
+
+        String delimiterRegex = String.join("|", delimiters);
+        String[] tokens = input.split(delimiterRegex);
+
+        System.out.println(Arrays.toString(tokens));
+
+        // 각 토큰을 공백 없이 연결된 하나의 문자열로 반환
+        StringBuilder separatedNumbers = new StringBuilder();
+        for (String token : tokens) {
+            if (!token.isEmpty()) {
+                separatedNumbers.append(token.trim()).append(",");
+            }
+        }
+
+        // 마지막 쉼표 제거
+        if (separatedNumbers.length() > 0) {
+            separatedNumbers.setLength(separatedNumbers.length() - 1);
+        }
+        return separatedNumbers.toString();
     }
 }
