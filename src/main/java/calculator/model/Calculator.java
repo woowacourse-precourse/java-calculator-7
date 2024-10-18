@@ -17,12 +17,7 @@ public class Calculator {
 
     private void calculateSum(String[] numbers) {
         for (String number : numbers) {
-            try {
-                validateNumber(number);
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-                throw e;
-            }
+            validateNumber(number);
             result += Integer.parseInt(number);
         }
     }
