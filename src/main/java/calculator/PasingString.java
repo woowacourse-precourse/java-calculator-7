@@ -1,24 +1,35 @@
 package calculator;
 
 public class PasingString {
+    private static final int BASIC_DELIMITER_SIZE = 3;
     private static int findStartIndex;
     private static String parseString;
 
     public static String pasingString(String input, String delimiter) {
-        findStartString(input);
+        findStartString(input, delimiter);
         isNumeric(parseString, delimiter);
         return parseString;
     }
 
-    public static void findStartString(String input) {
-        for (int i = 0; i < input.length(); i++) {
-            if (Character.isDigit(input.charAt(i))) {
-                findStartIndex = i;
-                break;
+    public static void findStartString(String input, String delimiter) {
+        if (delimiter.length() != BASIC_DELIMITER_SIZE) {
+            findStartIndex = 5;
+            if (delimiter.length() == 4) {
+                findStartIndex = 4;
             }
         }
         parseString = input.substring(findStartIndex);
+        findStartNumber();
         emptyString(parseString);
+    }
+
+    public static void findStartNumber() {
+        for (int i = 0; i < parseString.length(); i++) {
+            if (Character.isDigit(parseString.charAt(i))) {
+                parseString = parseString.substring(i);
+                return;
+            }
+        }
     }
 
     public static void isNumeric(String startString, String delimiter) {
