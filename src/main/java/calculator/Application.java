@@ -24,22 +24,33 @@ public class Application {
             return;
         }
 
-        // 커스텀 구분자가 존재한다면 구분자를 추출해서 separator 변수에 저장하고,
-        // 존재하지 않으면 결과를 출력
-        // (기본 구분자를 사용한다면 문자열 분리 후 계산, 사용하지 않는다면 정수로 변환 후 출력)(예정)
-        if (exitsCustomSeparator(input)) {
-            separator = findCustomSeparator(input);
-            System.out.println(separator);
-        } else {
-            System.out.println("결과 : " + Integer.parseInt(input));
-            return;
-        }
-
         try {
-            validateInput(input);
-            System.out.println("유효한 입력입니다: " + input);
+            // (기본 구분자를 사용한다면 문자열 분리 후 계산, 사용하지 않는다면 정수로 변환 후 출력)(예정)
+            if (exitsCustomSeparator(input)) {
+                // 커스텀 구분자가 존재한다면 구분자를 추출해서 separator 변수에 저장
+                separator = findCustomSeparator(input);
+
+                // 커스텀 구분자 생성하는 부분 자르고 문자열 가져오기
+
+
+                // 구분자를 이용해 문자열 분리
+
+                // 사용자 입력 검증
+                // 문자열배열에 있는 문자열을 검증하는 함수 호출(예정)
+                // validateInput(inputArray);
+
+                // 계산
+
+            } else {
+                // 사용자 입력 검증
+                validateInput(input);
+
+                // 존재하지 않으면 결과를 출력
+                System.out.println("결과 : " + Integer.parseInt(input));
+            }
         } catch (IllegalArgumentException e) {
-            // 에러 메시지 출력
+
+            // 검증 실패하면 에러 메시지 출력
             System.err.println(e.getMessage());
         }
 
