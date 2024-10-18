@@ -7,13 +7,13 @@ import java.util.Set;
 
 public class Delimiter {
 
-    Set<Character> delimiterSet = new HashSet<>();
+    private final Set<Character> delimiterSet = new HashSet<>();
 
     public Delimiter() {
         registerBasicDelimiters(BasicDelimiter.values());
     }
 
-    public void registerBasicDelimiters(BasicDelimiter[] delimiters) {
+    private void registerBasicDelimiters(BasicDelimiter[] delimiters) {
         for (BasicDelimiter basicDelimiter : delimiters) {
             delimiterSet.add(basicDelimiter.getSymbol());
         }
@@ -26,9 +26,4 @@ public class Delimiter {
     public boolean isRegisteredDelimiter(char delimiter) {
         return delimiterSet.contains(delimiter);
     }
-
-    public Set<Character> getDelimiterSet() {
-        return delimiterSet;
-    }
-
 }
