@@ -33,6 +33,7 @@ public class Application {
             printResult(result);
         } catch (IllegalArgumentException e) {
             printError(e.getMessage());
+            throw e;
         }
     }
 
