@@ -4,7 +4,6 @@ package calculator.numberExtractor;
 import calculator.dto.NumberDto;
 import calculator.repository.NumberRepository;
 import calculator.validator.Validator;
-import java.util.ArrayList;
 
 public class DefaultNumberExtractor implements NumberExtractor {
 
@@ -12,7 +11,6 @@ public class DefaultNumberExtractor implements NumberExtractor {
     public NumberDto extractNumbers(String input, String defaultDelimiter) {
 
         String[] splitDefaultDelimiter = input.split(defaultDelimiter);
-        ArrayList<Integer> repository = new ArrayList<>();
         NumberRepository numberRepository = new NumberRepository();
 
         for (String splitDefault : splitDefaultDelimiter) {
@@ -28,7 +26,7 @@ public class DefaultNumberExtractor implements NumberExtractor {
             }
 
         }
-        return new NumberDto(numberRepository.getNumberRepository());
+        return numberRepository.getNumberDto();
 
     }
 

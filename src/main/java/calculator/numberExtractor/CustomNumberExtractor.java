@@ -25,7 +25,7 @@ public class CustomNumberExtractor implements NumberExtractor {
                 throw new IllegalArgumentException();
             }
         }
-        return new NumberDto(numberRepository.getNumberRepository());
+        return numberRepository.getNumberDto();
 
     }
 
