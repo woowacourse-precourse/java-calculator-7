@@ -4,12 +4,9 @@ public abstract class ContentInspector {
     private String targetContent;
     private String delimiterGroup;
 
-    public ContentInspector(String targetContent) {
-        this.targetContent = targetContent;
-    }
-
-
     public abstract String getDelimiterGroup();
+
+    public abstract String getContent();
 
     protected void inspecting() {
         for (int i = 0; i < targetContent.length(); i++) {
