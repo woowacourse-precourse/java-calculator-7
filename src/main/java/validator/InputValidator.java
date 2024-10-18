@@ -14,13 +14,13 @@ public class InputValidator {
     private static boolean isMinusDelimiter = false;
 
     public static void checkInput(final String input) {
-        hasNumberAndSeparator(input);
+        hasNumberAndDelimiter(input);
         hasNumber(input);
-        hasSeparator(input);
+        hasDelimiter(input);
         hasMinusNumber(input);
     }
 
-    private static void hasNumberAndSeparator(final String inputs) {
+    private static void hasNumberAndDelimiter(final String inputs) {
         if (inputs.length() == 0 || inputs.contains(" ")) {
             throw new IllegalArgumentException("올바른 구분자와 양수를 입력해야 합니다.");
         }
@@ -36,16 +36,16 @@ public class InputValidator {
         throw new IllegalArgumentException("양수도 함께 입력해야 합니다.");
     }
 
-    private static void hasSeparator(final String inputs) {
+    private static void hasDelimiter(final String inputs) {
         if (inputs.contains(REGEX_CUSTOM_DELIMITER_START) && inputs.contains(REGEX_CUSTOM_DELIMITER_END)) {
-            hasCustomSeparator(inputs);
+            hasCustomDelimiter(inputs);
             return;
         }
 
-        hasDefaultSeparator(inputs);
+        hasDefaultDelimiter(inputs);
     }
 
-    private static void hasCustomSeparator(String inputs) {
+    private static void hasCustomDelimiter(String inputs) {
         inputs = inputs.replace(REGEX_CUSTOM_DELIMITER_START, "").replace(REGEX_CUSTOM_DELIMITER_END, "");
         for (String input : inputs.split("")) {
             if (input.matches(REGEX_CUSTOM_DELIMITER)) {
@@ -57,7 +57,7 @@ public class InputValidator {
         throw new IllegalArgumentException("올바른 구분자도 함께 입력해야 합니다.");
     }
 
-    private static void hasDefaultSeparator(final String inputs) {
+    private static void hasDefaultDelimiter(final String inputs) {
         for (String input : inputs.split("")) {
             if (input.matches(REGEX_DELIMITER)) {
                 return;

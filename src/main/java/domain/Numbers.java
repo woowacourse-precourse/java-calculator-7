@@ -14,13 +14,13 @@ public class Numbers {
 
     private List<Integer> numbers = new ArrayList<>();
 
-    public Numbers(final String input, final String separators) {
-        extractNumbers(input, separators);
+    public Numbers(final String input, final String delimiters) {
+        extractNumbers(input, delimiters);
     }
 
-    private void extractNumbers(final String input, final String separators) {
+    private void extractNumbers(final String input, final String delimiters) {
         String regex = new StringBuilder()
-                .append(REGEX_START + ESCAPE_TEXT + separators + REGEX_END).toString();
+                .append(REGEX_START + ESCAPE_TEXT + delimiters + REGEX_END).toString();
 
         if (input.contains("//")) {
             String removeCustomOperator = input.replaceAll("//", "").replaceAll("\\\\n", "");

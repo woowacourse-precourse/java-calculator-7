@@ -3,7 +3,7 @@ package domain;
 import java.util.Arrays;
 import java.util.HashSet;
 
-public class Separators {
+public class Delimiter {
 
     private static final String CUSTOM_START_POINT = "//";
     private static final String CUSTOM_END_POINT = "\\\\n";
@@ -11,22 +11,22 @@ public class Separators {
     private static final int OPERATOR_DUPLICATE_VALUE = 2;
     private static final String REGEX_HASHSET_UNNECESSARY = "[\\[\\],]";
 
-    private String separators;
+    private String delimiters;
 
-    public Separators(final String input) {
-        separators = filterSeparators(input);
+    public Delimiter(final String input) {
+        delimiters = filterDelimiters(input);
     }
 
-    private String filterSeparators(final String input) {
+    private String filterDelimiters(final String input) {
         if (input.contains(CUSTOM_START_POINT)) {
-            String separators = input.split(CUSTOM_END_POINT)[0].replaceAll(CUSTOM_START_POINT, "")
+            String delimiters = input.split(CUSTOM_END_POINT)[0].replaceAll(CUSTOM_START_POINT, "")
                     .replaceAll(REGEX_NUMBER, "");
 
-            if (isDuplicated(separators)) {
-                return removeDuplication(separators);
+            if (isDuplicated(delimiters)) {
+                return removeDuplication(delimiters);
             }
 
-            return separators;
+            return delimiters;
         }
 
         return input.replaceAll(REGEX_NUMBER, "");
@@ -47,7 +47,7 @@ public class Separators {
         return set.toString().replace(REGEX_HASHSET_UNNECESSARY, "");
     }
 
-    public String getSeparators() {
-        return separators;
+    public String getDelimiters() {
+        return delimiters;
     }
 }
