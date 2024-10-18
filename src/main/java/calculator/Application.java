@@ -89,7 +89,11 @@ public class Application {
     * 배열의 문자열 요소들을 정수형으로 변환하여 합을 구하는 메서드
      */
     public static int sumNumbers(String[] numbers){
-        throw new UnsupportedOperationException("sumNumbers() 아직 구현되지 않았습니다.");
+        int sum = 0;
+        for (String number : numbers){
+            sum += Integer.parseInt(number);
+        }
+        return sum;
     }
 }
 

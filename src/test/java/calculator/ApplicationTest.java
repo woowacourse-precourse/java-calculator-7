@@ -56,6 +56,14 @@ class ApplicationTest extends NsTest {
         assertThat(result).isEqualTo(answer);
     }
 
+    @Test
+    void 큰_숫자_계산() {
+        String[] numbers = {"1000000", "2000000", "3000000"};
+        int result = Application.sumNumbers(numbers);
+        int answer = 6000000;
+        assertThat(result).isEqualTo(answer);
+    }
+
 
     // 커스텀 구분자가 문자열일 경우 subString에서의 구분자들이 모두 커스텀 구분자 문자열을 포함해야하는 테스트
 
