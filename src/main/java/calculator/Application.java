@@ -22,7 +22,18 @@ public class Application {
 
         String[] split1 = input.split(",|:");
 
-        int resultSum = Stream.of(split1).mapToInt(Integer::parseInt).sum();
+        int resultSum = Stream.of(split1).mapToInt(s ->{
+
+            for(Character c : s.toCharArray()){
+                if(!Character.isDigit(c)) throw new IllegalArgumentException("숫자를 입력해주세요.");
+            }
+
+            int num = Integer.parseInt(s);
+            if(num < 0) throw new IllegalArgumentException("양수값을 입력해주세요.");
+
+            return num;
+
+        }).sum();
 
         System.out.println("결과 : " + resultSum);
 
