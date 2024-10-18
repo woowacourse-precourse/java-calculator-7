@@ -34,9 +34,17 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트_올바르지_않은_입력_형식() {
+    void 예외_테스트_올바르지_않은_입력_형식1() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("/;\\n1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_올바르지_않은_입력_형식2() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\\|n1"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
