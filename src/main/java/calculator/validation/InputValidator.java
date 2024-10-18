@@ -21,16 +21,15 @@ public class InputValidator {
     private void validateCustomDelimiter(String numbers){
         Pattern pattern = Pattern.compile("//(.*?)\n");
         Matcher matcher = pattern.matcher(numbers);
-        if (!numbers.contains("//") || !numbers.contains("\n")){
+        if (!matcher.find()) {
             throw new IllegalArgumentException(INVALID_CUSTOM_DELIMITER);
         }
-        if (matcher.group(1).matches(".*\\d.*")){
-            throw new IllegalArgumentException(INVALID_CUSTOM_DELIMITER);
-        }
-        if (matcher.group(1) == "" || matcher.group(1) == " "){
+        String customDelimiter = matcher.group(1);
+        if (customDelimiter.matches(".*\\d.*") || customDelimiter.trim().isEmpty()) {
             throw new IllegalArgumentException(INVALID_CUSTOM_DELIMITER);
         }
     }
+    
 
     private void validateNatureNumber(CustomDelimiter formula){
         String numbers = formula.getNumbersPart();

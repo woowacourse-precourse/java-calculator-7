@@ -28,10 +28,10 @@ public class MainController {
     public void readUserFormula(){
         this.customDelimiter = new CustomDelimiter(inputView.readUserNumbers());
         inputValidator.mainInputValidator(customDelimiter);
-        calculate(customDelimiter.getFormula());
+        calculate();
     }
 
-    public void calculate(String formula){
+    public void calculate(){
         Splitter splitter = new Splitter(customDelimiter);
         printSumToUser(splitter.getSplittedNumbers());
     }
