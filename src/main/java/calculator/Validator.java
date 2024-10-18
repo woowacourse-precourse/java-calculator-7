@@ -2,6 +2,8 @@ package calculator;
 
 public class Validator {
 
+    private static final String INVALID_PAIR_ERROR_MESSAGE = "커스텀 구분자의 형식이 올바르지 않습니다.";
+
     public static void checkValidCustomFormat(String inputData) {
         char[] inputDataArray = inputData.toCharArray();
         int count = 0;
@@ -15,9 +17,9 @@ public class Validator {
             }
             index++;
         }
-        
+
         if (count != 1) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(INVALID_PAIR_ERROR_MESSAGE);
         }
     }
 
