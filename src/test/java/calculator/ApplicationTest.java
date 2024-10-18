@@ -53,6 +53,14 @@ class ApplicationTest extends NsTest {
         }
 
         @Test
+        void 성공_커스텀구분자_메타문자가포함된구분자() {
+            assertSimpleTest(() -> {
+                run("//(\\n1(2");
+                assertThat(output()).contains("결과 : 3");
+            });
+        }
+
+        @Test
         void 실패_커스텀구분자_숫자로만이루어진구분자() {
             assertSimpleTest(() ->
                     assertThatThrownBy(() -> runException("//5\\n15253"))
@@ -94,7 +102,7 @@ class ApplicationTest extends NsTest {
         @Test
         void 실패_소수() {
             assertSimpleTest(() ->
-                    assertThatThrownBy(() -> runException("//(\\n1(2.2,23"))
+                    assertThatThrownBy(() -> runException("1!2.2,23"))
                             .isExactlyInstanceOf(IllegalArgumentException.class)
                             .hasMessage("정수 범위를 벗어난 수 또는 구분자를 제외한 문자열을 입력할 수 없습니다.")
             );
