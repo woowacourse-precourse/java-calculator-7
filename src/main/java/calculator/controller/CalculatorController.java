@@ -32,7 +32,8 @@ public class CalculatorController {
             throw new IllegalArgumentException("10개 이상의 숫자를 더할 수 없습니다.");
         }
 
-        Long result = inputNumbers.stream().mapToLong(Long::longValue).sum();
+        long result = inputNumbers.stream().mapToLong(Long::longValue).sum();
+        OutputView.printResult("결과 : " + result);
 
     }
 }

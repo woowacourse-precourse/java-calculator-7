@@ -12,4 +12,8 @@ public class OutputView {
     public static void printResult(String message) {
         System.out.println(message);
     }
+
+    public static void printResult(long message) {
+        System.out.println(message);
+    }
 }
