@@ -1,14 +1,17 @@
 package calculator.domain;
 
+import calculator.view.InputView;
+
 public class Calculator {
 
     private Input input;
     private Separator separator;
     private Numbers number;
+    private InputView inputView;
 
     public void start() {
-        //!!추후에 이 기능은 다른 객체에서 실행 해야할까?
-        System.out.println("덧셈할 문자열을 입력해주세요.");
+        inputView = new InputView();
+        inputView.showStartMessage();
 
         input = new Input();
         input.readFirstInput();
