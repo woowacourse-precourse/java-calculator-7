@@ -49,7 +49,16 @@ public class Input {
         }
     }
 
+    public String dealEmpty(String rawText) {
+        if (rawText.length() == 0) {
+            return "0";
+        }
+        return rawText;
+    }
+
     public void getInputText(String rawText) {
+        rawText = dealEmpty(rawText);
+
         validInputText(rawText.charAt(rawText.length()-1));
         int customDelimiterEndIndex = checkHasCustomDelimiter(rawText);
 
