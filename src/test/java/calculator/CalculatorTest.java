@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class CalculatorTest {
 
@@ -37,5 +38,14 @@ class CalculatorTest {
         String[] input = {"1", "2", "3"};
         int result = calculator.calculate(input);
         assertThat(result).isEqualTo(6);
+    }
+
+    @DisplayName("음수 문자열을 포함할 경우 IllegalArgumentException을 던져야 한다.")
+    @Test
+    void calculateWithNegative() {
+        String[] input = {"1", "2", "-3"};
+        assertThatThrownBy(() -> calculator.calculate(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("입력값이 올바르지 않습니다.");
     }
 }
