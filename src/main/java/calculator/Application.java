@@ -7,4 +7,13 @@ public class Application {
         }
         return input;
     }
+
+    private String extractCustomSymbols(String input) {
+        if (input.indexOf("/") == 0) {
+            int startIndex = input.indexOf("/") + 2;
+            int endIndex = input.indexOf("\\");
+            return input.substring(startIndex, endIndex);
+        }
+        return "";
+    }
 }
