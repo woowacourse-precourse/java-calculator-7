@@ -11,14 +11,16 @@
 - domain
     - Calculator
     - Number
+    - Operations
 
 - view
+    - InputHandler
     - InputView
     - OutputView
 
 ## 기능 목록
 
-- [ ] 추출한 숫자를 더하기
+- [x] 추출한 숫자를 더하기 - Operations#add()
 
 ### 입력
 
