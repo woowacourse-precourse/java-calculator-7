@@ -28,5 +28,4 @@ public class CompositeTokenExtractor implements TokenExtractor {
         this.extractors.add(extractor);
     }
 
-
 }

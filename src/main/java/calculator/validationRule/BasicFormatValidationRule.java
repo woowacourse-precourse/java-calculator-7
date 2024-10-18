@@ -6,14 +6,13 @@ public class BasicFormatValidationRule implements ValidationRule {
 
     @Override
     public void validate(String input) {
-        if (!input.matches("^\\d+([,:]\\d+)*$")) {
+        if (!canHandle(input)) {
             throw new IllegalArgumentException(잘못된_기본_입력_형식입니다);
         }
     }
 
     @Override
     public boolean canHandle(String input) {
-        return true;
+        return input.matches("^\\d+([,:]\\d+)*$") || input.matches("^//.\n\\d+([,:]\\d+)*$");
     }
-
 }

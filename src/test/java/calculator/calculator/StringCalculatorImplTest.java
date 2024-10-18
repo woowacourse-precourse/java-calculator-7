@@ -24,7 +24,7 @@ class StringCalculatorImplTest {
     @DisplayName("그냥 동작 테스트")
 
     @ParameterizedTest
-    @ValueSource(strings = {"1,2,3", "1:2:3", "1,2:3"})
+    @ValueSource(strings = {"1,2,3", "1:2:3", "1,2:3", "//;\\n1;2;3"})
     void test(String input) {
         InputValidator inputValidator = new StringCalculatorValidator(
                 new CompositeValidationRule(List.of(
@@ -42,7 +42,7 @@ class StringCalculatorImplTest {
 
         StringCalculatorImpl stringCalculator = new StringCalculatorImpl(inputValidator, tokenExtractor, numberParser);
         int calculate = stringCalculator.calculate(input);
-        System.out.println(calculate);
+//        System.out.println(calculate);
         Assertions.assertEquals(calculate, 6);
     }
 }

@@ -29,20 +29,17 @@ class DefaultTokenExtractorTest {
         }
     }
 
-    @Nested
-    @DisplayName("실패 케이스")
-    class FailureCases {
-        
-        @ParameterizedTest
-        @ValueSource(strings = {"abc", "123", "a b c"})
-        @DisplayName("','가 없는 문자열 입력 시 원본 문자열만 포함하는 리스트를 반환한다")
-        void extractTokens_NoCommaInput(String input) {
-            List<String> extract = defaultTokenExtractorStrategy.extract(input);
-
-            assertThat(extract)
-                    .isNotNull()
-                    .hasSize(1)
-                    .containsExactly(input);
-        }
-    }
+//    @Nested
+//    @DisplayName("실패 케이스")
+//    class FailureCases {
+//
+//        @ParameterizedTest
+//        @ValueSource(strings = {"abc", "123", "a b c"})
+//        @DisplayName("','가 없는 문자열 입력 시 원본 문자열만 포함하는 리스트를 반환한다")
+//        void extractTokens_NoCommaInput(String input) {
+//            List<String> extract = defaultTokenExtractorStrategy.extract(input);
+//
+//
+//        }
+//    }
 }

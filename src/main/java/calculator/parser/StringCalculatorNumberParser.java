@@ -8,8 +8,8 @@ public class StringCalculatorNumberParser implements NumberParser {
     public List<Integer> parseNumbers(List<String> numberStrings) {
         List<Integer> numbers = new ArrayList<>();
         for (String numberString : numberStrings) {
-            if (!numberString.isEmpty()) {
-                int number = Integer.parseInt(numberString);
+            if (!numberString.trim().isEmpty()) {
+                int number = Integer.parseInt(numberString.trim());
                 if (number < 0) {
                     throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
                 }
