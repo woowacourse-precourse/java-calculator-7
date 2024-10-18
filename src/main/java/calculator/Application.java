@@ -16,11 +16,7 @@ public class Application {
 
         String[] stringArray = splitDelimiter(input);
 
-        int[] intArray = new int[stringArray.length];
-
-        isNumeric(stringArray, intArray);
-
-        int sum = calculateNumber(intArray);
+        int sum = calculateNumber(isNumeric(stringArray));
 
         String answer = getAnswer(sum);
         System.out.println(answer);
@@ -41,14 +37,17 @@ public class Application {
         return sum;
     }
 
-    private static void isNumeric(String[] word, int[] num) {
-        for (int i = 0; i < word.length; i++) {
-            if (!word[i].matches("[0-9]+")) {
+    private static int[] isNumeric(String[] words) {
+        int[] nums = new int[words.length];
+        for (int i = 0; i < words.length; i++) {
+            if (!words[i].matches("[0-9]+")) {
                 throw new IllegalArgumentException("숫자가 아닙니다.");
             }
 
-            num[i] = Integer.parseInt(word[i]);
+            nums[i] = Integer.parseInt(words[i]);
         }
+
+        return nums;
     }
 
     private static String[] splitDelimiter(String input) {
