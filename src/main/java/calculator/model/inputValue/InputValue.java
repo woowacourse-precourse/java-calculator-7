@@ -54,14 +54,8 @@ public class InputValue {
             if (operand < 0) {
                 throw new IllegalArgumentException("입력값 중에 음수가 있습니다!");
             }
-        }
 
-        try{
-            for(String number : numbers) {
-                positiveIntegers.add(Integer.parseInt(number));
-            }
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("잘못된 구분자를 사용했습니다!");
+            positiveIntegers.add(operand);
         }
     }
 
