@@ -1,5 +1,8 @@
 package calculator.model;
 
+import static calculator.utils.StringUtils.getFirstChar;
+import static calculator.utils.StringUtils.isEmptyString;
+
 public class CustomDelimiterProcessor {
     private static final String CUSTOM_DELIMITER_FIRST_FORMAT = "//";
     private static final String CUSTOM_DELIMITER_LAST_FORMAT = "\n";
@@ -18,10 +21,10 @@ public class CustomDelimiterProcessor {
     }
 
     private boolean usesCustomDelimiter(String inputString) {
-        if (inputString.length() == 0) {
+        if (isEmptyString(inputString)) {
             return false;
         }
-        char firstChar = inputString.charAt(0);
+        char firstChar = getFirstChar(inputString);
         return firstChar == CUSTOM_DELIMITER_PREFIX;
     }
 

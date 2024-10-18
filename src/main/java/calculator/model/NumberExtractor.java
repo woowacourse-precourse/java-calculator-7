@@ -1,5 +1,7 @@
 package calculator.model;
 
+import static calculator.utils.StringUtils.getFirstChar;
+import static calculator.utils.StringUtils.isEmptyString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +10,7 @@ import java.util.StringTokenizer;
 public class NumberExtractor {
     public Numbers extractNumber(String inputString, Delimiters delimiters) {
         Numbers numbers = new Numbers();
-        if (inputString.length() == 0) {
+        if (isEmptyString(inputString)) {
             return numbers;
         }
         if (!isStartingWithDigit(inputString)) {
@@ -24,7 +26,7 @@ public class NumberExtractor {
     }
 
     private boolean isStartingWithDigit(String inputString) {
-        char firstChar = inputString.charAt(0);
+        char firstChar = getFirstChar(inputString);
         return Character.isDigit(firstChar);
     }
 
