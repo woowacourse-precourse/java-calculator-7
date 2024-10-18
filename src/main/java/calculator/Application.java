@@ -1,17 +1,20 @@
 package calculator;
 
 import calculator.calculator.Calculator;
-import calculator.input.Input;
-import calculator.output.Output;
+import calculator.input.InputReader;
+import calculator.output.OutputViewer;
+import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        Output.printInputMessage();
+        OutputViewer.printStartMessage();
 
-        Calculator calculator = new Calculator();
-        int result = calculator.add(Input.getInputString());
+        InputReader inputReader = new InputReader(Console.readLine());
+        Calculator calculator = new Calculator(inputReader);
 
-        Output.printResult(result);
+        int result = calculator.add();
+
+        OutputViewer.printResultMessage(result);
     }
 }

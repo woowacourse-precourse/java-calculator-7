@@ -1,48 +1,36 @@
 package calculator.calculator;
 
-import calculator.output.Output;
+import calculator.constant.Constant;
+import calculator.input.InputReader;
+import calculator.input.InputValidator;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Calculator {
 
-    private final String ORIGIN_DELIMITER_REGEX = ",|:";
-    private final String CUSTOM_DELIMITER_PATTERN = "//(.*)\\\\n(.*)";
+    private static final Pattern customPattern = Pattern.compile("//(.*)\\\\n(.*)");
 
-    public Calculator() {
+    private final InputReader inputReader;
+
+    public Calculator(InputReader inputReader) {
+        this.inputReader = inputReader;
     }
 
-    public int add(String input) {
-        if (isBlank(input)) {
-            throw new IllegalArgumentException("입력 값이 null 또는 비어있을 수 없습니다.");
-        }
-
-        return Arrays.stream(split(input))
+    public int add() {
+        return Arrays.stream(split(inputReader.getInput()))
                 .map(Integer::parseInt)
-                .peek(this::validateNegative)
+                .peek(InputValidator::validateNonNegative)
                 .reduce(0, Integer::sum);
     }
 
     private String[] split(String input) {
-        Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(input);
-
+        Matcher matcher = customPattern.matcher(input);
         if (matcher.find()) {
-            String customDelimiter = matcher.group(1);
-            String content = matcher.group(2);
-            return content.split(Pattern.quote(customDelimiter));
+            String delimiter = matcher.group(1);
+            return matcher.group(2).split(Pattern.quote(delimiter));
         }
 
-        return input.split(ORIGIN_DELIMITER_REGEX);
-    }
-
-    private boolean isBlank(String input) {
-        return input == null || input.isEmpty();
-    }
-
-    private void validateNegative(int n) {
-        if (n < 0) {
-            throw new IllegalArgumentException("입력 값이 음수가 될 수 없습니다.");
-        }
+        return input.split(Constant.ORIGIN_DELIMITER_REGEX);
     }
 }
