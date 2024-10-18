@@ -7,7 +7,7 @@ public class StringCalculator {
         if (input == null || input.isEmpty()) {
             return 0;
         }
-        // 구분자 ","
+        // 구분자 "," 입력
         if(input.contains(",")){
             String[] values =  input.split(",");
             int sum = 0;
