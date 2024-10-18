@@ -7,6 +7,10 @@ public class CalculatorModel {
 
     public String[] StringSplitter(String input) {
 
+        if (input == null || input.isEmpty()) {
+            return new String[0];
+        }
+
         String delimiter = ",|:";
         if (input.startsWith("//")) {
             Matcher matcher = Pattern.compile("//(.+)\n(.+)").matcher(input);
@@ -23,6 +27,10 @@ public class CalculatorModel {
     public int add(String[] numbers) {
         int sum = 0;
         int i = 0;
+
+        if (numbers == null) {
+            return sum;
+        }
 
         for (String number : numbers) {
             sum += Integer.parseInt(number);
