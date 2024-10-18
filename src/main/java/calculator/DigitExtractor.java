@@ -26,10 +26,10 @@ public class DigitExtractor {
     }
 
     /**
-     * 커스텀 구분자 추가
+     * 커스텀 구분자 설정
      */
-    private void addCustomDelimiter() {
-
+    private void setCustomDelimiter(char customDelimiter) {
+        delimiters[3] = customDelimiter;
     }
 
 }
