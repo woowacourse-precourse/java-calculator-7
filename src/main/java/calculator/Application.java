@@ -8,11 +8,7 @@ public class Application {
         String input = Console.readLine();
 
         StringCalculator calculator = new StringCalculator();
-        try {
-            int result = calculator.add(input);
-            System.out.println("결과 : " + result);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+        int result = calculator.add(input);
+        System.out.println("결과 : " + result);
     }
 }
