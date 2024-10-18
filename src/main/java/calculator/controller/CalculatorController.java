@@ -20,9 +20,9 @@ public class CalculatorController {
     public void runCalculator(){
         String input = viewManager.printInputMessage();
         List<String> delimeterList = preprocessor.preprocessDelimeter(input);
-        String preprocessedString = preprocessor.preprocessCalculationSegment(input);
-        preprocessor.validateCalculationSegment(delimeterList,preprocessedString);
-        Integer answer = mainProcessor.calculate(preprocessor.extractSumNumbers(delimeterList,preprocessedString));
+        String calculationSegment = preprocessor.preprocessCalculationSegment(input);
+        preprocessor.validateCalculationSegment(delimeterList,calculationSegment);
+        Integer answer = mainProcessor.calculate(preprocessor.extractSumNumbers(delimeterList,calculationSegment));
         viewManager.printResult(answer);
     }
 }
