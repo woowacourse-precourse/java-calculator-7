@@ -2,6 +2,10 @@ package calculator.split;
 
 import static calculator.split.StringSplit.getBackString;
 import static calculator.split.StringSplit.getFrontString;
+import static calculator.split.StringSplit.getSeperatorArray;
+import static calculator.split.StringSplit.validateFrontString;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -13,7 +17,7 @@ class StringSplitTest {
     void extractFrontString() {
         String string = "//abc\n123";
 
-        Assertions.assertEquals(getFrontString(string), "abc");
+        assertEquals(getFrontString(string), "abc");
     }
 
     @Test
@@ -21,7 +25,7 @@ class StringSplitTest {
     void extractBackString() {
         String string = "//abc\n123";
 
-        Assertions.assertEquals(getBackString(string), "123");
+        assertEquals(getBackString(string), "123");
     }
 
     @Test
@@ -29,8 +33,8 @@ class StringSplitTest {
     void splitAtFirstNewline() {
         String string = "//abc\n\n123";
 
-        Assertions.assertEquals(getFrontString(string), "abc");
-        Assertions.assertEquals(getBackString(string), "\n123");
+        assertEquals(getFrontString(string), "abc");
+        assertEquals(getBackString(string), "\n123");
     }
 
     @Test
@@ -38,6 +42,33 @@ class StringSplitTest {
     void backStringEmpty() {
         String string = "//abc\n";
 
-        Assertions.assertEquals(getBackString(string), "");
+        assertEquals(getBackString(string), "");
+    }
+
+    @Test
+    @DisplayName("앞 문자열가 문자로만 구성되어 있으면 true 반환")
+    void onlyCharacterInFrontString() {
+        String string = "abc";
+
+        Assertions.assertTrue(validateFrontString(string));
+    }
+
+    @Test
+    @DisplayName("앞 문자열에 숫자가 있으면 IllegalArgumentException 발생")
+    void isNumberInFrontString() {
+        String string = "1abc";
+
+        assertThrows(IllegalArgumentException.class, () -> validateFrontString(string));
+    }
+
+    @Test
+    @DisplayName("앞 문자열에서 각 문자를 추출하여 구분자 배열로 반환한다.")
+    void testGetSeperatorArray() {
+        String string = "a!b@c#";
+        char[] seperatorArray = new char[]{'a', '!', 'b', '@', 'c', '#'};
+
+        char[] result = getSeperatorArray(string);
+
+        Assertions.assertArrayEquals(seperatorArray, result);
     }
 }
