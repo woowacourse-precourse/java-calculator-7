@@ -9,7 +9,7 @@ import calculator.constant.ErrorMessage;
 public class Delimiter {
 	private static final int STRICT_LENGTH = 1;
 	private static final String EMPTY = "";
-	private static final Pattern SINGLE_NUMERIC_PATTERN = Pattern.compile("\\d");
+	private static final Pattern SINGLE_NUMERIC_PATTERN = Pattern.compile(CommonPattern.SINGLE_NUMBER);
 
 	private final String delimiter;
 
