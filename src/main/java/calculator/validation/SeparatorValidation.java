@@ -2,6 +2,8 @@ package calculator.validation;
 
 import calculator.number.CustomPatternMaker;
 
+import java.util.List;
+
 public class SeparatorValidation {
 
     private static final String SPECIAL_CHARACTERS = "^\\wㄱ-ㅎ가-힣,:\\-//\\n";
@@ -48,10 +50,7 @@ public class SeparatorValidation {
     }
 
     private static boolean isNotCustomPattern(String input) {
-        String customPattern = CustomPatternMaker.getCustomPattern(input);
-        // 커스텀 구분자는 뒤에 | 이 붙으므로 제거해준다.
-        customPattern = customPattern.replaceAll("\\|", "");
-        // 커스텀 구분자와 특수문자 아닌 문자들을 정규표현식으로 묶어준다.
+        List<String> customPattern = CustomPatternMaker.getCustomPattern(input);
         String pattern = "[" + SPECIAL_CHARACTERS + customPattern + " ]+";
         // 커스텀 구분자를 제외 시켜준다.
         input = input.substring(input.indexOf("\\n") + 2);

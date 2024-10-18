@@ -37,8 +37,9 @@ public class Division {
     }
 
     private static String getPatten(String input) {
-        String customPattern = CustomPatternMaker.getCustomPattern(input);
-        return customPattern + DEFAULT_SEPARATOR;
+        List<String> customPattern = CustomPatternMaker.getCustomPattern(input);
+        String pattern = String.join("|", customPattern);
+        return pattern + "|" + DEFAULT_SEPARATOR;
     }
 
     private static List<String> makeList(String input, String patten, List<String> list) {
