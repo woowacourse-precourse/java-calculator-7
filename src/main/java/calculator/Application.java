@@ -44,11 +44,11 @@ public class Application {
                 .reduce((d1, d2) -> d1 + "|" + d2)
                 .orElse("");
 
-        // 커스텀 구분자가 제거된 문자열이 올바른 형태인지 검증한다.
-        input = Validator.validateConvertedInput(input, delimiterRegex);
-
         // 숫자 추출
         String[] strNumArray = input.split(delimiterRegex);
+
+        // 커스텀 구분자가 제거된 문자열이 올바른 형태인지 검증한다.
+        input = Validator.validateConvertedInput(input, delimiterRegex, strNumArray);
 
         // 결과 추출
         int result = Arrays.stream(strNumArray)
