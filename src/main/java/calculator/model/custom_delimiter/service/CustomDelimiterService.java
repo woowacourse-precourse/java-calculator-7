@@ -1,8 +1,8 @@
-package calculator.delimiter.custom.service;
+package calculator.model.custom_delimiter.service;
 
-import calculator.delimiter.custom.pattern_matcher.CustomDelimiterPatternMatcher;
-import calculator.delimiter.domain.Delimiter;
-import calculator.delimiter.factory.DelimiterFactory;
+import calculator.model.custom_delimiter.pattern_matcher.CustomDelimiterPatternMatcher;
+import calculator.model.delimiter.domain.Delimiter;
+import calculator.model.delimiter.factory.DelimiterFactory;
 
 import java.util.Optional;
 

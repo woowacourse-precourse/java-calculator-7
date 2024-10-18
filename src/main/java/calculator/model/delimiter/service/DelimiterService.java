@@ -1,9 +1,9 @@
-package calculator.delimiter.service;
+package calculator.model.delimiter.service;
 
-import calculator.delimiter.custom.service.CustomDelimiterService;
-import calculator.delimiter.domain.Delimiter;
-import calculator.delimiter.domain.Delimiters;
-import calculator.delimiter.factory.DelimiterFactory;
+import calculator.model.custom_delimiter.service.CustomDelimiterService;
+import calculator.model.delimiter.domain.Delimiter;
+import calculator.model.delimiter.domain.Delimiters;
+import calculator.model.delimiter.factory.DelimiterFactory;
 
 import java.util.List;
 

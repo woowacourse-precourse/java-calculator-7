@@ -1,4 +1,4 @@
-package calculator.delimiter.domain;
+package calculator.model.delimiter.domain;
 
 import calculator.util.pattern.PatternUtils;
 

@@ -1,14 +1,14 @@
 package calculator.controller;
 
-import calculator.delimiter.custom.pattern_matcher.CustomDelimiterPatternMatcher;
-import calculator.delimiter.custom.pattern_matcher.DefaultCustomDelimiterPatternMatcher;
-import calculator.delimiter.custom.service.CustomDelimiterService;
-import calculator.delimiter.custom.validator.DefaultCustomDelimiterValidator;
-import calculator.delimiter.custom.validator.DelimiterValidator;
-import calculator.delimiter.factory.DefaultDelimiterFactory;
-import calculator.delimiter.factory.DelimiterFactory;
-import calculator.delimiter.service.DelimiterService;
-import calculator.delimiter.service.IntegerDelimiterService;
+import calculator.model.custom_delimiter.pattern_matcher.CustomDelimiterPatternMatcher;
+import calculator.model.custom_delimiter.pattern_matcher.DefaultCustomDelimiterPatternMatcher;
+import calculator.model.custom_delimiter.service.CustomDelimiterService;
+import calculator.model.custom_delimiter.validator.DefaultCustomDelimiterValidator;
+import calculator.model.custom_delimiter.validator.DelimiterValidator;
+import calculator.model.delimiter.factory.DefaultDelimiterFactory;
+import calculator.model.delimiter.factory.DelimiterFactory;
+import calculator.model.delimiter.service.DelimiterService;
+import calculator.model.delimiter.service.IntegerDelimiterService;
 import calculator.util.integer.IntegerUtils;
 import calculator.view.InputView;
 import calculator.view.OutputView;

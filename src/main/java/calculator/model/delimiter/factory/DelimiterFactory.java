@@ -1,8 +1,8 @@
-package calculator.delimiter.factory;
+package calculator.model.delimiter.factory;
 
-import calculator.delimiter.custom.validator.DelimiterValidator;
-import calculator.delimiter.domain.Delimiter;
-import calculator.delimiter.domain.Delimiters;
+import calculator.model.custom_delimiter.validator.DelimiterValidator;
+import calculator.model.delimiter.domain.Delimiter;
+import calculator.model.delimiter.domain.Delimiters;
 
 public abstract class DelimiterFactory {
 

@@ -1,4 +1,4 @@
-package calculator.delimiter.custom.pattern_matcher;
+package calculator.model.custom_delimiter.pattern_matcher;
 
 import java.util.Optional;
 import java.util.regex.Matcher;

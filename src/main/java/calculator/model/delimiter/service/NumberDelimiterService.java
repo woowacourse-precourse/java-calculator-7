@@ -1,7 +1,7 @@
-package calculator.delimiter.service;
+package calculator.model.delimiter.service;
 
-import calculator.delimiter.custom.service.CustomDelimiterService;
-import calculator.delimiter.factory.DelimiterFactory;
+import calculator.model.custom_delimiter.service.CustomDelimiterService;
+import calculator.model.delimiter.factory.DelimiterFactory;
 
 public abstract class NumberDelimiterService extends DelimiterService {
 
