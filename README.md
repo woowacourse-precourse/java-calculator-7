@@ -14,6 +14,7 @@
 - CalculatorManager
 - CalculatorController
 
+
 ## 기능 리스트
 - [x] 시작 멘트를 출력한다.
 - [x] 문자열을 입력받는다.
