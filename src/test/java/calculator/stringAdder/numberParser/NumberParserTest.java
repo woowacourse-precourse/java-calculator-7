@@ -37,6 +37,15 @@ class NumberParserTest {
   }
 
   @Test
+  void getNumbers_exceedLongRange_success() {
+    String input = "//;\\n"+String.valueOf(Long.MAX_VALUE)+"9474747474723459237"+",2;3";
+    String[] delimiters = {",", ":",";"};
+    String[] expected = {String.valueOf(Long.MAX_VALUE)+"9474747474723459237", "2", "3"};
+
+    assertArrayEquals(expected, numberParser.getNumbers(input, delimiters));
+  }
+
+  @Test
   void getNumbers_negativeNumber_fail() {
     String input = String.valueOf(Long.MAX_VALUE)+",-1,2,3";
     String[] delimiters = {",", ":","$"};
