@@ -51,7 +51,7 @@ public class StringCalculate {
         if (!reg.isEmpty()) {
             reg = reg.substring(0, reg.length() - 1);
         }
-        return inputString.split(reg);
+        return inputString.split(reg, -1);
     }
 
     private ArrayList<Integer> convertOperandsToInt(String[] stringOperands) {
