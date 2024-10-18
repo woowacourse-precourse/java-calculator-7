@@ -27,9 +27,9 @@ public class DelimitedNumbers {
         }
 
         String[] validDelimiters = makeValidateRegex(regex);
-        for (char c : stringNumbers.toCharArray()) {
-            if (!Arrays.asList(validDelimiters).contains(String.valueOf(c)) && !Character.isDigit(c)
-                    && !Character.isWhitespace(c)) {
+        for (char delimiter : stringNumbers.toCharArray()) {
+            if (!Arrays.asList(validDelimiters).contains(String.valueOf(delimiter)) && !Character.isDigit(delimiter)
+                    && !Character.isWhitespace(delimiter)) {
                 throw new IllegalArgumentException("입력된 구분자 중 잘못된 구분자가 있습니다");
             }
         }
