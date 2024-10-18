@@ -8,13 +8,7 @@ import static calculator.constant.Constant.DEFAULT_SEPARATOR_COMMA;
 
 
 public class Separator {
-    private final Set<String> separators;
-    private static final String REPLACE_SEPARATOR = DEFAULT_SEPARATOR_COMMA;
-
-    public Separator(){
-        this.separators = new HashSet<>(
-                Arrays.asList(DEFAULT_SEPARATOR_COMMA, DEFAULT_SEPARATOR_COLON));
-    }
+    private String customSeparator = null;
 
     public String processCustomSeparator(String inputValue){
         String[] separatedInput = parseSeparatorAndValue(inputValue);
@@ -23,8 +17,7 @@ public class Separator {
     }
 
     public List<Long> extractNumbers(String inputValue) throws IllegalArgumentException{
-        String replacedValue = normalizeSeparator(inputValue);
-        List<String> splitValue = separate(replacedValue);
+        List<String> splitValue = separate(inputValue);
 
         try {
             return splitValue.stream()
@@ -40,15 +33,10 @@ public class Separator {
     }
 
     public List<String> separate(String replacedValue){
-        return Arrays.asList(replacedValue.split(REPLACE_SEPARATOR,-1));
-    }
-
-    // 구분자를 전부 ','으로 통일.
-    public String normalizeSeparator(String inputValue){
-        for(String separator: separators){
-            inputValue = inputValue.replaceAll(Pattern.quote(separator), REPLACE_SEPARATOR);
+        if (customSeparator==null || customSeparator.isEmpty()){
+            return Arrays.asList(replacedValue.split(DEFAULT_SEPARATOR_COMMA + "|" + DEFAULT_SEPARATOR_COLON,-1));
         }
-        return inputValue;
+        return Arrays.asList(replacedValue.split(DEFAULT_SEPARATOR_COMMA + "|" + DEFAULT_SEPARATOR_COLON + "|" + Pattern.quote(customSeparator),-1));
     }
 
     public boolean isExistCustomSeparator(String inputValue){
@@ -61,7 +49,7 @@ public class Separator {
     }
 
     private void addSeparator(String customSeparator){
-        this.separators.add(customSeparator);
+        this.customSeparator = customSeparator;
     }
 
 }
