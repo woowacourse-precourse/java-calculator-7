@@ -1,22 +1,32 @@
 package calculator;
 
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Calculator {
 
-    public static int add(String input){
-        if(input == null || input.isEmpty()){
+    public static int add(String input) {
+        if (input == null || input.isEmpty()) {
             return 0;
         }
+        input = input.replace("\\n","\n");
 
         String[] numbers;
-        if(input.startsWith("//")){ // 미구현
-            numbers = input.split(" ");
-        }
-        else{
+        if (input.startsWith("//")) {
+            Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+            if (matcher.matches()) {
+                String customDelimiter = matcher.group(1);
+                String numbersPart = matcher.group(2);
+                numbers = numbersPart.split(Pattern.quote(customDelimiter));
+            } else {
+                throw new IllegalArgumentException("잘못된 형식입니다.");
+            }
+        } else {
             String delimiters = ",|:";
             numbers = input.split(delimiters);
         }
+
         return sumNumbers(numbers);
     }
 
@@ -28,4 +38,5 @@ public class Calculator {
         }
         return sum;
     }
+
 }
