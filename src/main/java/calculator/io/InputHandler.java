@@ -38,7 +38,7 @@ public class InputHandler {
 
     public String[] convertValidInputListCustom(String userInput) {
         String delimiter = userInput.substring(CUSTOM_START.length(), CUSTOM_START.length() + 1);
-        String extractInputs = userInput.substring(CUSTOM_START.length() + CUSTOM_END.length() + 2);
+        String extractInputs = userInput.substring(CUSTOM_START.length() + CUSTOM_END.length() + 1);
 
         lastIndexIsInteger(extractInputs);
 
