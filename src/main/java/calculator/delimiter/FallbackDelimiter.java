@@ -13,7 +13,7 @@ public class FallbackDelimiter implements Delimiter {
     private static final String INTEGER_REGEX = "\\d+";
 
     @Override
-    public List<String> extractString(String rawInput) {
+    public List<String> tokenize(String rawInput) {
         if (rawInput.isEmpty()) {
             return List.of();
         }

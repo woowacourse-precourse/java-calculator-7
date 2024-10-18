@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface Delimiter {
 
-    List<String> extractString(String rawInput);
+    List<String> tokenize(String rawInput);
 
     boolean applicable(String rawInput);
 

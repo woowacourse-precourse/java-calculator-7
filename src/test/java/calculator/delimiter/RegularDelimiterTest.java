@@ -16,14 +16,14 @@ class RegularDelimiterTest {
     private final RegularDelimiter regularDelimiter = new RegularDelimiter();
 
     @ParameterizedTest
-    @MethodSource("provideExtractStringTestCases")
+    @MethodSource("provideTokenizeTestCases")
     @DisplayName("쉼표와 콜론 구분자로 숫자를 분리하여 리턴한다.")
-    void testExtractString(String input, List<String> expectedNumbers) {
-        List<String> result = regularDelimiter.extractString(input);
+    void testTokenize(String input, List<String> expectedNumbers) {
+        List<String> result = regularDelimiter.tokenize(input);
         assertThat(result).isEqualTo(expectedNumbers);
     }
 
-    private static Stream<Arguments> provideExtractStringTestCases() {
+    private static Stream<Arguments> provideTokenizeTestCases() {
         return Stream.of(
                 arguments("1,2,3", List.of("1", "2", "3")),   // 쉼표 구분자
                 arguments("4:5:6", List.of("4", "5", "6")),   // 콜론 구분자

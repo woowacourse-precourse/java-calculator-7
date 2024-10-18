@@ -49,7 +49,7 @@ class CustomDelimiterTest {
     void validateInvalidInputs(String input, String expectedMessage) {
         CustomDelimiter customDelimiter = new CustomDelimiter();
 
-        assertThatThrownBy(() -> customDelimiter.extractString(input))
+        assertThatThrownBy(() -> customDelimiter.tokenize(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(expectedMessage);
     }
@@ -65,16 +65,17 @@ class CustomDelimiterTest {
         );
     }
 
+
     @ParameterizedTest
     @DisplayName("주어진 문자열에서 숫자를 올바르게 분리하여 리턴한다.")
-    @MethodSource("provideExtractStringTestCases")
-    void extractString(String input, List<String> expectedNumbers) {
+    @MethodSource("provideTokenizeTestCases")
+    void tokenize(String input, List<String> expectedNumbers) {
         CustomDelimiter customDelimiter = new CustomDelimiter();
-        List<String> numbers = customDelimiter.extractString(input);
+        List<String> numbers = customDelimiter.tokenize(input);
         Assertions.assertThat(numbers).isEqualTo(expectedNumbers);
     }
 
-    private static Stream<Arguments> provideExtractStringTestCases() {
+    private static Stream<Arguments> provideTokenizeTestCases() {
         return Stream.of(
                 // 기본적인 커스텀 구분자
                 Arguments.of("//;|,:\\n1;|,:2;|,:3", List.of("1", "2", "3")),

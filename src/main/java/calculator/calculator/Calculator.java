@@ -17,7 +17,7 @@ public class Calculator {
         validateInput(rawInput);
 
         Delimiter delimiter = delimiterFactory.getDelimiter(rawInput);
-        List<String> numberStrings = delimiter.extractString(rawInput);
+        List<String> numberStrings = delimiter.tokenize(rawInput);
         List<String> spaceRemoved = numberStrings.stream()
                 .map(DelimiterUtils::removeSpaces)
                 .toList();

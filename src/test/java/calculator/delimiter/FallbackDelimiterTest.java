@@ -13,9 +13,9 @@ class FallbackDelimiterTest {
 
     @Test
     @DisplayName("공백 문자열은 0을 반환한다.")
-    void testExtractString_EmptyOrWhitespaceInput() {
+    void testTokenize_EmptyOrWhitespaceInput() {
         FallbackDelimiter fallbackDelimiter = new FallbackDelimiter();
-        List<String> result = fallbackDelimiter.extractString("");
+        List<String> result = fallbackDelimiter.tokenize("");
         assertThat(result).isEqualTo(List.of());
     }
 
@@ -26,9 +26,9 @@ class FallbackDelimiterTest {
             "999=999"
     })
     @DisplayName("단일 숫자는 그대로 반환한다.")
-    void testExtractString_SingleNumber(String input, String expected) {
+    void testTokenize_SingleNumber(String input, String expected) {
         FallbackDelimiter fallbackDelimiter = new FallbackDelimiter();
-        List<String> result = fallbackDelimiter.extractString(input);
+        List<String> result = fallbackDelimiter.tokenize(input);
         assertThat(result).isEqualTo(List.of(expected));
     }
 

@@ -13,7 +13,7 @@ public class RegularDelimiter implements Delimiter {
     private static final String REGULAR_DELIMITERS = "[,:]";
 
     @Override
-    public List<String> extractString(String rawInput) {
+    public List<String> tokenize(String rawInput) {
         return Arrays.stream(rawInput.split(REGULAR_DELIMITERS))
                 .toList();
     }
