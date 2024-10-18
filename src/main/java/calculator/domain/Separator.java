@@ -59,16 +59,16 @@ public class Separator {
     }
 
     private void extractNumbers(String numbers) {
-        String number = "";
+        StringBuilder number = new StringBuilder();
         for(int i = 0; i < numbers.length(); i ++) {
             if(Character.isDigit(numbers.charAt(i))) {
-                number += numbers.charAt(i);
+                number.append(numbers.charAt(i));
                 continue;
             }
-            extractedNumbers.add(number);
-            number = "";
+            extractedNumbers.add(number.toString());
+            number.setLength(0);
         }
-        extractedNumbers.add(number);
+        extractedNumbers.add(number.toString());
     }
 
     public List<String> getExtractedNumbers() {
