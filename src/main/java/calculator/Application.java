@@ -34,10 +34,18 @@ public class Application {
         separatorBuilder.append("]");
 
         // 등록된 구분자로 문자열을 분리한다.
-        StringTokenizer tokens = new StringTokenizer(input, separatorBuilder.toString());
+        String separator = separatorBuilder.toString();
+        StringTokenizer tokens = new StringTokenizer(input, separator);
         while (tokens.hasMoreTokens()) {
+            String token = tokens.nextToken();
+
+            // 숫자가 아닌 문자가 입력되었을 때
+            if (!token.matches("[0-9]")) {
+                throw new IllegalArgumentException("숫자가 아닌 값은 계산할 수 없습니다.");
+            }
+
             // 분리된 문자열을 모두 `정수` 로 `파싱` 하고 숫자들을 등록한다.
-            int number = Integer.parseInt(tokens.nextToken());
+            int number = Integer.parseInt(token);
             // 분리된 문자열이 모두 `양의 숫자값` 인지 확인한다.
             if (number < 0) {
                 // 아닌 경우 예외를 throw 한다.
