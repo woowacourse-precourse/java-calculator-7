@@ -5,7 +5,7 @@ import static calculator.utils.StringUtils.isEmptyString;
 
 public class CustomDelimiterProcessor {
     private static final String CUSTOM_DELIMITER_FIRST_FORMAT = "//";
-    private static final String CUSTOM_DELIMITER_LAST_FORMAT = "\n";
+    private static final String CUSTOM_DELIMITER_LAST_FORMAT = "\\n";
     private static final int CUSTOM_DELIMITER_FORMAT_LENGTH = 5;
     private static final int CUSTOM_DELIMITER_INDEX = 2;
     private static final char CUSTOM_DELIMITER_PREFIX = '/';
@@ -32,10 +32,10 @@ public class CustomDelimiterProcessor {
         if (!checkCustomDelimiterFormatLength(inputString)) {
             throw new IllegalArgumentException();
         }
-        if (isCustomDelimiterFirstFormatCorrect(inputString)) {
+        if (!isCustomDelimiterFirstFormatCorrect(inputString)) {
             throw new IllegalArgumentException();
         }
-        if (isCustomDelimiterLastFormatCorrect(inputString)) {
+        if (!isCustomDelimiterLastFormatCorrect(inputString)) {
             throw new IllegalArgumentException();
         }
     }
@@ -45,14 +45,12 @@ public class CustomDelimiterProcessor {
     }
 
     private boolean isCustomDelimiterFirstFormatCorrect(String inputString) {
-        String firstFormat = inputString.substring(0, 1);
-
+        String firstFormat = inputString.substring(0, 2);
         return firstFormat.equals(CUSTOM_DELIMITER_FIRST_FORMAT);
     }
 
     private boolean isCustomDelimiterLastFormatCorrect(String inputString) {
-        String lastFormat = inputString.substring(3, 4);
-
+        String lastFormat = inputString.substring(3, 5);
         return lastFormat.equals(CUSTOM_DELIMITER_LAST_FORMAT);
     }
 }
