@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static calculator.Message.Message.ERROR_MESSAGE;
+
 public class CalculatorService {
     List<String> separatorList = new ArrayList<>();
     List<String> numberList = new ArrayList<>();
@@ -23,7 +25,7 @@ public class CalculatorService {
 
         // 숫자 또는 구분자가 아닌 값이 입력된 경우
         if (!checkValidNumber())
-            throw new IllegalArgumentException("올바르지 않은 문자열이 입력됐습니다.");
+            throw new IllegalArgumentException(ERROR_MESSAGE);
 
         // 덧셈 연산 수행
         addNumbers();

@@ -1,6 +1,7 @@
 package calculator.IO;
 
 import camp.nextstep.edu.missionutils.Console;
+import static calculator.Message.Message.INPUT_MESSAGE;
 
 public class InputService {
     private String formula;
@@ -8,7 +9,7 @@ public class InputService {
 
     // 덧셈할 문자열 입력 받기
     public void readFormula() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        System.out.println(INPUT_MESSAGE);
         formula = (Console.readLine());
     }
 
