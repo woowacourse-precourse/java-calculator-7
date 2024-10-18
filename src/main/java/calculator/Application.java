@@ -42,4 +42,14 @@ public class Application {
             return input.substring(5).split("[,:" + custom + "]");
         }
     }
+
+    private int sumArray(String[] arr) {
+        int sum = 0;
+        for (String value : arr) {
+            if (!value.isEmpty()) {
+                sum += Integer.parseInt(value);
+            }
+        }
+        return sum;
+    }
 }
