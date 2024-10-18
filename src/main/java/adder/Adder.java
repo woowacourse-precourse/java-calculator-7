@@ -3,6 +3,8 @@ package adder;
 import separator.Separator;
 
 import java.util.ArrayList;
+import java.util.EmptyStackException;
+import java.util.Stack;
 
 public class Adder {
 
@@ -37,6 +39,65 @@ public class Adder {
         } catch (NumberFormatException e){
             return false;
         }
+    }
+
+    public ArrayList<String> parseStringWithSeparators(String calculationFormula){
+
+        ArrayList<String> parsedString = new ArrayList<>();
+        String number = "";
+
+        for(int i = 0; i < calculationFormula.length(); i++) {
+
+            char element = calculationFormula.charAt(i);
+
+            if(isSeparator(String.valueOf(element))){
+                if(!number.isEmpty()) {
+                    parsedString.add(number);
+                }
+                parsedString.add(String.valueOf(element));
+                number = "";
+
+                continue;
+            }
+
+            number += element;
+            if(i == calculationFormula.length()-1){
+                parsedString.add(number);
+            }
+        }
+
+        return parsedString;
+    }
+
+    public boolean isValidated(ArrayList<String> calculationFormula) {
+        try {
+            Stack<String> numberStack = new Stack<>();
+            Stack<String> separatorStack = new Stack<>();
+            Stack<String> garbageStack = new Stack<>();
+
+            for(String element: calculationFormula){
+                if(isNumber(element)){
+                    numberStack.push(element);
+                    if(!separatorStack.isEmpty()){
+                        separatorStack.pop();
+                    }
+                } else if(isSeparator(element)){
+                    separatorStack.push(element);
+                    numberStack.pop();
+                } else {
+                    garbageStack.push(element);
+                }
+            }
+
+            if(separatorStack.isEmpty() && garbageStack.isEmpty()){
+                return true;
+            }
+
+            return false;
+        } catch (EmptyStackException e){
+            return false;
+        }
+
     }
 
 }
