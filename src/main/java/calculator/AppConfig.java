@@ -15,7 +15,7 @@ public class AppConfig {
         return new Parser();
     }
 
-    public Adder adder(){
-        return new Adder();
+    public MathUtils adder(){
+        return new MathUtils();
     }
 }
