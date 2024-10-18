@@ -10,8 +10,7 @@ public class Numbers {
 
     private final List<BigDecimal> numbers;
 
-    public Numbers(String inputFormula, Separators separators) {
-        String formulaPart = getFormulaPart(inputFormula, separators);
+    public Numbers(String formulaPart, Separators separators) {
         if (formulaPart.isEmpty()) {
             this.numbers = List.of(BigDecimal.ZERO);
             return;
@@ -27,16 +26,6 @@ public class Numbers {
             return dropDecimalPart(reduce);
         }
         return reduce.toString();
-    }
-
-    private static String getFormulaPart(String inputFormula, Separators separators) {
-        String numberPartOfFormula = inputFormula;
-        if (!separators.isCustomSeparatorEmpty()) {
-            int separatorIndex = inputFormula.indexOf(Separators.getSeparatorFooter());
-            int numbersStartIndex = separatorIndex + Separators.getSeparatorFooter().length();
-            numberPartOfFormula = inputFormula.substring(numbersStartIndex);
-        }
-        return numberPartOfFormula;
     }
 
     private static void throwIfFormulaPartIsNotSeparatorOrNumber(String numberPartOfFormula, Separators separators) {
