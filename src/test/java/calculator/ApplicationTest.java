@@ -15,7 +15,7 @@ class ApplicationTest extends NsTest {
             , "+", "a", "A", "b", "B", "c", "C", "d", "D", "e", "E", "f", "F", "g", "G", "h", "H", "i", "I", "j", "J",
             "k", "K", "l", "L", "m", "M", "n", "N", "o", "O",
             "p", "P", "q", "Q", "r", "R", "s", "S", "t", "T", "u", "U", "v", "V", "w", "W", "x", "X", "y", "Y", "z",
-            "Z", "[", "{", "]", "}", "'", "\"", ";", "/", "?", ".", ">", "<", "\\");
+            "Z", "[", "{", "]", "}", "'", "\"", ";", "/", "?", ".", ">", "<", "\\", "ㅜ");
 
 
     @Test
@@ -43,6 +43,23 @@ class ApplicationTest extends NsTest {
             }
         });
     }
+
+    @Test
+    void 커스텀_구분자_사용_정상_경우_기존구분자_땡() {
+        assertSimpleTest(() -> {
+            run("//:\\n1:2,3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_정상_경우_기존구분자_쉼표() {
+        assertSimpleTest(() -> {
+            run("//,\\n1:2,3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
 
     @Override
     public void runMain() {
