@@ -5,7 +5,6 @@ public class CustomDelimiterSplit{
     public static String[] customDelimiterSplit(String input, int inputLen, String basicDelimiter){
         int idx = input.indexOf("\\n", 2);
         String customDelimiter = basicDelimiter + "|";
-        String operandStr = "";
 
         if (inputLen == idx+2){
             return null;
@@ -18,8 +17,7 @@ public class CustomDelimiterSplit{
             customDelimiter += input.substring(2, idx).replace("|", "\\|");
         }
 
-        operandStr = input.substring(idx+2, inputLen);
-        String[] operandArr = operandStr.split(customDelimiter);
-        return operandArr;
+        String operandStr = input.substring(idx+2, inputLen);
+        return operandStr.split(customDelimiter);
     }
 }
