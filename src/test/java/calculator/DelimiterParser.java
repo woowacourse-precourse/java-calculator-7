@@ -1,10 +1,30 @@
 package calculator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DelimiterParser {
     private final DelimiterManager delimiterManager;
 
     public DelimiterParser(DelimiterManager delimiterManager) {
         this.delimiterManager = delimiterManager;
+    }
+
+    public List<Integer> parse(String input) {
+        List<Integer> numbers = new ArrayList<>();
+
+        String[] parts = splitByDelimiters(input);
+
+        for (String part : parts) {
+            numbers.add(Integer.parseInt(part));
+        }
+
+        return numbers;
+    }
+
+    private String[] splitByDelimiters(String input) {
+        String regex = buildDelimiterRegex();
+        return input.split(regex);
     }
 
     private String buildDelimiterRegex() {
