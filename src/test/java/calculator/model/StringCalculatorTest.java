@@ -3,6 +3,7 @@ package calculator.model;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,7 +40,7 @@ public class StringCalculatorTest {
     @DisplayName("잘못된 양식의 문자열 검증 테스트")
     public void notAllowedFromTest() {
         // given
-        String input = "1.2;3";
+        String input = "1.2:3";
 
         // when, then
         assertThatThrownBy(() -> stringCalculator.calculate(input))
@@ -47,5 +48,15 @@ public class StringCalculatorTest {
     }
 
     @Test
-    DisplayName("덧셈 계산 기능")
+    @DisplayName("숫자 필터링 기능 테스트")
+    public void filterNumberTest() {
+        // given
+        String input = "1,2:3";
+
+        // when
+        List<Long> numbers = stringCalculator.filter(input);
+
+        // then
+        assertThat(numbers).containsExactly(1L, 2L, 3L);
+    }
 }
