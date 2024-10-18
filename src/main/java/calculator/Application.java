@@ -63,8 +63,11 @@ public class Application {
     private static long calculateSum() {
         splitInput(input);
         strToNumber();
-
-        return 0;
+        long result = 0L;
+        for (Long num : nums) {
+            result += num;
+        }
+        return result;
     }
 
 
