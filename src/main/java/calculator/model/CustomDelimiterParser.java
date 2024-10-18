@@ -24,14 +24,14 @@ public class CustomDelimiterParser {
     }
 
     public boolean hasCustomDelimiter(String input) {
-        if (isStartWithPrefix(input)) {
+        if (!isStartWithPrefix(input)) {
             return false;
         }
         return hasSuffix(input);
     }
 
     private boolean isStartWithPrefix(String input) {
-        return !input.startsWith(PREFIX);
+        return input.startsWith(PREFIX);
     }
 
     private boolean hasSuffix(String input) {
