@@ -25,13 +25,11 @@ public class Application {
         }
 
         try {
-            // (기본 구분자를 사용한다면 문자열 분리 후 계산, 사용하지 않는다면 정수로 변환 후 출력)(예정)
-            if (exitsCustomSeparator(input)) {
+            if (existCustomSeparator(input)) {
                 // 커스텀 구분자가 존재한다면 구분자를 추출해서 separator 변수에 저장
                 separator = findCustomSeparator(input);
 
                 // 커스텀 구분자 생성하는 부분 자르고 문자열 가져오기
-
 
                 // 구분자를 이용해 문자열 분리
 
@@ -65,7 +63,7 @@ public class Application {
     }
 
     // 커스텀 구분자가 존재하는지 검증하는 함수
-    private static boolean exitsCustomSeparator(String input) {
+    private static boolean existCustomSeparator(String input) {
         return input.matches(CUSTOM_SEPARATOR);
     }
 
