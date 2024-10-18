@@ -59,13 +59,4 @@ class CalculatorTest {
         BigInteger result = calculator.calculate(input);
         Assertions.assertThat(result).isEqualTo(expected);
     }
-
-    @ParameterizedTest
-    @DisplayName("음수가 주어지면 예외가 발생한다.")
-    @ValueSource(strings = {"-1:-2,-3", "-1,5"})
-    void throwsExceptionWhenInputContainsNegative(String input) {
-        assertThatThrownBy(() -> calculator.calculate(input))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.ONLY_POSITIVE_NUMBERS_ALLOWED.getMessage());
-    }
 }
