@@ -11,18 +11,31 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class Application {
     public static List<String> separators = new ArrayList<>(Arrays.asList(",", ":"));
+    public static String customFormat = "//(.*?)\\\\n(.*)";
+    public static String input;
+    public static int[] numbers;
+    public static int sumValue;
 
     public static void main(String[] args) {
         displayHelp();
-        String input = readLine();
+        input = readLine();
 
-        if (isCustomSeparator(input)) {
-            input = extractCustomSeparator(input, separators);
+        if (inputIsEmpty(input)) {
+            sumValue = 0;
+        } else {
+            if (isCustomSeparator(input)) {
+                input = extractCustomSeparator(input, separators);
+            }
+            numbers = extractNumbers(input, separators);
+            sumValue = sum(numbers);
+
         }
-        int[] numbers = extractNumbers(input, separators);
-        int sumValue = sum(numbers);
 
         displayResult(sumValue);
+    }
+
+    public static boolean inputIsEmpty(String input) {
+        return input == null || input.trim().isEmpty();
     }
 
     public static int sum(int[] numbers) {
@@ -46,9 +59,9 @@ public class Application {
     }
 
     public static String extractCustomSeparator(String input, List<String> separators) {
-        Matcher matcher = Pattern.compile("//(.*?)\\\\n(.*)").matcher(input);
+        Matcher matcher = Pattern.compile(customFormat).matcher(input);
 
-        if (matcher.find()) {
+        if (matcher.find() && !matcher.group(1).isEmpty()) {
             String customSeparator = matcher.group(1);  // 커스텀 구분자
             String extractNumber = matcher.group(2);  // 나머지 문자열
 
