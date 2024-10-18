@@ -44,22 +44,29 @@ public class StringAddCalculator implements StringCalculator {
     }
 
     private int sumWithDefaultDelimiter(String input) {
-        List<Character> invalidChars = input.chars()
-                .mapToObj(c -> (char) c)
-                .filter(c -> !(Character.isDigit(c) || c == ':' || c == ',')) // 기본 구분자 :,
-                .toList();
-
-        if (!invalidChars.isEmpty()) {
-            throw new IllegalArgumentException(
-                    String.format("(%s)에서는 허용되지 않는 구분자가 발견되었습니다. (%s)", input, invalidChars)
-            );
-        }
+        validateDelimiter(input);
         String[] splitNumbers = input.split(DEFAULT_DELIMITER);
         List<Integer> numbers = Arrays.stream(splitNumbers)
                 .map(Integer::parseInt)
                 .toList();
         validateNumbers(numbers);
         return sum(numbers);
+    }
+
+    private void validateDelimiter(String input) {
+        List<Character> invalidChars = input.chars()
+                .mapToObj(c -> (char) c)
+                .filter(c -> !(Character.isDigit(c) || c == ':' || c == ',')) // 기본 구분자 :,
+                .toList();
+        if (hasInvalidDelimiter(invalidChars)) {
+            throw new IllegalArgumentException(
+                    String.format("(%s)에서는 허용되지 않는 구분자가 발견되었습니다. (%s)", input, invalidChars)
+            );
+        }
+    }
+
+    private boolean hasInvalidDelimiter(List<Character> invalidChars) {
+        return !invalidChars.isEmpty();
     }
 
     private List<Integer> splitNumbers(DelimiterAndNumber delimiterAndNumber) {
