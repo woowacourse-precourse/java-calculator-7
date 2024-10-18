@@ -1,4 +1,4 @@
-package calculator.separator.service;
+package calculator.generator.separator;
 
 
 import calculator.sentence.domain.Sentence;

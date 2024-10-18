@@ -1,4 +1,4 @@
-package calculator.number.service;
+package calculator.generator.number;
 
 import calculator.number.domain.Number;
 import calculator.number.domain.impl.PositiveNumber;

@@ -1,4 +1,4 @@
-package calculator.number.service;
+package calculator.generator.number;
 
 import calculator.sentence.domain.Sentence;
 import calculator.separator.domain.Separator;
