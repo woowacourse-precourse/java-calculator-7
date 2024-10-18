@@ -17,7 +17,19 @@ public class Application {
         if(input_split[0].equals("/")){
             
         }else{
-        
+            try{
+                for (int i=0; i<str_num.length; i++){
+                    if (Integer.parseInt(str_num[i]) >=0 ){
+                        sum = Integer.parseInt(str_num[i]);
+                        result += sum;
+                    }else{
+                        throw new IllegalArgumentException("잘못된 값입니다.");
+                    }
+                }    
+                System.out.println("결과 : " + result);
+            }catch (Exception e){
+                throw new IllegalArgumentException(e);
+            }
         } 
     }
 }
