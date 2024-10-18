@@ -1,7 +1,6 @@
 package calculator.service;
 
 import calculator.model.Calculator;
-import calculator.model.Delimiter;
 import calculator.validator.InputValidator;
 
 import java.util.ArrayList;
@@ -9,7 +8,6 @@ import java.util.ArrayList;
 public class StringSplit {
 
     private String inputString;
-    Delimiter delimiter = new Delimiter();
     Calculator calculator = Calculator.getInstance();
 
     public StringSplit(String inputString) {
@@ -24,7 +22,7 @@ public class StringSplit {
     private void findCustomDelimiter() {
         if (inputString.startsWith("//")) {
             char newDelimiter = inputString.charAt(2);
-            delimiter.addCustomDelimiter(newDelimiter);
+            calculator.addCustomDelimiter(newDelimiter);
         }
     }
 
@@ -43,7 +41,7 @@ public class StringSplit {
 
     private String[] splitOperands() {
         String reg = "";
-        for (Character delimiter : delimiter.getDelimiters()) {
+        for (Character delimiter : calculator.getDelimiters()) {
             reg += ("\\" + delimiter + "|");
         }
         if (!reg.isEmpty()) {

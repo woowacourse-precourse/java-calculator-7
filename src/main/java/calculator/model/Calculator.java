@@ -1,10 +1,12 @@
 package calculator.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Calculator {
 
     private static Calculator calculator;
+    private ArrayList<Character> delimiters = new ArrayList<>(Arrays.asList(':', ','));
     private ArrayList<Integer> operands;
     private int result;
 
@@ -17,6 +19,14 @@ public class Calculator {
             calculator = new Calculator();
         }
         return calculator;
+    }
+
+    public void addCustomDelimiter(char newDelimiter) {
+        delimiters.add(newDelimiter);
+    }
+
+    public ArrayList<Character> getDelimiters() {
+        return delimiters;
     }
 
     public void setOperands(ArrayList<Integer> operands) {
