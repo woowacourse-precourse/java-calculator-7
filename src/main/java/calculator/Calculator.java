@@ -8,20 +8,16 @@ import java.util.List;
 public class Calculator {
 
     private final InputStringParser parser;
-    private final ListCalculator calculator;
+    private final ListCalculator listCalculator;
 
     public Calculator(InputStringParser parser, ListCalculator calculator) {
         this.parser = parser;
-        this.calculator = calculator;
+        this.listCalculator = calculator;
     }
 
-    public long calculate(String input) throws IllegalArgumentException {
-        try{
-            List<Long> list = parser.parse(input);
-            ListValidator.validateIsPosList(list);
-            return calculator.calculate(list);
-        }catch (IllegalArgumentException e){
-            throw new IllegalArgumentException(e);
-        }
+    public long calculate(String input){
+        List<Long> list = parser.parse(input);
+        ListValidator.validatePositiveNumberList(list);
+        return listCalculator.calculate(list);
     }
 }
