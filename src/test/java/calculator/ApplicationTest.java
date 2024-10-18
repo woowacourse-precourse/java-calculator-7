@@ -26,6 +26,13 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 15");
         });
     }
+    @Test
+    void 커스텀_구분자_특수기호(){
+        assertSimpleTest(() -> {
+            run("//\\\\n1\\2");
+            assertThat(output()).contains("결과 : 3");
+        });
+    }
 
 
     @Test
