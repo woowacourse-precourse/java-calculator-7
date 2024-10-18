@@ -2,10 +2,10 @@ package calculator;
 
 import java.util.Arrays;
 
-public class InputNumberStrings {
+public class DelimitedNumbers {
     private final String stringNumbers;
 
-    public InputNumberStrings(String stringNumbers, DelimiterResult regex) {
+    public DelimitedNumbers(String stringNumbers, DelimiterResult regex) {
         validate(stringNumbers, regex);
         this.stringNumbers = stringNumbers;
     }
@@ -42,9 +42,7 @@ public class InputNumberStrings {
         return delimiters.split("");
     }
 
-
-    public String[] split(String delimiterResult) {
-        return stringNumbers.split(delimiterResult);
+    public String getStringNumbers() {
+        return stringNumbers;
     }
-
 }
