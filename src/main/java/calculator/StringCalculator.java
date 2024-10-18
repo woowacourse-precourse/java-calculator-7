@@ -37,17 +37,15 @@ public class StringCalculator {
     }
 
     private int stringToInteger(String str) {
-        int num;
-        try {
-            num = Integer.parseInt(str);
-        } catch (NumberFormatException e) {
-            if (!str.equals("")) { //입력 없을 시 0 / 구분자와 구분자 사이 입력이 없을 시는? TODO
-                throw new IllegalArgumentException("구분자와 양수 이외 다른 문자는 입력x");
-            }
-
-            num = 0;
+        if (str.isEmpty()) {
+            return 0;
         }
-        return num;
+
+        try {
+            return Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("구분자와 양수 이외 다른 문자는 입력x");
+        }
     }
 
     private Character extractCustomDelimiter(String input) {
