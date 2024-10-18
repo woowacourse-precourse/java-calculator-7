@@ -41,6 +41,8 @@ public class Application {
     public static boolean isNum(String[] parts) {
         for (String part : parts) {
             stringToChar(part);
+            isSpace(part);
+            isMinus(part);
         }
         return true;
     }
@@ -58,6 +60,21 @@ public class Application {
             throw new IllegalArgumentException(); //
         }
     }
+
+    //
+    public static void isSpace(String part) {
+        if (part.isBlank() || part.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public static void isMinus(String part) {
+        int num = Integer.parseInt(part);
+        if (num < 0) {
+            throw new IllegalArgumentException();
+        }
+    }
+
 
     //커스텀 구분자가 있는지 확인하고 구분자 반환하는 메서드
     public static String delimiter(String input) {
