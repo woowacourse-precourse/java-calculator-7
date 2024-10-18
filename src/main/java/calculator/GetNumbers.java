@@ -3,6 +3,7 @@ package calculator;
 import java.util.ArrayList;
 import java.util.List;
 
+// 구분자 기준으로 숫자를 추출하는 함수 GetNumbers
 public class GetNumbers {
     public List<Integer> extractNumbers(String input) {
         String defaultDelimiter = ",|:";
