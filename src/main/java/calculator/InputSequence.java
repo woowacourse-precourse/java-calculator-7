@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class InputSequence {
+    public static final long SUM_INITIAL_VALUE = 0L;
     public static final int DELIMITER_START_INDEX = 2;
     private final List<Long> sequence;
 
@@ -34,7 +35,7 @@ public class InputSequence {
         }
     }
 
-    private long castingElementToLong (String input) {
+    private long castingElementToLong(String input) {
         try {
             long number = Long.parseLong(input);
             validatePositive(number);
@@ -48,5 +49,9 @@ public class InputSequence {
         if (number <= 0) {
             throw new IllegalArgumentException("더 하는 값은 양수만 가능합니다.");
         }
+    }
+
+    public Long sum() {
+        return sequence.stream().reduce(SUM_INITIAL_VALUE, Long::sum);
     }
 }
