@@ -9,6 +9,9 @@ public class Application {
 
         if (input == null || input.isEmpty()) {
             System.out.println("결과 : " + 0);
+            return;
         }
+
+        String[] numbers = new StringHandler().split(input, ",|:");
     }
 }
