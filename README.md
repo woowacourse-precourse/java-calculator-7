@@ -5,33 +5,40 @@
 ------------------GUIDE---------------------
 
 ㄴ -> Directory
-* -> Parameter
-- -> Method
+- -> Parameter
++ -> Method
 
 --------------------------------------------
-
-ㄴ src
-    ㄴ main
-        ㄴ java
-            ㄴ calculator
-                ㄴ controller
-                    ㄴ CalcController
-                        * calculator : make Instance of calculatorCustom / calculator to calculate
-                        - void run() : Run Main WorkFlow
-                ㄴ model
-                    ㄴ Calculator - Interface
-                        - int calculate() 
-                    ㄴ CalculatorImpl - Class
-                        * String string : User Input
-                        - int calculate() : calculate the answer by default-delimiter
-                    ㄴ CalculatorCustom - Class
-                        * String string : User Input
-                        - int calculate() : calculate the answer by custom-delimiter
-                ㄴ view
-                    ㄴ View
-                        - static String getStringFromUser() : Print announcement and Get String Input from user
-                        - static void pringResultToUser() : Print answer in console 
-                ㄴ Application.java
+/src/main/java/calculator
+    │
+    ├── Application.java
+    ├── controller/
+    │     └── CalculatorController.java  // Controll Main Work Flow
+    │           + run() : void
+    ├── dto/
+    │     └── CalculatorDTO.java  // Controll the UserInput String and Delimiter
+    │           - str : string
+    │           - delim : string
+    │           - custom : boolean  
+    │           + getStr() : string
+    │           + getDelim() : string
+    │           + hasCustomDelim() : boolean
+    ├── service/
+    │     ├── CalculatorConfig.java // Constructor by DTO
+    │     │     + getCalculatorService(CalculatorDTO:CalculatorDTO) : CalculatorService
+    │     ├── CalculatorService.java <<Interface>>   // Seperate Role By Delimiter
+    │     │     + calculate(CalculatorDTO:CalculatorDTO) : int
+    │     ├── CalculatorServiceImpl.java  // Default Delimiter
+    │     │     + calculate(CalculatorDTO:CalculatorDTO) : int
+    │     └── CalculatorServiceCustomImpl.java  // Custom Delimiter
+    │           + calculate(CalculatorDTO:CalculatorDTO) : int
+    ├── view/
+    │     └── ConsoleView.java  // Show Announcement & getStringFromUser
+    │           + getStringFromUser() : string
+    │           + pringResultToUser() : void
+    └── util/
+          └── ExceptionUtil.java // Implement Static Method to check Runtime Exception
+        
 
 ```
 
@@ -72,6 +79,24 @@
     ㄴ Calculate Method를 작성하면서 생각보다 오류 처리가 많이 발생한다는 것을 느꼈다. 
         ㄴ 특히 커스텀 구분자의 경우 특수문자가 구분자로 들어오면 정규식에서 이스케이프 처리를 하지않으면 문제가 생기는 것을 파악했다.
         ㄴ 추가적으로 커스텀 구분자가 있는 경우에는 기존의 Default 구분자는 역할을 하지 않을 것인지에 대한 고민을 해보아야겠다.
+    
+        
+```
+### 2024.10.18 Fri
+``` 
+    
+    오늘의 구현 목표 : "역할과 구현을 분리하라"
+
+    ㄴ File Directory Structure 수정
+        ㄴ 기존 Model 패키지를 DTO와 Service로 나누어 관리 
+        ㄴ UML 관련 작성 오류가 있어서 수정 및 표현 방식 수정
+        ㄴ 예외 처리와 관련된 Static Method를 구현할 Util 패키지 및 클래스 생성
+    ㄴ 기초적인 예외 처리에 대한 Static Method 설정하기
+    ㄴ Service 내부에 config를 두어 직접 인스턴스를 만들지않고 입력값에 따라 유동적으로 인스턴스를 생성하도록 한다.
+    ㄴ 최대한 역할과 구현을 나누고 그것이 직접적으로 구현체에 의존하지 않도록 구성하려고 노력한다.
+
+
+    ✅ 구현 후 느낀점 / 추가 개선사항 
     
         
 ```
