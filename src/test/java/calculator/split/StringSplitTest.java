@@ -45,7 +45,7 @@ class StringSplitTest {
     }
 
     @Test
-    @DisplayName("앞 문자열가 문자로만 구성되어 있으면 true 반환")
+    @DisplayName("앞 문자열이 문자로만 구성되어 있으면 true 반환")
     void onlyCharacterInFrontString() {
         String string = "abc";
 
