@@ -2,9 +2,9 @@ package calculator;
 
 import java.util.List;
 
-public class Calculator {
+public class Adder {
 
-    public static int calculate(List<String> inputs) {
+    public static int add(List<String> inputs) {
         for (String input : inputs) {
             validateInput(input);
         }
@@ -21,7 +21,7 @@ public class Calculator {
                 throw new IllegalArgumentException("양수만 계산 가능합니다.");
             }
         } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException("숫자만 계산 가능합니다.");
+            throw new IllegalArgumentException("숫자만 계산 가능합니다.", exception);
         }
     }
 }

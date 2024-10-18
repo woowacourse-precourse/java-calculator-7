@@ -54,4 +54,9 @@ public class Separators {
                 .map(delimiter -> Pattern.quote(delimiter.toString()))
                 .collect(Collectors.joining("|")));
     }
+
+    @Override
+    public String toString() {
+        return separatorStore.toString();
+    }
 }
