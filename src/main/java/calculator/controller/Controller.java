@@ -22,7 +22,8 @@ public class Controller {
     public void run() {
         try {
             String input = inputString();
-
+            int result = addedString.calculate(input);
+            outputView.printResult(result);
         } catch (IllegalArgumentException e) {
             outputView.printError(e.getMessage());
         }
