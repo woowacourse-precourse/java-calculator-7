@@ -1,5 +1,7 @@
 package calculator.validator;
 
+import calculator.global.exception.ErrorMessage;
+
 import static calculator.global.constant.DelimiterConstant.*;
 
 public class DelimiterValidator {
@@ -27,7 +29,7 @@ public class DelimiterValidator {
 
     public static void validateCustomDelimiterLength(String customDelimiter) {
         if (customDelimiter.length() > 5) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.INVALID_DELIMITER_ERROR.getMessage());
         }
     }
 }
