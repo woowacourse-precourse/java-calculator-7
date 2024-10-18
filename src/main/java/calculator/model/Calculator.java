@@ -32,4 +32,9 @@ public class Calculator {
         return false;
     }
 
+    private String getCustomDelimiter(){
+        Pattern pattern = Pattern.compile("//(.*?)n//");
+        Matcher matcher = pattern.matcher(numbers);
+        return matcher.group(1);
+    }
 }
