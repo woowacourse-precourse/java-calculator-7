@@ -51,12 +51,18 @@ public class StringCalculatorTest {
     @DisplayName("숫자 필터링 기능 테스트")
     public void filterNumberTest() {
         // given
-        String input = "1,2:3";
+        String input1 = "1,2:3";
+        String input2 = "13:27:3";
+        String input3 = "139,20:3576";
 
         // when
-        List<Long> numbers = stringCalculator.filter(input);
+        List<Long> numbers1 = stringCalculator.filter(input1);
+        List<Long> numbers2 = stringCalculator.filter(input2);
+        List<Long> numbers3 = stringCalculator.filter(input3);
 
         // then
-        assertThat(numbers).containsExactly(1L, 2L, 3L);
+        assertThat(numbers1).containsExactly(1L, 2L, 3L);
+        assertThat(numbers2).containsExactly(13L, 27L, 3L);
+        assertThat(numbers3).containsExactly(139L, 20L, 3576L);
     }
 }
