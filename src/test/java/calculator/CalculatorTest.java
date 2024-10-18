@@ -2,6 +2,8 @@ package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import calculator.domain.Calculator;
+import calculator.domain.PositiveCalculator;
 import org.junit.jupiter.api.Test;
 
 class CalculatorTest {

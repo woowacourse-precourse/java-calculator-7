@@ -3,6 +3,7 @@ package calculator;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
+import calculator.domain.Extractor;
 import org.junit.jupiter.api.Test;
 
 class ExtractorTest {
