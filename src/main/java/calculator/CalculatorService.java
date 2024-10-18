@@ -1,5 +1,6 @@
 package calculator;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,6 +28,7 @@ public class CalculatorService {
 
     /**
      * 유저 입력에서 커스텀 구분자 있으면 파싱 후 반환 아니면 빈 문자열 반환
+     *
      * @param input
      * @return
      */
@@ -49,6 +51,10 @@ public class CalculatorService {
         return processedInput.split(regex);
     }
 
+    public long calculate(String[] numberStrings) {
+        return Arrays.stream(numberStrings).mapToLong(Long::parseLong).sum();
+    }
+
     public long logic(String input) {
 
         if (isBlank(input)) {
@@ -58,6 +64,9 @@ public class CalculatorService {
 
         validate(input, customSeparator);
 
-        return 1;
+        String[] splitedInput = splitBySeparator(input, customSeparator);
+        long answer = calculate(splitedInput);
+
+        return answer;
     }
 }
