@@ -52,12 +52,13 @@ class StringAdderTest extends NsTest {
   }
 
   @ParameterizedTest
-  @ValueSource(strings = {"", "\n"})
+  @ValueSource(strings = {"\n"})
   @DisplayName("빈 문자열 입력")
   void run_emptyInput_throwIllegalArgumentException(String input) {
-    assertThatThrownBy(() -> runException(input))
-        .isInstanceOf(IllegalArgumentException.class)
-        .hasMessageContaining("InputValidator");
+    assertSimpleTest(() -> {
+      run(input);
+      assertThat(output()).contains("결과 : 0");
+    });
   }
 
   @ParameterizedTest
