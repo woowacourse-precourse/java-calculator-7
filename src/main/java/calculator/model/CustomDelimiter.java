@@ -4,6 +4,8 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 public class CustomDelimiter {
+    private static final String INVALID_CUSTOM_DELIMITER = "커스텀 구분자가 정상적으로 입력되지 않았습니다.";
+    private static final String NO_INPUT_NUMBERS = "숫자가 입력되지 않았습니다.";
     private String formula;
 
     public CustomDelimiter(String formula){
@@ -15,22 +17,32 @@ public class CustomDelimiter {
     }
 
     public String getCustomDelimiter(){
+        if (!checkCustomDelimiter()) {
+            return null;
+        }
         Pattern pattern = Pattern.compile("//(.*?)\n");
         Matcher matcher = pattern.matcher(formula);
-        return matcher.group(1);
+        if (matcher.find()) {
+            return matcher.group(1);
+        } else {
+            throw new IllegalArgumentException(INVALID_CUSTOM_DELIMITER);
+        }
     }
 
     public boolean checkCustomDelimiter(){
-        String[] splitedNumbers = formula.split("[,;]");
-        String engraftedNumbers = String.join("", splitedNumbers);  
-        if (!engraftedNumbers.matches("\\d+")){
-            return true;
-        }
-        return false;
+        return formula.startsWith("//");
     }
 
-    public String SplitDelimiter(){
-        String[] splitedNumbers = formula.split("\n");
-        return splitedNumbers[1];
+    public String getNumbersPart(){
+        if (checkCustomDelimiter()) {
+            String[] splitedNumbers = formula.split("\n", 2);
+            if (splitedNumbers.length > 1) {
+                return splitedNumbers[1];
+            } else {
+                throw new IllegalArgumentException(NO_INPUT_NUMBERS);
+            }
+        } else {
+            return formula;
+        }
     }
 }
