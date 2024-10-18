@@ -11,18 +11,12 @@ public class Validator {
 
         return matcher.find();
     }
-
     public static boolean checkCustomDelimiterFormat(String inputString) {
         String rex =  "^//[\\D ]\\\\n.*$";
         Pattern p = Pattern.compile(rex);
         Matcher matcher = p.matcher(inputString);
 
         return matcher.find();
-    }
-    public static void checkNagativeInt(int part) {
-        if (part < 0) {
-            throw new IllegalArgumentException("음수값은 덧셈 할 수 없습니다.");
-        }
     }
     public static Boolean checkRemainStringFormat(String remainingInput, String customDelimiter) {
         String rex = "^[0-9]+([" + customDelimiter + "]\\d*)*$";
@@ -31,7 +25,11 @@ public class Validator {
 
         return matcher.find();
     }
-
+    public static void checkNagativeInt(int part) {
+        if (part < 0) {
+            throw new IllegalArgumentException("음수값은 덧셈 할 수 없습니다.");
+        }
+    }
     public static void checkEmptyInput(String inputString) {
         if (inputString.isEmpty()) {
             throw new IllegalArgumentException("빈 값을 입력하였습니다");

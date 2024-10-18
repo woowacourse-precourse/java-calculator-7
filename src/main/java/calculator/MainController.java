@@ -2,48 +2,33 @@ package calculator;
 
 import calculator.view.InputView;
 import calculator.view.OutputView;
-import java.util.Arrays;
 import java.util.List;
 
 public class MainController {
 
     public static void run() {
         String inputString = InputView.readString();
-        int sumResult = getSplittedValuesSum(inputString);
+        int sumResult = calculateSum(inputString);
         OutputView.printResult(sumResult);
     }
-    private static List<String> SplitbyDefaultDelimiter(String inputString) {
-        List<String> defaultSplitValues = Arrays.asList(inputString.split(",|:"));
-        return defaultSplitValues;
-    }
-    private static List<String> SplitbyCustomDelimiter(String inputString) {
-        String customDelimiter = String.valueOf(inputString.charAt(2));
-        String remainingInput = inputString.substring(5);
-
-        if (Validator.checkRemainStringFormat(remainingInput, customDelimiter)) {
-            List<String> customSplitValues = Arrays.asList(remainingInput.split(customDelimiter));
-            return customSplitValues;
-        }
-        throw new IllegalArgumentException("커스텀 구분자 지정형식 뒤의 계산할 문자열 형식을 확인해주세요");
-    }
-    private static int getSplittedValuesSum(String inputString) {
-        List<String> splittedValues;
-        int sumResult = 0 ;
+    
+    private static int calculateSum(String inputString) {
+        List<String> splitValues;
 
         if(Validator.checkDefaultDelimterFormat(inputString)){
-            splittedValues = SplitbyDefaultDelimiter(inputString);
-            return getSumResult(splittedValues);
+            splitValues = StringSplitter.SplitbyDefaultDelimiter(inputString);
+            return sumsplitValues(splitValues);
         }
 
         if (Validator.checkCustomDelimiterFormat(inputString)){
-            splittedValues = SplitbyCustomDelimiter(inputString);
-            sumResult = getSumResult(splittedValues);
+            splitValues = StringSplitter.SplitbyCustomDelimiter(inputString);
+            return sumsplitValues(splitValues);
         }
-        return sumResult;
+        return 0;
     }
-    private static int getSumResult(List<String> splittedValues) {
+    private static int sumsplitValues(List<String> splitValues) {
         int sumResult = 0;
-        for (String part : splittedValues) {
+        for (String part : splitValues) {
             Validator.checkNagativeInt(Integer.parseInt(part));
             sumResult += Integer.parseInt(part);
         }
