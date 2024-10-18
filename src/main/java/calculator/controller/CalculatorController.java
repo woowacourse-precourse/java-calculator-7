@@ -9,20 +9,20 @@ import calculator.view.output.ResultService;
 
 public class CalculatorController {
     private final GenerateController generateController;
-    private final InputHandlerService inputHandlerService;
-    private final ResultService resultService;
+    private final InputHandlerService inputProcess;
+    private final ResultService outputProcess;
     public CalculatorController(
             GenerateController generateController,
-            InputHandlerService inputHandlerService,
-            ResultService resultService) {
+            InputHandlerService inputProcess,
+            ResultService outputProcess) {
         this.generateController = generateController;
-        this.inputHandlerService = inputHandlerService;
-        this.resultService = resultService;
+        this.inputProcess = inputProcess;
+        this.outputProcess = outputProcess;
     }
     public void run() {
-        Sentence sentence = inputHandlerService.receive(Sentence::new);
+        Sentence sentence = inputProcess.receive(Sentence::new);
         Number number =  generateController.createNumber(sentence);
         long result = CalculatorProcess.sum(number);
-        resultService.result(result);
+        outputProcess.result(result);
     }
 }
