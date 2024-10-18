@@ -14,15 +14,15 @@ public class Application {
 
     public static void main(String[] args) {
         String input = Console.readLine();
-        int result = add(input);
+        long result = add(input);
         System.out.println("결과 : " + result);
     }
 
-    private static int add(String input) {
+    private static long add(String input) {
         boolean isNotContainingDelimiter = !input.contains(COMMA) && !input.contains(SEMICOLON);
 
         if (input.isEmpty()) {
-            return 0;
+            return 0L;
         }
         if (isNotContainingDelimiter) {
             throw new IllegalArgumentException("구분자가 없습니다");
@@ -35,10 +35,14 @@ public class Application {
 
         List<String> stringInputs = Arrays.stream(input.split(COMMA_AND_SEMICOLON)).toList();
 
-        List<Integer> intParsedInputs;
+        List<Long> longParsedInputs;
         try {
-            intParsedInputs = stringInputs.stream().filter(letter -> !letter.equals(EMPTY)).map(String::trim)
-                    .map(Integer::parseInt).toList();
+            longParsedInputs = stringInputs.stream()
+                    .filter(letter -> !letter.equals(EMPTY))
+                    .map(String::trim)
+                    .map(Long::parseLong)
+                    .toList();
+
         } catch (NumberFormatException e) {
 
             for (String stringInput : stringInputs) {
@@ -48,10 +52,10 @@ public class Application {
                 }
             }
 
-            throw new IllegalArgumentException("파싱시 Int 형식이 아닙니다");
+            throw new IllegalArgumentException("파싱시 Long 형식이 아닙니다");
         }
 
-        for (int inputNumber : intParsedInputs) {
+        for (long inputNumber : longParsedInputs) {
             if (inputNumber == 0) {
                 throw new IllegalArgumentException("0을 포함합니다");
             }
@@ -61,7 +65,7 @@ public class Application {
             }
         }
 
-        return intParsedInputs.stream().reduce(0, Integer::sum);
+        return longParsedInputs.stream().reduce(0L, Long::sum);
     }
 
     private static void validateOnlyDelimiter(String input, String delimiter) {

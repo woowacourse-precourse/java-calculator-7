@@ -139,6 +139,18 @@ class ApplicationTest extends NsTest {
                     .hasMessage("피연산자에 숫자가 아닌 다른 문자가 있습니다");
         });
     }
+    @Test
+    void addInputOverIntegerSize() {
+        assertSimpleTest(() -> {
+            run("2147483648;");
+            assertThat(output()).contains("결과 : 2147483648");
+        });
+
+        assertSimpleTest(() -> {
+            run("2147483649 ;");
+            assertThat(output()).contains("결과 : 2147483649");
+        });
+    }
 
     @Test
     void 커스텀_구분자_사용() {
