@@ -1,12 +1,23 @@
 package calculator;
 
-public class InputParser {
-    private String input;
+public class InputManager {
+    private final String input;
     private String separatorCandidates;
     private String operandCandidates;
 
-    public InputParser(String input) {
+    public InputManager(String input) {
         this.input = input;
+    }
+
+    public boolean validate() {
+        if(input.startsWith("//") && input.contains("\\n")) {
+            return true;
+        }
+        return input.matches("[1-9,:]+");
+    }
+
+    public boolean isCustomSeparatorCandidateExisted() {
+        return this.input.startsWith("//");
     }
 
     public String getSeparatorCandidates() {

@@ -7,13 +7,18 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         String input = Console.readLine();
-        InputParser inputParser = new InputParser(input);
-
+        InputManager inputManager = new InputManager(input);
+        if (!inputManager.validate()) {
+            throw new IllegalArgumentException("유효한 입력이 아닙니다.");
+        }
         Separator separator = new Separator();
-        separator.save(inputParser.getSeparatorCandidates());
+
+        if(inputManager.isCustomSeparatorCandidateExisted()) {
+            separator.save(inputManager.getSeparatorCandidates());
+        }
 
         OperandManager operandManager = new OperandManager();
-        operandManager.save(inputParser.getOperandCandidates(), separator.getSeparators());
+        operandManager.save(inputManager.getOperandCandidates(), separator.getSeparators());
 
         Operator operator = new Operator();
         BigDecimal result = operator.add(operandManager.getOperands());
