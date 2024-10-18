@@ -17,16 +17,9 @@ public class Separator {
     }
 
     public String containCustomSeparator(String input) {
-        if (input.startsWith("//")) {
-            System.out.println("// 포함");
-        }
-        if (input.contains("\\n")) {
-            System.out.println("개행 포함");
-        }
         if (input.startsWith("//") && input.contains("\\n")) {
             separators.add(input.substring(2, 3));
             this.separators = List.copyOf(separators);
-            System.out.println("구분자 적용 후 입력: " + input.substring(5));  // 디버깅용 출력
             return input.substring(5);
         }
         return input;
