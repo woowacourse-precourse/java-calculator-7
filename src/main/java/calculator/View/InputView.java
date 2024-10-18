@@ -12,9 +12,7 @@ public class InputView {
     }
 
     public static String getUserInput() {
-        String userInput = Console.readLine();
-
-        return userInput;
+        return Console.readLine();
     }
 
 }
