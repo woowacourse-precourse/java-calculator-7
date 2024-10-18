@@ -2,8 +2,8 @@ package calculator.entity;
 
 import static calculator.utils.Constants.CUSTOM_SEPARATOR_END_IDX;
 import static calculator.utils.Constants.CUSTOM_SEPARATOR_IDX;
-import static calculator.utils.Constants.CUSTOM_SEP_END_STRING;
-import static calculator.utils.Constants.CUSTOM_SEP_START_STRING;
+import static calculator.utils.Constants.CUSTOM_DESIGNATOR_END;
+import static calculator.utils.Constants.CUSTOM_DESIGNATOR_START;
 
 import java.util.Objects;
 
@@ -69,11 +69,11 @@ public class Index implements Comparable<Index> {
     }
 
     protected boolean isStartCustomSep(String value) {
-        return value.startsWith(CUSTOM_SEP_START_STRING, this.value);
+        return value.startsWith(CUSTOM_DESIGNATOR_START, this.value);
     }
 
     protected boolean isEndCustomSep(String value) {
-        return value.startsWith(CUSTOM_SEP_END_STRING, this.value + CUSTOM_SEPARATOR_END_IDX.value);
+        return value.startsWith(CUSTOM_DESIGNATOR_END, this.value + CUSTOM_SEPARATOR_END_IDX.value);
     }
 
     protected String oneLetter(String value) {

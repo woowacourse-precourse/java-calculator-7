@@ -7,8 +7,8 @@ public final class Constants {
 
     public static final String COMMA = ",";
     public static final String COLON = ":";
-    public static final String CUSTOM_SEP_START_STRING = "//";
-    public static final String CUSTOM_SEP_END_STRING = "\\n";
+    public static final String CUSTOM_DESIGNATOR_START = "//";
+    public static final String CUSTOM_DESIGNATOR_END = "\\n";
 
     public static final Index CUSTOM_SEPARATOR_LENGTH = new Index(5);
     public static final Index CUSTOM_SEPARATOR_IDX = new Index(2);
