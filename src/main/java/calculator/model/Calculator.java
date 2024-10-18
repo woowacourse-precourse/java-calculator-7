@@ -42,8 +42,5 @@ public class Calculator {
             sumOfNumbers = sumOfNumbers + intNumber;
         }
         return String.valueOf(sumOfNumbers);
-    }
-
-
-    
+    }  
 }
