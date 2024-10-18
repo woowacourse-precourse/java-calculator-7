@@ -17,4 +17,12 @@ public class NumberStorage {
             throw new IllegalArgumentException();
         }
     }
+
+    public Double getTotalSum(){
+        Double totalSum = 0.0;
+        for(int i = 0; i < numberList.size(); i++){
+            totalSum += numberList.get(i);
+        }
+        return totalSum;
+    }
 }
