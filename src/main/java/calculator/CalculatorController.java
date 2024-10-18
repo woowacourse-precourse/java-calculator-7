@@ -1,10 +1,10 @@
 package calculator;
 
 import calculator.separator.CustomSeparatorManager;
+import calculator.separator.NumericString;
 import calculator.separator.Separators;
 import calculator.view.InputView;
 import calculator.view.OutputView;
-import java.util.List;
 import java.util.Objects;
 
 public class CalculatorController {
@@ -27,18 +27,15 @@ public class CalculatorController {
         Separators separators = getSeparators(input);
 
         String inputWithoutCustomSeparators = customSeparatorManager.sliceCustomSeparators(input);
-        NumericString sum = Adder.add(inputWithoutCustomSeparators, separators);
+        NumericString sum = SeparatorCalculator.sum(inputWithoutCustomSeparators, separators);
 
         outputView.printResult(sum);
     }
 
     private Separators getSeparators(String input) {
-        return Separators.withDefault()
-                .merge(customSeparatorManager.findAllCustomSeparators(input));
-    }
+        Separators customSeparators = customSeparatorManager.findAllCustomSeparators(input);
 
-    private List<String> split(String input, Separators separators) {
-        input = customSeparatorManager.sliceCustomSeparators(input);
-        return separators.split(input);
+        return Separators.withDefault()
+                .merge(customSeparators);
     }
 }

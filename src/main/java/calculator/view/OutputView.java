@@ -1,6 +1,6 @@
 package calculator.view;
 
-import calculator.NumericString;
+import calculator.separator.NumericString;
 
 public class OutputView {
 
