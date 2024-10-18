@@ -41,10 +41,10 @@ public class Preprocessing {
     public List<String> findCustomSeparator(String given) {
         String temp = null;
         String customSeparator = null;
-        int endIdx = -1; // 커스텀 지정 끝나는 지점 인덱스
+        int endIdx = -2; // 커스텀 지정 끝나는 지점 인덱스
 
         for (int i = 2; i < given.length(); i++) {
-            if (given.substring(i - 1, i + 1).equals("\n")) {
+            if (given.substring(i - 1, i + 1).equals("\\n")) {
                 customSeparator = temp.substring(0, temp.length() - 1);
                 endIdx = i;
                 break;
