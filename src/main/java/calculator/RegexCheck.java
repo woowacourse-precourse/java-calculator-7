@@ -11,6 +11,8 @@ public abstract class RegexCheck {
     this.input = input;
   }
 
+
+
   public void setSort(String sort) {
     this.sort = sort;
   }
