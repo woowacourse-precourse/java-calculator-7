@@ -50,4 +50,15 @@ class InputParserTest {
         //then
         Assertions.assertEquals(expected, result);
     }
+
+    @Test
+    @DisplayName("문자열 리스트를 숫자 리스트로 파싱 - 파싱 성공한 경우")
+    void parseStringListToLongList() {
+        //given
+        List<String> input = Arrays.asList("1", "2", "3", "4");
+        List<Long> expected = Arrays.asList(1L, 2L, 3L, 4L);
+
+        //when
+        List<Long> result = inputParser.parseStringListToLongList(input);
+    }
 }
