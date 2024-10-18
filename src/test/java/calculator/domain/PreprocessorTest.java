@@ -27,9 +27,9 @@ class PreprocessorTest {
 
         // then
         assertEquals(expectUnparsedNumber, hashResult.unparsedNumber());
-        assertTrue(hashResult.delimiters().containsAll(List.of(',', ';', '#')));
+        assertTrue(hashResult.delimiters().containsAll(List.of(',', ':', '#')));
         assertEquals(expectUnparsedNumber, spaceResult.unparsedNumber());
-        assertTrue(spaceResult.delimiters().containsAll(List.of(',', ';', ' ')));
+        assertTrue(spaceResult.delimiters().containsAll(List.of(',', ':', ' ')));
     }
 
     @Test
@@ -44,7 +44,7 @@ class PreprocessorTest {
 
         // then
         assertEquals("1#2#3", result.unparsedNumber());  // 커스텀 구분자를 제외한 나머지 문자열 확인
-        assertTrue(result.delimiters().containsAll(List.of(',', ';', ' ')));  // 커스텀 구분자가 추가됐는지 확인
+        assertTrue(result.delimiters().containsAll(List.of(',', ':', ' ')));  // 커스텀 구분자가 추가됐는지 확인
     }
 
     @Test
@@ -59,7 +59,7 @@ class PreprocessorTest {
 
         // then
         assertEquals(emptyInput, result.unparsedNumber());
-        assertTrue(result.delimiters().containsAll(List.of(',', ';')));
+        assertTrue(result.delimiters().containsAll(List.of(',', ':')));
     }
 
     @Test
