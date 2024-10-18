@@ -42,8 +42,13 @@ public class Application {
 
         for (String word : nums) {
             if (!word.trim().isEmpty()) {
-                int num = Integer.parseInt(word.trim());
-                result += num;
+                int num;
+                try {
+                    num = Integer.parseInt(word.trim());
+                    result += num;
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException();
+                }
             }
         }
         System.out.println("결과 : " + result);
