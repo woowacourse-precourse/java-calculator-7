@@ -44,7 +44,7 @@ public class CalculatorController {
 
     private void validatePositiveNumber(String[] values) {
         NumberValidator numberValidator = NumberValidator.getInstance();
-        numberValidator.validatePositiveNumbers(values);
+        numberValidator.validateNumbers(values);
     }
 
     private int[] convertToInt(String[] values) {

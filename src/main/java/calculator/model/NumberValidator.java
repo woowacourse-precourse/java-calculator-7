@@ -10,13 +10,13 @@ public class NumberValidator {
 
     }
 
-    public void validatePositiveNumbers(String... strNums) {
+    public void validateNumbers(String... strNums) {
         for (String strNum : strNums) {
-            convertToInteger(strNum);
+            validateNumber(strNum);
         }
     }
 
-    private Integer convertToInteger(String strNum) {
+    private Integer validateNumber(String strNum) {
         return Integer.valueOf(strNum);
     }
 
