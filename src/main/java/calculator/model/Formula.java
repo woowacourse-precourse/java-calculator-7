@@ -1,6 +1,6 @@
 package calculator.model;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -33,5 +33,18 @@ public class Formula {
 
     public String extractCustomDelimiter(String formula) {
         return formula.substring(2, 4);
+    }
+
+    public List<Integer> extractNumber() {
+        return Arrays.stream(formula.split("//|\\\\n|:|,|" + customDelimiter))
+                .map(this::numberParser)
+                .toList();
+    }
+
+    public Integer numberParser(String number) {
+        if (number.isEmpty()) {
+            return 0;
+        }
+        return Integer.parseInt(number);
     }
 }
