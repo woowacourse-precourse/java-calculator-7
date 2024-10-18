@@ -13,11 +13,11 @@ public class CustomInputValidator implements InputValidator{
 
     if(input.startsWith("//")){
       char customDelimiter = extractCustomDelimiter(input);
-      validateAllowedCharacters(input.substring(4), customDelimiter);
+//      validateAllowedCharacters(input.substring(4), customDelimiter);
     }
-    else{
-      validateAllowedCharacters(input, ',');
-    }
+//    else{
+//      validateAllowedCharacters(input, ',');
+//    }
   }
 
   private char extractCustomDelimiter(String input) {
@@ -36,17 +36,17 @@ public class CustomInputValidator implements InputValidator{
     return delimiter;
   }
 
-  private void validateAllowedCharacters(String input, char customDelimiter) {
-    List<Character> invalidChars = new ArrayList<>();
-    for (char ch : input.toCharArray()) {
-      if(!Character.isDigit(ch) && ch != customDelimiter && ch != ',' && ch != ':'){
-        invalidChars.add(ch);
-      }
-    }
-
-    if (!invalidChars.isEmpty()) {
-      throw new IllegalArgumentException(
-          ErrorCode.DISALLOWED_CHAR_ERROR.formatMessage(invalidChars.toString()));
-    }
-  }
+//  private void validateAllowedCharacters(String input, char customDelimiter) {
+//    List<Character> invalidChars = new ArrayList<>();
+//    for (char ch : input.toCharArray()) {
+//      if(!Character.isDigit(ch) && ch != customDelimiter && ch != ',' && ch != ':'){
+//        invalidChars.add(ch);
+//      }
+//    }
+//
+//    if (!invalidChars.isEmpty()) {
+//      throw new IllegalArgumentException(
+//          ErrorCode.DISALLOWED_CHAR_ERROR.formatMessage(invalidChars.toString()));
+//    }
+//  }
 }

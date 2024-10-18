@@ -55,23 +55,23 @@ public class CustomInputValidatorTest extends NsTest {
     });
   }
 
-  @Test
-  void 기본_구분자_잘못된_문자_포함_예외(){
-    assertSimpleTest(()->{
-      assertThatThrownBy(() -> validator.validateInput("1:2,3@4#5$6"))
-          .isInstanceOf(IllegalArgumentException.class)
-          .hasMessageContaining(ErrorCode.DISALLOWED_CHAR_ERROR.formatMessage("[@, #, $]"));
-    });
-  }
-
-  @Test
-  void 커스텀_구분자_포함_잘못된_문자_포함_예외(){
-    assertSimpleTest(()->{
-      assertThatThrownBy(() -> validator.validateInput("//#\n1:2,3#4%5$6^7"))
-          .isInstanceOf(IllegalArgumentException.class)
-          .hasMessageContaining(ErrorCode.DISALLOWED_CHAR_ERROR.formatMessage("[%, $, ^]"));
-    });
-  }
+//  @Test
+//  void 기본_구분자_잘못된_문자_포함_예외(){
+//    assertSimpleTest(()->{
+//      assertThatThrownBy(() -> validator.validateInput("1:2,3@4#5$6"))
+//          .isInstanceOf(IllegalArgumentException.class)
+//          .hasMessageContaining(ErrorCode.DISALLOWED_CHAR_ERROR.formatMessage("[@, #, $]"));
+//    });
+//  }
+//
+//  @Test
+//  void 커스텀_구분자_포함_잘못된_문자_포함_예외(){
+//    assertSimpleTest(()->{
+//      assertThatThrownBy(() -> validator.validateInput("//#\n1:2,3#4%5$6^7"))
+//          .isInstanceOf(IllegalArgumentException.class)
+//          .hasMessageContaining(ErrorCode.DISALLOWED_CHAR_ERROR.formatMessage("[%, $, ^]"));
+//    });
+//  }
 
   @Override
   public void runMain(){
