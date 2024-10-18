@@ -36,10 +36,14 @@ public class Application {
         // 등록된 구분자로 문자열을 분리한다.
         String separator = separatorBuilder.toString();
         StringTokenizer tokens = new StringTokenizer(input, separator);
+
+        int result = 0;
         while (tokens.hasMoreTokens()) {
             String token = tokens.nextToken();
 
             // 숫자가 아닌 문자가 입력되었을 때
+            // 이때 구분자를 기준으로 split 하기 때문에, 숫자인지만 검증해도 괜찮다.
+            // NumberFormatException 이 더 하위 레벨(더 명확한)의 예외인데, try-catch 로 잡아낼지에 대한 고민
             if (!token.matches("[0-9]")) {
                 throw new IllegalArgumentException("숫자가 아닌 값은 계산할 수 없습니다.");
             }
@@ -51,6 +55,9 @@ public class Application {
                 // 아닌 경우 예외를 throw 한다.
                 throw new IllegalArgumentException("숫자는 양수여야 합니다.");
             }
+
+            // 파싱된 숫자들을 모두 더한다.
+            result += number;
         }
     }
 }
