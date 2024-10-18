@@ -14,14 +14,13 @@ public class Splitter {
     }
 
     public String[] splitNumbers(CustomDelimiter customDelimiter){
-        String delimiter = "";
-        String numbers = customDelimiter.getFormula();
-        if(customDelimiter.checkCustomDelimiter()){
-            delimiter = customDelimiter.getCustomDelimiter();
-            numbers = customDelimiter.SplitDelimiter();
-            return numbers.split("[,;]|" + Pattern.quote(delimiter));
+        String delimiter = ",|:";
+        String numbers = customDelimiter.getNumbersPart();
+        String customDelim = customDelimiter.getCustomDelimiter();
+        if(customDelim != null){
+            delimiter = delimiter + "|" + Pattern.quote(customDelim);
         }
-            return numbers.split("[,;]");
+        return numbers.split(delimiter);
     }
 
 }
