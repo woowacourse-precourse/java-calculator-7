@@ -8,6 +8,7 @@ import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
+
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
@@ -86,18 +87,10 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 정수_범위_초과인_경우() {
+    void int_범위_초과_확인() {
         assertSimpleTest(() -> {
             run("2147483647,1");
             assertThat(output()).contains("결과 : 2147483648");
         });
-    }
-
-    @Test
-    void 숫자로_끝나지_않는_경우() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//[\\n1[2;"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
     }
 }

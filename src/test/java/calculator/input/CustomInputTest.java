@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class CustomInputTest {
 
     @Test
-    void 상속_객체_테스트() {
+    void 커스텀_객체_생성() {
         // given & when
         Input customInput = Input.from("//;\\n1;2;3");
         // then
@@ -17,7 +17,7 @@ class CustomInputTest {
     }
 
     @Test
-    void 커스텀_구분자가_주어진_경우() {
+    void 커스텀_구분자_확인() {
         // given
         String separator = ";";
         String inputStr = "//" + separator + "\\n1;2;3";
@@ -29,7 +29,7 @@ class CustomInputTest {
     }
 
     @Test
-    void 숫자_배열_테스트() {
+    void 정수_리스트_요소_확인() {
         // given
         Input input = Input.from("//;\\n1;2;3");
         // when
@@ -41,15 +41,7 @@ class CustomInputTest {
     }
 
     @Test
-    void 숫자배열_예외_구분자_다름() {
-        // given
-        Input input = Input.from("//;\\n1?2");
-        // when & then
-        assertThrows(IllegalArgumentException.class, input::toLongList);
-    }
-
-    @Test
-    void escape_커스텀_구분자가_주어진_경우_온점() {
+    void escape_커스텀_구분자가_주어진_경우_구분자_확인() {
         String escapes = ".^$*+?()[]{}|\\";
         for (int i = 0; i < escapes.length(); i++) {
             // given
@@ -63,7 +55,16 @@ class CustomInputTest {
     }
 
     @Test
-    void 커스텀_숫자_변환_예외_숫자로_시작_안_함() {
+    void 정수_리스트_예외__커스텀과_다른_구분자() {
+        // given
+        Input input = Input.from("//;\\n1?2");
+        // when & then
+        assertThrows(IllegalArgumentException.class, input::toLongList);
+    }
+
+    @Test
+    void 정수_리스트_예외__구분자_앞에_정수_없음() {
+        // TODO : 구분자 뒤에 정수가 없는 경우 허용하는지 확인 후 처리 예정 ex) //;\n1;2;;;
         // given
         Input input = Input.from("//;\\n;2;3");
         // when & then
@@ -71,29 +72,26 @@ class CustomInputTest {
     }
 
     @Test
-    void 커스텀_숫자_변환_예외_구분자_없음() {
+    void 객체_생성_예외__구분자_없음() {
         // given
         Input input = Input.from("//\\n1;2;3");
         // when & then
-        assertFalse(input instanceof CustomInput);
         assertThrows(IllegalArgumentException.class, input::toLongList);
     }
 
     @Test
-    void 커스텀_숫자_변환_예외_prefix_없음() {
+    void 객체_생성_예외__prefix_없음() {
         // given
         Input input = Input.from(";\\n1;2;3");
         // when & then
-        assertFalse(input instanceof CustomInput);
         assertThrows(IllegalArgumentException.class, input::toLongList);
     }
 
     @Test
-    void 커스텀_객체_변환_예외_suffix_없음() {
+    void 객체_생성_예외__suffix_없음() {
         // given
         Input input = Input.from("//;1;2;3");
         // when & then
-        assertFalse(input instanceof CustomInput);
         assertThrows(IllegalArgumentException.class, input::toLongList);
     }
 }

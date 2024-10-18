@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class CalculatorTest {
 
     @Test
-    void 객체_테스트() {
+    void 기본_객체_생성() {
         // given & when
         Calculator calculator = Calculator.enterValue("1,2:3");
         // then
@@ -16,7 +16,7 @@ class CalculatorTest {
     }
 
     @Test
-    void 기본_결과_테스트() {
+    void 기본_결과() {
         // given & when
         Calculator calculator = Calculator.enterValue("1,2:3");
         // then
@@ -24,7 +24,7 @@ class CalculatorTest {
     }
 
     @Test
-    void 커스텀_결과_테스트() {
+    void 커스텀_결과() {
         // given & when
         Calculator calculator = Calculator.enterValue("//;\\n1;2;3");
         // then

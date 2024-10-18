@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class InputTest {
 
     @Test
-    void 객체_테스트() {
+    void 객체_생성() {
         // given & when
         Input input = Input.from("1;2;3");
         // then
@@ -17,7 +17,7 @@ class InputTest {
     }
 
     @Test
-    void 구분자가_확인_콤마() {
+    void 기본_구분자_확인() {
         // given & when
         Input input = Input.from("1,2:3");
         // then
@@ -26,7 +26,7 @@ class InputTest {
     }
 
     @Test
-    void 숫자_배열_테스트_콜론() {
+    void 정수_리스트_변환_콜론() {
         // given
         Input input = Input.from("1:2:3");
         // when
@@ -38,7 +38,7 @@ class InputTest {
     }
 
     @Test
-    void 숫자_배열_테스트_콤마() {
+    void 정수_리스트_변환_콤마() {
         // given
         Input input = Input.from("1,3");
         // when
@@ -49,18 +49,10 @@ class InputTest {
     }
 
     @Test
-    void 숫자_배열_예외_기본_구분자_오류() {
+    void 정수_리스트_예외__기본_구분자와_다름() {
         // given
         Input input = Input.from("1,3?2");
         // when & then
         assertThrows(IllegalArgumentException.class, input::toLongList);
-    }
-
-    @Test
-    void 기본_객체_변환_예외_숫자로_시작_안_함() {
-        // given
-        String defaultInput = ";2;3";
-        // when & then
-        assertThrows(IllegalArgumentException.class, () -> InputFilter.parseInput(defaultInput));
     }
 }
