@@ -1,6 +1,6 @@
 package calculator.constant;
 
-public class CharacterConstants {
+public final class CharacterConstants {
 
     public static final char[] CONSTANT_DELIMITER = {',', ':'};
     public static final String CUSTOM_DELIMITER_STARTS_WITH = "//";

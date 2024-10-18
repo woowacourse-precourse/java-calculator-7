@@ -1,6 +1,6 @@
 package calculator.constant;
 
-public class ErrorMessages {
+public final class ErrorMessages {
 
     public static final String EMPTY_INPUT_MESSAGE = "입력값이 없습니다";
     public static final String INVAILD_CHAR_MESSAGE = "'/'와'\\'는 커스텀 구분자를 등록하는 데에만 사용할 수 있습니다";
