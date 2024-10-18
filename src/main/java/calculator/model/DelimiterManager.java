@@ -16,10 +16,7 @@ public class DelimiterManager {
     }
 
     public void registerCustomDelimiters(String value) {
-        if (!delimiterChecker.existCustomDelimiter(value)) {
-            return;
-        }
-        Set<String> customDelimiters = delimiterExtractor.extractCustom(value);
+        List<String> customDelimiters = delimiterExtractor.extractCustom(value);
         delimiterStore.addDelimiters(customDelimiters);
     }
 }
