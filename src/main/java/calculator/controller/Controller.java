@@ -1,5 +1,6 @@
 package calculator.controller;
 
+import calculator.service.Parser;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -9,6 +10,7 @@ public class Controller {
         String inputNumber = getNumber();
 
         // 계산 메서드
+        System.out.println(parseInput(inputNumber));
 
         // 결과값 출력
         String result = getResult(100);
@@ -25,5 +27,15 @@ public class Controller {
     private String getResult(int answer) {
         OutputView outputView = new OutputView();
         return outputView.getResult(answer);
+    }
+
+    private String parseInput(String input) {
+        Parser parser = new Parser();
+        StringBuilder sb = new StringBuilder();
+        String[] inputArr = parser.parse(input);
+        for (String s : inputArr) {
+            sb.append(s).append(", ");
+        }
+        return sb.toString();
     }
 }
