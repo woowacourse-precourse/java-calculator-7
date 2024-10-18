@@ -1,13 +1,11 @@
 package calculator.service;
 
-import calculator.domain.Expression;
+
+import calculator.domain.calculator.Calculator;
 
 public class CalculatorService {
-    public static int add(String input) {
-        if (input == "") {
-            return 0;
-        }
-        Expression expression = new Expression(input);
-        return expression.calculateSum();
+    public int calculate(String input) {
+        Calculator calculator = Calculator.from(input);
+        return calculator.sum();
     }
 }

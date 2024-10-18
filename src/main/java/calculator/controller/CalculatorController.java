@@ -5,10 +5,20 @@ import calculator.view.InputView;
 import calculator.view.OutputView;
 
 public class CalculatorController {
-    public static void run() {
-        OutputView.displayInputMessage();
-        String input = InputView.getInput();
-        int result = CalculatorService.add(input);
-        OutputView.printResult(result);
+    private final CalculatorService calculatorService;
+    private final InputView inputView;
+    private final OutputView outputView;
+
+    public CalculatorController() {
+        this.calculatorService = new CalculatorService();
+        this.inputView = new InputView();
+        this.outputView = new OutputView();
+    }
+
+    public void run() {
+        outputView.displayInputMessage();
+        String input = inputView.getInput();
+        int result = calculatorService.calculate(input);
+        outputView.printResult(result);
     }
 }
