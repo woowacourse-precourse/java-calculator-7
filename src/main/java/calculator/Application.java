@@ -10,8 +10,10 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         System.out.println("덧셈할 문자열을 입력해 주세요.");
+
         String text = Console.readLine();
         String delimiters = "\\,|\\:";
+        int result;
 
         if (usesCustomDelimiter(text)) {
             String[] textAndDelimiters = extractCustomDelimiter(text, delimiters);
@@ -19,7 +21,25 @@ public class Application {
             delimiters = textAndDelimiters[1];
         }
 
+        result = calculateSum(text, delimiters);
+        output(result);
 
+    }
+
+    public static int calculateSum(String text, String delimiters) {
+        String[] textSplitArr = text.split(delimiters);
+
+        int sum = 0;
+        for (String s : textSplitArr) {
+            int num = Integer.parseInt(s);
+            sum += num;
+        }
+
+        return sum;
+    }
+
+    public static void output(int result) {
+        System.out.println("결과 : " + result);
     }
 
     public static boolean usesCustomDelimiter(String text) {
