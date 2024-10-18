@@ -6,25 +6,26 @@ import java.util.List;
 
 public class Calculator {
 
-    public static String get_input() {
+    //입력받기
+    public static String getInput() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
         Console.close();
         return input;
     }
 
+    //파싱하기
     public static List<Integer> parse(String input) {
         List<Integer> numbers = new ArrayList<Integer>();
         if (input == null || input.isEmpty()) {
             return numbers;
         }
 
-        String delimiter = ",|:";  // 기본 구분자: 쉼표와 콜론
+        String delimiter = ",|:";  // 기본 구분자: [",",":"]
 
         // 커스텀 구분자를 사용하는지 확인
         int delimiterStartIndex = 2;
         int delimiterEndIndex = input.indexOf("\\n");
-
         while (input.startsWith("//")) {
             if (delimiterEndIndex == -1) {
                 throw new IllegalArgumentException();
@@ -52,6 +53,7 @@ public class Calculator {
         return numbers;
     }
 
+    //계산하기
     public static int add(List<Integer> numbers) {
         int sum = 0;
         for (Integer number : numbers) {
