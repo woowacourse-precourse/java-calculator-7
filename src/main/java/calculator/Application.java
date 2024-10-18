@@ -5,9 +5,10 @@ public class Application {
         Calculator calculator = new Calculator();
         CalculatorIO calculatorIO = new CalculatorIO();
         SplitStringWithSeparator splitStringWithSeparator = new SplitStringWithSeparator();
+        DataVerification dataVerification = new DataVerification();
 
         calculatorIO.getUserInput();
-        checkIsInputEmpty(calculator);
+        dataVerification.checkIsInputEmpty(calculatorIO);
 
         int escapeIdx = calculatorIO.userInput.indexOf("\\n");
         if (escapeIdx > 0) {
@@ -16,32 +17,11 @@ public class Application {
             splitStringWithSeparator.splitWithDefaultSeparator(calculatorIO);
         }
 
-        checkIsPositiveNumber(calculator);
-        checkHasNumberFormat(calculator);
+        dataVerification.checkIsPositiveNumber(splitStringWithSeparator);
+        dataVerification.checkHasNumberFormat(splitStringWithSeparator);
+
         getTotal(calculator);
         calculatorIO.printResult(calculator);
-    }
-
-    static void checkIsInputEmpty(Calculator calculator) {
-        if (calculator.userInput.isEmpty()) {
-            System.out.println("결과 : " + 0);
-        }
-    }
-
-    static void checkIsPositiveNumber(Calculator calculator) {
-        for (String number : calculator.processedInput) {
-            if (Integer.parseInt(number) < 0) {
-                throw new IllegalArgumentException();
-            }
-        }
-    }
-
-    static void checkHasNumberFormat(Calculator calculator) {
-        for (String number : calculator.processedInput) {
-            if (Character.isDigit(Integer.parseInt(number))) {
-                throw new IllegalArgumentException();
-            }
-        }
     }
 
     static void getTotal(Calculator calculator) {
