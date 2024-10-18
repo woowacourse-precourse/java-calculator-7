@@ -23,9 +23,15 @@ public class Application {
 
         isNumeric(stringArray, intArray);
 
-        int answer = calculateNumber(intArray);
+        int sum = calculateNumber(intArray);
 
-        System.out.println("결과 : " + answer);
+        String answer = getAnswer(sum);
+        System.out.println(answer);
+        return;
+    }
+
+    public static String getAnswer(int sum) {
+        return "결과 : " + sum;
     }
 
     private static int calculateNumber(int[] num) {
