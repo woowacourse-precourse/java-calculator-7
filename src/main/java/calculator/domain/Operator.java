@@ -10,7 +10,7 @@ public enum Operator {
         public Number apply(Numbers numbers) {
             return new Number(
                     numbers.getNumbers().stream()
-                            .mapToInt(Number::getValue)
+                            .mapToDouble(Number::getValue)
                             .sum()
             );
         }
