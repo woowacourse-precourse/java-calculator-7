@@ -6,30 +6,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class DelimiterParser {
+
     private static final String COMMON_DELIMITER = ",";
-
-    private final List<String> delimiterList = new ArrayList<>();
-
-    public DelimiterParser(String... delimiterList) {
-        this.delimiterList.addAll(Arrays.asList(delimiterList));
-    }
-
-    public String replace(String input) {
-        String result = input;
-        for (String delimiter : delimiterList) {
-            if (delimiter.equals(input.substring(0, 2))) {
-                result = result.replace(input.substring(0, 2), "");
-                continue;
-            }
-            if (delimiter.equals(input.substring(3, 5))) {
-                result = result.replace(input.substring(3, 5), "");
-                continue;
-            }
-            result = result.replace(delimiter, COMMON_DELIMITER);
-        }
-        return result;
-    }
-
 
     public static boolean isDefaultDelimiter(String input) {
         return input.contains(":") || input.contains(",");

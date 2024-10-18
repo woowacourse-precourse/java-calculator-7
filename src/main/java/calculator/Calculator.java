@@ -1,6 +1,5 @@
 package calculator;
 
-
 import java.util.List;
 
 public class Calculator {
@@ -12,7 +11,7 @@ public class Calculator {
             return 0;
         }
         return delimiterParser.parseInputToIntList(input).stream()
-                .mapToInt(Integer::valueOf)
+                .mapToInt(Integer::intValue)
                 .sum();
     }
 }
