@@ -12,16 +12,25 @@ public class Application {
         String userInput = Console.readLine();
         Console.close();
 
-        List<Integer> nums = new ArrayList<>();
+        List<Integer> nums;
+
         if (userInput.startsWith("//") && userInput.startsWith("\\n", 3)) {
-//            nums = commandDelim(userInput);
+            nums = customDelim(userInput);
         } else {
             nums = basicDelim(userInput);
         }
 
-
-        int sum = nums.stream().mapToInt(i -> i).sum();
+        int sum = (nums != null) ? nums.stream().mapToInt(i -> i).sum() : 0;
         System.out.println("결과 : " + sum);
+    }
+
+    private static List<Integer> customDelim(String userInput) {
+        String customDelim = userInput.substring(2, 3);
+        String checkString = userInput.substring(5);
+        StringTokenizer st = new StringTokenizer(checkString, customDelim);
+        List<Integer> nums = new ArrayList<>();
+        extracted(st, nums);
+        return !nums.isEmpty() ? nums : null;
     }
 
     private static List<Integer> basicDelim(String userInput) {
@@ -33,19 +42,23 @@ public class Application {
         List<Integer> nums = new ArrayList<>();
         for (int i = 0; i < strings.size(); i++) {
             st = new StringTokenizer(strings.get(i), ":");
-            while (st.hasMoreTokens()) {
-                int num;
-                try {
-                    num = Integer.parseInt(st.nextToken());
-                } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException();
-                }
-                if (num <= 0) {
-                    throw new IllegalArgumentException();
-                }
-                nums.add(num);
-            }
+            extracted(st, nums);
         }
         return nums;
+    }
+
+    private static void extracted(StringTokenizer st, List<Integer> nums) {
+        while (st.hasMoreTokens()) {
+            int num;
+            try {
+                num = Integer.parseInt(st.nextToken());
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException();
+            }
+            if (num <= 0) {
+                throw new IllegalArgumentException();
+            }
+            nums.add(num);
+        }
     }
 }
