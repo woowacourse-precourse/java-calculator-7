@@ -18,8 +18,6 @@ public class Application {
     }
 
     private static String[] extractToken(String inputStr, String separations) {
-        ArrayList<Integer> listInt = new ArrayList<Integer>();
-
         separations = "[" + separations + "]";
         String[] tokens = inputStr.split(separations);
         return tokens;
