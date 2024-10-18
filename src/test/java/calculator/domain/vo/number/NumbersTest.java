@@ -65,11 +65,20 @@ class NumbersTest {
 
     private static Stream<Arguments> customDelimiterTestCases() {
         return Stream.of(
-            Arguments.of("//*\n1*2*3", BigInteger.valueOf(6)),
-            Arguments.of("//A\n1A2A3A4", BigInteger.valueOf(10)),
-            Arguments.of("//;\n1;2;10", BigInteger.valueOf(13))
+            Arguments.of("//*\\n1*2*3", BigInteger.valueOf(6)),
+            Arguments.of("//A\\n1A2A3A4", BigInteger.valueOf(10)),
+            Arguments.of("//;\\n1;2;10", BigInteger.valueOf(13))
         );
     }
 
+    @Test
+    void 음수가_포함된_입력은_예외를_발생() {
+        // given
+        String input = "1,-2,3,-4";
 
+        // when
+        Delimiters delimiters = Delimiters.from(input);
+        assertThatThrownBy(() -> Numbers.extractFrom(input, delimiters))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
 }

@@ -1,5 +1,6 @@
 package calculator.domain.vo.number;
 
+import static calculator.domain.vo.delimiter.constants.DelimiterPattern.*;
 import static calculator.infrastructure.exception.ErrorCode.*;
 
 import calculator.domain.vo.delimiter.Delimiters;
@@ -45,8 +46,8 @@ public class Numbers {
     }
 
     private static String normalizeInput(String input) {
-        if (input.startsWith("//")) {
-            input = input.substring(input.indexOf("\n") + 1);
+        if (input.startsWith(CUSTOM_DELIMITER_PREFIX.getValue())) {
+            input = input.substring(input.indexOf(CUSTOM_DELIMITER_SUFFIX.getValue()) + 2);
         }
 
         return input;

@@ -24,6 +24,10 @@ public class Number {
         } catch (NumberFormatException exception) {
             throw new IllegalArgumentException(INVALID_NUMBER.getMessage());
         }
+
+        if (new BigInteger(value).compareTo(BigInteger.ZERO) < 0) {
+            throw new IllegalArgumentException(NEGATIVE_NUMBER.getMessage());
+        }
     }
 
     public static Number from(final String value) {

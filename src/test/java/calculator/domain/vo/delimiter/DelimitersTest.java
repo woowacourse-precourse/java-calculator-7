@@ -24,7 +24,7 @@ class DelimitersTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"//;\n1;2;3", "//#\n1#2#3", "//*\n1*2*3"})
+    @ValueSource(strings = {"//;\\n1;2;3", "//#\\n1#2#3", "//*\\n1*2*3"})
     void Custom_Delimiter가_정상적으로_파싱(String input) {
 
         // given & when
@@ -35,7 +35,7 @@ class DelimitersTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"//;;\n1;2;3", "//##\n1#2#3", "//**\n1*2*3"})
+    @ValueSource(strings = {"//;;\\n1;2;3", "//##\\n1#2#3", "//**\\n1*2*3"})
     void 유효하지않은_Custom_Delimiter_시_예외를_발생(String input) {
         // given & when
         assertThatThrownBy(() -> Delimiters.from(input))

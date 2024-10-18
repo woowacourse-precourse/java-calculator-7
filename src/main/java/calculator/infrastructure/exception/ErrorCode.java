@@ -9,7 +9,8 @@ public enum ErrorCode {
     INPUT_CONTAINS_DUPLICATED_DELIMITER("입력 문자열에 중복된 구분자가 포함되어 있습니다."),
     INVALID_DELIMITER("구분자가 비었거나 문자로 이루어지지 않았습니다."),
     INVALID_COLLECTION("컬렉션이 비었거나 컬렉션으로 변환할 수 없는 값이 주어졌습니다."),
-    INVALID_NUMBER("숫자가 비었거나 숫자로 변환할 수 없는 값이 주어졌습니다."),;
+    INVALID_NUMBER("숫자가 비었거나 숫자로 변환할 수 없는 값이 주어졌습니다."),
+    NEGATIVE_NUMBER("음수가 주어졌습니다.");
 
     private final String message;
 
