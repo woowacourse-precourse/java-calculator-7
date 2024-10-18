@@ -4,16 +4,23 @@ import calculator.domain.calculator.service.StringCalculatorService;
 
 public class StringCalculatorController {
 
+    private static StringCalculatorController instance;
     private final StringCalculatorService stringCalculatorService;
 
-    public StringCalculatorController(StringCalculatorService stringCalculatorService) {
+    private StringCalculatorController(StringCalculatorService stringCalculatorService) {
         this.stringCalculatorService = stringCalculatorService;
     }
 
-    public int calculateString(String input) {
-        int calculate = stringCalculatorService.calculate(input);
-
-        return calculate;
+    public static StringCalculatorController getInstance(
+            StringCalculatorService stringCalculatorService
+    ) {
+        if (instance == null) {
+            instance = new StringCalculatorController(stringCalculatorService);
+        }
+        return instance;
     }
 
+    public int calculateString(String input) {
+        return stringCalculatorService.calculate(input);
+    }
 }
