@@ -13,4 +13,8 @@ public class Numbers {
     public void add(Number number) {
         numbers.add(number);
     }
+
+    public int sum() {
+        return numbers.stream().mapToInt(Number::getNumber).sum();
+    }
 }

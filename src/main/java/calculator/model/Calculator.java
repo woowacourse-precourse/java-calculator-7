@@ -26,6 +26,10 @@ public class Calculator {
 
     }
 
+    public int sum(Numbers numbers) {
+        return numbers.sum();
+    }
+
     public Delimiter selectDelimiter(String input) {
         if (defaultMode) {
             return new Delimiter(",|:");
