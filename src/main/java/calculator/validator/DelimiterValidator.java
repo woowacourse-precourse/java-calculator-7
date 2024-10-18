@@ -24,4 +24,10 @@ public class DelimiterValidator {
         }
         return customDelimiter;
     }
+
+    public static void validateCustomDelimiterLength(String customDelimiter) {
+        if (customDelimiter.length() > 5) {
+            throw new IllegalArgumentException();
+        }
+    }
 }
