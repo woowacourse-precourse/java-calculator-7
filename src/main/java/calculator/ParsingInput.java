@@ -1,6 +1,10 @@
 package calculator;
 
 public class ParsingInput {
+    public static int[] executeParsingInput(String input, String token) {
+        String[] splitInput = splitAsToken(input, token);
+        return parseIntArray(splitInput);
+    }
 
     private static String[] splitAsToken(String input, String token){
         if (token.equals("[,:]")) {
