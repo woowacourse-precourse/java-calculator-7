@@ -1,6 +1,6 @@
 package calculator;
 
-public class Validator {
+public class StringPartManager {
 
     static void validateString(String str, String separators) {
         for (int i = 0; i < str.length(); i++) {
@@ -19,16 +19,4 @@ public class Validator {
         }
         return false;
     }
-
-    static boolean validateCustomSeparator(String input) {
-        if (input.indexOf("\\n") != 3) {
-            return false;
-        }
-        return !isSeparatorNumeric(input.charAt(2));
-    }
-
-    static boolean isSeparatorNumeric(char separator) {
-        return Character.isDigit(separator);
-    }
-
 }

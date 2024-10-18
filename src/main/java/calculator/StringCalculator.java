@@ -1,7 +1,7 @@
 package calculator;
 
-import static calculator.Validator.validateCustomSeparator;
-import static calculator.Validator.validateString;
+import static calculator.CustomPartManager.validateCustomSeparator;
+import static calculator.StringPartManager.validateString;
 
 import camp.nextstep.edu.missionutils.Console;
 
