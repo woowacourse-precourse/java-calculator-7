@@ -3,7 +3,7 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
-    private Delimiters delimiters = new Delimiters();
+    private final Delimiters delimiters = new Delimiters();
 
     public static void main(String[] args) {
         Application application = new Application();
@@ -17,11 +17,11 @@ public class Application {
 
         validateInputString(inputString);
 
-        String numberString = extractNumberString(inputString);
+        String numberString = delimiters.extractNumberString(inputString);
 
         StringBuilder delimiterExpression = new StringBuilder();
         for (char delimiter : delimiters.getDelimiters()) {
-            appendDelimiter(delimiterExpression, delimiter);
+            delimiters.appendDelimiter(delimiterExpression, delimiter);
         }
 
         String delimiterStr = delimiterExpression.toString();
@@ -67,56 +67,4 @@ public class Application {
     }
 
 
-    private String extractNumberString(String inputString) {
-        delimiters.addDelimiter(':');
-        delimiters.addDelimiter(',');
-
-        if (inputString.startsWith("//")) {
-            delimiters = new Delimiters();
-            int index = findLastDelimiterIndex(inputString);
-
-            extractDelimiters(inputString, index);
-
-            validateSingleDelimiter();
-
-            return inputString.substring(index + 2);
-        }
-
-        return inputString;
-    }
-
-    private void validateSingleDelimiter() {
-        if (!delimiters.hasSingleDelimiter()) {
-            throw new IllegalArgumentException("커스텀 구분자는 하나여야 합니다.");
-        }
-    }
-
-    private void extractDelimiters(String inputString, int index) {
-        for (int i = 2; i < index; i++) {
-            delimiters.addDelimiter(inputString.charAt(i));
-        }
-    }
-
-    private static int findLastDelimiterIndex(String inputString) {
-        int index = 2;
-        int length = inputString.length();
-
-        while (index < length - 1) {
-            char currentChar = inputString.charAt(index);
-            char nextChar = inputString.charAt(index + 1);
-
-            if (currentChar == '\\' && nextChar == 'n') {
-                return index;
-            }
-            index++;
-        }
-        return index;
-    }
-
-    private void appendDelimiter(StringBuilder expression, char delimiter) {
-        if (!expression.isEmpty()) {
-            expression.append("|");
-        }
-        expression.append("\\").append(delimiter);
-    }
 }
