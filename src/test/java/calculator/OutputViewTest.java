@@ -1,7 +1,7 @@
 package calculator;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import calculator.view.OutputView;
 import java.io.ByteArrayOutputStream;
@@ -29,7 +29,8 @@ public class OutputViewTest {
     void 출력_테스트() {
         assertSimpleTest(() -> {
             outputView.printOutput(6);
-            assertNotEquals(outputStream.toString(), "결과 : 6");
+            assertThat(outputStream.toString()).isEqualTo("결과 : 6");
+
         });
     }
 
@@ -37,7 +38,7 @@ public class OutputViewTest {
     void 출력_테스트_2() {
         assertSimpleTest(() -> {
             outputView.printOutput(63);
-            assertNotEquals(outputStream.toString(), "결과 : 63");
+            assertThat(outputStream.toString()).isEqualTo("결과 : 63");
         });
     }
 }
