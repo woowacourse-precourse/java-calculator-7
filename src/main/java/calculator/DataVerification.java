@@ -1,8 +1,8 @@
 package calculator;
 
 public class DataVerification {
-    public void checkIsInputEmpty(CalculatorIO calculatorIO) {
-        if (calculatorIO.userInput.isEmpty()) {
+    public void checkIsInputEmpty(String userInput) {
+        if (userInput.isEmpty()) {
             System.out.println("결과 : " + 0);
         }
     }

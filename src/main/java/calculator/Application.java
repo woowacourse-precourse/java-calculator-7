@@ -1,26 +1,31 @@
 package calculator;
 
+import calculator.utils.InputUtils;
+import calculator.utils.PrintUtils;
+
 public class Application {
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
-        CalculatorIO calculatorIO = new CalculatorIO();
         SplitStringWithSeparator splitStringWithSeparator = new SplitStringWithSeparator();
         DataVerification dataVerification = new DataVerification();
 
-        calculatorIO.getUserInput();
-        dataVerification.checkIsInputEmpty(calculatorIO);
+        int total = 0;
 
-        int escapeIdx = calculatorIO.userInput.indexOf("\\n");
+        String userInput = InputUtils.getUserInput();
+        dataVerification.checkIsInputEmpty(userInput);
+
+        int escapeIdx = userInput.indexOf("\\n");
         if (escapeIdx > 0) {
-            splitStringWithSeparator.splitWithCustomSeparator(calculatorIO, escapeIdx);
+            splitStringWithSeparator.splitWithCustomSeparator(userInput, escapeIdx);
         } else {
-            splitStringWithSeparator.splitWithDefaultSeparator(calculatorIO);
+            splitStringWithSeparator.splitWithDefaultSeparator(userInput);
         }
 
         dataVerification.checkIsPositiveNumber(splitStringWithSeparator);
         dataVerification.checkHasNumberFormat(splitStringWithSeparator);
 
         calculator.getTotal(splitStringWithSeparator);
-        calculatorIO.printResult(calculator);
+
+        PrintUtils.printResult(total);
     }
 }
