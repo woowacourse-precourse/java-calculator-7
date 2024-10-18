@@ -15,10 +15,7 @@ public class StringCalculator {
         DelimiterResult delimiterResult = new DelimiterResult(defaultDelimiters.getDefaultDelimiter());
 
         if (userInput.isCustom()) {
-            String extractCustomDelimiter = userInput.extractCustomDelimiter();
-            CustomDelimiter customDelimiter = new CustomDelimiter(extractCustomDelimiter);
-            String combineDelimiter = combineDelimiter(delimiterResult, customDelimiter.getCustomDelimiter());
-            delimiterResult = new DelimiterResult(combineDelimiter);
+            delimiterResult = generateDelimiterResult(userInput, delimiterResult);
             input = userInput.extractNumbersPart();
         }
 
@@ -27,13 +24,18 @@ public class StringCalculator {
         String[] separatedNumbers = generateSeparatedNumbers(delimitedNumbers, delimiterResult);
         Numbers numbers = new Numbers(separatedNumbers);
 
-        int sum = calculateNumbers(numbers);
+        int sum = calculateTotalSum(numbers);
 
         System.out.println("결과 : " + sum);
 
     }
 
-    private int calculateNumbers(Numbers numbers) {
+    private DelimiterResult generateDelimiterResult(UserInput userInput, DelimiterResult delimiterResult) {
+        String combineDelimiter = generateCombineDelimiter(userInput, delimiterResult);
+        return new DelimiterResult(combineDelimiter);
+    }
+
+    private int calculateTotalSum(Numbers numbers) {
         int sum = 0;
         for (String stringNumbers : numbers.getNumbers()) {
             Number number = new Number(stringNumbers);
@@ -42,10 +44,16 @@ public class StringCalculator {
         return sum;
     }
 
+    private String generateCombineDelimiter(UserInput userInput, DelimiterResult delimiterResult) {
+        String extractCustomDelimiter = userInput.extractCustomDelimiter();
+        CustomDelimiter customDelimiter = new CustomDelimiter(extractCustomDelimiter);
+        return combineDelimiter(delimiterResult, customDelimiter.getCustomDelimiter());
+    }
+
     private String[] generateSeparatedNumbers(DelimitedNumbers delimitedNumbers, DelimiterResult delimiterResult) {
         return delimitedNumbers.getStringNumbers().split(delimiterResult.getDelimiterResult());
     }
-    
+
     private String combineDelimiter(DelimiterResult delimiterResult, String customDelimiter) {
         return delimiterResult.getDelimiterResult().replace("]", customDelimiter + "]");
     }
