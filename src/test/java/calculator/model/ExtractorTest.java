@@ -38,10 +38,27 @@ class ExtractorTest {
     }
 
     @Test
-    void 커스텀구분자_O_숫자추출() {
+    void 커스텀구분자_O_커스텀구분자가한개() {
         //given
         String input = "//-\\n1,2:3-4";
         List<String> expectedList = Arrays.asList("1", "2", "3", "4");
+        List<String> resultList = new ArrayList<>();
+
+        //when
+        extractor.execute(input, storage);
+        for (Candidate c : storage.getNumberCandidates()) {
+            resultList.add(c.getCandidate());
+        }
+
+        //then
+        assertThat(resultList).containsAll(expectedList);
+    }
+
+    @Test
+    void 커스텀구분자_O_커스텀구분자가여러개() {
+        //given
+        String input = "//-\\n//=\\n1,2:3-4=5";
+        List<String> expectedList = Arrays.asList("1", "2", "3", "4", "5");
         List<String> resultList = new ArrayList<>();
 
         //when
