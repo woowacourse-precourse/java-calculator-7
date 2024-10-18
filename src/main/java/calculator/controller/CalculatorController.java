@@ -14,7 +14,7 @@ public class CalculatorController {
     }
 
     public void run(){
-        calculator.validateExpression();
+        calculator.validateValues();
         calculator.extractNumber();
         int result = calculator.sum();
         OutputView.getOutputMessage(result);
