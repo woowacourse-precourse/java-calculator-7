@@ -10,6 +10,7 @@ public class InputValidator {
     private static final String REGEX_CUSTOM_DELIMITER_START = "//";
     private static final String REGEX_CUSTOM_DELIMITER_END = "\\n";
     private static final String MINUS_DELIMITER = "-";
+    private static final String EMPTY_TEXT = "";
 
     private static boolean isMinusDelimiter = false;
 
@@ -46,8 +47,8 @@ public class InputValidator {
     }
 
     private static void hasCustomDelimiter(String inputs) {
-        inputs = inputs.replace(REGEX_CUSTOM_DELIMITER_START, "").replace(REGEX_CUSTOM_DELIMITER_END, "");
-        for (String input : inputs.split("")) {
+        inputs = inputs.replace(REGEX_CUSTOM_DELIMITER_START, EMPTY_TEXT).replace(REGEX_CUSTOM_DELIMITER_END, EMPTY_TEXT);
+        for (String input : inputs.split(EMPTY_TEXT)) {
             if (input.matches(REGEX_CUSTOM_DELIMITER)) {
                 if (input.contains(MINUS_DELIMITER)) isMinusDelimiter = true;
                 return;
@@ -68,7 +69,7 @@ public class InputValidator {
     }
 
     private static void hasMinusNumber(final String inputs) {
-        String[] inputArray = inputs.split("");
+        String[] inputArray = inputs.split(EMPTY_TEXT);
         for (int i = 1; i < inputArray.length; i++) {
             checkMinusNumber(inputArray[i].charAt(0), inputArray[i - 1].charAt(0));
         }

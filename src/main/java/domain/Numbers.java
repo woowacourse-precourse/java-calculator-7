@@ -11,6 +11,8 @@ public class Numbers {
     private static final String ESCAPE_TEXT = "\\";
     private static final String REGEX_END = "]";
     private static final String EMPTY_TEXT = "";
+    private static final String CUSTOM_START_TEXT = "//";
+    private static final String CUSTOM_END_TEXT = "\\\\n";
 
     private List<Integer> numbers = new ArrayList<>();
 
@@ -22,8 +24,10 @@ public class Numbers {
         String regex = new StringBuilder()
                 .append(REGEX_START + ESCAPE_TEXT + delimiters + REGEX_END).toString();
 
-        if (input.contains("//")) {
-            String removeCustomOperator = input.replaceAll("//", "").replaceAll("\\\\n", "");
+        if (input.contains(CUSTOM_START_TEXT)) {
+            String removeCustomOperator = input.replaceAll(CUSTOM_START_TEXT, EMPTY_TEXT)
+                    .replaceAll(CUSTOM_END_TEXT,
+                            EMPTY_TEXT);
             convertNumber(removeCustomOperator, regex);
             return;
         }
