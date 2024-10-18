@@ -16,8 +16,6 @@ class DelimiterExtractorTest {
     void 기본_구분자_사용() {
         //given
         String userInput = "1:2,3";
-        InputStream in = new ByteArrayInputStream(userInput.getBytes());
-        System.setIn(in);
 
         //when
         String result = delimiterExtractor.determineDelimiter(userInput);
@@ -30,9 +28,7 @@ class DelimiterExtractorTest {
     @DisplayName("커스텀 구분자를 사용한 입력에서 구분자를 추출")
     void 커스텀_구분자_사용() {
         //given
-        String userInput = "//^^\n1^^2^^3^^4";
-        InputStream in = new ByteArrayInputStream(userInput.getBytes());
-        System.setIn(in);
+        String userInput = "//^^\\n1^^2^^3^^4";
 
         //when
         String result = delimiterExtractor.determineDelimiter(userInput);
@@ -45,9 +41,7 @@ class DelimiterExtractorTest {
     @DisplayName("기본 구분자와 커스텀 구분자를 사용한 입력에서 구분자를 추출")
     void 기본_구분자_커스텀_구분자_사용() {
         //given
-        String userInput = "//^^\n1,2:3^^4";
-        InputStream in = new ByteArrayInputStream(userInput.getBytes());
-        System.setIn(in);
+        String userInput = "//^^\\n1,2:3^^4";
 
         //when
         String result = delimiterExtractor.determineDelimiter(userInput);
@@ -59,9 +53,9 @@ class DelimiterExtractorTest {
 
     @Test
     @DisplayName("커스텀 구분자를 여러번 사용한 입력에서 구분자를 추출")
-    void 기본_구분자와_커스텀_구분자_사용() {
+    void 기본_구분자와_커스텀_구분자_여러번_사용() {
         //given
-        String userInput = "//&\n//^^\n1&2&3^^4";
+        String userInput = "//&\\n//^^\\n1&2&3^^4";
         InputStream in = new ByteArrayInputStream(userInput.getBytes());
         System.setIn(in);
 
