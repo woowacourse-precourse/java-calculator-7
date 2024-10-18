@@ -19,7 +19,7 @@ public class Numbers {
             validatePositiveNumber(parseInt);
 
             return parseInt;
-        } catch (NumberFormatException e) {
+        } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("숫자가 아닌 값을 입력할 수 없습니다.");
         }
     }
