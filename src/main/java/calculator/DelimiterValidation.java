@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class DelimiterValidation {
 
     private static final String DEFAULT_DELIMITER_REGEX = "^(|([1-9][0-9]*([,:][1-9][0-9]*)*))$";
-    private static final String CUSTOM_DELIMITER_REGEX = "^//([^0-9]*)\\\\n(|([1-9][0-9]*(\\1[1-9][0-9]*)*))$";
+    private static final String CUSTOM_DELIMITER_REGEX = "^//([^0-9])\\\\n(|([1-9][0-9]*(\\1[1-9][0-9]*)*))$";
 
     // regexMatcher 반환 함수
     private static Matcher regexMatcher(String formula, String regex) {
