@@ -47,4 +47,26 @@ public class Application {
         int delimiterEndIndex = input.indexOf("\n");
         return input.substring(delimiterEndIndex + 1);
     }
+
+    private static List<String> extractAndValidateCustomDelimiter(String input) {
+        int delimiterEndIndex = input.indexOf("\n");
+
+        if (delimiterEndIndex == -1) {
+            throw new IllegalArgumentException("잘못된 형식의 커스텀 구분자입니다.");
+        }
+
+        String customDelimiter = input.substring(2, delimiterEndIndex);
+
+        if (customDelimiter.length() != 1) {
+            throw new IllegalArgumentException("커스텀 구분자는 한 문자여야 합니다.");
+        }
+
+        if (customDelimiter.equals(",") || customDelimiter.equals(":")) {
+            throw new IllegalArgumentException("기본 구분자와 중복되는 커스텀 구분자는 사용할 수 없습니다.");
+        }
+
+        List<String> delimiters = getDefaultDelimiters();
+        delimiters.add(customDelimiter);
+        return delimiters;
+    }
 }
