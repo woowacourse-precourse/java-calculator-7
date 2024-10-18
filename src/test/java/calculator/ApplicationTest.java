@@ -35,7 +35,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 공백_문자열_입력() {
         assertSimpleTest(() -> {
-            run("");
+            run("\n");  // run(""); 이면 입력이 없기 때문에 입력이 안됨 run("\n"); 줄바꿈을 입력해야함
             assertThat(output()).contains("결과 : 0");
         });
     }
