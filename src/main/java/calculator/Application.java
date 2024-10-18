@@ -33,6 +33,11 @@ public class Application {
             int customEndIndex = input.indexOf(CUSTOM_DELIMITER_END);
             delimiter[2] = input.substring(2, customEndIndex);
 
+            // 커스텀 구분자가 숫자인 경우
+            if (delimiter[2].matches("^\\d+$")) {
+                throw new IllegalArgumentException("숫자 추출에서 유효하지 않은 값이 검출되었습니다.");
+            }
+
             // 커스텀 구분자 필드 제거
             input = input.substring(customEndIndex + 2);
         }
