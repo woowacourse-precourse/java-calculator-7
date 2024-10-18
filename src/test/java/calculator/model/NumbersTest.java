@@ -37,6 +37,13 @@ public class NumbersTest {
 		assertThrows(IllegalArgumentException.class, () -> Numbers.parseNumbers(invalidData));
 	}
 
+	@DisplayName("숫자는 문자열 배열을 변환할 때 표현 범위를 넘어서면 예외를 반환한다")
+	@ParameterizedTest
+	@MethodSource("stringNumberOverRange")
+	void validateParseNumbersRange(List<String> invalidData) {
+		assertThrows(IllegalArgumentException.class, () -> Numbers.parseNumbers(invalidData));
+	}
+
 	static Stream<Arguments> numbersAndCorrectResult() {
 		return Stream.of(
 			Arguments.of(Arrays.asList(1L, 2L, 3L), 6L),
@@ -57,6 +64,12 @@ public class NumbersTest {
 			Arguments.of(Arrays.asList("1", "2", "55", "1!")),
 			Arguments.of(Arrays.asList("!", "2", "55", "1")),
 			Arguments.of(Arrays.asList("z", "55", "1"))
+		);
+	}
+
+	static Stream<Arguments> stringNumberOverRange() {
+		return Stream.of(
+			Arguments.of(Arrays.asList("9223372036854775808"))
 		);
 	}
 }
