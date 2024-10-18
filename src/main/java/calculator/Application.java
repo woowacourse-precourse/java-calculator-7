@@ -13,7 +13,9 @@ public class Application {
 
         String newInputString = splitCustomDelimiter(inputString);
         String[] splitDelimiterString = splitDelimiter(newInputString);
-        calculateNumbers(splitDelimiterString);
+        int answer = calculateNumbers(splitDelimiterString);
+
+        System.out.println("결과"+" : "+answer);
     }
 
     /**
