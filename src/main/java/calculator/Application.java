@@ -14,7 +14,6 @@ public class Application {
         String[] numbers = delimiter(input);
         sum = calulator(numbers);
 
-
         System.out.println("결과 : " + sum);
     }
 
@@ -53,9 +52,13 @@ public class Application {
         return sum;
     }
 
-    private static int parseInt(String numbers){
+    private static int parseInt(String numbers) {
         try {
+            if(Integer.parseInt(numbers) < 0){
+                throw new IllegalArgumentException();
+            }
             return Integer.parseInt(numbers);
+
         }catch (NumberFormatException e){
             throw new IllegalArgumentException();
         }
