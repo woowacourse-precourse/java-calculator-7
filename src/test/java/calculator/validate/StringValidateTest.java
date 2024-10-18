@@ -79,4 +79,21 @@ class StringValidateTest {
         assertTrue(validateBackString(string, seperator));
     }
 
+    @Test
+    @DisplayName("계산해야 하는 문자열이 빈 문자열인 경우")
+    void emptyBackString() {
+        String string = "";
+        String seperator = "abc";
+
+        assertTrue(validateBackString(string, seperator));
+    }
+
+    @Test
+    @DisplayName("구분자가 없는 경우")
+    void emptySeperator() {
+        String string = "1234";
+        String seperator = "";
+
+        assertTrue(validateBackString(string, seperator));
+    }
 }

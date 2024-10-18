@@ -1,5 +1,7 @@
 package calculator.validate;
 
+import java.util.Objects;
+
 public class StringValidate {
     public static String validateInput(String input) {
         if (input == null || input.isEmpty()) {
@@ -24,6 +26,10 @@ public class StringValidate {
     }
 
     public static boolean validateBackString(String string, String seperator) {
+        if (Objects.equals(string, "")) {
+            return true;
+        }
+
         for (String s : string.split("")) {
             if (Character.isDigit(s.charAt(0))) {
                 continue;
