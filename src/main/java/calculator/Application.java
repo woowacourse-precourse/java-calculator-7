@@ -13,11 +13,10 @@ public class Application {
         String str = Console.readLine();
 
         // 커스텀 구분자 찾기
+        String custom = findCustomSpliter.customSpliter(str);
 
         ArrayList<String> nums = new ArrayList<>();
-        nums.add("1");
-        nums.add("2");
-        nums.add("3");
+        nums = splitNumbers.splitNums(str, custom);
 
         // 잘못된 문자열인지 오류 탐색 or 합 출력
         int cnt = 0;
@@ -27,6 +26,5 @@ public class Application {
         }
 
         System.out.println("결과 : " + cnt);
-
     }
 }

@@ -1,7 +1,7 @@
 package calculator;
 
 public class findCustomSpliter {
-    public String customSpliter(String str) {
+    public static String customSpliter(String str) {
         String startMark = "//";
         String endMark = "\n";
 
