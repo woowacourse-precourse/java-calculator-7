@@ -1,6 +1,7 @@
 package calculator;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,13 +13,17 @@ public class SimpleParser implements Parser {
     public static final String ERR_MSG_WHEN_FAIL_TO_PARSE_INT = "숫자가 아닌 값이 입력되었습니다.";
 
     @Override
-    public int[] parse(String input) {
+    public List<Integer> parse(String input) {
         DelimitersAndNumbers delimitersAndNumbers = separateInput(input);
         String delimiters = delimitersAndNumbers.delimiters();
         String numbers = delimitersAndNumbers.numbers();
 
-        String[] numbersStr = numbers.split(delimiters, -1);
-        int[] numbersInt = mapNumbersFromStrToInt(numbersStr);
+        if (numbers.isEmpty()) {
+            return List.of();
+        }
+
+        List<String> numbersStr = Arrays.stream(numbers.split(delimiters, -1)).toList();
+        List<Integer> numbersInt = mapNumbersFromStrToInt(numbersStr);
 
         validateNumbers(numbersInt);
         return numbersInt;
@@ -40,17 +45,18 @@ public class SimpleParser implements Parser {
         return new DelimitersAndNumbers(delimiters, numbers);
     }
 
-    private int[] mapNumbersFromStrToInt(String[] numbersStr) {
+    private List<Integer> mapNumbersFromStrToInt(List<String> numbersStr) {
         try {
-            return Arrays.stream(numbersStr)
-                    .mapToInt(Integer::parseInt).toArray();
+            return numbersStr.stream()
+                    .map(Integer::parseInt)
+                    .toList();
         } catch (NumberFormatException _ignored) {
             throw new IllegalArgumentException(ERR_MSG_WHEN_FAIL_TO_PARSE_INT);
         }
     }
 
-    private void validateNumbers(int[] numbers) {
-        if (Arrays.stream(numbers).anyMatch(n -> n < 0)) {
+    private void validateNumbers(List<Integer> numbers) {
+        if (numbers.stream().anyMatch(n -> n < 0)) {
             throw new IllegalArgumentException(ERR_MSG_WHEN_NEGATIVE_NUMBER);
         }
     }

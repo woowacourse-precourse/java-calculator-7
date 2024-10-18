@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.List;
+
 public interface Parser {
-    int[] parse(String input);
+    List<Integer> parse(String input);
 }

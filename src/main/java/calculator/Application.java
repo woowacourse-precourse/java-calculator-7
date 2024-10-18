@@ -2,7 +2,7 @@ package calculator;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class Application {
     public static final String USER_INPUT_PROMPT_MSG = "덧셈할 문자열을 입력해 주세요.";
@@ -13,9 +13,9 @@ public class Application {
         String userInput = readLine();
 
         Parser parser = new SimpleParser();
-        int[] numbers = parser.parse(userInput);
+        List<Integer> numbers = parser.parse(userInput);
 
-        int sum = Arrays.stream(numbers).sum();
+        int sum = numbers.stream().mapToInt(Integer::intValue).sum();
         System.out.printf(PROGRAM_OUTPUT_FORMAT, sum);
     }
 }
