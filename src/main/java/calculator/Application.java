@@ -23,8 +23,16 @@ public class Application {
         float result = 0;
         String[] a_arr = user_input.split(REGEX);
         for (String s : a_arr) {
-            float number = Float.parseFloat(s);
-            result += Float.parseFloat(s);
+            try {
+                float number = Float.parseFloat(s);
+                if (number >= 0) {
+                    result += Float.parseFloat(s);
+                } else {
+                    throw new IllegalArgumentException();
+                }
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException();
+            }
         }
 
         DecimalFormat df = new DecimalFormat("#.##");
