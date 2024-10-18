@@ -12,11 +12,11 @@ public class UIController {
         return InputView.readValue();
     }
 
-    public static void printSumResult(int number) {
+    public static void printSumResult(double number) {
         OutputView.print(fitFormat(number));
     }
 
-    private static String fitFormat(int number) {
+    private static String fitFormat(double number) {
         return RESULT_FORMAT + number;
     }
 }
