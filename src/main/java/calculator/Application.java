@@ -1,33 +1,34 @@
 package calculator;
 
 import calculator.model.CalculatorModel;
-import camp.nextstep.edu.missionutils.Console;
+import calculator.view.CalculatorView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Application {
     private final CalculatorModel calculatorModel;
+    private final CalculatorView calculatorView;
 
-    public Application(CalculatorModel calculatorModel) {
+    public Application(CalculatorModel calculatorModel, CalculatorView calculatorView) {
         this.calculatorModel = calculatorModel;
+        this.calculatorView = calculatorView;
     }
 
     public void run() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String str = Console.readLine();
         ArrayList<String> separate = new ArrayList<>(Arrays.asList(",", ":"));
+        String str = calculatorView.input();
         if (calculatorModel.CustomDiscrimination(str)) {
             separate.add(calculatorModel.CustomExtraction(str));
-            System.out.println(
-                    "결과 : " + calculatorModel.sumCalculator(str.substring(str.indexOf("\\n") + 2), separate));
+            calculatorView.output(calculatorModel.sumCalculator(str.substring(str.indexOf("\\n") + 2), separate));
         } else {
-            System.out.println("결과 : " + calculatorModel.sumCalculator(str, separate));
+            calculatorView.output(calculatorModel.sumCalculator(str, separate));
         }
     }
 
     public static void main(String[] args) {
         CalculatorModel calculatorModel = new CalculatorModel();
-        Application app = new Application(calculatorModel);
+        CalculatorView calculatorView = new CalculatorView();
+        Application app = new Application(calculatorModel, calculatorView);
         app.run();
 
     }
