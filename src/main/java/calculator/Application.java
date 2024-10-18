@@ -10,6 +10,27 @@ public class Application {
 
     }
 
+    public static long splitString(String str) {
+        if(str.isEmpty()){
+            return 0;
+        }
+
+        String separator = "[,:]";
+
+        if (str.startsWith("//")) {
+            int endIndex = str.indexOf("\\n");
+            if (endIndex == -1) {
+                throw new IllegalArgumentException();
+            }
+            separator = str.substring(2, endIndex);
+            str = str.substring(endIndex + 2);
+        }
+
+        String[] numList = str.split(separator);
+
+        return calculate(numList);
+    }
+
     public static long calculate(String[] numList){
         long sum = 0;
 
