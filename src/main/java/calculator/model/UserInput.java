@@ -1,5 +1,7 @@
 package calculator.model;
 
+import calculator.common.ExceptionMessage;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -54,7 +56,7 @@ public abstract class UserInput {
                     .mapToLong(Long::parseLong)
                     .forEach(value -> {}); // 스트림의 최종연산 (반환값이 필요 없기에 검증을 위한 코드)
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("구분자(, 또는 :)와 숫자로만 입력해주세요.");
+            throw new IllegalArgumentException(ExceptionMessage.CALCULATE_PART_IS_INVALID.getValue());
         }
     }
 
@@ -63,7 +65,7 @@ public abstract class UserInput {
      */
     private void checkInputNumsIsPositive() {
         if (Arrays.stream(this.inputNumbers).anyMatch(inputNumber -> inputNumber < 0)) {
-            throw new IllegalArgumentException("양수만 입력해주세요.");
+            throw new IllegalArgumentException(ExceptionMessage.NUMBER_NOT_POSITIVE.getValue());
         }
     }
 

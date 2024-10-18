@@ -1,6 +1,7 @@
 package calculator.model;
 
 import calculator.common.CustomDelimiter;
+import calculator.common.ExceptionMessage;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;
@@ -24,8 +25,8 @@ public class CustomInput extends UserInput {
         checkValueToCalculateIsNumber(splitValues);
 
         inputNumbers = Arrays.stream(splitValues)
-                .map(value -> value.isEmpty() ? ZERO_VALUE : value)  // 빈 문자열을 "0"으로 치환
-                .mapToLong(Long::parseLong)                    // Long으로 변환
+                .map(value -> value.isEmpty() ? ZERO_VALUE : value) // 빈 문자열을 "0"으로 치환
+                .mapToLong(Long::parseLong) // Long으로 변환
                 .toArray();
     }
 
@@ -35,7 +36,7 @@ public class CustomInput extends UserInput {
             String regex = String.join(REGEX_DELIMITER, delimiters.stream().map(Pattern::quote).toArray(String[]::new));
             return calculatePart.split(regex);
         } catch (PatternSyntaxException e) {
-            throw new IllegalArgumentException("구분자와 숫자로만 입력해주세요.");
+            throw new IllegalArgumentException(ExceptionMessage.CALCULATE_PART_IS_INVALID.getValue());
         }
     }
 
@@ -45,7 +46,7 @@ public class CustomInput extends UserInput {
      */
     private void checkCustomDelimFormat(String userInput) {
         if (!userInput.contains(CustomDelimiter.END_FORMAT.getValue())) {
-            throw new IllegalArgumentException("커스텀 구분자 포맷을 지켜주세요");
+            throw new IllegalArgumentException(ExceptionMessage.CUSTOM_DELIMITER_FORMAT_NOT_MATCH.getValue());
         }
     }
 

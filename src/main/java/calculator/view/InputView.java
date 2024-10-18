@@ -1,5 +1,6 @@
 package calculator.view;
 
+import calculator.common.ExceptionMessage;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
@@ -31,7 +32,7 @@ public class InputView {
      */
     private void checkInputIsNull(String userInput) {
         if (userInput == null) {
-            throw new IllegalArgumentException("형식에 맞춰 입력해주세요.");
+            throw new IllegalArgumentException(ExceptionMessage.INPUT_IS_NULL.getValue());
         }
     }
 }
