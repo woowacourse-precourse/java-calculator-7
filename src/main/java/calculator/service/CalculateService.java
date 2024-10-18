@@ -4,7 +4,7 @@ import calculator.dto.OperandDTO;
 import calculator.dto.ResultDTO;
 
 public class CalculateService {
-    private static ResultDTO addOperand(OperandDTO operandDTO){
+    public static ResultDTO addOperand(OperandDTO operandDTO){
         int sum = 0;
 
         for(int x : operandDTO.getOperandList()){

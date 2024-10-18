@@ -22,7 +22,6 @@ public class ParsingService {
             operandList.add(0);
             return new OperandDTO(operandList);
         }
-
         errorCheck(operandStr);
         parse(operandStr);
 
@@ -43,7 +42,7 @@ public class ParsingService {
 
     // 문자열의 처음이 숫자이거나 // 가 아니라면 에러 발생
     private static void checkStartingPoint(String OperandStr){
-        if(OperandStr.startsWith("//") || Character.isDigit(OperandStr.charAt(0)))
+        if(!(OperandStr.startsWith("//") || Character.isDigit(OperandStr.charAt(0))))
             throw new IllegalArgumentException();
     }
 
@@ -64,17 +63,17 @@ public class ParsingService {
         //custom 구분자 추출
         if(operandStr.startsWith("//")){
             delimiters.add(operandStr.charAt(CUSTOM_DELIMITER_INDEX));
+            operandStr = operandStr.substring(EXCEPT_CUSTOM_DELIMITER_INDEX);
         }
-        operandStr = operandStr.substring(EXCEPT_CUSTOM_DELIMITER_INDEX);
 
+        StringBuilder sb = new StringBuilder();
         //구분자로 구분
         for(char ch : operandStr.toCharArray()){
-            StringBuilder sb = new StringBuilder();
             if(delimiters.contains(ch) && !sb.isEmpty()){  //구분자 바로 다음에 또 구분자 나온다면 error
                 operandList.add(Integer.parseInt(sb.toString()));
                 sb.setLength(0);
             }
-            else if(sb.isEmpty()){
+            else if(delimiters.contains(ch) && sb.isEmpty()){
                 throw new IllegalArgumentException();
             }
             else {
@@ -82,6 +81,7 @@ public class ParsingService {
                 sb.append(ch);
             }
         }
+        operandList.add(Integer.parseInt(sb.toString()));
     }
 
     private static void checkInteger(char ch){
