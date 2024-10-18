@@ -108,7 +108,23 @@ public class InputTest {
         input.getInputText(testText);
         assertTrue(input.hasDelimiter());
     }
+    @Test
+    @DisplayName("커스텀 구분자와 함께 올바르게 입력된다.")
+    public void 커스텀_구분자_있는_올바른_입력_값5() {
+        String testText = "//\n\n1\n2\n3";
+        Input input = new Input();
+        input.getInputText(testText);
+        assertTrue(input.hasDelimiter());
+    }
 
+    @Test
+    @DisplayName("아무것도 입력되지 않는 경우")
+    public void 아무것도_입력되지_않는_경우() {
+        String testText = "";
+        Input input = new Input();
+        input.getInputText(testText);
+        assertTrue(input.hasText());
+    }
     @Test
     @DisplayName("올바르지 않은 입력 값으로, 예외가 발생한다.")
     public void 마지막_값이_숫자가_아닌_입력_값() {
