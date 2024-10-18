@@ -1,34 +1,30 @@
 package calculator.controller;
 
+import calculator.generator.controller.GenerateController;
 import calculator.number.domain.Number;
-import calculator.number.service.PositiveNumberGenerator;
 import calculator.sentence.domain.Sentence;
 import calculator.separator.domain.Separator;
-import calculator.service.calculator.CalculatorProcess;
-import calculator.separator.service.SeparatorGenerator;
+import calculator.service.CalculatorProcess;
 import calculator.view.input.handler.InputHandlerService;
 import calculator.view.output.ResultService;
 
 public class CalculatorController {
-    private final SeparatorGenerator separatorGenerator;
-    private final PositiveNumberGenerator positiveNumberGenerator;
+    private final GenerateController generateController;
     private final InputHandlerService inputHandlerService;
     private final ResultService resultService;
     public CalculatorController(
-            SeparatorGenerator separatorGenerator,
-            PositiveNumberGenerator positiveNumberGenerator,
+            GenerateController generateController,
                                 InputHandlerService inputHandlerService,
                                 ResultService resultService) {
-        this.separatorGenerator = separatorGenerator;
-        this.positiveNumberGenerator = positiveNumberGenerator;
+        this.generateController = generateController;
         this.inputHandlerService = inputHandlerService;
         this.resultService = resultService;
     }
     public void run() {
         Sentence sentence = inputHandlerService.receive(Sentence::new);
-        Separator separator = separatorGenerator.create(sentence);
-        Number positiveNumber =  positiveNumberGenerator.create(sentence, separator);
-        long result = CalculatorProcess.sum(positiveNumber);
+        Separator separator = generateController.createSeparator(sentence);
+        Number number =  generateController.createNumber(sentence, separator);
+        long result = CalculatorProcess.sum(number);
         resultService.result(result);
     }
 }
