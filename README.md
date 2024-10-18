@@ -11,8 +11,8 @@
 - [x] Parser 클래스 구현
   - [x] 구분자와 숫자+구분자 문자열을 담고 있는 DTO를 입력받아서 숫자 리스트로 변환하는 기능 구현
   - [x] Parser test 작성
-- [ ] Calculator 클래스 구현
-  - [ ] 숫자 리스트를 입력받아서 더하는 기능 구현
+- [x] Calculator 클래스 구현
+  - [x] 숫자 리스트를 입력받아서 더하는 기능 구현
   - [ ] Calculator test 작성
 - [ ] MultipleUseCase 구현체 (MultipleService) 클래스 구현
   - [ ] Preprocessor, Parser, Calculator를 사용해서 결과를 반환하는 기능 구현
