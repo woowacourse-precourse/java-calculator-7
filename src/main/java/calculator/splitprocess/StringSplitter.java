@@ -14,7 +14,7 @@ public class StringSplitter {
                 .toArray();
     }
     // 문자열이 숫자인지 확인하는 메서드
-    public static boolean isNumeric(String str) {
+    private static boolean isNumeric(String str) {
         try {
             Integer.parseInt(str);
             return true;
