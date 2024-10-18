@@ -3,54 +3,32 @@ import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) {
-        String input;
-        String sep = "";
-        String str = "";
-        int sum, result=0;
-
-	System.out.println("덧셈할 문자열을 입력해 주세요.");
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         Scanner sc = new Scanner(System.in);
-        input = sc.nextLine();
-        String[] input_split = input.split("");
-        String[] str_num = input.split(",|:");
+        String input = sc.nextLine();
+        int result = 0;
 
-        if(input_split[0].equals("/")){
-            try {
-                for (int i=2; i<input_split.length; i++){
-                    if (input_split[0].equals("/") && input_split[1].equals("/")){
-                        if (input_split[i].equals("\\") && input_split[i+1].equals("n")){
-                            break;
-                        }
-                        sep += input_split[i];
-                    }
-                }
-    
-                for (int i=4+sep.length(); i<input.length(); i++){
-                    str = str + input_split[i];
-                }
+        if (input.startsWith("//")) {
+            String delimiter = input.substring(2, input.indexOf("\\n"));
+            String[] numbers = input.substring(input.indexOf("\\n") + 2).split(",|:|" + delimiter);
+            result = sumNumbers(numbers);
+        } else {
+            String[] numbers = input.split(",|:");
+            result = sumNumbers(numbers);
+        }
 
-                String[] input_split2 = str.split(",|:|" + sep);
-                for (int i=0; i<input_split2.length; i++){
-                    result += Integer.parseInt(input_split2[i]);
-                }
-                System.out.println("결과 : " + result);
-            } catch (Exception e) {
-                throw new IllegalArgumentException(e);
+        System.out.println("결과 : " + result);
+    }
+
+    private static int sumNumbers(String[] numbers) {
+        int result = 0;
+        for (String num : numbers) {
+            int number = Integer.parseInt(num.trim());
+            if (number < 0) {
+                throw new IllegalArgumentException("잘못된 값입니다: " + number);
             }
-        }else{
-            try{
-                for (int i=0; i<str_num.length; i++){
-                    if (Integer.parseInt(str_num[i]) >=0 ){
-                        sum = Integer.parseInt(str_num[i]);
-                        result += sum;
-                    }else{
-                        throw new IllegalArgumentException("잘못된 값입니다.");
-                    }
-                }    
-                System.out.println("결과 : " + result);
-            }catch (Exception e){
-                throw new IllegalArgumentException(e);
-            }
-        } 
+            result += number;
+        }
+        return result;
     }
 }
