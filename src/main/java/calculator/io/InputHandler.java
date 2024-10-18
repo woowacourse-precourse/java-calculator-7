@@ -8,7 +8,7 @@ public class InputHandler {
     private static String DELIMITER_COMMAS = ",";
     private static String DELIMITERS_SEMIKOLON = ";";
     private static String CUSTOM_START = "//";
-    private static String CUSTOM_END = "\n";
+    private static String CUSTOM_END = "\\n";
 
     public String getUserInput() {
         return readLine();
@@ -21,21 +21,35 @@ public class InputHandler {
         }
 
         if (checkInputIsCustom(userInput)) {
-
+            return convertValidInputListCustom(userInput);
         } else {
             return convertValidInputList(userInput);
         }
-
-        return null;
     }
 
     public boolean checkInputIsCustom(String userInput) {
         if (userInput.startsWith(CUSTOM_START)
-                && userInput.indexOf(CUSTOM_END, 1, 4) != -1) {
+                && (userInput.indexOf(CUSTOM_END, 3) != -1)) {
             return true;
         }
 
         return false;
+    }
+
+    public String[] convertValidInputListCustom(String userInput) {
+        String delimiter = userInput.substring(CUSTOM_START.length(), CUSTOM_START.length() + 1);
+        String extractInputs = userInput.substring(CUSTOM_START.length() + CUSTOM_END.length() + 2);
+
+        lastIndexIsInteger(extractInputs);
+
+        checkDelimiterDuplicateCustom(extractInputs, delimiter);
+
+        String[] separatorInput = extractInputs.split(delimiter);
+        for (String s : separatorInput) {
+            isPositiveInteger(s);
+        }
+
+        return separatorInput;
     }
 
     public String[] convertValidInputList(String userInput) {
@@ -56,9 +70,23 @@ public class InputHandler {
             String lastIndex = String.valueOf(userInput.charAt(userInput.length() - 1));
             Integer.parseInt(lastIndex);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("잘못된 입력입니다.");
+            throw new IllegalArgumentException();
         }
 
+    }
+
+    public void checkDelimiterDuplicateCustom(String extractInput, String delimiter) {
+        for (int i = 0; i < extractInput.length(); i++) {
+            if (delimiter.equals(String.valueOf(extractInput.charAt(i)))
+            ) {
+                if (
+                        (i + 1 < extractInput.length())
+                                && (delimiter.equals(String.valueOf(extractInput.charAt(i + 1))))
+                ) {
+                    throw new IllegalArgumentException();
+                }
+            }
+        }
     }
 
     public void checkDelimiterDuplicate(String userInput) {
@@ -71,7 +99,7 @@ public class InputHandler {
                                 && (DELIMITER_COMMAS.equals(String.valueOf(userInput.charAt(i + 1)))
                                 || DELIMITERS_SEMIKOLON.equals(String.valueOf(userInput.charAt(i + 1))))
                 ) {
-                    throw new IllegalArgumentException("잘못된 입력입니다.");
+                    throw new IllegalArgumentException();
                 }
             }
         }
@@ -83,13 +111,13 @@ public class InputHandler {
             int number = Integer.parseInt(s);
 
             if (number < 1) {
-                throw new IllegalArgumentException("잘못된 입력입니다.");
+                throw new IllegalArgumentException();
             }
 
             return true;
 
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("잘못된 입력입니다.");
+            throw new IllegalArgumentException();
         }
     }
 }

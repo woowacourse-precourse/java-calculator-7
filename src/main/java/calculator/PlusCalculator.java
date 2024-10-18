@@ -20,7 +20,8 @@ public class PlusCalculator {
 
         }
         catch (IllegalArgumentException e){
-            System.out.println(e.getMessage());
+            System.out.println("e.getMessage() = " + e.getMessage());
+            throw new IllegalArgumentException();
         }
     }
 
