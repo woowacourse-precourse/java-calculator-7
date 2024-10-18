@@ -139,6 +139,7 @@ class ApplicationTest extends NsTest {
                     .hasMessage("피연산자에 숫자가 아닌 다른 문자가 있습니다");
         });
     }
+
     @Test
     void addInputOverIntegerSize() {
         assertSimpleTest(() -> {
@@ -149,6 +150,14 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("2147483649 ;");
             assertThat(output()).contains("결과 : 2147483649");
+        });
+    }
+
+    @Test
+    void addInputOverLongSize() {
+        assertSimpleTest(() -> {
+            run("9223372036854775808;");
+            assertThat(output()).contains("결과 : 9223372036854775808");
         });
     }
 

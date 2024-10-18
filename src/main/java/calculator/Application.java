@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,15 +15,15 @@ public class Application {
 
     public static void main(String[] args) {
         String input = Console.readLine();
-        long result = add(input);
+        BigInteger result = add(input);
         System.out.println("결과 : " + result);
     }
 
-    private static long add(String input) {
+    private static BigInteger add(String input) {
         boolean isNotContainingDelimiter = !input.contains(COMMA) && !input.contains(SEMICOLON);
 
         if (input.isEmpty()) {
-            return 0L;
+            return BigInteger.valueOf(0);
         }
         if (isNotContainingDelimiter) {
             throw new IllegalArgumentException("구분자가 없습니다");
@@ -33,18 +34,18 @@ public class Application {
             validateOnlyDelimiter(input, delimiter);
         }
 
-        List<String> stringInputs = Arrays.stream(input.split(COMMA_AND_SEMICOLON)).toList();
+        List<String> stringInputs = Arrays.stream(input.split(COMMA_AND_SEMICOLON))
+                .filter(letter -> !letter.equals(EMPTY))
+                .map(String::trim)
+                .toList();
 
-        List<Long> longParsedInputs;
+        List<BigInteger> bigIntegerParsedInputs;
         try {
-            longParsedInputs = stringInputs.stream()
-                    .filter(letter -> !letter.equals(EMPTY))
-                    .map(String::trim)
-                    .map(Long::parseLong)
+            bigIntegerParsedInputs = stringInputs.stream()
+                    .map(BigInteger::new)
                     .toList();
 
         } catch (NumberFormatException e) {
-
             for (String stringInput : stringInputs) {
                 boolean isNumeric = stringInput.matches(REX_ONLY_NUMBER);
                 if (!isNumeric) {
@@ -52,20 +53,20 @@ public class Application {
                 }
             }
 
-            throw new IllegalArgumentException("파싱시 Long 형식이 아닙니다");
+            throw new IllegalArgumentException("파싱시 알 수 없는 에러가 있습니다");
         }
 
-        for (long inputNumber : longParsedInputs) {
-            if (inputNumber == 0) {
+        for (BigInteger inputNumber : bigIntegerParsedInputs) {
+            if (inputNumber.compareTo(BigInteger.ZERO) == 0) {
                 throw new IllegalArgumentException("0을 포함합니다");
             }
 
-            if (inputNumber < 0) {
+            if (inputNumber.compareTo(BigInteger.ZERO) < 0) {
                 throw new IllegalArgumentException("음수를 포함합니다");
             }
         }
 
-        return longParsedInputs.stream().reduce(0L, Long::sum);
+        return bigIntegerParsedInputs.stream().reduce(BigInteger.valueOf(0), BigInteger::add);
     }
 
     private static void validateOnlyDelimiter(String input, String delimiter) {
@@ -74,4 +75,5 @@ public class Application {
             throw new IllegalArgumentException(delimiter + " 밖에 없습니다");
         }
     }
+
 }
