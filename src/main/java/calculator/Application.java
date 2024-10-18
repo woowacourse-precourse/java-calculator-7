@@ -10,6 +10,15 @@ public class Application {
 
     }
 
+    public static long calculate(String[] numList){
+        long sum = 0;
+
+        for (String s : numList) {
+            sum += parseLong(s);
+        }
+        return sum;
+    }
+
     public static long parseLong(String str){
         try{
             long num = Long.parseLong(str);
