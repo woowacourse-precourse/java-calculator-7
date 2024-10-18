@@ -10,6 +10,8 @@ public class Application {
 
         Calculator calculator = new Calculator(inputString);
 
+        System.out.println("결과: " + calculator.calculate(inputString));
+
 
     }
 }
