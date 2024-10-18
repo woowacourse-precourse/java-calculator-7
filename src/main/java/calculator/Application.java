@@ -10,7 +10,6 @@ public class Application {
         // 문자열을 입력 받아 저장할 수 있다.
         System.out.println("덧셈할 문자열을 입력해주세요.");
         String inputString = Console.readLine();
-        Console.close();
 
         // 문자열에서 커스텀 구분자를 추출할 수 있다.
         DelimiterParser delimiterParser = new DelimiterParser();
