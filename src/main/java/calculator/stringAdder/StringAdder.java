@@ -29,8 +29,7 @@ public class StringAdder {
       System.out.println("결과 : "+ result);
 
     } catch (IllegalArgumentException e){
-      System.err.println(e.getMessage());
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException(e.getMessage());
     } finally{
       System.out.println("애플리케이션을 종료합니다.");
     }
