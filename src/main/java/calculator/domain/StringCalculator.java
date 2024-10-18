@@ -1,7 +1,7 @@
 package calculator.domain;
 
 import calculator.constants.Constants;
-import calculator.util.UserInputValidator;
+import calculator.util.InputValidator;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,7 +29,7 @@ public class StringCalculator {
             return calculateSum(splitInput(input));
         }
 
-        UserInputValidator.validateDelimiter(input);
+        InputValidator.validateDelimiter(input);
 
         return toInteger(input);
     }
@@ -49,7 +49,7 @@ public class StringCalculator {
     private static int calculateSumByMatcher(String input) {
         Matcher matcher = getMatcher(input);
 
-        UserInputValidator.validateCustomPresence(matcher);
+        InputValidator.validateCustomFormat(matcher);
 
         return calculateSum(splitInputByCustom(matcher));
     }
@@ -57,7 +57,7 @@ public class StringCalculator {
     private static int calculateSum(String[] strings) {
         return Arrays.stream(strings).mapToInt(string -> {
             int number = toInteger(string);
-            UserInputValidator.validatePositive(number);
+            InputValidator.validatePositive(number);
             return number;
         }).sum();
     }
@@ -90,12 +90,12 @@ public class StringCalculator {
         char asciiOfDelimiter = delimiter.charAt(FIRST_LETTER_INDEX);
 
         IntStream.range(0, string.length()).forEach(
-                index -> UserInputValidator.validateDefinedCustom(string.charAt(index), asciiOfDelimiter)
+                index -> InputValidator.validateDefinedCustom(string.charAt(index), asciiOfDelimiter)
         );
     }
 
     private static int toInteger(String string) {
-        UserInputValidator.validateHasNumber(string);
+        InputValidator.validateHasNumber(string);
         return Integer.parseInt(string);
     }
 }
