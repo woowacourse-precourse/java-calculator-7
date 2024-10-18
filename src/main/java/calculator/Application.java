@@ -7,8 +7,7 @@ public class Application {
         String validatedCustomDelimiterInput = checkCustomDelimiter(input, delimiter);
         if (!checkArguments(validatedCustomDelimiterInput, delimiter))
             throw new IllegalArgumentException("wrong arguments");
-//        return checkDuplicateDelimiter(validatedCustomDelimiterInput.split(delimiter.toString()));
-        return null;
+        return checkDuplicateDelimiter(validatedCustomDelimiterInput.split(delimiter.toString()));
     }
 
     public static String checkCustomDelimiter (String input, StringBuilder delimiter) {
@@ -27,6 +26,14 @@ public class Application {
     public static boolean checkArguments (String input, StringBuilder delimiter) {
         String regex = "^[0-9" + delimiter.substring(1) + "+$";
         return input.matches(regex);
+    }
+
+    public static String[] checkDuplicateDelimiter (String[] splitInput) {
+        for (String str : splitInput) {
+            if (str.equals(""))
+                throw new IllegalArgumentException("delimiter duplicate");
+        }
+        return splitInput;
     }
 
     public static void main(String[] args) {
