@@ -24,6 +24,7 @@ public class Validator {
     }
 
     public void validateDelimiter(String value){
+        if(value.trim().isEmpty()) return;
         validateCustomDelimiterFormat(value);
         String delimiter = extractDelimiter(value, defaultDelimiter, prefix, suffix);
         String numberPart = extractNumberPart(value, prefix, suffix);
