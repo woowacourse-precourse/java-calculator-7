@@ -8,20 +8,28 @@ public class Calculator {
     static final String CUSTOM_DELIMITER_PREFIX = "//"; //커스텀 구분자를 구별해주는 앞부분
     static final String CUSTOM_DELIMITER_SUFFIX = "\\n"; //커스텀 구분자를 구별해주는 뒷부분
 
-    public static String inputString(){
+    public static String inputString() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         return Console.readLine();
     }
 
-    public static String [] extractNumber(String input){
-        if(input.startsWith(CUSTOM_DELIMITER_PREFIX)){
+    public static String[] extractNumber(String input) {
+        if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
             int delimiterIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
-            String customDelimiter = input.substring(CUSTOM_DELIMITER_PREFIX.length(),delimiterIndex);
-            String number = input.substring(CUSTOM_DELIMITER_PREFIX.length()+customDelimiter.length()
-                    +CUSTOM_DELIMITER_SUFFIX.length());
+            String customDelimiter = input.substring(CUSTOM_DELIMITER_PREFIX.length(), delimiterIndex);
+            String number = input.substring(CUSTOM_DELIMITER_PREFIX.length() + customDelimiter.length()
+                    + CUSTOM_DELIMITER_SUFFIX.length());
             return number.split(customDelimiter);
         }
         return input.split(DEFAULT_DELIMITERS);
+    }
+
+    public static int sum(String[] str) {
+        int result = 0;
+        for (String s : str) {
+            result += Integer.parseInt(s);
+        }
+        return result;
     }
 
 }
