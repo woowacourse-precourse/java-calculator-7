@@ -15,7 +15,7 @@ class SumCalculatorTest {
     @Test
     void shouldReturnSumWithCustomSeparatorAndValidInput() {
         // 커스텀 구분자가 있고, 올바른 형식의 입력일 때
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
 
         int result = calculator.sum(input);
 
@@ -25,7 +25,7 @@ class SumCalculatorTest {
     @Test
     void shouldThrowExceptionForInvalidCharacterWithCustomSeparator() {
         // 커스텀 구분자가 있고, 입력에 문자가 있을 때
-        String input = "//;\n1;2;a";
+        String input = "//;\\n1;2;a";
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             calculator.sum(input);
@@ -37,7 +37,7 @@ class SumCalculatorTest {
     @Test
     void shouldThrowExceptionForNegativeNumbersWithCustomSeparator() {
         // 커스텀 구분자가 있고, 입력에 음수가 있을 때
-        String input = "//;\n1;-2;3";
+        String input = "//;\\n1;-2;3";
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             calculator.sum(input);

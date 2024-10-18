@@ -19,7 +19,7 @@ class SeparatorManagerTest {
 
     @Test
     void shouldReturnSeparatorsIncludingCustomSeparator() {
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
         SeparatorManager manager = new SeparatorManager();
         manager.addCustomSeparatorAndTrim(input);
 
@@ -43,5 +43,14 @@ class SeparatorManagerTest {
         assertTrue(separators.contains(","), "기본 구분자 쉼표(,)가 구분자 리스트에 있어야 합니다.");
         assertTrue(separators.contains(":"), "기본 구분자 콜론(:)이 구분자 리스트에 있어야 합니다.");
         assertFalse(separators.contains(";"), "커스텀 구분자 세미콜론(;)은 추가되지 않아야 합니다.");
+    }
+    @Test
+    void shouldThrowExceptionWhenCustomSeparatorHasNoNewline() {
+        SeparatorManager manager = new SeparatorManager();
+
+        // 커스텀 구분자가 있으나 \n이 없는 경우 예외가 발생해야 함
+        assertThrows(IllegalArgumentException.class, () -> {
+            manager.addCustomSeparatorAndTrim("//;");
+        }, "커스텀 구분자 뒤에 \\n이 없을 때 IllegalArgumentException이 발생해야 합니다.");
     }
 }

@@ -10,7 +10,7 @@ class StringCalculatorTest {
         StringCalculator stringCalculator = new StringCalculator();
 
         // 커스텀 구분자와 올바른 입력이 있을 때
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
 
         stringCalculator.runWithInput(input);
     }
@@ -20,7 +20,7 @@ class StringCalculatorTest {
         StringCalculator stringCalculator = new StringCalculator();
 
         // 커스텀 구분자와 문자가 포함된 입력이 있을 때
-        String input = "//;\n1;2;a";
+        String input = "//;\\n1;2;a";
 
         // IllegalArgumentException이 발생해야 함
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -35,7 +35,7 @@ class StringCalculatorTest {
         StringCalculator stringCalculator = new StringCalculator();
 
         // 커스텀 구분자와 음수가 포함된 입력이 있을 때
-        String input = "//;\n1;-2;3";
+        String input = "//;\\n1;-2;3";
 
         // IllegalArgumentException이 발생해야 함
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {

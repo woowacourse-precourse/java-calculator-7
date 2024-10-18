@@ -8,7 +8,6 @@ class StringSplitterTest {
 
     @Test
     void shouldSplitStringWithoutCustomSeparator() {
-        // SeparatorManager 설정
         SeparatorManager sepManager = new SeparatorManager();
         StringSplitter splitter = new StringSplitter(sepManager);
 
@@ -28,7 +27,7 @@ class StringSplitterTest {
 
     @Test
     void shouldSplitStringWithCustomSeparator() {
-        String input = "//;\n1;2,3";
+        String input = "//;\\n1;2,3";
         SeparatorManager sepManager = new SeparatorManager();
         String processedInput = sepManager.addCustomSeparatorAndTrim(input); // 커스텀 구분자 세미콜론 추가
         StringSplitter splitter = new StringSplitter(sepManager);
