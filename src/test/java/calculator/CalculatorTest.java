@@ -18,4 +18,17 @@ class CalculatorTest {
         //then
         assertThat(result).isEqualTo(6);
     }
+
+    @Test
+    public void 입력이_없을_때_0을_반환한다() {
+        //given
+        int[] input = {};
+        Calculator calc = new PositiveCalculator();
+
+        //when
+        int result = calc.add(input);
+
+        //then
+        assertThat(result).isEqualTo(0);
+    }
 }
