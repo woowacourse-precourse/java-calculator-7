@@ -94,7 +94,9 @@ public class Calculator {
 		문자열 파싱 및 계산
 	 */
 	private void parsingNumsAndCalculate(String str) {
-
+		if (str.length() == 0) {
+			return;
+		}
 		// 처음과 끝에 구분자가 나올 때
 		if (!Character.isDigit(str.charAt(0))
 				|| !Character.isDigit(str.charAt(str.length() - 1))) {
