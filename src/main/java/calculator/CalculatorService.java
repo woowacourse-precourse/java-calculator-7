@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class CalculatorService {
 
-    private final static String VALID_EXPRESSION_TEMPLATE = "^((//)(.*?)(\\\\n))?(\\d+([,:%s]{1}\\d+)+)";
+    private final static String VALID_EXPRESSION_TEMPLATE = "^((//)(.*?)(\\\\n))?(\\d+([,:%s]{1}\\d+)*)*";
 
     public CalculatorService() {
     }
