@@ -8,6 +8,7 @@ import java.util.Arrays;
 public class InputParser {
 
     private static final int START_INDEX = 0;
+    private static final int DELIMITER_LENGTH = 2;
     private static final String CUSTOM_START = "//";
     private static final String CUSTOM_END = "\\n";
 
@@ -20,7 +21,7 @@ public class InputParser {
 
     private String removeCustomDelimiter(String input) {
         if (hasCustomDelimiter(input)) {
-            input = input.substring(input.indexOf(CUSTOM_END) + 2);
+            input = input.substring(input.indexOf(CUSTOM_END) + DELIMITER_LENGTH);
         }
         return input;
     }

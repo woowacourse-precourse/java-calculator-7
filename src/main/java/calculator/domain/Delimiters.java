@@ -8,12 +8,15 @@ import java.util.regex.Pattern;
 
 public class Delimiters {
 
+    private static final String DEFAULT_DELIMITER_COMMA = ",";
+    private static final String DEFAULT_DELIMITER_COLON = ":";
+
     private final List<String> elements;
 
     public Delimiters() {
         this.elements = new ArrayList<>();
-        elements.add(",");
-        elements.add(":");
+        elements.add(DEFAULT_DELIMITER_COMMA);
+        elements.add(DEFAULT_DELIMITER_COLON);
     }
 
     public List<String> getElements() {
