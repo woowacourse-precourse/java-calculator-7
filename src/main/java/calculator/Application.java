@@ -11,10 +11,10 @@ public class Application {
         InputManager inputManager = new InputManager(input);
         inputManager.validate();
 
-        SeparatorManager separatorManager = new SeparatorManager(inputManager.getSeparatorCandidates());
-        separatorManager.validate();
+        SeparatorManager separatorManager = new SeparatorManager();
 
         if(inputManager.isCustomSeparatorCandidateExisted()) {
+            separatorManager.validate(inputManager.getSeparatorCandidates());
             separatorManager.save(inputManager.getSeparatorCandidates());
         }
 

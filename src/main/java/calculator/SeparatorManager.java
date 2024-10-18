@@ -4,11 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class SeparatorManager {
-    private final String separatorCandidate;
     private final Set<String> separators;
 
-    public SeparatorManager(String separatorCandidate) {
-        this.separatorCandidate = separatorCandidate;
+    public SeparatorManager() {
         this.separators = new HashSet<>();
         this.separators.add(",");
         this.separators.add(":");
@@ -22,7 +20,7 @@ public class SeparatorManager {
         separators.add(separatorCandidates);
     }
 
-    public void validate() {
+    public void validate(String separatorCandidate) {
         if (separatorCandidate == null || separatorCandidate.isEmpty()) {
             throw new IllegalArgumentException("커스텀 구분자는 빈 문자열이어서는 안 됩니다.");
         }
