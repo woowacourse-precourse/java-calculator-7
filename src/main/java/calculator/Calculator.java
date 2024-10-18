@@ -1,13 +1,14 @@
 package calculator;
 
 import calculator.dto.Data;
+import calculator.parser.ParseManager;
 
 public class Calculator {
 
     public static void run() {
         try {
             String inputData = InputDataReader.getInputData();
-            Data data = DataParser.parseData(inputData);
+            Data data = ParseManager.parseData(inputData);
             int result = sum(data);
             Logger.printResult(result);
         } finally {
