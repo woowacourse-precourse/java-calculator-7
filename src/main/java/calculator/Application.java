@@ -34,6 +34,12 @@ public class Application {
                 .map(Integer::parseInt)
                 .toList();
 
+        for (int inputNumber : inputs) {
+            if (inputNumber < 0) {
+                throw new IllegalArgumentException("음수를 포함합니다");
+            }
+        }
+
         return inputs.stream()
                 .reduce(0, Integer::sum);
     }
