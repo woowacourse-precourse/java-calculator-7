@@ -24,4 +24,12 @@ public class Validator {
             throw new IllegalArgumentException(CUSTOM_SEPARATOR_INDEX_ERROR_MESSAGE);
         }
     }
+
+    public static void validateSeparator(String number) {
+        try {
+            validateNumberFormat(number);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(UNREGISTERED_SEPARATOR_ERROR_MESSAGE);
+        }
+    }
 }

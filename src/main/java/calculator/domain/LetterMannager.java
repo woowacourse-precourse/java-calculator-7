@@ -2,6 +2,7 @@ package calculator.domain;
 
 import static calculator.global.constant.Config.*;
 import static calculator.global.util.Validator.validateCustomIndex;
+import static calculator.global.util.Validator.validateSeparator;
 
 import calculator.domain.letter.Separators;
 import calculator.domain.number.Numbers;
@@ -43,6 +44,7 @@ public class LetterMannager {
             if (number.isEmpty()) {
                 continue;
             }
+            validateSeparator(number);
             this.numbers.addNumber(number);
         }
     }

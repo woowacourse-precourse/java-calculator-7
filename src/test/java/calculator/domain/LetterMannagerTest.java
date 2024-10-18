@@ -3,6 +3,7 @@ package calculator.domain;
 
 import static calculator.global.constant.ErrorMessage.CUSTOM_SEPARATOR_INDEX_ERROR_MESSAGE;
 
+import calculator.global.constant.ErrorMessage;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -67,6 +68,21 @@ class LetterMannagerTest {
         //then
         Assertions.assertThat(letterMannager.getNumbers().toInteger().contains(1)).isEqualTo(true);
         Assertions.assertThat(letterMannager.getNumbers().toInteger().contains(2)).isEqualTo(true);
+    }
+
+    @Test
+    void 추출한_문자가_구분자에_등록되어_있지_않다면_예외_처리() {
+        //given
+        String letters = "1;2";
+        LetterMannager letterMannager;
+
+        //when
+        letterMannager = new LetterMannager(letters);
+
+        //then
+        Assertions.assertThatThrownBy(letterMannager::splitNumber)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.UNREGISTERED_SEPARATOR_ERROR_MESSAGE);
     }
 
 
