@@ -18,13 +18,12 @@ public class Application {
     public static class StringCalculator{
         // 구분자를 담을 문자 배열 (구분자가 문자열일 수 있는 경우의 수 고려)
         ArrayList<String> delimiterArr;
-
-        Deque<String> splitStringDeq;
+        ArrayList<Integer> extractedNumArr;
 
         // 생성자
         public StringCalculator(){
             this.delimiterArr = new ArrayList<>();
-            this.splitStringDeq = new ArrayDeque<>();
+            this.extractedNumArr = new ArrayList<>();
 
             // 기본 구분자
             this.delimiterArr.add(":");
@@ -37,9 +36,9 @@ public class Application {
 
             extractDelimiter(input);
 
-            ArrayList<Integer> extractedNumArr = extractNumbers(input);
+            ArrayDeque<String> splitNumberArr = splitNumbers(input);
 
-            if(isValidString()){
+            if(isValidString(splitNumberArr)){
                 result = calculateNumbers(extractedNumArr);
             };
 
@@ -54,12 +53,19 @@ public class Application {
         }
 
         // 문자열 유효성 검사
-        public boolean isValidString(){
-            // 입력 값이 숫자, 구분자를 제외한 문자를 포함하는지
+        public boolean isValidString(ArrayDeque<String> splitStringDeq){
             try{
-                // 구분자 검사를 끝냈음에도 문자가 남아있다면 예외 처리
-                if(!splitStringDeq.isEmpty()){
-                    throw new IllegalArgumentException("Invalid Input");
+                int arrSize = splitStringDeq.size();
+                for (int i = 0; i < arrSize; i++) {
+                    String s = splitStringDeq.pollFirst();
+                    if (s.isEmpty()) {
+                        continue;
+                    }
+                    if(s.matches("\\d+")){
+                        extractedNumArr.add(Integer.parseInt(s));
+                    }else{
+                        throw new IllegalArgumentException();
+                    }
                 }
             } catch (Exception e) {
                 throw e;
@@ -86,15 +92,13 @@ public class Application {
         }
 
         // 문자열로부터 양수 추출
-        public ArrayList<Integer> extractNumbers(String input){
+        public ArrayDeque<String> splitNumbers(String input){
             // 구분자를 정의하려고 할때 사이에 숫자가 껴있을 수도 있음
             String slicedString = input.replaceAll("//(.*?)\\\\n",":");
-
-            // 추출한 int형 숫자를 담을 숫자 배열
-            ArrayList<Integer> extractedNumArr = new ArrayList<>();
+            ArrayDeque<String> splitStringDeq = new ArrayDeque<>();
 
             if(slicedString.isEmpty()){
-                return extractedNumArr;
+                return splitStringDeq;
             }
 
             splitStringDeq.add(slicedString);
@@ -103,27 +107,19 @@ public class Application {
                 int i = delimiterArr.size()-1;
                 // 넓이우선이네
                 while(i>=0 && !splitStringDeq.isEmpty()) {
-                    String 덩어리 = splitStringDeq.pollFirst();
-                    if(덩어리.isEmpty()){
-                        continue;
-                        // 덩어리가 숫자로만 이루어져있으면
-                    }else{
+                    int arrSize = splitStringDeq.size();
+                    for(int j=0;j< arrSize;j++){
+                        String 덩어리 = splitStringDeq.pollFirst();
                         덩어리 = 덩어리.trim();
-                    }
-
-                    if(덩어리.matches("\\d+")){
-                        // 숫자 배열에 추가
-                        extractedNumArr.add(Integer.parseInt(덩어리));
-                        continue;
-                    }else if(덩어리.contains(delimiterArr.get(i))){
-                        splitStringDeq.addAll(List.of(덩어리.split(delimiterArr.get(i))));
-                    }else{
-                        // 찾는 구분자는 없지만 숫자로만 이루어진 것은 아닐 때
+                        if(덩어리.contains(delimiterArr.get(i))){
+                            splitStringDeq.addAll(List.of(덩어리.split(delimiterArr.get(i))));
+                            continue;
+                        }
                         splitStringDeq.add(덩어리);
-                        i--;
                     }
+                    i--;
                 }
-                return extractedNumArr;
+                return splitStringDeq;
             } catch (Exception e) {
                 throw e;
             }
