@@ -25,7 +25,6 @@ public class CustomInput extends UserInput {
         checkValueToCalculateIsNumber(splitValues);
 
         inputNumbers = Arrays.stream(splitValues)
-                .map(value -> value.isEmpty() ? ZERO_VALUE : value) // 빈 문자열을 "0"으로 치환
                 .mapToLong(Long::parseLong) // Long으로 변환
                 .toArray();
     }

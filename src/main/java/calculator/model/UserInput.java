@@ -52,7 +52,6 @@ public abstract class UserInput {
     protected void checkValueToCalculateIsNumber(String[] splitStringByDelimiter) {
         try {
             Arrays.stream(splitStringByDelimiter)
-                    .map(value -> value.isEmpty() ? ZERO_VALUE : value)
                     .mapToLong(Long::parseLong)
                     .forEach(value -> {}); // 스트림의 최종연산 (반환값이 필요 없기에 검증을 위한 코드)
         } catch (NumberFormatException e) {
