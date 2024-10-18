@@ -10,11 +10,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class CalculatorTest {
 
+public class CalculatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3", "//@\\n1@2@3", "//@\\n//@\\n1@2@3"})
@@ -30,8 +31,10 @@ public class CalculatorTest {
 
     static Stream<org.junit.jupiter.params.provider.Arguments> parseTestCases() {
         return Stream.of(
-                org.junit.jupiter.params.provider.Arguments.of("1,2,3", new ArrayList<Integer>(Arrays.asList(1, 2, 3))),
-                org.junit.jupiter.params.provider.Arguments.of("", new ArrayList<Integer>()),
+                org.junit.jupiter.params.provider.Arguments.of(
+                        "1,2,3", new ArrayList<Integer>(Arrays.asList(1, 2, 3))),
+                org.junit.jupiter.params.provider.Arguments.of(
+                        "", new ArrayList<Integer>()),
                 org.junit.jupiter.params.provider.Arguments.of(
                         "//@\n1@2@3", new ArrayList<Integer>(Arrays.asList(1, 2, 3))),
                 org.junit.jupiter.params.provider.Arguments.of(
@@ -71,6 +74,25 @@ public class CalculatorTest {
     @MethodSource("parseExceptionTestCases")
     void parse_ExceptionTest(String input) {
         assertThrows(IllegalArgumentException.class, () -> Calculator.parse(input));
+    }
+
+    static Stream<Arguments> addTestCases() {
+        return Stream.of(
+                Arguments.of(Calculator.parse("1,2,3"), 6),
+                Arguments.of(Calculator.parse(""), 0),
+                Arguments.of(Calculator.parse("//@\n1@2@3"), 6),
+                Arguments.of(Calculator.parse("//@\n1@2,3"), 6),
+                Arguments.of(Calculator.parse("//@\n1@2:3"), 6),
+                Arguments.of(Calculator.parse("//@\n//@\n1@2,3"), 6),
+                Arguments.of(Calculator.parse("//@\n//;\n1;2@3"), 6),
+                Arguments.of(Calculator.parse("//@\n1@2@3"), 6)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("addTestCases")
+    void add_test(ArrayList<Integer> input, int expected) {
+        assertThat(Calculator.add(input)).isEqualTo(expected);
     }
 
 }
