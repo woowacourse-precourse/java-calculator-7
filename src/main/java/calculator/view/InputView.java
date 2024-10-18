@@ -1,25 +1,24 @@
 package view;
 
-
-import model.Custom;
 import utils.InputViewValidator;
 import camp.nextstep.edu.missionutils.Console;
-
-import java.util.ArrayList;
 
 
 public class InputView {
 
     private final InputViewValidator inputViewValidator = new InputViewValidator();
-    private final Custom custom;
 
     private String inputName;
-    private ArrayList<String> resultParsingInput;
+    private String customData;
 
-    public InputView(Custom custom) {
-        this.custom = custom;
+
+    public void setCustom(String customData) {
+        this.customData = customData;
     }
 
+    public String getCustom() {
+        return customData;
+    }
 
     public void readInputString() {
         inputName = Console.readLine();
@@ -29,15 +28,14 @@ public class InputView {
     }
 
     public Boolean isCustom() {
-        System.out.println("inputname: " + inputName);
         /*조건문 분리 및 리팩토링 필요*/
-        if(inputName.length()>4) {
+        if (inputName.length() > 4) {
             String prefix = inputName.substring(0, 2);
             String suffix = inputName.substring(3, 5);
             String customData = inputName.substring(2, 3);
             if (prefix.equals("//") && suffix.equals("\\n")) {
                 inputViewValidator.validateCustomNumeric(customData);
-                custom.addCustomSet(customData); /*컨트롤러의 역할로 변경*/
+                setCustom(customData);
                 return true;
             } else {
                 return false;
@@ -45,7 +43,6 @@ public class InputView {
         } else {
             return false;
         }
-
     }
 
     private void resultInput() {
