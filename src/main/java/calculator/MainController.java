@@ -27,12 +27,24 @@ public class MainController {
             return;
         }
 
-        splittedValues = SplitbyDefaultDelimiter(inputString);
-        for (String part : splittedValues) {
-            checkNagativeInt(Integer.parseInt(part));
-            sumResult += Integer.parseInt(part);
+        if(!checkCustomDelimiterFormat(inputString) && checkDefaultDelimter(inputString)){
+            splittedValues = SplitbyDefaultDelimiter(inputString);
+            for (String part : splittedValues) {
+                checkNagativeInt(Integer.parseInt(part));
+                sumResult += Integer.parseInt(part);
+            }
+            System.out.printf("결과 : %d", sumResult);
+            return;
         }
-        System.out.printf("결과 : %d", sumResult);
+
+    }
+
+    private static boolean checkDefaultDelimter(String inputString) {
+        String rex = "[,:]";
+        Pattern pattern = Pattern.compile(rex);
+        Matcher matcher = pattern.matcher(inputString);
+
+        return matcher.find();
     }
 
     private static void checkHasDigit(String inputString) {
