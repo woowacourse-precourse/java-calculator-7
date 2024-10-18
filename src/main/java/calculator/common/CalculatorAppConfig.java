@@ -13,7 +13,7 @@ import calculator.view.ApplicationView;
 import calculator.view.input.InputConsoleView;
 import calculator.view.output.OutputConsoleView;
 
-public class CalculatorAppConfig {
+public final class CalculatorAppConfig {
 
     private static final CalculatorAppConfig calculatorAppConfig = new CalculatorAppConfig();
 

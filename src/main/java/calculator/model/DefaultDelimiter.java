@@ -1,7 +1,7 @@
 package calculator.model;
 
 import java.util.Arrays;
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public enum DefaultDelimiter {
@@ -19,9 +19,9 @@ public enum DefaultDelimiter {
         return delimiter;
     }
 
-    public static Set<String> getAll() {
+    public static List<String> getAll() {
         return Arrays.stream(DefaultDelimiter.values())
                 .map(DefaultDelimiter::getDelimiter)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 }

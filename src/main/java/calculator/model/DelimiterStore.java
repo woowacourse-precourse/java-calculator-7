@@ -3,7 +3,6 @@ package calculator.model;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class DelimiterStore {
 
@@ -23,10 +22,10 @@ public class DelimiterStore {
     }
 
     public List<String> getAllDelimiters() {
-        return new ArrayList<>(delimiterStore);
+        return new ArrayList<>(new HashSet<>(delimiterStore));
     }
 
-    public boolean containsDelimiter(String delimiter) {
-        return delimiterStore.contains(delimiter);
+    public void clear() {
+        delimiterStore.clear();
     }
 }

@@ -1,6 +1,6 @@
 package calculator.common;
 
-public class NumberValidator {
+public final class NumberValidator {
 
     public static void validatePositive(int number) {
         if (number < 0) {
