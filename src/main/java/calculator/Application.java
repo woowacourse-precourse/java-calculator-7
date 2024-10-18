@@ -64,4 +64,9 @@ public class Application {
         int sum = sumArray(temp);
         System.out.println("결과 : " + sum);
     }
+
+    public static void main(String[] args) {
+        Application app = new Application();
+        app.run();
+    }
 }
