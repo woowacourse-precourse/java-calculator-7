@@ -42,7 +42,7 @@ public class CustomCalculator implements Calculator{
     }
 
     private void validateDelimiterUsage() {
-        if(Character.isDigit(calculatorValues.getExpression().charAt(0))) {
+        if(calculatorValues.getExpression().matches(".*-\\d+.*")) {
             throw new CalculatorException(CalculatorExceptionStatus.INVALID_CUSTOM_DELIMITER_INTEGER);
         }
         // 입력 수식에서 설정된 커스텀 구분자 외에 다른 구분자가 사용되었는지 확인
