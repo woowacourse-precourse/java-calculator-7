@@ -32,11 +32,11 @@ public class Application {
     public static String[] checkFirstNum(String str) {
     	String[] arr = {};
     	if(Character.isDigit(str.charAt(0))) {
-    		arr = str.replaceAll(":", ",").split(",");
+    		arr = str.split(",|:");
     	}
     	else if(str.charAt(0) == '/') {
-    		String custom = String.valueOf(str.charAt(2));
-    		str = str.substring(5, str.length());
+    		String custom = str.substring(2, str.indexOf("\\n"));
+    		str = str.substring(str.indexOf("\\n")+2,str.length());
     		arr = str.split(custom);
     	}
     	else {
