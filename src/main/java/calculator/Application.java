@@ -1,5 +1,7 @@
 package calculator;
 
+import calculator.plusCalculator.PlusCalculatorInterface;
+import calculator.plusCalculator.PlusPlusCalculator;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 
@@ -7,12 +9,12 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
 
-        Calculator calculator = new Calculator(Arrays.asList(",", ":"));
+        PlusCalculatorInterface plusCalculator = new PlusPlusCalculator(Arrays.asList(",", ":"));
         String input;
 
         input = inputString();
 
-        int result = calculator.run(input);
+        int result = plusCalculator.run(input);
 
         outputResult(result);
     }
