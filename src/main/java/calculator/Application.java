@@ -4,10 +4,14 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = Console.readLine();
-        System.out.println(input);
-        Console.close();
+
+        try (Calculator calculator = new Calculator()) {
+            calculator.displayPrompt();
+            calculator.readInput(Console.readLine());
+            calculator.printSum();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
