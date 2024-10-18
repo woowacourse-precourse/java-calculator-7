@@ -2,8 +2,9 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
-public class Application {
 
+public class Application {
+    
     public static void main(String[] args) {
         try {
             System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -12,6 +13,7 @@ public class Application {
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.out.println("잘못된 입력 : " + e.getMessage());
+            throw e;
         }
     }
 }
@@ -26,9 +28,23 @@ class Calculator {
         }
 
         String[] tokens;
-        tokens = splitDefault(input);
+        if (isCustom(input)) {
+            tokens = splitCustom(input);
+        } else {
+            tokens = splitDefault(input);
+        }
 
         return sum(tokens);
+    }
+
+    private static boolean isCustom(String input) {
+        return input.startsWith("//");
+    }
+
+    private static String[] splitCustom(String input) {
+        String customDelimiter = input.substring(2,3);
+        String numPart = input.substring(5);
+        return numPart.split(customDelimiter);
     }
 
     private static String[] splitDefault(String input) {
@@ -45,11 +61,10 @@ class Calculator {
     }
 
     private static int parse(String token) {
-        try {
-            int number = Integer.parseInt(token.trim());
-            return number;
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자 형식이 잘못됐습니다 : " + token);
+        int number = Integer.parseInt(token.trim());
+        if (number < 0) {
+            throw new IllegalArgumentException("음수는 입력 불가능합니다 : " + number);
         }
+        return number;
     }
 }
