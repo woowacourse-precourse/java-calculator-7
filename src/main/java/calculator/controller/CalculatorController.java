@@ -4,6 +4,7 @@ import calculator.domain.Numbers;
 import calculator.domain.Delimiter;
 import calculator.util.NumberConvertor;
 import calculator.validator.DelimiterValidator;
+import calculator.validator.StringValidator;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -19,6 +20,8 @@ public class CalculatorController {
 
     public void run() {
         String str = inputView.inputStringToAdd();
+
+        StringValidator.isEmpty(str);
 
         if (DelimiterValidator.hasCustomDelimiter(str)) {
             Delimiter.addCustomDelimiter(str);
