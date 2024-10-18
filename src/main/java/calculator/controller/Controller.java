@@ -6,8 +6,6 @@ import calculator.view.OutputView;
 public class Controller {
 
     public void run() {
-        System.out.print("숫자를 입력하세요: ");
-
         String inputNumber = getNumber();
 
         // 계산 메서드
