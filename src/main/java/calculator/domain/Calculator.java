@@ -1,5 +1,7 @@
 package calculator.domain;
 
+import java.util.regex.Pattern;
+
 public class Calculator {
 
     private String expression;
@@ -47,7 +49,7 @@ public class Calculator {
             String afterCustomDelimiter = expression.substring(endIdx + 2);
 
             expression = (beforeCustomDelimiter + afterCustomDelimiter)
-                    .replaceAll(customDelimiter, ":");
+                    .replaceAll(Pattern.quote(customDelimiter), ":");
         }
     }
 
