@@ -47,4 +47,22 @@ class CustomSeparatorManagerTest {
                 Arguments.of("//customSeparator\\n", new Separator("customSeparator"))
         );
     }
+
+    @ParameterizedTest
+    @DisplayName("//로시작하고 \n으로 끝나는 문자열 제거하는지 확인")
+    @MethodSource("generateCustomSeparatorDeclarationExpression")
+    void testRemoveCustomSeparator(String inputString, String expected) {
+        CustomSeparatorManager customSeparatorManager = new CustomSeparatorManager(inputString);
+
+        String actual = customSeparatorManager.removeCustomSeparatorDeclaration();
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    static Stream<Arguments> generateCustomSeparatorDeclarationExpression() {
+        return Stream.of(
+                Arguments.of("//d\\n", ""),
+                Arguments.of("//customSeparator\\n1:2", "1:2")
+        );
+    }
 }

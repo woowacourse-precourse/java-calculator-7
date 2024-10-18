@@ -24,7 +24,7 @@ public class CustomSeparatorManager {
         return new Separator(customSeparatorString);
     }
 
-    public String removeSeparatorDeclarationFrom() {
+    public String removeCustomSeparatorDeclaration() {
         return matcher.replaceFirst(BLANK);
     }
 }
