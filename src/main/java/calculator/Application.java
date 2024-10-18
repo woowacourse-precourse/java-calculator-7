@@ -17,6 +17,8 @@ public class Application {
             separator += ",:"; //기본 문자열 추가
 
             return new String[]{separator, parts[1]};
+        } else if (line.equals("")) {
+            line = "0";
         }
         return new String[]{",:", line};
     }
@@ -50,6 +52,6 @@ public class Application {
 
         int result = calculate(separators, operation);
 
-        System.out.println("결과: " + result);
+        System.out.println("결과 : " + result);
     }
 }
