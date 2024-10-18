@@ -48,8 +48,7 @@ public class CalculatorController {
     }
 
     private int[] convertToInt(String[] values) {
-        int[] numbers = PositiveNumberConverter.convertToInt(values);
-        return numbers;
+        return PositiveNumberConverter.convertToInt(values);
     }
 
     private int getSum(int[] numbers) {
