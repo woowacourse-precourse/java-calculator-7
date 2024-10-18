@@ -9,7 +9,7 @@ public class Separator {
     private List<String> separators;
 
     public Separator() {
-        this.separators = new ArrayList<>(Arrays.asList(",", ":"));
+        this.separators = new ArrayList<>(Arrays.asList(EnumClass.COMMA.getSymbol(), EnumClass.COLON.getSymbol()));
     }
 
     public List<String> getSeparators() {
@@ -17,10 +17,14 @@ public class Separator {
     }
 
     public String containCustomSeparator(String input) {
-        if (input.startsWith("//") && input.contains("\\n")) {
-            separators.add(input.substring(2, 3));
+        if (input.startsWith(EnumClass.DESIGNATED_SEPARATOR_START.getSymbol()) && input.contains(
+                EnumClass.DESIGNATED_SEPARATOR_END.getSymbol())) {
+            int customSeparatorStartIdx = EnumClass.DESIGNATED_SEPARATOR_START.getSymbolLength();
+            int customSeparatorEndIdx = input.indexOf(EnumClass.DESIGNATED_SEPARATOR_END.getSymbol());
+
+            separators.add(input.substring(customSeparatorStartIdx, customSeparatorEndIdx));
             this.separators = List.copyOf(separators);
-            return input.substring(5);
+            return input.substring(customSeparatorEndIdx + EnumClass.DESIGNATED_SEPARATOR_END.getSymbolLength());
         }
         return input;
     }
