@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class Calculator {
 
 
-    public static void sumNumbersFromLetters(String input){
+    public static void run(String input){
 
         if (input == null || input.isEmpty() || input.isBlank()) {
             System.out.println("결과 : 0");
@@ -50,6 +50,7 @@ public class Calculator {
         }
         return total;
     }
+    
 
     private static String findCustomSeparator(String input){
         input = input.replace("\\n", "\n"); // \\n을 실제 줄바꿈 \n으로 변환
