@@ -52,7 +52,7 @@ public class Separators {
 
     private String createRegex() {
         return String.valueOf(separatorStore.stream()
-                .map(delimiter -> Pattern.quote(delimiter.toString()))
+                .map(separator -> Pattern.quote(separator.toString()))
                 .collect(Collectors.joining("|")));
     }
 
