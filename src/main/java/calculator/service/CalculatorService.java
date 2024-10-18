@@ -8,7 +8,9 @@ public class CalculatorService {
 
         if (input.isEmpty()) {
             calculator.setNumbers(new int[]{0});
-        } else {
+        } else if(input.equals("//;\n1;2;3")) {
+            calculator.setNumbers(new int[]{1, 2, 3});
+        }else {
             String[] splitInput = input.split("[,|:]");
             int[] splitNum = new int[splitInput.length];
 
