@@ -10,7 +10,7 @@ public class StringCalculator {
     }
 
     // 기본 구분자
-    private String delimiter = ",:";
+    private String delimiter = ",|:";
     private final String specialDelimiter = ".*+?^${}()|[]\\";
 
     // 문자열을 정수로 변환하는 메서드
@@ -62,7 +62,7 @@ public class StringCalculator {
         }
         // 기존 기본 구분자에 커스텀 구분자를 추가
 
-        delimiter += escapeSpecialDelimiter(customDelimiter);
+        delimiter += "|" + escapeSpecialDelimiter(customDelimiter);
 
         // 커스텀 구분자 정의 부분 이후를 반환
         return str.substring(index + 2);
@@ -81,7 +81,7 @@ public class StringCalculator {
         }
 
         // limit:-1로 설정하면, 공백이어도 문자열의 끝까지 탐색해서 null로 저장한다.
-        return Arrays.stream(numbers.split("[" + delimiter + "]", -1))
+        return Arrays.stream(numbers.split(delimiter, -1))
                 .map(String::trim)  //공백 제거
                 .peek(this::checkNull)
                 .mapToInt(this::parseInt)
