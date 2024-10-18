@@ -23,4 +23,12 @@ class StringParserTest {
         String[] parseString = stringParser.parseString(input);
         assertThat(parseString).containsExactly("1", "2", "3");
     }
+
+    @ParameterizedTest
+    @DisplayName("//와 \\n 사이에 커스텀 구분자를 지정하여 커스텀 구분자로 문자열을 파싱한다.")
+    @ValueSource(strings = {"//;\\n1;2;3"})
+    void parseWithCustomDelimiter(String input) {
+        String[] parseString = stringParser.parseString(input);
+        assertThat(parseString).containsExactly("1", "2", "3");
+    }
 }
