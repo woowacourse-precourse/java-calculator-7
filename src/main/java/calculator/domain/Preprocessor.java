@@ -15,8 +15,8 @@ public class Preprocessor {
     private static final String CUSTOM_REGEX_PATTERN = "//(.)\\\\n(.*)";
     private static final String DELIMITER_PREFIX = "//";
     private static final ArrayList<Character> DELIMITERS = new ArrayList<>(Arrays.asList(',', ':'));
-    // TODO: 여기가 final일 경우 코드가 좀 더 더러워 지는데, 여기가 final이 아니면 어떤 문제가 생길지 생각해보기
-    private String input;
+    // 클래스 전체에서 사용 가능하므로 불변성을 유지하는게 좋다고 판단
+    private final String input;
 
     public Preprocessor(String input) {
         this.input = input == null ? "" : input;
@@ -24,20 +24,18 @@ public class Preprocessor {
 
     public PreprocessedInput preprocess() {
         if (input.startsWith(DELIMITER_PREFIX)) {
-            extractDelimiterWithMatcher();
+            return extractDelimiterWithMatcher();
         }
-
         return new PreprocessedInput(input, DELIMITERS);
     }
 
-    private void extractDelimiterWithMatcher() {
+    private PreprocessedInput extractDelimiterWithMatcher() {
         Matcher matcher = Pattern.compile(CUSTOM_REGEX_PATTERN).matcher(input);
-
         if (matcher.find()) {
-            DELIMITERS.add(matcher.group(1).charAt(0));
-            input = matcher.group(2);
-        } else {
-            throw new IllegalArgumentException();
+            ArrayList<Character> newDelimiters = new ArrayList<>(DELIMITERS);
+            newDelimiters.add(matcher.group(1).charAt(0));
+            return new PreprocessedInput(matcher.group(2), newDelimiters);
         }
+        throw new IllegalArgumentException();
     }
 }
