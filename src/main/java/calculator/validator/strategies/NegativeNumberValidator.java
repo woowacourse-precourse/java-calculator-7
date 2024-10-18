@@ -17,7 +17,7 @@ public class NegativeNumberValidator implements ValidationStrategy {
 
     // 입력 문자열을 구분자로 나누어 숫자 배열을 반환하는 메소드
     private String[] splitInputIntoNumbers(String input) {
-        return DelimiterUtils.splitInput(input);
+        return DelimiterUtils.splitByDelimiter(input);
     }
 
     // 음수 리스트를 확인하고, 음수가 있으면 예외를 발생시키는 메소드

@@ -4,7 +4,7 @@ import calculator.util.DelimiterUtils;
 import calculator.view.ErrorMessage;
 
 // 숫자가 아닌 입력값을 검증하는 클래스
-public class NonNumericValidator implements ValidationStrategy {
+public class NumericValidator implements ValidationStrategy {
 
     @Override
     public void validate(String input) {
@@ -16,7 +16,7 @@ public class NonNumericValidator implements ValidationStrategy {
 
     // 입력이 숫자와 구분자로만 이루어져 있는지 확인
     private boolean containsOnlyValidCharacters(String input) {
-        String[] numbers = DelimiterUtils.splitInput(input);
+        String[] numbers = DelimiterUtils.splitByDelimiter(input);
 
         // 숫자 배열을 확인하여 유효한지 판단
         for (String number : numbers) {
