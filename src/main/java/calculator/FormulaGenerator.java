@@ -1,12 +1,16 @@
 package calculator;
 
-public class formulaGenerator {
+public class FormulaGenerator {
     private String input;
     private String formula;
 
-    public formulaGenerator(String input) {
+    public FormulaGenerator(String input) {
         this.input = input;
-        formula = makeFormula(input);
+        if(this.input.charAt(0)=='/'){
+            InputParser inputParser = new InputParser(this.input);
+            this.input = inputParser.getparsedInput();
+        }
+        formula = makeFormula(this.input);
     }
 
     private String makeFormula(String input) {
