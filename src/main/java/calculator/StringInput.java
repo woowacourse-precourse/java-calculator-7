@@ -9,13 +9,13 @@ public class StringInput {
         this.input = input;
     }
 
-    private static void validateString(String input) {
+    private void validateString(String input) {
         if (isBlank(input)) {
             throw new IllegalArgumentException(BLINK_INPUT_ERROR);
         }
     }
 
-    private static boolean isBlank(String input) {
+    private boolean isBlank(String input) {
         return (input == null || input.trim().isEmpty());
     }
 }
