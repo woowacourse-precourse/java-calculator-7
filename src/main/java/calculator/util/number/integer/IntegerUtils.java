@@ -1,4 +1,4 @@
-package calculator.util.integer;
+package calculator.util.number.integer;
 
 import java.util.List;
 
