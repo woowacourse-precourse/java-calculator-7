@@ -33,8 +33,8 @@ public class CalculatorControllerTest  {
 
     @Test
     void 쉼표_콜론_구분자_테스트() {
-        //given: "3;3,2"
-        String input = "3;3,2";
+        //given: "3:3,2"
+        String input = "3:3,2";
         CalculatorController controller = new CalculatorController();
 
         //when: 입력 처리
