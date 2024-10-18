@@ -13,28 +13,25 @@ public enum RegexPattern {
     CUSTOM_SEPARATOR(RegexConstant.CUSTOM_SEPARATOR_REGEX) {
         @Override
         public String extractSeparator(String input) {
-            int startWith = SeparatorConvertor.forWardSlashStartWithIndex(input);
-            int endWith = SeparatorConvertor.slashNextLineEndWithIndex(input);
-            String customSeparator = SeparatorConvertor.createCustomSeparator(input, startWith, endWith);
-            return SeparatorConvertor.addCustomSeparator(customSeparator);
+            String customSeparator = SeparatorConvertor.createCustomSeparator(input);
+            return SeparatorConvertor.replaceEscape(customSeparator);
         }
 
         @Override
         public List<String> extractNumber(String input, String separator) {
-            int startWith = SeparatorConvertor.slashNextLineStartWithIndex(input);
-            String extractNumber = SeparatorConvertor.createNumber(input, startWith);
+            String extractNumber = SeparatorConvertor.createNumber(input);
             return Arrays.stream(extractNumber.split(separator))
                     .toList();
         }
     },
     BLANK(RegexConstant.BLANK_REGEX);
+    public static final RegexPattern[] REGEX_PATTERNS = values();
     private final Pattern pattern;
 
     RegexPattern(Pattern pattern) {
         this.pattern = pattern;
     }
 
-    public static final RegexPattern[] REGEX_PATTERNS = values();
 
     public static boolean isMatch(String input) {
         return Arrays.stream(REGEX_PATTERNS)
@@ -52,15 +49,14 @@ public enum RegexPattern {
                 ).orElseThrow(() -> new IllegalArgumentException(ErrorMessage.UNEXPECTED_ERROR));
     }
 
-    private boolean match(String input) {
-        return pattern.matcher(input).matches();
-    }
-
     public String extractSeparator(String input) {
-        return SeparatorConvertor.defaultSeparator();
+        return DefaultSeparator.getDefaultSeparator();
     }
 
     public List<String> extractNumber(String input, String separator) {
         return Arrays.stream(input.split(separator)).toList();
+    }
+    private boolean match(String input) {
+        return pattern.matcher(input).matches();
     }
 }
