@@ -19,4 +19,6 @@ Refactoring
 
 fixing
 
-- [ ] 
+- [ ] 입력을 안내하는 Systemprint 추가
+
+- [ ] IntegerParserTest의 커스텀문자가 아닌 문자가 파싱된 경우 예외처리 수정
