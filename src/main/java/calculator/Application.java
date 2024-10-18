@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.operations.SumCalculator;
 import calculator.parser.InputParser;
 import calculator.parser.InputParser.Builder;
 import camp.nextstep.edu.missionutils.Console;
@@ -10,11 +11,12 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.\n");
 
         String input = Console.readLine();
-        InputParser inputParser = new Builder().setDefaultDelimiter(",:").setCustomDelimiterFormat("//", "\\\\n")
+        InputParser inputParser = new Builder().setDefaultDelimiter(",:").setCustomDelimiterFormat("//", "\\n")
                 .build();
         ArrayList<Integer> numbers = inputParser.parse(input);
+        int sum = SumCalculator.sum(numbers);
+        System.out.println("결과 : " + sum);
 
-        System.out.println(numbers);
         Console.close();
     }
 }
