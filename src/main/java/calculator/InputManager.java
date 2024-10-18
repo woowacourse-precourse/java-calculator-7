@@ -5,10 +5,11 @@ class EmptyException extends Exception{}
 
 public class InputManager {
     public String getString(){
-        msgPrint();
+        printMsg();
         return stringInput();
     }
-    private void msgPrint(){
+
+    private void printMsg(){
         System.out.println("덧셈할 문자열을 입력해주세요.");
     }
 
@@ -23,6 +24,7 @@ public class InputManager {
             System.out.print("잘못된 값을 입력하였습니다.");
         } catch (EmptyException e){
             System.out.print(0);
+            return str = "Empty";
         }
         return str;
     }
