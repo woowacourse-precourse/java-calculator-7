@@ -3,7 +3,7 @@ package calculator.Model;
 import java.util.ArrayList;
 
 public class Input {
-    private static ArrayList<Integer> numberList = new ArrayList<>();
+    private ArrayList<Integer> numberList = new ArrayList<>();
 
     public boolean hasText() {
         return !numberList.isEmpty();
