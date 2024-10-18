@@ -32,7 +32,8 @@ public class Application {
 
         if (matcher.find()) {
             guboonja = matcher.group(1);  // 커스텀 구분자 추출
-            nums = re_susik.replaceAll("[^0-9-\\d]", guboonja).split(guboonja);
+            String metaGuboonja = Pattern.quote(guboonja);  // 메타문자 이스케이프 처리
+            nums = re_susik.replaceAll("[^0-9-\\d]", guboonja).split(metaGuboonja);
 
         } else {
             guboonja = "[,:]";
