@@ -4,15 +4,9 @@
 
 ## 목차
 
-[1. 프로젝트 소개](#프로젝트-소개)
+[1. 구현 기능 목록](#구현-기능-목록)
 
-[2. 구현 기능 목록](#구현-기능-목록)
-
-[3. 버전 로그](#버전-로그)
-
----
-
-## 프로젝트 소개
+[2. 버전 로그](#버전-로그)
 
 ---
 
@@ -63,7 +57,7 @@
 ```text
 - DataParser 를 CustomDataParser 와 DefaultDataParser 로 분리
 - 기존 DataParser 를 interface 로 변경
-- 입력받은 문자열에 대해 적절한 DataParser 를 실행시키는 ParseManager 생
+- 입력받은 문자열에 대해 적절한 DataParser 를 실행시키는 ParseManager 생성
 ```
 
 - 역할
