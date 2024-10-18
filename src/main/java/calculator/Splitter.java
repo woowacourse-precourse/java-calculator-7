@@ -1,5 +1,8 @@
 package calculator;
 
+import static calculator.Validator.hasCustomSplitter;
+import static calculator.Validator.isEmptyString;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -13,31 +16,24 @@ public class Splitter {
     }
 
     public List<String> splitString() throws IllegalArgumentException {
-        if (hasCustomSpliter()) {
-            DELIMITER += ("|" + getCustomSpliter());
+        if (hasCustomSplitter(userInput)) {
+            int delimiterIndex = userInput.indexOf("\\n");
+            DELIMITER += ("|" + getCustomSplitter(delimiterIndex));
+            userInput = userInput.substring(delimiterIndex + 2);
         }
-        if (isEmptyString()) {
+        if (isEmptyString(userInput)) {
             return Collections.emptyList();
         }
+
         return Arrays.stream(userInput.split(DELIMITER)).toList();
     }
 
-    private boolean isEmptyString() {
-        return userInput.isEmpty();
+    private String getCustomSplitter(int delimiterIndex) {
+        String customDelimiter = userInput.substring(2, delimiterIndex);
+        return escapeSpecialRegexChars(customDelimiter);
     }
 
-    private boolean hasCustomSpliter() {
-        if (userInput.length() >= 5 && userInput.startsWith("//")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private String getCustomSpliter() {
-        int delimiterIndex = userInput.indexOf("\\n");
-        String newDelimiter = userInput.substring(2, delimiterIndex);
-        userInput = userInput.substring(delimiterIndex + 2);
-        return newDelimiter;
+    private String escapeSpecialRegexChars(String delimiter) {
+        return delimiter.replaceAll("([\\\\.\\^\\$\\*\\+\\?\\(\\)\\[\\]\\{\\}\\|])", "\\\\$1");
     }
 }

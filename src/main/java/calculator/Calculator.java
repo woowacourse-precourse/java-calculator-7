@@ -1,5 +1,7 @@
 package calculator;
 
+import static calculator.Validator.checkNegativeNumber;
+
 import java.util.List;
 
 public class Calculator {
@@ -33,12 +35,6 @@ public class Calculator {
             numberOfInputString[i] = number;
         }
         return numberOfInputString;
-    }
-
-    private void checkNegativeNumber(long number) {
-        if (number <= 0) {
-            throw new IllegalArgumentException();
-        }
     }
 
     public void getResult() {
