@@ -13,14 +13,28 @@ public class CalculatorController {
     private static final CalculateService calculateService = new CalculateService();
 
     public static void run(){
-        OutputView.printRequireOperandStringMessage();
-        UserInputDTO userInputDTO = InputView.getOperandInput();
+        UserInputDTO userInputDTO = getUserInput();
 
         String operandStr = userInputDTO.getOperandStr();
-
-        OperandDTO operandDTO = parsingService.parseOperandStr(operandStr);
-        ResultDTO resultDTO = CalculateService.addOperand(operandDTO);
+        OperandDTO operandDTO = parseOperand(operandStr);
+        ResultDTO resultDTO = addOperand(operandDTO);
 
         OutputView.printCalculationResultMessage(resultDTO);
+    }
+
+    //문자열 입력 처리
+    public static UserInputDTO getUserInput(){
+        OutputView.printRequireOperandStringMessage();
+        return InputView.getOperandInput();
+    }
+
+    //문자열 파싱 처리
+    public static OperandDTO parseOperand(String operandStr){
+        return parsingService.parseOperandStr(operandStr);
+    }
+
+    //덧셈연산계산
+    public static ResultDTO addOperand(OperandDTO operandDTO){
+        return CalculateService.addOperand(operandDTO);
     }
 }
