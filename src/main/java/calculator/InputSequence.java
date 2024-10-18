@@ -10,7 +10,10 @@ public class InputSequence {
     public InputSequence(String input) {
         String delimiter = validateCustomDelimiter(input);
         this.sequence = Arrays.stream(input.split(delimiter))
-                            .map(Long::parseLong)
+                            .map(part -> {
+                                validateSplit(part);
+                                return Long.parseLong(part);
+                            })
                             .toList();
     }
 
@@ -23,5 +26,10 @@ public class InputSequence {
             }
         }
         return "[,:]";
+    }
+    private void validateSplit(String input) {
+        if (!input.chars().allMatch(Character::isDigit)) {
+            throw new IllegalArgumentException("구분자 외의 문자가 존재합니다.");
+        }
     }
 }
