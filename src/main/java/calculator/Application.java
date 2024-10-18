@@ -45,10 +45,13 @@ public class Application {
                 int num;
                 try {
                     num = Integer.parseInt(word.trim());
-                    result += num;
                 } catch (NumberFormatException e) {
+                    num = 0;
+                }
+                if (num < 0) {
                     throw new IllegalArgumentException();
                 }
+                result += num;
             }
         }
         System.out.println("결과 : " + result);
