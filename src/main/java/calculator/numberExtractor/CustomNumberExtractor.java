@@ -1,6 +1,7 @@
 package calculator.numberExtractor;
 
 
+import calculator.constants.StringConst;
 import calculator.dto.NumberDto;
 import calculator.repository.NumberRepository;
 import calculator.validator.Validator;
@@ -19,7 +20,7 @@ public class CustomNumberExtractor implements NumberExtractor {
     }
 
     private static String[] splitNextToken(String input, String customDelimiter) {
-        return input.split("\\\\n")[1].split(customDelimiter);
+        return input.split(StringConst.LINE_SEPARATOR)[1].split(customDelimiter);
     }
 
 

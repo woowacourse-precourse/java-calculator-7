@@ -1,5 +1,7 @@
 package calculator.validator;
 
+import calculator.constants.StringConst;
+
 public class Validator {
 
 
@@ -14,7 +16,7 @@ public class Validator {
 
     public static boolean isHaveNextToken(String input) {
 
-        if (input.split("\\\\n").length == 1) {
+        if (input.split(StringConst.LINE_SEPARATOR).length == 1) {
             throw new IllegalArgumentException("[FORMAT_ERROR] NextToken의 입력값이 없습니다");
         }
 
