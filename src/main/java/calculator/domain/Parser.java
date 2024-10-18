@@ -15,16 +15,29 @@ public class Parser {
     }
 
     public List<Integer> parse() {
-        String regax = buildDelimiterRegex(preprocessedInput.delimiters());
-        String[] splitNumbers = preprocessedInput.unparsedNumber().split(regax);
+        String regex = buildDelimiterRegex(preprocessedInput.delimiters());
+        String[] splitNumbers = preprocessedInput.unparsedNumber().split(regex);
         for (String splitNumber : splitNumbers) {
             try {
-                parsedNumbers.add(Integer.parseInt(splitNumber));
+                Integer parsedNumber = convertToPositiveIntegerOrThrow(splitNumber);
+                parsedNumbers.add(parsedNumber);
             } catch (Exception e) {
                 throw new IllegalArgumentException();
             }
         }
         return parsedNumbers;
+    }
+
+    private Integer convertToPositiveIntegerOrThrow(String number) {
+        try {
+            int parsedNumber = Integer.parseInt(number);
+            if(parsedNumber < 0) {
+                throw new IllegalArgumentException();
+            }
+            return parsedNumber;
+        } catch (Exception e) {
+            throw new IllegalArgumentException();
+        }
     }
 
     /**
