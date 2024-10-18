@@ -8,6 +8,10 @@ public class Application {
     public static void main(String[] args) {
         System.out.println(INPUT_REQUEST_MESSAGE);
         String input = Console.readLine();
-        System.out.println(input);
+        
+        if(input.isEmpty() || input.trim().isEmpty()) {
+        	System.out.println(0);
+        	return;
+        }
     }
 }
