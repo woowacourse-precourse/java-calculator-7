@@ -11,9 +11,6 @@ public class Application {
         String input = Console.readLine();
 
         //구분자 추가하기
-        ArrayList<String> seperatorList = new ArrayList<String>();
-        seperatorList.add(",");
-        seperatorList.add(":");
         String op = ",|:";
         //새로 등록할 구분자 있나 확인
         if (input.length() >= 5) {
@@ -21,7 +18,6 @@ public class Application {
             String back = input.substring(3, 5);
             //제대로된 형식 사이에 구분자가 끼어있는지 verify
             if (front.equals("//") && back.equals("\\n")) {
-                seperatorList.add(Character.toString(input.charAt(2)));
                 op += "|";
                 op += Character.toString(input.charAt(2));
                 input = input.substring(5);

@@ -6,4 +6,4 @@
 * [X]  입력 문자에서 구분자 제외하고 남은 것 배열에 담기
 * [X]  배열에 담겨있는 숫자 더하는 기능
   * 문자열 계산기 구현하기
-* [ ]  예외 처리(`IllegalArgumentException`) 처리하기
+* [X]  예외 처리(`IllegalArgumentException`) 처리하기
