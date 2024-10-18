@@ -9,6 +9,12 @@ public class Application {
         System.out.println("결과 : " + add(input));
     }
 
+    /**
+     *
+     * @param input 구분자와 양수로 구성된 문자열
+     * @return 문자열에 포함된 숫자의 합
+     * @throws IllegalArgumentException 사용자가 잘못된 값을 입력할 경우 예외를 발생시킴
+     */
     public static int add(String input) {
         if (input == null || input.isEmpty()) {
             return 0;
