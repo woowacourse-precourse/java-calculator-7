@@ -38,8 +38,14 @@ public class Application {
             }
         }
 
-        //출력 로직
+        // 배열에 담겨있는 숫자 더하는 기능
+        stringCal cal = new stringCal();
         String sum = "0";
+        for (String i : numbers) {
+            sum = cal.numCal(sum, i);
+        }
+
+        //출력 로직
         System.out.println("결과 : " + sum);
     }
 }
