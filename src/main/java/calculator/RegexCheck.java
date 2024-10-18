@@ -1,10 +1,13 @@
 package calculator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public abstract class RegexCheck {
-  private static final String SORT = "^//[^0-9\\\\n]\\\\n([^\\\\n]+)$";
+  private static final String SORT = "^//([^0-9\\\\n])\\\\n([^\\\\n]+)$";
   protected String input;
   private String strNumber;
-  private String sort = ",:";
+  private String delimiter = ",:";
   protected int[] numbers;
 
   RegexCheck(String input) {
@@ -12,17 +15,16 @@ public abstract class RegexCheck {
   }
 
 
-
-  public void setSort(String sort) {
-    this.sort = sort;
+  public void setDelimiter(String delimiter) {
+    this.delimiter = delimiter;
   }
 
-  public String getStrNumber(){
+  public String getStrNumber() {
     return strNumber;
   }
 
-  private String getRegex(){
-    return "^[" + sort + "]?[1-9][0-9]*([" + sort + "][1-9][0-9]*)*$";
+  private String getRegex() {
+    return "^[" + delimiter + "]?[1-9][0-9]*([" + delimiter + "][1-9][0-9]*)*$";
   }
 
   public Boolean isSort() {
@@ -33,26 +35,27 @@ public abstract class RegexCheck {
     return input.matches(getRegex());
   }
 
-  public void sortCheck(String input) {
-    String[] split = input.split("\\\\n");
-    String strSort = split[0];
-    strNumber = split[1];
-    setSort(String.valueOf(strSort.charAt(2)));
-    String regex = getRegex();
-    if(strNumber.matches(regex)){
-      intChange(strNumber.split(sort));
-    }else{
-      throw new IllegalArgumentException("지정 구분자로 숫자를 구분해주세요");
-    };
+  public void division(String input) {
+    Pattern pattern = Pattern.compile(SORT);
+    Matcher matcher = pattern.matcher(input);
+    if(matcher.matches()) {
+      delimiter = matcher.group(1);
+      strNumber = matcher.group(2);
+    }
+    System.out.println(Pattern.quote(delimiter));
+    System.out.println(delimiter);
+    System.out.println(strNumber);
   }
 
-  public void intChange(String[] args){
+  public void check(){
+
+  }
+
+  public void intChange(String[] args) {
     numbers = new int[args.length];
-    for(int i=0;i<args.length;i++){
+    for (int i = 0; i < args.length; i++) {
       numbers[i] = Integer.parseInt(args[i]);
     }
   }
-
-
 
 }
