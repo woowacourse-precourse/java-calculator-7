@@ -5,6 +5,8 @@ import calculator.domain.Separator;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
+import java.util.List;
+
 public class PlayerController {
     private Separator separator;
     private final InputView inputView;
@@ -23,7 +25,8 @@ public class PlayerController {
         separator = new Separator(numbers);
     }
     private void calculate() {
-        Numbers numbers = new Numbers(separator);
+        List<String> extractedNumbers = separator.getExtractedNumbers();
+        Numbers numbers = new Numbers(extractedNumbers);
         outputView.printResult(numbers.toString());
     }
 }

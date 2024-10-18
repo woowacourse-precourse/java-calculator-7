@@ -4,9 +4,8 @@ import java.util.List;
 
 public class Numbers {
     private final long sum;
-    public Numbers(Separator separator) {
-        List<String> numbers = separator.getExtractedNumbers();
-        numbers = handleEmptyNumbers(numbers);
+    public Numbers(List<String> extractedNumbers) {
+        List<String> numbers = handleEmptyNumbers(extractedNumbers);
         this.sum = sum(numbers);
     }
     private List<String> handleEmptyNumbers(List<String> numbers) {
