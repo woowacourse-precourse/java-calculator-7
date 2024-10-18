@@ -12,8 +12,17 @@ public class Application {
 
         int length = str.length();
         List<Integer> arr = new ArrayList<>();
+        char std;
         StringBuilder temp = new StringBuilder();
         int sum = 0;
+
+        if(str.startsWith("//")) {
+            if(str.charAt(3) == '\\' && str.charAt(4) == 'n') {
+                std = str.charAt(2);
+                str = str.substring(5);
+            }
+        }
+
 
         for (int i = 0; i < length; i++) {
             if (str.charAt(i) >= '0' && str.charAt(i) <= '9') {
