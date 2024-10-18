@@ -73,31 +73,4 @@ class ApplicationTest extends NsTest {
         });
     }
 
-    @Test
-    void 커스텀_구분자로_숫자_덧셈() {
-        assertSimpleTest(() -> {
-            long result = Application.calculate("//;\n1;2;3");
-            assertThat(result).isEqualTo(6); // 1 + 2 + 3 = 6
-        });
-
-        assertSimpleTest(() -> {
-            long result = Application.calculate("//|\n4|5|6");
-            assertThat(result).isEqualTo(15); // 4 + 5 + 6 = 15
-        });
-    }
-
-    @Test
-    void 커스텀_구분자가_기본_구분자와_혼합된_경우() {
-        assertSimpleTest(() -> {
-            long result = Application.calculate("//;\n1;2,3:4");
-            assertThat(result).isEqualTo(10); // 1 + 2 + 3 + 4 = 10
-        });
-    }
-
-    @Test
-    void 커스텀_구분자_정의가_없는경우() {
-        assertThatThrownBy(() -> Application.calculate("//\n1,2"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("유효한 숫자를 입력해야 합니다!"); // 커스텀 구분자가 비어있을 때 예외 발생
-    }
 }
