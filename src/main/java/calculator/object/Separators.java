@@ -2,6 +2,7 @@ package calculator.object;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 public class Separators {
 
@@ -41,8 +42,9 @@ public class Separators {
 
     private static String getCustomSeparatorFrom(String inputFormula) {
         int startIndexOfCustomSeparator = SEPARATOR_HEADER.length();
-        int nextIndexOfCustomSeparator = inputFormula.indexOf(SEPARATOR_FOOTER);
-        String nowSeparator = inputFormula.substring(startIndexOfCustomSeparator, nextIndexOfCustomSeparator);
+        String nowSeparator = new StringTokenizer(inputFormula, SEPARATOR_FOOTER)
+                .nextToken()
+                .substring(startIndexOfCustomSeparator);
         if (nowSeparator.length() != 1) {
             throw new IllegalArgumentException("잘못된 커스텀 구분자가 입력되었습니다.");
         }
