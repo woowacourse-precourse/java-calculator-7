@@ -2,7 +2,6 @@ package calculator.Constants;
 
 public enum ErrorMessages {
     ERROR_PREFIX("[ERROR] "),
-    INVALID_STRING_MESSAGE("문자열만 입력할 수 있습니다."),
     INVALID_NUMBER_RANGE_MESSAGE("양수만 입력할 수 있습니다."),
     INVALID_NUMBER_MESSAGE("숫자가 아닙니다."),
     INVALID_NUMBERS_EMPTY_MESSAGE("숫자들은 비어있을 수 없습니다."),
