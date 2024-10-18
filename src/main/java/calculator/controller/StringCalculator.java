@@ -38,6 +38,8 @@ public class StringCalculator {
         // 구분자로 문자열 토큰 단위 후 Integer 리스트로 추출
         List<Integer> numbers = delimiterTokenizer.getNumbers(delimiterResult);
 
+        // Integer 리스트에서 전체 합을 계산
+        long result = resultCalculator.getSum(numbers);
 
 
     }

@@ -14,7 +14,7 @@ class DelimiterExtractorTest {
 
         // t, n 두 가지 커스텀 구분자가 있는 경우
         String test1 = "//t\\n3//n\\n1:3:2,4";
-        ExtractResult result1 = delimiterExtractor.getDelimiters(test1);
+        DelimiterResult result1 = delimiterExtractor.getDelimiters(test1);
         Set<Character> delimiters1 = result1.getDelimiters();
         List<Character> expectList1 = new ArrayList<>(Arrays.asList('t', ':', ','));
         Set<Character> expect1 = new HashSet<>(expectList1);
@@ -26,7 +26,7 @@ class DelimiterExtractorTest {
         // '\\'은 '\'로 인식
         String test2 = "//t\\n//\\\\n1:33,3";
 
-        ExtractResult result2 = delimiterExtractor.getDelimiters(test2);
+        DelimiterResult result2 = delimiterExtractor.getDelimiters(test2);
         Set<Character> delimiters2 = result2.getDelimiters();
         String numberString2 = result2.getNumberString();
         List<Character> expectList2 = new ArrayList<>(Arrays.asList('t', '\\', ':', ','));
