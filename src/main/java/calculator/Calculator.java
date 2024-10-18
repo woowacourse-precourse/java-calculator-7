@@ -20,7 +20,7 @@ public class Calculator {
                 .mapToInt(str -> {
                     if(str.isEmpty()) return 0;
 
-                    if(isContainedLetter(str)) throw new IllegalArgumentException("[ERROR] 지정되지 않은 구분자입니다.");
+                    if(isNotDigit(str)) throw new IllegalArgumentException("[ERROR] 지정되지 않은 구분자입니다.");
 
                     int num = Integer.parseInt(str);
                     if(isNegative(num)) throw new IllegalArgumentException("[ERROR] 음수는 입력할 수 없습니다.");
@@ -69,9 +69,9 @@ public class Calculator {
         return CUSTOM_DELIMITER.length() == 1;
     }
 
-    private static boolean isContainedLetter(final String str) {
+    private static boolean isNotDigit(final String str) {
         for(char c : str.toCharArray()) {
-            if (Character.isLetter(c)) return true;
+            if (!Character.isDigit(c)) return true;
         }
         return false;
     }
