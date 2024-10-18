@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// //;\\n1//]\\n;1-
+// //;\\n1//]\\n;1-  //;]\\n1;2]3
 public class Application {
     static String sepeartor = ",|:";
 
@@ -21,14 +21,17 @@ public class Application {
         //System.out.println("커스텀 구분자 제거: " + str);
         //System.out.println("추출된 구분자: " + sepeartor);
 
+        //구분자를 기준으로 문자열을 분리
+        String[] numbers = str.split(sepeartor);
+
         // 유효성 검사 & 숫자 반환
-        String[] numbers = parseAndValidateNumbers(str);
+        parseAndValidateNumbers(numbers);
 
         // 제대로 된 입력시 분리된 숫자를 더한 결과 반환
         int result = addNumbers(numbers);
 
         // 결과 출력
-        System.out.println("결과 : " + str);
+        System.out.println("결과 : " + result);
     }
 
     /**
@@ -61,23 +64,17 @@ public class Application {
     }
 
     /**
-     * 입력한 문자열의 유효성을 검사하고 유효하다면 숫자로된 문자열 배열 반환
+     * 입력한 문자열의 유효성을 검사하고 유효한지 확인
      *
-     * @param str 커스텀 구분자를 나타내는 문자를 제거한 문자열
-     * @return 숫자 문자열 배열
+     * @param numbers 커스텀 구분자를 나타내는 문자를 제거한 문자열
      */
-    private static String[] parseAndValidateNumbers(String str) {
-        //구분자를 기준으로 문자열을 분리
-        String[] numbers = str.split(sepeartor);
-        //System.out.println("분리된 숫자 배열: " + Arrays.toString(numbers));
-
+    private static void parseAndValidateNumbers(String[] numbers) {
         for (String number : numbers) {
             //각 부분이 숫자로만 이루어져 있는지 확인 (빈 문자열 무시)
             if (!number.trim().isEmpty() && !number.matches("\\d+")) {
                 throw new IllegalArgumentException("잘못된 입력입니다. ");
             }
         }
-        return numbers;
     }
 
     private static int addNumbers(String[] numbers) {
