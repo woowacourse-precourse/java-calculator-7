@@ -39,6 +39,14 @@ class ApplicationTest extends NsTest {
         @Test
         void 성공_커스텀구분자_여러글자로이루어진구분자() {
             assertSimpleTest(() -> {
+                run("//!!\\n1!!2");
+                assertThat(output()).contains("결과 : 3");
+            });
+        }
+
+        @Test
+        void 성공_커스텀구분자_숫자와글자가혼합된구분자() {
+            assertSimpleTest(() -> {
                 run("//!5!\\n1!5!2");
                 assertThat(output()).contains("결과 : 3");
             });
@@ -49,6 +57,7 @@ class ApplicationTest extends NsTest {
             assertSimpleTest(() ->
                     assertThatThrownBy(() -> runException("//5\\n15253"))
                             .isExactlyInstanceOf(IllegalArgumentException.class)
+                            .hasMessage("구분자는 숫자로만 이루어질 수 없습니다. 문자를 포함하세요.")
             );
         }
 
@@ -57,6 +66,16 @@ class ApplicationTest extends NsTest {
             assertSimpleTest(() ->
                     assertThatThrownBy(() -> runException("//,!\\n1,!22,!23"))
                             .isExactlyInstanceOf(IllegalArgumentException.class)
+                            .hasMessage("구분자는 기본 구분자를 포함할 수 없습니다.")
+            );
+        }
+
+        @Test
+        void 실패_커스텀구분자_중복정의한구분자() {
+            assertSimpleTest(() ->
+                    assertThatThrownBy(() -> runException("//!\\n//!\\n1,22!23"))
+                            .isExactlyInstanceOf(IllegalArgumentException.class)
+                            .hasMessage("구분자는 다른 커스텀 구분자를 포함할 수 없습니다.")
             );
         }
     }
@@ -68,6 +87,7 @@ class ApplicationTest extends NsTest {
             assertSimpleTest(() ->
                     assertThatThrownBy(() -> runException("-1,2,3"))
                             .isExactlyInstanceOf(IllegalArgumentException.class)
+                            .hasMessage("양수가 아닙니다.")
             );
         }
 
@@ -76,6 +96,7 @@ class ApplicationTest extends NsTest {
             assertSimpleTest(() ->
                     assertThatThrownBy(() -> runException("//(\\n1(2.2,23"))
                             .isExactlyInstanceOf(IllegalArgumentException.class)
+                            .hasMessage("정수 범위를 벗어난 수 또는 구분자를 제외한 문자열을 입력할 수 없습니다.")
             );
         }
 
@@ -84,6 +105,7 @@ class ApplicationTest extends NsTest {
             assertSimpleTest(() ->
                     assertThatThrownBy(() -> runException((long) Math.pow(2, 32) + ",2,3"))
                             .isExactlyInstanceOf(IllegalArgumentException.class)
+                            .hasMessage("정수 범위를 벗어난 수 또는 구분자를 제외한 문자열을 입력할 수 없습니다.")
             );
         }
 
@@ -92,6 +114,7 @@ class ApplicationTest extends NsTest {
             assertSimpleTest(() ->
                     assertThatThrownBy(() -> runException("a,2,3"))
                             .isExactlyInstanceOf(IllegalArgumentException.class)
+                            .hasMessage("정수 범위를 벗어난 수 또는 구분자를 제외한 문자열을 입력할 수 없습니다.")
             );
         }
     }
@@ -103,6 +126,7 @@ class ApplicationTest extends NsTest {
             assertSimpleTest(() ->
                     assertThatThrownBy(() -> runException((int) (Math.pow(2, 31) - 1) + ",2,3"))
                             .isExactlyInstanceOf(IllegalStateException.class)
+                            .hasMessage("오버플로우가 발생했습니다.")
             );
         }
     }
