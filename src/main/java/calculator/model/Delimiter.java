@@ -3,13 +3,13 @@ package calculator.model;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import calculator.constant.CommonPattern;
 import calculator.constant.ErrorMessage;
 
 public class Delimiter {
 	private static final int STRICT_LENGTH = 1;
 	private static final String EMPTY = "";
-	private static final Pattern SINGLE_NUMERIC_PATTERN = Pattern.compile(CommonPattern.SINGLE_NUMBER);
+	private static final String SELECT_ONE_FORMAT = "[%s]";
+	private static final Pattern SINGLE_NUMERIC_PATTERN = Pattern.compile("^[0-9]$");
 
 	private final String delimiter;
 
@@ -38,7 +38,7 @@ public class Delimiter {
 
 	public static String toRegex(List<Delimiter> delimiters) {
 		return String.format(
-			CommonPattern.SELECT_ONE,
+			SELECT_ONE_FORMAT,
 			String.join(EMPTY, delimiters.stream().map(delimiter -> delimiter.delimiter).toList())
 		);
 	}

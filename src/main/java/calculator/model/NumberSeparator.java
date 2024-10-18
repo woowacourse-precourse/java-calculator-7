@@ -6,23 +6,15 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import calculator.constant.CommonPattern;
 import calculator.constant.DefaultDelimiter;
+import calculator.constant.ErrorMessage;
 
 public class NumberSeparator {
 	private static final int CUSTOM_DELIMITER_POSITION = 1;
 	private static final int EQUATION_POSITION = 2;
-	private static final String CUSTOM_DELIMITER_PREFIX = "//";
-	private static final String CUSTOM_DELIMITER_POSTFIX = "\\\\n";
 
-	private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile(
-		CommonPattern.START_WITH +
-		CUSTOM_DELIMITER_PREFIX +
-		CommonPattern.GROUP +
-		CUSTOM_DELIMITER_POSTFIX +
-		CommonPattern.GROUP +
-		CommonPattern.END_WITH
-	);
+	private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("^//(.*?)\\\\n(.*?)$");
+	private static final Pattern EQUATION_PATTERN = Pattern.compile("^$|^[0-9]+([^0-9][0-9]+)*$");
 
 	private final String equation;
 	private final List<Delimiter> delimiters = new ArrayList<>();
@@ -34,14 +26,23 @@ public class NumberSeparator {
 		if (hasCustomDelimiter(matcher)) {
 			delimiters.add(extractCustomDelimiter(matcher));
 			equation = extractEquation(matcher);
+			validateEquation(equation);
+
 			return;
 		}
 
 		equation = input;
+		validateEquation(equation);
 	}
 
 	public static NumberSeparator from(String input) {
 		return new NumberSeparator(input);
+	}
+
+	private void validateEquation(String equation) {
+		if (!EQUATION_PATTERN.matcher(equation).matches()) {
+			throw new IllegalArgumentException(ErrorMessage.NUMBER_SEPARATOR_EQUATION.getMessage());
+		}
 	}
 
 	private Matcher getMatcher(String input) {
@@ -59,14 +60,20 @@ public class NumberSeparator {
 	}
 
 	private String extractEquation(Matcher matcher) {
-		return matcher.group(EQUATION_POSITION);
+		return matcher.group(EQUATION_POSITION).trim();
 	}
 
 	public Numbers separate() {
+		if (equation.isEmpty()) {
+			return Numbers.parseNumbers(
+				new ArrayList<>()
+			);
+		}
+
 		return Numbers.parseNumbers(
 			Arrays.stream(
 				equation.split(Delimiter.toRegex(delimiters))
-			).toList()
+			).map(String::trim).toList()
 		);
 	}
 }

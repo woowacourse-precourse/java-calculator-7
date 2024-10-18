@@ -3,12 +3,11 @@ package calculator.model;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import calculator.constant.CommonPattern;
 import calculator.constant.ErrorMessage;
 
 public class Numbers {
 	private final static long MIN = 1;
-	private static final Pattern NUMBER_PATTERN = Pattern.compile(CommonPattern.NUMBER);
+	private static final Pattern NUMBER_PATTERN = Pattern.compile("^0|[1-9]+[0-9]*$");
 
 	private final List<Long> numbers;
 
@@ -26,8 +25,6 @@ public class Numbers {
 
 		try {
 			List<Long> numbers = stringNumbers.stream()
-				.map(String::trim)
-				.filter(stringNumber -> !stringNumber.isEmpty())
 				.map(Long::parseLong)
 				.toList();
 
@@ -47,7 +44,7 @@ public class Numbers {
 	}
 
 	private static void validateNumber(List<String> stringNumbers) {
-		if (!stringNumbers.stream().map(String::trim).allMatch(
+		if (!stringNumbers.stream().allMatch(
 			stringNumber -> NUMBER_PATTERN.matcher(stringNumber).matches()
 		)) {
 			throw new IllegalArgumentException(ErrorMessage.NUMBERS_NUMBER_FORMAT.getMessage());
