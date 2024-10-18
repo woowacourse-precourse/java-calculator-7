@@ -54,6 +54,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자를_정의하는_형식이_올바르지_않을_경우_예외가_발생한다() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("/%\\n1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
     void 커스텀_구분자가_2자리_이상일_경우_예외가_발생한다() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//%^\\n1"))
