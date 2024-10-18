@@ -21,6 +21,6 @@ public class NumUtil {
         if (isPositiveNum(num)) {
             return Long.parseLong(num);
         }
-        throw new IllegalArgumentException("음수 혹은 문자가 포함되어 있습니다.");
+        throw new IllegalArgumentException("올바르지 않은 형식의 문자열입니다.");
     }
 }

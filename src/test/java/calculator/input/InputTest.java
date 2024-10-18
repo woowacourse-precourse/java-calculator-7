@@ -55,4 +55,12 @@ class InputTest {
         // when & then
         assertThrows(IllegalArgumentException.class, input::toLongList);
     }
+
+    @Test
+    void 기본_객체_변환_예외_숫자로_시작_안_함() {
+        // given
+        String defaultInput = ";2;3";
+        // when & then
+        assertThrows(IllegalArgumentException.class, () -> InputFilter.parseInput(defaultInput));
+    }
 }

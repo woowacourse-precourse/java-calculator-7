@@ -13,7 +13,7 @@ public class CustomInput extends Input {
     }
 
     protected static CustomInput from(String numStr, String separator) {
-        return new CustomInput(numStr, getCleanedSeparator(separator));
+        return new CustomInput(numStr, getEscapeSafeSeparator(separator));
     }
 
     @Override
@@ -21,7 +21,7 @@ public class CustomInput extends Input {
         return this.separator.equals(separator);
     }
 
-    private static String getCleanedSeparator(String separator) {
+    private static String getEscapeSafeSeparator(String separator) {
         if (isEscape(separator)) {
             return createEscapeSeparator(separator);
         }

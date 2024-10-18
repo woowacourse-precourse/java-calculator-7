@@ -24,44 +24,4 @@ class InputFilterTest {
         assertInstanceOf(Input.class, defaultInputInstance);
         assertFalse(defaultInputInstance instanceof CustomInput);
     }
-
-    @Test
-    void 커스텀_객체_변환_예외_숫자로_시작_안_함() {
-        // given
-        String customInput = "//;\\n" + ";2;3";
-        // when & then
-        assertThrows(IllegalArgumentException.class, () -> InputFilter.parseInput(customInput));
-    }
-
-    @Test
-    void 커스텀_객체_변환_예외_구분자_없음() {
-        // given
-        String customInput = "//\\n" + "1;2;3";
-        // when & then
-        assertThrows(IllegalArgumentException.class, () -> InputFilter.parseInput(customInput));
-    }
-
-    @Test
-    void 커스텀_객체_변환_예외_prefix_없음() {
-        // given
-        String customInput = ";\\" + "n1;2;3";
-        // when & then
-        assertThrows(IllegalArgumentException.class, () -> InputFilter.parseInput(customInput));
-    }
-
-    @Test
-    void 커스텀_객체_변환_예외_suffix_없음() {
-        // given
-        String customInput = "//;" + "1;2;3";
-        // when & then
-        assertThrows(IllegalArgumentException.class, () -> InputFilter.parseInput(customInput));
-    }
-
-    @Test
-    void 기본_객체_변환_예외_숫자로_시작_안_함() {
-        // given
-        String defaultInput = ";2;3";
-        // when & then
-        assertThrows(IllegalArgumentException.class, () -> InputFilter.parseInput(defaultInput));
-    }
 }

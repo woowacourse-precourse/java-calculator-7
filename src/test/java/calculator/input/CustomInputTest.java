@@ -61,4 +61,39 @@ class CustomInputTest {
             assertTrue(customInput.matchesSeparator("\\" + separator));
         }
     }
+
+    @Test
+    void 커스텀_숫자_변환_예외_숫자로_시작_안_함() {
+        // given
+        Input input = Input.from("//;\\n;2;3");
+        // when & then
+        assertThrows(IllegalArgumentException.class, input::toLongList);
+    }
+
+    @Test
+    void 커스텀_숫자_변환_예외_구분자_없음() {
+        // given
+        Input input = Input.from("//\\n1;2;3");
+        // when & then
+        assertFalse(input instanceof CustomInput);
+        assertThrows(IllegalArgumentException.class, input::toLongList);
+    }
+
+    @Test
+    void 커스텀_숫자_변환_예외_prefix_없음() {
+        // given
+        Input input = Input.from(";\\n1;2;3");
+        // when & then
+        assertFalse(input instanceof CustomInput);
+        assertThrows(IllegalArgumentException.class, input::toLongList);
+    }
+
+    @Test
+    void 커스텀_객체_변환_예외_suffix_없음() {
+        // given
+        Input input = Input.from("//;1;2;3");
+        // when & then
+        assertFalse(input instanceof CustomInput);
+        assertThrows(IllegalArgumentException.class, input::toLongList);
+    }
 }
