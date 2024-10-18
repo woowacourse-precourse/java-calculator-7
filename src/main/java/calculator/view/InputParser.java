@@ -11,12 +11,12 @@ public class InputParser {
     private static final String CUSTOM_START = "//";
     private static final String CUSTOM_END = "\\n";
 
-    public List<Integer> parseInput(Delimeters delimiters, String input) {
+    public List<String> parseInput(Delimeters delimiters, String input) {
         String delimiterRegex = String.join("|", delimiters.getElements());
         String[] tokens = input.split(delimiterRegex);
-        List<Integer> numbers = new ArrayList<>();
+        List<String> numbers = new ArrayList<>();
         for (String token : tokens) {
-            numbers.add(Integer.parseInt(token.trim()));
+            numbers.add(token.trim());
         }
         return numbers;
     }
