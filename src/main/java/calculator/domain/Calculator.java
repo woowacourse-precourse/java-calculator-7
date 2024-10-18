@@ -13,7 +13,7 @@ public class Calculator {
     }
 
     public int getSum(String stringToAdd) {
-        if (stringToAdd.isEmpty()) {
+        if (stringToAdd.isBlank()) {
             return 0;
         }
         String[] stringsToNumber = numberStringExtractor.getStrings(stringToAdd);
