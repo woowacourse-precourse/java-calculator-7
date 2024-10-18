@@ -51,11 +51,5 @@ public class UserInput {
     public boolean isCustom() {
         return userInput.startsWith("//");
     }
-
-
-    public String getUserInput() {
-        return userInput;
-    }
-
-
+    
 }
