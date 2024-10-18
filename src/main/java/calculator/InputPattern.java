@@ -40,11 +40,11 @@ public enum InputPattern {
 
     public String extractNumbers(String input) {
         if (this.equals(TYPE_A)) {
-            validate(input);
+            validateNumbers(input);
             return input;
         } else if (this.equals(TYPE_B)) {
             String numbers = input.substring(getNumberIndex());
-            validate(numbers);
+            validateNumbers(numbers);
             return numbers;
         }
         throw new IllegalArgumentException("Unknown input pattern: Value does not belong to any type.");
@@ -53,16 +53,24 @@ public enum InputPattern {
     public List<String> getSeparators(String input) {
         List<String> separators = new ArrayList<>(Arrays.asList(",", ":"));
         if (this == TYPE_B) {
-            separators.add(String.valueOf(input.charAt(getSeparatorIndex())));
+            String custom = String.valueOf(input.charAt(getSeparatorIndex()));
+            validateSeparators(custom);
+            separators.add(custom);
         }
         return separators;
     }
 
-    private void validate(String numbers) { // 구분자가 연속으로 등장할 경우 exception
+    private void validateNumbers(String numbers) { // 구분자가 연속으로 등장할 경우 exception
         for (int i = 0; i < numbers.length() - 1; i++) {
             if (!Character.isDigit(numbers.charAt(i)) && !Character.isDigit(numbers.charAt(i + 1))) {
                 throw new IllegalArgumentException("Unknown input pattern: Separators appear consecutively.");
             }
+        }
+    }
+
+    private void validateSeparators(String custom) { // 구분자로 숫자 입력시 exception
+        if (Character.isDigit(custom.charAt(0))) {
+            throw new IllegalArgumentException("Unknown input pattern: Numbers are not allowed as separators.");
         }
     }
 }
