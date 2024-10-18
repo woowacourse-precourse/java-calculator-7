@@ -26,5 +26,11 @@ public class Application {
             }
         }
         arr.add(Integer.parseInt(temp.toString()));
+
+        for (int a : arr) {
+            sum += a;
+        }
+        System.out.println("결과 : " + sum);
+
     }
 }
