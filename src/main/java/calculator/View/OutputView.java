@@ -4,6 +4,9 @@ import calculator.Constants.OutputMessages;
 import calculator.Utils.NumberUtils;
 
 public class OutputView {
+    OutputView() {
+    }
+
     public static void printResultMessage() {
         System.out.print(OutputMessages.RESULT);
     }
