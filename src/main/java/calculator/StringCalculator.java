@@ -7,7 +7,7 @@ public class StringCalculator {
 
     public int add(String input) {
         // 빈 입력 처리
-        if (input == null || input.isEmpty()) {
+        if (input == null || input.trim().isEmpty()) {
             return 0;
         }
 
