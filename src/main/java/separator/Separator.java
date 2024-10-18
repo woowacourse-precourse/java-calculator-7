@@ -42,7 +42,6 @@ public class Separator {
         }
 
         separatorWithPadding = string.substring(0, 5);
-        System.out.println("separatorWithPadding = " + separatorWithPadding);
         boolean hasStartPadding = separatorWithPadding.substring(0, 2).equals("//");
         boolean hasEndPadding = separatorWithPadding.substring(3, 5).equals("\\n");
         if(hasStartPadding && hasEndPadding){
