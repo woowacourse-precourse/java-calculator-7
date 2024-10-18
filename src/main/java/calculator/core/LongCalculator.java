@@ -12,13 +12,14 @@ import calculator.parser.BasicSeparatorParser;
 import calculator.parser.MathematicalExpressionParser;
 import calculator.parser.SeparatorParser;
 import calculator.view.AdditionCalculatorView;
+import calculator.view.CalculatorView;
 
 public class LongCalculator implements Calculator {
 	private static final String VALID_CALCULATOR_EXPRESSION_PATTERN = "(^(/{2}\\D\\\\n)*)((\\d+\\D)*\\d+$)";
 	private static final Pattern VALID_PATTERN = Pattern.compile(VALID_CALCULATOR_EXPRESSION_PATTERN);
 	private final SeparatorParser separatorParser;
 	private final MathematicalExpressionParser mathematicalExpressionParser;
-	private final AdditionCalculatorView additionCalculatorView;
+	private final CalculatorView calculatorView;
 	private final LongCalculatorOperation longCalculatorOperation;
 
 	public LongCalculator() {
@@ -29,12 +30,12 @@ public class LongCalculator implements Calculator {
 	public LongCalculator(
 		SeparatorParser separatorParser,
 		MathematicalExpressionParser mathematicalExpressionParser,
-		AdditionCalculatorView additionCalculatorView,
+		CalculatorView calculatorView,
 		LongCalculatorOperation longCalculatorOperation
 	) {
 		this.separatorParser = separatorParser;
 		this.mathematicalExpressionParser = mathematicalExpressionParser;
-		this.additionCalculatorView = additionCalculatorView;
+		this.calculatorView = calculatorView;
 		this.longCalculatorOperation = longCalculatorOperation;
 	}
 
@@ -69,7 +70,7 @@ public class LongCalculator implements Calculator {
 
 	@Override
 	public void startCalculation() {
-		String input = additionCalculatorView.input();
+		String input = calculatorView.input();
 
 		long result = 0;
 		if (!input.equals("")) {
@@ -77,7 +78,7 @@ public class LongCalculator implements Calculator {
 			result = calculate(input, new HashSet<>());
 		}
 
-		additionCalculatorView.output(result);
+		calculatorView.output(Long.toString(result));
 	}
 
 }

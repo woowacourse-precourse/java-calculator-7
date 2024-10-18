@@ -2,11 +2,12 @@ package calculator.view;
 
 import camp.nextstep.edu.missionutils.Console;
 
-public class AdditionCalculatorView {
+public class AdditionCalculatorView implements CalculatorView{
 
 	private static final String INPUT_STRING = "덧셈할 문자열을 입력해 주세요.";
-	private static final String OUTPUT_STRING = "결과 : %d";
+	private static final String OUTPUT_STRING = "결과 : ";
 
+	@Override
 	public String input() {
 		System.out.println(INPUT_STRING);
 		try {
@@ -17,7 +18,8 @@ public class AdditionCalculatorView {
 		}
 	}
 
-	public void output(long result) {
-		System.out.printf(OUTPUT_STRING, result);
+	@Override
+	public void output(String result) {
+		System.out.println(OUTPUT_STRING + result);
 	}
 }
