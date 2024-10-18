@@ -4,7 +4,7 @@ public class StringCalculator {
 	private static final String ORIGINAL_SPLITTER_REGEX = ",|:";
 	public static int splitAndSum(String input){
 		String[] splitString = input.split(ORIGINAL_SPLITTER_REGEX);
-		if (splitString.length >= 1) {
+		if (splitString.length > 1) {
 			return calculateSum(splitString);
 		}
 		return 0;
