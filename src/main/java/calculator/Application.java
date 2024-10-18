@@ -12,9 +12,7 @@ public class Application {
 
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        String input = inputString();
-
-        String[] stringArray = splitDelimiter(input);
+        String[] stringArray = inputString();
 
         int sum = calculateNumber(isNumeric(stringArray));
 
@@ -69,9 +67,9 @@ public class Application {
         }
     }
 
-    private static String inputString() {
+    private static String[] inputString() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
 
-        return Console.readLine();
+        return splitDelimiter(Console.readLine());
     }
 }
