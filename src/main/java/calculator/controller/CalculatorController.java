@@ -15,7 +15,7 @@ public class CalculatorController {
 
         UserInputString userInput = new UserInputString(inputStringForAddition);
         if (userInput.isInputEmpty()) {
-            OutputView.printResult("0");
+            OutputView.printResult("결과 : " + 0);
             return;
         }
 
