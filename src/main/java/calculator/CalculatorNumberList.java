@@ -3,9 +3,13 @@ package calculator;
 import java.util.List;
 
 public class CalculatorNumberList {
-    private List<Integer> numbers;
+    private final List<Integer> numbers;
 
-    public int sum(String input) {
+    public CalculatorNumberList(List<Integer> input) {
+        numbers = input;
+    }
+
+    public int sum() {
         return 0;
     }
 }
