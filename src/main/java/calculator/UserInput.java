@@ -13,11 +13,11 @@ public class UserInput {
         if (customSettingIndex != -1) {
             String prefix = input.substring(0, customSettingIndex);
             if (!prefix.startsWith("//")) {
-                throw new IllegalArgumentException("잘못된 커스텀 구분자 형식입니다 올바른 형식은 '//'로 시작해야 합니다.");
+                throw new IllegalArgumentException("잘못된 커스텀 구분자 형식입니다 커스텀 구분자는 '//'로 시작해야 합니다.");
             }
         }
         if (input.startsWith("/") && !input.startsWith("//")) {
-            throw new IllegalArgumentException("잘못된 커스텀 구분자 형식입니다 올바른 형식은 '//'로 시작해야 합니다.");
+            throw new IllegalArgumentException("잘못된 커스텀 구분자 형식입니다 커스텀 구분자는 '//'로 시작해야 합니다.");
         }
 
         if (input.startsWith("//") && customSettingIndex == -1) {
@@ -51,5 +51,5 @@ public class UserInput {
     public boolean isCustom() {
         return userInput.startsWith("//");
     }
-    
+
 }
