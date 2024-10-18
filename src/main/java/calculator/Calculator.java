@@ -8,6 +8,12 @@ public class Calculator {
 
     public static void sumNumbersFromLetters(String input){
 
+        if (input == null || input.isEmpty() || input.isBlank()) {
+            System.out.println("결과 : 0");
+            return;
+        }
+
+
         String[] tmp;
 
         if(input.startsWith("//")){
@@ -50,7 +56,13 @@ public class Calculator {
         Pattern pattern = Pattern.compile("//(.)\n(.*)");
         Matcher matcher = pattern.matcher(input);
         if(matcher.find()){
-            return matcher.group(1);
+            String separator = matcher.group(1);
+            // 정규 표현식 메타문자를 이스케이프 처리
+            if ("?*+[](){}^$|.".contains(separator)) {
+                // 두 번의 백슬래시 사용, split을 위해선 메타문자 앞에 역슬래쉬 2개 \\ 를 붙이는 이스케이프처리가 필요.
+                separator = "\\" + separator;
+            }
+            return separator;
         }
         return null;
     }
