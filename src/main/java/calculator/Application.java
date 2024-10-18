@@ -1,8 +1,5 @@
 package calculator;
 
-import calculator.domain.Calculator;
-import calculator.service.CalculatorService;
-
 public class Application {
 
 

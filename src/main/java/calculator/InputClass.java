@@ -1,7 +1,5 @@
 package calculator;
 
-import calculator.service.CalculatorService;
-
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
