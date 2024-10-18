@@ -15,7 +15,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class NumbersTest {
 
-	@DisplayName("숫자는 양수이어야 한다.")
+	@DisplayName("숫자는 양수이어야 한다")
 	@ParameterizedTest
 	@MethodSource("negativeOrZeroNumbers")
 	void validatePositive(List<Long> invalidData) {
@@ -30,6 +30,13 @@ public class NumbersTest {
 		assertThat(numbers.sum()).isEqualTo(correctResult);
 	}
 
+	@DisplayName("숫자는 문자열 배열을 변환할 때 문자열에 문자가 포함되어 있으면 예외를 반환한다")
+	@ParameterizedTest
+	@MethodSource("stringIncludeCharacter")
+	void validateParseNumbersCharacter(List<String> invalidData) {
+		assertThrows(IllegalArgumentException.class, () -> Numbers.parseNumbers(invalidData));
+	}
+
 	static Stream<Arguments> numbersAndCorrectResult() {
 		return Stream.of(
 			Arguments.of(Arrays.asList(1L, 2L, 3L), 6L),
@@ -41,6 +48,15 @@ public class NumbersTest {
 		return Stream.of(
 			Arguments.of(Arrays.asList(1L, 2L, -3L)),
 			Arguments.of(Arrays.asList(1L, 0L))
+		);
+	}
+
+	static Stream<Arguments> stringIncludeCharacter() {
+		return Stream.of(
+			Arguments.of(Arrays.asList("1", "2", "5f5")),
+			Arguments.of(Arrays.asList("1", "2", "55", "1!")),
+			Arguments.of(Arrays.asList("!", "2", "55", "1")),
+			Arguments.of(Arrays.asList("z", "55", "1"))
 		);
 	}
 }
