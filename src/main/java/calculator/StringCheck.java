@@ -8,6 +8,8 @@ public class StringCheck {
         int endIndex = str.indexOf("\\n");
         if (startIndex == 0 && endIndex == 3) {
             return separator + "|" + str.substring(startIndex + 2, endIndex);
+        } else if (startIndex >= 0 || endIndex >= 0) {
+            throw new IllegalArgumentException();
         }
         return separator;
     }
