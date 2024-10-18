@@ -10,4 +10,8 @@ public class OutPutView {
         System.out.println("결과 : " + ans);
     }
 
+    public void printCalculatorEndMessage() {
+        System.out.println("계산기가 종료되었습니다.");
+    }
+
 }
