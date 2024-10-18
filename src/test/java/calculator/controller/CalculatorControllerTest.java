@@ -47,7 +47,7 @@ public class CalculatorControllerTest  {
     @Test
     void 커스텀_구분자_테스트() {
         //given: "//;\n1;2;3"
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
         CalculatorController controller = new CalculatorController();
 
         //when: 입력 처리

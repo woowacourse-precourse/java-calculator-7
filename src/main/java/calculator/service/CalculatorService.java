@@ -4,6 +4,7 @@ import calculator.model.Calculator;
 
 public class CalculatorService {
     public int calculate(String input) {
+        input = input.replace("\\n", "\n");
         Calculator calculator = new Calculator();
 
         if (input.isEmpty()) {
@@ -11,7 +12,7 @@ public class CalculatorService {
         } else {
             String delimiters = "[,|:]";
             if (input.startsWith("//")) {
-                String[] split = input.split("\n");
+                String[] split = input.split("\n", 2);
                 String customDelimiter = split[0].substring(2);
                 delimiters = "[" + delimiters.substring(1, 4) + "|" + customDelimiter + "]";
                 input = split[1];
