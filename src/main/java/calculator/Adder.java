@@ -3,7 +3,7 @@ package calculator;
 import java.util.List;
 
 public class Adder {
-    int answer;
+    long answer;
 
     public void add(List<String> numbers) {
         answer = 0;
@@ -11,11 +11,20 @@ public class Adder {
             if (number.isBlank()) {
                 continue;
             }
-            answer += Integer.parseInt(number);
+            long element = Long.parseLong(number);
+            validateOverflow(element);
+            answer += element;
         }
+        validateOverflow(answer);
     }
 
-    public int getAnswer() {
+    public long getAnswer() {
         return answer;
+    }
+
+    private void validateOverflow(long number) {
+        if (number < 0) {
+            throw new IllegalArgumentException("허용 범위를 초과하였습니다.");
+        }
     }
 }
