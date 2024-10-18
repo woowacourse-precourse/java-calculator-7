@@ -17,7 +17,7 @@ class DelimeterSegmentProcessorTest {
     @DisplayName("커스텀 구분자 요구사항 인식")
     void custom_delimeter_o() {
         boolean result = delimeterSegmentProcessor.checkCustomDelimeterRequest("//;\n2,3,4");
-        assertEquals(result, true);
+        assertTrue(result);
     }
 
 
