@@ -16,13 +16,7 @@ public class Controller {
         printStartMessage();
         var text = View.read();
         var regex = extractRegex(text);
-        var nums = convertInt(splitNumbers(text, regex));
-
-        var total = 0;
-        for (int num : nums) {
-            total += num;
-        }
-        printResult(total);
+        printResult(sum(convertInt(splitNumbers(text, regex))));
     }
 
     private String extractRegex(String text) {
@@ -66,6 +60,11 @@ public class Controller {
         if (number < 0) {
             throw new IllegalArgumentException();
         }
+    }
+
+    public int sum(List<Integer> numbers) {
+        return numbers.stream()
+                .reduce(0, Integer::sum);
     }
 
     private void printStartMessage() {
