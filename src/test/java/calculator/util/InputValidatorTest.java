@@ -77,4 +77,26 @@ class InputValidatorTest {
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> inputValidator.validateParsingStringToLong(input));
     }
+
+    @Test
+    @DisplayName("숫자 리스트가 양수로 이루어져 있는지 검증 - 모두 양수로 이루어져 있는 경우")
+    void validatePositiveNumberList() {
+        //given
+        List<Long> input = Arrays.asList(1L, 2L, 3L);
+
+        //when
+        //then
+        Assertions.assertDoesNotThrow(() -> inputValidator.validatePositiveNumberList(input));
+    }
+
+    @Test
+    @DisplayName("숫자 리스트가 양수로 이루어져 있는지 검증 - 음수가 포함되어 있는 경우")
+    void validatePositiveNumberListWithNegativeNumber() {
+        //given
+        List<Long> input = Arrays.asList(1L, -2L, 3L);
+
+        //when
+        //then
+        Assertions.assertThrows(IllegalArgumentException.class, () -> inputValidator.validatePositiveNumberList(input));
+    }
 }
