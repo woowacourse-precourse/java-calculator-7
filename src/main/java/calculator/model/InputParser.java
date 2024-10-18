@@ -19,7 +19,7 @@ public class InputParser {
         return input.matches(DEFAULT_DELIMITER_REGEX);
     }
 
-    public List<Integer> convertDefaultDelimiter(String input) throws IllegalArgumentException {
+    public List<Integer> convertDefaultDelimiter(String input) {
         input = input.replace(COMMA_DELIMITER, SPACE).replace(COLON_DELIMITER , SPACE);
         String[] inputs = input.split(SPACE);
         return convertToIntList(inputs);
