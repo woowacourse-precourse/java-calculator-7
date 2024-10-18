@@ -7,4 +7,8 @@ public class OutputHandler {
     public void showStartMessage() {
         System.out.println(START_MESSAGE);
     }
+
+    public void showResult(String result) {
+        System.out.println("결과 : " + result);
+    }
 }

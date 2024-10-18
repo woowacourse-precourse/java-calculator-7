@@ -16,8 +16,8 @@ public class PlusCalculator {
             String[] InputList = inputHandler.convertInputListBy(userInput);
 
             Integer result = addMachine(InputList);
-            System.out.println("result = " + result);
 
+            outputHandler.showResult(String.valueOf(result));
         }
         catch (IllegalArgumentException e){
             System.out.println("e.getMessage() = " + e.getMessage());
