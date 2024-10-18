@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Tokenization {
-    private static final String NUMBER_PATTERN = "^[0-9]*$";
+    private static final String NUMBER_PATTERN = "^-?[0-9]+$";
     private static final Pattern CUSTOM_OPERATION_PATTERN = Pattern.compile("^//(.*)\\\\n(.*)");
     private static final String DEFAULT_OPERATION = ",|:";
 
@@ -29,7 +29,7 @@ public class Tokenization {
         // 구분자에 따라 문자열 분리
         for(String i:str.split(operation)){
             if (!i.matches(NUMBER_PATTERN)) {
-                throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getErrorMessage());
+                throw new IllegalArgumentException(ErrorMessage.INVALID_TYPE.getErrorMessage());
             }
             try{
                 int num = Integer.parseInt(i);
