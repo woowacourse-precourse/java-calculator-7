@@ -40,7 +40,7 @@ public class Calculator {
     }
 
     //print(): 결과인 합을 계산
-    public int print() {
+    public int printResult() {
         int sum = 0;
 
         for (Integer integer : getIntegers()) {

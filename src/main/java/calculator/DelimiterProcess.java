@@ -2,7 +2,6 @@ package calculator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class DelimiterProcess {
     private List<String> delimitersInit = new ArrayList<>();

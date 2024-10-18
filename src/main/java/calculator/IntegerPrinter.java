@@ -8,7 +8,7 @@ public class IntegerPrinter {
         System.out.println("덧셈할 문자열을 입력해주세요.");
         String userInput = readLine();
         Calculator calculator = new Calculator(userInput);
-        System.out.println(calculator.print());
+        calculator.printResult();
     }
 
 }
