@@ -1,19 +1,28 @@
 package calculator.validator;
 
+import calculator.exception.ValidatorException;
+
+import static calculator.constant.ErrorMessage.PREFIX;
+import static calculator.constant.Limit.DEFAULT_VALUE;
+
 public class InputValidator {
+    public static final String ONLY_NUMBER_REGEX = "^[0-9]*$";
+    public static final String CHAR_ONLY_CAN_USE_AS_CUSTOM = "문자는 커스텀 구분자로 지정 후 사용할 수 있습니다.";
+    public static final String ONLY_POSITIVE = "양수만 계산 가능합니다.";
+
     public int validate(String input) {
-        int result = 0;
+        int result = DEFAULT_VALUE;
 
         if (input == null || input.isBlank()) {
             return result;
         }
 
-        if (!input.matches("^[0-9]*$")) {
-            throw new IllegalArgumentException("[ERROR] 커스텀 구분자를 지정하지 않고 사용할 수 없습니다.");
+        if (!input.matches(ONLY_NUMBER_REGEX)) {
+            throw new ValidatorException(PREFIX + CHAR_ONLY_CAN_USE_AS_CUSTOM);
         }
 
-        if (Integer.parseInt(input) < 0) {
-            throw new IllegalArgumentException("[ERROR] 음수는 계산할 수 없습니다.");
+        if (Integer.parseInt(input) < DEFAULT_VALUE) {
+            throw new ValidatorException(PREFIX + ONLY_POSITIVE);
         } // end if
 
         result = Integer.parseInt(input);
