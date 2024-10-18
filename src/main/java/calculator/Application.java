@@ -12,9 +12,8 @@ public class Application {
             String[] parts = splitInput(input); //입력된 숫자들의 배열값
             isNum(parts); //배열 내부가 전부 숫자인지 확인.. false시 에러
             int sum = sumNumbers(parts); //전체 배열 내 합 구하기
-            System.out.println("합계: " + sum); //결과
+            System.out.println("결과 : " + sum); //결과
         } catch (IllegalArgumentException e) {
-            System.out.println("error");
         }
 
     }
@@ -57,14 +56,15 @@ public class Application {
     //char 자료를 숫자인지 확인하고 아니면 에러내는 메서드
     public static void isDigit(char c) {
         if (!Character.isDigit(c)) {
+            System.out.println("error");
             throw new IllegalArgumentException(); //
         }
     }
 
-    //공백 또는 아무것도 입력 안했는지 확인하는 메서드
+    //아무것도 입력 안했는지 확인 후 즉시 출력하는 메서드
     public static void isSpace(String part) {
-        if (part.isBlank() || part.isEmpty()) {
-            throw new IllegalArgumentException();
+        if (part.isEmpty()) {
+            System.out.println("결과 : 0");
         }
     }
 
@@ -72,6 +72,7 @@ public class Application {
     public static void isMinus(String part) {
         int num = Integer.parseInt(part);
         if (num < 0) {
+            System.out.println("error");
             throw new IllegalArgumentException();
         }
     }
