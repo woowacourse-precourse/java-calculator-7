@@ -1,6 +1,5 @@
 package calculator.domain;
 
-import calculator.validator.CalculatorValidator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -69,8 +68,7 @@ class CalculatorTest {
     }
 
     private Calculator createCalculator() {
-        CalculatorValidator calculatorValidator = new CalculatorValidator();
         NumberStringExtractor numberStringExtractor = new NumberStringExtractor(new CustomDelimiterExtractor());
-        return new Calculator(calculatorValidator, numberStringExtractor);
+        return new Calculator(numberStringExtractor);
     }
 }
