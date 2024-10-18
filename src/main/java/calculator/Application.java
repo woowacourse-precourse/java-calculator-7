@@ -37,13 +37,12 @@ public class Application {
     }
 
     //나눠진 문자들이 합당한지 확인하는 메서드
-    public static boolean isNum(String[] parts) {
+    public static void isNum(String[] parts) {
         for (String part : parts) {
             stringToChar(part);
             isSpace(part);
             isMinus(part);
         }
-        return true;
     }
 
     //문자 배열을 char형태로 변경 후 검사하는 메서드
