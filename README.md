@@ -22,9 +22,9 @@
 
 ### 3. 커스텀 구분자 정하기 (split 패키지)
 
-- [ ] 구분자를 가진 문자열을 검증하는 기능 (validateFrontString)
+- [x] 구분자를 가진 문자열을 검증하는 기능 (validateFrontString)
   - 앞 문자열에 숫자가 있으면 IllegalArgumentException을 던진다.
-- [ ] 앞 문자열에 있는 문자들을 각각 커스텀 구분자로 등록하는 기능 (registerSeperator)
+- [x] 앞 문자열에 있는 문자들을 각각 추출하여 커스텀 구분자 배열로 반환하는 기능 (getSeperatorArray)
 
 ### 4. 숫자를 추출해야 하는 문자열을 검증한다. (validate 패키지)
 
