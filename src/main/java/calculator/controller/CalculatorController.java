@@ -4,6 +4,7 @@ import calculator.model.Delimiter;
 import calculator.model.UserInput;
 import calculator.service.CalculatorService;
 import calculator.view.InputView;
+import calculator.view.OutputView;
 
 public class CalculatorController {
     private final Delimiter delimiter;
@@ -27,5 +28,7 @@ public class CalculatorController {
 
         service.calculateSum(userInput.getUserInput(), delimiter.getDelimiter());
         int sum = service.getSum();
+
+        OutputView.printResult(sum);
     }
 }
