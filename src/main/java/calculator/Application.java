@@ -1,6 +1,5 @@
 package calculator;
 
-import calculator.common.exception.ExceptionFactory;
 import calculator.delimiter.factory.DefaultDelimiterFactory;
 import calculator.delimiter.factory.DelimiterFactory;
 import calculator.delimiter.pattern_matcher.CustomDelimiterPatternMatcher;
@@ -14,8 +13,6 @@ import calculator.util.integer.IntegerUtils;
 import calculator.util.io.IOConsole;
 
 import java.util.List;
-
-import static calculator.common.exception.ExceptionType.NOT_DELIMITER;
 
 public class Application {
 
@@ -34,12 +31,8 @@ public class Application {
 
         List<String> numberStrings = delimiterService.splitByDelimiters(input);
 
-        try {
-            List<Integer> numbers = IntegerUtils.parseIntegers(numberStrings);
-            int sum = IntegerUtils.sum(numbers);
-            IOConsole.print("결과 : " + sum);
-        } catch (NumberFormatException e) {
-            throw ExceptionFactory.createException(NOT_DELIMITER);
-        }
+        List<Integer> numbers = IntegerUtils.parseIntegers(numberStrings);
+        int sum = IntegerUtils.sum(numbers);
+        IOConsole.print("결과 : " + sum);
     }
 }
