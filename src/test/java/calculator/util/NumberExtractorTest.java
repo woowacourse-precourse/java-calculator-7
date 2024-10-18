@@ -1,5 +1,6 @@
-package calculator;
+package calculator.util;
 
+import calculator.util.NumberExtractor;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

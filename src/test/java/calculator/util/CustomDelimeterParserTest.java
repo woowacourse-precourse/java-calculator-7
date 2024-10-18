@@ -1,5 +1,6 @@
-package calculator;
+package calculator.util;
 
+import calculator.util.CustomDelimeterParser;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,4 +1,4 @@
-package calculator;
+package calculator.util;
 
 public class CustomDelimeterParser {
     public static String[] parse(String inputStr, String delimiter) {
