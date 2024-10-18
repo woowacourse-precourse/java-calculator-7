@@ -9,7 +9,7 @@ public class Application {
 
     public static ArrayList<String> seperatorList = new ArrayList<>(List.of(".", ":"));
     public static String userInput;
-    public static ArrayList<Long> usernumList = new ArrayList<Long>();
+    public static ArrayList<String> userNumList = new ArrayList<String>();
 
     public static void getCustomSeperator(String input) {
         String customSeperator;
@@ -27,19 +27,13 @@ public class Application {
     }
 
     public static String getUserInput() {
-        String userInput;
         Scanner scanner = new Scanner(System.in);
         userInput = scanner.nextLine();
-        System.out.println(userInput);
         return userInput;
     }
 
     public static boolean isNumber(String input) {
         return input.matches("\\d");
-    }
-
-    public static boolean isLongOverflow(Long inputNum) {
-        return (inputNum < 0);
     }
 
     public static void getNumber(String userInput) {
@@ -48,7 +42,7 @@ public class Application {
             String curChar = userInput.substring(i, i + 1);
             if (seperatorList.contains(curChar)) {
                 if (!numberBuffer.isEmpty()) {
-                    usernumList.add(Long.parseLong(numberBuffer.toString()));
+                    userNumList.add(numberBuffer.toString());
                     numberBuffer = new StringBuilder();
                 }
                 continue;
@@ -59,24 +53,18 @@ public class Application {
             numberBuffer.append(curChar);
         }
         if (!numberBuffer.isEmpty()) {
-            usernumList.add(Long.parseLong(numberBuffer.toString()));
+            userNumList.add(numberBuffer.toString());
         }
     }
 
-    public static BigInteger convertLongToBigInt(long input) {
-        if (isLongOverflow(input)) {
-            BigInteger longToBigInt = BigInteger.valueOf(input);
-            BigInteger overflowAmount = BigInteger.valueOf(input - Long.MIN_VALUE + 1);
-            longToBigInt = longToBigInt.negate().add(overflowAmount.multiply(BigInteger.valueOf(2)));
-            return longToBigInt;
-        }
-        return BigInteger.valueOf(input);
+    public static BigInteger convertStringToBigInt(String numberString) {
+        return new BigInteger(numberString);
     }
 
     public static void addNum() {
         BigInteger answer = BigInteger.ZERO;
-        for (int i = 0; i < usernumList.size(); i++) {
-            answer = answer.add(convertLongToBigInt(usernumList.get(i)));
+        for (String s : userNumList) {
+            answer = answer.add(convertStringToBigInt(s));
         }
         System.out.println("결과 : " + answer);
     }
