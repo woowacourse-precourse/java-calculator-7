@@ -4,14 +4,21 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Input {
     static String input;
-    static String[] token;
+    static String[] tokens;
     public String inputCal(){
         input = Console.readLine();
         return input;
     }
     public String[] inputSplit(){
-        token = input.split("[,:]");
-        return token;
+        tokens = input.split("[,:]");
+        return tokens;
+    }
+    public int sumToken(){
+        int sum = 0;
+        for(String token : tokens){
+            sum += Integer.parseInt(token);
+        }
+        return sum;
     }
 
 }
