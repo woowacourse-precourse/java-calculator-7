@@ -1,7 +1,10 @@
 package calculator;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -23,5 +26,19 @@ public class CalculatorViewTest {
 
         //then
         Assertions.assertEquals(result, input);
+    }
+
+    @Test
+    public void testOutputView() throws Exception {
+        //given
+        String testOutput = "결과: 3\n";
+        OutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        //when
+        calculatorview.outputView(3);
+
+        //then
+        Assertions.assertEquals(testOutput, outputStream.toString());
     }
 }

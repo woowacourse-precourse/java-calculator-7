@@ -9,4 +9,8 @@ public class CalculatorView {
         String input = Console.readLine();
         return input;
     }
+
+    public void outputView(int result) {
+        System.out.println("결과: " + result);
+    }
 }
