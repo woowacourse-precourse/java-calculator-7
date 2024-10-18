@@ -15,9 +15,9 @@
 ## 주요 클래스 설명
 - `Application`: 프로그램의 진입점으로, CalculatorController를 초기화하고 실행을 위임한다.
 - `CalculatorController`: 사용자 입력, 계산 처리, 결과 출력 등 계산기 프로그램의 전체 흐름을 제어하고 각 구성 요소를 조정한다.
-- `Number`: 숫자 객체 표현을 담당한다.
 - `Calculator`: 문자열 파싱 및 계산 로직을 담당한다.
 - `InputHandler`: 사용자 입력 처리를 담당한다.
+- `ValidatingParser`: 사용자 입력에 대한 파싱과 검증을 담당한다.
 - `OutputHandler`: 결과 출력을 담당한다.
 
 ## 기능 목록
