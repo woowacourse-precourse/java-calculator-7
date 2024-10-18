@@ -8,10 +8,10 @@ public class ContentParser {
     public ContentParser(String contentDelimiter, String targetContent) {
         this.targetContent = targetContent;
         this.contentDelimiter = contentDelimiter;
-        Parsing();
+        parsing();
     }
 
-    private void Parsing() {
+    private void parsing() {
         parsedContent = targetContent.split(contentDelimiter);
     }
 

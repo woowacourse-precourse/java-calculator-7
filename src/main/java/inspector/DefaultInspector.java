@@ -2,15 +2,16 @@ package inspector;
 
 public class DefaultInspector extends ContentInspector {
     private String targetContent;
-    private String delimiterGroup = ",|:";
+    private String parsingDelimiter = ",|:";
 
     public DefaultInspector(String targetContent) {
         this.targetContent = targetContent;
+        inspecting(targetContent, parsingDelimiter);
     }
 
     @Override
-    public String getDelimiterGroup() {
-        return delimiterGroup;
+    public String getParsingDelimiter() {
+        return parsingDelimiter;
     }
 
     @Override
