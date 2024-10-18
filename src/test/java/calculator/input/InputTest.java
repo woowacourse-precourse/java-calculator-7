@@ -17,6 +17,15 @@ class InputTest {
     }
 
     @Test
+    void 구분자가_확인_콤마() {
+        // given & when
+        Input input = Input.from("1,2:3");
+        // then
+        assertTrue(input.matchesSeparator(","));
+        assertTrue(input.matchesSeparator(":"));
+    }
+
+    @Test
     void 정수배열_테스트_콜론() {
         // given
         Input input = Input.from("1:2:3");
