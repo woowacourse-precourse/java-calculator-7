@@ -12,6 +12,8 @@ public class Calculator {
     private static String CUSTOM_DELIMITER = "";
 
     public static int calculate(final String input) {
+        if (input.isEmpty()) return 0;
+
         List<String> parsedNumbers = parseNumbers(input);
 
         return parsedNumbers.stream()
