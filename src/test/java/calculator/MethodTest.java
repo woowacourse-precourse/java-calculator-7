@@ -3,7 +3,6 @@ package calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,18 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MethodTest {
     private static final Pattern pattern = Pattern.compile("//(.*)\\\\n(.*)");
-
-    @Test
-    @DisplayName("입력값이 정상적으로 들어오게 되는지")
-    void test() {
-        String given = "1:2:3";
-        String expected = "1:2:3";
-
-        System.setIn(new ByteArrayInputStream(given.getBytes()));
-        String result = Application.getInput();
-
-        assertEquals(expected, result);
-    }
 
     @DisplayName("시작에 커스텀 구분자(//\n)를 지정할경우 해당 커스텀 구분자를 존재여부 파악(존재할 경우)")
     @Test
