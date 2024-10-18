@@ -1,4 +1,4 @@
-package calculator.provider;
+package calculator.tokenizer;
 
 import java.util.ArrayList;
 import java.util.List;

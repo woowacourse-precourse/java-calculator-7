@@ -1,5 +1,7 @@
 package calculator.provider;
 
+import calculator.parser.PositiveLongParser;
+import calculator.tokenizer.PrefixBasedSplitter;
 import camp.nextstep.edu.missionutils.Console;
 
 import java.util.ArrayList;
@@ -7,17 +9,18 @@ import java.util.List;
 
 public class ConsoleOperandsProvider implements OperandsProvider {
 
+    private final PrefixBasedSplitter splitter;
     private final PositiveLongParser longParser;
 
     public ConsoleOperandsProvider() {
+        this.splitter = new PrefixBasedSplitter();
         this.longParser = new PositiveLongParser();
     }
 
     @Override
     public List<Long> getOperands() {
         String userInput = getUserInput();
-        BasicStringTokenizer stringTokenizer = new BasicStringTokenizer(userInput);
-        List<String> tokens = stringTokenizer.tokenize();
+        List<String> tokens = splitter.split(userInput);
         return parseToLong(tokens);
     }
 

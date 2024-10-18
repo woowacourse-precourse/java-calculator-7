@@ -1,11 +1,13 @@
-package calculator.provider;
+package calculator.parser;
+
+import calculator.utils.FormatUtils;
 
 public class PositiveLongParser {
 
     private static final Long ZERO = 0L;
 
     public Long parse(String str) {
-        if (isNotNumeric(str)) {
+        if (!FormatUtils.isNumeric(str)) {
             throw new IllegalArgumentException("잘못된 숫자 입력이 있습니다.");
         }
         Long number = Long.parseLong(str);
@@ -17,15 +19,6 @@ public class PositiveLongParser {
 
     private boolean isNotPositive(Long number) {
         return number.compareTo(ZERO) <= 0;
-    }
-
-    private boolean isNotNumeric(String string) {
-        try {
-            Long.parseLong(string);
-            return false;
-        } catch (NumberFormatException e) {
-            return true;
-        }
     }
 
 }
