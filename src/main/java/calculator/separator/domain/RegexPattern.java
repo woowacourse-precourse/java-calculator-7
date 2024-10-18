@@ -1,9 +1,11 @@
 package calculator.separator.domain;
 
+import calculator.constant.ErrorMessage;
 import calculator.separator.constant.RegexConstant;
 import calculator.separator.util.SeparatorConvertor;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public enum RegexPattern {
@@ -16,10 +18,13 @@ public enum RegexPattern {
             String customSeparator = SeparatorConvertor.createCustomSeparator(input, startWith, endWith);
             return SeparatorConvertor.addCustomSeparator(customSeparator);
         }
+
         @Override
-        public String extractNumber(String input) {
+        public List<String> extractNumber(String input, String separator) {
             int startWith = SeparatorConvertor.slashNextLineStartWithIndex(input);
-            return SeparatorConvertor.createNumber(input, startWith);
+            String extractNumber = SeparatorConvertor.createNumber(input, startWith);
+            return Arrays.stream(extractNumber.split(separator))
+                    .toList();
         }
     },
     BLANK(RegexConstant.BLANK_REGEX);
@@ -28,26 +33,25 @@ public enum RegexPattern {
     RegexPattern(Pattern pattern) {
         this.pattern = pattern;
     }
+
     public static final RegexPattern[] REGEX_PATTERNS = values();
 
     public static boolean isMatch(String input) {
         return Arrays.stream(REGEX_PATTERNS)
                 .anyMatch((regexPattern) -> regexPattern.match(input));
     }
-    public static String extractNumberProcess(String input) {
+
+    public static List<String> extractNumberProcess(String input) {
         return Arrays.stream(REGEX_PATTERNS)
                 .filter((regexPattern) -> regexPattern.match(input))
                 .findFirst()
-                .map((regexPattern) -> regexPattern.extractNumber(input))
-                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 발생"));
+                .map((regexPattern) -> {
+                            String separator = regexPattern.extractSeparator(input);
+                            return regexPattern.extractNumber(input, separator);
+                        }
+                ).orElseThrow(() -> new IllegalArgumentException(ErrorMessage.UNEXPECTED_ERROR));
     }
-    public static String extractSeparatorProcess(String input) {
-        return Arrays.stream(REGEX_PATTERNS)
-                .filter((regexPattern) -> regexPattern.match(input))
-                .findFirst()
-                .map((regexPattern) -> regexPattern.extractSeparator(input))
-                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 발생"));
-    }
+
     private boolean match(String input) {
         return pattern.matcher(input).matches();
     }
@@ -55,7 +59,8 @@ public enum RegexPattern {
     public String extractSeparator(String input) {
         return SeparatorConvertor.defaultSeparator();
     }
-    public String extractNumber(String input) {
-        return input;
+
+    public List<String> extractNumber(String input, String separator) {
+        return Arrays.stream(input.split(separator)).toList();
     }
 }
