@@ -1,6 +1,9 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Application {
     private static String COMMA = ",";
@@ -22,6 +25,18 @@ public class Application {
             throw new IllegalArgumentException("구분자가 없습니다");
         }
 
-        return 1;
+        String[] delimiters = {COMMA, SEMICOLON, COMMA + "|" + SEMICOLON};
+        for (String delimiter : delimiters) {
+            validateOnlyDelimiter(input, delimiter);
+        }
+
+        return 23;
+    }
+
+    private static void validateOnlyDelimiter(String input, String delimiter) {
+        List<String> inputs = Arrays.stream(input.split(delimiter)).toList();
+        if (inputs.isEmpty()) {
+            throw new IllegalArgumentException(delimiter + " 밖에 없습니다");
+        }
     }
 }

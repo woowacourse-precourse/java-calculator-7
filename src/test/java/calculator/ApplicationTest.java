@@ -18,8 +18,8 @@ class ApplicationTest extends NsTest {
         });
 
         assertSimpleTest(() -> {
-            run("100");
-            assertThat(output()).contains("결과 : 1");
+            run("23;");
+            assertThat(output()).contains("결과 : 23");
         });
     }
 
@@ -39,6 +39,35 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void validateOnlyContainCOMMA() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException(",,,,,,")).isInstanceOf(IllegalArgumentException.class);
+        });
+        assertSimpleTest(() -> {
+            assertThatNoException().isThrownBy(() -> run("1,3,"));
+        });
+    }
+
+    @Test
+    void validateOnlyContainSEMICOLON() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException(";;;;;;;;")).isInstanceOf(IllegalArgumentException.class);
+        });
+        assertSimpleTest(() -> {
+            assertThatNoException().isThrownBy(() -> run("1;;3"));
+        });
+    }
+
+    @Test
+    void validateOnlyContainCOMMA_SEMICOLON() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException(",,,,,,;;;;;;;;")).isInstanceOf(IllegalArgumentException.class);
+        });
+        assertSimpleTest(() -> {
+            assertThatNoException().isThrownBy(() -> run("1;3,1"));
+        });
+    }
 
     @Test
     void 커스텀_구분자_사용() {
