@@ -17,6 +17,11 @@ public class CalculatorController {
 
     public void start() {
         String consoleInput = inputView.getConsoleInput();
+        List<Integer> numbers = getNumbersList(consoleInput)
+                .stream()
+                .map(Integer::parseInt)
+                .toList();
+        System.out.println("결과 : " + numbers.get(0));
     }
 
     public List<String> getNumbersList(String consoleInput) {
