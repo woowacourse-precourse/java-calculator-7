@@ -31,8 +31,6 @@ public class FunctionOperator {
             // 숫자 - !숫자 구분
             separated = preprocessing.separation(input);
         }
-        System.out.println(separated);
-        System.out.println(separators);
 
         // 구분자 유효하면 sum
         int answer = validation.validatingSeparator(separators, separated);
