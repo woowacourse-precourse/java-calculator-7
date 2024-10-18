@@ -25,6 +25,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 특수문자_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("//]\\n1]2,3]4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
     void 예외_테스트_음수() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))
