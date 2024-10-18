@@ -32,9 +32,13 @@ public class Calculator {
         replaceBasicDelimiters();
         replaceCustomDelimiter();
 
-        try {
-            return expression.split(":");
-        } catch (IllegalArgumentException e) {
+        validateDelimiterPresence();
+
+        return expression.split(":");
+    }
+
+    private void validateDelimiterPresence() {
+        if (!expression.contains(":")) {
             throw new IllegalArgumentException("구분자가 없습니다.");
         }
     }
