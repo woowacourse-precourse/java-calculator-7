@@ -76,7 +76,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀구분자가_여러_문자인_입력_예외_테스트() {
         assertSimpleTest(() -> {
-            run("4:;4//;:\\n");
+            run("4:;4//:;\\n");
             assertThat(output()).contains("결과 : 8");
         });
     }
