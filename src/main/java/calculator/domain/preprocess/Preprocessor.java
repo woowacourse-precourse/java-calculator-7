@@ -14,18 +14,10 @@ public class Preprocessor {
         this.calculationSegmentProcessor = calculationSegmentProcessor;
     }
 
-    private boolean validateDelimeterRequest(String input) {
-        if (delimeterSegmentProcessor.checkCustomDelimeterRequest(input)) {
-            return true;
-        }
-        return false;
-    }
-
-
     public List<String> preprocessDelimeter(String input) {
         List<String> delimeterList = new ArrayList<>(Arrays.asList(",", ":"));
 
-        if (validateDelimeterRequest(input)) {
+        if (delimeterSegmentProcessor.checkCustomDelimeterRequest(input)) {
             return delimeterSegmentProcessor.extractDelimeterList(input);
         }
 
@@ -33,7 +25,7 @@ public class Preprocessor {
     }
 
     public String preprocessCalculationSegment(String input) {
-        if (validateDelimeterRequest(input)) {
+        if (delimeterSegmentProcessor.checkCustomDelimeterRequest(input)) {
             return delimeterSegmentProcessor.extractCalculationSegment(input);
         } else {
             return input;
