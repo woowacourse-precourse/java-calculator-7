@@ -18,10 +18,11 @@ public class CalculatorService {
     }
 
     /**
-     * 파라미터로 전달된 문자열 배열에서 각 요소를 숫자로 변환할 수 있다면, values 리스트에 Int 타입으로 변환한 후 추가합니다. 만약 숫자로 변환할 수 없는 값이 있을 경우,
-     * NumberFormatException이 발생하며, 이를 IllegalArgumentException으로 변환해 예외를 던집니다.
+     * 파라미터로 전달된 문자열 배열에서 각 요소를 숫자로 변환할 수 있다면, values 리스트에 Int 타입으로 변환한 후 추가합니다. 1. 숫자로 변환할 수 없는 문자열일 경우
+     * NumberFormatException이 발생하고, 이를 IllegalArgumentException으로 변환하여 던집니다. 2. 변환된 숫자가 음수일 경우 IllegalArgumentException을
+     * 발생시킵니다.
      *
-     * @param parts 구분자를 통해 분리된 문자열 배열(숫자)
+     * @param parts 구분자를 통해 분리된 문자열 배열
      * @return 숫자 리스트
      */
     public List<Integer> convertToNumbers(String[] parts) {
