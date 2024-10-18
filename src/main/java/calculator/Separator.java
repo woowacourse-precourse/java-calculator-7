@@ -9,7 +9,7 @@ public class Separator {
     private List<String> separators;
 
     public Separator() {
-        this.separators = new ArrayList<>(Arrays.asList(",", ";"));
+        this.separators = new ArrayList<>(Arrays.asList(",", ":"));
     }
 
     public List<String> getSeparators() {
