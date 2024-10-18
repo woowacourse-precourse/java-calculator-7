@@ -32,6 +32,8 @@ public class Controller {
 
         inputString = new InputString(input);
         mainService.getCustomDelimiter(inputString);
+
+        exceptions.validateCustomDelimiter(inputString.getInputString(), inputString.getCustomDelimiter());
     }
 
     private void getNumberList() {

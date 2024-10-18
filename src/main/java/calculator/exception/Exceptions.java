@@ -16,10 +16,12 @@ public class Exceptions {
         }
     }
 
-    public void validateCustomDelimiter(String input, String customDelimiter) {
-        String consecutiveDelimiter = customDelimiter + customDelimiter;
-        if(input.contains(consecutiveDelimiter)) {
-            throw new IllegalArgumentException("[ERROR] 연속된 커스텀 구분자는 사용할 수 없습니다.");
+    public void validateCustomDelimiter(String input, List<String> customDelimiter) {
+        for (String s : customDelimiter) {
+            String consecutiveDelimiter = s + s;
+            if (input.contains(consecutiveDelimiter)) {
+                throw new IllegalArgumentException("[ERROR] 연속된 커스텀 구분자는 사용할 수 없습니다.");
+            }
         }
     }
 
