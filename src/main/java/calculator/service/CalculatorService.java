@@ -29,6 +29,6 @@ public class CalculatorService {
      * 숫자 리스트의 합계를 반환
      */
     public int calculateSum(List<Integer> values) {
-        return 0;
+        return values.stream().mapToInt(value -> value).sum();
     }
 }
