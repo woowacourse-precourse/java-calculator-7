@@ -23,7 +23,7 @@ public class Calculator {
 
     }
 
-    private int calculate(String input) {
+    private static int calculate(String input) {
         int result=0;
         String[] ar=input.split(SEPERATOR_REGEX);
 
@@ -41,7 +41,7 @@ public class Calculator {
 
     }
 
-    private boolean isSpace(String num) {
+    private static boolean isSpace(String num) {
         return num.equals("");
     }
 
