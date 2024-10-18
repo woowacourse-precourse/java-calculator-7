@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 public class CustomDelimiter {
     private String formula;
 
-    public CustomDelimiter(){
+    public CustomDelimiter(String formula){
         this.formula = formula;
     }
 
