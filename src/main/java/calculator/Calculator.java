@@ -16,4 +16,11 @@ public class Calculator {
         return sum;
     }
 
+    // 문자열 숫자로 변환
+    private int parseNumber(String token) {
+        int number = Integer.parseInt(token.trim());
+        return number;
+    }
+}
+
 }
