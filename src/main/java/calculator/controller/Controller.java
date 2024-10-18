@@ -44,20 +44,23 @@ public class Controller {
     private List<Integer> convertInt(String[] numbers) {
         List<Integer> list = new ArrayList<>();
         for (String number : numbers) {
-            int num;
-            try {
-                num = Integer.parseInt(number);
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException();
-            }
-            validateIsMinus(num);
-            list.add(num);
+            validateIsWrongInteger(number);
+            validateIsMinus(number);
+            list.add(Integer.parseInt(number));
         }
         return list;
     }
 
-    private void validateIsMinus(int number) {
-        if (number < 0) {
+    private void validateIsWrongInteger(String number) {
+        try {
+            Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void validateIsMinus(String number) {
+        if (Integer.parseInt(number) < 0) {
             throw new IllegalArgumentException();
         }
     }
