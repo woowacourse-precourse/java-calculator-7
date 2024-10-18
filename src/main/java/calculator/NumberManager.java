@@ -22,10 +22,14 @@ public class NumberManager {
         for (String part : numberParts) {
             if (!part.trim().isEmpty()) { // 빈 문자열은 제외
                 try {
-                    numbers.add(Integer.parseInt(part.trim())); // 문자열을 정수로 변환
+                    // 숫자 형식 검증
+                    int number = Integer.parseInt(part.trim());
+                    numbers.add(number); // 문자열을 정수로 변환
                 } catch (NumberFormatException e) {
-                    System.out.println("Invalid number: " + part);
+                    throw new IllegalArgumentException("유효하지 않은 구분자입니다.");
                 }
+            } else {
+                throw new IllegalArgumentException("입력에 연속된 구분자가 포함되어 있습니다. 형식은 숫자 + 구분자 + 숫자여야 합니다.");
             }
         }
     }

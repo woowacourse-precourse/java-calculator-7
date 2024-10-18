@@ -16,6 +16,7 @@ public class Application {
 
         // 커스텀 구분자가 있는 경우
         if (input.startsWith("//")) {
+
             SeparatorManager separatorManager = new SeparatorManager();
             separatorManager.processInput(input);
 
@@ -35,6 +36,8 @@ public class Application {
                 NumberManager numberManager = new NumberManager();
                 numberManager.numberInput(input, separators);
                 numberManager.calculateSum();
+            } else {
+                throw new IllegalArgumentException("유효하지 않은 입력입니다. 입력은 '//'로 시작하거나 숫자로 시작해야 합니다.");
             }
         }
     }
