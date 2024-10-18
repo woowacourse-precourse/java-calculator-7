@@ -5,7 +5,7 @@ import calculator.parser.ParseManager;
 
 public class Calculator {
 
-    public static final String ELEMENT_OVERFLOW_ERR_MESSAGE = "숫자 요소가 정수형 범위를 벗어납니다.";
+    public static final String ELEMENT_NOT_INTEGER_ERR_MESSAGE = "정수가 아니거나 정수형 범위를 벗어납니다.";
     public static final String RESULT_OVERFLOW_ERR_MESSAGE = "합이 정수형 범위를 벗어납니다.";
 
     public static void run() {
@@ -31,10 +31,10 @@ public class Calculator {
         try {
             for (int i = 0; i < nums.length; i++) {
                 sum += Integer.parseInt(nums[i]);
-                longSum += Integer.parseInt(nums[i]);
+                longSum += Long.parseLong(nums[i]);
             }
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ELEMENT_OVERFLOW_ERR_MESSAGE);
+            throw new IllegalArgumentException(ELEMENT_NOT_INTEGER_ERR_MESSAGE);
         }
 
         if (sum != longSum) {
