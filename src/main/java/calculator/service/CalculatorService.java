@@ -1,5 +1,6 @@
 package calculator.service;
 
+import calculator.model.CalculationStringFormatter;
 import calculator.model.Calculator;
 
 public class CalculatorService {
@@ -13,12 +14,12 @@ public class CalculatorService {
     }
 
     public int calculateSumString(String inputString) {
-        String customDelimeter = calculationStringFormatter.resolveCustomDelimeter(inputString);
-        String expression = calculationStringFormatter.resolveExpression(inputString);
+        if (inputString.isEmpty()) {
+            return 0;
+        }
 
-        calculator.patchDelimeter(customDelimeter);
-        calculator.calculate(expression);
-
-        return 0;
+        calculationStringFormatter.resolveCalculationString(inputString);
+        calculator.patchDelimeter(calculationStringFormatter.getCustomDelimiter());
+        return calculator.calculate(calculationStringFormatter.getExpression());
     }
 }
