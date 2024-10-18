@@ -4,6 +4,6 @@ public class DefaultDelimiter implements Delimiter {
 
     @Override
     public String[] split(String input) {
-        return new String[0];
+        return input.split("[,:]");
     }
 }
