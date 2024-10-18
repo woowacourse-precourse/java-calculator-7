@@ -2,6 +2,8 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.Arrays;
+
 public class Application {
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -10,10 +12,12 @@ public class Application {
 
         if (isCustomSeperator(input)) customSeperator = extractCustomSeperator(input);
 
-        String[] number = splitBySeperator(input, customSeperator);
+        try {
+            int[] number = Arrays.stream(splitBySeperator(input, customSeperator)).mapToInt(Integer::parseInt).toArray();
+            int result = sumCalculate(number);
 
-        int result = sumCalculate(number);
-        System.out.println("결과 : " + result);
+            System.out.println("결과 : " + result);
+        } catch (IllegalArgumentException e) {}
     }
 
     public static boolean isCustomSeperator(String input) {
@@ -41,11 +45,11 @@ public class Application {
         return number;
     }
 
-    public static int sumCalculate(String[] number) {
+    public static int sumCalculate(int[] number) {
         int result = 0;
-        for (String s : number) {
-            result += Integer.parseInt(s);
-        }
+
+        for (int i : number) result += i;
+
         return result;
     }
 }
