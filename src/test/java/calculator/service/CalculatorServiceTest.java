@@ -72,22 +72,16 @@ class CalculatorServiceTest {
                 .hasMessage("구분자와 숫자를 정확하게 입력해주세요.");
     }
 
-    private void delimiterSplit(String input) {
-        if (isNotDefaultDelimiter(input) && isNotCustomDelimiter(input)) {
-            try {
-                Integer.parseInt(input);
-            } catch (Exception e) {
-                throw new IllegalArgumentException("구분자와 숫자를 정확하게 입력해주세요.");
-            }
-        }
-    }
+    @Test
+    @DisplayName("음수가 입력된 경우 예외가 발생한다.")
+    void 음수가_입력된_경우_예외_발생() {
+        // given
+        String input = "1,2:-3";
 
-    private boolean isNotDefaultDelimiter(String input) {
-        return !(input.contains(",") || input.contains(":"));
-    }
-
-    private boolean isNotCustomDelimiter(String input) {
-        return !input.startsWith("//");
+        // when, then
+        assertThatThrownBy(() -> calculatorService.calculateSum(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("음수는 입력할 수 없습니다.");
     }
 
 }
