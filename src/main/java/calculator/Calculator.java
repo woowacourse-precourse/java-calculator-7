@@ -2,6 +2,7 @@ package calculator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Calculator {
     public int add(String input) {
@@ -35,8 +36,8 @@ public class Calculator {
     }
 
     public List<Integer> extractNumbers(String input, String delimiter) {
-        //입력값에서 구분자를 기준으로 숫자 추출
-        String[] extracted = input.split(",|:|" + delimiter);
+        String escapedDelimiter = Pattern.quote(delimiter);
+        String[] extracted = input.split(",|:|" + escapedDelimiter);
         List<Integer> numbers = new ArrayList<>();
         //정수형 리스트로 변환
         for (String a : extracted) {

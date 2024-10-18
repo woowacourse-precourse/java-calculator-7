@@ -10,7 +10,7 @@ class ApplicationTest2 extends NsTest {
     @Test
     void 문자_1개일_경우() {
         assertSimpleTest(() -> {
-            run("//;\\n1");
+            run("//&\\n1");
             assertThat(output()).contains("결과 : 1");
         });
     }
@@ -18,7 +18,7 @@ class ApplicationTest2 extends NsTest {
     @Test
     void 문자_여러개일_경우() {
         assertSimpleTest(() -> {
-            run("//;#\\n1;#1,2");
+            run("//&%\\n1&%1,2");
             assertThat(output()).contains("결과 : 4");
         });
     }
@@ -26,15 +26,15 @@ class ApplicationTest2 extends NsTest {
     @Test
     void 같은_문자_여러개일_경우() {
         assertSimpleTest(() -> {
-            run("//;;\\n1;;2");
+            run("//%%\\n1%%2");
             assertThat(output()).contains("결과 : 3");
         });
     }
 
     @Test
-    void 개행문자_일_경우() {
+    void 메타문자일_경우() {
         assertSimpleTest(() -> {
-            run("//\\n\\n1\\n2");
+            run("//[^\\n1[^2");
             assertThat(output()).contains("결과 : 3");
         });
     }
