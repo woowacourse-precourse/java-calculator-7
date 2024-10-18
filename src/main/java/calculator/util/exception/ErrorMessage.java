@@ -1,6 +1,7 @@
 package calculator.util.exception;
 
 public enum ErrorMessage {
+    EMPTY_INPUT("빈 문자열을 입력할 수 없습니다."),
     LOW_THEN_ZERO("숫자는 0 이상이어야 합니다."),
     CUSTOM_DELIMITER_NOT_ALLOW_MULTIPLE("커스텀 구분자는 하나의 문자여야 합니다."),
     IS_NOT_NUMBER_VALUE("정수로 변환이 불가능한 문자열이 존재합니다."),

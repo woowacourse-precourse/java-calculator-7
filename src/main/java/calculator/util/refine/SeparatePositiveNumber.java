@@ -1,9 +1,11 @@
 package calculator.util.refine;
 
+import static calculator.util.refine.InputValidator.validateIsEmptyInput;
+import static calculator.util.refine.InputValidator.validateIsInteger;
+import static calculator.util.refine.InputValidator.validateNonNegativeNumber;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import static calculator.util.refine.InputValidator.*;
 
 public class SeparatePositiveNumber {
 
@@ -14,6 +16,7 @@ public class SeparatePositiveNumber {
     }
 
     public List<Integer> extractNumbers(String input) {
+        validateIsEmptyInput(input);
         String delimiter = delimiterExtractor.extractDelimiter(input);
         input = delimiterExtractor.removeDelimiterDefinition(input);
 

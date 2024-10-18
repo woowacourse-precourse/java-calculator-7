@@ -1,6 +1,10 @@
 package calculator.util.refine;
 
-import static calculator.util.exception.CalculatorValidationException.*;
+import static calculator.util.exception.CalculatorValidationException.validateDelimiterAfterNewLinePresenceException;
+import static calculator.util.exception.CalculatorValidationException.validateEmptyInputException;
+import static calculator.util.exception.CalculatorValidationException.validateIsIntegerException;
+import static calculator.util.exception.CalculatorValidationException.validateNonNegativeNumberException;
+import static calculator.util.exception.CalculatorValidationException.validateSingleCharacterDelimiterException;
 
 public class InputValidator {
 
@@ -25,6 +29,12 @@ public class InputValidator {
     static void validateIsInteger(String token) {
         if (!token.matches("-?\\d+")) {
             throw new validateIsIntegerException();
+        }
+    }
+
+    static void validateIsEmptyInput(String input) {
+        if (input == null || input.isEmpty()) {
+            throw new validateEmptyInputException();
         }
     }
 }
