@@ -10,7 +10,10 @@ public class InputManager {
     }
 
     public void validate() {
-        if(!(input.startsWith("//") && input.contains("\\n")) || input.matches("[1-9,:]+")) {
+        if(input.matches("[1-9,:]+")) {
+            return;
+        }
+        if(!(input.startsWith("//") && input.contains("\\n"))) {
             throw new IllegalArgumentException("입력 형식이 유효하지 않습니다.");
         }
     }
