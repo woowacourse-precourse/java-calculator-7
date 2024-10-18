@@ -2,6 +2,7 @@ package calculator;
 
 import org.junit.jupiter.api.Test;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class StringSplitterTest {
@@ -42,6 +43,6 @@ class StringSplitterTest {
         assertEquals("1", result.get(0), "첫 번째 부분은 '1'이어야 합니다.");
         assertEquals("2", result.get(1), "두 번째 부분은 '2'이어야 합니다.");
         assertEquals("3", result.get(2), "세 번째 부분은 '3'이어야 합니다.");
-        assertEquals("1;2,3",processedInput, "커스텀 구분자가 있을 경우 문자열에서 제외해야 합니다.");
+        assertEquals("1;2,3", processedInput, "커스텀 구분자가 있을 경우 문자열에서 제외해야 합니다.");
     }
 }

@@ -12,7 +12,7 @@ public class SeparatorManager {
     }
 
     public String addCustomSeparatorAndTrim(String input) {
-        if (hasCustomSeparator(input)){
+        if (hasCustomSeparator(input)) {
             int separatorIndex = findSeparatorIndex(input);
             String customSeparator = extractCustomSeparator(input, separatorIndex);  // 커스텀 구분자 추출
             validateCustomSeparator(customSeparator);               // 커스텀 구분자가 문자인지 검증
@@ -48,7 +48,7 @@ public class SeparatorManager {
 
     // 커스텀 구분자가 문자가 아닌 숫자일 경우 검증
     private void validateCustomSeparator(String customSeparator) {
-        if (customSeparator.matches("\\d")){
+        if (customSeparator.matches("\\d")) {
             throw new IllegalArgumentException("커스텀 구분자는 숫자가 될 수 없습니다: " + customSeparator);
         }
     }

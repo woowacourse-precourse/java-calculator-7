@@ -13,7 +13,7 @@ public class SumCalculator {
         this.separator = separator;
     }
 
-    public int sum(String input){
+    public int sum(String input) {
         String processedInput = separator.addCustomSeparatorAndTrim(input);  // 커스텀 구분자 추출
         List<String> separators = separator.getSeparators();                 // 구분자 가져오기
 

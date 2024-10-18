@@ -2,6 +2,7 @@ package calculator;
 
 import org.junit.jupiter.api.Test;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class SeparatorManagerTest {
@@ -44,6 +45,7 @@ class SeparatorManagerTest {
         assertTrue(separators.contains(":"), "기본 구분자 콜론(:)이 구분자 리스트에 있어야 합니다.");
         assertFalse(separators.contains(";"), "커스텀 구분자 세미콜론(;)은 추가되지 않아야 합니다.");
     }
+
     @Test
     void shouldThrowExceptionWhenCustomSeparatorHasNoNewline() {
         SeparatorManager manager = new SeparatorManager();

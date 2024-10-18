@@ -5,6 +5,7 @@ import java.util.List;
 
 public class StringConverter {
     private NumberValidator numberValidator;
+
     public StringConverter(NumberValidator numberValidator) {
         this.numberValidator = numberValidator;
     }
@@ -17,7 +18,7 @@ public class StringConverter {
 
     private List<String> sanitizeInputs(List<String> stringInputs) {
         List<String> sanitizedInputs = new ArrayList<>();
-        for(String s : stringInputs) {
+        for (String s : stringInputs) {
             sanitizedInputs.add(sanitizeInput(s));
         }
         return sanitizedInputs;

@@ -29,7 +29,6 @@ public class NumberValidatorTest {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             validator.validate(input);
         });
-
         assertEquals("양수만 허용됩니다: -2", exception.getMessage());
     }
 

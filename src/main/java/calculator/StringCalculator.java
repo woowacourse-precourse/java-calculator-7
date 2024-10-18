@@ -17,7 +17,7 @@ public class StringCalculator {
         this.inputHandler = new InputHandler();
     }
 
-    public void run(){
+    public void run() {
         String input = inputHandler.getInput();
         int result = sumCalculator.sum(input);
         System.out.println("결과 : " + result);
