@@ -6,11 +6,11 @@ import java.util.regex.Pattern;
 public class Extractor {
 
     private static final String header = "//";
-    private static final String footer = "\n";
+    private static final String footer = "\\n";
     private static final String defaultDelimiter = "[,:]";
 
-    // numbersWithDelimiter 에는 "1;2;3" 와 같이 사용자의 입력이 그대로 들어옴
-    public int[] extractNumbers(String delimitedNumbers, String delimiter) {
+    // numbersWithDelimiter 에는 "1;2;3" 와 같이 들어옴
+    public int[] makeNumberArray(String delimitedNumbers, String delimiter) {
         String regexDelimiter = makeRegexDelimiter(delimiter);
         String[] splitNumbers = delimitedNumbers.split(regexDelimiter);
 
