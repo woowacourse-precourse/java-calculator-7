@@ -5,7 +5,7 @@ import static calculator.global.constant.ErrorMessage.*;
 
 public class Validator {
 
-    public static void ValidateNumberFormat(String number) {
+    public static void validateNumberFormat(String number) {
         try {
             Integer.parseInt(number);
         } catch (NumberFormatException e) {

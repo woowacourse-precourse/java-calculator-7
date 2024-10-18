@@ -7,7 +7,7 @@ public class Number {
 
     public Number(String number) {
         this.number = number;
-        Validator.ValidateNumberFormat(number);
+        Validator.validateNumberFormat(number);
     }
 
     public Integer toInteger() {
