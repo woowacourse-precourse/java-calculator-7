@@ -7,13 +7,12 @@ import java.util.List;
 public class InputDivider {
 
     public static Input divideInput(Input input) {
-        if (input.isEmpty()) {
-            return new Input(input.origin(), input.separator(), List.of("0"));
+        if (input.isOriginEmpty()) {
+            return Input.makeInputWithoutOrigin(input);
         }
         List<String> numbers = Arrays.stream(input.origin().split(
                         input.separator()))
                 .toList();
-        return new Input(input.origin(), input.separator(),
-                numbers);
+        return Input.makeInputWithOrigin(input, numbers);
     }
 }

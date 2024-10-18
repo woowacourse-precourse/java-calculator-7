@@ -22,7 +22,7 @@ public record Input(
         return true;
     }
 
-    public boolean isEmpty() {
+    public boolean isOriginEmpty() {
         return origin.isEmpty();
     }
 
@@ -35,5 +35,23 @@ public record Input(
             result.add(Integer.parseInt(number));
         }
         return result;
+    }
+
+    public static Input makeInputWithSeparator(Input input) {
+        return new Input(input.origin.substring(5), "[,:" + input.origin.charAt(2) + "]",
+                input.numbers());
+    }
+
+    public static Input makeInputWithoutSeparator(Input input) {
+        return new Input(input.origin.substring(4), input.separator(),
+                input.numbers());
+    }
+
+    public static Input makeInputWithoutOrigin(Input input) {
+        return new Input(input.origin(), input.separator(), List.of("0"));
+    }
+
+    public static Input makeInputWithOrigin(Input input, List<String> numbers) {
+        return new Input(input.origin(), input.separator(), numbers);
     }
 }

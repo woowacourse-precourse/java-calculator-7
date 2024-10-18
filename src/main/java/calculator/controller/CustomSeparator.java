@@ -10,12 +10,10 @@ public class CustomSeparator {
             return input;
         }
         if (hasCustomSeparator(origin)) {
-            return new Input(origin.substring(5), "[,:" + origin.charAt(2) + "]",
-                    input.numbers());
+            return Input.makeInputWithSeparator(input);
         }
         if (notHasCustomSeparator(origin)) {
-            return new Input(origin.substring(4), input.separator(),
-                    input.numbers());
+            return Input.makeInputWithoutSeparator(input);
         }
         return input;
     }
