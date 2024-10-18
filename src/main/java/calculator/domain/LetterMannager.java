@@ -4,15 +4,18 @@ import static calculator.global.constant.Config.*;
 import static calculator.global.util.Validator.validateCustomIndex;
 
 import calculator.domain.letter.Separators;
+import calculator.domain.number.Numbers;
 
 
 public class LetterMannager {
     private final StringBuilder letters;
     private final Separators separators;
+    private final Numbers numbers;
 
     public LetterMannager(String letters) {
         this.letters = new StringBuilder(letters);
         separators = new Separators();
+        numbers = new Numbers();
     }
 
     public void splitCustomSeparator() {
@@ -27,8 +30,20 @@ public class LetterMannager {
             }
             validateCustomIndex(startIndex, endIndex);
             separator = subLetter(startIndex, endIndex);
-            replaceSeparateLetter(startIndex, endIndex, separator);
+            replaceLetter(startIndex, endIndex, separator);
             separators.addSeparator(separator);
+        }
+    }
+
+    public void splitNumber() {
+        String lettersString = letters.toString();
+        String separator = separators.toString();
+        String[] numbers = lettersString.split(separator);
+        for (String number : numbers) {
+            if (number.isEmpty()) {
+                continue;
+            }
+            this.numbers.addNumber(number);
         }
     }
 
@@ -44,12 +59,16 @@ public class LetterMannager {
         return letters.substring(startIndex + START_OF_CUSTOM_SEPARATOR_LETTER.length(), endIndex);
     }
 
-    private void replaceSeparateLetter(int startIndex, int endIndex, String newLetter) {
-        letters.replace(startIndex, endIndex + END_OF_CUSTOM_SEPARATOR_LETTER.length() - 1, newLetter);
+    private void replaceLetter(int startIndex, int endIndex, String newLetter) {
+        letters.replace(startIndex, endIndex + END_OF_CUSTOM_SEPARATOR_LETTER.length(), newLetter);
     }
 
     public Separators getSeparators() {
         return separators;
+    }
+
+    public Numbers getNumbers() {
+        return numbers;
     }
 
 

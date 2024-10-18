@@ -37,4 +37,37 @@ class LetterMannagerTest {
         Assertions.assertThat(letterMannager.getSeparators().contains(separator)).isEqualTo(true);
     }
 
+    @Test
+    void 커스텀_구분자가_없는_상황에서_입력받은_문자열에서_숫자를_추출() {
+        //given
+        String letters = "1,2:3";
+        LetterMannager letterMannager;
+
+        //when
+        letterMannager = new LetterMannager(letters);
+        letterMannager.splitNumber();
+
+        //then
+        Assertions.assertThat(letterMannager.getNumbers().toInteger().contains(1)).isEqualTo(true);
+        Assertions.assertThat(letterMannager.getNumbers().toInteger().contains(2)).isEqualTo(true);
+        Assertions.assertThat(letterMannager.getNumbers().toInteger().contains(3)).isEqualTo(true);
+    }
+
+    @Test
+    void 커스텀_구분자가_있는_상황에서_입력받은_문자열에서_숫자를_추출() {
+        //given
+        String letters = "//;\n1;2";
+        LetterMannager letterMannager;
+
+        //when
+        letterMannager = new LetterMannager(letters);
+        letterMannager.splitCustomSeparator();
+        letterMannager.splitNumber();
+
+        //then
+        Assertions.assertThat(letterMannager.getNumbers().toInteger().contains(1)).isEqualTo(true);
+        Assertions.assertThat(letterMannager.getNumbers().toInteger().contains(2)).isEqualTo(true);
+    }
+
+
 }

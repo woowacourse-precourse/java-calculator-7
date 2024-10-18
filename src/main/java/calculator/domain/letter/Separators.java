@@ -33,4 +33,10 @@ public class Separators {
         return separators.contains(compareSeparator);
     }
 
+    @Override
+    public String toString() {
+        return separators.stream()
+                .map(Separator::toString)
+                .collect(Collectors.joining("|"));
+    }
 }
