@@ -12,8 +12,10 @@ public class Calculator {
         this.delimiters.add(":");
     }
 
-    public void patchDelimeter(String customDelimeter) {
-        delimiters.add(customDelimeter);
+    public void patchDelimeter(String customDelimiter) {
+        if (!customDelimiter.isEmpty()) {
+            delimiters.add(customDelimiter);
+        }
     }
 
     public int sum(String expression) {
