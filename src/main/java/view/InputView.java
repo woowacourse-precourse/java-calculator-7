@@ -4,11 +4,14 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
 
-    private String buff;
-
     public String readbuffer(){
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        buff = Console.readLine();
-        return buff;
+        return Console.readLine();
+    }
+
+    public void validateInput(String input){
+        if(input == null || input.equals("")){
+            throw new IllegalArgumentException("입력이 비어있습니다.");
+        }
     }
 }

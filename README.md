@@ -10,6 +10,7 @@ mvc 패턴으로 구현을 한다
     1) InputView 클래스
         * readBuffer 함수 - 문자열을 사용자로부터 입력 받는 함수
         * validateInput 함수 - 입력된 문자열의 유효성을 체크하는 함수
+        * printErrorMessage 함수 - input 에러 메세지를 출력하는 함수
     2) OutputView 클래스
         * writeSumResult 함수 - 덧셈의 결과를 출력하는 함수 
     
