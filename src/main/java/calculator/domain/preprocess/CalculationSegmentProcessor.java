@@ -21,7 +21,7 @@ public class CalculationSegmentProcessor {
         }
     }
 
-    //정수가 아닌 구분자로 String이 끝나게 되면 추출한 계산되어야 할 숫자 리스트에 공백이 들어가게 됩니다.
+    //정수가 아닌 구분자로 String이 끝나게 되거나, 구분자 사이에 숫자가 없다면 추출한 계산되어야 할 숫자 리스트에 공백이 들어가게 됩니다.
     //이 부분은 입력 오류 보다는 취급해야할 조건으로 생각했습니다.
     private List<String> discardBlankSpace(List<String> input) {
         input.removeIf(String::isBlank);
