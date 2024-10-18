@@ -42,27 +42,31 @@ public class Calculator {
 
     /**
      * sum(): 구분자를 이용해 문자열 분리 후 숫자들 합계 리턴
-     *
-     * @return : 합계
      */
     private Integer sum() {
         String[] numbers = input.split(separators.toString());
+
         return Arrays.stream(numbers)
-                .mapToInt(number -> {
-                    int integer;
-                    if (number.isEmpty()) {
-                        throw new IllegalArgumentException(ErrorCode.TO0_MUCH_SEPARATORS.message);
-                    }
-                    try {
-                        integer = Integer.parseInt(number);
-                    } catch (Exception e) {
-                        throw new IllegalArgumentException(ErrorCode.WRONG_INPUT.message);
-                    }
-                    if (integer < 0) {
-                        throw new IllegalArgumentException(ErrorCode.NOT_ALLOWED_NEGATIVE.message);
-                    }
-                    return integer;
-                }).sum();
+                .mapToInt(this::findExceptions).sum();
+    }
+
+    /**
+     * findExceptions(): 값을 Integer로 바꾸며 에러에 해당되는지 체크
+     */
+    private int findExceptions(String number) {
+        int integer;
+        if (number.isEmpty()) { //너무 많은 구분자 입력
+            throw new IllegalArgumentException(ErrorCode.TO0_MUCH_SEPARATORS.message);
+        }
+        try {
+            integer = Integer.parseInt(number);
+        } catch (Exception e) { // 잘못된 문자 입력
+            throw new IllegalArgumentException(ErrorCode.WRONG_INPUT.message);
+        }
+        if (integer < 0) { // 음수 값 입력
+            throw new IllegalArgumentException(ErrorCode.NOT_ALLOWED_NEGATIVE.message);
+        }
+        return integer;
     }
 
 }
