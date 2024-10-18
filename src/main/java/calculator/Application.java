@@ -9,9 +9,9 @@ public class Application {
 
     private static String extractCustomSeparation(String inputStr) {
         if (inputStr.startsWith("//")) { //\n이 구분자일 경우도 생각해봐야함.
-            int endIndex = inputStr.indexOf("n");
+            int endIndex = inputStr.indexOf("\\n");
             if (endIndex != -1) {
-                return inputStr.substring(2, endIndex - 1);
+                return inputStr.substring(2, endIndex);
             }
         }
         return null;
@@ -28,12 +28,16 @@ public class Application {
     private static ArrayList<Integer> extractIntegerAndDetectChar(String[] tokens) {
         ArrayList<Integer> numbers = new ArrayList<>();
         for (String token : tokens) {
-            System.out.println("token = " + token);
             if (isDigit(token)) {
-                numbers.add(Integer.parseInt(token));
+                int number = Integer.parseInt(token);
+                if (number < 0) { //음수일 경우
+                    throw new IllegalArgumentException();
+                } else {
+                    numbers.add(number);
+                }
             } else {
                 errorFlag = true;
-//                break;
+                break;
             }
         }
         return numbers;
@@ -52,32 +56,28 @@ public class Application {
         return true;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalArgumentException {
 //         TODO: 프로그램 구현
-        try {
-            String inputStr = Console.readLine();
-//          "//;\n1;2;3,4:5,q", "//;\n1;2;3,4:5";
-            String separations = ",:";
 
-            String customSeparation = extractCustomSeparation(inputStr);
-            separations += customSeparation;
+        System.out.println("덧셈할 문자열을 입력해주세요.");
+        String inputStr = Console.readLine();
+//          "//;\n1;2;3,4:5,q", "//;\n1;2;3,4:5", "-1,2,3"
+        String separations = ",:";
 
-            if (customSeparation != null) {
-//            System.out.println(customSeparation);
-                int SeparationEndIndex = inputStr.indexOf("n");
-                inputStr = inputStr.substring(SeparationEndIndex + 1);
-            }
-            String[] tokens = extractToken(inputStr, separations);
-            ArrayList<Integer> integers = extractIntegerAndDetectChar(tokens);
-            if (errorFlag) {
-                throw new IllegalArgumentException();
-            }
-            int sum = integers.stream().mapToInt(Integer::intValue).sum();
-            System.out.println("결과 : " + sum);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error: 잘못된 입력입니다.");
-            System.exit(1);
+        String customSeparation = extractCustomSeparation(inputStr);
+        separations += customSeparation;
+        System.out.println("customSeparation = " + customSeparation);
+        if (customSeparation != null) {
+            int SeparationEndIndex = inputStr.indexOf("\\n");
+            inputStr = inputStr.substring(SeparationEndIndex + 2);
         }
+        String[] tokens = extractToken(inputStr, separations);
+        ArrayList<Integer> integers = extractIntegerAndDetectChar(tokens);
+        if (errorFlag) {
+            throw new IllegalArgumentException();
+        }
+        int sum = integers.stream().mapToInt(Integer::intValue).sum();
+        System.out.println("결과 : " + sum);
 
     }
 }
