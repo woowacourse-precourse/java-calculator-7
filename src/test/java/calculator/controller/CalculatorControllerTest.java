@@ -12,7 +12,7 @@ public class CalculatorControllerTest  {
         CalculatorController controller = new CalculatorController();
 
         //when: 입력 처리
-        int result = controller.input(input);
+        int result = controller.processInput(input);
 
         //then: 결과는 0
         assertThat(result).isEqualTo(0);
@@ -25,7 +25,7 @@ public class CalculatorControllerTest  {
         CalculatorController controller = new CalculatorController();
 
         //when: 입력 처리
-        int result = controller.input(input);
+        int result = controller.processInput(input);
 
         //then: 결과는 3
         assertThat(result).isEqualTo(3);
@@ -38,7 +38,7 @@ public class CalculatorControllerTest  {
         CalculatorController controller = new CalculatorController();
 
         //when: 입력 처리
-        int result = controller.input(input);
+        int result = controller.processInput(input);
 
         //then: 결과는 8
         assertThat(result).isEqualTo(8);
@@ -51,7 +51,7 @@ public class CalculatorControllerTest  {
         CalculatorController controller = new CalculatorController();
 
         //when: 입력 처리
-        int result = controller.input(input);
+        int result = controller.processInput(input);
 
         //then: 결과는 6
         assertThat(result).isEqualTo(6);

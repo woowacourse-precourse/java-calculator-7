@@ -1,6 +1,5 @@
 package calculator.view;
 
-import calculator.model.Calculator;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
