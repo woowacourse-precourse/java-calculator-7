@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class DelimiterParserTest {
 
@@ -24,6 +25,12 @@ class DelimiterParserTest {
     public void 커스텀_구분자를_입력한_경우의_구분자(){
         String delimiters = delimiterParser.parseDelimiter("//;\\n1,2;3");
         assertThat(",|:|;").isEqualTo(delimiters); //기본 구분자와 커스텀 구분자인 ;을 포함
+    }
+
+    @Test
+    public void 커스텀_구분자를_입력_형식이_잘못된_경우의_구분자(){
+        assertThatThrownBy(() -> delimiterParser.parseDelimiter("//;//n1,2;3"))
+                .isInstanceOf(IllegalArgumentException.class).hasMessage("커스텀 구분자 지정 형식이 잘못 되었습니다.");
     }
 
     @Test
