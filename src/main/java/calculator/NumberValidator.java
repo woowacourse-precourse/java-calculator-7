@@ -11,7 +11,7 @@ public class NumberValidator {
     }
 
     private void validateParseNumber(String number) {
-        if (number.isBlank()) {
+        if (number.isEmpty()) {
             return;
         }
 
@@ -23,7 +23,7 @@ public class NumberValidator {
     }
 
     private void validatePositiveNumber(String number) {
-        if (number.isBlank()) {
+        if (number.isEmpty()) {
             return;
         }
 

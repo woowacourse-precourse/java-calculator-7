@@ -31,7 +31,7 @@ public class StringCalculator {
 
         numberValidator.validate(splitNumber);
 
-        return splitNumber.stream().map(number -> number.isBlank() ? 0.0 : Double.parseDouble(number)).toList();
+        return splitNumber.stream().map(number -> number.isEmpty() ? 0.0 : Double.parseDouble(number)).toList();
     }
 
     public Double calculate(List<Double> numberList) {
