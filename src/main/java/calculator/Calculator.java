@@ -32,7 +32,7 @@ public class Calculator {
             int separatorEndIndex = input.indexOf("\\n");
             String customSeparator = input.substring(2, separatorEndIndex);
 
-            separators.add(customSeparator);
+            separators.addAll(Arrays.asList(customSeparator.split("")));
             input = input.substring(separatorEndIndex + 2);
         }
     }
@@ -47,6 +47,9 @@ public class Calculator {
         return Arrays.stream(numbers)
                 .mapToInt(number -> {
                     int integer;
+                    if (number.isEmpty()) {
+                        throw new IllegalArgumentException(ErrorCode.TO0_MUCH_SEPARATORS.message);
+                    }
                     try {
                         integer = Integer.parseInt(number);
                     } catch (Exception e) {

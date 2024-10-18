@@ -33,6 +33,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자_입력_실수3() { // 숫자보다 많은 구분자를 사용한 경우
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("1,,2"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))
