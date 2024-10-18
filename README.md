@@ -26,8 +26,10 @@
 
 **3. 입력 값 검증**
 - [x] 빈 입력 값 검증 메서드 - checkIsInputEmpty()
+  - 제거하고 구분자로 분리하는 메서드 안에서 검증 후 빈 값이면 빈 리스트 반환하는 것으로 변경 (f456c9e1)
 - [x] 양수 검증 메서드 - checkIsPositiveNumber()
 - [x] 숫자 형식 검증 메서드 - checkHasNumberFormat()
+  - checkIsNumericAndPositive()로 통합 (58333870)
 
 **4. 결과 반환**
 - [x] 숫자의 총 합을 구하는 메서드 - getTotal()
@@ -35,6 +37,9 @@
 
 **5. 예외 처리**
 - [x] IllegalArgumentException 예외 처리
+  - 구분자 기준 추출한 숫자 안에 음수가 입력되었을때
+  - 구분자 기준 추출한 요소 중 숫자가 아닌 문자가 입력되었을때
+  - 구분자에 숫자가 입력되었을때
 
 ## ✅ 입출력 요구 사항 점검
 
