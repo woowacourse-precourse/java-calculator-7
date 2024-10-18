@@ -16,6 +16,18 @@ public class MainController {
 
         List<String> splittedValues ;
         int sumResult = 0;
+
+
+        if(checkDefaultDelimterFormat(inputString)){
+            splittedValues = SplitbyDefaultDelimiter(inputString);
+            for (String part : splittedValues) {
+                checkNagativeInt(Integer.parseInt(part));
+                sumResult += Integer.parseInt(part);
+            }
+            System.out.printf("결과 : %d", sumResult);
+            return;
+        }
+
         if (checkCustomDelimiterFormat(inputString)){
             splittedValues = SplitbyCustomDelimiter(inputString);
 
@@ -26,21 +38,12 @@ public class MainController {
             System.out.printf("결과 : %d", sumResult);
             return;
         }
-
-        if(!checkCustomDelimiterFormat(inputString) && checkDefaultDelimter(inputString)){
-            splittedValues = SplitbyDefaultDelimiter(inputString);
-            for (String part : splittedValues) {
-                checkNagativeInt(Integer.parseInt(part));
-                sumResult += Integer.parseInt(part);
-            }
-            System.out.printf("결과 : %d", sumResult);
-            return;
-        }
+        throw new IllegalArgumentException("(기본 구분자를 활용한 입력 포맷) 또는 (커스텀 구분자 지정 포맷)이 잘못되었습니다.");
 
     }
 
-    private static boolean checkDefaultDelimter(String inputString) {
-        String rex = "[,:]";
+    private static boolean checkDefaultDelimterFormat(String inputString) {
+        String rex = "^[0-9]*([,:]\\d*)+$";
         Pattern pattern = Pattern.compile(rex);
         Matcher matcher = pattern.matcher(inputString);
 
@@ -87,13 +90,9 @@ public class MainController {
     }
 
     private static List<String> SplitbyCustomDelimiter(String inputString) {
-        String prefix = inputString.substring(0, 2);
-        String suffix = inputString.substring(3, 5);
-        String customDelimiter = "";
 
-        if (prefix.equals("//") && suffix.equals("\\n")) {
-            customDelimiter = String.valueOf(inputString.charAt(2));
-        }
+        String customDelimiter = String.valueOf(inputString.charAt(2));
+
         String remainingInput = inputString.substring(5);
         List<String> customSplitValues = Arrays.asList(remainingInput.split(customDelimiter));
         return customSplitValues;
