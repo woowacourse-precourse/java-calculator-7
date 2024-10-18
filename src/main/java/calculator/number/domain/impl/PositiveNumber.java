@@ -3,7 +3,6 @@ package calculator.number.domain.impl;
 
 import calculator.number.domain.Number;
 import calculator.number.util.NumberConvertor;
-import calculator.separator.domain.Separator;
 
 import java.util.List;
 
@@ -12,8 +11,8 @@ public class PositiveNumber implements Number {
     private PositiveNumber(List<Long> numbers) {
         this.numbers = numbers;
     }
-    public static PositiveNumber of(String extractValue, Separator separator) {
-        List<Long> numbers = NumberConvertor.splitBySeparatorToList(extractValue, separator);
+    public static PositiveNumber of(List<String> numberInfo) {
+        List<Long> numbers = NumberConvertor.stringListToLongList(numberInfo);
         return new PositiveNumber(numbers);
     }
 
