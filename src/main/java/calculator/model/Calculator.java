@@ -1,18 +1,23 @@
 package calculator.model;
 
+import java.util.List;
+
 public class Calculator {
 
-    private int total = 0;
+    private final List<Integer> numbers;
+    private int result;
 
-    public int sum(int[] input) {
-        for (int i : input) {
-            total += i;
-        }
-
-        return total;
+    public Calculator(List<Integer> numbers) {
+        this.numbers = numbers;
     }
 
-    public int getTotal() {
-        return total;
+    public void sum() {
+        result = numbers.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
+
+    public int getResult() {
+        return result;
     }
 }
