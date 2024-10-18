@@ -16,20 +16,18 @@ public class Calculator {
     private Mode mode;
 
     public Calculator(String inputValue, RegDelimiter regDelimiter) {
-        this.inputValue = setInputValue(inputValue, regDelimiter);
+        this.inputValue = inputValue.substring(
+                regDelimiter.getCustomDeliEndIdx() + 1
+        );
         this.sum = 0;
         this.inputNumber = new InputNumber();
         this.inputDelimiter = new InputDelimiter();
-        this.regDelimiters = setRegDelimiters(regDelimiter);
+        this.regDelimiters = regDelimiter.getDelimiters();
         this.mode = Mode.NONE;
     }
 
     public InputDelimiter getInputDelimiter() {
         return inputDelimiter;
-    }
-
-    public String getInputValue() {
-        return inputValue;
     }
 
     public int getSum() {
@@ -40,36 +38,30 @@ public class Calculator {
         return inputNumber;
     }
 
-    public Mode getMode() {
-        return mode;
-    }
-
     public void updateMode(Mode mode) {
         this.mode = mode;
     }
 
-    private String setInputValue(String inputValue, RegDelimiter regDelimiter) {
-        int valueStartIdx = regDelimiter.getCustomDeliEndIdx() + 1;
-        return inputValue.substring(valueStartIdx);
-    }
-
-    private List<String> setRegDelimiters(RegDelimiter regDelimiter) {
-        return regDelimiter.getDelimiters();
+    private void addSum(int number) {
+        this.sum += number;
     }
 
     public void calculate() {
         if (inputValue.isEmpty()) {
             return;
         }
-        String[] inputValues = inputValue.split("");
-        for (int i=0; i<inputValues.length; i++) {
-            calculateEach(i);
-        }
+        calculateInputValue();
         calculateLeftValue();
     }
 
-    private void calculateEach(int idx) {
-        String value = inputValue.substring(idx, idx+1);
+    private void calculateInputValue() {
+        String[] inputValues = inputValue.split("");
+        for (int i=0; i<inputValues.length; i++) {
+            checkTypeAndCalculate(inputValue.substring(i, i+1));
+        }
+    }
+
+    private void checkTypeAndCalculate(String value) {
         if (isNumber(value)) {
             calculateNumber(value);
         } else {
@@ -78,8 +70,8 @@ public class Calculator {
     }
 
     private void calculateNumber(String value) {
-        validateWrongDelimiter();
-        if (mode == DELI || mode == NONE) {
+        if (isStartOfNumber()) {
+            validateWrongDelimiter();
             validatePositiveNumber(value);
             inputDelimiter.initialize();
         }
@@ -87,27 +79,35 @@ public class Calculator {
         updateMode(NUM);
     }
 
+    private boolean isStartOfNumber() {
+        return mode != NUM;
+    }
+
     private void calculateDelimiter(String value) {
-        if (mode == NUM) {
+        if (isStartOfDelimiter()) {
             addSum(inputNumber.getNumber());
             inputNumber.initialize();
         }
         inputDelimiter.addDelimiter(value);
+        checkDelimiterAndUpdateMode();
+    }
+
+    private void checkDelimiterAndUpdateMode() {
         if (inputDelimiter.isDelimiter(regDelimiters)) {
-            updateMode(DELI);
             inputDelimiter.initialize();
+            updateMode(DELI);
         } else {
             updateMode(WRONG_DELI);
         }
     }
 
+    private boolean isStartOfDelimiter() {
+        return mode == NUM;
+    }
+
     private void calculateLeftValue() {
         validateWrongDelimiter();
         addSum(inputNumber.getNumber());
-    }
-
-    private void addSum(int number) {
-        this.sum += number;
     }
 
     public boolean isNumber(String value) {

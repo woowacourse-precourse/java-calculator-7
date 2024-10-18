@@ -2,14 +2,16 @@ package calculator.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RegDelimiter {
     private List<String> delimiters;
     private int customDeliEndIdx;
 
     public RegDelimiter() {
-        this.delimiters = setDelimiters();
+        this.delimiters = new ArrayList<>(Arrays.asList(",", ":"));
         this.customDeliEndIdx = -1;
     }
 
@@ -21,11 +23,7 @@ public class RegDelimiter {
         return customDeliEndIdx;
     }
 
-    private List<String> setDelimiters() {
-        return new ArrayList<>(Arrays.asList(",", ":"));
-    }
-
-    private void updateDelimiters(String customDeli) {
+    private void addCustomDeliToDelimiters(String customDeli) {
         this.delimiters.add(customDeli);
     }
 
@@ -33,9 +31,12 @@ public class RegDelimiter {
         this.customDeliEndIdx = idx;
     }
 
-    public void findCustomDelimiter(String value) {
+    public void registerDelimiter(String value) {
         if (includesCustomDelimiter(value)) {
-            addCustomDelimiter(value);
+            CustomDelimiter customDeli = findCustomDelimiter(value);
+
+            addCustomDeliToDelimiters(customDeli.getValue());
+            updateCustomDeliEndIdx(customDeli.getValueEndIdx());
         }
     }
 
@@ -48,9 +49,9 @@ public class RegDelimiter {
         return false;
     }
 
-    public void addCustomDelimiter(String value) {
-        String customDeli = "";
+    public CustomDelimiter findCustomDelimiter(String value) {
         int valueLength = value.length();
+        String customDeli = "";
         int customDeliEndIdx = -1;
 
         for (int i=2; i<valueLength; i++) {
@@ -60,12 +61,9 @@ public class RegDelimiter {
             }
             customDeli += value.substring(i, i+1);
         }
-
         validateIfCustomDeliEnds(customDeliEndIdx);
         validateCustomDelimiter(customDeli);
-
-        updateDelimiters(customDeli);
-        updateCustomDeliEndIdx(customDeliEndIdx);
+        return new CustomDelimiter(customDeli, customDeliEndIdx);
     }
 
     private boolean checkCustomDelimiterEnd(int idx, String value, int valueLength) {
@@ -92,6 +90,24 @@ public class RegDelimiter {
             || customDeli.matches(numberRegex)) {
                 throw new IllegalArgumentException("잘못된 구분자입니다. '//', '\\n', '-', ',', ':' 또는 숫자를 제외한 문자를 입력해주세요.");
             }
+        }
+    }
+
+    private static class CustomDelimiter {
+        private String value;
+        private int valueEndIdx;
+
+        private CustomDelimiter(String value, int valueEndIdx) {
+            this.value = value;
+            this.valueEndIdx = valueEndIdx;
+        }
+
+        private String getValue() {
+            return value;
+        }
+
+        private int getValueEndIdx() {
+            return valueEndIdx;
         }
     }
 }

@@ -22,7 +22,7 @@ public class CalculatorController {
     private Calculator postCalculator() {
         String inputValue = inputView.inputValue();
         RegDelimiter regDelimiter = new RegDelimiter();
-        regDelimiter.findCustomDelimiter(inputValue);
+        regDelimiter.registerDelimiter(inputValue);
         return new Calculator(inputValue, regDelimiter);
     }
 
