@@ -199,7 +199,7 @@ More : [Commit Message convention](https://gist.github.com/9941e89d80e2bc58a153.
     - `커스텀 구분자(//\n)로 문자열 분리` 기능
 
 - CalculateValidation
-    - `계산기 입력 검증` 기능
+    - `계산(List<String> -> List<Integer>)에 필요한 검증` 기능
 
 ### Exception
 
