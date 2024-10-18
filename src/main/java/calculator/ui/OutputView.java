@@ -3,12 +3,16 @@ package calculator.ui;
 import static calculator.global.constant.Message.*;
 
 import calculator.global.constant.Message;
-import java.util.function.ObjIntConsumer;
+
 
 public class OutputView {
 
     public void printReadLettersMessage() {
         println(READ_LETTERS_MESSAGE);
+    }
+
+    public void printResult(int result) {
+        println(RESULT_MESSAGE + Integer.toString(result));
     }
 
     private void println(String message) {
