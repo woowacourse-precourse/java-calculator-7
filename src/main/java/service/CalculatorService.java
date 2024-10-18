@@ -31,6 +31,16 @@ public class CalculatorService {
     }
 
     public int[] splitByDelimiter(String input){
-
+        String[] arr;
+        int[] numbers;
+        if(input.matches(".*[^0-9,:].*")){
+            throw new IllegalArgumentException("잘못된 구분자가 포함되어 있습니다.");
+        }
+        arr = input.split(",|:");
+        numbers = new int[arr.length];
+        for(int i = 0; i < arr.length; i++){
+            numbers[i] = Integer.parseInt(arr[i]);
+        }
+        return numbers;
     }
 }
