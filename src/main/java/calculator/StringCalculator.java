@@ -1,34 +1,23 @@
 package calculator;
 
 public class StringCalculator {
+    private final StringParser parser = new StringParser();
+    private final StringValidator validator = new StringValidator();
+
+
     public int add(String input) {
+        // 빈 입력 처리
         if (input == null || input.isEmpty()) {
             return 0;
         }
 
-        // 구분자 정의
-        String delimiter = "[,:]";
+        // 문자열 파싱
+        String[] tokens = parser.parse(input);
 
-        // 커스텀 구분자 처리
-        if (input.startsWith("//")) {
-            // \\n라고 적어야 `\`, `n` 검색 가능
-            // \\는 escape 문자로, `\\`를 `\` 한 글자로 취급함
-            int delimiterIndex = input.indexOf("\\n");
-            // 커스텀 구분자 입력이 정상적으로 되었는지 확인
-            if (delimiterIndex != -1) {
-                // 커스텀 구분자가 2글자 이상일 경우를 가정 -> 정규 표현식 사용
-                delimiter = "[" + input.substring(2, delimiterIndex) + "]";
-                // 기존 방식: \n = 1글자 => Index + 1
-                // 현재 방식: \\n = 2글자 => Index + 2 (escape 문자 고려)
-                input = input.substring(delimiterIndex + 2);
-            } else {
-                throw new IllegalArgumentException("유효하지 않은 커스텀 구분자 형식입니다.");
-            }
-        }
-        // 정의된 구분자로 문자열 처리
-        String[] tokens = input.split(delimiter);
+        //유효성 검사
+        validator.validate(tokens);
 
-        // 처리된 문자열 덧셈 계산
+        // 덧셈 결과 반환
         return sumTokens(tokens);
     }
 
@@ -36,20 +25,7 @@ public class StringCalculator {
     private int sumTokens(String[] tokens) {
         int sum = 0;
         for (String token : tokens) {
-            // 구분자만 입력한 경우
-            if (token.trim().isEmpty()) {
-                continue;
-            }
-            try {
-                int number = Integer.parseInt(token);
-                // 음수인 경우
-                if (number < 0) {
-                    throw new IllegalArgumentException("음수는 허용되지 않는 값입니다:" + number);
-                }
-                sum += number;
-            } catch (NumberFormatException e) { // 숫자가 아닌 경우
-                throw new IllegalArgumentException("유효하지 않은 값입니다:" + token);
-            }
+            sum += Integer.parseInt(token);
         }
         return sum;
     }
