@@ -37,7 +37,7 @@ public class Application {
         return sum;
     }
 
-    //나눠진 문자들이 전부 숫자인지 확인하는 메서드
+    //나눠진 문자들이 합당한지 확인하는 메서드
     public static boolean isNum(String[] parts) {
         for (String part : parts) {
             stringToChar(part);
@@ -61,13 +61,14 @@ public class Application {
         }
     }
 
-    //
+    //공백 또는 아무것도 입력 안했는지 확인하는 메서드
     public static void isSpace(String part) {
         if (part.isBlank() || part.isEmpty()) {
             throw new IllegalArgumentException();
         }
     }
 
+    //음수인지 확인하는 메서드
     public static void isMinus(String part) {
         int num = Integer.parseInt(part);
         if (num < 0) {
@@ -80,8 +81,7 @@ public class Application {
     public static String delimiter(String input) {
         if (input.startsWith("//") && input.contains("\\n")) {
             int index = input.indexOf("\\n");
-            return "[,:" + input.substring(2, index) + "]";
-
+            return "[,:]" + input.substring(2, index);
         }
         return "[,:]";
     }
