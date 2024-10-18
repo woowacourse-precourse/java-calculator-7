@@ -59,5 +59,7 @@ public class Application {
             // 파싱된 숫자들을 모두 더한다.
             result += number;
         }
+
+        System.out.println("결과 : " + result);
     }
 }
