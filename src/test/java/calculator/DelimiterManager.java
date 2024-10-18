@@ -13,4 +13,9 @@ public class DelimiterManager {
         defaultDelimiters.add(COMMA);
         defaultDelimiters.add(COLON);
     }
+
+    public void registerCustomDelimiter(String delimiter) {
+        customDelimiters.add(delimiter);
+    }
+
 }
