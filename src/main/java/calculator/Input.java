@@ -27,8 +27,18 @@ public class Input {
         }
 
         int[] numbers = new int[splitStr.length];
-        for (int i = 0; i < splitStr.length; i++) {
-            numbers[i] = Integer.parseInt(splitStr[i]);
+        try {
+            for (int i = 0; i < splitStr.length; i++) {
+                numbers[i] = Integer.parseInt(splitStr[i]);
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
+        }
+
+        for (int number : numbers) {
+            if (number < 0) {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            }
         }
         return numbers;
     }
