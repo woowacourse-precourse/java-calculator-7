@@ -8,11 +8,12 @@ public class splitNumbers {
     // 사용 안하는 경우 기능분리 측면에서 이상해질 우려가 있음
     public static ArrayList<String> splitNums(String str, String custom) {
 
-        int stardIdx = str.indexOf("//");
-        int endIdx = str.indexOf("\n", stardIdx);
+        int startIdx = str.indexOf("//");
+        int endIdx = str.indexOf("\\n", startIdx);
 
-        if (stardIdx != -1 || endIdx != -1) {
-            str = str.substring(0, stardIdx) + str.substring(endIdx + 1);
+        if (startIdx != -1 && endIdx != -1) {
+            // "//"와 "\\n" 사이의 구분자를 제거하고 나머지 문자열만 남김
+            str = str.substring(endIdx + 2);
         }
 
         if (custom.isEmpty()) {

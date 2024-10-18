@@ -10,7 +10,7 @@ class FindCustomSpliterTest {
     @Test
     void testCustomSplitterWithValidDelimiter() {
         findCustomSpliter splitter = new findCustomSpliter();
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
         String expected = ";";
         assertEquals(expected, splitter.customSpliter(input));
     }
@@ -18,7 +18,7 @@ class FindCustomSpliterTest {
     @Test
     void testCustomSplitterWithDifferentDelimiter() {
         findCustomSpliter splitter = new findCustomSpliter();
-        String input = "//,\n4,5,6";
+        String input = "//,\\n4,5,6";
         String expected = ",";
         assertEquals(expected, splitter.customSpliter(input));
     }

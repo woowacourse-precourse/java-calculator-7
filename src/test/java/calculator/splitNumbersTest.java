@@ -10,7 +10,7 @@ class SplitNumbersTest {
 
     @Test
     void testSplitNumsWithCustomDelimiter() {
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
         String custom = ";";
         ArrayList<String> expected = new ArrayList<>(Arrays.asList("1", "2", "3"));
         assertEquals(expected, splitNumbers.splitNums(input, custom));
@@ -26,7 +26,7 @@ class SplitNumbersTest {
 
     @Test
     void testSplitNumsWithMultipleDelimiters() {
-        String input = "//#\n1#2,3:4";
+        String input = "//#\\n1#2,3:4";
         String custom = "#";
         ArrayList<String> expected = new ArrayList<>(Arrays.asList("1", "2", "3", "4"));
         assertEquals(expected, splitNumbers.splitNums(input, custom));
