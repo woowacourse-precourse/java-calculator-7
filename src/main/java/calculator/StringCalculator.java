@@ -16,8 +16,8 @@ public class StringCalculator {
 
         if (userInput.isCustom()) {
             int customDelimiterEndIndex = findCustomDelimiterEndIndex(userInput);
-            String customDelimiter = findCustomDelimiter(userInput, customDelimiterEndIndex);
-            String updateDelimiter = generateUpdateDelimiter(delimiterResult, customDelimiter);
+            CustomDelimiter customDelimiter = new CustomDelimiter(findCustomDelimiter(userInput, customDelimiterEndIndex));
+            String updateDelimiter = generateUpdateDelimiter(delimiterResult, customDelimiter.getCustomDelimiter());
             delimiterResult = new DelimiterResult(updateDelimiter);
             input = generateCombinedInput(userInput, customDelimiterEndIndex);
         }
