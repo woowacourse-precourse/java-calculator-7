@@ -62,7 +62,7 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 커스텀_구분자_숫자_사용() {
-        assertSimpleTest(() -> assertThatThrownBy(() -> runException("//1\\n2"))
+        assertSimpleTest(() -> assertThatThrownBy(() -> runException("//1\\n3"))
                 .isInstanceOf(IllegalArgumentException.class));
     }
 
