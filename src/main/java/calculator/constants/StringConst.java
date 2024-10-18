@@ -13,4 +13,8 @@ public class StringConst {
     public static final String COMMA = ",";
     public static final String COLON = ":";
 
+
+    public static final String DEFAULT_INPUT = "DefaultInput";
+    public static final String CUSTOM_INPUT = "CustomInput";
+
 }
