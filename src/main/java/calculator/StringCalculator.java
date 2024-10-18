@@ -13,6 +13,7 @@ public class StringCalculator {
         }
 
         String[] numbers = delimiterParser.splitNumbers(input);
+
         return sumNumbers(numbers);
     }
 
@@ -20,12 +21,16 @@ public class StringCalculator {
         int sum = 0;
 
         for (String number : numbers) {
-            int num = Integer.parseInt(number);
+            try {
+                int num = Integer.parseInt(number);
 
-            if (num < 0) {
-                // 예외 발생
+                if (num < 0) {
+                    throw new IllegalArgumentException("음수가 포함되었습니다.");
+                }
+                sum += num;
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("숫자가 아닌 값이 포함되었습니다.");
             }
-            sum += num;
         }
         return sum;
     }

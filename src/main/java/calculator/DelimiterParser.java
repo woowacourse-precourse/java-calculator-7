@@ -14,8 +14,14 @@ public class DelimiterParser {
             int delimiterEndIndex = numbersPart.indexOf("\\n");
             int numbersStartIndex = delimiterEndIndex + 2;
 
-            if (delimiterEndIndex == -1) {
-                // 잘못된 입력. 예외 발생.
+            // \n이 존재하지 않거나 //와 \n사이에 구분자가 없는 경우
+            if (delimiterEndIndex == -1 || delimiterEndIndex == 2) {
+                throw new IllegalArgumentException("잘못된 입력값입니다: " + input);
+            }
+
+            // 커스텀 구분자만 지정하고 숫자가 없는 경우(ex. "//;\\n")
+            if (input.length() < numbersStartIndex) {
+                return new String[]{};
             }
 
             String customDelimiter = input.substring(CUSTOM_DELIMITER_PREFIX.length(), delimiterEndIndex);
