@@ -8,12 +8,10 @@ public class Preprocessor {
 
     private final DelimeterSegmentProcessor delimeterSegmentProcessor;
     private final CalculationSegmentProcessor calculationSegmentProcessor;
-    private final SplitManager splitManager;
 
-    public Preprocessor(DelimeterSegmentProcessor delimeterSegmentProcessor, CalculationSegmentProcessor calculationSegmentProcessor, SplitManager splitManager) {
+    public Preprocessor(DelimeterSegmentProcessor delimeterSegmentProcessor, CalculationSegmentProcessor calculationSegmentProcessor) {
         this.delimeterSegmentProcessor = delimeterSegmentProcessor;
         this.calculationSegmentProcessor = calculationSegmentProcessor;
-        this.splitManager = splitManager;
     }
 
     private boolean validateDelimeterRequest(String input) {
@@ -47,6 +45,6 @@ public class Preprocessor {
     }
 
     public List<String> extractSumNumbers(List<String> delimeterList, String input){
-        return splitManager.extractNumbers(delimeterList,input);
+        return calculationSegmentProcessor.extractNumbers(delimeterList,input);
     }
 }
