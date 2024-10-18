@@ -18,7 +18,6 @@ public abstract class ValidationFilter {
         if (next == null) {
             return true;
         }
-
         return next.validate(str);
     }
 }

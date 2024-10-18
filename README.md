@@ -51,17 +51,16 @@ git clone -b as --single-branch https://github.com/pug9483/java-calculator-7.git
 - [x] 구분자로 분리된 숫자들을 이용하여 합을 구한다.
 - [x] 일반 구분자 커스텀 구분자를 핸들러 기반으로 구현한다.
 - [ ] int 범위를 벗어날 경우를 생각하여 구현한다.
-- [ ] 입력 값을 검증한다.
+- [x] 입력 값을 검증한다.
     - [x] 음수가 들어오지 않는지 확인하는 Filter 클래스를 생성한다.
-    - [ ] 구분자와 숫자가 번갈아 나오는지 확인하는 Filter 클래스를 생성한다.
 
 ### 예외
 
-- [ ] 구분자와 숫자는 한 번씩 번갈아가며 입력으로 들어오지 않으면 `IllegalException` 예외가 발생한다.
-- [x] 음수가 들어올 경우 `IllegalException` 예외가 발생한다.
-- [x] 일반 구분자 클래스에서 `쉼표(,)`,`콜론(:)` 외 다른 구분자가 들어오면 `IllegalException` 예외가 발생한다.
-- [x] 커스텀 구분자 클래스에서 커스텀 구분자 외 다른 구분자가 포함되어 있으면 `IllegalException` 예외가 발생한다.
-- [x] `//`와 `\n`사이에 구분자가 들어오지 않을 경우 `IllegalException` 예외가 발생한다.
+- [ ] 구분자와 숫자는 한 번씩 번갈아가며 입력으로 들어오지 않으면 `IllegalArgumentException` 예외가 발생한다.
+- [x] 음수가 들어올 경우 `IllegalArgumentException` 예외가 발생한다.
+- [x] 일반 구분자 클래스에서 `쉼표(,)`,`콜론(:)` 외 다른 구분자가 들어오면 `IllegalArgumentException` 예외가 발생한다.
+- [x] 커스텀 구분자 클래스에서 커스텀 구분자 외 다른 구분자가 포함되어 있으면 `IllegalArgumentException` 예외가 발생한다.
+- [x] `//`와 `\n`사이에 구분자가 들어오지 않을 경우 `IllegalArgumentException` 예외가 발생한다.
 
 --- 
 

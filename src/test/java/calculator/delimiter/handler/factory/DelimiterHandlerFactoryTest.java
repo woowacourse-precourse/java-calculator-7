@@ -1,4 +1,4 @@
-package calculator.delimiter.factory;
+package calculator.delimiter.handler.factory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -50,7 +50,6 @@ class DelimiterHandlerFactoryTest {
         DelimiterHandler handler = factory.getHandler(str);
 
         // then
-        System.out.println(handler);
         assertThat(handler).isInstanceOf(NoDelimiterHandler.class);
     }
 }
