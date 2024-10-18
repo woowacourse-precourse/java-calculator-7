@@ -6,15 +6,20 @@ import calculator.view.CalculatorInputer;
 import calculator.view.CalculatorOutputer;
 
 public class CalculatorController {
+    private final CalculatorOutputer calculatorOutputer;
+    private final CalculatorInputer calculatorInputer;
+    private final CalculatorService calculatorService;
 
-    public void run() {
-        CalculatorOutputer calculatorOutputer = new CalculatorOutputer();
+    public CalculatorController() {
+        this.calculatorOutputer = new CalculatorOutputer();
+        this.calculatorInputer = new CalculatorInputer();
+        this.calculatorService = new CalculatorService();
+    }
+
+    public void processSumStringCalculation() {
         calculatorOutputer.printIntro();
-
-        CalculatorInputer calculatorInputer = new CalculatorInputer();
         String inputString = calculatorInputer.getInput();
 
-        CalculatorService calculatorService = new CalculatorService();
         int result = calculatorService.calculateSumString(inputString);
 
         calculatorOutputer.printResult(result);
