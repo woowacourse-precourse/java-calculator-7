@@ -8,6 +8,7 @@ public class Application {
         String delimiter = getCustomDelimiter(input);
         String[] numbers = splitString(input, delimiter);
         int sum = calculateSum(numbers);
+        print(sum);
     }
 
     private static String getInput() {
@@ -56,7 +57,9 @@ public class Application {
     }
 
 
-
+    private static void print(int sum){
+        System.out.println("결과 : " + sum); // 결과 출력
+    }
 
 
 
