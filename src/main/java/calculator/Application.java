@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.domain.Calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 import java.util.ArrayList;
@@ -8,11 +9,12 @@ import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
+        Calculator calculator = new Calculator();
+
+        getUserInput(calculator);
+
         List<String> processedInput = new ArrayList<>();
         int total = 0;
-
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = Console.readLine();
 
         if (input == null) {
             throw new IllegalArgumentException();
@@ -54,5 +56,10 @@ public class Application {
         }
 
         System.out.println("결과 : " + total);
+    }
+
+    static void getUserInput(Calculator calculator) {
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        calculator.userInput = Console.readLine();
     }
 }
