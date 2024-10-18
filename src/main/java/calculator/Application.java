@@ -19,6 +19,7 @@ public class Application {
 
     // 입력된 문자열을 구분자로 나누는 메서드
     public static String[] splitInput(String input) {
+        input.replaceAll("",);
         return input.split("[,:]"); // 콤마와 콜론을 구분자로 사용하여 문자열을 나눔
     }
 
@@ -34,10 +35,11 @@ public class Application {
 
     //나눠진 문자들이 전부 숫자인지 확인하는 메서드
     public static boolean isNum(String[] parts) {
+
         for (String part : parts) {
             for (char c : part.toCharArray()) {
                 if (!Character.isDigit(c)) {
-                    throw new IllegalArgumentException(); // 숫자가 아닌 문자가 있으면 false
+                    throw new IllegalArgumentException(); //
                 }
             }
         }
