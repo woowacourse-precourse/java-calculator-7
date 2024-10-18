@@ -1,13 +1,16 @@
 package calculator.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class NumberParser {
     private final Divider divider;
-    private static String DIVIDER_SPLIT_FORMAT = "%s|%s|%s";
+    private static final String DIVIDER_SPLIT_FORMAT = "%s|%s|%s";
+    private static final String ESCAPE_CHARACTER = "\\";
+    private static final List<String> META_CHARACTERS = new ArrayList<>(List.of(
+            "*", "^", "$", ".", "+", "?", "|", "\\",
+            "[", "]", "{", "}", "(", ")")
+    );
 
     public NumberParser(Divider divider) {
         this.divider = divider;
@@ -20,6 +23,7 @@ public class NumberParser {
 
     private List<Integer> extractNumberValue(CalculatedValue calculatedValue) {
         List<Integer> result = new ArrayList<>();
+        System.out.println("커스텀              " + divider.getCustomDivider());
         String dividers = formatDividerSplit();
         String[] values = calculatedValue.getValue().split(dividers);
 
@@ -37,6 +41,7 @@ public class NumberParser {
             return Integer.parseInt(value);
         } catch (IllegalArgumentException e) {
             validateCustomDividerMinusAndNumberValueNegative(value);
+
             throw new IllegalArgumentException("등록되지 않는 구분자가 있습니다." + value);
         }
     }
@@ -57,7 +62,22 @@ public class NumberParser {
         return String.format(DIVIDER_SPLIT_FORMAT,
                 divider.getClon(),
                 divider.getComma()
-                , divider.getCustomDivider());
+                , handleMetaCharacter(divider.getCustomDivider()));
+    }
+
+    private String handleMetaCharacter(String customDivider) {
+        if (isMetaChar(customDivider)) {
+            return addEscapeCharToMetaChar(customDivider);
+        }
+        return customDivider;
+    }
+
+    private boolean isMetaChar(String ch) {
+        return META_CHARACTERS.contains(ch);
+    }
+
+    private String addEscapeCharToMetaChar(String metaCharacter) {
+        return ESCAPE_CHARACTER + metaCharacter;
     }
 
 }
