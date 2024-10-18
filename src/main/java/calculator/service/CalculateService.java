@@ -12,7 +12,7 @@ public class CalculateService {
     private static final String customDelimeterPostfix = "\\n";
 
     //임시 메서드
-    public Long calculate(final String userInput) {
+    public long calculate(final String userInput) {
 
         Delimeters delimeters = new Delimeters();
         addDelimeter(userInput, delimeters);
