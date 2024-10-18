@@ -1,6 +1,6 @@
 package calculator.util;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,16 +14,27 @@ public class Util {
     private static final String BASIC_SEPARATOR = "[,:]";
     private static final String CUSTOM_SEPARATOR_REGEX = "//(.)\\\\n(.*)";
 
-    public List<Integer> extract(String text){
-        String[] extractList = separatorExtract(text);
-        validExtractList(extractList);
-        return Arrays.stream(extractList).map(Integer::parseInt).collect(Collectors.toList());
-    }
-    private String[] separatorExtract(String text){
-        if(text.startsWith("//")){
-            return customSeparatorExtract(text);
+    public List<Integer> extract(String text) {
+        List<String> extractList = new ArrayList<>(separatorExtract(text));
+        extractList = checkListSize(extractList);
+        if (!extractList.isEmpty()) {
+            validExtractList(extractList);
         }
-        return basicSeparatorExtract(text);
+        return extractList.stream()
+                .map(Integer::parseInt).collect(Collectors.toList());
+    }
+
+    private List<String> checkListSize(List<String> list){
+        return list.stream()
+                .filter(s -> !s.isEmpty())
+                .collect(Collectors.toList());
+    }
+
+    private List<String> separatorExtract(String text){
+        if(text.startsWith("//")){
+            return List.of(customSeparatorExtract(text));
+        }
+        return List.of(basicSeparatorExtract(text));
     }
 
     private String[] basicSeparatorExtract(String text){

@@ -1,6 +1,6 @@
 package calculator.util;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,12 +8,10 @@ public class Validator {
 
     private static final String CUSTOM_SEPARATOR_REGEX = "//(.)\\\\n(.*)";
 
-    public static void validExtractList(String[] inputExtractText) {
-        if (!Arrays.stream(inputExtractText).toList().isEmpty()){
-            for (String text : inputExtractText) {
-                validNumberFormat(text);
-                validPositiveNumber(Integer.parseInt(text));
-            }
+    public static void validExtractList(List<String> inputExtractText) {
+        for (String text : inputExtractText) {
+            validNumberFormat(text);
+            validPositiveNumber(Integer.parseInt(text));
         }
     }
 
