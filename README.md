@@ -33,7 +33,8 @@
      └── java
          └── calculator
              ├── model
-             │   ├── CalculatorTest.java           // Calculator 클래스의 테스트 코드
+             │   ├── CalculatorImplTest.java       // Calculator 클래스의 테스트 코드
+             │   └── ExtractNumberTest.java        // ExtractNumber 클래스의 테스트 코드           
              └── controller
                  └── CalculatorControllerTest.java // CalculatorController 테스트 코드
 ```
