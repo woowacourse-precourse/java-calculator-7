@@ -28,7 +28,7 @@ public class InputParser {
     }
 
     private String escapeDelimiter(String customDelimiter) {
-        if (customDelimiter.equals("\\")) {
+        if (customDelimiter.contains("\\")) {
             customDelimiter = customDelimiter.replace("\\", "\\\\");
         }
         return customDelimiter;
