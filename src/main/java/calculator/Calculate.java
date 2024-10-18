@@ -1,6 +1,7 @@
 package calculator;
 
 public class Calculate {
+    // 문자열로 숫자 합 계산
     public static Number sumString(String input) {
 
         double sum = 0;
