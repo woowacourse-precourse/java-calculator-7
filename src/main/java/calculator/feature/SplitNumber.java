@@ -4,10 +4,10 @@ import java.util.regex.Pattern;
 
 public class SplitNumber {
 
-    Character[] delimiters;
+    char[] delimiters;
     String str;
 
-    public SplitNumber(Character[] delimiters, String str) {
+    public SplitNumber(char[] delimiters, String str) {
         this.delimiters = delimiters;
         this.str = str;
     }
