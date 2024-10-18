@@ -10,7 +10,9 @@ public class Calculator {
 
         String delimiter = ",|:";
 
-        CustomDelimeterParser.parse(input_str, delimiter);
+        String[] result = CustomDelimeterParser.parse(input_str, delimiter);
+        input_str = result[0];
+        delimiter = result[1];
 
         int sum = 0;
         String[] str_nums = input_str.split(delimiter);
