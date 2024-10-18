@@ -9,4 +9,8 @@ public class Separator {
         separators.add(',');
         separators.add(':');
     }
+
+    public void addNewSeparators(char separator) {
+        separators.add(separator);
+    }
 }
