@@ -19,6 +19,10 @@ public class CalculatorService {
 
         // 구분자로 문자열 분리
         separatorFormula(formula);
+
+        // 숫자 또는 구분자가 아닌 값이 입력된 경우
+        if (!checkValidNumber())
+            throw new IllegalArgumentException("올바르지 않은 문자열이 입력됐습니다.");
     }
 
     public void separatorFormula(String formula) {
@@ -28,6 +32,15 @@ public class CalculatorService {
         // 문자열을 구분자들로 분리
         String[] numbers = formula.split(separatorRegex);
 
+        // 숫자 리스트에 숫자 담기
         numberList.addAll(Arrays.asList(numbers));
+    }
+
+    public Boolean checkValidNumber() {
+        for (String number : numberList) {
+            if (number.matches(".*[^0-9].*"))
+                return false;
+        }
+        return true;
     }
 }
