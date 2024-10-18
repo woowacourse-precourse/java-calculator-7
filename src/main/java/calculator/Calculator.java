@@ -21,8 +21,8 @@ public class Calculator {
         }
     }
 
-    private void addResult(int[] customNumberSeparator) {
-        for (int i : customNumberSeparator) {
+    private void addResult(int[] numberSeparator) {
+        for (int i : numberSeparator) {
             result += i;
         }
     }
