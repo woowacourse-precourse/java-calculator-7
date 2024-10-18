@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.parser.InputStringParser;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
