@@ -10,6 +10,7 @@ public class Calculator {
 
     private String inputStr;
     private ArrayList<Integer> numberList = new ArrayList<>();
+    private int result;
 
     public Calculator(Delimiter delimiter){
         this.delimiter = delimiter;
@@ -53,6 +54,15 @@ public class Calculator {
             }
         }
         numberList.add(num);
+    }
+
+    public void plusCalculate(){
+        for(int n : numberList){
+            result+=n;
+            if(result>=CalculatorConstant.LIMIT_NUMBER){
+                throw new IllegalArgumentException();
+            }
+        }
     }
 
 }
