@@ -1,8 +1,12 @@
 package calculator.view;
 
+import java.math.BigInteger;
+
 public class OutputView {
 
-    public void printResult(final int result) {
-        System.out.println(String.format("결과 : %d", result));
+    private static final String OUTPUT_FORMAT = "결과 : %d";
+
+    public void printResult(BigInteger result) {
+        System.out.println(String.format(OUTPUT_FORMAT, result));
     }
 }

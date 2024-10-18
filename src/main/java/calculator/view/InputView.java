@@ -8,8 +8,10 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
 
+    private static final String INPUT_FORMAT = "덧셈할 문자열을 입력해 주세요.";
+
     public Command readCommand() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        System.out.println(INPUT_FORMAT);
         return Command.from(Console.readLine());
     }
 
