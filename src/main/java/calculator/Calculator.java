@@ -2,11 +2,14 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.HashSet;
+import java.util.List;
+import java.util.regex.Pattern;
 
 public class Calculator {
 
     private String equation;
     private String delimiters;
+    private List<Long> positiveNumbers;
     private String customDelimiter;
     private final String customDelimiterStart;
     private final String customDelimiterEnd;
@@ -60,9 +63,30 @@ public class Calculator {
         delimiters = sb.toString();
     }
 
+    private boolean isPositiveNumber(String number) {
+        String regEx = "[0-9]*";
+        return Pattern.matches(regEx, number);
+    }
+
+    private void parsePositiveNumbers() {
+        String regEx = "[" + delimiters + "]";
+        String[] numbers = equation.split(regEx);
+
+        for (String number : numbers) {
+            if (number.isEmpty()) {
+                positiveNumbers.add(0L);
+            } else if (!isPositiveNumber(number)) {
+                throw new IllegalArgumentException();
+            } else {
+                positiveNumbers.add(Long.parseLong(number));
+            }
+        }
+    }
+
     public void operate() {
         equation = readFromConsole();
         separateCustomDelimiter();
         parseDelimiter();
+        parsePositiveNumbers();
     }
 }
