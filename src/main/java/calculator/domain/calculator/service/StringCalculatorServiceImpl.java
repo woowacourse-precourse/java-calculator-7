@@ -5,6 +5,17 @@ import java.util.Arrays;
 
 public class StringCalculatorServiceImpl implements StringCalculatorService {
 
+    private static StringCalculatorServiceImpl instance;
+
+    private StringCalculatorServiceImpl() {}
+
+    public static StringCalculatorService getInstance() {
+        if (instance == null) {
+            instance = new StringCalculatorServiceImpl();
+        }
+        return instance;
+    }
+
     @Override
     public int calculate(String input) {
         final StringCalculator stringCalculator = StringCalculator.of(input);
