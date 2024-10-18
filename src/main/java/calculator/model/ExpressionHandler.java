@@ -4,17 +4,24 @@ import java.util.StringTokenizer;
 
 public class ExpressionHandler {
 
+    private String expression;
     private String delimiters;
+    private boolean customDelimiterFlag;
 
-    public String filterExpression(String expression, boolean customDelimiterFlag) {
+    public ExpressionHandler(String expression, String delimiters, boolean customDelimiterFlag) {
+        this.expression = expression;
+        this.delimiters = delimiters;
+        this.customDelimiterFlag = customDelimiterFlag;
+    }
+
+    public String filterExpression() {
         if (customDelimiterFlag) {
             expression = expression.substring(5);
         }
         return expression;
     }
 
-    public StringTokenizer tokenizeExpression(String expression) {
-        setDelimiter();
+    public StringTokenizer tokenizeExpression() {
         return new StringTokenizer(expression, delimiters, true);
     }
 
@@ -44,7 +51,7 @@ public class ExpressionHandler {
         // 짝수면 숫자(양의 정수)여야함
         if (t % 2 == 0) {
             try {
-                if (Integer.parseInt(token) >= 0){
+                if (Integer.parseInt(token) >= 0) {
                     return true;
                 }
                 else {
@@ -55,16 +62,11 @@ public class ExpressionHandler {
             }
         }
         // 홀수면 delimiters 중 여야함
-        else if (delimiters.contains(token)){
+        else if (delimiters.contains(token)) {
             return false;
         } else {
             throw new IllegalArgumentException();
         }
-    }
-
-    private void setDelimiter(){
-        DelimiterHandler delimiterHandler = new DelimiterHandler();
-        delimiters = delimiterHandler.getAllDelimiters();
     }
 
 }

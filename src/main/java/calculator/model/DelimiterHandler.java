@@ -2,12 +2,10 @@ package calculator.model;
 
 public class DelimiterHandler {
 
-    // final 더 공부
-    private String customStart ="//";
-    private String customEnd ="\\n";
+    private final String customStart = "//";
+    private final String customEnd = "\\n";
 
-    private String delimiters=",:";
-
+    private String delimiters = ",:";
     private boolean customDelimiterFlag = false;
 
     private boolean checkDelimiter(String expression) {

@@ -41,14 +41,14 @@ class ApplicationTest extends NsTest {
 
     @Test
     void filterExpressionTest1(){
-        ExpressionHandler expressionHandler = new ExpressionHandler();
-        String filtered = expressionHandler.filterExpression("//;\\n1,2,", true);
+        ExpressionHandler expressionHandler = new ExpressionHandler("//;\\n1,2,",",:;" , true);
+        String filtered = expressionHandler.filterExpression();
         assertThat(filtered).contains("1,2,");
     }
     @Test
     void filterExpressionTest2(){
-        ExpressionHandler expressionHandler = new ExpressionHandler();
-        String filtered = expressionHandler.filterExpression("/;\\n1,2,", false);
+        ExpressionHandler expressionHandler = new ExpressionHandler("/;\\n1,2,",",:;" ,false);
+        String filtered = expressionHandler.filterExpression();
         assertThat(filtered).contains("/;\\n1,2,");
     }
 
@@ -56,10 +56,10 @@ class ApplicationTest extends NsTest {
     void tokenizeExpressionTest1(){
         String expression = "1,2:33";
 
-        ExpressionHandler expressionHandler = new ExpressionHandler();
-        expression = expressionHandler.filterExpression(expression, false);
+        ExpressionHandler expressionHandler = new ExpressionHandler(expression,",:" ,false);
+        expression = expressionHandler.filterExpression();
 
-        StringTokenizer tokenizedExpression = expressionHandler.tokenizeExpression(expression);
+        StringTokenizer tokenizedExpression = expressionHandler.tokenizeExpression();
         String[] expectedTokens = {"1", ",", "2", ":", "33"};
 
         int index = 0;
@@ -73,10 +73,10 @@ class ApplicationTest extends NsTest {
     void getSumTest1(){
         String expression = "1,2:33";
 
-        ExpressionHandler expressionHandler = new ExpressionHandler();
-        expression = expressionHandler.filterExpression(expression, false);
+        ExpressionHandler expressionHandler = new ExpressionHandler(expression,",:" , false);
+        expression = expressionHandler.filterExpression();
 
-        StringTokenizer tokenizedExpression = expressionHandler.tokenizeExpression(expression);
+        StringTokenizer tokenizedExpression = expressionHandler.tokenizeExpression();
         int result = expressionHandler.getSum(tokenizedExpression);
 
         assertThat(result).isEqualTo(1+2+33);
@@ -122,8 +122,22 @@ class ApplicationTest extends NsTest {
     @Test
     void inputWellCaseTest1() {
         assertSimpleTest(() -> {
-            run("//;\\n1");
-            assertThat(output()).contains("결과 : 1");
+            run("//.\\n1.2");
+            assertThat(output()).contains("결과 : 3");
+        });
+    }
+    @Test
+    void inputWellCaseTest2() {
+        assertSimpleTest(() -> {
+            run("//.\\n1.2,3:4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+    @Test
+    void inputWellCaseTest3() {
+        assertSimpleTest(() -> {
+            run("//\\\\n1\\2,3:4");
+            assertThat(output()).contains("결과 : 10");
         });
     }
 
