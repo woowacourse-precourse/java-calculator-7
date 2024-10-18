@@ -11,12 +11,13 @@ public class Application {
         // 입력이 없을 경우 "결과 : 0" 출력
         if (input.isEmpty()) {
             System.out.println("결과 : 0");
+            return;
         }
 
         DelimiterParser delimiterParser = new DelimiterParser(input);
-        String[] stringArray = delimiterParser.splitString();
-        int[] intArray = convertStringArrayToIntArray(stringArray);
-        int result = sumIntArray(intArray);
+        String[] tokens = delimiterParser.splitString();
+        int[] numbers = convertStringArrayToIntArray(tokens);
+        int result = sumIntArray(numbers);
         System.out.println("결과 : " + result);
     }
 
@@ -29,8 +30,12 @@ public class Application {
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("숫자가 아닌 문자가 포함되어 있습니다." + stringArray[i]);
             }
-            if (intArray[i] <= 0) {
-                throw new IllegalArgumentException("음수 혹은 0으로 숫자가 구성되어 있습니다." + intArray[i]);
+            if (intArray[i] < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + intArray[i]);
+            }
+
+            if (intArray[i] == 0) {
+                throw new IllegalArgumentException("0은 허용되지 않습니다: " + intArray[i]);
             }
         }
 
