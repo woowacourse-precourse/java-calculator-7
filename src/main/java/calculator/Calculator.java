@@ -7,6 +7,12 @@ import java.util.List;
 public class Calculator {
     public void run() {
         InputHandler inputHandler = new InputHandler();
-        String inputString = inputHandler.getInputString();
+        InputString inputString = inputHandler.getInputString();
+
+        if (inputString == null || inputString.isBlank()) {
+            // 0 출력
+        }
+
+
     }
 }
