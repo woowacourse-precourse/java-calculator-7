@@ -1,6 +1,7 @@
 package calculator.util;
 
 import calculator.domain.Delimiter;
+import calculator.validator.DelimiterValidator;
 import calculator.validator.NumberValidator;
 
 import java.util.Arrays;
@@ -14,7 +15,10 @@ public class NumberConvertor {
             return new int[] {};
         }
 
-        return Arrays.stream(removedEnrollmentChar.split(Delimiter.getDelimiter()))
+        String delimiter = Delimiter.getDelimiter();
+        DelimiterValidator.isDelimiterValid(removedEnrollmentChar, delimiter);
+
+        return Arrays.stream(removedEnrollmentChar.split(delimiter))
                 .mapToInt(NumberConvertor::parseAndValidate)
                 .toArray();
     }

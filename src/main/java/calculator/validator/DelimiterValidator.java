@@ -32,4 +32,10 @@ public class DelimiterValidator {
             throw new IllegalArgumentException(ErrorMessage.INVALID_DELIMITER_ERROR.getMessage());
         }
     }
+
+    public static void isDelimiterValid(String str, String delimiter) {
+        if (!str.contains(delimiter)) {
+            throw new IllegalArgumentException(ErrorMessage.NOT_ENROLLED_DELIMITER.getMessage());
+        }
+    }
 }
