@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
-public class ValidatorUtilsTest extends NsTest {
+public class ValidatorUtilsTest {
 
   @Test
   void 문자열_유효성() {
@@ -13,7 +13,7 @@ public class ValidatorUtilsTest extends NsTest {
     String EmptyValidInput  = "";
     String NotIncludeNumberInput = ",,,,";
     String validInput_startWithChar = "//a\n1,2,3,4:5:6";
-    String invalidInput_startWithChar = "//ab\n1,2,3ab4:5:6";
+    String invalidInput_startWithChar = "//ab\n1,2,3,4:5:6";
     String invalidInput_startWithChar2 = "//a\n1,2,3a4:5b6";
     String nullInput = null;
     String invalidInput_startWithInt = "1,2:3a4";
@@ -51,10 +51,5 @@ public class ValidatorUtilsTest extends NsTest {
     assertThatThrownBy(() -> Validator.isValidate(invalidInput_startWithInt2))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("잘못된 계산 문자열");
-  }
-
-  @Override
-  protected void runMain() {
-
   }
 }
