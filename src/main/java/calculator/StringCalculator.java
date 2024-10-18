@@ -1,19 +1,11 @@
 package calculator;
 
 public class StringCalculator {
+
     public int calculate(String input) {
-        Character customDelimiter = null;
 
         //커스텀 구분자 추출
-        if (input.startsWith("//") && input.contains("\\n")) { //커스텀 구분자 존재 시
-            String customDelimiterStr = input.substring(2, input.lastIndexOf("\\n"));
-
-            if (customDelimiterStr.length() != 1) { //커스텀 구분자의 길이가 1인지 확인
-                throw new IllegalArgumentException();
-            }
-
-            customDelimiter = customDelimiterStr.charAt(0);
-        }
+        Character customDelimiter = extractCustomDelimiter(input);
 
         //계산 문자열 구분
         String calculateStr = input;
@@ -52,5 +44,22 @@ public class StringCalculator {
         }
 
         return ret; //TODO
+    }
+
+    private Character extractCustomDelimiter(String input) {
+        if (input.startsWith("//") && input.contains("\\n")) { //커스텀 구분자 존재 시
+            String customDelimiterStr = input.substring(2, input.lastIndexOf("\\n"));
+            validateCustomDelimiterLength(customDelimiterStr);
+
+            return customDelimiterStr.charAt(0);
+        }
+
+        return null;
+    }
+
+    private void validateCustomDelimiterLength(String customDelimiterStr) {
+        if (customDelimiterStr.length() != 1) { //커스텀 구분자의 길이가 1인지 확인
+            throw new IllegalArgumentException();
+        }
     }
 }
