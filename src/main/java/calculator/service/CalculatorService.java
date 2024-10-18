@@ -21,7 +21,7 @@ public class CalculatorService {
      * @param parts 구분자를 통해 분리된 문자열 배열(숫자)
      * @return 숫자 리스트
      */
-    private List<Integer> convertToNumbers(String[] parts) {
+    public List<Integer> convertToNumbers(String[] parts) {
         return List.of();
     }
 
