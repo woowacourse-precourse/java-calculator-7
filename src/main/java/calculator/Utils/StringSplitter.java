@@ -1,6 +1,7 @@
 package calculator.Utils;
 
 import static calculator.Constants.DelimiterConstants.CUSTOM_DELIMITER_END;
+import static calculator.Constants.DelimiterConstants.CUSTOM_DELIMITER_START_INDEX;
 import static calculator.Constants.DelimiterConstants.CUSTOM_INDICATOR_REGEX;
 
 import calculator.Model.Delimiter;
@@ -14,7 +15,7 @@ public class StringSplitter {
     }
 
     public static String getCustomDelimiter(String userInput) {
-        return userInput.substring(2, userInput.indexOf(CUSTOM_DELIMITER_END));
+        return userInput.substring(CUSTOM_DELIMITER_START_INDEX, userInput.indexOf(CUSTOM_DELIMITER_END));
     }
 
     public static String deleteIndicator(String userInput) {
