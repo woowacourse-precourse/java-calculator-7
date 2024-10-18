@@ -1,6 +1,8 @@
 package calculator.model;
 
+
 import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class Calculator {
     private String numbers;
@@ -12,10 +14,10 @@ public class Calculator {
     public String[] splitNumbers(){
         String customDelimiter = "";
         String[] splitedNumbers;
-        customDelimiter = checkCustomDelimiter();
-        if(!customDelimiter.isEmpty()){
-           splitedNumbers = numbers.split("[,;]|" + Pattern.quote(customDelimiter));
-           return splitedNumbers;
+        if(checkCustomDelimiter()){
+            customDelimiter = getCustomDelimiter();
+            splitedNumbers = numbers.split("[,;]|" + Pattern.quote(customDelimiter));
+            return splitedNumbers;
         }
         splitedNumbers = numbers.split("[,;]");
            return splitedNumbers;
@@ -29,8 +31,5 @@ public class Calculator {
         }
         return false;
     }
-
-
-
 
 }
