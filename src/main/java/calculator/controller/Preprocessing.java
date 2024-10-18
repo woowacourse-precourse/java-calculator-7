@@ -39,7 +39,7 @@ public class Preprocessing {
 
     // 커스텀 구분자 저장
     public List<String> findCustomSeparator(String given) {
-        String temp = null;
+        String temp = "";
         String customSeparator = null;
         int endIdx = -2; // 커스텀 지정 끝나는 지점 인덱스
 
