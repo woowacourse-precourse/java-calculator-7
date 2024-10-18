@@ -3,7 +3,7 @@ package calculator.service;
 import calculator.model.Calculator;
 import calculator.model.Delimeters;
 import calculator.model.PositiveNumbers;
-import java.util.Arrays;
+import java.util.List;
 
 //계산기의 전반적인 기능을 담당하는 클래스
 public class CalculateService {
@@ -64,12 +64,12 @@ public class CalculateService {
                 userInput.substring(userInput.indexOf(customDelimeterPostfix) + 2)
                 : userInput.substring(0);
 
-        String numbers[] = delimters.getNumbersFromCalculationFormula(calculationFormula);
-
+        List<String> numbers = delimters.getNumbersFromCalculationFormula(calculationFormula);
+        
         PositiveNumbers positiveNumbers = new PositiveNumbers();
 
         try {
-            Arrays.stream(numbers).forEach(number -> positiveNumbers.addNumber(Integer.valueOf(number)));
+            numbers.forEach(number -> positiveNumbers.addNumber(Integer.valueOf(number)));
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("안된다니까!");
         }

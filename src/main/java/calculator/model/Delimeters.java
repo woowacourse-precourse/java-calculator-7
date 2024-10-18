@@ -3,6 +3,7 @@ package calculator.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.StringTokenizer;
 
 public class Delimeters {
 
@@ -27,14 +28,22 @@ public class Delimeters {
     }
 
     //공식으로부터 Delimeter 를 활용하여 String 형식 숫자추출
-    public String[] getNumbersFromCalculationFormula(final String calculationFormula) {
+    public List<String> getNumbersFromCalculationFormula(final String calculationFormula) {
 
         String regexString = "";
         for (String regex : delimeters) {
             regexString += regex;
         }
 
-        return calculationFormula.split("[" + regexString + "]");
+        StringTokenizer tokenizer = new StringTokenizer(calculationFormula, regexString);
+
+        List<String> tokens = new ArrayList<>();
+
+        while (tokenizer.hasMoreTokens()) {
+            tokens.add(tokenizer.nextToken());
+        }
+
+        return tokens;
 
     }
 
