@@ -11,8 +11,6 @@ public class Application {
         Calculator calculator = new Calculator();
         DataVerification dataVerification = new DataVerification();
 
-        int total = 0;
-
         String userInput = InputUtils.getUserInput();
         dataVerification.checkIsInputEmpty(userInput);
 
@@ -21,7 +19,7 @@ public class Application {
         dataVerification.checkIsPositiveNumber(splitInput);
         dataVerification.checkHasNumberFormat(splitInput);
 
-        calculator.getTotal(splitInput);
+        int total = calculator.getTotal(splitInput);
         PrintUtils.printResult(total);
     }
 }
