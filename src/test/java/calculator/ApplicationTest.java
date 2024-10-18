@@ -21,6 +21,23 @@ class ApplicationTest extends NsTest {
         Assertions.assertEquals(0, result);
     }
 
+    @Test
+    void 기본_구분자만_사용한_더하기() {
+        assertSimpleTest(() -> {
+            run("1,2,3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 기본_구분자_조합_사용한_더하기_() {
+        assertSimpleTest(() -> {
+            run("1,2:3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
