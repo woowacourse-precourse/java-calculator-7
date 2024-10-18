@@ -1,10 +1,5 @@
 package calculator;
 
-import com.sun.security.jgss.GSSUtil;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class StringCalculator {
 
     public int add(String input) {
@@ -19,23 +14,13 @@ public class StringCalculator {
         return input == null || input.isEmpty();
     }
     private String[] split(String input) {
-        String separator = ",|:";
-        if (input.startsWith("//")) {
-            String customPart = input.substring(2, 3);
-            separator += "|" + customPart;
-            input = input.substring(5);
-        }
-        return input.split(separator);
+        String[] values =  input.split(",");
+        return values;
     }
-
 
     private int[] toInts(String[] values){
         int[] numbers = new int[values.length];
         for(int i =0; i < values.length; i++){
-            int number = Integer.parseInt(values[i]);
-            if(number < 0){
-                throw new IllegalArgumentException();
-            }
             numbers[i] = Integer.parseInt(values[i]);
         }
         return numbers;
