@@ -37,7 +37,8 @@ class ApplicationTest extends NsTest {
                 Arguments.of("//@\\n1@2:3", "결과 : 6"),
                 Arguments.of("//@\\n//@\\n1@2,3", "결과 : 6"),
                 Arguments.of("//@\\n//;\\n1;2@3", "결과 : 6"),
-                Arguments.of("//@\\n1@2@3", "결과 : 6")
+                Arguments.of("//@\\n1@2@3", "결과 : 6"),
+                Arguments.of("///\\n1/2/3", "결과 : 6")
         );
     }
 
@@ -57,7 +58,8 @@ class ApplicationTest extends NsTest {
                 Arguments.of("asdf"),
                 Arguments.of("1@2@3"),
                 Arguments.of("//@1@2@3"),
-                Arguments.of("//@\\n//1,2,3")
+                Arguments.of("//@\\n//1,2,3"),
+                Arguments.of("//\\n\\n1,2,3")
         );
     }
 
