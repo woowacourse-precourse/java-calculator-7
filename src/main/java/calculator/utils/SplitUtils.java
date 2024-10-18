@@ -7,16 +7,22 @@ import java.util.List;
 public class SplitUtils {
     public static List<String> getSplitInput(String userInput) {
         List<String> processedInput = new ArrayList<>();
-
         int escapeIdx = userInput.indexOf("\\n");
-        if (escapeIdx > 0) {
-            processedInput = splitWithCustomSeparator(userInput, escapeIdx);
-        } else {
-            processedInput = splitWithDefaultSeparator(userInput);
+
+        if (userInput.isEmpty()) {
+            return processedInput;
         }
 
-        return processedInput;
-    };
+        if (isUsingCustomSeparator(escapeIdx)) {
+            return splitWithCustomSeparator(userInput, escapeIdx);
+        }
+
+        return splitWithDefaultSeparator(userInput);
+    }
+
+    private static boolean isUsingCustomSeparator(int escapeIdx) {
+        return escapeIdx > 0;
+    }
 
     private static List<String> splitWithDefaultSeparator(String userInput) {
         String delimiter = "[,:]";
