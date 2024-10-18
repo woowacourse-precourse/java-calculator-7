@@ -53,7 +53,7 @@ public class Application {
         int arrayLength = parsedInput.length;
         int[] convertedInput = new int[arrayLength];
 
-        if (arrayLength == 0) {
+        if (parsedInput[0] == "") {
             return convertedInput;
         }
 
