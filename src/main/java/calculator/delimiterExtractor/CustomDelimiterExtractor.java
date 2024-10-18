@@ -1,24 +1,26 @@
 package calculator.delimiterExtractor;
 
 import calculator.constants.StringConst;
+import calculator.delimiter.Delimiter;
+import calculator.dto.DelimiterDto;
 import java.util.regex.Pattern;
 
 public class CustomDelimiterExtractor implements DelimiterExtractor {
 
 
-    public String extractDelimiter(String input) {
+    public DelimiterDto extractDelimiter(String input) {
 
         String[] firstSecondInput = input.split(StringConst.LINE_SEPARATOR);
         String firstInput = firstSecondInput[0];
-        String delimiter = firstInput.substring(2);
+        String delimiterString = firstInput.substring(2);
+        delimiterString = escapeDelimiter(delimiterString);
+        Delimiter delimiter = new Delimiter(delimiterString);
 
-        delimiter = checkEscape(delimiter);
-
-        return delimiter;
+        return delimiter.toDto();
     }
 
 
-    private String checkEscape(String escapeDelimiter) {
+    private String escapeDelimiter(String escapeDelimiter) {
 
         return Pattern.quote(escapeDelimiter);
 

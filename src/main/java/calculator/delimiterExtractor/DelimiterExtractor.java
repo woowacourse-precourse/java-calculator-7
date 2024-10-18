@@ -1,7 +1,9 @@
 package calculator.delimiterExtractor;
 
+import calculator.dto.DelimiterDto;
+
 public interface DelimiterExtractor {
 
 
-    public String extractDelimiter(String input);
+    public DelimiterDto extractDelimiter(String input);
 }

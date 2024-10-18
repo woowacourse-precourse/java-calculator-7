@@ -1,13 +1,15 @@
 package calculator.delimiterExtractor;
 
 import calculator.constants.StringConst;
+import calculator.delimiter.Delimiter;
+import calculator.dto.DelimiterDto;
 
 public class DefaultDelimiterExtractor implements DelimiterExtractor {
 
 
-    public String extractDelimiter(String input) {
-
-        return StringConst.DEFAULT_DELiMITER;
+    public DelimiterDto extractDelimiter(String input) {
+        Delimiter delimiter = new Delimiter(StringConst.DEFAULT_DELiMITER);
+        return delimiter.toDto();
     }
 
 
