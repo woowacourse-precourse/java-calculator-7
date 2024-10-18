@@ -10,7 +10,6 @@ public class RegexConstant {
     public static final String FORWARD_SLASH = "/";
     public static final Pattern ONLY_NUMBER_SEPARATOR_REGEX = Pattern.compile("[1-9]\\d*([,:][1-9]\\d*)*");
     public static final Pattern CUSTOM_SEPARATOR_REGEX = Pattern.compile("^//([^\\d\\s]+)\\\\n[1-9]\\d*(\\1[1-9]\\d*)*$");
-
     public static final Pattern BLANK_REGEX = Pattern.compile("^$");
 
 
