@@ -26,6 +26,19 @@ public class CaculatorMachine {
 			return 0;
 		}
 
+		userInput = checkDelimiter(userInput);
+
+		// 구분자를 기준으로 문자열 분리
+		if (hasDelimiter(userInput, baseDelimiter)) {
+			return calculateSum(userInput, baseDelimiter);
+		} else {
+			// 커스텀 구분자 선언은 존재하나, 사용하지 않은 경우
+			return Integer.parseInt(userInput);
+		}
+
+	}
+
+	private String checkDelimiter(String userInput) {
 		// 커스텀 구분자
 		// 5-2. "\n"만 존재하는 경우
 		if (hasEndDelimiter(userInput)) {
@@ -84,20 +97,12 @@ public class CaculatorMachine {
 		if (containsRepeatedDelimiters(userInput) || containsRepeatedCustomDelimiters(userInput, customDelimiter)) {
 			throw new IllegalArgumentException("잘못된 입력입니다.");
 		}
-
-		// 구분자를 기준으로 문자열 분리
-		if (hasDelimiter(userInput, baseDelimiter)) {
-			return caculateSum(userInput, baseDelimiter);
-		} else {
-			// 커스텀 구분자 선언은 존재하나, 사용하지 않은 경우
-			return Integer.parseInt(userInput);
-		}
-
+		return userInput;
 	}
 
 	// 숫자의 합을 계산
-	private static int caculateSum(String userInput, String defaultDelimiter) {
-		String[] numbers = userInput.split(defaultDelimiter);
+	private static int calculateSum(String userInput, String baseDelimiter) {
+		String[] numbers = userInput.split(baseDelimiter);
 		// 숫자의 합을 저장할 변수
 		int sum = 0;
 		for (String number : numbers) {
