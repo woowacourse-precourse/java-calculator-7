@@ -6,40 +6,33 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class InputProcessor {
-    private final String input;
-
-    public InputProcessor(String input) {
-        this.input = input;
-    }
-
-    public int[] getAdditionNumbers() {
+    public int[] getAdditionNumbers(String input) {
         if (input.isEmpty()) {
             return new int[]{0};
         }
-        String[] separatorList = getSeparator();
+        String[] separatorList = getSeparator(input);
         String separator = prefixSeparator(separatorList);
-        String trimmedInput = trimInput();
+        String trimmedInput = trimInput(input);
         String[] parsedInput = parseInput(trimmedInput, separator);
         return convertToIntArray(parsedInput);
-
     }
 
-    public String[] getSeparator() {
+    public String[] getSeparator(String input) {
         // 구분자 정의하기
-        if (hasCustomSeparator()) {
-            return getCustomSeparator();
+        if (hasCustomSeparator(input)) {
+            return getCustomSeparator(input);
         }
         return new String[]{",", ":"};
     }
 
-    private boolean hasCustomSeparator() {
+    private boolean hasCustomSeparator(String input) {
         return input.contains("//") || input.contains("\n");
     }
 
-    private String[] getCustomSeparator() {
+    private String[] getCustomSeparator(String input) {
         // 커스텀 구분자 추출하기
-        int separatorStartIndex = getSeparatorStartIndex();
-        int separatorEndIndex = getSeparatorEndIndex();
+        int separatorStartIndex = getSeparatorStartIndex(input);
+        int separatorEndIndex = getSeparatorEndIndex(input);
 
         validateCustomSeparator(separatorStartIndex, separatorEndIndex);
 
@@ -50,11 +43,11 @@ public class InputProcessor {
         return Arrays.stream(separator).map(Pattern::quote).collect(Collectors.joining("|"));
     }
 
-    private int getSeparatorStartIndex() {
+    private int getSeparatorStartIndex(String input) {
         return input.indexOf("//") + 2;
     }
 
-    private int getSeparatorEndIndex() {
+    private int getSeparatorEndIndex(String input) {
         return input.indexOf("\n") - 1;
     }
 
@@ -70,9 +63,9 @@ public class InputProcessor {
         return trimmedInput.split(separator);
     }
 
-    private String trimInput() {
-        if (hasCustomSeparator()) {
-            return (String) input.subSequence(getSeparatorEndIndex() + 2, input.length());
+    private String trimInput(String input) {
+        if (hasCustomSeparator(input)) {
+            return (String) input.subSequence(getSeparatorEndIndex(input) + 2, input.length());
         }
         return input;
     }

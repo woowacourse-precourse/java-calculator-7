@@ -8,27 +8,26 @@ import calculator.Model.InputProcessor;
 import org.junit.jupiter.api.Test;
 
 public class InputProcessorTest {
+    static final InputProcessor processor = new InputProcessor();
+
     @Test
     void 기본_구분자_추출() {
         assertSimpleTest(() -> {
-            InputProcessor processor = new InputProcessor("1,2:3");
-            assertThat(processor.getSeparator()).isEqualTo(new String[]{",", ":"});
+            assertThat(processor.getSeparator("1,2:3")).isEqualTo(new String[]{",", ":"});
         });
     }
 
     @Test
     void 커스텀_구분자_추출() {
         assertSimpleTest(() -> {
-            InputProcessor processor = new InputProcessor("//+\n1+2+3");
-            assertThat(processor.getSeparator()).isEqualTo(new String[]{"+"});
+            assertThat(processor.getSeparator("//+\n1+2+3")).isEqualTo(new String[]{"+"});
         });
     }
 
     @Test
     void 커스텀_구분자_추출_예외_1() {
         assertThatThrownBy(() -> {
-            InputProcessor processor = new InputProcessor("//1+2+3");
-            processor.getSeparator();
+            processor.getSeparator("//1+2+3");
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("커스텀 구분자가 올바르게 정의되지 않았습니다.");
     }
@@ -36,8 +35,7 @@ public class InputProcessorTest {
     @Test
     void 커스텀_구분자_추출_예외_2() {
         assertThatThrownBy(() -> {
-            InputProcessor processor = new InputProcessor("1+\n2+3");
-            processor.getSeparator();
+            processor.getSeparator("1+\n2+3");
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("커스텀 구분자가 올바르게 정의되지 않았습니다.");
     }
@@ -45,40 +43,35 @@ public class InputProcessorTest {
     @Test
     void 숫자_배열_출력_기본_구분자() {
         assertSimpleTest(() -> {
-            InputProcessor processor = new InputProcessor("1,2:3");
-            assertThat(processor.getAdditionNumbers()).isEqualTo(new int[]{1, 2, 3});
+            assertThat(processor.getAdditionNumbers("1,2:3")).isEqualTo(new int[]{1, 2, 3});
         });
     }
 
     @Test
     void 숫자_배열_출력_커스텀_구분자() {
         assertSimpleTest(() -> {
-            InputProcessor processor = new InputProcessor("//*\n1*2*3");
-            assertThat(processor.getAdditionNumbers()).isEqualTo(new int[]{1, 2, 3});
+            assertThat(processor.getAdditionNumbers("//*\n1*2*3")).isEqualTo(new int[]{1, 2, 3});
         });
     }
 
     @Test
     void 숫자_배열_출력_커스텀_구분자_2() {
         assertSimpleTest(() -> {
-            InputProcessor processor = new InputProcessor("//*$\n1*$2*$3");
-            assertThat(processor.getAdditionNumbers()).isEqualTo(new int[]{1, 2, 3});
+            assertThat(processor.getAdditionNumbers("//*$\n1*$2*$3")).isEqualTo(new int[]{1, 2, 3});
         });
     }
 
     @Test
     void 숫자_배열_출력_커스텀_구분자_빈문자() {
         assertSimpleTest(() -> {
-            InputProcessor processor = new InputProcessor("//&\n1&&2&3");
-            assertThat(processor.getAdditionNumbers()).isEqualTo(new int[]{1, 0, 2, 3});
+            assertThat(processor.getAdditionNumbers("//&\n1&&2&3")).isEqualTo(new int[]{1, 0, 2, 3});
         });
     }
 
     @Test
     void 숫자_배열_출력_커스텀_구분자_기호() {
         assertThatThrownBy(() -> {
-            InputProcessor processor = new InputProcessor("//&\n1&(2&3");
-            processor.getAdditionNumbers();
+            processor.getAdditionNumbers("//&\n1&(2&3");
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("숫자가 아닌 값이 포함되어 있습니다: (2");
     }
@@ -86,8 +79,7 @@ public class InputProcessorTest {
     @Test
     void 숫자_배열_출력_커스텀_구분자_음수() {
         assertThatThrownBy(() -> {
-            InputProcessor processor = new InputProcessor("//&\n1&-2&3");
-            processor.getAdditionNumbers();
+            processor.getAdditionNumbers("//&\n1&-2&3");
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("음수 값이 포함되어 있습니다: -2");
     }
@@ -95,8 +87,7 @@ public class InputProcessorTest {
     @Test
     void 숫자_배열_출력_빈_커스텀_구분자() {
         assertSimpleTest(() -> {
-            InputProcessor processor = new InputProcessor("//\n123");
-            assertThat(processor.getAdditionNumbers()).isEqualTo(new int[]{1, 2, 3});
+            assertThat(processor.getAdditionNumbers("//\n123")).isEqualTo(new int[]{1, 2, 3});
         });
     }
 }
