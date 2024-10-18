@@ -9,9 +9,11 @@ public class SeparatorExpressionCalculator {
     private static final Separator COLON_SEPARATOR = new Separator(":");
     private final OperatorMap operatorMap = OperatorMap.getInstance();
     private final Separators separators;
+    private final Display display;
 
-    public SeparatorExpressionCalculator() {
+    public SeparatorExpressionCalculator(Display display) {
         this.separators = new Separators(Set.of(COMMA_SEPARATOR, COLON_SEPARATOR));
+        this.display = display;
     }
 
     public void operate() {
@@ -19,6 +21,7 @@ public class SeparatorExpressionCalculator {
         Expression expression = parseToExpression(input);
         ExpressionExecutor expressionExecutor = new ExpressionExecutor(operatorMap);
         int result = expressionExecutor.calculate(expression);
+        display.showResult(result);
     }
 
     private Expression parseToExpression(String input) {
