@@ -20,8 +20,8 @@
 
 5. **사용자 인터페이스**
     - [x] 사용자로부터 문자열 입력 받기
-      - [x] BufferedReader를 사용하여 입력처리하기
-      - [x] BufferedReader 에러 처리를 위해 IOException throw 처리하기
+      - [x] camp.nextstep.edu.missionutils.Console를 사용하여 입력처리하기
+      - [x] 에러 처리를 위해 IOException throw 처리하기
     - [x] 계산 결과 출력
 
 6. **프로그램 종료**
