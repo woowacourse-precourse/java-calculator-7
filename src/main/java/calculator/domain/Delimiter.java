@@ -1,6 +1,7 @@
 package calculator.domain;
 
 import calculator.validator.DelimiterValidator;
+import calculator.validator.StringValidator;
 
 import static calculator.global.constant.DelimiterConstant.PREFIX;
 import static calculator.global.constant.DelimiterConstant.SUFFIX;
@@ -19,6 +20,7 @@ public class Delimiter {
         String customDelimiter = str.replace(SUFFIX, "");
 
         customDelimiter = DelimiterValidator.validateRequireEscapeCharacter(customDelimiter);
+        StringValidator.validateCustomDelimiterFormat(customDelimiter);
         DelimiterValidator.validateCustomDelimiterLength(customDelimiter);
 
         separator +=  "|" + customDelimiter;
