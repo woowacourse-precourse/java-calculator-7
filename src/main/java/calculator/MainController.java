@@ -41,7 +41,7 @@ public class MainController {
     }
 
     private static boolean checkDefaultDelimterFormat(String inputString) {
-        String rex = "^[0-9]*([,:]\\d*)+$";
+        String rex = "^[0-9]*([,:]\\d*)*$";
         Pattern pattern = Pattern.compile(rex);
         Matcher matcher = pattern.matcher(inputString);
 
@@ -92,7 +92,7 @@ public class MainController {
     }
 
     private static Boolean checkRemainStringFormat(String remainingInput, String customDelimiter) {
-        String rex = "^[0-9]*([" + customDelimiter + "]\\d*)+$";
+        String rex = "^[0-9]*([" + customDelimiter + "]\\d*)*$";
         Pattern pattern = Pattern.compile(rex);
         Matcher matcher = pattern.matcher(remainingInput);
 
