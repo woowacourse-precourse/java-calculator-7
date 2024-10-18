@@ -3,7 +3,8 @@ package calculator.generator.number;
 import calculator.number.domain.Number;
 import calculator.number.domain.impl.PositiveNumber;
 import calculator.sentence.domain.Sentence;
-import calculator.separator.domain.Separator;
+
+import java.util.List;
 
 public class NumberGenerator {
     private final NumberExtractService extractor;
@@ -14,15 +15,14 @@ public class NumberGenerator {
         this.createService = createService;
     }
 
-    public Number create(Sentence sentence, Separator separator) {
+    public Number create(Sentence sentence) {
         return createService.createNumber(
                 sentence,
                 this::extractorPositiveNumber,
-                PositiveNumber::of,
-                separator);
+                PositiveNumber::of);
     }
 
-    private String extractorPositiveNumber(String sentence) {
+    private List<String> extractorPositiveNumber(String sentence) {
         return extractor.extractorNumber(sentence);
     }
 }
