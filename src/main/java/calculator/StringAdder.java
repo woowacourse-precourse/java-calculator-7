@@ -13,7 +13,7 @@ public class StringAdder {
 
     private String extractDelimiter(String input) {
         String defaultDelimiter = ",|:";
-        if (input.startsWith("//")) {
+        if (input.startsWith("//") && input.contains("\\n")) {
             int delimiterEndIndex = input.indexOf("\\n");
             return input.substring(2, delimiterEndIndex);
         }
