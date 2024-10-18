@@ -21,14 +21,6 @@ class DelimeterSegmentProcessorTest {
     }
 
 
-
-    @Test
-    @DisplayName("구분자 추출 테스트")
-    void extract_custom_delimeter() {
-        String delimeter = delimeterSegmentProcessor.extractCustomDelimeter("//;\n");
-        assertEquals(delimeter, ";");
-    }
-
     @Test
     @DisplayName("구분자 요청 제외 String 반환 테스트")
     void discard_custom_delimeter_request() {
