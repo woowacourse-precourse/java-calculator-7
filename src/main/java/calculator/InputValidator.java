@@ -2,6 +2,15 @@ package calculator;
 
 public class InputValidator {
 
+    public void delimiterValidate(String delimiter) {
+        try {
+            Integer.parseInt(delimiter);
+            throw new IllegalArgumentException("숫자는 구분자가 될 수 없습니다.");
+        } catch (NumberFormatException e) {
+            return;
+        }
+    }
+
     public void validate(String[] numbers) {
         for (String number : numbers) {
             int num;
