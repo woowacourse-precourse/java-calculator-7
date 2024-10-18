@@ -69,4 +69,15 @@ public class Application {
         delimiters.add(customDelimiter);
         return delimiters;
     }
+    private static int parseAndValidateNumber(String token) {
+        try {
+            int number = Integer.parseInt(token);
+            if (number < 0) {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            }
+            return number;
+        } catch (NumberFormatException e) {
+            printError(e.getMessage());
+        }
+    }
 }
