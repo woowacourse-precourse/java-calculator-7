@@ -34,7 +34,7 @@
 
 ### Calculator
 * **계산 로직**
-  * [x] `InputManager`에서 준 리스트를 덧셈한다.
+  * [x] `InputManager`에서 준 리스트를 덧셈하여 결과를 저장한다.
 
 ### InputView
 * **입력**
