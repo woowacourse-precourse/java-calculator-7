@@ -23,10 +23,12 @@ public class Separator {
 
     // 구분자를 사용하여 숫자를 분리하는 메서드
     private String splitByDelimiters(String input, List<String> delimiters) {
+        // 첫 번째 숫자가 나올 때까지의 부분을 무시하고 나머지를 추출
         for (int i = 0; i < input.length(); i++) {
             char c = input.charAt(i);
-            if (Character.isDigit(c) || c == '-') {
-                // 첫 숫자가 발견되면 해당 위치부터 끝까지의 문자열을 반환
+            // 음수 부호는 뒤에 숫자가 나올 때만 인정
+            if (Character.isDigit(c) || (c == '-' && i + 1 < input.length() && Character.isDigit(
+                input.charAt(i + 1)))) {
                 input = input.substring(i);
                 break;
             }
@@ -36,12 +38,19 @@ public class Separator {
         String[] tokens = input.split(delimiterRegex);
 
         System.out.println(Arrays.toString(tokens));
-
         // 각 토큰을 공백 없이 연결된 하나의 문자열로 반환
         StringBuilder separatedNumbers = new StringBuilder();
         for (String token : tokens) {
             if (!token.isEmpty()) {
-                separatedNumbers.append(token.trim()).append(",");
+                // 음수인지 아닌지를 확인하기 위해 정수 변환 시도
+                try {
+                    int number = Integer.parseInt(token.trim());
+                    separatedNumbers.append(number).append(",");
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("유효하지 않은 입력입니다");
+                }
+            } else {
+                throw new IllegalArgumentException("유효하지 않은 입력입니다");
             }
         }
 
@@ -49,6 +58,7 @@ public class Separator {
         if (separatedNumbers.length() > 0) {
             separatedNumbers.setLength(separatedNumbers.length() - 1);
         }
+        System.out.println(separatedNumbers.toString());
         return separatedNumbers.toString();
     }
 }
