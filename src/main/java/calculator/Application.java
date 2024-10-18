@@ -10,6 +10,11 @@ public class Application {
         String[] nums;
         String delimiter = ",:";
 
+        if("".equals(str)){
+            System.out.println("결과 : 0");
+            return;
+        }
+
         if(str.matches("//.\\\\n.+")){
             delimiter = String.valueOf(str.charAt(2));
             str = str.substring(5);
