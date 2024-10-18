@@ -18,13 +18,19 @@ public class NumberService {
         List<Integer> numbers = new ArrayList<>();
         for(String separatedVal : separatedVals){
             int num = convertToInteger(separatedVal);
-            if(num<0){
-                throw new IllegalArgumentException(CANNOT_INPUT_NEGATIVE_NUM);
-            }else{
+            if(isPositiveNumber(num)){
                 numbers.add(num);
             }
         }
         setNumbers(numbers);
+    }
+
+    private static boolean isPositiveNumber(int num){
+        if(num<0){
+            throw new IllegalArgumentException(CANNOT_INPUT_NEGATIVE_NUM);
+        }else{
+            return true;
+        }
     }
 
     public static Integer convertToInteger(String separatedVal){
