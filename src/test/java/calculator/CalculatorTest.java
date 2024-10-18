@@ -48,4 +48,12 @@ class CalculatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("입력값이 올바르지 않습니다.");
     }
+
+    @DisplayName("숫자가 아닌 문자열을 포함할 경우 IllegalArgumentException을 던져야 한다.")
+    @Test
+    void calculateWithNonNumericString() {
+        String[] input = {"1", "2", "a"};
+        assertThatThrownBy(() -> calculator.calculate(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
