@@ -1,6 +1,6 @@
-package calculator.message;
+package calculator.domain.message;
 
-public enum UserOutputMessage implements MessageType {
+public enum UserOutputMessage implements MessageProvider {
 
     RESPONSE_MESSAGE("결과 : "),
     ;

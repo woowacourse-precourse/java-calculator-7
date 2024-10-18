@@ -1,6 +1,6 @@
-package calculator.message;
+package calculator.domain.message;
 
-public enum UserInputMessage implements MessageType {
+public enum UserInputMessage implements MessageProvider {
 
     REQUEST_MESSAGE("덧셈할 문자열을 입력해 주세요."),
     ;

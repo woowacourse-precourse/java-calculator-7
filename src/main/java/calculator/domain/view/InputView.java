@@ -1,6 +1,6 @@
-package calculator.view;
+package calculator.domain.view;
 
-import static calculator.message.UserInputMessage.REQUEST_MESSAGE;
+import static calculator.domain.message.UserInputMessage.REQUEST_MESSAGE;
 
 public class InputView {
 
