@@ -6,6 +6,10 @@ import delimiter.custom.CustomDelimiter;
 
 public class CaculatorMachine {
 
+	// 구분자 선언
+	String baseDelimiter = BaseDelimiter.COMMA.getDescription() + "|" + BaseDelimiter.COLON.getDescription();
+	String customDelimiter = "";
+
 	public void run() {
 		System.out.println("덧셈할 문자열을 입력해 주세요.");
 
@@ -15,15 +19,12 @@ public class CaculatorMachine {
 		System.out.println("결과 : " + result);
 	}
 
-	public static int calculate(String userInput) {
+	public int calculate(String userInput) {
 
 		// 입력 문자열이 공백인 경우
 		if (isUserInputNull(userInput)) {
 			return 0;
 		}
-		// 구분자 선언
-		String baseDelimiter = BaseDelimiter.COMMA.getDescription() + "|" + BaseDelimiter.COLON.getDescription();
-		String customDelimiter = "";
 
 		// 커스텀 구분자
 		// 5-2. "\n"만 존재하는 경우
@@ -121,78 +122,78 @@ public class CaculatorMachine {
 	}
 
 	// 구분자를 가지고 있을 때
-    private static boolean hasDelimiter(String userInput, String defaultDelimiter) {
+    private boolean hasDelimiter(String userInput, String defaultDelimiter) {
         return userInput.contains(defaultDelimiter);
     }
 
+	// 기본 구분자가 2번 이상 나오는 경우
+	private boolean containsRepeatedDelimiters(String userInput) {
+		return userInput.contains(",,") || userInput.contains("::") || userInput.contains(",:") || userInput.contains(
+			":,");
+	}
+
+	// 구분자로 시작하거나 끝날 경우
+	private boolean startsOrEndsWithDelimiter(String userInput, String defaultDelimiter) {
+		return userInput.startsWith(defaultDelimiter) || userInput.endsWith(defaultDelimiter);
+	}
+
     // 커스텀 구분자가 2번 이상 나오는 경우
-    private static boolean containsRepeatedCustomDelimiters(String userInput, String customDelimiter) {
+    private boolean containsRepeatedCustomDelimiters(String userInput, String customDelimiter) {
         return !customDelimiter.isEmpty() && userInput.contains(customDelimiter + customDelimiter);
     }
 
-    // 기본 구분자가 2번 이상 나오는 경우
-    private static boolean containsRepeatedDelimiters(String userInput) {
-        return userInput.contains(",,") || userInput.contains("::") || userInput.contains(",:") || userInput.contains(
-            ":,");
-    }
-
-    // 구분자로 시작하거나 끝날 경우
-    private static boolean startsOrEndsWithDelimiter(String userInput, String defaultDelimiter) {
-        return userInput.startsWith(defaultDelimiter) || userInput.endsWith(defaultDelimiter);
-    }
-
     // 커스텀 구분자가 1개 이상일 때
-    private static boolean hasMultipleCustomDelimiters(String customDelimiter) {
+    private boolean hasMultipleCustomDelimiters(String customDelimiter) {
         return customDelimiter.length() != 1;
     }
 
     // "\n"이 2번 이상 존재할 때
-    private static boolean hasTwoEndDelimiter(String userInput, int delimiterEndIndex) {
+    private boolean hasTwoEndDelimiter(String userInput, int delimiterEndIndex) {
         return userInput.indexOf(CustomDelimiter.END.getDescripton(), delimiterEndIndex + 1) != -1;
     }
 
     // "//"가 2번 이상 존재할 때
-	private static boolean hasTwoStartDelimiter(String userInput) {
+	private boolean hasTwoStartDelimiter(String userInput) {
 		return userInput.indexOf(CustomDelimiter.START.getDescripton(), 2) != -1;
 	}
 
 	// "//"로 시작할 때
-	private static boolean isStartWithStartDelimiter(String userInput) {
+	private boolean isStartWithStartDelimiter(String userInput) {
 		return userInput.startsWith(CustomDelimiter.START.getDescripton());
 	}
 
 	// "//"로 시작하지 않을 때
-	private static boolean isNotStartWithStartDelimiter(String userInput) {
+	private boolean isNotStartWithStartDelimiter(String userInput) {
 		return !isStartWithStartDelimiter(userInput);
 	}
 
 	// "//"를 갖고 있을 때
-	private static boolean hasStartDelimiter(String userInput) {
+	private boolean hasStartDelimiter(String userInput) {
 		return userInput.contains(CustomDelimiter.START.getDescripton());
 	}
 
 	// "\n"을 갖고 있을 때
-	private static boolean hasEndDelimiter(String userInput) {
+	private boolean hasEndDelimiter(String userInput) {
 		return userInput.contains(CustomDelimiter.END.getDescripton());
 	}
 
     // "\n"을 갖고 있지 않을 때
-    private static boolean hasNotEndDelimiter(String userInput) {
+    private boolean hasNotEndDelimiter(String userInput) {
         return !hasEndDelimiter(userInput);
     }
 
 	// "//"를 갖고 있지 않을 때
-	private static boolean hasNotStartDelimiter(String userInput) {
+	private boolean hasNotStartDelimiter(String userInput) {
 		return !hasStartDelimiter(userInput);
 	}
 
 	// "\n"이 "//"보다 더 앞에 있는지 판단
-	private static boolean isEndDelimiterBeforStartDelimiter(String userInput) {
+	private boolean isEndDelimiterBeforStartDelimiter(String userInput) {
 		return userInput.indexOf(CustomDelimiter.END.getDescripton()) < userInput.indexOf(CustomDelimiter.START.getDescripton());
 	}
 
 	// 문자열이 공백인지 판단
-	private static boolean isUserInputNull(String userInput) {
+	private boolean isUserInputNull(String userInput) {
 		return userInput == null || userInput.isEmpty();
 	}
 
