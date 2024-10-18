@@ -15,13 +15,16 @@ public class DelimiterNumberValidator {
     private int parseNumber(String number) {
         if (isNumeric(number)) {
             int parseInt = Integer.parseInt(number);
-
-            if (parseInt < 0) {
-                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
-            }
+            validatePositiveNumber(parseInt);
             return parseInt;
         }
         throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getMessage());
+    }
+
+    private void validatePositiveNumber(int parseInt) {
+        if (parseInt < 0) {
+            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+        }
     }
 
     private boolean isNumeric(String str) {
