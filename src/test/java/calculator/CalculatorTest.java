@@ -22,4 +22,25 @@ class CalculatorTest {
         assertThat(Calculator.calculate("///\\n1/2/3")).isEqualTo(6);
         assertThat(Calculator.calculate("//\\\\n1\\2\\3")).isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("잘못된 입력시 IllegalArgumentException 예외")
+    void when_input_is_wrong_then_throws_IllegalArgumentException() {
+        assertThatThrownBy(() -> Calculator.calculate("-1,2,3"))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Calculator.calculate("a,2,3"))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Calculator.calculate(",2,3"))
+                .isInstanceOf(IllegalArgumentException.class);
+
+        assertThatThrownBy(() -> Calculator.calculate("//;\\n-1;2;3"))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Calculator.calculate("//;\\n;1;2;3"))
+                .isInstanceOf(IllegalArgumentException.class);
+
+        assertThatThrownBy(() -> Calculator.calculate("/;\\n1;2;3"))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Calculator.calculate("//;\\1;2;3"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
