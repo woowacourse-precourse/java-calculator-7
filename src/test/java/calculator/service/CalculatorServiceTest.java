@@ -84,4 +84,16 @@ class CalculatorServiceTest {
                 .hasMessage("음수는 입력할 수 없습니다.");
     }
 
+    @Test
+    @DisplayName("구분자가 잘못된 위치에 있는 경우 예외가 발생한다.")
+    void 구분자가_잘못된_위치에_있는_경우_예외_발생() {
+        // given
+        String input = "1,,2:3";
+
+        // when, then
+        assertThatThrownBy(() -> calculatorService.calculateSum(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("구분자와 숫자를 정확하게 입력해주세요.");
+    }
+
 }
