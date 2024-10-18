@@ -35,7 +35,7 @@ public class InputValidator {
 
     // 커스텀 구분자가 올바르게 지정되었는지 확인하는 메서드
     private static void validateCustomDelimiter(String userInput) {
-        Pattern customDelimiterPattern = Pattern.compile("//(.)\n(.*)");
+        Pattern customDelimiterPattern = Pattern.compile("//(.)\\\\n(.*)");
         Matcher matcher = customDelimiterPattern.matcher(userInput);
 
         if (matcher.matches()) {
