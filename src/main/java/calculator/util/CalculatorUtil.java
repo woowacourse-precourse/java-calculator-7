@@ -41,4 +41,8 @@ public class CalculatorUtil {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
+
+    public static String formattingString(String inputValue) {
+        return inputValue.replaceAll(CUSTOM_DELIMITER_REGEX, "");
+    }
 }

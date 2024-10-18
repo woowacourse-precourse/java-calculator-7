@@ -1,11 +1,13 @@
 package calculator.util;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class CalculatorUtilTest {
@@ -40,5 +42,15 @@ class CalculatorUtilTest {
 
         // then
         assertEquals(6, result.size());
+    }
+
+    @Test
+    @DisplayName("커스텀 문자 정규식에 일치하는 부분을 삭제하고 반환합니다.")
+    void formattingString() {
+        String resultA = CalculatorUtil.formattingString("1:2:3,4|5|6");
+        String resultB = CalculatorUtil.formattingString("//:\n1:2:3,4|5|6");
+
+        assertThat(resultA).isEqualTo("1:2:3,4|5|6");
+        assertThat(resultB).isEqualTo("1:2:3,4|5|6");
     }
 }
