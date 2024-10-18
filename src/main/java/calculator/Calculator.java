@@ -6,25 +6,32 @@ public class Calculator implements AutoCloseable {
 
     public static final String PROMPT_MESSAGE = "덧셈할 문자열을 입력해 주세요.";
     private String input;
+    private String output;
     private double sum;
     private boolean isCustom;
     private char customChar;
-    private Parser parser;
-    private DelimiterManager delimiterManager;
+    private final Parser parser;
+    private final DelimiterManager delimiterManager;
 
     public Calculator() {
         parser = new Parser();
         delimiterManager = new DelimiterManager();
     }
 
-    public Calculator sum() {}
-
-    public void printSum() {
-        System.out.println("결과값 : " + sum);
-    }
-
     public void displayPrompt() {
         System.out.println(PROMPT_MESSAGE);
+    }
+
+    public void readInput(String input) {
+        output = parser.parseString(input);
+    }
+
+    public void sum() {
+        output = String.valueOf(sum);
+    }
+
+    public void printSum() {
+        System.out.println(String.format("결과 : %.0f", sum));
     }
 
     @Override
@@ -32,17 +39,26 @@ public class Calculator implements AutoCloseable {
         Console.close();
     }
 
-
     private class Parser {
 
-        private Parser() {}
+        private static final String DELIMITER_PREFIX = "//";
+        private static final String DELIMITER_DEFINITION_END = "\n";
+        StringBuilder stringBuilder;
 
-        private String parseString() {
-            // 검증 로직
-            return "test";
+        private Parser() {
         }
 
-        private static boolean isValidString(String str) {}
+        private String parseString(String str) {
+            // 문자열 양 끝에 존재하는 Whitespace 및 유니코드 공백 제거
+            String newStr = str.strip();
+            // 빈 문자열 처리
+            if (newStr.isEmpty()) {
+                return "0";
+            }
+        }
+
+        private static boolean isValidString(String str) {
+        }
     }
 
     private class DelimiterManager {
@@ -54,9 +70,6 @@ public class Calculator implements AutoCloseable {
         private DelimiterManager() {
             String delimiters = ",:";
             count = 2;
-//            delimiters = new String[2];
-//            delimiters[0] = ",";
-//            delimiters[1] = ":";
         }
 
         public void addDelimiter(String delimiter) {
