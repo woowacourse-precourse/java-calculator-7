@@ -14,14 +14,16 @@ public class Calculator {
     private void sum(String userInput) {
         if(userInput.startsWith("//") || userInput.contains("\n")) {
             int[] customNumberSeparator = getCustomSeparatorNumbers(userInput);
-            for (int i : customNumberSeparator) {
-                result += i;
-            }
+            addResult(customNumberSeparator);
         }else{
             int[] basicNumberSeparator = getBasicSeparatorNumbers(userInput);
-            for (int i : basicNumberSeparator) {
-                result += i;
-            }
+            addResult(basicNumberSeparator);
+        }
+    }
+
+    private void addResult(int[] customNumberSeparator) {
+        for (int i : customNumberSeparator) {
+            result += i;
         }
     }
 
