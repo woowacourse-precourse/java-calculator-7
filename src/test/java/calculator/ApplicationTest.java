@@ -24,6 +24,10 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    /*
+     * splitByDelimiter 메서드 테스트
+     * - 기본 구분자와 커스텀 구분자를 사용하여 문자열을 올바르게 분리하는지 검증
+     */
     @Test
     void 기본_구분자로_문자열_분리() {
         String input = "1,2:3";
@@ -38,6 +42,17 @@ class ApplicationTest extends NsTest {
         String Delimiter = ";";
         String[] result = Application.splitByDelimiter(input, Delimiter);
         String[] answer = {"1", "2", "3"};
+        assertThat(result).isEqualTo(answer);
+    }
+
+    /*
+     * sumNumbers 메서드 테스트
+     */
+    @Test
+    void 숫자_계산() {
+        String[] numbers = {"1", "2", "3"};
+        int result = Application.sumNumbers(numbers);
+        int answer = 6;
         assertThat(result).isEqualTo(answer);
     }
 
