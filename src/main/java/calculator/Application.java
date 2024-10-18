@@ -7,6 +7,7 @@ import calculator.delimiter.pattern.CustomDelimiterPatternMatcher;
 import calculator.delimiter.pattern.DefaultCustomDelimiterPatternMatcher;
 import calculator.delimiter.service.CustomDelimiterService;
 import calculator.delimiter.service.DelimiterService;
+import calculator.delimiter.service.NumberDelimiterService;
 import calculator.delimiter.validator.DefaultCustomDelimiterValidator;
 import calculator.delimiter.validator.DelimiterValidator;
 import calculator.util.integer.IntegerUtils;
@@ -24,14 +25,14 @@ public class Application {
     private static final CustomDelimiterService customDelimiterService = new CustomDelimiterService(
             delimiterFactory, customDelimiterPatternMatcher
     );
-    private static final DelimiterService delimiterService = new DelimiterService(delimiterFactory, customDelimiterService);
+    private static final DelimiterService delimiterService = new NumberDelimiterService(delimiterFactory, customDelimiterService);
 
     public static void main(String[] args) {
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = IOConsole.readLine();
 
-        List<String> numberStrings = delimiterService.extractNumberStrings(input);
+        List<String> numberStrings = delimiterService.splitByDelimiters(input);
 
         try {
             List<Integer> numbers = IntegerUtils.parsePositiveIntegers(numberStrings);
