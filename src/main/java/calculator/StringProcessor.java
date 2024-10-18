@@ -11,7 +11,7 @@ public class StringProcessor {
     }
 
     public static String[] splitWithCustomDelimiter(String expression) {
-        Matcher m = pattern.matcher(expression.replace("\\n","\n"));
+        Matcher m = pattern.matcher(expression.replace("\\n", "\n"));
         if (m.find()) {
             String customDelimiter = m.group(1);
             String[] tokens = m.group(2).split(customDelimiter);
@@ -23,7 +23,11 @@ public class StringProcessor {
     public static int calculate(String[] expression) {
         int sum = 0;
         for (String s : expression) {
-            sum+=Integer.parseInt(s);
+            int operand = Integer.parseInt(s);
+            if (operand < 0) {
+                throw new IllegalArgumentException("음수는 덧셈 대상이 아님");
+            }
+            sum += operand;
         }
         return sum;
     }

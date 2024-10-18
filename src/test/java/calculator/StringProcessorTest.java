@@ -29,4 +29,15 @@ public class StringProcessorTest {
         Assertions.assertThat(stringProcessor.calculate(new String[] {"1", "2", "3"})).isEqualTo(6);
     }
 
+    @Test
+    @DisplayName("덧셈 시 음수가 있으면 예외처리")
+    void 덧셈_음수_예외처리_발생() {
+        StringProcessor stringProcessor = new StringProcessor();
+
+        Assertions.assertThatThrownBy(
+                () -> stringProcessor.calculate(new String[] {"-1", "2", "3"})
+        ).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("음수는 덧셈 대상이 아님");
+    }
+
 }
