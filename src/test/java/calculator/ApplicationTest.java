@@ -15,7 +15,7 @@ class ApplicationTest extends NsTest {
             , "+", "a", "A", "b", "B", "c", "C", "d", "D", "e", "E", "f", "F", "g", "G", "h", "H", "i", "I", "j", "J",
             "k", "K", "l", "L", "m", "M", "n", "N", "o", "O",
             "p", "P", "q", "Q", "r", "R", "s", "S", "t", "T", "u", "U", "v", "V", "w", "W", "x", "X", "y", "Y", "z",
-            "Z", "[", "{", "]", "}", "'", "\"", ";", "/", "?", ".", ">", "<", "\\", "ㅜ");
+            "Z", "[", "{", "]", "}", "'", "\"", ";", "/", "?", ".", ">", "<", "\\", "ㅜ", "|");
 
 
     @Test
@@ -58,6 +58,14 @@ class ApplicationTest extends NsTest {
             run("//,\\n1:2,3");
             assertThat(output()).contains("결과 : 6");
         });
+    }
+
+    @Test
+    void 커스텀_구분자_비정상_사용_이스케이프_문자() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//\\n\\n1\\n2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage("올바른 형식이 아니거나 이스케이프 문자가 포함되어 있습니다"));
     }
 
 
