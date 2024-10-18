@@ -9,6 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
+@DisplayName("사용자가 입력한 문자열은 올바른 개행문자가 포함되었다고 가정")
 class UserInputTest {
 
     String customDelimiter;
@@ -18,7 +19,7 @@ class UserInputTest {
 
     @ParameterizedTest
     @MethodSource("Inputs")
-    @DisplayName("올바른 개행문자 and 커스텀 구분자 형식이 일치하는 경우")
+    @DisplayName("커스텀 구분자 형식이 일치하는 경우")
     void validSeparateDelimAndNumbers(String input,String exceptedDelimiter,String expectedNumberString) {
         separateDelimAndNumbers(input);
         Assertions.assertThat(exceptedDelimiter).isEqualTo(customDelimiter);
@@ -26,12 +27,10 @@ class UserInputTest {
     }
     @ParameterizedTest
     @MethodSource("exceptionTest")
-    @DisplayName("올바른 개행문자가 and 커스텀 구분자 형식이 일치하지 않는 경우")
+    @DisplayName("커스텀 구분자 형식이 일치하지 않는 경우")
     void exceptionTest(String input,String exceptedDelimiter,String expectedNumberString) {
-
         Assertions.assertThatThrownBy(() -> separateDelimAndNumbers(input))
                 .isInstanceOf(IllegalArgumentException.class);
-
     }
 
     public void separateDelimAndNumbers(String input) {
