@@ -8,7 +8,7 @@ public class InputString {
     }
 
     public CustomDelimiter extractCustomDelimiter() {
-        if (value.startsWith("//") && value.contains("\\n")) { //커스텀 구분자 존재 시
+        if (isValueHasCustomDelimiter()) {
             String customDelimiterStr = value.substring(2, value.lastIndexOf("\\n"));
             return new CustomDelimiter(customDelimiterStr);
         }
@@ -17,10 +17,14 @@ public class InputString {
     }
 
     public String extractCalculationString() {
-        if (value.startsWith("//") && value.contains("\\n")) {
+        if (isValueHasCustomDelimiter()) {
             return value.substring(value.lastIndexOf("\\n") + 2);
         }
 
         return value;
+    }
+
+    private boolean isValueHasCustomDelimiter() {
+        return value.startsWith("//") && value.contains("\\n");
     }
 }
