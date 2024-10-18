@@ -10,7 +10,7 @@ public class Number {
         this.numberList = new ArrayList<>();
     }
 
-    public void setNumberList(int num) {
+    public void addNumber(int num) {
         numberList.add(num);
     }
 
