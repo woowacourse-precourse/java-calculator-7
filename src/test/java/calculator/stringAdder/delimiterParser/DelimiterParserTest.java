@@ -51,6 +51,18 @@ class DelimiterParserTest {
     assertTrue(exception.getMessage().contains(expectedMessage));
   }
 
+  @ParameterizedTest
+  @ValueSource(strings = {"//0\\n1;2;3", "//1\\n1;2;3", "//2\\n1;2;3", "//3\\n1;2;3",
+      "//4\\n1;2;3", "//5\\n1;2;3", "//6\\n1;2;3", "//7\\n1;2;3",
+      "//8\\n1;2;3", "//9\\n1;2;3"})
+  void getDelimiters_invalidCustomDelimitersNumber_fail(String input) {
+    Exception exception = assertThrows(IllegalArgumentException.class, () ->
+        delimiterParser.getDelimiters(input)
+    );
+    String expectedMessage = "DelimiterParser: 숫자는 구분자로 사용할 수 없습니다.";
+    assertTrue(exception.getMessage().contains(expectedMessage));
+  }
+
   @Test
   void getDelimiters_multipleCustomDelimiters_fail() {
     String input = "//;,\\n1;2,3";
