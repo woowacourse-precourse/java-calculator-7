@@ -4,9 +4,9 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class InputHandler {
 
-    private static String DELIMITERS = "[,;]";
+    private static String DELIMITERS = "[,:]";
     private static String DELIMITER_COMMAS = ",";
-    private static String DELIMITERS_SEMIKOLON = ";";
+    private static String DELIMITERS_COLON = ":";
     private static String CUSTOM_START = "//";
     private static String CUSTOM_END = "\\n";
 
@@ -92,12 +92,12 @@ public class InputHandler {
     public void checkDelimiterDuplicate(String userInput) {
         for (int i = 0; i < userInput.length(); i++) {
             if (DELIMITER_COMMAS.equals(String.valueOf(userInput.charAt(i)))
-                    || DELIMITERS_SEMIKOLON.equals(String.valueOf(userInput.charAt(i)))
+                    || DELIMITERS_COLON.equals(String.valueOf(userInput.charAt(i)))
             ) {
                 if (
                         (i + 1 < userInput.length())
                                 && (DELIMITER_COMMAS.equals(String.valueOf(userInput.charAt(i + 1)))
-                                || DELIMITERS_SEMIKOLON.equals(String.valueOf(userInput.charAt(i + 1))))
+                                || DELIMITERS_COLON.equals(String.valueOf(userInput.charAt(i + 1))))
                 ) {
                     throw new IllegalArgumentException();
                 }
