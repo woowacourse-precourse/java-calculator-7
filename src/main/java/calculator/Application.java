@@ -34,4 +34,8 @@ public class Application {
 
         return delimiters;
     }
+
+    private static boolean isEmpty(String input) {
+        return input == null || input.trim().isEmpty();
+    }
 }
