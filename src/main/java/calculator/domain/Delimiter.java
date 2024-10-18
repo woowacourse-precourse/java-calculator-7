@@ -19,6 +19,7 @@ public class Delimiter {
         String customDelimiter = str.replace(SUFFIX, "");
 
         customDelimiter = DelimiterValidator.validateRequireEscapeCharacter(customDelimiter);
+        DelimiterValidator.validateCustomDelimiterLength(customDelimiter);
 
         separator +=  "|" + customDelimiter;
     }
