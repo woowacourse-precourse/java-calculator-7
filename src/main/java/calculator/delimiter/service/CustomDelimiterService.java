@@ -1,7 +1,8 @@
 package calculator.delimiter.service;
 
 import calculator.delimiter.domain.Delimiter;
-import calculator.delimiter.validator.CustomDelimiterValidator;
+import calculator.delimiter.domain.Delimiters;
+import calculator.delimiter.factory.DelimiterFactory;
 
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -17,21 +18,17 @@ public class CustomDelimiterService {
             "^" + CUSTOM_DELIMITER_PREFIX + "(.*)" + CUSTOM_DELIMITER_SUFFIX + "(.*)"
     );
 
-    private final CustomDelimiterValidator customDelimiterValidator;
+    private final DelimiterFactory delimiterFactory;
 
-    public CustomDelimiterService(CustomDelimiterValidator customDelimiterValidator) {
-        this.customDelimiterValidator = customDelimiterValidator;
+    public CustomDelimiterService(DelimiterFactory delimiterFactory) {
+        this.delimiterFactory = delimiterFactory;
     }
 
     public Optional<Delimiter> extract(String value) {
         return Optional.ofNullable(value)
                 .map(DELIMITER_PATTERN::matcher)
                 .filter(Matcher::find)
-                .map(matcher -> {
-                    String extracted = matcher.group(DELIMITER_GROUP);
-                    customDelimiterValidator.validate(extracted);
-                    return new Delimiter(extracted);
-                });
+                .map(matcher -> delimiterFactory.createDelimiter(matcher.group(DELIMITER_GROUP)));
     }
 
     public String trimCustomDelimiter(String value) {
@@ -40,6 +37,10 @@ public class CustomDelimiterService {
                 .filter(Matcher::find)
                 .map(matcher -> matcher.group(TRIMMED_GROUP))
                 .orElse(value);
+    }
+
+    public Delimiters createDelimiters(Delimiter... additionalDelimiters) {
+        return delimiterFactory.createDelimiters(additionalDelimiters);
     }
 }
 

@@ -2,6 +2,7 @@ package calculator;
 
 import calculator.common.exception.ExceptionFactory;
 import calculator.delimiter.domain.Delimiters;
+import calculator.delimiter.factory.DefaultDelimiterFactory;
 import calculator.delimiter.factory.DelimiterFactory;
 import calculator.delimiter.service.CustomDelimiterService;
 import calculator.delimiter.validator.CustomDelimiterValidator;
@@ -16,7 +17,8 @@ import static calculator.common.exception.ExceptionType.NOT_DELIMITER;
 public class Application {
 
     private static final CustomDelimiterValidator customDelimiterValidator = new NormalCustomDelimiterValidator();
-    private static final CustomDelimiterService customDelimiterService = new CustomDelimiterService(customDelimiterValidator);
+    private static final DelimiterFactory delimiterFactory = new DefaultDelimiterFactory(customDelimiterValidator);
+    private static final CustomDelimiterService customDelimiterService = new CustomDelimiterService(delimiterFactory);
 
     public static void main(String[] args) {
 
@@ -38,7 +40,7 @@ public class Application {
 
     private static Delimiters getDelimiters(String input) {
         return customDelimiterService.extract(input)
-                .map(DelimiterFactory::createDelimiters)
-                .orElseGet(DelimiterFactory::createDelimiters);
+                .map(customDelimiterService::createDelimiters)
+                .orElseGet(customDelimiterService::createDelimiters);
     }
 }
