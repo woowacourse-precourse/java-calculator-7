@@ -20,5 +20,6 @@ mvc 패턴으로 구현을 한다
     1) CalculatorService 클래스
         * tokenizeInput 함수 - 입력 받은 문자열에서 구분자를 기준으로 숫자를 추출하는 메소드
         * splitByCustomDelimiter 함수 - 유저가 설정한 구분자를 기준으로 split 하는 메소드
+        * getDelimiter 함수 - 유저가 설정한 구분자를 추출하는 메소드
         * splitByDelimiter 함수 - 주어진 구분자로 split 하는 메소드
         * sum 함수 - 모든 숫자들을 더해서 결과를 반환하는 함수
