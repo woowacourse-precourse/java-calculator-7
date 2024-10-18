@@ -7,6 +7,7 @@ public class Application {
         // TODO: 프로그램 구현
         String delimiter = ",|:";
 //        String delimiter = ",:";
+        int sum;
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = readLine();
         try {
@@ -15,8 +16,16 @@ public class Application {
             System.out.println(e.getMessage());
             return;
         }
-        //splitInput();
-        //getSum();
+        String[] numbers = splitInput(input, delimiter);
+        for (String number : numbers) {
+            System.out.print(number + ' ');
+        }
+//        sum = getSum();
+//        System.out.println("sum = " + sum);
+    }
+
+    private static String[] splitInput(String input, String delimiter) {
+        return input.split(delimiter);
     }
 
     private static String checkInput(String input, String delimiter) throws IllegalArgumentException {
@@ -25,7 +34,6 @@ public class Application {
             delimiter += "|" + newDelimiter;
             input = input.substring(input.indexOf("\\n") + 2, input.length());
         }
-        System.out.println("input = " + input);
         for (char c : input.toCharArray()) {
             if (!validateInput(c, delimiter)) {
                 throw new IllegalArgumentException("잘못된 입력");
