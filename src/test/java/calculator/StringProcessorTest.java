@@ -40,4 +40,12 @@ public class StringProcessorTest {
                 .hasMessage("음수는 덧셈 대상이 아님");
     }
 
+    @Test
+    @DisplayName("빈문자열 분리 테스트")
+    void 빈문자열_분리_테스트() {
+        StringProcessor stringProcessor = new StringProcessor();
+
+        Assertions.assertThat(stringProcessor.splitWithCustomDelimiter("")).containsExactly("");
+    }
+
 }
