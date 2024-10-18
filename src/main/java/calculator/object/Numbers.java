@@ -3,11 +3,9 @@ package calculator.object;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class Numbers {
 
-    //    private static final List<Character> DEFAULT_SEPARATORS = List.of(',', ':');
     private static final char DECIMAL_POINT = '.';
 
     private final List<BigDecimal> numbers;
@@ -19,13 +17,8 @@ public class Numbers {
             return;
         }
 
-//        List<Character> separators = getSeparators(customSeparator);
         throwIfFormulaPartIsNotSeparatorOrNumber(formulaPart, separators);
         this.numbers = getNumbers(formulaPart, separators);
-    }
-
-    public Stream<BigDecimal> stream() {
-        return numbers.stream();
     }
 
     public String addAll() {
@@ -46,8 +39,7 @@ public class Numbers {
         return numberPartOfFormula;
     }
 
-    private static void throwIfFormulaPartIsNotSeparatorOrNumber(String numberPartOfFormula,
-                                                                 Separators separators) {
+    private static void throwIfFormulaPartIsNotSeparatorOrNumber(String numberPartOfFormula, Separators separators) {
         for (char c : numberPartOfFormula.toCharArray()) {
             if (separators.contains(c)) {
                 continue;

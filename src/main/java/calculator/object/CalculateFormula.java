@@ -1,25 +1,21 @@
 package calculator.object;
 
-import java.math.BigDecimal;
+public class CalculateFormula {
 
-public record CalculateFormula(
-        Separators separators,
-        Numbers numbers
-) {
+    private final Numbers numbers;
+
+    private CalculateFormula(Numbers numbers) {
+        this.numbers = numbers;
+    }
 
     public static CalculateFormula from(String inputFormula) {
         Separators separators = new Separators(inputFormula);
         Numbers numbers = new Numbers(inputFormula, separators);
-        return new CalculateFormula(separators, numbers);
+        return new CalculateFormula(numbers);
     }
 
-    public String addAll() {
-        BigDecimal reduce = numbers.stream()
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-        if (reduce.remainder(BigDecimal.ONE).compareTo(BigDecimal.ZERO) == 0) {
-            return reduce.toBigInteger().toString();
-        }
-        return reduce.toString();
+    public String calculate() {
+        return numbers.addAll();
     }
 
 }

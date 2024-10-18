@@ -35,11 +35,6 @@ public class Separators {
         return separators.contains(target);
     }
 
-    @Override
-    public String toString() {
-        return customSeparator;
-    }
-
     private static boolean isNotIncludedHeaderOrFooter(String inputFormula) {
         return !inputFormula.contains(SEPARATOR_HEADER) || inputFormula.indexOf(SEPARATOR_FOOTER) <= 0;
     }
