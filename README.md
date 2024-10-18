@@ -16,12 +16,11 @@
 
 ### `StringHandler`
 
-- [ ] `문자열`을 받아서 `파싱`한다.
-    - [ ] `커스텀 구분자 문법`이 잘못된 경우, `IllegalArgumentException`을 발생시킨다.
-- [ ] 파싱한 결과를 `숫자 리스트`로 변환한다.
-    - [ ] `숫자 리스트`에 `음수`가 존재할 경우, `IllegalArgumentException`을 발생시킨다.
-- [ ] 변환된 `숫자 리스트`를 `CalculatorController`에게 반환한다.
--
+- [x] `문자열`을 받아서 `파싱`한다.
+    - [x] `커스텀 구분자 문법`이 잘못된 경우, `IllegalArgumentException`을 발생시킨다.
+    - [x] 파싱한 결과를 `숫자 리스트`로 변환한다.
+    - [x] `숫자 리스트`에 `음수`가 존재할 경우, `IllegalArgumentException`을 발생시킨다.
+    - [x] 변환된 `숫자 리스트`를 `CalculatorController`에게 반환한다.
 
 ---
 
