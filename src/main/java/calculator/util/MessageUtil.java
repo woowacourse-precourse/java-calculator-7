@@ -1,7 +1,7 @@
 package calculator.util;
 
-import static calculator.constant.MessageConstant.ADDITION_RESULT;
-import static calculator.constant.MessageConstant.INPUT_ADDITION;
+import static calculator.constant.OutputMessage.ADDITION_RESULT;
+import static calculator.constant.OutputMessage.INPUT_ADDITION;
 
 public class MessageUtil {
     public void printStringForSum() {

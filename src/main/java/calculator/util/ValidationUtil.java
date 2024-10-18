@@ -1,15 +1,18 @@
 package calculator.util;
 
+import static calculator.constant.ErrorMessage.INVALID_INPUT;
+import static calculator.constant.ErrorMessage.REQUIRED_POSITIVE_NUMBER;
+
 public class ValidationUtil {
     public void isValidInput(String initialInput) {
         if (!initialInput.startsWith("//") && !Character.isDigit(initialInput.charAt(0))) {
-            throw new IllegalArgumentException("유효하지 않은 입력입니다.");
+            throw new IllegalArgumentException(REQUIRED_POSITIVE_NUMBER.getMessage());
         }
     }
 
     public void isValidNumber(String s) {
         if (!Character.isDigit(s.charAt(0))) {
-            throw new IllegalArgumentException("양수로 구성된 문자열을 입력해주세요.");
+            throw new IllegalArgumentException(INVALID_INPUT.getMessage());
         }
 
     }
