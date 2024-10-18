@@ -7,11 +7,13 @@ import java.io.InputStreamReader;
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        // 1. 문자열을 입력하는 기능
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String userInput = null;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
         try {
             userInput = br.readLine();
+            StringCalculator sc = new StringCalculator(userInput);
+            sc.calculate();
         } catch (IOException e) {
             System.err.println("입력 오류: " + e.getMessage());
         } catch (Exception e) {

@@ -1,11 +1,11 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.Test;
-
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
     @Test
@@ -19,9 +19,26 @@ class ApplicationTest extends NsTest {
     @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+    @Test
+    void 잘못된_커스텀_구분자_형식() {
+        // given
+        String input = "//;\n1;2;3";
+        StringCalculator calculator = new StringCalculator(input);
+
+        // when
+        String wrongInput = "//;1n2n3";
+
+        // then
+        assertThatThrownBy(() -> {
+            StringCalculator wrongCalculator = new StringCalculator(wrongInput);
+            wrongCalculator.calculate();
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("\\n으로 끝나지 않았다는 exception 구현 예정");
     }
 
     @Override
