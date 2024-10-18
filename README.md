@@ -10,18 +10,17 @@
     - 숫자 파싱하기
 - 숫자 더하기
 
-### 2. 리팩터링
+### 2. 숫자 유형 확장하기
+
+- 실수 허용하기
+
+### 3. 리팩터링
 
 - `lexer`, `parser` 분리하기
 
-### 3. 숫자 유형 확장하기
-
-- 실수 허용하기
-- 2진수, 8진수, 16진수 표기 허용하기
-
 ## Sequence
 
-### 1. 간단하게 돌아가는 프로그램
+### `SimpleParser` (`Stream`과 `RegEx`를 통해 구현)
 
 ```mermaid
 sequenceDiagram
@@ -33,6 +32,6 @@ sequenceDiagram
 
     U ->>+ M: numbers with or without delimiters
     M ->>+ P: parse user input
-    P ->>- M: numbers
-    M ->>- U: sum of the numbers
+    P -->>- M: numbers
+    M -->>- U: sum of the numbers
 ```
