@@ -7,6 +7,14 @@ public class InputService {
     private String formula;
     private String customSeparator = null;
 
+    public void getInput() {
+        // 덧셈할 문자열 입력 받기
+        readFormula();
+
+        // 문자열 검사하기
+        checkValidFormula();
+    }
+
     // 덧셈할 문자열 입력 받기
     public void readFormula() {
         System.out.println(INPUT_MESSAGE);
