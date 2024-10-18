@@ -1,5 +1,5 @@
 package calculator;
-
+import java.util.stream.Stream;
 
 import camp.nextstep.edu.missionutils.Console;
 
@@ -19,6 +19,13 @@ public class Application {
 
             input = numbers.replace(delimiter, ",");
         }
+
         String[] split1 = input.split(",|:");
+
+        int resultSum = Stream.of(split1).mapToInt(Integer::parseInt).sum();
+
+        System.out.println("결과 : " + resultSum);
+
+        Console.close();
     }
 }
