@@ -14,5 +14,5 @@
 - [x] 문자열 입력 기능 (camp.nextstep.edu.missionutils.Console의 readLine()을 활용한다.
 - [x] 기본 구분자(쉼표,콜론)를 기준으로 분리한 각 숫자의 합을 반환한다.
 - [x] 커스텀 구분자("//"와"\n")사이에 위치하는 문자를 커스텀 구분자로 사용한다
-- 사용자가 잘못된 값을 입력할 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료되어야 한다.
+- [x] 사용자가 잘못된 값을 입력할 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료되어야 한다.
 - 테스트 코드 
