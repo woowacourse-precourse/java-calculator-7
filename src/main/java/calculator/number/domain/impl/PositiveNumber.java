@@ -1,6 +1,7 @@
-package calculator.number.domain;
+package calculator.number.domain.impl;
 
 
+import calculator.number.domain.Number;
 import calculator.number.util.NumberConvertor;
 import calculator.separator.domain.Separator;
 
