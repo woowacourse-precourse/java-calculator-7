@@ -13,5 +13,22 @@ public class Application {
         if (susik == null || susik.trim().isEmpty()) {
             System.out.println("결과 : " + 0);
         }
+
+        // 입력받은 문자열에서 "\n"을 실제 줄바꿈 문자로 변환
+        assert susik != null;
+        String re_susik = susik.replace("\\n", "\n");
+
+        int result = 0;
+
+        String guboonja = "[,:]";
+        String[] nums = re_susik.split(guboonja);
+
+        for (String word : nums) {
+            if (!word.trim().isEmpty()) {
+                int num = Integer.parseInt(word.trim());
+                result += num;
+            }
+        }
+        System.out.println("결과 : " + result);
     }
 }
