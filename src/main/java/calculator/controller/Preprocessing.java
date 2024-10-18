@@ -32,6 +32,7 @@ public class Preprocessing {
                 temp = given.substring(i, i + 1);
             }
         }
+        separated.add(temp);
         return separated;
     }
 
