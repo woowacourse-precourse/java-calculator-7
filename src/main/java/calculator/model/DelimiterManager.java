@@ -3,6 +3,7 @@ package calculator.model;
 import java.util.List;
 
 public class DelimiterManager {
+
     private final DelimiterChecker delimiterChecker;
     private final DelimiterExtractor delimiterExtractor;
     private final DelimiterStore delimiterStore;

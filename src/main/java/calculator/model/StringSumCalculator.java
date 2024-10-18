@@ -1,10 +1,11 @@
 package calculator.model;
 
+import static calculator.common.CalculatorConstant.DEFAULT_VALUE;
+
 import java.util.List;
 
 public class StringSumCalculator implements Calculator {
 
-    private static final int DEFAULT_VALUE = 0;
     private final DelimiterManager delimiterManager;
     private final StringParser stringParser;
 

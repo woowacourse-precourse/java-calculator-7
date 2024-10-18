@@ -1,14 +1,14 @@
 package calculator.model;
 
 
+import static calculator.common.DelimiterConstant.DELIMITER_CREATOR_BACK;
+import static calculator.common.DelimiterConstant.DELIMITER_SEPERATOR;
+
 import calculator.common.NumberValidator;
 import java.util.Arrays;
 import java.util.List;
 
 public class StringParser {
-
-    private final static String DELIMITER_SEPERATOR = "|";
-    private final static String CUSTOM_CREATOR_BACK = "\\n";
 
     private final DelimiterStore delimiterStore;
 
@@ -17,7 +17,7 @@ public class StringParser {
     }
 
     public String splitTarget(String value) {
-        return value.substring(value.lastIndexOf(CUSTOM_CREATOR_BACK) + CUSTOM_CREATOR_BACK.length());
+        return value.substring(value.lastIndexOf(DELIMITER_CREATOR_BACK) + DELIMITER_CREATOR_BACK.length());
     }
 
     public List<Integer> parseToNumbers(String value) {
