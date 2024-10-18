@@ -25,8 +25,12 @@
     - **예시**: `"1,-2,3"` → `IllegalArgumentException("음수는 허용되지 않습니다: -2")` 발생
 - **잘못된 커스텀 구분자 처리**: 커스텀 구분자가 잘못된 형식일 경우 `IllegalArgumentException`을 발생시킨다.
     - **예시**: `"//;\n1;2;3"` → 정상 처리
-    - **예시**: `"//;\n"` → `IllegalArgumentException("잘못된 커스텀 구분자 형식입니다.")` 발생
-    - **예시**: `"//\n1;2;3"` → `IllegalArgumentException("구분자가 존재하지 않습니다.")` 발생
+    - **예시**: `"//\n1;2;3"` → `IllegalArgumentException("잘못된 커스텀 구분자 형식입니다.")` 발생
+- **숫자가 없는 경우 처리**: 커스텀 구분자는 정의되었지만 숫자가 없는 경우 `IllegalArgumentException`을 발생시킨다.
+    - **예시**: `"//;\n"` → 커스텀 구분자는 정의되었지만 숫자가 없는 경우 `IllegalArgumentException`("숫자가 없습니다.")을 발생
+- **구분자가 중복된 경우 처리**: 입력된 문자열에서 구분자가 연속해서 사용된 경우 IllegalArgumentException을 발생시킨다.
+    - **예시**: `"1,,2" 또는 "1::3"` → IllegalArgumentException("연속된 구분자 형식입니다.") 발생
+    - **예시**: `"커스텀 구분자가 연속된 경우`: `"//;\n1;;2"` → IllegalArgumentException("잘못된 커스텀 문자입니다.")
 
 **4. 계산기 기능 (Model)**
 
