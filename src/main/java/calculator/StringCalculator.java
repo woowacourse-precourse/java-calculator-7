@@ -1,16 +1,14 @@
 package calculator;
 
 public class StringCalculator {
+
+    private InputParser inputParser;
+
     public int calculate(String input) {
 
         //커스텀 구분자 추출
-        Character customDelimiter = extractCustomDelimiter(input);
-
-        //계산 문자열 구분
-        String calculateStr = input;
-        if (customDelimiter != null) {
-            calculateStr = input.substring(input.lastIndexOf("\\n") + 2);
-        }
+        Character customDelimiter = inputParser.extractCustomDelimiter(input);
+        String calculateStr = inputParser.extractCalculationString(input, customDelimiter);
 
         //계산 문자열을 구분자로 분리
         String splitRegex = ":|,";
@@ -26,7 +24,6 @@ public class StringCalculator {
         for (String str : parsedCalculateStr) {
             int num = stringToInteger(str);
             validateNumPositive(num);
-
             ret += num;
         }
 
@@ -48,23 +45,6 @@ public class StringCalculator {
             return Integer.parseInt(str);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("구분자와 양수 이외 다른 문자는 입력x");
-        }
-    }
-
-    private Character extractCustomDelimiter(String input) {
-        if (input.startsWith("//") && input.contains("\\n")) { //커스텀 구분자 존재 시
-            String customDelimiterStr = input.substring(2, input.lastIndexOf("\\n"));
-            validateCustomDelimiterLength(customDelimiterStr);
-
-            return customDelimiterStr.charAt(0);
-        }
-
-        return null;
-    }
-
-    private void validateCustomDelimiterLength(String customDelimiterStr) {
-        if (customDelimiterStr.length() != 1) { //커스텀 구분자의 길이가 1인지 확인
-            throw new IllegalArgumentException();
         }
     }
 }
