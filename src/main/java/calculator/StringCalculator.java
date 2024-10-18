@@ -3,11 +3,15 @@ package calculator;
 public class StringCalculator {
 	private static final String ORIGINAL_SPLITTER_REGEX = ",|:";
 	public static int splitAndSum(String input){
-		String[] splitString = input.split(ORIGINAL_SPLITTER_REGEX);
+		String[] splitString = splitWithOriginalSplitter(input);
 		if (splitString.length > 1) {
 			return calculateSum(splitString);
 		}
 		return calculateSum(splitWithCustomSplitter(input));
+	}
+
+	private static String[] splitWithOriginalSplitter(String input) {
+		return input.split(ORIGINAL_SPLITTER_REGEX);
 	}
 
 	private static String[] splitWithCustomSplitter(String input){
