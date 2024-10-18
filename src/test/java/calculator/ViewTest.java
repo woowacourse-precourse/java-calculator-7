@@ -43,4 +43,21 @@ class ViewTest {
 
         System.setOut(System.out);
     }
+
+    @Test
+    @DisplayName("콘솔에 결과 메시지를 출력합니다.")
+    void printResultMessage() {
+        // given
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+
+        // when
+        View input = new View();
+        input.printResultMessage(6);
+
+        // then
+        assertEquals(CalculatorConstraint.RESULT_MESSAGE + 6, out.toString().trim());
+
+        System.setOut(System.out);
+    }
 }
