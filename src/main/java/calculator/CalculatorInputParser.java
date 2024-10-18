@@ -1,6 +1,7 @@
 package calculator;
 
 import calculator.exception.InvalidDelimiterException;
+import calculator.exception.InvalidInputException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +17,9 @@ public class CalculatorInputParser {
 
         if (start == -1 && end == -1) {
             return -1;
+        }
+        if (start != 0 || start > end) {
+            throw new InvalidInputException();
         }
 
         return end;
