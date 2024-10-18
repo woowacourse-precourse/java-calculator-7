@@ -2,6 +2,17 @@ package calculator;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        InputPrinter inputPrinter = new InputPrinter();
+        inputPrinter.printInputMessage();
+        String input = inputPrinter.input();
+
+        StringParser stringParser = new StringParser();
+        String[] strings = stringParser.parseString(input);
+
+        Calculator calculator = new Calculator();
+        int result = calculator.calculate(strings);
+
+        ResultPrinter resultPrinter = new ResultPrinter();
+        resultPrinter.print(result);
     }
 }
