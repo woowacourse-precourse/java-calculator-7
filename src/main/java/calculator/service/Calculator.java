@@ -18,20 +18,17 @@ public class Calculator {
         // 사용자의 입력값을 받아옴
         String inputString = inputController.getInputString();
 
-        // 사용자의 입력값으로부터 커스텀 구분자를 분리 -> 숫자와 구분자만 남아있는 문자열 생성
+        // 사용자의 입력값으로부터 커스텀 구분자를 추출
         separatorController.extractSeparator(inputString);
 
-        // 커스텀 구분자를 포함한 모든 구분자드을 정규표현식 형태로 변환
+        // 커스텀 구분자를 포함한 모든 구분자들을 정규표현식 형태로 변환
         String regex = separatorController.getRegex();
 
         // 숫자와 구분자만 남아있는 문자열에서 숫자만 추출
         numberController.extractNumber(inputString, regex);
 
-        // 분리한 숫자를 List형태로 가져옴
-        List<Integer> numbers = numberController.getNumbersToList();
-
         // List에 담긴 숫자들을 모두 덧셈
-        int result = sumNumbers(numbers);
+        int result = sumNumbers(numberController.getNumbersToList());
 
         // 결과물 출력
         outputController.writeResult(result);
