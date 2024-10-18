@@ -1,6 +1,6 @@
 package calculator;
 
-import static calculator.CustomPartManager.validateCustomSeparator;
+import static calculator.CustomPartManager.validateCustomPart;
 import static calculator.StringPartManager.initString;
 import static calculator.StringPartManager.validateString;
 
@@ -8,18 +8,17 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class StringCalculator {
 
-    String separators = ",:";
+    String separators;
     boolean hasCustomSeparator;
 
     void run() {
         printInputMsg();
         String input = Console.readLine();
-        if (hasCustomPart(input)) {
-            if (!validateCustomSeparator(input)) {
-                throw new IllegalArgumentException("커스텀 구분자 에러");
-            }
-            addCustomSeparator(input.charAt(2));
+
+        if (validateCustomPart(input)) {
+            hasCustomSeparator = true;
         }
+        separators = initSeparator(input, hasCustomSeparator);
 
         String str = initString(input, hasCustomSeparator);
         validateString(str, separators);
@@ -43,15 +42,12 @@ public class StringCalculator {
         return sumValue;
     }
 
-    boolean hasCustomPart(String input) {
-        if (input.startsWith("//")) {
-            return input.contains("\\n");
+    String initSeparator(String input, boolean hasCustomSeparator) {
+        String basicSeparators = ",:";
+        if (hasCustomSeparator) {
+            char customSeparator = input.charAt(2);
+            return basicSeparators + customSeparator;
         }
-        return false;
-    }
-
-    void addCustomSeparator(char customSeparator) {
-        hasCustomSeparator = true;
-        separators += customSeparator;
+        return basicSeparators;
     }
 }
