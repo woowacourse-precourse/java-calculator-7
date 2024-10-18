@@ -8,8 +8,10 @@ import java.util.regex.Pattern;
 public class Application {
 
     private static final int EMPTY_INPUT_RETURN_VALUE = 0;
+
     private static final String CUSTOM_DELIMITER_START_SIGN = "//";
     private static final int CUSTOM_DELIMITER_START_SIGN_LENGTH = CUSTOM_DELIMITER_START_SIGN.length();
+
     private static final String CUSTOM_DELIMITER_END_SIGN = "\\n";
     private static final int CUSTOM_DELIMITER_END_SIGN_LENGTH = CUSTOM_DELIMITER_END_SIGN.length();
 
