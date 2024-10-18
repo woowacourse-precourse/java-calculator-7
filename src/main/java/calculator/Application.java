@@ -15,20 +15,10 @@ public class Application {
         checkIsInputEmpty(calculator);
         splitWithDefaultSeparator(calculator);
 
-        int total = 0;
+        int escapeIdx = calculator.userInput.indexOf("\\n");
+        splitWithCustomSeparator(calculator, escapeIdx);
 
-        else {
-            int escapeIdx = input.indexOf("\\n");
-            if(escapeIdx > 0) {
-                String delimiter = input.substring(0, escapeIdx);
-                if(delimiter.startsWith("//")){
-                    delimiter = delimiter.replace("//", "");
-                }
-                String leftInput = input.substring(escapeIdx + 2);
-                String[] splitInput = leftInput.split(delimiter);
-                processedInput.addAll(Arrays.asList(splitInput));
-            }
-        }
+        int total = 0;
 
         for (String number : processedInput) {
             if (Integer.parseInt(number) < 0) {
@@ -63,6 +53,18 @@ public class Application {
     static void splitWithDefaultSeparator(Calculator calculator) {
         String delimiter = "[,:]";
         String[] splitInput = calculator.userInput.split(delimiter);
+        calculator.processedInput.addAll(Arrays.asList(splitInput));
+    }
+
+    static void splitWithCustomSeparator(Calculator calculator, Integer escapeIdx) {
+        String separator = calculator.userInput.substring(0, escapeIdx);
+
+        if (separator.startsWith("//")) {
+            separator = separator.replace("//", "");
+        }
+
+        String leftInput = calculator.userInput.substring(escapeIdx + 2);
+        String[] splitInput = leftInput.split(separator);
         calculator.processedInput.addAll(Arrays.asList(splitInput));
     }
 }
