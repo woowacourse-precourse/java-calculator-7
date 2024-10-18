@@ -1,8 +1,11 @@
 package calculator.domain;
 
+import static calculator.exception.constants.ErrorMessage.INVALID_INPUT_VALUE;
+import static calculator.exception.constants.ErrorMessage.NEGATIVE_VALUE_NOT_ALLOWED;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import calculator.exception.CalculatorException;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -33,7 +36,8 @@ class CalculatorTest {
 
         // when & then
         assertThatThrownBy(calculator::sum)
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(CalculatorException.class)
+                .hasMessage(INVALID_INPUT_VALUE.getMessage());
     }
 
     @ParameterizedTest(name = "입력값: {0}")
@@ -45,7 +49,8 @@ class CalculatorTest {
 
         // when & then
         assertThatThrownBy(calculator::sum)
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(NEGATIVE_VALUE_NOT_ALLOWED.getMessage());
     }
 
     static Stream<Arguments> providePositiveNumber() {

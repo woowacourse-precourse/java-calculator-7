@@ -1,5 +1,9 @@
 package calculator.domain;
 
+import static calculator.exception.constants.ErrorMessage.INVALID_INPUT_VALUE;
+import static calculator.exception.constants.ErrorMessage.NEGATIVE_VALUE_NOT_ALLOWED;
+
+import calculator.exception.CalculatorException;
 import java.util.Arrays;
 
 public class Calculator {
@@ -21,13 +25,13 @@ public class Calculator {
         try {
             return Long.parseLong(number);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
+            throw new CalculatorException(INVALID_INPUT_VALUE.getMessage());
         }
     }
 
     private boolean validatePositiveNumber(long number) {
         if (number <= 0) {
-            throw new IllegalArgumentException();
+            throw new CalculatorException(NEGATIVE_VALUE_NOT_ALLOWED.getMessage());
         }
         return true;
     }
