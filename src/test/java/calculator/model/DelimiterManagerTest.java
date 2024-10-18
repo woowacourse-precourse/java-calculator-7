@@ -45,5 +45,18 @@ class DelimiterManagerTest {
         // then
         assertThat(output).isEqualTo("1,3");
     }
+    @Test
+    void 커스텀구분자가_아닌문자가_포함되었을떄_문자열반환() {
+        // given
+        DelimiterManager manager = new DelimiterManager();
+        String input = "//;\\n1//;\\n,3\\";
+        // when
+        System.out.println("=====Logic Start=====");
 
+        String output = manager.removeCustomDelimiterFrom(input);
+
+        System.out.println("=====Logic End=====");
+        // then
+        assertThat(output).isEqualTo("1,3\\");
+    }
 }
