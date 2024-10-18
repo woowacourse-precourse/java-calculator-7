@@ -6,13 +6,11 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static camp.nextstep.edu.missionutils.Console.readLine;
-
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         StringCalculator stringCalculator = new StringCalculator();
-        stringCalculator.init();
+        stringCalculator.run();
 
     }
 
@@ -37,7 +35,7 @@ public class Application {
             this.delimiterArr.add(",");
         }
 
-        public void init(){
+        public void run(){
             String input = getInput();
             int result = 0;
 
