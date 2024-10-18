@@ -124,3 +124,20 @@
 
 - [X] 올바르지 않은 입력 형식 (INVALID_INPUT_FORMAT)
 - [X] 양의 정수 범위를 벗어난 숫자 존재 (OUT_OF_RANGE)
+
+##### NumberRange
+
+허용 가능한 숫자 범위를 정의
+
+- [X] 최소 : 1
+- [X] 최대 : 2,147,483,647 (Integer.MAX_VALUE)
+
+### ✅ 클래스 다이어그램
+
+#### 1. Main
+
+![image](https://github.com/user-attachments/assets/8b80f32e-bf8e-47cf-a625-9a8e5f45f58a)
+
+#### 2. Constant
+
+![image](https://github.com/user-attachments/assets/2ea3c5e9-5d5b-4be9-8c59-cee83a55e7cf)
