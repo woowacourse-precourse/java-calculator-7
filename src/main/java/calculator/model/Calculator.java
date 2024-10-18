@@ -12,7 +12,7 @@ public class Calculator {
         return this.formula;
     }
 
-    private String plus(String[] splitedNumbers){
+    public String plus(String[] splitedNumbers){
         int sumOfNumbers = 0;
         for (int i = 0; i < splitedNumbers.length; i++) {
             int intNumber = Integer.parseInt(splitedNumbers[i]);
