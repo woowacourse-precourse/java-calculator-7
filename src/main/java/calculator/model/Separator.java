@@ -13,7 +13,7 @@ public class Separator {
         this.separator = extractSeparator(expression);
     }
 
-    public String extractSeparator(String expression) {
+    private String extractSeparator(String expression) {
         String defaultSeparator = DEFAULT_SEPARATOR;
         if (expression.startsWith(CUSTOM_DELIMITER_PREFIX)) {
             int start = expression.indexOf(CUSTOM_DELIMITER_PREFIX) + PREFIX_OFFSET;

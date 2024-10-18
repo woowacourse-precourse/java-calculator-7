@@ -1,7 +1,7 @@
 package calculator.controller;
 
-import calculator.model.Calculator;
 import calculator.model.Expression;
+import calculator.model.Terms;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -15,9 +15,9 @@ public class CalculatorController {
     }
 
     public void run() {
-        String expression = inputAddition();
-        Calculator calculator = new Calculator(new Expression(expression));
-        Integer result = calculateExpression(calculator);
+        String rawExpression = inputAddition();
+        Expression expression = new Expression(rawExpression);
+        Integer result = calculateExpression(expression.getTerms());
         outputResult(result);
     }
 
@@ -25,8 +25,8 @@ public class CalculatorController {
         return inputView.inputAdditionString();
     }
 
-    private Integer calculateExpression(Calculator calculator) { // 입력받은 문자열에 대해 계산을 진행한다.
-        return calculator.addCalculate();
+    private Integer calculateExpression(Terms terms) { // 입력받은 문자열에 대해 계산을 진행한다.
+        return terms.addition();
     }
 
     private void outputResult(Integer result) { // 결과를 출력한다.
