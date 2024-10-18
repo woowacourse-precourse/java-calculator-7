@@ -16,18 +16,21 @@ public class Calculator {
         this.userInput = delimiterProcess.getUserInput();
     }
 
+    //print(): 결과인 합을 계산
+    public int printResult() {
+        int sum = 0;
+
+        for (Integer integer : getIntegers()) {
+            sum += integer;
+        }
+
+        return sum;
+    }
 
     //getIntegers(): 구분자를 사용하여 문자열에서 숫자만 분리하기
     private List<Integer> getIntegers(){
-        if (userInput == null) {
-            return new ArrayList<Integer>(List.of(0));
-        }
 
-        //연산자 모두 합치기
-        String completeDelimiter = "";
-        for (String delimiter : delimiters) {
-            completeDelimiter += delimiter + "|";
-        }
+        String DelimTotal = getDelimTotal();
 
         StringTokenizer stringTokenizer = new StringTokenizer(userInput, completeDelimiter);
         List<Integer> resultIntegers = new ArrayList<>();
@@ -39,15 +42,14 @@ public class Calculator {
         return resultIntegers;
     }
 
-    //print(): 결과인 합을 계산
-    public int printResult() {
-        int sum = 0;
-
-        for (Integer integer : getIntegers()) {
-            sum += integer;
+    //getDelimTotal(): 연산자 모두 합쳐서 String 정규식으로 만들기
+    private String getDelimTotal() {
+        StringBuilder DelimTotal = new StringBuilder();
+        for (String delimiter : delimiters) {
+            DelimTotal.append(delimiter).append("|");
         }
-
-        return sum;
+        return DelimTotal.toString();
     }
+
 
 }
