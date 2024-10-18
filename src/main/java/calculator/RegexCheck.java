@@ -5,7 +5,6 @@ public abstract class RegexCheck {
   protected String input;
   private String strNumber;
   private String sort = ",:";
-
   protected int[] numbers;
 
   RegexCheck(String input) {
