@@ -1,32 +1,40 @@
 package calculator;
 
-
 import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
-
+    public static String CustomSeparator(String input) {
+        if (input.startsWith("//") && input.substring(3, 5).equals("\\n")) {
+            return Character.toString(input.charAt(2));
+        } else {
+            return null;
+        }
+    }
 
     public static String[] StringSplit(String input) {
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < input.length(); i++) {
-            char ch = input.charAt(i);
-            if (ch == ':' || ch == ',') {
-                result.append("|");
-            } else {
-                result.append(ch);
-            }
+        String s = CustomSeparator(input);
+        if (s != null) {
+            input = input.substring(5);
+        } else {
+            s = ",|:";
         }
-        return result.toString().split("\\|");
+        return input.split(s);
     }
 
     public static int calculator(String input) {
+        if (input == null || input.isEmpty()) {
+            return 0;
+        }
         int sum = 0;
         String[] number = StringSplit(input);
-
         for (String numbers : number) {
-            sum += Integer.parseInt(numbers); // 문자열을 숫자로 변환하여 더하기
+            if (numbers.contains("-")) {
+                throw new IllegalArgumentException();
+            }
+            sum += Integer.parseInt(numbers);
         }
         return sum;
+
     }
 
     public static void main(String[] args) {
