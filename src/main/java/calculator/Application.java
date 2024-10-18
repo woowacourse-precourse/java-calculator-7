@@ -22,12 +22,21 @@ public class Application {
     }
 
     public static void validateInput(String separators, String operation){
-
         for (char ch : operation.toCharArray()) {
             if (!Character.isDigit(ch) && !separators.contains(Character.toString(ch))) {
                 throw new IllegalArgumentException("유효하지 않은 문자 '" + ch + "'가 포함되어 있습니다.");
             }
         }
+    }
+
+    public static int calculate(String separators, String operation){
+        String[] numbers = operation.split("["+separators+"]");
+
+        int sum = 0;
+        for (String number : numbers) {
+            sum += Integer.parseInt(number);
+        }
+        return sum;
     }
 
     public static void main(String[] args){
@@ -38,5 +47,9 @@ public class Application {
         String operation = separatorAndOperation[1];
 
         validateInput(separators, operation);
+
+        int result = calculate(separators, operation);
+
+        System.out.println("결과: " + result);
     }
 }
