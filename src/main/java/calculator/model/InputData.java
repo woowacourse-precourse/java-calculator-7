@@ -11,11 +11,8 @@ public class InputData {
     }
 
     public void validate(String input){
-        Pattern endPattern = Pattern.compile(".*[0-9]$");
-        Matcher endMatcher = endPattern.matcher(input);
-
-        Pattern startPattern = Pattern.compile("^[0-9](.*)");
-        Matcher startMatcher = startPattern.matcher(input);
+        Matcher endMatcher = getMatcher(".*[0-9]$");
+        Matcher startMatcher = getMatcher("^[0-9](.*)");
 
         if(!endMatcher.matches()){
             throw new IllegalArgumentException("[ERROR][F0001] 마지막 입력값은 숫자여야 합니다.");
@@ -27,15 +24,13 @@ public class InputData {
     }
 
     public boolean isDelimiter(){
-        Pattern delimiterPattern = Pattern.compile("^//(.*)\\\\n(.*)");
-        Matcher delimiterMatcher = delimiterPattern.matcher(input);
+        Matcher delimiterMatcher = getMatcher("^//(.*)\\\\n(.*)");
 
         return delimiterMatcher.matches();
     }
 
     public String convertDelimiterPart(){
-        Pattern delimiterPattern = Pattern.compile("^//(.*)\\\\n(.*)");
-        Matcher delimiterMatcher = delimiterPattern.matcher(input);
+        Matcher delimiterMatcher = getMatcher("^//(.*)\\\\n(.*)");
         String delimiter = "";
 
         if(delimiterMatcher.matches()){
@@ -45,13 +40,17 @@ public class InputData {
     }
 
     public String convertCalculatorPart() {
-        Pattern delimiterPattern = Pattern.compile("^//(.*)\\\\n(.*)");
-        Matcher delimiterMatcher = delimiterPattern.matcher(input);
+        Matcher calculatorMatcher = getMatcher("^//(.*)\\\\n(.*)");
         String calculator = "";
 
-        if(delimiterMatcher.matches()){
-            calculator = delimiterMatcher.group(2);
+        if(calculatorMatcher.matches()){
+            calculator = calculatorMatcher.group(2);
         }
         return calculator;
+    }
+
+    private Matcher getMatcher(String regex){
+        Pattern pattern = Pattern.compile(regex);
+        return pattern.matcher(input);
     }
 }
