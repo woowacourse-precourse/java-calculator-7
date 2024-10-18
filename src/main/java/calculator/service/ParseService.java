@@ -6,20 +6,20 @@ import calculator.model.Operators;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class calculatorService {
+public class ParseService {
 
     static public void parseExpression(String sentence, Operators operators, Expression expression) {
         sentence = sentence.replace(" ", "").replace("\n", "");
-        sentence = getSeparator(sentence, operators);
+        sentence = extractSeparator(sentence, operators);
         formulate(sentence, expression);
     }
 
-    static private String getSeparator(String sentence, Operators separators) {
+    static private String extractSeparator(String sentence, Operators separators) {
         Matcher matcher = Pattern.compile("^//(.)\\\\n(.*)").matcher(sentence); // "//(separator)\n"...
         if (matcher.find()) {
             char separator = matcher.group(1).charAt(0);
             if (Character.isDigit(separator)) {
-                throw new IllegalArgumentException(Message.EXCEPTION_MESSAGE + "숫자 형태의 구분자");
+                throw new IllegalArgumentException(Message.SELECTOR_EXCEPTION_MESSAGE + "숫자 형태의 구분자");
             }
             separators.addOperators(separator);
             return matcher.group(2);
