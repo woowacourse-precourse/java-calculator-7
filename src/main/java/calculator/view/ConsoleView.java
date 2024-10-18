@@ -4,13 +4,12 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class ConsoleView {
 
-    public String askCalculationFormula() {
+    public String askAdditionFormulaString() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String inputCalculationFormula = Console.readLine();
-        return inputCalculationFormula;
+        return Console.readLine();
     }
 
-    public void showResult(String result) {
+    public void tellResult(String result) {
         System.out.printf("결과 : %s\n", result);
     }
 
