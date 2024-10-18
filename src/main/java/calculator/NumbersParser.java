@@ -2,7 +2,9 @@ package calculator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 public class NumbersParser {
     
@@ -12,6 +14,7 @@ public class NumbersParser {
 
     static final String defaultSeparators = ",:";
     private HashSet<Character> separatorSet = null;
+    private int[] numbers;
     
     public NumbersParser(String input) {
         if (input == null) {
@@ -19,6 +22,7 @@ public class NumbersParser {
         }
         setAreaByPattern(input);
         separatorSet = parseSeparator(defaultSeparators + separatorArea);
+        numbers = parseNumber(separatorSet, numberArea);
     }
     
     private void setAreaByPattern(String input) {
@@ -39,5 +43,34 @@ public class NumbersParser {
         }
         
         return separatorSet;
+    }
+    
+    private int[] parseNumber(HashSet<Character> separatorSet, String input) {
+        int num = 0;
+        List<Integer> numList = new ArrayList<Integer>(20);
+        
+        for (int i = 0; i < input.length(); i++) {
+            if (Character.isDigit(input.charAt(i))) {
+                num = 10*num + Character.digit(input.charAt(i), 10);
+            }
+            else if (separatorSet.contains(input.charAt(i))) {
+                numList.add(num);
+                num = 0;
+            }
+            else {
+                throw new IllegalArgumentException();
+            }
+        }
+        numList.add(num);
+        
+        int[] result = new int[numList.size()];
+        for (int i = 0; i < numList.size(); i++) {
+            result[i] = numList.get(i);
+        }
+        return result;
+    }
+    
+    public int[] getNumbers() {
+        return numbers.clone();
     }
 }
