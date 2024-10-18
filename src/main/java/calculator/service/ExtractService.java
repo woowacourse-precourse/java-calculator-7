@@ -1,4 +1,4 @@
-package calculator;
+package calculator.service;
 
 public class ExtractService {
     public static final String CUSTOM_PREFIX = "//";
