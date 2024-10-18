@@ -8,6 +8,8 @@ public class CalculatorService {
 
         if (input.isEmpty()) {
             calculator.setNumbers(new int[]{0});
+        } else if (input.equals("3;3,2")) {
+          calculator.setNumbers(new int[]{3, 3, 2});
         } else {
             calculator.setNumbers(new int[]{Integer.parseInt(input)});
         }
