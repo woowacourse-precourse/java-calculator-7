@@ -9,6 +9,7 @@ import calculator.util.PositiveNumberConverter;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 import java.util.List;
+import java.util.Optional;
 
 public class CalculatorController {
     private final InputView inputView = InputView.INSTANCE;
@@ -29,20 +30,16 @@ public class CalculatorController {
 
     private String[] parseByDelimiter(String input) {
         CustomDelimiterParser customDelimiterParser = CustomDelimiterParser.getInstance();
-        Delimiters delimiters = null;
-        String cutInput = null;
-        if (customDelimiterParser.hasCustomDelimiter(input)) {
-            String customDelimiter = customDelimiterParser.parse(input).get();
-            delimiters = Delimiters.createWithCustomDelimiter(customDelimiter);
-            cutInput = customDelimiterParser.excludeFromPrefixToSuffixBy(input);
-        } else {
-            delimiters = Delimiters.create();
-            cutInput = input;
-        }
+        Optional<String> customDelimiter = customDelimiterParser.parse(input);
+        Delimiters delimiters = customDelimiter
+                .map(Delimiters::createWithCustomDelimiter)
+                .orElse(Delimiters.create());
+        String cutInput = customDelimiter
+                .map(delimiter -> customDelimiterParser.excludeFromPrefixToSuffixBy(input))
+                .orElse(input);
         List<String> allDelimiters = delimiters.getAllDelimiters();
         InputParser inputParser = InputParser.getInstance();
-        String[] values = inputParser.parseByDelimiter(cutInput, allDelimiters);
-        return values;
+        return inputParser.parseByDelimiter(cutInput, allDelimiters);
     }
 
     private void validatePositiveNumber(String[] values) {
