@@ -29,6 +29,7 @@ class CustomDelimiterPatternTest {
             "'//!\\n-1'",
             "'//!\\n0!5'",
             "'//!\\n1!-5'",
+            "'//!\\n0'",
     })
     public void 구분자는_정상인데_숫자가_양수가_아닌경우(String input) {
         assertThat(pattern.validate(input)).isFalse();
@@ -52,6 +53,15 @@ class CustomDelimiterPatternTest {
             "'1:안,녕:3'"
     })
     public void 아예_패턴에_맞지_않는_경우(String input) {
+        assertThat(pattern.validate(input)).isFalse();
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "'//;\\n01;2;3'",
+            "'//!\\n1!01'"
+    })
+    public void 숫자앞에_0이_포함될때(String input) {
         assertThat(pattern.validate(input)).isFalse();
     }
 
