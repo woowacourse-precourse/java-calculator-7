@@ -1,4 +1,4 @@
-package calculator.delimiter.service;
+package calculator.delimiter.validator;
 
 import calculator.common.exception.ExceptionFactory;
 
