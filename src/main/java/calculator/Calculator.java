@@ -87,13 +87,12 @@ public class Calculator {
 		문자열을 숫자로 전환
 	 */
 	private long stringToLong(String strNum) {
-		long num = Long.parseLong(strNum);
-
-		// 숫자가 정수형 범위를 넘어섰을 때
-		if (num < Integer.MIN_VALUE || Integer.MAX_VALUE < num) {
+		try {
+			long num = Integer.parseInt(strNum);
+			return num;
+		} catch (Exception e) {
 			throw new IllegalArgumentException("숫자는 int형 범위 내에서 입력 가능합니다.");
 		}
-		return num;
 	}
 
 	/*
