@@ -1,9 +1,16 @@
 package calculator;
 
 public class Calculator {
+    public int add() {
+        return 0;  // 인자가 없는 경우 0 반환
+    }
     // Split numbers using the default delimiters and calculate
     public int add (String input){
         String delimiter = ",|:";
+        //공백 문자 처리
+        if(input.isEmpty()){
+            return 0;
+        }
         // 커스텀 구분자 처리
         if(input.startsWith("//")){
             input = input.replace("\\n","\n");
