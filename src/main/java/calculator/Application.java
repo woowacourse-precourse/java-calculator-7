@@ -3,9 +3,7 @@ package calculator;
 import calculator.domain.Calculator;
 import camp.nextstep.edu.missionutils.Console;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
