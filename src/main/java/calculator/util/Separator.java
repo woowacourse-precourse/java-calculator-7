@@ -65,6 +65,6 @@ public class Separator {
     }
 
     private static boolean isNotDefaultDelimiter(String input) {
-        return !input.contains(COMMA) || !input.contains(DELIMITER);
+        return !input.contains(COMMA) && !input.contains(DELIMITER);
     }
 }
