@@ -28,6 +28,14 @@ class BasicSeparatorTest {
     }
 
     @ParameterizedTest
+    @ValueSource(strings = {"1.2,2.3,3.3", "1.0,2.0,3.0", "1.1:2.0:3.0"})
+    void 기본구분자실수(String value) {
+        List<Number> numbers = basicSeparator.separate(value);
+
+        assertThat(numbers.size()).isEqualTo(3);
+    }
+
+    @ParameterizedTest
     @ValueSource(strings = {",2,3", "1,2,", ",2,"})
     void 양사이드구분자오는예외(String value) {
         assertThatThrownBy(() -> basicSeparator.separate(value))

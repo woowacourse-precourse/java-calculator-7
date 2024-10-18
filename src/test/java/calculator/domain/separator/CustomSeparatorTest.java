@@ -27,6 +27,14 @@ class CustomSeparatorTest {
     }
 
     @ParameterizedTest
+    @ValueSource(strings = "//;\\n1.2;2.3;3.3")
+    void 커스텀구분자실수(String value) {
+        List<Number> numbers = customSeparator.separate(value);
+
+        assertThat(numbers.size()).isEqualTo(3);
+    }
+
+    @ParameterizedTest
     @ValueSource(strings = {"//;\\n;1;2", "//;\\n1;2;", "//;\\n;1;"})
     void 양사이드구분자예외(String value) {
         assertThatThrownBy(() -> customSeparator.separate(value))
