@@ -1,7 +1,7 @@
 package calculator;
 
-import calculator.customSeparatorExtractor.CustomSeparatorExtractor;
 import calculator.numberExtractor.NumberExtractor;
+import calculator.separatorProvider.SeparatorProvider;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,17 +10,15 @@ import java.util.List;
  */
 public class StringParser {
 
-    private final List<Character> separators = new ArrayList<>();
-    private final CustomSeparatorExtractor customSeparatorExtractor;
+    private final SeparatorProvider separatorProvider;
     private final NumberExtractor numberExtractor;
 
     public StringParser(
-            CustomSeparatorExtractor customSeparatorExtractor,
+            SeparatorProvider separatorProvider,
             NumberExtractor numberExtractor
     ) {
-        this.customSeparatorExtractor = customSeparatorExtractor;
+        this.separatorProvider = separatorProvider;
         this.numberExtractor = numberExtractor;
-        addDefaultSeparators();
     }
 
     /**
@@ -31,14 +29,10 @@ public class StringParser {
      * @return 분리된 숫자 리스트
      */
     public List<Integer> parse(String customSeparatorString, String numberString) {
-        List<Character> customSeparators = customSeparatorExtractor.extract(customSeparatorString);
-        separators.addAll(customSeparators);
+        List<Character> separatorList = new ArrayList<>();
+        separatorList.addAll(separatorProvider.getDefaultSeparator());
+        separatorList.addAll(separatorProvider.extractCustomSeparator(customSeparatorString));
 
-        return numberExtractor.extract(numberString, separators);
-    }
-
-    private void addDefaultSeparators() {
-        separators.add(',');
-        separators.add(':');
+        return numberExtractor.extract(numberString, separatorList);
     }
 }

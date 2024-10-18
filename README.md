@@ -33,15 +33,14 @@
   - 덧셈 결과를 출력하는 메서드 작성
 
 ### 요소 추출
-- CustomSeparatorExtractor 클래스 생성
-  - 역할: 커스텀구분자를 추출하여 반환
+- SeparatorProvider 클래스 생성
+  - 역할: 커스텀구분자를 추출하고 기본 구분자를 반환
 - NumberExtractor 클래스 생성
   - 역할: 문자열에서 숫자 리스트를 추출
   - 숫자 유효성을 검사(음수, 최대값)
 - StringParser 클래스 생성
   - 역할: 커스텀구분자와 숫자 문자열을 받아서 분리 후 숫자리스트 반환
-  - 기본 구분자 처리
-  - CustomSeparatorExtractor를 통해 커스텀 구분자 추출
+  - SeparatorProvider 통해 커스텀 구분자 추출
   - NumberExtractor를 통해 숫자 추출
   - 추출된 숫자 반환
 
