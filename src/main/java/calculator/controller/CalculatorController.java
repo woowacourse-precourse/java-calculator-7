@@ -23,6 +23,7 @@ public class CalculatorController {
     public void runCalculator() {
         CalculationString calculationString = readInput();
         int[] parsedNumbers = parseInput(calculationString);
+        String result = calculateResult(parsedNumbers);
     }
 
     private CalculationString readInput() {
@@ -31,5 +32,9 @@ public class CalculatorController {
 
     private int[] parseInput(CalculationString calculationString) {
         return stringHandler.parseString(calculationString);
+    }
+
+    private String calculateResult(int[] intArray) {
+        return calculator.calculate(intArray);
     }
 }
