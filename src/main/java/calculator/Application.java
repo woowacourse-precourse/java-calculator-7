@@ -17,12 +17,13 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해주세요.");
         // - 입력 받기
         String numbers = Console.readLine();
-        System.out.println(numbers);
         // - 예외처리
 
         // 숫자 추출
         // - 구분자
-        
+        if (numbers.contains(DELIMITER_1) || numbers.contains(DELIMITER_2)) {
+            System.out.println(Arrays.toString(numbers.split("DELIMITER_1|DELIMITER_2")));
+        }
         // - 커스텀 구분자
 
         // 문자 -> 숫자 형변환
