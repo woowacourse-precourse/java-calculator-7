@@ -41,7 +41,7 @@ public class NumberParser {
         } catch (IllegalArgumentException e) {
             validateCustomDividerMinusAndNumberValueNegative(value);
             validateContinuousDivider(value);
-            throw new IllegalArgumentException("등록되지 않는 구분자가 있습니다." + value);
+            throw new IllegalArgumentException("등록되지 않는 구분자가 존재합니다." + value);
         }
     }
 

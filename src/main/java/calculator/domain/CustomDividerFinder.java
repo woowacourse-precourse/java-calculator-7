@@ -22,7 +22,7 @@ public class CustomDividerFinder {
             handleCustomDivider(calculatedValue, divider, inputValue);
             return;
         }
-        throw new IllegalArgumentException("커스텀 구분자 사용시 양식을 지켜주세요. //커스텀문자\\n");
+        throw new IllegalArgumentException("커스텀 구분자 사용 시 양식을 지켜주세요. //커스텀문자\\n");
     }
 
 
@@ -57,7 +57,7 @@ public class CustomDividerFinder {
 
     private void validateStringCustomDivider(int closerIndex) {
         if (closerIndex > CLOSER_INDEX) {
-            throw new IllegalArgumentException("커스텀 구분자는 문자만 입력 가능합니다. 문자열은 불가능 합니다.");
+            throw new IllegalArgumentException("문자열 커스텀 구분자는 불가능합니다. 문자만 입력해 주세요.");
         }
     }
 
