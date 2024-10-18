@@ -3,7 +3,6 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Application {
     private static String COMMA = ",";
@@ -30,7 +29,13 @@ public class Application {
             validateOnlyDelimiter(input, delimiter);
         }
 
-        return 23;
+        List<Integer> inputs = Arrays.stream(input.split(COMMA + "|" + SEMICOLON))
+                .filter(letter -> !letter.equals(""))
+                .map(Integer::parseInt)
+                .toList();
+
+        return inputs.stream()
+                .reduce(0, Integer::sum);
     }
 
     private static void validateOnlyDelimiter(String input, String delimiter) {
