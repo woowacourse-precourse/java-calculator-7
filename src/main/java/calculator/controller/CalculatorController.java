@@ -34,7 +34,7 @@ public class CalculatorController {
         if (initialInput == null || initialInput.isEmpty()) {
             return false;
         }
-        return initialInput.startsWith("\\\\") || Character.isDigit(initialInput.charAt(0));
+        return initialInput.startsWith("//") || Character.isDigit(initialInput.charAt(0));
     }
 
     private List<Integer> splitInitialString(String initialString) {
@@ -55,10 +55,21 @@ public class CalculatorController {
         List<Integer> integerList = new ArrayList<>();
 
         for (String s : numList) {
+            boolean isValidNumberType = isValidNumber(s);
+            if (!isValidNumberType) {
+                throw new IllegalArgumentException("유효하지 않은 입력입니당.");
+            }
             integerList.add(Integer.valueOf(s));
         }
         return integerList;
 
+    }
+
+    private boolean isValidNumber(String s) {
+        if (s == null || s.isEmpty()) {
+            return false;
+        }
+        return Character.isDigit(s.charAt(0));
     }
 
     private Character setExtraSeparator(String initialString) {
