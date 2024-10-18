@@ -22,11 +22,16 @@ public class CustomInput extends UserInput {
         extractCustomDelimiterAndAdd(userInput, delimiterStartIdx, delimiterEndIdx);
 
         String[] splitValues = splitCalculatePartByDelimiters(extractCalculatePart(userInput, delimiterEndIdx + 2));
-        checkValueToCalculateIsNumber(splitValues);
 
-        inputNumbers = Arrays.stream(splitValues)
-                .mapToLong(Long::parseLong) // Long으로 변환
-                .toArray();
+        try {
+            inputNumbers = Arrays.stream(splitValues)
+                    .mapToLong(Long::parseLong)
+                    .filter(this::checkNumIsPositive)
+                    .toArray();
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ExceptionMessage.CALCULATE_PART_IS_INVALID.getValue());
+        }
+
     }
 
     @Override
@@ -40,7 +45,7 @@ public class CustomInput extends UserInput {
     }
 
     /***
-     * 커스텀 구분자포맷이 지켜졌는지 확인합니다.
+     * 커스텀 구분자포맷("//_\n)이 지켜졌는지 확인합니다.
      * @param userInput : 사용자의 입력
      */
     private void checkCustomDelimFormat(String userInput) {

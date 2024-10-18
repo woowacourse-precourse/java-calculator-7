@@ -20,7 +20,6 @@ public abstract class UserInput {
         delimiters.add(DEFAULT_DELIMITER_COLON);
 
         parseInputForCalculate(userInput);
-        checkInputNumsIsPositive();
     }
 
     /***
@@ -45,26 +44,15 @@ public abstract class UserInput {
     protected abstract String[] splitCalculatePartByDelimiters(String calculatePart);
 
     /***
-     * 계산해야 할 값이 숫자로만 이루어져있는지 확인합니다.
-     * @param splitStringByDelimiter : 구분자에 의해 split 된 배열
+     * 계산할 값이 양수인지 체크합니다.
+     * @param num : 파싱된 값
+     * @return : 양수면 true 리턴, 음수면 예외 출력
      */
-    protected void checkValueToCalculateIsNumber(String[] splitStringByDelimiter) {
-        try {
-            Arrays.stream(splitStringByDelimiter)
-                    .mapToLong(Long::parseLong)
-                    .forEach(value -> {}); // 스트림의 최종연산 (반환값이 필요 없기에 검증을 위한 코드)
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ExceptionMessage.CALCULATE_PART_IS_INVALID.getValue());
-        }
-    }
-
-    /***
-     * 계산할 값들이 양수로만 이루어져있는지 확인합니다.
-     */
-    private void checkInputNumsIsPositive() {
-        if (Arrays.stream(this.inputNumbers).anyMatch(inputNumber -> inputNumber < 0)) {
+    protected boolean checkNumIsPositive(Long num) {
+        if (num < 0) {
             throw new IllegalArgumentException(ExceptionMessage.NUMBER_NOT_POSITIVE.getValue());
         }
+        return true;
     }
 
 }
