@@ -40,6 +40,38 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 예제_테스트_1(){
+        assertSimpleTest(() -> {
+            run("1,2:3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 예제_테스트_4(){
+        assertSimpleTest(() -> {
+            run("0,0,0,0,0,0,0,0,0:0.00:0");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 예제_테스트_2(){
+        assertSimpleTest(() -> {
+            run("");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 예제_테스트_3(){
+        assertSimpleTest(() -> {
+            run("1,2,3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
