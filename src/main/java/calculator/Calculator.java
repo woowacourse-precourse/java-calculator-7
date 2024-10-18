@@ -60,7 +60,7 @@ public class Calculator {
 
 		// 커스텀 구분자가 처음에 위치하지 않거나, 커스텀 구분자로 1개 이상의 문자 입력 시
 		if (startPos != 0 || endPos != 3) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("커스텀 구분자는 처음에 위치해야 하며, 1개 이상 입력할 수 없습니다.");
 		}
 
 		// 커스텀 구분자로 숫자가 들어왔을 때
