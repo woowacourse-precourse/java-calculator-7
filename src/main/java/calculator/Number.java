@@ -6,12 +6,18 @@ import java.util.List;
 public class Number {
     private final List<Integer> numbers;
 
-    public Number() {
+    public Number(String [] numbers) {
         this.numbers = new ArrayList<>();
+        for(int i = 0; i < numbers.length; i++){
+            if(!isNumeric(numbers[i])){
+                throw new IllegalArgumentException();
+            }
+            this.numbers.add(Integer.parseInt(numbers[i]));
+        }
     }
 
-    public void addNumber(int number) {
-        numbers.add(number);
+    private boolean isNumeric(String str) {
+        return str != null && str.matches("\\d+");
     }
 
     public int getSum() {
