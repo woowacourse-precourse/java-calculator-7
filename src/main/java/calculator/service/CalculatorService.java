@@ -1,20 +1,16 @@
 package calculator.service;
 
-import calculator.domain.data.DataManager;
-import calculator.util.extractor.NumberExtractor;
+import calculator.util.parser.InputParser;
 
 public class CalculatorService {
-    private final DataManager dataManager;
-    private final NumberExtractor numberExtractor;
-    public CalculatorService(final DataManager dataManager, final NumberExtractor numberExtractor) {
-        this.dataManager = dataManager;
-        this.numberExtractor = numberExtractor;
+    private CalculatorService() {
+
     }
 
-    public void printResultOfSum() {
-        Long result = numberExtractor.extractNumbers(dataManager.getRawData()).stream()
+    public static void printResultOfSum(final String userInput) {
+        Long sum = InputParser.extractNumbers(userInput).stream()
                 .reduce(0L, Long::sum);
-        System.out.println("result = " + result);
+        System.out.println("결과 : " + sum);
     }
 
 }
