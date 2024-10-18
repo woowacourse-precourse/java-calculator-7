@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class PlusPlusCalculator implements PlusCalculatorInterface {
+public class PlusCalculator implements PlusCalculatorInterface {
 
-    public PlusPlusCalculator(List<String> separators) {
+    public PlusCalculator(List<String> separators) {
         this.separators = new ArrayList<>(separators);
     }
 
