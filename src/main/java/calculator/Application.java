@@ -15,14 +15,15 @@ public class Application {
         try {
             // 결과 출력
             System.out.printf("결과 : %d%n", createSeparator(inputString));
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
+            // 예외 출력
             System.err.println("예외 발생: " + e.getMessage());
         }
     }
 
     private static int createSeparator(String inputString){
         // 입력값이 없을 경우
-        if (inputString.length() == 0){
+        if (inputString.length() == 0) {
             return 0;
         }
 
@@ -42,7 +43,7 @@ public class Application {
         }
 
         // 구분자를 공백으로 대체
-        for (String i : separatorList){
+        for (String i : separatorList) {
             inputString = inputString.replace(i, " ");
         }
 
@@ -50,13 +51,13 @@ public class Application {
         String[] calArray = inputString.split(" ");
 
         // 음수가 배열에 남아있는 경우 예외처리
-        if (inputString.contains("-")){
+        if (inputString.contains("-")) {
             throw new IllegalArgumentException("음수가 포함되어 있으면 안 됩니다.");
         }
 
         // 0이 배열에 남아있는 경우 예외처리
         boolean hasZero = Arrays.asList(calArray).contains("0");
-        if (hasZero){
+        if (hasZero) {
             throw new IllegalArgumentException("0이 포함되어 있으면 안 됩니다.");
         }
 
@@ -64,9 +65,9 @@ public class Application {
         int sumNumbers = 0;
 
         // 구분자가 아닌 문자가 배열에 남아있는 경우 예외처리
-        for (String i : calArray){
-            for (char j : i.toCharArray()){
-                if (!Character.isDigit(j)){
+        for (String i : calArray) {
+            for (char j : i.toCharArray()) {
+                if (!Character.isDigit(j)) {
                     throw new IllegalArgumentException("구분자가 아닌 문자가 포함되어 있으면 안 됩니다.");
                 }
             }
