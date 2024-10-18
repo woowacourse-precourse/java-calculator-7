@@ -1,10 +1,10 @@
 package calculator.controller;
 
-import calculator.model.Calculator;
 import calculator.model.CustomDelimiterParser;
 import calculator.model.Delimiters;
 import calculator.model.InputParser;
 import calculator.model.NumberValidator;
+import calculator.model.PositiveNumbers;
 import calculator.util.PositiveNumberConverter;
 import calculator.view.InputView;
 import calculator.view.OutputView;
@@ -52,8 +52,9 @@ public class CalculatorController {
     }
 
     private int getSum(int[] numbers) {
-        Calculator calculator = Calculator.getInstance();
-        return calculator.add(numbers);
+        PositiveNumbers positiveNumbers = PositiveNumbers.getInstance(numbers);
+        int sum = positiveNumbers.sum();
+        return sum;
     }
 
 }
