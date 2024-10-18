@@ -13,4 +13,10 @@ public class Validator {
             throw new IllegalArgumentException("잘못된 숫자 형식입니다.");
         }
     }
+
+    public static void checkCustomDelimiter(int index){
+        if(index == -1 ){
+            throw new IllegalArgumentException("커스텀 구분자 지정 형식이 잘못 되었습니다.");
+        }
+    }
 }
