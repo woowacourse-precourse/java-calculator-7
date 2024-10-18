@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CalculationStringTokenizer {
-    public List<SumValue> tokenize(String calculationString, Character customDelimiter) {
+    public List<SumValue> tokenize(String calculationString, CustomDelimiter customDelimiter) {
         //계산 문자열을 구분자로 분리
         String splitRegex = ":|,";
 
         if (customDelimiter != null) {
-            splitRegex = splitRegex + "|" + customDelimiter;
+            splitRegex = splitRegex + "|" + customDelimiter.getCustomDelimiter();
         }
 
         return Arrays.stream(calculationString.split(splitRegex))

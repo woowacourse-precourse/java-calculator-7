@@ -15,7 +15,7 @@ public class StringCalculator {
     public int calculate(String input) {
 
         //커스텀 구분자 추출
-        Character customDelimiter = inputParser.extractCustomDelimiter(input);
+        CustomDelimiter customDelimiter = inputParser.extractCustomDelimiter(input);
         String calculationString = inputParser.extractCalculationString(input, customDelimiter);
         List<SumValue> values = calculationStringTokenizer.tokenize(calculationString, customDelimiter);
 
