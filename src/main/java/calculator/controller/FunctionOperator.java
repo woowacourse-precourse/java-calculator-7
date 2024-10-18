@@ -11,7 +11,7 @@ public class FunctionOperator {
     InputView inputView = new InputView();
     OutputView outputView = new OutputView();
     Preprocessing preprocessing = new Preprocessing();
-    Validation validation = new Validation();
+    Addition addition = new Addition();
 
     public void operator() {
         outputView.askInput();
@@ -26,14 +26,14 @@ public class FunctionOperator {
             separators.add(customAndLeft.get(0));
 
             // 숫자 - !숫자 구분
-            separated = preprocessing.separation(customAndLeft.get(1));
+            separated = preprocessing.separation(customAndLeft.get(1), separators);
         } else {
             // 숫자 - !숫자 구분
-            separated = preprocessing.separation(input);
+            separated = preprocessing.separation(input, separators);
         }
 
         // 구분자 유효하면 sum
-        int answer = validation.validatingSeparator(separators, separated);
+        int answer = addition.pickNumbers(separated);
 
         // 결과 출력
         outputView.printAnswer(answer);

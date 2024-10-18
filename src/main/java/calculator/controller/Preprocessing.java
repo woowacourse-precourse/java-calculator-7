@@ -1,10 +1,12 @@
 package calculator.controller;
 
+import calculator.view.InputValidator;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Preprocessing {
+public class Preprocessing extends InputValidator {
     // 첫 글자가 "/"로 시작하는지 아닌지에 따라 메소드 실행
     public boolean firstLetter(String given) {
         char firstLetter = given.charAt(0);
@@ -17,7 +19,7 @@ public class Preprocessing {
     }
 
     // <숫자 - 숫자 외 모든것> 분리
-    public List<String> separation(String given) {
+    public List<String> separation(String given, List<String> separtors) {
         // 결괏값으로 반환할 분리된 List
         List<String> separated = new ArrayList<>();
 
@@ -33,6 +35,7 @@ public class Preprocessing {
             }
         }
         separated.add(temp);
+        validatingSeparator(separated, separtors);
         return separated;
     }
 
