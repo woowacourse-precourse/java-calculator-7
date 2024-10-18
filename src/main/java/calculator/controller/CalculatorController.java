@@ -21,8 +21,6 @@ public class CalculatorController {
     public void run() {
         String str = inputView.inputStringToAdd();
 
-        StringValidator.isEmpty(str);
-
         if (DelimiterValidator.hasCustomDelimiter(str)) {
             Delimiter.addCustomDelimiter(str);
         }

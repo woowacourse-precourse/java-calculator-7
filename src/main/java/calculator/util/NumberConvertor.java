@@ -10,6 +10,10 @@ public class NumberConvertor {
     public static int[] stringToInt(String str) {
         String removedEnrollmentChar = Delimiter.removeEnrollmentChar(str);
 
+        if (str.isEmpty()) {
+            return new int[] {};
+        }
+
         return Arrays.stream(removedEnrollmentChar.split(Delimiter.getDelimiter()))
                 .mapToInt(NumberConvertor::parseAndValidate)
                 .toArray();
