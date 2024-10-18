@@ -1,22 +1,23 @@
 package calculator;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Calculator {
 
-    // 기본 구분자
-    List<String> separators = List.of(",", ":");
+    public Calculator(List<String> separators) {
+        this.separators = new ArrayList<>(separators);
+    }
+
+    // 구분자 리스트
+    List<String> separators;
 
     public int run(String input) {
         input = findCustomSeparator(input);
-//        List<String> separators = List.of(",", ":", numberStringAndCustomSeparator.get(1));
-//        String numberString = numberStringAndCustomSeparator.get(0);
-//
-//        List<Integer> numbers = getNumber(numberString, separators);
-//        int result = sumNumbers(numbers);
-//
-//        return result;
+        sortSeparatorsSizeDesc();
+        List<Integer> integerNumbers = extractNumbers(input);
+        return calculate(integerNumbers);
     }
 
     /**
@@ -43,7 +44,8 @@ public class Calculator {
             return false;
         }
 
-        if (input.indexOf("//") > 0 || !input.contains("\\n")) {
+        // //가 맨 앞에 있지만 \\n이 없는 경우 or //위치가 문자열의 처음이 아닌경우
+        if ((input.indexOf("//") == 0 && !input.contains("\\n")) || input.indexOf("//") > 0) {
             throw new IllegalArgumentException();
         }
 
@@ -62,43 +64,79 @@ public class Calculator {
         return input.substring(customSeparatorEnd + 2);
     }
 
-    // 구분자로 문자열에서 숫자 추출
-    public List<Integer> getNumber(String numberString, List<String> separators) {
-        // numberString이 공백이면 0으로 간주
-        if (numberString.isBlank()) {
-            return List.of(0);
-        }
+    /**
+     * 구분자로 split하여 숫자 추출
+     *
+     * @return 문자열에서 숫자를 모은 List<Integer>
+     */
+    public List<Integer> extractNumbers(String input) {
+        List<Integer> integerNumbers = new ArrayList<>();
 
-        List<Integer> result = new ArrayList<>();
+        // numberString이 공백이면 0으로 간주
+        if (input.isBlank()) {
+            integerNumbers.add(0);
+            return integerNumbers;
+        }
 
         // split으로 구분자 기준으로 숫자만 추출
-        String[] numbers = numberString.split(separators.toString());
+        String[] stringNumbers = input.split(getSeparatorsSplitRegex());
 
-        // parseInt를 사용해서 String 숫자를 int로 변환
-        // 숫자가 아닐경우 NumberFormatException이 발생함 -> IllegalArgumentException를 throw
-        for (String number : numbers) {
-            int numberInt;
-            try {
-                numberInt = Integer.parseInt(number);
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException();
-            }
-
-            if (numberInt < 0) {
-                throw new IllegalArgumentException();
-            }
-
-            result.add(numberInt);
+        // extractNumber를 이용해 Integer로 변환하여 result에 저장
+        for (String stringNumber : stringNumbers) {
+            integerNumbers.add(extractNumber(stringNumber));
         }
 
-        return result;
+        return integerNumbers;
     }
 
-    // 숫자 합 계산
-    public int sumNumbers(List<Integer> numbers) {
+    /**
+     * ,, 같은 중복 구분자를 처리하기 위한 separators 정렬 메서드
+     *
+     * @return void
+     */
+    public void sortSeparatorsSizeDesc() {
+        separators.sort(Comparator.comparingInt(String::length).reversed());
+    }
+
+    /**
+     * split에 사용할 구분자 문자열을 만드는 메서드
+     *
+     * @return 구분자 문자열 String
+     */
+    public String getSeparatorsSplitRegex() {
+        return String.join("|", separators);
+    }
+
+    /**
+     * String을 Integer로 변환해 반환 parseInt로 변환 실패하거나, 음수가 나오면 예외 처리
+     *
+     * @return Integer
+     */
+    public Integer extractNumber(String numberString) {
+        int numberInteger;
+
+        try {
+            numberInteger = Integer.parseInt(numberString);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
+
+        if (numberInteger < 0) {
+            throw new IllegalArgumentException();
+        }
+
+        return numberInteger;
+    }
+
+    /**
+     * 숫자합 계산
+     *
+     * @return int 합
+     */
+    public Integer calculate(List<Integer> integerNumbers) {
         int result = 0;
-        for (int number : numbers) {
-            result = result + number;
+        for (int integerNumber : integerNumbers) {
+            result = result + integerNumber;
         }
         return result;
     }
