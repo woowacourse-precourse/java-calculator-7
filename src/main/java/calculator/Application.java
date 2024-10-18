@@ -10,16 +10,12 @@ public class Application {
     public static void main(String[] args) {
         // 숫자입력기능
         String inputNumber = inputNumber();
-
         // 구분자 분리 기능
         String[] splitInputNumber = splitInputNumber(inputNumber);
-
         // 구분된 문자열이 양수인 문자열인지 체크
         validateSplitNumber(splitInputNumber);
-
         // 결과 출력
         printResult(splitInputNumber);
-
     }
 
     private static String inputNumber() {
@@ -38,6 +34,7 @@ public class Application {
             String inputDelimiter = matcher.group(1);
             inputNumber = matcher.replaceFirst("");
             String delimiter;
+            // 역슬래쉬 예외처리
             if (inputDelimiter.equals("\\")) {
                 delimiter = defaultDelimiter + "|" + "[" + "\\\\" + "]";
             } else {
@@ -66,6 +63,6 @@ public class Application {
             result += Integer.parseInt(number);
         }
 
-        System.out.println("결과 : " + result);
+        System.out.print("결과 : " + result);
     }
 }
