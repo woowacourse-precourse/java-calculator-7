@@ -2,6 +2,9 @@ package calculator.domain.calculator.service;
 
 public interface StringCalculatorService {
 
-    int calculate(String input);
+    static StringCalculatorService getInstance() {
+        return StringCalculatorServiceImpl.getInstance();
+    }
 
+    int calculate(String input);
 }
