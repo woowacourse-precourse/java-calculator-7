@@ -26,4 +26,9 @@ public class DefaultCustomDelimiterPatternMatcher implements CustomDelimiterPatt
     public Optional<String> extractTrimmedGroup(String value) {
         return matchAndFind(value).map(matcher -> matcher.group(2));
     }
+
+    private Optional<Matcher> matchAndFind(String value) {
+        Matcher matcher = match(value);
+        return matcher.find() ? Optional.of(matcher) : Optional.empty();
+    }
 }
