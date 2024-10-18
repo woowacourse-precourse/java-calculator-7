@@ -31,7 +31,7 @@ public class Validator {
 
         try {
             if (number.isEmpty()) {
-                throw new IllegalArgumentException("잘못된 형식입니다. 구분자가 연속으로 사용되었습니다.");
+                throw new IllegalArgumentException("잘못된 형식입니다.");
             }
 
             int result = Integer.parseInt(number);
