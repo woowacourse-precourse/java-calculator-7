@@ -65,7 +65,9 @@ public class BasicSeparator implements Separator {
         value.stream()
                 .filter(this::isNotNumeric)
                 .findAny()
-                .ifPresent(IllegalArgumentException::new);
+                .ifPresent(e -> {
+                    throw new IllegalArgumentException();
+                });
     }
 
     private boolean isNotNumeric(String value) {

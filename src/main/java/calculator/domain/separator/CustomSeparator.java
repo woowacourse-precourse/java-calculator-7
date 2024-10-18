@@ -70,7 +70,9 @@ public class CustomSeparator implements Separator {
         values.stream()
                 .filter(this::isNotNumeric)
                 .findAny()
-                .ifPresent(IllegalArgumentException::new);
+                .ifPresent(e -> {
+                    throw new IllegalArgumentException();
+                });
     }
 
     private boolean isNotNumeric(String value) {
