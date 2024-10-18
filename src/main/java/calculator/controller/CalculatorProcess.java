@@ -31,7 +31,7 @@ public class CalculatorProcess {
         String customDelimiter = extractUtil.extractCustomDelimiter(readInput);
         String positiveString = extractUtil.extractPositiveString(readInput, customDelimiter);
 
-        char[] positiveCharacters = calculatorService.toCharArrayWithoutDelimiter(positiveString, customDelimiter);
+        char[] positiveCharacters = arrayConverter.toCharArrayWithoutDelimiter(positiveString, customDelimiter);
         numberValidator.validateNoDigits(positiveCharacters); // 숫자 변환 가능한 문자 검사
 
         int[] positives = arrayConverter.convertCharArrayToIntArray(positiveCharacters);
