@@ -22,11 +22,18 @@ public class CustomDelimiterParser {
     }
 
     public boolean hasCustomDelimiter(String input) {
-        if (!input.startsWith(PREFIX)) {
+        if (isStartWithPrefix(input)) {
             return false;
         }
-        int suffixIndex = getSuffixIndex(input);
-        return suffixIndex != -1;
+        return hasSuffix(input);
+    }
+
+    private boolean isStartWithPrefix(String input) {
+        return !input.startsWith(PREFIX);
+    }
+
+    private boolean hasSuffix(String input) {
+        return getSuffixIndex(input) != -1;
     }
 
     private int getPrefixIndex() {
