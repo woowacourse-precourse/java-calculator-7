@@ -13,8 +13,6 @@ public class Application {
         Calculator calculator = new Calculator();
 
         String userInput = inputReader.getUserInput();
-        System.out.println("입력: "+ userInput);
-        System.out.println( "길이:"+ userInput.length());
         delimiterType = inputValidator.isValidInput(userInput);
         int[] numbers = inputTransformer.stringToIntArray(userInput, delimiterType);
         int result = calculator.addition(numbers);
