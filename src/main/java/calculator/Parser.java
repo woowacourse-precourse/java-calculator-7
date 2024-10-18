@@ -1,8 +1,8 @@
 package calculator;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.StringTokenizer;
 
 public class Parser {
 
@@ -16,10 +16,29 @@ public class Parser {
 
         String type = checkInput(input);
         if (type.equals(DEFAULT)) {
+            if (!(isCorrectInput(input))) {
+                throw new IllegalArgumentException("잘못된 입력입니다.");
+            }
             return separators;
+        }
+        if (!validateCustomSeparatorForm(input)) {
+            throw new IllegalArgumentException("잘못된 입력입니다.");
         }
         addCustomSeparators(separators, input);
         return separators;
+    }
+
+    private static boolean isCorrectInput(String input) {
+        for (int i = 0; i < input.length(); i++) {
+            if (!(input.charAt(i) == ',' || input.charAt(i) == ':' || isNumber(input.charAt(i)))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean isNumber(char c) {
+        return c >= '0' && c <= '9';
     }
 
     private static void addCustomSeparators(List<String> separators, String input) {
@@ -33,13 +52,17 @@ public class Parser {
         System.out.println("separators = " + separators);
     }
 
-    public static String checkInput(String input) {
+    private static String checkInput(String input) {
 
-        if (hasCustomSeparator(input)) {
+//        if (hasCustomSeparator(input)) {
+//            return CUSTOM;
+//        } else {
+//            return DEFAULT;
+//        }
+        if (input.startsWith("//")) {
             return CUSTOM;
-        } else {
-            return DEFAULT;
         }
+        return DEFAULT;
     }
 
     private static boolean hasCustomSeparator(String input) {
@@ -65,28 +88,31 @@ public class Parser {
         return contents;
     }
 
-    public static int[] getNumbers(String input, List<String> separators) {
-
-        String[] numberString = input.split(separators.toString());
-        System.out.println("numberString = " + Arrays.deepToString(numberString));
-        int[] numbers = new int[numberString.length];
-        //int sum = 0;
-        for (int i = 0; i < numberString.length; i++) {
-            numbers[i] = Integer.parseInt(numberString[i]);
-            // 여기서 최대범위 예외처리
-            //checkIntegerRange(numberString[i]);
-            //System.out.println("numbers = " + numbers[i]);
-            //sum += numbers[i];
+    private static String startWithNumberString(String input) {
+        String numberString = input;
+        for (int i = 0; i < input.length(); i++) {
+            if (Character.isDigit(input.charAt(i))) {
+                numberString = numberString.substring(i);
+                return numberString;
+            }
         }
-        //System.out.println("sum = " + sum);
+        return numberString;
+    }
+
+    public static int[] getNumbers(String input, List<String> separators) {
+        String contents = startWithNumberString(input);
+        StringTokenizer st = new StringTokenizer(contents, separators.toString());
+        int tokenCount = st.countTokens();
+        int[] numbers = new int[tokenCount];
+        for (int i = 0; i < tokenCount; i++) {
+            try {
+                numbers[i] = Integer.parseInt(st.nextToken());
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("정수형의 최대 범위를 초과하였습니다.");
+            }
+        }
         return numbers;
     }
-
-    /*
-    public static boolean checkIntegerRange(String num){
-        if (num)
-    }
-    */
 
     private static String getSeparatorString(String input) {
         int separatorIdx = getLastSeparatorIdx(input);
@@ -145,7 +171,7 @@ public class Parser {
         if ((startPair == lastPair) && startPair != 0) {
             return true;
         }
-        throw new IllegalArgumentException();
+        return false;
     }
 
     private static boolean isCorrectLastElement(String input, int idx) {
