@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static calculator.utils.Util.isInteger;
+
 public class Preprocessor {
 
     private final DelimeterSegmentProcessor delimeterSegmentProcessor;
@@ -18,10 +20,6 @@ public class Preprocessor {
 
     private boolean validateDelimeterRequest(String input) {
         if (delimeterSegmentProcessor.checkCustomDelimeterRequest(input)) {
-            delimeterSegmentProcessor.validateCutomDelimeterRequest(input);
-            if (inputManager.isInteger(delimeterSegmentProcessor.extractCustomDelimeter(input))) {
-                throw new IllegalArgumentException("구분자로 숫자를 입력했습니다");
-            }
             return true;
         }
         return false;
