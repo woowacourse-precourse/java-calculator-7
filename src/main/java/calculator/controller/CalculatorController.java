@@ -41,6 +41,7 @@ public class CalculatorController {
     }
 
     public void outputResult() {
+        outputView.printAnswerMessage(sumNumbers());
     }
 
     //inputString: 사용자의 문자열 입력을 받음
