@@ -13,7 +13,7 @@ public class CustomDelimiterExtractor {
             throw new IllegalArgumentException(CustomDelimiterExtractorErrorMessage.INVALID_CUSTOM_DELIMITER_FORMAT.getMessage());
         }
 
-        String delimiter = input.substring(2, input.indexOf('\n'));
+        String delimiter = input.substring(2, input.indexOf(CUSTOM_DELIMITER_END));
 
         validate(delimiter);
 

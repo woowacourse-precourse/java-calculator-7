@@ -1,7 +1,26 @@
 package calculator;
 
+import calculator.calculator.Calculator;
+import calculator.view.InputView;
+import calculator.view.OutputView;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        String input = getInput();
+        int result = calculateResult(input);
+        printResult(result);
+    }
+
+    private static String getInput() {
+        return InputView.inputExpression();
+    }
+
+    private static int calculateResult(String input) {
+        Calculator calculator = new Calculator(input);
+        return calculator.calculate();
+    }
+
+    private static void printResult(int result) {
+        OutputView.printResult(result);
     }
 }

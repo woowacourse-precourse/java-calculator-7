@@ -27,7 +27,7 @@ public class NumberExtractor {
         return numbers.stream().mapToInt(i -> i).toArray();
     }
 
-    private static String[] mergeDelimiters(String customDelimiter) {
+    public static String[] mergeDelimiters(String customDelimiter) {
         String[] mergedDelimiters = new String[DEFAULT_DELIMITERS.length + 1];
         System.arraycopy(DEFAULT_DELIMITERS, 0, mergedDelimiters, 0, DEFAULT_DELIMITERS.length);
         mergedDelimiters[DEFAULT_DELIMITERS.length] = customDelimiter;
