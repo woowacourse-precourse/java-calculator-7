@@ -1,6 +1,6 @@
 package calculator;
 
-import java.io.Console;
+import camp.nextstep.edu.missionutils.Console;
 import java.util.Scanner;
 
 
@@ -15,22 +15,8 @@ public class Application {
 
         //프로그램 실행시 문자열 데이터를 입력받아 String input에 저장한다.
 
-
-        //gradle을 이용한 test 환경에서 지원하지 않아 주석처리 하였다.
-        /*
-        Console console = System.console();
-        if(console == null) {
-            System.out.println("콘솔을 지원하지 않는 환경입니다.");
-            throw new Error();
-            //System.exit(1);
-        }
-        input=console.readLine("덧셈할 문자열을 입력해 주세요.");
-
-         */
-
-        Scanner scanner=new Scanner(System.in);
         System.out.println("덧셈할 문자열을 입력해 주세요:");
-        input=scanner.nextLine();
+        input=Console.readLine();
 
     }
     public static void main(String[] args) {
