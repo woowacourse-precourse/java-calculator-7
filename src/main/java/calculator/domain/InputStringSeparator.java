@@ -39,7 +39,8 @@ public class InputStringSeparator {
     }
 
     private void setInputString(String inputString) {
-        this.inputString = inputString.replaceAll("\n", "\\n");
+        this.inputString = inputString.replace("\n", "\\n");
+        System.out.println(this.inputString);
     }
 
     private void setCustomSeparator() {
@@ -48,6 +49,7 @@ public class InputStringSeparator {
             lastIndex = inputString.indexOf("\\n");
             this.customSeparator = inputString.substring(startIndex, lastIndex);
         }
+        System.out.println(customSeparator);
     }
 
     private void setFinalSeparator() {
@@ -55,7 +57,24 @@ public class InputStringSeparator {
             this.finalSeparator = ",|:";
             return;
         }
-        this.finalSeparator = ",|:|" + this.customSeparator;
+        this.finalSeparator = ",|:|" + escapeSpecialChars(customSeparator);
+    }
+
+    private String escapeSpecialChars(String separator) {
+        return separator.replace("\\", "\\\\")
+                .replace(".", "\\.")
+                .replace("(", "\\(")
+                .replace(")", "\\)")
+                .replace("[", "\\[")
+                .replace("]", "\\]")
+                .replace("{", "\\{")
+                .replace("}", "\\}")
+                .replace("?", "\\?")
+                .replace("+", "\\+")
+                .replace("*", "\\*")
+                .replace("|", "\\|")
+                .replace("^", "\\^")
+                .replace("$", "\\$");
     }
 
     private void setInputNumber() {
@@ -89,5 +108,4 @@ public class InputStringSeparator {
     public List<Integer> getInputNumber() {
         return Collections.unmodifiableList(inputNUmberInt);
     }
-
 }

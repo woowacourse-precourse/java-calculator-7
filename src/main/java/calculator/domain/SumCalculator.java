@@ -7,7 +7,7 @@ public class SumCalculator {
 
     public int getResult(List<Integer> inputNumber) {
         calculateResult(inputNumber);
-        return this.result;
+        return result;
     }
 
     private void calculateResult(List<Integer> inputNumber) {
