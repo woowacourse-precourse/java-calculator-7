@@ -1,7 +1,5 @@
 package calculator.domain.calculator.domain;
 
-import java.util.Arrays;
-
 public class StringCalculator {
     private final String input;
     private final Delimiter delimiter;
