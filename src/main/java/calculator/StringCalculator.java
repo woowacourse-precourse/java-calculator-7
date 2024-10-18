@@ -7,7 +7,7 @@ public class StringCalculator {
         }
 
         // 구분자 정의
-        String delimiter = "[,|:]";
+        String delimiter = "[,:]";
 
         // 커스텀 구분자 처리
         if (input.startsWith("//")) {
