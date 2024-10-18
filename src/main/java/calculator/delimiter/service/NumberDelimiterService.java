@@ -1,7 +1,6 @@
 package calculator.delimiter.service;
 
 import calculator.common.exception.ExceptionFactory;
-import calculator.delimiter.domain.Delimiter;
 import calculator.delimiter.domain.Delimiters;
 import calculator.delimiter.factory.DelimiterFactory;
 import calculator.util.pattern.PatternUtils;
@@ -34,15 +33,5 @@ public class NumberDelimiterService extends DelimiterService {
         if (!PatternUtils.matchesWithDelimitersIgnoringNumbers(strippedInput, delimiters.pattern())) {
             throw ExceptionFactory.createException(NOT_DELIMITER);
         }
-    }
-
-    private Delimiters getDelimiters(String input) {
-        return customDelimiterService.extractCustomDelimiter(input)
-                .map(this::createDelimiters)
-                .orElseGet(this::createDelimiters);
-    }
-
-    private Delimiters createDelimiters(Delimiter... additionalDelimiters) {
-        return delimiterFactory.createDelimiters(additionalDelimiters);
     }
 }
