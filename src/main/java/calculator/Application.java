@@ -29,6 +29,11 @@ public class Application {
             if (separatorIndex != -1) {
                 // '//' 뒤부터 '\\n' 앞까지의 문자를 구분자로 사용
                 String customSeparator = input.substring(input.indexOf("//") + 2, separatorIndex);
+
+                if (customSeparator.length() > 1) {
+                    throw new IllegalArgumentException("커스텀 구분자는 한 글자만 가능합니다.");
+                }
+
                 separator = separator + "|" + Pattern.quote(customSeparator);  // 기본 구분자에 커스텀 구분자 추가
                 // 커스텀 구분자를 추출했으니 그 이후의 숫자 문자열만 남김
                 input = input.substring(separatorIndex + 2);
