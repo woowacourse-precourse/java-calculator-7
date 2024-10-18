@@ -17,7 +17,7 @@ public class ValidateUtils {
         }
     }
 
-    private static  boolean isNumeric(String str) {
+    public static boolean isNumeric(String str) {
         return str != null && str.matches("-?\\d+");
     }
 }

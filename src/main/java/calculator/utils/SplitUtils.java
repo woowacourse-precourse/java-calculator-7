@@ -1,5 +1,7 @@
 package calculator.utils;
 
+import calculator.constant.ErrorMessage;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,6 +38,10 @@ public class SplitUtils {
 
         if (separator.startsWith("//")) {
             separator = separator.replace("//", "");
+        }
+
+        if (ValidateUtils.isNumeric(separator)) {
+            throw new IllegalArgumentException(ErrorMessage.CAN_USE_ONLY_STRING.getMessage());
         }
 
         String leftInput = userInput.substring(escapeIdx + 2);
