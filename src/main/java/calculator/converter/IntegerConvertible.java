@@ -1,10 +1,11 @@
-package calculator.util;
+package calculator.converter;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class NumberConverter {
+public class IntegerConvertible implements NumberConvertible<Integer> {
 
+    @Override
     public List<Integer> convertStringToNumber(final String[] splitedByRegex) {
         try {
             return Arrays.stream(splitedByRegex)
@@ -17,11 +18,10 @@ public class NumberConverter {
         }
     }
 
-    private int getPositiveNumber(final int number) {
+    private Integer getPositiveNumber(final Integer number) {
         if (number <= 0) {
             throw new IllegalArgumentException("양수가 아닙니다.");
         }
-
         return number;
     }
 

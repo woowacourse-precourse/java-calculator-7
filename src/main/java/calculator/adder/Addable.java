@@ -2,8 +2,8 @@ package calculator.adder;
 
 import java.util.List;
 
-public interface Addable<T> {
+public interface Addable {
 
-    T addNumbers(final List<T> numbers);
+    Number addNumbers(final List<Number> numbers);
 
 }

@@ -1,11 +1,13 @@
 package calculator;
 
+import calculator.adder.Addable;
 import calculator.adder.IntegerAdder;
+import calculator.converter.IntegerConvertible;
+import calculator.converter.NumberConvertible;
 import calculator.io.ConsoleInputHandler;
 import calculator.io.ConsoleOutputHandler;
+import calculator.regex.RegexGenerator;
 import calculator.util.DelimiterExtractor;
-import calculator.util.NumberConverter;
-import calculator.util.RegexGenerator;
 import calculator.util.Splitter;
 import delimiter.Delimiters;
 
@@ -18,11 +20,11 @@ public class Application {
         DelimiterExtractor delimiterExtractor = new DelimiterExtractor();
         Splitter splitter = new Splitter();
         RegexGenerator regexGenerator = new RegexGenerator();
-        NumberConverter numberConverter = new NumberConverter();
-        IntegerAdder integerAdder = new IntegerAdder();
+        NumberConvertible numberConvertible = new IntegerConvertible();
+        Addable adder = new IntegerAdder();
 
         StringCalculator stringCalculator = new StringCalculator(consoleInputHandler, consoleOutputHandler,
-                delimiterExtractor, splitter, regexGenerator, numberConverter, integerAdder);
+                delimiterExtractor, splitter, regexGenerator, numberConvertible, adder);
 
         Delimiters defaultDelimiters = stringCalculator.initialize();
         stringCalculator.run(defaultDelimiters);
