@@ -17,9 +17,7 @@ public class Calculator {
         }
 
         List<String> numbers = splitByDelimiters(str);  // 구분자로 숫자 분리
-        for(String i : numbers){ // 숫자 분리 확인
-            System.out.println(i);
-        }
+        System.out.println("결과 : " + sum(numbers)); // 결괏값 출력
     }
 
     // 입력한 문자열이 비었는지 확인 -> 비었으면 0 출력
@@ -50,5 +48,13 @@ public class Calculator {
         String numberPart = str.substring(endIndex + 2); // 숫자 부분 추출
         String delimiters = "[" + customDelimiters + ",:]"; // 커스텀 구분자와 기본 구분자를 모두 포함
         return Arrays.asList(numberPart.split(delimiters)); // 최종 구분자로 문자열을 분리
+    }
+    // 숫자 합산
+    public static int sum(List<String> numberPart) {
+        int sum = 0;
+        for (String number : numberPart) {
+            sum += Integer.parseInt(number);
+        }
+        return sum;
     }
 }
