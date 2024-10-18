@@ -1,5 +1,6 @@
 package calculator;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,13 +26,24 @@ public class StringCalculator {
     }
 
     public List<Double> extractNumbersByDelimiter(List<String> splitString, String customDelimiter) {
-        String numberCandidates = splitString.get(1);
         NumberValidator numberValidator = new NumberValidator();
-        List<String> splitNumber = Arrays.stream(numberCandidates.split(",|:|" + customDelimiter, -1)).toList();
+        String numberCandidates = splitString.getLast();
+        String splitRegex = createDelimiterRegex(customDelimiter);
+        List<String> splitNumber = Arrays.stream(numberCandidates.split(splitRegex, -1)).toList();
 
         numberValidator.validate(splitNumber);
 
         return splitNumber.stream().map(number -> number.isEmpty() ? 0.0 : Double.parseDouble(number)).toList();
+    }
+
+    private String createDelimiterRegex(String customDelimiter) {
+        List<String> delimiters = new ArrayList<>(Arrays.asList(",", ":"));
+
+        if (!customDelimiter.isEmpty()) {
+            delimiters.add(customDelimiter);
+        }
+
+        return String.join("|", delimiters);
     }
 
     public Double calculate(List<Double> numberList) {
