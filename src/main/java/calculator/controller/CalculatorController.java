@@ -13,6 +13,6 @@ public class CalculatorController {
     public void run() {
         String inputString = inputView.inputMessage(); // 입력 값 받아오기
         int result = calculatorService.calculate(inputString); // 계산 결과
-//        outputView.outputMessage(result); // 결과 출력
+        outputView.outputMessage(result); // 결과 출력
     }
 }

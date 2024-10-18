@@ -16,12 +16,13 @@ public class CalculatorService {
             return 0;
         }
 
+        // input 값이 음수이면 안됨!!
+
         // 구분자로 나눠줌
         String[] nums = separatorCheck.split(input);
         System.out.println("The number that needs to be calculated is " + Arrays.toString(nums));
 
         // 계산 결과 return
-//        return sumCalculator.sum(nums);
-        return 1;
+        return sumCalculator.sum(nums);
     }
 }
