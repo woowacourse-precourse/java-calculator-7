@@ -1,48 +1,58 @@
 package calculator;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class StringValidatorImpl implements StringValidator {
+    private static final String DEFAULT_DELIMITERS = "[,:]";
+    private static final String CUSTOM_DELIMITER_PREFIX = "//";
+    private static final String DELIMITER_END = "\\n";
 
     // 입력값의 유효성을 검사하고, 구분자를 반환하는 메서드
     @Override
     public String isValid(String input) {
-        // 1. 입력이 null이거나 빈 문자열인지 검사 -> 수정해야함
-        if (input == null || input.isEmpty()) {
-            //throw new IllegalArgumentException("입력 값이 비어있거나 null입니다.");
-            System.out.println("0");
+        // 0. 공백 입력 시 0을 반환 (유효성 검사)
+        if (input == null || input.trim().isEmpty()) {
+            return DEFAULT_DELIMITERS; // 구분자 없이 숫자 "0"을 반환할 수 있도록 기본 구분자 반환
         }
 
-        // 2. 정규 표현식을 사용하여 "//"와 "\n" 사이의 커스텀 구분자를 추출
-        Pattern pattern = Pattern.compile("//(.*?)\\n");  // "//"와 "\n" 사이의 구분자를 찾는 정규 표현식
-        Matcher matcher = pattern.matcher(input);
+        // 1. 커스텀 구분자가 있는지 확인 (//로 시작하는지 확인)
+        if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
+            int delimiterEndIndex = input.indexOf(DELIMITER_END);
+            if (delimiterEndIndex == -1) {
+                throw new IllegalArgumentException("잘못된 형식입니다. 구분자 정의가 없습니다.");
+            }
 
-        String delimiter;
-        String numbers;
-
-        if (matcher.find()) {
             // 커스텀 구분자 추출
-            delimiter = matcher.group(1);  // 첫 번째 그룹에서 구분자를 추출
-            numbers = input.substring(matcher.end());  // "\n" 이후의 숫자 부분 추출
-            System.out.println("1: " + numbers + delimiter);
-        } else {
-            // 기본 구분자 처리 (쉼표와 콜론 사용)
-            delimiter = "[,:]";
-            numbers = input;// 전체 입력을 숫자 부분으로 간주
-            System.out.println("2: " + numbers + delimiter);
+            String customDelimiter = input.substring(2, delimiterEndIndex);
+
+            // 4. 커스텀 구분자가 없는 경우 (//\n)
+            if (customDelimiter.isEmpty()) {
+                return "";  // 구분자가 없는 경우 공백을 반환
+            }
+
+            // 여러 개의 구분자를 허용하는 경우 정규식으로 처리
+            return "[" + customDelimiter + "]";  // ex) ";'" -> "[;'"]
         }
 
+        // 2. 기본 구분자를 사용하여 유효성 검사 후 반환
+        return DEFAULT_DELIMITERS;
+    }
 
-        // 3. 숫자 형식 검사 (숫자 이외의 값이 있는지 확인)
-        String[] tokens = numbers.split(Pattern.quote(delimiter));  // 구분자로 숫자 분리
-        for (String token : tokens) {
-            if (!token.matches("\\d+")) {  // 숫자가 아닌 경우 예외 처리
-                throw new IllegalArgumentException("숫자 형식이 올바르지 않음 " + token);
+    // 숫자 리스트가 유효한지 확인하는 메서드 (예: 음수 확인)
+    public void validateNumbers(String[] numbers) {
+        for (String num : numbers) {
+            // 공백이 아닌지 체크하고 숫자로 변환 가능하도록 처리
+            if (!num.trim().isEmpty()) {
+                try {
+                    int value = Integer.parseInt(num.trim());
+
+                    // 음수가 있을 경우 예외 발생
+                    if (value < 0) {
+                        throw new IllegalArgumentException("음수는 허용되지 않습니다: " + value);
+                    }
+                } catch (NumberFormatException e) {
+                    // 숫자로 변환할 수 없는 경우의 예외 처리
+                    throw new IllegalArgumentException("잘못된 숫자 형식이 포함되었습니다: " + num);
+                }
             }
         }
-
-        // 4. 유효한 경우 구분자 반환
-        return delimiter;
     }
 }

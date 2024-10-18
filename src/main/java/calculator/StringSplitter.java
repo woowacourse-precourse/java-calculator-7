@@ -18,11 +18,12 @@ public class StringSplitter {
 
         // 커스텀 구분자일 경우 숫자 부분만 추출
         if (input.startsWith("//")) {
-            int index = input.indexOf("\n");
+            int index = input.indexOf("\\n");
             input = input.substring(index + 2);  // "\n" 이후의 숫자 부분만 추출
         }
 
         // 구분자를 이용해 문자열을 분리
-        return input.split(Pattern.quote(delimiter));
+        return input.split(delimiter);
     }
 }
+//;\n;1;2
