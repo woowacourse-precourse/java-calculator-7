@@ -11,7 +11,7 @@ public class InputValidator {
     private static final String NON_NATURAL_NUMBER = "자연수를 입력해주세요.";
     private static final String INVALID_CUSTOM_DELIMITER = "커스텀 구분자가 정상적으로 입력되지 않았습니다.";
 
-    public void MainInputValidator(CustomDelimiter formula){
+    public void mainInputValidator(CustomDelimiter formula){
         if (formula.checkCustomDelimiter()){
             validateCustomDelimiter(formula.getFormula());
         }
