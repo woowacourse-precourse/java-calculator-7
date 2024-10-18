@@ -34,4 +34,14 @@ public class InputParser {
 
         return result;
     }
+
+    public List<Long> parseStringListToLongList(List<String> input) {
+        List<Long> result = new ArrayList<>();
+
+        for (String number : input) {
+            result.add(Long.parseLong(number));
+        }
+
+        return result;
+    }
 }
