@@ -22,6 +22,8 @@ public class Application {
             if(str.charAt(3) == '\\' && str.charAt(4) == 'n') {
                 std.add(str.charAt(2));
                 str = str.substring(5);
+            } else {
+                throw new IllegalArgumentException("잘못된 일력 값입니다.");
             }
         }
 
@@ -33,6 +35,8 @@ public class Application {
             } else if(std.contains(str.charAt(i))) {
                 arr.add(Integer.parseInt(temp.toString()));
                 temp = new StringBuilder();
+            } else {
+                throw new IllegalArgumentException("잘못된 일력 값입니다.");
             }
         }
         arr.add(Integer.parseInt(temp.toString()));
