@@ -2,12 +2,14 @@ package calculator.model;
 
 import static calculator.validate.NumberValidator.validateNumber;
 
+import calculator.parser.DelimiterExtractor;
 import java.util.Objects;
 
 public class Calculator {
 
-    private int result;
-    private static final String DEFAULT_DELIMITER = "[,:]";
+    private static int result;
+
+    private final DelimiterExtractor extractor = new DelimiterExtractor();
 
     public void calculate(String input) {
         if (Objects.equals(input, "")) {
@@ -16,12 +18,12 @@ public class Calculator {
         }
         String[] numbers;
         if (input.startsWith("//")) {
-            String customDelimiter = String.valueOf(input.charAt(2));
+            String customDelimiter = extractor.extractCustomDelimiter(input);
             numbers = input.substring(5).split(customDelimiter);
             calculateSum(numbers);
             return;
         }
-        numbers = input.split(DEFAULT_DELIMITER);
+        numbers = input.split(extractor.getDefaultDelimiter());
         calculateSum(numbers);
     }
 
