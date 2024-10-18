@@ -74,6 +74,14 @@ class ApplicationTest extends NsTest {
                 .hasMessageContaining("구분자가 아닌 값이 있습니다");
     }
 
+    @Test
+    void 양수_이외의_값_예외_테스트() {
+        Calculator calculator = new Calculator();
+
+        assertThatThrownBy(() -> calculator.add("-1,2,3"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("음수는 유효한 입력이 아닙니다");
+    }
 
     @Override
     public void runMain() {
