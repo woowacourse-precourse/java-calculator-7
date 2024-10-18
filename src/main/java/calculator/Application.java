@@ -14,7 +14,7 @@ public class Application {
         // TODO: 프로그램 구현
         String[] splitStringArray = inputString();
 
-        int sum = calculateNumber(isNumeric(splitStringArray));
+        int sum = calculateNumber(splitStringArray);
 
         String answer = getAnswer(sum);
         System.out.println(answer);
@@ -25,11 +25,12 @@ public class Application {
         return "결과 : " + sum;
     }
 
-    private static int calculateNumber(int[] num) {
+    private static int calculateNumber(String[] words) {
+        int[] nums = isNumeric(words);
         int sum = 0;
 
-        for (int i = 0; i < num.length; i++) {
-            sum += num[i];
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
         }
 
         return sum;
@@ -39,7 +40,7 @@ public class Application {
         int[] nums = new int[words.length];
         for (int i = 0; i < words.length; i++) {
             if (!words[i].matches("[0-9]+")) {
-                throw new IllegalArgumentException("숫자가 아닙니다.");
+                throw new IllegalArgumentException("잘못된 값을 입력하였습니다.");
             }
 
             nums[i] = Integer.parseInt(words[i]);
