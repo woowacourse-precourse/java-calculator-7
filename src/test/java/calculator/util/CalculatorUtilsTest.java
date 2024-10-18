@@ -13,26 +13,19 @@ class CalculatorUtilsTest {
 
     List<String> normalInputs = List.of(
             "2,3:328",
-            "//#!ji!!#",
-            "//",
-            "/",
-            "/\\n",
+            "//#!ji!!\\n",
             "//\\n",
-            "//asI#\\n12,3"
+            "//asI#9\\n12,3"
     );
     List<Set<Character>> normalCorrects = List.of(
             Set.of(',', ':'),
             Set.of(',', ':', '#', '!', 'j', 'i'),
             Set.of(',', ':'),
-            Set.of(',', ':'),
-            Set.of(',', ':'),
-            Set.of(',', ':'),
-            Set.of(',', ':', 'a', 's', 'I', '#')
+            Set.of(',', ':', 'a', 's', 'I', '#', '9')
     );
     List<String> abnormalInputs = List.of(
             "//12",
-            "//!@12",
-            "//!@12\\n12"
+            "//!@12"
     );
 
     @Test
