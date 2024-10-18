@@ -14,13 +14,14 @@ import org.junit.jupiter.api.Test;
 class StringParserTest {
 
     private final StringParser stringParser = CalculatorAppFixture.createStringParser();
+    private final DelimiterStore delimiterStore = CalculatorAppFixture.getDelimiterStore();
 
     @DisplayName("커스텀 구분자 생성문자와 계산대상인 숫자와 구분자 문자열을 분리한다.")
     @Test
     void splitTarget() {
 
         assertSimpleTest(() -> {
-            String splitedTarget = stringParser.splitTarget("//;\\n1//;\\n11.2.3");
+            String splitedTarget = stringParser.splitTarget("//;\\n//;\\n1.2.3");
             assertThat(splitedTarget).contains("1.2.3");
         });
     }
@@ -29,7 +30,8 @@ class StringParserTest {
     @Test
     void parseToNumbers() {
         assertSimpleTest(() -> {
-            List<Integer> numbers = stringParser.parseToNumbers("1,2:3");
+            delimiterStore.addDelimiters(List.of(";","/"));
+            List<Integer> numbers = stringParser.parseToNumbers("1;2/3");
             assertThat(numbers).contains(1,2,3);
         });
     }

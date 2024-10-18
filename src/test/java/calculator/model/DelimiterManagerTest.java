@@ -30,4 +30,13 @@ class DelimiterManagerTest {
             assertThat(delimiterStore.getAllDelimiters()).contains(".");
         });
     }
+
+    @DisplayName("문자열 내에 2개 이상 커스텀 구분자를 DelimiterStore에 등록한다.")
+    @Test
+    void registerTwoCustomDelimiters() {
+        assertSimpleTest(() -> {
+            delimiterManager.registerCustomDelimiters("//.\\n//;\\n1,2,3");
+            assertThat(delimiterStore.getAllDelimiters()).contains(".",";");
+        });
+    }
 }
