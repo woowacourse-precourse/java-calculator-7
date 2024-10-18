@@ -1,8 +1,9 @@
 package calculator.Model;
 
 
+import java.util.Arrays;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 public class StringProcessor {
     private final String input;
@@ -15,38 +16,38 @@ public class StringProcessor {
         if (input.isEmpty()) {
             return new int[]{0};
         }
-        String separator = getSeparator();
-        separator = preprocessCustomSeparator(separator);
+        String[] separatorList = getSeparator();
+        String separator = prefixSeparator(separatorList);
         String trimmedInput = trimInput();
         String[] parsedInput = parseInput(trimmedInput, separator);
         return convertToIntArray(parsedInput);
 
     }
 
-    public String getSeparator() {
+    public String[] getSeparator() {
         // 구분자 정의하기
         if (hasCustomSeparator()) {
             return getCustomSeparator();
         }
-        return ",|:";
+        return new String[]{",", ":"};
     }
 
     private boolean hasCustomSeparator() {
         return input.contains("//") || input.contains("\n");
     }
 
-    private String getCustomSeparator() {
+    private String[] getCustomSeparator() {
         // 커스텀 구분자 추출하기
         int separatorStartIndex = getSeparatorStartIndex();
         int separatorEndIndex = getSeparatorEndIndex();
 
-        ValidateCustomSeparator(separatorStartIndex, separatorEndIndex);
+        validateCustomSeparator(separatorStartIndex, separatorEndIndex);
 
-        return (String) input.subSequence(separatorStartIndex, separatorEndIndex + 1);
+        return new String[]{(String) input.subSequence(separatorStartIndex, separatorEndIndex + 1)};
     }
 
-    private String preprocessCustomSeparator(String separator) {
-        return Pattern.quote(separator);
+    private String prefixSeparator(String[] separator) {
+        return Arrays.stream(separator).map(Pattern::quote).collect(Collectors.joining("|"));
     }
 
     private int getSeparatorStartIndex() {
@@ -57,8 +58,8 @@ public class StringProcessor {
         return input.indexOf("\n") - 1;
     }
 
-    private void ValidateCustomSeparator(int startIndex, int endIndex) {
-        if (startIndex != 2 || endIndex <= 1) {
+    private void validateCustomSeparator(int startIndex, int endIndex) {
+        if (startIndex != 2 || endIndex <= 0) {
             throw new IllegalArgumentException("커스텀 구분자가 올바르게 정의되지 않았습니다.");
         }
     }
@@ -78,7 +79,7 @@ public class StringProcessor {
 
     private int[] convertToIntArray(String[] parsedInput) {
         // String 리스트를 Int 형으로 변경
-        return Stream.of(parsedInput)
+        return Arrays.stream(parsedInput)
                 .mapToInt(str -> {
                     if (str.isEmpty()) {
                         return 0;

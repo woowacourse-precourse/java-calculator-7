@@ -12,7 +12,7 @@ public class StringProcessorTest {
     void 기본_구분자_추출() {
         assertSimpleTest(() -> {
             StringProcessor processor = new StringProcessor("1,2:3");
-            assertThat(processor.getSeparator()).isEqualTo(",|:");
+            assertThat(processor.getSeparator()).isEqualTo(new String[]{",", ":"});
         });
     }
 
@@ -20,7 +20,7 @@ public class StringProcessorTest {
     void 커스텀_구분자_추출() {
         assertSimpleTest(() -> {
             StringProcessor processor = new StringProcessor("//+\n1+2+3");
-            assertThat(processor.getSeparator()).isEqualTo("+");
+            assertThat(processor.getSeparator()).isEqualTo(new String[]{"+"});
         });
     }
 
@@ -59,6 +59,14 @@ public class StringProcessorTest {
     }
 
     @Test
+    void 숫자_배열_출력_커스텀_구분자_2() {
+        assertSimpleTest(() -> {
+            StringProcessor processor = new StringProcessor("//*$\n1*$2*$3");
+            assertThat(processor.getAdditionNumbers()).isEqualTo(new int[]{1, 2, 3});
+        });
+    }
+
+    @Test
     void 숫자_배열_출력_커스텀_구분자_빈문자() {
         assertSimpleTest(() -> {
             StringProcessor processor = new StringProcessor("//&\n1&&2&3");
@@ -82,5 +90,13 @@ public class StringProcessorTest {
             processor.getAdditionNumbers();
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("음수 값이 포함되어 있습니다: -2");
+    }
+
+    @Test
+    void 숫자_배열_출력_빈_커스텀_구분자() {
+        assertSimpleTest(() -> {
+            StringProcessor processor = new StringProcessor("//\n123");
+            assertThat(processor.getAdditionNumbers()).isEqualTo(new int[]{1, 2, 3});
+        });
     }
 }
