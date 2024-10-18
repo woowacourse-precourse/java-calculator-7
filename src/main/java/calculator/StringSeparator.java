@@ -29,6 +29,15 @@ public class StringSeparator { //TODO: 구분자를 인식하고, 구분자로 �
     }
 
     private static String findSeparator(String leftString) {
-        return leftString.substring(2);
+        String separator = leftString.substring(2);
+        System.out.println(separator.length());
+        if (isCustomSeparatorEmpty(separator)) { //커스텀 구분자가 ""이면 ","을 반환
+            return ",";
+        }
+        return separator;
+    }
+
+    private static boolean isCustomSeparatorEmpty(String separator) {
+        return separator.isEmpty();
     }
 }
