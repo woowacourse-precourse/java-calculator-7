@@ -15,7 +15,7 @@ class ClassifierTest {
         // given
         String input = "1,2,3";
         List<String> defaultDelimiters = Arrays.asList(",", ":");
-        Delimiters delimiters = new Delimiters(defaultDelimiters, input);
+        Delimiters delimiters = new Delimiters(input, defaultDelimiters);
 
         // when
         Classifier classifier = new Classifier(input, delimiters);
@@ -31,7 +31,7 @@ class ClassifierTest {
         // given
         String input = "1:2:3";
         List<String> defaultDelimiters = Arrays.asList(",", ":");
-        Delimiters delimiters = new Delimiters(defaultDelimiters, input);
+        Delimiters delimiters = new Delimiters(input, defaultDelimiters);
 
         // when
         Classifier classifier = new Classifier(input, delimiters);
@@ -47,7 +47,7 @@ class ClassifierTest {
         // given
         String input = "//;\\n1;2;3";
         List<String> defaultDelimiters = Arrays.asList(",", ":");
-        Delimiters delimiters = new Delimiters(defaultDelimiters, input);
+        Delimiters delimiters = new Delimiters(input, defaultDelimiters);
 
         // when
         Classifier classifier = new Classifier(input, delimiters);
@@ -63,7 +63,7 @@ class ClassifierTest {
         // given
         String input = "//;\\n1;2:3,4";
         List<String> defaultDelimiters = Arrays.asList(",", ":");
-        Delimiters delimiters = new Delimiters(defaultDelimiters, input);
+        Delimiters delimiters = new Delimiters(input, defaultDelimiters);
 
         // when
         Classifier classifier = new Classifier(input, delimiters);
@@ -79,7 +79,7 @@ class ClassifierTest {
         // given
         String emptyInput = "";
         List<String> defaultDelimiters = Arrays.asList(",", ":");
-        Delimiters delimiters = new Delimiters(defaultDelimiters, emptyInput);
+        Delimiters delimiters = new Delimiters(emptyInput, defaultDelimiters);
 
         // when
         Classifier classifier = new Classifier(emptyInput, delimiters);
@@ -95,7 +95,7 @@ class ClassifierTest {
         // given
         String input = "1";
         List<String> defaultDelimiters = Arrays.asList(",", ":");
-        Delimiters delimiters = new Delimiters(defaultDelimiters, input);
+        Delimiters delimiters = new Delimiters(input, defaultDelimiters);
 
         // when
         Classifier classifier = new Classifier(input, delimiters);
@@ -111,7 +111,7 @@ class ClassifierTest {
         // given
         String invalidInput = "1,a,3";
         List<String> defaultDelimiters = Arrays.asList(",", ":");
-        Delimiters delimiters = new Delimiters(defaultDelimiters, invalidInput);
+        Delimiters delimiters = new Delimiters(invalidInput, defaultDelimiters);
 
         // when & then
         assertThrows(IllegalArgumentException.class, () -> {
@@ -125,7 +125,7 @@ class ClassifierTest {
         // given
         String invalidCustomDelimiterInput = "//\n1;2;3";
         List<String> defaultDelimiters = Arrays.asList(",", ":");
-        Delimiters delimiters = new Delimiters(defaultDelimiters, invalidCustomDelimiterInput);
+        Delimiters delimiters = new Delimiters(invalidCustomDelimiterInput, defaultDelimiters);
 
         // when & then
         assertThrows(IllegalArgumentException.class, () -> {

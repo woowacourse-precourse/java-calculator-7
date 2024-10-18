@@ -2,20 +2,17 @@ package calculator;
 
 import calculator.io.Input;
 import calculator.io.View;
-import calculator.operator.Adder;
-
-import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
+        AppConfig appConfig = AppConfig.getInstance();
+
         final View view = new View();
         view.printInstruction();
 
         String inputString = Input.readLine();
-        Delimiters delimiters = new Delimiters(List.of(":",","), inputString);
-        Classifier classifier = new Classifier(inputString, delimiters);
-        Adder adder = new Adder(classifier);
+        String result = appConfig.operator(inputString).toString();
 
-        view.printResult(adder.toString());
+        view.printResult(result);
     }
 }

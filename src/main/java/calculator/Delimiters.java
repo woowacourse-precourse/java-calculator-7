@@ -15,7 +15,7 @@ public class Delimiters {
      * @param defaultDelimiters 기본 구분자 리스트
      * @param input 사용자 입력 문자열
      */
-    public Delimiters(List<String> defaultDelimiters, String input) {
+    public Delimiters(String input, List<String> defaultDelimiters) {
         this.delimiters = defaultDelimiters;
         this.customDelimiter = getCustomDelimiter(input);
     }
