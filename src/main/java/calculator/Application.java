@@ -5,8 +5,8 @@ import camp.nextstep.edu.missionutils.Console;
 public class Application {
     public static String[] checkInput (String input, StringBuilder delimiter) {
         String validatedCustomDelimiterInput = checkCustomDelimiter(input, delimiter);
-//        if (!checkArguments(validatedCustomDelimiterInput, delimiter))
-//            throw new IllegalArgumentException("wrong arguments");
+        if (!checkArguments(validatedCustomDelimiterInput, delimiter))
+            throw new IllegalArgumentException("wrong arguments");
 //        return checkDuplicateDelimiter(validatedCustomDelimiterInput.split(delimiter.toString()));
         return null;
     }
@@ -22,6 +22,11 @@ public class Application {
         }
         delimiter.append("]");
         return customInput;
+    }
+
+    public static boolean checkArguments (String input, StringBuilder delimiter) {
+        String regex = "^[0-9" + delimiter.substring(1) + "+$";
+        return input.matches(regex);
     }
 
     public static void main(String[] args) {
