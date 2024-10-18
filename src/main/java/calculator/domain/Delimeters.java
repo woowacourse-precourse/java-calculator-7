@@ -16,4 +16,8 @@ public class Delimeters {
     public List<String> getElements() {
         return new ArrayList<>(elements);
     }
+
+    public void addDelimiter(String delimiter) {
+        elements.add(delimiter);
+    }
 }
