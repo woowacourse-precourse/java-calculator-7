@@ -31,15 +31,18 @@ class UserInputTest {
         Assertions.assertThatThrownBy(() -> separateDelimAndNumbers(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
-    
+
     public void separateDelimAndNumbers(String input) {
         String[] split = input.split("\n");
-        if(split.length==1 || split.length > 2) {
-            throw new IllegalArgumentException();
+        if(split.length==1) { // 커스텀 구분자가 존재하지 않는 경우
+            numberString = split[0];
+        }else if(split.length==2) {
+            delimiterSection = split[0];
+            numberString = split[1];
+            extractDelimiter(delimiterSection);
+        }else {
+            throw new IllegalArgumentException("커스텀 구분자 형식이 일치하지 않습니다.");
         }
-        delimiterSection = split[0];
-        numberString = split[1];
-        extractDelimiter(delimiterSection);
     }
 
     private void extractDelimiter(String delimiterSection) {
@@ -53,6 +56,7 @@ class UserInputTest {
     }
     static Stream<Object[]> validInputs() {
         return Stream.of(new Object[]{"//;\n1;2;3", ";", "1;2;3"},
+                new Object[]{"1.2:3",null,"1.2:3"},
                 new Object[]{"//#\n4.5#6:7", "#", "4.5#6:7"},
                 new Object[]{"//@\n7@8:9.10", "@", "7@8:9.10"},
                 new Object[]{"//^\n7^8.9:10","^","7^8.9:10"});
