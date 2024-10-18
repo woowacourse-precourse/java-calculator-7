@@ -22,6 +22,15 @@ public class CustomInputValidatorTest extends NsTest {
   }
 
   @Test
+  void 입력값이_공백인_경우_예외(){
+    assertSimpleTest(() -> {
+      assertThatThrownBy(() -> validator.validateInput(" "))
+          .isInstanceOf(IllegalArgumentException.class)
+          .hasMessageContaining(ErrorCode.EMPTY_INPUT.toString());
+    });
+  }
+
+  @Test
   void 올바른_커스텀_구분자_형식(){
     assertSimpleTest(() ->{
       assertDoesNotThrow(() -> validator.validateInput("//@\n1@2@3@"));

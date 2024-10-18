@@ -10,7 +10,9 @@ public class CustomInputValidator implements InputValidator{
     if(input == null){
       throw new IllegalArgumentException(ErrorCode.NULL_INPUT.toString());
     }
-
+    if (!input.isEmpty() && input.trim().isEmpty()) {
+      throw new IllegalArgumentException(ErrorCode.EMPTY_INPUT.toString());
+    }
     if(input.startsWith("//")){
       char customDelimiter = extractCustomDelimiter(input);
 //      validateAllowedCharacters(input.substring(4), customDelimiter);
