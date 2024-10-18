@@ -4,12 +4,12 @@ public class Calculator {
     public int sum(String[] elements) {
         int num = 0;
         for (String element : elements) {
-            num += checkValid(element);
+            num += stringToInt(element);
         }
         return num;
     }
 
-    public int checkValid(String value) {
+    public int stringToInt(String value) {
         int num;
         try {
             num = Integer.parseInt(value);

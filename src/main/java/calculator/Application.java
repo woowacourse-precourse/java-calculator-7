@@ -7,9 +7,9 @@ import calculator.domain.Separator;
 public class Application {
     public static void main(String[] args) {
         View view = new View();
-        Separator separator = new Separator(view.inputMessage());
+        Separator separator = new Separator(view.getString());
         Calculator calculator = new Calculator();
 
-        view.outputMessage(calculator.sum(separator.cut()));
+        view.printResult(calculator.sum(separator.cut()));
     }
 }
