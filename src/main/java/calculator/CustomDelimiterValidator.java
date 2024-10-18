@@ -5,17 +5,9 @@ import java.util.List;
 public class InputValidator {
 
     public void validate(String input) {
-        if (isCheckedBlank(input)) {
-            throw new IllegalArgumentException("공백만 입력할 수 없습니다.");
-        }
-
         if (input.startsWith("//")) {
             validateCustomDelimiter(input);
         }
-    }
-
-    private boolean isCheckedBlank(String input) {
-        return input.isBlank();
     }
 
     private void validateCustomDelimiter(String input) {
