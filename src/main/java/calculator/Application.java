@@ -59,11 +59,15 @@ public class Application {
         int sum = 0;
         for (String number : numbers) {
             if (!number.trim().isEmpty()) {
-                int num = Integer.parseInt(number.trim());
-                if (num <= 0) {
-                    throw new IllegalArgumentException("숫자는 1 이상의 양수여야 합니다");
+                try {
+                    int num = Integer.parseInt(number.trim());
+                    if (num <= 0) {
+                        throw new IllegalArgumentException("숫자는 1 이상의 양수여야 합니다.");
+                    }
+                    sum += num;
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("문자열은 숫자와 구분자로만 이루어져야 합니다.");
                 }
-                sum += num;
             }
         }
         return sum;
