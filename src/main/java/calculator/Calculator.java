@@ -23,24 +23,37 @@ public class Calculator {
 		print();
 	}
 
+	/*
+		입력
+	 */
 	private void enter() {
 		System.out.println("덧셈할 문자열을 입력해 주세요.");
 		inputStr = Console.readLine();
 		Console.close();
 	}
 
+	/*
+		출력
+	 */
 	private void print() {
 		System.out.println("결과 : " + totalSum);
 	}
 
+	/*
+		숫자 계산
+	 */
 	private void calculateNums(long num) {
 		totalSum += num;
 	}
 
+	/*
+		커스텀 구분자 확인 및 저장
+	 */
 	private void checkPersonalSeparator(String str) {
 		int startPos = str.indexOf("//");
 		int endPos = str.indexOf("\\n");
 
+		// 커스텀 구분자를 지정하지 않을 때
 		if (startPos == -1 && endPos == -1) {
 			return;
 		}
@@ -56,25 +69,30 @@ public class Calculator {
 			throw new IllegalArgumentException();
 		}
 
-		// 커스텀 구분자 저장
+		// 커스텀 구분자 저장 및 구분자 개수 추가
 		separator[2] = newSeparator;
+		separatorCnt++;
 
 		// 커스텀 구분자 지정 부분 문자열 제거
 		inputStr = inputStr.substring(5);
-
-		// 구분자 개수 추가
-		separatorCnt++;
 	}
 
+	/*
+		문자열을 숫자로 전환
+	 */
 	private long stringToLong(String strNum) {
 		long num = Long.parseLong(strNum);
 
+		// 숫자가 정수형 범위를 넘어섰을 때
 		if (num < Integer.MIN_VALUE || Integer.MAX_VALUE < num) {
 			throw new IllegalArgumentException();
 		}
 		return num;
 	}
 
+	/*
+		문자열 파싱 및 계산
+	 */
 	private void parsingNumsAndCalculate(String str) {
 
 		// 처음과 끝에 구분자가 나올 때
@@ -84,7 +102,6 @@ public class Calculator {
 		}
 
 		int startIdx = 0, endIdx = 0, strLen = str.length();
-
 		while (endIdx < strLen) {
 			while (endIdx < strLen && Character.isDigit(str.charAt(endIdx))) {
 				endIdx++;
