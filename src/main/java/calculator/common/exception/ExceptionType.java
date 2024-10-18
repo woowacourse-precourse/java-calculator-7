@@ -6,7 +6,9 @@ public enum ExceptionType {
     CUSTOM_DELIMITER_FORMAT_WRONG("커스텀 구분자의 형식이 올바르지 않습니다.", IllegalArgumentException.class),
     CUSTOM_DELIMITER_EMPTY("커스텀 구분자가 비어있습니다.", IllegalArgumentException.class),
     CUSTOM_DELIMITER_CONTAINS_NUMBER("커스텀 구분자에 숫자가 포함되어 있습니다.", IllegalArgumentException.class),
-    CUSTOM_DELIMITER_CONTAINS_ESCAPE("커스텀 구분자에 이스케이프 문자가 포함되어 있습니다.", IllegalArgumentException.class);
+    CUSTOM_DELIMITER_CONTAINS_ESCAPE("커스텀 구분자에 이스케이프 문자가 포함되어 있습니다.", IllegalArgumentException.class),
+
+    UNSUPPORTED_NUMBER_CLASS("지원하지 않는 숫자 클래스입니다.", UnsupportedOperationException.class);
 
     private final String message;
     private final Class<? extends RuntimeException> exceptionClass;
