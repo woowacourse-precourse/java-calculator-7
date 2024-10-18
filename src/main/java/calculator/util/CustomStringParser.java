@@ -1,10 +1,21 @@
 package calculator.util;
 
 
+import java.util.Arrays;
+
 public class CustomStringParser{
+
+    public static final char[] STANDARD_SEPARATOR = {',', ':'};
 
     public static final String CUSTOM_SEPARATOR_SUFFIX = "//";
     public static final String CUSTOM_SEPARATOR_PREFIX = "\\n";
+
+    public static String[] split(String string) {
+        String separator = Arrays.toString(STANDARD_SEPARATOR) + getCustomSeparator(string);
+        String regex = "[" + separator + "]";
+        string = string.substring(5);
+        return string.split(regex);
+    }
 
     public static Boolean hasCustomSeparator(String input){
         String temp = input.substring(0, 5);
