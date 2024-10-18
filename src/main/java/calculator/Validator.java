@@ -1,8 +1,11 @@
 package calculator;
 
+import static calculator.AppConfig.CUSTOM_DELIMITER_PATTERN;
+import static calculator.AppConfig.DEFAULT_DELIMITERS;
+
 public class Validator {
-    private static final char[]DEFAULT_DELIMITERS = {',', ':'};
-    private char customDelimiter = ' ';
+
+    private char customDelimiter = ':';
     public void isValid(String input){
         if(hasCustomDelimiter(input)){
             customDelimiter = input.charAt(2);
@@ -25,7 +28,7 @@ public class Validator {
 
     private boolean isDelimiter(char currentChar) {
         for(char ch : DEFAULT_DELIMITERS){
-            if(ch==currentChar || ch==customDelimiter){
+            if(ch==currentChar || currentChar==customDelimiter){
                 return true;
             }
         }
@@ -38,8 +41,7 @@ public class Validator {
         }
     }
     private boolean hasCustomDelimiter(String input) {
-        String pattern = "^//.\\\\n.*";
-        return input.matches(pattern);
+        return input.matches(CUSTOM_DELIMITER_PATTERN);
     }
 
 }
