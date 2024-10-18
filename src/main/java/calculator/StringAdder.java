@@ -15,7 +15,9 @@ public class StringAdder {
         String defaultDelimiter = ",|:";
         if (input.startsWith("//") && input.contains("\\n")) {
             int delimiterEndIndex = input.indexOf("\\n");
-            return input.substring(2, delimiterEndIndex);
+            String customDelimiter = input.substring(2, delimiterEndIndex);
+            validator.delimiterValidate(customDelimiter);
+            return customDelimiter;
         }
         return defaultDelimiter;
     }
