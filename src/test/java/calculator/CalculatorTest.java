@@ -4,6 +4,7 @@ import calculator.domain.Calculator;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class CalculatorTest {
 
@@ -18,5 +19,12 @@ class CalculatorTest {
     @Test
     void 기본_구분자_사용() {
         assertThat(calculator.splitAndSum("1,2:3")).isEqualTo(6);
+    }
+
+    @Test
+    void 음수_입력_예외_테스트() {
+        assertThatThrownBy(() -> calculator.splitAndSum("1,-2,3"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("구분자와 양수만 입력 가능합니다. 문제가 되는 입력값: -2");
     }
 }
