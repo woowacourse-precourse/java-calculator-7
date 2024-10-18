@@ -162,6 +162,22 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void validateResultOverIntSize() {
+        assertSimpleTest(() -> {
+            run("2147483647;1");
+            assertThat(output()).contains("결과 : 2147483648");
+        });
+    }
+
+    @Test
+    void validateResultOverLongSize() {
+        assertSimpleTest(() -> {
+            run("9223372036854775807;1");
+            assertThat(output()).contains("결과 : 9223372036854775808");
+        });
+    }
+
+    @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1");
