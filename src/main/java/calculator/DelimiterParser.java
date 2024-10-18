@@ -13,10 +13,6 @@ public class DelimiterParser {
         this.delimiterList.addAll(Arrays.asList(delimiterList));
     }
 
-    public static boolean isDefaultDelimiter(String input) {
-        return input.contains(":") || input.contains(",");
-    }
-
     public String replace(String input) {
         String result = input;
         for (String delimiter : delimiterList) {
@@ -32,24 +28,32 @@ public class DelimiterParser {
         }
         return result;
     }
-    public List<Integer> parseToIntList(String input) {
-        List<Integer> list = Arrays.stream(input.split(COMMON_DELIMITER))
-                .map(Validator::validateIfNotNumber)
-                .toList();
-        Validator.validateIfInputNegative(list);
-        return list;
-    }
 
-    public List<Integer> parseToInt(String input) {
+
+
+    public static boolean isDefaultDelimiter(String input) {
+        return input.contains(":") || input.contains(",");
+    }
+    public List<Integer> parseInputToIntList(String input) {
         // input = 1,2:3, 1:2:3, 1,2,3, -1,2:3:, 1,-2,3, 1:2:-3;
         if (isDefaultDelimiter(input)) {
-            return splitStringNum(input);
+            String replaceAllCommas = replaceAllByDefaultDelimiter(input);
+            return parseToIntList(replaceAllCommas);
         }
         return parseToIntList(input);
     }
 
-    private List<Integer> splitStringNum(String input) {
-        String replaceComma = input.replace("[,:]", ","); // 1,2:3, 1:2:3, 1,2,3, -1,2:3:, 1,-2,3, 1:2:-3
-        return parseToInt(replaceComma);
+    private String replaceAllByDefaultDelimiter(String input) {
+        return input.replaceAll("[,:]", ",");
+    }
+    private String[] splitCommonDelimiter(String input) {
+        return input.split(COMMON_DELIMITER);
+    }
+
+    private List<Integer> parseToIntList(String input) {
+        return Arrays.stream(splitCommonDelimiter(input))
+                .map(Validator::validateIfNotNumber)
+                .map(Validator::validateIfInputNegative)
+                .toList();
     }
 }

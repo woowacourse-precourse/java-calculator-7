@@ -1,6 +1,8 @@
 package calculator;
 
 
+import java.util.List;
+
 public class Calculator {
     private final DelimiterParser delimiterParser = new DelimiterParser();
 
@@ -9,7 +11,10 @@ public class Calculator {
             return 0;
         }
         // 오직 parseToInt 기본 구분자인지 아닌지를 알아서 판단하고 결과값을 도출함.
-        delimiterParser.parseToInt(input);
+        return delimiterParser.parseInputToIntList(input).stream()
+                .mapToInt(Integer::valueOf)
+                .sum();
+
         /*DelimiterParser delimiterParser;
         // TODO : 기본구분자 일 경우엔 , | : 이걸로 나눠서 추출함
         if (DelimiterParser.isDefaultDelimiter(input)) {
@@ -38,6 +43,5 @@ public class Calculator {
         return inputNums.stream()
                 .mapToInt(Integer::valueOf)
                 .sum();*/
-        return 0;
     }
 }
