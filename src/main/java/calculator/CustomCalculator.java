@@ -2,13 +2,13 @@ package calculator;
 
 import java.util.Arrays;
 
-public class CustomCalculator{
+public class CustomCalculator {
 
     private static final String META_CHARS = "*+?$^.()|\\{}[";
 
-    public int customCalculate(String inputString){
+    public int customCalculate(String inputString) {
         String targetString = inputString.substring(5);
-        if (isTargetStringEmpty(targetString)){
+        if (isTargetStringEmpty(targetString)) {
             return 0;
         }
         String[] elements = targetString.split(getSplitRegex(inputString.charAt(2)));
@@ -22,7 +22,7 @@ public class CustomCalculator{
         if (separator.equals('\\')) {
             return "\\\\";
         }
-        if (isMeta(separator)){
+        if (isMeta(separator)) {
             return "\\" + separator;
         }
         return Character.toString(separator);
@@ -32,7 +32,7 @@ public class CustomCalculator{
         return META_CHARS.indexOf(separator) != -1;
     }
 
-    private boolean isTargetStringEmpty(String targetString){
+    private boolean isTargetStringEmpty(String targetString) {
         return targetString.isEmpty();
     }
 

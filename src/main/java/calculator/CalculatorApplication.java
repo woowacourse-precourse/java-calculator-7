@@ -10,7 +10,7 @@ public class CalculatorApplication {
     private final ConsoleOutput consoleOutput = new ConsoleOutput();
     private final CalculatorController calculatorController = new CalculatorController();
 
-    public void run(){
+    public void run() {
         consoleOutput.printFirstComments();
         String inputString = consoleInput.getUserInput();
         int result = calculatorController.getResult(inputString);
