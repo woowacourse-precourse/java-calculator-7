@@ -1,6 +1,7 @@
 package calculator.domain;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Separator {
     private final Character value;
@@ -18,5 +19,9 @@ public class Separator {
             throw new IllegalArgumentException();
         }
         return new Separator(value);
+    }
+
+    public static List<Separator> getDefaultSeparators() {
+        return Arrays.stream(DEFAULT_SEPARATOR).map(Separator::new).toList();
     }
 }
