@@ -20,7 +20,7 @@ public class CalculatorService {
         String delimiter = ",|:"; //기본 구분자
         //커스텀 구분자
         if (input.startsWith("//") && input.contains("\n")) {
-            Matcher matcher = Pattern.compile("//(.)\\n(.*)").matcher(input);
+            Matcher matcher = Pattern.compile("//(.)\\n(.*)").matcher(input); //와 \n 사이에 있는 구분자로 입력 문자열을 나눈다.
             if (matcher.find()) {
                 delimiter = Pattern.quote(matcher.group(1));
                 input = matcher.group(2);
@@ -28,6 +28,10 @@ public class CalculatorService {
         }
 
         String[] numbers = input.split(delimiter);
+        return sum(numbers);
+    }
 
+
+    private int sum(String[] numbers) {
     }
 }
