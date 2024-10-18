@@ -7,6 +7,7 @@ import calculator.domain.separator.CustomSeparator;
 import calculator.domain.separator.Separator;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class SeparatorService {
 
@@ -30,13 +31,29 @@ public class SeparatorService {
     }
 
     private String extractCustomSeparatorIn(String input) {
-        return Arrays.stream(input.split(SUFFIX_CUSTOM_SEPARATOR))
-                .filter(part -> part.contains(PREFIX_CUSTOM_SEPARATOR))
-                .map(part -> part.substring(
-                        part.indexOf(PREFIX_CUSTOM_SEPARATOR)
-                                + PREFIX_CUSTOM_SEPARATOR.length()))
-                .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
+        return extractSeparator(removePrefix(splitBySuffix(input)));
+    }
+
+    private String extractSeparator(Optional<String> input) {
+        if (input.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+        return input.get();
+    }
+
+    private Optional<String> removePrefix(String[] inputs) {
+        return Arrays.stream(inputs)
+                .filter(this::isPrefixIn)
+                .map(value -> value.substring(PREFIX_CUSTOM_SEPARATOR.length()))
+                .findFirst();
+    }
+
+    private String[] splitBySuffix(String input) {
+        return input.split(SUFFIX_CUSTOM_SEPARATOR);
+    }
+
+    private boolean isPrefixIn(String input) {
+        return input.contains(PREFIX_CUSTOM_SEPARATOR);
     }
 
     private boolean hasCustomSeparator(String value) {
