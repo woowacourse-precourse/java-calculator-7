@@ -49,6 +49,9 @@ public class InputHandler {
         for (String ext : extractedStrings) {
             try {
                 int extractedNumber = Integer.parseInt(ext);
+                if (extractedNumber <= 0) {
+                    throw new IllegalArgumentException();
+                }
                 extractedNumbers.add(extractedNumber);
 
             } catch (IllegalArgumentException e) {
