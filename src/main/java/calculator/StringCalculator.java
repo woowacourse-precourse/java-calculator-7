@@ -5,6 +5,11 @@ public class StringCalculator {
     private InputParser inputParser;
     private CalculationStringTokenizer calculationStringTokenizer;
 
+    public StringCalculator() {
+        this.inputParser = new InputParser();
+        this.calculationStringTokenizer = new CalculationStringTokenizer();
+    }
+
     public int calculate(String input) {
 
         //커스텀 구분자 추출
