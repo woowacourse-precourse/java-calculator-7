@@ -30,7 +30,13 @@ public class Calculator {
     private static int[] getBasicSeparatorNumbers(String input) {
         String[] basicSeparator = input.split(",|:");
 
+//        int[] basicNumberSeparator = new int[basicSeparator.length];
+//        for (int i = 0; i < basicSeparator.length; i++) {
+//            basicNumberSeparator[i] = Integer.parseInt(basicSeparator[i]);
+//            isPositiveNumber(basicNumberSeparator,i);
+//        }
         int[] basicNumberSeparator = stringToInt(basicSeparator);
+
         return basicNumberSeparator;
     }
 
@@ -57,7 +63,7 @@ public class Calculator {
         try {
             numberSeparator[i] = Integer.parseInt(separator[i]);
         }catch (NumberFormatException e){
-            throw new IllegalArgumentException("다른 구분자를 입력해주세요.");
+            throw new IllegalArgumentException("올바른 구분자를 입력해주세요.");
         }
     }
 
@@ -66,5 +72,6 @@ public class Calculator {
             throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
         }
     }
+
 
 }

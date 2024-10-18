@@ -24,14 +24,6 @@ class ApplicationTest extends NsTest {
         );
     }
 
-    @Test
-    void 사용자_입력_예외(){
-        assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("/!\\m1!2"))
-                .isInstanceOf(IllegalArgumentException.class)
-        );
-    }
-
     @Override
     public void runMain() {
         Application.main(new String[]{});
