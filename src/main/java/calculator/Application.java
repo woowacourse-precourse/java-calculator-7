@@ -14,6 +14,8 @@ public class Application {
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
+            throw e; // 예외를 다시 던져 테스트 코드에서 감지할 수 있도록 함
         }
+
     }
 }

@@ -11,7 +11,7 @@ public class DelimiterParser {
         if (input.startsWith("//")) {
             int delimiterEndIndex = input.contains("\\n") ? input.indexOf("\\n") : input.indexOf("\n");
             if (delimiterEndIndex == -1) {
-                throw new IllegalArgumentException("유효하지 않은 구분자 형식입니다.");
+                throw new IllegalArgumentException("Invalid delimiter: " + input);
             }
             String customDelimiter = input.substring(2, delimiterEndIndex);
             return Pattern.quote(customDelimiter); // 여러 글자의 구분자를 안전하게 처리
