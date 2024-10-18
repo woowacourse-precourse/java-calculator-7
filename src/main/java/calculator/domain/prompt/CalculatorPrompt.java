@@ -5,6 +5,10 @@ import java.util.List;
 
 public class CalculatorPrompt extends Prompt {
 
+    private static final String CUSTOM_DELIMITER_SEPARATOR_PREFIX = "//";
+    private static final String CUSTOM_DELIMITER_SEPARATOR_SUFFIX = "\\\\n";
+    private static final int EXPECTED_SEPARATE_LENGTH = 2;
+
     public CalculatorPrompt(String input) {
         super(input);
     }
@@ -15,22 +19,22 @@ public class CalculatorPrompt extends Prompt {
             return new ArrayList<>();
         }
 
-        String[] splitData = inputData.split("\\\\n");
-        validateParse(splitData);
-
-        return determineAndSeparate(splitData, inputData);
+        return determineAndSeparate(inputData.split(CUSTOM_DELIMITER_SEPARATOR_SUFFIX), inputData);
     }
 
     private List<String> determineAndSeparate(String[] splitData, String inputData) {
-        if (splitData[0].startsWith("//")) {
+        validateParse(splitData);
+
+        if (splitData[0].startsWith(CUSTOM_DELIMITER_SEPARATOR_PREFIX)) {
             this.delimiter.add(inputData.charAt(2));
             return this.separate(splitData[1]);
         }
+
         return this.separate(splitData[0]);
     }
 
     private void validateParse(String[] splitData) {
-        if (splitData.length > 2) {
+        if (splitData.length > EXPECTED_SEPARATE_LENGTH) {
             throw new IllegalArgumentException();
         }
     }
