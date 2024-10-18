@@ -9,14 +9,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class NumCalculatorTest {
-    private NumCalculator numCalculator = new NumCalculator();
+class MainProcessorTest {
+    private MainProcessor mainProcessor = new MainProcessor();
 
     @Test
     @DisplayName("calculate 기능 테스트")
     void calculate_test(){
         List<String> given = new ArrayList<>(Arrays.asList("1","2","3","4"));
-        assertEquals(numCalculator.calculate(given),10);
+        assertEquals(mainProcessor.calculate(given),10);
     }
 
 }

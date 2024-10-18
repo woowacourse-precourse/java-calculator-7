@@ -2,7 +2,7 @@ package calculator.domain.mainprocess;
 
 import java.util.List;
 
-public class NumCalculator {
+public class MainProcessor {
 
     public Integer calculate(List<String> numbers){
         Integer answer = 0;
