@@ -3,7 +3,6 @@ package calculator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class DelimiterParser {
     private static final String COMMON_DELIMITER = ",";
@@ -39,5 +38,18 @@ public class DelimiterParser {
                 .toList();
         Validator.validateIfInputNegative(list);
         return list;
+    }
+
+    public List<Integer> parseToInt(String input) {
+        // input = 1,2:3, 1:2:3, 1,2,3, -1,2:3:, 1,-2,3, 1:2:-3;
+        if (isDefaultDelimiter(input)) {
+            return splitStringNum(input);
+        }
+        return parseToIntList(input);
+    }
+
+    private List<Integer> splitStringNum(String input) {
+        String replaceComma = input.replace("[,:]", ","); // 1,2:3, 1:2:3, 1,2,3, -1,2:3:, 1,-2,3, 1:2:-3
+        return parseToInt(replaceComma);
     }
 }

@@ -1,15 +1,16 @@
 package calculator;
 
-import java.util.List;
 
 public class Calculator {
-
+    private final DelimiterParser delimiterParser = new DelimiterParser();
 
     public int calculate(String input) {
         if (input.isEmpty()) {
             return 0;
         }
-        DelimiterParser delimiterParser;
+        // 오직 parseToInt 기본 구분자인지 아닌지를 알아서 판단하고 결과값을 도출함.
+        delimiterParser.parseToInt(input);
+        /*DelimiterParser delimiterParser;
         // TODO : 기본구분자 일 경우엔 , | : 이걸로 나눠서 추출함
         if (DelimiterParser.isDefaultDelimiter(input)) {
             delimiterParser = new DelimiterParser(":");
@@ -32,11 +33,11 @@ public class Calculator {
         String[] split = numberPart.split(customDelimiter);
 
         String splitString = String.join(",", split);
-
         List<Integer> inputNums = delimiterParser.parseToIntList(splitString);
 
         return inputNums.stream()
                 .mapToInt(Integer::valueOf)
-                .sum();
+                .sum();*/
+        return 0;
     }
 }
