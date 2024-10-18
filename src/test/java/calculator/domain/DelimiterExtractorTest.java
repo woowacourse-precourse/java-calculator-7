@@ -14,20 +14,27 @@ class DelimiterExtractorTest {
 
         // t, n 두 가지 커스텀 구분자가 있는 경우
         String test1 = "//t\\n3//n\\n1:3:2,4";
-        Set<Character> delimiters1 = delimiterExtractor.getDelimiters(test1);
-        List<Character> expectList1 = new ArrayList<>(Arrays.asList('t', 'n', ':', ','));
+        ExtractResult result1 = delimiterExtractor.getDelimiters(test1);
+        Set<Character> delimiters1 = result1.getDelimiters();
+        List<Character> expectList1 = new ArrayList<>(Arrays.asList('t', ':', ','));
         Set<Character> expect1 = new HashSet<>(expectList1);
+        String expectNumber1 = "3//n\\n1:3:2,4";
 
-        Assertions.assertThat(delimiters1.equals(expect1));
+        Assertions.assertThat(delimiters1).isEqualTo(expect1);
+        Assertions.assertThat(result1.getNumberString()).isEqualTo(expectNumber1);
 
-        // 문자가 여러개 들어오는 경우, '\\'은 '\'로 인식
-        String test2 = "//tt\\n//\\\\n1:33,3";
+        // '\\'은 '\'로 인식
+        String test2 = "//t\\n//\\\\n1:33,3";
 
-        Set<Character> delimiters2 = delimiterExtractor.getDelimiters(test2);
-        List<Character> expectList2 = new ArrayList<>(Arrays.asList('\\', ':', ','));
+        ExtractResult result2 = delimiterExtractor.getDelimiters(test2);
+        Set<Character> delimiters2 = result2.getDelimiters();
+        String numberString2 = result2.getNumberString();
+        List<Character> expectList2 = new ArrayList<>(Arrays.asList('t', '\\', ':', ','));
         Set<Character> expect2 = new HashSet<>(expectList2);
-        Assertions.assertThat(delimiters2.equals(expect2));
+        String expectNumber2 = "1:33,3";
 
+        Assertions.assertThat(delimiters2).isEqualTo(expect2);
+        Assertions.assertThat(numberString2).isEqualTo(expectNumber2);
     }
 
 }
