@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.math.BigDecimal;
-import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class CalculateFormulaTest {
@@ -16,8 +15,9 @@ class CalculateFormulaTest {
     void 숫자만_입력된_계산식을_성공적으로_생성() {
         CalculateFormula actual = CalculateFormula.from("1234");
 
-        assertThat(actual.customSeparator().toString()).isEqualTo("");
-        assertThat(actual.numbers()).isEqualTo(List.of(BigDecimal.valueOf(1234L)));
+        assertThat(actual.separators().isCustomSeparatorEmpty()).isTrue();
+        assertThat(actual.numbers().addAll())
+                .isEqualTo("1234");
     }
 
     @Test
@@ -25,9 +25,9 @@ class CalculateFormulaTest {
         CalculateFormula actual = CalculateFormula
                 .from(CUSTOM_SEPARATOR_HEADER + "g" + CUSTOM_SEPARATOR_FOOTER + ",:g");
 
-        assertThat(actual.customSeparator().toString()).isEqualTo("g");
-        // 아래의 검증은, 계산 결과 기능을 구현하면, 계산 결과를 비교하도록 리팩토링 하자
-        assertThat(actual.numbers()).isEqualTo(List.of(BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO));
+        assertThat(actual.separators().contains('g')).isTrue();
+        assertThat(actual.numbers().addAll())
+                .isEqualTo("0");
     }
 
     @Test
@@ -35,14 +35,9 @@ class CalculateFormulaTest {
         CalculateFormula actual = CalculateFormula
                 .from(CUSTOM_SEPARATOR_HEADER + "?" + CUSTOM_SEPARATOR_FOOTER + "1,23,456:7890");
 
-        assertThat(actual.customSeparator().toString()).isEqualTo("?");
-        // 아래의 검증은, 계산 결과 기능을 구현하면, 계산 결과를 비교하도록 리팩토링 하자
-        assertThat(actual.numbers()).isEqualTo(List.of(
-                BigDecimal.valueOf(1L),
-                BigDecimal.valueOf(23L),
-                BigDecimal.valueOf(456L),
-                BigDecimal.valueOf(7890L)
-        ));
+        assertThat(actual.separators().contains('?')).isTrue();
+        assertThat(actual.numbers().addAll())
+                .isEqualTo(BigDecimal.valueOf(1L + 23L + 456L + 7890L).toString());
     }
 
     @Test
@@ -50,12 +45,10 @@ class CalculateFormulaTest {
         CalculateFormula actual = CalculateFormula
                 .from(CUSTOM_SEPARATOR_HEADER + "?" + CUSTOM_SEPARATOR_FOOTER + "1,2.3");
 
-        assertThat(actual.customSeparator().toString()).isEqualTo("?");
-        // 아래의 검증은, 계산 결과 기능을 구현하면, 계산 결과를 비교하도록 리팩토링 하자
-        assertThat(actual.numbers()).isEqualTo(List.of(
-                BigDecimal.valueOf(1L),
-                new BigDecimal("2.3")
-        ));
+        assertThat(actual.separators().contains('?')).isTrue();
+        assertThat(actual.numbers().addAll()).isEqualTo(BigDecimal.valueOf(1L)
+                .add(new BigDecimal("2.3"))
+                .toString());
     }
 
     @Test
@@ -63,12 +56,10 @@ class CalculateFormulaTest {
         CalculateFormula actual = CalculateFormula
                 .from(CUSTOM_SEPARATOR_HEADER + "," + CUSTOM_SEPARATOR_FOOTER + "1,2.3");
 
-        assertThat(actual.customSeparator().toString()).isEqualTo(",");
-        // 아래의 검증은, 계산 결과 기능을 구현하면, 계산 결과를 비교하도록 리팩토링 하자
-        assertThat(actual.numbers()).isEqualTo(List.of(
-                BigDecimal.valueOf(1L),
-                new BigDecimal("2.3")
-        ));
+        assertThat(actual.separators().contains(',')).isTrue();
+        assertThat(actual.numbers().addAll()).isEqualTo(BigDecimal.valueOf(1L)
+                .add(new BigDecimal("2.3"))
+                .toString());
     }
 
     @Test
@@ -76,13 +67,12 @@ class CalculateFormulaTest {
         CalculateFormula actual = CalculateFormula
                 .from(CUSTOM_SEPARATOR_HEADER + "." + CUSTOM_SEPARATOR_FOOTER + "1,2.3");
 
-        assertThat(actual.customSeparator().toString()).isEqualTo(".");
-        // 아래의 검증은, 계산 결과 기능을 구현하면, 계산 결과를 비교하도록 리팩토링 하자
-        assertThat(actual.numbers()).isEqualTo(List.of(
-                BigDecimal.valueOf(1L),
-                BigDecimal.valueOf(2L),
-                BigDecimal.valueOf(3L)
-        ));
+        assertThat(actual.separators().contains('.')).isTrue();
+        assertThat(actual.numbers().addAll())
+                .isEqualTo(BigDecimal.valueOf(1L)
+                        .add(BigDecimal.valueOf(2L))
+                        .add(BigDecimal.valueOf(3L))
+                        .toString());
     }
 
     @Test
@@ -141,7 +131,8 @@ class CalculateFormulaTest {
         CalculateFormula actual = CalculateFormula
                 .from(CUSTOM_SEPARATOR_HEADER + "." + CUSTOM_SEPARATOR_FOOTER + "1,2:3.4");
 
-        assertThat(actual.addAll()).isEqualTo(String.valueOf(1 + 2 + 3 + 4));
+        assertThat(actual.numbers().addAll())
+                .isEqualTo(String.valueOf(1 + 2 + 3 + 4));
     }
 
     @Test
@@ -149,13 +140,16 @@ class CalculateFormulaTest {
         CalculateFormula actual = CalculateFormula
                 .from(CUSTOM_SEPARATOR_HEADER + "#" + CUSTOM_SEPARATOR_FOOTER + "1,2:3.4");
 
-        assertThat(actual.addAll()).isEqualTo(String.valueOf(1 + 2 + 3.4D));
+        assertThat(actual.numbers().addAll())
+                .isEqualTo(String.valueOf(1 + 2 + 3.4D));
     }
 
     @Test
     void 소수덧셈으로_소수점이하가_0이면_덧셈의_정수부만_반환한다() {
-        CalculateFormula actual = CalculateFormula.from(CUSTOM_SEPARATOR_HEADER + "#" + CUSTOM_SEPARATOR_FOOTER + "1,2:3.4,5.6");
-        assertThat(actual.addAll()).isEqualTo(BigDecimal.valueOf(1 + 2 + 3.4D + 5.6D).toBigInteger().toString());
+        CalculateFormula actual = CalculateFormula.from(
+                CUSTOM_SEPARATOR_HEADER + "#" + CUSTOM_SEPARATOR_FOOTER + "1,2:3.4,5.6");
+        assertThat(actual.numbers().addAll())
+                .isEqualTo(BigDecimal.valueOf(1 + 2 + 3.4D + 5.6D).toBigInteger().toString());
     }
 
 }
