@@ -17,6 +17,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자_여러개_테스트() {
+        assertSimpleTest(() -> {
+            run("//;*#\\n1#2;3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
     void 음수_입력_오류_테스트() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))
@@ -80,6 +88,12 @@ class ApplicationTest extends NsTest {
             run("1e3,2e3,3e3");
             assertThat(output()).contains("결과 : 6000");
         });
+    }
+
+    @Test
+    void 구분자를_숫자_표기에_필요한_문자로_설정시_오류_테스트() {
+        assertSimpleTest(() -> assertThatThrownBy(() -> runException("//e\\n1"))
+                .isInstanceOf(IllegalArgumentException.class));
     }
 
     @Override
