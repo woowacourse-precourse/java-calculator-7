@@ -24,6 +24,13 @@ public class NumberSeparator {
 
 	private NumberSeparator(String input) {
 		delimiters = DefaultDelimiter.getDefaultDelimiter();
+
+		if (hasCustomDelimiter(input)) {
+			delimiters.add(extractCustomDelimiter(input));
+			equation = extractEquation(input);
+			return;
+		}
+
 		equation = input;
 	}
 
