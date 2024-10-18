@@ -1,23 +1,23 @@
 package calculator.controller;
 
-import calculator.model.NumberAdder;
+import calculator.model.AdditionCalculator;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
 public class Calculator {
-    private final NumberAdder numberAdder;
+    private final AdditionCalculator additionCalculator;
 
     public Calculator() {
-        this.numberAdder = start();
+        this.additionCalculator = start();
     }
 
-    private NumberAdder start() {
-        return new NumberAdder(InputView.inputString());
+    private AdditionCalculator start() {
+        return new AdditionCalculator(InputView.inputString());
     }
 
     public void add() {
         try {
-            OutputView.printResult(numberAdder.calculate());
+            OutputView.printResult(additionCalculator.calculate());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }

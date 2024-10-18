@@ -1,4 +1,4 @@
-package calculator.model;
+package calculator.model.number;
 
 public class Number {
     private static final int ZERO = 0;
@@ -6,10 +6,6 @@ public class Number {
 
     protected Number(String number) {
         this.number = convertNumberToInt(number);
-    }
-
-    protected int getNumber() {
-        return number;
     }
 
     private int validateNumber(int number) {
@@ -26,5 +22,9 @@ public class Number {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자로 변환할 수 없는 값입니다.");
         }
+    }
+
+    public int getNumber() {
+        return number;
     }
 }
