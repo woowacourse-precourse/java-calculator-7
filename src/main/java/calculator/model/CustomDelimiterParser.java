@@ -6,6 +6,8 @@ public class CustomDelimiterParser {
     private static final String PREFIX = "//";
     private static final String SUFFIX = "\\n";
 
+    private static final int NO_SUFFIX_FOUND = -1;
+
     public static CustomDelimiterParser getInstance() {
         return new CustomDelimiterParser();
     }
@@ -33,7 +35,7 @@ public class CustomDelimiterParser {
     }
 
     private boolean hasSuffix(String input) {
-        return getSuffixIndex(input) != -1;
+        return getSuffixIndex(input) != NO_SUFFIX_FOUND;
     }
 
     private int getPrefixIndex() {
