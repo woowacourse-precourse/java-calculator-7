@@ -17,9 +17,9 @@ public class StringCalculator {
         if (userInput.isCustom()) {
             String extractCustomDelimiter = userInput.extractCustomDelimiter();
             CustomDelimiter customDelimiter = new CustomDelimiter(extractCustomDelimiter);
-            String updateDelimiter = generateUpdateDelimiter(delimiterResult, customDelimiter.getCustomDelimiter());
-            delimiterResult = new DelimiterResult(updateDelimiter);
-            input = generateCombinedInput(userInput, customDelimiterEndIndex);
+            String combineDelimiter = combineDelimiter(delimiterResult, customDelimiter.getCustomDelimiter());
+            delimiterResult = new DelimiterResult(combineDelimiter);
+            input = userInput.extractNumbersPart();
         }
 
         DelimitedNumbers delimitedNumbers = new DelimitedNumbers(input, delimiterResult);
@@ -45,12 +45,8 @@ public class StringCalculator {
     private String[] generateSeparatedNumbers(DelimitedNumbers delimitedNumbers, DelimiterResult delimiterResult) {
         return delimitedNumbers.getStringNumbers().split(delimiterResult.getDelimiterResult());
     }
-
-    private String generateCombinedInput(UserInput userInput, int customDelimiterEndIndex) {
-        return userInput.getUserInput().substring(customDelimiterEndIndex + 2);
-    }
-
-    private String generateUpdateDelimiter(DelimiterResult delimiterResult, String customDelimiter) {
+    
+    private String combineDelimiter(DelimiterResult delimiterResult, String customDelimiter) {
         return delimiterResult.getDelimiterResult().replace("]", customDelimiter + "]");
     }
 
