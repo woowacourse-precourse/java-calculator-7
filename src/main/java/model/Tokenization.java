@@ -14,7 +14,7 @@ public class Tokenization {
     /**
      * 구분자에 따라 문자열 분리하는 함수
      * **/
-    public static ArrayList<Integer> operator(String str){
+    public ArrayList<Integer> tokenize(String str){
         ArrayList<Integer> numArr = new ArrayList<>();
         String operation = DEFAULT_OPERATION;
         Matcher matcher = CUSTOM_OPERATION_PATTERN.matcher(str);
@@ -31,7 +31,6 @@ public class Tokenization {
             if (!i.matches(NUMBER_PATTERN)) {
                 throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getErrorMessage());
             }
-
             try{
                 int num = Integer.parseInt(i);
                 if (num<=0){
