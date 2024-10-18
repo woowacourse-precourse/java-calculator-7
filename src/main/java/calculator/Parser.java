@@ -1,6 +1,7 @@
 package calculator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Parser {
@@ -21,7 +22,7 @@ public class Parser {
         return separators;
     }
 
-    public static void addCustomSeparators(List<String> separators, String input) {
+    private static void addCustomSeparators(List<String> separators, String input) {
         System.out.println(separators);
         String separatorString = getSeparatorString(input);
         for (int i = 0; i + 4 < separatorString.length(); i++) {
@@ -29,8 +30,8 @@ public class Parser {
             separators.add(newCustomSeparator);
             separatorString = separatorString.substring(i + 4);
         }
+        System.out.println("separators = " + separators);
     }
-
 
     public static String checkInput(String input) {
 
@@ -41,7 +42,7 @@ public class Parser {
         }
     }
 
-    public static boolean hasCustomSeparator(String input) {
+    private static boolean hasCustomSeparator(String input) {
         if (input.startsWith("//")) {
             String separator = getSeparatorString(input);
             if (validateCustomSeparatorForm(separator)) {
@@ -53,7 +54,41 @@ public class Parser {
         return false;
     }
 
-    public static String getSeparatorString(String input) {
+    public static String getNumberString(String input) {
+        String contents;
+        if (hasCustomSeparator(input)) {
+            int startIdx = getLastSeparatorIdx(input);
+            contents = input.substring(startIdx);
+        } else {
+            contents = input;
+        }
+        return contents;
+    }
+
+    public static int[] getNumbers(String input, List<String> separators) {
+
+        String[] numberString = input.split(separators.toString());
+        System.out.println("numberString = " + Arrays.deepToString(numberString));
+        int[] numbers = new int[numberString.length];
+        //int sum = 0;
+        for (int i = 0; i < numberString.length; i++) {
+            numbers[i] = Integer.parseInt(numberString[i]);
+            // 여기서 최대범위 예외처리
+            //checkIntegerRange(numberString[i]);
+            //System.out.println("numbers = " + numbers[i]);
+            //sum += numbers[i];
+        }
+        //System.out.println("sum = " + sum);
+        return numbers;
+    }
+
+    /*
+    public static boolean checkIntegerRange(String num){
+        if (num)
+    }
+    */
+
+    private static String getSeparatorString(String input) {
         int separatorIdx = getLastSeparatorIdx(input);
         char[] customSeparatorArr = new char[separatorIdx];
         for (int i = 0; i < separatorIdx; i++) {
@@ -63,7 +98,7 @@ public class Parser {
         return str;
     }
 
-    public static int getLastSeparatorIdx(String input) {
+    private static int getLastSeparatorIdx(String input) {
         int idx = 1;
         for (int i = 1; i < input.length(); i++) {
             if (input.charAt(i) >= '0' && input.charAt(i) <= '9') {
@@ -78,11 +113,11 @@ public class Parser {
         return idx;
     }
 
-    public static boolean validateCustomSeparatorForm(String input) {
+    private static boolean validateCustomSeparatorForm(String input) {
         return isCorrectPair(input);
     }
 
-    public static boolean isCorrectPair(String input) {
+    private static boolean isCorrectPair(String input) {
         int startPair = 0;
         int lastPair = 0;
         int flag = 0;
@@ -113,7 +148,7 @@ public class Parser {
         throw new IllegalArgumentException();
     }
 
-    public static boolean isCorrectLastElement(String input, int idx) {
+    private static boolean isCorrectLastElement(String input, int idx) {
         if (input.charAt(idx) == '\\' && input.charAt(idx + 1) == 'n') {
             return true;
         }
