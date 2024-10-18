@@ -43,6 +43,8 @@ public class Application {
                 separator = separator + "|" + Pattern.quote(customSeparator);  // 기본 구분자에 커스텀 구분자 추가
                 // 커스텀 구분자를 추출했으니 그 이후의 숫자 문자열만 남김
                 input = input.substring(separatorIndex + 2);
+            } else {
+                throw new IllegalArgumentException("커스텀 구분자 형식이 잘못되었습니다.");
             }
         }
 
