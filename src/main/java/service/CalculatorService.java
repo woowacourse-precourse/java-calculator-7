@@ -15,15 +15,14 @@ public class CalculatorService {
         int[] numbers;
         if(input.startsWith("//")){
             numbers = splitByCustomDelimiter(input);
-            return new Number(numbers);
         }
         else if(input.matches("^\\d.*")){
             numbers = splitByDelimiter(input);
-            return new Number(numbers);
         }
         else{
             throw new IllegalArgumentException("Invalid input");
         }
+        return new Number(numbers);
     }
 
     public int[] splitByCustomDelimiter(String input){
