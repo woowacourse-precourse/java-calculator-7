@@ -19,6 +19,7 @@ public class ExtractService {
         if (hasCustomDelimiter(readInput)) {
             String remove = buildRemoveString(customDelimiter);
             return removeCustomDelimiter(readInput, remove);
+            return readInput.replace(remove, EMPTY);
         }
         return readInput;
     }
@@ -40,9 +41,5 @@ public class ExtractService {
 
     private String buildRemoveString(String customDelimiter) {
         return CUSTOM_PREFIX + customDelimiter + CUSTOM_SUFFIX;
-    }
-
-    private String removeCustomDelimiter(String readInput, String remove) {
-        return readInput.replace(remove, EMPTY);
     }
 }
