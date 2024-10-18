@@ -9,6 +9,14 @@ public class Input {
         return !numberList.isEmpty();
     }
 
+    public int size() {
+        return numberList.size();
+    }
+
+    public int get(int index) {
+        return numberList.get(index);
+    }
+
     public int getCustomDelimiterStartIndex(String rawText) {
         return rawText.indexOf("//") + 2;
     }

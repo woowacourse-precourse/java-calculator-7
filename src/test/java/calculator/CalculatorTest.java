@@ -2,6 +2,7 @@ package calculator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import calculator.Model.Calculator;
 import calculator.Model.Input;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,6 @@ public class CalculatorTest {
         input.getInputText(testText);
 
         Calculator calculator = new Calculator();
-        assertEquals(calculator.sumAllNumbers(input), 11);
+        assertEquals(calculator.calcSum(input), 11);
     }
 }
