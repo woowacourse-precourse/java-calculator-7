@@ -72,7 +72,7 @@ class StringValidateTest {
 
     @Test
     @DisplayName("계산해야 하는 문자열에 구분자만 있는 경우")
-    void onlyseparatorInBackString() {
+    void onlySeparatorInBackString() {
         String string = "abcabc";
         String separator = "abc";
 
@@ -90,7 +90,7 @@ class StringValidateTest {
 
     @Test
     @DisplayName("구분자가 없는 경우")
-    void emptyseparator() {
+    void emptySeparator() {
         String string = "1234";
         String separator = "";
 
