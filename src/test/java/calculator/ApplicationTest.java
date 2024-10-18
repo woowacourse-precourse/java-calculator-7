@@ -40,6 +40,22 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 형식에_맞지_않는_문자열1() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("aks3lii1ndm"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 형식에_맞지_않는_문자열2() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
