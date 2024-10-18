@@ -53,7 +53,7 @@ class DelimeterSegmentProcessorTest {
     @Test
     @DisplayName("구분자 요청 제외 String 반환 테스트")
     void discard_custom_delimeter_request() {
-        String newInput = delimeterSegmentProcessor.extractPartTobeProcessed("//;\n1,2,3");
+        String newInput = delimeterSegmentProcessor.extractCalculationSegment("//;\n1,2,3");
         assertEquals(newInput, "1,2,3");
     }
 

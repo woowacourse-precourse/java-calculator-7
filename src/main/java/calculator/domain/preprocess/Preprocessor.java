@@ -40,7 +40,7 @@ public class Preprocessor {
 
     public String preprocessString(String input) {
         if (validateDelimeterRequest(input)) {
-            return delimeterSegmentProcessor.extractPartTobeProcessed(input);
+            return delimeterSegmentProcessor.extractCalculationSegment(input);
         } else {
             return input;
         }
