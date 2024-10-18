@@ -5,22 +5,25 @@ import camp.nextstep.edu.missionutils.Console;
 public class Application {
     public static void main(String[] args) {
         String input = getInput(); // 문자열 입력 받기
-        String delimiter = getCustomDelimiter(input);
-        String[] numbers = splitString(input, delimiter);
-        int sum = calculateSum(numbers);
-        print(sum);
+        if(validation(input)) {//유효성 검사
+            String delimiter = getCustomDelimiter(input);
+            String[] numbers = splitString(input, delimiter);
+            int sum = calculateSum(numbers);
+            print(sum);
+        }
     }
 
     private static String getInput() {
         System.out.print("덧셈할 문자열을 입력해 주세요: ");
         String input = Console.readLine();
-        validation(input);//유효한지 검사
         return input;
     }
-    private static void validation(String input) {
+    private static boolean validation(String input) {
         if (input == null || input.isEmpty()) { // 비어 있는지 확인
-            throw new IllegalArgumentException("문자열이 비어있습니다.");
+            System.out.println("결과 : 0"); // 0 출력
+            return false;
         }
+        else return true;
     }
     private static String getCustomDelimiter(String input){
         if(input.startsWith("//")){
