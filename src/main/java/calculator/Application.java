@@ -12,8 +12,13 @@ public class Application {
             System.out.println(0);
         } else {
             String[] splited = input.split("[,|:]");
-
+            int sum = 0;
+            for (String s : splited) {
+                sum += Integer.parseInt(s);
+            }
+            System.out.println(sum);
         }
+
 
     }
 }
