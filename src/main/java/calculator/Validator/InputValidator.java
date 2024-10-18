@@ -1,7 +1,10 @@
 package calculator.Validator;
 
-public class InputValidator {
+import calculator.Interface.Validator;
 
+public class InputValidator implements Validator {
+
+    @Override
     public void validateTokens(String[] tokens){
 
         if(tokens.length < 1){
@@ -9,7 +12,9 @@ public class InputValidator {
         }
         for(String token : tokens){
 
-            token = token.trim();
+            if(token.contains(" ")){
+                throw new IllegalArgumentException("공백은 허용되지 않습니다.");
+            }
 
             if(token.isEmpty()){
                 throw new IllegalArgumentException("빈 값은 허용되지 않습니다.");

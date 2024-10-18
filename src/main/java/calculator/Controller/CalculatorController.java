@@ -1,8 +1,8 @@
 package calculator.Controller;
 
-import calculator.Model.CalculatorModel;
-import calculator.Service.InputParser;
-import calculator.Validator.InputValidator;
+import calculator.Interface.Calculator;
+import calculator.Interface.Parser;
+import calculator.Interface.Validator;
 import calculator.View.InputView;
 import calculator.View.OutputView;
 
@@ -10,26 +10,36 @@ import java.util.Arrays;
 
 public class CalculatorController {
 
-    private final CalculatorModel calculatorModel;
-    private final InputValidator inputValidator;
+    private final Calculator calculator;
+    private final Validator validator;
+    private final Parser parser;
 
-    public CalculatorController(){
-        this.calculatorModel = new CalculatorModel();
-        this.inputValidator = new InputValidator();
+    public CalculatorController(Calculator calculator, Validator validator, Parser parser){
+        this.calculator = calculator;
+        this.validator = validator;
+        this.parser = parser;
     }
 
     public void run(){
 
         String userInput = InputView.userInput();
+
         try{
+            parser.setInput(userInput);
 
-            InputParser inputParser = new InputParser(userInput);
+            // 구분자, 숫자 분리
+            parser.parseCustomSeparator();
 
-            String[] tokens = inputParser.getTokens();
+            // 구분자로 숫자 분리
+            String[] tokens = parser.getTokens();
 
-            inputValidator.validateTokens(tokens);
+            System.out.println(Arrays.toString(tokens));
 
-            String result = calculatorModel.calculateSum(tokens);
+            //공백, 빈값, 음수, 숫자에 대한 validation
+            validator.validateTokens(tokens);
+
+            // string addition
+            String result = calculator.calculateSum(tokens);
 
             OutputView.userOutput(result);
 

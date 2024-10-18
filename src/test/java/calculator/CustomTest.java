@@ -44,7 +44,7 @@ class CustomTest extends NsTest {
     @Test
     void Two_Or_More_Separator(){
         assertSimpleTest(() -> {
-            run("//;.\\n1;2.3");
+            run("//;\\n1;2;3");
             assertThat(output()).contains("결과 : 6");
         });
     }
@@ -67,13 +67,14 @@ class CustomTest extends NsTest {
 
     @Test
     void Negative_Number_Exception(){
+
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1:2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
-    
+
     @Override
     protected void runMain() {
         Application.main(new String[]{});

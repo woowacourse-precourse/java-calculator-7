@@ -1,15 +1,10 @@
 package calculator.Model;
 
-public class CalculatorModel {
+import calculator.Interface.Calculator;
 
-//    public long calculateSum(String[] tokens){
-//        long sum = 0;
-//        for(String token : tokens){
-//            long number = (long) Integer.parseInt(token);
-//            sum += number;
-//        }
-//        return sum;
-//    }
+public class CalculatorModel implements Calculator {
+
+    @Override
     public String calculateSum(String[] tokens){
         String sum = "0";
         for(String token : tokens){

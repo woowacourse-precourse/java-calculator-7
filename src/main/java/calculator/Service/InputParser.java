@@ -1,25 +1,28 @@
 package calculator.Service;
 
+import calculator.Interface.Parser;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class InputParser {
+public class InputParser implements Parser {
 
     private String input;
-    private List<String> customSeparator = new ArrayList<>();
+    private final List<String> customSeparator = new ArrayList<>();
+    private static final String END_OF_SEPARATOR = "\\n";
+    private static final String SEPARATOR_PREFIX = "//";
+    private static final String DEFAULT_SEPARATORS = ",|:";
 
-    public InputParser(String input){
+    @Override
+    public void setInput(String input){
         this.input = input;
-        parseCustomSeparator();
     }
 
-    private void parseCustomSeparator(){
+    @Override
+    public void parseCustomSeparator(){
 
-        if(input.startsWith("//")){
-            int customEndIdx = input.indexOf("\\n");
-            if(customEndIdx == -1){
-                throw new IllegalArgumentException("잘못된 입력");
-            }
+        if(input.startsWith(SEPARATOR_PREFIX)){
+            int customEndIdx = input.indexOf(END_OF_SEPARATOR);
 
             String separatorPart = input.substring(2,customEndIdx);
 
@@ -31,13 +34,7 @@ public class InputParser {
         }
     }
 
-    private String escapeSpecialCharacter(String separator){
-        if("\\.[]{}()^$?*+|".contains(separator)){
-            return "\\"+separator;
-        }
-        return separator;
-    }
-
+    @Override
     public String[] getTokens(){
 
         if(input == null || input.trim().isEmpty()){
@@ -49,18 +46,30 @@ public class InputParser {
         return input.split(tokenSeparator);
     }
 
+    @Override
     public String createTokenSeparator(){
         StringBuilder separatorPattern = new StringBuilder();
 
-        String defaultSeparator = ",|:";
-
-        separatorPattern.append(defaultSeparator);
+        separatorPattern.append(DEFAULT_SEPARATORS);
 
         for(String custom: customSeparator){
             separatorPattern.append("|").append(custom);
         }
 
-
         return separatorPattern.toString();
     }
+
+    private String escapeSpecialCharacter(String separator){
+
+        if (separator.matches("\\d+")) {
+            throw new IllegalArgumentException("구분자는 숫자가 될 수 없습니다: ");
+        }
+
+        if("\\.[]{}()^$?*+|".contains(separator)){
+            return "\\"+separator;
+        }
+        return separator;
+    }
+
+
 }
