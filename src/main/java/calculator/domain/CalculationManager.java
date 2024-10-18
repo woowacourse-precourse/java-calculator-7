@@ -1,6 +1,5 @@
 package calculator.domain;
 
-import calculator.output.OutputHandler;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -8,41 +7,44 @@ public class CalculationManager {
 
     private final InputView inputView;
     private final OutputView outputView;
-    private final OutputHandler outputHandler;
     private final Delimiter delimiter;
     private final CustomDelimiter customDelimiter;
     private final NumberGenerator numberGenerator;
+    private final SumCalculator sumCalculator;
 
     public CalculationManager(InputView inputView, OutputView outputView,
-                              OutputHandler outputHandler,
                               Delimiter delimiter,
                               CustomDelimiter customDelimiter,
+                              SumCalculator sumCalculator,
                               NumberGenerator numberGenerator) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.outputHandler = outputHandler;
+        this.sumCalculator = sumCalculator;
         this.delimiter = delimiter;
         this.customDelimiter = customDelimiter;
         this.numberGenerator = numberGenerator;
     }
 
     public void run() {
-        String input = handleInput();
-        processCalculation(input);
-        handleOutput();
+        displayInputPrompt();
+        processCalculation();
+        displayResultWithMessage();
     }
 
-    private String handleInput() {
-        outputView.displayInputPrompt();
-        return inputView.input();
+    private void displayInputPrompt() {
+        String inputPrompt = outputView.getInputPrompt();
+        System.out.println(inputPrompt);
     }
 
-    private void processCalculation(String input) {
+    private void processCalculation() {
+        String input = inputView.input();
         CharAnalyzer charAnalyzer = new CharAnalyzer(input, delimiter, customDelimiter, numberGenerator);
         charAnalyzer.analyzeAllChars();
     }
 
-    private void handleOutput() {
-        outputHandler.output();
+    private void displayResultWithMessage() {
+        int result = sumCalculator.getResult();
+        System.out.println(outputView.getFormattedResult(result));
     }
+
 }
