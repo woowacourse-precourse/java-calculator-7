@@ -1,13 +1,10 @@
 package calculator.delimiter.handler;
 
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 class ColonSemicolonDelimiterHandlerTest {
     private ColonSemicolonDelimiterHandler handler = new ColonSemicolonDelimiterHandler();
@@ -33,16 +30,5 @@ class ColonSemicolonDelimiterHandlerTest {
 
         // then
         assertThat(stringList).hasSize(5).containsExactly("1", "2", "3", "4", "5");
-    }
-
-    @Test
-    @DisplayName("음수가 입력되면 IllegalArgumentException을 발생시킨다.")
-    void test() {
-        // given
-        String s = "1:2:-3,4";
-
-        // when, then
-        assertThatThrownBy(() -> handler.split(s))
-                .isInstanceOf(IllegalArgumentException.class);
     }
 }

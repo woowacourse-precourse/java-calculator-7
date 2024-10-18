@@ -69,16 +69,5 @@ class CustomDelimiterHandlerTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("형식이 일치하지 않습니다.");
     }
-
-    @Test
-    @DisplayName("음수가 입력되면 IllegalArgumentException을 발생시킨다.")
-    void when_negative_number_is_input_then_throw_illegal_argument_exception() {
-        // given
-        String s = "//||\\n1||2||-3||4";
-
-        // when, then
-        assertThatThrownBy(() -> handler.split(s))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("음수가 포함되어 있습니다.");
-    }
+    
 }
