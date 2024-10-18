@@ -21,9 +21,20 @@ public class CalculatorController {
     }
 
     private List<Integer> getIntegerListInfo() {
-        String initialString = inputUtil.userInput();
-        List<Integer> integerList = splitInitialString(initialString);
+        String initialInput = inputUtil.userInput();
+        boolean isValidInputType = isValidInput(initialInput);
+        if (!isValidInputType) {
+            throw new IllegalArgumentException("유효하지 않은 입력입니다.");
+        }
+        List<Integer> integerList = splitInitialString(initialInput);
         return integerList;
+    }
+
+    boolean isValidInput(String initialInput) {
+        if (initialInput == null || initialInput.isEmpty()) {
+            return false;
+        }
+        return initialInput.startsWith("\\\\") || Character.isDigit(initialInput.charAt(0));
     }
 
     private List<Integer> splitInitialString(String initialString) {
