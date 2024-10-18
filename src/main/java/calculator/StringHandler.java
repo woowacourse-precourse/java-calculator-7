@@ -16,4 +16,9 @@ public class StringHandler {
         splitInput.removeAll(separators);
         return splitInput;
     }
+
+    public String removeCustom(String input) {
+        int end = input.indexOf("\n") + 1;
+        return input.substring(end);
+    }
 }
