@@ -34,16 +34,24 @@ public class Extractor {
 
     private String getDelimiter() {
         Matcher matcher = Pattern.compile(CUSTOM_DELIMITERS).matcher(input);
-        
+
         if (matcher.find()) {
-
-            String customDelimiter = matcher.group();
-
+            String customDelimiter = matcher.group(1);
             input = input.substring(matcher.end());
-            return "[" + Pattern.quote(customDelimiter) + "]|" + DEFAULT_DELIMITERS;
+
+            if (customDelimiter.isEmpty()) {
+                return DEFAULT_DELIMITERS;
+            }
+
+            if (customDelimiter.length() == 1) {
+                return "[" + Pattern.quote(customDelimiter) + "]|" + DEFAULT_DELIMITERS;
+            }
+
+            throw new IllegalArgumentException("커스텀 구분자는 하나의 문자만 지정할 수 있습니다.");
         }
         return DEFAULT_DELIMITERS;
     }
+
 
     private String[] splitByDelimiter(String delimiters) {
         return input.split(delimiters);
@@ -57,7 +65,7 @@ public class Extractor {
                     Integer value = Integer.valueOf(data);
                     numbers.add(value);
                 } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("숫자만 계산할 수 있습니다.");
+                    throw new IllegalArgumentException("잘못된 입력입니다.");
                 }
             }
         }

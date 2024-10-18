@@ -152,12 +152,11 @@ class ExtractorTest {
         String input = "//;/\\n3/4";
         Extractor extractor = new Extractor(input);
 
-        //when
-//        assertThatThrownBy(extractor::extractNumbers)
-//                .isInstanceOf(IllegalArgumentException.class)
-//                .hasMessageContaining("잘못된 입력입니다.");
+        //when & then
+        assertThatThrownBy(extractor::extractNumbers)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("커스텀 구분자는 하나의 문자만 지정할 수 있습니다.");
 
-        //then
     }
 
     @Test
