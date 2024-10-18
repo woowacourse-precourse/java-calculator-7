@@ -12,7 +12,7 @@ public class AdditionService {
         String input = calculationRequest.input();
 
         Delimiters delimiters = Delimiters.from(input);
-        Numbers numbers = delimiters.extractNumbers(input);
+        Numbers numbers = Numbers.extractFrom(input, delimiters);
 
         return new CalculationResponse(numbers.reduce());
     }

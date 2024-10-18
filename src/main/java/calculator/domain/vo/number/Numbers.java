@@ -2,8 +2,10 @@ package calculator.domain.vo.number;
 
 import static calculator.infrastructure.exception.ErrorCode.*;
 
+import calculator.domain.vo.delimiter.Delimiters;
 import calculator.infrastructure.exception.ErrorCode;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Numbers {
@@ -15,14 +17,30 @@ public class Numbers {
         this.numbers = numbers;
     }
 
-    private void validate(final List<Number> values) {
-        if (values == null || values.isEmpty()) {
+    private void validate(final List<Number> numbers) {
+        if (numbers == null || numbers.isEmpty()) {
             throw new IllegalArgumentException(INVALID_COLLECTION.getMessage());
         }
     }
 
     public static Numbers from(final List<Number> numbers) {
         return new Numbers(numbers);
+    }
+
+    public static Numbers extractFrom(final String input, Delimiters delimiters) {
+        List<Number> numbers = distinguishNumberByDelimiters(input, delimiters);
+        return new Numbers(numbers);
+    }
+
+    private static List<Number> distinguishNumberByDelimiters(String input, Delimiters delimiters) {
+        String[] values = input.split(delimiters.getDelimiterRegex());
+
+        List<Number> numbers = new ArrayList<>();
+        for (String value : values) {
+            numbers.add(Number.from(value));
+        }
+
+        return numbers;
     }
 
     public BigInteger reduce() {

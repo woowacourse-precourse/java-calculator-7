@@ -3,23 +3,20 @@ package calculator.domain.vo.delimiter;
 import static calculator.domain.vo.delimiter.constants.DelimiterPattern.*;
 import static calculator.infrastructure.exception.ErrorCode.*;
 
-import calculator.domain.vo.number.Number;
-import calculator.domain.vo.number.Numbers;
-import calculator.infrastructure.exception.ErrorCode;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Delimiters {
 
-    private final List<Delimiter> values;
+    private final List<Delimiter> delimiters;
 
-    private Delimiters(List<Delimiter> values) {
-        validate(values);
-        this.values = values;
+    private Delimiters(final List<Delimiter> delimiters) {
+        validate(delimiters);
+        this.delimiters = delimiters;
     }
 
-    protected void validate(List<Delimiter> values) {
-        if (values == null || values.isEmpty()) {
+    protected void validate(final List<Delimiter> delimiters) {
+        if (delimiters == null || delimiters.isEmpty()) {
             throw new IllegalArgumentException(INVALID_COLLECTION.getMessage());
         }
     }
@@ -52,18 +49,9 @@ public class Delimiters {
         return EMPTY.getValue();
     }
 
-    public Numbers extractNumbers(final String input) {
-        String[] values = input.split(getDelimiterRegex());
-        List<Number> numbers = new ArrayList<>();
-        for (String value : values) {
-            numbers.add(Number.from(value));
-        }
-        return Numbers.from(numbers);
-    }
-
-    private String getDelimiterRegex() {
+    public String getDelimiterRegex() {
         StringBuilder regex = new StringBuilder();
-        for (Delimiter delimiter : values) {
+        for (Delimiter delimiter : delimiters) {
             regex.append(delimiter.getValue());
             regex.append(PIPE.getValue());
         }
