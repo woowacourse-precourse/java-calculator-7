@@ -11,11 +11,11 @@ import camp.nextstep.edu.missionutils.test.NsTest;
 
 public class LongMathematicalExpressionParserTest extends NsTest {
 
-	private final LongMathematicalExpressionParser longMathematicalExpressionParser;
+	private final BasicLongMathematicalExpressionParser longMathematicalExpressionParser;
 	private final static String DEFAULT_PATTERN = ",|:";
 
 	public LongMathematicalExpressionParserTest() {
-		longMathematicalExpressionParser = new LongMathematicalExpressionParser();
+		longMathematicalExpressionParser = new BasicLongMathematicalExpressionParser();
 	}
 
 	// 성공

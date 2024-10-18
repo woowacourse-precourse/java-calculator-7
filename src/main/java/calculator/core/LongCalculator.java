@@ -7,9 +7,9 @@ import java.util.regex.Pattern;
 
 import calculator.operation.AdditionalLongCalculatorOperation;
 import calculator.operation.LongCalculatorOperation;
-import calculator.parser.LongMathematicalExpressionParser;
+import calculator.parser.BasicLongMathematicalExpressionParser;
 import calculator.parser.BasicSeparatorParser;
-import calculator.parser.MathematicalExpressionParser;
+import calculator.parser.LongMathematicalExpressionParser;
 import calculator.parser.SeparatorParser;
 import calculator.view.AdditionCalculatorView;
 import calculator.view.CalculatorView;
@@ -18,18 +18,18 @@ public class LongCalculator implements Calculator {
 	private static final String VALID_CALCULATOR_EXPRESSION_PATTERN = "(^(/{2}\\D\\\\n)*)((\\d+\\D)*\\d+$)";
 	private static final Pattern VALID_PATTERN = Pattern.compile(VALID_CALCULATOR_EXPRESSION_PATTERN);
 	private final SeparatorParser separatorParser;
-	private final MathematicalExpressionParser mathematicalExpressionParser;
+	private final LongMathematicalExpressionParser mathematicalExpressionParser;
 	private final CalculatorView calculatorView;
 	private final LongCalculatorOperation longCalculatorOperation;
 
 	public LongCalculator() {
-		this(new BasicSeparatorParser(), new LongMathematicalExpressionParser(),
+		this(new BasicSeparatorParser(), new BasicLongMathematicalExpressionParser(),
 			new AdditionCalculatorView(), new AdditionalLongCalculatorOperation());
 	}
 
 	public LongCalculator(
 		SeparatorParser separatorParser,
-		MathematicalExpressionParser mathematicalExpressionParser,
+		LongMathematicalExpressionParser mathematicalExpressionParser,
 		CalculatorView calculatorView,
 		LongCalculatorOperation longCalculatorOperation
 	) {
