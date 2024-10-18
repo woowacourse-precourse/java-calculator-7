@@ -14,3 +14,7 @@
 
 # Fix
 - [x] 커스텀 패턴 매칭 알맞게 변경 "^//(.+)\n(\\d+\\1)*\\d+$" -> "^//(.+)\\\\n(\\d+\\1)*\\d+$";
+
+# Refactoring
+- [x] 3tier layered architect -> 2tier로 변경
+- [x] 불필요한 domain 및 util 함수 제거
