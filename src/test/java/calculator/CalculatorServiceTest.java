@@ -58,7 +58,9 @@ class CalculatorServiceTest {
     @ParameterizedTest
     @CsvSource(value = {
             "'1,2,3', ''",
-            "'//k\\n1k12k3', 'k'"
+            "'//k\\n1k12k3', 'k'",
+            "'//k\\n', 'k'",
+            "'//k\\n1', 'k'"
     })
     @DisplayName("유효한 입력, 유효성 검사")
     void isValidUserInput(String userInput, String customSeparator) {
@@ -71,7 +73,6 @@ class CalculatorServiceTest {
     @CsvSource(value = {
             "',3', ''",
             "'//k\\n1kkk', 'k'",
-            "'//k\\n', 'k'",
             "'1,2,3//k\\n1,2', ''"
     })
     @DisplayName("유효하지 않은 입력, 유효성 검사")
