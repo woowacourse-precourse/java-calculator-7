@@ -3,7 +3,6 @@ package calculator;
 import static calculator.input.StringInput.getInput;
 import static calculator.split.StringSplit.getBackString;
 import static calculator.split.StringSplit.getFrontString;
-import static calculator.split.StringSplit.getSeperatorArray;
 import static calculator.validate.StringValidate.validateFrontString;
 
 public class Application {
@@ -13,9 +12,8 @@ public class Application {
         String frontString = getFrontString(input);
         String backString = getBackString(input);
 
-        char[] seperatorArray;
         if (validateFrontString(frontString)) {
-            seperatorArray = getSeperatorArray(frontString);
+            ;
         }
     }
 

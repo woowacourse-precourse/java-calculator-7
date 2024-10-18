@@ -10,8 +10,5 @@ public class StringSplit {
         String[] split = string.split("\n", 2);
         return split[1];
     }
-
-    public static char[] getSeperatorArray(String string) {
-        return string.toCharArray();
-    }
+    
 }

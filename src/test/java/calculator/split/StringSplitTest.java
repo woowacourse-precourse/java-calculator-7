@@ -2,7 +2,6 @@ package calculator.split;
 
 import static calculator.split.StringSplit.getBackString;
 import static calculator.split.StringSplit.getFrontString;
-import static calculator.split.StringSplit.getSeperatorArray;
 import static calculator.validate.StringValidate.validateFrontString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -59,16 +58,5 @@ class StringSplitTest {
         String string = "1abc";
 
         assertThrows(IllegalArgumentException.class, () -> validateFrontString(string));
-    }
-
-    @Test
-    @DisplayName("앞 문자열에서 각 문자를 추출하여 구분자 배열로 반환한다.")
-    void testGetSeperatorArray() {
-        String string = "a!b@c#";
-        char[] seperatorArray = new char[]{'a', '!', 'b', '@', 'c', '#'};
-
-        char[] result = getSeperatorArray(string);
-
-        Assertions.assertArrayEquals(seperatorArray, result);
     }
 }
