@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class Numbers {
 
     private static final String REGEX_START = "[";
+    private static final String ESCAPE_TEXT = "\\";
     private static final String REGEX_END = "]";
     private static final String EMPTY_TEXT = "";
 
@@ -19,7 +20,7 @@ public class Numbers {
 
     private void extractNumbers(final String input, final String separators) {
         String regex = new StringBuilder()
-                .append(REGEX_START + separators + REGEX_END).toString();
+                .append(REGEX_START + ESCAPE_TEXT + separators + REGEX_END).toString();
 
         if (input.contains("//")) {
             String removeCustomOperator = input.replaceAll("//", "").replaceAll("\\\\n", "");
