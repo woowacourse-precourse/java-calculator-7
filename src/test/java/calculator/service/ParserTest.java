@@ -3,25 +3,24 @@ package calculator.service;
 import calculator.domain.Calculator;
 import calculator.service.fixture.CalculatorFixture;
 import calculator.service.fixture.ExpressionFixture;
+import calculator.util.Parser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.Scanner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class ParsingServiceTest {
+class ParserTest {
 
     private final Calculator calculator = CalculatorFixture.createCalculator();
-    private final ParsingService parsingService = new ParsingService();
+    private final Parser parser = new Parser();
 
     @Test
     @DisplayName("parsing Operands and Identifiers Without custom identifier")
     void parseOperandsAndIdentifiersWithoutCustomIdentifier() {
 
         //when
-        parsingService.parsing(calculator, ExpressionFixture.EXPRESSION_WITHOUT_CUSTOM_IDENTIFIER);
+        parser.parsing(calculator, ExpressionFixture.EXPRESSION_WITHOUT_CUSTOM_IDENTIFIER);
 
         // then
         assertThat(calculator.getOperands().size()).isEqualTo(3);
@@ -33,7 +32,7 @@ class ParsingServiceTest {
     void parseOperandsAndIdentifiersWithCustomIdentifier() {
 
         // when
-        parsingService.parsing(calculator, ExpressionFixture.EXPRESSION_WITH_CUSTOM_IDENTIFIER);
+        parser.parsing(calculator, ExpressionFixture.EXPRESSION_WITH_CUSTOM_IDENTIFIER);
 
         // then
         assertThat(calculator.getOperands().size()).isEqualTo(3);
@@ -45,7 +44,8 @@ class ParsingServiceTest {
     void invalidInputStarsWithOneSlash() {
         // when
         // then
-        assertThatThrownBy(() -> {parsingService.parsing(calculator, ExpressionFixture.EXPRESSION_STARTS_WITH_ONE_SLASH);})
+        assertThatThrownBy(() -> {
+            parser.parsing(calculator, ExpressionFixture.EXPRESSION_STARTS_WITH_ONE_SLASH);})
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -54,7 +54,8 @@ class ParsingServiceTest {
     void invalidInputStarsWithoutNumber() {
         // when
         // then
-        assertThatThrownBy(() -> {parsingService.parsing(calculator, ExpressionFixture.EXPRESSION_STARTS_WITHOUT_NUMBER);})
+        assertThatThrownBy(() -> {
+            parser.parsing(calculator, ExpressionFixture.EXPRESSION_STARTS_WITHOUT_NUMBER);})
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -63,7 +64,8 @@ class ParsingServiceTest {
     void invalidInputDoubleCustomIdentifier() {
         // when
         // then
-        assertThatThrownBy(() -> {parsingService.parsing(calculator, ExpressionFixture.EXPRESSION_DOUBLE_CUSTOM_IDENTIFIER);})
+        assertThatThrownBy(() -> {
+            parser.parsing(calculator, ExpressionFixture.EXPRESSION_DOUBLE_CUSTOM_IDENTIFIER);})
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -72,7 +74,8 @@ class ParsingServiceTest {
     void invalidInputCustomWithoutSlashN() {
         // when
         // then
-        assertThatThrownBy(() -> {parsingService.parsing(calculator, ExpressionFixture.EXPRESSION_CUSTOM_WITHOUT_SLASH_N);})
+        assertThatThrownBy(() -> {
+            parser.parsing(calculator, ExpressionFixture.EXPRESSION_CUSTOM_WITHOUT_SLASH_N);})
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -81,7 +84,8 @@ class ParsingServiceTest {
     void invalidInputBlankCustomIdentifier() {
         // when
         // then
-        assertThatThrownBy(() -> {parsingService.parsing(calculator, ExpressionFixture.EXPRESSION_BLANK_CUSTOM_IDENTIFIER);})
+        assertThatThrownBy(() -> {
+            parser.parsing(calculator, ExpressionFixture.EXPRESSION_BLANK_CUSTOM_IDENTIFIER);})
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -90,7 +94,8 @@ class ParsingServiceTest {
     void invalidInputInvalidIdentifier() {
         // when
         // then
-        assertThatThrownBy(() -> {parsingService.parsing(calculator, ExpressionFixture.EXPRESSION_INVALID_IDENTIFIER);})
+        assertThatThrownBy(() -> {
+            parser.parsing(calculator, ExpressionFixture.EXPRESSION_INVALID_IDENTIFIER);})
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

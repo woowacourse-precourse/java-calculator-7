@@ -1,11 +1,11 @@
-package calculator.service;
+package calculator.util;
 
 import calculator.domain.Calculator;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParsingService {
+public class Parser {
 
     public void parsing(Calculator calculator, String input) {
         char identifier = parseIdentifier(calculator, input);
@@ -16,7 +16,7 @@ public class ParsingService {
 
     private char parseIdentifier(Calculator calculator, String input) {
         if(input.matches("^//.\\\\n.*")) {
-            calculator.addIdenfitier(input.charAt(2));
+            calculator.addIdentifier(input.charAt(2));
             return input.charAt(2);
         }
         return '\0';
@@ -38,7 +38,6 @@ public class ParsingService {
                 operands.add(Long.parseLong(number));
             }
         } catch (NumberFormatException e) {
-            e.printStackTrace();
             throw new IllegalArgumentException("식에는 숫자와 구분자만 입력 가능합니다.");
         }
 

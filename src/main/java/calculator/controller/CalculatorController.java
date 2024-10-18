@@ -2,23 +2,23 @@ package calculator.controller;
 
 import calculator.domain.Calculator;
 import calculator.service.CalculatorService;
-import calculator.service.ParsingService;
+import calculator.util.Parser;
 import calculator.view.CalculatorInput;
 import calculator.view.CalculatorOutput;
 
 public class CalculatorController {
 
     private final CalculatorService calculatorService;
-    private final ParsingService parsingService;
+    private final Parser parser;
 
-    public CalculatorController(CalculatorService calculatorService, ParsingService parsingService) {
+    public CalculatorController(CalculatorService calculatorService, Parser parser) {
         this.calculatorService = calculatorService;
-        this.parsingService = parsingService;
+        this.parser = parser;
     }
 
     public void calculate(Calculator calculator) {
         final String input = CalculatorInput.inputString();
-        parsingService.parsing(calculator, input);
+        parser.parsing(calculator, input);
         final Long result = calculatorService.getSumResult(calculator);
         CalculatorOutput.outputResult(result);
     }
