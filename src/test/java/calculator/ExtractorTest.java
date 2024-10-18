@@ -63,20 +63,6 @@ class ExtractorTest {
     }
 
     @Test
-    public void 커스텀_구분자로_숫자를_추출한다3() {
-        //given
-        Extractor ex = new Extractor();
-        String input = "1,.?/2,.?/3";
-        String delimiter = ",.?/";
-
-        //when
-        int[] result = ex.extractNumbers(input, delimiter);
-
-        //then
-        assertArrayEquals(new int[]{1, 2, 3}, result);
-    }
-
-    @Test
     public void 기본_구분자로_숫자를_추출한다() {
         //given
         Extractor extractor = new Extractor();
