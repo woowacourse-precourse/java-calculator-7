@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Calculator {
@@ -10,4 +12,42 @@ public class Calculator {
         return sc.nextLine();
     }
 
+    public static List<Integer> parse(String input) {
+        List<Integer> numbers = new ArrayList<Integer>();
+        if (input == null || input.isEmpty()) {
+            return numbers;
+        }
+
+        String delimiter = ",|:";  // 기본 구분자: 쉼표와 콜론
+
+        // 커스텀 구분자를 사용하는지 확인
+        int delimiterStartIndex = 2;
+        int delimiterEndIndex = input.indexOf("\n");
+
+        while (input.startsWith("//")) {
+            if (delimiterEndIndex == -1) {
+                throw new IllegalArgumentException();
+            }
+            delimiter += "|" + input.substring(delimiterStartIndex, delimiterEndIndex);
+            input = input.substring(delimiterEndIndex + 1);
+            delimiterEndIndex = input.indexOf("\n");
+        }
+
+        String[] snumbers = input.split(delimiter);  // 지정된 구분자로 문자열 분리
+
+        for (String number : snumbers) {
+            if (!number.isEmpty()) {
+                try {
+                    int num = Integer.parseInt(number);  // 숫자로 변환
+                    if (num < 0) {
+                        throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+                    }
+                    numbers.add(num);
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다: " + number);
+                }
+            }
+        }
+        return numbers;
+    }
 }
