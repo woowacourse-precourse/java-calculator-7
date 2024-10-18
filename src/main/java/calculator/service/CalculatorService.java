@@ -3,6 +3,7 @@ package calculator.service;
 public class CalculatorService {
     private static String customDelimiter;
     private static String pureExpression;
+    private static int sum;
 
     public boolean hasCustomDelimiter(String userInput) {
         return userInput.startsWith("//");
@@ -35,5 +36,23 @@ public class CalculatorService {
 
     public void setPureExpression(String[] userInput) {
         pureExpression = userInput[1];
+    }
+
+    public void calculateSum(String userInput, String delimiter) {
+        calculateNumbers(userInput.split(delimiter));
+    }
+
+    public void calculateNumbers(String[] numbers) {
+        for (String number : numbers) {
+            int numberInt = Integer.parseInt(number);
+            if (numberInt < 0) {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            }
+            sum += numberInt;
+        }
+    }
+
+    public int getSum() {
+        return sum;
     }
 }
