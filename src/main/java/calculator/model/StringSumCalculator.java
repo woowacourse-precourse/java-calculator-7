@@ -4,6 +4,7 @@ import java.util.List;
 
 public class StringSumCalculator implements Calculator {
 
+    private static final int DEFAULT_VALUE = 0;
     private final DelimiterManager delimiterManager;
     private final StringParser stringParser;
 
@@ -14,7 +15,10 @@ public class StringSumCalculator implements Calculator {
 
     @Override
     public int calculate(String inputValue) {
-        String targetValue = inputValue;
+        if (inputValue.isEmpty()) {
+            return DEFAULT_VALUE;
+        }
+
         if (delimiterManager.existCustomDelimiter(inputValue)) {
             delimiterManager.registerCustomDelimiters(inputValue);
             targetValue = stringParser.splitTarget(inputValue);
