@@ -1,15 +1,13 @@
 package calculator.model;
 
 import calculator.domain.Candidate;
-import calculator.utils.RegexUtils;
-import org.assertj.core.api.Assertions;
+import calculator.domain.Storage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 class ValidatorTest {
 

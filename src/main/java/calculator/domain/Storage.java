@@ -1,4 +1,4 @@
-package calculator.model;
+package calculator.domain;
 
 import calculator.domain.Candidate;
 import calculator.domain.delimiter.DefaultDelimiter;

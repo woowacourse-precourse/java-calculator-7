@@ -1,5 +1,6 @@
 package calculator.model;
 
+import calculator.domain.Storage;
 import calculator.domain.delimiter.CustomDelimiter;
 import calculator.utils.RegexUtils;
 

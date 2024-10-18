@@ -1,6 +1,7 @@
 package calculator.model;
 
 import calculator.domain.Candidate;
+import calculator.domain.Storage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
