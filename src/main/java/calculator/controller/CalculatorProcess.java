@@ -1,6 +1,7 @@
 package calculator.controller;
 
 import calculator.service.CalculatorService;
+import calculator.util.ArrayConverter;
 import calculator.util.ExtractUtil;
 import calculator.util.NumberValidator;
 import calculator.view.InputView;
@@ -12,6 +13,7 @@ public class CalculatorProcess {
     private final CalculatorService calculatorService;
     private final ExtractUtil extractUtil;
     private final NumberValidator numberValidator;
+    private final ArrayConverter arrayConverter;
 
     public CalculatorProcess() {
         this.outputView = new OutputView();
@@ -19,6 +21,7 @@ public class CalculatorProcess {
         this.calculatorService = new CalculatorService();
         this.extractUtil = new ExtractUtil();
         this.numberValidator = new NumberValidator();
+        this.arrayConverter = new ArrayConverter();
     }
 
     public void run() {
@@ -31,7 +34,7 @@ public class CalculatorProcess {
         char[] positiveCharacters = calculatorService.toCharArrayWithoutDelimiter(positiveString, customDelimiter);
         numberValidator.validateNoDigits(positiveCharacters); // 숫자 변환 가능한 문자 검사
 
-        int[] positives = calculatorService.convertCharArrayToIntArray(positiveCharacters);
+        int[] positives = arrayConverter.convertCharArrayToIntArray(positiveCharacters);
         numberValidator.validatorNoNegatives(positives); // 양수 검사
 
         int result = calculatorService.calculatorNumbers(positives);

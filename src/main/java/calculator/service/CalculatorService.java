@@ -11,13 +11,6 @@ public class CalculatorService {
         return positives.toCharArray();
     }
 
-    public int[] convertCharArrayToIntArray(char[] positiveCharArray) {
-        return new String(positiveCharArray)
-                .chars()
-                .map(Character::getNumericValue)
-                .toArray();
-    }
-
     public int calculatorNumbers(int[] numbers) {
         return Arrays.stream(numbers)
                 .sum();
