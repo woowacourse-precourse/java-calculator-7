@@ -2,14 +2,14 @@ package calculator.model;
 
 
 public class Calculator {
-    private String numbers;
+    private String formula;
 
-    public Calculator(String numbers){
-        this.numbers = numbers;
+    public Calculator(String formula){
+        this.formula = formula;
     }
 
-    public String getNumbers(){
-        return this.numbers;
+    public String getFormula(){
+        return this.formula;
     }
 
     private String plus(String[] splitedNumbers){
