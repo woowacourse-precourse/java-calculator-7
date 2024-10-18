@@ -24,9 +24,12 @@ public class Tokenizer {
     }
 
     private String splitNumbersToken(String input) {
+        String[] split = input.split("\\\\n", -1);
+
         if (isExistsCustomDelimiterToken(input)) {
-            return input.split("\\\\n")[1];
+            return split[1];
         }
+
         return input;
     }
 }

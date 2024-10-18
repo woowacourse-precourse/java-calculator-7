@@ -13,7 +13,7 @@ public class NumbersToken {
     }
 
     public String[] extractNumbers(Delimiter delimiter) {
-        return token.split(delimiter.getDelimiter());
+        return token.split(delimiter.getDelimiter(), -1);
     }
 
     public Numbers convertToNumbers(Delimiter delimiter) {
