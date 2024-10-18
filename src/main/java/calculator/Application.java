@@ -1,7 +1,12 @@
 package calculator;
 
+import calculator.view.CalculatorRequest;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        CalculatorRequest calculatorRequest = new CalculatorRequest();
+
+        calculatorRequest.getStartMessage();
+        calculatorRequest.inputString();
     }
 }
