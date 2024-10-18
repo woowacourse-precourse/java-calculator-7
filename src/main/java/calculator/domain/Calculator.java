@@ -11,7 +11,7 @@ public class Calculator {
 
     private static final String DEFAULT_DELIMITER_COMMA = ",";
     private static final String DEFAULT_DELIMITER_COLON = ":";
-    private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\\\\n";
+    private static final String CUSTOM_DELIMITER_PATTERN = "//(.+)\\\\n";
     private static final int DEFAULT_DELIMITER_COUNT = 2;
 
     public int splitAndSum(String input) {
@@ -41,7 +41,7 @@ public class Calculator {
         List<String> delimiters = new ArrayList<>();
         Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(input);
 
-        while (matcher.find()) {
+        if (matcher.find()) {
             String delimiter = matcher.group(1);
             ValidationUtils.validateCustomDelimiter(delimiter);
             delimiters.add(Pattern.quote(delimiter));

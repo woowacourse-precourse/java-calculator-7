@@ -11,7 +11,7 @@ class CalculatorTest {
     private final Calculator calculator = new Calculator();
 
     @Test
-    void 빈_문자열_또는_null_입력() {
+    void 빈_문자열_또는_null_입력_0_반환() {
         assertThat(calculator.splitAndSum("")).isZero();
         assertThat(calculator.splitAndSum(null)).isZero();
     }
@@ -24,6 +24,15 @@ class CalculatorTest {
     @Test
     void 커스텀_구분자_사용() {
         assertThat(calculator.splitAndSum("//;\\n1;2;3")).isEqualTo(6);
+        assertThat(calculator.splitAndSum("//.\\n1.2.3")).isEqualTo(6);
+        assertThat(calculator.splitAndSum("//;\\n1;2,3:4")).isEqualTo(10);
+    }
+
+    @Test
+    void 여러_개의_커스텀_구분자_예외_테스트() {
+        assertThatThrownBy(() -> calculator.splitAndSum("//;[]\\n1;[]2,3"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("유효하지 않은 커스텀 구분자입니다. 구분자는 단일 문자여야 합니다. 문제가 되는 입력값: [;[]]");
     }
 
     @Test
