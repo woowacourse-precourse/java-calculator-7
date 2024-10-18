@@ -8,8 +8,8 @@ public class Calculator implements AutoCloseable {
     private String input;
     private String output;
     private double sum;
-    private boolean isCustom;
-    private char customChar;
+    private boolean hasCustomDelimiter;
+    private char customDelimiter;
     private final Parser parser;
     private final DelimiterManager delimiterManager;
 
@@ -24,10 +24,11 @@ public class Calculator implements AutoCloseable {
 
     public void readInput(String input) {
         output = parser.parseString(input);
+        // output은 "//.\n"가 delete된 문자열.
     }
 
-    public void sum() {
-        output = String.valueOf(sum);
+    public void add() {
+
     }
 
     public void printSum() {
@@ -55,11 +56,27 @@ public class Calculator implements AutoCloseable {
             if (newStr.isEmpty()) {
                 return "0";
             }
+
+            stringBuilder = containsCustomDelimiter(newStr);
+
+            return stringBuilder.toString();
         }
 
-        private static boolean isValidString(String str) {
+        private StringBuilder containsCustomDelimiter(String str) {
+            StringBuilder stringBuilder = new StringBuilder(str);
+
+            if (str.startsWith(DELIMITER_PREFIX)) {
+                hasCustomDelimiter = true;
+                Parser.deleteDelimiterSection(stringBuilder, DELIMITER_PREFIX.length());
+            }
+            return stringBuilder;
+        }
+
+        private static void deleteDelimiterSection(StringBuilder strWithCustomDelimiter, int length) {
+            strWithCustomDelimiter.delete(0, length);
         }
     }
+
 
     private class DelimiterManager {
 
