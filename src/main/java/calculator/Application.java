@@ -1,7 +1,6 @@
 package calculator;
 
 import calculator.common.exception.ExceptionFactory;
-import calculator.delimiter.domain.Delimiters;
 import calculator.delimiter.factory.DefaultDelimiterFactory;
 import calculator.delimiter.factory.DelimiterFactory;
 import calculator.delimiter.pattern.CustomDelimiterPatternMatcher;
@@ -28,22 +27,14 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = IOConsole.readLine();
 
-        Delimiters delimiters = getDelimiters(input);
-
-        List<String> numberTokens = delimiters.split(customDelimiterService.stripCustomDelimiter(input));
+        List<String> numberStrings = customDelimiterService.extractNumberStrings(input);
 
         try {
-            List<Integer> numbers = IntegerUtils.parsePositiveIntegers(numberTokens);
+            List<Integer> numbers = IntegerUtils.parsePositiveIntegers(numberStrings);
             int sum = IntegerUtils.sum(numbers);
             IOConsole.print("결과 : " + sum);
         } catch (NumberFormatException e) {
             throw ExceptionFactory.createException(NOT_DELIMITER);
         }
-    }
-
-    private static Delimiters getDelimiters(String input) {
-        return customDelimiterService.extractCustomDelimiter(input)
-                .map(customDelimiterService::createDelimiters)
-                .orElseGet(customDelimiterService::createDelimiters);
     }
 }
