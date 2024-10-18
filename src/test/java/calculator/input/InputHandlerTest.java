@@ -25,6 +25,14 @@ public class InputHandlerTest extends NsTest {
     }
 
     @Test
+    void 구분자입력_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//!\\abc,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
     void Long범위_예외_테스트() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("9223372036854775808, 922337203685477580812"))

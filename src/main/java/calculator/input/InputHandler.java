@@ -33,7 +33,11 @@ public class InputHandler implements InputHandlerImpl {
         String[] strArr = input.substring(2).split("");
 
         int idx = 0;
+        int strLen = strArr.length;
         while (true) {
+            if (idx + 1 == strLen) {
+                throw new IllegalArgumentException();
+            }
             if (strArr[idx].equals("\\") && strArr[idx + 1].equals("n")) {
                 break;
             }
@@ -54,7 +58,7 @@ public class InputHandler implements InputHandlerImpl {
                 continue;
             }
             if (!isValidate(str)) {
-                throw new IllegalArgumentException("");
+                throw new IllegalArgumentException();
             }
             numbers.add(Long.parseLong(str));
         }
