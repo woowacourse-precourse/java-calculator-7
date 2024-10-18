@@ -57,26 +57,34 @@ public class Application {
 
         -> validateNoNegativeNumbers, add 메서드에서 빈 문자열에 대한 처리로직을 추가해주어야한다.
         */
-        validateNoNegativeNumbers(numbers); // 음수 있으면 예외 발생 (3.8 예외)
 
-        return add(numbers);
+        int[] parsedNumbers = parseNumbers(numbers);
+
+        validateNoNegativeNumbers(parsedNumbers); // 음수 있으면 예외 발생 (3.8 예외)
+
+        return add(parsedNumbers);
+    }
+
+    private static int[] parseNumbers(String[] numbers) {
+        return Arrays.stream(numbers)
+                .filter(Application::isNotEmpty)
+                .map(String::trim)
+                .mapToInt(Integer::parseInt)
+                .toArray();
     }
 
     private static void appendCustomDelimiters(String[] customDelimiters, StringBuilder delimiterPart) {
         for (String delim : customDelimiters) {
             delim = delim.trim();
-            if (!delim.isEmpty()) {
+            if (!delim.isEmpty()) { //빈 문자열로 파싱되지 않았다면
                 delimiterPart.append("|")
                         .append(toRegex(delim));
             }
         }
     }
 
-    private static void validateNoNegativeNumbers(String[] numbers) {
+    private static void validateNoNegativeNumbers(int[] numbers) {
         if (Arrays.stream(numbers)
-                .filter(Application::isNotEmpty)
-                .map(String::trim) // 공백 포함 시 예외 처리 3.9
-                .mapToInt(Integer::parseInt)
                 .anyMatch(n -> n < 0)) {
             throw new IllegalArgumentException("음수가 입력되었습니다.");
         }
@@ -94,18 +102,8 @@ public class Application {
         return input.startsWith(CUSTOM_DELIMITER_START_SIGN);
     }
 
-    private static int add(String[] numbers) {
-        int result = 0;
-
-        for (String number : numbers) {
-            if (number.isEmpty()) {
-                continue; // 빈 문자열 무시
-            }
-
-            result += Integer.parseInt(number.trim()); // 공백 포함 시 예외 처리 3.9
-        }
-
-        return result;
+    private static int add(int[] numbers) {
+        return Arrays.stream(numbers).sum();
     }
 
     private static void printInputMessage() {
