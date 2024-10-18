@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import calculator.fixture.CalculatorAppFixture;
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,6 +14,11 @@ class StringParserTest {
 
     private final StringParser stringParser = CalculatorAppFixture.createStringParser();
     private final DelimiterStore delimiterStore = CalculatorAppFixture.getDelimiterStore();
+
+    @BeforeEach
+    void setUp() {
+        delimiterStore.clear();
+    }
 
     @DisplayName("커스텀 구분자 생성문자와 계산대상인 숫자와 구분자 문자열을 분리한다.")
     @Test
