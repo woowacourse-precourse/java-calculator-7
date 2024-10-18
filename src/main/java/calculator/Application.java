@@ -29,7 +29,11 @@ public class Application {
         int sum = 0;
 
         for (String number : numbers) {
-            sum += Integer.parseInt(number);
+            int num = Integer.parseInt(number);
+            if (num < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + num);
+            }
+            sum += num;
         }
 
         return sum;
