@@ -50,4 +50,4 @@
 ### Controller
 
 #### CalculateController
-- [ ] View와 Model간 데이터 전달을 처리.
+- [X] View와 Model간 데이터 전달을 처리.
