@@ -13,7 +13,7 @@ public class Application {
 
         String newInputString = splitCustomDelimiter(inputString);
         String[] splitDelimiterString = splitDelimiter(newInputString);
-        int answer = calculateNumbers(splitDelimiterString);
+        long answer = calculateNumbers(splitDelimiterString);
 
         System.out.println("결과"+" : "+answer);
     }
@@ -68,13 +68,16 @@ public class Application {
      * @param number
      * @return 유효성 검사를 마친 숫자
      */
-    private static int parseNumber(String number) {
+    private static long parseNumber(String number) {
         try {
-            int parsingNumber = Integer.parseInt(number.trim());
-            if (parsingNumber < 0) {
-                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + parsingNumber);
+            long parsedNumber = Long.parseLong(number.trim());
+            if (parsedNumber < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + parsedNumber);
             }
-            return parsingNumber;
+            if (parsedNumber > Integer.MAX_VALUE) {
+                throw new IllegalArgumentException("입력된 숫자가 허용 범위를 초과했습니다: " + parsedNumber);
+            }
+            return parsedNumber;
         } catch (NumberFormatException exception) {
             throw new IllegalArgumentException("잘못된 숫자 형식: " + exception);
         }
