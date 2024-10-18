@@ -48,11 +48,17 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 빈문자열_테스트() {
+    void 빈문자열_테스트2() {
         assertSimpleTest(() -> {
-            run("");
+            run("\n");
             assertThat(output()).contains("결과 : 0");
         });
+    }
+
+    @Test
+    void 커스텀_구분자_없음() {
+        assertThatThrownBy(() -> runException("//\\n1234"))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
