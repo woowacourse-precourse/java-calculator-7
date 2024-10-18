@@ -36,7 +36,7 @@ public class Calculator {
         }
 
         for(String str : splitStr){
-            if(!str.matches("^[0-9]*$")){
+            if(!str.matches("^[0-9]*$") || str.equals("0")){
                 throw new IllegalArgumentException("Invalid number");
             }
         }
@@ -45,7 +45,9 @@ public class Calculator {
     public Integer getResult(){
         int result = 0;
         for(String str : splitStr){
-            result += Integer.parseInt(str);
+            if(!str.isEmpty()){
+                result += Integer.parseInt(str);
+            }
         }
         return result;
     }
