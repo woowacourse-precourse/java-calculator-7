@@ -39,9 +39,9 @@ class CalculationSegmentProcessorTest {
     }
 
     @Test
-    @DisplayName("extractNumbers 빈칸 제거까지 있는 기능 테스트")
+    @DisplayName("extractNumbers 빈칸 제거 기능 테스트")
     void extractNumbers_withblank() {
-        List<String> delimeterList = new ArrayList<>(Arrays.asList(",", ":", "<"));
+        List<String> delimeterList = new ArrayList<>(Arrays.asList(",", ":","<"));
 
         List<String> result = calculationSegmentProcessor.extractNumbers(delimeterList, "2,3:4<");
         List<String> expected = new ArrayList<>(Arrays.asList("2", "3", "4"));

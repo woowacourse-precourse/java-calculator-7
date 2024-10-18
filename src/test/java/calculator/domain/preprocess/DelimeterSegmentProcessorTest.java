@@ -14,7 +14,7 @@ class DelimeterSegmentProcessorTest {
     DelimeterSegmentProcessor delimeterSegmentProcessor = new DelimeterSegmentProcessor();
 
     @Test
-    @DisplayName("커스텀 구분자 요구사항 인식")
+    @DisplayName("checkCustomDelimeterRequest 기능 테스트")
     void custom_delimeter_o() {
         boolean result = delimeterSegmentProcessor.checkCustomDelimeterRequest("//;\n2,3,4");
         assertTrue(result);
@@ -22,7 +22,7 @@ class DelimeterSegmentProcessorTest {
 
 
     @Test
-    @DisplayName("구분자 요청 제외 String 반환 테스트")
+    @DisplayName("CalculationSegment 반환 테스트")
     void discard_custom_delimeter_request() {
         String newInput = delimeterSegmentProcessor.extractCalculationSegment("//;\n1,2,3");
         assertEquals(newInput, "1,2,3");
