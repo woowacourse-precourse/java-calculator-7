@@ -10,7 +10,15 @@ public class Application {
     private static String getInput() {
         System.out.print("덧셈할 문자열을 입력해 주세요: ");
         String input = Console.readLine();
+        validation(input);//유효한지 검사
         return input;
     }
+    private static void validation(String input) {
+        if (input == null || input.isEmpty()) { // 비어 있는지 확인
+            throw new IllegalArgumentException("문자열이 비어있습니다.");
+        }
+    }
+
+
 
 }
