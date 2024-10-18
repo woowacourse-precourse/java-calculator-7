@@ -14,14 +14,13 @@ public class Application {
             if (Character.isDigit(firstChar)) {
                 StartNumber startNumber = new StartNumber();
                 answer = startNumber.readNumInput(input);
-                System.out.println("결과 : " + answer);
             } else if (firstChar == '/') {
                 StartSlash startSlash = new StartSlash();
                 answer = startSlash.readSlashInput(input);
-                System.out.println("결과 : " + answer);
             } else {
                 throw new IllegalArgumentException();
             }
+            System.out.println("결과 : " + answer);
         } else {
             throw new IllegalArgumentException();
         }
