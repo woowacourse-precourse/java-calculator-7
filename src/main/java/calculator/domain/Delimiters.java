@@ -3,23 +3,21 @@ package calculator.domain;
 import calculator.constant.ExceptionMessage;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
 
 public class Delimiters {
 
-    private static final String DEFAULT_DELIMITER_COMMA = ",";
-    private static final String DEFAULT_DELIMITER_COLON = ":";
-
-    private final List<String> elements;
+    private static final Collection<String> DEFAULT_DELIMITERS = List.of(",", ":");
+    private final Collection<String> elements;
 
     public Delimiters() {
         this.elements = new ArrayList<>();
-        elements.add(DEFAULT_DELIMITER_COMMA);
-        elements.add(DEFAULT_DELIMITER_COLON);
+        this.elements.addAll(DEFAULT_DELIMITERS);
     }
 
-    public List<String> getElements() {
+    public Collection<String> getElements() {
         return new ArrayList<>(elements);
     }
 
