@@ -69,12 +69,16 @@ public class Calculator {
 			throw new IllegalArgumentException("숫자는 커스텀 구분자로 사용할 수 없습니다.");
 		}
 
-		// 커스텀 구분자 저장 및 구분자 개수 추가
-		separator[2] = newSeparator;
-		separatorCnt++;
-
 		// 커스텀 구분자 지정 부분 문자열 제거
 		inputStr = inputStr.substring(5);
+
+		savePersonalSeparator(newSeparator);
+	}
+
+	private void savePersonalSeparator(char personalSeparator) {
+		// 커스텀 구분자 저장 및 구분자 개수 추가
+		separator[2] = personalSeparator;
+		separatorCnt++;
 	}
 
 	/*
