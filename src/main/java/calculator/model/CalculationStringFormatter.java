@@ -14,9 +14,9 @@ public class CalculationStringFormatter {
     }
 
     public void resolveCalculationString(String inputString) {
-        if (inputString.startsWith("//") && inputString.contains("\n")) {
+        if (hasCustomDelimiter(inputString)) {
             resolveCustomDelimiter(inputString);
-            expression = inputString.substring(inputString.indexOf("\n") + 2);
+            expression = inputString.substring(inputString.indexOf("\\n") + 2);
         } else if (isBasicCalculationString(inputString)) {
             expression = inputString;
         } else {
@@ -24,9 +24,13 @@ public class CalculationStringFormatter {
         }
     }
 
-    public void resolveCustomDelimiter(String input) {
+    private boolean hasCustomDelimiter(String inputString) {
+        return inputString.startsWith("//") && inputString.contains("\\n");
+    }
+
+    private void resolveCustomDelimiter(String input) {
         int startIndex = input.indexOf("//") + 2;
-        int endIndex = input.indexOf("\n");
+        int endIndex = input.indexOf("\\n");
 
         customDelimiter = input.substring(startIndex, endIndex);
     }
