@@ -71,4 +71,16 @@ class InputValidatorTest {
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(INPUT_IS_NOT_PROPER_CUSTOM_DELIMITER.getMessage());
     }
+
+    @Test
+    void 입력_값에_제대로_된_커스텀_구분자_Suffix_값이_아닐때_예외를_발생() {
+        // given
+        String input = "//;\\1,2,3";
+        CalculationRequest calculationRequest = new CalculationRequest(input);
+
+        // when & then
+        Assertions.assertThatThrownBy(() -> inputValidator.validate(calculationRequest))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage(INPUT_IS_NOT_PROPER_CUSTOM_DELIMITER.getMessage());
+    }
 }
