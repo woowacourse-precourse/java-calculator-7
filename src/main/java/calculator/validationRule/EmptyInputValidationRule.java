@@ -9,6 +9,11 @@ public class EmptyInputValidationRule implements ValidationRule {
             throw new IllegalArgumentException(입력값이_비어있습니다);
         }
     }
+
+    @Override
+    public boolean canHandle(String input) {
+        return true;
+    }
 }
 
 

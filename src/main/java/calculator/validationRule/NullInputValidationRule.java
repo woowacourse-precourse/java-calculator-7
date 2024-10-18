@@ -9,4 +9,9 @@ public class NullInputValidationRule implements ValidationRule {
             throw new IllegalArgumentException(입력값이_null입니다);
         }
     }
+
+    @Override
+    public boolean canHandle(String input) {
+        return true;
+    }
 }
