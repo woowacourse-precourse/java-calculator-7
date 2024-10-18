@@ -1,7 +1,9 @@
 package calculator.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import calculator.constant.CommonPattern;
@@ -11,25 +13,27 @@ public class NumberSeparator {
 	private static final int CUSTOM_DELIMITER_POSITION = 1;
 	private static final int EQUATION_POSITION = 2;
 	private static final String CUSTOM_DELIMITER_PREFIX = "//";
-	private static final String CUSTOM_DELIMITER_POSTFIX = "\\n";
+	private static final String CUSTOM_DELIMITER_POSTFIX = "\\\\n";
 
 	private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile(
 		CommonPattern.START_WITH +
 		CUSTOM_DELIMITER_PREFIX +
 		CommonPattern.GROUP +
 		CUSTOM_DELIMITER_POSTFIX +
-		CommonPattern.GROUP
+		CommonPattern.GROUP +
+		CommonPattern.END_WITH
 	);
 
 	private final String equation;
-	private final List<Delimiter> delimiters;
+	private final List<Delimiter> delimiters = new ArrayList<>();
 
 	private NumberSeparator(String input) {
-		delimiters = DefaultDelimiter.getDefaultDelimiter();
+		delimiters.addAll(DefaultDelimiter.getDefaultDelimiter());
 
-		if (hasCustomDelimiter(input)) {
-			delimiters.add(extractCustomDelimiter(input));
-			equation = extractEquation(input);
+		Matcher matcher = getMatcher(input);
+		if (hasCustomDelimiter(matcher)) {
+			delimiters.add(extractCustomDelimiter(matcher));
+			equation = extractEquation(matcher);
 			return;
 		}
 
@@ -40,21 +44,25 @@ public class NumberSeparator {
 		return new NumberSeparator(input);
 	}
 
-	private boolean hasCustomDelimiter(String input) {
-		return CUSTOM_DELIMITER_PATTERN.matcher(input).matches();
+	private Matcher getMatcher(String input) {
+		return CUSTOM_DELIMITER_PATTERN.matcher(input);
 	}
 
-	private Delimiter extractCustomDelimiter(String input) {
+	private boolean hasCustomDelimiter(Matcher matcher) {
+		return matcher.find();
+	}
+
+	private Delimiter extractCustomDelimiter(Matcher matcher) {
 		return Delimiter.from(
-			CUSTOM_DELIMITER_PATTERN.matcher(input).group(CUSTOM_DELIMITER_POSITION)
+			matcher.group(CUSTOM_DELIMITER_POSITION)
 		);
 	}
 
-	private String extractEquation(String input) {
-		return CUSTOM_DELIMITER_PATTERN.matcher(input).group(EQUATION_POSITION);
+	private String extractEquation(Matcher matcher) {
+		return matcher.group(EQUATION_POSITION);
 	}
 
-	Numbers separate() {
+	public Numbers separate() {
 		return Numbers.parseNumbers(
 			Arrays.stream(
 				equation.split(Delimiter.toRegex(delimiters))
