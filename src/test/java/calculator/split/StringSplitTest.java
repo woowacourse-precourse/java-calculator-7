@@ -16,7 +16,7 @@ class StringSplitTest {
     void extractFrontString() {
         String string = "//abc\n123";
 
-        assertEquals(getFrontString(string), "abc");
+        assertEquals("abc", getFrontString(string));
     }
 
     @Test
@@ -24,7 +24,7 @@ class StringSplitTest {
     void extractBackString() {
         String string = "//abc\n123";
 
-        assertEquals(getBackString(string), "123");
+        assertEquals("123", getBackString(string));
     }
 
     @Test
@@ -32,8 +32,8 @@ class StringSplitTest {
     void splitAtFirstNewline() {
         String string = "//abc\n\n123";
 
-        assertEquals(getFrontString(string), "abc");
-        assertEquals(getBackString(string), "\n123");
+        assertEquals("abc", getFrontString(string));
+        assertEquals("\n123", getBackString(string));
     }
 
     @Test
@@ -41,7 +41,7 @@ class StringSplitTest {
     void backStringEmpty() {
         String string = "//abc\n";
 
-        assertEquals(getBackString(string), "");
+        assertEquals("", getBackString(string));
     }
 
     @Test
