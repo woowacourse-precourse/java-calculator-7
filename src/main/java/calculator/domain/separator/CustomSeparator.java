@@ -17,26 +17,11 @@ public class CustomSeparator implements Separator {
     public List<Number> separate(String input) {
         String value = removePrefix(input);
 
-        if (!isBlank(value)) {
-            return convert(validate(value)).stream()
-                    .map(Number::new)
-                    .toList();
+        if (hasSeparatorIn(value)) {
+            return convert(validateSeparator(value));
         }
 
-        return List.of(new Number(parse(value)));
-    }
-
-    private int parse(String value) {
-        if (isBlank(value)) {
-            return 0;
-        }
-        validateNumber(List.of(value));
-
-        return Integer.parseInt(value);
-    }
-
-    private boolean isBlank(String value) {
-        return value.isBlank();
+        return List.of(new Number(value));
     }
 
     private String removePrefix(String value) {
@@ -48,35 +33,16 @@ public class CustomSeparator implements Separator {
         return Arrays.stream(value.split(separator)).toList();
     }
 
-    private List<Integer> convert(List<String> values) {
+    private List<Number> convert(List<String> values) {
         return values.stream()
-                .map(Integer::parseInt)
+                .map(Number::new)
                 .toList();
-    }
-
-    private List<String> validate(String value) {
-        List<String> values = validateSeparator(value);
-        validateNumber(values);
-        return values;
     }
 
     private List<String> validateSeparator(String value) {
         validateEdgeSeparator(value);
         validateContinuousSeparator(value);
         return divideBySeparator(value);
-    }
-
-    private void validateNumber(List<String> values) {
-        values.stream()
-                .filter(this::isNotNumeric)
-                .findAny()
-                .ifPresent(e -> {
-                    throw new IllegalArgumentException();
-                });
-    }
-
-    private boolean isNotNumeric(String value) {
-        return !value.matches("\\d+");
     }
 
     private void validateEdgeSeparator(String value) {
@@ -97,5 +63,9 @@ public class CustomSeparator implements Separator {
 
     private boolean isContinuousSeparator(String value) {
         return value.contains(separator.repeat(2));
+    }
+
+    private boolean hasSeparatorIn(String value) {
+        return value.contains(separator);
     }
 }

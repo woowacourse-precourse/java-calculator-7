@@ -12,34 +12,19 @@ public class BasicSeparator implements Separator {
     @Override
     public List<Number> separate(String value) {
         if (hasSeparatorIn(value)) {
-            return convert(validate(value)).stream()
-                    .map(Number::new)
-                    .toList();
+            return convert(validateOfSeparator(value));
         }
 
-        return List.of(new Number(parse(value)));
-    }
-
-    private int parse(String value) {
-        if (isBlank(value)) {
-            return 0;
-        }
-        validateNumber(List.of(value));
-
-        return Integer.parseInt(value);
-    }
-
-    private boolean isBlank(String value) {
-        return value.isBlank();
+        return List.of(new Number(value));
     }
 
     private boolean hasSeparatorIn(String value) {
         return value.contains(COMMA) || value.contains(COLON);
     }
 
-    private List<Integer> convert(List<String> values) {
+    private List<Number> convert(List<String> values) {
         return values.stream()
-                .map(Integer::parseInt)
+                .map(Number::new)
                 .toList();
     }
 
@@ -48,30 +33,10 @@ public class BasicSeparator implements Separator {
                 .toList();
     }
 
-    private List<String> validate(String value) {
-        List<String> values = validateOfSeparator(value);
-        validateNumber(values);
-
-        return values;
-    }
-
     private List<String> validateOfSeparator(String value) {
         validateEdgeSeparator(value);
         validateContinuousSeparator(value);
         return divideBySeparator(value);
-    }
-
-    private void validateNumber(List<String> value) {
-        value.stream()
-                .filter(this::isNotNumeric)
-                .findAny()
-                .ifPresent(e -> {
-                    throw new IllegalArgumentException();
-                });
-    }
-
-    private boolean isNotNumeric(String value) {
-        return !value.matches("\\d+");
     }
 
     private void validateEdgeSeparator(String value) {
