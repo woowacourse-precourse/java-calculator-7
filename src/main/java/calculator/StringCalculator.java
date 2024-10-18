@@ -3,17 +3,23 @@ package calculator;
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
 // 문자열 계산기 클래스
-public class StringCalculator {
+public class
+StringCalculator {
 
     String inputString = ""; // 입력받는 문자열
     Character customSeparator = null; // 커스텀 구분자
     Calculation calculation = new Calculation(); // 연산 클래스
 
-    //사용자로부터 문자열을 입력받음
-    public void input(){
-
-
+    public void add(){
         System.out.println("덧셈할 문자열을 입력해 주세요.");
+        input();
+        int result = calculation.Add(inputString);
+        System.out.println("결과 : "+result);
+    }
+
+
+    //사용자로부터 문자열을 입력받음
+    private void input(){
 
         //문자열 입력받기
         readString();
@@ -41,15 +47,6 @@ public class StringCalculator {
         }
 
     }
-
-    //덧셈 결과를 출력
-    public void outputAdd(){
-        //Calculations 클래스에서 add 함수 가져오기
-        int result = calculation.Add(inputString);
-
-        System.out.println("결과 : "+result);
-    }
-
 
 
     //문자열 입력받기
