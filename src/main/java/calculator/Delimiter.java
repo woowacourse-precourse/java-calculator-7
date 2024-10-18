@@ -19,7 +19,6 @@ public class Delimiter {
             if (!(input.contains(",") || input.contains(":"))) {
                 throw new IllegalArgumentException("구분자가 포함돼야합니다.");
             }
-            validate(input);
             return null;
         }
 
@@ -36,20 +35,5 @@ public class Delimiter {
             return customDelimiter;
         }
         return DEFAULT_DELIMITERS;
-    }
-
-    private void validate(String input) {
-        checkValidDelimiter(input);
-    }
-
-    private void checkValidDelimiter(String input) {
-        String patternString = String.join("", "^[0-9", Pattern.quote(DEFAULT_DELIMITERS_PATTERN), "]+$");
-        Pattern pattern = Pattern.compile(patternString);
-        Matcher matcher = pattern.matcher(input);
-
-        if (!matcher.matches()) {
-            throw new IllegalArgumentException(
-                    "입력값이 유효하지 않습니다. 숫자 및 허용된 구분자만 사용할 수 있습니다: " + DEFAULT_DELIMITERS_PATTERN);
-        }
     }
 }
