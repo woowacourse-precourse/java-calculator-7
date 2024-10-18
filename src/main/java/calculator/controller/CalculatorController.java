@@ -53,8 +53,7 @@ public class CalculatorController {
 
     private int getSum(int[] numbers) {
         Calculator calculator = Calculator.getInstance();
-        int sum = calculator.add(numbers);
-        return sum;
+        return calculator.add(numbers);
     }
 
 }
