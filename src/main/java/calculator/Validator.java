@@ -31,4 +31,10 @@ public class Validator {
 
         return matcher.find();
     }
+
+    public static void checkEmptyInput(String inputString) {
+        if (inputString.isEmpty()) {
+            throw new IllegalArgumentException("빈 값을 입력하였습니다");
+        }
+    }
 }
