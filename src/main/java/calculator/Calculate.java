@@ -17,10 +17,9 @@ public class Calculate {
             customSeparator = matcher.group(1);
         }
         input = input.replaceAll("\\\\n|/", "").trim();
-        List<String> numbers = List.of(input.split(",|:|" + customSeparator)).stream().filter(n -> !"".equals(n))
+        List<String> numbers = List.of(input.split(",|:|\\" + customSeparator)).stream().filter(n -> !"".equals(n))
                 .collect(Collectors.toList());
-        numbers.stream().filter(n -> n.equals(customSeparator) || (n == null && n.isEmpty()))
-                .collect(Collectors.toList());
+        numbers.stream().filter(n -> n.equals(customSeparator)).collect(Collectors.toList());
         return addition(numbers);
     }
 
