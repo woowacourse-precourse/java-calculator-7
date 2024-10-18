@@ -37,8 +37,4 @@ public class Converter {
                 .map(this::convertToNumber)
                 .collect(Collectors.toList());
     }
-
-    private String addDelimiter(String existingDelimiters, String newDelimiter) {
-        return existingDelimiters.substring(0, existingDelimiters.length() - 1) + newDelimiter + "]";
-    }
 }
