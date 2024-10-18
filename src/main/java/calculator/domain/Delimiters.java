@@ -3,11 +3,11 @@ package calculator.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Delimeters {
+public class Delimiters {
 
     private final List<String> elements;
 
-    public Delimeters() {
+    public Delimiters() {
         this.elements = new ArrayList<>();
         elements.add(",");
         elements.add(":");
