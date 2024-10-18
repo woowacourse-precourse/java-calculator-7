@@ -36,9 +36,17 @@ public class InputSequence {
 
     private long castingElementToLong (String input) {
         try {
-            return Long.parseLong(input);
+            long number = Long.parseLong(input);
+            validatePositive(number);
+            return number;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("더 하는 값 중 너무 큰 수가 존재합니다.");
+        }
+    }
+
+    private void validatePositive(long number) {
+        if (number <= 0) {
+            throw new IllegalArgumentException("더 하는 값은 양수만 가능합니다.");
         }
     }
 }
