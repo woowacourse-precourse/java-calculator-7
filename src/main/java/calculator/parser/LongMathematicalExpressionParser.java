@@ -4,10 +4,8 @@ import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class LongMathematicalExpressionParser implements MathematicalExpressionParser {
-
-
-	public static final String BASIC_VALID_MATHEMATICAL_EXPRESSION_PATTERN = "(\\d+\\D)*\\d+$";
-	private static final Pattern VALID_PATTERN = Pattern.compile(BASIC_VALID_MATHEMATICAL_EXPRESSION_PATTERN);
+	public static final String VALID_MATHEMATICAL_EXPRESSION_PATTERN = "(\\d+\\D)*\\d+$";
+	private static final Pattern VALID_PATTERN = Pattern.compile(VALID_MATHEMATICAL_EXPRESSION_PATTERN);
 
 	private long stringNumberToNumber(String stringNumber) {
 		try {
@@ -22,16 +20,16 @@ public class LongMathematicalExpressionParser implements MathematicalExpressionP
 
 	}
 
-	private void isValid(String expression){
-		if(!VALID_PATTERN.matcher(expression).matches()){
+	private void isValid(String expression) {
+		if (!VALID_PATTERN.matcher(expression).matches()) {
 			throw new IllegalArgumentException(ParserError.INVALID_MATHEMATICAL_EXPRESSION.getMessage());
 		}
 	}
 
 	@Override
-	public long[] parse(String expression, String separatorPattern) {
+	public long[] parse(String expression, String separatorRegex) {
 		isValid(expression);
-		String[] stringNumbers = expression.split(separatorPattern);
+		String[] stringNumbers = expression.split(separatorRegex);
 
 		return Arrays.stream(stringNumbers)
 			.mapToLong(this::stringNumberToNumber)

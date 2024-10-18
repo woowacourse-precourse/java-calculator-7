@@ -39,18 +39,18 @@ public class LongCalculator implements Calculator {
 	}
 
 	private long calculate(String expression, Set<Character> separators) {
-		String[] expressions = splitBySeparatorExpressionAndMathematicalExpression(expression);
+		String[] expressions = splitExpression(expression);
 
 		separatorParser.parse(expressions[0], separators);
-		String separatorPattern = separatorParser.generateRegex(separators);
+		String separatorRegex = separatorParser.generateRegex(separators);
 
-		long[] numbers = mathematicalExpressionParser.parse(expressions[1], separatorPattern);
+		long[] numbers = mathematicalExpressionParser.parse(expressions[1], separatorRegex);
 		long result = longCalculatorOperation.operate(numbers);
 
 		return result;
 	}
 
-	private String[] splitBySeparatorExpressionAndMathematicalExpression(String expression) {
+	private String[] splitExpression(String expression) {
 		Matcher matcher = VALID_PATTERN.matcher(expression);
 		if (matcher.find()) {
 			String separatorExpression = matcher.group(1);
