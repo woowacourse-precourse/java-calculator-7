@@ -42,6 +42,12 @@ public class Application {
         stringCal cal = new stringCal();
         String sum = "0";
         for (String i : numbers) {
+            for(int j = 0; j < i.length(); j++){
+                if(!Character.isDigit(i.charAt(j))){
+                    IllegalArgumentException e = new IllegalArgumentException();
+                    throw e;
+                }
+            }
             sum = cal.numCal(sum, i);
         }
 
