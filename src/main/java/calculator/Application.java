@@ -31,7 +31,7 @@ public class Application {
 
     public static int[] extractNumbers(String input, List<String> separators) {
         String separatorsRegex = String.join("|", separators);
-        int[] numbers = Arrays.stream(input.split(separatorsRegex)).mapToInt(Integer::parseInt).toArray();
+        int[] numbers = Arrays.stream(input.split(separatorsRegex)).map(String::trim).mapToInt(Integer::parseInt).toArray();
 
         for (int number : numbers) {
             if (number < 0) {
@@ -49,14 +49,10 @@ public class Application {
         Matcher matcher = Pattern.compile("//(.*?)\\\\n(.*)").matcher(input);
 
         if (matcher.find()) {
-            String customSeparator = matcher.group(1);  // 커스텀 구분자
+            String customSeparator = Pattern.quote(matcher.group(1));  // 커스텀 구분자
             String extractNumber = matcher.group(2);  // 나머지 문자열
 
-            if (Objects.equals(customSeparator, ".")) {
-                separators.add("\\.");
-            } else {
-                separators.add(customSeparator);
-            }
+            separators.addFirst(customSeparator);
 
             return extractNumber;
         } else {
