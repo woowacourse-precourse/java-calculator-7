@@ -21,8 +21,11 @@ public class Application {
             }
         }
 
+        int sum = 0;
         for (int i : numbers) {
-            System.out.println(i);
+            sum += i;
         }
+
+        System.out.println(sum);
     }
 }
