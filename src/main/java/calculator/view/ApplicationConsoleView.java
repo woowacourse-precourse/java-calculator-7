@@ -1,5 +1,6 @@
 package calculator.view;
 
+import calculator.common.ConsoleMessage;
 import calculator.view.input.InputView;
 import calculator.view.output.OutputView;
 
@@ -21,7 +22,7 @@ public class ApplicationConsoleView implements ApplicationView{
 
     @Override
     public void printResult(int result) {
-
+        outputView.printMessage(ConsoleMessage.RESULT_PREFIX + result);
     }
 
     @Override

@@ -9,6 +9,11 @@ public class OutputConsoleView implements OutputView {
         println(ConsoleMessage.REQUEST_INPUT_VALUE);
     }
 
+    @Override
+    public void printMessage(String message) {
+        println(message);
+    }
+
     private void println(String message) {
         System.out.println(message);
     }
