@@ -1,6 +1,7 @@
 package calculator.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public record Input(
@@ -37,21 +38,34 @@ public record Input(
         return result;
     }
 
-    public static Input makeInputWithSeparator(Input input) {
-        return new Input(input.origin.substring(5), "[,:" + input.origin.charAt(2) + "]",
-                input.numbers());
+    public Input makeInputWithSeparator() {
+        return new Input(origin.substring(5), "[,:" + origin.charAt(2) + "]", numbers);
     }
 
-    public static Input makeInputWithoutSeparator(Input input) {
-        return new Input(input.origin.substring(4), input.separator(),
-                input.numbers());
+    public Input makeInputWithoutSeparator() {
+        return new Input(origin.substring(4), separator, numbers);
     }
 
-    public static Input makeInputWithoutOrigin(Input input) {
-        return new Input(input.origin(), input.separator(), List.of("0"));
+    public Input makeInputWithoutOrigin() {
+        return new Input(origin, separator, List.of("0"));
     }
 
-    public static Input makeInputWithOrigin(Input input, List<String> numbers) {
-        return new Input(input.origin(), input.separator(), numbers);
+    public Input makeInputWithOrigin() {
+        List<String> numbers = Arrays
+                .stream(origin.split(separator))
+                .toList();
+        return new Input(origin, separator, numbers);
+    }
+
+    public boolean isAgainstCustomLengthRule() {
+        return origin.length() < 4;
+    }
+
+    public boolean hasCustomSeparator() {
+        return origin.indexOf("//") == 0 && origin.indexOf("\\n") == 3;
+    }
+
+    public boolean notHasCustomSeparator() {
+        return origin.indexOf("//") == 0 && origin.indexOf("\\n") == 2;
     }
 }
