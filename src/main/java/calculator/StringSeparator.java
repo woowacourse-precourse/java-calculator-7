@@ -4,7 +4,11 @@ public class StringSeparator { //TODO: 구분자를 인식하고, 구분자로 �
     public static String[] separator(String input) { //StringSeparator 의 메인 로직
         String separator = "[,:]";
         String refinedString = getRefinedInput(input);
-        return refinedString.split(separator);
+        String[] refinedStringList = refinedString.split(separator);
+        if (!InputHandler.isValidInput(refinedStringList)) {
+            throw new IllegalArgumentException();
+        }
+        return refinedStringList;
     }
 
     private static String getRefinedInput(String input) { //인풋값을 받아, 커스텀 구분자를 정의하고 ","로 바꾼 후 문자열 반환
