@@ -44,6 +44,13 @@ public class NumbersTest {
 		assertThrows(IllegalArgumentException.class, () -> Numbers.parseNumbers(invalidData));
 	}
 
+	@DisplayName("숫자는 문자열 배열을 변환할 때 빈 문자열일 경우 건너뛴다")
+	@ParameterizedTest
+	@MethodSource("emptyStringNumber")
+	void validateParseNumbersEmpty(List<String> validData) {
+		assertDoesNotThrow(() -> Numbers.parseNumbers(validData));
+	}
+
 	static Stream<Arguments> numbersAndCorrectResult() {
 		return Stream.of(
 			Arguments.of(Arrays.asList(1L, 2L, 3L), 6L),
@@ -70,6 +77,15 @@ public class NumbersTest {
 	static Stream<Arguments> stringNumberOverRange() {
 		return Stream.of(
 			Arguments.of(Arrays.asList("9223372036854775808"))
+		);
+	}
+
+	static Stream<Arguments> emptyStringNumber() {
+		return Stream.of(
+			Arguments.of(Arrays.asList("")),
+			Arguments.of(Arrays.asList(" ")),
+			Arguments.of(Arrays.asList("\n")),
+			Arguments.of(Arrays.asList("\t"))
 		);
 	}
 }
