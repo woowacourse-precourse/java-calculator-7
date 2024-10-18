@@ -15,7 +15,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
 class ExpressionParserTest {
-
     @ParameterizedTest
     @DisplayName("유효하지 않은 계산식이면 IllegalArgumentException을 던지는지 확인")
     @MethodSource("generateIllegalExpressionData")

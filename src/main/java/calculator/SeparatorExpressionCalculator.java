@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.arithmeticUnit.PlusOperation;
 import calculator.expression.Expression;
 import calculator.expression.ExpressionExecutor;
 import calculator.io.Display;
@@ -7,7 +8,7 @@ import calculator.io.InputReceiver;
 import calculator.lexicalParser.CustomSeparatorParser;
 import calculator.lexicalParser.ExpressionParser;
 import calculator.lexicalParser.ExpressionValidator;
-import calculator.operator.OperatorEnum;
+import calculator.operator.Operand;
 import calculator.operator.OperatorMap;
 import calculator.operator.Separator;
 import calculator.operator.Separators;
@@ -26,16 +27,16 @@ public class SeparatorExpressionCalculator {
         this.separators = new Separators(Set.of(COMMA_SEPARATOR, COLON_SEPARATOR));
         this.display = display;
         this.inputReceiver = inputReceiver;
-        this.operatorMap.registerSeparatorToOperator(COMMA_SEPARATOR, OperatorEnum.PLUS);
-        this.operatorMap.registerSeparatorToOperator(COLON_SEPARATOR, OperatorEnum.PLUS);
+        this.operatorMap.registerSeparatorToOperator(COMMA_SEPARATOR, PlusOperation.getInstance());
+        this.operatorMap.registerSeparatorToOperator(COLON_SEPARATOR, PlusOperation.getInstance());
     }
 
     public void operate() {
         String input = inputReceiver.readInput();
         Expression expression = parseToExpression(input);
         ExpressionExecutor expressionExecutor = new ExpressionExecutor(operatorMap);
-        int result = expressionExecutor.calculate(expression);
-        display.showResult(result);
+        Operand result = expressionExecutor.calculate(expression);
+        display.showResult(result.getValue());
     }
 
     private Expression parseToExpression(String input) {
@@ -52,7 +53,7 @@ public class SeparatorExpressionCalculator {
         if (hasCustomSeparator) {
             Separator customSeparator = manager.getCustomSeparator();
             separators = separators.add(customSeparator);
-            operatorMap.registerSeparatorToOperator(customSeparator, OperatorEnum.PLUS);
+            operatorMap.registerSeparatorToOperator(customSeparator, PlusOperation.getInstance());
         }
     }
 }

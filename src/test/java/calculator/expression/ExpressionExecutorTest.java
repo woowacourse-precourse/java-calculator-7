@@ -1,13 +1,15 @@
 package calculator.expression;
 
-import calculator.operator.OperatorEnum;
+import calculator.arithmeticUnit.PlusOperation;
+import calculator.operator.Operand;
 import calculator.operator.OperatorMap;
 import calculator.operator.Separator;
+import calculator.utils.CustomDeque;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayDeque;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,19 +20,19 @@ class ExpressionExecutorTest {
     private final OperatorMap operatorMap = OperatorMap.getInstance();
 
     ExpressionExecutorTest() {
-        operatorMap.registerSeparatorToOperator(COLON, OperatorEnum.PLUS);
-        operatorMap.registerSeparatorToOperator(COMMA, OperatorEnum.PLUS);
-        operatorMap.registerSeparatorToOperator(CUSTOM, OperatorEnum.PLUS);
+        operatorMap.registerSeparatorToOperator(COLON, PlusOperation.getInstance());
+        operatorMap.registerSeparatorToOperator(COMMA, PlusOperation.getInstance());
+        operatorMap.registerSeparatorToOperator(CUSTOM, PlusOperation.getInstance());
     }
 
     @Test
     @DisplayName("일반적인 Expression을 올바르게 계산하는지 확인")
     void testCalculateGeneralExpression() {
-        Expression expression = generateExpressionFrom(List.of(COLON,COMMA,CUSTOM), List.of(1,1,1,1));
+        Expression expression = generateExpressionFrom(List.of(COLON, COMMA, CUSTOM), List.of(1, 1, 1, 1));
         ExpressionExecutor executor = new ExpressionExecutor(operatorMap);
-        int expectedResult = 4;
+        Operand expectedResult = Operand.of(4);
 
-        int actual = executor.calculate(expression);
+        Operand actual = executor.calculate(expression);
 
         assertThat(actual).isEqualTo(expectedResult);
     }
@@ -40,9 +42,9 @@ class ExpressionExecutorTest {
     void testCalculateEmptyExpression() {
         Expression expression = generateExpressionFrom(List.of(), List.of());
         ExpressionExecutor executor = new ExpressionExecutor(operatorMap);
-        int expectedResult = 0;
+        Operand expectedResult = Operand.of(0);
 
-        int actual = executor.calculate(expression);
+        Operand actual = executor.calculate(expression);
 
         assertThat(actual).isEqualTo(expectedResult);
     }
@@ -50,16 +52,22 @@ class ExpressionExecutorTest {
     @Test
     @DisplayName("양수 하나만 있는 Expression을 양수 그대로 계산하는지 확인")
     void testCalculateOnlyOneOperandExpression() {
-        int onlyOperand = 4;
-        Expression expression = generateExpressionFrom(List.of(), List.of(onlyOperand));
+        int onlyOperandValue = 4;
+        Operand expected = Operand.of(onlyOperandValue);
+        Expression expression = generateExpressionFrom(List.of(), List.of(onlyOperandValue));
         ExpressionExecutor executor = new ExpressionExecutor(operatorMap);
 
-        int actual = executor.calculate(expression);
+        Operand actual = executor.calculate(expression);
 
-        assertThat(actual).isEqualTo(onlyOperand);
+        assertThat(actual).isEqualTo(expected);
     }
 
     private static Expression generateExpressionFrom(List<Separator> separators, List<Integer> operands) {
-        return new Expression(new ArrayDeque<>(separators), new ArrayDeque<>(operands));
+        CustomDeque<Separator> separatorDeque = separators.stream()
+                .collect(Collectors.toCollection(CustomDeque::new));
+        CustomDeque<Operand> operandDeque = operands.stream()
+                .map(Operand::of)
+                .collect(Collectors.toCollection(CustomDeque::new));
+        return new Expression(separatorDeque, operandDeque);
     }
 }

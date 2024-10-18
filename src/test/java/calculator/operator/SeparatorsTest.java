@@ -9,7 +9,6 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class SeparatorsTest {
-
     @Test
     @DisplayName("구분자중 하나의 값을 인식하는 정규식을 반환하는지 확인")
     void toRegexAllowOneOfSeparator() {

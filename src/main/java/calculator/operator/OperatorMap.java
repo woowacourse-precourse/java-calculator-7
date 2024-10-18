@@ -1,10 +1,12 @@
 package calculator.operator;
 
+import calculator.arithmeticUnit.ArithmeticOperation;
+
 import java.util.HashMap;
 
 public class OperatorMap {
     private static final OperatorMap INSTANCE = new OperatorMap();
-    private final HashMap<Separator, OperatorEnum> operatorMapBySeparator = new HashMap<>();
+    private final HashMap<Separator, ArithmeticOperation> operatorMapBySeparator = new HashMap<>();
 
     private OperatorMap() {
     }
@@ -13,11 +15,11 @@ public class OperatorMap {
         return INSTANCE;
     }
 
-    public void registerSeparatorToOperator(Separator separator, OperatorEnum operator) {
-        operatorMapBySeparator.put(separator, operator);
+    public void registerSeparatorToOperator(Separator separator, ArithmeticOperation operation) {
+        operatorMapBySeparator.put(separator, operation);
     }
 
-    public OperatorEnum getOperatorBySeparator(Separator separator) {
+    public ArithmeticOperation getOperatorBySeparator(Separator separator) {
         return operatorMapBySeparator.get(separator);
     }
 }

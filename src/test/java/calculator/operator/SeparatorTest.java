@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class SeparatorTest {
-
     @Test
     @DisplayName("생성된 Separator가 생성자를 통해 넘겨준 String을 반환하는지 확인")
     void testGetSeparatorString() {

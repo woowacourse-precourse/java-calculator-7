@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 class ExpressionValidatorTest {
-
     @ParameterizedTest
     @DisplayName("양수와 Separator로만 이루어진 유효한 계산식 검증 확인")
     @MethodSource("generateExpressionData")

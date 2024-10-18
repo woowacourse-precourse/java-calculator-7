@@ -11,7 +11,6 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CustomSeparatorParserTest {
-
     @ParameterizedTest
     @DisplayName("//로 시작하고 \\n으로 끝나는 문자열 안에 커스텀 구분자가 있는지 확인한다")
     @MethodSource("generateCustomSeparatorStringData")

@@ -1,13 +1,18 @@
 package calculator.expression;
 
+import calculator.operator.Operand;
 import calculator.operator.Separator;
+import calculator.utils.CustomDeque;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -18,30 +23,31 @@ class ExpressionTest {
     @ParameterizedTest
     @DisplayName("피연산자 갯수가 sperator 갯수보다 1 크지 않을 때 IllegalArgumentException발생 확인")
     @MethodSource("generateIllegalExpressionData")
-    void testThrowIllegalArgumentException(Deque<Separator> separatorDeque, Deque<Integer> operandDeque) {
+    void testThrowIllegalArgumentException(CustomDeque<Separator> separatorDeque, CustomDeque<Operand> operandDeque) {
         assertThatThrownBy(() -> new Expression(separatorDeque, operandDeque)).isInstanceOf(IllegalArgumentException.class);
     }
 
     private static Stream<Arguments> generateIllegalExpressionData() {
         return Stream.of(
-                Arguments.of(new ArrayDeque<>(List.of(new Separator(";"))), new ArrayDeque<>(List.of(1))),
-                Arguments.of(new ArrayDeque<>(List.of(new Separator(";"))), new ArrayDeque<>(List.of(1,2,3))),
-                Arguments.of(new ArrayDeque<>(List.of(new Separator(";"),new Separator(";"))), new ArrayDeque<>(List.of(1)))
-                );
+                Arguments.of(new CustomDeque<>(List.of(new Separator(";"))), new CustomDeque<>(List.of(Operand.of(1)))),
+                Arguments.of(new CustomDeque<>(List.of(new Separator(";"))), new CustomDeque<>(List.of(Operand.of(1), Operand.of(2), Operand.of(3)))),
+                Arguments.of(new CustomDeque<>(List.of(new Separator(";"), new Separator(";"))), new CustomDeque<>(List.of(Operand.of(1))))
+        );
     }
-
 
     @Test
     @DisplayName("처음 두개의 피연산자를 반환하는지 확인")
     void testPeekFirstTwoOperands() {
-        Expression expression = generateExpression(List.of(";"), List.of(1, 2));
+        int firstOperandValue = 1;
+        int secondOperandValue = 2;
+        Expression expression = generateExpression(List.of(";"), List.of(firstOperandValue, secondOperandValue));
 
-        List<Integer> twoOperands = expression.peekFirstTwoOperands();
-        int firstOperand = twoOperands.get(0);
-        int secondOperand = twoOperands.get(1);
+        List<Operand> twoOperands = expression.peekFirstTwoOperands();
+        Operand firstOperand = twoOperands.get(0);
+        Operand secondOperand = twoOperands.get(1);
 
-        assertThat(firstOperand).isEqualTo(1);
-        assertThat(secondOperand).isEqualTo(2);
+        assertThat(firstOperand).isEqualTo(Operand.of(firstOperandValue));
+        assertThat(secondOperand).isEqualTo(Operand.of(secondOperandValue));
     }
 
     @Test
@@ -76,9 +82,9 @@ class ExpressionTest {
         int firstValue = 1;
         int secondValue = 2;
         int thirdValue = 3;
-        int firstOperationResult = 7;
+        Operand firstOperationResult = Operand.of(7);
         Expression expression = generateExpression(List.of(firstSeparator, secondSeparator), List.of(firstValue, secondValue, thirdValue));
-        Expression expected = generateExpression(List.of(secondSeparator), List.of(firstOperationResult, thirdValue));
+        Expression expected = generateExpression(List.of(secondSeparator), List.of(firstOperationResult.getValue(), thirdValue));
 
         Expression afterOperation = expression.updateFirstOperationResult(firstOperationResult);
 
@@ -104,10 +110,12 @@ class ExpressionTest {
     }
 
     private static Expression generateExpression(List<String> separatorString, List<Integer> operands) {
-        Deque<Separator> separatorDeque = separatorString.stream()
+        CustomDeque<Separator> separatorDeque = separatorString.stream()
                 .map(Separator::new)
-                .collect(Collectors.toCollection(ArrayDeque::new));
-        Deque<Integer> operandDeque = new ArrayDeque<>(operands);
+                .collect(Collectors.toCollection(CustomDeque::new));
+        CustomDeque<Operand> operandDeque = operands.stream()
+                .map(value -> Operand.of(value))
+                .collect(Collectors.toCollection(CustomDeque::new));
         return new Expression(separatorDeque, operandDeque);
     }
 }

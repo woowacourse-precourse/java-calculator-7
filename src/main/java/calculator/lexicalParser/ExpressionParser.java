@@ -1,10 +1,12 @@
 package calculator.lexicalParser;
 
+import calculator.utils.CustomDeque;
 import calculator.expression.Expression;
+import calculator.operator.Operand;
 import calculator.operator.Separator;
 import calculator.operator.Separators;
 
-import java.util.*;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -24,25 +26,26 @@ public class ExpressionParser {
         if (!validator.isValidateExpression(expression)) {
             throw new IllegalArgumentException("Invalid expression: " + expression);
         }
-        Deque<Integer> operandQueue = parseOperand(expression);
-        Deque<Separator> separatorQueue = parseSeparator(expression);
+        CustomDeque<Operand> operandQueue = parseOperand(expression);
+        CustomDeque<Separator> separatorQueue = parseSeparator(expression);
         return new Expression(separatorQueue, operandQueue);
     }
 
-    private Deque<Integer> parseOperand(String expression) {
+    private CustomDeque<Operand> parseOperand(String expression) {
         if(expression.isEmpty()) {
-            return new ArrayDeque<>();
+            return new CustomDeque<>();
         }
         return Arrays.stream(expression.split(separators.toRegexAllowOneOfSeparator()))
                 .map(Integer::parseInt)
-                .collect(Collectors.toCollection(LinkedList::new));
+                .map(Operand::of)
+                .collect(Collectors.toCollection(CustomDeque::new));
     }
 
-    private Deque<Separator> parseSeparator(String expression) {
+    private CustomDeque<Separator> parseSeparator(String expression) {
         if(expression.isEmpty()) {
-            return new ArrayDeque<>();
+            return new CustomDeque<>();
         }
-        Deque<Separator> separatorDeque = new LinkedList<>();
+        CustomDeque<Separator> separatorDeque = new CustomDeque<>();
         Matcher matcher = pattern.matcher(expression);
         while (matcher.find()) {
             separatorDeque.add(new Separator(matcher.group()));

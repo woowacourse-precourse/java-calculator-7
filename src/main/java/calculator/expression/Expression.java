@@ -1,50 +1,57 @@
 package calculator.expression;
 
+import calculator.operator.Operand;
 import calculator.operator.Separator;
+import calculator.utils.CustomDeque;
 
-import java.util.*;
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Arrays;
+import java.util.Objects;
 
 public class Expression {
-    private final Deque<Separator> separatorDeque;
-    private final Deque<Integer> operandDeque;
+    private final CustomDeque<Separator> separatorDeque;
+    private final CustomDeque<Operand> operandDeque;
 
-    public Expression(Deque<Separator> separatorDeque, Deque<Integer> operandDeque) {
+    public Expression(CustomDeque<Separator> separatorDeque, CustomDeque<Operand> operandDeque) {
         validate(separatorDeque, operandDeque);
         this.separatorDeque = separatorDeque;
         this.operandDeque = operandDeque;
     }
 
-    private void validate(Deque<Separator> separatorDeque, Deque<Integer> operandDeque) {
+    private void validate(Deque<Separator> separatorDeque, Deque<Operand> operandDeque) {
         if (isIllegalExpression(separatorDeque, operandDeque)) {
             throw new IllegalArgumentException("Invalid expression: separator operand count does not match");
         }
     }
 
-    private boolean isIllegalExpression(Deque<Separator> separatorDeque, Deque<Integer> operandDeque) {
+    private boolean isIllegalExpression(Deque<Separator> separatorDeque, Deque<Operand> operandDeque) {
         return !(isSeparatorOneLessThanOperand(separatorDeque, operandDeque) || isAllEmpty(separatorDeque, operandDeque));
     }
 
-    private boolean isSeparatorOneLessThanOperand(Deque<Separator> separatorDeque, Deque<Integer> operandDeque) {
+    private boolean isSeparatorOneLessThanOperand(Deque<Separator> separatorDeque, Deque<Operand> operandDeque) {
         int separatorCount = separatorDeque.size();
         int operandCount = operandDeque.size();
         return separatorCount + 1 == operandCount;
     }
 
-    private boolean isAllEmpty(Deque<Separator> separatorDeque, Deque<Integer> operandDeque) {
+    private boolean isAllEmpty(Deque<Separator> separatorDeque, Deque<Operand> operandDeque) {
         return separatorDeque.isEmpty() && operandDeque.isEmpty();
     }
 
-    public List<Integer> peekFirstTwoOperands() {
+    public List<Operand> peekFirstTwoOperands() {
         if (operandDeque.size() < 2) {
             throw new NoSuchElementException("has less than 2 operands");
         }
-        int firstOperand = operandDeque.poll();
-        int secondOperand = operandDeque.peek();
-        operandDeque.addFirst(firstOperand);
+        Iterator<Operand> iterator = operandDeque.iterator();
+        Operand firstOperand = iterator.next();
+        Operand secondOperand = iterator.next();
         return List.of(firstOperand, secondOperand);
     }
 
-    public int peekFirstOperand() {
+    public Operand peekFirstOperand() {
         if (operandDeque.isEmpty()) {
             throw new NoSuchElementException("Empty operand");
         }
@@ -58,10 +65,10 @@ public class Expression {
         return separatorDeque.peek();
     }
 
-    public Expression updateFirstOperationResult(int firstOperationResult) {
+    public Expression updateFirstOperationResult(Operand firstOperationResult) {
         consumeOperandsAndOperator();
         operandDeque.addFirst(firstOperationResult);
-        return new Expression(new LinkedList<>(separatorDeque), new LinkedList<>(operandDeque));
+        return new Expression(new CustomDeque<>(separatorDeque), new CustomDeque<>(operandDeque));
     }
 
     private void consumeOperandsAndOperator() {
@@ -83,8 +90,7 @@ public class Expression {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Expression that = (Expression) o;
-        return Arrays.equals(separatorDeque.toArray(), that.separatorDeque.toArray()) &&
-               Arrays.equals(operandDeque.toArray(), that.operandDeque.toArray());
+        return separatorDeque.equals(that.separatorDeque) && operandDeque.equals(that.operandDeque);
     }
 
     @Override

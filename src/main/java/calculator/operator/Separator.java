@@ -1,6 +1,8 @@
 package calculator.operator;
 
-public class Separator {
+import calculator.utils.ValueObject;
+
+public class Separator extends ValueObject {
     private final String separatorString;
 
     public Separator(String seperatorString) {
