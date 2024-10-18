@@ -78,21 +78,23 @@
 ## 구현 ✅&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 미구현 ❎
 
 ### _**Calculator Class**_
-#### ❎ void run()
+#### ✅ void run()
 계산기 실행 기능
-#### ❎ String checkCustomToken(String input)
+#### ✅ String checkCustomToken(String input)
 커스텀 구분자 확인 및 구분자 반환 기능
-#### ❎ int sumArray(int[] intArray)
+#### ✅ int sumArray(int[] intArray)
 정수 배열 합산 기능
-#### ❎ void printSum(int result)
+#### ✅ void printSum(int result)
 합산된 정수 출력 기능
+#### ✅ void printStart()
+계산기 실행 메세지 출력 기능
 ***
 
 ### _**ParsingInput Class**_
-#### ❎ int[] executeParsingInput(String input, String token)
+#### ✅ int[] executeParsingInput(String input, String token)
 ParsingInput 실행 기능
-#### ❎ String[] splitAsToken(String input, String token)
+#### ✅ String[] splitAsToken(String input, String token)
 구분자에 따라서 입력된 문자열 분리 기능
-#### ❎ int[] parseIntArray(String[] inputArray)
+#### ✅ int[] parseIntArray(String[] inputArray)
 분리된 문자열을 정수형 배열로 변환 및 입력 값 검증 기능
 ***
