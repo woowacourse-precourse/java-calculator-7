@@ -17,6 +17,6 @@ public class InputHandler {
         if (input == null || input.isBlank()) {
             return ZERO;
         }
-        return input.trim();
+        return input.trim().replace("\\n", "\n");
     }
 }
