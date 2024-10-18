@@ -13,5 +13,11 @@ public class Application {
         }
 
         String[] numbers = new StringHandler().split(input, ",|:");
+        Calculator calculator = new Calculator();
+        int result = 0;
+        for (String number : numbers) {
+            int num = Integer.parseInt(number);
+            result = calculator.add(result, num);
+        }
     }
 }
