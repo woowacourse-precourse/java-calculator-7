@@ -4,7 +4,7 @@ import calculator.common.exception.ExceptionFactory;
 
 import static calculator.common.exception.ExceptionType.*;
 
-public class NormalCustomDelimiterValidator implements CustomDelimiterValidator {
+public class DefaultCustomDelimiterValidator implements CustomDelimiterValidator {
 
     private final String ESCAPE = "\\";
     private final String NUMBER_REGEX = ".*\\d.*";
