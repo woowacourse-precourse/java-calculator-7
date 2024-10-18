@@ -52,7 +52,7 @@ public class Calculator {
 
 		// 커스텀 구분자로 숫자가 들어왔을 때
 		char newSeparator = str.charAt(2);
-		if ('0' <= newSeparator && newSeparator <= '9') {
+		if (Character.isDigit(newSeparator)) {
 			throw new IllegalArgumentException();
 		}
 
