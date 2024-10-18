@@ -3,6 +3,7 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 import calculator.inputData.InputData;
 import calculator.listParsing.ListChecking;
+import calculator.listParsing.ListParsing;
 
 import java.util.List;
 
@@ -16,5 +17,7 @@ public class Application {
         String numbers = delimiter.numbers;
         System.out.println("delimiter: " + delimiterInput);
         System.out.println("numbers: " + numbers);
+        List<Integer> numList = ListParsing.parseList(numbers, delimiterInput);
+        System.out.println("numberList: " + numList);
     }
 }
