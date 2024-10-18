@@ -22,14 +22,10 @@ public class Application {
         }
 
         checkIsPositiveNumber(calculator);
+        checkHasNumberFormat(calculator);
 
         int total = 0;
 
-        for (String number : processedInput) {
-            if (Character.isDigit(Integer.parseInt(number))) {
-                throw new IllegalArgumentException();
-            }
-        }
 
         for (String number : processedInput) {
             total += Integer.parseInt(number);
@@ -70,6 +66,14 @@ public class Application {
     static void checkIsPositiveNumber(Calculator calculator) {
         for (String number : calculator.processedInput) {
             if (Integer.parseInt(number) < 0) {
+                throw new IllegalArgumentException();
+            }
+        }
+    }
+
+    static void checkHasNumberFormat(Calculator calculator) {
+        for (String number : calculator.processedInput) {
+            if (Character.isDigit(Integer.parseInt(number))) {
                 throw new IllegalArgumentException();
             }
         }
