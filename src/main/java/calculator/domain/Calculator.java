@@ -37,7 +37,7 @@ public class Calculator {
     }
 
     private void replaceCustomDelimiter() {
-        if (expression.contains("//")) {
+        if (expression.startsWith("//")) {
             int startIdx = expression.indexOf("//");
             int endIdx = expression.indexOf("\\n");
 
