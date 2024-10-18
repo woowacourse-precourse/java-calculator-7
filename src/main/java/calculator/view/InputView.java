@@ -14,8 +14,6 @@ public class InputView {
     public List<Integer> getAdditionNumbers() {
         String input = Console.readLine();
 
-        input = input.replace("\\n", "\n");
-
         if (input.isBlank()) {
             return Collections.emptyList();
         }
@@ -29,7 +27,9 @@ public class InputView {
     private List<Integer> splitAndParseNumbers(String separators, String numbers) {
         String[] inputTokens = numbers.split(separators);
 
-        return Arrays.stream(inputTokens).map(this::parseNumber).toList();
+        return Arrays.stream(inputTokens)
+                .map(this::parseNumber)
+                .toList();
     }
 
     private int parseNumber(String token) {
@@ -64,7 +64,7 @@ public class InputView {
     private String getNumbers(String input) {
         if (hasCustomSeparator(input)) {
             int separatorEndIndex = getSeparatorEndIndex(input);
-            return input.substring(separatorEndIndex + 1);
+            return input.substring(separatorEndIndex + 2);
         }
 
         return input;
@@ -81,7 +81,7 @@ public class InputView {
     }
 
     private int getSeparatorEndIndex(String input) {
-        return input.indexOf("\n");
+        return input.indexOf("\\n");
     }
 
     private String getCustomSeparator(String input, int separatorEndIndex) {
