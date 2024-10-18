@@ -9,7 +9,6 @@ public class StringCalculator {
 
     String separators = ",:";
     boolean hasCustomSeparator;
-    int sumValue;
 
     void run() {
         printInputMsg();
@@ -26,7 +25,7 @@ public class StringCalculator {
         validateString(str, separators);
 
         String[] separatedNumbers = str.split('[' + separators + ']');
-        calculateSumValue(separatedNumbers);
+        int sumValue = calculateSumValue(separatedNumbers);
         System.out.println("결과 : " + sumValue);
     }
 
@@ -34,13 +33,14 @@ public class StringCalculator {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
     }
 
-    void calculateSumValue(String[] separatedNumbers) {
-        sumValue = 0;
+    int calculateSumValue(String[] separatedNumbers) {
+        int sumValue = 0;
         for (String number : separatedNumbers) {
             if (!number.isEmpty()) {
                 sumValue += Integer.parseInt(number);
             }
         }
+        return sumValue;
     }
 
     boolean hasCustomPart(String input) {
