@@ -14,6 +14,11 @@ public class Application {
         String user_input = sc.nextLine();
 
         sc.close();
+        if (user_input.startsWith("//")) {
+            int endIndex = user_input.indexOf("\\n");
+            REGEX = user_input.substring("//".length(), endIndex);
+            user_input = user_input.substring(endIndex + "\\n".length());
+        }
 
         float result = 0;
         String[] a_arr = user_input.split(REGEX);
