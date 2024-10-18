@@ -8,4 +8,13 @@ public class StringValidator {
             }
         }
     }
+    public void validateString(String[] input){
+        for (String str : input) {
+            try {
+                Integer.parseInt(str);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException();
+            }
+        }
+    }
 }

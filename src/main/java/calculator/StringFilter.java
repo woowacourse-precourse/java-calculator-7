@@ -10,11 +10,13 @@ public class StringFilter {
     public String[] delimiterSplit(String input) {
         if (input.contains("//") && input.contains("\\n")) {
             String[] splitCustomDelimiter = splitCustomDelimiter(input);
+            validator.validateString(splitCustomDelimiter);
             validator.validateNegativeNumber(splitCustomDelimiter);
             return splitCustomDelimiter;
         }
 
         String[] splitDefaultDelimiter = input.split(DEFAULT_DELIMITER);
+        validator.validateString(splitDefaultDelimiter);
         validator.validateNegativeNumber(splitDefaultDelimiter);
         return splitDefaultDelimiter;
     }
