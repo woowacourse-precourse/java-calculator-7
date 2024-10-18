@@ -1,7 +1,10 @@
 package calculator;
 
-public class StringAddCalculator {
-    public static int calculate(String input) {
+import calculator.CalculationManager.Calculator;
+
+public class StringAddCalculator implements Calculator {
+    @Override
+    public int calculate(String input) {
         // 아무것도 입력되지 않은 경우 0 반환
         if (input.isEmpty()) {
             return 0;
@@ -21,7 +24,6 @@ public class StringAddCalculator {
     private static int sumWithCustomSeparator(String input) {
         // "//" 와 "\n" 사이에 있는 커스텀 문자 추출
         char custom_ch = input.charAt(2);
-
         // //(커스텀문자)\n 이후를 input으로 다시 설정
         input = input.substring(5);
 
