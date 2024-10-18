@@ -32,6 +32,9 @@ public class Application {
     private static void validateInput(String input) {
         // 유효성 case 1: "//"로 시작하는 경우
         if (input.startsWith("//")) {
+            if (input.length() < 5) { // 최소 길이 체크
+                throw new IllegalArgumentException();
+            }
             // 3번 인덱스가 '\'인지, 4번 인덱스가 'n' 인지 확인
             if (input.charAt(3) != '\\' || input.charAt(4) != 'n') {
                 throw new IllegalArgumentException();
