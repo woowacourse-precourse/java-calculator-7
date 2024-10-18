@@ -1,5 +1,6 @@
 package calculator.controller;
 
+import calculator.domain.Calculator;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -16,12 +17,17 @@ public class CalculatorController {
     }
 
     public void start() {
-        String consoleInput = inputView.getConsoleInput();
-        List<Integer> numbers = getNumbersList(consoleInput)
-                .stream()
-                .map(Integer::parseInt)
-                .toList();
-        System.out.println("결과 : " + numbers.get(0));
+        try {
+            Calculator calculator = new Calculator();
+            String consoleInput = inputView.getConsoleInput();
+            List<Integer> numbers = getNumbersList(consoleInput)
+                    .stream()
+                    .map(Integer::parseInt)
+                    .toList();
+            outputView.printSum(calculator.sum(numbers));
+        } catch(NumberFormatException e) {
+            throw new IllegalArgumentException("[ERROR] 숫자를 입력해주세요.");
+        }
     }
 
     public List<String> getNumbersList(String consoleInput) {
