@@ -10,16 +10,18 @@ public class Application {
         // 입력을 구분자로 나누기
         try {
             String[] parts = splitInput(input);
+            isNum(parts);
             int sum = sumNumbers(parts);
             System.out.println("합계: " + sum);
         } catch (IllegalArgumentException e) {
+            System.out.println("error");
         }
 
     }
 
     // 입력된 문자열을 구분자로 나누는 메서드
     public static String[] splitInput(String input) {
-        input.replaceAll("",);
+        input.replaceAll(" ", "");
         return input.split("[,:]"); // 콤마와 콜론을 구분자로 사용하여 문자열을 나눔
     }
 
@@ -37,14 +39,22 @@ public class Application {
     public static boolean isNum(String[] parts) {
 
         for (String part : parts) {
-            for (char c : part.toCharArray()) {
-                if (!Character.isDigit(c)) {
-                    throw new IllegalArgumentException(); //
-                }
-            }
+            stringToChar(part);
         }
         return true;
     }
 
+    //
+    public static void stringToChar(String part) {
+        for (char c : part.toCharArray()) {
+            isDigit(c);
+        }
+    }
 
+    //
+    public static void isDigit(char c) {
+        if (!Character.isDigit(c)) {
+            throw new IllegalArgumentException(); //
+        }
+    }
 }
