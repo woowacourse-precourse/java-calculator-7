@@ -1,9 +1,8 @@
-package calculator.arithmeticUnit;
+package calculator.expression;
 
-import calculator.Expression;
-import calculator.OperatorEnum;
-import calculator.OperatorMap;
-import calculator.Separator;
+import calculator.operator.OperatorEnum;
+import calculator.operator.OperatorMap;
+import calculator.operator.Separator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

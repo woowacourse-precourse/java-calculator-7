@@ -1,4 +1,4 @@
-package calculator;
+package calculator.operator;
 
 import calculator.arithmeticUnit.ArithmeticFunction;
 import calculator.arithmeticUnit.PlusFunction;

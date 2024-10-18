@@ -1,16 +1,18 @@
-package calculator;
+package calculator.lexicalParser;
+
+import calculator.operator.Separator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CustomSeparatorManager {
+public class CustomSeparatorParser {
     private static final String CUSTOM_SEPARATOR_REGEX = "^//(\\S+)\\\\n";
     private static final Pattern PATTERN = Pattern.compile(CUSTOM_SEPARATOR_REGEX);
     private static final String BLANK = "";
     private final Matcher matcher;
     private final boolean hasCustomSeparator;
 
-    public CustomSeparatorManager(String targetString) {
+    public CustomSeparatorParser(String targetString) {
         this.matcher = PATTERN.matcher(targetString);
         this.hasCustomSeparator = matcher.find();
     }

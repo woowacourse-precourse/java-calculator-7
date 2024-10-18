@@ -1,8 +1,16 @@
 package calculator;
 
-import calculator.arithmeticUnit.ExpressionExecutor;
+import calculator.expression.Expression;
+import calculator.expression.ExpressionExecutor;
 import calculator.io.Display;
 import calculator.io.InputReceiver;
+import calculator.lexicalParser.CustomSeparatorParser;
+import calculator.lexicalParser.ExpressionParser;
+import calculator.lexicalParser.ExpressionValidator;
+import calculator.operator.OperatorEnum;
+import calculator.operator.OperatorMap;
+import calculator.operator.Separator;
+import calculator.operator.Separators;
 
 import java.util.Set;
 
@@ -31,7 +39,7 @@ public class SeparatorExpressionCalculator {
     }
 
     private Expression parseToExpression(String input) {
-        CustomSeparatorManager manager = new CustomSeparatorManager(input);
+        CustomSeparatorParser manager = new CustomSeparatorParser(input);
         registerCustomSeparators(manager);
         String removeCustomSeparatorDeclaration = manager.removeCustomSeparatorDeclaration();
         ExpressionValidator validator = new ExpressionValidator(separators);
@@ -39,7 +47,7 @@ public class SeparatorExpressionCalculator {
         return parser.parse(removeCustomSeparatorDeclaration);
     }
 
-    private void registerCustomSeparators(CustomSeparatorManager manager) {
+    private void registerCustomSeparators(CustomSeparatorParser manager) {
         boolean hasCustomSeparator = manager.hasCustomSeparator();
         if (hasCustomSeparator) {
             Separator customSeparator = manager.getCustomSeparator();

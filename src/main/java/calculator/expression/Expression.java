@@ -1,4 +1,6 @@
-package calculator;
+package calculator.expression;
+
+import calculator.operator.Separator;
 
 import java.util.*;
 

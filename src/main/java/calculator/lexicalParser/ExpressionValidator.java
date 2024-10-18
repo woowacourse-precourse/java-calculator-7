@@ -1,4 +1,6 @@
-package calculator;
+package calculator.lexicalParser;
+
+import calculator.operator.Separators;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
