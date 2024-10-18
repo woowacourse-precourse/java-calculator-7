@@ -17,5 +17,4 @@ class InputHandlerTest {
         //then
         Assertions.assertThat(length).isEqualTo(expected);
     }
-
 }

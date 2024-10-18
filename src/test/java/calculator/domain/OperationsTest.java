@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class OperationsTest {
     @ParameterizedTest
-    @MethodSource("provideTestData")
+    @MethodSource("provideTest")
     void 추출한_숫자_더하기(List<Number> numbers, String expected) {
         //given
         Operations operations = new Operations();
@@ -22,7 +22,7 @@ class OperationsTest {
         Assertions.assertThat(result).isEqualTo(expected);
     }
 
-    private static Stream<Arguments> provideTestData() {
+    private static Stream<Arguments> provideTest() {
         return Stream.of(Arguments.of(Arrays.asList(new Number("1"), new Number("2"), new Number("3")), "6"),
                 Arguments.of(Arrays.asList(new Number("100"), new Number("200"), new Number("300")), "600"),
                 Arguments.of(Arrays.asList(new Number("0"), new Number("0"), new Number("0")), "0"),
