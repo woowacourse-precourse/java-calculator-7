@@ -63,7 +63,7 @@ public class PatternParserTest {
     @Test
     public void testParseCustomPattern() throws Exception {
         //given
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
 
         //when
         String result = patternParser.parseCustomPattern(input);
@@ -75,14 +75,18 @@ public class PatternParserTest {
     @Test
     public void testCustomSplitPattern() throws Exception {
         //given
-        String input = "//;\n1;2;3";
+        String input1 = "//;\\n1;2;3";
+        String input2 = "1,2:7,4fg:34";
 
         //when
-        String[] result = patternParser.splitPattern(input);
+        String[] result1 = patternParser.splitPattern(input1);
+        String[] result2 = patternParser.splitPattern(input2);
 
         //then
-        String[] valid = {"1", "2", "3"};
-        assertArrayEquals(valid, result);
+        String[] valid1 = {"//", "\\n1", "2", "3"};
+        String[] valid2 = {"1", "2", "7", "4fg", "34"};
+        assertArrayEquals(valid1, result1);
+        assertArrayEquals(valid2, result2);
     }
 
     @Test
