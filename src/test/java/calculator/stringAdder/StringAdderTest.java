@@ -2,6 +2,7 @@ package calculator.stringAdder;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.in;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,6 +20,14 @@ import org.junit.jupiter.params.provider.ValueSource;
  */
 class StringAdderTest extends NsTest {
 
+  @ParameterizedTest
+  @ValueSource(strings = {"1","2","3"})
+  void run_singleNumber_success(String input) {
+    assertSimpleTest(() -> {
+      run(input);
+      assertThat(output()).contains("결과 : "+input);
+    });
+  }
 
   @ParameterizedTest
   @CsvSource({
@@ -54,7 +63,7 @@ class StringAdderTest extends NsTest {
   @ParameterizedTest
   @ValueSource(strings = {"\n"})
   @DisplayName("빈 문자열 입력")
-  void run_emptyInput_throwIllegalArgumentException(String input) {
+  void run_emptyInput_returnResult(String input) {
     assertSimpleTest(() -> {
       run(input);
       assertThat(output()).contains("결과 : 0");
@@ -81,6 +90,22 @@ class StringAdderTest extends NsTest {
     });
   }
 
+  @Test
+  @DisplayName("음수 입력")
+  void run_negativeNumber_throwIllegalArgumentException(){
+    String input = String.valueOf(Long.MAX_VALUE)+",-1,2,3";
+    assertThatThrownBy(() -> runException(input))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessageContaining("NumberParser");
+  }
+
+  @Test
+  @DisplayName("특수 문자")
+  void run_specialDelimiter_throwIllegalArgumentException(){
+    assertThatThrownBy(() -> runException("\t"))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessageContaining("NumberParser");
+  }
 
 
 
