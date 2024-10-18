@@ -10,7 +10,30 @@ import java.util.stream.Collectors;
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
+        try {
+            String input = getInput();
 
+            if (isEmpty(input)) {
+                printResult(0);
+                return;
+            }
+
+            List<String> delimiters;
+            String numbers;
+
+            if (hasCustomDelimiter(input)) {
+                delimiters = extractAndValidateCustomDelimiter(input);
+                numbers = extractNumbers(input);
+            } else {
+                delimiters = getDefaultDelimiters();
+                numbers = input;
+            }
+
+            int result = calculateSum(splitNumbers(numbers, delimiters));
+            printResult(result);
+        } catch (IllegalArgumentException e) {
+            printError(e.getMessage());
+        }
     }
 
     private static String getInput() {
