@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -76,17 +75,17 @@ public class NumbersTest {
 
 	static Stream<Arguments> stringNumberOverRange() {
 		return Stream.of(
-			Arguments.of(Arrays.asList("9223372036854775808"))
+			Arguments.of(List.of("9223372036854775808"))
 		);
 	}
 
 	static Stream<Arguments> emptyStringNumber() {
 		return Stream.of(
-			Arguments.of(Arrays.asList("")),
-			Arguments.of(Arrays.asList(" ")),
-			Arguments.of(Arrays.asList("\t")),
-			Arguments.of(Arrays.asList("\n")),
-			Arguments.of(Arrays.asList("   54  "))
+			Arguments.of(List.of("")),
+			Arguments.of(List.of(" ")),
+			Arguments.of(List.of("\t")),
+			Arguments.of(List.of("\n")),
+			Arguments.of(List.of("   54  "))
 		);
 	}
 }
