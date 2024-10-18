@@ -49,7 +49,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀구분자_없음_테스트() {
         Calculator calculator = new Calculator();
-        System.setIn(new ByteArrayInputStream("a1b2.c".getBytes()));
+        System.setIn(new ByteArrayInputStream("1,2,3".getBytes()));
         calculator.inputStr();
 
         assertSimpleTest(() ->
@@ -60,7 +60,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 숫자인식_커스텀구분자_테스트() {
         Calculator calculator = new Calculator();
-        System.setIn(new ByteArrayInputStream("//;\\n1;2;3;4".getBytes()));
+        System.setIn(new ByteArrayInputStream("//n\\n1n2n3n4".getBytes()));
         calculator.inputStr();
         calculator.checkCustomDelim();
 
@@ -80,6 +80,70 @@ class ApplicationTest extends NsTest {
                 assertThat(calculator.calculate()).isEqualTo(10)
         );
     }
+
+    @Test
+    void 문자열_형식_테스트() {
+        Calculator calculator = new Calculator();
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> {
+                    System.setIn(new ByteArrayInputStream("1,//2,3".getBytes()));
+                    calculator.inputStr();
+                })
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> {
+                    System.setIn(new ByteArrayInputStream("1\\n,2,3".getBytes()));
+                    calculator.inputStr();
+                })
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> {
+                    System.setIn(new ByteArrayInputStream("//\\n1,2,3".getBytes()));
+                    calculator.inputStr();
+                })
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> {
+                    System.setIn(new ByteArrayInputStream("1,2,3:".getBytes()));
+                    calculator.inputStr();
+                })
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> {
+                    System.setIn(new ByteArrayInputStream(":1,2,3".getBytes()));
+                    calculator.inputStr();
+                })
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 인식문자_숫자_테스트() {
+        Calculator calculator = new Calculator();
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> {
+                    System.setIn(new ByteArrayInputStream("-1,2,3".getBytes()));
+                    calculator.inputStr();
+                })
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> {
+                    System.setIn(new ByteArrayInputStream("1,k,3".getBytes()));
+                    calculator.inputStr();
+                })
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
 
     @Override
     public void runMain() {

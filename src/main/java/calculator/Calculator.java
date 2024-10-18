@@ -16,6 +16,10 @@ public class Calculator {
     public String inputStr() {
         str = Console.readLine().trim();
         Console.close();
+
+        if (!str.matches("([,:]?\\d([,:]\\d)*[,:]?)?|(//.+\\\\n).*")) {
+            throw new IllegalArgumentException();
+        }
         return str;
     }
 
@@ -34,7 +38,7 @@ public class Calculator {
         checkCustomDelim();
 
         String str2;
-        if (str.matches("//.*\\\\n.*")) {
+        if (str.matches("//.+\\\\n.*")) {
             str2 = str.substring(str.indexOf("\\n") + 2);
         } else {
             str2 = str;
@@ -44,7 +48,21 @@ public class Calculator {
         nums = str2.split(delims);
         int sum = 0;
         for (String num : nums) {
-            sum += Integer.parseInt(num);
+            try {
+                int temp;
+                if (num.equals("")) {
+                    continue;
+                } else {
+                    temp = Integer.parseInt(num);
+                    if (temp <= 0) {
+                        throw new IllegalArgumentException();
+                    }
+                }
+
+                sum += temp;
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException();
+            }
         }
 
         return sum;
