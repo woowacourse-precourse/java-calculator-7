@@ -2,10 +2,12 @@ package calculator.model;
 
 public class DelimiterParser {
     private static final String DELIMITERS = ",|:";
+    private final String DELIMITER_PREFIX = "//";
+    private final String DELIMITER_END = "\\n";
 
     public String parseDelimiter(String input){
-        if(input.startsWith("//")){
-            int index = input.indexOf("\\n");
+        if(input.startsWith(DELIMITER_PREFIX)){
+            int index = input.indexOf(DELIMITER_END);
 
             Validator.checkCustomDelimiter(index);
 
@@ -16,8 +18,8 @@ public class DelimiterParser {
     }
 
     public String extractNumbers(String input){
-        if(input.startsWith("//")){
-            int index = input.indexOf("\\n");
+        if(input.startsWith(DELIMITER_PREFIX)){
+            int index = input.indexOf(DELIMITER_END);
             return input.substring(index + 2);
         }
         return input;
