@@ -10,6 +10,18 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class DelimitersTest {
 
     @Test
+    @DisplayName("기본 구분자로 쉼표와 콜론이 주어진다.")
+    void createDefault() {
+        // given
+        Delimiters delimiters = new Delimiters();
+
+        // then
+        assertThat(delimiters.getElements()).hasSize(2);
+        assertThat(delimiters.getElements()).contains(",");
+        assertThat(delimiters.getElements()).contains(":");
+    }
+
+    @Test
     @DisplayName("구분자를 추가한다.")
     void addDelimiter() {
         // given
@@ -21,6 +33,7 @@ class DelimitersTest {
 
         // then
         assertThat(delimiters.getElements()).hasSize(3);
+        assertThat(delimiters.getElements()).contains(customDelimiter);
     }
 
     @Test
