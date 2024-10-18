@@ -14,6 +14,10 @@ public class InputValidation {
 
         String separator;
 
+        if (!userNumbers.contains("/")) {
+            separator = "[" + normalSeparator + "]";
+            numbers = userNumbers.split(separator);
+        }
         
     }
 
