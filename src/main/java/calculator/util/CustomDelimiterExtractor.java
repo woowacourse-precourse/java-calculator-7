@@ -6,6 +6,7 @@ import static calculator.util.DelimiterConstants.CUSTOM_DELIMITER_END;
 import static calculator.util.DelimiterConstants.DEFAULT_DELIMITERS;
 
 public class CustomDelimiterExtractor {
+    private static final String METACHARACTERS = "[.*+?^$(){}|\\\\]";
     public static String extract(String input) {
         int delimiterEndIndex = input.indexOf(CUSTOM_DELIMITER_END);
 
@@ -31,6 +32,10 @@ public class CustomDelimiterExtractor {
 
         if (delimiter.equals(DEFAULT_DELIMITERS[0]) || delimiter.equals(DEFAULT_DELIMITERS[1])) {
             throw new IllegalArgumentException(CustomDelimiterExtractorErrorMessage.CUSTOM_DUPLICATE_CUSTOM_DELIMITER.getMessage());
+        }
+
+        if (delimiter.matches(METACHARACTERS)) {
+            throw new IllegalArgumentException(CustomDelimiterExtractorErrorMessage.INVALID_CUSTOM_DELIMITER_FORMAT.getMessage());
         }
     }
 }
