@@ -34,4 +34,12 @@ public class Application {
             }
         }
     }
+
+    private String[] splitString(String input, String custom) {
+        if (custom.isEmpty()) {
+            return input.split("[,:]");
+        } else {
+            return input.substring(5).split("[,:" + custom + "]");
+        }
+    }
 }
