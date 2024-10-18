@@ -22,11 +22,20 @@ class StringAdderTest extends NsTest {
 
   @ParameterizedTest
   @ValueSource(strings = {"1","2","3"})
+  @DisplayName("단일 숫자")
   void run_singleNumber_success(String input) {
     assertSimpleTest(() -> {
       run(input);
       assertThat(output()).contains("결과 : "+input);
     });
+  }
+
+  @Test
+  @DisplayName("양수가 아닌 0 예외처리")
+  void run_zeroNumber_success() {
+    assertThatThrownBy(() -> runException("0"))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessageContaining("NumberParser");
   }
 
   @ParameterizedTest
@@ -41,6 +50,26 @@ class StringAdderTest extends NsTest {
     assertSimpleTest(() -> {
       run(input);
       assertThat(output()).contains("결과 : "+expected);
+    });
+  }
+
+  @Test
+  @DisplayName("기본 구분자 쉼표 유효한 입력")
+  void run_validInputForDefaultDelimitersPeriod_success() {
+    String input = "1,2,3";
+    assertSimpleTest(() -> {
+      run(input);
+      assertThat(output()).contains("결과 : 6");
+    });
+  }
+
+  @Test
+  @DisplayName("기본 구분자 혼합 유효한 입력")
+  void run_validInputForDefaultDelimitersMixed_success() {
+    String input = "1:2,3";
+    assertSimpleTest(() -> {
+      run(input);
+      assertThat(output()).contains("결과 : 6");
     });
   }
 
