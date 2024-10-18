@@ -3,8 +3,6 @@ package calculator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 class DelimiterParserTest {
 
     @Test
@@ -12,7 +10,7 @@ class DelimiterParserTest {
         //given
         String input = "1,2:3";
         //when
-        boolean result = DelimiterParser.isDefaultDelimiter(input);
+        boolean result = DelimiterParser.hasDefaultDelimiters(input);
         //then
         Assertions.assertTrue(result);
     }
@@ -22,7 +20,7 @@ class DelimiterParserTest {
         //given
         String input = "//;\n1;2;3";
         //when
-        boolean result = DelimiterParser.isDefaultDelimiter(input);
+        boolean result = DelimiterParser.hasDefaultDelimiters(input);
         //then
         Assertions.assertFalse(result);
     }
