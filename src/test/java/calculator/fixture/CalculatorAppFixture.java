@@ -18,10 +18,14 @@ public class CalculatorAppFixture {
     }
 
     public static DelimiterManager createDelimiterManager() {
-        return new DelimiterManager(new DelimiterChecker(), new DelimiterExtractor(), DelimiterStore.getInstance());
+        return new DelimiterManager(new DelimiterChecker(), getDelimiterExtractor(), DelimiterStore.getInstance());
     }
 
     public static DelimiterStore getDelimiterStore() {
         return DelimiterStore.getInstance();
+    }
+
+    public static DelimiterExtractor getDelimiterExtractor() {
+        return new DelimiterExtractor();
     }
 }
