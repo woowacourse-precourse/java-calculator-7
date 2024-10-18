@@ -11,6 +11,16 @@ public class StringAddCalculatorController {
     }
 
     public String stringAdd(String input){
+        if(input.contains(" ")){
+            throw new IllegalArgumentException();
+        }
+        if(input.isEmpty()){
+            return "0";
+        }
+        if(input.matches("\\d+")){
+            return input;
+        }
+
         return stringAddCalculatorService.add(input);
     }
 }
