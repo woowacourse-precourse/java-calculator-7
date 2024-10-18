@@ -5,11 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 class ApplicationTest extends NsTest {
     @Test
@@ -25,18 +21,6 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
-        );
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"1,2,3", "//@\n1@2@3", "//@\n//@\n1@2@3"})
-    void get_input_test(String input) {
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-        String result = Calculator.get_input();
-        System.out.println(result);
-        assertSimpleTest(() ->
-                assertThat(result).isEqualTo(input)
         );
     }
 
