@@ -114,9 +114,9 @@ public class InputParser {
 	}
 
 	private void validateDelimiter(String input) {
-		String regex = String.join("|", delimiters);
+		String regex = "[\\d" + String.join("", delimiters) + "]*";
 
-		if (!input.matches("[\\d" + regex + "]+")) {
+		if (!input.matches(regex)) {
 			throw new IllegalArgumentException("허용되지 않은 구분자가 포함되어 있습니다.");
 		}
 	}
