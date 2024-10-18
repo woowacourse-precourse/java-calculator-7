@@ -2,7 +2,7 @@ package calculator.view;
 
 public class InputValidator {
 
-    private static final String DEFAULT_DELIMITER = ",|:"; 
+    private static final String DEFAULT_DELIMITER = ",|:";
     private static final String CUSTOM_DELIMITER_START = "//";
     private static final String CUSTOM_DELIMITER_END = "\\n";
 
@@ -15,18 +15,18 @@ public class InputValidator {
             int separatorIdx = inputValue.indexOf(CUSTOM_DELIMITER_END);
             if (separatorIdx > 0) {
                 String customDelimiter = inputValue.substring(2, separatorIdx).trim();
-                return customDelimiter; 
+                return customDelimiter;
             }
         }
-        return DEFAULT_DELIMITER; 
+        return DEFAULT_DELIMITER;
     }
-
+    
     public static String validateNumbers(String inputValue, String delimiter) {
         String numbersPart;
 
         if (inputValue.startsWith(CUSTOM_DELIMITER_START)) {
             int newLineIndex = inputValue.indexOf(CUSTOM_DELIMITER_END);
-            numbersPart = inputValue.substring(newLineIndex + 2); 
+            numbersPart = inputValue.substring(newLineIndex + 2);
         } else {
             numbersPart = inputValue;
         }
