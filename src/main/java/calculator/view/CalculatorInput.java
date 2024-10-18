@@ -1,12 +1,12 @@
 package calculator.view;
 
-import java.util.Scanner;
+import camp.nextstep.edu.missionutils.Console;
 
 public class CalculatorInput {
-    public static String inputString() {
-        Scanner sc = new Scanner(System.in);
 
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        return sc.nextLine();
+    public static String inputString() {
+        String input = Console.readLine();
+        Console.close();
+        return input;
     }
 }
