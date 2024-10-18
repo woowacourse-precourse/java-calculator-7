@@ -23,13 +23,13 @@
 
   &nbsp;&nbsp;&nbsp;공백인 경우 주어진 것처럼 총합을 나타내는 변수에 0을 대입한다.
 
-  ####  &nbsp;&nbsp;2-d. 잘못된 형식을 입력한 경우
+  ####  &nbsp;&nbsp;&nbsp;2-d. 잘못된 형식을 입력한 경우
 
   &nbsp;&nbsp;&nbsp;즉 특수 구분자 입력 관련 잘못된 경우나 기본 구문자만 사용하는 경우에 잘못된 형식인 경우 IllegalArgumentException을 발생시킨 후 애플리케이션을 종료한다.
 
 ### 3. String 배열에 저장되어 있는 숫자값을 반복문을 통해 읽은 후 int형으로 변환 후 총 합을 구한다.
 
-  #### &nbsp;&nbsp;3-a. int형으로 변환 중 문제가 생기는 경우 
+  ####  &nbsp;&nbsp;&nbsp;3-a. int형으로 변환 중 문제가 생기는 경우 
   
   &nbsp;&nbsp;&nbsp;잘못된 형식이 입력된 경우로 위와 같이 IllegalArgumentException을 발생시킨 후 종료한다.
 
