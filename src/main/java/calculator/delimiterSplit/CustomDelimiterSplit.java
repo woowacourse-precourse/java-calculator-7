@@ -1,8 +1,8 @@
 package calculator.delimiterSplit;
 
-public class CustomDelimiterSplit {
+public class CustomDelimiterSplit{
 
-    public static String[] splitInput(String input, int inputLen, String basicDelimiter){
+    public static String[] customDelimiterSplit(String input, int inputLen, String basicDelimiter){
         int idx = input.indexOf("\\n", 2);
         String customDelimiter = basicDelimiter + "|";
         String operandStr = "";
