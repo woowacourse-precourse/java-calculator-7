@@ -8,14 +8,14 @@ import calculator.view.ErrorMessage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class NonNumericValidatorTest {
+public class NumericValidatorTest {
 
-    private NonNumericValidator nonNumericValidator;
+    private NumericValidator nonNumericValidator;
 
     @BeforeEach
     void setUp() {
         // NonNumericValidator 초기화
-        nonNumericValidator = new NonNumericValidator();
+        nonNumericValidator = new NumericValidator();
     }
 
     @Test
@@ -39,6 +39,6 @@ public class NonNumericValidatorTest {
 
         assertEquals(ErrorMessage.NON_NUMERIC_INPUT_ERROR.getMessage(), exception.getMessage());
     }
-    
+
 
 }
