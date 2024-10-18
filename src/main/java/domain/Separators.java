@@ -8,7 +8,7 @@ public class Separators {
     private static final String CUSTOM_START_POINT = "//";
     private static final String CUSTOM_END_POINT = "\\\\n";
     private static final String REGEX_NUMBER = "[0-9]";
-    private static final int OPERATOR_DUPLICATE_VALUE = 1;
+    private static final int OPERATOR_DUPLICATE_VALUE = 2;
     private static final String REGEX_HASHSET_UNNECESSARY = "[\\[\\],]";
 
     private String separators;
@@ -44,7 +44,7 @@ public class Separators {
             set.add(value);
         }
 
-        return set.toString().replaceAll(REGEX_HASHSET_UNNECESSARY, "");
+        return set.toString().replace(REGEX_HASHSET_UNNECESSARY, "");
     }
 
     public String getSeparators() {
