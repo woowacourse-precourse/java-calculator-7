@@ -25,9 +25,9 @@
 
 #### 참고한 자료
 
-* [https://www.sololearn.com/en/Discuss/1834735/what-does-n-do-and-is-it-the-same-as-n](Double Reversed Slash n에 대한 자료)
-* [https://chatgpt.com](ChatGPT)
-* [https://jamesdreaming.tistory.com/84](Java Split)
-* [https://mparchive.tistory.com/45](Java Split with regex)
-* [https://velog.io/@leo_c/JAVA-JAVA-substring으로-문자열-자르기](Java Substring)
-* [https://kimsg.tistory.com/48](Java Substring from behind)
+* [Double Reversed Slash n에 대한 자료](https://www.sololearn.com/en/Discuss/1834735/what-does-n-do-and-is-it-the-same-as-n)
+* [ChatGPT](https://chatgpt.com)
+* [Java Split](https://jamesdreaming.tistory.com/84)
+* [Java Split with regex](https://mparchive.tistory.com/45)
+* [Java Substring](https://velog.io/@leo_c/JAVA-JAVA-substring으로-문자열-자르기)
+* [Java Substring from behind](https://kimsg.tistory.com/48)
