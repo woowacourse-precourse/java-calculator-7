@@ -24,7 +24,16 @@ public class Application {
                         sep += input_split[i];
                     }
                 }
+    
+                for (int i=4+sep.length(); i<input.length(); i++){
+                    str = str + input_split[i];
+                }
 
+                String[] input_split2 = str.split(",|:|" + sep);
+                for (int i=0; i<input_split2.length; i++){
+                    result += Integer.parseInt(input_split2[i]);
+                }
+                System.out.println("결과 : " + result);
             } catch (Exception e) {
                 throw new IllegalArgumentException(e);
             }
