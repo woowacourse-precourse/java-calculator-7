@@ -14,7 +14,6 @@ import calculator.view.output.ResultService;
 
 public class CalculatorControllerFactory {
     public static CalculatorController create() {
-        CalculatorProcess calculatorProcess = new CalculatorProcess();
         InputHandlerService inputHandlerService = new NumberInputHandler(new InputView(new OutputProcess()));
         ResultService resultService = new OutputProcess();
         SeparatorGenerator separatorGenerator = new SeparatorGenerator(new ExtractProcess(), new CreateProcess());
@@ -22,7 +21,6 @@ public class CalculatorControllerFactory {
         return new CalculatorController(
                 separatorGenerator,
                 numberGenerator,
-                calculatorProcess,
                 inputHandlerService,
                 resultService);
     }
