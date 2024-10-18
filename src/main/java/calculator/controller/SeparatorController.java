@@ -4,7 +4,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import calculator.domain.Separator;
-import calculator.messages.ErrorMessages;
 
 public class SeparatorController {
     private Separator separator = new Separator();
@@ -16,9 +15,7 @@ public class SeparatorController {
 
         while (matcher.find()) {
             String newSeparator = matcher.group().replaceAll("[//|\\\\n]", "").trim();
-            if (separator.getSeparators().contains(newSeparator)) {
-                throw new IllegalArgumentException(ErrorMessages.EXIST_SEPARTOR.getMessage());
-            }
+
             separator.addSeperator(newSeparator);
         }
     }
