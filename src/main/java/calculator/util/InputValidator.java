@@ -3,7 +3,7 @@ package calculator.util;
 import calculator.constants.Constants;
 import java.util.regex.Matcher;
 
-public class UserInputValidator {
+public class InputValidator {
 
     private static final int NUMBER_UNDER_BOUND = 47;
     private static final int NUMBER_OVER_BOUND = 58;
