@@ -6,4 +6,14 @@ public class Calculator {
 
      }
 
+    // 분리된 숫자 더하기
+    private int sumTokens(String[] tokens) {
+        int sum = 0;
+        for (String token : tokens) {
+            int number = parseNumber(token);
+            sum += number;
+        }
+        return sum;
+    }
+
 }
