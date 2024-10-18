@@ -71,7 +71,7 @@ public class Input {
         try {
             return Integer.parseInt(numberString);
         } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException("입력이 올바르지 않습니다. 잘못된 구분자가 포함되어 있습니다.");
+            throw new IllegalArgumentException("입력이 올바르지 않습니다. 잘못된 구분자가 포함되어 있거나 허용 범위를 초과하였습니다.");
         }
     }
 
