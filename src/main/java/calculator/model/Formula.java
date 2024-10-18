@@ -47,4 +47,9 @@ public class Formula {
         }
         return Integer.parseInt(number);
     }
+
+    public Integer calculate() {
+        return extractNumbers().stream()
+                .reduce(0, Integer::sum);
+    }
 }
