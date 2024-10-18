@@ -49,8 +49,8 @@ class ApplicationTest extends NsTest {
     @DisplayName("커스텀 구분자가 두개 이상일 때 테스트")
     void manyCustomSepTest() {
         assertSimpleTest(() -> {
-            run("//;;;,www\\n1;;;2,3:4www5");
-            assertThat(output()).contains("결과 : 15");
+            run("//;;0;0\\\\0-\\n1;2,3:4;;5\\6");
+            assertThat(output()).contains("결과 : 21");
         });
     }
 
@@ -86,7 +86,7 @@ class ApplicationTest extends NsTest {
     void beyondIntegerTest() {
         assertSimpleTest(() -> {
             run("//;\\n2147483648;2147483648");
-            assertThat(output()).contains("결과 : 4294967296");
+            assertThat(output()).contains("결과 : 4,294,967,296");
         });
     }
 
@@ -95,7 +95,7 @@ class ApplicationTest extends NsTest {
     void beyondLongTest() {
         assertSimpleTest(() -> {
             run("//;\\n9223372036854775808;3");
-            assertThat(output()).contains("결과 : 9223372036854775811");
+            assertThat(output()).contains("결과 : 9,223,372,036,854,775,811");
         });
     }
 
@@ -105,6 +105,51 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("//;\\n9223372036854775808;3");
             assertThat(output()).contains("결과 : 9,223,372,036,854,775,811");
+        });
+    }
+
+    @Test
+    @DisplayName("구분자에 숫자가 있을 때")
+    void seperatorIsNumberTest() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//1\\n9223372036854775808;3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    @DisplayName("구분자가 없을 때")
+    void noSeperatorTest() {
+        assertSimpleTest(() -> {
+            run("//\\n9223372036854775808:3");
+            assertThat(output()).contains("결과 : 9,223,372,036,854,775,811");
+        });
+    }
+
+    @Test
+    @DisplayName("구분자가 0일 때")
+    void seperatorIsZeroTest() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//0\\n9223372036854775808;3"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
+    @DisplayName("구분자의 처음이 0일 때")
+    void seperatorStartIsZeroTest() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//0wer\\n9223372036854775808wer3"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
+    @DisplayName("구분자의 마지막이 0일 때")
+    void seperatorEndIsZeroTest() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//wer0\\n9223372036854775808wer3"))
+                    .isInstanceOf(IllegalArgumentException.class);
         });
     }
 
