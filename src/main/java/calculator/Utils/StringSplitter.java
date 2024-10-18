@@ -11,6 +11,10 @@ import java.util.List;
 public class StringSplitter {
     public final static String BLANK = "";
 
+    StringSplitter() {
+
+    }
+
     public static List<String> splitByDelimiter(String userInput, Delimiter delimiter) {
         String[] splittedInput = userInput.split(delimiter.getDelimiter());
         return Arrays.stream(splittedInput).toList();

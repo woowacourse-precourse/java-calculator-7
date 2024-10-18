@@ -9,4 +9,8 @@ public class DelimiterConstants {
     public final static String CUSTOM_DELIMITER_END = "\\n";
     public final static String CUSTOM_INDICATOR_REGEX = "//|\\\\n";
     public final static int CUSTOM_DELIMITER_START_INDEX = 2;
+
+    DelimiterConstants() {
+
+    }
 }

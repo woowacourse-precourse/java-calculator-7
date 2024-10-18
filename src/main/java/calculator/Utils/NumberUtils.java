@@ -2,11 +2,15 @@ package calculator.Utils;
 
 public class NumberUtils {
 
+    NumberUtils() {
+
+    }
+
     public static void isDouble(String number) {
         try {
             Double.parseDouble(number);
         } catch (IllegalArgumentException e) {
-            
+
         }
     }
 
