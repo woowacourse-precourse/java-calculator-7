@@ -11,9 +11,9 @@ class StringFilterTest {
     void 기본구분자입력(){
         //given
         String input1 = "1,2,3";
-        String input2 = "1,,2,,3";
-        String input3 = "1:2:3";
-        String input4 = "1::2::3";
+        String input2 = "1,2:3";
+        String input3 = "1:2,3";
+        String input4 = "1:2:3";
         //when
         int result1 = calculator.calculate(input1);
         int result2 = calculator.calculate(input2);
@@ -44,7 +44,7 @@ class StringFilterTest {
         Assertions.assertEquals(6,result4);
     }
     @Test
-    void 메타문자_입력(){
+    void 메타_문자_입력(){
         String[] inputs = {
                 "//.\\n1.2.3",
                 "//*\\n1*2*3",
