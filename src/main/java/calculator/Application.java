@@ -1,7 +1,12 @@
 package calculator;
 
+import calculator.config.BeanConfig;
+import camp.nextstep.edu.missionutils.Console;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        FrontController frontController = BeanConfig.getBean(FrontController.class);
+        frontController.run();
+        Console.close();
     }
 }
