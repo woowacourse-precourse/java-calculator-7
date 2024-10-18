@@ -8,6 +8,7 @@ public class DelimiterProcess {
     private String userInput;
     private boolean numberStarting;
 
+    //Generator: 기본 구분자 추가
     public DelimiterProcess(String userInput) {
         this.userInput = userInput;
         delimiters.add(",");
@@ -27,6 +28,7 @@ public class DelimiterProcess {
     private void addDelimiter(){
         if (userInput.startsWith("//")) {
             int customDelimiterIndex = userInput.indexOf("\\n");
+
             if (customDelimiterIndex == -1) {
                 throw new IllegalArgumentException("잘못된 구분자 형식입니다. \\n이 누락되었습니다.");
             }
