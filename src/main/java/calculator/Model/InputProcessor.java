@@ -26,7 +26,7 @@ public class InputProcessor {
     }
 
     private boolean hasCustomSeparator(String input) {
-        return input.contains("//") || input.contains("\n");
+        return input.contains("//") || input.contains("\\n");
     }
 
     private String[] getCustomSeparator(String input) {
@@ -48,7 +48,7 @@ public class InputProcessor {
     }
 
     private int getSeparatorEndIndex(String input) {
-        return input.indexOf("\n") - 1;
+        return input.indexOf("\\n") - 1;
     }
 
     private void validateCustomSeparator(int startIndex, int endIndex) {
@@ -65,7 +65,7 @@ public class InputProcessor {
 
     private String trimInput(String input) {
         if (hasCustomSeparator(input)) {
-            return (String) input.subSequence(getSeparatorEndIndex(input) + 2, input.length());
+            return (String) input.subSequence(getSeparatorEndIndex(input) + 3, input.length());
         }
         return input;
     }
