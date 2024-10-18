@@ -26,6 +26,14 @@ public class InputValidator {
         }
     }
 
+    public void validatePositiveNumberList(List<Long> list) {
+        list.forEach(element -> {
+            if (element <= 0) {
+                throw new IllegalArgumentException("양수가 아닌 값이 포함되어 있습니다.");
+            }
+        });
+    }
+
     private int countMatches(String input, String regex) {
         Matcher matcher = Pattern.compile(regex).matcher(input);
 
