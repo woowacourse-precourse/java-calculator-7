@@ -11,24 +11,22 @@ public class Application {
     static Matcher matcher;
 
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
         String[] splitStringArray = inputString();
 
         int sum = calculateNumber(splitStringArray);
 
-        String answer = getAnswer(sum);
-        System.out.println(answer);
+        System.out.println(getAnswer(sum));
         return;
     }
 
-    public static String getAnswer(int sum) {
+    private static String getAnswer(int sum) {
         return "결과 : " + sum;
     }
 
     private static int calculateNumber(String[] words) {
         int[] nums = isNumeric(words);
-        int sum = 0;
 
+        int sum = 0;
         for (int i = 0; i < nums.length; i++) {
             sum += nums[i];
         }
