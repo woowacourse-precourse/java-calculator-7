@@ -8,12 +8,12 @@ public class StringSplitterImpl implements StringSplitter {
             return new String[]{""};
         }
         if (input.startsWith("//")) {
-            return handleCustomDelimiter(input);
+            return CustomDelimiter(input);
         }
-        return handleDefaultDelimiter(input);
+        return DefaultDelimiter(input);
     }
 
-    private String[] handleDefaultDelimiter(String input) {
+    private String[] DefaultDelimiter(String input) {
         if (input.matches(".*[\\|\\\\\\n\\t\\r\\f].*")) {
             throw new IllegalArgumentException("잘못된 구분자 형식입니다. 구분자는 ','와 ':'만 가능합니다.");
         }
@@ -31,17 +31,16 @@ public class StringSplitterImpl implements StringSplitter {
         }
         return result;
     }
-    private String[] handleCustomDelimiter(String input) {
+    private String[] CustomDelimiter(String input) {
         int delimiterEndIndex = input.indexOf("\\n");
         if (delimiterEndIndex == -1) {
             throw new IllegalArgumentException("잘못된 구분자 형식입니다. '\\n'이 필요합니다.");
         }
 
-        String customDelimiter = input.substring(2, delimiterEndIndex); // "//" 뒤의 구분자 추출
+        String customDelimiter = input.substring(2, delimiterEndIndex);
         if (customDelimiter.isEmpty()) {
             throw new IllegalArgumentException("잘못된 구분자 형식입니다. 구분자가 비어 있습니다.");
         }
-        String modifiedInput = input.substring(delimiterEndIndex + 2); // 구분자 이후 문자열
-        return modifiedInput.split(customDelimiter);
+        return input.substring(delimiterEndIndex + 2).split(customDelimiter);
     }
 }
