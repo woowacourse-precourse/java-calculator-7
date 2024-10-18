@@ -25,7 +25,19 @@ public class StringCalculator {
             input = matcher.group(2);  // 숫자 부분 추출
         }
 
-        return 0;
+        // 구분자를 기준으로 문자열 분리
+        String[] factors = input.split(delimiter);
+        int sum = 0;
+        for (String factor : factors) {
+            try {
+                int number = Integer.parseInt(factor.trim());  // 문자열을 숫자로 변환 (trim을 활용한 공백 제거)
+                sum += number;
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
+            }
+        }
+
+        return sum;
     }
 
 }
