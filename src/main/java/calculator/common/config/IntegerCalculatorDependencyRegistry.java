@@ -43,4 +43,9 @@ public class IntegerCalculatorDependencyRegistry implements NumberCalculatorDepe
     public OutputView getOutputView() {
         return outputView;
     }
+
+    @Override
+    public Class<? extends Number> getNumberClass() {
+        return Integer.class;
+    }
 }
