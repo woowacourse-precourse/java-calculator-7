@@ -7,11 +7,14 @@ import java.util.List;
 
 /**
  * - 객체 생성의 책임을 담당
- * - 기본 구분자 지정
+ * - 기본 구분자 지정, 커스텀 구분자 지정
  */
 public class AppConfig {
     private final static List<String> DEFAULT_DELIMITERS = List.of(":",",");
     private static AppConfig INSTANCE;
+
+    public static final String CUSTOM_DELIMITER_START =  "//";
+    public static final String CUSTOM_DELIMITER_END =  "\\Q\\n\\E";
 
     private AppConfig() {}
 

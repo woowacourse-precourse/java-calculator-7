@@ -3,6 +3,8 @@ package calculator;
 import java.util.ArrayList;
 import java.util.List;
 
+import static calculator.AppConfig.CUSTOM_DELIMITER_END;
+
 /**
  * - 역할: 입력된 문자열을 구분자로 분류하여 숫자를 추출
  * - 책임: 문자열의 유효성을 검사하고, 올바른 형식이면 숫자를 분류
@@ -87,13 +89,11 @@ public class Classifier {
 
     /**
      * 커스텀 구분자를 제외한 문자열 가져오기
-     * - 특정 구분자에 대한 regex가 들어감. 이건 Delimiter의 책임도 아니고 Classifier의 책임도 아니라고 생각.
-     * - 이건 따로 설정 클래스를 만들던지 해서 빼야 할 것 같음.
      * @param input 입력 문자열
      * @return 커스텀 구분자를 제외한 문자열
      */
     private String getExcludedString(String input) {
-        return input.split("\\Q\\n\\E")[1];
+        return input.split(CUSTOM_DELIMITER_END)[1];
     }
 
     /**
