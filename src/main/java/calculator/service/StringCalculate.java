@@ -7,6 +7,12 @@ import java.util.ArrayList;
 
 public class StringCalculate {
 
+    private static final String BLANK = "";
+    private static final int ZERO = 0;
+    private static final String REGEX_START = "\\";
+    private static final String REGEX_OR = "|";
+    private static final String CUSTOM_DELIMITER_PREFIX = "//";
+
     private String inputString;
     Calculator calculator = Calculator.getInstance();
 
@@ -20,14 +26,14 @@ public class StringCalculate {
     }
 
     private void findCustomDelimiter() {
-        if (inputString.startsWith("//")) {
+        if (inputString.startsWith(CUSTOM_DELIMITER_PREFIX)) {
             char newDelimiter = inputString.charAt(2);
             calculator.addCustomDelimiter(newDelimiter);
         }
     }
 
     private void takeOffCustomDelimiter() {
-        if (inputString.startsWith("//")) {
+        if (inputString.startsWith(CUSTOM_DELIMITER_PREFIX)) {
             inputString = inputString.substring(5);
         }
     }
@@ -42,7 +48,7 @@ public class StringCalculate {
     private String[] splitOperands() {
         String reg = "";
         for (Character delimiter : calculator.getDelimiters()) {
-            reg += ("\\" + delimiter + "|");
+            reg += (REGEX_START + delimiter + REGEX_OR);
         }
         if (!reg.isEmpty()) {
             reg = reg.substring(0, reg.length() - 1);
@@ -53,8 +59,8 @@ public class StringCalculate {
     private ArrayList<Integer> convertOperandsToInt(String[] stringOperands) {
         ArrayList<Integer> intOperands = new ArrayList<>();
         for (String stringOperand : stringOperands) {
-            if (stringOperand.equals("")) {
-                intOperands.add(0);
+            if (stringOperand.equals(BLANK)) {
+                intOperands.add(ZERO);
             } else {
                 intOperands.add(Integer.valueOf(stringOperand));
             }

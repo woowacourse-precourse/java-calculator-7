@@ -5,8 +5,11 @@ import java.util.Arrays;
 
 public class Calculator {
 
+    private static final char FIRST_DEFAULT_DELIMITER = ':';
+    private static final char SECOND_DEFAULT_DELIMITER = ',';
+
     private static Calculator calculator;
-    private ArrayList<Character> delimiters = new ArrayList<>(Arrays.asList(':', ','));
+    private ArrayList<Character> delimiters = new ArrayList<>(Arrays.asList(FIRST_DEFAULT_DELIMITER, SECOND_DEFAULT_DELIMITER));
     private ArrayList<Integer> operands;
     private int result;
 
