@@ -2,6 +2,8 @@ package calculator.util;
 
 public class NumberValidator {
 
+    public static final int ZERO = 0;
+
     public void validateNoDigits(char[] chars) {
         for (char ch : chars) {
             if (!Character.isDigit(ch))
@@ -17,6 +19,6 @@ public class NumberValidator {
     }
 
     private boolean isNegative(int number) {
-        return number < 0;
+        return number < ZERO;
     }
 }
