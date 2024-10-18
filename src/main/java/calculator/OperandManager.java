@@ -16,12 +16,13 @@ public class OperandManager {
         return this.operands;
     }
 
-    public void save(String operandCandidates, Set<String> separator) {
-        String[] splitOperandCandidates = split(operandCandidates, separator);
+    public void save(String operandCandidates, Set<String> separators) {
+        String[] splitOperandCandidates = split(operandCandidates, separators);
         for (String operandCandidate : splitOperandCandidates) {
             validate(operandCandidate);
-            // TODO : 무리수, 소수점 다루는 로직 필요
-            operands.add(new BigDecimal(operandCandidate));
+            if(!operandCandidate.isEmpty()) {
+                operands.add(new BigDecimal(operandCandidate));
+            }
         }
     }
 
@@ -31,6 +32,11 @@ public class OperandManager {
     }
 
     private void validate(String operandCandidate) {
-        // TODO : 유효한 숫자인지 검증하는 로직 필요
+        if(operandCandidate.isEmpty()) {
+            return;
+        }
+        if (!operandCandidate.matches("[1-9]+")) {
+            throw new IllegalArgumentException("피연산자는 1~9의 숫자로만 이루어져야 합니다.");
+        }
     }
 }
