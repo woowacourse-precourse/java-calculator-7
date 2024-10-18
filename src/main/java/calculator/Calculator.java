@@ -1,15 +1,15 @@
 package calculator;
 
 import calculator.view.InputView;
+import java.util.regex.Pattern;
 
 public class Calculator {
 
     public Calculator() {
     }
 
-    public void start() {
+    protected void start() {
         String input = InputView.input();
-//        System.out.println("input = " + input);
 
         String[] results = getNumberLists(input);
 
@@ -18,6 +18,14 @@ public class Calculator {
     }
 
     private String[] getNumberLists(String str) {
+        // TODO: 구분자 커스텀 문자열이 없을 경우 (// or \n)
+        if (str.charAt(0) == '/') {
+            String delimiter = str.substring(2, str.indexOf("\\n"));
+            System.out.println("delimiter = " + delimiter);
+            String newStr = str.substring(str.indexOf("\\n") + 2);
+            System.out.println("newStr = " + newStr);
+            return newStr.split(Pattern.quote(delimiter) + "|[,:]");
+        }
         return str.split("[,:]");
     }
 
