@@ -23,8 +23,6 @@ public class NumbersToken {
 
         Arrays.stream(extractNumbers).map(Number::new).forEach(numbers::add);
 
-        System.out.println(numbers);
-
         return numbers;
     }
 

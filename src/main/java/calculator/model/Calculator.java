@@ -13,17 +13,16 @@ public class Calculator {
         this.tokenizer = new Tokenizer();
     }
 
-    public void calculate(String input) {
+    public int calculate(String input) {
         setMode(input);
 
         Delimiter delimiter = selectDelimiter(input);
-
-        System.out.println(delimiter);
 
         NumbersToken numbersToken = tokenizer.createNumbersToken(input);
 
         Numbers numbers = numbersToken.convertToNumbers(delimiter);
 
+        return sum(numbers);
     }
 
     public int sum(Numbers numbers) {
