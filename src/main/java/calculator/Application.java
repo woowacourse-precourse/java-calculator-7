@@ -3,6 +3,7 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.PatternSyntaxException;
 
 public class Application {
 
@@ -57,7 +58,11 @@ class Str {
         if (checkingCustomDelimiter()) {
             String customDelimiter = String.valueOf(getCustomDelimiter());
             string = string.substring(5);
-            strings = string.split(customDelimiter);
+            try {
+                strings = string.split(customDelimiter);
+            }catch(PatternSyntaxException e){
+                strings = string.split(('\\')+customDelimiter);
+            }
             return new StrArr(strings);
         }
 
