@@ -2,6 +2,7 @@ package calculator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import calculator.model.Calculator;
 import calculator.service.CalculatorService;
 import calculator.service.CalculatorServiceImpl;
 import java.util.List;
