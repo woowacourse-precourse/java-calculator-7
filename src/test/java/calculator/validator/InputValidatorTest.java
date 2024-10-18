@@ -2,7 +2,6 @@ package calculator.validator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -37,10 +36,18 @@ class InputValidatorTest {
         );
     } // generateData
 
-    @Test
-    @DisplayName("음수만 입력 시 예외 확인")
-    void inputExceptionTest() {
-        assertThatThrownBy(() -> inputValidator.validate("-2"))
+    @ParameterizedTest(name = "{index} : {1}")
+    @DisplayName("입력값 예외 확인")
+    @MethodSource("generateExceptionData")
+    void inputExceptionTest(String input, String message) {
+        assertThatThrownBy(() -> inputValidator.validate(input))
                 .isInstanceOf(IllegalArgumentException.class);
     } // inputExceptionTest
+
+    private static Stream<Arguments> generateExceptionData() {
+        return Stream.of(
+                Arguments.of(";123", "숫자만으로 구성되지 않았을 때"),
+                Arguments.of("-2", "음수일 때")
+                );
+    } // generateExceptionData
 } // class
