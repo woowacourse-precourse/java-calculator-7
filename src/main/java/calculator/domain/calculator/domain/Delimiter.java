@@ -1,15 +1,12 @@
 package calculator.domain.calculator.domain;
 
 public class Delimiter {
-    private static final String DEFAULT_PATTERN = "[,:]";
+    private static final String DEFAULT_PATTERN= "[,:]";
     private final String pattern;
 
-    public Delimiter() {
-        this.pattern = DEFAULT_PATTERN;
-    }
-
     private Delimiter(String pattern) {
-        this.pattern = validateDelimiter(pattern);
+        String validateDelimiter = validateDelimiter(pattern);
+        this.pattern =parse(validateDelimiter);
     }
 
     public static Delimiter of(
@@ -21,20 +18,18 @@ public class Delimiter {
     /*
     TO-DO: util 클래스로 나중에 옮겨야함
      */
-    public static Delimiter parse(String input) {
+    public static String parse(String input) {
         boolean startsWithCustom = input.startsWith("//");
         if (startsWithCustom) {
-            int lastIndex = input.indexOf("\n");
-
+            int lastIndex = input.indexOf("\\n");
             if (lastIndex == -1) {
                 throw new IllegalArgumentException("커스텀 구분자를 닫는 문자가 없습니다.");
             }
-
-            String customDelimiter = input.substring(2, lastIndex);
-            return new Delimiter(customDelimiter);
+            final String customDelimiter = input.substring(2, lastIndex);
+            return customDelimiter;
         }
 
-        return new Delimiter();
+        return DEFAULT_PATTERN;
     }
 
     private String validateDelimiter(String pattern) {
