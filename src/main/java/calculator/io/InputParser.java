@@ -1,7 +1,16 @@
 package calculator.io;
 
+/**
+ * 문자열을 읽어 커스텀구분자 문자열과 숫자 문자열로 분리하는 역할
+ */
 public class InputParser {
 
+    /**
+     * 문자열을 읽어 커스텀구분자 문자열과 숫자 문자열로 분리하고, 이를 InputParseResult 객체로 반환한다.
+     *
+     * @param input 사용자 입력값
+     * @return InputParseResult - 분리된 커스텀구분자 문자열과 숫자 문자열
+     */
     public InputParseResult parse(String input) {
         InputParseResult result;
         if (input.startsWith("//")) {
