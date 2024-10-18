@@ -1,16 +1,16 @@
 package calculator.model.separate;
 
-public enum BusinessRegex {
+public enum RegexPattern {
     CUSTOM_DELIMITER_COUNT_REGEX("(//.*?)\\\\n"),
     CUSTOM_DELIMITER_POSITION_REGEX("^(//.*?)\\\\n"),
     CUSTOM_DELIMITER_PARSE_REGEX("^//(.*?)\\\\n"),
     CUSTOM_DELIMITER_PARSE_CONDITION_REGEX("^//.*?"),
-    WHITE_SPACE("\\s")
-    ;
+    WHITE_SPACE_REGEX("\\s"),
+    OR_REGEX("|");
 
     private final String value;
 
-    BusinessRegex(String value) {
+    RegexPattern(String value) {
         this.value = value;
     }
 
@@ -26,11 +26,11 @@ public enum BusinessRegex {
         return CUSTOM_DELIMITER_PARSE_REGEX.value;
     }
 
-    public static String customDelimiterStartCondition() {
+    public static String customDelimiterStartConditionRegex() {
         return CUSTOM_DELIMITER_PARSE_CONDITION_REGEX.value;
     }
 
-    public static String whiteSpaceRegex() {
-        return WHITE_SPACE.value;
+    public static String replaceConditionRegex() {
+        return CUSTOM_DELIMITER_POSITION_REGEX.value + OR_REGEX.value + WHITE_SPACE_REGEX.value;
     }
 }

@@ -1,21 +1,24 @@
 package calculator.model.separate;
 
+import static calculator.common.SystemConstant.emptyString;
+import static calculator.common.SystemConstant.maxCustomDelimiterCount;
+import static calculator.model.separate.RegexCompileCache.CUSTOM_DELIMITER_COUNT;
+import static calculator.model.separate.RegexCompileCache.CUSTOM_DELIMITER_PARSE;
+import static calculator.model.separate.RegexCompileCache.CUSTOM_DELIMITER_PARSE_CONDITION;
+import static calculator.model.separate.RegexCompileCache.CUSTOM_DELIMITER_POSITION;
+import static calculator.model.separate.RegexCompileCache.REPLACE_CONDITION;
+import static calculator.model.separate.RegexCompileCache.findBy;
+import static org.junit.platform.commons.util.StringUtils.isNotBlank;
+
 import calculator.model.exception.MultiCustomDelimiterException;
 import calculator.model.exception.NotAllowedPositionException;
 import calculator.model.exception.ParseToIntegerFailedException;
-import org.junit.platform.commons.util.StringUtils;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static calculator.common.SystemConstant.emptyString;
-import static calculator.common.SystemConstant.maxCustomDelimiterCount;
-import static calculator.model.separate.BusinessRegex.*;
-import static org.junit.platform.commons.util.StringUtils.isBlank;
-import static org.junit.platform.commons.util.StringUtils.isNotBlank;
+import org.junit.platform.commons.util.StringUtils;
 
 public class SeparateManager {
 
@@ -32,13 +35,13 @@ public class SeparateManager {
     }
 
     // Method
-    private Matcher createMatcher(String source, String regex) {
-        Pattern pattern = Pattern.compile(regex);
+    private Matcher createMatcher(String source, RegexCompileCache patternType) {
+        Pattern pattern = findBy(patternType);
         return pattern.matcher(source);
     }
 
     public boolean canParseCustomDelimiter(String source) {
-        Matcher matcher = createMatcher(source, customDelimiterStartCondition());
+        Matcher matcher = createMatcher(source, CUSTOM_DELIMITER_PARSE_CONDITION);
         return matcher.find();
     }
 
@@ -52,7 +55,7 @@ public class SeparateManager {
     public String parseCustomDelimiter(String source) {
         validateCustomDelimiterPosition(source);
         validateCustomDelimiterCount(source);
-        Matcher matcher = createMatcher(source, customDelimiterParseRegex());
+        Matcher matcher = createMatcher(source, CUSTOM_DELIMITER_PARSE);
         if (matcher.find()) {
             return matcher.group(1);
         }
@@ -60,7 +63,7 @@ public class SeparateManager {
     }
 
     public void validateCustomDelimiterCount(String source) {
-        Matcher matcher = createMatcher(source, customDelimiterCountRegex());
+        Matcher matcher = createMatcher(source, CUSTOM_DELIMITER_COUNT);
 
         int delimiterCount = 0;
         while (matcher.find()) {
@@ -72,7 +75,7 @@ public class SeparateManager {
     }
 
     public void validateCustomDelimiterPosition(String source) {
-        Matcher matcher = createMatcher(source, customDelimiterPositionRegex());
+        Matcher matcher = createMatcher(source, CUSTOM_DELIMITER_POSITION);
         if (!matcher.find()) {
             throw new NotAllowedPositionException();
         }
@@ -88,8 +91,8 @@ public class SeparateManager {
     }
 
     private String processReplacing(String source) {
-        return source.replaceAll(whiteSpaceRegex(), emptyString())
-                .replaceAll(customDelimiterParseRegex(), emptyString());
+        Matcher matcher = createMatcher(source, REPLACE_CONDITION);
+        return matcher.replaceAll(emptyString());
     }
 
     public Integer tryParseToInt(String source) {
@@ -113,12 +116,6 @@ public class SeparateManager {
     }
 
     private boolean isAddable(String customDelimiter) {
-        if (isBlank(customDelimiter)) {
-            return false;
-        }
-        if (basicDelimiters.contains(customDelimiter)) {
-            return false;
-        }
-        return true;
+        return isNotBlank(customDelimiter) && !basicDelimiters.contains(customDelimiter);
     }
 }
