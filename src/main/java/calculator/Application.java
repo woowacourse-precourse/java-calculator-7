@@ -11,6 +11,12 @@ public class Application {
     public static void main(String[] args) {
         // 사용자로부터 문자열을 입력 받음
         String input = getUserInput();
+        // 입력값이 빈 문자열인지 확인
+        int is_empty = isEmpty(input);
+        if (is_empty == 0){
+            System.out.println(0);
+            return;
+        }
         // 입력 형식이 올바른지 검증
         validateInput(input);
         // 기본 구분자 또는 커스텀 구분자 추출
@@ -30,6 +36,15 @@ public class Application {
     public static String getUserInput(){
         System.out.println("덧셈할 문자열을 입력해주세요.");
         return Console.readLine();
+    }
+
+    /*
+     * 빈 문자열인지 확인하는 메서드
+     */
+    public static int isEmpty(String input){
+        if (input == null || input.isEmpty()){
+            return 0;
+        } else return 1;
     }
 
     /*

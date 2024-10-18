@@ -23,6 +23,22 @@ class ApplicationTest extends NsTest {
                 .isInstanceOf(IllegalArgumentException.class)
         );
     }
+    /*
+     * isEmpty 메서드 테스트
+     * 입력값이 빈 문자열인지 확인
+     */
+    @Test
+    void 빈_문자열일_경우_0_반환(){
+        String input = "";
+        int result = Application.isEmpty(input);
+        assertThat(result).isEqualTo(0);
+    }
+    @Test
+    void 빈_문자열이_아닐_경우_1_반환(){
+        String input = "1,2";
+        int result = Application.isEmpty(input);
+        assertThat(result).isEqualTo(1);
+    }
 
     /*
      * splitByDelimiter 메서드 테스트
