@@ -6,9 +6,16 @@ public class SeparatorCalculator {
 
     public static NumericString sum(String input, Separators separators) {
         List<String> numericStrings = separators.split(input);
+        validateConsecutiveSeparator(numericStrings);
 
         return numericStrings.stream()
-                .map((str) -> NumericString.of(input, 1))
-                .reduce(NumericString.ZERO, NumericString::sum);
+                .map(NumericString::positive)
+                .reduce(NumericString.ZERO, NumericString::add);
+    }
+
+    private static void validateConsecutiveSeparator(List<String> numericStrings) {
+        if (numericStrings.stream().anyMatch(String::isEmpty)) {
+            throw new IllegalArgumentException("구분자는 연속해서 올 수 없습니다.");
+        }
     }
 }

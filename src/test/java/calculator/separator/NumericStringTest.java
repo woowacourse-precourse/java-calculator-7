@@ -28,13 +28,13 @@ class NumericStringTest {
 
     @DisplayName("굉장히 큰 숫자의 덧셈이 가능하다.")
     @Test
-    void sum() {
+    void add() {
         //given
         NumericString numericString1 = NumericString.of("10000000000000000000000000000000000000000000", 0);
         NumericString numericString2 = NumericString.of("10000000000000000000000000000000000000000000", 0);
 
         //when
-        NumericString result = numericString1.sum(numericString2);
+        NumericString result = numericString1.add(numericString2);
 
         //then
         assertThat(result.toString()).isEqualTo("20000000000000000000000000000000000000000000");

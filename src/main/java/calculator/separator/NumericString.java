@@ -27,6 +27,10 @@ public class NumericString {
         return new NumericString(number);
     }
 
+    public static NumericString positive(String str) {
+        return NumericString.of(str, 1);
+    }
+
     private static void validateIsBlank(String str) {
         if (str.isBlank()) {
             throw new IllegalArgumentException("빈 문자열 값입니다.");
@@ -39,7 +43,7 @@ public class NumericString {
         }
     }
 
-    public NumericString sum(NumericString other) {
+    public NumericString add(NumericString other) {
         return new NumericString(number.add(other.number));
     }
 

@@ -34,7 +34,6 @@ public class Separators {
                         separators.separatorStore.stream()
                 )
                 .collect(Collectors.toCollection(HashSet::new));
-
         return new Separators(mergedSeparatorStore);
     }
 

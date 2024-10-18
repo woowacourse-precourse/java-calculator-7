@@ -26,7 +26,6 @@ public class CalculatorController {
         String input = inputView.inputString();
 
         Separators separators = getSeparators(input);
-
         String inputWithoutCustomSeparators = customSeparatorManager.sliceCustomSeparators(input);
         NumericString sum = SeparatorCalculator.sum(inputWithoutCustomSeparators, separators);
 
