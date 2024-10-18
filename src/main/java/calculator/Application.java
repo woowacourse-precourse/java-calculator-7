@@ -37,7 +37,7 @@ class UserInput {
 
         return strList;
     }
-
+    //IllegalArgumentException
     public void isValid(String[] strList) {
         for(String s : strList) {
             if(!s.matches("\\d+")) {
