@@ -15,8 +15,8 @@ public class StringCalculator {
         DelimiterResult delimiterResult = new DelimiterResult(defaultDelimiters.getDefaultDelimiter());
 
         if (userInput.isCustom()) {
-            int customDelimiterEndIndex = findCustomDelimiterEndIndex(userInput);
-            CustomDelimiter customDelimiter = new CustomDelimiter(findCustomDelimiter(userInput, customDelimiterEndIndex));
+            String extractCustomDelimiter = userInput.extractCustomDelimiter();
+            CustomDelimiter customDelimiter = new CustomDelimiter(extractCustomDelimiter);
             String updateDelimiter = generateUpdateDelimiter(delimiterResult, customDelimiter.getCustomDelimiter());
             delimiterResult = new DelimiterResult(updateDelimiter);
             input = generateCombinedInput(userInput, customDelimiterEndIndex);
@@ -54,12 +54,5 @@ public class StringCalculator {
         return delimiterResult.getDelimiterResult().replace("]", customDelimiter + "]");
     }
 
-    private String findCustomDelimiter(UserInput userInput, int customDelimiterEndIndex) {
-        return userInput.getUserInput().substring(2, customDelimiterEndIndex);
-    }
-
-    private int findCustomDelimiterEndIndex(UserInput userInput) {
-        return userInput.getUserInput().indexOf("\\n");
-    }
 
 }

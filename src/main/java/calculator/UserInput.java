@@ -37,15 +37,20 @@ public class UserInput {
         }
     }
 
-
-    public String getUserInput() {
-        return userInput;
+    public String extractCustomDelimiter() {
+        int endIndex = userInput.indexOf("\\n");
+        return userInput.substring(2, endIndex);
     }
+
 
     public boolean isCustom() {
         return userInput.startsWith("//");
     }
 
+
+    public String getUserInput() {
+        return userInput;
+    }
 
 
 }
