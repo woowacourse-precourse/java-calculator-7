@@ -6,8 +6,7 @@ import java.util.List;
 public class Calculator {
 
     public void run() {
-        System.out.println("덧셈할 문자열을 입력해주세요");
-        String input_str = Console.readLine();
+        String input_str = InputHandler.getInput();
 
         String delimiter = ",|:";
 
@@ -15,9 +14,12 @@ public class Calculator {
         input_str = result[0];
         delimiter = result[1];
 
-        List<Integer> nums = NumberExtractor.extractNums(input_str,delimiter);
-
-        int sum = nums.stream().mapToInt(Integer::intValue).sum();
-        System.out.println("결과 : "+sum);
+        try {
+            List<Integer> nums = NumberExtractor.extractNums(input_str, delimiter);
+            int sum = nums.stream().mapToInt(Integer::intValue).sum();
+            OutputHandler.printResult(sum);
+        } catch (IllegalArgumentException e) {
+            OutputHandler.printError(e.getMessage());
+        }
     }
 }
