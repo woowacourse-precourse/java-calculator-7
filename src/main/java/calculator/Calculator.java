@@ -10,14 +10,19 @@ public class Calculator {
 
     Calculator(String input) {
         this.input = input.trim();
-        this.separatorRegex = Regex.DEFAULT_SEPARATOR_REGEX.getValue();
+        this.separatorRegex = Regex.DEFAULT_SEPARATOR_REGEX.getPattern();
     }
 
-    public void setSeparatorRegex(String additionalSeparator) {
-        if (additionalSeparator.isEmpty())
-            return ;
+    private void updateInput(String input) {
+        this.input = input;
+    }
 
-        if (isSpecialRegex(additionalSeparator)) {
+    private void updateSeparatorRegex(String additionalSeparator) {
+        if (additionalSeparator.isEmpty()) {
+            return;
+        }
+
+        if (isSpecialCharacter(additionalSeparator)) {
             this.separatorRegex = this.separatorRegex
                     + Delimiter.OR.getValue()
                     + Delimiter.BRACKET_OPEN.getValue()
@@ -30,14 +35,10 @@ public class Calculator {
         }
     }
 
-    public void setInput(String input) {
-        this.input = input;
-    }
-
     public Integer caculate() {
-        List<String> strings = extract();
+        List<String> strs = extract();
 
-        List<Integer> numbers = stringToInteger(strings);
+        List<Integer> numbers = stringToInteger(strs);
 
         Integer result = sum(numbers);
 
@@ -47,8 +48,9 @@ public class Calculator {
     private List<String> extract() {
         List<String> strings = new ArrayList<>();
 
-        if (input.isEmpty())
+        if (input.isEmpty()) {
             return strings;
+        }
 
         if (input.startsWith(Delimiter.CUSTOM_SEPARATOR_START.getValue())) {
             if (input.contains(Delimiter.CUSTOM_SEPARATOR_END.getValue())) {
@@ -56,11 +58,11 @@ public class Calculator {
                         2,
                         input.indexOf(Delimiter.CUSTOM_SEPARATOR_END.getValue())
                 );
-                setSeparatorRegex(customDelim);
+                updateSeparatorRegex(customDelim);
 
                 int startIdx = input.indexOf(Delimiter.CUSTOM_SEPARATOR_END.getValue())
                         + Delimiter.CUSTOM_SEPARATOR_END.getValue().length();
-                setInput(input.substring(startIdx));
+                updateInput(input.substring(startIdx));
             } else {
                 throw new IllegalArgumentException("\n지정 구분자는 //와 \\n 사이에 입력해주세요");
             }
@@ -76,8 +78,9 @@ public class Calculator {
         List<Integer> numbers = strs.stream()
                 .filter(s -> !s.isEmpty() && !s.isBlank())
                 .map(s -> {
-                    if (!s.matches(Regex.NUMBER_REGEX.getValue()))
+                    if (!s.matches(Regex.NUMBER_REGEX.getPattern())) {
                         throw new IllegalArgumentException(s + " 는 허용되지 않는 문자입니다");
+                    }
                     return Integer.parseInt(s);
                 })
                 .toList();
@@ -94,10 +97,11 @@ public class Calculator {
         return result;
     }
 
-    private boolean isSpecialRegex(String str) {
-        if (str.matches(Regex.SPECIAL_CHARACTER_REGEX.getValue()))
+    private boolean isSpecialCharacter(String str) {
+        if (str.matches(Regex.SPECIAL_CHARACTER_REGEX.getPattern())) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 }

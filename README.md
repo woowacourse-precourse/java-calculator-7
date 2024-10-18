@@ -23,3 +23,5 @@
 - 리펙토링
   - java style guide 에 맞는지 확인
   - 객체지향적인 구조
+
+### [노션 기록](https://atom-dust-547.notion.site/1-1219fdec090f80c5bb78f9b711f70982?pvs=4)

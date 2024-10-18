@@ -11,7 +11,7 @@ public enum Regex {
         this.value = value;
     }
 
-    public String getValue() {
+    public String getPattern() {
         return value;
     }
 }
