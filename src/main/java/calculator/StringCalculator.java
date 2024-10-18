@@ -24,6 +24,11 @@ public class StringCalculator {
         }
         // "\n" 이전까지의 문자열을 커스텀 구분자로 사용
         String customSperator = subInput.substring(0, newlineIndex);
+
+        if (customSperator.isEmpty()) {
+            // exception 구현 예정
+            throw new IllegalArgumentException("// \\n 사이 구분자가 존재하지 않는다는 exception 구현 예정");
+        }
         return customSperator;
     }
 
