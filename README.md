@@ -26,12 +26,12 @@
 ### 4. 구분자로 구성된 문자열을 검증한다. (validate 패키지)
 
 - [x] 구분자를 가진 문자열을 검증하는 기능 (validateFrontString)
-  - 앞 문자열에 숫자가 있으면 IllegalArgumentException을 던진다.
+  - 구분자를 가진 문자열에 숫자가 있으면 IllegalArgumentException을 던진다.
 
-### 5. 숫자를 추출해야 하는 문자열을 검증한다. (validate 패키지)
+### 5. 계산해야 하는 문자열을 검증한다. (validate 패키지)
 
-- [ ]뒷 문자열의 유효성을 검증하는 기능(validateBackString)
-  - 뒷 문자열에 숫자, 커스텀 구분자 외 다른 문자가 있으면 IllegalArgumentException을 던진다.
+- [x] 계산해야 하는 문자열의 유효성을 검증하는 기능(validateBackString)
+  - 계산해야 하는 문자열에 숫자, 커스텀 구분자 외 다른 문자가 있으면 IllegalArgumentException을 던진다.
 
 ### 6. 숫자 추출하여 배열을 만든다. (split 패키지)
 
