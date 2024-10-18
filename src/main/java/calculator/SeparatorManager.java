@@ -2,6 +2,7 @@ package calculator;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;
+import net.bytebuddy.implementation.bytecode.Throw;
 
 public class SeparatorManager {
     public Separator getSeparator(String originString) {
@@ -17,6 +18,22 @@ public class SeparatorManager {
         else{
             return new Separator();
         }
+    }
+
+    public Number getNumber(Separator separator, String originString){
+        Number number = new Number();
+        originString = separateCustomSeparator(originString);
+
+        for(int i = 0; i < originString.length(); i = i + 2){
+            if(!Character.isDigit(originString.charAt(i))){
+                throw new IllegalArgumentException();
+            }
+            if(!separator.isValidSeparator(String.valueOf(originString.charAt(i+1)))){
+                throw new IllegalArgumentException();
+            }
+            number.addNumber(originString.charAt(i));
+        }
+        return number;
     }
 
     public String separateCustomSeparator(String originString){
