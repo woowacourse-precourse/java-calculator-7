@@ -23,9 +23,8 @@ public class Validator {
     static boolean validateCustomSeparator(String input) {
         if (input.indexOf("\\n") != 3) {
             return false;
-        } else {
-            return !isSeparatorNumeric(input.charAt(2));
         }
+        return !isSeparatorNumeric(input.charAt(2));
     }
 
     static boolean isSeparatorNumeric(char separator) {

@@ -14,11 +14,10 @@ public class StringCalculator {
         printInputMsg();
         String input = Console.readLine();
         if (hasCustomPart(input)) {
-            if (validateCustomSeparator(input)) {
-                addCustomSeparator(input.charAt(2));
-            } else {
+            if (!validateCustomSeparator(input)) {
                 throw new IllegalArgumentException("커스텀 구분자 에러");
             }
+            addCustomSeparator(input.charAt(2));
         }
 
         String str = initString(input);
