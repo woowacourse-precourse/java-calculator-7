@@ -1,15 +1,19 @@
 package calculator.validator;
 
+import calculator.error.ErrorCode;
+import java.util.ArrayList;
+import java.util.List;
+
 public class CustomInputValidator implements InputValidator{
   @Override
   public void validateInput(String input){
     if(input == null){
-      throw new IllegalArgumentException("입력값이 null입니다.");
+      throw new IllegalArgumentException(ErrorCode.NULL_INPUT.toString());
     }
 
     if(input.startsWith("//")){
       char customDelimiter = extractCustomDelimiter(input);
-      validateAllowedCharacters(input.substring(input.indexOf("\n") + 1), customDelimiter);
+      validateAllowedCharacters(input.substring(4), customDelimiter);
     }
     else{
       validateAllowedCharacters(input, ',');
@@ -18,21 +22,27 @@ public class CustomInputValidator implements InputValidator{
 
   private char extractCustomDelimiter(String input) {
     if(!input.contains("\n")){
-      throw new IllegalArgumentException("커스텀 구분자 형식 오류: '\\n'이 필요합니다.");
+      throw new IllegalArgumentException(ErrorCode.CUSTOM_DELIMITER_FORMAT_ERROR.toString());
     }
 
     char delimiter = input.charAt(2);
     if(Character.isDigit(delimiter) || delimiter == '.' || delimiter == 'e' || delimiter == 'E'){
-      throw new IllegalArgumentException("커스텀 구분자 내용 오류: 숫자('0-9'), '.', 'e', 'E'는 사용할 수 없습니다.");
+      throw new IllegalArgumentException(ErrorCode.INVALID_DELIMITER_ERROR.toString());
     }
     return delimiter;
   }
 
   private void validateAllowedCharacters(String input, char customDelimiter) {
+    List<Character> invalidChars = new ArrayList<>();
     for (char ch : input.toCharArray()) {
       if(!Character.isDigit(ch) && ch != customDelimiter && ch != ',' && ch != ':'){
-        throw new IllegalArgumentException("허용되지 않는 문자: " + ch + "가 포함되어 있습니다.");
+        invalidChars.add(ch);
       }
+    }
+
+    if (!invalidChars.isEmpty()) {
+      throw new IllegalArgumentException(
+          ErrorCode.DISALLOWED_CHAR_ERROR.formatMessage(invalidChars.toString()));
     }
   }
 }
