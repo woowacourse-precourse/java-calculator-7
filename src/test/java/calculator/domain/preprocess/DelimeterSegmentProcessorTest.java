@@ -39,7 +39,7 @@ class DelimeterSegmentProcessorTest {
     @Test
     @DisplayName("구분자 리스트 생성 테스트")
     void make_delimter_list(){
-        List<String> delimeterList = delimeterSegmentProcessor.makeDelimeterList(">");
+        List<String> delimeterList = delimeterSegmentProcessor.extractDelimeterList(">");
         List<String> expectedList = new ArrayList<>(Arrays.asList(",",":",">"));
         assertEquals(delimeterList.size(),3);
         assertTrue(delimeterList.containsAll(expectedList));

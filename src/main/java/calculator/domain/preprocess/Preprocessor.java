@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static calculator.utils.Util.isInteger;
-
 public class Preprocessor {
 
     private final DelimeterSegmentProcessor delimeterSegmentProcessor;
@@ -30,7 +28,7 @@ public class Preprocessor {
         List<String> delimeterList = new ArrayList<>(Arrays.asList(",", ":"));
 
         if (validateDelimeterRequest(input)) {
-            return delimeterSegmentProcessor.makeDelimeterList(delimeterSegmentProcessor.extractCustomDelimeter(input));
+            return delimeterSegmentProcessor.extractDelimeterList(delimeterSegmentProcessor.extractCustomDelimeter(input));
         }
 
         return delimeterList;

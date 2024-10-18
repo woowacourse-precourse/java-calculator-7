@@ -35,7 +35,7 @@ public class DelimeterSegmentProcessor {
         return newInput;
     }
 
-    public List<String> makeDelimeterList(String delimeter) {
+    public List<String> extractDelimeterList(String delimeter) {
         List<String> delimeterList = new ArrayList<>(Arrays.asList(",", ":"));
         delimeterList.add(delimeter);
         return delimeterList;
