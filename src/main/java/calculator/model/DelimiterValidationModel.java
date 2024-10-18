@@ -1,9 +1,9 @@
-package calculator;
+package calculator.model;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DelimiterValidation {
+public class DelimiterValidationModel {
 
     private static final String DEFAULT_DELIMITER_REGEX = "^(|([1-9][0-9]*([,:][1-9][0-9]*)*))$";
     private static final String CUSTOM_DELIMITER_REGEX = "^//([^0-9])\\\\n(|([1-9][0-9]*(\\1[1-9][0-9]*)*))$";
@@ -32,8 +32,8 @@ public class DelimiterValidation {
         throw new IllegalArgumentException("잘못된 사용자 입력입니다.");
     }
 
-    static String[] validateDelimiter(boolean isCustomDelimiter, String formula) {
-        if (isCustomDelimiter) {
+    public static String[] validateDelimiter(boolean delimiterType, String formula) {
+        if (delimiterType) {
             return validateCustomDelimiter(formula);
         }
         return validateDefaultDelimiter(formula);
