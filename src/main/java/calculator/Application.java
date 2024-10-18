@@ -1,6 +1,6 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.Console;
+import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) {
@@ -9,7 +9,11 @@ public class Application {
         // 입력
         // 문자열 str 입력받음
         System.out.println("덧셈할 문자열을 입력해 주세요.\n");
-        String str = Console.readLine();
+
+        Scanner scanner = new Scanner(System.in);
+
+        String str;
+        str = scanner.nextLine();
 
         // 커스텀 구분자 찾기
 
