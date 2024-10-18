@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.List;
+
 public class StringSumCalculator {
     private static final String START_MESSAGE = "덧셈할 문자열을 입력해 주세요.";
     private static InputHandler inputHandler;
@@ -8,8 +10,10 @@ public class StringSumCalculator {
         inputHandler = new InputHandler();
     }
 
-    public void start() {
+    public void run() {
         System.out.println(START_MESSAGE);
-        inputHandler.inputString();
+
+        String inputString = inputHandler.inputString();
+        List<Integer> numbers = inputHandler.extractNumbers(inputString);
     }
 }
