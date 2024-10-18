@@ -16,7 +16,7 @@ public class Calculator {
 
     public int calculate(String inputString){
 
-        if(isEmptyString(inputString)){
+        if(Validator.isEmptyString(inputString)){
             return 0;
         }
 
@@ -25,14 +25,6 @@ public class Calculator {
         return sumNumbers(numbers);
     }
 
-    /**
-     * 빈 문자열을 처리하는 메서드
-     * @param inputString
-     * @return 빈 문자열일 경우 true
-     */
-    private boolean isEmptyString(String inputString) {
-        return inputString == null || inputString.isEmpty();
-    }
 
     /**
      * 숫자를 추출하는 메서드
@@ -46,6 +38,8 @@ public class Calculator {
         if(inputString.contains("//")){
             int start = inputString.indexOf("//");
             int end = inputString.indexOf("\\n");
+
+            Validator.isInvalidCustomDelimiter(end);
 
             String newDelimiter = extractDelimiter(inputString,start+2,end);
 
@@ -80,7 +74,7 @@ public class Calculator {
         int sum = 0;
 
         for (String number : numbers) {
-            sum += Integer.parseInt(number.trim());
+            sum += Validator.parsePositiveInt(number);
         }
 
         return sum;
