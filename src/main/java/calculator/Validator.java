@@ -3,6 +3,7 @@ package calculator;
 public class Validator {
 
     private static final String INVALID_PAIR_ERROR_MESSAGE = "커스텀 구분자의 형식이 올바르지 않습니다.";
+    private static final String INVALID_CONTENTS_MESSAGE = "피 연산 데이터에 구분자와 숫자가 아닌 문자가 포함되어 있습니다.";
 
     public static void checkValidCustomFormat(String inputData) {
         char[] inputDataArray = inputData.toCharArray();
@@ -28,7 +29,7 @@ public class Validator {
         while (index < contents.length) {
             char c = contents[index];
             if (!(isSeparators(c, separators) || isNumber(c))) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException(INVALID_CONTENTS_MESSAGE);
             }
             index++;
         }
