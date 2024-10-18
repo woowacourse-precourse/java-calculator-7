@@ -10,7 +10,6 @@ public class UserInput {
     private String input;
     private String regex = "^(\\/\\/)([^a-zA-Z0-9.: ]{1})";
 
-
     public UserInput(String input) {
         this.input = input;
         init();
@@ -39,7 +38,7 @@ public class UserInput {
         if(matcher.matches()) {
             customDelimiter = matcher.group(2);
         }else {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("커스텀 구분자 형식이 일치하지 않습니다.");
         }
     }
     public boolean isCustomDelimiterPresent() {
