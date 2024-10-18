@@ -1,6 +1,9 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+package calculator;
+
+import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
@@ -12,6 +15,7 @@ public class Application {
 }
 
 class StringCalculator {
+    static String[] delimiters = {",", ":"}; // 쉼표와 콜론 구분자
 
     public int calculate() {
         String input = Console.readLine(); // 사용자 입력 받기
@@ -26,7 +30,16 @@ class StringCalculator {
             return Integer.parseInt(input);
         }
 
-        // 기본 동작 추가 예정
-        return -1;  // 임시값
+        // 기본 구분자로 숫자 합 계산
+        String[] numbers = input.split(delimiters[0]);  // "," 분리하기!
+        int sum = 0;
+        for (String number : numbers) {
+            String[] splitNumbers = number.split(delimiters[1]); //":" 분리하기!
+            for (String num : splitNumbers) {
+                sum += Integer.parseInt(num);
+            }
+        }
+
+        return sum;
     }
 }
