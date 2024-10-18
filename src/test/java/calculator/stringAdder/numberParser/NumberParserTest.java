@@ -64,6 +64,21 @@ class NumberParserTest {
     assertTrue(actualMessage.contains(expectedMessage));
   }
 
+  @Test
+  void getNumbers_DecimalNumber_fail() {
+    String input = String.valueOf(Long.MAX_VALUE)+",3.5,2,3";
+    String[] delimiters = {",", ":","$"};
+
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+      numberParser.getNumbers(input, delimiters);
+    });
+
+    String expectedMessage = "NumberParser: 소수는 허용되지 않습니다: 3.5";
+    String actualMessage = exception.getMessage();
+
+    assertTrue(actualMessage.contains(expectedMessage));
+  }
+
   @ParameterizedTest
   @MethodSource("provideInvalidInputs")
   void testGetNumbersWithInvalidInput(String input, String[] delimiters) {
