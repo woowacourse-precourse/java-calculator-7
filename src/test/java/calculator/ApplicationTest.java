@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import calculator.controller.CalculateApplication;
-import calculator.controller.CalculateInteger;
+import calculator.controller.InputCalculator;
 import calculator.controller.CustomSeparator;
 import calculator.model.Input;
 import camp.nextstep.edu.missionutils.test.NsTest;
@@ -54,7 +54,7 @@ class ApplicationTest extends NsTest {
         Input input = new Input("1,2,3:4", "[,:]", numberList);
 
         //when
-        int calculateResult = CalculateInteger.calculateResult(input);
+        int calculateResult = InputCalculator.calculateResult(input);
 
         //then
         assertThat(calculateResult).isEqualTo(10);

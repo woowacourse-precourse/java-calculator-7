@@ -6,7 +6,7 @@ public class CustomSeparator {
 
     public static Input findCustomSeparator(Input input) {
         String origin = input.origin();
-        if (origin.length() < 4) {
+        if (IsAgainstCustomLengthRule(origin)) {
             return input;
         }
         if (origin.indexOf("//") == 0 && origin.indexOf("\\n") == 3) {
@@ -19,4 +19,9 @@ public class CustomSeparator {
         }
         return input;
     }
+
+    private static boolean IsAgainstCustomLengthRule(String origin) {
+        return origin.length() < 4;
+    }
+
 }
