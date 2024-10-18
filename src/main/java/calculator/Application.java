@@ -12,12 +12,20 @@ public class Application {
             return;
         }
 
-        String[] numbers = new StringHandler().split(input, ",|:");
-        Calculator calculator = new Calculator();
-        int result = 0;
-        for (String number : numbers) {
-            int num = Integer.parseInt(number);
-            result = calculator.add(result, num);
+        try {
+            String[] numbers = new StringHandler().split(input, ",|:");
+            Calculator calculator = new Calculator();
+            int result = 0;
+            for (String number : numbers) {
+                int num = Integer.parseInt(number);
+                if (num < 0) {
+                    throw new IllegalArgumentException("잘못된 입력 형식입니다.");
+                }
+                result = calculator.add(result, num);
+            }
+            System.out.println("결과 : " + result);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(e);
         }
     }
 }
