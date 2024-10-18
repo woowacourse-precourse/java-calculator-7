@@ -1,4 +1,4 @@
-package calculator;
+package calculator.view;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
