@@ -2,6 +2,8 @@ package calculator.utils;
 
 public class NumUtil {
 
+    private NumUtil() {}
+
     public static boolean isNum(String num) {
         return num.matches("^[0-9]*$"); // 0~9 사이의 숫자
     }

@@ -8,6 +8,8 @@ public class InputFilter {
     private static final int CUSTOM_PREFIX_LENGTH = 2;
     private static final int CUSTOM_LENGTH = 5;
 
+    private InputFilter() {}
+
     public static Input parseInput(String value) {
         if (isCustom(value)) {
             return CustomInput.from(getCleanedNumStr(value), getCustomSeparator(value));
