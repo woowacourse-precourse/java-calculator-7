@@ -38,4 +38,21 @@ class InputDataTest {
         assertThat(inputData.convertCalculatorPart()).isEqualTo("1;2.3!4");
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3!4","a1,2:3","1,가,2,3"})
+    @DisplayName("기본 구분자를 사용할 때 숫자와 기본구분자 이외의 문자가 있으면 예외가 발생한다")
+    void isInvalidCalculatorWithDefaultDelimiter(){
+        assertThatThrownBy(()->new InputData("1,2,3!4"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[F0001]");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3,4,",":1:2:3","1:2,3"})
+    @DisplayName("기본 구분자를 사용할 때 숫자와 기본구분자만 있으면 예외가 발생하지 않는다")
+    void isValidCalculatorWithDefaultDelimiter(String input){
+        assertThatCode(()->new InputData(input))
+                .doesNotThrowAnyException();
+    }
+
 }

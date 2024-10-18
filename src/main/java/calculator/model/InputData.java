@@ -8,11 +8,13 @@ public class InputData {
 
     public InputData(String input) {
         this.input = input;
+        validate();
     }
 
-    public void validate(String input){
-        // TODO : 입력값으로 Delimiter 객체와 Calculator 객체를 생성하는지 검증한다.
-        // TODO : 기존의 구현은 각각의 객체에서 규칙에 맞게 검증하는 코드를 작성한다.
+    public void validate(){
+        if (!isDelimiter() && !convertCalculatorPart().matches("^[0-9,:]*$")) {
+            throw new IllegalArgumentException("[ERROR][F0001] 기본 구분자를 사용하는 경우 숫자와 기본 구분자만 입력 가능합니다.");
+        }
     }
 
     public boolean isDelimiter(){
@@ -33,11 +35,12 @@ public class InputData {
 
     public String convertCalculatorPart() {
         Matcher calculatorMatcher = getMatcher("^//(.*)\\\\n(.*)");
-        String calculator = "";
+        String calculator = input;
 
         if(calculatorMatcher.matches()){
             calculator = calculatorMatcher.group(2);
         }
+
         return calculator;
     }
 
