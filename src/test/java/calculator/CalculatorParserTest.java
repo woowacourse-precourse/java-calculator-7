@@ -27,4 +27,41 @@ class CalculatorParserTest {
                 Arguments.of("1,2:3", List.of(1, 2, 3))
         );
     }
+
+
+
+    @ParameterizedTest
+    @MethodSource("provide2")
+    void 커스텀_구분자를_파싱할_수_있다(String input, String guess) {
+        String ret = CalculatorParser.extractCustomDelimiter(input);
+
+        assertThat(ret).isEqualTo(guess);
+    }
+
+    private static Stream<Arguments> provide2() {
+        return Stream.of(
+                Arguments.of("//a\n21331", "a"),
+                Arguments.of("//aa\n21331", "aa"),
+                Arguments.of("21331", null)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("provide3")
+    void 커스텀_구분자를_기준으로_파싱할_수_있다(String input, List<Integer> guess) {
+        // when
+        List<Integer> ret = CalculatorParser.parse(input);
+
+        // then
+        assertThat(ret).isEqualTo(guess);
+    }
+
+    private static Stream<Arguments> provide3() {
+        return Stream.of(
+                Arguments.of("//A\n1A2A3", List.of(1, 2, 3)),
+                Arguments.of("//?\n1?2:3", List.of(1, 2, 3))
+        );
+    }
+
+
 }
