@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 /**
  * @author : jiffyin7@gmail.com
@@ -77,6 +78,17 @@ class NumberParserTest {
     String actualMessage = exception.getMessage();
 
     assertTrue(actualMessage.contains(expectedMessage));
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = {"1a,2,3", "1,2b,3", "1,2,3c"})
+  void getNumbers_invalidNumberFormat_fail(String input) {
+    String[] delimiters = {",", ":"};
+
+    Exception exception = assertThrows(IllegalArgumentException.class, () ->
+        numberParser.getNumbers(input, delimiters)
+    );
+    assertTrue(exception.getMessage().contains("유효하지 않은 숫자 형식 입니다"));
   }
 
   @ParameterizedTest

@@ -36,7 +36,7 @@ public class NumberParser {
       throw new IllegalArgumentException(this.getClass().getSimpleName()+ ": 소수는 허용되지 않습니다: " + number);
     }
     if (!NUMBER_PATTERN.matcher(number).matches()){
-      throw new IllegalArgumentException(this.getClass().getSimpleName()+ ": 유효하지 않은 숫자 형식 입니다.: " + number);
+      throw new IllegalArgumentException(this.getClass().getSimpleName()+ ": 유효하지 않은 숫자 형식 입니다: " + number);
     }
   }
 }
