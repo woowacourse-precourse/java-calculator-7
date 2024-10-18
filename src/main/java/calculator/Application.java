@@ -18,11 +18,14 @@ public class Application {
         // 구분자 추출
         if(separator.validateCustomSeparatorForParsing(input)){
             Character customSeparator = separator.parseCustomSeparator(input);
+            separator.addNewSeparator(customSeparator);
+
             calculatorFormula = separator.parseString(input);
         }
 
         // 계산 시작
         ArrayList<String> parsedCalculatorFormula = adder.parseStringWithSeparators(calculatorFormula);
+        System.out.println("parsedCalculatorFormula = " + parsedCalculatorFormula);
 
         if(!adder.isValidated(parsedCalculatorFormula)){
             throw new IllegalArgumentException();
