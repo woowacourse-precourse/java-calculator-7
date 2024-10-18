@@ -42,7 +42,7 @@ public class StringCalculator {
         return sum;
     }
 
-    private static String[] generateSeparatedNumbers(DelimitedNumbers delimitedNumbers, DelimiterResult delimiterResult) {
+    private String[] generateSeparatedNumbers(DelimitedNumbers delimitedNumbers, DelimiterResult delimiterResult) {
         return delimitedNumbers.getStringNumbers().split(delimiterResult.getDelimiterResult());
     }
 
