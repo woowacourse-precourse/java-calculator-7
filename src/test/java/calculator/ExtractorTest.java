@@ -42,7 +42,7 @@ class ExtractorTest {
         String delimiter = "?";
 
         //when
-        int[] result = ex.extractNumbers(input, delimiter);
+        int[] result = ex.makeNumberArray(input, delimiter);
 
         //then
         assertArrayEquals(new int[]{1, 2, 3}, result);
@@ -56,7 +56,7 @@ class ExtractorTest {
         String delimiter = "[";
 
         //when
-        int[] result = ex.extractNumbers(input, delimiter);
+        int[] result = ex.makeNumberArray(input, delimiter);
 
         //then
         assertArrayEquals(new int[]{1, 2, 3}, result);
@@ -70,7 +70,7 @@ class ExtractorTest {
         String delimiter = extractor.extractDelimiter(input);
 
         //when
-        int[] result = extractor.extractNumbers(input, delimiter);
+        int[] result = extractor.makeNumberArray(input, delimiter);
 
         //then
         assertArrayEquals(new int[]{1, 2, 3}, result);

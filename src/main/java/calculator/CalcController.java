@@ -22,9 +22,7 @@ public class CalcController {
 
         Extractor ex = new Extractor();
         String delimiter = ex.extractDelimiter(numsWithDelimiter);
-        String delimitedNums =
-            (delimiter.isEmpty()) ? numsWithDelimiter : numsWithDelimiter.substring(delimiter.length() + 4);
-        int[] nums = ex.extractNumbers(delimitedNums, delimiter);
+        int[] nums = ex.makeNumberArray(numsWithDelimiter, delimiter);
 
         Calculator calc = new PositiveCalculator(nums);
         outputView.printCalculatedResult(calc.sum());
