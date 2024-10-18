@@ -1,6 +1,6 @@
-package calculator.service;
+package calculator.util;
 
-public class ExtractService {
+public class ExtractUtil {
     public static final String CUSTOM_PREFIX = "//";
     public static final String CUSTOM_SUFFIX = "\\n";
     public static final String EMPTY = "";
