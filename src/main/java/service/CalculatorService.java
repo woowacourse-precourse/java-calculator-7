@@ -3,10 +3,11 @@ package service;
 import domain.Number;
 
 public class CalculatorService {
-    public int sum(int[] numbers){
+    public int sum(Number number){
         int sum = 0;
-        for (int number : numbers) {
-            sum += number;
+        int[] numbers = number.getNumbers();
+        for(int i : numbers){
+            sum += i;
         }
         return sum;
     }
@@ -20,7 +21,7 @@ public class CalculatorService {
             numbers = splitByDelimiter(input);
         }
         else{
-            throw new IllegalArgumentException("Invalid input");
+            throw new IllegalArgumentException("유효하지 않은 형식입니다.");
         }
         return new Number(numbers);
     }

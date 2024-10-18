@@ -8,6 +8,10 @@ public class Number {
         this.numbers = numbers;
     }
 
+    public int[] getNumbers() {
+        return numbers;
+    }
+
     private void validateNumber(int[] numbers) {
         for(int number : numbers){
             if(number <=0){
