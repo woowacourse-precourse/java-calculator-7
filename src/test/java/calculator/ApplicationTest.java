@@ -60,6 +60,12 @@ class ApplicationTest extends NsTest {
                 .isInstanceOf(IllegalArgumentException.class));
     }
 
+    @Test
+    void 커스텀_구분자_숫자_사용() {
+        assertSimpleTest(() -> assertThatThrownBy(() -> runException("//1\\n2"))
+                .isInstanceOf(IllegalArgumentException.class));
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
