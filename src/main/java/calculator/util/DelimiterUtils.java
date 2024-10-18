@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class DelimiterUtils {
 
-    // 커스텀 구분자를 처리하는 패턴. "\\n" 처리를 위한 정규식 적용
+    // 커스텀 구분자를 처리하는 패턴. "\n" 처리를 위한 정규식 수정
     public static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\\\\n(.*)");
 
     // 유틸리티 클래스이므로 인스턴스 생성 방지
@@ -20,7 +20,7 @@ public class DelimiterUtils {
         return "[,:]";
     }
 
-    public static String[] splitInput(String input) {
+    public static String[] splitByDelimiter(String input) {
         Matcher matcher = getCustomDelimiterMatcher(input);
 
         if (matcher.matches()) {
