@@ -46,7 +46,9 @@ public class Application {
             queue.offer(num);
         }
         int sum = 0;
-
+        while (!queue.isEmpty()) {
+            sum += queue.poll();
+        }
         return sum;
     }
 }
