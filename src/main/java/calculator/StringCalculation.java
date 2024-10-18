@@ -13,7 +13,7 @@ public class StringCalculation {
     public void startCalculate() {
         StringProcessor stringProcessor = new StringProcessor();
 
-        String[] splitedString = stringProcessor.splitWithDelimiter(inputView.inputString());
+        String[] splitedString = stringProcessor.splitWithCustomDelimiter(inputView.inputString());
         resultView.printResult(stringProcessor.calculate(splitedString));
 
     }

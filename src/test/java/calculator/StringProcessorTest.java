@@ -14,6 +14,14 @@ public class StringProcessorTest {
     }
 
     @Test
+    @DisplayName("커스텀 구분자 분리 테스트")
+    void 커스텀_구분자_기준_분리(){
+        StringProcessor stringProcessor = new StringProcessor();
+
+        Assertions.assertThat(stringProcessor.splitWithCustomDelimiter("//;\n1;2;3")).containsExactly("1", "2", "3");
+    }
+
+    @Test
     @DisplayName("덧셈 기능 구현")
     void 덧셈_기능_테스트() {
         StringProcessor stringProcessor = new StringProcessor();
