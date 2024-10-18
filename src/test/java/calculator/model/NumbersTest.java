@@ -22,13 +22,6 @@ public class NumbersTest {
 		assertThrows(IllegalArgumentException.class, () -> Numbers.from(invalidData));
 	}
 
-	static Stream<Arguments> negativeOrZeroNumbers() {
-		return Stream.of(
-			Arguments.of(Arrays.asList(1L, 2L, -3L)),
-			Arguments.of(Arrays.asList(1L, 0L))
-		);
-	}
-
 	@DisplayName("숫자의 합을 계산할 수 있다")
 	@ParameterizedTest
 	@MethodSource("numbersAndCorrectResult")
@@ -41,6 +34,13 @@ public class NumbersTest {
 		return Stream.of(
 			Arguments.of(Arrays.asList(1L, 2L, 3L), 6L),
 			Arguments.of(Arrays.asList(1000000000L, 2000000000L, 3000000000L), 6000000000L)
+		);
+	}
+
+	static Stream<Arguments> negativeOrZeroNumbers() {
+		return Stream.of(
+			Arguments.of(Arrays.asList(1L, 2L, -3L)),
+			Arguments.of(Arrays.asList(1L, 0L))
 		);
 	}
 }
