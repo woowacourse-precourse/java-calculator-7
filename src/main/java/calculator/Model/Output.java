@@ -1,7 +1,7 @@
 package calculator.Model;
 
 public class Output {
-    public String consoleOutput(int sum) {
-        return "결과 : " + sum;
+    public static void consoleOutput(int sum) {
+        System.out.println("결과 : " + sum);
     }
 }

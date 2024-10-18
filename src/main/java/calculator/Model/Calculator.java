@@ -22,4 +22,13 @@ public class Calculator {
 
         return sum;
     }
+
+    public void turnOn() {
+        Input input = new Input();
+        String inputText = input.consoleInput();
+        input.getInputText(inputText);
+
+        int sum = calcSum(input);
+        Output.consoleOutput(sum);
+    }
 }
