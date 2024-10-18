@@ -1,7 +1,11 @@
 package calculator;
 
+import calculator.sumCalculator.CalculatorController;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO:: controller에서 사용자에게 입력을 받는다.
+        AppFactory appFactory = new AppFactory();
+        CalculatorController calculatorController = appFactory.createCalculatorController();
+        calculatorController.sum();
     }
 }
