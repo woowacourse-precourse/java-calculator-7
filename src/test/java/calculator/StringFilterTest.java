@@ -43,4 +43,30 @@ class StringFilterTest {
         Assertions.assertEquals(6,result3);
         Assertions.assertEquals(6,result4);
     }
+    @Test
+    void 메타문자_입력(){
+        String[] inputs = {
+                "//.\\n1.2.3",
+                "//*\\n1*2*3",
+                "//+\\n1+2+3",
+                "//?\\n1?2?3",
+                "//^\\n1^2^3",
+                "//$\\n1$2$3",
+                "//|\\n1|2|3",
+                "//[\\n1[2[3",
+                "//]\\n1]2]3",
+                "//(\\n1(2(3",
+                "//)\\n1)2)3",
+                "//{\\n1{2{3",
+                "//}\\n1}2}3",
+                "//\\\\n1\\2\\3"
+        };
+
+        int expectedResult = 6;
+
+        for (String input : inputs) {
+            int result = calculator.calculate(input);
+            Assertions.assertEquals(expectedResult, result);
+        }
+    }
 }
