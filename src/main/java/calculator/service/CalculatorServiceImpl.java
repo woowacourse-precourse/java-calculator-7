@@ -1,12 +1,12 @@
-package calculator.model;
+package calculator.service;
 
 import java.util.StringTokenizer;
 
-public class CalculatorImpl implements Calculator {
+public class CalculatorServiceImpl implements CalculatorService {
 
     private final String string;
 
-    public CalculatorImpl(String string) {
+    public CalculatorServiceImpl(String string) {
         this.string = string;
     }
 

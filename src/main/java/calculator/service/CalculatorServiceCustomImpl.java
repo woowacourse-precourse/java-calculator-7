@@ -1,13 +1,12 @@
-package calculator.model;
+package calculator.service;
 
-import java.util.Arrays;
 import java.util.regex.Pattern;
 
-public class CalculatorCustom implements Calculator{
+public class CalculatorServiceCustomImpl implements CalculatorService {
 
     private final String string;
 
-    public CalculatorCustom(String string) {
+    public CalculatorServiceCustomImpl(String string) {
         this.string = string;
     }
 
