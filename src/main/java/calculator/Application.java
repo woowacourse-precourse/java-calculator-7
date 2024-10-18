@@ -20,13 +20,7 @@ public class Application {
         dataVerification.checkIsPositiveNumber(splitStringWithSeparator);
         dataVerification.checkHasNumberFormat(splitStringWithSeparator);
 
-        getTotal(calculator);
+        calculator.getTotal(splitStringWithSeparator);
         calculatorIO.printResult(calculator);
-    }
-
-    static void getTotal(Calculator calculator) {
-        for (String number : calculator.processedInput) {
-            calculator.total += Integer.parseInt(number);
-        }
     }
 }
