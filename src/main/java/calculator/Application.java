@@ -35,6 +35,10 @@ public class Application {
                 .toList();
 
         for (int inputNumber : inputs) {
+            if (inputNumber == 0) {
+                throw new IllegalArgumentException("0을 포함합니다");
+            }
+
             if (inputNumber < 0) {
                 throw new IllegalArgumentException("음수를 포함합니다");
             }

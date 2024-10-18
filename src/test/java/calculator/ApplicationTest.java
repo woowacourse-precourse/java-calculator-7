@@ -108,6 +108,14 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 1");
         });
     }
+
+    @Test
+    void validateAddingNotContainZero() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("0,2;3")).isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {

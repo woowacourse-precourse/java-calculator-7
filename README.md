@@ -53,7 +53,7 @@
 |               | 구분자만 있는 경우             | ;;;;; 또는 ;;;,,, 또는 ,,,,                                 | IllegalArgumentException  | ✅   |
 | 정상적인 덧셈       | 기본 구분자의 정상적인 덧셈        | 1,2,3 또는 1;2;3 또는 1;2,3                                 | 6                         | ✅   |
 |               | 음수가 포함된 경우             | -1,2,3                                                  | IllegalArgumentException  | ✅   |
-|               | 0이 포함된 경우              | 0,2,3                                                   | IllegalArgumentException  |     |
+|               | 0이 포함된 경우              | 0,2;3                                                   | IllegalArgumentException  |  ✅   |
 |               | 형식은 맞췄지만 중간에 공백이 있는 경우 | 1;2 ;3 ;4;5                                             | 15                        |
 |               | 구분자가 아닌 문자를 포함할 경우     | :,kk333333                                              | IllegalArgumentException  |     |
 | 자료형 범위 초과할 경우 | 양수 하나가 int의 범위를 넘는 경우  | 2_147_483_648                                           | 2_147_483_648             |     |
