@@ -19,9 +19,17 @@ public class Application {
 
         // 2) 구분자를 기준으로 문자열 분리
         String delimiter = ",|:";
+
         String[] tokens = input.split(delimiter);
 
-        return 0;
+        // 3) 문자열에서 숫자 추출 후 더하기
+        int sum = 0;
+
+        for (String token : tokens) {
+            sum += Integer.parseInt(token);
+        }
+
+        return sum;
     }
 
 }
