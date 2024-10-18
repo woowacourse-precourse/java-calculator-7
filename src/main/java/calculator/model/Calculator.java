@@ -5,25 +5,32 @@ import java.util.ArrayList;
 
 public class Calculator {
 
+    private final ArrayList<String> addEntries;
+
+    public Calculator() {
+        this.addEntries = new ArrayList<>();
+    }
+
+    public void setAddEntry(String addEntry) {
+        addEntries.add(addEntry);
+    }
+
     public BigInteger add(String input) {
-        return null;
-    }
-
-    private ArrayList<String> parseInput(String input) {
-        return null;
-    }
-
-    private String getCustumDelimiter(Custom custom) {
-//        custom.getCustomSet();
-        return null;
-    }
-
-    private boolean isNumeric(String input) {
-        return false;
+        setAddEntry(input);
+        return calculateSum(addEntries);
     }
 
     private BigInteger calculateSum(ArrayList<String> input) {
-        return null;
+        BigInteger total = BigInteger.ZERO;
+
+        for (String number : input) {
+            total = total.add(new BigInteger(number));
+        }
+        return total;
+    }
+
+    public BigInteger getResult() {
+        return calculateSum(addEntries);
     }
 
 }
