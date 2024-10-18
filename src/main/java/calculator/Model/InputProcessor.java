@@ -5,10 +5,10 @@ import java.util.Arrays;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class StringProcessor {
+public class InputProcessor {
     private final String input;
 
-    public StringProcessor(String input) {
+    public InputProcessor(String input) {
         this.input = input;
     }
 
