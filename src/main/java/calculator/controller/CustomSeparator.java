@@ -6,21 +6,29 @@ public class CustomSeparator {
 
     public static Input findCustomSeparator(Input input) {
         String origin = input.origin();
-        if (IsAgainstCustomLengthRule(origin)) {
+        if (isAgainstCustomLengthRule(origin)) {
             return input;
         }
-        if (origin.indexOf("//") == 0 && origin.indexOf("\\n") == 3) {
+        if (hasCustomSeparator(origin)) {
             return new Input(origin.substring(5), "[,:" + origin.charAt(2) + "]",
                     input.numbers());
         }
-        if (origin.indexOf("//") == 0 && origin.indexOf("\\n") == 2) {
+        if (notHasCustomSeparator(origin)) {
             return new Input(origin.substring(4), input.separator(),
                     input.numbers());
         }
         return input;
     }
 
-    private static boolean IsAgainstCustomLengthRule(String origin) {
+    private static boolean notHasCustomSeparator(String origin) {
+        return origin.indexOf("//") == 0 && origin.indexOf("\\n") == 2;
+    }
+
+    private static boolean hasCustomSeparator(String origin) {
+        return origin.indexOf("//") == 0 && origin.indexOf("\\n") == 3;
+    }
+
+    private static boolean isAgainstCustomLengthRule(String origin) {
         return origin.length() < 4;
     }
 
