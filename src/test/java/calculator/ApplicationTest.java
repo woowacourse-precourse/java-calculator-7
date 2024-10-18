@@ -27,8 +27,8 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
-            run("//;\\n1");
-            assertThat(output()).contains("결과 : 1");
+            run("//;\\n1;2;3");
+            assertThat(output()).contains("결과 : 6");
         });
     }
 

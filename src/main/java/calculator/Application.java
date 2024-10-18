@@ -18,11 +18,21 @@ public class Application {
             System.out.println("결과 : 0");  // 빈 문자열이 입력되면 0 출력
             return;
         }
+        if (input.startsWith("//")) {
+            int delimiterEnd = input.indexOf("\\n");
+            if (delimiterEnd != -1) {
+                delimiter = input.substring(2, delimiterEnd);
+                input = input.substring(delimiterEnd + 2);
+            }
+        }
         String[] numbers = input.split(delimiter);
+
         int sum = 0;
         for (String number : numbers) {
+           
             sum += Integer.parseInt(number);
         }
+
         System.out.println("결과 : " + sum);
     }
 }
