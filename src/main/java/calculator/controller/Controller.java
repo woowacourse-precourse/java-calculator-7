@@ -56,12 +56,16 @@ public class Controller {
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException();
             }
-            if (num < 0) {
-                throw new IllegalArgumentException();
-            }
+            validateIsMinus(num);
             list.add(num);
         }
         return list;
+    }
+
+    private void validateIsMinus(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException();
+        }
     }
 
     private void printStartMessage() {
