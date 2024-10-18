@@ -1,7 +1,8 @@
 # java-calculator-precourse
 
-1. [x] input 값 받는 메서드 생성
-    - [ ] output 출력 메서드 추가 생성
+1. [x] I/O 처리 클래스 생성
+    - [x] input 받는 메서드 생성
+    - [x] output 출력 메서드 생성
 
 2. [x] 커스텀 구분자 확인
     - [x] 문자열 앞부분에 "//" 와 "\n" 이 존재 하는가
