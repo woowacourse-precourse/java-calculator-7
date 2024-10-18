@@ -1,15 +1,12 @@
 package calculator.Model;
 
-public class Input {
-    String delimiter;
-    NumberList numberList;
+import java.util.ArrayList;
 
-    public boolean hasDelimiter() {
-        return delimiter != null;
-    }
+public class Input {
+    private static ArrayList<Integer> numberList = new ArrayList<>();
 
     public boolean hasText() {
-        return numberList.isEmpty();
+        return !numberList.isEmpty();
     }
 
     public int getCustomDelimiterStartIndex(String rawText) {
@@ -56,17 +53,47 @@ public class Input {
         return rawText;
     }
 
+    public boolean checkValidNumber(int number) {
+        return Integer.MIN_VALUE <= number && number <= Integer.MAX_VALUE;
+    }
+
+    public int parseInt(String numberString) {
+        try {
+            return Integer.parseInt(numberString);
+        } catch (NumberFormatException exception) {
+            throw new IllegalArgumentException("입력이 올바르지 않습니다. 잘못된 구분자가 포함되어 있습니다.");
+        }
+    }
+
+    public String removeDelimiter(String rawNumber, String customDelimiter) {
+        rawNumber = rawNumber.replace(":", ",");
+        if (customDelimiter != null) {
+            rawNumber = rawNumber.replace(customDelimiter, ",");
+        }
+        return rawNumber;
+    }
+
+    public void registerNumber(String numberString) {
+        int number = parseInt(numberString);
+        if (checkValidNumber(number)) {
+            numberList.add(number);
+        }
+    }
+
     public void getInputText(String rawText) {
         rawText = dealEmpty(rawText);
 
         validInputText(rawText.charAt(rawText.length()-1));
-        int customDelimiterEndIndex = checkHasCustomDelimiter(rawText);
 
+        int customDelimiterEndIndex = checkHasCustomDelimiter(rawText);
         String customDelimiter = splitCustomDelimiter(customDelimiterEndIndex, rawText);
-        this.delimiter = customDelimiter;
 
         String rawNumber = splitText(customDelimiterEndIndex, rawText);
-        this.numberList = new NumberList();
-        this.numberList.makeNumberList(rawNumber, customDelimiter);
+        String delimiterRemovedNumber = removeDelimiter(rawNumber, customDelimiter);
+
+        String[] splittedNumberList = delimiterRemovedNumber.split(",");
+        for (String splittedNumber : splittedNumberList) {
+            registerNumber(splittedNumber);
+        }
     }
 }

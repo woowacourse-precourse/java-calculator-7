@@ -82,7 +82,7 @@ public class InputTest {
         String testText = "//;\n1,2";
         Input input = new Input();
         input.getInputText(testText);
-        assertTrue(input.hasDelimiter());
+        assertTrue(input.hasText());
     }
     @Test
     @DisplayName("커스텀 구분자와 함께 올바르게 입력된다.")
@@ -90,7 +90,7 @@ public class InputTest {
         String testText = "//;\n1,2:3";
         Input input = new Input();
         input.getInputText(testText);
-        assertTrue(input.hasDelimiter());
+        assertTrue(input.hasText());
     }
     @Test
     @DisplayName("커스텀 구분자와 함께 올바르게 입력된다.")
@@ -98,7 +98,7 @@ public class InputTest {
         String testText = "//;\n1;2;3;4";
         Input input = new Input();
         input.getInputText(testText);
-        assertTrue(input.hasDelimiter());
+        assertTrue(input.hasText());
     }
     @Test
     @DisplayName("커스텀 구분자와 함께 올바르게 입력된다.")
@@ -106,7 +106,7 @@ public class InputTest {
         String testText = "//;?\n1;?2;?3";
         Input input = new Input();
         input.getInputText(testText);
-        assertTrue(input.hasDelimiter());
+        assertTrue(input.hasText());
     }
     @Test
     @DisplayName("커스텀 구분자와 함께 올바르게 입력된다.")
@@ -114,7 +114,7 @@ public class InputTest {
         String testText = "//\n\n1\n2\n3";
         Input input = new Input();
         input.getInputText(testText);
-        assertTrue(input.hasDelimiter());
+        assertTrue(input.hasText());
     }
 
     @Test
