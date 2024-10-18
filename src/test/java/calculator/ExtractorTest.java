@@ -79,7 +79,7 @@ class ExtractorTest {
     public void 기본_구분자로_숫자를_추출한다() {
         //given
         Extractor extractor = new Extractor();
-        String input = "1,2,3";
+        String input = "1,2:3";
         String delimiter = extractor.extractDelimiter(input);
 
         //when
