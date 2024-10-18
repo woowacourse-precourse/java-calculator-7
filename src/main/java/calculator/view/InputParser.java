@@ -1,9 +1,9 @@
 package calculator.view;
 
-import calculator.domain.Delimeters;
+import calculator.domain.Delimiters;
+import calculator.domain.Numbers;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 public class InputParser {
 
@@ -11,14 +11,22 @@ public class InputParser {
     private static final String CUSTOM_START = "//";
     private static final String CUSTOM_END = "\\n";
 
-    public List<String> parseInput(Delimeters delimiters, String input) {
+    public Numbers parseNumbers(Delimiters delimiters, String input) {
         String delimiterRegex = String.join("|", delimiters.getElements());
-        String[] tokens = input.split(delimiterRegex);
-        List<String> numbers = new ArrayList<>();
-        for (String token : tokens) {
-            numbers.add(token.trim());
+        String numberInput = removeCustomDelimiter(input);
+        return new Numbers(Arrays.stream(numberInput.split(delimiterRegex))
+                .toList());
+    }
+
+    private String removeCustomDelimiter(String input) {
+        if (hasCustomDelimiter(input)) {
+            input = input.substring(input.indexOf(CUSTOM_END) + 2);
         }
-        return numbers;
+        return input;
+    }
+
+    private boolean hasCustomDelimiter(String input) {
+        return input.startsWith(CUSTOM_START) && input.contains(CUSTOM_END);
     }
 
     public String parseCustomDelimiter(String input) {
