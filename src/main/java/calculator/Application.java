@@ -14,7 +14,19 @@ public class Application {
             return 0;
         }
 
-        String[] numbers = input.split("[,:]");
+        String delimiter = "[,:]";
+
+        if (input.startsWith("//")) {
+            int delimiterIndex = input.indexOf("\\n");
+            System.out.println(delimiter);
+
+            if (delimiterIndex != -1) {
+                delimiter = input.substring(2, delimiterIndex);
+                input = input.substring(delimiterIndex + 2);
+            }
+        }
+
+        String[] numbers = input.split(delimiter);
         int sum = 0;
 
         for (String number : numbers) {
