@@ -20,8 +20,9 @@ public class ExtractNumber {
         if (input.startsWith("//")) {
             String[] splitInput = splitDelimiterAndValue(input);
             String customDelimiter = splitInput[0].substring(2);
-            delimiterValidator.validate(customDelimiter);
             String splitValue = splitInput[1];
+
+            delimiterValidator.validate(customDelimiter);
             valueValidator.validate(splitValue);
 
             if (!splitValue.contains(customDelimiter)) {
