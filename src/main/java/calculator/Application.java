@@ -8,13 +8,13 @@ public class Application {
         String str = Console.readLine();
 
         String[] nums;
-        String delimiter = ",;";
+        String delimiter = ",:";
 
         if(str.matches("//.\\\\n.+")){
             delimiter = String.valueOf(str.charAt(2));
             str = str.substring(5);
         }
-        nums = str.split(delimiter);
+        nums = str.split("["+ delimiter + "]");
 
         int sum = 0;
         for (String num : nums) {
