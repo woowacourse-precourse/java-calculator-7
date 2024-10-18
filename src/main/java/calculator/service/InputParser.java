@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 final class InputParser {
+    private InputParser() {}
+
     static List<Integer> parseByDelimiters(CalculatorRequest request) {
         String targetInput = request.targetInput();
         String delimiters = request.delimiters();
