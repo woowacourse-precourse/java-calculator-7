@@ -28,7 +28,7 @@ class ApplicationTest extends NsTest {
      * 입력값이 빈 문자열인지 확인
      */
     @Test
-    void 빈_문자열일_경우_0_반환(){
+    void 빈_문자열일_경우_true_반환(){
         String input = "";
         Boolean result = Application.isEmpty(input);
         assertThat(result).isEqualTo(true);
@@ -38,6 +38,18 @@ class ApplicationTest extends NsTest {
         String input = "1,2";
         Boolean result = Application.isEmpty(input);
         assertThat(result).isEqualTo(false);
+    }
+
+    /*
+     * validateInput 메서드 테스트
+     input = "1,2:3", "//;\n1;2;3", "//2\n123", "a,b;c", "//a\na123", "//;\na1;23",
+     "//;*\n1;2;3", 커스텀구분자가 /,\n," 중에 있을 경우를 테스트
+     */
+    @Test
+    void 기본구분자와_숫자만_있는경우_예외_없음(){
+        String input = "1,2:3";
+        Application.validateInput(input);
+        assertThat(true).isTrue();
     }
 
     /*
