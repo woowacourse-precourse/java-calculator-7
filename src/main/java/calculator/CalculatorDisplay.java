@@ -6,7 +6,7 @@ import camp.nextstep.edu.missionutils.Console;
 public class CalculatorDisplay {
 
     private static final String inputMessage = "덧셈할 문자열을 입력해 주세요.";
-    private static final String outputMessage = "결과: %d";
+    private static final String outputMessage = "결과 : %d";
 
 
     public void show(){
