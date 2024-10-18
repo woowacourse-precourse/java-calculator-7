@@ -8,6 +8,7 @@ import static calculator.message.ErrorMessage.INVALID_ELEMENT_MESSAGE;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Parser {
     public static List<Integer> processString(String str) {
@@ -29,7 +30,7 @@ public class Parser {
 
     private static void checkAndApplyCustomDelimiter() {
         if (CUSTOM_DELIMITER != null && !CUSTOM_DELIMITER.isEmpty()) {
-            DELIMITERS += "|" + CUSTOM_DELIMITER;
+            DELIMITERS += "|" + Pattern.quote(CUSTOM_DELIMITER);
         }
     }
 
