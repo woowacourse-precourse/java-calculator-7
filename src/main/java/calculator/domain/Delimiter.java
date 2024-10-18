@@ -26,7 +26,7 @@ public class Delimiter {
         separator +=  "|" + customDelimiter;
     }
 
-    public static String removeEnrollmentChar(String str) {
+    public static String removeEnrollmentString(String str) {
         if (str.length() <= 5) {
             return str;
         }

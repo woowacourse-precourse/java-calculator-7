@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class NumberConvertor {
 
     public static int[] stringToInt(String str) {
-        String removedEnrollmentChar = Delimiter.removeEnrollmentChar(str);
+        String removedEnrollmentChar = Delimiter.removeEnrollmentString(str);
 
         if (str.isEmpty()) {
             return new int[] {};
