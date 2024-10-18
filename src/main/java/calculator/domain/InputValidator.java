@@ -33,6 +33,9 @@ public class InputValidator {
     }
 
     private static void validateInputWithNormalDelimiter(String input) {
+        if(input.isEmpty())
+            return;
+
         String cleanedInput = input.replace(" ", "");
         if(!Pattern.matches(NORMAL_DELIMITER_INPUT_PATTERN, cleanedInput)) {
             throw new IllegalArgumentException(INVALID_INPUT_EXCEPTION_MESSAGE);
