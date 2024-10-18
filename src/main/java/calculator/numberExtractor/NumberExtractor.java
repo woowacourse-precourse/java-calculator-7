@@ -1,9 +1,10 @@
 package calculator.numberExtractor;
 
-import java.util.ArrayList;
+
+import calculator.dto.NumberDto;
 
 public interface NumberExtractor {
 
 
-    public ArrayList<Integer> extractNumbers(String input, String delimiter);
+    public NumberDto extractNumbers(String input, String delimiter);
 }

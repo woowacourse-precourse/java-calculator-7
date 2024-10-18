@@ -1,28 +1,31 @@
 package calculator.numberExtractor;
 
+
+import calculator.dto.NumberDto;
+import calculator.repository.NumberRepository;
 import calculator.validator.Validator;
-import java.util.ArrayList;
 
 public class CustomNumberExtractor implements NumberExtractor {
 
 
-    public ArrayList<Integer> extractNumbers(String input, String customDelimiter) {
-        Validator.isHaveNextToken(input);
+    public NumberDto extractNumbers(String input, String customDelimiter) {
 
+        Validator.isHaveNextToken(input);
         String[] splitDelimiter = input.split("\\\\n")[1].split(customDelimiter);
-        ArrayList<Integer> repository = new ArrayList<>();
+        NumberRepository numberRepository = new NumberRepository();
+
         for (String split : splitDelimiter) {
 
             int parseInt = 0;
             try {
                 parseInt = Integer.parseInt(split);
                 Validator.validate(parseInt);
-                repository.add(parseInt);
+                numberRepository.saveNumber(parseInt);
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException();
             }
         }
-        return repository;
+        return new NumberDto(numberRepository.getNumberRepository());
 
     }
 

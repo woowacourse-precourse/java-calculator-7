@@ -1,6 +1,7 @@
 package calculator.numberExtractor;
 
 import calculator.delimiterExtractor.CustomDelimiterExtractor;
+import calculator.dto.NumberDto;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
@@ -10,6 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class NumberExtractorTest {
+
 
     CustomNumberExtractor customNumberExtractor;
     DefaultNumberExtractor defaultNumberExtractor;
@@ -25,7 +27,8 @@ public class NumberExtractorTest {
 
     @Test
     void 기본구분자_숫자추출() {
-        ArrayList<Integer> extractNumbers = defaultNumberExtractor.extractNumbers("1,2:3", ",|:");
+        NumberDto numberDTO = defaultNumberExtractor.extractNumbers("1,2:3", ",|:");
+        ArrayList<Integer> extractNumbers = numberDTO.getNumberRepository();
         ArrayList<Integer> expectedNumbers = new ArrayList<Integer>(List.of(1, 2, 3));
         Assertions.assertEquals(expectedNumbers, extractNumbers);
     }
@@ -33,7 +36,8 @@ public class NumberExtractorTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3,4", "1:2:3:4", "1,2,3:4"})
     void 기본구분자_숫자추출_여러케이스(String input) {
-        ArrayList<Integer> extractNumbers = defaultNumberExtractor.extractNumbers(input, ",|:");
+        NumberDto numberDTO = defaultNumberExtractor.extractNumbers(input, ",|:");
+        ArrayList<Integer> extractNumbers = numberDTO.getNumberRepository();
         ArrayList<Integer> expectedNumbers = new ArrayList<Integer>(List.of(1, 2, 3, 4));
         Assertions.assertEquals(expectedNumbers, extractNumbers);
     }
@@ -44,8 +48,8 @@ public class NumberExtractorTest {
     void 커스텀구분자_숫자추출(String input) {
         CustomDelimiterExtractor customDelimiterExtractor = new CustomDelimiterExtractor();
         String extractDelimiter = customDelimiterExtractor.extractDelimiter(input);
-        ArrayList<Integer> extractNumbers = customNumberExtractor.extractNumbers(input, extractDelimiter);
-
+        NumberDto numberDTO = customNumberExtractor.extractNumbers(input, extractDelimiter);
+        ArrayList<Integer> extractNumbers = numberDTO.getNumberRepository();
         ArrayList<Integer> expectedNumbers = new ArrayList<Integer>(List.of(1, 2, 37));
 
         Assertions.assertEquals(expectedNumbers, extractNumbers);
