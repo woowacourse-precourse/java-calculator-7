@@ -16,6 +16,7 @@ public class CalculatorController {
 
     public void stringAdditionCalculate() {
         String input = calculatorPresenter.splitAndSumInput();
+        System.out.println(input);
         int result = calculatorService.splitAndSum(new CalculatorSumRequest(input));
         calculatorPresenter.splitAndSumOutput(result);
     }

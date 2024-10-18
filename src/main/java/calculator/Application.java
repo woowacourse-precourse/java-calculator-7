@@ -1,17 +1,16 @@
 package calculator;
 
-import calculator.application.CalculatorService;
-import calculator.ui.CalculatorController;
-import calculator.ui.CalculatorPresenter;
+import calculator.global.config.AppConfig;
 
 public class Application {
 
     public static void main(String[] args) {
-        CalculatorPresenter calculatorPresenter = new CalculatorPresenter(new StringBuilder());
-        CalculatorService calculatorService = new CalculatorService();
-        CalculatorController calculatorController = new CalculatorController(calculatorPresenter, calculatorService);
+        Application.run();
+    }
 
-        calculatorController.stringAdditionCalculate();
+    public static void run() {
+        AppConfig appConfig = new AppConfig();
+        appConfig.getCalculatorController().stringAdditionCalculate();
     }
 
 }
