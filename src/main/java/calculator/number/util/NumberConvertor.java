@@ -1,9 +1,6 @@
 package calculator.number.util;
 
 import calculator.constant.ErrorMessage;
-import calculator.separator.domain.Separator;
-
-import java.util.Arrays;
 import java.util.List;
 
 public class NumberConvertor {
@@ -17,8 +14,8 @@ public class NumberConvertor {
     }
 
 
-    public static List<Long> splitBySeparatorToList(String extractValue, Separator separator) {
-        return Arrays.stream(extractValue.split(separator.getSeparator()))
+    public static List<Long> stringListToLongList(List<String> numberInfo) {
+        return numberInfo.stream()
                 .map(NumberConvertor::stringToLongBlankIsZero)
                 .toList();
     }
