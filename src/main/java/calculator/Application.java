@@ -23,7 +23,8 @@ public class Application {
     		return Integer.parseInt(str);
     	}
     	if(str.length() > 1) {
-    		Application.checkFirstNum(str);
+    		String[] arr = Application.checkFirstNum(str);
+    		return Application.checkArrNum(arr);
     	}
 		return 0;
     }
@@ -40,7 +41,16 @@ public class Application {
     	}
 		return arr;
     }
-
     
- 
+    public static int checkArrNum(String[] arr) {
+    	int sum = 0;
+    	for(int i = 0; i < arr.length; i++) {
+    		if(Integer.parseInt(arr[i]) >= 0) {
+    			sum += Integer.parseInt(arr[i]);
+    		}else {
+    			throw new IllegalArgumentException();
+    		}
+    	}
+		return sum;
+    }
 }
