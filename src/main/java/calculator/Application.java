@@ -45,13 +45,7 @@ public class Application {
             String customDelimiterPart = input.substring(2, indexOfEndSign);
             String[] customDelimiters = customDelimiterPart.split(""); // 여러 커스텀 구분자 받는 경우 포함
 
-            for (String delim : customDelimiters) {
-                delim = delim.trim();
-                if (!delim.isEmpty()) {
-                    delimiterPart.append("|")
-                            .append(toRegex(delim.trim()));
-                }
-            }
+            appendCustomDelimiters(customDelimiters, delimiterPart);
 
             numberPart = input.substring(indexOfEndSign + CUSTOM_DELIMITER_END_SIGN_LENGTH);
         }
@@ -63,10 +57,19 @@ public class Application {
 
         -> validateNoNegativeNumbers, add 메서드에서 빈 문자열에 대한 처리로직을 추가해주어야한다.
         */
-
         validateNoNegativeNumbers(numbers); // 음수 있으면 예외 발생 (3.8 예외)
 
         return add(numbers);
+    }
+
+    private static void appendCustomDelimiters(String[] customDelimiters, StringBuilder delimiterPart) {
+        for (String delim : customDelimiters) {
+            delim = delim.trim();
+            if (!delim.isEmpty()) {
+                delimiterPart.append("|")
+                        .append(toRegex(delim));
+            }
+        }
     }
 
     private static void validateNoNegativeNumbers(String[] numbers) {
