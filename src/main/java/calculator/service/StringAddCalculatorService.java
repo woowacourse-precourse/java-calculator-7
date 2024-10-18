@@ -15,11 +15,18 @@ public class StringAddCalculatorService {
     }
 
     private String stringAdd(String[] splitStringArr, Calculator calculator) {
-        for (String s : splitStringArr) {
-            long num = Long.parseLong(s);
+        try {
+            for (String s : splitStringArr) {
+                long num = Long.parseLong(s);
+                if (num <= 0) {
+                    throw new IllegalArgumentException("양수만 입력 가능합니다");
+                }
 
-            calculator.add(num);
+                calculator.add(num);
 
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("입력값이 잘못되었거나 long 범위를 넘어가는 경우");
         }
         return calculator.getResult();
     }
