@@ -2,6 +2,9 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
@@ -22,5 +25,13 @@ public class Application {
 
     private static void printResult(int result) {
         System.out.println("결과 : " + result);
+    }
+
+    private static List<String> getDefaultDelimiters() {
+        List<String> delimiters = new ArrayList<>();
+        delimiters.add(",");
+        delimiters.add(":");
+
+        return delimiters;
     }
 }
