@@ -4,44 +4,44 @@ import calculator.common.exception.ExceptionFactory;
 import calculator.delimiter.domain.Delimiter;
 
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static calculator.common.exception.ExceptionType.*;
 
 public class CustomDelimiterService {
 
     private final String CUSTOM_DELIMITER_PREFIX = "//";
-    private final String CUSTOM_DELIMITER_SUFFIX = "\\n";
+    private final String CUSTOM_DELIMITER_SUFFIX = "\\\\n";
     private final String ESCAPE = "\\";
     private final String NUMBER_REGEX = ".*\\d.*";
+    private final int DELIMITER_GROUP = 1;
+    private final int TRIMMED_GROUP = 2;
+    private final Pattern DELIMITER_PATTERN = Pattern.compile(
+            "^" + CUSTOM_DELIMITER_PREFIX + "(.*)" + CUSTOM_DELIMITER_SUFFIX + "(.*)"
+    );
+
 
     public Optional<Delimiter> extract(String value) {
-        if (!hasCustomDelimiter(value)) {
-            return Optional.empty();
-        }
-        validateFormat(value);
-        int delimiterIndex = value.indexOf(CUSTOM_DELIMITER_SUFFIX);
-        String extracted = value.substring(CUSTOM_DELIMITER_PREFIX.length(), delimiterIndex);
-        validate(extracted);
-        return Optional.of(new Delimiter(extracted));
+        return Optional.ofNullable(value)
+                .map(DELIMITER_PATTERN::matcher)
+                .filter(Matcher::find)
+                .map(matcher -> {
+                    String extracted = matcher.group(DELIMITER_GROUP);
+                    validate(extracted);
+                    return new Delimiter(extracted);
+                });
     }
+
 
     public String trimCustomDelimiter(String value) {
-        if (!hasCustomDelimiter(value)) {
-            return value;
-        }
-        int suffixIndex = value.indexOf(CUSTOM_DELIMITER_SUFFIX);
-        return value.substring(suffixIndex + CUSTOM_DELIMITER_SUFFIX.length());
+        return Optional.ofNullable(value)
+                .map(DELIMITER_PATTERN::matcher)
+                .filter(Matcher::find)
+                .map(matcher -> matcher.group(TRIMMED_GROUP))
+                .orElse(value);
     }
 
-    private boolean hasCustomDelimiter(String value) {
-        return value.contains(CUSTOM_DELIMITER_PREFIX) && value.contains(CUSTOM_DELIMITER_SUFFIX);
-    }
-
-    private void validateFormat(String value) {
-        if (!value.startsWith(CUSTOM_DELIMITER_PREFIX)) {
-            throw ExceptionFactory.createException(CUSTOM_DELIMITER_FORMAT_WRONG);
-        }
-    }
 
     private void validate(String customDelimiter) {
         validateEmptyDelimiter(customDelimiter);
@@ -67,3 +67,4 @@ public class CustomDelimiterService {
         }
     }
 }
+
