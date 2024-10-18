@@ -10,7 +10,7 @@ public class InputValidator {
         validateNumbers(inputValue, delimiter); 
     }
 
-    private static String extractDelimiter(String inputValue) {
+    public static String extractDelimiter(String inputValue) {
         if (inputValue.startsWith("//")) { 
             int newLineIndex = inputValue.indexOf('\n'); 
             if (newLineIndex > 0) {
