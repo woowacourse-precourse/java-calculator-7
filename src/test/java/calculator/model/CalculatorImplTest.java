@@ -3,9 +3,10 @@ package calculator.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import calculator.validator.CustomDelimiterValueValidator;
+import calculator.validator.DefalutDelimiterValueValidator;
 import calculator.validator.DelimiterValidator;
 import calculator.validator.Validator;
-import calculator.validator.ValueValidator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -60,15 +61,20 @@ class CalculatorImplTest {
         }
 
         private ExtractNumber extractNumber() {
-            return new ExtractNumber(delimiterValidator(), valueValidator());
+            return new ExtractNumber(delimiterValidator(), customDelimiterValueValidator(),
+                    defalutDelimiterValueValidator());
         }
 
         private Validator delimiterValidator() {
             return new DelimiterValidator();
         }
 
-        private Validator valueValidator() {
-            return new ValueValidator();
+        private Validator customDelimiterValueValidator() {
+            return new CustomDelimiterValueValidator();
+        }
+
+        private Validator defalutDelimiterValueValidator() {
+            return new DefalutDelimiterValueValidator();
         }
     }
 }

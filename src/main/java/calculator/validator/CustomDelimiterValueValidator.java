@@ -2,7 +2,7 @@ package calculator.validator;
 
 import static calculator.util.Constant.DEFAULT_DELIMITERS;
 
-public class ValueValidator implements Validator {
+public class CustomDelimiterValueValidator implements Validator {
 
     @Override
     public void validate(String value) {
@@ -11,7 +11,7 @@ public class ValueValidator implements Validator {
         }
 
         if (value.matches(".*" + DEFAULT_DELIMITERS + ".*")) {
-            throw new IllegalArgumentException("잘못된 입력 형식: 기본 구분자와 커스텀 구분자가 혼용되었습니다.");
+            throw new IllegalArgumentException("잘못된 입력: 커스텀 구분자 외에 다른 구분자가 포함되어있습니다.");
         }
     }
 }
