@@ -33,7 +33,7 @@ public class Calculator {
     }
 
     private String getCustomDelimiter(){
-        Pattern pattern = Pattern.compile("//(.*?)n//");
+        Pattern pattern = Pattern.compile("//(.*?)\n");
         Matcher matcher = pattern.matcher(numbers);
         return matcher.group(1);
     }
