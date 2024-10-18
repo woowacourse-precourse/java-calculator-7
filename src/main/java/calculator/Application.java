@@ -50,6 +50,7 @@ public class Application {
             // 입력 받기
             System.out.println("덧셈할 문자열을 입력해 주세요.");
             return Console.readLine();
+
         }
 
         // 문자열 유효성 검사
@@ -94,7 +95,7 @@ public class Application {
         // 문자열로부터 양수 추출
         public ArrayDeque<String> splitNumbers(String input){
             // 구분자를 정의하려고 할때 사이에 숫자가 껴있을 수도 있음
-            String slicedString = input.replaceAll("//(.*?)\\\\n",":");
+            String slicedString = input.replaceAll("//(.*?)\\\\n|\\\\s|\\\\t|\\\\r|\\\\f",":");
             ArrayDeque<String> splitStringDeq = new ArrayDeque<>();
 
             if(slicedString.isEmpty()){
@@ -105,12 +106,11 @@ public class Application {
 
             try {
                 int i = delimiterArr.size()-1;
-                // 넓이우선이네
+
                 while(i>=0 && !splitStringDeq.isEmpty()) {
                     int arrSize = splitStringDeq.size();
                     for(int j=0;j< arrSize;j++){
                         String 덩어리 = splitStringDeq.pollFirst();
-                        덩어리 = 덩어리.trim();
                         if(덩어리.contains(delimiterArr.get(i))){
                             splitStringDeq.addAll(List.of(덩어리.split(delimiterArr.get(i))));
                             continue;
