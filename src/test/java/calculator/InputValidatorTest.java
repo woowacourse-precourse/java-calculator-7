@@ -23,7 +23,7 @@ public class InputValidatorTest {
     }
 
     @Test
-    void isCustomDelimiter() {
+    void isCustomDelimiterTest() {
         InputValidator inputValidator = new InputValidator();
         DelimiterType result;
 
