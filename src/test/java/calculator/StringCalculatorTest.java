@@ -85,7 +85,12 @@ class StringCalculatorTest {
                 new Object[]{"1:2&3",6},
 
                 new Object[]{"//&\n1:2.3",6},
-                new Object[]{"//^\n\n1:2:3",6}
+                new Object[]{"//^\n\n1:2:3",6},
+                new Object[]{"//*\r*",6},
+
+                new Object[]{"",0},
+                new Object[]{"\\n",0},
+                new Object[]{"0",0}
                 );
     }
 }

@@ -16,7 +16,6 @@ public class StringCalculator {
         UserInput userInput = new UserInput(input);
         setThirdDelimiterAndCalculate(userInput);
     }
-
     private void setThirdDelimiterAndCalculate(UserInput userInput) {
         if(userInput.isCustomDelimiterPresent()) {
             String customDelimiter = userInput.getCustomDelimiter();
@@ -27,7 +26,6 @@ public class StringCalculator {
             calculate(userInput.getNumberString(),defaultRegex);
         }
     }
-
     private void calculate(String numberString,String regex) {
         int sum = 0;
         String[] split = numberString.split(regex);
