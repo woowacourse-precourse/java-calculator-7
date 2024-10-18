@@ -12,7 +12,7 @@ public class NumberConvertor {
             if (input.isBlank()) return 0L;
             return Long.parseLong(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ErrorMessage.MAX_VALUE_ERROR);
+            throw new IllegalArgumentException(ErrorMessage.REGEX_ERROR);
         }
     }
 
