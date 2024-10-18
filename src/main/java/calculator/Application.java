@@ -10,6 +10,9 @@ public class Application {
 
         if (input == null || input.isEmpty()) {
             System.out.println(0);
+        } else {
+            String[] splited = input.split("[,|:]");
+
         }
 
     }
