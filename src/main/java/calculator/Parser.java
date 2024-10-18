@@ -1,20 +1,50 @@
 package calculator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Parser {
 
-    public static void checkInput(String input) {
+    private static final String CUSTOM = "custom";
+    private static final String DEFAULT = "default";
+
+    public static List<String> parse(String input) {
+        List<String> separators = new ArrayList<>();
+        separators.add(",");
+        separators.add(":");
+
+        String type = checkInput(input);
+        if (type.equals(DEFAULT)) {
+            return separators;
+        }
+        addCustomSeparators(separators, input);
+        return separators;
+    }
+
+    public static void addCustomSeparators(List<String> separators, String input) {
+        System.out.println(separators);
+        String separatorString = getSeparatorString(input);
+        for (int i = 0; i + 4 < separatorString.length(); i++) {
+            String newCustomSeparator = String.valueOf(separatorString.charAt(i + 2));
+            separators.add(newCustomSeparator);
+            separatorString = separatorString.substring(i + 4);
+        }
+    }
+
+
+    public static String checkInput(String input) {
+
         if (hasCustomSeparator(input)) {
-            int count = countCustomSeparator(input);
-            System.out.println("통과");
+            return CUSTOM;
         } else {
-            System.out.println("기본 구분자");
+            return DEFAULT;
         }
     }
 
     public static boolean hasCustomSeparator(String input) {
         if (input.startsWith("//")) {
-            String upToSeparator = stringUpToCustomSeparator(input);
-            if (isCorrectCustomSeparatorForm(upToSeparator)) {
+            String separator = getSeparatorString(input);
+            if (validateCustomSeparatorForm(separator)) {
                 return true;
             } else {
                 throw new IllegalArgumentException("잘못된 입력입니다.");
@@ -23,19 +53,17 @@ public class Parser {
         return false;
     }
 
-    public static String stringUpToCustomSeparator(String input) {
-        int separatorIdx = checkSeparatorIdx(input);
+    public static String getSeparatorString(String input) {
+        int separatorIdx = getLastSeparatorIdx(input);
         char[] customSeparatorArr = new char[separatorIdx];
         for (int i = 0; i < separatorIdx; i++) {
             customSeparatorArr[i] = input.charAt(i);
-            System.out.println("input.charAt(i) = " + input.charAt(i));
         }
         String str = new String(customSeparatorArr);
-        System.out.println("str = " + str);
         return str;
     }
 
-    public static int checkSeparatorIdx(String input) {
+    public static int getLastSeparatorIdx(String input) {
         int idx = 1;
         for (int i = 1; i < input.length(); i++) {
             if (input.charAt(i) >= '0' && input.charAt(i) <= '9') {
@@ -50,12 +78,8 @@ public class Parser {
         return idx;
     }
 
-    public static boolean isCorrectCustomSeparatorForm(String input) {
-        if (isCorrectPair(input)) {
-            System.out.println(input);
-            return true;
-        }
-        return false;
+    public static boolean validateCustomSeparatorForm(String input) {
+        return isCorrectPair(input);
     }
 
     public static boolean isCorrectPair(String input) {
@@ -67,7 +91,7 @@ public class Parser {
                 if (i + 4 >= input.length()) {
                     return false;
                 }
-                if (!isCorrectPairLast(input, i + 3)) {
+                if (!isCorrectLastElement(input, i + 3)) {
                     return false;
                 }
                 startPair++;
@@ -89,16 +113,10 @@ public class Parser {
         throw new IllegalArgumentException();
     }
 
-    public static boolean isCorrectPairLast(String input, int idx) {
+    public static boolean isCorrectLastElement(String input, int idx) {
         if (input.charAt(idx) == '\\' && input.charAt(idx + 1) == 'n') {
             return true;
         }
         return false;
     }
-
-    public static int countCustomSeparator(String input) {
-        int count = 0;
-        return count;
-    }
-
 }
