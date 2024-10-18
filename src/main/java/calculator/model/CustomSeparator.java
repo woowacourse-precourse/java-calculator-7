@@ -10,10 +10,10 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class CustomSeparator {
-    private final List<String> customSeparator;
+    private final List<String> customSeparators;
 
     public CustomSeparator() {
-        customSeparator = new ArrayList<>();
+        customSeparators = new ArrayList<>();
     } // customSeparator
 
     public List<Integer> separate(String input) {
@@ -22,12 +22,13 @@ public class CustomSeparator {
 
         if (matcher.find()) {
             addAll(Arrays.asList(matcher.group(1).split("")));
-        }
+        } // end if
 
-        String numbers = customSeparator.stream()
-                .reduce(matcher.group(2), (result, separator) -> result.replaceAll(separator, " "));
+        List<String> numbers = customSeparators.stream()
+                .map(customSeparator -> matcher.group(2).replaceAll(customSeparator, " "))
+                .toList();
 
-        return Arrays.stream(numbers.split(" "))
+        return numbers.stream()
                 .map(number -> number.isEmpty() ? "0" : number)
                 .mapToInt(Integer::parseInt).boxed()
                 .collect(Collectors.toList());
@@ -35,6 +36,6 @@ public class CustomSeparator {
 
     public void addAll(List<String> separator) {
         new CustomSeparatorValidator().validate(separator);
-        customSeparator.addAll(separator);
+        customSeparators.addAll(separator);
     } // addAll
 } // class
