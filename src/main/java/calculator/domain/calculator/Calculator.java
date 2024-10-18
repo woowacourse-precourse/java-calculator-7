@@ -15,9 +15,15 @@ public class Calculator {
     public Calculator(Delimiter delimiter){
         this.delimiter = delimiter;
     }
-    
 
-    public void getString(){
+    public void plusOperation(){
+        this.getString();
+        this.extractNumberList();
+        this.plusCalculate();
+        this.printResult();
+    }
+
+    private void getString(){
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String s = Console.readLine();
         Console.close();
@@ -40,7 +46,7 @@ public class Calculator {
         this.inputStr = s;
     }
 
-    public void extractNumberList(){
+    private void extractNumberList(){
         int num = 0;
         for(char ch: this.inputStr.toCharArray()){
             if(delimiter.isDelimiter(ch)){
@@ -57,7 +63,7 @@ public class Calculator {
         numberList.add(num);
     }
 
-    public void plusCalculate(){
+    private void plusCalculate(){
         for(int n : numberList){
             result+=n;
             if(result>=CalculatorConstant.LIMIT_NUMBER){
@@ -66,7 +72,7 @@ public class Calculator {
         }
     }
 
-    public void printResult(){
+    private void printResult(){
         System.out.println("결과 : "+result);
     }
 }

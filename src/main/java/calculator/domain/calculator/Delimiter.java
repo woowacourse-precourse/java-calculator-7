@@ -10,7 +10,7 @@ public class Delimiter {
         set.add(','); set.add(':');
     }
 
-    void addDelimiter(char ch){
+    public void addDelimiter(char ch){
         set.add(ch);
     }
 
