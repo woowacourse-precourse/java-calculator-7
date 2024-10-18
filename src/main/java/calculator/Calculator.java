@@ -43,7 +43,7 @@ public class Calculator {
     }
 
     private void registerCustomSeparator(Matcher matcher){
-        Character customSeparator = matcher.group().charAt(customSeparatorIdx);
+        char customSeparator = matcher.group().charAt(customSeparatorIdx);
 
         if(Character.isDigit(customSeparator)){
             throw new IllegalArgumentException("숫자는 커스텀 구분자로 등록 불가");
