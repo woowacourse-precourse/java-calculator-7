@@ -5,7 +5,7 @@ import camp.nextstep.edu.missionutils.Console;
 public class Calculator {
 	private String inputStr;
 	private long totalSum;
-	private char[] separator = new char[3];
+	private final char[] separator = new char[3];
 	private int separatorCnt;
 
 	public Calculator() {
@@ -50,6 +50,7 @@ public class Calculator {
 		if (startPos != 0 || endPos != 3) {
 			throw new IllegalArgumentException();
 		}
+
 		// 커스텀 구분자로 숫자가 들어왔을 때
 		char newSeparator = str.charAt(2);
 		if ('0' <= newSeparator && newSeparator <= '9') {
