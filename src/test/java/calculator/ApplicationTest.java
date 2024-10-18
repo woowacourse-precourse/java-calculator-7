@@ -49,6 +49,22 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 구분자만_있는_경우() {
+        assertSimpleTest(() -> {
+            run(",:");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 빈값을_입력하는_경우() {
+        assertSimpleTest(() -> {
+            run(" ");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))
@@ -59,7 +75,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자가_문자열의_앞이아닌_다른곳에_위치하는_경우() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("1,2,3//?\n"))
+                assertThatThrownBy(() -> runException("//.\\n1,2,3//?\\n"))
                         .isInstanceOf(IllegalArgumentException.class)
                         .hasMessageContaining("숫자 형식으로 변환할 수 없는 값입니다.")
         );
@@ -71,15 +87,6 @@ class ApplicationTest extends NsTest {
                 assertThatThrownBy(() -> runException("1:3?4"))
                         .isInstanceOf(IllegalArgumentException.class)
                         .hasMessage("3?4은 숫자 형식으로 변환할 수 없는 값입니다.")
-        );
-    }
-
-    @Test
-    void 빈값을_입력하는_경우() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("     "))
-                        .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessage("계산할 숫자를 입력하세요")
         );
     }
 
@@ -98,15 +105,6 @@ class ApplicationTest extends NsTest {
                 assertThatThrownBy(() -> runException("//??\\n1"))
                         .isInstanceOf(IllegalArgumentException.class)
                         .hasMessage("구분자는 문자만 가능합니다.")
-        );
-    }
-
-    @Test
-    void 구분자만_있는_경우() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException(",,,,:::::"))
-                        .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessage("계산할 숫자를 입력하세요")
         );
     }
 

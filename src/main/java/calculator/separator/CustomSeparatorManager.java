@@ -45,6 +45,7 @@ public class CustomSeparatorManager {
     }
 
     public String sliceCustomSeparators(String input) {
+
         Matcher matcher;
         while ((matcher = PATTERN.matcher(input)).find()) {
             input = input.substring(matcher.end());

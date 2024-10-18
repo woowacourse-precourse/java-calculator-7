@@ -1,7 +1,6 @@
 package calculator.separator;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
@@ -39,21 +38,23 @@ class SeparatorCalculatorTest {
         assertThat(numericString.toString()).isEqualTo(String.valueOf(1 + 2 + 3 + 4));
     }
 
-    @DisplayName("빈 입력값의 합을 계산하는 경우 예외가 발생한다.")
+    @DisplayName("빈 입력값의 합을 계산하는 경우 0을 반환한다.")
     @Test
     void sumWithEmptyInput() {
-        //when //then
-        assertThatThrownBy(() -> SeparatorCalculator.sum("", Separators.empty()))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("계산할 숫자를 입력하세요");
+        //when
+        NumericString result = SeparatorCalculator.sum("", Separators.empty());
+
+        //then
+        assertThat(result.toString()).isEqualTo("0");
     }
 
-    @DisplayName("구분자로만 이루어진 문자열의 합을 계산하는 경우 예외가 발생한다.")
+    @DisplayName("구분자로만 이루어진 문자열의 합을 계산하는 경우 0을 반환한다.")
     @Test
     void sumWithOnlySeparators() {
-        //when //then
-        assertThatThrownBy(() -> SeparatorCalculator.sum(",,,,::::", Separators.withDefault()))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("계산할 숫자를 입력하세요");
+        //when
+        NumericString result = SeparatorCalculator.sum(",,,,::::", Separators.withDefault());
+
+        // then
+        assertThat(result.toString()).isEqualTo("0");
     }
 }
