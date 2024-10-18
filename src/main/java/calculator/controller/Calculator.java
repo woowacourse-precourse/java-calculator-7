@@ -1,42 +1,34 @@
 package calculator.controller;
 
-import calculator.service.Extractor;
-import calculator.domain.Delimiters;
 import calculator.domain.Numbers;
 import calculator.io.InputHandler;
 import calculator.io.OutputHandler;
-
-import java.util.List;
+import calculator.service.Extractor;
 
 public class Calculator {
 
     private final InputHandler inputHandler;
     private final OutputHandler outputHandler;
-    private final Extractor extractor;
 
-    public Calculator(InputHandler inputHandler, OutputHandler outputHandler, Extractor extractor) {
+    public Calculator(InputHandler inputHandler, OutputHandler outputHandler) {
         this.inputHandler = inputHandler;
         this.outputHandler = outputHandler;
-        this.extractor = extractor;
     }
 
     public void run() {
         String userInput = getUserInput();
-
-        Delimiters delimiters = Delimiters.from(userInput);
-        Numbers numbers = extractNumbers(userInput, delimiters);
-
+        Numbers numbers = extractNumbers(userInput);
         outputHandler.showResultMessageWith(numbers.totalSum());
     }
 
-    private Numbers extractNumbers(String userInput, Delimiters delimiters) {
-        String numberPart = extractor.extractNumberPart(userInput, delimiters.isCustomDelimiter());
-        List<Integer> extractedNumbers = extractor.extractNumbers(numberPart, delimiters.getRegex());
-        return new Numbers(extractedNumbers);
+    private Numbers extractNumbers(String userInput) {
+        Extractor extractor = Extractor.from(userInput);
+        return extractor.extractNumbers();
     }
 
     private String getUserInput() {
         outputHandler.showInitialMessage();
         return inputHandler.getUserAction().value();
     }
+
 }

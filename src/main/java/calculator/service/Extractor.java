@@ -1,34 +1,56 @@
 package calculator.service;
 
+import calculator.domain.Delimiters;
+import calculator.domain.Number;
+import calculator.domain.Numbers;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Extractor {
 
-    private static final String NUMERIC_REGEX = "[0-9]+";
+    public static final String NUMBER_PART_REGEX = "-?\\d+([%s]-?\\d+)*";
+    public static final String SPLIT_NUMBER_PART_REGEX = "\\\\n";
 
-    public List<Integer> extractNumbers(String input, String delimiter) {
-        if(input.isEmpty()) {
-            return List.of(0);
+    private final Delimiters delimiters;
+    private final String numberPart;
+
+    private Extractor(String input) {
+        this.delimiters = Delimiters.from(input);
+        this.numberPart = extractNumberPart(input);
+    }
+
+    public static Extractor from(String input) {
+        return new Extractor(input);
+    }
+
+    public String extractNumberPart(String userInput) {
+        if (delimiters.isCustomDelimiter()) {
+            return userInput.split(SPLIT_NUMBER_PART_REGEX)[1];
         }
-        String[] extractNumberString = input.split(delimiter);
-        return Arrays.stream(extractNumberString)
-            .filter(this::isPositiveNumber)
+        return userInput;
+    }
+
+    public Numbers extractNumbers() {
+        List<Number> numbers = new ArrayList<>();
+        if (numberPart.isEmpty()) {
+            numbers.add(new Number());
+            return Numbers.from(numbers);
+        }
+        Pattern pattern = Pattern.compile(String.format(NUMBER_PART_REGEX, delimiters.getDelimiters()));
+        Matcher matcher = pattern.matcher(numberPart);
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException("숫자와 구분자로만 이루어져야 합니다.");
+        }
+        String splitRegex = delimiters.getSplitRegex();
+        String[] extractedNumbers = numberPart.split(splitRegex);
+        Arrays.stream(extractedNumbers)
             .map(Integer::parseInt)
-            .toList();
+            .forEach(value -> numbers.add(new Number(value)));
+        return Numbers.from(numbers);
     }
 
-    public String extractNumberPart(String input, boolean isCustomDelimiter) {
-        if (isCustomDelimiter) {
-            input = input.split("\\\\n")[1];
-        }
-        return input;
-    }
-
-    private boolean isPositiveNumber(String s) {
-        if (s.matches(NUMERIC_REGEX)) {
-            return true;
-        }
-        throw new IllegalArgumentException("양수와 구분자만 입력 가능합니다.");
-    }
 }

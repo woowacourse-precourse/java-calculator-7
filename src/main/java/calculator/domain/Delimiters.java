@@ -32,7 +32,12 @@ public class Delimiters {
         return !(INITIAL_DELIMITER.equals(this.delimiters));
     }
 
-    public String getRegex() {
+    public String getSplitRegex() {
         return String.join("|", this.delimiters);
     }
+
+    public String getDelimiters() {
+        return String.join("", this.delimiters);
+    }
+
 }
