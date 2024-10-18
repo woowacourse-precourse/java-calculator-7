@@ -68,7 +68,6 @@ public class Application {
 
 
     private String extractNumberString(String inputString) {
-        // 기본 구분자 추가
         delimiters.addDelimiter(':');
         delimiters.addDelimiter(',');
 
