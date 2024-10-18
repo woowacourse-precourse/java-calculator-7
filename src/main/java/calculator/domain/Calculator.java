@@ -2,6 +2,8 @@ package calculator.domain;
 
 import calculator.validator.CalculatorValidator;
 
+import java.util.List;
+
 public class Calculator {
 
     private final NumberStringExtractor numberStringExtractor;
@@ -14,15 +16,15 @@ public class Calculator {
         if (stringToAdd.isBlank()) {
             return 0;
         }
-        String[] stringsToNumber = numberStringExtractor.getStrings(stringToAdd);
-        return sumNumbers(stringsToNumber);
+        List<Integer> numbers = numberStringExtractor.getNumbers(stringToAdd);
+        return sumNumbers(numbers);
     }
 
-    private int sumNumbers(String[] stringToNumber) {
+    private int sumNumbers(List<Integer> numbers) {
         int sum = 0;
-        for (String str : stringToNumber) {
-            CalculatorValidator.validatePositivity(str);
-            sum += Integer.parseInt(str);
+        for (int num : numbers) {
+            CalculatorValidator.validatePositivity(num);
+            sum += num;
         }
         return sum;
     }

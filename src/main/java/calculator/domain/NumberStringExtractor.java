@@ -1,5 +1,10 @@
 package calculator.domain;
 
+import calculator.validator.CalculatorValidator;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class NumberStringExtractor {
 
     private final CustomDelimiterExtractor customDelimiterExtractor;
@@ -14,7 +19,7 @@ public class NumberStringExtractor {
         this.customDelimiterExtractor = customDelimiterExtractor;
     }
 
-    public String[] getStrings(String stringToAdd) {
+    public List<Integer> getNumbers(String stringToAdd) {
         String customDelimiter = null;
         if (!isUsingOriginalDelimiter(stringToAdd)) {
             customDelimiter = customDelimiterExtractor.getCustomDelimiter(stringToAdd);
@@ -22,7 +27,19 @@ public class NumberStringExtractor {
         }
         //  | 기호는 정규 표현식에서 "또는"의 의미를 가지고 있습니다.
         //  즉, 아래 코드는 customDelimiter, COLON, 또는 COMMA 로 문자열을 나누겠다는 뜻입니다.
-        return stringToAdd.split(customDelimiter + "|" + COLON + "|" + COMMA);
+        String[] numberStrings = stringToAdd.split(customDelimiter + "|" + COLON + "|" + COMMA);
+        return parse(numberStrings);
+    }
+
+    private List<Integer> parse(String[] numberStrings) {
+        List<Integer> numbers = new ArrayList<>();
+
+        for (String numberString : numberStrings) {
+            CalculatorValidator.validateNumbers(numberString);
+            int num = Integer.parseInt(numberString);
+            numbers.add(num);
+        }
+        return numbers;
     }
 
     private String changeStringWithoutFormat(String stringWithDelimiter) {
