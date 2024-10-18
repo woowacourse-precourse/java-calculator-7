@@ -11,11 +11,13 @@ public class InputManager {
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
     private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
     private static final String INVALID_CHARACTER_MESSAGE = "입력 문자열에 유효하지 않은 문자가 포함되어 있습니다: ";
+    private static final String DEFAULT_VALUE = "0";
+
 
     private final String input;
 
     public InputManager(String input, Delimiters delimiters) {
-        this.input = removeDelimiters(input, delimiters);
+        this.input = removeDelimiters(input, delimiters) + DEFAULT_VALUE;
     }
 
     private String removeDelimiters(String input, Delimiters delimiters) {

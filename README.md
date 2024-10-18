@@ -1,4 +1,3 @@
-# java-calculator-precourse
 ## 기능 목록
 
 ### Delimiter (구분자)
@@ -26,21 +25,22 @@
   * [x] `DefaultDelimiterType`으로부터 값을 가져와 기본 구분자를 등록한다.
   * [x] `CustomDelimiter`로부터 커스텀 구분자를 등록할 수 있다.
 
-### InputManager
+### InputManager (입력된 문자열 관리)
 * **입력된 문자열을 관리**
+  * [x] 기본 값을 0으로 세팅한다.
   * [x] `Delimiters`에 있는 구분자들을 문자열에서 제거한다.
   * [x] 문자를 숫자로 변환하여 리스트로 반환할 수 있다.
     * [x] 변환 과정에서 유효하지 않은 문자가 포함되면 `IllegalArgumentException`을 발생시킨다.
 
-### Calculator
+### Calculator (계산기)
 * **계산 로직**
   * [x] `InputManager`에서 준 리스트를 덧셈하여 결과를 저장한다.
 
-### InputView
+### InputView (입력 담당)
 * **입력**
   * [x] 입력받기 전 안내 메시지를 출력한다.
   * [x] 문자열을 입력받는다.
 
-### OutputView
+### OutputView (출력 담당)
 * **출력**
   * [x] 실행 결과를 출력한다.
