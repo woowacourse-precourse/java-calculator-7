@@ -2,6 +2,8 @@ package service;
 
 import domain.Number;
 
+import java.util.regex.Pattern;
+
 public class CalculatorService {
     public int sum(Number number){
         int sum = 0;
@@ -27,6 +29,19 @@ public class CalculatorService {
     }
 
     public int[] splitByCustomDelimiter(String input){
+        String delimiter = getDelimiter(input);
+        String numberString = input.substring(delimiter.length() + 3);  //줄바꿈 문자 뒤의 유효한 숫자 문자열만 추출
+        if(numberString.matches("[0-9" + Pattern.quote(delimiter) + "]+$")){
+                String[] arr = numberString.split(Pattern.quote(delimiter));
+                int[] numbers = new int[arr.length];
+                for(int i = 0; i < arr.length; i++){
+                    numbers[i] = Integer.parseInt(arr[i]);
+                }
+                return numbers;
+        }
+        else{
+            throw new IllegalArgumentException("유효하지 않은 문자가 포함되어 있습니다.");
+        }
     }
 
     public String getDelimiter(String input){
@@ -43,7 +58,7 @@ public class CalculatorService {
         String[] arr;
         int[] numbers;
         if(input.matches("[^0-9,:]+$")){
-            throw new IllegalArgumentException("잘못된 구분자나 문자가 포함되어 있습니다.");
+            throw new IllegalArgumentException("유효하지 않은 문자가 포함되어 있습니다.");
         }
         arr = input.split(",|:");
         numbers = new int[arr.length];
