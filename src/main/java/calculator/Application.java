@@ -5,7 +5,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Application {
-    static String input;
     static String delimiter = ",|:";
     static String regex = "^//(.+)\\\\n(.+)$";
     static Pattern pattern;
@@ -13,11 +12,9 @@ public class Application {
 
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        input = inputString();
+        String input = inputString();
 
-        isCustomDelimiter();
-
-        String[] stringArray = splitDelimiter(input, delimiter);
+        String[] stringArray = splitDelimiter(input);
 
         int[] intArray = new int[stringArray.length];
 
@@ -54,17 +51,22 @@ public class Application {
         }
     }
 
-    private static String[] splitDelimiter(String input, String delimiter) {
+    private static String[] splitDelimiter(String input) {
+        if (isCustomDelimiter(input)) {
+            delimiter = matcher.group(1);
+            input = matcher.group(2);
+        }
         return input.split(delimiter);
     }
 
-    private static void isCustomDelimiter() {
+    private static boolean isCustomDelimiter(String input) {
         pattern = Pattern.compile(regex);
         matcher = pattern.matcher(input);
 
         if (matcher.matches()) {
-            delimiter = matcher.group(1);
-            input = matcher.group(2);
+            return true;
+        } else {
+            return false;
         }
     }
 
