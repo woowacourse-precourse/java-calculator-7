@@ -8,12 +8,12 @@ public class InputTypeSorter {
 
     public static Input sort(String text) {
         if (containsBasicDelimiter(text)) {
-            return new BasicDelimiterInput(text);
+            return BasicInput.from(text);
         }
         if (containsCustomDelimiter(text)) {
-            return new CustomDelimiterInput(text);
+            return CustomInput.from(text);
         }
-        return new DefaultInput(text);
+        return DefaultInput.from(text);
     }
 
     public static boolean containsBasicDelimiter(String text) {
