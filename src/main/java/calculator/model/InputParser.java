@@ -11,7 +11,7 @@ public class InputParser {
 
 	public InputParser(String input) {
 		// 만약 사용자가 커스텀 구분자를 입력했다면, 커스텀 구분자를 따로 추출해서 구분자 목록에 추가한다..
-		List<String> delimiter = Arrays.asList(",", ":");
+		List<String> delimiter = new ArrayList<>(List.of(",", ":"));
 		extractCustomDelimiter(input).ifPresent(delimiter::add);
 		this.delimiters = delimiter;
 	}
