@@ -7,35 +7,38 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Extractor {
-    private Matcher divideDelimiterAndNumber(String calculationValue) {
+    public ExtractorDto saveExtractorDto(String calculationValue){
         final String START_POINT_DELIMITER = "//";
         final String END_POINT_DELIMITER = "\n";
-        Pattern pattern = Pattern.compile(START_POINT_DELIMITER + "(.*)" + END_POINT_DELIMITER + "(.*)");
-        return pattern.matcher(calculationValue);
+        Delimiter delimiter = new Delimiter();
+        ExtractorDto extractorDto= new ExtractorDto();
+
+        if(calculationValue.contains(START_POINT_DELIMITER)&& calculationValue.contains(END_POINT_DELIMITER)){
+            calculationValue.replace(START_POINT_DELIMITER,"");
+            extractorDto = extractDelimiterAndNumber(extractorDto,delimiter,calculationValue,END_POINT_DELIMITER);
+            return extractorDto;
+        }
+        extractorDto.settingExtractorDto(delimiter.getDelimiters(),calculationValue);
+        return extractorDto;
     }
 
-    private ExtractorDto extractDelimiterAndNumber(String calculationValue) {
-        final int POSITION_DELIMITER = 1;
-        final int POSITION_NUMBERS = 2;
-        ExtractorDto extractorDto = new ExtractorDto();
-        Delimiter delimiter=new Delimiter();;
-        String values= new String();
+    public ExtractorDto extractDelimiterAndNumber(ExtractorDto extractorDto, Delimiter delimiter, String calculationValue,String END_POINT_DELIMITER) {
+        final int POSITION_DELIMITERS = 0;
+        final int POSITION_VALUES = 1;
 
-        Matcher matcher = divideDelimiterAndNumber(calculationValue);
-        if (matcher.matches()) {
-            List<String> customDelimiters = Collections.singletonList(matcher.group(POSITION_DELIMITER));
-            values = matcher.group(POSITION_NUMBERS);
-            delimiter.settingDelimiters(customDelimiters);
-        } else if (!matcher.matches()) {
-            values = calculationValue;
-        }
-        extractorDto.settingExtractorDto(delimiter.getDelimiters(), values);
+        List<String> delimiters = new ArrayList<>();
+        String[] divideDelimiterAndNumber = calculationValue.split(END_POINT_DELIMITER);
+        String appointedDelimiter = divideDelimiterAndNumber[POSITION_DELIMITERS];
+        delimiters.add(appointedDelimiter);
+        delimiter.settingDelimiters(delimiters);
+        String appointedNumbers = divideDelimiterAndNumber[POSITION_VALUES];
 
+        extractorDto.settingExtractorDto(delimiters, appointedNumbers);
         return extractorDto;
     }
 
     public Numbers extractValues(String calculationValue) {
-        ExtractorDto extractorDto = extractDelimiterAndNumber(calculationValue);
+        ExtractorDto extractorDto = saveExtractorDto(calculationValue);
 
         List<String> delimiters = extractorDto.getDelimiters();
         String appointedValues = extractorDto.getValues();
