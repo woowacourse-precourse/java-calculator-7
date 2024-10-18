@@ -39,4 +39,11 @@ class CalculatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("구분자와 양수만 입력 가능합니다. 문제가 되는 입력값: [0]");
     }
+
+    @Test
+    void 계산_결과_오버플로우_예외_테스트() {
+        assertThatThrownBy(() -> calculator.splitAndSum("2147483647,1"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("입력한 값의 계산 결과가 정수 범위를 초과했습니다.");
+    }
 }
