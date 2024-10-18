@@ -1,13 +1,15 @@
 package calculator.service;
 
+import static calculator.util.Const.EMPTY;
+import static calculator.util.Const.PREFIX;
+import static calculator.util.Const.PREFIX_ERROR_MESSAGE;
+import static calculator.util.Const.PREFIX_SIZE;
+import static calculator.util.Const.SUFFIX;
+
 import calculator.domain.DelimiterSet;
 import java.util.List;
 
 public class DelimiterExtractor {
-    
-    private static final String PREFIX = "//"; 
-    private static final String SUFFIX = "\\n";
-    private static final String EMPTY = "";
     
     public DelimiterSet extractDelimiter(String input) {
         DelimiterSet delimiterSet = new DelimiterSet();
@@ -26,8 +28,8 @@ public class DelimiterExtractor {
             return EMPTY;
         }
         if (!input.startsWith(PREFIX)) {
-            throw new IllegalArgumentException("// 로 시작되어야 합니다.");
+            throw new IllegalArgumentException(PREFIX_ERROR_MESSAGE);
         }
-        return input.substring(2, indexOfSplitDelimiter);
+        return input.substring(PREFIX_SIZE, indexOfSplitDelimiter);
     }
 }

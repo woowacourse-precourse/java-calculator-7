@@ -1,13 +1,19 @@
 package calculator.domain;
 
+import static calculator.util.Const.COLON;
+import static calculator.util.Const.COMMA;
+import static calculator.util.Const.DEFAULT_DELIMITER_SIZE;
+import static calculator.util.Const.DELIMITER_JOINER;
+import static calculator.util.Const.NUMERIC_ERROR_MESSAGE;
+import static calculator.util.Const.NUMERIC_REGEX;
+import static calculator.util.Const.STRING_ERROR_MESSAGE;
+import static calculator.util.Const.STRING_REGEX;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class DelimiterSet {
-
-    private static final String NUMERIC_REGEX = "[0-9]+";
-    private static final String STRING_REGEX = "[a-zA-Z가-힣]+";
 
     private final Set<String> delimiterSet;
 
@@ -17,8 +23,8 @@ public class DelimiterSet {
     }
 
     private void init() {
-        delimiterSet.add(",");
-        delimiterSet.add(":");
+        delimiterSet.add(COMMA);
+        delimiterSet.add(COLON);
     }
 
     public void addAll(List<String> delimiters) {
@@ -30,18 +36,18 @@ public class DelimiterSet {
 
     private void validateDelimiter(String delimiter) {
         if (delimiter.matches(NUMERIC_REGEX)) {
-            throw new IllegalArgumentException("숫자는 구분자로 사용 불가능합니다.");
+            throw new IllegalArgumentException(NUMERIC_ERROR_MESSAGE);
         }
         if (delimiter.matches(STRING_REGEX)) {
-            throw new IllegalArgumentException("문자는 구분자로 사용 불가능합니다.");
+            throw new IllegalArgumentException(STRING_ERROR_MESSAGE);
         }
     }
 
     public boolean hasCustom() {
-        return delimiterSet.size() > 2;
+        return delimiterSet.size() > DEFAULT_DELIMITER_SIZE;
     }
 
     public String getSplitForm() {
-        return String.join("|", delimiterSet);
+        return String.join(DELIMITER_JOINER, delimiterSet);
     }
 }
