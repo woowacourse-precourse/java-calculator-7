@@ -1,14 +1,10 @@
-package controller;
+package calculator.controller;
 
-import model.Calculator;
-import model.Custom;
-import utils.AddEntryValidator;
-import view.InputView;
-import view.OutputView;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import calculator.model.Calculator;
+import calculator.model.Custom;
+import calculator.utils.AddEntryValidator;
+import calculator.view.InputView;
+import calculator.view.OutputView;
 import java.util.StringTokenizer;
 
 public class CalculatorController {

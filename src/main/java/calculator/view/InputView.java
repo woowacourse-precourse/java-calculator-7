@@ -1,6 +1,6 @@
-package view;
+package calculator.view;
 
-import utils.InputViewValidator;
+import calculator.utils.InputViewValidator;
 import camp.nextstep.edu.missionutils.Console;
 
 
@@ -22,8 +22,6 @@ public class InputView {
 
     public void readInputString() {
         inputName = Console.readLine();
-        inputViewValidator.validateQuotationPair(inputName);
-        inputName = inputName.substring(1, inputName.length() - 1);
         resultInput();
     }
 
