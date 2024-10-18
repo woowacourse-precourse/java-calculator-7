@@ -1,6 +1,7 @@
 package calculator.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -32,5 +33,16 @@ public class StringCalculatorTest {
         assertThat(input2.matches(allowedFrom)).isTrue();
         assertThat(input3.matches(allowedFrom)).isTrue();
         assertThat(input4.matches(allowedFrom)).isTrue();
+    }
+
+    @Test
+    @DisplayName("잘못된 양식의 문자열 검증 테스트")
+    public void notAllowedFromTest() {
+        // given
+        String input = "1.2;3";
+
+        // when, then
+        assertThatThrownBy(() -> stringCalculator.claculate(input))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
