@@ -14,6 +14,8 @@ public class SeparatorExpressionCalculator {
     public SeparatorExpressionCalculator(Display display) {
         this.separators = new Separators(Set.of(COMMA_SEPARATOR, COLON_SEPARATOR));
         this.display = display;
+        this.operatorMap.registerSeparatorToOperator(COMMA_SEPARATOR, OperatorEnum.PLUS);
+        this.operatorMap.registerSeparatorToOperator(COLON_SEPARATOR, OperatorEnum.PLUS);
     }
 
     public void operate() {
