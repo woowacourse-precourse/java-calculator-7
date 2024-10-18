@@ -14,7 +14,7 @@ public class CalculatorViewTest {
         calculator.setSum(10);
 
         //when: 출력 처리
-        String output = calculatorView.displayOutput();
+        String output = calculatorView.displayOutput(calculator);
 
         //then: "결과 : 10" 출력
         assertThat(output).isEqualTo("결과 : 10");
