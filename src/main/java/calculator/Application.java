@@ -24,6 +24,7 @@ public class Application {
         checkIsPositiveNumber(calculator);
         checkHasNumberFormat(calculator);
         getTotal(calculator);
+        printResult(calculator);
     }
 
     static void getUserInput(Calculator calculator) {
@@ -75,5 +76,9 @@ public class Application {
         for (String number : calculator.processedInput) {
             calculator.total += Integer.parseInt(number);
         }
+    }
+
+    static void printResult(Calculator calculator) {
+        System.out.println("결과 : " + calculator.total);
     }
 }
