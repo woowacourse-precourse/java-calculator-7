@@ -2,28 +2,16 @@ package calculator.model;
 
 import static calculator.validate.NumberValidator.validateNumber;
 
-import calculator.parser.DelimiterExtractor;
-import java.util.Objects;
+import calculator.parser.InputParser;
 
 public class Calculator {
 
     private static int result;
 
-    private final DelimiterExtractor extractor = new DelimiterExtractor();
+    private final InputParser parser = new InputParser();
 
     public void calculate(String input) {
-        if (Objects.equals(input, "")) {
-            result = 0;
-            return;
-        }
-        String[] numbers;
-        if (input.startsWith("//")) {
-            String customDelimiter = extractor.extractCustomDelimiter(input);
-            numbers = input.substring(5).split(customDelimiter);
-            calculateSum(numbers);
-            return;
-        }
-        numbers = input.split(extractor.getDefaultDelimiter());
+        String[] numbers = parser.parseInput(input);
         calculateSum(numbers);
     }
 
