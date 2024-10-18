@@ -6,7 +6,7 @@ import calculator.delimiter.pattern_matcher.CustomDelimiterPatternMatcher;
 import calculator.delimiter.pattern_matcher.DefaultCustomDelimiterPatternMatcher;
 import calculator.delimiter.service.CustomDelimiterService;
 import calculator.delimiter.service.DelimiterService;
-import calculator.delimiter.service.NumberDelimiterService;
+import calculator.delimiter.service.IntegerDelimiterService;
 import calculator.delimiter.validator.DefaultCustomDelimiterValidator;
 import calculator.delimiter.validator.DelimiterValidator;
 import calculator.util.integer.IntegerUtils;
@@ -22,7 +22,7 @@ public class Application {
     private static final CustomDelimiterService customDelimiterService = new CustomDelimiterService(
             delimiterFactory, customDelimiterPatternMatcher
     );
-    private static final DelimiterService delimiterService = new NumberDelimiterService(delimiterFactory, customDelimiterService);
+    private static final DelimiterService delimiterService = new IntegerDelimiterService(delimiterFactory, customDelimiterService);
 
     public static void main(String[] args) {
 
