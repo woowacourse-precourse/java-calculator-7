@@ -6,7 +6,7 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        MyCalculator numberExtractor = new MyCalculator(Console.readLine());
-        System.out.println("sum = " + numberExtractor.getSum());
+        String inputStr = Console.readLine();
+        System.out.println("결과 : " + MyCalculator.getSum(inputStr));
     }
 }
