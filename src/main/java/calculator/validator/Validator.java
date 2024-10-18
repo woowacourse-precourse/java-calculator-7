@@ -32,7 +32,7 @@ public class Validator {
     public boolean contentIsPosNum(String[] input){
         for(String s : input){
             if(!s.matches("[0-9]+")){
-                throw new IllegalArgumentException("입력이 잘못되었습니다.(입력이 숫자가 아닙니다.)");
+                throw new IllegalArgumentException("입력이 잘못되었습니다.");
             }
             int num = Integer.parseInt(s);
             if (num <= 0) {
