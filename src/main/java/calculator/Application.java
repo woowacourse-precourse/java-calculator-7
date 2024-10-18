@@ -17,6 +17,12 @@ public class Application {
             System.err.println("입력이 없습니다. 프로그램을 종료합니다.");
             return;
         }
+        try {
+            int result = app.add(input);
+            System.out.println("결과 : " + result);
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+        }
     }
     public int add(String input) {
         //입력 x or 빈 문자열
