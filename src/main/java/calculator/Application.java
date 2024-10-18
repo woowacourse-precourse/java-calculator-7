@@ -1,7 +1,13 @@
 package calculator;
 
+import camp.nextstep.edu.missionutils.Console;
+
 public class Application {
+	private static final String INPUT_REQUEST_MESSAGE = "덧셈할 문자열을 입력해 주세요.";
+	
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        System.out.println(INPUT_REQUEST_MESSAGE);
+        String input = Console.readLine();
+        System.out.println(input);
     }
 }
