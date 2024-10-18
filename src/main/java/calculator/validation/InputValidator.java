@@ -2,14 +2,10 @@ package calculator.validation;
 
 import static calculator.domain.StringParser.splitCustomInput;
 
+import calculator.enums.Delimiter;
 import calculator.enums.ErrorMessage;
 
 public class InputValidator {
-
-    private static final String CUSTOM_FIRST_DELIMITER = "//";
-    private static final String CUSTOM_SECOND_DELIMITER = "\n";
-
-    private static final String DEFAULT_DELIMITERS = ",|:";
 
     public InputValidator() {
     }
@@ -24,8 +20,8 @@ public class InputValidator {
      * 커스텀 구분자 형식에서 '\n'이 없을 경우 예외를 발생
      */
     public static void validateCustomSecond(String input) {
-        if (input.startsWith(CUSTOM_FIRST_DELIMITER)) {
-            if (!input.contains(CUSTOM_SECOND_DELIMITER)) {
+        if (input.startsWith(Delimiter.CUSTOM_FIRST_DELIMITER.toString())) {
+            if (!input.contains(Delimiter.CUSTOM_SECOND_DELIMITER.toString())) {
                 throw new IllegalArgumentException(ErrorMessage.SECOND_SEPARATOR_MISS.getMessage());
             }
         }
@@ -35,8 +31,8 @@ public class InputValidator {
      * 커스텀 구분자 형식에서 구분자가 2개 이상일 경우 예외를 발생
      */
     public static void validateCustomLength(String input) {
-        if (input.startsWith(CUSTOM_FIRST_DELIMITER)) {
-            int delimiterEndIndex = input.indexOf(CUSTOM_SECOND_DELIMITER);
+        if (input.startsWith(Delimiter.CUSTOM_FIRST_DELIMITER.toString())) {
+            int delimiterEndIndex = input.indexOf(Delimiter.CUSTOM_SECOND_DELIMITER.toString());
             String customDelimiter = input.substring(2, delimiterEndIndex);
 
             if (customDelimiter.length() > 1) {
