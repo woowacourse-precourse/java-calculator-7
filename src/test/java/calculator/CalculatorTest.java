@@ -32,4 +32,11 @@ class CalculatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("구분자와 양수만 입력 가능합니다. 문제가 되는 입력값: [-2]");
     }
+
+    @Test
+    void zero_입력_예외_테스트() {
+        assertThatThrownBy(() -> calculator.splitAndSum("1,0,2"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("구분자와 양수만 입력 가능합니다. 문제가 되는 입력값: [0]");
+    }
 }
