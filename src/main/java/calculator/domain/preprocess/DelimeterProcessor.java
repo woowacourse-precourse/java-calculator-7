@@ -25,7 +25,7 @@ public class DelimeterProcessor {
         return delimeter;
     }
 
-    public String discardCustomDelimeterRequest(String input){
+    public String extractPartTobeProcessed(String input){
         String newInput = input.substring(4);
         return newInput;
     }
