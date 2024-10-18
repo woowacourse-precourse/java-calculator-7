@@ -24,6 +24,7 @@
 - [ ] 숫자가 하나만 입력되면 해당 숫자를 반환한다.
 - [ ] 잘못된 입력 시 예외를 처리한다.
 - [ ] 결과를 출력한다.
+- [ ] 등록된 구분자인지 확인한다.
 
 ## 추가 객체 도출
 추가 기능으로부터 객체를 도출한다.
@@ -44,6 +45,7 @@
   - sumNumbers()
 - DelimiterManager
   - registerCustomDelimiter()
+  - isValidDelimiter()
 - CalculatorExecutor
   - run()
 - InputHandler
