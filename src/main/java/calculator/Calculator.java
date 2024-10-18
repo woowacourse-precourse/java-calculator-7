@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -16,6 +17,8 @@ public class Calculator {
 
     Calculator() {
         this.equation = "";
+        this.delimiters = "";
+        this.positiveNumbers = new ArrayList<>();
         this.customDelimiter = "";
         this.customDelimiterStart = "//";
         this.customDelimiterEnd = "\\n";
@@ -23,6 +26,8 @@ public class Calculator {
 
     Calculator(String customDelimiterStart, String customDelimiterEnd) {
         this.equation = "";
+        this.delimiters = "";
+        this.positiveNumbers = new ArrayList<>();
         this.customDelimiter = "";
         this.customDelimiterStart = customDelimiterStart;
         this.customDelimiterEnd = customDelimiterEnd;
