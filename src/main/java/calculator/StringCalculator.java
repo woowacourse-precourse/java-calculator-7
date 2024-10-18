@@ -2,7 +2,7 @@ package calculator;
 
 public class StringCalculator {
 	private static final String ORIGINAL_SPLITTER_REGEX = ",|:";
-	public static int splitAndSum(String input){
+	public static int splitAndSum(String input) {
 		String[] splitString = splitWithOriginalSplitter(input);
 		if (splitString.length > 1) {
 			return calculateSum(splitString);
@@ -21,10 +21,18 @@ public class StringCalculator {
 		return inputSubString.split(customSplitter);
 	}
 
-	private static int calculateSum(String[] splitString){
+	private static void validateSplitNumber(int splitNum){
+		if (splitNum <= 0) {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	private static int calculateSum(String[] splitString) {
 		int sum = 0;
 		for (String s : splitString) {
-			sum += Integer.parseInt(s);
+			int splitNum = Integer.parseInt(s);
+			validateSplitNumber(splitNum);
+			sum += splitNum;
 		}
 		return sum;
 	}
