@@ -4,7 +4,6 @@ import calculator.controller.CalculatorController;
 import calculator.domain.Calculator;
 import calculator.domain.CustomDelimiterExtractor;
 import calculator.domain.NumberStringExtractor;
-import calculator.validator.CalculatorValidator;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -18,9 +17,7 @@ public class AppConfig {
     }
 
     public Calculator calculator() {
-        return new Calculator(
-                new CalculatorValidator(),
-                numberStringExtractor());
+        return new Calculator(numberStringExtractor());
     }
 
     public NumberStringExtractor numberStringExtractor() {

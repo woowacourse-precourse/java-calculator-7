@@ -4,11 +4,9 @@ import calculator.validator.CalculatorValidator;
 
 public class Calculator {
 
-    private final CalculatorValidator validator;
     private final NumberStringExtractor numberStringExtractor;
 
-    public Calculator(CalculatorValidator validator, NumberStringExtractor numberStringExtractor) {
-        this.validator = validator;
+    public Calculator(NumberStringExtractor numberStringExtractor) {
         this.numberStringExtractor = numberStringExtractor;
     }
 
@@ -23,7 +21,7 @@ public class Calculator {
     private int sumNumbers(String[] stringToNumber) {
         int sum = 0;
         for (String str : stringToNumber) {
-            validator.validatePositivity(str);
+            CalculatorValidator.validatePositivity(str);
             sum += Integer.parseInt(str);
         }
         return sum;
