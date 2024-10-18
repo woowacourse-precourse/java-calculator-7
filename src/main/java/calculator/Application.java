@@ -76,7 +76,8 @@ public class Application {
     private static void appendCustomDelimiters(String[] customDelimiters, StringBuilder delimiterPart) {
         for (String delim : customDelimiters) {
             delim = delim.trim();
-            if (!delim.isEmpty()) { //빈 문자열로 파싱되지 않았다면
+
+            if (!delim.isEmpty()) { // 빈 문자열로 파싱되지 않았다면
                 delimiterPart.append("|")
                         .append(toRegex(delim));
             }
