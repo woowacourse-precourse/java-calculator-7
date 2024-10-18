@@ -9,8 +9,12 @@ public class Application {
         System.out.print("계산할 문자열을 입력하세요: ");
         String input = Console.readLine();
 
-        int result = start(input);
-        System.out.println("결과 : " + result);
+        try{
+            int result = start(input);
+            System.out.println("결과 : " + result);
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+        }
 
     }
 }
