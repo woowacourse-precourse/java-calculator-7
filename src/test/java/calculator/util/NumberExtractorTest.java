@@ -72,3 +72,6 @@ public class NumberExtractorTest {
         // when & then
         assertThatThrownBy(() -> NumberExtractor.extract(input, delimiters))
                 .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(NumberExtractorErrorMessage.NEGATIVE_OR_ZERO_NUMBER.getMessage());
+    }
+}
