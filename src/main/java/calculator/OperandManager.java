@@ -27,8 +27,10 @@ public class OperandManager {
     }
 
     private String[] split(String operandCandidates, Set<String> separators) {
-        String regex = String.join("|", separators);
-        return operandCandidates.split(regex);
+        for (String separator : separators) {
+            operandCandidates = operandCandidates.replace(separator, " ");
+        }
+        return operandCandidates.trim().split("\\s+");
     }
 
     private void validate(String operandCandidate) {
