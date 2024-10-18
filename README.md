@@ -14,7 +14,7 @@
 - [x] Calculator 클래스 구현
   - [x] 숫자 리스트를 입력받아서 더하는 기능 구현
   - [x] Calculator test 작성
-- [ ] MultipleUseCase 구현체 (MultipleService) 클래스 구현
+- [x] MultipleUseCase 구현체 (MultipleService) 클래스 구현
   - [ ] Preprocessor, Parser, Calculator를 사용해서 결과를 반환하는 기능 구현
   - [ ] MultipleService test 작성 
 - [ ] ConsoleOutput 클래스 구현
