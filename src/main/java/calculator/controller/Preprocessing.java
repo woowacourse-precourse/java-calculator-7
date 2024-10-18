@@ -7,9 +7,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Preprocessing extends InputValidator {
+
     // 첫 글자가 "/"로 시작하는지 아닌지에 따라 메소드 실행
     public boolean firstLetter(String given) {
         char firstLetter = given.charAt(0);
+        validatingFirstLetter(firstLetter);
 
         if (firstLetter == '/') { // 커스텀 구분자 추출해야 됨
             return true;
@@ -45,20 +47,8 @@ public class Preprocessing extends InputValidator {
 
     // 커스텀 구분자 저장
     public List<String> findCustomSeparator(String given) {
-        String temp = "";
-        String customSeparator = null;
-        int endIdx = -2; // 커스텀 지정 끝나는 지점 인덱스
+        String customSeparator = customValidator(given);
 
-        for (int i = 2; i < given.length(); i++) {
-            if (given.substring(i - 1, i + 1).equals("\\n")) {
-                customSeparator = temp.substring(0, temp.length() - 1);
-                endIdx = i;
-                break;
-            } else {
-                temp += given.substring(i, i + 1);
-            }
-        }
-
-        return Arrays.asList(customSeparator, given.substring(endIdx + 1));
+        return Arrays.asList(customSeparator, given.substring(given.indexOf("\\n" + 2)));
     }
 }
