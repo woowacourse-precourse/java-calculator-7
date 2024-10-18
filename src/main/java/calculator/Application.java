@@ -1,57 +1,64 @@
 package calculator;
 
-import java.util.Scanner;
+import camp.nextstep.edu.missionutils.Console;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Application {
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = sc.nextLine();
+        String input = Console.readLine(); // Console API로 입력받기
 
         try {
-            int result = calculate(input);
-            System.out.println("결과: " + result);
+            long result = calculate(input); // 결과 계산
+            System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public static int calculate(String input) {
-        // 입력이 null이거나 비어있으면 0을 반환
+    public static long calculate(String input) {
+        // 빈 문자열 또는 null 처리
         if (input == null || input.isEmpty()) {
-            return 0;
+            return 0; // 빈 문자열 또는 null일 때 0 반환
         }
 
-        String delimiter = ",|:"; // 기본 구분자 설정
-        // 커스텀 구분자 처리
-        if (input.startsWith("//")) {
-            int delimiterIndex = input.indexOf("\n");
-            if (delimiterIndex != -1) { // 구분자 설정이 올바른지 확인
-                delimiter = input.substring(2, delimiterIndex); // 커스텀 구분자 추출
-                input = input.substring(delimiterIndex + 1); // 숫자 부분만 추출
-            } else {
-                throw new IllegalArgumentException("구분자 설정이 잘못되었습니다!");
-            }
+        // 정규 표현식으로 커스텀 구분자 추출
+        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+        String delimiter = ",|:"; // 기본 구분자
+        String numbers = input; // 숫자 문자열 초기화
+
+        if (matcher.find()) {
+            delimiter = matcher.group(1); // 커스텀 구분자
+            numbers = matcher.group(2); // 나머지 숫자 문자열
         }
 
         // 입력 문자열을 구분자로 나누기
-        String[] splits = input.split(delimiter); // delimiter를 사용하여 문자열 분리
-        int sum = 0;
+        String[] tokens = numbers.split("[,:" + Pattern.quote(delimiter) + "]"); // 기본 구분자 및 커스텀 구분자로 나누기
+        long sum = 0;
 
         // 숫자를 하나씩 합산
-        for (String split : splits) {
-            try {
-                int number = Integer.parseInt(split.trim()); // 문자열을 숫자로 변환
-                if (number < 0) {
-                    throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
-                }
-                sum += number; // 양수일 경우 합산
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("유효한 숫자를 입력해야 합니다!");
-            }
+        for (String numberStr : tokens) {
+            validateNumber(numberStr); // 숫자 유효성 검증
+            sum += Long.parseLong(numberStr); // 문자열을 숫자로 변환 후 합산
         }
 
         return sum; // 최종 합계 반환
+    }
+
+    // 유효한 숫자인지 확인하는 메서드
+    private static void validateNumber(String numberStr) {
+        if (numberStr.isEmpty()) { // 숫자가 없으면 예외 발생
+            throw new IllegalArgumentException("유효한 숫자를 입력해야 합니다!");
+        }
+        try {
+            long number = Long.parseLong(numberStr); // 문자열을 숫자로 변환
+            if (number < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("유효한 숫자를 입력해야 합니다!"); // 유효하지 않은 숫자 처리
+        }
     }
 }
