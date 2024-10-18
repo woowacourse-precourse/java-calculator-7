@@ -56,7 +56,10 @@ public class CustomInput extends UserInput {
      * @param endIdx : 커스텀 구분자의 추출 마지막 인덱스
      */
     private void extractCustomDelimiterAndAdd(String userInput, int startIdx, int endIdx) {
-        delimiters.add(userInput.substring(startIdx, endIdx));
+        String customDelimiter = userInput.substring(startIdx, endIdx);
+        checkCustomDelimiterIncludeNumber(customDelimiter);
+
+        delimiters.add(customDelimiter);
     }
 
     /***
@@ -67,5 +70,15 @@ public class CustomInput extends UserInput {
      */
     private String extractCalculatePart(String userInput, int startIdx) {
         return userInput.substring(startIdx);
+    }
+
+    /***
+     * 커스텀 구분자에 숫자가 사용되어있는지 검사합니다.
+     * @param customDelimiter : 추출된 커스텀 구분자
+     */
+    private void checkCustomDelimiterIncludeNumber(String customDelimiter) {
+        if (customDelimiter.chars().anyMatch(Character::isDigit)) {
+            throw new IllegalArgumentException(ExceptionMessage.CUSTOM_DELIMITER_NOT_INCLUDE_NUMBER.getValue());
+        }
     }
 }

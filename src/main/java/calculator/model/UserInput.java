@@ -10,7 +10,6 @@ public abstract class UserInput {
     private static final String DEFAULT_DELIMITER_COMMA = ",";
     private static final String DEFAULT_DELIMITER_COLON = ":";
     protected static final String REGEX_DELIMITER = "|";
-    protected static final String ZERO_VALUE = "0";
 
     protected final List<String> delimiters;
     protected long[] inputNumbers;
