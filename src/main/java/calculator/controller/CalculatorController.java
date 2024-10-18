@@ -1,5 +1,6 @@
 package calculator.controller;
 
+import calculator.domain.Calculator;
 import calculator.view.InputView;
 
 public class CalculatorController {
@@ -12,6 +13,9 @@ public class CalculatorController {
 
     public void start() {
         String userInput = inputView.userInput();
+
+        Calculator calculator = new Calculator(userInput);
+        String[] strNumbers = calculator.getStrNumbers();
 
     }
 
