@@ -18,8 +18,7 @@ public class Application {
             String numbers = split[1];
 
             input = numbers.replace(delimiter, ",");
-
         }
-
+        String[] split1 = input.split(",|:");
     }
 }
