@@ -23,15 +23,7 @@ public class Application {
 
         checkIsPositiveNumber(calculator);
         checkHasNumberFormat(calculator);
-
-        int total = 0;
-
-
-        for (String number : processedInput) {
-            total += Integer.parseInt(number);
-        }
-
-        System.out.println("결과 : " + total);
+        getTotal(calculator);
     }
 
     static void getUserInput(Calculator calculator) {
@@ -76,6 +68,12 @@ public class Application {
             if (Character.isDigit(Integer.parseInt(number))) {
                 throw new IllegalArgumentException();
             }
+        }
+    }
+
+    static void getTotal(Calculator calculator) {
+        for (String number : calculator.processedInput) {
+            calculator.total += Integer.parseInt(number);
         }
     }
 }
