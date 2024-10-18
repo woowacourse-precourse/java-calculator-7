@@ -9,8 +9,9 @@ public class Input {
         input = Console.readLine();
         return input;
     }
-    public void inputSplit(){
+    public String[] inputSplit(){
         token = input.split("[,:]");
+        return token;
     }
 
 }
