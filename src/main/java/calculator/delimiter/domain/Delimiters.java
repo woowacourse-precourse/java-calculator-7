@@ -1,6 +1,5 @@
 package calculator.delimiter.domain;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class Delimiters {
@@ -11,8 +10,8 @@ public class Delimiters {
         this.values = delimiters;
     }
 
-    public List<String> split(String source) {
-        return Arrays.stream(source.split(join("|"))).toList();
+    public String splitRegex() {
+        return join("|");
     }
 
     private String join(String delimiterString) {
