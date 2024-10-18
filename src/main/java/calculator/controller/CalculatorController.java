@@ -1,23 +1,27 @@
 package calculator.controller;
 
 import calculator.domain.CalculatorUseCase;
-import calculator.service.MultipleService;
-import calculator.view.ConsoleInput;
-import calculator.view.ConsoleOutPut;
+import calculator.domain.repository.InputRepository;
+import calculator.domain.view.View;
 
 public class CalculatorController {
-    private final ConsoleInput consoleInput;
-    private final ConsoleOutPut consoleOutPut;
+    private final InputRepository<String> inputRepository;
+    private final View<Integer> view;
+    private final CalculatorUseCase calculatorUseCase;
 
-    public CalculatorController() {
-        this.consoleInput = new ConsoleInput();
-        this.consoleOutPut = new ConsoleOutPut();
+    public CalculatorController(
+        InputRepository<String> inputRepository,
+        View<Integer> view,
+        CalculatorUseCase calculatorUseCase
+    ) {
+        this.inputRepository = inputRepository;
+        this.view = view;
+        this.calculatorUseCase = calculatorUseCase;
     }
 
     public void run() {
-        String input = consoleInput.input();
-        CalculatorUseCase multipleUseCase = new MultipleService();
-        int result = multipleUseCase.calculate(input);
-        consoleOutPut.render(result);
+        String input = inputRepository.input();
+        int result = calculatorUseCase.calculate(input);
+        view.render(result);
     }
 }
