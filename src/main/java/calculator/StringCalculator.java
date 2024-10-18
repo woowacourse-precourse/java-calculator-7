@@ -14,7 +14,7 @@ public class StringCalculator {
         DelimiterResult delimiterResult = new DelimiterResult(defaultDelimiters.getDefaultDelimiter());
 
         if (userInput.isCustom()) {
-            int customDelimiterEndIndex = userInput.getUserInput().indexOf("\\n");
+            int customDelimiterEndIndex = findCustomDelimiterEndIndex(userInput);
             String customDelimiter = userInput.getUserInput().substring(2, customDelimiterEndIndex);
             String updateDelimiter = delimiterResult.getDelimiterResult().replace("]", customDelimiter + "]");
             delimiterResult = new DelimiterResult(updateDelimiter);
@@ -35,6 +35,11 @@ public class StringCalculator {
 
         System.out.println("결과 : " + sum);
 
+    }
+
+    private static int findCustomDelimiterEndIndex(UserInput userInput) {
+        int customDelimiterEndIndex = userInput.getUserInput().indexOf("\\n");
+        return customDelimiterEndIndex;
     }
 
 }
