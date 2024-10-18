@@ -38,6 +38,9 @@ public class Calculator {
     private static void validateInput() {
         String regex = "^[0-9" + delimiters + "]*$";
 
+        if (input.isBlank()) {
+            throw new IllegalArgumentException("빈 문자열입니다.");
+        }
         if (!Pattern.matches(regex, input)) {
             throw new IllegalArgumentException("허용되지 않은 문자가 포함되어 있습니다.");
         }
