@@ -34,7 +34,17 @@ public class Application {
             numbers = matcher.group(2); // 나머지 숫자 문자열
         }
 
+        // 입력 문자열을 구분자로 나누기
+        String[] tokens = numbers.split("[,:" + Pattern.quote(delimiter) + "]"); // 기본 구분자 및 커스텀 구분자로 나누기
+        long sum = 0;
 
+        // 숫자를 하나씩 합산
+        for (String numberStr : tokens) {
+            validateNumber(numberStr); // 숫자 유효성 검증
+            sum += Long.parseLong(numberStr); // 문자열을 숫자로 변환 후 합산
+        }
+
+        return sum; // 최종 합계 반환
     }
 
     // 유효한 숫자인지 확인하는 메서드
