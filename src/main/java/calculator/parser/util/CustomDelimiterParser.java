@@ -1,5 +1,7 @@
-package calculator.parser.utils;
+package calculator.parser.util;
 
+import calculator.exception.ExceptionUtils;
+import calculator.exception.IllegalArgumentExceptionEnum;
 import calculator.regex.RegexPatternMatcher;
 
 public class CustomDelimiterParser {
@@ -19,16 +21,16 @@ public class CustomDelimiterParser {
         }
 
         if (1 < countMatches) {
-            throw new IllegalArgumentException("Delimiter는 하나 뿐이어야 합니다.");
+            ExceptionUtils.throwIllegalArgException(IllegalArgumentExceptionEnum.MULTIPLE_DELIMITERS);
         }
 
         String match = customDelimiterMatcher.getMatch(input);
         if (1 < match.length()) {
-            throw new IllegalArgumentException("Delimiter must be a single character");
+            ExceptionUtils.throwIllegalArgException(IllegalArgumentExceptionEnum.INVALID_LENGTH);
         } else if (match.isEmpty()) {
-            throw new IllegalArgumentException("Delimiter의 길이는 1이어야 합니다.");
+            ExceptionUtils.throwIllegalArgException(IllegalArgumentExceptionEnum.INVALID_LENGTH);
         } else if (Character.isDigit(match.charAt(0))) {
-            throw new IllegalArgumentException("Delimiter는 숫자가 될 수 없습니다.");
+            ExceptionUtils.throwIllegalArgException(IllegalArgumentExceptionEnum.DIGIT_NOT_ALLOWED);
         }
 
         return match.charAt(0);

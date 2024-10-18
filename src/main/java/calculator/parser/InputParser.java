@@ -1,8 +1,8 @@
 package calculator.parser;
 
-import calculator.parser.utils.CustomDelimiterParser;
-import calculator.parser.utils.Tokenizer;
-import calculator.parser.utils.TokensToIntConverter;
+import calculator.parser.util.CustomDelimiterParser;
+import calculator.parser.util.Tokenizer;
+import calculator.parser.util.TokensToIntConverter;
 import java.util.ArrayList;
 
 public class InputParser {

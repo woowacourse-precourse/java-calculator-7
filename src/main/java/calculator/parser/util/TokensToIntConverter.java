@@ -1,5 +1,7 @@
-package calculator.parser.utils;
+package calculator.parser.util;
 
+import calculator.exception.ExceptionUtils;
+import calculator.exception.IllegalArgumentExceptionEnum;
 import java.math.BigInteger;
 import java.util.ArrayList;
 
@@ -10,17 +12,17 @@ public class TokensToIntConverter {
 
         for (String token : tokens) {
             if (token.matches(".*[^\\d].*")) {
-                throw new IllegalArgumentException("Token contains invalid characters: " + token);
+                ExceptionUtils.throwIllegalArgException(IllegalArgumentExceptionEnum.INVALID_CHARACTER);
             }
 
             if (token.isEmpty()) {
-                throw new IllegalArgumentException("Token is empty");
+                ExceptionUtils.throwIllegalArgException(IllegalArgumentExceptionEnum.EMPTY_TOKEN);
             }
-            
+
             BigInteger bigIntValue = new BigInteger(token);
             if (bigIntValue.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) > 0 ||
                     bigIntValue.compareTo(BigInteger.valueOf(Integer.MIN_VALUE)) < 0) {
-                throw new IllegalArgumentException("Token is out of range: " + token);
+                ExceptionUtils.throwIllegalArgException(IllegalArgumentExceptionEnum.OUT_OF_RANGE);
             }
 
             numbers.add(Integer.parseInt(token));
