@@ -12,4 +12,12 @@ public class InputValidator {
             }
         }
     }
+
+    public void lastElement(List<String> separated) {
+        // 마지막 요소의 첫글자가 숫자가 아닐경우 exception
+        // 첫글자가 숫자면 나머지 글자도 숫자임
+        if (!Character.isDigit(separated.getLast().charAt(0))) {
+            throw new IllegalArgumentException();
+        }
+    }
 }

@@ -35,7 +35,11 @@ public class Preprocessing extends InputValidator {
             }
         }
         separated.add(temp);
+
+        //예외 검증
         validatingSeparator(separated, separtors);
+        lastElement(separated);
+
         return separated;
     }
 
