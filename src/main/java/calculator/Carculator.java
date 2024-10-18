@@ -10,8 +10,20 @@ public class Carculator {
         String separator = "[,:;]";
         tmp = input.split(separator);
 
+        System.out.println("결과 : " + sum(tmp));
+
 
     }
+
+    public static int sum(String[] tokens){
+        int total = 0;
+        for(String token : tokens){
+            total += Integer.parseInt(token.trim());
+        }
+        return total;
+    }
+
+
 
 
 }
