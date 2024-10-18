@@ -2,13 +2,13 @@ package calculator.domain.number;
 
 public class Number {
 
-    private final int value;
+    private final double value;
 
-    public Number(int value) {
+    public Number(double value) {
         this.value = value;
     }
 
-    public int getValue() {
+    public double getValue() {
         return value;
     }
 }
