@@ -22,7 +22,7 @@ public class Application {
     // 입력된 문자열을 구분자로 나누는 메서드
     public static String[] splitInput(String input) {
         input.replaceAll(" ", "");
-        return input.split("[,:]"); // 콤마와 콜론을 구분자로 사용하여 문자열을 나눔
+        return input.split(delimiter(input)); // 콤마와 콜론을 구분자로 사용하여 문자열을 나눔
     }
 
     //나눠진 문자를 합하는 메서드
@@ -44,17 +44,27 @@ public class Application {
         return true;
     }
 
-    //
+    //문자 배열을 char형태로 변경 후 검사하는 메서드
     public static void stringToChar(String part) {
         for (char c : part.toCharArray()) {
             isDigit(c);
         }
     }
 
-    //
+    //char 자료를 숫자인지 확인하고 아니면 에러내는 메서드
     public static void isDigit(char c) {
         if (!Character.isDigit(c)) {
             throw new IllegalArgumentException(); //
         }
     }
+
+    public static String delimiter(String input) {
+        if (input.startsWith("//") && input.contains("\\n")) {
+            int index = input.indexOf("\\n");
+            return "[,:" + input.substring(2, index) + "]";
+
+        }
+        return "[,:]";
+    }
+
 }
