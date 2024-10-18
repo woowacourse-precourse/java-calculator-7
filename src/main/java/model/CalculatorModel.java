@@ -12,7 +12,7 @@ public class CalculatorModel {
     public CalculatorModel() {
         delimiterList = new ArrayList<>();
         delimiterList.add(',');
-        delimiterList.add(';');
+        delimiterList.add(':');
         numberList = new ArrayList<>();
     }
 
