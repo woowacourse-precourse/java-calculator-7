@@ -2,7 +2,6 @@ package calculator.ui;
 
 import calculator.application.CalculatorService;
 import calculator.application.dto.CalculatorSumRequest;
-import camp.nextstep.edu.missionutils.Console;
 
 public class CalculatorController {
 
@@ -16,7 +15,6 @@ public class CalculatorController {
 
     public void stringAdditionCalculate() {
         String input = calculatorPresenter.splitAndSumInput();
-        System.out.println(input);
         int result = calculatorService.splitAndSum(new CalculatorSumRequest(input));
         calculatorPresenter.splitAndSumOutput(result);
     }

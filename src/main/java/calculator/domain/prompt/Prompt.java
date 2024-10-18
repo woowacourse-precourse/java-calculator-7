@@ -6,17 +6,16 @@ import java.util.List;
 
 public abstract class Prompt {
 
-    protected static final char DELIMITER_COMMA = ',';
-    protected static final char DELIMITER_COLON = ':';
-
+    protected final Delimiter delimiter;
     private final List<String> input;
 
     protected Prompt(String inputData) {
+        this.delimiter = new Delimiter();
         this.input = parseInput(inputData);
     }
 
     protected abstract List<String> parseInput(String inputData);
-    protected abstract List<String> separate(String inputData, char customDelimiter);
+    protected abstract List<String> separate(String inputData);
 
     public List<Integer> extractInteger() {
         return this.getInput()

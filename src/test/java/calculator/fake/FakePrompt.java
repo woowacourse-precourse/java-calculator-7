@@ -15,17 +15,14 @@ public class FakePrompt extends Prompt {
             return List.of();
         }
         if (inputData.equals("custom")) {
-            return separate("any", '+');
+            return List.of("1","2","3","4");
         }
-        return separate("any", '\0');
+        return List.of("1","2","3");
     }
 
     @Override
-    protected List<String> separate(String inputData, char customDelimiter) {
-        if (customDelimiter == '\0') {
-            return List.of("1","2","3");
-        }
-        return List.of("1","2","3","4");
+    protected List<String> separate(String inputData) {
+        return List.of();
     }
 
 }
