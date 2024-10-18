@@ -3,25 +3,19 @@ package calculator;
 public class StringCalculator {
 
     private InputParser inputParser;
+    private CalculationStringTokenizer calculationStringTokenizer;
 
     public int calculate(String input) {
 
         //커스텀 구분자 추출
         Character customDelimiter = inputParser.extractCustomDelimiter(input);
-        String calculateStr = inputParser.extractCalculationString(input, customDelimiter);
-
-        //계산 문자열을 구분자로 분리
-        String splitRegex = ":|,";
-        if (customDelimiter != null) {
-            splitRegex = splitRegex + "|" + customDelimiter;
-        }
-
-        String[] parsedCalculateStr = calculateStr.split(splitRegex);
+        String calculationString = inputParser.extractCalculationString(input, customDelimiter);
+        String[] tokens = calculationStringTokenizer.tokenize(calculationString, customDelimiter);
 
         //정수로 변환 및 계산
         int ret = 0;
 
-        for (String str : parsedCalculateStr) {
+        for (String str : tokens) {
             int num = stringToInteger(str);
             validateNumPositive(num);
             ret += num;
