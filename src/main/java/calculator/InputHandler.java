@@ -1,6 +1,7 @@
 package calculator;
 
 import java.util.*;
+import java.util.stream.*;
 
 public class InputHandler {
     private String input;
@@ -34,6 +35,8 @@ public class InputHandler {
 
     public List<String> extractNumber() {
         String separator = extractSeparator();
-        return Arrays.asList(input.split(separator));
+        return Arrays.stream(input.split(separator))
+                .filter(s -> !s.isEmpty())
+                .collect(Collectors.toList());
     }
 }
