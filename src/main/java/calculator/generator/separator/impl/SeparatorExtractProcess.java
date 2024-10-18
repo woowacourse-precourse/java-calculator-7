@@ -6,6 +6,6 @@ import calculator.generator.separator.SeparatorExtractService;
 public class SeparatorExtractProcess implements SeparatorExtractService {
     @Override
     public String extractorSeparator(String sentence) {
-        return RegexPattern.extractCustomSeparatorProcess(sentence);
+        return RegexPattern.extractSeparatorProcess(sentence);
     }
 }
