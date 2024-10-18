@@ -10,6 +10,6 @@ public class Application {
         final OutputView outputView = new OutputView();
         final CalculatorController calculatorController = new CalculatorController(inputView, outputView);
 
-
+        calculatorController.start();
     }
 }

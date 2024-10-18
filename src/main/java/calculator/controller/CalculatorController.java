@@ -1,10 +1,8 @@
 package calculator.controller;
 
-import calculator.domain.Calculator;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CalculatorController {
@@ -24,8 +22,9 @@ public class CalculatorController {
     public List<String> getNumbersList(String consoleInput) {
         if (consoleInput.startsWith("//")) {
             int customIndex = consoleInput.indexOf("\\n");
-            String customSeperator = consoleInput.substring(2, customIndex + 1);
-            return List.of(consoleInput.split(customSeperator));
+            String customSeperator = consoleInput.substring(2,customIndex);
+            String custom = consoleInput.substring(customIndex + 2);
+            return List.of(custom.split(customSeperator.trim()));
         }
         return List.of(consoleInput.split("[,:]"));
     }
