@@ -13,19 +13,23 @@ public class Delimiter {
     }
 
     /**
-     * 커스텀 구분자 처리
+     * 커스텀 구분자로 분리
      */
     public String[] customDelimiter(String input) {
-        int start = input.lastIndexOf("/");
+        int start = input.indexOf("/") + 2;
         int end = input.indexOf("\\n");
-        String delimiter = input.substring(start + 1, end);
 
-        // 파이프(|) 문자 처리
-        if ("|".equals(delimiter)) {
-            delimiter = "\\|";
-        }
+        String delimiter = input.substring(start, end);
+        delimiter = escapeCharacters(delimiter);
 
         String part = input.substring(end + 2);
         return part.split(delimiter);
+    }
+
+    /**
+     * 특수 문자 이스케이프 처리
+     */
+    private String escapeCharacters(String delimiter) {
+        return delimiter.replaceAll("([\\Q^$|(){}[]*+?\\\\.\\E])", "\\\\$1");
     }
 }
