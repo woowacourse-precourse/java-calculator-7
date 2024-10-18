@@ -15,5 +15,10 @@ public class StringSumCalculator {
 
         String inputString = inputHandler.inputString();
         List<Integer> numbers = inputHandler.extractNumbers(inputString);
+        int result = sum(numbers);
+    }
+
+    private int sum(List<Integer> numbers) {
+        return numbers.stream().mapToInt(Integer::intValue).sum();
     }
 }
