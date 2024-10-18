@@ -99,10 +99,15 @@ public class Calculator {
         return sum;
     }
 
+    private void writeToConsole(Long result) {
+        System.out.printf("결과 : %d", result);
+    }
+
     public void operate() {
         equation = readFromConsole();
         separateCustomDelimiter();
         parseDelimiter();
         parsePositiveNumbers();
+        writeToConsole(sumPositiveNumbers());
     }
 }
