@@ -27,7 +27,7 @@
   - 반환값 형식: boolen
   - 문자열을 숫자와 구분자로 분리한 ArrayList가 입력값에 위배되지 않는지, 계산이 가능한지 판별한다.
   
-- ### 숫자 추출 기능
+- ### ☑ 숫자 추출 기능
   - 입력값 형식: ArrayList<String>
   - 반환값 형식: ArrayList<Integer>
   - 설명: 숫자와 구분자가 들어있는 ArrayList를 정수만 들어있는 ArrayList로 추출하여 반환한다.

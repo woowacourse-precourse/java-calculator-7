@@ -100,4 +100,21 @@ public class Adder {
 
     }
 
+    public ArrayList<Integer> parseOnlyNumbers(ArrayList<String> calculationFormula){
+        if(!isValidated(calculationFormula)) {
+            System.out.println("calculationFormula = " + calculationFormula);
+            throw new IllegalArgumentException();
+        }
+
+        ArrayList<Integer> numbers = new ArrayList<>();
+        for (String element: calculationFormula) {
+            if(isNumber(element) && !isSeparator(element)){
+                int number = Integer.parseInt(element);
+                numbers.add(number);
+            }
+        }
+
+        return numbers;
+    }
+
 }
