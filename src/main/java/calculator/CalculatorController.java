@@ -15,5 +15,7 @@ public class CalculatorController {
     public void run(){
         outputView.printStartMessage();
         String readString = inputView.readUserString();
+        StringProcessor processor = new StringProcessor(readString);
+
     }
 }
