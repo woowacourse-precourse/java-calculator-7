@@ -1,25 +1,15 @@
 package calculator;
 
-import calculator.controller.CalculatorController;
-import calculator.service.CalculatorService;
+import calculator.util.Container;
 import calculator.view.CalculatorView;
 import calculator.view.OutputView;
 
 public class Calculator {
 
-    private final OutputView outputView;
-    private final CalculatorService calculatorService;
-    private final CalculatorController calculatorController;
-    private final CalculatorView calculatorView;
+    private static final OutputView outputView = Container.getInstance(OutputView.class);
+    private static final CalculatorView calculatorView = Container.getInstance(CalculatorView.class);
 
-    public Calculator() {
-        this.outputView = new OutputView();
-        this.calculatorService = new CalculatorService();
-        this.calculatorController = new CalculatorController(calculatorService);
-        this.calculatorView = new CalculatorView(calculatorController);
-    }
-
-    public void start() {
+    public static void start() {
         try {
             outputView.printStartMessage();
             int result = calculatorView.startProgram();
