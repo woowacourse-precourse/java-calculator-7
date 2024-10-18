@@ -18,11 +18,10 @@ public class CustomSeparator {
     public List<Integer> separate(String input) {
         String calculatePart = separateCalculatePart(input);
 
-        List<String> numbers = customSeparators.stream()
-                .map(customSeparator -> calculatePart.replaceAll(customSeparator, " "))
-                .toList();
+        String numbers = customSeparators.stream()
+                .reduce(input, (result, customSeparator) -> result.replaceAll(customSeparator, " "));
 
-        return numbers.stream()
+        return Arrays.stream(numbers.split(" "))
                 .map(number -> number.isEmpty() ? "0" : number)
                 .mapToInt(Integer::parseInt).boxed()
                 .toList();
