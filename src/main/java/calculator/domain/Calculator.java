@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class Calculator {
     private static final Pattern CUSTOM_SEPERATOR_PATTERN=Pattern.compile("^//(.)\\\\n{1}(.*)");
 
-    private static String SEPERATOR_REGEX=",|:";
+    private static String seperatorRegex=",|:";
     private String input;
 
     public Calculator(String input){
@@ -25,7 +25,7 @@ public class Calculator {
 
     private static int calculate(String input) {
         int result=0;
-        String[] ar=input.split(SEPERATOR_REGEX);
+        String[] ar=input.split(seperatorRegex);
 
         for (String num:ar){
             //공백이면 continue
@@ -74,7 +74,7 @@ public class Calculator {
             customSeperator="\\"+customSeperator;
         }
 
-        SEPERATOR_REGEX=SEPERATOR_REGEX+"|"+customSeperator;
+       seperatorRegex=seperatorRegex+"|"+customSeperator;
     }
 
     private static void checkBadSeperator(String customSeperator) {
