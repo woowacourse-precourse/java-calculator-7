@@ -17,6 +17,10 @@ public class Application {
     }
 
     private static int StringCalculate(String input) {
+        if(input.equals("") || input == null) {
+            return 0;
+        }
+
         int sum = 0;
 
         String delimiter = ",|:";
@@ -29,7 +33,8 @@ public class Application {
         String[] temps = input.split(delimiter);
 
         for(String num : temps) {
-            sum += Integer.parseInt(num);
+            int parsedNum = parseNumber(num);
+            sum += parsedNum;
         }
 
         return sum;
@@ -44,6 +49,18 @@ public class Application {
         }
 
         return input.substring(startIndex, endIndex); // "//"와 "\n" 사이의 구분자 추출
+    }
+
+    private static int parseNumber(String num) {
+        try {
+            int parsedNum = Integer.parseInt(num);
+            if (parsedNum < 0) {
+                throw new IllegalArgumentException();
+            }
+            return parsedNum;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
     }
 
 }
