@@ -9,13 +9,13 @@ public class Application {
         app.Calculator();
     }
 
-    static String defaultSeparator = ",:";
-
     public void Calculator() {
+        String defaultSeparator = ",:";
+
         printUserInputMessage();
         String userInput = getUserInput();
 
-        if (isStringWithDefaultSeparator(userInput)) {
+        if (isStringWithDefaultSeparator(userInput, defaultSeparator)) {
             int result = sum(userInput, defaultSeparator);
             printResult(result);
         }
@@ -37,30 +37,34 @@ public class Application {
         return Console.readLine();
     }
 
-    public String removeNumber(String str) {
+    private String removeNumber(String str) {
         return str.replaceAll("[0-9]", "");
     }
 
-    public String removeSeparator(String str, String separator) {
+    private String removeSeparator(String str, String separator) {
         return str.replaceAll(formatSeparator(separator), "");
     }
 
-    public boolean isStringWithDefaultSeparator(String input) {
+    private boolean isStringWithDefaultSeparator(String input, String separator) {
         String str = removeNumber(input);
-        str = removeSeparator(str, defaultSeparator);
+        str = removeSeparator(str, separator);
         return str.isEmpty();
     }
 
-    public String getCustomSeparator(String input) {
+    private String formatBackslash(String input) {
+        return input.replace("\\", "\\\\");
+    }
+
+    private String getCustomSeparator(String input) {
         String[] arr = input.split("//|\\n");
         return arr[1];
     }
 
-    public String removeSeparatorInitializer(String input) {
+    private String removeSeparatorInitializer(String input) {
         return input.substring(3 + getCustomSeparator(input).length());
     }
 
-    public boolean isStringWithCustomSeparator(String input) {
+    private boolean isStringWithCustomSeparator(String input) {
         String str = removeSeparatorInitializer(input);
         str = removeNumber(str);
         str = removeSeparator(str, getCustomSeparator(input));
@@ -71,7 +75,7 @@ public class Application {
         return "[" + separator + "]";
     }
 
-    public int sum(String str, String separator) {
+    private int sum(String str, String separator) {
         if (str.isEmpty()) {
             return 0;
         }
@@ -84,7 +88,7 @@ public class Application {
         return result;
     }
 
-    public void printResult(int result) {
+    private void printResult(int result) {
         System.out.println("결과 : " + result);
     }
 }
