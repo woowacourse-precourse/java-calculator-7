@@ -26,24 +26,4 @@ class DelimiterParserTest {
         //then
         Assertions.assertFalse(result);
     }
-    /*@Test
-    void splitInputAsString() {
-        //given
-        String input = "1,2:3";
-        //when
-        String result = DelimiterParser.splitInputAsString(input);
-        //then
-        Assertions.assertEquals("123", result);
-    }
-    @Test
-    void getNumbersAfterParsing() {
-        //given
-        String input = "1,2:3";
-        //when
-        String result = DelimiterParser.splitInputAsString(input);
-        List<Integer> list = DelimiterParser.getNumbersAfterParsing(result);
-        //then
-        Assertions.assertEquals(3, list.size());
-        Assertions.assertEquals(Integer.valueOf(1), list.getFirst());
-    }*/
 }

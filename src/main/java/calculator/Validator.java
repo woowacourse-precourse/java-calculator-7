@@ -1,18 +1,18 @@
 package calculator;
 
-import java.util.List;
 
 public abstract class Validator {
 
-    public static void validateIfInputNegative(List<Integer> numbers) {
-        if (numbers.stream().anyMatch(number -> number < 0)) {
+    public static int validateIfInputNegative(int numbers) {
+        if (numbers < 0) {
             throw new IllegalArgumentException();
         }
+        return numbers;
     }
 
-    public static void validate(String splitInput) {
+    public static int validateIfNotNumber(String splitInput) {
         try {
-            Integer.parseInt(splitInput);
+            return Integer.parseInt(splitInput);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }

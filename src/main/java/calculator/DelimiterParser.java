@@ -3,60 +3,38 @@ package calculator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class DelimiterParser {
+
     private static final String COMMON_DELIMITER = ",";
 
-    private final List<String> delimiterList = new ArrayList<>();
-
-    public DelimiterParser(String delimiter) {
-        delimiterList.add(delimiter);
-    }
-    public DelimiterParser(String... delimiterList) {
-        this.delimiterList.addAll(Arrays.asList(delimiterList));
-    }
-    public String replace(String input) {
-        String result = input;
-        for (String delimiter : delimiterList) {
-            if (delimiter.equals(input.substring(0,2))) {
-                result = result.replace(input.substring(0,2), "");
-                continue;
-            }
-            if (delimiter.equals(input.substring(3,5))) {
-                result = result.replace(input.substring(3,5), "");
-                continue;
-            }
-            result = result.replace(delimiter, COMMON_DELIMITER);
-        }
-        return result;
-    }
-
     public static boolean isDefaultDelimiter(String input) {
-        String[] defaultDelimiterNumber = input.split(COMMON_DELIMITER);
-        try {
-            Integer.parseInt(defaultDelimiterNumber[0]);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
+        return input.contains(":") || input.contains(",");
     }
 
-    public static List<Integer> getNumbersAfterParsing(String input) {
-        List<Integer> numbers = new ArrayList<>();
-        for (char number : input.toCharArray()) {
-            numbers.add(Character.getNumericValue(number)); // - -1
-        }
-        return numbers;
+    public List<Integer> parseInputToIntList(String input) {
+        String replaceAllCommas = replaceAllCommas(input);
+        return parseToIntList(replaceAllCommas);
     }
 
-    public static List<Integer> parseToIntList(String input) {
-        String[] split = input.split(COMMON_DELIMITER);
-
-        List<Integer> list = new ArrayList<>();
-        for (String splitNumber : split) {
-            Validator.validate(splitNumber);
-            list.add(Integer.parseInt(splitNumber));
+    private String replaceAllCommas(String input) {
+        if (isDefaultDelimiter(input)) {
+            return input.replaceAll("[,:]", COMMON_DELIMITER);
         }
-        return list;
+        String delimiter = input.substring(2, input.indexOf("\\n"));
+        String numbersPart = input.substring(input.indexOf("\\n") + 2);
+        return numbersPart.replaceAll(Pattern.quote(delimiter), COMMON_DELIMITER);
+    }
+
+    private List<String> splitCommonDelimiter(String input) {
+        return Arrays.stream(input.split(COMMON_DELIMITER)).toList();
+    }
+
+    private List<Integer> parseToIntList(String input) {
+        return splitCommonDelimiter(input).stream()
+                .map(Validator::validateIfNotNumber)
+                .map(Validator::validateIfInputNegative)
+                .toList();
     }
 }
