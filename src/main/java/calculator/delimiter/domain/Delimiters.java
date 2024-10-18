@@ -1,6 +1,11 @@
 package calculator.delimiter.domain;
 
+import calculator.util.pattern.PatternUtils;
+
 import java.util.List;
+
+import static calculator.util.pattern.PatternUtils.SPLIT_DELIMITER;
+
 
 public class Delimiters {
 
@@ -11,10 +16,10 @@ public class Delimiters {
     }
 
     public String splitRegex() {
-        return join("|");
+        return join(SPLIT_DELIMITER);
     }
 
     private String join(String delimiterString) {
-        return String.join(delimiterString, values.stream().map(Delimiter::value).toList());
+        return PatternUtils.join(delimiterString, values.stream().map(Delimiter::value).toList());
     }
 }
