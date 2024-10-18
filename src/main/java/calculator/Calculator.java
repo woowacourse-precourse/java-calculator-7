@@ -10,7 +10,7 @@ public class Calculator {
     private static String input;
     private static String delimiters;
     private static String[] numbers;
-    private static int sum = 0;
+    private static int sum;
 
     public static void run(String inputValue) {
         setInput(inputValue);
@@ -56,6 +56,8 @@ public class Calculator {
     }
 
     private static void addNumbers() {
+        sum = 0;
+
         for (String number : numbers) {
             sum += Integer.parseInt(number);
         }
