@@ -13,7 +13,10 @@ public class Delimiter {
     }
 
     public String removeDelimiterSyntax(String input) {
-        return input.substring(DelimiterSyntaxIndex.DELIMITER_AFTER.getKey());
+        if (validateStartsWith(input) && validateEndsWith(input)) {
+            return input.substring(DelimiterSyntaxIndex.DELIMITER_AFTER.getKey());
+        }
+        return input;
     }
 
     public boolean validateHasDefaultOrCustomDelimiter(String input, String customDelimiter) {
