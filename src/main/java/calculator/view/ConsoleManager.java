@@ -1,5 +1,8 @@
 package calculator.view;
 
+import calculator.parser.ParserSelector;
+import calculator.parser.StringParser;
+
 public class ConsoleManager {
     private final static String WELCOME_MESSAGE = "덧셈할 문자열을 입력해주세요.";
     private final static String RESULT_MESSAGE = "결과 : ";
@@ -8,7 +11,7 @@ public class ConsoleManager {
 
         String str = InputManager.consoleInput();
 
-        StringParser parser = ParserSelecter.select(str);
+        StringParser parser = ParserSelector.select(str);
         List<String> list = parser.parse(str);
         int result = Calculator.sum(list);
 
