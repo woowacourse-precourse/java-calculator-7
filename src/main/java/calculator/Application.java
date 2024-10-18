@@ -1,14 +1,13 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Application {
     public static void main(String[] args) {
-        // 숫자입력기능
+        // 숫자 입력 기능
         String inputNumber = inputNumber();
         // 구분자 분리 기능
         String[] splitInputNumber = splitInputNumber(inputNumber);
@@ -30,22 +29,27 @@ public class Application {
         Matcher matcher = pattern.matcher(inputNumber);
 
         if (matcher.find()) {
-            // 커스텀 구분자가 있을때
+            // 커스텀 구분자가 있을 때
             String inputDelimiter = matcher.group(1);
             inputNumber = matcher.replaceFirst("");
-            String delimiter;
-            // 역슬래쉬 예외처리
-            if (inputDelimiter.equals("\\")) {
-                delimiter = defaultDelimiter + "|" + "[" + "\\\\" + "]";
-            } else {
-                delimiter = defaultDelimiter + "|" + "[" + inputDelimiter + "]";
-            }
+        
+            String delimiter = buildDelimiter(defaultDelimiter, inputDelimiter);
             splitInputNumber = inputNumber.split(delimiter);
         } else {
-            // 커스텀 구분자가 없을때
+            // 커스텀 구분자가 없을 때
             splitInputNumber = inputNumber.split(defaultDelimiter);
         }
         return splitInputNumber;
+    }
+
+    private static String buildDelimiter(String defaultDelimiter, String inputDelimiter) {
+        // 특수 문자를 이스케이프 처리
+        String escapedDelimiter = escapeSpecialCharacters(inputDelimiter);
+        return defaultDelimiter + "|" + "[" + escapedDelimiter + "]";
+    }
+
+    private static String escapeSpecialCharacters(String delimiter) {
+        return delimiter.replaceAll("([\\\\+*?\\[\\](){}|.^$])", "\\\\$1");
     }
 
     private static void validateSplitNumber(String[] splitInputNumber) {
