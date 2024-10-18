@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import global.ErrorCode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,6 +26,9 @@ public class Calculator {
      */
     private void findCustomSeparator() {
         if (input.startsWith("//")) {
+            if (!input.contains("\\n")) {
+                throw new IllegalArgumentException(ErrorCode.INVALID_CUSTOM_REQUEST.message);
+            }
             int separatorEndIndex = input.indexOf("\\n");
             String customSeparator = input.substring(2, separatorEndIndex);
 
@@ -40,7 +44,6 @@ public class Calculator {
      */
     private Integer sum() {
         String[] numbers = input.split(separators.toString());
-
         try {
             return Arrays.stream(numbers)
                     .mapToInt(Integer::parseInt)
