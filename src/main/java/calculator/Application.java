@@ -42,7 +42,7 @@ public class Application {
         } else if (!isCustomDelimiter && !input.contains(",") && !input.contains(":")) {//구분자가 다를때
             throw new IllegalArgumentException("구분자와 입력된 구분자가 다릅니다.");
         }
-
+        boolean isContainsNumber = false;
         for (String number : numbers) {
 
             // 숫자로 변환할 수 없는 경우 처리
@@ -55,11 +55,14 @@ public class Application {
                 }
 
                 sum += num;
+                isContainsNumber = true;
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("잘못된 숫자 입력: " + number);
             }
         }
-
+        if (!isContainsNumber) {
+            throw new IllegalArgumentException("숫자가 입력되지 않았습니다.");
+        }
         System.out.println("결과 : " + sum);
     }
 }
