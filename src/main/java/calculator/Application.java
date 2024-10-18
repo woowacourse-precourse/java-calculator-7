@@ -13,10 +13,13 @@ public class Application {
 
         getUserInput(calculator);
         checkIsInputEmpty(calculator);
-        splitWithDefaultSeparator(calculator);
 
         int escapeIdx = calculator.userInput.indexOf("\\n");
-        splitWithCustomSeparator(calculator, escapeIdx);
+        if (escapeIdx > 0) {
+            splitWithCustomSeparator(calculator, escapeIdx);
+        } else {
+            splitWithDefaultSeparator(calculator);
+        }
 
         int total = 0;
 
