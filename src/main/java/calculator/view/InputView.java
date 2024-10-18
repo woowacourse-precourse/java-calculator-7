@@ -2,7 +2,6 @@ package calculator.view;
 
 import calculator.util.SplitNumber;
 import camp.nextstep.edu.missionutils.Console;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -12,7 +11,6 @@ public class InputView {
         if (numbers.equals("")){
             return Collections.emptyList();
         }else{
-
             return SplitNumber.checkNumbers(numbers);
         }
     }
