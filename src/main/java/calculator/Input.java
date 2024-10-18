@@ -9,7 +9,26 @@ public class Input {
         return input;
     }
 
-    public static void validUserInput(String input){
+    /*
+    테스트 입력
+    "1,2,3"
+    "1,2,3,"
+    "1,2:3@4"
+    "1,;2:3"
+    "1, 2;3"
+    "//;\n1;2;3"
+    "//;\n1;2; 3"
+    "//;\n1,2;3:4"
+    "//;\n1:2@3;4"
+    "//7\n172,3"
+     */
 
+    public static void validUserInput(String input){
+        if(input.isEmpty() || validGeneralUserInput(input) || validCustomUserInput(input)){
+            return;
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
+
 }
