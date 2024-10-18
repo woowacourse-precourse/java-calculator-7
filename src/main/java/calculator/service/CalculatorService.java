@@ -45,15 +45,34 @@ public class CalculatorService {
     }
 
     private Number sum(Double[] values) {
-        double result = Arrays.stream(values)
-                .mapToDouble(Double::doubleValue)
-                .sum();
-        if (result % 1 == 0) {
-            if (result > Long.MAX_VALUE) {
-                throw new IllegalArgumentException("계산 결과가 너무 큽니다.");
-            }
+        double result = getSum(values);
+        if (isWholeNumber(result)) {
+            checkLongRange(result);
             return (long) result;
         }
+        checkDoubleRange(result);
         return result;
+    }
+
+    private double getSum(Double[] values) {
+        return Arrays.stream(values)
+                .mapToDouble(Double::doubleValue)
+                .sum();
+    }
+
+    private boolean isWholeNumber(double result) {
+        return result % 1 == 0;
+    }
+
+    private void checkLongRange(double result) {
+        if (result > Long.MAX_VALUE) {
+            throw new IllegalArgumentException("계산 결과가 너무 큽니다.");
+        }
+    }
+
+    private void checkDoubleRange(double result) {
+        if (result > Double.MAX_VALUE) {
+            throw new IllegalArgumentException("계산 결과가 너무 큽니다.");
+        }
     }
 }
