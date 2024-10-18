@@ -18,7 +18,8 @@ public class CalculatorController {
         String s = inputView.getUserInput();
         List<String> validNumber = calculatorService.findValidNumber(s);
         double result = calculator.calculatePlusNumber(validNumber);
-        outputView.printResult(result);
+        Object finalResult = calculator.determine_type(result);
+        outputView.printResult(finalResult);
     }
 
 }

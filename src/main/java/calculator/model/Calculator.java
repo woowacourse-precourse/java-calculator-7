@@ -14,6 +14,13 @@ public class Calculator {
         return result;
     }
 
+    public Object determine_type(double result){
+        if(result%1 == 0){
+            return (long) result;
+        }
+        return result;
+    }
+
     private void validator(String number){
         try{
             double tmpRes = Double.parseDouble(number);
