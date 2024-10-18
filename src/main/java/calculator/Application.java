@@ -39,12 +39,17 @@ public class Application {
         int sum = 0;
 
         for (String number : numbers){
-            if(!number.isEmpty()){
-                int num = Integer.parseInt(number);
-                if(num < 0){
-                    throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+            if(!number.isBlank()){
+                try{
+                    int num = Integer.parseInt(number);
+                    if(num < 0){
+                        throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+                    }
+                    sum += num;
                 }
-                sum += num;
+                catch(NumberFormatException e){
+                    throw new IllegalArgumentException("잘못된 입력 값입니다: " + number);
+                }
             }
         }
         return sum;
