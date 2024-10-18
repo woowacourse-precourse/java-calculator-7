@@ -27,7 +27,7 @@ public class NumberValidator {
             return;
         }
 
-        if (Double.parseDouble(number) < 0) {
+        if (Double.parseDouble(number) <= 0) {
             throw new IllegalArgumentException("양수를 입력해주세요.");
         }
     }
