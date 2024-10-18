@@ -25,6 +25,22 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 문자열_없이_입력() {
+        assertSimpleTest(() -> {
+            run("\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 커스텀_지정자_지정_후_문자열_없이_입력() {
+        assertSimpleTest(() -> {
+            run("//;\\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))
