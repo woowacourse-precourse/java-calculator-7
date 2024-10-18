@@ -18,7 +18,8 @@ public class Delimiter {
 
     public boolean validateHasDefaultOrCustomDelimiter(String input, String customDelimiter) {
         String delimiters = DefaultDelimiter.COLON.getKey() + DefaultDelimiter.COMMA.getKey() + customDelimiter;
-        return input.matches("[0-9" + delimiters + "]*");
+        String defaultSyntax = removeDelimiterSyntax(input);
+        return defaultSyntax.matches("[0-9" + delimiters + "]*");
     }
 
     private boolean validateStartsWith(String input) {
