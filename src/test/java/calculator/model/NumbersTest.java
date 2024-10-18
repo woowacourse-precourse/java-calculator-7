@@ -84,8 +84,9 @@ public class NumbersTest {
 		return Stream.of(
 			Arguments.of(Arrays.asList("")),
 			Arguments.of(Arrays.asList(" ")),
+			Arguments.of(Arrays.asList("\t")),
 			Arguments.of(Arrays.asList("\n")),
-			Arguments.of(Arrays.asList("\t"))
+			Arguments.of(Arrays.asList("   54  "))
 		);
 	}
 }

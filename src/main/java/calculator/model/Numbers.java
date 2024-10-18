@@ -25,9 +25,13 @@ public class Numbers {
 		validateNumber(stringNumbers);
 
 		try {
-			return new Numbers(
-				stringNumbers.stream().map(Long::parseLong).toList()
-			);
+			List<Long> numbers = stringNumbers.stream()
+				.map(String::trim)
+				.filter(stringNumber -> !stringNumber.isEmpty())
+				.map(Long::parseLong)
+				.toList();
+
+			return new Numbers(numbers);
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException(ErrorMessage.NUMBERS_OVERFLOW.getMessage());
 		}
@@ -43,7 +47,7 @@ public class Numbers {
 	}
 
 	private static void validateNumber(List<String> stringNumbers) {
-		if (!stringNumbers.stream().allMatch(
+		if (!stringNumbers.stream().map(String::trim).allMatch(
 			stringNumber -> NUMBER_PATTERN.matcher(stringNumber).matches()
 		)) {
 			throw new IllegalArgumentException(ErrorMessage.NUMBERS_NUMBER_FORMAT.getMessage());
