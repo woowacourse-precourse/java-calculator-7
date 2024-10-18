@@ -5,7 +5,7 @@ public class InputValidator {
     private static final String REGEX_DELIMITER = "[,:]";
 
     private static final String REGEX_CUSTOM_DELIMITER = "[\'\",;:\\-\\.\\*\\+\\?\\[\\]\\{\\}\\(\\)" +
-            "\\\\\\|\\^\\$\\!\\@\\#\\$\\`\\~]";
+            "\\|\\^\\$\\!\\@\\#\\&\\`\\~\\=\\`\\~\\<\\>\\/\\\\]";
 
     private static final String REGEX_CUSTOM_DELIMITER_START = "//";
     private static final String REGEX_CUSTOM_DELIMITER_END = "\\n";
