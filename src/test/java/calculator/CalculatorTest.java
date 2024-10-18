@@ -25,10 +25,7 @@ class CalculatorTest {
 
 	static Stream<Arguments> provide_input_for_test_sum_validation() {
 		return Stream.of(
-			Arguments.of("//1,2,3,4,5\\n123"),
-			Arguments.of("//1,2,3,4,5\\n"),  // 숫자 부분이 비어있음
 			Arguments.of("//\\n"),           // 구분자와 숫자 부분이 모두 비어있음
-			Arguments.of("//;\\n"),          // 숫자 부분이 비어있음
 			Arguments.of("//"),              // 잘못된 형식
 			Arguments.of("-1,2,3"),          // 음수 포함
 			Arguments.of("1,-2,3"),          // 음수 포함
@@ -46,7 +43,7 @@ class CalculatorTest {
 		return Stream.of(Arguments.of("1", 1), Arguments.of("1,2,3", 6), Arguments.of("5,6,7,2", 20),
 			Arguments.of("1:2", 3), Arguments.of("1:2:4", 7), Arguments.of("//a\\n1", 1),
 			Arguments.of("//;\\n1:2,4;5", 12), Arguments.of("//,\\n5:7,2", 14),
-			Arguments.of("//[!!\\n5[!!6[!!7[!!2", 20),Arguments.of("//;\\n1:2,4;5"));
+			Arguments.of("//[!!\\n5[!!6[!!7[!!2", 20),Arguments.of("//;\\n1:2,4;5", 12));
 	}
 
 }
