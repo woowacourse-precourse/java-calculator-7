@@ -66,7 +66,7 @@ public class Calculator {
 		// 커스텀 구분자로 숫자가 들어왔을 때
 		char newSeparator = str.charAt(2);
 		if (Character.isDigit(newSeparator)) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("숫자는 커스텀 구분자로 사용할 수 없습니다.");
 		}
 
 		// 커스텀 구분자 저장 및 구분자 개수 추가
@@ -85,7 +85,7 @@ public class Calculator {
 
 		// 숫자가 정수형 범위를 넘어섰을 때
 		if (num < Integer.MIN_VALUE || Integer.MAX_VALUE < num) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("숫자는 int형 범위 내에서 입력 가능합니다.");
 		}
 		return num;
 	}
@@ -98,7 +98,7 @@ public class Calculator {
 		// 처음과 끝에 구분자가 나올 때
 		if (!Character.isDigit(str.charAt(0))
 				|| !Character.isDigit(str.charAt(str.length() - 1))) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("구분자는 문자열의 앞 또는 뒤에 위치할 수 없습니다.");
 		}
 
 		int startIdx = 0, endIdx = 0, strLen = str.length();
@@ -109,7 +109,7 @@ public class Calculator {
 
 			// 구분자 2개 이상
 			if (startIdx == endIdx) {
-				throw new IllegalArgumentException();
+				throw new IllegalArgumentException("구분자는 하나씩만 사용 가능합니다.");
 			}
 
 			long num = stringToLong(str.substring(startIdx, endIdx));
@@ -128,7 +128,7 @@ public class Calculator {
 				idx++;
 			}
 			if (idx == separatorCnt) {
-				throw new IllegalArgumentException();
+				throw new IllegalArgumentException("지정되지 않은 구분자는 사용할 수 없습니다.");
 			}
 
 			calculateNums(num);
