@@ -21,13 +21,9 @@ public class Application {
             splitWithDefaultSeparator(calculator);
         }
 
-        int total = 0;
+        checkIsPositiveNumber(calculator);
 
-        for (String number : processedInput) {
-            if (Integer.parseInt(number) < 0) {
-                throw new IllegalArgumentException();
-            }
-        }
+        int total = 0;
 
         for (String number : processedInput) {
             if (Character.isDigit(Integer.parseInt(number))) {
@@ -69,5 +65,13 @@ public class Application {
         String leftInput = calculator.userInput.substring(escapeIdx + 2);
         String[] splitInput = leftInput.split(separator);
         calculator.processedInput.addAll(Arrays.asList(splitInput));
+    }
+
+    static void checkIsPositiveNumber(Calculator calculator) {
+        for (String number : calculator.processedInput) {
+            if (Integer.parseInt(number) < 0) {
+                throw new IllegalArgumentException();
+            }
+        }
     }
 }
