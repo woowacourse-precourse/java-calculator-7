@@ -2,13 +2,16 @@ package calculator.controller;
 
 import calculator.util.InputUtil;
 import calculator.util.MessageUtil;
+import calculator.util.ValidationUtil;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CalculatorController {
 
     private final InputUtil inputUtil = new InputUtil();
     private final MessageUtil messageUtil = new MessageUtil();
+    private final ValidationUtil validationUtil = new ValidationUtil();
 
 
     public void run() {
@@ -22,20 +25,16 @@ public class CalculatorController {
 
     private List<Integer> getIntegerListInfo() {
         String initialInput = inputUtil.userInput();
-        boolean isValidInputType = isValidInput(initialInput);
-        if (!isValidInputType) {
-            throw new IllegalArgumentException("유효하지 않은 입력입니다.");
+
+        if (initialInput == null || initialInput.isEmpty()) {
+            return Arrays.asList(0);
         }
-        List<Integer> integerList = splitInitialString(initialInput);
-        return integerList;
+
+        validationUtil.isValidInput(initialInput);
+
+        return splitInitialString(initialInput);
     }
 
-    boolean isValidInput(String initialInput) {
-        if (initialInput == null || initialInput.isEmpty()) {
-            return false;
-        }
-        return initialInput.startsWith("//") || Character.isDigit(initialInput.charAt(0));
-    }
 
     private List<Integer> splitInitialString(String initialString) {
         String seporators = ",|:";
@@ -55,22 +54,19 @@ public class CalculatorController {
         List<Integer> integerList = new ArrayList<>();
 
         for (String s : numList) {
-            boolean isValidNumberType = isValidNumber(s);
-            if (!isValidNumberType) {
-                throw new IllegalArgumentException("유효하지 않은 입력입니당.");
+            validationUtil.isValidNumber(s);
+            if (s.isEmpty()) {
+                integerList.add(0);
+                System.out.println(Integer.valueOf(s));
+                continue;
             }
             integerList.add(Integer.valueOf(s));
+            System.out.println(Integer.valueOf(s));
         }
         return integerList;
 
     }
 
-    private boolean isValidNumber(String s) {
-        if (s == null || s.isEmpty()) {
-            return false;
-        }
-        return Character.isDigit(s.charAt(0));
-    }
 
     private Character setExtraSeparator(String initialString) {
 //      "//" 뒤에 문자 하나만 오는지 확인
