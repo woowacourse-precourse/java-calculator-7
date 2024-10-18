@@ -21,7 +21,7 @@ public class Controller {
             getNumberList();
             getResultNum();
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
