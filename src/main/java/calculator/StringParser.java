@@ -14,6 +14,7 @@ public class StringParser {
             String input = matcher.group(2);
             return input.split(delimiter);
         }
+
         return string.split(DEFAULT_DELIMITER);
     }
 }
