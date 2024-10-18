@@ -31,6 +31,7 @@ public class Application {
 
         List<Integer> inputs = Arrays.stream(input.split(COMMA + "|" + SEMICOLON))
                 .filter(letter -> !letter.equals(""))
+                .map(String::trim)
                 .map(Integer::parseInt)
                 .toList();
 
