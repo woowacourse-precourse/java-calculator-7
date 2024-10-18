@@ -23,7 +23,7 @@ public class CostomDelimiter {
             validateAndAddDelimiter("");
             return;
         }
-        if (next != 3) {
+        if (next == -1) {
             throw new IllegalArgumentException("커스텀 구분자 입력 값이 올바르지 않습니다.");
         }
         validateAndAddDelimiter(String.valueOf(inputMessage.charAt(2)));
