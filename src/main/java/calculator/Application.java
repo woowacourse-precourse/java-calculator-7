@@ -15,7 +15,19 @@ public class Application {
         String[] str_num = input.split(",|:");
 
         if(input_split[0].equals("/")){
-            
+            try {
+                for (int i=2; i<input_split.length; i++){
+                    if (input_split[0].equals("/") && input_split[1].equals("/")){
+                        if (input_split[i].equals("\\") && input_split[i+1].equals("n")){
+                            break;
+                        }
+                        sep += input_split[i];
+                    }
+                }
+
+            } catch (Exception e) {
+                throw new IllegalArgumentException(e);
+            }
         }else{
             try{
                 for (int i=0; i<str_num.length; i++){
