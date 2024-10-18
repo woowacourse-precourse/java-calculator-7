@@ -71,9 +71,7 @@ public class Application {
         int count = 0; // 저장한 숫자의 개수
 
         for (String s : numberStrings) {
-            if (!s.isEmpty()) { // 빈 문자열 필터링
-                tempArray[count++] = Integer.parseInt(s); // 정수 변환 후 저장
-            }
+            tempArray[count++] = Integer.parseInt(s); // 정수 변환 후 저장
         }
 
         // 숫자의 개수에 맞는 새로운 배열 생성
