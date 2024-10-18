@@ -1,12 +1,17 @@
 package calculator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringProcessor {
+    private List<String> readStringList;
 
     public StringProcessor(String readString) {
         String[] stringArray = splitString(readString);
+        readStringList = new ArrayList<>();
+        validateString(stringArray);
     }
 
     private String[] splitString(String readString) {
@@ -20,4 +25,31 @@ public class StringProcessor {
         }
         return readString.split("["+basic+"]");
     }
+
+    private void validateString(String[] stringArray) {
+        for (String s : stringArray){
+            if (s.isEmpty()){
+                continue;
+            }
+            validate(s);
+            readStringList.add(s);
+        }
+    }
+
+    private void validate(String s) {
+        invalidString(s);
+        validateRange(s);
+    }
+
+    private void invalidString(String s) {
+        if (!s.matches("[0-9\\.\\-]*")){
+            throw new IllegalArgumentException("[ERROR] 허용되지 않은 문자열이 포함되어있습니다.");
+        }
+    }
+    private void validateRange(String s) {
+        if (Double.parseDouble(s) < 0){
+            throw new IllegalArgumentException("[ERROR] 양수만 허용합니다.");
+        }
+    }
+
 }
