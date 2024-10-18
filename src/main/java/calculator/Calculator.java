@@ -1,7 +1,10 @@
 package calculator;
 
-import static calculator.Validator.checkNegativeNumber;
+import static calculator.exception.Validator.checkNegativeNumber;
+import static calculator.exception.Validator.isNumeric;
 
+import calculator.io.InputView;
+import calculator.io.OutputView;
 import java.util.List;
 
 public class Calculator {
@@ -30,7 +33,7 @@ public class Calculator {
     private Long[] changeStringToNumber(List<String> splitInput) throws IllegalArgumentException {
         Long[] numberOfInputString = new Long[splitInput.size()];
         for (int i = 0; i < splitInput.size(); i++) {
-            long number = Long.parseLong(splitInput.get(i));
+            long number = isNumeric(splitInput.get(i));
             checkNegativeNumber(number);
             numberOfInputString[i] = number;
         }

@@ -1,7 +1,7 @@
 package calculator;
 
-import static calculator.Validator.hasCustomSplitter;
-import static calculator.Validator.isEmptyString;
+import static calculator.exception.Validator.hasCustomSplitter;
+import static calculator.exception.Validator.isEmptyString;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -21,6 +21,7 @@ public class Splitter {
             DELIMITER += ("|" + getCustomSplitter(delimiterIndex));
             userInput = userInput.substring(delimiterIndex + 2);
         }
+
         if (isEmptyString(userInput)) {
             return Collections.emptyList();
         }
