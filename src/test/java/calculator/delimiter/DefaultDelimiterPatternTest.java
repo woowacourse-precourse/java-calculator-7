@@ -72,4 +72,13 @@ class DefaultDelimiterPatternTest {
     public void 아예_패턴에_맞지_않는_경우(String input) {
         assertThat(pattern.validate(input)).isFalse();
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "'01:2,3'",
+            "'1:05:3'",
+    })
+    public void 숫자앞에_0이_포함될때(String input) {
+        assertThat(pattern.validate(input)).isFalse();
+    }
 }
