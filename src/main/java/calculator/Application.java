@@ -52,7 +52,7 @@ public class Application {
             numberPart = getNumberPart(input, indexOfEndSign);
         }
 
-        String[] numbers = numberPart.split(delimiterPart.toString());
+        String[] eachNumbers = getEachNumbers(numberPart, delimiterPart);
         /*
         여러개의 구분자가 연속될 경우 빈 문자열이 리스트에 들어갈 수 있다.
         e.g. 1,,2,3의 경우 numbers List에는 [1, "", 2, 3] 이 들어가게 된다.
@@ -60,11 +60,15 @@ public class Application {
         -> validateNoNegativeNumbers, add 메서드에서 빈 문자열에 대한 처리로직을 추가해주어야한다.
         */
 
-        int[] parsedNumbers = parseNumbers(numbers);
+        int[] parsedNumbers = parseNumbers(eachNumbers);
 
         validateNoNegativeNumbers(parsedNumbers); // 음수 있으면 예외 발생 (3.8 예외)
 
         return add(parsedNumbers);
+    }
+
+    private static String[] getEachNumbers(String numberPart, StringBuilder delimiterPart) {
+        return numberPart.split(delimiterPart.toString());
     }
 
     private static String getNumberPart(String input, int indexOfEndSign) {
@@ -77,8 +81,8 @@ public class Application {
                 .split(""); // 여러 커스텀 구분자 받는 경우 포함
     }
 
-    private static int[] parseNumbers(String[] numbers) {
-        return Arrays.stream(numbers)
+    private static int[] parseNumbers(String[] eachNumbers) {
+        return Arrays.stream(eachNumbers)
                 .filter(Application::isNotEmpty)
                 .map(String::trim)
                 .mapToInt(Integer::parseInt)
