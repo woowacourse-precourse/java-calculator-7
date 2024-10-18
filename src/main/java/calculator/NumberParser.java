@@ -18,7 +18,7 @@ public class NumberParser {
             try {
                 numbers[i] = toPositiveInteger(token); // 각 토큰을 숫자로 변환
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("유효하지 않은 숫자 형식: " + token);
+                throw new IllegalArgumentException(); // "유효하지 않은 숫자 형식: " + token
             }
         }
 
@@ -31,7 +31,7 @@ public class NumberParser {
     private static int toPositiveInteger(String token) {
         int number = Integer.parseInt(token);
         if (number < 0) {
-            throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + number);
+            throw new IllegalArgumentException(); // "음수는 입력할 수 없습니다: " + number
         }
         return number;
     }
