@@ -23,7 +23,7 @@ public class DelimiterNumberValidator {
 
     private void validatePositiveNumber(int parseInt) {
         if (parseInt < 0) {
-            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            throw new IllegalArgumentException(ErrorMessage.NEGATIVE_NUMBER_NOT_ALLOWED.getMessage());
         }
     }
 
