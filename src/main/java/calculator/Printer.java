@@ -7,6 +7,6 @@ public class Printer {
     }
 
     public void  PrintOutput() {
-        System.out.println(output);
+        System.out.println("결과 : " + output);
     }
 }

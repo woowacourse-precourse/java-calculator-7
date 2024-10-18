@@ -81,7 +81,7 @@ public class AdderScanner {
 
     private static boolean isDelimiter(char ch,char custom_char) {
 
-        return ch == ';' || ch == ',' || ch==custom_char;
+        return ch == ':' || ch == ',' || ch==custom_char;
     }
 
 
