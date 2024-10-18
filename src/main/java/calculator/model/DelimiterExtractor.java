@@ -1,14 +1,16 @@
 package calculator.model;
 
+import java.util.regex.Pattern;
+
 public class DelimiterExtractor {
 
-    private String delimiter = "[,:]";
+    private String delimiter = ",|:";
     private int contentStartIndex;
     private static final int DELIMITER_START = 2;
 
     public void addCustomDelimiter(String input) {
         String customDelimiter = extractCustomDelimiter(input);
-        delimiter += "|" + customDelimiter;
+        delimiter += "|" + Pattern.quote(customDelimiter);
     }
 
     public String extractCustomDelimiter(String input) {
