@@ -19,16 +19,25 @@ public class Calculator {
 
     private static int sum(Data data) {
         int sum = 0;
+        long longSum = 0;
+
         String contents = data.getContents();
         String separators = data.getSeparators();
         String[] nums = contents.split(separators);
+
         try {
             for (int i = 0; i < nums.length; i++) {
                 sum += Integer.parseInt(nums[i]);
+                longSum += Integer.parseInt(nums[i]);
             }
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }
+
+        if (sum != longSum) {
+            throw new IllegalArgumentException();
+        }
+
         return sum;
     }
 }
