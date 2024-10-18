@@ -26,6 +26,10 @@ public class NumbersToken {
         return numbers;
     }
 
+    public boolean isEmpty() {
+        return token.isEmpty();
+    }
+
     @Override
     public String toString() {
         return token;

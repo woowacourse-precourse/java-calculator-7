@@ -9,7 +9,7 @@ public class Delimiter {
             this.delimiter = delimiter;
             return;
         }
-        valid(delimiter);
+        validate(delimiter);
         this.delimiter = delimiter;
     }
 
@@ -18,7 +18,20 @@ public class Delimiter {
     }
 
 
-    public void valid(String delimiter) {
+    private void validate(String delimiter) {
+        validateEmptyDelimiter(delimiter);
+        validateSize(delimiter);
+    }
 
+    private void validateEmptyDelimiter(String delimiter) {
+        if (delimiter == null || delimiter.isEmpty()) {
+            throw new IllegalArgumentException("구분자는 빈 값일 수 없습니다.");
+        }
+    }
+
+    private void validateSize(String delimiter) {
+        if (delimiter.length() > 1) {
+            throw new IllegalArgumentException("구분자는 한 개의 문자만 이용 가능합니다.");
+        }
     }
 }
