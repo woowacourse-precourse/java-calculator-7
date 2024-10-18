@@ -32,7 +32,7 @@ public class Preprocessor {
         }
     }
 
-    public void validateInputString(List<String> delimeter, String input) {
+    public void validateCalculationSegment(List<String> delimeter, String input) {
         calculationSegmentProcessor.findNoneDelimeterString(delimeter, input);
     }
 

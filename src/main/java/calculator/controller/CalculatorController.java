@@ -21,7 +21,7 @@ public class CalculatorController {
         String input = viewManager.printInputMessage();
         List<String> delimeterList = preprocessor.preprocessDelimeter(input);
         String preprocessedString = preprocessor.preprocessCalculationSegment(input);
-        preprocessor.validateInputString(delimeterList,preprocessedString);
+        preprocessor.validateCalculationSegment(delimeterList,preprocessedString);
         Integer answer = mainProcessor.calculate(preprocessor.extractSumNumbers(delimeterList,preprocessedString));
         viewManager.printResult(answer);
     }
