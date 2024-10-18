@@ -2,6 +2,7 @@ package calculator;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,6 +11,7 @@ public class StringAddCalculator implements StringCalculator {
     private static final String DEFAULT_DELIMITER = ",|:";
     private static final int CUSTOM_DELIMITER_ORDER = 1;
     private static final int ARITHMETIC_EXPRESSION_ORDER = 2;
+    public static final Set<Character> ALLOWED_DELIMITERS = Set.of(';', ',');
 
     @Override
     public int add(String input) {
@@ -56,13 +58,17 @@ public class StringAddCalculator implements StringCalculator {
     private void validateDelimiter(String input) {
         List<Character> invalidChars = input.chars()
                 .mapToObj(c -> (char) c)
-                .filter(c -> !(Character.isDigit(c) || c == ':' || c == ',')) // 기본 구분자 :,
+                .filter(this::isInvalidChar)
                 .toList();
         if (hasInvalidDelimiter(invalidChars)) {
             throw new IllegalArgumentException(
                     String.format("(%s)에서는 허용되지 않는 구분자가 발견되었습니다. (%s)", input, invalidChars)
             );
         }
+    }
+
+    private boolean isInvalidChar(Character c) {
+        return !(Character.isDigit(c) || ALLOWED_DELIMITERS.contains(c));
     }
 
     private boolean hasInvalidDelimiter(List<Character> invalidChars) {
