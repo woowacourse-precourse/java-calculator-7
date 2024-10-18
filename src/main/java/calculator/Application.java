@@ -43,16 +43,16 @@ public class Application {
     }
 
     private static boolean hasCustomDelimiter(String input) {
-        return input.startsWith("//") && input.contains("\n");
+        return input.startsWith("//") && input.contains("\\n");
     }
 
     private static String extractNumbers(String input) {
-        int delimiterEndIndex = input.indexOf("\n");
-        return input.substring(delimiterEndIndex + 1);
+        int delimiterEndIndex = input.indexOf("\\n");
+        return input.substring(delimiterEndIndex + 2);
     }
 
     private static List<String> extractAndValidateCustomDelimiter(String input) {
-        int delimiterEndIndex = input.indexOf("\n");
+        int delimiterEndIndex = input.indexOf("\\n");
 
         if (delimiterEndIndex == -1) {
             throw new IllegalArgumentException("잘못된 형식의 커스텀 구분자입니다.");
