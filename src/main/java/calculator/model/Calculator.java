@@ -18,10 +18,12 @@ public class Calculator {
 
         Delimiter delimiter = selectDelimiter(input);
 
+        System.out.println(delimiter);
+
         NumbersToken numbersToken = tokenizer.createNumbersToken(input);
 
-        System.out.println(delimiter);
-        System.out.println(numbersToken);
+        Numbers numbers = numbersToken.convertToNumbers(delimiter);
+
     }
 
     public Delimiter selectDelimiter(String input) {

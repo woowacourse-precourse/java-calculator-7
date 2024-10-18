@@ -1,6 +1,8 @@
 package calculator.model;
 
-public record Delimiter(String delimiter) {
+public class Delimiter {
+
+    private String delimiter;
 
     public Delimiter(String delimiter) {
         if (delimiter.equals(",|:")) {
@@ -10,6 +12,11 @@ public record Delimiter(String delimiter) {
         valid(delimiter);
         this.delimiter = delimiter;
     }
+
+    public String getDelimiter() {
+        return delimiter;
+    }
+
 
     public void valid(String delimiter) {
 
