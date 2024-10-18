@@ -49,15 +49,15 @@ public class Application {
         Matcher matcher = Pattern.compile("//(.*?)\\\\n(.*)").matcher(input);
 
         if (matcher.find()) {
-            String customSeparator = Pattern.quote(matcher.group(1));  // 커스텀 구분자
+            String customSeparator = matcher.group(1);  // 커스텀 구분자
             String extractNumber = matcher.group(2);  // 나머지 문자열
 
-            separators.addFirst(customSeparator);
-
-            return extractNumber;
-        } else {
-            throw new IllegalArgumentException("커스텀 구분자 형식이 틀렸습니다.");
+            if (!Character.isDigit(customSeparator.charAt(0))) {
+                separators.addFirst(Pattern.quote(customSeparator));
+                return extractNumber;
+            }
         }
+        throw new IllegalArgumentException("커스텀 구분자 형식이 틀렸습니다.");
     }
 
     public static void displayHelp() {
