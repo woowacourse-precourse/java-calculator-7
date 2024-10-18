@@ -17,8 +17,7 @@ public class CalculatorController {
         } // end if
 
         if (containsDefaultSeparator(input)) {
-            List<Integer> test = new DefaultSeparator().separate(input);
-            System.out.println(test);
+            new DefaultSeparator().separate(input);
         } // end if
     } // run
 
