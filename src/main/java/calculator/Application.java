@@ -9,10 +9,10 @@ public class Application {
 
         // 입력을 구분자로 나누기
         try {
-            String[] parts = splitInput(input); //배열화된 입력된 숫자
-            isNum(parts); //
-            int sum = sumNumbers(parts);
-            System.out.println("합계: " + sum);
+            String[] parts = splitInput(input); //입력된 숫자들의 배열값
+            isNum(parts); //배열 내부가 전부 숫자인지 확인.. false시 에러
+            int sum = sumNumbers(parts); //전체 배열 내 합 구하기
+            System.out.println("합계: " + sum); //결과
         } catch (IllegalArgumentException e) {
             System.out.println("error");
         }
@@ -21,14 +21,16 @@ public class Application {
 
     // 입력된 문자열을 구분자로 나누는 메서드
     public static String[] splitInput(String input) {
-        String numbers = removePdelimiter(input);
-        return numbers.split(delimiter(input)); // 콤마와 콜론을 구분자로 사용하여 문자열을 나눔
+        String numbers = removeCDelimiter(input);//입력값의 커스텀 입력부 삭제
+
+        return numbers.split(delimiter(input)); // 콤마와 콜론, 커스텀 구분자로 사용하여 문자열을 나눔
     }
 
     //나눠진 문자를 합하는 메서드
     public static int sumNumbers(String[] parts) {
         int sum = 0;
 
+        //배열 내부 숫자화와 합
         for (String part : parts) {
             sum += Integer.parseInt(part);
         }
@@ -37,7 +39,6 @@ public class Application {
 
     //나눠진 문자들이 전부 숫자인지 확인하는 메서드
     public static boolean isNum(String[] parts) {
-
         for (String part : parts) {
             stringToChar(part);
         }
@@ -58,7 +59,7 @@ public class Application {
         }
     }
 
-    //
+    //커스텀 구분자가 있는지 확인하고 구분자 반환하는 메서드
     public static String delimiter(String input) {
         if (input.startsWith("//") && input.contains("\\n")) {
             int index = input.indexOf("\\n");
@@ -68,13 +69,12 @@ public class Application {
         return "[,:]";
     }
 
-    public static String removePdelimiter(String input) {
+    //커스텀 구분자 구분 부분을 없애는 메서드
+    public static String removeCDelimiter(String input) {
         if (input.startsWith("//") && input.contains("\\n")) {
             int index = input.indexOf("\\n");
-            String substring = input.substring(index + 2, input.length());
-            return substring;
+            return input.substring(index + 2);
         }
         return input;
     }
-
 }
