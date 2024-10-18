@@ -19,6 +19,8 @@ public class Calculator {
             sum = getSum(str, sep);
         }
         System.out.println("결과 : " + sum);
+        System.out.println("sss");
+        System.out.println("ddd");
     }
 
     // 구분자가 [, \, ] 인 경우 구분자 조정  
