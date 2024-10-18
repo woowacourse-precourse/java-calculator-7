@@ -2,6 +2,7 @@ package calculator;
 
 public class stringCal {
 
+    //string을 반전시키는 함수
     public static String reverseStr(String str) {
         String reverse = "";
         for (int i = str.length() - 1; i >= 0; i--) {
