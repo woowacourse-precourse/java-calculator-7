@@ -29,13 +29,14 @@ public class Calculator {
     }
 
     private String[] getStrNumbers() {
-        processDelimiters();
-        return expression.split(":");
-    }
-
-    private void processDelimiters() {
         replaceBasicDelimiters();
         replaceCustomDelimiter();
+
+        try {
+            return expression.split(":");
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("구분자가 없습니다.");
+        }
     }
 
     private void replaceBasicDelimiters() {
