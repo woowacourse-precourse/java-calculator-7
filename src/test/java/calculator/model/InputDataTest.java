@@ -1,5 +1,6 @@
 package calculator.model;
 
+import calculator.util.ErrorMessage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -44,7 +45,7 @@ class InputDataTest {
     void isInvalidCalculatorWithDefaultDelimiter(){
         assertThatThrownBy(()->new InputData("1,2,3!4"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[F0001]");
+                .hasMessage(ErrorMessage.INPUT_DATA_WITH_DEFAULT_DELIMITER_FORMAT.getError());
     }
 
     @ParameterizedTest

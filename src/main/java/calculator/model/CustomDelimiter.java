@@ -15,7 +15,7 @@ public class CustomDelimiter extends Delimiter {
         Matcher inValidDelimiter = createMatcher("[0-9\\-\\\\/]");
 
         if (delimiter.length() > 3) {
-            throw new IllegalArgumentException("[ERROR][R0001] 커스텀 구분자는 최대 3개까지 등록 가능합니다.");
+            throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_LIMIT.getError());
         }
 
         if (inValidDelimiter.find()) {

@@ -1,5 +1,7 @@
 package calculator.model;
 
+import calculator.util.ErrorMessage;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,7 +15,7 @@ public class InputData {
 
     public void validate(){
         if (!isDelimiter() && !convertCalculatorPart().matches("^[0-9,:]*$")) {
-            throw new IllegalArgumentException("[ERROR][F0001] 기본 구분자를 사용하는 경우 숫자와 기본 구분자만 입력 가능합니다.");
+            throw new IllegalArgumentException(ErrorMessage.INPUT_DATA_WITH_DEFAULT_DELIMITER_FORMAT.getError());
         }
     }
 

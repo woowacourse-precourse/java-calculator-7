@@ -17,7 +17,7 @@ class CustomDelimiterTest {
     void isCustomDelimiterCountExceedLimit() {
         assertThatThrownBy(() -> new CustomDelimiter(";!?#").validate())
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[R0001]");
+                .hasMessage(ErrorMessage.CUSTOM_DELIMITER_LIMIT.getError());
     }
 
     @Test
