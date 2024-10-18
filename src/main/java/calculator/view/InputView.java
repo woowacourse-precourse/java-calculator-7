@@ -1,15 +1,19 @@
 package calculator.view;
 
+import calculator.model.domain.Separator;
+import calculator.validation.CustomSeparatorValidation;
+import calculator.validation.NotAllowedInputValidation;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
-    public InputView() {
+    private InputView() {
     }
 
     public static String inputString() {
         String inputString = Console.readLine();
-        // 검증
-        return inputString;
+        CustomSeparatorValidation.validate(inputString);
+        String processedInputString = Separator.separatorGenerator(inputString);
+        NotAllowedInputValidation.validate(processedInputString);
+        return processedInputString;
     }
-
 }
