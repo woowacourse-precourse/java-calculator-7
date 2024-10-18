@@ -10,16 +10,7 @@ public class Calculator {
 
         String delimiter = ",|:";
 
-        if(input_str.startsWith("//")){
-            String[] split_str = input_str.split("\\\\n");
-            if(split_str.length ==2){
-                String customDelimiter = split_str[0].substring(2);
-                delimiter += "|" + customDelimiter;
-                input_str = split_str[1];
-            }else {
-                throw new IllegalArgumentException("커스텀 구분자는 //와 \\n사이에 존재해야합니다. ");
-            }
-        }
+        CustomDelimeterParser.parse(input_str, delimiter);
 
         int sum = 0;
         String[] str_nums = input_str.split(delimiter);
