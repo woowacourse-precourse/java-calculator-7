@@ -1,6 +1,5 @@
 package calculator;
 
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -27,8 +26,6 @@ public class Application {
 
         String[] nums = refine_Input(input); // 입력을 정제하여 숫자 배열로 반환
 
-        System.out.println(Arrays.toString(nums));
-
         return sum(nums);
     }
 
@@ -43,11 +40,26 @@ public class Application {
         if (matcher.find()) {
             String guboonja = matcher.group(1);  // 커스텀 구분자 추출
             String metaGuboonja = Pattern.quote(guboonja);  // 메타문자 이스케이프 처리
-            System.out.println(metaGuboonja);
             return input.replaceAll("[^0-9-\\d]", guboonja).split(metaGuboonja);
         }
         return input.split("[,:]");
 
+    }
+
+    // 숫자의 유효성을 확인하는 메서드
+    private static void isValidNum(int num) {
+        if (num < 0) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    // 문자를 숫자로 변환하는 메서드
+    private static int string2int(String word) {
+        try {
+            return Integer.parseInt(word.trim());
+        } catch (NumberFormatException e) {
+            return 0;
+        }
     }
 
     // 숫자 배열을 합산하는 메서드
@@ -55,18 +67,12 @@ public class Application {
         int result = 0;
 
         for (String word : nums) {
-            if (!word.trim().isEmpty()) {
-                int num;
-                try {
-                    num = Integer.parseInt(word.trim());
-                } catch (NumberFormatException e) {
-                    num = 0;
-                }
-                if (num < 0) {
-                    throw new IllegalArgumentException();
-                }
-                result += num;
+            if (word.trim().isEmpty()) {
+                continue;
             }
+            int num = string2int(word);
+            isValidNum(num);
+            result += num;
         }
         return result;
     }
