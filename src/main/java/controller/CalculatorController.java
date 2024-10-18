@@ -18,7 +18,7 @@ public class CalculatorController {
             int result = calculatorService.sum(number);
             outputView.writeSumResult(result);
         }catch(IllegalArgumentException e){
-            outputView.printErrorMessage(e.getMessage());
+            throw e;
         }catch(Exception e){
             outputView.printErrorMessage("예상치 못한 오류가 발생했습니다.");
             e.printStackTrace();

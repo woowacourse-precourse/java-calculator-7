@@ -19,7 +19,7 @@ public class CalculatorService {
         if(input.startsWith("//")){
             numbers = splitByCustomDelimiter(input);
         }
-        else if(input.matches("[0-9,:].*")){
+        else if(input.matches("^(-?[0-9]+([,:]-?[0-9]+)*)?$")){
             numbers = splitByDelimiter(input);
         }
         else{
@@ -30,7 +30,7 @@ public class CalculatorService {
 
     public int[] splitByCustomDelimiter(String input){
         String delimiter = getDelimiter(input);
-        String numberString = input.substring(delimiter.length() + 3);  //줄바꿈 문자 뒤의 유효한 숫자 문자열만 추출
+        String numberString = input.substring(delimiter.length() + 4);  //줄바꿈 문자 뒤의 유효한 숫자 문자열만 추출
         if(numberString.matches("[0-9" + Pattern.quote(delimiter) + "]+$")){
                 String[] arr = numberString.split(Pattern.quote(delimiter));
                 int[] numbers = new int[arr.length];
@@ -45,8 +45,8 @@ public class CalculatorService {
     }
 
     public String getDelimiter(String input){
-        if(input.matches("//.+\n.*")){
-            String delimiter = input.substring(2, input.lastIndexOf("\n"));
+        if(input.contains("\\n")){
+            String delimiter = input.substring(2, input.lastIndexOf("\\n"));
             return delimiter;
         }
         else{

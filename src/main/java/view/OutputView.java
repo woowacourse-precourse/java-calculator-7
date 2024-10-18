@@ -7,6 +7,6 @@ public class OutputView {
     }
 
     public void printErrorMessage(String errorMessage){
-        System.out.println("오류" + errorMessage);
+        System.out.println("오류 : " + errorMessage);
     }
 }
