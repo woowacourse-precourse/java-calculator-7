@@ -34,6 +34,10 @@ public class Separator {
     }
 
     public BigDecimal notExistCustomSeparator(String userInput) {
+        if (userInput == null || userInput.isEmpty()) {
+            return BigDecimal.ZERO;
+        }
+
         String delimiter = ",|:";
         List<String> numbers = Arrays.asList(userInput.split(delimiter));
         BigDecimal sum = BigDecimal.ZERO;
