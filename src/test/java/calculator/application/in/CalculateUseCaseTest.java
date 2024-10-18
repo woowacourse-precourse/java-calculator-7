@@ -3,6 +3,7 @@ package calculator.application.in;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import calculator.application.service.CalculateService;
 import calculator.domain.CalculateExpression;
 import org.junit.jupiter.api.Test;
 
@@ -11,8 +12,7 @@ class CalculateUseCaseTest {
     private final CalculateUseCase calculateUseCase;
 
     public CalculateUseCaseTest() {
-        // Todo: CalculateUseCase 인터페이스의 구현체가 들어온다.
-        this.calculateUseCase = null;
+        this.calculateUseCase = new CalculateService();
     }
 
     @Test
