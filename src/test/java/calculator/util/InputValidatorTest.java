@@ -1,5 +1,7 @@
 package calculator.util;
 
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -50,5 +52,29 @@ class InputValidatorTest {
         //when
         //then
         Assertions.assertThrows(IllegalArgumentException.class, () -> inputValidator.validateInputFormat(input));
+    }
+
+    @Test
+    @DisplayName("문자열 리스트 숫자 리스트로 변환 - 빈 문자열이 있는 경우")
+    void validateParsingStringToLongWithNULL() {
+        //given
+        List<String> input = Arrays.asList("1", "2", "3", "");
+
+        //when
+        //then
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> inputValidator.validateParsingStringToLong(input));
+    }
+
+    @Test
+    @DisplayName("문자열 리스트 숫자 리스트로 변환 - 숫자가 아닌 문자가 들어있는 경우")
+    void validateParsingStringToLongWithNotNumber() {
+        //given
+        List<String> input = Arrays.asList("1", "b", "3");
+
+        //when
+        //then
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> inputValidator.validateParsingStringToLong(input));
     }
 }
