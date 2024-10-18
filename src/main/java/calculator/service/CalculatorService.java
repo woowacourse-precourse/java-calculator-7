@@ -19,13 +19,9 @@ public class CalculatorService {
             separators.add(command.getCustomSeparator());
         }
         String expression = command.getExpression();
-        String[] separatedValues = split(expression);
+        String[] separatedValues = ExpressionSplitter.split(separators, expression);
         Double[] values = convertToNumbers(separatedValues);
         return sum(values);
-    }
-
-    private String[] split(String expression) {
-        return new SeparatorSplitter(separators.getValues(), expression).split();
     }
 
     private Double[] convertToNumbers(String[] separatedValues) {
