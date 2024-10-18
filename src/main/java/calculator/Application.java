@@ -15,5 +15,18 @@ public class Application {
             str = str.substring(5);
         }
         nums = str.split(delimiter);
+
+        int sum = 0;
+        for (String num : nums) {
+            try{
+                int i = Integer.parseInt(num);
+                if (i < 0) {
+                    throw new IllegalArgumentException();
+                }
+                sum += i;
+            } catch(NumberFormatException e){
+                throw new IllegalArgumentException();
+            }
+        }
     }
 }
