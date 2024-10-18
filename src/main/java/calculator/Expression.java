@@ -1,9 +1,6 @@
 package calculator;
 
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class Expression {
     private final Deque<Separator> separatorDeque;
@@ -36,7 +33,7 @@ public class Expression {
     }
 
     public List<Integer> peekFirstTwoOperands() {
-        if(operandDeque.size() < 2) {
+        if (operandDeque.size() < 2) {
             throw new NoSuchElementException("has less than 2 operands");
         }
         int firstOperand = operandDeque.poll();
@@ -77,5 +74,19 @@ public class Expression {
 
     public boolean isOperandEmpty() {
         return operandDeque.isEmpty();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Expression that = (Expression) o;
+        return Arrays.equals(separatorDeque.toArray(), that.separatorDeque.toArray()) &&
+               Arrays.equals(operandDeque.toArray(), that.operandDeque.toArray());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(Arrays.hashCode(separatorDeque.toArray()), Arrays.hashCode(operandDeque.toArray()));
     }
 }
