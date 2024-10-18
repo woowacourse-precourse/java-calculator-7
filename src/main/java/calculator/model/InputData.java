@@ -11,16 +11,8 @@ public class InputData {
     }
 
     public void validate(String input){
-        Matcher endMatcher = getMatcher(".*[0-9]$");
-        Matcher startMatcher = getMatcher("^[0-9](.*)");
-
-        if(!endMatcher.matches()){
-            throw new IllegalArgumentException("[ERROR][F0001] 마지막 입력값은 숫자여야 합니다.");
-        }
-
-        if(!isDelimiter() && !startMatcher.matches()){
-            throw new IllegalArgumentException("[ERROR][F0002] 커스텀 구분자가 없는 경우 시작 입력값은 숫자여야 합니다.");
-        }
+        // TODO : 입력값으로 Delimiter 객체와 Calculator 객체를 생성하는지 검증한다.
+        // TODO : 기존의 구현은 각각의 객체에서 규칙에 맞게 검증하는 코드를 작성한다.
     }
 
     public boolean isDelimiter(){
