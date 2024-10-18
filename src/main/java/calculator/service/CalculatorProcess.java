@@ -1,4 +1,4 @@
-package calculator.service.calculator;
+package calculator.service;
 
 import calculator.constant.ErrorMessage;
 import calculator.number.domain.Number;
