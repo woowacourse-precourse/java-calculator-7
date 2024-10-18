@@ -11,7 +11,7 @@ public class PositiveNumbers {
     }
 
     private PositiveNumbers(int[] numbers) {
-        Arrays.stream(numbers).forEach(number -> validatePositive(number));
+        Arrays.stream(numbers).forEach(this::validatePositive);
         this.numbers = Arrays.copyOf(numbers, numbers.length);
     }
 
