@@ -1,10 +1,11 @@
 package calculator.domain.calculator;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Calculator {
 
-    public int sumAll(Integer[] parsedValues) {
-        return Arrays.stream(parsedValues).mapToInt(Integer::intValue).sum();
+    public int sumAll(List<Integer> parsedValues) {
+        return parsedValues.stream().mapToInt(Integer::intValue).sum();
     }
 }

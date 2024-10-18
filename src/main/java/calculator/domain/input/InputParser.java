@@ -17,16 +17,11 @@ public class InputParser {
         this.delimiters = delimiters;
     }
 
-    public Integer[] extractNumbersFromInput(final String input) {
+    public List<Integer> extractNumbersFromInput(final String input) {
         String delimiterRegex = getDelimiterPattern(input);
 
-        String[] inputSplitCustomDelimiter = input
-                .substring(input.indexOf(CUSTOM_DELIMITER_END_SEPARATOR) + INDEX_PUSH_RIGHT)
-                .split(delimiterRegex);
-
-        return Arrays.stream(inputSplitCustomDelimiter)
-                .map(this::parse)
-                .toArray(Integer[]::new);
+        return Arrays.stream(input.substring(input.indexOf(CUSTOM_DELIMITER_END_SEPARATOR) + INDEX_PUSH_RIGHT).split(delimiterRegex))
+                .map(this::parse).collect(Collectors.toList());
     }
 
     private String getDelimiterPattern(String input) {

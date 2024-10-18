@@ -2,6 +2,8 @@ package calculator.domain.calculator;
 
 import calculator.domain.input.InputParser;
 
+import java.util.List;
+
 public class StringAddCalculator {
 
     private static final int DEFAULT_SUM_RESULT = 0;
@@ -19,7 +21,7 @@ public class StringAddCalculator {
             return DEFAULT_SUM_RESULT;
         }
 
-        final Integer[] extractNumbers = inputParser.extractNumbersFromInput(input);
+        final List<Integer> extractNumbers = inputParser.extractNumbersFromInput(input);
 
         return calculator.sumAll(extractNumbers);
     }
