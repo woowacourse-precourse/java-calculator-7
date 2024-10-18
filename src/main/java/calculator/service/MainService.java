@@ -57,7 +57,7 @@ public class MainService {
 
         String[] numberList = input.getInputString().split(defaultRegex.toString());
 
-        // 문자열 예외처리는 여기에 추가해야할듯?
+        exceptions.isInvalidStringInList(numberList);
 
         for(String num : numberList) {
             resultNumbers.addNumberList(Integer.parseInt(num));

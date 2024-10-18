@@ -44,4 +44,15 @@ public class Exceptions {
             throw new IllegalArgumentException("[ERROR] 커스텀 구분자는 3개까지 가능합니다.");
         }
     }
+
+    public void isInvalidStringInList(String[] input) {
+        for (String num : input) {
+            try {
+                Integer.parseInt(num);
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("[ERROR] 잘못된 문자열 형식입니다. (배열에 덧셈할 수 없는 문자 존재)");
+            }
+        }
+    }
+
 }
