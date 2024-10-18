@@ -3,6 +3,8 @@ package calculator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static calculator.ParsingInput.executeParsingInput;
+
 public class Calculator {
     private final String INPUT;
     private final String TOKEN;
@@ -11,6 +13,12 @@ public class Calculator {
     public Calculator(String input) {
         INPUT = input;
         TOKEN = checkCustomToken(INPUT);
+    }
+
+    public void run() {
+        int[] parsedInput = executeParsingInput(INPUT, TOKEN);
+        int result = sumArray(parsedInput);
+        printSum(result);
     }
 
     private String checkCustomToken(String input) {
