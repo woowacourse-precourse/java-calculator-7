@@ -4,7 +4,11 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class InputHandler {
 
-    public String input() {
+    public static String input() {
         return Console.readLine();
+    }
+
+    public static void close() {
+        Console.close();
     }
 }

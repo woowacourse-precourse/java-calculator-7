@@ -14,4 +14,8 @@ public enum DisplayFormat {
     public String formatOutput(int result) {
         return String.format(this.format, result);
     }
+
+    public String getFormat() {
+        return format;
+    }
 }
