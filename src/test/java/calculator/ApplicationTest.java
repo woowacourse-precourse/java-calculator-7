@@ -24,13 +24,24 @@ class ApplicationTest extends NsTest {
         );
     }
 
+
     @Test
-    void 예외_테스트2() {
+    void 예외_테스트_공백() {
         assertSimpleTest(() -> {
             run(" ");
             assertThat(output()).contains("결과 : 0");
         });
     }
+
+    @Test
+    void 예외_테스트_NULL() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException((String) null))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+
 
     @Override
     public void runMain() {
