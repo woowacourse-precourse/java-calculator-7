@@ -4,10 +4,6 @@ import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import calculator.Controller.CalculatorController;
-import calculator.Model.AdditionCalculator;
-import calculator.Model.InputProcessor;
-import calculator.view.InputView;
-import calculator.view.OutputView;
 import camp.nextstep.edu.missionutils.Console;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -18,19 +14,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CalculatorControllerTest {
-    private static final InputView inputView = new InputView();
-    private static final InputProcessor inputProcessor = new InputProcessor();
-    private static final AdditionCalculator additionCalculator = new AdditionCalculator();
-    private static final OutputView outputView = new OutputView();
-
-    CalculatorController calculatorController = new CalculatorController(
-            inputView,
-            inputProcessor,
-            additionCalculator,
-            outputView
-    );
-
     private static ByteArrayOutputStream outputStream;
+
+    CalculatorController calculatorController = new CalculatorController();
 
     @BeforeEach
     void setOutputStream() {

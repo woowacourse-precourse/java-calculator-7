@@ -6,18 +6,10 @@ import calculator.view.InputView;
 import calculator.view.OutputView;
 
 public class CalculatorController {
-    private final InputView inputView;
-    private final InputProcessor inputProcessor;
-    private final AdditionCalculator additionCalculator;
-    private final OutputView outputView;
-
-    public CalculatorController(InputView inputView, InputProcessor inputProcessor,
-                                AdditionCalculator additionCalculator, OutputView outputView) {
-        this.inputView = inputView;
-        this.inputProcessor = inputProcessor;
-        this.additionCalculator = additionCalculator;
-        this.outputView = outputView;
-    }
+    private final InputView inputView = new InputView();
+    private final OutputView outputView = new OutputView();
+    private final InputProcessor inputProcessor = new InputProcessor();
+    private final AdditionCalculator additionCalculator = new AdditionCalculator();
 
     public void run() {
         String input = inputView.getInput();
