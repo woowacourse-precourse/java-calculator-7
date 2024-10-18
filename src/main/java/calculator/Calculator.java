@@ -1,5 +1,8 @@
 package calculator;
 
+import static calculator.message.error.CalculatorExceptionMessage.ELEMENT_OVERFLOW_ERR_MESSAGE;
+import static calculator.message.error.CalculatorExceptionMessage.RESULT_OVERFLOW_ERR_MESSAGE;
+
 import calculator.dto.Data;
 import calculator.parser.ParseManager;
 
@@ -31,11 +34,11 @@ public class Calculator {
                 longSum += Integer.parseInt(nums[i]);
             }
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ELEMENT_OVERFLOW_ERR_MESSAGE);
         }
 
         if (sum != longSum) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(RESULT_OVERFLOW_ERR_MESSAGE);
         }
 
         return sum;
