@@ -31,28 +31,9 @@ public class StringCalculatorController {
     private void handleUserInput() {
         String input = inputView.input();
 
-        if (isBlank(input)) {
-            handleBlankInput();
-            return;
-        }
-
-        processValidInput(input);
-    }
-
-    // 빈 입력일 경우 0을 출력하는 메소드
-    private void handleBlankInput() {
-        outputView.printResult(0);
-    }
-
-    // 유효한 입력일 경우 계산을 처리하는 메소드
-    private void processValidInput(String input) {
-        int result = calculateResult(input);
+        // 입력이 공백이거나 빈 문자열인 경우 0 출력, 그렇지 않으면 계산 후 결과 출력
+        int result = isBlank(input) ? 0 : calculatorService.calculate(input);
         outputView.printResult(result);
-    }
-
-    // 입력된 문자열을 계산하는 메소드
-    private int calculateResult(String input) {
-        return calculatorService.calculate(input);
     }
 
     // 공백인지 빈 문자열인지 확인
