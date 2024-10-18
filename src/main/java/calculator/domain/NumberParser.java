@@ -23,13 +23,12 @@ public class NumberParser {
 
     private List<Integer> extractNumberValue(CalculatedValue calculatedValue) {
         List<Integer> result = new ArrayList<>();
-        System.out.println("커스텀              " + divider.getCustomDivider());
         String dividers = formatDividerSplit();
         String[] values = calculatedValue.getValue().split(dividers);
 
         for (String value : values) {
             int numberValue = translateStringToInteger(value);
-            validateNumberValueNegative(numberValue);
+            validateNegativeNumberValue(numberValue);
 
             result.add(numberValue);
         }
@@ -45,6 +44,7 @@ public class NumberParser {
             throw new IllegalArgumentException("등록되지 않는 구분자가 있습니다." + value);
         }
     }
+
 
     private String formatDividerSplit() {
         return String.format(DIVIDER_SPLIT_FORMAT,
@@ -68,13 +68,14 @@ public class NumberParser {
         return ESCAPE_CHARACTER + metaCharacter;
     }
 
+
     private void validateCustomDividerMinusAndNumberValueNegative(String value) {
         if ("-".equals(divider.getCustomDivider()) && value.isEmpty()) {
             throw new IllegalArgumentException("음수는 계산이 불가능합니다.");
         }
     }
 
-    private void validateNumberValueNegative(int numberValue) {
+    private void validateNegativeNumberValue(int numberValue) {
         if (numberValue < 0) {
             throw new IllegalArgumentException("음수는 계산이 불가능합니다.");
         }

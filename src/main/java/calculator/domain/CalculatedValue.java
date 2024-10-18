@@ -8,7 +8,6 @@ public class CalculatedValue {
     private final List<Integer> NumberValueToken = new ArrayList<>();
 
     public CalculatedValue(String value) {
-        System.out.println("처음 들어온 값"+value);
         this.value = value;
     }
 
@@ -27,4 +26,5 @@ public class CalculatedValue {
     public List<Integer> getNumberValueToken() {
         return NumberValueToken;
     }
+    
 }
