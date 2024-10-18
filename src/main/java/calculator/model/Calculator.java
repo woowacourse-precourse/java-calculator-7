@@ -23,7 +23,7 @@ public class Calculator {
            return splitedNumbers;
     }
 
-    private boolean checkCustomDelimiter(){
+    public boolean checkCustomDelimiter(){
         String[] splitedNumbers = numbers.split("[,;]");
         String engraftedNumbers = String.join("", splitedNumbers);  
         if (engraftedNumbers.matches("\\d+")){
@@ -37,4 +37,6 @@ public class Calculator {
         Matcher matcher = pattern.matcher(numbers);
         return matcher.group(1);
     }
+
+    
 }
