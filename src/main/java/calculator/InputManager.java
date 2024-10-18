@@ -33,7 +33,10 @@ public class InputManager {
 
     public String getOperandCandidates() {
         if (operandCandidates == null) {
-            int startIndex = input.lastIndexOf("\\n") + 2;
+            int startIndex = 0;
+            if (isCustomSeparatorCandidateExisted()) {
+                startIndex = input.lastIndexOf("\\n") + 2;
+            }
             operandCandidates = input.substring(startIndex);
         }
         return this.operandCandidates;
