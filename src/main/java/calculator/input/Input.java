@@ -1,49 +1,50 @@
 package calculator.input;
 
 import calculator.utils.NumUtil;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Input {
 
-    private static final char SEPARATOR_COMMA = ',';
-    private static final char SEPARATOR_COLON = ':';
+    private static final String SEPARATOR_COMMA = ",";
+    private static final String SEPARATOR_COLON = ":";
 
-    private final String numStr;
-    private List<Long> numList = null;
+    private final String[] strNums;
+    private List<Long> numList;
 
-    protected Input(String numStr) {
-        this.numStr = numStr;
+    protected Input(String[] strNums) {
+        this.strNums = strNums;
+        initNumList(strNums);
+    }
+
+    protected Input(String strNums) {
+        this(strNums.split(SEPARATOR_COMMA + "|" + SEPARATOR_COLON));
     }
 
     public static Input from(String value) {
         return InputFilter.parseInput(value);
     }
 
-    protected boolean matchesSeparator(char ch) {
-        return ch == SEPARATOR_COLON || ch == SEPARATOR_COMMA;
+    private void initNumList(String[] strNums) {
+        if (isZeroInput(strNums)) {
+            this.numList = List.of(0L);
+            return;
+        }
+        this.numList = null;
+    }
+
+    private static boolean isZeroInput(String[] strNums) {
+        return strNums.length == 1 && strNums[0].isEmpty();
+    }
+
+    protected boolean matchesSeparator(String separator) {
+        return SEPARATOR_COLON.equals(separator) || SEPARATOR_COMMA.equals(separator);
     }
 
     public final List<Long> toLongList() {
-        if (this.numList != null) {
-            return this.numList;
+        if (this.numList == null) {
+            this.numList = Arrays.stream(strNums).mapToLong(NumUtil::toLong).boxed().toList();
         }
-        this.numList = new ArrayList<>();
-        long cur = 0L;
-        boolean isLastSeparator = false;
-        for (int i = 0; i < numStr.length(); i++) {
-            char ch = numStr.charAt(i);
-            if (matchesSeparator(ch) && !isLastSeparator) {
-                this.numList.add(cur);
-                cur = 0L;
-                isLastSeparator = true;
-                continue;
-            }
-            cur *= 10;
-            cur += NumUtil.toInt(ch);
-            isLastSeparator = false;
-        }
-        this.numList.add(cur);
         return this.numList;
     }
 }

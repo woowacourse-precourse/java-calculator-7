@@ -10,7 +10,7 @@ public class InputFilter {
 
     public static Input parseInput(String value) {
         if (isCustom(value)) {
-            return new CustomInput(getCleanedNumStr(value), getCustomSeparator(value));
+            return CustomInput.from(getCleanedNumStr(value), getCustomSeparator(value));
         }
         return new Input(validateNumStr(value));
     }
@@ -24,13 +24,16 @@ public class InputFilter {
     }
 
     private static String validateNumStr(String numStr) {
-        if (!NumUtil.isValidFirstNum(numStr)) {
+        if (!NumUtil.startWithNum(numStr)) {
             throw new IllegalArgumentException("숫자 문자열이 숫자로 시작하지 않습니다.");
+        }
+        if (!NumUtil.endsWithNum(numStr)) {
+            throw new IllegalArgumentException("숫자 문자열이 숫자로 끝나지 않습니다.");
         }
         return numStr;
     }
 
-    private static char getCustomSeparator(String value) {
-        return value.charAt(CUSTOM_PREFIX_LENGTH);
+    private static String getCustomSeparator(String value) {
+        return String.valueOf(value.charAt(CUSTOM_PREFIX_LENGTH));
     }
 }

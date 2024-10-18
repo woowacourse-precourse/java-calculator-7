@@ -92,4 +92,12 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 2147483648");
         });
     }
+
+    @Test
+    void 숫자로_끝나지_않는_경우() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//[\\n1[2["))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
 }

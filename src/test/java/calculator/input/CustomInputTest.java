@@ -19,7 +19,7 @@ class CustomInputTest {
     @Test
     void 커스텀_구분자가_주어진_경우() {
         // given
-        char separator = ';';
+        String separator = ";";
         String inputStr = "//" + separator + "\\n1;2;3";
         // when
         CustomInput customInput = (CustomInput) Input.from(inputStr);
@@ -46,5 +46,19 @@ class CustomInputTest {
         Input input = Input.from("//;\\n1?2");
         // when & then
         assertThrows(IllegalArgumentException.class, input::toLongList);
+    }
+
+    @Test
+    void escape_커스텀_구분자가_주어진_경우_온점() {
+        String escapes = ".^$*+?()[]{}|\\";
+        for (int i = 0; i < escapes.length(); i++) {
+            // given
+            String separator = String.valueOf(escapes.charAt(i));
+            String inputStr = "//" + separator + "\\n1" + separator + 2 + separator + 3;
+            // when
+            CustomInput customInput = (CustomInput) Input.from(inputStr);
+            // then
+            assertTrue(customInput.matchesSeparator("\\" + separator));
+        }
     }
 }

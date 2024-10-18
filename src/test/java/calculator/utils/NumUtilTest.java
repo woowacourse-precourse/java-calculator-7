@@ -12,14 +12,14 @@ class NumUtilTest {
         char c = '0';
         // when & then
         for (int i = 0; i < 10; i++) {
-            assertTrue(NumUtil.isNum((char) (c + i)));
+            assertTrue(NumUtil.isNum(String.valueOf((char) (c + i))));
         }
     }
 
     @Test
     void 숫자_검증_예외_숫자가_아닌_경우_1() {
         // given
-        char invalidChar = '0' - 1;
+        String invalidChar = "1.";
         // when & then
         assertFalse(NumUtil.isNum(invalidChar));
     }
@@ -27,7 +27,7 @@ class NumUtilTest {
     @Test
     void 숫자_검증_예외_숫자가_아닌_경우_2() {
         // given
-        char invalidChar = '9' + 1;
+        String invalidChar = "3,2";
         // when & then
         assertFalse(NumUtil.isNum(invalidChar));
     }
@@ -37,7 +37,7 @@ class NumUtilTest {
         // given
         String nums = "1:2";
         // when & then
-        assertTrue(NumUtil.isValidFirstNum(nums));
+        assertTrue(NumUtil.startWithNum(nums));
     }
 
     @Test
@@ -45,7 +45,7 @@ class NumUtilTest {
         // given
         String invalidNums = ":2";
         // when & then
-        assertFalse(NumUtil.isValidFirstNum(invalidNums));
+        assertFalse(NumUtil.startWithNum(invalidNums));
     }
 
     @Test
@@ -53,7 +53,7 @@ class NumUtilTest {
         // given
         String emptyNums = "";
         // when & then
-        assertTrue(NumUtil.isValidFirstNum(emptyNums)); // 통과
+        assertTrue(NumUtil.startWithNum(emptyNums)); // 통과
     }
 
     @Test
@@ -62,23 +62,23 @@ class NumUtilTest {
         char c = '0';
         // when & then
         for (int i = 0; i < 10; i++) {
-            assertEquals(i, NumUtil.toInt((char) (c + i)));
+            assertEquals(i, NumUtil.toLong(String.valueOf((char) (c + i))));
         }
     }
 
     @Test
     void 정수_변환_예외_숫자가_아닌_경우1() {
         // given
-        char invalidChar = '0' - 1;
+        String invalidChar = "3.2";
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> NumUtil.toInt(invalidChar));
+        assertThrows(IllegalArgumentException.class, () -> NumUtil.toLong(invalidChar));
     }
 
     @Test
     void 정수_변환_예외_숫자가_아닌_경우2() {
         // given
-        char invalidChar = '9' + 1;
+        String invalidChar = " ";
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> NumUtil.toInt(invalidChar));
+        assertThrows(IllegalArgumentException.class, () -> NumUtil.toLong(invalidChar));
     }
 }
