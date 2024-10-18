@@ -27,7 +27,7 @@ class LetterMannagerTest {
     void 커스텀_구분자를_추출() {
         //given
         String separator = ";";
-        String letters = "//" + separator + "\n";
+        String letters = "//" + separator + "\\n";
         LetterMannager letterMannager;
 
         //when
@@ -57,7 +57,7 @@ class LetterMannagerTest {
     @Test
     void 커스텀_구분자가_있는_상황에서_입력받은_문자열에서_숫자를_추출() {
         //given
-        String letters = "//;\n1;2";
+        String letters = "//;\\n1;2";
         LetterMannager letterMannager;
 
         //when
