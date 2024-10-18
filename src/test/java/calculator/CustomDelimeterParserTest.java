@@ -8,7 +8,7 @@ class CustomDelimeterParserTest {
     @Test
     void 커스텀_구분자_파싱_성공() {
         //given
-        String inputStr = "//;\n1;2;3";
+        String inputStr = "//;\\n1;2;3";
         String delimiter = ",|:";
 
         //when
