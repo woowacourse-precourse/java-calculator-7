@@ -7,8 +7,8 @@ public class Calculator {
 
     private final Delimiter delimiter;
 
-    private String inputStr;
-    private ArrayList<Integer> numberList = new ArrayList<>();
+    private String expression;
+    private ArrayList<Integer> operands = new ArrayList<>();
     private Integer result = 0;
 
     public Calculator(Delimiter delimiter) {
@@ -24,24 +24,24 @@ public class Calculator {
 
     private void getString() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        this.inputStr = Console.readLine();
+        this.expression = Console.readLine();
         Console.close();
 
         this.validateInputData();
     }
 
     private void validateInputData() {
-        if (this.inputStr.length() >= 5 && this.inputStr.charAt(0) == '/' && this.inputStr.charAt(1) == '/'
-                && this.inputStr.charAt(3) == '\\' && this.inputStr.charAt(4) == 'n') {
-            if (Character.isDigit(this.inputStr.charAt(2))) {
+        if (this.expression.length() >= 5 && this.expression.charAt(0) == '/' && this.expression.charAt(1) == '/'
+                && this.expression.charAt(3) == '\\' && this.expression.charAt(4) == 'n') {
+            if (Character.isDigit(this.expression.charAt(2))) {
                 throw new IllegalArgumentException(ErrorMessage.INVALID_CUSTOM_DELIMITER);
             }
-            delimiter.addDelimiter(this.inputStr.charAt(2));
-            this.inputStr = this.inputStr.substring(5);
+            delimiter.addDelimiter(this.expression.charAt(2));
+            this.expression = this.expression.substring(5);
         }
 
-        for (int i = 0; i < this.inputStr.length(); i++) {
-            char ch = this.inputStr.charAt(i);
+        for (int i = 0; i < this.expression.length(); i++) {
+            char ch = this.expression.charAt(i);
             if (!(Character.isDigit(ch) || delimiter.isDelimiter(ch))) {
                 throw new IllegalArgumentException(ErrorMessage.INVALID_VALIDATION);
             }
@@ -50,9 +50,9 @@ public class Calculator {
 
     private void extractNumberList() {
         int num = 0;
-        for (char ch : this.inputStr.toCharArray()) {
+        for (char ch : this.expression.toCharArray()) {
             if (delimiter.isDelimiter(ch)) {
-                numberList.add(num);
+                operands.add(num);
                 num = 0;
             } else {
                 num *= 10;
@@ -62,12 +62,12 @@ public class Calculator {
                 }
             }
         }
-        numberList.add(num);
+        operands.add(num);
     }
 
     private void plusCalculate() {
-        for (Integer number : numberList) {
-            result += number;
+        for (Integer operand : operands) {
+            result += operand;
             if (result >= CalculatorConstant.LIMIT_NUMBER) {
                 throw new IllegalArgumentException(ErrorMessage.EXCEED_BILLION);
             }
