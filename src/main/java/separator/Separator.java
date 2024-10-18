@@ -13,4 +13,16 @@ public class Separator {
     public void addNewSeparators(char separator) {
         separators.add(separator);
     }
+
+    public Character parseCustomSeparator(String string) {
+        Character customSeparator = null;
+
+        customSeparator = string.charAt(2);
+
+        return customSeparator;
+    }
+
+
+
+
 }
