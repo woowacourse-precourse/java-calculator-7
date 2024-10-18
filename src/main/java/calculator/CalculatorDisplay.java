@@ -7,9 +7,8 @@ public class CalculatorDisplay {
 
     private static final String inputMessage = "덧셈할 문자열을 입력해 주세요.";
     private static final String outputMessage = "결과 : %d";
-
-
-    public void show(){
+    
+    public void show() {
         // 사용자 입력 받기
         System.out.println(inputMessage);
         String input = getPromptUserInput();
@@ -22,7 +21,7 @@ public class CalculatorDisplay {
         System.out.printf(outputMessage, result);
     }
 
-    private String getPromptUserInput(){
+    private String getPromptUserInput() {
         String input = Console.readLine();
         Console.close();
 
