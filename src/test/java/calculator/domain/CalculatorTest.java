@@ -1,11 +1,11 @@
 package calculator.domain;
 
+import calculator.exception.NonPositiveNumberException;
+import calculator.exception.StringInSplittedInputException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CalculatorTest {
     @Test
@@ -29,12 +29,9 @@ class CalculatorTest {
         Calculator calculator = new Calculator();
         String[] strings = {"10", "-20", "30"};
 
-        //when
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> calculator.calculateSum(strings));
-
         //then
-        assertEquals("입력값 중 숫자는 0보다 커야합니다.", exception.getMessage());
+        Assertions.assertThatThrownBy(() ->
+                calculator.calculateSum(strings)).isInstanceOf(NonPositiveNumberException.class);
     }
 
     @Test
@@ -44,11 +41,8 @@ class CalculatorTest {
         Calculator calculator = new Calculator();
         String[] strings = {"10", "20", "a"};
 
-        //when
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> calculator.calculateSum(strings));
-
         //then
-        assertEquals("분리된 입력값에 문자열이 존재합니다.", exception.getMessage());
+        Assertions.assertThatThrownBy(() ->
+                calculator.calculateSum(strings)).isInstanceOf(StringInSplittedInputException.class);
     }
 }

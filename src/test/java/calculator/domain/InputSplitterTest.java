@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import calculator.exception.InvalidDelimiterException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -47,11 +48,8 @@ class InputSplitterTest {
         //given
         InputSplitter inputSplitter = new InputSplitter();
 
-        //when
-        IllegalArgumentException exception =
-                Assertions.assertThrows(IllegalArgumentException.class, () -> inputSplitter.splitByDelimiter(input));
-
         //then
-        Assertions.assertEquals("쉼표(,) 또는 콜론(:) 외의 다른 구분자는 사용할 수 없으며, 숫자 사이에만 올 수 있습니다.", exception.getMessage());
+        Assertions.assertThrows(InvalidDelimiterException.class,
+                () -> inputSplitter.splitByDelimiter(input));
     }
 }
