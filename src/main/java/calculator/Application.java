@@ -22,6 +22,20 @@ public class Application {
     	if(str.length() == 1) {
     		return Integer.parseInt(str);
     	}
+    	if(str.length() > 1) {
+    		Application.checkFirstNum(str);
+    	}
 		return 0;
     }
+    
+    public static String[] checkFirstNum(String str) {
+    	String[] arr = {};
+    	if(Character.isDigit(str.charAt(0))) {
+    		arr = str.replaceAll(":", ",").split(",");
+    	}
+		return arr;
+    }
+
+    
+ 
 }
