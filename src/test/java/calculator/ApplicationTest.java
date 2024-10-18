@@ -19,6 +19,14 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 1");
         });
     }
+    @Test
+    void 다양한_커스텀_구분자(){
+        assertSimpleTest(() -> {
+            run("//;\\n//-\\n1;2-3,4:5");
+            assertThat(output()).contains("결과 : 15");
+        });
+    }
+
 
     @Test
     void 네자리숫자_사용() {
@@ -29,15 +37,15 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 양수가_아닌_정수() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("0"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
+    void 공백() {
+        assertSimpleTest(() -> {
+            run("\n");
+            assertThat(output()).contains("결과 : 0");
+        });
     }
 
     @Test
-    void 공백() {
+    void 양수가_아닌_정수() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("0"))
                         .isInstanceOf(IllegalArgumentException.class)
