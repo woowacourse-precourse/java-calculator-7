@@ -17,10 +17,10 @@ public class AppConfig {
     }
 
     private Calculator calculator() {
-        return new CalculatorImpl(extractNumberFormInput());
+        return new CalculatorImpl(extractNumber());
     }
 
-    private ExtractNumber extractNumberFormInput() {
+    private ExtractNumber extractNumber() {
         return new ExtractNumber(delimiterValidator(), valueValidator());
     }
 
