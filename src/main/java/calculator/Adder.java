@@ -3,10 +3,11 @@ package calculator;
 import java.util.ArrayList;
 
 public class Adder {
-    long output;
+    long output=0;
     public Adder(AdderScanner adderScanner) {
+
         ArrayList<Integer> TokenArray=adderScanner.getOutput();
-        output=0;
+
         for(int num:TokenArray) {
             output +=num;
         }

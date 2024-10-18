@@ -1,7 +1,9 @@
 package calculator;
 
 public class Printer {
+
     long output;
+
     public Printer(Adder adder) {
         output=adder.getOutput();
     }
