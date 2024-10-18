@@ -12,20 +12,13 @@ import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 
 public class CalculatorTest {
 
-    static Stream<Arguments> getInputTestCases() {
-        return Stream.of(
-                Arguments.of("1,2,3"),
-                Arguments.of("//@\\n1@2@3"),
-                Arguments.of("//@\\n//@\\n1@2@3")
-        );
-    }
-
     @ParameterizedTest
-    @MethodSource("getInputTestCases")
+    @ValueSource(strings = {"1,2,3", "//@\\n1@2@3", "//@\\n//@\\n1@2@3"})
     void get_input_test(String input) {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
