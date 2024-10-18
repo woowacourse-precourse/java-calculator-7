@@ -17,7 +17,13 @@ public class Calculator {
         List<String> parsedNumbers = parseNumbers(input);
 
         return parsedNumbers.stream()
-                .mapToInt(Integer::parseInt)
+                .mapToInt(num -> {
+                    if(num.isEmpty()) return 0;
+
+                    if(isContainedLetter(num)) throw new IllegalArgumentException("[ERROR] 지정되지 않은 구분자입니다.");
+
+                    return Integer.parseInt(num);
+                })
                 .sum();
     }
 
@@ -30,7 +36,6 @@ public class Calculator {
             if(CUSTOM_DELIMITER.equals("\\\\")) subStringLength -= 1;
 
             String newInput = input.substring(subStringLength);
-
 
             return List.of(newInput.split(format("%s|%s|%s", FIRST_DELIMITER, SECOND_DELIMITER, CUSTOM_DELIMITER)));
         }
@@ -46,6 +51,13 @@ public class Calculator {
         if(CUSTOM_DELIMITER.equals("\\")) CUSTOM_DELIMITER += "\\";
 
         if(isContainedDigit()) throw new IllegalArgumentException("[ERROR] 숫자를 포함한 구분자는 지정할 수 없습니다.");
+    }
+
+    private static boolean isContainedLetter(final String str) {
+        for(char c : str.toCharArray()) {
+            if (Character.isLetter(c)) return true;
+        }
+        return false;
     }
 
     private static boolean isContainedDigit() {
