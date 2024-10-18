@@ -8,4 +8,9 @@ public class InputView {
     public void showStartMessage(){
         System.out.println(START_MESSAGE);
     }
+
+    public String getInput(){
+        return Console.readLine();
+    }
+
 }
