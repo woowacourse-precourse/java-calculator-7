@@ -1,11 +1,10 @@
 package calculator.object;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.math.BigDecimal;
 import java.util.List;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class CalculateFormulaTest {
@@ -17,7 +16,7 @@ class CalculateFormulaTest {
     void 숫자만_입력된_계산식을_성공적으로_생성() {
         CalculateFormula actual = CalculateFormula.from("1234");
 
-        assertThat(actual.customSeparator()).isEqualTo("");
+        assertThat(actual.customSeparator().toString()).isEqualTo("");
         assertThat(actual.numbers()).isEqualTo(List.of(BigDecimal.valueOf(1234L)));
     }
 
@@ -26,7 +25,7 @@ class CalculateFormulaTest {
         CalculateFormula actual = CalculateFormula
                 .from(CUSTOM_SEPARATOR_HEADER + "g" + CUSTOM_SEPARATOR_FOOTER + ",:g");
 
-        assertThat(actual.customSeparator()).isEqualTo("g");
+        assertThat(actual.customSeparator().toString()).isEqualTo("g");
         // 아래의 검증은, 계산 결과 기능을 구현하면, 계산 결과를 비교하도록 리팩토링 하자
         assertThat(actual.numbers()).isEqualTo(List.of(BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO));
     }
@@ -36,7 +35,7 @@ class CalculateFormulaTest {
         CalculateFormula actual = CalculateFormula
                 .from(CUSTOM_SEPARATOR_HEADER + "?" + CUSTOM_SEPARATOR_FOOTER + "1,23,456:7890");
 
-        assertThat(actual.customSeparator()).isEqualTo("?");
+        assertThat(actual.customSeparator().toString()).isEqualTo("?");
         // 아래의 검증은, 계산 결과 기능을 구현하면, 계산 결과를 비교하도록 리팩토링 하자
         assertThat(actual.numbers()).isEqualTo(List.of(
                 BigDecimal.valueOf(1L),
@@ -51,7 +50,7 @@ class CalculateFormulaTest {
         CalculateFormula actual = CalculateFormula
                 .from(CUSTOM_SEPARATOR_HEADER + "?" + CUSTOM_SEPARATOR_FOOTER + "1,2.3");
 
-        assertThat(actual.customSeparator()).isEqualTo("?");
+        assertThat(actual.customSeparator().toString()).isEqualTo("?");
         // 아래의 검증은, 계산 결과 기능을 구현하면, 계산 결과를 비교하도록 리팩토링 하자
         assertThat(actual.numbers()).isEqualTo(List.of(
                 BigDecimal.valueOf(1L),
@@ -64,7 +63,7 @@ class CalculateFormulaTest {
         CalculateFormula actual = CalculateFormula
                 .from(CUSTOM_SEPARATOR_HEADER + "," + CUSTOM_SEPARATOR_FOOTER + "1,2.3");
 
-        assertThat(actual.customSeparator()).isEqualTo(",");
+        assertThat(actual.customSeparator().toString()).isEqualTo(",");
         // 아래의 검증은, 계산 결과 기능을 구현하면, 계산 결과를 비교하도록 리팩토링 하자
         assertThat(actual.numbers()).isEqualTo(List.of(
                 BigDecimal.valueOf(1L),
@@ -77,7 +76,7 @@ class CalculateFormulaTest {
         CalculateFormula actual = CalculateFormula
                 .from(CUSTOM_SEPARATOR_HEADER + "." + CUSTOM_SEPARATOR_FOOTER + "1,2.3");
 
-        assertThat(actual.customSeparator()).isEqualTo(".");
+        assertThat(actual.customSeparator().toString()).isEqualTo(".");
         // 아래의 검증은, 계산 결과 기능을 구현하면, 계산 결과를 비교하도록 리팩토링 하자
         assertThat(actual.numbers()).isEqualTo(List.of(
                 BigDecimal.valueOf(1L),
