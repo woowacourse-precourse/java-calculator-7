@@ -29,12 +29,12 @@ public class Parser {
         String filteredInput = input.replaceAll("\\d", ""); // 숫자 제거
         if (!filteredInput.matches("[,:]*")) {
             int startIdx = input.indexOf("//");
-            int endIdx = input.indexOf("\n");
+            int endIdx = input.indexOf("\\n");
             if(startIdx == -1 || endIdx == -1){
                 throw new IllegalArgumentException();
             }
-            separator = input.substring(startIdx +2, endIdx);
-            return input.substring(endIdx +1);
+            separator = input.substring(startIdx + 2, endIdx);
+            return input.substring(endIdx + 2);
         } else {
             separator = ",|:";
             return input;
