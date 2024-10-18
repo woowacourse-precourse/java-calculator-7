@@ -6,7 +6,7 @@ import calculator.constants.Constants;
 import calculator.domain.StringCalculator;
 import org.junit.jupiter.api.Test;
 
-public class UserInputValidatorTest {
+public class InputValidatorTest {
 
     @Test
     void 음수_포함() {
