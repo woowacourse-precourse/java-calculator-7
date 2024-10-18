@@ -6,27 +6,25 @@ import calculator.exception.CalculatorExceptionStatus;
 
 public class CustomCalculator implements Calculator{
 
-    private CalculatorNumber calculatorNumber = new CalculatorNumber();
-    private String customDelimiter;
-    private String expression;
+    private final CalculatorValues calculatorValues;
 
-    public CustomCalculator() {
-    }
-
-    public void insertInfo(String input){
-        customDelimiter = String.valueOf(input.charAt(2));
-        expression = input.substring(5);
+    public CustomCalculator(String input) {
+        this.calculatorValues = new CalculatorValues(
+                input.substring(5),
+                String.valueOf(input.charAt(2))
+        );
     }
 
     public void extractNumber() {
-        String[] tokens = expression.split(customDelimiter);
+        String[] tokens = calculatorValues.getExpression()
+                .split(calculatorValues.getDelimiter());
         for(String token : tokens){
-            calculatorNumber.addNumbersFromInputByDelimiter(Integer.parseInt(token));
+            calculatorValues.addNumbersFromInputByDelimiter(Integer.parseInt(token));
         }
     }
 
     public int sum() {
-        return calculatorNumber.getNumbers()
+        return calculatorValues.getNumbers()
                 .stream()
                 .reduce(0, Integer::sum);
     }
@@ -38,18 +36,18 @@ public class CustomCalculator implements Calculator{
 
 
     private void validateNumbers() {
-        if (expression.matches(".*-\\d+.*")) {
+        if (calculatorValues.getExpression().matches(".*-\\d+.*")) {
             throw new CalculatorException(CalculatorExceptionStatus.INVALID_NEGATIVE_INTEGER);
         }
     }
 
     private void validateDelimiterUsage() {
-        if(Character.isDigit(customDelimiter.charAt(0))) {
+        if(Character.isDigit(calculatorValues.getExpression().charAt(0))) {
             throw new CalculatorException(CalculatorExceptionStatus.INVALID_CUSTOM_DELIMITER_INTEGER);
         }
         // 입력 수식에서 설정된 커스텀 구분자 외에 다른 구분자가 사용되었는지 확인
-        for (char c : expression.toCharArray()) {
-            if (!Character.isDigit(c) && !String.valueOf(c).equals(customDelimiter)) {
+        for (char c : calculatorValues.getExpression().toCharArray()) {
+            if (!Character.isDigit(c) && !String.valueOf(c).equals(calculatorValues.getDelimiter())) {
                 throw new CalculatorException(CalculatorExceptionStatus.INVALID_CUSTOM_DELIMITER_EXPRESSION);
             }
         }

@@ -3,7 +3,7 @@ package calculator.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CalculatorNumber {
+public class CalculatorValues {
 
     private final List<Integer> numbers = new ArrayList<>();
 
@@ -11,7 +11,7 @@ public class CalculatorNumber {
 
     private final String expression;
 
-    public CalculatorNumber(String expression, String delimiter) {
+    public CalculatorValues(String expression, String delimiter) {
         this.expression = expression;
         this.delimiter = delimiter;
     }
