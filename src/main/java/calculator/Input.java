@@ -19,7 +19,15 @@ public class Input  {
         }
         // 숫자 포함 검사
         if (!input.matches(".*[0-9].*")) {
-            throw new IllegalArgumentException("숫자가 포함되지 않은 잘못된 입력입니다.");
+            throw new IllegalArgumentException("숫자가 포함되지 않았습니다.");
+        }
+
+        // 커스텀 구분자 검사
+        if (input.startsWith("//")) {
+            Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+            if (!matcher.find()) {
+                throw new IllegalArgumentException("잘못된 형식입니다. '//(구분자)\n(문자열)' 형식이어야 합니다.");
+            }
         }
 
     }
