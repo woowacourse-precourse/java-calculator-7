@@ -7,6 +7,7 @@ public class Application {
         String input = getInput(); // 문자열 입력 받기
         String delimiter = getCustomDelimiter(input);
         String[] numbers = splitString(input, delimiter);
+        int sum = calculateSum(numbers);
     }
 
     private static String getInput() {
@@ -35,9 +36,25 @@ public class Application {
             String newInput = input.substring(NIndex+2); // 문자열에서 커스텀 구분자 이후 부분 추출
             return newInput.split(delimiter); // 커스텀 구분자로 분리
         }
-
-
     }
+
+    private static int calculateSum(String[] numbers) {
+        int sum = 0;
+
+        for (String number : numbers) {
+            validateNumber(number); // 숫자 유효성 검사
+            sum += Integer.parseInt(number.trim()); // 숫자로 변환하여 합계 계산
+        }
+
+        return sum; // 최종 합계 반환
+    }
+
+    private static void validateNumber(String number) {
+        if (number.isEmpty() || !number.matches("\\d+")) { // 숫자 유효성 검사
+            throw new IllegalArgumentException("유효하지 않은 숫자입니다.");
+        }
+    }
+
 
 
 
