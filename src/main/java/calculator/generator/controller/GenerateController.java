@@ -18,9 +18,6 @@ public class GenerateController {
         return separatorGenerator.create(sentence);
     }
     public Number createNumber(Sentence sentence, Separator separator) {
-
-        // TODO 여기에서 추출까지하고 create 유연하게 사용하자
-        String extractNumber = numberGenerator.extractorPositiveNumber(sentence.getSentence());
         return numberGenerator.create(sentence, separator);
     }
 }
