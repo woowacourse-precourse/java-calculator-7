@@ -19,4 +19,15 @@ public class CalculatorModel {
 
         return numbers;
     }
+
+    public int add(String[] numbers) {
+        int sum = 0;
+        int i = 0;
+
+        for (String number : numbers) {
+            sum += Integer.parseInt(number);
+        }
+
+        return sum;
+    }
 }
