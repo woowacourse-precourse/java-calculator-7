@@ -38,8 +38,19 @@ class StringAdderTest extends NsTest {
         .hasMessageContaining("NumberParser");
   }
 
+  @Test
+  @DisplayName("매우 큰 숫자")
+  void run_exceedLongRange_success() {
+    String input = "//;\\n"+"9999999999999999999999999,1,100000000077777777777777;1";
+    assertSimpleTest(() -> {
+      run(input);
+      assertThat(output()).contains("결과 : 10100000000077777777777778");
+    });
+  }
+
   @ParameterizedTest
   @CsvSource({
+      "1:2, 3",
       "1:2:3, 6",
       "10:20:30, 60",
       "5:15:25:35, 80",
@@ -90,7 +101,7 @@ class StringAdderTest extends NsTest {
   }
 
   @ParameterizedTest
-  @ValueSource(strings = {"\n"})
+  @ValueSource(strings = {"", "\n"})
   @DisplayName("빈 문자열 입력")
   void run_emptyInput_returnResult(String input) {
     assertSimpleTest(() -> {
@@ -129,6 +140,15 @@ class StringAdderTest extends NsTest {
   }
 
   @Test
+  @DisplayName("소수 입력")
+  void run_decimalNumber_throwIllegalArgumentException(){
+    String input = String.valueOf(Long.MAX_VALUE)+",0.5,2,3";
+    assertThatThrownBy(() -> runException(input))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessageContaining("NumberParser");
+  }
+
+  @Test
   @DisplayName("특수 문자")
   void run_specialDelimiter_throwIllegalArgumentException(){
     assertThatThrownBy(() -> runException("\t"))
@@ -136,6 +156,14 @@ class StringAdderTest extends NsTest {
         .hasMessageContaining("NumberParser");
   }
 
+  @ParameterizedTest
+  @ValueSource(strings = {"1a,2,3", "1,2b,3", "1,2,3c"})
+  @DisplayName("유효하지 않은 숫자 형식")
+  void run_invalidNumberFormat_fail(String input) {
+    assertThatThrownBy(() -> runException(input))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessageContaining("NumberParser");;
+  }
 
 
   @Override
