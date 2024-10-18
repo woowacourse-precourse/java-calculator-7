@@ -1,24 +1,15 @@
 package calculator;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
+/**
+ * 구분자를 통해 숫자를 분리하는 클래스입니다.
+ */
 public class Delimiter {
 
     /**
-     * 기본 구분자(쉼표, 콜론) 처리
+     * 기본 구분자(쉼표, 콜론)로 분리
      */
     public String[] defaultDelimiter(String input) {
-        String[] commaSplit = input.split(",");
-        List<String> result = new ArrayList<>();
-
-        for (String part : commaSplit) {
-            String[] colonSplit = part.split(":");
-            result.addAll(Arrays.asList(colonSplit));
-        }
-
-        return result.toArray(new String[0]);
+        return input.split("[,:]");
     }
 
     /**
