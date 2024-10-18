@@ -11,19 +11,22 @@ public class Application {
 
         //입력 받기
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String str = Console.readLine();
 
+
+        String str = Console.readLine();
         //기능 수행
         int result = 0;
 
+
         if (str.startsWith("//")) {
             result = function.customSeparator(str);
-        } else  {
+        } else {
             result = function.isSplit(str);
         }
 
 
         System.out.println("결과 : " + result);
+
 
     }
 }

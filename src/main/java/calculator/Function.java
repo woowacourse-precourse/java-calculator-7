@@ -19,6 +19,7 @@ public class Function {
 
         while (st.hasMoreTokens()) {
             String token = st.nextToken();
+            validateNumber(token);
             sum += Integer.parseInt(token);
         }
 
@@ -41,9 +42,20 @@ public class Function {
         String[] numbers = subString.split(String.valueOf(separator)); //숫자들을 구분자로 분리하기
 
         for (String number : numbers) {
+            validateNumber(number);
             sum += Integer.parseInt(number);
         }
 
         return sum;
+    }
+
+    //기능 3 : 숫자 검증 로직 (양수인지)
+    private void validateNumber(String number) {
+        int num = Integer.parseInt(number);
+
+        if (num < 0) {
+            //throw new InputException();
+            throw new InputException();
+        }
     }
 }
