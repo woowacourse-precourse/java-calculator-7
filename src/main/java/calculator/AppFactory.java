@@ -2,10 +2,8 @@ package calculator;
 
 import calculator.common.io.InputHandler;
 import calculator.common.io.OutputHandler;
-import calculator.sumCalculator.CalculatorController;
-import calculator.sumCalculator.CalculatorService;
-import calculator.sumCalculator.util.DelimiterParser;
-import calculator.sumCalculator.util.NumberParser;
+import calculator.util.DelimiterParser;
+import calculator.util.NumberParser;
 
 public class AppFactory {
 

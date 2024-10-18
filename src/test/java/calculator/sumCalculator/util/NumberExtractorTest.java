@@ -1,5 +1,6 @@
 package calculator.sumCalculator.util;
 
+import calculator.util.NumberParser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

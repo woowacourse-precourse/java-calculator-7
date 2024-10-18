@@ -1,4 +1,4 @@
-package calculator.sumCalculator;
+package calculator;
 
 import calculator.common.io.InputHandler;
 import calculator.common.io.OutputHandler;

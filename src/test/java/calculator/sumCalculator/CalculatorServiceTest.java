@@ -1,8 +1,9 @@
 package calculator.sumCalculator;
 
-import calculator.sumCalculator.domain.Calculator;
-import calculator.sumCalculator.util.DelimiterParser;
-import calculator.sumCalculator.util.NumberParser;
+import calculator.CalculatorService;
+import calculator.domain.Calculator;
+import calculator.util.DelimiterParser;
+import calculator.util.NumberParser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ class CalculatorServiceTest {
     @DisplayName("입력 문자열에서 기본 구분자 사용 여부를 판딘한다.")
     void hasDefaultDelimiter() {
         String prefix = "//";
-        String defaultDelimiter = "1,2:3";
+        String defaultDelimiter = "1,2;3";
         String customDelimiter = "//;\n1;2;3";
         boolean hasCustomDelimiter1 = defaultDelimiter.startsWith(prefix);
         boolean hasCustomDelimiter2 = customDelimiter.startsWith(prefix);

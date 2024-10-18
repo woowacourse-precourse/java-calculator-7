@@ -1,4 +1,4 @@
-package calculator.sumCalculator.util;
+package calculator.util;
 
 import calculator.common.exception.ExceptionCode;
 

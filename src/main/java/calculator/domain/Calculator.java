@@ -1,6 +1,6 @@
-package calculator.sumCalculator.domain;
+package calculator.domain;
 
-import calculator.sumCalculator.util.Validator;
+import calculator.util.Validator;
 
 import java.util.List;
 

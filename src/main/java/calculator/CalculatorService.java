@@ -1,8 +1,8 @@
-package calculator.sumCalculator;
+package calculator;
 
-import calculator.sumCalculator.domain.Calculator;
-import calculator.sumCalculator.util.DelimiterParser;
-import calculator.sumCalculator.util.NumberParser;
+import calculator.domain.Calculator;
+import calculator.util.DelimiterParser;
+import calculator.util.NumberParser;
 
 import java.util.List;
 import java.util.regex.Matcher;
