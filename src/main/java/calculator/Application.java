@@ -35,6 +35,16 @@ public class Application {
             division = input.substring(2, division_index); //구분자 추출
             numbers = input.substring(division_index + 1); //구분자 이후 숫자 추출
         }
+
+        String[] num_split = numbers.split(division);
+        Queue<Integer> queue = new LinkedList<>();
+        for (String split : num_split) {
+            int num = Integer.parseInt(split.trim());
+            if (num < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + split);
+            }
+            queue.offer(num);
+        }
         int sum = 0;
 
         return sum;
