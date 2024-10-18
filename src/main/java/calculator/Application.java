@@ -6,6 +6,7 @@ public class Application {
     public static void main(String[] args) {
         String input = getInput(); // 문자열 입력 받기
         String delimiter = getCustomDelimiter(input);
+        String[] numbers = splitString(input, delimiter);
     }
 
     private static String getInput() {
@@ -25,6 +26,17 @@ public class Application {
             return input.substring(2,Nindex);//커스텀 구분자
         }
         return "[,;]";//기본 구분자
+    }
+
+    private static String[] splitString(String input, String delimiter){
+        if(delimiter.equals("[,;]")) return input.split(delimiter); // 기본 구분자로 분리
+        else {
+            int NIndex = input.indexOf("\\n");
+            String newInput = input.substring(NIndex+2); // 문자열에서 커스텀 구분자 이후 부분 추출
+            return newInput.split(delimiter); // 커스텀 구분자로 분리
+        }
+
+
     }
 
 
