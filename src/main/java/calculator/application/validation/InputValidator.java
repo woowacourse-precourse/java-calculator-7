@@ -13,7 +13,7 @@ public class InputValidator {
         isEmpty(target);
         isNotTrimmed(target);
         isNotEndedWithNumber(target);
-        isProperCustomDelimiter(target);
+        isProperCustomDelimiterFormat(target);
     }
 
     private void isEmpty(String target) {
@@ -34,7 +34,7 @@ public class InputValidator {
         }
     }
 
-    private void isProperCustomDelimiter(String target) {
+    private void isProperCustomDelimiterFormat(String target) {
         if(target.contains(CUSTOM_DELIMITER_PREFIX.getValue()) && !target.contains(CUSTOM_DELIMITER_SUFFIX.getValue())) {
             throw new IllegalArgumentException(INPUT_IS_NOT_PROPER_CUSTOM_DELIMITER.getMessage());
         }
