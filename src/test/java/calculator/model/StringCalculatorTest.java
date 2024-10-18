@@ -45,4 +45,7 @@ public class StringCalculatorTest {
         assertThatThrownBy(() -> stringCalculator.calculate(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    DisplayName("덧셈 계산 기능")
 }
