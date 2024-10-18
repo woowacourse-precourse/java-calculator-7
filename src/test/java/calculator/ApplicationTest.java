@@ -17,6 +17,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 빈_문자열_입력() {
+        assertSimpleTest(() -> {
+            run("\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
     void 커스텀_구분자_입력_실수1() { // '//'입력이 잘못된 경우
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> runException(";\\n1;2"))

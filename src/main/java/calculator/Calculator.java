@@ -1,24 +1,27 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.Console;
 import global.ErrorCode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Calculator {
+    private static final Printer printer = new Printer();
     static String input = "";
     static List<String> separators = new ArrayList<>(Arrays.asList(",", ":"));
 
     Calculator() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        input = Console.readLine();
+        input = printer.write();
     }
 
 
     public void calculate() {
+        if (input.isEmpty()) {
+            printer.read(0);
+            return;
+        }
         findCustomSeparator();
-        System.out.println("결과 : " + sum());
+        printer.read(sum());
     }
 
     /**
