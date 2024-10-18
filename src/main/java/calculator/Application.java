@@ -21,8 +21,22 @@ public class Application {
         return new String[]{",:", line};
     }
 
+    public static void validateInput(String separators, String operation){
+
+        for (char ch : operation.toCharArray()) {
+            if (!Character.isDigit(ch) && !separators.contains(Character.toString(ch))) {
+                throw new IllegalArgumentException("유효하지 않은 문자 '" + ch + "'가 포함되어 있습니다.");
+            }
+        }
+    }
+
     public static void main(String[] args){
         String line= inputLine();
+
         String[] separatorAndOperation = separateString(line);
+        String separators = separatorAndOperation[0];
+        String operation = separatorAndOperation[1];
+
+        validateInput(separators, operation);
     }
 }
