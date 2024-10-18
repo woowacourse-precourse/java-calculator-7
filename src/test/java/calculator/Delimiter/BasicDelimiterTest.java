@@ -36,4 +36,13 @@ public class BasicDelimiterTest {
         assertThatThrownBy(() -> BasicDelimiter.getNumber(example))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 기본_구분자_이외의_문자() {
+        //given
+        String example = "1,2,3:4<3";
+        //when, then
+        assertThatThrownBy(() -> BasicDelimiter.getNumber(example))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
