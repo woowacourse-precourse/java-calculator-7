@@ -1,21 +1,17 @@
 package calculator;
 
 import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Application {
-
-    private static final Pattern pattern = Pattern.compile("//(.*)\\\\n(.*)");
 
     public static void main(String[] args) {
         InputHandler inputHandler = new InputHandler();
         String input = inputHandler.getInput();
-        Matcher matcher = pattern.matcher(input);
-
-        if (isCustomSeparatorExist(matcher)) {
-            String customSeparator = getCustomSeparator(matcher);
-            String[] dividedNum = divideStringBy(matcher.group(2), customSeparator);
+        SeparatorParser separatorParser = new SeparatorParser(input);
+        if (separatorParser.isCustomSeparatorExist()) {
+            String mathExpression = separatorParser.getMathematicalExpression();
+            String customSeparator = separatorParser.getCustomSeparator();
+            String[] dividedNum = divideStringBy(mathExpression, customSeparator);
             int sumArr = sum(dividedNum);
             System.out.println("결과 : " + sumArr);
             return;
@@ -23,14 +19,6 @@ public class Application {
         String[] dividedNum = divideStringBy(input);
         int sumArr = sum(dividedNum);
         System.out.println("결과 : " + sumArr);
-    }
-
-    public static boolean isCustomSeparatorExist(Matcher matcher) {
-        return matcher.find();
-    }
-
-    public static String getCustomSeparator(Matcher matcher) {
-        return matcher.group(1);
     }
 
     public static String[] divideStringBy(String givenString) {
