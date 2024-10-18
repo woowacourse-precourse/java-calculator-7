@@ -16,7 +16,7 @@ class InputParserTest {
 
     @BeforeAll
     static void setUp() {
-        inputParser = new InputParser.Builder().setDefaultDelimiter(",:").setCustomDelimiterFormat("//", "\\n").build();
+        inputParser = new InputParser(",:", "//", "\\n");
     }
 
     @Test

@@ -12,7 +12,6 @@ public enum IllegalArgumentExceptionEnum {
     ADDITION_OVERFLOW("덧셈 결과가 표현 범위를 넘었습니다."),
     ;
 
-
     private final String message;
 
     IllegalArgumentExceptionEnum(String message) {

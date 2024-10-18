@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Tokenizer {
-    private final String defaultDelimiter;
-    private final String customDelimiterPrefix;
-    private final String customDelimiterSuffix;
+    private final String defaultDelim;
+    private final String delimPrefix;
+    private final String delimSuffix;
 
-    public Tokenizer(String defaultDelimiter, String customDelimiterPrefix, String customDelimiterSuffix) {
-        this.defaultDelimiter = defaultDelimiter;
-        this.customDelimiterPrefix = customDelimiterPrefix;
-        this.customDelimiterSuffix = customDelimiterSuffix;
+    public Tokenizer(String defaultDelim, String delimPrefix, String delimSuffix) {
+        this.defaultDelim = defaultDelim;
+        this.delimPrefix = delimPrefix;
+        this.delimSuffix = delimSuffix;
     }
 
     public String removeCustomDelimiterInfo(String input) {
@@ -19,11 +19,11 @@ public class Tokenizer {
             return input;
         }
 
-        int startIndex = input.indexOf(customDelimiterPrefix);
-        int endIndex = input.indexOf(customDelimiterSuffix, startIndex + 1);
+        int startIndex = input.indexOf(delimPrefix);
+        int endIndex = input.indexOf(delimSuffix, startIndex + 1);
 
         if (endIndex != -1) {
-            return input.substring(0, startIndex) + input.substring(endIndex + customDelimiterSuffix.length());
+            return input.substring(0, startIndex) + input.substring(endIndex + delimSuffix.length());
         }
 
         return input;
@@ -34,9 +34,9 @@ public class Tokenizer {
             return new ArrayList<>();
         }
 
-        String delimiter = defaultDelimiter;
+        String delimiter = defaultDelim;
         if (customDelimiter != null) {
-            delimiter = defaultDelimiter + customDelimiter;
+            delimiter = defaultDelim + customDelimiter;
             input = removeCustomDelimiterInfo(input);
         }
 
