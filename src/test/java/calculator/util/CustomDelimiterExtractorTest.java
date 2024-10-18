@@ -13,7 +13,7 @@ public class CustomDelimiterExtractorTest {
     @DisplayName("올바른 형태의 커스텀 구분자")
     void 올바른_커스텀_구분자() {
         // given
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
 
         // when
         String delimiter = CustomDelimiterExtractor.extract(input);
@@ -38,7 +38,7 @@ public class CustomDelimiterExtractorTest {
     @DisplayName("커스텀 구분자가 기본 구분자와 같을 때 예외 처리")
     void 기본_구분자와_같은_커스텀_구분자() {
         // given
-        String input = "//,\n1,2,3";
+        String input = "//,\\n1,2,3";
 
         // when & then
         assertThatThrownBy(() -> CustomDelimiterExtractor.extract(input))
@@ -50,7 +50,7 @@ public class CustomDelimiterExtractorTest {
     @DisplayName("커스텀 구분자가 공백일 경우 예외 처리")
     void 공백인_커스텀_구분자() {
         // given
-        String input = "//  \n1,2,3";
+        String input = "//  \\n1,2,3";
 
         // when & then
         assertThatThrownBy(() -> CustomDelimiterExtractor.extract(input))
@@ -62,7 +62,7 @@ public class CustomDelimiterExtractorTest {
     @DisplayName("커스텀 구분자가 비어있을 경우 예외 처리")
     void 비어있는_커스텀_구분자() {
         // given
-        String input = "//\n3,5;3";
+        String input = "//\\n3,5;3";
 
         // when & then
         assertThatThrownBy(() -> CustomDelimiterExtractor.extract(input))
