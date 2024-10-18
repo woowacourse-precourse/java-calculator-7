@@ -22,14 +22,15 @@ public class Application {
     	}
 
     	 String cus = ",|:";
-
-
     	 String[] tokens = in.split(cus);
    	     int sum = 0;
 
    	     for(String token : tokens) {
 	    	try {
 	    		sum += Integer.parseInt(token);
+				if(sum < 0 ){
+					throw new IllegalArgumentException("음수는 계산할 수 없습니다." );
+				}
 	    	} catch (NumberFormatException e) {
 	    		throw new IllegalArgumentException("IllegalArgumentException");
 	    	}
