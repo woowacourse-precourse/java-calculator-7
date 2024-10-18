@@ -46,7 +46,11 @@ public class Application {
         int sum = 0;
         for (String number : numbers) {
             if (!number.trim().isEmpty()) {
-                sum += Integer.parseInt(number.trim());  // 숫자 변환 후 덧셈
+                int num = Integer.parseInt(number.trim());
+                if (num <= 0) {
+                    throw new IllegalArgumentException("숫자는 1 이상의 양수여야 합니다");
+                }
+                sum += num;
             }
         }
         return sum;
