@@ -1,13 +1,11 @@
 package calculator.domain;
 
+import calculator.enums.RegexPattern;
 import calculator.exception.InvalidDelimiterException;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InputSplitter {
-    private static final String REGEX_CUSTOM_DELIMITER = "^//(.)\\\\n";
-    private static final String REGEX_COMMA_COLON = "^[0-9]+([,:][0-9]+)*$";
     private static final String COMMA_COLON_DELIMITER = "[,:]";
     private static final int CUSTOM_DELIMITER_START_INDEX = 2;
     private static final int CUSTOM_DELIMITER_END_INDEX = 3;
@@ -17,7 +15,7 @@ public class InputSplitter {
         if (input.isEmpty()) {
             return new String[]{"0"};
         }
-        if (containsCustomDelimiter(input)) {
+        if (RegexPattern.CUSTOM_DELIMITER.find(input)) {
             String customDelimiter = escapeMetacharacter(getCustomDelimiter(input));
             input = input.substring(START_INDEX_EXCEPT_REGEX);
             return input.split(customDelimiter);
@@ -25,18 +23,12 @@ public class InputSplitter {
         return validateCommaAndColonDelimiter(input);
     }
 
-    private boolean containsCustomDelimiter(String input) {
-        Pattern pattern = Pattern.compile(REGEX_CUSTOM_DELIMITER);
-        Matcher matcher = pattern.matcher(input);
-        return matcher.find();
-    }
-
     private String getCustomDelimiter(String input) {
         return input.substring(CUSTOM_DELIMITER_START_INDEX, CUSTOM_DELIMITER_END_INDEX);
     }
 
     private String[] validateCommaAndColonDelimiter(String input) {
-        if (!input.matches(REGEX_COMMA_COLON)) {
+        if (!RegexPattern.ONLY_COMMA_COLON_DELIMITER.matches(input)) {
             throw new InvalidDelimiterException();
         }
         return input.split(COMMA_COLON_DELIMITER);
