@@ -43,4 +43,13 @@ class InputStringTest {
             assertThat(inputString.containsCustomSeperator()).isFalse();
         });
     }
+
+    @DisplayName("문자열에서 커스텀 구분자를 추출할 수 있다.")
+    @Test
+    void test5() {
+        assertSimpleTest(() -> {
+            InputString inputString = new InputString("//;\\n1;3;4");
+            assertThat(inputString.extractCustomSeperator()).isEqualTo(';');
+        });
+    }
 }
