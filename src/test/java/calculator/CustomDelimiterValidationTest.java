@@ -40,6 +40,38 @@ class CustomDelimiterValidationTest extends NsTest {
         });
     }
 
+    @Test
+    void 커스텀_구분자_실패_테스트1() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//qw\\n123qw23"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_실패_테스트2() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//5\\n123"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_실패_테스트3() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//[\\n123]23"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_실패_테스트4() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//[\\n123[-23[7"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     protected void runMain() {
         Application.main(new String[]{});
