@@ -7,6 +7,7 @@ public class CustomDataParser implements DataParser {
 
     private static final String REGEX = "\\\\n";
     private static final String PREFIX = "//";
+    private static final String INVALID_SEPARATOR_LENGTH_ERROR_MESSAGE = "커스텀 구분자는 1개만 입력할 수 있습니다.";
 
     @Override
     public boolean isSupport(String inputData) {
@@ -32,7 +33,7 @@ public class CustomDataParser implements DataParser {
         String[] split = inputData.split(REGEX);
         String prefix = split[0];
         if (prefix.length() != 3) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(INVALID_SEPARATOR_LENGTH_ERROR_MESSAGE);
         }
         char separator = prefix.charAt(2);
         return new char[]{separator, ':', ','};
