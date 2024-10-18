@@ -46,13 +46,13 @@ class ApplicationTest extends NsTest {
 			run(input);
 
 			// then
-			assertThat(output()).contains("결과 : " + 6);
+			assertThat(output()).contains("결과 : 6");
 		});
 	}
 
 	@Test
 	@DisplayName("공백 입력 테스트")
-	public void blankTest(){
+	public void blankTest() {
 		assertSimpleTest(() -> {
 			// given
 			String input = "\n";
@@ -61,13 +61,13 @@ class ApplicationTest extends NsTest {
 			run(input);
 
 			// then
-			assertThat(output()).contains("결과 : " + 0);
+			assertThat(output()).contains("결과 : 0");
 		});
 	}
 
 	@Test
 	@DisplayName("구분자 없는 숫자 입력 테스트")
-	public void hasNotSeparatorTest(){
+	public void hasNotSeparatorTest() {
 		assertSimpleTest(() -> {
 			// given
 			String input = "1";
@@ -76,13 +76,13 @@ class ApplicationTest extends NsTest {
 			run(input);
 
 			//then
-			assertThat(output()).contains("결과 : " + 1);
+			assertThat(output()).contains("결과 : " + input);
 		});
 	}
 
 	@Test
 	@DisplayName("구분자가 없으면서 커스텀 구분자가 있는 입력 테스트")
-	public void hasNotSeparatorAndHasCustomCeparatorTest(){
+	public void hasNotSeparatorAndHasCustomCeparatorTest() {
 		assertSimpleTest(() -> {
 			// given
 			String input = "//;\\n1";
@@ -97,8 +97,8 @@ class ApplicationTest extends NsTest {
 
 	@Test
 	@DisplayName("커스텀 문자열에 특수 문자가 포함되는 입력 테스트")
-	public void hasSpecialCharTest(){
-		assertSimpleTest(()->{
+	public void hasSpecialCharTest() {
+		assertSimpleTest(() -> {
 			// given
 			String input = "//\\\\n1\\2\\3";
 
@@ -113,8 +113,8 @@ class ApplicationTest extends NsTest {
 
 	@Test
 	@DisplayName("커스텀 문자열에 특수 문자 '[', ']'가 포함되며 수식에도 포함되는 입력 테스트")
-	public void hasSpecialCharsTest(){
-		assertSimpleTest(()->{
+	public void hasSpecialCharsTest() {
+		assertSimpleTest(() -> {
 			// given
 			String input = "//[\\n//]\\n1[2]3";
 
