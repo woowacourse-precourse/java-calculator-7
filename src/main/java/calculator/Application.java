@@ -8,7 +8,7 @@ public class Application {
 
     public static void main(String[] args) {
         final String input;
-        final int result;
+        final long result;
 
         System.out.println(ASK_INPUT_MESSAGE);
         input = Console.readLine();
