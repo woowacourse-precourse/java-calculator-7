@@ -30,8 +30,19 @@ public class InputValidator {
     }
 
     public static void validateStringOperand(String[] operands) {
+        validateBlank(operands);
         validateTypeAndBound(operands);
         validateResultBound(operands);
+    }
+
+    private static void validateBlank(String[] operands) {
+        if (operands.length > 1) {
+            for (String operand : operands) {
+                if (operand.equals(Constant.BLANK)) {
+                    throw new IllegalArgumentException(INPUT_ERROR);
+                }
+            }
+        }
     }
 
     private static void validateTypeAndBound(String[] operands) {
