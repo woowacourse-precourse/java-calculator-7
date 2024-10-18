@@ -22,9 +22,14 @@ public class CalculatorController {
 
     public void runCalculator() {
         CalculationString calculationString = readInput();
+        int[] parsedNumbers = parseInput(calculationString);
     }
 
     private CalculationString readInput() {
         return inputView.readInput();
+    }
+
+    private int[] parseInput(CalculationString calculationString) {
+        return stringHandler.parseString(calculationString);
     }
 }

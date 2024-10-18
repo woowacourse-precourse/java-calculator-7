@@ -43,6 +43,6 @@
 ### `CalculatorController`
 
 - [x] `InputView`에 `문자열 입력`을 요청한다.
-- [ ] 반환된 `문자열`을 `CalculationString`에 담아 `StringHandler`로 전달한다.
+- [x] 반환된 `문자열`을 `CalculationString`에 담아 `StringHandler`로 전달한다.
 - [ ] 반환된 `숫자 리스트`를 `Calculator`로 전달하여 덧셈을 수행한다.
 - [ ] 반환된 `결과 숫자값`을 받아 `OutputView`에 `문자열 출력`을 요청한다.
