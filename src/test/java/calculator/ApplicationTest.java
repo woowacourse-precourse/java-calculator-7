@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class ApplicationTest extends NsTest {
 
-    static Stream<Arguments> 기본_구분자_사용_TestCases() {
+    static Stream<Arguments> 기본_구분자_사용_testCases() {
         return Stream.of(
                 Arguments.of("1,2,3", "결과 : 6"),
                 Arguments.of("1,2:3", "결과 : 6"),
@@ -21,7 +21,7 @@ class ApplicationTest extends NsTest {
     }
 
     @ParameterizedTest
-    @MethodSource("기본_구분자_사용_TestCases")
+    @MethodSource("기본_구분자_사용_testCases")
     void 기본_구분자_사용(String input, String expected) {
         assertSimpleTest(() -> {
             run(input);
@@ -29,7 +29,7 @@ class ApplicationTest extends NsTest {
         });
     }
 
-    static Stream<Arguments> 커스텀_구분자_사용_TestCases() {
+    static Stream<Arguments> 커스텀_구분자_사용_testCases() {
         return Stream.of(
                 Arguments.of("//;\\n1", "결과 : 1"),
                 Arguments.of("//@\\n1@2@3", "결과 : 6"),
@@ -42,7 +42,7 @@ class ApplicationTest extends NsTest {
     }
 
     @ParameterizedTest
-    @MethodSource("커스텀_구분자_사용_TestCases")
+    @MethodSource("커스텀_구분자_사용_testCases")
     void 커스텀_구분자_사용(String input, String expected) {
         assertSimpleTest(() -> {
             run(input);
@@ -50,7 +50,7 @@ class ApplicationTest extends NsTest {
         });
     }
 
-    static Stream<Arguments> 예외_테스트_TestCases() {
+    static Stream<Arguments> 예외_테스트_testCases() {
         return Stream.of(
                 Arguments.of("-1,2,3"),
                 Arguments.of("1,a,3"),
@@ -62,7 +62,7 @@ class ApplicationTest extends NsTest {
     }
 
     @ParameterizedTest
-    @MethodSource("예외_테스트_TestCases")
+    @MethodSource("예외_테스트_testCases")
     void 예외_테스트(String input) {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException(input))
