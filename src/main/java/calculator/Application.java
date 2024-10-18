@@ -41,7 +41,7 @@ public class Application {
                 String input = getInput();
                 extractDelimiter(input);
                 if(isValidString(input)){
-//                    calculateNumbers();
+                    calculateNumbers(extractedNumArr);
                 };
         }
 
@@ -130,8 +130,12 @@ public class Application {
         }
 
         // 계산
-        public void calculateNumbers(ArrayList<Integer> extractedNumbers){
-
+        public int calculateNumbers(ArrayList<Integer> extractedNumbers){
+            int result = 0;
+            for(int n:extractedNumbers){
+                result+=n;
+            }
+            return result;
         }
 
         // 출력
