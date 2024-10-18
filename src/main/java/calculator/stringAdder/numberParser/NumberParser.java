@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
  * @since : 24. 10. 17.
  */
 public class NumberParser {
+  private static final Pattern NUMBER_PATTERN = Pattern.compile("^\\d+$");
 
   public String[] getNumbers(String input, String[] delimiters) {
     String numberString =
@@ -30,6 +31,12 @@ public class NumberParser {
   private void validateNumber(String number) {
     if (number.startsWith("-")) {
       throw new IllegalArgumentException(this.getClass().getSimpleName()+ ": 음수는 허용되지 않습니다: " + number);
+    }
+    if (number.contains(".")){
+      throw new IllegalArgumentException(this.getClass().getSimpleName()+ ": 소수는 허용되지 않습니다: " + number);
+    }
+    if (!NUMBER_PATTERN.matcher(number).matches()){
+      throw new IllegalArgumentException(this.getClass().getSimpleName()+ ": 유효하지 않은 숫자 형식 입니다: " + number);
     }
   }
 }
