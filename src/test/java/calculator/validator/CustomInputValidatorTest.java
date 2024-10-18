@@ -38,6 +38,15 @@ public class CustomInputValidatorTest extends NsTest {
   }
 
   @Test
+  void 커스텀_구분자_길이_예외(){
+    assertSimpleTest(() -> {
+      assertThatThrownBy(() -> validator.validateInput("//##\n1,2:3"))
+          .isInstanceOf(IllegalArgumentException.class)
+          .hasMessageContaining("구분자는 한 글자여야 합니다.");
+    });
+  }
+
+  @Test
   void 커스텀_구분자_내용_예외(){
     assertSimpleTest(() -> {
       assertThatThrownBy(() -> validator.validateInput("//1\n2,3"))

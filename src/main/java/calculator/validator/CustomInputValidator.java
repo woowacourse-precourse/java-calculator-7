@@ -21,8 +21,12 @@ public class CustomInputValidator implements InputValidator{
   }
 
   private char extractCustomDelimiter(String input) {
-    if(!input.contains("\n")){
+    int endIdx = input.indexOf("\n");
+    if(endIdx == -1){
       throw new IllegalArgumentException(ErrorCode.CUSTOM_DELIMITER_FORMAT_ERROR.toString());
+    }
+    else if(endIdx != 3){
+      throw new IllegalArgumentException(ErrorCode.CUSTOM_DELIMITER_LENGTH_ERROR.toString());
     }
 
     char delimiter = input.charAt(2);
