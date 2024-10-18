@@ -7,9 +7,7 @@ public class InputValidator {
     private static final String CUSTOM_DELIMITER_END = "\\n";
 
     public static void validateInput(String inputValue) {
-        validateEmpty(inputValue);
         String delimiter = extractDelimiter(inputValue);
-        validateNumbers(inputValue, delimiter);
     }
 
     public static String extractDelimiter(String inputValue) {
@@ -23,13 +21,7 @@ public class InputValidator {
         return DEFAULT_DELIMITER; 
     }
 
-    private static void validateEmpty(String inputValue) {
-        if (inputValue.isEmpty()) {
-            throw new IllegalArgumentException("빈 값을 입력하였습니다.");
-        }
-    }
-
-    private static void validateNumbers(String inputValue, String delimiter) {
+    public static String validateNumbers(String inputValue, String delimiter) {
         String numbersPart;
 
         if (inputValue.startsWith(CUSTOM_DELIMITER_START)) {
@@ -39,7 +31,6 @@ public class InputValidator {
             numbersPart = inputValue;
         }
 
-        // 구분자를 사용하여 숫자 부분을 분리
         for (String numStr : numbersPart.split(delimiter)) {
             try {
                 int num = Integer.parseInt(numStr.trim());
@@ -50,5 +41,6 @@ public class InputValidator {
                 throw new IllegalArgumentException("유효하지 않는 숫자 형식입니다.");
             }
         }
+        return numbersPart;
     }
 }
