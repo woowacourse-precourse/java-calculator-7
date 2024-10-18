@@ -43,10 +43,15 @@ public class ParsingService {
         List<Long> operands = new ArrayList<>();
         String[] numbers = expression.split(calculator.identifiersToString());
 
-        for(String number : numbers) {
-            operands.add(Long.parseLong(number));
+        try {
+            for (String number : numbers) {
+                operands.add(Long.parseLong(number));
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("식에는 숫자와 구분자만 입력 가능합니다.");
         }
 
         return operands;
     }
+
 }
