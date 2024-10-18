@@ -27,6 +27,6 @@ public class ApplicationConsoleView implements ApplicationView{
 
     @Override
     public void printError(String message) {
-
+        outputView.printMessage(ConsoleMessage.ERROR_PREFIX + message);
     }
 }

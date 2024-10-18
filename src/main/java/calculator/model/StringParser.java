@@ -1,6 +1,7 @@
 package calculator.model;
 
 
+import calculator.common.NumberValidator;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,10 +21,16 @@ public class StringParser {
     }
 
     public List<Integer> parseToNumbers(String value) {
-        String[] numbers = value.split(getAllSpliterator());
-        return Arrays.stream(numbers)
-                .map(Integer::parseInt)
+        String[] splitValues = value.split(getAllSpliterator());
+        return Arrays.stream(splitValues)
+                .map(this::parseIntAndValidate)
                 .toList();
+    }
+
+    private Integer parseIntAndValidate(String splitValue) {
+        int parsedValue = Integer.parseInt(splitValue);
+        NumberValidator.validatePositive(parsedValue);
+        return parsedValue;
     }
 
     private String getAllSpliterator() {
