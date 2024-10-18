@@ -64,7 +64,5 @@ class UserInputTest {
         return Stream.of(new Object[]{"/2;\\n1:2;3",";","\n1:2;3"},
                 new Object[]{"1/;\\n1:2;3",";","1:2;3"},
                 new Object[]{"123;\\n1:2:3",";","1:2:3"});
-
     }
-
 }
