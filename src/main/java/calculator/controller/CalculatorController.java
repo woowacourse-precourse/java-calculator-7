@@ -18,6 +18,7 @@ public class CalculatorController {
     public void run(){
         inputString();
         validateNull();
+        parseNumbers();
     }
 
     public void inputString(){
@@ -30,14 +31,13 @@ public class CalculatorController {
             outputView.printAnswerMessage(calculator.getAnswer());
     }
 
+    public void parseNumbers(){
+        calculator.parseNumbers();
+    }
+
     public void validateNumbers(){
 
     }
-
-    public void strToInt(){
-
-    }
-
     public void sumNumbers(){
 
     }

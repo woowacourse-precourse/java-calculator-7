@@ -2,6 +2,7 @@ package calculator.model;
 
 public class Calculator {
     private String str;
+    private String[] strArr;
     private int answer;
 
     public Calculator(String str){
@@ -9,11 +10,26 @@ public class Calculator {
         this.answer = 0;
     }
 
+    public int getAnswer(){
+        return this.answer;
+    }
+
     public boolean validateNull(){
         return this.str.isEmpty();
     }
 
-    public int getAnswer(){
-        return this.answer;
+    public void parseNumbers(){
+        if(validateCustom()) customParse();
     }
+
+    public boolean validateCustom(){
+        return str.startsWith("/");
+    }
+
+    public void customParse(){
+        String separator = String.valueOf(this.str.charAt(2));
+        this.str = this.str.substring(5);
+        this.strArr = this.str.split(separator);
+    }
+
 }
