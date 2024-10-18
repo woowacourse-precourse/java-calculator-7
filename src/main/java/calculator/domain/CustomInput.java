@@ -2,16 +2,16 @@ package calculator.domain;
 
 import java.util.Objects;
 
-public class DefaultDelimiterInput extends Input {
+public class CustomDelimiterInput extends Input {
 
     private final String text;
 
-    private DefaultDelimiterInput(String text) {
+    private CustomDelimiterInput(String text) {
         this.text = text;
     }
 
     public static Input from(String text) {
-        return new DefaultDelimiterInput(text);
+        return new CustomDelimiterInput(text);
     }
 
     @Override
@@ -19,7 +19,7 @@ public class DefaultDelimiterInput extends Input {
         if (this == object) {
             return true;
         }
-        if (!(object instanceof DefaultDelimiterInput that)) {
+        if (!(object instanceof CustomDelimiterInput that)) {
             return false;
         }
         return Objects.equals(text, that.text);

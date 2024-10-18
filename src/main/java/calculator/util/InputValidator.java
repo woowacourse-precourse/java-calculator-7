@@ -26,9 +26,9 @@ public class UserInputValidator {
         return input.length() > 1;
     }
 
-    public static void validateCustomPresence(Matcher matcher) {
+    public static void validateCustomFormat(Matcher matcher) {
         if (!canFindRegex(matcher)) {
-            throw new IllegalArgumentException(Constants.NOT_EXIST_CUSTOM);
+            throw new IllegalArgumentException(Constants.INVALID_CUSTOM_FORMAT);
         }
     }
 
@@ -52,7 +52,7 @@ public class UserInputValidator {
 
     public static void validateHasNumber(String string) {
         try {
-            Integer.parseInt(string);
+            Long.valueOf(string);
         } catch (NumberFormatException numberFormatException) {
             throw new IllegalArgumentException(Constants.NOT_CONTAINS_NUMBER);
         }

@@ -33,7 +33,7 @@ public class UserInputValidatorTest {
     void 커스텀_구분자_없음() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> StringCalculator.calculate("//\\n1;2;3"))
-                .withMessageMatching(Constants.NOT_EXIST_CUSTOM);
+                .withMessageMatching(Constants.INVALID_CUSTOM_FORMAT);
     }
 
     @Test
