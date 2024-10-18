@@ -38,4 +38,8 @@ public class Application {
     private static boolean isEmpty(String input) {
         return input == null || input.trim().isEmpty();
     }
+
+    private static boolean hasCustomDelimiter(String input) {
+        return input.startsWith("//") && input.contains("\n");
+    }
 }
