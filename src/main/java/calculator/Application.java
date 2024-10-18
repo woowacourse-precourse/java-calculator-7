@@ -30,7 +30,7 @@ public class Application {
 
         Delimiters delimiters = getDelimiters(input);
 
-        List<String> numberTokens = delimiters.split(customDelimiterService.trimCustomDelimiter(input));
+        List<String> numberTokens = delimiters.split(customDelimiterService.stripCustomDelimiter(input));
 
         try {
             List<Integer> numbers = IntegerUtils.parsePositiveIntegers(numberTokens);
@@ -42,7 +42,7 @@ public class Application {
     }
 
     private static Delimiters getDelimiters(String input) {
-        return customDelimiterService.extract(input)
+        return customDelimiterService.extractCustomDelimiter(input)
                 .map(customDelimiterService::createDelimiters)
                 .orElseGet(customDelimiterService::createDelimiters);
     }

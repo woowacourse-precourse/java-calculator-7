@@ -20,13 +20,13 @@ public class CustomDelimiterService {
         this.customDelimiterPatternMatcher = customDelimiterPatternMatcher;
     }
 
-    public Optional<Delimiter> extract(String value) {
+    public Optional<Delimiter> extractCustomDelimiter(String value) {
         return Optional.ofNullable(value)
                 .flatMap(customDelimiterPatternMatcher::extractDelimiterGroup)
                 .map(delimiterFactory::createDelimiter);
     }
 
-    public String trimCustomDelimiter(String value) {
+    public String stripCustomDelimiter(String value) {
         return Optional.ofNullable(value)
                 .flatMap(customDelimiterPatternMatcher::extractTrimmedGroup)
                 .orElse(value);
