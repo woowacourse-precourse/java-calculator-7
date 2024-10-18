@@ -11,16 +11,16 @@ public class Application {
 //        String regex = "^([1-9][0-9]*[^0-9]|[^0-9][1-9][0-9]*)+$"
     System.out.println("양수를 ,와:으로 구분해 작성해주세요 다른구분자를 원하시면 \"//[구분자]\\n[작성]\"으로 작성해 주세요 (ex://;\\n1;2;3)");
 
-    Calculator input = new Calculator(Console.readLine());
+    Calculator input = new Calculator(Console.readLine().trim());
 
-    if(input.isSort()){
+    if (input.isSort() || input.isBasic()) {
 
 
-    }else{
+    } else {
 
+      throw new IllegalArgumentException("양식에 맞게 입력했는지 확인해 주세요");
     }
 
-
-
+    System.out.println("결과 : 1");
   }
 }
