@@ -7,6 +7,8 @@ import java.util.List;
 
 public class Parser {
 
+    private final int INITIAL_SIZE = 0;
+
     public Numbers parseInput(List<Character> delimiter, String input) {
         List<Integer> numbers = new ArrayList<>();
         StringBuilder number = new StringBuilder();
@@ -26,7 +28,7 @@ public class Parser {
         try {
             if (!number.isEmpty()) {
                 numbers.add(Integer.parseInt(number.toString()));
-                number.setLength(0);
+                number.setLength(INITIAL_SIZE);
             }
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
