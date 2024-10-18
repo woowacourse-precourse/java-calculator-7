@@ -35,7 +35,7 @@ public class Application {
         List<String> numberStrings = delimiterService.splitByDelimiters(input);
 
         try {
-            List<Integer> numbers = IntegerUtils.parsePositiveIntegers(numberStrings);
+            List<Integer> numbers = IntegerUtils.parseIntegers(numberStrings);
             int sum = IntegerUtils.sum(numbers);
             IOConsole.print("결과 : " + sum);
         } catch (NumberFormatException e) {
