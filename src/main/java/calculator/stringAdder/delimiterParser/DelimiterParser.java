@@ -19,6 +19,10 @@ public class DelimiterParser {
       throw new IllegalArgumentException(this.getClass().getSimpleName() + ": 올바르지 않은 커스텀 구분자 설정입니다.");
     }
 
+    if ( '0' <= input.charAt(CUSTOM_DELIMITER_INDEX) && input.charAt(CUSTOM_DELIMITER_INDEX) <= '9'){
+      throw new IllegalArgumentException(this.getClass().getSimpleName() + ": 숫자는 구분자로 사용할 수 없습니다.");
+    }
+
     String[] customDelimiters = new String[]{ DEFAULT_DELIMITERS[0],
                                               DEFAULT_DELIMITERS[1],
                                               String.valueOf(input.charAt(CUSTOM_DELIMITER_INDEX))};
