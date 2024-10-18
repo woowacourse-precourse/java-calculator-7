@@ -45,7 +45,7 @@ class StringCalculator {
         for (String number : numbers) {
             String[] splitNumbers = number.split(delimiters[1]);  // 콜론으로 분리
             for (String num : splitNumbers) {
-                validateNumber(num);  // 음수 체크
+                validateNumber(num);  // 음수 및 숫자 체크
                 sum += Integer.parseInt(num);
             }
         }
@@ -53,9 +53,13 @@ class StringCalculator {
     }
 
     private void validateNumber(String num) {
-        int value = Integer.parseInt(num);
-        if (value < 0) {
-            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+        try {
+            int value = Integer.parseInt(num);
+            if (value < 0) {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("입력된 값이 숫자가 아닙니다.");
         }
     }
 }
