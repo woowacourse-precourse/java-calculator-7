@@ -5,6 +5,7 @@ public class CustomDelimiter {
     public static final String ERROR_INPUT_IS_NUMBER = "[ERROR] 구분자 외 입력은 오직 숫자만 가능합니다.";
     public static final String ERROR_INPUT_IS_POSITIVE = "[ERROR] 숫자는 양수만 입력 가능합니다.";
     public static final String ERROR_INPUT_IS_EMPTY = "[ERROR] 구분자 사이에 값을 입력해야 합니다.";
+    public static final String ERROR_INPUT_GET_DELIMITER = "[ERROR] 커스텀 구분자를 지정하기 위해선 //로 열고 \\n으로 닫아줘야 합니다.";
 
     public static int[] getNumber(String input) {
         String customDelimiter = getDelimiter(input);
@@ -38,6 +39,7 @@ public class CustomDelimiter {
     }
 
     // 커스텀 구분자 + 기본 구분자로 추출한 숫자(type: String) 배열 반환
+    // 여기서 예외처리 안 한 이유는 \n이 없는 경우는 getDelimiter 에서 걸러지기 때문
     private static String[] getToken(String input, String delimiterPattern) {
         String temp = input.substring(input.indexOf("\\n") + 2);
         return temp.split(delimiterPattern);
@@ -45,7 +47,11 @@ public class CustomDelimiter {
 
     // 커스텀 구분자 추출 메서드
     private static String getDelimiter(String input) {
-        String temp = input.substring(0, input.indexOf("\\n"));
-        return temp.substring(2);
+        try {
+            String temp = input.substring(0, input.indexOf("\\n"));
+            return temp.substring(2);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(ERROR_INPUT_GET_DELIMITER);
+        }
     }
 }
