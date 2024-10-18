@@ -9,11 +9,15 @@ public class Calculator {
         this.numbers = numbers;
     }
 
-    public int sum() {
-        int result = 0;
+    public String sum() {
+        float result = 0;
         for (String number : numbers) {
-            result += Integer.parseInt(number);
+            result += Float.parseFloat(number);
         }
-        return result;
+        if (result == (int) result) {
+            return String.format("%.0f", result);
+        } else {
+            return String.format("%s", result);
+        }
     }
 }

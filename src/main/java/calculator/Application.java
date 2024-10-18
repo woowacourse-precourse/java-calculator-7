@@ -20,7 +20,7 @@ public class Application {
         Validator.validate(numbers);
 
         Calculator calculator = new Calculator(numbers);
-        int answer = calculator.sum();
+        String answer = calculator.sum();
 
         System.out.println(Message.END.getMessage() + answer);
     }
