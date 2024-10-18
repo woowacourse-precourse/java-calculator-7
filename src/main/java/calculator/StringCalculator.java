@@ -10,10 +10,9 @@ public class StringCalculator {
 		return 0;
 	}
 
-	private static String findCustomSplitter(String[] splitString){
-		String originalInput = splitString[0];
-		int splitterIndex = originalInput.indexOf("\n");
-		String customSplitter = originalInput.substring(2, splitterIndex);
+	private static String findCustomSplitter(String input){
+		int splitterIndex = input.indexOf("\n");
+		String customSplitter = input.substring(2, splitterIndex);
 		return customSplitter;
 	}
 
