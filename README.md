@@ -67,8 +67,8 @@
 # 개발순서
 
 1. Application.java 작성 - 프로그램의 시작점, 사용자 입력 및 결과 출력.
-2.   StringCalculator.java 작성 - 문자열을 처리하고 결과를 반환하는 주요 로직.
-3.  InputParser.java 작성 - 입력 문자열을 해석하고 숫자로 변환.
+2. StringCalculator.java 작성 - 문자열을 처리하고 결과를 반환하는 주요 로직.
+3. InputParser.java 작성 - 입력 문자열을 해석하고 숫자로 변환.
 4. NumberValidator.java 작성 - 숫자 리스트의 유효성 검사.
 5. Delimiter.java 작성 - 기본 및 커스텀 구분자 처리 로직.
 6. 테스트 코드 작성 및 예외 처리 로직 강화.
