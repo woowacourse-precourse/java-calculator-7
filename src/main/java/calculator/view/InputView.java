@@ -13,7 +13,7 @@ public class InputView {
         printStartMessage();
 
         String userInput = Console.readLine();
-        checkInputIsNullOrBlank(userInput);
+        checkInputIsNull(userInput);
 
         return userInput;
     }
@@ -26,11 +26,11 @@ public class InputView {
     }
 
     /***
-     * 입력값의 NULL 체크 및 공백 체크
+     * 입력값의 NULL 체크
      * @param userInput : 사용자의 입력
      */
-    private void checkInputIsNullOrBlank(String userInput) {
-        if (userInput == null || userInput.isBlank()) {
+    private void checkInputIsNull(String userInput) {
+        if (userInput == null) {
             throw new IllegalArgumentException("형식에 맞춰 입력해주세요.");
         }
     }

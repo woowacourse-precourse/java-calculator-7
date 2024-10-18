@@ -7,6 +7,8 @@ import java.util.List;
 public abstract class UserInput {
     private static final String DEFAULT_DELIMITER_COMMA = ",";
     private static final String DEFAULT_DELIMITER_COLON = ":";
+    protected static final String REGEX_DELIMITER = "|";
+    protected static final String ZERO_VALUE = "0";
 
     protected final List<String> delimiters;
     protected long[] inputNumbers;
@@ -47,7 +49,10 @@ public abstract class UserInput {
      */
     protected void checkValueToCalculateIsNumber(String[] splitStringByDelimiter) {
         try {
-            Arrays.stream(splitStringByDelimiter).forEach(Long::parseLong);
+            Arrays.stream(splitStringByDelimiter)
+                    .map(value -> value.isEmpty() ? ZERO_VALUE : value)
+                    .mapToLong(Long::parseLong)
+                    .forEach(value -> {}); // 스트림의 최종연산 (반환값이 필요 없기에 검증을 위한 코드)
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("구분자(, 또는 :)와 숫자로만 입력해주세요.");
         }
