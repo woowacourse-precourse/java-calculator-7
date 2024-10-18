@@ -1,4 +1,5 @@
 ## New Features in This Release
+- refactor(Application): change method names
 - fix(Application): change invalid input message
 - feat(Application): support empty separator
 - feat(Application): more flexible custom separator

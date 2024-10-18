@@ -30,7 +30,7 @@ public class Application {
         return trimedInput;
     }
 
-    public static String replace(String input, String[] separators) {
+    public static String replaceSeparators(String input, String[] separators) {
         String replacedInput = trimSeparator(input);
         for (String sep : separators) {
             replacedInput = replacedInput.replace(sep, ",");
@@ -42,8 +42,8 @@ public class Application {
         return replacedInput;
     }
 
-    public static int[] split(String input, String[] separators) {
-        String[] arrayStrings = replace(input, separators).split(",");
+    public static int[] splitByComma(String input, String[] separators) {
+        String[] arrayStrings = replaceSeparators(input, separators).split(",");
         int len = arrayStrings.length;
         int[] arrayInts = new int[len];
         for (int i = 0; i < len; i++) {
@@ -86,7 +86,7 @@ public class Application {
         }
         String[] separators = getSeparators(input);
 
-        int[] container = split(input, separators);
+        int[] container = splitByComma(input, separators);
 
         checkValidity(container);
         int sum = calculateSum(container);
