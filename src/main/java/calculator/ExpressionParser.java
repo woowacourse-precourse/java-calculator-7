@@ -26,12 +26,18 @@ public class ExpressionParser {
     }
 
     private Deque<Integer> parseOperand(String expression) {
+        if(expression.isEmpty()) {
+            return new ArrayDeque<>();
+        }
         return Arrays.stream(expression.split(separators.toRegexAllowOneOfSeparator()))
                 .map(Integer::parseInt)
                 .collect(Collectors.toCollection(LinkedList::new));
     }
 
     private Deque<Separator> parseSeparator(String expression) {
+        if(expression.isEmpty()) {
+            return new ArrayDeque<>();
+        }
         Deque<Separator> separatorDeque = new LinkedList<>();
         Matcher matcher = pattern.matcher(expression);
         while (matcher.find()) {
