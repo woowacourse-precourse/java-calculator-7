@@ -29,7 +29,7 @@ public class CustomCalculator implements Calculator{
                 .reduce(0, Integer::sum);
     }
 
-    public void validateExpression(){
+    public void validateValues(){
         validateNumbers();
         validateDelimiterUsage();
     }

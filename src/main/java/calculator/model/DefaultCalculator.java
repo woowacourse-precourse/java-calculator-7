@@ -30,7 +30,7 @@ public class DefaultCalculator implements Calculator{
                 .reduce(0, Integer::sum);
     }
 
-    public void validateExpression(){
+    public void validateValues(){
         if(calculatorValues.getExpression().isEmpty()){
             return;
         }
