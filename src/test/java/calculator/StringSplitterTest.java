@@ -28,22 +28,21 @@ class StringSplitterTest {
 
     @Test
     void shouldSplitStringWithCustomSeparator() {
-        // SeparatorManager 설정
+        String input = "//;\n1;2,3";
         SeparatorManager sepManager = new SeparatorManager();
-        sepManager.addCustomSeparator("//;\n"); // 커스텀 구분자 세미콜론 추가
+        String processedInput = sepManager.addCustomSeparatorAndTrim(input); // 커스텀 구분자 세미콜론 추가
         StringSplitter splitter = new StringSplitter(sepManager);
 
-        // 커스텀 구분자가 포함된 문자열
-        String input = "1;2,3";
         List<String> separators = sepManager.getSeparators(); // 기본 + 커스텀 구분자
 
         // split 메서드 실행
-        List<String> result = splitter.split(input, separators);
+        List<String> result = splitter.split(processedInput, separators);
 
         // 결과 확인
         assertEquals(3, result.size(), "입력이 세 부분으로 분리되어야 합니다.");
         assertEquals("1", result.get(0), "첫 번째 부분은 '1'이어야 합니다.");
         assertEquals("2", result.get(1), "두 번째 부분은 '2'이어야 합니다.");
         assertEquals("3", result.get(2), "세 번째 부분은 '3'이어야 합니다.");
+        assertEquals("1;2,3",processedInput, "커스텀 구분자가 있을 경우 문자열에서 제외해야 합니다.");
     }
 }

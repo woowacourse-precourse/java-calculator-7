@@ -18,19 +18,10 @@ class SeparatorManagerTest {
     }
 
     @Test
-    void shouldAddCustomSeparatorFromInput() {
-        SeparatorManager manager = new SeparatorManager();
-        manager.addCustomSeparator("//;\n1;2;3");
-
-        // 커스텀 구분자가 제대로 추가되었는지 확인
-        List<String> separators = manager.getSeparators();
-        assertTrue(separators.contains(";"), "커스텀 구분자 세미콜론(;)이 구분자 리스트에 있어야 합니다.");
-    }
-
-    @Test
     void shouldReturnSeparatorsIncludingCustomSeparator() {
+        String input = "//;\n1;2;3";
         SeparatorManager manager = new SeparatorManager();
-        manager.addCustomSeparator("//;\n1;2;3");
+        manager.addCustomSeparatorAndTrim(input);
 
         List<String> separators = manager.getSeparators();
 
@@ -44,7 +35,7 @@ class SeparatorManagerTest {
     @Test
     void shouldNotAddCustomSeparatorWhenNotPresentInInput() {
         SeparatorManager manager = new SeparatorManager();
-        manager.addCustomSeparator("1,2:3");
+        manager.addCustomSeparatorAndTrim("1,2:3");
 
         // 커스텀 구분자가 없는 경우 기본 구분자만 있어야 함
         List<String> separators = manager.getSeparators();
