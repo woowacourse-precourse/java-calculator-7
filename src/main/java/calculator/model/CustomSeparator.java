@@ -19,7 +19,7 @@ public class CustomSeparator {
         String calculatePart = separateCalculatePart(input);
 
         String numbers = customSeparators.stream()
-                .reduce(input, (result, customSeparator) -> result.replaceAll(customSeparator, " "));
+                .reduce(calculatePart, (result, customSeparator) -> result.replaceAll(customSeparator, " "));
 
         return Arrays.stream(numbers.split(" "))
                 .map(number -> number.isEmpty() ? "0" : number)
