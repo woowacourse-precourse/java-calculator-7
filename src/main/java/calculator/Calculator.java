@@ -1,7 +1,9 @@
 package calculator;
 
+import java.util.Vector;
+
 public class Calculator {
-    public static int getSum(int[] numbers) {
+    public int getSum(Vector<Integer> numbers) {
         int sum = 0;
         for (int num : numbers) {
             sum += num;

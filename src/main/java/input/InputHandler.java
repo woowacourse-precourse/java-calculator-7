@@ -1,5 +1,6 @@
 package input;
 
+import calculator.Calculator;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.Vector;
 import java.util.regex.Matcher;
@@ -20,7 +21,7 @@ public class InputHandler {
     }
 
     public void ensureCustomSeparator() {
-        String regExp = "^//(.*?)\\n";
+        String regExp = "^//(.)\\\\n";
         Pattern pattern = Pattern.compile(regExp);
 
         Matcher matcher = pattern.matcher(inputString);
@@ -39,7 +40,7 @@ public class InputHandler {
 
         // 커스텀 구분자 추가 하는 부분 제거.
         if (customSeparator != null) {
-            String targetToDelete = "^//" + customSeparator + "\\n";
+            String targetToDelete = "^//" + customSeparator + "\\\\n";
             target = target.replaceFirst(targetToDelete, "");
         }
 
@@ -51,11 +52,17 @@ public class InputHandler {
                 extractedNumbers.add(extractedNumber);
 
             } catch (IllegalArgumentException e) {
+                System.out.println(ext);
                 throw new IllegalArgumentException();
             }
         }
+    }
 
+    public void printResult() {
+        Calculator calculator = new Calculator();
+        int result = calculator.getSum(extractedNumbers);
 
+        System.out.println("결과 : " + result);
     }
 
 
