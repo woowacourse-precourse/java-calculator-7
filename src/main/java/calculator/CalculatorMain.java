@@ -14,7 +14,8 @@ public class CalculatorMain {
     public void startCalculator() {
         setInputContent();
         ContentInspector contentInspector = new DefaultInspector(inputContent);
-        ContentParser contentParser = new ContentParser(contentInspector.getDelimiterGroup(), inputContent);
+        String parsingDelimiter = contentInspector.getDelimiterGroup();
+        ContentParser contentParser = new ContentParser(parsingDelimiter, inputContent);
         parsedContent = contentParser.getParsedContent();
         Calculation();
         getCalculateResult();
