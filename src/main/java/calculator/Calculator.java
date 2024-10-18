@@ -1,10 +1,12 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.HashSet;
 
 public class Calculator {
 
     private String equation;
+    private String delimiters;
     private String customDelimiter;
     private final String customDelimiterStart;
     private final String customDelimiterEnd;
@@ -42,8 +44,25 @@ public class Calculator {
         }
     }
 
+    private void parseDelimiter() {
+        HashSet<Character> delimiterSet = new HashSet<>();
+        delimiterSet.add(',');
+        delimiterSet.add(':');
+
+        for (char c : customDelimiter.toCharArray()) {
+            delimiterSet.add(c);
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (char c : delimiterSet) {
+            sb.append(c);
+        }
+        delimiters = sb.toString();
+    }
+
     public void operate() {
         equation = readFromConsole();
         separateCustomDelimiter();
+        parseDelimiter();
     }
 }
