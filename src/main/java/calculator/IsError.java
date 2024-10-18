@@ -11,4 +11,9 @@ public class IsError {
         else
             throw new IllegalArgumentException("잘못된 문자열이 입력되었습니다.");
     }
+
+    public void checkError(boolean unfinished) {
+        if(unfinished) throw new IllegalArgumentException("잘못된 문자열이 입력되었습니다.");
+        else return;
+    }
 }

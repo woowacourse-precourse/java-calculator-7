@@ -6,6 +6,7 @@ public class Divider {
     List<Character> divider;
     List<Character> problemMatcher;
     boolean slashstarted;
+    boolean backslashstarted;
     boolean append;
 
     public Divider() {
@@ -15,6 +16,7 @@ public class Divider {
         problemMatcher = new ArrayList<Character>();
 
         slashstarted = false;
+        backslashstarted = false;
         append = false;
     }
 
@@ -28,8 +30,12 @@ public class Divider {
         else if(c.equals('/') && slashstarted) {
             append = true;
         }
-        else if(c.equals('n') && slashstarted) {
+        else if(c.equals('\\') && slashstarted) {
+            backslashstarted = true;
+        }
+        else if(c.equals('n') && backslashstarted) {
             slashstarted = false;
+            backslashstarted = false;
             append = false;
         }
         else if(append) {
@@ -45,5 +51,9 @@ public class Divider {
 
     public List<Character> getProblemMatcher() {
         return problemMatcher;
+    }
+    public boolean isSlashstarted() {
+        if(!slashstarted && !backslashstarted && !append) return false;
+        else return true;
     }
 }

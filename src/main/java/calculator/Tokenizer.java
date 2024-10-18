@@ -31,6 +31,7 @@ public class Tokenizer {
         numberlist.push();
 
         isError.checkError(divider.getProblemMatcher());
+        isError.checkError(divider.isSlashstarted());
 
         numbers = numberlist.getNumbers();
         return numbers;
