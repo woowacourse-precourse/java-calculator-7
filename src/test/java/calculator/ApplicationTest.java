@@ -76,8 +76,8 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자에_빈문자_사용() {
         assertSimpleTest(() -> {
-            run("//\\n123");
-            assertThat(output()).contains("결과 : 6");
+            assertThatThrownBy(() -> runException("//\\n1,2,3"))
+                    .isInstanceOf(IllegalArgumentException.class);
         });
     }
 
