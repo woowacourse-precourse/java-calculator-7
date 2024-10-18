@@ -26,11 +26,10 @@ class DefaultDelimiterValidationTest extends NsTest {
     @Test
     void 기본_구분자_성공_테스트3() {
         assertSimpleTest(()-> {
-            run("");
+            run("\n");
             assertThat(output()).contains("결과 : 0");
         });
     }
-
 
     @Override
     protected void runMain() {
