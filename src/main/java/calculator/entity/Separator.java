@@ -18,7 +18,7 @@ public class Separator {
             throw new IllegalArgumentException("Separator should not be comma or colon");
         }
 
-        if (separator.length() > 2) {
+        if (separator.length() >= 2) {
             throw new IllegalArgumentException("Separator should be a single character");
         }
 

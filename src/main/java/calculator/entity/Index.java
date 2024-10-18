@@ -1,9 +1,9 @@
 package calculator.entity;
 
-import static calculator.utils.Constants.CUSTOM_SEPARATOR_END_IDX;
-import static calculator.utils.Constants.CUSTOM_SEPARATOR_IDX;
 import static calculator.utils.Constants.CUSTOM_DESIGNATOR_END;
 import static calculator.utils.Constants.CUSTOM_DESIGNATOR_START;
+import static calculator.utils.Constants.CUSTOM_SEPARATOR_END_IDX;
+import static calculator.utils.Constants.CUSTOM_SEPARATOR_IDX;
 
 import java.util.Objects;
 
@@ -65,19 +65,20 @@ public class Index implements Comparable<Index> {
 
     @Override
     public int compareTo(Index compareIdx) {
-        return Integer.compare(this.value, compareIdx.value);
+        Integer compareValue = compareIdx.value;
+        return Integer.compare(value, compareValue);
     }
 
-    protected boolean isStartCustomSep(String value) {
-        return value.startsWith(CUSTOM_DESIGNATOR_START, this.value);
+    protected boolean isStartCustomSep(String str) {
+        return str.startsWith(CUSTOM_DESIGNATOR_START, value);
     }
 
-    protected boolean isEndCustomSep(String value) {
-        return value.startsWith(CUSTOM_DESIGNATOR_END, this.value + CUSTOM_SEPARATOR_END_IDX.value);
+    protected boolean isEndCustomSep(String str) {
+        return str.startsWith(CUSTOM_DESIGNATOR_END, value + CUSTOM_SEPARATOR_END_IDX.value);
     }
 
-    protected String oneLetter(String value) {
-        char charLetter = value.charAt(this.value);
+    protected String oneLetter(String str) {
+        char charLetter = str.charAt(this.value);
         return String.valueOf(charLetter);
     }
 

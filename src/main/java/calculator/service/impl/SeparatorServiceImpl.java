@@ -78,7 +78,6 @@ public class SeparatorServiceImpl implements SeparatorService {
 
     @Override
     public NumList separateNum(RefinedInput refinedInput, RegexStr regexStr) {
-        System.out.println(refinedInput);
         return refinedInput.toNumList(regexStr);
     }
 
