@@ -22,7 +22,7 @@ public class InputValidator {
     }
 
     private void validateInputWithoutDelimiter(String input) {
-        String NUMBER_REGEXP = "^\\d*$";
+        String NUMBER_REGEXP = "^[\\d].*";
         if (!input.startsWith(CUSTOM_START) && !Pattern.matches(NUMBER_REGEXP, input)) {
             ExceptionMessage exceptionMessage = ExceptionMessage.INVALID_INPUT;
             throw new IllegalArgumentException(exceptionMessage.getMessage());
