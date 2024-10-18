@@ -30,12 +30,20 @@
 
 - Calculator (계산기)
     - [X] 계산 결과값을 출력
+- Validator (유효성 검사기)
+    - [ ] 구분자가 하나의 문자가 아니면 IllegalArgumentException을 발생
+    - [ ] 잘못된 커스텀 구분자 형식이면 IllegalArgumentException을 발생
+    - [ ] 숫자로 변활될 수 없는 값이 있으면 IllegalArgumentException을 발생
+    - [ ] 입력 문자열이 비어 있으면 IllegalArgumentException을 발생
+    - [ ] 구분자 리스트가 비어 있으면 IllegalArgumentException을 발생
+    - [ ] 음수가 사용되었을 때 IllegalArgumentException을 발생
 - DelimiterManager (구분자 매니저)
     - [X] "//"와 "\n" 사이에 위치하는 문자를 커스텀 구분자로 등록
     - [X] 커스텀 구분자로 설정하는 문자열이 "//" "구분자 문자열" "\n"의 순서가 아니게 입력됐다면 IllegalArgumentException을 발생
 - StringSplitter (문자열 분할기)
     - [ ] 구분자를 기준으로 문자열 분리
     - [ ] 구분자와 커스텀 문자열을 등록하는 문자열 이외의 문자열이 입력됐다면 IllegalArgumentException을 발생
+    - [ ] 구분자로 등록되지 않았는데, '-'가 들어오면 IllegalArgumentException을 발생
 
 ### View
 
