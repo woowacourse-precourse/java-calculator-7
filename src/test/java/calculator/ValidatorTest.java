@@ -28,4 +28,11 @@ public class ValidatorTest {
         assertThatThrownBy(() -> validator.validateDelimiter(value))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 구분자_중복될때_예외처리(){
+        String value = "//,\n1,2,3";
+        assertThatThrownBy(() -> validator.validateDelimiter(value))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
