@@ -6,6 +6,7 @@ import static calculator.Constant.CUSTOM_DELIMITER_END;
 import static calculator.Constant.CUSTOM_DELIMITER_START;
 import static calculator.Constant.INPUT_GUIDE;
 import static calculator.Constant.OUTPUT_RESULT;
+import static calculator.Constant.REGEX_PIPE_OPERATOR;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
@@ -41,7 +42,7 @@ public class Application {
         String delimiterRegex = Arrays.stream(delimiter)
                 .filter(Objects::nonNull)
                 .map(Pattern::quote)
-                .reduce((d1, d2) -> d1 + "|" + d2)
+                .reduce((d1, d2) -> d1 + REGEX_PIPE_OPERATOR + d2)
                 .orElse("");
 
         // 문자열이 빈 경우 0으로 처리

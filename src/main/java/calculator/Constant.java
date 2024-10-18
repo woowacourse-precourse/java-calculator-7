@@ -13,4 +13,6 @@ public class Constant {
     // 커스텀 구분자 지정
     public static final String CUSTOM_DELIMITER_START = "//";
     public static final String CUSTOM_DELIMITER_END = "\\n";
+
+    public static final String REGEX_PIPE_OPERATOR = "|";
 }
