@@ -51,7 +51,7 @@ public class Calculator {
         if(CUSTOM_DELIMITER.equals("\\")) CUSTOM_DELIMITER += "\\";
 
         if(!isValidLength()) throw new IllegalArgumentException("[ERROR] 한 글자의 문자만 구분자로 지정할 수 있습니다.");
-        if(isContainedDigit()) throw new IllegalArgumentException("[ERROR] 숫자를 포함한 구분자는 지정할 수 없습니다.");
+        if(isContainedDigit()) throw new IllegalArgumentException("[ERROR] 숫자를 구분자로 지정할 수 없습니다.");
     }
 
     private static boolean isValidLength() {
@@ -66,7 +66,9 @@ public class Calculator {
     }
 
     private static boolean isContainedDigit() {
-        return CUSTOM_DELIMITER.matches(".*\\d.*");
+        char c = CUSTOM_DELIMITER.charAt(0);
+
+        return Character.isDigit(c);
     }
 
     private static boolean hasCustomDelimiter(final String input) {
