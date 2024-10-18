@@ -30,7 +30,7 @@ public class CustomInputValidator implements InputValidator{
     }
 
     char delimiter = input.charAt(2);
-    if(Character.isDigit(delimiter) || delimiter == '.' || delimiter == 'e' || delimiter == 'E'){
+    if(Character.isDigit(delimiter) || delimiter == '.' || delimiter == 'e' || delimiter == 'E' || delimiter == '-'){
       throw new IllegalArgumentException(ErrorCode.INVALID_DELIMITER_ERROR.toString());
     }
     return delimiter;
