@@ -28,6 +28,10 @@ public class Calculator {
         String[] ar=input.split(SEPERATOR_REGEX);
 
         for (String num:ar){
+            //공백이면 continue
+            if(isSpace(num)){
+                continue;
+            }
             isNumber(num);
             result+=Integer.parseInt(num);
 
@@ -35,6 +39,10 @@ public class Calculator {
 
         return result;
 
+    }
+
+    private boolean isSpace(String num) {
+        return num.equals("");
     }
 
     private static void isNumber(String num) {
