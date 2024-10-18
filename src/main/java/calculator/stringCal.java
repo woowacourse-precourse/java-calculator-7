@@ -35,7 +35,7 @@ public class stringCal {
             return reverseStr(result);
         }
         //second가 first보다 자릿수가 더 높은 경우
-        if(first.length() < second.length()){
+        if(first.length() == min_val){
             for(int i = first.length(); i < second.length(); i++){
                 int temp = carry + Character.getNumericValue(second.charAt(i));
                 carry = temp / 10;
