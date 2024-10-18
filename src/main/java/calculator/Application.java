@@ -10,8 +10,8 @@ public class Application {
         OutputHandler.printInputPrompt();
         String input = InputHandler.input();
 
-        NumberExtractor extractor = new NumberExtractor(input);
-        int resultSum = extractor.extractNumber();
+        Calculator calculator = new Calculator(input);
+        int resultSum = calculator.sum();
 
         OutputHandler.printOutputResult(resultSum);
 

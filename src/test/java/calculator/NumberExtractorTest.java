@@ -8,16 +8,16 @@ import org.junit.jupiter.api.Test;
 class NumberExtractorTest {
 
     @Test
-    @DisplayName("문자열 추출 테스트")
+    @DisplayName("default 문자열 추출 테스트")
     void extractNumber() {
         // given
         String text = "1:22,32:4";
 
         // when
-        NumberExtractor extractor = new NumberExtractor(text);
+        NumberExtractor extractor = new NumberExtractor();
 
         // then
-        assertThat(extractor.extractNumber()).isEqualTo(59);
+        assertThat(extractor.defaultDelimiterExtractNumber(text)).isEqualTo(59);
     }
 
     @Test
@@ -27,9 +27,9 @@ class NumberExtractorTest {
         String text = "";
 
         // when
-        NumberExtractor extractor = new NumberExtractor(text);
+        NumberExtractor extractor = new NumberExtractor();
 
         // then
-        assertThat(extractor.extractNumber()).isEqualTo(59);
+        assertThat(extractor.defaultDelimiterExtractNumber(text)).isEqualTo(0);
     }
 }
