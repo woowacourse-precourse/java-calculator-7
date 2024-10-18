@@ -33,8 +33,7 @@ public class InputValidator {
     }
 
     private void validateNatureNumber(CustomDelimiter formula){
-        String numbers = formula.getFormula();
-        numbers = formula.SplitDelimiter();
+        String numbers = formula.getNumbersPart();
         if(numbers.isEmpty()){
             throw new IllegalArgumentException(NON_NATURAL_NUMBER);
         }
