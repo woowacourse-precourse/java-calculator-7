@@ -13,15 +13,34 @@ public class Application {
 
         try {
 
-            // 문자열 입력
-            System.out.println("문자열을 입력하세요: ");
+            String input = scanner.nextLine();
+            String[] delimiters = {",", ":"}; // 기본 구문자 설정
 
-            String input = scanner.next();
+            // //로 문장이 시작하는 지 체크
+            if (input.startsWith("//")) {
 
+                // \n의 위치 찾기
+                int endpointIndex = input.indexOf("\\n");
+
+                // \n을 못찾았거나 각 단어 사이의 문자가 있는 지 체크
+                if (endpointIndex != -1 && endpointIndex > 2) {
+                    // // 뒤에서 \n 이전까지의 문자열을 구분자로 사용
+                    String customDelimiters = input.substring(2, endpointIndex);
+
+                    delimiters = customDelimiters.split("");  // 개별 문자를 구분자로 사용
+
+                    // 입력 문자열에서 실제 값만 남기기 (구분자 정의 부분 제외)
+                    input = input.substring(endpointIndex + 2);
+                }
+
+            }
+
+            //구분자를 |를 기준으로 합침
+            String regex = String.join("|", delimiters);
             // 구분자를 기준으로 문자열을 자름
-            String[] numbers = input.split(",|:");
-
+            String[] numbers = input.split(regex);
             // 분리된 문자열을 숫자로 변환하여 출력
+
             for (String numberStr : numbers) {
                 try {
                     int number = Integer.parseInt(numberStr.trim());  // 숫자로 변환
@@ -32,14 +51,11 @@ public class Application {
                     System.exit(1);
                 }
             }
-            // 문자열 출력
-            System.out.println("입력한 문자열: " + input);
 
             // 정답 출력
-            System.out.println("정답: " + answer);
+            System.out.println("결과 : " + answer);
 
             scanner.close();
-
         } catch (IllegalArgumentException e) {
             System.err.println("오류 : " + e.getMessage());
             System.exit(1);
