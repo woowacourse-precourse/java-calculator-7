@@ -26,4 +26,21 @@ class InputStringTest {
         });
     }
 
+    @DisplayName("문자열이 커스텀 구분자를 지정했다.")
+    @Test
+    void test3() {
+        assertSimpleTest(() -> {
+            InputString inputString = new InputString("//;\\n1;3;4");
+            assertThat(inputString.containsCustomSeperator()).isTrue();
+        });
+    }
+
+    @DisplayName("문자열이 커스텀 구분자를 지정하지 않았다.")
+    @Test
+    void test4() {
+        assertSimpleTest(() -> {
+            InputString inputString = new InputString("1,3:2");
+            assertThat(inputString.containsCustomSeperator()).isFalse();
+        });
+    }
 }
