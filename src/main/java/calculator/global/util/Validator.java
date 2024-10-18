@@ -13,4 +13,15 @@ public class Validator {
         }
     }
 
+    /**
+     * startIndex 는 찾았지만 endIndex 를 찾지 못한 경우
+     *
+     * @param startIndex CustomIndex 의 시작 index
+     * @param endIndex   CustomIndex 의 끝 index
+     */
+    public static void validateCustomIndex(int startIndex, int endIndex) {
+        if (startIndex != -1 && endIndex == -1) {
+            throw new IllegalArgumentException(CUSTOM_SEPARATOR_INDEX_ERROR_MESSAGE);
+        }
+    }
 }
