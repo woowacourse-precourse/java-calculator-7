@@ -11,7 +11,7 @@ public class Utils {
         return input;
     }
 
-    public static void printResult(int data) {
+    public static void printResult(long data) {
         System.out.printf("결과 : %d", data);
     }
 }

@@ -60,8 +60,8 @@ public class Machine {
         return string.split(regex);
     }
 
-    private static int sum(String[] strArray) {
-        int result = 0;
+    private static long sum(String[] strArray) {
+        long result = 0L;
 
         for (String str : strArray) {
             // 빈 문자열은 0으로 취급
@@ -73,8 +73,8 @@ public class Machine {
                 throw new IllegalArgumentException("양수가 아닌 형태의 문자열");
             }
 
-            int num;
-            num = Integer.parseInt(str);
+            long num;
+            num = Long.parseLong(str);
             result += num;
         }
         return result;
@@ -85,7 +85,7 @@ public class Machine {
         setDelimiter(this.string);
 
         String[] temp = splitString(this.string);
-        int result = sum(temp);
+        long result = sum(temp);
 
         printResult(result);
     }
