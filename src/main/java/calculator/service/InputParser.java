@@ -1,4 +1,4 @@
-package calculator.service.util;
+package calculator.service;
 
 import calculator.domain.exception.CalculatorException;
 import calculator.domain.exception.CalculatorErrorMessage;
@@ -6,8 +6,8 @@ import calculator.dto.request.CalculatorRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class InputParser {
-    public static List<Integer> parseByDelimiters(CalculatorRequest request) {
+final class InputParser {
+    static List<Integer> parseByDelimiters(CalculatorRequest request) {
         String targetInput = request.targetInput();
         String delimiters = request.delimiters();
 
