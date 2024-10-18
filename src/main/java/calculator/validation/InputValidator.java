@@ -1,4 +1,4 @@
-package calculator.model;
+package calculator.validation;
 
 import java.util.Arrays;
 import java.util.List;

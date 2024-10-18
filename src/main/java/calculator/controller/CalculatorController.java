@@ -4,7 +4,7 @@ import java.util.List;
 
 import calculator.model.Calculator;
 import calculator.model.InputParser;
-import calculator.model.InputValidator;
+import calculator.validation.InputValidator;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
