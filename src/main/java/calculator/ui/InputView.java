@@ -1,6 +1,9 @@
 package calculator.ui;
 
+import calculator.domain.Result;
 import calculator.util.Util;
+
+import java.util.List;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
@@ -12,8 +15,9 @@ public class InputView {
         this.util = util;
     }
 
-    public void readText(){
+    public Result readText(){
         String text = readLine();
-        util.extract(text);
+        List<Integer> numbers = util.extract(text);
+        return new Result(numbers);
     }
 }
