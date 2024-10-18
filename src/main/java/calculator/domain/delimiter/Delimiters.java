@@ -1,5 +1,8 @@
 package calculator.domain.delimiter;
 
+import calculator.exception.BusinessException;
+import calculator.exception.CalculatorExceptionMessage;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -23,17 +26,29 @@ public class Delimiters {
     }
 
     public List<String> getAllDelimiters(final String input) {
-        findCustomDelimiter(input).ifPresent(delimiters::add);
+        final Optional<String> customDelimiter = findCustomDelimiter(input);
+
+        customDelimiter.ifPresent(delimiter -> {
+            validateSingleDelimiter(delimiter);
+            delimiters.add(delimiter);
+        });
 
         return delimiters;
     }
 
-    private Optional<String> findCustomDelimiter(final String input) {
+    public Optional<String> findCustomDelimiter(final String input) {
         if (hasCustomDelimiter(input)) {
-            return Optional.of(input.substring(BEGIN_INDEX, input.indexOf(CUSTOM_DELIMITER_END_SEPARATOR)));
+            final int endIndex = input.indexOf(CUSTOM_DELIMITER_END_SEPARATOR);
+            return Optional.of(input.substring(BEGIN_INDEX, endIndex));
         }
 
         return Optional.empty();
+    }
+
+    private void validateSingleDelimiter(final String delimiter) {
+        if (delimiter.length() != 1) {
+            throw new BusinessException(CalculatorExceptionMessage.MULTIPLE_CUSTOM_DELIMITERS_EXCEPTION);
+        }
     }
 
     public boolean hasCustomDelimiter(final String input) {

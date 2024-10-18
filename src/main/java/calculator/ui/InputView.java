@@ -11,6 +11,6 @@ public class InputView {
 
     public String input() {
         System.out.println(INPUT_MESSAGE);
-        return Console.readLine();
+        return Console.readLine().replace("\\n","\n");
     }
 }

@@ -10,11 +10,11 @@ public class ViewManager {
         this.outputView = new OutputView();
     }
 
-    public String userInput() {
+    public String getInput() {
         return inputView.input();
     }
 
-    public void output(int result) {
+    public void printOutput(int result) {
         outputView.output(result);
     }
 }

@@ -1,13 +1,14 @@
-package calculator.domain;
+package calculator.domain.delimiter;
 
-import calculator.domain.delimiter.Delimiters;
+import calculator.exception.BusinessException;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class DelimiterTest {
+public class DelimitersTest {
 
     private final Delimiters delimiters = new Delimiters();
 
@@ -45,5 +46,36 @@ public class DelimiterTest {
 
         // then
         assertThat(result).isTrue();
+    }
+
+    @Test
+    void 커스텀_구분자가_2개이상이라면_오류() {
+        // given
+        String input = "//-;\n1-2-3";
+
+        // when & then
+        assertThatThrownBy(() -> {
+            delimiters.getAllDelimiters(input);
+        }).isInstanceOf(BusinessException.class);
+    }
+
+    @Test
+    void 커스텀_구분자가_비어있는경우_오류() {
+        // given
+        String input = "//\n1-2-3";
+
+        // when & then
+        assertThatThrownBy(() -> {
+            delimiters.getAllDelimiters(input);
+        }).isInstanceOf(BusinessException.class);
+    }
+
+    @Test
+    void 커스텀_구분자가_비어있는경우_오류2() {
+        // given
+        String input = "//-\n1-2-3";
+
+        // when & then
+        delimiters.getAllDelimiters(input);
     }
 }

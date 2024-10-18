@@ -15,11 +15,11 @@ public class Application {
 
         ViewManager viewManager = new ViewManager();
 
-        String input = viewManager.userInput();
+        String input = viewManager.getInput();
 
         int result = stringAddCalculator.splitAndSum(input);
 
-        viewManager.output(result);
+        viewManager.printOutput(result);
     }
 
 }
