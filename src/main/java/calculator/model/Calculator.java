@@ -20,6 +20,7 @@ public class Calculator {
 
     public void parseNumbers(){
         if(validateCustom()) customParse();
+        else normalParse();
     }
 
     public boolean validateCustom(){
@@ -30,6 +31,10 @@ public class Calculator {
         String separator = String.valueOf(this.str.charAt(2));
         this.str = this.str.substring(5);
         this.strArr = this.str.split(separator);
+    }
+
+    public void normalParse(){
+        this.strArr = this.str.split("[,;]");
     }
 
 }
