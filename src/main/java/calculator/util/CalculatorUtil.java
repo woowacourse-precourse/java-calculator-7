@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class CalculatorUtil {
     private static final String CUSTOM_DELIMITER_REGEX = "^//(.*?)\\n";
@@ -29,5 +30,15 @@ public class CalculatorUtil {
         }
 
         return delimiters;
+    }
+
+    public static List<Integer> splitByDelimiters(List<String> delimiters, String inputValue) {
+        String combinedDelimiters = delimiters.stream()
+                .map(Pattern::quote)
+                .collect(Collectors.joining("|"));
+
+        return Arrays.stream(inputValue.split(combinedDelimiters))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 }

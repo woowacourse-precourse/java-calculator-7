@@ -3,6 +3,7 @@ package calculator.util;
 import static org.junit.jupiter.api.Assertions.*;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -22,5 +23,22 @@ class CalculatorUtilTest {
         assertTrue(customDelimiterResult.contains("+"));
         assertTrue(customDelimiterResult.contains(":"));
         assertEquals(2, customDelimiterResult.size());
+    }
+
+    @Test
+    void splitByDelimiters() {
+
+        // given
+        List<String> delimiters = new ArrayList<>();
+        delimiters.add(",");
+        delimiters.add(":");
+        delimiters.add("+");
+        delimiters.add("|");
+
+        // when
+        List<Integer> result = CalculatorUtil.splitByDelimiters(delimiters, "1:2:3,4|5|6");
+
+        // then
+        assertEquals(6, result.size());
     }
 }
