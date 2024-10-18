@@ -1,27 +1,15 @@
 package calculator;
 
+import calculator.separator.Separators;
 import java.util.List;
 
 public class Adder {
 
-    public static int add(List<String> inputs) {
-        for (String input : inputs) {
-            validateInput(input);
-        }
+    public static NumericString add(String input, Separators separators) {
+        List<String> numericStrings = separators.split(input);
 
-        return inputs.stream()
-                .map(Integer::parseInt)
-                .reduce(0, Integer::sum);
-    }
-
-    private static void validateInput(String input) {
-        try {
-            int num = Integer.parseInt(input.trim());
-            if (num <= 0) {
-                throw new IllegalArgumentException("양수만 계산 가능합니다.");
-            }
-        } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException("숫자만 계산 가능합니다.", exception);
-        }
+        return numericStrings.stream()
+                .map((str) -> NumericString.of(input, 1))
+                .reduce(NumericString.ZERO, NumericString::add);
     }
 }
