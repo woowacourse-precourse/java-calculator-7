@@ -9,9 +9,19 @@ public class Application {
         // 1) 문자열 입력 및 처리
         String input = Console.readLine();
 
+    }
+
+    public static int calculator(String input) {
         // 1.1) 입력 문자열이 비어있을 경우 0을 출력
         if (input.isEmpty()) {
-            System.out.println("결과 : 0");
+            return 0;
         }
+
+        // 2) 구분자를 기준으로 문자열 분리
+        String delimiter = ",|:";
+        String[] tokens = input.split(delimiter);
+
+        return 0;
     }
+
 }
