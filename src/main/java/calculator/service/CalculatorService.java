@@ -11,14 +11,12 @@ public class CalculatorService {
     }
 
     public List<String> setDelimiter(String inputString) {
-        if (!isCustomDelimiter(inputString)) {
-            return List.of(",", ":");
+        if (isCustomDelimiter(inputString)) {
+            String customDelimiter = parseCustomDelimiter(inputString);
+            validCustomDelimiter(customDelimiter);
+            return List.of(",", ":", customDelimiter);
         }
-
-        String customDelimiter = parseCustomDelimiter(inputString);
-        validCustomDelimiter(customDelimiter);
-
-        return List.of(",", ":", customDelimiter);
+        return List.of(",", ":");
     }
 
     public void validCustomDelimiter(String delimiter) {
