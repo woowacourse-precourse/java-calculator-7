@@ -6,7 +6,11 @@ public class Accumulator {
         int sum = 0;
 
         for (String s : input) {
-            sum += Integer.parseInt(s.trim());
+            if (s.isEmpty()) {
+                sum += 0;
+                continue;
+            }
+            sum += Integer.parseInt(s);
         }
 
         return sum;
