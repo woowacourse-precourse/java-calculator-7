@@ -3,6 +3,8 @@ package calculator.model;
 import calculator.util.ExtractionUtil;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Delimiters {
     private final Set<Character> delimiters;
@@ -27,5 +29,13 @@ public class Delimiters {
             throw new IllegalArgumentException("구분자를 중복해서 지정할 수 없습니다.");
         }
         return new Delimiters(delimiters);
+    }
+
+    public String buildSplitRegex() {
+        Set<String> stringSet = delimiters.stream()
+                .map(String::valueOf)
+                .map(Pattern::quote)
+                .collect(Collectors.toSet());
+        return String.join("|", stringSet);
     }
 }
