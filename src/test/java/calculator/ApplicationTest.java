@@ -66,6 +66,22 @@ class ApplicationTest extends NsTest {
                 .isInstanceOf(IllegalArgumentException.class));
     }
 
+    @Test
+    void 실수_입력_테스트() {
+        assertSimpleTest(() -> {
+            run("1.1,2.2,3.3");
+            assertThat(output()).contains("결과 : 6.6");
+        });
+    }
+
+    @Test
+    void 과학적_표기법_테스트() {
+        assertSimpleTest(() -> {
+            run("1e3,2e3,3e3");
+            assertThat(output()).contains("결과 : 6000");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
