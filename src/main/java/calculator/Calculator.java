@@ -22,15 +22,15 @@ public class Calculator {
 
         // 커스텀 구분자를 사용하는지 확인
         int delimiterStartIndex = 2;
-        int delimiterEndIndex = input.indexOf("\n");
+        int delimiterEndIndex = input.indexOf("\\n");
 
         while (input.startsWith("//")) {
             if (delimiterEndIndex == -1) {
                 throw new IllegalArgumentException();
             }
             delimiter += "|" + input.substring(delimiterStartIndex, delimiterEndIndex);
-            input = input.substring(delimiterEndIndex + 1);
-            delimiterEndIndex = input.indexOf("\n");
+            input = input.substring(delimiterEndIndex + 2);
+            delimiterEndIndex = input.indexOf("\\n");
         }
 
         String[] snumbers = input.split(delimiter);  // 지정된 구분자로 문자열 분리
