@@ -7,14 +7,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Extractor {
-    public Matcher divideDelimiterAndNumber(String calculationValue) {
+    private Matcher divideDelimiterAndNumber(String calculationValue) {
         final String START_POINT_DELIMITER = "//";
         final String END_POINT_DELIMITER = "\n";
         Pattern pattern = Pattern.compile(START_POINT_DELIMITER + "(.*)" + END_POINT_DELIMITER + "(.*)");
         return pattern.matcher(calculationValue);
     }
 
-    public ExtractorDto extractDelimiterAndNumber(String calculationValue) {
+    private ExtractorDto extractDelimiterAndNumber(String calculationValue) {
         final int POSITION_DELIMITER = 1;
         final int POSITION_NUMBERS = 2;
         ExtractorDto extractorDto = new ExtractorDto();
@@ -34,9 +34,10 @@ public class Extractor {
         return extractorDto;
     }
 
-    public Numbers extractValues(ExtractorDto extractorDto) {
-        List<String> delimiters = extractorDto.getDelimiters();
+    public Numbers extractValues(String calculationValue) {
+        ExtractorDto extractorDto = extractDelimiterAndNumber(calculationValue);
 
+        List<String> delimiters = extractorDto.getDelimiters();
         String appointedValues = extractorDto.getValues();
         String appointedDelimiters = String.join("|", delimiters);
         String[] valuesBeforeExtract = appointedValues.split(appointedDelimiters);
