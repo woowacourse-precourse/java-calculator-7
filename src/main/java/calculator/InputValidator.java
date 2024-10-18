@@ -12,17 +12,20 @@ public class InputValidator {
     }
 
     // 음수값 검증
-    public boolean validateNegative(List<Integer> numbers) {
+    public void validateNegative(List<Integer> numbers) {
         for (int number : numbers) {
             if (number < 0) {
-                return true;
+                throw new IllegalArgumentException("음수 값은 허용되지 않습니다.:" + number);
             }
         }
-        return false;
     }
 
     // 숫자가 아닌 값 검증
     public void validateNonNumeric(String input) {
-        //
+        try {
+            Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("유효하지 않은 값이 포함되어 있습니다.");
+        }
     }
 }
