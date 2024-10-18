@@ -4,6 +4,8 @@ import calculator.common.exception.ExceptionFactory;
 import calculator.delimiter.domain.Delimiters;
 import calculator.delimiter.factory.DefaultDelimiterFactory;
 import calculator.delimiter.factory.DelimiterFactory;
+import calculator.delimiter.pattern.CustomDelimiterPatternMatcher;
+import calculator.delimiter.pattern.DefaultCustomDelimiterPatternMatcher;
 import calculator.delimiter.service.CustomDelimiterService;
 import calculator.delimiter.validator.CustomDelimiterValidator;
 import calculator.delimiter.validator.DefaultCustomDelimiterValidator;
@@ -16,9 +18,10 @@ import static calculator.common.exception.ExceptionType.NOT_DELIMITER;
 
 public class Application {
 
+    private static final CustomDelimiterPatternMatcher customDelimiterPatternMatcher = new DefaultCustomDelimiterPatternMatcher();
     private static final CustomDelimiterValidator customDelimiterValidator = new DefaultCustomDelimiterValidator();
     private static final DelimiterFactory delimiterFactory = new DefaultDelimiterFactory(customDelimiterValidator);
-    private static final CustomDelimiterService customDelimiterService = new CustomDelimiterService(delimiterFactory);
+    private static final CustomDelimiterService customDelimiterService = new CustomDelimiterService(delimiterFactory, customDelimiterPatternMatcher);
 
     public static void main(String[] args) {
 
