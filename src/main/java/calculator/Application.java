@@ -45,12 +45,11 @@ public class Application {
                 throw new IllegalArgumentException("커스텀 구분자 선언 후 '\\n'이 필요합니다.");
             }
 
-            String customDelimiterPart = input.substring(CUSTOM_DELIMITER_START_SIGN_LENGTH, indexOfEndSign);
-            String[] customDelimiters = customDelimiterPart.split(""); // 여러 커스텀 구분자 받는 경우 포함
+            String[] customDelimiters = getCustomDelimiters(input, indexOfEndSign);
 
             appendCustomDelimiters(delimiterPart, customDelimiters);
 
-            numberPart = input.substring(indexOfEndSign + CUSTOM_DELIMITER_END_SIGN_LENGTH);
+            numberPart = getNumberPart(input, indexOfEndSign);
         }
 
         String[] numbers = numberPart.split(delimiterPart.toString());
@@ -66,6 +65,16 @@ public class Application {
         validateNoNegativeNumbers(parsedNumbers); // 음수 있으면 예외 발생 (3.8 예외)
 
         return add(parsedNumbers);
+    }
+
+    private static String getNumberPart(String input, int indexOfEndSign) {
+        return input.substring(indexOfEndSign + CUSTOM_DELIMITER_END_SIGN_LENGTH);
+    }
+
+    private static String[] getCustomDelimiters(String input, int indexOfEndSign) {
+        return input
+                .substring(CUSTOM_DELIMITER_START_SIGN_LENGTH, indexOfEndSign)
+                .split(""); // 여러 커스텀 구분자 받는 경우 포함
     }
 
     private static int[] parseNumbers(String[] numbers) {
