@@ -14,9 +14,15 @@ public class StringParser {
 
             // 커스텀 구분자 입력이 정상적으로 되었는지 확인
             if (delimiterIndex != -1) {
+                String customDelimiter = input.substring(2, delimiterIndex);
+
+                // `\`가 포함된 경우 예외 처리
+                if (customDelimiter.contains("\\")) {
+                    throw new IllegalArgumentException("구분자로 역슬래시(\\)는 사용할 수 없습니다.");
+                }
 
                 // 커스텀 구분자가 2글자 이상일 경우를 가정 -> 정규 표현식 사용
-                delimiter = "[" + input.substring(2, delimiterIndex) + "]";
+                delimiter = "[" + customDelimiter + "]";
 
                 // 기존 방식: \n = 1글자 => Index + 1
                 // 현재 방식: \\n = 2글자 => Index + 2 (escape 문자 고려)
