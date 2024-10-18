@@ -42,6 +42,11 @@ public class UserInput {
         return userInput.substring(2, endIndex);
     }
 
+    public String extractNumbersPart() {
+        int endIndex = userInput.indexOf("\\n");
+        return userInput.substring(endIndex + 2);
+    }
+
 
     public boolean isCustom() {
         return userInput.startsWith("//");
