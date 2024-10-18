@@ -16,12 +16,13 @@ public class InputString {
         return null;
     }
 
-    public String extractCalculationString() {
+    public CalculationString extractCalculationString() {
+        String calculationString = value;
         if (isValueHasCustomDelimiter()) {
-            return value.substring(value.lastIndexOf("\\n") + 2);
+            calculationString = value.substring(value.lastIndexOf("\\n") + 2);
         }
 
-        return value;
+        return new CalculationString(calculationString);
     }
 
     private boolean isValueHasCustomDelimiter() {
