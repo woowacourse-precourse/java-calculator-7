@@ -12,4 +12,10 @@ public class Numbers {
                 .map(Number::new)
                 .forEach(this.elements::add);
     }
+
+    public int sum() {
+        return elements.stream()
+                .mapToInt(Number::getValue)
+                .sum();
+    }
 }

@@ -17,7 +17,11 @@ public class Number {
         String NUMBER_REGEXP = "^\\d*$";
         if (!Pattern.matches(NUMBER_REGEXP, value)) {
             ExceptionMessage exceptionMessage = ExceptionMessage.NOT_INTEGER;
-            throw new IllegalArgumentException(exceptionMessage.toString());
+            throw new IllegalArgumentException(exceptionMessage.getMessage());
         }
+    }
+
+    public int getValue() {
+        return value;
     }
 }
