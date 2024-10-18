@@ -1,7 +1,5 @@
 package calculator;
 
-import java.util.regex.Pattern;
-
 public class StringSplitter {
 
     private final StringValidator stringvalidator;
@@ -23,7 +21,8 @@ public class StringSplitter {
         }
 
         // 구분자를 이용해 문자열을 분리
-        return input.split(delimiter);
+        String[] nums = input.split(delimiter);
+        stringvalidator.validateNumbers(nums);
+        return nums;
     }
 }
-//;\n;1;2

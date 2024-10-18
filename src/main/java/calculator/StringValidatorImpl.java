@@ -37,6 +37,7 @@ public class StringValidatorImpl implements StringValidator {
     }
 
     // 숫자 리스트가 유효한지 확인하는 메서드 (예: 음수 확인)
+    @Override
     public void validateNumbers(String[] numbers) {
         for (String num : numbers) {
             // 공백이 아닌지 체크하고 숫자로 변환 가능하도록 처리

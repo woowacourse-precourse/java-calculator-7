@@ -23,14 +23,12 @@ public class Application {
         // Application에 InputHandler와 ArraySumCalculator 주입
         Application application = new Application(new InputHandler(), sumCalculator);
 
-        // 실행
         application.run();
     }
 
     public void run() {
-        // 사용자 입력 받아서 처리
         String input = inputHandler.UserInput();
-        int result = arraySumCalculator.sumArrayElements(input);  // 배열 요소 합 계산
-        System.out.println("입력된 숫자의 합은: " + result);
+        int result = arraySumCalculator.sumArrayElements(input);
+        System.out.println("결과 : " + result);
     }
 }
