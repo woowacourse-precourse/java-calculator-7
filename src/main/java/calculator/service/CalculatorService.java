@@ -20,6 +20,6 @@ public class CalculatorService {
 
         calculationStringFormatter.resolveCalculationString(inputString);
         calculator.patchDelimeter(calculationStringFormatter.getCustomDelimiter());
-        return calculator.calculate(calculationStringFormatter.getExpression());
+        return calculator.sum(calculationStringFormatter.getExpression());
     }
 }
