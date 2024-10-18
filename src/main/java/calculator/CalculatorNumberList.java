@@ -10,6 +10,8 @@ public class CalculatorNumberList {
     }
 
     public int sum() {
-        return 0;
+        return numbers.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 }
