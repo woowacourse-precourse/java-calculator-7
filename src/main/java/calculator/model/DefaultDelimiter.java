@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 
 public enum DefaultDelimiter {
 
-    DEFAULT_COMMA(","),
-    DEFAULT_COLON(":");
+    COMMA(","),
+    COLON(":");
 
     private final String delimiter;
 
