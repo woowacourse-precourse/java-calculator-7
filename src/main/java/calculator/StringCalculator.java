@@ -1,7 +1,6 @@
 package calculator;
 
 public class StringCalculator {
-
     public int calculate(String input) {
 
         //커스텀 구분자 추출
@@ -25,16 +24,7 @@ public class StringCalculator {
         int ret = 0;
 
         for (String str : parsedCalculateStr) {
-            int num;
-            try {
-                num = Integer.parseInt(str);
-            } catch (NumberFormatException e) {
-                if (!str.equals("")) { //입력 없을 시 0 / 구분자와 구분자 사이 입력이 없을 시는? TODO
-                    throw new IllegalArgumentException("구분자와 양수 이외 다른 문자는 입력x");
-                }
-
-                num = 0;
-            }
+            int num = stringToInteger(str);
 
             if (num < 0) {
                 throw new IllegalArgumentException("양수만 입력");
@@ -44,6 +34,20 @@ public class StringCalculator {
         }
 
         return ret; //TODO
+    }
+
+    private int stringToInteger(String str) {
+        int num;
+        try {
+            num = Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            if (!str.equals("")) { //입력 없을 시 0 / 구분자와 구분자 사이 입력이 없을 시는? TODO
+                throw new IllegalArgumentException("구분자와 양수 이외 다른 문자는 입력x");
+            }
+
+            num = 0;
+        }
+        return num;
     }
 
     private Character extractCustomDelimiter(String input) {
