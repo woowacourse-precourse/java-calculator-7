@@ -31,12 +31,21 @@ public class Calculator {
 
     private static int getAnswer(String[] results) {
         int answer = 0;
-        for (String result : results) {
-            answer += Integer.parseInt(result);
+        try {
+            for (String result : results) {
+                int number = Integer.parseInt(result);
+                if (number <= 0) {
+                    throw new IllegalArgumentException("숫자는 양수만 가능합니다.");
+                }
+                answer += number;
+
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("문자가 아닌 숫자만 입력이 가능합니다.");
         }
+
         return answer;
     }
-
 
 
 }
