@@ -32,7 +32,7 @@ public class Preprocessor {
         return delimeterList;
     }
 
-    public String preprocessString(String input) {
+    public String preprocessCalculationSegment(String input) {
         if (validateDelimeterRequest(input)) {
             return delimeterSegmentProcessor.extractCalculationSegment(input);
         } else {
@@ -40,11 +40,11 @@ public class Preprocessor {
         }
     }
 
-    public void validateInputString(List<String> delimeter, String input){
-        calculationSegmentProcessor.findNoneDelimeterString(delimeter,input);
+    public void validateInputString(List<String> delimeter, String input) {
+        calculationSegmentProcessor.findNoneDelimeterString(delimeter, input);
     }
 
-    public List<String> extractSumNumbers(List<String> delimeterList, String input){
-        return calculationSegmentProcessor.extractNumbers(delimeterList,input);
+    public List<String> extractSumNumbers(List<String> delimeterList, String input) {
+        return calculationSegmentProcessor.extractNumbers(delimeterList, input);
     }
 }

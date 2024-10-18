@@ -43,16 +43,16 @@ class PreprocessorTest {
 
     @Test
     @DisplayName("preprocessString 커스텀 요청 있는 경우")
-    void preprocessString_with_customDelimeter() {
+    void preprocessCalculationSegment_with_customDelimeter() {
         String given = "//>\n2,3,4";
-        assertEquals(preprocessor.preprocessString(given), "2,3,4");
+        assertEquals(preprocessor.preprocessCalculationSegment(given), "2,3,4");
     }
 
     @Test
     @DisplayName("preprocessString 커스텀 요청 없는 경우")
-    void preprocessString_without_customDelimeter() {
+    void preprocessCalculationSegment_without_customDelimeter() {
         String given = "//2,3,4";
-        assertEquals(preprocessor.preprocessString(given), "//2,3,4");
+        assertEquals(preprocessor.preprocessCalculationSegment(given), "//2,3,4");
     }
 
 

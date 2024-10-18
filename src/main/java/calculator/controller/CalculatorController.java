@@ -20,7 +20,7 @@ public class CalculatorController {
     public void runCalculator(){
         String input = viewManager.printInputMessage();
         List<String> delimeterList = preprocessor.preprocessDelimeter(input);
-        String preprocessedString = preprocessor.preprocessString(input);
+        String preprocessedString = preprocessor.preprocessCalculationSegment(input);
         preprocessor.validateInputString(delimeterList,preprocessedString);
         Integer answer = numCalculator.calculate(preprocessor.extractSumNumbers(delimeterList,preprocessedString));
         viewManager.printResult(answer);
