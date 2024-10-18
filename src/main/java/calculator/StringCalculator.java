@@ -14,7 +14,7 @@ public class StringCalculator {
         return input == null || input.isEmpty();
     }
     private String[] split(String input) {
-        String[] values =  input.split(",");
+        String[] values =  input.split(",|:");
         return values;
     }
 
