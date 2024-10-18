@@ -14,7 +14,6 @@ public class Application {
         int resultSum = calculator.sum();
 
         OutputHandler.printOutputResult(resultSum);
-
         InputHandler.close();
     }
 }

@@ -5,18 +5,15 @@ public record DelimiterValidator(String input) {
     private static final String FIRST_CUSTOM_DELIMITER = "//";
     private static final String LAST_CUSTOM_DELIMITER = "\\n";
 
-    // 커스텀 구분자 조건
     private boolean isContainsCustomDelimiters() {
         return input.contains(FIRST_CUSTOM_DELIMITER) && input.contains(LAST_CUSTOM_DELIMITER);
     }
 
-    // 커스텀 구분자가 올바른 범위에 있는지
     private boolean isRangeOfCustomDelimiter() {
         return input.startsWith(FIRST_CUSTOM_DELIMITER) &&
             (input.indexOf(FIRST_CUSTOM_DELIMITER) < input.indexOf(LAST_CUSTOM_DELIMITER));
     }
 
-    // 커스텀 구분자가 입력된지 확인
     private void validateCustomDelimiterPosition() {
         if (input.indexOf(LAST_CUSTOM_DELIMITER) == 2) {
             throw new IllegalArgumentException(
@@ -29,9 +26,19 @@ public record DelimiterValidator(String input) {
         }
     }
 
+    private void isCustomDelimiterNumber() {
+        char customDelimiter = input.charAt(2);
+
+        if (customDelimiter > '0' && customDelimiter < '9') {
+            throw new IllegalArgumentException(
+                ErrorMessage.CUSTOM_DELIMITER_FORMAT_ERROR.getMessage());
+        }
+    }
+
     public boolean validateCustomDelimiter() {
         if (isContainsCustomDelimiters() && isRangeOfCustomDelimiter()) {
             validateCustomDelimiterPosition();
+            isCustomDelimiterNumber();
 
             return true;
         }

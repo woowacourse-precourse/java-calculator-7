@@ -1,8 +1,8 @@
 package calculator;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
 
 
 class DelimiterValidatorTest {
@@ -11,7 +11,7 @@ class DelimiterValidatorTest {
     @DisplayName("커스텀 구분자에 대한 검증 - 성공")
     void validateCustomDelimiterSuccess() {
         // given
-        String includeCustomDelimiter = "//[\n1,2:3[4";
+        String includeCustomDelimiter = "//[\\n1,2:3[4";
         DelimiterValidator validator = new DelimiterValidator(includeCustomDelimiter);
 
         // when
@@ -39,7 +39,7 @@ class DelimiterValidatorTest {
     @DisplayName("커스텀 구분자 입력을 하지 않았을 경우 - 실패")
     void validateCustomDelimiterFail() {
         // given
-        String wrongCustomDelimiter = "//\n12";
+        String wrongCustomDelimiter = "//\\n12";
         DelimiterValidator validator = new DelimiterValidator(wrongCustomDelimiter);
 
         // expected
