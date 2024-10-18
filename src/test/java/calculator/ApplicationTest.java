@@ -10,6 +10,7 @@ import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.math.BigInteger;
 import java.util.List;
 
 class ApplicationTest extends NsTest {
@@ -41,12 +42,12 @@ class ApplicationTest extends NsTest {
     @Test
     void 계산기_테스트() {
         Calculator calculator = new Calculator();
-        int sum = calculator.sum(List.of(
-            new Number(-1),
-            new Number(3),
-            new Number(2)
+        BigInteger sum = calculator.sum(List.of(
+            new Number(BigInteger.valueOf(1L)),
+            new Number(BigInteger.valueOf(3L)),
+            new Number(BigInteger.valueOf(2L))
         ));
-        assertThat(sum).isEqualTo(4);
+        assertThat(sum).isEqualTo(6);
     }
 
     @Override
