@@ -9,10 +9,6 @@ public class InputDelimiter {
         this.delimiter = "";
     }
 
-    public String getDelimiter() {
-        return delimiter;
-    }
-
     public void initialize() {
         this.delimiter = "";
     }
@@ -28,5 +24,9 @@ public class InputDelimiter {
             }
         }
         return false;
+    }
+
+    public String getDelimiter() {
+        return delimiter;
     }
 }

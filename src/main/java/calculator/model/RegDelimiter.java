@@ -2,9 +2,7 @@ package calculator.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class RegDelimiter {
     private List<String> delimiters;
@@ -15,12 +13,12 @@ public class RegDelimiter {
         this.customDeliEndIdx = -1;
     }
 
-    public List<String> getDelimiters() {
-        return delimiters;
-    }
-
-    public int getCustomDeliEndIdx() {
-        return customDeliEndIdx;
+    public void registerDelimiter(String value) {
+        if (includesCustomDelimiter(value)) {
+            CustomDelimiter customDeli = findCustomDelimiter(value);
+            addCustomDeliToDelimiters(customDeli.getValue());
+            updateCustomDeliEndIdx(customDeli.getValueEndIdx());
+        }
     }
 
     private void addCustomDeliToDelimiters(String customDeli) {
@@ -31,16 +29,7 @@ public class RegDelimiter {
         this.customDeliEndIdx = idx;
     }
 
-    public void registerDelimiter(String value) {
-        if (includesCustomDelimiter(value)) {
-            CustomDelimiter customDeli = findCustomDelimiter(value);
-
-            addCustomDeliToDelimiters(customDeli.getValue());
-            updateCustomDeliEndIdx(customDeli.getValueEndIdx());
-        }
-    }
-
-    public boolean includesCustomDelimiter(String value) {
+    private boolean includesCustomDelimiter(String value) {
         if (value.length() >= 2) {
             if (value.charAt(0) == '/' && value.charAt(1) == '/') {
                 return true;
@@ -49,7 +38,7 @@ public class RegDelimiter {
         return false;
     }
 
-    public CustomDelimiter findCustomDelimiter(String value) {
+    private CustomDelimiter findCustomDelimiter(String value) {
         int valueLength = value.length();
         String customDeli = "";
         int customDeliEndIdx = -1;
@@ -92,6 +81,10 @@ public class RegDelimiter {
             }
         }
     }
+
+    public List<String> getDelimiters() { return delimiters; }
+
+    public int getCustomDeliEndIdx() { return customDeliEndIdx; }
 
     private static class CustomDelimiter {
         private String value;
