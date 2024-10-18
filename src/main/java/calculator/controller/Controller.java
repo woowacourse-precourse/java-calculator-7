@@ -37,7 +37,10 @@ public class Controller {
     private void getNumberList() {
         resultNumbers = new ResultNumbers();
         mainService.extractSlashFromString(inputString);
+        exceptions.validateLeadingDelimiter(inputString.getInputString());
+
         mainService.extractNumbersFromString(inputString, resultNumbers);
+        exceptions.validateNegativeNumbers(resultNumbers.getNumberList());
     }
 
 
