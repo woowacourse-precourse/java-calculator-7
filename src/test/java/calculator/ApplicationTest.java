@@ -97,6 +97,110 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자_마침표_사용() {
+        assertSimpleTest(() -> {
+            run("//.\\n1.2.3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_별표_사용() {
+        assertSimpleTest(() -> {
+            run("//*\\n1*2*3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_더하기_사용() {
+        assertSimpleTest(() -> {
+            run("//+\\n1+2+3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_빼기_사용() {
+        assertSimpleTest(() -> {
+            run("//-\\n1-2-3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_물음표_사용() {
+        assertSimpleTest(() -> {
+            run("//?\\n1?2?3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_캐럿_사용() {
+        assertSimpleTest(() -> {
+            run("//^\\n1^2^3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_달러_사용() {
+        assertSimpleTest(() -> {
+            run("//$\\n1$2$3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_여는_소괄호_사용() {
+        assertSimpleTest(() -> {
+            run("//(\\n1(2(3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_닫는_소괄호_사용() {
+        assertSimpleTest(() -> {
+            run("//)\\n1)2)3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_여는_중괄호_사용() {
+        assertSimpleTest(() -> {
+            run("//{\\n1{2{3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_닫는_중괄호_사용() {
+        assertSimpleTest(() -> {
+            run("//}\\n1}2}3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_여는_대괄호_사용() {
+        assertSimpleTest(() -> {
+            run("//[\\n1[2[3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_닫는_대괄호_사용() {
+        assertSimpleTest(() -> {
+            run("//]\\n1]2]3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
     void 커스텀_구분자_파이프_사용() {
         assertSimpleTest(() -> {
             run("//|\\n1|2|3");
@@ -105,9 +209,9 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀_구분자_마이너스_사용() {
+    void 커스텀_구분자_백슬래시_사용() {
         assertSimpleTest(() -> {
-            run("//-\\n1-2-3");
+            run("//\\\\\\n1\\\\2\\\\3");
             assertThat(output()).contains("결과 : 6");
         });
     }
