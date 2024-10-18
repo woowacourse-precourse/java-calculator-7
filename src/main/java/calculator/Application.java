@@ -1,7 +1,16 @@
 package calculator;
 
+import calculator.io.CustomReader;
+import calculator.io.CustomWriter;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        run();
+    }
+
+    private static void run() {
+        CustomWriter.printInitMessage();
+        CustomReader.readLine();
+
     }
 }
