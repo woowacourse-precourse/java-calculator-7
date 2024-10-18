@@ -25,7 +25,7 @@ public class Application {
         for (String num : nums) {
             try{
                 int i = Integer.parseInt(num);
-                if (i < 0) {
+                if (i <= 0) {
                     throw new IllegalArgumentException();
                 }
                 sum += i;
