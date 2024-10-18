@@ -34,7 +34,7 @@ public class Calculator {
         if (this.inputStr.length() >= 5 && this.inputStr.charAt(0) == '/' && this.inputStr.charAt(1) == '/'
                 && this.inputStr.charAt(3) == '\\' && this.inputStr.charAt(4) == 'n') {
             if (Character.isDigit(this.inputStr.charAt(2))) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException(ErrorMessage.INVALID_CUSTOM_DELIMITER);
             }
             delimiter.addDelimiter(this.inputStr.charAt(2));
             this.inputStr = this.inputStr.substring(5);
@@ -43,7 +43,7 @@ public class Calculator {
         for (int i = 0; i < this.inputStr.length(); i++) {
             char ch = this.inputStr.charAt(i);
             if (!(Character.isDigit(ch) || delimiter.isDelimiter(ch))) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException(ErrorMessage.INVALID_VALIDATION);
             }
         }
     }
@@ -58,7 +58,7 @@ public class Calculator {
                 num *= 10;
                 num += (ch - '0');
                 if (num >= CalculatorConstant.LIMIT_NUMBER) {
-                    throw new IllegalArgumentException();
+                    throw new IllegalArgumentException(ErrorMessage.INVALID_VALIDATION_EXCEED_BILLION);
                 }
             }
         }
@@ -69,7 +69,7 @@ public class Calculator {
         for (Integer number : numberList) {
             result += number;
             if (result >= CalculatorConstant.LIMIT_NUMBER) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException(ErrorMessage.EXCEED_BILLION);
             }
         }
     }
