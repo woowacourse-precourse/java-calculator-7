@@ -43,11 +43,11 @@ class InputParserTest {
                 .isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> InputParser.getDelimiterAndRawData("1,,3"))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> InputParser.getDelimiterAndRawData("//-\n1,2-3"))
+        assertThatThrownBy(() -> InputParser.getDelimiterAndRawData("//-\\n1,2-3"))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> InputParser.getDelimiterAndRawData("//-\n1-2-"))
+        assertThatThrownBy(() -> InputParser.getDelimiterAndRawData("//-\\n1-2-"))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> InputParser.getDelimiterAndRawData("//-\n1-2--3"))
+        assertThatThrownBy(() -> InputParser.getDelimiterAndRawData("//-\\n1-2--3"))
                 .isInstanceOf(IllegalArgumentException.class);
         //when
 
@@ -59,7 +59,10 @@ class InputParserTest {
         String test1 = "1,2:3";
         System.out.println(InputParser.extractNumbers(test1));
 
-        String test2 = "//}\n4}5}6";
+        String test2 = "//}\\n4}5}6";
         System.out.println(InputParser.extractNumbers(test2));
+
+        String test3 = "//q\\n6q7q8";
+        System.out.println(InputParser.extractNumbers(test3));
     }
 }
