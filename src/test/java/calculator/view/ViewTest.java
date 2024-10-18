@@ -1,7 +1,5 @@
-package calculator;
+package calculator.view;
 
-import calculator.view.InputView;
-import calculator.view.OutputView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -60,7 +58,7 @@ public class ViewTest {
         OutputView.printResult(result);
 
         // Then
-        assertThat(outputStream.toString()).isEqualTo("결과: 6\n");
+        assertThat(outputStream.toString()).isEqualTo("결과 : 6\n");
 
         // Cleanup
         System.setOut(originalOut);

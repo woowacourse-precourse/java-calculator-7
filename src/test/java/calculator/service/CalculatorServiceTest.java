@@ -1,6 +1,5 @@
-package calculator;
+package calculator.service;
 
-import calculator.service.CalculatorService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +32,7 @@ public class CalculatorServiceTest {
     @Test
     @DisplayName("커스텀 구분자를 사용하여 문자열을 정수로 변환하고 합산한다.")
     void 커스텀_구분자로_문자열을_정수로_변환하고_합산() {
-        int result = CalculatorService.add("//;\n1;2;3");
+        int result = CalculatorService.add("//;\\n1;2;3");
         assertThat(result).isEqualTo(6);
     }
 
@@ -42,7 +41,7 @@ public class CalculatorServiceTest {
     void 음수_포함_예외_발생() {
         assertThatThrownBy(() -> CalculatorService.add("1,-2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("음수는 허용되지 않습니다.");
+                .hasMessage("음수는 입력할 수 없습니다.");
     }
 
     @Test
@@ -50,6 +49,6 @@ public class CalculatorServiceTest {
     void 숫자_아닌_문자_포함_예외_발생() {
         assertThatThrownBy(() -> CalculatorService.add("1,a,3"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("숫자가 아닌 값이 포함되어 있습니다.");
+                .hasMessage("입력 형식이 잘못되었습니다.");
     }
 }

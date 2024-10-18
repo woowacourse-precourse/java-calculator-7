@@ -2,37 +2,56 @@ package calculator.domain;
 
 import calculator.validator.Validator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Expression {
-    private final String delimiter;
+    private final List<String> delimiters;;
     private final String[] tokens;
 
     public Expression(String input) {
         Validator.validateInput(input);
-        this.delimiter = extractDelimiter(input);
-        this.tokens = splitNumbers(input, delimiter);
+        this.delimiters = new ArrayList<>(Arrays.asList(",", ":"));
+
+        extractAndAddCustomDelimiter(input);
+        String processedInput = removeDelimiterDefinition(input);
+
+        this.tokens = splitNumbers(processedInput);
     }
 
-    private String extractDelimiter(String input) {
+    private void extractAndAddCustomDelimiter(String input) {
         if (input.startsWith("//")) {
-            int newlineIndex = input.indexOf("\n");
+            int newlineIndex = input.indexOf("\\n");
             if (newlineIndex == -1) {
                 throw new IllegalArgumentException("커스텀 구분자 형식이 올바르지 않습니다.");
             }
-            String delimiter = input.substring(2, newlineIndex);
-            Validator.validateDelimiter(delimiter);
-            return delimiter;
+            String customDelimiter = input.substring(2, newlineIndex);
+            Validator.validateDelimiter(customDelimiter);
+            delimiters.add(escapeIfSpecialCharacter( customDelimiter));
         }
-        return ",|:";
     }
 
-    private String[] splitNumbers(String input, String delimiter) {
-        String processedInput = input;
-        if (input.startsWith("//")) {
-            processedInput = input.substring(input.indexOf("\n") + 1);
+    private String escapeIfSpecialCharacter(String delimiter) {
+        if (delimiter.matches("[\\W]")) {  // 특수문자 여부 확인
+            return "\\" + delimiter;
         }
-        String[] tokens = processedInput.split(delimiter);
+        return delimiter;
+    }
+
+    private String[] splitNumbers(String input) {
+        String delimiterRegex = String.join("|", delimiters);
+        String[] tokens = input.split(delimiterRegex);
         Validator.validateTokens(tokens);
         return tokens;
+    }
+
+
+    private String removeDelimiterDefinition(String input) {
+        if (delimiters.size() == 3) {
+            return input.substring(input.indexOf("\\n") + 2);
+        }
+        return input;
     }
 
     public int calculateSum() {
@@ -54,13 +73,5 @@ public class Expression {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
         }
-    }
-
-    public String getDelimiter() {
-        return delimiter;
-    }
-
-    public String[] getTokens() {
-        return tokens;
     }
 }

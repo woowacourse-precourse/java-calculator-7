@@ -1,6 +1,5 @@
-package calculator;
+package calculator.validator;
 
-import calculator.validator.Validator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -28,6 +27,6 @@ public class ValidatorTest {
     void 구분자_사이에_숫자_없음_예외_발생() {
         assertThatThrownBy(() -> Validator.validateTokens(new String[]{"1", "", "2"}))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("구분자 사이에 숫자가 없습니다.");
+                .hasMessage("입력 형식이 잘못되었습니다.");
     }
 }
