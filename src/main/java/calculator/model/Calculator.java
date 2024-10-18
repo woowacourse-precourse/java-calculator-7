@@ -5,7 +5,6 @@ import static calculator.validate.NumberValidator.validateNumber;
 public class Calculator {
 
     private static int result;
-
     private final InputParser parser = new InputParser();
 
     public void calculate(String input) {

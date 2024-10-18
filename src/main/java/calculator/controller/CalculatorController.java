@@ -11,10 +11,8 @@ public class CalculatorController {
     private final Calculator calculator = new Calculator();
 
     public void start() {
-        outputView.printInputMessage();
-        String input = inputView.readLine();
+        String input = inputView.readInput();
         calculator.calculate(input);
-        int result = calculator.getResult();
-        outputView.printResultMessage(result);
+        outputView.printResult(calculator.getResult());
     }
 }
