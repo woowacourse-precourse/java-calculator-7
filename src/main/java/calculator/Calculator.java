@@ -2,6 +2,9 @@ package calculator;
 
 import java.util.List;
 
+/**
+ * 문자열 덧셈 계산기의 로직을 캡슐화하는 클래스입니다.
+ */
 public class Calculator {
 
     private final Validator validator;
@@ -27,7 +30,7 @@ public class Calculator {
 
         // 단일 숫자 입력 처리
         if (validator.isInteger(input)) {
-            return Integer.parseInt(input);
+            return Integer.parseInt(input.trim());
         }
 
         // 커스텀 구분자 처리
