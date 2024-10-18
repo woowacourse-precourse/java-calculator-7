@@ -5,7 +5,8 @@ public class StringCalculator {
     private final Delimiter delimiter;
 
     private StringCalculator(String input) {
-        this.input = validateStringCalculator(input);
+        String stringCalculator = validateStringCalculator(input);
+        this.input = extractCalculationInput(stringCalculator);
         this.delimiter = Delimiter.of(input);
     }
 
@@ -22,6 +23,16 @@ public class StringCalculator {
 
         if (input == null) {
             throw new IllegalArgumentException("아무값도 입력하지 않을 순 없습니다.");
+        }
+
+        return input;
+    }
+
+    private String extractCalculationInput(String input) {
+        int lastIndex = input.indexOf("\\n");
+        if (lastIndex != -1 && lastIndex < input.length() - 1) {
+            String result = input.substring(lastIndex + 2);
+            return result;
         }
 
         return input;
