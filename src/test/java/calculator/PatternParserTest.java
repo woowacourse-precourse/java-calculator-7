@@ -51,7 +51,7 @@ public class PatternParserTest {
     @Test
     public void testInvalidIsReservePattern() throws Exception {
         //given
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
 
         //when
         boolean result = patternParser.isReservePattern(input);
