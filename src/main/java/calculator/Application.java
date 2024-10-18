@@ -1,6 +1,6 @@
 package calculator;
 
-import calculator.number.Number;
+import calculator.domain.AddCalculation;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -11,7 +11,7 @@ public class Application {
 
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        Number number = new Number(input.readString());
-        output.printResult(number.getResult());
+        AddCalculation addCalculation = new AddCalculation(input.readString());
+        output.printResult(addCalculation.calculation());
     }
 }

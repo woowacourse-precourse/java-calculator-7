@@ -1,4 +1,4 @@
-package calculator.number;
+package calculator.domain;
 
 import calculator.validation.NumberValidation;
 

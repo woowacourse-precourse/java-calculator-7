@@ -1,6 +1,6 @@
 package calculator.validation;
 
-import calculator.number.CustomPatternMaker;
+import calculator.domain.CustomPatternMaker;
 
 import java.util.List;
 
@@ -50,7 +50,7 @@ public class SeparatorValidation {
     }
 
     private static boolean isNotCustomPattern(String input) {
-        List<String> customPattern = CustomPatternMaker.getCustomPattern(input);
+        List<String> customPattern = CustomPatternMaker.makeCustomPattern(input);
         String pattern = "[" + SPECIAL_CHARACTERS + customPattern + " ]+";
         // 커스텀 구분자를 제외 시켜준다.
         input = input.substring(input.indexOf("\\n") + 2);

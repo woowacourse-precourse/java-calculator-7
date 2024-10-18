@@ -1,6 +1,6 @@
 package calculator;
 
-import calculator.number.Number;
+import calculator.domain.AddCalculation;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -138,9 +138,9 @@ class ApplicationTest extends NsTest {
     @DisplayName("입력에 공백이 들어오면 0을 반환한다.")
     void inputTest1() {
         String userInput = "";
-        calculator.number.Number number = new Number(userInput);
+        AddCalculation addCalculation = new AddCalculation(userInput);
 
-        int result = number.getResult();
+        int result = addCalculation.calculation();
 
         assertThat(result).isEqualTo(0);
     }
@@ -149,9 +149,9 @@ class ApplicationTest extends NsTest {
     @DisplayName("구분자 없이 양수만 들어오면 해당 양수값을 반환한다.")
     void inputTest2() {
         String userInput = "123";
-        calculator.number.Number number = new Number(userInput);
+        AddCalculation addCalculation = new AddCalculation(userInput);
 
-        int result = number.getResult();
+        int result = addCalculation.calculation();
 
         assertThat(result).isEqualTo(123);
     }
@@ -160,9 +160,9 @@ class ApplicationTest extends NsTest {
     @DisplayName("기본 구분자들을 통해 숫자를 구분한 뒤 결과값을 반환한다.")
     void inputTest3() {
         String userInput = "1,2,3:4";
-        calculator.number.Number number = new Number(userInput);
+        AddCalculation addCalculation = new AddCalculation(userInput);
 
-        int result = number.getResult();
+        int result = addCalculation.calculation();
 
         assertThat(result).isEqualTo(10);
     }
@@ -171,9 +171,9 @@ class ApplicationTest extends NsTest {
     @DisplayName("커스텀 구분자를 통해 숫자를 구분한 뒤 결과값을 반환한다.")
     void inputTest4() {
         String userInput = "//?\\n1?2?3?4";
-        calculator.number.Number number = new Number(userInput);
+        AddCalculation addCalculation = new AddCalculation(userInput);
 
-        int result = number.getResult();
+        int result = addCalculation.calculation();
 
         assertThat(result).isEqualTo(10);
     }
@@ -182,9 +182,9 @@ class ApplicationTest extends NsTest {
     @DisplayName("커스텀 구분자와 기본 구분자를 통해 숫자를 구분한 뒤 결과값을 반환한다.")
     void inputTest5() {
         String userInput = "//?\\n1?2,3:4";
-        calculator.number.Number number = new Number(userInput);
+        AddCalculation addCalculation = new AddCalculation(userInput);
 
-        int result = number.getResult();
+        int result = addCalculation.calculation();
 
         assertThat(result).isEqualTo(10);
     }
@@ -193,9 +193,9 @@ class ApplicationTest extends NsTest {
     @DisplayName("커스텀 구분자를 사용하더라도 기본 구분자를 통해 숫자를 구분한 뒤 결과값을 반환한다.")
     void inputTest6() {
         String userInput = "//?\\n1,2,3,4";
-        calculator.number.Number number = new Number(userInput);
+        AddCalculation addCalculation = new AddCalculation(userInput);
 
-        int result = number.getResult();
+        int result = addCalculation.calculation();
 
         assertThat(result).isEqualTo(10);
     }
@@ -204,9 +204,9 @@ class ApplicationTest extends NsTest {
     @DisplayName("기본 구분자를 통해 숫자를 구분한 뒤 결과값을 반환한다.")
     void inputTest7() {
         String userInput = "1,2,3,4";
-        calculator.number.Number number = new Number(userInput);
+        AddCalculation addCalculation = new AddCalculation(userInput);
 
-        int result = number.getResult();
+        int result = addCalculation.calculation();
 
         assertThat(result).isEqualTo(10);
     }
@@ -215,9 +215,9 @@ class ApplicationTest extends NsTest {
     @DisplayName("기본 구분자를 통해 숫자를 구분한 뒤 결과값을 반환한다.")
     void inputTest8() {
         String userInput = "1  ,  2   ,   3   ,  4";
-        calculator.number.Number number = new Number(userInput);
+        AddCalculation addCalculation = new AddCalculation(userInput);
 
-        int result = number.getResult();
+        int result = addCalculation.calculation();
 
         assertThat(result).isEqualTo(10);
     }
@@ -226,9 +226,9 @@ class ApplicationTest extends NsTest {
     @DisplayName("커스텀 구분자가 여러 개일 경우 해당 커스텀 구분자들을 통해 숫자를 구분한 뒤 결과값을 반환한다.")
     void inputTest9() {
         String userInput = "//?.\\n1?2?3.4";
-        calculator.number.Number number = new Number(userInput);
+        AddCalculation addCalculation = new AddCalculation(userInput);
 
-        int result = number.getResult();
+        int result = addCalculation.calculation();
 
         assertThat(result).isEqualTo(10);
     }

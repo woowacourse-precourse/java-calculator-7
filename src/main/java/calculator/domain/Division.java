@@ -1,4 +1,4 @@
-package calculator.number;
+package calculator.domain;
 
 import calculator.validation.SeparatorValidation;
 
@@ -37,7 +37,7 @@ public class Division {
     }
 
     private static String getPatten(String input) {
-        List<String> customPattern = CustomPatternMaker.getCustomPattern(input);
+        List<String> customPattern = CustomPatternMaker.makeCustomPattern(input);
         String pattern = String.join("|", customPattern);
         return pattern + "|" + DEFAULT_SEPARATOR;
     }

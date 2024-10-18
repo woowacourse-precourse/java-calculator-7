@@ -1,18 +1,18 @@
-package calculator.number;
+package calculator.domain;
 
 import java.util.List;
 
-public class Number {
+public class AddCalculation {
 
     private final List<Integer> numberList;
 
-    public Number(String userInput) {
+    public AddCalculation(String userInput) {
         List<String> stringList = Division.getStringList(userInput);
         numberList = IntegerListMaker.getNumberList(stringList);
     }
 
-    public int getResult() {
-        return ResultMaker.getResult(numberList);
+    public int calculation() {
+        return ResultMaker.sum(numberList);
     }
 
 }
