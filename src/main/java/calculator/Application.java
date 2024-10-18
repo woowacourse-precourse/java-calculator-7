@@ -10,10 +10,9 @@ public class Application {
         StringCalculator calculator = new StringCalculator();
         try {
             int result = calculator.add(input);
-            System.out.println("결과: " + result);
+            System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.out.println("입력한 값에 문제가 있습니다. " + e.getMessage());
         }
-
     }
 }
