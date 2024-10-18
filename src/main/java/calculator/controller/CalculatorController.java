@@ -15,11 +15,11 @@ public class CalculatorController {
     private OutputView outputView = new OutputView();
 
     public void start(){
-        String s = inputView.getUserInput();
-        List<String> validNumber = calculatorService.findValidNumber(s);
-        double result = calculator.calculatePlusNumber(validNumber);
-        Object finalResult = calculator.determine_type(result);
-        outputView.printResult(finalResult);
+        String userInput = inputView.getUserInput();
+        List<String> validNumber = calculatorService.findValidNumber(userInput);
+        double calculateResult = calculator.calculatePlusNumber(validNumber);
+        Object determineResultType = calculator.determine_type(calculateResult);
+        outputView.printResult(determineResultType);
     }
 
 }
