@@ -26,14 +26,19 @@ public class StringCalculator {
         String[] separatedNumbers = generateSepartedNumbers(delimitedNumbers, delimiterResult);
         Numbers numbers = new Numbers(separatedNumbers);
 
+        int sum = calculateNumbers(numbers);
+
+        System.out.println("결과 : " + sum);
+
+    }
+
+    private int calculateNumbers(Numbers numbers) {
         int sum = 0;
         for (String stringNumbers : numbers.getNumbers()) {
             Number number = new Number(stringNumbers);
             sum += Integer.parseInt(number.getNumber());
         }
-
-        System.out.println("결과 : " + sum);
-
+        return sum;
     }
 
     private static String[] generateSepartedNumbers(DelimitedNumbers delimitedNumbers, DelimiterResult delimiterResult) {
