@@ -7,6 +7,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.util.StringUtils;
 
 class ApplicationTest extends NsTest {
 
@@ -66,7 +67,7 @@ class ApplicationTest extends NsTest {
     @DisplayName("빈 문자열 입력에 대해 테스트")
     void EndToEnd_Test_5() {
         assertSimpleTest(() -> {
-            run("");
+            run("\n");
             assertThat(output()).contains("결과 : 0");
         });
     }
