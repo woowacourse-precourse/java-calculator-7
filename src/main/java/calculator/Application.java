@@ -16,19 +16,15 @@ public class Application {
 
     // 문자열 덧셈기 클래스 정의
     public static class StringCalculator{
-        // input 문자열을 담을 변수
-        private String inputString;
-
-        // 추출한 int형 숫자를 담을 숫자 배열
-        ArrayList<Integer> extractedNumArr;
-
         // 구분자를 담을 문자 배열 (구분자가 문자열일 수 있는 경우의 수 고려)
         ArrayList<String> delimiterArr;
+
+        Deque<String> splitStringDeq;
 
         // 생성자
         public StringCalculator(){
             this.delimiterArr = new ArrayList<>();
-            this.extractedNumArr = new ArrayList<>();
+            this.splitStringDeq = new ArrayDeque<>();
 
             // 기본 구분자
             this.delimiterArr.add(":");
@@ -41,7 +37,9 @@ public class Application {
 
             extractDelimiter(input);
 
-            if(isValidString(input)){
+            ArrayList<Integer> extractedNumArr = extractNumbers(input);
+
+            if(isValidString()){
                 result = calculateNumbers(extractedNumArr);
             };
 
@@ -52,32 +50,63 @@ public class Application {
         public String getInput(){
             // 입력 받기
             System.out.println("덧셈할 문자열을 입력해 주세요.");
-            inputString = Console.readLine();
-            return inputString;
+            return Console.readLine();
         }
 
         // 문자열 유효성 검사
-        public boolean isValidString(String input){
+        public boolean isValidString(){
+            // 입력 값이 숫자, 구분자를 제외한 문자를 포함하는지
+            try{
+                // 구분자 검사를 끝냈음에도 문자가 남아있다면 예외 처리
+                if(!splitStringDeq.isEmpty()){
+                    throw new IllegalArgumentException("Invalid Input");
+                }
+            } catch (Exception e) {
+                throw e;
+            }
 
+            return true;
+        }
+
+        // 문자열로부터 구분자 추출
+        public ArrayList<String> extractDelimiter(String input){
+            // 패턴 객체 생성
+            Pattern pattern = Pattern.compile("//(.*?)\\\\n+");
+            // 객체 필터링 후 Matcher 객체 생성
+            Matcher matcher = pattern.matcher(input);
+
+            // 커스텀 구분자 0개 이상일 가능성 있음 -> 반복문
+            // 일치할 경우 추출하여 delimiterArr에 추가
+            while (matcher.find()) {
+                String cleanDelimiter = matcher.group().replaceAll("//|\\\\n","");
+                delimiterArr.add(cleanDelimiter);
+            }
+            return delimiterArr;
+
+        }
+
+        // 문자열로부터 양수 추출
+        public ArrayList<Integer> extractNumbers(String input){
             // 구분자를 정의하려고 할때 사이에 숫자가 껴있을 수도 있음
             String slicedString = input.replaceAll("//(.*?)\\\\n",":");
 
+            // 추출한 int형 숫자를 담을 숫자 배열
+            ArrayList<Integer> extractedNumArr = new ArrayList<>();
+
             if(slicedString.isEmpty()){
-                return true;
+                return extractedNumArr;
             }
 
-            Deque<String> splitStringDeq = new ArrayDeque<>();
             splitStringDeq.add(slicedString);
 
-            // 입력 값이 숫자, 구분자를 제외한 문자를 포함하는지
             try {
                 int i = delimiterArr.size()-1;
-                // 깊이우선탐색
+                // 넓이우선이네
                 while(i>=0 && !splitStringDeq.isEmpty()) {
                     String 덩어리 = splitStringDeq.pollFirst();
                     if(덩어리.isEmpty()){
                         continue;
-                    // 덩어리가 숫자로만 이루어져있으면
+                        // 덩어리가 숫자로만 이루어져있으면
                     }else{
                         덩어리 = 덩어리.trim();
                     }
@@ -94,42 +123,10 @@ public class Application {
                         i--;
                     }
                 }
-
-                // 구분자 검사를 끝냈음에도 문자가 남아있다면 예외 처리
-                if(!splitStringDeq.isEmpty()){
-                    throw new IllegalArgumentException("Invalid Input");
-                }
-
+                return extractedNumArr;
             } catch (Exception e) {
                 throw e;
             }
-            System.out.println(extractedNumArr.toString());
-            return true;
-        }
-
-        // 문자열로부터 구분자 추출
-        public ArrayList<String> extractDelimiter(String input){
-            // 패턴 객체 생성
-            Pattern pattern = Pattern.compile("//(.*?)\\\\n+");
-            // 객체 필터링 후 Matcher 객체 생성
-            Matcher matcher = pattern.matcher(input);
-
-
-            // 커스텀 구분자 0개 이상일 가능성 있음 -> 반복문
-            // 일치할 경우 추출하여 delimiterArr에 추가
-            while (matcher.find()) {
-                String cleanDelimiter = matcher.group().replaceAll("//|\\\\n","");
-                delimiterArr.add(cleanDelimiter);
-            }
-            return delimiterArr;
-
-        }
-
-        // 문자열로부터 양수 추출
-        public void extractNumbers(){
-            // 유효 검사 통과한 문자열에서 숫자 추출
-
-            // 덧셈 -> calculateNumbers()
         }
 
         // 계산

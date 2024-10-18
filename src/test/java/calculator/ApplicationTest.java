@@ -60,8 +60,7 @@ class ApplicationTest extends NsTest {
 
         Application.StringCalculator stringCalculator= new Application.StringCalculator();
         stringCalculator.extractDelimiter(input);
-        assertThat(stringCalculator.isValidString(input)).isTrue();
-        assertThat(stringCalculator.extractedNumArr).isEqualTo(testExtractedNumbers);
+        assertThat(stringCalculator.extractNumbers(input)).isEqualTo(testExtractedNumbers);
     }
 
     @Override
