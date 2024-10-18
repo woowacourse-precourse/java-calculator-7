@@ -10,6 +10,10 @@ public class DelimiterParser {
         String delimiter = ",|:"; // 기본 구분자. 정규표현식 사용
         String numbersPart = input; // 숫자 부분
 
+        if (!Character.isDigit(input.charAt(input.length() - 1))) {
+            throw new IllegalArgumentException("구분자 뒤에 숫자가 없습니다.");
+        }
+
         if (input.startsWith("//")) {
             int delimiterEndIndex = numbersPart.indexOf("\\n");
             int numbersStartIndex = delimiterEndIndex + 2;
