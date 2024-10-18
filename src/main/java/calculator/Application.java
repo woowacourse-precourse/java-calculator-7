@@ -9,6 +9,7 @@ public class Application {
 
     private static final int EMPTY_INPUT_RETURN_VALUE = 0;
     private static final String CUSTOM_DELIMITER_START_SIGN = "//";
+    private static final int CUSTOM_DELIMITER_START_SIGN_LENGTH = CUSTOM_DELIMITER_START_SIGN.length();
     private static final String CUSTOM_DELIMITER_END_SIGN = "\\n";
     private static final int CUSTOM_DELIMITER_END_SIGN_LENGTH = CUSTOM_DELIMITER_END_SIGN.length();
 
@@ -42,10 +43,10 @@ public class Application {
                 throw new IllegalArgumentException("커스텀 구분자 선언 후 '\\n'이 필요합니다.");
             }
 
-            String customDelimiterPart = input.substring(2, indexOfEndSign);
+            String customDelimiterPart = input.substring(CUSTOM_DELIMITER_START_SIGN_LENGTH, indexOfEndSign);
             String[] customDelimiters = customDelimiterPart.split(""); // 여러 커스텀 구분자 받는 경우 포함
 
-            appendCustomDelimiters(customDelimiters, delimiterPart);
+            appendCustomDelimiters(delimiterPart, customDelimiters);
 
             numberPart = input.substring(indexOfEndSign + CUSTOM_DELIMITER_END_SIGN_LENGTH);
         }
@@ -73,7 +74,7 @@ public class Application {
                 .toArray();
     }
 
-    private static void appendCustomDelimiters(String[] customDelimiters, StringBuilder delimiterPart) {
+    private static void appendCustomDelimiters(StringBuilder delimiterPart, String[] customDelimiters) {
         for (String delim : customDelimiters) {
             delim = delim.trim();
 
