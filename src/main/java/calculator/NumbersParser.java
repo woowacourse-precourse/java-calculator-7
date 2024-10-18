@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+/**
+ * 입력 문자열에서 커스텀 구분자를 추출해 숫자를 분리하는 클래스입니다.
+ * <br>기본적으로 입력 문자열에서 구분자 사이의 빈 공간도 0으로 포함시키도록 구분합니다.
+ */
 public class NumbersParser {
     
     private static final Pattern areaDividePattern = Pattern.compile("^(?://([^0-9]*)\\\\n)?(.*)");
@@ -16,6 +20,13 @@ public class NumbersParser {
     private HashSet<Character> separatorSet = null;
     private int[] numbers;
     
+    /**
+     * 입력 문자열에서 커스텀 구분자를 추출해 숫자를 분리하는 클래스입니다.
+     * <br>기본적으로 입력 문자열에서 구분자 사이의 빈 공간도 0으로 포함시키도록 구분합니다.
+     * @param input 커스텀 구분자를 포함한 입력 문자열입니다.
+     * @exception IllegalArgumentException 입력 문자열이 null 이거나, 커스텀 구분자 서식이 잘못되었거나,
+     * 커스텀 구분자로 등록되지 않은 문자가 사용되는 경우 발생합니다.
+     */
     public NumbersParser(String input) {
         if (input == null) {
             throw new IllegalArgumentException();
@@ -70,6 +81,11 @@ public class NumbersParser {
         return result;
     }
     
+    /**
+     * 구분자로 분리된 숫자 배열을 반환합니다.
+     * <br>기본적으로 입력 문자열에서 구분자 사이의 빈 공간도 0으로 포함시키도록 구분합니다.
+     * @return 구분자로 분리된 숫자들의 배열
+     */
     public int[] getNumbers() {
         return numbers.clone();
     }
