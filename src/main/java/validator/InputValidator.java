@@ -1,5 +1,8 @@
 package validator;
 
+import static constants.Constants.CUSTOM_START_TEXT;
+import static constants.Constants.EMPTY_TEXT;
+
 public class InputValidator {
 
     private static final String REGEX_DELIMITER = "[,:]";
@@ -7,10 +10,8 @@ public class InputValidator {
     private static final String REGEX_CUSTOM_DELIMITER = "[\'\",;:\\-\\.\\*\\+\\?\\[\\]\\{\\}\\(\\)" +
             "\\|\\^\\$\\!\\@\\#\\&\\`\\~\\=\\`\\~\\<\\>\\/\\\\]";
 
-    private static final String REGEX_CUSTOM_DELIMITER_START = "//";
-    private static final String REGEX_CUSTOM_DELIMITER_END = "\\n";
+    private static final String CUSTOM_END_TEXT = "\\n";
     private static final String MINUS_DELIMITER = "-";
-    private static final String EMPTY_TEXT = "";
 
     private static boolean isMinusDelimiter = false;
 
@@ -38,7 +39,7 @@ public class InputValidator {
     }
 
     private static void hasDelimiter(final String inputs) {
-        if (inputs.contains(REGEX_CUSTOM_DELIMITER_START) && inputs.contains(REGEX_CUSTOM_DELIMITER_END)) {
+        if (inputs.contains(CUSTOM_START_TEXT) && inputs.contains(CUSTOM_END_TEXT)) {
             hasCustomDelimiter(inputs);
             return;
         }
@@ -47,7 +48,7 @@ public class InputValidator {
     }
 
     private static void hasCustomDelimiter(String inputs) {
-        inputs = inputs.replace(REGEX_CUSTOM_DELIMITER_START, EMPTY_TEXT).replace(REGEX_CUSTOM_DELIMITER_END, EMPTY_TEXT);
+        inputs = inputs.replace(CUSTOM_START_TEXT, EMPTY_TEXT).replace(CUSTOM_END_TEXT, EMPTY_TEXT);
         for (String input : inputs.split(EMPTY_TEXT)) {
             if (input.matches(REGEX_CUSTOM_DELIMITER)) {
                 if (input.contains(MINUS_DELIMITER)) isMinusDelimiter = true;

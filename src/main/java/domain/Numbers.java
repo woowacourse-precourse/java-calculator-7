@@ -5,14 +5,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static constants.Constants.*;
+
 public class Numbers {
 
     private static final String REGEX_START = "[";
     private static final String ESCAPE_TEXT = "\\";
     private static final String REGEX_END = "]";
-    private static final String EMPTY_TEXT = "";
-    private static final String CUSTOM_START_TEXT = "//";
-    private static final String CUSTOM_END_TEXT = "\\\\n";
 
     private List<Integer> numbers = new ArrayList<>();
 
@@ -26,8 +25,7 @@ public class Numbers {
 
         if (input.contains(CUSTOM_START_TEXT)) {
             String removeCustomOperator = input.replaceAll(CUSTOM_START_TEXT, EMPTY_TEXT)
-                    .replaceAll(CUSTOM_END_TEXT,
-                            EMPTY_TEXT);
+                    .replaceAll(REGEX_CUSTOM_END_TEXT, EMPTY_TEXT);
             convertNumber(removeCustomOperator, regex);
             return;
         }
