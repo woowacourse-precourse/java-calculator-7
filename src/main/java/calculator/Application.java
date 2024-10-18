@@ -25,8 +25,20 @@ public class Application {
         String[] tokens = input.split(delimiter);
         int sum = 0;
         for (String token : tokens) {
-            sum += Integer.parseInt(token);
+            sum += parseAndValidateNumber(token);
         }
         return sum;
+    }
+
+    private static int parseAndValidateNumber(String token) {
+        try {
+            int number = Integer.parseInt(token);
+            if (number < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+            }
+            return number;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자 형식이 잘못되었습니다.");
+        }
     }
 }
