@@ -2,20 +2,18 @@ package calculator.model;
 
 import calculator.common.ExceptionMessage;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public abstract class UserInput {
     private static final String DEFAULT_DELIMITER_COMMA = ",";
     private static final String DEFAULT_DELIMITER_COLON = ":";
     protected static final String REGEX_DELIMITER = "|";
 
-    protected final List<String> delimiters;
+    protected final Set<String> delimiters;
     protected long[] inputNumbers;
 
     protected UserInput(String userInput) {
-        delimiters = new ArrayList<>();
+        delimiters = new HashSet<>();
         delimiters.add(DEFAULT_DELIMITER_COMMA);
         delimiters.add(DEFAULT_DELIMITER_COLON);
 
