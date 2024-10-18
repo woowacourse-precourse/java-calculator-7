@@ -32,8 +32,7 @@ public class Exceptions {
     }
 
     public void validateNegativeNumbers(List<Integer> numbers) {
-        for (int i = 0; i < numbers.size(); i++) {
-            Integer number = numbers.get(i);
+        for (Integer number : numbers) {
             if (number < 0) {
                 throw new IllegalArgumentException("[ERROR] 음수는 입력할 수 없습니다.");
             }
@@ -45,5 +44,4 @@ public class Exceptions {
             throw new IllegalArgumentException("[ERROR] 커스텀 구분자는 3개까지 가능합니다.");
         }
     }
-
 }
