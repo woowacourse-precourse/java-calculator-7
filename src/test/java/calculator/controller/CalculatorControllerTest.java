@@ -43,4 +43,17 @@ public class CalculatorControllerTest  {
         //then: 결과는 8
         assertThat(result).isEqualTo(8);
     }
+
+    @Test
+    void 커스텀_구분자_테스트() {
+        //given: "//;\n1;2;3"
+        String input = "//;\n1;2;3";
+        CalculatorController controller = new CalculatorController();
+
+        //when: 입력 처리
+        int result = controller.input(input);
+
+        //then: 결과는 6
+        assertThat(result).isEqualTo(6);
+    }
 }
