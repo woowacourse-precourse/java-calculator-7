@@ -16,6 +16,8 @@ public class Application {
         StringAddCalculatorService stringAddCalculatorService = new StringAddCalculatorService();
         StringAddCalculatorController stringAddCalculatorController = new StringAddCalculatorController(stringAddCalculatorService);
 
+        String output = stringAddCalculatorController.stringAdd(inputView.readLine());
 
+        outputView.print(output);
     }
 }
