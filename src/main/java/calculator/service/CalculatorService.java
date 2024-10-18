@@ -32,7 +32,7 @@ public class CalculatorService {
 		return line.substring(PATTERN.length());
 	}
 
-	private List<Integer> getNumbers() {
+	public List<Integer> getNumbers() {
 		List<Integer> numbers = new ArrayList<>();
 		for (String number : line.split("[" + delimiter + "]")) {
 			int item = 0;
