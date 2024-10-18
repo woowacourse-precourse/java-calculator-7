@@ -8,7 +8,7 @@ public class InputView {
     /**
      * 문자열 입력 받는 함수
      * **/
-    public static String input(){
+    public String input(){
         System.out.println(INPUT_MESSAGE);
         return Console.readLine();
     }
