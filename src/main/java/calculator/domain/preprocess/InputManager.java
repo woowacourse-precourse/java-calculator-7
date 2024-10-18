@@ -2,16 +2,10 @@ package calculator.domain.preprocess;
 
 import java.util.List;
 
+import static calculator.utils.Util.isInteger;
+
 public class InputManager {
 
-    public boolean isInteger(String s) {
-        try {
-            Integer.parseInt(s);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
 
     public void findNoneDelimeterString(List<String>delimterList, String input){
 
