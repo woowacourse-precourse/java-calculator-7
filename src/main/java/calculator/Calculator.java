@@ -44,12 +44,19 @@ public class Calculator {
      */
     private Integer sum() {
         String[] numbers = input.split(separators.toString());
-        try {
-            return Arrays.stream(numbers)
-                    .mapToInt(Integer::parseInt)
-                    .sum();
-        } catch (Exception e) {
-            throw new IllegalArgumentException();
-        }
+        return Arrays.stream(numbers)
+                .mapToInt(number -> {
+                    int integer;
+                    try {
+                        integer = Integer.parseInt(number);
+                    } catch (Exception e) {
+                        throw new IllegalArgumentException(ErrorCode.WRONG_INPUT.message);
+                    }
+                    if (integer < 0) {
+                        throw new IllegalArgumentException(ErrorCode.NOT_ALLOWED_NEGATIVE.message);
+                    }
+                    return integer;
+                }).sum();
     }
+
 }
