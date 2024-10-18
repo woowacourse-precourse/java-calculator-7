@@ -6,4 +6,7 @@ public class PositiveNumberConverter {
     public static int[] convertToInt(String... strNums) {
         return Arrays.stream(strNums).mapToInt(Integer::parseInt).toArray();
     }
+
+    private PositiveNumberConverter() {
+    }
 }
