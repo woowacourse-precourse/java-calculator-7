@@ -1,9 +1,9 @@
-package util;
+package calculator.util;
 
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputUtil {
-    public String userInput(){
+    public String userInput() {
         return Console.readLine();
     }
 }

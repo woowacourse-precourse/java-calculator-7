@@ -1,11 +1,11 @@
-package calculator;
+package calculator.controller;
 
 import calculator.util.InputUtil;
 import calculator.util.MessageUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CalculatorRun {
+public class CalculatorController {
 
     private final InputUtil inputUtil = new InputUtil();
     private final MessageUtil messageUtil = new MessageUtil();
