@@ -13,9 +13,10 @@ import static org.junit.platform.commons.util.StringUtils.isNotBlank;
 import calculator.model.exception.MultiCustomDelimiterException;
 import calculator.model.exception.NotAllowedPositionException;
 import calculator.model.exception.ParseToIntegerFailedException;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.junit.platform.commons.util.StringUtils;
@@ -83,7 +84,8 @@ public class SeparateManager {
 
     public List<Integer> separate(String source) {
         String sourceReplacedByRegexes = processReplacing(source);
-        String[] tokens = sourceReplacedByRegexes.split(getAllDelimiters());
+        String finalDelimiters = this.toString();
+        String[] tokens = sourceReplacedByRegexes.split(finalDelimiters);
         return Arrays.stream(tokens)
                 .filter(StringUtils::isNotBlank)
                 .map(this::tryParseToInt)
@@ -103,12 +105,15 @@ public class SeparateManager {
         }
     }
 
-    public String getAllDelimiters() {
-        return mergeDelimiters().toString();
+    @Override
+    public String toString() {
+        StringBuilder regexBuilder = new StringBuilder();
+        allDelimiters().forEach(regexBuilder::append);
+        return String.format("[%s]", regexBuilder);
     }
 
-    public List<String> mergeDelimiters() {
-        List<String> mergedDelimiters = new ArrayList<>(basicDelimiters);
+    public Set<String> allDelimiters() {
+        Set<String> mergedDelimiters = new HashSet<>(basicDelimiters);
         if (isAddable(customDelimiter)) {
             mergedDelimiters.add(customDelimiter);
         }
