@@ -15,4 +15,8 @@ public class StringCalculator {
     public String getAllowedFrom() {
         return ALLOWED_FROM;
     }
+
+    public void calculate(String inputString) {
+        validateInputStringFrom(inputString);
+    }
 }

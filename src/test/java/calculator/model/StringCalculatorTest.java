@@ -42,7 +42,7 @@ public class StringCalculatorTest {
         String input = "1.2;3";
 
         // when, then
-        assertThatThrownBy(() -> stringCalculator.claculate(input))
+        assertThatThrownBy(() -> stringCalculator.calculate(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
