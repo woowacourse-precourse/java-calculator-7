@@ -11,5 +11,12 @@ public class StringAdderController {
 
     public void run() {
         String additionInput = inputView.getAdditionInput();
+        String delimiters;
+
+        if(inputView.containsCustomDelimiter(additionInput)) {
+            delimiters = inputView.getCustomDelimiter(additionInput);
+            additionInput = inputView.deleteCustomDelimiter(additionInput);
+        }
+
     }
 }

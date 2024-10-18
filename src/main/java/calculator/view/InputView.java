@@ -11,4 +11,17 @@ public class InputView {
         String additionInput = Console.readLine();
         return additionInput;
     }
+
+    public boolean containsCustomDelimiter(String additionInput) {
+        if(additionInput.length() >= 5 && additionInput.startsWith("//") && additionInput.substring(3, 5).equals("\\n")) return true;
+        return false;
+    }
+
+    public String getCustomDelimiter(String additionInput) {
+        return additionInput.substring(2, 3);
+    }
+
+    public String deleteCustomDelimiter(String additionInput) {
+        return additionInput.substring(5);
+    }
 }
