@@ -12,7 +12,7 @@ public class InputValidator {
     }
 
     // 음수값 검증
-    public boolean containsNegative(List<Integer> numbers) {
+    public boolean validateNegative(List<Integer> numbers) {
         for (int number : numbers) {
             if (number < 0) {
                 return true;
@@ -22,5 +22,7 @@ public class InputValidator {
     }
 
     // 숫자가 아닌 값 검증
-
+    public void validateNonNumeric(String input) {
+        //
+    }
 }
