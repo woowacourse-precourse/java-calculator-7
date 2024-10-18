@@ -8,6 +8,7 @@ import java.util.StringTokenizer;
 public class Application {
     static StringBuilder delim = new StringBuilder(",:");
     static List<String> tokens;
+    static List<Long> nums;
 
     public static void main(String[] args) {
         final String input = input();
@@ -16,6 +17,7 @@ public class Application {
             return;
         }
         tokens = new ArrayList<>();
+        nums = new ArrayList<>();
 
         splitInput(input);
 
@@ -56,6 +58,19 @@ public class Application {
             return l > 0;
         } catch (NumberFormatException e) {
             return false;
+        }
+    }
+
+    private static long calculateSum() {
+        strToNumber();
+
+        return 0;
+    }
+
+
+    private static void strToNumber() {
+        for (String token : tokens) {
+            nums.add(Long.parseLong(token));
         }
     }
 }
