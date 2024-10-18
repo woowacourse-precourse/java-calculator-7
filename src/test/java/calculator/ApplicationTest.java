@@ -49,6 +49,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 한자리_수를_초과한_경우() {
+        assertSimpleTest(() -> {
+            run("//ex\\n1ex23,31:4431");
+            assertThat(output()).contains("결과 : 4486");
+        });
+    }
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))
@@ -130,6 +138,20 @@ class ApplicationTest extends NsTest {
     void 예외_테스트_유효하지_않은_문자가_중간에_위치한_경우2() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1//.\\n2:3"))
+                        .isInstanceOf(IllegalArgumentException.class));
+    }
+
+    @Test
+    void 예외_테스트_커스텀_구분자로_숫자가_설정된_경우() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//33\\n1332,3:4"))
+                        .isInstanceOf(IllegalArgumentException.class));
+    }
+
+    @Test
+    void 예외_테스트_커스텀_구분자로_숫자가_설정된_경우2() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//3\\n132,3:4"))
                         .isInstanceOf(IllegalArgumentException.class));
     }
 
