@@ -1,40 +1,45 @@
 package calculator.controller;
 
-import calculator.service.CalculatorService;
-import calculator.service.CustomDelimiterService;
-import calculator.service.NumberExtractionService;
+import calculator.model.Calculator;
+import calculator.model.CustomDelimiterProcessor;
+import calculator.model.Delimiters;
+import calculator.model.NumberExtractor;
+import calculator.model.Numbers;
 import calculator.view.OutputView;
 
 public class Controller {
-    private final CustomDelimiterService customDelimiterService;
-    private final NumberExtractionService numberExtractionService;
-    private final CalculatorService calculatorService;
+    private final CustomDelimiterProcessor customDelimiterProcessor;
+    private final NumberExtractor numberExtractor;
+    private final Calculator calculator;
 
-
-    public Controller(CustomDelimiterService customDelimiterService, NumberExtractionService numberExtractionService,
-                      CalculatorService calculatorService) {
-        this.customDelimiterService = customDelimiterService;
-        this.numberExtractionService = numberExtractionService;
-        this.calculatorService = calculatorService;
+    public Controller(CustomDelimiterProcessor customDelimiterProcessor, NumberExtractor numberExtractor,
+                      Calculator calculator) {
+        this.customDelimiterProcessor = customDelimiterProcessor;
+        this.numberExtractor = numberExtractor;
+        this.calculator = calculator;
     }
 
     public void run(String inputString) {
-        String processedString = customDelimiterProgress(inputString);
-        numberExtractProgress(processedString);
-        int result = calculateProgress();
+        Delimiters delimiters = new Delimiters();
+        String processedString = customDelimiterProgress(inputString, delimiters);
+
+        Numbers numbers = numberExtractProgress(processedString, delimiters);
+
+        int result = calculateProgress(numbers);
+
         OutputView.printResultMessage(result);
     }
 
-    private String customDelimiterProgress(String inputString) {
-        return customDelimiterService.addCustomDelimiters(inputString);
+    private String customDelimiterProgress(String inputString, Delimiters delimiters) {
+        return customDelimiterProcessor.addCustomDelimiters(inputString, delimiters);
     }
 
-    private void numberExtractProgress(String inputString) {
-        numberExtractionService.extractNumber(inputString);
+    private Numbers numberExtractProgress(String inputString, Delimiters delimiters) {
+        return numberExtractor.extractNumber(inputString, delimiters);
     }
 
-    private int calculateProgress() {
-        return calculatorService.calculate();
+    private int calculateProgress(Numbers numbers) {
+        return calculator.calculate(numbers);
     }
 
 }

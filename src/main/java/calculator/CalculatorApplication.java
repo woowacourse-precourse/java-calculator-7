@@ -2,29 +2,24 @@ package calculator;
 
 import calculator.controller.Controller;
 import calculator.model.Calculator;
-import calculator.model.Delimiters;
-import calculator.model.Numbers;
-import calculator.service.CalculatorService;
-import calculator.service.CustomDelimiterService;
-import calculator.service.NumberExtractionService;
+import calculator.model.CustomDelimiterProcessor;
+import calculator.model.NumberExtractor;
 import calculator.view.InputView;
+import camp.nextstep.edu.missionutils.Console;
 
 public class CalculatorApplication {
     public static void run() {
         InputView.printStartMessage();
         String inputString = InputView.getInput();
         initialize().run(inputString);
+        Console.close();
     }
 
     private static Controller initialize() {
-        Delimiters delimiters = new Delimiters();
+        CustomDelimiterProcessor customDelimiterProcessor = new CustomDelimiterProcessor();
+        NumberExtractor numberExtractor = new NumberExtractor();
         Calculator calculator = new Calculator();
-        Numbers numbers = new Numbers();
 
-        CustomDelimiterService customDelimiterService = new CustomDelimiterService(delimiters);
-        NumberExtractionService numberExtractionService = new NumberExtractionService(numbers, customDelimiterService);
-        CalculatorService calculatorService = new CalculatorService(calculator, numberExtractionService);
-
-        return new Controller(customDelimiterService, numberExtractionService, calculatorService);
+        return new Controller(customDelimiterProcessor, numberExtractor, calculator);
     }
 }

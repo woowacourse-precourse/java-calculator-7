@@ -1,26 +1,13 @@
-package calculator.service;
+package calculator.model;
 
-import calculator.model.Delimiters;
-import java.util.List;
-
-public class CustomDelimiterService {
+public class CustomDelimiterProcessor {
     private static final String CUSTOM_DELIMITER_FIRST_FORMAT = "//";
     private static final String CUSTOM_DELIMITER_LAST_FORMAT = "\n";
     private static final int CUSTOM_DELIMITER_FORMAT_LENGTH = 5;
     private static final int CUSTOM_DELIMITER_INDEX = 2;
     private static final char CUSTOM_DELIMITER_PREFIX = '/';
 
-    private final Delimiters delimiters;
-
-    public CustomDelimiterService(Delimiters delimiters) {
-        this.delimiters = delimiters;
-    }
-
-    protected List<Character> getDelimiters() {
-        return delimiters.getDelimiters();
-    }
-
-    public String addCustomDelimiters(String inputString) {
+    public String addCustomDelimiters(String inputString, Delimiters delimiters) {
         while (usesCustomDelimiter(inputString)) {
             correctCustomDelimiterFormatOrThrow(inputString);
             char customDelimiter = inputString.charAt(CUSTOM_DELIMITER_INDEX);

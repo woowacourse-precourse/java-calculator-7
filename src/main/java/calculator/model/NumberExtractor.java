@@ -1,37 +1,26 @@
-package calculator.service;
+package calculator.model;
 
 
-import calculator.model.Numbers;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class NumberExtractionService {
-    private final Numbers numbers;
-    private final CustomDelimiterService customDelimiterService;
-
-    public NumberExtractionService(Numbers numbers, CustomDelimiterService customDelimiterService) {
-        this.numbers = numbers;
-        this.customDelimiterService = customDelimiterService;
-    }
-
-    protected List<Integer> getNumbers() {
-        return numbers.getNumbers();
-    }
-
-    public void extractNumber(String inputString) {
+public class NumberExtractor {
+    public Numbers extractNumber(String inputString, Delimiters delimiters) {
+        Numbers numbers = new Numbers();
         if (inputString.length() == 0) {
-            return;
+            return numbers;
         }
         if (!isStartingWithDigit(inputString)) {
             throw new IllegalArgumentException();
         }
-        ArrayList<String> splitedStringList = splitByDelimiters(inputString);
+        ArrayList<String> splitedStringList = splitByDelimiters(inputString, delimiters);
         for (String str : splitedStringList) {
             validateNumberString(str);
             int number = Integer.parseInt(str);
             numbers.saveNumber(number);
         }
+        return numbers;
     }
 
     private boolean isStartingWithDigit(String inputString) {
@@ -39,8 +28,8 @@ public class NumberExtractionService {
         return Character.isDigit(firstChar);
     }
 
-    private ArrayList<String> splitByDelimiters(String inputString) {
-        String delimitersString = createDelimitersString();
+    private ArrayList<String> splitByDelimiters(String inputString, Delimiters delimiters) {
+        String delimitersString = createDelimitersString(delimiters);
         StringTokenizer tokenizer = new StringTokenizer(inputString, delimitersString);
         ArrayList<String> splitedStringList = new ArrayList<>();
         while (tokenizer.hasMoreTokens()) {
@@ -49,10 +38,10 @@ public class NumberExtractionService {
         return splitedStringList;
     }
 
-    private String createDelimitersString() {
-        List<Character> delimiters = customDelimiterService.getDelimiters();
+    private String createDelimitersString(Delimiters delimiters) {
+        List<Character> delimitersList = delimiters.getDelimiters();
         StringBuilder stringBuilder = new StringBuilder();
-        for (char c : delimiters) {
+        for (char c : delimitersList) {
             stringBuilder.append(c);
         }
         return stringBuilder.toString();

@@ -3,11 +3,13 @@ package calculator.model;
 import java.util.List;
 
 public class Calculator {
-    public int calculate(List<Integer> numbers) {
-        if (numbers.isEmpty()) {
+
+    public int calculate(Numbers numbers) {
+        List<Integer> numbersList = numbers.getNumbers();
+        if (numbersList.isEmpty()) {
             return 0;
         }
-        return numbers.stream()
+        return numbersList.stream()
                 .mapToInt(Integer::intValue)
                 .sum();
     }
