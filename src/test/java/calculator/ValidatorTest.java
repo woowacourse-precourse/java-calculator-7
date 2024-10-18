@@ -14,4 +14,18 @@ public class ValidatorTest {
         assertThatThrownBy(() -> validator.validateDelimiter(value))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 커스텀_구분자가_숫자일때_예외처리(){
+        String value = "//1\n1,2,3";
+        assertThatThrownBy(() -> validator.validateDelimiter(value))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 커스텀_구분자가_공백일때_예외처리(){
+        String value = "// \n1,2,3";
+        assertThatThrownBy(() -> validator.validateDelimiter(value))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
