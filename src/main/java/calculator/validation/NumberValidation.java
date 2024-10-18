@@ -3,7 +3,7 @@ package calculator.validation;
 public class NumberValidation {
 
     public static void validation(String input) {
-        if (isNotNumber(input.trim()) || isNotPositiveNumber(input.trim())) {
+        if (isNotNumber(input) || isNotPositiveNumber(input)) {
             throw new IllegalArgumentException("양수만 입력 가능합니다.");
         }
     }

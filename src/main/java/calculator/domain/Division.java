@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import calculator.validation.NumberValidation;
 import calculator.validation.SeparatorValidation;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ public class Division {
 
     private static final String DEFAULT_SEPARATOR = ",|:";
 
-    public static List<String> getStringList(String input){
+    public static List<Integer> makeNumberList(String input){
         SeparatorValidation.separator(input); // 구분자가 있는지 검사
         // 빈 문자열이 들어왔을 경우
         if (input.isBlank()) {
@@ -20,8 +21,8 @@ public class Division {
         return getList(input);
     }
 
-    private static List<String> getList(String input) {
-        List<String> list = new ArrayList<>();
+    private static List<Integer> getList(String input) {
+        List<Integer> list = new ArrayList<>();
         // 기본 구분자를 사용했을 경우
         if (isDefaultSeparator(input)) {
             return makeList(input, DEFAULT_SEPARATOR, list);
@@ -42,9 +43,17 @@ public class Division {
         return pattern + "|" + DEFAULT_SEPARATOR;
     }
 
-    private static List<String> makeList(String input, String patten, List<String> list) {
+    private static List<Integer> makeList(String input, String patten, List<Integer> list) {
         String[] inputStrings = input.split(patten);
-        Collections.addAll(list, inputStrings);
+        for (String inputString : inputStrings) {
+            inputString = inputString.trim(); // 입력에 공백이 있을 수 있으므로 제거해준다.
+            numberValidation(inputString);
+            list.add(Integer.parseInt(inputString));
+        }
         return list;
+    }
+
+    private static void numberValidation(String input) {
+        NumberValidation.validation(input);
     }
 }

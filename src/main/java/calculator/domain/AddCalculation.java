@@ -7,8 +7,7 @@ public class AddCalculation {
     private final List<Integer> numberList;
 
     public AddCalculation(String userInput) {
-        List<String> stringList = Division.getStringList(userInput);
-        numberList = IntegerListMaker.getNumberList(stringList);
+        numberList = Division.makeNumberList(userInput);
     }
 
     public int calculation() {
