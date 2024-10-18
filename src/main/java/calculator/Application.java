@@ -9,7 +9,7 @@ public class Application {
         ConsoleView view = new ConsoleView();
         CalculatorService service = new CalculatorService();
         String input = view.requestInput();
-        double result = service.calculate(input);
+        Number result = service.calculate(input);
         view.printResult(result);
     }
 }

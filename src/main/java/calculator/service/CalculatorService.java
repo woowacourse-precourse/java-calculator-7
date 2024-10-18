@@ -14,7 +14,7 @@ public class CalculatorService {
         separators = SeparatorType.getDefaults();
     }
 
-    public double calculate(String input) {
+    public Number calculate(String input) {
         Command command = new Command(input);
         if (command.hasCustomSeparator()) {
             separators.add(command.getCustomSeparator());
@@ -44,12 +44,15 @@ public class CalculatorService {
         }
     }
 
-    private double sum(Double[] values) {
+    private Number sum(Double[] values) {
         double result = Arrays.stream(values)
                 .mapToDouble(Double::doubleValue)
                 .sum();
-        if (Double.isInfinite(result)) {
-            throw new ArithmeticException("계산 결과가 너무 큽니다. 오버플로우 발생");
+        if (result % 1 == 0) {
+            if (result > Long.MAX_VALUE) {
+                throw new IllegalArgumentException("계산 결과가 너무 큽니다.");
+            }
+            return (long) result;
         }
         return result;
     }
