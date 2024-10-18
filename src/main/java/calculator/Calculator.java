@@ -1,6 +1,7 @@
 package calculator;
 
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 public class Calculator {
     private String delimiterPattern = "[,:]";
@@ -23,12 +24,15 @@ public class Calculator {
         if (input.startsWith("//")) {
             input = processCustomDelimiter(input);
         }
-        return Arrays.stream(input.split(delimiterPattern))
+        String[] numbers = input.split(delimiterPattern);
+        InputValidator.validateNumbers(numbers);
+        return Arrays.stream(numbers)
                 .mapToInt(Integer::parseInt)
                 .sum();
     }
 
     public String processCustomDelimiter(String input) {
+        InputValidator.validateCustomDelimiterFormat(input);
         int delimiterIndex = input.indexOf("\\n");
         String customDelimiter = input.substring(2, delimiterIndex);
         delimiterPattern = customDelimiter + "|" + delimiterPattern;
