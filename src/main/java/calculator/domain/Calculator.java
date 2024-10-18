@@ -1,9 +1,11 @@
 package calculator.domain;
 
+import java.util.regex.Pattern;
+
 public class Calculator {
 
-    private static Integer CUSTOM_SEPARATOR_END_INDEX = 3;
     private static Integer CUSTOM_SEPARATOR_START_INDEX = 2;
+    private static Integer CUSTOM_SEPARATOR_END_INDEX = 3;
 
 
     public String[] extractNumber(String text) {
@@ -12,7 +14,8 @@ public class Calculator {
     }
 
     public String[] extractNumber(String customSeparator, String text) {
-        String arr[] = text.split(customSeparator);
+        String regex = Pattern.quote(customSeparator);
+        String arr[] = text.split(regex);
         return arr;
     }
 
@@ -25,15 +28,28 @@ public class Calculator {
     }
 
 
-    public void sum(String[] arr) {
+    public void test(String[] arr) {
         int sum = 0;
-        try {
-            for (String str : arr) {
+        for (String str : arr) {
+            try {
                 sum += validateNumber(Integer.parseInt(str));
+            } catch (NumberFormatException e) {
+                if (inputBlack(arr)) {
+                    System.out.println("결과 : " + sum);
+                }
+                if (!inputBlack(arr)) {
+                    throw new IllegalArgumentException();
+                }
             }
-        } catch (NumberFormatException e) {
         }
         System.out.println("결과 : " + sum);
+    }
+
+    private Boolean inputBlack(String[] arr) {
+        if (arr.length != 1) {
+            return false;
+        }
+        return true;
     }
 
     public static int validateNumber(int positiveNumber) {
