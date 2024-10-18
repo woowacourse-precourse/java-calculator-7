@@ -40,6 +40,4 @@ public class Separator {
     public String getRegex() {
         return String.join("|", separators);
     }
-
-
 }
