@@ -36,6 +36,7 @@
 
 * `Console` 명령어는 `Scanner.nextLine()`를 이용해 값을 입력받는데, `\n`을 할 경우, 입력값이 줄바꿈되며 사라진다.
   따라서 인덱스 값을 찾을 수 없다. 다른 방법을 찾아야겠다.
+* 커스텀구분자에 정규표현식`+,*,?,^,$,.,(),{},[],|`을 입력했을 때 실행이 되지 않는 버그가 있음.
 
 ### 해결한 문제
 
@@ -43,6 +44,7 @@
   하지만 `indexOf()` 함수를 사용했을 때 `\n` 의 인덱스 값이 추출되지 않는 것을 확인.
   이것을 `\\n` `(더블역슬래쉬n)`을 `indexOf()` 함수에 입력했을 떄 오류가 발생하지 않고,
   올바른 인덱스 값을 반환하는 것을 확인하여 문제를 해결함.
+* 커스텀구분자에 정규표현식이 들어갈 경우 실행이 되지 않는 버그를 `\\\\$1`로 대체하고 이스케이프하여 문제를 해결함.
 
 #### 참고한 자료
 
@@ -52,3 +54,4 @@
 * [Java Split with regex](https://mparchive.tistory.com/45)
 * [Java Substring](https://velog.io/@leo_c/JAVA-JAVA-substring으로-문자열-자르기)
 * [Java Substring from behind](https://kimsg.tistory.com/48)
+* [Double Back-Slash Escape](https://stackoverflow.com/questions/14260337/why-is-a-double-backslash-escape-required-inside-single-quoted-strings)
