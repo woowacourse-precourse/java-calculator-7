@@ -3,8 +3,8 @@ package calculator;
 import java.util.List;
 
 public class NumberValidator {
-    public void validate(List<String> stringInput) {
-        for (String s : stringInput) {
+    public void validate(List<String> stringInputs) {
+        for (String s : stringInputs) {
             validateNumberFormat(s);
             validatePositiveNumber(s);
         }
