@@ -11,16 +11,16 @@ public class Calculator {
         this.numbers = numbers;
     }
 
-    public String[] splitNumbers(){
+    public String splitNumbers(){
         String customDelimiter = "";
         String[] splitedNumbers;
         if(checkCustomDelimiter()){
             customDelimiter = getCustomDelimiter();
             splitedNumbers = numbers.split("[,;]|" + Pattern.quote(customDelimiter));
-            return splitedNumbers;
+            return plus(splitedNumbers);
         }
         splitedNumbers = numbers.split("[,;]");
-           return splitedNumbers;
+           return plus(splitedNumbers);
     }
 
     public boolean checkCustomDelimiter(){
