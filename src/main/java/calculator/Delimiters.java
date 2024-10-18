@@ -7,6 +7,17 @@ import java.util.List;
  * - 책임: 커스텀 구분자가 있는 경우 이를 파악하고, 적절한 구분자를 이용해 정규 표현식을 생성
  */
 public class Delimiters {
+    private static final String LEFT_BRACKET = "[";
+    private static final String RIGHT_BRACKET = "]";
+    private static final String BAR = "|";
+    private static final String STARTS_WITH = "^";
+    private static final String NUMBER_ONE_OR_MORE = "[0-9]+";
+    private static final String ZERO_OR_MORE_AT_END = "*$";
+    private static final String GROUP_START = "(";
+    private static final String GROUP_END = ")";
+    private static final String CUSTOM_DELIMITER_EXTRACTION_REGEX = "//|\\Q\\n\\E";
+    private static final String CUSTOM_DELIMITER_REGEX = "^//[^a-zA-Z0-9]\\Q\\n\\E.*";
+
     private final List<String> delimiters;
     private final String customDelimiter;
 
@@ -25,12 +36,12 @@ public class Delimiters {
     }
 
 
-    public String generateDefaultDelimiterRegex() {
-        return "[" + regexForDefault() + "]";
+    public String generateRegexForDefaultDelimiters() {
+        return LEFT_BRACKET + regexForDefault() + RIGHT_BRACKET;
     }
 
-    public String generateCustomDelimiterRegex() {
-        return "[" + regexForDefault() + "|" + customDelimiter + "]";
+    public String generateRegexForCustomDelimiter() {
+        return LEFT_BRACKET + regexForDefault() + BAR + customDelimiter + RIGHT_BRACKET;
     }
 
     /**
@@ -38,8 +49,8 @@ public class Delimiters {
      * - 커스텀 구분자를 이용해 숫자 패턴이 맞는지 검사
      * @return 숫자 패턴을 포함한 정규 표현식
      */
-    public String regexForCustomPatten() {
-        return "^[0-9]+("+ generateCustomDelimiterRegex() +"[0-9]+)*$";
+    public String regexForCustomPattern() {
+        return STARTS_WITH + NUMBER_ONE_OR_MORE + GROUP_START + generateRegexForCustomDelimiter() + NUMBER_ONE_OR_MORE + GROUP_END + ZERO_OR_MORE_AT_END;
     }
 
     /**
@@ -48,7 +59,7 @@ public class Delimiters {
      * @return 숫자 패턴을 포함한 정규 표현식
      */
     public String regexForDefaultPattern() {
-        return "^[0-9]+("+ generateDefaultDelimiterRegex() +"[0-9]+)*$";
+        return STARTS_WITH + NUMBER_ONE_OR_MORE + GROUP_START + generateRegexForDefaultDelimiters() + NUMBER_ONE_OR_MORE + GROUP_END  + ZERO_OR_MORE_AT_END;
     }
 
 
@@ -60,8 +71,7 @@ public class Delimiters {
      */
     private String getCustomDelimiter(String input) {
         if(isCustomDelimiterPresent(input)){
-            String regex = "//|\\Q\\n\\E";
-            String[] customString = input.split(regex);
+            String[] customString = input.split(CUSTOM_DELIMITER_EXTRACTION_REGEX);
             return customString[1];
         }
         return "";
@@ -74,12 +84,11 @@ public class Delimiters {
      * @return 커스텀 구분자가 있으면 true 반환
      */
     private boolean isCustomDelimiterPresent(String input) {
-        String regex = "^//[^a-zA-Z0-9]\\Q\\n\\E.*";
-        return input.matches(regex);
+        return input.matches(CUSTOM_DELIMITER_REGEX);
     }
 
 
     private String regexForDefault() {
-        return String.join("|", delimiters);
+        return String.join(BAR, delimiters);
     }
 }

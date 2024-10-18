@@ -53,9 +53,9 @@ public class Classifier {
             return List.of(0);
         }
         if(!delimiters.isCustomDelimiterPresent()) {
-            return splitAndConvertInput(input, delimiters.generateDefaultDelimiterRegex());
+            return splitAndConvertInput(input, delimiters.generateRegexForDefaultDelimiters());
         }
-        return splitAndConvertInput(getExcludedString(input), delimiters.generateCustomDelimiterRegex());
+        return splitAndConvertInput(getExcludedString(input), delimiters.generateRegexForCustomDelimiter());
     }
 
     /**
@@ -80,7 +80,7 @@ public class Classifier {
      * @param input 입력 문자열
      */
     private void isCustomStringValid(String input) {
-        if(!getExcludedString(input).matches(delimiters.regexForCustomPatten())) {
+        if(!getExcludedString(input).matches(delimiters.regexForCustomPattern())) {
             throw new IllegalArgumentException("Invalid custom delimiter");
         }
     }
