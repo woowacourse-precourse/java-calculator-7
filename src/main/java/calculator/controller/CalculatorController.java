@@ -3,7 +3,6 @@ package calculator.controller;
 import calculator.generator.controller.GenerateController;
 import calculator.number.domain.Number;
 import calculator.sentence.domain.Sentence;
-import calculator.separator.domain.Separator;
 import calculator.service.CalculatorProcess;
 import calculator.view.input.handler.InputHandlerService;
 import calculator.view.output.ResultService;
@@ -22,8 +21,7 @@ public class CalculatorController {
     }
     public void run() {
         Sentence sentence = inputHandlerService.receive(Sentence::new);
-        Separator separator = generateController.createSeparator(sentence);
-        Number number =  generateController.createNumber(sentence, separator);
+        Number number =  generateController.createNumber(sentence);
         long result = CalculatorProcess.sum(number);
         resultService.result(result);
     }
