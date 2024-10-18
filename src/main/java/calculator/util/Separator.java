@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 public class Separator {
     private static final String CUSTOM_PATTERN = "^//(.*)\\\\n(.*)";
     private static final String DEFALUT_PATTERN = "[,:]";
+    private static final String DIGITS_PATTERN = "\\d+";
     private static final String COMMA = ",";
     private static final String DELIMITER = ":";
     private static final Pattern COMPILE_PATTERN = Pattern.compile(CUSTOM_PATTERN);
@@ -44,11 +45,18 @@ public class Separator {
     }
 
     private static String[] splitInputByDefaultDelimiter(String input) {
+        if (isDigitsOnly(input)) {
+            return new String[]{input};
+        }
+
         validateDelimiter(input);
 
         return input.split(DEFALUT_PATTERN);
     }
 
+    private static boolean isDigitsOnly(String input) {
+        return input.matches(DIGITS_PATTERN);
+    }
 
     private static void validateDelimiter(String input) {
         if (isNotDefaultDelimiter(input)) {
@@ -57,6 +65,6 @@ public class Separator {
     }
 
     private static boolean isNotDefaultDelimiter(String input) {
-        return !input.contains(COMMA) && !input.contains(DELIMITER);
+        return !input.contains(COMMA) || !input.contains(DELIMITER);
     }
 }
