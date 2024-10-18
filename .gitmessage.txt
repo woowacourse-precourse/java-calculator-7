@@ -1,0 +1,20 @@
+# <type>(<scope>): <subject>
+
+
+# <body>
+
+
+# <footer> - Breaking changes, Referencing issues
+
+
+### Allowed <type>
+# feat (feature)
+# fix (bug fix)
+# docs (documentation)
+# style (formatting, missing semi colons, …)
+# refactor
+# test (when adding missing tests)
+# chore (maintain)
+
+### ref: https://gist.github.com/stephenparish/9941e89d80e2bc58a153
+### git config --local commit.template .gitmessage.txt
