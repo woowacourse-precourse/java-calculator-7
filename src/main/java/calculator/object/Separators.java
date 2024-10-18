@@ -1,17 +1,17 @@
 package calculator.object;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 public class Separators {
 
-    private static final List<Character> DEFAULT_SEPARATORS = List.of(',', ':');
+    private static final Set<Character> DEFAULT_SEPARATORS = Set.of(',', ':');
     private static final String SEPARATOR_HEADER = "//";
     private static final String SEPARATOR_FOOTER = "\\n";
 
     private final String customSeparator;
-    private final List<Character> separators;
+    private final Set<Character> separators;
 
     public Separators(String inputFormula) {
         if (isNotIncludedHeaderOrFooter(inputFormula)) {
@@ -51,10 +51,10 @@ public class Separators {
         return nowSeparator;
     }
 
-    private static List<Character> makeSeparatorsWith(String customSeparator) {
-        List<Character> separators = new ArrayList<>(DEFAULT_SEPARATORS);
+    private static Set<Character> makeSeparatorsWith(String customSeparator) {
+        Set<Character> separators = new HashSet<>(DEFAULT_SEPARATORS);
         separators.add(customSeparator.charAt(0));
-        return List.copyOf(separators);
+        return Set.copyOf(separators);
     }
 
 }
