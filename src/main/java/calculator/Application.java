@@ -23,6 +23,12 @@ public class Application {
             return null;
         }
         String default_Delimiters = ",|:";
+        if (input.startsWith("//") && input.contains("\\n")){
+            int endIndex = input.indexOf("\\n");
+            String number = input.substring(endIndex + 2);
+            String custom_Delimiters = input.substring(2, endIndex);
+            return number.split(custom_Delimiters);
+        }
         return input.split(default_Delimiters);
     }
 
