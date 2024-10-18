@@ -1,7 +1,10 @@
 package calculator.view;
 
-public class ConsoleOutPut {
-    public void printResult(int result) {
+import calculator.domain.view.View;
+
+public class ConsoleOutPut implements View<Integer> {
+    @Override
+    public void render(Integer result) {
         System.out.println("결과 : " + result);
     }
 }

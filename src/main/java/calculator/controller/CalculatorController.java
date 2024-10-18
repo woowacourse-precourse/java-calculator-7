@@ -18,6 +18,6 @@ public class CalculatorController {
         String input = consoleInput.input();
         CalculatorUseCase multipleUseCase = new MultipleService();
         int result = multipleUseCase.calculate(input);
-        consoleOutPut.printResult(result);
+        consoleOutPut.render(result);
     }
 }
