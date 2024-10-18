@@ -1,9 +1,9 @@
 package calculator;
 
+import camp.nextstep.edu.missionutils.Console;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Application {
 
@@ -27,8 +27,7 @@ public class Application {
     }
 
     public static String getUserInput() {
-        Scanner scanner = new Scanner(System.in);
-        userInput = scanner.nextLine();
+        userInput = Console.readLine();
         return userInput;
     }
 
