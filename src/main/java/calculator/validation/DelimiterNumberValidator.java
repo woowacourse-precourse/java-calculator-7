@@ -14,13 +14,18 @@ public class DelimiterNumberValidator {
 
     private int parseNumber(String number) {
         if (isNumeric(number)) {
-            return Integer.parseInt(number);
+            int parseInt = Integer.parseInt(number);
+
+            if (parseInt < 0) {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            }
+            return parseInt;
         }
         throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getMessage());
     }
 
     private boolean isNumeric(String str) {
-        return str.matches("\\d+");
+        return str.matches("-?\\d+");
     }
 
 }
