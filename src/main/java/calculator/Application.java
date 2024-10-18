@@ -57,14 +57,18 @@ public class Application {
         public boolean isValidString(ArrayDeque<String> splitStringDeq){
             try{
                 int arrSize = splitStringDeq.size();
+                // splitStringDeq를 순회
                 for (int i = 0; i < arrSize; i++) {
                     String s = splitStringDeq.pollFirst();
+                    // 비어있는 요소는 제거
                     if (s.isEmpty()) {
                         continue;
                     }
+                    // 숫자로 구성되어있으면 정수형으로 변환하여 저장
                     if(s.matches("\\d+")){
                         extractedNumArr.add(Integer.parseInt(s));
                     }else{
+                        // 다른 문자가 남아있을 경우 예외 throw
                         throw new IllegalArgumentException();
                     }
                 }
@@ -94,14 +98,18 @@ public class Application {
 
         // 문자열로부터 양수 추출
         public ArrayDeque<String> splitNumbers(String input){
-            // 구분자를 정의하려고 할때 사이에 숫자가 껴있을 수도 있음
+            // 구분자를 정의하려고 할때 사이에 숫자가 껴있을 수 있으므로 기본 구분자 콜론(:)으로 처리
+            // 이스케이프 문자가 주어진 경우에도 콜론(:)으로 처리
             String slicedString = input.replaceAll("//(.*?)\\\\n|\\\\s|\\\\t|\\\\r|\\\\f",":");
+
             ArrayDeque<String> splitStringDeq = new ArrayDeque<>();
 
+            // 다듬은 문자열이 없을 경우 빈 Deque를 반환
             if(slicedString.isEmpty()){
                 return splitStringDeq;
             }
 
+            // Deque를 통한 BFS
             splitStringDeq.add(slicedString);
 
             try {
@@ -110,13 +118,17 @@ public class Application {
                 while(i>=0 && !splitStringDeq.isEmpty()) {
                     int arrSize = splitStringDeq.size();
                     for(int j=0;j< arrSize;j++){
-                        String 덩어리 = splitStringDeq.pollFirst();
-                        if(덩어리.contains(delimiterArr.get(i))){
-                            splitStringDeq.addAll(List.of(덩어리.split(delimiterArr.get(i))));
+                        String element = splitStringDeq.pollFirst();
+
+                        // 구분자를 포함하고 있을 경우
+                        if(element.contains(delimiterArr.get(i))){
+                            // split하여 deque에 저장
+                            splitStringDeq.addAll(List.of(element.split(delimiterArr.get(i))));
                             continue;
                         }
-                        splitStringDeq.add(덩어리);
+                        splitStringDeq.add(element);
                     }
+                    // 다음 구분자로 넘어간다
                     i--;
                 }
                 return splitStringDeq;
