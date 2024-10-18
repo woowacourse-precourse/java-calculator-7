@@ -39,6 +39,16 @@ public class CalculatorService {
         return "";
     }
 
+    public String[] splitBySeparator(String input, String customSeparator) {
+        String regex = String.format("[,:%s]", customSeparator);
+        Pattern pattern = Pattern.compile(regex);
+
+        String prefixCustomSeparator = "^//(.+?)\\\\n";
+        String processedInput = input.replaceFirst(prefixCustomSeparator, "");
+
+        return processedInput.split(regex);
+    }
+
     public long logic(String input) {
 
         if (isBlank(input)) {
