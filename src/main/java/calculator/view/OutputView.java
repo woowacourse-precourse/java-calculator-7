@@ -5,6 +5,5 @@ public class OutputView {
 
     public static void printResult(final int result) {
         System.out.printf(RESULT_MESSAGE + "%d", result);
-        System.out.println();
     }
 }
