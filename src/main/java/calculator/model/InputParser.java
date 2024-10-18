@@ -29,7 +29,7 @@ public class InputParser {
 	// 구분자들을 이용해 정규식을 만들고, 이를 이용해 입력값을 분리
 	private String[] splitInput(String input, List<String> delimiters) {
 		String processedInput = removeCustomDelimiter(input);
-		validateDelimiter(processedInput);
+		validateInvalidDelimiter(processedInput);
 
 		String regex = String.join("|",
 			delimiters.stream()
@@ -113,7 +113,7 @@ public class InputParser {
 		return input.startsWith("//");
 	}
 
-	private void validateDelimiter(String input) {
+	private void validateInvalidDelimiter(String input) {
 		String regex = "[\\d" + String.join("", delimiters) + "]*";
 
 		if (!input.matches(regex)) {
