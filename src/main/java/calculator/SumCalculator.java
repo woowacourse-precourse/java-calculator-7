@@ -5,8 +5,8 @@ import java.util.List;
 public class SumCalculator implements Calculator {
 
     @Override
-    public long sum(List<Integer> numbers) {
-        long sum = 0;
+    public int sum(List<Integer> numbers) {
+        int sum = 0;
         for(int number : numbers) {
             validateRange(sum, number);
             sum += number;
@@ -15,8 +15,8 @@ public class SumCalculator implements Calculator {
         return sum;
     }
 
-    private void validateRange(long sum, int number) {
-        long MAX_SUM = Long.MAX_VALUE;
+    private void validateRange(int sum, int number) {
+        int MAX_SUM = Integer.MAX_VALUE;
         if(sum > MAX_SUM - number) {
             throw new IllegalArgumentException("합계가 최대값을 초과했습니다.");
         }

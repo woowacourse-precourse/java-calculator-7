@@ -6,7 +6,7 @@ public class Application {
         Calculator calculator = new SumCalculator();
         OutputView outputView = new OutputView();
 
-        long result = calculator.sum(userInput.createFormula());
+        int result = calculator.sum(userInput.createFormula());
         outputView.getSumResult(result);
     }
 }

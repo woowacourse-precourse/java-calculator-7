@@ -15,10 +15,10 @@ class SumCalculatorTest {
         List<Integer> numbers = List.of(123, 23, 1);
 
         //when
-        long actual = calculator.sum(numbers);
+        int actual = calculator.sum(numbers);
 
         //then
-        long expect = 147;
+        int expect = 147;
         assertThat(actual).isEqualTo(expect);
     }
 
