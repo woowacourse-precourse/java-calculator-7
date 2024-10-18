@@ -28,5 +28,7 @@ public class Application {
                 throw new IllegalArgumentException();
             }
         }
+
+        System.out.println("결과 : " + sum);
     }
 }
