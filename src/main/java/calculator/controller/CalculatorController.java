@@ -1,42 +1,38 @@
 package calculator.controller;
 
 import calculator.model.Calculator;
+import calculator.util.refine.SeparatePositiveNumber;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
+import java.util.List;
+
 public class CalculatorController {
-    private final Calculator calculator = new Calculator();
-    private final InputView inputView = new InputView();
-    private final OutputView outputView = new OutputView();
+
+    private final SeparatePositiveNumber separatePositiveNumber;
+    private final InputView inputView;
+    private final OutputView outputView;
+
+    public CalculatorController(SeparatePositiveNumber separatePositiveNumber, InputView inputView, OutputView outputView) {
+        this.separatePositiveNumber = separatePositiveNumber;
+        this.inputView = inputView;
+        this.outputView = outputView;
+    }
 
     public void startCalculate() {
+        Calculator calculator = inputExpression();
+        calculator.sum();
+        printCalculateResult(calculator);
+    }
+
+    private Calculator inputExpression() {
         String expression = inputView.inputExpressionString();
-        int[] extractNumberAry = extractNumbers(expression);
-        calculator.sum(extractNumberAry);
-        outputView.printCalculateResult(calculator.getTotal());
+        List<Integer> numberList = separatePositiveNumber.extractNumbers(expression);
+
+        return new Calculator(numberList);
     }
 
-    private int[] extractNumbers(String input) {
-        String delimiter = "[,:]";
-        if (input.startsWith("//")) {
-            int delimiterIndex = input.indexOf("\\n");
-            delimiter = input.substring(2, delimiterIndex);
-            input = input.substring(delimiterIndex + 1);
-        }
-
-        return toPositiveNumberArray(input.split(delimiter));
-    }
-
-    private int[] toPositiveNumberArray(String[] extractNumbers) {
-        int[] numberArray = new int[extractNumbers.length];
-        for (int count = 0; count < extractNumbers.length; count++) {
-            numberArray[count] = verifyPositive(extractNumbers[count]);
-        }
-
-        return numberArray;
-    }
-
-    private int verifyPositive(String extractNumber) {
-        return Integer.parseInt(extractNumber);
+    private void printCalculateResult(Calculator calculator) {
+        outputView.printCalculateResult(calculator.getResult());
     }
 }
