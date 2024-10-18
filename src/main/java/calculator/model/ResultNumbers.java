@@ -16,4 +16,12 @@ public class ResultNumbers {
         return numberList;
     }
 
+    public int getResult() {
+        return result;
+    }
+
+    public void setResult(int result) {
+        this.result = result;
+    }
+
 }

@@ -18,6 +18,7 @@ public class Controller {
         try {
             getString();
             getNumberList();
+            getResultNum();
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
@@ -43,6 +44,10 @@ public class Controller {
 
         mainService.extractNumbersFromString(inputString, resultNumbers);
         exceptions.validateNegativeNumbers(resultNumbers.getNumberList());
+    }
+
+    private void getResultNum() {
+        mainService.setResultNumbers(resultNumbers);
     }
 
 

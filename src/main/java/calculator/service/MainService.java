@@ -65,5 +65,17 @@ public class MainService {
 
     }
 
+    public void setResultNumbers(ResultNumbers resultNumbers) {
+
+        int result = resultNumbers.getResult();
+
+        for(int num : resultNumbers.getNumberList()) {
+            result += num;
+        }
+
+        resultNumbers.setResult(result);
+
+    }
+
 
 }
