@@ -36,6 +36,9 @@ public class Application {
                 if (Pattern.matches("\\d", customSeparator)) {
                     throw new IllegalArgumentException("커스텀 구분자는 숫자가 될 수 없습니다.");
                 }
+                if (customSeparator.isEmpty() || customSeparator.trim().isEmpty()) {
+                    throw new IllegalArgumentException("커스텀 구분자는 공백이 될 수 없습니다.");
+                }
 
                 separator = separator + "|" + Pattern.quote(customSeparator);  // 기본 구분자에 커스텀 구분자 추가
                 // 커스텀 구분자를 추출했으니 그 이후의 숫자 문자열만 남김
