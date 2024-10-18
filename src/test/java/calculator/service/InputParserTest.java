@@ -1,4 +1,4 @@
-package calculator.service.util;
+package calculator.service;
 
 import calculator.domain.exception.CalculatorException;
 import calculator.domain.exception.CalculatorErrorMessage;
