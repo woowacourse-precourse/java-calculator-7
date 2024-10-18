@@ -102,4 +102,24 @@ class CalculatorServiceTest {
         );
     }
 
+    @ParameterizedTest
+    @MethodSource("provideInputNumbersAndExpected")
+    @DisplayName("더하기 계산결과 테스트")
+    void calculateTest(String[] inputNumbers, long expected) {
+
+        // Given & Then
+        long result = calculatorService.calculate(inputNumbers);
+        // Then
+        assertThat(result).isEqualTo(expected);
+    }
+
+    static Stream<Object[]> provideInputNumbersAndExpected() {
+        return Stream.of(
+                new Object[]{new String[]{"1", "2", "3", "4"}, 10},
+                new Object[]{new String[]{"5", "6", "7"}, 18},
+                new Object[]{new String[]{"8", "9", "10"}, 27},
+                new Object[]{new String[]{"11", "12", "13"}, 36},
+                new Object[]{new String[]{"14", "1", "5", "1", "6"}, 27}
+        );
+    }
 }
