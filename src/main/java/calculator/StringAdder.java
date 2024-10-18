@@ -43,5 +43,18 @@ public class StringAdder {
         return sum;
     }
 
+    public int add(String input) {
+        if (input == null || input.isEmpty()) {
+            return 0;
+        }
 
+        String delimiter = extractDelimiter(input);
+        input = removeDelimiterSection(input);
+
+        String[] numbers = splitNumbers(input, delimiter);
+
+        validator.validate(numbers);
+
+        return sumNumbers(numbers);
+    }
 }
