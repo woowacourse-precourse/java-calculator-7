@@ -1,6 +1,7 @@
 package calculator.controller;
 
 import calculator.service.Parser;
+import calculator.service.Validator;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -31,8 +32,12 @@ public class Controller {
 
     private String parseInput(String input) {
         Parser parser = new Parser();
+        Validator validator = new Validator();
         StringBuilder sb = new StringBuilder();
         String[] inputArr = parser.parse(input);
+
+        validator.validate(inputArr);
+
         for (String s : inputArr) {
             sb.append(s).append(", ");
         }
