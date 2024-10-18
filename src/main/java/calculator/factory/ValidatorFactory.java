@@ -1,5 +1,6 @@
-package calculator.validator;
+package calculator.factory;
 
+import calculator.validator.InputValidator;
 import calculator.validator.strategies.CustomDelimiterValidator;
 import calculator.validator.strategies.DuplicateDelimiterValidator;
 import calculator.validator.strategies.EmptyNumberValidator;
