@@ -14,14 +14,6 @@ public class ExtractUtil {
         return EMPTY;
     }
 
-    public String extractPositiveString(String readInput, String customDelimiter) {
-        if (hasCustomDelimiter(readInput)) {
-            String remove = createRemoveString(customDelimiter);
-            return readInput.replace(remove, EMPTY);
-        }
-        return readInput;
-    }
-
     private boolean hasCustomDelimiter(String readInput) {
         return readInput.contains(CUSTOM_PREFIX) && readInput.contains(CUSTOM_SUFFIX);
     }
@@ -34,6 +26,11 @@ public class ExtractUtil {
 
     private String extractDelimiter(String readInput, int[] position) {
         return readInput.substring(position[0], position[1]);
+    }
+
+    public String extractPositiveString(String readInput, String customDelimiter) {
+        String remove = createRemoveString(customDelimiter);
+        return readInput.replace(remove, EMPTY);
     }
 
     private String createRemoveString(String customDelimiter) {
