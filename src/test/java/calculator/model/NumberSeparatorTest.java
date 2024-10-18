@@ -14,4 +14,11 @@ class NumberSeparatorTest {
 	void validateSeparateNumber(String validData) {
 		assertDoesNotThrow(() -> NumberSeparator.from(validData).separate());
 	}
+
+	@DisplayName("분리기의 커스텀 구분자에 숫자, 공백, 길이가 2 이상인 문자열이 올 수 없다")
+	@ParameterizedTest
+	@ValueSource(strings = {"//3\\n", "//\\n", "//!@\\n", "//ab\\n"})
+	void validateSeparateNumberCharacter(String invalidData) {
+		assertThrows(IllegalArgumentException.class, () -> NumberSeparator.from(invalidData).separate());
+	}
 }
