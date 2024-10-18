@@ -10,7 +10,8 @@ import calculator.delimiter.factory.DelimiterFactory;
 import calculator.delimiter.service.DelimiterService;
 import calculator.delimiter.service.IntegerDelimiterService;
 import calculator.util.integer.IntegerUtils;
-import calculator.util.io.IOConsole;
+import calculator.view.InputView;
+import calculator.view.OutputView;
 
 import java.util.List;
 
@@ -24,15 +25,17 @@ public class Application {
     );
     private static final DelimiterService delimiterService = new IntegerDelimiterService(delimiterFactory, customDelimiterService);
 
+    private static final InputView inputView = new InputView();
+    private static final OutputView outputView = new OutputView();
+
     public static void main(String[] args) {
 
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = IOConsole.readLine();
+        String input = inputView.readUserInput();
 
         List<String> numberStrings = delimiterService.splitByDelimiters(input);
 
         List<Integer> numbers = IntegerUtils.parseIntegers(numberStrings);
         int sum = IntegerUtils.sum(numbers);
-        IOConsole.print("결과 : " + sum);
+        outputView.printSumResult(sum);
     }
 }
