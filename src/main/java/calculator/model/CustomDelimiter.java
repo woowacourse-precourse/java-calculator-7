@@ -7,5 +7,6 @@ public class CustomDelimiter extends Delimiter {
 
     @Override
     public void validate() {
+
     }
 }

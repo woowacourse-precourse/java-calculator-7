@@ -17,12 +17,4 @@ public class StringCalculatorController {
         String input = inputView.InputData();
         return new InputData(input);
     }
-
-    public Delimiter createDelimiterPart(InputData inputData){
-        if(inputData.isDelimiter()) {
-            return new CustomDelimiter(inputData.convertDelimiterPart());
-        }
-
-        return new DefaultDelimiter();
-    }
 }
