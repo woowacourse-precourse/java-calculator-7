@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 class InputValidatorTest {
 
-    @DisplayName("빈 문자열 입력 정상 처리")
+    @DisplayName("빈 문자열 입력 정상 처리") //todo :  이후 빈 문자열 입력 시 종료로 리펙토링하자
     @Test
     void testEmptyString() {
         // given
@@ -17,7 +17,7 @@ class InputValidatorTest {
         assertDoesNotThrow(() -> InputValidator.validate(input));
     }
 
-    @DisplayName("커스텀 구분자 지정 시 정상 처리") //이후 커스텀 처리 프로세스 추가하자
+    @DisplayName("커스텀 구분자 지정 시 정상 처리") //todo: 이후 커스텀 처리 프로세스 추가할 예정
     @Test
     void testStartsWithDelimiter() {
         // given

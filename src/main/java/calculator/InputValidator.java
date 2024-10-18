@@ -3,18 +3,18 @@ package calculator;
 public class InputValidator {
     public static void validate(String input) {
         // 빈 문자열 처리
+        // todo : 빈 문자열 입력시 종료
         if (validateEmpty(input)) {
             return;
         }
-        ;
 
         // 커스텀 구분자로 시작할 경우 바로 리턴
-        // 이후 커스
+        // todo: 커스텀 구분자 로직 진행
         if (validateStartsWithDelimiter(input)) {
             return;
         }
 
-        validateStartsWithPositiveNumber(input);
+
 
         validateNotStartsWithChar(input);
 
@@ -33,10 +33,6 @@ public class InputValidator {
         }
     }
 
-    private static void validateStartsWithPositiveNumber(String input) {
-        if (isStartsWithDigit(input)) return;
-    }
-
     private static boolean isStartsWithDigit(String input) {
         return Character.isDigit(input.charAt(0));
     }
@@ -46,8 +42,6 @@ public class InputValidator {
     }
 
     private static boolean validateEmpty(String input) {
-        // 빈 문자열일 경우 정상 동작
-        if (input.isEmpty()) return true;
-        return false;
+        return input.isEmpty();
     }
 }
