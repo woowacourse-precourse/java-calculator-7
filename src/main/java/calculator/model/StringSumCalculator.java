@@ -19,11 +19,15 @@ public class StringSumCalculator implements Calculator {
             return DEFAULT_VALUE;
         }
 
+        String targetValue = inputValue;
         if (delimiterManager.existCustomDelimiter(inputValue)) {
             delimiterManager.registerCustomDelimiters(inputValue);
             targetValue = stringParser.splitTarget(inputValue);
         }
         List<Integer> extractedNumbers = stringParser.parseToNumbers(targetValue);
-        return 0;
+
+        return extractedNumbers.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 }
