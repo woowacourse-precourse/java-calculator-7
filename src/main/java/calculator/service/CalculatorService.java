@@ -16,7 +16,7 @@ public class CalculatorService {
 	private String validate(String line) {
 		if (line == null)
 			throw new IllegalArgumentException("입력값이 null입니다.");
-		if (line.charAt(0) == PATTERN.charAt(0))
+		if (!line.isBlank() && line.charAt(0) == PATTERN.charAt(0))
 			line = findDelimiter(line);
 		return line;
 	}
@@ -34,6 +34,8 @@ public class CalculatorService {
 
 	public List<Integer> getNumbers() {
 		List<Integer> numbers = new ArrayList<>();
+		if (line.isBlank())
+			return numbers;
 		for (String number : line.split("[" + delimiter + "]")) {
 			int item = 0;
 			try {
