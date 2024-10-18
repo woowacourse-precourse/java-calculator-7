@@ -14,5 +14,9 @@ public class Application {
         // GetNumbers 클래스 호출
         GetNumbers getNumbers = new GetNumbers();
         List<Integer> numbers = getNumbers.extractNumbers(input);
+
+        // Calculator 클래스 호출
+        Calculator calculator = new Calculator();
+        int result = calculator.sumNumbers(numbers);
     }
 }
