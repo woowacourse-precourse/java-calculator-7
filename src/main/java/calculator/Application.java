@@ -10,6 +10,16 @@ public class Application {
 
         String input = Console.readLine();
 
+        if(input.startsWith("//")){
+
+            String[] split = input.split("\\\\n");
+
+            String delimiter = split[0].replace("//", "");
+            String numbers = split[1];
+
+            input = numbers.replace(delimiter, ",");
+
+        }
 
     }
 }
