@@ -4,7 +4,7 @@ import calculator.constant.ErrorMessage;
 import calculator.number.domain.Number;
 
 public class CalculatorProcess {
-    public Long sum(Number number) {
+    public static Long sum(Number number) {
         try {
             return number.getNumbers()
                     .stream()
