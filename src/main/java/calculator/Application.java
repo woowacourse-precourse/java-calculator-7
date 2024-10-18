@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 import calculator.inputData.InputData;
 import calculator.listParsing.ListChecking;
 import calculator.listParsing.ListParsing;
+import calculator.summingData.DataSumming;
 
 import java.util.List;
 
@@ -19,5 +20,7 @@ public class Application {
         System.out.println("numbers: " + numbers);
         List<Integer> numList = ListParsing.parseList(numbers, delimiterInput);
         System.out.println("numberList: " + numList);
+        int sum = DataSumming.sumData(numList);
+        System.out.println("numberList: " + sum);
     }
 }
