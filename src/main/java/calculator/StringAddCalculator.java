@@ -16,6 +16,14 @@ public class StringAddCalculator implements StringCalculator {
         if (input == null || input.isBlank()) {
             return DEFAULT_VALUE;
         }
+        if (input.startsWith("//")) {
+            return sumWithCustomDelimiter(input);
+        } else {
+            return sumWithDefaultDelimiter(input);
+        }
+    }
+
+    private int sumWithCustomDelimiter(String input) {
         DelimiterAndNumber delimiterAndNumber = extractCustomDelimiterAndNumbers(input);
         List<Integer> numbers = splitNumbers(delimiterAndNumber);
         validateNumbers(numbers);
@@ -33,6 +41,25 @@ public class StringAddCalculator implements StringCalculator {
             delimiters += "|" + Pattern.quote(customDelimiter);
         }
         return new DelimiterAndNumber(delimiters, numbersString);
+    }
+
+    private int sumWithDefaultDelimiter(String input) {
+        List<Character> invalidChars = input.chars()
+                .mapToObj(c -> (char) c)
+                .filter(c -> !(Character.isDigit(c) || c == ':' || c == ',')) // 기본 구분자 :,
+                .toList();
+
+        if (!invalidChars.isEmpty()) {
+            throw new IllegalArgumentException(
+                    String.format("(%s)에서는 허용되지 않는 구분자가 발견되었습니다. (%s)", input, invalidChars)
+            );
+        }
+        String[] splitNumbers = input.split(DEFAULT_DELIMITER);
+        List<Integer> numbers = Arrays.stream(splitNumbers)
+                .map(Integer::parseInt)
+                .toList();
+        validateNumbers(numbers);
+        return sum(numbers);
     }
 
     private List<Integer> splitNumbers(DelimiterAndNumber delimiterAndNumber) {
