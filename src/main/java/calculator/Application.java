@@ -12,9 +12,14 @@ public class Application {
         // 구분자 분리 기능
         String[] splitInputNumber = splitInputNumber(inputNumber);
         // 구분된 문자열이 양수인 문자열인지 체크
+        if (inputNumber.isEmpty()) {
+            System.out.print("결과 : 0");
+            return;
+        }
         validateSplitNumber(splitInputNumber);
         // 결과 출력
         printResult(splitInputNumber);
+
     }
 
     private static String inputNumber() {
@@ -32,7 +37,7 @@ public class Application {
             // 커스텀 구분자가 있을 때
             String inputDelimiter = matcher.group(1);
             inputNumber = matcher.replaceFirst("");
-        
+
             String delimiter = buildDelimiter(defaultDelimiter, inputDelimiter);
             splitInputNumber = inputNumber.split(delimiter);
         } else {
@@ -63,6 +68,7 @@ public class Application {
 
     private static void printResult(String[] splitInputNumber) {
         int result = 0;
+
         for (String number : splitInputNumber) {
             result += Integer.parseInt(number);
         }
