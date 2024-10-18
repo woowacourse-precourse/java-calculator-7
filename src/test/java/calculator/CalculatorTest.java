@@ -19,10 +19,6 @@ class CalculatorTest extends NsTest {
 
     @Test
     void long_범위초과_예외_테스트() {
-        assertSimpleTest(() -> {
-
-            assertThat(output()).contains("결과 : 1");
-        });
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//+\\n4000000000000000000+5000000000000000000"))
                         .isInstanceOf(IllegalArgumentException.class)
