@@ -18,9 +18,13 @@ public class ListParsing {
 
         for (String numStr : parsedNumbers) {
             try {
-                numbersList.add(Integer.parseInt(numStr));
+                int number = Integer.parseInt(numStr);
+                if (number < 0) {
+                    throw new IllegalArgumentException("양의 정수를 입력해야 합니다.");
+                }
+                numbersList.add(number);
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Invalid number format: " + numStr);
+                throw new IllegalArgumentException("올바르지 않은 형식입니다.");
             }
         }
 
