@@ -13,7 +13,7 @@ public class CalculatorService {
 	private void validate(String line) {
 		if (line == null)
 			throw new IllegalArgumentException("입력값이 null입니다.");
-		if (line.charAt(0) == '/')
+		if (line.charAt(0) == pattern.charAt(0))
 			line = findDelimiter(line);
 	}
 
