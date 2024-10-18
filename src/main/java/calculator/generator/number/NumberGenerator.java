@@ -22,7 +22,7 @@ public class NumberGenerator {
                 separator);
     }
 
-    public String extractorPositiveNumber(String sentence) {
+    private String extractorPositiveNumber(String sentence) {
         return extractor.extractorNumber(sentence);
     }
 }
