@@ -1,53 +1,77 @@
 package calculator.controller;
 
-import calculator.controller.view.InputView;
+import calculator.utils.InputCase;
+import calculator.view.InputView;
+import calculator.view.OutputView;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
 public class CalculatorController {
 
-    public void start() {
-        String input = InputView.getDelimiterAndNumbers();
+    public void calculate() {
+        String input = InputView.getInput();
+        //input format 점검
+        Stream<Integer> numbers = convertString(input);
 
-        Stream<Integer> numbers;
-        List<String> delimiters = new ArrayList<>();
-        List<String> numStrs = new ArrayList<>();
-
-
-        if (startsWithNumber(input)) {
-            String[] stringNums = input
-                    .replaceAll("[,|:]", " ")
-                    .split(" ");
-
-            try {
-                numbers = Arrays.stream(stringNums).map(Integer::parseInt);
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("숫자가 아닌 입력값이 있습니다.");
-            }
-        } else {
-            // check the format of "//;\n1;2;3"
-            String newDelimiter = extractNewDelimiter(input);
-            numbers = Arrays.stream(
-                    input.substring(newDelimiter.length() + 4).split(newDelimiter)
-                    )
-                    .map(Integer::parseInt);
-        }
         int sum = numbers.reduce(0, Integer::sum);
-        System.out.println("결과 : " + sum);
+
+        OutputView.printResult(sum);
+    }
+
+    private Stream<Integer> convertString(String input) {
+        String[] stringNums = extractStringNumber(input);
+
+        if (Arrays.asList(stringNums).contains("")) {
+            throw new IllegalArgumentException("구분자가 잘못 입력되었습니다.");
+        }
+
+        return extractNumber(stringNums);
+    }
+
+    private String[] extractStringNumber(String input) {
+        InputCase inputCase = separateCase(input);
+        return switch(inputCase) {
+            case InputCase.NONE -> new String[0];
+            case InputCase.DEFAULT -> input.replaceAll("[,|:]", " ")
+                    .split(" ");
+            case InputCase.CUSTOM -> {
+                String customDelimiter = extractNewDelimiter(input);
+                String slicedInput = input.substring(customDelimiter.length() + 4); // 4 == "//\n".length()
+                yield slicedInput.replaceAll("[,|:|" + customDelimiter+ "]", " ")
+                        .split(" ");
+            }
+        };
+    }
+
+    private InputCase separateCase(String input) {
+        if (input.matches("")) {
+            return InputCase.NONE;
+        } else if (startsWithNumber(input)) {
+            return InputCase.DEFAULT;
+        } else {
+            return InputCase.CUSTOM;
+        }
+    }
+
+    private Stream<Integer> extractNumber(String[] stringNums) {
+        try {
+           return Arrays.stream(stringNums).map(Integer::parseInt);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자가 아닌 입력값이 있습니다.");
+        }
     }
 
     private String extractNewDelimiter(String str) {
-        checkInputFormat(str);
-        int delimiterIndex = str.indexOf("\\n");
-        return str.substring(2, delimiterIndex);
+        int indexOfFormatLast = str.indexOf("\\n");
+        return str.substring(2, indexOfFormatLast);
     }
 
-    private void checkInputFormat(String str) {
+    private boolean checkInputFormat(String str) {
         if(!str.startsWith("//")) throw new IllegalArgumentException("잘못된 형식의 입력입니다.");
         if(!str.contains("\\n")) throw new IllegalArgumentException("잘못된 형식의 입력입니다.");
+        return true;
     }
 
     private boolean startsWithNumber(String str) {
@@ -57,14 +81,6 @@ public class CalculatorController {
 
     private Stream<Integer> convertToInt(List<String> strs) {
         return strs.stream().map(Integer::parseInt);
-    }
-
-    public static void main(String[] args) {
-        var version = "Java 23";
-        String str = "33,1:2";
-        String result = str.replaceAll("[,|:]", " ").replace(":", " ");;
-        System.out.println(result);
-
     }
 }
 
