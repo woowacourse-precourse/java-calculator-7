@@ -7,10 +7,10 @@ import java.util.List;
 
 public class CalculatorService {
 
-    private final List<String> separators;
+    private final Separators separators;
 
     public CalculatorService() {
-        separators = SeparatorType.getDefaults();
+        separators = Separators.init();
     }
 
     public Number calculate(String input) {
@@ -25,7 +25,7 @@ public class CalculatorService {
     }
 
     private String[] split(String expression) {
-        return new SeparatorSplitter(separators, expression).split();
+        return new SeparatorSplitter(separators.getValues(), expression).split();
     }
 
     private Double[] convertToNumbers(String[] separatedValues) {

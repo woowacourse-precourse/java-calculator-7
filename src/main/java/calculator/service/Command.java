@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public class Command {
 
-    private final String customSeparator;
+    private final Separator customSeparator;
     private final String expression;
 
     public Command(String input) {
@@ -16,9 +16,10 @@ public class Command {
         this.expression = parseExpression(input);
     }
 
-    private String parseCustomSeparator(String input) {
+    private Separator parseCustomSeparator(String input) {
         Optional<String> customSeparator = new CustomSeparatorManager(input).extract();
-        return customSeparator.orElse(Constants.NO_VALUE);
+        return customSeparator.map(Separator::create)
+                .orElse(null);
     }
 
     private String parseExpression(String input) {
@@ -30,10 +31,10 @@ public class Command {
     }
 
     public boolean hasCustomSeparator() {
-        return !customSeparator.equals(Constants.NO_VALUE);
+        return customSeparator != null;
     }
 
-    public String getCustomSeparator() {
+    public Separator getCustomSeparator() {
         return customSeparator;
     }
 
