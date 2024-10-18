@@ -6,21 +6,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Application {
-    private static final String MSG_GUID_INPUT = "덧셈할 문자열을 입력해 주세요.\n";
+    private static final String MSG_GUIDE_INPUT = "덧셈할 문자열을 입력해 주세요.\n";
 
     public static void main(String[] args) {
         int inputNum = 0;
         String inputString = null;
+        char customDelim = 0;
         List<Integer> inputNumbers = new ArrayList<>();
 
         // 1. 입력
         // 1-1. 입력 안내 메시지 출력
-        System.out.println(MSG_GUID_INPUT);
+        System.out.println(MSG_GUIDE_INPUT);
         // 1-2. 입력 받아오기
         inputString = Console.readLine();
         // 1-3. 입력 유효성 검증
+        // 2-1. 커스텀 구분자 검증
         if (inputString.charAt(0) == '/' && inputString.charAt(1) == '/') {
             // 2. 커스텀 구분자
+            customDelim = inputString.charAt(2);
+            inputString = inputString.substring(5);
+
+            if (customDelim == '\\') {
+                throw new IllegalArgumentException("커스텀 구분자가 지정되지 않았습니다.");
+            }
         }
         try {
             if (inputString == null || inputString.isEmpty()) {
@@ -32,7 +40,7 @@ public class Application {
         }
         // 1-4. 입력 내 숫자 문자 추출
         for (char c : inputString.toCharArray()) {
-            if (c == ':' || c == ',') {
+            if ((customDelim == 0 && (c == ':' || c == ',')) || c == customDelim) {
                 if (inputNum != 0) {
                     inputNumbers.add(inputNum);
                     inputNum = 0;
