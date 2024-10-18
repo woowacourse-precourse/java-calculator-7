@@ -5,6 +5,12 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Simple parser that parses input string to numbers. It uses <code>Stream</code> & <code>RegEx</code> to parse the
+ * input string.
+ *
+ * @see Parser
+ */
 public class SimpleParser implements Parser {
     public static final String INPUT_DELIMITERS_PATTERN = "^//.*\\\\n";
     public static final String DEFAULT_DELIMITERS = "[,:]";
