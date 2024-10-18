@@ -1,4 +1,4 @@
-package calculator;
+package calculator.io;
 
 public class ConsoleDisplay implements Display {
     private static final String RESULT_MESSAGE_PREFIX = "결과 : ";

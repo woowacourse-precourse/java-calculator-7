@@ -1,6 +1,8 @@
 package calculator;
 
 import calculator.arithmeticUnit.ExpressionExecutor;
+import calculator.io.Display;
+import calculator.io.InputReceiver;
 
 import java.util.Set;
 
@@ -10,16 +12,18 @@ public class SeparatorExpressionCalculator {
     private final OperatorMap operatorMap = OperatorMap.getInstance();
     private final Separators separators;
     private final Display display;
+    private final InputReceiver inputReceiver;
 
-    public SeparatorExpressionCalculator(Display display) {
+    public SeparatorExpressionCalculator(InputReceiver inputReceiver, Display display) {
         this.separators = new Separators(Set.of(COMMA_SEPARATOR, COLON_SEPARATOR));
         this.display = display;
+        this.inputReceiver = inputReceiver;
         this.operatorMap.registerSeparatorToOperator(COMMA_SEPARATOR, OperatorEnum.PLUS);
         this.operatorMap.registerSeparatorToOperator(COLON_SEPARATOR, OperatorEnum.PLUS);
     }
 
     public void operate() {
-        String input = getInputFromConsole();
+        String input = inputReceiver.readInput();
         Expression expression = parseToExpression(input);
         ExpressionExecutor expressionExecutor = new ExpressionExecutor(operatorMap);
         int result = expressionExecutor.calculate(expression);
@@ -41,9 +45,5 @@ public class SeparatorExpressionCalculator {
             separators.add(customSeparator);
             operatorMap.registerSeparatorToOperator(customSeparator, OperatorEnum.PLUS);
         }
-    }
-
-    private String getInputFromConsole() {
-        return CalculatorInputConsole.readLine();
     }
 }
