@@ -9,7 +9,8 @@ public class Application {
         String input = Console.readLine();
         String[] splitString = input.split(ORIGINAL_SPLITTER_REGEX);
         int sum = 0;
-        if(splitString.length >= 1) {
+        
+        if (splitString.length >= 1) {
             sum = calculateSum(splitString, sum);
         }
         System.out.println("결과 : " + sum);
