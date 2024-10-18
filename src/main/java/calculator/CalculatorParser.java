@@ -14,14 +14,15 @@ public class CalculatorParser {
         if (line.startsWith(CUSTOM_START)) {
             parseCustomDelimiter(line);
             checkEndsWithCustomEnd(line);
-            expressionStartIdx = CUSTOM_START.length() + CUSTOM_DELIMITER_LENGTH + CUSTOM_END.length(); // TODO: 포맷하기
+            expressionStartIdx = CUSTOM_START.length() + CUSTOM_DELIMITER_LENGTH + CUSTOM_END.length();
         }
 
         this.expression = line.substring(expressionStartIdx);
     }
 
     private void parseCustomDelimiter(String line) {
-        if (line.length() == CUSTOM_START.length()) { // 커스텀 구분자가 없다면
+        // 커스텀 구분자가 없다면
+        if (line.length() == CUSTOM_START.length()) {
             throw new IllegalArgumentException();
         }
 
@@ -31,7 +32,8 @@ public class CalculatorParser {
     private static void checkEndsWithCustomEnd(String line) {
         int customEndStart = CUSTOM_START.length() + CUSTOM_DELIMITER_LENGTH;
 
-        if (!line.startsWith(CUSTOM_END, customEndStart)) { // CUSTOM_END로 끝나지 않는다면
+        // CUSTOM_END로 끝나지 않는다면
+        if (!line.startsWith(CUSTOM_END, customEndStart)) {
             throw new IllegalArgumentException();
         }
     }

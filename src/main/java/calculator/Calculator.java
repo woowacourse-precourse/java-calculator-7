@@ -17,7 +17,7 @@ public class Calculator {
                 continue;
             }
 
-            // parseDouble은 공백문자 무시
+            // parseDouble에서 공백문자를 예외로 처리하지 않아 따로 확인
             if (containsSpace(token)) {
                 throw new IllegalArgumentException();
             }
@@ -43,7 +43,7 @@ public class Calculator {
     }
 
     private static boolean isSpace(char ch) {
-        return ch <= ' '; // trim이 자르는 문자
+        return ch <= ' '; // parseDouble에서 trim이 자르는 문자
     }
 
     private static boolean isNotPositive(double value) {
