@@ -1,7 +1,5 @@
 package calculator;
 
-import java.util.Objects;
-
 public class Calculator {
 
     private final InputParam inputParam;
@@ -15,13 +13,17 @@ public class Calculator {
     }
 
     public void calculate() {
-        while(true) {
-            String userInput = inputParam.getInput();
-            if(Objects.equals(userInput, "exit\n")){
-                break;
-            }
+        String userInput = inputParam.getInput();
+        tryCalculate(userInput);
+    }
+
+    private void tryCalculate(String userInput) {
+        try{
             CalculatorParamDomain domain = inputParam.getUserNumber(userInput);
-            System.out.println(domain.getSumNumbers());
+            System.out.println("결과 : " + domain.getSumNumbers());
+        } catch(IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e);
         }
     }
 }

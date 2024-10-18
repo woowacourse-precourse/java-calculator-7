@@ -26,11 +26,19 @@ public class Validator {
         List<Integer> numbers = new ArrayList<>();
         stringNumbers.forEach(oneNumber -> {
             try {
-                numbers.add(Integer.parseInt(oneNumber));
+                numbers.add(isPositiveInt(oneNumber));
             } catch(NumberFormatException e) {
-                throw new IllegalArgumentException("숫자만 입력해주세요.\n");
+                throw new IllegalArgumentException("숫자만 입력해주세요.");
             }
         });
         return numbers;
+    }
+
+    private Integer isPositiveInt(String oneNumber) {
+        int num = Integer.parseInt(oneNumber);
+        if(num < 0) {
+            throw new IllegalArgumentException("음수는 입력되면 안됩니다.");
+        }
+        return num;
     }
 }

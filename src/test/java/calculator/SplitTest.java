@@ -18,7 +18,7 @@ class SplitTest {
 
     @Test
     void 기본_엔터_분리_확인_구분자_있을때() {
-        String userInput = "//;\n123\n";
+        String userInput = "//;\\n123";
         List<String> expect = List.of("", "", ";", "123");
         List<String> result = split.splitInputOfEnter(userInput);
 
@@ -27,7 +27,7 @@ class SplitTest {
 
     @Test
     void 기본_엔터_분리_확인_구분자_없을때() {
-        String userInput = "12:45,24\n";
+        String userInput = "12:45,24";
         List<String> expect = List.of("12:45,24");
         List<String> result = split.splitInputOfEnter(userInput);
 

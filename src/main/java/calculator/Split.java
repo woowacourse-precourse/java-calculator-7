@@ -14,7 +14,7 @@ public class Split {
     }
 
     public List<String> splitInputOfEnter(String inputData) {
-        List<String> splitEnter = splitString(inputData, "\n");
+        List<String> splitEnter = splitString(inputData, "\\\\n");
         List<String> splitSlash = new ArrayList<>();
 
         splitEnter.forEach(o -> {
