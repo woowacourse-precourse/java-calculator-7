@@ -21,7 +21,7 @@ public class NumberGenerator {
     public void flushConsecutiveNumbers() {
         if (!consecutiveNumbers.isEmpty()) {
             int parsedNumber = parsingToInteger(consecutiveNumbers);
-            sumCalculator.sum(parsedNumber);
+            sumCalculator.add(parsedNumber);
             consecutiveNumbers = "";
         }
     }

@@ -3,7 +3,7 @@ package calculator.domain;
 public class SumCalculator {
     private int result = 0;
 
-    public void sum(int number) {
+    public void add(int number) {
         result += number;
     }
 
