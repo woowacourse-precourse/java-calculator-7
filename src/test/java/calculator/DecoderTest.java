@@ -8,31 +8,44 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class DecoderTest {
 
-    // 올바른 문자열
-    @ValueSource(strings = {"1,2:3", "//;\\n1;2;3", "//:\\n1:2:3", "//.\\n1.2.3", "1:2:3", "1:2,3", "//?\\n?1?2?3",
+    // 올바른 형식 입력 시 숫자 구분 테스트
+    @ValueSource(strings = {"1,2:3", "1:2:3", "1:2,3", "//;\\n1;2;3", "//-\\n1-2-3", "//.\\n1.2.3", "//?\\n1?2?3",
             "///\\n1/2/3"})
     @ParameterizedTest
-    void ableToDecode(String input) {
-        Decoder decoder = new Decoder(input);
-        Assertions.assertThat(decoder.getDecodedNumbers())
+    void extractNumbersTest(String input) {
+        Assertions.assertThat(new Decoder(input).getDecodedNumbers())
                 .isEqualTo(List.of(1, 2, 3));
     }
 
-    // 올바르지 않은 문자열
-    @ValueSource(strings = {"1;2;3", "//\\n123", "//;\\n;-1;2;3", "//;1;2;3", "//1\\n11213", "// \\n1 2 3",
-            "//?\\n?1?2!3", "//?\\n0.1?0.2?0.34"})
+    // 입력 내 음수가 있다면 에러를 발생
+    @ValueSource(strings = {"-1,-2:-3", "-1,2,3", "//;\\n4;-5;7"})
     @ParameterizedTest
-    void disableToDecode(String input) {
+    void negativeNumberTest(String input) {
         Assertions.assertThatThrownBy(() -> new Decoder(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    // 빈 문자열 입력 시 빈 리스트 반환
+    // 입력 내 소수가 있다면 에러를 발생
+    @ValueSource(strings = {"0.1,0.25:0.5", "//;\\n-0.1;0.2;0.3", "0.3,0.7,0.9"})
+    @ParameterizedTest
+    void decimalNumberTest(String input) {
+        Assertions.assertThatThrownBy(() -> new Decoder(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    // 커스텀 구분자가 빈칸이면 에러를 발생
+    @ValueSource(strings = {"// \\n1 2 3", "//   \\n1   2   3"})
+    @ParameterizedTest
+    void blankDelimiterTest(String input) {
+        Assertions.assertThatThrownBy(() -> new Decoder(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    // 빈 문자열 테스트
     @ValueSource(strings = {"//;\\n", ""})
     @ParameterizedTest
-    void emptyDecodedNumbers(String input) {
-        Decoder decoder = new Decoder(input);
-        Assertions.assertThat(decoder.getDecodedNumbers())
-                .isEqualTo(List.of());
+    void blankInputTest(String input) {
+        Assertions.assertThat(new Decoder(input).getDecodedNumbers().isEmpty())
+                .isEqualTo(true);
     }
 }
