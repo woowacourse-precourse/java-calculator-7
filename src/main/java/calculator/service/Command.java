@@ -1,11 +1,9 @@
 package calculator.service;
 
+import calculator.util.Constants;
 import java.util.Optional;
 
 public class Command {
-
-    private static final String CUSTOM_SEPARATOR_REGEX = "//(.*?)\\\\n";
-    private static final String NO_VALUE = "";
 
     private final String customSeparator;
     private final String expression;
@@ -20,11 +18,11 @@ public class Command {
 
     private String parseCustomSeparator(String input) {
         Optional<String> customSeparator = new CustomSeparatorManager(input).extract();
-        return customSeparator.orElse(NO_VALUE);
+        return customSeparator.orElse(Constants.NO_VALUE);
     }
 
     private String parseExpression(String input) {
-        String expression = input.replaceAll(CUSTOM_SEPARATOR_REGEX, NO_VALUE);
+        String expression = input.replaceAll(Constants.CUSTOM_SEPARATOR_REGEX, Constants.NO_VALUE);
         if (expression.isEmpty()) {
             throw new IllegalArgumentException("식이 존재하지 않습니다.");
         }
@@ -32,7 +30,7 @@ public class Command {
     }
 
     public boolean hasCustomSeparator() {
-        return !customSeparator.equals(NO_VALUE);
+        return !customSeparator.equals(Constants.NO_VALUE);
     }
 
     public String getCustomSeparator() {

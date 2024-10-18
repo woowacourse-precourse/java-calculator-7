@@ -1,12 +1,11 @@
 package calculator.service;
 
+import calculator.util.Constants;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class CalculatorService {
-
-    private static final String POSITIVE_NUMBER_REGEX = "\\d+([.]\\d+)?";
 
     private final List<String> separators;
 
@@ -39,8 +38,8 @@ public class CalculatorService {
     }
 
     private void validatePositiveNumber(String value) {
-        if (value.isEmpty() || !value.matches(POSITIVE_NUMBER_REGEX)) {
-            throw new IllegalArgumentException("양수만 허용됩니다: " + value);
+        if (value.isEmpty() || !value.matches(Constants.POSITIVE_NUMBER_REGEX)) {
+            throw new IllegalArgumentException("양수만 허용됩니다.");
         }
     }
 

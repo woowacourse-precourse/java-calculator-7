@@ -1,5 +1,6 @@
 package calculator.service;
 
+import calculator.util.Constants;
 import java.util.List;
 
 public class SeparatorSplitter {
@@ -19,7 +20,7 @@ public class SeparatorSplitter {
     }
 
     public String[] split() {
-        String regex = String.join("|", separators);
+        String regex = String.join(Constants.OR, separators);
         return input.split(regex);
     }
 }

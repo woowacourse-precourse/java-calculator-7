@@ -1,12 +1,13 @@
 package calculator.service;
 
+import calculator.util.Constants;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CustomSeparatorManager {
 
-    private static final Pattern CUSTOM_SEPARATOR_PATTERN = Pattern.compile("//(.*?)\\\\n");
+    private static final Pattern CUSTOM_SEPARATOR_PATTERN = Pattern.compile(Constants.CUSTOM_SEPARATOR_REGEX);
 
     private final String input;
 
