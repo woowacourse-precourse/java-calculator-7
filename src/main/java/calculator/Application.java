@@ -5,30 +5,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 class FindNum {
-    public List<Integer> fNumber(String string, String d) {
-        if (string.isEmpty()) {
-            return List.of(0);  // 빈 문자열 처리
-        }
-        String[] numbers = string.split(d);
+    public List<Integer> fNumber(String input, String delimiter) {
         List<Integer> result = new ArrayList<>();
-        for (String number : numbers) {
-            if (number.isEmpty()) {
-                continue;
+        StringBuilder currentNumber = new StringBuilder(); // 숫자를 일시적으로 저장할 공간
+        boolean hasInvalidChar = false;
+        for (int i = 0; i < input.length(); i++) {
+            char currentChar = input.charAt(i);
+            if (currentChar == 'd') {
+                currentNumber.append('0');
             }
-            try {
-                int num = Integer.parseInt(number.trim());
-                if (num < 0) {
-                    throw new IllegalArgumentException("IllegalArgumentException" + num);
+            else if (Character.isDigit(currentChar)) {
+                currentNumber.append(currentChar);
+            }
+            else if (delimiter.indexOf(currentChar) >= 0) {
+                if (currentNumber.length() > 0) {
+                    int num = Integer.parseInt(currentNumber.toString());
+                    if (num < 0) {
+                        throw new IllegalArgumentException("음수 " + num);
+                    }
+                    result.add(num);
+                    currentNumber.setLength(0); // 숫자 초기화
                 }
-                result.add(num);
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("IllegalArgumentException" + number);
             }
+            else {
+                hasInvalidChar = true;
+            }
+        }
+        if (currentNumber.length() > 0) {
+            int num = Integer.parseInt(currentNumber.toString());
+            if (num < 0) {
+                throw new IllegalArgumentException("음수 " + num);
+            }
+            result.add(num);
+        }
+        if (hasInvalidChar) {
+            throw new IllegalArgumentException("허용되지 않은 문자가 포함되었습니다."+currentNumber);
         }
         return result;
     }
 }
-
 
 class Calculate {
     // 숫자 리스트의 합을 계산하는 메서드
@@ -43,14 +58,15 @@ class Calculate {
 
 class FindCustomDel {
     public String Fcustomdel(String b) {
-        if (b.startsWith("//")) {
-            return Character.toString(b.charAt(2));
+        if (b.charAt(0) == '/' && b.charAt(1) == '/') {
+            char a =  b.charAt(2);
+            return Character.toString(a);
         }
-        return ",|:|/";
+        return ",|:";
     }
     public String extract_Number(String b) {
-        if (b.startsWith("//")) {
-            return b.substring(4);
+        if (b.charAt(0) == '/' && b.charAt(1) == '/') {
+            return b.substring(b.indexOf('\n') + 1);
         }
         return b;
     }
