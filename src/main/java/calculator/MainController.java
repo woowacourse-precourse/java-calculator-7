@@ -1,25 +1,17 @@
 package calculator;
 
 import calculator.view.InputView;
-import camp.nextstep.edu.missionutils.Console;
-import java.io.PrintStream;
+import calculator.view.OutputView;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MainController {
 
     public static void run() {
         String inputString = InputView.readString();
         int sumResult = getSplittedValuesSum(inputString);
-        printResult(sumResult);
+        OutputView.printResult(sumResult);
     }
-
-    private static void printResult(int sumResult) {
-         System.out.printf("결과 : %d", sumResult);
-    }
-
     private static int getSplittedValuesSum(String inputString) {
         List<String> splittedValues;
         int sumResult = 0 ;
@@ -43,12 +35,10 @@ public class MainController {
         }
         return sumResult;
     }
-
     private static List<String> SplitbyDefaultDelimiter(String inputString) {
         List<String> defaultSplitValues = Arrays.asList(inputString.split(",|:"));
         return defaultSplitValues;
     }
-
     private static List<String> SplitbyCustomDelimiter(String inputString) {
         String customDelimiter = String.valueOf(inputString.charAt(2));
         String remainingInput = inputString.substring(5);

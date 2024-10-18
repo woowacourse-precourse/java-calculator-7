@@ -2,8 +2,6 @@ package calculator.view;
 
 import calculator.Validator;
 import camp.nextstep.edu.missionutils.Console;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class InputView {
     public static String readString() {
