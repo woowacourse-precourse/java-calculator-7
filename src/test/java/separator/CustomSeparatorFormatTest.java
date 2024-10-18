@@ -28,8 +28,8 @@ class CustomSeparatorFormatTest {
     @Test
     void generatePattern(){
         //given
-        Pattern pattern = Pattern.compile("//+(.*)\\n+(.*)");
-        CustomSeparatorFormat customSeparatorFormat = new CustomSeparatorFormat();
+        Pattern pattern = Pattern.compile("//+(.*)\\\\s+(.*)");
+        CustomSeparatorFormat customSeparatorFormat = new CustomSeparatorFormat(pattern);
 
         //when
         System.out.println(customSeparatorFormat.getPattern());

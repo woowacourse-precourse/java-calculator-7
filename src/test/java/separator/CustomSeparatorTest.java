@@ -1,15 +1,11 @@
 package separator;
 
-import calculator.Calculator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigInteger;
 import java.util.List;
-import java.util.regex.Pattern;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CustomSeparatorTest {
     @DisplayName("커스텀구분자에 숫자는 들어갈 수 없다.")
@@ -31,7 +27,7 @@ class CustomSeparatorTest {
 
     @DisplayName("문자열에 포함된 숫자를 가져올 수 있다.")
     @Test
-    void getNumbers() {
+    void splitInputDataBySeparator() {
         //given
         CustomSeparatorFormat customSeparatorFormat = new CustomSeparatorFormat();
         String inputData ="//@!\\n2341@!2031@!22122";
@@ -39,10 +35,10 @@ class CustomSeparatorTest {
         CustomSeparator customSeparator = new CustomSeparator(inputData,customSeparatorFormat);
         System.out.println("customSeparator.getSeparator().get(0) : "+customSeparator.getSeparator().get(0));
         //when
-        List<BigInteger> numbers = customSeparator.getNumbers();
+        String[] split = customSeparator.splitInputDataBySeparator();
         System.out.println("customSeparator.getSeparator().size()"+customSeparator.getSeparator().size());
         //then
-        Assertions.assertThat(numbers.get(0)).isEqualTo(2341);
+        Assertions.assertThat(split[0]).isEqualTo("2341");
 
     }
 

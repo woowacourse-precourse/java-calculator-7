@@ -35,35 +35,4 @@ class ApplicationTest extends NsTest {
     }
 
 
-
-
-    @DisplayName("test")
-    @Test
-    void test(){
-        String s = "//;\n4;5;6;7!#!#@;//;dw\n//;55\n//;e34\n//;g45\n";
-        String s1 = "//dd\n4;5;6;7!#!#@;dw;55;e34;g45";
-        String input = "hello beautiful world";
-
-//        Pattern pattern = Pattern.compile("^//+.*+\\n$");
-        Pattern pattern = Pattern.compile("^//+(.*)\\n+(.*)");
-        Matcher matcher = pattern.matcher(s1);
-
-        if (matcher.find()) {
-            String group = matcher.group(1);
-            System.out.println("----- custom : "+group);
-
-//            String[] split = s.split(group);
-//            for(int i = 0; i < split.length; i++) {
-//                System.out.println(i + " : " + split[i]);
-//            }
-        }else {
-            System.out.println("----- No found -----");
-        }
-
-
-
-        String s2 = "//;\n4;5234920941823909324O93;623498209348193245803846909434343;7123123513543245234!#!#@;//;dw\n//;523492304982390481092128901293091201241242345\n//;2342984029890942830957271₩834\n//;23284890238081904809182949172445\n";
-
-
-    }
 }

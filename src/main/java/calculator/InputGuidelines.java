@@ -1,7 +1,5 @@
 package calculator;
 
-import separator.DefaultSeparator;
-
 import java.util.List;
 
 public class InputGuidelines {
@@ -12,30 +10,22 @@ public class InputGuidelines {
     private final String INPUT = "계산할 문자열을 입력해주세요.";
 
 
-    private final DefaultSeparator defaultSeparator;
+    private final List<String> defaultSeparator;
 
 
     public InputGuidelines(List<String> defaultSeparator) {
-        this.defaultSeparator = new DefaultSeparator(defaultSeparator);
-    }
-
-    public InputGuidelines(DefaultSeparator defaultSeparator) {
         this.defaultSeparator = defaultSeparator;
     }
 
-    public DefaultSeparator getDefaultSeparator() {
-        return defaultSeparator;
-    }
 
     private String joinWithDefaultSeparator(){
         StringBuilder defaultSeparatorAsString = new StringBuilder();
-        List<String> defaultSeparators = defaultSeparator.getSeparator();
 
-        for (int i = 0; i < defaultSeparators.size(); i++) {
-            if(i<defaultSeparators.size()-1){
-                defaultSeparatorAsString.append("( ").append(defaultSeparators.get(i)).append(" ),");
+        for (int i = 0; i < defaultSeparator.size(); i++) {
+            if(i<defaultSeparator.size()-1){
+                defaultSeparatorAsString.append("( ").append(defaultSeparator.get(i)).append(" ),");
             }else {
-                defaultSeparatorAsString.append("( ").append(defaultSeparators.get(i)).append(" )");
+                defaultSeparatorAsString.append("( ").append(defaultSeparator.get(i)).append(" )");
             }
         }
         return defaultSeparatorAsString.toString();
@@ -48,7 +38,7 @@ public class InputGuidelines {
     public void printInputGuidelines(){
         System.out.println(TITLE);
         System.out.println(DEFAULT_SEPARATOR_OPTION);
-        System.out.println("기본 구분자 개수= "+ defaultSeparator.getSeparator().size() +
+        System.out.println("기본 구분자 개수= "+ defaultSeparator.size() +
                 " => " + this.joinWithDefaultSeparator());
         System.out.println(CUSTOM_SEPARATOR_STRATEGY);
         System.out.println(END);
