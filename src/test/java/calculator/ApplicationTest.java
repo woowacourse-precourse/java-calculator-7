@@ -15,7 +15,6 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 1");
         });
     }
-
     @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
@@ -23,6 +22,35 @@ class ApplicationTest extends NsTest {
                 .isInstanceOf(IllegalArgumentException.class)
         );
     }
+    @Test
+    void 공백_입력_예외_테스트() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("1,2,3 "))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void 커스텀_구분자_숫자_예외_테스트() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("//2\\n122232"))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void 아무것도_입력_안했을떄() {
+        assertSimpleTest(() -> {
+            run("\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+    @Test
+    void 숫자만_입력했을때() {
+        assertSimpleTest(() -> {
+            run("7");
+            assertThat(output()).contains("결과 : 7");
+        });
+    }
+
 
     @Override
     public void runMain() {
