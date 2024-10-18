@@ -38,7 +38,7 @@ class CalculatorServiceTest {
     @DisplayName("커스텀 구분자를 기준으로 숫자를 추출하여 합을 구한다.")
     public void 커스텀_구분자로_숫자를_추출하여_합을_구한다() {
         // given
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
 
         // when
         int result = calculatorService.calculateSum(input);
