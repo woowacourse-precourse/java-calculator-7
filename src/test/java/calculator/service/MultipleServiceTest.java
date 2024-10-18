@@ -11,7 +11,7 @@ class MultipleServiceTest {
     @DisplayName("MultipleService 정상 동작 확인")
     void process() {
         // given
-        String args = "//#\n1,2#3:4";
+        String args = "//#\\n1,2#3:4";
         MultipleService multipleService = new MultipleService();
         int expect = 10;
 

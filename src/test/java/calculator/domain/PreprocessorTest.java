@@ -15,8 +15,8 @@ class PreprocessorTest {
     void preprocess() {
         // given
         String expectUnparsedNumber = "1,2:3#4";
-        String hashInput = "//#\n1,2:3#4";
-        String spaceInput = "// \n1,2:3#4";
+        String hashInput = "//#\\n1,2:3#4";
+        String spaceInput = "// \\n1,2:3#4";
 
         Preprocessor hashPreprocessor = new Preprocessor(hashInput);
         Preprocessor spacePreprocessor = new Preprocessor(spaceInput);
@@ -36,7 +36,7 @@ class PreprocessorTest {
     @DisplayName("커스텀 구분자에 띄워쓰기 있는 경우 올바르게 처리")
     void preprocessWithSpace() {
         // given
-        String input = "// \n1#2#3";
+        String input = "// \\n1#2#3";
         Preprocessor preprocessor = new Preprocessor(input);
 
         // when
