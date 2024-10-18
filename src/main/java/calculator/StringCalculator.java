@@ -16,6 +16,21 @@ public class StringCalculator {
 
         // 쉼표 또는 콜론을 구분자로 설정
         String delimiter = ",|:";
+        String numbers = input;    // 숫자 부분
+
+        // 커스텀 구분자가 있는지 확인
+        if (input.startsWith("//")) {
+            // 패턴을 이용해 커스텀 구분자와 숫자 부분을 추출
+            Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+
+            if (matcher.find()) {
+                delimiter = Pattern.quote(matcher.group(1));  // 커스텀 구분자 설정
+                numbers = matcher.group(2);  // 커스텀 구분자를 제외한 나머지 문자열
+            } else {
+                throw new IllegalArgumentException("잘못된 형식입니다.");
+            }
+        }
+
 
         // 입력된 값 출력 (디버깅용)
         System.out.println("입력된 값: " + input);
