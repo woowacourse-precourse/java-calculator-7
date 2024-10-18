@@ -4,6 +4,9 @@ import calculator.Constants.ErrorMessages;
 import calculator.Utils.NumberUtils;
 
 public class Number {
+    private static final Double BLANK_ZERO = 0.0;
+    private static final int ZERO = 0;
+
     private final Double number;
 
     public Number(String number) {
@@ -16,7 +19,7 @@ public class Number {
 
     private Double parseAndValidate(String number) {
         if (isNull(number)) {
-            return 0.0;
+            return BLANK_ZERO;
         }
         NumberUtils.isDouble(number);
         Double parsedNumber = Double.parseDouble(number);
@@ -25,7 +28,7 @@ public class Number {
     }
 
     private void isPositive(Double number) {
-        if (number < 0) {
+        if (number < ZERO) {
             throw new IllegalArgumentException(ErrorMessages.INVALID_NUMBER_RANGE_MESSAGE.getErrorMessage());
         }
     }
