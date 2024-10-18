@@ -37,4 +37,12 @@ public class Calculator {
         this.strArr = this.str.split("[,;]");
     }
 
+    public int sumNumbers(){
+        for(String a : this.strArr){
+            int number = Integer.parseInt(a);
+            if(number < 0) throw new IllegalArgumentException();
+            this.answer += number;
+        }
+        return answer;
+    }
 }

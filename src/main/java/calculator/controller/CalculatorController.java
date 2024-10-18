@@ -19,6 +19,7 @@ public class CalculatorController {
         inputString();
         validateNull();
         parseNumbers();
+        outputResult();
     }
 
     public void inputString(){
@@ -35,15 +36,11 @@ public class CalculatorController {
         calculator.parseNumbers();
     }
 
-    public void validateNumbers(){
-
-    }
-    public void sumNumbers(){
-
+    public int sumNumbers(){
+        return calculator.sumNumbers();
     }
 
     public void outputResult() {
-
     }
 
     //inputString: 사용자의 문자열 입력을 받음
