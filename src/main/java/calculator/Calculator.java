@@ -9,11 +9,12 @@ public class Calculator implements AutoCloseable {
     private String output;
     private double sum;
     private boolean hasCustomDelimiter;
-    private char customDelimiter;
+    private String customDelimiter;
     private final Parser parser;
     private final DelimiterManager delimiterManager;
 
     public Calculator() {
+        customDelimiter = "";
         parser = new Parser();
         delimiterManager = new DelimiterManager();
     }
@@ -44,36 +45,35 @@ public class Calculator implements AutoCloseable {
 
         private static final String DELIMITER_PREFIX = "//";
         private static final String DELIMITER_DEFINITION_END = "\n";
-        StringBuilder stringBuilder;
+        StringBuilder strippedStringBuilder;
 
         private Parser() {
         }
 
-        private String parseString(String str) {
+        private String parseString(String inputString) {
             // 문자열 양 끝에 존재하는 Whitespace 및 유니코드 공백 제거
-            String newStr = str.strip();
+            String strippedString = inputString.strip();
             // 빈 문자열 처리
-            if (newStr.isEmpty()) {
+            if (strippedString.isEmpty()) {
                 return "0";
             }
 
-            stringBuilder = containsCustomDelimiter(newStr);
-
+            strippedStringBuilder = removeDelimiterPrefix(strippedString);
+            if (hasCustomDelimiter) {
+                customDelimiter += Character.toString(stringBuilder.charAt(0));
+                deleteDelimiterSection(stringBuilder, 0);
+            }
             return stringBuilder.toString();
         }
 
-        private StringBuilder containsCustomDelimiter(String str) {
-            StringBuilder stringBuilder = new StringBuilder(str);
+        private StringBuilder removeDelimiterPrefix(String targetString) {
+            StringBuilder targetStringBuilder = new StringBuilder(targetString);
 
-            if (str.startsWith(DELIMITER_PREFIX)) {
+            if (targetString.startsWith(DELIMITER_PREFIX)) {
                 hasCustomDelimiter = true;
-                Parser.deleteDelimiterSection(stringBuilder, DELIMITER_PREFIX.length());
+                targetStringBuilder.delete(0, DELIMITER_PREFIX.length());
             }
-            return stringBuilder;
-        }
-
-        private static void deleteDelimiterSection(StringBuilder strWithCustomDelimiter, int length) {
-            strWithCustomDelimiter.delete(0, length);
+            return targetStringBuilder;
         }
     }
 
