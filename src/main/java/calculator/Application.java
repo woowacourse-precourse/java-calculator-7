@@ -28,6 +28,16 @@ public class Application {
             }
         }
 
+        // 구분자 제외하고 남은 숫자 배열에 담는 기능
+        String[] number = input.split(op);
+        ArrayList<String> numbers = new ArrayList<>();
+
+        for(int i = 0; i < number.length; i++) {
+            if(!number[i].equals("")){
+                numbers.add(number[i]);
+            }
+        }
+
         //출력 로직
         String sum = "0";
         System.out.println("결과 : " + sum);
