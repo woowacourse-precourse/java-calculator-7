@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
@@ -65,6 +66,69 @@ class CalculatorTest {
         int result = calculator.sum();
 
         assertEquals(result, expectedSum);
+    }
+
+    @DisplayName("사용자 입력 값이 없을 때 예외가 발생한다.")
+    @Test
+    void 사용자_입력_X() {
+        String input = "";
+
+        assertThatThrownBy(() -> new Calculator(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("사용자 입력 값이 null일 때 예외가 발생한다.")
+    @Test
+    void 사용자_입력_null() {
+        String input = null;
+
+        assertThatThrownBy(() -> new Calculator(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("사용자 입력 값에 기본 구분자, 커스텀 구분자가 없을 때 예외가 발생한다.")
+    @Test
+    void 사용자_입력_구분자_X() {
+        String input = "1";
+
+        assertThatThrownBy(() -> new Calculator(input).sum())
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("사용자가 커스텀 구분자를 지정 못할 경우 예외가 발생한다.")
+    @Test
+    void 사용자_커스텀_구분자_실패() {
+        String input = "\\n1;2;3";
+
+        assertThatThrownBy(() -> new Calculator(input).sum())
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("사용자가 커스텀 구분자가 기본 구분자 쉽표 일 때 예외가 발생한다.")
+    @Test
+    void 사용자_커스텀_구분자_기본_구분자_쉼표_실패() {
+        String input = "//,\\n1,2,3";
+
+        assertThatThrownBy(() -> new Calculator(input).sum())
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("사용자가 커스텀 구분자가 기본 구분자 콜론 일 때 예외가 발생한다.")
+    @Test
+    void 사용자_커스텀_구분자_기본_구분자_콜론_실패() {
+        String input = "//:\\n1,2,3";
+
+        assertThatThrownBy(() -> new Calculator(input).sum())
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("사용자가 커스텀 구분자가 기본 구분자 빈문자열 일 때 예외가 발생한다.")
+    @Test
+    void 사용자_커스텀_구분자_기본_구분자_빈문자열_실패() {
+        String input = "//:\\n1,2,3";
+
+        assertThatThrownBy(() -> new Calculator(input).sum())
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
 }
