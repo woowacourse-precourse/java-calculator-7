@@ -7,11 +7,9 @@ public class Calculator {
     public void calculate(){
         User user = new User();
         String userInput = user.inputString();
-
         sum(userInput);
         System.out.println("결과 : " + result);
     }
-
 
     private void sum(String userInput) {
         if(userInput.startsWith("//") || userInput.contains("\n")) {
@@ -47,10 +45,18 @@ public class Calculator {
     private static int[] stringToInt(String[] separator) {
         int[] numberSeparator = new int[separator.length];
         for (int i = 0; i < separator.length; i++) {
-            numberSeparator[i] = Integer.parseInt(separator[i]);
+            isCorrectInput(separator, numberSeparator, i);
             isPositiveNumber(numberSeparator, i);
         }
         return numberSeparator;
+    }
+
+    private static void isCorrectInput(String[] separator, int[] numberSeparator, int i) {
+        try {
+            numberSeparator[i] = Integer.parseInt(separator[i]);
+        }catch (NumberFormatException e){
+            throw new IllegalArgumentException("다른 구분자를 입력해주세요.");
+        }
     }
 
     private static void isPositiveNumber(int[] numberSeparator, int i) {
@@ -58,4 +64,5 @@ public class Calculator {
             throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
         }
     }
+
 }
