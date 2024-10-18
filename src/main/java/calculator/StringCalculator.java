@@ -7,21 +7,32 @@ public class StringCalculator {
         if (isBlank(input)) {
             return 0;
         }
-        // 구분자 "," 입력
        return sum(toInts(split(input)));
     }
     private boolean isBlank(String input) {
         return input == null || input.isEmpty();
     }
     private String[] split(String input) {
-        String[] values =  input.split(",");
-        return values;
+        String separator = ",|:";
+        if(input.startsWith("//")){
+            String customPart = input.substring(2, 3);
+            System.out.println(customPart);
+            separator += "|" + customPart; //add custom separator
+            System.out.println(separator);
+            input = input.substring(5);
+            System.out.println(input);
+        }
+        return input.split(separator);
     }
 
     private int[] toInts(String[] values){
         int[] numbers = new int[values.length];
         for(int i =0; i < values.length; i++){
-            numbers[i] = Integer.parseInt(values[i]);
+            int number = Integer.parseInt(values[i]);
+            if(number <0){
+                throw new IllegalArgumentException();
+            }
+            numbers[i] = number;
         }
         return numbers;
     }
