@@ -11,6 +11,7 @@ public class StringCalculator {
 
     // 기본 구분자
     private String delimiter = ",:";
+    private final String specialDelimiter = ".*+?^${}()|[]\\";
 
     // 문자열을 정수로 변환하는 메서드
     private int parseInt(String str) {
@@ -35,6 +36,18 @@ public class StringCalculator {
         }
     }
 
+    //specialDelimiter가 존재하면 이스케이프 하는 메서드
+    private String escapeSpecialDelimiter(String customDelimiter) {
+        StringBuilder escapedDelimiter = new StringBuilder();
+        for (char c : customDelimiter.toCharArray()) {
+            if (specialDelimiter.indexOf(c) != -1) {
+                escapedDelimiter.append("\\");
+            }
+            escapedDelimiter.append(c);
+        }
+        return escapedDelimiter.toString();
+    }
+
     // 커스텀 구분자 처리 메서드
     private String extractNumbersWithCustomDelimiter() {
         int index = str.indexOf("\\n"); // '\'추가로 특수 문자 이스케이프
@@ -48,7 +61,8 @@ public class StringCalculator {
             throw new IllegalArgumentException("Custom delimiter cannot be empty");
         }
         // 기존 기본 구분자에 커스텀 구분자를 추가
-        delimiter += customDelimiter;
+
+        delimiter += escapeSpecialDelimiter(customDelimiter);
 
         // 커스텀 구분자 정의 부분 이후를 반환
         return str.substring(index + 2);
