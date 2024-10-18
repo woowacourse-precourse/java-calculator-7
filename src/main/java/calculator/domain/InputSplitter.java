@@ -4,7 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InputSplitter {
-    private static final String REGEX = "^//(.)\\\\n";
+    private static final String REGEX_CUSTOM_DELIMITER = "^//(.)\\\\n";
+    private static final String REGEX_COMMA_COLON = "^[0-9]+([,:][0-9]+)*$";
+    private static final String COMMA_COLON_DELIMITER = "[,:]";
     private static final int CUSTOM_DELIMITER_START_INDEX = 2;
     private static final int CUSTOM_DELIMITER_END_INDEX = 3;
     private static final int START_INDEX_EXCEPT_REGEX = 5;
@@ -22,7 +24,7 @@ public class InputSplitter {
     }
 
     private boolean containsCustomDelimiter(String input) {
-        Pattern pattern = Pattern.compile(REGEX);
+        Pattern pattern = Pattern.compile(REGEX_CUSTOM_DELIMITER);
         Matcher matcher = pattern.matcher(input);
         return matcher.find();
     }
@@ -32,10 +34,10 @@ public class InputSplitter {
     }
 
     private String[] validateCommaAndColonDelimiter(String input) {
-        if (!input.matches("^[0-9]+([,:][0-9]+)*$")) {
+        if (!input.matches(REGEX_COMMA_COLON)) {
             throw new IllegalArgumentException("쉼표(,) 또는 콜론(:) 외의 다른 구분자는 사용할 수 없으며, 숫자 사이에만 올 수 있습니다.");
         }
-        return input.split("[,:]");
+        return input.split(COMMA_COLON_DELIMITER);
     }
 
     private String escapeMetacharacter(String delimiter) {
