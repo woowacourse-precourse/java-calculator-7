@@ -67,12 +67,12 @@ public class Application {
         return add(parsedNumbers);
     }
 
-    private static String[] getEachNumbers(String numberPart, StringBuilder delimiterPart) {
-        return numberPart.split(delimiterPart.toString());
-    }
-
     private static String getNumberPart(String input, int indexOfEndSign) {
         return input.substring(indexOfEndSign + CUSTOM_DELIMITER_END_SIGN_LENGTH);
+    }
+
+    private static String[] getEachNumbers(String numberPart, StringBuilder delimiterPart) {
+        return numberPart.split(delimiterPart.toString());
     }
 
     private static String[] getCustomDelimiters(String input, int indexOfEndSign) {
