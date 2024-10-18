@@ -50,6 +50,62 @@
 
 ## 버전 로그
 
+### v 0.0.2
+
+- 이전 버전의 문제점
+
+```text
+1. 하나의 클래스가 여러 기능을 가지는 문제점이 존재
+2. 테스트 코드를 작성하지 않아 로직의 정확성이 떨어짐
+```
+
+- 변경사항
+
+```text
+- 하나의 클래스는 하나의 책임만 가지도록 변경
+
+    - 기존 클래스 내부 클래스 명에 맞지 않은 역할들을 다른 클래스로 이동
+    
+- Test Code 작성
+
+    - 각 클래스의 기능을 검증하기 위한 클래스 별 테스트 코드 작성
+```
+
+- 역할
+
+```text
+- Application class
+
+    - Calculator 를 호출하는 역할
+    
+- Calculator class
+
+    - Data dto 기반으로 더하기 연산을 하는 역할
+    
+- InputDataReader class
+
+    - 사용자에게 입력을 받는 역할
+    
+- DataParser class
+
+    - 문자열을 Data dto 로 파싱하는 역할
+    
+- Validator class
+
+    - 문자열을 검증하는 역할
+    
+- Logger class
+
+    - 결과를 정해진 포멧으로 출력하는 역할
+    
+```
+
+- todo
+
+```text
+ [ ] DataParser 와 Validator 을 기본 포맷과 커스텀 포멧 처리를 따로 하도록 분리
+```
+
 ### v 0.0.1
 
 - 역할
@@ -81,6 +137,6 @@
 - todo
 
 ```text
- [ ] Application, DataParser, Calculator class 가 단일 책임을 가지도록 리펙터링
- [ ] 또한 각 클래스별 테스트 코드를 작성
+ [x] Application, DataParser, Calculator class 가 단일 책임을 가지도록 리펙터링
+ [x] 또한 각 클래스별 테스트 코드를 작성
 ```
