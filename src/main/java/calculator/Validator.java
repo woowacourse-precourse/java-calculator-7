@@ -7,6 +7,7 @@ public class Validator {
     private static final String ERROR_INVALID_DELIMITER = "커스텀 구분자로 숫자 또는 공백을 사용할 수 없습니다.";
     private static final String ERROR_INVALID_FORMAT = "커스텀 구분자 형식이 올바르지 않습니다.";
     private static final String ERROR_DELIMITER_TYPE = "커스텀 구분자는 영어,숫자,공백을 허용하지 않습니다.: ";
+    private static final String ERROR_DELIMITER_DUPLICATE = "중복된 구분자는 허용하지 않습니다.";
     private static final String INVALID_CUSTOM_DELIMITER_PATTERN = "//[\\d\\s]*((\\\\n)|(\\n)).*";
 
     private final String defaultDelimiter;
@@ -24,6 +25,7 @@ public class Validator {
         String delimiter = extractDelimiter(value, defaultDelimiter, prefix, suffix);
         String numberPart = extractNumberPart(value, prefix, suffix);
         validateDelimiterType(numberPart, delimiter);
+        validateDuplicateDelimiter(delimiter);
     }
 
     private void validateCustomDelimiterFormat(String value){
@@ -41,6 +43,13 @@ public class Validator {
     private void validateDelimiterType(String value, String delimiter){
         if (!value.trim().isEmpty() && delimiter.matches("[a-zA-Z0-9]+")) {
             throw new IllegalArgumentException(ERROR_DELIMITER_TYPE + value);
+        }
+    }
+
+    private void validateDuplicateDelimiter(String delimiter) {
+        long distinctCount = delimiter.chars().distinct().count();
+        if (distinctCount < delimiter.length()) {
+            throw new IllegalArgumentException(ERROR_DELIMITER_DUPLICATE + delimiter);
         }
     }
 }
