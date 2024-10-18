@@ -18,7 +18,7 @@ public class DelimiterValidator {
         return str.startsWith(PREFIX) && str.endsWith(SUFFIX);
     }
 
-    public static String validRequireEscapeCharacter(String customDelimiter) {
+    public static String validateRequireEscapeCharacter(String customDelimiter) {
         if (customDelimiter.equals("|") || customDelimiter.equals(".")) {
             customDelimiter = "\\" + customDelimiter;
         }
