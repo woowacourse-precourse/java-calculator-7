@@ -2,6 +2,7 @@ package calculator;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
@@ -17,7 +18,8 @@ public class Application {
         String processedInput = stringParser.getProcessedInput();
         Set<Character> delimiters = stringParser.getDelimiters();
 
-        System.out.println(processedInput);
-        System.out.println(delimiters);
+        StringFilter filter = new StringFilter(processedInput, delimiters);
+        List<Integer> numbers = filter.extractNumbers();
+
     }
 }
