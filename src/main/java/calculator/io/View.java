@@ -1,4 +1,4 @@
-package calculator;
+package calculator.io;
 
 public class View {
 
