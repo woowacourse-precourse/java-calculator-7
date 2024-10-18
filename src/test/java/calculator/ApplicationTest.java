@@ -4,12 +4,23 @@ import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
+    static ArrayList<String> testDelimiterArr;
+    static ArrayList<Integer> testExtractedNumbers;
+
+    void calculatorConstructor(){
+        testDelimiterArr = new ArrayList<>();
+        testDelimiterArr.addAll(Arrays.asList(":",",",";","m45i","!"));
+
+        testExtractedNumbers = new ArrayList<>();
+        testExtractedNumbers.addAll(Arrays.asList(3, 989, 243, 1, 34, 6567));
+    }
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
@@ -20,21 +31,19 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 다수의_커스텀_구분자_추출() {
-        // 비교군
-        Application.StringCalculator testCalculator = new Application.StringCalculator();
-        testCalculator.delimiterArr.add(";");
-        testCalculator.delimiterArr.add("m45i");
-
+        calculatorConstructor();
         // given
-        String testDelimiterText = "//;\\n1//m45i\\n";
+        String testDelimiterText = "//;\\n1//m45i\\n//!\\n";
 
         // when
         Application.StringCalculator stringCalculator = new Application.StringCalculator();
         ArrayList<String> result = stringCalculator.extractDelimiter(testDelimiterText);
 
         // then
-            assertThat(result).isEqualTo(testCalculator.delimiterArr);
+        assertThat(result).isEqualTo(testDelimiterArr);
     }
+
+
 
     @Test
     void 예외_테스트() {
@@ -42,6 +51,17 @@ class ApplicationTest extends NsTest {
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+    @Test
+    void 숫자_추출(){
+        calculatorConstructor();
+        String input = "//;\\n1//m45i\\n//!\\n34:6567;243m45i989!3";
+
+        Application.StringCalculator stringCalculator= new Application.StringCalculator();
+        stringCalculator.extractDelimiter(input);
+        assertThat(stringCalculator.isValidString(input)).isTrue();
+        assertThat(stringCalculator.extractedNumArr).isEqualTo(testExtractedNumbers);
     }
 
     @Override
