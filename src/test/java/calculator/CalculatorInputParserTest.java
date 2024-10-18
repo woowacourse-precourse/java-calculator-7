@@ -162,4 +162,18 @@ class CalculatorInputParserTest {
             }).isInstanceOf(InvalidDelimiterException.class);
         });
     }
+
+    @Test
+    void 공백문자도_구분자로_사용할_수_있다() {
+        assertSimpleTest(() -> {
+            // given
+            String input = "// \\n1 2 3";
+
+            // when
+            List<Integer> parsed = calculatorInputParser.parse(input);
+
+            // then
+            assertThat(parsed).containsSequence(1, 2, 3);
+        });
+    }
 }
