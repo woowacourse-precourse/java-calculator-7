@@ -8,8 +8,8 @@ public class Calculator {
 
     private static final String DEFAULT_DELIMITERS = ",|:";
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
-    private static final String NEGATIVE_NUMBER_ERROR = "음수는 허용되지 않습니다";
-    private static final String INVALID_NUMBER_ERROR = "잘못된 숫자 형식입니다";
+    private static final String POSITIVE_NUMBER_ERROR = "양수만 허용됩니다: ";
+    private static final String INVALID_NUMBER_ERROR = "잘못된 숫자 형식입니다: ";
     private static final String INVALID_CUSTOM_DELIMITER_ERROR = "잘못된 커스텀 구분자 형식입니다";
 
     public int add(String input) {
@@ -24,36 +24,36 @@ public class Calculator {
         return sumNumbers(parseInput(input, DEFAULT_DELIMITERS));
     }
 
-    public int addWithCustomDelimiter(String input) {
-        Matcher matcher = Pattern.compile("//(.)\\n(.*)").matcher(input);
+    private int addWithCustomDelimiter(String input) {
+        Matcher matcher = Pattern.compile("//(.*)\n(.*)").matcher(input);
         if (!matcher.matches()) {
             throw new IllegalArgumentException(INVALID_CUSTOM_DELIMITER_ERROR);
         }
-        String customDelimiter = matcher.group(1);
+        String customDelimiter = Pattern.quote(matcher.group(1));
         String numbersPart = matcher.group(2);
-        return sumNumbers(parseInput(numbersPart, Pattern.quote(customDelimiter)));
+        return sumNumbers(parseInput(numbersPart, customDelimiter));
     }
 
-    public int[] parseInput(String input, String delimiter) {
-        String[] tokens = input.split(delimiter + "|\n");
-        return Arrays.stream(tokens)
+    private int[] parseInput(String input, String delimiter) {
+        return Arrays.stream(input.split(delimiter))
+                .map(String::trim)
                 .mapToInt(this::parseNumber)
                 .toArray();
     }
 
-    public int parseNumber(String token) {
+    private int parseNumber(String token) {
         try {
-            int number = Integer.parseInt(token.trim());
+            int number = Integer.parseInt(token);
             if (number < 0) {
-                throw new IllegalArgumentException(NEGATIVE_NUMBER_ERROR);
+                throw new IllegalArgumentException(POSITIVE_NUMBER_ERROR + number);
             }
             return number;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INVALID_NUMBER_ERROR, e);
+            throw new IllegalArgumentException(INVALID_NUMBER_ERROR + token, e);
         }
     }
 
-    public int sumNumbers(int[] numbers) {
+    private int sumNumbers(int[] numbers) {
         return Arrays.stream(numbers).sum();
     }
 }
