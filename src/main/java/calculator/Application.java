@@ -15,6 +15,8 @@ public class Application {
 
         String inputString = Console.readLine();
 
+        validateInputString(inputString);
+
         String numberString = extractNumberString(inputString);
 
         StringBuilder delimiterExpression = new StringBuilder();
@@ -29,23 +31,52 @@ public class Application {
         int sum = 0;
 
         for (String token : numList) {
-            if (!token.isEmpty()) {
-                try {
-                    int num = Integer.parseInt(token.trim());
 
-                    if (num < 0) {
-                        throw new IllegalArgumentException("음수는 허용되지 않습니다.");
-                    }
+            String trimToken = token.trim();
 
-                    sum += num;
-                } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("숫자가 입력되지 않았습니다.");
-                }
-            }
+            sum += convertToValidInteger(trimToken);
+
         }
 
         System.out.println("결과 : " + sum);
     }
+
+    private void validateInputString(String inputString) {
+        if (inputString == null || inputString.trim().isEmpty()) {
+            throw new IllegalArgumentException("입력값이 공백이거나 빈 문자열입니다.");
+        }
+    }
+
+    public int convertToInteger(String token) {
+        try {
+            int num = Integer.parseInt(token);
+
+            validateNonNegative(num);
+            return num;
+
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자가 입력되지 않았습니다.");
+        }
+
+    }
+
+    private int convertToValidInteger(String token) {
+        if (isEmptyToken(token)) {
+            return 0;
+        }
+        return convertToInteger(token.trim());
+    }
+
+    private boolean isEmptyToken(String token) {
+        return token.trim().isEmpty();
+    }
+
+    private void validateNonNegative(int num) {
+        if (num < 0) {
+            throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+        }
+    }
+
 
     private String extractNumberString(String inputString) {
         // 기본 구분자 추가
