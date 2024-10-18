@@ -1,4 +1,15 @@
 package calculator.parser;
 
-public class DefaultDataParser {
+import calculator.dto.Data;
+
+public class DefaultDataParser implements DataParser {
+    @Override
+    public boolean isSupport(String inputData) {
+        return false;
+    }
+
+    @Override
+    public Data parseData(String inputData) {
+        return null;
+    }
 }

@@ -1,4 +1,10 @@
 package calculator.parser;
 
-public class DataParser {
+import calculator.dto.Data;
+
+public interface DataParser {
+
+    boolean isSupport(String inputData);
+
+    Data parseData(String inputData);
 }
