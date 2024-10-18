@@ -12,10 +12,13 @@ public class CustomDelimiter {
     }
 
     public char[] getDelimiter() {
-        Pattern pattern = Pattern.compile("//(.*?)\\n"); // '//' ¿Í '\n' »çÀÌ ÆĞÅÏ
+        Pattern pattern = Pattern.compile("//(.*?)\\\\n"); // //ì™€ \n ì‚¬ì´ì˜ ì»¤ìŠ¤í…€ êµ¬ë¶„ì ê°€ì ¸ì˜¤ê¸°
         Matcher matcher = pattern.matcher(str);
 
-        return matcher.group(1).toCharArray();
+        if (matcher.find())
+            return matcher.group(1).toCharArray();
+        else
+            return new char[]{};
     }
 
 }
