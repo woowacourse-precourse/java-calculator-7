@@ -8,6 +8,7 @@ public class Input {
 
     private static final String SEPARATOR_COMMA = ",";
     private static final String SEPARATOR_COLON = ":";
+    private static final String REGEX_OR = "|";
 
     private final String[] strNums;
     private List<Long> numList;
@@ -18,7 +19,7 @@ public class Input {
     }
 
     protected Input(String strNums) {
-        this(strNums.split(SEPARATOR_COMMA + "|" + SEPARATOR_COLON));
+        this(strNums.split(SEPARATOR_COMMA + REGEX_OR + SEPARATOR_COLON));
     }
 
     public static Input from(String value) {
