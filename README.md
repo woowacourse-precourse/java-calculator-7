@@ -10,7 +10,29 @@
 
 ## 🧬 디렉토리 구조
 ```bash
-
+├── Application.java
+├── constant
+│   ├── ErrorMessage.java
+│   ├── Limit.java
+│   └── Message.java
+├── controller
+│   └── CalculatorController.java
+├── exception
+│   └── ValidatorException.java
+├── model
+│   ├── Calculator.java
+│   ├── CustomSeparator.java
+│   ├── DefaultSeparator.java
+│   └── Numbers.java
+├── test.txt
+├── validator
+│   ├── CustomSeparatorValidator.java
+│   ├── DefaultSeparatorValidator.java
+│   └── InputValidator.java
+└── view
+    ├── InputReader.java
+    ├── OutputView.java
+    └── OutputWriter.java
 ```
 
 ## 💻 프로그램 진행 순서
