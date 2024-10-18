@@ -63,12 +63,16 @@ public class Application {
             numberStrings = input.split("[,:" + "]+");
         }
 
+        return convertStringToInt(numberStrings);
+    }
+
+    private static int[] convertStringToInt(String[] numberStrings) {
         int[] tempArray = new int[numberStrings.length]; // 임시 배열
-        int count = 0;  // 저장한 숫자의 개수
+        int count = 0; // 저장한 숫자의 개수
 
         for (String s : numberStrings) {
-            if (!s.isEmpty()) {  // 빈 문자열 필터링
-                tempArray[count++] = Integer.parseInt(s);  // 정수로 변환 후 저장
+            if (!s.isEmpty()) { // 빈 문자열 필터링
+                tempArray[count++] = Integer.parseInt(s); // 정수 변환 후 저장
             }
         }
 
@@ -79,7 +83,6 @@ public class Application {
         for (int i = 0; i < count; i++) {
             resultArray[i] = tempArray[i];
         }
-
         return resultArray;
     }
 }
