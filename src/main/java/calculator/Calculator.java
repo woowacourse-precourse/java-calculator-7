@@ -44,8 +44,7 @@ public class Calculator {
 		if (startPos == -1 && endPos == -1) {
 			return;
 		}
-		System.out.println("startPos = " + startPos);
-		System.out.println("endPos = " + endPos);
+
 		// 커스텀 구분자가 처음에 위치하지 않거나, 커스텀 구분자로 1개 이상의 문자 입력 시
 		if (startPos != 0 || endPos != 3) {
 			throw new IllegalArgumentException();
