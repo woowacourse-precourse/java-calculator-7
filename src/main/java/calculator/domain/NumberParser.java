@@ -41,20 +41,8 @@ public class NumberParser {
             return Integer.parseInt(value);
         } catch (IllegalArgumentException e) {
             validateCustomDividerMinusAndNumberValueNegative(value);
-
+            validateContinuousDivider(value);
             throw new IllegalArgumentException("등록되지 않는 구분자가 있습니다." + value);
-        }
-    }
-
-    private void validateCustomDividerMinusAndNumberValueNegative(String value) {
-        if ("-".equals(divider.getCustomDivider()) && value.isEmpty()) {
-            throw new IllegalArgumentException("음수는 계산이 불가능합니다.");
-        }
-    }
-
-    private void validateNumberValueNegative(int numberValue) {
-        if (numberValue < 0) {
-            throw new IllegalArgumentException("음수는 계산이 불가능합니다.");
         }
     }
 
@@ -78,6 +66,24 @@ public class NumberParser {
 
     private String addEscapeCharToMetaChar(String metaCharacter) {
         return ESCAPE_CHARACTER + metaCharacter;
+    }
+
+    private void validateCustomDividerMinusAndNumberValueNegative(String value) {
+        if ("-".equals(divider.getCustomDivider()) && value.isEmpty()) {
+            throw new IllegalArgumentException("음수는 계산이 불가능합니다.");
+        }
+    }
+
+    private void validateNumberValueNegative(int numberValue) {
+        if (numberValue < 0) {
+            throw new IllegalArgumentException("음수는 계산이 불가능합니다.");
+        }
+    }
+
+    private void validateContinuousDivider(String value) {
+        if ("".equals(value)) {
+            throw new IllegalArgumentException("구분자가 연속으로 사용되었어요.");
+        }
     }
 
 }
