@@ -1,5 +1,8 @@
 package calculator.util;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,5 +20,18 @@ public class InputParser {
         }
 
         return "[" + delimeter + "]";
+    }
+
+    public List<String> parseStringToList(String input, String delimiter) {
+        if (input.startsWith("//")) {
+            input = input.split("\\\\n", 2)[1];
+        }
+
+        String[] elements = input.split(delimiter);
+
+        List<String> result = new ArrayList<>();
+        Collections.addAll(result, elements);
+
+        return result;
     }
 }
