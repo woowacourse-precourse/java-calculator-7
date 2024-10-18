@@ -1,11 +1,11 @@
 package calculator;
 
-public class PasingString {
+public class ParsingString {
     private static final int BASIC_DELIMITER_SIZE = 3;
     private static int findStartIndex;
     private static String parseString;
 
-    public static String pasingString(String input, String delimiter) {
+    public static String parsingString(String input, String delimiter) {
         findStartString(input, delimiter);
         isNumeric(parseString, delimiter);
         return parseString;
@@ -20,7 +20,7 @@ public class PasingString {
         }
         parseString = input.substring(findStartIndex);
         findStartNumber();
-        emptyString(parseString);
+        isEmptyString(parseString);
     }
 
     public static void findStartNumber() {
@@ -42,7 +42,7 @@ public class PasingString {
         }
     }
 
-    public static void emptyString(String input) {
+    public static void isEmptyString(String input) {
         if (input.isEmpty()) {
             parseString = "0";
         }

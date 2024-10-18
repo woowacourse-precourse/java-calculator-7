@@ -1,6 +1,6 @@
 package calculator;
 
-public class CostomDelimiter {
+public class CustomDelimiter {
     private static String delimiters = ",|:";
 
     public static String parseDelimiters(String inputMessage) {

@@ -6,7 +6,7 @@ public class Calculator {
     public Calculator() {
     }
 
-    public int add(String delimiter, String digit) {
+    public int add(String digit, String delimiter) {
         String[] arr = digit.split(delimiter);
 
         for (String s : arr) {
