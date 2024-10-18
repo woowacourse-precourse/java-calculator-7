@@ -13,10 +13,10 @@ public enum ParserError {
 	private final String message;
 
 	ParserError(String s) {
-		this.message=s;
+		this.message = s;
 	}
 
-	public String getMessage(){
+	public String getMessage() {
 		return message;
 	}
 

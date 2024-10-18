@@ -7,10 +7,10 @@ public enum CalculatorError {
 	private final String message;
 
 	CalculatorError(String s) {
-		this.message=s;
+		this.message = s;
 	}
 
-	public String getMessage(){
+	public String getMessage() {
 		return message;
 	}
 

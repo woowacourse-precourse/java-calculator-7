@@ -2,7 +2,7 @@ package calculator.view;
 
 import camp.nextstep.edu.missionutils.Console;
 
-public class AdditionCalculatorView implements CalculatorView{
+public class AdditionCalculatorView implements CalculatorView {
 
 	private static final String INPUT_STRING = "덧셈할 문자열을 입력해 주세요.";
 	private static final String OUTPUT_STRING = "결과 : ";
