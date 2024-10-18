@@ -10,6 +10,11 @@ public class CalculatorController {
 
     public static void add() {
         String input = InputView.inputString();
+        if (input.trim().isEmpty()) {
+            calculator.setResult(0);
+            OutputView.printResult(calculator);
+            return;
+        }
         String[] nums = StringSplitter.splitter(input);
         int[] numbers = Arrays.stream(nums).mapToInt(Integer::parseInt).toArray();
         int sum = 0;
