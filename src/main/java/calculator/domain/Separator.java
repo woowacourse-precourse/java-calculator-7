@@ -22,6 +22,35 @@ public class Separator {
         return separatedInput[1];
     }
 
+    public List<Long> extractNumbers(String inputValue) throws IllegalArgumentException{
+        String replacedValue = normalizeSeparator(inputValue);
+        List<String> splitValue = separate(replacedValue);
+
+        try {
+            return splitValue.stream()
+                    .filter(i-> !i.isEmpty()) // 구분자가 연속으로 오는 경우 ""이 올 수 있으므로 이를 필터링.
+                    .map(Long::valueOf)
+                    .peek(i-> {
+                        if(i<0) throw new IllegalArgumentException("음수는 입력이 불가합니다");
+                    })
+                    .toList();
+        }catch (IllegalArgumentException e){
+            throw new IllegalArgumentException("입력이 잘못되었습니다.");
+        }
+    }
+
+    public List<String> separate(String replacedValue){
+        return Arrays.asList(replacedValue.split(REPLACE_SEPARATOR,-1));
+    }
+
+    // 구분자를 전부 ','으로 통일.
+    public String normalizeSeparator(String inputValue){
+        for(String separator: separators){
+            inputValue = inputValue.replaceAll(Pattern.quote(separator), REPLACE_SEPARATOR);
+        }
+        return inputValue;
+    }
+
     public boolean isExistCustomSeparator(String inputValue){
         return inputValue.startsWith("//");
     }
