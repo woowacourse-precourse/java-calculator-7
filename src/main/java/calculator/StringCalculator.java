@@ -17,10 +17,10 @@ public class StringCalculator {
         System.out.printf("덧셈할 문자열을 입력해 주세요. ");
         String input = Console.readLine();
         UserInput userInput = new UserInput(input);
-        setThirdDelimiter(userInput);
+        setThirdDelimiterAndCalculate(userInput);
     }
 
-    private void setThirdDelimiter(UserInput userInput) {
+    private void setThirdDelimiterAndCalculate(UserInput userInput) {
         if(userInput.isCustomDelimiterPresent()) {
             String customDelimiter = userInput.getCustomDelimiter();
             regex = "[:."+customDelimiter+"]";

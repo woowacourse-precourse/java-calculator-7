@@ -17,23 +17,25 @@ class UserInputTest {
     String regex = "^(\\/\\/)([^a-zA-Z0-9.: ]{1})";
 
     @ParameterizedTest
-    @MethodSource("validInputs")
-    @DisplayName("정상입력")
+    @MethodSource("Inputs")
+    @DisplayName("올바른 개행문자 and 커스텀 구분자 형식이 일치하는 경우")
     void validSeparateDelimAndNumbers(String input,String exceptedDelimiter,String expectedNumberString) {
         separateDelimAndNumbers(input);
         Assertions.assertThat(exceptedDelimiter).isEqualTo(customDelimiter);
         Assertions.assertThat(expectedNumberString).isEqualTo(numberString);
     }
     @ParameterizedTest
-    @MethodSource("inValidInputs")
-    @DisplayName("잘못된 입력")
-    void InvalidSeparateDelimAndNumbers(String input,String expectedDelimiter,String expectedNumberString) {
+    @MethodSource("exceptionTest")
+    @DisplayName("올바른 개행문자가 and 커스텀 구분자 형식이 일치하지 않는 경우")
+    void exceptionTest(String input,String exceptedDelimiter,String expectedNumberString) {
+
         Assertions.assertThatThrownBy(() -> separateDelimAndNumbers(input))
                 .isInstanceOf(IllegalArgumentException.class);
+
     }
 
     public void separateDelimAndNumbers(String input) {
-        String[] split = input.split("\n");
+        String[] split = input.split("\\\\n");
         if(split.length==1) { // 커스텀 구분자가 존재하지 않는 경우
             numberString = split[0];
         }else if(split.length==2) {
@@ -54,18 +56,16 @@ class UserInputTest {
             throw new IllegalArgumentException();
         }
     }
-    static Stream<Object[]> validInputs() {
-        return Stream.of(new Object[]{"//;\n1;2;3", ";", "1;2;3"},
-                new Object[]{"1.2:3",null,"1.2:3"},
-                new Object[]{"//#\n4.5#6:7", "#", "4.5#6:7"},
-                new Object[]{"//@\n7@8:9.10", "@", "7@8:9.10"},
-                new Object[]{"//^\n7^8.9:10","^","7^8.9:10"});
+    static Stream<Object[]> Inputs() {
+        return Stream.of(new Object[]{"//#\\n4.5#6:7", "#", "4.5#6:7"},
+                new Object[]{"//@\\n7@8:9.10", "@", "7@8:9.10"},
+                new Object[]{"//^\\n7^8.9:10","^","7^8.9:10"});
     }
-    static Stream<Object[]> inValidInputs() {
-        return Stream.of(new Object[]{"//;\\n1;2;3",";","1;2;3"}, // 커스텀 형식이 일치하지 않는경우
-                new Object[]{"//;1;2;3",";","1;2;3"},
-                new Object[]{"//;\n\n1;2;3",";","1;2;3"},
-                new Object[]{"//.\n1;2;3",".","1;2;3"}, //기존 커스텀 구분자
-                new Object[]{"//:\n1;2;3",":","1;2;3"});
+    static Stream<Object[]> exceptionTest() {
+        return Stream.of(new Object[]{"/2;\\n1:2;3",";","\n1:2;3"},
+                new Object[]{"1/;\\n1:2;3",";","1:2;3"},
+                new Object[]{"123;\\n1:2:3",";","1:2:3"});
+
     }
+
 }
