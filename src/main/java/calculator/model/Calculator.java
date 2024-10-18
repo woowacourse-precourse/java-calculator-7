@@ -11,10 +11,15 @@ public class Calculator {
         this.numbers = numbers;
     }
 
+    public String getNumbers(){
+        return this.numbers;
+    }
+
     public String[] splitNumbers(){
         String customDelimiter = "";
         if(checkCustomDelimiter()){
             customDelimiter = getCustomDelimiter();
+            this.numbers = SplitDelimiter(numbers);
             return numbers.split("[,;]|" + Pattern.quote(customDelimiter));
         }
             return numbers.split("[,;]");
@@ -43,4 +48,9 @@ public class Calculator {
         }
         return String.valueOf(sumOfNumbers);
     }  
+
+    public String SplitDelimiter(String numbers){
+        String[] splitedNumbers = numbers.split("\n");
+        return splitedNumbers[1];
+    }
 }
