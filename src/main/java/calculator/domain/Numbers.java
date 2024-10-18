@@ -6,15 +6,13 @@ public class Numbers {
     private final long sum;
     public Numbers(Separator separator) {
         List<String> numbers = separator.getExtractedNumbers();
-        validate(numbers);
+        numbers = handleEmptyNumbers(numbers);
         this.sum = sum(numbers);
     }
-    private void validate(List<String> numbers) {
-        for(String number : numbers) {
-            if(number.isEmpty()) {
-                throw new IllegalArgumentException();
-            }
-        }
+    private List<String> handleEmptyNumbers(List<String> numbers) {
+        return numbers.stream()
+                .map(number -> number.isEmpty() ? "0" : number)
+                .toList();
     }
     private long sum(List<String> numbers) {
         long sum = 0;
