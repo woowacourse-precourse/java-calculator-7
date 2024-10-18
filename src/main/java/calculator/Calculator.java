@@ -31,7 +31,12 @@ public class Calculator {
     private static int sum(String[] tokens){
         int total = 0;
         for(String token : tokens){
-            total += Integer.parseInt(token.trim());
+            String trimmedToken = token.trim();
+            int value = Integer.parseInt(trimmedToken);
+            if (value < 0) {
+                throw new IllegalArgumentException("ERROR : 음수는 허용되지 않습니다." + value);
+            }
+            total += value;
         }
         return total;
     }
