@@ -7,9 +7,14 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine(); //사용자입력
 
-        String[] parts = splitInput(input); // 입력을 구분자로 나누기
-        int sum = sumNumbers(parts);
-        System.out.println("합계: " + sum);
+        // 입력을 구분자로 나누기
+        try {
+            String[] parts = splitInput(input);
+            int sum = sumNumbers(parts);
+            System.out.println("합계: " + sum);
+        } catch (IllegalArgumentException e) {
+        }
+
     }
 
     // 입력된 문자열을 구분자로 나누는 메서드
@@ -32,7 +37,7 @@ public class Application {
         for (String part : parts) {
             for (char c : part.toCharArray()) {
                 if (!Character.isDigit(c)) {
-                    return false; // 숫자가 아닌 문자가 있으면 false
+                    throw new IllegalArgumentException(); // 숫자가 아닌 문자가 있으면 false
                 }
             }
         }
