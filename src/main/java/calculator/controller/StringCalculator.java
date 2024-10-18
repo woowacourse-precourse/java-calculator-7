@@ -3,6 +3,7 @@ package calculator.controller;
 import calculator.domain.DelimiterExtractor;
 import calculator.domain.DelimiterTokenizer;
 import calculator.domain.ResultCalculator;
+import calculator.global.OutputMessage;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -20,5 +21,11 @@ public class StringCalculator {
         this.delimiterExtractor = delimiterExtractor;
         this.delimiterTokenizer = delimiterTokenizer;
         this.resultCalculator = resultCalculator;
+    }
+
+    public void run(){
+        // "덧셈할 문자열을 입력해 주세요." 출력
+        outputView.print(OutputMessage.INPUT_MESSAGE);
+
     }
 }
