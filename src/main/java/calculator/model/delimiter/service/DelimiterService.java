@@ -21,8 +21,8 @@ public abstract class DelimiterService {
 
     public abstract List<String> splitByDelimiters(String value);
 
-    protected Delimiters getDelimiters(String input) {
-        return customDelimiterService.extractCustomDelimiter(input)
+    protected Delimiters getDelimiters(String value) {
+        return customDelimiterService.extractCustomDelimiter(value)
                 .map(this::createDelimiters)
                 .orElseGet(this::createDelimiters);
     }

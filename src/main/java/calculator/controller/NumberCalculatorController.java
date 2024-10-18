@@ -9,9 +9,9 @@ public class NumberCalculatorController extends CalculatorController {
 
     private final Class<? extends Number> numberClass;
 
-    public NumberCalculatorController(NumberCalculatorDependencyRegistry dependencyRegistry) {
-        super(dependencyRegistry);
-        this.numberClass = dependencyRegistry.getNumberClass();
+    public NumberCalculatorController(NumberCalculatorDependencyRegistry numberCalculatorDependencyRegistry) {
+        super(numberCalculatorDependencyRegistry);
+        this.numberClass = numberCalculatorDependencyRegistry.getNumberClass();
     }
 
     @Override

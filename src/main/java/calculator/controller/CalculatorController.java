@@ -11,9 +11,9 @@ public abstract class CalculatorController implements Controller {
     protected final InputView inputView;
     protected final OutputView outputView;
 
-    public CalculatorController(NumberCalculatorDependencyRegistry dependencyRegistry) {
-        this.delimiterService = dependencyRegistry.getDelimiterService();
-        this.inputView = dependencyRegistry.getInputView();
-        this.outputView = dependencyRegistry.getOutputView();
+    public CalculatorController(NumberCalculatorDependencyRegistry numberCalculatorDependencyRegistry) {
+        this.delimiterService = numberCalculatorDependencyRegistry.getDelimiterService();
+        this.inputView = numberCalculatorDependencyRegistry.getInputView();
+        this.outputView = numberCalculatorDependencyRegistry.getOutputView();
     }
 }
