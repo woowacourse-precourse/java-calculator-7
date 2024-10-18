@@ -15,6 +15,7 @@ public class Calculator {
     public Calculator(Delimiter delimiter){
         this.delimiter = delimiter;
     }
+    
 
     public void getString(){
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -65,4 +66,7 @@ public class Calculator {
         }
     }
 
+    public void printResult(){
+        System.out.println("결과 : "+result);
+    }
 }
