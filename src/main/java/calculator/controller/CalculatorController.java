@@ -1,10 +1,9 @@
 package calculator.controller;
 
-import calculator.domain.Numbers;
 import calculator.domain.Delimiter;
+import calculator.domain.Numbers;
 import calculator.util.NumberConvertor;
 import calculator.validator.DelimiterValidator;
-import calculator.validator.StringValidator;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
