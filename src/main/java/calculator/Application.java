@@ -58,8 +58,8 @@ public class Application {
             throw new IllegalArgumentException("숫자만 입력 가능합니다.");
         }
 
-        if (Integer.parseInt(val) < 0) {
-            throw new IllegalArgumentException("음수 사용 불가");
+        if (Integer.parseInt(val) <= 0) {
+            throw new IllegalArgumentException("음수, 0 사용 불가");
         }
         return intVal;
     }
