@@ -7,6 +7,6 @@ public class CalculateApplication {
     public static int doCalculate(Input input) {
         Input afterCustom = CustomSeparator.findCustomSeparator(input);
         Input afterSplit = SplitInputString.SplitString(afterCustom);
-        return CalculateIntegerList.calculateResult(afterSplit);
+        return CalculateInteger.calculateResult(afterSplit);
     }
 }

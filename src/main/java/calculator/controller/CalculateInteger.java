@@ -3,7 +3,7 @@ package calculator.controller;
 import calculator.model.Input;
 import java.util.List;
 
-public class CalculateIntegerList {
+public class CalculateInteger {
 
     public static int calculateResult(Input input) {
         List<Integer> numbers = input.getNumbers();
