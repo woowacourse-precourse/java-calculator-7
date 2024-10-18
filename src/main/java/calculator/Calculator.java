@@ -7,6 +7,7 @@ import java.util.List;
 public class Calculator {
 
     private static String DEFAULT_DELIMITERS = ",|:";
+    private static final Validator validator = new Validator();
 
     public List<Integer> splitString(String input) {
         if (input == null || input.isEmpty()) {
@@ -15,9 +16,12 @@ public class Calculator {
 
         String customNumber = customDelimiter(input);
         String[] tokens = customNumber.split(DEFAULT_DELIMITERS);
+
         List<Integer> numbers = new ArrayList<>();
         for (String token : tokens) {
-            numbers.add(Integer.parseInt(token));
+            int num = validator.isValid(token);
+            validator.isNumber(num);
+            numbers.add(num);
         }
 
         return numbers;
@@ -26,6 +30,9 @@ public class Calculator {
     public String customDelimiter(String input) {
         if (input.startsWith("//")) {
             int endIndex = input.indexOf("\\"+"n");
+            if (endIndex == -1) {
+                throw new IllegalArgumentException();
+            }
 
             String customDelimiter = input.substring(2, endIndex);
             DEFAULT_DELIMITERS = DEFAULT_DELIMITERS + "|" +customDelimiter;
