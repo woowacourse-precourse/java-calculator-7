@@ -1,24 +1,16 @@
 package calculator;
 
-import java.text.DecimalFormat;
+import java.util.Arrays;
 
 public class  Calculator {
+       private final StringFilter stringFilter = new StringFilter();
     public int calculate(String input) {
-
-        StringFilter stringFilter = new StringFilter();
-
         if (input.isEmpty())
             return 0;
 
-        if (input.length() == 1)
-            return Integer.parseInt(input);
-
-        String[] numbers = stringFilter.StringController(input);
-        int sum = 0;
-
-        for (String numberStr : numbers) {
-            sum += Integer.parseInt(numberStr);
-        }
-        return sum;
+        return Arrays.stream(stringFilter.delimiterSplit(input))
+                .map(Integer::parseInt)
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 }

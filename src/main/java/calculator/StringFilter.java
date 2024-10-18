@@ -1,58 +1,33 @@
 package calculator;
 
-import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class StringFilter {
     private final String DEFAULT_DELIMITER = "[,:]";
+    private final StringValidator validator = new StringValidator();
 
-    public String[] StringController(String input) {
-        String[] sanitizedInput = splitAndTrim(input);
-
-        if (validateDelimiter(sanitizedInput)){
-        validateNegativeNumber(sanitizedInput); //첫번째 인덱스가 음수,양수인지 확인
-            return sanitizedInput;
+    //기본 구분자로 문자열 나누기
+    public String[] delimiterSplit(String input) {
+        if (input.contains("//") && input.contains("\\n")) {
+            String[] splitCustomDelimiter = splitCustomDelimiter(input);
+            validator.validateNegativeNumber(splitCustomDelimiter);
+            return splitCustomDelimiter;
         }
-        else return customDelimiter(sanitizedInput);
+
+        String[] splitDefaultDelimiter = input.split(DEFAULT_DELIMITER);
+        validator.validateNegativeNumber(splitDefaultDelimiter);
+        return splitDefaultDelimiter;
     }
 
-    //문자열 나누기
-    private String[] splitAndTrim(String input) {
-        String[] splitInput = input.split(DEFAULT_DELIMITER);
+    private static String[] splitCustomDelimiter(String Input) {
+        String joinedString = String.join("", Input);
+        String replaceString = joinedString.replace("//", "").replace("\\n", "");
+        String customDelimiter = replaceString.substring(0, 1);
 
-        return Arrays.stream(splitInput)
-                .filter(s -> !s.isEmpty())
-                .map(String::trim)
-                .toArray(String[]::new);
+        return replaceString.substring(1).split(Pattern.quote(customDelimiter));
     }
 
-    //입력값에 대한 음수,양수 검증
-    private static void validateNegativeNumber(String[] splitedString) {
-        for (String numberStr : splitedString) {
-            if (Integer.parseInt(numberStr.trim()) < 0) {
-                throw new IllegalArgumentException("음수는 입력할 수 없습니다");
-            }
-        }
-    }
 
-    //구분자 검증
-    private boolean validateDelimiter(String[] splitedString) {
-        try{
-            Integer.parseInt(splitedString[0]);
-            return true;
-        }catch (NumberFormatException e){
-            return false;
-        }
-    }
-
-    //커스텀 구분자 추출
-    private String[] customDelimiter(String[] filteredString) {
-        String s = String.join("", filteredString);
-        String replaceInput = s.replace("//", "").replace("\\n", "").trim();
-        String customDelimiter = replaceInput.substring(0, 1);
-
-        return replaceInput.substring(1).split(Pattern.quote(customDelimiter));
-    }
 
 
 }
