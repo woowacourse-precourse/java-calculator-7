@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static calculator.Extractor.extractDelimiter;
+import static calculator.Extractor.extractNumberPart;
+
 public class Converter {
 
     private String delimiter;
@@ -17,8 +20,8 @@ public class Converter {
     }
 
     public List<Integer> convertNumbersFromString(String value) {
-        delimiter = extractDelimiter(value);
-        String numberPart = extractNumberPart(value);
+        delimiter = extractDelimiter(value, delimiter, prefix, suffix);
+        String numberPart = extractNumberPart(value, prefix, suffix);
         return splitNumbers(numberPart);
     }
 
@@ -28,22 +31,6 @@ public class Converter {
         return Integer.parseInt(trimmedValue);
     }
 
-    public String extractDelimiter(String value){
-        if (value.startsWith(prefix)) {
-            int delimiterIndex = value.indexOf(suffix);
-            String customDelimiter = value.substring(prefix.length(), delimiterIndex);
-            return addDelimiter(delimiter, customDelimiter);
-        }
-        return delimiter;
-    }
-
-    private String extractNumberPart(String value){
-        if (value.startsWith(prefix)) {
-            int delimiterIndex = value.indexOf(suffix);
-            return value.substring(delimiterIndex + 2);
-        }
-        return value;
-    }
 
     private List<Integer> splitNumbers(String numberPart) {
         return Arrays.stream(numberPart.split(delimiter))
