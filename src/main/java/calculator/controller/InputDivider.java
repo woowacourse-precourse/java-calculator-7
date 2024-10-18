@@ -10,8 +10,8 @@ public class InputDivider {
         if (input.isOriginEmpty()) {
             return Input.makeInputWithoutOrigin(input);
         }
-        List<String> numbers = Arrays.stream(input.origin().split(
-                        input.separator()))
+        List<String> numbers = Arrays
+                .stream(input.origin().split(input.separator()))
                 .toList();
         return Input.makeInputWithOrigin(input, numbers);
     }
