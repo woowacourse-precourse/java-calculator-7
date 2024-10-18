@@ -13,8 +13,8 @@ public class CalculatorService {
      * @param line 사용자가 입력한 문자열
      * @return 분리된 숫자 리스트
      */
-    public List<Integer> paresInput(String line) {
-        return List.of();
+    public String[] paresInput(String line) {
+        return new String[]{};
     }
 
     /**
