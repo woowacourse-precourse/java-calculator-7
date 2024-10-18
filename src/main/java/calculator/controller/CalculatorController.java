@@ -13,8 +13,8 @@ public class CalculatorController {
     private final ResultService resultService;
     public CalculatorController(
             GenerateController generateController,
-                                InputHandlerService inputHandlerService,
-                                ResultService resultService) {
+            InputHandlerService inputHandlerService,
+            ResultService resultService) {
         this.generateController = generateController;
         this.inputHandlerService = inputHandlerService;
         this.resultService = resultService;
