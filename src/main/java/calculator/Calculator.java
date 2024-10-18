@@ -1,8 +1,6 @@
 package calculator;
 
 
-import java.util.Arrays;
-
 public class Calculator {
     private Delimiter delimiter;
 
@@ -17,7 +15,7 @@ public class Calculator {
             return 0;
         }
 
-        String[] tokens = delimiter.split(input); // 입력 문자열을 나누어 배열로 변환
+        String[] tokens = delimiter.splitInput(input); // 입력 문자열을 나누어 배열로 변환
 
         int sum = 0;
         for(String token : tokens){

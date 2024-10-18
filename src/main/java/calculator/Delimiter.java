@@ -1,5 +1,5 @@
 package calculator;
 
 public interface Delimiter {
-    String[] split(String input);
+    String[] splitInput(String input);
 }
