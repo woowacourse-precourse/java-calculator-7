@@ -29,7 +29,6 @@
 
 #### 예외처리
 
-- [ ] 예외 처리 기능 구현
 - [ ] 분리하는 중 구분자와 숫자 이외의 문자 확인 및 예외 처리 (IllegalArgumentException 발생)
 - [ ] 음수 값이 입력된 경우 예외 처리 (IllegalArgumentException 발생)
 - [ ] 커스텀 구분자의 자리에 문자가 존재하지 않는 경우 예외 처리 (IllegalArgumentException 예외 발생)
@@ -37,3 +36,7 @@
 - [ ] 숫자가 없이 구분자만 존재하는 경우 예외처리 (IllegalArgumentException 예외 발생)
 - [ ] 입력값이 null일 경우 예외 처리 (IllegalArgumentException 발생)
 - [ ] 커스텀 구분자가 제대로 지정되지 않았을 경우 예외 처리 (IllegalArgumentException 발생)
+
+#### 기타
+
+- [ ] 애플리케이션 실행 시 사용자가 입력한 문자열을 받아 결과를 출력하는 기능
