@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.List;
+
 public class DataVerification {
     public void checkIsInputEmpty(String userInput) {
         if (userInput.isEmpty()) {
@@ -7,16 +9,16 @@ public class DataVerification {
         }
     }
 
-    public void checkIsPositiveNumber(SplitStringWithSeparator splitStringWithSeparator) {
-        for (String number : splitStringWithSeparator.processedInput) {
+    public void checkIsPositiveNumber(List<String> splitInput) {
+        for (String number : splitInput) {
             if (Integer.parseInt(number) < 0) {
                 throw new IllegalArgumentException();
             }
         }
     }
 
-    public void checkHasNumberFormat(SplitStringWithSeparator splitStringWithSeparator) {
-        for (String number : splitStringWithSeparator.processedInput) {
+    public void checkHasNumberFormat(List<String> splitInput) {
+        for (String number : splitInput) {
             if (Character.isDigit(Integer.parseInt(number))) {
                 throw new IllegalArgumentException();
             }

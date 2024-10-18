@@ -2,11 +2,13 @@ package calculator;
 
 import calculator.utils.InputUtils;
 import calculator.utils.PrintUtils;
+import calculator.utils.SplitUtils;
+
+import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
-        SplitStringWithSeparator splitStringWithSeparator = new SplitStringWithSeparator();
         DataVerification dataVerification = new DataVerification();
 
         int total = 0;
@@ -14,18 +16,12 @@ public class Application {
         String userInput = InputUtils.getUserInput();
         dataVerification.checkIsInputEmpty(userInput);
 
-        int escapeIdx = userInput.indexOf("\\n");
-        if (escapeIdx > 0) {
-            splitStringWithSeparator.splitWithCustomSeparator(userInput, escapeIdx);
-        } else {
-            splitStringWithSeparator.splitWithDefaultSeparator(userInput);
-        }
+        List<String> splitInput = SplitUtils.getSplitInput(userInput);
 
-        dataVerification.checkIsPositiveNumber(splitStringWithSeparator);
-        dataVerification.checkHasNumberFormat(splitStringWithSeparator);
+        dataVerification.checkIsPositiveNumber(splitInput);
+        dataVerification.checkHasNumberFormat(splitInput);
 
-        calculator.getTotal(splitStringWithSeparator);
-
+        calculator.getTotal(splitInput);
         PrintUtils.printResult(total);
     }
 }
