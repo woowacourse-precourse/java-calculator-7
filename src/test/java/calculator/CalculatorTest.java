@@ -36,17 +36,17 @@ public class CalculatorTest {
                 org.junit.jupiter.params.provider.Arguments.of(
                         "", new ArrayList<Integer>()),
                 org.junit.jupiter.params.provider.Arguments.of(
-                        "//@\n1@2@3", new ArrayList<Integer>(Arrays.asList(1, 2, 3))),
+                        "//@\\n1@2@3", new ArrayList<Integer>(Arrays.asList(1, 2, 3))),
                 org.junit.jupiter.params.provider.Arguments.of(
-                        "//@\n1@2,3", new ArrayList<Integer>(Arrays.asList(1, 2, 3))),
+                        "//@\\n1@2,3", new ArrayList<Integer>(Arrays.asList(1, 2, 3))),
                 org.junit.jupiter.params.provider.Arguments.of(
-                        "//@\n1@2:3", new ArrayList<Integer>(Arrays.asList(1, 2, 3))),
+                        "//@\\n1@2:3", new ArrayList<Integer>(Arrays.asList(1, 2, 3))),
                 org.junit.jupiter.params.provider.Arguments.of(
-                        "//@\n//@\n1@2,3", new ArrayList<Integer>(Arrays.asList(1, 2, 3))),
+                        "//@\\n//@\\n1@2,3", new ArrayList<Integer>(Arrays.asList(1, 2, 3))),
                 org.junit.jupiter.params.provider.Arguments.of(
-                        "//@\n//;\n1;2@3", new ArrayList<Integer>(Arrays.asList(1, 2, 3))),
+                        "//@\\n//;\\n1;2@3", new ArrayList<Integer>(Arrays.asList(1, 2, 3))),
                 org.junit.jupiter.params.provider.Arguments.of(
-                        "//@\n1@2@3", new ArrayList<Integer>(Arrays.asList(1, 2, 3)))
+                        "//@\\n1@2@3", new ArrayList<Integer>(Arrays.asList(1, 2, 3)))
         );
     }
 
@@ -65,7 +65,7 @@ public class CalculatorTest {
                 org.junit.jupiter.params.provider.Arguments.of("asdf"),
                 org.junit.jupiter.params.provider.Arguments.of("1@2@3"),
                 org.junit.jupiter.params.provider.Arguments.of("//@1@2@3"),
-                org.junit.jupiter.params.provider.Arguments.of("//@\n//1,2,3")
+                org.junit.jupiter.params.provider.Arguments.of("//@\\n//1,2,3")
         );
     }
 
@@ -80,12 +80,12 @@ public class CalculatorTest {
         return Stream.of(
                 Arguments.of(Calculator.parse("1,2,3"), 6),
                 Arguments.of(Calculator.parse(""), 0),
-                Arguments.of(Calculator.parse("//@\n1@2@3"), 6),
-                Arguments.of(Calculator.parse("//@\n1@2,3"), 6),
-                Arguments.of(Calculator.parse("//@\n1@2:3"), 6),
-                Arguments.of(Calculator.parse("//@\n//@\n1@2,3"), 6),
-                Arguments.of(Calculator.parse("//@\n//;\n1;2@3"), 6),
-                Arguments.of(Calculator.parse("//@\n1@2@3"), 6)
+                Arguments.of(Calculator.parse("//@\\n1@2@3"), 6),
+                Arguments.of(Calculator.parse("//@\\n1@2,3"), 6),
+                Arguments.of(Calculator.parse("//@\\n1@2:3"), 6),
+                Arguments.of(Calculator.parse("//@\\n//@\\n1@2,3"), 6),
+                Arguments.of(Calculator.parse("//@\\n//;\\n1;2@3"), 6),
+                Arguments.of(Calculator.parse("//@\\n1@2@3"), 6)
         );
     }
 
