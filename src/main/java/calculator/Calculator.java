@@ -44,7 +44,8 @@ public class Calculator implements AutoCloseable {
     private class Parser {
 
         private static final String DELIMITER_PREFIX = "//";
-        private static final String DELIMITER_DEFINITION_END = "\n";
+        private static final String DELIMITER_SUFFIX = "\n";
+        private static final int CUSTOM_DELIMITER = 0;
         StringBuilder strippedStringBuilder;
 
         private Parser() {
@@ -60,10 +61,10 @@ public class Calculator implements AutoCloseable {
 
             strippedStringBuilder = removeDelimiterPrefix(strippedString);
             if (hasCustomDelimiter) {
-                customDelimiter += Character.toString(stringBuilder.charAt(0));
-                deleteDelimiterSection(stringBuilder, 0);
+                removeDelimiterSuffix(strippedStringBuilder);
             }
-            return stringBuilder.toString();
+
+            return strippedStringBuilder.toString();
         }
 
         private StringBuilder removeDelimiterPrefix(String targetString) {
@@ -75,8 +76,21 @@ public class Calculator implements AutoCloseable {
             }
             return targetStringBuilder;
         }
-    }
 
+        private void removeDelimiterSuffix(StringBuilder targetStringBuilder) {
+            customDelimiter = Character.toString(targetStringBuilder.charAt(CUSTOM_DELIMITER));
+            // DelimiterManager 인스턴스에 customDelimiter 전달
+            delimiterManager.addDelimiter(customDelimiter);
+            // targetStringBuilder의 customDelimiter까지 제거
+            targetStringBuilder.deleteCharAt(CUSTOM_DELIMITER);
+            String stringWithSuffix = targetStringBuilder.toString();
+            if (stringWithSuffix.startsWith("\n")) {
+                targetStringBuilder.delete(0, DELIMITER_PREFIX.length());
+            } else {
+                throw new IllegalArgumentException("Invalid string: missing custom delimiter suffix.");
+            }
+        }
+    }
 
     private class DelimiterManager {
 
