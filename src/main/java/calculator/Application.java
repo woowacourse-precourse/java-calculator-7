@@ -38,11 +38,16 @@ public class Application {
         }
 
         public void init(){
-                String input = getInput();
-                extractDelimiter(input);
-                if(isValidString(input)){
-                    calculateNumbers(extractedNumArr);
-                };
+            String input = getInput();
+            int result = 0;
+
+            extractDelimiter(input);
+
+            if(isValidString(input)){
+                result = calculateNumbers(extractedNumArr);
+            };
+
+            printResult(result);
         }
 
         // 입력
@@ -139,8 +144,8 @@ public class Application {
         }
 
         // 출력
-        public void printResult(){
-            // 출력
+        public void printResult(int result){
+            System.out.println("결과 : "+result);
         }
     }
 }
