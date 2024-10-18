@@ -12,13 +12,14 @@ import java.util.List;
 public class DelimiterExtractor {
     
     public DelimiterSet extractDelimiter(String input) {
-        DelimiterSet delimiterSet = new DelimiterSet();
-        if (!input.startsWith(PREFIX)) {
-            return delimiterSet;
+
+        if (notStartWithPrefix(input)) {
+            return new DelimiterSet();
         }
+
+        DelimiterSet delimiterSet = new DelimiterSet();
         String firstHalf = getFistHalf(input);
-        String[] delimiters = firstHalf.split(EMPTY);
-        delimiterSet.addAll(List.of(delimiters));
+        delimiterSet.addAll(List.of(firstHalf.split(EMPTY)));
         return delimiterSet;
     }
 
@@ -27,9 +28,17 @@ public class DelimiterExtractor {
         if (indexOfSplitDelimiter == -1) {
             return EMPTY;
         }
-        if (!input.startsWith(PREFIX)) {
+        checkValidatePrefix(input);
+        return input.substring(PREFIX_SIZE, indexOfSplitDelimiter);
+    }
+
+    private boolean notStartWithPrefix(String input) {
+        return !input.startsWith(PREFIX);
+    }
+
+    private void checkValidatePrefix(String input) {
+        if (notStartWithPrefix(input)) {
             throw new IllegalArgumentException(PREFIX_ERROR_MESSAGE);
         }
-        return input.substring(PREFIX_SIZE, indexOfSplitDelimiter);
     }
 }

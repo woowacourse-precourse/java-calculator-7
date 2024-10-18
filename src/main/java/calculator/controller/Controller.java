@@ -15,8 +15,7 @@ public class Controller {
     private final StringParser stringParser;
     private final NumberCalculator numberCalculator;
 
-    public Controller(DelimiterExtractor delimiterExtractor, StringParser stringParser,
-                      NumberCalculator numberCalculator) {
+    public Controller(DelimiterExtractor delimiterExtractor, StringParser stringParser, NumberCalculator numberCalculator) {
         this.delimiterExtractor = delimiterExtractor;
         this.stringParser = stringParser;
         this.numberCalculator = numberCalculator;

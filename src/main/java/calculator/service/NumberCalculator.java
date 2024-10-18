@@ -9,9 +9,9 @@ import calculator.domain.Numbers;
 public class NumberCalculator {
 
     public Numbers calculateNumbers(String numberPart, String splitForm) {
-        String[] split = numberPart.trim().split(splitForm);
+        String[] parts = numberPart.trim().split(splitForm);
         Numbers numbers = new Numbers();
-        for (String target : split) {
+        for (String target : parts) {
             int number = toInt(target);
             validateNumber(number);
             numbers.add(number);
