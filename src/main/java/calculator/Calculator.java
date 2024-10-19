@@ -65,18 +65,60 @@ public class Calculator {
             return true;
     }
 
+    private void addBasicSeparator() {
+        separator.add(",");
+        separator.add(":");
+    }
+
+    private boolean isSeparator(String tmpSeparator) {
+        for (int i = 0; i < separator.size(); i++) {
+            if (separator.get(i).equals(tmpSeparator)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * 피연산자 파싱하여 operand 배열에 저장
      */
     private void parseOperand() {
+        int tmpOperand = 0;
+        String tmpOperator = "";
+        boolean flag = false;
 
+        // 숫자가 있는지 확인하기
+        for (int i = 0; i < removedString.length(); i++) {
+
+            if (removedString.charAt(i) >= '0' && removedString.charAt(i) <= '9') {
+                if (!flag) {
+
+                    continue;
+                }
+                if (flag && isSeparator(tmpOperator)) {
+
+                    continue;
+                }
+                throw new IllegalArgumentException("존재하지 않는 구분자가 포함되었습니다.");
+            }
+            else {
+                if (flag == false) {
+                    flag = true;
+
+                }
+                tmpOperand += removedString.charAt(i);
+            }
+        }
+
+
+        // 커스텀 문자 제외하고 남은 문자가 있는지 확인하기
+        // 만약에
     }
 
     /**
      * 결과 출력
      */
     private void printResult() {
-        System.out.println("removedString = " + removedString);
         if (operand != null) {
             System.out.println("결과 : " + Arrays.stream(operand).sum());
         } else {
@@ -87,15 +129,9 @@ public class Calculator {
     public void run() {
         getUserInput();
         parseCustomSeparator();
-//        if (parseCustomSeparator()) {
-//            for (int i = 0; i < separator.size(); i++) {
-//                if (!separator.isEmpty())
-//                    System.out.println("separator.get(i) = " + separator.get(i));
-//            }
-//        }
+        addBasicSeparator();
         // todo: 피연산자 문자열 파싱 및 저장 -> 예외처리
         parseOperand();
-
         // todo: 결과 출력
         printResult();
     }
