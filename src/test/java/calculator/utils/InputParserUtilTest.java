@@ -1,6 +1,7 @@
 package calculator.utils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -43,5 +44,25 @@ public class InputParserUtilTest {
         assertThat(result7).isEqualTo(new String[]{"1", "2", "3"});
         assertThat(result8).isEqualTo(new String[]{"//@@\\n1@@2@@3"});
         assertThat(result9).isEqualTo(new String[]{"1", "2", "", "3"});
+    }
+
+    @Test
+    @DisplayName("양수를 판별해 정수형으로 형변환 시켜준다.")
+    void numberStrListToIntList() {
+        String[] input1 = new String[]{"1", "2", "3"};
+        String[] input2 = new String[]{"", "2", "3"};
+        String[] input3 = new String[]{"-1", "2", "3"};
+
+        int[] result1 = InputParserUtil.numberStrListToIntList(input1);
+
+        assertThat(result1).isEqualTo(new int[]{1, 2, 3});
+
+        assertThatThrownBy(() -> InputParserUtil.numberStrListToIntList(input2))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("잘못된 입력값입니다.");
+
+        assertThatThrownBy(() -> InputParserUtil.numberStrListToIntList(input3))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("잘못된 입력값입니다.");
     }
 }
