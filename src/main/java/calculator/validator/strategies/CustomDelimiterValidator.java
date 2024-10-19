@@ -36,15 +36,11 @@ public class CustomDelimiterValidator implements ValidationStrategy {
     private void validateDelimiter(Matcher matcher) {
         String customDelimiter = matcher.group(1);
 
-        // 구분자가 유효하지 않은지 검사하고 예외 던짐
-        if (isInvalidDelimiter(customDelimiter)) {
+        // 구분자가 유효하지 않거나 구분자가 비어있는 경우 예외 던짐
+        if (isInvalidDelimiter(customDelimiter) || isMissingDelimiter(customDelimiter)) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_CUSTOM_DELIMITER_ERROR.getMessage());
         }
 
-        // 구분자가 없거나 비어있는 경우에도 예외 던짐
-        if (isMissingDelimiter(customDelimiter)) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_CUSTOM_DELIMITER_ERROR.getMessage());
-        }
     }
 
     // 구분자가 없거나 비어있는지 검사하는 메서드
