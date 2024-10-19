@@ -1,6 +1,7 @@
 package calculator.service;
 
 import calculator.exception.ErrorMessage;
+import calculator.util.IntegerUtils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -32,6 +33,7 @@ public class DelimiterService {
         Matcher matcher = Pattern.compile(CUSTOM_DELIMITERS).matcher(input);
 
         if (matcher.find()) {
+            validateMatcherGroup(matcher);
             return matcher.group(2).substring(2).split(Pattern.quote(matcher.group(1)));
         }
         throw new IllegalArgumentException(ErrorMessage.NOT_MATCH_FOUND_DELIMITER.getMessage());
@@ -40,5 +42,12 @@ public class DelimiterService {
     private String[] splitByDefaultDelimiters(String input) {
         return input.split(DEFAULT_DELIMITERS);
     }
+
+    private void validateMatcherGroup(Matcher matcher) {
+        if (IntegerUtils.isNumeric(matcher.group(1))) {
+            throw new IllegalArgumentException("커스텀 문자에 숫자를 입력할 수 없습니다.");
+        }
+    }
+
 
 }
