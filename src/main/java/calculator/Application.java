@@ -19,11 +19,19 @@ public class Application {
     }
 
     public static List<Long> extractNumbers(String input, String delimiterRegex){
-        try {
-            return Arrays.stream(input.split(delimiterRegex)).map(Long::parseLong).toList();
-        }catch (NumberFormatException e){
-            throw new IllegalArgumentException();
+        return Arrays.stream(input.split(delimiterRegex)).map(Application::stringToLong).toList();
+    }
+
+    public static Long stringToLong(String str){
+        Long num = 0L;
+        for(char i : str.toCharArray()){
+            if(i < '0' || i>'9'){
+                throw new IllegalArgumentException();
+            }
+            num *= 10;
+            num += i-'0';
         }
+        return num;
     }
 
     public static void main(String[] args) {
@@ -34,5 +42,6 @@ public class Application {
             input = input.substring(separator.length()-7);
         }
 
+        extractNumbers(input, separator);
     }
 }
