@@ -1,7 +1,7 @@
 package calculator.utils;
 
 public class PrintUtils {
-    public static void print(String str) {
-        System.out.println(str);
+    public static void print(String message) {
+        System.out.println(message);
     }
 }
