@@ -19,6 +19,12 @@ class ApplicationTest extends NsTest {
     void calculatorConstructor(){
         testDelimiterArr = new ArrayList<>();
         testDelimiterArr.addAll(Arrays.asList(":",",",";","m45i","!"));
+
+        testSplitNumbers = new ArrayDeque<>();
+        testSplitNumbers.addAll(Arrays.asList("", "1", "", "34", "6567", "243", "989", "3"));
+
+        testExtractedNumbers = new ArrayList<>();
+        testExtractedNumbers.addAll(Arrays.asList(1,34,6567,243,989,3));
     }
     @Test
     void 커스텀_구분자_사용() {
@@ -40,6 +46,17 @@ class ApplicationTest extends NsTest {
 
         // then
         assertThat(result).isEqualTo(testDelimiterArr);
+    }
+
+    // splitNumbers()
+    @Test
+    void 숫자_문자_추출(){
+        calculatorConstructor();
+        String input = "//;\\n1//m45i\\n//!\\n34:6567;243m45i989!3";
+
+        Application.StringCalculator stringCalculator= new Application.StringCalculator();
+        stringCalculator.extractDelimiter(input);
+        assertThat(stringCalculator.splitNumbers(input)).containsExactlyElementsOf(testSplitNumbers);
     }
 
     @Test
