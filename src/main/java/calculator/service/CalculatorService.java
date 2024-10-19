@@ -38,12 +38,11 @@ public class CalculatorService {
     private String[] separate(boolean hasPlusSeparator) {
         if (!hasPlusSeparator) {
             return s.split("[:,]");
-        } else { //else 문 삭제해도 됨. ####################################################
-            if (plusSeparator.equals("\\")) {
-                return s.split("[:," + plusSeparator.repeat(2) + "]");
-            }
-            return s.split("[:," + plusSeparator + "]");
         }
+        if (plusSeparator.equals("\\")) {
+            return s.split("[:," + plusSeparator.repeat(2) + "]");
+        }
+        return s.split("[:," + plusSeparator + "]");
     }
 
     /**
