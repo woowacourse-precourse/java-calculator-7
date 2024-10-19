@@ -32,5 +32,9 @@ public class CustomSeparator implements Separator {
                 "커스텀 구분자는 문자열 앞부분의 \"//\"와 \"\\n\" 사이에 위치해야 합니다.");
     }
 
+    public String getLine() {
+        return line;
+    }
+
 }
 

@@ -16,6 +16,14 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 커스텀_구분자_사용1() {
+        assertSimpleTest(() -> {
+            run("//&\n23&3&74,03");
+            assertThat(output()).contains("결과 : 103");
+        });
+    }
+
 
     @Test
     void 커스텀_구분자와_기본_구분자_함께_사용() {
