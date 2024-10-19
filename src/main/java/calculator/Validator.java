@@ -11,4 +11,11 @@ public class Validator {
 
     return matcher.find();
   }
+  public static boolean checkCustomDelimiterFormat(String inputString) {
+    String rex =  "^//[\\D ]\\\\n.*$";
+    Pattern p = Pattern.compile(rex);
+    Matcher matcher = p.matcher(inputString);
+
+    return matcher.find();
+  }
 }
