@@ -1,5 +1,7 @@
 package calculator.Model;
 
+import static calculator.Constants.ErrorMessages.INVALID_NUMBER_MESSAGE;
+
 import calculator.Constants.ErrorMessages;
 import calculator.Utils.NumberUtils;
 
@@ -21,7 +23,7 @@ public class Number {
         if (isNull(number)) {
             return BLANK_ZERO;
         }
-        NumberUtils.isDouble(number);
+        validateDigit(number);
         Double parsedNumber = Double.parseDouble(number);
         isPositive(parsedNumber);
         return parsedNumber;
@@ -35,5 +37,11 @@ public class Number {
 
     private boolean isNull(String number) {
         return number.isEmpty() || number.isBlank();
+    }
+
+    private void validateDigit(String number) {
+        if (!NumberUtils.isNumeric(number)) {
+            throw new IllegalArgumentException(INVALID_NUMBER_MESSAGE.getErrorMessage());
+        }
     }
 }
