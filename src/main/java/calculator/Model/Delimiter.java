@@ -22,25 +22,25 @@ public class Delimiter {
     }
 
     private void validateDelimiter(String delimiter) {
-        isNull(delimiter);
+        validateNull(delimiter);
         validateDigit(delimiter);
-        isBlank(delimiter);
-        isDot(delimiter);
+        validateBlank(delimiter);
+        validateDot(delimiter);
     }
 
-    private void isNull(String delimiter) {
+    private void validateNull(String delimiter) {
         if (delimiter.isEmpty()) {
             throw new IllegalArgumentException(INVALID_CUSTOM_SEPARATOR_EMPTY_MESSAGE.getErrorMessage());
         }
     }
 
-    private void isBlank(String delimiter) {
+    private void validateBlank(String delimiter) {
         if (delimiter.isBlank()) {
             throw new IllegalArgumentException(INVALID_CUSTOM_SEPARATOR_BLANK_MESSAGE.getErrorMessage());
         }
     }
 
-    private void isDot(String delimiter) {
+    private void validateDot(String delimiter) {
         if (Objects.equals(delimiter, DOT)) {
             throw new IllegalArgumentException(INVALID_CUSTOM_SEPARATOR_DOT_MESSAGE.getErrorMessage());
         }
