@@ -65,15 +65,26 @@ public class Application {
         for (int i = 0; i < input.length(); i++) {
             temp[i] = -1;
 
-            for (char c : seperator) {
-                if (c == ' ')
-                    continue;
+            if (!Character.isDigit(input.charAt(i)))
+            {
+                int check = lastIndex;
 
-                if (input.charAt(i) == c) {
-                    temp[inputIndex++] = Integer.parseInt(input.substring(lastIndex, i));
-                    lastIndex = i + 1;
+                for (char c : seperator) {
+                    if (c == ' ')
+                        continue;
+
+                    if (input.charAt(i) == c) {
+                        temp[inputIndex++] = Integer.parseInt(input.substring(lastIndex, i));
+                        lastIndex = i + 1;
+                    }
+                }
+
+                if(check == lastIndex)
+                {
+                    throw new IllegalArgumentException();
                 }
             }
+
             if (i == input.length() - 1) {
                 temp[inputIndex] = Integer.parseInt(input.substring(lastIndex));
             }
