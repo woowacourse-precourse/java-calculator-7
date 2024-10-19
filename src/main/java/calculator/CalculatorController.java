@@ -5,8 +5,8 @@ import java.util.List;
 
 public class CalculatorController {
 
-    private final static String START_MESSAGE = "덧셈할 문자열을 입력해 주세요.";
-    private final static String RESULT_MESSAGE = "결과 : ";
+    private static final String START_MESSAGE = "덧셈할 문자열을 입력해 주세요.";
+    private static final String RESULT_MESSAGE = "결과 : ";
 
     private final CustomDelimiterValidator customDelimiterValidator;
     private final DelimiterExtractor delimiterExtractor;
@@ -25,7 +25,7 @@ public class CalculatorController {
 
         customDelimiterValidator.validate(input);
         List<String> delimiters = delimiterExtractor.extract(input);
-        List<Integer> numbers = numberExtractor.extract(input,delimiters);
+        List<Integer> numbers = numberExtractor.extract(input, delimiters);
         int result = sumCalculator.calculate(numbers);
 
         getResult(result);
