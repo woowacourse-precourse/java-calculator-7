@@ -1,6 +1,7 @@
 package calculator.validation;
 
 import calculator.exception.ErrorMessage;
+import calculator.util.IntegerUtils;
 
 import java.util.Arrays;
 
@@ -13,7 +14,7 @@ public class DelimiterNumberValidator {
     }
 
     private int parseNumber(String number) {
-        if (isNumeric(number)) {
+        if (IntegerUtils.isNumeric(number)) {
             int parseInt = Integer.parseInt(number);
             validatePositiveNumber(parseInt);
             return parseInt;
@@ -25,10 +26,6 @@ public class DelimiterNumberValidator {
         if (parseInt < 0) {
             throw new IllegalArgumentException(ErrorMessage.NEGATIVE_NUMBER_NOT_ALLOWED.getMessage());
         }
-    }
-
-    private boolean isNumeric(String str) {
-        return str.matches("-?\\d+");
     }
 
 }
