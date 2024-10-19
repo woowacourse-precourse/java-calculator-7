@@ -1,5 +1,6 @@
 package calculator.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -7,15 +8,21 @@ public class Arithmetic {
     private List<Integer> arithmetic;
 
     public Arithmetic(Delimiter delimiter, String arithmetic) {
-        this.arithmetic = splitArithmetic(delimiter,arithmetic);
+        this.arithmetic = splitArithmetic(delimiter, arithmetic);
     }
 
     public List<Integer> splitArithmetic(Delimiter delimiter, String calculatorPart) {
-        List<Integer> result =
-                Arrays.stream(calculatorPart.split("[" + delimiter.delimiter + "]"))
-                        .map(Integer::parseInt).toList();
+        List<String> temp = Arrays.stream(
+                        calculatorPart.split("[" + new DefaultDelimiter().getDelimiter() + "]"))
+                .toList();
 
-        return result;
+        if (delimiter.getClass() == CustomDelimiter.class) {
+            temp = temp.stream()
+                    .flatMap(str -> Arrays.stream(str.split("[" + delimiter.getDelimiter() + "]")))
+                    .toList();
+        }
+
+        return temp.stream().map(Integer::parseInt).toList();
     }
 
     public List<Integer> getArithmetic() {

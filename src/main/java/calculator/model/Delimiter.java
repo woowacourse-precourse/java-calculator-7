@@ -7,5 +7,9 @@ public abstract class Delimiter {
         this.delimiter = delimiter;
     }
 
+    public String getDelimiter() {
+        return delimiter;
+    }
+
     public abstract void validate();
 }
