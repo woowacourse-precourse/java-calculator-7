@@ -22,10 +22,14 @@ public class Application {
         return  answer;
     }
 
-    public int custom(String str) {
+    public int custom(String str) throws IllegalArgumentException{
         int answer = 0;
-        String delimiter = str.substring(2,str.indexOf("\n"));
-        String str2 = str.substring(str.indexOf("\n")+1);
+        int customIndex = str.indexOf("\n");
+        if(customIndex==-1) {
+            throw  new IllegalArgumentException();
+        }
+        String delimiter = str.substring(2,customIndex);
+        String str2 = str.substring(customIndex+1);
         String[] strArr = str2.split(delimiter);
         answer = addition(strArr);
         return  answer;
