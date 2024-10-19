@@ -1,10 +1,11 @@
-package calculator;
+package calculator.converter;
 
+import calculator.converter.Converter;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static calculator.CalculatorConstants.*;
+import static calculator.utils.CalculatorConstants.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ConverterTest {

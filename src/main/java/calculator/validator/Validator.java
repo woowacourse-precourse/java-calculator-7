@@ -1,10 +1,9 @@
-package calculator;
+package calculator.validator;
 
-import java.util.Arrays;
 import java.util.List;
 
-import static calculator.Extractor.extractDelimiter;
-import static calculator.Extractor.extractNumberPart;
+import static calculator.converter.Extractor.extractDelimiter;
+import static calculator.converter.Extractor.extractNumberPart;
 
 public class Validator {
     private static final String ERROR_INVALID_DELIMITER = "커스텀 구분자로 숫자 또는 공백을 사용할 수 없습니다.";

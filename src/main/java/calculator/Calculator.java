@@ -1,10 +1,13 @@
 package calculator;
 
+import calculator.converter.Converter;
+import calculator.model.PositiveNumbers;
+import calculator.validator.Validator;
 import camp.nextstep.edu.missionutils.Console;
 
 import java.util.List;
 
-import static calculator.CalculatorConstants.*;
+import static calculator.utils.CalculatorConstants.*;
 
 public class Calculator {
     private static final String INPUT_STRING_MESSAGE = "덧셈할 문자열을 입력해 주세요.";

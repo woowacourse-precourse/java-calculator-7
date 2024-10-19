@@ -1,5 +1,6 @@
-package calculator;
+package calculator.validator;
 
+import calculator.validator.Validator;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

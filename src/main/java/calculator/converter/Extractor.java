@@ -1,4 +1,4 @@
-package calculator;
+package calculator.converter;
 
 public class Extractor {
 

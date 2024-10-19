@@ -1,5 +1,6 @@
-package calculator;
+package calculator.model;
 
+import calculator.model.PositiveNumbers;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

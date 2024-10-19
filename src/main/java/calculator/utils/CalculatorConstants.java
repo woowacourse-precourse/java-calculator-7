@@ -1,4 +1,4 @@
-package calculator;
+package calculator.utils;
 
 public class CalculatorConstants {
     public static final String DELIMITER_REGEX = "[,:]";

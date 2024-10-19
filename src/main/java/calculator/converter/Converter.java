@@ -1,11 +1,11 @@
-package calculator;
+package calculator.converter;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static calculator.Extractor.extractDelimiter;
-import static calculator.Extractor.extractNumberPart;
+import static calculator.converter.Extractor.extractDelimiter;
+import static calculator.converter.Extractor.extractNumberPart;
 
 public class Converter {
 
