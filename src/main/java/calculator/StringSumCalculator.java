@@ -14,9 +14,9 @@ public class StringSumCalculator {
 
     public void sum() {
         String input = inputHandler.input();
-        if (input.startsWith("//") && input.contains("\\n")) {
+        if (input.startsWith(Delimiter.CUSTOM_DELIMITER_PREFIX) && input.contains(Delimiter.CUSTOM_DELIMITER_SUFFIX)) {
             Delimiter customDelimiter = Delimiter.createCustomDelimiter(input);
-            String numbersWithDelimiter = input.substring(input.indexOf("\\n") + 2);
+            String numbersWithDelimiter = input.substring(input.indexOf(Delimiter.CUSTOM_DELIMITER_SUFFIX) + 2);
             splitAndSum(numbersWithDelimiter, customDelimiter);
         } else {
             Delimiter customDelimiter = Delimiter.createDefaultDelimiter();

@@ -23,7 +23,7 @@ class DelimiterTest {
     void 커스텀_구분자를_잘못_입력한_경우_예외가_발생한다() {
         assertThatThrownBy(() -> Delimiter.createCustomDelimiter("/\\n1;2;3"))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("[ERROR] 커스텀 구분자가 잘못된 형식입니다. 형식은 '//'와 구분자, 그리고 '\\n'으로 시작해야 합니다.");
+            .hasMessage("[ERROR] 커스텀 구분자가 잘못된 형식입니다. 형식은 //와 구분자, 그리고 \\n으로 시작해야 합니다.");
     }
 
     @Test
