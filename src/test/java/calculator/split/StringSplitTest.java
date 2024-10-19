@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Test;
 
 class StringSplitTest {
     @Test
-    @DisplayName("커스텀 구분자를 가진 문자열에서 '\n' 구분자를 올바르게 추출했는지 검증")
-    void extractCustomSeparator() {
+    @DisplayName("구분자 문자열에서 '\n'로 구분자를 올바르게 추출했는지 검증")
+    void extractCustomSeparatorByEndOfLine() {
         String string = "//abc\n123";
         String customSeparator = "abc,:";
 
@@ -22,8 +22,17 @@ class StringSplitTest {
     }
 
     @Test
-    @DisplayName("커스텀 구분자를 가진 문자열에서 '\n' 계산해야 하는 문자열을 올바르게 추출했는지 검증")
-    void extractCustomCalFormula() {
+    @DisplayName("구분자를 문자열에서 '\\n'로 구분자를 올바르게 추출했는지 검증")
+    void extractCustomSeparatorByEscapeAndN() {
+        String string = "//abc\\n123";
+        String customSeparator = "abc,:";
+
+        assertEquals(customSeparator, getCustomSeparator(string));
+    }
+
+    @Test
+    @DisplayName("구분자를 문자열에서 '\n'로 계산해야 하는 문자열을 올바르게 추출했는지 검증")
+    void extractCustomCalFormulaByEndOfLine() {
         String string = "//abc\n123";
         String calFormula = "123";
 
@@ -31,8 +40,17 @@ class StringSplitTest {
     }
 
     @Test
+    @DisplayName("구분자를 문자열에서 '\\n'로 계산해야 하는 문자열을 올바르게 추출했는지 검증")
+    void extractCustomCalFormulaWithEscapeAndN() {
+        String string = "//abc\\n123";
+        String calFormula = "123";
+
+        assertEquals(calFormula, getCustomCalFormula(string));
+    }
+
+    @Test
     @DisplayName("커스텀 구분자를 가진 문자열에서 첫번째로 나오는 '\n'로 문자열을 자른다.")
-    void splitAtFirstNewline() {
+    void splitAtFirstEndOfLine() {
         String string = "//abc\n\n123";
         String customSeparator = "abc,:";
         String calFormula = "\n123";
@@ -42,9 +60,18 @@ class StringSplitTest {
     }
 
     @Test
-    @DisplayName("커스텀 구분자를 가진 문자열에서 '\n' 뒷 부분이 빈 문자열인 경우")
-    void backStringEmpty() {
+    @DisplayName("문자열에서 '\n' 뒷 부분이 빈 문자열인 경우")
+    void endOfLineAndCalFormulaIsEmpty() {
         String string = "//abc\n";
+        String calFormula = "";
+
+        assertEquals(calFormula, getCustomCalFormula(string));
+    }
+
+    @Test
+    @DisplayName("문자열에서 '\\n' 뒷 부분이 빈 문자열인 경우")
+    void escapeAndNAndCalFormulaIsEmpty() {
+        String string = "//abc\\n";
         String calFormula = "";
 
         assertEquals(calFormula, getCustomCalFormula(string));

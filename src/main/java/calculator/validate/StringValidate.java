@@ -14,9 +14,11 @@ public class StringValidate {
     }
 
     public static void validateNewLineInput(String input) {
-        if (!input.contains("\n")) {
-            throw new IllegalArgumentException("문자열에 '\n'이 있어야 합니다.");
+        if (input.contains("\n") || input.contains("\\n")) {
+            return;
         }
+
+        throw new IllegalArgumentException("문자열에 '\n' 또는 '\\n'이 있어야 합니다.");
     }
 
     public static void validateSeperator(String seperator) {

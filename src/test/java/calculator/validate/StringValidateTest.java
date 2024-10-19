@@ -38,10 +38,26 @@ class StringValidateTest {
 
     @Test
     @DisplayName("'\n'이 없는 문자열 테스트")
-    void inputWithoutEndLine() {
+    void inputWithoutEndOfLine() {
         String input = "//test";
 
         assertThrows(IllegalArgumentException.class, () -> validateNewLineInput(input));
+    }
+
+    @Test
+    @DisplayName("'\n'로 끝나는 문자열 테스트")
+    void endWithEndOfLine() {
+        String input = "test\n";
+
+        Assertions.assertDoesNotThrow(() -> validateNewLineInput(input));
+    }
+
+    @Test
+    @DisplayName("'\\n'로 끝나는 문자열 테스트")
+    void endWithEscapeAndN() {
+        String input = "test\\n";
+
+        Assertions.assertDoesNotThrow(() -> validateNewLineInput(input));
     }
 
     @Test
