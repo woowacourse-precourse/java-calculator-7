@@ -5,7 +5,7 @@ public class Calculator {
     private Operands operands;
 
     public Calculator(String inputValue) {
-        Separator separator = new Separator(inputValue);
+        this.separator = new Separator(inputValue);
         String[] splitInput = separator.splitBySeparator(inputValue);
         this.operands = new Operands(splitInput);
     }
