@@ -1,5 +1,7 @@
 package calculator.global.util;
 
+import java.util.Arrays;
+
 public class DefaultDelimiterExtractor extends DelimiterExtractor {
 
     private final String delimiter;
@@ -9,12 +11,20 @@ public class DefaultDelimiterExtractor extends DelimiterExtractor {
     }
 
     @Override
-    String extractDelimiter(String input) {
-        return delimiter;
+    public Integer[] extractNumber(String input) {
+        return Arrays.stream(input.split(delimiter))
+                .map(String::trim)
+                .map(numStr ->{
+                    if(numStr.isEmpty()) return 0;
+                    if(isNotValid(numStr)) throw  new IllegalArgumentException(numStr);
+                    return Integer.parseInt(numStr);
+                })
+                .toArray(Integer[]::new);
     }
 
+
     @Override
-    boolean isApplicable(String input) {
-        return Character.isDigit(input.charAt(0));
+    public boolean isApplicable(String input) {
+        return !input.startsWith(CUSTOM_DELIMITER_PREFIX);
     }
 }
