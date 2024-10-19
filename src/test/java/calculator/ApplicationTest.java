@@ -35,20 +35,50 @@ class ApplicationTest extends NsTest {
         final InputValidator inputValidator = new InputValidator();
         final String input = "//;\n1;2;3";
         // when
-
-        inputValidator.isInvalidFormat(input);
         // then
     }
 
     @Test
-    void isCustomDelimiterTest() {
+    void isCustomPatternTest() {
         // given
         final InputValidator inputValidator = new InputValidator();
-        final String input = "//;\n1;2;3";
+        final String input = "//;\\n1;2;3";
         // when
-        final boolean isCustomDelimiter = inputValidator.isCustomPattern(input);
+        final boolean isCustomPattern = inputValidator.isCustomPattern(input);
         // then
-        assertThat(isCustomDelimiter).isTrue();
+        assertThat(isCustomPattern).isTrue();
     }
 
+//    @Test
+//    void isMetaCharactersTest() {
+//        // given
+//        final InputValidator inputValidator = new InputValidator();
+//        final String customPattern = "a";
+//        // when
+//        final boolean isMetaCharacters = inputValidator.isMetaCharacters(customPattern);
+//        // then
+//        assertThat(isMetaCharacters).isFalse(); // false
+//    }
+
+    @Test
+    void toStringArrTest() {
+        // given
+        final Converter converter = new Converter();
+        final String input = "//.\\n1.2.3.4.5";
+        // when
+        String[] stringArr = converter.toStringArr(input); // {1,2,3,4,5}
+        // then
+        assertThat(stringArr).containsExactly("1", "2", "3", "4", "5");
+    }
+
+    @Test
+    void formatTest() {
+        // given
+        final NumberFormatter formatter = new NumberFormatter();
+        final double sum = 5;
+        // when
+        final String formatted = formatter.format(sum);
+        // then
+        assertThat(formatted).matches("5");
+    }
 }

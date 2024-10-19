@@ -3,21 +3,22 @@ package calculator;
 public class StringAddCalculator {
 
     private final Converter converter = new Converter();
+    private final NumberFormatter numberFormatter = new NumberFormatter();
 
-    public int add(String input) {
+    public String add(String input) {
         if (input.isEmpty()) {
-            return 0;
+            return "0";
         }
 
         String[] stringArr = converter.toStringArr(input);
 
-        int sum = 0;
+        double sum = 0;
 
         for (String s : stringArr) {
-            sum += Integer.parseInt(s);
+            sum += Double.parseDouble(s);
         }
 
-        return sum;
+        return numberFormatter.format(sum);
     }
 
 }

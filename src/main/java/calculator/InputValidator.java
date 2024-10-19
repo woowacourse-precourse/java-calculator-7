@@ -8,7 +8,6 @@ public class InputValidator {
     private static final String META_CHARACTERS = "{}[]()|^$.*+?\\";
 
     public void isInvalidFormat(String input) {
-
         if (!NUMBER_PATTERN.matcher(input).matches()) {
             throw new IllegalArgumentException();
         }
