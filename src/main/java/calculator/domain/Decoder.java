@@ -36,7 +36,7 @@ public class Decoder {
 
     // 커스텀 구분자 찾기
     private String findCustomDelimiter(String input) {
-        int start = input.indexOf(DELIMITER_START) + DELIMITER_START.length();
+        int start = DELIMITER_START.length();
         int end = input.indexOf(DELIMITER_END);
         String customDelimiter = input.substring(start, end);
         // 유효성 검사

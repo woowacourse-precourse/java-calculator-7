@@ -1,5 +1,7 @@
 package calculator.domain;
 
+import java.util.List;
+
 public class Calculator {
 
     private final Decoder decoder;
@@ -10,8 +12,9 @@ public class Calculator {
 
     public int addAll() {
         int result = 0;
-        for(int n : decoder.getDecodedNumbers()) {
-            result+=n;
+        List<Integer> numbers = decoder.getDecodedNumbers();
+        for (int n : numbers) {
+            result += n;
         }
         return result;
     }

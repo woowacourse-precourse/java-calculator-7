@@ -16,7 +16,8 @@ public class Controller {
     }
 
     public void run() {
-        Calculator calculator = new Calculator(new Decoder(inputView.readInput()));
+        Decoder decoder = new Decoder(inputView.readInput());
+        Calculator calculator = new Calculator(decoder);
         outputView.printResult(calculator);
     }
 }
