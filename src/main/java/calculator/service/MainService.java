@@ -10,7 +10,7 @@ public class MainService {
 
     Exceptions exceptions = new Exceptions();
 
-    public String getCustomDelimiter(InputString inputString) {
+    public void getCustomDelimiter(InputString inputString) {
 
         String input = inputString.getInputString();
 
@@ -26,11 +26,10 @@ public class MainService {
                 String refiendString = input.substring(customLastMark + 2);
                 inputString.setInputString(refiendString);
 
-                return getCustomDelimiter(inputString);
+                getCustomDelimiter(inputString);
 
             }
         }
-        return input;
     }
 
     public void extractSlashFromString(InputString inputString) {
@@ -43,16 +42,11 @@ public class MainService {
     public void extractNumbersFromString(InputString input, ResultNumbers resultNumbers) {
 
         List<String> customDelimiter = input.getCustomDelimiter();
-
         StringBuilder defaultRegex = new StringBuilder("[,|:]");
 
-        if (!customDelimiter.isEmpty()) {
-            for (String delimiter : customDelimiter) {
-                defaultRegex.append("|").append(delimiter);
-            }
-        }
+        StringBuilder combinedRegex = appendCustomDelimiter(defaultRegex, customDelimiter);
 
-        String[] numberList = input.getInputString().split(defaultRegex.toString());
+        String[] numberList = input.getInputString().split(combinedRegex.toString());
 
         exceptions.isInvalidStringInList(numberList);
 
@@ -60,6 +54,16 @@ public class MainService {
             resultNumbers.addNumberList(Integer.parseInt(num));
         }
 
+    }
+
+    private StringBuilder appendCustomDelimiter(StringBuilder defaultRegex, List<String> customDelimiter) {
+        if (customDelimiter.isEmpty()) {
+            return defaultRegex;
+        }
+        for(String delimiter : customDelimiter) {
+            defaultRegex.append("|").append(delimiter);
+        }
+        return defaultRegex;
     }
 
     public void setResultNumbers(ResultNumbers resultNumbers) {
