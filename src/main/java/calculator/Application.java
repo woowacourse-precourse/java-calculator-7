@@ -19,7 +19,7 @@ public class Application {
         int answer = 0;
         String[] strArr = str.split(",|:");
         answer = addition(strArr);
-        return  answer;
+        return answer;
     }
 
     public int custom(String str) throws IllegalArgumentException {
@@ -32,7 +32,7 @@ public class Application {
         String str2 = str.substring(customIndex+2);
         String[] strArr = str2.split(delimiter);
         answer = addition(strArr);
-        return  answer;
+        return answer;
     }
 
     public static void main(String[] args) {
