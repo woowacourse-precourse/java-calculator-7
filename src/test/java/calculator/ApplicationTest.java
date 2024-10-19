@@ -16,26 +16,34 @@ class ApplicationTest extends NsTest {
         });
     }
     @Test
-    void 구분자연속사용() {
+    void 구분자_연속_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1;;;;;3;;4;5;");
             assertThat(output()).contains("결과 : 13");
         });
     }
     @Test
-    void 마이너스구분자사용(){
+    void 마이너스구분자_사용(){
         assertSimpleTest(() -> {
             run("//-\\n-1-2-3--4-5--");
             assertThat(output()).contains("결과 : 15");
         });
     }
     @Test
-    void 기본구분자_커스텀구분자_같이사용() {
+    void 기본구분자_커스텀구분자_같이_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1,2,3;4;;5;:6");
             assertThat(output()).contains("결과 : 21");
         });
     }
+    @Test
+    void 공백_문자(){
+        assertSimpleTest(() -> {
+            run(" ");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
 
     @Test
     void 예외_테스트() {

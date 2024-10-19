@@ -10,6 +10,9 @@ public class Calculator {
     }
 
     public int calculate(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            return 0;
+        }
         if(input.startsWith("//")) {
             String customDelimiter = extractor.extractCustomDelimiter(input);
             input = extractor.extractSentence(input);
