@@ -4,47 +4,50 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
 
+    private static final String DEFAULT_DELIMITER = ",|:";
+
     public static void main(String[] args) {
-
-        // 1) 문자열 입력 및 처리
         String input = Console.readLine();
-
         System.out.println("결과 : " + calculator(input));
-
     }
 
     public static int calculator(String input) {
-        // 1.1) 입력 문자열이 비어있을 경우 0을 출력
         if (input.isEmpty()) {
             return 0;
         }
 
-        String[] numbers = splitInput(input);
-
-        // 3) 문자열에서 숫자 추출 후 더하기
+        String[] tokens = splitInput(input);
         int sum = 0;
 
-        for (String number : numbers) {
-            sum += Integer.parseInt(number);
+        for (String token : tokens) {
+            try {
+                int n = Integer.parseInt(token);
+                if (n < 0) {
+                    throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + n);
+                }
+                sum += n;
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("구분자 위치 외 문자는 사용할 수 없습니다: " + token);
+            }
         }
 
         return sum;
     }
 
-    // 2) 구분자를 기준으로 문자열 분리
     private static String[] splitInput(String input) {
-        String delimiter = ",|:"; // 기본 구분자
+        String delimiter = DEFAULT_DELIMITER;
 
-        // 4) 커스텀 구분자 지정
         if (input.startsWith("//")) {
-            int delimiterIndex = input.lastIndexOf("\\n");
-            if (delimiterIndex != -1) {
-                delimiter = input.substring(2, delimiterIndex); // 커스텀 구분자 추출
-                input = input.substring(delimiterIndex + 2); // 실제 숫자 부분
+            int delimiterIndex = input.indexOf("\\n");
+
+            if (delimiterIndex == -1) {
+                throw new IllegalArgumentException("잘못된 구분자 형식입니다: " + input);
             }
+
+            delimiter = input.substring(2, delimiterIndex);
+            input = input.substring(delimiterIndex + 2);
         }
 
         return input.split(delimiter);
     }
-
 }
