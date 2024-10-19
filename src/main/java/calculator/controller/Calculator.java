@@ -1,5 +1,6 @@
 package calculator.controller;
 
+import calculator.exception.ErrorType;
 import calculator.model.Numbers;
 import calculator.view.Output;
 import camp.nextstep.edu.missionutils.Console;
@@ -46,12 +47,12 @@ public class Calculator {
         }
         String[] tokens = input.split(delimiter);
         if (!Validation.isAllNumbers(tokens)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorType.NOT_ALLOWED_NON_NUMERIC.getMessage());
         }
         int[] numbers = Arrays.stream(tokens)
             .mapToInt(Integer::parseInt).toArray();
         if (!Validation.isAllPositive(numbers)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorType.NOT_ALLOWED_NEGATIVE.getMessage());
         }
         return numbers;
     }
