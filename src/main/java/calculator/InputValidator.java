@@ -1,11 +1,28 @@
 package calculator;
 
+import java.util.List;
+
 public class InputValidator {
     private static final String DEFAULT_DELIMITER_PATTERN = "^(\\d+([,:]\\d+)*)?$";
     private static final String CUSTOM_DELIMITER_PATTERN = "^//(.+)\\n\\d+([,:]\\d+|\\\\1\\d+)*$";
 
+    private final DelimiterManager delimiterManager;
+
+    public InputValidator(DelimiterManager delimiterManager) {
+        this.delimiterManager = delimiterManager;
+    }
+
     public boolean isEmptyInput(String input) {
         return input.isEmpty();
+    }
+
+    public void validateUnregisteredDelimiter(List<String> delimiters) {
+        boolean hasInvalidDelimiter = delimiters.stream()
+                .anyMatch(delimiter -> !delimiterManager.isValidDelimiter(delimiter));
+
+        if (hasInvalidDelimiter) {
+            throw new IllegalArgumentException("등록되지 않은 구분자가 포함되어 있습니다.");
+        }
     }
 
     private void validateInputPattern(String input) {
