@@ -9,6 +9,12 @@ public class CalculatorController {
     private OutputView outputView;
     private CalculationModel calculationModel;
 
+    public CalculatorController(CalculationModel model, InputView inputView, OutputView outputView) {
+        this.calculationModel = model;
+        this.inputView = inputView;
+        this.outputView = outputView;
+    }
+
     public void run(){
         try{
             outputView.printInput();
