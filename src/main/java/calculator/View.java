@@ -10,7 +10,6 @@ public class View {
         System.out.println("덧셈할 문자열을 입력해 주세요");
         inputStr = input.inputCal();
         System.out.println(inputStr);
-        input.inputSplit();
         tokens = input.inputSplit();
         for(String token : tokens){
             System.out.println(token);

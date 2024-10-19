@@ -15,9 +15,12 @@ public class Input {
     public String[] inputSplit(){
         String delimiter = "[,:]";
         if (input.startsWith("//")) {
-            int delimiterIndex = input.indexOf('\n');
-            delimiter = Pattern.quote(input.substring(2,delimiterIndex));
-            input = input.substring(delimiterIndex+1);
+
+            int delimiterIndex = input.indexOf("\\n");
+            System.out.println(delimiterIndex);
+            delimiter = (input.substring(2,delimiterIndex));
+            System.out.println(delimiter);
+            input = input.substring(delimiterIndex+2);
         }
         tokens = input.split(delimiter);
         isValidNumber();
