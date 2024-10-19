@@ -42,14 +42,14 @@ public class DelimitersTest {
         String input = "//-\n1-2-3";
 
         // when
-        final boolean result = delimiters.hasCustomDelimiter(input);
+        List<String> result = delimiters.getAllDelimiters(input);
 
         // then
-        assertThat(result).isTrue();
+        assertThat(result).containsExactly(",",":","-");
     }
 
     @Test
-    void 커스텀_구분자가_2개이상이라면_오류() {
+    void 커스텀_구분자가_2개이상이라면_BusinessException() {
         // given
         String input = "//-;\n1-2-3";
 
@@ -60,7 +60,7 @@ public class DelimitersTest {
     }
 
     @Test
-    void 커스텀_구분자가_비어있는경우_오류() {
+    void 커스텀_구분자가_비어있는경우_BusinessException() {
         // given
         String input = "//\n1-2-3";
 
@@ -68,14 +68,5 @@ public class DelimitersTest {
         assertThatThrownBy(() -> {
             delimiters.getAllDelimiters(input);
         }).isInstanceOf(BusinessException.class);
-    }
-
-    @Test
-    void 커스텀_구분자가_비어있는경우_오류2() {
-        // given
-        String input = "//-\n1-2-3";
-
-        // when & then
-        delimiters.getAllDelimiters(input);
     }
 }
