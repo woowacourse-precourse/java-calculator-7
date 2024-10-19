@@ -8,13 +8,13 @@ public class Validator {
 
     public static void validateNumber(String number) {
         if (!number.matches(POSITIVE_INTEGER_PATTERN)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.INVALID_NUMBER);
         }
     }
 
     public static void validateMatcher(Matcher matcher) {
         if (!matcher.find()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.MATCHER_NOT_FOUND);
         }
     }
 }
