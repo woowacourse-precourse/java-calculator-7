@@ -13,5 +13,7 @@ public class Application {
         output.requestString();
 
         String inputString = input.responseString();
+
+        output.printCalculateResult(inputString);
     }
 }
