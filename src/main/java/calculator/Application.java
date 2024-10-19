@@ -4,10 +4,17 @@ import camp.nextstep.edu.missionutils.Console;
 
 class StringAddCalculator {
     public int add(String input) {
-        if(input == null)
+        if (input == null) {
             return 0;
+        }
 
-        return 0;
+        int result = 0;
+        String[] numbers = input.split(",|:");
+        for (String num : numbers) {
+            result += Integer.parseInt(num);
+        }
+
+        return result;
     }
 }
 
@@ -20,6 +27,6 @@ public class Application {
         String input = Console.readLine();
 
         int result = stringAddCalculator.add(input);
-        System.out.println("결과: " + result);
+        System.out.println("결과 : " + result);
     }
 }
