@@ -1,4 +1,4 @@
-package calculator.domain.prompt;
+package calculator.domain;
 
 import java.util.HashSet;
 import java.util.Set;

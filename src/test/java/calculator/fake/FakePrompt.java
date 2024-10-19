@@ -1,6 +1,6 @@
 package calculator.fake;
 
-import calculator.domain.prompt.Prompt;
+import calculator.domain.Prompt;
 import java.util.List;
 
 public class FakePrompt extends Prompt {

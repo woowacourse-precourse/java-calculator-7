@@ -1,7 +1,5 @@
 package calculator.domain;
 
-import calculator.domain.prompt.Prompt;
-
 public class Calculator {
 
     private final Prompt prompt;
