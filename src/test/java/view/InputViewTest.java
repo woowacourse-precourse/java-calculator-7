@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import calculator.Application;
+import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -35,12 +36,13 @@ public class InputViewTest extends NsTest {
     }
 
     /**
-     * 테스트 실행 후 표준 입출력을 복원합니다.
+     * 테스트 실행 후 표준 입출력을 복원하고 콘솔을 닫습니다.
      */
     @AfterEach
     void restoreSystemInputOutput() {
         System.setIn(systemIn);
         System.setOut(systemOut);
+        Console.close();
     }
 
     /**
