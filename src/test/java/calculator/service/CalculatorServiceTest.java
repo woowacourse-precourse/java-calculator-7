@@ -200,4 +200,70 @@ class CalculatorServiceTest {
         assertThat(numbers.contains("4")).isTrue();
 
     }
+
+    @DisplayName("숫자가 양수인지 검증 성공 테스트")
+    @Test
+    void validRangeMinus() {
+
+        //given
+        int number = 1;
+
+        //when - then
+        assertThatCode(() -> calculatorService.validRangeMinus(number))
+                .doesNotThrowAnyException();
+
+    }
+
+    @DisplayName("숫자가 양수인지 검증 실패 테스트")
+    @Test
+    void validRangeMinusException() {
+
+        //given
+        int number = -1;
+
+        //when - then
+        assertThatThrownBy(() -> calculatorService.validRangeMinus(number))
+                .isInstanceOf(IllegalArgumentException.class);
+
+    }
+
+    @DisplayName("숫자 파싱 기능 테스트")
+    @Test
+    void parseIntegerNumber(){
+
+        //given
+        List<String> numbers = List.of("1", "13", "54");
+
+        //when
+        List<Integer> parseNumbers = calculatorService.parseIntegerNumber(numbers);
+
+        //then
+        assertThat(parseNumbers.contains(1)).isTrue();
+        assertThat(parseNumbers.contains(13)).isTrue();
+        assertThat(parseNumbers.contains(54)).isTrue();
+
+    }
+
+    @DisplayName("숫자 파싱 실패 테스트")
+    @Test
+    void parseIntegerNumberException(){
+        //given
+        List<String> emptyNumber = List.of("");
+        List<String> blankNumber = List.of(" 1");
+        List<String> wordNumber = List.of("r4");
+        List<String> minusNumber = List.of("-8");
+
+        //when - then
+
+        assertThatThrownBy(() -> calculatorService.parseIntegerNumber(emptyNumber))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> calculatorService.parseIntegerNumber(blankNumber))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> calculatorService.parseIntegerNumber(wordNumber))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> calculatorService.parseIntegerNumber(minusNumber))
+                .isInstanceOf(IllegalArgumentException.class);
+
+    }
+
 }

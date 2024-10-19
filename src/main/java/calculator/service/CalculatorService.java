@@ -3,13 +3,16 @@ package calculator.service;
 import calculator.dto.DelimiterInputDto;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CalculatorService {
 
     public String calculateSumFormString(DelimiterInputDto delimiterInputDto) {
 
         setDelimiter(delimiterInputDto);
+
         List<String> numbers = parseNumber(delimiterInputDto);
+        List<Integer> parseNumbers = parseIntegerNumber(numbers);
 
         return delimiterInputDto.getInputString();
     }
@@ -43,6 +46,25 @@ public class CalculatorService {
 
     public String formatDelimiters(List<String> delimiters) {
         return "[" + String.join("", delimiters) + "]";
+    }
+
+    public List<Integer> parseIntegerNumber(List<String> numbers) {
+        return numbers.stream().map(number -> {
+                    try {
+                        int parseNumber = Integer.parseInt(number);
+                        validRangeMinus(parseNumber);
+                        return parseNumber;
+                    } catch (NumberFormatException e) {
+                        throw new IllegalArgumentException("잘못된 숫자 입니다.");
+                    }
+                })
+                .collect(Collectors.toList());
+    }
+
+    public void validRangeMinus(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException("양수가 아닙니다.");
+        }
     }
 
     public void validCustomDelimiter(String delimiter) {
