@@ -1,19 +1,20 @@
 package calculator.service;
 
+import javax.sound.midi.SysexMessage;
 import java.util.ArrayList;
 
 public class CalculatorService {
     String number = "";
     int result = 0;
+    boolean useCustomSeparator = false;
     String customSeparator = "";
     String checkSeparator = "";
-    String printNumList = "";
 
     ArrayList<String> numList = new ArrayList<>();
 
-    public String getUserInput(String input) {
+    public int getUserInput(String input) {
         if (input.isEmpty()) { // 빈 입력값 처리
-            return "0";
+            return 0;
         }
         else {
             int i=0;
@@ -24,6 +25,7 @@ public class CalculatorService {
                     customSeparator += input.charAt(i);
                     i++;
                 }
+                useCustomSeparator = true;
                 i += 2;
             }
 
@@ -37,7 +39,7 @@ public class CalculatorService {
                         continue;
                     default:
                         if ((int)c >= 48 && (int)c <= 57) {
-                            if (checkSeparator.equals(customSeparator)) { // 커스텀 구분자를 기준으로 숫자 분리
+                            if (useCustomSeparator && checkSeparator.equals(customSeparator)) { // 커스텀 구분자를 기준으로 숫자 분리
                                 numList.add(number);
                                 number = "";
                                 checkSeparator = "";
@@ -52,11 +54,11 @@ public class CalculatorService {
             }
             numList.add(number);
 
-            System.out.println("커스텀 구분자: " + customSeparator + "\n");
             for (int j=0; j<numList.size(); j++) {
-                printNumList += numList.get(j) + " ";
+                if (!numList.get(j).equals(""))
+                    result += Integer.parseInt(numList.get(j));
             }
-            return printNumList;
+            return result;
         }
     }
 }
