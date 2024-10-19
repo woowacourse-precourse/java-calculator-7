@@ -7,13 +7,13 @@ import java.util.Arrays;
 
 public class CalculatorService {
     private final ExtractUtil extractUtil;
-    private final ArrayConverter arrayConverter;
     private final NumberValidator numberValidator;
+    private final ArrayConverter arrayConverter;
 
     public CalculatorService() {
         this.extractUtil = new ExtractUtil();
-        this.arrayConverter = new ArrayConverter();
         this.numberValidator = new NumberValidator();
+        this.arrayConverter = new ArrayConverter(numberValidator);
     }
 
     public int processCalculator(String readInput) {
@@ -21,11 +21,9 @@ public class CalculatorService {
         String positiveString = extractUtil.extractPositiveString(readInput, customDelimiter);
 
         char[] positiveCharacters = arrayConverter.toCharArrayWithoutDelimiter(positiveString, customDelimiter);
-        numberValidator.validateNoDigits(positiveCharacters); // 숫자 변환 가능한 문자 검사
-
         int[] positives = arrayConverter.convertCharArrayToIntArray(positiveCharacters);
-        numberValidator.validatorNoNegatives(positives); // 양수 검사
 
+        numberValidator.validateNoNegatives(positives); // 양수 검사
         return calculatorNumbers(positives);
     }
 
