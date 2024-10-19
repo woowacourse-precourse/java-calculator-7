@@ -9,7 +9,7 @@ public class Application {
             return 0;
         }
 
-        String delimiter = ",|:";
+        String delimiter = "[,:]";
         String numbers = input;
 
         if (input.startsWith("//")) {
