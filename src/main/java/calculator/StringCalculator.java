@@ -1,9 +1,11 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.Arrays;
 
 public class StringCalculator {
     private static final String USER_INPUT_PROMPT = "덧셈할 문자열을 입력해 주세요.";
+    private static final String RESULT_PREFIX = "결과 : ";
 
     private final Delimiter delimiter;
     private final Parser parser;
@@ -17,20 +19,12 @@ public class StringCalculator {
         System.out.println(USER_INPUT_PROMPT);
         String input = Console.readLine();
         String[] stringNumbers;
-        try {
-            stringNumbers = delimiter.split(input);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return;
-        }
+        stringNumbers = delimiter.split(input);
 
-        try {
-            int[] numbers = parser.parseToNumber(stringNumbers);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return;
-        }
+        int[] numbers;
+        numbers = parser.parseToNumber(stringNumbers);
 
-
+        int summary = Arrays.stream(numbers).sum();
+        System.out.println(RESULT_PREFIX + summary);
     }
 }
