@@ -2,49 +2,58 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Application {
 
-    static Character customDelemiter;
+    static String customDelemiter;
     public static void main(String[] args) {
 
-        String input = Console.readLine();
-        String prefix = input.split("\n")[0];
+        String numsInput;
+        String[] input = Console.readLine().split("\\\\n");
 
-        if (prefix != null && !prefix.isEmpty()) {
-            customDelemiter = getCustomDelimiter(prefix);
+        System.out.println(Arrays.toString(input));
+        if (input.length > 1) {
+            String prefix = input[0];
+            numsInput = input[1];
+
+            if (prefix != null && !prefix.isEmpty()) {
+                customDelemiter = getCustomDelimiter(prefix);
+                System.out.println("커스텀 구분자: " + customDelemiter);
+            }
+        } else {
+            numsInput = input[0];
         }
 
-        char[] delimiters = getDelimiters();
+        String[] delimiters = getDelimiters();
+        String delimiter = String.join("|", delimiters);
 
-
+        String[] nums = numsInput.split(delimiter);
+        System.out.println(Arrays.toString(nums));
 
         Console.close();
     }
 
-    private static char[] getDelimiters() {
-        char[] delimiters;
+    private static String[] getDelimiters() {
+        String[] delimiters;
         if (customDelemiter == null) {
-            delimiters = new char[] {',', ':'};
+            delimiters = new String[] {",", ":"};
             return delimiters;
         }
-        delimiters = new char[] {',', ':', customDelemiter};
+        delimiters = new String[] {",", ":", customDelemiter};
         return delimiters;
     }
 
-    private static Character getCustomDelimiter(String input) {
+    private static String getCustomDelimiter(String input) {
 
-        Pattern pattern = Pattern.compile("//(.*?)");
-        Matcher matcher = pattern.matcher(input);
+        if (!input.startsWith("//")) return null;   // 형식 예외처리 필요
 
-        if (matcher.find()) {
-            String delimiter = matcher.group(1);    // //와 \n 사이의 내용 추출
-            if (delimiter.length() > 1) return null;    // 예외처리 필요
-            return delimiter.charAt(0);
-        }
-        return null;
+        String delimiter = input.substring(2);
+        if (delimiter.length() > 1) return null;    // 구분자 길이 예외처리 필요
+
+        return delimiter;
     }
 
 }
