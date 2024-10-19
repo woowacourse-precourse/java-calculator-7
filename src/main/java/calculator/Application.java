@@ -17,8 +17,21 @@ public class Application {
             customDelemiter = getCustomDelimiter(prefix);
         }
 
+        char[] delimiters = getDelimiters();
+
+
 
         Console.close();
+    }
+
+    private static char[] getDelimiters() {
+        char[] delimiters;
+        if (customDelemiter == null) {
+            delimiters = new char[] {',', ':'};
+            return delimiters;
+        }
+        delimiters = new char[] {',', ':', customDelemiter};
+        return delimiters;
     }
 
     private static Character getCustomDelimiter(String input) {
