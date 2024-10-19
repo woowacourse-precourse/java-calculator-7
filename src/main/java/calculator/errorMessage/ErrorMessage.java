@@ -1,7 +1,7 @@
 package calculator.errorMessage;
 
 public enum ErrorMessage {
-    NEGATIVE_NUMBER("음수가 포함되어 있습니다."),
+    NEGATIVE_NUMBER("양수가 아닌 숫자 포함되어 있습니다."),
     INVALID_NUMBER_FORMAT("잘못된 숫자 형식입니다."),
     INVALID_CUSTOM_DELIMITER("커스텀 구분자 지정 형식이 잘못 되었습니다."),
     NUMBER_RANGE_ERROR("int 값의 범위를 넘어갔습니다."),
