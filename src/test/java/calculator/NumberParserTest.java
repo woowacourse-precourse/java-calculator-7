@@ -30,8 +30,7 @@ class NumberParserTest {
     @DisplayName("커스텀 구분자를 지정하면, 기본 및 커스텀 구분자를 통해 숫자를 파싱해야 한다.")
     void parseByCustomDelimiterTest(String value) {
         // given
-        String delimiter = DelimiterExtractor.extract(value);
-        Delimiter delimiters = Delimiter.from(delimiter);
+        Delimiter delimiters = DelimiterExtractor.extract(value);
         NumberParser parser = NumberParser.from(delimiters);
 
         // when

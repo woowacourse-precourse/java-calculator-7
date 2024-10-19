@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 public class NumberParser {
 
+    private static final String NUMBER_REGEX = "-?\\d+";
     private static final String BOUNDARY_SUFFIX = "\\n";
     private static final String PIPE = "|";
     private static final String COMMA = ",";
@@ -53,10 +54,21 @@ public class NumberParser {
     private String[] getValidTokens(String value, String delimiters) {
         String[] tokens = value.split(delimiters, -1);
         for (String token : tokens) {
-            if (token.isEmpty()) {
-                throw new IllegalArgumentException("[ERROR] 유효하지 않은 입력입니다.");
-            }
+            validateEmptyToken(token);
+            validateDelimiter(token);
         }
         return tokens;
+    }
+
+    private void validateEmptyToken(String token) {
+        if (token.isEmpty()) {
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 입력입니다.");
+        }
+    }
+
+    private void validateDelimiter(String token) {
+        if (!token.matches(NUMBER_REGEX)) {
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 구분자가 존재합니다." + token);
+        }
     }
 }
