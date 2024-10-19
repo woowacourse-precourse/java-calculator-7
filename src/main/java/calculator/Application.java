@@ -1,8 +1,8 @@
 package calculator;
 
-import calculation.Calculation;
-import input.InputHandler;
-import parser.InputParser;
+import calculator.calculation.Calculation;
+import calculator.input.InputHandler;
+import calculator.parser.InputParser;
 
 public class Application {
     public static void main(String[] args) {

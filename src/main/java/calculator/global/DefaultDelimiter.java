@@ -1,4 +1,4 @@
-package global;
+package calculator.global;
 
 public enum DefaultDelimiter {
 

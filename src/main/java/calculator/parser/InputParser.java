@@ -1,6 +1,6 @@
-package parser;
+package calculator.parser;
 
-import global.DefaultDelimiter;
+import calculator.global.DefaultDelimiter;
 
 public class InputParser {
 

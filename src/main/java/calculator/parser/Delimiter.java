@@ -1,7 +1,7 @@
-package parser;
+package calculator.parser;
 
-import global.DefaultDelimiter;
-import global.DelimiterSyntaxIndex;
+import calculator.global.DefaultDelimiter;
+import calculator.global.DelimiterSyntaxIndex;
 
 public class Delimiter {
 
