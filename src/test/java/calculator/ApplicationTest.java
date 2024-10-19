@@ -41,15 +41,33 @@ class ApplicationTest extends NsTest {
             run("10");
             assertThat(output()).contains("결과 : 10");
         });
-
     }
 
 
     @Test
-    void 입력값이_없을_때() {
+    void 입력값이_없는_경우() {
         assertSimpleTest(() -> {
             run("");
             assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+
+    @Test
+    void 피연산자가_소수인_경우() {
+        assertSimpleTest(() -> {
+            run("1.1");
+            assertThat(output()).contains("결과 : 1.1");
+        });
+
+        assertSimpleTest(() -> {
+            run("1.1,2.2");
+            assertThat(output()).contains("결과 : 3.3");
+        });
+
+        assertSimpleTest(() -> {
+            run("1.0,1");
+            assertThat(output()).contains("결과 : 2");
         });
     }
 
@@ -189,9 +207,6 @@ class ApplicationTest extends NsTest {
             run("//\\r2\\n2\\r22");
             assertThat(output()).contains("결과 : 4");
         });
-
-
-
     }
 
 
@@ -252,7 +267,31 @@ class ApplicationTest extends NsTest {
             run("//00\\n00");
             assertThat(output()).contains("결과 : 0");
         });
+    }
 
+
+    @Test
+    void 구분자가_온점(){
+        assertSimpleTest(() -> {
+            run("//.\\n1.1:2.2");
+            assertThat(output()).contains("결과 : 6");
+        });
+
+        assertSimpleTest(() -> {
+            run("//..\\n1.1:2.2");
+            assertThat(output()).contains("결과 : 3.3");
+        });
+
+        // 구분자가 온점보다 우선한다
+        assertSimpleTest(() -> {
+            run("//.\\n1.1");
+            assertThat(output()).contains("결과 : 2");
+        });
+
+        assertSimpleTest(() -> {
+            run("//..\\n2..2.2");
+            assertThat(output()).contains("결과 : 4.2");
+        });
     }
 
 
@@ -282,6 +321,7 @@ class ApplicationTest extends NsTest {
         );
 
     }
+
 
     @Test
     void 커스텀연산자_예외_테스트(){
@@ -318,6 +358,16 @@ class ApplicationTest extends NsTest {
 
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//\\n2 34"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//..\\n2...2.2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//.\\n2.0"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
