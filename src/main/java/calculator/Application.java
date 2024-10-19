@@ -11,8 +11,8 @@ public class Application {
         String input = InputView.getInput();
 
         // 2. 입력값에 대한 계산 실행
-        Calculator calculator = new Calculator();
-        int result = Calculator.calculate(input);
+        Calculator calculator = new Calculator(input);
+        int result = calculator.calculate();
 
         // 3. 계산 결과 출력
         OutputView.printResult(result);
