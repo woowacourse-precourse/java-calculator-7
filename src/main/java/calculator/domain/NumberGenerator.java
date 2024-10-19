@@ -8,7 +8,7 @@ public class NumberGenerator {
         this.sumCalculator = sumCalculator;
     }
 
-    public void generator(char number) {
+    public void appendNumber(char number) {
         consecutiveNumbers += number;
     }
 

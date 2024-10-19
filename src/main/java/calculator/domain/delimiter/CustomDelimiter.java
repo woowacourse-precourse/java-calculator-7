@@ -1,7 +1,8 @@
 package calculator.domain.delimiter;
 
 import static calculator.domain.delimiter.CustomDelimiterPattern.CUSTOM_DELIMITER_END;
-import static calculator.exception.ErrorMessage.*;
+import static calculator.view.enums.Message.INVALID_CUSTOM_DELIMITER_FORMAT;
+import static calculator.view.enums.Message.INVALID_CUSTOM_DELIMITER_LENGTH;
 
 public class CustomDelimiter {
 

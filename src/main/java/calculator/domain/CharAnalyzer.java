@@ -6,7 +6,8 @@ import calculator.domain.delimiter.Delimiter;
 import static calculator.domain.delimiter.CustomDelimiterPattern.CUSTOM_DELIMITER_END;
 import static calculator.domain.delimiter.CustomDelimiterPattern.CUSTOM_DELIMITER_START;
 import static calculator.domain.delimiter.DelimiterState.REGISTERED_DELIMITER;
-import static calculator.exception.ErrorMessage.*;
+import static calculator.view.enums.Message.END_OF_INPUT;
+import static calculator.view.enums.Message.INVALID_INPUT_VALUE;
 
 public class CharAnalyzer {
     private final String input;
@@ -45,9 +46,9 @@ public class CharAnalyzer {
         currentIndex++;
 
         if (isPositiveNumber(currentChar)) {
-            processNumber(currentChar);
+            processCurrentNumber(currentChar);
         } else if (isRegisteredDelimiterChar(currentChar)) {
-            markDelimiter();
+            processDelimiter();
         } else {
             throw new IllegalArgumentException(INVALID_INPUT_VALUE.getMessage());
         }
@@ -61,11 +62,11 @@ public class CharAnalyzer {
         return input.startsWith(CUSTOM_DELIMITER_START.getPattern(), currentIndex);
     }
 
-    private void processNumber(char currentChar) {
-        numberGenerator.generator(currentChar);
+    private void processCurrentNumber(char currentChar) {
+        numberGenerator.appendNumber(currentChar);
     }
 
-    private void markDelimiter() {
+    private void processDelimiter() {
         numberGenerator.handleDelimiter(REGISTERED_DELIMITER.getState());
     }
 
