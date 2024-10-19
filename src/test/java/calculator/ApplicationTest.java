@@ -52,9 +52,16 @@ class ApplicationTest extends NsTest {
     @Test
     void 없는_구분자_예외_테스트() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//\\n1/2;3:4"))
+                assertThatThrownBy(() -> runException("//\\n1 2:4:4"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+    @Test
+    void 이전_테스트에_있는_문자열() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("///\\\\n1\\2;5/4"))
+                        .isInstanceOf(IllegalArgumentException.class));
     }
 
     @Override
