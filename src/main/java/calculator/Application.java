@@ -46,5 +46,12 @@ public class Application {
         index++;
     }
 
+
+    // 변환된 숫자를 더하기
+    int sum = 0;
+    for (int number : strToIntList) {
+        sum += number;
+    }
+
     }
 }
