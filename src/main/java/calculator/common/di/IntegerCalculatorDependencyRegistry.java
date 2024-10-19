@@ -9,6 +9,7 @@ import calculator.model.delimiter.factory.DefaultDelimiterFactory;
 import calculator.model.delimiter.factory.DelimiterFactory;
 import calculator.model.delimiter.service.DelimiterService;
 import calculator.model.delimiter.service.IntegerDelimiterService;
+import calculator.service.NumberService;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -19,6 +20,7 @@ public class IntegerCalculatorDependencyRegistry implements NumberCalculatorDepe
     private static final DelimiterFactory delimiterFactory = new DefaultDelimiterFactory(delimiterValidator);
     private static final CustomDelimiterService customDelimiterService = new CustomDelimiterService(delimiterFactory, customDelimiterPatternMatcher);
     private static final DelimiterService delimiterService = new IntegerDelimiterService(delimiterFactory, customDelimiterService);
+    private static final NumberService numberService = new NumberService();
 
     private static final InputView inputView = new InputView();
     private static final OutputView outputView = new OutputView();
@@ -30,6 +32,10 @@ public class IntegerCalculatorDependencyRegistry implements NumberCalculatorDepe
 
     public static IntegerCalculatorDependencyRegistry getInstance() {
         return instance;
+    }
+
+    public CustomDelimiterService getCustomDelimiterService() {
+        return customDelimiterService;
     }
 
     public DelimiterService getDelimiterService() {
@@ -47,5 +53,10 @@ public class IntegerCalculatorDependencyRegistry implements NumberCalculatorDepe
     @Override
     public Class<? extends Number> getNumberClass() {
         return Integer.class;
+    }
+
+    @Override
+    public NumberService getNumberService() {
+        return numberService;
     }
 }
