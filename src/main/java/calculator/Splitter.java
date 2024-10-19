@@ -10,15 +10,17 @@ public class Splitter {
 
     public static List<String> splitByDelimiter(String userInput) {
         String delimiter = "[,:]";
+        String content = userInput;
 
-        Pattern pattern = Pattern.compile("//(.)\n(.*)");
+        Pattern pattern = Pattern.compile("//(.*)\\\\n(.*)");
         Matcher matcher = pattern.matcher(userInput);
 
         if (matcher.find()) {
-            delimiter = matcher.group(1);
-            userInput = matcher.group(2);
+            String customDelimiter = matcher.group(1);
+            delimiter = Pattern.quote(customDelimiter);
+            content = matcher.group(2);
         }
 
-        return Arrays.asList(userInput.split(delimiter));
+        return Arrays.asList(content.split(delimiter));
     }
 }
