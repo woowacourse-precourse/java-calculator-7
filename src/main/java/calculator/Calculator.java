@@ -37,18 +37,13 @@ public class Calculator {
 
     // 기본 구분자로 문자열을 분리
     private static List<String> splitByDefaultDelimiters(String input) {
-        // 문자열에서 기본 구분자 외에 다른 문자가 있는지 확인
-        if (input.matches(".*[^0-9a-zA-Z,:-].*")) {
-            throw new IllegalArgumentException("기본 구분자 외 다른 문자가 포함되어 있습니다.");
-        }
+        validateDefaultDelimitersFormat(input); // 기본 구분자 외에 다른 문자가 있는지 확인
         return Arrays.asList(input.split("[,:]"));
     }
 
     // 커스텀 구분자로 문자열을 분리
     private static List<String> splitByCustomDelimiter(String input) {
-        if (!input.contains("\\n")) {
-            throw new IllegalArgumentException("잘못된 커스텀 구분자 선언 형식 입니다.");
-        }
+        validateCustomDelimitersFormat(input); // 커스텀 구분자 선언 형식 검사
         int startIndex = 2; // 커스텀 구분자의 시작 인덱스
         int endIndex = input.indexOf("\\n"); // 구분자와 숫자 부분을 분리
         String customDelimiters = input.substring(startIndex, endIndex); // 커스텀 구분자 추출
@@ -82,6 +77,20 @@ public class Calculator {
     private static void validatePositive(int num) {
         if (num < 0) {
             throw new IllegalArgumentException("숫자는 오직 양수만 허용 됩니다.");
+        }
+    }
+
+    // 커스텀 구분자 선언 형식 검사
+    private static void validateCustomDelimitersFormat(String input) {
+        if (!input.contains("\\n")) {
+            throw new IllegalArgumentException("잘못된 커스텀 구분자 선언 형식 입니다.");
+        }
+    }
+
+    // 기본 구분자 외 문자 검사
+    private static void validateDefaultDelimitersFormat(String input) {
+        if (input.matches(".*[^0-9a-zA-Z,:-].*")) {
+            throw new IllegalArgumentException("기본 구분자 외 다른 문자가 포함되어 있습니다.");
         }
     }
 }
