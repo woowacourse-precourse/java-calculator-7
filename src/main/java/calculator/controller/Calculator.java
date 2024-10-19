@@ -50,6 +50,7 @@ public class Calculator {
             throw new IllegalArgumentException(ErrorType.NOT_ALLOWED_NON_NUMERIC.getMessage());
         }
         int[] numbers = Arrays.stream(tokens)
+            .filter(token -> !token.isEmpty())
             .mapToInt(Integer::parseInt).toArray();
         if (!Validation.isAllPositive(numbers)) {
             throw new IllegalArgumentException(ErrorType.NOT_ALLOWED_NEGATIVE.getMessage());
