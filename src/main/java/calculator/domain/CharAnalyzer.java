@@ -66,7 +66,7 @@ public class CharAnalyzer {
     }
 
     private void markDelimiter() {
-        numberGenerator.isDelimiter(REGISTERED_DELIMITER.getState());
+        numberGenerator.handleDelimiter(REGISTERED_DELIMITER.getState());
     }
 
     private void processCustomDelimiter() {

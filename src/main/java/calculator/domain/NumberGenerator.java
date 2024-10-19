@@ -12,7 +12,7 @@ public class NumberGenerator {
         consecutiveNumbers += number;
     }
 
-    public void isDelimiter(boolean flag) {
+    public void handleDelimiter(boolean flag) {
         if (flag && !consecutiveNumbers.isEmpty()) {
             flushConsecutiveNumbers();
         }
