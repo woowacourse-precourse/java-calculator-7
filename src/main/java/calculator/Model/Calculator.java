@@ -10,12 +10,12 @@ public class Calculator {
         }
     }
 
-    public int calcSum(Input input) {
+    public int calcSum(Number number) {
         int sum = 0;
 
-        int numberSize = input.size();
+        int numberSize = number.size();
         for (int i=0; i<numberSize; i++) {
-            int nowNumber = input.get(i);
+            int nowNumber = number.get(i);
             checkOverflow(nowNumber, sum);
             sum += nowNumber;
         }
@@ -24,11 +24,12 @@ public class Calculator {
     }
 
     public void turnOn() {
-        Input input = new Input();
-        String inputText = input.consoleInput();
-        input.getInputText(inputText);
+        String inputText = Input.consoleInput();
 
-        int sum = calcSum(input);
+        Number number = new Number();
+        number.getInputText(inputText);
+
+        int sum = calcSum(number);
         Output.consoleOutput(sum);
     }
 }
