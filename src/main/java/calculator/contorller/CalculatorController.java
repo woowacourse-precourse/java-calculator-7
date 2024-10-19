@@ -1,7 +1,7 @@
 package calculator.contorller;
 
-import calculator.CustomCalculator;
-import calculator.SimpleCalculator;
+import calculator.calculator.CustomCalculator;
+import calculator.calculator.SimpleCalculator;
 import calculator.Validator;
 
 public class CalculatorController {
@@ -11,8 +11,8 @@ public class CalculatorController {
 
     public int getResult(String inputString) {
         if (Validator.isCustom(inputString)) {
-            return customCalculator.customCalculate(inputString);
+            return customCalculator.calculate(inputString);
         }
-        return simpleCalculator.simpleCalculate(inputString);
+        return simpleCalculator.calculate(inputString);
     }
 }

@@ -16,8 +16,8 @@ public abstract class Validator {
                         return Integer.parseInt(string);
                     } catch (NumberFormatException e) {
                         throw new IllegalArgumentException();
-                    }
-                }).toArray();
+                    }})
+                .toArray();
     }
 
     public static void checkHasNotPositive(int[] intArray) {

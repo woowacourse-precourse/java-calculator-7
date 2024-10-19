@@ -1,13 +1,14 @@
-package calculator;
+package calculator.calculator;
 
 
+import calculator.Validator;
 import java.util.Arrays;
 
 public class SimpleCalculator {
 
     private static final String DEFAULT_SPLIT_REGEX = "[,:]";
 
-    public int simpleCalculate(String inputString) {
+    public int calculate(String inputString) {
         if (inputString.isEmpty()) {
             return 0;
         }
