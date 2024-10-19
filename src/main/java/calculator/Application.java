@@ -14,7 +14,8 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
-        String[] parsedString = parse(input);
+        String[] parsedStrings = parse(input);
+        int result = calculateSum(parsedStrings);
     }
 
     static String[] parse(String input) {
@@ -29,6 +30,23 @@ public class Application {
         }
 
         String[] result = input.split(delimiter.toString());
+
+        return result;
+    }
+
+    static int calculateSum(String[] parsedStrings) {
+        int sum = 0;
+
+        for (String parsedString: parsedStrings) {
+            int positiveNumber = toPositiveNumber(parsedString);
+            sum += positiveNumber;
+        }
+
+        return sum;
+    }
+
+    static int toPositiveNumber(String input) {
+        int result = Integer.parseInt(input);
 
         return result;
     }
