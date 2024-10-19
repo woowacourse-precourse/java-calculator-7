@@ -3,7 +3,7 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
 
-    public int addition(String[] strArr) throws IllegalArgumentException{
+    public int addition(String[] strArr) throws IllegalArgumentException {
         int sum = 0;
         for(String number : strArr) {
             try {
@@ -19,14 +19,14 @@ public class Application {
         return  sum;
     }
 
-    public int separate(String str) {
+    public int separate(String str) throws IllegalArgumentException {
         int answer = 0;
         String[] strArr = str.split(",|:");
         answer = addition(strArr);
         return  answer;
     }
 
-    public int custom(String str) throws IllegalArgumentException{
+    public int custom(String str) throws IllegalArgumentException {
         int answer = 0;
         int customIndex = str.indexOf("\n");
         if(customIndex==-1) {
