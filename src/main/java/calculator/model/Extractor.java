@@ -9,7 +9,7 @@ public class Extractor {
     private List<Character> delimiters = new ArrayList<>(Arrays.asList(',', ':'));
     private boolean isCustomDelimiter = false;
 
-    public void extractCustomDelimiter(String input, List<Character> delimiters) {
+    public void extractCustomDelimiter(String input) {
         if(input.startsWith("//") && input.substring(3,5).equals("\\n")){
             delimiters.add(input.charAt(2));
             isCustomDelimiter = true;
