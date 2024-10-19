@@ -20,8 +20,9 @@ calculator/
  ├── calculator/                
  │    ├── Calculator.java       # 계산기 로직 처리
  │    └── StringParsing.java    # 문자열 파싱 기능
- ├── io/                        
- │    └── InputString.java      # 사용자 입력 기능
+ ├── io/ 
+ │    ├── InputString.java      # 사용자 입력 기능
+ │    └── OutputResult.java     # 결과 출력 기능
  └── exception/                
       └── ValidateInput.java    # 입력값 검증 및 예외 처리
 ```
