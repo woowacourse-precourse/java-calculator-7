@@ -2,6 +2,7 @@ package calculator;
 
 import calculator.controller.StringAddCalculatorController;
 import calculator.service.StringAddCalculatorService;
+import calculator.validator.InputValidator;
 import calculator.view.InputView;
 import calculator.view.ConsoleInputView;
 import calculator.view.OutputView;
@@ -13,10 +14,12 @@ public class Application {
         InputView inputView = new ConsoleInputView();
         OutputView outputView = new StandardOutputView();
 
-        StringAddCalculatorService stringAddCalculatorService = new StringAddCalculatorService();
-        StringAddCalculatorController stringAddCalculatorController = new StringAddCalculatorController(stringAddCalculatorService);
+        InputValidator inputValidator = new InputValidator();
 
-        String output = stringAddCalculatorController.stringAdd(inputView.readLine());
+        StringAddCalculatorService stringAddCalculatorService = new StringAddCalculatorService(inputValidator);
+        StringAddCalculatorController stringAddCalculatorController = new StringAddCalculatorController(stringAddCalculatorService, inputValidator);
+
+        String output = stringAddCalculatorController.getStringAdd(inputView.readLine());
 
         outputView.print(output);
     }
