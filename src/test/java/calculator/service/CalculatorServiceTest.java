@@ -8,6 +8,7 @@ import calculator.dto.CalculatorResponseDto;
 import calculator.exception.CalculatorException;
 import calculator.exception.constants.ErrorMessage;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -91,6 +92,34 @@ class CalculatorServiceTest {
         assertThatThrownBy(() -> calculatorService.sum(requestDto))
                 .isInstanceOf(CalculatorException.class)
                 .hasMessage(ErrorMessage.NEGATIVE_VALUE_NOT_ALLOWED.getMessage());
+    }
+
+    @Test
+    void 입력_값이_빈_값일_경우() {
+        // given
+        String input = "";
+        CalculatorRequestDto requestDto = new CalculatorRequestDto(input);
+
+        // when
+        CalculatorResponseDto responseDto = calculatorService.sum(requestDto);
+        long sumResult = responseDto.sumResult();
+
+        // then
+        assertThat(sumResult).isZero();
+    }
+
+    @Test
+    void 입력_값이_커스텀_구분자이고_빈_값일_경우() {
+        // given
+        String input = "//;\\n";
+        CalculatorRequestDto requestDto = new CalculatorRequestDto(input);
+
+        // when
+        CalculatorResponseDto responseDto = calculatorService.sum(requestDto);
+        long sumResult = responseDto.sumResult();
+
+        // then
+        assertThat(sumResult).isZero();
     }
 
     static Stream<Arguments> provideInputWithDefaultDelimiterAndPositiveNumber() {
