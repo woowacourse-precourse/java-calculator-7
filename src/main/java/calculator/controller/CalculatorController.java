@@ -17,7 +17,7 @@ public class CalculatorController {
 
     public void run(){
         inputString();
-        validateNull();
+        isValidationCheckNullOrEmpty();
         parseNumbers();
         outputResult();
     }
@@ -27,13 +27,13 @@ public class CalculatorController {
         calculator = new Calculator(inputView.getInput());
     }
 
-    public void validateNull(){
-        if(calculator.validateNull())
+    public void isValidationCheckNullOrEmpty(){
+        if(calculator.isValidationNullOrEmpty())
             outputView.printAnswerMessage(calculator.getAnswer());
     }
 
     public void parseNumbers(){
-        calculator.parseNumbers();
+        calculator.split();
     }
 
     public int sumNumbers(){
@@ -43,10 +43,4 @@ public class CalculatorController {
     public void outputResult() {
         outputView.printAnswerMessage(sumNumbers());
     }
-
-    //inputString: 사용자의 문자열 입력을 받음
-    //strToInt: 문자열을 구분자로 나눠 숫자 배열로 변환
-    //validateNumbers: 배열에서 음수가 있는지 검사
-    //sumNumbers: 숫자 배열을 합산
-    //outputResult: 결과를 출력
 }

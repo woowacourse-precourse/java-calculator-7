@@ -1,7 +1,5 @@
 package calculator.view;
 
-import calculator.model.Calculator;
-
 import static calculator.util.Constants.OUTPUT_ANSWER;
 import static calculator.util.Constants.OUTPUT_SUM_STRING;
 
