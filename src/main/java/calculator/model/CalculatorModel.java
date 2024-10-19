@@ -21,7 +21,6 @@ public class CalculatorModel {
         Matcher matcher = compiledPattern.matcher(customInput);
         if (matcher.find()) {
             String extraction = matcher.group(1).trim();
-            System.out.println(extraction);
             if (extraction.length() > 1 || extraction.matches("\\d+")) {
                 throw new IllegalArgumentException();
             }
