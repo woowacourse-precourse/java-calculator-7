@@ -56,7 +56,31 @@ class DelimitersTest {
         assertThat(delimiters.isCustomDelimiter()).isFalse();
     }
 
-    @DisplayName("구분자를 통해 기본 REGEX를 반환한다.")
+    @DisplayName("구분자를 통해 | 를 포함한 기본 분할 정규식을 반환한다.")
+    @Test
+    void getDefaultSplitRegex() {
+        //given
+        String input = "1,2:3";
+        Delimiters delimiters = Delimiters.from(input);
+        //when
+        String regex = delimiters.getSplitRegex();
+        //then
+        assertThat(regex).contains(",", ":", "|");
+    }
+
+    @DisplayName("구분자를 통해 | 를 포함한 커스텀 분할 정규식를 반환한다.")
+    @Test
+    void getCustomSplitRegex() {
+        //given
+        String input = "//;\\n1;2;3";
+        Delimiters delimiters = Delimiters.from(input);
+        //when
+        String regex = delimiters.getSplitRegex();
+        //then
+        assertThat(regex).isEqualTo(";");
+    }
+
+    @DisplayName("구분자를 통해 기본 정규식을 반환한다.")
     @Test
     void getDefaultRegex() {
         //given
@@ -68,7 +92,7 @@ class DelimitersTest {
         assertThat(regex).contains(",", ":");
     }
 
-    @DisplayName("구분자를 통해 커스텀 REGEX를 반환한다.")
+    @DisplayName("구분자를 통해 커스텀 정규식를 반환한다.")
     @Test
     void getCustomRegex() {
         //given
