@@ -1,8 +1,6 @@
 package calculator;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -10,12 +8,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ValidatorTest {
 
-    private Validator validator;
-
-    @BeforeEach
-    void 테스트_전_세팅() {
-        this.validator = Validator.of();
-    }
+    private Validator validator = Validator.of();
 
     @Test
     void 구분자_검증_확인() {
@@ -32,7 +25,7 @@ class ValidatorTest {
             validator.isNullDelimiters(splitEnterInput);
         })
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("입력이 잘못되었습니다. 다시 입력해주세요.\n");
+                .hasMessage("구분자 입력 방식이 잘못되었습니다. 다시 입력해주세요.");
     }
 
     @Test
@@ -51,6 +44,6 @@ class ValidatorTest {
             validator.tryParseInteger(splitStringNumbers);
         })
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("숫자만 입력해주세요.\n");
+                .hasMessage("숫자(양수인 정수)만 입력해주세요.");
     }
 }

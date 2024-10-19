@@ -1,25 +1,18 @@
 package calculator;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class SplitTest {
 
-    private Split split;
-
-    @BeforeEach
-    void 테스트_전_세팅() {
-        this.split = Split.of();
-    }
+    private Split split = Split.of();
 
     @Test
     void 기본_엔터_분리_확인_구분자_있을때() {
         String userInput = "//;\\n123";
-        List<String> expect = List.of("", "", ";", "123");
+        List<String> expect = List.of("", ";", "123");
         List<String> result = split.splitInputOfEnter(userInput);
 
         assertThat(result).isEqualTo(expect);

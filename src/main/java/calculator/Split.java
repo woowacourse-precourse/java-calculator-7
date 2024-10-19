@@ -18,7 +18,7 @@ public class Split {
         List<String> splitSlash = new ArrayList<>();
 
         splitEnter.forEach(o -> {
-            splitSlash.addAll(splitString(o, "/"));
+            splitSlash.addAll(splitString(o, "//"));
         });
         return splitSlash;
     }

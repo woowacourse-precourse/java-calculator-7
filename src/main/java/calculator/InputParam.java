@@ -2,6 +2,8 @@ package calculator;
 
 import java.util.List;
 
+import static calculator.message.InputMessage.구분자인덱스;
+import static calculator.message.InputMessage.입력안내문;
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class InputParam {
@@ -19,8 +21,7 @@ public class InputParam {
     }
 
     public String getInput() {
-        System.out.println("다음과 같이 입력해주세요\n");
-        System.out.println("//구분자 \\n 계산할 숫자들을 구분자로 구별해주세요.\n");
+        System.out.println(입력안내문);
 
         return readLine();
     }
@@ -43,7 +44,7 @@ public class InputParam {
         if(validator.validDelimiters(userInput)) {
             validator.isNullDelimiters(domain.getStringNumbers());
             List<String> splitInput = domain.getStringNumbers();
-            List<Character> delimiter = splitInput.get(2).chars().mapToObj(c -> (char) c).toList();
+            List<Character> delimiter = splitInput.get(구분자인덱스).chars().mapToObj(c -> (char) c).toList();
             domain.changeUserDelimiters(delimiter);
         }
     }

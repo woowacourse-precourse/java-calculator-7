@@ -1,5 +1,7 @@
 package calculator;
 
+import calculator.message.ErrorMessage;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +19,8 @@ public class Validator {
     }
 
     public void isNullDelimiters(List<String> splitSlash) {
-        if(splitSlash.size() != 4 || splitSlash.get(2).isEmpty()) {
-            throw new IllegalArgumentException("입력이 잘못되었습니다. 다시 입력해주세요.\n");
+        if(splitSlash.size() != 3 || splitSlash.get(1).isEmpty()) {
+            throw new IllegalArgumentException(ErrorMessage.구분자입력에러메시지.getMessage());
         }
     }
 
@@ -28,7 +30,7 @@ public class Validator {
             try {
                 numbers.add(isPositiveInt(oneNumber));
             } catch(NumberFormatException e) {
-                throw new IllegalArgumentException("숫자만 입력해주세요.");
+                throw new IllegalArgumentException(ErrorMessage.숫자입력에러메시지.getMessage());
             }
         });
         return numbers;
@@ -37,7 +39,7 @@ public class Validator {
     private Integer isPositiveInt(String oneNumber) {
         int num = Integer.parseInt(oneNumber);
         if(num < 0) {
-            throw new IllegalArgumentException("음수는 입력되면 안됩니다.");
+            throw new IllegalArgumentException(ErrorMessage.음수입력에러메시지.getMessage());
         }
         return num;
     }
