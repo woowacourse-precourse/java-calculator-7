@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import calculator.constant.ErrorMessage;
 import calculator.util.NumberChecker;
 
 public class NumberExtractor {
@@ -34,13 +35,13 @@ public class NumberExtractor {
 
 	private void validateNumberFormat(String number) {
 		if (NumberChecker.isNotNumber(number)) {
-			throw new IllegalArgumentException("Not a number: " + number);
+			throw new IllegalArgumentException(ErrorMessage.INVALID_NUMBER_FORMAT.getMessage());
 		}
 	}
 
 	private void validatePositiveNumber(String number) {
 		if (NumberChecker.isNegativeNumber(number)) {
-			throw new IllegalArgumentException("Negative number: " + number);
+			throw new IllegalArgumentException(ErrorMessage.NEGATIVE_NUMBER_NOT_ALLOWED.getMessage());
 		}
 	}
 
