@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class MyCalculator {
     
     public int calculate(String expression) {
-        if(expression == null || expression.trim().isEmpty()) {
+        if (expression == null || expression.trim().isEmpty()) {
             return 0;
         }
         
@@ -45,6 +45,7 @@ public class MyCalculator {
             if (parseToInt < 0) {
                 throw new IllegalArgumentException("음수를 입력할 수 없습니다. : " + number);
             }
+            
             result += parseToInt;
         }
         return result;
