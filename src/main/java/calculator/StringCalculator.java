@@ -1,5 +1,8 @@
 package calculator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StringCalculator {
     private String input;
 
@@ -37,8 +40,66 @@ public class StringCalculator {
         return customSperator;
     }
 
+    // 문자를 seperator를 통해 다 나누는 기능
+    private List<Integer> separateMachine(String separator) {
+        if (separator.equals("defaultSeparator")) {
+            return defaultSeperateMachine();
+        } else {
+            return customSeperateMachine();
+        }
+    }
+
+    private List<Integer> defaultSeperateMachine() {
+        String[] inputSplit = input.split("");
+        List<Integer> splitedNums = new ArrayList<>();
+        String splitedNum = "";
+
+        // 아무 입력이 없을 경우
+        if (input.length() == 0) {
+            splitedNums.add(0);
+            System.out.println("splitedNums = " + splitedNums);
+            return splitedNums;
+        }
+        for (int i = 0; i != input.length(); i++) {
+            char charInput = inputSplit[i].charAt(0);
+            // 구분자일 경우
+            if (charInput == ',' || charInput == ':') {
+                // 구분자가 나왔지만 앞에 숫자가 없었을 경우
+                if (splitedNum == "") {
+                    splitedNums.add(0);
+                    System.out.println("splitedNums = " + splitedNums);
+                    continue;
+                }
+                splitedNums.add(Integer.parseInt(splitedNum));
+                splitedNum = "";
+                continue;
+            }
+            // 숫자일 경우
+            if (Character.isDigit(charInput)) {
+                splitedNum = splitedNum + charInput;
+                // 배열의 마지막 번째에 숫자가 나왔을 경우
+                if (i == input.length() - 1) {
+                    splitedNums.add(Integer.parseInt(splitedNum));
+                }
+            }
+            // 숫자나 기본 구분자가 아닐경우 에러 발생
+            else {
+                throw new IllegalArgumentException("기본 구분자, 숫자가 아닌 문자가 들어왔다는 에러 구현 예정");
+            }
+        }
+        return splitedNums;
+    }
+
+    // 구현 예정
+    private List<Integer> customSeperateMachine() {
+        List<Integer> splitedNums = new ArrayList<>();
+        splitedNums.add(0);
+        return splitedNums;
+    }
+
     public int calculate() {
         String separator = findSeperator();
+        List<Integer> seperatedNums = separateMachine(separator);
         return 0;
     }
 }
