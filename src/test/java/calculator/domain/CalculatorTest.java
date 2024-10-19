@@ -19,4 +19,21 @@ class CalculatorTest {
 
         Assertions.assertThat(calculator.getNumbers()).isEqualTo(numbers);
     }
+
+    @Test
+    @DisplayName("숫자는 양수로 이루어져 있다")
+    void 숫자_양수_TEST(){
+        List<Double> invalidNumbers1 = new ArrayList<>(Arrays.asList(0.0, 1.1, 2.0));
+        List<Double> invalidNumbers2 = new ArrayList<>(Arrays.asList(-1.0, 1.1, 2.0));
+
+        Assertions.assertThatThrownBy(() -> new Calculator(invalidNumbers1))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("숫자는 양수만 가능합니다.");
+
+        Assertions.assertThatThrownBy(() -> new Calculator(invalidNumbers2))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("숫자는 양수만 가능합니다.");
+
+    }
+
 }
