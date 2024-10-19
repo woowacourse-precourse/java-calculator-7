@@ -51,6 +51,14 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 지정되지_않은_구분자() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,2+3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
