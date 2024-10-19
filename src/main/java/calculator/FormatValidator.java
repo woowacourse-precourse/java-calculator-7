@@ -59,7 +59,8 @@ public class FormatValidator {
             return;
         }
 
-        throw new IllegalArgumentException("잘못된 커스텀 구분자 형식입니다. 올바른 형식은 //<숫자가 아닌 문자>\\n입니다.");
+        throw new IllegalArgumentException("올바른 커스텀 구분자 형식은 //<숫자가 아닌 문자>\\n입니다. "
+            + "혹은 구분자 외의 문자가 포함되었는지 확인해주세요.");
     }
 
     private boolean isCustomStartFormat(String formula) {
