@@ -15,7 +15,13 @@ public class Application {
         String input = Console.readLine();
 
         String[] parsedStrings = parse(input);
-        int result = calculateSum(parsedStrings);
+
+        int sum = calculateSum(parsedStrings);
+
+        StringBuilder result = new StringBuilder("결과 : ");
+        result.append(sum);
+
+        System.out.println(result);
     }
 
     static String[] parse(String input) {
