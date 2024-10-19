@@ -19,9 +19,14 @@ public class Application {
         // 커스텀 구분자 처리
         String customDelimiter = ",|:";
         if (str.startsWith("//")) {
-            int delimiterIndex = str.indexOf("\n");
+            int delimiterIndex = str.indexOf("\\n");
+
+            if (delimiterIndex == -1) {
+                throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
+            }
+
             customDelimiter = str.substring(2, delimiterIndex);
-            str = str.substring(delimiterIndex + 1);
+            str = str.substring(delimiterIndex + 2);
         }
 
         // 커스텀 문자 또는 기본 구분자로 분리
