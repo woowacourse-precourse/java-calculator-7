@@ -10,8 +10,8 @@ import java.util.List;
 
 public class Calculator {
     private static String userInput;
-    static List<String> numberList = new ArrayList<>();
-    static int total = 0;
+    private static List<String> numberList = new ArrayList<>();
+    private static int total = 0;
 
     public static void run() {
         userInput = InputUtils.getUserInput();
