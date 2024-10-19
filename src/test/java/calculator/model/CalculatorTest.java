@@ -6,14 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CalculatorTest {
 
-    private Calculator calculator = new Calculator();
+    private final Calculator calculator = new Calculator();
 
     @Test
     void 문자열을_받아_더한값을_전달한다() {
         String input = "1,2:3";
-        int expectedSum = 1 + 2 + 3;
+        Number expectedSum = Number.from("6");
 
-        int actual = calculator.sumNumbersFromString(input);
+        Number actual = calculator.sumNumbersFromString(input);
 
         assertEquals(expectedSum, actual);
     }
