@@ -7,6 +7,8 @@ public class Calculator {
 
     private final String inputString;
     private final String splitString = "[:,]";
+    private final Character userDefinedChar = '/';
+    private final int zeroNumber = 0;
     private final int indexOfOne = 1;
     private final int indexOfTwo = 2;
     private final int indexOfThree = 3;
@@ -42,7 +44,7 @@ public class Calculator {
     }
 
     public int addNumber(List<Integer> integerList){
-        int sum = 0;
+        int sum = zeroNumber;
 
         for(int number : integerList){
             sum += number;
@@ -61,7 +63,7 @@ public class Calculator {
     }
 
     private boolean userDefined(){
-        if(inputString.charAt(indexOfOne) == '/'){
+        if(inputString.charAt(indexOfOne) == userDefinedChar){
             return true;
         }
 
