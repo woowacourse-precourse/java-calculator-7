@@ -5,7 +5,7 @@ public class Calculator {
     private static char customDelimiter;
 
     public static int calculate(String input) {
-        Parser.checkDelimiter(input);
+        Parser.parse(input);
 
         int res = 0;
         return res;
@@ -14,8 +14,10 @@ public class Calculator {
     public static void setIsCustomDelimiter(boolean value) {
         isCustomDelimiter = value;
     }
+    public static void setCustomDelimiter(char delimiter) { customDelimiter = delimiter; }
 
     public static boolean getIsCustomDelimiter() {
         return isCustomDelimiter;
     }
+    public static char getCustomDelimiter() { return customDelimiter; }
 }
