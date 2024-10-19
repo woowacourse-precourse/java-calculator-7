@@ -45,7 +45,13 @@ public class Application {
 
                 // for 문을 사용하여 splitedNumber에 있는 숫자를 더해 값을 저장
                 for (String s : splitedNumber) {
-                    customSum += Integer.parseInt(s);
+                    int changedNumber = Integer.parseInt(s);
+
+                    //입력 값이 음수일 경우 IllegalArgumentException 발생
+                    if (changedNumber < 0) {
+                        throw new IllegalArgumentException();
+                    }
+                    customSum += changedNumber;
                 }
                 // 더한 합 출력
                 System.out.println("결과 : " + customSum);
@@ -58,6 +64,12 @@ public class Application {
 
             // for 문을 사용하여 저장되어있는 값 합을 구하기
             for (String s : splited) {
+                int changedNumbers = Integer.parseInt(s);
+
+                //입력 값이 음수일 경우 IllegalArgumentException 발생
+                if (changedNumbers < 0) {
+                    throw new IllegalArgumentException();
+                }
                 sum += Integer.parseInt(s);
             }
 
