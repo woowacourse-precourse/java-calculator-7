@@ -15,7 +15,11 @@ public class Calculator {
     }
 
     public long sum() {
-        return Arrays.stream(splitInputs)
+        if (this.splitInputs.length == 0) {
+            return 0L;
+        }
+
+        return Arrays.stream(this.splitInputs)
                 .mapToLong(this::parsedNumber)
                 .filter(this::validatePositiveNumber)
                 .sum();

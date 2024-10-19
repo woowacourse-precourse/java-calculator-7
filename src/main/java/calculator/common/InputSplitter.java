@@ -17,6 +17,9 @@ public class InputSplitter {
             int customDelimiterIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX) + CUSTOM_DELIMITER_SUFFIX.length();
             extractedNumberText = input.substring(customDelimiterIndex);
         }
+        if (extractedNumberText.isEmpty()) {
+            return new String[0];
+        }
         return delimiter.split(extractedNumberText);
     }
 
