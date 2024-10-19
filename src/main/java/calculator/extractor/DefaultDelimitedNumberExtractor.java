@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DefaultTokenExtractor implements TokenExtractor {
+public class DefaultDelimitedNumberExtractor implements DelimitedNumberExtractor {
     private static final String DEFAULT_DELIMITERS = ",|:";
 
 

@@ -1,10 +1,9 @@
 package calculator;
 
 import calculator.calculator.StringCalculatorImpl;
-import calculator.extractor.CompositeTokenExtractor;
-import calculator.extractor.CustomTokenExtractor;
-import calculator.extractor.DefaultTokenExtractor;
-import calculator.extractor.TokenExtractor;
+import calculator.extractor.developed.CustomDelimiterNumberExtractorTest;
+import calculator.extractor.developed.NumberExtractorChainTest;
+import calculator.extractor.developed.StandardDelimiterNumberExtractorTest;
 import calculator.inputReader.ConsoleInputReader;
 import calculator.parser.NumberParser;
 import calculator.parser.StringCalculatorNumberParser;
@@ -28,13 +27,18 @@ public class Application {
                         new CustomTokenFormatValidationRule()
                 ))
         );
-        TokenExtractor tokenExtractor = new CompositeTokenExtractor(List.of(
-                new DefaultTokenExtractor(),
-                new CustomTokenExtractor()
-        ));
+//        DelimitedNumberExtractor delimitedNumberExtractor = new CompositeDelimitedNumberExtractor(List.of(
+//                new DefaultDelimitedNumberExtractor(),
+//                new CustomDelimitedNumberExtractor()
+//        ));
+        NumberExtractorChainTest numberExtractorChain = new NumberExtractorChainTest(
+                List.of(new StandardDelimiterNumberExtractorTest(), new CustomDelimiterNumberExtractorTest()));
         NumberParser numberParser = new StringCalculatorNumberParser();
 
-        StringCalculatorImpl calculator = new StringCalculatorImpl(inputValidator, tokenExtractor, numberParser);
+//        StringCalculatorImpl calculator = new StringCalculatorImpl(inputValidator, delimitedNumberExtractor,
+//                numberParser);
+        StringCalculatorImpl calculator = new StringCalculatorImpl(inputValidator, numberExtractorChain,
+                numberParser);
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         ConsoleInputReader consoleInputReader = new ConsoleInputReader();
 //        System.out.println("1");

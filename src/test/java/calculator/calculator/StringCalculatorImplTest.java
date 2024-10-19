@@ -1,9 +1,8 @@
 package calculator.calculator;
 
-import calculator.extractor.CompositeTokenExtractor;
-import calculator.extractor.CustomTokenExtractor;
-import calculator.extractor.DefaultTokenExtractor;
-import calculator.extractor.TokenExtractor;
+import calculator.extractor.developed.CustomDelimiterNumberExtractorTest;
+import calculator.extractor.developed.NumberExtractorChainTest;
+import calculator.extractor.developed.StandardDelimiterNumberExtractorTest;
 import calculator.parser.NumberParser;
 import calculator.parser.StringCalculatorNumberParser;
 import calculator.validationRule.BasicFormatValidationRule;
@@ -34,13 +33,18 @@ class StringCalculatorImplTest {
                         new CustomTokenFormatValidationRule()
                 ))
         );
-        TokenExtractor tokenExtractor = new CompositeTokenExtractor(List.of(
-                new DefaultTokenExtractor(),
-                new CustomTokenExtractor()
-        ));
+//        DelimitedNumberExtractor delimitedNumberExtractor = new CompositeDelimitedNumberExtractor(List.of(
+//                new DefaultDelimitedNumberExtractor(),
+//                new CustomDelimitedNumberExtractor()
+//        ));
+
+        NumberExtractorChainTest numberExtractorChain = new NumberExtractorChainTest(
+                List.of(new StandardDelimiterNumberExtractorTest(),
+                        new CustomDelimiterNumberExtractorTest()));
         NumberParser numberParser = new StringCalculatorNumberParser();
 
-        StringCalculatorImpl stringCalculator = new StringCalculatorImpl(inputValidator, tokenExtractor, numberParser);
+        StringCalculatorImpl stringCalculator = new StringCalculatorImpl(inputValidator, numberExtractorChain,
+                numberParser);
         int calculate = stringCalculator.calculate(input);
 //        System.out.println(calculate);
         Assertions.assertEquals(calculate, 6);

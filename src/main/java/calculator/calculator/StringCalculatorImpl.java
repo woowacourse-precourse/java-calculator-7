@@ -1,26 +1,26 @@
 package calculator.calculator;
 
-import calculator.extractor.TokenExtractor;
+import calculator.extractor.developed.NumberExtractorChainTest;
 import calculator.parser.NumberParser;
 import calculator.validator.InputValidator;
 import java.util.List;
 
 public class StringCalculatorImpl implements Calculator {
     private final InputValidator inputValidator;
-    private final TokenExtractor tokenExtractor;
+    private final NumberExtractorChainTest NumberExtractorChain;
     private final NumberParser numberParser;
 
-    public StringCalculatorImpl(InputValidator inputValidator, TokenExtractor tokenExtractor,
+    public StringCalculatorImpl(InputValidator inputValidator, NumberExtractorChainTest NumberExtractorChain,
                                 NumberParser numberParser) {
         this.inputValidator = inputValidator;
-        this.tokenExtractor = tokenExtractor;
+        this.NumberExtractorChain = NumberExtractorChain;
         this.numberParser = numberParser;
     }
 
     @Override
     public int calculate(String input) {
         inputValidator.validate(input);
-        List<String> tokens = tokenExtractor.extract(input);
+        List<String> tokens = NumberExtractorChain.extract(input);
         List<Integer> numbers = numberParser.parseNumbers(tokens);
         return numbers.stream().mapToInt(Integer::intValue).sum();
     }

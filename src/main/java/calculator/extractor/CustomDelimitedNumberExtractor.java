@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class CustomTokenExtractor implements TokenExtractor {
+public class CustomDelimitedNumberExtractor implements DelimitedNumberExtractor {
     private static final String CUSTOM_TOKEN_PREFIX = "//";
     private static final String CUSTOM_TOKEN_SUFFIX = "\\n";
 
