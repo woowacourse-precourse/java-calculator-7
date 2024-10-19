@@ -65,7 +65,7 @@ public class Application {
 
     private static void validateCustomDelimiters(String[] customDelimiters) {
         for (String delim : customDelimiters) {
-            if (Character.isDigit(delim.charAt(0))) {
+            if (delim.chars().anyMatch(Character::isDigit)) {
                 throw new IllegalArgumentException("커스텀 구분자에 숫자가 포함될 수 없습니다: " + delim);
             }
         }
