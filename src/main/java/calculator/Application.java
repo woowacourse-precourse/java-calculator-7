@@ -2,27 +2,72 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.List;
+import java.util.Optional;
 
 public class Application {
 
     public static void main(String[] args) {
-        String calculationInput = getCalculationInput();
-        List<Integer> operands = decodeCalculationInput(calculationInput);
-        System.out.println("결과 : " + addAll(operands));
+        CalculatorInput calculationInput = readCalculatorInputByKeyboard();
+        int calculatorResult = addAll(calculationInput.getOperands());
+        printCalculatorOutput(calculatorResult);
     }
 
-    private static String getCalculationInput() {
+    private static CalculatorInput readCalculatorInputByKeyboard() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        return Console.readLine();
+        String inputString = Console.readLine();
+        return new CalculatorInput(inputString);
     }
 
-    private static List<Integer> decodeCalculationInput(String calculationInput) {
-        List<String> operands = List.of(calculationInput.split("[,:]"));
-        return operands.stream().map(Integer::valueOf).toList();
-    }
-
-    private static Integer addAll(List<Integer> operands) {
+    private static int addAll(List<Integer> operands) {
         return operands.stream().mapToInt(operand -> operand).sum();
     }
 
+    private static void printCalculatorOutput(int calculatorResult) {
+        System.out.println("결과 : " + calculatorResult);
+    }
+
+    private static class CalculatorInput {
+
+        private final String BASE_OPERANDS_SEPARATOR = "[,:]";
+
+        private List<Integer> operands;
+
+        public CalculatorInput(String inputString) {
+            Optional<Character> customSeparatorOptional = findCustomSeparator(inputString);
+            if (customSeparatorOptional.isPresent()) {
+                String operandString = inputString.substring(5);
+                char customSeparator = customSeparatorOptional.get();
+                this.operands = findOperands(operandString, customSeparator);
+            } else {
+                this.operands = findOperands(inputString);
+            }
+        }
+
+        private Optional<Character> findCustomSeparator(String inputString) {
+            if (inputString.length() < 6) {
+                return Optional.empty();
+            }
+            String header = inputString.substring(0, 5);
+            if (header.startsWith("//") && header.endsWith("\\n")) {
+                return Optional.of(inputString.substring(2, 3).charAt(0));
+            } else {
+                return Optional.empty();
+            }
+        }
+
+        private List<Integer> findOperands(String operandString) {
+            List<String> operands = List.of(operandString.split(BASE_OPERANDS_SEPARATOR));
+            return operands.stream().map(Integer::valueOf).toList();
+        }
+
+        private List<Integer> findOperands(String operandString, char customSeparator) {
+            List<String> operands = List.of(operandString.split(BASE_OPERANDS_SEPARATOR + "|" + customSeparator));
+            return operands.stream().map(Integer::valueOf).toList();
+        }
+
+        public List<Integer> getOperands() {
+            return this.operands;
+        }
+
+    }
 }
