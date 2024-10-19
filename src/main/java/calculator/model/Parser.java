@@ -36,10 +36,9 @@ public class Parser {
     }
 
     public List<String> parseCustom(String input, String custom) {
-        String separator = String.format(",|:|%s", custom);
+        String separator = String.format(",|:|%s", Pattern.quote(custom));
         List<String> splitString = List.of(input.split(separator));
 
         return splitString;
     }
-
 }
