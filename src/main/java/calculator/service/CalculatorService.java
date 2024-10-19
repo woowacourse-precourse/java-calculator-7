@@ -1,7 +1,6 @@
 package calculator.service;
 
 import calculator.util.Constants;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,18 +20,27 @@ public class CalculatorService {
             separators.add(command.customSeparator());
         }
         String expression = command.expression();
-        String[] separatedValues = ExpressionSplitter.split(separators, expression);
-        Double[] values = convertToNumbers(separatedValues);
-        return sum(values);
+        return getExpressionResult(expression);
     }
 
-    private Double[] convertToNumbers(String[] separatedValues) {
-        List<Double> numbers = new ArrayList<>();
-        for (String value : separatedValues) {
-            validatePositiveNumber(value);
-            numbers.add(Double.parseDouble(value));
-        }
-        return numbers.toArray(new Double[0]);
+    private Number getExpressionResult(String expression) {
+        List<Double> values = splitExpressionToPositiveNumber(expression);
+        double result = sum(values);
+        return transformResultType(result);
+    }
+
+    private List<Double> splitExpressionToPositiveNumber(String expression) {
+        String[] separatedValues = ExpressionSplitter.split(separators, expression);
+        return convertToPositiveNumber(separatedValues);
+    }
+
+    private List<Double> convertToPositiveNumber(String[] separatedValues) {
+        return Arrays.stream(separatedValues)
+                .map(value -> {
+                    validatePositiveNumber(value);
+                    return Double.parseDouble(value);
+                })
+                .toList();
     }
 
     private void validatePositiveNumber(String value) {
@@ -41,20 +49,19 @@ public class CalculatorService {
         }
     }
 
-    private Number sum(Double[] values) {
-        double result = getSum(values);
+    private double sum(List<Double> values) {
+        return values.stream()
+                .mapToDouble(Double::doubleValue)
+                .sum();
+    }
+
+    private Number transformResultType(double result) {
         if (isWholeNumber(result)) {
             checkLongRange(result);
             return (long) result;
         }
         checkDoubleRange(result);
         return result;
-    }
-
-    private double getSum(Double[] values) {
-        return Arrays.stream(values)
-                .mapToDouble(Double::doubleValue)
-                .sum();
     }
 
     private boolean isWholeNumber(double result) {

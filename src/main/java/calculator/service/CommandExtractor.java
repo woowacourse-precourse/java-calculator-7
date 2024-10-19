@@ -36,10 +36,14 @@ public class CommandExtractor {
         }
 
         String customSeparator = matcher.group(1);
+        validateMultipleCustomSeparator(matcher);
+        return Separator.create(customSeparator);
+    }
+
+    private void validateMultipleCustomSeparator(Matcher matcher) {
         if (matcher.find()) {
             throw new IllegalArgumentException("커스텀 구분자는 하나만 추가할 수 있습니다.");
         }
-        return Separator.create(customSeparator);
     }
 
     private String extractExpression(String input) {
