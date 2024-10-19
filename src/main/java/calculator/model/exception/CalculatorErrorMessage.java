@@ -1,4 +1,4 @@
-package calculator.exception;
+package calculator.model.exception;
 
 public enum CalculatorErrorMessage {
     INVALID_CUSTOM_DELIMITER_SEPARATION_ERROR("커스텀 구분자 형식이 잘못되었습니다."),
