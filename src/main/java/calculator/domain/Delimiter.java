@@ -17,11 +17,6 @@ public class Delimiter {
         this.delimiters.add(delimiter);
     }
 
-    // 외부에 구분자들을 전달하는 getter 메서드
-    public List<String> getDelimiters() {
-        return this.delimiters;
-    }
-
     // 추출한 구분자들을 정규표현식 형태로 변경
     public String getDelimitersRegex() {
         return "[" + this.delimiters.stream()
