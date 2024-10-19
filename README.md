@@ -11,12 +11,12 @@
 
 ## 기능 구현
 - Calculator() 생성자 : Input된 문자열 공백 제거, ~~음수값 포함된 경우 예외처리, 숫자가 없는경우 "결과 : 0" 출력 처리~~
-- Custom_Deli() : 기본 구문자 및 Custom 구분자 추가 후 Custom 구분자 추가 구문 삭제
+- Custom_Deli() : 기본 구분자 및 Custom 구분자 추가 후 Custom 구분자 추가 구문 삭제
 - split_input() : del_deli_input 문자열 구분자로 구분하기
   - escapeDelimiters() : Delimiter 구분자 리스트에 특수 기호(+,*)등의 기호가 있는 경우 일반 문자로 변환 처리
   - double_check() : .의 위치와 개수로 실수인지 아닌지 확인
 - add() : parts에 있는 String형 숫자들을 합해서 출력
-- isEmpty() : 숫자가 없는경우와 아무 입력이 없는 경우 "결과 : 0" 출력
+- isEmpty() : ~~숫자가 없는경우와~~ 아무 입력이 없는 경우 "결과 : 0" 출력
 - isNegative() : 문자열에 음수값 있는경우 예외처리
 
 ## 고려 사항

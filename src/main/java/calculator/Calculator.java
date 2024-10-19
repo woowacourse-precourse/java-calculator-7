@@ -24,7 +24,7 @@ public class Calculator {
             return;
         }
 
-        if(isNegative())
+        if(isNegative() || noNum())
             throw new IllegalArgumentException("음수값이 포함되면 안됩니다.");
 
         Custom_Deli(); // 커스텀 구분자 추가
@@ -37,11 +37,14 @@ public class Calculator {
     }
 
     public boolean isEmpty(){
-        return (No_Space_Input.isEmpty() || !No_Space_Input.matches(".*\\d.*"));
+        return (No_Space_Input.isEmpty());
     }
 
     public boolean isNegative(){
         return No_Space_Input.matches(".*-\\d.*");
+    }
+    public boolean noNum(){
+        return !No_Space_Input.matches(".*\\d.*");
     }
 
     public void Custom_Deli(){

@@ -55,6 +55,14 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 입력_숫자없는경우() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("fawefdfwefae"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
 
     @Override
     public void runMain() {
