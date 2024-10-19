@@ -22,6 +22,7 @@ public class CalculatorController {
             service.getInputValues(input);
             System.out.println(calculator.getRawValue());
             service.validateInput();
+            service.sumOfList();
         }
     }
 

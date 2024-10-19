@@ -100,8 +100,8 @@ class ApplicationTest extends NsTest {
     @Test
     void 추출한_값_더하기() {
         // given
-        String input = "//+\\n1+2:3,4";
-        List<Integer> expectedList = Arrays.asList(1, 2, 3, 4);
+        String input = "//+\\n1+2:3+4+10";
+        List<Integer> expectedList = Arrays.asList(1, 2, 3, 4, 10);
 
         calculator.setProcessedValue(expectedList);
 
@@ -109,7 +109,7 @@ class ApplicationTest extends NsTest {
         int result = service.sumOfList();
 
         // then
-        assertThat(result).isEqualTo(10);
+        assertThat(result).isEqualTo(20);
     }
 
     @Test
