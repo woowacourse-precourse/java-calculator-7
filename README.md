@@ -61,10 +61,9 @@
 - InputValidator
   - isEmptyInput()
   - validateInputPattern()
+  - validateCustomDelimiterPattern()
+  - validateDefaultDelimiterPattern()
   - validateUnregisteredDelimiter()
-  - validateCustomDelimiterFormat()
-  - validateNumberFormat()
-  - validateEmptyNumber()
 - ResultPrinter
   - printResult()
 
