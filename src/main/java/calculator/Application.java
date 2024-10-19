@@ -11,19 +11,53 @@ public class Application {
 
         String str = "";
         if (input.charAt(0) == '/') {
-            str = String.valueOf(input.charAt(2));
-            input = input.substring(5);
+            try {
+                str = checkCustomDelimiter(input);
+                input = input.substring(5);
+            } catch (Exception e) {
+                throw e;
+            }
         }
 
         StringTokenizer st;
         st = new StringTokenizer(input, ",:" + str);
+        try {
+            checkInput(st);
+        } catch (Exception e) {
+            throw e;
+        }
 
         int sum = 0;
+        st = new StringTokenizer(input, ",:" + str);
         while (st.hasMoreTokens()) {
             sum += Integer.parseInt(st.nextToken());
         }
 
-        System.out.println("결과 : "+sum);
-        
+        System.out.println("결과 : " + sum);
+
+    }
+
+    private static String checkCustomDelimiter(String input) {
+        if (input.length() > 4
+                && input.charAt(1) == '/'
+                && input.charAt(3) == '\\'
+                && input.charAt(4) == 'n') {
+            return String.valueOf(input.charAt(2));
+        }
+        throw new IllegalArgumentException("잘못된 입력입니다");
+    }
+
+    private static void checkInput(StringTokenizer st) {
+        while (st.hasMoreTokens()) {
+            String s = st.nextToken();
+            try {
+                int num = Integer.parseInt(s);
+                if (num < 0) {
+                    throw new IllegalArgumentException("잘못된 입력입니다");
+                }
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("잘못된 입력입니다");
+            }
+        }
     }
 }
