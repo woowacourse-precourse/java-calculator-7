@@ -13,7 +13,7 @@ public class CustomDelimiterSplit{
         }
 
         if (idx == -1) {
-            throw new IllegalArgumentException("잘못된 입력값입니다.");
+            throw new IllegalArgumentException("잘못된 커스텀 입력값 형식입니다.");
         } else{
             customDelimiter += input.substring(2, idx).replace("\\", "\\\\").replace("|", "\\|");
             customDelimiter = CheckRegex.checkRegex(customDelimiter);

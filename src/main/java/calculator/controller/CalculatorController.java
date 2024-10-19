@@ -9,12 +9,14 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.NoSuchElementException;
 
 public class CalculatorController {
-    private int result;
-    private static final String basicDelimiter = ",|:";
+    //private int result;
+    private double result;
+    private static final String BASIC_DELIMITER = ",|:";
 
 
     public CalculatorController() {
         try {
+            System.out.println("덧셈할 문자열을 입력해 주세요.");
             String input = Console.readLine();
             int inputLen = input.length();
             String[] operandArr = getOperandArr(input, inputLen);
@@ -24,7 +26,6 @@ public class CalculatorController {
             } else{
                 calculate(operandArr);
             }
-
         } catch (NoSuchElementException e) {
             isNull();
         } finally {
@@ -40,9 +41,9 @@ public class CalculatorController {
         String type = checkInputType.checkType(input);
 
         if (type.equals("custom")){
-            operandArr = CustomDelimiterSplit.customDelimiterSplit(input, inputLen, basicDelimiter);
+            operandArr = CustomDelimiterSplit.customDelimiterSplit(input, inputLen, BASIC_DELIMITER);
         } else if(type.equals("basic")){
-            operandArr = BasicDelimiterSplit.basicDelimiterSplit(input, basicDelimiter);
+            operandArr = BasicDelimiterSplit.basicDelimiterSplit(input, BASIC_DELIMITER);
         } else {
             operandArr = null;
         }
@@ -66,7 +67,11 @@ public class CalculatorController {
 
 
     public void printResult(){
-        System.out.println("결과 : " + result);
+        if (result == (int)result){
+            System.out.println("결과 : " + (int) result);
+        } else{
+            System.out.println("결과 : " + result);
+        }
     }
 
 }
