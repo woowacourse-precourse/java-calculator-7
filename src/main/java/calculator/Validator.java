@@ -5,7 +5,7 @@ import java.util.Arrays;
 public abstract class Validator {
 
     public static boolean isCustom(String inputString) {
-        String regex = "^//.\\\\n.*$";
+        String regex = "^//.*\\\\n.*$";
         return inputString.matches(regex);
     }
 
