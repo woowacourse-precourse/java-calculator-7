@@ -23,6 +23,14 @@ public final class Numbers {
         this.numbers = getNumbers(formulaPart, separators);
     }
 
+    public String addAll() {
+        BigDecimal reduce = numbers.stream().reduce(BigDecimal.ZERO, BigDecimal::add);
+        if (reduce.remainder(BigDecimal.ONE).compareTo(BigDecimal.ZERO) == 0) {
+            return dropDecimalPart(reduce);
+        }
+        return reduce.toString();
+    }
+
     private static void throwIfSeparatorsIsNull(Separators separators) {
         if (null == separators) {
             throw new IllegalArgumentException("구분자는 null일 수 없습니다.");
@@ -35,16 +43,27 @@ public final class Numbers {
         }
     }
 
-    public String addAll() {
-        BigDecimal reduce = numbers.stream().reduce(BigDecimal.ZERO, BigDecimal::add);
-        if (reduce.remainder(BigDecimal.ONE).compareTo(BigDecimal.ZERO) == 0) {
-            return dropDecimalPart(reduce);
-        }
-        return reduce.toString();
-    }
-
     private static void throwIfFormulaPartIsNotSeparatorOrNumber(String numberPartOfFormula, Separators separators) {
-        for (char c : numberPartOfFormula.toCharArray()) {
+        char[] charArray = numberPartOfFormula.toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            char c = charArray[i];
+            if (separators.contains(c) &&
+                    Character.isDigit(c) &&
+                    (i + 1) < charArray.length &&
+                    charArray[i + 1] == DECIMAL_POINT) {
+                throw new IllegalArgumentException("정수부 없는 실수를 입력할 수 없습니다.");
+            }
+            if (!separators.contains(c) &&
+                    c == DECIMAL_POINT &&
+                    (i == 0 || !Character.isDigit(charArray[i - 1]))) {
+                throw new IllegalArgumentException("정수부 없는 실수를 입력할 수 없습니다.");
+            }
+            if (!separators.contains(c) &&
+                    c == DECIMAL_POINT &&
+                    ((i + 1 < charArray.length && separators.contains(charArray[i + 1]))
+                            || i + 1 == charArray.length)) {
+                throw new IllegalArgumentException("소수부 없는 실수를 입력할 수 없습니다.");
+            }
             if (separators.contains(c)) {
                 continue;
             }
