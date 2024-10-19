@@ -4,6 +4,8 @@ import camp.nextstep.edu.missionutils.Console;
 import calculator.common.exception.InvalidDelimiterException;
 import calculator.common.exception.InvalidNumberFormatException;
 import calculator.common.exception.NegativeNumberException;
+import calculator.common.io.Input;
+import calculator.common.io.Output;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,48 +15,33 @@ import java.util.stream.Collectors;
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
+        Input input = new Input();
+        Output output = new Output();
         try {
-            String input = getInput();
+            String userInput = input.getInput();
 
-            if (isEmpty(input)) {
-                printResult(0);
+            if (isEmpty(userInput)) {
+                output.printResult(0);
                 return;
             }
 
             List<String> delimiters;
             String numbers;
 
-            if (hasCustomDelimiter(input)) {
-                delimiters = extractAndValidateCustomDelimiter(input);
-                numbers = extractNumbers(input);
+            if (hasCustomDelimiter(userInput)) {
+                delimiters = extractAndValidateCustomDelimiter(userInput);
+                numbers = extractNumbers(userInput);
             } else {
                 delimiters = getDefaultDelimiters();
-                numbers = input;
+                numbers = userInput;
             }
 
             int result = calculateSum(splitNumbers(numbers, delimiters));
-            printResult(result);
+            output.printResult(result);
         } catch (IllegalArgumentException e) {
-            printError(e.getMessage());
+            output.printError(e.getMessage());
             throw e;
         }
-    }
-
-    private static String getInput() {
-        printMessage("덧셈할 문자열을 입력해 주세요.");
-        return Console.readLine();
-    }
-
-    private static void printMessage(String output) {
-        System.out.println(output);
-    }
-
-    private static void printError(String errorMessage) {
-        System.err.println(errorMessage);
-    }
-
-    private static void printResult(int result) {
-        System.out.println("결과 : " + result);
     }
 
     private static List<String> getDefaultDelimiters() {
