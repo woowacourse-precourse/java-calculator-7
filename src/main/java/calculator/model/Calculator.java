@@ -12,7 +12,7 @@ public class Calculator {
     private final int indexOfOne = 1;
     private final int indexOfTwo = 2;
     private final int indexOfThree = 3;
-    private final int beginningIndex = 4;
+    private final int beginningIndex = 5;
 
     public Calculator(String inputString){
         this.inputString = inputString;
@@ -21,9 +21,9 @@ public class Calculator {
     public List<String> splitList(String selectedSplitString){
         if(userDefined()){
             String stringList = inputString.substring(beginningIndex);
-            stringList.split(selectedSplitString);
+            String[] stringArray = stringList.split(selectedSplitString);
 
-            return List.of(stringList);
+            return List.of(stringArray);
         }
 
         String[] stringArray = inputString.split(selectedSplitString);
