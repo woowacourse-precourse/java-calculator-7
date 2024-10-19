@@ -80,6 +80,21 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 특수_연산자_사용1() {
+        assertSimpleTest(() -> {
+            run("//-\\n1-2-3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 특수_연산자_사용2() {
+        assertSimpleTest(() -> {
+            run("//^\\n1^2^3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
 
     @Override
     public void runMain() {
