@@ -1,4 +1,5 @@
 package calculator.separator.domain;
+import calculator.regex.domain.RegexPattern;
 import org.junit.jupiter.api.Test;
 
 
