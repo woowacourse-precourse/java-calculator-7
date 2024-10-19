@@ -34,8 +34,9 @@ public class StringValidator {
         if (hasNoDelimiterDeclaration(input)) {
             return !input.matches("^[0-9:,]+$");
         }
-        String customDelimiter = Pattern.quote(input.substring(2, input.indexOf("\\n")));
-        return !input.matches("^[\\d():" + customDelimiter + "]+$");
+        String customDelimiter = input.substring(2, input.indexOf("\\n"));
+        String calculationValue = input.substring(input.indexOf("\\n") + 2);
+        return !calculationValue.matches("^[\\d:" + Pattern.quote(customDelimiter) + "]+$");
     }
 
     private boolean hasNoDelimiterDeclaration(String input) {
