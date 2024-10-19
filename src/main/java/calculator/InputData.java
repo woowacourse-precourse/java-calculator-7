@@ -20,3 +20,7 @@ public class InputData {
         return this.userInput;
     }
 }
+
+enum InputType {
+    EMPTY, GENERAL, CUSTOM
+}
