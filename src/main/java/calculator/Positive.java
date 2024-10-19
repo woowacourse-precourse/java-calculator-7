@@ -1,7 +1,7 @@
 package calculator;
 
 public class Positive {
-	private final int num;
+	private int num;
 
 	private static void validateSplitNumber(final int splitNum){
 		if (splitNum <= 0) {
@@ -27,8 +27,8 @@ public class Positive {
 		return num;
 	}
 
-	public Positive add(Positive other) {
-		return new Positive(other.getNum() + this.num);
+	public void add(Positive other) {
+		this.num = this.num + other.getNum();
 	}
 
 	public void printResult() {
