@@ -8,6 +8,7 @@ public class Parser {
 
     private static final String CUSTOM = "custom";
     private static final String DEFAULT = "default";
+    private static final String IS_NOT_INTEGER_NUMBER = "정수 범위를 넘어간 숫자 입니다.";
 
     public static List<Integer> parse(String input) {
         List<Integer> list = new ArrayList<>();
@@ -57,7 +58,7 @@ public class Parser {
                 list.add(num);
             }
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(IS_NOT_INTEGER_NUMBER);
         }
     }
 
