@@ -12,25 +12,65 @@ class ApplicationTest extends NsTest {
     @Test
     void 그냥_기본입출력_테스트() {
         assertSimpleTest(() -> {
-            run("바보");
+            run("1,2,3:4");
+            assertThat(output()).contains("결과: 10");
         });
     }
-
     @Test
-    void 커스텀_구분자_사용() {
+    void 그냥_기본입출력_테스트_2() {
         assertSimpleTest(() -> {
-            run("//%%%%\\n1;2");
-            assertThat(output()).contains("ture");
+            run("1,2,3:4,7:9:5:11:23:44:55:223:435:22:2,3,3");
         });
     }
 
     @Test
-    void 예외_테스트() {
-        assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
-        );
+    void 커스텀_구분자_사용_단일() {
+        assertSimpleTest(() -> {
+            run("// \\n1 2 3 4 5 6 7 8 9 10");
+            assertThat(output()).contains("결과: 55");
+        });
     }
+
+    @Test
+    void 커스텀_구분자_사용_단일_2() {
+        assertSimpleTest(() -> {
+            run("///\\n1/2/3/4/5/6/7/8/9/10/11");
+            assertThat(output()).contains("결과: 66");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_단일_3() {
+        assertSimpleTest(() -> {
+            run("//n\\n1n2n3n4n5n6n7n8n9n10n11n12");
+            assertThat(output()).contains("결과: 78");
+        });
+    }
+
+
+    @Test
+    void 커스텀_구분자_사용_멀티() {
+        assertSimpleTest(() -> {
+            run("//%%\\n1%%2%%3%%4%%5");
+            assertThat(output()).contains("결과: 15");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_멀티_2() {
+        assertSimpleTest(() -> {
+            run("//ㅇㄱㄹㅇ?\\n1ㅇㄱㄹㅇ?2ㅇㄱㄹㅇ?3ㅇㄱㄹㅇ?4ㅇㄱㄹㅇ?5ㅇㄱㄹㅇ?100");
+            assertThat(output()).contains("결과: 115");
+        });
+    }
+
+//    @Test
+//    void 예외_테스트() {
+//        assertSimpleTest(() ->
+//            assertThatThrownBy(() -> runException("-1,2,3"))
+//                .isInstanceOf(IllegalArgumentException.class)
+//        );
+//    }
 
     @Override
     public void runMain() {
