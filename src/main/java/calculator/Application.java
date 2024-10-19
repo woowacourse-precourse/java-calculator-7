@@ -30,5 +30,12 @@ public class Application {
         customPolymerList = basicPolymerList.substring(0,basicPolymerList.length()-1) + customPolymer + "]";
     }
 
+    // 입력한 문자열에서 구분자를 기준으로 숫자 문자열 분리시키기
+    String[] inputStrList;
+    if(customPolymer.length() == 1){
+        inputStrList = inputStr.substring(5,inputStr.length()).split(customPolymerList);
+    } else {
+        inputStrList = inputStr.split(basicPolymerList);
+    }
     }
 }
