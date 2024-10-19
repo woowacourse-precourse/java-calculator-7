@@ -1,5 +1,6 @@
 package calculator;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 
@@ -41,17 +42,22 @@ public class InputSequence {
             validatePositive(number);
             return number;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("더 하는 값 중 너무 큰 수가 존재합니다.");
+            throw new IllegalArgumentException("더하는 값 중 너무 큰 수가 존재합니다.");
         }
     }
 
     private void validatePositive(long number) {
         if (number <= 0) {
-            throw new IllegalArgumentException("더 하는 값은 양수만 가능합니다.");
+            throw new IllegalArgumentException("더하는 값은 양수만 가능합니다.");
         }
     }
 
     public Long sum() {
-        return sequence.stream().reduce(SUM_INITIAL_VALUE, Long::sum);
+        return sequence.stream().reduce(SUM_INITIAL_VALUE, (a,b) -> {
+            if (a + b < 0) {
+                throw new IllegalArgumentException("더한 값이 너무 큽니다.");
+            }
+            return a + b;
+        });
     }
 }
