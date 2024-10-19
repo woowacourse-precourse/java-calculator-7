@@ -26,7 +26,7 @@ public class Separator {
     }
 
     private List<Double> split(String numberString) {
-        List<Double> numberList = new ArrayList<>();
+        List<Double> numberList;
         String[] symbolArray = symbols.split(CUSTOM_SEPARATOR_CENTER_REGEX);
         String replaceString = numberString;
         for (String symbol : symbolArray) {
@@ -34,20 +34,22 @@ public class Separator {
         }
         String[] numberArray = replaceString.split(COMMA);
         try{
-            addNumberToNumberList(numberArray, numberList);
+            numberList = addNumberToNumberList(numberArray);
         }catch (Exception e){
             throw new IllegalArgumentException("[ERROR] 구분자와 숫자만 입력해주세요");
         }
         return numberList;
     }
 
-    private void addNumberToNumberList(String[] numberArray, List<Double> numberList) {
+    private List<Double> addNumberToNumberList(String[] numberArray) {
+        List<Double> numberList = new ArrayList<>();
         for(String s : numberArray){
             if(!s.isEmpty()){
                 Double i = Double.parseDouble(s);
                 numberList.add(i);
             }
         }
+        return numberList;
     }
 
     private String getNumberString(String readString) {
@@ -56,7 +58,7 @@ public class Separator {
         return substring;
     }
 
-    private void addCustomSeparator(String readString) {
+    public void addCustomSeparator(String readString) {
         String substring = readString.substring(0, readString.indexOf(CUSTOM_SEPARATOR_END));
         substring = substring.replace(CUSTOM_SEPARATOR_START,"");
         if (!substring.isEmpty()) {
@@ -64,7 +66,7 @@ public class Separator {
         }
     }
 
-    private boolean hasCustomSeparator(String readString) {
+    public boolean hasCustomSeparator(String readString) {
         if(readString.contains(CUSTOM_SEPARATOR_START) && readString.contains(CUSTOM_SEPARATOR_END))return true;
         return false;
     }
