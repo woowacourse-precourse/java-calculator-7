@@ -110,7 +110,8 @@ ApplicationTest의 작동 원리 이해 중<br>
 
 숫자가 양의 정수형인지 확인해 주던 코드를 함수화함
 
-
+빈 문자열 입력시 `nosuchelementsexpetion`오류가 발생하였기에 해당 오류 발견시 <br>
+빈 문자열을 반환했음 
 
 ## 후기
 혼자 할 때는 github Desktop을 사용하여 commit을 진행하였기에 commit관련 오류가 많았음
@@ -129,7 +130,8 @@ ApplicationTest의 작동 원리 이해 중<br>
 assertSimpleTest 함수에서는 "\\n"으로 입력받아야 됨
 
 터미널에 입력할 때는 빈문자를 ""로 입력받아도 되지만<br>
-assertSimpleTest 함수에서는 라인에 빈문자열이 있는 것을 허용하지 않았음
+assertSimpleTest 함수에서는 라인에 빈문자열이 있는 것을 허용하지 않았음<br>
+빈 문자열에 생기는 오류를 감지해서 빈 문자열을 따로 반환함
 
 ## 참고
 [문제 설명](https://apply.techcourse.co.kr/assignment/14/mission/43)<br>
