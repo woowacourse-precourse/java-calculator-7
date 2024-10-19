@@ -5,7 +5,7 @@ import java.util.List;
 public class CalculatorService {
 
     public int calculate(String expression, List<String> separators) {
-        String[] splitExpression = expression.split(separators.toString());
+        String[] splitExpression = expression.split(String.join("|", separators));
 
         int result = 0;
         for (String number : splitExpression) {
