@@ -48,10 +48,28 @@ public class PlusCalculator implements PlusCalculatorInterface {
     public String extractCustomSeparator(String input) {
         int customSeparatorEnd = input.indexOf("\\n");
         String customSeparator = input.substring(2, customSeparatorEnd);
+        checkCustomSeparator(input, customSeparatorEnd);
         separators.add(customSeparator);
         return input.substring(customSeparatorEnd + 2);
     }
 
+    public void checkCustomSeparator(String input, int end) {
+        String customSeparator = input.substring(2, end);
+
+        if (customSeparator.equals("//")) {
+            throw new IllegalArgumentException();
+        }
+
+        for (char letter : customSeparator.toCharArray()) {
+            checkCustomSeparatorNumber(letter);
+        }
+    }
+
+    public void checkCustomSeparatorNumber(char letter) {
+        if (Character.isDigit(letter)) {
+            throw new IllegalArgumentException();
+        }
+    }
 
     public List<Integer> extractNumbers(String input) {
         List<Integer> integerNumbers = new ArrayList<>();

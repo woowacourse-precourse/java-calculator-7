@@ -37,6 +37,17 @@ public interface PlusCalculatorInterface {
     public String extractCustomSeparator(String input);
 
     /**
+     * 추출하려는 커스텀 구분자를 검증하는 메서드
+     */
+    public void checkCustomSeparator(String input, int end);
+
+    /**
+     * 커스텀 구분자의 한 글자를 숫자인지 검사하는 메서드
+     */
+    public void checkCustomSeparatorNumber(char letter);
+
+
+    /**
      * 구분자로 split하여 숫자 추출
      *
      * @return 문자열에서 숫자를 모은 List<Integer>
