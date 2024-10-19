@@ -25,11 +25,11 @@ public class Application {
     }
 
     // 커스텀 구분자 존재 시, 커스텀 구분자 부분 분리하여 구분자에 추가하기
-    private static String getCustomDelimiter(String str) {
+    private static String[] getCustomDelimiter(String str) {
         String regex = "//(.*?)\n";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(str);
-        return matcher.group(1);
+        return new String[]{matcher.group(1), str.substring(matcher.end())};
     }
     public static void main(String[] args) {
         // TODO: 프로그램 구현
@@ -38,7 +38,10 @@ public class Application {
         init_print();
         String str = input();
         if(checkCustomDelimiter(str)) {
-            delimiter.append("|").append(getCustomDelimiter(str));
+            String[] tempResult = getCustomDelimiter(str);
+            delimiter.append("|").append(tempResult[0]);
+            str = tempResult[1];
         }
+
     }
 }
