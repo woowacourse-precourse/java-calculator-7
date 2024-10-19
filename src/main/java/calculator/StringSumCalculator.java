@@ -16,15 +16,15 @@ public class StringSumCalculator {
         String input = inputHandler.input();
         if (input.startsWith("//") && input.contains("\\n")) {
             Delimiter customDelimiter = Delimiter.createCustomDelimiter(input);
-            String substring = input.substring(input.indexOf("\\n") + 2);
-            extracted(substring, customDelimiter);
+            String numbersWithDelimiter = input.substring(input.indexOf("\\n") + 2);
+            splitAndSum(numbersWithDelimiter, customDelimiter);
         } else {
             Delimiter customDelimiter = Delimiter.createDefaultDelimiter();
-            extracted(input, customDelimiter);
+            splitAndSum(input, customDelimiter);
         }
     }
 
-    private void extracted(String numbersWithDelimiter, Delimiter delimiter) {
+    private void splitAndSum(String numbersWithDelimiter, Delimiter delimiter) {
         String[] splitedNumbers = DelimiterSeparator.split(numbersWithDelimiter, delimiter);
         List<PositiveNumber> numbers = NumberListConverter.toNumbers(splitedNumbers);
         PositiveNumber sum = Calculator.sum(numbers);
