@@ -32,8 +32,8 @@ public class Extractor {
         delimiterManager.addCustomDelimiter(customDelimiter);
     }
 
-    private String extractGroupByPattern(String input, String Regex) {
-        Pattern pattern = Pattern.compile(Regex);
+    private String extractGroupByPattern(String input, String regex) {
+        Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(input);
         validateMatcher(matcher);
         return matcher.group(1);
