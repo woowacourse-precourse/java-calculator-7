@@ -20,6 +20,27 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자_사용() {
+        StringAddCalculator calculator = new StringAddCalculator();
+        assertThat(calculator.splitAndSum("//;\n1;2;3")).isEqualTo(6);
+    }
+
+    @Test
+    void 예외_테스트_커스텀_구분자_누락() {
+        StringAddCalculator calculator = new StringAddCalculator();
+        assertThatThrownBy(() -> calculator.splitAndSum("//\n1;2;3"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("커스텀 구분자를 찾을 수 없습니다.");
+    }
+
+    @Test
+    void 예외_테스트_커스텀_구분자_기본_구분자_혼합() {
+        StringAddCalculator calculator = new StringAddCalculator();
+        assertThatThrownBy(() -> calculator.splitAndSum("//\n1.2;3"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     void 예외_테스트_숫자가_아닌_값_입력() {
         StringAddCalculator calculator = new StringAddCalculator();
         assertThatThrownBy(() -> calculator.splitAndSum("가,2:3"))

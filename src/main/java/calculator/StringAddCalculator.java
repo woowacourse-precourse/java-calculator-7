@@ -1,17 +1,37 @@
 package calculator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringAddCalculator {
     public double splitAndSum(String exp) {
+        String[] numbers;
+        String delimiter = "";
+        double result = 0;
+
+        // 빈 문자열 확인
         if(exp==null || exp.trim().isEmpty()) {
             throw new IllegalArgumentException("문자열이 입력되지 않았습니다.");
         }
-        String[] numbers = exp.split(",|:");
-        double result = 0.0;
+
+        // 커스텀 문자열 확인
+        if(exp.startsWith("//")) {
+            Matcher matcher = Pattern.compile("//(.+)\n").matcher(exp);
+            if(matcher.find()) {
+                delimiter = matcher.group(1);
+                exp = exp.substring(exp.indexOf("\n") + 1);
+            } else {
+                throw new IllegalArgumentException("커스텀 구분자를 찾을 수 없습니다.");
+            }
+        } else {
+            delimiter = ",|:";
+        }
+
+        numbers = exp.split(delimiter);
 
         for(String number : numbers) {
-            double strToNum = 0.0;
+            double strToNum;
             try {
-                //result += Integer.parseInt(num);
                 strToNum = Double.parseDouble(number);
                 result += strToNum;
                 if(strToNum <= 0)
