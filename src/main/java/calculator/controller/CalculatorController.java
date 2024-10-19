@@ -20,6 +20,7 @@ public class CalculatorController {
         outputView.printPrompt();
         String input = inputView.strInput();
         int sum = calculatorService.calculateSumFromString(input);
+        outputView.printSum(sum);
     }
 
 }
