@@ -29,7 +29,13 @@ public class Application {
         Application app = new Application();
         String str = Console.readLine();
         try {
-            System.out.println(app.solution(str));
+            if(str.startsWith("//")) {
+                System.out.println(app.Custom(str));
+            } else if(str!=null && str.isEmpty()) {
+                System.out.println("0");
+            } else {
+                System.out.println(app.Separate(str));
+            }
         } catch (IllegalArgumentException e) {
             return;
         }
