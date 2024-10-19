@@ -27,6 +27,7 @@
 - [x] 등록된 구분자인지 확인한다.
 - [x] 구분자들을 조합하여 정규표현식을 생성한다.
 - [ ] 커스텀 구분자를 파싱한다.
+- [ ] 기존 입력에서 커스텀 구분자를 제외한 문자열을 반환한다.
 
 ## 추가 객체 도출
 추가 기능으로부터 객체를 도출한다.
@@ -45,6 +46,7 @@
   - parse()
   - buildDelimiterRegex()
   - parseCustomDelimiter()
+  - removeCustomDelimiter()
 - Calculator
   - sumNumbers()
 - DelimiterManager
