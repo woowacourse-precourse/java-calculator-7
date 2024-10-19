@@ -18,7 +18,7 @@ public class Separator {
     public Numbers getNumbers(String readString) {
         String numberString = readString;
         if(hasCustomSeparator(readString)){
-            addCustomSeparator(readString);
+            symbols = addCustomSeparator(readString);
             numberString = getNumberString(readString);
         }
         List<Double> numberList = split(numberString);
@@ -58,12 +58,14 @@ public class Separator {
         return substring;
     }
 
-    public void addCustomSeparator(String readString) {
+    private String addCustomSeparator(String readString) {
+        String symbolsTmp = symbols;
         String substring = readString.substring(0, readString.indexOf(CUSTOM_SEPARATOR_END));
         substring = substring.replace(CUSTOM_SEPARATOR_START,"");
         if (!substring.isEmpty()) {
-            symbols = symbols + CUSTOM_SEPARATOR_CENTER +substring;
+            symbolsTmp = symbolsTmp + CUSTOM_SEPARATOR_CENTER + substring;
         }
+        return symbolsTmp;
     }
 
     public boolean hasCustomSeparator(String readString) {
