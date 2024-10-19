@@ -28,6 +28,7 @@
 ## Plus Class
 
 - [x] 테스트 코드 작성
+- [ ] 문자열 정수로 변경 기능 구현
 - [ ] 누적 합 기능 구현
 
 ## Calculator Class
