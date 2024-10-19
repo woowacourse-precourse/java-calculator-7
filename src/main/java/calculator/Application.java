@@ -1,7 +1,9 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 public class Application {
 
@@ -22,6 +24,18 @@ public class Application {
         return delimiters;
     }
 
+    public static ArrayList<String> getNumbers(String input, HashSet<String> delimiters) {
+        String numberString = input;
+        if (hasCustomDelimiter(input)) {
+            numberString = input.substring(input.indexOf("\\n") + 2);
+        }
+        for (String delimiter : delimiters) {
+            numberString = numberString.replace(delimiter, ",");
+        }
+
+        return new ArrayList<>(List.of(numberString.split(",")));
+    }
+
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
@@ -31,5 +45,6 @@ public class Application {
 
         boolean hasCustomDelimiter = hasCustomDelimiter(input);
         HashSet<String> delimiters = getDelimiters(input, hasCustomDelimiter);
+        ArrayList<String> numbers = getNumbers(input, delimiters);
     }
 }
