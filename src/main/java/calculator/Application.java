@@ -1,29 +1,42 @@
 package calculator;
 
-import static calculator.calculate.Calculator.getResult;
+import static calculator.calculate.Calculator.getNumSum;
 import static calculator.calculate.Calculator.printResult;
 import static calculator.input.StringInput.getInput;
-import static calculator.split.StringSplit.getBackString;
-import static calculator.split.StringSplit.getFrontString;
-import static calculator.split.StringSplit.splitStringBySeparator;
-import static calculator.validate.StringValidate.validateFrontString;
+import static calculator.split.StringSplit.getCustomCalFormula;
+import static calculator.split.StringSplit.getCustomSeparator;
+import static calculator.split.StringSplit.getDefaultCalFormula;
+import static calculator.split.StringSplit.getDefaultSeparator;
+import static calculator.split.StringSplit.splitCalFormulaBySeparator;
+import static calculator.validate.StringValidate.isInputStartWithSlash;
+import static calculator.validate.StringValidate.validateCalFormula;
+import static calculator.validate.StringValidate.validateNewLineInput;
+import static calculator.validate.StringValidate.validateSeperator;
 
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        String input = getInput();
-        String frontString = getFrontString(input);
-        String backString = getBackString(input);
-
+        String seperator, calFormula;
         int[] numArr;
         int result;
 
-        if (validateFrontString(frontString)) {
-            numArr = splitStringBySeparator(backString, frontString);
-            result = getResult(numArr);
-            printResult(result);
+        String input = getInput();
+
+        // 커스텀 구분자
+        if (isInputStartWithSlash(input)) {
+            validateNewLineInput(input);
+            seperator = getCustomSeparator(input);
+            calFormula = getCustomCalFormula(input);
+        } else { // 기본 구분자
+            seperator = getDefaultSeparator();
+            calFormula = getDefaultCalFormula(input);
         }
 
+        validateSeperator(seperator);
+        validateCalFormula(calFormula, seperator);
+        numArr = splitCalFormulaBySeparator(calFormula, seperator);
+        result = getNumSum(numArr);
+        printResult(result);
     }
 
 }
