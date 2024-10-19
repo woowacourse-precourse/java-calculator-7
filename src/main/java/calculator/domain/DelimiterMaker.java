@@ -11,23 +11,43 @@ public class DelimiterMaker {
 	private static final String DEFAULT_DELIMITER_COLON = ":";
 	private static final String CUSTOM_DELIMITER_PREFIX = "//";
 	private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
+	private static final int STRING_START_INDEX = 0;
+	private static final String BLANK_STRING = "";
 
 	public List<String> getDelimitersFrom(String delimiterMixedNumbers) {
 
 		List<String> delimiters = new ArrayList<>(Arrays.asList(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON));
 
 		String delimiter = getDelimiterStringFrom(delimiterMixedNumbers);
-		String[] split = delimiter.split(Pattern.quote(CUSTOM_DELIMITER_SUFFIX));
-		Arrays.stream(split)
-			.filter(separator -> separator.contains(CUSTOM_DELIMITER_PREFIX))
-			.map(separator -> separator.replace(CUSTOM_DELIMITER_PREFIX, ""))
+		String[] splitDelimiter = delimiter.split(Pattern.quote(CUSTOM_DELIMITER_SUFFIX));
+
+		validateAllDelimiter(splitDelimiter);
+
+		Arrays.stream(splitDelimiter)
+			.map(separator -> separator.replace(CUSTOM_DELIMITER_PREFIX, BLANK_STRING))
 			.forEach(delimiters::add);
 
 		return delimiters;
 	}
 
+	private void validateAllDelimiter(String[] splitDelimiter) {
+		Arrays.stream(splitDelimiter)
+			.forEach(this::validateDelimiter);
+	}
+
+	private void validateDelimiter(String delimiter) {
+		validateCustomDelimiterFormat(delimiter);
+	}
+
+	private void validateCustomDelimiterFormat(String delimiter) {
+		if (!delimiter.startsWith(CUSTOM_DELIMITER_PREFIX)) {
+			throw new IllegalArgumentException("Invalid delimiter: " + delimiter);
+		}
+	}
+
 	public String getDelimiterStringFrom(String delimiterMixedNumbers) {
-		return delimiterMixedNumbers.substring(delimiterMixedNumbers.lastIndexOf(CUSTOM_DELIMITER_SUFFIX) + 1);
+		return delimiterMixedNumbers.substring(STRING_START_INDEX,
+			delimiterMixedNumbers.lastIndexOf(CUSTOM_DELIMITER_SUFFIX));
 	}
 
 	public boolean hasCustomSeparator(String input) {
