@@ -10,14 +10,36 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
     @Test
+    void 커스텀_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("//;\\n1");
+            assertThat(output()).contains("결과 : 1");
+        });
+    }
+
+    @Test
+    void 예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void 커스텀_구분자_사용_2() {
+        assertSimpleTest(() -> {
+            run("2;//;\\n37:3,7");
+            assertThat(output()).contains("결과 : 49");
+        });
+    }
+
+    /*
+    @Test
     void Input_음수판단(){
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-15:523"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
-
-    /*
     @Test
     void 구분된_숫자_실수판별_성공(){
         assertSimpleTest(() ->{
@@ -97,22 +119,9 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("7228");
         });
     }
-    @Test
-    void 커스텀_구분자_사용() {
-        assertSimpleTest(() -> {
-            run("//;\\n1");
-            assertThat(output()).contains("결과 : 1");
-        });
-    }
 
-    @Test
-    void 예외_테스트() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("-1,2,3"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
-    }
-    */
+     */
+
     @Override
     public void runMain() {
         Application.main(new String[]{});

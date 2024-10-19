@@ -21,15 +21,27 @@ public class Calculator {
 
         this.No_Space_Input = input.replaceAll("\\s+", "");
     }
-
+    /*
     public void print(){
         Custom_Deli(); // 커스텀 구분자 추가
-        split_input(); // 커스텀 구분자 구문 삭제된 문자열에서 구분자 출력
-        double_check(parts);
+        split_input(); // 커스텀 구분자 구문 삭제된 문자열에서 구분자를 이용해 문자열 구분 후 parts 리스트 저장
+        double_check(parts); // 구분자로 나뉜 문자열 실수형 체크
         System.out.println(parts);
         //System.out.println(Delimiter);
         //System.out.println(del_deli_input);
         //System.out.println(No_Space_Input);
+    }
+     */
+
+    public void add(){
+        double sum = 0;
+        Custom_Deli(); // 커스텀 구분자 추가
+        split_input(); // 커스텀 구분자 구문 삭제된 문자열에서 구분자를 이용해 문자열 구분 후 parts 리스트 저장
+        double_check(parts); // 구분자로 나뉜 문자열 실수형 체크
+        for(String num : parts){
+            sum += Double.parseDouble(num);
+        }
+        System.out.println("결과 : " + sum);
     }
 
     public void Custom_Deli(){
