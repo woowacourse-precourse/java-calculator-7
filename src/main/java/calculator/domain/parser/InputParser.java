@@ -1,16 +1,13 @@
 package calculator.domain.parser;
 
-import static calculator.domain.CalculatorConstants.CUSTOM_DELIMITER_PREFIX;
 import static calculator.domain.CalculatorConstants.CUSTOM_DELIMITER_SUFFIX;
 import static calculator.domain.CalculatorConstants.DEFAULT_DELIMITER_COLON;
 import static calculator.domain.CalculatorConstants.DEFAULT_DELIMITER_COMMA;
 import calculator.domain.validator.InputValidator;
 
 import calculator.util.FilteredEmptyString;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 public class InputParser {
