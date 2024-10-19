@@ -2,6 +2,16 @@ package calculator;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        try {
+            String input = new InputView().readInput();
+
+            int result = new Calculator().calculate(input);
+
+            new OutputView().printResult(result);
+
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
+
