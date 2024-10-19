@@ -1,7 +1,9 @@
 package calculator.service;
 
-import calculator.util.StringNumberSumCalculator;
+import calculator.model.NumberSumCalculator;
 import calculator.validator.DelimiterNumberValidator;
+
+import java.util.List;
 
 public class CalculatorService {
 
@@ -15,15 +17,9 @@ public class CalculatorService {
 
     public int calculateSum(String input) {
         String[] stringNumbers = delimiterService.splitNumbers(input);
-        int[] numbers = delimiterNumberValidator.isValidNumber(stringNumbers);
-        return sumNumbers(numbers);
-    }
-
-    private int sumNumbers(int[] numbers) {
-        if (numbers.length == 1) {
-            return numbers[0];
-        }
-        return StringNumberSumCalculator.sum(numbers);
+        List<Integer> validNumber = delimiterNumberValidator.isValidNumber(stringNumbers);
+        NumberSumCalculator numberSumCalculator = new NumberSumCalculator(validNumber);
+        return numberSumCalculator.sum();
     }
 
 }
