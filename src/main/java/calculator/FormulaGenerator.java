@@ -11,9 +11,9 @@ public class FormulaGenerator {
 
     private String makeFormula(String input) {
         if(input.isEmpty()) return "0";
-        if(this.input.charAt(0)=='/'){
-            InputParser inputParser = new InputParser(this.input);
-            this.input = inputParser.getparsedInput();
+        if(input.charAt(0)=='/'){
+            InputParser inputParser = new InputParser(input);
+            input = inputParser.getparsedInput();
         }
         for (int i = 1; i < input.length(); i++) {
             input = changeSeparator(input, i);
