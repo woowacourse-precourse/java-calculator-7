@@ -1,28 +1,33 @@
 package calculator;
 
 public class Validator {
+    private String input;
 
-    public static String validateInput(String input) {
-//        if ()
-//            throw new IllegalArgumentException("");
-        if (input.length() > 4) { //TODO 더 좋은 조건?
-            input = separateCustomDelimiter(input);
-        }
-        if (isInvalidCharacter(input)) {
-            throw new IllegalArgumentException("잘못된 입력");
-        }
-        return input;
+    public Validator(String input) {
+        this.input = input;
     }
 
-    private static String separateCustomDelimiter(String input) {
-        if (input.substring(0, 2).equals("//") && input.contains("\\n")) {
-            Delimiter.extractDelimiter(input);
-            input = input.substring(input.indexOf("\\n") + 2, input.length());
+    public void validateInput() {
+        if (isEmptyString()) {
+            return;
         }
-        return input;
+        if (isInvalidCharacter()) {
+            throw new IllegalArgumentException("잘못된 문자 포함됨");
+        }
+        if (isNegativeNumber()) {
+            throw new IllegalArgumentException("양수만 입력 가능");
+        }
     }
 
-    private static boolean isInvalidCharacter(String input) {
+    private boolean isNegativeNumber() {
+        return input.contains("-");
+    }
+
+    private boolean isEmptyString() {
+        return input.isEmpty();
+    }
+
+    private boolean isInvalidCharacter() {
         for (char c : input.toCharArray()) {
             if (!validateCharacter(c)) {
                 return true;
@@ -31,7 +36,7 @@ public class Validator {
         return false;
     }
 
-    private static boolean validateCharacter(char c) {
+    private boolean validateCharacter(char c) {
         return Character.isDigit(c) || Delimiter.delimiter.indexOf(c) != -1;
     }
 }
