@@ -2,17 +2,11 @@ package calculator.repository;
 
 import java.util.List;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CalculatorRepositoryTest {
 
-    private CalculatorRepository repository;
-
-    @BeforeEach
-    void setUp() {
-        repository = new CalculatorRepository();
-    }
+    private CalculatorRepository repository = new CalculatorRepository();
 
     @Test
     void 기본_구분자_설정_성공_테스트() {

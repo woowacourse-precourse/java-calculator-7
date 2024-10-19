@@ -2,6 +2,8 @@ package calculator.service;
 
 import calculator.parser.InputParser;
 import calculator.repository.CalculatorRepository;
+import java.math.BigDecimal;
+import java.util.List;
 
 public class CalculatorService {
 
@@ -16,12 +18,15 @@ public class CalculatorService {
     public int parseInputAndCalculate(String input) {
         String[] splitInput = inputParser.parseInput(input);
         String delimiterPart = splitInput[0];
-        String expressionPart = splitInput[1];
+        String calculationPart = splitInput[1];
 
         if (delimiterPart != null) {
             Character customDelimiter = inputParser.parseCustomDelimiterPart(delimiterPart);
             calculatorRepository.createCustomDelimiter(customDelimiter);
         }
+
+        List<Character> delimiters = calculatorRepository.getDelimiters();
+        List<BigDecimal> numbers = inputParser.splitCalculationPartByDelimiters(calculationPart, delimiters);
 
         // TODO : 계산 수행 로직 작성
 

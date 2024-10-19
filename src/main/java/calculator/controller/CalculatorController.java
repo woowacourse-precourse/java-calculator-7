@@ -2,6 +2,7 @@ package calculator.controller;
 
 import calculator.service.CalculatorService;
 import calculator.view.ApplicationView;
+import java.util.Objects;
 
 public class CalculatorController {
 
@@ -29,8 +30,8 @@ public class CalculatorController {
     }
 
     private void validateInput(String input) {
-        if (!input.startsWith("//") && !Character.isDigit(input.charAt(0))) {
-            throw new IllegalArgumentException("입력 값이 숫자 또는 //로 시작해야 합니다.");
+        if (!Objects.equals(input, "") && !input.startsWith("//") && !Character.isDigit(input.charAt(0))) {
+            throw new IllegalArgumentException("입력 값은 공백, 숫자, //로 시작해야 합니다.");
         }
     }
 }

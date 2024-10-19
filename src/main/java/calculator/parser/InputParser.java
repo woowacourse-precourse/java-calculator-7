@@ -1,8 +1,11 @@
 package calculator.parser;
 
 import calculator.validator.InputValidator;
+import java.math.BigDecimal;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class InputParser {
 
@@ -44,5 +47,28 @@ public class InputParser {
         inputValidator.validateDelimiterIsNotDigit(findCustomDelimiter);
 
         return findCustomDelimiter;
+    }
+
+    public List<BigDecimal> splitCalculationPartByDelimiters(String calculationPart, List<Character> delimiters) {
+        String delimiterRegex = buildDelimiterRegex(delimiters);
+        return getNumbersWithDelimiterRegex(calculationPart, delimiterRegex);
+    }
+
+    private List<BigDecimal> getNumbersWithDelimiterRegex(String calculationPart, String delimiterRegex) {
+        return List.of(calculationPart.split(delimiterRegex)).stream()
+                .map(value -> {
+                    if (value.isEmpty()) {
+                        return BigDecimal.ZERO;
+                    } else {
+                        return new BigDecimal(value);
+                    }
+                })
+                .collect(Collectors.toList());
+    }
+
+    private String buildDelimiterRegex(List<Character> delimiters) {
+        return delimiters.stream()
+                .map(delimiter -> Pattern.quote(delimiter.toString()))
+                .collect(Collectors.joining("|"));
     }
 }

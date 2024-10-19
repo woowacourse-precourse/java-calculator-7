@@ -15,6 +15,6 @@ public class CalculatorControllerTest {
         // when & then
         Assertions.assertThatThrownBy(() -> controller.calculate(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("입력 값이 숫자 또는 //로 시작해야 합니다.");
+                .hasMessage("입력 값은 공백, 숫자, //로 시작해야 합니다.");
     }
 }
