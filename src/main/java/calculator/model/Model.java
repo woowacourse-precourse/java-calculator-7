@@ -26,16 +26,18 @@ public class Model {
             input = matcher.group(2); // 커스텀 구분자 이후의 숫자 추출
         }
 
-        return sum(split(input, delimiters));
-    }
-
-    // 문자열을 구분자로 숫자 분리
-    private String[] split(String input, String delimiters) {
-
+        return sum(input.split(delimiters)); // 숫자를 구분자로 분리 후 덧셈
     }
 
     // 숫자를 모두 더하는 메소드
     private int sum(String[] numbArr) {
+        int result = 0;
+        for (String num : numbArr) {
+            int n = Integer.parseInt(num);
+            if (n < 0) throw new IllegalArgumentException("음수는 입력할 수 없습니다."); // 음수 예외처리
 
+            result += n;
+        }
+        return result;
     }
 }
