@@ -11,11 +11,11 @@ public class InputHandler {
 		this.validatingParser = validatingParser;
 	}
 
-	public static InputHandler of(ValidatingParser validatingParser) {
+	public static InputHandler from(ValidatingParser validatingParser) {
 		return new InputHandler(validatingParser);
 	}
 
-	public List<Integer> getValidatedUserInput() {
+	public List<Integer> getValidatedNumbersFromUserInput() {
 		String userInput = Console.readLine();
 		return validatingParser.validatedNumbersFrom(userInput);
 	}
