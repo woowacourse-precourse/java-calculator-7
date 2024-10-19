@@ -27,11 +27,13 @@ class CalculatorControllerTest extends NsTest {
         final String inputString3 = "///\\n6/7:8,9";
         final String inputString4 = "//.\\n.";
         final String inputString5 = "// \\n10 20 30 40";
+        final String inputString6 = "//;a.\\\\n50;a.\\60;a.\\70";
         final BigInteger result1 = BigInteger.valueOf(23);
         final BigInteger result2 = BigInteger.valueOf(10);
         final BigInteger result3 = BigInteger.valueOf(30);
         final BigInteger result4 = BigInteger.ZERO;
         final BigInteger result5 = BigInteger.valueOf(100);
+        final BigInteger result6 = BigInteger.valueOf(180);
         //when
         //then
         assertAll(
@@ -54,6 +56,10 @@ class CalculatorControllerTest extends NsTest {
                 () -> assertSimpleTest(() -> {
                     run(inputString5);
                     assertThat(output()).contains(String.format(RESULT, result5));
+                }),
+                () -> assertSimpleTest(() -> {
+                    run(inputString6);
+                    assertThat(output()).contains(String.format(RESULT, result6));
                 })
         );
     }
@@ -61,7 +67,7 @@ class CalculatorControllerTest extends NsTest {
 
     @ParameterizedTest
     @DisplayName("사용자가 올바르지 않은 형식을 입력하여 예외가 발생한다.")
-    @ValueSource(strings = {"///;\\n1;2;3", "1;2;3//;\\n", "1;2,3", "-1;2;3"})
+    @ValueSource(strings = {"///;\\n1;2;3", "1;2;3//;\\n", "1;2,3", "-1;2;3", "//;\\n1;2;//;\\n;3"})
     void invalidInputTest(final String inputString) throws Exception {
         //given
         //when
