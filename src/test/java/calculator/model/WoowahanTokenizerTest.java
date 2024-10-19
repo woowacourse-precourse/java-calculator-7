@@ -9,38 +9,44 @@ import org.junit.jupiter.api.Test;
 
 public class WoowahanTokenizerTest {
     @Test
-    void getCustomSeparatorFromInputString() {
+    void 커스텀_구분자_포함한_덧셈_문자열_입력() {
         String inputString = "//!\n0!2!3!4";
         WoowahanTokenizer wt = new WoowahanTokenizer(inputString);
 
-        wt.setCustomSeparator();
         assertEquals("0!2!3!4", wt.getInputString());
         assertEquals("!", wt.getCustomSeparator());
     }
 
     @Test
-    void tokenizeStringTest() {
+    void 구분자들로_문자열_정상_분리_여부_테스트() {
         String inputString = "//!\n0!2:3,4";
         WoowahanTokenizer wt = new WoowahanTokenizer(inputString);
 
-        wt.setCustomSeparator();
         List<String> expectedValues = new ArrayList<>();
         expectedValues.add("0");
         expectedValues.add("2");
         expectedValues.add("3");
         expectedValues.add("4");
-        assertEquals(expectedValues, wt.tokenizeString());
+        assertEquals(expectedValues, wt.getStringTokens());
 
 
     }
 
     @Test
-    void emptyInput() {
+    void 아무_입력도_주어지지_않았을_때() {
         String inputString = "";
         WoowahanTokenizer wt = new WoowahanTokenizer(inputString);
 
-        wt.setCustomSeparator();
         assertEquals("", wt.getInputString());
         assertEquals("", wt.getCustomSeparator());
+    }
+
+    @Test
+    void 커스텀_구분자만_문자열로_주어졌을_때() {
+        String inputString = "//!\n";
+        WoowahanTokenizer wt = new WoowahanTokenizer(inputString);
+
+        assertEquals("", wt.getInputString());
+        assertEquals("!", wt.getCustomSeparator());
     }
 }
