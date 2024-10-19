@@ -6,6 +6,9 @@ public class Number {
     private final BigDecimal value;
 
     public Number(BigDecimal value) {
+        if (value.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException();
+        }
         this.value = value;
     }
 
