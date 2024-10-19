@@ -2,23 +2,23 @@ package calculator.checkMethod;
 
 public class CheckIsPositiveNum {
 
-    public static int isPositiveNum(String operand){
-        int operandInt;
+    public static double isPositiveNum(String operand){
+        double operandNum;
 
-        if (operand.equals("")){
+        if (operand.isEmpty()){
             return 0;
         }
 
         try{
-            operandInt = Integer.parseInt(operand);
+            operandNum = Double.parseDouble(operand);
         } catch (NumberFormatException e){
-            throw new IllegalArgumentException("잘못된 입력값입니다.");
+            throw new IllegalArgumentException("올바른 숫자 형식으로 바꿀 수 없습니다.");
         }
 
-        if (operandInt > 0){
-            return operandInt;
+        if (operandNum > 0){
+            return operandNum;
         } else{
-            throw new IllegalArgumentException("양수가 아닙니다.");
+            throw new IllegalArgumentException("피연산자로 양수가 아닌 값을 입력하셨습니다.");
         }
     }
 
