@@ -1,4 +1,4 @@
-package calculator.domain.input;
+package calculator.domain;
 
 import java.util.Arrays;
 
