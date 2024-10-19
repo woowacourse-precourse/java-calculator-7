@@ -11,12 +11,19 @@ public class Calculate {
     }
 
     public Long sum() {
-        if (numbers != null) {
-            result = numbers.stream()
-                    .mapToLong(Long::longValue)
-                    .sum();
+        for (Long number : numbers) {
+            result = addWithOverFlowCheck(result, number);
         }
+
         return result;
 
+    }
+
+    private long addWithOverFlowCheck(long result, Long number) {
+        try {
+            return Math.addExact(result, number);
+        } catch (ArithmeticException e) {
+            throw new IllegalArgumentException("계산기가 연산 할 수 있는 범위를 넘어섰습니다.");
+        }
     }
 }
