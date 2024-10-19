@@ -4,12 +4,11 @@ import calculator.constant.ErrorMessage;
 
 public class ValidateUtils {
     public static void checkNumberIsValid(String number) {
-        if (isNumeric(number)) {
-            if (Integer.parseInt(number) < 0) {
-                throw new IllegalArgumentException(ErrorMessage.NEGATIVE_NUMBER_INPUT.getMessage());
-            }
-        } else {
+        if (!isNumeric(number)) {
             throw new IllegalArgumentException(ErrorMessage.NOT_A_NUMBER.getMessage());
+        }
+        if (Integer.parseInt(number) < 0) {
+            throw new IllegalArgumentException(ErrorMessage.NEGATIVE_NUMBER_INPUT.getMessage());
         }
     }
 
