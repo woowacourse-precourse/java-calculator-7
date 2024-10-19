@@ -1,5 +1,6 @@
 package calculator.controller;
 
+import calculator.model.Calculate;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Calculator {
@@ -14,6 +15,10 @@ public class Calculator {
 
     private InputProcessor readInput() {
         String line = Console.readLine();
+
+        InputProcessor inputProcessor = readInput();
+
+        Calculate calculate = new Calculate(inputProcessor.numbers());
 
         return new InputProcessor(line);
 
