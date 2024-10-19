@@ -67,5 +67,6 @@ public class Application {
 
     private static void showResult(int result) {
         System.out.printf("결과 : %d%n", result);
+        Console.close();
     }
 }
