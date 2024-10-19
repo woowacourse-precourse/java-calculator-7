@@ -65,6 +65,33 @@ class ApplicationTest extends NsTest {
 
     }
 
+    @Test
+    void 구분자가_처음_나올경우_예외테스트() {
+
+        String userInput = ",1:2,3";
+
+        inputString = new InputString(userInput);
+
+        assertThatThrownBy(() -> runException(userInput))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] 문자열의 처음에 구분자가 올 수 없습니다.");
+
+    }
+
+    @Test
+    void 커스텀_구분자가_처음_나올경우_예외테스트() {
+
+        String userInput = "//!\\n!1,2:3";
+
+        inputString = new InputString(userInput);
+
+        assertThatThrownBy(() -> runException(userInput))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] 문자열의 처음에 커스텀 구분자가 올 수 없습니다.");
+
+    }
+
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
