@@ -31,13 +31,18 @@ public class CalculatorServiceImpl implements CalculatorService {
             int idx1 = userInput.indexOf(START_CUSTOM_DELIMITER) + 2;
             int idx2 = userInput.lastIndexOf(END_CUSTOM_DELIMITER);
 
-            StringBuilder sb = new StringBuilder();
-            for (int i = idx1; i < idx2; i++) {
-                sb.append(userInput.charAt(i));
-            }
+            StringBuilder sb = getStringBuilder(userInput, idx1, idx2);
             return sb.toString();
         }
         return null;
+    }
+
+    private StringBuilder getStringBuilder(String userInput, int idx1, int idx2) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = idx1; i < idx2; i++) {
+            sb.append(userInput.charAt(i));
+        }
+        return sb;
     }
 
 }
