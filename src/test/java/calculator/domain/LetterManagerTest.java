@@ -12,7 +12,6 @@ class LetterManagerTest {
     void 커스텀_구분자_입력_시_끝나는_문자열이_나오지_않을_경우_예외_처리() {
         //given
         String letters = "//hello";
-        LetterManager letterManager;
 
         //when
 
@@ -76,6 +75,20 @@ class LetterManagerTest {
         Assertions.assertThatThrownBy(() -> new LetterManager(letters))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.UNREGISTERED_SEPARATOR_ERROR_MESSAGE);
+    }
+
+    @Test
+    void 커스텀_구분자가_문자열_중간에_나오는_경우_커스텀_구분자_추출() {
+        //given
+        String letters = "3//;\\n1;2";
+        LetterManager letterManager;
+
+        //when
+        letterManager = new LetterManager(letters);
+
+        //then
+        Assertions.assertThat(letterManager.getSeparators().contains(";")).isEqualTo(true);
+        Assertions.assertThat(letterManager.getNumbers().toInteger().size()).isEqualTo(3);
     }
 
 

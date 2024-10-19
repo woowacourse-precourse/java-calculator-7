@@ -89,7 +89,7 @@ public class LetterManager {
     private void replaceCustomSeparatorToSeparator(String customSeparator) {
         String separatorString = START_OF_CUSTOM_SEPARATOR_LETTER + customSeparator + END_OF_CUSTOM_SEPARATOR_LETTER;
         int startIndex = letters.indexOf(separatorString);
-        letters.replace(startIndex, separatorString.length(), customSeparator);
+        letters.replace(startIndex, startIndex + separatorString.length(), customSeparator);
     }
 
     public Separators getSeparators() {
