@@ -4,11 +4,14 @@ import calculator.view.enums.Message;
 
 public class OutputView {
 
-    public String getInputPrompt() {
-        return Message.INPUT_REQUEST_PROMPT.getMessage();
+    public void displayInputPrompt() {
+        String inputPromptMessage = Message.INPUT_REQUEST_PROMPT.getMessage();
+        System.out.println(inputPromptMessage);
     }
 
-    public String getFormattedResult(int result) {
-        return Message.OUTPUT_RESULT_PROMPT.getMessage() + result;
+    public void displayResult(int calculatedResult) {
+        String resultMessage = Message.OUTPUT_RESULT_PROMPT.getMessage() + calculatedResult;
+        System.out.println(resultMessage);
     }
 }
+
