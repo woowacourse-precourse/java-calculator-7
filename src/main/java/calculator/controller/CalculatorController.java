@@ -13,10 +13,10 @@ public class CalculatorController {
         this.outputView = new OutputView();
         this.inputView = new InputView();
         this.calculatorService = new CalculatorService();
+        outputView.printStartMessage();
     }
 
     public void run() {
-        outputView.printStartMessage();
         String input = inputView.readInput();
 
         int result = calculatorService.processCalculator(input);
