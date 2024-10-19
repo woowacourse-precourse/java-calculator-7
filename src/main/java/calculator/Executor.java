@@ -1,7 +1,6 @@
 package calculator;
 
 import java.util.List;
-import java.util.Objects;
 
 public class Executor {
 	private IOController ioController;
@@ -32,8 +31,8 @@ public class Executor {
 			inputStr = inputStr.substring(5);
 		}
 
+		checkSeparatorErrors(inputStr);
 		String[] splitStr = parser.parseBySeparator(inputStr);
-		checkSeparatorErrors(splitStr);
 
 		List<Integer> nums = parser.stringToNums(splitStr);
 		checkPositiveNumbers(nums);
@@ -46,18 +45,16 @@ public class Executor {
 	/**
 	 * 구분자 에러 확인
 	 *
-	 * @param splitStr
+	 * @param inputStr
 	 */
-	private void checkSeparatorErrors(String[] splitStr) {
-		// check 구분자 에러
-		for (String s : splitStr) {
-			if (Objects.equals(s, "")) {
-				throw new IllegalArgumentException("구분자는 문자열의 앞 또는 뒤에 위치할 수 없습니다.");
-			}
+	private void checkSeparatorErrors(String inputStr) {
+		if (!Character.isDigit(inputStr.charAt(0)) || !Character.isDigit(inputStr.charAt(inputStr.length() - 1))) {
+			throw new IllegalArgumentException("구분자는 문자열의 앞 또는 뒤에 위치할 수 없습니다.");
+		}
 
-			try {
-				Integer.parseInt(s);
-			} catch (Exception e) {
+		for (int idx = 0; idx < inputStr.length(); idx++) {
+			char c = inputStr.charAt(idx);
+			if (!Character.isDigit(c) && !(parser.getSeparators().contains(String.valueOf(c)))) {
 				throw new IllegalArgumentException("지정되지 않은 구분자는 사용할 수 없습니다.");
 			}
 		}
