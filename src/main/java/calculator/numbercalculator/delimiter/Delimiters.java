@@ -17,6 +17,9 @@ public class Delimiters {
     }
 
     public List<String> split(String str) {
+        if (str.isEmpty()) {
+            return List.of();
+        }
         String regex = getRegex();
         return List.of(str.split(regex));
     }

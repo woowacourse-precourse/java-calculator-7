@@ -10,10 +10,6 @@ public class Numbers {
         this.numbers = numbers;
     }
 
-    public static Numbers empty() {
-        return new Numbers(List.of());
-    }
-
     public static Numbers of(List<String> strings) {
         List<Number> numbers = toNumbers(strings);
         return new Numbers(numbers);

@@ -2,7 +2,7 @@ package calculator.numbercalculator;
 
 import calculator.numbercalculator.delimiter.Delimiter;
 
-public class CustomDelimiterCalculator {
+public class CustomDelimiterProcessor {
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
     private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
 
