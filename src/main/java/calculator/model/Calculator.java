@@ -24,7 +24,7 @@ public class Calculator {
     }
 
     public void split(){
-        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(this.str);
+        Matcher matcher = Pattern.compile("//(.)\\\\n(.*)").matcher(this.str);
         if(matcher.find())
             customSplit(matcher);
         else
