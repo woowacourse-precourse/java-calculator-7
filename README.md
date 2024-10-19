@@ -50,18 +50,18 @@ git clone -b as --single-branch https://github.com/pug9483/java-calculator-7.git
 - [x] 커스텀 구분자는 `//` 와 `\n`사이에 위치하는 문자다. 커스텀 구분자 클래스는 커스텀 구분자를 사용하여 문자열을 분리한다.
 - [x] 구분자로 분리된 숫자들을 이용하여 합을 구한다.
 - [x] 일반 구분자 커스텀 구분자를 핸들러 기반으로 구현한다.
-- [ ] 커스텀 구분자로 -가 들어올 수 있다.
-- [ ] 커스텀 구분자는 문자이므로 한 글자만 들어와야 한다. 숫자가 들어올 수 없다.
+- [x] 커스텀 구분자로 -가 들어올 수 있다.
+- [x] 커스텀 구분자는 문자이므로 한 글자만 들어와야 한다.
 - [ ] int 범위를 벗어날 경우를 생각하여 구현한다.
 
 ### 예외
 
 - [x] 음수가 들어올 경우 `IllegalArgumentException` 예외가 발생한다.
 - [x] 일반 구분자 클래스에서 `쉼표(,)`,`콜론(:)` 외 다른 구분자가 들어오면 `IllegalArgumentException` 예외가 발생한다.
+- [x] 일반 구분자 클래스에서 ,와 :가 연속으로 나오면 `IllegalArgumentException` 예외가 발생한다.
 - [x] 커스텀 구분자 클래스에서 커스텀 구분자 외 다른 구분자가 포함되어 있으면 `IllegalArgumentException` 예외가 발생한다.
-- [ ] `//`로 시작하는데 `\n`이 뒤에 나오지 않으면 `IllegalArgumentException` 예외가 발생한다.
+- [x] `//`로 시작하는데 `\n`이 뒤에 나오지 않으면 `IllegalArgumentException` 예외가 발생한다.
 - [x] `//`와 `\n`사이에 구분자가 들어오지 않을 경우 `IllegalArgumentException` 예외가 발생한다.
-- [ ] 구분자로 숫자가 들어오면 `IllegalArgumentException` 예외가 발생한다.
 
 --- 
 

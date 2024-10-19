@@ -10,10 +10,10 @@ public class CustomDelimiterHandler implements DelimiterHandler {
 
     @Override
     public List<String> split(String str) {
-        String delimiter = extractDelimiter(str);
         if (!isSupport(str)) {
             throw new IllegalArgumentException("형식이 일치하지 않습니다.");
         }
+        String delimiter = extractDelimiter(str);
 
         str = str.substring(str.indexOf("\\n") + 2);
 
@@ -24,14 +24,14 @@ public class CustomDelimiterHandler implements DelimiterHandler {
         return Arrays.stream(str.split(Pattern.quote(delimiter)))
                 .collect(Collectors.toList());
     }
-
+    
     @Override
     public boolean isSupport(String str) {
-        return !str.isEmpty() && str.matches("^//.+\\\\n.+");
+        return !str.isEmpty() && str.matches("^//.\\\\n.*");
     }
 
     public String extractDelimiter(String s) {
-        Pattern pattern = Pattern.compile("//(.*?)\\\\n");
+        Pattern pattern = Pattern.compile("//(.)\\\\n");
         Matcher matcher = pattern.matcher(s);
 
         if (matcher.find()) {
