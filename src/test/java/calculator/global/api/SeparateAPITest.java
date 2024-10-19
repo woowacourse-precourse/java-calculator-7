@@ -63,7 +63,7 @@ class SeparateAPITest {
 	@DisplayName("숫자 추출 기능 테스트")
 	void findNumberAndSave() {
 		//given
-		String sentence = "13;235;33";
+		String sentence = "13:235:33";
 
 		//when
 		separateAPI.findNumberAndSave(sentence);

@@ -37,13 +37,17 @@ public class SeparateAPI {
 		while(idx < sentence.length()) {
 			if(booleans[idx]) {
 				int nextTrue = judgmentAPI.isNextTrue(booleans, idx);
-				String sub = sentence.substring(idx, nextTrue );
+				String sub = sentence.substring(idx, nextTrue + idx);
 				number.addNumber(Integer.parseInt(sub));
+
+				idx += nextTrue;
 			} else {
 				char separator = sentence.charAt(idx);
 				if(!validSeparator(separator)) {
 					throw new IllegalArgumentException("올바른 구분자가 아닙니다");
 				}
+
+				idx++;
 			}
 		}
 	}
