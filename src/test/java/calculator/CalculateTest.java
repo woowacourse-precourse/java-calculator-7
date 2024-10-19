@@ -19,6 +19,17 @@ public class CalculateTest {
     }
 
     @Test
+    void sum_빈_배열_덧셈() {
+        //given
+        List<Long> numberList = List.of();
+        //when
+        Calculate calculate = new Calculate(numberList);
+        long result = calculate.sum();
+        //then
+        Assertions.assertEquals(result, 0);
+    }
+
+    @Test
     void sum_오버플로우_수_연산_예외처리() {
         //given
         List<Long> numberList = List.of(Long.MAX_VALUE, 1L);
