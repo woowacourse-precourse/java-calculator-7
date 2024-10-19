@@ -1,7 +1,13 @@
 package calculator;
 
+import calculator.repository.number.NumberRepository;
+import calculator.repository.number.NumberRepositoryImpl;
+import calculator.repository.separator.SeparatorRepository;
+import calculator.repository.separator.SeparatorRepositoryImpl;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        SeparatorRepository separatorRepository = SeparatorRepositoryImpl.getInstance();
+        NumberRepository numberRepository = NumberRepositoryImpl.getInstance(separatorRepository);
     }
 }
