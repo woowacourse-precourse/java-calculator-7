@@ -20,19 +20,8 @@ public class StringParser {
         delimiters.add(secondDelimiter);
     }
 
-    public List<String> getDelimiters() {
-        return delimiters;
-    }
-
-    private String getPattern() {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append(prefix);
-        sb.append("(.*)");
-        sb.append(suffix);
-        sb.append("(.*)");
-
-        return sb.toString();
+    public int getDelimiterCount() {
+        return delimiters.size();
     }
 
     public void addDelimiterFromInput(String input) {
@@ -47,5 +36,43 @@ public class StringParser {
 
             delimiters.add(customDelimiter);
         }
+    }
+
+    private String getPattern() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(prefix);
+        sb.append("(.*)");
+        sb.append(suffix);
+        sb.append("(.*)");
+
+        return sb.toString();
+    }
+
+    private String getDelimiters() {
+        StringBuilder sb = new StringBuilder();
+
+        for (String delimiter : delimiters) {
+            sb.append(delimiter);
+            sb.append("|");
+        }
+
+        sb.deleteCharAt(sb.length() - 1);
+
+        return sb.toString();
+    }
+
+    public List<String> split(String input) {
+        if (input.startsWith(prefix)) {
+            return List.of(input.split(suffix)[1].split(getDelimiters()));
+        }
+
+        return List.of(input.split(getDelimiters()));
+    }
+
+    public int[] convertToIntArray(List<String> strings) {
+        return strings.stream()
+                .mapToInt(Integer::parseInt)
+                .toArray();
     }
 }
