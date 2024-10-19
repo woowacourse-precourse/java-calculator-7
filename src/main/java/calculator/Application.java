@@ -21,6 +21,9 @@ public class Application {
         // 문자열파트가 공백이라면 0 출력
         if (str.isEmpty()){
             System.out.println("결과 : " + 0);
+        } else {
+            int sum = calculator(splitter(delimiter, str));
+            System.out.println("결과 : " + sum);
         }
     }
 
