@@ -1,6 +1,6 @@
 package calculator.calculate;
 
-import static calculator.calculate.Calculator.getResult;
+import static calculator.calculate.Calculator.getNumSum;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -13,7 +13,7 @@ class CalculatorTest {
     void testGetResult() {
         int[] arr = new int[]{1, 2, 3};
 
-        Assertions.assertEquals(6, getResult(arr));
+        Assertions.assertEquals(6, getNumSum(arr));
     }
 
     @Test
@@ -21,6 +21,6 @@ class CalculatorTest {
     void getEmptyArrResult() {
         int[] arr = new int[0];
 
-        Assertions.assertEquals(0, getResult(arr));
+        Assertions.assertEquals(0, getNumSum(arr));
     }
 }

@@ -57,8 +57,8 @@
 
 ### 6. 숫자를 더한다. (calculate 패키지)
 
-- [ ] 배열을 순회하며 숫자 요소들을 더하는 기능 (getNumSum)
-- [ ] 결과를 출력하는 기능 (printResult)
+- [x] 배열을 순회하며 숫자 요소들을 더하는 기능 (getNumSum)
+- [x] 결과를 출력하는 기능 (printResult)
 
 ---
 
@@ -69,8 +69,7 @@ calculator
   ├── input
   │   └── StringInput.java
   ├── split
-  │   ├── StringSplit.java
-  │   └── NumberSplit.java
+  │   └──  StringSplit.java
   ├── validate
   │   └── StringValidate.java
   └── calculate
