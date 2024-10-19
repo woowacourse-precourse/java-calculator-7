@@ -20,7 +20,7 @@ public class Calculator {
     }
 
     public Calculator() {
-        this.separators = new ArrayList<>(Arrays.asList(";", ","));
+        this.separators = new ArrayList<>(Arrays.asList(":", ","));
     }
 
     public String getRawValue() {

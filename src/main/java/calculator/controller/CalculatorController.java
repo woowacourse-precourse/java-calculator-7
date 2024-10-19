@@ -12,7 +12,7 @@ public class CalculatorController {
 
     public void run() throws IOException {
 
-        System.out.println("돌아갑니다.");
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         while (true) {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             String input = br.readLine();
@@ -23,6 +23,7 @@ public class CalculatorController {
             System.out.println(calculator.getRawValue());
             service.validateInput();
             service.sumOfList();
+            service.printResult();
         }
     }
 

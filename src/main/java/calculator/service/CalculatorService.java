@@ -105,12 +105,12 @@ public class CalculatorService {
             sum += value;
         }
         calculator.setSumValue(sum);
-        System.out.println("결과 : " + sum);
         return sum;
     }
 
     public String printResult() {
-        return null;
+        System.out.println("결과 : " + calculator.getSumValue());
+        return  "" + calculator.getSumValue();
     }
 }
 
