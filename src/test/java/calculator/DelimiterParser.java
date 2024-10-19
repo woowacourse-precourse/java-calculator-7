@@ -22,6 +22,11 @@ public class DelimiterParser {
         return numbers;
     }
 
+    public String parseCustomDelimiter(String input) {
+        int index = input.indexOf("\n");
+        return input.substring(2, index);
+    }
+
     private String[] splitByDelimiters(String input) {
         String regex = buildDelimiterRegex();
         return input.split(regex);
