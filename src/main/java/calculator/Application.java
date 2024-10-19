@@ -5,9 +5,15 @@ import camp.nextstep.edu.missionutils.Console;
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        InputView ip = new InputView();
+        InputView inputView = new InputView();
+        DelimiterParser dp = new DelimiterParser();
+        Delimiter dm = new Delimiter();
 
-        String input = ip.getInput();
-        System.out.println(input);
+        String input = inputView.getInput();
+        String customDelimiter = dp.findCustomDelimiter(input);
+        dm.addCustomDelimiter(customDelimiter);
+
+        boolean contain = dm.isContain("!");
+        System.out.println("contain = " + contain);
     }
 }
