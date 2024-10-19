@@ -49,7 +49,7 @@ public class ValidatorTest {
     void 숫자_입력란예_영어가_있을경우_예외를_던진다(String value) {
         assertThatThrownBy(() -> validator.validateDelimiter(value))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ERROR_NUMBER_TYPE);
+                .hasMessage(ERROR_LETTERS_NOT_ALLOWED);
     }
 
     @ParameterizedTest

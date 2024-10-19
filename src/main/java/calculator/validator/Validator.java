@@ -64,7 +64,7 @@ public class Validator {
             return;
         }
         if (Character.isLetter(character)) {
-            throw new IllegalArgumentException(ERROR_NUMBER_TYPE);
+            throw new IllegalArgumentException(ERROR_LETTERS_NOT_ALLOWED);
         }
         if (!charAsString.matches(delimiter)) {
             throw new IllegalArgumentException(ERROR_DELIMITER_NOT_EXIST);
