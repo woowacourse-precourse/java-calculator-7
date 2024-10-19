@@ -10,9 +10,9 @@ public class Application {
 
         StringCalculator calculator = new StringCalculator();
 
-        // 숫자 추출 테스트
-        System.out.println("입력된 문자열에서 추출된 숫자: " + calculator.extractNumToString(input));
+        int result = calculator.add(input); // 사용자가 입력한 문자열로 덧셈 계산
 
+        System.out.println("결과 : " + result); // 결과 출력
 
     }
 }
