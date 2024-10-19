@@ -2,8 +2,8 @@
 
 ## 기능 목록
 
-### ❌ 1. 사용자로부터 문자열을 입력받는다.
--[ ] `camp.nextstep.edu.missionutils.Console`의 `readLine()` 함수를 사용해야 한다.
+### ✅ 1. 사용자로부터 문자열을 입력받는다.
+-[x] `camp.nextstep.edu.missionutils.Console`의 `readLine()` 함수를 사용해야 한다.
 
 ### ❌ 2. 문자열 중에서 커스텀 구분자를 찾는다.
 -[ ] 커스텀 구분자는 문자열의 맨 앞에 `//[커스텀 구분자]\n` 형태로 주어진다.
