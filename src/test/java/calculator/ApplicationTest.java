@@ -7,6 +7,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
@@ -40,6 +41,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    @DisplayName("커스텀 구분자를 지정하는지 확인합니다.")
     void checkCustomDelimiterTest() {
         //when
         String input = "//.\n";
@@ -55,6 +57,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    @DisplayName("문자열에서 구분자를 기준으로 숫자를 추출합니다.")
     void splitNumbersTest() {
         //when
         String input = "//;\n1;2;3";
@@ -69,6 +72,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    @DisplayName("추출한 숫자를 더합니다.")
     void sumNumbersTest() {
         //when
         String[] input = {"1", "2", "3"};
@@ -85,6 +89,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    @DisplayName("아무것도 입력하지 않으면 결과는 0입니다.")
     void isNothingTest() {
         //when
         String input = "";
@@ -98,6 +103,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    @DisplayName("덧셈할 문자열을 입력하고 계산합니다.")
     void addTest() {
         //when
         String input = "1,2:3";
