@@ -2,11 +2,11 @@ package calculator.extractor.developed;
 
 import java.util.List;
 
-public class ExtractResultTest {
+public class ExtractResult {
     private final boolean extracted;
     private final List<String> numbers;
 
-    public ExtractResultTest(boolean extracted, List<String> numbers) {
+    public ExtractResult(boolean extracted, List<String> numbers) {
         this.extracted = extracted;
         this.numbers = numbers;
     }

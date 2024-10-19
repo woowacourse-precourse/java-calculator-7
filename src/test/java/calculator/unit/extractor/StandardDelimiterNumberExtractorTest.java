@@ -63,7 +63,7 @@ class test {
 //    })
 //    void extract_fail(String input) {
 //        // given
-//        StandardDelimiterNumberExtractorTest standardDelimiterNumberExtractor = new StandardDelimiterNumberExtractorTest();
+//        StandardDelimiterNumberExtractor standardDelimiterNumberExtractor = new StandardDelimiterNumberExtractor();
 //
 //        //  when then
 //        assertThatThrownBy(() -> standardDelimiterNumberExtractor.extract(input))

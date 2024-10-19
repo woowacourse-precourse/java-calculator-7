@@ -1,16 +1,16 @@
 package calculator.calculator;
 
-import calculator.extractor.developed.NumberExtractorChainTest;
 import calculator.parser.NumberParser;
 import calculator.validator.InputValidator;
 import java.util.List;
 
 public class StringCalculatorImpl implements Calculator {
     private final InputValidator inputValidator;
-    private final NumberExtractorChainTest NumberExtractorChain;
+    private final calculator.extractor.developed.NumberExtractorChain NumberExtractorChain;
     private final NumberParser numberParser;
 
-    public StringCalculatorImpl(InputValidator inputValidator, NumberExtractorChainTest NumberExtractorChain,
+    public StringCalculatorImpl(InputValidator inputValidator,
+                                calculator.extractor.developed.NumberExtractorChain NumberExtractorChain,
                                 NumberParser numberParser) {
         this.inputValidator = inputValidator;
         this.NumberExtractorChain = NumberExtractorChain;

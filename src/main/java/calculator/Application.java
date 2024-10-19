@@ -1,9 +1,9 @@
 package calculator;
 
 import calculator.calculator.StringCalculatorImpl;
-import calculator.extractor.developed.CustomDelimiterNumberExtractorTest;
-import calculator.extractor.developed.NumberExtractorChainTest;
-import calculator.extractor.developed.StandardDelimiterNumberExtractorTest;
+import calculator.extractor.developed.CustomDelimiterNumberExtractor;
+import calculator.extractor.developed.NumberExtractorChain;
+import calculator.extractor.developed.StandardDelimiterNumberExtractor;
 import calculator.inputReader.ConsoleInputReader;
 import calculator.parser.NumberParser;
 import calculator.parser.StringCalculatorNumberParser;
@@ -31,8 +31,8 @@ public class Application {
 //                new DefaultDelimitedNumberExtractor(),
 //                new CustomDelimitedNumberExtractor()
 //        ));
-        NumberExtractorChainTest numberExtractorChain = new NumberExtractorChainTest(
-                List.of(new StandardDelimiterNumberExtractorTest(), new CustomDelimiterNumberExtractorTest()));
+        NumberExtractorChain numberExtractorChain = new NumberExtractorChain(
+                List.of(new StandardDelimiterNumberExtractor(), new CustomDelimiterNumberExtractor()));
         NumberParser numberParser = new StringCalculatorNumberParser();
 
 //        StringCalculatorImpl calculator = new StringCalculatorImpl(inputValidator, delimitedNumberExtractor,

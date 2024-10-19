@@ -1,17 +1,13 @@
 package calculator.unit.extractor;
 
-import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import calculator.extractor.CustomDelimitedNumberExtractor;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 public class CustomDelimiterNumberExtractorTest implements DelimitedNumberExtractorTest {
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
@@ -74,14 +70,6 @@ class CustomDelimiterNumberExtractorMethodTest {
         assertEquals(extract.getNumbers().get(1), "2");
         assertEquals(extract.getNumbers().get(2), "3");
 
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"//;\\n1;2;3", "//,\\n1,2,3"})
-    @DisplayName("유효한 커스텀 토큰 형식")
-    void validCustomTokenFormat(String input) {
-        CustomDelimitedNumberExtractor extractor = new CustomDelimitedNumberExtractor();
-        assertThatNoException().isThrownBy(() -> extractor.isCustomTokenFormat(input));
     }
 
 }
