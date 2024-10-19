@@ -33,4 +33,25 @@ public class StudyTest {
 
         assertThat(pattern.matcher("a*c").matches()).isTrue();
     }
+
+    @Test
+    void test_split_with_limit() {
+        String input = "//;\\\\n1;2;3";
+        String[] strings = input.split("\\\\n", 2);
+        assertThat(strings).containsExactly("//;\\", "1;2;3");
+    }
+
+    @Test
+    void test_split_with_negative_limit() {
+        String input = "1;2;3";
+        String[] strings = input.split(";", -1);
+        assertThat(strings).containsExactly("1", "2", "3");
+    }
+
+    @Test
+    void test_split_with_zero_limit() {
+        String input = "1;2;3";
+        String[] strings = input.split(";", 0);
+        assertThat(strings).containsExactly("1", "2", "3");
+    }
 }
