@@ -4,10 +4,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
-    public double splitAndSum(String exp) {
+    public int splitAndSum(String exp) {
         String[] numbers;
         String delimiter = "";
-        double result = 0;
+        int result = 0;
 
         // 빈 문자열 확인
         if(exp==null || exp.trim().isEmpty()) {
@@ -30,9 +30,9 @@ public class StringAddCalculator {
         numbers = exp.split(delimiter);
 
         for(String number : numbers) {
-            double strToNum;
+            int strToNum;
             try {
-                strToNum = Double.parseDouble(number);
+                strToNum = Integer.parseInt(number);
                 result += strToNum;
                 if(strToNum <= 0)
                     throw new IllegalArgumentException("양수만 입력 가능합니다: " + strToNum);
