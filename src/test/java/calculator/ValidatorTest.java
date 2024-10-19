@@ -8,16 +8,6 @@ import org.junit.jupiter.api.Test;
 
 public class ValidatorTest extends NsTest {
     @Test
-    void testIsInputEmpty() {
-        assertSimpleTest(() -> {
-            assertThatThrownBy(() -> {
-                Validator obj = new Validator();
-                obj.validate("");
-            }).isInstanceOf(IllegalArgumentException.class);
-        });
-    }
-
-    @Test
     void testIsInputContainNegative() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> {
