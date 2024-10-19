@@ -22,6 +22,13 @@ class NumberSeparatorTest {
 		assertThrows(IllegalArgumentException.class, () -> NumberSeparator.from(invalidData).separate());
 	}
 
+	@DisplayName("분리기의 커스텀 구분자는 기본 구분자와 같을 수 없다")
+	@ParameterizedTest
+	@ValueSource(strings = {"//,\\n", "//:\\n"})
+	void validateSeparateNumberDefault(String invalidData) {
+		assertThrows(IllegalArgumentException.class, () -> NumberSeparator.from(invalidData).separate());
+	}
+
 	@DisplayName("숫자 사이의 공백은 허용하지 않는다")
 	@ParameterizedTest
 	@ValueSource(strings = {"1 2:3,4", "34\t2:2"})
