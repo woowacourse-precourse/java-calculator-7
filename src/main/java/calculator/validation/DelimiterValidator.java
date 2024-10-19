@@ -9,7 +9,7 @@ import static calculator.validation.InputValidator.isContainMinus;
 
 public class DelimiterValidator {
     public static String[] customDelimiterAddCalculator(String userInput) {
-        userInput = userInput.replace("\\n", CUSTOM_DELIMITER_BACKWARD.getValue());
+        userInput = userInput.replace(INPUT_DELIMITER_BACKWARD.getValue(), CUSTOM_DELIMITER_BACKWARD.getValue());
         Matcher m = Pattern.compile(CUSTOM_DELIMITER_PATTERN.getValue()).matcher(userInput);
         if (m.find()) {
             String[] numbers = splitByCustomDelimiter(m.group(2), m.group(1));
@@ -26,14 +26,14 @@ public class DelimiterValidator {
     }
 
     private static String[] splitByCustomDelimiter(String userInput, String customDelimiter) {
-        if (userInput.matches(".*[,:].*")) {
+        if (userInput.matches(DUPLICATE_DEFAULT_DELIMITER.getValue())) {
             String combinedDelimiter = Pattern.quote(customDelimiter) + AND.getValue() + DEFAULT_DELIMITER.getValue();
             return userInput.split(combinedDelimiter);
         }
         if (userInput.contains(customDelimiter)) {
             return userInput.split(Pattern.quote(customDelimiter));
         }
-        if (userInput.matches("\\d+")) {
+        if (userInput.matches(ALL_NUMBER.getValue())) {
             return new String[]{userInput};
         }
         throw new IllegalArgumentException(INVALID_CUSTOM_TYPE.format());

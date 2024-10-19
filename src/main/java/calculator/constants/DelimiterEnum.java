@@ -5,9 +5,12 @@ public enum DelimiterEnum {
     AND("|"),
     ZERO("0"),
     DEFAULT_DELIMITER(",|:"),
+    DUPLICATE_DEFAULT_DELIMITER(".*[,:].*"),
     CUSTOM_DELIMITER_FORWARD("//"),
     CUSTOM_DELIMITER_PATTERN("//(.)\n(.*)"),
-    CUSTOM_DELIMITER_BACKWARD("\n");
+    CUSTOM_DELIMITER_BACKWARD("\n"),
+    INPUT_DELIMITER_BACKWARD("\\n"),
+    ALL_NUMBER("\\d+");
 
     private final String value;
 
