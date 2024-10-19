@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.calculator.StringAdditionCalculator;
 import calculator.controller.CalculatorController;
 import calculator.validator.InputValidator;
 import calculator.view.InputView;

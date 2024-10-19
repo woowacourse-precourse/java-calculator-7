@@ -1,6 +1,6 @@
 package calculator.controller;
 
-import calculator.StringAdditionCalculator;
+import calculator.calculator.StringAdditionCalculator;
 import calculator.parser.CustomStringParser;
 import calculator.parser.DefaultStringParser;
 import calculator.parser.EmptyStringParser;
