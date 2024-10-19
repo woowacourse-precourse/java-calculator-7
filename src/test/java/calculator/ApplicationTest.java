@@ -143,6 +143,34 @@ class ApplicationTest extends NsTest {
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
+
+    @Test
+    void 예외_테스트_무작위_문장() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("aaaaaaaaaaaaaaaaaaaa"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("안녕하세요"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("/;\\n1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(";\\n3:3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//4:5"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
     
     @Override
     public void runMain() {
