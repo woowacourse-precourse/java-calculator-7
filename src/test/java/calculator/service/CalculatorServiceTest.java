@@ -4,10 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import calculator.dto.DelimiterInputDto;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -139,11 +138,15 @@ class CalculatorServiceTest {
         String customDelimiter = "&";
         String inputString = "//" + customDelimiter + "\n1&2&3";
 
+        DelimiterInputDto delimiterInputDto =
+                new DelimiterInputDto(inputString, new ArrayList<>(List.of(",", ":")));
+
+        delimiterInputDto.setInputString(inputString);
+
         //when
-        String delimiters = calculatorService.setDelimiter(inputString);
+        calculatorService.setDelimiter(delimiterInputDto);
 
         //then
-        assertThat(delimiters.length()).isEqualTo(5);
-        assertThat(delimiters.contains(customDelimiter)).isTrue();
+        assertThat(delimiterInputDto.getDelimiters().contains(customDelimiter)).isTrue();
     }
 }

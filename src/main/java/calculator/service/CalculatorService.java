@@ -1,28 +1,20 @@
 package calculator.service;
 
-import java.util.List;
+import calculator.dto.DelimiterInputDto;
 
 public class CalculatorService {
 
-    public String calculateSumFormString(String inputString) {
+    public String calculateSumFormString(DelimiterInputDto delimiterInputDto) {
 
-        String delimiters = setDelimiter(inputString);
-        return inputString;
+        return delimiterInputDto.getInputString();
     }
 
-    public String setDelimiter(String inputString) {
-        if (isCustomDelimiter(inputString)) {
-            String customDelimiter = parseCustomDelimiter(inputString);
+    public void setDelimiter(DelimiterInputDto delimiterInputDto) {
+        if (isCustomDelimiter(delimiterInputDto.getInputString())) {
+            String customDelimiter = parseCustomDelimiter(delimiterInputDto.getInputString());
             validCustomDelimiter(customDelimiter);
-            return "[,:" + customDelimiter + "]";
+            delimiterInputDto.addDelimiter(customDelimiter);
         }
-        return "[,:]";
-    }
-
-    public void validCustomDelimiter(String delimiter) {
-        checkDelimiterLength(delimiter);
-        checkDelimiterIsNumber(delimiter);
-        checkDelimiterPlusMinus(delimiter);
     }
 
     public boolean isCustomDelimiter(String inputString) {
@@ -31,6 +23,12 @@ public class CalculatorService {
 
     public String parseCustomDelimiter(String inputString) {
         return inputString.substring(2, inputString.indexOf("\n"));
+    }
+
+    public void validCustomDelimiter(String delimiter) {
+        checkDelimiterLength(delimiter);
+        checkDelimiterIsNumber(delimiter);
+        checkDelimiterPlusMinus(delimiter);
     }
 
     public void checkDelimiterLength(String delimiter) {
