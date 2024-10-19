@@ -6,9 +6,7 @@ permissions:
 
 on:
   pull_request:
-    branches:
-      - '*'
-    types: [ opened, synchronize ]
+    types: [opened, synchronize]
 
 jobs:
   code-review:
