@@ -29,7 +29,8 @@ class DelimitedNumberParserTest {
         List<Character> delimiters = List.of('c', '|', '*', '.', ';');
         //when
         //then
-        assertThatThrownBy(() -> DelimitedNumberParser.parseDelimitedNumber(inputWithDelimiters, delimiters)).isInstanceOf(
+        assertThatThrownBy(
+                () -> DelimitedNumberParser.parseDelimitedNumber(inputWithDelimiters, delimiters)).isInstanceOf(
                 InvalidInputException.class);
     }
 
@@ -41,7 +42,8 @@ class DelimitedNumberParserTest {
         List<Character> delimiters = List.of('c', '|', '*', '.', ';');
         //when
         //then
-        assertThatThrownBy(() -> DelimitedNumberParser.parseDelimitedNumber(inputWithDelimiters, delimiters)).isInstanceOf(
+        assertThatThrownBy(
+                () -> DelimitedNumberParser.parseDelimitedNumber(inputWithDelimiters, delimiters)).isInstanceOf(
                 InvalidInputException.class);
     }
 

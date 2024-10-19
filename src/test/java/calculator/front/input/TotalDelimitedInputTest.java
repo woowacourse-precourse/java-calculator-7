@@ -3,6 +3,7 @@ package calculator.front.input;
 import calculator.front.parser.CustomDelimiterParser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.*;
 
 class TotalDelimitedInputTest {
@@ -14,11 +15,13 @@ class TotalDelimitedInputTest {
         String rawInput = "//;\\n1:2:3";
         //when
         CustomDelimiterParsedInput customDelimiterParsedInput = CustomDelimiterParser.parse(rawInput);
-        TotalDelimitedInput totalDelimitedInput = TotalDelimitedInput.fromCustomDelimiterParseInput(customDelimiterParsedInput);
+        TotalDelimitedInput totalDelimitedInput = TotalDelimitedInput.fromCustomDelimiterParseInput(
+                customDelimiterParsedInput);
         Character[] customDelimiters = customDelimiterParsedInput.delimiters().toArray(new Character[0]);
         //then
         assertThat(totalDelimitedInput.getDelimiters()).containsAnyOf(customDelimiters);
         assertThat(totalDelimitedInput.getDelimiters()).containsExactly(':', ',', ';');
-        assertThat(totalDelimitedInput.getInputWithDelimiters()).isEqualTo(customDelimiterParsedInput.inputWithDelimiter());
+        assertThat(totalDelimitedInput.getInputWithDelimiters()).isEqualTo(
+                customDelimiterParsedInput.inputWithDelimiter());
     }
 }

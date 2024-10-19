@@ -1,6 +1,7 @@
 package calculator.front.view;
 
 import static org.assertj.core.api.Assertions.*;
+
 import calculator.front.input.CustomDelimiterParsedInput;
 import calculator.front.input.TotalDelimitedInput;
 import org.junit.jupiter.api.DisplayName;
@@ -19,8 +20,9 @@ class InputViewTest {
         //when
         TotalDelimitedInput totalDelimitedInput = inputView.getTotalDelimitedInput(rawInput);
         //then
-        assertThat(expectedTotalDelimitedInput.getInputWithDelimiters()).isEqualTo(totalDelimitedInput.getInputWithDelimiters());
+        assertThat(expectedTotalDelimitedInput.getInputWithDelimiters()).isEqualTo(
+                totalDelimitedInput.getInputWithDelimiters());
         assertThat(expectedTotalDelimitedInput.getDelimiters()).isEqualTo(totalDelimitedInput.getDelimiters());
     }
-  
+
 }
