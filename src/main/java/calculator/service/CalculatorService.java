@@ -1,7 +1,6 @@
 package calculator.service;
 
 import calculator.constant.ErrorStatus;
-import calculator.constant.message.Command;
 import java.util.List;
 
 public class CalculatorService {
@@ -17,7 +16,7 @@ public class CalculatorService {
     public static CalculatorService getInstance() {
         return CalculatorServiceHolder.INSTANCE;
     }
-    
+
     public Long calculateNumbers(List<Long> numbers) {
         Long result = 0L;
         for (Long number : numbers) {
@@ -28,14 +27,5 @@ public class CalculatorService {
             result += number;
         }
         return result;
-    }
-
-    public Command checkCommand(Integer command) {
-        for (Command c : Command.values()) {
-            if (c.getCommand().equals(command)) {
-                return c;
-            }
-        }
-        throw new IllegalArgumentException(ErrorStatus.INVALID_COMMAND.getMessage());
     }
 }
