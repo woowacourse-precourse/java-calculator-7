@@ -8,9 +8,16 @@ public class CalculatorService {
     private static final String CUSTOM_DELIMITER_PREFIX = "\\n"; // \n를 그대로 사용하기 위함.
 
     private final ExtractLogic extractLogic = new ExtractLogic();
+    private final CalculatorOperation calculatorOperation = new CalculatorOperation();
 
-    private String getDelimiter(Scanner scanner) {
-        return extractLogic.extractDelimiter(scanner.nextLine());
+    public int calculate(String input) {
+        String delimiter = getDelimiter(input);
+        List<Integer> numbers = extractLogic.extractNumber(input, delimiter);
+        return calculatorOperation.calculateSum(numbers);
+    }
+
+    private String getDelimiter(String input) {
+        return extractLogic.extractDelimiter(input);
     }
 
     private List<Integer> getNumbers(String input, String delimiter, Scanner scanner) {
