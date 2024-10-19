@@ -15,31 +15,40 @@
 
 ## ✅ 구현할 기능 목록
 
-**1. 시작**
+**시작**
 - [x] 사용자 입력 메서드 - getUserInput()
 
-**2. 입력 값 가공**
-- [x] Default 구분자 기준 분리 메서드 - splitWithDefaultSeparator()
+**입력 값 가공**
+- [x] Default 구분자 기준 분리 메서드 - splitWithDefaultDelimiter()
   - [x] 쉼표(,)와 콜론(:)을 기준으로 분리되는가
-- [x] Custom 구분자 기준 분리 메서드 - splitWithCustomSeparator()
+- [x] Custom 구분자 기준 분리 메서드 - splitWithCustomDelimiter()
   - [x] “//“와 “\n” 사이에 입력된 문자를 기준으로 분리되는가
+- getCalculationSection() 추가 (56fcd504)
+- getCustomEscapeIndex() 추가 (9f7ec59f)
+- isUsingCustomDelimiter() 추가 (9f7ec59f)
 
-**3. 입력 값 검증**
+**입력 값 검증**
 - [x] 빈 입력 값 검증 메서드 - checkIsInputEmpty()
-  - 제거하고 구분자로 분리하는 메서드 안에서 검증 후 빈 값이면 빈 리스트 반환하는 것으로 변경 (f456c9e1)
+  - 제거하고 getCalculationSection() 안에서 검증 후 빈 값이면 빈 리스트 반환하는 것으로 변경 (f456c9e1)
 - [x] 양수 검증 메서드 - checkIsPositiveNumber()
 - [x] 숫자 형식 검증 메서드 - checkHasNumberFormat()
-  - checkIsNumericAndPositive()로 통합 (58333870)
+  - checkNumberIsValid()로 통합 / isNumeric() 메서드 추가 (58333870)
+  - 파라미터 타입 List<String> 에서 String 변경 (1c6e4e10)
 
-**4. 결과 반환**
+* 결과 반환**
 - [x] 숫자의 총 합을 구하는 메서드 - getTotal()
 - [x] 결과를 출력하는 메서드 - printResult()
 
-**5. 예외 처리**
+**예외 처리**
 - [x] IllegalArgumentException 예외 처리
   - 구분자 기준 추출한 숫자 안에 음수가 입력되었을때
   - 구분자 기준 추출한 요소 중 숫자가 아닌 문자가 입력되었을때
   - 구분자에 숫자가 입력되었을때
+
+**기타**
+- run() 추가 (b5a07369)
+- calculating() 추가 (b5a07369)
+- checkEachInputIsValid() 추가 (b5a07369)
 
 ## ✅ 입출력 요구 사항 점검
 
@@ -62,7 +71,7 @@
 - [x] build.gradle 파일은 변경하지 않고, 제공된 라이브러리 이외의 외부 라이브러리는 사용하지 않았는가
 - [x] 프로그램 종료 시 System.exit()를 호출하지 않는가
 - [x] 프로그래밍 요구 사항에서 달리 명시하지 않는 한 파일, 패키지 등의 이름을 바꾸거나 이동하지 않았는가
-- [ ] 자바 코드 컨벤션을 지키면서 프로그래밍 했는가
-- [ ] 기본적으로 Java Style Guide를 원칙으로 했는가
+- [x] 자바 코드 컨벤션을 지키면서 프로그래밍 했는가
+- [x] 기본적으로 Java Style Guide를 원칙으로 했는가
 - [x] camp.nextstep.edu.missionutils에서 제공하는 Console API를 사용하여 구현했는가
 - [x] 사용자가 입력하는 값은 camp.nextstep.edu.missionutils.Console의 readLine()을 활용했는가
