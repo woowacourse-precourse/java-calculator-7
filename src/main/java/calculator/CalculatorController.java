@@ -17,6 +17,10 @@ public class CalculatorController {
         return view.input();
     }
 
+    public void executeOutput(Integer result) {
+        view.printResultMessage(result);
+    }
+
     public Integer executeCalculation(List<Integer> numbers) {
         return calculatorService.calculate(numbers);
     }
