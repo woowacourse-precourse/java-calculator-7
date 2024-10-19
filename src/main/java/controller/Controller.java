@@ -6,9 +6,16 @@ import view.OutputView;
 
 public class Controller {
 
-    private final Calculator calculator = new Calculator();
-    private final InputView inputView = new InputView();
-    private final OutputView outputView = new OutputView();
+    private final Calculator calculator;
+    private final InputView inputView;
+    private final OutputView outputView;
+
+    // 생성자를 통한 의존성 주입
+    public Controller(Calculator calculator, InputView inputView, OutputView outputView) {
+        this.calculator = calculator;
+        this.inputView = inputView;
+        this.outputView = outputView;
+    }
 
     public void processUserInput() {
         while (true) {
