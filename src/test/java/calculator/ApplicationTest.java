@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
     @Test
-    void 커스텀_구분자_사용() {
+    void 커스텀_구분자_사용_메인() {
         assertSimpleTest(() -> {
             run("//;\\n1");
             assertThat(output()).contains("결과 : 1");
@@ -17,7 +17,71 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트() {
+    void 입력_공백() {
+        assertSimpleTest(() -> {
+            run("");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 일반_구분자() {
+        assertSimpleTest(()->{
+            run("1,2:3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자() {
+        assertSimpleTest(()->{
+            run("//^\\n1^3^3");
+            assertThat(output()).contains("결과 : 7");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_입력_문자열() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("//;;\\n1;;4;;2"))
+                    .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_예약어_커스텀_구분자_일반_구분자_공존() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\\n1;4,2:3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 일반_예약어_커스텀_구분자_일반_구분자_공존() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1;4,2:3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_숫자_아닌_문자_일반_구분자() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("a,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_숫자_아닌_문자_커스텀_구분자() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\\na;2;3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_메인() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
