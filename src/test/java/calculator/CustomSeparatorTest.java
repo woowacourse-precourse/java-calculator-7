@@ -1,6 +1,7 @@
 package calculator;
 
 import calculator.separator.CustomSeparator;
+import calculator.separator.Separator;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,7 @@ public class CustomSeparatorTest extends NsTest {
         String input = "//&\\n23&3&74,03";
 
         // when
-        CustomSeparator separator = new CustomSeparator(input);
+        Separator separator = new CustomSeparator(input);
         String[] actual = separator.splitLine();
 
         // then
@@ -38,7 +39,7 @@ public class CustomSeparatorTest extends NsTest {
         String input = "//a\\n23a3a74:03";
 
         // when
-        CustomSeparator separator = new CustomSeparator(input);
+        Separator separator = new CustomSeparator(input);
         String[] actual = separator.splitLine();
 
         // then
@@ -52,7 +53,7 @@ public class CustomSeparatorTest extends NsTest {
         String input = "//4\\n2123534:03";
 
         // when
-        CustomSeparator separator = new CustomSeparator(input);
+        Separator separator = new CustomSeparator(input);
 
         // then
         assertSimpleTest(() ->
@@ -68,7 +69,7 @@ public class CustomSeparatorTest extends NsTest {
         String input = "//\"\\n21\"534:62,36\"53";
 
         // when
-        CustomSeparator separator = new CustomSeparator(input);
+        Separator separator = new CustomSeparator(input);
         String[] actual = separator.splitLine();
 
         // then
@@ -83,7 +84,7 @@ public class CustomSeparatorTest extends NsTest {
         String input = "//\\\\n21\\534:62,36\\53";
 
         // when
-        CustomSeparator separator = new CustomSeparator(input);
+        Separator separator = new CustomSeparator(input);
         String[] actual = separator.splitLine();
 
         // then
@@ -97,7 +98,7 @@ public class CustomSeparatorTest extends NsTest {
         String input = "//ad\\n21,534:62,36";
 
         // when
-        CustomSeparator separator = new CustomSeparator(input);
+        Separator separator = new CustomSeparator(input);
 
         // then
         assertSimpleTest(() ->
@@ -119,6 +120,33 @@ public class CustomSeparatorTest extends NsTest {
                 assertThatThrownBy(separator::splitLine)
                         .isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+
+    @Test
+    public void 빈_문자열_입력() {
+        // given
+        String input = "//%\\n";
+
+        // when
+        Separator separator = new CustomSeparator(input);
+        String[] actual = separator.splitLine();
+
+        // then
+        Assertions.assertThat(actual).isEqualTo(null);
+    }
+
+    @Test
+    public void 숫자없이_구분자만_입력() {
+        // given
+        String input = "//%\\n,:,%:";
+
+        // when
+        Separator separator = new CustomSeparator(input);
+        String[] actual = separator.splitLine();
+
+        // then
+        Assertions.assertThat(actual).isEqualTo(null);
     }
 
     @Override

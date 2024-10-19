@@ -10,9 +10,11 @@ public class DefaultSeparator implements Separator {
 
     @Override
     public String[] splitLine() {
-        if (line.isEmpty()) {
+        String[] result = line.split(":|,");
+        if (line.isEmpty() || result.length == 0) {
             return null;
         }
-        return line.split(":|,");
+        return result;
     }
+
 }

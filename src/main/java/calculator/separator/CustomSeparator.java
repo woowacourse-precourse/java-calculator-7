@@ -15,10 +15,11 @@ public class CustomSeparator implements Separator {
     public String[] splitLine() {
         String delimiter = extractDelimiter();
         String regex = Pattern.quote(delimiter)+"|:|,";
-        if (line.isEmpty()) {
+        String[] strings = line.split(regex);
+        if (line.isEmpty() || strings.length == 0) {
             return null;
         }
-        return line.split(regex);
+        return strings;
     }
 
     private String extractDelimiter() {
