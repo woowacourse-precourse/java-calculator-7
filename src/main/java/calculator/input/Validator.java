@@ -20,28 +20,37 @@ public class Validator {
 
     private void checkCustomDelimiter(String customDelimiter) { // 책임: 구분자가 올바른지 확인.
         if (customDelimiter.length() != 1 || Character.isDigit(customDelimiter.charAt(0))) { // 구분자는 숫자가 아닌 한 글자여야 함
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Invalid custom delimiter: " + customDelimiter);
         }
     }
 
     private void checkString(String input, String customDelimiter) {
         int startIndex = 0;
+        final int lastIndex = input.length() - 1;
+
         if (customDelimiter != null) {
             startIndex = input.indexOf(CUSTOM_DELIMITER_END) + DELIMITER_OFFSET; // 검사 시작 인덱스를 커스텀 지정자 선언 문구 이후로 설정
         }
 
         boolean isDelimiterAllowed = false;
-
-        for (int i = startIndex; i < input.length(); i++) {
+        for (int i = startIndex; i <= lastIndex; i++) {
             char currentChar = input.charAt(i);
+
             if (Character.isDigit(currentChar)) { // 숫자가 나왔다면
                 isDelimiterAllowed = true; // 다음에 구분자가 나와도 된다고 표시
-            } else if (isValidDelimiter(currentChar, customDelimiter) && isDelimiterAllowed
-                    && i != input.length() - 1) { // 올바르게 구분자가 나왔다면
-                isDelimiterAllowed = false; // 다음에는 구분자가 나오면 안된다고 표시
-            } else { // 올바르지 않은 구분자가 나왔으면 exception
-                throw new IllegalArgumentException();
+                continue;
             }
+
+            if (!isDelimiterAllowed) { // 문자 금지인데 구분자가 나왔다면
+                throw new IllegalArgumentException("Invalid character at position " + i + ": " + currentChar);
+            }
+
+            if (isValidDelimiter(currentChar, customDelimiter) && i != lastIndex) { // 올바르게 구분자가 나왔다면
+                isDelimiterAllowed = false; // 다음에는 구분자가 나오면 안된다고 표시
+                continue;
+            }
+
+            throw new IllegalArgumentException("Invalid character at position " + i + ": " + currentChar);
         }
     }
 
