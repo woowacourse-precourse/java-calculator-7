@@ -18,9 +18,9 @@ public class CalculatorService {
     public Number calculate(String input) {
         Command command = commandExtractor.extract(input);
         if (command.hasCustomSeparator()) {
-            separators.add(command.getCustomSeparator());
+            separators.add(command.customSeparator());
         }
-        String expression = command.getExpression();
+        String expression = command.expression();
         String[] separatedValues = ExpressionSplitter.split(separators, expression);
         Double[] values = convertToNumbers(separatedValues);
         return sum(values);
