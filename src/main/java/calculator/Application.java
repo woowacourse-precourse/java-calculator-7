@@ -11,6 +11,18 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
+        List<String> sepList = inputSeparate(input);
+
+        String delimiter = sepList.get(0);
+        String str = sepList.get(1);
+
+        // 문자열파트가 공백이라면 0 출력
+        if (str.isEmpty()){
+            System.out.println("결과 : " + 0);
+            return;
+        } else {
+            return;
+        }
     }
 
     // 입력을 구분자파트와 문자열파트로 분리하는 메서드
