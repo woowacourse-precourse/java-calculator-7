@@ -37,7 +37,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1,-2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessageContaining("음수는 입력할 수 없습니다.")
+                        .hasMessageContaining("양수를 입력해 주세요.")
         );
     }
 
@@ -46,7 +46,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("0,1,2"))
                         .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessageContaining("0은 입력할 수 없습니다.")
+                        .hasMessageContaining("양수를 입력해 주세요.")
         );
     }
 
@@ -55,7 +55,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//\n1;2;3"))
                         .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessageContaining("잘못된 커스텀 구분자 형식입니다.")
+                        .hasMessageContaining("커스텀 구분자를 입력해 주세요.")
         );
     }
 
@@ -64,7 +64,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//;\\n1$2$3"))
                         .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessageContaining("올바르지 않은 구분자입니다.")
+                        .hasMessageContaining("올바르지 않은 커스텀 구분자입니다.")
         );
     }
 
