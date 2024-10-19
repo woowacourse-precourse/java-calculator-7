@@ -15,29 +15,13 @@ public class Calculator {
         // 커스텀 구분자
         while (input.contains("//")) {
             // 커스텀 구분자 앞부분의 숫자 부분을 먼저 계산
-            String prefix = input.substring(0, input.indexOf("//")).trim();
-            if (!prefix.isEmpty()) {
-                sum += sumNumbers(prefix.split(separator));
-            }
-
-            // '\\n' 앞까지가 구분자 부분
-            int separatorIndex = input.indexOf("\\n");
-            if (separatorIndex != -1) {
-                // '//' 뒤부터 '\\n' 앞까지의 문자를 구분자로 사용
-                String customSeparator = input.substring(input.indexOf("//") + 2, separatorIndex);
-                validateCustomSeparator(customSeparator);
-
-                separator = separator + "|" + Pattern.quote(customSeparator);  // 기본 구분자에 커스텀 구분자 추가
-                // 커스텀 구분자를 추출했으니 그 이후의 숫자 문자열만 남김
-                input = input.substring(separatorIndex + 2);
-            } else {
-                throw new IllegalArgumentException("커스텀 구분자 형식이 잘못되었습니다.");
-            }
+            sum += calculatePrefixSum(input, separator);
+            separator = addCustomSeparator(input, separator);
+            input = updateInputString(input);
         }
 
         // 나머지 문자열에서 구분자 기준으로 숫자 분리 및 합산
         sum += sumNumbers(input.split(separator));
-
         return sum;
     }
 
@@ -45,6 +29,31 @@ public class Calculator {
         if (input == null || input.trim().isEmpty()) {
             throw new IllegalArgumentException("입력 값이 비어있습니다.");
         }
+    }
+
+    private static int calculatePrefixSum(String input, String separator) {
+        String prefix = input.substring(0, input.indexOf("//")).trim();
+        if (!prefix.isEmpty()) {
+            return sumNumbers(prefix.split(separator));
+        }
+        return 0;
+    }
+
+    private static String addCustomSeparator(String input, String separator) {
+        int separatorIndex = input.indexOf("\\n");
+        if (separatorIndex == -1) {
+            throw new IllegalArgumentException("커스텀 구분자 형식이 잘못되었습니다.");
+        }
+
+        String customSeparator = input.substring(input.indexOf("//") + 2, separatorIndex);
+        validateCustomSeparator(customSeparator);
+
+        return separator + "|" + Pattern.quote(customSeparator);
+    }
+
+    private static String updateInputString(String input) {
+        int separatorIndex = input.indexOf("\\n");
+        return input.substring(separatorIndex + 2);
     }
 
     private static void validateCustomSeparator(String customSeparator) {
