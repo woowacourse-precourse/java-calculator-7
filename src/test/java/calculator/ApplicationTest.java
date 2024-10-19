@@ -8,14 +8,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
-//    @Test
-//    void 커스텀_구분자_사용() {
-//        assertSimpleTest(() -> {
-//            run("//;\\n1");
-//            assertThat(output()).contains("결과 : 1");
-//        });
-//    }
-//
+    @Test
+    void 커스텀_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("//;\\n1");
+            assertThat(output()).contains("결과 : 1");
+        });
+    }
+
 //    @Test
 //    void 예외_테스트() {
 //        assertSimpleTest(() ->
@@ -58,6 +58,25 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 6");
         });
     }
+
+    @Test
+    void single_number(){
+        assertSimpleTest(()->{
+            run("1");
+            assertThat(output()).contains("결과 : 1");
+        });
+    }
+
+    @Test
+    void custom_separator(){
+        assertSimpleTest(()->{
+            run("//;\\n1;2,3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
