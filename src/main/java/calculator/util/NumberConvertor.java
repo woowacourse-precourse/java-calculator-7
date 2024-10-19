@@ -9,17 +9,17 @@ import java.util.Arrays;
 public class NumberConvertor {
 
     public static int[] stringToInt(String str) {
-        String removedEnrollmentChar = Delimiter.removeEnrollmentString(str);
-
         if (str.isEmpty()) {
             return new int[] {};
         }
 
-        String delimiter = Delimiter.getDelimiter();
-
-        return Arrays.stream(removedEnrollmentChar.split(delimiter))
+        return Arrays.stream(getRemovedEnrollmentChar(str).split(Delimiter.getDelimiter()))
                 .mapToInt(NumberConvertor::parseAndValidate)
                 .toArray();
+    }
+
+    private static String getRemovedEnrollmentChar(String str) {
+        return Delimiter.removeEnrollmentString(str);
     }
 
     private static int parseAndValidate(String str) {
