@@ -13,7 +13,7 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class Application {
     public static void main(String[] args) throws IOError {
-        Set<String> set = new HashSet<>(new ArrayList<>(List.of(":", ".")));
+        Set<String> set = new HashSet<>(new ArrayList<>(List.of(":", ",")));
 
         //시작 문자열
         System.out.println("덧셈할 문자열을 입력해 주세요.");
