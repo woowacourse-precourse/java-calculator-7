@@ -33,4 +33,9 @@ public class Number {
     public int hashCode() {
         return number.hashCode();
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
+    }
 }

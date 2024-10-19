@@ -8,7 +8,7 @@ import calculator.processor.handler.calculating.CalculatingHandler;
 
 public abstract class AbstractCalculatingHandlerAdapter implements HandlerAdapter {
 
-    protected static String delimiter = ";|,";
+    protected static String delimiter = ":|,";
 
     @Override
     public abstract boolean supports(Request request);

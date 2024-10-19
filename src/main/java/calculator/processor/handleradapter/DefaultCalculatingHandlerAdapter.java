@@ -7,6 +7,6 @@ public class DefaultCalculatingHandlerAdapter extends AbstractCalculatingHandler
 
     @Override
     public boolean supports(Request request) {
-        return false;
+        return true;
     }
 }
