@@ -10,21 +10,17 @@ public class PatternParser {
     public static final String CUSTOM_PATTERN = "^//(.*?)\\\\n";
     public static final String RESERVE_PATTERN = "[,:]";
 
-    private Pattern toPattern(String regex) {
-        return Pattern.compile(regex);
-    }
-
-    private Matcher toMatcher(String regex, String input) {
-        return toPattern(regex).matcher(input);
+    private Matcher matcher(String regex, String input) {
+        return Pattern.compile(regex).matcher(input);
     }
 
     public boolean isCustomPattern(String input) {
-        Matcher matcher = toMatcher(CUSTOM_PATTERN, input);
+        Matcher matcher = matcher(CUSTOM_PATTERN, input);
         return matcher.find() && (matcher.start() == 0);
     }
 
     public boolean isReservePattern(String input) {
-        Matcher matcher = toMatcher(RESERVE_PATTERN, input);
+        Matcher matcher = matcher(RESERVE_PATTERN, input);
 
         Set<String> delimiters = new HashSet<>();
         while (matcher.find()) {
@@ -35,7 +31,7 @@ public class PatternParser {
     }
 
     public String parseCustomPattern(String input) {
-        Matcher matcher = toMatcher(CUSTOM_PATTERN, input);
+        Matcher matcher = matcher(CUSTOM_PATTERN, input);
 
         if (matcher.find()) {
             return matcher.group(1);
