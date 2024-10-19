@@ -9,11 +9,19 @@ public class Application {
         // TODO: 프로그램 구현
 
         //testg
-        String strs = "//: \n1;2;3,4,5:6";
+        String strs = "//;\n1;2;3,4,5:6";
         String strs1 = "1,2,3,4:5";
         ArrayList<String> delimiters = getDelimiter(strs);
-        for (String item : delimiters) {
-            System.out.printun("구분자 =" + item);
+
+        if (delimiters.size() > 2) {
+            String regex = checkSpecialDelimiter(strs);
+            strs = changeInputStr(regex,strs);
+            // DEBUG
+            System.out.println(strs);
+        }
+        // debug
+        for (String delimiter : delimiters) {
+            System.out.println(delimiter);
         }
     }
     public static ArrayList<String> getDelimiter(String inputString){
@@ -48,5 +56,10 @@ public class Application {
         } else {
             return null;
         }
+    }
+    public static String changeInputStr(String matchStr, String InputString){
+        String[] modStr = InputString.split(matchStr);
+        String changeStr = modStr[modStr.length - 1];
+        return changeStr;
     }
 }
