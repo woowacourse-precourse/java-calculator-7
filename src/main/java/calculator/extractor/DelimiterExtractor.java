@@ -4,17 +4,19 @@ import java.util.regex.Pattern;
 
 public class DelimiterExtractor {
 
-    private static final String DEFAULT_DELIMITERS = "[,:]";  // 기본 구분자 (쉼표, 콜론)
+    private static final String DEFAULT_DELIMITERS = "[,:]";
+    public static final String CUSTOM_DELIMITER_PREFIX = "//";
+    public static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
 
     public String extractDelimiter(String input) {
-        if (input.startsWith("//")) {
+        if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
             return extractCustomDelimiter(input);
         }
-        return DEFAULT_DELIMITERS;  // 기본 구분자 사용
+        return DEFAULT_DELIMITERS;
     }
 
     private String extractCustomDelimiter(String input) {
-        int delimiterEndIndex = input.indexOf("\\n");
+        int delimiterEndIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
         validateCustomDelimiter(input, delimiterEndIndex);
         String customDelimiter = input.substring(2, delimiterEndIndex);
         return Pattern.quote(customDelimiter) + "|" + DEFAULT_DELIMITERS;

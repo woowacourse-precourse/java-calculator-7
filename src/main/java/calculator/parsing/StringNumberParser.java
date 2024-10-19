@@ -3,7 +3,7 @@ package calculator.parsing;
 public class StringNumberParser {
 
     public long parseNumber(String number) {
-        if (number == null || number.isEmpty()) {
+        if (number.isEmpty()) {
             return 0L;
         }
         return parseValidNumber(number);

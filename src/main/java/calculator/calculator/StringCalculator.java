@@ -17,15 +17,7 @@ public class StringCalculator {
     }
 
     public PositiveNumber add(InputString inputString) {
-        if (inputString == null) {
-            return new PositiveNumber(0);
-        }
-
         Numbers numbers = userInputParser.parseInput(inputString);
-        return sumNumbers(numbers);
-    }
-
-    private PositiveNumber sumNumbers(Numbers numbers) {
         PositiveNumber sum = new PositiveNumber(0);
         for (PositiveNumber number : numbers.numbers()) {
             sum = calculateOrThrow(sum, number);
