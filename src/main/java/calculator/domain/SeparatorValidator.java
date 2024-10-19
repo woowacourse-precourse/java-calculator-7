@@ -1,6 +1,5 @@
 package calculator.domain;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -8,6 +7,7 @@ public class SeparatorValidator {
     private static final String CUSTOM_START_LETTERS = "//";
     private static final String CUSTOM_END_LETTERS = "\\n";
     private static final String MAKE_SPLIT_FORMAT_LETTER = "|";
+    private static final String ERROR_MESSAGE_FOR_CONSECUTIVE_SEPARATOR = "구분자를 연속해서 입력하셨습니다. 프로그램을 종료합니다."
     private static final Pattern VALID_NUMBER_PATTERN = Pattern.compile("[-\\d,:]+");
 
     public SeparatorValidator() {
@@ -20,9 +20,15 @@ public class SeparatorValidator {
         return separators;
     }
 
-    public static List<String> removeSeparator(List<String> separators, String inputData) {
+    public static String[] removeSeparator(List<String> separators, String inputData) {
         String str = removeCustomSeparatorFormat(inputData);
-        List<String> separatedString = Arrays.asList(separateString(separators, inputData));
+        String[] separatedString = separateString(separators, str);
+
+        for (String string : separatedString) {
+            if (hasConsecutiveSeparator(string)) {
+                throw new IllegalArgumentException(ERROR_MESSAGE_FOR_CONSECUTIVE_SEPARATOR);
+            }
+        }
     }
 
     private static boolean containsCustomSeparator(String inputData) {
@@ -42,5 +48,9 @@ public class SeparatorValidator {
             }
         }
         return inputData.split(splitFormat);
+    }
+
+    private static boolean hasConsecutiveSeparator(String str) {
+        return str.isEmpty();
     }
 }
