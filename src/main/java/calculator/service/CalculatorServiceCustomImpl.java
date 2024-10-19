@@ -1,6 +1,7 @@
 package calculator.service;
 
 import calculator.dto.CalculatorDTO;
+import static calculator.util.ExceptionUtil.checkNextTargetIsLiteral;
 
 import java.util.regex.Pattern;
 
@@ -20,7 +21,7 @@ public class CalculatorServiceCustomImpl implements CalculatorService {
 
         // iterate to calculate by custom delimiters
         for (String eachList : calcList) {
-            calcResult += Integer.parseInt(eachList);
+            calcResult += checkNextTargetIsLiteral(eachList);
         }
 
         return calcResult;
