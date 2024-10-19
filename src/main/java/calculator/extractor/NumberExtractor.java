@@ -40,10 +40,10 @@ public class NumberExtractor {
             try {
                 int num = Integer.parseInt(string);
                 if (num < 0) // 음수인 경우 예외 발생 -> 잘못된 입력임
-                    throw new IllegalStateException();
+                    throw new IllegalArgumentException();
                 extractedNumber.add(num);
             } catch (Exception e) {
-                throw new IllegalStateException();
+                throw new IllegalArgumentException();
             }
         }
         return extractedNumber;
