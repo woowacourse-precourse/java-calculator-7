@@ -12,9 +12,17 @@ public class Calculator {
         String separators = String.join("|",separatorList);
         String[] numberArray = text.split(separators);
         for (int i=0;i<numberArray.length;i++){
+            checkCondition(numberArray[i]);
             int number = Integer.parseInt(numberArray[i]);
             result += number;
         }
         return result;
+    }
+
+    public void checkCondition(String number){
+        String regex = "^[1-9]\\d*$";
+        if (!number.matches(regex)) {
+            throw new IllegalArgumentException();
+        }
     }
 }
