@@ -3,9 +3,11 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
+    public static final String DEFAULT_DELIMITER = "[,:]";
+    public static final String LEFT_CUSTOM_DELIMITER = "//";
+    public static final String RIGHT_CUSTOM_DELIMITER = "\\n";
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-
         Application app = new Application();
         String input = app.userInputManager();
         int Result = app.InputSeparator(input);
@@ -20,7 +22,6 @@ public class Application {
     }
     public int InputSeparator(String userInput) {
         int sum = 0;
-        String defaultDelimiter = "[,:]";
 
         if (userInput.isEmpty()) {
             return 0;
@@ -28,12 +29,11 @@ public class Application {
 
         String numbers = userInput.trim();
 
-        if (numbers.startsWith("//")) {
-            int newLineIndex = numbers.indexOf("\\n");
+        if (numbers.startsWith(LEFT_CUSTOM_DELIMITER)) {
+            int newLineIndex = numbers.indexOf(RIGHT_CUSTOM_DELIMITER);
             if (newLineIndex == -1) {
                 throw new IllegalArgumentException("잘못된 값입니다.");
             }
-
             String customDelimiter = numbers.substring(2, newLineIndex);
             if(customDelimiter.isEmpty() || customDelimiter.contains(",") || customDelimiter.contains(":")){
                 throw new IllegalArgumentException("잘못된 값입니다.");
@@ -47,7 +47,7 @@ public class Application {
             }
         }
 
-        String[] nums = numbers.split(defaultDelimiter);
+        String[] nums = numbers.split(DEFAULT_DELIMITER);
 
         for (String num : nums) {
             if (isParse(num)) {
@@ -63,13 +63,11 @@ public class Application {
         return sum;
     }
     public boolean isParse(String inputStr){
-        try
-        {
+        try{
             Integer.parseInt(inputStr);
             return true;
         }
-        catch (IllegalArgumentException e)
-        {
+        catch (IllegalArgumentException e){
             return false;
         }
     }
