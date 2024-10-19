@@ -15,7 +15,7 @@ public class Application {
         String input = Console.readLine();
 
         if (input.startsWith("//")) {
-            endex = input.indexOf("\n");
+            endex = input.indexOf("\\n");
             if (endex == -1) {
                 throw new IllegalArgumentException("Unavailable format. Check your input.");
             }
@@ -24,7 +24,7 @@ public class Application {
                 c_sep = "\\" + c_sep;
             }
             sep = sep + "|" + c_sep;
-            input = input.substring(endex + 1);
+            input = input.substring(endex + 2);
         }
         else if(input.contains("//")){
             throw new IllegalArgumentException("Custom Separator Grammar must be placed at the first.");
@@ -37,10 +37,10 @@ public class Application {
         } else {
             for (String v : value) {
                 try {
-                    num = Integer.parseInt(v);
-                    if (num < 0) {
-                        throw new IllegalArgumentException("The number should be positive. Error number = " + num);
+                    if(Integer.parseInt(v) < 0){
+                        throw new IllegalArgumentException("The number should be positive");
                     }
+                    num = Integer.parseInt(v);
                     sum = sum + num;
                 } catch (NumberFormatException e) {
                     throw new IllegalArgumentException("Not allowed separator is used.");
