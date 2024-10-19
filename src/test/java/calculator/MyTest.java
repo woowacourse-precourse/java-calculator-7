@@ -33,6 +33,22 @@ public class MyTest extends NsTest {
         });
     }
 
+    @Test
+    void 커스텀_구분자_외에_숫자_안주어짐() {
+        assertSimpleTest(() -> {
+            run("//;|\\n");
+            assertThat(output().contains("결과 : 0"));
+        });
+    }
+
+    @Test
+    void 빈_문자열() {
+        assertSimpleTest(() -> {
+            run("\n");
+            assertThat(output().contains("결과 : 0"));
+        });
+    }
+
     @Override
     protected void runMain() {
         Application.main(new String[]{});
