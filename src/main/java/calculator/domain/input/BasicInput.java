@@ -1,15 +1,16 @@
 package calculator.domain;
 
-import calculator.constants.Constants;
+import calculator.util.InputValidator;
+import calculator.util.StringUtil;
 import java.util.Arrays;
 import java.util.Objects;
 
 public class BasicInput extends Input {
 
-    private final String text;
+    private static final String BASIC_DELIMITER = "[,:]";
 
     private BasicInput(String text) {
-        this.text = text;
+        super(text);
     }
 
     public static Input from(String text) {
@@ -18,13 +19,10 @@ public class BasicInput extends Input {
 
     @Override
     public Long[] createCalculationInputs() {
-        return Arrays.stream(createStrings(text))
-                .map(Long::valueOf)
+        return Arrays.stream(StringUtil.splitText(text, BASIC_DELIMITER))
+                .map(InputValidator::validateOnlyPlainNumber)
+                .peek(InputValidator::validatePositive)
                 .toArray(Long[]::new);
-    }
-
-    private String[] createStrings(String text) {
-        return text.split(Constants.BASIC_DELIMITER);
     }
 
     @Override

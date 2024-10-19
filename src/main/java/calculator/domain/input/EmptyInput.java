@@ -1,29 +1,20 @@
 package calculator.domain;
 
-import calculator.util.InputValidator;
 import java.util.Objects;
 
-public class DefaultInput extends Input {
+public class EmptyInput extends Input {
 
-    private final String text;
-
-    private DefaultInput(String text) {
-        this.text = text;
+    private EmptyInput(String text) {
+        super(text);
     }
 
     public static Input from(String text) {
-        return new DefaultInput(text);
+        return new EmptyInput(text);
     }
 
     @Override
     public Long[] createCalculationInputs() {
-        InputValidator.validateHasNumber(text);
-
-        return new Long[]{toLong(text)};
-    }
-
-    private Long toLong(String text) {
-        return Long.valueOf(text);
+        return new Long[]{0L};
     }
 
     @Override
@@ -31,7 +22,7 @@ public class DefaultInput extends Input {
         if (this == object) {
             return true;
         }
-        if (!(object instanceof DefaultInput that)) {
+        if (!(object instanceof EmptyInput that)) {
             return false;
         }
         return Objects.equals(text, that.text);

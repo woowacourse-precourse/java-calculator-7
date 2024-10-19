@@ -61,16 +61,22 @@
 
 2. StringCalculator는 덧셈 계산만 담당하도록 변경. 이름도 Calculator로 변경
 
-3. 작업 순서
+3. 여러 유형의 Input 클래스를 만들고 사용자가 입력한 문자열을 InputTypeSorter가 확인하여 알맞은 Input 클래스에 할당하도록 변경
 
-- Console.readlLine
-- 커스텀 구분자 포함 input / 기본 구분자 포함 input / 유효하지 않은 input
-- split해서 Calculator로 넘기기
+4. 각 Input 클래스는 자신만의 방법으로 문자열을 Long 배열로 변환하여 Calculator로 넘김
 
-4. 자료형 변경
+5. 작업 흐름
+
+- InputView가 '덧셈할 문자열을 입력해주세요' 출력
+- 사용자 입력 : Console.readlLine
+- InputTypeSorter에 사용자 입력을 넘기고, 알맞은 Input 클래스에 작업 할당
+- Input 클래스가 문자열을 Long형 배열로 만듦 (이 때, 문자열 split은 StringUtil이 담당)
+- Long형 배열이 Calculator로 넘어가, Calculator는 Long 덧셈 결과를 반환
+- ResultView가 계산 결과 출력
+
+6. 자료형 변경
 
 - int 덧셈 -> Long 덧셈으로 변경 (int의 범위를 넘을 경우 대비)
-- 기본 구분자 ,와 :는 String -> Character로 변경
 
 ## 패키지 설계
 
@@ -81,11 +87,14 @@
 
 2. domain
 
-- StringCalculator : 구분자로부터 숫자를 분리하여 덧셈 계산
-- InputTypeSorter : 사용자의 입력 유형을 구분
-- Input : 공통 유효성 검증 정의
-- BasicDelimiterInput : 유효성 검증, long형 배열 생성
-- CustomDelimiterInput : 유효성 검증, long형 배열 생성
+- Calculator : 구분자로부터 숫자를 분리하여 덧셈 계산
+- input
+    * InputTypeSorter : 사용자의 Input 유형을 구분
+    * Input : 추상 클래스. Long형 배열을 만드는 추상 메소드 정의
+    * BasicInput : 기본 구분자가 포함된 문자열. 유효성 검증, long형 배열 생성
+    * CustomInput : 커스텀 구분자를 정의하는 문자들이 포함된 문자열. 유효성 검증, long형 배열 생성
+    * EmptyInput : 빈 문자열. 유효성 검증, long형 배열 생성
+    * OtherInput : 이외 문자열
 
 3. controller
 
@@ -98,4 +107,4 @@
 
 5. constants
 
-- Constants : StringCalculator, StringValidator, 그 외 테스트 클래스에서 사용되는 상수 정의
+- InValidInputConstants : 잘못된 문자열이 입력되었을 때 유형에 알맞은 출력 문구 정의
