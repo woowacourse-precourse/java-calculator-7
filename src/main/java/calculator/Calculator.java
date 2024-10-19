@@ -34,6 +34,9 @@ public class Calculator {
 
                 try {
                     int value = Integer.parseInt(temp);
+                    if (value <= 0) {
+                        throw new IllegalArgumentException();
+                    }
                     result += value;
                     start = end + 1;
                     end++;
