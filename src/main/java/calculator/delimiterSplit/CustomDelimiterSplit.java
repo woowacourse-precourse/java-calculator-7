@@ -1,5 +1,7 @@
 package calculator.delimiterSplit;
 
+import calculator.checkMethod.CheckRegex;
+
 public class CustomDelimiterSplit{
 
     public static String[] customDelimiterSplit(String input, int inputLen, String basicDelimiter){
@@ -13,8 +15,8 @@ public class CustomDelimiterSplit{
         if (idx == -1) {
             throw new IllegalArgumentException("잘못된 입력값입니다.");
         } else{
-            // |가 커스텀구분자에 포함되었을 경우에 \\|로 치환하여 문자로 인식하도록
-            customDelimiter += input.substring(2, idx).replace("|", "\\|");
+            customDelimiter += input.substring(2, idx).replace("\\", "\\\\").replace("|", "\\|");
+            customDelimiter = CheckRegex.checkRegex(customDelimiter);
         }
 
         String operandStr = input.substring(idx+2, inputLen);
