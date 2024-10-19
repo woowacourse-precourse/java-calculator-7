@@ -10,6 +10,13 @@ public class Application {
 
     public static void main(String[] args) {
 
+        List<String> number = new ArrayList<>();
+        List<Integer> sumList;
+
+        for (int i = 0; i < 10; i++) {
+            number.add(String.valueOf(i));
+        }
+
         // 입력
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String str = Console.readLine();
@@ -18,9 +25,9 @@ public class Application {
         // 구분자 확인
         if (splitStr[0].equals("/")) {
             String delimiter = findDelimiter(splitStr);
-            // 문자열 분리
+            sumList = checkStr(splitStr, 5, number, delimiter);
         } else {
-            // 문자열 분리
+            sumList = checkStr(splitStr, 0, number, null);
         }
 
         // 출력
@@ -35,4 +42,27 @@ public class Application {
             throw new IllegalArgumentException();
         }
     }
+
+    public static List<Integer> checkStr (String[] splitStr, int start, List<String> number, String delimiter) {
+        Stack<String> digits = new Stack<>();
+        List<Integer> sumNumbers = new ArrayList<>();
+
+        for (int i = start; i < splitStr.length; i++) {
+            if (splitStr[i].equals(",") || splitStr[i].equals(":") || splitStr[i].equals(delimiter)) {
+                digitsToNumber(digits, sumNumbers);
+            } else if (number.contains(splitStr[i])) {
+                digits.add(splitStr[i]);
+            } else {
+                throw new IllegalArgumentException();
+            }
+        }
+
+        if (!digits.isEmpty()) {
+            digitsToNumber(digits, sumNumbers);
+        }
+
+        return sumNumbers;
+    }
+
+    public static void digitsToNumber (Stack<String> digits, List<Integer> sumNumbers) {}
 }
