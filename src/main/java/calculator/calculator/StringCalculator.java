@@ -8,4 +8,9 @@ public class StringCalculator extends Calculator {
     public StringCalculator(NumberExtractor numberExtractor) {
         this.numberExtractor = numberExtractor;
     }
+
+    @Override
+    int sum() {
+        return 0;
+    }
 }

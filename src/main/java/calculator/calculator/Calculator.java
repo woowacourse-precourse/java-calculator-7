@@ -5,4 +5,5 @@ package calculator.calculator;
  * - 원하는 형식에 맞춰 추상화
  */
 public abstract class Calculator {
+    abstract int sum();
 }
