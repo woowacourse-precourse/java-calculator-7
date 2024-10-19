@@ -18,7 +18,7 @@ public class CalculatorController {
     public void run(){
         inputString();
         isValidationCheckNullOrEmpty();
-        parseNumbers();
+        split();
         outputResult();
     }
 
@@ -32,7 +32,7 @@ public class CalculatorController {
             outputView.printAnswerMessage(calculator.getAnswer());
     }
 
-    public void parseNumbers(){
+    public void split(){
         calculator.split();
     }
 
