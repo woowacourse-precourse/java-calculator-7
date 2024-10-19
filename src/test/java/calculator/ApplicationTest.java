@@ -190,6 +190,23 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void validateOverTwoCustomDelimiter() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//??\\n//!!\\n33??")).isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("커스텀 구분자가 2개이상 있습니다");
+        });
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//??\\n//!!  \\n33??")).isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("커스텀 구분자가 2개이상 있습니다");
+        });
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//??\\n//!!  \\n//!1231  \\n33??")).isInstanceOf(
+                            IllegalArgumentException.class)
+                    .hasMessage("커스텀 구분자가 2개이상 있습니다");
+        });
+    }
+
+    @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1");

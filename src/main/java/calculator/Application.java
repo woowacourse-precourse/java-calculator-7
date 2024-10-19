@@ -29,7 +29,6 @@ public class Application {
 
         if (isNotContainingDelimiter) {
             List<String> customDelimiterInputs = Arrays.stream(input.split(CUSTOM_DELITMITER_END))
-                    .map(String::trim)
                     .filter(letter -> !letter.isBlank())
                     .toList();
 
@@ -37,6 +36,10 @@ public class Application {
 
             if (expression.contains(CUSTOM_DELITMITER_STRART)) {
                 throw new IllegalArgumentException("커스텀 구분자 이후로 수식이 없습니다");
+            }
+
+            if (customDelimiterInputs.size() > 2) {
+                throw new IllegalArgumentException("커스텀 구분자가 2개이상 있습니다");
             }
 
             throw new IllegalArgumentException("구분자가 없습니다");
