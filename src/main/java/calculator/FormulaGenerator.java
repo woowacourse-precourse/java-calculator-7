@@ -10,11 +10,11 @@ public class FormulaGenerator {
     }
 
     private String makeFormula(String input) {
-        if(input.isEmpty()) return "0";
         if(input.charAt(0)=='/'){
             InputParser inputParser = new InputParser(input);
             input = inputParser.getparsedInput();
         }
+        if(input.isEmpty()) return "0";
         for (int i = 1; i < input.length(); i++) {
             input = changeSeparator(input, i);
         }

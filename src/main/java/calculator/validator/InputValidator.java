@@ -9,10 +9,16 @@ public class InputValidator {
     }
 
     private void validate() {
-        if(input.isEmpty()) return;
+        if(isInputEmpty()) return;
         CustomSeparatorValidator customSeparatorValidator = new CustomSeparatorValidator(input);
         AnotherLetterValidator anotherLetterValidator = new AnotherLetterValidator(input);
         ConsecutiveLetterValidator consecutiveLetterValidator = new ConsecutiveLetterValidator(input);
+    }
+
+    private boolean isInputEmpty() {
+        if(input.isEmpty()) return true;
+        if(input.charAt(0)=='/') return input.substring(5).isEmpty();
+        return false;
     }
 
 }
