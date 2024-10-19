@@ -75,6 +75,29 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    @DisplayName("추출한 것이 숫자가 아닐 경우 예외 처리하기")
+    void 추출한_자료형_예외() {
+        assertSimpleTest(() -> {
+
+            //커스텀 구분자를 잘못 선언한 상황
+            assertThatThrownBy(() -> runException("3,4:1//;\\n"))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("1//;\\n은(는) 숫자가 아닙니다.");
+
+            //잘못된 구분자를 사용한 경우
+            assertThatThrownBy(() -> runException("3'4:6"))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("3'4은(는) 숫자가 아닙니다.");
+
+            //문자를 더하려는 상황
+            assertThatThrownBy(() -> runException("5,2d:1"))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("2d은(는) 숫자가 아닙니다.");
+
+        });
+    }
+
     @Override
     public void runMain() {
         try {
