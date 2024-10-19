@@ -66,19 +66,19 @@ class ApplicationTest extends NsTest {
 
 
     @Test
-    void 구문자_위치오류_예외_테스트() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException(":1:2:3"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
+    void 구문자_위치오류_테스트() {
+        assertSimpleTest(() -> {
+            run(":1:2:3");
+            assertThat(output()).contains("결과 : 6");
+        });
     }
 
     @Test
-    void 구문자_중복사용_예외_테스트() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("1:2::3"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
+    void 구문자_중복사용_테스트() {
+        assertSimpleTest(() -> {
+            run("1:2::3");
+            assertThat(output()).contains("결과 : 6");
+        });
     }
 
     @Test
@@ -129,6 +129,14 @@ class ApplicationTest extends NsTest {
                 assertThatThrownBy(() -> runException("1:2;3"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+    @Test
+    void 미입력시_결과_테스트() {
+        assertSimpleTest(() -> {
+            run("\n");
+            assertThat(output()).contains("결과 : 0");
+        });
     }
 
 
