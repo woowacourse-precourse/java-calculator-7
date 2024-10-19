@@ -9,6 +9,9 @@ public class StringInput {
         this.input = input;
     }
 
+    public String getInput(){
+        return input;
+    }
     private void validateString(String input) {
         if (isBlank(input)) {
             throw new IllegalArgumentException(BLINK_INPUT_ERROR);
