@@ -2,7 +2,7 @@ package calculator;
 
 public class InputManager {
     private final String input;
-    private String separatorCandidates;
+    private String separatorCandidate;
     private String operandCandidates;
 
     public InputManager(String input) {
@@ -22,13 +22,13 @@ public class InputManager {
         return this.input.startsWith("//");
     }
 
-    public String getSeparatorCandidates() {
-        if(separatorCandidates == null) {
+    public String getSeparatorCandidate() {
+        if(separatorCandidate == null) {
             int startIndex = input.indexOf("//") + 2;
             int endIndex = input.lastIndexOf("\\n");
-            separatorCandidates = input.substring(startIndex, endIndex);
+            separatorCandidate = input.substring(startIndex, endIndex);
         }
-        return this.separatorCandidates;
+        return this.separatorCandidate;
     }
 
     public String getOperandCandidates() {
