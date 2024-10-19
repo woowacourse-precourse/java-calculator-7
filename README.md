@@ -26,9 +26,10 @@
         - private void checkCustomSperator()
     - [X] 2. 필드 데이터 연산하고, 결과값 리턴하기
         - public int returnAddition()
-- [ ] C. Exception 처리하기: 잘못된 값을 입력할 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료(exit()함수 사용 불가) 
+- [X] C. Exception 처리하기: 잘못된 값을 입력할 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료(exit()함수 사용 불가) 
     - 1. 숫자도 구분자도 아닌 문자의 경우 에러 처리 
     - 2. 입력받은 문자열에 음수가 포함되는 경우(커스텀 구분자가 아닌 정수로 인식될 때)
+    - 3. 숫자 범위는 Int로 제한 한다 -> sum의 결과값이 int범위를 넘어서는 경우.
 
 ## 환경설정
 - Style 폴더를 만들고, Google과 우테코 스타일 파일을 넣었다. Google스타일 적용후 인덴트설정, 열제한(120줄)설정.

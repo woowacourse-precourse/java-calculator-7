@@ -72,7 +72,14 @@ public class Calculation {
         int sum = 0;
         for(int i=0; i<valList.size(); i++)
         {
-            sum += valList.get(i);
+            int currentValue = valList.get(i);
+
+            // 양수 더하기 전 오버플로우 감지
+            if (Integer.MAX_VALUE - sum < currentValue) {
+                throw new IllegalArgumentException();
+            }
+
+            sum += currentValue;
         }
         return sum;
     }
