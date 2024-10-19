@@ -52,4 +52,16 @@ public class DelimiterExtractor {
 
         return "";
     }
+
+    public void validate(String positiveNumberPattern) {
+        String delimiterLeft = remove(positiveNumberPattern);
+
+        String BASIC_DELIMITER_REGEX = ",|:";
+        String maybeNothing = remove(BASIC_DELIMITER_REGEX, delimiterLeft).trim();
+
+        if (!maybeNothing.isBlank()) {
+            throw new IllegalArgumentException(maybeNothing + " 은 잘못된 구분자예요!");
+        }
+    }
+
 }
