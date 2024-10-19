@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class StringParser {
     private static final List<String> DEFAULT_DELIMITER = Arrays.asList(",", ":");
     private static final String EXTRACT_DELIMITER_REGEX = "//(.*?)\\\\n";
-    private static final String NON_DIGIT_REGEX = ".*\\D.*";
+    private static final String NUMERIC_REGEX = "^-?\\d+(\\.\\d+)?$";
     private final String inputString;
 
     public StringParser(String inputString) {
@@ -58,9 +58,9 @@ public class StringParser {
     }
 
     private void validateNumeric(String[] stringNumbers) {
-        boolean existNonNumeric = Arrays.stream(stringNumbers).anyMatch(s -> s.matches(NON_DIGIT_REGEX));
-        if (existNonNumeric) {
-            throw new IllegalArgumentException();
+        boolean hasNonNumeric = Arrays.stream(stringNumbers).anyMatch(str -> !str.matches(NUMERIC_REGEX));
+        if (hasNonNumeric) {
+            throw new IllegalArgumentException("Invalid numeric value found.");
         }
     }
 }
