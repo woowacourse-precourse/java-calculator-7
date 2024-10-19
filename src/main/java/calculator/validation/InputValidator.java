@@ -1,9 +1,9 @@
 package calculator.validation;
 
-import java.util.Arrays;
-
-import static calculator.constants.DelimiterEnum.*;
+import static calculator.constants.DelimiterEnum.MINUS;
 import static calculator.controller.ExceptionMessage.MUST_BE_DIGIT;
+
+import java.util.Arrays;
 
 public class InputValidator {
     public static boolean isCheckEmpty(String userInput) {

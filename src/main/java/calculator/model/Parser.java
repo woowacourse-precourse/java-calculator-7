@@ -1,8 +1,8 @@
 package calculator.model;
 
-import calculator.validation.InputValidator;
-
 import static calculator.controller.ExceptionMessage.INVALID_DELIMITER;
+
+import calculator.validation.InputValidator;
 
 public class Parser {
     public int toInt(String value) {
