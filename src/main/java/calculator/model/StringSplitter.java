@@ -2,6 +2,7 @@ package calculator.model;
 
 import static calculator.validate.Validator.handleConversionError;
 import static calculator.validate.Validator.validateInputStringAndDelimiters;
+import static calculator.validate.Validator.validateNegativeNumber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,6 @@ public class StringSplitter {
         for (String delimiter : delimiters) {
             appendOrOperatorWhenNeeded(regexBuilder);
 
-            // "-" 구분자를 처리
             if (delimiter.equals("-")) {
                 regexBuilder.append("\\-");
             } else {
@@ -68,14 +68,12 @@ public class StringSplitter {
         try {
             int number = Integer.parseInt(inputStringPart.trim());
 
-            // 음수를 허용하지 않는 경우 에러 발생
-            if (!allowNegativeNumbers && number < 0) {
-                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + inputStringPart);
-            }
+            validateNegativeNumber(number, allowNegativeNumbers, inputStringPart);
 
             return number;
         } catch (NumberFormatException e) {
             handleConversionError(inputStringPart);
+
             return null;
         }
     }
