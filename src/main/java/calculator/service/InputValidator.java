@@ -1,5 +1,7 @@
 package calculator.service;
 
+import calculator.exception.ErrorCode;
+
 public class InputValidator {
 
     public static void validate(String[] parts) {
@@ -7,9 +9,9 @@ public class InputValidator {
             if (part.isEmpty()) {
                 continue;
             } else if (!isNumeric(part)) {
-                throw new IllegalArgumentException("숫자가 아닌 값이 포함되었습니다: " + part);
+                throw new IllegalArgumentException(ErrorCode.NOT_NUMBER.getMessage() + part);
             } else if (Integer.parseInt(part) < 0) {
-                throw new IllegalArgumentException("양수가 아닌 값이 포함되었습니다: " + part);
+                throw new IllegalArgumentException(ErrorCode.NOT_POSITIVE_NUMBER.getMessage() + part);
             }
         }
     }
