@@ -5,8 +5,7 @@ public class Application {
 
         try (ConsoleIOHandler handler = new ConsoleIOHandler()) {
             final Expression expr = Expression.parse(handler.read());
-
-            final Adder adder = new Adder(expr.getDelimiters(), expr.getOperands());
+            final Adder adder = new Adder(expr);
             final int result = adder.sum();
             handler.print(result);
         }
