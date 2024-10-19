@@ -17,6 +17,6 @@ public class HandlerAdapters {
                 return handlerAdapter;
             }
         }
-        throw new NoSuchElementException("요청을 처리하기 위한 handlerAdapter가 존재하지 않습니다");
+        throw new IllegalArgumentException("요청을 처리하기 위한 handlerAdapter가 존재하지 않습니다");
     }
 }

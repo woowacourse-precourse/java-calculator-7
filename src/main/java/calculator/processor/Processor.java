@@ -3,24 +3,23 @@ package calculator.processor;
 import calculator.common.Request;
 import calculator.common.Response;
 import calculator.processor.handler.calculating.CalculatingHandler;
+import calculator.processor.handler.exception.ExceptionHandler;
 import calculator.processor.handleradapter.HandlerAdapter;
 import calculator.processor.handleradapter.HandlerAdapters;
 import calculator.processor.handlermapping.HandlerMappings;
-import java.util.NoSuchElementException;
 
 public class Processor {
 
     private final HandlerMappings handlerMappings;
     private final HandlerAdapters handlerAdapters;
+    private final ExceptionHandler exceptionHandler;
 
     public Processor() {
         handlerMappings = new HandlerMappings();
         handlerAdapters = new HandlerAdapters();
+        exceptionHandler = new ExceptionHandler();
     }
 
-    /**
-     * TODO : 에러 처리 로직 추가
-     */
     public Response process(Request request) {
         Response response;
         try {
@@ -28,11 +27,11 @@ public class Processor {
             HandlerAdapter ha = getHandlerAdapter(request);
 
             response = getResponse(request, ha, handler);
-        } catch (NoSuchElementException e) {
-            response = Response.NoSuchElementException();
+        } catch (IllegalArgumentException e) {
+            response = Response.IllegalArgumentException();
         }
 
-        // 에러 처리 로직 추가
+        handleException(response);
         return response;
     }
 
@@ -46,5 +45,9 @@ public class Processor {
 
     private Response getResponse(Request request, HandlerAdapter ha, CalculatingHandler handler) {
         return ha.handle(request, handler);
+    }
+
+    private void handleException(Response response) {
+        exceptionHandler.handle(response);
     }
 }

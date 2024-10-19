@@ -10,6 +10,10 @@ public record Response(Object body, String errorMessage) {
         return new Response(null, "NoSuchElementException");
     }
 
+    public static Response IllegalArgumentException() {
+        return new Response(null, "IllegalArgumentException");
+    }
+
     public boolean isSuccess() {
         return errorMessage == null;
     }

@@ -14,10 +14,14 @@ public abstract class AbstractCalculatingHandlerAdapter implements HandlerAdapte
     public abstract boolean supports(Request request);
 
     public Response handle(Request request, Object handler) {
-        Numbers numbers = toNumbers(request);
-        Number result = ((CalculatingHandler) handler).handle(numbers);
+        try {
+            Numbers numbers = toNumbers(request);
+            Number result = ((CalculatingHandler) handler).handle(numbers);
 
-        return new Response(result);
+            return new Response(result);
+        } catch (Exception e) {
+            return Response.IllegalArgumentException();
+        }
     }
 
     private static Numbers toNumbers(Request request) {
