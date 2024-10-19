@@ -1,5 +1,8 @@
 package calculator.dto;
 
+import calculator.global.exception.CalculatorException;
+import calculator.global.message.ErrorMessage;
+
 public record AdditionInput(String input) {
 
     public AdditionInput {
@@ -8,7 +11,7 @@ public record AdditionInput(String input) {
 
     private void validateInput(String input) {
         if (input == null) {
-            throw new IllegalArgumentException("null은 입력할 수 없습니다.");
+            throw CalculatorException.from(ErrorMessage.NULL_INPUT_ERROR);
         }
     }
 }
