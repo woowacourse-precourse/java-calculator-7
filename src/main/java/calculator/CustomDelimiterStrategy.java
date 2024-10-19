@@ -26,6 +26,9 @@ public class CustomDelimiterStrategy implements DelimiterStrategy {
     }
 
     private void validateAndParseNumbers(String input, String[] tokens) {
+        if (!Character.isDigit(input.charAt(0)) || !Character.isDigit(input.charAt(input.length() - 1))) {
+            throw new IllegalArgumentException("표현식의 처음과 끝은 숫자로 이루어져야합니다.");
+        }
 
         for (String token : tokens) {
             System.out.println(token);
