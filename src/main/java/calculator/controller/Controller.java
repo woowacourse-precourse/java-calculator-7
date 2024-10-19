@@ -17,12 +17,11 @@ public class Controller {
         String calculationValue = inputView.inputCalculationValue(outputView);
         if (calculationValue.isEmpty()) {
             outputView.printResultValue(INIT_VALUE);
+            return;
         }
-        else if (!calculationValue.isEmpty()) {
-            extractor.extractValues(calculationValue);
-            Numbers numbers = extractor.extractValues(calculationValue);
-            int resultValue = calculator.plusCalculator(numbers);
-            outputView.printResultValue(resultValue);
-        }
+        extractor.extractValues(calculationValue);
+        Numbers numbers = extractor.extractValues(calculationValue);
+        int resultValue = calculator.plusCalculator(numbers);
+        outputView.printResultValue(resultValue);
     }
 }
