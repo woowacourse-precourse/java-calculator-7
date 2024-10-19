@@ -13,6 +13,7 @@ public class CalculatorRunner {
         String userInput = CalculatorUtils.getInput();
         // 입력값에서 커스텀 구분자를 추출하기
         CalculatorUtils.extractSeparators(separators, userInput);
-        System.out.println(separators);
+        // 사용자 입력이 올바른지 검사하기
+        CalculatorUtils.checkInputFormat(userInput, separators);
     }
 }
