@@ -11,7 +11,7 @@ public class Application {
         ArrayList<String> separator = new ArrayList<>();
         separator.add(",");
         separator.add(":");
-        if(str.startsWith("//") && str.charAt(3)=='\\' && str.charAt(4) == 'n'){
+        if (str.startsWith("//") && str.charAt(3)=='\\' && str.charAt(4) == 'n'){
             separator.add(str.substring(2,3));
             str = str.substring(5);
         }
@@ -19,11 +19,11 @@ public class Application {
             str = str.replaceAll(s, " ");
         }
         int sum = 0;
-        if(!str.isEmpty()){
+        if (!str.isEmpty()){
             String[] number = str.split(" ");
-            for(String s : number){
+            for (String s : number){
                 try{
-                    if(sum < 0){
+                    if (sum < 0){
                         throw new IllegalArgumentException();
                     }
                     sum += Integer.parseInt(s);
