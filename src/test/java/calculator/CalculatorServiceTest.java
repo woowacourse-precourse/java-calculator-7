@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 public class CalculatorServiceTest {
 
-    public static final CalculatorService calculatorService = new CalculatorService();
+    private final CalculatorService calculatorService = new CalculatorService();
 
     @Test
     public void testCalcualte() throws Exception {
