@@ -1,21 +1,15 @@
 package calculator;
 
 public class Calculation {
-    public static int stringCalculation(InputData input){
-        switch(input.getInputType()) {
-            case InputType.EMPTY:
-                return 0;
-            case InputType.GENERAL:
-                calculationGeneralString(input.getUserInput());
-                break;
-            case InputType.CUSTOM:
-                calculationCustomString(input.getUserInput());
-                break;
+    public static int getCalculationResult(String input){
+        if(input.isEmpty()){
+            return 0;
+        }else{
+            return stringCalculation(input);
         }
-        return -1;
     }
 
-    public static int calculationGeneralString(String input){
+    public static int stringCalculation(String input){
         int sum = 0;
         for(char c : input.toCharArray()){
             if(Character.isDigit(c)){
@@ -24,10 +18,4 @@ public class Calculation {
         }
         return sum;
     }
-
-    public static void sliceCustomString(String input){
-
-
-    }
-
 }

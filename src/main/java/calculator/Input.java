@@ -2,9 +2,10 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Input {
-    public static InputData getUserInput() {
+    public static String getUserInput() {
         String input = Console.readLine();
-        return validUserInput(input);
+        validUserInput(input);
+        return input;
     }
 
     /*
@@ -22,13 +23,9 @@ public class Input {
      */
 
     /** 사용자 입력 검증 **/
-    public static InputData validUserInput(String input){
-        if(input.isEmpty()){
-            return new InputData(InputType.EMPTY, input);
-        } else if (validGeneralUserInput(input)) {
-            return new InputData(InputType.GENERAL, input);
-        } else if (validCustomUserInput(input)){
-            return new InputData(InputType.CUSTOM, input);
+    public static void validUserInput(String input){
+        if(input.isEmpty() || validGeneralUserInput(input) || validCustomUserInput(input)){
+            return;
         } else {
             throw new IllegalArgumentException();
         }
