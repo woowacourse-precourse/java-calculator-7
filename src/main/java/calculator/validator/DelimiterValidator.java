@@ -10,15 +10,9 @@ public class DelimiterValidator {
     public static boolean hasCustomDelimiter(String str) {
         if (str.length() >= 5) {
             str = str.substring(0, str.lastIndexOf(SUFFIX)+2);
-
-            return isCustomDelimiter(str);
+            return str.startsWith(PREFIX) && str.endsWith(SUFFIX);
         }
-
         return false;
-    }
-
-    private static boolean isCustomDelimiter(String str) {
-        return str.startsWith(PREFIX) && str.endsWith(SUFFIX);
     }
 
     public static String validateRequireEscapeCharacter(String customDelimiter) {
