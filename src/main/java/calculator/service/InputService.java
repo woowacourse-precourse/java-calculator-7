@@ -11,7 +11,7 @@ public class InputService {
     private char customDelimiter; // 사용자가 입력한 커스텀 구분자
 
     public InputService() {
-//        this.userInput = "//\\n";
+        this.userInput = "//.\\n33:4:5";
     }
 
     // 사용자의 입력을 받는다.
@@ -24,12 +24,19 @@ public class InputService {
     public boolean isCustomDelimiter() {
         // 이스케이프 문자 처리
         userInput = userInput.replace("\\n", "\n");
+
         if (userInput.length() >= 4) {
             if (userInput.startsWith("//") && userInput.charAt(3) == '\n') {
                 this.customDelimiter = userInput.charAt(2);
                 return true;
             }
         }
+
+        // 입력 문자열이 "//\\n" 인 경우, 커스텀 구분자를 입력하지 않았다. 잘못된 입력이다.
+        if (userInput.startsWith("//") && userInput.charAt(2) == '\n') {
+            throw new IllegalArgumentException("커스텀 구분자를 입력하지 않았습니다. 잘못된 입력입니다.");
+        }
+
         return false;
     }
 
