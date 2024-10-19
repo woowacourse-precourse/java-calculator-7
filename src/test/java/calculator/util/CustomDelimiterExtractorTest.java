@@ -1,5 +1,6 @@
 package calculator.util;
 
+import calculator.calculator.Calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -68,5 +69,17 @@ public class CustomDelimiterExtractorTest {
         assertThatThrownBy(() -> CustomDelimiterExtractor.extract(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(CUSTOM_DELIMITER_IS_EMPTY.getMessage());
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자가 메타 기호일 때 예외 처리")
+    void 메타_기호_커스텀_구분자() {
+        // given
+        String input = "//?\\n1?2?3";
+
+        // when & then
+        assertThatThrownBy(() -> CustomDelimiterExtractor.extract(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(INVALID_META_DELIMITER_FORMAT.getMessage());
     }
 }

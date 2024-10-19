@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static calculator.exception.util.CustomDelimiterExtractorErrorMessage.INVALID_CUSTOM_DELIMITER_FORMAT;
+import static calculator.exception.util.CustomDelimiterExtractorErrorMessage.INVALID_META_DELIMITER_FORMAT;
 import static calculator.exception.util.NumberExtractorErrorMessage.INVALID_CHARACTER;
 import static calculator.exception.util.NumberExtractorErrorMessage.NEGATIVE_OR_ZERO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -115,7 +116,7 @@ public class CalculatorTest {
         // when & then
         assertThatThrownBy(calculator::calculate)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(INVALID_CUSTOM_DELIMITER_FORMAT.getMessage());
+                .hasMessageContaining(INVALID_META_DELIMITER_FORMAT.getMessage());
     }
 
     @Test

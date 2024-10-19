@@ -35,7 +35,7 @@ public class CustomDelimiterExtractor {
         }
 
         if (delimiter.matches(METACHARACTERS)) {
-            throw new IllegalArgumentException(CustomDelimiterExtractorErrorMessage.INVALID_CUSTOM_DELIMITER_FORMAT.getMessage());
+            throw new IllegalArgumentException(CustomDelimiterExtractorErrorMessage.INVALID_META_DELIMITER_FORMAT.getMessage());
         }
     }
 }
