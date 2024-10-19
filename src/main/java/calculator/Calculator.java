@@ -1,59 +1,37 @@
 package calculator;
 
-import java.util.ArrayList;
-import java.util.List;
+public class Calculator implements AutoCloseable{
+    private String input;
+    private int sum;
 
-public class Calculator {
-    private final String userInput;
-    private final List<String> delimiters;
-
-    //Generator: 기본 구별자, 유저 입력 값 설정
-    public Calculator(String userInput) {
-        DelimiterProcess delimiterProcess = new DelimiterProcess(userInput);
-        delimiters = delimiterProcess.getDelimiters();
-        this.userInput = delimiterProcess.getUserInput();
+    //Generator: 기본 구분자 추가
+    public Calculator(String input) {
+        this.input = input;
     }
 
-    //print(): 결과인 합을 계산
-    public void printResult() {
-        int sum = 0;
-
-        for (Integer integer : getIntegers()) {
-            sum += integer;
+    //process() : 구분자 처리, 숫자만 남은 문자열 처리, 합 계산 과정
+    public void process() {
+        DelimiterService delimiterService = new DelimiterService(input);
+        while(delimiterService.isDelimStarting()) {
+            delimiterService.addDelimiter();
         }
 
-        System.out.println("결과 : " + sum);
-    }
+        delimiterService.replacePattern();
 
-    //getIntegers(): 구분자를 사용하여 문자열에서 숫자만 분리하기
-    private List<Integer> getIntegers(){
-        String DelimTotal = getDelimTotal();
-        String[] tokens = userInput.split(DelimTotal);
-
-        List<Integer> resultIntegers = new ArrayList<>();
-
-        for (String token : tokens) {
-            token = token.trim();
-            if (!token.isEmpty()) {
-                resultIntegers.add(Integer.parseInt(token));
-            }
+        input = delimiterService.getInput();
+        if(input.isEmpty()) {
+            sum = 0;
+            return;
         }
 
-        return resultIntegers;
+        String delimiters = delimiterService.getDelimiters();
+        IntegerService integerService = new IntegerService(input, delimiters);
+        integerService.getIntegers();
+        integerService.printSum();
     }
 
-    //getDelimTotal(): 연산자 모두 합쳐서 String 정규식으로 만들기
-    private String getDelimTotal() {
-        StringBuilder DelimTotal = new StringBuilder();
-
-        for (String delimiter : delimiters) {
-            DelimTotal.append(delimiter).append("|");
-        }
-
-        // 마지막 추가된 |를 제거
-        DelimTotal.deleteCharAt(DelimTotal.length() - 1);
-
-        return DelimTotal.toString();
+    @Override
+    public void close() throws Exception {
+        System.out.println("종료되었습니다.");
     }
-
 }
