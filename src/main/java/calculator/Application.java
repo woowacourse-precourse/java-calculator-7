@@ -11,7 +11,7 @@ public class Application {
         userInput.input();
 
         String input = userInput.getInput();
-        ArrayList<String> separators = userInput.getSeperators();
+        ArrayList<Character> separators = userInput.getSeperators();
 
         Calculator calculator = new Calculator(input, separators);
 

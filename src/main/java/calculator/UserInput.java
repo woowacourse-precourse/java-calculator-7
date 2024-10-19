@@ -47,7 +47,7 @@ public class UserInput {
         return input;
     }
 
-    public ArrayList<String> getSeperators() {
+    public ArrayList<Character> getSeperators() {
         return seperators;
     }
 }
