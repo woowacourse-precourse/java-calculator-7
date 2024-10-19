@@ -3,26 +3,20 @@ package calculator.validate;
 import java.util.Objects;
 
 public class StringValidate {
-    public static String validateInput(String input) {
-        if (input == null || input.isEmpty()) {
-            throw new IllegalArgumentException("아무것도 입력하지 않았습니다.");
+    public static void validateNotNullInput(String input) {
+        if (input == null) {
+            throw new IllegalArgumentException("입력한 문자열이 null 입니다.");
         }
-        if (!input.startsWith("//")) {
-            throw new IllegalArgumentException("문자열은 '//'로 시작해야 합니다.");
-        }
+    }
+
+    public static boolean isInputStartWithSlash(String input) {
+        return input.startsWith("//");
+    }
+
+    public static void validateNewLineInput(String input) {
         if (!input.contains("\n")) {
             throw new IllegalArgumentException("문자열에 '\n'이 있어야 합니다.");
         }
-        return input;
-    }
-
-    public static boolean validateFrontString(String string) {
-        for (char c : string.toCharArray()) {
-            if (Character.isDigit(c)) {
-                throw new IllegalArgumentException("해당 문자열은 문자로만 이루어져야 합니다.");
-            }
-        }
-        return true;
     }
 
     public static boolean validateBackString(String string, String separator) {

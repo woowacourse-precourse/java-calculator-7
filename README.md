@@ -8,16 +8,14 @@
 
 ### 2. 입력받은 문자열을 검증한다. (validate 패키지)
 
-- [ ] 입력받은 문자열이 null인지 확인하는 기능 (isInputNull)
-- [ ] 입력받은 문자열이 "//"로 시작하는지 확인하는 기능 (isInputStartWithSlash)
+- [x] 입력받은 문자열이 null인지 검증하는 기능 (validateNotNullInput)
+- [x] 입력받은 문자열이 "//"로 시작하는지 확인하는 기능 (isInputStartWithSlash)
 
 #### 2-1. 입력받은 문자열이 "//"로 시작하는 경우
 
-- [ ] 입력받은 문자열에 "\n"이 있는지 확인하는 기능 (isNewLineInInput)
+- [x] 입력받은 문자열에 "\n"이 있는지 검증하는 기능 (validateNewLineInput)
 
 #### 2-2. 입력받은 문자열이 "//"로 시작하지 않는 경우
-
-- [ ] 입력받은 문자열이 숫자나 기본 구분자로 시작하는지 확인하는 기능 (isInputStartWithNumOrBasicSeparator)
 
 ### 3. 구분자를 등록한다. (split 패키지)
 
