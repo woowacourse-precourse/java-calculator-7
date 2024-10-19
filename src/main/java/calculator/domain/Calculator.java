@@ -20,7 +20,7 @@ public class Calculator {
     }
 
     private void validatePositiveNumber(int number) {
-        if (number <= 0) {
+        if (number < 0) {
             throw new NonPositiveNumberException();
         }
     }
