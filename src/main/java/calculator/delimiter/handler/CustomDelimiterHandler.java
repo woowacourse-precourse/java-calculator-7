@@ -1,5 +1,6 @@
 package calculator.delimiter.handler;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -17,6 +18,10 @@ public class CustomDelimiterHandler implements DelimiterHandler {
 
         str = str.substring(str.indexOf("\\n") + 2);
 
+        if (str.isEmpty()) {
+            return new ArrayList<>();
+        }
+        
         if (!str.matches("\\d+(?:" + Pattern.quote(delimiter) + "\\d+)*")) {
             throw new IllegalArgumentException("형식이 일치하지 않습니다.");
         }
@@ -24,7 +29,7 @@ public class CustomDelimiterHandler implements DelimiterHandler {
         return Arrays.stream(str.split(Pattern.quote(delimiter)))
                 .collect(Collectors.toList());
     }
-    
+
     @Override
     public boolean isSupport(String str) {
         return !str.isEmpty() && str.matches("^//.\\\\n.*");
