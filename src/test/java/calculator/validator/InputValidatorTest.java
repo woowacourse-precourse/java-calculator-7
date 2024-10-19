@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 class InputValidatorTest {
-    private InputValidator inputValidator;
+    private BasicValidator<String> inputValidator;
 
     @BeforeEach
     void setUp() {
