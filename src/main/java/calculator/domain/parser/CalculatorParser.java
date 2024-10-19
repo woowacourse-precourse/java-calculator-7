@@ -2,6 +2,7 @@ package calculator.domain.parser;
 
 import calculator.domain.dto.InputRequest;
 import calculator.domain.error.InputException;
+import calculator.domain.message.ErrorMessage;
 import calculator.domain.validation.CalculatorParserValidator;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,9 +28,14 @@ public abstract class CalculatorParser {
         List<Integer> numbers = new ArrayList<>();
 
         Arrays.stream(splitData)
-                .filter(data -> !data.isEmpty()) // 빈 문자열을 필터링합니다.
+                .filter(data -> {
+                    if (data.isEmpty()) {
+                        throw InputException.from(ErrorMessage.DEFAULT_INPUT_MUST_START_WITH_NUMBER);
+                    }
+                    return true;
+                })
                 .forEach(data -> numbers.add(CalculatorParserValidator.parseToInt(data)));
-
+        
         return numbers;
     }
 }
