@@ -40,8 +40,7 @@ public class StringCalculator {
 	private static Positive[] toInts(String[] splitString) {
 		Positive[] positives = new Positive[splitString.length];
 		for ( int i = 0; i < splitString.length ; i++) {
-			final int splitNum = Integer.parseInt(splitString[i]);
-			Positive positive = new Positive(splitNum);
+			Positive positive = Positive.inputPositive(splitString[i]);
 			positives[i] = positive;
 		}
 		return positives;
