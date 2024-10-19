@@ -73,4 +73,8 @@ public class Parser {
 		}
 		return nums;
 	}
+
+	public List<String> getSeparators() {
+		return separators;
+	}
 }
