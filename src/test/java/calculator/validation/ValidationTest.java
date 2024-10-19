@@ -20,4 +20,11 @@ public class ValidationTest {
         assertThatThrownBy(() -> Validation.validateIntRange("10000000000,2"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("음수를 입력한 경우 예외발생")
+    void throwExceptionWhenNumberIsNegative() {
+        assertThatThrownBy(() -> Validation.validateNegativeNumber("1,-2,3"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }

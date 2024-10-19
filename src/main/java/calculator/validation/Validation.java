@@ -14,4 +14,10 @@ public class Validation {
             throw new IllegalArgumentException("계산할 수 있는 범위를 벗어났습니다");
         }
     }
+
+    public static void validateNegativeNumber(String number){
+        if(Integer.parseInt(number) < 0) {
+            throw new IllegalArgumentException("음수를 입력했습니다");
+        }
+    }
 }

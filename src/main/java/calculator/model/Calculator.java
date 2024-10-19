@@ -13,6 +13,7 @@ public class Calculator {
         for (String number : numberGroup) {
             Validation.validateNumberFormat(number);
             Validation.validateIntRange(number);
+            Validation.validateNegativeNumber(number);
 
             sum += Integer.parseInt(number);
         }
