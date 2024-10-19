@@ -3,16 +3,14 @@ package calculator;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
-import java.util.List;
-
-public class CalculatorController {
+public class Calculator {
 
     private OutputView outputView;
     private InputView inputView;
     private Separator separator;
     private Numbers numbers;
 
-    public CalculatorController() {
+    public Calculator() {
         this.outputView = new OutputView();
         this.inputView = new InputView();
         this.separator = new Separator();
