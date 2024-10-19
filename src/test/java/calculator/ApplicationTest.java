@@ -39,6 +39,21 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 0");
         });
     }
+    @Test
+    void 입력_실수구분_성공1() {
+        assertSimpleTest(() -> {
+            run("38.2:27.3:30.4");
+            assertThat(output()).contains("결과 : 95.9");
+        });
+    }
+
+    @Test
+    void 입력_실수구분_성공2() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("38..2:27.3:30.4"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
 
 
     @Override

@@ -18,19 +18,21 @@ public class Calculator {
 
     public void add(){
         double sum = 0;
+
         if(isEmpty()){
             System.out.println("결과 : 0");
             return;
         }
-        if(isNegative()){
+
+        if(isNegative())
             throw new IllegalArgumentException("음수값이 포함되면 안됩니다.");
-        }
+
         Custom_Deli(); // 커스텀 구분자 추가
         split_input(); // 커스텀 구분자 구문 삭제된 문자열에서 구분자를 이용해 문자열 구분 후 parts 리스트 저장
-        double_check(parts); // 구분자로 나뉜 문자열 실수형 체크
-        for(String num : parts){
+
+        for(String num : parts)
             sum += Double.parseDouble(num);
-        }
+
         System.out.println("결과 : " + sum);
     }
 
@@ -79,7 +81,7 @@ public class Calculator {
             }
         }
         for(String part : parts){
-            if(part.matches(".*[^0-9.].*")) // .이 포함되도 되는 이유 : 숫자가 실수인 경우도 고려 하기 위해
+            if(part.matches(".*[^0-9.].*") || double_check(part)) // .이 포함되도 되는 이유 : 숫자가 실수인 경우도 고려 하기 위해
                 throw new IllegalArgumentException("입력된 값에 문자가 있습니다.");
         }
         this.parts = parts;
@@ -93,11 +95,7 @@ public class Calculator {
         return escaped;
     }
 
-    public void double_check(List<String> input){
-        for(String num : input){
-            if(num.startsWith(".") || num.endsWith(".") || num.contains("..")){
-                throw new IllegalArgumentException("실수 표현이 잘못된 입력값이 있습니다.");
-            }
-        }
+    public boolean double_check(String part){
+        return (part.startsWith(".") || part.endsWith(".") || part.contains(".."));
     }
 }
