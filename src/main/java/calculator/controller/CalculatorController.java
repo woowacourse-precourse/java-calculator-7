@@ -1,23 +1,25 @@
 package calculator.controller;
 
+import calculator.service.CalculatorService;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
 public class CalculatorController {
 	private final InputView inputView;
 	private final OutputView outputView;
+	private final CalculatorService calculatorService;
 
 	public CalculatorController() {
 		this.inputView = new InputView();
 		this.outputView = new OutputView();
+		this.calculatorService = new CalculatorService();
 	}
 
 	public void run() {
 		outputView.printStartMessage();
 		String input = inputView.getInput();
 
-		// todo: 예시 데이터 서비스 로직으로 변경 필요
-		int result = 6;
+		int result = calculatorService.add(input);
 		outputView.printResult(result);
 
 	}
