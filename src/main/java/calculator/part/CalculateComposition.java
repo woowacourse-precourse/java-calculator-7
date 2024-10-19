@@ -1,5 +1,7 @@
 package calculator.part;
 
+import java.math.BigInteger;
+
 public class CalculateComposition {
 
     private final CalculatorAdder calculatorAdder;
@@ -8,7 +10,7 @@ public class CalculateComposition {
         this.calculatorAdder = calculatorAdder;
     }
 
-    public int makeSum(int [] numberArr){
+    public BigInteger makeSum(BigInteger[] numberArr){
         return calculatorAdder.calculateAdd(numberArr);
     }
 }
