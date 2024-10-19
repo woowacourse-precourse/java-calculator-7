@@ -2,6 +2,9 @@ package calculator.validation;
 
 import java.util.Set;
 
+import static calculator.data.keywords.DOUBLE_SLASH;
+import static calculator.data.keywords.NEW_LINE;
+
 public class CheckForm {
 
     private static final String errorMessage = "적절하지 않은 형식입니다.";
@@ -22,7 +25,7 @@ public class CheckForm {
 
     public static void checkFormOfOperands(String input, Set<Character> separators){
         if(isStartsWithTwoSlash(input)){
-            input = input.substring(input.indexOf("\\n")+2);
+            input = input.substring(input.indexOf(NEW_LINE.getKeyword())+2);
         }
         for(char character : input.toCharArray()){
             if(!separators.contains(character) && (character < '0' || character > '9')){
@@ -32,23 +35,23 @@ public class CheckForm {
     }
 
     private static boolean isStartsWithTwoSlash(String input){
-        return input.startsWith("//");
+        return input.startsWith(DOUBLE_SLASH.getKeyword());
     }
 
     private static void checkContainNewLine(String input){
-        if(!input.contains("\\n")) {
+        if(!input.contains(NEW_LINE.getKeyword())) {
             throwException();
         }
     }
 
     private static void checkSeparatorIsCharacter(String input){
-        if(input.indexOf("\\n") != 3){
+        if(input.indexOf(NEW_LINE.getKeyword()) != 3){
             throwException();
         }
     }
 
     private static void checkIsCustomSeparatorEmpty(String input){
-        if(input.substring(0, input.indexOf("\\n")).isEmpty()){
+        if(input.substring(0, input.indexOf(NEW_LINE.getKeyword())).isEmpty()){
             throwException();
         }
     }

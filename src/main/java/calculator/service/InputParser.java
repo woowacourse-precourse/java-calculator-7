@@ -6,18 +6,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import static calculator.data.keywords.DOUBLE_SLASH;
+
 public class InputParser implements Parser {
 
     public Character getCustomParser(String input) {
         Character separator = null;
-        if (input.startsWith("//")) {
+        if (input.startsWith(DOUBLE_SLASH.getKeyword())) {
             separator = input.charAt(2);
         }
         return separator;
     }
 
     public List<Integer> getIntegerList(String input, Set<Character> separators){
-        if (input.startsWith("//")) {
+        if (input.startsWith(DOUBLE_SLASH.getKeyword())) {
             input = input.substring(5);
         }
 
