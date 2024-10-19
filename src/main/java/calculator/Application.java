@@ -31,10 +31,23 @@ public class Application {
 
         // 입력한 문자열에서 구분자를 기준으로 숫자 문자열 분리시키기
         String[] inputStrList;
+
         if(customPolymer.length() == 1){
             inputStrList = inputStr.substring(5,inputStr.length()).split(customPolymerList);
         } else {
             inputStrList = inputStr.split(basicPolymerList);
+        }
+
+        // 문자열 숫자가 아닌 경우 예외 처리
+        boolean isStringNumber = true;
+        for (String s : inputStrList) {
+            if(!s.matches("\\d+")){
+                isStringNumber = false;
+            }
+        }
+
+        if(!isStringNumber){
+            throw new IllegalArgumentException("숫자 제외 입력 금지");
         }
 
         // 분리된 문자열 숫자로 변환하기
@@ -49,6 +62,7 @@ public class Application {
             index++;
         }
 
+        // 음수인 경우 에러처리
         if(isMinus){
             throw new IllegalArgumentException("음수 입력 불가");
         }
