@@ -81,6 +81,45 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 구분자가_앞뒤에_있을_경우() {
+        String[] inputStrings = {":1:2", "1:2:", ",1:2", "1:2,", ",1,2", "1,2,"};
+        for (String inputString : inputStrings) {
+            assertSimpleTest(() -> {
+                run(inputStrings);
+                assertThat(output()).contains("결과 : 3");
+            });
+        }
+    }
+
+    @Test
+    void 커스텀_구분자가_특수문자1() {
+        String[] inputStrings = {"//#\\n1#2", "//!\\n1!2", "//@\\n1@2", "//\\$\\n1$2", "//%\\n1%2", "//\\^\\n1^2",
+                "//&\\n1&2", "//\\*\\n1*2", "//\\(\\n1(2", "//\\)\\n1)2", "//-\\n1-2", "//\\+\\n1+2", "//=\\n1=2",
+                "//\\|\\n1|2"};
+        for (String inputString : inputStrings) {
+            assertSimpleTest(() -> {
+                run(inputString);
+                assertThat(output()).contains("결과 : 3");
+            });
+
+        }
+    }
+
+    // TODO
+//    @Test
+//    void 커스텀_구분자가_특수문자2() {
+//        String[] inputStrings = {"//'\\n1'2", "//\"\\n1\"2", "//\t\\n1\t2", "//\\n\\n1\n2",
+//                "//\0\\n1\02", "//\\\\n1\2"};
+//        for (String inputString : inputStrings) {
+//            assertSimpleTest(() -> {
+//                run(inputString);
+//                assertThat(output()).contains("결과 : 3");
+//            });
+//
+//        }
+//    }
+
     // 에러 케이스
     @Test
     void 음수기호_포함() {
