@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.regex.Pattern;
 
 public class Calculator {
@@ -35,9 +36,15 @@ public class Calculator {
 
     private String readFromConsole() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = Console.readLine();
-        Console.close();
-        if (input == null) {
+        String input;
+        try {
+            input = Console.readLine();
+        } catch (NoSuchElementException e) {
+            input = "";
+        } finally {
+            Console.close();
+        }
+        if (input == null || input.isEmpty()) {
             input = "";
         }
         return input;
@@ -106,6 +113,7 @@ public class Calculator {
 
     public void operate() {
         equation = readFromConsole();
+        System.out.println(equation);
         separateCustomDelimiter();
         parseDelimiter();
         parsePositiveNumbers();
