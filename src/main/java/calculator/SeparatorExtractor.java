@@ -26,6 +26,18 @@ public class SeparatorExtractor {
             //커스텀 구분자 추출
             String separator = matcher.group(1);
 
+            //커스텀 구분자 선언 시작 인덱스
+            int declarationIndex = matcher.start();
+            int firstIndex = value.indexOf(separator);
+
+            if (firstIndex < declarationIndex) {
+                throw new IllegalArgumentException("커스텀 구분자 선언이 사용보다 선행되어야합니다.");
+            }
+
+            if (separator.isBlank()) {
+                throw new IllegalArgumentException("공백 또는 \"\\n\"은 커스텀 구분자로 사용이 불가합니다.");
+            }
+
             //커스텀 구분자에 양수가 포함되면 예외 발생
             boolean isNumContains = separator.chars().anyMatch(c -> c >= '1' && c <= '9');
             if (isNumContains) {
