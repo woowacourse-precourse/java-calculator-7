@@ -7,19 +7,24 @@ import java.util.StringTokenizer;
 public class Application {
     public static void main(String[] args) {
 
+        String input = readInput();
+        StringTokenizer numbers = inputValidCheck(input);
+        long result = sum(numbers);
+
+        System.out.println("결과 : " + result);
+    }
+
+    private static String readInput() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = Console.readLine();
+        return Console.readLine();
+    }
 
-        StringTokenizer st = inputValidCheck(input);
-        
-//        int sum = 0;
-//        st = new StringTokenizer(input, ",:" + str);
-//        while (st.hasMoreTokens()) {
-//            sum += Integer.parseInt(st.nextToken());
-//        }
-//
-//        System.out.println("결과 : " + sum);
-
+    private static long sum(StringTokenizer st) {
+        int sum = 0;
+        while (st.hasMoreTokens()) {
+            sum += Integer.parseInt(st.nextToken());
+        }
+        return sum;
     }
 
     private static String customDelimiterBeingCheck(String input) {
