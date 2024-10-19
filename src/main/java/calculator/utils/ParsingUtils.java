@@ -2,6 +2,7 @@ package calculator.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,5 +25,15 @@ public class ParsingUtils {
             paringUserInput.add(userInput);
         }
         return paringUserInput;
+    }
+
+    public static String buildRegexFromSet(Set<String> delimiters) {
+        StringBuilder regex = new StringBuilder();
+        regex.append("[");
+        for (String delimiter : delimiters) {
+            regex.append("\\").append(delimiter);
+        }
+        regex.append("]");
+        return regex.toString();
     }
 }

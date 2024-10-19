@@ -28,4 +28,24 @@ class UserInputParseTest {
         Assertions.assertThatThrownBy(() -> new UserInputParse(userInput))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("숫자 문자열은 기본 구분자와 커스텀 구분자로 파싱이 가능하다.")
+    void 숫자_문자열_파싱_기능_TEST(){
+        String userInput = "//;\n1.1,2:3;4";
+
+        UserInputParse userInputParse = new UserInputParse(userInput);
+
+        Assertions.assertThat(userInputParse.getNumbers().size()).isEqualTo(4);
+        Assertions.assertThat(userInputParse.getNumbers().contains(1.1)).isTrue();
+    }
+
+    @Test
+    @DisplayName("숫자 문자열은 숫자와 구분자로만 이루어져 있어야 한다.")
+    void 잘못된_문자열_구성_TEST(){
+        String invalidUserInput = "//;\n1.1,2:3;4,invalid";
+
+        Assertions.assertThatThrownBy(() -> new UserInputParse(invalidUserInput))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
