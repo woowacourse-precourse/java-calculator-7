@@ -1,13 +1,13 @@
 package calculator.util;
 
-public class NumberValidator {
-    private static final NumberValidator instance = new NumberValidator();
+public class StringArrayValidator extends Validator<String[]> {
+    private static final StringArrayValidator instance = new StringArrayValidator();
 
-    private NumberValidator() {
+    private StringArrayValidator() {
 
     }
 
-    public static NumberValidator getInstance() {
+    public static StringArrayValidator getInstance() {
         return instance;
     }
 
@@ -19,6 +19,7 @@ public class NumberValidator {
         return str.matches("\\d+");  // 숫자로만 구성된 문자열인지 확인
     }
 
+    @Override
     public void isValid(String[] maybeNums) {
         for (String maybeNum : maybeNums) {
             if (!isNumeric(maybeNum) || isPositiveNumber(maybeNum)) {

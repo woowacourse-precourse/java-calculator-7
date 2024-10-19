@@ -1,17 +1,18 @@
 package calculator.model;
 
-import calculator.util.NumberValidator;
+import calculator.util.StringArrayValidator;
+import calculator.util.Validator;
 
 import java.util.Arrays;
 
 public class NumberFinder {
     private final DelimiterManager delimiterManager;
 
-    private final NumberValidator numberValidator;
+    private final Validator<String[]> numberValidator;
 
     public NumberFinder(DelimiterManager delimiterManager) {
         this.delimiterManager = delimiterManager;
-        this.numberValidator = NumberValidator.getInstance();
+        this.numberValidator = StringArrayValidator.getInstance();
     }
 
     public int[] findNumbersFrom(String ridiculousSentenceIncludeNumber) {

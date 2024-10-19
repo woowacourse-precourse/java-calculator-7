@@ -1,5 +1,5 @@
 package calculator.util;
 
-public interface Validator {
-    public void isValie();
+public abstract class Validator<T> {
+    public abstract void isValid(T m);
 }
