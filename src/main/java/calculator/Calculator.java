@@ -1,6 +1,7 @@
 package calculator;
 
 import calculator.view.InputView;
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class Calculator {
@@ -13,20 +14,23 @@ public class Calculator {
 
         String[] results = getNumberLists(input);
 
+        System.out.println("results = " + Arrays.toString(results));
+
         int answer = getAnswer(results);
         System.out.println("answer = " + answer);
     }
 
     private String[] getNumberLists(String str) {
         // TODO: 구분자 커스텀 문자열이 없을 경우 (// or \n)
-        if (str.charAt(0) == '/') {
+        if (str.startsWith("//")) {
             String delimiter = str.substring(2, str.indexOf("\\n"));
             System.out.println("delimiter = " + delimiter);
             String newStr = str.substring(str.indexOf("\\n") + 2);
             System.out.println("newStr = " + newStr);
-            return newStr.split(Pattern.quote(delimiter) + "|[,:]");
+            System.out.println(Pattern.quote(delimiter));
+            return newStr.split("[" +Pattern.quote(delimiter) + ",:]+");
         }
-        return str.split("[,:]");
+        return str.split("[,:]+");
     }
 
     private static int getAnswer(String[] results) {
