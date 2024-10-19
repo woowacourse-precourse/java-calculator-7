@@ -21,6 +21,14 @@ public class AdditionCommand {
         }
     }
 
+    public Double exec(){
+        double result = 0;
+        for (Number number : numbers){
+            result += number.getNumber();
+        }
+        return result;
+    }
+
     private Optional<String> findCustomDelimiter(String input){
         Matcher matcher = customDelimiterPattern.matcher(input);
         if (matcher.find()) {

@@ -10,5 +10,6 @@ public class CalculatorController {
     public void joinStrings(){
         calculatorOutputView.printAddGreetingMessage();
         AdditionCommand additionCommand = calculatorInputView.getAdditionCommand();
+        double commandResult = additionCommand.exec();
     }
 }
