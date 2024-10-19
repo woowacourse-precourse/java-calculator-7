@@ -32,20 +32,32 @@ public class CharAnalyzer {
     }
 
     private void analyzeNextChar() {
-        if (isEndOfInput()) {
-            throw new IllegalStateException(END_OF_INPUT.getMessage());
-        }
-
-        if (isCustomDelimiterStart()) {
-            processCustomDelimiter();
-            return;
-        }
+        validateInputEnd();
+        if (isCustomDelimiter()) return;
 
         char currentChar = input.charAt(currentIndex);
         currentIndex++;
 
+        processChar(currentChar);
+    }
+
+    private void validateInputEnd() {
+        if (hasMoreChar()) {
+            throw new IllegalStateException(END_OF_INPUT.getMessage());
+        }
+    }
+
+    private boolean isCustomDelimiter() {
+        if (isCustomDelimiterStart()) {
+            registerCustomDelimiter();
+            return true;
+        }
+        return false;
+    }
+
+    private void processChar(char currentChar) {
         if (isPositiveNumber(currentChar)) {
-            processCurrentNumber(currentChar);
+            processNumber(currentChar);
         } else if (isRegisteredDelimiterChar(currentChar)) {
             processDelimiter();
         } else {
@@ -53,7 +65,7 @@ public class CharAnalyzer {
         }
     }
 
-    private boolean isEndOfInput() {
+    private boolean hasMoreChar() {
         return currentIndex >= input.length();
     }
 
@@ -61,7 +73,7 @@ public class CharAnalyzer {
         return input.startsWith(CUSTOM_DELIMITER_START.getPattern(), currentIndex);
     }
 
-    private void processCurrentNumber(char currentChar) {
+    private void processNumber(char currentChar) {
         numberGenerator.appendNumber(currentChar);
     }
 
@@ -71,7 +83,7 @@ public class CharAnalyzer {
         }
     }
 
-    private void processCustomDelimiter() {
+    private void registerCustomDelimiter() {
         customDelimiterRegistrar.registerCustomDelimiter(input.substring(currentIndex), delimiter);
         currentIndex = input.indexOf(CUSTOM_DELIMITER_END.getPattern(), currentIndex) + 2;
     }
