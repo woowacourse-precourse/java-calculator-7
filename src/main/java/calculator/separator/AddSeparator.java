@@ -21,6 +21,12 @@ public class AddSeparator {
             return remainingInput;
         }
 
-        return userInput;
+        if(userInput.matches("^[1-9].*"))
+            return userInput;
+
+        if(userInput.matches("^-.*"))
+            throw new IllegalArgumentException("양수만 입력가능합니다");
+
+        throw new IllegalArgumentException("올바른 형식으로 입력해주세요.");
     }
 }

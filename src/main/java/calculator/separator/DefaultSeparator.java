@@ -11,7 +11,7 @@ public class DefaultSeparator {
         String [] parsedStrings = UserInput.split(getRegex(separatorStorage));
 
         int[] numbers = Arrays.stream(parsedStrings)
-                .mapToInt(Integer::parseUnsignedInt)
+                .mapToInt(Integer::parseInt)
                 .toArray();
 
         return numbers;
