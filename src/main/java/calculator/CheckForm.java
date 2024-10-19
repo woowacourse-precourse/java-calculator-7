@@ -6,6 +6,8 @@ public class CheckForm {
 
     private static final String errorMessage = "적절하지 않은 형식입니다.";
 
+    private CheckForm(){}
+
     public static void throwException(){
         throw new IllegalArgumentException(errorMessage);
     }
