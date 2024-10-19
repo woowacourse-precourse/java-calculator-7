@@ -12,7 +12,7 @@ public class InputView {
      *
      * @return 입력된 문자열
      */
-    String getInput() {
+    public String getInput() {
         System.out.print(INPUT_PROMPT);
         String firstLine = readLine();
         validateInput(firstLine);
