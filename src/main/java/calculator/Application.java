@@ -10,8 +10,9 @@ public class Application {
     private static String SEMICOLON = ";";
     private static String COMMA_AND_SEMICOLON = COMMA + "|" + SEMICOLON;
     private static String EMPTY = "";
-
     private static String REX_ONLY_NUMBER = "\\d+";
+    private static String CUSTOM_DELITMITER_STRART = "//";
+    private static String CUSTOM_DELITMITER_END = "\\\\n";
 
     public static void main(String[] args) {
         String input = Console.readLine();
@@ -25,7 +26,19 @@ public class Application {
         if (input.isEmpty()) {
             return BigInteger.valueOf(0);
         }
+
         if (isNotContainingDelimiter) {
+            List<String> customDelimiterInputs = Arrays.stream(input.split(CUSTOM_DELITMITER_END))
+                    .map(String::trim)
+                    .filter(letter -> !letter.isBlank())
+                    .toList();
+
+            String expression = customDelimiterInputs.getLast();
+
+            if (expression.contains(CUSTOM_DELITMITER_STRART)) {
+                throw new IllegalArgumentException("커스텀 구분자 이후로 수식이 없습니다");
+            }
+
             throw new IllegalArgumentException("구분자가 없습니다");
         }
 

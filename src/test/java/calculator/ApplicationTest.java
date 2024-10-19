@@ -178,6 +178,18 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void validateInputOnlyContaining_CustomDelimiter() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//??\\n"))
+                    .isInstanceOf(IllegalArgumentException.class).hasMessage("커스텀 구분자 이후로 수식이 없습니다");
+        });
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//??\\n//!!\\n "))
+                    .isInstanceOf(IllegalArgumentException.class).hasMessage("커스텀 구분자 이후로 수식이 없습니다");
+        });
+    }
+
+    @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1");
