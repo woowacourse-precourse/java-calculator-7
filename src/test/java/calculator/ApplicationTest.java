@@ -40,6 +40,21 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 숫자_없음_에러_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(":,")).isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 영값_에러_테스트() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("0,0,0"))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
     void 커스텀_구분자_에러_테스트() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("//;1"))
