@@ -1,27 +1,27 @@
 package calculator.model;
 
-import java.util.regex.Pattern;
+import calculator.model.separator.CustomSeparator;
+import calculator.model.separator.DefaultSeparator;
+import calculator.model.separator.Separator;
 
 public class Calculator {
     private static final int MIN_NUMBER = 1;
-    private static final int MAX_CUSTOM_SEPARATOR_LENGTH = 1;
 
-    public static int add(String input) {
+    public int add(String input) {
         validateInput(input);
 
-        String separator = "[,:]"; // 기본 구분자: 쉼표와 콜론
+        Separator separator = new DefaultSeparator();
         int sum = 0;
 
         // 커스텀 구분자
         while (input.contains("//")) {
-            // 커스텀 구분자 앞부분의 숫자 부분을 먼저 계산
-            sum += calculatePrefixSum(input, separator);
-            separator = addCustomSeparator(input, separator);
+            separator = CustomSeparator.extractAndCombine(input, separator.getSeparator());
+            sum += calculatePrefixSum(input, separator.getSeparator());
             input = updateInputString(input);
         }
 
         // 나머지 문자열에서 구분자 기준으로 숫자 분리 및 합산
-        sum += sumNumbers(input.split(separator));
+        sum += sumNumbers(input.split(separator.getSeparator()));
         return sum;
     }
 
@@ -39,33 +39,9 @@ public class Calculator {
         return 0;
     }
 
-    private static String addCustomSeparator(String input, String separator) {
-        int separatorIndex = input.indexOf("\\n");
-        if (separatorIndex == -1) {
-            throw new IllegalArgumentException("커스텀 구분자 형식이 잘못되었습니다.");
-        }
-
-        String customSeparator = input.substring(input.indexOf("//") + 2, separatorIndex);
-        validateCustomSeparator(customSeparator);
-
-        return separator + "|" + Pattern.quote(customSeparator);
-    }
-
     private static String updateInputString(String input) {
         int separatorIndex = input.indexOf("\\n");
         return input.substring(separatorIndex + 2);
-    }
-
-    private static void validateCustomSeparator(String customSeparator) {
-        if (customSeparator.length() > MAX_CUSTOM_SEPARATOR_LENGTH) {
-            throw new IllegalArgumentException("커스텀 구분자는 한 글자만 가능합니다.");
-        }
-        if (Pattern.matches("\\d", customSeparator)) {
-            throw new IllegalArgumentException("커스텀 구분자는 숫자가 될 수 없습니다.");
-        }
-        if (customSeparator.isEmpty() || customSeparator.trim().isEmpty()) {
-            throw new IllegalArgumentException("커스텀 구분자는 공백이 될 수 없습니다.");
-        }
     }
 
     // 숫자 배열의 합을 계산하는 메서드
