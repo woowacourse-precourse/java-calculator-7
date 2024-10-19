@@ -68,6 +68,25 @@ class CalculatorInputParseServiceTest {
     }
 
     @Test
+    @DisplayName("parseSumInput은 정규 표현식이 포함된 커스텀 구분자를 이용한 입력에 정상 작동한다.")
+    public void parseSumInput_WithRegexCharacterCustomDelimiter_WorksCorrectly() {
+        // given
+        String input = "//[\\n1[2[3";
+
+        List<BigInteger> expectedResult = List.of(
+                BigInteger.valueOf(1),
+                BigInteger.valueOf(2),
+                BigInteger.valueOf(3)
+        );
+
+        // when
+        List<BigInteger> result = calculatorInputParseService.parseSumInput(input);
+
+        // then
+        Assertions.assertThat(result).isEqualTo(expectedResult);
+    }
+
+    @Test
     @DisplayName("parseSumInput은 두개 이상의 커스텀 구분자를 이용한 입력에 정상 작동한다.")
     public void parseSumInput_WithMultipleCustomDelimiter_WorksCorrectly() {
         // given

@@ -28,7 +28,7 @@ public class CalculatorInputParseService {
             numbersPart = input.substring(delimiterPart.length());
             String customDelimiter = delimiterPart.substring(2, delimiterPart.length() - 2);
 
-            delimiterRegex += "|" + "[" + customDelimiter + "]";
+            delimiterRegex += "|" + "[" + Pattern.quote(customDelimiter) + "]";
         } else {
             numbersPart = input;
         }
