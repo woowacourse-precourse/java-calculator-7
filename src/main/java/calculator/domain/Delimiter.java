@@ -5,7 +5,6 @@ import calculator.validator.StringValidator;
 
 import static calculator.global.constant.DelimiterConstant.PREFIX;
 import static calculator.global.constant.DelimiterConstant.SUFFIX;
-import static calculator.global.constant.DelimiterConstant.DELIMITER_LIMIT_LENGTH;
 import static calculator.global.constant.DelimiterConstant.ESCAPE_CHAR;
 import static calculator.global.constant.DelimiterConstant.ESCAPE_REQUIRED_REGEX;
 
@@ -29,7 +28,7 @@ public class Delimiter {
     }
 
     public static String removeEnrollmentString(String str) {
-        if (str.length() <= DELIMITER_LIMIT_LENGTH) {
+        if (!DelimiterValidator.hasCustomDelimiter(str)) {
             return str;
         }
         str = removePrefixAndSuffix(str);
