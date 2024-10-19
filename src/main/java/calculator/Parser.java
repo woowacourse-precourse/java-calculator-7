@@ -58,4 +58,19 @@ public class Parser {
 		}
 		return splitStr;
 	}
+
+	/**
+	 * 문자들을 숫자로 변환
+	 *
+	 * @param splitStr
+	 */
+	public List<Integer> stringToNums(String[] splitStr) {
+		List<Integer> nums = new ArrayList<>();
+
+		for (String s : splitStr) {
+			int num = Integer.parseInt(s);
+			nums.add(num);
+		}
+		return nums;
+	}
 }
