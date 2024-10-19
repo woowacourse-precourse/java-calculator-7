@@ -56,7 +56,7 @@ public class PlusCalculator implements PlusCalculatorInterface {
     public void checkCustomSeparator(String input, int end) {
         String customSeparator = input.substring(2, end);
 
-        if (customSeparator.equals("//")) {
+        if (customSeparator.equals("//") || customSeparator.isBlank()) {
             throw new IllegalArgumentException();
         }
 
