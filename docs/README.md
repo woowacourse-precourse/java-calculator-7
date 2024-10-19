@@ -4,35 +4,35 @@
 
 **📚 문자열 덧셈 계산기**
 
-**1. 입력기 기능 (InputView)**
+- [x] **1. 입력기 기능 (InputView)**
 
 - 구분자와 양수로 구성된 문자열을 입력받는다.
 - 사용자는 camp.nextstep.edu.missionutils.Console.readLine()을 통해 값을 입력한다.
 - 입력된 문자열은 기본 구분자(쉼표, 콜론) 또는 커스텀 구분자를 포함할 수 있다.
 
-**2. 출력기 기능 (OutputView)**
+- [x] **2. 출력기 기능 (OutputView)**
 
 - 계산 결과 또는 예외 발생 시 에러 메시지를 출력한다.
 
-**3. 검증기 기능 (Validator)**
+- [x] **3. 검증기 기능 (Validator)**
 
 - 입력된 문자열이 유효한지 검증한다.
 - 다양한 예외 상황을 처리하고 상세한 에러 메시지를 반환한다.
 -
-- **숫자가 아닌 문자의 포함 여부**: 숫자가 아닌 문자가 포함된 경우 `IllegalArgumentException`을 발생시킨다.
+- - [x] **숫자가 아닌 문자의 포함 여부**: 숫자가 아닌 문자가 포함된 경우 `IllegalArgumentException`을 발생시킨다.
     - **예시**: `"1,a:3"` → `IllegalArgumentException("숫자가 아닌 문자가 포함되었습니다.")` 발생
-- **음수 처리**: 음수가 포함된 경우 `IllegalArgumentException`을 발생시킨다.
+- - [x] **음수 처리**: 음수가 포함된 경우 `IllegalArgumentException`을 발생시킨다.
     - **예시**: `"1,-2,3"` → `IllegalArgumentException("음수는 허용되지 않습니다: -2")` 발생
-- **잘못된 커스텀 구분자 처리**: 커스텀 구분자가 잘못된 형식일 경우 `IllegalArgumentException`을 발생시킨다.
+- - [x] **잘못된 커스텀 구분자 처리**: 커스텀 구분자가 잘못된 형식일 경우 `IllegalArgumentException`을 발생시킨다.
     - **예시**: `"//;\n1;2;3"` → 정상 처리
     - **예시**: `"//\n1;2;3"` → `IllegalArgumentException("잘못된 커스텀 구분자 형식입니다.")` 발생
-- **숫자가 없는 경우 처리**: 커스텀 구분자는 정의되었지만 숫자가 없는 경우 `IllegalArgumentException`을 발생시킨다.
+- - [x] **숫자가 없는 경우 처리**: 커스텀 구분자는 정의되었지만 숫자가 없는 경우 `IllegalArgumentException`을 발생시킨다.
     - **예시**: `"//;\n"` → 커스텀 구분자는 정의되었지만 숫자가 없는 경우 `IllegalArgumentException`("숫자가 없습니다.")을 발생
-- **구분자가 중복된 경우 처리**: 입력된 문자열에서 구분자가 연속해서 사용된 경우 IllegalArgumentException을 발생시킨다.
+- - [x] **구분자가 중복된 경우 처리**: 입력된 문자열에서 구분자가 연속해서 사용된 경우 IllegalArgumentException을 발생시킨다.
     - **예시**: `"1,,2" 또는 "1::3"` → IllegalArgumentException("연속된 구분자 형식입니다.") 발생
     - **예시**: `"커스텀 구분자가 연속된 경우`: `"//;\n1;;2"` → IllegalArgumentException("잘못된 커스텀 문자입니다.")
 
-**4. 계산기 기능 (Model)**
+- [x] **4. 계산기 기능 (Model)**
 
 - 입력된 문자열을 파싱하여 숫자를 추출하고 합산한다.
 - 기본 구분자(쉼표, 콜론)를 기준으로 숫자를 분리한다.
@@ -45,7 +45,7 @@
 
 - 합산된 결과를 반환한다.
 
-**5. 컨트롤러 기능 (Controller)**
+- [x] **5. 컨트롤러 기능 (Controller)**
 
 - 전체 프로그램의 흐름을 제어한다.
 - 공백일 때는 0으로 처리
@@ -55,13 +55,19 @@
 - **OutputView**를 통해 결과를 출력한다.
 - 예외 발생 시 에러 메시지를 출력한다.
 
-**6. 서비스 기능 (CalculatorService)**
+- [x] **6. 서비스 기능 (Service)**
 
 - **InputValidator를 통해 입력을 검증한다.**
 - **StringParser를 사용하여 문자열을 파싱해 숫자로 분리한다.**
 - **StringCalculator를 사용해 분리된 숫자들의 합을 계산한다.**
 
-**7.구분자 처리 기능 (DelimiterUtils)**
+- [x] **7.구분자 처리 기능 (DelimiterUtils)**
 
 - **입력 문자열에서 커스텀 구분자(//;\n와 같은 형식)를 추출하고 구분자로 사용할 문자열을 반환한다.**
 - **기본 구분자(쉼표 ,, 콜론 :) 또는 커스텀 구분자를 기준으로 문자열을 분리한다.**
+
+- [x] **8. Factory 기능 (Factory)**
+
+- 계산에 필요한 서비스, 입력/출력 뷰 객체들을 생성하고 제공
+
+- 입력값 검증을 위한 다양한 검증 전략들을 포함한 InputValidator 객체를 생성
