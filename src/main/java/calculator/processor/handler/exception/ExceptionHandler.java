@@ -1,7 +1,6 @@
 package calculator.processor.handler.exception;
 
 import calculator.common.Response;
-import java.util.NoSuchElementException;
 
 public class ExceptionHandler {
 

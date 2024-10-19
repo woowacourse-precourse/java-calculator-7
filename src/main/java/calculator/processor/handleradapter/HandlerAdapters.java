@@ -2,7 +2,6 @@ package calculator.processor.handleradapter;
 
 import calculator.common.Request;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class HandlerAdapters {
 
