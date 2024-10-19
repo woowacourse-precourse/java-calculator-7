@@ -96,3 +96,41 @@
 
 > ❓ 폴더 및 파일 구성입니다.
 >
+
+```bash
+└── src
+    ├── main
+    │   └── java
+    │       └── calculator
+    │           ├── Application.java
+    │           ├── Constants
+    │           │   ├── DelimiterConstants.java
+    │           │   ├── ErrorMessages.java
+    │           │   ├── InputMessages.java
+    │           │   └── OutputMessages.java
+    │           ├── Controller
+    │           │   └── CalculatorController.java
+    │           ├── Model
+    │           │   ├── Delimiter.java
+    │           │   ├── Number.java
+    │           │   ├── Numbers.java
+    │           │   └── OriginalInput.java
+    │           ├── Utils
+    │           │   ├── NumberUtils.java
+    │           │   └── StringSplitter.java
+    │           └── View
+    │               ├── InputView.java
+    │               └── OutputView.java
+    └── test
+        └── java
+            └── calculator
+                ├── ApplicationTest.java
+                ├── Model
+                │   ├── DelimiterTest.java
+                │   ├── NumberTest.java
+                │   └── NumbersTest.java
+                ├── MyApplicationTest.java
+                └── Utils
+                    ├── NumberUtilsTest.java
+                    └── StringSplitterTest.java
+```
