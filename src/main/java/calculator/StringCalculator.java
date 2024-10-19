@@ -11,7 +11,8 @@ public class StringCalculator {
 
     // 기본 구분자
     private String delimiter = ",:";
-    private final String specialDelimiter = ".*+?^${}()|[]\\";
+    //특수문자 이스케이프를 위한 특수문자 문자열
+    private static final String specialDelimiter = ".*+?^${}()|[]\\";
 
     // 문자열을 정수로 변환하는 메서드
     private int parseInt(String str) {
