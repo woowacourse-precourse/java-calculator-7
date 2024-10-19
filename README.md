@@ -4,7 +4,7 @@
 
 우아한 테크코스 프리코스 1주차 미션 문자열 덧셈 계산기를 구현한 저장소입니다.
 
-<br>
+![woowacourse](https://oopy.lazyrockets.com/api/v2/notion/image?src=https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Ff71cbdcd-b763-41af-9bbb-42abdb18bd6a%2F8725996b-9c63-4691-927f-2989a2f47ca8%2Fcover-22x.png&blockId=8705deab-d8f2-476b-9892-98b37b020779&width=2400)
 
 ## 💡 목차
 
