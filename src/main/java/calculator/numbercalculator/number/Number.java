@@ -1,29 +1,31 @@
 package calculator.numbercalculator.number;
 
-public record Number(int value) {
+import java.math.BigInteger;
+
+public record Number(BigInteger value) {
 
     public Number {
         validate(value);
     }
 
     public static Number of(String value) {
-        int intValue = toInt(value);
-        return new Number(intValue);
+        BigInteger digit = toInteger(value);
+        return new Number(digit);
     }
 
-    private void validate(int value) {
+    private void validate(BigInteger value) {
         if (isNotPositive(value)) {
             throw new IllegalArgumentException("숫자는 양수만 올 수 있습니다.");
         }
     }
 
-    private boolean isNotPositive(int value) {
-        return value <= 0;
+    private boolean isNotPositive(BigInteger value) {
+        return value.compareTo(BigInteger.ZERO) <= 0;
     }
 
-    private static int toInt(String value) {
+    private static BigInteger toInteger(String value) {
         try {
-            return Integer.parseInt(value);
+            return new BigInteger(value);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자로 변환할 수 없습니다.");
         }

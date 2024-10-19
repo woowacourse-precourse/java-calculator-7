@@ -1,5 +1,6 @@
 package calculator.numbercalculator.number;
 
+import java.math.BigInteger;
 import java.util.List;
 
 public class Numbers {
@@ -24,9 +25,9 @@ public class Numbers {
                 .toList();
     }
 
-    public int calculateTotalValue() {
+    public BigInteger calculateTotalValue() {
         return numbers.stream()
-                .mapToInt(Number::value)
-                .sum();
+                .map(Number::value)
+                .reduce(BigInteger.ZERO, BigInteger::add);
     }
 }
