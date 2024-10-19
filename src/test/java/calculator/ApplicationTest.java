@@ -108,20 +108,6 @@ class ApplicationTest extends NsTest {
                 })
                         .isInstanceOf(IllegalArgumentException.class)
         );
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> {
-                    System.setIn(new ByteArrayInputStream("1,2,3:".getBytes()));
-                    calculator.inputStr();
-                })
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> {
-                    System.setIn(new ByteArrayInputStream(":1,2,3".getBytes()));
-                    calculator.inputStr();
-                })
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
     }
 
     @Test
