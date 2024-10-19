@@ -1,10 +1,22 @@
 package calculator.controller;
 
+import java.util.Arrays;
+
 public class Divider {
 
     public String[] spliter(String str, char de) {
         String[] strArray;
-        strArray = str.split(String.valueOf(de));
+        String newStr;
+        if (str.startsWith("/")) {
+            newStr = str.substring(5);
+        } else if (str.isEmpty()){
+            newStr = "0";
+        } else {
+            newStr  = str.replace(":", ",");
+        };
+
+        strArray = newStr.split(String.valueOf(de));
+//        System.out.println(Arrays.toString(strArray));
         return strArray;
     }
 
@@ -13,8 +25,9 @@ public class Divider {
 
         for (int i = 0; i < strArray.length; i++) {
             try { numArray[i] = Integer.parseInt(strArray[i]);
+//                System.out.println(numArray[i]);
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("구분자가 잘못됨");
+                throw new IllegalArgumentException("구분자가 잘못되었습니다.");
             }
 
         }

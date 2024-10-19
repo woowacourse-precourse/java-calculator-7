@@ -4,12 +4,14 @@ public class Validation {
 
     public boolean formValidate(String str) {
         if (str.startsWith("/")) { // custom delimiter
-            if (str.length() >= 4 && !str.startsWith("\\n", 2)) {
+            // 구분자가 두개(문자열)일 수도 있을까?
+            if (str.length() >= 4 && !str.startsWith("\\n", 3)) {
                 return true;
-            } else if (!Character.isDigit(str.charAt(2))) {
+            } else if (Character.isDigit(str.charAt(2))) {
                 return true;
             };
-        } else { // ,: delimiter
+        }
+        else { // ,: delimiter
             return !str.isEmpty() && !Character.isDigit(str.charAt(0));
         }
         return false;
@@ -19,7 +21,6 @@ public class Validation {
         if (str.startsWith("/")) {
             return str.charAt(2);
         } else {
-            str = str.replace(":", ",");
             return ',';
         }
     }
