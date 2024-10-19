@@ -1,6 +1,7 @@
 package calculator.domain.separator;
 
 import calculator.domain.number.Number;
+import calculator.domain.number.Numbers;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,12 +11,12 @@ public class BasicSeparator implements Separator {
     private static final String COLON = ":";
 
     @Override
-    public List<Number> separate(String value) {
+    public Numbers separate(String value) {
         if (hasSeparatorIn(value)) {
-            return convert(validateOfSeparator(value));
+            return new Numbers(convert(validateOfSeparator(value)));
         }
 
-        return List.of(new Number(value));
+        return new Numbers(List.of(new Number(value)));
     }
 
     private boolean hasSeparatorIn(String value) {

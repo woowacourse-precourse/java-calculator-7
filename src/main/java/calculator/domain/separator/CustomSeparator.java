@@ -1,6 +1,7 @@
 package calculator.domain.separator;
 
 import calculator.domain.number.Number;
+import calculator.domain.number.Numbers;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,14 +15,14 @@ public class CustomSeparator implements Separator {
     }
 
     @Override
-    public List<Number> separate(String input) {
+    public Numbers separate(String input) {
         String value = removePrefix(input);
 
         if (hasSeparatorIn(value)) {
-            return convert(validateSeparator(value));
+            return new Numbers(convert(validateSeparator(value)));
         }
 
-        return List.of(new Number(value));
+        return new Numbers(List.of(new Number(value)));
     }
 
     private String removePrefix(String value) {
