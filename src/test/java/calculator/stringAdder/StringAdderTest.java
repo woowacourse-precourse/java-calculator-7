@@ -32,8 +32,17 @@ class StringAdderTest extends NsTest {
 
   @Test
   @DisplayName("양수가 아닌 0 예외처리")
-  void run_zeroNumber_success() {
+  void run_zeroNumber_throwIllegalArgumentException() {
     assertThatThrownBy(() -> runException("0"))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessageContaining("NumberParser");
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = {"0424", "00", "02348", "0", "012345"})
+  @DisplayName("0으로 시작하는 숫자 예외처리")
+  void run_startingZeroNumber_throwIllegalArgumentException(String input) {
+    assertThatThrownBy(() -> runException(input))
         .isInstanceOf(IllegalArgumentException.class)
         .hasMessageContaining("NumberParser");
   }
