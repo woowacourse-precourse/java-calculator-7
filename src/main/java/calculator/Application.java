@@ -24,5 +24,11 @@ public class Application {
         customPolymer = inputStr.substring(2,3);
     }
 
+    // 기본 구분자 리스트에 커스텀 구분자 추가하기
+    String customPolymerList = "";
+    if(customPolymer.length() > 0){
+        customPolymerList = basicPolymerList.substring(0,basicPolymerList.length()-1) + customPolymer + "]";
+    }
+
     }
 }
