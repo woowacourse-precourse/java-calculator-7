@@ -1,26 +1,30 @@
 package calculator.model;
 
-import static calculator.validate.NumberValidator.validateNumber;
+import static calculator.validate.Validator.validateNumber;
 
 public class Calculator {
 
     private int result;
-    private final InputParser parser;
+    private final Extractor extractor;
 
     public Calculator() {
-        this.parser = new InputParser();
+        this.extractor = new Extractor();
     }
 
-    public void calculate(String input) {
-        String[] numbers = parser.parseInput(input);
-        calculateSum(numbers);
-    }
-
-    private void calculateSum(String[] numbers) {
+    public void calculateSum(String input) {
+        String[] numbers = extractor.extractNumber(input);
         for (String number : numbers) {
             validateNumber(number);
-            result += Integer.parseInt(number);
+            int intNumber = getIntNumber(number);
+            result += intNumber;
         }
+    }
+
+    private static int getIntNumber(String number) {
+        if (number.isEmpty()) {
+            return 0;
+        }
+        return Integer.parseInt(number);
     }
 
     public int getResult() {
