@@ -14,7 +14,7 @@ class InputViewTest {
     }
 
     @Test
-    void inputExpressionStringTest() {
+    void inputExpressionString_test() {
         // given
         String expectedInput = "1,2,3\n";
         ByteArrayInputStream inputStream = new ByteArrayInputStream(expectedInput.getBytes());

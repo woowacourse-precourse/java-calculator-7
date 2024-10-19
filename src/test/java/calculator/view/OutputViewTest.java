@@ -25,7 +25,7 @@ class OutputViewTest {
     }
 
     @Test
-    void printCalculateResultTest() {
+    void printCalculateResult_test() {
         // given
         int result = 5;
 
