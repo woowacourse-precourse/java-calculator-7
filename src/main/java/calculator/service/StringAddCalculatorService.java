@@ -1,8 +1,7 @@
 package calculator.service;
 
 import calculator.domain.Calculator;
-import calculator.util.CustomStringParser;
-import calculator.util.StandardStringParser;
+import calculator.util.StringParser;
 import calculator.validator.InputValidator;
 
 public class StringAddCalculatorService {
@@ -27,11 +26,11 @@ public class StringAddCalculatorService {
     }
 
     private String validateEmptyAndNumber(String input) {
-        if(input.isEmpty()){
+        if (input.isEmpty()) {
             return "0";
         }
 
-        if(input.matches("\\d+")){
+        if (input.matches("\\d+")) {
             return input;
         }
         return null;
@@ -50,10 +49,6 @@ public class StringAddCalculatorService {
     }
 
     private String[] stringParse(String input) {
-        if (CustomStringParser.hasCustomSeparator(input)) {
-            return CustomStringParser.split(input);
-        } else {
-            return StandardStringParser.split(input);
-        }
+        return StringParser.split(input);
     }
 }
