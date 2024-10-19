@@ -53,12 +53,22 @@ public class Calculator {
     }
 
     private static void addRegex(String customSeperator) {
+        StringBuilder regexBuilder=new StringBuilder();
         //커스텀 구분자가 | 이라면 이스케이프문자를 추가해햐 한다
         if (customSeperator.equals("|")){
-            customSeperator="\\"+customSeperator;
+            StringBuilder seperatorBuilder=new StringBuilder();
+
+            seperatorBuilder.append("\\");
+            seperatorBuilder.append(customSeperator);
+
+            customSeperator=customSeperator.toString();
         }
 
-       seperatorRegex=seperatorRegex+"|"+customSeperator;
+        regexBuilder.append(seperatorRegex);
+        regexBuilder.append("|");
+        regexBuilder.append(customSeperator);
+
+       seperatorRegex=regexBuilder.toString();
     }
 
     private static void checkBadSeperator(String customSeperator) {
