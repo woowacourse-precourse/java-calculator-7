@@ -1,5 +1,6 @@
 package calculator;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Executor {
@@ -36,6 +37,19 @@ public class Executor {
 				Integer.parseInt(s);
 			} catch (Exception e) {
 				throw new IllegalArgumentException("지정되지 않은 구분자는 사용할 수 없습니다.");
+			}
+		}
+	}
+
+	/**
+	 * 모든 수가 양수인지 확인
+	 *
+	 * @param nums
+	 */
+	private void checkPositiveNumbers(List<Integer> nums) {
+		for (Integer n : nums) {
+			if (n < 0) {
+				throw new IllegalArgumentException("0 이상의 숫자만 입력 가능합니다.");
 			}
 		}
 	}
