@@ -10,7 +10,7 @@ public class Calculator {
         } //공백 처리
 
         Delimiter delimiter = new Delimiter(inputString);
-        String[] delimitedNumbers = delimiter.getDelimitedNumbers();//구분자 처리
+        String[] delimitedNumbers = delimiter.extractDelimitedNumbers();//구분자로 문자열 -> 숫자 처리
 
         NumberValidator validator = new NumberValidator();
         validator.validateNumbers(delimitedNumbers);//잘못된 값 예외 처리

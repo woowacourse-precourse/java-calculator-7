@@ -5,31 +5,22 @@ import java.util.regex.Pattern;
 public class Delimiter {
     private static final String DEFAULT_DELIMITER = "[,:]";
     private String delimiter = DEFAULT_DELIMITER;
-    private String[] delimitedNumbers;
+    private final String inputString;
 
     public Delimiter(String inputString) {
-        checkAndSetDelimiter(inputString);
-        createDelimitedStrings(inputString);
-    }
+        this.inputString = inputString;
 
-    private void checkAndSetDelimiter(String inputString) {
-        if (inputString.startsWith("//")) {
-            String newDelimiter = inputString.substring(2, inputString.indexOf("\\n"));
-            delimiter += "|" + Pattern.quote(newDelimiter);
+        if (inputString.startsWith("//") && inputString.contains("\\n")) {
+            String customDelimiter = inputString.substring(2, inputString.indexOf("\\n"));
+            delimiter = DEFAULT_DELIMITER + "|" + Pattern.quote(customDelimiter);
         }
     }
 
-    private void createDelimitedStrings(String inputString) {
-        delimitedNumbers = inputString.split(delimiter);
-
-        if (inputString.startsWith("//")) {
+    public String[] extractDelimitedNumbers() {
+        if (inputString.startsWith("//") && inputString.contains("\\n")) {
             String customInputString = inputString.substring(inputString.indexOf("\\n") + 2);
-            delimitedNumbers = customInputString.split(delimiter);
+            return customInputString.split(delimiter);
         }
+        return inputString.split(delimiter);
     }
-
-    public String[] getDelimitedNumbers() {
-        return delimitedNumbers;
-    }
-
 }
