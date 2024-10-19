@@ -8,6 +8,7 @@ public class Application {
         String input;
         char[] seperatorArray = {',', ':'};
         int[] numberArray;
+        int result = 0;
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
 
@@ -17,8 +18,11 @@ public class Application {
         for (int i : numberArray) {
             if (i == -1)
                 break;
-            System.out.println(i);
+            result += i;
         }
+
+        System.out.print("결과 : ");
+        System.out.println(result);
     }
 
     public static int[] convertStringToIntArray(String input, char[] seperator) {
