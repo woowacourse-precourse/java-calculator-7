@@ -1,6 +1,7 @@
 package calculator.domain;
 
 
+import calculator.util.Parser;
 import java.util.List;
 
 public class UserInput {

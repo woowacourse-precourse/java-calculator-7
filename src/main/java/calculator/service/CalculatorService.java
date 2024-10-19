@@ -1,8 +1,8 @@
 package calculator.service;
 
-import calculator.domain.Adder;
-import calculator.domain.InputValidator;
-import calculator.domain.Parser;
+import calculator.util.Adder;
+import calculator.util.InputValidator;
+import calculator.util.Parser;
 import calculator.domain.UserInput;
 import java.util.List;
 

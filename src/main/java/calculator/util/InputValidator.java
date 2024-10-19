@@ -1,6 +1,7 @@
-package calculator.domain;
+package calculator.util;
 
 import calculator.constants.InputValidationConstants;
+import calculator.domain.UserInput;
 import java.util.regex.Pattern;
 
 public class InputValidator {
