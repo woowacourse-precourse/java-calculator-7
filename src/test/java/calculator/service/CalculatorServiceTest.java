@@ -72,4 +72,48 @@ public class CalculatorServiceTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("커스텀 구분자는 숫자가 될 수 없습니다.");
     }
+
+    @Test
+    public void 올바르지_않은_구분자_예외_테스트() {
+        // given
+        String input = "1;2:3";  // ';'는 유효한 구분자가 아님
+
+        // when & then
+        Assertions.assertThatThrownBy(() -> service.parseInputAndCalculate(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("올바르지 않은 구분자 혹은 입력값이 있습니다.");
+    }
+
+    @Test
+    public void 파싱_불가_입력_값_예외_테스트() {
+        // given
+        String input = "1,abc,3";  // 'abc'는 파싱할 수 없는 값
+
+        // when & then
+        Assertions.assertThatThrownBy(() -> service.parseInputAndCalculate(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("올바르지 않은 구분자 혹은 입력값이 있습니다.");
+    }
+
+    @Test
+    public void 음수_입력_예외_테스트() {
+        // given
+        String input = "1,-2,0";  // 음수와 0이 포함된 입력 값
+
+        // when & then
+        Assertions.assertThatThrownBy(() -> service.parseInputAndCalculate(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("양수를 입력해주세요.");
+    }
+
+    @Test
+    public void 숫자_0_입력_예외_테스트() {
+        // given
+        String input = "1,2,0";  // 음수와 0이 포함된 입력 값
+
+        // when & then
+        Assertions.assertThatThrownBy(() -> service.parseInputAndCalculate(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("양수를 입력해주세요.");
+    }
 }

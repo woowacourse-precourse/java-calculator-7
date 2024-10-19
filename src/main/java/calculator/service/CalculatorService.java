@@ -26,7 +26,7 @@ public class CalculatorService {
         }
 
         List<Character> delimiters = calculatorRepository.getDelimiters();
-        List<BigDecimal> numbers = inputParser.splitCalculationPartByDelimiters(calculationPart, delimiters);
+        List<BigDecimal> numbers = inputParser.parseCalculationPartByDelimiters(calculationPart, delimiters);
 
         // TODO : 계산 수행 로직 작성
 

@@ -1,5 +1,8 @@
 package calculator.validator;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 public class InputValidator {
 
     private static final String DELIMITER_PREFIX = "//";
@@ -41,6 +44,23 @@ public class InputValidator {
     public void validateDelimiterIsNotDigit(Character findCustomDelimiter) {
         if (Character.isDigit(findCustomDelimiter)) {
             throw new IllegalArgumentException("커스텀 구분자는 숫자가 될 수 없습니다.");
+        }
+    }
+
+    public void validateInvalidDelimiters(String input, List<Character> validDelimiters) {
+        input.chars()
+                .mapToObj(ch -> (char) ch)
+                .filter(ch -> !Character.isDigit(ch) && !validDelimiters.contains(ch) && ch != '-')
+                .findFirst()
+                .ifPresent(invalidDelimiter -> {
+                    throw new IllegalArgumentException("올바르지 않은 구분자 혹은 입력값이 있습니다.");
+                });
+    }
+
+    public void validateNumber(String input) {
+        BigDecimal number = new BigDecimal(input);
+        if (number.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("양수를 입력해주세요.");
         }
     }
 }

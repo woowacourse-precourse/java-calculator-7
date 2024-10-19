@@ -26,6 +26,7 @@ public class InputParser {
             String[] parts = input.split(Pattern.quote(DELIMITER_SUFFIX), 2);
             return new String[]{parts[0], parts[1]};
         }
+
         inputValidator.validateCustomDelimiterSpecificIndex(input);
 
         return new String[]{null, input};
@@ -33,10 +34,7 @@ public class InputParser {
 
     public Character parseCustomDelimiterPart(String customDelimiterPart) {
         String regex = Pattern.quote(DELIMITER_PREFIX) + "(.*)";
-        return extractCustomDelimiter(customDelimiterPart, regex);
-    }
 
-    private Character extractCustomDelimiter(String customDelimiterPart, String regex) {
         Matcher matcher = Pattern.compile(regex).matcher(customDelimiterPart);
         inputValidator.validateCustomDelimiterExtraction(matcher.find());
 
@@ -49,8 +47,10 @@ public class InputParser {
         return findCustomDelimiter;
     }
 
-    public List<BigDecimal> splitCalculationPartByDelimiters(String calculationPart, List<Character> delimiters) {
+    public List<BigDecimal> parseCalculationPartByDelimiters(String calculationPart, List<Character> delimiters) {
+        inputValidator.validateInvalidDelimiters(calculationPart, delimiters);
         String delimiterRegex = buildDelimiterRegex(delimiters);
+
         return getNumbersWithDelimiterRegex(calculationPart, delimiterRegex);
     }
 
@@ -59,9 +59,9 @@ public class InputParser {
                 .map(value -> {
                     if (value.isEmpty()) {
                         return BigDecimal.ZERO;
-                    } else {
-                        return new BigDecimal(value);
                     }
+                    inputValidator.validateNumber(value);
+                    return new BigDecimal(value);
                 })
                 .collect(Collectors.toList());
     }

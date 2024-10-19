@@ -31,7 +31,7 @@ public class CalculatorController {
 
     private void validateInput(String input) {
         if (!Objects.equals(input, "") && !input.startsWith("//") && !Character.isDigit(input.charAt(0))) {
-            throw new IllegalArgumentException("입력 값은 공백, 숫자, //로 시작해야 합니다.");
+            throw new IllegalArgumentException("입력 값은 공백, 숫자(양수), '//' 로 시작해야 합니다.");
         }
     }
 }
