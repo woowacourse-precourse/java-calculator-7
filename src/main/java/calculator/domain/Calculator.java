@@ -8,11 +8,15 @@ public class Calculator {
     public int calculateSum(String[] numberStrings) {
         int sum = 0;
         for (String numberString : numberStrings) {
-            int number = validateNumericContent(numberString);
-            validateNoNegativeNumber(number);
-            sum += Integer.parseInt(numberString);
+            sum += validateAndParseNumber(numberString);
         }
         return sum;
+    }
+
+    private int validateAndParseNumber(String numberString) {
+        int number = validateNumericContent(numberString);
+        validateNoNegativeNumber(number);
+        return number;
     }
 
     private void validateNoNegativeNumber(int number) {
