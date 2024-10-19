@@ -1,6 +1,8 @@
 package calculator.model;
 
 import calculator.controller.CalculatorController;
+import calculator.service.NumbersService;
+import calculator.service.SeparatorsService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -10,13 +12,17 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("덧셈 확인")
+@DisplayName("Calculator 객체 테스트")
 class CalculatorTest {
     @ParameterizedTest(name = "{index} : {2}")
     @DisplayName("덧셈 확인")
     @MethodSource("generateData")
     void testSum(String input, int output, String message) {
-        Numbers numbers = new Numbers(new CalculatorController().getNumbers(input));
+        CalculatorController calculatorController = new CalculatorController(new SeparatorsService(),
+                new NumbersService(),
+                new Calculator());
+
+        Numbers numbers = calculatorController.createNumbers(input);
         assertThat(new Calculator().calculateSum(numbers)).isEqualTo(output);
     } // testSum
 

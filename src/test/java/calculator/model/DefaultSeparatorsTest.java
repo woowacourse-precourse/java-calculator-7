@@ -1,6 +1,5 @@
 package calculator.model;
 
-import calculator.controller.CalculatorController;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,19 +12,13 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@DisplayName("기본 구분자 확인")
-class DefaultSeparatorTest {
-    @Test
-    @DisplayName("기본 구분자 포함 확인")
-    void containsDefaultSeparator() {
-        assertThat(new CalculatorController().containsDefaultSeparator("1:2:3")).isTrue();
-    } // containsDefaultSeparator
-
+@DisplayName("DefaultSeparators 객체 테스트")
+class DefaultSeparatorsTest {
     @ParameterizedTest(name = "{index} : {2}")
-    @DisplayName("기본 구분자 정상 작동 확인")
+    @DisplayName("DefaultSeparators 객체가 숫자를 잘 구분하는지 확인")
     @MethodSource("generateSuccessData")
-    void testDefaultSeparator(String input, List<Integer> output,String message) {
-        assertThat(new CalculatorController().getNumbers(input)).isEqualTo(output);
+    void testCorrectSeparated(String input, List<Integer> output,String message) {
+        assertThat(new DefaultSeparators().separateNumbers(input)).isEqualTo(output);
     } // testDefaultSeparator
 
     static Stream<Arguments> generateSuccessData() {
@@ -36,9 +29,9 @@ class DefaultSeparatorTest {
     } // generateSuccessData
 
     @Test
-    @DisplayName("기본 구분자 예외 확인")
-    void isDefaultSeparatorException() {
-        assertThatThrownBy(() -> new DefaultSeparator().separate("1,2!3"))
+    @DisplayName("기본 구분자 이외의 문자가 포함되어 있을 때 예외 확인")
+    void testContainsOtherCharacters() {
+        assertThatThrownBy(() -> new DefaultSeparators().separateNumbers("1,2!3"))
                 .isInstanceOf(IllegalArgumentException.class);
-    } // isDefaultSeparatorException
+    } // testContainsOtherCharacters
 } // class
