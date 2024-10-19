@@ -35,4 +35,13 @@ public class Parser {
 		return true;
 	}
 
+	/**
+	 * 커스텀 구분자 저장
+	 *
+	 * @param personalSeparator
+	 */
+	public void savePersonalSeparator(String personalSeparator) {
+		separators.add(personalSeparator);
+	}
+
 }
