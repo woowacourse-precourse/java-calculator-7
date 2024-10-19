@@ -1,8 +1,11 @@
 package calculator;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DelimiterParserTest {
 
@@ -26,6 +29,18 @@ public class DelimiterParserTest {
         String[] splitResults = delimiterParser.splitByDelimiter(mockInput);
 
         assertArrayEquals(result, splitResults);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1:/,2", "//a\\n1b2:c", "1!2:3"})
+    void 지정하지_않은_문자열_예외(String mockInput) {
+        var delimiterParser = new DelimiterParser();
+        var inputValidator = new InputValidator();
+        String[] splitResults = delimiterParser.splitByDelimiter(mockInput);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            inputValidator.validateUnspecifiedCharacters(splitResults);
+        });
     }
 }
 
