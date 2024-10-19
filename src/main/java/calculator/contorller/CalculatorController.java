@@ -1,8 +1,8 @@
 package calculator.contorller;
 
+import calculator.Validator;
 import calculator.calculator.CustomCalculator;
 import calculator.calculator.SimpleCalculator;
-import calculator.Validator;
 
 public class CalculatorController {
 

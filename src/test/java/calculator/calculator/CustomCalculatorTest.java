@@ -56,4 +56,15 @@ class CustomCalculatorTest {
         assertThat(result).isZero();
     }
 
+    @DisplayName("구분자가 여러개인 경우")
+    @Test
+    void multiDelimiter() {
+        // given
+        String inputString = "//;,\\n1,2;3";
+        // when
+        int result = customCalculator.calculate(inputString);
+        // then
+        assertThat(result).isEqualTo(6);
+    }
+
 }
