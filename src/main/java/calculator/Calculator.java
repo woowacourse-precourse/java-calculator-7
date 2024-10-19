@@ -25,14 +25,8 @@ public class Calculator {
     }
 
     public void run() {
-//        while (true) {
         outputView.requestString();
         Long result = calculatorController.calculateNumbers(inputView.getNotSeparatedString());
         outputView.showResult(result);
-//        Boolean isContinue = calculatorController.isContinue(inputView.readContinue());
-//            if (!isContinue) {
-//                return;
-//            }
-//        }
     }
 }
