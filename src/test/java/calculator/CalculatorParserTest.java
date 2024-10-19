@@ -58,7 +58,7 @@ class CalculatorParserTest {
         });
 
         // then
-        assertThat(exception.getMessage()).isEqualTo("커스텀 구분자로 2자 이상이 올 수 없습니다.");
+        assertThat(exception.getMessage()).isEqualTo("커스텀 구분자는 1자를 초과할 수 없습니다.");
     }
 
     private static Stream<Arguments> provide3() {
@@ -77,7 +77,7 @@ class CalculatorParserTest {
         });
 
         // then
-        assertThat(exception.getMessage()).isEqualTo("커스텀 구분자로 빈 값이 올 수 없습니다.");
+        assertThat(exception.getMessage()).isEqualTo(CalculatorParsedException.CUSTOM_NOT_EMPTY);
     }
 
     @Test
@@ -88,17 +88,17 @@ class CalculatorParserTest {
         });
 
         // then
-        assertThat(exception.getMessage()).isEqualTo("커스텀 구분자로 숫자가 올 수 없습니다.");
+        assertThat(exception.getMessage()).isEqualTo(CalculatorParsedException.CUSTOM_NOT_NUMERIC);
     }
 
     @Test
     void 정수만_입력_할_수_있습니다() {
         // when
-        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+        Throwable exception = assertThrows(CalculatorParsedException.class, () -> {
             CalculatorParser.parse("-1:2:A");
         });
 
         // then
-        assertThat(exception.getMessage()).isEqualTo("정수만 입력할 수 있습니다.");
+        assertThat(exception.getMessage()).isEqualTo(CalculatorParsedException.NOT_NUMERIC);
     }
 }

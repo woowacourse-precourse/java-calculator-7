@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 public class CalculatorParser {
     public static final String DEFAULT_DELIMITER = ",:";
     public static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.*)(\n|\\\\n)(.*)");
+    public static final Pattern POSITIVE_INTEGER_PATTERN = Pattern.compile("^\\d+$");
 
     public static List<Integer> parse(String text) {
         Result result = getResult(text);
@@ -31,15 +32,7 @@ public class CalculatorParser {
         String customDelimiter = matcher.group(1);
         String parsedText = matcher.group(3);
 
-        if (customDelimiter.isEmpty()) {
-            throw new CalculatorParsedException("커스텀 구분자로 빈 값이 올 수 없습니다.");
-        }
-        if (customDelimiter.length() >= 2) {
-            throw new CalculatorParsedException("커스텀 구분자로 2자 이상이 올 수 없습니다.");
-        }
-        if (Character.isDigit(customDelimiter.charAt(0))) {
-            throw new CalculatorParsedException("커스텀 구분자로 숫자가 올 수 없습니다.");
-        }
+        CustomDelimiterValidator.validate(customDelimiter);
 
         return new Result(delimiter + customDelimiter, parsedText);
     }
@@ -48,12 +41,11 @@ public class CalculatorParser {
     }
 
     private static int toInteger(String str) {
-        int i = Integer.parseInt(str);
-
-        if (i < 0) {
-            throw new CalculatorParsedException("정수만 입력할 수 있습니다.");
+        Matcher matcher = POSITIVE_INTEGER_PATTERN.matcher(str);
+        if (!matcher.find()) {
+            throw new CalculatorParsedException(CalculatorParsedException.NOT_NUMERIC);
         }
 
-        return i;
+        return Integer.parseInt(str);
     }
 }
