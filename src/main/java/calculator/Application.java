@@ -1,7 +1,7 @@
 package calculator;
 
 import calculator.addCalculator.AddCalculator;
-import calculator.main.MainCalculator;
+import calculator.model.MainCalculator;
 import calculator.stringSplitter.StringSplitter;
 
 public class Application {

@@ -1,4 +1,4 @@
-package calculator.main;
+package calculator.model;
 
 import calculator.addCalculator.AddCalculator;
 import calculator.stringSplitter.StringSplitter;
