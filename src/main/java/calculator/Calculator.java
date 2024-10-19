@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Calculator {
-    private String division = "-";
+    private String division = " ";
     private final List<Integer> numbers = new ArrayList<>();
 
     public void getDivision(String inputString) {
@@ -17,14 +17,20 @@ public class Calculator {
         List<String> strings;
 
         for (String customString : customStrings) {
-            strings =  Arrays.asList(customString.split(",|:"));
+            strings = Arrays.asList(customString.split(",|:"));
             for (String string : strings) {
                 numbers.add(Integer.parseInt(string));
             }
         }
     }
 
-    public int calculator() {
-        return 0; // 계산 결과값 반환
+    public int calculateNumber() {
+        int result = 0;
+
+        for (Integer number : numbers) {
+            result += number;
+        }
+
+        return result; // 계산 결과값 반환
     }
 }
