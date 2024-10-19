@@ -5,14 +5,11 @@ import java.util.List;
 
 public class ValidationUtils {
     public void validateInput(String input) {
-        if (isEmpty(input)) {
+        if (input.isEmpty()) {
             throw new IllegalArgumentException("입력값이 없습니다.");
         }
     }
-
-    private boolean isEmpty(String input) {
-        return input.isEmpty();
-    }
+    
 
     public void numbersCheck(List<Integer> numbers) {
         for (Integer number : numbers) {
@@ -21,6 +18,4 @@ public class ValidationUtils {
             }
         }
     }
-
-
 }
