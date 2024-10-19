@@ -9,6 +9,13 @@ public class DelimiterExtractorTest {
     private final String positiveNumberPattern = "[0-9]+\\.?[0-9]*";
 
     @Test
+    void 잘못된_커스텀_구분자가_있으면_IllegalArgumentException_예외가_발생한다() {
+        DelimiterExtractor delimiterExtractor = new DelimiterExtractor("//;\n1;2$3");
+
+        assertThrows(IllegalArgumentException.class, () -> delimiterExtractor.validate(positiveNumberPattern));
+    }
+
+    @Test
     void 잘못된_기본_구분자가_있으면_IllegalArgumentException_예외가_발생한다() {
         DelimiterExtractor delimiterExtractor = new DelimiterExtractor("1,2:3-4");
 

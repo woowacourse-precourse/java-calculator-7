@@ -55,13 +55,21 @@ public class DelimiterExtractor {
 
     public void validate(String positiveNumberPattern) {
         String delimiterLeft = remove(positiveNumberPattern);
-
-        String BASIC_DELIMITER_REGEX = ",|:";
-        String maybeNothing = remove(BASIC_DELIMITER_REGEX, delimiterLeft).trim();
+        String maybeNothing = remove(createRegularExpression(), delimiterLeft).trim();
 
         if (!maybeNothing.isBlank()) {
-            throw new IllegalArgumentException(maybeNothing + " 은 잘못된 구분자예요!");
+            throw new IllegalArgumentException("[" + type() + "] " + maybeNothing + " 은 잘못된 구분자예요!");
         }
+    }
+
+    private String createRegularExpression() {
+        String BASIC_DELIMITER_REGEX = ",|:";
+
+        if (DelimiterType.BASIC.equals(this.type())) {
+            return BASIC_DELIMITER_REGEX;
+        }
+
+        return extractCustomDelimiter();
     }
 
 }
