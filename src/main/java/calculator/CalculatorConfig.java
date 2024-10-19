@@ -10,4 +10,5 @@ public class CalculatorConfig {
 
     public View view() { return new View(); }
 
+    public InputValidator inputValidator() { return new InputValidator(); }
 }
