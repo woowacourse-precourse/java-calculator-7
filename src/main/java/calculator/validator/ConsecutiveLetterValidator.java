@@ -7,7 +7,7 @@ public class ConsecutiveLetterValidator {
         validateConsecutiveLetters();
     }
     private void validateConsecutiveLetters() {
-        if (('0' <= input.charAt(0) || input.charAt(0) <= '9') && checkConsecutiveLetter(input)) {
+        if ((input.charAt(0)!='/') && checkConsecutiveLetter(input)) {
             new IllegalArgumentException("같은 문자가 두 번 연속 입력되었습니다.");
         }
         if(checkConsecutiveLetter(input.substring(5))){
