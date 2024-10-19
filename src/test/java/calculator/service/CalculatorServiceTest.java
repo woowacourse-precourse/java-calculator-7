@@ -114,12 +114,10 @@ class CalculatorServiceTest {
         String input = "//;\\n";
         CalculatorRequestDto requestDto = new CalculatorRequestDto(input);
 
-        // when
-        CalculatorResponseDto responseDto = calculatorService.sum(requestDto);
-        long sumResult = responseDto.sumResult();
-
-        // then
-        assertThat(sumResult).isZero();
+        // when & then
+        assertThatThrownBy(() -> calculatorService.sum(requestDto))
+                .isInstanceOf(CalculatorException.class)
+                .hasMessage(ErrorMessage.INVALID_INPUT_VALUE.getMessage());
     }
 
     static Stream<Arguments> provideInputWithDefaultDelimiterAndPositiveNumber() {

@@ -10,15 +10,16 @@ public class InputSplitter {
     private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
 
     public String[] split(String input) {
+        if (input == null || input.isEmpty()) {
+            return new String[0];
+        }
+
         String extractedNumberText = input;
         Delimiter delimiter = selectDelimiter(input);
 
         if (hasCustomDelimiter(input)) {
             int customDelimiterIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX) + CUSTOM_DELIMITER_SUFFIX.length();
             extractedNumberText = input.substring(customDelimiterIndex);
-        }
-        if (extractedNumberText.isEmpty()) {
-            return new String[0];
         }
         return delimiter.split(extractedNumberText);
     }

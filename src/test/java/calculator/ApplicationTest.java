@@ -22,7 +22,6 @@ class ApplicationTest extends NsTest {
 
     @ParameterizedTest(name = "입력값: {0}, 기대값: {1}")
     @CsvSource({
-            "'//;\\n', 0",
             "'//@\\n1', 1",
             "'//#\\n1#2', 3",
             "'//aa\\n1aa2aa3', 6",
@@ -63,6 +62,7 @@ class ApplicationTest extends NsTest {
 
     @ParameterizedTest(name = "입력값: {0}")
     @ValueSource(strings = {
+            "//;\\n",
             "//;\\na",
             "//;\\n1;2;a",
             "//;\\n1.2;2;3",
