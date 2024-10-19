@@ -3,6 +3,7 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Application {
     public static void main(String[] args) {
@@ -15,6 +16,13 @@ public class Application {
         delimiters.add(':');
         delimiters.add(',');
 
+        // 커스텀 문자열 추가
+        char customDelimiter = checkDelimiter(input);
+        if (customDelimiter != '\0') {
+            delimiters.add(customDelimiter);
+            input = input.substring(5);
+        }
+
         // 숫자로 분리
         List<String> numStrings = splitByDelimiter(input, delimiters);
         List<Integer> nums = changeToInteger(numStrings);
@@ -23,6 +31,13 @@ public class Application {
         Integer answer = calculate(nums);
 
         System.out.println("결과 : " + answer);
+    }
+
+    private static char checkDelimiter(String input) {
+        if (Pattern.matches("^//.*\\\\n.*$", input)) {
+            return input.charAt(2);
+        }
+        return '\0';
     }
 
     private static List<String> splitByDelimiter(String input, List<Character> delimiter) {
