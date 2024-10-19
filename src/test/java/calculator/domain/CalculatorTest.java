@@ -11,6 +11,7 @@ public class CalculatorTest {
     @CsvSource(value = {"1,2,3 | 6", "1:2:3 | 6", "1,2:3 | 6", "//;\\n1;2;3 | 6", "1 | 1", " | 0"}, delimiter = '|')
     void 덧셈_계산(String input, Long expected) {
         Long[] calculationInputs = InputTypeSorter.sort(input).createCalculationInputs();
+        
         assertThat(Calculator.addition(calculationInputs)).isEqualTo(expected);
     }
 
