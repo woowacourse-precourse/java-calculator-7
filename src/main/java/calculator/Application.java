@@ -1,13 +1,14 @@
 package calculator;
 
 public class Application {
-    public static void main(String[] args) {
-        final ExpressionInputReader expressionInputReader = new ExpressionInputReader();
+    public static void main(String[] args) throws Exception {
 
-        final String input = expressionInputReader.read();
-        System.out.println(input);
-        final Adder adder = new Adder(input, expressionInputReader.getDelimiters());
+        try (ConsoleIOHandler handler = new ConsoleIOHandler()) {
+            final Expression expr = Expression.parse(handler.read());
 
-        System.out.println("결과 : " + adder.run());
+            final Adder adder = new Adder(expr.getDelimiters(), expr.getOperands());
+            final int result = adder.sum();
+            handler.print(result);
+        }
     }
 }
