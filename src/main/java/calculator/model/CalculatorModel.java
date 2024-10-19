@@ -11,10 +11,18 @@ public final class CalculatorModel {
 
     public List<String> parseUserInput(String input) {
         if (isCustom(input)) {
-
+            return parseCustomString(input);
         }
 
         return parseDefaultString(input);
+    }
+
+    public List<String> parseCustomString(String input) {
+        int delimiterEndIndex = input.indexOf("\\n");
+        String delimiter = input.substring(2, delimiterEndIndex);
+        String numbersPart = input.substring(delimiterEndIndex + 1);
+
+        return Arrays.asList(numbersPart.split(delimiter));
     }
 
     public List<String> parseDefaultString(String input) {
