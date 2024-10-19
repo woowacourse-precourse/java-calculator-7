@@ -16,7 +16,8 @@ public class CalculationValues {
             throw new IllegalArgumentException();
         }
 
-        if (beforeValidateCalculation.stream().anyMatch(n -> n < 0)) {
+        if (beforeValidateCalculation.stream()
+                .anyMatch(n -> n < 0)) {
             throw new IllegalArgumentException();
         }
     }
