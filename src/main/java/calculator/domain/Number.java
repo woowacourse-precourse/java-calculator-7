@@ -30,12 +30,7 @@ public class Number {
 
     // 숫자인지 확인하는 메서드
     private boolean isNumeric(String str) {
-        try {
-            Integer.parseInt(str);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
+        return str.chars().allMatch(Character::isDigit);
     }
 
 
