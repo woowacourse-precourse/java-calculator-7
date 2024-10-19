@@ -12,18 +12,18 @@ public class Calculator {
         System.out.println("결과 : " + sum);
     }
 
-    private static int calculateSum(String UserInput, String delimiter) {
+    private static int calculateSum(String userInput, String delimiter) {
         if (delimiter.length() > 3) {
-            UserInput = UserInput.substring(UserInput.indexOf("\\n") + 2);
+            userInput = userInput.substring(userInput.indexOf("\\n") + 2);
         }
-        String[] userInputArr = stringValidateCheck(UserInput, delimiter);
-        return userInputArrIsNum(userInputArr);
+        String[] userInputArr = stringValidateCheck(userInput, delimiter); // 이름이 validate인데 validate를 안함
+        return userInputArrIsNum(userInputArr); // 이 메서드에서 validate를 하고 있음
     }
 
-    private static int userInputArrIsNum(String[] UserInputArr) {
+    private static int userInputArrIsNum(String[] userInputArr) {
         long sum = 0;
 
-        for (String s : UserInputArr) {
+        for (String s : userInputArr) {
             if (s.isEmpty()) {
                 continue;
             }
