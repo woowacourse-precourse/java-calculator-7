@@ -13,7 +13,6 @@ public class CalculatorController {
         String inputValue = input.readInput();
 
         Calculator calc = new Calculator(inputValue);
-
         int sum = calc.sum();
 
         output.printCalcResult(sum);
