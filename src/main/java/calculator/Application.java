@@ -11,20 +11,12 @@ public class Application {
     private static final int SEPARATOR_START = 2;
 
     public static void main(String[] args) {
-        String input = readIn(); // 입력
+        String input = Console.readLine(); // 입력
         int endIndex = findSeparatorEndIndex(input);
         Set<String> separatorSet = parseSeparator(input,endIndex);
         String afterSeparator = input.substring(endIndex);
         System.out.println("Separators: " + separatorSet);
         System.out.println("After separator: " + afterSeparator);
-    }
-
-    public static String readIn() {
-        String newInput = Console.readLine();
-        if (newInput == null || newInput.isEmpty()) {
-            throw new IllegalArgumentException("Input cannot be null or empty.");
-        }
-        return newInput;
     }
 
 
