@@ -6,6 +6,13 @@ public class Calculator {
 	private static final String ERROR_MESSAGE_NEGATIVE_NUMBER = "음수는 계산할 수 없습니다.";
 	private static final String ERROR_OVERFLOW_SUM = "계산 범위를 초과 하였습니다.";
 
+	private Calculator() {
+	}
+
+	public static Calculator create() {
+		return new Calculator();
+	}
+
 	public int sumNumbers(List<Integer> numbers) {
 		int sum = 0;
 		for (int number : numbers) {

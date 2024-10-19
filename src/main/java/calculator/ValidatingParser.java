@@ -10,6 +10,13 @@ public class ValidatingParser {
 	private static final String ERROR_MESSAGE_NOT_NUMBER = "입력값이 숫자가 아닙니다.";
 	private static final String ERROR_MESSAGE_NEGATIVE_NUMBER = "입력값이 양수가 아닙니다.";
 
+	private ValidatingParser() {
+	}
+
+	public static ValidatingParser create() {
+		return new ValidatingParser();
+	}
+
 	public List<Integer> validatedNumbersFrom(String userInput) {
 		if (isContainsCustomSeparator(userInput)) {
 			String prefix = getPrefix(userInput);
