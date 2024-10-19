@@ -1,7 +1,7 @@
 package calculator.model.primitive;
 
 public class PositiveNumber {
-    private static final int MIN_RANGE = 0;
+    private static final int MIN_RANGE = 1;
 
     private final int number;
 
@@ -16,7 +16,7 @@ public class PositiveNumber {
 
     private void validateRange(int number) {
         if (isOutOfRange(number)) {
-            throw new IllegalArgumentException("유효하지 않은 입력입니다.");
+            throw new IllegalArgumentException("양수를 입력해야 합니다.");
         }
     }
 
