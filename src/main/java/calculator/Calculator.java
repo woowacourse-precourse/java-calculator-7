@@ -2,7 +2,7 @@ package calculator;
 
 import java.util.Arrays;
 
-public class Calculator extends RegexCheck{
+public class Calculator extends RegexCheck {
   private int[] numbers;
 
   Calculator(String input) {
@@ -14,28 +14,30 @@ public class Calculator extends RegexCheck{
   }
 
   private int parseInt(String strNumber) {
-      return Integer.parseInt(strNumber);
+    return Integer.parseInt(strNumber);
   }
 
-  public Calculator allPositiveNumber() throws IllegalArgumentException{
-    for(int i=0; i< getStringNumbers().length; i++){
-      if(numbers[i] < 0){
+  public Calculator allPositiveNumber() throws IllegalArgumentException {
+    numbers = new int[getStringNumbers().length];
+
+    for (int i = 0; i < getStringNumbers().length; i++) {
+      if (parseInt(getStringNumbers()[i]) < 0) {
         throw new IllegalArgumentException("음수가 있습니다. 양수만 입력해 주세요.");
-      }else {
-        numbers[i] = parseInt(getStringNumbers()[i] );
+      } else {
+        numbers[i] = parseInt(getStringNumbers()[i]);
       }
     }
+
     return this;
   }
 
-  public int add(int[] numbers){
+  public static int add(int[] numbers) {
     int sum = 0;
     for (int number : numbers) {
       sum += number;
     }
     return sum;
   }
-
 
 }
 

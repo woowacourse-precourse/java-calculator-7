@@ -22,7 +22,7 @@ public class Application {
         int[] numbersArray = calculator.allPositiveNumber().getNumbers();
 
 
-        int result=calculator.add(numbersArray);
+        int result=Calculator.add(numbersArray);
 
         System.out.println("결과 : " + result);
 
@@ -30,7 +30,7 @@ public class Application {
         throw new IllegalArgumentException("입력을 잘못하였습니다.");
       }
 
-    } catch (Exception e) {
+    } catch (IllegalArgumentException e) {
       System.err.println(e.getMessage());
     } finally {
       Console.close();
