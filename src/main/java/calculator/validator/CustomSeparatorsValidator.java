@@ -2,6 +2,7 @@ package calculator.validator;
 
 import calculator.exception.ValidatorException;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static calculator.constant.ErrorMessage.PREFIX;
@@ -16,6 +17,7 @@ public class CustomSeparatorValidator {
     public static final String BACKSLASH_CANNOT_USE_AS_CUSTOM = "'\\'는 커스텀 구분자로 사용 불가합니다.";
     public static final String NUMBER_CANNOT_USE_AS_CUSTOM = "숫자는 커스텀 구분자로 사용 불가합니다.";
     public static final String CUSTOM_CANNOT_MORE_THAN_LIMIT = "커스텀 구분자는 2개까지만 사용 가능합니다.";
+    public static final String CUSTOM_ONLY_CAN_USE_SPECIFIED = "커스텀 구분자는 지정한 것만 사용 가능합니다.";
 
     public void validate(List<String> customSeparator) {
         if (customSeparator.contains(EMPTY) || customSeparator.contains(WHITE_SPACE)) {
@@ -35,4 +37,14 @@ public class CustomSeparatorValidator {
             throw new ValidatorException(PREFIX + CUSTOM_CANNOT_MORE_THAN_LIMIT);
         } // end if
     } // validate
+
+    public void validateCalculatePart(List<String> customSeparator, String calculatePart) {
+        Arrays.stream(calculatePart.split(EMPTY))
+                .filter(string -> !string.matches(ONE_MORE_NUMBER_REGEX))
+                .forEach(string -> {
+                    if (!customSeparator.contains(string)) {
+                        throw new ValidatorException(PREFIX + CUSTOM_ONLY_CAN_USE_SPECIFIED);
+                    } // end if
+                });
+    } // validateCalculatePart
 } // class

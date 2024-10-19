@@ -8,7 +8,7 @@ import java.util.List;
 
 import static calculator.constant.Message.*;
 
-public class DefaultSeparator {
+public class DefaultSeparator implements Separator {
     private final List<String> defaultSeparators;
 
     public DefaultSeparator() {
@@ -21,7 +21,8 @@ public class DefaultSeparator {
         defaultSeparators.add(SECOND_DEFAULT_SEPARATOR);
     } // addInitialValue
 
-    public List<Integer> separate(String input) {
+    @Override
+    public List<Integer> separateNumbers(String input) {
         new DefaultSeparatorValidator().validate(input);
 
         String numbers = defaultSeparators.stream()
