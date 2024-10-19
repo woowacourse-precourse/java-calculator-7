@@ -1,5 +1,8 @@
 package calculator.model;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static calculator.util.ErrorMessages.ERROR_NUMBER_TYPE;
 
 public class Calculator {
@@ -21,20 +24,17 @@ public class Calculator {
     }
 
     public void split(){
-        if(isCustomSeparator())
-            customSplit();
+        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(this.str);
+        if(matcher.find())
+            customSplit(matcher);
         else
             normalSplit();
     }
 
-    public boolean isCustomSeparator(){
-        return str.startsWith("//");
-    }
-
-    public void customSplit(){
-        String separator = String.valueOf(this.str.charAt(2));
-        this.str = this.str.substring(5);
-        this.strArr = this.str.split(separator);
+    public void customSplit(Matcher matcher){
+        String customSeparator = matcher.group(1);
+        String customText = matcher.group(2);
+        this.strArr = customText.split(customSeparator);
     }
 
     public void normalSplit(){
