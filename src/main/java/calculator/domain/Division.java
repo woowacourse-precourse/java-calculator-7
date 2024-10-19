@@ -13,7 +13,7 @@ public class Division {
     private static int CUSTOM_DELIMITER_START_INDEX = 2;
     private static int START_NUMBER_INDEX = 2;
 
-    private StringBuilder delimiter = new StringBuilder(":|,");
+    private static final String DEFAULT_DELIMITER = ":|,";
 
     public List<String> split(String input) {
         validateFormat(input);
@@ -21,10 +21,9 @@ public class Division {
             String customDelimiter = getCustomDelimiter(input);
             String digits = getDigits(input);
             validateCustomDelimiter(customDelimiter, digits);
-            delimiter.append("|").append(customDelimiter);
-            input = digits;
+            return List.of(digits.split(customDelimiter));
         }
-        return Arrays.stream(input.split(delimiter.toString())).toList();
+        return List.of(input.split(DEFAULT_DELIMITER));
     }
 
     private static String getDigits(String input) {
@@ -67,7 +66,7 @@ public class Division {
     }
 
     private void validateCustomDuplicate(String customDelimiter) {
-        if (Pattern.matches(delimiter.toString(), customDelimiter)) {
+        if (Pattern.matches(DEFAULT_DELIMITER, customDelimiter)) {
             throw new IllegalArgumentException(DUPLICATE_DELIMITER.getMessage());
         }
     }
