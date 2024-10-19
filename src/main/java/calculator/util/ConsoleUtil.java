@@ -6,12 +6,17 @@ import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ConsoleInputUtil {
-	private static final Logger logger = LoggerFactory.getLogger(ConsoleInputUtil.class);
+import calculator.interfaces.IOHandler;
+
+public class ConsoleUtil implements IOHandler {
+	private static final Logger logger = LoggerFactory.getLogger(ConsoleUtil.class);
+
+	public void displayMessage(String message) {
+		System.out.println(message);
+	}
 
 	public String readInput() {
 		try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-			System.out.println("덧셈할 문자열을 입력해 주세요.");
 			return reader.readLine();
 		} catch (IOException e) {
 			logger.log(Level.SEVERE, "입력을 읽는 중 오류 발생", e);
