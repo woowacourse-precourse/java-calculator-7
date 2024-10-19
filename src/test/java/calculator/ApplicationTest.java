@@ -17,6 +17,60 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    // 특수문자로 된 커스텀 구분자 사용_1
+    @Test
+    void use_special_custom_divider_1() {
+        assertSimpleTest(() -> {
+            run("//.\\n1.2.4");
+            assertThat(output()).contains("결과 : 7");
+        });
+    }
+
+    // 특수문자로 된 커스텀 구분자 사용_2
+    @Test
+    void use_special_custom_divider_2() {
+        assertSimpleTest(() -> {
+            run("//-\\n1-2-4");
+            assertThat(output()).contains("결과 : 7");
+        });
+    }
+
+    // 특수문자로 된 커스텀 구분자 사용_3
+    @Test
+    void use_special_custom_divider_3() {
+        assertSimpleTest(() -> {
+            run("//[\\n1[2[4");
+            assertThat(output()).contains("결과 : 7");
+        });
+    }
+
+    // 특수문자로 된 커스텀 구분자 사용_4
+    @Test
+    void use_special_custom_divider_4() {
+        assertSimpleTest(() -> {
+            run("//]\\n1]2]4");
+            assertThat(output()).contains("결과 : 7");
+        });
+    }
+
+    // 특수문자로 된 커스텀 구분자 사용_5
+    @Test
+    void use_special_custom_divider_5() {
+        assertSimpleTest(() -> {
+            run("//^\\n1^2^4");
+            assertThat(output()).contains("결과 : 7");
+        });
+    }
+
+    // 특수문자로 된 커스텀 구분자 사용_6
+    @Test
+    void use_special_custom_divider_6() {
+        assertSimpleTest(() -> {
+            run("//\\\\n1\\2\\4");
+            assertThat(output()).contains("결과 : 7");
+        });
+    }
+
     // 한 숫자만 입력했을 때
     @Test
     void input_one_number() {
@@ -40,6 +94,24 @@ class ApplicationTest extends NsTest {
     void Error_input_continuous_dividers() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1,,3::5"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    // [오류] 맨 앞이 구분자일 때
+    @Test
+    void Error_dividers_in_front() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(",1,3,5"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    // [오류] 맨 뒤가 구분자일 때
+    @Test
+    void Error_dividers_in_back() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,3,5,"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
