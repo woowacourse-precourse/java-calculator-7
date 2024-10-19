@@ -13,8 +13,8 @@ public class InputHandler {
     }
 
     private void checkNullInput(String input) {
-        if (input == null || input.isEmpty()) {
-            throw new IllegalArgumentException("입력 값이 비어 있습니다.");
+        if (input == null || input.trim().isEmpty()) {
+            throw new IllegalArgumentException("빈 입력값");
         }
     }
 }
