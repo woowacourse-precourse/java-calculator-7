@@ -23,12 +23,14 @@ public class Application {
         stringCalculator.setNumberStrategy(new SimpleNumberStrategy());
         configureDelimiterStrategy(userInput);
         configureCalculateStrategy(userInput);
+
+        System.out.println(outputPhrase + stringCalculator.operate());
     }
 
     private static boolean isCustomDelimiter(String userInput) {
         return userInput.startsWith(startCustomPattern) && userInput.contains(endCustomPattern);
     }
-    
+
     private static void configureDelimiterStrategy(String userInput) {
         if (isCustomDelimiter(userInput)) {
             stringCalculator.setDelimiterStrategy(new CustomDelimiterStrategy());
