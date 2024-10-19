@@ -12,6 +12,8 @@ public class Calculator {
         String delimiters = check[0];
         String numbersSection = check[1];
 
+        InputValidator.validate(delimiters, numbersSection);
+
         return extractAndSum(numbersSection, delimiters);
     }
 
@@ -27,9 +29,7 @@ public class Calculator {
             int start = 2;
             int end = input.indexOf("\\n", start);
 
-            if (end == -1) {
-                break;
-            }
+            InputValidator.validateCustomDelimiter(input, start, end);
 
             String customDelimiter = input.substring(start, end);
             delimiters.append(customDelimiter);
@@ -46,7 +46,12 @@ public class Calculator {
 
         for (String num : numbers) {
             if (!num.isEmpty()) {
-                sum += Integer.parseInt(num);
+                int number = Integer.parseInt(num);
+
+                if (number < 0) {
+                    throw new IllegalArgumentException("유효하지 않은 입력값입니다. : " + num);
+                }
+                sum += number;
             }
         }
         return sum;
