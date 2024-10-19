@@ -13,6 +13,9 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class ApplicationTest extends NsTest {
 
+    private Adder adder;
+    private Formatter formatter;
+
     static Stream<String> invalidDelimiterInputs() {
         return Stream.of(
                 "/;\\n1,2", "/;\\n1,2", ";\\n1,2", "\\n1,2",
@@ -87,6 +90,51 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("// \\n1");
             assertThat(output()).contains("결과 : 1");
+        });
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자가 없는 사용자 입력에서 숫자만을 추출한다")
+    void 기본_구분자_숫자_추출_테스트() {
+        assertSimpleTest(() -> {
+            // given
+            String input = "1,2,,3";
+
+            // when
+            int[] formatedNums = formatter.formatInput(input);
+
+            // then
+            assertThat(formatedNums.length).isEqualTo(4);
+        });
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자가 있는 사용자 입력에서 숫자만을 추출한다")
+    void 커스텀_구분자_숫자_추출_테스트() {
+        assertSimpleTest(() -> {
+            // given
+            String input = "//;\\n1;2;,3";
+
+            // when
+            int[] formatedNums = formatter.formatInput(input);
+
+            // then
+            assertThat(formatedNums.length).isEqualTo(4);
+        });
+    }
+
+    @Test
+    @DisplayName("사용자 입력에서 올바르게 추출된 숫자들을 모두 더한다")
+    void 숫자_덧셈_테스트() {
+        assertSimpleTest(() -> {
+            // given
+            int[] nums = {1, 2, 3};
+
+            // when
+            int result = adder.addNum(nums);
+
+            // then
+            assertThat(result).isEqualTo(1 + 2 + 3);
         });
     }
 
