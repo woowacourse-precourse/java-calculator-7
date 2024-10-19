@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import calculator.constant.ErrorMessage;
 import calculator.util.NumberChecker;
 
 public class DelimiterMaker {
@@ -14,19 +15,17 @@ public class DelimiterMaker {
 	private static final String CUSTOM_DELIMITER_PREFIX = "//";
 	private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
 	private static final int STRING_START_INDEX = 0;
-	private static final String BLANK_STRING = "";
 
 	public List<String> getDelimitersFrom(String delimiterMixedNumbers) {
 
-		List<String> delimiters = new ArrayList<>(Arrays.asList(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON));
+		String delimiterString = getDelimiterStringFrom(delimiterMixedNumbers);
 
-		String delimiter = getDelimiterStringFrom(delimiterMixedNumbers);
-		String[] splitDelimiter = delimiter.split(Pattern.quote(CUSTOM_DELIMITER_SUFFIX));
-
+		String[] splitDelimiter = delimiterString.split(Pattern.quote(CUSTOM_DELIMITER_SUFFIX));
 		validateAllDelimiter(splitDelimiter);
 
+		List<String> delimiters = new ArrayList<>(Arrays.asList(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON));
 		Arrays.stream(splitDelimiter)
-			.map(separator -> separator.replace(CUSTOM_DELIMITER_PREFIX, BLANK_STRING))
+			.map(separator -> separator.substring(CUSTOM_DELIMITER_PREFIX.length()))
 			.forEach(delimiters::add);
 
 		return delimiters;
@@ -43,7 +42,6 @@ public class DelimiterMaker {
 	}
 
 	private void validateDelimiter(String delimiter) {
-		validateBlank(delimiter);
 		validateCustomDelimiterFormat(delimiter);
 		validateDelimiterIsCustomDelimiterPrefix(delimiter);
 		validateDelimiterContainsNumber(delimiter);
@@ -52,7 +50,7 @@ public class DelimiterMaker {
 
 	private void validateCustomDelimiterFormat(String delimiter) {
 		if (!delimiter.startsWith(CUSTOM_DELIMITER_PREFIX)) {
-			throw new IllegalArgumentException("Invalid delimiter: " + delimiter);
+			throw new IllegalArgumentException(ErrorMessage.INVALID_CUSTOM_DELIMITER_FORMAT.getMessage());
 		}
 	}
 
@@ -60,28 +58,26 @@ public class DelimiterMaker {
 
 		String customDelimiter = delimiter.substring(CUSTOM_DELIMITER_PREFIX.length());
 
-		if(customDelimiter.contains(CUSTOM_DELIMITER_SUFFIX)) {
-			throw new IllegalArgumentException("Invalid delimiter: " + customDelimiter);
+		if (customDelimiter.contains(CUSTOM_DELIMITER_PREFIX)) {
+			throw new IllegalArgumentException(
+				ErrorMessage.USE_CUSTOM_DELIMITER_PREFIX_AT_CUSTOM_DELIMITER.getMessage()
+			);
 		}
 	}
 
 	private void validateDelimiterContainsNumber(String delimiter) {
-		if(NumberChecker.containsNumber(delimiter)) {
-			throw new IllegalArgumentException("Invalid delimiter: " + delimiter);
-		}
-	}
-
-	private void validateBlank(String delimiter) {
-		if(delimiter.isBlank()) {
-			throw new IllegalArgumentException("Invalid delimiter: " + delimiter);
+		if (NumberChecker.containsNumber(delimiter)) {
+			throw new IllegalArgumentException(ErrorMessage.USE_NUMBER_AT_CUSTOM_DELIMITER.getMessage());
 		}
 	}
 
 	private void validateDelimiterIsEmpty(String delimiter) {
 		String customDelimiter = delimiter.substring(CUSTOM_DELIMITER_PREFIX.length());
 
-		if(customDelimiter.isEmpty()) {
-			throw new IllegalArgumentException("Invalid delimiter: " + customDelimiter);
+		if (customDelimiter.isEmpty()) {
+			throw new IllegalArgumentException(
+				ErrorMessage.USE_BLANK_OR_CUSTOM_DELIMITER_SUFFIX_AT_CUSTOM_DELIMITER.getMessage()
+			);
 		}
 	}
 
