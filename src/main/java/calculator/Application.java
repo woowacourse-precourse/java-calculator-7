@@ -36,6 +36,8 @@ public class Application {
                 }
             }
 
+            System.out.println("구분자 = " + delimiter);
+
             String[] inputSplits = input.split(delimiter);
             int result = 0;
 
