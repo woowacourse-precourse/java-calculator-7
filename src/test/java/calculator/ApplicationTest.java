@@ -137,6 +137,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 연속적인_구분자_허용() {
+        assertSimpleTest(() -> {
+            run("2,::3");
+            assertThat(output()).contains("결과 : 5");
+        });
+    }
+
+    @Test
     void 양수_판별_실패_케이스1() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1,2,3:1.743,5"))
