@@ -22,7 +22,8 @@ class ApplicationTest extends NsTest {
     private static final String[][] CUSTOM_VALID_INPUTS = {
             {"//;\\n1", "1"},
             {"//;\\n1", "1"},
-            {"//S\\n1S2S3:4", "10"}
+            {"//S\\n1S2S3:4", "10"},
+            {"//ST\\n1S2T3:4", "10"}
     };
 
     @Test
