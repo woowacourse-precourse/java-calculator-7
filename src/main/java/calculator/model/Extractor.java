@@ -26,15 +26,7 @@ public class Extractor {
         String[] tokens = input.split(regex);
         for (String token : tokens) {
             if (!token.isEmpty()) {
-                try {
-                    Long number = Long.parseLong(token);
-                    if(number < 0){
-                        throw new IllegalArgumentException("음수가 포함되어 있습니다.");
-                    }
-                    numbers.add(number);
-                } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("잘못된 입력입니다.");
-                }
+                Long number = validateIsNumber(token);
             }
         }
     }
@@ -56,6 +48,14 @@ public class Extractor {
         regex.append("]");
 
         return regex.toString();
+    }
+
+    private Long validateIsNumber(String input) {
+        try{
+            return Long.parseLong(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("잘못된 입력입니다.");
+        }
     }
 
 }
