@@ -23,8 +23,6 @@ public class CalculatorController {
             return number.addCalculator();
 
         } catch (IllegalArgumentException e) {
-            // 예외 발생 시 메시지 출력 및 애플리케이션 종료
-            System.out.println(e.getMessage());
             throw e;
         }
     }
