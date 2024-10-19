@@ -24,4 +24,8 @@ public abstract class AbstractCalculatingHandlerAdapter implements HandlerAdapte
         String body = request.body().toString();
         return new Numbers(body.split(delimiter));
     }
+
+    protected void addDelimiter(char newDelimiter) {
+        delimiter += ("|" + newDelimiter);
+    }
 }

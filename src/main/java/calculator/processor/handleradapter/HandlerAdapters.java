@@ -6,7 +6,10 @@ import java.util.NoSuchElementException;
 
 public class HandlerAdapters {
 
-    List<HandlerAdapter> handlerAdapters = List.of(new DefaultCalculatingHandlerAdapter());
+    List<HandlerAdapter> handlerAdapters = List.of(
+        new CustomCalculatingHandlerAdapter(),
+        new DefaultCalculatingHandlerAdapter()
+    );
 
     public HandlerAdapter getHandlerAdapter(Request request) {
         for (HandlerAdapter handlerAdapter : handlerAdapters) {
