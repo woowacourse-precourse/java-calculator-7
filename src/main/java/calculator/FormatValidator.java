@@ -9,9 +9,9 @@ public class FormatValidator {
 
     /**
      * 주어진 수식(formula)을 유효성 검사하는 메서드입니다.
-     * 수식이 숫자로 시작하는지, 또는 '/' 문자로 시작하는지를 확인하여
+     * 수식이 숫자로 시작하는지, 또는 '//' 문자로 시작하는지를 확인하여
      * 각각 적절한 형식의 유효성을 검증합니다.
-     * 1. 숫자로 시작하면 쉼표(,) 또는 콜론(:) 외의 문자가 포함되었는지 검사합니다.
+     * 1. 숫자로 시작하면 숫자 또는 구분자 외의 문자가 포함되었는지 검사합니다.
      * 2. '//' 문자로 시작하면 커스텀 구분자 형식이 맞는지 확인합니다.
      *
      * @param formula 유효성을 검사할 수식 (null 또는 빈 문자열일 수 있음)
@@ -27,7 +27,7 @@ public class FormatValidator {
         } else if (isCustomStart(formula)) {
             validateCustomStartFormat(formula);
         } else {
-            throw new IllegalArgumentException("잘못된 수식입니다.");
+            throw new IllegalArgumentException("잘못된 수식입니다. 수식을 다시 한번 확인해 주세요.");
         }
     }
 
