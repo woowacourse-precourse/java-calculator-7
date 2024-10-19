@@ -11,12 +11,20 @@ public class Application {
     private List<Character> delimiters = new ArrayList<>(Arrays.asList(',', ':'));
     private boolean isCustomDelimiter = false;
 
+    private void extractCustomDelimiter(String input, List<Character> delimiters) {
+        if(input.startsWith("//") && input.substring(3,5).equals("\\n")){
+            delimiters.add(input.charAt(2));
+            isCustomDelimiter = true;
+        }
+    }
 
     public void startApplication() {
         List<Long> numbers = new ArrayList<>();
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
+
+        extractCustomDelimiter(input, delimiters);
 
        long sum = 0;
 
