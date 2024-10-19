@@ -11,6 +11,15 @@ public class Application {
 
         if (input.startsWith("//")) {
             // 커스텀 문자열 사용
+            String [] customInfo = input.split("\\\\n", 2);
+
+            String customString = customInfo[0].substring(2);
+            String numbersString = customInfo[1];
+
+            String[] parsedInput = numbersString.split(String.format("%s|,|:", customString));
+            for (String number : parsedInput) {
+                sum += Integer.parseInt(number);
+            }
         }
         else {
             // 커스텀 문자열 미사용
