@@ -1,11 +1,11 @@
 package calculator;
 
-import calculator.domain.calculation.CalculationFactory;
-import calculator.domain.calculation.CalculationFlow;
+import calculator.factory.FlowFactory;
+import calculator.controller.CalculationController;
 
 public class Application {
     public static void main(String[] args) {
-        CalculationFlow calculationFlow = CalculationFactory.createCalculationFlow();
+        CalculationController calculationFlow = FlowFactory.createCalculationFlow();
         calculationFlow.run();
     }
 }

@@ -1,22 +1,24 @@
-package calculator.domain.calculation;
+package calculator.factory;
 
+import calculator.controller.CalculationController;
 import calculator.domain.NumberGenerator;
 import calculator.domain.SumCalculator;
 import calculator.domain.delimiter.CustomDelimiter;
 import calculator.domain.delimiter.Delimiter;
+import calculator.service.CalculationService;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
-public class CalculationFactory {
+public class FlowFactory {
 
-    public static CalculationFlow createCalculationFlow() {
+    public static CalculationController createCalculationFlow() {
         SumCalculator sumCalculator = new SumCalculator();
         NumberGenerator numberGenerator = new NumberGenerator(sumCalculator);
         Delimiter delimiter = new Delimiter();
         CustomDelimiter customDelimiter = new CustomDelimiter();
 
-        CalculationProcessor calculationProcessor = new CalculationProcessor(delimiter, customDelimiter, numberGenerator, sumCalculator);
+        CalculationService calculationProcessor = new CalculationService(delimiter, customDelimiter, numberGenerator, sumCalculator);
 
-        return new CalculationFlow(new InputView(), new OutputView(), calculationProcessor);
+        return new CalculationController(new InputView(), new OutputView(), calculationProcessor);
     }
 }

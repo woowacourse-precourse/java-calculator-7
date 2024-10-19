@@ -11,17 +11,17 @@ public class Delimiter {
         registerBasicDelimiters(BasicDelimiter.values());
     }
 
-    private void registerBasicDelimiters(BasicDelimiter[] delimiters) {
-        for (BasicDelimiter basicDelimiter : delimiters) {
-            delimiterSet.add(basicDelimiter.getSymbol());
-        }
-    }
-
     public void addCustomDelimiter(char customDelimiter) {
         delimiterSet.add(customDelimiter);
     }
 
     public boolean isRegisteredDelimiter(char delimiter) {
         return delimiterSet.contains(delimiter);
+    }
+
+    private void registerBasicDelimiters(BasicDelimiter[] delimiters) {
+        for (BasicDelimiter basicDelimiter : delimiters) {
+            delimiterSet.add(basicDelimiter.getSymbol());
+        }
     }
 }

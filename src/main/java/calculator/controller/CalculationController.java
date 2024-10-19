@@ -1,15 +1,16 @@
-package calculator.domain.calculation;
+package calculator.controller;
 
+import calculator.service.CalculationService;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
-public class CalculationFlow {
+public class CalculationController {
 
     private final InputView inputView;
     private final OutputView outputView;
-    private final CalculationProcessor calculationProcessor;
+    private final CalculationService calculationProcessor;
 
-    public CalculationFlow(InputView inputView, OutputView outputView, CalculationProcessor calculationProcessor) {
+    public CalculationController(InputView inputView, OutputView outputView, CalculationService calculationProcessor) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.calculationProcessor = calculationProcessor;

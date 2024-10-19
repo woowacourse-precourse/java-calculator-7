@@ -1,4 +1,4 @@
-package calculator.domain.calculation;
+package calculator.service;
 
 import calculator.domain.CharAnalyzer;
 import calculator.domain.NumberGenerator;
@@ -6,14 +6,14 @@ import calculator.domain.SumCalculator;
 import calculator.domain.delimiter.CustomDelimiter;
 import calculator.domain.delimiter.Delimiter;
 
-public class CalculationProcessor {
+public class CalculationService {
 
     private final Delimiter delimiter;
     private final CustomDelimiter customDelimiter;
     private final NumberGenerator numberGenerator;
     private final SumCalculator sumCalculator;
 
-    public CalculationProcessor(Delimiter delimiter, CustomDelimiter customDelimiter, NumberGenerator numberGenerator, SumCalculator sumCalculator) {
+    public CalculationService(Delimiter delimiter, CustomDelimiter customDelimiter, NumberGenerator numberGenerator, SumCalculator sumCalculator) {
         this.delimiter = delimiter;
         this.customDelimiter = customDelimiter;
         this.numberGenerator = numberGenerator;
