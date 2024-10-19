@@ -13,11 +13,12 @@ public class Application {
     /*
      * 입력에서 커스텀 구분자 설정을 확인해서 존재하면 구분자 리스트에 커스텀 구분자를 넣어준다.
      * 입력을 커스텀 구분자 이후의 문자열만 남겨서 반환한다.
+     * while문을 통해 여러개의 커스텀 구분자가 들어오는 경우를 처리
      */
     public static String checkCustomSep(String input) throws IllegalArgumentException {
         String regex = "^//.\\\\n.*";
 
-        if ( Pattern.matches(regex, input)) {
+        while (Pattern.matches(regex, input)) {
             if (input.charAt(2) >= '0' && input.charAt(2) <= '9') {
                 throw new IllegalArgumentException("잘못된 입력입니다.");
             }
