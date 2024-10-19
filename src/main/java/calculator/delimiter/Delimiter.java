@@ -2,35 +2,22 @@ package calculator.delimiter;
 
 public class Delimiter {
     private static final String DEFAULT_DELIMITER_REGEX = "[,:]";
-    private static final String CUSTOM_DELIMITER_PREFIX = "//";
-    private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
+    static final Delimiter DEFAULT_DELIMITER = new Delimiter(DEFAULT_DELIMITER_REGEX);
+
     private final String customDelimiter;
 
-    public Delimiter(String line) {
-        customDelimiter = readDelimiter(line);
+    static Delimiter create(String delimiter) {
+        if(delimiter == null || isNotSingleCharacter(delimiter))
+            throw new IllegalArgumentException("잘못된 형식의 구분자");
+        return new Delimiter(delimiter);
     }
 
-    private String readDelimiter(String line) {
-        String delimiterLine = getDelimiterLine(line);
-        return removeWords(delimiterLine, CUSTOM_DELIMITER_PREFIX, CUSTOM_DELIMITER_SUFFIX);
+    private static boolean isNotSingleCharacter(String delimiter) {
+        return delimiter.length() != 1;
     }
 
-    private String removeWords(String original, String... words) {
-        String result = original;
-        for (String word : words) {
-            result = result.replace(word, "");
-        }
-        return result;
-    }
-
-    private String getDelimiterLine(String line) {
-        return line.substring(0, findEndOfDelimiterLineIndex(line));
-    }
-
-    private int findEndOfDelimiterLineIndex(String line) {
-        if (line.contains(CUSTOM_DELIMITER_SUFFIX))
-            return line.indexOf(CUSTOM_DELIMITER_SUFFIX) + CUSTOM_DELIMITER_SUFFIX.length();
-        return 0;
+    private Delimiter(String delimiter) {
+        customDelimiter = delimiter;
     }
 
     public String[] split(String line) {
