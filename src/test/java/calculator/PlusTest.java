@@ -22,12 +22,9 @@ public class PlusTest extends NsTest {
     @Test
     void testPlus() {
         assertSimpleTest(() -> {
-            int[] test = {1, 2, 3};
+            String[] test = {"1", "2", "3"};
             Plus obj = new Plus();
-            int result = 0;
-            for (int i = 0; i < test.length; i++) {
-                result += obj.plus(test[i]);
-            }
+            int result = obj.plus(test);
             assertThat(result).isEqualTo(6);
         });
     }
