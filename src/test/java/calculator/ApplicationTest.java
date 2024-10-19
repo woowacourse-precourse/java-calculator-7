@@ -19,10 +19,10 @@ class ApplicationTest extends NsTest {
         String input = "//;\\n1";
 
         // when
-        CalculationService service = new CalculationService();
         Calculation calculation = new Calculation();
+        CalculationService service = new CalculationService(calculation);
         // Calculation 객체를 넣으면 -> rawValue 값을 인풋값으로 설정
-        service.getInputValues(calculation, input);
+        service.getInputValues(input);
 
         // then
         List<Integer> expectedValue = new ArrayList<>();
