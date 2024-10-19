@@ -17,8 +17,11 @@ public class Calculator {
         this.answer = 0;
     }
 
-    public int getAnswer(){
-        return this.answer;
+    public int sum(){
+        if(isNullOrEmpty())
+            return 0;
+        split();
+        return sumNumbers();
     }
 
     public boolean isNullOrEmpty(){
@@ -44,12 +47,8 @@ public class Calculator {
     }
 
     public int sumNumbers(){
-        if(isNullOrEmpty())
-            return 0;
-
         for(String a : this.strArr){
-            int number = Integer.parseInt(a);
-            if(number < 0) throw new IllegalArgumentException(ERROR_NUMBER_TYPE);
+            int number = validatePositive(a);
             this.answer += number;
         }
         return answer;
