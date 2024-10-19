@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Calculator {
 
-    private InputHandler inputHandler;
+    private final InputHandler inputHandler;
 
     public Calculator() {
         inputHandler = new InputHandler();
@@ -19,13 +19,10 @@ public class Calculator {
     public long calculate(List<Long> numbers) {
         long sum = 0;
 
-        try {
-            for (long number : numbers) {
-                sum += number;
-            }
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
+        for (long number : numbers) {
+            sum = Math.addExact(sum, number);
         }
+
         return sum;
     }
 
