@@ -12,7 +12,7 @@ public class Calculator {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine(); // 문자열 입력
 
-        if (checkEmpty(input)) { // 입력 문자열 비어있는지 확인
+        if (isEmpty(input)) { // 입력 문자열 비어있는지 확인
             System.out.println("결과 : 0");
             return;
         }
@@ -22,7 +22,7 @@ public class Calculator {
     }
 
     // 입력한 문자열이 비었는지 확인 -> 비었으면 0 출력
-    public static boolean checkEmpty(String input) {
+    public static boolean isEmpty(String input) {
         return input == null || input.isEmpty();
     }
 
