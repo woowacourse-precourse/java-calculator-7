@@ -10,11 +10,7 @@ public class Calculator {
     }
 
     protected void start(String input) {
-
-
         String[] results = getNumberLists(input);
-
-//        System.out.println("results = " + Arrays.toString(results));
 
         int answer = getSum(results);
         System.out.println("결과 : " + answer);
@@ -36,7 +32,10 @@ public class Calculator {
         int answer = 0;
         try {
             for (String result : results) {
-                int number = Integer.parseInt(result);
+                if (result.isEmpty()) {
+                    continue;
+                }
+                int number = Integer.parseInt(result.strip());
                 if (number <= 0) {
                     throw new IllegalArgumentException("숫자는 양수만 가능합니다.");
                 }
@@ -49,6 +48,4 @@ public class Calculator {
 
         return answer;
     }
-
-
 }

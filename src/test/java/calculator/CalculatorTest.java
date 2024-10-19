@@ -1,6 +1,7 @@
 package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.in;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -65,4 +66,37 @@ class CalculatorTest {
 
         assertThat(sum).isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("숫자가 없을 경우 0 반환")
+    void noNumberResultsZero() {
+        String input = "";
+
+        calculator.start(input);
+        String[] numberLists = calculator.getNumberLists(input);
+        int sum = calculator.getSum(numberLists);
+
+        assertThat(sum).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("양수가 아닌 경우 예외 처리")
+    void notPositiveNumberException() {
+        String input = "1,2:-2";
+
+        assertThatThrownBy(() -> {
+            calculator.start(input);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("숫자가 아닌 다른 문자가 있는 경우 예외 처리")
+    void notNumberException() {
+        String input = "1,2:a";
+
+        assertThatThrownBy(() -> {
+            calculator.start(input);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
 }
