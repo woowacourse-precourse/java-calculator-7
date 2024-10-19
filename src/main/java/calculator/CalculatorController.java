@@ -5,7 +5,7 @@ import java.util.List;
 
 public class CalculatorController {
     private static final CalculatorView calculatorView = new CalculatorView();
-    private static List<Integer> nums = new ArrayList<>();
+    private static final List<Integer> nums = new ArrayList<>();
     private static final List<Character> delimiters = new ArrayList<>(List.of(',', ':'));
 
     public static void run() {
@@ -20,6 +20,7 @@ public class CalculatorController {
         }
 
         checkString(inputString);
+        calculate();
     }
 
     private static void checkString(String inputString) {
@@ -53,4 +54,12 @@ public class CalculatorController {
         }
     }
 
+    private static void calculate() {
+        int sumResult = 0;
+        for (int i : nums) {
+            sumResult += i;
+        }
+
+        calculatorView.printResult(sumResult);
+    }
 }
