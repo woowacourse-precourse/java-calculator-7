@@ -10,6 +10,11 @@ public class Calculator {
 
         return parsedNumbers.stream()
                 .mapToLong(Validator::validate)
-                .sum();
+                .reduce(0, Calculator::safeAdd);
+    }
+
+    private static long safeAdd(final long sumSoFar, final long num) {
+        if (sumSoFar > Long.MAX_VALUE - num) throw new IllegalArgumentException("[ERROR] 숫자의 합이 범위를 초과하였습니다.");
+        return sumSoFar + num;
     }
 }
