@@ -21,4 +21,13 @@ class CalculatorParserTest {
         assertThat(operands).isEqualTo(new ArrayList<>(Arrays.asList(1.0, 2.0, 3.0)));
     }
 
+    @Test
+    void 커스텀_구분자로_피연산자를_분리한다() {
+        // given & when
+        final var calculatorParser = new CalculatorParser();
+        List<Double> operands = calculatorParser.parse("//;\n1;2;3");
+
+        // then
+        assertThat(operands).isEqualTo(new ArrayList<>(Arrays.asList(1.0, 2.0, 3.0)));
+    }
 }

@@ -10,6 +10,12 @@ public class CalculatorParser {
     public List<Double> parse(String sentence){
         List<Double> operands = new ArrayList<>();
 
+        if(sentence.startsWith("//")){
+            processCustomDelimiter(sentence);
+            sentence = sentence.substring(4);
+        }
+
+
         for(String word : sentence.split(makeDelimiterRegex())){
             double operand = 0;
             operand = Double.parseDouble(word);
@@ -30,6 +36,11 @@ public class CalculatorParser {
             delimiterRegex.append("|");
         }
         return delimiterRegex.toString();
+    }
+
+    private void processCustomDelimiter(String sentence) {
+        String[] result = sentence.split("\n");
+        delimiters.add(result[0].charAt(2));
     }
 }
 
