@@ -37,11 +37,11 @@ class CalculatorTest {
       }
       // 커스텀 구분자가 문자열 맨 앞에 지정된 경우
       // //;\n
-      char[] validCustomSeparator = string.toCharArray();
+
       // charArray 인덱스0부터 5까지의 값이 "//;\n" 인지 체크
       // 여기를 어떻게 구현하지..흠 🤔🤔
-      validCustomSeparator.
-      if (string.toCharArray().) {
+      boolean validCustomSeparator = string.substring(0, 5) == "//;\\n";
+      if (validCustomSeparator) {
         // 맞다면 커스텀 구분자 ';'인지 체크하고 건너뛰거나
         if (index == ';') {
           continue;
