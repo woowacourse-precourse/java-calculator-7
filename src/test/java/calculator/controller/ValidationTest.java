@@ -97,4 +97,30 @@ public class ValidationTest {
         // then
         assertThat(actual).isFalse();
     }
+
+    @Test
+    @DisplayName("기본만 포함된 구분자")
+    void isDefaultDelimiter_withDefaultDelimiter() {
+        // given
+        String delimiter = ",|:";
+
+        // when
+        boolean actual = Validation.isDefaultDelimiter(delimiter);
+
+        // then
+        assertThat(actual).isTrue();
+    }
+
+    @Test
+    @DisplayName("커스텀도 포함된 구분자")
+    void isDefaultDelimiter_withCustomerDelimiter() {
+        // given
+        String delimiter = ",|:|;";
+
+        // when
+        boolean actual = Validation.isDefaultDelimiter(delimiter);
+
+        // then
+        assertThat(actual).isFalse();
+    }
 }
