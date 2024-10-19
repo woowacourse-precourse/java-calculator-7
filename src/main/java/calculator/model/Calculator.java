@@ -7,6 +7,9 @@ public class Calculator {
     private static final int MAX_CUSTOM_SEPARATOR_LENGTH = 1;
 
     public static int add(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            throw new IllegalArgumentException("입력 값이 비어있습니다.");
+        }
 
         String separator = "[,:]"; // 기본 구분자: 쉼표와 콜론
         int sum = 0;
