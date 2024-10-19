@@ -47,24 +47,6 @@ public class BasicSeparatorParserTest extends NsTest {
 		);
 	}
 
-	@Test
-	@DisplayName("올바른 정규식 테스트")
-	public void generateRegexTest() {
-		assertSimpleTest(() -> {
-			// given
-			char separator1 = ',';
-			char separator2 = ':';
-			separators.addAll(Arrays.asList(new Character[] {separator1, separator2}));
-
-			//when
-			String result = basicSeparatorParser.generateRegex(separators);
-
-			//then
-			assertThat(result)
-				.containsPattern(separator1 + "|" + separator2);
-		});
-	}
-
 	// 실패
 
 	@Test

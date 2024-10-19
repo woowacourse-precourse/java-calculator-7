@@ -3,6 +3,12 @@ package calculator.parser;
 import static camp.nextstep.edu.missionutils.test.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,10 +18,16 @@ import camp.nextstep.edu.missionutils.test.NsTest;
 public class LongMathematicalExpressionParserTest extends NsTest {
 
 	private final BasicLongMathematicalExpressionParser longMathematicalExpressionParser;
-	private final static String DEFAULT_PATTERN = ",|:";
+	private static final List<Character> BASIC_SEPARATORS = Arrays.asList(new Character[] {',', ':'});
+	private Set<Character> separators = new HashSet<>();
 
 	public LongMathematicalExpressionParserTest() {
 		longMathematicalExpressionParser = new BasicLongMathematicalExpressionParser();
+	}
+
+	@BeforeEach
+	public void initSeparators() {
+		separators.clear();
 	}
 
 	// 성공
@@ -25,9 +37,10 @@ public class LongMathematicalExpressionParserTest extends NsTest {
 		assertSimpleTest(() -> {
 			// given
 			String input = "10,2:5,3:10";
+			separators.addAll(BASIC_SEPARATORS);
 
 			// when
-			long[] numbers = longMathematicalExpressionParser.parse(input, DEFAULT_PATTERN);
+			long[] numbers = longMathematicalExpressionParser.parse(input, separators);
 
 			// then
 			assertThat(numbers)
@@ -41,10 +54,12 @@ public class LongMathematicalExpressionParserTest extends NsTest {
 		assertSimpleTest(() -> {
 			// given
 			String input = "10;2,5:1-3]10";
-			String pattern = DEFAULT_PATTERN + "|;|-|]";
+			separators.addAll(BASIC_SEPARATORS);
+			separators.addAll(Arrays.asList(new Character[] {';', '-', ']'}));
+			System.out.println(separators);
 
 			// when
-			long[] numbers = longMathematicalExpressionParser.parse(input, pattern);
+			long[] numbers = longMathematicalExpressionParser.parse(input, separators);
 
 			// then
 			assertThat(numbers)
@@ -59,9 +74,10 @@ public class LongMathematicalExpressionParserTest extends NsTest {
 		assertSimpleTest(() -> {
 			// given
 			String input = "10,2:3;4,5";
+			separators.addAll(BASIC_SEPARATORS);
 
 			// when
-			assertThatThrownBy(() -> longMathematicalExpressionParser.parse(input, DEFAULT_PATTERN))
+			assertThatThrownBy(() -> longMathematicalExpressionParser.parse(input, separators))
 
 				// then
 				.isInstanceOf(IllegalArgumentException.class);

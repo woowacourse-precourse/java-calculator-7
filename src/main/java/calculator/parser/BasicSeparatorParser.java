@@ -35,19 +35,4 @@ public class BasicSeparatorParser implements SeparatorParser {
 		}
 	}
 
-	@Override
-	public String generateRegex(Set<Character> separators) {
-		if (separators.isEmpty()) {
-			return "";
-		}
-		StringBuilder separatorPattern = new StringBuilder();
-
-		for (char separator : separators) {
-			separatorPattern.append("|\\").append(separator);
-		}
-
-		separatorPattern.deleteCharAt(0);
-		return separatorPattern.toString();
-	}
-
 }

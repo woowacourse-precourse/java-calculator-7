@@ -43,9 +43,8 @@ public class LongCalculator implements Calculator {
 		String[] expressions = splitExpression(expression);
 
 		separatorParser.parse(expressions[0], separators);
-		String separatorRegex = separatorParser.generateRegex(separators);
 
-		long[] numbers = mathematicalExpressionParser.parse(expressions[1], separatorRegex);
+		long[] numbers = mathematicalExpressionParser.parse(expressions[1], separators);
 		long result = longCalculatorOperation.operate(numbers);
 
 		return result;
