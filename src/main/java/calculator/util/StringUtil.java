@@ -1,7 +1,7 @@
 package calculator.util;
 
 public class StringUtil {
-    public static String[] splitInput(String input, String delimiter) {
+    public static String[] splitText(String input, String delimiter) {
         return input.split(delimiter);
     }
 }
