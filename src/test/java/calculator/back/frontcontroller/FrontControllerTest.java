@@ -1,12 +1,12 @@
 package calculator.back.frontcontroller;
 
 import calculator.back.controller.CalculatorController;
-import calculator.back.exception.InvalidInputException;
 import calculator.back.resolver.ArgumentResolver;
 import calculator.back.service.impl.CalculatorServiceImpl;
 import calculator.front.enums.ViewMessage;
 import calculator.front.view.InputView;
 import calculator.front.view.OutputView;
+import camp.nextstep.edu.missionutils.Console;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -33,6 +33,7 @@ class FrontControllerTest {
     void setUp() {
         // sout을 가로 채기 위함
         System.setOut(new PrintStream(byteArrayOutputStream));
+        Console.close();
     }
 
     @ParameterizedTest
@@ -115,7 +116,20 @@ class FrontControllerTest {
         assertThatThrownBy(frontController::run).isInstanceOf(IllegalArgumentException.class);
     }
 
-    private static final List<String> inputs = List.of("//|\\n1|2:3", "//|\\n", "\n", "asdasd12as", "-1,2,3");
+    @ParameterizedTest
+    @MethodSource("delimitedZeroNumbers")
+    @DisplayName("0이 포함된 입력에 대한 예외 반환")
+    void 어플리케이션_통합_테스트6(ByteArrayInputStream in) {
+        //given
+        // Scanner의 nextLine()에 입력할 값
+        System.setIn(in);
+
+        //when
+        //then
+        assertThatThrownBy(frontController::run).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    private static final List<String> inputs = List.of("//|\\n1|2:3", "//|\\n", "\n", "asdasd12as", "-1,2,3", "0,1,2");
 
     static Stream<ByteArrayInputStream> validTestInput() {
         return Stream.of(new ByteArrayInputStream(inputs.get(0).getBytes()));
@@ -134,7 +148,11 @@ class FrontControllerTest {
     }
 
     static Stream<ByteArrayInputStream> delimitedNegativeNumbers() {
-        return Stream.of(new ByteArrayInputStream(inputs.get(3).getBytes()));
+        return Stream.of(new ByteArrayInputStream(inputs.get(4).getBytes()));
+    }
+
+    static Stream<ByteArrayInputStream> delimitedZeroNumbers() {
+        return Stream.of(new ByteArrayInputStream(inputs.get(5).getBytes()));
     }
 
 }
