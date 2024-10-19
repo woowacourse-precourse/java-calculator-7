@@ -7,22 +7,34 @@ import calculator.view.OutputPrint;
 import java.util.Arrays;
 
 public class Game {
+
     public void start() {
-        InputPrint.printInput();
-        String input = readLine();
-
+        String input = getUserInput();
         Separators separators = new Separators();
-        String splitInputWithSeparator = separators.containCustomSeparator(input);
 
-        Input input1 = new Input(splitInputWithSeparator);
+        String processedInput = processInput(input, separators);
+        int[] numbers = convertInputToNumbers(processedInput, separators);
 
-        String[] splitStr = input1.splitBySeparator(separators);
-        int[] numbers = input1.convertToIntArray(splitStr);
+        printResult(numbers);
+    }
 
-        if (numbers.length == 0) {
-            OutputPrint.printResult(0);
-            return;
-        }
-        OutputPrint.printResult(Arrays.stream(numbers).sum());
+    private String getUserInput() {
+        InputPrint.printInput();
+        return readLine();
+    }
+
+    private String processInput(String input, Separators separators) {
+        return separators.containCustomSeparator(input);
+    }
+
+    private int[] convertInputToNumbers(String input, Separators separators) {
+        Input inputProcessor = new Input(input);
+        String[] splitStr = inputProcessor.splitBySeparator(separators);
+        return inputProcessor.convertToIntArray(splitStr);
+    }
+
+    private void printResult(int[] numbers) {
+        int sum = Arrays.stream(numbers).sum();
+        OutputPrint.printResult(numbers.length == 0 ? 0 : sum);
     }
 }
