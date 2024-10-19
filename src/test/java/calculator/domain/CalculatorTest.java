@@ -46,4 +46,15 @@ class CalculatorTest {
         Assertions.assertThat(calculator.getSum()).isEqualTo(4.1);
     }
 
+    @Test
+    @DisplayName("숫자가 정수로만 이루어져 있으면 정수값을 반환한다")
+    void 숫자_합_정수_반환(){
+        List<Double> numbers = new ArrayList<>(Arrays.asList(1.0, 3.0, 2.0));
+
+        Calculator calculator = new Calculator(numbers);
+
+        Assertions.assertThat(calculator.getSum()).isEqualTo(6L);
+        Assertions.assertThat(calculator.getSum()).isNotEqualTo(6.0);
+    }
+
 }

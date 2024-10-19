@@ -20,11 +20,15 @@ public class Calculator {
         }
     }
 
-    public Double getSum(){
+    public Number getSum(){
         Double sum = 0.0;
 
         for (Double number : numbers) {
             sum += number;
+        }
+
+        if(sum == sum.longValue()){
+            return sum.longValue();
         }
 
         return sum;
