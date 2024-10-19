@@ -21,7 +21,7 @@ public class Calculator {
 
         Splitor splitor = splitorExtractor.extractSplitor(inputString);
         List<String> stringList = splitor.split();
-
+        List<Integer> integerList = IntegerConverter.convertToIntegerList(stringList);
 
     }
 }
