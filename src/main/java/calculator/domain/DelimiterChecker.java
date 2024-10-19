@@ -5,19 +5,18 @@ import java.util.List;
 
 public class DelimiterChecker {
 
-    private final String input;
-    private List<Character> delimiters;
+    private String input;
+    private List<Character> delimiters = new ArrayList<>(List.of(',', ':'));
 
     private static final String CUSTOM_DELIMITER_BEGIN = "//";
     private static final String CUSTOM_DELIMITER_END = "\\n";
     private static final int CUSTOM_DELIMITER_INDEX = 2;
 
-    public DelimiterChecker(String input) {
-        this.input = input;
-        this.delimiters = new ArrayList<>(List.of(',', ':'));
+    public DelimiterChecker() {
+    }
 
-        if (isCustomed())
-            addDelimiter();
+    public void putString(String input) {
+        this.input = input;
     }
 
     public List<Integer> getNumbers() {
