@@ -47,11 +47,19 @@ public class Application {
             // customDivider를 기준으로 문자열을 분리
 
             String combinedDividers = String.join("|", divider) + "|" + customDivider;
+//            System.out.println("combinedDividers >> " + combinedDividers);
             String[] numbers = tmpNum.split(combinedDividers);
+
+            // 구분자가 숫자, 음수, 또는 잘못된 문자일 경우 예외 발생
+
 
             // 각 숫자를 정수로 변환하여 리스트에 추가
             for (String number : numbers) {
-                numArrayList.add(Integer.parseInt(number.trim()));
+                if (!number.matches("[^0-9]+")) {
+                    throw new IllegalArgumentException("유효하지 않은 구분자 에러 정상 출력.");
+                } else if (!number.trim().isEmpty()) {
+                    numArrayList.add(Integer.parseInt(number.trim()));
+                }
             }
         }
 
