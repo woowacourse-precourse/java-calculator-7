@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.Stack;
 
 public class Parser {
-    private final List<String> separators = new ArrayList<>();
-    private final List<Integer> operands = new ArrayList<>();
+    private final List<String> separator = new ArrayList<>();
+    private final List<Integer> operand = new ArrayList<>();
     private String removedString = "";
 
     /**
      * 커스텀 구분자 유뮤 커스텀 구분자 짝 맞는지 확인 후 파싱
      */
-    private void parseCustomSeparator() {
+    private void parseCustomSeparator(String inputString) {
         Stack<String> buffer = new Stack<>();
         boolean flag = false;
         int idx = 0;
@@ -92,5 +92,11 @@ public class Parser {
         if (!tmpOperand.equals("")) {
             operand.add(Integer.parseInt(tmpOperand));
         }
+    }
+
+    public void parse(String inputString) {
+        parseCustomSeparator(inputString);
+        addBasicSeparator();
+        parseOperand();
     }
 }
