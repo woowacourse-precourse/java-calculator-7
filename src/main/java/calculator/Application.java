@@ -11,8 +11,9 @@ public class Application {
         String inputString = calculatorIO.input();
 
         calculator.getDivision(inputString);
-        //calculator.getNumbers("");
+        calculator.getNumbers(inputString);
+        int result = calculator.calculateNumber();
 
-        System.out.println(calculator.calculateNumber());
+        calculatorIO.output(result);
     }
 }

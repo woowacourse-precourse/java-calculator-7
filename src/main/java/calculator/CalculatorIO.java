@@ -8,7 +8,7 @@ public class CalculatorIO {
         return Console.readLine(); // 입력 받은 문자열 반환
     }
 
-    public void output(/*계산한 결과*/) {
-
+    public void output(int result) {
+        System.out.println("결과 : " + result);
     }
 }

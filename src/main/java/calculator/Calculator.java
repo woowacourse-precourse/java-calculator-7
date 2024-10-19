@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Calculator {
-    private String division;
+    private String division = " ";
     private final List<Integer> numbers = new ArrayList<>();
 
     public void getDivision(String inputString) {
