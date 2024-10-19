@@ -22,7 +22,14 @@ public class Application {
         if(!str.isEmpty()){
             String[] number = str.split(" ");
             for(String s : number){
-                sum += Integer.parseInt(s);
+                try{
+                    if(sum < 0){
+                        throw new IllegalArgumentException();
+                    }
+                    sum += Integer.parseInt(s);
+                }catch (NumberFormatException e){
+                    throw new IllegalArgumentException(e);
+                }
             }
         }
         System.out.println("결과 : " + sum);
