@@ -17,11 +17,11 @@ public class AppConfig {
     }
 
     public StringCalculator stringCalculator() {
-        return new StringCalculator(new StringNumberParser(), userInputParser(), new Addition());
+        return new StringCalculator(userInputParser(), new Addition());
     }
 
     private UserInputParser userInputParser() {
-        return new UserInputParser(new DelimiterExtractor(), new NumberExtractor());
+        return new UserInputParser(new DelimiterExtractor(), new NumberExtractor(),new StringNumberParser());
     }
 
     public IOService ioService() {

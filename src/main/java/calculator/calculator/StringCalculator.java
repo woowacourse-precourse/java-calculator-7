@@ -1,42 +1,42 @@
 package calculator.calculator;
 
+import calculator.calculator.model.InputString;
+import calculator.calculator.model.Numbers;
+import calculator.calculator.model.PositiveNumber;
 import calculator.calculator.operator.Operation;
-import calculator.parsing.StringNumberParser;
 import calculator.parsing.UserInputParser;
 
 public class StringCalculator {
 
-    private final StringNumberParser stringNumberParser;
     private final UserInputParser userInputParser;
     private final Operation operation;
 
-    public StringCalculator(StringNumberParser stringNumberParser, UserInputParser userInputParser, Operation operation) {
-        this.stringNumberParser = stringNumberParser;
+    public StringCalculator(UserInputParser userInputParser, Operation operation) {
         this.userInputParser = userInputParser;
         this.operation = operation;
     }
 
-    public long add(String input) {
-        if (input == null || input.isEmpty()) {
-            return 0L;
+    public PositiveNumber add(InputString inputString) {
+        if (inputString == null) {
+            return new PositiveNumber(0);
         }
 
-        String[] parts = userInputParser.parseInput(input);
-        return sumNumbers(parts);
+        Numbers numbers = userInputParser.parseInput(inputString);
+        return sumNumbers(numbers);
     }
 
-    private long sumNumbers(String[] numbers) {
-        long sum = 0L;  // long 타입으로 초기화
-        for (String number : numbers) {
-            long parsedNumber = stringNumberParser.parseNumber(number);
-            sum = calculateOrThrow(sum, parsedNumber); // long 타입의 덧셈 사용
+    private PositiveNumber sumNumbers(Numbers numbers) {
+        PositiveNumber sum = new PositiveNumber(0);
+        for (PositiveNumber number : numbers.numbers()) {
+            sum = calculateOrThrow(sum, number);
         }
         return sum;
     }
 
-    private long calculateOrThrow(long sum, long number) {
+    private PositiveNumber calculateOrThrow(PositiveNumber sum, PositiveNumber number) {
         try {
-            return operation.operate(sum, number);
+            long result = operation.operate(sum.value(), number.value());
+            return new PositiveNumber(result);
         } catch (ArithmeticException e) {
             throw new IllegalArgumentException("덧셈 중 오버플로우가 발생했습니다.", e);
         }
