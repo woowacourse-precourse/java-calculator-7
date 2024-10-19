@@ -99,7 +99,14 @@ public class CalculatorService {
 
 
     public int sumOfList() {
-        return 0;
+        List<Integer> values = calculator.getProcessedValue();
+        int sum = 0;
+        for (int value : values) {
+            sum += value;
+        }
+        calculator.setSumValue(sum);
+        System.out.println("결과 : " + sum);
+        return sum;
     }
 
     public String printResult() {
