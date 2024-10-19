@@ -9,8 +9,14 @@ public class NumberExtractor {
 
     private static final String NUMBER_REGEX = "\\d*";
 
+    private final CustomDelimiterFormatParser formatParser;
+
+    public NumberExtractor() {
+        this.formatParser = new CustomDelimiterFormatParser();
+    }
+
     public List<Integer> extract(String input, List<String> delimiters) {
-        input = preprocessingInput(input);
+        input = formatParser.preprocessInput(input);
 
         String regex = createDelimiterRegex(delimiters);
 
@@ -20,14 +26,6 @@ public class NumberExtractor {
                 .filter(this::isNotEmpty)
                 .map(this::validateAndParseInt)
                 .toList();
-    }
-
-    private String preprocessingInput(String input) {
-        if (input.startsWith("//")) {
-            input = input.substring(input.indexOf("\\n") + 2);
-        }
-
-        return input;
     }
 
     private String createDelimiterRegex(List<String> delimiters) {
