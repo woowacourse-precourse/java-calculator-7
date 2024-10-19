@@ -7,35 +7,25 @@ import java.util.regex.Pattern;
 
 public class Extractor {
 
-    private static final String CUSTOM_DELIMITER_PATTERN = "//([\\s\\S]*?)\\\\n\\d+";
-    private static final String CONTENT_PATTERN = "([0-9][\\s\\S]*$)";
-    private final DelimiterManager delimiterManager;
-
-    public Extractor() {
-        this.delimiterManager = new DelimiterManager();
-    }
+    private static final String DEFAULT_DELIMITER = "[,:]";
+    private static final String CUSTOM_DELIMITER_PATTERN = "//([\\s\\S]*?)\\\\n([\\s\\S]*)";
 
     public String[] extractNumber(String input) {
         if (input.isEmpty()) {
             return new String[]{};
         }
         if (input.startsWith("//")) {
-            addCustomDelimiter(input);
-            String content = extractGroupByPattern(input, CONTENT_PATTERN);
-            return content.split(delimiterManager.getDelimiter());
+            String customDelimiter = findGroupByRegex(input).group(1);
+            String numberContent = findGroupByRegex(input).group(2);
+            return numberContent.split(DEFAULT_DELIMITER + "|" + customDelimiter);
         }
-        return input.split(delimiterManager.getDelimiter());
+        return input.split(DEFAULT_DELIMITER);
     }
 
-    private void addCustomDelimiter(String input) {
-        String customDelimiter = extractGroupByPattern(input, CUSTOM_DELIMITER_PATTERN);
-        delimiterManager.addCustomDelimiter(customDelimiter);
-    }
-
-    private String extractGroupByPattern(String input, String regex) {
-        Pattern pattern = Pattern.compile(regex);
+    private static Matcher findGroupByRegex(String input) {
+        Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_PATTERN);
         Matcher matcher = pattern.matcher(input);
         validateMatcher(matcher);
-        return matcher.group(1);
+        return matcher;
     }
 }

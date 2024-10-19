@@ -15,8 +15,7 @@ public class Calculator {
         String[] numbers = extractor.extractNumber(input);
         for (String number : numbers) {
             validateNumber(number);
-            int intNumber = getIntNumber(number);
-            result += intNumber;
+            result += getIntNumber(number);
         }
     }
 
