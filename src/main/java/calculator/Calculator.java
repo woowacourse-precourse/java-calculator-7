@@ -10,7 +10,7 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 public class Calculator {
     // 전체 입력 문자열
     private String inputString;
-    // // \n 제거 문자열
+    // // \n, 커스텀 구분자 제거 문자열
     private String removedString = "";
     // 구분자 배열
     private List<String> separator = new ArrayList<>();
@@ -27,7 +27,7 @@ public class Calculator {
     }
 
     /**
-     * 커스텀 구분자 유뮤 / 짝 맞는지 확인
+     * 커스텀 구분자 유뮤 / 짝 맞는지 확인 후 파싱
      */
     private boolean parseCustomSeparator() {
         Stack<String> buffer = new Stack<>();
@@ -72,6 +72,9 @@ public class Calculator {
 
     }
 
+    /**
+     * 결과 출력
+     */
     private void printResult() {
         System.out.println("removedString = " + removedString);
         if (operand != null) {
@@ -83,14 +86,13 @@ public class Calculator {
 
     public void run() {
         getUserInput();
-        // todo: 커스텀 구분자 파싱
-        if (parseCustomSeparator()) {
-            // todo: 커스텀 구분자가 짝이 맞는지 확인
-            for (int i = 0; i < separator.size(); i++) {
-                if (!separator.isEmpty())
-                    System.out.println("separator.get(i) = " + separator.get(i));
-            }
-        }
+        parseCustomSeparator();
+//        if (parseCustomSeparator()) {
+//            for (int i = 0; i < separator.size(); i++) {
+//                if (!separator.isEmpty())
+//                    System.out.println("separator.get(i) = " + separator.get(i));
+//            }
+//        }
         // todo: 피연산자 문자열 파싱 및 저장 -> 예외처리
         parseOperand();
 
