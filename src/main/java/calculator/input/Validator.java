@@ -36,7 +36,7 @@ public class Validator {
         for (int i = startIndex; i <= lastIndex; i++) {
             char currentChar = input.charAt(i);
 
-            if (Character.isDigit(currentChar)) { // 숫자가 나왔다면
+            if (Character.isDigit(currentChar)) {
                 isDelimiterAllowed = true; // 다음에 구분자가 나와도 된다고 표시
                 continue;
             }
