@@ -5,7 +5,7 @@ import java.util.List;
 
 public class StringCalculator {
 
-    // 문자열에서 숫자를 추출하는 함수 extractNumToString
+    // 문자열에서 숫자를 추출하는 메서드 extractNumToString
     public List<Integer> extractNumToString(String input) {
 
         List<Integer> numbers = new ArrayList<>();
@@ -27,6 +27,14 @@ public class StringCalculator {
         }
 
         return numbers; // 추출한 숫자 리스트를 반환함.
+    }
+
+    // 추출한 숫자들의 합을 구하는 메서드 add
+    public int add(String input) {
+
+        List<Integer> numbers = extractNumToString(input);
+        return numbers.stream().mapToInt(Integer::intValue).sum(); // 리스트의 모든 숫자를 더하여 반환함.
+
     }
 
 }
