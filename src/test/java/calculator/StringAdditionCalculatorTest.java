@@ -16,6 +16,14 @@ class StringAdditionCalculatorTest extends NsTest {
         });
     }
 
+    @Test
+    void 커스텀구분자_숫자추출_테스트() {
+        assertSimpleTest(() -> {
+            run("//;\\n1");
+            assertThat(output()).contains("[1]");
+        });
+    }
+
     @Override
     protected void runMain() {
         Application.main(new String[]{});
