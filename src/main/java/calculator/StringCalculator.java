@@ -23,12 +23,6 @@ public class StringCalculator {
 		return inputSubString.split(customSplitter);
 	}
 
-	private static void validateSplitNumber(final int splitNum){
-		if (splitNum <= 0) {
-			throw new IllegalArgumentException();
-		}
-	}
-
 	private static Positive calculateSum(Positive[] positives) {
 		Positive zero = Positive.zero();
 		for (Positive positive : positives) {
