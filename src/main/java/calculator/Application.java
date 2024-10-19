@@ -37,4 +37,18 @@ public class Application {
     static private boolean isNum(char c) {
         return '0'<=c && c<='9';
     }
+
+    static private void addDelimiter(String s) {
+        if (s.length()!=3) {
+            throw new IllegalArgumentException();
+        }
+
+        int n = s.charAt(2);
+
+        if (delimiters.contains(n)) {
+            throw new IllegalArgumentException();
+        }
+
+        delimiters.add(n);
+    }
 }
