@@ -8,6 +8,7 @@ public class Delimiter {
     public static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile(CUSTOM_DELIMITER_FORMAT);
     public static final String COMMA = ",";
     public static final String COLON = ":";
+    public static final String STANDARD_DELIMITER_REGEX = String.join("|", COMMA, COLON);
     public static final String BACK_SLASH = "\\";
 
     private Delimiter() {
