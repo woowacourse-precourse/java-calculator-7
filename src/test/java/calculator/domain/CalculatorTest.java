@@ -49,25 +49,6 @@ class CalculatorTest {
     }
 
     @Test
-    void 숫자가_구분자일때_예외_발생() throws Exception{
-        String input="//3\\n12";
-
-        assertThatThrownBy(()->Calculator.inputCalculate(input))
-                .isInstanceOf(InvalidInputException.class)
-                .hasMessageContaining(MessageType.NUMBER_SEPERATOR.getMessage());
-    }
-
-    @Test
-    void 마이너스가_구분자일때_예외_발생(){
-        String input="//-\\n-3";
-
-        assertThatThrownBy(()->Calculator.inputCalculate(input))
-                .isInstanceOf(InvalidInputException.class)
-                .hasMessageContaining(MessageType.MINUS_SEPERATOR.getMessage());
-
-    }
-
-    @Test
     void 음수를_입력했을때_예외_발생(){
         String input="//!\\n-34";
 

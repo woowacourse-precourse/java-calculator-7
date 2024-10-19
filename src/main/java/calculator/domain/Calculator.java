@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Calculator {
-    private static final Pattern CUSTOM_SEPERATOR_PATTERN=Pattern.compile(RegexType.CUSTOM_SEPERATOR.getRegex());
+    private static final Pattern CUSTOM_SEPERATOR_PATTERN=Pattern.compile("^//(.)\\\\n{1}(.*)");
     private static final Pattern NEGATIVE_PATTERN=Pattern.compile("-[0-9]");
     private static String seperatorRegex=",|:";
 
@@ -25,8 +25,7 @@ public class Calculator {
 
         if (matcher.find()){//일치한다면
             String customSeperator=matcher.group(1);
-            //잘못된 구분자 입력-> 예외를 터뜨린다
-            checkBadSeperator(customSeperator);
+
             input= matcher.group(2);
             //SEPERATOR_REGEX에 더한다
             addRegex(customSeperator);
@@ -86,23 +85,6 @@ public class Calculator {
         seperatorBuilder.append(customSeperator);
 
         return customSeperator.toString();
-
     }
 
-    private static void checkBadSeperator(String customSeperator) {
-        checkIfNumber(customSeperator);
-        checkIfMinus(customSeperator);
-    }
-
-    private static void checkIfNumber(String customSeperator) {
-        if (customSeperator.matches("[0-9]")){
-            throw new InvalidInputException(MessageType.NUMBER_SEPERATOR);
-        }
-    }
-
-    private static void checkIfMinus(String customSeperator) {
-        if (customSeperator.equals("-")){
-            throw new InvalidInputException(MessageType.MINUS_SEPERATOR);
-        }
-    }
 }
