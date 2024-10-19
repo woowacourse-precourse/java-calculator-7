@@ -14,8 +14,8 @@ public class Calculator {
         this.processor = processor;
     }
 
-    public void getSum() {
-        Response response = processor.process(new Request(RequestType.SUM, getNumbers()));
+    public void command(RequestType type) {
+        Response response = processor.process(new Request(type, getNumbers()));
         displayResult(response);
     }
 
