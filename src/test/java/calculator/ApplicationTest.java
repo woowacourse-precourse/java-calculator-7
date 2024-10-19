@@ -7,15 +7,20 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import calculator.domain.Number;
+import calculator.domain.Numbers;
 import calculator.service.exception.SeparationException;
 import calculator.service.separation.BasicSeparationService;
+import calculator.service.separation.CustomSeparationService;
 import camp.nextstep.edu.missionutils.test.NsTest;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
 
     final String CUSTOM_SEPARATOR = "&";
 
+    private final CustomSeparationService customSeparationService = new CustomSeparationService();
     private final BasicSeparationService basicSeparationService = new BasicSeparationService();
 
     @Test
@@ -48,5 +53,15 @@ class ApplicationTest extends NsTest {
             basicSeparationService.getNumbers(input, CUSTOM_SEPARATOR);
         });
         assertEquals(INVALID_SEPARATOR.message(), exception.getMessage());
+    }
+
+    @Test
+    void 커스텀_구분자를_사용하고_입력값이_비어있는_경우() {
+        String input = "//&\\n";
+        Numbers numbers = Numbers.from(List.of(Number.from(0)));
+        assertEquals(
+                customSeparationService.getNumbers(input, CUSTOM_SEPARATOR),
+                numbers
+        );
     }
 }
