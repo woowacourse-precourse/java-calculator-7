@@ -15,8 +15,8 @@ public class Controller {
     public void calculate(){
         String calculationValue=inputView.inputCalculationValue();
         extractor.extractValues(calculationValue);
-        //Numbers numbers = extractor.extractValues(calculationValue);
-        //int resultValue=calculator.plusCalculator(numbers);
-        //outputView.printResultValue(resultValue);
+        Numbers numbers = extractor.extractValues(calculationValue);
+        int resultValue=calculator.plusCalculator(numbers);
+        outputView.printResultValue(resultValue);
     }
 }

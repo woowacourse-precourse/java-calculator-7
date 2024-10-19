@@ -1,33 +1,32 @@
 package calculator.model;
 
 import java.util.List;
-import java.util.Collections;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Extractor {
     public ExtractorDto saveExtractorDto(String calculationValue){
         final String START_POINT_DELIMITER = "//";
-        final String END_POINT_DELIMITER = "\n";
+        final String END_POINT_DELIMITER = "\\n";
+        final String SPLIT_POINT= "\n";
         Delimiter delimiter = new Delimiter();
         ExtractorDto extractorDto= new ExtractorDto();
 
         if(calculationValue.contains(START_POINT_DELIMITER)&& calculationValue.contains(END_POINT_DELIMITER)){
-            calculationValue.replace(START_POINT_DELIMITER,"");
-            extractorDto = extractDelimiterAndNumber(extractorDto,delimiter,calculationValue,END_POINT_DELIMITER);
+            calculationValue = calculationValue.replace(START_POINT_DELIMITER, "");
+            calculationValue = calculationValue.replace(END_POINT_DELIMITER, SPLIT_POINT);
+            String[] divideDelimiterAndNumber = calculationValue.split(SPLIT_POINT);
+            extractorDto = saveCustomDelimiter(extractorDto,delimiter,divideDelimiterAndNumber);
             return extractorDto;
         }
         extractorDto.settingExtractorDto(delimiter.getDelimiters(),calculationValue);
         return extractorDto;
     }
 
-    public ExtractorDto extractDelimiterAndNumber(ExtractorDto extractorDto, Delimiter delimiter, String calculationValue,String END_POINT_DELIMITER) {
+    public ExtractorDto saveCustomDelimiter(ExtractorDto extractorDto, Delimiter delimiter, String[] divideDelimiterAndNumber) {
         final int POSITION_DELIMITERS = 0;
         final int POSITION_VALUES = 1;
 
         List<String> delimiters = new ArrayList<>();
-        String[] divideDelimiterAndNumber = calculationValue.split(END_POINT_DELIMITER);
         String appointedDelimiter = divideDelimiterAndNumber[POSITION_DELIMITERS];
         delimiters.add(appointedDelimiter);
         delimiter.settingDelimiters(delimiters);

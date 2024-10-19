@@ -7,6 +7,9 @@ public class Number {
         if(!(value instanceof Integer)){
             throw new IllegalArgumentException("입력된 값이 숫자가 아닙니다.");
         }
+        if (value < 0) {
+            throw new IllegalArgumentException("입력된 값이 양수가 아닙니다. ");
+        }
         this.value=value;
     }
 
