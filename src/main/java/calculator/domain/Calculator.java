@@ -1,7 +1,7 @@
 package calculator.domain;
-
 import calculator.validation.MessageType;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,18 +23,26 @@ public class Calculator {
         return calculate(input);
     }
 
-    private static int calculate(String input) {
-        int result=0;
-        String[] ar=input.split(seperatorRegex);
+    private void checkExtractor(){
+        Matcher matcher=CUSTOM_SEPERATOR_PATTERN.matcher(input);
 
-        for (String num:ar){
-            //공백이면 continue
-            if(isSpace(num)){
-                continue;
-            }
-            isNumber(num);
-            result+=Integer.parseInt(num);
+        if (matcher.find()){//일치한다면
+            String customSeperator=matcher.group(1);
+            //잘못된 구분자 입력-> 예외를 터뜨린다
+            checkBadSeperator(customSeperator);
+            String editedInput= matcher.group(2);
+            //SEPERATOR_REGEX에 더한다
+            addRegex(customSeperator);
+            editInput(editedInput);
         }
+    }
+
+    private static int calculate(String input) {
+        int result= Arrays.stream(input.split(seperatorRegex))
+                .filter(num->!isSpace(num))
+                .peek(num->isNumber(num))
+                .mapToInt(Integer::parseInt)
+                .sum();
 
         return result;
 
@@ -47,20 +55,6 @@ public class Calculator {
     private static void isNumber(String num) {
         if (!(num.matches("[0-9]{0,}"))){
             throw new IllegalArgumentException("존재하지 않는 커스텀 구분자입니다");
-        }
-    }
-
-    private void checkExtractor(){
-        Matcher matcher=CUSTOM_SEPERATOR_PATTERN.matcher(input);
-
-        if (matcher.find()){//일치한다면
-            String customSeperator=matcher.group(1);
-            //잘못된 구분자 입력-> 예외를 터뜨린다
-            checkBadSeperator(customSeperator);
-            String editedInput= matcher.group(2);
-            //SEPERATOR_REGEX에 더한다
-            addRegex(customSeperator);
-            editInput(editedInput);
         }
     }
 
