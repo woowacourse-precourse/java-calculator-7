@@ -27,4 +27,4 @@
 3. 패키지의 이름을 바꾸지 않을 것
 
 ### TODO
-Read notes about Records vs Lombok and think if refactoring is possible for the immutable classes.
+Review the notes on Records vs. Lombok and consider whether refactoring the immutable classes is feasible.
