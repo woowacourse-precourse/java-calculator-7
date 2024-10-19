@@ -17,7 +17,7 @@ public class DefaultCustomDelimiterValidator implements DelimiterValidator {
     }
 
     private void validateEmptyDelimiter(String delimiterString) {
-        if (delimiterString.isEmpty()) {
+        if (delimiterString.isBlank()) {
             throw ExceptionFactory.createException(CUSTOM_DELIMITER_EMPTY);
         }
     }
