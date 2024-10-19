@@ -1,19 +1,22 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
 public class StringCalculator {
     private final StringBuilder separators;
-    private final List<Integer> numbers;
+    private final List<BigInteger> numbers;
     private String input;
+    private BigInteger result;
 
     public StringCalculator() {
         this.separators = new StringBuilder();
         this.numbers = new ArrayList<>();
         this.input = "";
+        this.result = BigInteger.ZERO;
         separators.append(",:");
     }
 
@@ -51,8 +54,8 @@ public class StringCalculator {
         StringTokenizer st = new StringTokenizer(input, separators.toString());
         while (st.hasMoreTokens()) {
             try {
-                int num = Integer.parseInt(st.nextToken());
-                if (num < 0) {
+                BigInteger num = new BigInteger(st.nextToken());
+                if (num.compareTo(BigInteger.ZERO) < 0) {
                     throw new IllegalArgumentException("음수는 허용되지 않습니다.");
                 }
                 numbers.add(num);
@@ -62,8 +65,13 @@ public class StringCalculator {
         }
     }
 
+    private BigInteger addNumbers() {
+        return numbers.stream().reduce(result, BigInteger::add);
+    }
+
     public void run() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
+
         input = Console.readLine().trim();
 
         if (input.startsWith("//") && input.contains("\\n")) {
@@ -74,6 +82,11 @@ public class StringCalculator {
             splitNumbers();
         }
 
+        if (!numbers.isEmpty()) {
+            result = addNumbers();
+        }
+
+        System.out.println("결과 : " + result);
         Console.close();
     }
 }
