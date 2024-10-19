@@ -97,13 +97,28 @@ class LetterManagerTest {
         String letters = "//;\\n1//@\\n2@3";
         LetterManager letterManager;
 
-        letterManager = new LetterManager(letters);
-
         //when
+        letterManager = new LetterManager(letters);
 
         //then
         Assertions.assertThat(letterManager.getSeparators().contains(";")).isEqualTo(true);
         Assertions.assertThat(letterManager.getSeparators().contains("@")).isEqualTo(true);
         Assertions.assertThat(letterManager.getNumbers().toInteger().size()).isEqualTo(3);
+    }
+
+    @Test
+    void 커스텀_구분자_길이가_2일_경우() {
+        //given
+        String letters = "//;;\\n1;;2:3";
+        LetterManager letterManager;
+
+        //when
+        letterManager = new LetterManager(letters);
+
+        //then
+        Assertions.assertThat(letterManager.getSeparators().contains(";;")).isEqualTo(true);
+        Assertions.assertThat(letterManager.getNumbers().toInteger().contains(1)).isEqualTo(true);
+        Assertions.assertThat(letterManager.getNumbers().toInteger().contains(2)).isEqualTo(true);
+        Assertions.assertThat(letterManager.getNumbers().toInteger().contains(3)).isEqualTo(true);
     }
 }
