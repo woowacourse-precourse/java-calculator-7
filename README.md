@@ -24,7 +24,7 @@
    * 메서드 isNotEmpty(), isNotFormattErr(), isNotSomethingWroing() -> TC를 돌려보아야 알 수 있을 것 같음. (현재는 모르겠음) 
    * 하나라도 false이면 유효성검증실패 throwException(); (종료)
 2.2. 커스텀 여부 - class CustomChecker
-   * 메서드 isCustom
+   * 메서드 isCustom()
    * true 값 반환시 문자값 추출 메서드로 , 아니라면 2.4로
 2.3. 커스텀 문자라면 문자추출 - class CustomChecker
    * 메서드 getCustomVal()
