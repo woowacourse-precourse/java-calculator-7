@@ -8,7 +8,7 @@ public class StringCalculator {
         printInputMsg();
         String input = Console.readLine();
 
-        Data data = Validator.validate(input);
+        Data data = InputManager.validateInput(input);
         String str = data.getStr();
         String separators = data.getSeparators();
 
