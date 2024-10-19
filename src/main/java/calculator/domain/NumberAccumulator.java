@@ -12,10 +12,8 @@ public class NumberAccumulator {
         consecutiveNumbers += number;
     }
 
-    public void handleDelimiter(boolean flag) {
-        if (flag && !consecutiveNumbers.isEmpty()) {
-            flushConsecutiveNumbers();
-        }
+    public boolean isConsecutiveNumbersEmpty() {
+        return consecutiveNumbers.isEmpty();
     }
 
     public void flushConsecutiveNumbers() {

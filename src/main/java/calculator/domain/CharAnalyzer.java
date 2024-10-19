@@ -5,7 +5,6 @@ import calculator.domain.delimiter.Delimiter;
 
 import static calculator.domain.delimiter.CustomDelimiterPattern.CUSTOM_DELIMITER_END;
 import static calculator.domain.delimiter.CustomDelimiterPattern.CUSTOM_DELIMITER_START;
-import static calculator.domain.delimiter.DelimiterState.REGISTERED_DELIMITER;
 import static calculator.view.enums.Message.END_OF_INPUT;
 import static calculator.view.enums.Message.INVALID_INPUT_VALUE;
 
@@ -67,7 +66,9 @@ public class CharAnalyzer {
     }
 
     private void processDelimiter() {
-        numberGenerator.handleDelimiter(REGISTERED_DELIMITER.getState());
+        if (!numberGenerator.isConsecutiveNumbersEmpty()) {
+            numberGenerator.flushConsecutiveNumbers();
+        }
     }
 
     private void processCustomDelimiter() {
