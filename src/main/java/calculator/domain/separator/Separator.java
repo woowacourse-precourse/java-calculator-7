@@ -26,7 +26,7 @@ public class Separator {
             string = string.substring(string.indexOf("\\n") + 2);
         }
 
-        strings = string.split(separatorRegex);
+        strings = string.split(separatorRegex, -1);
 
         for (String s : strings) {
             queue.add(s);
