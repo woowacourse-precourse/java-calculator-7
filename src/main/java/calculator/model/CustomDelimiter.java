@@ -1,8 +1,8 @@
 package calculator.model;
 
+import calculator.validation.Validator;
 
 public class CustomDelimiter {
-    private static final String INVALID_CUSTOM_DELIMITER = "커스텀 구분자가 정상적으로 입력되지 않았습니다.";
     
     private String formula;
 
@@ -19,15 +19,16 @@ public class CustomDelimiter {
         if (delimiterEndIndex == null) {
             return null;
         }
-        return formula.substring(2, delimiterEndIndex);
+        String customDelimiter = formula.substring(2, delimiterEndIndex);
+        Validator.isValidDelimiter(customDelimiter);
+        return customDelimiter;
     }
+
 
     public Integer checkCustomDelimiter(){
         if (formula.startsWith("//")){
             int delimiterEndIndex = formula.indexOf("\n");
-            if (delimiterEndIndex == -1) {
-                throw new IllegalArgumentException(INVALID_CUSTOM_DELIMITER);
-            }
+            Validator.isThereSeparator(delimiterEndIndex);
             return delimiterEndIndex;
         }
         return null;
