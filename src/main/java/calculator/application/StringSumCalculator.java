@@ -1,20 +1,25 @@
 package calculator.application;
 
+import calculator.common.ErrorMessage;
+import java.util.Arrays;
+
 public class StringSumCalculator {
 
     public int sumStringNumbers(String[] stringNumbers) {
-        int sum = 0;
-        for (String stringNumber : stringNumbers) {
-            int number = Integer.parseInt(stringNumber);
-            validatePositiveNumber(number);
-            sum += number;
-        }
-        return sum;
+        return Arrays.stream(stringNumbers)
+                .mapToInt(this::parseAndValidate)
+                .sum();
+    }
+
+    private int parseAndValidate(String stringNumber) {
+        int number = Integer.parseInt(stringNumber);
+        validatePositiveNumber(number);
+        return number;
     }
 
     private void validatePositiveNumber(int number) {
         if (number <= 0) {
-            throw new IllegalArgumentException("양수가 아닌 값이 있습니다.");
+            throw new IllegalArgumentException(ErrorMessage.NON_POSITIVE_NUMBER_ERROR);
         }
     }
 }
