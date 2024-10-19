@@ -28,4 +28,12 @@ public class StringCalculator {
         return sumNumbers(tokens);
     }
 
+    private int sumNumbers(String[] tokens) {
+        int sum = 0;
+        for (String token : tokens) {
+            sum += validateNumber(token);
+        }
+        return sum;
+    }
+
 }
