@@ -12,6 +12,10 @@ public class NumericString {
         this.number = number;
     }
 
+    public static NumericString positive(String str) {
+        return NumericString.of(str, 1);
+    }
+
     public static NumericString of(String str, int min) {
         validateIsBlank(str);
 
@@ -25,10 +29,6 @@ public class NumericString {
         validateMinNumber(number, min);
 
         return new NumericString(number);
-    }
-
-    public static NumericString positive(String str) {
-        return NumericString.of(str, 1);
     }
 
     private static void validateIsBlank(String str) {
