@@ -9,5 +9,10 @@ public class NumberService {
         }
     }
 
+    public void addNumbers(TextInfo textInfo) {
+        for (int number : textInfo.convertedNumbers) {
+            textInfo.result += number;
+        }
+    }
 
 }
