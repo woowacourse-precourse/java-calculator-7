@@ -28,6 +28,9 @@ public class ConsoleReader {
                 }
             }
 
+            if(target.contains("-"))
+                throw new IllegalArgumentException();
+
             if(customSeperator > '0' && customSeperator < '9') // 커스텀 문자가 숫자인 경우
                 throw new IllegalArgumentException();
 
