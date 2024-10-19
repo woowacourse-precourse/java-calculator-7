@@ -5,53 +5,35 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class StringParserTest {
 
-    @Test
-    void 커스텀_구분자로_문자열을_분할할_수_있다() {
+    private StringParser stringParser;
+
+    @ParameterizedTest
+    @CsvSource({
+            "'//;\n1;2;3', '1,2,3'",
+            "'//&\n1&2&3', '1,2,3'",
+            "'1,2,3', '1,2,3'"
+    })
+    void 문자열을_올바르게_분할해야_한다(String input, String expected) {
         // given
-        String input = "//;\n1;2;3";
-        StringParser stringParser = new StringParser(input);
+        stringParser = new StringParser(input);
 
         // when
         List<String> numbers = stringParser.split();
 
         // then
-        assertThat(numbers).isEqualTo(List.of("1", "2", "3"));
-    }
-
-    @Test
-    void 커스텀_구분자로_문자열을_분할할_수_있다2() {
-        // given
-        String input = "//&\n1&2&3";
-        StringParser stringParser = new StringParser(input);
-
-        // when
-        List<String> numbers = stringParser.split();
-
-        // then
-        assertThat(numbers).isEqualTo(List.of("1", "2", "3"));
-    }
-
-    @Test
-    void 기본_구분자로_문자열을_분할할_수_있다() {
-        // given
-        String input = "1,2,3";
-        StringParser stringParser = new StringParser(input);
-
-        // when
-        List<String> numbers = stringParser.split();
-
-        // then
-        assertThat(numbers).isEqualTo(List.of("1", "2", "3"));
+        assertThat(numbers).isEqualTo(List.of(expected.split(",")));
     }
 
     @Test
     void 빈_입력을_처리할_수_있다() {
         // given
         String input = "";
-        StringParser stringParser = new StringParser(input);
+        stringParser = new StringParser(input);
 
         // when
         List<String> numbers = stringParser.split();
@@ -64,7 +46,7 @@ class StringParserTest {
     void 문자열을_숫자로_변환할_수_있다() {
         // given
         String input = "1,2,3";
-        StringParser stringParser = new StringParser(input);
+        stringParser = new StringParser(input);
         List<String> numbers = stringParser.split();
 
         // when
@@ -78,7 +60,7 @@ class StringParserTest {
     void 숫자가_아닌_문자는_예외를_발생시킨다() {
         // given
         String input = "1,2,a";
-        StringParser stringParser = new StringParser(input);
+        stringParser = new StringParser(input);
 
         // when & then
         assertThrows(IllegalArgumentException.class, () -> stringParser.split());
@@ -88,7 +70,7 @@ class StringParserTest {
     void 음수는_예외를_발생시킨다() {
         // given
         String input = "1,2,-3";
-        StringParser stringParser = new StringParser(input);
+        stringParser = new StringParser(input);
 
         // when & then
         assertThrows(IllegalArgumentException.class, stringParser::split);
