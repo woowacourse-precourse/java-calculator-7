@@ -1,5 +1,6 @@
 package calculator.service;
 
+import java.util.Arrays;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -64,5 +65,36 @@ class CalculatorServiceTest {
         Assertions.assertThatThrownBy(() -> service.convertToNumbers(parts))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("잘못된 값이 입력되었습니다.");
+    }
+
+    @DisplayName("기본 구분자를 사용한 문자열 분리")
+    @Test
+    void parseInputDefault() {
+        String line1 = "1,2,4:5";
+        String line2 = "1:1,2a:4,5";
+        String line3 = "1: ,2:4,5";
+        CalculatorService service = new CalculatorService();
+        String[] paresInput1 = service.paresInput(line1);
+        String[] paresInput2 = service.paresInput(line2);
+        String[] paresInput3 = service.paresInput(line3);
+
+        Assertions.assertThat(paresInput1).containsAll(Arrays.asList("1", "2", "4", "5"));
+        Assertions.assertThat(paresInput2).containsAll(Arrays.asList("1", "1", "2a", "4", "5"));
+        Assertions.assertThat(paresInput3).containsAll(Arrays.asList("1", " ", "2", "4", "5"));
+    }
+
+    @DisplayName("커스텀 구분자입력시 문자열 분리")
+    @Test
+    void parseInputCustom() {
+        CalculatorService service = new CalculatorService();
+        String[] parses1 = service.paresInput("//n\\n1n2");
+        String[] parses2 = service.paresInput("//;\\n1;2");
+        String[] parses3 = service.paresInput("//;\\n1;2:2");
+        String[] parses4 = service.paresInput("//;\\n1; ;2");
+
+        Assertions.assertThat(parses1).containsAll(Arrays.asList("1", "2"));
+        Assertions.assertThat(parses2).containsAll(Arrays.asList("1", "2"));
+        Assertions.assertThat(parses3).containsAll(Arrays.asList("1", "2:2"));
+        Assertions.assertThat(parses4).containsAll(Arrays.asList("1", " ", "2"));
     }
 }
