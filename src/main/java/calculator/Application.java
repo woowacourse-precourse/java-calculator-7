@@ -3,6 +3,8 @@ package calculator;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
@@ -32,30 +34,35 @@ public class Application {
         Pattern pattern = Pattern.compile( regex );
         String[] nums = pattern.split( numString );
         int[] result = new int[nums.length];
-        for( int i = 0; i < nums.length; i++ ) result[i] = Integer.parseInt( nums[i] );
+        // 숫자 부분에 숫자와 구분자 외의 글자가 들어온 경우
+        try {for( int i = 0; i < nums.length; i++ ) result[i] = Integer.parseInt( nums[i] );}
+        catch( NumberFormatException e ) {throw new IllegalArgumentException();}
+
         return result;
     }
 
     static int sum( int[] numbers ){
         int result = 0;
         if( numbers.length == 0 ) return 0;
-        for( int num : numbers ) result += num;
+        for( int num : numbers ) {
+            if( num < 0 ) throw new IllegalArgumentException();
+            result += num;
+        }
         return result;
     }
 
     static boolean validateInput( String input ){
         StringTokenizer tokenizer = new StringTokenizer( input, "\\n" );
-        // \n이 있는 경우
-        if( tokenizer.countTokens() == 2 ){
+        String numberPart;
+        //// 커스텀 구분자 부분
+        if( tokenizer.countTokens() > 1 ){
+            numberPart = input.substring( input.indexOf( "\\n") + 2 );
+            String customDelimiterPart = input.substring( 0, input.indexOf( "\\n") );
             // 맨 앞에 //가 있는지 확인
-            if( !tokenizer.nextToken().substring(0,2).equals("//") ) return false;
+            if( !customDelimiterPart.substring(0,2).equals("//") ) return false;
         }
-        else {
-            // 구분자 외의 값이 들어오는 경우
-
-        }
-        //if( input.substring(2,3).equals( "\\") ) System.out.println( true );
-        // \n이 없는 경우
+        else numberPart = input;
+        //// 공통 부분
 
         return true;
     }
@@ -66,8 +73,7 @@ public class Application {
             BufferedReader bufferedReader = new BufferedReader( new InputStreamReader( System.in ) );
             System.out.println( "덧셈할 문자열을 입력해 주세요." );
             String input = bufferedReader.readLine();
-            validateInput( input );
-            //if( !validateInput( input ) ) throw new IllegalArgumentException();
+            if( !validateInput( input ) ) throw new IllegalArgumentException();
             String[] delimiterList = setDelimiter( input );
             int[] numbers = getNumbers( input, delimiterList );
             result = sum( numbers );
