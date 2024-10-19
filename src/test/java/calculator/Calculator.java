@@ -7,7 +7,7 @@ import java.util.Set;
 public class Calculator {
 
     public Set<String> delimiters = new HashSet<>(Arrays.asList(",", ";"));
-
+    
     public void checkCustomDelimiter(String input) {
         if (input.startsWith("//") && input.endsWith("\n")) {
             String content = input.substring(2, input.length() - 1);
@@ -30,5 +30,12 @@ public class Calculator {
             sum += value;
         }
         return sum;
+    }
+
+    public int isNothing(String input) {
+        if (input.equals("")) {
+            return 0;
+        }
+        return -1;
     }
 }
