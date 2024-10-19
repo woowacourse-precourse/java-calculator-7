@@ -115,7 +115,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 예외_테스트2() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("3;-11;2"))
+            assertThatThrownBy(() -> runException("123//@\\n1@2,5"))
                 .isInstanceOf(IllegalArgumentException.class)
         );
     }
