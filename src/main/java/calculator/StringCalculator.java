@@ -8,10 +8,17 @@ public class StringCalculator {
     public void plusCalculate() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String userInput = Console.readLine();
+
+        if (userInput.isEmpty()) {
+            System.out.println("결과 : 0");
+            return;
+        }
+
         System.out.println(userInput);
 
         String[] numberList = InputParserUtil.splitter(userInput);
         int result = sumNumbers(InputParserUtil.numbersToInt(numberList));
+
         System.out.println("결과 : " + result);
     }
 
