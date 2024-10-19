@@ -35,7 +35,12 @@ public class NumberUtils {
 
             //구분자인가?
             if(separators.contains(c)) {
-                numbersList.add(stringToNumber(sb));
+                int parsedNumber = stringToNumber(sb);
+
+                //음수가 아닌지 확인
+                checkNotNegativeNumber(parsedNumber);
+                numbersList.add(parsedNumber);
+
                 //StringBuilder초기화
                 sb.setLength(0);
                 continue;
@@ -45,9 +50,23 @@ public class NumberUtils {
         }
 
         //sb에 남은 문자처리
-        numbersList.add(stringToNumber(sb));
+        int parsedNumber = stringToNumber(sb);
+
+        //음수가 아닌지 확인
+        checkNotNegativeNumber(parsedNumber);
+        numbersList.add(parsedNumber);
 
         return numbersList;
+    }
+
+    /**
+     * 음수인지 확인
+     * @param parsedNumber int 형식의 숫자
+     */
+    private static void checkNotNegativeNumber(int parsedNumber) {
+        if(parsedNumber < 0) {
+            throw new IllegalArgumentException("음수는 허용되지 않습니다");
+        }
     }
 
     /**

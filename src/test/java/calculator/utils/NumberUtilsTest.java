@@ -99,6 +99,18 @@ public class NumberUtilsTest {
         Assertions.assertEquals(expected, numbers);
     }
 
+    @Test
+    void 음수가_들어오면_예외_발생() {
+        List<Character> separators = createSeparatorList();
+
+        //음수가 포함된 문자열
+        String s = "-49:";
+
+        //음수가 들어오면 예외가 발생해야 한다
+        Assertions.assertThrows(IllegalArgumentException.class,
+                ()->NumberUtils.parseNumbers(s, separators));
+    }
+
     /**
      * 올바른 형식의 문자열을 반환
      *
