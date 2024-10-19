@@ -8,8 +8,8 @@ public class Processor {
     public Processor() {
     }
 
-    private static final String DELIMITER_DECLARATION_SECTION = "\\";
-    private static final String DELIMITER_AND_NUMBERS_SEPARATOR = "\n";
+    private static final String DELIMITER_DECLARATION_SECTION = "//";
+    private static final String DELIMITER_AND_NUMBERS_SEPARATOR = "\\n";
     private List<String> delimiters = new ArrayList<>(List.of(",", ":"));
 
     public void execute(String input) {
