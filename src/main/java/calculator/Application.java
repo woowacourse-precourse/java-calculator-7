@@ -8,7 +8,7 @@ public class Application {
         if (input == null || input.isEmpty()) {
             return 0;
         }
-        
+
         String delimiter = ",|:";
         String numbers = input;
 
@@ -52,7 +52,7 @@ public class Application {
         String input = Console.readLine();
         try {
             int result = add(input);
-            System.out.println("결과: " + result);
+            System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
         } finally {
