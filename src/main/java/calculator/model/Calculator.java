@@ -1,12 +1,13 @@
 package calculator.model;
 
+import static calculator.util.Constants.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static calculator.util.ErrorMessages.ERROR_NUMBER_TYPE;
 
 public class Calculator {
-    private String str;
+    private final String str;
     private String[] strArr;
     private int answer;
 
@@ -24,7 +25,7 @@ public class Calculator {
     }
 
     public void split(){
-        Matcher matcher = Pattern.compile("//(.)\\\\n(.*)").matcher(this.str);
+        Matcher matcher = Pattern.compile(PATTERN_TEXT).matcher(this.str);
         if(matcher.find())
             customSplit(matcher);
         else
