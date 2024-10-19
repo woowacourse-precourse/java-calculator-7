@@ -1,18 +1,15 @@
 package calculator;
 
 public class Output {
-    private SumData sumData;
-
-    public Output(SumData sumData) {
-        this.sumData = sumData;
-    }
-
-    public void formatOutput() {
+    public void formatOutput(SumData sumData) {
         double sumResult = sumData.getSumData();
-        boolean isInteger = sumResult == (int) sumResult;
+        boolean isInteger = false;
+
+        if (sumResult == (int) sumResult) {
+            isInteger = true;
+        }
         if (isInteger) {
-            System.out.println("결과 : " + (int) sumResult);
-            return;
+            sumResult = (int) sumResult;
         }
         System.out.println("결과 : " + sumResult);
     }
