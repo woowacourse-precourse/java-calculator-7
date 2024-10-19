@@ -3,19 +3,36 @@ package calculator.service;
 import calculator.util.CustomDelimiterFormatParser;
 import java.util.List;
 
-public class CustomDelimiterValidator {
+public class InputValidator {
 
     private final CustomDelimiterFormatParser formatParser;
 
-    public CustomDelimiterValidator() {
+    public InputValidator() {
         this.formatParser = new CustomDelimiterFormatParser();
     }
 
     public void validate(String input) {
         if (!formatParser.isCheckedStart(input)) {
-            return;
+            validateBasicDelimiter(input);
         }
 
+        validateCustomDelimiter(input);
+    }
+
+    private void validateBasicDelimiter(String input) {
+        if (!isCheckedBasicDelimiter(input)) {
+            throw new IllegalArgumentException("기본 구분자가 포함되어 있지 않습니다.");
+        }
+    }
+
+    private boolean isCheckedBasicDelimiter(String input) {
+        List<String> basicDelimiters = Delimiter.getBasicDelimiters();
+
+        return basicDelimiters.stream()
+                .anyMatch(input::contains);
+    }
+
+    private void validateCustomDelimiter(String input) {
         if (!formatParser.isCheckedFormat(input)) {
             throw new IllegalArgumentException("커스텀 구분자를 사용하기 위한 형식이 아닙니다.");
         }
