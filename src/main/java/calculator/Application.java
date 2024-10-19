@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
@@ -15,7 +16,9 @@ public class Application {
         if (userInput.isEmpty()) {
             System.out.println(0);
         } else {
-
+            // 입력된 문자열에서 구분자를 추출하고 파싱하는 기능
+            Parser parser = new Parser();
+            List<String> numberList = parser.extractNumberList(userInput);
         }
     }
 }
