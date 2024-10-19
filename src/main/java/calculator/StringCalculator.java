@@ -1,6 +1,7 @@
 package calculator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class StringCalculator {
     public int calculate(String userInput) {
@@ -11,17 +12,37 @@ public class StringCalculator {
         if (userInput.startsWith("//")) {
             if (userInput.contains("\\n")) {
                 String newDelimiter = userInput.substring(2, userInput.indexOf("\\n"));
+                System.out.println(newDelimiter);
+                if (newDelimiter.matches("\\d+")) {
+                    throw new IllegalArgumentException("잘못된 값을 입력하였습니다");
+                }
                 delimiters.add(newDelimiter);
                 userInput = userInput.substring(userInput.indexOf("\\n") + 2);
             } else {
-                //ToDO:나중에 예외 처리
+                throw new IllegalArgumentException("잘못된 값을 입력하였습니다");
             }
         }
         String regex = String.join("|", delimiters);
+        System.out.println(userInput);
         String[] splitByDelimiter = userInput.split(regex);
+        System.out.println(Arrays.toString(splitByDelimiter));
+        System.out.println(splitByDelimiter[0]);
         int result = 0;
         for (String num : splitByDelimiter) {
-            result += Integer.parseInt(num);
+
+            int addNum;
+            try {
+                if (num.isEmpty()) {
+                    num = "0";
+                }
+                addNum = Integer.parseInt(num);
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException();
+            }
+            if (addNum < 0) {
+                throw new IllegalArgumentException();
+            }
+            result += addNum;
         }
         return result;
     }
