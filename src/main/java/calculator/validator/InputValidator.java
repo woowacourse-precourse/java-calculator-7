@@ -3,6 +3,8 @@ package calculator.validator;
 import calculator.constants.ErrorMessage;
 
 public class InputValidator {
+    private final String ZERO = "0";
+
     public void validateStrip(String input) {
         String stripped = input.strip();
         if (input.equals(stripped)) {
@@ -23,7 +25,7 @@ public class InputValidator {
 
     public void validateZero(String[] separated) {
         for (String element : separated) {
-            if (element.equals("0")) {
+            if (element.equals(ZERO)) {
                 throw new IllegalArgumentException(ErrorMessage.ONLY_ALLOWED_POSITIVE_NUMBER);
             }
         }

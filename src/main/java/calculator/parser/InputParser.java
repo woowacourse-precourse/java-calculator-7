@@ -4,16 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InputParser {
-    public static final String DEFAULT_DELIMITER_FILTER = "[,:]";
-    public static final String DELIMITER_PREFIX = "//";
-    public static final String DELIMITER_SUFFIX = "\\n";
+    private final String DEFAULT_DELIMITER_FILTER = "[,:]";
+    private final String BACKSLASH_ESCAPE = "\\";
+    private final String DELIMITER_PREFIX = "//";
+    private final String DELIMITER_SUFFIX = BACKSLASH_ESCAPE + "n";
+    private final String ZERO = "0";
+    private final int PREFIX_LENGTH = 2;
+    private final int SUFFIX_LENGTH = 2;
 
     public String[] separate(String input) {
         if (input.startsWith(DELIMITER_PREFIX)) {
             int suffixIndex = input.indexOf(DELIMITER_SUFFIX);
-            String customDelimiter = input.substring(2, suffixIndex);
+            String customDelimiter = input.substring(PREFIX_LENGTH, suffixIndex);
             customDelimiter = escapeDelimiter(customDelimiter);
-            String numbersPart = input.substring(suffixIndex + 2);
+            String numbersPart = input.substring(suffixIndex + SUFFIX_LENGTH);
             return numbersPart.split(customDelimiter);
         }
         return input.split(DEFAULT_DELIMITER_FILTER);
@@ -28,8 +32,8 @@ public class InputParser {
     }
 
     private String escapeDelimiter(String customDelimiter) {
-        if (customDelimiter.contains("\\")) {
-            customDelimiter = customDelimiter.replace("\\", "\\\\");
+        if (customDelimiter.contains(BACKSLASH_ESCAPE)) {
+            customDelimiter = customDelimiter.replace(BACKSLASH_ESCAPE, BACKSLASH_ESCAPE + BACKSLASH_ESCAPE);
         }
         return customDelimiter;
     }
@@ -37,7 +41,7 @@ public class InputParser {
     public void blankToZero(String[] separated) {
         for (int i = 0; i < separated.length; i++) {
             if (separated[i].isEmpty()) {
-                separated[i] = "0";
+                separated[i] = ZERO;
             }
         }
     }

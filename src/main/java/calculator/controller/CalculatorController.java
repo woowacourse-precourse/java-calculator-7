@@ -30,18 +30,30 @@ public class CalculatorController {
     }
 
     private String processInput(String input) {
-        inputValidator.validateStrip(input);
-        String[] separated = inputParser.separate(input);
-        inputValidator.validateZero(separated);
-        inputParser.blankToZero(separated);
-        inputValidator.validateInteger(separated);
-        List<Integer> numbers = inputParser.toInteger(separated);
-        PositiveNumbers positiveNumbers = new PositiveNumbers(numbers);
-        int sum = positiveNumbers.sum();
+        String[] separated = separate(input);
+        int sum = calculateSum(separated);
         return Integer.toString(sum);
     }
 
     private void displayResult(String result) {
         outputView.displayResult(result);
+    }
+
+    private String[] separate(String input) {
+        inputValidator.validateStrip(input);
+        return inputParser.separate(input);
+    }
+
+    private int calculateSum(String[] separated) {
+        changeBlankToZero(separated);
+        List<Integer> numbers = inputParser.toInteger(separated);
+        PositiveNumbers positiveNumbers = new PositiveNumbers(numbers);
+        return positiveNumbers.sum();
+    }
+
+    private void changeBlankToZero(String[] separated) {
+        inputValidator.validateZero(separated);
+        inputParser.blankToZero(separated);
+        inputValidator.validateInteger(separated);
     }
 }

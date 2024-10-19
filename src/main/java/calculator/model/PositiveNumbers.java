@@ -5,6 +5,8 @@ import calculator.constants.ErrorMessage;
 import java.util.List;
 
 public class PositiveNumbers {
+    private final int ZERO = 0;
+
     private final List<Integer> numbers;
 
     public PositiveNumbers(List<Integer> numbers) {
@@ -18,7 +20,7 @@ public class PositiveNumbers {
 
     private void validatePositive(List<Integer> numbers) {
         numbers.forEach((number) -> {
-            if (number < 0) {
+            if (number < ZERO) {
                 throw new IllegalArgumentException(ErrorMessage.ONLY_ALLOWED_POSITIVE_NUMBER);
             }
         });
