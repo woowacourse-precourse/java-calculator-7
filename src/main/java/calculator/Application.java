@@ -49,7 +49,14 @@ public class Application {
 
     // 구분자 끝을 찾는 로직
     private static int findSeparatorEndIndex(String input) {
-        return 0;
+        for (int i = SEPARATOR_START; i < input.length() - 2; i++) {
+            if (input.charAt(i) == '\\') {
+                if (i < input.length() - 1 && input.charAt(i + 1) == 'n') {
+                    return i + 2;
+                }
+            }
+        }
+        return SEPARATOR_START;
     }
 }
 
