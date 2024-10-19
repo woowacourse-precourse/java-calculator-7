@@ -45,20 +45,22 @@ public class CalculatorService {
         System.out.println("분리된 애들: " + newSeparator +" " +value);
 
         makeNewSeparator(newSeparator);
-        List<Integer> processedValue = checkValue(value);
+        calculator.setRawValue(value);
+        List<Integer> processedValue = extractNumbersToList();
         if (!isValid) {
             exceptionHandler.handleException(new IllegalArgumentException());
         }
         calculator.setProcessedValue(processedValue);
     }
 
-    private List<Integer> checkValue(String value) {
-        List<String> resultList = new ArrayList<>(List.of(value)); // 초기 결과 리스트
+    private List<Integer> extractNumbersToList() {
+        List<String> resultList = new ArrayList<>(List.of(calculator.getRawValue())); // 초기 결과 리스트
         try {
             for (String separator : calculator.getSeparators()) {
                 List<String> tempList = new ArrayList<>();
                 for (String item : resultList) {
-                    tempList.addAll(Arrays.asList(item.split("\\" + separator)));
+                    String regex = "\\" + separator;
+                    tempList.addAll(Arrays.asList(item.split(regex)));
                 }
                 resultList = tempList;
             }
@@ -95,9 +97,6 @@ public class CalculatorService {
         System.out.println("새로운 값 :" + calculator.getSeparators());
     }
 
-    public List<Integer> extractNumbersToList() {
-        return List.of();
-    }
 
     public int sumOfList() {
         return 0;
