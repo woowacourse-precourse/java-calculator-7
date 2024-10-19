@@ -44,13 +44,11 @@ public class InputHandler {
         }
 
         String[] extractedStrings = target.split(regExp);
+        ErrorHandler.validateExtractedNumbers(extractedStrings);
 
-        for (String ext : extractedStrings) {
-            ErrorHandler.validateOnlyDigits(ext);
-            int extractedNumber = Integer.parseInt(ext);
-            ErrorHandler.validatePositiveNumber(extractedNumber);
+        for (String extractedString : extractedStrings) {
+            int extractedNumber = Integer.parseInt(extractedString);
             extractedNumbers.add(extractedNumber);
-
         }
     }
 
