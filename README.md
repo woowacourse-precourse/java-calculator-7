@@ -12,31 +12,30 @@
 ```bash
 ├── Application.java
 ├── constant
-│   ├── ErrorMessage.java
-│   ├── Limit.java
-│   └── Message.java
+│   ├── ErrorMessage.java : 범용 에러 메시지 상수 클래스
+│   ├── Limit.java : 제한과 관련된 숫자 상수 클래스
+│   └── Message.java : 범용 메시지 상수 클래스
 ├── controller
-│   └── CalculatorController.java
+│   └── CalculatorController.java : 프로그램 흐름 제어
 ├── exception
-│   └── ValidatorException.java
+│   └── ValidatorException.java : 예외 클래스
 ├── model
-│   ├── Calculator.java
-│   ├── CustomSeparators.java
-│   ├── DefaultSeparators.java
-│   ├── Numbers.java
-│   └── Separators.java
+│   ├── Calculator.java : 숫자 계산
+│   ├── CustomSeparators.java : 커스텀 구분자 데이터, 커스텀 구분자와 숫자를 분리
+│   ├── DefaultSeparators.java : 기본 구분자 데이터, 기본 구분자와 숫자를 분리
+│   ├── Numbers.java : 숫자 데이터
+│   └── Separators.java : 인터페이스
 ├── service
-│   ├── NumbersService.java
-│   └── SeparatorsService.java
-├── test.txt
+│   ├── NumbersService.java : Numbers 객체 생성
+│   └── SeparatorsService.java : Separators 객체 생성, 커스텀 구분자의 구분자/계산 부분 분리
 ├── validator
-│   ├── CustomSeparatorsValidator.java
-│   ├── DefaultSeparatorsValidator.java
-│   └── NumbersValidator.java
+│   ├── CustomSeparatorsValidator.java : CustomSeparators의 유효성 검증
+│   ├── DefaultSeparatorsValidator.java : DefaultSeparators의 유효성 검증
+│   └── NumbersValidator.java : Numbers의 유효성 검증
 └── view
-    ├── InputReader.java
-    ├── OutputView.java
-    └── OutputWriter.java
+    ├── InputReader.java : 사용자 입력 수신
+    ├── OutputView.java : 출력 메시지 제어
+    └── OutputWriter.java : 메시지 출력
 ```
 
 ## 💻 프로그램 진행 순서
