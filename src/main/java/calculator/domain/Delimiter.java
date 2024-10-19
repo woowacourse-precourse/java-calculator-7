@@ -9,10 +9,6 @@ public class Delimiter {
         this.delimiter = delimiter;
     }
 
-    public int getDelimiterSize() {
-        return delimiter.size();
-    }
-
     public boolean contains(char c) {
         return delimiter.contains(c);
     }

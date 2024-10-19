@@ -10,10 +10,10 @@ import calculator.view.UserView;
 public class AppConfig {
 
     public UserController userController() {
-        return new ConsoleController(expressionService(), userView());
+        return new ConsoleController(calculatorService(), userView());
     }
 
-    public CalculatorService expressionService() {
+    public CalculatorService calculatorService() {
         return new CalculatorServiceImpl();
     }
 

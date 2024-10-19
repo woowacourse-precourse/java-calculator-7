@@ -24,11 +24,11 @@ public class ExpressionParser {
 
 
     private String findExpression(String userExpression) {
-        int prefixSize = delimiter.getDelimiterSize() - fixDelimiter.size();
-        if (userExpression.startsWith("//")) {
-            prefixSize += 3;
+        if (!userExpression.startsWith("//")) {
+            return userExpression;
         }
-        return userExpression.substring(prefixSize);
+
+        return userExpression.substring(userExpression.indexOf("\\n") + 2);
     }
 
     private Set<Character> findDelimiters(String userExpression) {
@@ -37,16 +37,17 @@ public class ExpressionParser {
             return delimiters;
         }
         int idx = 2;
-        while (idx < userExpression.length()) {
-            if (userExpression.charAt(idx) == '\n') {
+        while (idx < userExpression.length() - 1) {
+            char currentChar = userExpression.charAt(idx);
+            if (currentChar == '\\' && userExpression.charAt(idx + 1) == 'n') {
                 return delimiters;
             }
 
-            if (Character.isDigit(userExpression.charAt(idx))) {
-                throw new IllegalArgumentException();
+            if (Character.isDigit(currentChar)) {
+                throw new IllegalArgumentException("구분자로 숫자가 등장할 수 없습니다:" + currentChar);
             }
 
-            delimiters.add(userExpression.charAt(idx));
+            delimiters.add(currentChar);
             idx++;
         }
 
