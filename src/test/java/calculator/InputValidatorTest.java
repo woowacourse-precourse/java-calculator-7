@@ -28,4 +28,17 @@ public class InputValidatorTest {
             inputValidator.validateCustomDelimiterFormat(customDelimiterStartIndex, customDelimiterEndIndex);
         });
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1:2,3//a\\n", "1//a\\n2:3"})
+    void 커스텀_구분자_위치(String mockInput) {
+        int customDelimiterStartIndex = mockInput.indexOf("//");
+        int customDelimiterEndIndex = mockInput.indexOf("\\n");
+
+        var inputValidator = new InputValidator();
+        System.out.println(customDelimiterStartIndex + " " + customDelimiterEndIndex);
+        assertThrows(IllegalArgumentException.class, () -> {
+            inputValidator.validateCustomDelimiterPosition(customDelimiterStartIndex, customDelimiterEndIndex);
+        });
+    }
 }

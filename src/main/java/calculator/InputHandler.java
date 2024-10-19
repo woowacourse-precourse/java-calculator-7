@@ -12,12 +12,16 @@ public class InputHandler {
     }
 
     public char extractCustomDelimiter(String userInput) {
-        int customDelimiterStartIndex = userInput.indexOf("//") + 2;
-        int customDelimiterEndIndex = userInput.indexOf("\\n") - 1;
+        int customDelimiterStartIndex = userInput.indexOf("//");
+        int customDelimiterEndIndex = userInput.indexOf("\\n");
+        validateCustomDelimiter(customDelimiterStartIndex, customDelimiterEndIndex);
 
+        return userInput.charAt(customDelimiterStartIndex+2);
+    }
+
+    private void validateCustomDelimiter(int customDelimiterStartIndex, int customDelimiterEndIndex) {
         InputValidator inputValidator = new InputValidator();
         inputValidator.validateCustomDelimiterFormat(customDelimiterStartIndex, customDelimiterEndIndex);
-
-        return userInput.charAt(customDelimiterStartIndex);
+        inputValidator.validateCustomDelimiterPosition(customDelimiterStartIndex, customDelimiterEndIndex);
     }
 }
