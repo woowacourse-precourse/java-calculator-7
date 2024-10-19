@@ -31,9 +31,18 @@ public class Application {
         String delimiter = String.join("|", delimiters);
 
         String[] nums = numsInput.split(delimiter);
-        System.out.println(Arrays.toString(nums));
+        int result = 0;
+        if (isAllNumbers(nums)) {
+            for (String num : nums) {
+                result += Integer.parseInt(num);
+            }
+        }
 
         Console.close();
+    }
+
+    private static boolean isAllNumbers(String[] nums) {
+        return true;
     }
 
     private static String[] getDelimiters() {
