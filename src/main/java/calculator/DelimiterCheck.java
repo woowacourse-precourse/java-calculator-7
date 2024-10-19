@@ -1,12 +1,14 @@
 package calculator;
 
+import java.util.regex.PatternSyntaxException;
+
 public class DelimiterCheck {
 
     // Application에서 사용자가 입력한 수식에 대해서 구분자만 제외하고 숫자만 추출
     // 잘못 입력된 예외처리 항목에 대해서 해소
     // 커스텀 구분자를 저장, 관리
     private String inputString = "";
-    private String delimiter = ",|:";
+    private String delimiter = "[,:]";
     private String[] splitFormulaArray;
     private int[] intNumArray;
     private double[] doubleNumArray;
@@ -23,26 +25,22 @@ public class DelimiterCheck {
         int startCustom = inputString.indexOf("//");
         int endCustom = inputString.indexOf("\\n");
 
-        // 계산 중간에도 커스텀 입력 가능하게 수정
         // 예) 1,2,3//+\n1+2+3
+        // 계산 중간에도 커스텀 입력 가능하게 수정, 커스텀 입력위치 추출
         if (startCustom != -1 && endCustom != -1) {
             String customDelimiter = inputString.substring(startCustom + 2, endCustom);
 
             // 커스텀 문자열로 사용할 수 없는 문자들 예외처리
-            if (customDelimiter.contains(" ") || customDelimiter.contains(".") || customDelimiter.contains("-")) {
+            if (customDelimiter.contains(" ") || customDelimiter.contains(".") || customDelimiter.contains("-") ||
+                    customDelimiter.contains("(") || customDelimiter.contains("[") || customDelimiter.contains(
+                    "{")) {
                 throw new IllegalArgumentException("잘못된 구분자를 입력하셨습니다.");
             }
+
             delimiter = delimiter + "|" + customDelimiter;
 
             inputString = inputString.substring(0, startCustom) + "," + inputString.substring(endCustom + 2);
         }
-//        if (inputString.startsWith("//") && (inputString.substring(3, 5).equals("\\n"))) {
-//            String customDelimiter = Character.toString(inputString.charAt(2));
-//
-//            delimiter = ",|:|" + customDelimiter;
-//            // 커맨드 입력 이후의 문자열만 inputString 지정
-//            inputString = inputString.substring(inputString.indexOf("\\n") + 2);
-//        }
         getSplitFormula();
     }
 
@@ -53,14 +51,16 @@ public class DelimiterCheck {
         inputString = inputString.replaceAll(" ", "");
 
         // 구분자 없이 하나만 입력되었을 때 하나의 배열로만 입력
-        splitFormulaArray = inputString.trim().split("\\s*" + delimiter + "\\s*");
+        try {
+            splitFormulaArray = inputString.trim().split("\\s*" + delimiter + "\\s*");
+        } catch (PatternSyntaxException e) {
+            throw new IllegalArgumentException(e);
+        }
 
         for (int i = 0; i < splitFormulaArray.length; i++) {
             if (splitFormulaArray[i].isBlank()) {
                 splitFormulaArray[i] = "0";
             }
-//            String afterTrimBlank = splitFormulaArray[i].trim().replace("\r\n","");
-//            splitFormulaArray[i] = afterTrimBlank;
         }
         checkFloatingPointNum();
     }

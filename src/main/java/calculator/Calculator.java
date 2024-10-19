@@ -15,18 +15,17 @@ public class Calculator {
         intNumbers = checker.getIntNumArray();
         doubleNumbers = checker.getDoubleNumArray();
 
-
         if (intNumbers != null) {
             int sum = 0;
-            for (int i = 0; i < intNumbers.length; i++) {
-                sum += intNumbers[i];
+            for (int intNumber : intNumbers) {
+                sum += intNumber;
             }
             System.out.println("결과 : " + sum);
             System.out.println();
         } else if (doubleNumbers != null) {
             double sum = 0;
-            for (int i = 0; i < doubleNumbers.length; i++) {
-                sum += doubleNumbers[i];
+            for (double doubleNumber : doubleNumbers) {
+                sum += doubleNumber;
             }
             System.out.println("결과 : " + sum);
             System.out.println();
