@@ -5,6 +5,7 @@ import static calculator.converter.Extractor.extractNumberPart;
 import static calculator.utils.ErrorConstants.*;
 
 public class Validator {
+
     private static final String INVALID_CUSTOM_DELIMITER_PATTERN = "//[a-zA-Z0-9\\s-]+\\\\n.*";
 
     private final String defaultDelimiter;
@@ -70,4 +71,5 @@ public class Validator {
             throw new IllegalArgumentException(ERROR_DELIMITER_NOT_EXIST);
         }
     }
+
 }

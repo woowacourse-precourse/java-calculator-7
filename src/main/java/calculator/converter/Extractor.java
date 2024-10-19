@@ -2,7 +2,7 @@ package calculator.converter;
 
 public class Extractor {
 
-    public static String extractDelimiter(String value, String delimiter,String prefix, String suffix){
+    public static String extractDelimiter(String value, String delimiter, String prefix, String suffix) {
         if (isCustomDelimiter(value, prefix)) {
             int delimiterIndex = value.indexOf(suffix);
             String customDelimiter = value.substring(prefix.length(), delimiterIndex);
@@ -11,7 +11,7 @@ public class Extractor {
         return delimiter;
     }
 
-    public static String extractNumberPart(String value, String prefix, String suffix){
+    public static String extractNumberPart(String value, String prefix, String suffix) {
         if (isCustomDelimiter(value, prefix)) {
             int delimiterIndex = value.indexOf(suffix);
             return value.substring(delimiterIndex + 2);
@@ -19,11 +19,12 @@ public class Extractor {
         return value;
     }
 
-    private static boolean isCustomDelimiter(String value, String prefix){
+    private static boolean isCustomDelimiter(String value, String prefix) {
         return value.startsWith(prefix);
     }
 
     private static String addDelimiter(String existingDelimiters, String newDelimiter) {
         return existingDelimiters.substring(0, existingDelimiters.length() - 1) + newDelimiter + "]";
     }
+
 }

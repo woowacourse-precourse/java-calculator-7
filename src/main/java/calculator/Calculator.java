@@ -10,6 +10,7 @@ import java.util.List;
 import static calculator.utils.CalculatorConstants.*;
 
 public class Calculator {
+
     private static final String INPUT_STRING_MESSAGE = "덧셈할 문자열을 입력해 주세요.";
     private static final String OUTPUT_RESULT_MESSAGE = "결과 : ";
 
@@ -33,7 +34,6 @@ public class Calculator {
         System.out.println(INPUT_STRING_MESSAGE);
         return Console.readLine();
     }
-
 
     private void printResult(int result) {
         System.out.println(OUTPUT_RESULT_MESSAGE + result);

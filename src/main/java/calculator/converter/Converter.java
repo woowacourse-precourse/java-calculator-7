@@ -31,10 +31,10 @@ public class Converter {
         return Integer.parseInt(trimmedValue);
     }
 
-
     private List<Integer> splitNumbers(String numberPart) {
         return Arrays.stream(numberPart.split(delimiter))
                 .map(this::convertToNumber)
                 .collect(Collectors.toList());
     }
+
 }

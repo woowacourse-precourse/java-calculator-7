@@ -60,5 +60,4 @@ public class ValidatorTest {
                 .hasMessage(ERROR_DELIMITER_DUPLICATE);
     }
 
-
 }

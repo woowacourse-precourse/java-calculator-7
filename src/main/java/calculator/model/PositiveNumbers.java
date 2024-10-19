@@ -3,6 +3,7 @@ package calculator.model;
 import java.util.List;
 
 public class PositiveNumbers {
+
     private static final String POSITIVE_NUMBER_ERROR_MESSAGE = "숫자는 양수를 입력해야 합니다.";
     private static final PositiveNumbers EMPTY_INSTANCE = new PositiveNumbers(List.of());
 
