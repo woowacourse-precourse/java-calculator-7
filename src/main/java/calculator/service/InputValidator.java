@@ -12,14 +12,22 @@ public class InputValidator {
     }
 
     public void validate(String input) {
-        if (input.isEmpty()) {
+        if (input == null || input.isEmpty()) {
             return;
         }
+
+        checkBlank(input);
 
         if (formatParser.isCheckedStart(input)) {
             validateCustomDelimiter(input);
         } else {
             validateBasicDelimiter(input);
+        }
+    }
+
+    private void checkBlank(String input) {
+        if (input.isBlank()) {
+            throw new IllegalArgumentException("입력값은 공백일 수 없습니다.");
         }
     }
 
