@@ -47,5 +47,14 @@ public class Application {
         }
         return 0;
     }
+    
+    private static boolean isValid(String input) {
+        for(char c : input.toCharArray()) {
+            if((int)c<48||(int)c>57) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
 
