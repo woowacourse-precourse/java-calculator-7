@@ -17,7 +17,7 @@ public class Application {
         InputHandler inputHandler = new ConsoleInputHandler();
         OutputHandler outputHandler = new ConsoleOutputHandler();
         DelimiterChecker delimiterChecker = new DelimiterChecker("//", "\n");
-        Delimiter delimiter = new Delimiter(List.of(",", ":"));
+        Delimiter delimiter = new Delimiter("|", List.of(",", ":"));
         Calculator calculator = new Calculator(new AdditionStrategy());
 
         CalculatorApp calculatorApp = new CalculatorApp

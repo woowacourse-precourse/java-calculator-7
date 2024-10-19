@@ -5,9 +5,11 @@ import java.util.List;
 
 public class Delimiter {
 
+    private String separator;
     private List<String> delimiters;
 
-    public Delimiter(List<String> defaultDelimiters) {
+    public Delimiter(String separator, List<String> defaultDelimiters) {
+        this.separator = separator;
         this.delimiters = new ArrayList<>(defaultDelimiters);
     }
 
@@ -16,7 +18,7 @@ public class Delimiter {
     }
 
     public String buildDelimiterRegex() {
-        return String.join("|", delimiters);
+        return String.join(separator, delimiters);
     }
 
 }
