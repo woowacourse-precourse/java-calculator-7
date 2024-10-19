@@ -1,26 +1,41 @@
 package calculator.controller;
 
-import java.util.List;
-
 import calculator.domain.Calculator;
+import calculator.dto.FormulaDto;
+import calculator.dto.DelimitersDto;
+import calculator.dto.NumbersDto;
+import calculator.view.InputView;
 
 public class ProgramController {
 	private final DrawController drawController;
+	private final DelimiterController delimiterController;
 
 	public ProgramController() {
 		this.drawController = new DrawController();
+		this.delimiterController = new DelimiterController();
 	}
 
 	public void run() {
-		Calculator calculator = new Calculator(drawNumber());
+		System.out.print("입력하세요: ");
+		FormulaDto formulaDto = generateFormulaRequest();
+
+		DelimitersDto delimiterDto = delimiterController.extractDelimiters(formulaDto.formula());
+		NumbersDto numbersDto = drawNumber(formulaDto, delimiterDto);
+		Calculator calculator = new Calculator(numbersDto.numbers());
 		calculator.calculateSum();
+
 		System.out.print("결과 : ");
 		System.out.println(calculator.getSum());
 
 	}
 
-	private List<Long> drawNumber() {
-		return drawController.requestNumberDraw();
+	private FormulaDto generateFormulaRequest() {
+		String formula = InputView.readLine();
+		return new FormulaDto(formula);
+	}
+
+	private NumbersDto drawNumber(FormulaDto formulaDto, DelimitersDto delimiterDto) {
+		return drawController.drawNumbers(formulaDto, delimiterDto);
 	}
 
 }

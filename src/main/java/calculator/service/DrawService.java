@@ -1,13 +1,14 @@
 package calculator.service;
 
 import java.util.List;
-import java.util.Set;
 
+import calculator.constant.DelimiterConstant;
 import calculator.constant.DrawConstant;
-import calculator.dto.request.FormulaReq;
-import calculator.dto.response.DelimitersDto;
-import calculator.factory.DelimitersFactory;
+import calculator.dto.DelimitersDto;
+import calculator.dto.FormulaDto;
+import calculator.dto.NumbersDto;
 import calculator.helper.ParseHelper;
+import calculator.util.RegexGenerator;
 
 public class DrawService {
 	private final ParseHelper parseHelper;
@@ -16,16 +17,18 @@ public class DrawService {
 		this.parseHelper = new ParseHelper();
 	}
 
-	public DelimitersDto generateDelimiters(FormulaReq formulaReq) {
-		Set<String> delimiters = DelimitersFactory.getDelimiters();
-		if (formulaReq.formula().startsWith(DrawConstant.CUSTOM_DELIMITER_START_SIGN)) {
-			String customDelimiter = parseHelper.extractCustomDelimiter(formulaReq.formula());
-			delimiters.add(customDelimiter);
-		}
-		return DelimitersDto.from(delimiters);
-	}
+	public NumbersDto drawNumbers(FormulaDto formulaDto, DelimitersDto delimiters) {
+		String formula = formulaDto.formula();
 
-	public List<Long> drawNumbers(Set<String> delimiters, FormulaReq formulaReq) {
-		return parseHelper.extractNumbers(delimiters, formulaReq.formula());
+		String regex = DelimiterConstant.NO_CUSTOM_DELIMITER_SPLIT_REGEX;
+		if (!(delimiters.delimiters().size() == DelimiterConstant.NO_CUSTOM_DELIMITER_LENGTH)) {
+			formula = formulaDto.formula().substring(
+				DrawConstant.CUSTOM_DELIMITER_FORMULA_NUMBER_START_INDEX);
+			regex = RegexGenerator.generateCustomDelimiterContainsRegex(delimiters.delimiters());
+		}
+
+		List<Long> numbers = parseHelper.extractNumbers(formula, regex);
+
+		return new NumbersDto(numbers);
 	}
 }
