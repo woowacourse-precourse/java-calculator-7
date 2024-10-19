@@ -6,8 +6,8 @@ import java.util.List;
 
 public class StringHandler {
     public String extractSeparator(String input) {
-        int start = input.indexOf("//") + 2;
-        int end = input.indexOf("\n");
+        int start = "//".length() ;
+        int end = input.indexOf("\\n");
         return input.substring(start, end);
     }
 
@@ -25,7 +25,7 @@ public class StringHandler {
     }
 
     public String removeCustom(String input) {
-        int end = input.indexOf("\n") + 1;
+        int end = input.indexOf("\\n") + 2;
         return input.substring(end);
     }
 }
