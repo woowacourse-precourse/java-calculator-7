@@ -11,9 +11,9 @@ class StringDividerTest {
     void test4() {
         String givenString = "1:2,3";
         String[] expected = new String[]{"1", "2", "3"};
-        StringDivider stringDivider = new StringDivider();
+        StringDivider stringDivider = new StringDivider(givenString);
 
-        String[] result = stringDivider.divideStringBy(givenString);
+        String[] result = stringDivider.divideStringBy();
         assertArrayEquals(expected, result);
     }
 
@@ -23,9 +23,9 @@ class StringDividerTest {
         String givenString = "1;2:3,4;5";
         String givenCustomSeparator = ";";
         String[] expected = new String[]{"1", "2", "3", "4", "5"};
-        StringDivider stringDivider = new StringDivider(givenCustomSeparator);
+        StringDivider stringDivider = new StringDivider(givenCustomSeparator,givenString);
 
-        String[] result = stringDivider.divideStringBy(givenString);
+        String[] result = stringDivider.divideStringBy();
         assertArrayEquals(expected, result);
     }
 
@@ -35,9 +35,9 @@ class StringDividerTest {
         String givenString = "1;;;;2:3,4;;;;5";
         String givenCustomSeparator = ";;;;";
         String[] expected = new String[]{"1", "2", "3", "4", "5"};
-        StringDivider stringDivider = new StringDivider(givenCustomSeparator);
+        StringDivider stringDivider = new StringDivider(givenCustomSeparator,givenString);
 
-        String[] result = stringDivider.divideStringBy(givenString);
+        String[] result = stringDivider.divideStringBy();
         assertArrayEquals(expected, result);
     }
 

@@ -5,24 +5,22 @@ public class Application {
     public static void main(String[] args) {
         InputHandler inputHandler = new InputHandler();
         String input = inputHandler.getInput();
-        SeparatorParser separatorParser = new SeparatorParser(input);
-        if (separatorParser.isCustomSeparatorExist()) {
-            String mathExpression = separatorParser.getMathematicalExpression();
-            String customSeparator = separatorParser.getCustomSeparator();
-            StringDivider stringDivider = new StringDivider(customSeparator);
-            String[] dividedNum = stringDivider.divideStringBy(mathExpression);
-            Calculator calculator = new Calculator();
-            int result = calculator.sum(dividedNum);
-            OutputHandler outputHandler = new OutputHandler();
-            outputHandler.printResult(result);
-            return;
-        }
-        StringDivider stringDivider = new StringDivider();
-        String[] dividedNum = stringDivider.divideStringBy(input);
+        StringDivider stringDivider = createStringDivider(input);
+        String[] dividedNum = stringDivider.divideStringBy();
         Calculator calculator = new Calculator();
         int result = calculator.sum(dividedNum);
         OutputHandler outputHandler = new OutputHandler();
         outputHandler.printResult(result);
+    }
+
+    private static StringDivider createStringDivider(String input) {
+        SeparatorParser separatorParser = new SeparatorParser(input);
+        if (separatorParser.isCustomSeparatorExist()) {
+            String customSeparator = separatorParser.getCustomSeparator();
+            String mathExpression = separatorParser.getMathematicalExpression();
+            return new StringDivider(customSeparator, mathExpression);
+        }
+        return new StringDivider(input);
     }
 
 }

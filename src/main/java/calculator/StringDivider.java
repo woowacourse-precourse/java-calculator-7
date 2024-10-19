@@ -4,15 +4,19 @@ public class StringDivider {
     private static final String DEFAULT_SEPARATOR = ":|,";
     private final String separator;
 
-    public StringDivider() {
+    private final String mathExpression;
+
+    public StringDivider(String mathExpression) {
         this.separator = DEFAULT_SEPARATOR;
+        this.mathExpression = mathExpression;
     }
 
-    public StringDivider(String customSeparator) {
+    public StringDivider(String customSeparator, String mathExpression) {
         this.separator = DEFAULT_SEPARATOR + "|" + customSeparator;
+        this.mathExpression = mathExpression;
     }
 
-    public String[] divideStringBy(String givenString) {
-        return givenString.split(this.separator);
+    public String[] divideStringBy() {
+        return mathExpression.split(this.separator);
     }
 }
