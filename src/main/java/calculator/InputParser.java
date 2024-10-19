@@ -2,27 +2,26 @@ package calculator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class InputParser {
 
-    public void getCustomParser(InputString inputString) {
+    public Character getCustomParser(String input) {
         Character separator = null;
-        String input = inputString.getInput();
         if (input.startsWith("//")) {
             separator = input.charAt(2);
         }
-        inputString.setSeparator(separator);
+        return separator;
     }
 
-    public void getIntegerList(InputString inputString){
-        String input = inputString.getInput();
+    public List<Integer> getIntegerList(String input, Set<Character> separators){
         if (input.startsWith("//")) {
             input = input.substring(5);
         }
 
         List<String> parsedOperand = new ArrayList<>();
         for (char character : input.toCharArray()) {
-            if(inputString.getSeparator().contains(character)) {
+            if(separators.contains(character)) {
                 String operand = input.substring(0, input.indexOf(character));
                 parsedOperand.add(operand);
                 input = input.substring(input.indexOf(character) + 1);
@@ -30,12 +29,15 @@ public class InputParser {
         }
         parsedOperand.add(input);
 
+        List<Integer> integerList = new ArrayList<>();
         try{
             for(String s : parsedOperand){
-                inputString.addOperand((Integer.parseInt(s)));
+                integerList.add(Integer.parseInt(s));
             }
         }catch (NumberFormatException e){
             CheckForm.throwException();
         }
+
+        return integerList;
     }
 }

@@ -1,6 +1,5 @@
 package calculator;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -8,34 +7,39 @@ import java.util.Set;
 public class InputString {
 
     private final String input;
-    private Set<Character> customSeparator;
-    private final List<Integer> operands;
+    private Set<Character> customSeparators;
+    private List<Integer> operands;
 
     public InputString(String input){
         this.input = input;
-        this.operands = new ArrayList<>();
-        this.customSeparator = new HashSet<>();
-        customSeparator.add(',');
-        customSeparator.add(':');
+        this.customSeparators = new HashSet<>();
+        customSeparators.add(',');
+        customSeparators.add(':');
+
+        setCustomSeparator();
+        setOperands();
     }
 
     public String getInput() {
         return input;
     }
 
-    public void setSeparator(Character separator) {
-        customSeparator.add(separator);
-    }
-
     public Set<Character> getSeparator() {
-        return customSeparator;
-    }
-
-    public void addOperand(Integer operand) {
-        this.operands.add(operand);
+        return customSeparators;
     }
 
     public List<Integer> getOperands() {
         return operands;
+    }
+
+    private void setCustomSeparator(){
+        InputParser inputParser = new InputParser();
+        Character customSeparator = inputParser.getCustomParser(input);
+        customSeparators.add(customSeparator);
+    }
+
+    private void setOperands(){
+        InputParser inputParser = new InputParser();
+        operands = inputParser.getIntegerList(input, customSeparators);
     }
 }
