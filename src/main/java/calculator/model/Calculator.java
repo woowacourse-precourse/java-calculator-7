@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 public class Calculator {
     public static int add(String input) {
 
-        String separator = ",|:"; // 기본 구분자: 쉼표와 콜론
+        String separator = "[,:]"; // 기본 구분자: 쉼표와 콜론
         int sum = 0;
 
         // 커스텀 구분자
