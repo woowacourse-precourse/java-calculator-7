@@ -62,6 +62,21 @@ public class SeparatorTest extends NsTest {
         });
     }
 
+    @Test
+    void testSeparateMethod() {
+
+        assertSimpleTest(() -> {
+            String test1 = "//;\\n1;2,3:4";
+            String test2 = "1:2,3:4";
+
+            Separator obj = new Separator();
+            run(test2);
+
+            String[] result = obj.separate(test1);
+            assertThat(result).containsExactly("1", "2", "3", "4");
+        });
+    }
+
     @Override
     protected void runMain() {
 
