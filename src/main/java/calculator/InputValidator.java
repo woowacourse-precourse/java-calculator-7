@@ -6,6 +6,10 @@ public class InputValidator {
         // 인스턴스 생성 방지
     }
 
+    public static boolean isNullInput(String input) {
+        return input == null || input.isEmpty();
+    }
+
     public static void delimiterValidate(String delimiter) {
         try {
             Integer.parseInt(delimiter);

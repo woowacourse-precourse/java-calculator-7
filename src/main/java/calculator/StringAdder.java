@@ -45,7 +45,7 @@ public class StringAdder {
     }
 
     public int add(String input) {
-        if (input == null || input.isEmpty()) {
+        if (InputValidator.isNullInput(input)) {
             return 0;
         }
 
