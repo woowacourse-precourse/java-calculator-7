@@ -76,4 +76,16 @@ public class Input {
         return true;
     }
 
+    //사용자가 구분자를 연달아 쓰지 않았는지 검증
+    public static boolean validSequenceSeparator(String input){
+        for(char c : input.toCharArray()){
+            if(!Character.isDigit(c) && input.indexOf(c) != input.length()-1){
+                if(!Character.isDigit(input.charAt(input.indexOf(c)+1))){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 }
