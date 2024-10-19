@@ -22,6 +22,11 @@ public class Application {
         String input = Console.readLine();
         Console.close();
 
+        if (input.isBlank()) {
+            System.out.println(Constant.RESULT + 0);
+            return;
+        }
+
         //문자열 유효성 검사
         validator.validate(input);
 
