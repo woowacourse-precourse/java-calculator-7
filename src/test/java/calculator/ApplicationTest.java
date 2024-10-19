@@ -106,7 +106,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 잘못된_구분자3() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("1,231,5.73:231"))
+                assertThatThrownBy(() -> runException("1,231,5[73:231"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
@@ -337,7 +337,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_잘못된_구분자3() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//;\\n1,231,5.73:231"))
+                assertThatThrownBy(() -> runException("//;\\n1,231,5/73:231"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
