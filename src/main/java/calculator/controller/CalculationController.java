@@ -1,9 +1,9 @@
 package calculator.controller;
 
-import static calculator.service.container.SeparationServiceType.BASIC;
+import static calculator.container.SeparationServiceType.BASIC;
 
+import calculator.container.SeparationServiceContainer;
 import calculator.domain.Numbers;
-import calculator.service.container.SeparationServiceContainer;
 import calculator.service.operation.AddOperationService;
 import calculator.service.operation.OperationService;
 import calculator.view.InputView;
