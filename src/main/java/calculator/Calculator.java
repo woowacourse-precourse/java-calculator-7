@@ -27,7 +27,15 @@ public class Calculator {
     }
 
     public void isInputValid(String input) {
-
+        if (input.isEmpty()) {
+            return;
+        }
+        String regex = String.format("(//[^0-9]\\\\n)?([0-9]+)([%s]([0-9]+))*", separator);
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input);
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException();
+        }
     }
 
     public int calculate(String input) {
