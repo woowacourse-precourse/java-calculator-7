@@ -7,14 +7,17 @@ public class Application {
         try {
             System.out.println("덧셈할 문자열을 입력해 주세요.");
             String input = Console.readLine();
+
+            if(input.isEmpty()) {
+                System.out.println("결과 : " + 0);
+                return;
+            }
+
             String delimiter = "[,;]";
             String[] inputSplits = input.split(delimiter);
             int result = 0;
 
             for (String s : inputSplits) {
-                if(s.isEmpty()) {
-                    continue;
-                }
                 try{
                     int number = Integer.parseInt(s);
                     if(number < 0) {
