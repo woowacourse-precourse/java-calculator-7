@@ -2,15 +2,11 @@ package calculator;
 
 public class StringCalculation {
 
-    private final InputView inputView;
-    private final ResultView resultView;
-
-    StringCalculation(InputView inputView, ResultView resultView) {
-        this.inputView = inputView;
-        this.resultView = resultView;
-    }
-
     public void startCalculate() {
+
+        InputView inputView = new InputView();
+        ResultView resultView = new ResultView();
+
         StringProcessor stringProcessor = new StringProcessor();
 
         String[] splitedString = stringProcessor.splitWithCustomDelimiter(inputView.inputString());
