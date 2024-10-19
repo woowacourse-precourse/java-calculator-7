@@ -53,4 +53,8 @@ public class Delimiter {
     private String escapeSpecialRegexChars(String delimiter) {
         return delimiter.replaceAll("([\\[\\]\\\\.^$|?*+(){}])", "\\\\$1");
     }
+
+    public String getCustomDelimiter() {
+        return customDelimiter;
+    }
 }
