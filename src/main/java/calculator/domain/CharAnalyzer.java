@@ -1,5 +1,9 @@
 package calculator.domain;
 
+import calculator.domain.delimiter.CustomDelimiter;
+import calculator.domain.delimiter.Delimiter;
+import static calculator.domain.delimiter.DelimiterState.REGISTERED_DELIMITER;
+
 public class CharAnalyzer {
     private final String input;
     private final Delimiter delimiter;
@@ -24,11 +28,11 @@ public class CharAnalyzer {
     }
 
     private void analyzeNextChar() {
-        if (currentIndex >= input.length()) {
+        if (isEndOfInput()) {
             throw new IllegalStateException("문자열의 끝에 도달했습니다.");
         }
 
-        if (input.startsWith("//", currentIndex)) {
+        if (isCustomDelimiterStart()) {
             processCustomDelimiter();
             return;
         }
@@ -37,12 +41,28 @@ public class CharAnalyzer {
         currentIndex++;
 
         if (isPositiveNumber(currentChar)) {
-            numberGenerator.generator(currentChar);
-        } else if (isDelimiter(currentChar)) {
-            numberGenerator.isDelimiter(true);
+            processNumber(currentChar);
+        } else if (isRegisteredDelimiterChar(currentChar)) {
+            markDelimiter();
         } else {
             throw new IllegalArgumentException("입력 값은 구분자와 양수로 구성된 문자열이어야합니다.");
         }
+    }
+
+    private boolean isEndOfInput() {
+        return currentIndex >= input.length();
+    }
+
+    private boolean isCustomDelimiterStart() {
+        return input.startsWith("//", currentIndex);
+    }
+
+    private void processNumber(char currentChar) {
+        numberGenerator.generator(currentChar);
+    }
+
+    private void markDelimiter() {
+        numberGenerator.isDelimiter(REGISTERED_DELIMITER.getState());
     }
 
     private void processCustomDelimiter() {
@@ -54,8 +74,7 @@ public class CharAnalyzer {
         return Character.isDigit(ch) && ch > '0';
     }
 
-    private boolean isDelimiter(char ch) {
+    private boolean isRegisteredDelimiterChar(char ch) {
         return delimiter.isRegisteredDelimiter(ch);
     }
-
 }

@@ -1,5 +1,7 @@
 package calculator.domain;
 
+import calculator.domain.delimiter.CustomDelimiter;
+import calculator.domain.delimiter.Delimiter;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
