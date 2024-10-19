@@ -1,13 +1,13 @@
-package calculator;
+package calculator.delimiter;
 
 
-public class DelimiterManager {
+public class DelimiterService {
     private DefaultDelimiter defaultDelimiter;
     private CustomDelimiter customDelimiter;
 
-    public DelimiterManager(DefaultDelimiter defaultSeparator, CustomDelimiter customDelimiter) {
-        this.defaultDelimiter = defaultSeparator;
-        this.customDelimiter = customDelimiter;
+    public DelimiterService() {
+        this.defaultDelimiter = new DefaultDelimiter();
+        this.customDelimiter = new CustomDelimiter();
     }
 
     public String[] generateString(String input) {
