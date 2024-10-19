@@ -35,8 +35,8 @@ public class CalculatorService {
      * @return 숫자 리스트
      */
     public List<Integer> convertToNumbers(String[] parts) {
-        return Arrays.stream(parts).
-                map(part -> {
+        return Arrays.stream(parts)
+                .map(part -> {
                     try {
                         int value = 0;
                         if (!part.isEmpty()) {
