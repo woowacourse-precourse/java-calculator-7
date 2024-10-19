@@ -37,7 +37,7 @@ public class Application {
         try {
             if(str.startsWith("//")) {
                 System.out.println(app.custom(str));
-            } else if(str!=null && str.isEmpty()) {
+            } else if(str.isEmpty()) {
                 System.out.println("0");
             } else {
                 System.out.println(app.separate(str));
