@@ -3,6 +3,7 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.HashSet;
 import java.util.NoSuchElementException;
+import java.util.regex.Pattern;
 
 public class Application {
 
@@ -25,26 +26,36 @@ public class Application {
         int result = 0;
         initDelimiter();
 
-        if (isCustom(input)) {
-            char customDelimiter = input.charAt(2);
-            addDelimiter(customDelimiter);
-
-            input = input.substring(input.indexOf("\n") + 1);
-        }
         result = getResult(input, result);
 
         return result;
     }
 
-    private static boolean isCustom(String input) {
-        return input.startsWith("//") && input.charAt(3) == 92 && input.charAt(4) == 'n';
+    private static boolean isCustom(String input, String start, char char1, char char2) {
+        return input.startsWith(start) &&
+                input.charAt(3) == char1 &&
+                input.charAt(4) == char2;
+    }
+
+    private static boolean expressValidation(String input) throws IllegalArgumentException {
+        String delimiter = getDelimitersToString();
+        return Pattern.matches("(\\d+([" + delimiter + "]\\d+)*|\\d+([" + delimiter + "]\\d+)*)?|", input);
     }
 
     private static int getResult(String input, int result) {
-        String[] numbers = splitInput(input);
-        if (isCustom(input)) {
-            numbers = splitInput(input.substring(5));
+        String inputAdapter = input;
+        if (isCustom(input, "//", '\\', 'n')) {
+            addDelimiter(input.charAt(2));
+            inputAdapter = input.substring(5);
         }
+
+        try {
+            expressValidation(inputAdapter);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage() + "잘못된 입력입니다.");
+        }
+
+        String[] numbers = splitInput(inputAdapter);
 
         for (String number : numbers) {
             if (!number.isEmpty()) {
@@ -90,5 +101,13 @@ public class Application {
             return integerValue;
         }
         throw new IllegalArgumentException("음수의 값이 들어왔습니다.");
+    }
+
+    public static String getDelimitersToString() {
+        StringBuilder result = new StringBuilder();
+        for (Character delimiter : delimiters) {
+            result.append(delimiter);
+        }
+        return result.toString();
     }
 }
