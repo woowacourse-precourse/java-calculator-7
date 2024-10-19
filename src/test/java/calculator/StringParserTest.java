@@ -3,6 +3,7 @@ package calculator;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class StringParserTest {
@@ -44,4 +45,80 @@ class StringParserTest {
         assertThat(stringParser.getDelimiters()).hasSize(2);
     }
 
+    @Test
+    void 적절한_입력이_들어왔을_때_정규표현식이_올바르게_추출된다() {
+        // given
+        StringParser stringParser = new StringParser();
+        String input = "//;\n1;2;3";
+        stringParser.addDelimiterFromInput(input);
+
+        // when
+        List<String> numbers = stringParser.split(input);
+
+        // then
+        assertThat(numbers).isEqualTo(List.of("1", "2", "3"));
+    }
+
+    @Test
+    void 적절한_입력이_들어왔을_때_정규표현식이_올바르게_추출된다2() {
+        // given
+        StringParser stringParser = new StringParser();
+        String input = "//&\n1&2&3";
+        stringParser.addDelimiterFromInput(input);
+
+        // when
+        List<String> numbers = stringParser.split(input);
+
+        // then
+        assertThat(numbers).isEqualTo(List.of("1", "2", "3"));
+    }
+
+    @Test
+    void 적절한_입력이_들어왔을_때_정규표현식이_올바르게_추출된다3() {
+        StringParser stringParser = new StringParser();
+        String input = "1,2,3";
+        stringParser.addDelimiterFromInput(input);
+
+        List<String> numbers = stringParser.split(input);
+
+        assertThat(numbers).isEqualTo(List.of("1", "2", "3"));
+    }
+
+    @Test
+    void 적절한_입력이_들어왔을_때_정규표현식이_올바르게_추출된다4() {
+        StringParser stringParser = new StringParser();
+        String input = "";
+        stringParser.addDelimiterFromInput(input);
+
+        List<String> numbers = stringParser.split(input);
+
+        assertThat(numbers).isEqualTo(List.of(""));
+    }
+
+    @Test
+    void 문자열을_입력받아_숫자열로_변환한다() {
+        StringParser stringParser = new StringParser();
+        String input = "1,2,3";
+        stringParser.addDelimiterFromInput(input);
+
+        List<String> numbers = stringParser.split(input);
+
+        assertThat(numbers).isEqualTo(List.of(1, 2, 3));
+    }
+
+    @Test
+    void 문자열을_입력받아_숫자열로_변환하다_숫자가_아닌_문자가_들어오면_IllegalArgumentException이_발생한다() {
+        StringParser stringParser = new StringParser();
+        String input = "1,2,a";
+
+        assertThrows(IllegalArgumentException.class, () -> stringParser.split(input));
+    }
+
+    @Test
+    void 문자열을_입력받아_숫자열로_변환하다_음수가_들어오면_IllegalArgumentException이_발생한다() {
+        StringParser stringParser = new StringParser();
+        String input = "1,2,-3";
+
+        assertThrows(IllegalArgumentException.class, () -> stringParser.split(input));
+    }
 }
