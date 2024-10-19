@@ -14,11 +14,11 @@ public class Controller {
 
     public void calculate() {
         final int INIT_VALUE = 0;
-
         String calculationValue = inputView.inputCalculationValue(outputView);
         if (calculationValue.isEmpty()) {
             outputView.printResultValue(INIT_VALUE);
-        } else if (!calculationValue.isEmpty()) {
+        }
+        else if (!calculationValue.isEmpty()) {
             extractor.extractValues(calculationValue);
             Numbers numbers = extractor.extractValues(calculationValue);
             int resultValue = calculator.plusCalculator(numbers);
