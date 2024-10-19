@@ -2,7 +2,7 @@ package calculator;
 
 public class Validator {
     public boolean hasCustomSeparator(String input) {
-        return input.startsWith("//") && input.contains("\n");
+        return input.startsWith("//") && input.contains("\\n");
     }
 
     public boolean isStartWithDigit(String input) {
@@ -25,15 +25,15 @@ public class Validator {
     }
 
     public void validateInput(String input) {
-        if (input.isBlank()) { // 공백일 때
+        if (input.isBlank()) {
             return;
         }
-        if (hasCustomSeparator(input)) { // //로 시작해 \n이 있을 때
+        if (hasCustomSeparator(input)) {
             return;
         }
-        if (isStartWithDigit(input) && (!input.contains("//") && !input.contains("\n"))) {
+        if (isStartWithDigit(input) && (!input.contains("//") && !input.contains("\\n"))) {
             return;
         }
-        throw new IllegalArgumentException("포멧에 맞게 입력해 주세요.(ex://@\n1@2:3,4)");
+        throw new IllegalArgumentException("포멧에 맞게 입력해 주세요.(ex://@\\n1@2:3,4)");
     }
 }
