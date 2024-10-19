@@ -4,10 +4,10 @@ import java.util.NoSuchElementException;
 
 public class CalculatorController {
     private final Calculator calculator;
-    private final InputView view;
+    private final View view;
 
     // 생성자
-    public CalculatorController(Calculator calculator, InputView view) {
+    public CalculatorController(Calculator calculator, View view) {
         this.calculator = calculator;
         this.view = view;
     }
