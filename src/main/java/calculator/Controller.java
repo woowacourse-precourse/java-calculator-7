@@ -5,7 +5,7 @@ public class Controller {
   public static void run() {
     String input = Console.readLine();
 
-    int result = 0;
+    int result = PlusCalculator.calculateSum(input);
 
     System.out.println(result);
   }
