@@ -53,7 +53,7 @@ public class StringCalculator {
         String[] splitedInput = splitter.splitedByDelimiters(input, defaultDelimiters, regexGenerator);
 
         //3. 추출한 문자열을 숫자로 변환한다.
-        List<Number> numbers = numberConvertible.convertStringToNumber(splitedInput);
+        List numbers = numberConvertible.convertStringToNumber(splitedInput);
 
         // 4. 구한 숫자들을 더한 값을 출력한다.
         consoleOutputHandler.printResult(addable.addNumbers(numbers));

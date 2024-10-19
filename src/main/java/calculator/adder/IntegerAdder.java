@@ -2,12 +2,12 @@ package calculator.adder;
 
 import java.util.List;
 
-public class IntegerAdder implements Addable {
+public class IntegerAdder implements Addable<Integer> {
 
     private static final Integer MAX_VALUE = Integer.MAX_VALUE;
 
     @Override
-    public Integer addNumbers(final List<Number> numbers) {
+    public Integer addNumbers(final List<Integer> numbers) {
         int sum = 0;
         for (Number number : numbers) {
             sum = addSafely(sum, number.intValue());
