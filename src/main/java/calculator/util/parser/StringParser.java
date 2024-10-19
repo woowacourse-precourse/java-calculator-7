@@ -7,4 +7,6 @@ public interface StringParser {
     String removeCustomDelimiterFormat(final String str);
 
     String[] extractTokens(final String str);
+
+    String getDelimiterRegex(final String customDelimiter);
 }
