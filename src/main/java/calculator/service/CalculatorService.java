@@ -6,17 +6,17 @@ public class CalculatorService {
 
     public String calculateSumFormString(String inputString) {
 
-        List<String> delimiters = setDelimiter(inputString);
+        String delimiters = setDelimiter(inputString);
         return inputString;
     }
 
-    public List<String> setDelimiter(String inputString) {
+    public String setDelimiter(String inputString) {
         if (isCustomDelimiter(inputString)) {
             String customDelimiter = parseCustomDelimiter(inputString);
             validCustomDelimiter(customDelimiter);
-            return List.of(",", ":", customDelimiter);
+            return "[,:" + customDelimiter + "]";
         }
-        return List.of(",", ":");
+        return "[,:]";
     }
 
     public void validCustomDelimiter(String delimiter) {
