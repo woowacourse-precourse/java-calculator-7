@@ -8,7 +8,7 @@ public class MainCalculator {
     private final AddCalculator addCalculator;
     private final StringSplitter stringSplitter;
 
-    private MainCalculator(AddCalculator addCalculator, StringSplitter stringSplitter) {
+    public MainCalculator(AddCalculator addCalculator, StringSplitter stringSplitter) {
         this.addCalculator = addCalculator;
         this.stringSplitter = stringSplitter;
     }
