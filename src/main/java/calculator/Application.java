@@ -18,6 +18,29 @@ public class Application {
         }
     }
 
+    private void extractNumbers(String input, List<Long> numbers) {
+        if(isCustomDelimiter) {
+            input = input.substring(5);
+        }
+        StringBuilder regex = new StringBuilder("[");
+        for (char delimiter : delimiters) {
+            regex.append("\\").append(delimiter);
+        }
+        regex.append("]");
+
+        // 구분자를 기준으로 문자열을 숫자들로 분리
+        String[] tokens = input.split(regex.toString());
+        for (String token : tokens) {
+            if (!token.isEmpty()) {
+                try {
+                    numbers.add(Long.parseLong(token));
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("잘못된 입력입니다.");
+                }
+            }
+        }
+    }
+
     public void startApplication() {
         List<Long> numbers = new ArrayList<>();
 
