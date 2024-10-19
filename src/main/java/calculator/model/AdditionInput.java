@@ -6,12 +6,12 @@ import java.util.regex.Pattern;
 
 public class AdditionInput {
     private static final String customDelimiterFormat = "^//.*\\\\n";
-    private static final Pattern customDelimiterPattern = Pattern.compile("^//(.*)\\\\n.*$");
+    private static final Pattern customDelimiterPattern = Pattern.compile("^//(.*)\\\\n");
     private final String customDelimiter;
     private Number[] numbers;
     public AdditionInput(String input){
         customDelimiter = findCustomDelimiter(input).orElse("");
-        if (customDelimiter.isBlank()){
+        if (!customDelimiter.isBlank()){
             input = removeCustomDelimiter(input);
         }
         String[] strings = splitStrings(input, customDelimiter);
@@ -23,7 +23,7 @@ public class AdditionInput {
 
     private Optional<String> findCustomDelimiter(String input){
         Matcher matcher = customDelimiterPattern.matcher(input);
-        if (matcher.matches()) {
+        if (matcher.find()) {
             String delimiter = matcher.group(1);
             return Optional.ofNullable(delimiter);
         }
