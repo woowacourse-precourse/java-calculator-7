@@ -13,10 +13,24 @@ public class Application {
         return Console.readLine();
     }
 
-    
+    // 커스텀 구분자 유무를 판단하기
+    private static boolean checkCustomDelimiter(String str) {
+        if (str.startsWith("//")) {
+            int delimiterEndIndex = str.indexOf("\n");
+            if (delimiterEndIndex == -1) {
+                throw new IllegalArgumentException("잘못된 입력 형식입니다.");
+            }
+            else return true;
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         init_print();
         String str = input();
+        if(checkCustomDelimiter(str)) {
+
+        }
     }
 }
