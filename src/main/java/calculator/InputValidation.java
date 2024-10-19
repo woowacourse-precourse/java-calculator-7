@@ -42,8 +42,11 @@ public class InputValidation { // 입력의 유효성을 확인하는 클래스�
     //입력된 값이 숫자인지 그 유효성을 확인하는 메서드이다.
     public static void CheckNumber(String buffer) {
         try {
-            Integer.parseInt(buffer); // 입력이 숫자가 아니라면 예외를 터뜨린다.
-        } catch (NumberFormatException e) {
+            int number = Integer.parseInt(buffer); // 입력이 숫자가 아니라면 예외를 터뜨린다.
+            if (number < 0) { // 음수인지 확인
+                throw new IllegalArgumentException("유효하지 않은 입력입니다: 음수는 허용되지 않습니다.");
+                }
+            } catch (NumberFormatException e) {
             throw new NumberFormatException("유효하지 않은 입력입니다.");
         }
     }
