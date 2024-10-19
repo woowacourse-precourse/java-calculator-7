@@ -23,14 +23,15 @@ public class StringAdditionController {
     }
 
     public void run() {
-        Optional<String> input = inputHandler.input();
+        inputHandler.input()
+                .ifPresentOrElse(
+                        this::processInput,
+                        () -> resultPrinter.printResult(ZERO)
+                );
+    }
 
-        if (input.isEmpty()) {
-            resultPrinter.printResult(ZERO);
-            return;
-        }
-
-        String[] stringNumbers = delimiterProcessor.extractNumberStrings(input.get());
+    private void processInput(String input) {
+        String[] stringNumbers = delimiterProcessor.extractNumberStrings(input);
         int sum = stringSumCalculator.sumStringNumbers(stringNumbers);
         resultPrinter.printResult(sum);
     }
