@@ -1,17 +1,21 @@
 package calculator.domain;
 
 import calculator.global.ui.InputView;
-import calculator.global.ui.OutView;
-import camp.nextstep.edu.missionutils.Console;
+import calculator.global.ui.OutputView;
 
 public class Calculator {
 
-    InputView inputView = new InputView();
-    OutView outView = new OutView();
+    private final InputView inputView;
+    private final OutputView outputView;
+
+    public Calculator() {
+        inputView = new InputView();
+        outputView = new OutputView();
+    }
 
     public void run() {
-        outView.startMessage();
-        outView.resultMessage(sum(inputView.parseIntNumbers(Console.readLine())));
+        outputView.startMessage();
+        outputView.resultMessage(sum(getNumbers(inputString())));
     }
 
     private int sum(int[] numbers) {
@@ -20,5 +24,13 @@ public class Calculator {
             sum += number;
         }
         return sum;
+    }
+
+    private String inputString() {
+        return inputView.inputString();
+    }
+
+    private int[] getNumbers(String input) {
+        return inputView.parseIntNumbers(input);
     }
 }
