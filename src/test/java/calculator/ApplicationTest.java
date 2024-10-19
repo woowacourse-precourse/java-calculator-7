@@ -121,6 +121,22 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 지정되지않은_구분자_사용_실패_케이스1() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\\n1;2,3:4?5"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 지정되지않은_구분자_사용_실패_케이스2() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,2,3:4?5"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
     void 양수_판별_실패_케이스1() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1,2,3:1.743,5"))
