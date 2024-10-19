@@ -46,4 +46,10 @@ class StringAddCalculatorTest {
         assertThatThrownBy(() -> stringAddCalculator.splitAndSum("일,2:3"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 공백_입력시_0반환() {
+        StringAddCalculator stringAddCalculator = new StringAddCalculator();
+        assertThat(stringAddCalculator.splitAndSum("")).isEqualTo(0);
+    }
 }
