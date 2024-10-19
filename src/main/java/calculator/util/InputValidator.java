@@ -8,7 +8,7 @@ public class InputValidator {
     public static Long validateOnlyPlainNumber(String text) {
         try {
             return Long.valueOf(text);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException numberFormatException) {
             throw new IllegalArgumentException(InvalidInputConstants.WRONG_DELIMITER);
         }
     }
