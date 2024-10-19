@@ -56,12 +56,7 @@ public class Calculator {
         StringBuilder regexBuilder=new StringBuilder();
         //커스텀 구분자가 | 이라면 이스케이프문자를 추가해햐 한다
         if (customSeperator.equals("|")){
-            StringBuilder seperatorBuilder=new StringBuilder();
-
-            seperatorBuilder.append("\\");
-            seperatorBuilder.append(customSeperator);
-
-            customSeperator=customSeperator.toString();
+            customSeperator=addEscapeChar(customSeperator);
         }
 
         regexBuilder.append(seperatorRegex);
@@ -69,6 +64,16 @@ public class Calculator {
         regexBuilder.append(customSeperator);
 
        seperatorRegex=regexBuilder.toString();
+    }
+
+    private static String addEscapeChar(String customSeperator){
+        StringBuilder seperatorBuilder=new StringBuilder();
+
+        seperatorBuilder.append("\\");
+        seperatorBuilder.append(customSeperator);
+
+        return customSeperator.toString();
+
     }
 
     private static void checkBadSeperator(String customSeperator) {
