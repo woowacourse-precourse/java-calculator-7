@@ -16,4 +16,13 @@ class CalculationResultTest {
         assertThat(result).isEqualTo(expectedResult);
     }
 
+    @Test
+    void toString_테스트() {
+        int result = 6;
+        CalculationResult calculationResult = new CalculationResult(result);
+
+        String resultString = calculationResult.toString();
+
+        assertThat(resultString).isEqualTo("결과 : 6");
+    }
 }
