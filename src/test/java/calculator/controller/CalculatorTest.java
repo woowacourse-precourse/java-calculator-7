@@ -34,6 +34,19 @@ public class CalculatorTest {
     }
 
     @Test
+    @DisplayName("커스텀 구분자와 기본 구분자 모두 포함된 문자열을 계산")
+    void testCalculateWithCustomAndDefaultDelimiters() {
+        // given
+        String input = "//;\\n1;2,3";
+
+        // when
+        int result = ExpressionCalculator.calculate(input);
+
+        // then
+        assertEquals(6, result);
+    }
+
+    @Test
     @DisplayName("구분자 없이 숫자만 입력")
     void testCalculateWithNoDelimiter() {
         // given
