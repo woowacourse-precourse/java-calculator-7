@@ -9,8 +9,8 @@ import java.util.Stack;
 public class Calculator {
     private String inputString;
     private String removedString = "";
-    private List<String> separator = new ArrayList<>();
-    private List<Integer> operand = new ArrayList<>();
+    private final List<String> separator = new ArrayList<>();
+    private final List<Integer> operand = new ArrayList<>();
 
     /**
      * 사용자 입력
@@ -25,13 +25,13 @@ public class Calculator {
      * 커스텀 구분자 유뮤
      * 커스텀 구분자 짝 맞는지 확인 후 파싱
      */
-    private boolean parseCustomSeparator() {
+    private void parseCustomSeparator() {
         Stack<String> buffer = new Stack<>();
         boolean flag = false;
         int idx = 0;
 
         for (int i = 0; i <= inputString.length() - 1; i++) {
-            if (flag == false && (inputString.charAt(i) == '/' && inputString.charAt(i + 1) == '/')) {
+            if (!flag && (inputString.charAt(i) == '/' && inputString.charAt(i + 1) == '/')) {
                 buffer.push(inputString.substring(i, i + 2));
                 separator.add("");
                 flag = true;
@@ -44,7 +44,7 @@ public class Calculator {
                 flag = false;
                 i += 1;
             } else {
-                if (flag == true) {
+                if (flag) {
                     separator.set(idx, separator.get(idx) + inputString.charAt(i));
                 } else {
                     removedString += inputString.charAt(i);
@@ -55,10 +55,6 @@ public class Calculator {
         if (!buffer.isEmpty()) {
             throw new IllegalArgumentException("커스텀 구분자의 짝이 맞지 않습니다.");
         }
-        if (separator.isEmpty()) {
-            return false;
-        } else
-            return true;
     }
 
     /**
@@ -88,7 +84,6 @@ public class Calculator {
      * 피연산자 파싱하여 operand 배열에 저장
      */
     private void parseOperand() {
-        String tmpString = removedString;
         String tmpOperand = "";
 
         for (int i = 0; i < removedString.length(); i++) {
