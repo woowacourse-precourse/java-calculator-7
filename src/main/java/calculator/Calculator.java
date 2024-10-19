@@ -1,4 +1,6 @@
 package calculator;
+import org.junit.jupiter.api.DisplayName;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,30 +13,18 @@ public class Calculator {
     private List<String> parts;
 
     public Calculator(String input) {
-        if(input.isEmpty() || !input.matches(".*\\d.*")) {
-            System.out.println("결과 : 0");
-        }
-
-        if(input.matches(".*-\\d.*")){
-            throw new IllegalArgumentException("음수값이 포함되면 안됩니다.");
-        }
-
         this.No_Space_Input = input.replaceAll("\\s+", "");
     }
-    /*
-    public void print(){
-        Custom_Deli(); // 커스텀 구분자 추가
-        split_input(); // 커스텀 구분자 구문 삭제된 문자열에서 구분자를 이용해 문자열 구분 후 parts 리스트 저장
-        double_check(parts); // 구분자로 나뉜 문자열 실수형 체크
-        System.out.println(parts);
-        //System.out.println(Delimiter);
-        //System.out.println(del_deli_input);
-        //System.out.println(No_Space_Input);
-    }
-     */
 
     public void add(){
         double sum = 0;
+        if(isEmpty()){
+            System.out.println("결과 : 0");
+            return;
+        }
+        if(isNegative()){
+            throw new IllegalArgumentException("음수값이 포함되면 안됩니다.");
+        }
         Custom_Deli(); // 커스텀 구분자 추가
         split_input(); // 커스텀 구분자 구문 삭제된 문자열에서 구분자를 이용해 문자열 구분 후 parts 리스트 저장
         double_check(parts); // 구분자로 나뉜 문자열 실수형 체크
@@ -42,6 +32,14 @@ public class Calculator {
             sum += Double.parseDouble(num);
         }
         System.out.println("결과 : " + sum);
+    }
+
+    public boolean isEmpty(){
+        return (No_Space_Input.isEmpty() || !No_Space_Input.matches(".*\\d.*"));
+    }
+
+    public boolean isNegative(){
+        return No_Space_Input.matches(".*-\\d.*");
     }
 
     public void Custom_Deli(){
