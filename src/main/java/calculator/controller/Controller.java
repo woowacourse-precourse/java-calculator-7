@@ -7,19 +7,23 @@ import calculator.logic.Validation;
 import calculator.io.Input;
 import calculator.io.Output;
 
+import static calculator.logic.CustomChecker.isCustom;
+
 public class Controller {
     public void execution() {
-        // 값을 입력받고
+        // 값을 입력받고 (완료)
         String str = Input.inputString();
-        // 유효성 검증을 하고
+        // 유효성 검증을 하고 (비어있는 경우에는 그냥 종료)
+        if (str.isEmpty()) {
+            Output.printOutMessage(0);
+            return;
+        }
         Validation.execution(str);
-        // 문제가 없다면 커스텀 검사를 하고
-        CustomChecker.isCustom(str);
-        // 추출된 문자가 있다면 그 문자를 함께, 없다면 원래 문자를 분리하고
-        Delimiter.execution();
-        //값을 더하고 나서
-        Sum.execution();
-        // 출력값에 전달한다
-        Output.printOutMessage(str);
+        // 문자와 숫자를 분리한다. (완료)
+        String[] delimitedValues =  Delimiter.execution(str, isCustom(str));
+        // 문자와 분리된 수를 더 한다. (완료)
+        int sumVal = Sum.doSummation(delimitedValues);
+        // 더한 값을 출력한다. (완료)
+        Output.printOutMessage(sumVal);
     }
 }
