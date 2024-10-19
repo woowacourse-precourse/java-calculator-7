@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class Calculator {
@@ -8,6 +10,22 @@ public class Calculator {
     private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
     private static final int CUSTOM_DELIMITER_START_INDEX = 2;
     private static final String DEFAULT_DELIMITER = "[,|:]";
+    private static final String POSITIVE_NUMBER = "^[1-9]\\d*$";
+
+    public List<Integer> extractValidNumbers(String[] splitValues) {
+        List<Integer> numbers = new ArrayList<>();
+        for (String splitValue : splitValues) {
+            if (isNumeric(splitValue)) {
+                numbers.add(Integer.parseInt(splitValue));
+            }
+        }
+        return numbers;
+    }
+
+    // 양수를 표현하는 정규식 표현을 이용해 숫자인 경우 true 반환
+    public boolean isNumeric(String splitUSerInput) {
+        return splitUSerInput.matches(POSITIVE_NUMBER);
+    }
 
     public String[] splitByDelimiter(String userInput, String customDelimiter) {
         String numbersPart = extractNumbersPart(userInput, customDelimiter);
