@@ -84,8 +84,8 @@ class ApplicationTest extends NsTest {
     @Test
     void 음수_예외_테스트() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
