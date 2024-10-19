@@ -1,5 +1,6 @@
 package calculator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Parser {
@@ -54,7 +55,33 @@ public class Parser {
         return true;
     }
 
-    public List<Integer> parseIntegers(String input, Character delimiter) {
-        return List.of(1, 2, 3);
+    /**
+     * 입력에서 숫자를 리스트로 파싱하는 함수
+     * @param input 입력 문자열
+     * @param customDelimiter 커스텀 구분자
+     * @return List 입력된 숫자 리스트
+     */
+    public List<Integer> parseIntegers(String input, Character customDelimiter) {
+        String integersAndDelimiters = null;
+
+        // customDelimiter가 존재하는 경우 = //*\n이 존재하는 경우
+        if (customDelimiter != null) {
+            int lastIndex = input.lastIndexOf("\n");
+            integersAndDelimiters = input.substring(lastIndex + 1);
+        }
+
+        // customDelimiter가 존재하지 않는 경우 = 바로 숫자부터 시작하는 경우
+        integersAndDelimiters = input;
+        List<Integer> integers = new ArrayList<>();
+        try {
+            String[] integerStrs = integersAndDelimiters.split(",|:");
+            for (String integerStr : integerStrs) {
+                integers.add(Integer.parseInt(integerStr));
+            }
+        } catch (Exception e) {
+            throw new IllegalArgumentException("올바르지 않은 문법입니다.");
+        }
+
+        return integers;
     }
 }
