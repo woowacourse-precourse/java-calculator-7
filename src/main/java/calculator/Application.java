@@ -3,6 +3,7 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Application {
     public static void main(String[] args) {
@@ -23,6 +24,7 @@ public class Application {
             return null;
         }
         if (input.startsWith("//") && input.contains("\\n")) {
+
             int endIndex = input.indexOf("\\n");
             String number = input.substring(endIndex + 2);
             String custom_Delimiters = input.substring(2, endIndex);
@@ -33,7 +35,7 @@ public class Application {
             if (number.isEmpty()) {
                 return null;
             }
-            return number.split(custom_Delimiters);
+            return number.split(Pattern.quote(custom_Delimiters));
         }
         return input.split(default_Delimiters);
     }
