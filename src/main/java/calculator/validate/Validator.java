@@ -22,4 +22,10 @@ public class Validator {
             throw new CustomException(ErrorMessage.INVALID_CUSTOM_DELIMITER);
         }
     }
+
+    public static void containsNumber(String delimiter){
+        if(delimiter.matches(".*\\d.*")){
+            throw new CustomException(ErrorMessage.INVALID_CUSTOM_DELIMITER);
+        }
+    }
 }

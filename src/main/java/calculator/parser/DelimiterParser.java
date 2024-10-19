@@ -12,8 +12,9 @@ public class DelimiterParser {
             int index = input.indexOf(DELIMITER_END);
 
             Validator.checkCustomDelimiter(index);
-
             String customDelimiter = input.substring(2, index);
+            Validator.containsNumber(customDelimiter);
+
             return DELIMITERS + "|" + customDelimiter;
         }
         return DELIMITERS;
