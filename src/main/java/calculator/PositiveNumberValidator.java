@@ -1,34 +1,26 @@
 package calculator;
 
 public class PositiveNumberValidator {
-    public int addCalculator(String[] tokens) {
-        int sum = 0;
+    public int[] validateNumber(String[] tokens) {
+        // 빈 문자열 or 숫자가 없는 경우 예외 처리
+        if (tokens == null || tokens.length == 1 && tokens[0].isEmpty()) {
+            return new int[]{0};
+        }
 
         int[] validatedNumbers = new int[tokens.length];
 
-        for (int i = 0; i < tokens.length; i++){
-            validatedNumbers[i] = isNumber(tokens[i]);
-        }
-
-        for (int i = 0; i < validatedNumbers.length; i++){
-            sum += validatedNumbers[i];
-        }
-
-        return sum;
-
-    }
-    private int isNumber(String token) {
-        try {
-            int number = Integer.parseInt(token);
-            if (number > 0){
-                return number;
+        for (int i = 0; i < tokens.length; i++) {
+            try {
+                int number = Integer.parseInt(tokens[i]);
+                if (number > 0) {
+                    validatedNumbers[i] = number;
+                } else {
+                    throw new IllegalArgumentException("The number must be positive: " + tokens[i]);
+                }
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid number format: " + tokens[i], e);
             }
-            else {
-                throw new IllegalArgumentException("The number must be positive " + token);
-            }
-
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid number format" + token);
         }
+        return validatedNumbers;
     }
 }
