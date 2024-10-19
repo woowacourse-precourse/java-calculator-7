@@ -13,16 +13,21 @@ public class Calculator {
         String[] numberArray = text.split(separators);
         for (int i=0;i<numberArray.length;i++){
             checkCondition(numberArray[i]);
-            int number = Integer.parseInt(numberArray[i]);
+            int number = checkBlank(numberArray[i]);
             result += number;
         }
         return result;
     }
 
     public void checkCondition(String number){
-        String regex = "^[1-9]\\d*$";
+        String regex = "^[1-9]\\d*$|";
         if (!number.matches(regex)) {
             throw new IllegalArgumentException();
         }
     }
+
+    public int checkBlank(String number){
+        return !number.isEmpty() ? Integer.parseInt(number) : 0;
+    }
+
 }
