@@ -11,36 +11,17 @@ public class InputView {
     private String inputName;
     private String customData;
 
-
-    public void setCustom(String customData) {
-        this.customData = customData;
+    public void readInputString() {
+        inputName = Console.readLine();
+        resultInput();
     }
 
     public String getCustom() {
         return customData;
     }
 
-    public void readInputString() {
-        inputName = Console.readLine();
-        resultInput();
-    }
-
-    public Boolean isCustom() {
-        /*조건문 분리 및 리팩토링 필요*/
-        if (inputName.length() > 4) {
-            String prefix = inputName.substring(0, 2);
-            String suffix = inputName.substring(3, 5);
-            String customData = inputName.substring(2, 3);
-            if (prefix.equals("//") && suffix.equals("\\n")) {
-                inputViewValidator.validateCustomNumeric(customData);
-                setCustom(customData);
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
+    public String getInputString() {
+        return inputName;
     }
 
     private void resultInput() {
@@ -49,7 +30,37 @@ public class InputView {
         }
     }
 
-    public String getInputString() {
-        return inputName;
+    private Boolean isCustom() {
+        if (!hasInputCustomLength()) {
+            return false;
+        }
+
+        if (!hasCustomDelimeter()) {
+            return false;
+        }
+
+        inputViewValidator.validateCustomNumeric(getParsingCustom());
+        setCustom(getParsingCustom());
+
+        return true;
     }
+
+    private void setCustom(String customData) {
+        this.customData = customData;
+    }
+
+    private boolean hasInputCustomLength() {
+        return inputName.length() > 4;
+    }
+
+    private boolean hasCustomDelimeter() {
+        String prefix = inputName.substring(0, 2);
+        String suffix = inputName.substring(3, 5);
+        return prefix.equals("//") && suffix.equals("\\n");
+    }
+
+    private String getParsingCustom() {
+        return inputName.substring(2, 3);
+    }
+
 }
