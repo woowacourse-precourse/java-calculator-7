@@ -1,6 +1,8 @@
 package calculator;
 
-import java.util.ArrayList;
+import java.math.BigInteger;
+import java.util.Arrays;
+
 import camp.nextstep.edu.missionutils.*;
 
 public class Application {
@@ -30,6 +32,7 @@ public class Application {
                     i++;
                 } else {
                     tempCustomString.append(input.charAt(i));
+
                 }
             }
         }
@@ -38,7 +41,13 @@ public class Application {
             throw new IllegalArgumentException("커스텀 구분자가 닫혀 있지 않습니다.");
         }
 
-        String[] numbers = rest.split("[:,]");
+        String[] numbers = Arrays.stream(rest.split("[:,]")).map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .toArray(String[]::new);
+
+        if (numbers.length == 0) {
+            throw new IllegalArgumentException("숫자가 없습니다.");
+        }
 
         for (String number : numbers) {
             if (number.length() == 1 && number.charAt(0) == '0') {
@@ -50,5 +59,17 @@ public class Application {
                 }
             }
         }
+
+
+        String answer = numbers[0];
+        for (int i = 1; i < numbers.length; i++) {
+            System.out.println("numbers = " + numbers[i]);
+            String nowNumber = numbers[i];
+
+            answer = new BigInteger(answer).add(new BigInteger(nowNumber)).toString();
+        }
+
+
+        System.out.println("결과 : " + answer);
     }
 }
