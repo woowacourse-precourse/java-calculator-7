@@ -25,7 +25,22 @@ public class CustomDelimiterStrategy implements DelimiterStrategy {
     }
 
     private void validateAndParseNumbers(String[] tokens) {
-        
+        for (String token : tokens) {
+
+            if (token.isEmpty()) {
+                throw new IllegalArgumentException("구분자가 연속으로 입력되었습니다.");
+            }
+
+            try {
+                double number = Double.parseDouble(token);
+
+                if (number <= 0) {
+                    throw new IllegalArgumentException("음수 또는 0은 허용되지 않습니다: " + token);
+                }
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("유효하지 않은 숫자입니다: " + token);
+            }
+        }
     }
 
     private String[] parseDelimiter(String delimiter) {
