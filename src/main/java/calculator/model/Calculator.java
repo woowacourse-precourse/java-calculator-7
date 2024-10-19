@@ -16,7 +16,7 @@ public class Calculator {
         return this.answer;
     }
 
-    public boolean isValidationNullOrEmpty(){
+    public boolean isNullOrEmpty(){
         return this.str == null || this.str.isEmpty();
     }
 
@@ -42,7 +42,7 @@ public class Calculator {
     }
 
     public int sumNumbers(){
-        if(isValidationNullOrEmpty())
+        if(isNullOrEmpty())
             return 0;
 
         for(String a : this.strArr){

@@ -17,7 +17,7 @@ public class CalculatorController {
 
     public void run(){
         inputString();
-        isValidationCheckNullOrEmpty();
+        isNullOrEmpty();
         split();
         outputResult();
     }
@@ -27,8 +27,8 @@ public class CalculatorController {
         calculator = new Calculator(inputView.getInput());
     }
 
-    public void isValidationCheckNullOrEmpty(){
-        if(calculator.isValidationNullOrEmpty())
+    public void isNullOrEmpty(){
+        if(calculator.isNullOrEmpty())
             outputView.printAnswerMessage(calculator.getAnswer());
     }
 
