@@ -36,7 +36,11 @@ public class AdditionInput {
         if (input == null || input.isEmpty()) {
             return new String[0];
         }
-        String delimiter = customDelimiter.isBlank() ? (input.contains(",") ? "," : ":") : customDelimiter;
-        return input.split(delimiter);
+
+        if (customDelimiter == null || customDelimiter.isBlank()) {
+            return input.split("[,:]");
+        }
+
+        return input.split(customDelimiter);
     }
 }
