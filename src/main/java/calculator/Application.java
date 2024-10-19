@@ -19,21 +19,20 @@ public class Application {
             String delimiter = "[,;]";
 
             if(input.contains("//")) {
-                Pattern pattern = Pattern.compile("//(.+)\\\\n");
+                Pattern pattern = Pattern.compile("//(.*?)\\\\n");
                 Matcher matcher = pattern.matcher(input);
                 StringBuilder customDelimiter = new StringBuilder("[,;");
 
-                if(matcher.find()) {
-                    int count = 0;
-                    for (int i = 0; i < matcher.groupCount(); i++) {
-                        customDelimiter.append(matcher.group(i), 2, matcher.group(i).length()-2);
-                        count += matcher.group(i).length();
-                    }
+                int count = 0;
 
-                    customDelimiter.append("]");
-                    delimiter = customDelimiter.toString();
-                    input = input.substring(count);
+                while(matcher.find()) {
+                    customDelimiter.append(matcher.group(), 2, matcher.group().length()-2);
+                    count += matcher.group().length();
                 }
+
+                customDelimiter.append("]");
+                delimiter = customDelimiter.toString();
+                input = input.substring(count);
             }
 
             System.out.println("구분자 = " + delimiter);
