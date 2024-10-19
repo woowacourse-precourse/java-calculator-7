@@ -1,6 +1,9 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import calculator.common.exception.InvalidDelimiterException;
+import calculator.common.exception.InvalidNumberFormatException;
+import calculator.common.exception.NegativeNumberException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,17 +82,17 @@ public class Application {
         int delimiterEndIndex = input.indexOf("\\n");
 
         if (delimiterEndIndex == -1) {
-            throw new IllegalArgumentException("잘못된 형식의 커스텀 구분자입니다.");
+            throw InvalidDelimiterException.invalidCustomDelimiterFormat();
         }
 
         String customDelimiter = input.substring(2, delimiterEndIndex);
 
         if (customDelimiter.length() != 1) {
-            throw new IllegalArgumentException("커스텀 구분자는 한 문자여야 합니다.");
+            throw InvalidDelimiterException.invalidCustomDelimiter();
         }
 
         if (customDelimiter.equals(",") || customDelimiter.equals(":")) {
-            throw new IllegalArgumentException("기본 구분자와 중복되는 커스텀 구분자는 사용할 수 없습니다.");
+            throw InvalidDelimiterException.duplicateWithDefaultDelimiter();
         }
 
         List<String> delimiters = getDefaultDelimiters();
@@ -101,11 +104,11 @@ public class Application {
         try {
             int number = Integer.parseInt(token);
             if (number < 0) {
-                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+                throw new NegativeNumberException(token);
             }
             return number;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("잘못된 입력 값: " + token);
+            throw new InvalidNumberFormatException(token);
         }
     }
 
