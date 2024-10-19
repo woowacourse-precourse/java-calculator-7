@@ -8,9 +8,11 @@ import java.util.Set;
 public class Application {
 
     public static void main(String[] args) {
-        String s = readIn();
+        String s = readIn(); // 입력
         Set<String> separatorSet = parseSeparator(s);
+        String afterSeparator = sliceString(s);
         System.out.println("Separators: " + separatorSet);
+        System.out.println("After separator: " + afterSeparator);
     }
 
     public static String readIn() {
@@ -38,6 +40,23 @@ public class Application {
         separatorSet.add(",");
         separatorSet.add(":");
         return separatorSet;
+    }
+
+    public static String sliceString(String input) {
+        int idx = 0;
+        if (input.startsWith("//")) {
+            for (int i = 2; i < input.length()-2; i++) {
+                if (input.charAt(i) == '\\') {
+                    if (i < input.length() - 1) {
+                        if(input.charAt(i+1) == 'n') {
+                            idx=i+2;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return input.substring(idx);
     }
 }
 
