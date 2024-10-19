@@ -1,14 +1,17 @@
 package calculator;
 
+import calculator.domain.Calculator;
+import calculator.error.ExceptionHandler;
+import calculator.service.CalculatorService;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
-import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ApplicationTest extends NsTest {
 
@@ -19,15 +22,14 @@ class ApplicationTest extends NsTest {
         String input = "//;\\n1";
 
         // when
-        Calculation calculation = new Calculation();
-        CalculationService service = new CalculationService(calculation);
+        Calculator calculator = new Calculator();
+        CalculatorService service = new CalculatorService(calculator);
         // Calculation 객체를 넣으면 -> rawValue 값을 인풋값으로 설정
         service.getInputValues(input);
 
         // then
-        List<Integer> expectedValue = new ArrayList<>();
-        expectedValue.add(1);
-        assertThat(calculation.getRawValue()).isEqualTo(expectedValue);
+        String expectedValue = "//;\\n1";
+        assertThat(calculator.getRawValue()).isEqualTo(expectedValue);
     }
 
 
@@ -44,12 +46,12 @@ class ApplicationTest extends NsTest {
         // given
         String wrongInputCase1 = "/;\\n1";
         String wrongInputCase2 = "//;\\n1+2";
-        Calculation calculation2 = new Calculation();
-        CalculationService service = new CalculationService(calculation2);
+        Calculator calculation2 = new Calculator();
+        CalculatorService service = new CalculatorService(calculation2);
 
         // when
         // 이 과정에서 임의로 잘못된 값을 설정
-        calculation2.setRawValue = wrongInputCase1;
+        calculation2.setRawValue(wrongInputCase1);
 
         // then
         assertThrows(IllegalArgumentException.class, () -> {
@@ -57,14 +59,13 @@ class ApplicationTest extends NsTest {
         });
     }
 
-
     @Test
     void 에러_구분_및_출력() {
         // given
         String wrongInput = "//;\\n1+2";
-        Calculation calculation = new Calculation();
-        CalculationService service = new CalculationService(calculation);
-        calculation.setRawValue(wrongInput);
+        Calculator calculator = new Calculator();
+        CalculatorService service = new CalculatorService(calculator);
+        calculator.setRawValue(wrongInput);
 
         ExceptionHandler exceptionHandler = new ExceptionHandler();
 
@@ -78,14 +79,13 @@ class ApplicationTest extends NsTest {
 
     }
 
-
     @Test
     void 입력값_숫자_추출() {
         // given
         String input = "//+\\n1+2:3,4";
-        Calculation calculation = new Calculation();
-        CalculationService service = new CalculationService(calculation);
-        calculation.setRawValue(input);
+        Calculator calculator = new Calculator();
+        CalculatorService service = new CalculatorService(calculator);
+        calculator.setRawValue(input);
 
         List<Integer> expectedList = Arrays.asList(1, 2, 3, 4);
 
@@ -100,10 +100,10 @@ class ApplicationTest extends NsTest {
     void 추출한_값_더하기() {
         // given
         String input = "//+\\n1+2:3,4";
-        Calculation calculation = new Calculation();
-        CalculationService service = new CalculationService(calculation);
+        Calculator calculator = new Calculator();
+        CalculatorService service = new CalculatorService(calculator);
         List<Integer> expectedList = Arrays.asList(1, 2, 3, 4);
-        calculation.setProcessedValue(expectedList);
+        calculator.setProcessedValue(expectedList);
 
         // when
         int result = service.sumOfList();
@@ -115,9 +115,9 @@ class ApplicationTest extends NsTest {
     @Test
     void 값_출력() {
         // given
-        Calculation calculation = new Calculation();
-        CalculationService service = new CalculationService(calculation);
-        calculation.setSumValue(10);
+        Calculator calculator = new Calculator();
+        CalculatorService service = new CalculatorService(calculator);
+        calculator.setSumValue(10);
 
         // when
         String output = service.printResult();
@@ -128,6 +128,10 @@ class ApplicationTest extends NsTest {
 
     @Override
     public void runMain() {
-        Application.main(new String[]{});
+        try {
+            Application.main(new String[]{});
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
