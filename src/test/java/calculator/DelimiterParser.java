@@ -27,6 +27,16 @@ public class DelimiterParser {
         return input.substring(2, index);
     }
 
+    public String removeCustomDelimiter(String input) {
+        int index = input.indexOf("\n");
+
+        if (index != -1) {
+            return input.substring(index + 1);
+        }
+
+        return input;
+    }
+
     private String[] splitByDelimiters(String input) {
         String regex = buildDelimiterRegex();
         return input.split(regex);
