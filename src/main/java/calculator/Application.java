@@ -7,6 +7,11 @@ public class Application {
     public static void main(String[] args) {
         String input = Console.readLine();
 
+        if(input.isEmpty()){
+            System.out.println("result : 0" );
+            return;
+        }
+
         String delimiter = ",|:";
 
         if (input.startsWith("//")) {
@@ -26,11 +31,11 @@ public class Application {
             try {
                 int number = Integer.parseInt(numberString.trim());
                 if (number < 0) {
-                    throw new IllegalArgumentException("invalid" + number);
+                    throw new IllegalArgumentException("invalid value(negative integer)" + number);
                 }
                 sum += number;
             } catch (IllegalArgumentException e) {
-                System.out.println("invalid");
+                System.out.println("invalid value(not integer)");
                 return;
             }
         }
