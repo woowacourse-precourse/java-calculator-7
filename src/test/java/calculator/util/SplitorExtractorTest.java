@@ -17,7 +17,7 @@ class SplitorExtractorTest {
     void test1() {
         assertSimpleTest(() -> {
             InputString inputString = new InputString("//;\\n1;3;4");
-            assertThat(splitorExtractor.extractSplitor(inputString)).isInstanceOf(CustomSplitor.class);
+            assertThat(splitorExtractor.extractSplitor(inputString)).isExactlyInstanceOf(CustomSplitor.class);
         });
     }
 
@@ -26,7 +26,7 @@ class SplitorExtractorTest {
     void test2() {
         assertSimpleTest(() -> {
             InputString inputString = new InputString("1;3;4");
-            assertThat(splitorExtractor.extractSplitor(inputString)).isInstanceOf(BasicSplitor.class);
+            assertThat(splitorExtractor.extractSplitor(inputString)).isExactlyInstanceOf(BasicSplitor.class);
         });
     }
 }
