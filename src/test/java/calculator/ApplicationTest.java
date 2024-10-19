@@ -46,6 +46,15 @@ class ApplicationTest extends NsTest {
     }
 
     @Test()
+    @DisplayName("등록되지 않은 커스텀 구분자를 추가했을 때 테스트")
+    void notRegistedCustomSepTest() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;0-\\n1;2,3:4+5"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test()
     @DisplayName("커스텀 구분자가 두개 이상일 때 테스트")
     void manyCustomSepTest() {
         assertSimpleTest(() -> {
