@@ -1,5 +1,6 @@
 package calculator.util.parser;
 
+import static calculator.constant.Delimiter.BACK_SLASH;
 import static calculator.constant.Delimiter.COLON;
 import static calculator.constant.Delimiter.COMMA;
 import static calculator.constant.Delimiter.CUSTOM_DELIMITER_FORMAT;
@@ -17,7 +18,7 @@ public class InputStringParser implements StringParser {
         if (matcher.find()) {
             customDelimiter = matcher.group(1);
         }
-        return customDelimiter;
+        return customDelimiter.replace(BACK_SLASH, BACK_SLASH.repeat(2));
     }
 
     @Override
