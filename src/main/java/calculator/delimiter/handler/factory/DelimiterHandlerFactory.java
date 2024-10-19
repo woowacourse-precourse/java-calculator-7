@@ -12,9 +12,9 @@ public class DelimiterHandlerFactory {
 
     public DelimiterHandlerFactory() {
         handlers = new ArrayList<>();
+        handlers.add(new NoDelimiterHandler());
         handlers.add(new ColonSemicolonDelimiterHandler());
         handlers.add(new CustomDelimiterHandler());
-        handlers.add(new NoDelimiterHandler());
     }
 
     public DelimiterHandler getHandler(String str) {

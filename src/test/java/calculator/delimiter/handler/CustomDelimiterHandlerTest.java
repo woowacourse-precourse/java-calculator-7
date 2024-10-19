@@ -44,18 +44,21 @@ class CustomDelimiterHandlerTest {
     void return_list_when_split_by_custom_delimiter() {
         // given
         String s1 = "//;\\n1;2;3";
-        String s2 = "//||\\n4||5||6";
-        String s3 = "//||\\n7";
+        String s2 = "//7\\n47576";
+        String s3 = "//-\\n4-5-6";
+        String s4 = "//||\\n7";
 
         // when
         List<String> stringList1 = handler.split(s1);
         List<String> stringList2 = handler.split(s2);
         List<String> stringList3 = handler.split(s3);
+        List<String> stringList4 = handler.split(s4);
 
         // then
         assertThat(stringList1).hasSize(3).containsExactly("1", "2", "3");
         assertThat(stringList2).hasSize(3).containsExactly("4", "5", "6");
-        assertThat(stringList3).hasSize(1).containsExactly("7");
+        assertThat(stringList3).hasSize(3).containsExactly("4", "5", "6");
+        assertThat(stringList4).hasSize(1).containsExactly("7");
     }
 
     @Test
@@ -69,5 +72,5 @@ class CustomDelimiterHandlerTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("형식이 일치하지 않습니다.");
     }
-    
+
 }

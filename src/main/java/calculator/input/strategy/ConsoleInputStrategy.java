@@ -1,11 +1,10 @@
 package calculator.input.strategy;
 
-import java.util.Scanner;
+import camp.nextstep.edu.missionutils.Console;
 
-public class ConsoleInputStrategy implements InputStrategy{
+public class ConsoleInputStrategy implements InputStrategy {
     @Override
     public String input() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
+        return Console.readLine();
     }
 }

@@ -1,7 +1,5 @@
 package calculator;
 
-import calculator.delimiter.filter.NegativeNumberValidationFilter;
-import calculator.delimiter.filter.ValidationFilter;
 import calculator.delimiter.handler.factory.DelimiterHandlerFactory;
 import calculator.input.InputContext;
 import calculator.input.strategy.ConsoleInputStrategy;
@@ -14,12 +12,8 @@ public class Application {
         OutputContext outputContext = new OutputContext(new ConsoleOutputStrategy());
         DelimiterHandlerFactory factory = new DelimiterHandlerFactory();
 
-        ValidationFilter middleware = ValidationFilter.link(
-                new NegativeNumberValidationFilter()
-        );
-
         String input = inputContext.execute();
-        Calculator calculator = new Calculator(factory, middleware);
+        Calculator calculator = new Calculator(factory);
 
         outputContext.execute(String.valueOf(calculator.sum(input)));
     }
