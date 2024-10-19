@@ -39,6 +39,7 @@ public class Application {
                 validateInput(cutStringArr);
 
                 // 계산
+                addCalc(cutStringArr);
 
             } else {
                 // 숫자만 입력했을 때 사용자 입력 검증(테스트 중)
@@ -57,6 +58,7 @@ public class Application {
                     validateInput(cutStringArr);
                     
                     // 계산
+                    addCalc(cutStringArr);
                 }
             }
         } catch (IllegalArgumentException e) {
@@ -103,5 +105,16 @@ public class Application {
         } else {
             return null;
         }
+    }
+
+    // 문자열을 덧셈하는 함수
+    private static void addCalc(String[] cutStringArr) {
+        int result = 0;
+
+        for (String str : cutStringArr) {
+            result += Integer.parseInt(str);
+        }
+
+        System.out.println("결과 : " + result);
     }
 }
