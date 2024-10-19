@@ -1,25 +1,13 @@
 package calculator;
 
+import calculator.validator.CalculatorValidator;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CalculatorService {
 
-    private final static String VALID_EXPRESSION_TEMPLATE = "^((//)(.*?)(\\\\n))?(\\d+([,:%s]{1}\\d+)*)*";
-
     public CalculatorService() {
-    }
-
-    public static void validate(String input, String customSeparator) {
-        String regex = String.format(VALID_EXPRESSION_TEMPLATE, customSeparator);
-
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(input);
-
-        if (!matcher.matches()) {
-            throw new IllegalArgumentException();
-        }
     }
 
     public boolean isBlank(String input) {
@@ -61,9 +49,10 @@ public class CalculatorService {
 
         String customSeparator = parseCustomSeparator(input);
 
-        validate(input, customSeparator);
+        CalculatorValidator.validate(input, customSeparator);
 
         String processedInput = removeCustomSeparatorPrefix(input);
+
         if (isBlank(processedInput)) {
             return 0;
         }
