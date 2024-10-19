@@ -13,13 +13,13 @@ public class InputParserUtilTest {
     void testSplitter() {
         // given
         String input1 = "1,2,3";
-        String input2 = "//;\n1;2;3";
+        String input2 = "//;\\n1;2;3";
         String input3 = "1";
         String input4 = "/,1,2,3";
-        String input5 = "//;\n;2;";
-        String input6 = "//;\n1;2;";
-        String input7 = "//.\n1.2.3";
-        String input8 = "//@@\n1@@2@@3";
+        String input5 = "//;\\n;2;";
+        String input6 = "//;\\n1;2;";
+        String input7 = "//.\\n1.2.3";
+        String input8 = "//@@\\n1@@2@@3";
         String input9 = "1:2::3";
 
         // when
@@ -41,7 +41,7 @@ public class InputParserUtilTest {
         assertThat(result5).isEqualTo(new String[]{"", "2", ""});
         assertThat(result6).isEqualTo(new String[]{"1", "2", ""});
         assertThat(result7).isEqualTo(new String[]{"1", "2", "3"});
-        assertThat(result8).isEqualTo(new String[]{"//@@\n1@@2@@3"});
+        assertThat(result8).isEqualTo(new String[]{"//@@\\n1@@2@@3"});
         assertThat(result9).isEqualTo(new String[]{"1", "2", "", "3"});
     }
 }

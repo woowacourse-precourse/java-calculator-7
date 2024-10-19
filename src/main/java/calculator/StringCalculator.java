@@ -12,7 +12,7 @@ public class StringCalculator {
 
         String[] numberList = InputParserUtil.splitter(userInput);
         int result = sumNumbers(InputParserUtil.numbersToInt(numberList));
-        System.out.println("결과는 : " + result);
+        System.out.println("결과 : " + result);
     }
 
 

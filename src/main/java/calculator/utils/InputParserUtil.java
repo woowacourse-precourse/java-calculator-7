@@ -6,11 +6,10 @@ import java.util.regex.Pattern;
 
 public class InputParserUtil {
     private static final String BASIC_DELIMITERS = ",|:";
-    private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\\r?\\n(.*)";
+    private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\\\\n(.*)";
 
     public static String[] splitter(String input) {
-        Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_PATTERN);
-        Matcher matcher = pattern.matcher(input);
+        Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(input);
 
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
