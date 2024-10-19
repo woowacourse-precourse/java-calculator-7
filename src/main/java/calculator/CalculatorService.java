@@ -73,7 +73,12 @@ public class CalculatorService {
     public BigInteger calculateList() {
         BigInteger result = new BigInteger("0");
         for (String i : numList) {
-            BigInteger n= new BigInteger(i);
+            BigInteger n;
+            try{
+                n= new BigInteger(i);
+            }catch (NumberFormatException e){
+                throw new IllegalArgumentException(CalculatorException.CANNOT_USE_THIS_SEPERATOR.getText());
+            }
             try{
                 if(n.compareTo(new BigInteger("0"))<0){
                     throw new IllegalArgumentException(CalculatorException.CANNOT_USE_MINUS.getText());
