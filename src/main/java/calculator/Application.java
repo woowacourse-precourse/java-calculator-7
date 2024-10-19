@@ -10,7 +10,7 @@ public class Application {
         CalculateService calculateService;
 
         // 기능 0 : 사용자가 덧셈할 문자열을 입력한다.
-//        inputService.enterInput();
+        inputService.enterInput();
 
         // 기능 1 : 문자열 앞부분에 커스텀 구분자가 있는지 확인한다.
         // 기능 2 : 커스텀 구분자가 있을 때 값을 계산한다.

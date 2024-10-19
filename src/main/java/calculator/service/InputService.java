@@ -11,7 +11,7 @@ public class InputService {
     private char customDelimiter; // 사용자가 입력한 커스텀 구분자
 
     public InputService() {
-        this.userInput = "//.\\n33:4:5";
+//        this.userInput = "//.\\n33:4:5";
     }
 
     // 사용자의 입력을 받는다.
@@ -52,7 +52,10 @@ public class InputService {
     // 커스텀 구분자 이후의 문자열에서 숫자들을 분리해서 저장한다.
     public String[] separateNumberWithCustomDelimiter() {
         String afterCustomDelimiter = this.userInput.substring(4);
-        String[] parts = afterCustomDelimiter.split(String.valueOf(customDelimiter));
+
+        // 커스텀 구분자가 '.'일 경우 이스케이프 처리
+        String delimiter = (customDelimiter == '.') ? "\\." : String.valueOf(customDelimiter);
+        String[] parts = afterCustomDelimiter.split(delimiter);
 
         // 분리한 각 String이 올바른 입력 형태의 숫자인지 확인한다.
         return isWrongInput(parts);
