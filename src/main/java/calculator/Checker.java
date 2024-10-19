@@ -9,58 +9,76 @@ public class Checker {
 
     public boolean checkIsNotString() {
         String inputString = stringData.getInputString();
+        boolean isNotString = false;
+
         if (inputString.equals("\0")) {
-            return true;
+            isNotString = true;
         }
         if (inputString.isEmpty()) {
-            return true;
+            isNotString = true;
         }
-        return false;
+        return isNotString;
     }
 
     public boolean checkIsSingleNumber() {
         String inputString = stringData.getInputString();
+        boolean isSingleNumber = true;
+
         try {
             Double number = Double.parseDouble(inputString);
         } catch (NumberFormatException e) {
-            return false;
+            isSingleNumber = false;
         }
-        return true;
+        return isSingleNumber;
     }
 
     public String checkCustomSeparator() throws IllegalArgumentException {
         String inputString = stringData.getInputString();
+        String customSeparator = null;
+
         if (inputString.length() < 5) {
-            return null;
-        }
-        String customPattern = inputString.substring(0, 2);
-        boolean hasCustomPatternStart = customPattern.equals("//");
-        if (!hasCustomPatternStart) {
-            return null;
+            return customSeparator;
         }
 
-        customPattern = inputString.substring(3, 5);
-        boolean hasCustomPatternEnd = customPattern.equals("\\n");
-        if (hasCustomPatternStart && !hasCustomPatternEnd) {
+        String customPatternStart = inputString.substring(0, 2);
+        boolean hasCustomPatternStart = customPatternStart.equals("//");
+
+        if (!hasCustomPatternStart) {
+            return customSeparator;
+        }
+
+        String customPatternEnd = inputString.substring(3, 5);
+        boolean hasCustomPatternEnd = customPatternEnd.equals("\\n");
+
+        if (!hasCustomPatternEnd) {
             throw new IllegalArgumentException();
         }
-        char customSeparator = inputString.charAt(2);
-        if (Character.isDigit(customSeparator)) {
+
+        char customCharacter = inputString.charAt(2);
+
+        if (Character.isDigit(customCharacter)) {
             throw new IllegalArgumentException();
         }
-        return Character.toString(customSeparator);
+
+        customSeparator = Character.toString(customCharacter);
+        return customSeparator;
     }
 
     public String checkDefaultSeparator() throws IllegalArgumentException {
         String inputString = stringData.getInputString();
+
         if (inputString.contains("-")) {
             throw new IllegalArgumentException();
         }
+
         boolean colon = inputString.contains(":");
         boolean comma = inputString.contains(",");
+        
         if (!colon && !comma) {
             throw new IllegalArgumentException();
         }
-        return "[:,]";
+
+        String defaultSeparator = "[:,]";
+        return defaultSeparator;
     }
 }
