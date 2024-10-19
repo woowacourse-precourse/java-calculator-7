@@ -15,19 +15,13 @@ public class DrawController {
 	}
 
 	public List<Long> requestNumberDraw() {
-		while(true) {
-			try {
-				System.out.print("입력하세요: ");
-				String formula = InputView.readLine();
+		System.out.print("입력하세요: ");
+		String formula = InputView.readLine();
 
-				FormulaReq formulaReq = new FormulaReq(formula);
+		FormulaReq formulaReq = new FormulaReq(formula);
 
-				DelimitersDto delimiters = drawService.generateDelimiters(formulaReq);
+		DelimitersDto delimiters = drawService.generateDelimiters(formulaReq);
 
-				return drawService.drawNumbers(delimiters.delimiters(), formulaReq);
-			} catch (IllegalArgumentException exception) {
-				System.out.println(exception.getMessage());
-			}
-		}
+		return drawService.drawNumbers(delimiters.delimiters(), formulaReq);
 	}
 }
