@@ -92,7 +92,8 @@ public class Application {
     public static String delimiter(String input) {
         if (input.startsWith("//") && input.contains("\\n")) {
             int index = input.indexOf("\\n");
-            return "[,:]" + input.substring(2, index); //todo 연산자 한개체로 취급하게 배열로 바꾸기
+            String s = delimiterCheck(input);
+            return ",|:|" + s;
         }
         return "[,:]";
     }
@@ -102,6 +103,19 @@ public class Application {
         if (input.startsWith("//") && input.contains("\\n")) {
             int index = input.indexOf("\\n");
             return input.substring(index + 2);
+        }
+        return input;
+    }
+
+    //커스텀 구분자로 |를 추가했을 때 수정하는 메서드
+    public static String delimiterCheck(String input) {
+        if (input.startsWith("//") && input.contains("\\n")) {
+            int index = input.indexOf("\\n");
+            String check = input.substring(2, index);
+            String complateCheck = check.contains("|")
+                    ? check.replace("|", "\\|")
+                    : check;
+            return complateCheck;
         }
         return input;
     }
