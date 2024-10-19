@@ -2,11 +2,15 @@ package calculator.exception;
 
 import calculator.domain.Delimiters;
 import calculator.domain.Numbers;
+import calculator.service.ExtractService;
 
 public class InputStringException {
+    private static final ExtractService extractService = new ExtractService();
     public Numbers validateInputPattern(String inputString, Numbers numbers, Delimiters delimiters){
         if(inputString.contains("//") || inputString.contains("\\n")) {
             isCustomDelimiterDeclaredInStandardFormat(inputString);
+            extractService.extractDelimeter(inputString, delimiters);
+
         }
 
         return new Numbers();
