@@ -12,7 +12,7 @@ public class Arithmetic {
 
     public List<Integer> splitArithmetic(Delimiter delimiter, String calculatorPart) {
         List<Integer> result =
-                Arrays.stream(calculatorPart.split(delimiter.delimiter))
+                Arrays.stream(calculatorPart.split("[" + delimiter.delimiter + "]"))
                         .map(Integer::parseInt).toList();
 
         return result;
