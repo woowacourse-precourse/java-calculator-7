@@ -13,4 +13,11 @@ public class ValidationTest {
         assertThatThrownBy(() -> Validation.validateNumberFormat("1,2,a"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("int의 범위를 넘는 경우 예외발생")
+    void throwExceptionWhenNumberExceedIntRange() {
+        assertThatThrownBy(() -> Validation.validateIntRange("10000000000,2"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }

@@ -12,6 +12,7 @@ public class Calculator {
         int sum = 0;
         for (String number : numberGroup) {
             Validation.validateNumberFormat(number);
+            Validation.validateIntRange(number);
 
             sum += Integer.parseInt(number);
         }
