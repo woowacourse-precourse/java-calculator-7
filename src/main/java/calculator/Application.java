@@ -13,6 +13,14 @@ public class Application {
 
         // InputValidator 클래스 호출
         InputValidator validator = new InputValidator();
+
+        // 빈 문자열 검증
+        int result = validator.validateEmptyString(input);
+        if (result == 0) {
+            System.out.println("결과 : 0");
+            return;
+        }
+
         validator.validateNonNumeric(input);
 
         // GetNumbers 클래스 호출
@@ -24,8 +32,8 @@ public class Application {
 
         // Calculator 클래스 호출
         Calculator calculator = new Calculator();
-        int result = calculator.sumNumbers(numbers);
+        int sum = calculator.sumNumbers(numbers);
 
-        System.out.println("결과 : " + result);
+        System.out.println("결과 : " + sum);
     }
 }
