@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 public class StringParser {
     private static final List<String> DEFAULT_DELIMITER = Arrays.asList(",", ":");
     private static final String EXTRACT_DELIMITER_REGEX = "//(.*?)\\\\n";
+    private static final String NON_DIGIT_REGEX = ".*\\D.*";
     private final String inputString;
 
     public StringParser(String inputString) {
@@ -31,6 +32,9 @@ public class StringParser {
     }
 
     private String extractCustomDelimiter() {
+        // TODO: validate input string format
+        // TODO: validate custom delimiter is number
+
         Pattern pattern = Pattern.compile(EXTRACT_DELIMITER_REGEX);
         Matcher matcher = pattern.matcher(this.inputString);
 
@@ -45,8 +49,18 @@ public class StringParser {
         String delimiterRegEx = "[" + String.join("", delimiters) + "]";
         String[] stringNumbers = expression.split(delimiterRegEx);
 
+        validateNumeric(stringNumbers);
+        // TODO: validate positive integer
+
         return Arrays.stream(stringNumbers)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+    }
+
+    private void validateNumeric(String[] stringNumbers) {
+        boolean existNonNumeric = Arrays.stream(stringNumbers).anyMatch(s -> s.matches(NON_DIGIT_REGEX));
+        if (existNonNumeric) {
+            throw new IllegalArgumentException();
+        }
     }
 }
