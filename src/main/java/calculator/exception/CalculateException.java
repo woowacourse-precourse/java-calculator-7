@@ -1,5 +1,6 @@
 package calculator.exception;
 
+import calculator.util.CalculateCustom;
 import calculator.util.CalculateValidation;
 
 public class CalculateException {
@@ -27,5 +28,12 @@ public class CalculateException {
         if (CalculateValidation.checkNotContainAllSeparator(userInput)) {
             throwException(ExceptionMessage.INPUT_IS_WRONG_EXCEPTION);
         }
+    }
+
+    public static Integer catchCustomPrePositionException(String userInput) {
+        if (CalculateValidation.checkIsNotCustomPreCorrect(userInput)) {
+            throwException(ExceptionMessage.INPUT_CUSTOM_SEPARATOR_POSITION_EXCEPTION);
+        }
+        return CalculateCustom.getCustomPreIndex(userInput);
     }
 }

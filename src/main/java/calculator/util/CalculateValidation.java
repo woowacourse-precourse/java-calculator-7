@@ -11,4 +11,8 @@ public class CalculateValidation {
     public static boolean checkIsNumberPositive(Integer number){
         return number < ZERO;
     }
+
+    public static boolean checkIsNotCustomPreCorrect(String userInput) {
+        return !CalculateCustom.getCustomPreIndex(userInput).equals(ZERO);
+    }
 }

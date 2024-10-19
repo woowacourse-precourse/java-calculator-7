@@ -1,5 +1,6 @@
 package calculator.util;
 
+import calculator.exception.CalculateException;
 import java.util.List;
 
 public class CalculateCustom extends CalculateSeparator {
@@ -13,7 +14,11 @@ public class CalculateCustom extends CalculateSeparator {
     }
 
     public static Integer getCustomPreIndex(String userInput) {
-        return getIndexNumberOfSeparator(userInput, CUSTOM_PRE);
+        return CalculateSeparator.getIndexNumberOfSeparator(userInput, CUSTOM_PRE);
+    }
+
+    public static Integer getCorrectCustomPreIndex(String userInput) {
+        return CalculateException.catchCustomPrePositionException(userInput);
     }
 
     public static Integer getCustomPostIndex(String userInput) {
@@ -21,7 +26,7 @@ public class CalculateCustom extends CalculateSeparator {
     }
 
     public static String getCustomPreToPost(String userInput) {
-        return substringUserInputWithSeparator(userInput, makeIndexList(getCustomPreIndex(userInput), getCustomPostIndex(userInput)));
+        return substringUserInputWithSeparator(userInput, makeIndexList(getCorrectCustomPreIndex(userInput), getCustomPostIndex(userInput)));
     }
 
     public static String getCustomSeparator(String userInput) {
