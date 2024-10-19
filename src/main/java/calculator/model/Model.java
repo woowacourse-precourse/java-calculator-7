@@ -1,0 +1,44 @@
+package calculator.model;
+
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static calculator.constants.DelimiterEnum.*;
+import static calculator.controller.ExceptionMessage.*;
+
+public class Model {
+    public static String[] customDelimiterAddCalculator(String userInput) {
+        userInput = userInput.replace("\\n", CUSTOM_DELIMITER_BACKWARD.getValue());
+        Matcher m = Pattern.compile(CUSTOM_DELIMITER_PATTERN.getValue()).matcher(userInput);
+        if (m.find()) {
+            return splitByCustomDelimiter(m.group(2), m.group(1));
+        }
+        throw new IllegalArgumentException(INVALID_CUSTOM_TYPE.format());
+    }
+
+    public static String[] defaultDelimiterAddCalculator(String userInput) {
+        return userInput.split(DEFAULT_DELIMITER.getValue());
+    }
+
+    private static String[] splitByCustomDelimiter(String userInput, String customDelimiter) {
+        if (userInput.matches(".*[,:].*")) {
+            String combinedDelimiter = Pattern.quote(customDelimiter) + AND.getValue() + DEFAULT_DELIMITER.getValue();
+            return userInput.split(combinedDelimiter);
+        }
+        if (userInput.contains(customDelimiter)) {
+            return userInput.split(Pattern.quote(customDelimiter));
+        }
+        if (userInput.matches("\\d+")) {
+            return new String[]{userInput};
+        }
+        throw new IllegalArgumentException(INVALID_CUSTOM_TYPE.format());
+    }
+
+    public static int getSum(String[] numbers) {
+        return Arrays.stream(numbers)
+                .mapToInt(Integer::parseInt)
+                .sum();
+    }
+
+}
