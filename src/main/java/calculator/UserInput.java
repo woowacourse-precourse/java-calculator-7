@@ -55,4 +55,8 @@ public class UserInput {
         return userInput.startsWith(CUSTOM_DELIMITER_PREFIX);
     }
 
+    public String getUserInput() {
+        return userInput;
+    }
+    
 }
