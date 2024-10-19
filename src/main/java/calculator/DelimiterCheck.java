@@ -13,24 +13,39 @@ public class DelimiterCheck {
 
     public DelimiterCheck(String inputString) {
         this.inputString = inputString;
+        System.out.println(inputString);
         getCustomDelimiter();
     }
 
     //커스텀 구분자 커맨드 입력여부 검증 로직
     private void getCustomDelimiter() {
-        if (inputString.startsWith("//") && (inputString.substring(3, 5).equals("\\n"))) {
-            String customDelimiter = Character.toString(inputString.charAt(2));
+        // 위치 추출위한 배열
+        int startCustom = inputString.indexOf("//");
+        int endCustom = inputString.indexOf("\\n");
+
+        // 계산 중간에도 커스텀 입력 가능하게 수정
+        // 예) 1,2,3//+\n1+2+3
+        if (startCustom != -1 && endCustom != -1) {
+            String customDelimiter = inputString.substring(startCustom + 2, endCustom);
 
             // 커스텀 문자열로 사용할 수 없는 문자들 예외처리
-            if (customDelimiter.equals(" ") || customDelimiter.equals(".") || customDelimiter.equals("-")) {
+            if (customDelimiter.contains(" ") || customDelimiter.contains(".") || customDelimiter.contains("-")) {
                 throw new IllegalArgumentException("잘못된 구분자를 입력하셨습니다.");
             }
-            delimiter = ",|:|" + customDelimiter;
-            // 커맨드 입력 이후의 문자열만 inputString 지정
-            inputString = inputString.substring(inputString.indexOf("\\n")+2);
+            delimiter = delimiter + "|" + customDelimiter;
+
+            inputString = inputString.substring(0, startCustom) + "," + inputString.substring(endCustom + 2);
         }
+//        if (inputString.startsWith("//") && (inputString.substring(3, 5).equals("\\n"))) {
+//            String customDelimiter = Character.toString(inputString.charAt(2));
+//
+//            delimiter = ",|:|" + customDelimiter;
+//            // 커맨드 입력 이후의 문자열만 inputString 지정
+//            inputString = inputString.substring(inputString.indexOf("\\n") + 2);
+//        }
         getSplitFormula();
     }
+
 
     // String 계산식에서 구분자로 숫자들을 분리
     private void getSplitFormula() {
@@ -38,7 +53,7 @@ public class DelimiterCheck {
         inputString = inputString.replaceAll(" ", "");
 
         // 구분자 없이 하나만 입력되었을 때 하나의 배열로만 입력
-        splitFormulaArray = inputString.trim().split("\\s*"+delimiter+"\\s*");
+        splitFormulaArray = inputString.trim().split("\\s*" + delimiter + "\\s*");
 
         for (int i = 0; i < splitFormulaArray.length; i++) {
             if (splitFormulaArray[i].isBlank()) {
@@ -68,7 +83,7 @@ public class DelimiterCheck {
             String beforeConvert = splitFormulaArray[i];
             try {
                 intNumArray[i] = Integer.parseInt(beforeConvert);
-            } catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("잘못된 형식입니다.");
             }
         }
