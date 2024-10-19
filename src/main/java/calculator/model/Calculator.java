@@ -1,5 +1,6 @@
 package calculator.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Calculator {
@@ -13,8 +14,19 @@ public class Calculator {
 
     public List<String> splitList(){
         String[] splitedStringArray = inputString.split(splitString);
-        List<String> splitedList = List.of(splitedStringArray);
+        List<String> stringList = List.of(splitedStringArray);
 
-        return splitedList;
+        return stringList;
+    }
+
+    public List<Integer> parseIntegerList(List<String> stringList){
+        List<Integer> integerList = new ArrayList<>();
+
+        for(String str : stringList){
+            int strToInteger = Integer.parseInt(str);
+            integerList.add(strToInteger);
+        }
+
+        return integerList;
     }
 }
