@@ -10,7 +10,7 @@ public class Application {
             new OutputView().printResult(result);
 
         } catch (IllegalArgumentException e) {
-            System.out.println("잘못된 입력 : " + e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 }
