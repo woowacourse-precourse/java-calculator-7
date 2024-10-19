@@ -25,6 +25,10 @@ public class InputValidator {
         }
     }
 
+    public void validateInput(String input) {
+        validateInputPattern(input);
+    }
+
     private void validateInputPattern(String input) {
         if (input.startsWith("//")) {
             validateCustomDelimiterPattern(input);
