@@ -2,15 +2,24 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.regex.Pattern;
+
 public class Input {
     static String input;
     static String[] tokens;
     public String inputCal(){
         input = Console.readLine();
+        isEmpty();
         return input;
     }
     public String[] inputSplit(){
-        tokens = input.split("[,:]");
+        String delimiter = "[,:]";
+        if (input.startsWith("//")) {
+            int delimiterIndex = input.indexOf('\n');
+            delimiter = Pattern.quote(input.substring(2,delimiterIndex));
+            input = input.substring(delimiterIndex+1);
+        }
+        tokens = input.split(delimiter);
         isValidNumber();
         return tokens;
     }
@@ -22,6 +31,11 @@ public class Input {
         return sum;
     }
 
+    private void isEmpty(){
+        if(input == null || input.isEmpty()){
+            throw new IllegalArgumentException("입력이 비었습니다.");
+        }
+    }
     private void isValidNumber(){
         try {
             for (String token : tokens) {
