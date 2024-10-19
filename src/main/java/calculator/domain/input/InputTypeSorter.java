@@ -1,4 +1,4 @@
-package calculator.domain;
+package calculator.domain.input;
 
 public class InputTypeSorter {
 
