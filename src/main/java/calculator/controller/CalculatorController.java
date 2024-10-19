@@ -1,8 +1,8 @@
 package calculator.controller;
 
 import calculator.service.InputValidator;
-import calculator.service.DelimiterExtractor;
-import calculator.service.NumberExtractor;
+import calculator.util.DelimiterExtractor;
+import calculator.util.NumberExtractor;
 import calculator.service.SumCalculator;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.List;
@@ -13,14 +13,10 @@ public class CalculatorController {
     private static final String RESULT_MESSAGE = "결과 : ";
 
     private final InputValidator inputValidator;
-    private final DelimiterExtractor delimiterExtractor;
-    private final NumberExtractor numberExtractor;
     private final SumCalculator sumCalculator;
 
     public CalculatorController() {
         this.inputValidator = new InputValidator();
-        this.delimiterExtractor = new DelimiterExtractor();
-        this.numberExtractor = new NumberExtractor();
         this.sumCalculator = new SumCalculator();
     }
 
@@ -28,8 +24,8 @@ public class CalculatorController {
         String input = getInput();
 
         inputValidator.validate(input);
-        List<String> delimiters = delimiterExtractor.extract(input);
-        List<Integer> numbers = numberExtractor.extract(input, delimiters);
+        List<String> delimiters = DelimiterExtractor.extract(input);
+        List<Integer> numbers = NumberExtractor.extract(input, delimiters);
         int result = sumCalculator.calculate(numbers);
 
         getResult(result);

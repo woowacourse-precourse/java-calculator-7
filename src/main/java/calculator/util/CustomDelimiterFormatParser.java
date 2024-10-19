@@ -3,27 +3,27 @@ package calculator.util;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomDelimiterFormatParser {
+public final class CustomDelimiterFormatParser {
 
     private static final String START_FORMAT = "//";
     private static final String END_FORMAT = "\\n";
 
-    public boolean isCheckedStart(String input) {
+    public static boolean isCheckedStart(String input) {
         return input.startsWith(START_FORMAT);
     }
 
-    public boolean isCheckedFormat(String input) {
+    public static boolean isCheckedFormat(String input) {
         return input.startsWith(START_FORMAT) && input.contains(END_FORMAT);
     }
 
-    public List<String> splitDelimiterSection(String input) {
+    public static List<String> splitDelimiterSection(String input) {
         List<String> delimiterSections = new ArrayList<>();
         extractCustomDelimiters(input, delimiterSections);
 
         return delimiterSections;
     }
 
-    private void extractCustomDelimiters(String input, List<String> delimiterSections) {
+    private static void extractCustomDelimiters(String input, List<String> delimiterSections) {
         int startIndex = input.indexOf(START_FORMAT);
 
         while (startIndex != -1) {
@@ -38,7 +38,7 @@ public class CustomDelimiterFormatParser {
         }
     }
 
-    public String preprocessInput(String input) {
+    public static String preprocessInput(String input) {
         if (isCheckedFormat(input)) {
             int endIndex = input.lastIndexOf(END_FORMAT);
 
