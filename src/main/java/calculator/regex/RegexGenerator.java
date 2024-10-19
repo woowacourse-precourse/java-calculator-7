@@ -7,7 +7,7 @@ public class RegexGenerator {
 
     private static final String DEFAULT_DELIMITER_AREA_REGEX = "(:(?=\\d+))|(,(?=\\d+))|(\\/\\/([\\w\\*\\@\\$\\!\\%\\*\\#\\?\\&\\;\\~\\^\\{\\}\\(\\)\\<\\>\\-\\+\\[\\]\\'\\\"\\,\\.\\\\]*)\\\\n)";
 
-    public Regex getExcludingDelimiterAreaRegex(final Delimiters delimiters) {
+    public Regex makeExcludingDelimiterAreaRegex(final Delimiters delimiters) {
         Regex regex = new Regex(DEFAULT_DELIMITER_AREA_REGEX);
 
         for (Delimiter delimiter : delimiters.getDelimiters()) {

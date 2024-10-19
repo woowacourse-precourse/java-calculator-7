@@ -31,8 +31,8 @@ public class Delimiters {
     }
 
     private void validateDelimiters(final Delimiter delimiter) {
-        checkIfOtherDelimiterIncluded(delimiter);
         checkIfDefaultDelimiterIncluded(delimiter);
+        checkIfOtherDelimiterIncluded(delimiter);
     }
 
     private void checkIfOtherDelimiterIncluded(final Delimiter delimiter) {
@@ -44,11 +44,12 @@ public class Delimiters {
     private void checkIfDefaultDelimiterIncluded(final Delimiter delimiter) {
         String totalRegex = CONTAINING_ALL_START_REGEX + DEFAULT_DELIMITER_REGEX + CONTAINING_ALL_END_REGEX;
         if (delimiter.matches(totalRegex)) {
-            throw new IllegalArgumentException("구분자는 기본 구분자를 포함할 수 없습니다.");
+            throw new IllegalArgumentException("구분자 내부에 기본 구분자를 포함할 수 없습니다.");
         }
     }
 
     public List<Delimiter> getDelimiters() {
         return Collections.unmodifiableList(delimiters);
     }
+
 }

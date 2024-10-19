@@ -8,7 +8,7 @@ public class Splitter {
 
     public String[] splitedByDelimiters(final String input, final Delimiters delimiters,
                                         final RegexGenerator regexGenerator) {
-        Regex regex = regexGenerator.getExcludingDelimiterAreaRegex(delimiters);
+        Regex regex = regexGenerator.makeExcludingDelimiterAreaRegex(delimiters);
 
         return input.split(regex.getRegex());
     }

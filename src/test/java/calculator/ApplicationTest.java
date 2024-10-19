@@ -74,7 +74,7 @@ class ApplicationTest extends NsTest {
             assertSimpleTest(() ->
                     assertThatThrownBy(() -> runException("//,!\\n1,!22,!23"))
                             .isExactlyInstanceOf(IllegalArgumentException.class)
-                            .hasMessage("구분자는 기본 구분자를 포함할 수 없습니다.")
+                            .hasMessage("구분자 내부에 기본 구분자를 포함할 수 없습니다.")
             );
         }
 
