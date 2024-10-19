@@ -7,4 +7,4 @@
 - validate : 사용자 입력 유효성 검증
 - set : 커스텀 구분자 설정
 - calculate : 더하기 연산
-- output : 결과 혹인 에러 출력
+- output : 결과 출력
