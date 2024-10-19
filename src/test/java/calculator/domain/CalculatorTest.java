@@ -29,7 +29,7 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("정수 합 연산")
+    @DisplayName("정수 합 연산에 성공한다")
     void sumIntegerTest() throws Exception {
         //given
         final String inputString1 = "//;\\n1,2;3";
