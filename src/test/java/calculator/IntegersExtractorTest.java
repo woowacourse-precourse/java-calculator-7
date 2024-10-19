@@ -1,155 +1,117 @@
 package calculator;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import calculator.domain.SplitNumbers;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
 class IntegersExtractorTest {
-    private final IntegersExtractor integersExtractor = new IntegersExtractor();
+
+    private static final List<Integer> EXPECTED_LIST = List.of(1, 2, 3);
 
     @Nested
+    @DisplayName("성공 테스트")
     class 성공_테스트 {
+
+        @Test
+        @DisplayName("성공 - 빈 문자열이 들어올 경우 빈 리스트를 반환한다.")
+        void emptyStringTest() {
+            runSuccessTest("", List.of());
+        }
+
         @Test
         @DisplayName("성공 - 기본 구분자인 경우")
-        void IntegersExtractorTest() {
-            // given
-            String inputValue = "1,2:3";
-            // when
-            List<Integer> integers = integersExtractor.extractIntegers(inputValue);
-            // then
-            assertThat(integers).containsExactly(1, 2, 3);
+        void basicDelimiterTest() {
+            runSuccessTest("1,2:3", EXPECTED_LIST);
         }
 
         @Test
         @DisplayName("성공 - 커스텀 구분자가 한 문자 인 경우")
         void singleCustomDelimiterTest() {
-            // given
-            String inputValue = "//;\\n1;2;3";
-            // when
-            List<Integer> integers = integersExtractor.extractIntegers(inputValue);
-            // then
-            assertThat(integers).containsExactly(1, 2, 3);
+            runSuccessTest("//;\\n1;2;3", EXPECTED_LIST);
         }
 
         @Test
         @DisplayName("성공 - 커스텀 구분자가 여러 문자 인 경우")
         void multiCustomDelimiterTest() {
-            // given
-            String inputValue = "//;*\\n1;*2;*3";
-            // when
-            List<Integer> integers = integersExtractor.extractIntegers(inputValue);
-            // then
-            assertThat(integers).containsExactly(1, 2, 3);
+            runSuccessTest("//;*\\n1;*2;*3", EXPECTED_LIST);
         }
 
         @Test
         @DisplayName("성공 - 커스텀 구분자와 기본 구분자가 같이 있는 경우")
         void normalAndCustomDelimiterTest() {
-            // given
-            String inputValue = "//;\\n1;2,3";
-            // when
-            List<Integer> integers = integersExtractor.extractIntegers(inputValue);
-            // then
-            assertThat(integers).containsExactly(1, 2, 3);
+            runSuccessTest("//;\\n1;2,3", EXPECTED_LIST);
         }
 
         @Test
         @DisplayName("성공 - 커스텀 구분자가 n인 경우")
-        void customDelimiterCase1Test() {
-            // given
-            String inputValue = "//n\\n1n2n3";
-            // when
-            List<Integer> integers = integersExtractor.extractIntegers(inputValue);
-            // then
-            assertThat(integers).containsExactly(1, 2, 3);
+        void customDelimiterNTest() {
+            runSuccessTest("//n\\n1n2n3", EXPECTED_LIST);
         }
 
         @Test
         @DisplayName("성공 - 커스텀 구분자가 //인 경우")
-        void customDelimiterCase2Test() {
-            // given
-            String inputValue = "////\\n1//2//3";
-            // when
-            List<Integer> integers = integersExtractor.extractIntegers(inputValue);
-            // then
-            assertThat(integers).containsExactly(1, 2, 3);
+        void customDelimiterDoubleSlashTest() {
+            runSuccessTest("////\\n1//2//3", EXPECTED_LIST);
         }
 
         @Test
         @DisplayName("성공 - 커스텀 구분자가 백슬레시 1개 인 경우")
-        void customDelimiterCase3Test() {
-            // given
-            String inputValue = "//\\\\n1\\2\\3";
-            // when
-            List<Integer> integers = integersExtractor.extractIntegers(inputValue);
-            // then
-            assertThat(integers).containsExactly(1, 2, 3);
+        void customDelimiterBackslashTest() {
+            runSuccessTest("//\\\\n1\\2\\3", EXPECTED_LIST);
         }
 
         @Test
         @DisplayName("성공 - 커스텀 구분자가 백슬레시 2개인 경우")
-        void customDelimiterCase4Test() {
-            // given
-            String inputValue = "//\\\\\\n1\\\\2\\\\3";
+        void customDelimiterDoubleBackslashTest() {
+            runSuccessTest("//\\\\\\n1\\\\2\\\\3", EXPECTED_LIST);
+        }
+
+        private void runSuccessTest(String inputValue, List<Integer> expected) {
             // when
-            List<Integer> integers = integersExtractor.extractIntegers(inputValue);
+            SplitNumbers numbers = SplitNumbers.from(inputValue);
             // then
-            assertThat(integers).containsExactly(1, 2, 3);
+            assertThat(numbers.getNumbers()).containsExactlyElementsOf(expected);
         }
     }
 
     @Nested
+    @DisplayName("예외 테스트")
     class 예외_테스트 {
+
         @Test
         @DisplayName("예외 - 커스텀 구분자가 잘못된 위치에 있는 경우")
         void wrongCustomDelimiterPositionTest() {
-            // given
-            String inputValue = "\\n;//1;2;3";
-            // when // then
-            assertThatThrownBy(() -> integersExtractor.extractIntegers(inputValue))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("잘못된 입력입니다. 커스텀 구분자는 //와 \\n 사이에 위치해야 합니다.");
+            runExceptionTest("\\n;//1;2;3", "잘못된 입력입니다. 커스텀 구분자는 //와 \\n 사이에 위치해야 합니다.");
         }
 
         @Test
         @DisplayName("예외 - 구분자 사이에 문자가 있는 경우")
         void delimiterInMiddleCharTest() {
-            // given
-            String inputValue = "1,a:3";
-            // when // then
-            assertThatThrownBy(() -> integersExtractor.extractIntegers(inputValue))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("잘못된 입력입니다. 구분자 사이에는 숫자만 입력되어야 합니다.");
+            runExceptionTest("1,a:3", "잘못된 입력입니다. 구분자 사이에는 숫자만 입력되어야 합니다.");
         }
 
         @Test
         @DisplayName("예외 - 구분자 사이에 숫자가 음수인 경우")
         void delimiterInMiddleNegativeIntegerTest() {
-            // given
-            String inputValue = "1,-1:3";
-            // when // then
-            assertThatThrownBy(() -> integersExtractor.extractIntegers(inputValue))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("잘못된 입력입니다. 구분자 사이에 숫자는 양수여야 합니다.");
+            runExceptionTest("1,-1:3", "잘못된 입력입니다. 구분자 사이에 숫자는 양수여야 합니다.");
         }
 
         @Test
         @DisplayName("예외 - 구분자 사이에 숫자가 0인 경우")
         void delimiterInMiddleZeroTest() {
-            // given
-            String inputValue = "1,0:3";
-            // when // then
-            assertThatThrownBy(() -> integersExtractor.extractIntegers(inputValue))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("잘못된 입력입니다. 구분자 사이에 숫자는 양수여야 합니다.");
+            runExceptionTest("1,0:3", "잘못된 입력입니다. 구분자 사이에 숫자는 양수여야 합니다.");
         }
 
+        private void runExceptionTest(String inputValue, String expectedMessage) {
+            // when // then
+            assertThatThrownBy(() -> SplitNumbers.from(inputValue))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(expectedMessage);
+        }
     }
-
-
 }

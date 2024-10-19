@@ -1,9 +1,11 @@
 package calculator;
 
+import calculator.config.AppConfig;
+import calculator.controller.StringAddCalculatorController;
+
 public class Application {
     public static void main(String[] args) {
-        IntegersExtractor integersExtractor = new IntegersExtractor();
-        StringSumCalculator calculator = new StringSumCalculator(integersExtractor);
-        calculator.run();
+        StringAddCalculatorController calculatorController = AppConfig.config();
+        calculatorController.run();
     }
 }
