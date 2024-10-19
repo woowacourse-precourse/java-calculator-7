@@ -29,6 +29,11 @@ public class StringCalculator {
             // exception 구현 예정
             throw new IllegalArgumentException("// \\n 사이 구분자가 존재하지 않는다는 exception 구현 예정");
         }
+
+        if (customSperator.length() != 1) {
+            // exception 구현 예정
+            throw new IllegalArgumentException("// \\n 사이 구분자가 문자가 아닌 문자열이라는 exception 구현 예정");
+        }
         return customSperator;
     }
 
