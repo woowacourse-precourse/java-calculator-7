@@ -16,11 +16,30 @@
 * 예를 들어 "//;\n1;2;3"과 같이 값을 입력할 경우 커스텀 구분자는 세미콜론(;)이며, 결과 값은 6이 반환되어야 한다.
 * 사용자가 잘못된 값을 입력할 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료되어야 한다.
 
+# 구현할 기능 목록 (2차로 생각)
+1. [입력] - class Input;
+  * 메서드 public.Input.inputString();
+2. [계산 과정(로직)]
+2.1. 유효성 검증 - class Validation
+   * 메서드 isNotEmpty(), isNotFormattErr(), isNotSomethingWroing() -> TC를 돌려보아야 알 수 있을 것 같음. (현재는 모르겠음) 
+   * 하나라도 false이면 유효성검증실패 throwException(); (종료)
+2.2. 커스텀 여부 - class CustomChecker
+   * 메서드 isCustom
+   * true 값 반환시 문자값 추출 메서드로 , 아니라면 2.4로
+2.3. 커스텀 문자라면 문자추출 - class CustomChecker
+   * 메서드 getCustomVal()
+2.4. 기본문자라면 기본, 커스텀이라면 커스텀 상태값과 str 문자열 전달 후 분리 - class Delimiter
+   * 메서드 pubilc static List<Integer> delimiter(boolean status, String str)
+2.5. 분리된 배열로 값을 더함 - class Sum
+   * 메서드 public static int Sum(List<Integer> value)
+3. [출력] - class Output;
+   * 메서드 public.Output.printOutMessage();
 
-# 구현할 기능 목록 (1차) 
 
-* mainApplicaion과 중간다리 역할을 하는 class / Class StringCalcularor
-
+# 구현할 기능 목록 (1차로 생각)
+* mainApplicaion과 중간다리 역할을 하는 class / Class StringCalcularor :
+왜냐하면 Application에 그냥 넣으면 실행하는 단계가 깔끔하지 못하고 지저분해지는 느낌, 계산로직만 있는게 아니라 다른 로직이 여러개 있을때에는 가독성이 떨어질 것으로 생각이 되어서 넣어야 한다고 생각..
+사람들이 말하는 controller 의 역할인 것 같음.
 * 올바르게 입력을 하였는지 검증을 한다. / Validation 
   * 지정된 문자로만 입력이 되었는가 (구분자가 "," , ":", or "//")
   * int형 수로만 입력이 되었는가
