@@ -139,7 +139,7 @@ class CalculatorInputParseServiceTest {
     @DisplayName("parseSumInput은 잘못된 입력에 대해 IllegalArgumentException을 던진다.")
     public void parseSumInput_WithInvalidInput_ThrowsIllegalArgumentException() {
         // given
-        String input = "1A,-2,3";
+        String input = "1A,2,3";
 
         // when & then
         Assertions.assertThatThrownBy(() -> calculatorInputParseService.parseSumInput(input))
