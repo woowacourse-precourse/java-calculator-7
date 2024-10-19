@@ -53,5 +53,7 @@ public class Application {
         sum += number;
     }
 
+    // 덧셈 결과 출력하기
+    System.out.println("결과 : " + sum);
     }
 }
