@@ -42,4 +42,26 @@ public class Input {
             }
         }
     }
+
+    private String[] splitStringByDelimiter() {
+        StringBuilder inputPart = new StringBuilder(input);
+
+        if (inputPart.isEmpty()) {
+            return new String[]{"0"};
+        }
+        if (inputPart.charAt(0) == '/') {
+            while (inputPart.charAt(0) == '/') {
+                inputPart.delete(0, 5);
+            }
+        }
+
+        ArrayList<String> delimiters = Delimiter.getCustomDelimiters(input);
+        delimiters.add(",");
+        delimiters.add(":");
+
+        String regex = String.join("|", delimiters);
+
+        return new String(inputPart).split(regex);
+    }
+
 }
