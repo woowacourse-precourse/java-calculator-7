@@ -45,7 +45,7 @@ public class CalculatorService {
 
     private void validatePositiveNumber(String value) {
         if (value.isEmpty() || !value.matches(Constants.POSITIVE_NUMBER_REGEX)) {
-            throw new IllegalArgumentException("양수만 허용됩니다.");
+            throw new IllegalArgumentException("양수만 계산할 수 있어요. 입력하신 식을 확인해주세요.");
         }
     }
 
@@ -70,13 +70,13 @@ public class CalculatorService {
 
     private void checkLongRange(double result) {
         if (result > Long.MAX_VALUE) {
-            throw new IllegalArgumentException("계산 결과가 너무 큽니다.");
+            throw new IllegalArgumentException("계산 결과가 너무 커서 처리할 수 없습니다. 다른 숫자를 시도해 보세요.");
         }
     }
 
     private void checkDoubleRange(double result) {
         if (result > Double.MAX_VALUE) {
-            throw new IllegalArgumentException("계산 결과가 너무 큽니다.");
+            throw new IllegalArgumentException("계산 결과가 너무 커서 처리할 수 없습니다. 다른 숫자를 시도해 보세요.");
         }
     }
 }

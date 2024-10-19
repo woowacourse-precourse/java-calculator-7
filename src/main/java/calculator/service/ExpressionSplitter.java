@@ -14,10 +14,10 @@ public class ExpressionSplitter {
 
     private static void validateExpression(String possibleSeparatorsRegex, String expression) {
         if (expression == null || expression.isEmpty()) {
-            throw new IllegalArgumentException("식이 존재하지 않습니다.");
+            throw new IllegalArgumentException("계산할 식을 찾을 수 없어요. 입력값을 확인해주세요.");
         }
         if (hasUnrecognizedSeparator(possibleSeparatorsRegex, expression)) {
-            throw new IllegalArgumentException("식별되지 않는 구분자가 포함되어 있습니다.");
+            throw new IllegalArgumentException("숫자와 사용 가능한 구분자 외에 다른 문자가 포함되어 있습니다. 입력값을 확인해주세요.");
         }
     }
 

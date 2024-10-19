@@ -27,10 +27,10 @@ public class Separators {
 
     private void validateSeparator(Separator separator) {
         if (isDefaultSeparator(separator.getRegex())) {
-            throw new IllegalArgumentException("기본 구분자를 커스텀 구분자로 사용할 수 없습니다.");
+            throw new IllegalArgumentException("기본 구분자인 쉼표(,)와 콜론(:)은 커스텀 구분자로 사용할 수 없어요. 다른 구분자를 사용해주세요.");
         }
         if (separators.size() >= Constants.MAX_CUSTOM_SEPARATORS) {
-            throw new IllegalArgumentException("커스텀 구분자는 하나만 추가할 수 있습니다.");
+            throw new IllegalArgumentException("한 번에 하나의 커스텀 구분자만 추가할 수 있어요.");
         }
     }
 
