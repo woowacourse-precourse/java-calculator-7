@@ -8,6 +8,9 @@ public class Application {
         // TODO: 프로그램 구현
 
         String UserInput = valueInput();
+        String matcherCheck = "[0-9]+";
+        int StartIndex = 0;
+        String AllSeparator;
 
         if (UserInput.isEmpty()) {
             resultPrint(0);
@@ -15,10 +18,14 @@ public class Application {
         }
 
         if (hasPattern(UserInput)) {
-
+            AllSeparator = ",|:|" + UserInput.substring(2);
+            StartIndex = 5;
         } else {
-
+            AllSeparator = ",|:";
         }
+
+        String[] NumberList =
+                UserInput.substring(StartIndex).split(AllSeparator);
     }
 
 
