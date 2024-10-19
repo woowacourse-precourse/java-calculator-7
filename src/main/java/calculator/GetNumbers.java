@@ -19,10 +19,6 @@ public class GetNumbers {
             }
             customDelimiter = input.substring(2, delimiterEndIndex);
             numbersPart = input.substring(delimiterEndIndex + 2);
-
-            // 로그 출력
-            System.out.println("Custom delimiter: " + customDelimiter);
-            System.out.println("Numbers part: " + numbersPart);
         }
 
         // 구분자 설정

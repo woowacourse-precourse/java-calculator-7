@@ -4,7 +4,7 @@ import java.util.List;
 
 public class InputValidator {
     // 입력값이 빈 문자열인지 확인
-    public  int validateEmptyString(String input) {
+    public int validateEmptyString(String input) {
         if (input == null || input.isEmpty()) {
             return 0;
         }
