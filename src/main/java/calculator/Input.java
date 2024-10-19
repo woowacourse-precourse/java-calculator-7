@@ -35,11 +35,15 @@ public class Input {
             throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
         }
 
+        validPositiveArray(numbers);
+        return numbers;
+    }
+
+    private static void validPositiveArray(int[] numbers) {
         for (int number : numbers) {
             if (number <= 0) {
                 throw new IllegalArgumentException("0 또는 음수는 입력할 수 없습니다.");
             }
         }
-        return numbers;
     }
 }
