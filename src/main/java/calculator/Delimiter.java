@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.regex.Pattern;
+
 public class Delimiter {
     private final String delimiterPattern;
     private boolean isCustomDelimiter = false;
@@ -10,6 +12,7 @@ public class Delimiter {
             validateCustomDelimiterForm(inputString);
             validateSingleChar(inputString);
             this.isCustomDelimiter = true;
+            defaultDelimiter = addCustomPattern(defaultDelimiter, inputString);
         }
         this.delimiterPattern = defaultDelimiter;
     }
@@ -36,6 +39,11 @@ public class Delimiter {
         if (delimiterEndIndex != 3) {
             throw new IllegalArgumentException("[ERROR] 커스텀 구분자는 하나의 문자 입니다.");
         }
+    }
+    private String addCustomPattern(String defaultDelimiter, String inputString) {
+        char customPattern = inputString.charAt(2);
+        String customDelimiter = Pattern.quote(String.valueOf(customPattern));
+        return defaultDelimiter + "|" + customDelimiter;
     }
 
 }
