@@ -20,6 +20,8 @@ public class Parser {
     private List<String> parseBasicSeparator(String input) {
         List<String> splitString = List.of(input.split(",|:"));
 
+        VerificationNum.verifyAndParseNums(splitString);
+
         return splitString;
     }
 
@@ -33,7 +35,7 @@ public class Parser {
         }
         String realInput = input.substring(input.indexOf("\\n") + 2);
 
-        VerificationCustomSeparator verificationCustomSeparator = new VerificationCustomSeparator(customSeparator);
+        VerificationCustomSeparator.verifyCustomSeparator(customSeparator);
 
         return parseCustom(realInput, customSeparator);
     }
@@ -41,6 +43,8 @@ public class Parser {
     public List<String> parseCustom(String input, String custom) {
         String separator = String.format(",|:|%s", Pattern.quote(custom));
         List<String> splitString = List.of(input.split(separator));
+
+        VerificationNum.verifyAndParseNums(splitString);
 
         return splitString;
     }

@@ -4,13 +4,7 @@ import java.util.List;
 
 public class VerificationNum {
 
-    private final List<String> parsedList;
-
-    public VerificationNum(List<String> parsedList) {
-        this.parsedList = parsedList;
-    }
-
-    public void verifyAndParseNums() {
+    public static void verifyAndParseNums(List<String> parsedList) {
         parsedList.forEach(num -> {
             try {
                 int parsedNum = Integer.parseInt(num);

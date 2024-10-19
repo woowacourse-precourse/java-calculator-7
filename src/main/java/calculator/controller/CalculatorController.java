@@ -17,8 +17,7 @@ public class CalculatorController {
         String input = InputView.getInput();
         List<String> parsedList = parser.parseInput(input);
 
-        VerificationNum verificationNum = new VerificationNum(parsedList);
-        verificationNum.verifyAndParseNums();
+
 
         Converter converter = new Converter(parsedList);
         Calculator calculator = new Calculator(converter.convertList());
