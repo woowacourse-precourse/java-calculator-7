@@ -1,9 +1,8 @@
-package calculator.domain;
+package calculator.domain.input;
 
 import calculator.util.InputValidator;
 import calculator.util.StringUtil;
 import java.util.Arrays;
-import java.util.Objects;
 
 public class BasicInput extends Input {
 
@@ -23,22 +22,6 @@ public class BasicInput extends Input {
                 .map(InputValidator::validateOnlyPlainNumber)
                 .peek(InputValidator::validatePositive)
                 .toArray(Long[]::new);
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) {
-            return true;
-        }
-        if (!(object instanceof BasicInput that)) {
-            return false;
-        }
-        return Objects.equals(text, that.text);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(text);
     }
 
 }
