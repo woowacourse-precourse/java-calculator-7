@@ -1,31 +1,32 @@
 package calculator;
 
-public class InputValidator {
+import static calculator.CustomDelimiter.customDelimiter;
+import static calculator.Parser.*;
 
+public class InputValidator {
+    private static String result = "";
     public static String validate(String input) {
-        String result = input;
 
         // 커스텀 구분자로 시작할 경우 커스텀 구분자 관련 호출 진행 (추출후 이후 문자열 검사.)
         // todo: 커스텀 구분자 로직 진행
-        if (validateStartsWithDelimiter(result)) {
-            result = CustomDelimiter.extractCustomDelimiter(result);
+        if (validateStartsWithDelimiter(input)) {
+            result = CustomDelimiter.extractCustomDelimiter(input);
+            return Parser.startsWithCustomDelimiter(customDelimiter, result);
         }
 
         // 빈 문자열 처리
         // todo : 빈 문자열 입력시 0 반환
-        if (validateEmpty(result)) {
-            return "0";
+        if (validateEmpty(input)) {
+            return result="0";
         }
 
 
-
-
-        validateNotStartsWithChar(result);
-        validateNotStartsWithNegativeNumber(result);
+        validateNotStartsWithChar(input);
+        validateNotStartsWithNegativeNumber(input);
 
         // 여기까지 왔으면 숫자로 시작, 기본 구분자로 파싱하는 다계로 이동
         // 구분자가 유효한지는 파싱과 구분자가 책임지게 함.
-        return Parser.startsWithPositiveNumber(result);
+        return Parser.startsWithPositiveNumber(input);
 
     }
 

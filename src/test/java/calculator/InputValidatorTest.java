@@ -8,6 +8,27 @@ import org.junit.jupiter.api.Test;
 class InputValidatorTest {
 
 
+    @DisplayName("커스텀 구분자가 없는 문자열 입력에 정상 동작")
+    @Test
+    void properResultStartsFromNumber() {
+        //given
+        String input = "1:2,3";
+        //when
+        InputValidator.validate(input);
+        //then
+        assertEquals(6, Parser.result);
+    }
+
+    @DisplayName("커스텀 구분자가 있으면 커스텀 구분자에 대해 정상 동작")
+    @Test
+    void properResultStartsFromCustomDelimiter() {
+        //given
+        String input = "//.\n1:2,3.4";
+        //when
+        InputValidator.validate(input);
+        //then
+        assertEquals(10, Parser.result);
+    }
 
     @DisplayName("빈 문자열 입력 0을 반환")
     @Test
@@ -24,7 +45,7 @@ class InputValidatorTest {
 
     }
 
-    @DisplayName("커스텀 구분자 지정 시 정상 처리") //todo: 이후 커스텀 처리 프로세스 추가할 예정
+    @DisplayName("커스텀 구분자 지정 시 정상 처리")
     @Test
     void testStartsWithDelimiter() {
         // given
@@ -33,6 +54,8 @@ class InputValidatorTest {
         // when, then: 정상 동작 => 예외 미동작
         assertDoesNotThrow(() -> InputValidator.validateStartsWithDelimiter(input));
     }
+
+
 
 
     @DisplayName("커스텀 구분자 지정 구문 없이 숫자가 아닌 문자가 등장함")
@@ -78,7 +101,6 @@ class InputValidatorTest {
     }
 
 
-    //todo @DisplayName("정상 입력(양수로 시작) 시 파서 호출")
 
 }
 

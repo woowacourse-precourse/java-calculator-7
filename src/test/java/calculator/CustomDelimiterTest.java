@@ -19,7 +19,7 @@ class CustomDelimiterTest {
         //then
         assertTrue(CustomDelimiter.isValidExpression(input));
         assertEquals("11", extractCustomDelimiter(input));
-        assertEquals('\\', CustomDelimiter.customDelimiter);
+        assertEquals("\\\\", CustomDelimiter.customDelimiter);
     }
 
 
@@ -34,7 +34,7 @@ class CustomDelimiterTest {
         //then
         assertTrue(CustomDelimiter.isValidExpression(input));
         assertEquals("11", CustomDelimiter.result);
-        assertEquals('!', CustomDelimiter.customDelimiter);
+        assertEquals("!", CustomDelimiter.customDelimiter);
 
     }
 
