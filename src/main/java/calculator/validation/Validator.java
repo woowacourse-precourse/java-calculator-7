@@ -11,7 +11,7 @@ public class Validator {
                 return 0;
             } 
             int number = Integer.parseInt(token);
-            if (number <= 0) {
+            if (number < 0) {
                 throw new IllegalArgumentException(INVALID_OPERAND);
             }
             return number;
