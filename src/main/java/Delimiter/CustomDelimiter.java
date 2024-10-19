@@ -2,7 +2,7 @@ package Delimiter;
 
 import exception.ErrorMessage;
 
-public class CustomDelimiter {
+public class CustomDelimiter extends Delimiter {
 
     public static int[] getNumber(String input) {
         String customDelimiter = getDelimiter(input);
@@ -20,19 +20,6 @@ public class CustomDelimiter {
             throw new IllegalArgumentException(ErrorMessage.ERROR_INPUT_IS_NUMBER.toString());
         }
         return numbers;
-    }
-
-    private static void checkIsEmpty(String token) {
-        if (token.isEmpty()) {
-            throw new IllegalArgumentException(ErrorMessage.ERROR_INPUT_IS_EMPTY.toString());
-        }
-    }
-
-    private static int isPositive(int number) {
-        if (number < 0) {
-            throw new IllegalArgumentException(ErrorMessage.ERROR_INPUT_IS_POSITIVE.toString());
-        }
-        return number;
     }
 
     // 커스텀 구분자 + 기본 구분자로 추출한 숫자(type: String) 배열 반환
