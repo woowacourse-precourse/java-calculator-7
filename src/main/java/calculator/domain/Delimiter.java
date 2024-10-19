@@ -66,7 +66,7 @@ public class Delimiter {
             return input.substring(index + 2);
         }
 
-        // 커스텀 구분자거 없을 경우
-        return input.substring(2);
+        // 커스텀 구분자가 없을 경우
+        return input;
     }
 }
