@@ -35,12 +35,12 @@ public class Application {
 
         // 3. 덧셈을 하는 기능
         int sum = 0;
-        if (splited_by_seperators.length == 1 && splited_by_seperators[0].equals("")){
+        if (splited_by_seperators.length == 1 && splited_by_seperators[0].isEmpty()){
             System.out.println("결과 : " + sum);
         } else {
-            for (int i = 0; i < splited_by_seperators.length; i++) {
-                if (Pattern.matches("^[0-9]*$", splited_by_seperators[i])){
-                    sum += Integer.parseInt(splited_by_seperators[i]);
+            for (String num: splited_by_seperators) {
+                if (Pattern.matches("^[0-9]*$", num)){
+                    sum += Integer.parseInt(num);
                 } else {
                     // 양수를 제외한 다른 것이 나왔을 때 에러처리
                     throw new IllegalArgumentException("덧셈은 양수만 가능합니다");
