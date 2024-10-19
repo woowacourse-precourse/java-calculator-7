@@ -21,4 +21,11 @@ class NumberSeparatorTest {
 	void validateSeparateNumberCharacter(String invalidData) {
 		assertThrows(IllegalArgumentException.class, () -> NumberSeparator.from(invalidData).separate());
 	}
+
+	@DisplayName("분리기의 커스텀 구분자는 입력 문자열 맨 앞에 있어야 한다")
+	@ParameterizedTest
+	@ValueSource(strings = {"1:2!3,4//!\\n", "1:2//!\\n!3", "1//!\\n!3!4"})
+	void validateSeparateNumberPosition(String invalidData) {
+		assertThrows(IllegalArgumentException.class, () -> NumberSeparator.from(invalidData).separate());
+	}
 }
