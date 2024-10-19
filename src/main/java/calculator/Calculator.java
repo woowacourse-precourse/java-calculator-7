@@ -1,27 +1,26 @@
 package calculator;
 
-import static calculator.StringParsing.StringValidateCheck;
+import static calculator.StringParsing.stringValidateCheck;
 
 public class Calculator {
-    private static String[] UserInputArr;
 
     public static void run() {
-        String userInput = CalStart.InputMessage();
+        String userInput = CalStart.inputMessage();
         String delimiter = InputValidate.checkCustom(userInput);
         int sum = calculateSum(userInput, delimiter);
 
         System.out.println("결과 : " + sum);
     }
 
-    public static int calculateSum(String UserInput, String delimiter) {
+    private static int calculateSum(String UserInput, String delimiter) {
         if (delimiter.length() > 3) {
             UserInput = UserInput.substring(UserInput.indexOf("\\n") + 2);
         }
-        UserInputArr = StringValidateCheck(UserInput, delimiter);
-        return UserInputArrIsNum(UserInputArr);
+        String[] userInputArr = stringValidateCheck(UserInput, delimiter);
+        return userInputArrIsNum(userInputArr);
     }
 
-    public static int UserInputArrIsNum(String[] UserInputArr) {
+    private static int userInputArrIsNum(String[] UserInputArr) {
         long sum = 0;
 
         for (String s : UserInputArr) {
@@ -44,4 +43,3 @@ public class Calculator {
         return (int) sum;
     }
 }
-//int범위아닌거 에러처리(보류), 변수명 수정, private
