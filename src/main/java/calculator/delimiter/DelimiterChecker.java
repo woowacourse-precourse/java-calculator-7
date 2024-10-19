@@ -1,5 +1,7 @@
 package calculator.delimiter;
 
+import calculator.CalculatorException;
+
 public class DelimiterChecker {
 
     private final String prefix;
@@ -11,7 +13,13 @@ public class DelimiterChecker {
     }
 
     public boolean isCustomDelimiter(String userInput) {
-        return userInput.startsWith(prefix) && userInput.contains(suffix);
+        if (!userInput.startsWith(prefix)) {
+            throw new CalculatorException("커스텀 구분자는 " + prefix + "로 시작해야 합니다.");
+        }
+        if (!userInput.contains(suffix)) {
+            throw new CalculatorException("커스텀 구분자 " + suffix + "를 포함해야 합니다.");
+        }
+        return true;
     }
 
     public String getPrefix() {
