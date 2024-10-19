@@ -24,7 +24,7 @@ public class CalculatorController {
     }
 
     private String decideDelimiter() {
-        if (input.substring(0, 2).equals(BEGIN_COMMAND)) {
+        if (input.length() > 3 && input.substring(0, 2).equals(BEGIN_COMMAND)) {
             int indexOfEndCommand = input.indexOf(END_COMMAND);
             String customDelimiter = input.substring(2, indexOfEndCommand);
             input = input.substring(indexOfEndCommand + END_COMMAND.length());
