@@ -12,7 +12,13 @@ public class Calculator {
 
         StringBuilder num = new StringBuilder();
 
-        for (int i = 0; i < input.length(); i++) {
+        int index = 0;
+
+        if (input.startsWith("//")) {
+            index = 5;
+        }
+
+        for (int i = index; i < input.length(); i++) {
             if (!separators.contains(input.charAt(i))) {
                 num.append(input.charAt(i));
             } else {
@@ -27,7 +33,7 @@ public class Calculator {
 
         return sum;
     }
-    
+
     public Calculator(String input, ArrayList<Character> separators) {
         this.input = input;
         this.separators = separators;
