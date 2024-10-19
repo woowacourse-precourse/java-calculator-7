@@ -274,6 +274,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void addInputOverIntegerSize_CustomDelimiter(){
+        assertSimpleTest(()->{
+            run("//?\\n2147483648");
+            assertThat(output()).contains("결과 : 2147483648");
+        });
+    }
+
+    @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1");
