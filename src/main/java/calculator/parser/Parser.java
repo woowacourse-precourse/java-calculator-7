@@ -16,9 +16,6 @@ public class Parser {
         separators.addAll(basicSep);
     }
 
-    public ArrayList<Integer> getOperands() {
-        return operands;
-    }
     public Parser updateInput(String input) {
         this.input = input;
         return this;
