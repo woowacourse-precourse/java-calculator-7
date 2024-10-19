@@ -1,13 +1,18 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 public class StringCalculator {
     private final StringBuilder separators;
+    private final List<Integer> numbers;
     private String input;
 
     public StringCalculator() {
         this.separators = new StringBuilder();
+        this.numbers = new ArrayList<>();
         this.input = "";
         separators.append(",:");
     }
@@ -41,13 +46,32 @@ public class StringCalculator {
     private boolean isDigit(char c) {
         return c - 48 >= 0 && c - 48 <= 9;
     }
-    
+
+    private void splitNumbers() {
+        StringTokenizer st = new StringTokenizer(input, separators.toString());
+        while (st.hasMoreTokens()) {
+            try {
+                int num = Integer.parseInt(st.nextToken());
+                if (num < 0) {
+                    throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+                }
+                numbers.add(num);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("구분자로 지정되지 않은 문자가 있습니다.");
+            }
+        }
+    }
+
     public void run() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         input = Console.readLine().trim();
 
         if (input.startsWith("//") && input.contains("\\n")) {
             splitCustomSeparator();
+        }
+
+        if (!input.isEmpty()) {
+            splitNumbers();
         }
 
         Console.close();
