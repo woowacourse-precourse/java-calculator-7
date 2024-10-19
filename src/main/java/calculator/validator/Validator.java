@@ -24,7 +24,7 @@ public class Validator {
     //커스텀 구분자를 사용하였는지 검사
     public boolean checkCustomSeparator(String input, ArrayList<String> separators) {
         // "//"로 시작안하면 커스텀 구분자를 사용안하기 때문에 리턴
-        if (input.startsWith("//")) {
+        if (!input.startsWith("//")) {
             return true;
         }
         for (int i = 2; i < input.length(); i++) {
@@ -42,7 +42,7 @@ public class Validator {
         if (input.startsWith("//")) {
             // "\n"의 위치 찾기
             int newlineIndex = input.indexOf("\\n");
-            if (newlineIndex <= 2) {
+            if (newlineIndex == -1 || newlineIndex <= 2) {
                 return false; // 형식이 잘못된 경우
             }
             // 커스텀 구분자 이후의 문자열만 처리
