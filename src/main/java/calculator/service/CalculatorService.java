@@ -16,9 +16,9 @@ public class CalculatorService {
         this.arrayConverter = new ArrayConverter(numberValidator);
     }
 
-    public int processCalculator(String readInput) {
-        String customDelimiter = extractUtil.extractCustomDelimiter(readInput);
-        String positiveString = extractUtil.extractPositiveString(readInput, customDelimiter);
+    public int processCalculator(String input) {
+        String customDelimiter = extractUtil.extractCustomDelimiter(input);
+        String positiveString = extractUtil.extractPositiveString(input, customDelimiter);
 
         char[] positiveCharacters = arrayConverter.toCharArrayWithoutDelimiter(positiveString, customDelimiter);
         int[] positives = arrayConverter.convertCharArrayToIntArray(positiveCharacters);
