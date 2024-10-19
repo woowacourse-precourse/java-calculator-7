@@ -1,78 +1,61 @@
 package calculator;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Optional;
 
 public class StringParser {
 
-    private List<String> delimiters = new ArrayList<>();
-    private String firstDelimiter = ",";
-    private String secondDelimiter = ":";
+    private final DelimiterProcessor delimiterProcessor;
+    private String input;
 
-    private String prefix = "//";
-    private String suffix = "\n";
-
-
-    public StringParser() {
-        delimiters.add(firstDelimiter);
-        delimiters.add(secondDelimiter);
+    public StringParser(String input) {
+        delimiterProcessor = new DelimiterProcessor(input);
+        this.input = input;
     }
 
-    public int getDelimiterCount() {
-        return delimiters.size();
+    public List<String> split() {
+        extractCustomDelimiterIfPresent();
+
+        List<String> strings = List.of(input.split(delimiterProcessor.getDelimiters()));
+
+        validateInput(strings);
+
+        return strings;
     }
 
-    public void addDelimiterFromInput(String input) {
-        Matcher m = Pattern.compile(getPattern()).matcher(input);
-
-        if (m.matches()) {
-            String customDelimiter = m.group(1);
-
-            if (customDelimiter.length() > 1) {
-                throw new IllegalArgumentException();
+    private void validateInput(List<String> strings) {
+        for (String number : strings) {
+            if (!number.isEmpty()) {
+                validateNumber(number);
             }
-
-            delimiters.add(customDelimiter);
         }
     }
 
-    private String getPattern() {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append(prefix);
-        sb.append("(.*)");
-        sb.append(suffix);
-        sb.append("(.*)");
-
-        return sb.toString();
-    }
-
-    private String getDelimiters() {
-        StringBuilder sb = new StringBuilder();
-
-        for (String delimiter : delimiters) {
-            sb.append(delimiter);
-            sb.append("|");
+    private void validateNumber(String number) {
+        if (isInvalidNumber(number)) {
+            throw new IllegalArgumentException();
         }
-
-        sb.deleteCharAt(sb.length() - 1);
-
-        return sb.toString();
     }
 
-    public List<String> split(String input) {
-        if (input.startsWith(prefix)) {
-            return List.of(input.split(suffix)[1].split(getDelimiters()));
-        }
-
-        return List.of(input.split(getDelimiters()));
+    private boolean isInvalidNumber(String number) {
+        return Integer.parseInt(number) < 0 || !Character.isDigit(number.charAt(0));
     }
 
-    public int[] convertToIntArray(List<String> strings) {
+    public List<Integer> convertToIntArray(List<String> strings) {
         return strings.stream()
-                .mapToInt(Integer::parseInt)
-                .toArray();
+                .map(Integer::parseInt)
+                .toList();
+    }
+
+    private void extractCustomDelimiterIfPresent() {
+        if (delimiterProcessor.containsCustomDelimiter()) {
+            input = extractExpression(input);
+        }
+    }
+
+    private String extractExpression(String input) {
+        return Optional.ofNullable(input)
+                .map(i -> i.substring(i.indexOf("\n") + 1))
+                .orElse("");
     }
 }
