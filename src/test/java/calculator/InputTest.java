@@ -3,6 +3,7 @@ package calculator;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import calculator.constants.ExceptionCode;
 import org.junit.jupiter.api.Test;
 
 public class InputTest {
@@ -71,9 +72,8 @@ public class InputTest {
         // when & then
         // IllegalArgumentException 발생
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
-            String splitInputWithSeparator = separators.containCustomSeparator(null);
-            Input input1 = new Input(splitInputWithSeparator);
+            String string = separators.containCustomSeparator(null);
         });
-        assertThat(exception.getMessage()).isEqualTo("입력값이 null이 될 수 없습니다.");
+        assertThat(exception.getMessage()).isEqualTo(ExceptionCode.NULL_INPUT.getMessage());
     }
 }
