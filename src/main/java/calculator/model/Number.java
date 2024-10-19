@@ -17,7 +17,7 @@ public class Number {
         return false;
     }
 
-    private void stringToInt() {
+    public void stringToInt() {
         if (isNullString()) {
             return;
         }
@@ -47,5 +47,9 @@ public class Number {
             sum += num;
         }
         return sum;
+    }
+
+    public int[] getNumbers() {
+        return numbers;
     }
 }
