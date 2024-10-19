@@ -1,26 +1,29 @@
 package calculator.core.service;
 
-import calculator.converter.StringToBigIntegerConverter;
-import calculator.extractor.StringDelimiterExtractor;
-import calculator.extractor.result.StringDelimiterResult;
+import calculator.converter.StringToPositiveBigIntegerConverter;
+import calculator.extractor.TextCustomDelimiterExtractor;
 import calculator.splitter.TextDelimiterSplitter;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Set;
 
+import static calculator.delimiter.BasicDelimiter.getBasicDelimiters;
+import static calculator.delimiter.CustomDelimiter.getCustomDelimiters;
+import static calculator.delimiter.CustomDelimiter.hasCustomDelimiter;
 import static calculator.util.StringUtils.hasText;
 import static java.math.BigInteger.ZERO;
 
 public class CalculateService {
 
-    private final TextDelimiterSplitter splitter;
-    private final StringDelimiterExtractor extractor;
-    private final StringToBigIntegerConverter converter;
+    private final TextDelimiterSplitter textDelimiterSplitter;
+    private final TextCustomDelimiterExtractor textCustomDelimiterExtractor;
+    private final StringToPositiveBigIntegerConverter stringToPositiveBigIntegerConverter;
 
     public CalculateService() {
-        this.splitter = new TextDelimiterSplitter();
-        this.extractor = new StringDelimiterExtractor();
-        this.converter = new StringToBigIntegerConverter();
+        this.textDelimiterSplitter = new TextDelimiterSplitter();
+        this.textCustomDelimiterExtractor = new TextCustomDelimiterExtractor();
+        this.stringToPositiveBigIntegerConverter = new StringToPositiveBigIntegerConverter();
     }
 
     public BigInteger calculate(String input) {
@@ -28,13 +31,21 @@ public class CalculateService {
             return ZERO;
         }
 
-        StringDelimiterResult extractedResult = extractor.extract(input);
-        List<String> list = splitter.split(extractedResult.text(), extractedResult.getDelimiters());
+        if (!hasCustomDelimiter(input)) {
+            return sum(textDelimiterSplitter.split(input, getBasicDelimiters()));
+        }
+
+        Set<String> delimiters = getCustomDelimiters(textCustomDelimiterExtractor.extractCustomDelimiter(input));
+        String text = textCustomDelimiterExtractor.extractText(input);
+
+        List<String> list = textDelimiterSplitter.split(text, delimiters);
 
         return sum(list);
     }
 
     private BigInteger sum(List<String> list) {
-        return list.stream().map(converter::convert).reduce(ZERO, BigInteger::add);
+        return list.stream()
+                .map(stringToPositiveBigIntegerConverter::convert)
+                .reduce(ZERO, BigInteger::add);
     }
 }
