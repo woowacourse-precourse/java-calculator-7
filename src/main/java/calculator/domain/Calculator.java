@@ -15,7 +15,7 @@ public class Calculator {
 		return sum;
 	}
 
-	public void calculateSum(){
+	public void calculateSum() {
 		calculationNumbers.forEach(number -> sum += number);
 	}
 }

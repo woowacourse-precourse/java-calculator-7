@@ -16,7 +16,7 @@ public class TypeConversion {
 		}
 	}
 
-	protected static void validateNumber(long number){
+	protected static void validateNumber(long number) {
 		validatePositiveNumber(number);
 	}
 

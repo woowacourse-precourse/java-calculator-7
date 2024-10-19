@@ -4,8 +4,8 @@ import java.util.regex.Pattern;
 
 import calculator.constant.DrawConstant;
 import calculator.domain.Calculator;
-import calculator.dto.FormulaDto;
 import calculator.dto.DelimitersDto;
+import calculator.dto.FormulaDto;
 import calculator.dto.NumbersDto;
 import calculator.dto.SumDto;
 import calculator.view.InputView;
@@ -25,7 +25,7 @@ public class ProgramController {
 
 		FormulaDto formulaDto = generateFormulaRequest();
 
-		if(isZeroRegex(formulaDto.formula())){
+		if (isZeroRegex(formulaDto.formula())) {
 			printZeroSumMessage();
 			return;
 		}
@@ -41,7 +41,8 @@ public class ProgramController {
 	}
 
 	private boolean isZeroRegex(String formula) {
-		return Pattern.matches(DrawConstant.ZERO_SUM_FORMULA_CONTAINS_CUSTOM_DELIMITER_REGEX, formula) || formula.isEmpty();
+		return Pattern.matches(DrawConstant.ZERO_SUM_FORMULA_CONTAINS_CUSTOM_DELIMITER_REGEX, formula)
+			|| formula.isEmpty();
 	}
 
 	private void printZeroSumMessage() {
@@ -65,7 +66,7 @@ public class ProgramController {
 		return drawController.drawNumbers(formulaDto, delimiterDto);
 	}
 
-	private SumDto calculateSum(NumbersDto numbersDto){
+	private SumDto calculateSum(NumbersDto numbersDto) {
 		Calculator calculator = new Calculator(numbersDto.numbers());
 		calculator.calculateSum();
 		return new SumDto(calculator.getSum());
