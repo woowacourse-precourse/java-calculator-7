@@ -1,7 +1,56 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
+
+// model
+class ExpressionModel {
+    private final String delimeter;
+    private final int cntData;
+    private final List<String> operand;
+
+    public ExpressionModel() {
+        this.delimeter = ",|:";
+        this.cntData = 0;
+        this.operand = new ArrayList<>();
+    }
+
+    int plusData() {
+        return cntData;
+    }
+}
+
+// view
+class CalculateView {
+    public String getUserInput() {
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        return Console.readLine();
+    }
+
+    public void displayResult(int cnt) {
+        System.out.println("결과 : " + cnt);
+    }
+}
+
+// controller
+class CalculatorController {
+    private final ExpressionModel model;
+    private final CalculateView view;
+
+    public CalculatorController(ExpressionModel model, CalculateView view) {
+        this.model = model;
+        this.view = view;
+    }
+
+    public void calculate(int cnt) {
+        String expression = view.getUserInput();
+        // 데이터 처리
+
+        // 출력
+    }
+}
 
 public class Application {
     static String delimeter = ",|:";
