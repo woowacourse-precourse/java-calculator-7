@@ -32,7 +32,7 @@ public class InputService {
             }
         }
 
-        // 입력 문자열이 "//\\n" 인 경우, 커스텀 구분자를 입력하지 않았다. 잘못된 입력이다.
+        // 기능 4-4 : 입력 문자열이 "//\\n" 인 경우, 커스텀 구분자를 입력하지 않았다. 잘못된 입력이다.
         if (userInput.startsWith("//") && userInput.charAt(2) == '\n') {
             throw new IllegalArgumentException("커스텀 구분자를 입력하지 않았습니다. 잘못된 입력입니다.");
         }
