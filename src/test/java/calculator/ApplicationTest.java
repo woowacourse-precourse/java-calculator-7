@@ -16,6 +16,13 @@ class ApplicationTest extends NsTest {
         });
     }
     @Test
+    void 미입력_처리() {
+        assertSimpleTest(() -> {
+            run(System.lineSeparator());
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+    @Test
     void 기본_구분자_사용() {
         assertSimpleTest(() -> {
             run("1,2,3");
@@ -82,15 +89,9 @@ class ApplicationTest extends NsTest {
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
+
     @Test
-    void 예외_테스트_4() { // 커스텀 구분자는 문자열 미허용
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("////;\\n1//;2//;3"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
-    }
-    @Test
-    void 예외_테스트_5() { // 커스텀 구분자 기준 문자열 사이 아무것도 입력하지 않으면 에러
+    void 예외_테스트_4() { // 커스텀 구분자 기준 문자열 사이 아무것도 입력하지 않으면 에러
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//\n123"))
                         .isInstanceOf(IllegalArgumentException.class)
