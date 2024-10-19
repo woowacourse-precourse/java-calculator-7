@@ -1,6 +1,7 @@
 package calculator;
 
 import calculator.model.Calculator;
+import calculator.model.Number;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -14,7 +15,7 @@ public class Application {
         String input = inputView.readInput();
 
         Calculator calculator = new Calculator();
-        int sum = calculator.sumNumbersFromString(input);
+        Number sum = calculator.sumNumbersFromString(input);
 
         outputView.displayResultMessage(String.valueOf(sum));
     }

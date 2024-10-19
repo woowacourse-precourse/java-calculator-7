@@ -1,26 +1,22 @@
 package calculator.model;
 
-import java.util.List;
-
 public class Calculator {
 
-    private final StringParser stringParser;
-
-    public Calculator() {
-        this.stringParser = new StringParser();
-    }
-
-    public int sumNumbersFromString(String input) {
-        List<Integer> numbers = stringParser.extractNumbers(input);
-        return sumNumbers(numbers);
-    }
-
-    public int sumNumbers(List<Integer> numbers) {
-        int sum = 0;
-        for (Integer number : numbers) {
-            sum += number;
+    public Number sumNumbersFromString(String input) {
+        if (isBlank(input)) {
+            return Number.from("0");
         }
 
-        return sum;
+        Separator separator = new Separator();
+        String[] numberStrings = separator.splitByAllSeparators(input);
+
+        Numbers numbers = Numbers.from(numberStrings);
+        Number number = numbers.sumNumbers();
+
+        return number;
+    }
+
+    private boolean isBlank(String input) {
+        return input.isEmpty();
     }
 }
