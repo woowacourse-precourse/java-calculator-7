@@ -1,9 +1,8 @@
-package calculator.domain;
+package calculator.domain.input;
 
 import calculator.util.InputValidator;
 import calculator.util.StringUtil;
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -50,19 +49,4 @@ public class CustomInput extends Input {
         return matcher.group(FIRST);
     }
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) {
-            return true;
-        }
-        if (!(object instanceof CustomInput that)) {
-            return false;
-        }
-        return Objects.equals(text, that.text);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(text);
-    }
 }
