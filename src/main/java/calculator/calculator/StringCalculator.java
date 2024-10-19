@@ -27,15 +27,19 @@ public class StringCalculator {
 
     private long sumNumbers(String[] numbers) {
         long sum = 0L;  // long 타입으로 초기화
-        try {
-            for (String number : numbers) {
-                long num = stringNumberParser.parseNumber(number);
-                sum = operation.operate(num, sum); // long 타입의 덧셈 사용
-            }
-        } catch (ArithmeticException e) { // 오버플로우 예외 처리
-            throw new IllegalArgumentException("덧셈 중 오버플로우가 발생했습니다.", e);
+        for (String number : numbers) {
+            long parsedNumber = stringNumberParser.parseNumber(number);
+            sum = calculateOrThrow(sum, parsedNumber); // long 타입의 덧셈 사용
         }
         return sum;
+    }
+
+    private long calculateOrThrow(long sum, long number) {
+        try {
+            return operation.operate(sum, number);
+        } catch (ArithmeticException e) {
+            throw new IllegalArgumentException("덧셈 중 오버플로우가 발생했습니다.", e);
+        }
     }
 
 }

@@ -4,10 +4,14 @@ public class NumberExtractor {
 
     public String extractNumbersPart(String input) {
         if (input.startsWith("//")) {
-            int delimiterEndIndex = input.indexOf("\\n");
-            return input.substring(delimiterEndIndex + 2);
+            return extractCustomNumbersPart(input);
         }
         return input.trim();
+    }
+
+    private String extractCustomNumbersPart(String input) {
+        int delimiterEndIndex = input.indexOf("\\n");
+        return input.substring(delimiterEndIndex + 2);
     }
 
 }
