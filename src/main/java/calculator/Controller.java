@@ -1,4 +1,5 @@
 package calculator;
+import calculator.view.OutputView;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Controller {
@@ -7,6 +8,6 @@ public class Controller {
 
     int result = PlusCalculator.calculateSum(input);
 
-    System.out.println(result);
+    OutputView.printResult(result);
   }
 }
