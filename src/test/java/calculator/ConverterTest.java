@@ -4,11 +4,12 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static calculator.CalculatorConstants.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ConverterTest {
 
-    Converter converter = new Converter("[,:]","//","\\n");
+    Converter converter = new Converter(DELIMITER_REGEX, CUSTOM_DELIMITER_PREFIX, CUSTOM_DELIMITER_SUFFIX);;
 
     @Test
     void 기본_구분자로_숫자_분리(){

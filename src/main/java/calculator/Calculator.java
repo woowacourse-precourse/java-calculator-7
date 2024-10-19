@@ -4,6 +4,8 @@ import camp.nextstep.edu.missionutils.Console;
 
 import java.util.List;
 
+import static calculator.CalculatorConstants.*;
+
 public class Calculator {
     private static final String INPUT_STRING_MESSAGE = "덧셈할 문자열을 입력해 주세요.";
     private static final String OUTPUT_RESULT_MESSAGE = "결과 : ";
@@ -12,8 +14,8 @@ public class Calculator {
     Validator validator;
 
     public Calculator() {
-        this.converter = new Converter("[,:]", "//", "\\n");
-        this.validator = new Validator("[,:]", "//", "\\n");
+        this.converter = new Converter(DELIMITER_REGEX, CUSTOM_DELIMITER_PREFIX, CUSTOM_DELIMITER_SUFFIX);
+        this.validator = new Validator(DELIMITER_REGEX, CUSTOM_DELIMITER_PREFIX, CUSTOM_DELIMITER_SUFFIX);
     }
 
     public void run() {
