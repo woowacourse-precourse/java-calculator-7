@@ -96,4 +96,17 @@ class CalculatorServiceTest {
                 .hasMessage("구분자와 숫자를 정확하게 입력해주세요.");
     }
 
+    @Test
+    @DisplayName("커스텀 구분자로 메타 문자를 처리하여 숫자를 올바르게 분리한다.")
+    void 커스텀_구분자로_메타_문자를_처리한다() {
+        // given
+        String input = "//+\\n1+2+3";
+        
+        // when
+        int result = calculatorService.calculateSum(input);
+
+        // then
+        assertThat(result).isEqualTo(6);
+    }
+
 }
