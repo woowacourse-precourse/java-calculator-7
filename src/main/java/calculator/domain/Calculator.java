@@ -28,16 +28,16 @@ public class Calculator {
     }
 
 
-    public void sum(String[] arr) {
+    public void sum(String[] extractNumberArr) {
         int sum = 0;
-        for (String str : arr) {
+        for (String str : extractNumberArr) {
             try {
                 sum += validateNumber(Integer.parseInt(str));
             } catch (NumberFormatException e) {
-                if (inputBlack(arr)) {
+                if (isInputBlank(extractNumberArr)) {
                     System.out.println("결과 : " + sum);
                 }
-                if (!inputBlack(arr)) {
+                if (!isInputBlank(extractNumberArr)) {
                     throw new IllegalArgumentException();
                 }
             }
@@ -45,8 +45,7 @@ public class Calculator {
         System.out.println("결과 : " + sum);
     }
 
-    // 이 로직 InputClass에서 다루는게 좋으려나?
-    private Boolean inputBlack(String[] arr) {
+    private Boolean isInputBlank(String[] arr) {
         if (arr.length != 1) {
             return false;
         }
