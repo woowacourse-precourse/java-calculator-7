@@ -9,59 +9,59 @@ public class CalculatorValidatorTest {
 
     @Test
     void 예외_테스트_커스텀_구분자_존재확인1() {
-        String input = "123";
-        Assertions.assertFalse(calculatorValidator.validateCustomDelimiterInput(input));
+        String inputString = "123";
+        Assertions.assertFalse(calculatorValidator.validateCustomDelimiterInput(inputString));
     }
 
     @Test
     void 예외_테스트_커스텀_구분자_존재확인2() {
-        String input = "/";
-        Assertions.assertFalse(calculatorValidator.validateCustomDelimiterInput(input));
+        String inputString = "/";
+        Assertions.assertFalse(calculatorValidator.validateCustomDelimiterInput(inputString));
     }
 
     @Test
     void 예외_테스트_커스텀_구분자_통과() {
-        String input = "//1\\n";
-        Assertions.assertTrue(calculatorValidator.validateCustomDelimiterInput(input));
+        String inputString = "//1\\n";
+        Assertions.assertTrue(calculatorValidator.validateCustomDelimiterInput(inputString));
     }
 
     @Test
     void 예외_테스트_커스텀_구분자_문자_접미사_누락() {
-        String input = "//";
+        String inputString = "//";
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            calculatorValidator.validateCustomDelimiterInput(input);
+            calculatorValidator.validateCustomDelimiterInput(inputString);
         });
     }
 
     @Test
     void 예외_테스트_커스텀_구분자_문자_누락() {
-        String input = "//\\n";
+        String inputString = "//\\n";
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            calculatorValidator.validateCustomDelimiterInput(input);
+            calculatorValidator.validateCustomDelimiterInput(inputString);
         });
     }
 
     @Test
     void 예외_테스트_커스텀_구분자_접미사_누락() {
-        String input = "//1";
+        String inputString = "//1";
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            calculatorValidator.validateCustomDelimiterInput(input);
+            calculatorValidator.validateCustomDelimiterInput(inputString);
         });
     }
 
     @Test
     void 예외_테스트_커스텀_구분자_형식_틀림() {
-        String input = "//1\\m";
+        String inputString = "//1\\m";
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            calculatorValidator.validateCustomDelimiterInput(input);
+            calculatorValidator.validateCustomDelimiterInput(inputString);
         });
     }
 
     @Test
     void 예외_테스트_커스텀_구분자_문자열_입력() {
-        String input = "//123\\n";
+        String inputString = "//123\\n";
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            calculatorValidator.validateCustomDelimiterInput(input);
+            calculatorValidator.validateCustomDelimiterInput(inputString);
         });
     }
 }

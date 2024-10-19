@@ -14,7 +14,7 @@ public class CalculatorService {
         return calculatorValidator.validateCustomDelimiterInput(inputString);
     }
 
-    public String addCustomDelimiter(String delimiter, String inputString) {
+    public String addCustomDelimiter(String inputString, String delimiter) {
         delimiter += inputString.charAt(CUSTOM_DELIMITER_INDEX);
         return delimiter;
     }
