@@ -10,7 +10,7 @@ public class ExpressionCalculator {
 
     // 입력받은 문자열을 계산하는 메서드
     public static int calculate(String input) {
-        String[] delimiterAndNumbers = parseIntput(input);
+        String[] delimiterAndNumbers = parseInput(input);
         String delimiters = delimiterAndNumbers[0];
         String numbers = delimiterAndNumbers[1];
 
@@ -19,7 +19,7 @@ public class ExpressionCalculator {
     }
 
     // 커스텀 구분자가 있는지 확인하고, 구분자와 숫자 문자열을 추출하는 메서드
-    private static String[] parseIntput(String input) {
+    private static String[] parseInput(String input) {
         String delimiters = DEFAULT_DELIMITERS;
         String numbers = input;
 
