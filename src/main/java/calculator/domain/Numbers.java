@@ -1,7 +1,5 @@
 package calculator.domain;
 
-import static calculator.constant.Delimiter.COLON;
-import static calculator.constant.Delimiter.COMMA;
 import static calculator.constant.NumberRange.MAX;
 import static calculator.constant.NumberRange.MIN;
 
@@ -12,10 +10,10 @@ import java.util.List;
 
 public class Numbers<T extends Number> {
 
-    private final List<T> numbers;
+    private final List<T> values;
 
-    private Numbers(final List<T> numbers) {
-        this.numbers = numbers;
+    private Numbers(final List<T> values) {
+        this.values = values;
     }
 
     public static Numbers<Integer> ofInteger(
@@ -26,18 +24,18 @@ public class Numbers<T extends Number> {
         stringValidator.validateFormat(inputString);
         stringValidator.validateRange(inputString, MIN, MAX);
         final String customDelimiter = stringParser.extractCustomDelimiter(inputString);
-        final String delimiter = "[" + COMMA + COLON + customDelimiter + "]";
+        final String delimiterRegex = stringParser.getDelimiterRegex(customDelimiter);
         final List<Integer> numbers = stringConvertor.convertToListWithDelimiter(
-                stringParser.removeCustomDelimiterFormat(inputString), delimiter);
+                stringParser.removeCustomDelimiterFormat(inputString), delimiterRegex);
         return new Numbers<>(numbers);
     }
 
     public int getSize() {
-        return numbers.size();
+        return values.size();
     }
 
     public T getNumber(final int idx) {
-        return numbers.get(idx);
+        return values.get(idx);
     }
 
 }
