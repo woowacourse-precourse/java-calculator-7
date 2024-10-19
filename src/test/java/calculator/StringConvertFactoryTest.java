@@ -46,7 +46,7 @@ class StringConvertFactoryTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"//^\n1^2^3", "//)\n1)2:3", "//*\n1,2*3"})
+    @ValueSource(strings = {"//^\\n1^2^3", "//)\\n1)2:3", "//*\\n1,2*3"})
     @DisplayName("구분자 선언 미포함 - 구분자 선언이 있는 문자열의 경우 커스텀 구분자를 포함한 패턴으로 분할")
     void containsDelimiterDeclaration_splitByCustomDelimiterAndDefaultDelimiter(String input) {
         //given & when

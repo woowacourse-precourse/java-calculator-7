@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 public class StringValidator {
 
     private final String PREFIX = "//";
-    private final String SUFFIX = "\n";
+    private final String SUFFIX = "\\n";
 
     public void validate(String input) {
         if (hasDelimiterDeclaration(input)) {
@@ -38,7 +38,7 @@ public class StringValidator {
             return !input.matches("^[0-9:,]+$");
         }
         String customDelimiter = input.substring(2, input.indexOf(SUFFIX));
-        String calculationValue = input.substring(input.indexOf(SUFFIX) + 1);
+        String calculationValue = input.substring(input.indexOf(SUFFIX) + 2);
         return !calculationValue.matches("^[\\d:," + Pattern.quote(customDelimiter) + "]+$");
     }
 

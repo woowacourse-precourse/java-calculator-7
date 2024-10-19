@@ -10,11 +10,15 @@ public class Application {
         String input = Console.readLine();
 
         StringConvertFactory stringConvertFactory = new StringConvertFactory();
-        String[] strings = stringConvertFactory.parseString(input);
+        String[] numbers = stringConvertFactory.parseString(input);
 
-        if (strings.length == 1) {
-            System.out.println(strings[0]);
+        if (numbers.length == 1) {
+            System.out.println("결과 : " + numbers[0]);
             return;
         }
+        StringCalculator stringCalculator = new StringCalculator();
+        int result = stringCalculator.calculate(numbers);
+
+        System.out.println("결과 : " + result);
     }
 }

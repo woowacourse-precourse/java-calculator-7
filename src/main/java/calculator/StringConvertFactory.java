@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 public class StringConvertFactory {
 
     private final String PREFIX = "//";
-    private final String SUFFIX = "\n";
+    private final String SUFFIX = "\\n";
     private final StringValidator stringValidator;
 
     public StringConvertFactory() {
@@ -26,7 +26,7 @@ public class StringConvertFactory {
 
         if (hasDelimiterDeclaration(input)) {
             delimiter = getCustomPattern(input, delimiter);
-            input = input.substring(input.indexOf(SUFFIX) + 1);
+            input = input.substring(input.indexOf(SUFFIX) + 2);
         }
         return input.split(delimiter);
     }
