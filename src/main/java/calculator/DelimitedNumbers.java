@@ -3,6 +3,9 @@ package calculator;
 import java.util.Arrays;
 
 public class DelimitedNumbers {
+    public static final String ZERO_STRING = "\"\"";
+    public static final String ONLY_DIGITS = "\\d+";
+
     private final String stringNumbers;
 
     public DelimitedNumbers(String stringNumbers, DelimiterResult regex) {
@@ -11,18 +14,18 @@ public class DelimitedNumbers {
     }
 
     private void validate(String stringNumbers, DelimiterResult regex) {
-        if (stringNumbers.equals("\"\"")) {
+        if (stringNumbers.equals(ZERO_STRING)) {
             return;
         }
         validateContainsDelimiter(stringNumbers, regex);
     }
 
     private void validateContainsDelimiter(String stringNumbers, DelimiterResult regex) {
-        if (stringNumbers.contains("\"\"")) {
+        if (stringNumbers.contains(ZERO_STRING)) {
             return;
         }
 
-        if (stringNumbers.matches("\\d+")) {
+        if (stringNumbers.matches(ONLY_DIGITS)) {
             return;
         }
 
