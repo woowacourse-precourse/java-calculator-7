@@ -6,8 +6,8 @@ import camp.nextstep.edu.missionutils.Console;
 public class CalculatorController {
     private final CalculatorService calculatorService;
 
-    public CalculatorController(CalculatorService calculatorService) {
-        this.calculatorService = calculatorService;
+    public CalculatorController() {
+        this.calculatorService = new CalculatorService();
     }
 
     public void input() {

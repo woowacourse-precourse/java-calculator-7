@@ -7,7 +7,7 @@ public class Configuration {
     private final CalculatorController calculatorController;
 
     public Configuration() {
-        this.calculatorController = new CalculatorController(new CalculatorService());
+        this.calculatorController = new CalculatorController();
     }
 
     public CalculatorController getCalculatorController() {

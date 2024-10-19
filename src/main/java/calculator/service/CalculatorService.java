@@ -1,16 +1,18 @@
 package calculator.service;
 
+import java.util.Arrays;
+
 public class CalculatorService {
     private String s;
-    private String plusSeparator;
+    private String customSeparator;
 
     /**
      * 덧셈 로직을 순차적으로 진행한다.
      */
     public int sum(String s) {
         this.s = s;
-        boolean hasPlusSeparator = checkPlusSeparator();
-        String[] separatedString = separate(hasPlusSeparator);
+        boolean hasCustomSeparator = checkCustomSeparator();
+        String[] separatedString = separate(hasCustomSeparator);
         hasNaN(separatedString);
         return sumSeparatedStringArr(separatedString);
     }
@@ -20,9 +22,9 @@ public class CalculatorService {
      *
      * @return 만약 커스텀 구분자가 있다면 true, 없다면 false 를 반환한다.
      */
-    private boolean checkPlusSeparator() {
+    private boolean checkCustomSeparator() {
         if (s.length() >= 5 && s.startsWith("//") && s.startsWith("\\n", 3)) {
-            plusSeparator = String.valueOf(s.charAt(2));
+            customSeparator = String.valueOf(s.charAt(2));
             s = s.substring(5);
             return true;
         }
@@ -32,17 +34,17 @@ public class CalculatorService {
     /**
      * 받은 문자열을 구분자를 기준으로 나눈다. 만약 커스텀 구분자에 역슬래시가 있다면 문제가 생기지 않도록 한다.
      *
-     * @param hasPlusSeparator 커스텀 구분자가 있다면 true, 없다면 false 를 입력한다.
+     * @param hasCustomSeparator 커스텀 구분자가 있다면 true, 없다면 false 를 입력한다.
      * @return 분리된 문자열을 반환한다. 이 문자열에는 반드시 숫자만 있는 것은 아니다.
      */
-    private String[] separate(boolean hasPlusSeparator) {
-        if (!hasPlusSeparator) {
+    private String[] separate(boolean hasCustomSeparator) {
+        if (!hasCustomSeparator) {
             return s.split("[:,]");
         }
-        if (plusSeparator.equals("\\")) {
-            return s.split("[:," + plusSeparator.repeat(2) + "]");
+        if (customSeparator.equals("\\")) {
+            return s.split("[:," + customSeparator.repeat(2) + "]");
         }
-        return s.split("[:," + plusSeparator + "]");
+        return s.split("[:," + customSeparator + "]");
     }
 
     /**
@@ -51,12 +53,10 @@ public class CalculatorService {
      * @param separatedStringArr 숫자 외의 문자가 있는지 확인하고 싶은 문자열을 입력한다.
      */
     private void hasNaN(String[] separatedStringArr) {
-        for (String s : separatedStringArr) {
-            for (char c : s.toCharArray()) {
-                if (c < 48 || c > 57) {
-                    throw new IllegalArgumentException();
-                }
-            }
+        if (Arrays.stream(separatedStringArr)
+                .flatMapToInt(String::chars)
+                .anyMatch(it -> it < '0' || it > '9')) {
+            throw new IllegalArgumentException();
         }
     }
 
