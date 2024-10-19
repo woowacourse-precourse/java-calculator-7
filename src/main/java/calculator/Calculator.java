@@ -11,18 +11,20 @@ public class Calculator {
 
     public double calculateSingleValue() {
         String inputString = stringData.getInputString();
-        return Double.parseDouble(inputString);
+        double singleValue = Double.parseDouble(inputString);
+
+        return singleValue;
     }
 
     public double calculateString() throws NumberFormatException {
         String inputString = stringData.getInputString();
         String separator = stringData.getSeparator();
-
         String[] slicedString = inputString.split(separator);
-        double sum = sumData.getSumData();
+        double sumValue = sumData.getSumData();
+
         for (String slice : slicedString) {
-            sum += Double.parseDouble(slice);
+            sumValue += Double.parseDouble(slice);
         }
-        return sum;
+        return sumValue;
     }
 }
