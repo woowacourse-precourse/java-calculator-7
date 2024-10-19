@@ -1,6 +1,7 @@
 package calculator.service;
 
 import calculator.dto.CalculatorDTO;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -41,4 +42,29 @@ class CalculatorServiceTest {
         assertThat(result).isEqualTo(6);
     }
 
+    @Test
+    @DisplayName("중간에 계산 대상이 정수가 아닌 경우")
+    void hasNoCustomDelimiterExceptionCheck(){
+        //given
+        String str = "1,2: ";
+        CalculatorDTO calculatorDTO = new CalculatorDTO(str);
+
+        //when
+        CalculatorService calculatorService = CalculatorConfig.getCalculatorService(calculatorDTO);
+        Assertions.assertThrows(IllegalArgumentException.class,
+                ()->calculatorService.calculate(calculatorDTO));
+    }
+
+    @Test
+    @DisplayName("중간에 계산 대상이 정수가 아닌 경우")
+    void hasCustomDelimiterExceptionCheck(){
+        //given
+        String str = "//?\\n1?2?*";
+        CalculatorDTO calculatorDTO = new CalculatorDTO(str);
+
+        //when
+        CalculatorService calculatorService = CalculatorConfig.getCalculatorService(calculatorDTO);
+        Assertions.assertThrows(IllegalArgumentException.class,
+                ()->calculatorService.calculate(calculatorDTO));
+    }
 }
