@@ -51,6 +51,14 @@ public class StringAddCalculator {
     }
 
     private static int toInt(String stringNumber) {
-        return Integer.parseInt(stringNumber);
+        return validateParseNumber(stringNumber);
+    }
+
+    private static int validateParseNumber(String stringNumber) {
+        try {
+            return Integer.parseInt(stringNumber);
+        } catch (NumberFormatException exception) {
+            throw new IllegalArgumentException("구분자가 잘못 되었습니다. 커스텀 구분자, 기본 구분자를 확인 후, 다시 입력하세요");
+        }
     }
 }
