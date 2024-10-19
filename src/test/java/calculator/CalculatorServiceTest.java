@@ -19,91 +19,98 @@ class CalculatorServiceTest {
 
     @Test
     void 빈_문자열_처리_테스트() {
-        assertEquals(0, calculator.calculate(""));
+        assertEquals("0", calculator.calculate(""));
     }
 
     @Test
     void 기본_구분자_처리_테스트() {
-        assertEquals(6, calculator.calculate("1,2:3"));
+        assertEquals("6", calculator.calculate("1,2:3"));
     }
 
     @Test
     void 커스텀_구분자_처리_테스트() {
-        assertEquals(6, calculator.calculate("//#\\n1#2#3"));
+        assertEquals("6", calculator.calculate("//#\\n1#2#3"));
     }
 
     @Test
-    void 긴_커스텀_구분자_처리_테스트() {
-        assertEquals(6, calculator.calculate("//qq\\n1qq2qq3"));
+    void 긴_커스텀_구분자_예외_테스트() {
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> calculator.calculate("//qq\\n1qq2qq3"));
+        assertEquals("올바르지 않은 형식입니다. 커스텀 구분자는 1글자의 문자만 가능합니다.", exception.getMessage());
     }
 
     @Test
     void 기본_커스텀_구분자_처리_테스트() {
-        assertEquals(6, calculator.calculate("//#\\n1#2:3"));
+        assertEquals("6", calculator.calculate("//#\\n1#2:3"));
     }
 
     @Test
     void 여러개의_커스텀_구분자_처리_테스트() {
-        assertEquals(6, calculator.calculate("//#\\n//$\\n1#2$3"));
+        assertEquals("6", calculator.calculate("//#\\n//$\\n1#2$3"));
     }
 
     @Test
     void 커스텀_구분자가_공백_문자열일_경우_처리_테스트() {
-        assertEquals(15, calculator.calculate("// \\n12 3"));
+        assertEquals("15", calculator.calculate("// \\n12 3"));
     }
 
     @Test
-    void 커스텀_구분자_포맷이_구분자일_경우_예외_테스트1() {
+    void 커스텀_구분자가_기본_구분자일_경우_테스트() {
+        assertEquals("12", calculator.calculate("//,\\n1,2,4:5"));
+    }
+
+    @Test
+    void 커스텀_구분자_포맷_예외_테스트1() {
         Exception exception = assertThrows(IllegalArgumentException.class,
                 () -> calculator.calculate("////\\n1//2//3"));
-        assertEquals("올바르지 않은 형식입니다. '//'나 '\\n'은 커스텀 구분자로 사용할 수 없습니다.", exception.getMessage());
+        assertEquals("올바르지 않은 형식입니다. 커스텀 구분자는 '//'와 '\\n' 사이에 위치해야 합니다.", exception.getMessage());
     }
 
     @Test
-    void 커스텀_구분자_포맷이_구분자일_경우_예외_테스트2() {
+    void 커스텀_구분자_포맷_예외_테스트2() {
         Exception exception = assertThrows(IllegalArgumentException.class,
                 () -> calculator.calculate("//\\n\\n1\\n2\\n3"));
-        assertEquals("올바르지 않은 형식입니다. '//'나 '\\n'은 커스텀 구분자로 사용할 수 없습니다.", exception.getMessage());
+        assertEquals("올바르지 않은 형식입니다. 커스텀 구분자는 '//'와 '\\n' 사이에 위치해야 합니다.", exception.getMessage());
     }
 
     @Test
-    void 커스텀_구분자_포맷이_구분자일_경우_예외_테스트3() {
+    void 커스텀_구분자_포맷_예외_테스트3() {
         Exception exception = assertThrows(IllegalArgumentException.class,
                 () -> calculator.calculate("//\\n\\n////\\n1//2\\n3"));
-        assertEquals("올바르지 않은 형식입니다. '//'나 '\\n'은 커스텀 구분자로 사용할 수 없습니다.", exception.getMessage());
+        assertEquals("올바르지 않은 형식입니다. 커스텀 구분자는 '//'와 '\\n' 사이에 위치해야 합니다.", exception.getMessage());
     }
 
     @Test
-    void 커스텀_구분자_포맷이_구분자일_경우_예외_테스트4() {
+    void 커스텀_구분자_포맷_예외_테스트4() {
         Exception exception = assertThrows(IllegalArgumentException.class,
                 () -> calculator.calculate("//\\n\\n//$\\n////\\n1//2\\n3$4,5"));
-        assertEquals("올바르지 않은 형식입니다. '//'나 '\\n'은 커스텀 구분자로 사용할 수 없습니다.", exception.getMessage());
+        assertEquals("올바르지 않은 형식입니다. 커스텀 구분자는 '//'와 '\\n' 사이에 위치해야 합니다.", exception.getMessage());
     }
 
     @Test
-    void 커스텀_구분자_포맷이_구분자일_경우_예외_테스트5() {
+    void 커스텀_구분자_포맷_예외_테스트5() {
         Exception exception = assertThrows(IllegalArgumentException.class,
                 () -> calculator.calculate("////\\n\\n//$\\n////\\n1//2\\n3$4,5//\\n6"));
-        assertEquals("올바르지 않은 형식입니다. '//'나 '\\n'은 커스텀 구분자로 사용할 수 없습니다.", exception.getMessage());
+        assertEquals("올바르지 않은 형식입니다. 커스텀 구분자는 '//'와 '\\n' 사이에 위치해야 합니다.", exception.getMessage());
     }
 
     @Test
-    void 커스텀_구분자_포맷이_구분자일_경우_예외_테스트6() {
+    void 커스텀_구분자_포맷_예외_테스트6() {
         Exception exception = assertThrows(IllegalArgumentException.class,
                 () -> calculator.calculate("//////\\n\\n\\n1////\\n\\n2"));
-        assertEquals("올바르지 않은 형식입니다. '//'나 '\\n'은 커스텀 구분자로 사용할 수 없습니다.", exception.getMessage());
+        assertEquals("올바르지 않은 형식입니다. 커스텀 구분자는 '//'와 '\\n' 사이에 위치해야 합니다.", exception.getMessage());
     }
 
     @Test
     void 음수_입력_예외_테스트() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> calculator.calculate("1,-2,3"));
-        assertEquals("음수 입력은 불가능합니다.", exception.getMessage());
+        assertEquals("음수 입력은 불가합니다.", exception.getMessage());
     }
 
     @Test
     void 숫자_커스텀_구분자_예외_테스트() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> calculator.calculate("//1\\n213"));
-        assertEquals("올바르지 않은 형식입니다. 커스텀 구분자는 숫자 형식이 불가능합니다.", exception.getMessage());
+        assertEquals("올바르지 않은 형식입니다. 커스텀 구분자는 숫자 형식이 불가합니다.", exception.getMessage());
     }
 
     @Test

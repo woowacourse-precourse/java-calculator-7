@@ -1,29 +1,54 @@
 package calculator.domain;
 
+import static calculator.exception.Exception.INVALID_FORMAT;
+import static calculator.exception.Exception.INVALID_NEGATIVE_NUMBER;
+import static calculator.exception.Exception.NUMERIC_TOO_LONG;
+
 public class Number {
 
-    private final int value;
+    private static final int MAX_LENGTH = 10;
+    private final long value;
 
     public Number(String input) {
-        this.value = parseInt(input);
-        validatePositive(value);
+        validate(input);
+        this.value = parseLong(input);
     }
 
-    public int getValue() {
+    public long getValue() {
         return value;
     }
 
-    private int parseInt(String number) {
+    private void validate(String input) {
+        validateFormat(input);
+        validateLength(input);
+        validatePositive(input);
+    }
+
+    private long parseLong(String number) {
         try {
-            return Integer.parseInt(number);
+            return Long.parseLong(number);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("올바르지 않은 형식입니다: " + number);
+            throw new IllegalArgumentException(INVALID_FORMAT.getMessage());
         }
     }
 
-    private void validatePositive(int num) {
-        if (num < 0) {
-            throw new IllegalArgumentException("음수 입력은 불가능합니다: " + num);
+    private void validateFormat(String input) {
+        if (!input.matches("-?\\d+")) {
+            throw new IllegalArgumentException(INVALID_FORMAT.getMessage());
+        }
+    }
+
+    private void validateLength(String input) {
+        int maxAllowedLength = input.startsWith("-") ? MAX_LENGTH + 1 : MAX_LENGTH;
+
+        if (input.length() > maxAllowedLength) {
+            throw new IllegalArgumentException(NUMERIC_TOO_LONG.getMessage());
+        }
+    }
+
+    private void validatePositive(String input) {
+        if (input.startsWith("-")) {
+            throw new IllegalArgumentException(INVALID_NEGATIVE_NUMBER.getMessage());
         }
     }
 }
