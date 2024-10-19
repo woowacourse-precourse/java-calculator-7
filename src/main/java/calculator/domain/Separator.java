@@ -5,7 +5,7 @@ public class Separator {
     private static final String NOT_NUMBER_MESSAGE = "커스텀 구분자는 문자만 가능합니다.";
 
     private static final String defaultSeparator = "[,:]";
-    private String customSeparator = "";
+    private String customSeparator = null;
 
     public Separator(String inputValue) {
         String customSeparator = getCustomSeparator(inputValue);
@@ -13,7 +13,7 @@ public class Separator {
     }
 
     private void setCustomSeparator(String customSeparator) {
-        if (!customSeparator.isEmpty()) {
+        if (customSeparator != null) {
             validate(customSeparator);
             this.customSeparator = escapeSeparator(customSeparator);
         }
@@ -47,7 +47,7 @@ public class Separator {
     }
 
     public String[] splitBySeparator(String inputValue) {
-        if (customSeparator.isEmpty()) {
+        if (customSeparator == null) {
             return inputValue.split(defaultSeparator);
         }
         String targetValue = inputValue.substring(5);
