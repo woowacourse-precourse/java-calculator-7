@@ -9,17 +9,15 @@ import java.util.regex.Pattern;
 public class ParsingUtils {
 
     public static List<String> parsingUserInput(String userInput){
-        String pattern = "//.*\\n";
+        String regex = "//(.*)\\\\n(.*)";
 
-        Matcher matcher = Pattern.compile(pattern).matcher(userInput);
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(userInput);
 
         List<String> paringUserInput = new ArrayList<>();
         if(matcher.find()){
-            String customDelimiter = userInput.substring(2, userInput.lastIndexOf("\n"));
-            paringUserInput.add(customDelimiter);
-
-            String numberString = userInput.substring(userInput.lastIndexOf("\n") + 1);
-            paringUserInput.add(numberString);
+            paringUserInput.add(matcher.group(1));
+            paringUserInput.add(matcher.group(2));
         }
         else{
             paringUserInput.add(userInput);
