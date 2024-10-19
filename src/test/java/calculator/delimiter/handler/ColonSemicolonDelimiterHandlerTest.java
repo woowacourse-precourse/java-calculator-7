@@ -1,6 +1,7 @@
 package calculator.delimiter.handler;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -30,5 +31,17 @@ class ColonSemicolonDelimiterHandlerTest {
 
         // then
         assertThat(stringList).hasSize(5).containsExactly("1", "2", "3", "4", "5");
+    }
+
+    @Test
+    @DisplayName(",와 :구분자가 연속으로 나올 경우 IllegalArgumentException을 반환한다.")
+    void throws_exception_when_delimiter_are_consecutive() {
+        // given
+        String s = "1,2,3,,4:5";
+
+        // when, then
+        assertThatThrownBy(() -> handler.split(s))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("구분자가 연속해서 있습니다.");
     }
 }
