@@ -63,22 +63,19 @@ public class Application {
         return add(parsedNumbers);
     }
 
+
+    private static String[] getCustomDelimiters(String input, int indexOfEndSign) {
+        return input
+                .substring(CUSTOM_DELIMITER_START_SIGN_LENGTH, indexOfEndSign)
+                .split(""); // 여러 커스텀 구분자 받는 경우 포함
+    }
+
     private static void validateCustomDelimiters(String[] customDelimiters) {
         for (String delim : customDelimiters) {
             if (containsDigit(delim)) {
                 throw new IllegalArgumentException("커스텀 구분자에 숫자가 포함될 수 없습니다: " + delim);
             }
         }
-    }
-
-    private static boolean containsDigit(String delim) {
-        return delim.chars().anyMatch(Character::isDigit);
-    }
-
-    private static String[] getCustomDelimiters(String input, int indexOfEndSign) {
-        return input
-                .substring(CUSTOM_DELIMITER_START_SIGN_LENGTH, indexOfEndSign)
-                .split(""); // 여러 커스텀 구분자 받는 경우 포함
     }
 
     private static void appendCustomDelimiters(StringBuilder delimiterPart, String[] customDelimiters) {
@@ -117,6 +114,10 @@ public class Application {
 
     private static int add(int[] numbers) {
         return Arrays.stream(numbers).sum();
+    }
+
+    private static boolean containsDigit(String delim) {
+        return delim.chars().anyMatch(Character::isDigit);
     }
 
     private static boolean isNotEmpty(String n) {
