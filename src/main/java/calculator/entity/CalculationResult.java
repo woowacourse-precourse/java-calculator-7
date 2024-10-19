@@ -14,6 +14,6 @@ public class CalculationResult {
 
     @Override
     public String toString() {
-        return "결과: " + result;
+        return "결과 : " + result;
     }
 }
