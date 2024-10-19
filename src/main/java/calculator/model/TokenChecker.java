@@ -8,6 +8,10 @@ public class TokenChecker {
         this.delimiters = delimiters;
     }
 
+    public boolean isEndingWithDelimiter(int t) {
+        return isEven(t);
+    }
+
     public boolean isNumericToken(String token, int t) {
         if (isEven(t)) {
             return verifyNumericToken(token);

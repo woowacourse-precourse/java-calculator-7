@@ -11,19 +11,15 @@ public class Application {
 
         // 1. 입력 받기
         ConsoleView consoleView = new ConsoleView();
-
         String expression = consoleView.getExpression();
 
         // 2. custom 구분자 확인
-        DelimiterHandler delimiterHandler = new DelimiterHandler();
-
-        delimiterHandler.setDelimiter(expression);
+        DelimiterHandler delimiterHandler = new DelimiterHandler(expression);
         String delimiters = delimiterHandler.getAllDelimiters();
         boolean customDelimiterFlag = delimiterHandler.getCustomDelimiterFlag();
 
         // 3. 문자열 tokenizing
         ExpressionHandler expressionHandler = new ExpressionHandler(expression, delimiters, customDelimiterFlag);
-
         StringTokenizer tokenizedExpression = expressionHandler.tokenizeExpression();
 
         // 4. 덧셈

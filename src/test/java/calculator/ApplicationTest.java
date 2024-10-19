@@ -33,8 +33,8 @@ class ApplicationTest extends NsTest {
     @Test
     void getCustomDelimiterTest() {
         assertSimpleTest(() -> {
-            DelimiterHandler delimiterHandler = new DelimiterHandler();
-            delimiterHandler.setDelimiter("//.\\n1,2");
+            String expression = "//.\\n1,2";
+            DelimiterHandler delimiterHandler = new DelimiterHandler(expression);
             assertThat(delimiterHandler.getAllDelimiters().contains(".,:"));
         });
     }

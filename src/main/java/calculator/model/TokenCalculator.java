@@ -17,21 +17,20 @@ public class TokenCalculator {
 
         int sum = 0;
         int t = 0;
-
         while (tokenizedExpression.hasMoreTokens()) {
             String token = tokenizedExpression.nextToken();
+
             if (tokenChecker.isNumericToken(token, t)) {
                 sum += Integer.parseInt(token);
             }
             t++;
         }
 
-        if (t % 2 == 0) {
+        if (tokenChecker.isEndingWithDelimiter(t)) {
             throw new IllegalArgumentException();
         }
 
         return sum;
     }
-
 
 }
