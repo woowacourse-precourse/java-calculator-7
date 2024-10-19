@@ -24,12 +24,12 @@ public class Application {
         int[] numbers;
         String delimiter = ",|:";  // 기본 구분자
 
+
         // 커스텀 구분자가 있는지 확인하고 처리
         if (checkCustomDelimiter(input)) {
-            delimiter += "|" + addCustomDelimiter(input);  // 기본 구분자에 커스텀 구분자 추가
+            delimiter = addCustomDelimiter(delimiter, input);  // 기본 구분자에 커스텀 구분자 추가
             input = Console.readLine();
         }
-
         // 문자열을 구분자로 분리하여 숫자 배열 추출
         numbers = extractNumbers(input, delimiter);
         sum = Arrays.stream(numbers).sum();  // 숫자들 합 계산
@@ -40,9 +40,22 @@ public class Application {
         return input.startsWith("//");
     }
 
-    private static String addCustomDelimiter(String input) {
-        return input.substring(2);
+
+    private static String addCustomDelimiter(String delimiter, String input) {
+        StringBuilder delimiterBuilder = new StringBuilder(delimiter);
+
+        // input의 두 번째 문자 이후 모든 문자를 구분자로 추가
+        for (int i = 2; i < input.length(); i++) {
+            char currentChar = input.charAt(i);
+            if (currentChar == '\\') {
+                delimiterBuilder.append("|\\\\");
+            } else {
+                delimiterBuilder.append("|").append(currentChar);
+            }
+        }
+        return delimiterBuilder.toString();  // 수정된 구분자 반환
     }
+
 
     private static int[] extractNumbers(String input, String delimiter) {
         String[] tokens = input.split(delimiter);  // 구분자를 사용해 문자열 분리
