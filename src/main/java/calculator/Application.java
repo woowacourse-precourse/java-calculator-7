@@ -1,5 +1,7 @@
 package calculator;
 
+import utils.ExceptionMessages;
+
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -31,10 +33,10 @@ public class Application {
             // 숫자인지 판별
             Matcher numberMatcher = getMatcher("[0-9]", separator);
             if(numberMatcher.find()) {
-                throw new IllegalArgumentException("숫자는 커스텀 구분자로 사용할 수 없습니다.");
+                throw new IllegalArgumentException(ExceptionMessages.CUSTOM_SEPARATOR_CANNOT_BE_NUMBER);
             }
             if(separator.length() != 1) {
-                throw new IllegalArgumentException("커스텀 구분자는 1개의 1Byte 문자만 지정할 수 있습니다. (추출한 구분자:"+separator+")");
+                throw new IllegalArgumentException(ExceptionMessages.CUSTOM_SEPARATOR_ONE_BYTE_REQUIRED);
             }
             // 입력문자열 앞부분의 커스텀 지정 부분 제거
             input = input.replaceFirst(customKeywordRegex, "");
@@ -43,7 +45,7 @@ public class Application {
         }
 
         if (!input.matches("[0-9" + separator + "]*")) {
-            throw new IllegalArgumentException("문자열에 지정된 구분자 이외의 문자가 포함되어 있습니다.");
+            throw new IllegalArgumentException(ExceptionMessages.INVALID_CHARACTER_IN_INPUT);
         }
 
         String[] str = input.split(separator);
@@ -53,7 +55,7 @@ public class Application {
                     try {
                         return Integer.parseInt(s);
                     } catch (NumberFormatException e) {
-                        throw new IllegalArgumentException("숫자가 아닌 값이 존재합니다.");
+                        throw new IllegalArgumentException(ExceptionMessages.NON_NUMERIC_VALUE);
                     }
                 });
 

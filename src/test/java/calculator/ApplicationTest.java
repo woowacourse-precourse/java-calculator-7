@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import utils.ExceptionMessages;
 
 import java.util.stream.Stream;
 
@@ -29,11 +30,14 @@ class ApplicationTest extends NsTest {
                         assertThat(output()).contains("결과 : 1");
                     },
                     () -> assertThatThrownBy(() -> runException("//😀\\n1😀2😀3"))
-                            .isInstanceOf(IllegalArgumentException.class),
+                            .isInstanceOf(IllegalArgumentException.class)
+                            .hasMessage(ExceptionMessages.CUSTOM_SEPARATOR_ONE_BYTE_REQUIRED),
                     () -> assertThatThrownBy(() -> runException("//ㄱㄱ\\n1ㄱㄱ2ㄱㄱ3"))
-                            .isInstanceOf(IllegalArgumentException.class),
+                            .isInstanceOf(IllegalArgumentException.class)
+                            .hasMessage(ExceptionMessages.CUSTOM_SEPARATOR_ONE_BYTE_REQUIRED),
                     () -> assertThatThrownBy(() -> runException("//2\\n12325"))
                             .isInstanceOf(IllegalArgumentException.class)
+                            .hasMessage(ExceptionMessages.CUSTOM_SEPARATOR_CANNOT_BE_NUMBER)
             );
 
         }
@@ -51,18 +55,19 @@ class ApplicationTest extends NsTest {
         // ==== MethodSource 적용해보기 ====
         static Stream<Arguments> customInputs() {
             return Stream.of(
-                    Arguments.of("지정되지 않은 커스텀 문자 사용", "//;\\n1;2ㄱ3"),
-                    Arguments.of("이모티콘 구분자 사용", "//😀\\n1😀2😀3"),
-                    Arguments.of("두글자 구분자 사용", "//ㄱㄱ\\n1ㄱㄱ2:3"),
-                    Arguments.of("숫자 구분자 사용", "//2\\n12325")
+                    Arguments.of("지정되지 않은 커스텀 문자 사용", "//;\\n1;2ㄱ3", ExceptionMessages.INVALID_CHARACTER_IN_INPUT),
+                    Arguments.of("이모티콘 구분자 사용", "//😀\\n1😀2😀3", ExceptionMessages.CUSTOM_SEPARATOR_ONE_BYTE_REQUIRED),
+                    Arguments.of("두글자 구분자 사용", "//ㄱㄱ\\n1ㄱㄱ2:3", ExceptionMessages.CUSTOM_SEPARATOR_ONE_BYTE_REQUIRED),
+                    Arguments.of("숫자 구분자 사용", "//2\\n12325", ExceptionMessages.CUSTOM_SEPARATOR_CANNOT_BE_NUMBER)
             );
         }
         @ParameterizedTest(name = "{index} - {0}")
         @MethodSource("customInputs")
-        void 불가능한_커스텀_구분자_사용(String description, String input) {
+        void 불가능한_커스텀_구분자_사용(String description, String input, String exceptionMessage) {
             assertSimpleTest(() ->
                     assertThatThrownBy(() -> runException(input))
                             .isInstanceOf(IllegalArgumentException.class)
+                            .hasMessage(exceptionMessage)
             );
         }
 
@@ -90,6 +95,7 @@ class ApplicationTest extends NsTest {
             assertSimpleTest(() ->
                     assertThatThrownBy(() -> runException("//-\\n1,2,-3"))
                             .isInstanceOf(IllegalArgumentException.class)
+                            .hasMessage(ExceptionMessages.NON_NUMERIC_VALUE)
             );
         }
     }
@@ -109,10 +115,11 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트() {
+    void 음수_입력() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage(ExceptionMessages.INVALID_CHARACTER_IN_INPUT)
         );
     }
 
