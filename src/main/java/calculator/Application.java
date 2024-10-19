@@ -1,7 +1,7 @@
 package calculator;
 import java.lang.System;
-import java.util.Scanner;
 import java.util.regex.Pattern;
+import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
@@ -11,12 +11,11 @@ public class Application {
         String[] splited_by_seperators;
 
         // 사용자 input 받는 부분
-        Scanner scan_input  = new Scanner(System.in);
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        System.out.println("덧셈할 문자열을 입력해 주세요. ");
 
         // 1. 구분자를 인식하는 기능 - 커스텀 구분자가 있다면 구분자 목록에 추가
         // 2. 구분자 목록을 기반으로 입력된 문자열을 나누는 기능
-        String input_string = scan_input.nextLine();
+        String input_string = Console.readLine();
         String[] splited_string = input_string.split("\\\\n");
         // 커스텀 구분자가 있는 경우
         if (splited_string.length > 1 && splited_string[0].startsWith("//")){
@@ -26,7 +25,7 @@ public class Application {
         }
         // 커스텀 구분자가 없는 경우
         else if (splited_string.length == 1){
-            custom_seperators = ",|:";
+            custom_seperators = "[,:]";
             splited_by_seperators = splited_string[0].split(custom_seperators);
         } else {
             // '\n'은 등장했으나 '//' 은 등장하지 않은 상황으로 에러처리
@@ -43,7 +42,7 @@ public class Application {
                     sum += Integer.parseInt(num);
                 } else {
                     // 양수를 제외한 다른 것이 나왔을 때 에러처리
-                    throw new IllegalArgumentException("덧셈은 양수만 가능합니다");
+                    throw new IllegalArgumentException("덧셈은 양수만 가능합니다 또는 구분자가 잘못되었습니다");
                 }
             }
             System.out.println("결과 : " + sum);
