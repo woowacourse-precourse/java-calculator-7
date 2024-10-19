@@ -1,8 +1,7 @@
 package calculator;
 
 public class CustomDelimiter {
-
-
+    private static boolean called = false;
 
 
     public static String getCostumDelimiter(String input) {
@@ -12,7 +11,14 @@ public class CustomDelimiter {
         // 삭제 후에는 나머지 구문에 대한 검사 필요하니 되돌려야함.
         // 따라서 호출부에서 return 이 아니라 실행 해야함!!!!!
         // 추가로 추출했는데 공백일 수 있으므로 InputValidator의 공백 체크의 순서를 바꿔야함.
-        String result = "추출된 문자열";
+        String result = "123";
+        called = true;
+        // 실제 커스텀 구분자 처리 로직은 추후 구현
         return result;
     }
+
+    public static boolean wasCalled() {
+        return called;
+    }
+    
 }

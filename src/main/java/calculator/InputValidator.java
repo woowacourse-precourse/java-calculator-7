@@ -1,24 +1,33 @@
 package calculator;
 
 public class InputValidator {
-    public static void validate(String input) {
-        // 빈 문자열 처리
-        // todo : 빈 문자열 입력시 종료
-        if (validateEmpty(input)) {
-            return;
-        }
+    private static String result="";
 
-        // 커스텀 구분자로 시작할 경우 바로 리턴
+    public static String validate(String input) {
+        result=input;
+
+        // 커스텀 구분자로 시작할 경우 커스텀 구분자 관련 호출 진행 (추출후 이후 문자열 검사.)
         // todo: 커스텀 구분자 로직 진행
-        if (validateStartsWithDelimiter(input)) {
-            return;
+        if (validateStartsWithDelimiter(result)) {
+            result = CustomDelimiter.getCostumDelimiter(result);
+        }
+
+        // 빈 문자열 처리
+        // todo : 빈 문자열 입력시 0 반환
+        if (validateEmpty(result)) {
+            return "0";
         }
 
 
 
-        validateNotStartsWithChar(input);
 
-        validateNotStartsWithNegativeNumber(input);
+        validateNotStartsWithChar(result);
+        validateNotStartsWithNegativeNumber(result);
+
+        // 여기까지 왔으면 숫자로 시작, 기본 구분자로 파싱하는 다계로 이동
+        // 구분자가 유효한지는 파싱과 구분자가 책임지게 함.
+        return Parser.startsWithPositiveNumber(result);
+
     }
 
     private static void validateNotStartsWithNegativeNumber(String input) {
