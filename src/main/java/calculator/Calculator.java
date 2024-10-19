@@ -61,16 +61,18 @@ public class Calculator {
     }
 
     private void parseDelimiter() {
-        HashSet<Character> delimiterSet = new HashSet<>();
-        delimiterSet.add(',');
-        delimiterSet.add(':');
+        HashSet<String> delimiterSet = new HashSet<>();
+        delimiterSet.add(",");
+        delimiterSet.add(":");
 
-        for (char c : customDelimiter.toCharArray()) {
-            delimiterSet.add(c);
-        }
+        customDelimiter.codePoints()
+                .forEach(codePoint -> {
+                    String character = new String(Character.toChars(codePoint));
+                    delimiterSet.add(character);
+                });
 
         StringBuilder sb = new StringBuilder();
-        for (char c : delimiterSet) {
+        for (String c : delimiterSet) {
             sb.append(c);
         }
         delimiters = sb.toString();
