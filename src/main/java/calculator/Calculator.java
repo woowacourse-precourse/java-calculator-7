@@ -17,7 +17,28 @@ public class Calculator {
                 throw new IllegalArgumentException();
             }
         }
-        return 0;
+
+        int inputStringLength = input.length();
+        for (int i = 0; i < inputStringLength; ++i) {
+            char ch = input.charAt(i);
+            if (Character.isDigit(ch)) {
+                number.append(ch);
+                continue;
+            } else if (isDelimeter(ch)) {
+                if (!number.isEmpty()) {
+                    sum += Integer.parseInt(number.toString());
+                }
+                number.setLength(0);
+                continue;
+            }
+            throw new IllegalArgumentException();
+
+        }
+        if (!number.isEmpty()) {
+            sum += Integer.parseInt(number.toString());
+        }
+
+        return sum;
     }
 
     private static boolean isDelimeter(char ch) {
