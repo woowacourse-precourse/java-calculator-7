@@ -1,9 +1,6 @@
 package calculator.stringSplitter;
 
-import camp.nextstep.edu.missionutils.Console;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -42,12 +39,4 @@ public class StringSplitter {
         return number.split(calculateSeparator);
     }
 
-    public static void main(String[] args) {
-        StringSplitter stp = new StringSplitter();
-        String tmp = Console.readLine();
-        System.out.println("입력받은 문자의 수 " + tmp.length());
-        System.out.println(tmp);
-        String[] test = stp.splitsString(tmp);
-        System.out.println("test = " + Arrays.toString(test));
-    }
 }
