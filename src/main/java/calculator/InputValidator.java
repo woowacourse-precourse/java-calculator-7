@@ -59,7 +59,7 @@ public class InputValidator implements Validator {
                 }
             } catch (NumberFormatException e) {
                 // 숫자가 아닌 문자가 포함된 경우 예외 발생
-                throw new IllegalArgumentException("숫자가 아닌 문자가 포함되었습니다: " + s);
+                throw new IllegalArgumentException("숫자가 아닌 문자가 포함되었습니다." + s);
             }
         }
     }
