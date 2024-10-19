@@ -11,13 +11,21 @@ public class Controller {
     private final OutputView outputView = new OutputView();
 
     public void processUserInput() {
-        // 입력
-        String userInput = inputView.readInput();
+        while (true) {
+            // 입력
+            String userInput = inputView.readInput();
 
-        // 비즈니스 로직
-        int sum = calculator.processInputAndSum(userInput);
+            // "exit" 입력 시 프로그램 종료
+            if (userInput.equalsIgnoreCase("exit")) {
+                System.out.println("프로그램을 종료합니다.");
+                break;
+            }
 
-        // 출력
-        outputView.printResult(sum);
+            // 비즈니스 로직
+            int sum = calculator.processInputAndSum(userInput);
+
+            // 출력
+            outputView.printResult(sum);
+        }
     }
 }
