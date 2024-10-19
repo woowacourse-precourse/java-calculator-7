@@ -1,7 +1,5 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.Console;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -10,16 +8,11 @@ public class Calculator {
     private String inputString;
     private String removedString = "";
     private final List<String> separator = new ArrayList<>();
-    private final List<Integer> operand = new ArrayList<>();
 
     /**
      * 사용자 입력
      */
-    private void getUserInput() {
-        System.out.println("덧셈할 문자열을 입력해주세요.");
-        this.inputString = Console.readLine();
-        Console.close();
-    }
+
 
     /**
      * 커스텀 구분자 유뮤 커스텀 구분자 짝 맞는지 확인 후 파싱
@@ -106,20 +99,6 @@ public class Calculator {
         }
     }
 
-    /**
-     * 결과 출력
-     */
-    private void printResult() {
-        if (operand != null) {
-            int sum = 0;
-            for (int i = 0; i < operand.size(); i++) {
-                sum += operand.get(i);
-            }
-            System.out.println("결과 : " + sum);
-        } else {
-            System.out.println("결과 : 0");
-        }
-    }
 
     public void run() {
         getUserInput();
