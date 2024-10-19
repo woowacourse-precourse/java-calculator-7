@@ -6,21 +6,26 @@ public class Calculation {
             case InputType.EMPTY:
                 return 0;
             case InputType.GENERAL:
-                sliceGeneralString(input);
+                calculationGeneralString(input.getUserInput());
                 break;
             case InputType.CUSTOM:
-                sliceCustomString(input);
+                calculationCustomString(input.getUserInput());
                 break;
         }
         return -1;
     }
 
-    public static void sliceGeneralString(InputData input){
-
-
+    public static int calculationGeneralString(String input){
+        int sum = 0;
+        for(char c : input.toCharArray()){
+            if(Character.isDigit(c)){
+                sum += Integer.parseInt(Character.toString(c));
+            }
+        }
+        return sum;
     }
 
-    public static void sliceCustomString(InputData input){
+    public static void sliceCustomString(String input){
 
 
     }
