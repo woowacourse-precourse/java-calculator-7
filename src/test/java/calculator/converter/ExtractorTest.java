@@ -16,9 +16,9 @@ public class ExtractorTest {
             "'//;\\n1;2;3', '[,:;]'"
     })
     void 구분자_추출_테스트(String value, String expectedDelimiter) {
-        String actualDelimiter = Extractor.extractDelimiter(value, DELIMITER_REGEX, CUSTOM_DELIMITER_PREFIX, CUSTOM_DELIMITER_SUFFIX);
+        String delimiter = Extractor.extractDelimiter(value, DELIMITER_REGEX, CUSTOM_DELIMITER_PREFIX, CUSTOM_DELIMITER_SUFFIX);
 
-        assertThat(actualDelimiter).isEqualTo(expectedDelimiter);
+        assertThat(delimiter).isEqualTo(expectedDelimiter);
     }
 
     @ParameterizedTest
@@ -28,9 +28,9 @@ public class ExtractorTest {
             "'//;\\n1;2;3', '1;2;3'"
     })
     void 숫자_추출_테스트(String value, String expectedNumberPart) {
-        String actualDelimiter = Extractor.extractNumberPart(value, CUSTOM_DELIMITER_PREFIX, CUSTOM_DELIMITER_SUFFIX);
+        String numberPart = Extractor.extractNumberPart(value, CUSTOM_DELIMITER_PREFIX, CUSTOM_DELIMITER_SUFFIX);
 
-        assertThat(actualDelimiter).isEqualTo(expectedNumberPart);
+        assertThat(numberPart).isEqualTo(expectedNumberPart);
     }
 
 
