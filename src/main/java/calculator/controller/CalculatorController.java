@@ -10,6 +10,6 @@ public class CalculatorController {
     public void run() {
         String input = inputView.readSentence();
         boolean isEmpty = validator.checkIsEmpty(input);
-
+        validator.checkHasNumber(input);
     }
 }
