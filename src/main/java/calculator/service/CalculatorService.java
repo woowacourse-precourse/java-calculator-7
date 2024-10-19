@@ -26,9 +26,9 @@ public class CalculatorService {
 	public void run() {
 		// 1. 문자열 입력 받는다
 		ioHandler.displayMessage(ENTER_NUMBERS);
-		String input = ioHandler.readInput();
+		String input = ioHandler.readLine();
 		// 2. 구분자를 이용해 문자열 분리한다
-		List<Integer> numbers = parser.stringToInt(input);
+		List<Integer> numbers = parser.parseInput(input);
 		// 3. 분리된 숫자 더한다
 		int sum = calculator.sum(numbers);
 		// TODO: 잘못된 입력에 대한 IllegalArgumentException 예외 처리한다
