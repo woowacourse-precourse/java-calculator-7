@@ -19,7 +19,7 @@ public class StringNumberAdder implements NumberAdder {
                 sum = Math.addExact(number, sum);
             }
             return sum;
-        } catch (ArithmeticException e) {
+        } catch (NumberFormatException | ArithmeticException e) {
             throw new IllegalArgumentException("너무 큰 숫자를 입력했습니다.");
         }
     }

@@ -42,11 +42,13 @@ class ApplicationTest extends NsTest {
 
             //총합이 최대 크기를 초과하는 상황
             assertThatThrownBy(() -> runException(Integer.MAX_VALUE + ":1"))
-                    .isInstanceOf(IllegalArgumentException.class);
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("너무 큰 숫자를 입력했습니다.");
 
             //입력이 최대 크기를 초과하는 상황
             assertThatThrownBy(() -> runException("2147483648:0"))
-                    .isInstanceOf(IllegalArgumentException.class);
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("너무 큰 숫자를 입력했습니다.");
 
             //총합이 최대 크기가 나오는 상황
             run(Integer.MAX_VALUE + ":0");
@@ -62,11 +64,13 @@ class ApplicationTest extends NsTest {
 
             //빈 문자열을 입력한 상황
             assertThatThrownBy(() -> runException(""))
-                    .isInstanceOf(IllegalArgumentException.class);
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("문자열을 입력하지 않았습니다.");
 
             //공백을 입력한 상황
             assertThatThrownBy(() -> runException(" "))
-                    .isInstanceOf(IllegalArgumentException.class);
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("문자열을 입력하지 않았습니다.");
 
         });
     }
