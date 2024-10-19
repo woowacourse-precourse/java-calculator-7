@@ -16,9 +16,10 @@ public class Controller {
     public void run() {
         try {
             String input = view.Input();
-
+            int result = model.add(input);
+            view.displayResult(result);
         } catch (IllegalArgumentException e) {
-
+            view.displayError(e.getMessage());
         }
     }
 }
