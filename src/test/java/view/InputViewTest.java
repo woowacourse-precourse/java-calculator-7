@@ -4,9 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import calculator.Application;
 import camp.nextstep.edu.missionutils.Console;
-import camp.nextstep.edu.missionutils.test.NsTest;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -16,7 +14,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class InputViewTest extends NsTest {
+public class InputViewTest {
 
     // 원본 표준 입출력 복원을 위해 참조를 저장합니다.
     private final InputStream systemIn = System.in;
@@ -113,8 +111,4 @@ public class InputViewTest extends NsTest {
                 .isInstanceOf(NoSuchElementException.class);
     }
 
-    @Override
-    public void runMain() {
-        Application.main(new String[]{});
-    }
 }
