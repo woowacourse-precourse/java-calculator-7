@@ -31,6 +31,7 @@ public class SeparatorExpressionCalculator {
     }
 
     public void operate() {
+        display.showInputMessage();
         String input = inputReceiver.readInput();
         Expression expression = parseToExpression(input);
         ExpressionExecutor expressionExecutor = new ExpressionExecutor(operatorContainer);
