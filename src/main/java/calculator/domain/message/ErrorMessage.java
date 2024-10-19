@@ -7,6 +7,7 @@ public enum ErrorMessage implements MessageProvider {
     INVALID_CUSTOM_DELIMITER("커스텀 구분자 형식이 잘못되었습니다."),
     INTEGER_IN_DELIMITER("커스텀 구분자에 정수형이 포함될 수 없습니다."),
     DEFAULT_INPUT_MUST_START_WITH_NUMBER("입력 조건을 충족하지 않습니다."),
+    INTEGER_OUT_OF_RANGE("정수형의 표현 가능한 범위를 벗어났습니다."),
     ;
 
     private final String message;

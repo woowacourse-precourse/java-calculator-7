@@ -1,5 +1,7 @@
 package calculator.domain.modal;
 
+import calculator.domain.error.InputException;
+import calculator.domain.message.ErrorMessage;
 import java.util.List;
 
 public class AddOperator implements Operator {
@@ -12,8 +14,12 @@ public class AddOperator implements Operator {
      */
     @Override
     public int operate(List<Integer> numbers) {
-        return numbers.stream()
+        int sum = numbers.stream()
                 .mapToInt(Integer::intValue)
                 .sum();
+        if (sum <= 0) {
+            throw InputException.from(ErrorMessage.INTEGER_OUT_OF_RANGE);
+        }
+        return sum;
     }
 }
