@@ -4,6 +4,9 @@ import java.util.regex.Pattern;
 
 public class StringValidator {
 
+    private final String PREFIX = "//";
+    private final String SUFFIX = "\n";
+
     public void validate(String input) {
         if (hasDelimiterDeclaration(input)) {
             if (isCustomDelimiterMissing(input)) {
@@ -19,27 +22,27 @@ public class StringValidator {
     }
 
     private boolean hasDelimiterDeclaration(String input) {
-        return input.startsWith("//") && input.contains("\\n");
+        return input.startsWith(PREFIX) && input.contains(SUFFIX);
     }
 
     private boolean isCustomDelimiterMissing(String input) {
-        return input.indexOf("//") + 2 == input.indexOf("\\n");
+        return input.indexOf(PREFIX) + 2 == input.indexOf(SUFFIX);
     }
 
     private boolean hasInteger(String input) {
-        return input.substring(2, input.indexOf("\\n")).matches(".*\\d.*");
+        return input.substring(2, input.indexOf(SUFFIX)).matches(".*\\d.*");
     }
 
     private boolean hasNonDelimiterCharacters(String input) {
         if (hasNoDelimiterDeclaration(input)) {
             return !input.matches("^[0-9:,]+$");
         }
-        String customDelimiter = input.substring(2, input.indexOf("\\n"));
-        String calculationValue = input.substring(input.indexOf("\\n") + 2);
-        return !calculationValue.matches("^[\\d:" + Pattern.quote(customDelimiter) + "]+$");
+        String customDelimiter = input.substring(2, input.indexOf(SUFFIX));
+        String calculationValue = input.substring(input.indexOf(SUFFIX) + 1);
+        return !calculationValue.matches("^[\\d:," + Pattern.quote(customDelimiter) + "]+$");
     }
 
     private boolean hasNoDelimiterDeclaration(String input) {
-        return !input.startsWith("//") || !input.contains("\\n");
+        return !input.startsWith(PREFIX) || !input.contains(SUFFIX);
     }
 }

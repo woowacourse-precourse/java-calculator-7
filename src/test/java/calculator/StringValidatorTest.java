@@ -13,7 +13,7 @@ class StringValidatorTest {
     private final StringValidator stringValidator = new StringValidator();
 
     @ParameterizedTest
-    @ValueSource(strings = {"//\\n1:2:3", "//\\n1,2:3"})
+    @ValueSource(strings = {"//\n1:2:3", "//\n1,2:3"})
     @DisplayName("커스텀 구분자 선언부에 구분 기호 누락시 예외 발생")
     void missingDelimiterInDeclaration_throwException(String input) {
         //given & when
@@ -25,7 +25,7 @@ class StringValidatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"//1\\n1:2:3", "//^2\\n1,2:3"})
+    @ValueSource(strings = {"//1\n1:2:3", "//^2\n1,2:3"})
     @DisplayName("커스텀 구분자에 숫자 포함시 예외 발생")
     void customDelimiterContainsNumber_throwException(String input) {
         //given & when
@@ -37,7 +37,7 @@ class StringValidatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1)2:3", "//^\\n1^2)3"})
+    @ValueSource(strings = {"1)2:3", "//^\n1^2)3"})
     @DisplayName("구분자를 아닌 문자 입력 시 예외 발생")
     void inputNonDelimiterCharacter_throwException(String input) {
         //given & when
