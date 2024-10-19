@@ -32,25 +32,28 @@ public class Application {
     }
 
     private static boolean isCustom(String input, String start, char char1, char char2) {
-        return input.startsWith(start) && input.charAt(3) == char1 && input.charAt(4) == char2;
+        return input.startsWith(start) &&
+                input.charAt(3) == char1 &&
+                input.charAt(4) == char2;
     }
 
-    private static void expressValidation(String input) throws IllegalArgumentException {
+    private static boolean expressValidation(String input) throws IllegalArgumentException {
         String delimiter = getDelimitersToString();
-        if (!Pattern.matches("(\\d+([" + delimiter + "]\\d+)*|\\d*([" + delimiter + "]\\d+)*)?|", input)) {
-            throw new IllegalArgumentException("잘못된 입력입니다.");
-        }
+        return Pattern.matches("(\\d+([" + delimiter + "]\\d+)*|\\d+([" + delimiter + "]\\d+)*)?|", input);
     }
 
     private static int getResult(String input, int result) {
         String inputAdapter = input;
-
         if (isCustom(input, "//", '\\', 'n')) {
             addDelimiter(input.charAt(2));
             inputAdapter = input.substring(5);
         }
 
-        expressValidation(inputAdapter);
+        try {
+            expressValidation(inputAdapter);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage() + "잘못된 입력입니다.");
+        }
 
         String[] numbers = splitInput(inputAdapter);
 
