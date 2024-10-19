@@ -47,7 +47,11 @@ public class Application {
         int endIndex = input.indexOf("\n");
         return input.substring(2, endIndex);
     }
-    private static int[] extractNumbers(String input) {
+    private static int[] extractNumbers(String input, String delimiter) {
+        String[] tokens = input.split(delimiter);  // 구분자를 사용해 문자열 분리
+        return Arrays.stream(tokens)
+                .mapToInt(Integer::parseInt)
+                .toArray();
     }
 
     private static void printOutput(int result) {
