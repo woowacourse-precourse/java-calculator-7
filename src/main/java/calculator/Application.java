@@ -10,6 +10,7 @@ record InputSliceResult(String input, String delimiters) {
 }
 
 public class Application {
+
     private static InputSliceResult getCustomDelimiters(String input, String delimiters) {
         String[] inputSliced = input.split("//", 2)[1].split("\\\\n", 2);
 
@@ -44,13 +45,13 @@ public class Application {
             }
 
             BigDecimal sum = Arrays.stream(numbers)
-                                   .filter(n -> !n.isEmpty())
-                                   .map(BigDecimal::new)
-                                   .reduce(BigDecimal.ZERO, BigDecimal::add);
+                    .filter(n -> !n.isEmpty())
+                    .map(BigDecimal::new)
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
 
             System.out.println("결과 : " + sum);
 
-        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e){
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             throw new IllegalArgumentException("올바르지 않은 숫자 형식입니다. 원래의 예외 메시지: " + e);
         } finally {
             Console.close();
