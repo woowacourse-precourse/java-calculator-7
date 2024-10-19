@@ -15,7 +15,6 @@
 ## Separator Class
 
 - [x] 테스트 코드 작성
-- [ ] 구분자 리스트 생성
 - [ ] 구분자 기준 문자열 분리 기능 구현
 
 ## Validator Class
