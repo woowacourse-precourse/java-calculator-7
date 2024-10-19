@@ -6,6 +6,7 @@ import calculator.domain.delimiter.Delimiter;
 import static calculator.domain.delimiter.CustomDelimiterPattern.CUSTOM_DELIMITER_END;
 import static calculator.domain.delimiter.CustomDelimiterPattern.CUSTOM_DELIMITER_START;
 import static calculator.domain.delimiter.DelimiterState.REGISTERED_DELIMITER;
+import static calculator.exception.ErrorMessage.*;
 
 public class CharAnalyzer {
     private final String input;
@@ -32,7 +33,7 @@ public class CharAnalyzer {
 
     private void analyzeNextChar() {
         if (isEndOfInput()) {
-            throw new IllegalStateException("문자열의 끝에 도달했습니다.");
+            throw new IllegalStateException(END_OF_INPUT.getMessage());
         }
 
         if (isCustomDelimiterStart()) {
@@ -48,7 +49,7 @@ public class CharAnalyzer {
         } else if (isRegisteredDelimiterChar(currentChar)) {
             markDelimiter();
         } else {
-            throw new IllegalArgumentException("입력 값은 구분자와 양수로 구성된 문자열이어야합니다.");
+            throw new IllegalArgumentException(INVALID_INPUT_VALUE.getMessage());
         }
     }
 
