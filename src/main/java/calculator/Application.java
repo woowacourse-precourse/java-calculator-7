@@ -21,17 +21,11 @@ public class Application {
                 input = input.substring(5);
                 String[] input_array = input.split(String.valueOf(custom));
                 checkPositiveNumber(input_array);
-                for (String s : input_array) {
-                    //System.out.println(s);
-                    result += Integer.parseInt(s);
-                }
+                result = calculate(input_array);
             } else {
                 String[] input_array = input.split(DEFAULT);
                 checkPositiveNumber(input_array);
-                for (String s : input_array) {
-                    //System.out.println(s);
-                    result += Integer.parseInt(s);
-                }
+                result = calculate(input_array);
             }
 
             System.out.println("결과 : " + result);
@@ -74,5 +68,13 @@ public class Application {
                 throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
             }
         }
+    }
+
+    private static int calculate(String[] array) {
+        int result = 0;
+        for (String s : array) {
+            result += Integer.parseInt(s);
+        }
+        return result;
     }
 }
