@@ -98,7 +98,13 @@ public class PlusCalculator implements PlusCalculatorInterface {
 
 
     public String getSeparatorsSplitRegex() {
-        return String.join("|", separators);
+        List<String> splitRegex = new ArrayList<>();
+
+        for (String separator : separators) {
+            splitRegex.add("\\" + separator);
+        }
+
+        return String.join("|", splitRegex);
     }
 
 
