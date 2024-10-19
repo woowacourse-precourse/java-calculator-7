@@ -4,15 +4,17 @@ import calculator.exception.ErrorMessage;
 import calculator.util.IntegerUtils;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class DelimiterNumberValidator {
 
     private static final int MINIMUM_ALLOWED_NUMBER = 0;
 
-    public int[] isValidNumber(String[] number) {
+    public List<Integer> isValidNumber(String[] number) {
         return Arrays.stream(number)
-                .mapToInt(this::parseNumber)
-                .toArray();
+                .map(this::parseNumber)
+                .collect(Collectors.toList());
     }
 
     private int parseNumber(String number) {
