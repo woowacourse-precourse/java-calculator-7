@@ -13,7 +13,7 @@ public class Application {
         String customDelimiter = dp.findCustomDelimiter(input);
         dm.addCustomDelimiter(customDelimiter);
 
-        boolean contain = dm.isContain("!");
-        System.out.println("contain = " + contain);
+        String result = dp.removeCustomDelimiterRegistrant(input);
+        System.out.println("result = " + result);
     }
 }
