@@ -4,12 +4,12 @@ public class StringCalculator {
 	private static final String ORIGINAL_SPLITTER_REGEX = ",|:";
 	private static final int SPLITTER_FIND_START_INDEX = 2;
 
-	public static int splitAndSum(String input) {
+	public static Positive splitAndSum(String input) {
 		String[] splitString = splitWithOriginalSplitter(input);
 		if (splitString.length > 1) {
 			return calculateSum(toInts(splitString));
 		}
-		return calculateSum(splitWithCustomSplitter(input));
+		return calculateSum(toInts(splitWithCustomSplitter(input)));
 	}
 
 	private static String[] splitWithOriginalSplitter(String input) {
