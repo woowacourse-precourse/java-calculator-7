@@ -8,9 +8,14 @@ public class CalculatorController {
 
     private static final String RESULT = "결과 : ";
 
+    private final Calculator calculator;
+
+    public CalculatorController(Calculator calculator) {
+        this.calculator = calculator;
+    }
+
     public void run() {
         System.out.println(INITIAL_COMMENT);
-        Calculator calculator = new Calculator();
         String input = Console.readLine();
         BigInteger result = calculator.calculate(input);
         System.out.println(RESULT + result);

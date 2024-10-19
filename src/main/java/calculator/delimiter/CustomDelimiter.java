@@ -1,8 +1,8 @@
 package calculator.delimiter;
 
 import calculator.calculator.Delimiter;
-import calculator.utils.DelimiterUtils;
-import calculator.utils.ErrorMessage;
+import calculator.global.DelimiterUtils;
+import calculator.global.ErrorMessage;
 import java.util.Arrays;
 import java.util.List;
 

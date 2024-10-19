@@ -3,7 +3,8 @@ package calculator.calculator;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import calculator.utils.ErrorMessage;
+import calculator.global.CustomBeanFactory;
+import calculator.global.ErrorMessage;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,20 +14,21 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class TokenProviderTest {
+class StringTokenProviderTest {
 
-    private TokenProvider tokenProvider;
+    private TokenProvider defaultTokenProvider;
 
     @BeforeEach
     void setUp() {
-        tokenProvider = new TokenProvider();
+        CustomBeanFactory customBeanFactory = new CustomBeanFactory();
+        this.defaultTokenProvider = customBeanFactory.tokenProvider();
     }
 
     @ParameterizedTest
     @MethodSource("validInputProvider")
     @DisplayName("유효한 입력이 주어지면 공백이 제거된 토큰 리스트를 반환한다.")
     void givenValidInput_thenReturnsTokensWithoutSpaces(String input, List<String> expectedTokens) {
-        List<String> tokens = tokenProvider.getTokens(input);
+        List<String> tokens = defaultTokenProvider.getTokens(input);
         assertThat(tokens).containsExactlyElementsOf(expectedTokens);
     }
 
@@ -43,7 +45,7 @@ class TokenProviderTest {
     @DisplayName("음수 또는 잘못된 형식의 입력이 주어지면 예외가 발생한다.")
     @ValueSource(strings = {"-1,2", "3:-4", "//n\\n-12n14"})
     void givenInvalidInput_thenThrowsException(String input) {
-        assertThatThrownBy(() -> tokenProvider.getTokens(input))
+        assertThatThrownBy(() -> defaultTokenProvider.getTokens(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.ONLY_POSITIVE_NUMBERS_ALLOWED.getMessage());
     }

@@ -2,7 +2,7 @@ package calculator.delimiter;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import calculator.utils.ErrorMessage;
+import calculator.global.ErrorMessage;
 import java.util.List;
 import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;

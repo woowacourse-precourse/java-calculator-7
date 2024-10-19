@@ -2,7 +2,8 @@ package calculator.calculator;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import calculator.utils.ErrorMessage;
+import calculator.global.CustomBeanFactory;
+import calculator.global.ErrorMessage;
 import java.math.BigInteger;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,26 +13,27 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class CalculatorTest {
+class StringCalculatorTest {
 
-    private Calculator calculator;
+    private Calculator defaultCalculator;
 
     @BeforeEach
     void setUp() {
-        this.calculator = new Calculator();
+        CustomBeanFactory customBeanFactory = new CustomBeanFactory();
+        this.defaultCalculator = customBeanFactory.calculator();
     }
 
     @Test
     @DisplayName("생성자를 테스트한다.")
     void constructorTest() {
-        Assertions.assertThat(calculator).isNotNull();
+        Assertions.assertThat(defaultCalculator).isNotNull();
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"", " ", "   ", "  ,   ,   ,"})
     @DisplayName("빈 값이 들어오면 0을 반환한다.")
     void whenEmptyStringIsGivenThenReturnZero(String emptyInput) {
-        BigInteger calculated = calculator.calculate(emptyInput);
+        BigInteger calculated = defaultCalculator.calculate(emptyInput);
         Assertions.assertThat(calculated).isZero();
     }
 
@@ -39,14 +41,14 @@ class CalculatorTest {
     @CsvSource(delimiter = '=', value = {"1,  2=3", "      1=1", "   3 ,  1 : 2  =6"})
     @DisplayName("숫자와 공백이 같이 주어지면 공백을 없애서 계산한다.")
     void replaceEmptyString(String emptyInput, int expected) {
-        BigInteger calculated = calculator.calculate(emptyInput);
+        BigInteger calculated = defaultCalculator.calculate(emptyInput);
         Assertions.assertThat(calculated).isEqualTo(expected);
     }
 
     @Test
     @DisplayName("null 이 들어오면 예외가 발생한다.")
     void whenNullStringIsGivenThenThrowsException() {
-        assertThatThrownBy(() -> calculator.calculate(null))
+        assertThatThrownBy(() -> defaultCalculator.calculate(null))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.NULL_NOT_ALLOWED.getMessage());
     }
@@ -56,7 +58,7 @@ class CalculatorTest {
     @CsvSource(delimiter = '=', value = {"1,2,3=6", "0,1,2=3", "100,200,300=600", "1,2=3", "1:2=3", "1:2,3=6",
             "100,200:300=600"})
     void calculateByRestOrColon(String input, int expected) {
-        BigInteger result = calculator.calculate(input);
+        BigInteger result = defaultCalculator.calculate(input);
         Assertions.assertThat(result).isEqualTo(expected);
     }
 }

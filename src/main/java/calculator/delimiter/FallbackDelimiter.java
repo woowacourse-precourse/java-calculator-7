@@ -1,7 +1,7 @@
 package calculator.delimiter;
 
 import calculator.calculator.Delimiter;
-import calculator.utils.DelimiterUtils;
+import calculator.global.DelimiterUtils;
 import java.util.List;
 
 /**

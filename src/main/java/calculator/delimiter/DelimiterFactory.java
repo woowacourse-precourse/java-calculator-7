@@ -1,7 +1,7 @@
 package calculator.delimiter;
 
 import calculator.calculator.Delimiter;
-import calculator.utils.ErrorMessage;
+import calculator.global.ErrorMessage;
 import java.util.List;
 
 public class DelimiterFactory {

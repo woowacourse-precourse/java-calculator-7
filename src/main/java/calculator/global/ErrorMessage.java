@@ -1,4 +1,4 @@
-package calculator.utils;
+package calculator.global;
 
 public enum ErrorMessage {
     NULL_NOT_ALLOWED("null 값은 허용되지 않는다."),
