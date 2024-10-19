@@ -9,6 +9,10 @@ public class Operand {
         this.number = Integer.parseInt(number);
     }
 
+    public int getNumber() {
+        return this.number;
+    }
+
     private void validateIsDigit(String number) {
         try {
             Integer.parseInt(number);
