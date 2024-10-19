@@ -1,55 +1,36 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Application {
 
   public static void main(String[] args) {
 
-    //구분자를 기억하고 있는 배열
-    String[] divisionList = {",", ":"};
+    //구분자는 정규표현식 쓰기 쉽게 그냥 string으로 관리
+    String alreadyDivision = ",:";
 
     System.out.println("덧셈할 문자열을 입력해 주세요. ");
     String input = Console.readLine();
 
     int result = 0;
 
-    String[] divisionArray = divideInput(input);//구분자를 찾는 반복문을 메서드로 구분
-    String realInput = divisionArray[0];
-    String divisionString = divisionArray[1];
+    String[] divisionArray = divideInput(input); //구분자를 찾는 반복문을 메서드로 분리
+    String realInput = divisionArray[0]; //입력값을 분리해서 하나는 커스터마이징 부분을 제외한 실제 입력
+    String divisionString = divisionArray[1]; //커스터 마이징으로 분리해낸 구분자 문자열
 
-    //입력 받은 구분자 문자열을 빈문자열을 split에 구분자로 넣어 배열로 만듦
-    String[] divisionList2 = divisionString.split("");
-    //기존에 가지고 있던 구분자의 배열과 입력을 받은 구분자의 배열의 길이를 합쳐서 최종 구분자 배열의 길이를 정해줌
-    String[] finalDivision = new String[divisionList.length + divisionList2.length];
+    String finalDivision = divisionString + alreadyDivision; //기존 구분자 설정이랑 합치기
+    //사용자 입력 값에 오류 없는지 확인
+    realInput = checkValid(realInput, finalDivision);
 
-    System.arraycopy(divisionList, 0, finalDivision, 0, divisionList.length);
-    System.arraycopy(divisionList2, 0, finalDivision, divisionList.length, divisionList2.length);
+    String regex = "[" + finalDivision + "]";
+    String[] numsArray = realInput.split(regex); //구분자들 문자열 중에 있으면 기준으로 분리
 
-    String nums = "";
-//    System.out.println("중간에 결과 한번 보자" + realInput);
-    for (int j = 0; j < realInput.length(); j++) {
-
-      String element = Character.toString(realInput.charAt(j));
-
-      if (Arrays.asList(finalDivision).contains(element)) { //구분자가 맞는 경우
-        result = result + Integer.parseInt(nums); //이전에 확인했으니 정수만 들어있는 문자열일 것
-        nums = ""; //숫자 초기화
-        continue;
-      } else {//구분자가 아닌 경우
-        if (element.matches("\\d+")) { //숫자인 경우
-          nums += element; //다음에도 숫자가 이어질 수 있으니 nums 변수에 더해주기
-          if (j == realInput.length() - 1) { //마지막 인덱스인 경우 nums에 저장만 하고 안더해주므로 따로 조건
-            result = result + Integer.parseInt(nums);
-          }
-          continue;
-        } else {  //구분자도 아니고 숫자도 아닌 잘못된 문자인 경우
-          System.out.println(element + "에러를 내는거지?");
-          throw new IllegalArgumentException();
-        }
-      }
+    for (String num : numsArray) {
+      result += Integer.parseInt(num);
     }
+    
     System.out.println("결과 : " + result);
 
   }
@@ -75,6 +56,9 @@ public class Application {
         }
       } else { //커스터마이징 시작 문구도 끝문구도 아닌경우
         if (start == 2) { //커스터 마이징 문구를 추가하기 시작했다는 뜻
+          if (Character.toString(c).matches("\\d+")) { //근데 구분자가 숫자인 경우에는 추가를 안함
+            continue;
+          }
           divideString += c;
         } else if (i > 1) { //2번째까지 확인을 했는데도 //이 나오지 않은 경우 커스터 마이징 기회 종료
           break;
@@ -82,7 +66,19 @@ public class Application {
       }
 
     }
-
     return new String[]{finalInput, divideString};
+  }
+
+  public static String checkValid(String userString, String regx) {
+    String error = "[^" + regx + "0-9]";
+
+    Pattern pattern = Pattern.compile(error); //원래는 contain메서드 쓸려고 했는데 정규표현식을 인식 못해서 ..
+    Matcher matcher = pattern.matcher(userString);
+
+    if (matcher.find()) { //구분자가 아닌 문자가 포함된 경우
+      throw new IllegalArgumentException();
+    } else {
+      return userString;
+    }
   }
 }
