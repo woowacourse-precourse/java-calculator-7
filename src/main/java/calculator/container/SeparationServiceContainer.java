@@ -1,4 +1,4 @@
-package calculator.service.container;
+package calculator.container;
 
 import calculator.service.separation.SeparationService;
 import java.util.EnumMap;

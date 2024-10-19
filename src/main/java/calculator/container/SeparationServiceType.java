@@ -1,4 +1,4 @@
-package calculator.service.container;
+package calculator.container;
 
 import calculator.service.separation.BasicSeparationService;
 import calculator.service.separation.CustomSeparationService;
