@@ -1,5 +1,6 @@
 package calculator.service;
 
+import calculator.model.Calculator;
 import calculator.model.InputFormatter;
 import calculator.model.StringFormatter;
 
@@ -9,6 +10,6 @@ public class CalculatorService {
         String[] strInput = InputFormatter.splitByDelimiter(input);
         int[] intArr = StringFormatter.toIntArr(strInput);
 
-        return 0;
+        return Calculator.arrSum(intArr);
     }
 }

@@ -19,7 +19,7 @@ public class CalculatorController {
     public void calculate() {
         outputView.printPrompt();
         String input = inputView.strInput();
-        Long sum = calculatorService.calculateSumFromString(input);
+        int sum = calculatorService.calculateSumFromString(input);
     }
 
 }
