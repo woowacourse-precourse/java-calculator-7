@@ -1,7 +1,7 @@
 package calculator;
 
 public class InputString {
-    private String inputString;
+    private final String inputString;
 
     public InputString(String inputString) {
         this.inputString = inputString;
@@ -17,5 +17,13 @@ public class InputString {
 
     public char extractCustomSeperator() {
         return inputString.charAt(2);
+    }
+
+    public InputString substring(int beginIndex) {
+        return new InputString(inputString.substring(beginIndex));
+    }
+
+    public String[] split(String regex) {
+        return inputString.split(regex);
     }
 }
