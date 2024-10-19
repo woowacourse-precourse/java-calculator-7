@@ -64,8 +64,50 @@
 
 
 3. 문자열에서 숫자를 검사하는 함수
-    - 숫자가 몇 자리 수인지 판별하는 함수
     - 판별된 숫자를 저장하는 함수
 
 
 4. 덧셈 계산을 하는 함수
+
+## 2. 구현
+
+---
+
+```text
+└── calculator
+    ├── Application.java
+    ├── calculator
+    │   ├── CalculateService.java
+    │   └── Calculator.java
+    ├── delimiter
+    │   ├── CustomDelimiter.java
+    │   ├── DefaultDelimiter.java
+    │   └── DelimiterService.java
+    ├── util
+    │   └── InputUtil.java
+    └── view
+        └── ViewService.java
+
+```
+
+### Calculator
+
+- 프로그램 전체를 흐름을 제어하는 main 클래스
+- 입력, 구분자 처리, 계산 로직을 모두 호출하여 동작을 수행
+
+### DelimiterService
+
+- 문자열에서 구분자를 판별하여 숫자를 배열로 변환하는 클래스
+- 문자열을 배열로 반환
+
+### CalculateService
+
+- 배열로부터 숫자를 더해서 최종 결과값을 구하는 클래스
+
+### ViewService
+
+- 입출력에 필요한 글을 화면에 나타내는 클래스
+
+### InputUtil
+
+- 입력값이 유효한지 검증하는 클래스
