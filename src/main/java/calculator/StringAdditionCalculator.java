@@ -12,6 +12,9 @@ public class StringAdditionCalculator {
     }
 
     public long calculate(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            throw new IllegalArgumentException("입력 문자열이 null이거나 비어 있습니다.");
+        }
         String[] numbers = parser.parse(input);
         return calculateNumbers(numbers);
     }
