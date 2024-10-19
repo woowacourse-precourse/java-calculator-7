@@ -7,7 +7,16 @@ public class StringAddCalculator {
             return 0;
         }
 
-        String delimiter = "[,:]";
+        String delimiter = ",|:";
+
+        if (input.startsWith("//")) {
+            input = input.replaceFirst("//", "");
+            input = input.replace("\\n", "\n");
+
+            String[] temp = input.split("\n");
+            delimiter += "|" + temp[0];
+            input = input.split("\n", 2)[1];
+        }
 
         String[] numbers = input.split(delimiter);
 
