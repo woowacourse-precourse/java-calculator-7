@@ -13,5 +13,12 @@ public class Application {
 
         // 유저의 입력값을 받는다.
         userInput.input();
+
+        input = userInput.getInput();
+        seperators = userInput.getSeperators();
+
+        Calculator calculator = new Calculator(input, seperators);
+
+        int answer = calculator.calculate();
     }
 }
