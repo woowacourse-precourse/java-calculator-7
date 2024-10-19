@@ -19,8 +19,26 @@ class ApplicationTest extends NsTest {
             run("//;\\n1,2,3;4:5;6");
             assertThat(output()).contains("결과 : 21");
         });
-        
-        //알파벳 한글 사용 테스트 추가
+
+        assertSimpleTest(() -> {
+            run("//;\\n\\n1n2\\3"); //1n2\3
+            assertThat(output()).contains("결과 : 6");
+        });
+
+        assertSimpleTest(() -> {
+            run("//\\n1,2,3");
+            assertThat(output()).contains("결과 : 6");
+        });
+
+        assertSimpleTest(() -> {
+            run("//a\\n1a2a3");
+            assertThat(output()).contains("결과 : 6");
+        });
+
+        assertSimpleTest(() -> {
+            run("//뷁\\n1뷁2뷁3");
+            assertThat(output()).contains("결과 : 6");
+        });
     }
 
     @Test
