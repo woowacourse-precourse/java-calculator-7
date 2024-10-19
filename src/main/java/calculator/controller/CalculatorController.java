@@ -2,6 +2,7 @@ package calculator.controller;
 
 import calculator.model.InputString;
 import calculator.view.InputView;
+import calculator.view.OutputView;
 
 /**
  * controller
@@ -9,6 +10,7 @@ import calculator.view.InputView;
 public class CalculatorController {
 
     private final InputView inputView = new InputView();
+    private final OutputView outputView = new OutputView();
 
     /**
      * 애플리케이션 시작
@@ -25,6 +27,8 @@ public class CalculatorController {
         InputString inputString = new InputString(input);
 
         long resultSum = inputString.calculate();  // 문자열 계산
+
+        outputView.getOutputResult(resultSum);
     }
 
 }
