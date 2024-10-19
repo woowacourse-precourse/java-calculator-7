@@ -3,11 +3,10 @@ package calculator;
 import java.util.regex.Pattern;
 
 public class StringAdder {
-    private final ConsoleIO consoleIO;
+
     private final InputValidator validator;
 
-    public StringAdder(ConsoleIO consoleIO, InputValidator validator) {
-        this.consoleIO = consoleIO;
+    public StringAdder(InputValidator validator) {
         this.validator = validator;
     }
 

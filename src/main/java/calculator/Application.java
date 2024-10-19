@@ -2,12 +2,12 @@ package calculator;
 
 public class Application {
     public static void main(String[] args) {
-        ConsoleIO consoleIO = new ConsoleIO();
-        InputValidator validator = new InputValidator();
-        StringAdder stringAdder = new StringAdder(consoleIO, validator);
 
-        String input = consoleIO.getInput();
+        InputValidator validator = new InputValidator();
+        StringAdder stringAdder = new StringAdder(validator);
+
+        String input = ConsoleIO.getInput();
         int result = stringAdder.add(input);
-        consoleIO.printResult(result);
+        ConsoleIO.printResult(result);
     }
 }
