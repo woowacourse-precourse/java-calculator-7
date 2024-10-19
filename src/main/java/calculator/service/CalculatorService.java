@@ -3,6 +3,7 @@ package calculator.service;
 import calculator.model.StringCalculator;
 import calculator.model.StringParser;
 import calculator.validator.InputValidator;
+import java.util.List;
 
 // 입력을 검증하고 파싱한 후 계산
 public class CalculatorService {
@@ -21,8 +22,8 @@ public class CalculatorService {
     // 계산
     public int calculate(String input) {
         validateInput(input);
-        String[] numbers = stringParser.parseInput(input);
-        return stringCalculator.sumNumbers(numbers);
+        List<String> numbers = stringParser.parseInput(input);  // String[] 대신 List<String> 반환
+        return stringCalculator.sumNumbers(numbers);  // 수정된 sumNumbers에 맞게 호출
     }
 
     // 입력 값 검증
