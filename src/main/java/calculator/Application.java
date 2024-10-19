@@ -1,12 +1,9 @@
 package calculator;
 
-import calculator.domain.Calculator;
-import calculator.domain.Delimiter;
 import calculator.common.io.Input;
 import calculator.common.io.Output;
-import calculator.domain.Number;
+import calculator.service.CalculatorService;
 
-import java.util.List;
 
 
 public class Application {
@@ -14,6 +11,8 @@ public class Application {
         // TODO: 프로그램 구현
         Input input = new Input();
         Output output = new Output();
+        CalculatorService calculatorService = new CalculatorService();
+
         try {
             String userInput = input.getInput();
 
@@ -21,11 +20,7 @@ public class Application {
                 output.printResult(0);
                 return;
             }
-            Delimiter delimiter = Delimiter.from(userInput);
-            String numbers = delimiter.extractNumbers(userInput);
-            List<Number> numberList = Calculator.splitAndParse(numbers, delimiter.getDelimiters());
-
-            int result = Calculator.calculateSum(numberList);
+            int result = calculatorService.calculate(userInput);
             output.printResult(result);
         } catch (IllegalArgumentException e) {
             output.printError(e.getMessage());
