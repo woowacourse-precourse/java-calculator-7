@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class InputValidator implements BasicValidator<String> {
-    private static final Pattern DEFAULT_INPUT_PATTERN = Pattern.compile("(^\\d+([,:\\d]+)*)|^$");
+    private static final Pattern DEFAULT_INPUT_PATTERN = Pattern.compile("^\\d+([,:]\\d+)*$");
     private static final Pattern EMPTY_INPUT_REGEX = Pattern.compile("^$");
     private static final Pattern CUSTOM_DELIMITER_REGEX = Pattern.compile("//(.)\\\\n(.*)");
 
