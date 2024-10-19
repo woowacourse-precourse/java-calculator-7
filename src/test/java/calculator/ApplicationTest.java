@@ -51,6 +51,13 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 빈_문자열_입력_테스트() {
+        assertSimpleTest(() -> {
+            run("");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
 
     @Test
     void 숫자아닌_입력_예외_테스트() {
