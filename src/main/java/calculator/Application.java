@@ -2,7 +2,7 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class Application {
@@ -20,6 +20,10 @@ public class Application {
     public static void main(String[] args) {
         String input = Console.readLine();
         String separator = getCustomSeparator(input);
-        
+
+        if(separator.length() != 4){
+            input = input.substring(separator.length()-7);
+        }
+
     }
 }
