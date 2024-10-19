@@ -10,7 +10,12 @@ public class Application {
     public static final String DELIMITER_PATTERN = "//(.)\\\\n(.*)";
     public static void main(String[] args) {
         String input = Console.readLine(); //문자열 입력받기.
-        String[] numbers = splitNumbers(input); //구분자로 구분한 후 추출한 숫자
+        if (input == null || input.trim().isEmpty()) { // 사용자 입력이 null이거나 ""일 경우
+            System.out.println(0);
+        } else {
+            String[] numbers = splitNumbers(input); // 구분자로 구분한 후 추출한 숫자
+            System.out.println(calculateSum(numbers));
+        }
     }
 
     public static String extractDelimiter(String input){ // "//(.)\\\\n(.*)" 패턴에서 구분자 추출하여 반환.
@@ -30,5 +35,13 @@ public class Application {
             input = input.substring(5); //커스텀 구분자 패턴 삭제
         }
         return input.split("[" + delimiters + "]");
+    }
+
+    public static int calculateSum(String[] numbers){ // 문자열 배열의 숫자를 int로 변환후 sum에 합하여 반환.
+        int sum = 0;
+        for (String number : numbers) {
+            sum += Integer.parseInt(number);
+        }
+        return sum;
     }
 }
