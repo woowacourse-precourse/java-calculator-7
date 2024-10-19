@@ -3,7 +3,7 @@ package calculator.model;
 
 import java.util.Arrays;
 
-public class calculate {
+public class Calculate {
     private static final calculator.model.Parser parser = new Parser();
 
     public static int calculateTotalSum(String[] numbers) {

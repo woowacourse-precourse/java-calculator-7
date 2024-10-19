@@ -6,7 +6,7 @@ import static calculator.constants.DelimiterEnum.*;
 import static calculator.controller.ExceptionMessage.MUST_BE_DIGIT;
 
 public class InputValidator {
-    public static boolean isCheckNullOrEmpty(String userInput) {
+    public static boolean isCheckEmpty(String userInput) {
         return userInput == null || userInput.isEmpty();
     }
 

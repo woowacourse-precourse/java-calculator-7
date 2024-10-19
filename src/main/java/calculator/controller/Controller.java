@@ -1,6 +1,6 @@
 package calculator.controller;
 
-import calculator.model.calculate;
+import calculator.model.Calculate;
 import calculator.validation.DelimiterValidator;
 import calculator.validation.InputValidator;
 import calculator.view.InputView;
@@ -19,14 +19,14 @@ public class Controller {
     }
 
     private int calculate(String userInput) {
-        if (InputValidator.isCheckNullOrEmpty(userInput)) {
+        if (InputValidator.isCheckEmpty(userInput)) {
             return 0;
         }
         InputValidator.isContainZero(userInput);
         if (userInput.startsWith(CUSTOM_DELIMITER_FORWARD.getValue())) {
-            return calculate.calculateTotalSum(DelimiterValidator.customDelimiterAddCalculator(userInput));
+            return Calculate.calculateTotalSum(DelimiterValidator.customDelimiterAddCalculator(userInput));
         }
-        return calculate.calculateTotalSum(DelimiterValidator.defaultDelimiterAddCalculator(userInput));
+        return Calculate.calculateTotalSum(DelimiterValidator.defaultDelimiterAddCalculator(userInput));
     }
 
     public void run() {
