@@ -1,6 +1,8 @@
 package calculator.domain.parser;
 
 import calculator.domain.dto.InputRequest;
+import calculator.domain.error.InputException;
+import calculator.domain.message.ErrorMessage;
 import calculator.domain.validation.InputParserValidator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,6 +26,9 @@ public abstract class InputParser {
 
         // 사용자 정의 구분자가 없는 경우 기본 구분자로 반환
         if (!trimmedText.startsWith(CUSTOM_DELIMITER_PREFIX)) {
+            if (!trimmedText.isEmpty() && !Character.isDigit(trimmedText.charAt(0))) {
+                throw InputException.from(ErrorMessage.DEFAULT_INPUT_MUST_START_WITH_NUMBER);
+            }
             return InputRequest.of(DEFAULT_DELIMITER, trimmedText);
         }
 
