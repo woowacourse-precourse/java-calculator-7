@@ -1,4 +1,4 @@
-package calculator;
+package calculator.delimiter;
 
 public class Delimiter {
     private static final String DEFAULT_DELIMITER_REGEX = "[,:]";
