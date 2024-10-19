@@ -10,34 +10,29 @@ public class Application {
 
 
     public static void main(String[] args) {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = readLine();
+        while (true) {
+            System.out.println("덧셈할 문자열을 입력해 주세요.");
+            String input = readLine();
 
-        int result = 0;
-        try {
-            checkDigit(input);
-            char custom = hasSpecialSeparator(input);
-            if (custom != 0) {
-                input = input.substring(5);
-                String[] input_array = input.split(String.valueOf(custom));
+            int result = 0;
+            try {
+                checkDigit(input);
+                char custom = hasSpecialSeparator(input);
+                String[] input_array = checkString(custom, input);
                 checkPositiveNumber(input_array);
                 result = calculate(input_array);
-            } else {
-                String[] input_array = input.split(DEFAULT);
-                checkPositiveNumber(input_array);
-                result = calculate(input_array);
+                System.out.println("결과 : " + result);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
-            System.out.println("결과 : " + result);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+
     }
 
     private static void checkDigit(String input) {
         int tmp = 0;
         for (int i = 0; i < input.length(); i++) {
-            if (isNumber(input.charAt(i))) {
+            if (Character.isDigit(input.charAt(i))) {
                 tmp = 1;
             }
         }
@@ -46,20 +41,31 @@ public class Application {
         }
     }
 
-    private static boolean isNumber(char c) {
-        int tmp = (int) c;
-        if (c >= '0' && c <= '9') {
-            return true;
-        }
-        return false;
-    }
-
 
     private static char hasSpecialSeparator(String input) {
         if (input.startsWith(CUSTOM_PREFIX) && input.substring(3, 5).equals(CUSTOM_SUFFIX)) {
-            return input.charAt(2);
+            char custom = input.charAt(2);
+            System.out.println("custom = " + custom);
+            if (Character.isDigit(custom)) {
+                throw new IllegalArgumentException("숫자는 커스텀 구분자가 될 수 없습니다.");
+            }
+
+            if (DEFAULT.contains(String.valueOf(custom))) {
+                throw new IllegalArgumentException("커스텀 구분자는 기본 구분자가 될 수 없습니다.");
+            }
+
+            return custom;
         }
         return 0;
+    }
+
+    private static String[] checkString(char custom, String input) {
+        if (custom != 0) {
+            input = input.substring(5);
+            System.out.println("custom = " + custom);
+            return input.split(String.valueOf(custom));
+        }
+        return input.split(DEFAULT);
     }
 
     private static void checkPositiveNumber(String[] array) {
