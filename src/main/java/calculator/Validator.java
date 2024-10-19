@@ -30,4 +30,9 @@ public class Validator {
       throw new IllegalArgumentException("음수값은 덧셈 할 수 없습니다.");
     }
   }
+  public static void checkEmptyInput(String inputString) {
+    if (inputString.isEmpty()) {
+      throw new IllegalArgumentException("빈 값을 입력하였습니다");
+    }
+  }
 }
