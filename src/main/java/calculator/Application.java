@@ -1,7 +1,7 @@
 package calculator;
 
 public class Application {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
         try (ConsoleIOHandler handler = new ConsoleIOHandler()) {
             final Expression expr = Expression.parse(handler.read());
