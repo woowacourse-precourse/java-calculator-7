@@ -67,26 +67,10 @@ public class Application {
         return add(parsedNumbers);
     }
 
-    private static String getNumberPart(String input, int indexOfEndSign) {
-        return input.substring(indexOfEndSign + CUSTOM_DELIMITER_END_SIGN_LENGTH);
-    }
-
-    private static String[] getEachNumbers(String numberPart, StringBuilder delimiterPart) {
-        return numberPart.split(delimiterPart.toString());
-    }
-
     private static String[] getCustomDelimiters(String input, int indexOfEndSign) {
         return input
                 .substring(CUSTOM_DELIMITER_START_SIGN_LENGTH, indexOfEndSign)
                 .split(""); // 여러 커스텀 구분자 받는 경우 포함
-    }
-
-    private static int[] parseNumbers(String[] eachNumbers) {
-        return Arrays.stream(eachNumbers)
-                .filter(Application::isNotEmpty)
-                .map(String::trim)
-                .mapToInt(Integer::parseInt)
-                .toArray();
     }
 
     private static void appendCustomDelimiters(StringBuilder delimiterPart, String[] customDelimiters) {
@@ -100,11 +84,31 @@ public class Application {
         }
     }
 
+    private static String getNumberPart(String input, int indexOfEndSign) {
+        return input.substring(indexOfEndSign + CUSTOM_DELIMITER_END_SIGN_LENGTH);
+    }
+
+    private static String[] getEachNumbers(String numberPart, StringBuilder delimiterPart) {
+        return numberPart.split(delimiterPart.toString());
+    }
+
+    private static int[] parseNumbers(String[] eachNumbers) {
+        return Arrays.stream(eachNumbers)
+                .filter(Application::isNotEmpty)
+                .map(String::trim)
+                .mapToInt(Integer::parseInt)
+                .toArray();
+    }
+
     private static void validateNoNegativeNumbers(int[] numbers) {
         if (Arrays.stream(numbers)
                 .anyMatch(n -> n < 0)) {
             throw new IllegalArgumentException("음수가 입력되었습니다.");
         }
+    }
+
+    private static int add(int[] numbers) {
+        return Arrays.stream(numbers).sum();
     }
 
     private static boolean isNotEmpty(String n) {
@@ -117,10 +121,6 @@ public class Application {
 
     private static boolean hasCustomDelimiter(String input) {
         return input.startsWith(CUSTOM_DELIMITER_START_SIGN);
-    }
-
-    private static int add(int[] numbers) {
-        return Arrays.stream(numbers).sum();
     }
 
     private static void printInputMessage() {
