@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.regex.Pattern;
 
 public class Application {
     static String delimeter = ",|:";
@@ -14,8 +15,11 @@ public class Application {
     static void registerCustom(String str) {
         int customStart = hasCustom(str);
         for (int i = customStart + 2; i < str.length() - 2; i++) {
-            if (str.substring(i, i + 2).equals("\\n")) {
-                delimeter += "|" + str.substring(customStart + 2, i);
+            if (str.startsWith("\\n", i)) {
+                String tmp = str.substring(customStart + 2, i);
+                for (int j = 0; j < tmp.length(); j++) {
+                    delimeter += "|\\" + tmp.charAt(j);
+                }
                 inputExpression = inputExpression.substring(i + 2);
                 break;
             }
@@ -38,6 +42,13 @@ public class Application {
         // 추출된 숫자들의 합 구하기
         int cnt = 0;
         for (String nowStr : numbers) {
+            String REGEXP_ONLY_NUM = "^[\\d]*$";
+            if (!Pattern.matches(REGEXP_ONLY_NUM, nowStr)) {
+                throw new IllegalArgumentException();
+            }
+            if (nowStr.equals("")) {
+                continue;
+            }
             int nowInt = Integer.parseInt(nowStr);
             if (nowInt <= 0) {
                 throw new IllegalArgumentException();
