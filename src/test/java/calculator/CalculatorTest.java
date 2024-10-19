@@ -154,6 +154,60 @@ class CalculatorTest extends NsTest {
         });
     }
 
+    @Test
+    void invalid_custom_test() {
+        String args = "//;\\p1,2;3";
+
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException(args))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
+    void duplicated_custom_end_test() {
+        String args = "//\\n\\n1\\2n3";
+        long result = 6L;
+
+        assertSimpleTest(() -> {
+            run(args);
+            assertThat(output()).contains(formatResult(result));
+        });
+    }
+
+    @Test
+    void regex_escape_test() {
+        String args = "//^+-\\n1^2-3+4";
+        long result = 10L;
+
+        assertSimpleTest(() -> {
+            run(args);
+            assertThat(output()).contains(formatResult(result));
+        });
+    }
+
+    @Test
+    void unicode_test() {
+        String args = "//ㄱ\\n1ㄱ2:3";
+        long result = 6L;
+
+        assertSimpleTest(() -> {
+            run(args);
+            assertThat(output()).contains(formatResult(result));
+        });
+    }
+
+    @Test
+    void emoji_test() {
+        String args = "//😀\\n1😀2:3";
+        long result = 6L;
+
+        assertSimpleTest(() -> {
+            run(args);
+            assertThat(output()).contains(formatResult(result));
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
