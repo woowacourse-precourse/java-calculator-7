@@ -3,46 +3,62 @@ package calculator.service;
 import java.util.regex.Pattern;
 
 public class CalculateService {
-    public int split(String input) {
+
+    public int calculate(String input) {
+
+        if(input == null || input.isEmpty()) {
+            return 0;
+        }
+
+        String[] numbers = getNumbers(input);
+
+        int result = getSum(numbers);
+
+        return result;
+    }
+
+    private String[] getNumbers(String input) {
+
+        String delimiter = "[,:]";
+        String numbers = input;
+
+        if (input.startsWith("//")) {
+
+            int customDelimiterEndIndex = input.indexOf("\\n");
+
+            if (customDelimiterEndIndex != -1) {
+
+                String customDelimiter = input.substring(2, customDelimiterEndIndex);
+
+                delimiter = Pattern.quote(customDelimiter);
+
+                numbers = input.substring(customDelimiterEndIndex + 2);
+            }
+
+        }
+
+        String[] tokens = numbers.split(delimiter);
+
+        return tokens;
+    }
+
+    private int getSum(String[] tokens) {
 
         int sum = 0;
 
-        if (input.startsWith("//")) { // 커스텀 구분자
-
-            int endOfCustom = input.indexOf("\\n");   // '\n'의 시작 위치
-
-            if(endOfCustom == -1) {
-                throw new IllegalArgumentException("잘못된 입력겂입니다.");
-            }
-
-            String customDelimiter = input.substring(2, endOfCustom); // 커스텀 구분자: '//'과 '\n'의 사이
-
-            String c = Pattern.quote(customDelimiter);
-
-            String seperated = input.substring(endOfCustom+2); // '\n' 뒤에 위치하는 문자열
-
-            String[] tokens = seperated.split(c);
-
+        try {
             for (String token : tokens) {
-                if (Integer.parseInt(token) < 0) {
-                    throw new IllegalArgumentException("잘못된 입력값 입니다.");
+                if(!token.trim().isEmpty() && Integer.parseInt(token.trim()) > 0) {
+                    sum += Integer.parseInt(token.trim());
                 }
-                sum += Integer.parseInt(token);
-            }
-        }
-        else {
-            if(input.contains(",") || input.contains(":")){ // 기본 구분자
-
-                String[] tokens = input.split("[,:]");
-
-                for (String token : tokens) {
-                    if(Integer.parseInt(token) < 0){
-                        throw new IllegalArgumentException("잘못된 입력값입니다.");
-                    }
-                    sum += Integer.parseInt(token);
+                else {
+                    throw new IllegalArgumentException("잘못된 입력값입니다.");
                 }
             }
+        } catch (Exception e) {
+            throw new IllegalArgumentException("잘못된 입력값입니다.");
         }
+
         return sum;
     }
 }
