@@ -7,7 +7,6 @@ public class StringCalculator {
 
         for (String stringNum : numbers) {
             if (stringNum.isEmpty()) {
-                sum += 0;
                 continue;
             }
             sum += Integer.parseInt(stringNum);

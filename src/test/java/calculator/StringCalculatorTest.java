@@ -25,14 +25,6 @@ class StringCalculatorTest {
         assertThat(result).isEqualTo(sum);
     }
 
-    static Stream<Arguments> provideFailCase() {
-        return Stream.of(
-                Arguments.arguments((Object) new String[] {"-1", "2", "3"}),
-                Arguments.arguments((Object) new String[] {"1", "-2", "3"}),
-                Arguments.arguments((Object) new String[] {"1", "2", "-3"})
-        );
-    }
-
     static Stream<Arguments> provideSuccessCase() {
         return Stream.of(
                 Arguments.arguments(new String[] {"1", "2", "3"}, 6),

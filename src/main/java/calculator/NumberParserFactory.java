@@ -37,7 +37,7 @@ public class NumberParserFactory {
     }
 
     private String getCustomPattern(String input, String delimiter) {
-        String customDelimiter = input.substring(2, input.indexOf(SUFFIX.value()));
+        String customDelimiter = String.valueOf(input.charAt(2));
         return delimiter + "|" + Pattern.quote(customDelimiter);
     }
 }

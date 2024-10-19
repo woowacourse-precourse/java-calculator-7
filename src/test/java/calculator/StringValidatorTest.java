@@ -25,7 +25,19 @@ class StringValidatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"//1\\n1:2:3", "//^2\\n1,2:3"})
+    @ValueSource(strings = {"//;*\\n1:2;*3", "//*!\\n1*!2:3"})
+    @DisplayName("커스텀 구분자 길이 초과 시 예외 발생")
+    void overCustomDelimiterLength_throwException(String input) {
+        //given & when
+        Throwable throwable = catchThrowable(() -> stringValidator.validate(input));
+
+        //then
+        assertThat(throwable).isInstanceOf(IllegalArgumentException.class);
+        assertThat(throwable).hasMessage("구분자는 한 자리의 문자만 사용 가능합니다.");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//1\\n1:2:3", "//2\\n1,2:3"})
     @DisplayName("커스텀 구분자에 숫자 포함시 예외 발생")
     void customDelimiterContainsNumber_throwException(String input) {
         //given & when
@@ -34,6 +46,18 @@ class StringValidatorTest {
         //then
         assertThat(throwable).isInstanceOf(IllegalArgumentException.class);
         assertThat(throwable).hasMessage("커스텀 구분자는 숫자를 제외한 문자만 사용 가능합니다.");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//:\\n1:2:3", "//,\\n1,2:3"})
+    @DisplayName("이미 존재하는 구분자 선언 시 예외 발생")
+    void declareExistingDelimiter_throwException(String input) {
+        //given & when
+        Throwable throwable = catchThrowable(() -> stringValidator.validate(input));
+
+        //then
+        assertThat(throwable).isInstanceOf(IllegalArgumentException.class);
+        assertThat(throwable).hasMessage("이미 존재하는 구분자 입니다.");
     }
 
     @ParameterizedTest
@@ -46,5 +70,16 @@ class StringValidatorTest {
         //then
         assertThat(throwable).isInstanceOf(IllegalArgumentException.class);
         assertThat(throwable).hasMessage("구분자를 제외한 문자는 포함될 수 없습니다.");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//^\\n1:2:3", "//&\\n1,2:3"})
+    @DisplayName("커스텀 구분자 선언부에 적절한 구분 기호 입력 시 검증 통과")
+    void inputProperDelimiterInDeclaration_passValidation(String input) {
+        //given & when
+        Throwable throwable = catchThrowable(() -> stringValidator.validate(input));
+
+        //then
+        assertThat(throwable).isNull();
     }
 }
