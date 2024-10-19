@@ -1,6 +1,7 @@
 package calculator.splitor;
 
 import calculator.InputString;
+import calculator.SplittedResult;
 import calculator.util.IntegerConverter;
 
 import java.util.List;
@@ -11,8 +12,8 @@ public class BasicSplitor extends Splitor {
     }
 
     @Override
-    public List<String> split() {
+    public SplittedResult split() {
         String regex = String.format("[%s%s]", SEPERATOR_COLON, SEPERATOR_COMMA);
-        return List.of(inputString.split(regex));
+        return new SplittedResult(List.of(inputString.split(regex)));
     }
 }

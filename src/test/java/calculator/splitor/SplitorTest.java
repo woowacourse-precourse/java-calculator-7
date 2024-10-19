@@ -1,6 +1,7 @@
 package calculator.splitor;
 
 import calculator.InputString;
+import calculator.SplittedResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +21,8 @@ class SplitorTest {
             Splitor splitor = new BasicSplitor(inputString);
 
             // when
-            List<String> integerList = splitor.split();
+            SplittedResult splittedResult = splitor.split();
+            List<String> integerList = splittedResult.getIntegerList();
 
             // then
             assertThat(integerList).isEqualTo(List.of("1", "3", "4", "23"));
@@ -36,7 +38,8 @@ class SplitorTest {
             Splitor splitor = new CustomSplitor(inputString, inputString.extractCustomSeperator());
 
             // when
-            List<String> integerList = splitor.split();
+            SplittedResult splittedResult = splitor.split();
+            List<String> integerList = splittedResult.getIntegerList();
 
             // then
             assertThat(integerList).isEqualTo(List.of("1", "3", "4", "23"));

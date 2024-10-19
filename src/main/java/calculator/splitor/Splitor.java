@@ -1,6 +1,7 @@
 package calculator.splitor;
 
 import calculator.InputString;
+import calculator.SplittedResult;
 
 import java.util.List;
 
@@ -13,5 +14,5 @@ public abstract class Splitor {
         this.inputString = inputString;
     }
 
-    abstract public List<String> split();
+    abstract public SplittedResult split();
 }
