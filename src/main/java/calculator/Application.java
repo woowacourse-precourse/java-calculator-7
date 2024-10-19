@@ -25,8 +25,7 @@ public class Application {
 
             // \n으로 끝나지 않는다면 예외처리
             if (targetIndex == -1) {
-                //throw new IllegalArgumentException("잘못된 형식입니다.");
-                System.out.println(targetIndex);
+                throw new IllegalArgumentException("잘못된 형식입니다.");
 
             } else {
                 // 저장한 인덱스 값의 위치까지 지정해, 설정한 구분자 저장

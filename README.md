@@ -15,3 +15,5 @@
 #### - 문자열 앞부분에 "//" 와 "\n" 가  있을 경우 그 사이에 위치하는 문자를 커스텀 구분자로 사용
 
 #### - 예외처리: 잘못된 값을 입력할 경우 IllegalArgumentException 발생시킨 후 종료
+
+#### - 예외처리: 음수가 포함될 경우 IllegalArgumentException 발생시킨 후 종료
