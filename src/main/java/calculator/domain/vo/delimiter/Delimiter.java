@@ -14,7 +14,7 @@ public class Delimiter {
     }
 
     protected void validate(final String value) {
-        if (value == null || value.length() != 1) {
+        if (value == null || value.length() != 1 || Character.isDigit(value.charAt(0))) {
             throw new IllegalArgumentException(INVALID_DELIMITER.getMessage());
         }
     }

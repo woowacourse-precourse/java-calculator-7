@@ -1,5 +1,6 @@
 package calculator.domain.vo.number;
 
+import static calculator.domain.vo.number.constants.NumberRange.*;
 import static calculator.infrastructure.exception.ErrorCode.*;
 
 import java.math.BigInteger;
@@ -20,14 +21,14 @@ public class Number {
         }
 
         try {
-            new BigInteger(value);
+            BigInteger number = new BigInteger(value);
+            if (number.compareTo(BigInteger.ZERO) < ZERO.getValue()) {
+	throw new IllegalArgumentException(NEGATIVE_NUMBER.getMessage());
+            }
         } catch (NumberFormatException exception) {
             throw new IllegalArgumentException(INVALID_NUMBER.getMessage());
         }
 
-        if (new BigInteger(value).compareTo(BigInteger.ZERO) < 0) {
-            throw new IllegalArgumentException(NEGATIVE_NUMBER.getMessage());
-        }
     }
 
     public static Number from(final String value) {
@@ -54,7 +55,7 @@ public class Number {
 
     @Override
     public String toString() {
-        return String.format("Number = %s", value);
+        return value.toString();
     }
 
 }

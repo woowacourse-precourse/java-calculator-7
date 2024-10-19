@@ -24,8 +24,8 @@ public class CliInputAdapter implements InputPort {
         String input = Console.readLine();
         CalculationRequest request = new CalculationRequest(input);
 
-        CalculationResponse response = process(request);  // 유스케이스 실행
-        outputPort.writeResponse(response);  // 결과 출력
+        CalculationResponse response = process(request);
+        outputPort.writeResponse(response);
     }
 
     @Override

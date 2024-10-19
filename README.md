@@ -78,12 +78,12 @@ public class CliInputAdapter implements InputPort {
     }
 
     public void run() {
-        outputPort.writeMessage("계산할 식을 입력하세요:");
+        outputPort.writeMessage(REQUEST_INPUT_MESSAGE.getMessage());
         String input = Console.readLine();
         CalculationRequest request = new CalculationRequest(input);
 
-        CalculationResponse response = process(request);  // 유스케이스 실행
-        outputPort.writeResponse(response);  // 결과 출력
+        CalculationResponse response = process(request);
+        outputPort.writeResponse(response);
     }
 
     @Override
@@ -110,8 +110,8 @@ public class WebInputAdapter {
 
     @PostMapping
     public ResponseEntity<CalculationResponse> calculate(@RequestBody CalculationRequest request) {
-        CalculationResponse response = process(request);  // 유스케이스 실행
-        return ResponseEntity.ok(response);  // 결과를 HTTP 응답으로 반환
+        CalculationResponse response = process(request);
+        return ResponseEntity.ok(response);
     }
 
     @Override
