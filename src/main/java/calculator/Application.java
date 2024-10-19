@@ -1,10 +1,10 @@
 package calculator;
 
-import calculator.inputData.InputData;
-import calculator.listParsing.ListChecking;
-import calculator.listParsing.ListParsing;
-import calculator.summingData.DataSumming;
-import calculator.outputData.OutputData;
+import calculator.input.InputData;
+import calculator.parsing.ListChecking;
+import calculator.parsing.ListParsing;
+import calculator.adder.DataSumming;
+import calculator.output.OutputData;
 
 import java.util.List;
 

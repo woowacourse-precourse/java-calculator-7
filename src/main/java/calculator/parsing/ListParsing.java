@@ -1,4 +1,4 @@
-package calculator.listParsing;
+package calculator.parsing;
 
 import java.util.ArrayList;
 import java.util.List;

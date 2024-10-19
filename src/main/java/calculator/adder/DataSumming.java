@@ -1,4 +1,4 @@
-package calculator.summingData;
+package calculator.adder;
 
 import java.util.List;
 
