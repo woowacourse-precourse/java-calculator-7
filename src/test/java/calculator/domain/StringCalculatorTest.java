@@ -1,4 +1,4 @@
-package calculator;
+package calculator.domain;
 
 import calculator.domain.StringCalculator;
 import org.junit.jupiter.api.DisplayName;
