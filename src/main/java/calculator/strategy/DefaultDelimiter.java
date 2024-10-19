@@ -6,6 +6,6 @@ public class DefaultDelimiter implements Delimiter {
 
     @Override
     public String[] split(String input) {
-        return input.split(DEFAULT_DELIMITER_REGEX);
+        return input.split(DEFAULT_DELIMITER_REGEX, -1);
     }
 }

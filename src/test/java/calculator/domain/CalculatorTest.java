@@ -31,7 +31,7 @@ class CalculatorTest {
     @ValueSource(strings = {"a", "1.2", "a,b", "1,a,3", "1.2,2,3"})
     void 예외_테스트_문자_또는_실수가_포함된_더하기(String input) {
         // given
-        String[] splitInputs = input.split(",");
+        String[] splitInputs = input.split(",", -1);
         Calculator calculator = new Calculator(splitInputs);
 
         // when & then
@@ -44,13 +44,26 @@ class CalculatorTest {
     @ValueSource(strings = {"-1", "0", "0,1", "-1,2,3", "-1,-2,-3"})
     void 예외_테스트_양수가_아닌_수가_포함된_더하기(String input) {
         // given
-        String[] splitInputs = input.split(",");
+        String[] splitInputs = input.split(",", -1);
         Calculator calculator = new Calculator(splitInputs);
 
         // when & then
         assertThatThrownBy(calculator::sum)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(NEGATIVE_VALUE_NOT_ALLOWED.getMessage());
+    }
+
+    @ParameterizedTest(name = "입력값: {0}")
+    @ValueSource(strings = {"1,", "1,2,", "1,,"})
+    void 예외_테스트_빈_값이_포함된_더하기(String input) {
+        // given
+        String[] splitInputs = input.split(",", -1);
+        Calculator calculator = new Calculator(splitInputs);
+
+        // when & then
+        assertThatThrownBy(calculator::sum)
+                .isInstanceOf(CalculatorException.class)
+                .hasMessage(INVALID_INPUT_VALUE.getMessage());
     }
 
     static Stream<Arguments> providePositiveNumber() {

@@ -31,7 +31,6 @@ class CustomDelimiterTest {
                 Arguments.of("#", "1#2#3", new String[]{"1", "2", "3"}),
                 Arguments.of("a", "1a2a3", new String[]{"1", "2", "3"}),
                 Arguments.of("0", "10203", new String[]{"1", "2", "3"}),
-                Arguments.of("0", "1020300", new String[]{"1", "2", "3"}),
                 Arguments.of("a123", "1a1232a1233", new String[]{"1", "2", "3"})
         );
     }

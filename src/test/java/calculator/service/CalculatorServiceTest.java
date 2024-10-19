@@ -59,8 +59,8 @@ class CalculatorServiceTest {
     }
 
     @ParameterizedTest(name = "입력값: {0}")
-    @ValueSource(strings = {"//;\\na", "//@\\n1.2", "//#\\na#b", "//;\\n1;a;3", "// \\n1.2 2 3"})
-    void 입력_값이_커스텀_구분자이고_문자_또는_실수가_포함_된_경우(String input) {
+    @ValueSource(strings = {"1,", "1,2,", "1,,"})
+    void 입력_값이_기본_구분자이고_빈_값이_포함_된_경우(String input) {
         // given
         CalculatorRequestDto requestDto = new CalculatorRequestDto(input);
 
@@ -80,6 +80,30 @@ class CalculatorServiceTest {
         assertThatThrownBy(() -> calculatorService.sum(requestDto))
                 .isInstanceOf(CalculatorException.class)
                 .hasMessage(ErrorMessage.NEGATIVE_VALUE_NOT_ALLOWED.getMessage());
+    }
+
+    @ParameterizedTest(name = "입력값: {0}")
+    @ValueSource(strings = {"//;\\na", "//@\\n1.2", "//#\\na#b", "//;\\n1;a;3", "// \\n1.2 2 3"})
+    void 입력_값이_커스텀_구분자이고_문자_또는_실수가_포함_된_경우(String input) {
+        // given
+        CalculatorRequestDto requestDto = new CalculatorRequestDto(input);
+
+        // when & then
+        assertThatThrownBy(() -> calculatorService.sum(requestDto))
+                .isInstanceOf(CalculatorException.class)
+                .hasMessage(ErrorMessage.INVALID_INPUT_VALUE.getMessage());
+    }
+
+    @ParameterizedTest(name = "입력값: {0}")
+    @ValueSource(strings = {"//;\\n1;", "//@\\n1@2@", "//#\\n1##"})
+    void 입력_값이_커스텀_구분자이고_빈_값이_포함_된_경우(String input) {
+        // given
+        CalculatorRequestDto requestDto = new CalculatorRequestDto(input);
+
+        // when & then
+        assertThatThrownBy(() -> calculatorService.sum(requestDto))
+                .isInstanceOf(CalculatorException.class)
+                .hasMessage(ErrorMessage.INVALID_INPUT_VALUE.getMessage());
     }
 
     @ParameterizedTest(name = "입력값: {0}")

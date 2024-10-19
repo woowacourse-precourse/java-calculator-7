@@ -39,11 +39,10 @@ class ApplicationTest extends NsTest {
     @CsvSource({
             "'\n', 0",
             "'1', 1",
-            "'1,', 1",
             "'1,2', 3",
-            "'1:2,', 3",
+            "'1:2', 3",
             "'1,2:3', 6",
-            "'1,2:3:', 6",
+            "'1:2,3', 6",
     })
     void 기본_구분자_사용(String input, long expected) {
         assertSimpleTest(() -> {
