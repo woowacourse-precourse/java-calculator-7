@@ -10,5 +10,7 @@ public class CalculatorView {
     }
 
     public void displayResult(int result) {
+        String ouput = "결과 : " + result;
+        System.out.println(ouput);
     }
 }

@@ -13,14 +13,10 @@ public class CalculatorController {
         this.calcView = new CalculatorView();
     }
 
-
-    public void start() {
+    public void run() {
         String input = calcView.getInput(); // 사용자 입력받기
-        try {
-            int result = calcService.caculate(input);
-            calcView.displayResult(result);
-        } catch (IllegalArgumentException iae) { //예외가 발생하면
-            System.exit(1); //출력없이 종료
-        }
+
+        int result = calcService.caculate(input);
+        calcView.displayResult(result);
     }
 }
