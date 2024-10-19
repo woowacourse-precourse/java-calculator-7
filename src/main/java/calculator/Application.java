@@ -9,16 +9,22 @@ public class Application {
 
         String input = Console.readLine();
 
-        StringConvertFactory stringConvertFactory = new StringConvertFactory();
-        String[] numbers = stringConvertFactory.parseString(input);
-
+        String[] numbers = parseNumbers(input);
         if (numbers.length == 1) {
             System.out.println("결과 : " + numbers[0]);
             return;
         }
-        StringCalculator stringCalculator = new StringCalculator();
-        int result = stringCalculator.calculate(numbers);
 
-        System.out.println("결과 : " + result);
+        System.out.println("결과 : " + calculateResult(numbers));
+    }
+
+    private static String[] parseNumbers(String input) {
+        NumberParserFactory numberParserFactory = new NumberParserFactory();
+        return numberParserFactory.parseString(input);
+    }
+
+    private static int calculateResult(String[] numbers) {
+        StringCalculator stringCalculator = new StringCalculator();
+        return stringCalculator.calculate(numbers);
     }
 }

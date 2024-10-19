@@ -5,12 +5,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("[유닛 테스트] - 입력 문자열 변환기")
 class StringConvertFactoryTest {
 
-    private final StringConvertFactory stringConvertFactory = new StringConvertFactory();
+    private final NumberParserFactory stringConvertFactory = new NumberParserFactory();
 
     @ParameterizedTest
     @EmptySource

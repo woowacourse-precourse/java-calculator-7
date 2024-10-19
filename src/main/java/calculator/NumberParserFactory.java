@@ -2,19 +2,20 @@ package calculator;
 
 import java.util.regex.Pattern;
 
-public class StringConvertFactory {
+import static calculator.Delimiter.*;
 
-    private final String PREFIX = "//";
-    private final String SUFFIX = "\\n";
+public class NumberParserFactory {
+
     private final StringValidator stringValidator;
 
-    public StringConvertFactory() {
+    public NumberParserFactory() {
         this.stringValidator = new StringValidator();
     }
 
     public String[] parseString(String input) {
 
-        String delimiter = ",|:";
+        String delimiterPattern = DEFAULT_DELIMITER.value();
+        String calculationValue = input;
 
         if (input.isEmpty()) {
             return new String[]{"0"};
@@ -25,18 +26,18 @@ public class StringConvertFactory {
         stringValidator.validate(input);
 
         if (hasDelimiterDeclaration(input)) {
-            delimiter = getCustomPattern(input, delimiter);
-            input = input.substring(input.indexOf(SUFFIX) + 2);
+            delimiterPattern = getCustomPattern(input, delimiterPattern);
+            calculationValue = input.substring(input.indexOf(SUFFIX.value()) + 2);
         }
-        return input.split(delimiter);
+        return calculationValue.split(delimiterPattern);
     }
 
     private boolean hasDelimiterDeclaration(String input) {
-        return input.startsWith(PREFIX) && input.contains(SUFFIX);
+        return input.startsWith(PREFIX.value()) && input.contains(SUFFIX.value());
     }
 
     private String getCustomPattern(String input, String delimiter) {
-        String customDelimiter = input.substring(2, input.indexOf(SUFFIX));
+        String customDelimiter = input.substring(2, input.indexOf(SUFFIX.value()));
         return delimiter + "|" + Pattern.quote(customDelimiter);
     }
 }
