@@ -44,4 +44,18 @@ public class Parser {
 		separators.add(personalSeparator);
 	}
 
+	/**
+	 * 구분자를 기준으로 문자열 파싱
+	 *
+	 * @param inputStr
+	 */
+	public String[] parseBySeparator(String inputStr) {
+		String[] splitStr = new String[0];
+
+		if (!inputStr.isEmpty()) {
+			String regex = String.join("|", separators);
+			splitStr = inputStr.split(regex);
+		}
+		return splitStr;
+	}
 }
