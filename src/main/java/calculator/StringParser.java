@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class StringParser {
     private static final List<String> DEFAULT_DELIMITER = Arrays.asList(",", ":");
-    private static final String EXTRACT_DELIMITER_REGEX = "//(.*?)\\\\n";
+    private static final String EXTRACT_DELIMITER_REGEX = "//(.{1})\\\\n";
     private static final String DIGIT_OR_POINT_REGEX = "[0-9.]";
     private static final String NUMERIC_REGEX = "^-?\\d+(\\.\\d+)?$";
     private final String inputString;
@@ -22,8 +22,8 @@ public class StringParser {
         Set<String> delimiters = new HashSet<>(DEFAULT_DELIMITER);
         String expression = this.inputString;
 
-        String customDelimiter = extractCustomDelimiter();
-        if (customDelimiter != null) {
+        if (expression.startsWith("//")) {
+            String customDelimiter = extractCustomDelimiter();
             delimiters.add(customDelimiter);
             expression = removeDelimiterDefinition();
         }
@@ -32,8 +32,6 @@ public class StringParser {
     }
 
     private String extractCustomDelimiter() {
-        // TODO: validate input string format
-
         Pattern pattern = Pattern.compile(EXTRACT_DELIMITER_REGEX);
         Matcher matcher = pattern.matcher(this.inputString);
 
@@ -41,9 +39,9 @@ public class StringParser {
             String delimiter = matcher.group(1);
             validateInvalidDelimiter(delimiter);
             return delimiter;
+        } else {
+            throw new IllegalArgumentException("커스텀 구분자 입력 양식이 유효하지 않습니다.");
         }
-
-        return null;
     }
 
     private void validateInvalidDelimiter(String delimiter) {
