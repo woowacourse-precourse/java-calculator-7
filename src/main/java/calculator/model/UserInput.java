@@ -1,10 +1,9 @@
-package calculator;
+package calculator.model;
 import camp.nextstep.edu.missionutils.Console;
 
 public class UserInput {
 
     public String input() {
-
         return Console.readLine();
     }
 }
