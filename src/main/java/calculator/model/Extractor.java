@@ -23,6 +23,7 @@ public class Extractor {
         String regex = makeRegex();
 
         // 구분자를 기준으로 문자열을 숫자들로 분리
+        // 이때 구분자가 아닌 문자가 포함되어 있을 수 있는데, 숫자인지 확인하는 메소드에서 걸러짐
         String[] tokens = input.split(regex);
         for (String token : tokens) {
             if (!token.isEmpty()) {
@@ -52,6 +53,7 @@ public class Extractor {
         return regex.toString();
     }
 
+    //분리한 문자열이 숫자인지 확인하는 메소드
     private Long validateIsNumber(String input) {
         try{
             return Long.parseLong(input);
@@ -60,6 +62,7 @@ public class Extractor {
         }
     }
 
+    //음수인지 확인하는 메소드
     private void validateNegativeNumber(Long number) {
         if(number < 0) {
             throw new IllegalArgumentException("음수가 포함되어 있습니다.");
