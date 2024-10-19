@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import calculator.util.NumberChecker;
+
 public class DelimiterMaker {
 
 	private static final String DEFAULT_DELIMITER_COMMA = ",";
@@ -38,6 +40,7 @@ public class DelimiterMaker {
 	private void validateDelimiter(String delimiter) {
 		validateCustomDelimiterFormat(delimiter);
 		validateDelimiterIsCustomDelimiterPrefix(delimiter);
+		validateDelimiterContainsNumber(delimiter);
 	}
 
 	private void validateCustomDelimiterFormat(String delimiter) {
@@ -52,6 +55,12 @@ public class DelimiterMaker {
 
 		if(customDelimiter.contains(CUSTOM_DELIMITER_SUFFIX)) {
 			throw new IllegalArgumentException("Invalid delimiter: " + customDelimiter);
+		}
+	}
+
+	private void validateDelimiterContainsNumber(String delimiter) {
+		if(NumberChecker.containsNumber(delimiter)) {
+			throw new IllegalArgumentException("Invalid delimiter: " + delimiter);
 		}
 	}
 
