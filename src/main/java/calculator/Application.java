@@ -57,6 +57,7 @@ public class Application {
                     List<BigInteger> operands;
                     try {
                         operands = Arrays.stream(expression.split(Pattern.quote(customDelimiter)))
+                                .map(String::trim)
                                 .map(BigInteger::new)
                                 .toList();
                     } catch (NumberFormatException i) {

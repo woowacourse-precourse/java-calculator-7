@@ -262,6 +262,18 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void addIfOperandContainsSpace() {
+        assertSimpleTest(() -> {
+            run("//?\\n1?2 ?3 ?4?5");
+            assertThat(output()).contains("결과 : 15");
+        });
+        assertSimpleTest(() -> {
+            run("//?\\n1?2 ?3 ?4?5?");
+            assertThat(output()).contains("결과 : 15");
+        });
+    }
+
+    @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1");
