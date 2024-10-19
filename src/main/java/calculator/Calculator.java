@@ -9,7 +9,19 @@ public class Calculator {
             return 0;
         }
 
+        if(input.startsWith("//")){
+            return 0;
+        }else {
+            return calcWithDefault(input);
+        }
+    }
+
+    private int calcWithDefault(String input){
         String[] numbers = input.split(COMMA + "|" + COLON);
+        return calcSum(numbers);
+    }
+
+    private int calcSum(String[] numbers){
         int result = 0;
 
         for(String num : numbers){
