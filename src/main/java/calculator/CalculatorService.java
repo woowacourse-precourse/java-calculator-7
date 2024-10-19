@@ -20,7 +20,7 @@ public class CalculatorService {
             int result = calculator.calculate();  // 계산 수행
             outputHandler.printSum(result); // 결과 출력
         } catch (IllegalArgumentException e) {
-            System.err.println("잘못된 입력: " + e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 }
