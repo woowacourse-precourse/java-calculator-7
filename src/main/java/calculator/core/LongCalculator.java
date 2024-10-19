@@ -15,8 +15,6 @@ import calculator.view.AdditionCalculatorView;
 import calculator.view.CalculatorView;
 
 public class LongCalculator implements Calculator {
-	private static final String VALID_CALCULATOR_EXPRESSION_PATTERN = "(^(/{2}\\D\\\\n)*)((\\d+\\D)*\\d+$)";
-	private static final Pattern VALID_PATTERN = Pattern.compile(VALID_CALCULATOR_EXPRESSION_PATTERN);
 	private final SeparatorParser separatorParser;
 	private final LongMathematicalExpressionParser mathematicalExpressionParser;
 	private final CalculatorView calculatorView;
