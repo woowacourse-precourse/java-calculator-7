@@ -13,7 +13,7 @@ class CalculatorTest {
 	@Test
 	void sumNumbers() {
 		//given
-		Calculator calculator = new Calculator();
+		Calculator calculator = Calculator.create();
 		List<Integer> testInput = List.of(1, 2, 3);
 		int expectedNumber = 6;
 
@@ -28,7 +28,7 @@ class CalculatorTest {
 	@Test
 	void sumNumbers_singleElement() {
 		//given
-		Calculator calculator = new Calculator();
+		Calculator calculator = Calculator.create();
 		List<Integer> testInput = List.of(1);
 		int expectedNumber = 1;
 
@@ -43,7 +43,7 @@ class CalculatorTest {
 	@Test
 	void sumNumbers_singleZero() {
 		//given
-		Calculator calculator = new Calculator();
+		Calculator calculator = Calculator.create();
 		List<Integer> testInput = List.of(0);
 		int expectedNumber = 0;
 
@@ -58,7 +58,7 @@ class CalculatorTest {
 	@Test
 	void sumNumbers_emptyList() {
 		//given
-		Calculator calculator = new Calculator();
+		Calculator calculator = Calculator.create();
 		List<Integer> testInput = List.of();
 		int expectedNumber = 0;
 
@@ -73,7 +73,7 @@ class CalculatorTest {
 	@Test
 	void sumNumbers_throwsExceptionForNegativeNumbers() {
 		//given
-		Calculator calculator = new Calculator();
+		Calculator calculator = Calculator.create();
 		List<Integer> testInput = List.of(-1, -2, 3);
 
 		//when & then
@@ -85,7 +85,7 @@ class CalculatorTest {
 	@Test
 	void sumNumbers_throwsExceptionForOverflow() {
 		//given
-		Calculator calculator = new Calculator();
+		Calculator calculator = Calculator.create();
 		List<Integer> testInput = List.of(Integer.MAX_VALUE, 1);
 
 		//when & then
