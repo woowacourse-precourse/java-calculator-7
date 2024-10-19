@@ -17,10 +17,13 @@ public class InputSplitter {
         }
         if (RegexPattern.CUSTOM_DELIMITER.find(input)) {
             String customDelimiter = escapeMetacharacter(getCustomDelimiter(input));
-            input = input.substring(START_INDEX_EXCEPT_REGEX);
-            return input.split(customDelimiter);
+            return getInputExceptRegex(input).split(customDelimiter);
         }
         return validateCommaAndColonDelimiter(input);
+    }
+
+    private String getInputExceptRegex(String input) {
+        return input.substring(START_INDEX_EXCEPT_REGEX);
     }
 
     private String getCustomDelimiter(String input) {
