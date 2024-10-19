@@ -40,25 +40,4 @@ class InputProcessorTest {
 
         assertThat(inputProcessor.getInput()).isEqualTo("//;\n1;2;3");
     }
-
-    @Test
-    void 커스텀_구분자가_존재하는_경우_true를_반환한다() {
-        InputProcessor inputProcessor = new InputProcessor();
-        systemInMock("//;\n1;2;3");
-
-        inputProcessor.readInput();
-
-        assertThat(inputProcessor.hasCustomDelimiter()).isTrue();
-    }
-
-    @Test
-    void 커스텀_구분자가_존재하지_않는_경우_false를_반환한다() {
-        InputProcessor inputProcessor = new InputProcessor();
-        systemInMock("1 + 2");
-
-        inputProcessor.readInput();
-
-        assertThat(inputProcessor.hasCustomDelimiter()).isFalse();
-    }
-
 }

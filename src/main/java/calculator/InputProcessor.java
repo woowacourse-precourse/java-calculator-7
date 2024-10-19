@@ -26,8 +26,4 @@ public class InputProcessor {
     public String getInput() {
         return input;
     }
-
-    public boolean hasCustomDelimiter() {
-        return input.startsWith("//");
-    }
 }
