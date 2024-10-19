@@ -15,12 +15,16 @@ public class DelimiterMaker {
 	private static final String CUSTOM_DELIMITER_PREFIX = "//";
 	private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
 
+	public List<String> getDefaultDelimiters() {
+		return new ArrayList<>(List.of(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON));
+	}
+
 	public List<String> getDelimitersFrom(String delimiterSection) {
 
 		String[] splitDelimiter = delimiterSection.split(Pattern.quote(CUSTOM_DELIMITER_SUFFIX));
 		validateAllDelimiter(splitDelimiter);
 
-		List<String> delimiters = new ArrayList<>(Arrays.asList(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON));
+		List<String> delimiters = getDefaultDelimiters();
 		Arrays.stream(splitDelimiter)
 			.map(separator -> separator.substring(CUSTOM_DELIMITER_PREFIX.length()))
 			.forEach(delimiters::add);
@@ -74,7 +78,7 @@ public class DelimiterMaker {
 	}
 
 	public boolean hasCustomSeparator(String input) {
-		return input.contains(CUSTOM_DELIMITER_PREFIX) && input.contains(CUSTOM_DELIMITER_SUFFIX);
+		return input.contains(CUSTOM_DELIMITER_PREFIX) || input.contains(CUSTOM_DELIMITER_SUFFIX);
 	}
 
 }
