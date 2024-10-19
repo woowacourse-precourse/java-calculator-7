@@ -4,14 +4,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class StringParserTest {
 
+    private StringParser stringParser;
+
+    @BeforeEach
+    void setUp() {
+        stringParser = new StringParser();
+    }
+
     @Test
-    void 커스텀_구분자가_존재하는_경우_구분자가_세개가_된다() {
+    void 커스텀_구분자를_추가할_수_있다() {
         // given
-        StringParser stringParser = new StringParser();
         String input = "//;\n1;2;3";
 
         // when
@@ -22,20 +29,17 @@ class StringParserTest {
     }
 
     @Test
-    void 커스텀_구분자가_2글자_이상인_경우_IllegalArgumentException이_발생한다() {
+    void 다중_문자_구분자는_예외를_발생시킨다() {
         // given
-        StringParser stringParser = new StringParser();
         String input = "//&^\n1;2;3";
 
         // when & then
         assertThrows(IllegalArgumentException.class, () -> stringParser.addDelimiterFromInput(input));
     }
 
-
     @Test
-    void 커스텀_구분자가_존재하지_않는_경우_구분자의_수는_2개다() {
+    void 커스텀_구분자가_없으면_구분자는_두_개다() {
         // given
-        StringParser stringParser = new StringParser();
         String input = "1,2:3";
 
         // when
@@ -46,9 +50,8 @@ class StringParserTest {
     }
 
     @Test
-    void 적절한_입력이_들어왔을_때_정규표현식이_올바르게_추출된다() {
+    void 커스텀_구분자로_문자열을_분할할_수_있다() {
         // given
-        StringParser stringParser = new StringParser();
         String input = "//;\n1;2;3";
         stringParser.addDelimiterFromInput(input);
 
@@ -60,9 +63,8 @@ class StringParserTest {
     }
 
     @Test
-    void 적절한_입력이_들어왔을_때_정규표현식이_올바르게_추출된다2() {
+    void 커스텀_구분자로_문자열을_분할할_수_있다2() {
         // given
-        StringParser stringParser = new StringParser();
         String input = "//&\n1&2&3";
         stringParser.addDelimiterFromInput(input);
 
@@ -74,51 +76,56 @@ class StringParserTest {
     }
 
     @Test
-    void 적절한_입력이_들어왔을_때_정규표현식이_올바르게_추출된다3() {
-        StringParser stringParser = new StringParser();
+    void 기본_구분자로_문자열을_분할할_수_있다() {
+        // given
         String input = "1,2,3";
-        stringParser.addDelimiterFromInput(input);
 
+        // when
         List<String> numbers = stringParser.split(input);
 
+        // then
         assertThat(numbers).isEqualTo(List.of("1", "2", "3"));
     }
 
     @Test
-    void 적절한_입력이_들어왔을_때_정규표현식이_올바르게_추출된다4() {
-        StringParser stringParser = new StringParser();
+    void 빈_입력을_처리할_수_있다() {
+        // given
         String input = "";
-        stringParser.addDelimiterFromInput(input);
 
+        // when
         List<String> numbers = stringParser.split(input);
 
+        // then
         assertThat(numbers).isEqualTo(List.of(""));
     }
 
     @Test
-    void 문자열을_입력받아_숫자열로_변환한다() {
-        StringParser stringParser = new StringParser();
+    void 문자열을_숫자로_변환할_수_있다() {
+        // given
         String input = "1,2,3";
-        stringParser.addDelimiterFromInput(input);
 
+        // when
         List<String> numbers = stringParser.split(input);
 
+        // then
         assertThat(numbers).isEqualTo(List.of(1, 2, 3));
     }
 
     @Test
-    void 문자열을_입력받아_숫자열로_변환하다_숫자가_아닌_문자가_들어오면_IllegalArgumentException이_발생한다() {
-        StringParser stringParser = new StringParser();
+    void 숫자가_아닌_문자는_예외를_발생시킨다() {
+        // given
         String input = "1,2,a";
 
+        // when & then
         assertThrows(IllegalArgumentException.class, () -> stringParser.split(input));
     }
 
     @Test
-    void 문자열을_입력받아_숫자열로_변환하다_음수가_들어오면_IllegalArgumentException이_발생한다() {
-        StringParser stringParser = new StringParser();
+    void 음수는_예외를_발생시킨다() {
+        // given
         String input = "1,2,-3";
 
+        // when & then
         assertThrows(IllegalArgumentException.class, () -> stringParser.split(input));
     }
 }
