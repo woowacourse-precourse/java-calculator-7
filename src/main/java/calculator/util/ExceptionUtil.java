@@ -66,4 +66,17 @@ public class ExceptionUtil {
             }
         }
     }
+
+    public static int checkNextTargetIsLiteral(String str) throws IllegalArgumentException {
+        try{
+            int target = Integer.parseInt(str);
+            if(target > 0){
+                return target;
+            }else{
+                throw new IllegalArgumentException("ERR : 양수가 아닌 값이 포함되어 있습니다.");
+            }
+        }catch (NumberFormatException e) { // 정수가 아닌 경우  Integer.parseInt에서 발생하는 에러
+            throw new IllegalArgumentException("ERR : 계산할수 없는 대상이 포함되어 있습니다.");
+        }
+    }
 }
