@@ -7,11 +7,7 @@ import java.util.List;
 
 public class Application {
 
-    public static ArrayList<String> seperatorList = new ArrayList<>(List.of(".", ":"));
-    public static String userInput;
-    public static ArrayList<String> userNumList = new ArrayList<String>();
-
-    public static void getCustomSeperator(String input) {
+    public static String getCustomSeperator(String input, ArrayList<String> seperatorList) {
         String customSeperator;
         if (input.contains("\\n") && input.contains("//")) {
             customSeperator = input.substring(input.indexOf("//") + 2, input.indexOf("\\n"));
@@ -22,8 +18,9 @@ public class Application {
                 throw new IllegalArgumentException("커스텀 구분자는 문자열 처음에서만 추가할 수 있습니다.");
             }
             seperatorList.add(customSeperator);
-            userInput = userInput.substring((input.indexOf("\\n") + 2));
+            return input.substring((input.indexOf("\\n") + 2));
         }
+        return input;
     }
 
     public static String getUserInput() {
@@ -35,10 +32,10 @@ public class Application {
         return input.matches("\\d");
     }
 
-    public static void getNumber(String userInput) {
+    public static void getNumber(String cleanInput, ArrayList<String> seperatorList, ArrayList<String> userNumList) {
         StringBuilder numberBuffer = new StringBuilder();
-        for (int i = 0; i < userInput.length(); i++) {
-            String curChar = userInput.substring(i, i + 1);
+        for (int i = 0; i < cleanInput.length(); i++) {
+            String curChar = cleanInput.substring(i, i + 1);
             if (seperatorList.contains(curChar)) {
                 if (!numberBuffer.isEmpty()) {
                     userNumList.add(numberBuffer.toString());
@@ -60,7 +57,7 @@ public class Application {
         return new BigInteger(numberString);
     }
 
-    public static void addNum() {
+    public static void addNum(ArrayList<String> userNumList) {
         BigInteger answer = BigInteger.ZERO;
         for (String s : userNumList) {
             answer = answer.add(convertStringToBigInt(s));
@@ -69,10 +66,17 @@ public class Application {
     }
 
     public static void main(String[] args) {
+        ArrayList<String> seperatorList = new ArrayList<>(List.of(".", ":"));
+        String userInput, cleanInput;
+        ArrayList<String> userNumList = new ArrayList<String>();
+
         System.out.println("덧셈할 문자열을 입력해주세요");
         userInput = getUserInput();
         getCustomSeperator(userInput);
         getNumber(userInput);
         addNum();
+        cleanInput = getCustomSeperator(userInput, seperatorList);
+        getNumber(cleanInput, seperatorList, userNumList);
+        addNum(userNumList);
     }
 }
