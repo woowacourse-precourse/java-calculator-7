@@ -38,7 +38,7 @@ public class DelimiterChecker {
     }
 
     private void deleteCustomMark() {
-        input.substring(CUSTOM_MARK_END_INDEX);
+        input = input.substring(CUSTOM_MARK_END_INDEX);
     }
 
     private List<Integer> leaveOnlyNumbers() {
