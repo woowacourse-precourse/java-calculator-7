@@ -30,6 +30,10 @@
 
 ### 3. String 배열에 저장되어 있는 숫자값을 반복문을 통해 읽은 후 int형으로 변환 후 총 합을 구한다.
 
+  &nbsp;&nbsp;&nbsp;&nbsp;String 타입의 양수를 정수로 반환하기 위해 parseStringtoInt라는 함수를 만든다.
+  
+  &nbsp;&nbsp;&nbsp;&nbsp;해당 함수 내에서 NumberFormatException을 IllegalArgumentException으로 발생시키도록 변환한다.
+
   ####  &nbsp;&nbsp;&nbsp;3-a. int형으로 변환 중 문제가 생기는 경우 
   
   &nbsp;&nbsp;&nbsp;&nbsp;잘못된 형식이 입력된 경우로 위와 같이 IllegalArgumentException을 발생시킨 후 종료한다.
