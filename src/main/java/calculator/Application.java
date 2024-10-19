@@ -10,13 +10,13 @@ public class Application {
         CalculatorController calculator = new CalculatorController(calculatorConfig.calculatorService(), calculatorConfig.view());
 
         String input = calculator.executeInput();
-        boolean isValid = CalculatorUtil.isValidInput(input);
-
-        if (isValid) {
-            List<String> delimiters = CalculatorUtil.extractDelimiter(input);
-            List<Integer> numbers = CalculatorUtil.splitByDelimiters(delimiters, CalculatorUtil.formattingString(input));
-            Integer result = calculator.executeCalculation(numbers);
-            calculator.executeOutput(result);
-        }
+//        boolean isValid = CalculatorUtil.isValidInput(input);
+//
+//        if (isValid) {
+//            List<String> delimiters = CalculatorUtil.extractDelimiter(input);
+//            List<Integer> numbers = CalculatorUtil.splitByDelimiters(delimiters, CalculatorUtil.formattingString(input));
+//            Integer result = calculator.executeCalculation(numbers);
+//            calculator.executeOutput(result);
+//        }
     }
 }

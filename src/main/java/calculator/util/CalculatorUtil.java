@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class CalculatorUtil {
-    private static final String CUSTOM_DELIMITER_REGEX = "^//(.*?)\\\\n";
+    public static final String CUSTOM_DELIMITER_REGEX = "^//(.*?)\\\\n";
 
     private CalculatorUtil() {};
 
@@ -43,43 +43,5 @@ public class CalculatorUtil {
 
     public static String formattingString(String inputValue) {
         return inputValue.replaceAll(CUSTOM_DELIMITER_REGEX, "");
-    }
-
-    public static boolean isValidInput(String inputValue) {
-        if (!isOnlyOneCustomDeclare(inputValue)) throw new IllegalArgumentException();
-
-        if(isContainInvalidChar(inputValue)) throw new IllegalArgumentException();
-
-        return true;
-    }
-
-    public static Boolean isOnlyOneCustomDeclare(String inputValue) {
-        // TODO : 커스텀 구분자 선언부가 1개만 존재하는 지 확인합니다.
-
-        String formattingString = formattingString(inputValue);
-
-        Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
-        Matcher matcher = pattern.matcher(formattingString);
-
-        return !matcher.find();
-    }
-
-
-    public static Boolean isContainInvalidChar(String inputValue) {
-
-        // TODO : 추출한 delimiter 외 다른 '문자' 또는 '공백'을 포함하는 지 확인합니다.
-
-        List<String> delimiters = extractDelimiter(inputValue);
-
-        String formattingString = formattingString(inputValue);
-
-        for (String delimiter : delimiters) {
-            formattingString = formattingString.replaceAll(Pattern.quote(delimiter), "");
-        }
-
-        for (char s : formattingString.toCharArray()) {
-            if (!Character.isDigit(s)) return true;
-        }
-        return false;
     }
 }

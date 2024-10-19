@@ -3,6 +3,7 @@ package calculator.util;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import calculator.InputValidator;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +49,7 @@ class CalculatorUtilTest {
     @DisplayName("커스텀 문자 정규식에 일치하는 부분을 삭제하고 반환합니다.")
     void formattingString() {
         String resultA = CalculatorUtil.formattingString("1:2:3,4|5|6");
-        String resultB = CalculatorUtil.formattingString("//:\n1:2:3,4|5|6");
+        String resultB = CalculatorUtil.formattingString("//:\\n1:2:3,4|5|6");
 
         assertThat(resultA).isEqualTo("1:2:3,4|5|6");
         assertThat(resultB).isEqualTo("1:2:3,4|5|6");
@@ -57,10 +58,14 @@ class CalculatorUtilTest {
     @Test
     @DisplayName("커스텀 구분자 선언부가 1개인지 확인합니다.")
     void isOnlyOneCustomDeclare() {
+
+        // given
+        InputValidator inputValidator = new InputValidator();
+
         // when
-        Boolean resultOneDeclare = CalculatorUtil.isOnlyOneCustomDeclare("//:\n1:2:3,4|5|6");
-        Boolean resulTwiceDeclare2 = CalculatorUtil.isOnlyOneCustomDeclare("//:\n//:\n1:2:3,4|5|//:\n6");
-        Boolean resultNoneDeclare = CalculatorUtil.isOnlyOneCustomDeclare("1:2:3,4|5|6");
+        Boolean resultOneDeclare = inputValidator.isOnlyOneCustomDeclare("//:\\n1:2:3,4|5|6");
+        Boolean resulTwiceDeclare2 = inputValidator.isOnlyOneCustomDeclare("//:\\n//:\\n1:2:3,4|5|//:\\n6");
+        Boolean resultNoneDeclare = inputValidator.isOnlyOneCustomDeclare("1:2:3,4|5|6");
 
         // then
         assertTrue(resultOneDeclare);
@@ -71,11 +76,14 @@ class CalculatorUtilTest {
     @Test
     @DisplayName("추출한 delimiter 외 다른 '문자' 또는 '공백을 포함하는 지 확인합니다.")
     void isContainInvalidChar() {
+        // given
+        InputValidator inputValidator = new InputValidator();
+
         // when
-        Boolean invalidDeclare = CalculatorUtil.isContainInvalidChar("//:\n//:\n1:2:3,4|5|//:\n6");
-        Boolean containSpace = CalculatorUtil.isContainInvalidChar("//-\n1 2:3-4:5,6");
-        Boolean validResult1 = CalculatorUtil.isContainInvalidChar("1:2:3,4:5:6");
-        Boolean validResult2 = CalculatorUtil.isContainInvalidChar("//-\n1-2:3-4:5,6");
+        Boolean invalidDeclare = inputValidator.isContainInvalidChar("//:\\n//:\\n1:2:3,4|5|//:\\n6");
+        Boolean containSpace = inputValidator.isContainInvalidChar("//-\\n1 2:3-4:5,6");
+        Boolean validResult1 = inputValidator.isContainInvalidChar("1:2:3,4:5:6");
+        Boolean validResult2 = inputValidator.isContainInvalidChar("//-\\n1-2:3-4:5,6");
 
         // then
         assertTrue(invalidDeclare);
