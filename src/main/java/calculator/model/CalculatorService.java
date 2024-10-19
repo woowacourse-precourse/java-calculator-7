@@ -9,10 +9,12 @@ public class CalculatorService {
 
     private final ExtractLogic extractLogic = new ExtractLogic();
     private final CalculatorOperation calculatorOperation = new CalculatorOperation();
+    private final ValidationUtils validationUtils = new ValidationUtils();
 
     public int calculate(String input) {
         String delimiter = getDelimiter(input);
         List<Integer> numbers = extractLogic.extractNumber(input, delimiter);
+        validationUtils.numbersCheck(numbers);
         return calculatorOperation.calculateSum(numbers);
     }
 
