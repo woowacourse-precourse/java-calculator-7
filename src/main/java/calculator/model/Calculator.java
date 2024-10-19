@@ -15,7 +15,7 @@ public class Calculator {
         int sum = 0;
 
         // 커스텀 구분자
-        if (input.contains("//")) {
+        while (input.contains("//")) {
             // 커스텀 구분자 앞부분의 숫자 부분을 먼저 계산
             String prefix = input.substring(0, input.indexOf("//")).trim();
             if (!prefix.isEmpty()) {
