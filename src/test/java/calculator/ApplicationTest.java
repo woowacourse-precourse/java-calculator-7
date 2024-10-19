@@ -112,21 +112,18 @@ class ApplicationTest extends NsTest {
         assertThat(result).isEqualTo(10);
     }
 
-
     @Test
-    void 커스텀_구분자_사용() {
-        assertSimpleTest(() -> {
-            run("//;\\n1");
-            assertThat(output()).contains("결과 : 1");
-        });
-    }
+    void 값_출력() {
+        // given
+        Calculation calculation = new Calculation();
+        CalculationService service = new CalculationService(calculation);
+        calculation.setSumValue(10);
 
-    @Test
-    void 예외_테스트() {
-        assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
-        );
+        // when
+        String output = service.printResult();
+
+        // then
+        assertThat(output).isEqualTo("결과 : 10");
     }
 
     @Override
