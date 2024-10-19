@@ -3,10 +3,22 @@ package calculator.service;
 import calculator.domain.Calculator;
 import calculator.util.CustomStringParser;
 import calculator.util.StandardStringParser;
+import calculator.validator.InputValidator;
 
 public class StringAddCalculatorService {
 
+    private final InputValidator inputValidator;
+
+    public StringAddCalculatorService(InputValidator inputValidator) {
+        this.inputValidator = inputValidator;
+    }
+
     public String add(String input) {
+        String number = validateEmptyAndNumber(input);
+        if (number != null) {
+            return number;
+        }
+
         String[] splitStringArr = stringParse(input);
 
         Calculator calculator = new Calculator();
@@ -14,19 +26,25 @@ public class StringAddCalculatorService {
         return stringAdd(splitStringArr, calculator);
     }
 
+    private String validateEmptyAndNumber(String input) {
+        if(input.isEmpty()){
+            return "0";
+        }
+
+        if(input.matches("\\d+")){
+            return input;
+        }
+        return null;
+    }
+
     private String stringAdd(String[] splitStringArr, Calculator calculator) {
-        try {
-            for (String s : splitStringArr) {
-                long num = Long.parseLong(s);
-                if (num <= 0) {
-                    throw new IllegalArgumentException("양수만 입력 가능합니다");
-                }
+        for (String s : splitStringArr) {
+            inputValidator.validateIsNumber(s);
+            inputValidator.validateIsLong(s);
 
-                calculator.add(num);
+            long num = Long.parseLong(s);
+            calculator.add(num);
 
-            }
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("입력값이 잘못되었거나 long 범위를 넘어가는 경우");
         }
         return calculator.getResult();
     }
