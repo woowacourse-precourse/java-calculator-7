@@ -18,7 +18,11 @@ public class Number {
     }
 
     public int getCustomDelimiterEndIndex(String rawText) {
-        return rawText.lastIndexOf("\n");
+        int lastIndex = rawText.indexOf("\n");
+        while (rawText.charAt(lastIndex+1) == '\n') {
+            lastIndex++;
+        }
+        return lastIndex;
     }
 
     public int checkHasCustomDelimiter(String rawText) {
