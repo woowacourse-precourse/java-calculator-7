@@ -2,7 +2,7 @@ package calculator.core;
 
 public enum CalculatorError {
 
-	INVALID_INPUT("우효하지 않은 입력값입니다.");
+	INVALID_INPUT("유효하지 않은 입력값입니다.");
 
 	private final String message;
 
