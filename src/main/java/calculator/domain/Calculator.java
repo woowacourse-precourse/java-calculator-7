@@ -1,6 +1,7 @@
 package calculator.domain;
 
 import java.util.List;
+import java.util.Optional;
 
 public class Calculator {
     private int result;
@@ -11,10 +12,7 @@ public class Calculator {
     }
 
     public int sum() {
-        this.result = 0;
-        this.parsedNumbers.forEach(num -> {
-            this.result += num;
-        });
-        return this.result;
+        Optional<Integer> reduceResult = this.parsedNumbers.stream().reduce(Integer::sum);
+        return reduceResult.orElseGet(() -> 0);
     }
 }
