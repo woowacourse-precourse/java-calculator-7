@@ -29,14 +29,17 @@ public class StringSplitter {
             if(customSeparators.length() > 1){
                 String[] splited = customSeparators.split("");
                 for(String str : splited){
-                    separator.add(Pattern.quote(str));
+                    separator.add(str);
                 }
             }else{
-                separator.add(Pattern.quote(customSeparators));
+                separator.add(customSeparators);
             }
             number = input.substring(endPoint+2);
         }
-        String calculateSeparator = separator.stream().collect(Collectors.joining("|"));
+
+        String calculateSeparator = separator.stream().map(Pattern::quote)
+                .collect(Collectors.joining("|"));
+
         return number.split(calculateSeparator);
     }
 
