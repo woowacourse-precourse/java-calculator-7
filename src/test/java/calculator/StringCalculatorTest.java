@@ -12,8 +12,8 @@ class StringCalculatorTest {
     @DisplayName("문자열로 된 숫자들의 합을 구한다.")
     void testSumNumbers() {
         // given
-        String[] input1 = new String[]{"1", "2", "3"};
-        String[] input2 = new String[]{"1"};
+        int[] input1 = new int[]{1, 2, 3};
+        int[] input2 = new int[]{1};
 
         // when
         int result1 = StringCalculator.sumNumbers(input1);
