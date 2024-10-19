@@ -7,15 +7,15 @@ import java.util.regex.Pattern;
 
 public class CustomDelimiter extends Delimiter {
     public CustomDelimiter(String delimiter) {
-        super(delimiter);
+        super(Pattern.quote(delimiter));
         validate();
     }
 
     @Override
     public void validate() {
-        Matcher inValidDelimiter = createMatcher("[0-9\\-\\\\/]");
+        Matcher inValidDelimiter = createMatcher("[0-9\\-/]|\\\\(?!Q|E)");
 
-        if (delimiter.length() > 3) {
+        if (delimiter.length() > 7) {
             throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_LIMIT.getError());
         }
 
