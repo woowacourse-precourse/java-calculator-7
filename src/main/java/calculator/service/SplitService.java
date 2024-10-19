@@ -1,6 +1,8 @@
 package calculator.service;
 
 import calculator.domain.TextInfo;
+import java.util.Vector;
+import java.util.regex.Pattern;
 
 public class SplitService {
     public boolean checkCustomSplit(TextInfo textInfo) {
@@ -10,6 +12,21 @@ public class SplitService {
     public void addSplit(TextInfo textInfo) {
         String customSplit = textInfo.text.getText().substring(2, textInfo.customSplitIndex);
         textInfo.split.add(customSplit);
+    }
+
+    public String mergeSplits(Vector<String> split) {
+        StringBuilder regex = new StringBuilder();
+        for (int i = 0; i < split.size(); i++) {
+            regex.append(Pattern.quote(split.get(i)));
+            if (i < split.size() - 1) {
+                regex.append("|");
+            }
+        }
+        return regex.toString();
+    }
+
+    public void splitText(TextInfo textInfo, String splits) {
+        textInfo.numericStringsArray = textInfo.text.getText().split(splits);
     }
 
 }
