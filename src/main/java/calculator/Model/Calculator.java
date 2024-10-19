@@ -1,9 +1,7 @@
 package calculator.Model;
 
 public class Calculator {
-    private int sum = 0;
-
-    public void checkOverflow(int nowNumber) {
+    public void checkOverflow(int nowNumber, int sum) {
         if (nowNumber > 0 && sum > Integer.MAX_VALUE-nowNumber) {
             throw new IllegalArgumentException("표현할 수 있는 최대치를 초과하였습니다.");
         }
@@ -13,10 +11,12 @@ public class Calculator {
     }
 
     public int calcSum(Input input) {
+        int sum = 0;
+
         int numberSize = input.size();
         for (int i=0; i<numberSize; i++) {
             int nowNumber = input.get(i);
-            checkOverflow(nowNumber);
+            checkOverflow(nowNumber, sum);
             sum += nowNumber;
         }
 
