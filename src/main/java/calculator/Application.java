@@ -36,6 +36,15 @@ public class Application {
         return new ArrayList<>(List.of(numberString.split(",")));
     }
 
+    public static boolean isValidNumbers(ArrayList<String> numbers) {
+        for (String number : numbers) {
+            if (!number.matches("^[0-9]*$")) {
+                throw new IllegalArgumentException("숫자가 아닌 문자 포함");
+            }
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
