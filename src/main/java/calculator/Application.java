@@ -19,4 +19,19 @@ public class Application {
         }
         return result;
     }
+
+    // 문자열을 정수로 변환하며 음수를 체크하는 메서드
+    private static int toPositiveInt(String value) {
+        int number;
+        try {
+            number = Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("유효하지 않은 숫자 입력: " + value);
+        }
+
+        if (number < 0) {
+            throw new IllegalArgumentException("음수는 허용되지 않습니다: " + value);
+        }
+        return number;
+    }
 }
