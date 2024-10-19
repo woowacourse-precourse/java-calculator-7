@@ -2,8 +2,9 @@ package calculator.validator.strategies;
 
 import calculator.util.DelimiterUtils;
 import calculator.view.ErrorMessage;
+import java.util.Arrays;
 
-// 숫자가 존재 하지 않을 경우 검증
+// 숫자가 존재하지 않을 경우 검증
 public class EmptyNumberValidator implements ValidationStrategy {
 
     @Override
@@ -23,12 +24,8 @@ public class EmptyNumberValidator implements ValidationStrategy {
     }
 
     private boolean allNumbersAreEmpty(String[] numbers) {
-        for (String number : numbers) {
-            if (!number.isEmpty()) {
-                return false;
-            }
-        }
-        return true;
+        return Arrays.stream(numbers)
+                .allMatch(String::isEmpty);  // 모든 요소가 빈 문자열인지 검사
     }
 
 }
