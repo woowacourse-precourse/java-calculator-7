@@ -8,7 +8,6 @@ public class CustomChecker {
 
     public static String getCustom(String str) {
         StringBuilder sb = new StringBuilder();
-
         if(str.charAt(0) == '/' && str.charAt(1)=='/'){
             for(int i=2; i<str.length(); i++) {
                 if(str.charAt(i-1) == '\\' && str.charAt(i)=='n') {
