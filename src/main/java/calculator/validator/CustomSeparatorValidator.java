@@ -10,10 +10,10 @@ import static calculator.constant.Message.EMPTY;
 import static calculator.constant.Message.WHITE_SPACE;
 
 public class CustomSeparatorValidator {
-    public static final String BACKTICK = "\\";
+    public static final String BACKSLASH = "\\";
     public static final String ONE_MORE_NUMBER_REGEX = "^[0-9]+$";
     public static final String WHITE_SPACE_CANNOT_USE_AS_CUSTOM = "공백은 커스텀 구분자로 사용 불가합니다.";
-    public static final String BACKTICK_CANNOT_USE_AS_CUSTOM = "'\\'는 커스텀 구분자로 사용 불가합니다.";
+    public static final String BACKSLASH_CANNOT_USE_AS_CUSTOM = "'\\'는 커스텀 구분자로 사용 불가합니다.";
     public static final String NUMBER_CANNOT_USE_AS_CUSTOM = "숫자는 커스텀 구분자로 사용 불가합니다.";
     public static final String CUSTOM_CANNOT_MORE_THAN_LIMIT = "커스텀 구분자는 2개까지만 사용 가능합니다.";
 
@@ -22,8 +22,8 @@ public class CustomSeparatorValidator {
             throw new ValidatorException(PREFIX + WHITE_SPACE_CANNOT_USE_AS_CUSTOM);
         } // end if
 
-        if (customSeparator.contains(BACKTICK)) {
-            throw new ValidatorException(PREFIX + BACKTICK_CANNOT_USE_AS_CUSTOM);
+        if (customSeparator.contains(BACKSLASH)) {
+            throw new ValidatorException(PREFIX + BACKSLASH_CANNOT_USE_AS_CUSTOM);
         } // end if
 
         if (customSeparator.stream()
