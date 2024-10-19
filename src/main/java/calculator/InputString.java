@@ -24,9 +24,9 @@ public class InputString {
         customSeparators.add(':');
 
         checkFormOfCustomSeparator(input);
-        checkFormOfOperands(input, customSeparators);
-
         setCustomSeparator();
+
+        checkFormOfOperands(input, customSeparators);
         setOperands();
     }
 
