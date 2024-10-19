@@ -19,12 +19,12 @@ public class ConsoleReader {
 
             if(target.contains("//") && target.contains("\\n")
             && target.startsWith("/")){
-                int startIndex = target.indexOf("//");
+                int startIndex = target.indexOf("//")+2;
                 int endIndex = target.indexOf("\\n");
                 if(endIndex - startIndex != 1){ // 커스텀 문자가 없거나 두 개 이상인 경우
                     throw new IllegalArgumentException();
                 }else{
-                    customSeperator = target.charAt(startIndex+2);
+                    customSeperator = target.charAt(startIndex);
                 }
             }
 
