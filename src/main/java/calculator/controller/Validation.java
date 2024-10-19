@@ -14,6 +14,10 @@ public class Validation {
         return false;
     }
 
+    public static boolean isAllNumbers(String[] tokens) {
+        return Arrays.stream(tokens).allMatch(token -> token.chars().allMatch(Character::isDigit));
+    }
+
     public static boolean isAllPositive(int[] numbers) {
         return Arrays.stream(numbers).allMatch(number -> number > ZERO);
     }
