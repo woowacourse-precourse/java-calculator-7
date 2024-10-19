@@ -26,8 +26,10 @@ public class CalculatorController {
     public void proceed() {
         String inputString = inputView.promptString();
         if (calculatorService.haveCustomDelimiter(inputString)) {
-            delimiter = calculatorService.addCustomDelimiter(delimiter, inputString);
+            delimiter = calculatorService.addCustomDelimiter(inputString, delimiter);
+            inputString = calculatorService.extractInput(inputString, delimiter);
         }
+        List<String> inputTokens = calculatorService.splitInputWithDelimiter(inputString, delimiter);
     }
 
     public void end() {
