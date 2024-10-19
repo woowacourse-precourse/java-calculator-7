@@ -7,9 +7,12 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+/**
+ * 주어진 입력
+ */
+
 public class Parser {
     private final HashSet<String> separators = new HashSet<>();
-    private final ArrayList<Integer> operands = new ArrayList<>();
     private String input;
 
     public Parser(List<String> basicSep) {
