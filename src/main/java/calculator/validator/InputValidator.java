@@ -47,10 +47,16 @@ public class InputValidator {
         }
     }
 
+    public void validateDelimiterIsNotDotOrDash(Character findCustomDelimiter) {
+        if (findCustomDelimiter == '.' || findCustomDelimiter == '-') {
+            throw new IllegalArgumentException("커스텀 구분자는 '.', '-' 이 될 수 없습니다.");
+        }
+    }
+
     public void validateInvalidDelimiters(String input, List<Character> validDelimiters) {
         input.chars()
                 .mapToObj(ch -> (char) ch)
-                .filter(ch -> !Character.isDigit(ch) && !validDelimiters.contains(ch) && ch != '-')
+                .filter(ch -> !Character.isDigit(ch) && !validDelimiters.contains(ch) && ch != '-' && ch != '.')
                 .findFirst()
                 .ifPresent(invalidDelimiter -> {
                     throw new IllegalArgumentException("올바르지 않은 구분자 혹은 입력값이 있습니다.");

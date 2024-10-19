@@ -43,6 +43,7 @@ public class InputParser {
 
         Character findCustomDelimiter = findCustomDelimiterString.charAt(0);
         inputValidator.validateDelimiterIsNotDigit(findCustomDelimiter);
+        inputValidator.validateDelimiterIsNotDotOrDash(findCustomDelimiter);
 
         return findCustomDelimiter;
     }

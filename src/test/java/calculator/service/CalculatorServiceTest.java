@@ -74,6 +74,28 @@ public class CalculatorServiceTest {
     }
 
     @Test
+    public void 커스텀_구분자_점_예외_테스트() {
+        // given
+        String input = "//.\\n1.2.3";  // '.'로 된 커스텀 구분자
+
+        // when & then
+        Assertions.assertThatThrownBy(() -> service.parseInputAndCalculate(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("커스텀 구분자는 '.', '-' 이 될 수 없습니다.");
+    }
+
+    @Test
+    public void 커스텀_구분자_대시_예외_테스트() {
+        // given
+        String input = "//-\\n1-2-3";  // '-'로 된 커스텀 구분자
+
+        // when & then
+        Assertions.assertThatThrownBy(() -> service.parseInputAndCalculate(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("커스텀 구분자는 '.', '-' 이 될 수 없습니다.");
+    }
+
+    @Test
     public void 올바르지_않은_구분자_예외_테스트() {
         // given
         String input = "1;2:3";  // ';'는 유효한 구분자가 아님
