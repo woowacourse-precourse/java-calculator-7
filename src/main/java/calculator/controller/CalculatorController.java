@@ -18,6 +18,7 @@ public class CalculatorController {
 
     public void calculate() {
         outputView.printPrompt();
+        String input = inputView.strInput();
     }
 
 }
