@@ -59,6 +59,27 @@ class ApplicationTest extends NsTest {
 
 
     @Test
+    void 에러_구분_및_출력() {
+        // given
+        String wrongInput = "//;\\n1+2";
+        Calculation calculation = new Calculation();
+        CalculationService service = new CalculationService(calculation);
+        calculation.setRawValue(wrongInput);
+
+        ExceptionHandler exceptionHandler = new ExceptionHandler();
+
+        // when
+        Class<IllegalArgumentException> error = IllegalArgumentException.class;
+
+        // then
+        assertThrows(IllegalArgumentException.class, () -> {
+            exceptionHandler.handleException(error);
+        });
+
+    }
+
+
+    @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1");
