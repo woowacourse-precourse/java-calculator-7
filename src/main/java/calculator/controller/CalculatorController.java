@@ -22,6 +22,7 @@ public class CalculatorController {
     public void startCalculator() {
         String input = calculatorView.getInput();
         int result = this.calculate(input);
+        calculatorView.showOutput(result);
     }
 
 }
