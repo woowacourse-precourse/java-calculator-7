@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class Validator {
     public static boolean checkDefaultDelimterFormat(String inputString) {
-        String rex = "^[0-9]+([,:]\\d*)*$";
+        String rex = "^[0-9]+([,:]\\d+)*$";
         Pattern pattern = Pattern.compile(rex);
         Matcher matcher = pattern.matcher(inputString);
 
