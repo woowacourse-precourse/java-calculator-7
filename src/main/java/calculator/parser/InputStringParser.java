@@ -14,7 +14,7 @@ public class InputStringParser {
 
         Optional<String> customDelimiter= extractCustomDelimiter(input);
         String removedDelimiterInput = customDelimiter.isPresent() ? removeCustomDelimiterFromOriginal(input) : input;
-        String delimiterRegex = customDelimiter.isPresent() ? createDelimeterRegex(customDelimiter.get()) : DEFAULT_DELIMITER_REGEX;
+        String delimiterRegex = customDelimiter.map(Pattern::quote).orElse(DEFAULT_DELIMITER_REGEX);
         return convertStringToList(removedDelimiterInput, delimiterRegex);
     }
 
@@ -27,12 +27,6 @@ public class InputStringParser {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }
-    }
-
-    private String createDelimeterRegex(String input) {
-        return input.chars()
-                .mapToObj(c -> "\\" + (char) c)
-                .reduce("", (s1,s2) -> s1 + s2);
     }
 
     private String removeCustomDelimiterFromOriginal(String input) {
