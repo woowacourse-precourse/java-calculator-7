@@ -20,5 +20,9 @@ public class Application {
         Calculator calculator = new Calculator(input, seperators);
 
         int answer = calculator.calculate();
+
+        UserOutput userOutput = new UserOutput(answer);
+
+        userOutput.print();
     }
 }
