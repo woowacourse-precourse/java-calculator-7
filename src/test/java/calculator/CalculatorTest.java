@@ -16,16 +16,17 @@ public class CalculatorTest {
 
     @DisplayName("음수를 입력할 경우, IllegalArgumentException이 발생하며 프로그래밍이 종료된다")
     @Test
-    void invalid_input_negative_then_throw_IllegalArgumentException() throws Exception{
+    void invalid_input_negative_then_throw_IllegalArgumentException() throws Exception {
         assertThrows(IllegalArgumentException.class, () -> {
             String input = "-1,2:3";
             List<String> validNumber = calculatorService.findValidNumber(input);
             calculator.calculatePlusNumber(validNumber);
         });
     }
+
     @DisplayName("0을 입력할 경우, IllegalArgumentException이 발생하며 프로그래밍이 종료된다")
     @Test
-    void invalid_input_0_then_throw_IllegalArgumentException() throws Exception{
+    void invalid_input_0_then_throw_IllegalArgumentException() throws Exception {
         assertThrows(IllegalArgumentException.class, () -> {
             String input = "2:2,0";
             List<String> validNumber = calculatorService.findValidNumber(input);
@@ -35,7 +36,7 @@ public class CalculatorTest {
 
     @DisplayName("문자열을 입력할 경우, IllegalArgumentException이 발생하며 프로그래밍이 종료된다")
     @Test
-    void invalid_input_string_then_throw_IllegalArgumentException() throws Exception{
+    void invalid_input_string_then_throw_IllegalArgumentException() throws Exception {
         assertThrows(IllegalArgumentException.class, () -> {
             String input = "a,2:3";
             List<String> validNumber = calculatorService.findValidNumber(input);

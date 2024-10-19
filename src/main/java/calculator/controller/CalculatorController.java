@@ -14,7 +14,7 @@ public class CalculatorController {
     private InputView inputView = new InputView();
     private OutputView outputView = new OutputView();
 
-    public void start(){
+    public void start() {
         String userInput = inputView.getUserInput();
         List<String> validNumber = calculatorService.findValidNumber(userInput);
         double calculateResult = calculator.calculatePlusNumber(validNumber);

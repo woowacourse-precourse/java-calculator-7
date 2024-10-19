@@ -22,28 +22,28 @@ public class CalculatorServiceImplTest {
 
     @DisplayName("커스텀 구분자와 쉼표, 콜론: 을 함께 사용할 경우의 값 테스트")
     @Test
-    void custom_delimiter_with_comma_and_colon_test(){
+    void custom_delimiter_with_comma_and_colon_test() {
         String inputString = "//;\\n1;2;3,4:5";
         List<String> validNumber = calculatorService.findValidNumber(inputString);
-        List<String> testNumber = Arrays.asList("1","2","3","4","5");
+        List<String> testNumber = Arrays.asList("1", "2", "3", "4", "5");
         assertThat(validNumber).containsAll(testNumber);
     }
 
     @DisplayName("쉼표, 커스텀구분자, 콜론: 을 함께 사용할 경우의 값 테스트")
     @Test
-    void comma_with_custom_delimiter_colon_test(){
+    void comma_with_custom_delimiter_colon_test() {
         String inputString = "//;\\n1,2,3;4:5";
         List<String> validNumber = calculatorService.findValidNumber(inputString);
-        List<String> testNumber = Arrays.asList("1","2","3","4","5");
+        List<String> testNumber = Arrays.asList("1", "2", "3", "4", "5");
         assertThat(validNumber).containsAll(testNumber);
     }
 
     @DisplayName("커스텀 구분자가 한 자리가 아닐 경우 테스트")
     @Test
-    void custom_delimiter_is_not_one_digit(){
+    void custom_delimiter_is_not_one_digit() {
         String inputString = "//;;;;;;!!!!!\\n1;;;;;;!!!!!2;;;;;;!!!!!3;;;;;;!!!!!4";
         List<String> validNumber = calculatorService.findValidNumber(inputString);
-        List<String> testNumber = Arrays.asList("1","2","3","4");
+        List<String> testNumber = Arrays.asList("1", "2", "3", "4");
         assertThat(validNumber).containsAll(testNumber);
     }
 
