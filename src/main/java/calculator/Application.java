@@ -2,6 +2,9 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Application {
     public static void main(String[] args) {
         try {
@@ -14,6 +17,25 @@ public class Application {
             }
 
             String delimiter = "[,;]";
+
+            if(input.contains("//")) {
+                Pattern pattern = Pattern.compile("//(.+)\\\\n");
+                Matcher matcher = pattern.matcher(input);
+                StringBuilder customDelimiter = new StringBuilder("[,;");
+
+                if(matcher.find()) {
+                    int count = 0;
+                    for (int i = 0; i < matcher.groupCount(); i++) {
+                        customDelimiter.append(matcher.group(i), 2, matcher.group(i).length()-2);
+                        count += matcher.group(i).length();
+                    }
+
+                    customDelimiter.append("]");
+                    delimiter = customDelimiter.toString();
+                    input = input.substring(count);
+                }
+            }
+
             String[] inputSplits = input.split(delimiter);
             int result = 0;
 
