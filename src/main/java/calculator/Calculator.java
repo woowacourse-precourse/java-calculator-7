@@ -15,7 +15,7 @@ public class Calculator {
         }
         Pattern pattern = Pattern.compile(REGEX);
         Matcher matcher = pattern.matcher(input);
-        if(matcher.matches()) {
+        if (matcher.matches()) {
             return calculateWithCustomDelimiter(matcher);
         }
         return calculateWithDefaultDelimiter(input);
@@ -26,21 +26,21 @@ public class Calculator {
         String numbers = matcher.group(2);
         String[] values = numbers.split(Pattern.quote(delimiter));
         return Arrays.stream(values)
-            .mapToInt(value -> toInt(value))
-            .sum();
+                .mapToInt(value -> toInt(value))
+                .sum();
     }
 
     private static int calculateWithDefaultDelimiter(String input) {
         String[] values = input.split(DELIMITER);
         return Arrays.stream(values)
-            .mapToInt(value -> toInt(value))
-            .sum();
+                .mapToInt(value -> toInt(value))
+                .sum();
     }
 
     private static int toInt(String value) {
         try {
             int number = Integer.parseInt(value);
-            if(number < 0) {
+            if (number < 0) {
                 throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
             }
             return number;
