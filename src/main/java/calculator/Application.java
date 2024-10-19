@@ -53,4 +53,17 @@ public class Application {
         return inputString;
     }
 
+    // 기능 3: 구분자를 기준으로 덧셈
+    private static int sum(String inputString, List<Character> separators){
+
+        String[] splits =  inputString.split(separators.toString());
+
+        int sum = 0;
+        for (int i=0; i<splits.length ; i++){
+            sum += Integer.parseInt(splits[i]);
+        }
+
+        return sum;
+    }
+
 }
