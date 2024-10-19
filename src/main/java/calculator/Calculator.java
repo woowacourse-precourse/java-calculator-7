@@ -13,6 +13,14 @@ public class Calculator {
     private static final String POSITIVE_NUMBER = "^[1-9]\\d*$";
     private static final int SUM_ZERO = 0;
 
+    public int processInputAndSum(String userInput) {
+        String customDelimiter = extractCustomDelimiter(userInput);
+        String[] splitNumbers = splitByDelimiter(userInput, customDelimiter);
+        List<Integer> numbers = extractValidNumbers(splitNumbers);
+        int sum = sumNumbers(numbers);
+        return sum;
+    }
+
     public int sumNumbers(List<Integer> numbers) {
         int sum = SUM_ZERO;
         for (Integer number : numbers) {
