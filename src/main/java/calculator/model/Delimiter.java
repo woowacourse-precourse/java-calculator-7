@@ -14,21 +14,26 @@ public class Delimiter {
     }
 
     public void setCustomDelimiter() {
-        int delimiterEndIndex = inputString.indexOf("\n");
+        int delimiterEndIndex = inputString.indexOf("\\n");
+
+        if (delimiterEndIndex == -1) {
+            throw new IllegalArgumentException("올바른 형식의 커스텀 구분자가 아닙니다.");
+        }
+
         customDelimiter = inputString.substring(2, delimiterEndIndex);
 
-        // 구분자가 한 글자를 초과하는 경우 예외 발생
-        if (customDelimiter.length() > 1) {
-            throw new IllegalArgumentException("커스텀 구분자는 한 글자만 허용됩니다");
+        if (customDelimiter.length() != 1 || customDelimiter.trim().isEmpty()) {
+            throw new IllegalArgumentException("커스텀 구분자는 한 글자만 허용됩니다.");
         }
-        // 구분자가 공백인 경우 예외 발생
-        else if (customDelimiter.equals("")) {
-            throw new IllegalArgumentException("커스텀 구분자는 공백이 허용되지 않습니다.");
+
+        if (Character.isDigit(customDelimiter.charAt(0))) {
+            throw new IllegalArgumentException("커스텀 구분자는 숫자가 될 수 없습니다.");
         }
 
         delimiterList.add(customDelimiter);
-        inputString = inputString.substring(delimiterEndIndex + 1);
+        inputString = inputString.substring(delimiterEndIndex + 2);
     }
+
 
     // Controller 에서 Delimiter 객체 생성 후 사용 (커스텀 구분자 존재 여부 확인)
     public void checkCustomDelimiter() {
@@ -39,7 +44,7 @@ public class Delimiter {
 
     public String[] splitString() {
         if (inputString == null || inputString.trim().isEmpty()) {
-            return new String[]{};
+            return null;
         }
         String delimiterRegex = String.join("|", delimiterList); // ",|:|customDeli"
         return inputString.split(delimiterRegex);
