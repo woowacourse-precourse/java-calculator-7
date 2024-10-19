@@ -50,6 +50,13 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 6");
         });
     }
+    @Test
+    void 두_자릿수_값_처리(){
+        assertSimpleTest(() -> {
+            run("//;\\n1;20,30");
+            assertThat(output()).contains("결과 : 51");
+        });
+    }
 
 
 
