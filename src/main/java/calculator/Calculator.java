@@ -22,6 +22,16 @@ public class Calculator {
     public void run() {
         String cmd = calculatorDisplay.getPromptInput();
 
+        // 커스텀 구분자 설정
+        Matcher matcher = customSeparatorCmdPattern.matcher(cmd);
+        if (matcher.find()) { // 사용자가 커스텀 구분자 설정 명령을 입력했을 시
+            registerCustomSeparator(matcher);
+
+            // 구분자 등록에 사용됐던 명령어 제거
+            cmd = cmd.replace(matcher.group(), "");
+        }
+
+        // 계산
         int result = sum(cmd);
 
         calculatorDisplay.printResult(result);
@@ -35,16 +45,6 @@ public class Calculator {
     private int sum(String cmd) {
         if (cmd.isEmpty()) {
             return 0;
-        }
-
-        // 커스텀 구분자 등록
-        Matcher matcher = customSeparatorCmdPattern.matcher(cmd);
-        boolean containsCustomSeparatorCmd = matcher.find();
-        if (containsCustomSeparatorCmd) {
-            registerCustomSeparator(matcher);
-
-            // 구분자 등록에 사용됐던 명령어 제거
-            cmd = cmd.replace(matcher.group(), "");
         }
 
         // 합 계산
