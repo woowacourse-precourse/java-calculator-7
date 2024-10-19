@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -66,6 +67,26 @@ class ApplicationTest extends NsTest {
                 .isInstanceOf(IllegalArgumentException.class)
         );
     }
+
+    // isValidString()
+    @Test
+    void 유효_문자_검증(){
+        ArrayDeque<String> testSplitque = new ArrayDeque<>();
+        testSplitque.addAll(List.of("","3","4","","93"));
+
+        Application.StringCalculator stringCalculator= new Application.StringCalculator();
+        assertThat(stringCalculator.isValidString(testSplitque)).isTrue();
+    }
+
+    @Test
+    void 정의되지_않은_구분자() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("‘3’4:93"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+
 
     @Override
     public void runMain() {

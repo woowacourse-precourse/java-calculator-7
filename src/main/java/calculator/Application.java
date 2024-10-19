@@ -51,7 +51,28 @@ public class Application {
             return 0;
         }
 
-        private boolean isValidString(ArrayDeque<String> splitNumberArr) {
+        public boolean isValidString(ArrayDeque<String> splitStringDeq) {
+            try{
+                int arrSize = splitStringDeq.size();
+                // splitStringDeq를 순회
+                for (int i = 0; i < arrSize; i++) {
+                    String s = splitStringDeq.pollFirst();
+                    // 비어있는 요소는 제거
+                    if (s.isEmpty()) {
+                        continue;
+                    }
+                    // 숫자로 구성되어있으면 정수형으로 변환하여 저장
+                    if(s.matches("\\d+")){
+                        extractedNumArr.add(Integer.parseInt(s));
+                    }else{
+                        // 다른 문자가 남아있을 경우 예외 throw
+                        throw new IllegalArgumentException();
+                    }
+                }
+            } catch (Exception e) {
+                throw e;
+            }
+
             return true;
         }
 
