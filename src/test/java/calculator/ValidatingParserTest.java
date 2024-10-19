@@ -26,6 +26,21 @@ class ValidatingParserTest {
 		assertThat(result).isEqualTo(expectedResult);
 	}
 
+	@DisplayName("커스텀 구분자 뒤에 빈 문자열이 오면 [0]을 반환한다.")
+	@Test
+	void validatedNumbersFrom_customSeparatorWithEmptyString() {
+		//given
+		ValidatingParser parser = ValidatingParser.create();
+		String testInput = "//ak\\n";
+		List<Integer> expectedResult = List.of(0);
+
+		//when
+		List<Integer> result = parser.validatedNumbersFrom(testInput);
+
+		//then
+		assertThat(result).isEqualTo(expectedResult);
+	}
+
 	@DisplayName("기본 구분자가 들어간 문자열의 숫자 리스트를 반환한다.")
 	@Test
 	void validatedNumbersFrom_default_separator() {
@@ -54,6 +69,18 @@ class ValidatingParserTest {
 
 		//then
 		assertThat(result).isEqualTo(expectedResult);
+	}
+
+	@DisplayName("잘못된 커스텀 구분자 형식에 대해 IllegalArgumentException을 발생시킨다.")
+	@Test
+	void validatedNumbersFrom_invalidCustomSeparatorFormat() {
+		//given
+		ValidatingParser parser = ValidatingParser.create();
+		String testInput = "//::\\n1:::2";
+
+		//when & then
+		assertThatThrownBy(() -> parser.validatedNumbersFrom(testInput))
+			.isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@DisplayName("음수가 들어오면 IllegalArgumentException을 발생시킨다.")
