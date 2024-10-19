@@ -1,5 +1,6 @@
-package calculator.model;
+package calculator.service;
 
+import calculator.model.Operand;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 

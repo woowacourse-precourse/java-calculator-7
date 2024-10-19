@@ -3,21 +3,21 @@ package calculator.controller;
 import static calculator.common.constant.Constants.COLON;
 import static calculator.common.constant.Constants.COMMA;
 
-import calculator.model.Calculator;
 import calculator.model.Operand;
 import calculator.model.Separators;
+import calculator.service.Calculator;
 import calculator.service.CustomSeparatorParser;
 import calculator.service.OperandExtractor;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 import java.util.List;
 
-public class StringCalculator {
+public class CustomCalculator {
 
     private final InputView inputView;
     private final OutputView outputView;
 
-    public StringCalculator(InputView inputView, OutputView outputView) {
+    public CustomCalculator(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
     }
