@@ -38,7 +38,7 @@ class CalculatorParserTest {
         // when & then
         assertThatThrownBy(() -> calculatorParser.parse("//;;;;\n1;2;3"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("커스텀 구분자가 1글자를 초과했습니다.");
+                .hasMessage("구분자는 길이가 1인 문자여야 합니다.");
     }
 
     @Test
