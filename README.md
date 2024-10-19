@@ -38,6 +38,8 @@
     │           + pringResultToUser() : void
     └── util/
           └── ExceptionUtil.java // Implement Static Method to check Runtime Exception
+                + checkParamsIsNotEmpty(String str, String delim, boolean custom) : void
+                + checkNextTargetIsLiteral(String str) : int
         
 
 ```
@@ -106,6 +108,24 @@
         ㄴ 남은 기간동안 예외 처리 또한 Service와 같이 추상 개체를 만들고 각각의 상황에 따라 자동으로 대응하도록 바꿔볼 계획이다.
         ㄴ 또한 아직까지는 발견하지 않은 다양한 예외들에 대한 케이스를 고민해보아야한다.
     ㄴ 한가지 의문점은 Custom 구분자가 있는 경우에도 , : 이 2개의 기본 구분자로도 분리를 해야하는지에 대해서 고민중이다.
+    
+        
+```
+### 2024.10.19 Sat
+``` 
+    
+    오늘의 목표 : "예외 처리 언제 해야 옳을까"
+
+    ㄴ 예외 처리 관련 내용 수정
+        ㄴ DTO를 생성하는 타이밍에 특정 구역의 값(Delimiter, String)이 비어있는지 검사한다.
+        ㄴ 서비스 단계에서 각각의 상황에 맞춰서 연산의 대상이 0 이상의 정수인지 검사한다.
+    ㄴ 구현해야 하는 함수 목록
+        ㄴ 생성자 내에서 Delim과 Str이 비어있는지 확인하는 static void checkParamsIsNotEmpty(String delim, String str, boolean custom) 구현
+        ㄴ Service 내부에서 연산하는 대상이 0 이상의 정수인지 검사하면서 다음 연산값을 반환하는 static int checkNextTargetIsLiteral(String str) 구현
+    ㄴ 구현한 각각의 예외 처리 함수에 대한 기능 테스트 + DTO 생성자 레벨 테스트 + 서비스 레벨 테스트 케이스 추가
+
+
+    ✅ 구현 후 느낀점 / 추가 개선사항 
     
         
 ```
