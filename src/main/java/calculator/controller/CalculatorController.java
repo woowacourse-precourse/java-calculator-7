@@ -17,15 +17,14 @@ public class CalculatorController {
 
     public void run() {
         String userInput = inputView.receiveUserInput();
-        String[] operand = splitDelimiter.splitWithDelimiter(userInput);
-        int[] numbs = strToInt(operand);
-        int res = additionOperator.calculate(numbs);
-        outputView.printResult(res);
+        int[] operandInt = convertToIntArray(splitDelimiter.splitWithDelimiter(userInput));
+        int result = additionOperator.calculate(operandInt);
+        outputView.printResult(result);
     }
 
-    private int[] strToInt(String[] str) {
-        return Arrays.stream(str)
-                .mapToInt(this::parsePositiveInt)
+    private int[] convertToIntArray(String[] strArray) {
+        return Arrays.stream(strArray)
+                .mapToInt(this::validateAndParsePositiveInt)
                 .toArray();
     }
 
@@ -34,7 +33,7 @@ public class CalculatorController {
      * @param numberStr String
      * @return int
      */
-    private int parsePositiveInt(String numberStr) {
+    private int validateAndParsePositiveInt(String numberStr) {
         try {
             int number = Integer.parseInt(numberStr);
             if (number < 0) {
