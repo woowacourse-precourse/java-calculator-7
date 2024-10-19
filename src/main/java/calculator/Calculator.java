@@ -3,7 +3,6 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
@@ -11,7 +10,7 @@ public class Calculator {
     private String inputString;
     private String removedString = "";
     private List<String> separator = new ArrayList<>();
-    private int[] operand;
+    private List<Integer> operand = new ArrayList<>();
 
     /**
      * 사용자 입력
@@ -62,25 +61,54 @@ public class Calculator {
             return true;
     }
 
+    /**
+     * 기본 구분자 배열에 추가
+     */
     private void addBasicSeparator() {
         separator.add(",");
         separator.add(":");
     }
 
-    private boolean isSeparator(String tmpSeparator) {
+    /**
+     * 현재 문자열이 구분자에 해당하는지 확인하고 자릿수 반환
+     */
+    private int isSeparator(String tmpString) {
         for (int i = 0; i < separator.size(); i++) {
-            if (separator.get(i).equals(tmpSeparator)) {
-                return true;
+            // 이 부분 예외처리 잘해야 함
+            if (tmpString.length() < separator.get(i).length())
+                continue;
+            if (separator.get(i).equals(tmpString.substring(0, separator.get(i).length()))) {
+                return separator.get(i).length();
             }
         }
-        return false;
+        return -1;
     }
 
     /**
      * 피연산자 파싱하여 operand 배열에 저장
      */
     private void parseOperand() {
+        String tmpString = removedString;
+        String tmpOperand = "";
 
+        for (int i = 0; i < removedString.length(); i++) {
+            int separatorLength = isSeparator(removedString.substring(i));
+
+            if (separatorLength != -1) {
+                if (!tmpOperand.equals("")) {
+                    operand.add(Integer.parseInt(tmpOperand));
+                    tmpOperand = "";
+                }
+                i += separatorLength - 1;
+            } else if (Character.isDigit(removedString.charAt(i))) {
+                tmpOperand += removedString.charAt(i);
+            } else {
+                throw new IllegalArgumentException("등록되지 않은 구분자가 포함되어 있습니다.");
+            }
+        }
+        if (!tmpOperand.equals("")) {
+            operand.add(Integer.parseInt(tmpOperand));
+        }
     }
 
     /**
@@ -88,7 +116,11 @@ public class Calculator {
      */
     private void printResult() {
         if (operand != null) {
-            System.out.println("결과 : " + Arrays.stream(operand).sum());
+            int sum = 0;
+            for (int i = 0; i < operand.size(); i++) {
+                sum += operand.get(i);
+            }
+            System.out.println("결과 : " + sum);
         } else {
             System.out.println("결과 : 0");
         }
@@ -98,9 +130,7 @@ public class Calculator {
         getUserInput();
         parseCustomSeparator();
         addBasicSeparator();
-        // todo: 피연산자 문자열 파싱 및 저장 -> 예외처리
         parseOperand();
-        // todo: 결과 출력
         printResult();
     }
 }
