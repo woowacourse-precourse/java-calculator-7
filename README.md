@@ -44,3 +44,36 @@
 ## 커밋 규칙
 - Git의 커밋 단위는 `README.md`에 정리한 기능 목록 단위로 추가한다.
   - [AngularJS Git Commit Message Conventions](https://github.com/angular/angular.js/blob/main/DEVELOPERS.md#commits)을 참고해 커밋 메시지를 작성한다.
+
+## 사용 방법
+**1. 저장소를 자신의 컴퓨터로 clone**
+  ```bash
+  git clone https://github.com/{본인_아이디}/{저장소 아이디}.git
+  ex) git clone https://github.com/junsoo0719/woowacourse-precourse-java-calculator-7.git
+  
+  cd {저장소 아이디}
+  ex) cd woowacourse-precourse-java-calculator-7
+  ```
+
+**2. Java 21 환경 확인**
+  ```bash
+  java -version
+  ```
+
+**3. 테스트 실행**
+- Mac/Linux 사용자
+```bash
+./gradlew clean test
+```
+
+- Windows 사용자
+```bash
+gradlew.bat clean test
+또는
+.\gradlew.bat clean test
+```
+
+- 모든 테스트 통과 시
+```bash
+BUILD SUCCESSFUL in 0s
+```
