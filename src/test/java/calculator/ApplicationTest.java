@@ -46,7 +46,7 @@ class ApplicationTest extends NsTest {
         // 정상값 입력
         assertSimpleTest(() -> {
             run("1:3,2");
-            assertThat(output()).contains("결과 : 0");
+            assertThat(output()).contains("결과 : 6");
         });
         assertSimpleTest(() -> {
             run("1:3,2,40,800,29");
