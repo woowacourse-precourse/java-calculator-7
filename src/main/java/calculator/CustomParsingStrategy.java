@@ -27,7 +27,8 @@ public class CustomParsingStrategy implements ParsingStrategy {
 
         // 커스텀 구분자와 기본 구분자를 함께 사용
         String numbersPart = input.substring(delimiterEnd + 1);
-        String[] numbers = numbersPart.split(delimiter + "|,|:");
+        String escapedDelimiter = java.util.regex.Pattern.quote(delimiter);
+        String[] numbers = numbersPart.split(escapedDelimiter + "|,|:");
 
         return Arrays.stream(numbers)
                 .mapToInt(number -> {
