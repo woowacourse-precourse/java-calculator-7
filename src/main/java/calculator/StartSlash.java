@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StartSlash {
-    public int readSlashInput (String input) {
+    public ArrayList<Integer> readSlashInput (String input) {
         String custom = "";
         String exp = "";
         if (input.startsWith("//")) {
@@ -29,13 +29,12 @@ public class StartSlash {
             throw new IllegalArgumentException();
         }
 
-        ArrayList<Integer> numbers = new ArrayList<>();  //여기가 numbers
+        ArrayList<Integer> numbers = new ArrayList<>();
         String[] temps = exp.split(custom);
         for (String temp : temps) {
             numbers.add(Integer.parseInt(temp));
         }
 
-        Calculate calculate = new Calculate();
-        return calculate.AddNumbers(numbers);
+        return numbers;
     }
 }
