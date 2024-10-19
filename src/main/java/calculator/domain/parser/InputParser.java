@@ -23,31 +23,51 @@ public class InputParser {
             return new ParsedInput(new String[]{"0"});
         }
 
+        Set<String> delimiters = initializeDefaultDelimiters();
         String numbers = input;
-        Set<String> delimiters = new HashSet<>();
 
+        if (inputValidator.containCustomDelimiter(input)) {
+            numbers = processCustomDelimiter(input, delimiters);
+        }
+
+        String[] filteredNumberTokens = tokenizeNumbers(numbers, delimiters);
+        validateNumbers(filteredNumberTokens);
+
+        return new ParsedInput(filteredNumberTokens);
+    }
+
+    private Set<String> initializeDefaultDelimiters() {
+        Set<String> delimiters = new HashSet<>();
         delimiters.add(DEFAULT_DELIMITER_COLON.getValue());
         delimiters.add(DEFAULT_DELIMITER_COMMA.getValue());
 
-        if (inputValidator.containCustomDelimiter(input)) {
-            int lastDelimiterIndex = input.lastIndexOf(CUSTOM_DELIMITER_SUFFIX.getValue());
+        return delimiters;
+    }
 
-            if (lastDelimiterIndex == -1) {
-                throw new IllegalArgumentException("커스텀 구분자 지정이 잘못되었습니다.");
-            }
+    private String processCustomDelimiter(String input, Set<String> delimiters) {
+        int lastDelimiterIndex = input.lastIndexOf(CUSTOM_DELIMITER_SUFFIX.getValue());
 
-            String customDelimiterSection = input.substring(2, lastDelimiterIndex);
-            numbers = input.substring(lastDelimiterIndex + 2);
-
-            delimiters.addAll(extractCustomDelimiters(customDelimiterSection));
+        if (lastDelimiterIndex == -1) {
+            throw new IllegalArgumentException("커스텀 구분자 지정이 잘못되었습니다.");
         }
 
-        String regex = buildRegex(delimiters);
+        String customDelimiterSection = input.substring(2, lastDelimiterIndex);
+        String numbers = input.substring(lastDelimiterIndex + 2);
+
+        delimiters.addAll(extractCustomDelimiters(customDelimiterSection));
+
+        return numbers;
+    }
+
+    private String[] tokenizeNumbers(String numbers, Set<String> delimiters) {
+        String regex = String.join("|", delimiters);
         String[] numberTokens = numbers.split(regex);
 
-        String[] filteredNumberTokens = FilteredEmptyString.filterEmptyString(numberTokens);
+        return FilteredEmptyString.filterEmptyString(numberTokens);
+    }
 
-        for (String number : filteredNumberTokens) {
+    private void validateNumbers(String[] numbers) {
+        for (String number : numbers) {
             if (inputValidator.isMinus(number)) {
                 throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
             }
@@ -55,8 +75,6 @@ public class InputParser {
                 throw new IllegalArgumentException("숫자 이외의 값은 입력할 수 없습니다.");
             }
         }
-
-        return new ParsedInput(filteredNumberTokens);
     }
 
     private Set<String> extractCustomDelimiters(String customDelimiterSection) {
@@ -68,10 +86,6 @@ public class InputParser {
 
         return delimiters;
      }
-
-    private String buildRegex(Set<String> delimiters) {
-        return String.join("|", delimiters);
-    }
 
     public record ParsedInput(String[] numbers) { }
 
