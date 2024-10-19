@@ -12,7 +12,7 @@ class ExtractorTest {
     public void 문자열에서_커스텀_구분자를_추출한다() {
         //given
         Extractor ex = new Extractor();
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
 
         //when
         String result = ex.extractDelimiter(input);
@@ -38,10 +38,10 @@ class ExtractorTest {
     public void 커스텀_구분자로_숫자를_추출한다() {
         //given
         Extractor ex = new Extractor();
-        String input = "1?2?3";
-        String delimiter = "?";
+        String input = "//?\\n1?2?3";
 
         //when
+        String delimiter = ex.extractDelimiter(input);
         int[] result = ex.makeNumberArray(input, delimiter);
 
         //then
@@ -52,10 +52,10 @@ class ExtractorTest {
     public void 커스텀_구분자로_숫자를_추출한다2() {
         //given
         Extractor ex = new Extractor();
-        String input = "1[2[3";
-        String delimiter = "[";
+        String input = "//[\\n1[2[3";
 
         //when
+        String delimiter = ex.extractDelimiter(input);
         int[] result = ex.makeNumberArray(input, delimiter);
 
         //then
