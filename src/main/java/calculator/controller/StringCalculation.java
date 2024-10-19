@@ -1,4 +1,8 @@
-package calculator;
+package calculator.controller;
+
+import calculator.model.StringProcessor;
+import calculator.view.InputView;
+import calculator.view.ResultView;
 
 public class StringCalculation {
 
