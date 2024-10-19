@@ -3,7 +3,7 @@ package calculator.split;
 import static calculator.split.StringSplit.getCustomCalFormula;
 import static calculator.split.StringSplit.getCustomSeparator;
 import static calculator.split.StringSplit.getDefaultSeparator;
-import static calculator.split.StringSplit.splitStringBySeparator;
+import static calculator.split.StringSplit.splitCalFormulaBySeparator;
 import static calculator.split.StringSplit.stringToNumber;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -70,46 +70,49 @@ class StringSplitTest {
     @Test
     @DisplayName("구분자로 계산해야 하는 문자열을 끊고, 배열을 반환한다.")
     void testSplitStringBySeparator() {
-        String string = "12a34b5c";
+        String calFormula = "12a34b5c";
         String separator = "abc";
 
         int[] expected = new int[]{12, 34, 5, 0};
 
-        assertArrayEquals(expected, splitStringBySeparator(string, separator));
+        assertArrayEquals(expected, splitCalFormulaBySeparator(calFormula, separator));
     }
 
     @Test
     @DisplayName("계산할 문자열이 빈 경우에는 길이가 1인 배열 [0]을 반환한다.")
     void emptyString() {
-        String string = "";
+        String calFormula = "";
         String separator = "a";
 
         int[] expected = new int[]{0};
 
-        assertArrayEquals(expected, splitStringBySeparator(string, separator));
+        assertArrayEquals(expected, splitCalFormulaBySeparator(calFormula, separator));
     }
 
     @Test
     @DisplayName("계산할 문자열이 구분자로만 이루어진 경우에는 0으로 채워진 배열을 반환한다.")
     void containWithOnlySeparator() {
-        String string = "abcabc";
+        String calFormula = "abcabc";
         String separator = "abc";
         int[] expected = new int[]{0, 0, 0, 0, 0, 0, 0};
 
-        assertArrayEquals(expected, splitStringBySeparator(string, separator));
+        assertArrayEquals(expected, splitCalFormulaBySeparator(calFormula, separator));
     }
 
     @Test
     @DisplayName("문자열을 숫자로 변환한다.")
     void testStringToNumber() {
-        String string = "12";
-        assertEquals(12, stringToNumber(string));
+        String calFormula = "12";
+        int expected = 12;
+
+        assertEquals(expected, stringToNumber(calFormula));
     }
 
     @Test
     @DisplayName("빈 문자열을 숫자 '0'으로 변환한다.")
     void emptyStringToZero() {
-        String string = "";
-        assertEquals(0, stringToNumber(string));
+        String calFormula = "";
+        int expected = 0;
+        assertEquals(expected, stringToNumber(calFormula));
     }
 }

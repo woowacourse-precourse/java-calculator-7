@@ -22,17 +22,17 @@ public class StringSplit {
         return string;
     }
 
-    public static int[] splitStringBySeparator(String string, String separator) {
-        return Arrays.stream(string.split(String.format("[%s]", separator), -1))
+    public static int[] splitCalFormulaBySeparator(String calFormula, String separator) {
+        return Arrays.stream(calFormula.split(String.format("[%s]", separator), -1))
                 .mapToInt(StringSplit::stringToNumber)
                 .toArray();
     }
 
-    public static int stringToNumber(String string) {
-        if (Objects.equals(string, "")) {
+    public static int stringToNumber(String strNum) {
+        if (Objects.equals(strNum, "")) {
             return 0;
         }
-        return Integer.parseInt(string);
+        return Integer.parseInt(strNum);
     }
 
 }
