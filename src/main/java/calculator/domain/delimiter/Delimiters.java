@@ -13,10 +13,9 @@ public class Delimiters {
     private static final String CUSTOM_DELIMITER_START_SEPARATOR = "//";
     private static final String CUSTOM_DELIMITER_END_SEPARATOR = "\n";
 
-    private final List<String> delimiters;
+    private final List<String> delimiters = new ArrayList<>();
 
     public Delimiters() {
-        this.delimiters = new ArrayList<>();
         addDefaultDelimiters();
     }
 
