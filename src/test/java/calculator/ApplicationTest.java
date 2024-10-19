@@ -3,17 +3,43 @@ package calculator;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
+    static ArrayList<String> testDelimiterArr;
+    static ArrayList<Integer> testExtractedNumbers;
+    static ArrayDeque<String> testSplitNumbers;
+
+    void calculatorConstructor(){
+        testDelimiterArr = new ArrayList<>();
+        testDelimiterArr.addAll(Arrays.asList(":",",",";","m45i","!"));
+    }
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1");
             assertThat(output()).contains("결과 : 1");
         });
+    }
+
+    @Test
+    void 다수의_커스텀_구분자_추출() {
+        calculatorConstructor();
+        // given
+        String testDelimiterText = "//;\\n1//m45i\\n//!\\n";
+
+        // when
+        Application.StringCalculator stringCalculator = new Application.StringCalculator();
+        ArrayList<String> result = stringCalculator.extractDelimiter(testDelimiterText);
+
+        // then
+        assertThat(result).isEqualTo(testDelimiterArr);
     }
 
     @Test
