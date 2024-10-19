@@ -95,10 +95,10 @@ class CalculatorServiceTest {
 
     static Stream<Object[]> provideInputAndExpectedAndCustomSeparator() {
         return Stream.of(
-                new Object[]{"//k\\n1:2:3k4", new String[]{"1", "2", "3", "4"}, "k"},
-                new Object[]{"//;\\n5;6:7", new String[]{"5", "6", "7"}, ";"},
-                new Object[]{"//o\\n8,9,10", new String[]{"8", "9", "10"}, "o"},
-                new Object[]{"//.\\n11.12.13", new String[]{"11", "12", "13"}, "."},
+                new Object[]{"1:2:3k4", new String[]{"1", "2", "3", "4"}, "k"},
+                new Object[]{"5;6:7", new String[]{"5", "6", "7"}, ";"},
+                new Object[]{"8,9,10", new String[]{"8", "9", "10"}, "o"},
+                new Object[]{"11.12.13", new String[]{"11", "12", "13"}, "."},
                 new Object[]{"14,1:5,1,6", new String[]{"14", "1", "5", "1", "6"}, ""}
         );
     }
