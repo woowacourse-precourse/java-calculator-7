@@ -7,7 +7,7 @@ public class StringCalculator {
 	public static int splitAndSum(String input) {
 		String[] splitString = splitWithOriginalSplitter(input);
 		if (splitString.length > 1) {
-			return calculateSum(splitString);
+			return calculateSum(toInts(splitString));
 		}
 		return calculateSum(splitWithCustomSplitter(input));
 	}
@@ -29,14 +29,12 @@ public class StringCalculator {
 		}
 	}
 
-	private static int calculateSum(String[] splitString) {
-		int sum = 0;
-		for (String s : splitString) {
-			final int splitNum = Integer.parseInt(s);
-			validateSplitNumber(splitNum);
-			sum += splitNum;
+	private static Positive calculateSum(Positive[] positives) {
+		Positive zero = Positive.zero();
+		for (Positive positive : positives) {
+			zero.add(positive);
 		}
-		return sum;
+		return zero;
 	}
 
 	private static Positive[] toInts(String[] splitString) {
