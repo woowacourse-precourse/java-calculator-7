@@ -2,13 +2,13 @@ package input;
 
 import calculator.Calculator;
 import camp.nextstep.edu.missionutils.Console;
+import error.ErrorHandler;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InputHandler {
     private String inputString;
-
     private String[] separators = new String[]{",", ":"};
     private String customSeparator = null;
 
@@ -49,9 +49,7 @@ public class InputHandler {
         for (String ext : extractedStrings) {
             try {
                 int extractedNumber = Integer.parseInt(ext);
-                if (extractedNumber <= 0) {
-                    throw new IllegalArgumentException();
-                }
+                ErrorHandler.validatePositiveNumber(extractedNumber);
                 extractedNumbers.add(extractedNumber);
 
             } catch (IllegalArgumentException e) {
@@ -67,6 +65,5 @@ public class InputHandler {
 
         System.out.println("결과 : " + result);
     }
-
 
 }
