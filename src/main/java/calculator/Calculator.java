@@ -8,7 +8,7 @@ public class Calculator {
         int sum = 0;
 
         if (input.startsWith("//") && input.length() >= 4) {
-            if (input.lastIndexOf("\\n") == 3) {
+            if (input.lastIndexOf("\\n") == 3 && !Character.isDigit(input.charAt(2))) {
                 delimeters.append(input.charAt(2));
                 input = input.substring(5);
             } else if (input.lastIndexOf("\\n") == 2) {
