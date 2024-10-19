@@ -2,13 +2,9 @@ package calculator.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.stream.Stream;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.EmptySource;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class DelimiterTest {
@@ -17,14 +13,14 @@ class DelimiterTest {
 	@ParameterizedTest
 	@EmptySource
 	@ValueSource(strings = {"chihyun", "ch", "", " ", "\n", "\t"})
-	void validateLength(String invalidData) {
+	void isLength1(String invalidData) {
 		assertThrows(IllegalArgumentException.class, () -> Delimiter.from(invalidData));
 	}
 
 	@DisplayName("구분자는 숫자가 될 수 없다")
 	@ParameterizedTest
 	@ValueSource(strings = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"})
-	void validateNotNumber(String invalidData) {
+	void isNotNumber(String invalidData) {
 		assertThrows(IllegalArgumentException.class, () -> Delimiter.from(invalidData));
 	}
 }

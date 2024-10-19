@@ -17,14 +17,14 @@ public class NumbersTest {
 	@DisplayName("숫자는 양수이어야 한다")
 	@ParameterizedTest
 	@MethodSource("negativeOrZeroNumbers")
-	void validatePositive(List<Long> invalidData) {
+	void isPositiveNumber(List<Long> invalidData) {
 		assertThrows(IllegalArgumentException.class, () -> Numbers.from(invalidData));
 	}
 
 	@DisplayName("숫자의 합을 계산할 수 있다")
 	@ParameterizedTest
 	@MethodSource("numbersAndCorrectResult")
-	void validateSum(List<Long> validData, Long correctResult) {
+	void sum(List<Long> validData, Long correctResult) {
 		Numbers numbers = Numbers.from(validData);
 		assertThat(numbers.sum()).isEqualTo(correctResult);
 	}
@@ -32,14 +32,14 @@ public class NumbersTest {
 	@DisplayName("숫자는 문자열 배열을 변환할 때 문자열에 문자가 포함되어 있으면 예외를 반환한다")
 	@ParameterizedTest
 	@MethodSource("stringIncludeCharacter")
-	void validateParseNumbersCharacter(List<String> invalidData) {
+	void isNumber(List<String> invalidData) {
 		assertThrows(IllegalArgumentException.class, () -> Numbers.parseNumbers(invalidData));
 	}
 
 	@DisplayName("숫자는 문자열 배열을 변환할 때 표현 범위를 넘어서면 예외를 반환한다")
 	@ParameterizedTest
 	@MethodSource("stringNumberOverRange")
-	void validateParseNumbersRange(List<String> invalidData) {
+	void isRangeIn(List<String> invalidData) {
 		assertThrows(IllegalArgumentException.class, () -> Numbers.parseNumbers(invalidData));
 	}
 
