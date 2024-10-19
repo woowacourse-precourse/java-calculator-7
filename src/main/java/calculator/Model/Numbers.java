@@ -18,10 +18,6 @@ public class Numbers {
     }
 
     private void validateNumbers(List<Number> numbers) {
-        isNumbersEmpty(numbers);
-    }
-
-    private void isNumbersEmpty(List<Number> numbers) {
         if (numbers.isEmpty()) {
             throw new IllegalArgumentException(ErrorMessages.INVALID_NUMBERS_EMPTY_MESSAGE.getErrorMessage());
         }
