@@ -1,14 +1,6 @@
 package calculator.regex;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class Regex {
-
-    private static final List<Character> metaCharacters = new ArrayList<>(Arrays.asList(
-            '?', '*', '+', '(', ')', '[', ']', '{', '}', '.', '^', '$', '|'
-    ));
 
     private final StringBuilder regex;
 
@@ -20,18 +12,18 @@ public class Regex {
         regex.append('|').append(escapeMetaCharacter(value));
     }
 
-    private StringBuilder escapeMetaCharacter(String value) {
-        StringBuilder regex = new StringBuilder();
+    private StringBuilder escapeMetaCharacter(final String letters) {
+        StringBuilder value = new StringBuilder();
 
-        for (char c : value.toCharArray()) {
-            if (metaCharacters.contains(c)) {
-                regex.append("\\").append(c);
+        for (char c : letters.toCharArray()) {
+            if (MetaCharacter.isMetaCharacter(c)) {
+                value.append("\\").append(c);
                 continue;
             }
-            regex.append(c);
+            value.append(c);
         }
 
-        return regex;
+        return value;
     }
 
     public String getRegex() {
