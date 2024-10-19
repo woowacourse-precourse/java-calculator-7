@@ -39,7 +39,11 @@ public class StringSplitter {
             }
             number = input.substring(endPoint+2);
         }
-
+        for (char c : number.toCharArray()) {
+            if(!Character.isDigit(c) && !separator.contains(String.valueOf(c))){
+                throw new IllegalArgumentException("허용되지 않은 입력입니다.");
+            }
+        }
         String calculateSeparator = separator.stream().map(Pattern::quote)
                 .collect(Collectors.joining("|"));
 
