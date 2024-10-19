@@ -18,8 +18,21 @@ public class Separator {
     }
 
     public Queue<String> separateString(String string) {
+        customSeparator = identifier.findDelimiter(string);
+        String separatorRegex = fixedSeparator1 + "|" + fixedSeparator2;
 
+        if (customSeparator != null) {
+            separatorRegex += "|" + customSeparator;
+            string = string.substring(string.indexOf("\\n") + 2);
+        }
+
+        strings = string.split(separatorRegex);
+
+        for (String s : strings) {
+            queue.add(s);
+        }
+
+        return queue;
     }
+
 }
-
-
