@@ -2,7 +2,7 @@ package calculator.constant;
 
 public enum CustomDelimiterPattern {
     PREFIX("//"),
-    SUFFIX("\n");
+    SUFFIX("\\n");
 
     private final String symbol;
 
