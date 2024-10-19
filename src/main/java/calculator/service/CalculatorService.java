@@ -34,9 +34,9 @@ public class CalculatorService {
 
 	public List<Integer> getNumbers() {
 		List<Integer> numbers = new ArrayList<>();
-		if (line.isBlank())
-			return numbers;
 		for (String number : line.split("[" + delimiter + "]")) {
+			if (number.isBlank())
+				continue;
 			int item = 0;
 			try {
 				item = Integer.parseInt(number);
