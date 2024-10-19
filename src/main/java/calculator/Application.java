@@ -9,6 +9,7 @@ public class Application {
         String input = Console.readLine();
 
         Processor processor = new Processor(input);
-        processor.execute();
+        int result = processor.execute();
+        System.out.println("결과 : " + result);
     }
 }

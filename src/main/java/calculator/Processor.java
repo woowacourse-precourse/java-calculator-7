@@ -14,7 +14,7 @@ public class Processor {
         this.input = input;
     }
 
-    public void execute() {
+    public int execute() {
         if (input.startsWith(DELIMITER_DECLARATION_SECTION)) {
             String customDelimiter = extractCustomDelimiter();
             delimiters.add(customDelimiter);
@@ -22,7 +22,7 @@ public class Processor {
 
         int[] numbers = convertToIntArray(splitByDelimiters());
 
-        int result = calculateSum(numbers);
+        return calculateSum(numbers);
     }
 
     public String extractCustomDelimiter() {
