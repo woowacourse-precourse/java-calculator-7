@@ -29,4 +29,14 @@ public class Calculator {
 
         return integerList;
     }
+
+    public int addNumber(List<Integer> integerList){
+        int sum = 0;
+
+        for(int number : integerList){
+            sum += number;
+        }
+
+        return sum;
+    }
 }
