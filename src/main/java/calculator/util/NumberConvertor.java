@@ -16,15 +16,15 @@ public class NumberConvertor {
         }
 
         String delimiter = Delimiter.getDelimiter();
-        DelimiterValidator.isDelimiterValid(removedEnrollmentChar, delimiter);
 
         return Arrays.stream(removedEnrollmentChar.split(delimiter))
                 .mapToInt(NumberConvertor::parseAndValidate)
                 .toArray();
     }
 
-    private static int parseAndValidate(String s) {
-        int number = Integer.parseInt(s.trim());
+    private static int parseAndValidate(String str) {
+        DelimiterValidator.validateIncludeDelimiter(str);
+        int number = Integer.parseInt(str.trim());
         NumberValidator.validatePositiveNumber(number);
         return number;
     }

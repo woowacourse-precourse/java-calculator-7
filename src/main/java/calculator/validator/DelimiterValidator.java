@@ -34,8 +34,8 @@ public class DelimiterValidator {
         }
     }
 
-    public static void isDelimiterValid(String str, String delimiter) {
-        if (!str.contains(delimiter)) {
+    public static void validateIncludeDelimiter(String str) {
+        if (!str.matches("-?\\d+")) {
             throw new IllegalArgumentException(ErrorMessage.NOT_ENROLLED_DELIMITER.getMessage());
         }
     }
