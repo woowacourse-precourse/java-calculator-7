@@ -29,4 +29,28 @@ public class Application {
         return separatorList;
     }
 
+    // 기능 2: 사용자의 입력값 검증
+    private static String validateInputString(String inputString, List<Character> separators){
+
+        // 커스텀 구분자가 있는 경우
+        // 숫자인지 확인 및 커스텀 문구 삭제
+        if (separators.size() == 3){
+            char customSeparator = separators.get(2);
+
+            if (Character.isDigit(customSeparator)){
+                throw new IllegalArgumentException("커스텀 구분자는 숫자로 지정할 수 없습니다.");
+            }
+            inputString = inputString.substring(5);
+        }
+
+        // 전체 구분자 이외의 숫자가 아닌 문자 유무
+        for (char c : inputString.toCharArray()){
+            if (!(Character.isDigit(c) || separators.contains(c))){
+                throw new IllegalArgumentException("구분자 이외의 문자가 포함되어 있습니다: "+c);
+            }
+        }
+
+        return inputString;
+    }
+
 }
