@@ -46,18 +46,30 @@ public class StringParser {
 
     private List<Double> parseNumbers(String expression, Set<String> delimiters) {
         String delimiterRegEx = "[" + String.join("", delimiters) + "]";
-        String[] stringNumbers = expression.split(delimiterRegEx);
-        validateNumeric(stringNumbers);
+        List<String> stringNumbers = Arrays.asList(expression.split(delimiterRegEx));
 
-        return Arrays.stream(stringNumbers)
+        validateNumeric(stringNumbers);
+        List<Double> numbers = stringNumbers.stream()
                 .map(Double::parseDouble)
                 .toList();
+
+        validatePositive(numbers);
+        return numbers;
     }
 
-    private void validateNumeric(String[] stringNumbers) {
-        boolean hasNonNumeric = Arrays.stream(stringNumbers).anyMatch(str -> !str.matches(NUMERIC_REGEX));
-        if (hasNonNumeric) {
-            throw new IllegalArgumentException("Invalid numeric value found.");
-        }
+    private void validateNumeric(List<String> stringNumbers) {
+        stringNumbers.forEach(string -> {
+            if (!string.matches(NUMERIC_REGEX)) {
+                throw new IllegalArgumentException("숫자 또는 구분자만 입력 가능합니다.");
+            }
+        });
+    }
+
+    private void validatePositive(List<Double> numbers) {
+        numbers.forEach(number -> {
+            if (number <= 0) {
+                throw new IllegalArgumentException("양수만 입력 가능합니다.");
+            }
+        });
     }
 }
