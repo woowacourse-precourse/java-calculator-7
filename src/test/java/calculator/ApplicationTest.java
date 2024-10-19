@@ -154,4 +154,13 @@ class ApplicationTest extends NsTest {
         });
         assertEquals(STARTS_WITH_SEPARATOR.message(), exception.getMessage());
     }
+
+    @Test
+    void 기본_구분자를_사용하고_입력값이_콜론으로_시작하는_경우() {
+        final String input = ":1,2:3";
+        SeparationException exception = assertThrows(SeparationException.class, () -> {
+            basicSeparationService.getNumbers(input, BASIC_SEPARATOR_COMMA, BASIC_SEPARATOR_COLON);
+        });
+        assertEquals(STARTS_WITH_SEPARATOR.message(), exception.getMessage());
+    }
 }
