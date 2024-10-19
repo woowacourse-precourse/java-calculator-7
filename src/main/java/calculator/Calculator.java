@@ -63,7 +63,7 @@ public class Calculator {
         if (number.trim().isEmpty()) {
             return 0; // 빈 문자열은 0으로 처리
         }
-        if (!isNumeric(number.trim())) { // 숫자 처리해야함
+        if (!isNumeric(number.trim())) {
             throw new IllegalArgumentException("유효하지 않은 숫자: " + number);
         }
         int num = Integer.parseInt(number.trim());
@@ -73,5 +73,13 @@ public class Calculator {
         return num;
     }
 
-
+    // 문자열이 숫자인지 확인하는 메서드
+    private boolean isNumeric(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 }
