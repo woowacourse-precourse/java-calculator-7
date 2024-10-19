@@ -93,7 +93,7 @@ public class Calculator {
         long sum = 0L;
         for (Long number : positiveNumbers) {
             if (sum > Long.MAX_VALUE - number) {
-                throw new IllegalArgumentException();
+                throw new NumberFormatException();
             }
             sum += number;
         }
