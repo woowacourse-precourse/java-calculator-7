@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.common.ErrorMessage;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
@@ -62,7 +63,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> run("1,2,0"))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining("양수가 아닌 값이 있습니다.");
+                    .hasMessageContaining(ErrorMessage.NON_POSITIVE_NUMBER_ERROR);
         });
     }
 
@@ -71,7 +72,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> run("-1,2,3"))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining("잘못된 숫자 형식입니다.");
+                    .hasMessageContaining(ErrorMessage.INVALID_INPUT_ERROR);
         });
     }
 
@@ -88,7 +89,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> run("//\\n1,2,3"))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining("잘못된 숫자 형식입니다.");
+                    .hasMessageContaining(ErrorMessage.INVALID_INPUT_ERROR);
         });
     }
 
@@ -97,7 +98,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> run("//$%\n1,2,3"))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining("잘못된 숫자 형식입니다.");
+                    .hasMessageContaining(ErrorMessage.INVALID_INPUT_ERROR);
         });
     }
 
@@ -106,7 +107,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> run("//.\n//;\n1,2,3"))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining("잘못된 숫자 형식입니다.");
+                    .hasMessageContaining(ErrorMessage.INVALID_INPUT_ERROR);
         });
     }
 
@@ -115,7 +116,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> run("0"))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining("양수가 아닌 값이 있습니다.");
+                    .hasMessageContaining(ErrorMessage.NON_POSITIVE_NUMBER_ERROR);
         });
     }
 
@@ -124,7 +125,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> run("-3"))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining("잘못된 숫자 형식입니다.");
+                    .hasMessageContaining(ErrorMessage.INVALID_INPUT_ERROR);
         });
     }
 

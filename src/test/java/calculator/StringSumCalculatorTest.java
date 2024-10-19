@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import calculator.application.StringSumCalculator;
+import calculator.common.ErrorMessage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -47,7 +48,7 @@ class StringSumCalculatorTest {
         String[] stringNumbers = {"1", "0", "3"};
         assertThatThrownBy(() -> stringSumCalculator.sumStringNumbers(stringNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("양수가 아닌 값이 있습니다.");
+                .hasMessageContaining(ErrorMessage.NON_POSITIVE_NUMBER_ERROR);
     }
 
     @DisplayName("음수가 있는 경우 예외 발생")
@@ -56,6 +57,6 @@ class StringSumCalculatorTest {
         String[] stringNumbers = {"1", "-2", "3"};
         assertThatThrownBy(() -> stringSumCalculator.sumStringNumbers(stringNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("양수가 아닌 값이 있습니다.");
+                .hasMessageContaining(ErrorMessage.NON_POSITIVE_NUMBER_ERROR);
     }
 }

@@ -4,6 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import calculator.application.DelimiterProcessor;
+import calculator.domain.CustomDelimiter;
+import calculator.domain.DefaultDelimiter;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +17,7 @@ class DelimiterProcessorTest {
 
     @BeforeEach
     void setUp() {
-        delimiterProcessor = new DelimiterProcessor();
+        delimiterProcessor = new DelimiterProcessor(List.of(new DefaultDelimiter(), new CustomDelimiter()));
     }
 
     @DisplayName("문자열을 숫자로 분리 - 숫자가 하나일 경우")
