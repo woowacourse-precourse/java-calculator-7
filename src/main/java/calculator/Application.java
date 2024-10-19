@@ -51,10 +51,14 @@ public class Application {
             // 각 숫자 합산 도출
             for (String token : tokens) {
                 int number = Integer.parseInt(token.trim()); // 문자열을 정수로 변환하여 합산
+                // 음수일 경우 해당 배열에 추가
                 if (number < 0) {
                     negativeNumbers[negativeCount++] = number;
                 }
-                sum += number;
+                // 1000 초과하는 숫자는 연산 대상에서 제외
+                else if (number <= 1000) {
+                    sum += number;
+                }
             }
 
             // 음수가 있을 경우 예외 발생
