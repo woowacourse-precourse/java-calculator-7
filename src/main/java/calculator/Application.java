@@ -54,9 +54,14 @@ public class Application {
                 try {
                     new BigInteger(customDelimiter);
                 } catch (NumberFormatException e) {
-                    List<BigInteger> operands = Arrays.stream(expression.split(Pattern.quote(customDelimiter)))
-                            .map(BigInteger::new)
-                            .toList();
+                    List<BigInteger> operands;
+                    try {
+                        operands = Arrays.stream(expression.split(Pattern.quote(customDelimiter)))
+                                .map(BigInteger::new)
+                                .toList();
+                    } catch (NumberFormatException i) {
+                        throw new IllegalArgumentException("피연산자에 커스텀 구분자가 아닌 문자가 있습니다");
+                    }
 
                     return operands.stream().reduce(BigInteger.valueOf(0), BigInteger::add);
                 }

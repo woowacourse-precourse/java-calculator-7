@@ -205,6 +205,7 @@ class ApplicationTest extends NsTest {
                     .hasMessage("커스텀 구분자가 2개이상 있습니다");
         });
     }
+
     @Test
     void validateContaining_OtherCharInFrontDelimiter() {
         assertSimpleTest(() -> {
@@ -216,6 +217,7 @@ class ApplicationTest extends NsTest {
                     .hasMessage("커스텀 구분자의 형식인 //로 시작하지 않습니다");
         });
     }
+
     @Test
     void validateCustomDelimiterIsNumber() {
         assertSimpleTest(() -> {
@@ -226,19 +228,36 @@ class ApplicationTest extends NsTest {
             assertThatNoException().isThrownBy(() -> runException("//dd\\n33"));
         });
     }
+
     @Test
-    void addCustomDelimiter(){
-        assertSimpleTest(()->{
+    void addCustomDelimiter() {
+        assertSimpleTest(() -> {
             run("//?\\n12?345");
             assertThat(output()).contains("결과 : 357");
         });
-        assertSimpleTest(()->{
+        assertSimpleTest(() -> {
             run("//!!!\\n12!!!345!!!-1");
             assertThat(output()).contains("결과 : 356");
         });
-        assertSimpleTest(()->{
+        assertSimpleTest(() -> {
             run("//!!!\\n12!!!0!!!-1");
             assertThat(output()).contains("결과 : 11");
+        });
+    }
+
+    @Test
+    void validateCustomDelimiterExpressionOnlyContaining_Positive_Delimiter() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//?\\n33kk3333?")).isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("피연산자에 커스텀 구분자가 아닌 문자가 있습니다");
+        });
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//kk?\\n33kk?3333?")).isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("피연산자에 커스텀 구분자가 아닌 문자가 있습니다");
+        });
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//???\\n33?3333")).isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("피연산자에 커스텀 구분자가 아닌 문자가 있습니다");
         });
     }
 
