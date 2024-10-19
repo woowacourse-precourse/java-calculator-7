@@ -6,13 +6,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Application {
-    private static String COMMA = ",";
-    private static String SEMICOLON = ";";
-    private static String COMMA_AND_SEMICOLON = COMMA + "|" + SEMICOLON;
-    private static String EMPTY = "";
-    private static String REX_ONLY_NUMBER = "\\d+";
-    private static String CUSTOM_DELITMITER_STRART = "//";
-    private static String CUSTOM_DELITMITER_END = "\\\\n";
+    private static final String COMMA = ",";
+    private static final String SEMICOLON = ";";
+    private static final String COMMA_AND_SEMICOLON = COMMA + "|" + SEMICOLON;
+    private static final String EMPTY = "";
+    private static final String REX_ONLY_NUMBER = "\\d+";
+    private static final String CUSTOM_DELIMITER_START = "//";
+    private static final String CUSTOM_DELIMITER_END = "\\\\n";
 
     public static void main(String[] args) {
         String input = Console.readLine();
@@ -28,13 +28,13 @@ public class Application {
         }
 
         if (isNotContainingDelimiter) {
-            List<String> customDelimiterInputs = Arrays.stream(input.split(CUSTOM_DELITMITER_END))
+            List<String> customDelimiterInputs = Arrays.stream(input.split(CUSTOM_DELIMITER_END))
                     .filter(letter -> !letter.isBlank())
                     .toList();
 
             String expression = customDelimiterInputs.getLast();
 
-            if (expression.contains(CUSTOM_DELITMITER_STRART)) {
+            if (expression.contains(CUSTOM_DELIMITER_START)) {
                 throw new IllegalArgumentException("커스텀 구분자 이후로 수식이 없습니다");
             }
 
