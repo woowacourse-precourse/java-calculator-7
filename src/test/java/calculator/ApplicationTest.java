@@ -1,15 +1,24 @@
 package calculator;
 
 import calculator.exception.Exceptions;
+import calculator.model.InputString;
+import calculator.model.ResultNumbers;
 import calculator.service.MainService;
 import camp.nextstep.edu.missionutils.test.NsTest;
+import com.sun.tools.javac.Main;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 class ApplicationTest extends NsTest {
+
+    MainService mainService = new MainService();
+    InputString inputString;
 
     @Test
     void 커스텀_구분자_사용() {
@@ -22,8 +31,8 @@ class ApplicationTest extends NsTest {
     @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
@@ -41,6 +50,19 @@ class ApplicationTest extends NsTest {
                 assertThatThrownBy(() -> runException("1:2::3"))
                         .isInstanceOf(IllegalArgumentException.class)
                         .hasMessage("[ERROR] 연속된 콜론(::)은 사용할 수 없습니다."));
+    }
+
+    @Test
+    void 연속된_커스텀_구분자_사용_예외테스트() {
+
+        String userInput = "//!\\n1,2,3:4!!5";
+
+        inputString = new InputString(userInput);
+
+        assertThatThrownBy(() -> runException(userInput))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] 연속된 커스텀 구분자는 사용할 수 없습니다.");
+
     }
 
     @Override
