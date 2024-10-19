@@ -8,7 +8,7 @@ public class OutputView {
         System.out.println(ASK_FOR_STRING_TO_CALCULATE);
     }
 
-    public void printResult(int result) {
+    public void printResult(Long result) {
         System.out.printf(RESULT_MESSAGE, result);
     }
 }
