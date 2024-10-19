@@ -55,5 +55,16 @@ class InputValidatorTest {
             assertThrows(IllegalArgumentException.class, () -> inputValidator.validate("//1\\n1,2,3"));
         }
 
+        @Test
+        void 커스텀_구분자가_한_자리_인경우_테스트를_통과한다() {
+            assertDoesNotThrow(() -> inputValidator.validate("//;\\n1;2;3"));
+            assertDoesNotThrow(() -> inputValidator.validate("//%\\n1%2%3"));
+        }
+
+        @Test
+        void 커스텀_구분자가_두_자리_이상일_때도_테스트를_통과한다() {
+            assertDoesNotThrow(() -> inputValidator.validate("//;;\\n1;;2;;3"));
+            assertDoesNotThrow(() -> inputValidator.validate("//;%\\n1;%2;%3"));
+        }
     }
 }
