@@ -19,4 +19,11 @@ public class StringCalculator {
         }
         return "";
     }
+
+    public static String[] splitString(String input, String customDelimiter) {
+        if (customDelimiter.isEmpty()) {
+            return input.split(DELIMITERS);
+        }
+        return input.substring(customDelimiter.length() + 3).split(customDelimiter);
+    }
 }

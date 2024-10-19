@@ -31,4 +31,23 @@ class StringCalculatorTest {
         // then
         assertThat(result).isEqualTo("");
     }
+
+    @Test
+    @DisplayName("구분자를 기준으로 문자열을 분리한다.")
+    void testSplitString() {
+        // given
+        String input1 = "1,2,3";
+        String customDelimiter1 = "";
+
+        String input2 = "//;\n1;2;3";
+        String customDelimiter2 = ";";
+
+        // when
+        String[] result1 = StringCalculator.splitString(input1, customDelimiter1);
+        String[] result2 = StringCalculator.splitString(input2, customDelimiter2);
+
+        // then
+        assertThat(result1).isEqualTo(new String[]{"1", "2", "3"});
+        assertThat(result2).isEqualTo(new String[]{"1", "2", "3"});
+    }
 }
