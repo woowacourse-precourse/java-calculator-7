@@ -4,15 +4,15 @@ import calculator.constants.InputValidationConstants;
 import java.util.regex.Pattern;
 
 public class InputValidator {
-    public static void validate(String input){
-        if(Parser.hasCustomDelimiter(input)){
-            String delimiter = Parser.extractCustomDelimiter(input);
+    public static void validate(UserInput userInput){
+        if(userInput.hasCustomDelimiter()){
+            String delimiter = Parser.extractCustomDelimiter(userInput.getInput());
 
             validateCustomDelimiterForm(delimiter);
-            validateInputWithCustomDelimiter(input, delimiter);
+            validateInputWithCustomDelimiter(userInput.getInput(), delimiter);
         }
         else
-            validateInputWithNormalDelimiter(input);
+            validateInputWithNormalDelimiter(userInput.getInput());
     }
 
     private static void validateInputWithCustomDelimiter(String input, String delimiter) {
@@ -30,9 +30,7 @@ public class InputValidator {
     private static void validateInputWithNormalDelimiter(String input) {
         if(input.isEmpty())
             return;
-
-        String cleanedInput = input.replace(" ", "");
-        if(!Pattern.matches(InputValidationConstants.NORMAL_DELIMITER_INPUT_PATTERN, cleanedInput)) {
+        if(!Pattern.matches(InputValidationConstants.NORMAL_DELIMITER_INPUT_PATTERN, input)) {
             throw new IllegalArgumentException(InputValidationConstants.INVALID_INPUT_EXCEPTION_MESSAGE);
         }
     }

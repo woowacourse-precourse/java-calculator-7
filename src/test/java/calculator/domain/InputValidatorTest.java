@@ -26,7 +26,8 @@ class InputValidatorTest {
     })
     @DisplayName("잘못된 input 입력 시, 예외 발생")
     void inputException(String input) {
-        assertThatThrownBy(() -> InputValidator.validate(input))
+        UserInput userInput = new UserInput(input);
+        assertThatThrownBy(() -> InputValidator.validate(userInput))
                         .isInstanceOf(IllegalArgumentException.class)
                 .hasFieldOrPropertyWithValue("message","올바른 형태의 문자열을 입력해주세요.");
     }
@@ -49,7 +50,8 @@ class InputValidatorTest {
     })
     @DisplayName("옳은 입력 시, 메서드 정상 종료")
     void correctInput(String input) {
-        InputValidator.validate(input);
+        UserInput userInput = new UserInput(input);
+        InputValidator.validate(userInput);
     }
 
 

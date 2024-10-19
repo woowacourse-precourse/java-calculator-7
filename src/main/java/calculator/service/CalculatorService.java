@@ -3,26 +3,18 @@ package calculator.service;
 import calculator.domain.Adder;
 import calculator.domain.InputValidator;
 import calculator.domain.Parser;
+import calculator.domain.UserInput;
 import java.util.List;
 
 public class CalculatorService {
     public CalculatorService(){}
 
     public int calculate(String input){
-        InputValidator.validate(input);
+        UserInput userInput = new UserInput(input);
 
-        if(!Parser.hasCustomDelimiter(input))
-            input = input.replace(" ","");
+        InputValidator.validate(userInput);
 
-        List<String> delimiters = getDelimitersList(input);
-        List<Integer> numbers = Parser.parseNumbersFromInput(input, delimiters);
+        List<Integer> numbers = Parser.parseNumbersFromInput(userInput.getInput(), userInput.getDelimiters());
         return Adder.add(numbers);
-    }
-
-    private List<String> getDelimitersList(String input) {
-        if(Parser.hasCustomDelimiter(input))
-            return List.of(Parser.extractCustomDelimiter(input));
-        else
-            return List.of(":",",");
     }
 }
