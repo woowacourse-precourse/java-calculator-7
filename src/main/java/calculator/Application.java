@@ -1,17 +1,21 @@
 package calculator;
 
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
 
 public class Application {
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("덧셈할 문자열을 입력해 주세요.");
-		String input = scanner.nextLine();
-
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		System.out.print("덧셈할 문자열을 입력해 주세요.\n");
 		try {
-			Calculator.calculator(input);
-		} catch (IllegalArgumentException e){
-			System.err.println(e.getMessage());
+			String input = reader.readLine();
+			Calculator.calculate(input);
+		} catch (IOException e) {
+			throw new IllegalArgumentException("입력 오류" + e.getMessage());
 		}
 	}
 }
+
+
