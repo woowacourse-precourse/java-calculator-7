@@ -2,15 +2,20 @@ package calculator;
 
 public class Calculator {
     // 기본 구분자로 숫자 분리 및 합 계산 기능 구현
-    public int claculateSumFromInput(String input) {
+
+    private static final String DEFAULT_DELIMITER = ",|:";
+    private static final String CUSTOM_DELIMITER_PREFIX = "//";
+    private static final String NEWLINE_REPLACEMENT = "\\n";
+
+    public int calculateSumFromInput(String input) {
         if (input == null || input.isEmpty()) { // 공백 문자열 처리
             return 0;
         }
 
-        String delimiter = ",|:"; // 기본 구분자
+        String delimiter = DEFAULT_DELIMITER; // 기본 구분자
 
-        if (input.startsWith("//")) {
-            input = input.replace("\\n", "\n");
+        if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
+            input = input.replace(NEWLINE_REPLACEMENT, "\n");
             int delimiterIndex = input.indexOf("\n");
             delimiter = input.substring(2, delimiterIndex);
             input = input.substring(delimiterIndex + 1);

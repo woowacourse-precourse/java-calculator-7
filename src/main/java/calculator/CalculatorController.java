@@ -16,7 +16,7 @@ public class CalculatorController {
     public void run() {
         try {
             String input = view.getUserInput();
-            int result = calculator.claculateSumFromInput(input);
+            int result = calculator.calculateSumFromInput(input);
             view.showResult(result); // 출력
         } catch (NoSuchElementException e) {
             view.showResult(0); // 빈 입력에 대해 기본 값 반환
