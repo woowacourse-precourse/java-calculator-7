@@ -1,4 +1,4 @@
-package calculator.common.util;
+package calculator.service;
 
 import static calculator.common.constant.Constants.REGEX_OR;
 

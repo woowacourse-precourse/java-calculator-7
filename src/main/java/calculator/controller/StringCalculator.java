@@ -3,11 +3,11 @@ package calculator.controller;
 import static calculator.common.constant.Constants.COLON;
 import static calculator.common.constant.Constants.COMMA;
 
-import calculator.common.util.CustomSeparatorParser;
-import calculator.common.util.OperandExtractor;
 import calculator.model.Calculator;
 import calculator.model.Operand;
 import calculator.model.Separators;
+import calculator.service.CustomSeparatorParser;
+import calculator.service.OperandExtractor;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 import java.util.List;
