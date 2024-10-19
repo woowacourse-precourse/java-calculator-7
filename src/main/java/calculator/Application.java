@@ -2,6 +2,9 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Application {
     // "덧셈할 문자열을 입력해주세요." 구문 출력
     private static void init_print() {
@@ -13,24 +16,22 @@ public class Application {
         return Console.readLine();
     }
 
-    // 커스텀 구분자 유무를 판단하기
-    private static boolean checkCustomDelimiter(String str) {
-        if (str.startsWith("//")) {
-            int delimiterEndIndex = str.indexOf("\n");
-            if (delimiterEndIndex == -1) {
-                throw new IllegalArgumentException("잘못된 입력 형식입니다.");
-            }
-            else return true;
+    // 커스텀 구분자 유무를 판단하고, 커스텀 구분자 반환하기
+    private static String checkCustomDelimiter(String str) {
+        String regex = "//(.*?)\n";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(str);
+        if(matcher.find()) {
+            return matcher.group(1);
         }
-        return false;
+        return "";
     }
-
     public static void main(String[] args) {
         // TODO: 프로그램 구현
+        StringBuilder delimiter = new StringBuilder();
+        delimiter.append(".|:");
         init_print();
         String str = input();
-        if(checkCustomDelimiter(str)) {
-
-        }
+        delimiter.append(checkCustomDelimiter(str));
     }
 }
