@@ -32,9 +32,7 @@ public class Application {
 
     static int sum( int[] numbers ){
         int result = 0;
-        for( int num : numbers ){
-            result += num;
-        }
+        for( int num : numbers ){ result += num; }
         return result;
     }
 
