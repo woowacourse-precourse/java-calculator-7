@@ -33,5 +33,6 @@ public class Application {
         init_print();
         String str = input();
         delimiter.append(checkCustomDelimiter(str));
+
     }
 }
