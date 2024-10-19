@@ -11,6 +11,14 @@ public class Validation {
         isCorrectPair(input);
     }
 
+    public static void isCorrectInput(String input) {
+        for (int i = 0; i < input.length(); i++) {
+            if (!(input.charAt(i) == ',' || input.charAt(i) == ':' || isNumber(input.charAt(i)))) {
+                throw new IllegalArgumentException();
+            }
+        }
+    }
+
     private static void isCorrectPair(String input) {
         int startPair = 0;
         int lastPair = 0;
@@ -45,13 +53,6 @@ public class Validation {
         return false;
     }
 
-    public static void isCorrectInput(String input) {
-        for (int i = 0; i < input.length(); i++) {
-            if (!(input.charAt(i) == ',' || input.charAt(i) == ':' || isNumber(input.charAt(i)))) {
-                throw new IllegalArgumentException();
-            }
-        }
-    }
 
     private static boolean isNumber(char c) {
         return c >= '0' && c <= '9';
