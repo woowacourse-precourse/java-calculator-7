@@ -12,6 +12,7 @@ public class Adder {
     private String outputValue;
     private int sum = 0;
     private final Separator separator;
+    private String separatedNumberString;
 
     public Adder() {
         this.separator = new Separator();
@@ -34,7 +35,11 @@ public class Adder {
 
     public int addAll(Queue<String> string) {
         while (!string.isEmpty()) {
-            sum += Integer.parseInt(string.poll());
+            separatedNumberString = string.poll();
+            if (Integer.parseInt(separatedNumberString) < 0) {
+                throw new IllegalArgumentException();
+            }
+            sum += Integer.parseInt(separatedNumberString);
         }
         return sum;
     }
