@@ -25,8 +25,12 @@ public class Calculator {
     }
 
     public void run() {
-        outputView.requestString();
-        Long result = calculatorController.calculateNumbers(inputView.getNotSeparatedString());
-        outputView.showResult(result);
+        try {
+            outputView.requestString();
+            Long result = calculatorController.calculateNumbers(inputView.getNotSeparatedString());
+            outputView.showResult(result);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
