@@ -13,8 +13,8 @@ public class Preprocessor {
      * (.) : 임이의 한 문자 캡쳐
      * (.*) : .: 임의의 *: 여러 문자
      */
-    private static final String CUSTOM_REGEX_PATTERN = "//(.)\\\\n(.*)";
     private static final String DELIMITER_PREFIX = "//";
+    private static final Pattern CUSTOM_MATCHER =Pattern.compile("//(.)\\\\n(.*)") ;
     private static final List<Character> DELIMITERS = new ArrayList<>(Arrays.asList(',', ':'));
     // 클래스 전체에서 사용 가능하므로 불변성을 유지하는게 좋다고 판단
     private final String input;
@@ -31,7 +31,7 @@ public class Preprocessor {
     }
 
     private PreprocessedInput extractDelimiterWithMatcher() {
-        Matcher matcher = Pattern.compile(CUSTOM_REGEX_PATTERN).matcher(input);
+        Matcher matcher = CUSTOM_MATCHER.matcher(input);
         if (matcher.find()) {
             List<Character> newDelimiters = new ArrayList<>(DELIMITERS);
             newDelimiters.add(matcher.group(1).charAt(0));
