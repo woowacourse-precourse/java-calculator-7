@@ -1,14 +1,16 @@
 package calculator;
 
+import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Tokenizer {
 
-    public static String[] tokenize(char[] separators, String str) {
+    public static String[] tokenize(List<Character> separators, String str) {
         for (char separator: separators) {
-            str = str.replace(separator, separators[0]);
+            str = str.replace(separator, separators.get(0));
         }
-        return str.split(String.valueOf(separators[0]));
+        return str.split(String.valueOf(separators.get(0)));
     }
 
     public static int[] tokensToNums(String[] tokens) {
