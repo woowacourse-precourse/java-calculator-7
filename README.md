@@ -13,7 +13,7 @@
 >### Calculator
 >* `plusCalculator`: 숫자들의 합을 구하는 기능
 >### Delimiter : 구분자를 관리하는 객체
->### Extractor :
+>### Extractor 
 >* `saveExtractorDto`: `ExtractorDto`를 저장하는 기능
 >* `saveCustomDelimiter`: 커스텀구분자를 저장하는 기능
 >* `extractValues`: 숫자들의 값을 추출하는 기능
