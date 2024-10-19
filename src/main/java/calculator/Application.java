@@ -27,6 +27,9 @@ public class Application {
                 //그 후 원본 문자열에서 앞선 커스텀 구분자 관련 글 처리
                 userInput = userInput.substring(idx + 2);
                 result = userInput.split(",|;|" + separator);
+                for (String num : result) {
+                    total += parseStringToInt(num);
+                }
             }
         }else if(userInput.length() == 0){
             //공백인 경우
@@ -39,9 +42,23 @@ public class Application {
         } else{
             //기본 구분자 사용
             result = userInput.split(",|:");
+            for (String num : result) {
+                total += parseStringToInt(num);
+            }
         }
+        System.out.println("결과 : " + total);
 
         Console.close();
         return;
+    }
+
+    //문자열 형태의 수를 int로 반환하는 함수
+    private static int parseStringToInt(String val){
+        try {
+            return Integer.parseInt(val);
+        }catch (NumberFormatException e){
+            //parseInt함수의 경우 형식이 안 맞으면 NumberFormatException을 발생시키는데
+            throw new IllegalArgumentException(e);  //이를 IllegalArgumentException으로 반환하여 처리
+        }
     }
 }
