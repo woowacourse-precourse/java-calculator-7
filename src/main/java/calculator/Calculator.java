@@ -7,7 +7,8 @@ public class Calculator {
 
     public void run(){
         Output.printUserInput();
-
+        InputData inputData = Input.getUserInput();
+        this.result = Calculation.stringCalculation(inputData);
     }
 
     public void end(){

@@ -1,8 +1,8 @@
 package calculator;
 
 public class Calculation {
-    public static int stringCalculation(String input){
+    public static int stringCalculation(InputData input){
 
-        return 0;
+        return -1;
     }
 }
