@@ -1,33 +1,34 @@
 package calculator;
 
-import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
-import camp.nextstep.edu.missionutils.test.NsTest;
+import java.util.List;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class CalculatorTest extends NsTest {
-
+@DisplayName("Calculator 단위 테스트")
+class CalculatorTest {
     @Test
-    void 정상작동() {
-        assertSimpleTest(() -> {
-            run("//;\\n1");
-            assertThat(output()).contains("결과 : 1");
-        });
-    }
-
-    @Test
-    void long_범위초과_예외_테스트() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//+\\n4000000000000000000+5000000000000000000"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
-    }
-
-    @Override
-    protected void runMain() {
+    @DisplayName("[성공] - calculate 메서드")
+    void success_calculate() {
+        //given
         Calculator calculator = new Calculator();
-        calculator.run();
+        List<Long> numbers = List.of(1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L);
+
+        //when
+        long result = calculator.calculate(numbers);
+
+        //then
+        Assertions.assertThat(result).isEqualTo(45L);
+    }
+
+    @Test
+    @DisplayName("[예외] - calculate 메서드(long 범위 초과)")
+    void exception_calculate_overflow() {
+        //given
+        Calculator calculator = new Calculator();
+        List<Long> numbers = List.of(9223372036854775807L, 1L);
+
+        //when, then
+        org.junit.jupiter.api.Assertions.assertThrows(ArithmeticException.class, () -> calculator.calculate(numbers));
     }
 }
