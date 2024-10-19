@@ -36,4 +36,11 @@ public class StringCalculator {
         return sum;
     }
 
+    private int validateNumber(String token) {
+        try{
+            return Integer.parseInt(token);
+        } catch(NumberFormatException e) {
+            throw new IllegalArgumentException("잘못된 숫자 형식입니다.");
+        }
+    }
 }
