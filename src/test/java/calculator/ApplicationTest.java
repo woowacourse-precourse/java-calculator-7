@@ -5,6 +5,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -64,6 +65,22 @@ class ApplicationTest extends NsTest {
 
         //then
         assertThat(actual).isEqualTo(expected);
+
+    }
+
+    @Test
+    void sumNumbersTest() {
+        //when
+        String[] input = {"1", "2", "3"};
+        int inputSum = Arrays.stream(input)
+                .mapToInt(Integer::parseInt)  // 문자열을 정수로 변환
+                .sum();
+
+        //given
+        int actual = calculator.sumNumbers(input);
+
+        //then
+        assertThat(actual).isEqualTo(inputSum);
 
     }
 }

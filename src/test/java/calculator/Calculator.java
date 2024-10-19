@@ -22,4 +22,13 @@ public class Calculator {
         String regex = String.join("|", delimiters);
         return input.split(regex);
     }
+
+    public int sumNumbers(String[] numbers) {
+        int sum = 0;
+        for (String number : numbers) {
+            int value = Integer.parseInt(number);
+            sum += value;
+        }
+        return sum;
+    }
 }
