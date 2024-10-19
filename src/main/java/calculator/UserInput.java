@@ -43,11 +43,6 @@ public class UserInput {
         }
     }
 
-    public UserInput(String input, ArrayList<String> seperators) {
-        this.input = input;
-        this.seperators = seperators;
-    }
-
     public String getInput() {
         return input;
     }

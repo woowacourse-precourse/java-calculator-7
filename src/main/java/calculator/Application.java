@@ -1,23 +1,19 @@
 package calculator;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
 
-        String input = "";
-        ArrayList<String> seperators = new ArrayList<>(List.of(",", ":"));
-
-        UserInput userInput = new UserInput(input, seperators);
+        UserInput userInput = new UserInput();
 
         // 유저의 입력값을 받는다.
         userInput.input();
 
-        input = userInput.getInput();
-        seperators = userInput.getSeperators();
+        String input = userInput.getInput();
+        ArrayList<String> separators = userInput.getSeperators();
 
-        Calculator calculator = new Calculator(input, seperators);
+        Calculator calculator = new Calculator(input, separators);
 
         int answer = calculator.calculate();
 
