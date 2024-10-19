@@ -28,7 +28,7 @@ public class Calculator {
     }
 
 
-    public void test(String[] arr) {
+    public void sum(String[] arr) {
         int sum = 0;
         for (String str : arr) {
             try {
@@ -45,6 +45,7 @@ public class Calculator {
         System.out.println("결과 : " + sum);
     }
 
+    // 이 로직 InputClass에서 다루는게 좋으려나?
     private Boolean inputBlack(String[] arr) {
         if (arr.length != 1) {
             return false;
@@ -52,7 +53,7 @@ public class Calculator {
         return true;
     }
 
-    public static int validateNumber(int positiveNumber) {
+    private int validateNumber(int positiveNumber) {
         if (positiveNumber < 0) {
             throw new IllegalArgumentException();
         }
