@@ -42,24 +42,16 @@ public class Application {
                 addCalc(cutStringArr);
 
             } else {
-                // 숫자만 입력했을 때 사용자 입력 검증(테스트 중)
-                if (false) {
-                    validateInput(input);
+                // 커스텀 구분자가 아닌 기본 구분자를 사용했을 때
 
-                    // 커스텀 구분자가 존재하지 않으면 결과를 출력
-                    System.out.println("결과 : " + Integer.parseInt(input));
-                } else {
-                    // 커스텀 구분자가 아닌 기본 구분자를 사용했을 때
+                // 구분자를 이용해 문자열 분리
+                String[] cutStringArr = input.split(separator);
 
-                    // 구분자를 이용해 문자열 분리
-                    String[] cutStringArr = input.split(separator);
+                // 문자열 배열에 있는 문자열을 검증하는 함수 호출
+                validateInput(cutStringArr);
 
-                    // 문자열 배열에 있는 문자열을 검증하는 함수 호출
-                    validateInput(cutStringArr);
-                    
-                    // 계산
-                    addCalc(cutStringArr);
-                }
+                // 계산
+                addCalc(cutStringArr);
             }
         } catch (IllegalArgumentException e) {
 
@@ -69,15 +61,7 @@ public class Application {
 
     }
 
-    // 숫자만 입력했을 때 사용자 입력을 검증하는 함수
-    private static void validateInput(String input) {
-        // 0보다 큰지 확인. 그리고 숫자 형식인지 확인
-        if (!input.matches("^[1-9]\\d*$")) {
-            throw new IllegalArgumentException("잘못된 값을 입력하였습니다.");
-        }
-    }
-
-    // 구분자가 사용할 때 사용자 입력을 검증하는 함수
+    // 사용자 입력을 검증하는 함수
     private static void validateInput(String[] inputArr) {
         for (String str : inputArr) {
             // 0보다 큰지 확인. 그리고 숫자 형식인지 확인
