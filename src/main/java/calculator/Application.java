@@ -15,8 +15,8 @@ public class Application {
         int endIndex = findSeparatorEndIndex(input);
         Set<String> separatorSet = parseSeparator(input,endIndex);
         String afterSeparator = input.substring(endIndex);
-        System.out.println("Separators: " + separatorSet);
-        System.out.println("After separator: " + afterSeparator);
+        BigInteger ans=processNumber(afterSeparator,separatorSet);
+        System.out.println("결과 : " + ans);
     }
 
 
@@ -47,7 +47,22 @@ public class Application {
         }
         return 0;
     }
-    
+
+    private static BigInteger processNumber(String input,Set<String> separatorSet) {
+        if(input.isEmpty()) return BigInteger.ZERO;
+        BigInteger sum = BigInteger.ZERO;
+        String regex = String.join("|", separatorSet);
+        String[] tokens = input.split(regex);
+        for(String token : tokens) {
+            if(!token.isEmpty()) {
+                if(isValid(token)) {
+                    sum = sum.add(BigInteger.valueOf(Integer.parseInt(token)));
+                }
+            }
+        }
+        return sum;
+    }
+
     private static boolean isValid(String input) {
         for(char c : input.toCharArray()) {
             if((int)c<48||(int)c>57) {
