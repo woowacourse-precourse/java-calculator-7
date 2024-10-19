@@ -25,7 +25,7 @@ class CalculatorParserTest {
     void 커스텀_구분자로_피연산자를_분리한다() {
         // given & when
         final var calculatorParser = new CalculatorParser();
-        List<Double> operands = calculatorParser.parse("//;\n1;2;3");
+        List<Double> operands = calculatorParser.parse("//;\\n1;2;3");
 
         // then
         assertThat(operands).isEqualTo(new ArrayList<>(Arrays.asList(1.0, 2.0, 3.0)));
@@ -36,7 +36,7 @@ class CalculatorParserTest {
         final var calculatorParser = new CalculatorParser();
 
         // when & then
-        assertThatThrownBy(() -> calculatorParser.parse("//;;;;\n1;2;3"))
+        assertThatThrownBy(() -> calculatorParser.parse("//;;;;\\n1;2;3"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("구분자는 길이가 1인 문자여야 합니다.");
     }
@@ -46,7 +46,7 @@ class CalculatorParserTest {
         final var calculatorParser = new CalculatorParser();
 
         // when & then
-        assertThatThrownBy(() -> calculatorParser.parse("//;\n1;aaaa;3"))
+        assertThatThrownBy(() -> calculatorParser.parse("//;\\n1;aaaa;3"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("피연산자가 숫자가 아닙니다.");
     }
@@ -56,7 +56,7 @@ class CalculatorParserTest {
         final var calculatorParser = new CalculatorParser();
 
         // when & then
-        assertThatThrownBy(() -> calculatorParser.parse("//;\n1;-2;3"))
+        assertThatThrownBy(() -> calculatorParser.parse("//;\\n1;-2;3"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("피연산자가 양수가 아닙니다.");
     }
