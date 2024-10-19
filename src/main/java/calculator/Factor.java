@@ -23,7 +23,6 @@ public class Factor {
             }
             number = number.substring(idx + 1);
         }
-
         factor = number.split(separator);
         return factor;
     }
