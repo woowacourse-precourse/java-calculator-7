@@ -6,7 +6,7 @@
 
 ##### OutputView
 - [X] “덧셈할 문자열을 입력해 주세요.” 메세지 콘솔 출력
-- [ ] 결과 값 콘솔 출력
+- [X] 결과 값 콘솔 출력
 - [X] 출력 메세지 Enum 추가
 
 ##### DelimiterExtractor
