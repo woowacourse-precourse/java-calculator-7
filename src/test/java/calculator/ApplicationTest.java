@@ -26,20 +26,31 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 구분자_사이_숫자없음() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("1:,3:4,5:6,10"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
+    void 공백_입력() {
+        assertSimpleTest(() -> {
+            run(" ");
+            assertThat(output()).contains("결과 : 0");
+        });
     }
 
     @Test
-    void 공백_입력() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException(" "))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
+    void 구분자_사이_숫자없음() {
+
+        assertSimpleTest(() -> {
+            run("1:,3:4,5:6,10");
+            assertThat(output()).contains("결과 : 29");
+        });
     }
+
+    @Test
+    void 커스텀_구분자_사이_숫자없음() {
+
+        assertSimpleTest(() -> {
+            run("//;\\n1;;3;4;5;6;10");
+            assertThat(output()).contains("결과 : 29");
+        });
+    }
+
 
     @Test
     void 숫자아닌_입력_예외_테스트() {

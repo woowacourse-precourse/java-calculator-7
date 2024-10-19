@@ -11,9 +11,7 @@ public class Calculator {
         System.out.println("덧셈할 문자열을 입력해주세요.");
 
         String inputString = Console.readLine();
-
-        converter.validateInputString(inputString);
-
+        
         String numberString = delimiter.extractNumberString(inputString);
 
         StringBuilder delimiterExpression = new StringBuilder();
