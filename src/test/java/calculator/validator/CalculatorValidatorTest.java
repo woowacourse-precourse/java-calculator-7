@@ -64,4 +64,28 @@ public class CalculatorValidatorTest {
             calculatorValidator.validateCustomDelimiterInput(inputString);
         });
     }
+
+    @Test
+    void 분리된_문자_토큰_유효성_확인1() {
+        String inputToken = "1 23";
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            calculatorValidator.validateInputToken(inputToken);
+        });
+    }
+
+    @Test
+    void 분리된_문자_토큰_유효성_확인2() {
+        String inputToken = " ";
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            calculatorValidator.validateInputToken(inputToken);
+        });
+    }
+
+    @Test
+    void 분리된_문자_토큰_유효성_확인3() {
+        String inputToken = "1234;";
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            calculatorValidator.validateInputToken(inputToken);
+        });
+    }
 }
