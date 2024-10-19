@@ -11,22 +11,16 @@ public class Application {
         if (separatorParser.isCustomSeparatorExist()) {
             String mathExpression = separatorParser.getMathematicalExpression();
             String customSeparator = separatorParser.getCustomSeparator();
-            String[] dividedNum = divideStringBy(mathExpression, customSeparator);
+            StringDivider stringDivider = new StringDivider(customSeparator);
+            String[] dividedNum = stringDivider.divideStringBy(mathExpression);
             int sumArr = sum(dividedNum);
             System.out.println("결과 : " + sumArr);
             return;
         }
-        String[] dividedNum = divideStringBy(input);
+        StringDivider stringDivider = new StringDivider();
+        String[] dividedNum = stringDivider.divideStringBy(input);
         int sumArr = sum(dividedNum);
         System.out.println("결과 : " + sumArr);
-    }
-
-    public static String[] divideStringBy(String givenString) {
-        return givenString.split("[:,]");
-    }
-
-    public static String[] divideStringBy(String givenString, String customSeparator) {
-        return givenString.split(":|,|" + customSeparator);
     }
 
     public static int sum(String[] numberArr) {
