@@ -1,6 +1,7 @@
 package calculator;
 
 public class CalculatorController {
+
     private final CalculatorService calculatorService = new CalculatorService();
     private final CalculatorView calculatorView = new CalculatorView();
 
@@ -9,7 +10,7 @@ public class CalculatorController {
 
         String input = calculatorService.getInput();
         int result = calculatorService.calculate(input);
-        
+
         calculatorView.outputView(result);
     }
 }

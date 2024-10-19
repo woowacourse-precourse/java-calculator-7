@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class CalculatorControllerTest {
+
     private final CalculatorController calculatorController = new CalculatorController();
 
     @Test
