@@ -6,12 +6,7 @@ public class Application {
         // TODO: 프로그램 구현
         String str = Console.readLine();
 
-        try{
-            int sum = StringCalculator.calculate(str);
-            System.out.println("결과 : " + sum);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+        int sum = StringCalculator.calculate(str);
+        System.out.println("결과 : " + sum);
     }
 }

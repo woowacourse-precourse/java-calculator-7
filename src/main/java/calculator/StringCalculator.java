@@ -21,8 +21,8 @@ public class StringCalculator {
                     ans += Integer.parseInt(s);
                 }
             }
-
         }
+
         else if (m2.matches()) {
             String separator = str.substring(2, 3);
             String[] arr = str.substring(5).split(separator);
