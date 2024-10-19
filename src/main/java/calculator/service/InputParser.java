@@ -33,7 +33,12 @@ public class InputParser implements Parser {
         }
         parsedOperand.add(input);
 
+        return typeCastingStringListToIntegerList(parsedOperand);
+    }
+
+    private List<Integer> typeCastingStringListToIntegerList(List<String> parsedOperand){
         List<Integer> integerList = new ArrayList<>();
+
         try{
             for(String s : parsedOperand){
                 integerList.add(Integer.parseInt(s));
@@ -41,7 +46,6 @@ public class InputParser implements Parser {
         }catch (NumberFormatException e){
             CheckForm.throwException();
         }
-
         return integerList;
     }
 }
