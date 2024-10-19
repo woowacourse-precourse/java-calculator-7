@@ -23,6 +23,18 @@ public class Application {
         return input;
     }
 
+    public static void checkCustomSeparatorCount(String input, String customSeperatorKeyword) {
+        int index = 0;
+        int keyworkdCount = 0;
+        while ((index = input.indexOf(customSeperatorKeyword, index)) != -1) {
+            keyworkdCount++;
+            if (keyworkdCount > 1) {
+                throw new IllegalArgumentException("//와 \\n는 한 번만 사용될 수 있습니다.");
+            }
+            index += customSeperatorKeyword.length();
+        }
+    }
+
     public static String getUserInput() {
         userInput = Console.readLine();
         return userInput;
@@ -72,9 +84,8 @@ public class Application {
 
         System.out.println("덧셈할 문자열을 입력해주세요");
         userInput = getUserInput();
-        getCustomSeperator(userInput);
-        getNumber(userInput);
-        addNum();
+        checkCustomSeparatorCount(userInput, "//");
+        checkCustomSeparatorCount(userInput, "\\n");
         cleanInput = getCustomSeperator(userInput, seperatorList);
         getNumber(cleanInput, seperatorList, userNumList);
         addNum(userNumList);
