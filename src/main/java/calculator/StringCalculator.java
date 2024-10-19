@@ -1,5 +1,6 @@
 package calculator;
 
+import static camp.nextstep.edu.missionutils.Console.close;
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class StringCalculator {
@@ -13,6 +14,8 @@ public class StringCalculator {
         String[] extractedNumbers = extractNumbersFrom(input);
         validateInput(extractedNumbers);
         int sum = calulateSum(extractedNumbers);
+        showSum(sum);
+        close();
     }
 
     private String askForStringInput() {
@@ -51,7 +54,7 @@ public class StringCalculator {
     }
 
     private void isNagative(String number) {
-        if(Integer.parseInt(number) < 0) {
+        if (Integer.parseInt(number) < 0) {
             throw new IllegalArgumentException("잘못된 값을 입력하였습니다.");
         }
     }
@@ -63,6 +66,10 @@ public class StringCalculator {
             sum += Integer.parseInt(number);
         }
         return sum;
+    }
+
+    private void showSum(int sum) {
+        System.out.println("결과 : " + sum);
     }
 
 }
