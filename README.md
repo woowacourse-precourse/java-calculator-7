@@ -32,8 +32,8 @@
 ## 구현 기능 목록
 
 **입력 기능**
-- [ ] `camp.nextstep.edu.missionutils.Consle`의 `readLine()`을 활용하여 입력 구현한다.
-- [ ] 입력이 빈 문자열이거나 `null`인 경우 `IllegalArgumentException`을 발생시킨다.
+- [x] `camp.nextstep.edu.missionutils.Consle`의 `readLine()`을 활용하여 입력 구현한다.
+- [x] 입력이 빈 문자열이거나 `null`인 경우 `IllegalArgumentException`을 발생시킨다.
 
 **커스텀 구분자 확인 기능**
 - [ ] 문자열 앞부분에 커스텀 구분자 추가 문자가 없는 경우, `false` 반환.
