@@ -23,4 +23,15 @@ public class Utils {
         String[] split = s.split("\\\\n");
         return split[1];
     }
+
+    public static int[] convertStringToIntList(String s, Calculator list) {
+        String result = list.getDelimitersAsString();
+        String[] split = s.split(result);
+
+        int[] lists = new int[split.length];
+        for (int i = 0; i < split.length; i++) {
+            lists[i] = Integer.parseInt(split[i]);
+        }
+        return lists;
+    }
 }
