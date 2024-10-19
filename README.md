@@ -59,7 +59,7 @@
   - getInput()
   - printInputMessage()
 - InputValidator
-  - validateEmptyInput()
+  - isEmptyInput()
   - validateInputPattern()
   - validateNonNegativeNumbers()
   - validateUnregisteredDelimiter()
