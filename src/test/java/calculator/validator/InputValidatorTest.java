@@ -8,9 +8,9 @@ import calculator.error.ErrorCode;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
-public class CustomInputValidatorTest extends NsTest {
+public class InputValidatorTest extends NsTest {
 
-  private final CustomInputValidator validator = new CustomInputValidator();
+  private final InputValidator validator = new CustomInputValidator();
 
   @Test
   void 입력값이_null인_경우_예외(){
