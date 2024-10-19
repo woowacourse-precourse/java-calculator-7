@@ -16,11 +16,13 @@ public class CalculatorService {
     public int calculateSum(String input) {
         String[] stringNumbers = delimiterService.splitNumbers(input);
         int[] numbers = delimiterNumberValidator.isValidNumber(stringNumbers);
+        return sumNumbers(numbers);
+    }
 
+    private int sumNumbers(int[] numbers) {
         if (numbers.length == 1) {
             return numbers[0];
         }
-
         return StringNumberSumCalculator.sum(numbers);
     }
 
