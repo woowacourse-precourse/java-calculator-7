@@ -75,10 +75,10 @@ public class PlusCalculator implements PlusCalculatorInterface {
         List<Integer> integerNumbers = new ArrayList<>();
 
         // numberString이 공백이면 0으로 간주
-        if (input.isBlank()) {
-            integerNumbers.add(0);
-            return integerNumbers;
-        }
+//        if (input.isBlank()) {
+//            integerNumbers.add(0);
+//            return integerNumbers;
+//        }
 
         // split으로 구분자 기준으로 숫자만 추출
         String[] stringNumbers = input.split(getSeparatorsSplitRegex());
@@ -110,6 +110,10 @@ public class PlusCalculator implements PlusCalculatorInterface {
 
     public Integer extractNumber(String numberString) {
         int numberInteger;
+
+        if (numberString.isBlank()) {
+            numberString = "0";
+        }
 
         try {
             numberInteger = Integer.parseInt(numberString);
