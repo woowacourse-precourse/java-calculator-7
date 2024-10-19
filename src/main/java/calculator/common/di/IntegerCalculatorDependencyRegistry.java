@@ -9,7 +9,7 @@ import calculator.model.delimiter.factory.DefaultDelimiterFactory;
 import calculator.model.delimiter.factory.DelimiterFactory;
 import calculator.model.delimiter.service.DelimiterService;
 import calculator.model.delimiter.service.IntegerDelimiterService;
-import calculator.service.NumberService;
+import calculator.model.number.service.NumberService;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 

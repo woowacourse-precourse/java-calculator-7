@@ -1,7 +1,7 @@
 package calculator.controller;
 
 import calculator.common.di.NumberCalculatorDependencyRegistry;
-import calculator.service.NumberService;
+import calculator.model.number.service.NumberService;
 
 import java.util.List;
 

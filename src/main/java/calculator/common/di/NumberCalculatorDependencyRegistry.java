@@ -1,6 +1,6 @@
 package calculator.common.di;
 
-import calculator.service.NumberService;
+import calculator.model.number.service.NumberService;
 
 public interface NumberCalculatorDependencyRegistry extends CalculatorDependencyRegistry {
 
