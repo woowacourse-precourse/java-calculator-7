@@ -28,11 +28,7 @@ public final class CalculatorController {
     }
 
     private void parseAndInitialize(String inputString) {
-        try {
-            calculatorModel.processInput(inputString);
-        } catch (IllegalArgumentException e) {
-            calculatorView.displayException(e.getMessage());
-        }
+        calculatorModel.processInput(inputString);
     }
 
     private void showResult() {

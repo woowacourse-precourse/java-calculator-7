@@ -6,6 +6,10 @@ public final class Validator {
 
     public static void validateParsedStrings(List<String> parsedStrings) throws IllegalArgumentException {
         for (String str : parsedStrings) {
+            if (str.isBlank()) {
+                continue;
+            }
+
             try {
                 Integer.parseInt(str);
             } catch (NumberFormatException e) {

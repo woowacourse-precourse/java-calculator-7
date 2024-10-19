@@ -34,7 +34,7 @@ public final class CalculatorModel {
     public List<String> parseCustomString(String input) {
         int delimiterEndIndex = input.indexOf("\\n");
         String delimiter = input.substring(2, delimiterEndIndex);
-        String numbersPart = input.substring(delimiterEndIndex + 1);
+        String numbersPart = input.substring(delimiterEndIndex + 2);
 
         return Arrays.asList(numbersPart.split(delimiter));
     }
@@ -47,6 +47,10 @@ public final class CalculatorModel {
         List<Integer> parsedInteger = new ArrayList<>();
 
         for (String str : parsedStrings) {
+            if (str.isBlank()) {
+                continue;
+            }
+
             parsedInteger.add(Integer.parseInt(str));
         }
 
