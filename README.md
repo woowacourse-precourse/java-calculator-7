@@ -1,4 +1,4 @@
-# java-calculator-precourse
+# 우아한 테크코스 1주차 문자열 덧셈 계산기
 
 ## 기능 목록
 
