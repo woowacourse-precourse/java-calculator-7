@@ -9,6 +9,6 @@ public class OutputProcess implements InfoService, ResultService{
 
     @Override
     public void result(long value) {
-        System.out.printf("결과 : %d", value);
+        System.out.printf("결과 : %,d", value);
     }
 }
