@@ -13,11 +13,9 @@ public class CalculatorService {
     }
 
     public void calculate() {
-        // 덧셈할 문자열 입력
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = Console.readLine();
 
-        // 입력이 없을 경우 "결과 : 0" 출력
+        String input = getInput();
+
         if (input.isEmpty()) {
             System.out.println("결과 : 0");
             return;
@@ -26,9 +24,18 @@ public class CalculatorService {
         try {
             String[] tokens = delimiterParser.parse(input);
             int result = calculator.sumOfStrings(tokens);
-            System.out.println("결과 : " + result);
-        } catch (Exception e) {
+            displayResult(result);
+        } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException();
         }
+    }
+
+    private String getInput() {
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        return Console.readLine();
+    }
+
+    private void displayResult(int result) {
+        System.out.println("결과 : " + result);
     }
 }
