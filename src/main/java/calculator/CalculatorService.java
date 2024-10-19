@@ -9,9 +9,10 @@ import java.util.regex.Pattern;
 public class CalculatorService {
     private final String startString = "덧셈할 문자열을 입력해 주세요.";
     private final Pattern pattern = Pattern.compile("//\\D+(0?\\D)*\\\\n");
-    private final Pattern wrongPattern = Pattern.compile("^//[1-9]+.*|.*[1-9]+.*|[1-9]+\\\\n$");
+    private final Pattern wrongPattern = Pattern.compile("//([1-9]+.*|.*[1-9]+.*|[1-9]+)\\\\n");
     private final Pattern zeroPattern = Pattern.compile("^//0+.*|.*0+\\\\n$");
     private final Pattern nothingPattern = Pattern.compile("//\\\\n");
+    private final Pattern numberPattern = Pattern.compile("\\d");
     private String inputString;
     private String transedString;
     private final String endString = "결과 : ";
@@ -34,7 +35,7 @@ public class CalculatorService {
         String endChar = expression.substring(len-1,len);
         int startInt = 0;
         if(!Character.isDigit(expression.charAt(0)) || !Character.isDigit(expression.charAt(len-1))){
-            throw new IllegalArgumentException("계산식의 처음과 마지막에는 숫자만 입력할 수 있습니다.");
+            throw new IllegalArgumentException(CalculatorException.ONLY_CAN_USE_DIGIT.getText());
         }
         return result;
     }
@@ -72,11 +73,11 @@ public class CalculatorService {
             BigInteger n= new BigInteger(i);
             try{
                 if(n.compareTo(new BigInteger("0"))<0){
-                    throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+                    throw new IllegalArgumentException(CalculatorException.CANNOT_USE_MINUS.getText());
                 }
                 result = result.add(n);
             }catch (NumberFormatException e){
-                throw new IllegalArgumentException("등록되지 않은 구분자가 포함되어 있습니다.");
+                throw new IllegalArgumentException(CalculatorException.CANNOT_USE_THIS_SEPERATOR.getText());
             }
         }
         return result;
@@ -102,9 +103,9 @@ public class CalculatorService {
         }else if(nothingMatcher.find()){
             transedString = transCustomSeperator(nothingMatcher);
         }else if(zeroMatcher.find()){
-            throw new IllegalArgumentException("0은 등록하고자 하는 구분자 사이에만 사용할 수 있습니다.");
+            throw new IllegalArgumentException(CalculatorException.ONLY_CAN_USE_ZERO_BETWEEN_SEPERATOR.getText());
         }else if(wrongMatcher.find()){
-            throw new IllegalArgumentException("커스텀 구분자에 숫자를 입력할 수 없습니다.");
+            throw new IllegalArgumentException(CalculatorException.CANNOT_USE_DIGIT_IN_SEPERATOR.getText());
         }else{
             transedString = transBasicSeperator();
         }
