@@ -10,7 +10,9 @@ public class Accumulator {
                 sum += 0;
                 continue;
             }
-            sum += Integer.parseInt(s);
+            int number = Integer.parseInt(s);
+            ExceptionHandler.handleInvalidNumber(number);
+            sum += number;
         }
 
         return sum;

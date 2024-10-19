@@ -24,6 +24,8 @@ public class StringSplitter {
     private String extractCustomDelimiter(String input) {
         int startIndex = CUSTOM_DELIMITER_PREFIX.length();
         int endIndex = input.indexOf(DELIMITER_END);
-        return input.substring(startIndex, endIndex);
+        String customDelimiter = input.substring(startIndex, endIndex);
+        ExceptionHandler.handleInvalidDelmiter(customDelimiter);
+        return customDelimiter;
     }
 }
