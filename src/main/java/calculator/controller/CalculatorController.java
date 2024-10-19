@@ -1,6 +1,7 @@
 package calculator.controller;
 
 import calculator.model.Calculator;
+import calculator.service.InputValidator;
 import calculator.service.StringArrToIntegerArr;
 import calculator.service.StringParsing;
 import calculator.view.InputView;
@@ -19,10 +20,12 @@ public class CalculatorController {
     public void calculateRun() {
         outputView.printInputPromptMessage();
         String input = InputView.userInputStr();
-        String[] inputs = StringParsing.userInputStrToArr(input);
+        String[] inputs = StringParsing.Delimiter(input);
+        InputValidator.validate(inputs);
         int[] numbers = StringArrToIntegerArr.toNumbers(inputs);
         int result = Calculator.sum(numbers);
         outputView.printResult(result);
+
     }
 
 }
