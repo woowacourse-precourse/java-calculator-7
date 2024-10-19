@@ -1,8 +1,5 @@
 package calculator;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class StringCalculator {
 
     public int calculate(String input){
@@ -11,8 +8,6 @@ public class StringCalculator {
         }
 
         ParsedInput parsedInput = InputParser.parse(input);
-        List<Integer> numbers = parsedInput.numbers();
-
-        return numbers.stream().reduce(0, Integer::sum);
+        return parsedInput.numbers().stream().mapToInt(Integer::intValue).sum();
     }
 }
