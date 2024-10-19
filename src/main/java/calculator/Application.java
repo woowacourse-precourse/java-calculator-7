@@ -12,7 +12,7 @@ public class Application {
             int result = 0;
 
             for (String s : inputSplits) {
-                if(s.equals("")) {
+                if(s.isEmpty()) {
                     continue;
                 }
                 result += Integer.parseInt(s);
