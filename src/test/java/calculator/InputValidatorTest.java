@@ -1,9 +1,9 @@
 package calculator;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -16,27 +16,16 @@ public class InputValidatorTest {
         System.setIn(originalIn);
     }
 
-    @Test
-    void 커스텀_구분자_형식() {
-        String[] mockInputs = {
-                "//aa\n1:2,3",
-                "\na//1:2,3"
-        };
-        var runner = new InputHandler();
+    @ParameterizedTest
+    @ValueSource(strings = {"\\na//1:2,3", "//aa\\n1:2,3"})
+    void 커스텀_구분자_형식(String mockInput) {
+        int customDelimiterStartIndex = mockInput.indexOf("//") + 2;
+        int customDelimiterEndIndex = mockInput.indexOf("\\n") - 1;
 
-        for (String mockInput : mockInputs) {
-            System.setIn(new ByteArrayInputStream(mockInput.getBytes()));
+        var inputValidator = new InputValidator();
 
-            String userInput = runner.readInput();
-
-            int customDelimiterStartIndex = userInput.indexOf("//") + 2;
-            int customDelimiterEndIndex = userInput.indexOf("\\n") - 1;
-            var inputValidator = new InputValidator();
-
-            assertThrows(IllegalArgumentException.class, () -> {
-                inputValidator.validateCustomDelimiterFormat(customDelimiterStartIndex, customDelimiterEndIndex);
-            });
-        }
-
+        assertThrows(IllegalArgumentException.class, () -> {
+            inputValidator.validateCustomDelimiterFormat(customDelimiterStartIndex, customDelimiterEndIndex);
+        });
     }
 }
