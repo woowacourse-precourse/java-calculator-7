@@ -11,8 +11,7 @@ public class StringCalculator {
     public void run() {
         String input = askForStringInput();
         String[] extractedNumbers = extractNumbersFrom(input);
-
-
+        validateInput(extractedNumbers);
     }
 
     private String askForStringInput() {
@@ -41,6 +40,19 @@ public class StringCalculator {
         int customDelimiterIndex = input.length() - 1;
         char customDelimiter = input.charAt(customDelimiterIndex);
         return String.valueOf(customDelimiter);
+    }
+
+    private void validateInput(String[] numbers) {
+        for (String number : numbers) {
+            if (number.isEmpty()) continue;
+            isNagative(number);
+        }
+    }
+
+    private void isNagative(String number) {
+        if(Integer.parseInt(number) < 0) {
+            throw new IllegalArgumentException("잘못된 값을 입력하였습니다.");
+        }
     }
 
 }
