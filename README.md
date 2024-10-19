@@ -23,7 +23,7 @@
 1. Input View
    - [X] ```Console API```를 이용하여 문자열 입력 받은 후, 반환  
 2. Split Model
-   - [ ] 구분자를 이용하여 문자열 분리
+   - [X] 구분자를 이용하여 문자열 분리
 3. Calculator Model
    - [ ] 숫자의 합을 계산하여 반환
 4. Output View
