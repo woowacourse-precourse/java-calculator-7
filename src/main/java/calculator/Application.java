@@ -11,10 +11,15 @@ public class Application {
 
         String str=Console.readLine();
 
+        if(str==null){
+            throw new IllegalArgumentException();
+        }
+
         if(str.isEmpty()){
             System.out.println("결과 : 0");
             return;
         }
+
 
         String customSeparator=null;
         if(str.startsWith("//")){
@@ -22,6 +27,11 @@ public class Application {
             customSeparator=str.substring(0,end);
 
             str=str.substring(end+2);
+        }
+
+        String regex=customSeparator!=null?String.format("[^0-9,:%s]",customSeparator):"[^0-9,:]";
+        if(str.matches(regex)){
+            throw new IllegalArgumentException();
         }
 
         String[] separator=customSeparator!=null?new String[]{",",":",customSeparator}:new String[]{",",";"};
@@ -35,6 +45,9 @@ public class Application {
         int result=0;
         for(String s : integers){
             int i=Integer.parseInt(s);
+            if(i<0){
+                throw new IllegalArgumentException();
+            }
             result+=i;
         }
 
