@@ -274,18 +274,26 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void addInputOverIntegerSize_CustomDelimiter(){
-        assertSimpleTest(()->{
+    void addInputOverIntegerSize_CustomDelimiter() {
+        assertSimpleTest(() -> {
             run("//?\\n2147483648");
             assertThat(output()).contains("결과 : 2147483648");
         });
     }
 
     @Test
-    void addInputOverLongSize_CustomDelimiter(){
-        assertSimpleTest(()->{
+    void addInputOverLongSize_CustomDelimiter() {
+        assertSimpleTest(() -> {
             run("//?\\n9223372036854775808");
             assertThat(output()).contains("결과 : 9223372036854775808");
+        });
+    }
+
+    @Test
+    void addResultOverIntSize_CustomDelimiter() {
+        assertSimpleTest(() -> {
+            run("//?\\n2147483647?1");
+            assertThat(output()).contains("결과 : 2147483648");
         });
     }
 
