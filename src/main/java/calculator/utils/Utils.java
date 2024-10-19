@@ -34,4 +34,12 @@ public class Utils {
         }
         return lists;
     }
+
+    public static int sumIntList(int[] list) {
+        int ans = 0;
+        for (int i = 0; i < list.length; i++) {
+            ans += list[i];
+        }
+        return ans;
+    }
 }
