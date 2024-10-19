@@ -89,6 +89,14 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 커스텀_구분자에_숫자가_포함된_경우() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//3\\n1,2,3,4"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
