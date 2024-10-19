@@ -2,31 +2,23 @@ package calculator;
 
 public class Validation {
 
-    // 올바른 문자열인지 아닌지 확인
-    //
-    public static boolean checkCustomSeparator(String input) {
-        if (isCorrectCustomSeparatorForm(input)) {
-            return true;
-        }
-        return false;
+    public static void checkCustomSeparator(String input) {
+        isCorrectCustomSeparatorForm(input);
     }
 
-    public static boolean isCorrectCustomSeparatorForm(String input) {
+    public static void isCorrectCustomSeparatorForm(String input) {
         input = Parser.getSeparatorString(input);
-        return isCorrectPair(input);
+        isCorrectPair(input);
     }
 
-    private static boolean isCorrectPair(String input) {
+    private static void isCorrectPair(String input) {
         int startPair = 0;
         int lastPair = 0;
         int flag = 0;
         for (int i = 0; i < input.length(); i++) {
             if (input.charAt(i) == '/' && input.charAt(i + 1) == '/') {
-                if (i + 4 >= input.length()) {
-                    return false;
-                }
-                if (!isCorrectLastElement(input, i + 3)) {
-                    return false;
+                if (i + 4 >= input.length() || !isCorrectLastElement(input, i + 3)) {
+                    throw new IllegalArgumentException();
                 }
                 startPair++;
                 flag = 1;
@@ -34,17 +26,16 @@ public class Validation {
             }
             if (input.charAt(i) == '\\' && input.charAt(i + 1) == 'n') {
                 if (flag == 0) {
-                    return false;
+                    throw new IllegalArgumentException();
                 }
                 lastPair++;
                 flag = 0;
                 i++;
             }
         }
-        if ((startPair == lastPair) && startPair != 0) {
-            return true;
+        if ((startPair == lastPair) && startPair == 0) {
+            throw new IllegalArgumentException();
         }
-        return false;
     }
 
     private static boolean isCorrectLastElement(String input, int idx) {
@@ -52,5 +43,17 @@ public class Validation {
             return true;
         }
         return false;
+    }
+
+    public static void isCorrectInput(String input) {
+        for (int i = 0; i < input.length(); i++) {
+            if (!(input.charAt(i) == ',' || input.charAt(i) == ':' || isNumber(input.charAt(i)))) {
+                throw new IllegalArgumentException();
+            }
+        }
+    }
+
+    private static boolean isNumber(char c) {
+        return c >= '0' && c <= '9';
     }
 }
