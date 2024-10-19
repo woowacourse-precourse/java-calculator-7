@@ -1,15 +1,14 @@
 package calculator.view;
 
+import static calculator.util.SeparatorProcessor.getNumbers;
+import static calculator.util.SeparatorProcessor.getSeparators;
+
 import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class InputView {
-
-    private static final String COMMA = ",";
-    private static final String COLON = ":";
 
     public List<Integer> getAdditionNumbers() {
         String input = Console.readLine();
@@ -46,45 +45,5 @@ public class InputView {
         if (number < 0) {
             throw new IllegalArgumentException("양수만 입력할 수 있습니다.");
         }
-    }
-
-    private String getSeparators(String input) {
-        if (hasCustomSeparator(input)) {
-            int separatorEndIndex = getSeparatorEndIndex(input);
-            validateCustomSeparator(separatorEndIndex);
-
-            String customSeparator = getCustomSeparator(input, separatorEndIndex);
-
-            return COMMA + "|" + COLON + "|" + Pattern.quote(customSeparator);
-        }
-
-        return COMMA + "|" + COLON;
-    }
-
-    private String getNumbers(String input) {
-        if (hasCustomSeparator(input)) {
-            int separatorEndIndex = getSeparatorEndIndex(input);
-            return input.substring(separatorEndIndex + 2);
-        }
-
-        return input;
-    }
-
-    private boolean hasCustomSeparator(String input) {
-        return input.startsWith("//");
-    }
-
-    private void validateCustomSeparator(int customSeparatorEndIndex) {
-        if (customSeparatorEndIndex == -1) {
-            throw new IllegalArgumentException("입력이 잘못되었습니다.");
-        }
-    }
-
-    private int getSeparatorEndIndex(String input) {
-        return input.indexOf("\\n");
-    }
-
-    private String getCustomSeparator(String input, int separatorEndIndex) {
-        return input.substring(2, separatorEndIndex);
     }
 }
