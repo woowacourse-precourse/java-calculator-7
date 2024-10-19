@@ -10,7 +10,7 @@ public class StringAddCalculator {
         this(new Splitter());
     }
 
-    public StringAddCalculator(Splitter splitter) {
+    public StringAddCalculator(final Splitter splitter) {
         this.splitter = splitter;
     }
 

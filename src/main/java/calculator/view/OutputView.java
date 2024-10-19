@@ -6,7 +6,7 @@ public class OutputView {
     public OutputView() {
     }
 
-    public static void printCalculationResult(int result) {
+    public static void printCalculationResult(final int result) {
         System.out.printf(RESULT_MESSAGE, result);
     }
 }
