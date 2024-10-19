@@ -26,6 +26,12 @@ public class Calculator {
     public void run(){
         consoleOutputHandler.showInputComments();
         String userInput = consoleInputHandler.getUserInput();
+
+        if (IsUserInputEmptyString(userInput)) {
+            consoleOutputHandler.showFinalOutput(0);
+            return;
+        }
+
         String parsedInput = AddSeparator.addCustomSeparator(userInput);
 
         int[] toSumArrays = defaultSeparator.separateStringToSum(parsedInput,separatorStorage);
@@ -33,5 +39,9 @@ public class Calculator {
         int sum = calculateComposition.makeSum(toSumArrays);
 
         consoleOutputHandler.showFinalOutput(sum);
+    }
+
+    private static boolean IsUserInputEmptyString(String userInput) {
+        return userInput.trim().isEmpty();
     }
 }
