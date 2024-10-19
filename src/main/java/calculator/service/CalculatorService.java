@@ -6,7 +6,7 @@ import calculator.calculator.model.PositiveNumber;
 import calculator.io.IOService;
 import camp.nextstep.edu.missionutils.Console;
 
-public class CalculatorService{
+public class CalculatorService {
     private final StringCalculator calculator;
     private final IOService ioService;
 
@@ -26,4 +26,3 @@ public class CalculatorService{
         }
     }
 }
-

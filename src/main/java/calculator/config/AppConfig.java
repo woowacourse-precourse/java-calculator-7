@@ -21,7 +21,7 @@ public class AppConfig {
     }
 
     private UserInputParser userInputParser() {
-        return new UserInputParser(new DelimiterExtractor(), new NumberExtractor(),new StringNumberParser());
+        return new UserInputParser(new DelimiterExtractor(), new NumberExtractor(), new StringNumberParser());
     }
 
     public IOService ioService() {
