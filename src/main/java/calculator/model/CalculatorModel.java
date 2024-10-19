@@ -26,4 +26,8 @@ public class CalculatorModel {
         }
         return result;
     }
+
+    public int add(List<Integer> operands) {
+        return operands.stream().mapToInt(Integer::intValue).sum();
+    }
 }
