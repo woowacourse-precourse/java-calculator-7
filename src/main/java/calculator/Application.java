@@ -21,7 +21,7 @@ public class Application {
             return;
         }
 
-        validator.validateNonNumeric(input);
+        //validator.validateNonNumeric(input);
 
         // GetNumbers 클래스 호출
         GetNumbers getNumbers = new GetNumbers();

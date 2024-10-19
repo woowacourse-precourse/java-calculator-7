@@ -34,3 +34,56 @@
 6. 예외 처리
     - 잘못된 값을 입력할 경우 `IllegalArgumentException` 발생시키고 종료
 7. 결과 출력
+
+------------
+
+## 코드 작성 중 헷갈렸던 문제들
+
+```java
+// 커스텀 구분자인지 확인
+if (input.startsWith("//")) {
+    int delimiterEndIndex = input.indexOf("\n"); //
+    customDelimiter = input.substring(2, delimiterEndIndex); //
+    numbersPart = input.substring(delimiterEndIndex + 2); //
+
+    // 로그 출력
+    System.out.println("Custom delimiter: " + customDelimiter);
+    System.out.println("Numbers part: " + numbersPart);
+}
+```
+
+이렇게 코드 작성시 테스트 코드`커스텀_구분자_사용()`가 계속 에러발생 ..
+
+```java
+@Test
+    void 커스텀_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("//;\\n1");
+            assertThat(output()).contains("결과 : 1");
+        });
+    }
+```
+
+에러 원인은 `delimiter`의 `index`가 `-1`이 나오고 있어서 범위 밖이라는 에러.
+
+```java
+java.lang.StringIndexOutOfBoundsException: Range [2, -1) out of bounds for length 6
+	at java.base/jdk.internal.util.Preconditions$1.apply(Preconditions.java:55)
+```
+
+> `\n`과 `\\n` 의 차이
+
+* `\n` : 줄바꿈 문자
+* `\\n` : 문자열로써 두 개의 문자 `\`와 `n`을 의미
+
+> `run("//;\\n1")`와 `run("//;\n1;2;3")`의 
+
+1. `run("//;\\n1")`의 경우 :
+    
+    * `\\n`은 문자 그대로 `\` 와 `n`
+    * `input.indexOf("\\n")` 을 했을 때, 이 코드는 문자열에서 문자열 `\\n`을 찾음
+
+2. `run("//;\n1;2;3")`의 경우 :
+    
+    * `\n`은 줄바꿈 문자
+    * `input.indexOf("\n")`라고 했을 때, 이 코드는 문자열에서 실제 줄바꿈을 찾

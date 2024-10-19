@@ -21,9 +21,12 @@ public class InputValidator {
     }
 
     // 숫자가 아닌 값 검증
-    public void validateNonNumeric(String input) {
-        if (input.matches(".*[a-zA-Z]+.*")) {
-            throw new IllegalArgumentException("유효하지 않은 값이 포함되어 있습니다.");
-        }
-    }
+    //public void validateNonNumeric(String input) {
+        // 커스텀 구분자 부분을 제외한 실제 숫자 부분만 검사
+        //String numbersPart = input.startsWith("//") ? input.substring(input.indexOf("\n") + 1) : input;
+
+        //if (numbersPart.matches(".*[a-zA-Z]+.*")) {
+            //throw new IllegalArgumentException("유효하지 않은 값이 포함되어 있습니다.");
+        //}
+    //}
 }
