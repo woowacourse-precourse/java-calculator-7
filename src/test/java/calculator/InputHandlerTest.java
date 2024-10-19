@@ -27,4 +27,18 @@ public class InputHandlerTest {
 
         assertThat(result).isEqualTo("1,2:3");
     }
+
+    @Test
+    void 커스텀_구분자_추출() {
+        String mockInput = "//a\\n1,2:3";
+
+        System.setIn(new ByteArrayInputStream(mockInput.getBytes()));
+
+        var runner = new InputHandler();
+
+        String userInput = runner.readInput();
+
+        char result = runner.extractCustomDelimiter(userInput);
+        assertThat(result).isEqualTo('a');
+    }
 }
