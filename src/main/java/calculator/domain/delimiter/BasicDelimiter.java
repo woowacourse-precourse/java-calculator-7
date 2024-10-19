@@ -1,4 +1,4 @@
-package calculator.domain.enums;
+package calculator.domain.delimiter;
 
 public enum BasicDelimiter {
     COMMA(','),

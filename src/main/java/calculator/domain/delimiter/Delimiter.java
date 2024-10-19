@@ -1,6 +1,4 @@
-package calculator.domain;
-
-import calculator.domain.enums.BasicDelimiter;
+package calculator.domain.delimiter;
 
 import java.util.HashSet;
 import java.util.Set;
