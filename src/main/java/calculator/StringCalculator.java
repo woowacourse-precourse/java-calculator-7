@@ -37,8 +37,7 @@ public class StringCalculator {
      * @param separators The string to split numbers
      * @return A list of numbers
      */
-    private ArrayList<Integer> getNumbers(String input, ArrayList<String> separators) {
-        ArrayList<Integer> numbers = new ArrayList<>();
+    private String[] getNumbers(String input, ArrayList<String> separators) {
         String number_string;
         if (input.startsWith("//")) {
             number_string = input.split("\\\\n")[1];
@@ -48,19 +47,7 @@ public class StringCalculator {
 
         String separator = String.join("|", separators);
 
-        for (String num : number_string.split(separator)) {
-            try {
-                int number = Integer.parseInt(num);
-                if (number <= 0) {
-                    throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
-                }
-                numbers.add(number);
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("구분자의 형식이 올바르지 않습니다.");
-            }
-        }
-
-        return numbers;
+        return number_string.split(separator);
     }
 
     /**
@@ -68,7 +55,7 @@ public class StringCalculator {
      * @param input The string to sum
      * @return A sum of input numbers
      */
-    public Integer calculate(String input) {
+    public int calculate(String input) {
 
         ArrayList<String> separators;
 
@@ -78,19 +65,22 @@ public class StringCalculator {
             separators = getDefaultSeparator();
         }
 
-        try {
-            ArrayList<Integer> numbers = getNumbers(input, separators);
+        String[] numbers = getNumbers(input, separators);
 
-            Integer sum = 0;
+        int sum = 0;
 
-            for (Integer number : numbers) {
-                sum += number;
+        for (String number : numbers) {
+            try {
+                int num = Integer.parseInt(number);
+                if (num <= 0) {
+                    throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+                }
+                sum += num;
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("구분자가 올바르지 않습니다.");
             }
-
-            return sum;
-
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(e.getMessage());
         }
+
+        return sum;
     }
 }
