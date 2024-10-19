@@ -5,11 +5,8 @@ import java.util.Arrays;
 
 public class Application {
     public static void main(String[] args) {
-
         String input = getInput();
-
         int result = processInput(input);
-
         printOutput(result);
     }
 
@@ -30,7 +27,7 @@ public class Application {
         // 커스텀 구분자가 있는지 확인하고 처리
         if (checkCustomDelimiter(input)) {
             delimiter += "|" + addCustomDelimiter(input);  // 기본 구분자에 커스텀 구분자 추가
-            input =  Console.readLine();
+            input = Console.readLine();
         }
 
         // 문자열을 구분자로 분리하여 숫자 배열 추출
@@ -38,7 +35,6 @@ public class Application {
         sum = Arrays.stream(numbers).sum();  // 숫자들 합 계산
         return sum;  // 합 반환
     }
-
 
     private static boolean checkCustomDelimiter(String input) {
         return input.startsWith("//");
@@ -52,14 +48,19 @@ public class Application {
         String[] tokens = input.split(delimiter);  // 구분자를 사용해 문자열 분리
         return Arrays.stream(tokens)
                 .mapToInt(token -> {
+                    String trimmedToken = token.trim();
+                    if (trimmedToken.startsWith("-")) {  // 음수인지 확인
+                        throw new IllegalArgumentException("Invalid number: " + trimmedToken);
+                    }
                     try {
-                        return Integer.parseInt(token.trim());
+                        return Integer.parseInt(trimmedToken);  // 숫자 변환
                     } catch (NumberFormatException e) {
-                        throw new IllegalArgumentException("Invalid number: " + token);
+                        throw new IllegalArgumentException("Invalid number: " + trimmedToken);
                     }
                 })
                 .toArray();
     }
+
 
     private static void printOutput(int result) {
         System.out.println("결과 : " + result);
