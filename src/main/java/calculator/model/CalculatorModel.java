@@ -15,7 +15,11 @@ public class CalculatorModel {
         if (input.startsWith("//")) {
             Matcher matcher = Pattern.compile("//(.+)\n(.+)").matcher(input);
             if (matcher.find()) {
-                delimiter = Pattern.quote(matcher.group(1));
+                String customDelimiter = matcher.group(1);
+                if (customDelimiter.isEmpty()) {
+                    throw new IllegalArgumentException("커스텀 구분자를 입력해 주세요.");
+                }
+                delimiter = Pattern.quote(customDelimiter);
                 input = matcher.group(2);
             }
         }
