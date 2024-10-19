@@ -13,4 +13,12 @@ public final class Validator {
             }
         }
     }
+
+    public static void validatePositiveNumbers(List<Integer> parsedNumbers) throws IllegalArgumentException {
+        for (int number : parsedNumbers) {
+            if (number <= 0) {
+                throw new IllegalArgumentException("All input numbers must be greater than zero.");
+            }
+        }
+    }
 }
