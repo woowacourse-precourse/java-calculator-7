@@ -20,4 +20,8 @@ public class Number {
             throw new IllegalArgumentException();
         }
     }
+
+    public BigDecimal getValue() {
+        return value;
+    }
 }

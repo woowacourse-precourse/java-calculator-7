@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class Numbers {
@@ -14,5 +15,11 @@ public class Numbers {
             throw new IllegalArgumentException();
         }
         numbers.add(number);
+    }
+
+    public BigDecimal sum() {
+        return numbers.stream()
+                .map(Number::getValue)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }
