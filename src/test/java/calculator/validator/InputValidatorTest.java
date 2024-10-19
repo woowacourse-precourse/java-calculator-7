@@ -67,4 +67,24 @@ class InputValidatorTest {
             assertDoesNotThrow(() -> inputValidator.validate("//;%\\n1;%2;%3"));
         }
     }
+
+    @Nested
+    @DisplayName("기타 예외 상황 테스트")
+    class ExceptionTest {
+
+        @Test
+        void 빈_문자열이_입력은_테스트를_통과한다() {
+            assertDoesNotThrow(() -> inputValidator.validate(""));
+        }
+
+        @Test
+        void 숫자가_아닌_문자가_입력되면_예외를_발생한다() {
+            assertThrows(IllegalArgumentException.class, () -> inputValidator.validate("1,a,3"));
+        }
+
+        @Test
+        void 음수가_입력되면_예외를_발생한다() {
+            assertThrows(IllegalArgumentException.class, () -> inputValidator.validate("-1,2,3"));
+        }
+    }
 }
