@@ -12,6 +12,12 @@ public class CalculatorUtil {
 
     private CalculatorUtil() {};
 
+    public static List<Integer> getNumberList(String inputValue) {
+        List<String> delimiters = extractDelimiter(inputValue);
+
+        return splitByDelimiters(delimiters, inputValue);
+    }
+
     public static List<String> extractDelimiter(String inputValue) {
         Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
         Matcher matcher = pattern.matcher(inputValue);

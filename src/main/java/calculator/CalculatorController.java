@@ -1,12 +1,12 @@
 package calculator;
 
 import calculator.service.CalculatorService;
+import calculator.util.CalculatorUtil;
 import java.util.List;
 
 public class CalculatorController {
     private final CalculatorService calculatorService;
     private final View view;
-
     private final InputValidator inputValidator;
 
     public CalculatorController(CalculatorService calculatorService, View view, InputValidator inputValidator) {
@@ -15,25 +15,14 @@ public class CalculatorController {
         this.inputValidator = inputValidator;
     }
 
-    public String executeInput() {
-        view.printMessage();
-        return view.input();
-    }
+    public void executeCalculation() {
 
-    public void executeOutput(Integer result) {
+        String input = view.executeInput();
+
+        if (!inputValidator.isValidInput(input)) throw new IllegalArgumentException();
+
+        Integer result = calculatorService.calculate(CalculatorUtil.getNumberList(input));
+
         view.printResultMessage(result);
-    }
-
-    public Integer executeCalculation(List<Integer> numbers) {
-        return calculatorService.calculate(numbers);
-    }
-
-    public Boolean isValidInput(String input) {
-        if (!inputValidator.isOnlyOneCustomDeclare(input))
-            throw new IllegalArgumentException("하나 이상의 선언부가 존재합니다.");
-
-        if (inputValidator.isContainInvalidChar(input))
-            throw new IllegalArgumentException("올바르지 않은 문자가 포함되었습니다.");
-        return true;
     }
 }

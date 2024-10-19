@@ -8,6 +8,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InputValidator {
+    public Boolean isValidInput(String input) {
+        if (isOnlyOneCustomDeclare(input)) return false;
+
+        if (isContainInvalidChar(input)) return false;
+
+        return true;
+    }
 
     public Boolean isOnlyOneCustomDeclare(String inputValue) {
         // TODO : 커스텀 구분자 선언부가 1개만 존재하는 지 확인합니다.

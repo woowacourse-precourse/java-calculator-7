@@ -3,6 +3,12 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class View {
+
+    public String executeInput() {
+        printMessage();
+        return input();
+    }
+
     public String input() {
         return Console.readLine();
     }

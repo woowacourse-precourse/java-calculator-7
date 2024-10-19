@@ -10,14 +10,7 @@ public class Application {
         CalculatorController calculator = new CalculatorController(
                 calculatorConfig.calculatorService(), calculatorConfig.view(), calculatorConfig.inputValidator());
 
-        String input = calculator.executeInput();
-        boolean isValid = calculator.isValidInput(input);
-
-        if (isValid) {
-            List<String> delimiters = CalculatorUtil.extractDelimiter(input);
-            List<Integer> numbers = CalculatorUtil.splitByDelimiters(delimiters, CalculatorUtil.formattingString(input));
-            Integer result = calculator.executeCalculation(numbers);
-            calculator.executeOutput(result);
-        }
+        calculator.executeCalculation();
     }
 }
+
