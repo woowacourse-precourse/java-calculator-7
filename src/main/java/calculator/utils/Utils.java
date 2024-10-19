@@ -18,4 +18,9 @@ public class Utils {
         String[] split = ss.split("\\\\n");
         return split[0].toCharArray();
     }
+
+    public static String extractCalculationString(String s) {
+        String[] split = s.split("\\\\n");
+        return split[1];
+    }
 }
