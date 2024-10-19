@@ -1,5 +1,7 @@
 package calculator.domain;
 
+import java.util.regex.Pattern;
+
 import static calculator.constants.DelimiterConstants.COLON;
 import static calculator.constants.DelimiterConstants.COMMA;
 
@@ -22,7 +24,8 @@ public class StringSplitter {
         String customDelimiter = delimiterHandler.getCustomDelimiterIfPresent(stringToAdd);
         if (!customDelimiter.isEmpty()) {
             stringToAdd = changeStringWithoutFormat(stringToAdd);
-            return stringToAdd.split(customDelimiter + "|" + COLON + "|" + COMMA);
+
+            return stringToAdd.split(Pattern.quote(customDelimiter) + "|" + COLON + "|" + COMMA);
         }
         return stringToAdd.split(COLON + "|" + COMMA);
     }
