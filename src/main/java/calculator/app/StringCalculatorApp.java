@@ -12,7 +12,7 @@ public class StringCalculatorApp {
         // 2. 계산기 사용하여 정답 계산
         stringCalculator = new StringCalculator(inputData);
         int result = stringCalculator.sum();
-
+        System.out.println("결과 : " + result);
     }
 
     // 1. 문자열 입력받기
