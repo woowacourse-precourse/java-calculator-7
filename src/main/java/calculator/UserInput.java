@@ -17,24 +17,26 @@ public class UserInput {
         // 커스텀 구분자 여부
         if(in.contains("//") && in.contains("\\n")) {
             return customInput(in);
-        } else if(in.contains(",") || in.contains(":")) { // ',' or ':' 구분
+        } else  { // ',' or ':' 구분
             return defaultInput(in);
-        } else { // 잘못된 입력
-            throw new IllegalArgumentException();
         }
     }
 
     private List<String> customInput(String in) {
-        int idx = in.indexOf("n");
+        int idx = in.indexOf("\\n");
         System.out.println(idx);
-        String custom = in.substring(0, idx+1).replaceAll("//", "").replaceAll("\\n", "");
+        String custom = in.substring(0, idx).replaceAll("//", "");
 
-        List<String> number = List.of(in.substring(idx+1).split(custom));
+        List<String> number = List.of(in.substring(idx+2).split(custom));
         return number;
     }
 
     private List<String> defaultInput(String in) {
-        List<String> number = List.of(in.split(",|:"));
-        return number;
+        try {
+            List<String> number = List.of(in.split(",|:"));
+            return number;
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException();
+        }
     }
 }

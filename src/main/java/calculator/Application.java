@@ -9,10 +9,14 @@ public class Application {
         String in = input.userInput();
         List<String> number = input.substringInput(in);
         int sum = 0;
-        for(String num : number) {
-            if(Integer.parseInt(num) < 0)
-                throw new IllegalArgumentException();
-            sum += Integer.parseInt(num);
+        try {
+            for(String num : number) {
+                if(Integer.parseInt(num) < 0)
+                    throw new IllegalArgumentException();
+                sum += Integer.parseInt(num);
+            }
+        } catch(Exception e) {
+            throw new IllegalArgumentException();
         }
 
         System.out.println("결과 : " + sum);
