@@ -5,7 +5,7 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class Application {
 
-    enum Type {
+    enum DelimiterType {
         DEFAULT, CUSTOM;
     }
 
@@ -13,45 +13,43 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String str = Console.readLine();
 
-//        char[] character = str.toCharArray();
-
-        Type strType = getType(str);
+        DelimiterType strType = getType(str);
 
         int sum = 0;
 
+        // 쉼표(,) 또는 콜론(:), 공백 등을 기준으로 문자열 분리
+        String[] parts = str.split("[, :]+");
+        String content;
         switch (strType) {
             case DEFAULT:
-
-                // 쉼표(,) 또는 콜론(:)을 기준으로 문자열 분리
-                String[] parts = str.split("[, :]+");
-
-                for (int i=0; i<parts.length; i++) {
-                    sum += Integer.parseInt(parts[i]);
-                }
-
                 break;
 
             case CUSTOM:
+                // 커스텀 구분자를 지정해서 사용한 경우
+                // 커스텀 구분자 추출 (//와 \n 사이)
+                int endIndex = str.indexOf("\\n");
+
+                // 커스텀 구분자 추출 (//와 \n 사이의 문자 추출)
+                String sub = str.substring(2, endIndex);
+                // 숫자 부분 추출 (커스텀 구분자 이후의 문자열)
+                content = str.substring(endIndex+2);
+
+                // 기본 구분자 기준 분리에 커스텀 구분자 추가
+                parts = content.split(sub + "|[, :]");
                 break;
         }
 
-
+        for (int i=0; i<parts.length; i++) {
+            sum += Integer.parseInt(parts[i]);
+        }
         System.out.println("결과 : " + sum);
     }
 
-    private static Type getType(String str) {
+    private static DelimiterType getType(String str) {
         if (str.startsWith("//")) {
-            return Type.CUSTOM;
+            return DelimiterType.CUSTOM;
         } else {
-            return Type.DEFAULT;
+            return DelimiterType.DEFAULT;
         }
     }
-
-    // 숫자 추출 후 합산하는 함수
-//    private static int[] extractNumberSum(String str) {
-//
-//
-//
-//
-//    }
 }
