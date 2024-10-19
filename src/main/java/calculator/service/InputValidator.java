@@ -12,11 +12,15 @@ public class InputValidator {
     }
 
     public void validate(String input) {
-        if (!formatParser.isCheckedStart(input)) {
-            validateBasicDelimiter(input);
+        if (input.isEmpty()) {
+            return;
         }
 
-        validateCustomDelimiter(input);
+        validateBasicDelimiter(input);
+
+        if (formatParser.isCheckedStart(input)) {
+            validateCustomDelimiter(input);
+        }
     }
 
     private void validateBasicDelimiter(String input) {
