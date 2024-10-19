@@ -12,7 +12,7 @@
 
 ## 구현 기능
 1. 입력 값 추출
-    - [] camp.nextstep.edu.missionutils.Console의 readLine() 사용
+    - [o] camp.nextstep.edu.missionutils.Console의 readLine() 사용
     - [] 빈 문자열로 들어올 경우 0으로 처리
 2. 입력된 문자열 분리
     - [] 쉼표(,) 또는 세미콜론(;)으로 문자열 분리
