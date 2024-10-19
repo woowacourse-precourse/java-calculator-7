@@ -10,15 +10,14 @@ public class Application {
         OutputView outputView = new OutputView();
         CalculatorController controller = new CalculatorController(inputView);
 
-        while (true) {
-            try {
-                int result = controller.processInput();
-                outputView.printResult(result);
-            } catch (IllegalArgumentException e) {
-                outputView.printError(e.getMessage());
-                break;
-            }
+        try {
+            int result = controller.processInput();
+            outputView.printResult(result);
+        } catch (IllegalArgumentException e) {
+            outputView.printError(e.getMessage());
+            throw e;
         }
+
         inputView.close();
     }
 }
