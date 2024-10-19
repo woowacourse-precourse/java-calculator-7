@@ -8,7 +8,7 @@ import static calculator.ParsingInput.executeParsingInput;
 public class Calculator {
     private final String INPUT;
     private final String TOKEN;
-    private final String REGEX = "//(.)\\\\n|//(.)(?=\\n)";
+    private final String REGEX = "//(.)\\\\n";
 
     public Calculator(String input) {
         INPUT = input;
@@ -25,7 +25,7 @@ public class Calculator {
         Pattern pattern = Pattern.compile(REGEX);
         Matcher matcher = pattern.matcher(input);
         if (matcher.find()) {
-            String token = matcher.group(1) != null ? matcher.group(1) : matcher.group(2);
+            String token = matcher.group(1);
             return "[,:" + token + "]";
         }
         return "[,:]";
