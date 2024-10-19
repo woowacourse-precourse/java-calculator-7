@@ -97,4 +97,14 @@ class CalculatorTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
+    @DisplayName("커스텀 구분자 설정이 잘못될 경우 예외 처리")
+    void invalidCustomDelimiterException() {
+        String input = "//A1A2A3";
+
+        assertThatThrownBy(() -> {
+            calculator.start(input);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
 }

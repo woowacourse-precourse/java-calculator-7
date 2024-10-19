@@ -1,7 +1,5 @@
 package calculator;
 
-import calculator.view.InputView;
-import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class Calculator {
@@ -17,13 +15,15 @@ public class Calculator {
     }
 
     public String[] getNumberLists(String str) {
-        // TODO: 구분자 커스텀 문자열이 없을 경우 (// or \n)
         if (str.startsWith("//")) {
-            String delimiter = str.substring(2, str.indexOf("\\n"));
-            String newStr = str.substring(str.indexOf("\\n") + 2);
-//            System.out.println("newStr = " + newStr);
-//            System.out.println(Pattern.quote(delimiter));
-            return newStr.split("[" +Pattern.quote(delimiter) + ",:]+");
+            int delimiterIndex = str.indexOf("\\n");
+            if (delimiterIndex == -1) {
+                throw new IllegalArgumentException("커스텀 구분자 설정이 잘못 되었습니다.");
+            }
+            String delimiter = str.substring(2, delimiterIndex);
+            String newStr = str.substring(delimiterIndex + 2);
+
+            return newStr.split("[" + Pattern.quote(delimiter) + ",:]+");
         }
         return str.split("[,:]+");
     }
