@@ -16,11 +16,11 @@ public class NumberFinder {
     }
 
     public int[] findNumbersFrom(String ridiculousSentenceIncludeNumber) {
-        String correct = delimiterManager.removeCustomDelimiterFrom(ridiculousSentenceIncludeNumber);
+        String numericStringWithDelimiter = delimiterManager.removeCustomDelimiterFrom(ridiculousSentenceIncludeNumber);
         String regex = delimiterManager.buildRegex();
-        String[] maybeNums = correct.split(regex);
-        numberValidator.isValid(maybeNums);
-        return convertToIntegerArray(maybeNums);
+        String[] numericString = numericStringWithDelimiter.split(regex);
+        numberValidator.isValid(numericString);
+        return convertToIntegerArray(numericString);
     }
 
     private int[] convertToIntegerArray(String[] maybeNums) {
