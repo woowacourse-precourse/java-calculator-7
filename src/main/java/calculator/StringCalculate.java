@@ -4,22 +4,19 @@ import java.util.regex.Pattern;
 
 public class StringCalculate {
 
-    public int calculateDefault(String input) {
-        // 커스텀 구분자 처리
-        if(input.isEmpty()){
-            return 0;
-        }
-        else {
-            return sumWithDefaultDelimiter(input);
-        }
-    }
-
-    public int calculateCustom(String input){
+    public int calculate(String input) {
         // 입력 값 디버깅
         input = input.replace("\\n", "\n");
 
-
-        return sumWithCustomDelimiter(input, findDelimiter(input));
+        // 커스텀 구분자 처리
+        if (input.startsWith("//")) {
+            return sumWithCustomDelimiter(input, findDelimiter(input));
+        } else if (input.isEmpty()) {
+            return 0;
+        } else {
+            // 기본 구분자(쉼표와 콜론)로 처리
+            return sumWithDefaultDelimiter(input);
+        }
     }
 
     private String findDelimiter(String input) {
