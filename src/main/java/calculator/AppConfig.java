@@ -1,9 +1,9 @@
 package calculator;
 
-import binaryOperator.BinaryOperator;
+import operation.Operator;
 import detector.CustomSeparatorDetector;
 import detector.CustomSeparatorDetectorImpl;
-import binaryOperator.PlusOperator;
+import operation.PlusOperator;
 import separator.Separator;
 import separator.SeparatorImpl;
 import separator.SeparatorParser;
@@ -16,7 +16,7 @@ public class AppConfig {
     private final Separator separator;
     private final CustomSeparatorDetector customSeparatorDetector;
     private final SeparatorParser separatorParser;
-    private final BinaryOperator operator;
+    private final Operator operator;
 
     public AppConfig() {
         separator = new SeparatorImpl();
@@ -45,7 +45,7 @@ public class AppConfig {
         return separatorParser;
     }
 
-    public BinaryOperator operator() {
+    public Operator operator() {
         return operator;
     }
 }

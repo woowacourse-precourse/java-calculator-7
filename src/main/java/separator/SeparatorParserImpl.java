@@ -36,15 +36,11 @@ public class SeparatorParserImpl implements SeparatorParser {
         String regex = regexBuilder.toString();
         String[] splitLine = line.split(regex);
 
-        try {
-            for (String s : splitLine) {
-                int number = Integer.parseInt(s);
-                if (number < 0) {
-                    throw new NumberFormatException();
-                }
+        for (String s : splitLine) {
+            int number = Integer.parseInt(s);
+            if (number < 0) {
+                throw new NumberFormatException();
             }
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
         }
 
         return Arrays.asList(splitLine);
