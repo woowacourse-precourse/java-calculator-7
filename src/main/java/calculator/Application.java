@@ -1,10 +1,10 @@
 package calculator;
 
-import calculator.controller.CalculatorController;
+import calculator.controller.CalcController;
 
 public class Application {
     public static void main(String[] args) {
-        CalculatorController calculatorController = new CalculatorController();
-        calculatorController.run();
+        CalcController calcController = new CalcController();
+        calcController.run();
     }
 }

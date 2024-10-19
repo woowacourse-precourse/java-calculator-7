@@ -4,12 +4,12 @@ import calculator.model.Numbers;
 import calculator.model.Separator;
 import calculator.view.IOView;
 
-public class CalculatorController {
+public class CalcController {
 
     private final Separator separator;
     private final IOView ioView;
 
-    public CalculatorController() {
+    public CalcController() {
         this.separator = new Separator();
         this.ioView = new IOView();
     }
