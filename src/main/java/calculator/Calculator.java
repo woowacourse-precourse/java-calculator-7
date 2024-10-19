@@ -38,7 +38,7 @@ public class Calculator {
     // 기본 구분자로 문자열을 분리
     private static List<String> splitByDefaultDelimiters(String input) {
         // 문자열에서 기본 구분자 외에 다른 문자가 있는지 확인
-        if (input.matches(".*[^0-9, :, -].*")) {
+        if (input.matches(".*[^0-9a-zA-Z,:-].*")) {
             throw new IllegalArgumentException("기본 구분자 외 다른 문자가 포함되어 있습니다.");
         }
         return Arrays.asList(input.split("[,:]"));
