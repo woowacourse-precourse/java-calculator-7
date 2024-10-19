@@ -21,8 +21,8 @@ public class StringSplitter {
         }
 
         // 구분자를 이용해 문자열을 분리
-        String[] nums = input.split(delimiter);
-        stringvalidator.validateNumbers(nums);
-        return nums;
+        String[] numbers = input.split(delimiter);
+        stringvalidator.validateNumbers(numbers);
+        return numbers;
     }
 }
