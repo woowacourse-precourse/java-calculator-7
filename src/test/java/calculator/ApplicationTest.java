@@ -40,6 +40,14 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 숫자가_아닌_입력값이_포함될때() {
+        assertSimpleTest(() -> {
+            run("1,2:a");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
