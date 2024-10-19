@@ -1,6 +1,7 @@
 package calculator;
 
 import calculator.view.InputView;
+import java.util.List;
 
 public class Application {
 
@@ -8,6 +9,7 @@ public class Application {
     }
 
     public static void main(String[] args) {
-        System.out.println(InputView.inputNumbers());
+        List<Integer> numbers = InputView.inputNumbers();
+        System.out.println(Calculator.sum(numbers));
     }
 }
