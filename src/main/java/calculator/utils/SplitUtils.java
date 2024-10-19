@@ -7,46 +7,51 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SplitUtils {
-    public static List<String> getSplitInput(String userInput) {
-        List<String> processedInput = new ArrayList<>();
-        int escapeIdx = userInput.indexOf("\\n");
+    public static List<String> getCalculationSection(String userInput) {
+         List<String> calculationSection = new ArrayList<>();
 
         if (userInput.isEmpty()) {
-            return processedInput;
+            return calculationSection;
         }
 
-        if (isUsingCustomSeparator(escapeIdx)) {
-            return splitWithCustomSeparator(userInput, escapeIdx);
+        if (isUsingCustomDelimiter(userInput)) {
+            return splitWithCustomDelimiter(userInput);
         }
 
-        return splitWithDefaultSeparator(userInput);
+        return splitWithDefaultDelimiter(userInput);
     }
 
-    private static boolean isUsingCustomSeparator(int escapeIdx) {
-        return escapeIdx > 0;
-    }
-
-    private static List<String> splitWithDefaultSeparator(String userInput) {
+    private static List<String> splitWithDefaultDelimiter(String userInput) {
         String delimiter = "[,:]";
-        String[] splitInput = userInput.split(delimiter);
+        String[] calculationSection = userInput.split(delimiter);
 
-        return Arrays.asList(splitInput);
+        return Arrays.asList(calculationSection);
     }
 
-    private static List<String> splitWithCustomSeparator(String userInput, int escapeIdx) {
-        String separator = userInput.substring(0, escapeIdx);
+    private static List<String> splitWithCustomDelimiter(String userInput) {
+        int customEscapeIndex = getCustomEscapeIndex(userInput);
+        String delimiter = userInput.substring(0, customEscapeIndex);
 
-        if (separator.startsWith("//")) {
-            separator = separator.replace("//", "");
+        if (delimiter.startsWith("//")) {
+            delimiter = delimiter.replace("//", "");
         }
 
-        if (ValidateUtils.isNumeric(separator)) {
+        if (ValidateUtils.isNumeric(delimiter)) {
             throw new IllegalArgumentException(ErrorMessage.CAN_USE_ONLY_STRING.getMessage());
         }
 
-        String leftInput = userInput.substring(escapeIdx + 2);
-        String[] splitInput = leftInput.split(separator);
+        String customSection = userInput.substring(customEscapeIndex + 2);
+        String[] calculationSection = customSection.split(delimiter);
 
-        return Arrays.asList(splitInput);
+        return Arrays.asList(calculationSection);
+    }
+
+    private static int getCustomEscapeIndex(String userInput) {
+        return userInput.indexOf("\\n");
+    }
+
+    private static boolean isUsingCustomDelimiter(String userInput) {
+        int customEscapeIndex = getCustomEscapeIndex(userInput);
+        return customEscapeIndex > 0;
     }
 }
