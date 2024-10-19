@@ -19,21 +19,19 @@ public class Application {
             }
 
             if (input.length() < 4 || input.charAt(3) != '\n') {
-
-                throw new IllegalArgumentException("잘못된 형식의 입력입니다.");
+                throw new IllegalArgumentException("커스텀 구분자 문법이 잘못 입력되었습니다.");
             }
-
+            
             delimiter = String.valueOf(input.charAt(2));
             numbers = input.substring(4);
+
+
         }
 
         String[] tokens = numbers.split(delimiter);
         int sum = 0;
         for (String token : tokens) {
             int num = parseInt(token);
-            if (num < 0) {
-                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + num);
-            }
             sum += num;
         }
         return sum;
@@ -41,11 +39,16 @@ public class Application {
 
     private static int parseInt(String str) {
         try {
-            return Integer.parseInt(str);
+            int num = Integer.parseInt(str);
+            if (num < 0) {
+                throw new IllegalArgumentException("음수는 사용할 수 없습니다");
+            }
+            return num;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("잘못된 숫자 형식입니다: " + str);
+            throw new IllegalArgumentException("잘못된 숫자 형식입니다 : " + str);
         }
     }
+
 
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요:");
