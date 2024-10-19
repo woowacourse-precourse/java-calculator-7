@@ -32,6 +32,12 @@ public class StringCalculator {
         // 문자열 입력
         String input = inputView.getInput();
 
+        // 공백("")인 경우 결과값은 0
+        if(input.isEmpty()){
+            outputView.printResult(0L);
+            return;
+        }
+
         // 구분자 추출, 기존 문자열의 구분자 부분 제거
         DelimiterResult delimiterResult = delimiterExtractor.getDelimiters(input);
 
