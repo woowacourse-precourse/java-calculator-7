@@ -79,12 +79,12 @@ public class Calculator {
     }
 
     private boolean isPositiveNumber(String number) {
-        String regEx = "[0-9]*";
+        String regEx = "\\d*";
         return Pattern.matches(regEx, number);
     }
 
     private void parsePositiveNumbers() {
-        String regEx = "[" + delimiters + "]";
+        String regEx = "[" + Pattern.quote(delimiters) + "]";
         String[] numbers = equation.split(regEx);
 
         for (String number : numbers) {
