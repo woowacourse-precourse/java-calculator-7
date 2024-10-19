@@ -18,12 +18,8 @@ public class Parser {
         String regex = buildDelimiterRegex(preprocessedInput.delimiters());
         String[] splitNumbers = preprocessedInput.unparsedNumber().split(regex);
         for (String splitNumber : splitNumbers) {
-            try {
-                Integer parsedNumber = convertToPositiveIntegerOrThrow(splitNumber);
-                parsedNumbers.add(parsedNumber);
-            } catch (Exception e) {
-                throw new IllegalArgumentException();
-            }
+            Integer parsedNumber = convertToPositiveIntegerOrThrow(splitNumber);
+            parsedNumbers.add(parsedNumber);
         }
         return parsedNumbers;
     }
@@ -31,7 +27,7 @@ public class Parser {
     private Integer convertToPositiveIntegerOrThrow(String number) {
         try {
             int parsedNumber = Integer.parseInt(number);
-            if(parsedNumber < 0) {
+            if (parsedNumber < 0) {
                 throw new IllegalArgumentException();
             }
             return parsedNumber;
