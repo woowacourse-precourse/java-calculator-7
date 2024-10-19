@@ -56,4 +56,19 @@ class SplitServiceTest {
         SplitService splitService = new SplitService();
         assertThrows(IllegalArgumentException.class, () -> splitService.split("//\\n3;4;5"));
     }
+
+    @DisplayName("덧셈 할 문자열 비어있을시 예외")
+    @ParameterizedTest(name = "{displayName}: {0}")
+    @MethodSource("invalidExpression")
+    void checkInvalidExpression(String input) {
+        SplitService splitService = new SplitService();
+        assertThrows(IllegalArgumentException.class, () -> splitService.split(input));
+    }
+
+    static Stream<Arguments> invalidExpression() {
+        return Stream.of(
+                Arguments.of(""),
+                Arguments.of("//;\\n")
+        );
+    }
 }
