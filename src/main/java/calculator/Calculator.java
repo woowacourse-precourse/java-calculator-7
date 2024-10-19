@@ -7,6 +7,7 @@ import java.util.StringTokenizer;
 public class Calculator {
 
     private ArrayList<String> separator;
+    private static final String INVALID_INPUT_MESSAGE = "유효하지 않은 입력값입니다.";
 
     public void addSeparator(String newSeparator) {
         this.separator.add(newSeparator);
@@ -24,9 +25,14 @@ public class Calculator {
                 int separatorEndIdx = inStr.indexOf("\\n");
                 String customSeparator = inStr.substring(2, separatorEndIdx);
                 addSeparator(customSeparator);
+
+                String restStr = inStr.substring(separatorEndIdx + 2);
+                if (restStr.contains("\\n") || restStr.contains("//")) {
+                    throw new IllegalArgumentException(INVALID_INPUT_MESSAGE);
+                }
                 return customSeparator;
             } else {
-                throw new IllegalArgumentException("제대로 입력해");
+                throw new IllegalArgumentException(INVALID_INPUT_MESSAGE);
             }
         }
         return "";
@@ -42,10 +48,10 @@ public class Calculator {
             try {
                 int intValue = Integer.parseInt(str);
                 if (intValue < 0) {
-                    throw new IllegalArgumentException("올바른 값을 입력해주세요");
+                    throw new IllegalArgumentException(INVALID_INPUT_MESSAGE);
                 }
             } catch (Exception e) {
-                throw new IllegalArgumentException("올바른 값을 입력해주세요");
+                throw new IllegalArgumentException(INVALID_INPUT_MESSAGE);
             }
         }
     }

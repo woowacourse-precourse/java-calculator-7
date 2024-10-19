@@ -12,6 +12,5 @@ public class Application {
         String customSeparator = calculator.getCustomSeparator(inStr);
         calculator.inspectConsoleStr(inStr, customSeparator);
         System.out.println("결과 : " + calculator.outputResult(inStr, customSeparator));
-
     }
 }
