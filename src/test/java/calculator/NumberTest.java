@@ -13,7 +13,7 @@ public class NumberTest {
         String testText = "1,2";
         Number number = new Number();
         number.getInputText(testText);
-        assertTrue(number.hasText());
+        assertTrue(number.size() > 0);
     }
     @Test
     @DisplayName("커스텀 구분자가 없이 올바르게 입력된다.")
@@ -21,7 +21,7 @@ public class NumberTest {
         String testText = "1:2:3";
         Number number = new Number();
         number.getInputText(testText);
-        assertTrue(number.hasText());
+        assertTrue(number.size() > 0);
     }
     @Test
     @DisplayName("커스텀 구분자가 없이 올바르게 입력된다.")
@@ -29,7 +29,7 @@ public class NumberTest {
         String testText = "1,2,3:4:5,6:7,8:9";
         Number number = new Number();
         number.getInputText(testText);
-        assertTrue(number.hasText());
+        assertTrue(number.size() > 0);
     }
     @Test
     @DisplayName("커스텀 구분자가 없이 올바르게 입력된다.")
@@ -37,7 +37,7 @@ public class NumberTest {
         String testText = "-3,-4:-5,-6:-7";
         Number number = new Number();
         number.getInputText(testText);
-        assertTrue(number.hasText());
+        assertTrue(number.size() > 0);
     }
     @Test
     @DisplayName("커스텀 구분자가 없이 올바르게 입력된다.")
@@ -45,7 +45,7 @@ public class NumberTest {
         String testText = "2147483647,0";
         Number number = new Number();
         number.getInputText(testText);
-        assertTrue(number.hasText());
+        assertTrue(number.size() > 0);
     }
 
     @Test
@@ -82,7 +82,7 @@ public class NumberTest {
         String testText = "//;\n1,2";
         Number number = new Number();
         number.getInputText(testText);
-        assertTrue(number.hasText());
+        assertTrue(number.size() > 0);
     }
     @Test
     @DisplayName("커스텀 구분자와 함께 올바르게 입력된다.")
@@ -90,7 +90,7 @@ public class NumberTest {
         String testText = "//;\n1,2:3";
         Number number = new Number();
         number.getInputText(testText);
-        assertTrue(number.hasText());
+        assertTrue(number.size() > 0);
     }
     @Test
     @DisplayName("커스텀 구분자와 함께 올바르게 입력된다.")
@@ -98,7 +98,7 @@ public class NumberTest {
         String testText = "//;\n1;2;3;4";
         Number number = new Number();
         number.getInputText(testText);
-        assertTrue(number.hasText());
+        assertTrue(number.size() > 0);
     }
     @Test
     @DisplayName("커스텀 구분자와 함께 올바르게 입력된다.")
@@ -106,7 +106,7 @@ public class NumberTest {
         String testText = "//;?\n1;?2;?3";
         Number number = new Number();
         number.getInputText(testText);
-        assertTrue(number.hasText());
+        assertTrue(number.size() > 0);
     }
     @Test
     @DisplayName("커스텀 구분자와 함께 올바르게 입력된다.")
@@ -114,7 +114,7 @@ public class NumberTest {
         String testText = "//\n\n1\n2\n3";
         Number number = new Number();
         number.getInputText(testText);
-        assertTrue(number.hasText());
+        assertTrue(number.size() > 0);
     }
 
     @Test
@@ -123,7 +123,7 @@ public class NumberTest {
         String testText = "";
         Number number = new Number();
         number.getInputText(testText);
-        assertTrue(number.hasText());
+        assertTrue(number.size() > 0);
     }
     @Test
     @DisplayName("올바르지 않은 입력 값으로, 예외가 발생한다.")

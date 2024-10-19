@@ -5,10 +5,6 @@ import java.util.ArrayList;
 public class Number {
     private ArrayList<Integer> numberList = new ArrayList<>();
 
-    public boolean hasText() {
-        return !numberList.isEmpty();
-    }
-
     public int size() {
         return numberList.size();
     }
