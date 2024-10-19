@@ -1,5 +1,6 @@
 package calculator;
 
+import static calculator.service.exception.SeparationExceptionType.ENDS_WITH_SEPARATOR;
 import static calculator.service.exception.SeparationExceptionType.INVALID_SEPARATOR;
 import static calculator.service.exception.SeparationExceptionType.STARTS_WITH_SEPARATOR;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
@@ -77,11 +78,20 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀_구분자를_사용하고_입력값이_구분자로_시작하는_경우() {
+    void 커스텀_구분자를_사용하고_입력값이_커스텀_구분자로_시작하는_경우() {
         String input = "//&\\n&1&2&3";
         SeparationException exception = assertThrows(SeparationException.class, () -> {
             customSeparationService.getNumbers(input, CUSTOM_SEPARATOR);
         });
         assertEquals(STARTS_WITH_SEPARATOR.message(), exception.getMessage());
+    }
+
+    @Test
+    void 커스텀_구분자를_사용하고_입력값이_커스텀_구분자로_끝나는_경우() {
+        String input = "//&\\n1&2&3&";
+        SeparationException exception = assertThrows(SeparationException.class, () -> {
+            customSeparationService.getNumbers(input, CUSTOM_SEPARATOR);
+        });
+        assertEquals(ENDS_WITH_SEPARATOR.message(), exception.getMessage());
     }
 }
