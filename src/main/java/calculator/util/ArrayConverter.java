@@ -11,7 +11,7 @@ public class ArrayConverter {
 
     private String removeDelimiter(String positiveString, String customDelimiter) {
         positiveString = positiveString.replaceAll(BASE_REGEX, EMPTY);
-        return positiveString.replaceAll(customDelimiter, EMPTY);
+        return positiveString.replace(customDelimiter, EMPTY);
     }
 
     public int[] convertCharArrayToIntArray(char[] chars) {
