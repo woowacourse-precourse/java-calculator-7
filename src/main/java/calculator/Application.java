@@ -65,10 +65,14 @@ public class Application {
 
     private static void validateCustomDelimiters(String[] customDelimiters) {
         for (String delim : customDelimiters) {
-            if (delim.chars().anyMatch(Character::isDigit)) {
+            if (containsDigit(delim)) {
                 throw new IllegalArgumentException("커스텀 구분자에 숫자가 포함될 수 없습니다: " + delim);
             }
         }
+    }
+
+    private static boolean containsDigit(String delim) {
+        return delim.chars().anyMatch(Character::isDigit);
     }
 
     private static String[] getCustomDelimiters(String input, int indexOfEndSign) {
