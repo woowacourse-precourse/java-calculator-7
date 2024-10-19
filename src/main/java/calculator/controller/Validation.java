@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Validation {
 
-    private static final String CUSTOM_DELIMITER_REGEX = "^(//.?\\n).*$";
+    private static final String CUSTOM_DELIMITER_REGEX = "^(//.?\\\\n).*$";
     private static final int ZERO = 0;
 
     public static boolean hasCustomDelimiter(String input) {

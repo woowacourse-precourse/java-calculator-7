@@ -24,7 +24,7 @@ public class ValidationTest {
     @DisplayName("커스텀 구분자가 포함된 입력")
     void hasCustomDelimiter_withCustomDelimiter() {
         // given
-        String testInput = "//;\n1;2;3";
+        String testInput = "//;\\n;2;3";
 
         // when
         boolean actual = Validation.hasCustomDelimiter(testInput);
