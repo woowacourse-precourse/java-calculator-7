@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 
 public class InputHandler {
     private String inputString;
-    private String[] separators = new String[]{",", ":"};
     private String customSeparator = null;
 
     private Vector<Integer> extractedNumbers = new Vector<>();
@@ -47,15 +46,11 @@ public class InputHandler {
         String[] extractedStrings = target.split(regExp);
 
         for (String ext : extractedStrings) {
-            try {
-                int extractedNumber = Integer.parseInt(ext);
-                ErrorHandler.validatePositiveNumber(extractedNumber);
-                extractedNumbers.add(extractedNumber);
+            ErrorHandler.validateOnlyDigits(ext);
+            int extractedNumber = Integer.parseInt(ext);
+            ErrorHandler.validatePositiveNumber(extractedNumber);
+            extractedNumbers.add(extractedNumber);
 
-            } catch (IllegalArgumentException e) {
-                System.out.println(ext);
-                throw new IllegalArgumentException();
-            }
         }
     }
 
