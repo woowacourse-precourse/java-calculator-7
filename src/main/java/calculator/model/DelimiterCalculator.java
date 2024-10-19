@@ -22,6 +22,8 @@ public class DelimiterCalculator {
             throw new IllegalArgumentException(NULL_OR_EMPTY_INPUT);
         }
 
+        input = input.replace(" ", "");
+
         String[] parts = splitInput(input);
 
         return Arrays.stream(parts)
@@ -40,6 +42,11 @@ public class DelimiterCalculator {
         if (input.startsWith("//")) {
             String[] parts = input.split("\\\\n");
             String delimiter = parts[0].substring(2);
+
+            if (delimiter.length() > 1) {
+                delimiter = "[" + delimiter + "]";
+            }
+
             return parts[1].split(delimiter);
         }
 
