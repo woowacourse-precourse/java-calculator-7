@@ -35,19 +35,15 @@ public class Application {
         return answer;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalArgumentException {
         Application app = new Application();
         String str = Console.readLine();
-        try {
-            if(str.startsWith("//")) {
-                System.out.println("결과 : " + app.custom(str));
-            } else if(str.isEmpty()) {
-                System.out.println("결과 : 0");
-            } else {
-                System.out.println("결과 : " + app.separate(str));
-            }
-        } catch (IllegalArgumentException e) {
-            return;
+        if(str.startsWith("//")) {
+            System.out.println("결과 : " + app.custom(str));
+        } else if(str.isEmpty()) {
+            System.out.println("결과 : 0");
+        } else {
+            System.out.println("결과 : " + app.separate(str));
         }
     }
 }
