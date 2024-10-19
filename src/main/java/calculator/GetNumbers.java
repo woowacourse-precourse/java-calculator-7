@@ -13,9 +13,12 @@ public class GetNumbers {
 
         // 커스텀 구분자인지 확인
         if (input.startsWith("//")) {
-            int delimiterEndIndex = input.indexOf("\n"); //
-            customDelimiter = input.substring(2, delimiterEndIndex); //
-            numbersPart = input.substring(delimiterEndIndex + 2); //
+            int delimiterEndIndex = input.indexOf("\n");
+            if (delimiterEndIndex == -1) {
+                delimiterEndIndex = input.indexOf("\\n"); // 문자 그대로의 '\n' 처리
+            }
+            customDelimiter = input.substring(2, delimiterEndIndex);
+            numbersPart = input.substring(delimiterEndIndex + 2);
 
             // 로그 출력
             System.out.println("Custom delimiter: " + customDelimiter);
