@@ -18,13 +18,13 @@ public class IntegrationTest {
         operator.inputView = new InputView() {
             @Override
             public String input() {
-                return "//;\n1;2";
+                return "//;\\n1;2";
             }
         };
 
         // 예시 데이터 테스트
         String input = operator.inputView.input();
-        assertEquals("//;\n1;2", input);
+        assertEquals("//;\\n1;2", input);
         // 실제 동작 수행 및 결과 확인 필요 (다음 과정에서)
     }
 

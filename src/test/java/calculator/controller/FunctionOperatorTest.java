@@ -24,7 +24,7 @@ public class FunctionOperatorTest {
         operator.preprocessing = preprocessing;
         operator.addition = addition;
 
-        String input = "//;\n1;2";
+        String input = "//;\\n1;2";
         List<String> separated = Arrays.asList("1", ";", "2");
 
         // 첫 글자가 '/'로 시작하는 커스텀 구분자

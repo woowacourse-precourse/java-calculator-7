@@ -60,7 +60,7 @@ public class InputValidatorTest {
     @Test
     void testCustomValidator_valid() {
         InputValidator validator = new InputValidator();
-        String separator = validator.customValidator("//;\n1;2");
+        String separator = validator.customValidator("//;\\n1;2");
         assertEquals(";", separator);
     }
 
@@ -76,7 +76,7 @@ public class InputValidatorTest {
     void testCustomValidator_invalidContent() {
         InputValidator validator = new InputValidator();
         assertThrows(IllegalArgumentException.class, () ->
-                validator.customValidator("//1\n1;2")
+                validator.customValidator("//1\\n1;2")
         );
     }
 }

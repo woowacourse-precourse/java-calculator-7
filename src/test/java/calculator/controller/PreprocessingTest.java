@@ -11,7 +11,7 @@ public class PreprocessingTest {
     @Test
     void testFirstLetter_withCustomSeparator() {
         Preprocessing preprocessing = new Preprocessing();
-        assertTrue(preprocessing.firstLetter("//;\n1;2"));
+        assertTrue(preprocessing.firstLetter("//;\\n1;2"));
     }
 
     @Test
@@ -30,7 +30,7 @@ public class PreprocessingTest {
     @Test
     void testFindCustomSeparator() {
         Preprocessing preprocessing = new Preprocessing();
-        List<String> result = preprocessing.findCustomSeparator("//;\n1;2");
+        List<String> result = preprocessing.findCustomSeparator("//;\\n1;2");
         assertEquals(Arrays.asList(";", "1;2"), result);
     }
 }
