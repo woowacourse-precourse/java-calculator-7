@@ -13,7 +13,7 @@ public class Application {
         }
         int sumResult = delimiterService.sendMessage(input);
         if(sumResult != 0) {
-            System.out.println("결과: " + sumResult);
+            System.out.println("결과 : " + sumResult);
         }
 
     }

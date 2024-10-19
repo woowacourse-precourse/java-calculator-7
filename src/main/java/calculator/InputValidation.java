@@ -25,7 +25,7 @@ public class InputValidation { // 입력의 유효성을 확인하는 클래스�
 
     //Input 자체의 유효성을 확인하는 메서드이다.
     public static String CheckInput(String input, String customDelimiter) {
-        String delimiter = "[,:";  // 기본 구분자 처리
+        String delimiter = "[, :";  // 기본 구분자 처리
         if (customDelimiter != null && !customDelimiter.isBlank()) {
             delimiter += customDelimiter; // 커스텀 구분자가 존재했으면 이를 포함하여 검사한다.
         }
@@ -44,7 +44,7 @@ public class InputValidation { // 입력의 유효성을 확인하는 클래스�
         try {
             int number = Integer.parseInt(buffer); // 입력이 숫자가 아니라면 예외를 터뜨린다.
             if (number < 0) { // 음수인지 확인
-                throw new IllegalArgumentException("유효하지 않은 입력입니다: 음수는 허용되지 않습니다.");
+                throw new IllegalArgumentException("유효하지 않은 입력입니다. 음수는 허용되지 않습니다.");
                 }
             } catch (NumberFormatException e) {
             throw new NumberFormatException("유효하지 않은 입력입니다.");
