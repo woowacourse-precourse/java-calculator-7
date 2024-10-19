@@ -15,7 +15,7 @@ class CalculatorUtilTest {
     void extractDelimiter() {
         // when
         List<String> delimiterResult = CalculatorUtil.extractDelimiter("1:2,2");
-        List<String> customDelimiterResult = CalculatorUtil.extractDelimiter("//+\n1+2:2");
+        List<String> customDelimiterResult = CalculatorUtil.extractDelimiter("//+\\n1+2:2");
 
         // then
         assertTrue(delimiterResult.contains(","));

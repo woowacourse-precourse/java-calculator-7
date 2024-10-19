@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class CalculatorUtil {
-    private static final String CUSTOM_DELIMITER_REGEX = "^//(.*?)\\n";
+    private static final String CUSTOM_DELIMITER_REGEX = "^//(.*?)\\\\n";
 
     private CalculatorUtil() {};
 
@@ -20,7 +20,6 @@ public class CalculatorUtil {
         if (inputValue.contains(",")) delimiters.add(",");
 
         if (inputValue.contains(":")) delimiters.add(":");
-
         if (matcher.find()) {
             String[] customDelimiters = matcher.group(1).split("\\|");
 
@@ -44,6 +43,14 @@ public class CalculatorUtil {
 
     public static String formattingString(String inputValue) {
         return inputValue.replaceAll(CUSTOM_DELIMITER_REGEX, "");
+    }
+
+    public static boolean isValidInput(String inputValue) {
+        if (!isOnlyOneCustomDeclare(inputValue)) throw new IllegalArgumentException();
+
+        if(isContainInvalidChar(inputValue)) throw new IllegalArgumentException();
+
+        return true;
     }
 
     public static Boolean isOnlyOneCustomDeclare(String inputValue) {
