@@ -11,16 +11,8 @@ public class Application {
         String inputStr = getInput();
 
         // 입력한 문자열에서 기본 구분자, 커스텀 구분자 찾아내기
-        String customPolymerPattern = "//[^\\w\\s]";
+        String customPolymer = findCustomPolymer(inputStr);
         String basicPolymerList = "[,:]";
-        String customPolymer = "";
-
-        Pattern pattern = Pattern.compile(customPolymerPattern);
-        Matcher matcher = pattern.matcher(inputStr);
-
-        if(matcher.find() && inputStr.substring(3,5).equals("\\n")){
-            customPolymer = inputStr.substring(2,3);
-        }
 
         // 기본 구분자 리스트에 커스텀 구분자 추가하기
         String customPolymerList = "";
@@ -81,4 +73,21 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         return Console.readLine();
     }
+
+    // 입력한 문자열에서 기본 구분자, 커스텀 구분자 찾아내기
+    private static String findCustomPolymer(String inputStr){
+        String customPolymerPattern = "//[^\\w\\s]";
+
+        String customPolymer = "";
+
+        Pattern pattern = Pattern.compile(customPolymerPattern);
+        Matcher matcher = pattern.matcher(inputStr);
+
+        if(matcher.find() && inputStr.substring(3,5).equals("\\n")){
+            customPolymer = inputStr.substring(2,3);
+        }
+
+        return customPolymer;
+    }
+
 }
