@@ -188,16 +188,22 @@ public class NumberInputHandlerTest {
         new NumberInputHandler(new InputTest(s4)).receive(Sentence::new);
     }
     @Test
-    @DisplayName("커스텀 구분자")
-    void customSeparatorTest() {
-        String s = "//s\\n1s2s3";
-        String s2 = "////s\\n\\n1//s\\n2//s\\n3";
-        String s3 = "//test\\n1test2test3";
-        String s4 = "//;\\n1;2;3";
+    @DisplayName("커스텀 구분자 문자열")
+    void customSeparatorStringTest() {
+        String s = "////s\\n\\n1//s\\n2//s\\n3";
+        String s2 = "//test\\n1test2test3";
+
         new NumberInputHandler(new InputTest(s)).receive(Sentence::new);
         new NumberInputHandler(new InputTest(s2)).receive(Sentence::new);
-        new NumberInputHandler(new InputTest(s3)).receive(Sentence::new);
-        new NumberInputHandler(new InputTest(s4)).receive(Sentence::new);
+    }
+    @Test
+    @DisplayName("커스텀 구분자 문자")
+    void customSeparatorChar() {
+        String s = "//s\\n1s2s3";
+        String s2 = "//;\\n1;2;3";
+
+        new NumberInputHandler(new InputTest(s)).receive(Sentence::new);
+        new NumberInputHandler(new InputTest(s2)).receive(Sentence::new);
     }
 
 
