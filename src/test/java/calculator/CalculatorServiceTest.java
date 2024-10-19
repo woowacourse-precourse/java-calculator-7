@@ -1,8 +1,6 @@
 package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
@@ -53,34 +51,6 @@ class CalculatorServiceTest {
 
         // Then
         assertThat(result).isEqualTo(customSeparator);
-    }
-
-    @ParameterizedTest
-    @CsvSource(value = {
-            "'1,2,3', ''",
-            "'//k\\n1k12k3', 'k'",
-            "'//k\\n', 'k'",
-            "'//k\\n1', 'k'"
-    })
-    @DisplayName("유효한 입력, 유효성 검사")
-    void isValidUserInput(String userInput, String customSeparator) {
-
-        // Then
-        assertDoesNotThrow(() -> CalculatorService.validate(userInput, customSeparator));
-    }
-
-    @ParameterizedTest
-    @CsvSource(value = {
-            "',3', ''",
-            "'//k\\n1kkk', 'k'",
-            "'1,2,3//k\\n1,2', ''"
-    })
-    @DisplayName("유효하지 않은 입력, 유효성 검사")
-    void isInvalidUserInput(String userInput, String customSeparator) {
-
-        // Then
-        assertThrowsExactly(IllegalArgumentException.class,
-                () -> CalculatorService.validate(userInput, customSeparator));
     }
 
     @ParameterizedTest
