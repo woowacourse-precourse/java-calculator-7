@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
@@ -23,6 +24,14 @@ class ApplicationTest extends NsTest {
                 .isInstanceOf(IllegalArgumentException.class)
         );
     }
+
+    @Test
+    @DisplayName("빈 문자열 입력 시 0을 반환해야한다.")
+    void should_returnZero_when_inputIsEmpty() {
+        int result = Application.calculateSum("");
+        assertThat(result).isEqualTo(0);
+    }
+
 
     @Override
     public void runMain() {
