@@ -2,6 +2,7 @@ package calculator.object;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class SeparatorsTest {
@@ -34,6 +35,12 @@ class SeparatorsTest {
     void contains로_지정한커스텀구분자를_찾을수없으면_false_확인할수있다() {
         Separators actual = new Separators("//*\\n1234");
         assertThat(actual.contains('!')).isFalse();
+    }
+
+    @Test
+    void 생성시_널파라미터를_넘기면_예외발생한다() {
+        Assertions.assertThatThrownBy(() -> new Separators(null))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
 }
