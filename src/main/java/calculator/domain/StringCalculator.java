@@ -2,8 +2,7 @@ package calculator.domain;
 
 public class StringCalculator {
 
-    public int calculate(String input) {
-        InputString inputString = new InputString(input);
+    public int calculate(InputString inputString) {
         Delimiters delimiters = new Delimiters(inputString.extractCustomDelimiter());
 
         return inputString

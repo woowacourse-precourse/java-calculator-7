@@ -3,9 +3,9 @@ package calculator.domain;
 public class CustomDelimiter {
     private final String value;
 
-    public CustomDelimiter(String customDelimiterString) {
-        validateCustomDelimiterLength(customDelimiterString);
-        this.value = customDelimiterString;
+    public CustomDelimiter(String value) {
+        validateCustomDelimiterLength(value);
+        this.value = value;
     }
 
     public String getValue() {
