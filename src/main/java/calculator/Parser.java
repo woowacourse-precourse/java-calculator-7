@@ -11,12 +11,12 @@ public class Parser {
     public static String startsWithCustomDelimiter(String customDelimiter, String input) {
         delimiters+="|"+customDelimiter;
         parseInputBasedOnDelimiter(input);
-        return new StringBuilder().append(result).toString();
+        return String.valueOf(result);
     }
 
     public static String startsWithPositiveNumber(String input) {
         parseInputBasedOnDelimiter(input);
-        return new StringBuilder().append(result).toString();
+        return String.valueOf(result);
     }
 
     private static void parseInputBasedOnDelimiter(String input) {

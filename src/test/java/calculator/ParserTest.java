@@ -11,8 +11,8 @@ class ParserTest {
     @Test
     void statrsWithCustomDelimiter() {
         //given
-        String input="1,2:3.4";
-        String customDelimiter="\\.";
+        String input="1,2:3)4";
+        String customDelimiter="\\)";
         int result = 10;
         //when
         Parser.startsWithCustomDelimiter(customDelimiter,input);

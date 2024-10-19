@@ -1,14 +1,13 @@
 package calculator;
 
 import static calculator.CustomDelimiter.customDelimiter;
-import static calculator.Parser.*;
 
 public class InputValidator {
-    private static String result = "";
     public static String validate(String input) {
 
         // 커스텀 구분자로 시작할 경우 커스텀 구분자 관련 호출 진행 (추출후 이후 문자열 검사.)
         // todo: 커스텀 구분자 로직 진행
+        String result = "";
         if (validateStartsWithDelimiter(input)) {
             result = CustomDelimiter.extractCustomDelimiter(input);
             return Parser.startsWithCustomDelimiter(customDelimiter, result);
@@ -17,7 +16,7 @@ public class InputValidator {
         // 빈 문자열 처리
         // todo : 빈 문자열 입력시 0 반환
         if (validateEmpty(input)) {
-            return result="0";
+            return result ="0";
         }
 
 
