@@ -10,7 +10,7 @@ public class Application {
             String input = Console.readLine();
             int result = Calculator.calculate(input);
 
-            System.out.println(result);
+            System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.out.println("오류: " + e.getMessage());
         }

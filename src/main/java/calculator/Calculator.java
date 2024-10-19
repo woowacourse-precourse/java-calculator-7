@@ -18,7 +18,7 @@ public class Calculator {
 
                 result += validatedNumber;
             } catch (NumberFormatException e) {
-                Validator.use("커스텀 구분자를 설정할 수 없거나 유효하지 않은 숫자입니다.");
+                Validator.use();
             }
         }
 
