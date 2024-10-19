@@ -8,15 +8,19 @@ public class Separator {
     private String customSeparator = null;
 
     public Separator(String inputValue) {
-        String customSeparator = getCustomSeparator(inputValue);
-        setCustomSeparator(customSeparator);
+        setCustomSeparator(inputValue);
     }
 
-    private void setCustomSeparator(String customSeparator) {
-        if (customSeparator != null) {
+    public void setCustomSeparator(String inputValue) {
+        if (hasCustomSeparator(inputValue)) {
+            String customSeparator = getCustomSeparator(inputValue);
             validate(customSeparator);
             this.customSeparator = escapeSeparator(customSeparator);
         }
+    }
+
+    private Boolean hasCustomSeparator(String inputValue) {
+        return inputValue.startsWith("//") && inputValue.indexOf("\\n") >= 2;
     }
 
     private void validate(String customSeparator) {
@@ -40,10 +44,7 @@ public class Separator {
     }
 
     private String getCustomSeparator(String inputValue) {
-        if (inputValue.startsWith("//")) {
-            return inputValue.substring(2, inputValue.indexOf("\\n"));
-        }
-        return "";
+        return inputValue.substring(2, inputValue.indexOf("\\n"));
     }
 
     public String[] splitBySeparator(String inputValue) {

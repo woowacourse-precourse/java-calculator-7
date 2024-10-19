@@ -33,7 +33,7 @@ public class SeparatorTest {
 
     @DisplayName("구분자 입력 실패 : 숫자 입력")
     @ParameterizedTest
-    @ValueSource(strings = {"//3\\n"})
+    @ValueSource(strings = {"//1\\n"})
     void validateLetterTest(String inputs) {
         //given
 

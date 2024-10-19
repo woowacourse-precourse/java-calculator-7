@@ -12,7 +12,6 @@ public class Operand {
         this.operand = operand;
     }
 
-
     private int parseToInt(String element) {
         try {
             return Integer.parseInt(element);
