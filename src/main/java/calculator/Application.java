@@ -47,6 +47,8 @@ public class Application {
 
             String[] customDelimiters = getCustomDelimiters(input, indexOfEndSign);
 
+            validateCustomDelimiters(customDelimiters);
+
             appendCustomDelimiters(delimiterPart, customDelimiters);
 
             numberPart = getNumberPart(input, indexOfEndSign);
@@ -59,6 +61,14 @@ public class Application {
         validateNoNegativeNumbers(parsedNumbers); // 음수 있으면 예외 발생 (3.8 예외)
 
         return add(parsedNumbers);
+    }
+
+    private static void validateCustomDelimiters(String[] customDelimiters) {
+        for (String delim : customDelimiters) {
+            if (Character.isDigit(delim.charAt(0))) {
+                throw new IllegalArgumentException("커스텀 구분자에 숫자가 포함될 수 없습니다: " + delim);
+            }
+        }
     }
 
     private static String[] getCustomDelimiters(String input, int indexOfEndSign) {
