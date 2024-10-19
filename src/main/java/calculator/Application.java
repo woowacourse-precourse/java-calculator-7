@@ -15,10 +15,9 @@ public class Application {
     public static void main(String[] args) {
         String inputString = readLine();
 
-        extractDelimiter(inputString).forEach(
-                calculatorService::addSeparator);
+        List<String> customDelimiters = DelimiterUtil.getCustomSeparators(extractDelimiter(inputString));
 
-        System.out.println("결과 : " +calculatorService.calculate(extractCommand(inputString)));
+        System.out.println("결과 : " +calculatorService.calculate(extractCommand(inputString), customDelimiters));
     }
 
     private static List<String> extractDelimiter(String inputString) {
