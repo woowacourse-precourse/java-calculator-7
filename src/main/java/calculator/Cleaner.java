@@ -9,23 +9,31 @@ public class Cleaner {
 
     public String refineString() {
         String inputString = stringData.getInputString();
+        boolean hasNumberString = true;
+
         if (inputString.length() == 5) {
-            return "";
+            hasNumberString = false;
+            inputString = "";
         }
-        return inputString.substring(5);
+        if (hasNumberString) {
+            inputString = inputString.substring(5);
+        }
+        return inputString;
     }
 
     public String refineSeparator() {
         String separator = stringData.getSeparator();
-        String regexSpecialChars = ".^$*+?()[]{}|\\";
-        boolean isRegexSpecialSeparator = regexSpecialChars.contains(separator);
-        if (!isRegexSpecialSeparator) {
-            return separator;
-        }
+        String specialRegexes = ".^$*+?()[]{}|\\";
+        boolean isSpecialRegexSeparator = specialRegexes.contains(separator);
 
-        StringBuilder refinedSeparator = new StringBuilder();
-        refinedSeparator.append("\\");
-        refinedSeparator.append(separator);
-        return refinedSeparator.toString();
+        if (isSpecialRegexSeparator) {
+            StringBuilder refinedSeparator = new StringBuilder();
+            
+            refinedSeparator.append("\\");
+            refinedSeparator.append(separator);
+
+            separator = refinedSeparator.toString();
+        }
+        return separator;
     }
 }
