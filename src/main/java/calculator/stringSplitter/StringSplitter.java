@@ -12,6 +12,9 @@ public class StringSplitter {
         separator.add(",");
         separator.add(":");
         String number = input;
+        if(!Character.isDigit(input.charAt(input.length()-1))){
+            throw new IllegalArgumentException("마지막은 숫자로 입력해주세요");
+        }
         if(input.startsWith("//")){
             int endPoint = input.lastIndexOf("\\n");
             if(endPoint == -1){
