@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class PositiveNumberTest {
 
-    @ValueSource(strings = {"0", "999999999999999"})
+    @ValueSource(strings = {"", "0", "1", "999999999999999"})
     @ParameterizedTest(name = "\"{0}\"은 15자리 이하의 양수")
     @DisplayName("양수 생성 성공: 15자리 이하의 양수")
     void 양수_생성_성공(String number) {

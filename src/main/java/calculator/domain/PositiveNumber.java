@@ -5,11 +5,15 @@ import java.util.Objects;
 
 public class PositiveNumber {
 
-    private static final int MIN_LENGTH_THRESHOLD = 1;
     private static final int MAX_LENGTH_THRESHOLD = 15;
+    private static final String DEFAULT_NUMBER = "0";
     private static final String MINUS_SIGN = "-";
 
     private final BigInteger value;
+
+    private PositiveNumber() {
+        this.value = BigInteger.ZERO;
+    }
 
     private PositiveNumber(final String number) {
         this.value = new BigInteger(number);
@@ -17,6 +21,9 @@ public class PositiveNumber {
 
     public static PositiveNumber from(final String number) {
         validate(number);
+        if (isDefault(number)) {
+            return new PositiveNumber();
+        }
         return new PositiveNumber(number);
     }
 
@@ -24,6 +31,10 @@ public class PositiveNumber {
         validatePositive(number);
         validateOnlyDigits(number);
         validateLength(number);
+    }
+
+    private static boolean isDefault(final String number) {
+        return DEFAULT_NUMBER.equals(number) || number.isEmpty();
     }
 
     private static void validatePositive(final String number) {
@@ -54,7 +65,7 @@ public class PositiveNumber {
     }
 
     private static boolean isOutOfRange(final int numberDigit) {
-        return MIN_LENGTH_THRESHOLD > numberDigit || MAX_LENGTH_THRESHOLD < numberDigit;
+        return MAX_LENGTH_THRESHOLD < numberDigit;
     }
 
     @Override
