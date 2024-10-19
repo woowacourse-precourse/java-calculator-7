@@ -22,6 +22,28 @@ public class Executor {
 	}
 
 	/**
+	 * 프로그램 실행
+	 */
+	public void executeApplication() {
+		String inputStr = ioController.enter();
+
+		if (parser.isPersonalSeparatorExist(inputStr)) {
+			parser.savePersonalSeparator(String.valueOf(inputStr.charAt(2)));
+			inputStr = inputStr.substring(5);
+		}
+
+		String[] splitStr = parser.parseBySeparator(inputStr);
+		checkSeparatorErrors(splitStr);
+
+		List<Integer> nums = parser.stringToNums(splitStr);
+		checkPositiveNumbers(nums);
+
+		calculator.addNums(nums);
+
+		ioController.print(calculator.getTotalSum());
+	}
+
+	/**
 	 * 구분자 에러 확인
 	 *
 	 * @param splitStr
