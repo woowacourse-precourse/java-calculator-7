@@ -3,19 +3,19 @@ package calculator.processor;
 import calculator.common.Request;
 import calculator.common.Response;
 import calculator.processor.handler.calculating.CalculatingHandler;
+import calculator.processor.handler.calculating.HandlerFactory;
 import calculator.processor.handler.exception.ExceptionHandler;
 import calculator.processor.handleradapter.HandlerAdapter;
 import calculator.processor.handleradapter.HandlerAdapters;
-import calculator.processor.handlermapping.HandlerMappings;
 
 public class Processor {
 
-    private final HandlerMappings handlerMappings;
+    private final HandlerFactory handlerFactory;
     private final HandlerAdapters handlerAdapters;
     private final ExceptionHandler exceptionHandler;
 
     public Processor() {
-        handlerMappings = new HandlerMappings();
+        handlerFactory = new HandlerFactory();
         handlerAdapters = new HandlerAdapters();
         exceptionHandler = new ExceptionHandler();
     }
@@ -36,7 +36,7 @@ public class Processor {
     }
 
     private CalculatingHandler getHandler(Request request) {
-        return handlerMappings.getHandler(request);
+        return handlerFactory.getHandler(request);
     }
 
     private HandlerAdapter getHandlerAdapter(Request request) {
