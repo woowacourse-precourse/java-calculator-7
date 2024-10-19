@@ -26,16 +26,17 @@ public class Application {
 
         int sum;
         int[] numbers;
-        String delimiter = ",|:";
+        String delimiter = ",|:";  // 기본 구분자
 
         // 커스텀 구분자가 있는지 확인하고 처리
         if (checkCustomDelimiter(input)) {
-            delimiter = addCustomDelimiter(input);
+            delimiter += "|" + addCustomDelimiter(input);  // 기본 구분자에 커스텀 구분자 추가
         }
 
+        // 문자열을 구분자로 분리하여 숫자 배열 추출
         numbers = extractNumbers(input, delimiter);
-        sum = Arrays.stream(numbers).sum();
-        return sum;
+        sum = Arrays.stream(numbers).sum();  // 숫자들 합 계산
+        return sum;  // 합 반환
     }
 
 
