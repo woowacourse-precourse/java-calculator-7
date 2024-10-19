@@ -22,7 +22,7 @@ public final class CalculatorController {
     public String readUserInput() {
         String userInput;
 
-        userInput = calculatorView.getUserInput();
+        userInput = calculatorView.getUserInput().trim();
 
         return userInput;
     }
