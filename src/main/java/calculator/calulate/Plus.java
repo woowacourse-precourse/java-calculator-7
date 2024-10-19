@@ -10,7 +10,7 @@ public class Plus {
 
         try {
             result = String.valueOf(getResultForInteger(numbers));
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | ArithmeticException e) {
             result = getResultForBigInteger(numbers).toString();
         }
 
