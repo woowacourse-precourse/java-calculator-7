@@ -3,6 +3,9 @@ package calculator.model;
 import java.util.regex.Pattern;
 
 public class Calculator {
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_CUSTOM_SEPARATOR_LENGTH = 1;
+
     public static int add(String input) {
 
         String separator = "[,:]"; // 기본 구분자: 쉼표와 콜론
@@ -22,7 +25,7 @@ public class Calculator {
                 // '//' 뒤부터 '\\n' 앞까지의 문자를 구분자로 사용
                 String customSeparator = input.substring(input.indexOf("//") + 2, separatorIndex);
 
-                if (customSeparator.length() > 1) {
+                if (customSeparator.length() > MAX_CUSTOM_SEPARATOR_LENGTH) {
                     throw new IllegalArgumentException("커스텀 구분자는 한 글자만 가능합니다.");
                 }
                 if (Pattern.matches("\\d", customSeparator)) {
@@ -53,7 +56,7 @@ public class Calculator {
             if (!number.trim().isEmpty()) {
                 try {
                     int num = Integer.parseInt(number.trim());
-                    if (num <= 0) {
+                    if (num < MIN_NUMBER) {
                         throw new IllegalArgumentException("숫자는 1 이상의 양수여야 합니다.");
                     }
                     sum += num;
