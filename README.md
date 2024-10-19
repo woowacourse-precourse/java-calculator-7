@@ -32,7 +32,7 @@
 
 ## Constants Class
 
-- [ ] 커스텀 문자 지정 심볼 추가
+- [x] 커스텀 문자 지정 심볼 추가
 
 ## Calculator Class
 
