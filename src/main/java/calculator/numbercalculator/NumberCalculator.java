@@ -17,9 +17,14 @@ public class NumberCalculator {
     }
 
     public void run() {
-        String userInput = inputHandler.getUserInput();
+        String userInput = getUserInput();
         Numbers numbers = numberExtractor.extractNumbers(userInput);
         BigInteger result = numbers.calculateTotalValue();
         outputHandler.showCalculateResult(result);
+    }
+
+    private String getUserInput() {
+        outputHandler.showAdditionComment();
+        return inputHandler.getUserInput();
     }
 }

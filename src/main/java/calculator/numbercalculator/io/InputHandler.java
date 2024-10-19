@@ -6,7 +6,6 @@ public class InputHandler {
     private static final int MAX_INPUT_LENGTH = 100;
 
     public String getUserInput() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
         validateInputLength(input);
         return input;
