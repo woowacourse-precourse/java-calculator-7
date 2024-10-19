@@ -33,7 +33,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 기본_입력_예외_테스트_1() {
+    void 기본_입력_예외_테스트() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("/1,2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
@@ -41,7 +41,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 기본_구분자_사용_예외_테스트_1() {
+    void 기본_구분자_사용_예외_테스트_a() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1, 2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
@@ -49,9 +49,57 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 기본_구분자_사용_예외_테스트_2() {
+    void 기본_구분자_사용_예외_테스트_b() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1,2:"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_사용_예외_테스트_a() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//,\n1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_사용_예외_테스트_b() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\\n1;2;"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_사용_예외_테스트_c() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//9\\n1;2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_사용_예외_테스트_d() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//\\n1;2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_사용_예외_테스트_e() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;;\\n1;2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_사용_예외_테스트_f() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\\n1;2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
