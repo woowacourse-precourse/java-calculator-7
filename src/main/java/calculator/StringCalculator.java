@@ -16,13 +16,13 @@ public class StringCalculator {
             return 0;
         }
         if(input.startsWith("//")){
-            int delimiterIndex = input.indexOf("\n");
+            int delimiterIndex = input.indexOf("\\n");
             if(delimiterIndex == -1) {
                 throw new IllegalArgumentException("잘못된 입력입니다");
             }
-            String CustomDelimiter = input.substring(2,delimiterIndex);
-            this.delimiter = new CustomDelimiter(CustomDelimiter);
-            input = input.substring(delimiterIndex+1);
+            String customDelimiter = input.substring(2,delimiterIndex);
+            this.delimiter = new CustomDelimiter(customDelimiter);
+            input = input.substring(delimiterIndex+2);
         }
         String[] tokens = delimiter.split(input);
         return sumNumbers(tokens);
