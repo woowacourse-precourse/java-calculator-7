@@ -37,6 +37,12 @@ public class Application {
      */
     private static Set<Character> extractDelimiter(String inputValue) {
         Set<Character> delimiterSet = new HashSet<>();
+
+        // 기본 구분자를 Set에 미리 추가합니다.
+        for (char defaultDelimiter : DEFAULT_DELIMITERS) {
+            delimiterSet.add(defaultDelimiter);
+        }
+
         int startIdx = inputValue.indexOf(START_DELIMITER);
         int endIdx = inputValue.indexOf(END_DELIMITER);
 
@@ -62,10 +68,6 @@ public class Application {
             if (Character.isDigit(delimiter)) {
                 throw new IllegalArgumentException("올바르지 않는 형식의 문자열 입력입니다.");
             } else delimiterSet.add(delimiter);
-        }
-
-        for (char defaultDelimiter : DEFAULT_DELIMITERS) {
-            delimiterSet.add(defaultDelimiter);
         }
 
         return delimiterSet;
@@ -100,4 +102,6 @@ public class Application {
 
         return result;
     }
+
+
 }
