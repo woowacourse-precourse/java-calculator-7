@@ -17,13 +17,13 @@ public class StringCalculator {
 	}
 
 	private static String[] splitWithCustomSplitter(String input){
-		int splitterFindEndIndex = input.indexOf("\\n");
-		String customSplitter = input.substring(SPLITTER_FIND_START_INDEX, splitterFindEndIndex);
-		String inputSubString = input.substring(splitterFindEndIndex + 2);
+		final int splitterFindEndIndex = input.indexOf("\\n");
+		final String customSplitter = input.substring(SPLITTER_FIND_START_INDEX, splitterFindEndIndex);
+		final String inputSubString = input.substring(splitterFindEndIndex + 2);
 		return inputSubString.split(customSplitter);
 	}
 
-	private static void validateSplitNumber(int splitNum){
+	private static void validateSplitNumber(final int splitNum){
 		if (splitNum <= 0) {
 			throw new IllegalArgumentException();
 		}
@@ -32,7 +32,7 @@ public class StringCalculator {
 	private static int calculateSum(String[] splitString) {
 		int sum = 0;
 		for (String s : splitString) {
-			int splitNum = Integer.parseInt(s);
+			final int splitNum = Integer.parseInt(s);
 			validateSplitNumber(splitNum);
 			sum += splitNum;
 		}
