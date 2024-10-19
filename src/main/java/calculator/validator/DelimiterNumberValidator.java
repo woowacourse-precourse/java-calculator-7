@@ -7,6 +7,8 @@ import java.util.Arrays;
 
 public class DelimiterNumberValidator {
 
+    private static final int MINIMUM_ALLOWED_NUMBER = 0;
+
     public int[] isValidNumber(String[] number) {
         return Arrays.stream(number)
                 .mapToInt(this::parseNumber)
@@ -23,7 +25,7 @@ public class DelimiterNumberValidator {
     }
 
     private void validatePositiveNumber(int parseInt) {
-        if (parseInt < 0) {
+        if (parseInt < MINIMUM_ALLOWED_NUMBER) {
             throw new IllegalArgumentException(ErrorMessage.NEGATIVE_NUMBER_NOT_ALLOWED.getMessage());
         }
     }
