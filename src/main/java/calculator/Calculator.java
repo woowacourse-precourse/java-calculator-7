@@ -81,11 +81,12 @@ public class Calculator implements AutoCloseable {
             customDelimiter = Character.toString(targetStringBuilder.charAt(CUSTOM_DELIMITER));
             // DelimiterManager 인스턴스에 customDelimiter 전달
             delimiterManager.addDelimiter(customDelimiter);
-            // targetStringBuilder의 customDelimiter까지 제거
+            // targetStringBuilder의 customDelimiter 제거
             targetStringBuilder.deleteCharAt(CUSTOM_DELIMITER);
             String stringWithSuffix = targetStringBuilder.toString();
-            if (stringWithSuffix.startsWith("\n")) {
-                targetStringBuilder.delete(0, DELIMITER_PREFIX.length());
+            // Delimiter suffix를 제거. 만약 suffix가 없다면 유효하지 않은 문자열 예외 발생
+            if (stringWithSuffix.startsWith(DELIMITER_SUFFIX)) {
+                targetStringBuilder.delete(0, DELIMITER_SUFFIX.length());
             } else {
                 throw new IllegalArgumentException("Invalid string: missing custom delimiter suffix.");
             }
