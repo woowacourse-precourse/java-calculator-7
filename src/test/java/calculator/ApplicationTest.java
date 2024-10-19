@@ -33,6 +33,30 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 비정상적인_쉼표() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException(",,,,,1,1,1,1,1"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
+    void 비정상적인_쉼표2() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("1,1,1,1,1,,,,,"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
+    void 비정상적_구분자의_돌돌이() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException(",:,:,:,:,:,:"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
     void 숫자_한개() {
         assertSimpleTest(() -> {
             run("1");
@@ -45,6 +69,22 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("");
             assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 빈_문자2() {
+        assertSimpleTest(() -> {
+            run("//;\\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 가짜_커스텀_구분자() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//?\\b1"))
+                    .isInstanceOf(IllegalArgumentException.class);
         });
     }
 
