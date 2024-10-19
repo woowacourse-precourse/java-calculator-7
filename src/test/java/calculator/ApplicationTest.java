@@ -35,7 +35,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 일반_구분자_사용2() {
         assertSimpleTest(() -> {
-            run("3,15;3");
+            run("3,15:3");
             assertThat(output()).contains("결과 : 21");
         });
     }
@@ -43,7 +43,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 일반_구분자_사용3() {
         assertSimpleTest(() -> {
-            run("21;1,2");
+            run("21:1,2");
             assertThat(output()).contains("결과 : 24");
         });
     }
@@ -51,7 +51,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 일반_구분자_사용4() {
         assertSimpleTest(() -> {
-            run("11;12;13");
+            run("11:12:13");
             assertThat(output()).contains("결과 : 36");
         });
     }
@@ -59,7 +59,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 일반_구분자_사용5() {
         assertSimpleTest(() -> {
-            run("13,2,3;6,3;17;32;12,1;1");
+            run("13,2,3:6,3:17:32:12,1:1");
             assertThat(output()).contains("결과 : 90");
         });
     }

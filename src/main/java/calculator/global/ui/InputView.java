@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class InputView {
 
-    private final String BASIC_DELIMITER = "[,;]";
+    private final String BASIC_DELIMITER = "[,:]";
     private final String CUSTOM_DELIMITER = "//(.*?)\\\\n(.*)";
 
     public String inputString() {
