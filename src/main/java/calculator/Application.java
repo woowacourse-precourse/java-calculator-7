@@ -62,7 +62,11 @@ public class Application {
     // 문자열을 정수로 파싱하며 예외 처리
     private static int parseNumber(String number) {
         try {
-            return Integer.parseInt(number);
+            int value = Integer.parseInt(number);
+            if (value < 0) {
+                throw new IllegalArgumentException("양수만 입력해주세요.");  // 음수 예외 발생
+            }
+            return value;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("잘못된 숫자 형식입니다: " + number);
         }
