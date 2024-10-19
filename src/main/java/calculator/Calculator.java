@@ -9,6 +9,13 @@ public class Calculator {
     private static final int CUSTOM_DELIMITER_START_INDEX = 2;
     private static final String DEFAULT_DELIMITER = "[,|:]";
 
+    public String[] splitByDelimiter(String userInput, String customDelimiter) {
+        String numbersPart = extractNumbersPart(userInput, customDelimiter);
+        String delimiter = determineDelimiter(customDelimiter);
+        String[] splitNumbers = numbersPart.split(delimiter);
+        return splitNumbers;
+    }
+
     // 커스텀 구분자가 있는 경우 기본 구분자와 커스텀 구분자 결합
     public String determineDelimiter(String customDelimiter) {
         if (!customDelimiter.isEmpty()) {
