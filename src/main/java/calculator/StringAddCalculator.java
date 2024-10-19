@@ -84,12 +84,13 @@ public class StringAddCalculator implements StringCalculator {
     }
 
     private void validateNumbers(List<Integer> numbers) {
-        for (Integer number : numbers) {
-            if (number < 0) {
-                throw new IllegalArgumentException(
-                        String.format("(%s)는 음수입니다. 입력하는 숫자들은 반드시 양수 혹은 0이어야 합니다.", number)
-                );
-            }
+        List<Integer> negativeNumbers = numbers.stream()
+                .filter(num -> num < 0)
+                .toList();
+        if (!negativeNumbers.isEmpty()) {
+            throw new IllegalArgumentException(
+                    String.format("음수는 허용되지 않습니다: %s", negativeNumbers)
+            );
         }
     }
 
