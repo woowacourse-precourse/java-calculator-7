@@ -6,26 +6,26 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static calculator.constant.UtilsConstant.REGEX;
+
 public class ParsingUtils {
 
-    public static List<String> parsingUserInput(String userInput){
-        String regex = "//(.*)\\\\n(.*)";
-
-        Pattern pattern = Pattern.compile(regex);
+    public static List<String> splitUserInputTowPart(String userInput){
+        Pattern pattern = Pattern.compile(REGEX);
         Matcher matcher = pattern.matcher(userInput);
 
-        List<String> paringUserInput = new ArrayList<>();
+        List<String> twoPartUserInput = new ArrayList<>();
         if(matcher.find()){
-            paringUserInput.add(matcher.group(1));
-            paringUserInput.add(matcher.group(2));
+            twoPartUserInput.add(matcher.group(1));
+            twoPartUserInput.add(matcher.group(2));
         }
         else{
-            paringUserInput.add(userInput);
+            twoPartUserInput.add(userInput);
         }
-        return paringUserInput;
+        return twoPartUserInput;
     }
 
-    public static String buildRegexFromSet(Set<String> delimiters) {
+    public static String buildMultiDelimiterFromSet(Set<String> delimiters) {
         StringBuilder regex = new StringBuilder();
         regex.append("[");
         for (String delimiter : delimiters) {
