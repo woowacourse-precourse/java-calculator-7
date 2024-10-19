@@ -21,14 +21,18 @@
 │   └── ValidatorException.java
 ├── model
 │   ├── Calculator.java
-│   ├── CustomSeparator.java
-│   ├── DefaultSeparator.java
-│   └── Numbers.java
+│   ├── CustomSeparators.java
+│   ├── DefaultSeparators.java
+│   ├── Numbers.java
+│   └── Separators.java
+├── service
+│   ├── NumbersService.java
+│   └── SeparatorsService.java
 ├── test.txt
 ├── validator
-│   ├── CustomSeparatorValidator.java
-│   ├── DefaultSeparatorValidator.java
-│   └── InputValidator.java
+│   ├── CustomSeparatorsValidator.java
+│   ├── DefaultSeparatorsValidator.java
+│   └── NumbersValidator.java
 └── view
     ├── InputReader.java
     ├── OutputView.java
