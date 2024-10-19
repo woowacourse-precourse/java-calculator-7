@@ -67,6 +67,19 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    @DisplayName("등록되지 않은 구분자 입력시 예외 처리")
+    void exceptionNoDelimiter() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("1+2+3"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("1+2+3+4+5*6&7*8(9)10"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
     @DisplayName("커스텀 구분자 추가시, 표현식이 이상한 경우")
     void exceptionWrongExpression() {
         assertSimpleTest(() -> {
@@ -106,6 +119,17 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> run(input1));
         assertThat(output()).contains("결과 : 55");
         String input2 = "//+\\n10+20+30+40";
+        assertSimpleTest(() -> run(input2));
+        assertThat(output()).contains("결과 : 100");
+    }
+
+    @Test
+    @DisplayName("구분자 여러개가 입력될때 태스트")
+    void manyDelimiterTest() {
+        String input1 = "//+\\n1,2:3+4:5:6,7+8:9,10";
+        assertSimpleTest(() -> run(input1));
+        assertThat(output()).contains("결과 : 55");
+        String input2 = "//+\\n10,20+30:40";
         assertSimpleTest(() -> run(input2));
         assertThat(output()).contains("결과 : 100");
     }
