@@ -71,7 +71,11 @@ public class Calculator {
         Integer sum = Integer.valueOf(0);
         try {
             for (int i = 0; i < list.length; i++) {
-                sum += Integer.valueOf(list[i]);
+                Integer value = Integer.valueOf(list[i]);
+                if (value < 0) {
+                    throw new IllegalArgumentException();
+                }
+                sum += value;
             }
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
