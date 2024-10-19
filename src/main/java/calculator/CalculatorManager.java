@@ -53,6 +53,22 @@ public class CalculatorManager {
         return condition;
     }
 
-
+    public int sum(String[] numbers) {
+        try {
+            return Arrays.stream(numbers)   // Stream<String>
+                    .map(this::toPositive)  // Stream<Integer>
+                    .reduce(Integer::sum)   // Optional<Integer>
+                    .orElseThrow();         // 존재하지 않으면 예외처리
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자로 변환할 수 없는 값이 포함되어 있습니다.", e);
+        }
+    }
+    private int toPositive(String number) {
+        int num = Integer.parseInt(number.strip());
+        if (num < 0) {
+            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+        }
+        return num;
+    }
 
 }
