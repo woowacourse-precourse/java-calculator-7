@@ -21,10 +21,11 @@ public class Input {
         }
         return sum;
     }
+
     private void isValidNumber(){
         try {
             for (String token : tokens) {
-                Integer.parseInt(token);
+                stringToInt(token);
             }
         }catch (NumberFormatException e){
             throw new IllegalArgumentException("토큰이 숫자가 아닙니다");

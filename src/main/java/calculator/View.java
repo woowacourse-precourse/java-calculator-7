@@ -1,6 +1,5 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.Console;
 
 public class View {
     Input input = new Input();
