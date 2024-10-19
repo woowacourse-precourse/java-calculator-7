@@ -10,11 +10,21 @@ public class Calculator {
     private final int customSeparatorIdx;
     private final String minusDigitRegex = "-[0-9]*";
     private final String positiveDigitRegex = "\\d*";
+    private final ICalculatorDisplay calculatorDisplay;
 
-    public Calculator() {
+    public Calculator(ICalculatorDisplay calculatorDisplay) {
         this.separatorProcessor = new SeparatorProcessor(',', ':');
         this.customSeparatorCmdPattern = Pattern.compile("^(\\/\\/.\\\\n)");
         this.customSeparatorIdx = 2;
+        this.calculatorDisplay = calculatorDisplay;
+    }
+
+    public void run() {
+        String cmd = calculatorDisplay.getPromptInput();
+
+        int result = sum(cmd);
+
+        calculatorDisplay.printResult(result);
     }
 
     /**
@@ -22,7 +32,7 @@ public class Calculator {
      *
      * @return 구분자로 분리된 숫자의 합
      */
-    public int sum(String cmd) {
+    private int sum(String cmd) {
         if (cmd.isEmpty()) {
             return 0;
         }
