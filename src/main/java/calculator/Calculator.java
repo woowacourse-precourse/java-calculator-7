@@ -8,20 +8,28 @@ import parser.ContentParser;
 
 public class Calculator {
     private BigInteger Result = BigInteger.ZERO;
-    private String inputContent;
+    private String originalContent;
     private String convertedContent;
-    private String parsingSeparator;
+    private String separator;
     private String[] parsedContent;
 
     public void start() {
-        setInputContent();
-        ContentInspector contentInspector = InspectorSelector.selection(inputContent);
-        parsingSeparator = contentInspector.getParsingSeparator();
+        inputContent();
+        ContentInspector contentInspector = InspectorSelector.selection(originalContent);
+        separator = contentInspector.getSeparator();
         convertedContent = contentInspector.getConvertedContent();
-        ContentParser contentParser = new ContentParser(parsingSeparator, convertedContent);
-        parsedContent = contentParser.getParsedContent();
+        ContentParser contentParser = new ContentParser(separator);
+        parsedContent = contentParser.parsing(convertedContent);
         calculation();
-        getResult();
+        printResult();
+    }
+
+    private void inputContent() {
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        originalContent = Console.readLine();
+        if (originalContent.isEmpty()) {
+            printResult();
+        }
     }
 
     private void calculation() {
@@ -46,16 +54,7 @@ public class Calculator {
         }
     }
 
-
-    private void setInputContent() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        inputContent = Console.readLine();
-        if (inputContent.isEmpty()) {
-            getResult();
-        }
-    }
-
-    private void getResult() {
+    private void printResult() {
         System.out.println("결과 : " + Result);
     }
 }
