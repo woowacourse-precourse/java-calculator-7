@@ -6,6 +6,16 @@ import java.util.List;
 
 public final class CalculatorModel {
 
+    private List<Integer> numbers;
+
+    public void processInput(String input) {
+        List<String> parsedStrings = parseUserInput(input);
+
+        List<Integer> parsedNumbers = stringsToIntegers(parsedStrings);
+
+        this.numbers = parsedNumbers;
+    }
+
     public boolean isCustom(String input) {
         return input.startsWith("//") && input.contains("\\n");
     }
