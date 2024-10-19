@@ -1,13 +1,15 @@
 package calculator;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class StringParser {
-    private static final String DEFAULT_DELIMITER_REGEX = "[,:]";
+    private static final List<String> DEFAULT_DELIMITER = Arrays.asList(",", ":");
     private static final String EXTRACT_DELIMITER_REGEX = "//(.*?)\\\\n";
     private final String inputString;
 
@@ -16,23 +18,16 @@ public class StringParser {
     }
 
     public List<Integer> extractNumbers() {
-        List<String> parsedString = parseString();
+        String expression = this.inputString;
+        Set<String> delimiter = new HashSet<>(DEFAULT_DELIMITER);
 
-        return parsedString.stream()
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-    }
-
-    private List<String> parseString() {
         String customDelimiter = extractCustomDelimiter();
         if (customDelimiter != null) {
-            String inputString = this.inputString.replaceAll(EXTRACT_DELIMITER_REGEX, "");
-            String[] result = inputString.split(customDelimiter);
-            return Arrays.asList(result);
+            expression = removeDelimiterDefinition();
+            delimiter.add(customDelimiter);
         }
 
-        String[] result = this.inputString.split(DEFAULT_DELIMITER_REGEX);
-        return Arrays.asList(result);
+        return getNumbers(expression, delimiter);
     }
 
     private String extractCustomDelimiter() {
@@ -44,5 +39,18 @@ public class StringParser {
         }
 
         return null;
+    }
+
+    private String removeDelimiterDefinition() {
+        return this.inputString.replaceAll(EXTRACT_DELIMITER_REGEX, "");
+    }
+
+    private List<Integer> getNumbers(String expression, Set<String> delimiter) {
+        String delimiterRegEx = "[" + String.join("", delimiter) + "]";
+        String[] stringNumbers = expression.split(delimiterRegEx);
+
+        return Arrays.stream(stringNumbers)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 }
