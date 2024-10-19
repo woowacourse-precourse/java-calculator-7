@@ -14,4 +14,12 @@ public class Calculator {
             delimiters.add(content);
         }
     }
+
+    public String[] splitNumbers(String input) {
+        if (input.startsWith("//")) {
+            input = input.substring(input.indexOf("\n") + 1);
+        }
+        String regex = String.join("|", delimiters);
+        return input.split(regex);
+    }
 }

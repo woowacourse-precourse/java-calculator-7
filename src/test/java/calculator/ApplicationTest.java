@@ -52,4 +52,18 @@ class ApplicationTest extends NsTest {
         assertThat(afterCount).isEqualTo(beforeCount + 1);
 
     }
+
+    @Test
+    void splitNumbersTest() {
+        //when
+        String input = "//;\n1;2;3";
+        String[] expected = {"1", "2", "3"};
+
+        //given
+        String[] actual = calculator.splitNumbers(input);
+
+        //then
+        assertThat(actual).isEqualTo(expected);
+
+    }
 }
