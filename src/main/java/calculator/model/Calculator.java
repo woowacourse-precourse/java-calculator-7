@@ -1,4 +1,4 @@
-package calculator.calculator;
+package calculator.model;
 
 
 import calculator.util.CustomDelimiterExtractor;
