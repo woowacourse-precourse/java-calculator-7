@@ -2,14 +2,18 @@ package calculator.model;
 
 public class DelimiterHandler {
 
-    private final String customStart = "//";
-    private final String customEnd = "\\n";
+    private static final int customStartIndex = 0;
+    private static final int customEndIndex = 3;
+    private static final int customDelimIndex = 2;
+
+    private static final String customStart = "//";
+    private static final String customEnd = "\\n";
 
     private String delimiters = ",:";
     private boolean customDelimiterFlag = false;
 
     private boolean checkDelimiter(String expression) {
-        if (expression.indexOf(customStart) == 0 && expression.indexOf(customEnd) == 3){
+        if (expression.indexOf(customStart) == customStartIndex && expression.indexOf(customEnd) == customEndIndex) {
             return true;
         }
         return false;
@@ -17,7 +21,7 @@ public class DelimiterHandler {
 
     public void setDelimiter(String expression) {
             if (checkDelimiter(expression)) {
-                delimiters += expression.charAt(2);
+                delimiters += expression.charAt(customDelimIndex);
                 customDelimiterFlag = true;
             }
     }
