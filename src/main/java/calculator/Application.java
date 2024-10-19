@@ -13,27 +13,48 @@ public class Application {
     }
     public static void checkMinus(int i1){
         if(i1 < 0)  {
-            throw new IllegalArgumentException("잘못 입력하셨습니다.");
+            throw new IllegalArgumentException("양수만 입력할 수 있습니다.");
         }
     }
+    public static void checkOtherStringCustom(String number, String delimiter){
+        if (!number.matches("([0-9]*(" + Pattern.quote(delimiter) + "[0-9]*)*)")) {
+            throw new IllegalArgumentException("잘못된 형식의 입력입니다.");
+        }
+    }
+    public static void checkOtherString(String str){
+        if (!str.matches("[0-9,|:]+")) {
+            throw new IllegalArgumentException("기본 구분자가 아닌 문자가 포함되었습니다.");
+        }
+    }
+    public static String[] defaultSeparator(String[] word, String str){
+        if (word == null) {
+            word = str.split(",|:");
+            checkOtherString(str);
+        }
+        return word;
+    }
     public static int calculate(String str){
-        System.out.println("입력된 문자열: " + str); // 입력 문자열 출력
-
         Matcher matcher = Pattern.compile("//(.*?)\\\\n(.*)").matcher(str);
         String[] word = null;
-
+        /**
+         * 커스텀 구분자 split()처리
+         */
         if (matcher.find()){
-            System.out.println("여기 들어옴");
             String delimeter = matcher.group(1);
-            word = matcher.group(2).split(Pattern.quote(delimeter));
+            String number = matcher.group(2);
+            checkOtherStringCustom(number, delimeter);
+            word = number.split(Pattern.quote(delimeter));
         }
+        /**
+         * 기본 구분자 split()처리
+         */
+        word = defaultSeparator(word, str);
 
-        if (word == null) {
-            System.out.println("word==null에 들어옴");
-            word = str.split(",|:");
-        }
         int sum = 0;
         for (int i = 0; i < word.length; i++) {
+            if (word[i].trim().isEmpty()) {
+                continue;
+            }
             int i1 = Integer.parseInt(word[i]);
             checkMinus(i1);
             sum += i1;
