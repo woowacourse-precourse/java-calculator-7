@@ -15,7 +15,7 @@ public class StringCalculator {
         if(input == null||input.isEmpty()) {
             return 0;
         }
-        if(input.startsWith("//"){
+        if(input.startsWith("//")){
             int delimiterIndex = input.indexOf("\n");
             if(delimiterIndex == -1) {
                 throw new IllegalArgumentException("잘못된 입력입니다");
