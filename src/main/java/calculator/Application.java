@@ -7,7 +7,9 @@ public class Application {
         // TODO: 프로그램 구현
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
-        System.out.println(DecideSeparatorInString(input));
+        String seperator = DecideSeparatorInString(input);
+        String[] arr = DevideStringToSeparator(input, seperator);
+        System.out.println(String.join(" ", arr));
         Console.close();
     }
 
@@ -17,8 +19,6 @@ public class Application {
         int indexNewline = string.indexOf("\\n");
         int isComma = string.indexOf(",");
         int isColon = string.indexOf(":");
-        System.out.println("DoubleSlash"+indexDoubleSlash);
-        System.out.println("NewLine"+indexNewline);
         if(indexDoubleSlash != -1 && indexNewline != -1) {
             value += string.substring(indexDoubleSlash+2, indexNewline);
         }
@@ -29,5 +29,11 @@ public class Application {
             value += ":";
         }
         return value;
+    }
+
+    private static String[] DevideStringToSeparator(String string, String separator) {
+        int indexNewline = string.indexOf("\\n");
+        string = string.substring(indexNewline + 2);
+        return string.split(String.format("[%s]",separator));
     }
 }
