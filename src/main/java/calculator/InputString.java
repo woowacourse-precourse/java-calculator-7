@@ -4,6 +4,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static calculator.CheckForm.checkFormOfCustomSeparator;
+import static calculator.CheckForm.checkFormOfOperands;
+
 public class InputString {
 
     private final String input;
@@ -19,6 +22,9 @@ public class InputString {
 
         customSeparators.add(',');
         customSeparators.add(':');
+
+        checkFormOfCustomSeparator(input);
+        checkFormOfOperands(input, customSeparators);
 
         setCustomSeparator();
         setOperands();

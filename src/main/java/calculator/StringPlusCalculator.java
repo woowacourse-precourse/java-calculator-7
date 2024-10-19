@@ -9,9 +9,6 @@ public class StringPlusCalculator {
 
     public Integer plusCalculate(InputString inputString) {
 
-        checkFormOfCustomSeparator(inputString);
-        checkFormOfOperands(inputString);
-
         return calculation.addOperands(inputString);
     }
 }

@@ -10,9 +10,7 @@ public class CheckForm {
         throw new IllegalArgumentException(errorMessage);
     }
 
-    public static void checkFormOfCustomSeparator(InputString inputString){
-        String input = inputString.getInput();
-
+    public static void checkFormOfCustomSeparator(String input){
         if(isStartsWithTwoSlash(input)){
             checkContainNewLine(input);
             checkSeparatorIsCharacter(input);
@@ -20,15 +18,10 @@ public class CheckForm {
         }
     }
 
-    public static void checkFormOfOperands(InputString inputString){
-        String input = inputString.getInput();
-
+    public static void checkFormOfOperands(String input, Set<Character> separators){
         if(isStartsWithTwoSlash(input)){
             input = input.substring(input.indexOf("\\n")+2);
         }
-
-        Set<Character> separators = inputString.getSeparator();
-
         for(char character : input.toCharArray()){
             if(!separators.contains(character) && (character < '0' || character > '9')){
                 throwException();
