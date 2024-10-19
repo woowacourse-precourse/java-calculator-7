@@ -9,8 +9,12 @@ public class Application {
         String inputString = Console.readLine();
 
         // TODO: 문자열 파싱 객체에서 구분자, 숫자 받아오기
+        Parser parser = Parser.getInstance();
 
         // TODO : calculate sum
+        parser.parseNums(inputString);
 
+        int sum = Calculator.calculateSum(parser.getNums());
+        System.out.println("결과 : " + sum);
     }
 }
