@@ -10,9 +10,9 @@ public class CalculatorService {
     private final String startString = "덧셈할 문자열을 입력해 주세요.";
     private final Pattern pattern = Pattern.compile("//\\D+(0?\\D)*\\\\n");
     private final Pattern wrongPattern = Pattern.compile("//([1-9]+.*|.*[1-9]+.*|[1-9]+)\\\\n");
-    private final Pattern zeroPattern = Pattern.compile("^//0+.*|.*0+\\\\n$");
+    private final Pattern zeroPattern = Pattern.compile("//(0+.*|.*0+)\\\\n");
     private final Pattern nothingPattern = Pattern.compile("//\\\\n");
-    private final Pattern numberPattern = Pattern.compile("\\d");
+    private final Pattern minusPattern = Pattern.compile("-[0-9]+.*");
     private String inputString;
     private String transedString;
     private final String endString = "결과 : ";
@@ -33,7 +33,10 @@ public class CalculatorService {
         int len = expression.length();
         String startChar = expression.substring(0,1);
         String endChar = expression.substring(len-1,len);
-        int startInt = 0;
+        Matcher minusMatcher = minusPattern.matcher(expression);
+        if(minusMatcher.find()){
+            throw new IllegalArgumentException(CalculatorException.CANNOT_USE_MINUS.getText());
+        }
         if(!Character.isDigit(expression.charAt(0)) || !Character.isDigit(expression.charAt(len-1))){
             throw new IllegalArgumentException(CalculatorException.ONLY_CAN_USE_DIGIT.getText());
         }
@@ -49,17 +52,17 @@ public class CalculatorService {
             sepList = new String[]{customSeperator};
         }
         String expression = inputString.substring(customMatcher.length(), inputString.length());
-        transedString = expression.replaceAll(":",",");
+        transedString = expression.replace(":",",");
         for(String i : sepList){
             if(!i.equals("")) {
-                transedString = transedString.replaceAll(i, ",");
+                transedString = transedString.replace(i, ",");
             }
         }
         return transedString;
     }
 
     public String transBasicSeperator() {
-        transedString = inputString.replaceAll(":",",");
+        transedString = inputString.replace(":",",");
         return transedString;
     }
 
