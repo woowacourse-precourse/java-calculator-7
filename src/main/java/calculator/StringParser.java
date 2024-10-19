@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 public class StringParser {
     private static final List<String> DEFAULT_DELIMITER = Arrays.asList(",", ":");
     private static final String EXTRACT_DELIMITER_REGEX = "//(.*?)\\\\n";
+    private static final String DIGIT_OR_POINT_REGEX = "[0-9.]";
     private static final String NUMERIC_REGEX = "^-?\\d+(\\.\\d+)?$";
     private final String inputString;
 
@@ -32,12 +33,23 @@ public class StringParser {
 
     private String extractCustomDelimiter() {
         // TODO: validate input string format
-        // TODO: validate custom delimiter is number
 
         Pattern pattern = Pattern.compile(EXTRACT_DELIMITER_REGEX);
         Matcher matcher = pattern.matcher(this.inputString);
 
-        return matcher.find() ? matcher.group(1) : null;
+        if (matcher.find()) {
+            String delimiter = matcher.group(1);
+            validateInvalidDelimiter(delimiter);
+            return delimiter;
+        }
+
+        return null;
+    }
+
+    private void validateInvalidDelimiter(String delimiter) {
+        if (delimiter.matches(DIGIT_OR_POINT_REGEX)) {
+            throw new IllegalArgumentException("숫자와 마침표(.)는 구분자로 사용할 수 없습니다.");
+        }
     }
 
     private String removeDelimiterDefinition() {
