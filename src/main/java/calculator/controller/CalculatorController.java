@@ -9,8 +9,6 @@ import calculator.regex.service.RegexPatternServiceResolver;
 import calculator.view.input.handler.InputHandlerService;
 import calculator.view.output.ResultService;
 
-import java.util.regex.Pattern;
-
 public class CalculatorController {
     private final GenerateController generateController;
     private final InputHandlerService inputProcess;
