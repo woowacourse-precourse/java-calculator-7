@@ -1,4 +1,4 @@
-package calculator.model.Dto;
+package calculator.model.dto;
 
 public class DelimiterInputData {
     public static Character COMMA = ',';

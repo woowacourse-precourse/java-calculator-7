@@ -1,7 +1,7 @@
 package calculator.controller;
 
-import calculator.model.Dto.DelimiterInputData;
 import calculator.model.NumberParser;
+import calculator.model.dto.DelimiterInputData;
 import calculator.model.validator.InputValidator;
 import java.util.List;
 

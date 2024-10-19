@@ -1,6 +1,6 @@
 package calculator.model;
 
-import calculator.model.Dto.DelimiterInputData;
+import calculator.model.dto.DelimiterInputData;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;

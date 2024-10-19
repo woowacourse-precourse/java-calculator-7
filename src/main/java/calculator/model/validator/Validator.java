@@ -1,6 +1,6 @@
 package calculator.model.validator;
 
-import calculator.model.Dto.DelimiterInputData;
+import calculator.model.dto.DelimiterInputData;
 
 public interface Validator {
     void validate();
