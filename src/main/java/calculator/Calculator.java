@@ -16,7 +16,7 @@ public class Calculator {
         print(result);
     }
 
-    public long calculate(List<Long> numbers) {
+    protected long calculate(List<Long> numbers) {
         long sum = 0;
 
         for (long number : numbers) {
@@ -26,7 +26,7 @@ public class Calculator {
         return sum;
     }
 
-    public void print(long result) {
+    protected void print(long result) {
         System.out.println("결과 : " + result);
     }
 }

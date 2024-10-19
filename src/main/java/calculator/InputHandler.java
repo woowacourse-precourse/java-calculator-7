@@ -12,7 +12,7 @@ public class InputHandler {
         return getNumbers(convertedInput);
     }
 
-    private static String getInput() {
+    protected static String getInput() {
         System.out.println("덧셈할 문자열을 입력해 주세요");
         String input = Console.readLine();
         Console.close();
@@ -20,7 +20,7 @@ public class InputHandler {
         return input;
     }
 
-    private String convertInput(String input) {
+    protected String convertInput(String input) {
         if (!input.startsWith("//")) {
             return input;
         }
@@ -29,7 +29,7 @@ public class InputHandler {
         return input.substring(separator.length() + 4).replace(separator, ",");
     }
 
-    private String getSeparator(String input) {
+    protected String getSeparator(String input) {
         StringBuilder sb = new StringBuilder();
         String[] strArr = input.substring(2).split("");
 
@@ -48,7 +48,7 @@ public class InputHandler {
         return sb.toString();
     }
 
-    private List<Long> getNumbers(String input) {
+    protected List<Long> getNumbers(String input) {
         List<Long> numbers = new ArrayList<>();
 
         String[] splitInput = input.split("[,;]");
@@ -65,7 +65,7 @@ public class InputHandler {
         return numbers;
     }
 
-    private boolean isValidate(String str) {
+    protected boolean isValidate(String str) {
         //양수인지 검사
         String REGEXP_ONLY_NUM = "^\\d+$";
         if (!str.matches(REGEXP_ONLY_NUM)) {
