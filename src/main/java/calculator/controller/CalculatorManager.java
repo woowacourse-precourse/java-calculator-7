@@ -27,5 +27,7 @@ public class CalculatorManager {
         SeparatorsResult separatorsResult = customSeparatorExtractor.getSeparatorsResult(input);
         Numbers numbers = numbersExtractor.extractNumbers(separatorsResult);
         BigDecimal sum = numbers.sum();
+
+        outputView.printResult(sum);
     }
 }
