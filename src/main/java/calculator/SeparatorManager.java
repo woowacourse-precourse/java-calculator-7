@@ -16,8 +16,8 @@ public class SeparatorManager {
         return this.separators;
     }
 
-    public void save(String separatorCandidates) {
-        separators.add(separatorCandidates);
+    public void save(String separatorCandidate) {
+        separators.add(separatorCandidate);
     }
 
     public void validate(String separatorCandidate) {
