@@ -12,6 +12,7 @@ public class Application {
 
         List<String> number = new ArrayList<>();
         List<Integer> sumList;
+        int total = 0;
 
         for (int i = 0; i < 10; i++) {
             number.add(String.valueOf(i));
@@ -31,7 +32,11 @@ public class Application {
         }
 
         // 출력
+        for (int i = 0; i < sumList.size(); i++) {
+            total += sumList.get(i);
+        }
 
+        System.out.println("결과 : " + total);
     }
 
     public static String findDelimiter (String[] splitStr) {
