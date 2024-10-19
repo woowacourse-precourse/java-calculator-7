@@ -1,9 +1,11 @@
 package calculator;
 
+import calculator.calculator.Calculator;
 import calculator.input.Input;
 import calculator.parser.Parser;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import java.util.List;
+import java.util.function.BiFunction;
 import java.util.function.Predicate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -73,6 +75,19 @@ class ApplicationTest extends NsTest {
             List<String> inputs = input.read(() -> "//;\\a32;12");
             System.out.println(inputs);
         });
+    }
+
+    @Test
+    void calculator_빈_피연산자_테스트() {
+        // given
+        Calculator calculator = new Calculator((a, b) -> a + b);
+
+        // when
+        List<Integer> operands = List.of();
+
+        // then
+        Integer result = calculator.calculate(operands, 0);
+        assertThat(result).isEqualTo(0);
     }
 
     @Override
