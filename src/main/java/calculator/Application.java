@@ -25,6 +25,6 @@ public class Application {
         Operator operator = new Operator();
         BigInteger result = operator.add(operandManager.getOperands());
 
-        System.out.println("결과 : " + result);
+        System.out.print("결과 : " + result);
     }
 }
