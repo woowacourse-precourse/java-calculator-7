@@ -48,10 +48,10 @@ public class CalculatorApp implements CalculatorRunnable {
 
             int result = calculator.execute(convertToIntArray(splitNumbers));
             outputHandler.showAdditionResult(result);
-        } catch (IllegalArgumentException ex) {
-            throw ex;
+        } catch (CalculatorException e) {
+            outputHandler.showExceptionMessage(e);
         } catch (Exception ex) {
-            throw new IllegalArgumentException();
+            outputHandler.showExceptionMessage(ex.getMessage());
         }
     }
 

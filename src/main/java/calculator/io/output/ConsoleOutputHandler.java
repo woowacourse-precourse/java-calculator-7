@@ -1,5 +1,7 @@
 package calculator.io.output;
 
+import calculator.CalculatorException;
+
 public class ConsoleOutputHandler implements OutputHandler {
 
     @Override
@@ -10,6 +12,16 @@ public class ConsoleOutputHandler implements OutputHandler {
     @Override
     public void showAdditionResult(int calculateResult) {
         System.out.println("결과 : " + calculateResult);
+    }
+
+    @Override
+    public void showExceptionMessage(CalculatorException e) {
+        throw new IllegalArgumentException(e.getMessage());
+    }
+
+    @Override
+    public void showExceptionMessage(String message) {
+        throw new IllegalArgumentException(message);
     }
 
 }
