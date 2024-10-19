@@ -12,7 +12,7 @@ public class Calculator {
     }
 
     private void sum(String userInput) {
-        if(userInput.startsWith("//") || userInput.contains("\n")) {
+        if(userInput.startsWith("//") || userInput.contains("\\n")) {
             int[] customNumberSeparator = getCustomSeparatorNumbers(userInput);
             addResult(customNumberSeparator);
         }else{
@@ -35,7 +35,9 @@ public class Calculator {
     }
 
     private static int[] getCustomSeparatorNumbers(String input){
-        input = input.replace("//","").replace("\\n","");
+        isContain(input);
+        input = input.replace("//", "").replace("\\n", "");
+
         String separator = input.substring(0, 1);
         input = input.substring(1);
         String[] customSeparator = input.split(separator);
@@ -57,6 +59,12 @@ public class Calculator {
         try {
             numberSeparator[i] = Integer.parseInt(separator[i]);
         }catch (NumberFormatException e){
+            throw new IllegalArgumentException("올바른 구분자를 입력해주세요.");
+        }
+    }
+
+    private static void isContain(String input){
+        if(!input.startsWith("//") || !input.contains("\\n")){
             throw new IllegalArgumentException("올바른 구분자를 입력해주세요.");
         }
     }
