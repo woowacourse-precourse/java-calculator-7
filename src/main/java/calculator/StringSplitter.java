@@ -2,7 +2,7 @@ package calculator;
 
 public class StringSplitter {
 
-    private static final String DEFAULT_DELIMITERS = "[,:]";
+    private static final String DEFAULT_DELIMITERS = ",:";
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
     private static final String DELIMITER_END = "\\n";
 
@@ -14,11 +14,12 @@ public class StringSplitter {
         if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
             String customDelimiter = extractCustomDelimiter(input);
             int contentStartIndex = input.indexOf(DELIMITER_END) + DELIMITER_END.length();
+            String combinedDelimiters = combineDelimiters(customDelimiter);
             return input.substring(contentStartIndex)
-                    .split(customDelimiter);
+                    .split(combinedDelimiters);
         }
 
-        return input.split(DEFAULT_DELIMITERS);
+        return input.split("[" + DEFAULT_DELIMITERS + "]");
     }
 
     private String extractCustomDelimiter(String input) {
@@ -27,5 +28,14 @@ public class StringSplitter {
         String customDelimiter = input.substring(startIndex, endIndex);
         ExceptionHandler.handleInvalidDelmiter(customDelimiter);
         return customDelimiter;
+    }
+
+    private String combineDelimiters(String customDelimiter) {
+        StringBuilder combinedDelimiters = new StringBuilder(DEFAULT_DELIMITERS);
+        for (char delimiter : customDelimiter.toCharArray()) {
+            combinedDelimiters.append(delimiter);
+        }
+        // 중복 제거를 위해 [ ] 안에 넣어주는 정규식 패턴으로 반환
+        return "[" + combinedDelimiters + "]";
     }
 }
