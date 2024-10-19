@@ -23,7 +23,7 @@
 ### Main
 
 - Application
-    - [ ] `CalculatorController`를 통해 계산기를 실행
+    - [X] `CalculatorController`를 통해 계산기를 실행
 
 ### Model
 
