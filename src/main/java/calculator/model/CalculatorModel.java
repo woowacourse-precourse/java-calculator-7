@@ -41,7 +41,13 @@ public class CalculatorModel {
         }
 
         for (String number : numbers) {
-            sum += Integer.parseInt(number);
+            int num = Integer.parseInt(number);
+
+            if (num <= 0) {
+                throw new IllegalArgumentException("양수를 입력해 주세요.");
+            }
+
+            sum += num;
         }
 
         return sum;
