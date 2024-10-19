@@ -104,6 +104,19 @@ class ApplicationTest extends NsTest {
 
     }
 
+    @Test
+    void 배열에_문자_존재시_예외테스트() {
+
+        String userInput = "1,2:n3";
+
+        inputString = new InputString(userInput);
+
+        assertThatThrownBy(() -> runException(userInput))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] 잘못된 문자열 형식입니다. (배열에 덧셈할 수 없는 문자 존재)");
+
+    }
+
 
     @Override
     public void runMain() {
