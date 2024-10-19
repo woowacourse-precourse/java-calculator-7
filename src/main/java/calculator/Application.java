@@ -26,6 +26,18 @@ public class Application {
 
         String[] NumberList =
                 UserInput.substring(StartIndex).split(AllSeparator);
+
+        int result = 0;
+
+        for (String s : NumberList) {
+            if (s.matches(matcherCheck)) {
+                result += Integer.parseInt(s);
+            } else {
+                throw new IllegalArgumentException();
+            }
+        }
+
+        resultPrint(result);
     }
 
 
