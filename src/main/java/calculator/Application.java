@@ -25,16 +25,13 @@ public class Application {
         System.out.println("결과 : "+ result);
     }
 
-    // 기능 1: 커스텀 구분자 확인 및 전체 구분자 정의
     private static List<Character> getSeparator(String inputString){
-
         // 기본 구분자
         List<Character> separatorList = new ArrayList<>();
         separatorList.add(',');
         separatorList.add(':');
 
         // 커스텀 구분자 찾기
-        // 커스텀 구분자는 문자열 처음에 한번만 지정되거나 없다고 가정
         String s1 = inputString.substring(0,2);
         String s2 = inputString.substring(3,5);
 
@@ -46,9 +43,7 @@ public class Application {
         return separatorList;
     }
 
-    // 기능 2: 사용자의 입력값 검증
     private static String validateInputString(String inputString, List<Character> separators){
-
         // 커스텀 구분자가 있는 경우
         // 숫자인지 확인 및 커스텀 문구 삭제
         if (separators.size() == 3){
@@ -70,9 +65,7 @@ public class Application {
         return inputString;
     }
 
-    // 기능 3: 구분자를 기준으로 덧셈
     private static int sum(String inputString, List<Character> separators){
-
         String[] splits =  inputString.split(separators.toString());
 
         int sum = 0;
@@ -82,5 +75,4 @@ public class Application {
 
         return sum;
     }
-
 }
