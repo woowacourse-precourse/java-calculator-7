@@ -15,11 +15,18 @@ public class Application {
                 if(s.isEmpty()) {
                     continue;
                 }
-                result += Integer.parseInt(s);
+
+                int number = Integer.parseInt(s);
+
+                if(number <= 0) {
+                    throw new IllegalArgumentException("마이너스 입력");
+                }
+                result += number;
             }
 
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
+            System.out.println("잘못된 입력을 하였습니다.");
             System.out.println(e.getMessage());
         }
     }
