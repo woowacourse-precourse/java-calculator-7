@@ -11,6 +11,6 @@ public class Calculator {
     }
 
     public void end(){
-
+        Output.printResult(this.result);
     }
 }
