@@ -25,6 +25,15 @@ public class Application {
         return  answer;
     }
 
+    public int Custom(String str) {
+        int answer = 0;
+        String delimiter = str.substring(2,str.indexOf("\n"));
+        String str2 = str.substring(str.indexOf("\n")+1);
+        String[] strArr = str2.split(delimiter);
+        answer = addition(strArr);
+        return  answer;
+    }
+
     public static void main(String[] args) {
         Application app = new Application();
         String str = Console.readLine();
