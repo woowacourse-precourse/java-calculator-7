@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) throws IOException {
@@ -21,14 +20,36 @@ public class Application {
         }
     }
 
-    //구분자(쉼표, 콜론) 외에 커스텀 구분자를 인식하는 메소드
+    // 입력된 문자열을 처리하는 메서드
     public static int add(String input) {
         if (input == null || input.isEmpty()) {
             return 0;
         }
 
         String delimiter = ",|:"; // 기본 구분자
-        return calculateSum(input, delimiter);
+        String numbers = input;
+
+        if (input.startsWith("//")) {
+            delimiter = extractCustomDelimiter(input);
+            numbers = extractNumbers(input);
+        }
+
+        return calculateSum(numbers, delimiter);
+    }
+
+    // 커스텀 구분자 추출
+    private static String extractCustomDelimiter(String input) {
+        int delimiterIndex = input.indexOf("\n");
+        if (delimiterIndex == -1) {
+            throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
+        }
+        return input.substring(2, delimiterIndex); // "//"와 "\n" 사이의 구분자
+    }
+
+    // 숫자 문자열 추출
+    private static String extractNumbers(String input) {
+        int delimiterIndex = input.indexOf("\n");
+        return input.substring(delimiterIndex + 1); // 구분자 이후 숫자 문자열
     }
 
     // 숫자 합산 계산
