@@ -27,7 +27,7 @@
 
 ## Plus Class
 
-- [ ] 테스트 코드 작성
+- [x] 테스트 코드 작성
 - [ ] 누적 합 기능 구현
 
 ## Calculator Class
