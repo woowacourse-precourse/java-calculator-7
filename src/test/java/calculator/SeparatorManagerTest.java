@@ -23,16 +23,16 @@ class SeparatorManagerTest {
     }
 
     @Test
-    void separatingTest() {
+    void basicSeparatingTest() {
         SeparatorManager separatorManager = new SeparatorManager('*');
 
-        String normalCaseString = "123*456,789;123";
-        String invalidCaseString = "-123*456,789;123";
+        String normalCase = "123*456,789;123";
+        String invalidCase = "-123*456,789;123";
 
-        assertThat(separatorManager.getSeparatedStringNumber(normalCaseString))
-                .contains("123", "456", "789", "123");
+        assertThat(separatorManager.getSeparatedStringNumber(normalCase))
+                .containsExactly("123", "456", "789", "123");
         assertThatThrownBy(()-> separatorManager
-                .getSeparatedStringNumber(invalidCaseString))
+                .getSeparatedStringNumber(invalidCase))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -40,19 +40,29 @@ class SeparatorManagerTest {
     void separatingWithNumberSeparatorTest() {
         SeparatorManager numberSeparatorManager = new SeparatorManager('3');
 
-        String testString = "123456,789;123";
+        String testInput = "123456,789;123";
 
-        assertThat(numberSeparatorManager.getSeparatedStringNumber(testString))
-                .contains("12", "456", "789", "12");
+        assertThat(numberSeparatorManager.getSeparatedStringNumber(testInput))
+                .containsExactly("12", "456", "789", "12");
+    }
+
+    @Test
+    void separatingEndsWithSeparatorStringTest() {
+        SeparatorManager separatorManager = new SeparatorManager(null);
+
+        String endsWithSeparator = "123;";
+
+        assertThat(separatorManager.getSeparatedStringNumber(endsWithSeparator))
+                .containsExactly("123");
     }
 
     @Test
     void separatingConsecutiveSeparatorsStringTest(){
         SeparatorManager separatorManager = new SeparatorManager(null);
 
-        String testString = "1,;,;;,;,;,;,;,;,;;,;,;,;2";
+        String consecutiveSeparators = "1,;,;;,;,;,;,;,;,;;,;,;,;2";
 
-        assertThat(separatorManager.getSeparatedStringNumber(testString))
+        assertThat(separatorManager.getSeparatedStringNumber(consecutiveSeparators))
                 .containsExactly("1", "2");
 
     }
