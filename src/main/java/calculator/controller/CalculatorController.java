@@ -1,5 +1,6 @@
 package calculator.controller;
 
+import calculator.model.Formatter;
 import calculator.model.delimiter.DelimiterFactory;
 import calculator.view.StartView;
 
@@ -10,5 +11,6 @@ public class CalculatorController {
         String input = StartView.getInputView();
 
         String delimiters = DelimiterFactory.getDelimiters(input);
+        int[] formatResult = Formatter.formatInput(input, delimiters);
     }
 }
