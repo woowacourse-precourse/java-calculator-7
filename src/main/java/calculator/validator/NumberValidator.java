@@ -2,12 +2,12 @@ package calculator.validator;
 
 import java.util.ArrayList;
 
+import static calculator.domain.ValueExtractor.getDelimitedValue;
+
 public class NumberValidator{
     public static boolean areAllPositiveIntegers(String input, ArrayList<String> delimiter) {
-        String regex = String.join("|", delimiter);
-        String[] DelimitedValue = input.split(regex);
 
-        for (String value : DelimitedValue) {
+        for (String value : getDelimitedValue(input, delimiter)) {
             if (!isPositiveInteger(value)) {
                 throw new IllegalArgumentException("양의 정수가 아닙니다: " + value);
             }
