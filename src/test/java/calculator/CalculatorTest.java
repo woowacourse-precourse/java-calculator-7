@@ -41,4 +41,22 @@ class CalculatorTest {
         assertThatThrownBy(calculator::calculate)
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 숫자를_0이하로_입력한_경우() {
+        Delimiter delimiter = new Delimiter();
+        DelimiterParser dp = new DelimiterParser();
+
+        String input = "-1,2,3";
+        String customDelimiter = dp.findCustomDelimiter(input);
+
+        delimiter.addCustomDelimiter(customDelimiter);
+        input = dp.removeCustomDelimiterRegistrant(input);
+
+        Calculator calculator = new Calculator(delimiter, input);
+        assertThatThrownBy(calculator::calculate)
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+
 }
