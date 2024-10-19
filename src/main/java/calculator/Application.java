@@ -4,6 +4,8 @@ import calculator.delimiter.Delimiter;
 import calculator.view.Input;
 import calculator.view.Output;
 
+import java.util.List;
+
 public class Application {
 
     private static final Output output = new Output();
@@ -13,6 +15,6 @@ public class Application {
     public static void main(String[] args) {
         output.printBeginningPhrase();
         String userInput = input.getInput();
-
+        List<String> strings = delimiter.divideCharacter(userInput);
     }
 }
