@@ -24,6 +24,18 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 그냥_기본입출력_테스트_3() {
+        assertSimpleTest(() -> {
+            run("\n");
+        });
+    }
+    @Test
+    void 그냥_기본입출력_테스트_4() {
+        assertSimpleTest(() -> {
+            run("1");
+        });
+    }
+    @Test
     void 커스텀_구분자_사용_단일() {
         assertSimpleTest(() -> {
             run("// \\n1 2 3 4 5 6 7 8 9 10");
@@ -64,13 +76,77 @@ class ApplicationTest extends NsTest {
         });
     }
 
-//    @Test
-//    void 예외_테스트() {
-//        assertSimpleTest(() ->
-//            assertThatThrownBy(() -> runException("-1,2,3"))
-//                .isInstanceOf(IllegalArgumentException.class)
-//        );
-//    }
+    @Test
+    void 예외_테스트() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("-1,2,-33"))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_2() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("ㅁㅇㄹㅇㅁㄹ,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_3() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,ㄴㅇㄹㅎ,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_4() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1%2,33"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void 예외_테스트_5() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1+2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_커스텀(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//1\\n1111111"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                );
+    }
+
+    @Test
+    void 예외_테스트_커스텀_문자가종료되지않는경우(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//ㄴㅇㄹㅎㄹㅇㄴㅎㄹㅇㅎㄹdafasgf1#2#3#4#-5"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_커스텀_문자가일치하지않는경우(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//$$\\n1,2#4%6#4"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_커스텀_음수(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//#\\n1#2#3#4#-5"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
 
     @Override
     public void runMain() {
