@@ -4,16 +4,22 @@ import static calculator.domain.CalculatorConstants.CUSTOM_DELIMITER_PREFIX;
 import static calculator.domain.CalculatorConstants.CUSTOM_DELIMITER_SUFFIX;
 import static calculator.domain.CalculatorConstants.DEFAULT_DELIMITER_COLON;
 import static calculator.domain.CalculatorConstants.DEFAULT_DELIMITER_COMMA;
+import calculator.domain.validator.InputValidator;
 
+import calculator.util.FilteredEmptyString;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
-import java.util.Arrays;
 
 public class InputParser {
 
+    private final InputValidator inputValidator = new InputValidator();
+    private final FilteredEmptyString FilteredEmptyString = new FilteredEmptyString();
+
     public ParsedInput parse(String input) {
-        if (input == null || input.isEmpty()) {
+        if (inputValidator.checkInputEmpty(input)) {
             return new ParsedInput(new String[]{"0"});
         }
 
@@ -23,7 +29,7 @@ public class InputParser {
         delimiters.add(DEFAULT_DELIMITER_COLON.getValue());
         delimiters.add(DEFAULT_DELIMITER_COMMA.getValue());
 
-        if (input.startsWith(CUSTOM_DELIMITER_PREFIX.getValue())) {
+        if (inputValidator.containCustomDelimiter(input)) {
             int lastDelimiterIndex = input.lastIndexOf(CUSTOM_DELIMITER_SUFFIX.getValue());
 
             if (lastDelimiterIndex == -1) {
@@ -39,7 +45,18 @@ public class InputParser {
         String regex = buildRegex(delimiters);
         String[] numberTokens = numbers.split(regex);
 
-        return new ParsedInput(numberTokens);
+        String[] filteredNumberTokens = FilteredEmptyString.filterEmptyString(numberTokens);
+
+        for (String number : filteredNumberTokens) {
+            if (inputValidator.isMinus(number)) {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            }
+            if (!inputValidator.isNumeric(number)) {
+                throw new IllegalArgumentException("숫자 이외의 값은 입력할 수 없습니다.");
+            }
+        }
+
+        return new ParsedInput(filteredNumberTokens);
     }
 
     private Set<String> extractCustomDelimiters(String customDelimiterSection) {
