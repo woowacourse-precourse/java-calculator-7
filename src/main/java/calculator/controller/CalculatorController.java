@@ -18,7 +18,7 @@ public class CalculatorController {
     }
 
     public void run() {
-        String str = inputView.inputStringToAdd();
+        String str = inputView.inputString();
 
         if (DelimiterValidator.hasCustomDelimiter(str)) {
             Delimiter.addCustomDelimiter(str);
