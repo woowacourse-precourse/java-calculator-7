@@ -54,9 +54,25 @@ class ApplicationTest extends NsTest {
         }
 
         @Test
-        void 커스텀_구분자_테스트를_진행한다() {
+        void 단일_커스텀_구분자_테스트를_진행한다() {
             assertSimpleTest(() -> {
                 run("//;\\n1;2;3");
+                assertThat(output()).contains("결과 : 6");
+            });
+        }
+
+        @Test
+        void 연속된_커스텀_구분자_테스트를_진행한다() {
+            assertSimpleTest(() -> {
+                run("//;;\\n1;;2;;3");
+                assertThat(output()).contains("결과 : 6");
+            });
+        }
+
+        @Test
+        void 메타_문자인_커스텀_구분자_테스트를_진행한다() {
+            assertSimpleTest(() -> {
+                run("//?\\n1?2?3");
                 assertThat(output()).contains("결과 : 6");
             });
         }
