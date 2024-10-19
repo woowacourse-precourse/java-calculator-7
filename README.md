@@ -40,7 +40,8 @@
    - [x] 0이 먼저 나올 경우
    - [x] 공백일 경우 [Pass]
    - [x] 기본 구분자 [Pass]
-   - [x] 커스텀 구분자 [Pass]
+   - [x] 커스텀 구분자 문자열[Pass]
+   - [x] 커스텀 구분자 문자[Pass]
 2. SumTest
    - [x] 최댓값 초과및 합 테스트
 3. RegexPatternTest
