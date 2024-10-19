@@ -34,11 +34,17 @@ public class Adder {
     }
 
     public int addAll(Queue<String> string) {
+        System.out.println(string);
         while (!string.isEmpty()) {
             separatedNumberString = string.poll();
-            if (Integer.parseInt(separatedNumberString) < 0) {
-                throw new IllegalArgumentException();
+            try {
+                if (Integer.parseInt(separatedNumberString) < 0) {
+                    throw new IllegalArgumentException();
+                }
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("허용되지 않은 문자가 포함되었습니다.");
             }
+
             sum += Integer.parseInt(separatedNumberString);
         }
         return sum;
