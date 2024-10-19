@@ -91,6 +91,19 @@ class ApplicationTest extends NsTest {
 
     }
 
+    @Test
+    void 커스텀_구분자가_3개_초과일경우_예외테스트() {
+
+        String userInput = "//!\\n//@\\n//#\\n//$\\n1,2,3";
+
+        inputString = new InputString(userInput);
+
+        assertThatThrownBy(() -> runException(userInput))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] 커스텀 구분자는 3개까지 가능합니다.");
+
+    }
+
 
     @Override
     public void runMain() {
