@@ -15,6 +15,10 @@ public class Application {
             if (endIndex != -1) { // \n 이 있다면 커스텀 구분자로 업데이트
                 determine = input.substring(2, endIndex); // 커스텀 구분자 업데이트
                 input = input.substring(endIndex + 2);
+
+                if(!input.contains(determine)){ // 커스텀 구분자로 구분되지 않을 경우
+                    throw new IllegalArgumentException();
+                }
             } else { // \n 이 없을 경우 커스텀 선언이 안됨
                 throw new IllegalArgumentException();
             }
