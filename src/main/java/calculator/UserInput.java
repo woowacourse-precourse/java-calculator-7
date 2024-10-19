@@ -54,9 +54,5 @@ public class UserInput {
     public boolean isCustom() {
         return userInput.startsWith(CUSTOM_DELIMITER_PREFIX);
     }
-
-    public String getUserInput() {
-        return userInput;
-    }
     
 }

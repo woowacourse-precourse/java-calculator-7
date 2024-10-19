@@ -18,15 +18,11 @@ public class StringCalculator {
 
         if (isCustomDelimiter) {
             delimiterResult = generateDelimiterResult(userInput, delimiterResult);
-            System.out.println(delimiterResult.getDelimiterResult());
             input = userInput.extractNumbersPart();
         }
 
         DelimitedNumbers delimitedNumbers = new DelimitedNumbers(input, delimiterResult);
         String[] separatedNumbers = generateSeparatedNumbers(delimitedNumbers, delimiterResult);
-        for (String separatedNumber : separatedNumbers) {
-            System.out.println(separatedNumber);
-        }
         Numbers numbers = new Numbers(separatedNumbers);
 
         int sum = calculateTotalSum(numbers);
