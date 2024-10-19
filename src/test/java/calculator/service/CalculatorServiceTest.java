@@ -19,7 +19,7 @@ class CalculatorServiceTest {
     void isCustomDelimiterTrue() {
 
         //given
-        String inputString = "//*\n1*2*3";
+        String inputString = "//*\\n1*2*3";
 
         //when
         boolean result = calculatorService.isCustomDelimiter(inputString);
@@ -47,7 +47,7 @@ class CalculatorServiceTest {
     void parseCustomDelimiter() {
 
         //given
-        String inputString = "//*\n1*2*3";
+        String inputString = "//*\\n1*2*3";
 
         //when
         String delimiter = calculatorService.parseCustomDelimiter(inputString);
@@ -136,7 +136,7 @@ class CalculatorServiceTest {
     void setDelimiter() {
         //given
         String customDelimiter = "&";
-        String inputString = "//" + customDelimiter + "\n1&2&3";
+        String inputString = "//" + customDelimiter + "\\n1&2&3";
 
         DelimiterInputDto delimiterInputDto =
                 new DelimiterInputDto(inputString, new ArrayList<>(List.of(",", ":")));
@@ -156,7 +156,7 @@ class CalculatorServiceTest {
 
         //given
         String customDelimiter = "&";
-        String inputString = "//" + customDelimiter + "\n1&2&3";
+        String inputString = "//" + customDelimiter + "\\n1&2&3";
         DelimiterInputDto delimiterInputDto = new DelimiterInputDto(inputString, new ArrayList<>(List.of(",", ":")));
 
         //when
