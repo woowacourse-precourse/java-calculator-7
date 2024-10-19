@@ -2,8 +2,8 @@ package calculator.domain.input;
 
 public class InputTypeSorter {
 
-    private static final CharSequence COMMA = ",";
-    private static final CharSequence COLON = ":";
+    private static final String COMMA = ",";
+    private static final String COLON = ":";
     private static final String DOUBLE_SLASH = "//";
     private static final String ESCAPE = "\\n";
 
