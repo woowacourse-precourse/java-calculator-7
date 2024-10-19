@@ -5,13 +5,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DefaultDelimiterParser {
+public class DefaultDelimiterParser implements DelimiterParser {
     private static final String WHITESPACE = " ";
     private final NumberValidator numberValidator = new NumberValidator();
 
     public List<Integer> parseInputNumbers(String input) {
         input = removeDelimiter(input);
-        
+
         numberValidator.validate(input);
 
         return Arrays.stream(input.split(WHITESPACE))
