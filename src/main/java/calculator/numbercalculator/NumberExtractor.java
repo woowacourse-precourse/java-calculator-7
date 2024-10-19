@@ -10,6 +10,9 @@ public class NumberExtractor {
     private final CustomDelimiterCalculator customDelimiterCalculator = new CustomDelimiterCalculator();
 
     public Numbers extractNumbers(String input) {
+        if (input.isEmpty()) {
+            return Numbers.empty();
+        }
         if (customDelimiterCalculator.matches(input)) {
             Delimiter customDelimiter = customDelimiterCalculator.extract(input);
             delimiters.add(customDelimiter);
