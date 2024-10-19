@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StringParser {
+    private static final int DELIMITER_OFFSET = 2;
+
     public String getCustomDelimiter(String input) {
         int endIndex = input.indexOf(CUSTOM_DELIMITER_END);
         return input.substring(2, endIndex);
@@ -15,7 +17,7 @@ public class StringParser {
     public int[] convertStringToIntArray(String input) {
         int startIndex = 0;
         if (input.startsWith(CUSTOM_DELIMITER_START)) { // 커스텀 구분자가 있는 경우
-            startIndex = input.indexOf(CUSTOM_DELIMITER_END) + 2; // 그 이후부터 탐색하도록 인덱스 조정
+            startIndex = input.indexOf(CUSTOM_DELIMITER_END) + DELIMITER_OFFSET; // 그 이후부터 탐색하도록 인덱스 조정
         }
 
         List<Integer> numbers = new ArrayList<>();

@@ -3,6 +3,7 @@ package calculator.input;
 import static calculator.constants.DelimiterConstants.*;
 
 public class Validator {
+    private static final int DELIMITER_OFFSET = 2;
 
     public void check(String input) {
         checkString(input, null);
@@ -26,7 +27,7 @@ public class Validator {
     private void checkString(String input, String customDelimiter) {
         int startIndex = 0;
         if (customDelimiter != null) {
-            startIndex = input.indexOf(CUSTOM_DELIMITER_END) + 2; // 검사 시작 인덱스를 커스텀 지정자 선언 문구 이후로 설정
+            startIndex = input.indexOf(CUSTOM_DELIMITER_END) + DELIMITER_OFFSET; // 검사 시작 인덱스를 커스텀 지정자 선언 문구 이후로 설정
         }
 
         boolean isDelimiterAllowed = false;
