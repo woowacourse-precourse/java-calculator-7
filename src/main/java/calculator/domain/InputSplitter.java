@@ -22,12 +22,16 @@ public class InputSplitter {
         return validateCommaAndColonDelimiter(input);
     }
 
-    private String getInputExceptRegex(String input) {
-        return input.substring(START_INDEX_EXCEPT_REGEX);
+    private String escapeMetacharacter(String delimiter) {
+        return Pattern.quote(delimiter);
     }
 
     private String getCustomDelimiter(String input) {
         return input.substring(CUSTOM_DELIMITER_START_INDEX, CUSTOM_DELIMITER_END_INDEX);
+    }
+
+    private String getInputExceptRegex(String input) {
+        return input.substring(START_INDEX_EXCEPT_REGEX);
     }
 
     private String[] validateCommaAndColonDelimiter(String input) {
@@ -35,9 +39,5 @@ public class InputSplitter {
             throw new InvalidDelimiterException();
         }
         return input.split(COMMA_COLON_DELIMITER);
-    }
-
-    private String escapeMetacharacter(String delimiter) {
-        return Pattern.quote(delimiter);
     }
 }
