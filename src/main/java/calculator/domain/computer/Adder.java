@@ -13,11 +13,14 @@ public class Adder {
     }
 
     public int inPut(String string) {
-
+        return addAll(separator.separateString(string));
     }
 
     public int addAll(Queue<String> string) {
-
+        while (!string.isEmpty()) {
+            sum += Integer.parseInt(string.poll());
+        }
+        return sum;
     }
 
 }
