@@ -2,48 +2,16 @@ package calculator.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.jupiter.api.Test;
+import calculator.domain.input.InputTypeSorter;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
-public class StringCalculatorTest {
-
-//    @Test
-//    void 빈_문자열_입력() {
-//        assertThat(StringCalculator.calculate("")).isEqualTo(0);
-//    }
-//
-//    @Test
-//    void null_문자열_입력() {
-//        assertThat(StringCalculator.calculate(null)).isEqualTo(0);
-//    }
-//
-//    @Test
-//    void 구분자_콤마() {
-//        assertThat(StringCalculator.calculate("1,2,3")).isEqualTo(6);
-//    }
-//
-//    @Test
-//    void 구분자_콜론() {
-//        assertThat(StringCalculator.calculate("1:2:3")).isEqualTo(6);
-//    }
-//
-//    @Test
-//    void 구분자_컴마_콜론() {
-//        assertThat(StringCalculator.calculate("1,2:3")).isEqualTo(6);
-//    }
-//
-//    @Test
-//    void 커스텀_구분자() {
-//        assertThat(StringCalculator.calculate("//;\\n1;2;3")).isEqualTo(6);
-//    }
-//
-//    @Test
-//    void 숫자_하나() {
-//        assertThat(StringCalculator.calculate("1")).isEqualTo(1);
-//    }
-
-    @Test
-    void 덧셈_계산() {
-        assertThat(Calculator.cal)
+public class CalculatorTest {
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3 | 6", "1:2:3 | 6", "1,2:3 | 6", "//;\\n1;2;3 | 6", "1 | 1", " | 0"}, delimiter = '|')
+    void 덧셈_계산(String input, Long expected) {
+        Long[] calculationInputs = InputTypeSorter.sort(input).createCalculationInputs();
+        assertThat(Calculator.addition(calculationInputs)).isEqualTo(expected);
     }
 
 }

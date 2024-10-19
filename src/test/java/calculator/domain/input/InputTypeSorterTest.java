@@ -1,12 +1,7 @@
-package calculator.domain;
+package calculator.domain.input;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import calculator.domain.input.BasicInput;
-import calculator.domain.input.CustomInput;
-import calculator.domain.input.EmptyInput;
-import calculator.domain.input.InputTypeSorter;
-import calculator.domain.input.OtherInput;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

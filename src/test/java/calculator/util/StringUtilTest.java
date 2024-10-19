@@ -8,6 +8,6 @@ public class StringUtilTest {
 
     @Test
     void split() {
-        assertThat(StringUtil.splitInput("1,2,3", ",")).containsExactly("1", "2", "3");
+        assertThat(StringUtil.splitText("1,2,3", ",")).containsExactly("1", "2", "3");
     }
 }

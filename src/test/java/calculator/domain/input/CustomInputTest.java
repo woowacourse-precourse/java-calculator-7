@@ -1,8 +1,7 @@
-package calculator.domain;
+package calculator.domain.input;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import calculator.domain.input.CustomInput;
 import org.junit.jupiter.api.Test;
 
 public class CustomInputTest {
