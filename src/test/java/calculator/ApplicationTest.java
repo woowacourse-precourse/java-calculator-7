@@ -33,7 +33,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 비정상적인_쉼표() {
+    void 비정상적인_구분자() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> runException(",,,,,1,1,1,1,1"))
                     .isInstanceOf(IllegalArgumentException.class);
@@ -41,7 +41,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 비정상적인_쉼표2() {
+    void 비정상적인_구분자2() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> runException("1,1,1,1,1,,,,,"))
                     .isInstanceOf(IllegalArgumentException.class);
