@@ -28,7 +28,7 @@ public class Parser {
         if (matcher.find()) {
             customSeparator = matcher.group(1);
         }
-        String realInput = input.substring(input.lastIndexOf("\\n") + 2);
+        String realInput = input.substring(input.indexOf("\\n") + 2);
 
         VerificationCustomSeparator verificationCustomSeparator = new VerificationCustomSeparator(customSeparator);
 
