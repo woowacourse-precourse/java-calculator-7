@@ -4,9 +4,13 @@ public class Calculator {
     private static final String COMMA = ",";
     private static final String COLON = ":";
 
-    public int calcString(String input){
-        if(input.isEmpty()) {
+    public int calcString(String input) {
+        if(input == null || input.isEmpty()) {
             return 0;
+        }
+
+        if (!input.startsWith("//") && !input.matches("^[0-9, :]*$")) {
+            throw new IllegalArgumentException("잘못된 입력입니다.");
         }
 
         if(input.startsWith("//")) {
@@ -23,6 +27,11 @@ public class Calculator {
 
     private int calcWithCustom(String input) {
         int delimiterEnd = input.indexOf("\\n");
+
+        if (delimiterEnd == -1) {
+            throw new IllegalArgumentException("잘못된 입력입니다.");
+        }
+
         String delimiter = input.substring(2,delimiterEnd);
         String numbersString = input.substring(delimiterEnd + 2);
 
@@ -34,6 +43,9 @@ public class Calculator {
         int result = 0;
 
         for(String num : numbers){
+            if (!num.matches("\\d+")) {
+                throw new IllegalArgumentException("잘못된 입력입니다.");
+            }
             result += Integer.parseInt(num);
         }
 
