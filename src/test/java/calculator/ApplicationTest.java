@@ -28,6 +28,10 @@ class ApplicationTest extends NsTest {
             run("4,,2:3");
             assertThat(output()).contains("결과 : 9"); //4+2+3=9
 
+            //숫자가 하나만 들어간 상황
+            run("5");
+            assertThat(output()).contains("결과 : 5");
+
         });
     }
 
