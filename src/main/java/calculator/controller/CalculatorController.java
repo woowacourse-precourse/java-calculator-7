@@ -10,11 +10,11 @@ public class CalculatorController {
     InputView inputView = new InputView();
     Validator validator = new Validator();
     Calculator calculator = new Calculator();
-    ArrayList<String> separator = new ArrayList<>();
+    ArrayList<String> separators = new ArrayList<>();
 
     public CalculatorController() {
-        separator.add(",");
-        separator.add(":");
+        separators.add(",");
+        separators.add(":");
     }
 
     public void run() {
@@ -24,10 +24,13 @@ public class CalculatorController {
             System.out.println("0");
             return;
         }
-        if (!validator.checkCustomSeparator(input, separator)) {
+        if (!validator.checkCustomSeparator(input, separators)) {
             throw new IllegalArgumentException("커스텀 구분자를 잘못 입력하였습니다.");
         }
-        int sum = calculator.sumNumber(input, separator);
+        if (!validator.checkIsCorrectString(input, separators)) {
+            throw new IllegalArgumentException("올바른 문자열이 아닙니다.");
+        }
+        int sum = calculator.sumNumber(input, separators);
         System.out.println(sum);
     }
 }
