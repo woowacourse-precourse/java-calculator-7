@@ -19,12 +19,7 @@ public class StringCalculatorController {
 
     // 프로그램 실행
     public void run() {
-        try {
-            handleUserInput();
-        } catch (IllegalArgumentException e) {
-            // 예외 발생 시 프로그램 종료
-            throw e; // 예외를 던져서 프로그램 종료 유도
-        }
+        handleUserInput();
     }
 
     // 사용자 입력 처리하는 메소드
