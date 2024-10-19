@@ -4,11 +4,14 @@ import java.util.List;
 
 public class Calculator {
 
-    private final StringParser stringParser = new StringParser();
+    private final StringParser stringParser;
+
+    public Calculator() {
+        this.stringParser = new StringParser();
+    }
 
     public int sumNumbersFromString(String input) {
         List<Integer> numbers = stringParser.extractNumbers(input);
-
         return sumNumbers(numbers);
     }
 
