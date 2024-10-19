@@ -22,7 +22,7 @@ public class Calculator {
         numberList = SplitUtils.getCalculationSection(userInput);
         checkEachInputIsValid();
         getTotal();
-        PrintUtils.printResult(total);
+        PrintUtils.print("결과 : " + total);
     }
 
     private static void checkEachInputIsValid() {
