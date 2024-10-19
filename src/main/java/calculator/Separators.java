@@ -14,10 +14,14 @@ public class Separators {
         separator.add(":");
     }
 
-    public void getCustomSeparator(String rawString) {
+    public void findCustomSeparator(String rawString) {
         Matcher matcher = Pattern.compile("(?<=//)(.*?)(?=\n)").matcher(rawString);
         while (matcher.find()) {
             separator.add(matcher.group());
         }
+    }
+
+    public List<String> getSeparators() {
+        return separator;
     }
 }
