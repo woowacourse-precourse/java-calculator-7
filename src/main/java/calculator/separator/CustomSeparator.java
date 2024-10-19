@@ -42,6 +42,7 @@ public class CustomSeparator implements Separator {
         }
     }
 
+    // 테스트를 위한 메서드
     public String getLine() {
         return line;
     }

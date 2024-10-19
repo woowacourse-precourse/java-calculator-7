@@ -47,7 +47,7 @@ public class CustomSeparatorTest extends NsTest {
     }
 
     @Test
-    public void 숫자_커스텀_지정자_예외_테스트() {
+    public void 숫자_커스텀_구분자_예외_테스트() {
         // given
         String input = "//4\\n2123534:03";
 
@@ -60,6 +60,65 @@ public class CustomSeparatorTest extends NsTest {
                         .isInstanceOf(IllegalArgumentException.class)
         );
 
+    }
+
+    @Test
+    public void 특수문자_구분자_테스트_큰따옴표() {
+        // given
+        String input = "//\"\\n21\"534:62,36\"53";
+
+        // when
+        CustomSeparator separator = new CustomSeparator(input);
+        String[] actual = separator.splitLine();
+
+        // then
+        String[] expected = new String[]{"21", "534", "62", "36", "53"};
+        Assertions.assertThat(actual).isEqualTo(expected);
+
+    }
+
+    @Test
+    public void 특수문자_구분자_테스트_백슬래시() {
+        // given
+        String input = "//\\\\n21\\534:62,36\\53";
+
+        // when
+        CustomSeparator separator = new CustomSeparator(input);
+        String[] actual = separator.splitLine();
+
+        // then
+        String[] expected = new String[]{"21", "534", "62", "36", "53"};
+        Assertions.assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    public void 커스텀_구분자_두글자_예외() {
+        // given
+        String input = "//ad\\n21,534:62,36";
+
+        // when
+        CustomSeparator separator = new CustomSeparator(input);
+
+        // then
+        assertSimpleTest(() ->
+                assertThatThrownBy(separator::splitLine)
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    public void 커스텀_구분자_잘못_지정() {
+        // given
+        String input = "//\n21,534:62,36";
+
+        // when
+        CustomSeparator separator = new CustomSeparator(input);
+
+        // then
+        assertSimpleTest(() ->
+                assertThatThrownBy(separator::splitLine)
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Override

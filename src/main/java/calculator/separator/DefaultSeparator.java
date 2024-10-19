@@ -2,7 +2,7 @@ package calculator.separator;
 
 public class DefaultSeparator implements Separator {
 
-    private String line;
+    private final String line;
 
     public DefaultSeparator(String line) {
         this.line = line;
