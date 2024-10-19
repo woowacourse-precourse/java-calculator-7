@@ -11,26 +11,30 @@ public class MainService {
     Exceptions exceptions = new Exceptions();
 
     public void getCustomDelimiter(InputString inputString) {
-
-        String input = inputString.getInputString();
-
         exceptions.validateCustomDelimiterSize(inputString.getCustomDelimiter().size());
 
-        if (input.startsWith("//")) { //
-            int customLastMark = input.indexOf("\\n");
-            if (customLastMark != -1) {
-
-                String customDelimiter = input.substring(2, customLastMark);
-                inputString.addCustomDelimiter(customDelimiter);
-
-                String refiendString = input.substring(customLastMark + 2);
-                inputString.setInputString(refiendString);
-
-                getCustomDelimiter(inputString);
-
-            }
+        if (checkedCustomDelimiterFormat(inputString.getInputString())) {
+            processCustomDelimiter(inputString);
         }
     }
+
+    private void processCustomDelimiter(InputString inputString) {
+        String input = inputString.getInputString();
+        int customLastMark = input.indexOf("\\n");
+
+        String customDelimiter = input.substring(2, customLastMark);
+        inputString.addCustomDelimiter(customDelimiter);
+
+        String refiendString = input.substring(customLastMark + 2);
+        inputString.setInputString(refiendString);
+
+        getCustomDelimiter(inputString);
+    }
+
+    private boolean checkedCustomDelimiterFormat(String input) {
+        return input.startsWith("//") && input.contains("\\n");
+    }
+
 
     public void extractSlashFromString(InputString inputString) {
         if (inputString.getInputString().startsWith("/")) {
@@ -60,7 +64,7 @@ public class MainService {
         if (customDelimiter.isEmpty()) {
             return defaultRegex;
         }
-        for(String delimiter : customDelimiter) {
+        for (String delimiter : customDelimiter) {
             defaultRegex.append("|").append(delimiter);
         }
         return defaultRegex;
@@ -69,7 +73,7 @@ public class MainService {
     public int getResultNumber(ResultNumbers resultNumbers) {
         int result = 0;
 
-        for(int num : resultNumbers.getNumberList()) {
+        for (int num : resultNumbers.getNumberList()) {
             result += num;
         }
         return result;
