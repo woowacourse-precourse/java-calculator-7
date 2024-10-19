@@ -28,12 +28,12 @@ public class Application {
 
     public int custom(String str) throws IllegalArgumentException {
         int answer = 0;
-        int customIndex = str.indexOf("\n");
+        int customIndex = str.indexOf("\\n");
         if(customIndex==-1) {
-            throw  new IllegalArgumentException();
+            throw new IllegalArgumentException();
         }
         String delimiter = str.substring(2,customIndex);
-        String str2 = str.substring(customIndex+1);
+        String str2 = str.substring(customIndex+2);
         String[] strArr = str2.split(delimiter);
         answer = addition(strArr);
         return  answer;
