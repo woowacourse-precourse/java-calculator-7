@@ -17,7 +17,11 @@ public class Operand {
         String[] numbers = expression.split(delimiter);
         this.numbers = new int[numbers.length];
         for (int i = 0; i < numbers.length; i++) {
-            this.numbers[i] = Integer.parseInt(numbers[i]);
+            try {
+                this.numbers[i] = Integer.parseInt(numbers[i]);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid number: " + numbers[i]);
+            }
         }
     }
 
