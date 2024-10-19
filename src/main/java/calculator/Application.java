@@ -2,10 +2,6 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
-class Delimiter {
-
-}
-
 public class Application {
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -114,10 +110,10 @@ public class Application {
     //커스텀 구분자로 |를 추가했을 때 수정하는 메서드
     public static String delimiterCheck(String input, int index) {
         String check = input.substring(2, index);
-        String complateCheck = check.contains("|")
+
+        return check.contains("|")
                 ? check.replace("|", "\\|")
                 : check;
-        return complateCheck;
     }
 
     //커스텀 구분자가 들어갔는지 확인하는 메서드
