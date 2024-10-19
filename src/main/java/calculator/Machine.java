@@ -15,8 +15,7 @@ public class Machine {
 
     public Machine() {
     }
-
-
+    
     private static String escapeMetaChars(String input) {
         StringBuilder result = new StringBuilder();
 
