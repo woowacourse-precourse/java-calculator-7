@@ -23,6 +23,7 @@ public class Application {
         String numbers = removeCDelimiter(input);//입력값의 커스텀 입력부 삭제
 
         return numbers.split(delimiter(input)); // 콤마와 콜론, 커스텀 구분자로 사용하여 문자열을 나눔
+        //todo 연산자 배열된거 string으로 바꾸게 for each문 돌려서 넣기
     }
 
     //나눠진 문자를 합하는 메서드
@@ -38,6 +39,8 @@ public class Application {
 
     //나눠진 문자들이 합당한지 확인하는 메서드
     public static void isNum(String[] parts) {
+        checkOnlySpace(parts[0]);   //만약 전부 공백이면 여기에서 0으로 걸러짐
+
         for (String part : parts) {
             stringToChar(part);
             isSpace(part);
@@ -55,7 +58,7 @@ public class Application {
     //char 자료를 숫자인지 확인하고 아니면 에러내는 메서드
     public static void isDigit(char c) {
         if (!Character.isDigit(c)) {
-            System.out.println("error");
+            System.out.println("num error");
             throw new IllegalArgumentException(); //
         }
     }
@@ -63,6 +66,14 @@ public class Application {
     //아무것도 입력 안했는지 확인 후 즉시 출력하는 메서드
     public static void isSpace(String part) {
         if (part.isEmpty()) {
+            System.out.println("space error");
+            throw new IllegalArgumentException(); //
+        }
+    }
+
+    //입력한 것이 오직 공백인지 확인하는 메서드
+    public static void checkOnlySpace(String part) {
+        if (part.equals("")) {
             System.out.println("결과 : 0");
         }
     }
@@ -81,7 +92,7 @@ public class Application {
     public static String delimiter(String input) {
         if (input.startsWith("//") && input.contains("\\n")) {
             int index = input.indexOf("\\n");
-            return "[,:]" + input.substring(2, index);
+            return "[,:]" + input.substring(2, index); //todo 연산자 한개체로 취급하게 배열로 바꾸기
         }
         return "[,:]";
     }
