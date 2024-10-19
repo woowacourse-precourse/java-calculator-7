@@ -1,5 +1,8 @@
 package calculator;
 
+import static calculator.constants.ExceptionCode.NEGATIVE_OR_ZERO_INPUT;
+import static calculator.constants.ExceptionCode.VALID_NUMBER;
+
 public class Input {
 
     private final String input;
@@ -37,7 +40,7 @@ public class Input {
             try {
                 numbers[i] = Integer.parseInt(splitStr[i]);
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
+                throw new IllegalArgumentException(VALID_NUMBER.getMessage());
             }
         }
         return numbers;
@@ -46,7 +49,7 @@ public class Input {
     private static void validPositiveArray(int[] numbers) {
         for (int number : numbers) {
             if (number <= 0) {
-                throw new IllegalArgumentException("0 또는 음수는 입력할 수 없습니다.");
+                throw new IllegalArgumentException(NEGATIVE_OR_ZERO_INPUT.getMessage());
             }
         }
     }

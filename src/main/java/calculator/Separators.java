@@ -1,7 +1,11 @@
 package calculator;
 
+import static calculator.constants.DesignSeparator.END;
+import static calculator.constants.DesignSeparator.START;
+import static calculator.constants.ExceptionCode.NULL_INPUT;
+import static calculator.constants.ExceptionCode.VAILDATION_CUSTOME;
+
 import calculator.constants.BasicSeparator;
-import calculator.constants.DesignSeparator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,24 +25,23 @@ public class Separators {
 
     public String containCustomSeparator(String input) {
         if (input == null) {
-            throw new IllegalArgumentException("입력값이 null이 될 수 없습니다.");
+            throw new IllegalArgumentException(NULL_INPUT.getMessage());
         }
-        if (input.startsWith(DesignSeparator.START.getSymbol()) && input.contains(
-                DesignSeparator.END.getSymbol())) {
-            int customSeparatorStartIdx = DesignSeparator.START.getSymbolLength();
-            int customSeparatorEndIdx = input.indexOf(DesignSeparator.END.getSymbol());
+        if (input.startsWith(START.getSymbol()) && input.contains(END.getSymbol())) {
+            int customSeparatorStartIdx = START.getSymbolLength();
+            int customSeparatorEndIdx = input.indexOf(END.getSymbol());
 
             if (customSeparatorEndIdx == -1) {
-                throw new IllegalArgumentException("커스텀 구분자가 올바르게 입력되지 않았습니다.");
+                throw new IllegalArgumentException(VAILDATION_CUSTOME.getMessage());
             }
 
             if (customSeparatorStartIdx + 1 != customSeparatorEndIdx) {
-                throw new IllegalArgumentException("커스텀 구분자가 올바르게 입력되지 않았습니다.");
+                throw new IllegalArgumentException(VAILDATION_CUSTOME.getMessage());
             }
 
             separators.add(input.substring(customSeparatorStartIdx, customSeparatorEndIdx));
             this.separators = List.copyOf(separators);
-            return input.substring(customSeparatorEndIdx + DesignSeparator.END.getSymbolLength());
+            return input.substring(customSeparatorEndIdx + END.getSymbolLength());
         }
         return input;
     }
