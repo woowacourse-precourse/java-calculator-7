@@ -1,4 +1,6 @@
 package calculator.domain;
+
+import calculator.exception.InvalidInputException;
 import calculator.validation.MessageType;
 
 import java.util.Arrays;
@@ -6,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Calculator {
-    private static final Pattern CUSTOM_SEPERATOR_PATTERN=Pattern.compile("^//(.)\\\\n{1}(.*)");
+    private static final Pattern CUSTOM_SEPERATOR_PATTERN=Pattern.compile(RegexType.CUSTOM_SEPERATOR.getRegex());
     private static String seperatorRegex=",|:";
 
     public static int inputCalculate(String input){
@@ -48,7 +50,7 @@ public class Calculator {
 
     private static void isNumber(String num) {
         if (!(num.matches("[0-9]{0,}"))){
-            throw new IllegalArgumentException(MessageType.INVALID_SEPERATOR.getMessage());
+            throw new InvalidInputException(MessageType.INVALID_SEPERATOR);
         }
     }
 
@@ -83,13 +85,13 @@ public class Calculator {
 
     private static void checkIfNumber(String customSeperator) {
         if (customSeperator.matches("[0-9]")){
-            throw new IllegalArgumentException(MessageType.NUMBER_SEPERATOR.getMessage());
+            throw new InvalidInputException(MessageType.NUMBER_SEPERATOR);
         }
     }
 
     private static void checkIfMinus(String customSeperator) {
         if (customSeperator.equals("-")){
-            throw new IllegalArgumentException(MessageType.MINUS_SEPERATOR.getMessage());
+            throw new InvalidInputException(MessageType.MINUS_SEPERATOR);
         }
     }
 }
