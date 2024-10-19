@@ -2,61 +2,54 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.math.BigInteger;
 import java.util.HashSet;
 import java.util.Set;
 
 public class Application {
 
+    private static final int SEPARATOR_START = 2;
+
     public static void main(String[] args) {
-        String s = readIn(); // 입력
-        Set<String> separatorSet = parseSeparator(s);
-        String afterSeparator = sliceString(s);
+        String input = readIn(); // 입력
+        Set<String> separatorSet = parseSeparator(input);
+        String afterSeparator = input.substring(findSeparatorEndIndex(input));
         System.out.println("Separators: " + separatorSet);
         System.out.println("After separator: " + afterSeparator);
     }
 
     public static String readIn() {
-        String new_in = Console.readLine();
-        if (new_in == null || new_in.isEmpty()) {
-            throw new IllegalArgumentException();
+        String newInput = Console.readLine();
+        if (newInput == null || newInput.isEmpty()) {
+            throw new IllegalArgumentException("Input cannot be null or empty.");
         }
-        return new_in;
+        return newInput;
     }
+
 
     public static Set<String> parseSeparator(String input) {
         Set<String> separatorSet = new HashSet<>();
 
         if (input.startsWith("//")) {
-            for (int i = 2; i < input.length(); i++) {
+            for (int i = SEPARATOR_START; i < input.length(); i++) {
                 if (input.charAt(i) == '\\') {
-                    if (i < input.length() - 1) {
-                        if(input.charAt(i+1) == 'n') break;
-                        separatorSet.add(input.substring(i, i + 1));
+                    if (i < input.length() - 1 && input.charAt(i + 1) == 'n') {
+                        break;
                     }
+                } else {
+                    separatorSet.add(input.substring(i, i + 1));
                 }
-                else separatorSet.add(input.substring(i, i + 1));
             }
         }
+
         separatorSet.add(",");
         separatorSet.add(":");
         return separatorSet;
     }
 
-    public static String sliceString(String input) {
-        int idx = 0;
-        if (input.startsWith("//")) {
-            for (int i = 2; i < input.length()-2; i++) {
-                if (input.charAt(i) == '\\') {
-                    if (i < input.length() - 1) {
-                        if(input.charAt(i+1) == 'n') {
-                            idx=i+2;
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-        return input.substring(idx);
+    // 구분자 끝을 찾는 로직
+    private static int findSeparatorEndIndex(String input) {
+        return 0;
     }
 }
 
