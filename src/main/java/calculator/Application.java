@@ -28,12 +28,22 @@ public class Application {
         // 커스텀 구분자가 있는지 확인하고 처리
         if (checkCustomDelimiter(input)) {
             delimiter = addCustomDelimiter(delimiter, input);  // 기본 구분자에 커스텀 구분자 추가
-            input = Console.readLine();
+            // 1. \n이 포함되어 있는지 확인
+            if (input.contains("\n")) {
+                input = input.substring(input.indexOf("\n") + 1);
+            }
+            // 2. \\n이 포함되어 있는지 확인
+            else if (input.contains("\\n")) {
+                input = input.substring(input.indexOf("\\n") + 2);
+            }
+            // 3. 둘 다 없을 때 새로운 문장을 받기
+            else {
+                input = Console.readLine();
+            }
             if (input == null || input.isEmpty()) {
                 return 0;
             }
         }
-        System.out.println(delimiter);
         // 문자열을 구분자로 분리하여 숫자 배열 추출
         numbers = extractNumbers(input, delimiter);
         sum = Arrays.stream(numbers).sum();  // 숫자들 합 계산
