@@ -16,7 +16,15 @@ public class Application {
             return;
         }
 
-        String[] separator=new String[]{",",";"};
+        String customSeparator=null;
+        if(str.startsWith("//")){
+            int end=str.indexOf("\\n");
+            customSeparator=str.substring(0,end);
+
+            str=str.substring(end+2);
+        }
+
+        String[] separator=customSeparator!=null?new String[]{",",":",customSeparator}:new String[]{",",";"};
 
         for(String s:separator){
             str=str.replace(s," ");
