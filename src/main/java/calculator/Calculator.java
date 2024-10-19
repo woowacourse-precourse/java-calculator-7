@@ -39,6 +39,13 @@ public class Calculator {
     }
 
     public int calculate(String input) {
-        return 1;
+        Pattern pattern = Pattern.compile("([0-9])+");
+        Matcher matcher = pattern.matcher(input);
+
+        int result = 0;
+        while (matcher.find()) {
+            result += Integer.parseInt(matcher.group());
+        }
+        return result;
     }
 }
