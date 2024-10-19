@@ -39,7 +39,7 @@ public class Application {
 
     // 커스텀 구분자 추출
     private static String extractCustomDelimiter(String input) {
-        int delimiterIndex = input.indexOf("\n");
+        int delimiterIndex = input.indexOf("\\n");
         if (delimiterIndex == -1) {
             throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
         }
@@ -48,8 +48,8 @@ public class Application {
 
     // 숫자 문자열 추출
     private static String extractNumbers(String input) {
-        int delimiterIndex = input.indexOf("\n");
-        return input.substring(delimiterIndex + 1); // 구분자 이후 숫자 문자열
+        int delimiterIndex = input.indexOf("\\n");
+        return input.substring(delimiterIndex + 2); // 구분자 이후 숫자 문자열
     }
 
     // 숫자 합산 계산
@@ -67,4 +67,5 @@ public class Application {
             throw new IllegalArgumentException("잘못된 숫자 형식입니다: " + number);
         }
     }
+
 }
