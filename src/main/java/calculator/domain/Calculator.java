@@ -12,4 +12,8 @@ public class Calculator {
         this.delimiters.add(':');
         this.delimiters.add(',');
     }
+
+    public String getDelimitersAsString() {
+        return this.delimiters.toString();
+    }
 }
