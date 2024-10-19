@@ -8,18 +8,12 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class StringCalculator {
 
-    String separators;
-    boolean hasCustomSeparator;
-
     void run() {
         printInputMsg();
         String input = Console.readLine();
 
-        if (validateCustomPart(input)) {
-            hasCustomSeparator = true;
-        }
-        separators = initSeparator(input, hasCustomSeparator);
-
+        boolean hasCustomSeparator = validateCustomPart(input);
+        String separators = initSeparator(input, hasCustomSeparator);
         String str = initString(input, hasCustomSeparator);
         validateString(str, separators);
 
