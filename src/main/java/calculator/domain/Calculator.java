@@ -1,14 +1,26 @@
 package calculator.domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Calculator {
 
     String rawValue;
-    List<Integer> processedValue;
+    int[] processedValue;
     int sumValue;
+    List<String> separators;
+
+    public List<String> getSeparators() {
+        return separators;
+    }
+
+    public void setSeparators(List<String> separators) {
+        this.separators = separators;
+    }
 
     public Calculator() {
+        this.separators = new ArrayList<>(Arrays.asList(";", ","));
     }
 
     public String getRawValue() {
@@ -19,11 +31,11 @@ public class Calculator {
         this.rawValue = rawValue;
     }
 
-    public List<Integer> getProcessedValue() {
+    public int[] getProcessedValue() {
         return processedValue;
     }
 
-    public void setProcessedValue(List<Integer> processedValue) {
+    public void setProcessedValue(int[] processedValue) {
         this.processedValue = processedValue;
     }
 

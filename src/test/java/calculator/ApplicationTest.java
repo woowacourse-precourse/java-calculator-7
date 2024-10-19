@@ -7,6 +7,7 @@ import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,19 +45,19 @@ class ApplicationTest extends NsTest {
         // - 계산식에 -> 구분자 리스트에 포함 되지 않는 값이 있을경우
 
         // given
-        String wrongInputCase1 = "/;\\n1";
-        String wrongInputCase2 = "//;\\n1+2";
-        Calculator calculation2 = new Calculator();
-        CalculatorService service = new CalculatorService(calculation2);
+        Calculator calculator = new Calculator();
+        CalculatorService service = new CalculatorService(calculator);
 
         // when
-        // 이 과정에서 임의로 잘못된 값을 설정
-        calculation2.setRawValue(wrongInputCase1);
+        String[] wrongInputCases = new String[] {"/;\\n1;1", "//;\\\\n1;2", "1:2", "//t\\n1+1", "1+1:"};
 
         // then
-        assertThrows(IllegalArgumentException.class, () -> {
-            service.validateInput();
-        });
+        for (String wrongInputCase : wrongInputCases) {
+            service.setIsValid(true);
+            calculator.setSeparators(new ArrayList<>(Arrays.asList(";", ",")));
+            calculator.setRawValue(wrongInputCase);
+            assertThrows(IllegalArgumentException.class, service::validateInput);
+        }
     }
 
     @Test
@@ -102,7 +103,7 @@ class ApplicationTest extends NsTest {
         String input = "//+\\n1+2:3,4";
         Calculator calculator = new Calculator();
         CalculatorService service = new CalculatorService(calculator);
-        List<Integer> expectedList = Arrays.asList(1, 2, 3, 4);
+        int[] expectedList = new int[]{1, 2, 3, 4};
         calculator.setProcessedValue(expectedList);
 
         // when

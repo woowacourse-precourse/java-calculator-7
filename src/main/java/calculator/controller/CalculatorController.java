@@ -12,14 +12,15 @@ public class CalculatorController {
     public void run() throws IOException {
 
         System.out.println("돌아갑니다.");
-
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        String input = br.readLine();
-        Calculator calculator = new Calculator();
-        CalculatorService service = new CalculatorService(calculator);
-        service.getInputValues(input);
-        System.out.println(calculator.getRawValue());
+        while (true) {
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            String input = br.readLine();
+            Calculator calculator = new Calculator();
+            CalculatorService service = new CalculatorService(calculator);
+            service.getInputValues(input);
+            System.out.println(calculator.getRawValue());
+            service.validateInput();
+        }
     }
 
 
