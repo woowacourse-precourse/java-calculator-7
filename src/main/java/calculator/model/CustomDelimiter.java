@@ -7,7 +7,7 @@ public class CustomDelimiter {
     private String formula;
 
     public CustomDelimiter(String formula){
-        this.formula = formula;
+        this.formula = formula.replace("\\n", "\n");
     }
 
     public String getFormula(){

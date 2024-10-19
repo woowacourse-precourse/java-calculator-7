@@ -27,7 +27,6 @@ public class MainController {
 
     public void readUserFormula(){
         this.customDelimiter = new CustomDelimiter(inputView.readUserNumbers());
-        inputValidator.mainInputValidator(customDelimiter);
         calculate();
     }
 
