@@ -30,7 +30,7 @@ public class Delimiter {
             throw new IllegalArgumentException("커스텀 구분자는 숫자가 될 수 없습니다.");
         }
 
-        delimiterList.add(customDelimiter);
+        delimiterList.add(escapeSpecialRegexChars(customDelimiter));
         inputString = inputString.substring(delimiterEndIndex + 2);
     }
 
@@ -48,5 +48,9 @@ public class Delimiter {
         }
         String delimiterRegex = String.join("|", delimiterList); // ",|:|customDeli"
         return inputString.split(delimiterRegex);
+    }
+
+    private String escapeSpecialRegexChars(String delimiter) {
+        return delimiter.replaceAll("([\\[\\]\\\\.^$|?*+(){}])", "\\\\$1");
     }
 }
