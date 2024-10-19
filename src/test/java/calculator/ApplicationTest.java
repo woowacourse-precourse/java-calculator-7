@@ -24,6 +24,22 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 기본_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("1,2:3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 공백_문자열_입력() {
+        assertSimpleTest(() -> {
+            run("\n");  // run(""); 이면 입력이 없기 때문에 입력이 안됨 run("\n"); 줄바꿈을 입력해야함
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
