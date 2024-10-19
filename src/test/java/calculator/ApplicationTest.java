@@ -6,8 +6,13 @@ import org.junit.jupiter.api.Test;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ApplicationTest extends NsTest {
+
+    private final InputValidator inputValidator = new InputValidator();
+
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
@@ -22,6 +27,27 @@ class ApplicationTest extends NsTest {
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+    @Test
+    void 입력_유효_테스트() {
+
+        // 올바른 입력
+        assertTrue(inputValidator.isValid("1,2"));
+        assertTrue(inputValidator.isValid("//#\\n1:23,3#4"));
+        assertTrue(inputValidator.isValid("//;\\n"));
+
+        // 구분자가 숫자보다 먼저온 경우
+        assertFalse(inputValidator.isValid(":123:12;2"));
+        // 중간에 띄어쓰기가 들어간 경우
+        assertFalse(inputValidator.isValid("//;\\n:12 3:12;2"));
+        // 구분자가 맨 뒤에 오는 경우
+        assertFalse(inputValidator.isValid("//;\\n123:12;2:"));
+        // 커스텀 서식이 잘못되었을 경우
+        assertFalse(inputValidator.isValid("/;\\n123:12;2:"));
+        // 음수입력
+        assertFalse(inputValidator.isValid("//;\\n123:-12;2"));
+
     }
 
     @Override
