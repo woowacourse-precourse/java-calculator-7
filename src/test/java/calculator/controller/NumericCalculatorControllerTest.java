@@ -1,11 +1,16 @@
 package calculator.controller;
 
-import calculator.model.Arithmetic;
-import calculator.model.InputData;
+import calculator.model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.ValueSources;
+
+import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,11 +24,30 @@ class NumericCalculatorControllerTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4","//;\\n1;2;3"})
-    @DisplayName("데이터 객체를 받아서 연산부분 객체를 생성한다")
-    void createCalculator(String input) {
+    @ValueSource(strings = {"1,2,3,4","1:2:3"})
+    @DisplayName("기본 연산자를 사용한 데이터 객체를 받아서 연산부분 객체를 생성한다")
+    void createCalculatorWithDefaultDelimiter(String input) {
         InputData inputData = new InputData(input);
-        assertThat(numericCalculatorController.createCalculatorPart(inputData))
+        Delimiter delimiter = new DefaultDelimiter();
+        assertThat(numericCalculatorController.createCalculatorPart(delimiter, inputData))
+                .isInstanceOf(Arithmetic.class);
+    }
+
+    private static Stream<List<String>> customDelimiterData() {
+        return Stream.of(
+                List.of("//;\\n1;2;3", ";"),
+                List.of("//!\\n1!2!3", "!"),
+                List.of("//a\\n1a2a3", "a")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("customDelimiterData")
+    @DisplayName("커스텀 연산자를 사용한 데이터 객체를 받아서 연산부분 객체를 생성한다")
+    void createCalculatorWithCustomDelimiter(List<String> input) {
+        InputData inputData = new InputData(input.get(0));
+        Delimiter delimiter = new CustomDelimiter(input.get(1));
+        assertThat(numericCalculatorController.createCalculatorPart(delimiter, inputData))
                 .isInstanceOf(Arithmetic.class);
     }
 }

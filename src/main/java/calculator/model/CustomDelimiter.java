@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 public class CustomDelimiter extends Delimiter {
     public CustomDelimiter(String delimiter) {
         super(delimiter);
+        validate();
     }
 
     @Override

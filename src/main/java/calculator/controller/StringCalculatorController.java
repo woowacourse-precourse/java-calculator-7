@@ -1,8 +1,5 @@
 package calculator.controller;
 
-import calculator.model.CustomDelimiter;
-import calculator.model.DefaultDelimiter;
-import calculator.model.Delimiter;
 import calculator.model.InputData;
 import calculator.view.InputView;
 
@@ -17,4 +14,5 @@ public class StringCalculatorController {
         String input = inputView.InputData();
         return new InputData(input);
     }
+
 }

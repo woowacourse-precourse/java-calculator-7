@@ -18,6 +18,7 @@ class SumCalculatorTest {
     @Test
     @DisplayName("덧셈 연산을 정확하게 수행한다")
     void calculateSumExactly(){
-        assertThat(sumCalculator.calculate(new Arithmetic("1,2,3,4"))).isEqualTo(10);
+        assertThat(sumCalculator.calculate(new Arithmetic(new DefaultDelimiter(),"1,2,3,4")))
+                .isEqualTo(10);
     }
 }
