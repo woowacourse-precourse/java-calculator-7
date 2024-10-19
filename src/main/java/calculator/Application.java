@@ -28,8 +28,12 @@ class StringCalculator{
 
         String[] numbers = input.split("[,:]"); // 구분자로 문자열 분리
 
+        int sum = 0;
 
-        return -1;
+        for (String number : numbers) {
+            sum += Integer.parseInt(number);
+        }
+        return sum; // 분리한 숫자를 합해 결과 출력
     }
 }
 
