@@ -4,7 +4,7 @@ import static calculator.validate.Validator.validateNumber;
 
 public class Calculator {
 
-    private int result;
+    private long result;
     private final Extractor extractor;
 
     public Calculator() {
@@ -15,11 +15,11 @@ public class Calculator {
         String[] numbers = extractor.extractNumber(input);
         for (String number : numbers) {
             validateNumber(number);
-            result += new Parser(number).parseToInt(number);
+            result += new Parser(number).parseToLong(number);
         }
     }
-    
-    public int getResult() {
+
+    public long getResult() {
         return result;
     }
 }

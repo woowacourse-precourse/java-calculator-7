@@ -4,10 +4,10 @@ import java.util.regex.Matcher;
 
 public class Validator {
 
-    private static final String POSITIVE_INTEGER_PATTERN = "^(|[1-9][0-9]*)$";
+    private static final String POSITIVE_NUMBER_PATTERN = "^(|[1-9][0-9]*)$";
 
     public static void validateNumber(String number) {
-        if (!number.matches(POSITIVE_INTEGER_PATTERN)) {
+        if (!number.matches(POSITIVE_NUMBER_PATTERN)) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_NUMBER);
         }
     }
