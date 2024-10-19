@@ -12,7 +12,7 @@ public class Application {
         String input = Console.readLine(); // 입력
         int endIndex = findSeparatorEndIndex(input); // 커스텀 구분자 입력의 끝부분('\n' 다음 인덱스)
         Set<String> separatorSet = parseSeparator(input, endIndex); // 구분자를 전부 모아놓을 Set
-        String afterSeparator = input.substring(endIndex); // 커스텀 구분자 입력을 전부 받은 후의 문자열('\n' 다음 문자열)
+        String afterSeparator = endIndex<=input.length()-1 ? input.substring(endIndex) : ""; // 커스텀 구분자 입력을 전부 받은 후의 문자열('\n' 다음 문자열)
         BigInteger ans = processNumber(afterSeparator, separatorSet); // 합을 저장할 결과값
         System.out.println("결과 : " + ans); // 출력
     }
@@ -36,7 +36,7 @@ public class Application {
             for (int i = 2; i < input.length(); i++) { // "//" 이후부터 끝까지
                 if (input.charAt(i) == '\\') { // 만약 "\" 발견시
                     if (i < input.length() - 1 && input.charAt(i + 1) == 'n') { // index out of bound 대비, "\n"이어야 끝이므로 "n"이 붙어있는지 확인
-                        return i + 2 < input.length() ? i + 2 : input.length() - 1; // 만약 끝이 "\n"이라면 마지막 인덱스 반환, 아니라면 다음 인덱스 반환
+                        return Math.min(i+2,input.length()-1); // 만약 끝이 "\n"이라면 마지막 인덱스 반환, 아니라면 다음 인덱스 반환
                     }
                 }
             }
@@ -61,8 +61,8 @@ public class Application {
     // 구분자로 나눈 뭉치가 숫자로만 되어있는지 확인하는 함수
     private static boolean isValid(String input) {
         for (char c : input.toCharArray()) { 
-            if ((int) c < 48 || (int) c > 57) { // 아스키 코드 48은 0, 57은 9이므로 이 밖은 문자로 간주
-                throw new IllegalArgumentException(); // 에외 발생
+            if ((int) c < 48 || (int) c > 57) { // 아스키 코드 48은 0, 57은 9이므로 이 밖은 문자로 간주함
+                throw new IllegalArgumentException("Invalid Input"); // 에외 발생
             }
         }
         return true;
