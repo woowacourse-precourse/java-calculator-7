@@ -1,7 +1,7 @@
 package calculator.view.input.validator;
 
 import calculator.constant.ErrorMessage;
-import calculator.separator.domain.RegexPattern;
+import calculator.regex.domain.RegexPattern;
 
 public class InputValidator {
     public static void validator(String input) {
