@@ -59,8 +59,6 @@ class ApplicationTest extends NsTest {
         assertEquals(List.of(1, 234, 3, 4), result);
     }
 
-
-
     @Override
     public void runMain() {
         Application.main(new String[]{});
