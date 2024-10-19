@@ -1,4 +1,6 @@
-package calculator.model;
+package calculator.parser;
+
+import calculator.validate.Validator;
 
 public class DelimiterParser {
     private static final String DELIMITERS = ",|:";

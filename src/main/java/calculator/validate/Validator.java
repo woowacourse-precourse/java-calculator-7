@@ -1,4 +1,4 @@
-package calculator.model;
+package calculator.validate;
 
 import calculator.errorMessage.CustomException;
 import calculator.errorMessage.ErrorMessage;

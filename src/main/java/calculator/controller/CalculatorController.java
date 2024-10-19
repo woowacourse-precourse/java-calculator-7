@@ -1,21 +1,21 @@
 package calculator.controller;
 
+import calculator.service.CalculatorService;
 import calculator.view.ConsoleView;
-import calculator.model.StringAdd;
 
 public class CalculatorController {
 
-    private final StringAdd stringAdd;
+    private final CalculatorService calculatorService;
     private final ConsoleView consoleView;
 
     public CalculatorController() {
-        this.stringAdd = new StringAdd();
+        this.calculatorService = new CalculatorService();
         this.consoleView = new ConsoleView();
     }
 
     public void run() {
         String input = consoleView.getInput();
-        int result = stringAdd.add(input);
+        int result = calculatorService.calculator(input);
         consoleView.outputResult(result);
     }
 

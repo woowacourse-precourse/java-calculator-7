@@ -1,22 +1,19 @@
-package calculator.model;
+package calculator.parser;
 
 import java.util.List;
 
-public class StringAdd {
-
+public class Parser {
     private final DelimiterParser delimiterParser;
     private final NumberParser numberParser;
 
-    public StringAdd(){
+    public Parser(){
         this.delimiterParser = new DelimiterParser();
         this.numberParser = new NumberParser();
     }
 
-    public int add(String input){
+    public List<Integer> parser(String input){
         String delimiters = delimiterParser.parseDelimiter(input);
         String numbers = delimiterParser.extractNumbers(input);
-        List<Integer> numberList = numberParser.parseNumbers(numbers, delimiters);
-
-        return numberList.stream().mapToInt(Integer::intValue).sum();
+        return numberParser.parseNumbers(numbers, delimiters);
     }
 }

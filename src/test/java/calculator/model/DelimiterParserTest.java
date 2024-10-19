@@ -1,5 +1,6 @@
 package calculator.model;
 
+import calculator.parser.DelimiterParser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

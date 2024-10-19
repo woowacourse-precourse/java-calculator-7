@@ -1,4 +1,6 @@
-package calculator.model;
+package calculator.parser;
+
+import calculator.validate.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
