@@ -11,7 +11,7 @@ public class CalculatorTest {
 
   @BeforeEach
   public void setUp() {
-    calculator = new Calculator("//;\\n1;2;3");
+//    calculator = new Calculator("//;\\n1;2;3");
   }
 
   @Test

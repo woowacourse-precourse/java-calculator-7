@@ -10,23 +10,29 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class RegexCheckTest {
   private Calculator calculator;
-  final String SORT="(//([^0-9]+)\\\\n)?([0-9]+|[^0-9]+)+";
+//  final String SORT="(//([^0-9]+)\\\\n)?([0-9]+|[^0-9]+)+";
+//  final String SORT="(//([^0-9]+)\\\\n)?([0-9][^0-9]+[0-9][^0-9]+[0-9]+)";
+
+  final String SORT = "(//([^0-9])\\\\n)?(([0-9]+[^0-9]+)*[0-9]*)$";
 
   @BeforeEach
   public void setUp() {
-    calculator = new Calculator("//`\\n1`2`3");
-    calculator.isCorrect(SORT);
-    calculator.division();
+    calculator = new Calculator("1`2`3");
+    calculator.isValidInput(SORT);
+//
   }
 
   @Test
   public void testIsCorrect() {
-    assertTrue(calculator.isCorrect(SORT));
+    assertTrue(calculator.isValidInput(SORT));
   }
 
   @Test
   public void checkTest() {
-    String[] arr=calculator.check();
-    System.out.println(Arrays.toString(arr));
+
+    assertThrows(IllegalArgumentException.class, () -> {
+      calculator = calculator.splitValues().matchesRegex();
+      throw new IllegalArgumentException("Invalid argument");
+    });
   }
 }

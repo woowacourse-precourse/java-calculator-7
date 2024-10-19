@@ -2,6 +2,9 @@ package calculator;
 
 public class Calculator extends RegexCheck{
 
+  public Calculator() {
+    this("");
+  }
 
   Calculator(String input) {
     super(input);
