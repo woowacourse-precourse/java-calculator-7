@@ -40,7 +40,7 @@
 - [ ] 커스텀 구분자가 존재하지 않고, `,`과 `;`를 제외한 다른 문자열이 존재할 경우 `IllegalArgumentException`을 발생시킨다.
   - 문자열에 띄어쓰기가 들어갈 경우 
     - 예 1) "1, 2" -> `IllegalArgumentException`
-- [ ] 문자열이 띄어쓰기로만 이루어진 경우 `IllegalArgumentException`을 발생시킨다.
+- [x] 문자열이 띄어쓰기로만 이루어진 경우 `IllegalArgumentException`을 발생시킨다.
   - 예 1) " "
 
 <br>
