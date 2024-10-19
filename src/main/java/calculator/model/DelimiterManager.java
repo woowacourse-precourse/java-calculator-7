@@ -27,8 +27,8 @@ public class DelimiterManager {
         customDelimiters.add(delimiterPart);
     }
 
-    private String extractDelimiter(String input, int delimiterStartIndex, int delimiterEndIndex) {
-        return input.substring(delimiterStartIndex + PREFIX.length(), delimiterEndIndex);
+    private String extractDelimiter(String inputString, int delimiterStartIndex, int delimiterEndIndex) {
+        return inputString.substring(delimiterStartIndex + PREFIX.length(), delimiterEndIndex);
     }
 
     public List<String> getAllDelimiters() {
