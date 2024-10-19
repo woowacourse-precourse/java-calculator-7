@@ -4,6 +4,7 @@ import static calculator.util.Constants.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static calculator.util.ErrorMessages.ERROR_INPUT;
 import static calculator.util.ErrorMessages.ERROR_NUMBER_TYPE;
 
 public class Calculator {

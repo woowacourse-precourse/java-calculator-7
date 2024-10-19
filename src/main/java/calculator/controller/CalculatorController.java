@@ -17,8 +17,6 @@ public class CalculatorController {
 
     public void run(){
         inputString();
-        isNullOrEmpty();
-        split();
         outputResult();
     }
 
@@ -27,20 +25,7 @@ public class CalculatorController {
         calculator = new Calculator(inputView.getInput());
     }
 
-    public void isNullOrEmpty(){
-        if(calculator.isNullOrEmpty())
-            outputView.printAnswerMessage(calculator.getAnswer());
-    }
-
-    public void split(){
-        calculator.split();
-    }
-
-    public int sumNumbers(){
-        return calculator.sumNumbers();
-    }
-
     public void outputResult() {
-        outputView.printAnswerMessage(sumNumbers());
+        outputView.printAnswerMessage(calculator.sum());
     }
 }
