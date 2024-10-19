@@ -20,9 +20,12 @@
     - [O] 1. 문자열 입력받기
     - [O] 2. 결과 출력하기
 - [X] B. Calculation의 함수
-    - [X] 0. getter, setter
+    - ~~[X] 0. getter, setter~~
     - [X] 1. 입력 받은 문자열 분석하고 필드에 저장하기
+        - public void splitInputString(String input)
+        - private void checkCustomSperator()
     - [X] 2. 필드 데이터 연산하고, 결과값 리턴하기
+        - public int returnAddition()
 
 ## 환경설정
 - Style 폴더를 만들고, Google과 우테코 스타일 파일을 넣었다. Google스타일 적용후 인덴트설정, 열제한(120줄)설정.
