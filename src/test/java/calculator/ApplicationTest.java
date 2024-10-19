@@ -205,6 +205,17 @@ class ApplicationTest extends NsTest {
                     .hasMessage("커스텀 구분자가 2개이상 있습니다");
         });
     }
+    @Test
+    void validateContaining_OtherCharInFrontDelimiter() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("~~~//??\\n33")).isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("커스텀 구분자의 형식인 //로 시작하지 않습니다");
+        });
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("     //??\\n33")).isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("커스텀 구분자의 형식인 //로 시작하지 않습니다");
+        });
+    }
 
     @Test
     void 커스텀_구분자_사용() {

@@ -42,6 +42,11 @@ public class Application {
                 throw new IllegalArgumentException("커스텀 구분자가 2개이상 있습니다");
             }
 
+            String firstToTwoLetter = customDelimiterInputs.getFirst().substring(0, 2);
+            if (!firstToTwoLetter.equals(CUSTOM_DELIMITER_START)) {
+                throw new IllegalArgumentException("커스텀 구분자의 형식인 //로 시작하지 않습니다");
+            }
+
             throw new IllegalArgumentException("구분자가 없습니다");
         }
 
