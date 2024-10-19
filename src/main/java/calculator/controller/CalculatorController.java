@@ -22,8 +22,10 @@ public class CalculatorController {
     public void run() {
         outputView.askForStringToCalculate();
         String input = inputView.inputStringToCalculate();
+
         StringParser parser = selectParser(input);
         calculator.setParser(parser);
+        
         Long result = calculator.calculate(input);
         outputView.printResult(result);
     }
