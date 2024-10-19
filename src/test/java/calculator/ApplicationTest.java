@@ -2,6 +2,7 @@ package calculator;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
 import java.io.IOException;
@@ -30,9 +31,28 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    @DisplayName("자료형이 최대 크기를 초과 했을때 예외 처리하기")
+    void 자료형_크기_초과_예외() {
+        assertSimpleTest(() -> {
+
+            //총합이 최대 크기를 초과하는 상황
+            assertThatThrownBy(() -> runException(Integer.MAX_VALUE + ":1"))
+                    .isInstanceOf(IllegalArgumentException.class);
+
+            //입력이 최대 크기를 초과하는 상황
+            assertThatThrownBy(() -> runException("2147483648:0"))
+                    .isInstanceOf(IllegalArgumentException.class);
+
+            //총합이 최대 크기가 나오는 상황
+            run(Integer.MAX_VALUE + ":0");
+            assertThat(output()).contains("결과 : " + Integer.MAX_VALUE); //2147483647+0=2147483647
+
+        });
+    }
+
     @Override
     public void runMain() {
-
         try {
             Application.main(new String[]{});
         } catch (IOException e) {

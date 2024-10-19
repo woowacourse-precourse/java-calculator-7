@@ -13,10 +13,14 @@ public class StringNumberAdder implements NumberAdder {
         int sum = 0;
 
         //숫자 추출 후 더하기
-        List<Integer> numbers = stringParser.parseBySeparator(inputString, separator);
-        for (Integer number : numbers) {
-            sum += number;
+        try {
+            List<Integer> numbers = stringParser.parseBySeparator(inputString, separator);
+            for (Integer number : numbers) {
+                sum = Math.addExact(number, sum);
+            }
+            return sum;
+        } catch (ArithmeticException e) {
+            throw new IllegalArgumentException("너무 큰 숫자를 입력했습니다.");
         }
-        return sum;
     }
 }
