@@ -58,10 +58,31 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    @DisplayName("커스텀 문자열 사이, 2글자 이상 오는 경우 예외 처리")
+    @DisplayName("커스텀 문자열 사이, 아무 문자도 들어오지 않는 경우 예외 처리")
     void exceptionEmptyChar() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> runException("//\\n"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자 추가시, 표현식이 이상한 경우")
+    void exceptionWrongExpression() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("/\\n"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//\\n"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("\\n"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//\\nn"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
