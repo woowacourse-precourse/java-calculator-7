@@ -1,4 +1,4 @@
-package calculator.validation;
+package calculator.validator;
 
 import calculator.exception.ErrorMessage;
 import calculator.util.IntegerUtils;

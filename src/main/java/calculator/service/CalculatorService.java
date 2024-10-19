@@ -1,7 +1,7 @@
 package calculator.service;
 
 import calculator.util.StringNumberSumCalculator;
-import calculator.validation.DelimiterNumberValidator;
+import calculator.validator.DelimiterNumberValidator;
 
 public class CalculatorService {
 

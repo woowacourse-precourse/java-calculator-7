@@ -1,7 +1,7 @@
 package calculator.controller;
 
 import calculator.service.CalculatorService;
-import calculator.validation.InputValidator;
+import calculator.validator.InputValidator;
 import calculator.view.CalculatorView;
 import camp.nextstep.edu.missionutils.Console;
 

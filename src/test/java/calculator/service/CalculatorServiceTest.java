@@ -1,6 +1,6 @@
 package calculator.service;
 
-import calculator.validation.DelimiterNumberValidator;
+import calculator.validator.DelimiterNumberValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

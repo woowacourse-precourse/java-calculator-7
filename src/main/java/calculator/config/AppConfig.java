@@ -3,8 +3,8 @@ package calculator.config;
 import calculator.controller.StringAddCalculatorController;
 import calculator.service.CalculatorService;
 import calculator.service.DelimiterService;
-import calculator.validation.DelimiterNumberValidator;
-import calculator.validation.InputValidator;
+import calculator.validator.DelimiterNumberValidator;
+import calculator.validator.InputValidator;
 
 public class AppConfig {
 
