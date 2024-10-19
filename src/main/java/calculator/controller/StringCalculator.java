@@ -2,9 +2,6 @@ package calculator.controller;
 
 import static calculator.common.constant.Constants.COLON;
 import static calculator.common.constant.Constants.COMMA;
-import static calculator.common.constant.Constants.CUSTOM_SEPARATOR_PREFIX;
-import static calculator.common.constant.Constants.CUSTOM_SEPARATOR_SUFFIX;
-import static calculator.common.constant.Constants.SEPARATOR_SIZE;
 
 import calculator.common.util.CustomSeparatorParser;
 import calculator.common.util.OperandExtractor;
@@ -26,13 +23,14 @@ public class StringCalculator {
     }
 
     public void run() {
+        String operationString = inputView.inputOperationString();
+        CustomSeparatorParser parser = new CustomSeparatorParser(operationString);
+
         Separators separators = Separators.from(List.of(COMMA, COLON));
 
-        String operationString = inputView.inputOperationString();
-
-        if (CustomSeparatorParser.hasCustomSeparator(operationString)) {
-            separators = separators.addSeparator(CustomSeparatorParser.extractSeparator(operationString));
-            operationString = stripCustomSeparator(operationString);
+        if (parser.hasCustomSeparator()) {
+            separators = separators.addSeparator(parser.extractSeparator());
+            operationString = parser.stripCustomSeparator();
         }
 
         OperandExtractor operandExtractor = new OperandExtractor(separators);
@@ -40,10 +38,5 @@ public class StringCalculator {
 
         int result = Calculator.calculate(operands);
         outputView.printResult(result);
-    }
-
-    private String stripCustomSeparator(String operationString) {
-        return operationString.substring(
-                CUSTOM_SEPARATOR_PREFIX.length() + SEPARATOR_SIZE + CUSTOM_SEPARATOR_SUFFIX.length());
     }
 }
