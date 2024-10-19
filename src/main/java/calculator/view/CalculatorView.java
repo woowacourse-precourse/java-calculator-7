@@ -6,11 +6,11 @@ public class CalculatorView {
 
     public String getInput() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        return Console.readLine(); //사용자로부터 입력 받음
-    }
+        return Console.readLine();
+    }//getInput
 
     public void displayResult(int result) {
         String ouput = "결과 : " + result;
         System.out.println(ouput);
-    }
-}
+    }//displayResult
+}//class

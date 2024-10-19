@@ -5,18 +5,17 @@ import calculator.view.CalculatorView;
 
 public class CalculatorController {
 
-    private final Calculator calculator;
+    private final Calculator calculator ;
     private final CalculatorView calcView;
 
-    public CalculatorController() {
-        this.calculator = new Calculator();
-        this.calcView = new CalculatorView();
+    public CalculatorController(Calculator calculator, CalculatorView calcView) {
+        this.calculator = calculator;
+        this.calcView = calcView;
     }
 
     public void run() {
-        String input = calcView.getInput(); // 사용자 입력받기
-
-        int result = calculator.caculate(input);
+        String input = calcView.getInput();
+        int result = calculator.calculate(input);
         calcView.displayResult(result);
-    }
-}
+    }//run
+}//class
