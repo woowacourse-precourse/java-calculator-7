@@ -17,16 +17,17 @@ public class CalculatorController {
 
         if (input.isEmpty()) {
             OutputView.printResult(0);
-        } else {
-            String separator = findSeparator(input);
-
-            String[] numbers = extractNumbers(input, separator);
-            CustomCalculator customCalculator = new CustomCalculator(numbers);
-
-            customCalculator.calculateSum();
-
-            OutputView.printResult(customCalculator.getResult());
+            return;
         }
+
+        String separator = findSeparator(input);
+
+        String[] numbers = extractNumbers(input, separator);
+        CustomCalculator customCalculator = new CustomCalculator(numbers);
+
+        customCalculator.calculateSum();
+
+        OutputView.printResult(customCalculator.getResult());
     }
 
     private String findSeparator(String input) {
@@ -34,16 +35,16 @@ public class CalculatorController {
             index = input.indexOf("\\n");
 
             return input.substring(2, index);
-        } else {
-            return "[,:]";
         }
+
+        return "[,:]";
     }
 
     private String[] extractNumbers(String input, String separator) {
         if (index >= 0) {
             return input.substring(index + 2).split(separator);
-        } else {
-            return input.split(separator);
         }
+
+        return input.split(separator);
     }
 }
