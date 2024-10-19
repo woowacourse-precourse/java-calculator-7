@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class Calculator {
     private static final Pattern CUSTOM_SEPERATOR_PATTERN=Pattern.compile("^//(.)\\\\n{1}(.*)");
-    private static final Pattern NEGATIVE_PATTERN=Pattern.compile("-[0-9]");
+
     private static String seperatorRegex=",|:";
 
     public static int inputCalculate(String input){
@@ -36,7 +36,7 @@ public class Calculator {
     private static int calculate(String input) {
         int result= Arrays.stream(input.split(seperatorRegex))
                 .filter(num->!isSpace(num))
-                .peek(num->isNumber(num))
+                .peek(num->Validator.validateCustomSeperator(num))
                 .mapToInt(Integer::parseInt)
                 .sum();
 
@@ -45,12 +45,6 @@ public class Calculator {
 
     private static boolean isSpace(String num) {
         return num.equals("");
-    }
-
-    private static void isNumber(String num) { //커스텀구분자가 아닌 구분자 입력
-        if (!(num.matches("[0-9]{0,}"))){
-            throw new InvalidInputException(MessageType.INVALID_SEPERATOR);
-        }
     }
 
     private static void addRegex(String customSeperator) {

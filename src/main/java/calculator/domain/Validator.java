@@ -8,10 +8,9 @@ import java.util.regex.Pattern;
 
 public class Validator {
 
-    private static final String NUMBER_REGEX="[0-9]";
+    private static final String NUMBER_REGEX="[0-9]{0,}";
 
     private static final Pattern NEGATIVE=Pattern.compile("-[0-9]");
-
 
     //구분자가 - 또는 숫자이면 예외를 발생시킨다
     public static void validateSeperator(String customSeperator) {
@@ -41,6 +40,11 @@ public class Validator {
     }
 
     //존재하지 않는 커스텀 구분자 예외발생
+    public static void validateCustomSeperator(String num){
+        if (!(num.matches(NUMBER_REGEX))){
+            throw new InvalidInputException(MessageType.INVALID_SEPERATOR);
+        }
+    }
 
 
 }

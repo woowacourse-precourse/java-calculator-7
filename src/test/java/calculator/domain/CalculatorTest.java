@@ -40,15 +40,6 @@ class CalculatorTest {
     }
 
     @Test
-    void 존재하지_않는_커스텀구분자_예외_발생(){
-        String input="//!\\n1:~2";
-
-        assertThatThrownBy(()->Calculator.inputCalculate(input))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(MessageType.INVALID_SEPERATOR.getMessage());
-    }
-
-    @Test
     void 음수를_입력했을때_예외_발생(){
         String input="//!\\n-34";
 
