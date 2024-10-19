@@ -2,19 +2,17 @@ package calculator;
 
 public class Calculator extends RegexCheck{
 
-  public Calculator() {
-    this("");
-  }
-
   Calculator(String input) {
     super(input);
   }
 
-  public void changeInt(String[] args){
-    int[] numbers = new int[args.length];
-    for(int i=0;i<args.length;i++){
-      numbers[i] = Integer.parseInt(args[i]);
+  public Calculator allPositiveNumber(int[] numbers) throws IllegalArgumentException{
+    for(int number : numbers){
+      if(number < 0){
+        throw new IllegalArgumentException("음수가 있습니다.");
+      }
     }
+    return this;
   }
 
   public int add(int[] numbers){

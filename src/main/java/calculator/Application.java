@@ -6,9 +6,8 @@ import camp.nextstep.edu.missionutils.Console;
 public class Application {
   public static void main(String[] args) {
     // TODO: 프로그램 구현
+
     final String SORT = "(//([^0-9])\\\\n)?(([0-9]+[^0-9]+)*[0-9]*)$";
-
-
     int sum = 0;
 
 
@@ -17,13 +16,11 @@ public class Application {
     Calculator calculator = new Calculator(Console.readLine().trim());
 
     try {
+      if (calculator.isValidByRegex(SORT)) {
 
-      if (calculator.isValidInput(SORT)) {
-
-        calculator = calculator.splitValues().matchesRegex();
+        calculator = calculator.splitOrInsert().matchesRegex();
 
         System.out.println(calculator.getNumericString());
-
         System.out.println("결과 : " + calculator.add(new int[]{1, 2, 3}));
 
       } else {

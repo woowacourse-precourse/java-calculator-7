@@ -3,8 +3,6 @@ package calculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -18,21 +16,21 @@ public class RegexCheckTest {
   @BeforeEach
   public void setUp() {
     calculator = new Calculator("1`2`3");
-    calculator.isValidInput(SORT);
+    calculator.isValidByRegex(SORT);
 //
   }
 
   @Test
-  public void testIsCorrect() {
-    assertTrue(calculator.isValidInput(SORT));
+  public void   isValidInputTest() {
+    assertTrue(calculator.isValidByRegex(SORT));
   }
 
   @Test
-  public void checkTest() {
+  public void matchesRegexTest() {
 
     assertThrows(IllegalArgumentException.class, () -> {
-      calculator = calculator.splitValues().matchesRegex();
-      throw new IllegalArgumentException("Invalid argument");
+      calculator = calculator.splitOrInsert().matchesRegex();
+      throw new IllegalArgumentException("구분자 확인");
     });
   }
 }

@@ -1,7 +1,6 @@
 package calculator;
 
 import java.util.Arrays;
-import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,7 +8,6 @@ public abstract class RegexCheck {
   private final String input;
   private String numericString = "";
   private String delimiter = ",:";
-  private String[] stringNumbers;
   protected int[] numbers;
   private Pattern pattern;
   private Matcher matcher;
@@ -27,14 +25,14 @@ public abstract class RegexCheck {
     return "([0-9]+[" + delimiter + "]*|" + delimiter + "+[0-9]*)+";
   }
 
-  public Boolean isValidInput(String sort) {
+  public Boolean isValidByRegex(String sort) {
     pattern = Pattern.compile(sort);
     matcher = pattern.matcher(input);
 
     return matcher.matches();
   }
 
-  public Calculator splitValues() {
+  public Calculator splitOrInsert() {
     if (matcher.group(2) != null) {
       delimiter = Pattern.quote(matcher.group(2));
     }
@@ -53,20 +51,23 @@ public abstract class RegexCheck {
     System.out.println("getRegex() = " + getRegex());
     pattern = Pattern.compile(getRegex());
     matcher = pattern.matcher(numericString);
+
     if (matcher.matches()) {
-      stringNumbers = numericString.split(delimiter);
+      String[] stringNumbers = numericString.split(delimiter);
       System.out.println("stringNumbers = " + Arrays.toString(stringNumbers));
+      parseInt(stringNumbers);
       return (Calculator) this;
     } else {
       throw new IllegalArgumentException("구분자를 확인해 주세요");
     }
   }
 
-  public void parseInt(String[] args) {
+  private void parseInt(String[] args) {
     numbers = new int[args.length];
     for (int i = 0; i < args.length; i++) {
       numbers[i] = Integer.parseInt(args[i]);
     }
   }
+
 
 }
