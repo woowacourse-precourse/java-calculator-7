@@ -24,7 +24,7 @@
     - [X] 1. 입력 받은 문자열 분석하고 필드에 저장하기
         - public void splitInputString(String input)
         - private void checkCustomSperator()
-    - [ ] 2. 필드 데이터 연산하고, 결과값 리턴하기
+    - [X] 2. 필드 데이터 연산하고, 결과값 리턴하기
         - public int returnAddition()
 
 ## 환경설정

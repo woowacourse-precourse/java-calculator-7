@@ -75,6 +75,11 @@ public class Calculation {
     // valList에 저장된 모든 값을 더한후 리턴
     public int returnAddition()
     {
-        return 0;
+        int sum = 0;
+        for(int i=0; i<valList.size(); i++)
+        {
+            sum += valList.get(i);
+        }
+        return sum;
     }
 }
