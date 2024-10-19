@@ -11,7 +11,7 @@ public class Calculator {
 		return new Calculator(input);
 	}
 
-	Long sum() {
+	public Long sum() {
 		return numbers.sum();
 	}
 }
