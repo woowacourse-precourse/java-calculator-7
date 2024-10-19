@@ -11,6 +11,15 @@ public class Calculator {
     private static final int CUSTOM_DELIMITER_START_INDEX = 2;
     private static final String DEFAULT_DELIMITER = "[,|:]";
     private static final String POSITIVE_NUMBER = "^[1-9]\\d*$";
+    private static final int SUM_ZERO = 0;
+
+    public int sumNumbers(List<Integer> numbers) {
+        int sum = SUM_ZERO;
+        for (Integer number : numbers) {
+            sum += number;
+        }
+        return sum;
+    }
 
     public List<Integer> extractValidNumbers(String[] splitValues) {
         List<Integer> numbers = new ArrayList<>();
