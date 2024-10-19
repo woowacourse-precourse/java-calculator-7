@@ -1,5 +1,7 @@
 package calculator.model;
 
+import static calculator.util.Constants.NONE;
+
 public class InputNumber {
     private String number;
 
@@ -16,7 +18,7 @@ public class InputNumber {
     }
 
     public int getNumber() {
-        if (number.equals("")) {
+        if (number.equals(NONE)) {
             return 0;
         }
         return Integer.parseInt(number);

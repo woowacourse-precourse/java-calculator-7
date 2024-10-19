@@ -134,7 +134,6 @@ public class CalculatorTest {
         Calculator calculator = new Calculator(testString, defaultRegDelimiter);
 
         calculator.calculate();
-        InputNumber inputNumber = calculator.getInputNumber();
 
         assertThat(calculator.getSum()).isEqualTo(6);
     }

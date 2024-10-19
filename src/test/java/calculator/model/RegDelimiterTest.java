@@ -44,9 +44,9 @@ public class RegDelimiterTest {
         String testString1 = "//%//";
         String testString2 = "//-";
 
-        assertThatThrownBy(() -> regDelimiter.registerDelimiter(testString1))
+        assertThatThrownBy(() -> regDelimiter.registerCustomDelimiter(testString1))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> regDelimiter.registerDelimiter(testString2))
+        assertThatThrownBy(() -> regDelimiter.registerCustomDelimiter(testString2))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -55,7 +55,7 @@ public class RegDelimiterTest {
         RegDelimiter regDelimiter = new RegDelimiter();
         String testString = "//%%\\n1%%2,3";
 
-        regDelimiter.registerDelimiter(testString);
+        regDelimiter.registerCustomDelimiter(testString);
 
         assertThat(regDelimiter.getCustomDeliEndIdx()).isEqualTo(5);
     }
@@ -65,7 +65,7 @@ public class RegDelimiterTest {
         RegDelimiter regDelimiter = new RegDelimiter();
         String testString = "//%%1%2,3";
 
-        assertThatThrownBy(() -> regDelimiter.registerDelimiter(testString))
+        assertThatThrownBy(() -> regDelimiter.registerCustomDelimiter(testString))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -74,7 +74,7 @@ public class RegDelimiterTest {
         RegDelimiter regDelimiter = new RegDelimiter();
         String testString = "//%$\\n1%2,3";
 
-        regDelimiter.registerDelimiter(testString);
+        regDelimiter.registerCustomDelimiter(testString);
 
         int customDeliEndIdx = regDelimiter.getCustomDeliEndIdx();
         List<String> delimiters = regDelimiter.getDelimiters();
@@ -91,7 +91,7 @@ public class RegDelimiterTest {
         RegDelimiter regDelimiter = new RegDelimiter();
         String testString = "//%\\n1%2,3";
 
-        regDelimiter.registerDelimiter(testString);
+        regDelimiter.registerCustomDelimiter(testString);
 
         int customDeliEndIdx = regDelimiter.getCustomDeliEndIdx();
         List<String> delimiters = regDelimiter.getDelimiters();

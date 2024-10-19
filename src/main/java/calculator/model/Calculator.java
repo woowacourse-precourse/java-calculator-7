@@ -1,9 +1,12 @@
 package calculator.model;
 
-import static calculator.model.Mode.DELI;
-import static calculator.model.Mode.NUM;
-import static calculator.model.Mode.WRONG_DELI;
+import static calculator.model.Mode.*;
+import static calculator.util.Constants.*;
+import static calculator.util.Exceptions.*;
+import static calculator.util.Validations.validatePositiveNumber;
+import static calculator.util.Validations.validateWrongDelimiter;
 
+import calculator.util.Validations;
 import java.util.List;
 
 public class Calculator {
@@ -49,13 +52,12 @@ public class Calculator {
     }
 
     private boolean isNumber(String value) {
-        String numberIncludingMinusAndZeroRegex = "[0-9-]";
-        return value.matches(numberIncludingMinusAndZeroRegex);
+        return value.matches(NUMBER_INCLUDING_MINUS_AND_ZERO_REGEX);
     }
 
     private void calculateNumber(String value) {
         if (isStartOfNumber()) {
-            validateWrongDelimiter();
+            validateWrongDelimiter(mode);
             validatePositiveNumber(value);
             inputDelimiter.initialize();
         }
@@ -65,19 +67,6 @@ public class Calculator {
 
     private boolean isStartOfNumber() {
         return mode != NUM;
-    }
-
-    private void validateWrongDelimiter() {
-        if (mode == WRONG_DELI) {
-            throw new IllegalArgumentException("잘못된 구분자입니다. ',', ':' 또는 커스텀 구분자를 사용해주세요.");
-        }
-    }
-
-    private void validatePositiveNumber(String value) {
-        if (value.equals("0")
-                || value.equals("-")) {
-            throw new IllegalArgumentException("잘못된 숫자입니다. 양수를 입력해주세요.");
-        }
     }
 
     private void updateMode(Mode mode) {
@@ -111,7 +100,7 @@ public class Calculator {
     }
 
     private void calculateLeftValue() {
-        validateWrongDelimiter();
+        validateWrongDelimiter(mode);
         addSum(inputNumber.getNumber());
     }
 
