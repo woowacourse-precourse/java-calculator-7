@@ -19,8 +19,12 @@ public class ExtractNumber {
 
     private String[] splitByCustomExtracter(){
         String delimiter = input.substring(2,input.indexOf("\\n"));
+        if (delimiter.isEmpty() || delimiter.matches("[0-9]") || 2 <= delimiter.length()) {
+            throw new IllegalArgumentException("잘못된 구분자 입력");
+        }
+
         String numberPart=input.substring(input.indexOf("\\n")+2);
-        return numberPart.split(delimiter);
+        return numberPart.split("[;,"+delimiter+"]");
     }
 
     private String[] splitByDefaultExtracter(){
