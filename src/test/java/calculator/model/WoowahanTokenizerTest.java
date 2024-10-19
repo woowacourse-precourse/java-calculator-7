@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 public class WoowahanTokenizerTest {
     @Test
     void getCustomSeparatorFromInputString() {
-        String inputString = "\\\\!\\n0!2!3!4";
+        String inputString = "//!\n0!2!3!4";
         WoowahanTokenizer wt = new WoowahanTokenizer(inputString);
 
         wt.setCustomSeparator();
@@ -20,7 +20,7 @@ public class WoowahanTokenizerTest {
 
     @Test
     void tokenizeStringTest() {
-        String inputString = "\\\\!\\n0!2:3,4";
+        String inputString = "//!\n0!2:3,4";
         WoowahanTokenizer wt = new WoowahanTokenizer(inputString);
 
         wt.setCustomSeparator();

@@ -15,13 +15,12 @@ public class WoowahanTokenizer {
     }
 
     public void setCustomSeparator() {
-        if (inputString.length() <= 4) return;
-        if (inputString.charAt(0) != '\\') return;
-        if (inputString.charAt(1) != '\\') return;
-        if (inputString.charAt(3) != '\\') return;
-        if (inputString.charAt(4) != 'n') return;
+        if (inputString.length() < 4) return;
+        if (inputString.charAt(0) != '/') return;
+        if (inputString.charAt(1) != '/') return;
+        if (inputString.charAt(3) != '\n') return;
         customSeparator = inputString.substring(2, 3);
-        inputString = inputString.substring(5);
+        inputString = inputString.substring(4);
     }
     public List<String> tokenizeString() {
         String separator = defaultSeparator + customSeparator;
