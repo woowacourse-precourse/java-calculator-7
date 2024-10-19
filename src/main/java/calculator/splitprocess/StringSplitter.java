@@ -8,10 +8,23 @@ public class StringSplitter {
 
         String[] parts= input.split(delimiter);
 
-        return Arrays.stream(parts)
+        int[] numbers=Arrays.stream(parts)
                 .filter(StringSplitter::isNumeric)
                 .mapToInt(Integer::parseInt)
                 .toArray();
+
+        //유효한 숫자가 없는 경우 예외 발생(형식을 지키지 않으면 유효한 숫자가 없음)
+        if(numbers.length==0){
+            throw new IllegalArgumentException("형식이 잘못됐습니다.");
+        }
+        //음수가 포함된 경우 예외 발생
+        for (int number : numbers) {
+            if (number<0) {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            }
+        }
+//;\n1;2;3
+        return numbers;
     }
     // 문자열이 숫자인지 확인하는 메서드
     private static boolean isNumeric(String str) {
