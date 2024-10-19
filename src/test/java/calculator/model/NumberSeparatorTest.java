@@ -17,8 +17,15 @@ class NumberSeparatorTest {
 
 	@DisplayName("분리기의 커스텀 구분자에 숫자, 공백, 길이가 2 이상인 문자열이 올 수 없다")
 	@ParameterizedTest
-	@ValueSource(strings = {"//3\\n", "//\\n", "//!@\\n", "//ab\\n"})
+	@ValueSource(strings = {"//3\\n", "//\\n", "//!@\\n", "//ab\\n", "//\t\\n"})
 	void validateSeparateNumberCharacter(String invalidData) {
+		assertThrows(IllegalArgumentException.class, () -> NumberSeparator.from(invalidData).separate());
+	}
+
+	@DisplayName("숫자 사이의 공백은 허용하지 않는다")
+	@ParameterizedTest
+	@ValueSource(strings = {"1 2:3,4", "34\t2:2"})
+	void validateSeparateNumberSpace(String invalidData) {
 		assertThrows(IllegalArgumentException.class, () -> NumberSeparator.from(invalidData).separate());
 	}
 
