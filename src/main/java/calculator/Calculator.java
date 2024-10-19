@@ -35,6 +35,13 @@ public class Calculator {
         int index = 0;
         if (matcher.find()) {
             index = matcher.start();
+        } else {
+            if (input.endsWith("\\n")) {
+                System.out.println("결과 : 0");
+                System.exit(0);
+            } else {
+                throw new IllegalArgumentException();
+            }
         }
         String delimiter = input.substring(2, index - 2);
         String newInput = input.substring(index);
