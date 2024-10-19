@@ -25,11 +25,8 @@ public class ConsoleOperandsProvider implements OperandsProvider {
     }
 
     private String getUserInput() {
-        String input = Console.readLine().trim();
-        if (input.isEmpty()) {
-            throw new IllegalArgumentException("입력값이 존재하지 않습니다.");
-        }
-        return input;
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        return Console.readLine().trim();
     }
 
     private List<Long> parseToLong(List<String> strings) {
