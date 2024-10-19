@@ -1,18 +1,18 @@
 package calculator;
 
-import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
 public class OperandManager {
-    private final List<BigDecimal> operands;
+    private final List<BigInteger> operands;
 
     public OperandManager() {
         this.operands = new LinkedList<>();
     }
 
-    public List<BigDecimal> getOperands() {
+    public List<BigInteger> getOperands() {
         return this.operands;
     }
 
@@ -21,7 +21,7 @@ public class OperandManager {
         for (String operandCandidate : splitOperandCandidates) {
             validate(operandCandidate);
             if(!operandCandidate.isEmpty()) {
-                operands.add(new BigDecimal(operandCandidate));
+                operands.add(new BigInteger(operandCandidate));
             }
         }
     }
