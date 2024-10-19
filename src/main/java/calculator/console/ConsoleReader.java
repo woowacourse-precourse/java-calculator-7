@@ -13,7 +13,7 @@ public class ConsoleReader {
     private static class Validator{
         public static String validate(String target) {
             String patternString;
-            char customSeperator = 0;
+            String customSeperator = "";
             Pattern pattern;
             Matcher matcher;
 
@@ -24,15 +24,18 @@ public class ConsoleReader {
                 if(endIndex - startIndex != 1){ // 커스텀 문자가 없거나 두 개 이상인 경우
                     throw new IllegalArgumentException();
                 }else{
-                    customSeperator = target.charAt(startIndex);
+                    customSeperator = Character.toString(target.charAt(startIndex));
                 }
             }
 
             if(target.contains("-"))
                 throw new IllegalArgumentException();
 
-            if(customSeperator > '0' && customSeperator < '9') // 커스텀 문자가 숫자인 경우
+            if(customSeperator.charAt(0) > '0' && customSeperator.charAt(0) < '9') // 커스텀 문자가 숫자인 경우
                 throw new IllegalArgumentException();
+
+            if(customSeperator.equals("\\")) // 커스텀 문자가 이스케이프 문자인 경우
+                customSeperator = "\\\\";
 
             patternString = "[^0-9:," + customSeperator + "]";
             pattern = Pattern.compile(patternString);

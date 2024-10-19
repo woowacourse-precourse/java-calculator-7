@@ -6,7 +6,13 @@ public class CalculatorService {
         String regex = ":|,";
 
         if(input.contains("//") && input.contains("\\n")){ // 커스텀 구분자가 있는 경우
-            regex = regex + "|" + input.charAt(input.indexOf("//") + 2);
+            String custom = Character.toString
+                    (input.charAt(input.indexOf("//")+2));
+
+            if(custom.equals("\\"))
+                custom = "\\\\";
+
+            regex = regex + "|" + custom;
             input = input.substring(input.indexOf("\\n")+2);
         }
 
