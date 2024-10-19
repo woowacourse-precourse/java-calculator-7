@@ -21,7 +21,7 @@ public class CustomSeparatorParser {
     }
 
     public static char getCustomSeparator(String input) {
-        char separator = input.charAt(3);
+        char separator = input.charAt(2);
         validateCustomSeparator(String.valueOf(separator));
         return separator;
     }
