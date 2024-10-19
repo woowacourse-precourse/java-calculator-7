@@ -7,15 +7,15 @@ public class StringSumCalculator {
         String inputString = InputHandler.inputString();
 
         StringParser stringParser = new StringParser(inputString);
-        List<Integer> numbers = stringParser.extractNumbers();
-        int result = sum(numbers);
+        List<Double> numbers = stringParser.extractNumbers();
+        double result = sum(numbers);
 
         OutputHandler.printResult(result);
     }
 
-    private int sum(List<Integer> numbers) {
+    private double sum(List<Double> numbers) {
         return numbers.stream()
-                .mapToInt(Integer::intValue)
+                .mapToDouble(Double::doubleValue)
                 .sum();
     }
 }

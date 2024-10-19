@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class StringParser {
     private static final List<String> DEFAULT_DELIMITER = Arrays.asList(",", ":");
@@ -18,7 +17,7 @@ public class StringParser {
         this.inputString = inputString;
     }
 
-    public List<Integer> extractNumbers() {
+    public List<Double> extractNumbers() {
         Set<String> delimiters = new HashSet<>(DEFAULT_DELIMITER);
         String expression = this.inputString;
 
@@ -45,16 +44,14 @@ public class StringParser {
         return this.inputString.replaceAll(EXTRACT_DELIMITER_REGEX, "");
     }
 
-    private List<Integer> parseNumbers(String expression, Set<String> delimiters) {
+    private List<Double> parseNumbers(String expression, Set<String> delimiters) {
         String delimiterRegEx = "[" + String.join("", delimiters) + "]";
         String[] stringNumbers = expression.split(delimiterRegEx);
-
         validateNumeric(stringNumbers);
-        // TODO: validate positive integer
 
         return Arrays.stream(stringNumbers)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+                .map(Double::parseDouble)
+                .toList();
     }
 
     private void validateNumeric(String[] stringNumbers) {
