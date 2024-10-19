@@ -3,6 +3,8 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.regex.Pattern;
+
 public class Application {
 
     /*
@@ -11,6 +13,9 @@ public class Application {
     public static void main(String[] args) {
         // 사용자로부터 문자열을 입력 받음
         String input = getUserInput();
+        if (input.contains("\\n")){
+            input = input.replace("\\n", "\n");
+        }
         // 입력값이 빈 문자열인지 확인
         if (isEmpty(input)){
             System.out.println(0);
@@ -56,12 +61,22 @@ public class Application {
             return;
         }
         // 커스텀 구분자를 가질 경우
+//        if(input.startsWith("//") && input.contains("\n") || input.contains("\\n")){
         if(input.startsWith("//") && input.contains("\n")){
-            String Delimiter = input.substring(2, input.indexOf("\n"));
-            String regex = "[0-9" + Delimiter + "]+";
+//            if (input.contains("\\n")){
+//                input = input.replace("\\n", "\n");
+//            }
+
+            String delimiter = input.substring(2, input.indexOf("\n"));
+            System.out.println("delimiter="+delimiter);
+
+            String regex = "[0-9]+(" + java.util.regex.Pattern.quote(delimiter) + "[0-9]+)*";
+
             String subInput = input.substring(input.indexOf("\n") + 1);
+            System.out.println("subinput="+subInput);
+
             // 구분자의 길이가 1이며 숫자를 포함하지 않고, 구분자 정의 섹션 외의 문자열에 구분자와 숫자만 갖는지 확인
-            if (Delimiter.length() == 1 && !Delimiter.matches(".*[0-9].*") && subInput.matches(regex)){
+            if (subInput.matches("[0-9]+") || (!delimiter.matches(".*[0-9].*") && subInput.matches(regex))){
                 return;
             }
         }
@@ -95,7 +110,10 @@ public class Application {
     * 문자열을 주어진 구분자를 기준으로 분리하여 배열로 변환하는 메서드
      */
     public static String[] splitByDelimiter(String input, String delimiter){
-        return input.split(delimiter);
+        if (delimiter == "[,|:]"){
+            return input.split(delimiter);
+        }else{
+        return input.split(Pattern.quote(delimiter));}
     }
 
 
