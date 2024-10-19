@@ -1,12 +1,11 @@
 package calculator;
 
-import javax.swing.text.html.parser.Parser;
 import java.util.ArrayList;
 import  java.util.List;
 
 
 public class InputParser {
-    public  parsedInput parse(String input){
+    public ParsedInput parse(String input){
         String delimiter = "[,:]";
 
         if (input.startsWith("//")) {
@@ -22,5 +21,16 @@ public class InputParser {
         List<Integer> numbers = new ArrayList<>();
 
         return new ParsedInput(numbers);
+    }
+
+    private int parseNumber(String number){
+        if(number.isEmpty()){
+            return 0;
+        }
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e){
+            throw new IllegalArgumentException("잘못된 숫자 형식입니다: " + number);
+        }
     }
 }
