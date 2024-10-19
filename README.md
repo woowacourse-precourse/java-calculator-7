@@ -16,7 +16,34 @@
 ## Code Highlighting
 
 ```java
+        /**
+         * 입력에서 구분 문자를 추출하는 메서드
+         *
+         * @param input 입력 문자열
+         * @return 구분 문자
+         */
+        private static String extractSpecialChars(String input) {
+                if (input.startsWith("//")) {
+                        int start = input.indexOf("//") + 2;
+                        int end = input.indexOf("\\n");
+                        return input.substring(start, end); // 구분 문자 반환
+                }
+                return ",:"; // 기본 구분 문자
+        }
 
+        /**
+         * 입력에서 숫자 부분을 추출하는 메서드
+         *
+         * @param input 입력 문자열
+         * @return 숫자 부분
+         */
+        private static String extractNumbers(String input) {
+                if (input.startsWith("//")) {
+                        int end = input.indexOf("\\n");
+                        return input.substring(end + 2); // 숫자 부분만 반환
+                }
+                return input; // 구분 문자가 없는 경우 전체 입력 반환
+        }
 ```
 
 ## 참고 자료
