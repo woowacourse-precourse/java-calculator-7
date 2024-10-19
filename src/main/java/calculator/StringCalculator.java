@@ -1,8 +1,5 @@
 package calculator;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * This class parses the input string and calculates the sum of a list of integers.
  */
@@ -12,8 +9,8 @@ public class StringCalculator {
      * This method returns default separators
      * @return default separators
      */
-    private ArrayList<String> getDefaultSeparator() {
-        return new ArrayList<>(List.of(",", ":"));
+    private String getDefaultSeparator() {
+        return ",|:";
     }
 
     /**
@@ -21,12 +18,12 @@ public class StringCalculator {
      * @param input The string to get custom separator
      * @return A list of default separators + custom separator
      */
-    private ArrayList<String> getCustomSeparator(String input) {
-        ArrayList<String> separators = getDefaultSeparator();
+    private String getCustomSeparator(String input) {
+        String separators = getDefaultSeparator();
 
         String custom_separator = input.split("\\\\n")[0];
         custom_separator = custom_separator.substring(2);
-        separators.add(custom_separator);
+        separators = separators + "|" + custom_separator;
 
         return separators;
     }
@@ -37,7 +34,7 @@ public class StringCalculator {
      * @param separators The string to split numbers
      * @return A list of numbers
      */
-    private String[] getNumbers(String input, ArrayList<String> separators) {
+    private String[] getNumbers(String input, String separators) {
         String number_string;
         if (input.startsWith("//")) {
             number_string = input.split("\\\\n")[1];
@@ -45,9 +42,7 @@ public class StringCalculator {
             number_string = input;
         }
 
-        String separator = String.join("|", separators);
-
-        return number_string.split(separator);
+        return number_string.split(separators);
     }
 
     /**
@@ -57,7 +52,7 @@ public class StringCalculator {
      */
     public int calculate(String input) {
 
-        ArrayList<String> separators;
+        String separators;
 
         if (input.startsWith("//")) {
             separators = getCustomSeparator(input);
