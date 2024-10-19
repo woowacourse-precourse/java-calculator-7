@@ -7,6 +7,7 @@ public class PatternUtils {
 
     public final static Pattern NUMBER_PATTERNS = Pattern.compile("[0-9]");
     public final static String SPLIT_DELIMITER = "|";
+    public final static String ESCAPE = "\\";
     private final static List<String> SPECIAL_CHARACTERS = List.of(
             ".", "*", "+", "?", "^", "$", "[", "]", "{", "}", "(", ")", "|"
     );
