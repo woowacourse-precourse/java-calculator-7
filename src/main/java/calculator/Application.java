@@ -1,7 +1,17 @@
 package calculator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+
+        String input = "";
+        ArrayList<String> seperators = new ArrayList<>(List.of(",", ":"));
+
+        UserInput userInput = new UserInput(input, seperators);
+
+        // 유저의 입력값을 받는다.
+        userInput.input();
     }
 }
