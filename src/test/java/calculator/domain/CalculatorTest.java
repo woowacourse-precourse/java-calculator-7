@@ -1,10 +1,9 @@
 package calculator.domain;
+
 import calculator.validation.MessageType;
-import calculator.validation.Validator;
-import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+
 import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -22,6 +21,14 @@ class CalculatorTest {
         String input="23:3,";
 
         assertThat(Calculator.inputCalculate(input)).isEqualTo(26);
+    }
+
+    @Test
+    void 공백을_입력했을때_0_반환(){
+        String input="";
+
+        assertThat(Calculator.inputCalculate(input)).isEqualTo(0);
+
     }
 
     @Test
