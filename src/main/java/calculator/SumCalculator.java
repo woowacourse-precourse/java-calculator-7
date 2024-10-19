@@ -1,6 +1,7 @@
 package calculator;
 
 import java.util.List;
+import java.util.Objects;
 
 public class SumCalculator {
     private final InputParser inputParser;
@@ -12,6 +13,9 @@ public class SumCalculator {
     }
 
     public int calculate(String input) {
+        if (Objects.equals(input, "")) {
+            return 0;
+        }
         List<Integer> numbers = inputParser.parse(input);
         return stringAdder.sum(numbers);
     }
