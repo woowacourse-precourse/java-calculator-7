@@ -1,6 +1,7 @@
 package calculator.constants;
 
 public enum BasicSeparator implements EnumClass {
+
     COMMA(","),
     COLON(":");
 

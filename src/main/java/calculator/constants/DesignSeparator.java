@@ -1,6 +1,7 @@
 package calculator.constants;
 
 public enum DesignSeparator implements EnumClass {
+
     START("//"),
     END("\\n");
 
