@@ -7,12 +7,12 @@ import java.util.Scanner;
 public class Application {
     static String S;
     static ArrayList<String> arrayList;
-    static HashSet<String> hashSet;
+    static HashSet<String> delimiters;
     static int ans = 0;
 
     static void sum() {
-        for(int i = 0; i < arrayList.size(); i++) {
-            ans += Integer.parseInt(arrayList.get(i));
+        for(String num : arrayList) {
+            ans += Integer.parseInt(num);
         }
     }
 
@@ -21,46 +21,52 @@ public class Application {
             int startIndex = S.indexOf("//");
 
             if(startIndex == -1) {
-                break;
+               break;
             }
-            int endIndex = S.indexOf("\n", startIndex);
+
+            int endIndex = S.indexOf("\\n", startIndex);
 
             if(endIndex == -1) {
                 throw new IllegalArgumentException();
             }
 
-            String s = S.substring(startIndex+2, endIndex);
-            hashSet.add(s);
+            String newDelimiter = S.substring(startIndex + 2, endIndex);
+            delimiters.add(newDelimiter);
 
-            S = S.substring(0, startIndex) + S.substring(endIndex+1);
+            S = S.substring(0, startIndex) + S.substring(endIndex + 2);
         }
     }
 
-    static boolean isNumber(char num) {
-        if(num >= '0' && num <= '9') {
-            return true;
-        }
-
-        return false;
+    static boolean isNumber(char ch) {
+        return ch >= '0' && ch <= '9';
     }
 
     static void calculate() {
         findNewDelimiter();
 
+        StringBuilder numberBuffer = new StringBuilder();
+
         for(int i = 0; i < S.length(); i++) {
-            String pre = String.valueOf(S.charAt(i));
-            if(isNumber(S.charAt(i))) {
+            char currentChar = S.charAt(i);
+
+            if(isNumber(currentChar)) {
+                numberBuffer.append(currentChar);
+
                 for(int j = i+1; j < S.length(); j++) {
                     if(!isNumber(S.charAt(j))) {
                         i = j-1;
                         break;
                     }
 
-                    pre += String.valueOf(S.charAt(j));
+                    numberBuffer.append(S.charAt(j));
                 }
-                arrayList.add(pre);
+                arrayList.add(numberBuffer.toString());
+                numberBuffer.setLength(0);
+
             }
             else {
+                numberBuffer.append(currentChar);
+
                 for(int j = i+1; j < S.length(); j++) {
                     if(isNumber(S.charAt(j))) {
                         i = j-1;
@@ -71,12 +77,14 @@ public class Application {
                         throw new IllegalArgumentException();
                     }
 
-                    pre += String.valueOf(S.charAt(j));
+                    numberBuffer.append(S.charAt(j));
                 }
 
-                if(!hashSet.contains(pre)) {
+                if(!delimiters.contains(numberBuffer.toString())) {
                     throw new IllegalArgumentException();
                 }
+
+                numberBuffer.setLength(0);
             }
         }
 
@@ -86,22 +94,21 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
 
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-
-        hashSet = new HashSet<>();
-        hashSet.add(",");
-        hashSet.add(":");
+        arrayList = new ArrayList<>();
+        delimiters = new HashSet<>();
+        delimiters.add(",");
+        delimiters.add(":");
 
         Scanner scanner = new Scanner(System.in);
-        S = scanner.next();
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        S = scanner.nextLine();
 
         try {
             calculate();
             System.out.println("결과 : " + ans);
         }
         catch(IllegalArgumentException e) {
-            System.err.println(e.getMessage());
+            System.err.println(e);
         }
-
     }
 }
