@@ -5,7 +5,7 @@ import  java.util.List;
 
 
 public class InputParser {
-    public ParsedInput parse(String input){
+    public static ParsedInput parse(String input){
         String delimiter = "[,:]";
 
         if (input.startsWith("//")) {
