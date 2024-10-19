@@ -24,11 +24,14 @@ public class DelimiterExtractor {
     }
 
     public String remove(String regex) {
+        final String LINE_BREAK = "\\n";
+        final int OPERATION_FORMULA_LOCATION = 1;
+
         if (DelimiterType.BASIC.equals(this.type())) {
             return remove(regex, this.text);
         }
 
-        return remove(regex, "");
+        return remove(regex, this.text.split(LINE_BREAK)[OPERATION_FORMULA_LOCATION]);
     }
 
     private String remove(String regex, String target) {

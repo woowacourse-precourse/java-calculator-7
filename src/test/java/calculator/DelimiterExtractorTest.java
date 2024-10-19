@@ -6,9 +6,21 @@ import org.junit.jupiter.api.Test;
 
 public class DelimiterExtractorTest {
 
+    private final String positiveNumberPattern = "[0-9]+\\.?[0-9]*";
+
     @Test
-    void 기본_구분자를_사용한_경우_문자열에_사용된_구분자를_추출한다() {
-        String positiveNumberPattern = "[0-9]+\\.?[0-9]*";
+    void 커스텀_구분자_문자열에_사용된_구분자를_추출한다() {
+        String input = "//;\n1;2;3";
+        DelimiterExtractor delimiterExtractor = new DelimiterExtractor(input);
+
+        String delimiterLeft = delimiterExtractor.remove(positiveNumberPattern);
+
+        String expected = " ; ; ";
+        assertEquals(expected, delimiterLeft);
+    }
+
+    @Test
+    void 기본_구분자_문자열에_사용된_구분자를_추출한다() {
         DelimiterExtractor delimiterExtractor = new DelimiterExtractor("1,2:3-4");
 
         String delimiterLeft = delimiterExtractor.remove(positiveNumberPattern);
@@ -36,7 +48,6 @@ public class DelimiterExtractorTest {
 
     @Test
     void 문자열에_구분자가_없으면_문자열을_그대로_반환한다() {
-        String positiveNumberPattern = "[0-9]+\\.?[0-9]*";
         String input = "";
 
         String result = "1:2,3";
@@ -49,8 +60,6 @@ public class DelimiterExtractorTest {
 
     @Test
     void 문자열에_구분자가_없는_경우() {
-        String positiveNumberPattern = "[0-9]+\\.?[0-9]*";
-
         String empty = "";
         String positiveNumber = "12.345";
 
