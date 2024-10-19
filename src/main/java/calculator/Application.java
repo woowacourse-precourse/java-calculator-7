@@ -25,15 +25,7 @@ public class Application {
                     }
                     else {
                         if(tempChar == ',' || tempChar == ':') {
-                            int tempSize = tempList.size();
-                            int powCount = tempSize - 1;
-                            int tempInt2 = 0;
-                            for(int j = 0; j < tempSize; j++) {
-                                tempInt2 += tempList.get(j) * Math.pow(10, powCount);
-                                powCount--;
-                            }
-                            wholeList.add(tempInt2);
-                            tempList.clear();
+                            tempListToWholeList(tempList, wholeList);
                         }
                         else {
                             throw new IllegalArgumentException("잘못된 값이 입력되었습니다.");
@@ -42,15 +34,7 @@ public class Application {
                 }
 
                 if (tempList.size() != 0) {
-                    int tempSize2 = tempList.size();
-                    int powCount2 = tempSize2 - 1;
-                    int tempInt2 = 0;
-                    for(int j = 0; j < tempSize2; j++) {
-                        tempInt2 += tempList.get(j) * Math.pow(10, powCount2);
-                        powCount2--;
-                    }
-                    wholeList.add(tempInt2);
-                    tempList.clear();
+                    tempListToWholeList(tempList, wholeList);
                 }
 
                 int finalSum = 0;
@@ -67,5 +51,17 @@ public class Application {
         }
 
         System.out.println("계산기가 종료되었습니다.");
+    }
+
+    public static void tempListToWholeList(ArrayList<Integer> tempList, ArrayList<Integer> wholeList) {
+        int tempSize = tempList.size();
+        int powCount = tempSize - 1;
+        int tempInt = 0;
+        for(int j = 0; j < tempSize; j++) {
+            tempInt += tempList.get(j) * Math.pow(10, powCount);
+            powCount--;
+        }
+        wholeList.add(tempInt);
+        tempList.clear();
     }
 }
