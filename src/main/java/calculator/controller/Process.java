@@ -19,6 +19,13 @@ public class Process {
         return false;
     }
 
+    public String findSeparator() {
+        int startIndex = 2;
+        int endIndex = userInput.lastIndexOf("\\n");
+
+        return userInput.substring(startIndex, endIndex);
+    }
+
 }
 
 
