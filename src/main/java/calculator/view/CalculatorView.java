@@ -13,4 +13,8 @@ public final class CalculatorView {
     public void displayResult(int result) {
         System.out.println("결과 : " + result);
     }
+
+    public void displayException(String errorMessage) {
+        System.out.println("[ERROR] " + errorMessage);
+    }
 }
