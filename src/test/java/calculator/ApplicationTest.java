@@ -1,6 +1,7 @@
 package calculator;
 
 import static calculator.service.exception.SeparationExceptionType.INVALID_SEPARATOR;
+import static calculator.service.exception.SeparationExceptionType.NO_INPUT;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -58,6 +59,16 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자를_사용하고_입력값이_비어있는_경우() {
         String input = "//&\\n";
+        Numbers numbers = Numbers.from(List.of(Number.from(0)));
+        assertEquals(
+                customSeparationService.getNumbers(input, CUSTOM_SEPARATOR),
+                numbers
+        );
+    }
+
+    @Test
+    void 커스텀_구분자를_사용하고_입력값이_공백문자인_경우() {
+        String input = "//&\\n     ";
         Numbers numbers = Numbers.from(List.of(Number.from(0)));
         assertEquals(
                 customSeparationService.getNumbers(input, CUSTOM_SEPARATOR),
