@@ -32,6 +32,6 @@ public class Positive {
 	}
 
 	public void printResult() {
-		System.out.println("결과 = " + num);
+		System.out.println("결과 : " + num);
 	}
 }
