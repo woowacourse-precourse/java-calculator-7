@@ -10,6 +10,14 @@ import org.junit.jupiter.api.Test;
 class ApplicationTest extends NsTest {
 
     @Test
+    void 일반() {
+        assertSimpleTest(() -> {
+            run("1");
+            assertThat(output()).contains("결과 : 1");
+        });
+    }
+
+    @Test
     void 기본_구분자_사용_1() {
         assertSimpleTest(() -> {
             run("1,2,4");
@@ -85,6 +93,70 @@ class ApplicationTest extends NsTest {
     void 예외_테스트_5() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//|\\n-1|2 3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_6() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//|\\n-1|2|3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_7() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//|\\n1,2|3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_8() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//|\\n1:2|3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_9() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//|\\n1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_10() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//:\\n1::2:3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_11() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//:\\n1: :2:3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_12() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//|\\n9|8|7|"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_13() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//&\\n&3&4&5"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
