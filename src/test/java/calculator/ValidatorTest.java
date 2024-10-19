@@ -1,8 +1,9 @@
 package calculator;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class ValidatorTest {
 
@@ -25,8 +26,8 @@ class ValidatorTest {
     @Test
     void 문자열의_시작과_끝_검사_실패() {
         //given
-        String[] input1 = {",3,4:5", "3,4:5:", "3:4//;\n;6;"};
-        String[] input2 = {"3:4//;\n;6;", "3,4:5:"};
+        String[] input1 = {",3,4:5", "3,4:5:", "3:4//;\\n;6;"};
+        String[] input2 = {"3:4//;\\n;6;", "3,4:5:"};
 
         //then
         for (String str : input1) {
@@ -38,6 +39,27 @@ class ValidatorTest {
             assertThrows(IllegalArgumentException.class, () -> validator.validate(str),
                     "문자열의 끝은 커스텀 구분자 종료 선언 또는 양수여야 합니다.");
         }
+    }
+
+    @Test
+    void 문자열의_시작과_끝_마지막수가0() {
+        //given
+        String[] input = {"1,12:3://*\n4*50*6*0", "1,12:3://*\n4*50*6*00", "1,12:3://*\n4*50*6*000"};
+
+        //then
+        for (String str : input) {
+            assertThrows(IllegalArgumentException.class, () -> validator.validate(str),
+                    "문자열의 끝은 커스텀 구분자 종료 선언 또는 양수여야 합니다.");
+        }
+    }
+
+    @Test
+    void 문자열의_시작과_끝_마지막_양수가_0으로끝나는_두자리수이상인_양수인경우() {
+        //given
+        String input = "1,12:3://*\n4*50*6*300";
+
+        //then
+        assertDoesNotThrow(() -> validator.validate(input));
     }
 
     @Test
