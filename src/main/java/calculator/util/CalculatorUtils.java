@@ -9,7 +9,6 @@ public class CalculatorUtils {
     // 사용자에게 문자열 입력받아서 반환
     public static String getInput() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = scanner.nextLine();
         // 사용자가 개행이 아닌 "\"와 "n"을 붙여서 입력한 것을 올바르게 처리하기 위해 replace합니다.
         return input.replace("\\n", "\n");
@@ -32,22 +31,21 @@ public class CalculatorUtils {
     }
 
     // 사용자 입력이 올바른 형식인지 체크
-    public static void checkInputFormat(String userInput, Set<Character> separators) {
+    public static void checkInputFormat(Set<Character> separators, String userInput) {
+        if (userInput.isEmpty()) {
+            return;
+        }
+
         String[] split = userInput.split("\n");
         Pattern pattern = makePattern(separators);
 
-        if (split.length == 0) {
-            return;
-        }
         if (split.length > 2) {
             throw new IllegalArgumentException("사용자 입력이 올바르지 않습니다.");
         }
         // split의 길이가 1 또는 2
         if (userInput.contains("\n")) {
             String customSeparator = split[0];
-            if (customSeparator.charAt(customSeparator.length() - 1) == '\n') {
-                throw new IllegalArgumentException("사용자 입력이 올바르지 않습니다.");
-            } else if (customSeparator.length() < 2) {
+            if (customSeparator.length() < 2) {
                 throw new IllegalArgumentException("사용자 입력이 올바르지 않습니다.");
             } else if (customSeparator.charAt(0) != '/' || customSeparator.charAt(1) != '/') {
                 throw new IllegalArgumentException("사용자 입력이 올바르지 않습니다.");
@@ -72,5 +70,21 @@ public class CalculatorUtils {
         patternStr = "^[" + patternStr + "]*$";
 
         return Pattern.compile(patternStr);
+    }
+
+    // 숫자 추출하고 더하기
+    public static int sumOfNums(Set<Character> separators, String userInput) {
+        int startIndex = userInput.indexOf('\n') == -1 ? 0 : userInput.indexOf('\n') + 1;
+
+        String calPart = userInput.substring(startIndex);
+        String[] nums = calPart.split("[" + separators.stream().map(Object::toString).collect(Collectors.joining()) + "]");
+
+        int result = 0;
+        for (String num : nums) {
+            if (!num.isEmpty()) {
+                result += Integer.parseInt(num);
+            }
+        }
+        return result;
     }
 }

@@ -18,21 +18,30 @@ class CalculatorUtilsTest {
             "2,3:328",
             "//#!ji!!\\n",
             "//\\n",
-            "//asI#9\\n1a2,3"
+            "//asI#9\\n1a2,3",
+            "//123\\n12471231523"
     );
-    List<Set<Character>> normalCorrects = List.of(
+    List<Integer> normalCorrectOutputs = List.of(
+            0, 2, 333, 0, 0, 6, 52
+    );
+    List<Set<Character>> normalCorrectSeparators = List.of(
             Set.of(',', ':'),
             Set.of(',', ':'),
             Set.of(',', ':'),
             Set.of(',', ':', '#', '!', 'j', 'i'),
             Set.of(',', ':'),
-            Set.of(',', ':', 'a', 's', 'I', '#', '9')
+            Set.of(',', ':', 'a', 's', 'I', '#', '9'),
+            Set.of(',', ':', '1', '2', '3')
     );
     List<String> abnormalInputs = List.of(
             "//12",
             "//!@12",
+            "/\\n",
+            "!/\\n",
+            "/\\n12,3",
             "/!@\\n12",
-            "//!\\n1?2"
+            "//!\\n1?2",
+            "//@!\\n1\\n12"
     );
 
     @Test
@@ -61,7 +70,7 @@ class CalculatorUtilsTest {
 
             CalculatorUtils.extractSeparators(separators, input);
 
-            Assertions.assertThat(separators).isEqualTo(normalCorrects.get(i));
+            Assertions.assertThat(separators).isEqualTo(normalCorrectSeparators.get(i));
         }
     }
 
@@ -69,9 +78,9 @@ class CalculatorUtilsTest {
     void 사용자_입력_형식_검사_정상() {
         for (int i = 0; i < normalInputs.size(); i++) {
             String input = normalInputs.get(i).replace("\\n", "\n");
-            Set<Character> separators = normalCorrects.get(i);
+            Set<Character> separators = normalCorrectSeparators.get(i);
 
-            Assertions.assertThatCode(() -> CalculatorUtils.checkInputFormat(input, separators))
+            Assertions.assertThatCode(() -> CalculatorUtils.checkInputFormat(separators, input))
                     .doesNotThrowAnyException();
         }
     }
@@ -84,8 +93,18 @@ class CalculatorUtilsTest {
             Set<Character> separators = new HashSet<>(Set.of(',', ':'));
             CalculatorUtils.extractSeparators(separators, input);
 
-            Assertions.assertThatThrownBy(() -> CalculatorUtils.checkInputFormat(input, separators))
+            Assertions.assertThatThrownBy(() -> CalculatorUtils.checkInputFormat(separators, input))
                     .isInstanceOf(IllegalArgumentException.class);
+        }
+    }
+
+    @Test
+    void 숫자_더하기() {
+        for (int i = 0; i < normalInputs.size(); i++) {
+            String input = normalInputs.get(i).replace("\\n", "\n");
+            Set<Character> separators = normalCorrectSeparators.get(i);
+
+            Assertions.assertThat(CalculatorUtils.sumOfNums(separators, input)).isEqualTo(normalCorrectOutputs.get(i));
         }
     }
 
