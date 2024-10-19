@@ -11,7 +11,7 @@ public class Calculator {
 
     Calculator() {
         scanner = new Scanner(System.in);
-        separator = "";
+        separator = ",:";
         operandList = null;
     }
 
@@ -41,6 +41,8 @@ public class Calculator {
         if (input.substring(0, 2).equals("//")) {
             if (input.charAt(3) == '\\' && input.charAt(4) == 'n') {
                 return true;
+            } else if (input.charAt(2) == '\\' && input.charAt(3) == 'n') {
+                return false;
             } else {
                 throw new IllegalArgumentException();
             }
