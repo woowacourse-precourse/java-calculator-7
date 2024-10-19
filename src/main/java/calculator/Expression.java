@@ -6,13 +6,11 @@ import java.util.regex.Pattern;
 public class Expression {
 
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
-    private static final String CUSTOM_DELIMITER_SUFFIX = "\\\\n";
+    private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
     private static final Set<String> DEFALUT_DELIMITER_SET = Set.copyOf(Set.of(",", ":"));
 
     private final Set<String> delimiters;
     private final List<String> operands;
-
-    private static int startIndex = 0;
 
 
     private Expression(Set<String> customDelimiters, Collection<String> operands) {
@@ -40,19 +38,20 @@ public class Expression {
     }
 
     private static Set<String> parseCustomDelimiters(String expr) {
-        final String str = expr.substring(startIndex);
         final Set<String> delimiters = new HashSet<>();
+        int startIndex = 0;
 
-        while (str.startsWith(CUSTOM_DELIMITER_PREFIX, startIndex)) {
+        while (expr.startsWith(CUSTOM_DELIMITER_PREFIX, startIndex)) {
 
             startIndex += CUSTOM_DELIMITER_PREFIX.length();
 
-            int endIndex = str.indexOf(CUSTOM_DELIMITER_SUFFIX, startIndex);
-            final String candidate = str.substring(startIndex, endIndex);
+            int endIndex = expr.indexOf(CUSTOM_DELIMITER_SUFFIX, startIndex);
+            final String candidate = expr.substring(startIndex, endIndex);
+
             if (candidate.contains(CUSTOM_DELIMITER_PREFIX)) {
-                throw new IllegalArgumentException("커스텀 구분자에 " + CUSTOM_DELIMITER_PREFIX + "는 포함할 수 없습니다.");
+                throw new IllegalArgumentException("올바르지 않은 커스텀 구분자입니다: " + candidate);
             }
-            //TODO: CUSTOM_DELIMITER_SUFFIX도 있는지 검증
+
             delimiters.add(candidate);
 
             startIndex = endIndex + CUSTOM_DELIMITER_SUFFIX.length();
@@ -62,6 +61,10 @@ public class Expression {
     }
 
     private static List<String> parseOperands(String expr, Set<String> delimiters) {
+        int startIndex = 0;
+        for (String delimiter : delimiters) {
+            startIndex += delimiter.length() + CUSTOM_DELIMITER_PREFIX.length() + CUSTOM_DELIMITER_SUFFIX.length();
+        }
         final String str = expr.substring(startIndex);
 
         return new ArrayList<>(Arrays.stream(str.split(buildDelimiterRegex(delimiters)))
@@ -78,7 +81,6 @@ public class Expression {
             sb.append("|");
         }
         sb.delete(sb.length() - 1, sb.length());
-
         return sb.toString();
     }
 
