@@ -14,7 +14,6 @@ public class Converter {
         }
         return numbers;
     }
-
     private static Integer isPositive(int i) {
         if (i < 0) {
             throw new IllegalArgumentException("음수를 계산할 수 없습니다.");
