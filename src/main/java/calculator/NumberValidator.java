@@ -1,8 +1,5 @@
 package calculator;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class NumberValidator {
     public static void validate(int number) {
         if(number < 0){
