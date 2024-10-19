@@ -8,7 +8,7 @@ public class Application {
 
         String input = getInput();
 
-        int result = processInput("//;\n1:2:3");
+        int result = processInput(input);
 
         printOutput(result);
     }
@@ -30,9 +30,9 @@ public class Application {
         // 커스텀 구분자가 있는지 확인하고 처리
         if (checkCustomDelimiter(input)) {
             delimiter += "|" + addCustomDelimiter(input);  // 기본 구분자에 커스텀 구분자 추가
-            input = removeDelimiter(input);
+            input =  Console.readLine();
         }
-        System.out.println(delimiter);
+
         // 문자열을 구분자로 분리하여 숫자 배열 추출
         numbers = extractNumbers(input, delimiter);
         sum = Arrays.stream(numbers).sum();  // 숫자들 합 계산
@@ -43,16 +43,15 @@ public class Application {
     private static boolean checkCustomDelimiter(String input) {
         return input.startsWith("//");
     }
+
+    private static String addCustomDelimiter(String input) {
+        return input.substring(2);
+    }
+
     private static String removeDelimiter(String input) {
         int delimiterIndex = input.indexOf("\n");  // 구분자 위치 찾기
         return input.substring(delimiterIndex + 1).trim();
     }
-
-    private static String addCustomDelimiter(String input) {
-        int endIndex = input.indexOf("\n");
-        return input.substring(2, endIndex);
-    }
-
     private static int[] extractNumbers(String input, String delimiter) {
         String[] tokens = input.split(delimiter);  // 구분자를 사용해 문자열 분리
         return Arrays.stream(tokens)
