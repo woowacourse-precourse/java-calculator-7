@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Application {
     private static final String COMMA = ",";
@@ -53,7 +54,11 @@ public class Application {
                 try {
                     new BigInteger(customDelimiter);
                 } catch (NumberFormatException e) {
-                    return BigInteger.valueOf(0);
+                    List<BigInteger> operands = Arrays.stream(expression.split(Pattern.quote(customDelimiter)))
+                            .map(BigInteger::new)
+                            .toList();
+
+                    return operands.stream().reduce(BigInteger.valueOf(0), BigInteger::add);
                 }
                 throw new IllegalArgumentException("구분자에 숫자가 들어있습니다");
             }
