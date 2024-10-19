@@ -21,7 +21,7 @@ public class NumberExtractor {
 
         String regex = createDelimiterRegex(delimiters);
 
-        String[] splitNumbers = input.split(regex.isEmpty() ? input : regex);
+        String[] splitNumbers = input.split(regex);
 
         return Arrays.stream(splitNumbers)
                 .filter(this::isNotEmpty)
