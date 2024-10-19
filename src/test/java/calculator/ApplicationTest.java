@@ -85,7 +85,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void isNothing() {
+    void isNothingTest() {
         //when
         String input = "";
         int expected = 0;
@@ -95,5 +95,18 @@ class ApplicationTest extends NsTest {
 
         //then
         assertThat(actual).isEqualTo(actual);
+    }
+
+    @Test
+    void addTest() {
+        //when
+        String input = "1,2:3";
+        int expected = 6;
+
+        //given
+        int actual = calculator.add(input);
+
+        //then
+        assertThat(actual).isEqualTo(expected);
     }
 }

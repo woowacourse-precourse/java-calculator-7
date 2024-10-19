@@ -6,8 +6,16 @@ import java.util.Set;
 
 public class Calculator {
 
-    public Set<String> delimiters = new HashSet<>(Arrays.asList(",", ";"));
-    
+    public Set<String> delimiters = new HashSet<>(Arrays.asList(",", ":"));
+
+    public int add(String input) {
+        isNothing(input);
+        checkCustomDelimiter(input);
+
+        String[] numbers = splitNumbers(input);
+        return sumNumbers(numbers);
+    }
+
     public void checkCustomDelimiter(String input) {
         if (input.startsWith("//") && input.endsWith("\n")) {
             String content = input.substring(2, input.length() - 1);
