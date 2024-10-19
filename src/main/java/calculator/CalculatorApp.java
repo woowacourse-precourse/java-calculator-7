@@ -76,9 +76,11 @@ public class CalculatorApp implements CalculatorRunnable {
     }
 
     private static int[] convertToIntArray(String[] splitNumbers) {
-        return Arrays.stream(splitNumbers)
-                .mapToInt(Integer::valueOf)
-                .toArray();
+        try {
+            return Arrays.stream(splitNumbers).mapToInt(Integer::valueOf).toArray();
+        } catch (NumberFormatException e) {
+            throw new CalculatorException("입력값 중 숫자로 변환할 수 없는 값이 포함되어 있습니다.");
+        }
     }
 
 }
