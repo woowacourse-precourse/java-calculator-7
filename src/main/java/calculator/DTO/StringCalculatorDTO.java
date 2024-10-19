@@ -3,7 +3,7 @@ package calculator.DTO;
 import java.util.List;
 
 public class StringCalculatorDTO {
-    final String input;
+    String input;
     List<String> detachedInput;
 
     public StringCalculatorDTO(String input) {
