@@ -19,7 +19,7 @@ public class DelimiterHelper {
 
 	private static void validateCustomDelimiterFormula(String formula) {
 		if (!(Pattern.matches(DrawConstant.CUSTOM_DELIMITER_FORMULA_REGEX, formula))) {
-			throw new CalculatorException(ExceptionMessage.INVALID_CUSTOM_PREFIX);
+			throw new CalculatorException(ExceptionMessage.INVALID_FORMAT_ERROR);
 		}
 	}
 

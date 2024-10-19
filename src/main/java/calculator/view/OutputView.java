@@ -4,6 +4,8 @@ import calculator.dto.SumDto;
 import calculator.view.message.OutputViewMessage;
 
 public class OutputView {
+	private static final int ZERO = 0;
+
 	public static void printInformationMessage() {
 		printMessage(OutputViewMessage.INFORMATION_MESSAGE);
 	}
@@ -19,5 +21,9 @@ public class OutputView {
 	public static void printResultMessage(SumDto sumDto) {
 		printInlineMessage(OutputViewMessage.RESULT_MESSAGE);
 		printMessage(sumDto.sum());
+	}
+
+	public static void printZeroSumMessage() {
+		printMessage(ZERO);
 	}
 }
