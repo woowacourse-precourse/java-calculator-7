@@ -42,7 +42,7 @@
 
 _Bottom-up implementation_
 
-0. Console 라이브러리 테스트  
+0. Console 라이브러리 테스트 및 입출력 구현 
  
 1. 쉼표(`,`) 또는 콜론(`:`)을 구분자만 생각하고 구현 
 
