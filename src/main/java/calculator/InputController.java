@@ -1,11 +1,11 @@
 package calculator;
 
-import java.util.Scanner;
+import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class InputController {
 
     public static InputString getInputString(){
-       Scanner scanner = new Scanner(System.in);
-        return new InputString(scanner.nextLine());
+        String inputString = readLine();
+        return new InputString(inputString);
     }
 }
