@@ -32,16 +32,27 @@ public class Application {
         return str.split(delimiter);
     }
 
+    // 파싱된 양수를 더하는 기능
+    private static int add(String[] integerList) {
+        int sum = 0;
+        for(String i : integerList) {
+            sum += Integer.parseInt(i);
+        }
+        return sum;
+    }
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         StringBuilder delimiter = new StringBuilder();
-        delimiter.append(".|:");
+        delimiter.append(",|:");
         init_print();
         String str = input();
         String[] tempResult = getCustomDelimiter(str);
-        delimiter.append("|").append(tempResult[0]);
+        if (!tempResult[0].isEmpty()) {
+            delimiter.append("|").append(Pattern.quote(tempResult[0]));  // 커스텀 구분자를 정규식으로 처리
+        }
         str = tempResult[1];
         System.out.println(str);
         String[] result = parseString(delimiter.toString(), str);
+        System.out.println(add(result));
     }
 }
