@@ -6,6 +6,8 @@ import static calculator.global.util.Validator.validateSeparator;
 
 import calculator.domain.separator.Separators;
 import calculator.domain.number.Numbers;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class LetterMannager {
@@ -17,36 +19,59 @@ public class LetterMannager {
         this.letters = new StringBuilder(letters);
         separators = new Separators();
         numbers = new Numbers();
+
+        RegisterCustomSeparator();
+        addSeparatedNumbersToNumbers(splitNumbers());
     }
 
-    public void splitCustomSeparator() {
-        int startIndex = 0;
-        int endIndex;
-        String separator;
-        while (true) {
-            startIndex = getStartIndex(START_OF_CUSTOM_SEPARATOR_LETTER, startIndex);
-            endIndex = getStartIndex(END_OF_CUSTOM_SEPARATOR_LETTER, startIndex);
-            if (!isFindCustomSeparator(startIndex)) {
-                return;
-            }
-            validateCustomIndex(startIndex, endIndex);
-            separator = subLetter(startIndex, endIndex);
-            replaceLetter(startIndex, endIndex, separator);
-            separators.addSeparator(separator);
+    private void RegisterCustomSeparator() {
+        String[] separators = getCustomSeparatorFromLetters();
+        for (String separator : separators) {
+            replaceCustomSeparatorToSeparator(separator);
+            this.separators.addSeparator(separator);
         }
     }
 
-    public void splitNumber() {
-        String lettersString = letters.toString();
-        String separator = separators.toString();
-        String[] numbers = lettersString.split(separator);
+    private String[] getCustomSeparatorFromLetters() {
+        List<String> separators = new ArrayList<>();
+        int startIndex = 0;
+        while (true) {
+            startIndex = getStartIndex(START_OF_CUSTOM_SEPARATOR_LETTER, startIndex);
+            int endIndex = getStartIndex(END_OF_CUSTOM_SEPARATOR_LETTER, startIndex);
+            validateCustomIndex(startIndex, endIndex);
+            if (!isFindCustomSeparator(startIndex)) {
+                break;
+            }
+            String separator = extractCustomSeparator(startIndex, endIndex);
+            separators.add(separator);
+            startIndex = endIndex;
+        }
+        return separators.toArray(String[]::new);
+    }
+
+
+    private String[] splitNumbers() {
+        return getNumbersFromLetters();
+    }
+
+    private void addSeparatedNumbersToNumbers(String[] numbers) {
         for (String number : numbers) {
             if (number.isEmpty()) {
                 continue;
             }
-            validateSeparator(number);
-            this.numbers.addNumber(number);
+            addSeparatedNumberToNumbers(number);
         }
+    }
+
+    private void addSeparatedNumberToNumbers(String number) {
+        validateSeparator(number);
+        this.numbers.addNumber(number);
+    }
+
+    private String[] getNumbersFromLetters() {
+        String lettersString = letters.toString();
+        String separator = separators.toString();
+        return lettersString.split(separator);
     }
 
     private int getStartIndex(String letter, int startIndex) {
@@ -57,12 +82,14 @@ public class LetterMannager {
         return startIndex != -1;
     }
 
-    private String subLetter(int startIndex, int endIndex) {
+    private String extractCustomSeparator(int startIndex, int endIndex) {
         return letters.substring(startIndex + START_OF_CUSTOM_SEPARATOR_LETTER.length(), endIndex);
     }
 
-    private void replaceLetter(int startIndex, int endIndex, String newLetter) {
-        letters.replace(startIndex, endIndex + END_OF_CUSTOM_SEPARATOR_LETTER.length(), newLetter);
+    private void replaceCustomSeparatorToSeparator(String customSeparator) {
+        String separatorString = START_OF_CUSTOM_SEPARATOR_LETTER + customSeparator + END_OF_CUSTOM_SEPARATOR_LETTER;
+        int startIndex = letters.indexOf(separatorString);
+        letters.replace(startIndex, separatorString.length(), customSeparator);
     }
 
     public Separators getSeparators() {

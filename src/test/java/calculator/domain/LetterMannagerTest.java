@@ -15,10 +15,9 @@ class LetterMannagerTest {
         LetterMannager letterMannager;
 
         //when
-        letterMannager = new LetterMannager(letters);
 
         //then
-        Assertions.assertThatThrownBy(letterMannager::splitCustomSeparator)
+        Assertions.assertThatThrownBy(() -> new LetterMannager(letters))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(CUSTOM_SEPARATOR_INDEX_ERROR_MESSAGE);
     }
@@ -32,7 +31,6 @@ class LetterMannagerTest {
 
         //when
         letterMannager = new LetterMannager(letters);
-        letterMannager.splitCustomSeparator();
 
         //then
         Assertions.assertThat(letterMannager.getSeparators().contains(separator)).isEqualTo(true);
@@ -46,7 +44,6 @@ class LetterMannagerTest {
 
         //when
         letterMannager = new LetterMannager(letters);
-        letterMannager.splitNumber();
 
         //then
         Assertions.assertThat(letterMannager.getNumbers().toInteger().contains(1)).isEqualTo(true);
@@ -62,8 +59,6 @@ class LetterMannagerTest {
 
         //when
         letterMannager = new LetterMannager(letters);
-        letterMannager.splitCustomSeparator();
-        letterMannager.splitNumber();
 
         //then
         Assertions.assertThat(letterMannager.getNumbers().toInteger().contains(1)).isEqualTo(true);
@@ -74,13 +69,11 @@ class LetterMannagerTest {
     void 추출한_문자가_구분자에_등록되어_있지_않다면_예외_처리() {
         //given
         String letters = "1;2";
-        LetterMannager letterMannager;
 
         //when
-        letterMannager = new LetterMannager(letters);
 
         //then
-        Assertions.assertThatThrownBy(letterMannager::splitNumber)
+        Assertions.assertThatThrownBy(() -> new LetterMannager(letters))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.UNREGISTERED_SEPARATOR_ERROR_MESSAGE);
     }

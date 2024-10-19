@@ -15,13 +15,31 @@ public class CalculateMannager {
     }
 
     public void start() {
-        outputView.printReadLettersMessage();
-        String letters = inputView.readLetters();
-        letterMannager = new LetterMannager(letters);
-        letterMannager.splitCustomSeparator();
-        letterMannager.splitNumber();
-        calculator = new Calculator(letterMannager.getNumbers());
+        printReadLettersMessage();
+        String letters = readLetters();
+        initializeLetterMannager(letters);
+        initializeCalculator();
+        printResult();
+    }
+
+    private void printResult() {
         outputView.printResult(calculator.getSum());
+    }
+
+    private void initializeCalculator() {
+        calculator = new Calculator(letterMannager.getNumbers());
+    }
+
+    private void initializeLetterMannager(String letters) {
+        letterMannager = new LetterMannager(letters);
+    }
+
+    private String readLetters() {
+        return inputView.readLetters();
+    }
+
+    private void printReadLettersMessage() {
+        outputView.printReadLettersMessage();
     }
 
 
