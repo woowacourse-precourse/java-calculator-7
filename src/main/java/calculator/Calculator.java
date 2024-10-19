@@ -16,7 +16,7 @@ public class Calculator {
         String input = readLine();
 
         Character delimiter = parser.parseCustomDelimiter(input);
-        List<Integer> integers = parser.parseIntegers(input, delimiter);
+        List<Integer> integers = parser.parsePositiveIntegers(input, delimiter);
 
         System.out.println("결과 : " + sum(integers));
     }

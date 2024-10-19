@@ -61,7 +61,7 @@ public class Parser {
      * @param customDelimiter 커스텀 구분자
      * @return List 입력된 숫자 리스트
      */
-    public List<Integer> parseIntegers(String input, Character customDelimiter) {
+    public List<Integer> parsePositiveIntegers(String input, Character customDelimiter) {
         String integersAndDelimiters = null;
 
         // customDelimiter가 존재하는 경우 = //*\n이 존재하는 경우
@@ -76,7 +76,11 @@ public class Parser {
         try {
             String[] integerStrs = integersAndDelimiters.split(",|:");
             for (String integerStr : integerStrs) {
-                integers.add(Integer.parseInt(integerStr));
+                int number = Integer.parseInt(integerStr);
+                if (number <= 0) {
+                    throw new IllegalArgumentException("음수는 불가능합니다.");
+                }
+                integers.add(number);
             }
         } catch (Exception e) {
             throw new IllegalArgumentException("올바르지 않은 문법입니다.");
