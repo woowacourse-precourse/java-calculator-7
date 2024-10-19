@@ -12,10 +12,10 @@ public class ConsoleView {
     }
 
     public void printResult(BigInteger result) {
-        System.out.println(MessageConst.RESULT_MSG + result);
+        System.out.print("\n" + MessageConst.RESULT_MSG + result);
     }
 
     public void printErrorMessage(String errorMsg) {
-        System.out.println(MessageConst.INVALID_INPUT_MSG + errorMsg);
+        System.out.print("\n" + MessageConst.INVALID_INPUT_MSG + errorMsg);
     }
 }
