@@ -8,6 +8,8 @@ import static calculator.constants.DelimiterEnum.*;
 import static calculator.controller.ExceptionMessage.*;
 
 public class Model {
+    private static final calculator.model.Parser parser = new Parser();
+
     public static String[] customDelimiterAddCalculator(String userInput) {
         userInput = userInput.replace("\\n", CUSTOM_DELIMITER_BACKWARD.getValue());
         Matcher m = Pattern.compile(CUSTOM_DELIMITER_PATTERN.getValue()).matcher(userInput);
@@ -42,7 +44,7 @@ public class Model {
 
     public static int getSum(String[] numbers) {
         return Arrays.stream(numbers)
-                .mapToInt(Integer::parseInt)
+                .mapToInt(parser::toInt)
                 .sum();
     }
 

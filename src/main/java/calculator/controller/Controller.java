@@ -28,11 +28,7 @@ public class Controller {
 
     public void run() {
         String userInput = inputView.readUserInput();
-        try {
-            int result = calculate(userInput);
-            outputView.showResultMessage(result);
-        } catch (RuntimeException e) {
-            System.out.println(e.getMessage());
-        }
+        int result = calculate(userInput);
+        outputView.showResultMessage(result);
     }
 }
