@@ -2,15 +2,20 @@ package calculator.ui;
 
 import calculator.common.Request;
 import calculator.common.Response;
+import calculator.processor.Processor;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Calculator {
 
-    /**
-     * TODO : 계산 요청을 처리하는 Processor 구현
-     */
+    private final Processor processor;
+
+    public Calculator(Processor processor) {
+        this.processor = processor;
+    }
+
     public void run() {
-        getNumbers();
+        Response response = processor.process(getNumbers());
+        displayResult(response);
     }
 
     private Request getNumbers() {
