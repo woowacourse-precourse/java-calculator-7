@@ -24,7 +24,6 @@ public class DrawController {
 
 				DelimitersDto delimiters = drawService.generateDelimiters(formulaReq);
 
-				System.out.println(delimiters.delimiters());
 				return drawService.drawNumbers(delimiters.delimiters(), formulaReq);
 			} catch (IllegalArgumentException exception) {
 				System.out.println(exception.getMessage());

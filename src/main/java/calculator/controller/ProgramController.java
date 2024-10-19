@@ -12,10 +12,10 @@ public class ProgramController {
 	}
 
 	public void run() {
-			Calculator calculator = new Calculator(drawNumber());
-			System.out.println(calculator.getCalculationNumbers());
-			calculator.calculateSum();
-			System.out.println(calculator.getSum());
+		Calculator calculator = new Calculator(drawNumber());
+		calculator.calculateSum();
+		System.out.print("결과 : ");
+		System.out.println(calculator.getSum());
 
 	}
 
