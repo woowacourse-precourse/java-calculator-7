@@ -1,4 +1,6 @@
-package calculator;
+package calculator.service;
+
+import calculator.data.InputString;
 
 import java.util.List;
 

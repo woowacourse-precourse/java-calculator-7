@@ -1,4 +1,4 @@
-package calculator;
+package calculator.validation;
 
 import java.util.Set;
 

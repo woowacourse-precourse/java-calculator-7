@@ -1,11 +1,14 @@
-package calculator;
+package calculator.data;
+
+import calculator.service.InputParser;
+import calculator.service.Parser;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static calculator.CheckForm.checkFormOfCustomSeparator;
-import static calculator.CheckForm.checkFormOfOperands;
+import static calculator.validation.CheckForm.checkFormOfCustomSeparator;
+import static calculator.validation.CheckForm.checkFormOfOperands;
 
 public class InputString {
 

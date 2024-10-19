@@ -1,8 +1,10 @@
 package calculator;
 
-import static calculator.InputController.getInputString;
-import static calculator.PrintOutput.printDefaultMessage;
-import static calculator.PrintOutput.printOutput;
+import calculator.service.StringPlusCalculator;
+
+import static calculator.input.InputController.getInputString;
+import static calculator.output.PrintOutput.printDefaultMessage;
+import static calculator.output.PrintOutput.printOutput;
 
 public class Application {
 
