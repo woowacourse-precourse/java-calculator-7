@@ -13,7 +13,17 @@ public class StringParser {
         this.input = input;
     }
 
-    public List<String> split() {
+    public List<Integer> parse() {
+        return convertToIntArray(split());
+    }
+
+    private List<Integer> convertToIntArray(List<String> strings) {
+        return strings.stream()
+                .map(string -> string.isEmpty() ? 0 : Integer.parseInt(string))
+                .toList();
+    }
+
+    private List<String> split() {
         extractCustomDelimiterIfPresent();
 
         List<String> strings = List.of(input.split(delimiterProcessor.getDelimiters()));
@@ -21,6 +31,18 @@ public class StringParser {
         validateInput(strings);
 
         return strings;
+    }
+
+    private void extractCustomDelimiterIfPresent() {
+        if (delimiterProcessor.containsCustomDelimiter()) {
+            input = extractExpression(input);
+        }
+    }
+
+    private String extractExpression(String input) {
+        return Optional.ofNullable(input)
+                .map(i -> i.substring(i.indexOf("\n") + 1))
+                .orElse("");
     }
 
     private void validateInput(List<String> strings) {
@@ -39,23 +61,5 @@ public class StringParser {
 
     private boolean isInvalidNumber(String number) {
         return Integer.parseInt(number) < 0 || !Character.isDigit(number.charAt(0));
-    }
-
-    public List<Integer> convertToIntArray(List<String> strings) {
-        return strings.stream()
-                .map(Integer::parseInt)
-                .toList();
-    }
-
-    private void extractCustomDelimiterIfPresent() {
-        if (delimiterProcessor.containsCustomDelimiter()) {
-            input = extractExpression(input);
-        }
-    }
-
-    private String extractExpression(String input) {
-        return Optional.ofNullable(input)
-                .map(i -> i.substring(i.indexOf("\n") + 1))
-                .orElse("");
     }
 }
