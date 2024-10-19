@@ -64,8 +64,9 @@ public class CalculatorApp implements CalculatorRunnable {
     }
 
     private String extractCustomDelimiter(String input) {
+        int prefixLength = delimiterChecker.getPrefix().length();
         int delimiterIdx = input.indexOf(delimiterChecker.getSuffix());
-        return input.substring(2, delimiterIdx);
+        return input.substring(prefixLength, delimiterIdx);
     }
 
     private String extractNumbersWithDelimiter(String input, DelimiterHandler delimiterHandler) {
