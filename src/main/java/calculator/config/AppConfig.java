@@ -8,19 +8,19 @@ import calculator.validator.InputValidator;
 
 public class AppConfig {
 
-    public DelimiterService delimiterService() {
+    private DelimiterService delimiterService() {
         return new DelimiterService();
     }
 
-    public DelimiterNumberValidator delimiterNumberValidator() {
+    private DelimiterNumberValidator delimiterNumberValidator() {
         return new DelimiterNumberValidator();
     }
 
-    public CalculatorService calculatorService() {
+    private CalculatorService calculatorService() {
         return new CalculatorService(delimiterService(), delimiterNumberValidator());
     }
 
-    public InputValidator inputValidator() {
+    private InputValidator inputValidator() {
         return new InputValidator();
     }
 
