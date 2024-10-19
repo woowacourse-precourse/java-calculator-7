@@ -22,12 +22,13 @@ public class StringServiceImpl implements StringService {
                 throw new IllegalArgumentException("알맞은 입력 형식이 아닙니다.");
             }
         }
-        Matcher inputMatcher = Pattern.compile("^\\d+((,|:|\\|;)(\\d+))*").matcher(input);
+        String inputRegex = ("^\\d+((" + delimiter + ")(\\d+))*");
+        Matcher inputMatcher = Pattern.compile(inputRegex).matcher(input);
 
         if (input.isEmpty()) {
             return new ArrayList<>();
         }
-        if (!inputMatcher.find()) {
+        if (inputMatcher.find()) {
             throw new IllegalArgumentException("알맞은 입력 형식이 아닙니다.");
         }
         return Arrays.asList(input.split(delimiter));
