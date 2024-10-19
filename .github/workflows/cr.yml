@@ -12,6 +12,7 @@ jobs:
   code-review:
     runs-on: ubuntu-latest
     steps:
+
       - uses: anc95/ChatGPT-CodeReview@v1.0.13
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
