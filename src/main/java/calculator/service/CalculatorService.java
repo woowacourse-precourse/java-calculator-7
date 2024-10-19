@@ -22,7 +22,7 @@ public class CalculatorService {
             PositiveNumber result = calculator.add(inputString);
             ioService.printResult(result.value());
         } finally {
-            Console.close();
+            ioService.close();
         }
     }
 }

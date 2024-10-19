@@ -6,4 +6,6 @@ public interface IOService {
 
     void printResult(long result);
 
+    void close();
+
 }

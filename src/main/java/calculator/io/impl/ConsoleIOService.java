@@ -16,4 +16,9 @@ public class ConsoleIOService implements IOService {
         System.out.println("결과 : " + result);
     }
 
+    @Override
+    public void close() {
+        Console.close();
+    }
+
 }
