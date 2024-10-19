@@ -11,7 +11,7 @@
 ---
 
 - [시작하기](#-시작하기)
-- [Commit convention](#-commit-message)
+- [Commit convention](#-commit-convention)
 - [Flow](#-flow)
     - [실행 결과 예시](#실행-결과-예시)
 - [용어 정의](#-용어-정의)
