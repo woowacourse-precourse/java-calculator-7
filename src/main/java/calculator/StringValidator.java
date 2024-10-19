@@ -11,6 +11,8 @@ public class StringValidator {
     }
 
     public static List<String> userInputValidator(String userInput) {
+        vaildateNulll(userInput);
+
         List<Delimiter> delimiter = delimiterValidator(userInput);
         return setDelimiter(userInput, delimiter);
     }
@@ -64,4 +66,10 @@ public class StringValidator {
         return Pattern.matches("^[0-9\\p{Punct}n]*", userInput);
     }
 
+    public static void vaildateNulll(String userInput) throws IllegalArgumentException {
+        if (userInput.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+    }
+    
 }
