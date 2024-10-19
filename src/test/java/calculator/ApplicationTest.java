@@ -149,7 +149,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void Custom1_Number0_Delimiter2() {
+    void Custom1_Number0_Delimiter3() {
         assertSimpleTest(() -> {
             run("//;\\n;;:");
             assertThat(output()).contains("결과 : 0");

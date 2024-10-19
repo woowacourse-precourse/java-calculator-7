@@ -20,8 +20,42 @@
 |JCAL_EXEP_01|예외 처리|예외처리| `IllegalArgumentException` (Invalid input) |try/catch|
 
 <br>
-  
-### Commit Convention
+
+---
+
+## Test Cases
+테스트 함수명은 다음과 같은 것을 의미합니다.
+- Custom()_Number()_Delimiter()
+  - CustomN : N개의 커스텀 구분자 정의
+  - NumberN : N개의 숫자
+  - DelimiterN : N개의 구분자
+를 가진 입력값을 의미합니다.
+  - e.g. Custom0_Number0_Delimiter0() : 빈 문자열 입력 테스트 케이스
+  - e.g. CustomString_Number1_Delimiter2() : 문자열 커스텀 구분자 정의 1개, 1개의 숫자와 2개의 구분자
+
+| Custom | Number | Delimiter | 입력               | 예상 출력     |
+|--------|--------|-----------|------------------|-----------|
+| 0      | 0      | 0         |                  | 결과 : 0    |
+| 0      | 1      | 0         | 3492             | 결과 : 3492 |
+| 0      | 2      | 2         | 3;4;93           | 결과 : 100  |
+| 0      | 0      | 2         | :,               | 결과 : 0    |
+| 1      | 0      | 0         | //;\n            | 결과 : 0    |
+| 1      | 1      | 0         | //;\n34          | 결과 : 34   |
+| 1      | 2      | 1         | //;\n3;4         | 결과 : 7    |
+| 1      | 0      | 3         | //;\n;;:         | 결과 : 0    |
+| 2      | 0      | 0         | //;\\n//'\\n     | 결과: 0     |
+| 2      | 3      | 3         | //;\n//’\n3;4’93: | 결과 : 100| 
+| 문자열    | 1      | 2         | //;mz\n//’34\n’34;mz93 | 결과 : 93   |
+|이스케이프 문자| 3      | 2         |  //;\n//\t\n3\t4;93 |결과 : 100|
+|2|커스텀 정의 사이1,그외2|1|//;\n3:4//’\n93|결과 : 100|
+
+
+<br>
+
+
+---
+
+## Commit Convention
 
 > [!NOTE]
 > [Angular 9 Commit Message Format](https://github.com/angular/angular/blob/main/CONTRIBUTING.md#type) 를 참고하였습니다.
@@ -40,7 +74,7 @@
 - 등
 
 #### \<scope>
-- * \<scope>는  변경되거나 추가된 함수의 이름을 의미합니다.
+- \<scope>는  변경되거나 추가된 함수의 이름을 의미합니다.
 
 #### \<short summary>
 - 명령문으로 작성합니다.
@@ -60,4 +94,3 @@ feat(getInput): JCAL_INPUT_01- Get input by readline
 
 ### 
 [Angular 9 Commit Message Format](https://github.com/angular/angular/blob/main/CONTRIBUTING.md#type)을 참고하였습니다.
-
