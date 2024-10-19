@@ -12,10 +12,14 @@ public class Calculator {
         System.out.println("덧셈할 문자열을 입력해주세요.");
         String input = Console.readLine();
 
-        String[] numbers = splitString(input);
-        System.out.println("분리된 숫자: ");
-        for (String number : numbers) {
-            System.out.println(number);
+        try {
+            String[] numbers = splitString(input);
+            for (String number : numbers) {
+                int num = parseNumber(number.trim());
+                validateNumber(num);
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -44,5 +48,19 @@ public class Calculator {
 
     private static boolean hasCustomDelimiter(String input) {
         return input.startsWith(PREFIX_CUSTOM) && input.contains(POSTFIX_CUSTOM);
+    }
+
+    private static int parseNumber(String number) {
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("유효하지 않은 숫자가 포함되어 있습니다: " + number);
+        }
+    }
+
+    private static void validateNumber(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + number);
+        }
     }
 }
