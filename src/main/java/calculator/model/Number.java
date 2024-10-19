@@ -4,7 +4,7 @@ public class Number {
     private int number;
 
     public Number(String number) {
-        int tempNumber = Integer.parseInt(number);
+        int tempNumber = parseNumber(number);
         validateNumber(tempNumber);
         this.number = tempNumber;
     }
@@ -23,5 +23,12 @@ public class Number {
             return true;
         }
         return false;
+    }
+    private int parseNumber(String number) {
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("잘못된 입력입니다. 숫자가 아닙니다.");
+        }
     }
 }
