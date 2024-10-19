@@ -45,8 +45,7 @@ public class Controller {
     }
 
     private void getResultNum() {
-        mainService.setResultNumbers(resultNumbers);
-        OutputMessage.resultMessage(resultNumbers.getResult());
+        OutputMessage.resultMessage(mainService.getResultNumber(resultNumbers));
     }
 
 

@@ -66,17 +66,13 @@ public class MainService {
         return defaultRegex;
     }
 
-    public void setResultNumbers(ResultNumbers resultNumbers) {
+    public int getResultNumber(ResultNumbers resultNumbers) {
+        int result = 0;
 
-        int result = resultNumbers.getResult();
-
-        for (int num : resultNumbers.getNumberList()) {
+        for(int num : resultNumbers.getNumberList()) {
             result += num;
         }
-
-        resultNumbers.setResult(result);
-
+        return result;
     }
-
 
 }
