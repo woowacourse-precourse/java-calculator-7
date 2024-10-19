@@ -41,4 +41,24 @@ class CalculatorParserTest {
                 .hasMessage("커스텀 구분자가 1글자를 초과했습니다.");
     }
 
+    @Test
+    void 구분자로_구분된_값이_양수인지_검증한다_숫자가_아닌_경우(){
+        final var calculatorParser = new CalculatorParser();
+
+        // when & then
+        assertThatThrownBy(() -> calculatorParser.parse("//;\n1;aaaa;3"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("피연산자가 숫자가 아닙니다.");
+    }
+
+    @Test
+    void 구분자로_구분된_값이_양수인지_검증한다_음수인_경우(){
+        final var calculatorParser = new CalculatorParser();
+
+        // when & then
+        assertThatThrownBy(() -> calculatorParser.parse("//;\n1;-2;3"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("피연산자가 양수가 아닙니다.");
+    }
+
 }
