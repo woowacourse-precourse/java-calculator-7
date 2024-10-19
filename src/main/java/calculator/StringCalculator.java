@@ -2,6 +2,8 @@ package calculator;
 
 public class StringCalculator {
 	private static final String ORIGINAL_SPLITTER_REGEX = ",|:";
+	private static final int SPLITTER_FIND_START_INDEX = 2;
+
 	public static int splitAndSum(String input) {
 		String[] splitString = splitWithOriginalSplitter(input);
 		if (splitString.length > 1) {
@@ -16,7 +18,7 @@ public class StringCalculator {
 
 	private static String[] splitWithCustomSplitter(String input){
 		int splitterFindEndIndex = input.indexOf("\\n");
-		String customSplitter = input.substring(2, splitterFindEndIndex);
+		String customSplitter = input.substring(SPLITTER_FIND_START_INDEX, splitterFindEndIndex);
 		String inputSubString = input.substring(splitterFindEndIndex + 2);
 		return inputSubString.split(customSplitter);
 	}
