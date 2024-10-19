@@ -9,7 +9,11 @@ public class Plus {
         String result = null;
 
         try {
-            result = String.valueOf(getResultForInteger(numbers));
+            if (isListSizeOne(numbers)) {
+                result = numbers.get(0);
+            } else {
+                result = String.valueOf(getResultForInteger(numbers));
+            }
         } catch (NumberFormatException | ArithmeticException e) {
             result = getResultForBigInteger(numbers).toString();
         }
@@ -23,6 +27,10 @@ public class Plus {
 
     public BigInteger getResultForBigInteger(List<String> numbers) {
         return numbers.stream().map(BigInteger::new).reduce(BigInteger.ZERO, BigInteger::add);
+    }
+
+    private boolean isListSizeOne(List<String> numbers) {
+        return numbers.size() == 1;
     }
 
 }
