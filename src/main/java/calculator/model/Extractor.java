@@ -27,6 +27,8 @@ public class Extractor {
         for (String token : tokens) {
             if (!token.isEmpty()) {
                 Long number = validateIsNumber(token);
+                validateNegativeNumber(number);
+                numbers.add(number);
             }
         }
     }
@@ -55,6 +57,12 @@ public class Extractor {
             return Long.parseLong(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("잘못된 입력입니다.");
+        }
+    }
+
+    private void validateNegativeNumber(Long number) {
+        if(number < 0) {
+            throw new IllegalArgumentException("음수가 포함되어 있습니다.");
         }
     }
 
