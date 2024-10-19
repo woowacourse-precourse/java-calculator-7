@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 
 public class DefaultSeparator {
 
-    public BigInteger[] separateStringToSum(String UserInput, SeparatorStorage separatorStorage){
+    public BigInteger[] separateStringToSum(String userInput, SeparatorStorage separatorStorage){
 
-        String [] parsedStrings = UserInput.split(getRegex(separatorStorage));
+        String [] parsedStrings = userInput.split(getRegex(separatorStorage));
 
         BigInteger[] numbers = Arrays.stream(parsedStrings)
                 .map(BigInteger::new)
