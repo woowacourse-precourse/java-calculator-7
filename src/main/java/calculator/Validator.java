@@ -20,8 +20,23 @@ public class Validator {
         }
     }
 
+    // 파싱된 숫자를 검증
+    public static int validateNumber(int parsedNumber) {
+        if (parsedNumber < 0) {
+            throwError("커스텀 구분자를 설정할 수 없거나 유효하지 않은 숫자입니다.");
+        }
+
+        return parsedNumber;
+    }
+
+    // 외부에서 throwError 함수를 사용하기 위한 함수
+    public static void use(String message) {
+        throwError(message);
+    }
+
     // 오류를 throw하는 함수
     private static void throwError(String message) {
         throw new IllegalArgumentException(message);
     }
+
 }

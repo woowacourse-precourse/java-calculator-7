@@ -7,9 +7,18 @@ public class Calculator {
         }
 
         // input이 빈 문자열이 아닌 경우
-        String[] parsedNumber = Parser.parse(input);
-        for (String number : parsedNumber) {
-            System.out.println(number);
+        String[] parsedInput = Parser.parse(input);
+
+        // 분할한 문자열을 숫자로 바꾸고, 정수인지 검증하기
+        for (String number : parsedInput) {
+            try {
+                int parsedNumber = Integer.parseInt(number);
+                int validatedNumber = Validator.validateNumber(parsedNumber);
+
+                System.out.println(validatedNumber);
+            } catch (NumberFormatException e) {
+                Validator.use("커스텀 구분자를 설정할 수 없거나 유효하지 않은 숫자입니다.");
+            }
         }
 
         return 1;
