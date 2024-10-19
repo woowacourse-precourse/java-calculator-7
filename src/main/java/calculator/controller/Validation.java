@@ -8,10 +8,7 @@ public class Validation {
     private static final int ZERO = 0;
 
     public static boolean hasCustomDelimiter(String input) {
-        if (input.matches(CUSTOM_DELIMITER_REGEX)) {
-            return true;
-        }
-        return false;
+        return input.matches(CUSTOM_DELIMITER_REGEX);
     }
 
     public static boolean isAllNumbers(String[] tokens) {
