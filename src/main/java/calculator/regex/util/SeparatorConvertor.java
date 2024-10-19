@@ -1,12 +1,13 @@
-package calculator.separator.util;
+package calculator.regex.util;
 
 import calculator.constant.ErrorMessage;
-import calculator.separator.constant.RegexConstant;
+import calculator.regex.constant.RegexConstant;
 
 import java.util.stream.IntStream;
 
 public class SeparatorConvertor {
-    public static String replaceEscape(String separator) {
+    public static String replaceRegex(String separator) {
+        if (separator.equals(RegexConstant.DOT)) return RegexConstant.DOT_REGEX;
         return separator.replace(RegexConstant.SINGLE_BACK_SLASH,
                 RegexConstant.DOUBLE_BACK_SLASH);
     }
