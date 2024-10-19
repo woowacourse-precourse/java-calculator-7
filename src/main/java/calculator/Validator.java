@@ -25,4 +25,9 @@ public class Validator {
 
     return matcher.find();
   }
+  public static void checkNagativeInt(int part) {
+    if (part < 0) {
+      throw new IllegalArgumentException("음수값은 덧셈 할 수 없습니다.");
+    }
+  }
 }
