@@ -1,9 +1,5 @@
 package calculator;
 
-import static calculator.CustomPartManager.validateCustomPart;
-import static calculator.StringPartManager.initString;
-import static calculator.StringPartManager.validateString;
-
 import camp.nextstep.edu.missionutils.Console;
 
 public class StringCalculator {
@@ -12,10 +8,9 @@ public class StringCalculator {
         printInputMsg();
         String input = Console.readLine();
 
-        boolean hasCustomSeparator = validateCustomPart(input);
-        String separators = initSeparator(input, hasCustomSeparator);
-        String str = initString(input, hasCustomSeparator);
-        validateString(str, separators);
+        Data data = Validator.validate(input);
+        String str = data.getStr();
+        String separators = data.getSeparators();
 
         String[] separatedNumbers = str.split('[' + separators + ']');
         int sumValue = calculateSumValue(separatedNumbers);
@@ -38,14 +33,5 @@ public class StringCalculator {
             }
         }
         return sumValue;
-    }
-
-    String initSeparator(String input, boolean hasCustomSeparator) {
-        String basicSeparators = ",:";
-        if (hasCustomSeparator) {
-            char customSeparator = input.charAt(2);
-            return basicSeparators + customSeparator;
-        }
-        return basicSeparators;
     }
 }
