@@ -3,6 +3,16 @@ public class Calculator {
          // 기본 구분자
          String delimiter = ",|:";
          String[] tokens = input.split(delimiter);
+
+         //커스텀 구분자
+         if (input.startsWith("//")) {
+             Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+             if (matcher.find()) {
+                 delimiter = Pattern.quote(matcher.group(1));
+                 input = input.substring(matcher.end());
+             }
+         }
+
          return sumTokens(tokens);
 
      }
