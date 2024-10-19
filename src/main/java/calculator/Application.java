@@ -13,7 +13,13 @@ public class Application {
         String customDelimiter = dp.findCustomDelimiter(input);
         dm.addCustomDelimiter(customDelimiter);
 
-        String result = dp.removeCustomDelimiterRegistrant(input);
-        System.out.println("result = " + result);
+        String removeInput = dp.removeCustomDelimiterRegistrant(input);
+        Calculator calculator = new Calculator(dm, removeInput);
+
+
+        long result = calculator.calculate();
+
+        OutputView outputView = new OutputView();
+        outputView.print(result);
     }
 }
