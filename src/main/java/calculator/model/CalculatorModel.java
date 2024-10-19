@@ -49,4 +49,14 @@ public final class CalculatorModel {
 
         return parsedInteger;
     }
+
+    public int calculateSum() {
+        int sum = 0;
+
+        for (int n : this.numbers) {
+            sum += n;
+        }
+
+        return sum;
+    }
 }
