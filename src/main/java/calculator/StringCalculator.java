@@ -26,4 +26,12 @@ public class StringCalculator {
         }
         return input.substring(customDelimiter.length() + 3).split(customDelimiter);
     }
+
+    public static int sumNumbers(String[] numbers) {
+        int result = 0;
+        for (int i = 0; i < numbers.length; i++) {
+            result += Integer.parseInt(numbers[i]);
+        }
+        return result;
+    }
 }
