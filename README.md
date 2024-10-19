@@ -55,8 +55,8 @@
 ### Controller
 
 - CalculatorController
-    - [ ] `InputView`로부터 사용자의 입력을 받아 계산기 로직을 수행
-    - [ ] `OutputView`를 통해 계산 결과를 출력
+    - [X] `InputView`로부터 사용자의 입력을 받아 계산기 로직을 수행
+    - [X] `OutputView`를 통해 계산 결과를 출력
 
 ### Enum
 
