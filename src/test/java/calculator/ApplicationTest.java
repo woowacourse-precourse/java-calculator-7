@@ -86,6 +86,113 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    // ex. Custom(1) Number(2) Delimiter(1) : //;\n1;34
+    // => Custom1_Number2_Delimiter1
+    @Test
+    void Custom0_Number0_Delimiter0() {
+        assertSimpleTest(() -> {
+            run("\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void Custom0_Number1_Delimiter0() {
+        assertSimpleTest(() -> {
+            run("3492");
+            assertThat(output()).contains("결과 : 3492");
+        });
+    }
+
+    @Test
+    void Custom0_Number2_Delimiter2() {
+        assertSimpleTest(() -> {
+            run("3:4,93");
+            assertThat(output()).contains("결과 : 100");
+        });
+    }
+
+
+    @Test
+    void Custom0_Number0_Delimiter2() {
+        assertSimpleTest(() -> {
+            run("3:4,93");
+            assertThat(output()).contains("결과 : 100");
+        });
+    }
+
+    @Test
+    void Custom1_Number0_Delimiter0() {
+        assertSimpleTest(() -> {
+            run("//;\\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void Custom1_Number1_Delimiter0() {
+        assertSimpleTest(() -> {
+            run("//;\\n34");
+            assertThat(output()).contains("결과 : 34");
+        });
+    }
+
+    @Test
+    void Custom1_Number2_Delimiter1() {
+        assertSimpleTest(() -> {
+            run("//;\\n3;4");
+            assertThat(output()).contains("결과 : 7");
+        });
+    }
+
+    @Test
+    void Custom1_Number0_Delimiter3() {
+        assertSimpleTest(() -> {
+            run("//;\\n;;:");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void Custom2_Number0_Delimiter0() {
+        assertSimpleTest(() -> {
+            run("//;\\n//'\\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void Custom2_Number3_Delimiter3() {
+        assertSimpleTest(() -> {
+            run("//;\\n//’\\n3;4’93:");
+            assertThat(output()).contains("결과 : 100");
+        });
+    }
+
+    @Test
+    void CustomString_Number1_Delimiter3() {
+        assertSimpleTest(() -> {
+            run("//;mz\\n//’34\\n’34;mz93");
+            assertThat(output()).contains("결과 : 93");
+        });
+    }
+
+    @Test
+    void CustomEscape_Number3_Delimiter2() {
+        assertSimpleTest(() -> {
+            run("//;\\n//\\t\\n3\\t4;93");
+            assertThat(output()).contains("결과 : 100");
+        });
+    }
+
+    @Test
+    void Custom2_NumberBetween_Delimiter1() {
+        assertSimpleTest(() -> {
+            run("//;\\n3:4//’\\n93");
+            assertThat(output()).contains("결과 : 100");
+        });
+    }
+
 
 
     @Override
