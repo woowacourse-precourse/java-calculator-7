@@ -10,7 +10,7 @@ public class Calculator {
     private final int CUSTOM_SEPARATOR_IDX = 2;
     private final String CUSTOM_SEPARATOR_CMD_REGEX = "^(\\/\\/.\\\\n)";
     private final String MINUS_DIGIT_REGEX = "-[0-9]*";
-    private final String POSITIVE_DIGIT_REGEX = "\\d*";
+    private final String DIGIT_REGEX = "-?\\d*";
     private final ICalculatorDisplay calculatorDisplay;
 
     public Calculator(ICalculatorDisplay calculatorDisplay) {
@@ -81,7 +81,7 @@ public class Calculator {
         if (str.matches(MINUS_DIGIT_REGEX)) {
             throw new IllegalArgumentException("음수 계산 불가");
         }
-        if (!str.matches(POSITIVE_DIGIT_REGEX)) {
+        if (!str.matches(DIGIT_REGEX)) {
             throw new IllegalArgumentException("숫자 이외의 값은 계산 불가");
         }
 
