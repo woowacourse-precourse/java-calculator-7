@@ -1,25 +1,36 @@
 package calculator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DelimiterExtractor {
 
-    List<String> delimiters = new ArrayList<>();
+    private static final String MULTI_CUSTOM_DELIMIT = "\\s*,\\s*";
+
+    private final CustomDelimiterFormatParser formatParser;
+    private final List<String> delimiters;
+
+    public DelimiterExtractor() {
+        this.formatParser = new CustomDelimiterFormatParser();
+        this.delimiters = new ArrayList<>();
+    }
 
     public List<String> extract(String input) {
-        if (input.startsWith("//")) {
-            String customDelimiter = extractCustomDelimiter(input);
-            delimiters.add(customDelimiter);
+        if (formatParser.isCheckedFormat(input)) {
+            extractCustomDelimiter(input);
         }
-
         extractBasicDelimiter(input);
 
         return delimiters;
     }
 
-    private String extractCustomDelimiter(String input) {
-        return input.substring(2, input.indexOf("\\n"));
+    private void extractCustomDelimiter(String input) {
+        List<String> delimiterSections = formatParser.splitDelimiterSection(input);
+
+        for (String section : delimiterSections) {
+            delimiters.addAll(Arrays.asList(section.split(MULTI_CUSTOM_DELIMIT)));
+        }
     }
 
     private void extractBasicDelimiter(String input) {
