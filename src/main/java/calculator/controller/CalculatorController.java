@@ -3,15 +3,18 @@ package calculator.controller;
 import calculator.model.Delimiter;
 import calculator.model.Number;
 import calculator.view.InputView;
+import calculator.view.OutputView;
 
 public class CalculatorController {
     private InputView inputView;
+    private OutputView outputView;
 
-    public CalculatorController(InputView inputView) {
+    public CalculatorController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
+        this.outputView = outputView;
     }
 
-    public int processInput() {
+    public void run() {
         try {
             String input = inputView.getInputString();
 
@@ -20,10 +23,15 @@ public class CalculatorController {
             String[] splitNumbers = delimiter.splitString();
 
             Number number = new Number(splitNumbers);
-            return number.addCalculator();
+            int result = number.addCalculator();
+            outputView.printResult(result);
 
         } catch (IllegalArgumentException e) {
+            outputView.printError(e.getMessage());
             throw e;
+
+        } finally {
+            inputView.close();
         }
     }
 }
