@@ -5,12 +5,12 @@ import calculator.view.CalculatorView;
 
 public final class CalculatorController {
 
-    private CalculatorView calculatorView;
     private CalculatorModel calculatorModel;
+    private CalculatorView calculatorView;
 
-    public CalculatorController(CalculatorView calculatorView, CalculatorModel calculatorModel) {
-        this.calculatorView = calculatorView;
+    public CalculatorController(CalculatorModel calculatorModel, CalculatorView calculatorView) {
         this.calculatorModel = calculatorModel;
+        this.calculatorView = calculatorView;
     }
 
     public void calculate() {
