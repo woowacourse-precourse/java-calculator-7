@@ -2,15 +2,20 @@ package calculator.domain;
 
 public class Separator {
 
-    private static String separators = "[,:]";
+    private static final String FIXED_SEPARATORS = "[,:]";
+    private static final String PIPE = "|";
 
+    private String separators;
 
-    public static void addSeparator(String customSeparator){
-        separators += "|";
-        separators += customSeparator;
+    public Separator(){
+        this.separators = FIXED_SEPARATORS;
     }
 
-    public static String getSeparators(){
-        return separators;
+    public Separator(String customSeparator){
+        this.separators = FIXED_SEPARATORS + PIPE + customSeparator;
+    }
+
+    public String getSeparators(){
+        return this.separators;
     }
 }

@@ -4,8 +4,7 @@ import calculator.domain.Number;
 
 public class NumberService {
 
-    public static Number extractNum(){
-        String[] separatedVals = ValueService.getSeparatedValue();
-        return new Number(separatedVals);
+    public static Number extractNum(String[] separatedValue){
+        return new Number(separatedValue);
     }
 }

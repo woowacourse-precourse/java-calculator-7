@@ -7,7 +7,7 @@ public class Number {
     private static final String CANNOT_INPUT_NEGATIVE_NUM = "음수는 입력할 수 없습니다.";
     private static final String CANNOT_INPUT_CHARACTER = "구분자 외의 문자는 입력 불가능합니다.";
 
-    private static List<Integer> numbers = new ArrayList<>();
+    private List<Integer> numbers = new ArrayList<>();
 
     public Number(String[] separatedVals){
         for(String separatedVal : separatedVals){
@@ -18,6 +18,10 @@ public class Number {
         }
     }
 
+    public List<Integer> getNumbers(){
+        return this.numbers;
+    }
+
     private boolean isPositiveNumber(int num){
         if(num<0){
             throw new IllegalArgumentException(CANNOT_INPUT_NEGATIVE_NUM);
@@ -26,15 +30,11 @@ public class Number {
         }
     }
 
-    public Integer convertToInteger(String separatedVal){
+    private Integer convertToInteger(String separatedVal){
         try {
             return Integer.parseInt(separatedVal);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(CANNOT_INPUT_CHARACTER);
         }
-    }
-
-    public List<Integer> getNumbers(){
-        return this.numbers;
     }
 }

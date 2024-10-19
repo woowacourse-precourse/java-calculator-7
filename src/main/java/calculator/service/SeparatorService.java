@@ -1,6 +1,7 @@
 package calculator.service;
 
 import calculator.domain.Separator;
+import calculator.domain.StringValue;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,34 +10,27 @@ public class SeparatorService {
 
     private static final String REGEX_PATTERN = "^//(.)(\\\\n.*)";
 
-    public static void makeUpSeparators(){
-        String userInput = ValueService.getOriginalInput();
-        if(isCustomSeparatorExist(userInput)){
-            String customSeparator = extractCustomSeparator(userInput);
-            addSeparator(customSeparator);
-            ValueService.removeMarking();
+    public static Separator makeUpSeparators(StringValue stringValue){
+        if(isCustomSeparatorExist(stringValue.getOriginalValue())){
+            String customSeparator = extractCustomSeparator(stringValue.getOriginalValue());
+            StringValueService.removeMarking(stringValue);
+            return new Separator(customSeparator);
+        }else{
+            return new Separator();
         }
     }
 
-    public static boolean isCustomSeparatorExist(String inputString){
-        return Pattern.matches(REGEX_PATTERN,inputString);
+    private static boolean isCustomSeparatorExist(String originalInput){
+        return Pattern.matches(REGEX_PATTERN,originalInput);
     }
 
-    public static String extractCustomSeparator(String inputString){
+    private static String extractCustomSeparator(String originalInput){
         Pattern pattern = Pattern.compile(REGEX_PATTERN);
-        Matcher matcher = pattern.matcher(inputString);
+        Matcher matcher = pattern.matcher(originalInput);
         String separator = "";
         if(matcher.matches()){
             separator =  matcher.group(1);
         }
         return separator;
-    }
-
-    public static void addSeparator(String customSeparator){
-        Separator.addSeparator(customSeparator);
-    }
-
-    public static String getSeparators(){
-        return Separator.getSeparators();
     }
 }

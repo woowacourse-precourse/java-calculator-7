@@ -18,7 +18,7 @@ public class ValueServiceTest {
         ValueService.removeMarking();
         String originalInput = ValueService.getOriginalInput();
 
-        assertThat(originalInput).isEqualTo("n1");
+        assertThat(originalInput).isEqualTo("1");
     }
 
     @DisplayName("사용자에게 입력받은 최초의 문자열을 구분자로 나눈다.")
@@ -28,7 +28,7 @@ public class ValueServiceTest {
         SeparatorService.makeUpSeparators();
         ValueService.separateInputString();
         String[] parts = Value.getSeparatedValue();
-        String[] array = {"n1"};
+        String[] array = {"1"};
 
         assertTrue(Arrays.equals(array,parts));
     }

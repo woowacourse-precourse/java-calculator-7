@@ -4,8 +4,8 @@ import calculator.domain.Value;
 
 public class ValueService {
 
-    public static void saveUserInput(String userInput){
-        Value.setOriginalValue(userInput);
+    public static void saveOriginalString(String userInput){
+        new StringValue();
     }
 
     public static void separateInputString(){
