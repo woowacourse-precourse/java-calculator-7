@@ -1,6 +1,7 @@
 package calculator.controller;
 
-import calculator.domain.StringCalculator;
+import calculator.domain.Calculator;
+import calculator.domain.input.InputTypeSorter;
 import calculator.view.InputView;
 import calculator.view.ResultView;
 import camp.nextstep.edu.missionutils.Console;
@@ -8,7 +9,13 @@ import camp.nextstep.edu.missionutils.Console;
 public class StringCalculatorController {
     public static void startStringCalculator() {
         InputView.promptForAdditionInput();
-        String input = Console.readLine();
-        ResultView.promptForAdditionResult(StringCalculator.calculate(input));
+
+        ResultView.promptForAdditionResult(
+                Calculator.addition(
+                        InputTypeSorter.sort(
+                                Console.readLine()
+                        ).createCalculationInputs()
+                )
+        );
     }
 }
