@@ -55,6 +55,22 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    @DisplayName("빈 문자열을 입력할 경우 예외처리하기")
+    void 빈_문자열_예외() {
+        assertSimpleTest(() -> {
+
+            //빈 문자열을 입력한 상황
+            assertThatThrownBy(() -> runException(""))
+                    .isInstanceOf(IllegalArgumentException.class);
+
+            //공백을 입력한 상황
+            assertThatThrownBy(() -> runException(" "))
+                    .isInstanceOf(IllegalArgumentException.class);
+
+        });
+    }
+
     @Override
     public void runMain() {
         try {

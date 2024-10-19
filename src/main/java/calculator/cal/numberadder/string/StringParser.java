@@ -9,6 +9,9 @@ public class StringParser {
         List<Integer> numbers = new ArrayList<>();
 
         //구분자로 숫자 추출
+        if (inputString == null || inputString.isBlank()) {
+            throw new IllegalArgumentException("문자열을 입력하지 않았습니다.");
+        }
         String noSpaceString = inputString.replace(" ", "");
         String[] numberStrings = noSpaceString.split(separator);
 
