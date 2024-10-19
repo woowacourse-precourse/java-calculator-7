@@ -25,5 +25,7 @@ public class Application {
         // Calculator 클래스 호출
         Calculator calculator = new Calculator();
         int result = calculator.sumNumbers(numbers);
+
+        System.out.println("결과 : " + result);
     }
 }

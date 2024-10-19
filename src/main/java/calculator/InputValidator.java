@@ -22,9 +22,7 @@ public class InputValidator {
 
     // 숫자가 아닌 값 검증
     public void validateNonNumeric(String input) {
-        try {
-            Integer.parseInt(input);
-        } catch (NumberFormatException e) {
+        if (input.matches(".*[a-zA-Z]+.*")) {
             throw new IllegalArgumentException("유효하지 않은 값이 포함되어 있습니다.");
         }
     }
