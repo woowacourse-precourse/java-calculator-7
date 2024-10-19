@@ -8,5 +8,8 @@ public class Number {
     public Number(List<Integer> numbers) {
         this.numbers = numbers;
     }
-    
+
+    public int sum() {
+        return numbers.stream().mapToInt(Integer::intValue).sum();
+    }
 }
