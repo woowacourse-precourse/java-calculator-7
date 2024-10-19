@@ -1,12 +1,12 @@
 package calculator.number.domain.impl;
 
 
-import calculator.number.domain.Number;
+import calculator.number.domain.NumberService;
 import calculator.number.util.NumberConvertor;
 
 import java.util.List;
 
-public class PositiveNumber implements Number {
+public class PositiveNumber implements NumberService<Long> {
     private final List<Long> numbers;
     private PositiveNumber(List<Long> numbers) {
         this.numbers = numbers;

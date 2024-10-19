@@ -8,7 +8,8 @@ public class OutputProcess implements InfoService, ResultService{
     }
 
     @Override
-    public void result(long value) {
-        System.out.printf("결과 : %,d", value);
+    public void result(Number value) {
+        if (value instanceof Double d) System.out.println(d);
+        else System.out.printf("결과 : %,d", value);
     }
 }
