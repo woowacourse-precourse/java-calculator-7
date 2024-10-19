@@ -8,8 +8,7 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         // 문자열 입력 받기
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String inputStr = Console.readLine();
+        String inputStr = getInput();
 
         // 입력한 문자열에서 기본 구분자, 커스텀 구분자 찾아내기
         String customPolymerPattern = "//[^\\w\\s]";
@@ -75,5 +74,11 @@ public class Application {
 
         // 덧셈 결과 출력하기
         System.out.println("결과 : " + sum);
+    }
+
+    // 문자열 입력 받기
+    private static String getInput(){
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        return Console.readLine();
     }
 }
