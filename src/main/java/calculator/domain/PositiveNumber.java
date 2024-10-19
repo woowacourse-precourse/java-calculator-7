@@ -80,6 +80,10 @@ public class PositiveNumber {
         return new PositiveNumber(resultNumber);
     }
 
+    public BigInteger value() {
+        return value;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {

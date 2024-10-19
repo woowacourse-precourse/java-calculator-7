@@ -38,7 +38,7 @@ class DelimiterTest {
         assertThat(delimiter.isDefault(input)).isFalse();
     }
 
-    @ValueSource(strings = {"//;\n1;2;3", "// \n1 2 3", "//;\n1", "// \n"})
+    @ValueSource(strings = {"//;\\n1;2;3", "// \\n1 2 3", "//;\\n1", "// \\n"})
     @ParameterizedTest(name = "\"{0}\"은 커스텀 구분자")
     @DisplayName("커스텀 구분자 일치: //와 \n 사이에 1개 이상의 문자가 존재")
     void 커스텀_구분자_일치(String input) {
@@ -48,7 +48,7 @@ class DelimiterTest {
     @Test
     @DisplayName("커스텀 구분자 불일치: 빈 문자열은 커스텀 구분자가 아님")
     void 커스텀_구분자_불일치() {
-        assertThat(delimiter.isCustom("//\n")).isFalse();
+        assertThat(delimiter.isCustom("//\\n")).isFalse();
     }
 
     @MethodSource(value = "provideDefaultInputAndNumbers")
@@ -87,11 +87,12 @@ class DelimiterTest {
 
     static Stream<Arguments> provideCustomInputAndNumbers() {
         return Stream.of(
-                Arguments.of("//;\n1", List.of("1")),
-                Arguments.of("//;\n1;2", List.of("1", "2")),
-                Arguments.of("// \n1 2 3", List.of("1", "2", "3")),
-                Arguments.of("// \n", Collections.emptyList()),
-                Arguments.of("// \n 1", List.of("", "1"))
+                Arguments.of("//;\\n1", List.of("1")),
+                Arguments.of("//;\\n1;2", List.of("1", "2")),
+                Arguments.of("// \\n1 2 3", List.of("1", "2", "3")),
+                Arguments.of("// \\n", Collections.emptyList()),
+                Arguments.of("// \\n 1", List.of("", "1")),
+                Arguments.of("// \\n 1  2 3", List.of("", "1", "", "2", "3"))
         );
     }
 
