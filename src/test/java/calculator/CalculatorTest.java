@@ -1,5 +1,6 @@
 package calculator;
 
+import static calculator.util.ErrorMessage.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -43,7 +44,7 @@ class CalculatorTest {
         // then
         assertThatThrownBy(() -> Calculator.sumPositiveNumbers(digits))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.INVALID_POSITIVE_NUMBER);
+                .hasMessage(INVALID_POSITIVE_NUMBER.getMessage());
 
     }
 
@@ -62,7 +63,7 @@ class CalculatorTest {
         // then
         assertThatThrownBy(() -> Calculator.sumPositiveNumbers(digits))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.INVALID_DIGIT);
+                .hasMessage(INVALID_DIGIT.getMessage());
 
     }
 

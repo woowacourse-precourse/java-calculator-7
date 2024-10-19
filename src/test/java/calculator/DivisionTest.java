@@ -1,5 +1,6 @@
 package calculator;
 
+import static calculator.util.ErrorMessage.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -53,7 +54,7 @@ class DivisionTest {
         // then
         assertThatThrownBy(() -> division.split(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.INVALID_FORMAT);
+                .hasMessage(INVALID_FORMAT.getMessage());
     }
 
     private static Stream<Arguments> providedWrongFormat() {
@@ -78,7 +79,7 @@ class DivisionTest {
         // then
         assertThatThrownBy(() -> division.split(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.INVALID_CUSTOM_DELIMITER_FORMAT);
+                .hasMessage(INVALID_CUSTOM_DELIMITER_FORMAT.getMessage());
     }
 
     private static Stream<Arguments> providedWrongCustomDelimiterFormat() {
@@ -101,7 +102,7 @@ class DivisionTest {
         // then
         assertThatThrownBy(() -> division.split(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.DUPLICATE_DELIMITER);
+                .hasMessage(DUPLICATE_DELIMITER.getMessage());
     }
 
     private static Stream<Arguments> providedDuplicateDelimiter() {

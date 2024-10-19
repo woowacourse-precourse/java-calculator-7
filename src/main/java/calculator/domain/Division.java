@@ -2,6 +2,7 @@ package calculator.domain;
 
 import static calculator.util.CalculatorConst.END_CUSTOM_DELIMITER;
 import static calculator.util.CalculatorConst.START_CUSTOM_DELIMITER;
+import static calculator.util.ErrorMessage.*;
 
 import calculator.util.ErrorMessage;
 import java.util.Arrays;
@@ -38,7 +39,7 @@ public class Division {
     private void validateFormat(String input) {
         boolean isValidStart = input.isBlank() || isDigit(input) || isCustomFormat(input);
         if (!isValidStart) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_FORMAT);
+            throw new IllegalArgumentException(INVALID_FORMAT.getMessage());
         }
     }
 
@@ -61,13 +62,13 @@ public class Division {
 
     private void validateCustomFormat(String customDelimiter, String digits) {
         if (customDelimiter.isEmpty() || !isDigit(digits)) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_CUSTOM_DELIMITER_FORMAT);
+            throw new IllegalArgumentException(INVALID_CUSTOM_DELIMITER_FORMAT.getMessage());
         }
     }
 
     private void validateCustomDuplicate(String customDelimiter) {
         if (Pattern.matches(delimiter.toString(), customDelimiter)) {
-            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_DELIMITER);
+            throw new IllegalArgumentException(DUPLICATE_DELIMITER.getMessage());
         }
     }
 

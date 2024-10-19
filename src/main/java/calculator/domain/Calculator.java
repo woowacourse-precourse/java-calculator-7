@@ -1,5 +1,7 @@
 package calculator.domain;
 
+import static calculator.util.ErrorMessage.*;
+
 import calculator.util.ErrorMessage;
 import java.util.List;
 
@@ -22,11 +24,11 @@ public class Calculator {
         try {
             int number = Integer.parseInt(s);
             if (number < MINIMUM_VALUE) {
-                throw new IllegalArgumentException(ErrorMessage.INVALID_POSITIVE_NUMBER);
+                throw new IllegalArgumentException(INVALID_POSITIVE_NUMBER.getMessage());
             }
             return number;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_DIGIT);
+            throw new IllegalArgumentException(INVALID_DIGIT.getMessage());
         }
     }
 }
