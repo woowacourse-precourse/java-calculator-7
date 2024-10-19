@@ -16,7 +16,7 @@ public class Application {
         }
     }
 
-    public class StringAddCalculator {
+    public static class StringAddCalculator {
         // 빈 문자열 혹은 null 체크
         public static int add(String input) {
             if (input == null || input.isBlank()) {
@@ -24,15 +24,31 @@ public class Application {
             }
 
             // 쉼표 또는 콜론을 기준으로 문자열 분리
-            String[] tokens = input.split("[,:]");
+            String delimiter = "[,:]";
+            String numbers = input;
+
+            // 커스텀 구분자 입력 확인
+            if (input.startsWith("//")) {
+                int endIndexDelimiter = input.indexOf("\n");
+                delimiter = input.substring(2, endIndexDelimiter);
+                numbers = input.substring(endIndexDelimiter + 1);
+
+                delimiter = escapeSpecialCharacters(delimiter);
+            }
+
+            String[] tokens = numbers.split(delimiter);
 
             // 각 숫자의 합을 계산
             int sum = 0;
             for (String token : tokens) {
-                sum += Integer.parseInt(token); // 문자열을 정수로 변환하여 합산
+                sum += Integer.parseInt(token.trim()); // 문자열을 정수로 변환하여 합산
             }
 
             return sum;
+        }
+
+        private static String escapeSpecialCharacters(String delimiter) {
+            return delimiter.replaceAll("([\\[\\]{}()*+?^$\\\\|.])", "\\\\$1");
         }
     }
 }
