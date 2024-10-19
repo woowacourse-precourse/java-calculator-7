@@ -1,7 +1,11 @@
 package calculator;
 
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.stream.IntStream;
+
 public class Application {
+    private final static String DEFAULT_SEPARATOR = ",|:";
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -13,6 +17,19 @@ public class Application {
             System.out.println("결과 : 0");
             return;
         }
+        String separator = DEFAULT_SEPARATOR;
         }
+
+        String[] str = input.split(separator);
+
+        IntStream numbers = Arrays.stream(str).mapToInt(
+                s -> {
+                    try {
+                        return Integer.parseInt(s);
+                    } catch (NumberFormatException e) {
+                        throw new IllegalArgumentException("숫자가 아닌 값이 존재합니다.");
+                    }
+                });
+
     }
 }
