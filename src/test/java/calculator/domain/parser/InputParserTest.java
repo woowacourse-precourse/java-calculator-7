@@ -1,6 +1,7 @@
 package calculator.domain.parser;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import calculator.domain.parser.InputParser.ParsedInput;
 import org.junit.jupiter.api.Test;
@@ -70,6 +71,33 @@ public class InputParserTest {
         ParsedInput parsedInput = inputParser.parse(input);
 
         assertThat(parsedInput.numbers()).containsExactly("13","21","3");
+    }
+
+    @Test
+    void 마이너스_입력_예외_테스트() {
+        String input = "1,2,-3";
+
+        assertThatThrownBy(() -> inputParser.parse(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("음수는 입력할 수 없습니다.");
+    }
+
+    @Test
+    void 숫자가_아닌_값_예외_테스트() {
+        String input = "1,2,3a";
+
+        assertThatThrownBy(() -> inputParser.parse(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("숫자 이외의 값은 입력할 수 없습니다.");
+    }
+
+    @Test
+    void 마이너스_구분자로_주어줬을때_통과_테스트() {
+        String input = "//-\\n-1-2-3";
+
+        ParsedInput parsedInput = inputParser.parse(input);
+
+        assertThat(parsedInput.numbers()).containsExactly("1","2","3");
     }
 
 }
