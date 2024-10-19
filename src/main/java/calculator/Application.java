@@ -13,20 +13,18 @@ public class Application {
         int Result = app.InputSeparator(input);
         app.outputManager(Result);
     }
-    public String userInputManager(){
+    public String userInputManager() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         return Console.readLine();
     }
-    public void outputManager(int result){
+    public void outputManager(int result) {
         System.out.println("결과 : " + result);
     }
     public int InputSeparator(String userInput) {
         int sum = 0;
-
-        if (userInput.isEmpty()) {
+        if (userInput == null || userInput.trim().isEmpty()) {
             return 0;
         }
-
         String numbers = userInput.trim();
 
         if (numbers.startsWith(LEFT_CUSTOM_DELIMITER)) {
@@ -48,8 +46,8 @@ public class Application {
         }
 
         String[] nums = numbers.split(DEFAULT_DELIMITER);
-
         for (String num : nums) {
+            num = num.trim();
             if (isParse(num)) {
                 int value = Integer.parseInt(num);
                 if (value <= 0) {
@@ -62,7 +60,7 @@ public class Application {
         }
         return sum;
     }
-    public boolean isParse(String inputStr){
+    public boolean isParse(String inputStr) {
         try{
             Integer.parseInt(inputStr);
             return true;
