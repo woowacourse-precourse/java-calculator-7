@@ -24,6 +24,8 @@ public class DelimiterProcess {
             isNumberStarting();
         }
 
+        replacePattern();
+
         return delimitersInit;
     }
 
@@ -59,5 +61,18 @@ public class DelimiterProcess {
         }
         return userInput;
     }
+
+    //replacePatterQ(): 정규식 패턴 문자가 구분자로 입력될 때 backslash 더함
+    private void replacePattern() {
+        delimitersInit.replaceAll(delim -> {
+            String patterns = "\\ ( [ { ^ $ . * + ? | ₩ x X";
+
+            if (patterns.contains(delim)) {
+                return "\\" + delim;
+            }
+            return delim;
+        });
+    }
+
 
 }

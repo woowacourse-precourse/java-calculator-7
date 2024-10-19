@@ -56,5 +56,4 @@ public class Calculator {
         return DelimTotal.toString();
     }
 
-
 }
