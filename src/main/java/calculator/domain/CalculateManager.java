@@ -3,13 +3,13 @@ package calculator.domain;
 import calculator.ui.InputView;
 import calculator.ui.OutputView;
 
-public class CalculateMannager {
+public class CalculateManager {
     InputView inputView;
     OutputView outputView;
-    LetterMannager letterMannager;
+    LetterManager letterManager;
     Calculator calculator;
 
-    public CalculateMannager() {
+    public CalculateManager() {
         inputView = new InputView();
         outputView = new OutputView();
     }
@@ -17,7 +17,7 @@ public class CalculateMannager {
     public void start() {
         printReadLettersMessage();
         String letters = readLetters();
-        initializeLetterMannager(letters);
+        initializeLetterManager(letters);
         initializeCalculator();
         printResult();
     }
@@ -27,11 +27,11 @@ public class CalculateMannager {
     }
 
     private void initializeCalculator() {
-        calculator = new Calculator(letterMannager.getNumbers());
+        calculator = new Calculator(letterManager.getNumbers());
     }
 
-    private void initializeLetterMannager(String letters) {
-        letterMannager = new LetterMannager(letters);
+    private void initializeLetterManager(String letters) {
+        letterManager = new LetterManager(letters);
     }
 
     private String readLetters() {

@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class LetterMannager {
+public class LetterManager {
     private final StringBuilder letters;
     private final Separators separators;
     private final Numbers numbers;
 
-    public LetterMannager(String letters) {
+    public LetterManager(String letters) {
         this.letters = new StringBuilder(letters);
         separators = new Separators();
         numbers = new Numbers();

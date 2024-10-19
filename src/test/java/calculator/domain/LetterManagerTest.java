@@ -7,17 +7,17 @@ import calculator.global.constant.ErrorMessage;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class LetterMannagerTest {
+class LetterManagerTest {
     @Test
     void 커스텀_구분자_입력_시_끝나는_문자열이_나오지_않을_경우_예외_처리() {
         //given
         String letters = "//hello";
-        LetterMannager letterMannager;
+        LetterManager letterManager;
 
         //when
 
         //then
-        Assertions.assertThatThrownBy(() -> new LetterMannager(letters))
+        Assertions.assertThatThrownBy(() -> new LetterManager(letters))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(CUSTOM_SEPARATOR_INDEX_ERROR_MESSAGE);
     }
@@ -27,42 +27,42 @@ class LetterMannagerTest {
         //given
         String separator = ";";
         String letters = "//" + separator + "\\n";
-        LetterMannager letterMannager;
+        LetterManager letterManager;
 
         //when
-        letterMannager = new LetterMannager(letters);
+        letterManager = new LetterManager(letters);
 
         //then
-        Assertions.assertThat(letterMannager.getSeparators().contains(separator)).isEqualTo(true);
+        Assertions.assertThat(letterManager.getSeparators().contains(separator)).isEqualTo(true);
     }
 
     @Test
     void 커스텀_구분자가_없는_상황에서_입력받은_문자열에서_숫자를_추출() {
         //given
         String letters = "1,2:3";
-        LetterMannager letterMannager;
+        LetterManager letterManager;
 
         //when
-        letterMannager = new LetterMannager(letters);
+        letterManager = new LetterManager(letters);
 
         //then
-        Assertions.assertThat(letterMannager.getNumbers().toInteger().contains(1)).isEqualTo(true);
-        Assertions.assertThat(letterMannager.getNumbers().toInteger().contains(2)).isEqualTo(true);
-        Assertions.assertThat(letterMannager.getNumbers().toInteger().contains(3)).isEqualTo(true);
+        Assertions.assertThat(letterManager.getNumbers().toInteger().contains(1)).isEqualTo(true);
+        Assertions.assertThat(letterManager.getNumbers().toInteger().contains(2)).isEqualTo(true);
+        Assertions.assertThat(letterManager.getNumbers().toInteger().contains(3)).isEqualTo(true);
     }
 
     @Test
     void 커스텀_구분자가_있는_상황에서_입력받은_문자열에서_숫자를_추출() {
         //given
         String letters = "//;\\n1;2";
-        LetterMannager letterMannager;
+        LetterManager letterManager;
 
         //when
-        letterMannager = new LetterMannager(letters);
+        letterManager = new LetterManager(letters);
 
         //then
-        Assertions.assertThat(letterMannager.getNumbers().toInteger().contains(1)).isEqualTo(true);
-        Assertions.assertThat(letterMannager.getNumbers().toInteger().contains(2)).isEqualTo(true);
+        Assertions.assertThat(letterManager.getNumbers().toInteger().contains(1)).isEqualTo(true);
+        Assertions.assertThat(letterManager.getNumbers().toInteger().contains(2)).isEqualTo(true);
     }
 
     @Test
@@ -73,7 +73,7 @@ class LetterMannagerTest {
         //when
 
         //then
-        Assertions.assertThatThrownBy(() -> new LetterMannager(letters))
+        Assertions.assertThatThrownBy(() -> new LetterManager(letters))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.UNREGISTERED_SEPARATOR_ERROR_MESSAGE);
     }

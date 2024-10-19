@@ -1,10 +1,10 @@
 package calculator;
 
-import calculator.domain.CalculateMannager;
+import calculator.domain.CalculateManager;
 
 public class Application {
     public static void main(String[] args) {
-        CalculateMannager calculateMannager = new CalculateMannager();
-        calculateMannager.start();
+        CalculateManager calculateManager = new CalculateManager();
+        calculateManager.start();
     }
 }
