@@ -12,8 +12,7 @@ public class Application {
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
 
-        //String input = Console.readLine();
-        String input = "//!!!\n3,4!!!5:8";
+        String input = Console.readLine();
 
         if (input.startsWith("//")) {
             endex = input.indexOf("\n");
