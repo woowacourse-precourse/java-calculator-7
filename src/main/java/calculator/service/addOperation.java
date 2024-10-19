@@ -14,7 +14,8 @@ public class addOperation {
         if (input.startsWith("//")) {
             int startIdx = input.indexOf("//");
             int endIdx = input.indexOf("\\n");
-            if(startIdx + 1 == endIdx) throw new IllegalArgumentException("구분자가 정의되지 않았습니다");
+            System.out.println(startIdx + " " + endIdx);
+            if(startIdx + 2 == endIdx) throw new IllegalArgumentException("구분자가 정의되지 않았습니다");
 
             if (endIdx == -1) {
                 throw new IllegalArgumentException("커스텀 구분자가 올바르지 않습니다.");
