@@ -5,12 +5,12 @@ import java.util.List;
 import calculator.controller.InputController;
 import calculator.controller.NumberController;
 import calculator.controller.OutputController;
-import calculator.controller.SeparatorController;
+import calculator.controller.DelimiterController;
 
 public class Calculator {
     private final InputController inputController = new InputController();
     private final OutputController outputController = new OutputController();
-    private final SeparatorController separatorController = new SeparatorController();
+    private final DelimiterController delimiterController = new DelimiterController();
     private final NumberController numberController = new NumberController();
 
     // calculator의 전체 동작이 순차적으로 실행되는 메서드
@@ -19,10 +19,10 @@ public class Calculator {
         String inputString = inputController.getInputString();
 
         // 사용자의 입력값으로부터 커스텀 구분자를 추출
-        separatorController.extractSeparator(inputString);
+        delimiterController.extractDelimiter(inputString);
 
         // 커스텀 구분자를 포함한 모든 구분자들을 정규표현식 형태로 변환
-        String regex = separatorController.getRegex();
+        String regex = delimiterController.getRegex();
 
         // 숫자와 구분자만 남아있는 문자열에서 숫자만 추출
         numberController.extractNumber(inputString, regex);

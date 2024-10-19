@@ -7,8 +7,9 @@ import calculator.messages.ErrorMessages;
 public class Number {
     private List<Integer> numbers;
 
-    // Number 생성자의 파라미터로 숫자 리스트를 입력잡아서 초기화
+    // Number 생성자의 파라미터로 숫자 리스트를 입력받아서 초기화
     public Number(List<Integer> numbers) {
+        // 생성자 호출시 파라미터 검증 후에 필드를 초기화
         validateNumber(numbers);
         this.numbers = numbers;
     }
@@ -18,7 +19,7 @@ public class Number {
         return this.numbers;
     }
 
-    // 입력된 숫자들이 0이상의 수인지 검증
+    // 입력된 숫자들이 0 이상의 수인지 검증
     private void validateNumber(List<Integer> numbers) {
         for (Integer number : numbers) {
             if (number < 0) {
