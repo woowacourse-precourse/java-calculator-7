@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.Arrays;
 
 public class Application {
     public static void main(String[] args) {
@@ -22,5 +23,12 @@ public class Application {
         if (str.contains("0")) {
             throw new IllegalArgumentException("0을 제외한 양수를 입력해 주세요.");
         }
+
+        // 기본 구분자가 있는 경우 기본 구분자를 기준으로 문자열 분리하기
+        if (str.contains(",") || str.contains(":")) {
+            String[] tmp = str.split(",|:");
+            System.out.println(Arrays.toString(tmp));
+        }
+
     }
 }
