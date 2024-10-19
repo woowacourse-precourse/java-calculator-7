@@ -3,8 +3,12 @@ package calculator;
 public class InputParser {
 
     public String getCustomSeparator(String input) {
-        if (input.startsWith("//") && input.length() > 3 && input.substring(3, 5).equals("\\n")) {
-            return Character.toString(input.charAt(2));
+        if (input.startsWith("//") && input.length() > 5 && input.substring(3, 5).equals("\\n")) {
+            String separator = Character.toString(input.charAt(2));
+            if (separator.isEmpty()) {
+                throw new IllegalArgumentException("커스텀 구분자는 빈 문자열이 될 수 없습니다.");
+            }
+            return separator;
         } else {
             return null;
         }
