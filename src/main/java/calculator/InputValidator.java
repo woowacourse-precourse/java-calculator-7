@@ -1,15 +1,14 @@
 package calculator;
 
 public class InputValidator {
-    private static String result="";
 
     public static String validate(String input) {
-        result=input;
+        String result = input;
 
         // 커스텀 구분자로 시작할 경우 커스텀 구분자 관련 호출 진행 (추출후 이후 문자열 검사.)
         // todo: 커스텀 구분자 로직 진행
         if (validateStartsWithDelimiter(result)) {
-            result = CustomDelimiter.getCostumDelimiter(result);
+            result = CustomDelimiter.extractCustomDelimiter(result);
         }
 
         // 빈 문자열 처리
@@ -46,7 +45,7 @@ public class InputValidator {
         return Character.isDigit(input.charAt(0));
     }
 
-    private static boolean validateStartsWithDelimiter(String input) {
+    protected static boolean validateStartsWithDelimiter(String input) {
         return input.startsWith("//");
     }
 

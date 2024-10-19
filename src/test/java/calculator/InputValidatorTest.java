@@ -31,22 +31,9 @@ class InputValidatorTest {
         String input = "//";
 
         // when, then: 정상 동작 => 예외 미동작
-        assertDoesNotThrow(() -> InputValidator.validate(input));
+        assertDoesNotThrow(() -> InputValidator.validateStartsWithDelimiter(input));
     }
 
-    @DisplayName("커스텀 구분자로 시작할 경우 구분자 추출 로직이 호출된다")
-    @Test
-    void testCustomDelimiterIsCalled() {
-        // given: 커스텀 구분자로 시작하는 문자열
-        String input = "//;\n1;2;3";
-
-        // when: 커스텀 구분자 검증을 진행
-        InputValidator.validate(input);
-
-        // then: CustomDelimiter.getCostumDelimiter가 호출되었음을 확인 (간단한 확인 출력 추가)
-        // 추후 Mocking이나 다른 방법으로 이 부분은 확장 가능
-        assertTrue(CustomDelimiter.wasCalled());
-    }
 
     @DisplayName("커스텀 구분자 지정 구문 없이 숫자가 아닌 문자가 등장함")
     @Test

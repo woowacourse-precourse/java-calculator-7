@@ -1,24 +1,53 @@
 package calculator;
 
+
 public class CustomDelimiter {
-    private static boolean called = false;
+    protected static String result = "";
+    protected static char customDelimiter = '0';
+    private static final int lengthOfCustomDelimiterExpression = "//?\n".length();
+    private static final int indexOfCustomDelimiter = "//?\n".indexOf("?");
 
+    public static String extractCustomDelimiter(String input) {
+        if (isValidExpression(input)) {
+            customDelimiter = input.charAt(indexOfCustomDelimiter);
+            return result= input.substring(lengthOfCustomDelimiterExpression);
+        }
 
-    public static String getCostumDelimiter(String input) {
-        // 커스텀 구분자 추출
-        // 커스텀 구분자 구분자로 추가
-        // 커스텀 구분자 지정 구문 삭제
-        // 삭제 후에는 나머지 구문에 대한 검사 필요하니 되돌려야함.
-        // 따라서 호출부에서 return 이 아니라 실행 해야함!!!!!
-        // 추가로 추출했는데 공백일 수 있으므로 InputValidator의 공백 체크의 순서를 바꿔야함.
-        String result = "123";
-        called = true;
+        if (Character.isDigit(customDelimiter)){
+            throw new IllegalArgumentException("커스텀 구분자로 숫자가 입력되었습니다.");
+        }
+
         // 실제 커스텀 구분자 처리 로직은 추후 구현
         return result;
     }
 
-    public static boolean wasCalled() {
-        return called;
+
+    public static boolean isValidExpression(String input) {
+        if(input.contains("\\")) {
+            return isValidExpressionWhileContainEscapeCaracter(input);
+        }
+
+        if (!isValidExpressionLength(input)) {
+            throw new IllegalArgumentException("커스텀 구분자 표현이 잘못되었습니다.");
+        }
+
+        return true;
+
     }
-    
+
+
+
+    private static boolean isValidExpressionWhileContainEscapeCaracter(String input) {
+        if(input.startsWith("//\\")) {
+            customDelimiter = input.charAt(indexOfCustomDelimiter);
+            result = input.substring(indexOfCustomDelimiter+1);
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean isValidExpressionLength(String input) {
+        return input.substring(0, input.indexOf("\n")+1).length() == lengthOfCustomDelimiterExpression;
+    }
+
 }
