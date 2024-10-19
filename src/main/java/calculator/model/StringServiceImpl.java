@@ -13,7 +13,7 @@ public class StringServiceImpl implements StringService {
         boolean isCustom = input.startsWith("//");
         if (isCustom) {
             Matcher matcher = Pattern.compile("//(.+)\\\\n(.*)").matcher(input);
-            if (matcher.find()) {
+            if (matcher.matches()) {
                 String customDelimiter = matcher.group(1);
                 String customDelimiterQuote = Pattern.quote(customDelimiter);
                 delimiter = delimiter + "|" + customDelimiterQuote;
@@ -28,7 +28,7 @@ public class StringServiceImpl implements StringService {
         if (input.isEmpty()) {
             return new ArrayList<>();
         }
-        if (inputMatcher.find()) {
+        if (!inputMatcher.matches()) {
             throw new IllegalArgumentException("알맞은 입력 형식이 아닙니다.");
         }
         return Arrays.asList(input.split(delimiter));
