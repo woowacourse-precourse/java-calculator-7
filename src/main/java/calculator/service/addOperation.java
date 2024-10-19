@@ -1,6 +1,6 @@
-package service;
+package calculator.service;
 
-import domain.Number;
+import calculator.domain.Number;
 
 public class addOperation {
     String input;
@@ -13,15 +13,16 @@ public class addOperation {
         String delimiter = ",|:";  // 기본 구분자 쉼표와 콜론
         if (input.startsWith("//")) {
             int startIdx = input.indexOf("//");
-            int endIdx = input.indexOf("\\n"); // 구분자가 없을 경우 처리하기 !
+            int endIdx = input.indexOf("\\n");
+            if(startIdx + 1 == endIdx) throw new IllegalArgumentException("구분자가 정의되지 않았습니다");
 
             if (endIdx == -1) {
                 throw new IllegalArgumentException("커스텀 구분자가 올바르지 않습니다.");
             }
             delimiter = input.substring(2, endIdx);
-            input = input.substring(endIdx + 1); // 구분자를 제외한 값
+            input = input.substring(endIdx + 2); // 구분자를 제외한 값
         }
-        System.out.println("delimiter:"+delimiter);
+
         String[] tokens = input.split(delimiter); // 구분자 기준으로 숫자 저장하기
 
         int sum = 0;
