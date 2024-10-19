@@ -24,6 +24,10 @@ public class StringProcessorController {
 
         // 문자열을 기본 구분자를 기준으로 분리하는 로직 호출
         List<String> afterDefaultExtractor = delimiterExtractor.extractDelimiter(inputDTO);
+        inputDTO.setDetachedInput(afterDefaultExtractor);
+
+        // 기본 구분자로 분리된 문자열을 커스텀 구분자를 기준으로 또 다시 분리하는 로직 호출
+        List<String> afterCustomExtractor = CustomDelimiterExtractor.extractDelimiter(inputDTO);
     }
 
 
