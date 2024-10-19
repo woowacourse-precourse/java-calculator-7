@@ -30,6 +30,8 @@ public class Parser {
         }
         String realInput = input.substring(input.lastIndexOf("\\n") + 2);
 
+        VerificationCustomSeparator verificationCustomSeparator = new VerificationCustomSeparator(customSeparator);
+
         return parseCustom(realInput, customSeparator);
     }
 
