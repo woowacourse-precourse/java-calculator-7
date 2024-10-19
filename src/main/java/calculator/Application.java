@@ -3,6 +3,41 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
+    public static int add(String str, String delimiter){
+        int a = 0;
+        String[] strArr = str.split(delimiter);
+
+        for (String number : strArr) {
+            int i = Integer.parseInt(number);
+            if (i > 0) {
+                    a += i;
+            }
+        }
+        return a;
+    }
+
+    public static int summarize(String str){
+        int ans = 0;
+        if (!str.isEmpty()) {
+            if (str.matches("//(.*?)\\\\n.*")) {
+                String newlyAddedDelimiter = str.replaceAll("//(.*?)\\\\n.*","$1");
+                String strRule;
+                if(newlyAddedDelimiter.length() == 0)
+                {
+                    strRule = newlyAddedDelimiter + ",|:";
+                }
+                else{
+                    strRule = "|,|:";
+                }
+                str = str.replaceAll("//(.*?)\\\\n","");
+                ans = add(str, strRule);
+            }
+            else if(Character.isDigit(str.charAt(0))){
+                ans = add(str, ",|:");
+            }
+        }
+        return ans;
+    }
     public static void main(String[] args) {
         // TODO: 프로그램 구현
 
