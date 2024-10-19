@@ -7,15 +7,15 @@ public class Calculator {
 
     private final SeparatorProcessor separatorProcessor;
     private final Pattern customSeparatorCmdPattern;
-    private final int customSeparatorIdx;
+    private final int customSeparatorIdx = 2;
+    private final String customSeparatorCmdRegex = "^(\\/\\/.\\\\n)";
     private final String minusDigitRegex = "-[0-9]*";
     private final String positiveDigitRegex = "\\d*";
     private final ICalculatorDisplay calculatorDisplay;
 
     public Calculator(ICalculatorDisplay calculatorDisplay) {
         this.separatorProcessor = new SeparatorProcessor(',', ':');
-        this.customSeparatorCmdPattern = Pattern.compile("^(\\/\\/.\\\\n)");
-        this.customSeparatorIdx = 2;
+        this.customSeparatorCmdPattern = Pattern.compile(customSeparatorCmdRegex);
         this.calculatorDisplay = calculatorDisplay;
     }
 
