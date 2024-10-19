@@ -21,23 +21,25 @@ public class StringParser {
         }
 
         List<Integer> numbers = new ArrayList<>();
-        StringBuilder currentNumber = new StringBuilder(); // 현재 숫자를 임시로 저장하는 StringBuilder
+        StringBuilder buffer = new StringBuilder(); // 현재 숫자를 임시 저장하는 버퍼 StringBuilder
 
         for (int i = startIndex; i < input.length(); i++) {
-            char currentChar = input.charAt(i); // 현재 인덱스의 문자
+            char currentChar = input.charAt(i);
 
-            if (Character.isDigit(currentChar)) { // 현재 문자가 숫자일 경우, currentNumber(버퍼) 에 추가
-                currentNumber.append(currentChar);
-            } else { // 숫자가 아닌 문자가 등장했을 경우, 버퍼에 있던것을 리스트에 추가
-                int number = Integer.parseInt(currentNumber.toString());
-                numbers.add(number);
-                currentNumber.setLength(0); // StringBuilder 초기화
+            if (Character.isDigit(currentChar)) {
+                buffer.append(currentChar);
+                continue;
             }
+
+            // 숫자가 아니라면 버퍼에 있던것을 리스트에 추가
+            int currentNumber = Integer.parseInt(buffer.toString());
+            numbers.add(currentNumber);
+            buffer.setLength(0); // 버퍼 초기화
         }
 
         // 버퍼에 남아있는 것 추가
-        if (!currentNumber.isEmpty()) {
-            int number = Integer.parseInt(currentNumber.toString());
+        if (!buffer.isEmpty()) {
+            int number = Integer.parseInt(buffer.toString());
             numbers.add(number);
         }
 
