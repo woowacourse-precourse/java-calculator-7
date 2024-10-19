@@ -36,6 +36,20 @@ public class CalculatorTest {
         number.getInputText("//;\n-534;-567;1882");
         assertEquals(calculator.calcSum(number), 781);
     }
+    @Test
+    @DisplayName("합계 출력 예외1")
+    public void 합계를_출력_예외1() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            number.getInputText("//123,345,789");
+            calculator.calcSum(number);
+        });
+    }
+    @Test
+    @DisplayName("합계 출력 예외2")
+    public void 합계를_출력_예외2() {
+        number.getInputText("//\n\n\n3\n\n4\n\n5");
+        assertEquals(calculator.calcSum(number), 12);
+    }
 
     @Test
     @DisplayName("공백 입력")
