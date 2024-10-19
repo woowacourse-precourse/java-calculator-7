@@ -1,23 +1,54 @@
 package calculator.tokenizer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StringTokenizer {
 
-    private final String input;
-    private final BufferedSplitter splitter;
+    private final List<Character> delimiters;
+    private final String string;
+    private final List<String> storage;
+    private final StringBuffer buffer;
 
     public StringTokenizer(String input, List<Character> delimiters) {
-        this.input = input;
-        this.splitter = new BufferedSplitter(delimiters);
+        this.delimiters = delimiters;
+        this.string = input;
+        this.storage = new ArrayList<>();
+        this.buffer = new StringBuffer();
     }
 
     public List<String> getTokens() {
-        char[] charArray = input.toCharArray();
+        char[] charArray = string.toCharArray();
         for (Character character : charArray) {
-            splitter.appendIfNotDelimiter(character);
+            appendIfNotDelimiter(character);
         }
-        return splitter.getTokens();
+        flush();
+        return storage;
+    }
+
+    public void appendIfNotDelimiter(Character character) {
+        if (isDelimiter(character)) {
+            flush();
+            return;
+        }
+        buffer.append(character);
+    }
+
+    private void flush() {
+        if (buffer.isEmpty()) {
+            return;
+        }
+        String token = buffer.toString();
+        storage.add(token);
+        clearBuffer();
+    }
+
+    private void clearBuffer() {
+        buffer.setLength(0);
+    }
+
+    private boolean isDelimiter(Character character) {
+        return delimiters.contains(character);
     }
 
 }
