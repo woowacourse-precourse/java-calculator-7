@@ -1,6 +1,6 @@
 package calculator.domain;
 
-import calculator.domain.delimiter.CustomDelimiter;
+import calculator.domain.delimiter.CustomDelimiterRegistrar;
 import calculator.domain.delimiter.Delimiter;
 
 import static calculator.domain.delimiter.CustomDelimiterPattern.CUSTOM_DELIMITER_END;
@@ -12,14 +12,14 @@ import static calculator.view.enums.Message.INVALID_INPUT_VALUE;
 public class CharAnalyzer {
     private final String input;
     private final Delimiter delimiter;
-    private final CustomDelimiter customDelimiter;
-    private final NumberGenerator numberGenerator;
+    private final CustomDelimiterRegistrar customDelimiterRegistrar;
+    private final NumberAccumulator numberGenerator;
     private int currentIndex;
 
-    public CharAnalyzer(String input, Delimiter delimiter, CustomDelimiter customDelimiter, NumberGenerator numberGenerator) {
+    public CharAnalyzer(String input, Delimiter delimiter, CustomDelimiterRegistrar customDelimiterRegistrar, NumberAccumulator numberGenerator) {
         this.input = input;
         this.delimiter = delimiter;
-        this.customDelimiter = customDelimiter;
+        this.customDelimiterRegistrar = customDelimiterRegistrar;
         this.numberGenerator = numberGenerator;
         this.currentIndex = 0;
     }
@@ -71,7 +71,7 @@ public class CharAnalyzer {
     }
 
     private void processCustomDelimiter() {
-        customDelimiter.registerCustomDelimiter(input.substring(currentIndex), delimiter);
+        customDelimiterRegistrar.registerCustomDelimiter(input.substring(currentIndex), delimiter);
         currentIndex = input.indexOf(CUSTOM_DELIMITER_END.getPattern(), currentIndex) + 2;
     }
 

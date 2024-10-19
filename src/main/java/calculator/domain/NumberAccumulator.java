@@ -1,10 +1,10 @@
 package calculator.domain;
 
-public class NumberGenerator {
+public class NumberAccumulator {
     private final SumCalculator sumCalculator;
     private String consecutiveNumbers = "";
 
-    public NumberGenerator(SumCalculator sumCalculator) {
+    public NumberAccumulator(SumCalculator sumCalculator) {
         this.sumCalculator = sumCalculator;
     }
 

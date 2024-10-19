@@ -4,7 +4,7 @@ import static calculator.domain.delimiter.CustomDelimiterPattern.CUSTOM_DELIMITE
 import static calculator.view.enums.Message.INVALID_CUSTOM_DELIMITER_FORMAT;
 import static calculator.view.enums.Message.INVALID_CUSTOM_DELIMITER_LENGTH;
 
-public class CustomDelimiter {
+public class CustomDelimiterRegistrar {
 
     public void registerCustomDelimiter(String input, Delimiter delimiter) {
         if (!input.contains(CUSTOM_DELIMITER_END.getPattern())) {
