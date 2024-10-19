@@ -23,7 +23,7 @@ public class Calculator {
     }
 
     private void getString() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        System.out.println(CalculatorConstant.START_MESSAGE);
         this.expression = Console.readLine();
         Console.close();
 
@@ -75,6 +75,6 @@ public class Calculator {
     }
 
     private void printResult() {
-        System.out.println("결과 : " + result);
+        System.out.println(CalculatorConstant.RESULT_MESSAGE + result);
     }
 }
