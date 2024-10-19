@@ -16,5 +16,7 @@ public class CalculatorController {
         String input = view.getInput();
         int result = calculator.add(input);
         view.displayResult(result);
+        String userInput = input.getInput();
+        int result = calculator.add(userInput);
     }
 }
