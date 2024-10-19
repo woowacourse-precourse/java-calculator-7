@@ -12,6 +12,8 @@ package calculator;
             }
             input = input.substring(delimiterIndex + 2);
         }
+        System.out.println(delimiter);
+        String[] tokens = input.split(delimiter);
 
-}
+    }
 
