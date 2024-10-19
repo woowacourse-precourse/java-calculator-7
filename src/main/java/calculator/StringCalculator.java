@@ -34,6 +34,7 @@ public class StringCalculator {
             }
         }
         else {
+            throw new IllegalArgumentException();
         }
 
         return ans;
