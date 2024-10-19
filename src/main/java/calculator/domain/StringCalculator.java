@@ -30,8 +30,7 @@ public class StringCalculator {
     }
 
     public List<Integer> saveValue(String[] newValue) {
-        return Arrays
-                .stream(newValue)
+        return Arrays.stream(newValue)
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
     }
