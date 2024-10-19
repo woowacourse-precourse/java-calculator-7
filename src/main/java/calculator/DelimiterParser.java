@@ -24,4 +24,14 @@ public class DelimiterParser {
             throw new IllegalArgumentException("잘못된 형식의 입력입니다. 커스텀 구분자는 //와 \\n 사이에 위치해야 합니다.");
         }
     }
+
+    public String extractNumbers(String input) {
+        if (input.startsWith("//")) {
+            int delimiterEnd = input.indexOf("\\n");
+            if (delimiterEnd != -1) {
+                return input.substring(delimiterEnd + 2);
+            }
+        }
+        return input;
+    }
 }
