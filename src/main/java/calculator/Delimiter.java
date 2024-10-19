@@ -52,7 +52,7 @@ public class Delimiter {
         if (inputString.startsWith("//")) {
             clearDelimiters();
             int index = findLastDelimiterIndex(inputString);
-
+            validateCustomDelimiterFormat(inputString);
             extractDelimiters(inputString, index);
 
             validateSingleDelimiter();
@@ -80,6 +80,12 @@ public class Delimiter {
     private void validateDelimiterIsPeriod(char Delimiter) {
         if (Delimiter == '.') {
             throw new IllegalArgumentException("커스텀 구분자에 '.'이 들어올 수 없습니다.");
+        }
+    }
+
+    private void validateCustomDelimiterFormat(String inputString) {
+        if (index == inputString.length() - 1) {
+            throw new IllegalArgumentException("커스텀 구분자 입력이 잘못되었습니다.");
         }
     }
 }
