@@ -10,8 +10,13 @@ public class Positive {
 	}
 
 	public Positive(int num) {
-		validateSplitNumber(num);
 		this.num = num;
+	}
+
+	public static Positive inputPositive(String inputString) {
+		int inputNum = Integer.parseInt(inputString);
+		validateSplitNumber(inputNum);
+		return new Positive(inputNum);
 	}
 
 	public static Positive zero(){
