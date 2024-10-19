@@ -20,8 +20,4 @@ public record Delimiter(String value) {
     private boolean isInvalidSize(String symbol) {
         return symbol.length() != DELIMITER_SIZE;
     }
-
-    public int size() {
-        return DELIMITER_SIZE;
-    }
 }

@@ -24,7 +24,7 @@ public class CustomDelimiterProcessor {
         throw new IllegalArgumentException("커스텀 구분자를 제거할 수 없습니다.");
     }
 
-    private static String getCustomDelimiter(String str) {
+    private String getCustomDelimiter(String str) {
         return str.substring(CUSTOM_DELIMITER_PREFIX.length(), str.indexOf(CUSTOM_DELIMITER_SUFFIX));
     }
 }
