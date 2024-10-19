@@ -18,4 +18,14 @@ public class SumCalculator {
     }
 
 
+    public static List<Integer> vaildateNumber(List<Integer> numbers) throws IllegalArgumentException {
+        for (Integer number : numbers) {
+            if (number < 0) {
+                throw new IllegalArgumentException();
+            }
+        }
+        return numbers;
+    }
+
+
 }
