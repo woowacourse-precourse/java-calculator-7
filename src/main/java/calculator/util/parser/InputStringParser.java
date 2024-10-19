@@ -29,7 +29,7 @@ public class InputStringParser implements StringParser {
     @Override
     public String[] extractTokens(final String str) {
         final String customDelimiter = extractCustomDelimiter(str);
-        final String regex = "[" + COMMA + COLON + customDelimiter + "]";
+        final String regex = String.join("|", COMMA, COLON, customDelimiter);
         return removeCustomDelimiterFormat(str).split(regex);
     }
 }
