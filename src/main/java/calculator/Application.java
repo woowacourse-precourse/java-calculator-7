@@ -1,13 +1,22 @@
 package calculator;
 
 import java.util.Scanner;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Application {
     public static void main(String[] args) {
         int operandA = inPut();
         int operandB = inPut();
+        int operandC = inPut();
 
-        int result = add(operandA, operandB);
+
+        Queue<Integer> operandQueue = new LinkedList<>();
+        operandQueue.add(operandA);
+        operandQueue.add(operandB);
+        operandQueue.add(operandC);
+
+        int result = iterateCalculation(operandQueue);
         System.out.println("결과 : " + result);
     }
 
@@ -20,5 +29,18 @@ public class Application {
 
     public static int add(int operandA, int operandB) {
         return operandA + operandB;
+    }
+
+    public static int iterateCalculation(Queue<Integer> operandQueue) {
+        if (operandQueue.peek() == null) {
+            return 0;
+        }
+
+        int operandA = operandQueue.poll();
+        while (!operandQueue.isEmpty()) {
+            int operandB = operandQueue.poll();
+            operandA = add(operandA, operandB);
+        }
+        return operandA;
     }
 }
