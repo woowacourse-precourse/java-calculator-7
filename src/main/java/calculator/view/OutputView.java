@@ -14,11 +14,11 @@ public class OutputView {
         return outputView;
     }
 
-    public void printResult(String result){
+    public void printResult(int result){
         System.out.println(RESULT_MESSAGE + result);
     }
 
-    public static void closeOutputView() {
+    public void closeOutputView() {
         if (outputView != null) {
             outputView = null;
         }
