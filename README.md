@@ -37,3 +37,9 @@
    - 리스트의 수를 합산하고 저장
 
 4. 콘솔을 통해 출력하기
+
+###수정해야 할 것
+- https://newwisdom.tistory.com/m/96 해당 포스트의 5번 규칙에 맞춰 패키지, 클래스, 메소드, 변수 명명 수정
+- https://myeonguni.tistory.com/1596 해당 포스트의 10번 규칙에 맞춰 전체적인 코드 리팩토링 (특히 ListChecking)
+- https://github.com/woowacourse/woowacourse-docs/blob/main/cleancode/pr_checklist.md 참고하여 전체적인 코드 리팩토링
+- 예외처리 사항 생각하고 추가하기
