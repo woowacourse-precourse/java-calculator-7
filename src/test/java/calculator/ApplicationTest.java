@@ -86,7 +86,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 입력값_숫자_추출() {
         // given
-        String input = "1;2,3,4";
+        String input = "1:2,3,4";
         calculator.setRawValue(input);
         List<Integer> expectedList = Arrays.asList(1, 2, 3, 4);
 

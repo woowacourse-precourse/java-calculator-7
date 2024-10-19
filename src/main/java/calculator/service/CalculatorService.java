@@ -109,8 +109,9 @@ public class CalculatorService {
     }
 
     public String printResult() {
-        System.out.println("결과 : " + calculator.getSumValue());
-        return  "" + calculator.getSumValue();
+        String result = "결과 : " + calculator.getSumValue();
+        System.out.println(result);
+        return  result;
     }
 }
 
