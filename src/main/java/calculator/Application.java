@@ -20,7 +20,7 @@ public class Application {
         String str = readLine();
 
         //해당 regex가 만족하지 않는 경우 IllegalArgumentException 예외 발생
-        if(!str.matches("(//\\D\\\\n)*([0-9]+)(\\D[0-9]+)*")) throw new IllegalArgumentException();
+        if(!str.matches("(//\\D\\\\n)*([0-9]+)(\\D[0-9]+)*")) throw new IllegalArgumentException("입력값이 맞지 않습니다.");
 
         //첫 부분 패턴이 있을 경우 해당 구분자를 출력해 set에 저장
         Pattern pattern = Pattern.compile("//\\D\\\\n");
@@ -53,7 +53,7 @@ public class Application {
             }
             System.out.println("결과 : " + sum);
         } catch (Exception e) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("구분자가 포함되어 있습니다", e);
         }
     }
 }
