@@ -1,6 +1,7 @@
 package calculator.controller;
 
 import calculator.constants.AppConstants;
+import calculator.dto.UserExpressionDto;
 import calculator.service.UserExpressionService;
 import calculator.view.UserView;
 import camp.nextstep.edu.missionutils.Console;
@@ -22,6 +23,10 @@ public class ConsoleController implements UserController {
     private String getExpressionFromUser() {
         userView.showMessage(AppConstants.requestMessage);
         return Console.readLine();
+    }
+
+    private void saveUserExpression(String expression) {
+        userExpressionService.saveUserExpression(new UserExpressionDto(expression));
     }
 
 
