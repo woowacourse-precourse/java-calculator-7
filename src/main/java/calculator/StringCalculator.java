@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public class StringCalculator {
-    private final String defaultRegex = "[:.]";
+    private final String defaultRegex = "[:,]";
     private String customRegex;
     private final String isPositiveNumberRegex = "^[^0]\\d*";
 
@@ -19,7 +19,7 @@ public class StringCalculator {
     private void setThirdDelimiterAndCalculate(UserInput userInput) {
         if(userInput.isCustomDelimiterPresent()) {
             String customDelimiter = userInput.getCustomDelimiter();
-            customRegex = "[:."+customDelimiter+"]";
+            customRegex = "[:,"+customDelimiter+"]";
             calculate(userInput.getNumberString(), customRegex);
         }
         else {
@@ -50,6 +50,4 @@ public class StringCalculator {
             throw new IllegalArgumentException("구분자외 문자나 0으로 시작하는 숫자가 존재합니다. 혹은 숫자 섹션 자체가 존재하지 않습니다.");
         }
     }
-
-
 }

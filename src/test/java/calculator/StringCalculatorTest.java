@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("사용자가 입력한 문자열에서 숫자를 추출하여 더하는 계산하는 기능 테스트")
 class StringCalculatorTest {
-    private final String defaultRegex = "[:.]";
+    private final String defaultRegex = "[:,]";
     private String customRegex;
     private final String isPositiveNumberRegex = "^[^0]\\d*";
 
@@ -37,7 +37,7 @@ class StringCalculatorTest {
     private void setThirdDelimiterAndCalculate(UserInput userInput) {
         if(userInput.isCustomDelimiterPresent()) {
             String customDelimiter = userInput.getCustomDelimiter();
-            customRegex = "[:."+customDelimiter+"]";
+            customRegex = "[:,"+customDelimiter+"]";
             calculate(userInput.getNumberString(), customRegex);
         }
         else {
@@ -68,23 +68,23 @@ class StringCalculatorTest {
     }
 
     static Stream<Object[]> validInputs() {
-        return Stream.of(new Object[]{"//#\\n4.5#6:7",22},
-                new Object[]{"//@\\n7@8:9.10",34},
-                new Object[]{"//^\\n7^8.9:10",34},
+        return Stream.of(new Object[]{"//#\\n4,5#6:7",22},
+                new Object[]{"//@\\n7@8:9,10",34},
+                new Object[]{"//^\\n7^8,9:10",34},
                 new Object[]{"//&\\n1:2&3",6},
-                new Object[]{"1:2.3",6});
+                new Object[]{"1:2,3",6});
     }
     static Stream<Object[]> invalidInputs() {
         return Stream.of(new Object[]{"//;\\n1:2.3,4",10},
                 new Object[]{"//^\\n1:2*3",6},
-                new Object[]{"//.\\n1:2.3",6},
-                new Object[]{"//:\\n1:2.3",6},
+                new Object[]{"//,\\n1:2,3",6},
+                new Object[]{"//:\\n1:2,3",6},
 
-                new Object[]{"\\:\\n1:2.3",6},
+                new Object[]{"\\:\\n1:2,3",6},
 
                 new Object[]{"1:2&3",6},
 
-                new Object[]{"//&\n1:2.3",6},
+                new Object[]{"//&\n1:2,3",6},
                 new Object[]{"//^\n\n1:2:3",6},
                 new Object[]{"//*\r*",6},
 
@@ -92,9 +92,9 @@ class StringCalculatorTest {
                 new Object[]{"\\n",0},
                 new Object[]{"0",0},
 
-                new Object[]{"//^\\n\\n1:2.3",6},
-                new Object[]{"//^\\n\n1:2.4",7},
-                new Object[]{"//^\\n1:2.\\n3",6}
+                new Object[]{"//^\\n\\n1:2,3",6},
+                new Object[]{"//^\\n\n1:2,4",7},
+                new Object[]{"//^\\n1:2,\\n3",6}
                 );
     }
 }

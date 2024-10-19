@@ -8,7 +8,7 @@ public class UserInput {
     private String delimiterSection;
     private String numberString;
     private String input;
-    private String regex = "^(\\/\\/)([^a-zA-Z0-9.: ]{1})";
+    private String regex = "^(\\/\\/)([^a-zA-Z0-9,: ]{1})";
 
     public UserInput(String input) {
         this.input = input;

@@ -15,7 +15,7 @@ class UserInputTest {
     String customDelimiter;
     String delimiterSection;
     String numberString;
-    String regex = "^(\\/\\/)([^a-zA-Z0-9.: ]{1})";
+    String regex = "^(\\/\\/)([^a-zA-Z0-9,: ]{1})";
 
     @ParameterizedTest
     @MethodSource("Inputs")
@@ -56,9 +56,9 @@ class UserInputTest {
         }
     }
     static Stream<Object[]> Inputs() {
-        return Stream.of(new Object[]{"//#\\n4.5#6:7", "#", "4.5#6:7"},
-                new Object[]{"//@\\n7@8:9.10", "@", "7@8:9.10"},
-                new Object[]{"//^\\n7^8.9:10","^","7^8.9:10"});
+        return Stream.of(new Object[]{"//#\\n4,5#6:7", "#", "4,5#6:7"},
+                new Object[]{"//@\\n7@8:9,10", "@", "7@8:9,10"},
+                new Object[]{"//^\\n7^8,9:10","^","7^8,9:10"});
     }
     static Stream<Object[]> exceptionTest() {
         return Stream.of(new Object[]{"/2;\\n1:2;3",";","\n1:2;3"},
