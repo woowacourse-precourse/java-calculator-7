@@ -11,12 +11,12 @@ public class Game {
         InputPrint.printInput();
         String input = readLine();
 
-        Separator separator = new Separator();
-        String splitInputWithSeparator = separator.containCustomSeparator(input);
+        Separators separators = new Separators();
+        String splitInputWithSeparator = separators.containCustomSeparator(input);
 
         Input input1 = new Input(splitInputWithSeparator);
 
-        String[] splitStr = input1.splitBySeparator(separator);
+        String[] splitStr = input1.splitBySeparator(separators);
         int[] numbers = input1.convertToIntArray(splitStr);
 
         if (numbers.length == 0) {

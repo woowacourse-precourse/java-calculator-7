@@ -12,12 +12,12 @@ public class Input {
         return input;
     }
 
-    public String[] splitBySeparator(Separator separator) {
+    public String[] splitBySeparator(Separators separators) {
         if (input.isEmpty()) {
             return new String[0];
         }
 
-        String regex = separator.getRegex();
+        String regex = separators.getRegex();
         return input.split(regex);
     }
 

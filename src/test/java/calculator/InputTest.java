@@ -11,18 +11,18 @@ public class InputTest {
     @Test
     void inputSplit() {
         // given
-        Separator separator = new Separator();
+        Separators separators = new Separators();
 
         // when
-        final int[] numbers = separatorInput(separator);
+        final int[] numbers = separatorInput(separators);
 
         // then
         assertThat(numbers).containsExactly(1, 2, 3);
     }
 
-    private int[] separatorInput(Separator separator) {
+    private int[] separatorInput(Separators separators) {
         Input input = new Input("1,2,3");
-        String regex = separator.getRegex();
+        String regex = separators.getRegex();
         String[] splitStr = input.getInput().split(regex);
 
         int[] numbers = new int[splitStr.length];
@@ -49,12 +49,12 @@ public class InputTest {
     @Test
     public void separatorInputWithCostume() {
         // given
-        Separator separator = new Separator();
-        String splitInputWithSeparator = separator.containCustomSeparator("//;\\n1;2;3");
+        Separators separators = new Separators();
+        String splitInputWithSeparator = separators.containCustomSeparator("//;\\n1;2;3");
         Input input = new Input(splitInputWithSeparator);
 
         // when
-        String[] splitStr = input.splitBySeparator(separator);
+        String[] splitStr = input.splitBySeparator(separators);
 
         // then
         for (int i = 0; i < splitStr.length; i++) {
@@ -66,12 +66,12 @@ public class InputTest {
     @Test
     public void inputIsNULL() {
         // given
-        Separator separator = new Separator();
+        Separators separators = new Separators();
 
         // when & then
         // IllegalArgumentException 발생
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
-            String splitInputWithSeparator = separator.containCustomSeparator(null);
+            String splitInputWithSeparator = separators.containCustomSeparator(null);
             Input input1 = new Input(splitInputWithSeparator);
         });
         assertThat(exception.getMessage()).isEqualTo("입력값이 null이 될 수 없습니다.");

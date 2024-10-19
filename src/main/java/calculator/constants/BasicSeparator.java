@@ -1,22 +1,21 @@
-package calculator;
+package calculator.constants;
 
-public enum EnumClass {
+public enum BasicSeparator implements EnumClass {
     COMMA(","),
-    COLON(":"),
-
-    DESIGNATED_SEPARATOR_START("//"),
-    DESIGNATED_SEPARATOR_END("\\n");
+    COLON(":");
 
     private final String symbol;
 
-    EnumClass(String symbol) {
+    BasicSeparator(String symbol) {
         this.symbol = symbol;
     }
 
+    @Override
     public String getSymbol() {
         return symbol;
     }
 
+    @Override
     public Integer getSymbolLength() {
         return symbol.length();
     }
