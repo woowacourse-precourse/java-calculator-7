@@ -20,4 +20,10 @@ class DelimiterParserTest {
         String input = "//;\n1;2;3";
         assertThat(delimiterParser.parseCustomDelimiter(input)).isEqualTo(";");
     }
+
+    @Test
+    void 커스텀_구분자_등록부분을_제외한_나머지만_파싱해서_반환하는지_테스트() {
+        String input = "//;\n1;2;3";
+        assertThat(delimiterParser.removeCustomDelimiter(input)).isEqualTo("1;2;3");
+    }
 }
