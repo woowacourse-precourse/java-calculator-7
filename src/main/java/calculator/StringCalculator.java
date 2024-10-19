@@ -1,28 +1,25 @@
 package calculator;
 
-import parser.DelimiterParser;
-import parser.NumberParser;
-import validator.InputValidator;
-
 import java.util.Arrays;
 
 public class StringCalculator {
 
-    private final DelimiterParser delimiterParser = new DelimiterParser();
-    private final NumberParser numberParser = new NumberParser();
-    private final InputValidator inputValidator = new InputValidator();
+    private final Parser parser;
+    private final InputValidator inputValidator;
+
+    public StringCalculator(Parser parser, InputValidator inputValidator) {
+        this.parser = parser;
+        this.inputValidator = inputValidator;
+    }
 
     public int add(String input) {
-        inputValidator.validate(input);  // 입력 값 유효성 검사
-
-        if (input.isEmpty()) {
+        if (input == null || input.isEmpty()) {
             return 0;
         }
 
-        String delimiter = delimiterParser.parseDelimiters(input);
-        String[] numbers = numberParser.parseNumbers(input, delimiter);
+        String[] numbers = parser.parseNumbers(input);
+        inputValidator.validate(numbers);
 
-        // 스트림을 사용하여 숫자 합산
         return Arrays.stream(numbers)
                 .mapToInt(Integer::parseInt)
                 .sum();
