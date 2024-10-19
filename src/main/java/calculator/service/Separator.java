@@ -1,5 +1,7 @@
 package calculator.service;
 
+import calculator.util.Constants;
+
 public class Separator {
 
     private final String regex;
@@ -19,6 +21,9 @@ public class Separator {
         }
         if (regex.length() != 1) {
             throw new IllegalArgumentException("구분자는 한 글자여야 합니다.");
+        }
+        if (regex.matches(Constants.POSITIVE_NUMBER_REGEX)) {
+            throw new IllegalArgumentException("숫자는 커스텀 구분자로 사용할 수 없습니다.");
         }
         if (!SeparatorType.isPermitted(regex)) {
             throw new IllegalArgumentException("허용되지 않는 커스텀 구분자입니다.");
