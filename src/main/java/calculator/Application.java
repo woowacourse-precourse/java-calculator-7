@@ -44,6 +44,8 @@ public class Application {
         return input.startsWith("//");
     }
     private static String addCustomDelimiter(String input) {
+        int endIndex = input.indexOf("\n");
+        return input.substring(2, endIndex);
     }
     private static int[] extractNumbers(String input) {
     }
