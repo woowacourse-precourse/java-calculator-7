@@ -9,7 +9,7 @@ public class Application {
         String userInput = Console.readLine();
         int start = 0;
         int end = 0;
-        if (userInput.startsWith("//")) {
+        if(userInput.startsWith("//")) {
             start = userInput.indexOf("//");
             end = userInput.indexOf("\\n");
             String custom = null;
@@ -21,15 +21,24 @@ public class Application {
                 //커스텀구분자 지정 값들을 배열에서 없앤다. end의 원 스트링의 길이는 3이기에 2를 더해준다.
                 String customInput = userInput.substring(end + 2);
                 //커스텀 문자열 삭제
-                String[] input = customInput.split(custom);
-                int num = 0;
-                for (String s : input) {
-                    if (!s.isEmpty()) {
+                String []input = customInput.split(custom);
+                int num =0;
+                for(String s : input){
+                    if(!s.isEmpty()){
                         num += Integer.parseInt(s);
                     }
                 }
+
                 System.out.println(num);
+            }else{
+                throw new IllegalArgumentException("범위를 지정할 수 없습니다"+ end);
             }
+        }
+
+
+
+
+
 
 
 //        String [] input = userInput.split("[,/]");
@@ -45,6 +54,5 @@ public class Application {
 //            }
 //        }
 //        System.out.println(num);
-        }
     }
 }
