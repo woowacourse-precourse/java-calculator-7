@@ -42,7 +42,6 @@
   - 기본적인 구분자(쉼표, 콜론)을 배열에 넣어준다.
   - checkSpecialDelimiter 에서 특수 구분자가 있는지 확인한다.
     - 있다면, 특수 구분자를 빼내기 위해 getSpecialDelimiter를 사용
-    - 없다면, null을 반환받는다.
   - output : 특수 구분자 or null
 
 #### getSpecialDelimiter
@@ -50,6 +49,7 @@
   - input : Stirng "//(특수구분자)\n"
   - .substring을 활용해서 특수구분자만 빼낸다.
   - return : 특수 구분자.
+  
 #### changeInputStr
 - 기능
   - input : Stirng "//(특수구분자)\n" 와 입력 받은 문자열
