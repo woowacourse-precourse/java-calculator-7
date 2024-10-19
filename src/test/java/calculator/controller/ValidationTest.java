@@ -34,6 +34,32 @@ public class ValidationTest {
     }
 
     @Test
+    @DisplayName("모든 문자열이 숫자인 입력")
+    void isAllNumbers_withNumbers() {
+        // given
+        String[] testTokens = {"1", "2", "3"};
+
+        // when
+        boolean actual = Validation.isAllNumbers(testTokens);
+
+        // then
+        assertThat(actual).isTrue();
+    }
+
+    @Test
+    @DisplayName("모든 문자열이 숫자인 입력")
+    void isAllNumbers_withString() {
+        // given
+        String[] testTokens = {"a", "2", "3"};
+
+        // when
+        boolean actual = Validation.isAllNumbers(testTokens);
+
+        // then
+        assertThat(actual).isFalse();
+    }
+
+    @Test
     @DisplayName("모든 숫자가 양수인 입력")
     void isAllPositive_withPositiveNumbers() {
         // given
