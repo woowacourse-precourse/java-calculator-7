@@ -9,7 +9,7 @@ public class Application {
 	String[] customNumbers;
 
 	void mymain() {
-		System.out.println("숫자를 입력하세요.");
+		System.out.println("덧셈할 문자열을 입력해 주세요.");
 		String input = scan.next();
 		if (input.contains("//")) {
 			int length = input.length();
@@ -30,9 +30,12 @@ public class Application {
 	void doCalc(String input, String custom) {
 		String[] numbers = input.split("[,:" + custom + "]");
 		for (String s : numbers) {
+			if(Integer.parseInt(s)<0){
+				throw new IllegalArgumentException("음수가 입력되었습니다.");
+			}
 			sum += Integer.parseInt(s);
 		}
-		System.out.printf("합 : %d", sum);
+		System.out.printf("결과 : %d", sum);
 	}
 
 	public static void main(String[] args) {
