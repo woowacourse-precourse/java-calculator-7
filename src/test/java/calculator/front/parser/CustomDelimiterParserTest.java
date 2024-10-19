@@ -1,6 +1,6 @@
 package calculator.front.parser;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 import calculator.front.input.CustomDelimiterParsedInput;
 import java.util.ArrayList;
@@ -18,8 +18,8 @@ class CustomDelimiterParserTest {
         CustomDelimiterParsedInput customDelimiterParsedInput = CustomDelimiterParser.parse(rawInput);
         //then
         // 빈 문자열과 커스텀 구분자가 존재하지 않는 리스트 반환, null이면 안 됨.
-        assertNotNull(customDelimiterParsedInput.delimiters());
-        assertNotNull(customDelimiterParsedInput.inputWithDelimiter());
+        assertThat(customDelimiterParsedInput.delimiters()).isNotNull();
+        assertThat(customDelimiterParsedInput.inputWithDelimiter()).isNotNull();
     }
 
     @Test
@@ -33,7 +33,7 @@ class CustomDelimiterParserTest {
         //when
         CustomDelimiterParsedInput customDelimiterParsedInput = CustomDelimiterParser.parse(rawInput);
         //then
-        assertEquals(customDelimiterParsedInput.delimiters(), delimiters);
-        assertEquals(customDelimiterParsedInput.inputWithDelimiter(), inputWithDelimiters);
+        assertThat(customDelimiterParsedInput.delimiters()).isEqualTo(delimiters);
+        assertThat(customDelimiterParsedInput.inputWithDelimiter()).isEqualTo(inputWithDelimiters);
     }
 }
