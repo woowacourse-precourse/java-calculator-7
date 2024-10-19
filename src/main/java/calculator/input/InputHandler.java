@@ -17,15 +17,15 @@ public class InputHandler {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine(); // 사용자에게 값을 입력 받음
 
-        // Validator 을 통해서 검증
+        // 커스텀 구분자가 포함되어 있으면 추출 후 검증
         if (validator.hasCustomDelimiter(input)) {
             String customDelimiter = stringParser.getCustomDelimiter(input);
             validator.check(input, customDelimiter);
-        } else {
-            validator.check(input);
+
+            return input;
         }
 
-        // 올바른 입력 값 반환
+        validator.check(input); // 기본 검증 후 반환
         return input;
     }
 }
