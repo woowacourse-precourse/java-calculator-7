@@ -1,11 +1,12 @@
 package calculator;
 
-import static calculator.util.ErrorMessage.*;
+import static calculator.util.ErrorMessage.DUPLICATE_DELIMITER;
+import static calculator.util.ErrorMessage.INVALID_CUSTOM_DELIMITER_FORMAT;
+import static calculator.util.ErrorMessage.INVALID_FORMAT;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import calculator.domain.Division;
-import calculator.util.ErrorMessage;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
@@ -20,10 +21,9 @@ class DivisionTest {
     @MethodSource("providedDefaultNumber")
     void defaultDelimiter(String input, List<String> answer) throws Exception {
         // given
-        Division division = new Division();
 
         // when
-        List<String> split = division.split(input);
+        List<String> split = Division.split(input);
 
         // then
         assertThat(split).hasSize(3)
@@ -44,10 +44,9 @@ class DivisionTest {
     @MethodSource("providedCustomNumber")
     void delimiter(String input, List<String> answer) throws Exception {
         // given
-        Division division = new Division();
 
         // when
-        List<String> split = division.split(input);
+        List<String> split = Division.split(input);
 
         // then
         assertThat(split).hasSize(3)
@@ -68,12 +67,11 @@ class DivisionTest {
     @MethodSource("providedWrongFormat")
     void invalidFormat(String input) throws Exception {
         // given
-        Division division = new Division();
 
         // when
 
         // then
-        assertThatThrownBy(() -> division.split(input))
+        assertThatThrownBy(() -> Division.split(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(INVALID_FORMAT.getMessage());
     }
@@ -93,12 +91,11 @@ class DivisionTest {
     @MethodSource("providedWrongCustomDelimiterFormat")
     void invalidCustomDelimiterFormat(String input) throws Exception {
         // given
-        Division division = new Division();
 
         // when
 
         // then
-        assertThatThrownBy(() -> division.split(input))
+        assertThatThrownBy(() -> Division.split(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(INVALID_CUSTOM_DELIMITER_FORMAT.getMessage());
     }
@@ -118,10 +115,9 @@ class DivisionTest {
     @MethodSource("providedDuplicateDelimiter")
     void DuplicateCustomDelimiter(String input) throws Exception {
         // given
-        Division division = new Division();
 
         // then
-        assertThatThrownBy(() -> division.split(input))
+        assertThatThrownBy(() -> Division.split(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(DUPLICATE_DELIMITER.getMessage());
     }

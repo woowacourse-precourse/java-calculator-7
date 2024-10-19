@@ -15,7 +15,7 @@ public class Division {
 
     private static final String DEFAULT_DELIMITER = ":|,";
 
-    public List<String> split(String input) {
+    public static List<String> split(String input) {
         validateFormat(input);
         if (isCustomFormat(input)) {
             String customDelimiter = getCustomDelimiter(input);
@@ -35,7 +35,7 @@ public class Division {
                 END_CUSTOM_DELIMITER));
     }
 
-    private void validateFormat(String input) {
+    private static void validateFormat(String input) {
         boolean isValidStart = input.isBlank() || isDigit(input) || isCustomFormat(input);
         if (!isValidStart) {
             throw new IllegalArgumentException(INVALID_FORMAT.getMessage());
@@ -46,7 +46,7 @@ public class Division {
         return input.startsWith(START_CUSTOM_DELIMITER) && input.contains(END_CUSTOM_DELIMITER);
     }
 
-    private boolean isDigit(String input) {
+    private static boolean isDigit(String input) {
         char[] charArray = input.toCharArray();
         if(charArray[0] == '-' && charArray.length > 1) {
             return Character.isDigit(charArray[1]);
@@ -54,18 +54,18 @@ public class Division {
         return Character.isDigit(charArray[0]);
     }
 
-    private void validateCustomDelimiter(String customDelimiter, String digits) {
+    private static void validateCustomDelimiter(String customDelimiter, String digits) {
         validateCustomFormat(customDelimiter, digits);
         validateCustomDuplicate(customDelimiter);
     }
 
-    private void validateCustomFormat(String customDelimiter, String digits) {
+    private static void validateCustomFormat(String customDelimiter, String digits) {
         if (customDelimiter.isEmpty() || !isDigit(digits)) {
             throw new IllegalArgumentException(INVALID_CUSTOM_DELIMITER_FORMAT.getMessage());
         }
     }
 
-    private void validateCustomDuplicate(String customDelimiter) {
+    private static void validateCustomDuplicate(String customDelimiter) {
         if (Pattern.matches(DEFAULT_DELIMITER, customDelimiter)) {
             throw new IllegalArgumentException(DUPLICATE_DELIMITER.getMessage());
         }

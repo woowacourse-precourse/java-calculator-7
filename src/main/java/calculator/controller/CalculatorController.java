@@ -8,11 +8,9 @@ import java.util.List;
 
 public class CalculatorController {
 
-    private Division division = new Division();
-
     public void start() {
         String inputString = InputView.printInputAddString();
-        List<String> digits = division.split(inputString);
+        List<String> digits = Division.split(inputString);
         result(digits);
     }
 
