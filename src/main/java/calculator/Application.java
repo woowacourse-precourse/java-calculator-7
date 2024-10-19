@@ -48,7 +48,9 @@ public class Application {
         int sum = 0;
         for (String token : tokens) {
             int number = Integer.parseInt(token); // string to int
-
+            if (number < 0) {
+                throw new IllegalArgumentException(); //negative int error
+            }
             sum += number;
         }
 

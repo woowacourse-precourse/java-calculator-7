@@ -16,13 +16,13 @@ class ApplicationTest extends NsTest {
         });
     }
 
-//    @Test
-//    void 예외_테스트() {
-//        assertSimpleTest(() ->
-//            assertThatThrownBy(() -> runException("-1,2,3"))
-//                .isInstanceOf(IllegalArgumentException.class)
-//        );
-//    }
+    @Test
+    void 예외_테스트() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("-1,2,3"))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
 
     // build test
     @Test
@@ -68,11 +68,19 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void custom_separator(){
+    void custom_delimiter(){
         assertSimpleTest(()->{
             run("//;\\n1;2,3");
             assertThat(output()).contains("결과 : 6");
         });
+    }
+
+    @Test
+    void custom_delimiter_err(){
+        assertSimpleTest(()->
+                    assertThatThrownBy(() -> runException("//;\\n1;2.3"))
+                            .isInstanceOf(IllegalArgumentException.class)
+                );
     }
 
 
