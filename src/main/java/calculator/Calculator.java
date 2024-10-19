@@ -27,7 +27,7 @@ public class Calculator {
 
         return sum;
     }
-
+    
     public Calculator(String input, ArrayList<Character> separators) {
         this.input = input;
         this.separators = separators;
