@@ -50,7 +50,7 @@ char checkDelimiter(String input);
 **시그니처**
 
 ```java
-List<String> splitByDelimiter(String input, List<char> delimiter);
+List<String> splitByDelimiter(String input, List<Character> delimiter);
 ```
 
 **입력**
@@ -72,7 +72,7 @@ List<String> splitByDelimiter(String input, List<char> delimiter);
 **시그니처**
 
 ```java
-List<Integer> checkDelimiter(List<String> numStrings);
+List<Integer> changeToInteger(List<String> numStrings);
 ```
 
 **입력**
