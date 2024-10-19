@@ -36,11 +36,19 @@ public class Calculator {
 
     // 기본 구분자로 문자열을 분리
     private static List<String> splitByDefaultDelimiters(String str) {
+        // 문자열에서 기본 구분자 외에 다른 문자가 있는지 확인
+        if (str.matches(".*[^0-9, :].*")) {
+            throw new IllegalArgumentException("기본 구분자 외 다른 문자가 포함되어 있습니다.");
+        }
         return Arrays.asList(str.split("[,:]"));
     }
 
+
     // 커스텀 구분자로 문자열을 분리
     private static List<String> splitByCustomDelimiter(String str) {
+        if (!str.contains("\n")) {
+            throw new IllegalArgumentException("잘못된 커스텀 구분자 선언 형식 입니다.");
+        }
         int startIndex = 2; // 커스텀 구분자의 시작 인덱스
         int endIndex = str.indexOf("\\n"); // 구분자와 숫자 부분을 분리
         String customDelimiters = str.substring(startIndex, endIndex); // 커스텀 구분자 추출
@@ -53,8 +61,25 @@ public class Calculator {
     public static int sum(List<String> numberPart) {
         int sum = 0;
         for (String number : numberPart) {
+            validateNumber(number);  // 숫자 유효성 검사
             sum += Integer.parseInt(number);
         }
         return sum;
+    }
+    // 숫자 유효성 검사
+    private static void validateNumber(String number) {
+        try {
+            int num = Integer.parseInt(number);
+            validatePositive(num);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("문자열에 숫자가 아닌 값이 포함되어 있습니다.");
+        }
+    }
+
+    // 양수 유효성 검사
+    private static void validatePositive(int num) {
+        if (num < 0) {
+            throw new IllegalArgumentException("숫자는 오직 양수만 허용 됩니다.");
+        }
     }
 }
