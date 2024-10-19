@@ -2,7 +2,8 @@ package calculator.validator;
 
 import calculator.global.exception.ErrorMessage;
 
-import static calculator.global.constant.DelimiterConstant.*;
+import static calculator.global.constant.DelimiterConstant.PREFIX;
+import static calculator.global.constant.DelimiterConstant.SUFFIX;
 
 public class DelimiterValidator {
 
