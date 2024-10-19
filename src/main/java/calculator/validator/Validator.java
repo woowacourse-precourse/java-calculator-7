@@ -1,18 +1,16 @@
 package calculator.validator;
 
-import java.util.List;
-
 import static calculator.converter.Extractor.extractDelimiter;
 import static calculator.converter.Extractor.extractNumberPart;
 
 public class Validator {
-    private static final String ERROR_INVALID_DELIMITER = "커스텀 구분자로 숫자 또는 공백을 사용할 수 없습니다.";
     private static final String ERROR_INVALID_FORMAT = "커스텀 구분자 형식이 올바르지 않습니다.";
-    private static final String ERROR_DELIMITER_TYPE = "커스텀 구분자는 '-',영어,숫자,공백을 허용하지 않습니다.: ";
-    private static final String ERROR_NUMBER_TYPE = "잘못된 숫자 형식입니다: ";
+    private static final String ERROR_INVALID_DELIMITER = "커스텀 구분자로 '-',영어,숫자,공백을 사용할 수 없습니다.";
+    private static final String ERROR_NUMBER_EMPTY = "숫자는 공백을 허용하지 않습니다.";
+    private static final String ERROR_DELIMITER_NOT_EXIST = "구분자가 아닌 문자를 허용하지 않습니다.";
+    private static final String ERROR_NUMBER_TYPE = "영어를 허용하지 않습니다.";
     private static final String ERROR_DELIMITER_DUPLICATE = "중복된 구분자는 허용하지 않습니다.";
-    private static final String ERROR_DELIMITER_INVALID_CHARACTER = "구분자가 아닌 잘못된 문자가 포함되어 있습니다.";
-    private static final String INVALID_CUSTOM_DELIMITER_PATTERN = "//[\\d\\s]*((\\\\n)|(\\n)).*";
+    private static final String INVALID_CUSTOM_DELIMITER_PATTERN = "//[a-zA-Z0-9\\s-]+\\\\n.*";
 
     private final String defaultDelimiter;
     private final String prefix;
@@ -24,43 +22,17 @@ public class Validator {
         this.suffix = suffix;
     }
 
-    public void validateDelimiter(String value){
-        if(value.trim().isEmpty()) return;
+    public void validateDelimiter(String value) {
+        if (value.trim().isEmpty()) return;
         validateCustomDelimiterFormat(value);
         String delimiter = extractDelimiter(value, defaultDelimiter, prefix, suffix);
         String numberPart = extractNumberPart(value, prefix, suffix);
-        validateDelimiterType(numberPart, delimiter);
         validateDuplicateDelimiter(delimiter);
-        validateDelimiterInput(numberPart, delimiter);
         validateNumberPart(numberPart, delimiter);
     }
 
-    private void validateDelimiterInput(String numberPart, String delimiter) {
-        String[] numberStrings = numberPart.split(delimiter);
-        for (String number : numberStrings) {
-            if (number.trim().isEmpty() || !number.matches("-?\\d+")) {
-                throw new IllegalArgumentException(ERROR_DELIMITER_INVALID_CHARACTER);
-            }
-        }
-    }
-
-    private void validateNumberPart(String numberPart, String delimiter) {
-        List<String> numbers = List.of(numberPart.split(delimiter));
-        for (String number : numbers) {
-            validateNumberFormat(number);
-        }
-    }
-
-    private static void validateNumberFormat(String number) {
-        try {
-            Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ERROR_NUMBER_TYPE + number);
-        }
-    }
-
-    private void validateCustomDelimiterFormat(String value){
-        if(Character.isDigit(value.charAt(0))){
+    private void validateCustomDelimiterFormat(String value) {
+        if (Character.isDigit(value.charAt(0))) {
             return;
         }
         if (!value.startsWith(prefix) || !value.contains(suffix)) {
@@ -71,16 +43,36 @@ public class Validator {
         }
     }
 
-    private void validateDelimiterType(String value, String delimiter){
-        if (!value.trim().isEmpty() && delimiter.matches(".*[\\d\\sA-Za-z-].*")) {
-            throw new IllegalArgumentException(ERROR_DELIMITER_TYPE + value);
-        }
-    }
-
     private void validateDuplicateDelimiter(String delimiter) {
         long distinctCount = delimiter.chars().distinct().count();
         if (distinctCount < delimiter.length()) {
-            throw new IllegalArgumentException(ERROR_DELIMITER_DUPLICATE + delimiter);
+            throw new IllegalArgumentException(ERROR_DELIMITER_DUPLICATE);
+        }
+    }
+
+    private void validateNumberPart(String numberPart, String delimiter) {
+        for (Character character : numberPart.toCharArray()) {
+            validateNumberEmpty(character);
+            validateNumberFormat(character, delimiter);
+        }
+    }
+
+    private static void validateNumberEmpty(Character character) {
+        if (Character.isWhitespace(character)) {
+            throw new IllegalArgumentException(ERROR_NUMBER_EMPTY);
+        }
+    }
+
+    private static void validateNumberFormat(Character character, String delimiter) {
+        String charAsString = String.valueOf(character);
+        if (Character.isDigit(character)) {
+            return;
+        }
+        if (Character.isLetter(character)) {
+            throw new IllegalArgumentException(ERROR_NUMBER_TYPE + character);
+        }
+        if (!charAsString.matches(delimiter)) {
+            throw new IllegalArgumentException(ERROR_DELIMITER_NOT_EXIST + character);
         }
     }
 }
