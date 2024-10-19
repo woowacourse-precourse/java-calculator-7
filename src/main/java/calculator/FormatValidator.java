@@ -1,6 +1,11 @@
 package calculator;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class FormatValidator {
+
+    private static final Set<Character> separators = new HashSet<>(DefaultSeparate.getSeparates());
 
     /**
      * 주어진 수식(formula)을 유효성 검사하는 메서드입니다.
@@ -28,23 +33,27 @@ public class FormatValidator {
 
     // 숫자로 시작하는 수식에서 허용되지 않은 문자가 있는지 검증
     private void validateNumberStartFormat(String formula) {
-        if (isNumberStartFormat(formula)) {
+        if (isNumberStartFormat(formula, null)) {
             return;
         }
 
-        throw new IllegalArgumentException("수식에는 쉼표 또는 콜론 이외의 문자가 포함될 수 없습니다.");
+        throw new IllegalArgumentException("수식에는 기본 구분자(쉼표, 콜론)외의 문자가 포함될 수 없습니다.");
     }
 
-    private static boolean isNumberStartFormat(String formula) {
+    private static boolean isNumberStartFormat(String formula, Character separator) {
+        if (separator != null) {
+            separators.add(separator);
+        }
+
         for(char ch : formula.toCharArray()) {
-            if (!Character.isDigit(ch) && !DefaultSeparate.getSeparates().contains(ch)) {
+            if (!Character.isDigit(ch) && !separators.contains(ch)) {
                 return false;
             }
         }
         return true;
     }
 
-    // 커스텀 구분자 형식을 검증
+    // 커스텀 구분자 형식으로 시작하는 수식에서 허용되지 않은 문자가 있는지 검증
     private void validateCustomStartFormat(String formula) {
         if (isCustomStartFormat(formula)) {
             return;
@@ -62,9 +71,12 @@ public class FormatValidator {
             return false;
         }
 
-        return !Character.isDigit(formula.charAt(customSeparateIdx))
+        char customSeparate = formula.charAt(customSeparateIdx);
+
+        return !Character.isDigit(customSeparate)
             && CustomFormulaFormat.hasLastFormat(formula, lastFormatStartIdx)
-            && Character.isDigit(formula.charAt(formulaStartIdx));
+            && Character.isDigit(formula.charAt(formulaStartIdx))
+            && isNumberStartFormat(formula.substring(5), customSeparate);
     }
 
     private boolean isNullOrEmpty(String str) {
