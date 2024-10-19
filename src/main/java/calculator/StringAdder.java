@@ -11,10 +11,17 @@ public class StringAdder {
         this.validator = validator;
     }
 
+    private int findDelimiterEndIndex(String input) {
+        if (input.startsWith("//") && input.contains("\\n")) {
+            return input.indexOf("\\n");
+        }
+        return -1;
+    }
+
     private String extractDelimiter(String input) {
         String delimiter = ",|:";
-        if (input.startsWith("//") && input.contains("\\n")) {
-            int delimiterEndIndex = input.indexOf("\\n");
+        int delimiterEndIndex = findDelimiterEndIndex(input);
+        if (delimiterEndIndex != -1) {
             delimiter = input.substring(2, delimiterEndIndex);
             validator.delimiterValidate(delimiter);
         }
@@ -22,8 +29,8 @@ public class StringAdder {
     }
 
     private String removeDelimiterSection(String input) {
-        if (input.startsWith("//")) {
-            int delimiterEndIndex = input.indexOf("\\n");
+        int delimiterEndIndex = findDelimiterEndIndex(input);
+        if (delimiterEndIndex != -1) {
             return input.substring(delimiterEndIndex + 2);
         }
         return input;
