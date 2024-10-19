@@ -2,11 +2,21 @@ package calculator.service;
 
 import calculator.enums.ExceptionMessage;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class CalculatorService {
 	private static final String DEFAULT_DELIMITERS = ",|:";
+	private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
 
 	public int add(String text) {
-		return calculateSum(split(text, DEFAULT_DELIMITERS));
+		Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(text);
+		String delimiters = DEFAULT_DELIMITERS;
+		if (matcher.matches()) {
+			delimiters += "|" + Pattern.quote(matcher.group(1));
+			text = matcher.group(2);
+		}
+		return calculateSum(split(text, delimiters));
 	}
 
 	private String[] split(String text, String delimiters) {
