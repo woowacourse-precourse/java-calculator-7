@@ -14,6 +14,14 @@ public class Application {
             result = 0;
         }
 
+        //쉼표, 콜론을 사용하여 숫자 분리
+        if (input.contains(",") || input.contains(":")) {
+            String[] numbers = input.split("[,:]");
+            for (String number : numbers) {
+                System.out.println(number);
+            }
+        }
+
         System.out.println("Input : " + result);
 
     }
