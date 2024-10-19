@@ -7,9 +7,11 @@ public class Operand {
     private int operand;
 
     public Operand(String element) {
-        this.operand = parseToInt(element);
-        validatePositive(this.operand);
+        int operand = parseToInt(element);
+        validatePositive(operand);
+        this.operand = operand;
     }
+
 
     private int parseToInt(String element) {
         try {
