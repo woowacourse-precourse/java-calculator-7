@@ -30,13 +30,7 @@ public class Calculator {
     private static int[] getBasicSeparatorNumbers(String input) {
         String[] basicSeparator = input.split(",|:");
 
-//        int[] basicNumberSeparator = new int[basicSeparator.length];
-//        for (int i = 0; i < basicSeparator.length; i++) {
-//            basicNumberSeparator[i] = Integer.parseInt(basicSeparator[i]);
-//            isPositiveNumber(basicNumberSeparator,i);
-//        }
         int[] basicNumberSeparator = stringToInt(basicSeparator);
-
         return basicNumberSeparator;
     }
 
