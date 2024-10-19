@@ -14,10 +14,9 @@ import calculator.util.TypeConversion;
 
 public class ParseHelper {
 	public String extractCustomDelimiter(String formula) {
-		validateCustomDelimiter(formula);
+		validateCustomDelimiterFormat(formula);
 		return String.valueOf(formula.charAt(DrawConstant.CUSTOM_DELIMITER_INDEX));
 	}
-
 	public List<Long> extractNumbers(Set<String> delimiters, String formula) {
 		if (delimiters.size() == DelimiterConstant.NO_CUSTOM_DELIMITER_LENGTH) {
 			return Arrays.stream(formula.split(DelimiterConstant.NO_CUSTOM_DELIMITER_SPLIT_REGEX))
@@ -25,24 +24,27 @@ public class ParseHelper {
 				.toList();
 		}
 		String excludedCustomDelimiterFormula = formula.substring(
-			formula.indexOf(DrawConstant.CUSTOM_DELIMITER_END_SIGN) + DrawConstant.NEXT_INDEX);
+			DrawConstant.CUSTOM_DELIMITER_FORMULA_NUMBER_START_INDEX);
 		return Arrays.stream(
 				excludedCustomDelimiterFormula.split(RegexGenerator.generateExtractNumberRegex(delimiters)))
 			.map(TypeConversion::convertStringToLong)
 			.toList();
 	}
 
-	private void validateCustomDelimiter(String formula) {
-		if (!formula.contains(DrawConstant.CUSTOM_DELIMITER_END_SIGN)) {
-			throw new CalculatorException(ExceptionMessage.NOT_FOUND_CUSTOM_DELIMITER_END_SIGN);
-		}
-		if (!(formula.charAt(DrawConstant.BACK_SLASH_INDEX) == DrawConstant.BACK_SLASH
-			&& formula.charAt(DrawConstant.N_INDEX) == DrawConstant.N)) {
+	private void validateCustomDelimiterFormat(String formula) {
+		validateCustomDelimiterFormula(formula);
+		validatePositiveNumberWithHyphenDelimiter(formula);
+	}
+
+	private static void validateCustomDelimiterFormula(String formula) {
+		if (!(Pattern.matches(DrawConstant.CUSTOM_DELIMITER_FORMULA_REGEX, formula))) {
 			throw new CalculatorException(ExceptionMessage.INVALID_CUSTOM_PREFIX);
 		}
-		if (!(Pattern.matches(DrawConstant.CUSTOM_DELIMITER_REGEX,
-			String.valueOf(formula.charAt(DrawConstant.CUSTOM_DELIMITER_INDEX))))) {
-			throw new CalculatorException(ExceptionMessage.INVALID_CUSTOM_PREFIX);
+	}
+
+	private void validatePositiveNumberWithHyphenDelimiter(String formula) {
+		if(formula.contains(DrawConstant.INEVITABLE_CONTAINS_HYPHEN_FORMAT)){
+			throw new CalculatorException(ExceptionMessage.NOT_POSITIVE_NUMBER);
 		}
 	}
 }

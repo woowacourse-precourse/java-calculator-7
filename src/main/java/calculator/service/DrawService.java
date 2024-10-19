@@ -19,8 +19,7 @@ public class DrawService {
 	public DelimitersDto generateDelimiters(FormulaReq formulaReq) {
 		Set<String> delimiters = DelimitersFactory.getDelimiters();
 		if (formulaReq.formula().startsWith(DrawConstant.CUSTOM_DELIMITER_START_SIGN)) {
-			String customDelimiter = parseHelper.extractCustomDelimiter(
-				formulaReq.formula().substring(DrawConstant.EXTRACT_START_INDEX));
+			String customDelimiter = parseHelper.extractCustomDelimiter(formulaReq.formula());
 			delimiters.add(customDelimiter);
 		}
 		return DelimitersDto.from(delimiters);
