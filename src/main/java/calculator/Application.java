@@ -22,7 +22,8 @@ public class Application {
                     }
                 }
             }catch (IllegalArgumentException e){
-                System.out.println(e.getMessage()+"프로그램을 종료합니다.\n---------------------------\n");
+                System.out.println(e.getMessage()+"-".repeat(58)+"\n" +
+                        "프로그램을 종료합니다.\n");
                 throw new IllegalArgumentException();
             }
         }
@@ -38,7 +39,11 @@ public class Application {
             int newLineIdx = inputValue.indexOf("\\n");
 
             if(slashIdx!=0 || slashIdx>newLineIdx || newLineIdx-slashIdx>3){
-                throw new IllegalArgumentException("---------------------------\n커스텀 구분자가 문자열 앞부분의 //와 \\n 사이에 위치하는지, 또는 커스텀 문자가 두 글자 이상인지 확인이 필요합니다.\n");
+                throw new IllegalArgumentException("-".repeat(58)+"\n" +
+                        "커스텀 구분자 지정시, 아래의 형식에 맞게 입력해 주세요.\n" +
+                        "➣ 문자열의 맨 앞에 지정해 주어야 합니다.\n" +
+                        "➣ [ //구분자\\n ]를 순서를 지켜 지정해 주어야 합니다.\n" +
+                        "➣ 커스텀 문자는 한 글자여야 합니다.\n");
             }
 
             res[0] += "|\\"+inputValue.substring(slashIdx+2,newLineIdx);
@@ -53,12 +58,16 @@ public class Application {
 
         try {
             intValue = Integer.parseInt(value);
-        }catch (IllegalArgumentException e){
-            throw new IllegalArgumentException("---------------------------\n정수가 아닌 입력이 감지되었습니다.\n");
+        }catch (Exception e){
+            throw new IllegalArgumentException("-".repeat(58)+"\n" +
+                    "정수로 변환할 수 없는 값이 감지되었습니다. 아래의 형식에 맞게 입력해 주세요.\n" +
+                    "➣ 커스텀 구분자 지정시, //와 \\n를 모두 사용하며 순서를 지켜야 합니다.\n" +
+                    "➣ 구분자를 제외한 모든 문자는 양수인 정수여야 합니다.\n");
         }
 
         if(intValue < 0) {
-            throw new IllegalArgumentException("---------------------------\n음수를 입력했습니다.\n");
+            throw new IllegalArgumentException("-".repeat(58)+"\n" +
+                    "음수를 입력하였습니다. 양수인 정수를 입력해 주세요.\n");
         }
 
         return intValue;
