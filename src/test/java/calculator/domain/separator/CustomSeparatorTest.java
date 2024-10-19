@@ -19,7 +19,7 @@ class CustomSeparatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = "//;\\n1;2;3")
+    @ValueSource(strings = "1;2;3")
     void 커스텀구분자(String value) {
         Numbers numbers = customSeparator.separate(value);
 
@@ -27,7 +27,7 @@ class CustomSeparatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = "//;\\n1.2;2.3;3.3")
+    @ValueSource(strings = "1.2;2.3;3.3")
     void 커스텀구분자실수(String value) {
         Numbers numbers = customSeparator.separate(value);
 
@@ -35,28 +35,28 @@ class CustomSeparatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"//;\\n;1;2", "//;\\n1;2;", "//;\\n;1;"})
+    @ValueSource(strings = {";1;2", "1;2;", ";1;"})
     void 양사이드구분자예외(String value) {
         assertThatThrownBy(() -> customSeparator.separate(value))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"//;\\n1;;2", "//;\\n;;1", "//;\\n1;;"})
+    @ValueSource(strings = {"1;;2", ";;1", "1;;"})
     void 연속커스텀구분자예외(String value) {
         assertThatThrownBy(() -> customSeparator.separate(value))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = "//;\\n1;a;2")
+    @ValueSource(strings = "1;a;2")
     void 문자포함예외(String value) {
         assertThatThrownBy(() -> customSeparator.separate(value))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = "//;\\n")
+    @ValueSource(strings = "")
     void 커스텀구분자빈문자열(String value) {
         Numbers numbers = customSeparator.separate(value);
         Number number = numbers.getNumbers().getFirst();

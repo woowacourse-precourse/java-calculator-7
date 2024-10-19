@@ -7,7 +7,6 @@ import java.util.List;
 
 public class CustomSeparator implements Separator {
 
-    private static final String PREFIX_STANDARD = "\\n";
     private final String separator;
 
     public CustomSeparator(String separator) {
@@ -15,19 +14,8 @@ public class CustomSeparator implements Separator {
     }
 
     @Override
-    public Numbers separate(String input) {
-        String value = removePrefix(input);
-
-        if (hasSeparatorIn(value)) {
-            return new Numbers(convert(validateSeparator(value)));
-        }
-
-        return new Numbers(List.of(new Number(value)));
-    }
-
-    private String removePrefix(String value) {
-        return value.substring(
-                value.indexOf(PREFIX_STANDARD) + PREFIX_STANDARD.length());
+    public Numbers separate(String value) {
+        return new Numbers(convert(validateSeparator(value)));
     }
 
     private List<String> divideBySeparator(String value) {
@@ -64,9 +52,5 @@ public class CustomSeparator implements Separator {
 
     private boolean isContinuousSeparator(String value) {
         return value.contains(separator.repeat(2));
-    }
-
-    private boolean hasSeparatorIn(String value) {
-        return value.contains(separator);
     }
 }
