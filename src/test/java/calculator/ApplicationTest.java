@@ -28,4 +28,29 @@ class ApplicationTest extends NsTest {
     public void runMain() {
         Application.main(new String[]{});
     }
+
+    @Test
+    void 기본_구분자_테스트() {
+        // 기본
+        assertSimpleTest(() -> {
+            run("1");
+            assertThat(output()).contains("결과 : 1");
+        });
+
+        // 빈문자열
+        assertSimpleTest(() -> {
+            run("\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+
+        // 정상값 입력
+        assertSimpleTest(() -> {
+            run("1:3,2");
+            assertThat(output()).contains("결과 : 0");
+        });
+        assertSimpleTest(() -> {
+            run("1:3,2,40,800,29");
+            assertThat(output()).contains("결과 : 875");
+        });
+    }
 }
