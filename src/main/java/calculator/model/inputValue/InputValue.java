@@ -29,10 +29,17 @@ public class InputValue {
     private void checkCustomSeparator(){
         if (uncheckedInput.startsWith("//")){
             int indexOfDelimiter = uncheckedInput.indexOf("n");
+
             if (indexOfDelimiter == -1) {
                 throw new IllegalArgumentException("잘못된 형식으로 커스텀 구분자를 지정했습니다!");
             }
+
             customDelimiter = uncheckedInput.substring(2,indexOfDelimiter-1);
+
+            if(customDelimiter.equals("+") || customDelimiter.equals("-") || customDelimiter.equals("*") || customDelimiter.equals("^")) {
+                customDelimiter = new String("\\").concat(customDelimiter);
+            }
+
             delimiter = delimiter.concat("|").concat(customDelimiter);
             uncheckedInput = uncheckedInput.substring(indexOfDelimiter+1);
         }
