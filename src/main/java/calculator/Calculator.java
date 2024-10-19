@@ -9,31 +9,30 @@ public class Calculator {
     public Calculator() {
     }
 
-    protected void start() {
-        String input = InputView.input();
+    protected void start(String input) {
+
 
         String[] results = getNumberLists(input);
 
-        System.out.println("results = " + Arrays.toString(results));
+//        System.out.println("results = " + Arrays.toString(results));
 
-        int answer = getAnswer(results);
-        System.out.println("answer = " + answer);
+        int answer = getSum(results);
+        System.out.println("결과 : " + answer);
     }
 
-    private String[] getNumberLists(String str) {
+    public String[] getNumberLists(String str) {
         // TODO: 구분자 커스텀 문자열이 없을 경우 (// or \n)
         if (str.startsWith("//")) {
             String delimiter = str.substring(2, str.indexOf("\\n"));
-            System.out.println("delimiter = " + delimiter);
             String newStr = str.substring(str.indexOf("\\n") + 2);
-            System.out.println("newStr = " + newStr);
-            System.out.println(Pattern.quote(delimiter));
+//            System.out.println("newStr = " + newStr);
+//            System.out.println(Pattern.quote(delimiter));
             return newStr.split("[" +Pattern.quote(delimiter) + ",:]+");
         }
         return str.split("[,:]+");
     }
 
-    private static int getAnswer(String[] results) {
+    public int getSum(String[] results) {
         int answer = 0;
         try {
             for (String result : results) {
