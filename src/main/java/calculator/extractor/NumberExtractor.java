@@ -7,8 +7,8 @@ public class NumberExtractor {
 
     // 초기값 삽입
     static {
-        separators.add(',');
         separators.add(':');
+        separators.add(',');
     }
 
     /**
@@ -17,7 +17,7 @@ public class NumberExtractor {
     public static ArrayList<Integer> extractNumberList(String inputData) {
         // 1. 커스텀 구분자 존재 유무 파악
         // - 커스텀 구분자는 문자열 앞부분의 "//"와 "\n" 사이에 위치하는 문자를 커스텀 구분자로 사용한다.
-        if(inputData.startsWith("//") && inputData.charAt(3) == '\\' && inputData.charAt(4) == 'n') {
+        if (inputData.startsWith("//") && inputData.charAt(3) == '\\' && inputData.charAt(4) == 'n') {
             char customSeparator = inputData.charAt(2);
             separators.add(customSeparator);
             // 입력 문자열에서 커스텀 구분자 선언문 제거
@@ -40,7 +40,9 @@ public class NumberExtractor {
             try {
                 int num = Integer.parseInt(string);
                 if (num < 0) // 음수인 경우 예외 발생 -> 잘못된 입력임
+                {
                     throw new IllegalArgumentException();
+                }
                 extractedNumber.add(num);
             } catch (Exception e) {
                 throw new IllegalArgumentException();
