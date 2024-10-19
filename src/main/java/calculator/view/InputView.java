@@ -1,11 +1,11 @@
 package calculator.view;
 
+import calculator.constant.SystemMessage;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
 	public String inputEquation() {
-		// TODO: "덧셈할 문자열을 입력해 주세요." 출력
-
+		System.out.println(SystemMessage.INPUT_EQUATION);
 		return Console.readLine();
 	}
 }
