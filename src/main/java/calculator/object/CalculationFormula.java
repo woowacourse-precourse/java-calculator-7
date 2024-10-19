@@ -1,6 +1,6 @@
 package calculator.object;
 
-public class CalculationFormula {
+public final class CalculationFormula {
 
     private final Numbers numbers;
 
@@ -9,10 +9,19 @@ public class CalculationFormula {
     }
 
     public static CalculationFormula from(String inputFormula) {
+        throwIfInputFormulaIsNull(inputFormula);
+
         Separators separators = new Separators(inputFormula);
         String formulaPart = getFormulaPart(inputFormula, separators);
         Numbers numbers = new Numbers(formulaPart, separators);
+
         return new CalculationFormula(numbers);
+    }
+
+    private static void throwIfInputFormulaIsNull(String inputFormula) {
+        if (inputFormula == null) {
+            throw new IllegalArgumentException("입력되는 수식은 null일 수 없습니다.");
+        }
     }
 
     public String calculate() {

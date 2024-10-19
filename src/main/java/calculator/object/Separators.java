@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-public class Separators {
+public final class Separators {
 
     private static final Set<Character> DEFAULT_SEPARATORS = Set.of(',', ':');
     private static final String SEPARATOR_HEADER = "//";
@@ -14,6 +14,8 @@ public class Separators {
     private final Set<Character> separators;
 
     public Separators(String inputFormula) {
+        throwIfInputFormulaIsNull(inputFormula);
+
         if (isNotIncludedHeaderOrFooter(inputFormula)) {
             customSeparator = "";
             separators = DEFAULT_SEPARATORS;
@@ -22,6 +24,12 @@ public class Separators {
 
         customSeparator = getCustomSeparatorFrom(inputFormula);
         separators = makeSeparatorsWith(customSeparator);
+    }
+
+    private static void throwIfInputFormulaIsNull(String inputFormula) {
+        if (inputFormula == null) {
+            throw new IllegalArgumentException("입력되는 수식은 null일 수 없습니다.");
+        }
     }
 
     public static String getSeparatorFooter() {

@@ -4,13 +4,16 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Numbers {
+public final class Numbers {
 
     private static final char DECIMAL_POINT = '.';
 
     private final List<BigDecimal> numbers;
 
     public Numbers(String formulaPart, Separators separators) {
+        throwIfFormulaPartIsNull(formulaPart);
+        throwIfSeparatorsIsNull(separators);
+
         if (formulaPart.isEmpty()) {
             this.numbers = List.of(BigDecimal.ZERO);
             return;
@@ -18,6 +21,18 @@ public class Numbers {
 
         throwIfFormulaPartIsNotSeparatorOrNumber(formulaPart, separators);
         this.numbers = getNumbers(formulaPart, separators);
+    }
+
+    private static void throwIfSeparatorsIsNull(Separators separators) {
+        if (null == separators) {
+            throw new IllegalArgumentException("구분자는 null일 수 없습니다.");
+        }
+    }
+
+    private static void throwIfFormulaPartIsNull(String formulaPart) {
+        if (null == formulaPart) {
+            throw new IllegalArgumentException("수식부는 null일 수 없습니다.");
+        }
     }
 
     public String addAll() {
