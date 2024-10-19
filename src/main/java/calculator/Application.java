@@ -4,7 +4,7 @@ package calculator;
         if (input.isEmpty()) {
             return 0;
         }
+        String delimiter = ",|:";
 
-    }
-
+}
 
