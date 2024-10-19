@@ -13,7 +13,7 @@ public class Calculator {
         String[] delimitedNumbers = delimiter.getDelimitedNumbers();//구분자 처리
 
         NumberValidator validator = new NumberValidator();
-        validator.positiveNumberCheck(delimitedNumbers);//잘못된 값 예외 처리
+        validator.validateNumbers(delimitedNumbers);//잘못된 값 예외 처리
 
         return addingNumbers(delimitedNumbers);
     }

@@ -1,11 +1,15 @@
 package calculator;
 
 public class NumberValidator {
-    void positiveNumberCheck(String[] delimitedNumbers) {
+    void validateNumbers(String[] delimitedNumbers) {
         for (String delimitedNumber : delimitedNumbers) {
-            if (!delimitedNumber.matches("^[1-9]\\d*$")) {
-                throw new IllegalArgumentException();
-            }
+            validatePositiveNumber(delimitedNumber);
+        }
+    }
+
+    private static void validatePositiveNumber(String Number) {
+        if (!Number.matches("^[1-9]\\d*$")) {
+            throw new IllegalArgumentException();
         }
     }
 }
