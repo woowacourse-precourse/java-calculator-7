@@ -12,7 +12,7 @@ public class Calculator {
         String delimiters = check[0];
         String numbersSection = check[1];
 
-        return -1;
+        return extractAndSum(numbersSection, delimiters);
     }
 
     private static String[] checkDelimiter(String input) {
@@ -33,12 +33,22 @@ public class Calculator {
 
             String customDelimiter = input.substring(start, end);
             delimiters.append(customDelimiter);
-
             input = input.substring(end + 2);
         }
-
         return new String[] { delimiters.toString(), input };
     }
 
+    private static int extractAndSum(String numbersSection, String delimiters) {
 
+        String regex = "[" + delimiters + "]";
+        String[] numbers = numbersSection.split(regex);
+        int sum = 0;
+
+        for (String num : numbers) {
+            if (!num.isEmpty()) {
+                sum += Integer.parseInt(num);
+            }
+        }
+        return sum;
+    }
 }
