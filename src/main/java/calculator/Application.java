@@ -2,6 +2,7 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Application {
@@ -11,6 +12,7 @@ public class Application {
 
         HashSet<String> separators = fetchSeparator(input);
 
+        ArrayList<Integer> extractedNumbers = extractNumbers(input, separators);
     }
 
     // Helper
@@ -43,5 +45,28 @@ public class Application {
         }
 
         return separators;
+    }
+    private static ArrayList<Integer> extractNumbers(String input, HashSet<String> separators) throws IllegalArgumentException {
+        ArrayList<Integer> numbers = new ArrayList<>();
+        int startIndex = Integer.max(input.indexOf('\n') + 1, 0);
+        int endIndex = startIndex;
+        for ( ; endIndex < input.length(); endIndex++) {
+            if ('0' <= input.charAt(endIndex) && input.charAt(endIndex) <= '9') {
+                continue;
+            }
+
+            String numberCandidate = input.substring(startIndex, endIndex);
+            if (separators.contains(String.valueOf(input.charAt(endIndex)))) {
+                numbers.add(Integer.parseInt(numberCandidate));
+            } else {
+                throw new IllegalArgumentException("구분자 목록에 없는 문자임");
+            }
+        }
+        if (endIndex == input.length()) {
+            String numberCandidate = input.substring(startIndex, endIndex);
+            numbers.add(Integer.parseInt(numberCandidate));
+        }
+
+        return numbers;
     }
 }
