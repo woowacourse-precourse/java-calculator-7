@@ -17,6 +17,14 @@ public class Delimiter {
         this.delimiterPattern = defaultDelimiter;
     }
 
+    public boolean hasCustomDelimiter() {
+        return this.isCustomDelimiter;
+    }
+
+    public String getDelimiterPattern() {
+        return this.delimiterPattern;
+    }
+
     public String removeCustomDelimiterForm(String inputString) {
         int delimiterEndIndex = inputString.indexOf("\\n");
 
