@@ -20,7 +20,6 @@ public class NumberExtractor {
         if(inputData.startsWith("//") && inputData.charAt(3) == '\\' && inputData.charAt(4) == 'n') {
             char customSeparator = inputData.charAt(2);
             separators.add(customSeparator);
-
             // 입력 문자열에서 커스텀 구분자 선언문 제거
             inputData = inputData.substring(5);
         }
@@ -40,8 +39,9 @@ public class NumberExtractor {
             // 3. 분리된 문자가 숫자가 아니거나, 양수가 아니라면 IllegalArgumentException 발생 후 어플리케이션 종료
             try {
                 int num = Integer.parseInt(string);
-                if (num > 0) // 양수인 경우에만 추출 숫자 리스트에 삽입
-                    extractedNumber.add(num);
+                if (num < 0) // 음수인 경우 예외 발생 -> 잘못된 입력임
+                    throw new IllegalStateException();
+                extractedNumber.add(num);
             } catch (Exception e) {
                 throw new IllegalStateException();
             }
