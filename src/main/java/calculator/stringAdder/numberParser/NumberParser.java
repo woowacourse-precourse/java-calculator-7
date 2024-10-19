@@ -29,8 +29,11 @@ public class NumberParser {
   }
 
   private void validateNumber(String number) {
-    if (number.equals("0")){
-      throw new IllegalArgumentException(this.getClass().getSimpleName()+ ": 0은 허용되지 않습니다: " + number);
+    if (number.startsWith("0")){
+      if (number.equals("0")){
+        throw new IllegalArgumentException(this.getClass().getSimpleName()+ ": 0은 허용되지 않습니다: " + number);
+      }
+      throw new IllegalArgumentException(this.getClass().getSimpleName() + ": 0으로 시작하는 숫자는 허용되지 않습니다: " + number);
     }
 
     if (number.startsWith("-")) {
