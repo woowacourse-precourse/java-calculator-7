@@ -15,6 +15,8 @@ public class Application {
 
         String customSeparator = extractCustomSeparator(input);
         separators.add(customSeparator);
+        validInput(input, separators);
+
     }
 
     private static String extractCustomSeparator(String input) {
@@ -32,6 +34,19 @@ public class Application {
         }
         if (separator.chars().allMatch(Character::isDigit)) {
             throw new IllegalArgumentException("구분자로 숫자는 입력될 수 없습니다.");
+        }
+    }
+
+    private static void validInput(String input, List<String> customSeparator) {
+        Pattern pattern = Pattern.compile(
+                "((^//)[^0-9](\\\\n))?([0-9]*["
+                        + String.join("", customSeparator)
+                        + "]?[0-9])*"
+        );
+
+        Matcher m = pattern.matcher(input);
+        if (!m.replaceAll("").isEmpty()) {
+            throw new IllegalArgumentException("입력 형식이 잘못되었습니다.");
         }
     }
 }
