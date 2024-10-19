@@ -1,28 +1,40 @@
 package calculator.controller;
 
 import calculator.generator.controller.GenerateController;
-import calculator.number.domain.Number;
+import calculator.number.domain.NumberService;
 import calculator.sentence.domain.Sentence;
-import calculator.service.CalculatorProcess;
+import calculator.regex.domain.RegexPattern;
+import calculator.service.CalculatorService;
+import calculator.regex.service.RegexPatternServiceResolver;
 import calculator.view.input.handler.InputHandlerService;
 import calculator.view.output.ResultService;
+
+import java.util.regex.Pattern;
 
 public class CalculatorController {
     private final GenerateController generateController;
     private final InputHandlerService inputProcess;
-    private final ResultService outputProcess;
+    private final RegexPatternServiceResolver numberTypeController;
+
     public CalculatorController(
             GenerateController generateController,
             InputHandlerService inputProcess,
-            ResultService outputProcess) {
+            RegexPatternServiceResolver numberTypeController) {
         this.generateController = generateController;
         this.inputProcess = inputProcess;
-        this.outputProcess = outputProcess;
+        this.numberTypeController = numberTypeController;
     }
+
     public void run() {
         Sentence sentence = inputProcess.receive(Sentence::new);
-        Number number =  generateController.createNumber(sentence);
-        long result = CalculatorProcess.sum(number);
+        RegexPattern regexPattern = RegexPattern.getRegexPattern(sentence);
+        ResultService outputProcess = numberTypeController.getResultService(regexPattern);
+        CalculatorService calculatorService = numberTypeController.getCalculatorService(regexPattern);
+        NumberService number = generateController.createNumber(
+                sentence,
+                numberTypeController.getConvertorService(regexPattern),
+                numberTypeController.getService(regexPattern));
+        Number result = calculatorService.sum(number);
         outputProcess.result(result);
     }
 }
