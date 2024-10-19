@@ -12,8 +12,12 @@ public class SumValues {
 
     public int sumAll() {
         sumValues.stream()
-                .forEach(sumValue -> totalSum += sumValue.getValue());
+                .forEach(this::sum);
 
         return totalSum;
+    }
+
+    private void sum(SumValue sumValue) {
+        totalSum += sumValue.getValue();
     }
 }
