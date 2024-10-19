@@ -17,9 +17,9 @@ public class InputView {
 
     public String[] inputCalculateNumber() {
         System.out.println(INPUT_NUMBER_MESSAGE);
-        String inputNumber = trimInputNumber(Console.readLine());
+        String inputNumber = Console.readLine();
 
-        if (inputNumber.isEmpty()) {
+        if (inputNumber.isBlank()) {
             return new String[]{"0"};
         }
         String[] splitNumber = splitInputNumber(inputNumber);
@@ -29,9 +29,6 @@ public class InputView {
         return splitNumber;
     }
 
-    private String trimInputNumber(String inputNumber) {
-        return inputNumber.trim();
-    }
 
     private String[] splitInputNumber(String input) {
         String divisionNumber = ",|:";
