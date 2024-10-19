@@ -1,7 +1,10 @@
 package calculator.service.separation;
 
+import static calculator.service.exception.SeparationExceptionType.NOT_EXIST_CUSTOM_SEPARATOR;
+
 import calculator.domain.Number;
 import calculator.domain.Numbers;
+import calculator.service.exception.SeparationException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,6 +38,9 @@ public class CustomSeparationService implements SeparationService {
         int postfixIndex = input.indexOf(CUSTOM_SEPARATOR_POSTFIX);
 
         String customSeparator = input.substring(prefixIndex + 2, postfixIndex);
+        if (customSeparator.isBlank()) {
+            throw new SeparationException(NOT_EXIST_CUSTOM_SEPARATOR);
+        }
         return customSeparator;
     }
 
