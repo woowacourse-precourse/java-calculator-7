@@ -91,7 +91,7 @@ class ApplicationExceptionTest extends NsTest {
     }
 
     @Test
-    @DisplayName("예외 테스트 : 커스텀 구분자가 문자열")
+    @DisplayName("예외 테스트 : 커스텀 구분자가 숫자 문자열")
     void exceptionTest11() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//123\\n1"))

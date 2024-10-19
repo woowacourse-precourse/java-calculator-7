@@ -39,7 +39,7 @@ class SeparatorServiceTest {
     /**
      * PROBLEM: IndexQueue 동일성 문제
      * <p>
-     * Queue 자료 구조를 사용하였는데 equals 메소드를 재구현해 값을 동일하게 해도 주소값에 의해 False 처리되는 현상
+     * Queue 자료 구조를 사용하였는데 equals 메소드를 재구현해 값을 동일하게 해도 주소값이 달라 False 처리되는 현상
      * </p>
      */
 

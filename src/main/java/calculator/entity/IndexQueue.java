@@ -2,7 +2,6 @@ package calculator.entity;
 
 import java.util.ArrayDeque;
 import java.util.Objects;
-import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class IndexQueue {

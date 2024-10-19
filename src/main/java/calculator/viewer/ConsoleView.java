@@ -7,7 +7,6 @@ public class ConsoleView {
 
     public void displayMessage() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-
     }
 
     public void result(Integer total) {
