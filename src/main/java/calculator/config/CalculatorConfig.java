@@ -1,7 +1,9 @@
-package calculator;
+package calculator.config;
 
+import calculator.view.View;
 import calculator.service.CalculatorService;
 import calculator.service.AdditionService;
+import calculator.service.InputValidator;
 
 public class CalculatorConfig {
     public CalculatorService calculatorService() {

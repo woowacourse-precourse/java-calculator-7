@@ -1,7 +1,7 @@
 package calculator;
 
-import calculator.util.CalculatorUtil;
-import java.util.List;
+import calculator.config.CalculatorConfig;
+import calculator.controller.CalculatorController;
 
 public class Application {
     public static void main(String[] args) {

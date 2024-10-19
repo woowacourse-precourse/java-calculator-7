@@ -3,11 +3,9 @@ package calculator.util;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import calculator.InputValidator;
-import camp.nextstep.edu.missionutils.Console;
+import calculator.service.InputValidator;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

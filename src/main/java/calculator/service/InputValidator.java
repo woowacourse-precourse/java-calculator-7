@@ -1,4 +1,4 @@
-package calculator;
+package calculator.service;
 
 import static calculator.util.CalculatorUtil.*;
 

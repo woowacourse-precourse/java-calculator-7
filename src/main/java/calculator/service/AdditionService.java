@@ -1,9 +1,6 @@
 package calculator.service;
 
-import calculator.InputValidator;
 import java.util.List;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class AdditionService implements CalculatorService {
 
