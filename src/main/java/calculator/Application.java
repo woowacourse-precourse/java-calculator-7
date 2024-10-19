@@ -1,13 +1,13 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.Console;
-
 public class Application {
     public static void main(String[] args) {
         int result = 10;
+        int sum = 0;
 
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = Console.readLine();
+        View view = new View();
+        view.printStart();
+        String input = Input.getInput();
 
         // 엔터, 공백 입력
         if (input.isBlank()) {
