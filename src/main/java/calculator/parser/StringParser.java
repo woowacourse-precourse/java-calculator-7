@@ -1,25 +1,19 @@
 package calculator.parser;
 
-import calculator.validation.Validator;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import static calculator.validation.Validator.validationNegative;
-import static calculator.validation.Validator.validationSeparator;
+import static calculator.validation.Validator.*;
 
 public class StringParser {
 
     String getSeparator(String input) {
-        String separator = "";
+        String separator = ",|:";
 
         if(input.startsWith("//")){
             int index = input.indexOf("\\n");
-            separator += input.substring(2, index);
-            validationSeparator(separator);
+            separator += "|" + input.substring(2, index);
         }
-
-        separator += "|,|:";
 
         return separator;
     }
@@ -28,6 +22,7 @@ public class StringParser {
     public int extractionNumber(String input){
         List<Integer> numbers = new ArrayList<>();
         String[] strings = input.split(getSeparator(input));
+
 
         for(String s : strings){
             StringBuilder num = new StringBuilder();
@@ -43,11 +38,18 @@ public class StringParser {
             }
         }
 
-        validationNegative(numbers);
+        validateNegative(numbers);
 
-        return numbers.stream()
-                .mapToInt(Integer::intValue)
-                .sum();
+        return sumNumber(numbers);
     }
 
+    int sumNumber(List<Integer> numbers){
+        int sum = 0;
+
+        for(Integer i : numbers) {
+            sum += i;
+        }
+
+        return sum;
+    }
 }
