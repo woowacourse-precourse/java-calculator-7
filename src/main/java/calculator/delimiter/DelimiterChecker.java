@@ -33,11 +33,21 @@ public class DelimiterChecker {
             throw new CalculatorException("커스텀 종료 식별자가 포함되어 있지 않습니다.");
         }
 
-        return userInput.substring(prefix.length(), suffixIdx);
+        String customDelimiter = userInput.substring(prefix.length(), suffixIdx);
+        return escapeMetaCharacters(customDelimiter);
     }
 
     private boolean isNotStartPrefix(String userInput) {
         return !userInput.startsWith(prefix);
+    }
+
+    private String escapeMetaCharacters(String input) {
+        String[] metaCharacters = {"\\", ".", "*", "+", "?", "[", "]", "^", "$", "(", ")", "{", "}", "|", "-"};
+        for (String metaChar : metaCharacters) {
+            input = input.replace(metaChar, "\\" + metaChar);
+        }
+
+        return input;
     }
 
 }
