@@ -1,4 +1,5 @@
 package calculator.domain;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -9,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 class DelimiterExtractorTest {
     @Test
-    void 커스텀_구분자_추출 (){
+    void 커스텀_구분자_추출() {
         DelimiterExtractor delimiterExtractor = new DelimiterExtractor();
 
         // t, n 두 가지 커스텀 구분자가 있는 경우

@@ -12,7 +12,7 @@ class DelimiterTokenizerTest {
 
 
     @Test
-    void 구분자_기준_토큰_분리(){
+    void 구분자_기준_토큰_분리() {
         DelimiterTokenizer delimiterTokenizer = new DelimiterTokenizer();
 
         // 구분자 및 번호 문자열
@@ -27,7 +27,7 @@ class DelimiterTokenizerTest {
     }
 
     @Test
-    void 구분자_기준_토큰_분리_예외반환(){
+    void 구분자_기준_토큰_분리_예외반환() {
         DelimiterTokenizer delimiterTokenizer = new DelimiterTokenizer();
 
         // 구분자 및 번호 문자열
@@ -44,7 +44,7 @@ class DelimiterTokenizerTest {
     }
 
     @Test
-    void 구분자_기준_토큰_분리_구분자가_없는경우(){
+    void 구분자_기준_토큰_분리_구분자가_없는경우() {
         DelimiterTokenizer delimiterTokenizer = new DelimiterTokenizer();
 
         // 구분자 및 번호 문자열

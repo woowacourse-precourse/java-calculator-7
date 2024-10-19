@@ -15,7 +15,8 @@ public class Application {
         DelimiterExtractor delimiterExtractor = new DelimiterExtractor();
         DelimiterTokenizer delimiterTokenizer = new DelimiterTokenizer();
         ResultCalculator resultCalculator = new ResultCalculator();
-        StringCalculator stringCalculator = new StringCalculator(inputView, outputView, delimiterExtractor, delimiterTokenizer, resultCalculator);
+        StringCalculator stringCalculator = new StringCalculator(inputView, outputView, delimiterExtractor,
+                delimiterTokenizer, resultCalculator);
 
         stringCalculator.run();
     }

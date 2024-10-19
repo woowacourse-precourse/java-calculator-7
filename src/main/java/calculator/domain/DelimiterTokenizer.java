@@ -28,7 +28,7 @@ public class DelimiterTokenizer {
             }
         }
         // 남은 buffer check
-        if(buffer.isBlank()){
+        if (buffer.isBlank()) {
             throw new IllegalArgumentException("입력이 올바르지 않습니다.");
         }
         numbers.add(Integer.parseInt(buffer));
