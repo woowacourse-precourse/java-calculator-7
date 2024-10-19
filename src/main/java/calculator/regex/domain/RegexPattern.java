@@ -1,9 +1,10 @@
-package calculator.separator.domain;
+package calculator.regex.domain;
 
 import calculator.constant.ErrorMessage;
 import calculator.sentence.domain.Sentence;
-import calculator.separator.constant.RegexConstant;
-import calculator.separator.util.SeparatorConvertor;
+import calculator.regex.constant.RegexConstant;
+import calculator.separator.domain.DefaultSeparator;
+import calculator.regex.util.SeparatorConvertor;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,7 +17,7 @@ public enum RegexPattern {
         @Override
         public String extractSeparator(String input) {
             String customSeparator = SeparatorConvertor.createCustomSeparator(input);
-            return SeparatorConvertor.replaceEscape(customSeparator);
+            return SeparatorConvertor.replaceRegex(customSeparator);
         }
 
         @Override
@@ -29,7 +30,7 @@ public enum RegexPattern {
         @Override
         public String extractSeparator(String input) {
             String customSeparator = SeparatorConvertor.createCustomSeparator(input);
-            return SeparatorConvertor.replaceEscape(customSeparator);
+            return SeparatorConvertor.replaceRegex(customSeparator);
         }
 
         @Override
