@@ -6,6 +6,8 @@ public class CalculatorService {
 
     public String calculateSumFormString(DelimiterInputDto delimiterInputDto) {
 
+        setDelimiter(delimiterInputDto);
+
         return delimiterInputDto.getInputString();
     }
 
@@ -14,6 +16,7 @@ public class CalculatorService {
             String customDelimiter = parseCustomDelimiter(delimiterInputDto.getInputString());
             validCustomDelimiter(customDelimiter);
             delimiterInputDto.addDelimiter(customDelimiter);
+            updateInputString(delimiterInputDto);
         }
     }
 
@@ -23,6 +26,11 @@ public class CalculatorService {
 
     public String parseCustomDelimiter(String inputString) {
         return inputString.substring(2, inputString.indexOf("\n"));
+    }
+
+    public void updateInputString(DelimiterInputDto delimiterInputDto){
+        String inputString = delimiterInputDto.getInputString();
+        delimiterInputDto.setInputString(inputString.substring(inputString.indexOf("\n") +1));
     }
 
     public void validCustomDelimiter(String delimiter) {

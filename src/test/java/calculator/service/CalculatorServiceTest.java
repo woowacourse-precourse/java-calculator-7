@@ -149,4 +149,20 @@ class CalculatorServiceTest {
         //then
         assertThat(delimiterInputDto.getDelimiters().contains(customDelimiter)).isTrue();
     }
+
+    @DisplayName("inputString에 구분자 설정 문자 파싱 테스트")
+    @Test
+    void updateInputString(){
+
+        //given
+        String customDelimiter = "&";
+        String inputString = "//" + customDelimiter + "\n1&2&3";
+        DelimiterInputDto delimiterInputDto = new DelimiterInputDto(inputString, new ArrayList<>(List.of(",", ":")));
+
+        //when
+        calculatorService.updateInputString(delimiterInputDto);
+
+        //then
+        assertThat(delimiterInputDto.getInputString()).isEqualTo("1&2&3");
+    }
 }
