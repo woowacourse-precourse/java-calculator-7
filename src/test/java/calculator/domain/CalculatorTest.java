@@ -10,10 +10,9 @@ public class CalculatorTest {
 
     @DisplayName("계산기 더하기 성공")
     @ParameterizedTest
-    @ValueSource(strings = {"1,2:3", "//;\\n1;2;3"})
+    @ValueSource(strings = {"1,2:3", "//;\\n1;2;3", "//(\\n1(2(3"})
     void sumTest(String inputs) {
         // given
-
         // when
         Calculator calc = new Calculator(inputs);
 

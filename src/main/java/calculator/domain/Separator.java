@@ -9,15 +9,19 @@ public class Separator {
 
     public Separator(String inputValue) {
         String customSeparator = getCustomSeparator(inputValue);
-        validate(customSeparator);
-        this.customSeparator = customSeparator;
+        setCustomSeparator(customSeparator);
+    }
+
+    private void setCustomSeparator(String customSeparator) {
+        if (!customSeparator.isEmpty()) {
+            validate(customSeparator);
+            this.customSeparator = escapeSeparator(customSeparator);
+        }
     }
 
     private void validate(String customSeparator) {
-        if (!customSeparator.isEmpty()) {
-            validateLength(customSeparator);
-            validateLetter(customSeparator);
-        }
+        validateLength(customSeparator);
+        validateLetter(customSeparator);
     }
 
     private void validateLength(String customSeparator) {
@@ -48,5 +52,12 @@ public class Separator {
         }
         String targetValue = inputValue.substring(5);
         return targetValue.split(customSeparator);
+    }
+
+    private String escapeSeparator(String customSeparator) {
+        if (".[]{}()*+-?^$|".contains(customSeparator)) {
+            return "\\" + customSeparator;
+        }
+        return customSeparator;
     }
 }
