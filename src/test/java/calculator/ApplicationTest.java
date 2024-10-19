@@ -96,6 +96,21 @@ class ApplicationTest extends NsTest {
         assertThat(numberList).isEqualTo(expectedList);
     }
 
+    @Test
+    void 추출한_값_더하기() {
+        // given
+        String input = "//+\\n1+2:3,4";
+        Calculation calculation = new Calculation();
+        CalculationService service = new CalculationService(calculation);
+        List<Integer> expectedList = Arrays.asList(1, 2, 3, 4);
+        calculation.setProcessedValue(expectedList);
+
+        // when
+        int result = service.sumOfList();
+
+        // then
+        assertThat(result).isEqualTo(10);
+    }
 
 
     @Test
