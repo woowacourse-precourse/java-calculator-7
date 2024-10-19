@@ -19,12 +19,16 @@ public class NumberCalculatorController extends CalculatorController {
     @Override
     public void run() {
         String input = inputView.readUserInput();
-        List<String> numberStrings = splitInputByDelimiters(input);
 
-        List<? extends Number> numbers = numberService.convertFrom(numberStrings, numberClass);
+        List<? extends Number> numbers = convertToNumbers(input);
+
         Number sum = numberService.sum(numbers, numberClass);
 
         outputView.printSumResult(sum);
+    }
+
+    private List<? extends Number> convertToNumbers(String input) {
+        return numberService.convertFrom(splitInputByDelimiters(input), numberClass);
     }
 
     private List<String> splitInputByDelimiters(String input) {
