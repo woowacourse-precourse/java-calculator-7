@@ -21,4 +21,5 @@ public class Separator {
 
         return input.split(separator);
     }
+
 }

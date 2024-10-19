@@ -5,6 +5,8 @@ import calculator.io.ConsoleOutputHandler;
 
 public class Calculator {
 
+    private final static String NUMBERICPATTERN = "\\d+";
+
     private final Separator separator = new Separator();
     private final Result result = new Result();
     private final ConsoleInputHandler consoleInputHandler = new ConsoleInputHandler();
@@ -14,12 +16,22 @@ public class Calculator {
         String input = getInputFromUser();
 
         if (input == null || input.isEmpty()) {
-            input = "0";
+            consoleOutputHandler.printResult(0);
+            return;
         }
 
         String[] strings = separator.handleDelimiter(input);
 
+        validateNumber(strings);
+
         consoleOutputHandler.printResult(result.add(strings));
+    }
+
+    private static void validateNumber(String[] strings) {
+        for (String value : strings) {
+            if (!value.matches(NUMBERICPATTERN))
+                throw new IllegalArgumentException();
+        }
     }
 
     private String getInputFromUser() {
