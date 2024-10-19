@@ -4,37 +4,58 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListChecker {
-    public String checklist;
-    public List<String> delimiters = new ArrayList<>();   //구분자는 최대 3개
-    public String numbers;
+    private static final int MAX_DELIMITERS = 3;
+    private static final String DEFAULT_DELIMITER1 = ":";
+    private static final String DEFAULT_DELIMITER2 = ",";
 
-/*    private ListChecking() {
-    }*/
+    private final List<String> delimiters = new ArrayList<>();
+    private String numbers;
 
-    public void checkDelimeter(String input) {
-        this.checklist = input;
-        String cult = this.checklist;
-        char[] charArray = cult.toCharArray();
-        delimiters.add(":");
-        delimiters.add(",");
+    public List<String> getDelimiters(String input) {
+        checkDelimiter(input);
+        return new ArrayList<>(delimiters);
+    }
 
-        if (checklist == null || checklist.isEmpty()) {
+    public String getNumbers() {
+        return numbers;
+    }
+
+    private void checkDelimiter(String input) {
+        validateInput(input);
+        parseInput(input);
+    }
+
+    private void validateInput(String input) {
+        if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException("아무것도 입력하지 않았습니다.");
         }
+    }
 
-        if (checklist.startsWith("//")) {
-            if (charArray[3] == '\\' && charArray[4] == 'n') {          //split이 작동을 안함
-                delimiters.add(String.valueOf(charArray[2]));
-                numbers = String.valueOf(charArray, 5, charArray.length - 5);
-//                delimiter = Pattern.quote(parts[0].substring(2));  // 커스텀 구분자 추출
-//                numbers = parts[1];  // 숫자 부분 추출
-            } else {
-                throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
-            }
-        } else if (Character.isDigit(checklist.charAt(0))) {
-            numbers = input;  // 커스텀 구분자가 없으면 입력 그대로 숫자로 처리
-        } else {
-            throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
+    private void parseInput(String input) {
+        if (input.startsWith("//")) {
+            parseCustomDelimiter(input);
+            return;
         }
+        if (Character.isDigit(input.charAt(0))) {
+            numbers = input; // 커스텀 구분자가 없으면 숫자로 처리
+            return;
+        }
+        throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
+    }
+
+    private void parseCustomDelimiter(String input) {
+        char[] charArray = input.toCharArray();
+        if (charArray.length > 4 && charArray[3] == '\\' && charArray[4] == 'n') {
+            addCustomDelimiter(charArray[2]);
+            numbers = String.valueOf(charArray, 5, charArray.length - 5);
+            return;
+        }
+        throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
+    }
+
+    private void addCustomDelimiter(char delimiter) {
+        delimiters.add(DEFAULT_DELIMITER1);
+        delimiters.add(DEFAULT_DELIMITER2);
+        delimiters.add(String.valueOf(delimiter));
     }
 }

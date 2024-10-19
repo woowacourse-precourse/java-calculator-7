@@ -1,11 +1,10 @@
 package calculator;
 
+import calculator.adder.ListAdder;
 import calculator.input.InputData;
+import calculator.output.OutputData;
 import calculator.parsing.ListChecker;
 import calculator.parsing.ListParser;
-import calculator.adder.ListAdder;
-import calculator.output.OutputData;
-
 import java.util.List;
 
 public class Application {
@@ -13,9 +12,8 @@ public class Application {
         // TODO: 프로그램 구현
         String input = InputData.getInput();
         ListChecker delimiter = new ListChecker();
-        delimiter.checkDelimeter(input);
-        List<String> delimiterInput = delimiter.delimiters;
-        String numbers = delimiter.numbers;
+        List<String> delimiterInput = delimiter.getDelimiters(input);
+        String numbers = delimiter.getNumbers();
         System.out.println("delimiter: " + delimiterInput);
         System.out.println("numbers: " + numbers);
         List<Integer> numList = ListParser.parseList(numbers, delimiterInput);
