@@ -31,6 +31,11 @@ public class Application {
                 CUSTOM_DELIMITER_PREFIX.length(),
                 inputString.indexOf(CUSTOM_DELIMITER_SUFFIX));
 
+        //빈 문자열일 때 split("")을 하면 빈칸이 나오는 문제를 해결하기 위함
+        if (separatorsString.isEmpty()) {
+            return List.of();
+        }
+
         return Arrays.stream(
                 separatorsString.split(""))
                 .toList();
