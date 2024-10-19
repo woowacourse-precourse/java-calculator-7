@@ -1,6 +1,7 @@
 package calculator.controller;
 
 import calculator.model.CustomCalculator;
+import calculator.validator.InputValidator;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -11,6 +12,8 @@ public class CalculatorController {
         OutputView.printInputStringMessage();
 
         String input = InputView.readInputString();
+
+        InputValidator.validateInput(input);
 
         if (input.isEmpty()) {
             OutputView.printResult(0);
