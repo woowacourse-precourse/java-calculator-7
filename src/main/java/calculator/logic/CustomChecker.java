@@ -1,10 +1,11 @@
-package calculator;
+package calculator.logic;
 
 public class CustomChecker {
 
     public static char[] customArray  = new char[10];
+
     /* 커스텀 문자가 있는지 확인하고, 만약 커스텀문자열이라면 커스텀문자열을 배열로 저장*/
-    private static boolean isCustom(String str) {
+    public static boolean isCustom(String str) {
 
         if(str.charAt(0) == '/' && str.charAt(1)=='/'){
             for(int i=2; i<str.length(); i++) {
