@@ -22,8 +22,8 @@ class ApplicationTest extends NsTest {
             run("1,2,3");
             assertThat(output()).contains("결과 : 6");
 
-//            run("1,2:3");
-//            assertThat(output()).contains("결과 : 6");
+            run("1,2:3");
+            assertThat(output()).contains("결과 : 6");
         });
     }
 
