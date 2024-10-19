@@ -54,7 +54,14 @@ public class Calculator {
         return answer;
     }
 
-    public void validateNumbers(){
-
+    public int validatePositive(String value){
+        try{
+        int number = Integer.parseInt(value);
+        if(number < 0)
+            throw new IllegalArgumentException(ERROR_NUMBER_TYPE);
+        return number;}
+        catch (NumberFormatException e){
+            throw new IllegalArgumentException(ERROR_INPUT);
+        }
     }
 }
