@@ -14,6 +14,11 @@ public class Calculator {
         if(input.isEmpty() || !input.matches(".*\\d.*")) {
             System.out.println("결과 : 0");
         }
+
+        if(input.matches(".*-\\d.*")){
+            throw new IllegalArgumentException("음수값이 포함되면 안됩니다.");
+        }
+
         this.No_Space_Input = input.replaceAll("\\s+", "");
     }
 

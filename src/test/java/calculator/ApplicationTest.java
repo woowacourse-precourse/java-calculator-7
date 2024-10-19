@@ -10,6 +10,15 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
     @Test
+    void Input_음수판단(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("-15:523"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    /*
+    @Test
     void 구분된_숫자_실수판별_성공(){
         assertSimpleTest(() ->{
             run("//*\\n37*38.7:34.5");
@@ -41,9 +50,6 @@ class ApplicationTest extends NsTest {
     }
 
 
-
-
-    /*
     @Test
     void Input_구분자_구분(){
         assertSimpleTest(() ->{
