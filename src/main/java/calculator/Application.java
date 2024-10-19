@@ -1,16 +1,29 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 class StringAddCalculator {
     public int add(String input) {
-        if (input == null) {
+        if (input == null || input.isEmpty()) {
             return 0;
         }
 
         int result = 0;
-        String[] numbers = input.split(",|:");
+        Pattern pattern = Pattern.compile("//(.)\n(.*)");
+        Matcher matcher = pattern.matcher(input);
+        String[] numbers;
+        String delimeter = ",|:";
+        if (matcher.find()) {
+            delimeter = matcher.group(1);
+            input = matcher.group(2);
+        }
+        numbers = input.split(delimeter);
+
         for (String num : numbers) {
+            if (num.isEmpty())
+                continue;
             result += Integer.parseInt(num);
         }
 
