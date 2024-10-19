@@ -18,11 +18,17 @@ public class DigitExtractor {
     }
 
     /**
-     * TODO 문자열의 유효성 검증
+     * 문자열의 유효성 검증
      */
     public boolean isValidateInput(String input) {
-        if (input.startsWith("//")) { // 커스텀 구분자 사용
-
+        if (input.startsWith("//")) { // TODO 커스텀 구분자 사용
+            char customDelimiter = input.charAt(3);
+            if (input.charAt(4) != '\n' || customDelimiter == ' '
+                    || Character.getNumericValue(customDelimiter) != -1) {
+                return false;
+            }
+            String regex = "[,:]" + "|" + Pattern.quote(Character.toString(customDelimiter));
+            tokens = List.of(input.split(regex));
         } else { // 기본 구분자만 사용
             tokens = Stream.of(input.split("[,:]")).map(String::trim).collect(Collectors.toList());
         }
