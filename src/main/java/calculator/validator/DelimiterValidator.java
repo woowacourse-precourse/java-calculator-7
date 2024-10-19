@@ -9,7 +9,7 @@ public class DelimiterValidator {
 
     public static boolean hasCustomDelimiter(String str) {
         if (str.length() >= 5) {
-            str = str.substring(0, str.lastIndexOf(SUFFIX)+2);
+            str = str.substring(str.indexOf(PREFIX), str.lastIndexOf(SUFFIX)+SUFFIX.length());
             return str.startsWith(PREFIX) && str.endsWith(SUFFIX);
         }
         return false;
