@@ -13,6 +13,10 @@ public class Application {
         HashSet<String> separators = fetchSeparator(input);
 
         ArrayList<Integer> extractedNumbers = extractNumbers(input, separators);
+
+        Integer result = addAllNumbers(extractedNumbers);
+
+        System.out.println(result);
     }
 
     // Helper
@@ -68,5 +72,8 @@ public class Application {
         }
 
         return numbers;
+    }
+    private static Integer addAllNumbers(ArrayList<Integer> numbers) {
+        return numbers.stream().reduce(0, Integer::sum);
     }
 }
