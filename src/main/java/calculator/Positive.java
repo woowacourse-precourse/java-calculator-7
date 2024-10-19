@@ -14,6 +14,10 @@ public class Positive {
 		this.num = num;
 	}
 
+	public static Positive zero(){
+		return new Positive(0);
+	}
+
 	public Positive add(int other) {
 		return new Positive(other + this.num);
 	}
