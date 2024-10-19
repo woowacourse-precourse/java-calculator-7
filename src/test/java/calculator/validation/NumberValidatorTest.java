@@ -8,14 +8,14 @@ import org.junit.jupiter.api.Test;
 public class NumberValidatorTest {
 
     @Test
-    @DisplayName("파라미터가 숫자가 아니면 에러를 던진다")
-    void testIsNotNumber() {
+    @DisplayName("숫자가 아니거나 음수일 때 에러를 던진다.")
+    void testIsNotNumberOrNotPositive() {
         // when, then
-        assertThatThrownBy(() -> NumberValidator.isNotNumber(":"))
+        assertThatThrownBy(() -> NumberValidator.isNotNumberOrNotPositive(":"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("잘못된 입력값입니다.");
 
-        assertThatThrownBy(() -> NumberValidator.isNotNumber(""))
+        assertThatThrownBy(() -> NumberValidator.isNotNumberOrNotPositive(""))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("잘못된 입력값입니다.");
     }

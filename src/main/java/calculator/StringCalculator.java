@@ -16,8 +16,8 @@ public class StringCalculator {
 
         System.out.println(userInput);
 
-        String[] numberList = InputParserUtil.splitter(userInput);
-        int result = sumNumbers(InputParserUtil.numbersToInt(numberList));
+        String[] numberList = InputParserUtil.seperator(userInput);
+        int result = sumNumbers(InputParserUtil.numberStrListToIntList(numberList));
 
         System.out.println("결과 : " + result);
     }

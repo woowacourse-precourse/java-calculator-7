@@ -9,7 +9,7 @@ class StringCalculatorTest {
 
 
     @Test
-    @DisplayName("문자열로 된 숫자들의 합을 구한다.")
+    @DisplayName("숫자들의 합을 구한다.")
     void testSumNumbers() {
         // given
         int[] input1 = new int[]{1, 2, 3};

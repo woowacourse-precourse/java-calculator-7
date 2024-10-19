@@ -10,7 +10,7 @@ public class InputParserUtilTest {
 
     @Test
     @DisplayName("커스텀 구분자를 판별 후, 구분자를 기준으로 문자열을 분리한다.")
-    void testSplitter() {
+    void testSeperator() {
         // given
         String input1 = "1,2,3";
         String input2 = "//;\\n1;2;3";
@@ -23,15 +23,15 @@ public class InputParserUtilTest {
         String input9 = "1:2::3";
 
         // when
-        String[] result1 = InputParserUtil.splitter(input1);
-        String[] result2 = InputParserUtil.splitter(input2);
-        String[] result3 = InputParserUtil.splitter(input3);
-        String[] result4 = InputParserUtil.splitter(input4);
-        String[] result5 = InputParserUtil.splitter(input5);
-        String[] result6 = InputParserUtil.splitter(input6);
-        String[] result7 = InputParserUtil.splitter(input7);
-        String[] result8 = InputParserUtil.splitter(input8);
-        String[] result9 = InputParserUtil.splitter(input9);
+        String[] result1 = InputParserUtil.seperator(input1);
+        String[] result2 = InputParserUtil.seperator(input2);
+        String[] result3 = InputParserUtil.seperator(input3);
+        String[] result4 = InputParserUtil.seperator(input4);
+        String[] result5 = InputParserUtil.seperator(input5);
+        String[] result6 = InputParserUtil.seperator(input6);
+        String[] result7 = InputParserUtil.seperator(input7);
+        String[] result8 = InputParserUtil.seperator(input8);
+        String[] result9 = InputParserUtil.seperator(input9);
 
         // then
         assertThat(result1).isEqualTo(new String[]{"1", "2", "3"});
