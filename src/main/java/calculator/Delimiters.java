@@ -33,6 +33,7 @@ public class Delimiters {
     public Delimiters(String input, List<String> defaultDelimiters) {
         this.delimiters = defaultDelimiters;
         this.customDelimiter = getCustomDelimiter(input);
+        isCustomDelimiterValid(customDelimiter);
     }
 
     public boolean isCustomDelimiterPresent() {
@@ -79,6 +80,16 @@ public class Delimiters {
             return customString[1];
         }
         return "";
+    }
+
+    /**
+     * - 커스텀 구분자가 기존 구분자와 동일할 경우 예외 발생
+     * @param customDelimiter 추출된 커스텀 구분자
+     */
+    private void isCustomDelimiterValid(String customDelimiter) {
+        if(delimiters.contains(customDelimiter)){
+            throw new IllegalArgumentException("Delimiter '" + customDelimiter + "' already exists");
+        }
     }
 
     /**
