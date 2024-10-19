@@ -4,6 +4,7 @@ public class CalculateValidation {
 
     private static final Integer ZERO = 0;
     private static final String ZERO_STRING = "";
+    private static final String NUMBER_REGEX = "[+-]?\\d*(\\.\\d+)?";
 
     public static boolean checkNotContainAllSeparator(String userInput) {
         return CalculateDefault.checkNotContainDefault(userInput) && CalculateCustom.checkNotContainCustom(userInput);
@@ -22,6 +23,6 @@ public class CalculateValidation {
     }
 
     public static boolean checkIsNotUserInputNumber(String userInput) {
-        return !userInput.matches("[+-]?\\d*(\\.\\d+)?");
+        return !userInput.matches(NUMBER_REGEX);
     }
 }
