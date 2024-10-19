@@ -12,7 +12,8 @@
 2. 구분자와 양수로 구성되어야 함. 구분자는 문자만 가능.
 
 ### 의문점
-1. calculator에서 에러 터지는게 맞나? 
+1. calculator 에서 에러 터지는게 맞나? 
 2. validator.isInvalidFormat(numbers.replace(customDelimiter, ",")
-3. .을 커스텀 구분자로 썼을 때 안되는 에러
-4. 
+3. 지금 StringAddCalculator 가 너무 많은 책임이 있지 않나?
+4. 정규식에서 쓰는 연산자('.','*','{','}' 등등) 은 문자가 아닌가? 되어야 하지 않을까?
+

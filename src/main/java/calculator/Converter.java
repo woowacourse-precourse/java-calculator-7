@@ -1,9 +1,11 @@
 package calculator;
 
+import java.util.regex.Pattern;
+
 public class Converter {
 
+    private static final String SEPARATOR = "[,:]";
     private final InputValidator inputValidator = new InputValidator();
-    private static final String SEPARATOR = ",|:";
 
     public String[] toStringArr(String input) {
 
@@ -11,20 +13,18 @@ public class Converter {
             String customPattern = String.valueOf(input.charAt(2));
             String numbers = input.substring(5);
 
-            String[] split = numbers.split(customPattern);
+            inputValidator.isInvalidFormatCustomPattern(customPattern, numbers);
 
-            for (String s : split) {
-                System.out.println("s = " + s);
-            }
+            String customDelimiter = Pattern.quote(customPattern); // 특수문자 처리
 
-            return split;
+            return numbers.split(customDelimiter);
         }
 
         inputValidator.isInvalidFormat(input);
 
-
         return input.split(SEPARATOR);
     }
+
 
 
 }
