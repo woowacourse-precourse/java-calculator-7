@@ -7,14 +7,16 @@ public class Calculator {
 
     private final String inputString;
     private final String splitString = "[:,]";
+    private final int indexOfOne = 1;
 
     public Calculator(String inputString){
         this.inputString = inputString;
     }
 
     public List<String> splitList(){
-        String[] splitedStringArray = inputString.split(splitString);
-        List<String> stringList = List.of(splitedStringArray);
+
+        String[] stringArray = inputString.split(splitString);
+        List<String> stringList = List.of(stringArray);
 
         return stringList;
     }
@@ -38,5 +40,13 @@ public class Calculator {
         }
 
         return sum;
+    }
+
+    private boolean userDefined(){
+        if(inputString.charAt(indexOfOne) == '/'){
+            return true;
+        }
+
+        return false;
     }
 }
