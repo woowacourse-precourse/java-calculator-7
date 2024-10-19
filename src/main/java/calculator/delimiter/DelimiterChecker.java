@@ -14,4 +14,11 @@ public class DelimiterChecker {
         return userInput.startsWith(prefix) && userInput.contains(suffix);
     }
 
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public String getSuffix() {
+        return suffix;
+    }
 }

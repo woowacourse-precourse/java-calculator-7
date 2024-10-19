@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 class DelimiterHandlerTest {
 
     private EscapeNewLineConverter escapeNewLineConverter = new EscapeNewLineConverter();
+    private DelimiterChecker delimiterChecker = new DelimiterChecker("//", "\n");
 
     @Test
     @DisplayName("기본 구분자가 포함된 문자열을 추출할 수 있다.")
@@ -30,7 +31,7 @@ class DelimiterHandlerTest {
         // given
         String input = "//t\\n1t2t3t";
         input = escapeNewLineConverter.convert(input);
-        DelimiterHandler delimiterHandler = new CustomDelimiterHandler();
+        DelimiterHandler delimiterHandler = new CustomDelimiterHandler(delimiterChecker);
 
         // when
         String numbersWithDelimiter = delimiterHandler.getNumbersWithDelimiter(input);

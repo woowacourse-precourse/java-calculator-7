@@ -39,7 +39,7 @@ public class CalculatorApp implements CalculatorRunnable {
                 if (isCustomDelimiter(userInput)) {
                     String customDelimiter = extractCustomDelimiter(userInput);
                     delimiter.addDelimiter(customDelimiter);
-                    delimiterHandler = new CustomDelimiterHandler();
+                    delimiterHandler = new CustomDelimiterHandler(delimiterChecker);
                 }
             }
 
@@ -64,7 +64,7 @@ public class CalculatorApp implements CalculatorRunnable {
     }
 
     private String extractCustomDelimiter(String input) {
-        int delimiterIdx = input.indexOf("\n");
+        int delimiterIdx = input.indexOf(delimiterChecker.getSuffix());
         return input.substring(2, delimiterIdx);
     }
 
