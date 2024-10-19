@@ -16,7 +16,10 @@ public class CalculatorService {
         List<BigDecimal> numbers = Numbers
                 .of(expression, delimiters)
                 .getNumbers();
-        // todo : Calculator를 이용하여 계산 진행
-        return ""; // todo : 연산 결과 반환
+        BigDecimal sum = BigDecimal.ZERO;
+        for (BigDecimal number : numbers) {
+            sum = sum.add(number);
+        }
+        return sum.toString();
     }
 }
