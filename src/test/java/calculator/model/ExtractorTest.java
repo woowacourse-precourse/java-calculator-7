@@ -72,7 +72,7 @@ public class ExtractorTest {
     }
 
     @Test
-    public void 입력된_값이_0이_아닐_때_오류발생(){
+    public void 입력된_값이_숫자가_아닐_때_오류발생(){
         //Given
         SoftAssertions softly = new SoftAssertions();
         Extractor extractor = new Extractor();
