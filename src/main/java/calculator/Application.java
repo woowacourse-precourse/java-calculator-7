@@ -1,8 +1,8 @@
 package calculator;
 
+import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Scanner;
 
 public class Application {
     static String S;
@@ -99,9 +99,8 @@ public class Application {
         delimiters.add(",");
         delimiters.add(":");
 
-        Scanner scanner = new Scanner(System.in);
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        S = scanner.nextLine();
+        S = Console.readLine();
 
         try {
             calculate();
