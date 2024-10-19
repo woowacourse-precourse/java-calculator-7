@@ -1,55 +1,63 @@
 package calculator.controller;
 
 import calculator.model.Calculator;
-import calculator.model.CustomSeparator;
-import calculator.model.DefaultSeparator;
+import calculator.model.CustomSeparators;
 import calculator.model.Numbers;
-import calculator.validator.InputValidator;
+import calculator.model.Separators;
+import calculator.service.NumbersService;
+import calculator.service.SeparatorsService;
 import calculator.view.InputReader;
 import calculator.view.OutputView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static calculator.constant.Message.*;
 
 public class CalculatorController {
+    private final SeparatorsService separatorsService;
+    private final NumbersService numbersService;
+    private final Calculator calculator;
+
+    public CalculatorController(SeparatorsService separatorsService,
+                                NumbersService numbersService,
+                                Calculator calculator) {
+        this.separatorsService = separatorsService;
+        this.numbersService = numbersService;
+        this.calculator = calculator;
+    } // CalculatorController
+
     public void run() {
         OutputView.displayStart();
         String input = InputReader.inputMessage();
 
-        Numbers numbers = new Numbers(getNumbers(input));
+        Numbers numbers = createNumbers(input);
 
-        int result = new Calculator().calculateSum(numbers);
+        int result = calculator.calculateSum(numbers);
         OutputView.displayResult(result);
     } // run
 
-    public List<Integer> getNumbers(String input) {
-        List<Integer> numbers = new ArrayList<>();
-        if (containsCustomSeparator(input)) {
-            numbers = new CustomSeparator().separate(input);
+    public Numbers createNumbers(String input) {
+        if (containsSeparator(input)) {
+            Separators separators = separatorsService.createSeparator(input);
+            List<Integer> separatedNumbers = separateNumbers(separators, input);
+            return numbersService.createNumbers(separatedNumbers);
         } // end if
 
-        if (containsDefaultSeparator(input)) {
-            numbers = new DefaultSeparator().separate(input);
+        return numbersService.createNumbers(input);
+    } // createNumbers
+
+    private List<Integer> separateNumbers(Separators separators, String input) {
+        if (separators instanceof CustomSeparators) {
+            String calculatePart = separatorsService.getCalculatePart(input);
+            return separators.separateNumbers(calculatePart);
         } // end if
 
-        if (notContainsSeparator(input)) {
-            numbers = List.of(new InputValidator().validate(input));
-        } // end if
-        return numbers;
+        return separators.separateNumbers(input);
     } // getNumbers
 
-    public boolean containsCustomSeparator(String input) {
-        return input.matches(CUSTOM_SEPARATE_REGEX);
-    } // containsCustomSeparator
-
-    public boolean containsDefaultSeparator(String input) {
-        return !containsCustomSeparator(input)
-                && (input.contains(FIRST_DEFAULT_SEPARATOR) || input.contains(SECOND_DEFAULT_SEPARATOR));
-    } // containsDefaultSeparator
-
-    public boolean notContainsSeparator(String input) {
-        return !containsDefaultSeparator(input) && !containsCustomSeparator(input);
-    } // notContainsSeparator
+    public boolean containsSeparator(String input) {
+        return input.matches(CUSTOM_SEPARATE_REGEX)
+                || (input.contains(FIRST_DEFAULT_SEPARATOR)
+                || input.contains(SECOND_DEFAULT_SEPARATOR));
+    } // containsSeparator
 } // class

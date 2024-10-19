@@ -1,6 +1,6 @@
 package calculator.model;
 
-import calculator.validator.DefaultSeparatorValidator;
+import calculator.validator.DefaultSeparatorsValidator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,13 +8,13 @@ import java.util.List;
 
 import static calculator.constant.Message.*;
 
-public class DefaultSeparator implements Separator {
+public class DefaultSeparators implements Separators {
     private final List<String> defaultSeparators;
 
-    public DefaultSeparator() {
+    public DefaultSeparators() {
         this.defaultSeparators = new ArrayList<>();
         setInitialValue();
-    } // DefaultSeparator
+    } // DefaultSeparators
 
     private void setInitialValue() {
         defaultSeparators.add(FIRST_DEFAULT_SEPARATOR);
@@ -23,7 +23,7 @@ public class DefaultSeparator implements Separator {
 
     @Override
     public List<Integer> separateNumbers(String input) {
-        new DefaultSeparatorValidator().validate(input);
+        new DefaultSeparatorsValidator().validate(input);
 
         String numbers = defaultSeparators.stream()
                 .reduce(input, (result, defaultSeparator) -> result.replaceAll(defaultSeparator, WHITE_SPACE));

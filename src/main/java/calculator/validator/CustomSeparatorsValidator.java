@@ -10,7 +10,7 @@ import static calculator.constant.Limit.CUSTOM_SEPARATOR_LIMIT;
 import static calculator.constant.Message.EMPTY;
 import static calculator.constant.Message.WHITE_SPACE;
 
-public class CustomSeparatorValidator {
+public class CustomSeparatorsValidator {
     public static final String BACKSLASH = "\\";
     public static final String ONE_MORE_NUMBER_REGEX = "^[0-9]+$";
     public static final String WHITE_SPACE_CANNOT_USE_AS_CUSTOM = "공백은 커스텀 구분자로 사용 불가합니다.";

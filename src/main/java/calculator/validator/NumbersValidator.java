@@ -5,7 +5,7 @@ import calculator.exception.ValidatorException;
 import static calculator.constant.ErrorMessage.PREFIX;
 import static calculator.constant.Limit.DEFAULT_VALUE;
 
-public class InputValidator {
+public class NumbersValidator {
     public static final String ONLY_NUMBER_REGEX = "^[0-9]*$";
     public static final String CHAR_ONLY_CAN_USE_AS_CUSTOM = "문자는 커스텀 구분자로 지정 후 사용할 수 있습니다.";
     public static final String ONLY_POSITIVE = "양수만 계산 가능합니다.";
