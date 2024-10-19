@@ -30,21 +30,34 @@ public class Application {
                 separator = findCustomSeparator(input);
 
                 // 커스텀 구분자 생성하는 부분 자르고 문자열 가져오기
+                String cutString = input.substring(input.lastIndexOf("n") + 1);
 
                 // 구분자를 이용해 문자열 분리
+                String[] cutStringArr = cutString.split(separator);
 
-                // 사용자 입력 검증
-                // 문자열배열에 있는 문자열을 검증하는 함수 호출(예정)
-                // validateInput(inputArray);
+                // 문자열배열에 있는 문자열을 검증하는 함수 호출
+                validateInput(cutStringArr);
 
                 // 계산
 
             } else {
-                // 사용자 입력 검증
-                validateInput(input);
+                // 숫자만 입력했을 때 사용자 입력 검증(테스트 중)
+                if (false) {
+                    validateInput(input);
 
-                // 존재하지 않으면 결과를 출력
-                System.out.println("결과 : " + Integer.parseInt(input));
+                    // 커스텀 구분자가 존재하지 않으면 결과를 출력
+                    System.out.println("결과 : " + Integer.parseInt(input));
+                } else {
+                    // 커스텀 구분자가 아닌 기본 구분자를 사용했을 때
+
+                    // 구분자를 이용해 문자열 분리
+                    String[] cutStringArr = input.split(separator);
+
+                    // 문자열 배열에 있는 문자열을 검증하는 함수 호출
+                    validateInput(cutStringArr);
+                    
+                    // 계산
+                }
             }
         } catch (IllegalArgumentException e) {
 
@@ -54,11 +67,21 @@ public class Application {
 
     }
 
-    // 사용자 입력을 검증하는 함수
+    // 숫자만 입력했을 때 사용자 입력을 검증하는 함수
     private static void validateInput(String input) {
         // 0보다 큰지 확인. 그리고 숫자 형식인지 확인
         if (!input.matches("^[1-9]\\d*$")) {
             throw new IllegalArgumentException("잘못된 값을 입력하였습니다.");
+        }
+    }
+
+    // 구분자가 사용할 때 사용자 입력을 검증하는 함수
+    private static void validateInput(String[] inputArr) {
+        for (String str : inputArr) {
+            // 0보다 큰지 확인. 그리고 숫자 형식인지 확인
+            if (!str.matches("^[1-9]\\d*$")) {
+                throw new IllegalArgumentException("잘못된 값을 입력하였습니다.");
+            }
         }
     }
 
