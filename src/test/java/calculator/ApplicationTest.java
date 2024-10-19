@@ -57,16 +57,16 @@ class ApplicationTest extends NsTest {
 	}
 
 	@Test
-	void 예외_테스트_다양한구분자(){
-		assertSimpleTest(() ->{
+	void 예외_테스트_다양한구분자() {
+		assertSimpleTest(() -> {
 			run("// \\n3:1,2 5");
 			assertThat(output()).contains("결과 : 11");
 		});
 	}
 
 	@Test
-	void 예외_테스트_숫자와공백(){
-		assertSimpleTest(() ->{
+	void 예외_테스트_숫자와공백() {
+		assertSimpleTest(() -> {
 			run(":1,2");
 			assertThat(output()).contains("결과 : 3");
 		});
