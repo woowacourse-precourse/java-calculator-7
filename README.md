@@ -130,6 +130,8 @@ More : [Commit Message convention](https://gist.github.com/9941e89d80e2bc58a153.
 - (6) 호출된 계산기가 분리된 수들의 합을 구한다.
 - (7) 컴퓨터가 덧셈 결과를 출력한다.
 
+![FlowDiagram](https://github.com/user-attachments/assets/e71e1628-a802-4f31-8a9e-6a327c729487)
+
 ### 실행 결과 예시
 
 ```
@@ -147,6 +149,8 @@ More : [Commit Message convention](https://gist.github.com/9941e89d80e2bc58a153.
 - **계산(Calculate)** : 애플리케이션이 시작되어 사용자 입력을 받고 수를 분리해 수들의 합을 구할 때까지를 의미한다.
 - **분리(Split)** : 문자열에서 구분자를 기준으로 수를 분리하는 것을 의미한다.
 - **덧셈(Sum)** : 문자열에서 분리된 수들의 합을 구하는 것을 의미한다.
+
+![MethodDiagram](https://github.com/user-attachments/assets/16b8c794-00e3-46d7-961b-df543226ea2b)
 
 ### Model
 
