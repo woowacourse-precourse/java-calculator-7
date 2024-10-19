@@ -1,7 +1,6 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,18 +29,26 @@ public class Application {
         List<String> response = new ArrayList<>();
         String curNum = "";
 
-        for (int i = 0; i < input.length(); i++) {
+        int i;
+        for (i = 0; i < input.length(); i++) {
             if (delimiter.contains(input.charAt(i))) {
                 response.add(curNum);
                 curNum = "";
-            } else if (input.charAt(i) >= '0' && input.charAt(i) <= '9') {
+            } else if (input.charAt(i) >= '1' && input.charAt(i) <= '9') {
                 curNum += input.charAt(i);
+            } else if (input.charAt(i) == '0' && !curNum.isEmpty()) {
+                curNum += '0';
             } else {
-                // 예외 처리 필요
+                // 숫자의 가장 앞에 0이 등장하는 경우
+                // 입력으로 구분자나 숫자가 아닌 문자가 들어온 경우 예외 처리
+                throw new IllegalArgumentException();
             }
         }
-        if (curNum != "") {
+        if (!curNum.isEmpty()) {
             response.add(curNum);
+        } else if (i != 0) {
+            // 가장 마지막 입력이 양수가 아닌 경우 예외 처리
+            throw new IllegalArgumentException();
         }
 
         return response;
