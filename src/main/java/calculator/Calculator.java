@@ -19,7 +19,7 @@ public class Calculator {
 
         //입력 값이 없으면 결과 값은 0
         if (input.equals("")) {
-            System.out.println("결과 : 0");
+            showSum(0);
             return;
         }
 
@@ -37,9 +37,9 @@ public class Calculator {
         }
 
         if (operandList.length == 0) {
-            System.out.println("결과 : 0");
+            showSum(0);
         } else if (input.length() == 0) {
-            System.out.println("결과 : 0");
+            showSum(0);
         } else {
             Integer sum = getResult(operandList);
             showSum(sum);
