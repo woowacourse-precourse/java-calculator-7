@@ -18,6 +18,7 @@ public class Application {
         System.out.println(greeting);
 
         String input = Console.readLine();
-        app.calculatorController.calculate(input);
+        String result = app.calculatorController.calculate(input);
+        System.out.println(result);
     }
 }

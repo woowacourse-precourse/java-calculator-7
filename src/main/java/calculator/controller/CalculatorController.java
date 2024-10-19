@@ -2,6 +2,7 @@ package calculator.controller;
 
 import calculator.service.CalculatorService;
 import calculator.view.ApplicationView;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class CalculatorController {
@@ -20,9 +21,9 @@ public class CalculatorController {
 
     public String calculate(String input) {
         validateInput(input);
-        int result = calculatorService.parseInputAndCalculate(input);
+        BigDecimal result = calculatorService.parseInputAndCalculate(input);
 
-        if (result == 1) {
+        if (result.compareTo(BigDecimal.ZERO) >= 0) {
             return "성공";
         } else {
             return "실패";

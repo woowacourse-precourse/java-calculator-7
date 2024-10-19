@@ -15,7 +15,7 @@ public class CalculatorService {
         this.inputParser = new InputParser();
     }
 
-    public int parseInputAndCalculate(String input) {
+    public BigDecimal parseInputAndCalculate(String input) {
         String[] splitInput = inputParser.parseInput(input);
         String delimiterPart = splitInput[0];
         String calculationPart = splitInput[1];
@@ -28,8 +28,6 @@ public class CalculatorService {
         List<Character> delimiters = calculatorRepository.getDelimiters();
         List<BigDecimal> numbers = inputParser.parseCalculationPartByDelimiters(calculationPart, delimiters);
 
-        // TODO : 계산 수행 로직 작성
-
-        return 1;
+        return numbers.stream().reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }
