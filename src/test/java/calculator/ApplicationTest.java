@@ -113,6 +113,15 @@ class ApplicationTest extends NsTest {
                 assertThatThrownBy(() -> runException("1//;\\n2;3"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\\nstr"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("str"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Override
