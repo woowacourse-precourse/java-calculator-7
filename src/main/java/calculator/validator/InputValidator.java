@@ -3,7 +3,18 @@ package calculator.validator;
 import calculator.constants.ErrorMessage;
 
 public class InputValidator {
-    private final String ZERO = "0";
+    private static final String ZERO = "0";
+    private static InputValidator instance;
+
+    private InputValidator() {
+    }
+
+    public static InputValidator getInstance() {
+        if (instance == null) {
+            instance = new InputValidator();
+        }
+        return instance;
+    }
 
     public void validateStrip(String input) {
         String stripped = input.strip();

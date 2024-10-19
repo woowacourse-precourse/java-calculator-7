@@ -12,7 +12,7 @@ class InputValidatorTest {
 
     @BeforeAll
     static void setUp() {
-        inputValidator = new InputValidator();
+        inputValidator = InputValidator.getInstance();
     }
 
     @Test

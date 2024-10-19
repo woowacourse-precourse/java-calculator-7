@@ -12,6 +12,18 @@ public class InputParser {
     private final int PREFIX_LENGTH = 2;
     private final int SUFFIX_LENGTH = 2;
 
+    private static InputParser instance;
+
+    private InputParser() {
+    }
+
+    public static InputParser getInstance() {
+        if (instance == null) {
+            instance = new InputParser();
+        }
+        return instance;
+    }
+
     public String[] separate(String input) {
         if (input.startsWith(DELIMITER_PREFIX)) {
             int suffixIndex = input.indexOf(DELIMITER_SUFFIX);

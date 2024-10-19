@@ -12,7 +12,7 @@ class InputParserTest {
 
     @BeforeAll
     static void setUp() {
-        inputParser = new InputParser();
+        inputParser = InputParser.getInstance();
         expected = new String[]{ "1", "2", "3" };
     }
 
