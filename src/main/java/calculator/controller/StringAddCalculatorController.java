@@ -1,26 +1,20 @@
 package calculator.controller;
 
 import calculator.service.StringAddCalculatorService;
+import calculator.validator.InputValidator;
 
 public class StringAddCalculatorController {
 
     private final StringAddCalculatorService stringAddCalculatorService;
+    private final InputValidator inputValidator;
 
-    public StringAddCalculatorController(StringAddCalculatorService stringAddCalculatorService) {
+    public StringAddCalculatorController(StringAddCalculatorService stringAddCalculatorService, InputValidator inputValidator) {
         this.stringAddCalculatorService = stringAddCalculatorService;
+        this.inputValidator = new InputValidator();
     }
 
-    public String stringAdd(String input){
-        if(input.contains(" ")){
-            throw new IllegalArgumentException();
-        }
-        if(input.isEmpty()){
-            return "0";
-        }
-        if(input.matches("\\d+")){
-            return input;
-        }
-
+    public String getStringAdd(String input){
+        inputValidator.validateNoSpace(input);
         return stringAddCalculatorService.add(input);
     }
 }
