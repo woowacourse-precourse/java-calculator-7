@@ -8,5 +8,6 @@ public class Application {
     public static void main(String[] args) {
         String input = Console.readLine();
 		Positive positive = StringCalculator.splitAndSum(input);
+		positive.printResult();
     }
 }

@@ -25,4 +25,8 @@ public class Positive {
 	public Positive add(Positive other) {
 		return new Positive(other.getNum() + this.num);
 	}
+
+	public void printResult() {
+		System.out.println("결과 = " + num);
+	}
 }
