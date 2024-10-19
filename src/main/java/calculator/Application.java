@@ -30,6 +30,14 @@ public class Application {
         return result;
     }
 
+    static int sum( int[] numbers ){
+        int result = 0;
+        for( int num : numbers ){
+            result += num;
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         int result = 0;
         try{
@@ -39,7 +47,7 @@ public class Application {
             StringTokenizer tokenizer = new StringTokenizer( input, "\\n" );
             String[] delimiterList = setDelimiter( tokenizer );
             int[] numbers = getNumbers( tokenizer, delimiterList );
-            
+            result = sum( numbers );
             System.out.println( "결과: " + result );
             bufferedReader.close();
         } catch (IOException e ){
