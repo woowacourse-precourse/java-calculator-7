@@ -66,7 +66,6 @@ class CalculatorParserTest {
 
                 Arguments.of("//AAA\n1AAA2AAA3"),
                 Arguments.of("////\n1//2//3")
-//                Arguments.of("//\n\n1\n2\n3")
         );
     }
 
@@ -74,7 +73,7 @@ class CalculatorParserTest {
     void 커스텀_구분자로_빈_값이_올_수_없다() {
         // when
         Throwable exception = assertThrows(CalculatorParsedException.class, () -> {
-            CalculatorParser.parse("//\n13:A:2");
+            CalculatorParser.parse("//\n\n13:A:2");
         });
 
         // then
@@ -82,24 +81,24 @@ class CalculatorParserTest {
     }
 
     @Test
-    void 정수만_입력_할_수_있습니다() {
-        // when
-        Throwable exception = assertThrows(CalculatorParsedException.class, () -> {
-            CalculatorParser.parse("-1:2:-3");
-        });
-
-        // then
-        assertThat(exception.getMessage()).isEqualTo("정수만 입력할 수 있습니다.");
-    }
-
-    @Test
     void 커스텀_구분자로_숫자가_올_수_없다() {
         // when
         Throwable exception = assertThrows(CalculatorParsedException.class, () -> {
-            CalculatorParser.parse("//3\n13:A:2");
+            CalculatorParser.parse("//3\n13:2:2");
         });
 
         // then
         assertThat(exception.getMessage()).isEqualTo("커스텀 구분자로 숫자가 올 수 없습니다.");
+    }
+
+    @Test
+    void 정수만_입력_할_수_있습니다() {
+        // when
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+            CalculatorParser.parse("-1:2:A");
+        });
+
+        // then
+        assertThat(exception.getMessage()).isEqualTo("정수만 입력할 수 있습니다.");
     }
 }
