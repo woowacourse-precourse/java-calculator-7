@@ -1,13 +1,25 @@
 package calculator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class OperationService {
-    // TODO customDelimiter 확인 기능 추가
+
     public static int sumStringNum(String stringNum) {
-
         String delimiter = ",|:";
-
-        String[] values = stringNum.split(delimiter);
         int sum = 0;
+
+        // 커스텀 구분자인 경우 실행
+        if (stringNum.contains("//")) {
+            Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(stringNum);
+            if (matcher.find()) {
+                delimiter = Pattern.quote(matcher.group(1)); // 커스텀 구분자 설정
+                stringNum = matcher.group(2); // 실제 숫자 부분 추출
+            } else {
+                throw new IllegalArgumentException("잘못된 입력 형식입니다.");
+            }
+        }
+        String[] values = stringNum.split(delimiter);
 
         for (String value : values) {
             int number = parsePositiveInt(value);
