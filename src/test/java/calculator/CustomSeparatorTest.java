@@ -2,14 +2,13 @@ package calculator;
 
 import calculator.separator.CustomSeparator;
 import calculator.separator.Separator;
-import camp.nextstep.edu.missionutils.test.NsTest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class CustomSeparatorTest extends NsTest {
+public class CustomSeparatorTest {
 
     @Test
     public void 커스텀_지정자_지정부분_제거_테스트() {
@@ -147,10 +146,5 @@ public class CustomSeparatorTest extends NsTest {
 
         // then
         Assertions.assertThat(actual).isEqualTo(null);
-    }
-
-    @Override
-    protected void runMain() {
-        // 여기서는 Application의 메인 메서드 실행X
     }
 }
