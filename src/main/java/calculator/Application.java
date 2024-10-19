@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.regex.Pattern;
 
 public class Application {
     public static void main(String[] args) {
@@ -8,26 +9,32 @@ public class Application {
 
         String delimiter = ",|:";
 
-        String[] input_integer = input.split(delimiter);
+        if (input.startsWith("//")) {
+            int endIndex = input.indexOf("\\n");
+            String customDelimiter = input.substring(2, endIndex);
+            delimiter += "|" + Pattern.quote(customDelimiter);
+            input = input.substring(endIndex + 2);
+        }
+
+        String[] inputNumbers = input.split(delimiter);
 
         int sum = 0;
 
-        for(String integer : input_integer){
-            if(integer.trim().isEmpty()) continue;
+        for (String numberString : inputNumbers) {
+            if (numberString.trim().isEmpty()) continue;
 
-            try{
-                int number = Integer.parseInt(integer.trim());
+            try {
+                int number = Integer.parseInt(numberString.trim());
+                if (number < 0) {
+                    throw new IllegalArgumentException("invalid" + number);
+                }
                 sum += number;
-            }
-            catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
                 System.out.println("invalid");
                 return;
             }
-
         }
 
-        System.out.println("결과 : " + sum);
+        System.out.println("result : " + sum);
     }
-
-
 }
