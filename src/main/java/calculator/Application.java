@@ -2,6 +2,10 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+class Delimiter {
+
+}
+
 public class Application {
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -90,9 +94,9 @@ public class Application {
 
     //커스텀 구분자가 있는지 확인하고 구분자 반환하는 메서드
     public static String delimiter(String input) {
-        if (input.startsWith("//") && input.contains("\\n")) {
+        if (isCDelimiter(input)) {
             int index = input.indexOf("\\n");
-            String s = delimiterCheck(input);
+            String s = delimiterCheck(input, index);
             return ",|:|" + s;
         }
         return "[,:]";
@@ -100,7 +104,7 @@ public class Application {
 
     //커스텀 구분자 구분 부분을 없애는 메서드
     public static String removeCDelimiter(String input) {
-        if (input.startsWith("//") && input.contains("\\n")) {
+        if (isCDelimiter(input)) {
             int index = input.indexOf("\\n");
             return input.substring(index + 2);
         }
@@ -108,15 +112,16 @@ public class Application {
     }
 
     //커스텀 구분자로 |를 추가했을 때 수정하는 메서드
-    public static String delimiterCheck(String input) {
-        if (input.startsWith("//") && input.contains("\\n")) {
-            int index = input.indexOf("\\n");
-            String check = input.substring(2, index);
-            String complateCheck = check.contains("|")
-                    ? check.replace("|", "\\|")
-                    : check;
-            return complateCheck;
-        }
-        return input;
+    public static String delimiterCheck(String input, int index) {
+        String check = input.substring(2, index);
+        String complateCheck = check.contains("|")
+                ? check.replace("|", "\\|")
+                : check;
+        return complateCheck;
+    }
+
+    //커스텀 구분자가 들어갔는지 확인하는 메서드
+    public static boolean isCDelimiter(String input) {
+        return input.startsWith("//") && input.contains("\\n");
     }
 }
