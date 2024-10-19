@@ -16,10 +16,10 @@ public class InputValidator {
             return;
         }
 
-        validateBasicDelimiter(input);
-
         if (formatParser.isCheckedStart(input)) {
             validateCustomDelimiter(input);
+        } else {
+            validateBasicDelimiter(input);
         }
     }
 
