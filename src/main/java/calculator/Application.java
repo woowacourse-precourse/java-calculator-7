@@ -34,7 +34,13 @@ public class Application {
         return num;
     }
 
+    public static Long sumOfList(List<Long> numbers){
+        return numbers.stream().mapToLong(Long::longValue).sum();
+    }
+
     public static void main(String[] args) {
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+
         String input = Console.readLine();
         String separator = getCustomSeparator(input);
 
@@ -42,6 +48,7 @@ public class Application {
             input = input.substring(separator.length()-7);
         }
 
-        extractNumbers(input, separator);
+        Long result = sumOfList(extractNumbers(input, separator));
+        System.out.println("결과 : " + result);
     }
 }
