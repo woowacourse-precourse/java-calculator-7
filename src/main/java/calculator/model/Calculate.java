@@ -1,6 +1,8 @@
 package calculator.model;
 
 
+import calculator.validation.InputValidator;
+
 import java.util.Arrays;
 
 public class Calculate {

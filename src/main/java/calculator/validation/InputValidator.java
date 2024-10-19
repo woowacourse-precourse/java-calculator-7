@@ -11,7 +11,7 @@ public class InputValidator {
     }
 
     public static void isContainZero(String userInput) {
-        if (userInput.contains(ZERO.getValue())) {
+        if (userInput.equals("0")) {
             throw new IllegalArgumentException(MUST_BE_DIGIT.format());
         }
     }

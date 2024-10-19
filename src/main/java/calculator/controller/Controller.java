@@ -22,7 +22,6 @@ public class Controller {
         if (InputValidator.isCheckEmpty(userInput)) {
             return 0;
         }
-        InputValidator.isContainZero(userInput);
         if (userInput.startsWith(CUSTOM_DELIMITER_FORWARD.getValue())) {
             return Calculate.calculateTotalSum(DelimiterValidator.customDelimiterAddCalculator(userInput));
         }
