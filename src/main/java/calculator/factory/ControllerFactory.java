@@ -9,7 +9,6 @@ public class ControllerFactory {
 
     // Controller 객체를 생성하는 메소드
     public static StringCalculatorController createController() {
-        // ServiceFactory를 사용하여 CalculatorService 객체 생성
         CalculatorService calculatorService = ServiceFactory.createCalculatorService();
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
