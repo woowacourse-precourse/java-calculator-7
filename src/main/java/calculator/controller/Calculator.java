@@ -8,10 +8,12 @@ public class Calculator {
 
     public void start() {
         startView();
-        
+
         InputProcessor inputProcessor = readInput();
 
         Calculate calculate = new Calculate(inputProcessor.numbers());
+
+        resultView(calculate.sum());
 
     }
 
@@ -27,5 +29,8 @@ public class Calculator {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
     }
 
+    private void resultView(Long result) {
+        System.out.println("결과 : " + result);
+    }
 
 }
