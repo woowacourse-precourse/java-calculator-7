@@ -29,7 +29,17 @@ class ApplicationTest extends NsTest {
 
         assertSimpleTest(() -> {
             run(":1:2,3");
-            assertThat(output()).contains("결과 : 0");
+            assertThat(output()).contains("결과 : 6");
+        });
+
+        assertSimpleTest(() -> {
+            run("12");
+            assertThat(output()).contains("결과 : 12");
+        });
+
+        assertSimpleTest(() -> {
+            run("10");
+            assertThat(output()).contains("결과 : 10");
         });
 
     }
@@ -67,8 +77,8 @@ class ApplicationTest extends NsTest {
         });
 
         assertSimpleTest(() -> {
-            run("//\\n1235");
-            assertThat(output()).contains("결과 : 11");
+            run("//\\n1234");
+            assertThat(output()).contains("결과 : 10");
         });
 
         assertSimpleTest(() -> {
@@ -110,6 +120,88 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 24");
         });
 
+        assertSimpleTest(() -> {
+            run("//;\\n22");
+            assertThat(output()).contains("결과 : 22");
+        });
+
+        assertSimpleTest(() -> {
+            run("//:\\n2:2");
+            assertThat(output()).contains("결과 : 4");
+        });
+
+        assertSimpleTest(() -> {
+            run("//::\\n2::2:2");
+            assertThat(output()).contains("결과 : 6");
+        });
+
+        assertSimpleTest(() -> {
+            run("///\\n2/2");
+            assertThat(output()).contains("결과 : 4");
+        });
+
+        assertSimpleTest(() -> {
+            run("//'\\n2'2");
+            assertThat(output()).contains("결과 : 4");
+        });
+
+        assertSimpleTest(() -> {
+            run("//''\\n2''2");
+            assertThat(output()).contains("결과 : 4");
+        });
+
+        assertSimpleTest(() -> {
+            run("//\"\\n2\"2");
+            assertThat(output()).contains("결과 : 4");
+        });
+
+        assertSimpleTest(() -> {
+            run("//\\\"\\n2\\\"2");
+            assertThat(output()).contains("결과 : 4");
+        });
+
+        assertSimpleTest(() -> {
+            run("//\\t\\n2\\t2");
+            assertThat(output()).contains("결과 : 4");
+        });
+
+        assertSimpleTest(() -> {
+            run("//'\\n2'2");
+            assertThat(output()).contains("결과 : 4");
+        });
+
+        // 여기부터 다시
+        assertSimpleTest(() -> {
+            run("//\\.\\n2\\.2");
+            assertThat(output()).contains("결과 : 4");
+        });
+
+        assertSimpleTest(() -> {
+            run("//?\\n2?2");
+            assertThat(output()).contains("결과 : 4");
+        });
+
+        assertSimpleTest(() -> {
+            run("//{\\n2{2");
+            assertThat(output()).contains("결과 : 4");
+        });
+
+        assertSimpleTest(() -> {
+            run("//*\\n2*2");
+            assertThat(output()).contains("결과 : 4");
+        });
+
+        assertSimpleTest(() -> {
+            run("//[\\n2[2");
+            assertThat(output()).contains("결과 : 4");
+        });
+
+        assertSimpleTest(() -> {
+            run("//[\\n2[2");
+            assertThat(output()).contains("결과 : 4");
+        });
+
+
     }
 
 
@@ -146,6 +238,11 @@ class ApplicationTest extends NsTest {
         );
 
         assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,2 3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+
+        assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("0,2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
@@ -179,6 +276,7 @@ class ApplicationTest extends NsTest {
                 assertThatThrownBy(() -> runException("//  \\n2  3 4"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
+
     }
 
 
