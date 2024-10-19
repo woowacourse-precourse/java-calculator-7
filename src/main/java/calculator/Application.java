@@ -12,7 +12,9 @@ public class Application {
                     "예를 들어 커스텀 구분자로 세미콜론(;)을 지정한다면 '//;\\n1;2;3'을 입력하면 됩니다.");
             String input = Console.readLine();
             // 계산기
-            System.out.println(input);
+            StringAddCalculator calculator = new StringAddCalculator();
+            int result = calculator.calculate(input);
+            System.out.println("결과: " + result);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
