@@ -26,12 +26,15 @@ public class CustomDelimiterStrategy implements DelimiterStrategy {
     }
 
     private void validateAndParseNumbers(String input, String[] tokens) {
+        if (input.isEmpty()) {
+            return;
+        }
+
         if (!Character.isDigit(input.charAt(0)) || !Character.isDigit(input.charAt(input.length() - 1))) {
             throw new IllegalArgumentException("표현식의 처음과 끝은 숫자로 이루어져야합니다.");
         }
 
         for (String token : tokens) {
-            System.out.println(token);
             if (token.isEmpty()) {
                 throw new IllegalArgumentException("구분자가 연속으로 입력되었습니다.");
             }
@@ -47,7 +50,7 @@ public class CustomDelimiterStrategy implements DelimiterStrategy {
                     throw new IllegalArgumentException("소수는 허용되지 않습니다: " + token);
                 }
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("유효하지 않은 구분자입니다: " + token);
+                throw new IllegalArgumentException("유효하지 않은 구분자입니다");
             }
         }
     }
@@ -56,10 +59,6 @@ public class CustomDelimiterStrategy implements DelimiterStrategy {
         String[] customs = delimiter.split("");
 
         Set<String> uniqueDelimiters = new HashSet<>();
-
-        //기본 구분자 set에 추가
-        uniqueDelimiters.add(",");
-        uniqueDelimiters.add(":");
 
         for (String custom : customs) {
             // 구분자가 숫자인지 확인
@@ -73,7 +72,7 @@ public class CustomDelimiterStrategy implements DelimiterStrategy {
             }
 
             // 중복 구분자 확인
-            if (!uniqueDelimiters.add(custom)) {
+            if (!uniqueDelimiters.add(custom) && !custom.equals(",") && !custom.equals(":")) {
                 throw new IllegalArgumentException("중복된 구분자가 있습니다: " + custom);
             }
 
@@ -81,6 +80,9 @@ public class CustomDelimiterStrategy implements DelimiterStrategy {
                 throw new IllegalArgumentException("사용할 수 없는 구분자가 있습니다: " + custom);
             }
         }
-        return customs;
+        uniqueDelimiters.add(":");
+        uniqueDelimiters.add(",");
+
+        return uniqueDelimiters.toArray(new String[0]);
     }
 }

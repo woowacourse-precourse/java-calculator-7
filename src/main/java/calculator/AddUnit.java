@@ -10,7 +10,9 @@ public class AddUnit implements Alu {
     public AddUnit(String[] numbers) {
         this.numbers = new ArrayList<>();
         for (String number : numbers) {
-            this.numbers.add(Long.parseLong(number));
+            if (!number.isEmpty()) {
+                this.numbers.add(Long.parseLong(number));
+            }
         }
     }
 
