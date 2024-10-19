@@ -14,6 +14,11 @@ public class Application {
         }
         else {
             // 커스텀 문자열 미사용
+            String[] parsedInput = input.split(",|:");
+
+            for (String s : parsedInput) {
+                sum += Integer.parseInt(s);
+            }
         }
         System.out.println("결과 : " + sum);
     }
