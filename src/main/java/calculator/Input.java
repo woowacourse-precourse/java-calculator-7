@@ -62,4 +62,18 @@ public class Input {
         return true;
     }
 
+    //사용자가 입력한 커스텀 구분자와 기본 구분자만 들어갔는지 검증
+    public static boolean validSeparator(String input, char customSeparator){
+        for(int i=4; i<input.length(); i++){
+            if(!Character.isDigit(input.charAt(i))){
+                if(!(input.charAt(i) == ','
+                        || input.charAt(i) == ':'
+                        || input.charAt(i) == customSeparator)){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 }
