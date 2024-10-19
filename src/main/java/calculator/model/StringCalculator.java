@@ -70,7 +70,7 @@ public class StringCalculator {
         for (int i = 0; i < delimitersPart.length(); i++) {  // 수정: delimitersPart.length()를 사용
             char delimiter = delimitersPart.charAt(i);
             System.out.println("추출된 특수 문자: " + delimiter);
-            delimiters.add(Character.toString(delimiter));
+            delimiters.add(Pattern.quote(Character.toString(delimiter)));
         }
 
         return String.join("|", delimiters);
