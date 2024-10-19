@@ -13,7 +13,7 @@ public class ValidatorUtils {
     }
 
     public static void validateCustomDelimiter(String customDelimiter){
-        if(customDelimiter.length() != 1){
+        if(customDelimiter.length() != 1 || Character.isDigit(customDelimiter.charAt(0))){
             throw new IllegalArgumentException("커스텀 구분자는 1자리 문자입니다.");
         }
     }

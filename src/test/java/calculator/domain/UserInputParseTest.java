@@ -22,7 +22,7 @@ class UserInputParseTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"//\n1,2,3", "//[]\n1,2,3"})
+    @ValueSource(strings = {"//\n1,2,3", "//[]\n1,2,3", "//3\n1,2,3"})
     @DisplayName("커스텀 구분자는 1자리 문자이다.")
     void 커스텀_구분자_1자리_문자_TEST(final String userInput){
         Assertions.assertThatThrownBy(() -> new UserInputParse(userInput))
