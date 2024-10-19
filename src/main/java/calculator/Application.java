@@ -13,11 +13,9 @@ public class Application {
                 new InputView(
                         new InputValidator()
                 ),
-                new StringAdditionCalculator(
-                        new DefaultStringParser()
-                )
+                new StringAdditionCalculator()
         );
-        
+
         calculatorController.run();
     }
 }
