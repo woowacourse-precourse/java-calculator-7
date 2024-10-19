@@ -13,6 +13,7 @@ public class Input {
     }
     public String[] inputSplit(){
         String delimiter = "[,:]";
+        input = input.replaceAll("\\s","");
         if (input.startsWith("//")) {
 
             int delimiterIndex = input.indexOf("\\n");
@@ -20,6 +21,7 @@ public class Input {
             delimiter = (input.substring(2,delimiterIndex));
             System.out.println(delimiter);
             input = input.substring(delimiterIndex+2);
+
         }
         tokens = input.split(delimiter);
         isValidNumber();
@@ -41,13 +43,19 @@ public class Input {
     private void isValidNumber(){
         try {
             for (String token : tokens) {
-                stringToInt(token);
+                int num = stringToInt(token);
+                isPositive(num);
             }
         }catch (NumberFormatException e){
-            throw new IllegalArgumentException("토큰이 숫자가 아닙니다");
+            throw new IllegalArgumentException("토큰이 숫자가 아닙니다.");
         }
 
         //다른 특수문자 사용
+    }
+    private void isPositive(int num){
+        if(num<0){
+            throw new IllegalArgumentException("양수가 아닙니다.");
+        }
     }
     private int stringToInt(String str){
         return Integer.parseInt(str);
