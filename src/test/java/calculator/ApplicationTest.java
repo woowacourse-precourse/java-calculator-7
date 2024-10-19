@@ -24,24 +24,17 @@ class ApplicationTest extends NsTest {
         );
     }
 
+
     @Test
     void 테스트_1() {
         assertSimpleTest(() -> {
-            run("1;;;1");
-            assertThat(output()).contains("결과 : 2");
-        });
-    }
-
-    @Test
-    void 테스트_2() {
-        assertSimpleTest(() -> {
-            run("1,2;3");
+            run("1,2:3");
             assertThat(output()).contains("결과 : 6");
         });
     }
 
     @Test
-    void 테스트_3() {
+    void 테스트_2() {
         assertSimpleTest(() -> {
             run("");
             assertThat(output()).contains("결과 : 0");
@@ -49,10 +42,10 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 테스트_4() {
+    void 테스트_3() {
         assertSimpleTest(() -> {
-            run("1;;;1");
-            assertThat(output()).contains("결과 : 2");
+            run("//;\\n1;2;3");
+            assertThat(output()).contains("결과 : 6");
         });
     }
 
