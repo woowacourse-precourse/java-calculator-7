@@ -15,7 +15,7 @@ public class CustomSeparatorValidator {
     }
 
     private void ValidateIsCustomSeparatorNumber(String input) {
-        if ('0' <= input.charAt(2) && input.charAt(2) <= '9') {
+        if (Character.isDigit(input.charAt(2))) {
             throw new IllegalArgumentException("숫자는 커스텀 구분자가 될 수 없습니다.");
         }
     }

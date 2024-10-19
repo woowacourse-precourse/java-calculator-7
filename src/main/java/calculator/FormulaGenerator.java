@@ -33,7 +33,7 @@ public class FormulaGenerator {
     }
 
     private boolean isSeparate(char input) {
-        return '0' > input || input > '9';
+        return !Character.isDigit(input);
     }
 
     private char changeSeparatorToPlusSign() {
