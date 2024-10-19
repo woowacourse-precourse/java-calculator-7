@@ -13,14 +13,19 @@ public class Calculator {
         String input = Console.readLine();
 
         try {
-            String[] numbers = splitString(input);
-            for (String number : numbers) {
-                int num = parseNumber(number.trim());
-                validateNumber(num);
-            }
+            int result = add(input);
+            System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public static int add(String input) {
+        if (input == null || input.isEmpty()) {
+            return 0;
+        }
+        String[] numbers = splitString(input);
+        return sumString(numbers);
     }
 
     public static String[] splitString(String input) {
@@ -48,6 +53,18 @@ public class Calculator {
 
     private static boolean hasCustomDelimiter(String input) {
         return input.startsWith(PREFIX_CUSTOM) && input.contains(POSTFIX_CUSTOM);
+    }
+
+    private static int sumString(String[] numbers) {
+        int sum = 0;
+        for (String number : numbers) {
+            if (!number.trim().isEmpty()) {
+                int num = parseNumber(number.trim());
+                validateNumber(num);
+                sum += num;
+            }
+        }
+        return sum;
     }
 
     private static int parseNumber(String number) {
