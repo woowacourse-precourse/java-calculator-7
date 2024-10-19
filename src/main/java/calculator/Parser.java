@@ -29,15 +29,37 @@ public class Parser {
             String regulatedInput = input.substring(delimiterIndex + 2);
 
             // 커스텀 구분자로 파싱하는 함수
-            return splitUsingCustomDelimiter(customDelimiter, regulatedInput);
+            return splitUsingCustomDelimiter(regulatedInput, customDelimiter);
         }
 
         // 커스텀 구분자의 종료점이 없는 경우, 기본 구분자를 이용
-        return new String[] {};
+        return input.split(DEFAULT_DELIMITER);
     }
 
-    private static String[] splitUsingCustomDelimiter(String customDelimiter, String regulatedInput) {
+    private static String[] splitUsingCustomDelimiter(String regulatedInput, String customDelimiter) {
+        // split() 메서드를 사용할 수 없으므로, indexOf와 substring을 활용해서 배열의 길이 결정
+        int count = 1;
+        int index = regulatedInput.indexOf(customDelimiter);
+        int customDelimiterLength = customDelimiter.length();
+        while (index != -1) {
+            count++;
+            index = regulatedInput.indexOf(customDelimiter, index + customDelimiterLength);
+        }
 
-        return new String[] {};
+        // 결정한 배열의 길이를 이용해서 계산식을 숫자 문자열로 분할
+        String[] result = new String[count];
+
+        int startIndex = 0;
+        int endIndex = regulatedInput.indexOf(customDelimiter, startIndex);
+        int tempIndex = 0;
+        while (endIndex != -1) {
+            result[tempIndex] = regulatedInput.substring(startIndex, endIndex);
+            startIndex = endIndex + customDelimiterLength;
+            tempIndex++;
+            endIndex = regulatedInput.indexOf(customDelimiter, startIndex);
+        }
+        result[tempIndex] = regulatedInput.substring(startIndex);
+
+        return result;
     }
 }
