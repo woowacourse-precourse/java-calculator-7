@@ -8,7 +8,7 @@ public class Application {
                 String input = readLine();
                 validateInput(input); // 입력 유효성 검사
                 int result = calculateSum(input); // 입력된 문자열의 합계 계산
-                System.out.println(result); // 결과 출력
+                System.out.println("결과 : " + result); // 결과 출력
         }
 
         /**
