@@ -384,6 +384,49 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    // 추가 예외 처리
+    @Test
+    void 숫자가_int_범위_초과() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("11111111111"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 실수_입력_test() {
+        assertSimpleTest(() -> {
+            run("//;\\n10.2,4:5.08;1");
+            assertThat(output()).contains("결과 : 20.28");
+        });
+    }
+
+    @Test
+    void 잘못된_실수_입력1_test() {
+        // .이 두 개 들어온 경우
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\\n1.0.2,4:5.08"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 잘못된_실수_입력2_test() {
+        // .이 구분자 바로 뒤 or 처음 온 경우
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\\n1.02,4:.08"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 잘못된_실수_입력3_test() {
+        // .이 마지막에 입력되는 경우
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\\n1.02,4.:7"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
 
     @Test
     void 예외_테스트() {
