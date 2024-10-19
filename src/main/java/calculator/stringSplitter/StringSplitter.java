@@ -2,6 +2,7 @@ package calculator.stringSplitter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -39,4 +40,26 @@ public class StringSplitter {
         return number.split(calculateSeparator);
     }
 
+    public static void main(String[] args) {
+        List<String> list = new ArrayList<>();
+        list.add(",");
+        list.add(":");
+        list.add(Pattern.quote("+"));
+        list.add(Pattern.quote("@"));
+        String regex = list.stream().collect(Collectors.joining("|"));
+        String tmp ="1+3@4:5,6"; // true
+        String tmp2 = "1-3@4:5"; // false
+        String tmp3 = "1+3!4,5@6;"; // false
+
+
+    }
+    private static void check(String tmp, Pattern pattern){
+        Matcher matcher = pattern.matcher(tmp);
+        if (matcher.matches()) {
+            System.out.println("매칭됨: \"" + tmp + "\"");
+        } else {
+            System.out.println("매칭되지 않음: \"" + tmp + "\"");
+        }
+
+    }
 }
