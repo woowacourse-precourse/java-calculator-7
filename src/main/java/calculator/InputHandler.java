@@ -6,18 +6,21 @@ import java.util.List;
 
 public class InputHandler {
     public List<Long> inputProcessor() {
-        //입력
+        String input = getInput();
+        String convertedInput = convertInput(input);
+
+        return getNumbers(convertedInput);
+    }
+
+    private static String getInput() {
         System.out.println("덧셈할 문자열을 입력해 주세요");
         String input = Console.readLine();
         Console.close();
 
-        //구분자 처리
-        String convertedInput = convertInput(input);
-        //숫자 처리
-        return getNumbers(convertedInput);
+        return input;
     }
 
-    public String convertInput(String input) {
+    private String convertInput(String input) {
         if (!input.startsWith("//")) {
             return input;
         }
@@ -45,8 +48,7 @@ public class InputHandler {
         return sb.toString();
     }
 
-    public List<Long> getNumbers(String input) {
-
+    private List<Long> getNumbers(String input) {
         List<Long> numbers = new ArrayList<>();
 
         String[] splitInput = input.split("[,;]");
@@ -64,19 +66,19 @@ public class InputHandler {
     }
 
     private boolean isValidate(String str) {
-        String REGEXP_ONLY_NUM = "^[\\d*$]";
-
-        //숫자인지 검사
+        //양수인지 검사
+        String REGEXP_ONLY_NUM = "^\\d+$";
         if (!str.matches(REGEXP_ONLY_NUM)) {
             return false;
         }
 
         //Long 범위 검사
         try {
-            //음수면 false
-            return Long.parseLong(str) > 0;
+            Long.parseLong(str);
         } catch (NumberFormatException e) {
             return false;
         }
+
+        return true;
     }
 }
