@@ -1,12 +1,10 @@
 package calculator.service.separator;
 
-import calculator.domain.number.Number;
 import calculator.domain.number.Numbers;
 import calculator.domain.separator.BasicSeparator;
 import calculator.domain.separator.CustomSeparator;
 import calculator.domain.separator.Separator;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 public class SeparatorService {
@@ -15,11 +13,7 @@ public class SeparatorService {
     private static final String SUFFIX_CUSTOM_SEPARATOR = "\\\\n";
 
     public Numbers separate(String input) {
-        return new Numbers(divideNumber(generate(input), input));
-    }
-
-    private List<Number> divideNumber(Separator separator, String value) {
-        return separator.separate(value);
+        return generate(input).separate(input);
     }
 
     private Separator generate(String input) {
