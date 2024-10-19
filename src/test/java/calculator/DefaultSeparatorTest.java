@@ -6,16 +6,16 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class DefaultSeparateTest {
+class DefaultSeparatorTest {
 
     @ParameterizedTest
     @ValueSource(chars = {',', ':'})
-    void 기본_구분자_리스트를_반환한다(char separate) {
+    void 기본_구분자_리스트를_반환한다(char separator) {
         //given & when
-        List<Character> separates = DefaultSeparate.getSeparates();
+        List<Character> separators = DefaultSeparator.getSeparators();
 
         //then
-        assertThat(separates).contains(separate);
+        assertThat(separators).contains(separator);
     }
 
 }

@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class FormatValidator {
 
-    private static final Set<Character> separators = new HashSet<>(DefaultSeparate.getSeparates());
+    private static final Set<Character> separators = new HashSet<>(DefaultSeparator.getSeparators());
 
     /**
      * 주어진 수식(formula)을 유효성 검사하는 메서드입니다.
@@ -65,19 +65,19 @@ public class FormatValidator {
 
     private boolean isCustomStartFormat(String formula) {
         int formulaStartIdx = 5;
-        int customSeparateIdx = 2;
+        int customSeparatorIdx = 2;
         int lastFormatStartIdx = 3;
 
         if (formula.length() < formulaStartIdx) {
             return false;
         }
 
-        char customSeparate = formula.charAt(customSeparateIdx);
+        char customSeparator = formula.charAt(customSeparatorIdx);
 
-        return !Character.isDigit(customSeparate)
+        return !Character.isDigit(customSeparator)
             && CustomFormulaFormat.hasLastFormat(formula, lastFormatStartIdx)
             && Character.isDigit(formula.charAt(formulaStartIdx))
-            && isNumberStartFormat(formula.substring(5), customSeparate);
+            && isNumberStartFormat(formula.substring(5), customSeparator);
     }
 
     private boolean isNullOrEmpty(String str) {

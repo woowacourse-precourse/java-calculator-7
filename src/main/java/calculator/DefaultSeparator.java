@@ -3,17 +3,17 @@ package calculator;
 import java.util.Arrays;
 import java.util.List;
 
-public enum DefaultSeparate {
+public enum DefaultSeparator {
     COMMA(','), COLON(':');
 
-    DefaultSeparate(char character) {
+    DefaultSeparator(char character) {
         this.character = character;
     }
 
     private final char character;
 
-    public static List<Character> getSeparates() {
-        return Arrays.stream(DefaultSeparate.values())
+    public static List<Character> getSeparators() {
+        return Arrays.stream(DefaultSeparator.values())
             .map(sp -> sp.character)
             .toList();
     }

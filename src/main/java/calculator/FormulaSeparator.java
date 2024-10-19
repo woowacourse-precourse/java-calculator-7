@@ -7,10 +7,10 @@ import java.util.Set;
 
 public class FormulaSeparator {
 
-    private static final int CUSTOM_SEPARATE_IDX = 2;
+    private static final int CUSTOM_SEPARATOR_IDX = 2;
     private static final int CUSTOM_FORMULA_START_IDX = 5;
     private final FormatValidator formatValidator = new FormatValidator();
-    private final Set<Character> separators = new HashSet<>(DefaultSeparate.getSeparates());
+    private final Set<Character> separators = new HashSet<>(DefaultSeparator.getSeparators());
 
     public List<Integer> getNumbers(String formula) {
         formatValidator.validateFormula(formula);
@@ -19,15 +19,15 @@ public class FormulaSeparator {
             return List.of();
         }
 
-        if (hasCustomSeparate(formula)) {
-            separators.add(formula.charAt(CUSTOM_SEPARATE_IDX));
+        if (hasCustomSeparator(formula)) {
+            separators.add(formula.charAt(CUSTOM_SEPARATOR_IDX));
             formula = formula.substring(CUSTOM_FORMULA_START_IDX);
         }
 
         return parseNumbers(formula);
     }
 
-    private boolean hasCustomSeparate(String formula) {
+    private boolean hasCustomSeparator(String formula) {
         return CustomFormulaFormat.hasFirstFormat(formula);
     }
 
