@@ -1,11 +1,12 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.Test;
-
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import org.junit.jupiter.api.Test;
+
+import camp.nextstep.edu.missionutils.test.NsTest;
 
 class ApplicationTest extends NsTest {
     @Test
@@ -25,7 +26,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 기본_구분자_테스트_1(){
+    void 기본_구분자_테스트_1() {
         assertSimpleTest(() -> {
             run("1,2,3");
             assertThat(output()).contains("결과 : 6");
@@ -33,7 +34,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 기본_구분자_테스트_2(){
+    void 기본_구분자_테스트_2() {
         assertSimpleTest(() -> {
             run("1:2:3");
             assertThat(output()).contains("결과 : 6");
@@ -57,7 +58,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀_구분자_예외_테스트2() {
+    void 커스텀_구분자_예외_테스트_2() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("//\\n\\n1\\n3"))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -66,6 +67,6 @@ class ApplicationTest extends NsTest {
 
     @Override
     public void runMain() {
-        Application.main(new String[]{});
+        Application.main(new String[] {});
     }
 }
