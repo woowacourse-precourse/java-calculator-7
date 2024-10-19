@@ -19,8 +19,8 @@ public class CalculatorController {
 
     public void run() {
         String input = inputView.readSentence();
-        boolean isEmpty = validator.checkIsEmpty(input);
-        if (!validator.checkHasNumber(input)) {
+
+        if (!validator.checkIsEmpty(input) && !validator.checkHasNumber(input)) {
             System.out.println("0");
             return;
         }
