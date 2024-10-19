@@ -1,20 +1,25 @@
 package calculator.service;
 
 import calculator.domain.Calculator;
+import calculator.error.ExceptionHandler;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CalculatorService {
 
     Calculator calculator;
+    ExceptionHandler exceptionHandler;
     boolean isValid;
 
     public void setIsValid(boolean valid) {
         isValid = valid;
     }
 
-    public CalculatorService(Calculator calculator) {
+    public CalculatorService(Calculator calculator, ExceptionHandler exceptionHandler) {
         this.calculator = calculator;
+        this.exceptionHandler = exceptionHandler;
         isValid = true;
     }
 
@@ -40,29 +45,33 @@ public class CalculatorService {
         System.out.println("분리된 애들: " + newSeparator +" " +value);
 
         makeNewSeparator(newSeparator);
-        int[] processedValue = checkValue(value);
+        List<Integer> processedValue = checkValue(value);
         if (!isValid) {
-            throw new IllegalArgumentException();
+            exceptionHandler.handleException(new IllegalArgumentException());
         }
         calculator.setProcessedValue(processedValue);
     }
 
-    private int[] checkValue(String value) {
-        String regex = "[" + String.join("", calculator.getSeparators()) + "]";
-        String[] targets = value.split(regex);
-        int[] processedValue = new int[targets.length];
+    private List<Integer> checkValue(String value) {
+        List<String> resultList = new ArrayList<>(List.of(value)); // 초기 결과 리스트
         try {
-            for (int i = 0; i < targets.length; i++) {
-                int number = Integer.parseInt(targets[i]);  // 문자열을 정수로 변환
-                if (number <= 0) {
-                    isValid = false;
-                    break;
+            for (String separator : calculator.getSeparators()) {
+                List<String> tempList = new ArrayList<>();
+                for (String item : resultList) {
+                    tempList.addAll(Arrays.asList(item.split("\\" + separator)));
                 }
-                processedValue[i] = number;
+                resultList = tempList;
             }
         } catch (Exception e) {
+            System.out.println("숫자가 아니어서 안됨");
             isValid = false;
         }
+        List<Integer> processedValue = new ArrayList<>();
+        for (String item : resultList) {
+            System.out.print(item + " ");
+            processedValue.add(Integer.parseInt(item));
+        }
+        System.out.println();
         return processedValue;
     }
 
@@ -83,6 +92,7 @@ public class CalculatorService {
         List<String> newSeparators = calculator.getSeparators();
         newSeparators.add(result);
         calculator.setSeparators(newSeparators);
+        System.out.println("새로운 값 :" + calculator.getSeparators());
     }
 
     public List<Integer> extractNumbersToList() {

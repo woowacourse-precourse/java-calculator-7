@@ -1,6 +1,7 @@
 package calculator.controller;
 
 import calculator.domain.Calculator;
+import calculator.error.ExceptionHandler;
 import calculator.service.CalculatorService;
 
 import java.io.BufferedReader;
@@ -16,7 +17,8 @@ public class CalculatorController {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             String input = br.readLine();
             Calculator calculator = new Calculator();
-            CalculatorService service = new CalculatorService(calculator);
+            ExceptionHandler exceptionHandler = new ExceptionHandler();
+            CalculatorService service = new CalculatorService(calculator, exceptionHandler);
             service.getInputValues(input);
             System.out.println(calculator.getRawValue());
             service.validateInput();
