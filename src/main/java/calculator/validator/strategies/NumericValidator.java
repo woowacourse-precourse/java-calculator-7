@@ -2,6 +2,7 @@ package calculator.validator.strategies;
 
 import calculator.util.DelimiterUtils;
 import calculator.view.ErrorMessage;
+import java.util.Arrays;
 
 // 숫자가 아닌 입력값을 검증하는 클래스
 public class NumericValidator implements ValidationStrategy {
@@ -16,15 +17,8 @@ public class NumericValidator implements ValidationStrategy {
 
     // 입력이 숫자와 구분자로만 이루어져 있는지 확인
     private boolean containsOnlyValidCharacters(String input) {
-        String[] numbers = DelimiterUtils.splitByDelimiter(input);
-
-        // 숫자 배열을 확인하여 유효한지 판단
-        for (String number : numbers) {
-            if (!isValidNumber(number)) {
-                return false;
-            }
-        }
-        return true; // 모든 숫자가 유효할 경우
+        return Arrays.stream(DelimiterUtils.splitByDelimiter(input))  // 문자열 배열을 스트림으로 변환
+                .allMatch(this::isValidNumber);  // 모든 요소가 유효한지 검사
     }
 
     // 숫자가 유효한지 확인하는 헬퍼 메서드
