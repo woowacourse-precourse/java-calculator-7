@@ -16,6 +16,7 @@ public class InputView {
     public List<Number> readNumbers() {
         System.out.println(INPUT_MESSAGE);
         String input = Console.readLine();
+
         int index = inputHandler.isCustomDelimiter(input);
         input = input.substring(index);
         return inputHandler.parseNumbers(input);

@@ -12,17 +12,19 @@ public class InputHandler {
     private String delimiter = "[,:]";
 
     public int isCustomDelimiter(String input) {
-        int length = CUSTOM_DELIMITER_PREFIX.length();
-        int index = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
-        if (input.startsWith(CUSTOM_DELIMITER_PREFIX) && index == length + CUSTOM_DELIMITER_LENGTH) {
-            delimiter = String.valueOf(input.charAt(length));
-            return index + CUSTOM_DELIMITER_SUFFIX.length();
+        int prefixLength = CUSTOM_DELIMITER_PREFIX.length();
+        int suffixIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
+
+        if (input.startsWith(CUSTOM_DELIMITER_PREFIX) && suffixIndex == prefixLength + CUSTOM_DELIMITER_LENGTH) {
+            delimiter = String.valueOf(input.charAt(prefixLength));
+            return suffixIndex + CUSTOM_DELIMITER_SUFFIX.length();
         }
         return 0;
     }
 
     public List<Number> parseNumbers(String input) {
         List<Number> parsedNumbers = new ArrayList<>();
+
         String[] Numbers = input.split(delimiter);
         for (String number : Numbers) {
             parsedNumbers.add(new Number(number));
