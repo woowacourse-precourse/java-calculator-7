@@ -123,4 +123,21 @@ class CalculatorServiceTest {
                 new Object[]{new String[]{"14", "1", "5", "1", "6"}, 27}
         );
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "'1,2,3', 6",
+            "'//;\\n1', 1",
+            "'//;\\n1:2', 3",
+            "'//;\\n', 0",
+    })
+    @DisplayName("메인 로직 테스트")
+    void checkLogic(String userInput, long expected) {
+
+        // Given & When
+        long answer = calculatorService.logic(userInput);
+
+        // Then
+        assertThat(answer).isEqualTo(expected);
+    }
 }
