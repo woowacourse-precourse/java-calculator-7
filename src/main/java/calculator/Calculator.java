@@ -45,9 +45,14 @@ public class Calculator {
     //getDelimTotal(): 연산자 모두 합쳐서 String 정규식으로 만들기
     private String getDelimTotal() {
         StringBuilder DelimTotal = new StringBuilder();
+
         for (String delimiter : delimiters) {
             DelimTotal.append(delimiter).append("|");
         }
+
+        // 마지막 추가된 |를 제거
+        DelimTotal.deleteCharAt(DelimTotal.length() - 1);
+
         return DelimTotal.toString();
     }
 
