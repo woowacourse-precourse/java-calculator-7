@@ -1,18 +1,14 @@
 package calculator.number.util.impl;
 
-import calculator.constant.ErrorMessage;
 import calculator.number.util.NumberConvertorService;
+
 import java.util.List;
 
-public class LongConvertor implements NumberConvertorService{
+public class DoubleConvertor implements NumberConvertorService{
     @Override
     public Number stringToNumberBlankIsZero(String input) {
-        try {
-            if (input.isBlank()) return 0L;
-            return Long.parseLong(input);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ErrorMessage.MAX_VALUE_ERROR);
-        }
+        if (input.isBlank()) return 0.0;
+        return Double.parseDouble(input);
     }
 
     @Override
