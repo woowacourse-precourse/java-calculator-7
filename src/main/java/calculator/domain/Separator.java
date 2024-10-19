@@ -29,8 +29,9 @@ public class Separator {
     private void validateLetter(String customSeparator) {
         try {
             Integer.parseInt(customSeparator);
-        } catch (NumberFormatException e) {
             throw new IllegalArgumentException(NOT_NUMBER_MESSAGE);
+        } catch (NumberFormatException e) {
+
         }
     }
 
