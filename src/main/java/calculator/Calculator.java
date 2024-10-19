@@ -10,7 +10,7 @@ public class Calculator {
 
     private String equation;
     private String delimiters;
-    private List<Long> positiveNumbers;
+    private final List<Long> positiveNumbers;
     private String customDelimiter;
     private final String customDelimiterStart;
     private final String customDelimiterEnd;
