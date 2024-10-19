@@ -1,11 +1,28 @@
 package calculator;
 
+import camp.nextstep.edu.missionutils.Console;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
+        // 사용자 입력
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        String inputString = Console.readLine();
+
+        // 기능 1: 커스텀 구분자 확인 및 전체 구분자 정의
+        List<Character> seperators = getSeparator(inputString);
+
+        // 기능 2: 사용자의 입력값 검증
+        inputString = validateInputString(inputString, seperators);
+
+        // 기능 3: 구분자를 기준으로 덧셈
+        int result = sum(inputString, seperators);
+
+        // 출력
+        System.out.println("결과 : "+ result);
     }
 
     // 기능 1: 커스텀 구분자 확인 및 전체 구분자 정의
