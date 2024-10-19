@@ -8,9 +8,11 @@ public class InputValidator {
         return input.isEmpty();
     }
 
-    public void validateInputPattern(String input) {
-        if (!input.matches(DEFAULT_DELIMITER_PATTERN) && !input.matches(CUSTOM_DELIMITER_PATTERN)) {
-            throw new IllegalArgumentException("잘못된 형식의 입력입니다.");
+    private void validateInputPattern(String input) {
+        if (input.startsWith("//")) {
+            validateCustomDelimiterPattern(input);
+        } else {
+            validateDefaultDelimiterPattern(input);
         }
     }
 
@@ -20,4 +22,9 @@ public class InputValidator {
         }
     }
 
+    private void validateDefaultDelimiterPattern(String input) {
+        if (!input.matches(DEFAULT_DELIMITER_PATTERN)) {
+            throw new IllegalArgumentException("잘못된 형식의 입력입니다.");
+        }
+    }
 }
