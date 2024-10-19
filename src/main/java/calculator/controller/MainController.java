@@ -3,7 +3,7 @@ package calculator.controller;
 import calculator.model.Calculator;
 import calculator.model.CustomDelimiter;
 import calculator.model.Splitter;
-import calculator.validation.InputValidator;
+import calculator.validation.OperandValidator;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -12,13 +12,13 @@ public class MainController {
     private OutputView outputView;
     private Calculator calculator;
     private CustomDelimiter customDelimiter;
-    private InputValidator inputValidator;
+    private OperandValidator inputValidator;
 
     public MainController(){
         this.inputView = new InputView();
         this.outputView = new OutputView();
         this.calculator = new Calculator();
-        this.inputValidator = new InputValidator();
+        this.inputValidator = new OperandValidator();
     }
 
     public void start(){

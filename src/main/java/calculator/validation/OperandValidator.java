@@ -1,7 +1,7 @@
 package calculator.validation;
 
 
-public class InputValidator {
+public class OperandValidator {
     private static final String NON_NATURAL_NUMBER = "자연수가 아닌 값이 포함되어 있습니다.";
 
 
