@@ -19,15 +19,15 @@ public class StringSumCalculator {
             String numbersWithDelimiter = input.substring(input.indexOf(Delimiter.CUSTOM_DELIMITER_SUFFIX) + 2);
             splitAndSum(numbersWithDelimiter, customDelimiter);
         } else {
-            Delimiter customDelimiter = Delimiter.createDefaultDelimiter();
-            splitAndSum(input, customDelimiter);
+            Delimiter defaultDelimiter = Delimiter.createDefaultDelimiter();
+            splitAndSum(input, defaultDelimiter);
         }
     }
 
     private void splitAndSum(String numbersWithDelimiter, Delimiter delimiter) {
         String[] splitedNumbers = DelimiterSeparator.split(numbersWithDelimiter, delimiter);
         List<PositiveNumber> numbers = NumberListConverter.toNumbers(splitedNumbers);
-        PositiveNumber sum = Calculator.sum(numbers);
+        PositiveNumber sum = PositiveNumber.sum(numbers);
         outputHandler.printResult(sum);
     }
 }
