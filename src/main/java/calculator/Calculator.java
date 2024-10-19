@@ -22,8 +22,7 @@ public class Calculator {
     }
 
     /**
-     * 커스텀 구분자 유뮤
-     * 커스텀 구분자 짝 맞는지 확인 후 파싱
+     * 커스텀 구분자 유뮤 커스텀 구분자 짝 맞는지 확인 후 파싱
      */
     private void parseCustomSeparator() {
         Stack<String> buffer = new Stack<>();
@@ -37,8 +36,9 @@ public class Calculator {
                 flag = true;
                 i += 1;
             } else if (inputString.charAt(i) == '\\' && inputString.charAt(i + 1) == 'n') {
-                if (buffer.isEmpty() || !flag)
+                if (buffer.isEmpty() || !flag) {
                     throw new IllegalArgumentException("커스텀 구분자의 짝이 맞지 않습니다.");
+                }
                 buffer.pop();
                 idx++;
                 flag = false;
@@ -70,9 +70,9 @@ public class Calculator {
      */
     private int isSeparator(String tmpString) {
         for (int i = 0; i < separator.size(); i++) {
-            // 이 부분 예외처리 잘해야 함
-            if (tmpString.length() < separator.get(i).length())
+            if (tmpString.length() < separator.get(i).length()) {
                 continue;
+            }
             if (separator.get(i).equals(tmpString.substring(0, separator.get(i).length()))) {
                 return separator.get(i).length();
             }
@@ -129,4 +129,3 @@ public class Calculator {
         printResult();
     }
 }
-
