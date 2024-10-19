@@ -42,7 +42,7 @@ public class OutputViewTest extends NsTest {
 
         try {
             Number number = new Number(invalidInput);
-            number.stringToInt();
+            number.convertStringToInt();
         } catch (IllegalArgumentException e) {
             outputView.printError(e.getMessage());
             assertThat(outputStreamCaptor.toString().trim())

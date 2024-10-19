@@ -23,7 +23,7 @@ public class CalculatorController {
             String[] splitNumbers = delimiter.splitString();
 
             Number number = new Number(splitNumbers);
-            int result = number.addCalculator();
+            int result = number.calculateSum();
             outputView.printResult(result);
 
         } catch (IllegalArgumentException e) {

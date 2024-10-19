@@ -14,7 +14,7 @@ public class NumberTest extends NsTest {
         delimiter.checkCustomDelimiter();
         assertSimpleTest(() -> {
             Number number = new Number(delimiter.splitString());
-            number.stringToInt();
+            number.convertStringToInt();
             assertThat(number.getNumbers()).isEqualTo(new int[]{1, 2, 3});
         });
     }
@@ -25,7 +25,7 @@ public class NumberTest extends NsTest {
         delimiter.checkCustomDelimiter();
         assertSimpleTest(() -> {
             Number number = new Number(delimiter.splitString());
-            number.stringToInt();
+            number.convertStringToInt();
             assertThat(number.getNumbers()).isEqualTo(new int[]{1, 2, 3});
         });
     }
@@ -36,7 +36,7 @@ public class NumberTest extends NsTest {
         delimiter.checkCustomDelimiter();
         assertSimpleTest(() -> {
             Number number = new Number(delimiter.splitString());
-            assertThat(number.addCalculator()).isEqualTo(6);
+            assertThat(number.calculateSum()).isEqualTo(6);
         });
     }
 
@@ -46,7 +46,7 @@ public class NumberTest extends NsTest {
         delimiter.checkCustomDelimiter();
         assertSimpleTest(() -> {
             Number number = new Number(delimiter.splitString());
-            assertThat(number.addCalculator()).isEqualTo(6);
+            assertThat(number.calculateSum()).isEqualTo(6);
         });
     }
 
@@ -56,7 +56,7 @@ public class NumberTest extends NsTest {
         delimiter.checkCustomDelimiter();
         assertSimpleTest(() -> {
             Number number = new Number(delimiter.splitString());
-            number.stringToInt();
+            number.convertStringToInt();
             for (int num : number.getNumbers()) {
                 assertThat(num).isGreaterThanOrEqualTo(1);
             }
