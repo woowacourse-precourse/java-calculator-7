@@ -1,22 +1,22 @@
-package calculator;
+package calculator.domain;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CalculatorParamDomain {
+public class CalculatorParam {
 
     private List<Character> delimiters;
     private List<String> stringNumbers;
     private List<Integer> numbers;
 
-    protected CalculatorParamDomain() {
+    protected CalculatorParam() {
         this.delimiters = List.of(',', ':');
         this.numbers = new ArrayList<>();
         this.stringNumbers = new ArrayList<>();
     }
 
-    public static CalculatorParamDomain of() {
-        return new CalculatorParamDomain();
+    public static CalculatorParam of() {
+        return new CalculatorParam();
     }
 
     public void changeUserDelimiters(List<Character> delimiters) {

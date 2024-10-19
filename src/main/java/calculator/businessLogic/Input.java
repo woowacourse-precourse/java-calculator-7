@@ -1,23 +1,25 @@
-package calculator;
+package calculator.businessLogic;
+
+import calculator.domain.CalculatorParam;
 
 import java.util.List;
 
-import static calculator.message.InputMessage.구분자인덱스;
-import static calculator.message.InputMessage.입력안내문;
+import static calculator.message.Message.구분자인덱스;
+import static calculator.message.Message.입력안내문;
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
-public class InputParam {
+public class Input {
 
     private final Validator validator;
     private final Split split;
 
-    protected InputParam() {
+    protected Input() {
         this.validator = Validator.of();
         this.split = Split.of();
     }
 
-    public static InputParam of() {
-        return new InputParam();
+    public static Input of() {
+        return new Input();
     }
 
     public String getInput() {
@@ -26,8 +28,8 @@ public class InputParam {
         return readLine();
     }
 
-    public CalculatorParamDomain getUserNumber(String userInput) {
-        CalculatorParamDomain domain = CalculatorParamDomain.of();
+    public CalculatorParam getUserNumber(String userInput) {
+        CalculatorParam domain = CalculatorParam.of();
 
         splitEnter(userInput, domain);
         findDelimiters(userInput, domain);
@@ -35,12 +37,12 @@ public class InputParam {
         return domain;
     }
 
-    private void splitEnter(String userInput, CalculatorParamDomain domain) {
+    private void splitEnter(String userInput, CalculatorParam domain) {
         List<String> splitEnter = split.splitInputOfEnter(userInput);
         domain.splitStringNumbers(splitEnter);
     }
 
-    private void findDelimiters(String userInput, CalculatorParamDomain domain) {
+    private void findDelimiters(String userInput, CalculatorParam domain) {
         if(validator.validDelimiters(userInput)) {
             validator.isNullDelimiters(domain.getStringNumbers());
             List<String> splitInput = domain.getStringNumbers();
@@ -49,7 +51,7 @@ public class InputParam {
         }
     }
 
-    private void findNumbers(CalculatorParamDomain domain) {
+    private void findNumbers(CalculatorParam domain) {
         split.splitNumberOfDelimiter(domain);
         List<Integer> parseNumbers = validator.tryParseInteger(domain.getStringNumbers());
         domain.parseUserNumbers(parseNumbers);

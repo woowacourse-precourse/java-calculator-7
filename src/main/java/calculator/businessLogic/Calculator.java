@@ -1,11 +1,15 @@
-package calculator;
+package calculator.businessLogic;
+
+import calculator.domain.CalculatorParam;
+
+import static calculator.message.Message.결과안내문;
 
 public class Calculator {
 
-    private final InputParam inputParam;
+    private final Input input;
 
     protected Calculator() {
-        this.inputParam = InputParam.of();
+        this.input = Input.of();
     }
 
     public static Calculator of() {
@@ -13,14 +17,14 @@ public class Calculator {
     }
 
     public void calculate() {
-        String userInput = inputParam.getInput();
+        String userInput = input.getInput();
         tryCalculate(userInput);
     }
 
     private void tryCalculate(String userInput) {
         try{
-            CalculatorParamDomain domain = inputParam.getUserNumber(userInput);
-            System.out.println("결과 : " + domain.getSumNumbers());
+            CalculatorParam domain = input.getUserNumber(userInput);
+            System.out.println(결과안내문 + domain.getSumNumbers());
         } catch(IllegalArgumentException e) {
             System.out.println(e.getMessage());
             throw new IllegalArgumentException(e);

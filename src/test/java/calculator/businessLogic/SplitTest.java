@@ -1,5 +1,6 @@
-package calculator;
+package calculator.businessLogic;
 
+import calculator.domain.CalculatorParam;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 
@@ -29,7 +30,7 @@ class SplitTest {
 
     @Test
     void 구분자_분리_확인() {
-        CalculatorParamDomain domain = CalculatorParamDomain.of();
+        CalculatorParam domain = CalculatorParam.of();
         List<String> splitEnter = List.of("12:45,36");
         List<String> expect = List.of("12", "45", "36");
 

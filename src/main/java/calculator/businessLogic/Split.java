@@ -1,8 +1,13 @@
-package calculator;
+package calculator.businessLogic;
+
+import calculator.domain.CalculatorParam;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static calculator.message.Message.구분자시작;
+import static calculator.message.Message.입력끝구분자;
 
 public class Split {
 
@@ -14,16 +19,16 @@ public class Split {
     }
 
     public List<String> splitInputOfEnter(String inputData) {
-        List<String> splitEnter = splitString(inputData, "\\\\n");
+        List<String> splitEnter = splitString(inputData, 입력끝구분자);
         List<String> splitSlash = new ArrayList<>();
 
         splitEnter.forEach(o -> {
-            splitSlash.addAll(splitString(o, "//"));
+            splitSlash.addAll(splitString(o, 구분자시작));
         });
         return splitSlash;
     }
 
-    public void splitNumberOfDelimiter(CalculatorParamDomain domain) {
+    public void splitNumberOfDelimiter(CalculatorParam domain) {
         String stringNumbers = domain.getStringNumbers().getLast();
         List<String> stringNumberList = new ArrayList<>(List.of(stringNumbers));
 

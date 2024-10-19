@@ -1,9 +1,14 @@
-package calculator;
+package calculator.businessLogic;
 
 import calculator.message.ErrorMessage;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static calculator.message.Message.구분자시작;
+import static calculator.message.Message.구분자인덱스;
+import static calculator.message.Message.구분자크기;
+import static calculator.message.Message.음수확인;
 
 public class Validator {
 
@@ -15,11 +20,11 @@ public class Validator {
     }
 
     public Boolean validDelimiters(String inputData) {
-        return inputData.contains("//");
+        return inputData.contains(구분자시작);
     }
 
     public void isNullDelimiters(List<String> splitSlash) {
-        if(splitSlash.size() != 3 || splitSlash.get(1).isEmpty()) {
+        if(splitSlash.size() != 구분자크기 || splitSlash.get(구분자인덱스).isEmpty()) {
             throw new IllegalArgumentException(ErrorMessage.구분자입력에러메시지.getMessage());
         }
     }
@@ -38,7 +43,7 @@ public class Validator {
 
     private Integer isPositiveInt(String oneNumber) {
         int num = Integer.parseInt(oneNumber);
-        if(num < 0) {
+        if(num < 음수확인) {
             throw new IllegalArgumentException(ErrorMessage.음수입력에러메시지.getMessage());
         }
         return num;
