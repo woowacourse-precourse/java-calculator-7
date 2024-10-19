@@ -19,6 +19,7 @@ public class Application {
 
         int[] extractedNumbers = extractNumbers(delim, inputString);
         int result = calculate(extractedNumbers);
+        showResult(result);
     }
 
     private static String[] getInputString() {
@@ -62,5 +63,9 @@ public class Application {
         }
 
         return sum;
+    }
+
+    private static void showResult(int result) {
+        System.out.printf("결과 : %d%n", result);
     }
 }
