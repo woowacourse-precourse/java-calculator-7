@@ -1,7 +1,6 @@
 package calculator.domain;
 
-import static calculator.constants.DelimiterConstants.*;
-
+import calculator.constants.DelimiterConstants;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,12 +9,12 @@ public class Parser {
         if(string == null || string.length() < 5)
             return false;
 
-        if(!string.startsWith(CUSTOM_DELIMITER_PREFIX))
+        if(!string.startsWith(DelimiterConstants.CUSTOM_DELIMITER_PREFIX))
             return false;
 
         int endIndex = 2;
         for(; endIndex < string.length()-1; endIndex++){
-            if(string.startsWith(CUSTOM_DELIMITER_SUFFIX, endIndex))
+            if(string.startsWith(DelimiterConstants.CUSTOM_DELIMITER_SUFFIX, endIndex))
                break;
         }
 
@@ -29,7 +28,7 @@ public class Parser {
         StringBuilder delimiter = new StringBuilder();
 
         for(int index = 2; index < string.length()-1; index++){
-            if(string.startsWith(CUSTOM_DELIMITER_SUFFIX, index))
+            if(string.startsWith(DelimiterConstants.CUSTOM_DELIMITER_SUFFIX, index))
                 break;
 
             delimiter.append(string.charAt(index));
