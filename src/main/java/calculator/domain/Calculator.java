@@ -54,7 +54,7 @@ public class Calculator {
 
     private static void isNumber(String num) {
         if (!(num.matches("[0-9]{0,}"))){
-            throw new IllegalArgumentException("존재하지 않는 커스텀 구분자입니다");
+            throw new IllegalArgumentException(MessageType.INVALID_SEPERATOR.getMessage());
         }
     }
 
