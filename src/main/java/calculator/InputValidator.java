@@ -2,7 +2,11 @@ package calculator;
 
 public class InputValidator {
 
-    public void delimiterValidate(String delimiter) {
+    private InputValidator() {
+        // 인스턴스 생성 방지
+    }
+
+    public static void delimiterValidate(String delimiter) {
         try {
             Integer.parseInt(delimiter);
             throw new IllegalArgumentException("숫자는 구분자가 될 수 없습니다.");
@@ -11,7 +15,7 @@ public class InputValidator {
         }
     }
 
-    public void validate(String[] numbers) {
+    public static void validate(String[] numbers) {
         for (String number : numbers) {
             int num;
             try {

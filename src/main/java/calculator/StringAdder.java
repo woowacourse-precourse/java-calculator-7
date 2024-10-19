@@ -4,12 +4,6 @@ import java.util.regex.Pattern;
 
 public class StringAdder {
 
-    private final InputValidator validator;
-
-    public StringAdder(InputValidator validator) {
-        this.validator = validator;
-    }
-
     private int findDelimiterEndIndex(String input) {
         if (input.startsWith("//") && input.contains("\\n")) {
             return input.indexOf("\\n");
@@ -22,7 +16,7 @@ public class StringAdder {
         int delimiterEndIndex = findDelimiterEndIndex(input);
         if (delimiterEndIndex != -1) {
             delimiter = input.substring(2, delimiterEndIndex);
-            validator.delimiterValidate(delimiter);
+            InputValidator.delimiterValidate(delimiter);
         }
         return delimiter;
     }
@@ -60,7 +54,7 @@ public class StringAdder {
 
         String[] numbers = splitNumbers(input, delimiter);
 
-        validator.validate(numbers);
+        InputValidator.validate(numbers);
 
         return sumNumbers(numbers);
     }
