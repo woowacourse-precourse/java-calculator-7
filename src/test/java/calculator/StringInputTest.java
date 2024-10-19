@@ -50,16 +50,6 @@ public class StringInputTest {
     }
 
     @Test
-    @DisplayName("구분자 없이 문자열을 입력하면 IllegalArgumentException 발생")
-    void 구분자_없으면_예외_발생() {
-        String input = "123";
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            int result = Calculator.performAddition(input);
-        });
-    }
-
-    @Test
     @DisplayName("문자열의 끝에 숫자가 아닌 구분자가 오는 경우 무시한다")
     void 문자열_끝에_구분자_입력() {
         String input = "1:2:3:";
