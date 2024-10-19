@@ -15,4 +15,13 @@ public class IOController {
 		Console.close();
 		return inputStr;
 	}
+
+	/**
+	 * 출력
+	 *
+	 * @param totalSum
+	 */
+	public void print(long totalSum) {
+		System.out.println("결과 : " + totalSum);
+	}
 }
