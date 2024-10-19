@@ -73,4 +73,15 @@ class CustomSeparatorDetectorImplTest {
         // then
         assertThat(customSeparator).isEqualTo("//");
     }
+
+    @Test
+    @DisplayName("커스텀 구분자 입력 포맷 제거")
+    void removeCustomSeparatorFormat() {
+        // given
+        String input = "//;\\n1;2;3";
+        // when
+        String removeInput = detector.removeCustomFormat(input, ";");
+        // then
+        assertThat(removeInput).isEqualTo("1;2;3");
+    }
 }

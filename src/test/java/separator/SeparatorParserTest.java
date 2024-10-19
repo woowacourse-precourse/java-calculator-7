@@ -1,5 +1,6 @@
 package separator;
 
+import calculator.AppConfig;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -7,9 +8,11 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class SeparatorParserImplTest {
-    private static Separator separator = new SeparatorImpl();
-    private static final SeparatorParser parser = new SeparatorParserImpl();
+public class SeparatorParserTest {
+    private static final AppConfig appConfig = new AppConfig();
+    private static final SeparatorParser parser = appConfig.separatorParser();
+
+    private static Separator separator;
 
     @BeforeEach
     void setUp() {
