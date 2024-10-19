@@ -1,7 +1,10 @@
 package calculator.config;
 
 import calculator.controller.CalculatorController;
-import calculator.domain.*;
+import calculator.domain.Calculator;
+import calculator.domain.CustomDelimiterExtractor;
+import calculator.domain.NumberExtractor;
+import calculator.domain.StringSplitter;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -23,10 +26,6 @@ public class AppConfig {
     }
 
     public StringSplitter stringTokenizer() {
-        return new StringSplitter(delimiterHandler());
-    }
-
-    public DelimiterHandler delimiterHandler() {
-        return new DelimiterHandler(new CustomDelimiterExtractor());
+        return new StringSplitter(new CustomDelimiterExtractor());
     }
 }

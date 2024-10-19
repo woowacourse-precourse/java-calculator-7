@@ -50,7 +50,6 @@ class NumberExtractorTest {
 
     private NumberExtractor createNumberStringExtractor() {
         return new NumberExtractor(
-                new StringSplitter(new DelimiterHandler(
-                        new CustomDelimiterExtractor())));
+                new StringSplitter(new CustomDelimiterExtractor()));
     }
 }
