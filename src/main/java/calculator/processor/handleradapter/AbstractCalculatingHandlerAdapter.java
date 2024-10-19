@@ -10,6 +10,7 @@ public abstract class AbstractCalculatingHandlerAdapter implements HandlerAdapte
 
     protected static String delimiter = ":|,";
 
+
     @Override
     public abstract boolean supports(Request request);
 
@@ -30,6 +31,6 @@ public abstract class AbstractCalculatingHandlerAdapter implements HandlerAdapte
     }
 
     protected void addDelimiter(char newDelimiter) {
-        delimiter += ("|" + newDelimiter);
+        delimiter += "|" + "\\" + newDelimiter;
     }
 }
