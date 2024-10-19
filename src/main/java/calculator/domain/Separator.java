@@ -24,4 +24,8 @@ public class Separator {
     public static List<Separator> getDefaultSeparators() {
         return Arrays.stream(DEFAULT_SEPARATOR).map(Separator::new).toList();
     }
+
+    public Character getValue() {
+        return value;
+    }
 }
