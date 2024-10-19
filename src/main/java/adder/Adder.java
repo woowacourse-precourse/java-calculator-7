@@ -53,27 +53,25 @@ public class Adder {
     public ArrayList<String> parseStringWithSeparators(String calculationFormula){
 
         ArrayList<String> parsedString = new ArrayList<>();
-        String number = "";
+        StringBuilder number = new StringBuilder();
 
         for(int i = 0; i < calculationFormula.length(); i++) {
 
             char element = calculationFormula.charAt(i);
+            String separator = String.valueOf(element);
 
-            if(isSeparator(String.valueOf(element))){
-                if(!number.isEmpty()) {
-                    parsedString.add(number);
-                }
-                parsedString.add(String.valueOf(element));
-                number = "";
+            if (isSeparator(separator) && !number.isEmpty()) {
+                parsedString.add(number.toString());
+                number = new StringBuilder();
 
+            } else if(isSeparator(separator)){
+                parsedString.add(separator);
                 continue;
             }
 
-            number += element;
-            if(i == calculationFormula.length()-1){
-                parsedString.add(number);
-            }
+            number.append(element);
         }
+        parsedString.add(number.toString());
 
         return parsedString;
     }
@@ -111,7 +109,6 @@ public class Adder {
 
     public ArrayList<Integer> parseOnlyNumbers(ArrayList<String> calculationFormula){
         if(!isValidated(calculationFormula)) {
-            System.out.println("calculationFormula = " + calculationFormula);
             throw new IllegalArgumentException();
         }
 
