@@ -13,6 +13,7 @@ public class InputValidator {
         CustomSeparatorValidator customSeparatorValidator = new CustomSeparatorValidator(input);
         AnotherLetterValidator anotherLetterValidator = new AnotherLetterValidator(input);
         ConsecutiveLetterValidator consecutiveLetterValidator = new ConsecutiveLetterValidator(input);
+        EdgeCharValidator edgeCharValidator = new EdgeCharValidator(input);
     }
 
     private boolean isInputEmpty() {
