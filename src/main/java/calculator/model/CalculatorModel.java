@@ -1,5 +1,6 @@
 package calculator.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,5 +28,15 @@ public final class CalculatorModel {
 
     public List<String> parseDefaultString(String input) {
         return Arrays.asList(input.split("[,;]"));
+    }
+
+    public List<Integer> stringsToIntegers(List<String> parsedStrings) {
+        List<Integer> parsedInteger = new ArrayList<>();
+
+        for (String str : parsedStrings) {
+            parsedInteger.add(Integer.parseInt(str));
+        }
+
+        return parsedInteger;
     }
 }
