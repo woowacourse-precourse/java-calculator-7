@@ -42,6 +42,9 @@ public class Application {
     }
 
     private static boolean isAllNumbers(String[] nums) {
+        for (String num : nums) {
+            if (!num.matches("\\d*")) return false;
+        }
         return true;
     }
 
