@@ -32,15 +32,22 @@ public class DelimiterMaker {
 		return delimiters;
 	}
 
+	public String getDelimiterStringFrom(String delimiterMixedNumbers) {
+		return delimiterMixedNumbers.substring(STRING_START_INDEX,
+			delimiterMixedNumbers.lastIndexOf(CUSTOM_DELIMITER_SUFFIX));
+	}
+
 	private void validateAllDelimiter(String[] splitDelimiter) {
 		Arrays.stream(splitDelimiter)
 			.forEach(this::validateDelimiter);
 	}
 
 	private void validateDelimiter(String delimiter) {
+		validateBlank(delimiter);
 		validateCustomDelimiterFormat(delimiter);
 		validateDelimiterIsCustomDelimiterPrefix(delimiter);
 		validateDelimiterContainsNumber(delimiter);
+		validateDelimiterIsEmpty(delimiter);
 	}
 
 	private void validateCustomDelimiterFormat(String delimiter) {
@@ -64,9 +71,18 @@ public class DelimiterMaker {
 		}
 	}
 
-	public String getDelimiterStringFrom(String delimiterMixedNumbers) {
-		return delimiterMixedNumbers.substring(STRING_START_INDEX,
-			delimiterMixedNumbers.lastIndexOf(CUSTOM_DELIMITER_SUFFIX));
+	private void validateBlank(String delimiter) {
+		if(delimiter.isBlank()) {
+			throw new IllegalArgumentException("Invalid delimiter: " + delimiter);
+		}
+	}
+
+	private void validateDelimiterIsEmpty(String delimiter) {
+		String customDelimiter = delimiter.substring(CUSTOM_DELIMITER_PREFIX.length());
+
+		if(customDelimiter.isEmpty()) {
+			throw new IllegalArgumentException("Invalid delimiter: " + customDelimiter);
+		}
 	}
 
 	public boolean hasCustomSeparator(String input) {
