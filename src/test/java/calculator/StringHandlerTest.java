@@ -23,6 +23,12 @@ class StringHandlerTest {
     }
 
     @Test
+    void 두자리_이상의_숫자가_잘_반환_되는지_확인() {
+        assertEquals(List.of("12", "36", "222"),
+                handler.getNumbers(separatorManager.getSeparators(), "12,36:222"));
+    }
+
+    @Test
     void 커스텀_구분자_선언부분만_잘라내는지_확인() {
         assertEquals("1,2;3",
                 handler.removeCustom("//;\n1,2;3"));
