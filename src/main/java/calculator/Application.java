@@ -12,6 +12,9 @@ public class Application {
             int result = 0;
 
             for (String s : inputSplits) {
+                if(s.equals("")) {
+                    continue;
+                }
                 result += Integer.parseInt(s);
             }
 
