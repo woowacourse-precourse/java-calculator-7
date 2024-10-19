@@ -8,6 +8,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
 
+import java.util.List;
+import java.util.Set;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,46 +32,42 @@ class ExpressionTest {
     }
 
     @Nested
-    class Parse_fail_Throws_IllegalArgumentException {
+    class Check_fail_Throws_IllegalArgumentException {
 
         @Test
         void When_contains_custom_delimiter_prefix() {
             //given
-            final String expr = "////\\n123:234//345:456";
+            final Set<String> delimiters = Set.of(",", ":", "//");
 
             //when, then
-            assertThrows(IllegalArgumentException.class, () -> Expression.parse(expr));
+            assertThrows(IllegalArgumentException.class, () -> Expression.checkDelimitersConstraints(delimiters));
         }
 
         @Test
         void When_contains_custom_delimiter_suffix() {
             //given
-            final String expr = "//\\n\\n123:234//345:456";
+            final Set<String> delimiters = Set.of(",", ":", "\\n", "");
 
             //when, then
-            assertThrows(IllegalArgumentException.class, () -> Expression.parse(expr));
+            assertThrows(IllegalArgumentException.class, () -> Expression.checkDelimitersConstraints(delimiters));
         }
-    }
-
-    @Nested
-    class Validate_fail_Throws_IllegalArgumentException {
 
         @Test
         void When_delimiter_is_numeric() {
             //given
-            final String expr = "//1\\n123:234";
+            final Set<String> delimiters = Set.of(",", ":", "123");
 
             //when, then
-            assertThrows(IllegalArgumentException.class, () -> Expression.parse(expr));
+            assertThrows(IllegalArgumentException.class, () -> Expression.checkDelimitersConstraints(delimiters));
         }
 
         @Test
         void When_operand_is_not_numeric() {
             //given
-            final String expr = "123:abc";
+            final List<String> operands = List.of("123", "234", "abc");
 
             //when, then
-            assertThrows(IllegalArgumentException.class, () -> Expression.parse(expr));
+            assertThrows(IllegalArgumentException.class, () -> Expression.checkOperandsConstraints(operands));
         }
     }
 }
