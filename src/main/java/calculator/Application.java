@@ -9,7 +9,6 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         String input = readLine();
-
         HashSet<String> separators = fetchSeparator(input);
 
         ArrayList<Integer> extractedNumbers = extractNumbers(input, separators);
@@ -26,10 +25,10 @@ public class Application {
     private static HashSet<String> fetchSeparator(String input) throws IllegalArgumentException {
         HashSet<String> separators = new HashSet<>();
         separators.add(",");
-        separators.add(";");
+        separators.add(":");
 
-        int startIndex = input.indexOf('\\');
-        int endIndex = input.indexOf('\n');
+        int startIndex = input.indexOf("//");
+        int endIndex = input.indexOf("\\n");
 
         if (startIndex == -1 && endIndex == -1) { // 커스텀 구분자가 없음
             return separators;
@@ -38,9 +37,9 @@ public class Application {
             throw new IllegalArgumentException("커스텀 입력 형식이 올바르지 않음");
         }
 
-        String separatorCandidate = input.substring(startIndex + 1, endIndex);
+        String separatorCandidate = input.substring(startIndex + 2, endIndex);
 
-        for (int i = startIndex + 1; i < endIndex; i++) {
+        for (int i = 0; i < separatorCandidate.length(); i++) {
             char candidate = separatorCandidate.charAt(i);
             if ('0' <= candidate && candidate <= '9') {
                 throw new IllegalArgumentException("숫자는 구분자가 될 수 없음");
@@ -52,7 +51,8 @@ public class Application {
     }
     private static ArrayList<Integer> extractNumbers(String input, HashSet<String> separators) throws IllegalArgumentException {
         ArrayList<Integer> numbers = new ArrayList<>();
-        int startIndex = Integer.max(input.indexOf('\n') + 1, 0);
+        int startIndex = input.indexOf("\\n");
+        startIndex = startIndex == -1 ? 0 : startIndex + 2;
         int endIndex = startIndex;
         for ( ; endIndex < input.length(); endIndex++) {
             if ('0' <= input.charAt(endIndex) && input.charAt(endIndex) <= '9') {
@@ -62,13 +62,16 @@ public class Application {
             String numberCandidate = input.substring(startIndex, endIndex);
             if (separators.contains(String.valueOf(input.charAt(endIndex)))) {
                 numbers.add(Integer.parseInt(numberCandidate));
+                startIndex = endIndex+1;
             } else {
                 throw new IllegalArgumentException("구분자 목록에 없는 문자임");
             }
         }
         if (endIndex == input.length()) {
             String numberCandidate = input.substring(startIndex, endIndex);
-            numbers.add(Integer.parseInt(numberCandidate));
+            if (!numberCandidate.isEmpty()) {
+                numbers.add(Integer.parseInt(numberCandidate));
+            }
         }
 
         return numbers;
