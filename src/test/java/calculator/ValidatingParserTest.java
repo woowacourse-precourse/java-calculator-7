@@ -13,7 +13,7 @@ class ValidatingParserTest {
 
 	@DisplayName("커스텀 구분자가 들어간 문자열의 숫자 리스트를 반환한다.")
 	@Test
-	void validatedNumbersFrom_custom_separator() {
+	void validatedNumbersFrom_customSeparator() {
 		//given
 		ValidatingParser parser = ValidatingParser.create();
 		String testInput = "//ak\\n1ak2ak3";
@@ -26,13 +26,13 @@ class ValidatingParserTest {
 		assertThat(result).isEqualTo(expectedResult);
 	}
 
-	@DisplayName("커스텀 구분자 뒤에 빈 문자열이 오면 [0]을 반환한다.")
+	@DisplayName("커스텀 구분자 뒤에 빈 문자열이 오면 빈 리스트를 반환한다.")
 	@Test
 	void validatedNumbersFrom_customSeparatorWithEmptyString() {
 		//given
 		ValidatingParser parser = ValidatingParser.create();
 		String testInput = "//ak\\n";
-		List<Integer> expectedResult = List.of(0);
+		List<Integer> expectedResult = List.of();
 
 		//when
 		List<Integer> result = parser.validatedNumbersFrom(testInput);
@@ -43,7 +43,7 @@ class ValidatingParserTest {
 
 	@DisplayName("기본 구분자가 들어간 문자열의 숫자 리스트를 반환한다.")
 	@Test
-	void validatedNumbersFrom_default_separator() {
+	void validatedNumbersFrom_defaultSeparator() {
 		//given
 		ValidatingParser parser = ValidatingParser.create();
 		String testInput = "1:2,3:4";
@@ -56,13 +56,13 @@ class ValidatingParserTest {
 		assertThat(result).isEqualTo(expectedResult);
 	}
 
-	@DisplayName("빈 문자열 입력 시 [0]을 반환한다.")
+	@DisplayName("빈 문자열 입력 시 빈 리스트를 반환한다.")
 	@Test
 	void validatedNumbersFrom_empty_input() {
 		//given
 		ValidatingParser parser = ValidatingParser.create();
 		String testInput = "";
-		List<Integer> expectedResult = List.of(0);
+		List<Integer> expectedResult = List.of();
 
 		//when
 		List<Integer> result = parser.validatedNumbersFrom(testInput);

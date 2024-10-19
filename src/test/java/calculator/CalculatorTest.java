@@ -41,21 +41,6 @@ class CalculatorTest {
 		assertThat(result).isEqualTo(expectedNumber);
 	}
 
-	@DisplayName("0이 하나인 숫자 리스트를 받아 덧셈 결과를 반환한다.")
-	@Test
-	void sumNumbers_singleZero() {
-		//given
-		Calculator calculator = Calculator.create();
-		List<Integer> testInput = List.of(0);
-		int expectedNumber = 0;
-
-		//when
-		int result = calculator.sumNumbers(testInput);
-
-		//then
-		assertThat(result).isEqualTo(expectedNumber);
-	}
-
 	@DisplayName("빈 리스트일시 0을 반환한다.")
 	@Test
 	void sumNumbers_emptyList() {
@@ -71,12 +56,12 @@ class CalculatorTest {
 		assertThat(result).isEqualTo(expectedNumber);
 	}
 
-	@DisplayName("음수가 포함된 숫자 리스트에 대해 IllegalArgumentException을 발생시킨다.")
+	@DisplayName("양수가 아닌 숫자 리스트에 대해 IllegalArgumentException을 발생시킨다.")
 	@Test
-	void sumNumbers_throwsExceptionForNegativeNumbers() {
+	void sumNumbers_throwsExceptionNotPositiveNumbers() {
 		//given
 		Calculator calculator = Calculator.create();
-		List<Integer> testInput = List.of(-1, -2, 3);
+		List<Integer> testInput = List.of(0, -1, -2, 0);
 
 		//when & then
 		assertThatThrownBy(() -> calculator.sumNumbers(testInput))
