@@ -5,22 +5,14 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
-    	 System.out.println("덧셈할 문자열을 입력해 주세요.");
-    	 String in = Console.readLine();
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        String in = Console.readLine();
 
-		/*try {
-          	int result = add(in);
-          	System.out.println("결과 : " + result);
-          } catch(IllegalArgumentException e) {
-          	System.out.println(e.getMessage());
-          }*/
 		int result = add(in);
 		System.out.println("결과 : " + result);
-
-
     }
-    public static int add(String in) {
 
+    public static int add(String in) {
     	if(in == null || in.isEmpty()) {
     		return 0;
     	}
@@ -55,5 +47,4 @@ public class Application {
 
 	    return sum;
     }
-
 }
