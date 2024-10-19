@@ -42,6 +42,7 @@ public class Calculator {
             System.out.println("결과 : 0");
         } else {
             Integer sum = getResult(operandList);
+            showSum(sum);
         }
 
         scanner.close();
@@ -78,5 +79,8 @@ public class Calculator {
         return sum;
     }
 
-
+    //숫자들의 합 출력
+    private void showSum(Integer sum) {
+        System.out.println("결과 : " + sum);
+    }
 }
