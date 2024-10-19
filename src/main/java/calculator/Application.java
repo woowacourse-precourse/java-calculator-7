@@ -19,7 +19,15 @@ public class Application {
                     }
                 }
             }
+        } else if (userInput.contains("//") && userInput.contains("\\n")) {
+            String separator = userInput.substring(userInput.indexOf("//") + 2  ,
+                userInput.indexOf("\\n"));
+            String[] nums = userInput.substring(userInput.indexOf("\\n") + 2).split(separator);
+            for (String num : nums) {
+                sum += Long.parseLong(num);
+            }
         }
+
         System.out.println("결과 : " + sum);
         Console.close();
 
