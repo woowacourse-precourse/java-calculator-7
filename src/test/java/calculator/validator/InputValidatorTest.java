@@ -25,5 +25,10 @@ class InputValidatorTest {
             assertDoesNotThrow(() -> inputValidator.validate("1,2,3"));
         }
 
+        @Test
+        void 기본_구분자가_콜론_으로만_이루어지면_테스트를_통과한다() {
+            assertDoesNotThrow(() -> inputValidator.validate("1:2:3"));
+        }
+
     }
 }
