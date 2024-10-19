@@ -1,8 +1,6 @@
-package calculator.domain;
+package calculator.domain.input;
 
-import calculator.domain.input.Input;
 import calculator.util.InputValidator;
-import java.util.Objects;
 
 public class OtherInput extends Input {
 
@@ -27,19 +25,4 @@ public class OtherInput extends Input {
         return Long.valueOf(text);
     }
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) {
-            return true;
-        }
-        if (!(object instanceof OtherInput that)) {
-            return false;
-        }
-        return Objects.equals(text, that.text);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(text);
-    }
 }
