@@ -11,6 +11,8 @@ public class Application {
         //입력값 받기
         String input = Console.readLine();
 
+        input = input.replace("\\n", "\n");
+
         //입력값이 null이거나, 비어있을 경우 0 반환
         if (input == null || input.isEmpty()) {
             System.out.println(0);
@@ -23,7 +25,8 @@ public class Application {
 
             // \n으로 끝나지 않는다면 예외처리
             if (targetIndex == -1) {
-                throw new IllegalArgumentException("잘못된 형식입니다.");
+                //throw new IllegalArgumentException("잘못된 형식입니다.");
+                System.out.println(targetIndex);
 
             } else {
                 // 저장한 인덱스 값의 위치까지 지정해, 설정한 구분자 저장
@@ -31,6 +34,11 @@ public class Application {
 
                 // 이후의 숫자를 numbers 배열에 저장
                 String numbers = input.substring(targetIndex + 1);
+
+                //백슬래시가 포함된 구분자를 이스케이프로 처리
+                if (custom.contains("\\")) {
+                    custom = custom.replace("\\", "\\\\");
+                }
 
                 // 설정한 구분자를 바탕으로 숫자들을 splitedNumber 배열에 저장
                 String[] splitedNumber = numbers.split(custom);
@@ -41,7 +49,7 @@ public class Application {
                     customSum += Integer.parseInt(s);
                 }
                 // 더한 합 출력
-                System.out.println(customSum);
+                System.out.println("결과 : " + customSum);
             }
             // input 값이 // 으로 시작하지 않는다면
         } else {
@@ -55,7 +63,7 @@ public class Application {
             }
 
             //결과 출력
-            System.out.println(sum);
+            System.out.println("결과 : " + sum);
         }
 
 
