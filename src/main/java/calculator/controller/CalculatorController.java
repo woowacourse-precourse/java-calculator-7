@@ -7,13 +7,14 @@ import calculator.service.CalculatorServiceCustomImpl;
 import calculator.util.ExceptionUtil;
 import calculator.view.View;
 
+import static calculator.service.CalculatorConfig.*;
+
 public class CalculatorController {
 
     public void run(){
         String userInput = View.getStringFromUser();
         CalculatorDTO calculatorDTO = new CalculatorDTO(userInput);
-        ExceptionUtil.checkParameterIsLiteral(calculatorDTO);
-        CalculatorService calculatorService = CalculatorConfig.getCalculatorService(calculatorDTO);
+        CalculatorService calculatorService = getCalculatorService(calculatorDTO);
         View.printResultToUser(calculatorService.calculate(calculatorDTO));
     }
 }
