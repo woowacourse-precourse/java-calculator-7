@@ -3,10 +3,7 @@ package calculator.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import calculator.validator.CustomDelimiterValueValidator;
-import calculator.validator.DefalutDelimiterValueValidator;
-import calculator.validator.DelimiterValidator;
-import calculator.validator.Validator;
+import calculator.AppConfig;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -38,43 +35,42 @@ class CalculatorImplTest {
         Calculator calculator = appConfig.calculator();
 
         //when, then
-        assertThrows(IllegalArgumentException.class, () -> calculator.calculate("1,-2,3"));
+        assertThrows(IllegalArgumentException.class, () -> calculator.calculate("1,-2:3"));
     }
 
     @Test
     @DisplayName("정상적인 입력값을 받아 합을 계산하는지 테스트")
     void 정상_입력값_테스트() {
+
         //given
         Calculator calculator = appConfig.calculator();
 
         //when
-        int result = calculator.calculate("1,2,3");
+        int result = calculator.calculate("1,2:3");
 
         //then
         assertEquals(6, result);
     }
 
-    class AppConfig {
+    @Test
+    @DisplayName("잘못된 숫자 형식이 들어왔을 때 예외를 발생시키는지 테스트")
+    void 잘못된_숫자형식_입력값_테스트() {
 
-        public Calculator calculator() {
-            return new CalculatorImpl(extractNumber());
-        }
+        //given
+        Calculator calculator = appConfig.calculator();
 
-        private ExtractNumber extractNumber() {
-            return new ExtractNumber(delimiterValidator(), customDelimiterValueValidator(),
-                    defalutDelimiterValueValidator());
-        }
+        //when, then
+        assertThrows(IllegalArgumentException.class, () -> calculator.calculate("1,a:3"));
+    }
 
-        private Validator delimiterValidator() {
-            return new DelimiterValidator();
-        }
+    @Test
+    @DisplayName("입력값에 문자가 있는 공백이 포함되어 있을 때 예외를 발생시키는지 테스트")
+    void 문자가_포함된_공백_입력값_테스트() {
 
-        private Validator customDelimiterValueValidator() {
-            return new CustomDelimiterValueValidator();
-        }
+        //given
+        Calculator calculator = appConfig.calculator();
 
-        private Validator defalutDelimiterValueValidator() {
-            return new DefalutDelimiterValueValidator();
-        }
+        //when, then
+        assertThrows(IllegalArgumentException.class, () -> calculator.calculate("1, 2:3"));
     }
 }

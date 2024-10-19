@@ -5,10 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import calculator.model.Calculator;
 import calculator.model.CalculatorImpl;
 import calculator.model.ExtractNumber;
-import calculator.validator.CustomDelimiterValueValidator;
-import calculator.validator.DefalutDelimiterValueValidator;
 import calculator.validator.DelimiterValidator;
 import calculator.validator.Validator;
+import calculator.validator.ValueValidate;
 import calculator.view.CalculatorView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,6 +20,7 @@ class CalculatorControllerTest {
 
         //given
         AppConfig appConfig = new AppConfig();
+
         TestCalculatorView testCalculatorView = new TestCalculatorView("1,2,3");
         CalculatorController calculatorController = appConfig.calculatorController(testCalculatorView);
 
@@ -66,21 +66,15 @@ class CalculatorControllerTest {
         }
 
         private ExtractNumber extractNumber() {
-            return new ExtractNumber(delimiterValidator(), customDelimiterValueValidator(),
-                    defalutDelimiterValueValidator());
+            return new ExtractNumber(delimiterValidator(), valueValidator());
         }
 
         private Validator delimiterValidator() {
             return new DelimiterValidator();
         }
 
-        private Validator customDelimiterValueValidator() {
-            return new CustomDelimiterValueValidator();
+        private Validator valueValidator() {
+            return new ValueValidate();
         }
-
-        private Validator defalutDelimiterValueValidator() {
-            return new DefalutDelimiterValueValidator();
-        }
-
     }
 }

@@ -4,10 +4,9 @@ import calculator.controller.CalculatorController;
 import calculator.model.Calculator;
 import calculator.model.CalculatorImpl;
 import calculator.model.ExtractNumber;
-import calculator.validator.CustomDelimiterValueValidator;
-import calculator.validator.DefalutDelimiterValueValidator;
 import calculator.validator.DelimiterValidator;
 import calculator.validator.Validator;
+import calculator.validator.ValueValidate;
 import calculator.view.CalculatorView;
 import calculator.view.CalculatorViewImpl;
 
@@ -17,28 +16,23 @@ public class AppConfig {
         return new CalculatorController(calculator(), calculatorView());
     }
 
-    private Calculator calculator() {
+    public Calculator calculator() {
         return new CalculatorImpl(extractNumber());
     }
 
-    private ExtractNumber extractNumber() {
-        return new ExtractNumber(delimiterValidator(), customDelimiterValueValidator(),
-                defalutDelimiterValueValidator());
+    public ExtractNumber extractNumber() {
+        return new ExtractNumber(delimiterValidator(), valueValidator());
     }
 
-    private Validator delimiterValidator() {
+    public Validator delimiterValidator() {
         return new DelimiterValidator();
     }
 
-    private Validator customDelimiterValueValidator() {
-        return new CustomDelimiterValueValidator();
+    public Validator valueValidator() {
+        return new ValueValidate();
     }
 
-    private Validator defalutDelimiterValueValidator() {
-        return new DefalutDelimiterValueValidator();
-    }
-
-    private CalculatorView calculatorView() {
+    public CalculatorView calculatorView() {
         return new CalculatorViewImpl();
     }
 }

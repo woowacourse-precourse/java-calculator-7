@@ -23,16 +23,22 @@ public class CalculatorImpl implements Calculator {
     }
 
     private int sum(String[] numbers) {
+
         int total = 0;
 
         for (String number : numbers) {
-            int num = Integer.parseInt(number);
+            try {
 
-            if (ValidatorUtil.isNegativeNumber(num)) {
-                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+                int num = Integer.parseInt(number);
+
+                if (ValidatorUtil.isNegativeNumber(num)) {
+                    throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+                }
+
+                total += num;
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("잘못된 숫자 형식입니다.");
             }
-
-            total += num;
         }
 
         return total;
