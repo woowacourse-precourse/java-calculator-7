@@ -104,6 +104,14 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 식별되지_않는_구분자_사용_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1@2:3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
