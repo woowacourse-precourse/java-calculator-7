@@ -1,11 +1,9 @@
 package calculator.model;
 
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 
 public class CustomDelimiter {
     private static final String INVALID_CUSTOM_DELIMITER = "커스텀 구분자가 정상적으로 입력되지 않았습니다.";
-    private static final String NO_INPUT_NUMBERS = "숫자가 입력되지 않았습니다.";
+    
     private String formula;
 
     public CustomDelimiter(String formula){
@@ -17,32 +15,29 @@ public class CustomDelimiter {
     }
 
     public String getCustomDelimiter(){
-        if (!checkCustomDelimiter()) {
+        Integer delimiterEndIndex = checkCustomDelimiter();
+        if (delimiterEndIndex == null) {
             return null;
         }
-        Pattern pattern = Pattern.compile("//(.*?)\n");
-        Matcher matcher = pattern.matcher(formula);
-        if (matcher.find()) {
-            return matcher.group(1);
-        } else {
-            throw new IllegalArgumentException(INVALID_CUSTOM_DELIMITER);
-        }
+        return formula.substring(2, delimiterEndIndex);
     }
 
-    public boolean checkCustomDelimiter(){
-        return formula.startsWith("//");
+    public Integer checkCustomDelimiter(){
+        if (formula.startsWith("//")){
+            int delimiterEndIndex = formula.indexOf("\n");
+            if (delimiterEndIndex == -1) {
+                throw new IllegalArgumentException(INVALID_CUSTOM_DELIMITER);
+            }
+            return delimiterEndIndex;
+        }
+        return null;
     }
 
     public String getNumbersPart(){
-        if (checkCustomDelimiter()) {
-            String[] splitedNumbers = formula.split("\n", 2);
-            if (splitedNumbers.length > 1) {
-                return splitedNumbers[1];
-            } else {
-                throw new IllegalArgumentException(NO_INPUT_NUMBERS);
-            }
-        } else {
-            return formula;
+        Integer delimiterEndIndex = checkCustomDelimiter();
+        if (delimiterEndIndex != null) {
+            return formula.substring(delimiterEndIndex + 1);
         }
+        return formula;
     }
 }
