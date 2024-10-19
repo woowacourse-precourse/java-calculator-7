@@ -14,7 +14,6 @@ public class Application {
             end = userInput.indexOf("\\n");
             String custom = null;
             if (end != -1) {
-                System.out.println(end);
                 // "//" 의 문자열 길이 만큼 subString 첫번째 인자값 설정 , "\n"의 시작지점 까지 두번째 인자값
                 // "//" custom "\n"  커스텀 구분자의 인덱스 값을 찾아내 문자열로 변환한다.
                 custom = userInput.substring(start + 2, end);
@@ -26,6 +25,8 @@ public class Application {
                 for(String s : input){
                     if(!s.isEmpty()){
                         num += Integer.parseInt(s);
+                    }else{
+                        throw new IllegalArgumentException("숫자가 존재하지않습니다."+ num);
                     }
                 }
 
