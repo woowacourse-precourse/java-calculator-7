@@ -7,8 +7,7 @@ public class InputClass {
 
     private final String LEFT_CUSTOM_SEPARATOR = "//";
     private final String RIGHT_CUSTOM_SEPARATOR = "\\n";
-    private static final String INPUT_SENTENCE = "덧셈할 문자열을 입력해 주세요.";
-
+    private final String INPUT_SENTENCE = "덧셈할 문자열을 입력해 주세요.";
 
 
     public String input() {
