@@ -5,10 +5,7 @@ public class InputValidator {
     private static final String CUSTOM_DELIMITER_PATTERN = "^//(.+)\\n\\d+([,:]\\d+|\\\\1\\d+)*$";
 
     public boolean isEmptyInput(String input) {
-        if (input.isEmpty()) {
-            return true;
-        }
-        return false;
+        return input.isEmpty();
     }
 
     public void validateInputPattern(String input) {
