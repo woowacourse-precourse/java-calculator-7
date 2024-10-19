@@ -17,6 +17,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 길이가_1이상인_커스텀_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("//;?\\n1;?2;?3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
     void 구분자_없을_경우_테스트() {
         assertSimpleTest(() -> {
             run("3");
