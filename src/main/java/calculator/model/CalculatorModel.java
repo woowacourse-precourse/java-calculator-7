@@ -1,5 +1,6 @@
 package calculator.model;
 
+import calculator.Validator.Validator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,10 +9,12 @@ public final class CalculatorModel {
 
     private List<Integer> numbers;
 
-    public void processInput(String input) {
+    public void processInput(String input) throws IllegalArgumentException {
         List<String> parsedStrings = parseUserInput(input);
+        Validator.validateParsedStrings(parsedStrings);
 
         List<Integer> parsedNumbers = stringsToIntegers(parsedStrings);
+        Validator.validatePositiveNumbers(parsedNumbers);
 
         this.numbers = parsedNumbers;
     }
