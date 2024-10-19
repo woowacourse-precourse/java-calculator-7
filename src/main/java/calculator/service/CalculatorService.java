@@ -22,28 +22,19 @@ public class CalculatorService {
     }
 
     private String[] splitInput(String input) {
-        if (hasCustomDelimiter(input)) {
-            return splitByCustomDelimiter(input);
-        }
-        return splitByDefaultDelimiter(input);
-    }
-
-    private boolean hasCustomDelimiter(String input) {
-        return input.startsWith("//");
-    }
-
-    private String[] splitByCustomDelimiter(String input) {
         Matcher matcher = Pattern.compile(Delimiter.CUSTOM_PATTERN.getPattern()).matcher(input);
-        if (matcher.matches()) {
-            String customDelimiter = matcher.group(1);
-            String numbers = matcher.group(2);
-            return numbers.split(Pattern.quote(customDelimiter));
-        }
-        throw new IllegalArgumentException("[ERROR] 잘못된 커스텀 구분자 형식입니다.");
-    }
+        String delimiters = Delimiter.DEFAULT.getPattern(); // 기본 구분자(쉼표, 콜론)
 
-    private String[] splitByDefaultDelimiter(String input) {
-        return input.split(Delimiter.DEFAULT.getPattern());
+        // 커스텀 구분자가 있는 경우, 커스텀 구분자 추가
+        if (matcher.matches()) {
+            String customDelimiter = Pattern.quote(matcher.group(1)); // 커스텀 구분자
+            String numbers = matcher.group(2);
+            delimiters += "|" + customDelimiter; // 기본 구분자와 커스텀 구분자를 결합
+            return numbers.split(delimiters);
+        }
+
+        // 기본 구분자만 사용하는 경우
+        return input.split(delimiters);
     }
 
     private int sumOfNumbers(String[] tokens) {
