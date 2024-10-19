@@ -6,7 +6,11 @@ public class Application {
     public int addition(String[] strArr) throws IllegalArgumentException{
         int sum = 0;
         for(String number : strArr) {
-            sum += Integer.parseInt(number);
+            try {
+                sum += Integer.parseInt(number);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException();
+            }
         }
         return  sum;
     }
