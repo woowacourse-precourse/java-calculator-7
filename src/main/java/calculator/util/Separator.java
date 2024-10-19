@@ -12,7 +12,7 @@ public class Separator {
 
     public static List<String> separate(String input) {
         if (input.isBlank()) {
-            return List.of("0");
+            return List.of();
         }
         // 커스텀 구분자 구분
         if (input.startsWith("//")) {
