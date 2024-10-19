@@ -1,6 +1,7 @@
 package calculator.controller;
 
 import calculator.model.Calculator;
+import calculator.validation.Validation;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -15,6 +16,8 @@ public class CalculatorController {
         OutputView.printInitialMessage();
         readInput();
         String delimiter = decideDelimiter();
+        Validation.validateBackSlashDelimiter(delimiter);
+
         String[] numberGroup = Calculator.separateNumber(input, delimiter);
         OutputView.printResult(Calculator.findSum(numberGroup));
     }

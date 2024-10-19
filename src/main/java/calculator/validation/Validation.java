@@ -20,4 +20,10 @@ public class Validation {
             throw new IllegalArgumentException("음수를 입력했습니다");
         }
     }
+
+    public static void validateBackSlashDelimiter(String delimiter){
+        if(delimiter.contains("\\")){
+            throw new IllegalArgumentException("구분자에 '\\'를 포함할 수 없습니다");
+        }
+    }
 }
