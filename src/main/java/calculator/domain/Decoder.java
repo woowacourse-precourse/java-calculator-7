@@ -2,13 +2,13 @@ package calculator.domain;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.StringTokenizer;
+import java.util.regex.Pattern;
 
 public class Decoder {
 
     private static final String DELIMITER_START = "//";
     private static final String DELIMITER_END = "\\n";
-    private static final String DEFAULT_DELIMITER = ",:";
+    private static final String DEFAULT_DELIMITER = "[,:]";
     private final List<Integer> decodedNumbers;
 
     public Decoder(String input) {
@@ -41,7 +41,7 @@ public class Decoder {
         String customDelimiter = input.substring(start, end);
         // 유효성 검사
         validateCustomDelimiter(customDelimiter);
-        return customDelimiter;
+        return Pattern.quote(customDelimiter);
     }
 
     private void validateCustomDelimiter(String customDelimiter) {
@@ -67,11 +67,13 @@ public class Decoder {
 
     // 덧셈할 숫자 뽑기
     private void collectNumbers(String encodedString, String delimiter) {
-        StringTokenizer st = new StringTokenizer(encodedString, delimiter);
-        while (st.hasMoreTokens()) {
-            String token = st.nextToken();
+        String[] tokens = encodedString.split(delimiter);
+        for (String t : tokens) {
+            if (t.isBlank()) {
+                continue;
+            }
             try {
-                int number = Integer.parseInt(token);
+                int number = Integer.parseInt(t);
                 validateNumber(number);
                 decodedNumbers.add(number);
             } catch (NumberFormatException e) {
