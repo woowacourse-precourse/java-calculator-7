@@ -11,5 +11,6 @@ public class CalculatorController {
         calculatorOutputView.printAddGreetingMessage();
         AdditionCommand additionCommand = calculatorInputView.getAdditionCommand();
         double commandResult = additionCommand.exec();
+        calculatorOutputView.printAdditionResult(commandResult);
     }
 }
