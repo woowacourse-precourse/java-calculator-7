@@ -1,13 +1,16 @@
 package calculator;
 
 import calculator.io.InputHandler;
+import calculator.io.OutputHandler;
 import java.util.Arrays;
 
 public class Calculator {
     private final InputHandler inputHandler;
+    private final OutputHandler outputHandler;
 
-    public Calculator(InputHandler inputHandler) {
+    public Calculator(InputHandler inputHandler, OutputHandler outputHandler) {
         this.inputHandler = inputHandler;
+        this.outputHandler = outputHandler;
     }
 
     public void run() {
@@ -16,6 +19,7 @@ public class Calculator {
         String[] inputStringNumbers = splitUserInput(userInput, "[,;]");
         int[] inputIntegerNumbers = changeStringArrayToIntegerArray(inputStringNumbers);
         int result = sumAllNumbers(inputIntegerNumbers);
+        outputHandler.printMessage(String.valueOf(result));
     }
 
     private int sumAllNumbers(int[] inputIntegerNumbers) {
