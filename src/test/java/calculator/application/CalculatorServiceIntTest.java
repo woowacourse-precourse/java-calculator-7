@@ -3,7 +3,6 @@ package calculator.application;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import calculator.application.dto.CalculatorSumRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,12 +12,12 @@ class CalculatorServiceIntTest {
 
     @Test
     @DisplayName("splitAndSum 요청시 정수를 반환한다.")
-    void givenSumRequest_whenSplitAndSum_thenReturnInteger() {
+    void givenSumCommand_whenSplitAndSum_thenReturnInteger() {
         // given
-        CalculatorSumRequest request = new CalculatorSumRequest("1,2:3");
+        String command = "1,2:3";
 
         // when
-        int sum = calculatorService.splitAndSum(request);
+        int sum = calculatorService.splitAndSum(command);
 
         // then
         assertThat(sum).isEqualTo(6);
@@ -26,12 +25,12 @@ class CalculatorServiceIntTest {
 
     @Test
     @DisplayName("splitAndSum 요청시 예외가 발생한다.")
-    void givenSumRequest_whenSplitAndSum_thenReturnError() {
+    void givenSumCommand_whenSplitAndSum_thenReturnError() {
         // given
-        CalculatorSumRequest request = new CalculatorSumRequest("-");
+        String command = "-";
 
         // when, then
-        assertThatThrownBy(() -> calculatorService.splitAndSum(request))
+        assertThatThrownBy(() -> calculatorService.splitAndSum(command))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

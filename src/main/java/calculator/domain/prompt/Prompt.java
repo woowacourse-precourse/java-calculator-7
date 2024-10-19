@@ -1,6 +1,6 @@
 package calculator.domain.prompt;
 
-import calculator.global.utility.CharacterUtils;
+import calculator.utility.CharacterUtils;
 import java.util.Collections;
 import java.util.List;
 

@@ -9,8 +9,8 @@ public class CalculatorPrompt extends Prompt {
     private static final String CUSTOM_DELIMITER_SEPARATOR_SUFFIX = "\\\\n";
     private static final int EXPECTED_SEPARATE_LENGTH = 2;
 
-    public CalculatorPrompt(String input) {
-        super(input);
+    public CalculatorPrompt(String inputData) {
+        super(inputData);
     }
 
     @Override

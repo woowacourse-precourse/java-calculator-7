@@ -1,4 +1,4 @@
-package calculator.global.utility;
+package calculator.utility;
 
 public class CharacterUtils {
 

@@ -1,22 +1,29 @@
 package calculator.ui;
 
 import calculator.application.CalculatorService;
-import calculator.application.dto.CalculatorSumRequest;
+import calculator.ui.view.CalculatorInputView;
+import calculator.ui.view.CalculatorOutputView;
 
 public class CalculatorController {
 
-    private final CalculatorPresenter calculatorPresenter;
+    private final CalculatorInputView calculatorInputView;
+    private final CalculatorOutputView calculatorOutputView;
     private final CalculatorService calculatorService;
 
-    public CalculatorController(CalculatorPresenter calculatorPresenter, CalculatorService calculatorService) {
-        this.calculatorPresenter = calculatorPresenter;
+    public CalculatorController(
+            CalculatorInputView calculatorInputView,
+            CalculatorOutputView calculatorOutputView,
+            CalculatorService calculatorService
+    ) {
+        this. calculatorInputView = calculatorInputView;
+        this.calculatorOutputView = calculatorOutputView;
         this.calculatorService = calculatorService;
     }
 
     public void stringAdditionCalculate() {
-        String input = calculatorPresenter.splitAndSumInput();
-        int result = calculatorService.splitAndSum(new CalculatorSumRequest(input));
-        calculatorPresenter.splitAndSumOutput(result);
+        String command = calculatorInputView.splitAndSumInput();
+        int result = calculatorService.splitAndSum(command);
+        calculatorOutputView.splitAndSumOutput(result);
     }
 
 }
