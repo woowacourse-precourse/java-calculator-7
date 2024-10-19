@@ -1,6 +1,7 @@
 package calculator.service;
 
 import calculator.domain.Calculator;
+import calculator.domain.SumCalculator;
 import calculator.domain.CalculatorUseCase;
 import calculator.domain.Parser;
 import calculator.domain.Preprocessor;
@@ -9,6 +10,11 @@ import calculator.domain.model.PreprocessedInput;
 import java.util.List;
 
 public class MultipleService implements CalculatorUseCase {
+    private final Calculator calculator;
+
+    public MultipleService(Calculator calculator) {
+        this.calculator = calculator;
+    }
     @Override
     public int calculate(String args) {
         // 전처리
@@ -20,8 +26,7 @@ public class MultipleService implements CalculatorUseCase {
         List<Integer> numbers = parser.parse();
 
         // 계산
-        Calculator calculator = new Calculator(numbers);
-        int result = calculator.sum();
+        int result = calculator.calculate(numbers);
 
         return result;
     }

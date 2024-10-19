@@ -13,10 +13,11 @@ class CalculatorTest {
     @DisplayName("sum() 메서드 테스트")
     void sum() {
         // given
-        Calculator calculator = new Calculator(List.of(1, 2, 3, 4, 5));
+        SumCalculator calculator = new SumCalculator();
+        List<Integer> data = List.of(1, 2, 3, 4, 5);
 
         // when
-        int result = calculator.sum();
+        int result = calculator.calculate(data);
 
         // then
         assertEquals(15, result);
