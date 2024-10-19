@@ -9,9 +9,9 @@ import java.util.Set;
  * 문자열에서 커스텀 문자를 추출하는 클래스
  */
 public class DelimiterExtractor {
-    static final String CUSTOM_DELIMITER_FORMAT = "//.\\n"; // 커스텀 구분자 형식
-    static int customDelimiterIndex; // 구분자 문자가 존재하는 인덱스 번호
-    static List<Character> defaultDelimiters = Arrays.asList(',', ':'); // 기본 구분자
+    private final String CUSTOM_DELIMITER_FORMAT = "//.\\n"; // 커스텀 구분자 형식
+    private int customDelimiterIndex; // 구분자 문자가 존재하는 인덱스 번호
+    private List<Character> defaultDelimiters = Arrays.asList(',', ':'); // 기본 구분자
 
     /**
      * 커스텀 구분자가 나오는 인덱스 번호 탐색
