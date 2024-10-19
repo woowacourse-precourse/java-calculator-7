@@ -11,14 +11,10 @@ public class CalculationString {
         this.value = calculationString;
     }
 
-    public SumValues getSumValues(CustomDelimiter customDelimiter) {
-        String splitRegex = ":|,";
+    public SumValues getSumValues(Delimiters delimiters) {
+        String regex = delimiters.convertToRegex();
 
-        if (customDelimiter != null) {
-            splitRegex = splitRegex + "|" + customDelimiter.getCustomDelimiter();
-        }
-
-        List<SumValue> sumValues =  Arrays.stream(value.split(splitRegex))
+        List<SumValue> sumValues = Arrays.stream(splitValueWithDelimiters(regex))
                 .map(str -> stringToInteger(str))
                 .map(SumValue::new)
                 .collect(Collectors.toList());
@@ -26,7 +22,11 @@ public class CalculationString {
         return new SumValues(sumValues);
     }
 
-    private int stringToInteger(String str) { //TODO
+    private String[] splitValueWithDelimiters(String regex) {
+        return value.split(regex);
+    }
+
+    private int stringToInteger(String str) {
         if (str.isEmpty()) {
             return 0;
         }

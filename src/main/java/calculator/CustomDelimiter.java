@@ -1,15 +1,15 @@
 package calculator;
 
 public class CustomDelimiter {
-    private final char customDelimiter;
+    private final String value;
 
     public CustomDelimiter(String customDelimiterString) {
         validateCustomDelimiterLength(customDelimiterString);
-        this.customDelimiter = customDelimiterString.charAt(0);
+        this.value = customDelimiterString;
     }
 
-    public char getCustomDelimiter() {
-        return customDelimiter;
+    public String getValue() {
+        return value;
     }
 
     private void validateCustomDelimiterLength(String customDelimiterStr) {
