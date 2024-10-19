@@ -60,7 +60,7 @@ public class CustomDataParser implements DataParser {
         return getSecondToken(st);
     }
 
-    private static String getSecondToken(StringTokenizer st) {
+    private String getSecondToken(StringTokenizer st) {
         st.nextToken();
         return  st.nextToken();
     }
