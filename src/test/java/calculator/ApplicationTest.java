@@ -8,6 +8,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
+
+
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
@@ -23,6 +25,8 @@ class ApplicationTest extends NsTest {
                 .isInstanceOf(IllegalArgumentException.class)
         );
     }
+
+
 
     @Override
     public void runMain() {
