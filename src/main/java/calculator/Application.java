@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.delimiter.Delimiter;
 import calculator.view.Input;
 import calculator.view.Output;
 
@@ -7,6 +8,7 @@ public class Application {
 
     private static final Output output = new Output();
     private static final Input input = new Input();
+    private static final Delimiter delimiter = Delimiter.getInstance();
 
     public static void main(String[] args) {
         output.printBeginningPhrase();

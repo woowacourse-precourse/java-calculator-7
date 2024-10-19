@@ -12,7 +12,8 @@ public class Input {
     }
 
     private String validateInput(String input) {
-        if (input == null || isInputBlank(input)) {
+
+        if (isNull(input) || isInputBlank(input)) {
             CalculatorException.causeException("띄어쓰기를 포함시킬 수 없습니다.");
         }
 
@@ -21,6 +22,10 @@ public class Input {
 
     private boolean isInputBlank(String input) {
         return input != null && !input.equals(" ");
+    }
+
+    private boolean isNull(String input) {
+        return input == null;
     }
 
 }
