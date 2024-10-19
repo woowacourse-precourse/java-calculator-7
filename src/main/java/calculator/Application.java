@@ -18,7 +18,8 @@ public class Application {
     }
 
     static int[] getNumbers( StringTokenizer tokenizer, String[] delimiterList ){
-        if( tokenizer.countTokens() > 1 ){ tokenizer.nextToken(); }
+        if( tokenizer.countTokens() > 1 ) tokenizer.nextToken();
+        if( tokenizer.countTokens() == 0 ) return new int[0];
         String numString = tokenizer.nextToken();
         String regex = String.join( "|", delimiterList );
         Pattern pattern = Pattern.compile( regex );
@@ -32,6 +33,7 @@ public class Application {
 
     static int sum( int[] numbers ){
         int result = 0;
+        if( numbers.length == 0 ) return 0;
         for( int num : numbers ){ result += num; }
         return result;
     }
