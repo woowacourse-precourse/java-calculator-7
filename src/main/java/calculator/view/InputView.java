@@ -3,7 +3,7 @@ package calculator.view;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
-    private static final String MESSAGE = "덧셈할 문자열을 입력해 주세요.";
+    private static final String PROMPT_MESSAGE = "덧셈할 문자열을 입력해 주세요.";
     private static InputView inputView;
 
     private InputView(){
@@ -17,7 +17,7 @@ public class InputView {
     }
 
     public String readExpression(){
-        System.out.println(MESSAGE);
+        System.out.println(PROMPT_MESSAGE);
         return Console.readLine();
     }
 
