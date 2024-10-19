@@ -21,13 +21,13 @@ public class Calculator {
     }
 
     public void split(){
-        if(validateCustom())
+        if(isCustomSeparator())
             customSplit();
         else
             normalSplit();
     }
 
-    public boolean validateCustom(){
+    public boolean isCustomSeparator(){
         return str.startsWith("//");
     }
 
