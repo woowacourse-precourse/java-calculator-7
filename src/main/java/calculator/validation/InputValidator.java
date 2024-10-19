@@ -7,6 +7,9 @@ public class InputValidator {
 
     public static int parsePositiveNumber(String token) {
         try {
+            if (token == null || token.isEmpty()) {
+                return 0;
+            } 
             int number = Integer.parseInt(token);
             if (number <= 0) {
                 throw new IllegalArgumentException(NON_NATURAL_NUMBER);
