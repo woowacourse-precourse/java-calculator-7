@@ -33,9 +33,15 @@ public class StringSplitter {
     private String combineDelimiters(String customDelimiter) {
         StringBuilder combinedDelimiters = new StringBuilder(DEFAULT_DELIMITERS);
         for (char delimiter : customDelimiter.toCharArray()) {
-            combinedDelimiters.append(delimiter);
+            combinedDelimiters.append(escapeRegexChars(delimiter));
         }
-        // 중복 제거를 위해 [ ] 안에 넣어주는 정규식 패턴으로 반환
         return "[" + combinedDelimiters + "]";
+    }
+
+    private String escapeRegexChars(char delimiter) {
+        if (delimiter == '[' || delimiter == ']' || delimiter == '\\') {
+            return "\\" + delimiter;
+        }
+        return Character.toString(delimiter);
     }
 }
