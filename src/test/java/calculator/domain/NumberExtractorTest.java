@@ -7,16 +7,16 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class NumberStringExtractorTest {
+class NumberExtractorTest {
 
     @DisplayName("구분자로 나뉜 숫자를 구할 수 있다.")
     @Test
     void getNumbersWithoutDelimiters() {
         //given
         String stringToAdd = "1,2,3";
-        NumberStringExtractor numberStringExtractor = createNumberStringExtractor();
+        NumberExtractor numberExtractor = createNumberStringExtractor();
         //when
-        List<Integer> numbers = numberStringExtractor.getNumbers(stringToAdd);
+        List<Integer> numbers = numberExtractor.getNumbers(stringToAdd);
         //then
         assertThat(numbers).hasSize(3);
         assertThat(numbers).containsExactly(1, 2, 3);
@@ -27,9 +27,9 @@ class NumberStringExtractorTest {
     void getNumbersWithoutDelimiters2() {
         //given
         String stringToAdd = "10:20,30:40";
-        NumberStringExtractor numberStringExtractor = createNumberStringExtractor();
+        NumberExtractor numberExtractor = createNumberStringExtractor();
         //when
-        List<Integer> numbers = numberStringExtractor.getNumbers(stringToAdd);
+        List<Integer> numbers = numberExtractor.getNumbers(stringToAdd);
         //then
         assertThat(numbers).hasSize(4);
         assertThat(numbers).containsExactly(10, 20, 30, 40);
@@ -40,15 +40,17 @@ class NumberStringExtractorTest {
     void getNumbersWithoutDelimiters3() {
         //given
         String stringToAdd = "//%\\n1%5,55:40%2,3%7:9";
-        NumberStringExtractor numberStringExtractor = createNumberStringExtractor();
+        NumberExtractor numberExtractor = createNumberStringExtractor();
         //when
-        List<Integer> numbers = numberStringExtractor.getNumbers(stringToAdd);
+        List<Integer> numbers = numberExtractor.getNumbers(stringToAdd);
         //then
         assertThat(numbers).hasSize(8);
         assertThat(numbers).containsExactly(1, 5, 55, 40, 2, 3, 7, 9);
     }
 
-    private NumberStringExtractor createNumberStringExtractor() {
-        return new NumberStringExtractor(new CustomDelimiterExtractor());
+    private NumberExtractor createNumberStringExtractor() {
+        return new NumberExtractor(
+                new StringSplitter(new DelimiterHandler(
+                        new CustomDelimiterExtractor())));
     }
 }

@@ -68,7 +68,10 @@ class CalculatorTest {
     }
 
     private Calculator createCalculator() {
-        NumberStringExtractor numberStringExtractor = new NumberStringExtractor(new CustomDelimiterExtractor());
-        return new Calculator(numberStringExtractor);
+        NumberExtractor numberExtractor = new NumberExtractor(
+                new StringSplitter(new DelimiterHandler(
+                        new CustomDelimiterExtractor()
+                )));
+        return new Calculator(numberExtractor);
     }
 }

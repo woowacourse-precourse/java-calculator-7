@@ -6,17 +6,17 @@ import java.util.List;
 
 public class Calculator {
 
-    private final NumberStringExtractor numberStringExtractor;
+    private final NumberExtractor numberExtractor;
 
-    public Calculator(NumberStringExtractor numberStringExtractor) {
-        this.numberStringExtractor = numberStringExtractor;
+    public Calculator(NumberExtractor numberExtractor) {
+        this.numberExtractor = numberExtractor;
     }
 
     public int getSum(String stringToAdd) {
         if (stringToAdd.isBlank()) {
             return 0;
         }
-        List<Integer> numbers = numberStringExtractor.getNumbers(stringToAdd);
+        List<Integer> numbers = numberExtractor.getNumbers(stringToAdd);
         return sumNumbers(numbers);
     }
 
