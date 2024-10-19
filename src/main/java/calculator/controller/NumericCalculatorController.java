@@ -6,6 +6,6 @@ import calculator.model.InputData;
 
 public class NumericCalculatorController {
     public Arithmetic createCalculatorPart(Delimiter delimiter,InputData inputData){
-        return new Arithmetic(delimiter, inputData.convertCalculatorPart());
+        return new Arithmetic(delimiter, inputData);
     }
 }

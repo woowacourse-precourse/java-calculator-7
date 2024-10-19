@@ -7,8 +7,8 @@ import java.util.List;
 public class Arithmetic {
     private List<Integer> arithmetic;
 
-    public Arithmetic(Delimiter delimiter, String arithmetic) {
-        this.arithmetic = splitArithmetic(delimiter, arithmetic);
+    public Arithmetic(Delimiter delimiter, InputData inputData) {
+        this.arithmetic = splitArithmetic(delimiter, inputData.convertCalculatorPart());
     }
 
     public List<Integer> splitArithmetic(Delimiter delimiter, String calculatorPart) {
