@@ -28,47 +28,46 @@ public class Application {
         if (input.isEmpty()) {
             return BigInteger.valueOf(0);
         }
+        if (input.matches(REX_CUSTOM_DELIMITER_FORMAT)) {
+            List<String> customDelimiterInputs = Arrays.stream(input.split(CUSTOM_DELIMITER_END))
+                    .filter(letter -> !letter.isBlank())
+                    .toList();
 
-        if (isNotContainingDelimiter || input.matches(REX_CUSTOM_DELIMITER_FORMAT)) {
-            if (input.matches(REX_CUSTOM_DELIMITER_FORMAT)) {
-                List<String> customDelimiterInputs = Arrays.stream(input.split(CUSTOM_DELIMITER_END))
-                        .filter(letter -> !letter.isBlank())
-                        .toList();
+            String expression = customDelimiterInputs.getLast();
 
-                String expression = customDelimiterInputs.getLast();
-
-                if (expression.contains(CUSTOM_DELIMITER_START)) {
-                    throw new IllegalArgumentException("커스텀 구분자 이후로 수식이 없습니다");
-                }
-
-                if (customDelimiterInputs.size() > 2) {
-                    throw new IllegalArgumentException("커스텀 구분자가 2개이상 있습니다");
-                }
-
-                String firstToTwoLetter = customDelimiterInputs.getFirst().substring(0, 2);
-                if (!firstToTwoLetter.equals(CUSTOM_DELIMITER_START)) {
-                    throw new IllegalArgumentException("커스텀 구분자의 형식인 //로 시작하지 않습니다");
-                }
-
-                String customDelimiter = customDelimiterInputs.getFirst().substring(2);
-                try {
-                    new BigInteger(customDelimiter);
-                } catch (NumberFormatException e) {
-                    List<BigInteger> operands;
-                    try {
-                        operands = Arrays.stream(expression.split(Pattern.quote(customDelimiter)))
-                                .map(String::trim)
-                                .map(BigInteger::new)
-                                .toList();
-                    } catch (NumberFormatException i) {
-                        throw new IllegalArgumentException("피연산자에 커스텀 구분자가 아닌 문자가 있습니다");
-                    }
-
-                    return operands.stream().reduce(BigInteger.valueOf(0), BigInteger::add);
-                }
-                throw new IllegalArgumentException("구분자에 숫자가 들어있습니다");
+            if (expression.contains(CUSTOM_DELIMITER_START)) {
+                throw new IllegalArgumentException("커스텀 구분자 이후로 수식이 없습니다");
             }
 
+            if (customDelimiterInputs.size() > 2) {
+                throw new IllegalArgumentException("커스텀 구분자가 2개이상 있습니다");
+            }
+
+            String firstToTwoLetter = customDelimiterInputs.getFirst().substring(0, 2);
+            if (!firstToTwoLetter.equals(CUSTOM_DELIMITER_START)) {
+                throw new IllegalArgumentException("커스텀 구분자의 형식인 //로 시작하지 않습니다");
+            }
+
+            String customDelimiter = customDelimiterInputs.getFirst().substring(2);
+            try {
+                new BigInteger(customDelimiter);
+            } catch (NumberFormatException e) {
+                List<BigInteger> operands;
+                try {
+                    operands = Arrays.stream(expression.split(Pattern.quote(customDelimiter)))
+                            .map(String::trim)
+                            .map(BigInteger::new)
+                            .toList();
+                } catch (NumberFormatException i) {
+                    throw new IllegalArgumentException("피연산자에 커스텀 구분자가 아닌 문자가 있습니다");
+                }
+
+                return operands.stream().reduce(BigInteger.valueOf(0), BigInteger::add);
+            }
+            throw new IllegalArgumentException("구분자에 숫자가 들어있습니다");
+        }
+
+        if (isNotContainingDelimiter) {
             throw new IllegalArgumentException("구분자가 없습니다");
         }
 
