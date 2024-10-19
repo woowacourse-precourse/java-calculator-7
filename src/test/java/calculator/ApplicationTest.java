@@ -3,15 +3,17 @@ package calculator;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ApplicationTest extends NsTest {
 
     private final InputValidator inputValidator = new InputValidator();
+    private final StringSplitter stringSplitter = new StringSplitter();
 
     @Test
     void 커스텀_구분자_사용() {
@@ -49,6 +51,15 @@ class ApplicationTest extends NsTest {
         assertFalse(inputValidator.isValid("//;\\n123:-12;2"));
 
     }
+
+    @Test
+    void 문자열_나누기_테스트() {
+        // 기본 및 커스텀 구분자 혼합 테스트
+        List<Integer> result = stringSplitter.split("//;\\n1;234,3:4");
+        assertEquals(List.of(1, 234, 3, 4), result);
+    }
+
+
 
     @Override
     public void runMain() {

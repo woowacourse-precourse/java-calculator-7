@@ -21,7 +21,7 @@ public class InputValidator {
             String escapedDelimiter = delimiter.replaceAll("([\\W])", "\\\\$1");
 
             // 커스텀 구분자와 기본 구분자를 모두 처리하는 정규식 패턴
-            String pattern = "//" + escapedDelimiter + "\\\\n([0-9]+([," + escapedDelimiter + ":][0-9]+)*)?";
+            String pattern = "//" + delimiter + "\\\\n([0-9]+([," + delimiter + ":][0-9]+)*)?";
 
             if (input.matches(pattern)) {
                 return true;
