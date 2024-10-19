@@ -4,12 +4,12 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class AdditionInput {
+public class AdditionCommand {
     private static final String customDelimiterFormat = "^//.*\\\\n";
     private static final Pattern customDelimiterPattern = Pattern.compile("^//(.*)\\\\n");
     private final String customDelimiter;
     private Number[] numbers;
-    public AdditionInput(String input){
+    public AdditionCommand(String input){
         customDelimiter = findCustomDelimiter(input).orElse("");
         if (!customDelimiter.isBlank()){
             input = removeCustomDelimiter(input);

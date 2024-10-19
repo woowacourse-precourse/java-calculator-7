@@ -1,6 +1,6 @@
 package calculator.controller;
 
-import calculator.model.AdditionInput;
+import calculator.model.AdditionCommand;
 import calculator.view.CalculatorInputView;
 import calculator.view.CalculatorOutputView;
 
@@ -9,6 +9,6 @@ public class CalculatorController {
     CalculatorOutputView calculatorOutputView = new CalculatorOutputView();
     public void joinStrings(){
         calculatorOutputView.printAddGreetingMessage();
-        AdditionInput additionInput = calculatorInputView.getAdditionString();
+        AdditionCommand additionCommand = calculatorInputView.getAdditionCommand();
     }
 }

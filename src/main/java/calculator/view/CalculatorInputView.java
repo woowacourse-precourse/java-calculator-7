@@ -1,11 +1,11 @@
 package calculator.view;
 
-import calculator.model.AdditionInput;
+import calculator.model.AdditionCommand;
 import camp.nextstep.edu.missionutils.Console;
 
 public class CalculatorInputView {
-    public AdditionInput getAdditionString(){
-        AdditionInput additionInput = new AdditionInput(Console.readLine());
-        return additionInput;
+    public AdditionCommand getAdditionCommand(){
+        AdditionCommand additionCommand = new AdditionCommand(Console.readLine());
+        return additionCommand;
     }
 }
