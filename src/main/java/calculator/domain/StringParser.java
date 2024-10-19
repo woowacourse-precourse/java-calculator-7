@@ -1,8 +1,7 @@
 package calculator.domain;
 
 import calculator.dto.ParsedComponents;
-import calculator.global.exception.CalculatorException;
-import calculator.global.message.ErrorMessage;
+import calculator.validator.DelimiterValidator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,29 +24,13 @@ public class StringParser {
         int prefixIndex = inputExpression.indexOf(CUSTOM_DELIMITER_PREFIX);
         int suffixIndex = inputExpression.indexOf(CUSTOM_DELIMITER_SUFFIX);
 
-        if ((prefixIndex == -1 && suffixIndex != -1) || (prefixIndex != -1 && suffixIndex == -1)) {
-            throw CalculatorException.from(ErrorMessage.INVALID_CUSTOM_DELIMITER_FORMAT);
-        }
-
-        if (prefixIndex > suffixIndex) {
-            throw CalculatorException.from(ErrorMessage.INVALID_CUSTOM_DELIMITER_ORDER);
-        }
+        DelimiterValidator.validateDelimiterFormat(prefixIndex, suffixIndex);
 
         if (prefixIndex < suffixIndex) {
             String customDelimiter = inputExpression.substring(prefixIndex + CUSTOM_DELIMITER_PREFIX.length(),
                     suffixIndex);
 
-            if (customDelimiter.isEmpty()) {
-                throw CalculatorException.from(ErrorMessage.EMPTY_CUSTOM_DELIMITER);
-            }
-
-            if (customDelimiter.length() != 1) {
-                throw CalculatorException.from(ErrorMessage.INVALID_CUSTOM_DELIMITER_LENGTH);
-            }
-
-            if (Character.isDigit(customDelimiter.charAt(0))) {
-                throw CalculatorException.from(ErrorMessage.CUSTOM_DELIMITER_IS_NUMBER);
-            }
+            DelimiterValidator.validateCustomDelimiter(customDelimiter);
 
             delimiters.add(customDelimiter.charAt(0));
 
