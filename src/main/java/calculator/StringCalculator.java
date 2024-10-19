@@ -12,6 +12,7 @@ public class StringCalculator {
         String input = askForStringInput();
         String[] extractedNumbers = extractNumbersFrom(input);
         validateInput(extractedNumbers);
+        int sum = calulateSum(extractedNumbers);
     }
 
     private String askForStringInput() {
@@ -53,6 +54,15 @@ public class StringCalculator {
         if(Integer.parseInt(number) < 0) {
             throw new IllegalArgumentException("잘못된 값을 입력하였습니다.");
         }
+    }
+
+    private int calulateSum(String[] numbers) {
+        int sum = 0;
+        for (String number : numbers) {
+            if (number.isEmpty()) continue;
+            sum += Integer.parseInt(number);
+        }
+        return sum;
     }
 
 }
