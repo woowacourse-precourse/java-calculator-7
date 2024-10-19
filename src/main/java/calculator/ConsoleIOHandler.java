@@ -20,7 +20,7 @@ public class ConsoleIOHandler implements AutoCloseable {
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() {
         Console.close();
     }
 }
