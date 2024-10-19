@@ -50,7 +50,7 @@ public class InputParser {
 			.map(String::trim)
 			.map(this::replaceBlankWithZero)
 			.forEach(part -> {
-				validateNumber(part);
+				validateDigit(part);
 				validateNumberPositive(part);
 				numbers.add(Integer.parseInt(part));
 			});
@@ -66,11 +66,11 @@ public class InputParser {
 		return part;
 	}
 
-	private void validateNumber(String s) {
+	private void validateDigit(String s) {
 		try {
 			Integer.parseInt(s);
 		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException("구분자 사이에 숫자가 아닌 값이 포함되어 있습니다.");
+			throw new IllegalArgumentException("구분자 사이에 정수가 아닌 값이 포함되어 있습니다.");
 		}
 	}
 
