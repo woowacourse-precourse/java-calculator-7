@@ -3,7 +3,7 @@ package calculator.Model;
 import java.util.Arrays;
 
 public class AdditionCalculator {
-    public int add(int[] operands) {
+    public long add(long[] operands) {
         return Arrays.stream(operands).sum();
     }
 }

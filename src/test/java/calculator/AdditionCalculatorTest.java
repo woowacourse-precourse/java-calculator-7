@@ -12,12 +12,12 @@ public class AdditionCalculatorTest {
 
     @Test
     void 덧셈_테스트() {
-        assertSimpleTest(() -> assertThat(adder.add(new int[]{1, 2, 3})).isEqualTo(6));
+        assertSimpleTest(() -> assertThat(adder.add(new long[]{1, 2, 3})).isEqualTo(6));
     }
 
     @Test
     void 덧셈_테스트_빈_리스트() {
-        Assertions.assertSimpleTest(() -> assertThat(adder.add(new int[]{})).isEqualTo(0));
+        Assertions.assertSimpleTest(() -> assertThat(adder.add(new long[]{})).isEqualTo(0));
     }
 
 }

@@ -6,9 +6,9 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class InputProcessor {
-    public int[] processInput(String input) {
+    public long[] processInput(String input) {
         if (input.isEmpty()) {
-            return new int[]{0};
+            return new long[]{0};
         }
         String[] separatorList = getSeparator(input);
         String separator = prefixSeparator(separatorList);
@@ -70,10 +70,10 @@ public class InputProcessor {
         return input;
     }
 
-    private int[] convertToIntArray(String[] parsedInput) {
+    private long[] convertToIntArray(String[] parsedInput) {
         // String 리스트를 Int 형으로 변경
         return Arrays.stream(parsedInput)
-                .mapToInt(str -> {
+                .mapToLong(str -> {
                     if (str.isEmpty()) {
                         return 0;
                     }

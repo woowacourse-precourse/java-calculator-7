@@ -13,8 +13,8 @@ public class CalculatorController {
 
     public void run() {
         String input = inputView.getInput();
-        int[] numbers = inputProcessor.processInput(input);
-        int additionResult = additionCalculator.add(numbers);
+        long[] numbers = inputProcessor.processInput(input);
+        long additionResult = additionCalculator.add(numbers);
         outputView.printOutput(additionResult);
     }
 }
