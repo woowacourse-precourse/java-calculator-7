@@ -12,6 +12,8 @@ public class InputView {
     }
 
     public static List<Integer> inputNumbers() {
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+
         String string = input();
         return Arrays.stream(string.split(DEFAULT_NUMBER_DELIMITER_REGEX))
                 .map(InputView::toInt)
