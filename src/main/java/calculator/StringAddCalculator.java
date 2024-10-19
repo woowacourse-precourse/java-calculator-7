@@ -2,6 +2,7 @@ package calculator;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,9 +16,13 @@ public class StringAddCalculator implements StringCalculator {
 
     @Override
     public int add(String input) {
-        if (input == null || input.isBlank()) {
-            return DEFAULT_VALUE;
-        }
+        return Optional.ofNullable(input)
+                .filter(it -> !it.isBlank())
+                .map(this::processInput)
+                .orElse(DEFAULT_VALUE);
+    }
+
+    private int processInput(String input) {
         if (input.startsWith("//")) {
             return sumWithCustomDelimiter(input);
         } else {
@@ -46,7 +51,7 @@ public class StringAddCalculator implements StringCalculator {
     }
 
     private int sumWithDefaultDelimiter(String input) {
-        validateDelimiter(input);
+        validateDefaultDelimiter(input);
         String[] splitNumbers = input.split(DEFAULT_DELIMITER);
         List<Integer> numbers = Arrays.stream(splitNumbers)
                 .map(Integer::parseInt)
@@ -55,7 +60,7 @@ public class StringAddCalculator implements StringCalculator {
         return sum(numbers);
     }
 
-    private void validateDelimiter(String input) {
+    private void validateDefaultDelimiter(String input) {
         List<Character> invalidChars = input.chars()
                 .mapToObj(c -> (char) c)
                 .filter(this::isInvalidChar)
@@ -67,7 +72,7 @@ public class StringAddCalculator implements StringCalculator {
         }
     }
 
-    private boolean isInvalidChar(Character c) {
+    private boolean isInvalidChar(char c) {
         return !(Character.isDigit(c) || ALLOWED_DELIMITERS.contains(c));
     }
 
