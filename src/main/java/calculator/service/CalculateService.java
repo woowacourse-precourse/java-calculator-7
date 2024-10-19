@@ -1,12 +1,12 @@
 package calculator.service;
 
-import java.util.List;
+import calculator.domain.Number;
 
 public class CalculateService {
-    public static Integer calc(){
+
+    public static Integer calc(Number numbers){
         int result = 0;
-        List<Integer> numbers = NumberService.getNumbers();
-        for(Integer number : numbers){
+        for(Integer number : numbers.getNumbers()){
             result += number;
         }
         return result;

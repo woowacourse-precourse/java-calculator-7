@@ -1,5 +1,6 @@
 package calculator.controller;
 
+import calculator.domain.Number;
 import calculator.service.CalculateService;
 import calculator.service.SeparatorService;
 import calculator.service.ValueService;
@@ -17,8 +18,8 @@ public class CalculatorController {
         }else{
             SeparatorService.makeUpSeparators();
             ValueService.separateInputString();
-            NumberService.extractNum();
-            int result = CalculateService.calc();
+            Number numbers = NumberService.extractNum();
+            int result = CalculateService.calc(numbers);
             OutputView.printResult(result);
         }
     }
