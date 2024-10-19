@@ -28,7 +28,7 @@ public class OutputViewTest extends NsTest {
 
         try {
             Delimiter delimiter = new Delimiter(invalidInput);
-            delimiter.checkCustomDelimiter();
+            delimiter.splitString();
         } catch (IllegalArgumentException e) {
             outputView.printError(e.getMessage());
             assertThat(outputStreamCaptor.toString().trim())

@@ -19,7 +19,6 @@ public class CalculatorController {
             String input = inputView.getInputString();
 
             Delimiter delimiter = new Delimiter(input);
-            delimiter.checkCustomDelimiter();
             String[] splitNumbers = delimiter.splitString();
 
             Number number = new Number(splitNumbers);
