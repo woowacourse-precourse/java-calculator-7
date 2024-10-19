@@ -1,6 +1,6 @@
 package calculator.constants;
 
-public interface EnumClass {
+public interface SymbolDetails {
 
     String getSymbol();
 
