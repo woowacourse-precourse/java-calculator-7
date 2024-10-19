@@ -17,11 +17,14 @@ public class Parser {
     private final List<String> customDelimiters = new ArrayList<>();
 
     public String[] parseInput(String input) {
-        if (input.startsWith("//"))
+        if (input.startsWith("//")){
             input = extractCustomDelimiter(input);
-
-        String regex = String.join("|", defaultDelimiters) + "|" + String.join("|", customDelimiters);
-        return input.split(regex);
+            String regex = String.join("|", defaultDelimiters) + "|" + String.join("|", customDelimiters);
+            return input.split(regex);
+        } else{
+            String regex = String.join("|", defaultDelimiters);
+            return input.split(regex);
+        }
     }
     private String extractCustomDelimiter(String input) {
         int delimiterEndIndex = input.indexOf("\\n");
