@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 public class CalculatorInputParseService {
 
     private static final String DEFAULT_DELIMITER_REGEX = "[,:]";
+    private static final String CUSTOM_DELIMITER_START_STRING = "//";
+    private static final String CUSTOM_DELIMITER_END_STRING = "\\n";
     private static final String CUSTOM_DELIMITER_PART_REGEX = "^//(.*?)\\\\n";
 
     public CalculatorInputParseService() {
@@ -23,10 +25,12 @@ public class CalculatorInputParseService {
 
         String numbersPart;
         if (matcher.find()) {
-            String comment = matcher.group();
-            String delimiterPart = comment.substring(0, comment.indexOf("\\n") + 2);
+            String delimiterPart = matcher.group();
             numbersPart = input.substring(delimiterPart.length());
-            String customDelimiter = delimiterPart.substring(2, delimiterPart.length() - 2);
+            String customDelimiter = delimiterPart.substring(
+                    CUSTOM_DELIMITER_START_STRING.length(),
+                    delimiterPart.length() - CUSTOM_DELIMITER_END_STRING.length()
+            );
 
             delimiterRegex += "|" + "[" + Pattern.quote(customDelimiter) + "]";
         } else {
