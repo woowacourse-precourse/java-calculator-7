@@ -4,14 +4,11 @@ import calculator.exception.Exceptions;
 import calculator.model.InputString;
 import calculator.model.ResultNumbers;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class MainService {
 
     Exceptions exceptions = new Exceptions();
-    private InputString inputString;
-    private ResultNumbers resultNumbers;
 
     public String getCustomDelimiter(InputString inputString) {
 
@@ -20,10 +17,10 @@ public class MainService {
         exceptions.validateCustomDelimiterSize(inputString.getCustomDelimiter().size());
 
         if (input.startsWith("//")) { //
-            int customLastMark = input.indexOf("\\n"); // //로 시작하지만 \n가 없다면 -1 출력 있다면 해당 인덱스값 반환
+            int customLastMark = input.indexOf("\\n");
             if (customLastMark != -1) {
 
-                String customDelimiter = input.substring(2, customLastMark); // 자르기
+                String customDelimiter = input.substring(2, customLastMark);
                 inputString.addCustomDelimiter(customDelimiter);
 
                 String refiendString = input.substring(customLastMark + 2);
@@ -59,7 +56,7 @@ public class MainService {
 
         exceptions.isInvalidStringInList(numberList);
 
-        for(String num : numberList) {
+        for (String num : numberList) {
             resultNumbers.addNumberList(Integer.parseInt(num));
         }
 
@@ -69,7 +66,7 @@ public class MainService {
 
         int result = resultNumbers.getResult();
 
-        for(int num : resultNumbers.getNumberList()) {
+        for (int num : resultNumbers.getNumberList()) {
             result += num;
         }
 

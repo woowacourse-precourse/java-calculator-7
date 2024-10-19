@@ -7,8 +7,7 @@ import java.util.List;
 public class InputString {
 
     private String inputString;
-    private String refinedString;
-    private List<String> customDelimiter = new ArrayList(); // List vs ArrayList ?
+    private List<String> customDelimiter = new ArrayList();
 
     public InputString(String inputString) {
         this.inputString = inputString;
@@ -20,10 +19,6 @@ public class InputString {
 
     public String getInputString() {
         return inputString;
-    }
-
-    public void setRefinedString(String refinedString) {
-        this.refinedString = refinedString;
     }
 
     public List<String> getCustomDelimiter() {

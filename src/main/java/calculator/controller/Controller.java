@@ -16,13 +16,9 @@ public class Controller {
     private ResultNumbers resultNumbers;
 
     public void start() {
-        try {
-            getString();
-            getNumberList();
-            getResultNum();
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(e.getMessage());
-        }
+        getString();
+        getNumberList();
+        getResultNum();
     }
 
     private void getString() {
