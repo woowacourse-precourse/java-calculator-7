@@ -76,7 +76,7 @@ public class InputParser {
 
 	private void validateNumberPositive(String s) {
 		if (Integer.parseInt(s) <= 0) {
-			throw new IllegalArgumentException("음수는 계산할 수 없습니다.");
+			throw new IllegalArgumentException("0 또는 음수가 포함되어 있습니다.");
 		}
 	}
 
