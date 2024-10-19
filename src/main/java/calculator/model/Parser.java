@@ -7,6 +7,9 @@ import java.util.regex.Pattern;
 public class Parser {
 
     public List<String> parseInput(String input) {
+        if(input.isEmpty()){
+            return List.of("0");
+        }
         if (input.startsWith("//")) {
             return parseCustomSeparator(input);
         }
