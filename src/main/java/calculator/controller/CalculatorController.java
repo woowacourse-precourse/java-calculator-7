@@ -1,5 +1,6 @@
 package calculator.controller;
 
+import calculator.domain.Calculator;
 import calculator.validator.Validator;
 import calculator.view.InputView;
 
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 public class CalculatorController {
     InputView inputView = new InputView();
     Validator validator = new Validator();
+    Calculator calculator = new Calculator();
     ArrayList<String> separator = new ArrayList<>();
 
     public CalculatorController() {
@@ -22,7 +24,10 @@ public class CalculatorController {
             System.out.println("0");
             return;
         }
-        validator.checkCustomSeparator(input, separator);
-
+        if (!validator.checkCustomSeparator(input, separator)) {
+            throw new IllegalArgumentException("커스텀 구분자를 잘못 입력하였습니다.");
+        }
+        int sum = calculator.sumNumber(input, separator);
+        System.out.println(sum);
     }
 }
