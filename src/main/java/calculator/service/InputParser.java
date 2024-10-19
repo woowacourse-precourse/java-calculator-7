@@ -19,9 +19,7 @@ public class InputParser implements Parser {
     }
 
     public List<Integer> getIntegerList(String input, Set<Character> separators){
-        if (input.startsWith(DOUBLE_SLASH.getKeyword())) {
-            input = input.substring(5);
-        }
+        input = getOperandsPartOfInput(input);
 
         List<String> parsedOperand = new ArrayList<>();
         for (char character : input.toCharArray()) {
@@ -34,6 +32,13 @@ public class InputParser implements Parser {
         parsedOperand.add(input);
 
         return typeCastingStringListToIntegerList(parsedOperand);
+    }
+
+    private String getOperandsPartOfInput(String input){
+        if (input.startsWith(DOUBLE_SLASH.getKeyword())) {
+            return input.substring(5);
+        }
+        return input;
     }
 
     private List<Integer> typeCastingStringListToIntegerList(List<String> parsedOperand){
