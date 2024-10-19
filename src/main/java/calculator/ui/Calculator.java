@@ -1,6 +1,7 @@
 package calculator.ui;
 
 import calculator.common.Request;
+import calculator.common.RequestType;
 import calculator.common.Response;
 import calculator.processor.Processor;
 import camp.nextstep.edu.missionutils.Console;
@@ -13,14 +14,14 @@ public class Calculator {
         this.processor = processor;
     }
 
-    public void run() {
-        Response response = processor.process(getNumbers());
+    public void getSum() {
+        Response response = processor.process(new Request(RequestType.SUM, getNumbers()));
         displayResult(response);
     }
 
-    private Request getNumbers() {
+    private String getNumbers() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        return new Request(Console.readLine());
+        return Console.readLine();
     }
 
     private void displayResult(Response result) {

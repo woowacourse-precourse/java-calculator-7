@@ -1,5 +1,5 @@
 package calculator.common;
 
-public record Request(Object body) {
+public record Request(RequestType type, Object body) {
 
 }
