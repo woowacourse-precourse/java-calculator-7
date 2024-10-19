@@ -26,23 +26,30 @@ public class NumberSeparator {
 		if (hasCustomDelimiter(matcher)) {
 			delimiters.add(extractCustomDelimiter(matcher));
 			equation = extractEquation(matcher);
-			validateEquation(equation);
-
 			return;
 		}
 
 		equation = input;
-		validateEquation(equation);
+		validateEquationFormat(equation);
 	}
 
 	public static NumberSeparator from(String input) {
 		return new NumberSeparator(input);
 	}
 
-	private void validateEquation(String equation) {
+	private void validateEquationFormat(String equation) {
 		if (!EQUATION_PATTERN.matcher(equation).matches()) {
-			throw new IllegalArgumentException(ErrorMessage.NUMBER_SEPARATOR_EQUATION.getMessage());
+			throw new IllegalArgumentException(ErrorMessage.NUMBER_SEPARATOR_EQUATION_FORMAT.getMessage());
 		}
+	}
+
+	private void validateNotDefaultDelimiter(Delimiter delimiter) {
+		DefaultDelimiter.getDefaultDelimiter().stream()
+			.filter(defaultDelimiter -> defaultDelimiter.equals(delimiter))
+			.findAny()
+			.ifPresent(matched -> {
+				throw new IllegalArgumentException(ErrorMessage.NUMBER_SEPARATOR_CUSTOM_DELIMITER_SAME_DEFAULT.getMessage());
+			});
 	}
 
 	private Matcher getMatcher(String input) {
@@ -54,13 +61,21 @@ public class NumberSeparator {
 	}
 
 	private Delimiter extractCustomDelimiter(Matcher matcher) {
-		return Delimiter.from(
+		Delimiter customDelimiter = Delimiter.from(
 			matcher.group(CUSTOM_DELIMITER_POSITION)
 		);
+
+		validateNotDefaultDelimiter(customDelimiter);
+
+		return customDelimiter;
 	}
 
 	private String extractEquation(Matcher matcher) {
-		return matcher.group(EQUATION_POSITION).trim();
+		String equation = matcher.group(EQUATION_POSITION).trim();
+
+		validateEquationFormat(equation);
+
+		return equation;
 	}
 
 	public Numbers separate() {

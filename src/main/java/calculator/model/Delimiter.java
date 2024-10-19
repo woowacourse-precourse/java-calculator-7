@@ -1,6 +1,7 @@
 package calculator.model;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 import calculator.constant.ErrorMessage;
@@ -41,5 +42,20 @@ public class Delimiter {
 			SELECT_ONE_FORMAT,
 			String.join(EMPTY, delimiters.stream().map(delimiter -> delimiter.delimiter).toList())
 		);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Delimiter that = (Delimiter)o;
+		return Objects.equals(this.delimiter, that.delimiter);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(delimiter);
 	}
 }
