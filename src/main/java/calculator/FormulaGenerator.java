@@ -6,14 +6,15 @@ public class FormulaGenerator {
 
     public FormulaGenerator(String input) {
         this.input = input;
+        this.formula = makeFormula(this.input);
+    }
+
+    private String makeFormula(String input) {
+        if(input.isEmpty()) return "0";
         if(this.input.charAt(0)=='/'){
             InputParser inputParser = new InputParser(this.input);
             this.input = inputParser.getparsedInput();
         }
-        formula = makeFormula(this.input);
-    }
-
-    private String makeFormula(String input) {
         for (int i = 1; i < input.length(); i++) {
             input = changeSeparator(input, i);
         }
