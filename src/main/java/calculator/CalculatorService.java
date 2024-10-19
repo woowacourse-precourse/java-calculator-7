@@ -43,12 +43,14 @@ public class CalculatorService {
 
     public String[] splitBySeparator(String input, String customSeparator) {
         String regex = String.format("[,:%s]", customSeparator);
-        Pattern pattern = Pattern.compile(regex);
 
+        return input.split(regex);
+    }
+
+    private String removeCustomSeparatorPrefix(String input) {
         String prefixCustomSeparator = "^//(.+?)\\\\n";
-        String processedInput = input.replaceFirst(prefixCustomSeparator, "");
 
-        return processedInput.split(regex);
+        return input.replaceFirst(prefixCustomSeparator, "");
     }
 
     public long calculate(String[] numberStrings) {
@@ -57,14 +59,17 @@ public class CalculatorService {
 
     public long logic(String input) {
 
-        if (isBlank(input)) {
-            return 0;
-        }
         String customSeparator = parseCustomSeparator(input);
 
         validate(input, customSeparator);
 
-        String[] splitedInput = splitBySeparator(input, customSeparator);
+        String processedInput = removeCustomSeparatorPrefix(input);
+        if (isBlank(processedInput)) {
+            return 0;
+        }
+
+        String[] splitedInput = splitBySeparator(processedInput, customSeparator);
+
         long answer = calculate(splitedInput);
 
         return answer;
