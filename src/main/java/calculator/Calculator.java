@@ -20,6 +20,7 @@ public class Calculator {
     public void print(){
         Custom_Deli(); // 커스텀 구분자 추가
         split_input(); // 커스텀 구분자 구문 삭제된 문자열에서 구분자 출력
+        double_check(parts);
         System.out.println(parts);
         //System.out.println(Delimiter);
         //System.out.println(del_deli_input);
@@ -63,7 +64,7 @@ public class Calculator {
             }
         }
         for(String part : parts){
-            if(part.matches(".*[^0-9.].*"))
+            if(part.matches(".*[^0-9.].*")) // .이 포함되도 되는 이유 : 숫자가 실수인 경우도 고려 하기 위해
                 throw new IllegalArgumentException("입력된 값에 문자가 있습니다.");
         }
         this.parts = parts;
@@ -77,4 +78,11 @@ public class Calculator {
         return escaped;
     }
 
+    public void double_check(List<String> input){
+        for(String num : input){
+            if(num.startsWith(".") || num.endsWith(".") || num.contains("..")){
+                throw new IllegalArgumentException("실수 표현이 잘못된 입력값이 있습니다.");
+            }
+        }
+    }
 }

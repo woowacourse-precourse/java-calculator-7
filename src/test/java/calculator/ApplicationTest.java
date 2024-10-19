@@ -10,6 +10,41 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
     @Test
+    void 구분된_숫자_실수판별_성공(){
+        assertSimpleTest(() ->{
+            run("//*\\n37*38.7:34.5");
+            assertThat(output()).contains("[37, 38.7, 34.5]");
+        });
+    }
+    @Test
+    void 구분된_숫자_실수판별_실패1(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//*\\n37*38..7:34.5"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 구분된_숫자_실수판별_실패2(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//*\\n37*.38.7:34.5"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 구분된_숫자_실수판별_실패3(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//*\\n37*.38.7:34.5."))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+
+
+
+    /*
+    @Test
     void Input_구분자_구분(){
         assertSimpleTest(() ->{
             run("//#\\n39:24#72");
@@ -40,7 +75,6 @@ class ApplicationTest extends NsTest {
         );
     }
 
-    /*
     @Test
     void Input_커스텀구문자_추가1(){
         assertSimpleTest(() ->{
