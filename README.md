@@ -49,17 +49,18 @@
 # 프로그램 흐름 및 구현할 기능 목록
 ***
 ## 프로그램 흐름
-1. **Console.readLine()호출 ** (사용자가 문자를 입력)
+1. Calculator 생성
+    - **Console.readLine()** 호출 (사용자가 문자를 입력)
     - 입력된 문자를 **Calculator** 생성자 매개변수로 전달
-3. **Calculator.run()** 호출 (계산기 시작)
-4. **checkCustomToken(String input)** 호출 (커스텀 구분자가 있는지 확인) <br>
-   **커스텀 구분자 유무에 따라 아래 상황 진행**
-
+    - **InputValidationException.isEmpty** 입력된 문자 유효성 검사 및 문자 반환
+    - **checkCustomToken(String input)** 호출 (커스텀 구분자가 있는지 확인) <br>
+      **커스텀 구분자 유무에 따라 아래 상황 진행**
 ```
-> No : 구분자로 쉼표(,), 콜론(:)만을 사용. 이후 5번 진행
-> Yes : 구분자로 쉼표(,), 콜론(:)과 함께 커스텀 구분자를 넣어줌. 이후 5번 진행
+> No : 구분자로 쉼표(,), 콜론(:) 반환. 이후 2번 진행
+> Yes : 구분자로 쉼표(,), 콜론(:), 커스텀 구분자 반환. 이후 2번 진행
 ```
-5. **executeParsingInput(String input, String token)** 호출
+2. **Calculator.run()** 호출 (계산기 시작)
+3. **executeParsingInput(String input, String token)** 호출 (입력값 파싱 후 반환)
     - **splitAsToken(String input, String token)** (구분자에 따라 입력된 문자열을 분리하여 문자열 배열에 담음)
     - **parseIntArray(String[] inputArray)** (분리된 배열을 순회하며 입력된 문자가 유효한지 검증,<br>
       만약 유효하다면 String 배열을 int 배열로 파싱하여 반환) <br>
@@ -67,11 +68,11 @@
 
 ```
 > No : IllegalArgumentException 을 발생시킨 후 애플리케이션 종료
-> Yes : 순회. 단, 순회가 끝나면 6번 진행
+> Yes : 순회. 단, 순회가 끝나면 정수 배열 반환
 ```
 
-6. **sumArray(int[] intArray)** (반환된 정수 배열 합산하여 반환)
-7. **printSum(int result)** (합산된 정수 출력)
+4. **sumArray(int[] intArray)** (반환된 정수 배열 합산하여 반환)
+5. **printSum(int result)** (합산된 정수 출력)
 ***
 
 
@@ -97,4 +98,13 @@ ParsingInput 실행 기능
 구분자에 따라서 입력된 문자열 분리 기능
 #### ✅ int[] parseIntArray(String[] inputArray)
 분리된 문자열을 정수형 배열로 변환 및 입력 값 검증 기능
+***
+
+## 추가 기능 구현
+***
+### _**InputValidationException Class**_
+#### ✅ void isEmpty(String input)
+공백 입력시 예외처리 기능 구현
+#### ✅ void isPositiveNumber(int value)
+음수 입력시 예외처리 기능 구현
 ***
