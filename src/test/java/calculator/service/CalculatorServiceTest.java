@@ -134,4 +134,28 @@ public class CalculatorServiceTest {
         Assertions.assertEquals(calculatorService.splitInputWithDelimiter(inputString, delimiter), expected);
     }
 
+    @Test
+    void 구분된_문자열_더하기() {
+        List<String> inputTokens = List.of("1","2","3");
+        String expected = "6";
+
+        Assertions.assertEquals(calculatorService.sumAllTokens(inputTokens), expected);
+    }
+
+    @Test
+    void 구분된_긴_문자열_더하기() {
+        List<String> inputTokens = List.of("10000000000000000000000000","10000000000000000000000000","10000000000000000000000000");
+        String expected = "30000000000000000000000000";
+
+        Assertions.assertEquals(calculatorService.sumAllTokens(inputTokens), expected);
+    }
+
+    @Test
+    void 구분된_빈_문자열_더하기() {
+        List<String> inputTokens = List.of("","1","2");
+        String expected = "3";
+
+        Assertions.assertEquals(calculatorService.sumAllTokens(inputTokens), expected);
+    }
+
 }
