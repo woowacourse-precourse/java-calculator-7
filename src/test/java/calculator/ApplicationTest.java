@@ -282,6 +282,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void addInputOverLongSize_CustomDelimiter(){
+        assertSimpleTest(()->{
+            run("//?\\n9223372036854775808");
+            assertThat(output()).contains("결과 : 9223372036854775808");
+        });
+    }
+
+    @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1");
