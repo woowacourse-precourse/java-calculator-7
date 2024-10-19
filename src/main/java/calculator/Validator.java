@@ -8,7 +8,7 @@ public class Validator {
             throwError();
         }
         // 커스텀 구분자 기호가 없지만 커스텀 구분자를 사용한 경우
-        if (!input.startsWith(customDelimiterStart) && input.matches(".*[^0-9,:].*")) {
+        if (!input.startsWith(customDelimiterStart) && input.matches(".*[^0-9,;\\\\-\\\\.].*")) {
             throwError();
         }
     }
