@@ -49,4 +49,16 @@ public class WoowahanTokenizerTest {
         assertEquals("", wt.getInputString());
         assertEquals("!", wt.getCustomSeparator());
     }
+
+    @Test
+    void 연속된_구분자가_포함된_문자열() {
+        assertThrows(IllegalArgumentException.class, 
+            ()->{
+                WoowahanTokenizer wt = new WoowahanTokenizer("1::2");
+            });
+        assertThrows(IllegalArgumentException.class, 
+            ()->{
+                WoowahanTokenizer wt = new WoowahanTokenizer("//?\n1::2?3???4");
+            });
+    }
 }

@@ -35,7 +35,7 @@
 ## Exception
 ### WoowahanTokenizer
 - [ ] 잘못된 값을 입력받았다면 IllegalArgumentException을 발생시킨다.
-    - [ ] 커스텀 구분자를 설정하는 명령이 올바르지 않을 경우
+    - [x] 구분자가 연속해서 사용되었을 경우
 
 ### Operand
 - [ ] 잘못된 값을 입력받았다면 IllegalArgumentException을 발생시킨다.
