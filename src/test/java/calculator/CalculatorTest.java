@@ -1,24 +1,21 @@
 package calculator;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CalculatorTest {
-  Calculator calculator;
+public class CalculatorTest extends RegexCheckTest {
 
-  @BeforeEach
-  public void setUp() {
-    calculator = new Calculator("//;\\n1;2;3");
-    calculator=calculator.splitOrInsert().matchesRegex();
-  }
 
   @Test
-  public void allPositiveNumbersTest() {
-    int[] numbers=new int[]{1,2,3};
-    assertArrayEquals(new int[]{1,2,3},calculator.allPositiveNumber(numbers).numbers);
+  public void allPositiveNumbers() {
+    assertThrows(IllegalArgumentException.class, () -> {
+      calculator = new Calculator("//`\\n-1`2`3");
+      calculator.matchesAndInsert();
+      calculator.allPositiveNumber();
+    });
   }
+
 
   @Test
   public void addTest() {
@@ -26,8 +23,6 @@ public class CalculatorTest {
     assertEquals(6, result);
 
   }
-
-
 
 }
 

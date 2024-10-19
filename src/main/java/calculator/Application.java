@@ -7,30 +7,34 @@ public class Application {
   public static void main(String[] args) {
     // TODO: 프로그램 구현
 
-    final String SORT = "(//([^0-9])\\\\n)?(([0-9]+[^0-9]+)*[0-9]*)$";
-    int sum = 0;
-
-
     System.out.println("덧셈할 문자열을 입력해 주세요.");
 
-    Calculator calculator = new Calculator(Console.readLine().trim());
+    String input = Console.readLine().trim();
 
     try {
-      if (calculator.isValidByRegex(SORT)) {
 
-        calculator = calculator.splitOrInsert().matchesRegex();
+      Calculator calculator = new Calculator(input);
 
-        System.out.println(calculator.getNumericString());
-        System.out.println("결과 : " + calculator.add(new int[]{1, 2, 3}));
+      if (calculator.inputValidator()) {
+
+        calculator.matchesAndInsert();
+
+        int[] numbersArray = calculator.allPositiveNumber().getNumbers();
+
+
+        int result=calculator.add(numbersArray);
+
+        System.out.println("결과 : " + result);
 
       } else {
-        throw new IllegalArgumentException("양식에 맞게 입력했는지 확인해 주세요");
+        throw new IllegalArgumentException("입력을 잘못하였습니다.");
       }
 
-    } catch (IllegalArgumentException e) {
+    } catch (Exception e) {
       System.err.println(e.getMessage());
+    } finally {
+      Console.close();
     }
-
 
   }
 }

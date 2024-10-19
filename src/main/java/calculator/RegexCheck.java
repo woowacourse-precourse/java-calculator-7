@@ -5,69 +5,69 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public abstract class RegexCheck {
-  private final String input;
-  private String numericString = "";
-  private String delimiter = ",:";
-  protected int[] numbers;
-  private Pattern pattern;
+  private final String INPUT;
+  private String numericString;
+  private String delimiter = "[,:]";
+  private String[] stringNumbers;
   private Matcher matcher;
 
 
   RegexCheck(String input) {
-    this.input = input;
+    this.INPUT = input;
+
+    String INPUT_REGEX = "(//([^0-9])\\\\n)?(([-]?[0-9]+[^0-9]+)*[-]?[0-9]*)$";
+    matcher = Pattern.compile(INPUT_REGEX).matcher(input);
   }
 
-  public String getNumericString() {
-    return numericString;
-  }
 
   private String getRegex() {
-    return "([0-9]+[" + delimiter + "]*|" + delimiter + "+[0-9]*)+";
+    return "([-]?[0-9]+([" + delimiter + "]+[-]?[0-9]+)*)";
   }
 
-  public Boolean isValidByRegex(String sort) {
-    pattern = Pattern.compile(sort);
-    matcher = pattern.matcher(input);
+  public String[] getStringNumbers() {
+    return stringNumbers;
+  }
 
+  public Boolean inputValidator() {
     return matcher.matches();
   }
 
-  public Calculator splitOrInsert() {
-    if (matcher.group(2) != null) {
-      delimiter = Pattern.quote(matcher.group(2));
-    }
-
-    if (matcher.group(3) != null) {
-      numericString = matcher.group(3);
-    }
-
-
-    System.out.println("delimiter = " + delimiter);
-    System.out.println("numericString = " + numericString);
-    return (Calculator) this;
-  }
-
-  public Calculator matchesRegex() throws IllegalArgumentException {
-    System.out.println("getRegex() = " + getRegex());
-    pattern = Pattern.compile(getRegex());
-    matcher = pattern.matcher(numericString);
+  public void matchesAndInsert() {
 
     if (matcher.matches()) {
-      String[] stringNumbers = numericString.split(delimiter);
+
+      if (matcher.group(2) != null) {
+        delimiter = matcher.group(2);
+      }
+      numericString = matcher.group(3);
+
+      System.out.println("delimiter = " + delimiter);
+      System.out.println("numericString = " + numericString);
+
+      matchDelimiter();
+
+      System.out.println("matchDelimiter 후");
+      System.out.println("delimiter = " + delimiter);
       System.out.println("stringNumbers = " + Arrays.toString(stringNumbers));
-      parseInt(stringNumbers);
-      return (Calculator) this;
+
     } else {
-      throw new IllegalArgumentException("구분자를 확인해 주세요");
+      throw new IllegalArgumentException("입력 형식을 확인해 주세요");
     }
+
   }
 
-  private void parseInt(String[] args) {
-    numbers = new int[args.length];
-    for (int i = 0; i < args.length; i++) {
-      numbers[i] = Integer.parseInt(args[i]);
+  private void matchDelimiter() throws IllegalArgumentException {
+    matcher = Pattern.compile(getRegex()).matcher(numericString);
+    System.out.println("getRegex() = " + getRegex());
+
+    if (INPUT.isEmpty()) {
+      stringNumbers = new String[0];
+    }
+
+    if (matcher.matches()) {
+      stringNumbers = numericString.split(delimiter);
+    } else {
+      throw new IllegalArgumentException("구분자가 잘못되었습니다.");
     }
   }
-
-
 }
