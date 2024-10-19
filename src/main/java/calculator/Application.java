@@ -1,7 +1,6 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class StringAddCalculator {
@@ -10,23 +9,29 @@ class StringAddCalculator {
             return 0;
         }
 
-        int result = 0;
-        Pattern pattern = Pattern.compile("//(.)\n(.*)");
-        Matcher matcher = pattern.matcher(input);
-        String[] numbers;
         String delimeter = ",|:";
-        if (matcher.find()) {
-            delimeter = matcher.group(1);
-            input = matcher.group(2);
-        }
-        numbers = input.split(delimeter);
-
-        for (String num : numbers) {
-            if (num.isEmpty())
-                continue;
-            result += Integer.parseInt(num);
+        if (input.startsWith("//")) {
+            int delimeterEndIndex = input.indexOf("\\n");
+            if (delimeterEndIndex == -1) {
+                throw new IllegalArgumentException("잘못된 값이 입력되었습니다.");
+            }
+            delimeter = Pattern.quote(input.substring(2, delimeterEndIndex));
+            input = input.substring(delimeterEndIndex + 2);
         }
 
+        String[] numbers = input.split(delimeter);
+        int result = 0;
+        for (String numString : numbers) {
+            try {
+                int number = Integer.parseInt(numString);
+                if (number < 0) {
+                    throw new IllegalArgumentException("음수 값이 입력되었습니다: " + number);
+                }
+                result += number;
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("잘못된 값이 입력되었습니다: " + numString);
+            }
+        }
         return result;
     }
 }
