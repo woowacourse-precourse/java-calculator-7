@@ -17,9 +17,9 @@ public class CalculatorController {
 
     public void run() {
         String inputString = view.getUserInput();
-        parseCustomSeparator();
-        addBasicSeparator();
-        parseOperand();
-        view.printResult();
+        parser.parse(inputString);
+        model.setOperand(parser.getOperand());
+        int sumResult = model.calculateSum();
+        view.printResult(sumResult);
     }
 }

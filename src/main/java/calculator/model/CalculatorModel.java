@@ -6,7 +6,7 @@ import java.util.List;
 public class CalculatorModel {
     private List<Integer> operand = new ArrayList<>();
 
-    public CalculatorModel(List<Integer> operands) {
+    public void setOperand(List<Integer> operands) {
         this.operand = operands;
     }
 

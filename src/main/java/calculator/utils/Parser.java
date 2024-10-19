@@ -48,7 +48,7 @@ public class Parser {
     /**
      * 기본 구분자 배열에 추가
      */
-    public void addBasicSeparator() {
+    private void addBasicSeparator() {
         separator.add(",");
         separator.add(":");
     }
@@ -71,7 +71,7 @@ public class Parser {
     /**
      * 피연산자 파싱하여 operand 배열에 저장
      */
-    public void parseOperand() {
+    private void parseOperand() {
         String tmpOperand = "";
 
         for (int i = 0; i < removedString.length(); i++) {
@@ -92,6 +92,10 @@ public class Parser {
         if (!tmpOperand.equals("")) {
             operand.add(Integer.parseInt(tmpOperand));
         }
+    }
+
+    public List<Integer> getOperand() {
+        return operand;
     }
 
     public void parse(String inputString) {
