@@ -2,11 +2,21 @@ package calculator.util;
 
 public class Validator {
     public boolean hasCustomSeparator(String input) {
+        if (isEmpty(input)) {
+            return false;
+        }
         return input.startsWith("//") && input.contains("\\n");
     }
 
     public boolean isStartWithDigit(String input) {
+        if (isEmpty(input)) {
+            return false;
+        }
         return Character.isDigit(input.charAt(0));
+    }
+
+    public boolean isEmpty(String input) {
+        return input == null || input.isBlank();
     }
 
     public void validateSeparator(String separator) {
@@ -25,7 +35,7 @@ public class Validator {
     }
 
     public void validateInput(String input) {
-        if (input.isBlank()) {
+        if (isEmpty(input)) {
             return;
         }
         if (hasCustomSeparator(input)) {
