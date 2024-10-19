@@ -9,20 +9,29 @@ public class ExpressionToPositiveIntegerOperandConverter implements Converter<Ex
 
     @Override
     public PositiveIntegerOperand convert(final Expression expression) {
-        try {
-            final List<Integer> numbers = expression.getOperands().stream()
-                    .map(number -> {
-                        int parsedNumber = Integer.parseInt(number);
-                        if (parsedNumber < 0) {
-                            throw new IllegalArgumentException("음수는 허용되지 않습니다: " + parsedNumber);
-                        }
-                        return parsedNumber;
-                    })
-                    .collect(Collectors.toList());
+        final List<Integer> numbers = expression.getOperands().stream()
+                .map(this::parseAndValidatePositiveInteger)
+                .collect(Collectors.toList());
+        return new PositiveIntegerOperand(numbers);
+    }
 
-            return new PositiveIntegerOperand(numbers);
+    private int parseAndValidatePositiveInteger(final String numberStr) {
+        final int parsedNumber = parseInteger(numberStr);
+        validatePositive(parsedNumber);
+        return parsedNumber;
+    }
+
+    private int parseInteger(final String numberStr) {
+        try {
+            return Integer.parseInt(numberStr);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자로 변환할 수 없는 입력 값이 포함되어 있습니다: " + e.getMessage(), e);
+            throw new IllegalArgumentException("숫자로 변환할 수 없는 입력 값이 포함되어 있습니다: " + numberStr, e);
+        }
+    }
+
+    private static void validatePositive(int parsedNumber) {
+        if (parsedNumber < 0) {
+            throw new IllegalArgumentException("음수는 허용되지 않습니다: " + parsedNumber);
         }
     }
 }

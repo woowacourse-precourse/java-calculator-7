@@ -9,13 +9,17 @@ public class ExpressionToIntegerOperandConverter implements Converter<Expression
 
     @Override
     public IntegerOperand convert(final Expression expression) {
+        final List<Integer> numbers = expression.getOperands().stream()
+                .map(this::parseInteger)
+                .collect(Collectors.toList());
+        return new IntegerOperand(numbers);
+    }
+
+    private int parseInteger(final String numberStr) {
         try {
-            final List<Integer> numbers = expression.getOperands().stream()
-                    .map(Integer::parseInt)
-                    .collect(Collectors.toList());
-            return new IntegerOperand(numbers);
+            return Integer.parseInt(numberStr);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자로 변환할 수 없는 입력 값이 포함되어 있습니다: " + e.getMessage(), e);
+            throw new IllegalArgumentException("숫자로 변환할 수 없는 입력 값이 포함되어 있습니다: " + numberStr, e);
         }
     }
 }
