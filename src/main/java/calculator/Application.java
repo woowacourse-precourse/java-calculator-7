@@ -20,6 +20,8 @@ public class Application {
             if (isPositive(splits)) {
                 System.out.println("결과" + sumNumber(splits));
             } else {
+                throw new IllegalArgumentException("올바르지 않은 입력입니다.");
+
             }
 
         } else {
@@ -27,6 +29,7 @@ public class Application {
             if (isPositive(splits)) {
                 System.out.println("결과" + sumNumber(splits));
             } else {
+                throw new IllegalArgumentException("올바르지 않은 입력입니다.");
 
             }
         }
