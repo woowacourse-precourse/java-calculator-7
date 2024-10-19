@@ -5,8 +5,13 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 public class BasicLongMathematicalExpressionParser implements LongMathematicalExpressionParser {
-	public static final String VALID_MATHEMATICAL_EXPRESSION_PATTERN = "(\\d+\\D)*\\d+$";
-	private static final Pattern VALID_PATTERN = Pattern.compile(VALID_MATHEMATICAL_EXPRESSION_PATTERN);
+	private final String VALID_MATHEMATICAL_EXPRESSION_PATTERN = "(\\d+\\D)*\\d+$";
+	private  final Pattern VALID_PATTERN = Pattern.compile(VALID_MATHEMATICAL_EXPRESSION_PATTERN);
+
+	public String getVALID_MATHEMATICAL_EXPRESSION_PATTERN(){
+		return this.VALID_MATHEMATICAL_EXPRESSION_PATTERN;
+	}
+
 
 	private long stringNumberToNumber(String stringNumber) {
 		try {

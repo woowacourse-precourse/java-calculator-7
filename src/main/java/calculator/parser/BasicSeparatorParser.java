@@ -10,14 +10,18 @@ public class BasicSeparatorParser implements SeparatorParser {
 
 	private static final String CUSTOM_SEPARATOR_PATTERN = "(/{2})(\\D)(\\\\n)";
 	private static final Pattern PATTERN = Pattern.compile(CUSTOM_SEPARATOR_PATTERN);
-	private static final String VALID_CUSTOM_SEPARATOR_PATTERN = "^(/{2}\\D\\\\n)*";
-	private static final Pattern VALID_PATTERN = Pattern.compile(VALID_CUSTOM_SEPARATOR_PATTERN);
+	private final String VALID_CUSTOM_SEPARATOR_PATTERN = "^(/{2}\\D\\\\n)*";
+	private final Pattern VALID_PATTERN = Pattern.compile(VALID_CUSTOM_SEPARATOR_PATTERN);
 	private static final List<Character> BASIC_SEPARATORS = Arrays.asList(new Character[] {',', ':'});
 
 	private void isValid(String expression) {
 		if (!VALID_PATTERN.matcher(expression).matches()) {
 			throw new IllegalArgumentException(ParserError.INVALID_SEPARATOR_EXPRESSION.getMessage());
 		}
+	}
+
+	public String getVALID_CUSTOM_SEPARATOR_PATTERN() {
+		return this.VALID_CUSTOM_SEPARATOR_PATTERN;
 	}
 
 	@Override
