@@ -2,10 +2,10 @@ package calculator.domain;
 
 import java.util.List;
 
-public class Number {
+public class ParsedNumber {
     private final List<Integer> numbers;
 
-    public Number(List<Integer> numbers) {
+    public ParsedNumber(List<Integer> numbers) {
         this.numbers = numbers;
     }
 

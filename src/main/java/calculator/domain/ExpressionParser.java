@@ -9,17 +9,17 @@ public class ExpressionParser {
     private final ParsedExpression parsedExpression;
     private final Delimiter delimiter;
 
-    private final Number number;
+    private final ParsedNumber parsedNumber;
 
     public ExpressionParser(String userExpression) {
         this.delimiter = new Delimiter(findDelimiters(userExpression));
         this.parsedExpression = new ParsedExpression(findExpression(userExpression), delimiter);
-        this.number = new Number(parsedExpression.extractNumbers());
+        this.parsedNumber = new ParsedNumber(parsedExpression.extractNumbers());
     }
 
 
     public int getAddResult() {
-        return number.sum();
+        return parsedNumber.sum();
     }
 
 
