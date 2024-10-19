@@ -1,11 +1,8 @@
 package Delimiter;
 
-public class CustomDelimiter {
+import exception.ErrorMessage;
 
-    public static final String ERROR_INPUT_IS_NUMBER = "[ERROR] 구분자 외 입력은 오직 숫자만 가능합니다.";
-    public static final String ERROR_INPUT_IS_POSITIVE = "[ERROR] 숫자는 양수만 입력 가능합니다.";
-    public static final String ERROR_INPUT_IS_EMPTY = "[ERROR] 구분자 사이에 값을 입력해야 합니다.";
-    public static final String ERROR_INPUT_GET_DELIMITER = "[ERROR] 커스텀 구분자를 지정하기 위해선 //로 열고 \\n으로 닫아줘야 합니다.";
+public class CustomDelimiter {
 
     public static int[] getNumber(String input) {
         String customDelimiter = getDelimiter(input);
@@ -20,20 +17,20 @@ public class CustomDelimiter {
                 numbers[i] = isPositive(Integer.parseInt(tokens[i]));
             }
         } catch (Exception e) {
-            throw new IllegalArgumentException(ERROR_INPUT_IS_NUMBER);
+            throw new IllegalArgumentException(ErrorMessage.ERROR_INPUT_IS_NUMBER.toString());
         }
         return numbers;
     }
 
     private static void checkIsEmpty(String token) {
         if (token.isEmpty()) {
-            throw new IllegalArgumentException(ERROR_INPUT_IS_EMPTY);
+            throw new IllegalArgumentException(ErrorMessage.ERROR_INPUT_IS_EMPTY.toString());
         }
     }
 
     private static int isPositive(int number) {
         if (number < 0) {
-            throw new IllegalArgumentException(ERROR_INPUT_IS_POSITIVE);
+            throw new IllegalArgumentException(ErrorMessage.ERROR_INPUT_IS_POSITIVE.toString());
         }
         return number;
     }
@@ -51,7 +48,7 @@ public class CustomDelimiter {
             String temp = input.substring(0, input.indexOf("\\n"));
             return temp.substring(2);
         } catch (Exception e) {
-            throw new IllegalArgumentException(ERROR_INPUT_GET_DELIMITER);
+            throw new IllegalArgumentException(ErrorMessage.ERROR_INPUT_GET_DELIMITER.toString());
         }
     }
 }
