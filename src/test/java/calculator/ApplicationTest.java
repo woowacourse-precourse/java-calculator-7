@@ -113,4 +113,13 @@ class ApplicationTest extends NsTest {
         });
         assertEquals(NOT_A_POSITIVE_NUMBER.message(), exception.getMessage());
     }
+
+    @Test
+    void 커스텀_구분자를_사용하고_지정된_커스텀_구분자를_사용하지_않는_경우() {
+        String input = "//&\\n1&2*3";
+        SeparationException exception = assertThrows(SeparationException.class, () -> {
+            customSeparationService.getNumbers(input, CUSTOM_SEPARATOR);
+        });
+        assertEquals(INVALID_SEPARATOR.message(), exception.getMessage());
+    }
 }
