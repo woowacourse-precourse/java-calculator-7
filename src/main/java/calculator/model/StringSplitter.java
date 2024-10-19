@@ -12,6 +12,8 @@ public class StringSplitter {
     private static final String OR_OPERATOR = "|";
     private static final String REGEX_QUOTE_START = "\\Q";
     private static final String REGEX_QUOTE_END = "\\E";
+    private static final String MINUS = "-";
+    private static final String ESCAPED_HYPHEN = "\\-";
 
     public List<Integer> splitAndConvertToIntegers(String inputString, List<String> delimiters,
                                                    boolean allowNegativeNumbers) {
@@ -24,6 +26,7 @@ public class StringSplitter {
 
     private String[] splitInputStringByDelimiters(String inputString, List<String> delimiters) {
         String regex = createRegexFromDelimiters(delimiters);
+
         return inputString.split(regex);
     }
 
@@ -32,14 +35,18 @@ public class StringSplitter {
 
         for (String delimiter : delimiters) {
             appendOrOperatorWhenNeeded(regexBuilder);
-
-            if (delimiter.equals("-")) {
-                regexBuilder.append("\\-");
-            } else {
-                regexBuilder.append(makeDelimiterRegexWithEscape(delimiter));
-            }
+            appendEscapedDelimiter(regexBuilder, delimiter);
         }
+
         return regexBuilder.toString();
+    }
+
+    private void appendEscapedDelimiter(StringBuilder regexBuilder, String delimiter) {
+        if (delimiter.equals(MINUS)) {
+            regexBuilder.append(ESCAPED_HYPHEN);
+        } else {
+            regexBuilder.append(makeDelimiterRegexWithEscape(delimiter));
+        }
     }
 
     private void appendOrOperatorWhenNeeded(StringBuilder regexBuilder) {
