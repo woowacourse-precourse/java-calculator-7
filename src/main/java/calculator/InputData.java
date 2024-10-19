@@ -4,6 +4,11 @@ public class InputData {
     private InputType inputType;
     private String userInput;
 
+    public InputData(InputType inputType, String userInput) {
+        this.inputType = inputType;
+        this.userInput = userInput;
+    }
+
     public void setInputType(InputType inputType) {
         this.inputType = inputType;
     }
