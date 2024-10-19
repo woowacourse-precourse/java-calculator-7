@@ -216,6 +216,16 @@ class ApplicationTest extends NsTest {
                     .hasMessage("커스텀 구분자의 형식인 //로 시작하지 않습니다");
         });
     }
+    @Test
+    void validateCustomDelimiterIsNumber() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//3\\n11394")).isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("구분자에 숫자가 들어있습니다");
+        });
+        assertSimpleTest(() -> {
+            assertThatNoException().isThrownBy(() -> runException("//dd\\n33"));
+        });
+    }
 
     @Test
     void 커스텀_구분자_사용() {

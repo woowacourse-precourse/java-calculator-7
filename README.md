@@ -68,8 +68,7 @@
 |               | 커스텀 구분자만 있는 경우           | //??\n                                                       | IllegalArgumentException  |         ✅           |
 |               | 커스텀 구분자가 2개 이상 있는 경우     | //??\n//!!\n33                                               | IllegalArgumentException  |        ✅            |
 |               | 커스텀 구분자 앞에 문자나 숫자가 있는경우  | ~~~//??\n33                                             | IllegalArgumentException  |           ✅           |
-|               | 커스텀 구분자가 ":" 또는 "," 인 경우 | //:\n33 또는  //,\n33                                          | IllegalArgumentException  |                     |
-|               | 커스텀 구분자가 숫자일 경우          | //3\n//4\n//5\n11394                                         | IllegalArgumentException  |                     |
+|               | 커스텀 구분자가 숫자일 경우          | //3\n//4\n//5\n11394                                         | IllegalArgumentException  |        ✅             |
 | 정상적인 덧셈       | 커스텀 구분자가 있는 정상적인 덧셈      | //?\n12?345                                                  | 357                       |                     |
 |               | 커스텀 구분자와 숫자 하나있을떄        | //?\n33                                                      | 33                        | ApplicationTest에 존재 |
 |               | 구분자가 아닌 문자를 포함할 경우       | //?\n33kk3333                                                | IllegalArgumentException  |                     |

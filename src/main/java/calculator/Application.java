@@ -13,6 +13,7 @@ public class Application {
     private static final String REX_ONLY_NUMBER = "\\d+";
     private static final String CUSTOM_DELIMITER_START = "//";
     private static final String CUSTOM_DELIMITER_END = "\\\\n";
+    private static final String REX_CUSTOM_DELIMITER_FORMAT = ".*//(.+)\\\\n.*";
 
     public static void main(String[] args) {
         String input = Console.readLine();
@@ -27,24 +28,34 @@ public class Application {
             return BigInteger.valueOf(0);
         }
 
-        if (isNotContainingDelimiter) {
-            List<String> customDelimiterInputs = Arrays.stream(input.split(CUSTOM_DELIMITER_END))
-                    .filter(letter -> !letter.isBlank())
-                    .toList();
+        if (isNotContainingDelimiter || input.matches(REX_CUSTOM_DELIMITER_FORMAT)) {
+            if (input.matches(REX_CUSTOM_DELIMITER_FORMAT)) {
+                List<String> customDelimiterInputs = Arrays.stream(input.split(CUSTOM_DELIMITER_END))
+                        .filter(letter -> !letter.isBlank())
+                        .toList();
 
-            String expression = customDelimiterInputs.getLast();
+                String expression = customDelimiterInputs.getLast();
 
-            if (expression.contains(CUSTOM_DELIMITER_START)) {
-                throw new IllegalArgumentException("커스텀 구분자 이후로 수식이 없습니다");
-            }
+                if (expression.contains(CUSTOM_DELIMITER_START)) {
+                    throw new IllegalArgumentException("커스텀 구분자 이후로 수식이 없습니다");
+                }
 
-            if (customDelimiterInputs.size() > 2) {
-                throw new IllegalArgumentException("커스텀 구분자가 2개이상 있습니다");
-            }
+                if (customDelimiterInputs.size() > 2) {
+                    throw new IllegalArgumentException("커스텀 구분자가 2개이상 있습니다");
+                }
 
-            String firstToTwoLetter = customDelimiterInputs.getFirst().substring(0, 2);
-            if (!firstToTwoLetter.equals(CUSTOM_DELIMITER_START)) {
-                throw new IllegalArgumentException("커스텀 구분자의 형식인 //로 시작하지 않습니다");
+                String firstToTwoLetter = customDelimiterInputs.getFirst().substring(0, 2);
+                if (!firstToTwoLetter.equals(CUSTOM_DELIMITER_START)) {
+                    throw new IllegalArgumentException("커스텀 구분자의 형식인 //로 시작하지 않습니다");
+                }
+
+                String customDelimiter = customDelimiterInputs.getFirst().substring(2);
+                try {
+                    new BigInteger(customDelimiter);
+                } catch (NumberFormatException e) {
+                    return BigInteger.valueOf(0);
+                }
+                throw new IllegalArgumentException("구분자에 숫자가 들어있습니다");
             }
 
             throw new IllegalArgumentException("구분자가 없습니다");
