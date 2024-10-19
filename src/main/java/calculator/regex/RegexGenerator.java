@@ -1,15 +1,14 @@
 package calculator.regex;
 
+import static delimiter.DelimiterPattern.CUSTOM_DELIMITER;
+
 import delimiter.Delimiter;
 import delimiter.Delimiters;
 
 public class RegexGenerator {
 
-    private static final String DEFAULT_DELIMITER_AREA_REGEX = "(:(?=\\d+))|(,(?=\\d+))|(\\/\\/([\\w\\*\\@\\$\\!\\%\\*\\#\\?\\&\\;\\~\\^\\{\\}\\(\\)\\<\\>\\-\\+\\[\\]\\'\\\"\\,\\.\\\\]*)\\\\n)";
-
-    public Regex makeExcludingDelimiterAreaRegex(final Delimiters delimiters) {
-        Regex regex = new Regex(DEFAULT_DELIMITER_AREA_REGEX);
-
+    public Regex makeDelimiterAreaRegex(final Delimiters delimiters) {
+        Regex regex = new Regex(CUSTOM_DELIMITER.getRegex());
         for (Delimiter delimiter : delimiters.getDelimiters()) {
             regex.add(delimiter.getDelimiter());
         }

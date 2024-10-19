@@ -1,26 +1,18 @@
 package calculator.util;
 
+import static delimiter.DelimiterPattern.CUSTOM_DELIMITER;
+
 import delimiter.Delimiter;
 import delimiter.Delimiters;
-import java.util.ArrayList;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class DelimiterExtractor {
 
-    private static final String CUSTOM_DELIMITER_EXTRACT_REGEX = "(?<=\\/\\/)([\\w\\*\\@\\$\\!\\%\\*\\#\\?\\&\\;\\~\\^\\{\\}\\(\\)\\<\\>\\-\\+\\[\\]\\'\\\"\\,\\.\\\\]*)(?=\\\\n)";
-    private static final Pattern EXTRACT_DELIMITER_PATTERN = Pattern.compile(CUSTOM_DELIMITER_EXTRACT_REGEX);
-
-    public Delimiters extractCustomDelimiter(final String input) {
-        Matcher matcher = EXTRACT_DELIMITER_PATTERN.matcher(input);
-        Delimiters delimiters = new Delimiters(new ArrayList<>());
-
+    public void extractDelimitersFrom(final String input, final Delimiters delimiters) {
+        Matcher matcher = CUSTOM_DELIMITER.getPattern().matcher(input);
         while (matcher.find()) {
-            Delimiter delimiter = new Delimiter(matcher.group());
-            delimiters.addDelimiter(delimiter);
+            delimiters.addDelimiter(new Delimiter(matcher.group(1)));
         }
-
-        return delimiters;
     }
 
 }

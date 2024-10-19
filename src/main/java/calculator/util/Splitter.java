@@ -1,16 +1,17 @@
 package calculator.util;
 
 import calculator.regex.Regex;
-import calculator.regex.RegexGenerator;
-import delimiter.Delimiters;
+import delimiter.DelimiterPattern;
+import java.util.Arrays;
+import java.util.List;
 
 public class Splitter {
 
-    public String[] splitedByDelimiters(final String input, final Delimiters delimiters,
-                                        final RegexGenerator regexGenerator) {
-        Regex regex = regexGenerator.makeExcludingDelimiterAreaRegex(delimiters);
+    public List<String> splitByDelimiters(final String input, final Regex regex) {
 
-        return input.split(regex.getRegex());
+        return Arrays.stream(DelimiterPattern.CUSTOM_DELIMITER.getPattern().split(input))
+                .flatMap(s -> Arrays.stream(s.split(regex.getRegex())))
+                .toList();
     }
 
 }
