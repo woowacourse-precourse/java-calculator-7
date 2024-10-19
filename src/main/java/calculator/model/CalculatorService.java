@@ -1,6 +1,7 @@
 package calculator.model;
 
 import java.util.List;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class CalculatorService {
@@ -13,30 +14,28 @@ public class CalculatorService {
     private final ValidationUtils validationUtils = new ValidationUtils();
 
     public int calculate(String input) {
-        String delimiter = getDelimiter(input);
-        List<Integer> numbers = getNumbers(input, delimiter);
+        Scanner scanner = new Scanner(input);
+        String delimiter = getDelimiter(scanner);
+        List<Integer> numbers = getNumbers(scanner, input, delimiter);
         validationUtils.numbersCheck(numbers);
         return calculatorOperation.calculateSum(numbers);
     }
 
-    private String getDelimiter(String input) {
-        String delimiter = extractLogic.extractDelimiter(input);
+    private String getDelimiter(Scanner scanner) {
+        String delimiter = extractLogic.extractDelimiter(scanner.nextLine());
         return hasSpecialCharacters(delimiter) ? Pattern.quote(delimiter) : delimiter;
     }
 
-    private List<Integer> getNumbers(String input, String delimiter) {
-        String numbersInput;
-
-        if (input.contains(CUSTOM_DELIMITER_PREFIX)) {
-            // CUSTOM_DELIMITER_PREFIX가 있는 경우 그 뒤의 부분을 추출
-            numbersInput = input.substring(input.indexOf(CUSTOM_DELIMITER_PREFIX) + 2);
-        } else {
-            // 그렇지 않은 경우 전체 input을 사용
-            numbersInput = input;
+    private List<Integer> getNumbers(Scanner scanner, String input, String delimiter) {
+        if (scanner.hasNextLine()) {
+            return extractLogic.extractNumber(scanner.nextLine(), delimiter);
         }
-
-        // numbersInput에서 구분자를 사용하여 숫자 리스트를 추출
-        return extractLogic.extractNumber(numbersInput, delimiter);
+        if (input.contains(CUSTOM_DELIMITER_PREFIX)) {
+            return extractLogic.extractNumber(input.substring(input.indexOf(CUSTOM_DELIMITER_PREFIX) + 2),
+                    delimiter);
+        } else {
+            return extractLogic.extractNumber(input, delimiter);
+        }
     }
 
     private boolean hasSpecialCharacters(String delimiter) {
