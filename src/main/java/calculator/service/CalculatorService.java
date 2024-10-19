@@ -36,11 +36,13 @@ public class CalculatorService {
 
     private List<Double> convertToPositiveNumber(String[] separatedValues) {
         return Arrays.stream(separatedValues)
-                .map(value -> {
-                    validatePositiveNumber(value);
-                    return Double.parseDouble(value);
-                })
+                .map(this::convertToPositiveDouble)
                 .toList();
+    }
+
+    private Double convertToPositiveDouble(String value) {
+        validatePositiveNumber(value);
+        return Double.parseDouble(value);
     }
 
     private void validatePositiveNumber(String value) {
