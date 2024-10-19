@@ -1,10 +1,9 @@
 package calculator.util.parser;
 
 import static calculator.constant.Delimiter.BACK_SLASH;
-import static calculator.constant.Delimiter.COLON;
-import static calculator.constant.Delimiter.COMMA;
 import static calculator.constant.Delimiter.CUSTOM_DELIMITER_FORMAT;
 import static calculator.constant.Delimiter.CUSTOM_DELIMITER_PATTERN;
+import static calculator.constant.Delimiter.STANDARD_DELIMITER_REGEX;
 
 import java.util.regex.Matcher;
 
@@ -29,7 +28,16 @@ public class InputStringParser implements StringParser {
     @Override
     public String[] extractTokens(final String str) {
         final String customDelimiter = extractCustomDelimiter(str);
-        final String regex = String.join("|", COMMA, COLON, customDelimiter);
-        return removeCustomDelimiterFormat(str).split(regex);
+        final String delimiterRegex = getDelimiterRegex(customDelimiter);
+        return removeCustomDelimiterFormat(str).split(delimiterRegex);
+    }
+
+    @Override
+    public String getDelimiterRegex(final String customDelimiter) {
+        String delimiterRegex = STANDARD_DELIMITER_REGEX;
+        if (!customDelimiter.isEmpty()) {
+            delimiterRegex = String.join("|", STANDARD_DELIMITER_REGEX, customDelimiter);
+        }
+        return delimiterRegex;
     }
 }
