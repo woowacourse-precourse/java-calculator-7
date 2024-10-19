@@ -24,9 +24,8 @@
      
      b. 계산기가 제공하는 기능을 보여주는 Calculate 인터페이스 (지금은 plus기능만 가지고 있지만, 빼기와 곱셈등 기능이 추가 될 수 있음)
      
-     c. Calculate의 plus기능을 구현하는 PlusImpl 객체 구현
+     c. 더하기 기능을 제공하기 위해 Calculate인터페이스의 puls 메서드를 구현한 CalculateImpl 구현 객체
      
-     d. 사용자가 입력한 값의 유효성을 검증하는 Verify 객체 구현  (음수 같은 잘못된 값 입력 처리)
-     
-     e. 사용자의 문자열 입력값을 계산 가능한 숫자 타입으로 가공해주는 CalculateFactory 객체 구현
-    
+     d. 문자열을 구분자를 기준으로 숫자를 추출해주는 CalculateFactory 객체 구현
+
+     e. 추출된 숫자가 계산 가능한 상태의 숫자인지 검증하기 위한 Verify 객체 구현 (음수나, null인 경우 등)
