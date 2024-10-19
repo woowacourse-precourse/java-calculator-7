@@ -31,6 +31,7 @@ public class Controller {
         inputString = new InputString(input);
         mainService.getCustomDelimiter(inputString);
 
+        exceptions.validateLeadingCustomDelimiter(inputString.getInputString(), inputString.getCustomDelimiter());
         exceptions.validateCustomDelimiter(inputString.getInputString(), inputString.getCustomDelimiter());
     }
 

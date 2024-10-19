@@ -31,6 +31,14 @@ public class Exceptions {
         }
     }
 
+    public void validateLeadingCustomDelimiter(String input, List<String> customDelimiter) {
+        for (String s : customDelimiter) {
+            if (input.startsWith(s)) {
+                throw new IllegalArgumentException("[ERROR] 문자열의 처음에 커스텀 구분자가 올 수 없습니다.");
+            }
+        }
+    }
+
     public void validateNegativeNumbers(List<Integer> numbers) {
         for (Integer number : numbers) {
             if (number < 0) {
