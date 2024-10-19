@@ -38,4 +38,14 @@ public class StringCalculator {
 		}
 		return sum;
 	}
+
+	private static Positive[] toInts(String[] splitString) {
+		Positive[] positives = new Positive[splitString.length];
+		for ( int i = 0; i < splitString.length ; i++) {
+			final int splitNum = Integer.parseInt(splitString[i]);
+			Positive positive = new Positive(splitNum);
+			positives[i] = positive;
+		}
+		return positives;
+	}
 }
