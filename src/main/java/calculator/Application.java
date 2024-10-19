@@ -14,7 +14,7 @@ public class Application {
 
         try {
             int result = add(input);
-            System.out.println("결과: " + result);
+            System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
