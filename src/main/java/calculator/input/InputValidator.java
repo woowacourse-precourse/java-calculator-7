@@ -14,6 +14,12 @@ public class InputValidator {
         }
     }
 
+    public static void validateDelimiterBlank(String input) {
+        if (isBlank(input)) {
+            throw new IllegalArgumentException("커스텀 구분자가 공백일 수 없습니다.");
+        }
+    }
+
     private static boolean isNegative(int n) {
         return n < 0;
     }

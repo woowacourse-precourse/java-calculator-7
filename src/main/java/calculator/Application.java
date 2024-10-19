@@ -1,7 +1,7 @@
 package calculator;
 
 import calculator.calculator.Calculator;
-import calculator.input.InputReader;
+import calculator.calculator.Parser;
 import calculator.output.OutputViewer;
 import camp.nextstep.edu.missionutils.Console;
 
@@ -10,10 +10,8 @@ public class Application {
         // TODO: 프로그램 구현
         OutputViewer.printStartMessage();
 
-        InputReader inputReader = new InputReader(Console.readLine());
-        Calculator calculator = new Calculator(inputReader);
-
-        int result = calculator.add();
+        Calculator calculator = new Calculator(new Parser());
+        int result = calculator.add(Console.readLine());
 
         OutputViewer.printResultMessage(result);
     }
