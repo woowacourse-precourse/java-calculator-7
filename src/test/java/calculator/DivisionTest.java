@@ -16,8 +16,32 @@ import org.junit.jupiter.params.provider.MethodSource;
 class DivisionTest {
 
     @ParameterizedTest
-    @DisplayName("delimiter")
-    @MethodSource("providedNumber")
+    @DisplayName("문자열이 주어지면 기본 구분자로 문자열을 분리한다")
+    @MethodSource("providedDefaultNumber")
+    void defaultDelimiter(String input, List<String> answer) throws Exception {
+        // given
+        Division division = new Division();
+
+        // when
+        List<String> split = division.split(input);
+
+        // then
+        assertThat(split).hasSize(3)
+                .containsAll(answer);
+    }
+
+    private static Stream<Arguments> providedDefaultNumber() {
+        return Stream.of(
+                Arguments.arguments("1,2:3", List.of("1", "2", "3")),
+                Arguments.arguments("1,2,3", List.of("1", "2", "3")),
+                Arguments.arguments("1:2:3", List.of("1", "2", "3")),
+                Arguments.arguments("1:2,3", List.of("1", "2", "3"))
+        );
+    }
+
+    @ParameterizedTest
+    @DisplayName("커스텀 구분자가 주어지면 커스텀 구분자로만 문자열을 나눈다")
+    @MethodSource("providedCustomNumber")
     void delimiter(String input, List<String> answer) throws Exception {
         // given
         Division division = new Division();
@@ -30,13 +54,10 @@ class DivisionTest {
                 .containsAll(answer);
     }
 
-    private static Stream<Arguments> providedNumber() {
+    private static Stream<Arguments> providedCustomNumber() {
         return Stream.of(
-                Arguments.arguments("1,2:3", List.of("1", "2", "3")),
-                Arguments.arguments("1,2,3", List.of("1", "2", "3")),
-                Arguments.arguments("1:2:3", List.of("1", "2", "3")),
-                Arguments.arguments("//;\\n1:2;3", List.of("1", "2", "3")),
-                Arguments.arguments("//q\\n1q2:3", List.of("1", "2", "3")),
+                Arguments.arguments("//;\\n1;2;3", List.of("1", "2", "3")),
+                Arguments.arguments("//q\\n1q2q3", List.of("1", "2", "3")),
                 Arguments.arguments("// \\n1 2 3", List.of("1", "2", "3")),
                 Arguments.arguments("//ab\\n1ab2ab3", List.of("1", "2", "3"))
         );
