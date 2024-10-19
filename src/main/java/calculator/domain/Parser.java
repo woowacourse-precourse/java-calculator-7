@@ -4,33 +4,19 @@ import static calculator.domain.Delimiter.getCustomDelimiter;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class Parser {
+
+    // 구분자를 기준으로 문자열 split
     public static List<String> splitInput(String input) {
         String delimiter = makeDelimiter(input);
 
         String numbers = removeCustomDelimiterPart(input);
 
-        if (!isIncludeDelimiter(input)) {
-            throw new IllegalArgumentException("구분자를 입력해 주세요.");
-        }
-
         return Arrays.asList(numbers.split(delimiter));
     }
 
-    private static boolean isIncludeDelimiter(String input) {
-        try {
-            if (!Objects.equals(input, "")) {
-                return input.contains(",") || input.contains(":") || input.contains(
-                        Objects.requireNonNull(getCustomDelimiter(input)));
-            }
-        } catch (Exception e) {
-            throw new IllegalArgumentException();
-        }
-        return true;
-    }
-
+    // 커스텀 구분자와 지정 구분자를 결합하여 최종 구분자 반환
     private static String makeDelimiter(String input) {
         StringBuilder delimiterBuilder = new StringBuilder("[:,");
 
@@ -41,6 +27,7 @@ public class Parser {
         return delimiterBuilder.append("]").toString();
     }
 
+    // 커스텀 구분자를 지정하는 부분을 제거한 문자열 반환
     private static String removeCustomDelimiterPart(String input) {
         if (Delimiter.getCustomDelimiter(input) != null) {
             int delimiterEndIndex = input.indexOf("\\n") + 1;
