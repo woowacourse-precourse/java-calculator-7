@@ -1,14 +1,14 @@
 package calculator.view;
 
-public class OutputView {
-    private final static String RESULT_PRINT_SENTENCE = "결과 : %d";
-    private final static String START_PRINT_SENTENCE = "덧셈할 문자열을 입력해 주세요.";
+import calculator.view.enumerate.Phrase;
 
-    public void printResult(int result) {
-        System.out.printf(RESULT_PRINT_SENTENCE, result);
+public class OutputView {
+
+    public void print(Phrase phrase, int result) {
+        System.out.printf(phrase.getSentence(), result);
     }
 
-    public void printStart() {
-        System.out.println(START_PRINT_SENTENCE);
+    public void print(Phrase phrase) {
+        System.out.printf(phrase.getSentence());
     }
 }

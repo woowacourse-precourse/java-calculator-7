@@ -7,6 +7,9 @@ import calculator.model.DelimiterManager;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
+import static calculator.view.enumerate.Phrase.RESULT_PRINT_SENTENCE;
+import static calculator.view.enumerate.Phrase.START_PRINT_SENTENCE;
+
 public class CalculateController {
     private final InputView inputView;
     private final OutputView outputView;
@@ -19,9 +22,9 @@ public class CalculateController {
     }
 
     public void run() {
-        outputView.printStart();
+        outputView.print(START_PRINT_SENTENCE);
         String input = inputView.startInputValue();
         int result = calculator.sumOfNumInAlphaNum(input);
-        outputView.printResult(result);
+        outputView.print(RESULT_PRINT_SENTENCE,result);
     }
 }
