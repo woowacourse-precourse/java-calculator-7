@@ -27,7 +27,13 @@ public class StringAddCalculator {
         int sum = 0;
 
         for (String number: numbers) {
-            sum += Integer.parseInt(number);
+            int intNum = Integer.parseInt(number);
+
+            if (intNum < 0) {
+                throw new IllegalArgumentException();
+            }
+
+            sum += intNum;
         }
 
         return sum;
