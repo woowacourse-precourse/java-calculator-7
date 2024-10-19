@@ -8,10 +8,10 @@ import static calculator.global.constant.DelimiterConstant.SUFFIX;
 
 public class Delimiter {
 
-    private static String separator = ",|:";
+    private static String delimiter = ",|:";
 
     public static String getDelimiter() {
-        return separator;
+        return delimiter;
     }
 
     public static void addCustomDelimiter(String str) {
@@ -23,7 +23,7 @@ public class Delimiter {
         StringValidator.validateCustomDelimiterFormat(customDelimiter);
         DelimiterValidator.validateCustomDelimiterLength(customDelimiter);
 
-        separator +=  "|" + customDelimiter;
+        delimiter +=  "|" + customDelimiter;
     }
 
     public static String removeEnrollmentString(String str) {
@@ -33,6 +33,6 @@ public class Delimiter {
 
         str = str.replace(PREFIX, "");
         str = str.replace(SUFFIX, "");
-        return str.replaceFirst(separator, "");
+        return str.replaceFirst(delimiter, "");
     }
 }
