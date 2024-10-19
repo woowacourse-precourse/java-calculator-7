@@ -7,6 +7,7 @@ import static calculator.exception.ErrorMessage.NULL_OR_EMPTY_INPUT;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class DelimiterCalculator {
 
@@ -30,6 +31,8 @@ public class DelimiterCalculator {
 
         if (isUsingDefaultDelimiter(input)) {
             validateDefaultInput(input);
+        } else {
+            validateCustomInput(input);
         }
 
         String[] parts = splitInput(input);
@@ -61,6 +64,22 @@ public class DelimiterCalculator {
         }
 
         if (CONSECUTIVE_DELIMITER_PATTERN.matcher(input).find()) {
+            throw new IllegalArgumentException(CONSECUTIVE_DELIMITERS);
+        }
+    }
+
+    /**
+     * 커스텀 구분자를 사용하는 입력 값 검증 : 구분자를 연속으로 사용하지 않는지 판단
+     *
+     * @param input 사용자의 입력 값
+     */
+    private void validateCustomInput(String input) {
+        String delimiter = input.split("\\\\n")[0].substring(2);
+        input = input.split("\\\\n")[1];
+        String regex =
+                "(" + Arrays.stream(delimiter.split("")).map(Pattern::quote).collect(Collectors.joining("|")) + "){2,}";
+
+        if (Pattern.compile(regex).matcher(input).find()) {
             throw new IllegalArgumentException(CONSECUTIVE_DELIMITERS);
         }
     }
