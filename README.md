@@ -1,35 +1,36 @@
 # java-calculator-precourse
-
 ---
 # 구현 기능 목록
-
 ---
 ## \<controller>
->### Controller
->* `calculate`: 빈 문자열일 경우 결과값 0으로 출력히는 기능
+### Controller
+* `calculate`: 빈 문자열일 경우 결과값 0으로 출력히는 기능
+---
 
 
 ## \<model>
->### Calculator
->* `plusCalculator`: 숫자들의 합을 구하는 기능
->### Delimiter : 구분자를 관리하는 객체
->### Extractor 
->* `saveExtractorDto`: `ExtractorDto`를 저장하는 기능
->* `saveCustomDelimiter`: 커스텀구분자를 저장하는 기능
->* `extractValues`: 숫자들의 값을 추출하는 기능
->* `numericErrorDiscriminator`: 입력된 값이 숫자가 아니면 에러를 발생시키는 기능
->### ExtractorDto : 구분자와 숫자를 분리해서 가지고 있는 객체
->### Number : 숫자객체
->* `Number`: 숫자가 음수이면 에러를 발생시키는 기능
->### Numbers : 숫자들을 모아둔 객체
+### Calculator
+* `plusCalculator`: 숫자들의 합을 구하는 기능
+### Delimiter : 구분자를 관리하는 객체
+### Extractor 
+* `saveExtractorDto`: `ExtractorDto`를 저장하는 기능
+* `saveCustomDelimiter`: 커스텀구분자를 저장하는 기능
+* `extractValues`: 숫자들의 값을 추출하는 기능
+* `numericErrorDiscriminator`: 입력된 값이 숫자가 아니면 에러를 발생시키는 기능
+### ExtractorDto : 구분자와 숫자를 분리해서 가지고 있는 객체
+### Number : 숫자객체
+* `Number`: 숫자가 음수이면 에러를 발생시키는 기능
+### Numbers : 숫자들을 모아둔 객체
+---
+
+
+## \<view>
+### inputView
+* `inputCalculationValue`: 계산할 문장을 입력받는 기능
+### outputView
+* `printResultValue`: 결과를 출력하는 기능
 
 ---
-## \<view>
->### inputView
->* `inputCalculationValue`: 계산할 문장을 입력받는 기능
->### outputView
->* `printResultValue`: 결과를 출력하는 기능
-
 ---
 (참고)
 ## 기능 요구 사항
