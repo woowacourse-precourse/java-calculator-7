@@ -85,4 +85,20 @@ public class CalculatorServiceTest {
             assertTrue(e.getMessage().equals("구분자를 중첩해서 입력할 수 없습니다."));
         }
     }
+
+    @Test
+    void 커스텀_구분자_숫자_예외_테스트() {
+        //given: "//3\\n231"
+        CalculatorService calculatorService = new CalculatorService();
+        String input = "//3\\n231";
+
+        // when & then
+        try {
+            calculatorService.calculate(input);
+            fail("IllegalArgumentException 발생 안 함");
+        } catch (IllegalArgumentException e) {
+            // 예외가 발생하면 성공
+            assertTrue(e.getMessage().equals("커스텀 구분자에 숫자를 포함할 수 없습니다."));
+        }
+    }
 }

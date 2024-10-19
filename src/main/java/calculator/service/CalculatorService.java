@@ -15,6 +15,10 @@ public class CalculatorService {
             if (input.startsWith("//")) {
                 String[] split = input.split("\n", 2);
                 String customDelimiter = split[0].substring(2);
+                // 커스텀 구분자에 숫자가 포함된 경우 예외 발생
+                if (customDelimiter.matches(".*\\d.*")) {
+                    throw new IllegalArgumentException(ExceptionMessage.CONTAIN_NUMBER_IN_DELIMITER.getMessage());
+                }
                 delimiters = "[" + delimiters.substring(1, 4) + "|" + customDelimiter + "]";
                 input = split[1];
             }
