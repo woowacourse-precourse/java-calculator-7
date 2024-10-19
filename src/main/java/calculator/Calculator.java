@@ -7,10 +7,6 @@ public class  Calculator {
     public int calculate(String input) {
         if (input.isEmpty())
             return 0;
-
-        return Arrays.stream(stringFilter.delimiterSplit(input))
-                .map(Integer::parseInt)
-                .mapToInt(Integer::intValue)
-                .sum();
+        return Arrays.stream(stringFilter.convertToIntArray(input)).sum();
     }
 }
