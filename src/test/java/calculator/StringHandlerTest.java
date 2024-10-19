@@ -12,7 +12,7 @@ class StringHandlerTest {
     @Test
     void 커스텀구분자만_리턴하는지_확인() {
         assertEquals("@",
-                handler.extractSeparator("//@\n1@2@3"));
+                handler.extractSeparator("//@\\n1@2@3"));
     }
 
 
@@ -31,6 +31,6 @@ class StringHandlerTest {
     @Test
     void 커스텀_구분자_선언부분만_잘라내는지_확인() {
         assertEquals("1,2;3",
-                handler.removeCustom("//;\n1,2;3"));
+                handler.removeCustom("//;\\n1,2;3"));
     }
 }

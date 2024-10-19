@@ -12,7 +12,7 @@ class ValidatorTest {
 
     @Test
     void 커스텀_구분자의_포맷이_올바르면_True_반환() {
-        assertTrue(validator.hasCustomSeparator("//;\n1;2;3"));
+        assertTrue(validator.hasCustomSeparator("//;\\n1;2;3"));
     }
 
     @Test
@@ -27,12 +27,12 @@ class ValidatorTest {
 
     @Test
     void 숫자로_시작하지_않으면_False_반환() {
-        assertFalse(validator.isStartWithDigit("//;\n"));
+        assertFalse(validator.isStartWithDigit("//;\\n"));
     }
 
     @Test
     void 올바른_포맷일때_아무_처리도_하지_않음() {
-        String[] testCases = {"//@\n1@2@3", " ", "", "//@\n", "1:2:3"};
+        String[] testCases = {"//@\\n1@2@3", " ", "", "//@\\n", "1:2:3"};
         for (String testCase : testCases) {
             assertDoesNotThrow(() -> validator.validateInput(testCase));
         }
