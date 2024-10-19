@@ -29,6 +29,9 @@ public class Application {
         if (checkCustomDelimiter(input)) {
             delimiter = addCustomDelimiter(delimiter, input);  // 기본 구분자에 커스텀 구분자 추가
             input = Console.readLine();
+            if (input == null || input.isEmpty()) {
+                return 0;
+            }
         }
         System.out.println(delimiter);
         // 문자열을 구분자로 분리하여 숫자 배열 추출
