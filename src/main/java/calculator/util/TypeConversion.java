@@ -6,13 +6,24 @@ import calculator.exception.message.ExceptionMessage;
 public class TypeConversion {
 	public static Long convertStringToLong(String value) {
 		try {
-			Long parsedNumber = Long.parseLong(value);
-			if (parsedNumber < 0) {
-				throw new CalculatorException(ExceptionMessage.NOT_POSITIVE_NUMBER);
-			}
+			long parsedNumber = Long.parseLong(value);
+			validateNumber(parsedNumber);
 			return parsedNumber;
 		} catch (NumberFormatException e) {
 			throw new CalculatorException(ExceptionMessage.NOT_NUMBER);
+		} catch (ArithmeticException e) {
+			throw new CalculatorException(ExceptionMessage.OUT_OF_BOUNDS);
 		}
 	}
+
+	protected static void validateNumber(long number){
+		validatePositiveNumber(number);
+	}
+
+	protected static void validatePositiveNumber(long number) {
+		if (number < 0) {
+			throw new CalculatorException(ExceptionMessage.NOT_POSITIVE_NUMBER);
+		}
+	}
+
 }
