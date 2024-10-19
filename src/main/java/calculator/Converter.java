@@ -7,6 +7,11 @@ public class Converter {
 
     public static List<Integer> convert(String[] strings) {
         List<Integer> numbers = new ArrayList<>();
+        if (strings == null) {
+            numbers.add(0);
+            return numbers;
+        }
+
         for (String s : strings) {
             isInteger(s);
             Integer num = isPositive(Integer.parseInt(s));
@@ -14,6 +19,7 @@ public class Converter {
         }
         return numbers;
     }
+
     private static Integer isPositive(int i) {
         if (i < 0) {
             throw new IllegalArgumentException("음수를 계산할 수 없습니다.");
