@@ -2,7 +2,7 @@ package calculator;
 
 import java.util.List;
 
-public class Calculator {
+public class PlusCalculator {
     public static int calculateSum(String inputString) {
         List<String> splitValues;
 
