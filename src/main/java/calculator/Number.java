@@ -32,6 +32,10 @@ public class Number {
         return this;
     }
 
+    public String value() {
+        return value.toString();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
