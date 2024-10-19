@@ -8,10 +8,14 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         String str = Console.readLine();
-        ArrayList<String> seperator = new ArrayList<>();
-        seperator.add(",");
-        seperator.add(":");
-        for (String s : seperator) {
+        ArrayList<String> separator = new ArrayList<>();
+        separator.add(",");
+        separator.add(":");
+        if(str.startsWith("//") && str.charAt(3)=='\\' && str.charAt(4) == 'n'){
+            separator.add(str.substring(2,3));
+            str = str.substring(5);
+        }
+        for (String s : separator) {
             str = str.replaceAll(s, " ");
         }
         int sum = 0;
@@ -21,6 +25,6 @@ public class Application {
                 sum += Integer.parseInt(s);
             }
         }
-        System.out.println(sum);
+        System.out.println("결과 : " + sum);
     }
 }
