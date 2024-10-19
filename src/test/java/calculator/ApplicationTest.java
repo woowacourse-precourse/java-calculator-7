@@ -1,6 +1,11 @@
 package calculator;
 
+import calculator.input.Input;
+import calculator.parser.Parser;
 import camp.nextstep.edu.missionutils.test.NsTest;
+import java.util.List;
+import java.util.function.Predicate;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
@@ -22,6 +27,52 @@ class ApplicationTest extends NsTest {
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+    @Test
+    void 파서_테스트() {
+        // given
+        List<String> basicSeparators = List.of(",", ":");
+        Parser parser = new Parser(basicSeparators);
+        Input input = new Input("//", "\\n");
+
+        //when
+        String input1 = "//a\\n1:2:3a54";
+
+        Predicate<Integer> positivePolicy = (num) -> num >= 0;
+//        Predicate<Integer> minimumPolicy = (num) -> num > 10;
+        List<Predicate<Integer>> policies = List.of(positivePolicy);
+
+        // then
+        List<String> inputs = input.read(() -> input1);
+        System.out.println(inputs);
+
+        parser.updateInput(inputs.get(0));
+        parser.addSeparators();
+
+        parser.updateInput(inputs.get(1));
+        List<Integer> result = parser.parse(policies);
+        List<Integer> expected = List.of(1, 2, 3, 54);
+
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    void 리더_테스트() {
+        Input input = new Input("//", "\\n");
+
+//        System.out.println("//\n\\n32\n12");
+        List<String> inputs = input.read(() -> "//\\n\\n32\\n12");
+        System.out.println(inputs.size() + ": " + inputs);
+    }
+
+    @Test
+    void input_에러_테스트() {
+        Input input = new Input("//", "\\n");
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            List<String> inputs = input.read(() -> "//;\\a32;12");
+            System.out.println(inputs);
+        });
     }
 
     @Override
