@@ -9,7 +9,7 @@ public class Positive {
 		}
 	}
 
-	public Positive(int num) {
+	private Positive(int num) {
 		this.num = num;
 	}
 
