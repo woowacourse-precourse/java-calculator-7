@@ -12,27 +12,27 @@ public class Delimiter {
 	private static final String SELECT_ONE_FORMAT = "[%s]";
 	private static final Pattern SINGLE_NUMERIC_PATTERN = Pattern.compile("^[0-9]$");
 
-	private final String delimiter;
+	private final String character;
 
-	private Delimiter(String delimiter) {
-		validateLength(delimiter);
-		validateNotNumber(delimiter);
+	private Delimiter(String character) {
+		validateLength(character);
+		validateNotNumber(character);
 
-		this.delimiter = delimiter;
+		this.character = character;
 	}
 
-	public static Delimiter from(String delimiter) {
-		return new Delimiter(delimiter.trim());
+	public static Delimiter from(String character) {
+		return new Delimiter(character.trim());
 	}
 
-	private void validateLength(String delimiter) {
-		if (delimiter.isBlank() || delimiter.length() > STRICT_LENGTH) {
-			throw new IllegalArgumentException(ErrorMessage.DELIMITER_LENGTH.getMessage());
+	private void validateLength(String character) {
+		if (character.isBlank() || character.length() > STRICT_LENGTH) {
+			throw new IllegalArgumentException(ErrorMessage.DELIMITER_LENGTH_OVER.getMessage());
 		}
 	}
 
-	private void validateNotNumber(String delimiter) {
-		if (SINGLE_NUMERIC_PATTERN.matcher(delimiter).matches()) {
+	private void validateNotNumber(String character) {
+		if (SINGLE_NUMERIC_PATTERN.matcher(character).matches()) {
 			throw new IllegalArgumentException(ErrorMessage.DELIMITER_NOT_NUMBER.getMessage());
 		}
 	}
@@ -40,7 +40,7 @@ public class Delimiter {
 	public static String toRegex(List<Delimiter> delimiters) {
 		return String.format(
 			SELECT_ONE_FORMAT,
-			String.join(EMPTY, delimiters.stream().map(delimiter -> delimiter.delimiter).toList())
+			String.join(EMPTY, delimiters.stream().map(delimiter -> delimiter.character).toList())
 		);
 	}
 
@@ -51,11 +51,11 @@ public class Delimiter {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		Delimiter that = (Delimiter)o;
-		return Objects.equals(this.delimiter, that.delimiter);
+		return Objects.equals(this.character, that.character);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hashCode(delimiter);
+		return Objects.hashCode(character);
 	}
 }

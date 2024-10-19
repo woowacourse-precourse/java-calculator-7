@@ -6,7 +6,8 @@ import java.util.regex.Pattern;
 import calculator.constant.ErrorMessage;
 
 public class Numbers {
-	private final static long MIN = 1;
+	private final static long MIN = 1L;
+	private final static long SUM_BASE = 0L;
 	private static final Pattern NUMBER_PATTERN = Pattern.compile("^0|[1-9]+[0-9]*$");
 
 	private final List<Long> numbers;
@@ -30,7 +31,7 @@ public class Numbers {
 
 			return new Numbers(numbers);
 		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException(ErrorMessage.NUMBERS_OVERFLOW.getMessage());
+			throw new IllegalArgumentException(ErrorMessage.NUMBERS_OVER_RANGE.getMessage());
 		}
 	}
 
@@ -39,7 +40,7 @@ public class Numbers {
 			.filter(number -> number < MIN)
 			.findAny()
 			.ifPresent(number -> {
-				throw new IllegalArgumentException(ErrorMessage.NUMBERS_POSITIVE.getMessage());
+				throw new IllegalArgumentException(ErrorMessage.NUMBERS_NOT_POSITIVE.getMessage());
 			});
 	}
 
@@ -47,12 +48,12 @@ public class Numbers {
 		if (!stringNumbers.stream().allMatch(
 			stringNumber -> NUMBER_PATTERN.matcher(stringNumber).matches()
 		)) {
-			throw new IllegalArgumentException(ErrorMessage.NUMBERS_NUMBER_FORMAT.getMessage());
+			throw new IllegalArgumentException(ErrorMessage.NUMBERS_INVALID_NUMBER_FORMAT.getMessage());
 		}
 	}
 
 	Long sum() {
 		return numbers.stream()
-			.reduce(0L, Long::sum);
+			.reduce(SUM_BASE, Long::sum);
 	}
 }

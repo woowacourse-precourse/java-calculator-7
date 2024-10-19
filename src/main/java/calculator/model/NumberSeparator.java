@@ -39,7 +39,7 @@ public class NumberSeparator {
 
 	private void validateEquationFormat(String equation) {
 		if (!EQUATION_PATTERN.matcher(equation).matches()) {
-			throw new IllegalArgumentException(ErrorMessage.NUMBER_SEPARATOR_EQUATION_FORMAT.getMessage());
+			throw new IllegalArgumentException(ErrorMessage.NUMBER_SEPARATOR_INVALID_EQUATION_FORMAT.getMessage());
 		}
 	}
 
