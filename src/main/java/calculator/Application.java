@@ -1,5 +1,7 @@
 package calculator;
+
 import calculator.Controller.StringProcessorController;
+import calculator.Service.DelimiterExtractor;
 import calculator.Service.InputReader;
 
 public class Application {
@@ -9,8 +11,12 @@ public class Application {
         // InputReader 객체 생성
         InputReader inputReader = new InputReader();
 
+        // DelimiterExtractor 객체 생성
+        DelimiterExtractor delimiterExtractor = new DelimiterExtractor();
+
         // StringProcessorController에 의존성 주입
-        StringProcessorController stringProcessorController = new StringProcessorController(inputReader);
+        StringProcessorController stringProcessorController = new StringProcessorController(inputReader,
+                delimiterExtractor);
 
         // 프로세스 시작
         stringProcessorController.process();
