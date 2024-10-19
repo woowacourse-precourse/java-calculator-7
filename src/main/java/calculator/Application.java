@@ -32,6 +32,8 @@ public class Application {
         for (String s : NumberList) {
             if (s.matches(matcherCheck)) {
                 result += Integer.parseInt(s);
+            } else if (s.matches("")) {
+                result += 0;
             } else {
                 throw new IllegalArgumentException();
             }
@@ -52,7 +54,7 @@ public class Application {
     static boolean hasPattern(String input) {
         try {
             String checkMobile = input.substring(0, 5);
-            return checkMobile.contains("//");
+            return checkMobile.contains("//") & checkMobile.contains("\\n");
         } catch (StringIndexOutOfBoundsException e) {
             return false;
         }
