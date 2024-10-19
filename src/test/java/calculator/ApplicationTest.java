@@ -58,7 +58,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 비어있는_입력() {
+    void 빈값이_입력으로_주어질_때() {
         assertSimpleTest(() -> {
             run("\n");
             assertThat(output()).contains("결과 : 0");
@@ -66,7 +66,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 구분자_사이에_비어있는_입력() {
+    void 구분자가_맨_앞에_올_때() {
         assertSimpleTest(() -> {
             run("//wq\\nwq3:3");
             assertThat(output()).contains("결과 : 6");
@@ -74,7 +74,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀_구분자_개행포함() {
+    void 커스텀_구분자가_이스케이프_문자일_때() {
         assertSimpleTest(() -> {
             run("//*\\n*3*3");
             assertThat(output()).contains("결과 : 6");

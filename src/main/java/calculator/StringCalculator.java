@@ -2,9 +2,10 @@ package calculator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 public class StringCalculator {
-    public int calculate(String userInput) {
+    public long calculate(String userInput) {
         ArrayList<String> delimiters = new ArrayList<>();
         delimiters.add(",");
         delimiters.add(":");
@@ -13,11 +14,11 @@ public class StringCalculator {
             if (userInput.contains("\\n")) {
                 String newDelimiter = userInput.substring(2, userInput.indexOf("\\n"));
                 System.out.println(newDelimiter);
-                if (newDelimiter.matches("\\d+")) {
+                if (newDelimiter.isEmpty() || newDelimiter.matches("\\d+")) {
                     throw new IllegalArgumentException("잘못된 값을 입력하였습니다");
                 }
-                delimiters.add(newDelimiter);
-                userInput = userInput.substring(userInput.indexOf("\\n") + 2);
+                delimiters.add(Pattern.quote(newDelimiter));
+                userInput = userInput.substring(userInput.lastIndexOf("\\n") + 2);
             } else {
                 throw new IllegalArgumentException("잘못된 값을 입력하였습니다");
             }
@@ -27,15 +28,15 @@ public class StringCalculator {
         String[] splitByDelimiter = userInput.split(regex);
         System.out.println(Arrays.toString(splitByDelimiter));
         System.out.println(splitByDelimiter[0]);
-        int result = 0;
+        long result = 0;
         for (String num : splitByDelimiter) {
 
-            int addNum;
+            long addNum;
             try {
                 if (num.isEmpty()) {
                     num = "0";
                 }
-                addNum = Integer.parseInt(num);
+                addNum = Long.parseLong(num);
             } catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException();
             }
