@@ -33,7 +33,13 @@ class ApplicationTest extends NsTest {
                 //커스텀 구분자가 존재하지 않고, ','와 ':'를 제외한 다른 문자열이 있을 경우 예외를 발생시킨다.
                 () -> assertThatThrownBy(() -> run("1,2'3"))
                         .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessage("잘못된 문자가 들어있습니다.")
+                        .hasMessage("잘못된 문자가 들어있습니다."),
+
+                //구분자로 나눈 문자열이 빈 칸일 경우 0으로 저장한다.
+                () -> assertSimpleTest(() -> {
+                    run("1,,2");
+                    assertThat(output()).contains("3");
+                })
         );
     }
 

@@ -30,7 +30,9 @@ public abstract class Delimiter {
 
         if (!hasCustomDelimiter(s)) {
             if (hasDelimiter(s)) {
-                result = Arrays.stream(s.split("[:,]")).toList();
+                result = Arrays.stream(s.split("[:,]"))
+                        .map(str -> str.isEmpty() ? "0" : str)
+                        .toList();
 
                 if (!areDigits(result)) {
                     CalculatorException.causeException("잘못된 문자가 들어있습니다.");

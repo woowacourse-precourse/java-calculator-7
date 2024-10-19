@@ -20,4 +20,8 @@ public class Output {
         System.out.println("결과 : " + result);
     }
 
+    public void printResult(String result) {
+        System.out.println("결과 : " + result);
+    }
+
 }
