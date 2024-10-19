@@ -1,10 +1,10 @@
-package calculator.model;
+package calculator.service;
 
 import calculator.model.separator.CustomSeparator;
 import calculator.model.separator.DefaultSeparator;
 import calculator.model.separator.Separator;
 
-public class Calculator {
+public class CalculatorService {
     private static final int MIN_NUMBER = 1;
 
     public int add(String input) {
