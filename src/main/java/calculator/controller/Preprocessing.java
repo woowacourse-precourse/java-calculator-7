@@ -49,6 +49,6 @@ public class Preprocessing extends InputValidator {
     public List<String> findCustomSeparator(String given) {
         String customSeparator = customValidator(given);
 
-        return Arrays.asList(customSeparator, given.substring(given.indexOf("\\n" + 2)));
+        return Arrays.asList(customSeparator, given.substring(given.indexOf("\\n") + 2));
     }
 }
