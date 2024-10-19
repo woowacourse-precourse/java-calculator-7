@@ -2,6 +2,7 @@ package calculator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Calculator {
@@ -29,9 +30,14 @@ public class Calculator {
 
     //커스텀 구분자 추출 후 커스텀 구분자와 커스텀 구분자를 제거한 입력값을 반환
     public String[] customDelimiter(String input) {
-        int index = input.indexOf("\\n");
-        String delimiter = input.substring(2, index);
-        String newInput = input.substring(index + 2);
+        Pattern pattern = Pattern.compile("\\d");
+        Matcher matcher = pattern.matcher(input);
+        int index = 0;
+        if (matcher.find()) {
+            index = matcher.start();
+        }
+        String delimiter = input.substring(2, index - 2);
+        String newInput = input.substring(index);
         return new String[]{delimiter, newInput};
     }
 

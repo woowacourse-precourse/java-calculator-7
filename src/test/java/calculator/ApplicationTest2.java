@@ -39,6 +39,14 @@ class ApplicationTest2 extends NsTest {
         });
     }
 
+    @Test
+    void 개행문자일_경우() {
+        assertSimpleTest(() -> {
+            run("//\\n\\n1\\n2");
+            assertThat(output()).contains("결과 : 3");
+        });
+    }
+
 
     @Override
     public void runMain() {
