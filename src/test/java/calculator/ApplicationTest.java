@@ -10,6 +10,38 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
     @Test
+    void Input_구분자_구분(){
+        assertSimpleTest(() ->{
+            run("//#\\n39:24#72");
+            assertThat(output()).contains("[39, 24, 72]");
+        });
+    }
+
+    @Test
+    void Input_구분자_구분_특수문자(){
+        assertSimpleTest(() ->{
+            run("//+\\n21+23+52");
+            assertThat(output()).contains("[21, 23, 52]");
+        });
+    }
+    @Test
+    void Input_커스텀구분자_중간(){
+        assertSimpleTest(() ->{
+            run("14$23$//$\\n72");
+            assertThat(output()).contains("[14, 23, 72]");
+        });
+    }
+
+    @Test
+    void Input_구분_문자포함(){
+        assertSimpleTest(() ->
+        assertThatThrownBy(() -> runException("1sf4$2@#3$//$\\n72"))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    /*
+    @Test
     void Input_커스텀구문자_추가1(){
         assertSimpleTest(() ->{
             run("//#\\n3924");
@@ -25,7 +57,6 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("7228");
         });
     }
-    /*
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {

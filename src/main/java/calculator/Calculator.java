@@ -2,11 +2,13 @@ package calculator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Calculator {
     private String No_Space_Input;
     private List<String> Delimiter = new ArrayList<>(Arrays.asList(",",":"));
     private String del_deli_input;
+    private List<String> parts;
 
     public Calculator(String input) {
         if(input.isEmpty() || !input.matches(".*\\d.*")) {
@@ -16,13 +18,15 @@ public class Calculator {
     }
 
     public void print(){
-        del_deli_input = Custom_Deli();
-        System.out.println(Delimiter);
-        System.out.println(del_deli_input);
+        Custom_Deli(); // 커스텀 구분자 추가
+        split_input(); // 커스텀 구분자 구문 삭제된 문자열에서 구분자 출력
+        System.out.println(parts);
+        //System.out.println(Delimiter);
+        //System.out.println(del_deli_input);
         //System.out.println(No_Space_Input);
     }
 
-    public String Custom_Deli(){
+    public void Custom_Deli(){
         int index = 0;
         StringBuilder returnstring = new StringBuilder(No_Space_Input);
 
@@ -39,7 +43,38 @@ public class Calculator {
             }
             index += 2;
         }
-        return returnstring.toString();
+        del_deli_input = returnstring.toString();
+    }
+
+    public void split_input(){
+        List<String> escapedDelimiters = escapeDelimiters(Delimiter);
+
+        List<String> parts = new ArrayList<>();
+
+        for(String delimiter : escapedDelimiters){
+            if(parts.isEmpty()){
+                parts.addAll(Arrays.asList(del_deli_input.split(delimiter)));
+            }else{
+                List<String> newparts = new ArrayList<>();
+                for(String part : parts){
+                    newparts.addAll(Arrays.asList(part.split(delimiter)));
+                }
+                parts = newparts;
+            }
+        }
+        for(String part : parts){
+            if(part.matches(".*[^0-9.].*"))
+                throw new IllegalArgumentException("입력된 값에 문자가 있습니다.");
+        }
+        this.parts = parts;
+    }
+
+    private static List<String> escapeDelimiters(List<String> delimiter) {
+        List<String> escaped = new ArrayList<>();
+        for (String deli : delimiter) {
+            escaped.add(Pattern.quote(deli));
+        }
+        return escaped;
     }
 
 }
