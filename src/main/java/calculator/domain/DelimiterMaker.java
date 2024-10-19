@@ -37,11 +37,21 @@ public class DelimiterMaker {
 
 	private void validateDelimiter(String delimiter) {
 		validateCustomDelimiterFormat(delimiter);
+		validateDelimiterIsCustomDelimiterPrefix(delimiter);
 	}
 
 	private void validateCustomDelimiterFormat(String delimiter) {
 		if (!delimiter.startsWith(CUSTOM_DELIMITER_PREFIX)) {
 			throw new IllegalArgumentException("Invalid delimiter: " + delimiter);
+		}
+	}
+
+	private void validateDelimiterIsCustomDelimiterPrefix(String delimiter) {
+
+		String customDelimiter = delimiter.substring(CUSTOM_DELIMITER_PREFIX.length());
+
+		if(customDelimiter.contains(CUSTOM_DELIMITER_SUFFIX)) {
+			throw new IllegalArgumentException("Invalid delimiter: " + customDelimiter);
 		}
 	}
 
