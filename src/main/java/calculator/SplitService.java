@@ -14,10 +14,10 @@ public class SplitService {
 
     public List<String> split(String input) {
         String expressionStr = extractExpression(input);
+        checkStringValidity(expressionStr);
         String[] numbers = expressionStr.split(delimiterSetToString());
         return Arrays.stream(numbers).toList();
     }
-
 
     private String extractExpression(String input) {
         if (input.startsWith(START_POINT) && input.contains(END_POINT)) {
@@ -32,9 +32,7 @@ public class SplitService {
         int startIndex = START_POINT.length();
         int endIndex = input.indexOf(END_POINT);
         String customDelimiter = input.substring(startIndex, endIndex);
-        if (customDelimiter.isEmpty()) {
-            throw new IllegalArgumentException();
-        }
+        checkStringValidity(customDelimiter);
         delimiterSet.add(customDelimiter);
     }
 
@@ -45,5 +43,11 @@ public class SplitService {
         }
         builder.setLength(builder.length() - 1);
         return builder.toString();
+    }
+
+    private void checkStringValidity(String input) {
+        if (input.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
     }
 }
