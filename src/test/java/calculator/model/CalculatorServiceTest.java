@@ -49,6 +49,13 @@ public class CalculatorServiceTest {
         assertThrows(IllegalArgumentException.class, () -> {
             calculatorService.calculate(input);
         });
+    }
 
+    @Test
+    @DisplayName("dangling 문자 구분자 사용시 숫자 추출 테스트")
+    void extractDanglingNumbers() {
+        String input = "//?\n1?2?3";
+        int result = calculatorService.calculate(input);
+        assertThat(result).isEqualTo(6);
     }
 }
