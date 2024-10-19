@@ -88,4 +88,9 @@ public class Input {
         return true;
     }
 
+    //사용자가 문자열 마지막에 구분자를 사용했는지 검증
+    public static boolean validLastSeparator(String input){
+        return Character.isDigit(input.charAt(input.length() - 1));
+    }
+
 }
