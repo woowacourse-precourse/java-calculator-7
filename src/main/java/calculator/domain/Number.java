@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Number {
     private final List<Integer> numberList;
+    private static final String NOT_NUMERIC_ERROR = "기본 구분자와 커스텀 구분자 외의 문자가 입력되었습니다.";
+    private static final String NOT_POSITIVE_NUMBER_ERROR = "양수를 입력해주세요.";
 
     public Number(String[] numberArray) {
         this.numberList = new ArrayList<>();
@@ -16,13 +18,13 @@ public class Number {
         for (String str : array) {
             // 숫자가 아닐 경우
             if (!isNumeric(str)) {
-                throw new IllegalArgumentException("기본 구분자와 커스텀 구분자 외의 문자가 입력되었습니다.");
+                throw new IllegalArgumentException(NOT_NUMERIC_ERROR);
             }
 
             // 양수가 아닌 숫자가 입력된 경우
             int number = Integer.parseInt(str);
             if (number <= 0) {
-                throw new IllegalArgumentException("양수를 입력해주세요.");
+                throw new IllegalArgumentException(NOT_POSITIVE_NUMBER_ERROR);
             }
             addNumber(number);
         }
