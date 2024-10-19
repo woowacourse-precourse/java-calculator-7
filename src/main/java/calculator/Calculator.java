@@ -3,6 +3,7 @@ package calculator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class Calculator {
     private String input;
@@ -38,7 +39,7 @@ public class Calculator {
     public Integer caculate() {
         List<String> strs = extract();
 
-        List<Integer> numbers = stringToInteger(strs);
+        List<Integer> numbers = convert(strs);
 
         Integer result = sum(numbers);
 
@@ -52,20 +53,13 @@ public class Calculator {
             return strings;
         }
 
-        if (input.startsWith(Delimiter.CUSTOM_SEPARATOR_START.getValue())) {
-            if (input.contains(Delimiter.CUSTOM_SEPARATOR_END.getValue())) {
-                String customDelim = input.substring(
-                        2,
-                        input.indexOf(Delimiter.CUSTOM_SEPARATOR_END.getValue())
-                );
-                updateSeparatorRegex(customDelim);
+        Optional<String> customSeparator = Validator.checkCustomSeparator(input);
+        if (customSeparator.isPresent()) {
+            updateSeparatorRegex(customSeparator.get());
 
-                int startIdx = input.indexOf(Delimiter.CUSTOM_SEPARATOR_END.getValue())
-                        + Delimiter.CUSTOM_SEPARATOR_END.getValue().length();
-                updateInput(input.substring(startIdx));
-            } else {
-                throw new IllegalArgumentException("\n지정 구분자는 //와 \\n 사이에 입력해주세요");
-            }
+            int startIdx = input.indexOf(Delimiter.CUSTOM_SEPARATOR_END.getValue())
+                    + Delimiter.CUSTOM_SEPARATOR_END.getValue().length();
+            updateInput(input.substring(startIdx));
         }
 
         strings = Arrays.stream(input.split(separatorRegex))
@@ -74,15 +68,12 @@ public class Calculator {
         return strings;
     }
 
-    private List<Integer> stringToInteger(List<String> strs) {
+    private List<Integer> convert(List<String> strs) {
+        Validator.checkString(strs);
+
         List<Integer> numbers = strs.stream()
                 .filter(s -> !s.isEmpty() && !s.isBlank())
-                .map(s -> {
-                    if (!s.matches(Regex.NUMBER_REGEX.getPattern())) {
-                        throw new IllegalArgumentException(s + " 는 허용되지 않는 문자입니다");
-                    }
-                    return Integer.parseInt(s);
-                })
+                .map(Integer::parseInt)
                 .toList();
 
         return numbers;
