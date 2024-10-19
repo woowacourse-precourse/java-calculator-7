@@ -8,8 +8,8 @@ import calculator.view.OutputView;
 
 public class CalcController {
 
-    private InputView inputView;
-    private OutputView outputView;
+    private final InputView inputView;
+    private final OutputView outputView;
 
     public CalcController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
