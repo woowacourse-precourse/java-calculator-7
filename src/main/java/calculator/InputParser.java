@@ -2,16 +2,17 @@ package calculator;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class InputParser {
-    private static final String DEFAULT_DIVIDERS = ",|:";
+    private static final String DEFAULT_DIVIDERS = ",:";
 
     public List<Integer> parse(String input) {
         String[] parts = findCustomDivider(input);
         String dividers = parts[0];
         String numbers = parts[1];
 
-        return Arrays.stream(numbers.split(dividers))
+        return Arrays.stream(numbers.split(dividers, -1))
                 .map(this::parseNumber)
                 .toList();
     }
@@ -24,15 +25,16 @@ public class InputParser {
             }
 
             String customDivider = input.substring(2, endIndex);
-            if (customDivider.length() != 1 || Character.isDigit(customDivider.charAt(0))) {
+            if (customDivider.length() != 1) {
                 throw new IllegalArgumentException("커스텀 구분자는 한글자의 문자여야 합니다.");
             }
 
-            String dividers = DEFAULT_DIVIDERS + "|" + customDivider;
+            customDivider = Pattern.quote(customDivider);
+            String dividers = DEFAULT_DIVIDERS + customDivider;
             String remainingInput = input.substring(endIndex + 2);
-            return new String[]{dividers, remainingInput};
+            return new String[]{"[" + dividers + "]", remainingInput};
         }
-        return new String[]{DEFAULT_DIVIDERS, input};
+        return new String[]{"[" + DEFAULT_DIVIDERS + "]", input};
     }
 
     private int parseNumber(String number) {
