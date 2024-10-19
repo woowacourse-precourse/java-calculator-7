@@ -8,12 +8,14 @@ public class Calculator {
             return 0;
         }
 
-        String delimiters = checkDelimiter(input);
+        String[] check = checkDelimiter(input);
+        String delimiters = check[0];
+        String numbersSection = check[1];
 
         return -1;
     }
 
-    private static String checkDelimiter(String input) {
+    private static String[] checkDelimiter(String input) {
         
         StringBuilder delimiters = new StringBuilder(); 
         
@@ -37,9 +39,10 @@ public class Calculator {
                     break;
                 }
             }
+            input = input.substring(end + 1);
         }
 
-        return delimiters.toString();
+        return new String[] { delimiters.toString(), input };
     }
 
 }
