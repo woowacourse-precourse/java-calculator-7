@@ -5,15 +5,15 @@ import static calculator.domain.CalculatorConstants.DEFAULT_DELIMITER_COLON;
 import static calculator.domain.CalculatorConstants.DEFAULT_DELIMITER_COMMA;
 import calculator.domain.validator.InputValidator;
 
-import calculator.util.FilteredEmptyString;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 public class InputParser {
 
     private final InputValidator inputValidator = new InputValidator();
-    private final FilteredEmptyString FilteredEmptyString = new FilteredEmptyString();
 
     public ParsedInput parse(String input) {
         if (inputValidator.checkInputEmpty(input)) {
@@ -60,7 +60,13 @@ public class InputParser {
         String regex = String.join("|", delimiters);
         String[] numberTokens = numbers.split(regex);
 
-        return FilteredEmptyString.filterEmptyString(numberTokens);
+        return filterEmptyString(numberTokens);
+    }
+
+    private String[] filterEmptyString(String[] numbers) {
+        return Arrays.stream(numbers)
+                .filter(Predicate.not(String::isEmpty))
+                .toArray(String[]::new);
     }
 
     private void validateNumbers(String[] numbers) {
