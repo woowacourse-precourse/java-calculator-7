@@ -1,25 +1,21 @@
 package calculator;
 
-import calculator.input.InputHandler;
-import calculator.input.InputHandlerImpl;
 import java.util.List;
 
-public class Calculator implements CalculatorImpl {
+public class Calculator {
 
-    private InputHandlerImpl inputHandler;
+    private InputHandler inputHandler;
 
     public Calculator() {
         inputHandler = new InputHandler();
     }
 
-    @Override
     public void run() {
         List<Long> numbers = inputHandler.inputProcessor();
         long result = calculate(numbers);
         print(result);
     }
 
-    @Override
     public long calculate(List<Long> numbers) {
         long sum = 0;
 
@@ -33,7 +29,6 @@ public class Calculator implements CalculatorImpl {
         return sum;
     }
 
-    @Override
     public void print(long result) {
         System.out.println("결과 : " + result);
     }

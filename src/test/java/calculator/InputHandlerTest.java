@@ -1,15 +1,17 @@
 package calculator.input;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.Test;
-
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class InputHandlerTest extends NsTest {
+import org.junit.jupiter.api.Test;
+
+public class InputHandlerTest {
 
     @Test
     void 음수입력_예외_테스트() {
+        //given
+        //when
+        //then
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))
                         .isInstanceOf(IllegalArgumentException.class)

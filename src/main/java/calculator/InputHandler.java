@@ -1,24 +1,22 @@
-package calculator.input;
+package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InputHandler implements InputHandlerImpl {
-    @Override
+public class InputHandler {
     public List<Long> inputProcessor() {
         //입력
         System.out.println("덧셈할 문자열을 입력해 주세요");
-        InputDto inputDto = new InputDto(Console.readLine());
+        String input = Console.readLine();
         Console.close();
 
         //구분자 처리
-        String convertedInput = convertInput(inputDto.getInput());
+        String convertedInput = convertInput(input);
         //숫자 처리
         return getNumbers(convertedInput);
     }
 
-    @Override
     public String convertInput(String input) {
         if (!input.startsWith("//")) {
             return input;
@@ -47,7 +45,6 @@ public class InputHandler implements InputHandlerImpl {
         return sb.toString();
     }
 
-    @Override
     public List<Long> getNumbers(String input) {
 
         List<Long> numbers = new ArrayList<>();
