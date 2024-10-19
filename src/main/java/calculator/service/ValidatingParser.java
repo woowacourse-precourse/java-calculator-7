@@ -8,7 +8,7 @@ public class ValidatingParser {
 	private static final String END_CUSTOM_SEPARATOR = "\\n";
 	private static final String DEFAULT_SEPARATORS = "[,:]";
 	private static final String ERROR_MESSAGE_NOT_NUMBER = "입력값이 숫자가 아닙니다.";
-	private static final String ERROR_MESSAGE_NEGATIVE_NUMBER = "입력값이 양수가 아닙니다.";
+	private static final String ERROR_MESSAGE_NOT_POSITIVE_NUMBER = "입력값이 양수가 아닙니다.";
 
 	private ValidatingParser() {
 	}
@@ -55,7 +55,7 @@ public class ValidatingParser {
 		List<Integer> numbers = new ArrayList<>();
 
 		if (suffix.isEmpty()) {
-			return handleEmptyInput();
+			return numbers;
 		}
 
 		String[] split = suffix.split(separator);
@@ -80,14 +80,8 @@ public class ValidatingParser {
 	}
 
 	private void validatePositiveNumber(int number) {
-		if (number < 0) {
-			throw new IllegalArgumentException(ERROR_MESSAGE_NEGATIVE_NUMBER);
+		if (number <= 0) {
+			throw new IllegalArgumentException(ERROR_MESSAGE_NOT_POSITIVE_NUMBER);
 		}
-	}
-
-	private List<Integer> handleEmptyInput() {
-		List<Integer> numbers = new ArrayList<>();
-		numbers.add(0);
-		return numbers;
 	}
 }
