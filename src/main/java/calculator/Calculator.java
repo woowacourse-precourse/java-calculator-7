@@ -1,8 +1,8 @@
 package calculator;
 
+import calculator.exception.InputValidationException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import static calculator.ParsingInput.executeParsingInput;
 
 public class Calculator {
@@ -12,6 +12,7 @@ public class Calculator {
 
     public Calculator(String input) {
         INPUT = input;
+        InputValidationException.isEmpty(input);
         TOKEN = checkCustomToken(INPUT);
     }
 
