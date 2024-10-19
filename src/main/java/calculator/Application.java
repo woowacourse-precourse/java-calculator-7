@@ -15,13 +15,15 @@ public class Application {
                 if(s.isEmpty()) {
                     continue;
                 }
-
-                int number = Integer.parseInt(s);
-
-                if(number <= 0) {
-                    throw new IllegalArgumentException("마이너스 입력");
+                try{
+                    int number = Integer.parseInt(s);
+                    if(number < 0) {
+                        throw new IllegalArgumentException("마이너스 입력");
+                    }
+                    result += number;
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("잘못된 값 입력");
                 }
-                result += number;
             }
 
             System.out.println("결과 : " + result);
