@@ -1,6 +1,7 @@
 package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -66,14 +67,13 @@ public class InputTest {
     public void inputIsNULL() {
         // given
         Separator separator = new Separator();
-        String splitInputWithSeparator = separator.containCustomSeparator("");
-        Input input1 = new Input(splitInputWithSeparator);
 
-        // when
-        String[] splitStr = input1.splitBySeparator(separator);
-        int[] numbers = input1.convertToIntArray(splitStr);
-
-        // then
-        assertThat(numbers).isEmpty();
+        // when & then
+        // IllegalArgumentException 발생
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+            String splitInputWithSeparator = separator.containCustomSeparator(null);
+            Input input1 = new Input(splitInputWithSeparator);
+        });
+        assertThat(exception.getMessage()).isEqualTo("입력값이 null이 될 수 없습니다.");
     }
 }

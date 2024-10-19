@@ -17,6 +17,9 @@ public class Separator {
     }
 
     public String containCustomSeparator(String input) {
+        if (input == null) {
+            throw new IllegalArgumentException("입력값이 null이 될 수 없습니다.");
+        }
         if (input.startsWith(EnumClass.DESIGNATED_SEPARATOR_START.getSymbol()) && input.contains(
                 EnumClass.DESIGNATED_SEPARATOR_END.getSymbol())) {
             int customSeparatorStartIdx = EnumClass.DESIGNATED_SEPARATOR_START.getSymbolLength();

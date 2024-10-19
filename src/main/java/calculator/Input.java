@@ -13,7 +13,7 @@ public class Input {
     }
 
     public String[] splitBySeparator(Separator separator) {
-        if (input.isEmpty() || input == null) {
+        if (input.isEmpty()) {
             return new String[0];
         }
 
