@@ -2,22 +2,23 @@ package calculator.controller;
 
 import calculator.constants.AppConstants;
 import calculator.dto.UserExpressionDto;
-import calculator.service.UserExpressionService;
+import calculator.service.CalculatorService;
 import calculator.view.UserView;
 import camp.nextstep.edu.missionutils.Console;
 
 public class ConsoleController implements UserController {
-    private final UserExpressionService userExpressionService;
+    private final CalculatorService calculatorService;
     private final UserView userView;
 
-    public ConsoleController(UserExpressionService userExpressionService, UserView userView) {
-        this.userExpressionService = userExpressionService;
+    public ConsoleController(CalculatorService calculatorService, UserView userView) {
+        this.calculatorService = calculatorService;
         this.userView = userView;
     }
 
     @Override
     public void run() {
         String expression = getExpressionFromUser();
+        saveUserExpression(expression);
     }
 
     private String getExpressionFromUser() {
@@ -26,7 +27,7 @@ public class ConsoleController implements UserController {
     }
 
     private void saveUserExpression(String expression) {
-        userExpressionService.saveUserExpression(new UserExpressionDto(expression));
+        calculatorService.saveUserExpression(new UserExpressionDto(expression));
     }
 
 

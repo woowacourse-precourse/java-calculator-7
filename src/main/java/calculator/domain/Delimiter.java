@@ -8,4 +8,12 @@ public class Delimiter {
     public Delimiter(Set<Character> delimiter) {
         this.delimiter = delimiter;
     }
+
+    public int getDelimiterSize() {
+        return delimiter.size();
+    }
+
+    public boolean contains(char c) {
+        return delimiter.contains(c);
+    }
 }

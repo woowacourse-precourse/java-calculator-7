@@ -2,8 +2,8 @@ package calculator;
 
 import calculator.controller.ConsoleController;
 import calculator.controller.UserController;
-import calculator.service.UserExpressionService;
-import calculator.service.UserExpressionServiceImpl;
+import calculator.service.CalculatorService;
+import calculator.service.CalculatorServiceImpl;
 import calculator.view.ConsoleView;
 import calculator.view.UserView;
 
@@ -13,8 +13,8 @@ public class AppConfig {
         return new ConsoleController(expressionService(), userView());
     }
 
-    public UserExpressionService expressionService() {
-        return new UserExpressionServiceImpl();
+    public CalculatorService expressionService() {
+        return new CalculatorServiceImpl();
     }
 
     public UserView userView() {
