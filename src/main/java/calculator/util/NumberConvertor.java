@@ -9,6 +9,7 @@ import java.util.Arrays;
 public class NumberConvertor {
 
     public static int[] stringToInt(String str) {
+        str = str.trim();
         if (str.isEmpty()) {
             return new int[] {};
         }
@@ -24,7 +25,7 @@ public class NumberConvertor {
 
     private static int parseAndValidate(String str) {
         DelimiterValidator.validateIncludeDelimiter(str);
-        int number = Integer.parseInt(str.trim());
+        int number = Integer.parseInt(str);
         NumberValidator.validatePositiveNumber(number);
         return number;
     }
