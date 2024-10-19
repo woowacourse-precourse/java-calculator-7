@@ -3,12 +3,13 @@ package calculator.application;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import calculator.application.impl.PositiveNumberExtractService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class CalculatorServiceIntTest {
+class CalculateServiceIntTest {
 
-    CalculatorService calculatorService = new CalculatorService();
+    CalculateService calculateService = new CalculateService(new PositiveNumberExtractService());
 
     @Test
     @DisplayName("splitAndSum 요청시 정수를 반환한다.")
@@ -17,7 +18,7 @@ class CalculatorServiceIntTest {
         String command = "1,2:3";
 
         // when
-        int sum = calculatorService.splitAndSum(command);
+        int sum = calculateService.splitAndSum(command);
 
         // then
         assertThat(sum).isEqualTo(6);
@@ -30,7 +31,7 @@ class CalculatorServiceIntTest {
         String command = "-";
 
         // when, then
-        assertThatThrownBy(() -> calculatorService.splitAndSum(command))
+        assertThatThrownBy(() -> calculateService.splitAndSum(command))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

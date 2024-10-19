@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class PromptTest {
+class CalculatorPromptTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3", "4,5:6", "7:8:9", "0:1:2:3:4:5:6:7:8:9", "ab:cd,ef", "a1,as2,bd3"})
@@ -18,11 +18,11 @@ class PromptTest {
     void givenInputWithBaseDelimiters_whenSeparate_thenReturnListWithoutDelimiters(String input) {
         // given
         // when
-        Prompt prompt = new Prompt(input);
+        CalculatorPrompt calculatorPrompt = new CalculatorPrompt(input);
 
         // then
         String[] inputWithoutDelimiter = input.split("[,:]");
-        assertThat(prompt.getInput()).containsExactly(inputWithoutDelimiter);
+        assertThat(calculatorPrompt.getData()).containsExactly(inputWithoutDelimiter);
     }
 
     @ParameterizedTest
@@ -31,11 +31,11 @@ class PromptTest {
     void givenInputWithoutDelimiter_whenSeparate_thenReturnListOfOneElement(String input) {
         // given
         // when
-        Prompt prompt = new Prompt(input);
+        CalculatorPrompt calculatorPrompt = new CalculatorPrompt(input);
 
         // then
         String[] inputWithoutDelimiter = input.split("[,:]");
-        assertThat(prompt.getInput()).containsExactly(inputWithoutDelimiter);
+        assertThat(calculatorPrompt.getData()).containsExactly(inputWithoutDelimiter);
     }
 
     @Test
@@ -45,11 +45,11 @@ class PromptTest {
         String input = ",123";
 
         // when
-        Prompt prompt = new Prompt(input);
+        CalculatorPrompt calculatorPrompt = new CalculatorPrompt(input);
 
         // then
         String[] inputWithoutDelimiter = input.split("[,:]");
-        assertThat(prompt.getInput()).containsExactly(inputWithoutDelimiter);
+        assertThat(calculatorPrompt.getData()).containsExactly(inputWithoutDelimiter);
     }
 
     @Test
@@ -59,11 +59,11 @@ class PromptTest {
         String input = ",123";
 
         // when
-        Prompt prompt = new Prompt(input);
+        CalculatorPrompt calculatorPrompt = new CalculatorPrompt(input);
 
         // then
         String[] inputWithoutDelimiter = input.split("[,:]");
-        assertThat(prompt.getInput()).containsExactly(inputWithoutDelimiter);
+        assertThat(calculatorPrompt.getData()).containsExactly(inputWithoutDelimiter);
     }
 
     @Test
@@ -73,12 +73,12 @@ class PromptTest {
         String input = "1,2:3+4";
 
         // when
-        Prompt prompt = new Prompt(input);
+        CalculatorPrompt calculatorPrompt = new CalculatorPrompt(input);
 
         // then
         String[] inputWithoutDelimiter = input.split("[,:]");
-        assertThat(prompt.getInput()).containsExactly(inputWithoutDelimiter);
-        assertThat(prompt.getInput().get(2)).contains("+");
+        assertThat(calculatorPrompt.getData()).containsExactly(inputWithoutDelimiter);
+        assertThat(calculatorPrompt.getData().get(2)).contains("+");
     }
 
     @Test
@@ -88,11 +88,11 @@ class PromptTest {
         String input = "//+\\n1,2:3+4";
 
         // when
-        Prompt prompt = new Prompt(input);
+        CalculatorPrompt calculatorPrompt = new CalculatorPrompt(input);
 
         // then
         String[] inputWithoutDelimiter = "1,2:3+4".split("[,:+]");
-        assertThat(prompt.getInput()).containsExactly(inputWithoutDelimiter);
+        assertThat(calculatorPrompt.getData()).containsExactly(inputWithoutDelimiter);
     }
 
     @Test
@@ -102,34 +102,26 @@ class PromptTest {
         String input = "//+\\n1,2:3+4-5";
 
         // when
-        Prompt prompt = new Prompt(input);
+        CalculatorPrompt calculatorPrompt = new CalculatorPrompt(input);
 
         // then
         String[] inputWithoutDelimiter = "1,2:3+4-5".split("[,:+]");
-        assertThat(prompt.getInput()).containsExactly(inputWithoutDelimiter);
-        assertThat(prompt.getInput().get(3)).contains("-");
+        assertThat(calculatorPrompt.getData()).containsExactly(inputWithoutDelimiter);
+        assertThat(calculatorPrompt.getData().get(3)).contains("-");
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"1,2,3", "4,5:6", "7:8:9", "0:1:2:3:4:5:6:7:8:9"})
-    @DisplayName("기본 구분자가 포함된 한자리 숫자로 이루어진 문자열 추출시, 정수 리스트를 반환한다.")
-    void givenPromptWithDigit_whenExtractInteger_thenReturnIntegerList(String input) {
-        // given
-        Prompt prompt = new Prompt(input);
 
-        // when, then
-        assertThat(prompt.extractInteger()).doesNotHaveSameClassAs(String.class);
-    }
+/*  통합 테스트로 마이그레이션
 
     @ParameterizedTest
     @ValueSource(strings = {"11,22,33", "444,555:666", "777:888:999", "012:123:234:345:456:567:678:789:8910:91011"})
     @DisplayName("기본 구분자가 포함된 숫자로 이루어진 문자열 추출시, 정수 리스트를 반환한다.")
     void givenPromptWithNumber_whenExtractInteger_thenReturnIntegerList(String input) {
         // given
-        Prompt prompt = new Prompt(input);
+        CalculatorPrompt calculatorPrompt = new CalculatorPrompt(input);
 
         // when, then
-        assertThat(prompt.extractInteger()).doesNotHaveSameClassAs(String.class);
+        assertThat(calculatorPrompt.extractInteger()).doesNotHaveSameClassAs(String.class);
     }
 
     @ParameterizedTest
@@ -137,10 +129,10 @@ class PromptTest {
     @DisplayName("구분자가 없는 숫자로 이루어진 문자열 추출 시, 한 개의 숫자를 반환한다.")
     void givenPromptWithoutDelimiters_whenExtractInteger_thenReturnIntegerList(String input) {
         // given
-        Prompt prompt = new Prompt(input);
+        CalculatorPrompt calculatorPrompt = new CalculatorPrompt(input);
 
         // when
-        List<Integer> result = prompt.extractInteger();
+        List<Integer> result = calculatorPrompt.extractInteger();
 
         // then
         AssertionsForClassTypes.assertThat(result.size()).isOne();
@@ -151,10 +143,10 @@ class PromptTest {
     void givenPromptStartingWithBaseDelimiter_whenExtractInteger_thenReturnError() {
         // given
         String input = ",123";
-        Prompt prompt = new Prompt(input);
+        CalculatorPrompt calculatorPrompt = new CalculatorPrompt(input);
 
         // when, then
-        assertThatThrownBy(prompt::extractInteger)
+        assertThatThrownBy(calculatorPrompt::extractInteger)
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -163,10 +155,10 @@ class PromptTest {
     void givenPromptEndingWithBaseDelimiter_whenExtractInteger_thenReturnError() {
         // given
         String input = "123,";
-        Prompt prompt = new Prompt(input);
+        CalculatorPrompt calculatorPrompt = new CalculatorPrompt(input);
 
         // when, then
-        assertThatThrownBy(prompt::extractInteger)
+        assertThatThrownBy(calculatorPrompt::extractInteger)
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -175,10 +167,10 @@ class PromptTest {
     @DisplayName("기본 구분자 외에 다른 문자가 포함되면 예외가 발생한다.")
     void givenInvalidPrompt_whenExtractInteger_thenReturnError(String input) {
         // given
-        Prompt prompt = new Prompt(input);
+        CalculatorPrompt calculatorPrompt = new CalculatorPrompt(input);
 
         // when, then
-        assertThatThrownBy(prompt::extractInteger)
+        assertThatThrownBy(calculatorPrompt::extractInteger)
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -191,10 +183,11 @@ class PromptTest {
     void givenInputNumberStringWithCustomDelimiter_whenExtractInteger_thenReturnIntegerList(String input) {
         // given
         char customDelimiter = '+';
-        Prompt prompt = new Prompt(input);
+        CalculatorPrompt calculatorPrompt = new CalculatorPrompt(input);
 
         // when, then
-        assertThat(prompt.extractInteger()).doesNotHaveSameClassAs(String.class);
+        assertThat(calculatorPrompt.extractInteger()).doesNotHaveSameClassAs(String.class);
     }
+*/
 
 }
