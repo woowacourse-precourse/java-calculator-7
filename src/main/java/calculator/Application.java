@@ -11,6 +11,7 @@ public class Application {
     public static void main(String[] args) {
         InputHandler inputHandler = new ConsoleInputHandler();
         OutputHandler outputHandler = new ConsoleOutputHandler();
+        Adder adder = new Adder();
 
         DelimiterStrategy defaultDelimiterStrategy = new DefaultDelimiterStrategy();
         DelimiterStrategy customDelimiterStrategy = new CustomDelimiterStrategy();
@@ -18,7 +19,9 @@ public class Application {
         Calculator calculator = new Calculator(
                 inputHandler,
                 outputHandler,
-                Arrays.asList(defaultDelimiterStrategy, customDelimiterStrategy));
+                adder,
+                Arrays.asList(defaultDelimiterStrategy, customDelimiterStrategy)
+        );
 
         calculator.run();
     }

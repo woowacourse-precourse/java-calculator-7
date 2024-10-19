@@ -3,17 +3,18 @@ package calculator;
 import calculator.io.InputHandler;
 import calculator.io.OutputHandler;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class Calculator {
     private final InputHandler inputHandler;
     private final OutputHandler outputHandler;
     private final List<DelimiterStrategy> delimiterStrategies;
+    private final Adder adder;
 
-    public Calculator(InputHandler inputHandler, OutputHandler outputHandler, List<DelimiterStrategy> delimiterStrategies) {
+    public Calculator(InputHandler inputHandler, OutputHandler outputHandler, Adder adder, List<DelimiterStrategy> delimiterStrategies) {
         this.inputHandler = inputHandler;
         this.outputHandler = outputHandler;
+        this.adder = adder;
         this.delimiterStrategies = delimiterStrategies;
     }
 
@@ -22,8 +23,8 @@ public class Calculator {
         String userInput = inputHandler.getUserInput();
 
         String[] numbers = splitUsingStrategy(userInput);
-        System.out.println(Arrays.toString(numbers));
-        outputHandler.printResult(0);
+        int result = adder.calculateSum(numbers);  // 검증된 숫자로 계산
+        outputHandler.printResult(result);
     }
 
     private String[] splitUsingStrategy(String userInput) {
