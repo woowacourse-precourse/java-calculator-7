@@ -2,23 +2,23 @@ package calculator;
 
 import calculator.common.io.InputHandler;
 import calculator.common.io.OutputHandler;
-import calculator.util.DelimiterParser;
-import calculator.util.NumberParser;
+import calculator.util.DelimiterExtractor;
+import calculator.util.NumberExtractor;
 
 public class AppFactory {
 
     private final InputHandler inputHandler;
     private final OutputHandler outputHandler;
-    private final NumberParser numberParser;
-    private final DelimiterParser delimiterParser;
+    private final NumberExtractor numberExtractor;
+    private final DelimiterExtractor delimiterExtractor;
     private final CalculatorService calculatorService;
 
     public AppFactory() {
         this.inputHandler = new InputHandler();
         this.outputHandler = new OutputHandler();
-        this.numberParser = new NumberParser();
-        this.delimiterParser = new DelimiterParser();
-        this.calculatorService = new CalculatorService(numberParser, delimiterParser);
+        this.numberExtractor = new NumberExtractor();
+        this.delimiterExtractor = new DelimiterExtractor();
+        this.calculatorService = new CalculatorService(numberExtractor, delimiterExtractor);
     }
 
     public CalculatorController createCalculatorController() {

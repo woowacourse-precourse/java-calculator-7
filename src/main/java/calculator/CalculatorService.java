@@ -1,8 +1,8 @@
 package calculator;
 
 import calculator.domain.Calculator;
-import calculator.util.DelimiterParser;
-import calculator.util.NumberParser;
+import calculator.util.DelimiterExtractor;
+import calculator.util.NumberExtractor;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -10,12 +10,12 @@ import java.util.regex.Pattern;
 
 public class CalculatorService {
 
-    private final NumberParser numberParser;
-    private final DelimiterParser delimiterParser;
+    private final NumberExtractor numberExtractor;
+    private final DelimiterExtractor delimiterExtractor;
 
-    public CalculatorService(NumberParser numberParser, DelimiterParser delimiterParser) {
-        this.numberParser = numberParser;
-        this.delimiterParser = delimiterParser;
+    public CalculatorService(NumberExtractor numberExtractor, DelimiterExtractor delimiterExtractor) {
+        this.numberExtractor = numberExtractor;
+        this.delimiterExtractor = delimiterExtractor;
     }
 
     public int sum(String input) {
@@ -33,8 +33,8 @@ public class CalculatorService {
      * @return 더한 결과
      */
     private int sumWithDefaultDelimiter(String input) {
-        delimiterParser.validateDefaultDelimiter(input);
-        List<Integer> numbers = numberParser.extractNumbers(input, false, "");
+        delimiterExtractor.validateDefaultDelimiter(input);
+        List<Integer> numbers = numberExtractor.extractNumbers(input, false, "");
         return sumNumbers(Calculator.of(numbers));
     }
 
@@ -45,8 +45,8 @@ public class CalculatorService {
      */
     private int sumWithCustomDelimiter(String input) {
         String expression = extractExpression(input);
-        String customDelimiter = delimiterParser.extractCustomDelimiter(input);
-        List<Integer> numbers = numberParser.extractNumbers(expression, true, customDelimiter);
+        String customDelimiter = delimiterExtractor.extractCustomDelimiter(input);
+        List<Integer> numbers = numberExtractor.extractNumbers(expression, true, customDelimiter);
         return sumNumbers(Calculator.of(numbers));
     }
 

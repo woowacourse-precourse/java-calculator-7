@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class NumberParser {
+public class NumberExtractor {
 
     private final static String REGEXP_DEFAULT_DELIMITER_PATTERN = "[^,;]+(?=[,;]|$)|(?<=^|[,;])[^,;]+\n";
 

@@ -2,8 +2,8 @@ package calculator.sumCalculator;
 
 import calculator.CalculatorService;
 import calculator.domain.Calculator;
-import calculator.util.DelimiterParser;
-import calculator.util.NumberParser;
+import calculator.util.DelimiterExtractor;
+import calculator.util.NumberExtractor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,9 +19,9 @@ class CalculatorServiceTest {
 
     @BeforeEach
     void setUp() {
-        DelimiterParser delimiterParser = new DelimiterParser();
-        NumberParser numberParser = new NumberParser();
-        calculatorService =  new CalculatorService(numberParser, delimiterParser);
+        DelimiterExtractor delimiterExtractor = new DelimiterExtractor();
+        NumberExtractor numberExtractor = new NumberExtractor();
+        calculatorService =  new CalculatorService(numberExtractor, delimiterExtractor);
     }
 
     @Test
