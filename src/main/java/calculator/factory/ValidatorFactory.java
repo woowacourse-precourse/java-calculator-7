@@ -3,7 +3,6 @@ package calculator.factory;
 import calculator.validator.InputValidator;
 import calculator.validator.strategies.CustomDelimiterValidator;
 import calculator.validator.strategies.DuplicateDelimiterValidator;
-import calculator.validator.strategies.EmptyNumberValidator;
 import calculator.validator.strategies.NegativeNumberValidator;
 import calculator.validator.strategies.NumericValidator;
 import calculator.validator.strategies.ValidationStrategy;
@@ -19,9 +18,6 @@ public class ValidatorFactory {
      */
     public static InputValidator createInputValidator() {
         List<ValidationStrategy> validators = Arrays.asList(
-
-                // 1. EmptyNumberValidator : 빈 입력과 숫자가 없는 경우 검증
-                new EmptyNumberValidator(),
 
                 // 2. DuplicateDelimiterValidator: 연속된 구분자가 있는지 검증
                 new DuplicateDelimiterValidator(),
