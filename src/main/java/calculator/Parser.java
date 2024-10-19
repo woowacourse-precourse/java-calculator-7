@@ -25,6 +25,31 @@ public class Parser {
         return list;
     }
 
+    public static String getSeparatorString(String input) {
+        int separatorIdx = getLastSeparatorIdx(input);
+        char[] customSeparatorArr = new char[separatorIdx];
+        for (int i = 0; i < separatorIdx; i++) {
+            customSeparatorArr[i] = input.charAt(i);
+        }
+        return new String(customSeparatorArr);
+    }
+
+    private static String getSeparator(String input, String type) {
+        List<String> separators = new ArrayList<>();
+        separators.add(",");
+        separators.add(":");
+
+        if (type.equals(DEFAULT)) {
+            Validation.isCorrectInput(input);
+            return String.join("", separators);
+        }
+        Validation.isCorrectCustomSeparatorForm(input);
+
+        addCustomSeparators(separators, input);
+
+        return String.join("", separators);
+    }
+
     private static void appendNumbers(StringTokenizer st, List<Integer> list) {
         try {
             while (st.hasMoreTokens()) {
@@ -43,24 +68,7 @@ public class Parser {
         return DEFAULT;
     }
 
-    public static String getSeparator(String input, String type) {
-        List<String> separators = new ArrayList<>();
-        separators.add(",");
-        separators.add(":");
-
-        if (type.equals(DEFAULT)) {
-            Validation.isCorrectInput(input);
-            return String.join("", separators);
-        }
-        Validation.isCorrectCustomSeparatorForm(input);
-
-        addCustomSeparators(separators, input);
-
-        return String.join("", separators);
-    }
-
     private static void addCustomSeparators(List<String> separators, String input) {
-        System.out.println(separators);
         String separatorString = getSeparatorString(input);
         for (int i = 0; i + 4 < separatorString.length(); i++) {
             String newCustomSeparator = String.valueOf(separatorString.charAt(i + 2));
@@ -69,7 +77,7 @@ public class Parser {
         }
     }
 
-    public static String getNumberString(String input, String type) {
+    private static String getNumberString(String input, String type) {
         String contents = input;
         if (type.equals(CUSTOM)) {
             int startIdx = getLastSeparatorIdx(input);
@@ -78,16 +86,7 @@ public class Parser {
         return contents;
     }
 
-    public static String getSeparatorString(String input) {
-        int separatorIdx = getLastSeparatorIdx(input);
-        char[] customSeparatorArr = new char[separatorIdx];
-        for (int i = 0; i < separatorIdx; i++) {
-            customSeparatorArr[i] = input.charAt(i);
-        }
-        return new String(customSeparatorArr);
-    }
-
-    public static int getLastSeparatorIdx(String input) {
+    private static int getLastSeparatorIdx(String input) {
         int idx = input.length() - 1;
         while (idx >= 0 && input.charAt(idx) != 'n') {
             idx--;
