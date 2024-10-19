@@ -1,6 +1,7 @@
 package calculator.back.frontcontroller;
 
 import calculator.back.controller.CalculatorController;
+import calculator.back.exception.InvalidInputException;
 import calculator.back.resolver.ArgumentResolver;
 import calculator.back.service.impl.CalculatorServiceImpl;
 import calculator.front.enums.ViewMessage;
@@ -100,7 +101,7 @@ class FrontControllerTest {
 
         //when
         //then
-        assertThatThrownBy(frontController::run).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(frontController::run).isInstanceOf(InvalidInputException.class);
     }
 
     @ParameterizedTest
@@ -113,7 +114,7 @@ class FrontControllerTest {
 
         //when
         //then
-        assertThatThrownBy(frontController::run).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(frontController::run).isInstanceOf(InvalidInputException.class);
     }
 
     @ParameterizedTest
@@ -126,7 +127,7 @@ class FrontControllerTest {
 
         //when
         //then
-        assertThatThrownBy(frontController::run).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(frontController::run).isInstanceOf(InvalidInputException.class);
     }
 
     private static final List<String> inputs = List.of("//|\\n1|2:3", "//|\\n", "\n", "asdasd12as", "-1,2,3", "0,1,2");
