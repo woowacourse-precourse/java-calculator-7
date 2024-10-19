@@ -54,10 +54,11 @@ public class InputSequence {
 
     public Long sum() {
         return sequence.stream().reduce(SUM_INITIAL_VALUE, (a,b) -> {
-            if (a + b < 0) {
+            long sum = a + b;
+            if (sum < 0) {
                 throw new IllegalArgumentException("더한 값이 너무 큽니다.");
             }
-            return a + b;
+            return sum;
         });
     }
 }
