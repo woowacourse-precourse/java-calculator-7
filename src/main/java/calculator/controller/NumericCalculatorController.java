@@ -1,10 +1,10 @@
 package calculator.controller;
 
-import calculator.model.Calculator;
+import calculator.model.Arithmetic;
 import calculator.model.InputData;
 
 public class NumericCalculatorController {
-    public Calculator createCalculatorPart(InputData inputData){
-        return new Calculator(inputData.convertCalculatorPart());
+    public Arithmetic createCalculatorPart(InputData inputData){
+        return new Arithmetic(inputData.convertCalculatorPart());
     }
 }
