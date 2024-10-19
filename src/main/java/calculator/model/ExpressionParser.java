@@ -21,4 +21,18 @@ public class ExpressionParser {
 
         return expression;
     }
+
+    public List<Integer> stringToIntegerList(){
+        return Arrays.stream(expression.split(EMPTY_STRING))
+            .map(this::parseInteger)
+            .collect(Collectors.toList());
+    }
+
+    private Integer parseInteger(String character){
+        try {
+            return Integer.parseInt(character);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
+    }
 }
