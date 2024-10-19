@@ -1,5 +1,7 @@
 package calculator;
 
+import calculator.exception.InputValidationException;
+
 public class ParsingInput {
     public static int[] executeParsingInput(String input, String token) {
         String[] splitInput = splitAsToken(input, token);
@@ -18,9 +20,7 @@ public class ParsingInput {
 
         for (int i = 0; i < inputArray.length; i++) {
             int parsedValue = Integer.parseInt(inputArray[i]);
-            if (parsedValue <= 0) {
-                throw new IllegalArgumentException("잘못된 입력입니다. 애플리케이션을 종료합니다.");
-            }
+            InputValidationException.isPositiveNumber(parsedValue);
             parsedValueArray[i] = parsedValue;
         }
         return parsedValueArray;
