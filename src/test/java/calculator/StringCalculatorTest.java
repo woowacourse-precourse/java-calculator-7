@@ -90,7 +90,11 @@ class StringCalculatorTest {
 
                 new Object[]{"",0},
                 new Object[]{"\\n",0},
-                new Object[]{"0",0}
+                new Object[]{"0",0},
+
+                new Object[]{"//^\\n\\n1:2.3",6},
+                new Object[]{"//^\\n\n1:2.4",7},
+                new Object[]{"//^\\n1:2.\\n3",6}
                 );
     }
 }

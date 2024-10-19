@@ -47,7 +47,7 @@ public class StringCalculator {
     private void validateNumberString(String[] split) {
         Optional<String> any = Arrays.stream(split).filter(num -> !num.matches(isPositiveNumberRegex)).findAny();
         if (any.isPresent() || split.length==0) {
-            throw new IllegalArgumentException("숫자 섹션에 구분자외 문자나 0으로 시작하는 숫자가 존재합니다.");
+            throw new IllegalArgumentException("구분자외 문자나 0으로 시작하는 숫자가 존재합니다. 혹은 숫자 섹션 자체가 존재하지 않습니다.");
         }
     }
 
