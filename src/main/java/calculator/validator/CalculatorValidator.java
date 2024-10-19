@@ -25,5 +25,14 @@ public class CalculatorValidator {
     private boolean isValidFormat(String inputString) {
         return inputString.indexOf(CUSTOM_DELIMITER_SUFFIX) == CUSTOM_DELIMITER_SUFFIX_INDEX;
     }
+
+    public void validateInputToken(String inputToken) {
+        for (int i = 0; i < inputToken.length(); i++) {
+            char part = inputToken.charAt(i);
+            if (!Character.isDigit(part)) {
+                throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_FORMAT_ERROR.getMessage(part));
+            }
+        }
+    }
 }
 
