@@ -53,7 +53,7 @@ public class CalculatorService {
         calculator.setProcessedValue(processedValue);
     }
 
-    private List<Integer> extractNumbersToList() {
+    public List<Integer> extractNumbersToList() {
         List<String> resultList = new ArrayList<>(List.of(calculator.getRawValue())); // 초기 결과 리스트
         try {
             for (String separator : calculator.getSeparators()) {
