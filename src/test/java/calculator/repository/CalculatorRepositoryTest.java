@@ -1,6 +1,5 @@
-package calculator;
+package calculator.repository;
 
-import calculator.repository.CalculatorRepository;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
