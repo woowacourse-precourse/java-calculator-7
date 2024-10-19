@@ -3,6 +3,7 @@ package calculator.util;
 public class CalculateValidation {
 
     private static final Integer ZERO = 0;
+    private static final String ZERO_STRING = "";
 
     public static boolean checkNotContainAllSeparator(String userInput) {
         return CalculateDefault.checkNotContainDefault(userInput) && CalculateCustom.checkNotContainCustom(userInput);
@@ -14,5 +15,9 @@ public class CalculateValidation {
 
     public static boolean checkIsNotCustomPreCorrect(String userInput) {
         return !CalculateCustom.getCustomPreIndex(userInput).equals(ZERO);
+    }
+
+    public static boolean checkIsNotUserInputZero(String userInput) {
+        return !userInput.equals(ZERO_STRING);
     }
 }

@@ -7,6 +7,9 @@ import java.util.List;
 
 public class StringNumbers {
 
+    private static final String ZERO = "0";
+    private static final String ZERO_STRING = "";
+
     private final List<String> splitUserInput;
 
     public StringNumbers(String userInput) {
@@ -24,7 +27,14 @@ public class StringNumbers {
         return !CalculateCustom.checkNotContainCustom(userInput);
     }
 
+    public boolean checkIsUserInputZero(String userInput) {
+        return userInput.equals(ZERO_STRING);
+    }
+
     public List<String> createSplitUserInput(String userInput) {
+        if (checkIsUserInputZero(userInput)) {
+            return List.of(ZERO);
+        }
         if (checkContainCustom(userInput)) {
             return CalculateCustom.splitWithCustomSeparator(userInput);
         }
