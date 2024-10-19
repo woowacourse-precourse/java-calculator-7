@@ -6,8 +6,8 @@ public class Delimiter {
 
     private static final String COMMA_DELIMITER = ",";
     private static final String COLON_DELIMITER = ":";
-    public static final String CUSTOM_DELIMITER_PREFIX = "//";
-    public static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
+    private static final String CUSTOM_DELIMITER_PREFIX = "//";
+    private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
 
     private final String value;
 
@@ -25,11 +25,15 @@ public class Delimiter {
                     + "와 구분자, 그리고 " + CUSTOM_DELIMITER_SUFFIX + "으로 시작해야 합니다.");
         }
 
-        String customDelimiter = value.substring(2, value.indexOf(CUSTOM_DELIMITER_SUFFIX));
+        String customDelimiter = value.substring(2, locateCustomDelimiterSuffix(value));
         if (customDelimiter.isEmpty()) {
             throw new IllegalArgumentException("[ERROR] 커스텀 구분자가 존재하지 않습니다.");
         }
         return new Delimiter(customDelimiter);
+    }
+
+    public static int locateCustomDelimiterSuffix(String value) {
+        return value.indexOf(CUSTOM_DELIMITER_SUFFIX);
     }
 
     public static boolean isCustomDelimiter(String value) {

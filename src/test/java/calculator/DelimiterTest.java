@@ -34,6 +34,18 @@ class DelimiterTest {
     }
 
     @Test
+    void 커스텀_구분자의_접미사의_위치를_반환한다() {
+        // given
+        String value = "//;\\n1;2;3";
+
+        // when
+        int customDelimiterSuffixIndex = Delimiter.locateCustomDelimiterSuffix(value);
+
+        // then
+        assertThat(customDelimiterSuffixIndex).isEqualTo(3);
+    }
+
+    @Test
     void 커스텀_구분자인지_판별한다() {
         // given
         String input = "//;\\n1;2;3";
