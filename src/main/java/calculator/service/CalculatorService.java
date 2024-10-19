@@ -1,6 +1,7 @@
 package calculator.service;
 
 import calculator.validator.CalculatorValidator;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -27,9 +28,21 @@ public class CalculatorService {
     public List<String> splitInputWithDelimiter(String inputString, String delimiter) {
         StringTokenizer stringTokenizer = new StringTokenizer(inputString, delimiter);
         List<String> result = new ArrayList<>();
-        while(stringTokenizer.hasMoreTokens()) {
+        while (stringTokenizer.hasMoreTokens()) {
             result.add(stringTokenizer.nextToken());
         }
         return result;
+    }
+
+    public String sumAllTokens(List<String> inputTokens) {
+        BigInteger result = new BigInteger("0");
+        for (String inputToken : inputTokens) {
+            calculatorValidator.validateInputToken(inputToken);
+            if (inputToken.equals("")) {
+                inputToken = "0";
+            }
+            result = result.add(new BigInteger(inputToken));
+        }
+        return result.toString();
     }
 }

@@ -12,6 +12,10 @@ public class OutputView {
         System.out.println(ViewMessage.END_CALCULATOR.getMessage());
     }
 
+    public void printResult(String result) {
+        System.out.println(ViewMessage.RESULT.getMessage(result));
+    }
+
     public void printError(String error) {
         System.err.println(error);
     }

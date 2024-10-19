@@ -15,7 +15,8 @@ public class CalculatorController {
     public void start() {
         outputView.printStart();
         try {
-            proceed();
+            String result = proceed();
+            outputView.printResult(result);
         } catch (IllegalArgumentException error) {
             outputView.printError(error.getMessage());
         } finally {
@@ -23,13 +24,14 @@ public class CalculatorController {
         }
     }
 
-    public void proceed() {
+    public String proceed() {
         String inputString = inputView.promptString();
         if (calculatorService.haveCustomDelimiter(inputString)) {
             delimiter = calculatorService.addCustomDelimiter(inputString, delimiter);
             inputString = calculatorService.extractInput(inputString, delimiter);
         }
         List<String> inputTokens = calculatorService.splitInputWithDelimiter(inputString, delimiter);
+        return calculatorService.sumAllTokens(inputTokens);
     }
 
     public void end() {
