@@ -3,6 +3,7 @@ package calculator.model.delimiter.factory;
 import calculator.model.custom_delimiter.validator.DelimiterValidator;
 import calculator.model.delimiter.domain.Delimiter;
 import calculator.model.delimiter.domain.Delimiters;
+import calculator.util.pattern.PatternUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,6 +30,7 @@ public class DefaultDelimiterFactory extends DelimiterFactory {
     @Override
     public Delimiter createDelimiter(String value) {
         delimiterValidator.validate(value);
+        value = PatternUtils.escapeSpecialCharacters(value);
         return new Delimiter(value);
     }
 }
