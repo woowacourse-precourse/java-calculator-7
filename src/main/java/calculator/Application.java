@@ -18,7 +18,7 @@ public class Application {
         String inputString = inputStringAndDelimiters[1];
 
         int[] extractedNumbers = extractNumbers(delim, inputString);
-        System.out.println(Arrays.toString(extractedNumbers));
+        int result = calculate(extractedNumbers);
     }
 
     private static String[] getInputString() {
@@ -52,5 +52,15 @@ public class Application {
 
     private static String makeDelimiterRegex(String DelimString) {
         return "[" + DelimString + "]";
+    }
+
+    private static int calculate(int[] numbersToSum) {
+
+        int sum = 0;
+        for (int number : numbersToSum) {
+            sum += number;
+        }
+
+        return sum;
     }
 }
