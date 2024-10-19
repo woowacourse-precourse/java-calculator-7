@@ -71,6 +71,18 @@ class ValidatingParserTest {
 		assertThat(result).isEqualTo(expectedResult);
 	}
 
+	@DisplayName("문자열에 0이 포함되어 있다면 IllegalArgumentException을 발생시킨다.")
+	@Test
+	void validatedNumbersFrom_contains_zero() {
+		//given
+		ValidatingParser parser = ValidatingParser.create();
+		String testInput = "0,1,2,3,4";
+
+		//when & then
+		assertThatThrownBy(() -> parser.validatedNumbersFrom(testInput))
+			.isInstanceOf(IllegalArgumentException.class);
+	}
+
 	@DisplayName("잘못된 커스텀 구분자 형식에 대해 IllegalArgumentException을 발생시킨다.")
 	@Test
 	void validatedNumbersFrom_invalidCustomSeparatorFormat() {
