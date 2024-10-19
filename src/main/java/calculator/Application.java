@@ -2,6 +2,8 @@ package calculator;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
+import java.util.regex.Pattern;
+
 public class Application {
 
     private static final String CUSTOM_PREFIX = "//";
@@ -63,7 +65,8 @@ public class Application {
         if (custom != 0) {
             input = input.substring(5);
             System.out.println("custom = " + custom);
-            return input.split(String.valueOf(custom));
+            String customDelimiter = Pattern.quote(String.valueOf(custom));
+            return input.split(customDelimiter);
         }
         return input.split(DEFAULT);
     }
