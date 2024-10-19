@@ -74,7 +74,15 @@ public class Machine {
             }
 
             long num;
-            num = Long.parseLong(str);
+            try {
+                num = Long.parseLong(str);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("long의 최대값보다 큰 값");
+            }
+
+            if (num + result < result) {
+                throw new IllegalArgumentException("덧셈 과정 중 오버플로우 발생");
+            }
             result += num;
         }
         return result;
