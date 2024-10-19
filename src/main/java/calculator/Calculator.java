@@ -17,11 +17,6 @@ public class Calculator {
                 continue;
             }
 
-            // parseDouble에서 공백문자를 예외로 처리하지 않아 따로 확인
-            if (containsSpace(token)) {
-                throw new IllegalArgumentException();
-            }
-
             double toAdd = parseDouble(token);
             if (isNotPositive(toAdd)) {
                 throw new IllegalArgumentException();
@@ -30,6 +25,19 @@ public class Calculator {
             result += toAdd;
         }
         return result;
+    }
+
+    private static double parseDouble(String token) {
+        // Double.parseDouble에서 공백문자는 예외처리하지 않아 따로 처리
+        if (containsSpace(token)) {
+            throw new IllegalArgumentException();
+        }
+
+        try {
+            return Double.parseDouble(token);
+        } catch (Exception e) {
+            throw new IllegalArgumentException();
+        }
     }
 
     private static boolean containsSpace(String token) {
@@ -43,18 +51,10 @@ public class Calculator {
     }
 
     private static boolean isSpace(char ch) {
-        return ch <= ' '; // parseDouble에서 trim이 자르는 문자
+        return ch <= ' '; // Double.parseDouble에서 trim이 자르는 문자
     }
 
     private static boolean isNotPositive(double value) {
         return value <= 0;
-    }
-
-    private static double parseDouble(String token) {
-        try {
-            return Double.parseDouble(token);
-        } catch (Exception e) {
-            throw new IllegalArgumentException();
-        }
     }
 }
