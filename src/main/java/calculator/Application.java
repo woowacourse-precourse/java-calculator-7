@@ -1,4 +1,5 @@
 package calculator;
+
 import java.util.stream.Stream;
 
 import camp.nextstep.edu.missionutils.Console;
@@ -20,20 +21,27 @@ public class Application {
             input = numbers.replace(delimiter, ",");
         }
 
-        String[] split1 = input.split(",|:");
-
-        int resultSum = Stream.of(split1).mapToInt(s ->{
-
-            for(Character c : s.toCharArray()){
-                if(!Character.isDigit(c)) throw new IllegalArgumentException("숫자를 입력해주세요.");
+        char[] charArray = input.toCharArray();
+        for(int i = 0; i< charArray.length; i=i+2){
+            if(!Character.isDigit(charArray[i])){
+                throw new IllegalArgumentException("숫자를 입력하세요.");
             }
 
-            int num = Integer.parseInt(s);
-            if(num < 0) throw new IllegalArgumentException("양수값을 입력해주세요.");
+            if(Character.getNumericValue(charArray[i]) < 0 ){
+                throw new IllegalArgumentException("양수를 입력하세요.");
+            }
+        }
 
-            return num;
+        for(int i =1; i<charArray.length; i=i+2){
+            if(charArray[i] != '|' || charArray[i] != ','){
+                throw new IllegalArgumentException("구분자 입력이 올바르지 않습니다.");
+            }
+        }
 
-        }).sum();
+
+        String[] split1 = input.split(",|:");
+
+        int resultSum = Stream.of(split1).mapToInt(Integer::parseInt).sum();
 
         System.out.println("결과 : " + resultSum);
 
