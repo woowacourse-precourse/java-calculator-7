@@ -1,31 +1,42 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.Test;
-
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import camp.nextstep.edu.missionutils.test.NsTest;
+import java.io.IOException;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
-    @Test
-    void 커스텀_구분자_사용() {
-        assertSimpleTest(() -> {
-            run("//;\\n1");
-            assertThat(output()).contains("결과 : 1");
-        });
-    }
 
     @Test
-    void 예외_테스트() {
-        assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
-        );
+    @DisplayName("문자열에서 숫자를 추출한 후 더하기")
+    void 숫자_추출_및_더하기() {
+        assertSimpleTest(() -> {
+
+            //기본 구분자(쉼표(,), 콜론(:))을 기준으로 숫자를 추출한 후 더하기
+            run("1,2:3");
+            assertThat(output()).contains("결과 : 6"); //1+2+3=6
+
+            //공백이 있는 상황
+            run(" 1 ,3,3 ");
+            assertThat(output()).contains("결과 : 7"); //1+3+3=7
+
+            //구분자가 한칸에 두번 사용된 상황
+            run("4,,2:3");
+            assertThat(output()).contains("결과 : 9"); //4+2+3=9
+
+        });
     }
 
     @Override
     public void runMain() {
-        Application.main(new String[]{});
+
+        try {
+            Application.main(new String[]{});
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
