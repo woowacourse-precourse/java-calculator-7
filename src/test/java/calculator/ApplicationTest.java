@@ -64,6 +64,13 @@ class ApplicationTest extends NsTest {
 		});
 	}
 
+	@Test
+	void 예외_테스트_숫자와공백(){
+		assertSimpleTest(() ->{
+			run(":1,2");
+			assertThat(output()).contains("결과 : 3");
+		});
+	}
 
 
 	@Override
