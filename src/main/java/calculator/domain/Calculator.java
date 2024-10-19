@@ -8,7 +8,14 @@ public class Calculator {
     }
 
     public void add(long num) {
+        validateNum(num);
         this.sum += num;
+    }
+
+    private void validateNum(long num) {
+        if (num < 0) {
+            throw new IllegalArgumentException("양수만 입력 가능합니다.");
+        }
     }
 
     public String getResult() {
