@@ -12,7 +12,7 @@ public class StringCalculator extends Calculator {
     }
 
     @Override
-    int sum() {
+    public int sum() {
         // 1. 문자열에서 숫자 배열 추출
         ArrayList<Integer> numberList = NumberExtractor.extractNumberList(inputData);
 

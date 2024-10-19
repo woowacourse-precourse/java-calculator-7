@@ -12,7 +12,6 @@ public class StringCalculatorApp {
 
     public void run() {
         String inputData = readInput();
-
     }
 
     // 1. 문자열 입력받기
@@ -20,4 +19,5 @@ public class StringCalculatorApp {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         return Console.readLine();
     }
+
 }
