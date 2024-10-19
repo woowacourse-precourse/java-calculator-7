@@ -41,6 +41,7 @@ public class Application {
 
 
     private static boolean checkCustomDelimiter(String input) {
+        return input.startsWith("//");
     }
     private static String addCustomDelimiter(String input) {
     }
