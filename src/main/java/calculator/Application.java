@@ -11,35 +11,32 @@ public class Application {
     }
 
     public String calculator(){
+        String[] strs;
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
-        if(input.startsWith("//")){
+
+        //get splited String[]
+        if(input.startsWith("//"))
             // custom
-            try {
-                Stream.of(input.substring(5, input.length())
-                                .split(String.valueOf(input.charAt(2))))
-                        .forEach(e -> {
-                            int v = Integer.valueOf(e);
-                            if(v <= 0)
-                                throw new IllegalArgumentException();
-                            answer += Integer.valueOf(e);
-                        });
-            }catch (NumberFormatException e) {
-                throw new IllegalArgumentException();
-            }
-        }else{
+            //strs = input.substring(5, input.length()).split(String.valueOf(input.charAt(2)));
+            strs = input.substring(5, input.length()).split("[,:"+String.valueOf(input.charAt(2))+"]");
+        else
             // defualt 정규식!!
+            strs = input.split("[,:]");
+
+        //get int from String[]
+        for(String str : strs) {
+            int v;
             try {
-                Stream.of(input.split("[,:]")).forEach(e -> {
-                    int v = Integer.valueOf(e);
-                    if(v <= 0)
-                        throw new IllegalArgumentException();
-                    answer += Integer.valueOf(e);
-                });
-            }catch (NumberFormatException e){
+                v = Integer.parseInt(str);
+            } catch (NumberFormatException e) {
                 throw new IllegalArgumentException();
             }
+            if(v<=0)
+                throw new IllegalArgumentException();
+            answer += v;
         }
+
         Console.close();
         return "결과 : "+String.valueOf(answer);
     }
