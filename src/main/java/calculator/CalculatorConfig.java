@@ -7,4 +7,7 @@ public class CalculatorConfig {
     public CalculatorService calculatorService() {
         return new AdditionService();
     }
+
+    public View view() { return new View(); }
+
 }
