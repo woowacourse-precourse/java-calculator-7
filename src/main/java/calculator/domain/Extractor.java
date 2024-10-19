@@ -19,7 +19,7 @@ public class Extractor {
         return Arrays.stream(splitNumbers).mapToInt(Integer::parseInt).toArray();
     }
 
-    // 검증된 값이 들어온다는 가정
+
     public String extractDelimiter(String delimitedNumbers) {
         int beginIndex = delimitedNumbers.indexOf(HEADER);
         int endIndex = delimitedNumbers.indexOf(FOOTER);
