@@ -15,8 +15,7 @@ public class Calculator {
     public static int inputCalculate(String input){
         //커스텀 구분자 패턴이 존재하는지 확인한다
         input=checkExtractor(input);
-        //음수를 입력했는지 확인한다
-        checkNegative(input);
+        Validator.validatePositive(input);
         return calculate(input);
     }
 
@@ -25,7 +24,7 @@ public class Calculator {
 
         if (matcher.find()){//일치한다면
             String customSeperator=matcher.group(1);
-
+            Validator.validateSeperator(customSeperator);
             input= matcher.group(2);
             //SEPERATOR_REGEX에 더한다
             addRegex(customSeperator);
@@ -42,16 +41,6 @@ public class Calculator {
                 .sum();
 
         return result;
-
-    }
-
-    //음수를 입력하면 예외 출력
-    private static void checkNegative(String input) {
-        Matcher matcher=NEGATIVE_PATTERN.matcher(input);
-
-        if (matcher.find()) {
-            throw new InvalidInputException(MessageType.NEGATIVE_INPUT);
-        }
     }
 
     private static boolean isSpace(String num) {

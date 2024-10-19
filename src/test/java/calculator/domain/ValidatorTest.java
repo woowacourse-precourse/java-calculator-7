@@ -2,6 +2,7 @@ package calculator.domain;
 
 import calculator.exception.InvalidInputException;
 import calculator.validation.MessageType;
+
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,6 +26,16 @@ class ValidatorTest {
         assertThatThrownBy(()->Validator.validateSeperator(seperator))
                 .isInstanceOf(InvalidInputException.class)
                 .hasMessageContaining(MessageType.MINUS_SEPERATOR.getMessage());
+
+    }
+
+    @Test
+    void 음수를_입력했을때_예외_발생(){
+        String input="//!\\n-34";
+
+        assertThatThrownBy(()->Validator.validatePositive(input))
+                .isInstanceOf(InvalidInputException.class)
+                .hasMessageContaining(MessageType.NEGATIVE_INPUT.getMessage());
 
     }
 
