@@ -81,7 +81,7 @@ BUILD SUCCESSFUL in 0s
 
 ✅ **`isCustomSeperator` 메서드**
 - 문자열이 커스텀 구분자 포함하고 있는지 확인
-- "//"로 시작하고 "\n"으로 끝나는지 검사하는 메서드
+- "//"와 "\n"이 문자열에 포함되어 있는지 검사하는 메서드
 
 ✅ **`extractCustomSeperator` 메서드**
 - 커스텀 구분자 추출하는 메서드
@@ -92,10 +92,10 @@ BUILD SUCCESSFUL in 0s
 
 ✅ **`sumCalculate` 메서드**
 - 문자열 배열을 정수로 변환 후 합계 계산
-- 빈 문자열일 경우 0 반환, 정수가 아닌 잘못된 값일 경우 예외 발생
 
 ### 2. 예외처리
-- 잘못된 입력값에 대해 예외 처리(IllegalArgumentException)
+- 정수가 아닌 잘못된 값일 경우 예외 발생
+- 사용자가 잘못된 값을 입력할 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료
 
 ---
 
