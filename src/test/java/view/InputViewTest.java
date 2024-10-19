@@ -27,7 +27,7 @@ public class InputViewTest extends NsTest {
     private ByteArrayOutputStream testOut;
 
     /**
-     * 표준 출력을 캡쳐하기 위한 설정 System.out을 ByteArrayOutputStream로 리다이렉션 합니다.
+     * 표준 출력을 캡쳐하기 위해 System.out을 ByteArrayOutputStream로 리다이렉션 합니다.
      */
     @BeforeEach
     void setOutput() {
