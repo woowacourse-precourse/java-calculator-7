@@ -3,27 +3,31 @@ package calculator.operator;
 import calculator.utils.ValueObject;
 
 public class Separator extends ValueObject {
-    private final String separatorString;
+    private final String symbol;
 
-    public Separator(String seperatorString) {
-        this.separatorString = seperatorString;
+    private Separator(String seperatorString) {
+        this.symbol = seperatorString;
     }
 
-    public String getSeparatorString() {
-        return separatorString;
+    public static Separator of(String symbol) {
+        return new Separator(symbol);
+    }
+
+    public String getSymbol() {
+        return symbol;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (this.getClass() == o.getClass()) {
-            return separatorString.equals(((Separator) o).separatorString);
+            return symbol.equals(((Separator) o).symbol);
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        return separatorString.hashCode();
+        return symbol.hashCode();
     }
 }

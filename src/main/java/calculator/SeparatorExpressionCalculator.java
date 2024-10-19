@@ -7,53 +7,49 @@ import calculator.io.Display;
 import calculator.io.InputReceiver;
 import calculator.lexicalParser.CustomSeparatorParser;
 import calculator.lexicalParser.ExpressionParser;
-import calculator.lexicalParser.ExpressionValidator;
-import calculator.operator.Operand;
-import calculator.operator.OperatorMap;
-import calculator.operator.Separator;
-import calculator.operator.Separators;
+import calculator.operator.*;
 
-import java.util.Set;
+import java.util.List;
 
 public class SeparatorExpressionCalculator {
-    private static final Separator COMMA_SEPARATOR = new Separator(",");
-    private static final Separator COLON_SEPARATOR = new Separator(":");
-    private final OperatorMap operatorMap = OperatorMap.getInstance();
+    private static final Separator COMMA_SEPARATOR = Separator.of(",");
+    private static final Separator COLON_SEPARATOR = Separator.of(":");
+    private static final Operator COMMA_OPERATOR = new Operator(COMMA_SEPARATOR, PlusOperation.getInstance());
+    private static final Operator COLON_OPERATOR = new Operator(COLON_SEPARATOR, PlusOperation.getInstance());
+    private final OperatorContainer operatorContainer;
     private final Display display;
     private final InputReceiver inputReceiver;
-    private Separators separators;
 
     public SeparatorExpressionCalculator(InputReceiver inputReceiver, Display display) {
-        this.separators = new Separators(Set.of(COMMA_SEPARATOR, COLON_SEPARATOR));
         this.display = display;
         this.inputReceiver = inputReceiver;
-        this.operatorMap.registerSeparatorToOperator(COMMA_SEPARATOR, PlusOperation.getInstance());
-        this.operatorMap.registerSeparatorToOperator(COLON_SEPARATOR, PlusOperation.getInstance());
+        this.operatorContainer = generateDefaultContainer();
+    }
+
+    public OperatorContainer generateDefaultContainer() {
+        return new OperatorContainer(List.of(COMMA_OPERATOR, COLON_OPERATOR));
     }
 
     public void operate() {
         String input = inputReceiver.readInput();
         Expression expression = parseToExpression(input);
-        ExpressionExecutor expressionExecutor = new ExpressionExecutor(operatorMap);
+        ExpressionExecutor expressionExecutor = new ExpressionExecutor(operatorContainer);
         Operand result = expressionExecutor.calculate(expression);
         display.showResult(result.getValue());
     }
 
     private Expression parseToExpression(String input) {
-        CustomSeparatorParser manager = new CustomSeparatorParser(input);
-        registerCustomSeparators(manager);
-        String removeCustomSeparatorDeclaration = manager.removeCustomSeparatorDeclaration();
-        ExpressionValidator validator = new ExpressionValidator(separators);
-        ExpressionParser parser = new ExpressionParser(validator, separators);
-        return parser.parse(removeCustomSeparatorDeclaration);
+        CustomSeparatorParser customSeparatorParser = CustomSeparatorParser.getInstance();
+        registerIfHasCustomSeparator(input, customSeparatorParser);
+        String removeCustomSeparatorDeclaration = customSeparatorParser.removeCustomSeparatorDeclaration(input);
+        ExpressionParser expressionParser = new ExpressionParser(operatorContainer);
+        return expressionParser.parse(removeCustomSeparatorDeclaration);
     }
 
-    private void registerCustomSeparators(CustomSeparatorParser manager) {
-        boolean hasCustomSeparator = manager.hasCustomSeparator();
-        if (hasCustomSeparator) {
-            Separator customSeparator = manager.getCustomSeparator();
-            separators = separators.add(customSeparator);
-            operatorMap.registerSeparatorToOperator(customSeparator, PlusOperation.getInstance());
+    private void registerIfHasCustomSeparator(String input, CustomSeparatorParser customSeparatorParser) {
+        if(customSeparatorParser.canParse(input)) {
+            Separator separator = customSeparatorParser.parse(input);
+            operatorContainer.add(new Operator(separator, PlusOperation.getInstance()));
         }
     }
 }

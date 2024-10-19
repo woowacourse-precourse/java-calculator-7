@@ -6,12 +6,12 @@ import calculator.utils.CustomDeque;
 
 import java.util.Deque;
 import java.util.Iterator;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Arrays;
 import java.util.Objects;
 
 public class Expression {
+    private static final int OPERAND_TO_SEPARATOR_DIFFERENCE = 1;
     private final CustomDeque<Separator> separatorDeque;
     private final CustomDeque<Operand> operandDeque;
 
@@ -22,40 +22,26 @@ public class Expression {
     }
 
     private void validate(Deque<Separator> separatorDeque, Deque<Operand> operandDeque) {
-        if (isIllegalExpression(separatorDeque, operandDeque)) {
+        if (!isOperandToSeparatorCountValid(separatorDeque, operandDeque)) {
             throw new IllegalArgumentException("Invalid expression: separator operand count does not match");
         }
     }
 
-    private boolean isIllegalExpression(Deque<Separator> separatorDeque, Deque<Operand> operandDeque) {
-        return !(isSeparatorOneLessThanOperand(separatorDeque, operandDeque) || isAllEmpty(separatorDeque, operandDeque));
-    }
-
-    private boolean isSeparatorOneLessThanOperand(Deque<Separator> separatorDeque, Deque<Operand> operandDeque) {
-        int separatorCount = separatorDeque.size();
-        int operandCount = operandDeque.size();
-        return separatorCount + 1 == operandCount;
-    }
-
-    private boolean isAllEmpty(Deque<Separator> separatorDeque, Deque<Operand> operandDeque) {
-        return separatorDeque.isEmpty() && operandDeque.isEmpty();
-    }
-
-    public List<Operand> peekFirstTwoOperands() {
-        if (operandDeque.size() < 2) {
-            throw new NoSuchElementException("has less than 2 operands");
-        }
-        Iterator<Operand> iterator = operandDeque.iterator();
-        Operand firstOperand = iterator.next();
-        Operand secondOperand = iterator.next();
-        return List.of(firstOperand, secondOperand);
+    private boolean isOperandToSeparatorCountValid(Deque<Separator> separatorDeque, Deque<Operand> operandDeque) {
+        return OPERAND_TO_SEPARATOR_DIFFERENCE == operandDeque.size() - separatorDeque.size();
     }
 
     public Operand peekFirstOperand() {
-        if (operandDeque.isEmpty()) {
-            throw new NoSuchElementException("Empty operand");
-        }
         return operandDeque.peek();
+    }
+
+    public Operand peekSecondOperand() {
+        if (operandDeque.size() < 2){
+            throw new NoSuchElementException("Expression has only one operand");
+        }
+        Iterator<Operand> iterator = operandDeque.iterator();
+        iterator.next();
+        return iterator.next();
     }
 
     public Separator peekFirstSeparator() {
@@ -77,12 +63,9 @@ public class Expression {
         separatorDeque.poll();
     }
 
-    public boolean isSeparatorEmpty() {
-        return separatorDeque.isEmpty();
-    }
-
-    public boolean isOperandEmpty() {
-        return operandDeque.isEmpty();
+    public boolean hasSeparator() {
+        return separatorDeque.iterator()
+                .hasNext();
     }
 
     @Override

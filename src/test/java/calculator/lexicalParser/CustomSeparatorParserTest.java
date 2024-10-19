@@ -14,9 +14,11 @@ class CustomSeparatorParserTest {
     @ParameterizedTest
     @DisplayName("//로 시작하고 \\n으로 끝나는 문자열 안에 커스텀 구분자가 있는지 확인한다")
     @MethodSource("generateCustomSeparatorStringData")
-    void testHasCustomSeparator(String inputString, boolean expected) {
-        CustomSeparatorParser customSeparatorParser = new CustomSeparatorParser(inputString);
-        assertThat(customSeparatorParser.hasCustomSeparator()).isEqualTo(expected);
+    void testCanParse(String inputString, boolean expected) {
+        CustomSeparatorParser customSeparatorParser = CustomSeparatorParser.getInstance();
+        boolean actual = customSeparatorParser.canParse(inputString);
+
+        assertThat(actual).isEqualTo(expected);
     }
 
     static Stream<Arguments> generateCustomSeparatorStringData() {
@@ -35,16 +37,18 @@ class CustomSeparatorParserTest {
     @ParameterizedTest
     @DisplayName("//와 \\n 사이의 커스텀 구분자를 반환하는지 확인")
     @MethodSource("generateValidCustomSeparatorData")
-    void testGetCustomSeparator(String inputString, Separator expectedCustomSeparator) {
-        CustomSeparatorParser customSeparatorParser = new CustomSeparatorParser(inputString);
-        Separator actualSeparator = customSeparatorParser.getCustomSeparator();
+    void testParse(String inputString, Separator expectedCustomSeparator) {
+        CustomSeparatorParser customSeparatorParser = CustomSeparatorParser.getInstance();
+
+        Separator actualSeparator = customSeparatorParser.parse(inputString);
+
         assertThat(actualSeparator).isEqualTo(expectedCustomSeparator);
     }
 
     static Stream<Arguments> generateValidCustomSeparatorData() {
         return Stream.of(
-                Arguments.of("//d\\n", new Separator("d")),
-                Arguments.of("//customSeparator\\n", new Separator("customSeparator"))
+                Arguments.of("//d\\n", Separator.of("d")),
+                Arguments.of("//customSeparator\\n", Separator.of("customSeparator"))
         );
     }
 
@@ -52,9 +56,9 @@ class CustomSeparatorParserTest {
     @DisplayName("//로시작하고 \n으로 끝나는 문자열 제거하는지 확인")
     @MethodSource("generateCustomSeparatorDeclarationExpression")
     void testRemoveCustomSeparator(String inputString, String expected) {
-        CustomSeparatorParser customSeparatorParser = new CustomSeparatorParser(inputString);
+        CustomSeparatorParser customSeparatorParser = CustomSeparatorParser.getInstance();
 
-        String actual = customSeparatorParser.removeCustomSeparatorDeclaration();
+        String actual = customSeparatorParser.removeCustomSeparatorDeclaration(inputString);
 
         assertThat(actual).isEqualTo(expected);
     }

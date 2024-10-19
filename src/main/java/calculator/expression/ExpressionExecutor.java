@@ -1,35 +1,31 @@
 package calculator.expression;
 
 import calculator.operator.Operand;
-import calculator.operator.OperatorMap;
+import calculator.operator.Operator;
+import calculator.operator.OperatorContainer;
 import calculator.operator.Separator;
-import calculator.arithmeticUnit.ArithmeticOperation;
-
-import java.util.List;
 
 public class ExpressionExecutor {
-    private static final Operand EMPTY_EXPRESSION_RESULT = Operand.of(0);
-    private final OperatorMap operatorMap;
+    private final OperatorContainer operatorContainer;
 
-    public ExpressionExecutor(OperatorMap operatorMap) {
-        this.operatorMap = operatorMap;
+    public ExpressionExecutor(OperatorContainer operatorContainer) {
+        this.operatorContainer = operatorContainer;
     }
 
     public Operand calculate(Expression expression) {
-        if (isExpressionEmpty(expression)) {
-            return EMPTY_EXPRESSION_RESULT;
-        }
-        while (!expression.isSeparatorEmpty()) {
-            List<Operand> firstTwoOperands = expression.peekFirstTwoOperands();
-            Separator separator = expression.peekFirstSeparator();
-            ArithmeticOperation arithmeticOperation = operatorMap.getOperatorBySeparator(separator);
-            Operand firstOperatorResult =  arithmeticOperation.execute(firstTwoOperands.get(0), firstTwoOperands.get(1));
-            expression = expression.updateFirstOperationResult(firstOperatorResult);
-        }
+        expression = useAllSeparator(expression);
         return expression.peekFirstOperand();
     }
 
-    private boolean isExpressionEmpty(Expression expression) {
-        return expression.isOperandEmpty() && expression.isSeparatorEmpty();
+    private Expression useAllSeparator(Expression expression) {
+        while (expression.hasSeparator()) {
+            Operand leftOperand = expression.peekFirstOperand();
+            Operand rightOperand = expression.peekSecondOperand();
+            Separator separator = expression.peekFirstSeparator();
+            Operator operator = operatorContainer.getOperator(separator);
+            Operand firstOperatorResult = operator.execute(leftOperand, rightOperand);
+            expression = expression.updateFirstOperationResult(firstOperatorResult);
+        }
+        return expression;
     }
 }
