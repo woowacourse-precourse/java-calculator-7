@@ -24,10 +24,11 @@
     4.  service 디렉토리 생성
     5.  NormalCalculator 인터페이스 생성 -> 일반적인 구분자만 들어온 경우
     6.  SpecialCalculator 인터페이스 생성 -> // 로 시작하여 특수한 구분자를 입력받게 될 경우
-    7.  CalculateService 생성 -> 문자열의 첫 시작이 //인지로 분기하여 override 하여 구현한 
+    7.  NormalCalculatorImpl 과 SpecialCalculatorImpl을 구현하여, 인터페이스 내용을 구현해준다.
+    8.  CalculateService 생성 -> 문자열의 첫 시작이 //인지로 분기하여 override 하여 구현한 
         NormalCalculator와 SpecialCalculator를 각각 사용함.
-    8.  controller 디렉토리 생성
-    9.  CalculatorController 생성 -> 문자열을 입력으로 받으면 해당 문자열을 구분자로 분석해서 덧셈 결과를 리턴
+    9.  controller 디렉토리 생성
+    10.  CalculatorController 생성 -> 문자열을 입력으로 받으면 해당 문자열을 구분자로 분석해서 덧셈 결과를 리턴
 
     test 태그
-    10. testcase 추가
+    11. testcase 추가
