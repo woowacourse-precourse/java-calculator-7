@@ -44,11 +44,11 @@ public class Application {
         String str = Console.readLine();
         try {
             if(str.startsWith("//")) {
-                System.out.println(app.custom(str));
+                System.out.println("결과 : " + app.custom(str));
             } else if(str.isEmpty()) {
-                System.out.println("0");
+                System.out.println("결과 : 0");
             } else {
-                System.out.println(app.separate(str));
+                System.out.println("결과 : " + app.separate(str));
             }
         } catch (IllegalArgumentException e) {
             return;
