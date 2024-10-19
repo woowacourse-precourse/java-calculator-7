@@ -12,8 +12,9 @@ public class Application {
 
     public static void main(String[] args) {
         String input = readIn(); // 입력
-        Set<String> separatorSet = parseSeparator(input);
-        String afterSeparator = input.substring(findSeparatorEndIndex(input));
+        int endIndex = findSeparatorEndIndex(input);
+        Set<String> separatorSet = parseSeparator(input,endIndex);
+        String afterSeparator = input.substring(endIndex);
         System.out.println("Separators: " + separatorSet);
         System.out.println("After separator: " + afterSeparator);
     }
@@ -27,36 +28,32 @@ public class Application {
     }
 
 
-    public static Set<String> parseSeparator(String input) {
+    public static Set<String> parseSeparator(String s, int endIndex) {
+
         Set<String> separatorSet = new HashSet<>();
-
-        if (input.startsWith("//")) {
-            for (int i = SEPARATOR_START; i < input.length(); i++) {
-                if (input.charAt(i) == '\\') {
-                    if (i < input.length() - 1 && input.charAt(i + 1) == 'n') {
-                        break;
-                    }
-                } else {
-                    separatorSet.add(input.substring(i, i + 1));
-                }
-            }
-        }
-
-        separatorSet.add(",");
         separatorSet.add(":");
+        separatorSet.add(",");
+        if(endIndex < 4) {
+            return separatorSet;
+        }
+        for(char c : s.substring(2, endIndex-2).toCharArray()) {
+            separatorSet.add(c + "");
+        }
         return separatorSet;
     }
 
     // 구분자 끝을 찾는 로직
     private static int findSeparatorEndIndex(String input) {
-        for (int i = SEPARATOR_START; i < input.length() - 2; i++) {
-            if (input.charAt(i) == '\\') {
-                if (i < input.length() - 1 && input.charAt(i + 1) == 'n') {
-                    return i + 2;
+        if (input.startsWith("//")) {
+            for (int i = SEPARATOR_START; i < input.length(); i++) {
+                if (input.charAt(i) == '\\') {
+                    if (i < input.length() - 1 && input.charAt(i + 1) == 'n') {
+                        return i+2<input.length() ? i+2 : input.length()-1;
+                    }
                 }
             }
         }
-        return SEPARATOR_START;
+        return 0;
     }
 }
 
