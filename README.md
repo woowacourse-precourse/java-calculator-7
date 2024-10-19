@@ -21,3 +21,19 @@
 
     4. 결과값을 반환한다.
         a. "결과 : n"의 형식으로 반환한다.
+
+## 테스트 기능 목록
+
+    1. UserInput 테스트
+        a. testValidInput: 기본 구분자를 사용한 정상적인 입력값을 확인한다.
+        b. testValidCustomSeparatorInput: 커스텀 구분자를 입력한 경우를 확인한다.
+        c. testEmptyInput: 빈 문자열을 입력한 경우 `IllegalArgumentException`이 발생하는지 확인한다.
+        d. testInvalidInputWrongSeparator: 구분자 이외의 문자를 입력한 경우 `IllegalArgumentException`이 발생하는지 확인한다.
+
+    2. Caculator 테스트
+        a. testCalculateValidInput: 기본 구분자를 사용해 계산 결과를 확인한다.
+        b. testCalculateWithCustomSeparator: 커스텀 구분자를 사용해 계산 결과를 확인한다.
+        c. testCalculateWithInvalidInput: 구분자가 아닌 문자가 들어간 경우 `IllegalArgumentException`이 발생하는지 확인한다.
+
+    3. UserOutput 테스트
+        a. 올바른 출력을 하는지 확인한다.
