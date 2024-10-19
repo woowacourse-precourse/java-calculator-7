@@ -18,7 +18,7 @@
     0.  docs: README.md 파일 수정
 
     feat 태그
-    1.  dto 디렉토리 생성 -> 계층간의 이동이 필요하기에 DTO를 사용함
+    1.  domain 디렉토리 생성 -> 생성된 디렉토리와 파일들을 포함, dto 디렉토리 생성 -> 계층간의 이동이 필요하기에 DTO를 사용함
     2.  ResultDTO 생성
     3.  InputDTO 생성
     4.  service 디렉토리 생성
