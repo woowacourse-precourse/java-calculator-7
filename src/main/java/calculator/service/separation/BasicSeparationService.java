@@ -1,5 +1,7 @@
 package calculator.service.separation;
 
+import static calculator.service.validation.SeparationValidator.validate;
+
 import calculator.domain.Number;
 import calculator.domain.Numbers;
 import java.util.Arrays;
@@ -8,6 +10,8 @@ import java.util.stream.Collectors;
 
 public class BasicSeparationService implements SeparationService {
 
+    private static final String COMMA = ",";
+    private static final String COLON = ":";
     private static final String BASIC_SEPARATOR_REGEX = "[,:]";
 
     @Override
@@ -17,6 +21,7 @@ public class BasicSeparationService implements SeparationService {
 
     @Override
     public Numbers getNumbers(String input, String... separators) {
+        validate(input, COMMA, COLON);
 
         String[] split = split(input, BASIC_SEPARATOR_REGEX);
         List<Number> values = Arrays.stream(split)
