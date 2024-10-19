@@ -8,13 +8,17 @@ public class WoowahanTokenizer {
     private String inputString;
     private final String defaultSeparator = ",:";
     private String customSeparator;
+    private List<String> stringTokens;
 
     public WoowahanTokenizer(String inputString) {
         this.inputString = inputString;
         this.customSeparator = "";
+
+        setCustomSeparator();
+        tokenizeString();
     }
 
-    public void setCustomSeparator() {
+    private void setCustomSeparator() {
         if (inputString.length() < 4) return;
         if (inputString.charAt(0) != '/') return;
         if (inputString.charAt(1) != '/') return;
@@ -22,14 +26,15 @@ public class WoowahanTokenizer {
         customSeparator = inputString.substring(2, 3);
         inputString = inputString.substring(4);
     }
-    public List<String> tokenizeString() {
+
+    private void tokenizeString() {
         String separator = defaultSeparator + customSeparator;
         StringTokenizer st = new StringTokenizer(inputString, separator);
         List<String> result = new ArrayList<>();
         while (st.hasMoreTokens()) {
             result.add(st.nextToken());
         }
-        return result;
+        stringTokens = result;
     }
 
     public String getCustomSeparator() {
@@ -37,6 +42,9 @@ public class WoowahanTokenizer {
     }
     public String getInputString() {
         return inputString;
+    }
+    public List<String> getStringTokens() {
+        return stringTokens;
     }
 
 }
