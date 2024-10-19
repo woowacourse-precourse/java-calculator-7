@@ -55,5 +55,12 @@ public class Application {
         boolean hasCustomDelimiter = hasCustomDelimiter(input);
         HashSet<String> delimiters = getDelimiters(input, hasCustomDelimiter);
         ArrayList<String> numbers = getNumbers(input, delimiters);
+
+        if (isValidNumbers(numbers)) {
+            int sum = numbers.stream()
+                .mapToInt(Integer::parseInt)
+                .sum();
+            System.out.println("결과 : " + sum);
+        }
     }
 }
