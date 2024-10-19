@@ -6,14 +6,14 @@ import inspector.InspectorSelector;
 import java.math.BigInteger;
 import parser.ContentParser;
 
-public class MainCalculator {
-    private BigInteger calculationResult = BigInteger.ZERO;
+public class Calculator {
+    private BigInteger Result = BigInteger.ZERO;
     private String inputContent;
     private String convertedContent;
     private String parsingSeparator;
     private String[] parsedContent;
 
-    public void startCalculator() {
+    public void start() {
         setInputContent();
         ContentInspector contentInspector = InspectorSelector.selection(inputContent);
         parsingSeparator = contentInspector.getParsingSeparator();
@@ -21,26 +21,14 @@ public class MainCalculator {
         ContentParser contentParser = new ContentParser(parsingSeparator, convertedContent);
         parsedContent = contentParser.getParsedContent();
         calculation();
-        getCalculateResult();
-    }
-
-    private void setInputContent() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        inputContent = Console.readLine();
-        if (inputContent.isEmpty()) {
-            getCalculateResult();
-        }
-    }
-
-    private void getCalculateResult() {
-        System.out.println("결과 : " + calculationResult);
+        getResult();
     }
 
     private void calculation() {
         for (String content : parsedContent) {
             BigInteger addedBigInteger = convertStringToBigInteger(content);
             detectNegativeValueException(addedBigInteger);
-            calculationResult = calculationResult.add(addedBigInteger);
+            Result = Result.add(addedBigInteger);
         }
     }
 
@@ -54,7 +42,20 @@ public class MainCalculator {
 
     private void detectNegativeValueException(BigInteger bigInteger) {
         if (bigInteger.compareTo(BigInteger.ZERO) == -1) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("음수가 입력되었음");
         }
+    }
+
+
+    private void setInputContent() {
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        inputContent = Console.readLine();
+        if (inputContent.isEmpty()) {
+            getResult();
+        }
+    }
+
+    private void getResult() {
+        System.out.println("결과 : " + Result);
     }
 }

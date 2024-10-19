@@ -4,10 +4,6 @@ import java.util.regex.Pattern;
 
 public abstract class ContentInspector {
 
-    public abstract String getParsingSeparator();
-
-    public abstract String getConvertedContent();
-
     protected void inspecting(String content, String parsingSeparator) {
         String separatorRegex = getSeparatorRegex(parsingSeparator);
         if (!Pattern.matches(separatorRegex, content)) {
@@ -18,4 +14,8 @@ public abstract class ContentInspector {
     private String getSeparatorRegex(String parsingSeparator) {
         return "^(" + parsingSeparator + "|[0-9])*$";
     }
+
+    public abstract String getParsingSeparator();
+
+    public abstract String getConvertedContent();
 }

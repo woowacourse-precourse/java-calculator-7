@@ -2,22 +2,13 @@ package inspector;
 
 public class CustomInspector extends ContentInspector {
     protected String originalContent;
+    private String convertedContent;
     private String parsingSeparator = ",|:";
 
 
     public CustomInspector(String originalContent) {
         this.originalContent = originalContent;
         findCustomSeparator();
-    }
-
-    @Override
-    public String getParsingSeparator() {
-        return parsingSeparator;
-    }
-
-    @Override
-    public String getConvertedContent() {
-        return originalContent;
     }
 
     private void findCustomSeparator() {
@@ -27,7 +18,7 @@ public class CustomInspector extends ContentInspector {
             throw new IllegalArgumentException("커스텀 구분자의 생성 형식에 맞지 않음");
         }
         separatorRegistration();
-        String convertedContent = convertContent(originalContent);
+        convertedContent = convertContentFromOriginal(originalContent);
         inspecting(convertedContent, parsingSeparator);
     }
 
@@ -35,7 +26,17 @@ public class CustomInspector extends ContentInspector {
         parsingSeparator = parsingSeparator.concat("|" + originalContent.charAt(2));
     }
 
-    private String convertContent(String originalContent) {
+    private String convertContentFromOriginal(String originalContent) {
         return originalContent.substring(5);
+    }
+
+    @Override
+    public String getParsingSeparator() {
+        return parsingSeparator;
+    }
+
+    @Override
+    public String getConvertedContent() {
+        return convertedContent;
     }
 }
