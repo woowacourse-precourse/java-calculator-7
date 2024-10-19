@@ -1,7 +1,11 @@
 package calculator.regex;
 
+import static java.util.regex.Pattern.quote;
+
 public class Regex {
 
+    public static final String OR = "|";
+    
     private final StringBuilder regex;
 
     public Regex(final String regex) {
@@ -9,25 +13,11 @@ public class Regex {
     }
 
     public void add(final String value) {
-        regex.append('|').append(escapeMetaCharacter(value));
-    }
-
-    private StringBuilder escapeMetaCharacter(final String letters) {
-        StringBuilder value = new StringBuilder();
-
-        for (char c : letters.toCharArray()) {
-            if (MetaCharacter.isMetaCharacter(c)) {
-                value.append("\\").append(c);
-                continue;
-            }
-            value.append(c);
-        }
-
-        return value;
+        regex.append(OR).append(quote(value));
     }
 
     public String getRegex() {
-        return new String(regex);
+        return regex.toString();
     }
 
 }

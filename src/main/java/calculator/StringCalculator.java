@@ -4,6 +4,7 @@ import calculator.adder.Addable;
 import calculator.converter.NumberConvertible;
 import calculator.io.ConsoleInputHandler;
 import calculator.io.ConsoleOutputHandler;
+import calculator.regex.Regex;
 import calculator.regex.RegexGenerator;
 import calculator.util.DelimiterExtractor;
 import calculator.util.Splitter;
@@ -42,18 +43,19 @@ public class StringCalculator {
         return new Delimiters(Arrays.asList(commaDelimiter, colonDelimiter));
     }
 
-    public void run(Delimiters defaultDelimiters) {
+    public void run(Delimiters delimiters) {
         // 0. 입력한다.
         String input = consoleInputHandler.getUserInput();
 
-        // 1.커스텀 구분자를 추출하여 저장한다.
-        defaultDelimiters = defaultDelimiters.merge(delimiterExtractor.extractCustomDelimiter(input));
+        // 1.커스텀 구분자를 추출한다.
+        delimiterExtractor.extractDelimitersFrom(input, delimiters);
 
         //2. 구분자를 기준으로 문자열을 추출한다.
-        String[] splitedInput = splitter.splitedByDelimiters(input, defaultDelimiters, regexGenerator);
+        Regex regex = regexGenerator.makeDelimiterAreaRegex(delimiters);
+        List<String> splitInput = splitter.splitByDelimiters(input, regex);
 
         //3. 추출한 문자열을 숫자로 변환한다.
-        List numbers = numberConvertible.convertStringToNumber(splitedInput);
+        List numbers = numberConvertible.convertStringToNumber(splitInput);
 
         // 4. 구한 숫자들을 더한 값을 출력한다.
         consoleOutputHandler.printResult(addable.addNumbers(numbers));

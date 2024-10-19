@@ -1,14 +1,13 @@
 package calculator.converter;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class IntegerConvertible implements NumberConvertible<Integer> {
 
     @Override
-    public List<Integer> convertStringToNumber(final String[] splitedByRegex) {
+    public List<Integer> convertStringToNumber(final List<String> splitByRegex) {
         try {
-            return Arrays.stream(splitedByRegex)
+            return splitByRegex.stream()
                     .filter(str -> str.length() > 0)
                     .map(Integer::parseInt)
                     .map(this::getPositiveNumber)
