@@ -24,6 +24,15 @@ class ApplicationTest extends NsTest {
 //        );
 //    }
 
+    // build test
+    @Test
+    void empty() {
+        assertSimpleTest(() -> {
+            run("");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
     // test 01 : comma
     @Test
     void comma() {
