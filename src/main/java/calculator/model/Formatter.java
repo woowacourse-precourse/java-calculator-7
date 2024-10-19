@@ -1,5 +1,7 @@
 package calculator.model;
 
+import java.util.Objects;
+
 public class Formatter {
     public static int[] formatInput(String input, String delimiters) {
         input = removeCustomSetting(input, delimiters);
@@ -19,7 +21,7 @@ public class Formatter {
     private static int[] generateFormatResult(String[] splitResult) {
         int[] formatResult = new int[splitResult.length];
         for (int i = 0; i < formatResult.length; i++) {
-            formatResult[i] = Integer.parseInt(splitResult[i]);
+            formatResult[i] = Integer.parseInt(!Objects.equals(splitResult[i], "") ? splitResult[i] : "0");
         }
 
         return formatResult;
