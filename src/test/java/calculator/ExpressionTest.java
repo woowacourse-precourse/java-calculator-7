@@ -19,7 +19,7 @@ class ExpressionTest {
 
     @ParameterizedTest
     @EnumSource(ExpressionTestCase.class)
-    void Parse_success(ExpressionTestCase testCase) throws Exception {
+    void Parse_success(ExpressionTestCase testCase) {
         //given
         final String input = testCase.str;
 
