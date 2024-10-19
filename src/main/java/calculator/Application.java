@@ -22,6 +22,11 @@ class StringCalculator{
         if(input.isEmpty()){
             return 0;
         } //빈 문자열을 입력할 경우 0 반환
+        else if(input.matches("\\d+")){
+            return Integer.parseInt(input);
+        } //하나의 숫자만 입력할 경우 그 숫자를 반환
+
+
         return -1;
     }
 }
