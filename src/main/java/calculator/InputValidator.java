@@ -13,4 +13,11 @@ public class InputValidator {
             throw new IllegalArgumentException("잘못된 형식의 입력입니다.");
         }
     }
+
+    private void validateCustomDelimiterPattern(String input) {
+        if (!input.matches(CUSTOM_DELIMITER_PATTERN)) {
+            throw new IllegalArgumentException("잘못된 커스텀 구분자 형식입니다.");
+        }
+    }
+
 }
