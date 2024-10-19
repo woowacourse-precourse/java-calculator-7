@@ -1,6 +1,8 @@
 package calculator.model;
 
 
+import calculator.exception.Exceptions;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,9 +28,7 @@ public class InputString {
     }
 
     public void addCustomDelimiter(String input) {
-        if (customDelimiter.size() < 3) {
-            this.customDelimiter.add(input);
-        }
+        this.customDelimiter.add(input);
     }
 
 
