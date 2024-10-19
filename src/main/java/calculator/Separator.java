@@ -71,4 +71,8 @@ public class Separator {
         Collections.sort(index);
         return index.getFirst();
     }
+
+    public int calculateSum() {
+        return numbers.stream().reduce(0, Integer::sum);
+    }
 }
