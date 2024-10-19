@@ -62,6 +62,12 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    public void 마침표_사용(){
+        assertThatThrownBy(() -> runException("1.2.3:4"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     public void 따옴표_구분자_사용() {
         assertSimpleTest(() -> {
             run("//\"\\n1\"2\"4:3");
@@ -74,6 +80,14 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("1,:2");
             assertThat(output()).contains("결과 : 3");
+        });
+    }
+
+    @Test
+    public void 문자열_없음(){
+        assertSimpleTest(() -> {
+            run("\n");
+            assertThat(output()).contains("결과 : 0");
         });
     }
 }
