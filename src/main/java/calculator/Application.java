@@ -3,13 +3,13 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Application {
 
     static String customDelemiter;
     public static void main(String[] args) {
+
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
 
         String numsInput;
         String[] input = Console.readLine().split("\\\\n");
@@ -21,7 +21,6 @@ public class Application {
 
             if (prefix != null && !prefix.isEmpty()) {
                 customDelemiter = getCustomDelimiter(prefix);
-                System.out.println("커스텀 구분자: " + customDelemiter);
             }
         } else {
             numsInput = input[0];
@@ -38,6 +37,7 @@ public class Application {
             }
         }
 
+        System.out.println("결과 : " + result);
         Console.close();
     }
 
