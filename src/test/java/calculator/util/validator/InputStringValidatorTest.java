@@ -24,8 +24,9 @@ class InputStringValidatorTest {
     }
 
     @ParameterizedTest
-    @DisplayName("사용자가 잘못된 문자열을 입력하여 예외가 발생한다.")
-    @ValueSource(strings = {"///;\\n1;2;3", "\\;/n1,2,3", "1;2:3", "-1,2,3", "//;\\n1;2;3//;\\n", "//\\n1;2;3"})
+    @DisplayName("잘못된 문자열로 인해 예외가 발생한다.")
+    @ValueSource(strings = {"///;\\n1;2;3", "\\;/n1,2,3", "1;2:3", "-1,2,3", "//;\\n1;2;//;\\n;3", "//\\n1;2;3",
+            "//;;\\n;"})
     void validateFormatFailTest(final String input) throws Exception {
         //given
         //when
@@ -35,14 +36,16 @@ class InputStringValidatorTest {
     }
 
     @ParameterizedTest
-    @DisplayName("사용자가 올바른 문자열을 입력하여 검증을 통과한다.")
-    @ValueSource(strings = {"", "//.\\n.", "1,2:3", "//;\\n1;2;3", "//3\\n1:2,3", "//.\\n1:2:3", "// \\n1:2:3"})
+    @DisplayName("구분자 n개를 포함한 올바른 문자열은 검증을 통과한다.")
+    @ValueSource(strings = {"", "//\\\\n1\\2\\3", "//.\\n.", "1,2:3", "//;\\n1;2;3", "//3\\n1:2,3", "//.\\n1:2:3",
+            "// \\n1:2:3", "//''..\\n1''..2''..3", "//..\\n.."})
     void validateFormatSuccessTest(final String input) throws Exception {
         //given
         //when
         //then
         assertDoesNotThrow(() -> inputStringValidator.validateFormat(input));
     }
+
 
     @ParameterizedTest
     @DisplayName("사용자가 양의 정수 범위를 벗어난 값을 입력하여 예외가 발생한다.")
