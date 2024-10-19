@@ -5,9 +5,9 @@ import java.util.List;
 
 public class NumberListConverter {
 
-    public static List<Integer> toNumbers(String[] values) {
+    public static List<PositiveNumber> toNumbers(String[] values) {
         return Arrays.stream(values)
-                .map(Integer::parseInt)
+                .map(v -> new PositiveNumber(Integer.parseInt(v)))
                 .toList();
     }
 }

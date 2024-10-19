@@ -14,9 +14,9 @@ class NumberListConverterTest {
         String[] values = {"1", "2", "3"};
 
         // when
-        List<Integer> numbers = NumberListConverter.toNumbers(values);
-        
+        List<PositiveNumber> numbers = NumberListConverter.toNumbers(values);
+
         // then
-        assertThat(numbers).containsExactly(1, 2, 3);
+        assertThat(numbers).containsExactly(new PositiveNumber(1), new PositiveNumber(2), new PositiveNumber(3));
     }
 }
