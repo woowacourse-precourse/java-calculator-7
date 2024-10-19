@@ -18,14 +18,21 @@ public class CustomStringParser{
     }
 
     public static Boolean hasCustomSeparator(String input){
-        String temp = input.substring(0, 5);
-        String suffix = temp.substring(0, 2);
-        String prefix = temp.substring(3, 5);
+        String suffix = input.substring(0, 2);
+        String prefix = input.substring(3, 5);
 
+        if(CUSTOM_SEPARATOR_PREFIX.equals(prefix) && CUSTOM_SEPARATOR_SUFFIX.equals(suffix)){
+            validateCustomSeparator(String.valueOf(getCustomSeparator(input)));
+            return true;
+        }
+
+        return false;
+    }
+
+    private static void validateCustomSeparator(String input) {
         if (input.matches("\\d+")) {
             throw new IllegalArgumentException("커스텀 구분자는 숫자가 아니여야 합니다");
         }
-        return CUSTOM_SEPARATOR_PREFIX.equals(prefix) && CUSTOM_SEPARATOR_SUFFIX.equals(suffix);
     }
 
     private static char getCustomSeparator(String string) {
