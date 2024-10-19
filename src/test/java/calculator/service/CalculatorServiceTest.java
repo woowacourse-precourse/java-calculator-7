@@ -48,7 +48,7 @@ class CalculatorServiceTest {
 
     @ParameterizedTest(name = "입력값: {0}")
     @ValueSource(strings = {"a", "1.2", "a,b", "1,a,3", "1.2,2,3"})
-    void 입력_값이_기본_구분자이고_문자_또는_실수가_포함_된_경우(String input) {
+    void 예외_테스트_입력_값이_기본_구분자이고_문자_또는_실수가_포함_된_경우(String input) {
         // given
         CalculatorRequestDto requestDto = new CalculatorRequestDto(input);
 
@@ -60,7 +60,7 @@ class CalculatorServiceTest {
 
     @ParameterizedTest(name = "입력값: {0}")
     @ValueSource(strings = {"1,", "1,2,", "1,,"})
-    void 입력_값이_기본_구분자이고_빈_값이_포함_된_경우(String input) {
+    void 예외_테스트_입력_값이_기본_구분자이고_빈_값이_포함_된_경우(String input) {
         // given
         CalculatorRequestDto requestDto = new CalculatorRequestDto(input);
 
@@ -72,7 +72,7 @@ class CalculatorServiceTest {
 
     @ParameterizedTest(name = "입력값: {0}")
     @ValueSource(strings = {"-1", "0", "0,1", "-1,2,3", "-1,-2,-3"})
-    void 입력_값이_기본_구분자이고_양수가_아닌_수가_포함_된_경우(String input) {
+    void 예외_테스트_입력_값이_기본_구분자이고_양수가_아닌_수가_포함_된_경우(String input) {
         // given
         CalculatorRequestDto requestDto = new CalculatorRequestDto(input);
 
@@ -84,7 +84,7 @@ class CalculatorServiceTest {
 
     @ParameterizedTest(name = "입력값: {0}")
     @ValueSource(strings = {"//;\\na", "//@\\n1.2", "//#\\na#b", "//;\\n1;a;3", "// \\n1.2 2 3"})
-    void 입력_값이_커스텀_구분자이고_문자_또는_실수가_포함_된_경우(String input) {
+    void 예외_테스트_입력_값이_커스텀_구분자이고_문자_또는_실수가_포함_된_경우(String input) {
         // given
         CalculatorRequestDto requestDto = new CalculatorRequestDto(input);
 
@@ -96,7 +96,7 @@ class CalculatorServiceTest {
 
     @ParameterizedTest(name = "입력값: {0}")
     @ValueSource(strings = {"//;\\n1;", "//@\\n1@2@", "//#\\n1##"})
-    void 입력_값이_커스텀_구분자이고_빈_값이_포함_된_경우(String input) {
+    void 예외_테스트_입력_값이_커스텀_구분자이고_빈_값이_포함_된_경우(String input) {
         // given
         CalculatorRequestDto requestDto = new CalculatorRequestDto(input);
 
@@ -108,7 +108,7 @@ class CalculatorServiceTest {
 
     @ParameterizedTest(name = "입력값: {0}")
     @ValueSource(strings = {"//;\\n-1", "//@\\n0", "//#\\n0#1", "//ab\\n-1ab2ab3", "// \\n-1 -2 -3"})
-    void 입력_값이_커스텀_구분자이고_양수가_아닌_수가_포함_된_경우(String input) {
+    void 예외_테스트_입력_값이_커스텀_구분자이고_양수가_아닌_수가_포함_된_경우(String input) {
         // given
         CalculatorRequestDto requestDto = new CalculatorRequestDto(input);
 
@@ -133,7 +133,7 @@ class CalculatorServiceTest {
     }
 
     @Test
-    void 입력_값이_커스텀_구분자이고_빈_값일_경우() {
+    void 예외_테스트_입력_값이_커스텀_구분자이고_빈_값일_경우() {
         // given
         String input = "//;\\n";
         CalculatorRequestDto requestDto = new CalculatorRequestDto(input);
