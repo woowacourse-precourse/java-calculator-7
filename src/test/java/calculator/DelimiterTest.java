@@ -29,4 +29,16 @@ class DelimiterTest {
         assertThat(delimiter.isContain('*')).isFalse();
         assertThat(delimiter.isContain('+')).isFalse();
     }
+
+    @Test
+    void 커스텀_구분자로_숫자를_입력한_경우() {
+        Delimiter delimiter = new Delimiter();
+        DelimiterParser dp = new DelimiterParser();
+
+        String input = "//1\\n112131415";
+        String customDelimiter = dp.findCustomDelimiter(input);
+
+        assertThatThrownBy(() -> delimiter.addCustomDelimiter(customDelimiter))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }

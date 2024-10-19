@@ -6,6 +6,7 @@ import java.util.List;
 public class Delimiter {
 
     private static final String BASE_DELIMITER = ",:";
+    private static final String NUMBERS = "1234567890";
     private final List<Character> delimiters = new ArrayList<>();
 
     public Delimiter() {
@@ -16,7 +17,11 @@ public class Delimiter {
 
     public void addCustomDelimiter(String customDelimiter) {
         for (int i = 0; i < customDelimiter.length(); i++) {
-            delimiters.add((customDelimiter.charAt(i)));
+            char target = customDelimiter.charAt(i);
+            if (NUMBERS.indexOf(target) != -1) {
+                throw new IllegalArgumentException();
+            }
+            delimiters.add((target));
         }
     }
 

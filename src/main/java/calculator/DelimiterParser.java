@@ -21,7 +21,9 @@ public class DelimiterParser {
                 throw new IllegalArgumentException();
             }
 
-            sb.append(str, start + 2, end);
+            String customDelimiter = str.substring(start + 2, end);
+
+            sb.append(customDelimiter);
             str = str.substring(end + 2);
         }
         return sb.toString();
