@@ -1,11 +1,13 @@
 package calculator;
 
+import camp.nextstep.edu.missionutils.Console;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
-import static camp.nextstep.edu.missionutils.Console.readLine;
+import static camp.nextstep.edu.missionutils.Console.*;
 
 public class Calculator {
     // 전체 입력 문자열
@@ -22,7 +24,8 @@ public class Calculator {
      */
     private void getUserInput() {
         System.out.println("덧셈할 문자열을 입력해주세요.");
-        this.inputString = readLine();
+        this.inputString = Console.readLine();
+        Console.close();
         System.out.println("input string: " + inputString);
     }
 
