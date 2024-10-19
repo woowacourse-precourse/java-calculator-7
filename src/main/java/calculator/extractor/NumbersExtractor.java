@@ -5,7 +5,7 @@ import calculator.domain.Numbers;
 import calculator.dto.SeparatorsResult;
 
 public class NumbersExtractor {
-    public void extractNumbers(SeparatorsResult separatorsResult) {
+    public Numbers extractNumbers(SeparatorsResult separatorsResult) {
         StringBuilder currentNumber = new StringBuilder();
         Numbers numbers = new Numbers();
 
@@ -19,6 +19,8 @@ public class NumbersExtractor {
 
         // 마지막 남은 숫자를 추가
         addNumber(currentNumber, numbers);
+
+        return numbers;
     }
 
     private void addNumber(StringBuilder currentNumber, Numbers numbers) {
