@@ -4,18 +4,17 @@ import static camp.nextstep.edu.missionutils.Console.*;
 
 public class Application {
         public static void main(String[] args) {
-                String text = input();
-                delimiterHandler(text);
-        }
-
-        private static String input() {
                 System.out.println("덧셈할 문자열을 입력해 주세요.");
-                return readLine();
+                delimiterHandler(readLine());
         }
 
         private static void delimiterHandler(String input) {
+                if (input.isEmpty()) {
+                        throw new IllegalArgumentException("입력이 비어 있습니다.");
+                }
+
                 String specialChars;
-                int start = 0, end = 0;
+                int start, end;
 
                 if (input.startsWith("//")) {
                         start = input.indexOf("//") + 2;
@@ -43,20 +42,20 @@ public class Application {
                         } else if (specialChars.indexOf(currentChar) != -1) {
                                 // 숫자가 아닌 경우, 현재까지의 숫자를 정수로 변환하고 결과에 더함
                                 if (!currentNumber.isEmpty()) {
-                                        result += Integer.parseInt(currentNumber.toString());
+                                                int number = Integer.parseInt(currentNumber.toString());
+                                                result += number;
                                         currentNumber.setLength(0); // StringBuilder 초기화
                                 }
-                        } else {
-                                // 예외처리
+                        }
+                        else {
+                                throw new IllegalArgumentException("지정된 구분 문자 외의 문자가 입력되었습니다.");
                         }
                 }
+                        // 마지막에 남아있는 숫자 처리
+                        if (!currentNumber.isEmpty()) {
+                                result += Integer.parseInt(currentNumber.toString());
+                        }
 
-                // 마지막에 남아있는 숫자 처리
-                if (!currentNumber.isEmpty()) {
-                        result += Integer.parseInt(currentNumber.toString());
+                        return result;
                 }
-
-                return result;
-        }
-
 }
