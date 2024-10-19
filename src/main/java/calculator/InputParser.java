@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class InputParser {
+public class InputParser implements Parser {
 
     public Character getCustomParser(String input) {
         Character separator = null;

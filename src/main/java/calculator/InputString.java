@@ -10,9 +10,13 @@ public class InputString {
     private Set<Character> customSeparators;
     private List<Integer> operands;
 
+    private Parser parser;
+
     public InputString(String input){
         this.input = input;
         this.customSeparators = new HashSet<>();
+        this.parser = new InputParser();
+
         customSeparators.add(',');
         customSeparators.add(':');
 
@@ -33,13 +37,11 @@ public class InputString {
     }
 
     private void setCustomSeparator(){
-        InputParser inputParser = new InputParser();
-        Character customSeparator = inputParser.getCustomParser(input);
+        Character customSeparator = parser.getCustomParser(input);
         customSeparators.add(customSeparator);
     }
 
     private void setOperands(){
-        InputParser inputParser = new InputParser();
-        operands = inputParser.getIntegerList(input, customSeparators);
+        operands = parser.getIntegerList(input, customSeparators);
     }
 }
