@@ -12,13 +12,10 @@ public class Application {
 
         // 입력한 문자열에서 기본 구분자, 커스텀 구분자 찾아내기
         String customPolymer = findCustomPolymer(inputStr);
-        String basicPolymerList = "[,:]";
 
         // 기본 구분자 리스트에 커스텀 구분자 추가하기
-        String customPolymerList = "";
-        if(customPolymer.length() > 0){
-            customPolymerList = basicPolymerList.substring(0,basicPolymerList.length()-1) + customPolymer + "]";
-        }
+        String basicPolymerList = "[,:]";
+        String customPolymerList = addPolymerList(customPolymer, basicPolymerList);
 
         // 입력한 문자열에서 구분자를 기준으로 숫자 문자열 분리시키기
         String[] inputStrList;
@@ -88,6 +85,16 @@ public class Application {
         }
 
         return customPolymer;
+    }
+
+    private static String addPolymerList(String customPolymer, String basicPolymerList){
+        // 기본 구분자 리스트에 커스텀 구분자 추가하기
+        String customPolymerList = "";
+        if(customPolymer.length() > 0){
+            customPolymerList = basicPolymerList.substring(0,basicPolymerList.length()-1) + customPolymer + "]";
+        }
+
+        return customPolymerList;
     }
 
 }
