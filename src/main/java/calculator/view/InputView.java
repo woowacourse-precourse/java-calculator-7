@@ -1,12 +1,12 @@
 package calculator.view;
 
-import calculator.validator.InputValidator;
+import calculator.validator.BasicValidator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
-    private final InputValidator inputValidator;
+    private final BasicValidator<String> inputValidator;
 
-    public InputView(InputValidator inputValidator) {
+    public InputView(BasicValidator<String> inputValidator) {
         this.inputValidator = inputValidator;
     }
 
