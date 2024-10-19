@@ -3,7 +3,6 @@ package calculator;
 import static calculator.service.exception.SeparationExceptionType.ENDS_WITH_SEPARATOR;
 import static calculator.service.exception.SeparationExceptionType.INVALID_SEPARATOR;
 import static calculator.service.exception.SeparationExceptionType.NOT_A_POSITIVE_NUMBER;
-import static calculator.service.exception.SeparationExceptionType.NO_INPUT;
 import static calculator.service.exception.SeparationExceptionType.STARTS_WITH_SEPARATOR;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -130,6 +129,16 @@ class ApplicationTest extends NsTest {
     @Test
     void 기본_구분자를_사용하고_입력값이_비어있는_경우() {
         final String input = "";
+        Numbers numbers = Numbers.from(List.of(Number.from(0)));
+        assertEquals(
+                basicSeparationService.getNumbers(input, BASIC_SEPARATOR_COMMA, BASIC_SEPARATOR_COLON),
+                numbers
+        );
+    }
+
+    @Test
+    void 기본_구분자를_사용하고_입력값이_공백문자인_경우() {
+        final String input = "     ";
         Numbers numbers = Numbers.from(List.of(Number.from(0)));
         assertEquals(
                 basicSeparationService.getNumbers(input, BASIC_SEPARATOR_COMMA, BASIC_SEPARATOR_COLON),
