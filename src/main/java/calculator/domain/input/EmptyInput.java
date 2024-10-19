@@ -1,6 +1,4 @@
-package calculator.domain;
-
-import java.util.Objects;
+package calculator.domain.input;
 
 public class EmptyInput extends Input {
 
@@ -17,19 +15,4 @@ public class EmptyInput extends Input {
         return new Long[]{0L};
     }
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) {
-            return true;
-        }
-        if (!(object instanceof EmptyInput that)) {
-            return false;
-        }
-        return Objects.equals(text, that.text);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(text);
-    }
 }
