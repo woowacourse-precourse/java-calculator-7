@@ -12,13 +12,18 @@ public class Model {
         userInput = userInput.replace("\\n", CUSTOM_DELIMITER_BACKWARD.getValue());
         Matcher m = Pattern.compile(CUSTOM_DELIMITER_PATTERN.getValue()).matcher(userInput);
         if (m.find()) {
-            return splitByCustomDelimiter(m.group(2), m.group(1));
+            String[] numbers = splitByCustomDelimiter(m.group(2), m.group(1));
+            isContainMinus(numbers);
+            return numbers;
         }
+
         throw new IllegalArgumentException(INVALID_CUSTOM_TYPE.format());
     }
 
     public static String[] defaultDelimiterAddCalculator(String userInput) {
-        return userInput.split(DEFAULT_DELIMITER.getValue());
+        String[] numbers = userInput.split(DEFAULT_DELIMITER.getValue());
+        isContainMinus(numbers);
+        return numbers;
     }
 
     private static String[] splitByCustomDelimiter(String userInput, String customDelimiter) {
@@ -41,4 +46,19 @@ public class Model {
                 .sum();
     }
 
+    public static boolean isCheckNullOrEmpty(String userInput) {
+        return userInput == null || userInput.isEmpty();
+    }
+
+    public static void isContainZero(String userInput) {
+        if (userInput.contains(ZERO.getValue())) {
+            throw new IllegalArgumentException(MUST_BE_DIGIT.format());
+        }
+    }
+
+    public static void isContainMinus(String[] numbers) {
+        if (Arrays.toString(numbers).contains(MINUS.getValue())) {
+            throw new IllegalArgumentException(MUST_BE_DIGIT.format());
+        }
+    }
 }
