@@ -15,7 +15,7 @@ public class InputStringException {
         }
         validateInputInStandardFormat(delimiters, inputString);
 
-        return new Numbers();
+        return checkIfNumeric(inputString, numbers);
     }
 
     public static void isCustomDelimiterDeclaredInStandardFormat(String inputString){
@@ -47,5 +47,23 @@ public class InputStringException {
                 throw new IllegalArgumentException("");
             }
         }
+    }
+
+    public static Numbers checkIfNumeric(String inputString, Numbers numbers){
+        LinkedList<String> stringNumber = extractService.extractNumbers(inputString);
+        for(String s : stringNumber){
+            if(s.isEmpty()) continue;
+            if(s.length() !=1 && s.charAt(0)=='0'){
+                throw new IllegalArgumentException();
+            }
+            if(Integer.parseInt(s) <=0){
+                throw new IllegalArgumentException();
+            }
+        }
+        for(int i=0;i<stringNumber.size();i++){
+            if(stringNumber.get(i).isEmpty()) continue;
+            numbers.getNumbersList().add(Integer.parseInt(stringNumber.get(i)));
+        }
+        return numbers;
     }
 }
