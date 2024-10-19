@@ -30,7 +30,7 @@ public class Number {
     }
 
     private void isPositive(Double number) {
-        if (number < ZERO) {
+        if (number <= ZERO) {
             throw new IllegalArgumentException(ErrorMessages.INVALID_NUMBER_RANGE_MESSAGE.getErrorMessage());
         }
     }
