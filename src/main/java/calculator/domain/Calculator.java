@@ -1,32 +1,32 @@
 package calculator.domain;
 
-import java.util.List;
-
 public class Calculator {
 
     int result;
 
     public int calculatorLogic(InputText inputText){
-        String text = inputText.getText();
-        List<String> separatorList = inputText.getSeparatorList();
-        String separators = String.join("|",separatorList);
-        String[] numberArray = text.split(separators);
-        for (int i=0;i<numberArray.length;i++){
-            checkCondition(numberArray[i]);
-            int number = checkBlank(numberArray[i]);
+        String[] numberArray = makeNumberArray(inputText);
+        for (String sn : numberArray) {
+            checkCondition(sn);
+            int number = checkBlank(sn);
             result += number;
         }
         return result;
     }
 
-    public void checkCondition(String number){
+    String[] makeNumberArray(InputText inputText){
+        String separators = String.join("|",inputText.getSeparatorList());
+        return inputText.getText().split(separators);
+    }
+
+    void checkCondition(String number){
         String regex = "^[1-9]\\d*$|";
         if (!number.matches(regex)) {
             throw new IllegalArgumentException();
         }
     }
 
-    public int checkBlank(String number){
+   int checkBlank(String number){
         return !number.isEmpty() ? Integer.parseInt(number) : 0;
     }
 
