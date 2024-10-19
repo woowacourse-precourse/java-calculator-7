@@ -1,6 +1,8 @@
 package calculator;
 
 public class Validation {
+    private static final String WRONG_INPUT = "입력값이 잘못되었습니다.";
+    private static final String WRONG_CUSTOM_SEPARATOR_FORM = "custom 구분자의 형식이 잘못되었습니다.";
 
     public static void checkCustomSeparator(String input) {
         isCorrectCustomSeparatorForm(input);
@@ -14,7 +16,7 @@ public class Validation {
     public static void isCorrectInput(String input) {
         for (int i = 0; i < input.length(); i++) {
             if (!(input.charAt(i) == ',' || input.charAt(i) == ':' || isNumber(input.charAt(i)))) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException(WRONG_INPUT);
             }
         }
     }
@@ -26,7 +28,7 @@ public class Validation {
         for (int i = 0; i < input.length(); i++) {
             if (input.charAt(i) == '/' && input.charAt(i + 1) == '/') {
                 if (i + 4 >= input.length() || !isCorrectLastElement(input, i + 3)) {
-                    throw new IllegalArgumentException();
+                    throw new IllegalArgumentException(WRONG_CUSTOM_SEPARATOR_FORM);
                 }
                 startPair++;
                 flag = 1;
@@ -34,7 +36,7 @@ public class Validation {
             }
             if (input.charAt(i) == '\\' && input.charAt(i + 1) == 'n') {
                 if (flag == 0) {
-                    throw new IllegalArgumentException();
+                    throw new IllegalArgumentException(WRONG_CUSTOM_SEPARATOR_FORM);
                 }
                 lastPair++;
                 flag = 0;
@@ -42,7 +44,7 @@ public class Validation {
             }
         }
         if ((startPair == lastPair) && startPair == 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(WRONG_CUSTOM_SEPARATOR_FORM);
         }
     }
 
