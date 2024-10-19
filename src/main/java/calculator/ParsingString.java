@@ -19,32 +19,18 @@ public class ParsingString {
             }
         }
         parseString = input.substring(findStartIndex);
-        findStartNumber();
-        isEmptyString(parseString);
-    }
-
-    public static void findStartNumber() {
-        for (int i = 0; i < parseString.length(); i++) {
-            if (Character.isDigit(parseString.charAt(i))) {
-                parseString = parseString.substring(i);
-                return;
-            }
-        }
     }
 
     public static void isNumeric(String startString, String delimiter) {
         String[] list = startString.split(delimiter);
 
         for (String digit : list) {
+            if (digit.isEmpty()) {
+                continue;
+            }
             if (!digit.matches("\\d+")) {
                 throw new IllegalArgumentException("입력 값이 올바르지 않습니다.");
             }
-        }
-    }
-
-    public static void isEmptyString(String input) {
-        if (input.isEmpty()) {
-            parseString = "0";
         }
     }
 }

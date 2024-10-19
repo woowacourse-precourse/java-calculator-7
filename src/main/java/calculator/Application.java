@@ -11,3 +11,6 @@ public class Application {
         InputOutputManager.outputMessage(calculator.add(parseString, delimiters));
     }
 }
+
+// Main 문 리펙토링
+// 이스케이프가 필요한 구분자 추가 구현

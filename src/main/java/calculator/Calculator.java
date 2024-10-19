@@ -10,6 +10,9 @@ public class Calculator {
         String[] arr = digit.split(delimiter);
 
         for (String s : arr) {
+            if (s.isEmpty()) {
+                continue;
+            }
             sum += Integer.parseInt(s);
         }
         return sum;
