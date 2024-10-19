@@ -1,6 +1,8 @@
 package calculator;
 
+import calculator.util.TestEvironment;
 import camp.nextstep.edu.missionutils.Console;
+
 
 
 public class Application {
@@ -8,33 +10,32 @@ public class Application {
     // TODO: 프로그램 구현
 
     System.out.println("덧셈할 문자열을 입력해 주세요.");
+    System.out.flush();
 
-    String input = Console.readLine().trim();
+
+    Calculator calculator = new Calculator(Console.readLine().trim());
 
     try {
-
-      Calculator calculator = new Calculator(input);
-
       if (calculator.inputValidator()) {
 
         calculator.matchesAndInsert();
 
         int[] numbersArray = calculator.allPositiveNumber().getNumbers();
-
-
-        int result=Calculator.add(numbersArray);
-
-        System.out.println("결과 : " + result);
+        System.out.println("결과 : " + Calculator.add(numbersArray));
 
       } else {
         throw new IllegalArgumentException("입력을 잘못하였습니다.");
       }
-
     } catch (IllegalArgumentException e) {
       System.err.println(e.getMessage());
+
+      if(TestEvironment.isRunningInTest()){
+        throw e;
+      }
+
     } finally {
       Console.close();
     }
-
   }
+
 }

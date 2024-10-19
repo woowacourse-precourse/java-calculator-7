@@ -41,14 +41,14 @@ public abstract class RegexCheck {
       }
       numericString = matcher.group(3);
 
-      System.out.println("delimiter = " + delimiter);
-      System.out.println("numericString = " + numericString);
+//      System.out.println("delimiter = " + delimiter);
+//      System.out.println("numericString = " + numericString);
 
       matchDelimiter();
-
-      System.out.println("matchDelimiter 후");
-      System.out.println("delimiter = " + delimiter);
-      System.out.println("stringNumbers = " + Arrays.toString(stringNumbers));
+//
+//      System.out.println("matchDelimiter 후");
+//      System.out.println("delimiter = " + delimiter);
+//      System.out.println("stringNumbers = " + Arrays.toString(stringNumbers));
 
     } else {
       throw new IllegalArgumentException("입력 형식을 확인해 주세요");
@@ -58,10 +58,11 @@ public abstract class RegexCheck {
 
   private void matchDelimiter() throws IllegalArgumentException {
     matcher = Pattern.compile(getRegex()).matcher(numericString);
-    System.out.println("getRegex() = " + getRegex());
+//    System.out.println("getRegex() = " + getRegex());
 
     if (INPUT.isEmpty()) {
       stringNumbers = new String[0];
+      return;
     }
 
     if (matcher.matches()) {

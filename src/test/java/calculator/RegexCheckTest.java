@@ -10,27 +10,24 @@ public class RegexCheckTest {
 
 
   @BeforeEach
-  public void setUp(){
+  public void setUp() {
     calculator.matchesAndInsert();
   }
 
   @Test
-  public void   isValidInputTest() {
+  public void isValidInputTest() {
     assertTrue(calculator.inputValidator());
   }
 
   @Test
   public void matchDelimiterTest() {
-    assertThrows(IllegalArgumentException.class, () -> {
-      Calculator calculator1 = new Calculator("//`\\n1:2`3");
-      calculator1.matchesAndInsert();
-      throw new IllegalArgumentException("구분자가 잘못되었습니다.");
-    });
+    Calculator calculator1 = new Calculator("1;2;3");
+    assertThrows(IllegalArgumentException.class, calculator1::matchesAndInsert);
   }
 
   @Test
   public void matchAndInsertTest() {
-    assertArrayEquals(new String[]{"1","2","3"},calculator.getStringNumbers());
+    assertArrayEquals(new String[]{"1", "2", "3"}, calculator.getStringNumbers());
   }
 
   @Test
