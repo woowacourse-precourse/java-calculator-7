@@ -1,14 +1,17 @@
 package calculator;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Application {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // TODO: 프로그램 구현
-        Scanner scanner = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = scanner.nextLine();
+        String input = br.readLine();
 
         try {
             int result = add(input);
