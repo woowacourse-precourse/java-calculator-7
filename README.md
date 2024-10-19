@@ -16,9 +16,9 @@
     - class IOManager -> input, output 처리
     - class Calculation -> 데이터 연산 처리
         - 필드로 ArrayList 타입의 숫자,구분자 만들기
-- [X] A. IOManager의 함수 
-    - [X] 1. 문자열 입력받기
-    - [X] 2. 결과 출력하기
+- [O] A. IOManager의 함수 
+    - [O] 1. 문자열 입력받기
+    - [O] 2. 결과 출력하기
 - [X] B. Calculation의 함수
     - [X] 0. getter, setter
     - [X] 1. 입력 받은 문자열 분석하고 필드에 저장하기
