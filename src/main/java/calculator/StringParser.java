@@ -18,35 +18,31 @@ public class StringParser {
     }
 
     public List<Integer> extractNumbers() {
+        Set<String> delimiters = new HashSet<>(DEFAULT_DELIMITER);
         String expression = this.inputString;
-        Set<String> delimiter = new HashSet<>(DEFAULT_DELIMITER);
 
         String customDelimiter = extractCustomDelimiter();
         if (customDelimiter != null) {
+            delimiters.add(customDelimiter);
             expression = removeDelimiterDefinition();
-            delimiter.add(customDelimiter);
         }
 
-        return getNumbers(expression, delimiter);
+        return parseNumbers(expression, delimiters);
     }
 
     private String extractCustomDelimiter() {
         Pattern pattern = Pattern.compile(EXTRACT_DELIMITER_REGEX);
         Matcher matcher = pattern.matcher(this.inputString);
 
-        if (matcher.find()) {
-            return matcher.group(1);
-        }
-
-        return null;
+        return matcher.find() ? matcher.group(1) : null;
     }
 
     private String removeDelimiterDefinition() {
         return this.inputString.replaceAll(EXTRACT_DELIMITER_REGEX, "");
     }
 
-    private List<Integer> getNumbers(String expression, Set<String> delimiter) {
-        String delimiterRegEx = "[" + String.join("", delimiter) + "]";
+    private List<Integer> parseNumbers(String expression, Set<String> delimiters) {
+        String delimiterRegEx = "[" + String.join("", delimiters) + "]";
         String[] stringNumbers = expression.split(delimiterRegEx);
 
         return Arrays.stream(stringNumbers)
