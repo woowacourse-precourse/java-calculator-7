@@ -1,5 +1,7 @@
 package calculator.delimiter;
 
+import calculator.exception.CalculatorException;
+
 import java.util.*;
 
 public abstract class Delimiter {
@@ -26,8 +28,16 @@ public abstract class Delimiter {
     public List<String> divideCharacter(String s) {
         List<String> result = new ArrayList<>();
 
-        if (!hasCustomDelimiter(s) && hasDelimiter(s)) {
-            result = Arrays.stream(s.split("[:,]")).toList();
+        if (!hasCustomDelimiter(s)) {
+            if (hasDelimiter(s)) {
+                result = Arrays.stream(s.split("[:,]")).toList();
+
+                if (!areDigits(result)) {
+                    CalculatorException.causeException("잘못된 문자가 들어있습니다.");
+                }
+            } else {
+                CalculatorException.causeException("잘못된 문자가 들어있습니다.");
+            }
         }
 
         return result;
@@ -41,8 +51,12 @@ public abstract class Delimiter {
         return s.contains(":") || s.contains(",");
     }
 
+    public boolean areDigits(List<String> s) {
+        return s.stream().allMatch(this::isDigit);
+    }
+
     public boolean isDigit(String s) {
-        return s.matches("\\d+");
+        return s.matches("\\d+"); //부호 포함x
     }
 
     public abstract boolean hasCustomDelimiter(String s);

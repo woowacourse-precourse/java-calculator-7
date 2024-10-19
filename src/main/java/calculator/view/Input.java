@@ -21,7 +21,7 @@ public class Input {
     }
 
     private boolean isInputBlank(String input) {
-        return input != null && !input.equals(" ");
+        return input != null && input.contains(" ");
     }
 
     private boolean isNull(String input) {
