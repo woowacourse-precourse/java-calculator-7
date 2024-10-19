@@ -16,23 +16,22 @@ public class Application {
         return Console.readLine();
     }
 
-    // 커스텀 구분자 유무를 판단하고, 커스텀 구분자 반환하기
-    private static String checkCustomDelimiter(String str) {
+    // 커스텀 구분자 유무를 판단하기
+    private static boolean checkCustomDelimiter(String str) {
         String regex = "//(.*?)\n";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(str);
-        if(matcher.find()) {
-            return matcher.group(1);
-        }
-        return "";
+        return matcher.find();
     }
+
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         StringBuilder delimiter = new StringBuilder();
         delimiter.append(".|:");
         init_print();
         String str = input();
-        delimiter.append(checkCustomDelimiter(str));
+        if(checkCustomDelimiter(str)) {
 
+        }
     }
 }
