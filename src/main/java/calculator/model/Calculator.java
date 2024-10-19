@@ -15,17 +15,10 @@ public class Calculator {
         String[] numbers = extractor.extractNumber(input);
         for (String number : numbers) {
             validateNumber(number);
-            result += getIntNumber(number);
+            result += new Parser(number).parseToInt(number);
         }
     }
-
-    private static int getIntNumber(String number) {
-        if (number.isEmpty()) {
-            return 0;
-        }
-        return Integer.parseInt(number);
-    }
-
+    
     public int getResult() {
         return result;
     }
