@@ -7,11 +7,15 @@ public class Validator {
         if (isNotDigit(str))
             throw new IllegalArgumentException("[ERROR] 지정되지 않은 구분자입니다.");
 
-        long num = Long.parseLong(str);
-        if (isNegative(num))
-            throw new IllegalArgumentException("[ERROR] 음수는 입력할 수 없습니다.");
+        try {
+            long num = Long.parseLong(str);
+            if (isNegative(num))
+                throw new IllegalArgumentException("[ERROR] 음수는 입력할 수 없습니다.");
 
-        return num;
+            return num;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("[ERROR] 범위를 초과한 숫자입니다.");
+        }
     }
 
     private static boolean isNotDigit(final String str) {
