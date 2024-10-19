@@ -11,7 +11,15 @@ public class Separator {
         setCustomSeparator(inputValue);
     }
 
-    public void setCustomSeparator(String inputValue) {
+    public String[] splitBySeparator(String inputValue) {
+        if (customSeparator == null) {
+            return inputValue.split(defaultSeparator);
+        }
+        String targetValue = inputValue.substring(5);
+        return targetValue.split(customSeparator);
+    }
+
+    private void setCustomSeparator(String inputValue) {
         if (hasCustomSeparator(inputValue)) {
             String customSeparator = getCustomSeparator(inputValue);
             validate(customSeparator);
@@ -21,6 +29,10 @@ public class Separator {
 
     private Boolean hasCustomSeparator(String inputValue) {
         return inputValue.startsWith("//") && inputValue.indexOf("\\n") >= 2;
+    }
+
+    private String getCustomSeparator(String inputValue) {
+        return inputValue.substring(2, inputValue.indexOf("\\n"));
     }
 
     private void validate(String customSeparator) {
@@ -35,24 +47,9 @@ public class Separator {
     }
 
     private void validateLetter(String customSeparator) {
-        try {
-            Integer.parseInt(customSeparator);
+        if (customSeparator.matches("\\d")) {
             throw new IllegalArgumentException(NOT_NUMBER_MESSAGE);
-        } catch (NumberFormatException e) {
-
         }
-    }
-
-    private String getCustomSeparator(String inputValue) {
-        return inputValue.substring(2, inputValue.indexOf("\\n"));
-    }
-
-    public String[] splitBySeparator(String inputValue) {
-        if (customSeparator == null) {
-            return inputValue.split(defaultSeparator);
-        }
-        String targetValue = inputValue.substring(5);
-        return targetValue.split(customSeparator);
     }
 
     private String escapeSeparator(String customSeparator) {

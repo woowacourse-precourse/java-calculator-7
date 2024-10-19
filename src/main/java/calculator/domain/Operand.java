@@ -12,6 +12,10 @@ public class Operand {
         this.operand = operand;
     }
 
+    public int getOperand() {
+        return operand;
+    }
+
     private int parseToInt(String element) {
         try {
             return Integer.parseInt(element);
@@ -24,9 +28,5 @@ public class Operand {
         if (operand <= 0) {
             throw new IllegalArgumentException(NOT_POSITIVE_MESSAGE);
         }
-    }
-
-    public int getOperand() {
-        return operand;
     }
 }
