@@ -21,7 +21,7 @@ public class StringProcessor {
     }
 
     public static int calculate(String[] expression) {
-        if(expression[0].isEmpty()) {
+        if (expression[0].isEmpty()) {
             return 0;
         }
         int sum = 0;
@@ -34,4 +34,5 @@ public class StringProcessor {
         }
         return sum;
     }
+
 }
