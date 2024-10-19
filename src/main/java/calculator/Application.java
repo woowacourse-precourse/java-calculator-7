@@ -1,7 +1,6 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.math.BigInteger;
 import java.util.Set;
 import java.util.HashSet;
 
@@ -10,11 +9,10 @@ public class Application {
     private static final String END_DELIMITER = "\\n";
     private static final char[] DEFAULT_DELIMITERS = {',', ':'};
 
-    private static Console inputConsole;
     private static String numberInputString = null;
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        String inputValue = inputConsole.readLine();
+        String inputValue = Console.readLine();
         try {
             Set<Character> delimiters = extractDelimiter(inputValue);
             long result = calcNumbers(delimiters);
@@ -22,7 +20,7 @@ public class Application {
         } catch (IllegalArgumentException expected) {
             throw expected;
         } finally {
-            inputConsole.close();
+            Console.close();
         }
 
     }
