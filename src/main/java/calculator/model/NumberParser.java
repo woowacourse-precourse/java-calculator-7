@@ -1,10 +1,10 @@
 package calculator.model;
 
 import calculator.model.Dto.DelimiterInputData;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class NumberParser {
     private final Character customDelimiter;
@@ -26,9 +26,14 @@ public class NumberParser {
                 .filter(s -> !s.isEmpty())
                 .toList();
 
-        return extractedStrings.stream()
-                .map(Long::parseLong)
-                .collect(Collectors.toList());
+        List<Long> numbers = new ArrayList<>();
+
+        for (String str : extractedStrings) {
+            numbers.add(convertToLong(str));
+        }
+
+        return numbers;
+
     }
 
 
@@ -44,6 +49,14 @@ public class NumberParser {
                 .replace("]", "\\]");
 
 
+    }
+
+    private Long convertToLong(String str) {
+        try {
+            return Long.parseLong(str);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("계산기가 계산 할 수 있는 범위를 초과했습니다.");
+        }
     }
 
 }
