@@ -21,9 +21,10 @@ public class CalculatorController {
      * 사용자로부터 문자열을 입력받는다.
      */
     private void createInputString() {
-        String input = inputView.getInputString();  //덧셈할 문자열을 입력해주세요.
+        String input = inputView.getInputString();  // 덧셈할 문자열을 입력해주세요.
         InputString inputString = new InputString(input);
 
+        long resultSum = inputString.calculate();  // 문자열 계산
     }
 
 }

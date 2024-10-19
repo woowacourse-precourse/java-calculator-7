@@ -29,6 +29,8 @@ public class InputString {
 
         long[] numberList = splitStringByDelimiters(delimiters);
 
+        sum(numberList);
+
         return this.resultSum;
     }
 
@@ -56,4 +58,14 @@ public class InputString {
                 .toArray();
     }
 
+    /**
+     * 덧셈 계산
+     *
+     * @param numberList 문자열로부터 추출한 숫자들
+     */
+    private void sum(long[] numberList) {
+        for (long number : numberList) {
+            resultSum += number;
+        }
+    }
 }
