@@ -34,6 +34,7 @@ public class DelimiterProcess {
 
         while(delimStarting) {
             addDelimiter();
+            isNumberStarting();
         }
 
         return delimitersInit;

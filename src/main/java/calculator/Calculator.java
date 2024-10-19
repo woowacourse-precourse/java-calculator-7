@@ -32,7 +32,7 @@ public class Calculator {
 
         String DelimTotal = getDelimTotal();
 
-        StringTokenizer stringTokenizer = new StringTokenizer(userInput, completeDelimiter);
+        StringTokenizer stringTokenizer = new StringTokenizer(userInput, DelimTotal);
         List<Integer> resultIntegers = new ArrayList<>();
         while (stringTokenizer.hasMoreTokens()){
             int outInteger = Integer.parseInt(stringTokenizer.nextToken());
