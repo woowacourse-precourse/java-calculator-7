@@ -37,5 +37,14 @@ public class Application {
     } else {
         inputStrList = inputStr.split(basicPolymerList);
     }
+
+    // 분리된 문자열 숫자로 변환하기
+    int[] strToIntList = new int[inputStrList.length];
+    int index = 0;
+    for (String str : inputStrList) {
+        strToIntList[index] = Integer.parseInt(str);
+        index++;
+    }
+
     }
 }
