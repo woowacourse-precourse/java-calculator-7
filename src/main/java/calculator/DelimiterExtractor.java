@@ -8,14 +8,18 @@ public class DelimiterExtractor {
     private DelimiterExtractor() {
     }
 
-    public static String extract(String target) {
+    public static Delimiter extract(String target) {
+        if (!target.startsWith(BOUNDARY_PREFIX) && !target.contains(BOUNDARY_PREFIX)) {
+            return Delimiter.getDefault();
+        }
         validateBoundary(target);
 
         int prefixLastIndex = target.indexOf(BOUNDARY_PREFIX) + BOUNDARY_PREFIX.length() - 1;
         int suffixStartIndex = target.indexOf(BOUNDARY_SUFFIX);
         validateDelimiterCount(prefixLastIndex, suffixStartIndex);
 
-        return target.substring(prefixLastIndex + 1, suffixStartIndex);
+        String extracted = target.substring(prefixLastIndex + 1, suffixStartIndex);
+        return Delimiter.from(extracted);
     }
 
     private static void validateBoundary(String target) {
