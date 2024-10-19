@@ -1,11 +1,16 @@
 package calculator.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class PositiveNumbersTest {
 
@@ -14,6 +19,23 @@ class PositiveNumbersTest {
     void 양수들_0은_기본값으로_포함하지_않는다() {
         assertThatNoException().isThrownBy(() ->
                 PositiveNumbers.from(List.of("0", "1", "2", "3")));
+    }
+
+    @MethodSource(value = "provideNumbersAndExpectedValue")
+    @ParameterizedTest(name = "피연산자: {0}, 기대값: {1}")
+    void 덧셈_계산_성공(List<String> numbers, PositiveNumber expected) {
+        PositiveNumbers positiveNumbers = PositiveNumbers.from(numbers);
+
+        assertThat(positiveNumbers.sum()).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> provideNumbersAndExpectedValue() {
+        return Stream.of(
+                Arguments.of(List.of(""), PositiveNumber.zero()),
+                Arguments.of(List.of("", "1"), PositiveNumber.from("1")),
+                Arguments.of(List.of("0", "1"), PositiveNumber.from("1")),
+                Arguments.of(List.of("0", "1", "2", "3"), PositiveNumber.from("6"))
+        );
     }
 
 }

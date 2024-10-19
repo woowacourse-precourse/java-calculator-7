@@ -20,4 +20,9 @@ public class PositiveNumbers {
                 .toList();
     }
 
+    public PositiveNumber sum() {
+        return positiveNumbers.stream()
+                .reduce(PositiveNumber.zero(), PositiveNumber::add);
+    }
+
 }
