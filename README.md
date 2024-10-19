@@ -61,7 +61,6 @@
 - InputValidator
   - isEmptyInput()
   - validateInputPattern()
-  - validateNonNegativeNumbers()
   - validateUnregisteredDelimiter()
   - validateCustomDelimiterFormat()
   - validateNumberFormat()
@@ -72,7 +71,6 @@
 ## 예외 처리
 - 빈 값이 들어왔을 때
 - input 패턴이 올바르지 않을 때
-- 음수가 입력되었을 때
 - 등록되지 않은 구분자를 사용했을 때
 - 커스텀 구분자 등록 형식을 지키지 않았을 때
 - 숫자의 형식이 올바르지 않을 때
