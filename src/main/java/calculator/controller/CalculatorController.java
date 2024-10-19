@@ -29,6 +29,9 @@ public class CalculatorController {
         if (!validator.checkCustomSeparator(input, separators)) {
             throw new IllegalArgumentException("커스텀 구분자를 잘못 입력하였습니다.");
         }
+        if (validator.checkHasNegative(input, separators)) {
+            throw new IllegalArgumentException("음수를 입력하였습니다.");
+        }
         if (!validator.checkIsCorrectString(input, separators)) {
             throw new IllegalArgumentException("올바른 문자열이 아닙니다.");
         }

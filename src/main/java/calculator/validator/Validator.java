@@ -72,4 +72,35 @@ public class Validator {
         }
         return true; // 모든 문자가 숫자이거나 구분자인 경우
     }
+
+    //음수가 있는지 검사
+    public boolean checkHasNegative(String  input, ArrayList<String> separators) {
+        // 커스텀 구분자가 있을 경우 처리
+        if (input.startsWith("//")) {
+            // "\n"의 위치 찾기
+            int newlineIndex = input.indexOf("\\n");
+            if (newlineIndex == -1 || newlineIndex <= 2) {
+                return false; // 형식이 잘못된 경우
+            }
+            // 커스텀 구분자 이후의 문자열만 처리
+            input = input.substring(newlineIndex + 2);
+        }
+        boolean hasMinus = false;
+        int minusSize = 0;
+        for (int i = 0; i < separators.size(); i++) {
+            if (separators.get(i).startsWith("-")){
+                minusSize = separators.get(i).length();
+                hasMinus = true;
+            }
+        }
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == '-') {
+                if (hasMinus && input.charAt(i + 1)  + minusSize!= '-') {
+                    return false;
+                }
+                return true;
+            }
+        }
+        return true;
+    }
 }
