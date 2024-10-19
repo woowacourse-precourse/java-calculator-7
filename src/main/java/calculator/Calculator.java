@@ -7,16 +7,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
-import static camp.nextstep.edu.missionutils.Console.*;
-
 public class Calculator {
-    // 전체 입력 문자열
     private String inputString;
-    // // \n, 커스텀 구분자 제거 문자열
     private String removedString = "";
-    // 구분자 배열
     private List<String> separator = new ArrayList<>();
-    // 피연산자 배열
     private int[] operand;
 
     /**
@@ -26,11 +20,11 @@ public class Calculator {
         System.out.println("덧셈할 문자열을 입력해주세요.");
         this.inputString = Console.readLine();
         Console.close();
-        System.out.println("input string: " + inputString);
     }
 
     /**
-     * 커스텀 구분자 유뮤 / 짝 맞는지 확인 후 파싱
+     * 커스텀 구분자 유뮤
+     * 커스텀 구분자 짝 맞는지 확인 후 파싱
      */
     private boolean parseCustomSeparator() {
         Stack<String> buffer = new Stack<>();
@@ -86,36 +80,7 @@ public class Calculator {
      * 피연산자 파싱하여 operand 배열에 저장
      */
     private void parseOperand() {
-        int tmpOperand = 0;
-        String tmpOperator = "";
-        boolean flag = false;
 
-        // 숫자가 있는지 확인하기
-        for (int i = 0; i < removedString.length(); i++) {
-
-            if (removedString.charAt(i) >= '0' && removedString.charAt(i) <= '9') {
-                if (!flag) {
-
-                    continue;
-                }
-                if (flag && isSeparator(tmpOperator)) {
-
-                    continue;
-                }
-                throw new IllegalArgumentException("존재하지 않는 구분자가 포함되었습니다.");
-            }
-            else {
-                if (flag == false) {
-                    flag = true;
-
-                }
-                tmpOperand += removedString.charAt(i);
-            }
-        }
-
-
-        // 커스텀 문자 제외하고 남은 문자가 있는지 확인하기
-        // 만약에
     }
 
     /**
