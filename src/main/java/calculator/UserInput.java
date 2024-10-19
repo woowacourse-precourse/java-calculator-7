@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class UserInput {
 
     private String input;
-    private ArrayList<Character> seperators;
+    private ArrayList<Character> separators;
 
     public void input() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -28,16 +28,15 @@ public class UserInput {
                 throw new IllegalArgumentException("입력값이 올바르지 않습니다.");
             }
 
-            seperators.add(input.charAt(2));
+            separators.add(input.charAt(2));
 
             index = 5;
         }
 
         for (int i = index; i < input.length(); i++) {
-
             char c = input.charAt(i);
 
-            if (!Character.isDigit(c) && !seperators.contains(String.valueOf(c))) {
+            if (!Character.isDigit(c) && !separators.contains(c)) {
                 throw new IllegalArgumentException("입력값이 올바르지 않습니다.");
             }
         }
@@ -47,7 +46,7 @@ public class UserInput {
         return input;
     }
 
-    public ArrayList<Character> getSeperators() {
-        return seperators;
+    public ArrayList<Character> getSeparators() {
+        return separators;
     }
 }
