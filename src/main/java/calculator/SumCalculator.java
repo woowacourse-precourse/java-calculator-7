@@ -32,8 +32,8 @@ public class SumCalculator {
     }
     try{
       for(int i = 0; i<number.length; i++){
-        if(number[i].isEmpty()){
-          throw new IllegalArgumentException("계산식이 잘못되었습니다.");
+        if(number[i].isEmpty() || Integer.parseInt(number[i]) < 0){
+          throw new IllegalArgumentException("음수를 입력하였거나 계산식이 잘못되었습니다.");
         }
         answer += Integer.parseInt(number[i]);
       }
@@ -52,8 +52,8 @@ public class SumCalculator {
     }
     try{
       for(int i = 0; i<number.length; i++){
-        if(number[i].isEmpty()){
-          throw new IllegalArgumentException("계산식이 잘못되었습니다.");
+        if(number[i].isEmpty() || Integer.parseInt(number[i]) < 0){
+          throw new IllegalArgumentException("음수를 입력하였거나 계산식이 잘못되었습니다.");
         }
         answer += Integer.parseInt(number[i]);
       }
