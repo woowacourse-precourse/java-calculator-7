@@ -8,17 +8,16 @@ public class Calculator {
 
     public void start() {
         startView();
+        
+        InputProcessor inputProcessor = readInput();
 
+        Calculate calculate = new Calculate(inputProcessor.numbers());
 
     }
 
 
     private InputProcessor readInput() {
         String line = Console.readLine();
-
-        InputProcessor inputProcessor = readInput();
-
-        Calculate calculate = new Calculate(inputProcessor.numbers());
 
         return new InputProcessor(line);
 
