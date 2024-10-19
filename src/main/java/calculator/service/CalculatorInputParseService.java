@@ -1,5 +1,6 @@
 package calculator.service;
 
+import calculator.exception.NonPositiveNumberException;
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
@@ -50,11 +51,11 @@ public class CalculatorInputParseService {
         try {
             parsedNumber = new BigInteger(numberStr);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("변환할 수 없는 숫자입니다.: " + numberStr);
+            throw new NumberFormatException("변환할 수 없는 숫자입니다.: " + numberStr);
         }
 
         if (parsedNumber.compareTo(BigInteger.ZERO) <= 0) {
-            throw new IllegalArgumentException("숫자는 양수만 허용됩니다.: " + numberStr);
+            throw new NonPositiveNumberException(parsedNumber);
         }
 
         return parsedNumber;
