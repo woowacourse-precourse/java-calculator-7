@@ -17,6 +17,7 @@ public class StringCalculatorController {
     }
 
     public void startCalculator() {
+        outputView.getString();
         StringParser parser = new StringParser(inputView.getString());
         String delimiter = parser.extractDelimiter();
         List<String> numbers = parser.parseStrings(delimiter);
