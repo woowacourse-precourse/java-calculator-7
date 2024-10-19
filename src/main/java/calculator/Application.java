@@ -1,20 +1,18 @@
 package calculator;
 
+import calculator.controller.CalculateController;
 import calculator.model.UserInput;
-import calculator.service.SplitMethod;
+import calculator.service.CalculateService;
+import calculator.view.UserView;
 
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         UserInput userInput = new UserInput();
-        SplitMethod splitMethod = new SplitMethod();
+        CalculateService calculateService = new CalculateService();
+        UserView userView = new UserView();
+        CalculateController controller = new CalculateController(userInput, calculateService, userView);
 
-        System.out.println("덧셈할 문자열을 입력.");
-
-        String input = userInput.input();
-
-        int result = splitMethod.split(input);
-
-        System.out.println("결과 : " + result);
+        controller.run();
     }
 }
