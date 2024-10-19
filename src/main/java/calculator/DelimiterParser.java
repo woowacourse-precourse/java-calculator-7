@@ -9,7 +9,7 @@ public class DelimiterParser {
     public DelimiterParser(String input) {
         this.input = input;
         if (input.startsWith("//")) {
-            int newlineIndex = input.indexOf('\n');
+            int newlineIndex = input.indexOf("\\n");
             if (newlineIndex == -1) {
                 throw new IllegalArgumentException("잘못된 입력 형식입니다.");
             }
@@ -18,7 +18,7 @@ public class DelimiterParser {
             }
             if (input.startsWith("//")) {
                 String customDelimiter = input.substring(2, newlineIndex);
-                numbersPart = input.substring(newlineIndex + 1);
+                numbersPart = input.substring(newlineIndex + 2);
                 delimiterStrategy = new CustomDelimiterStrategy(customDelimiter);
             }
         } else {
