@@ -24,7 +24,7 @@ class CalculatorTest {
 
     @Test
     @DisplayName("분리된 입력값 중 음수가 존재할 경우 예외 발생")
-    void validateNoNegativeNumber() {
+    void validatePositiveNumber() {
         //given
         Calculator calculator = new Calculator();
         String[] strings = {"10", "-20", "30"};

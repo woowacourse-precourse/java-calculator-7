@@ -15,12 +15,12 @@ public class Calculator {
 
     private int validateAndParseNumber(String numberString) {
         int number = validateNumericContent(numberString);
-        validateNoNegativeNumber(number);
+        validatePositiveNumber(number);
         return number;
     }
 
-    private void validateNoNegativeNumber(int number) {
-        if (number < 0) {
+    private void validatePositiveNumber(int number) {
+        if (number <= 0) {
             throw new NonPositiveNumberException();
         }
     }
