@@ -2,6 +2,7 @@ package calculator.front.parser;
 
 import static org.assertj.core.api.Assertions.*;
 
+import calculator.front.exception.message.NumberAsDelimiterException;
 import calculator.front.input.CustomDelimiterParsedInput;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,5 +36,15 @@ class CustomDelimiterParserTest {
         //then
         assertThat(customDelimiterParsedInput.delimiters()).isEqualTo(delimiters);
         assertThat(customDelimiterParsedInput.inputWithDelimiter()).isEqualTo(inputWithDelimiters);
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자가 숫자가 들어왔을 때 예외 발생")
+    void 커스텀_구분자_예외_테스트() {
+        //given
+        String rawInput = "//1\\n1,2,3";
+        //when
+        //then
+        assertThatThrownBy(() -> CustomDelimiterParser.parse(rawInput)).isInstanceOf(NumberAsDelimiterException.class);
     }
 }
