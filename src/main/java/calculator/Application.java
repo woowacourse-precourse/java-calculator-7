@@ -29,6 +29,11 @@ public class Application {
         }
         return delimiters;
     }
+    public static String getSpecialDelimiter(String matchStr) {
+        // 특수 구분자가 하나의 문자가 아닐 수 있다.
+        String delimiter = matchStr.substring(2,3);
+        return delimiter;
+    }
 
     public static String checkSpecialDelimiter (String inputString) {
         // 정규표현식
