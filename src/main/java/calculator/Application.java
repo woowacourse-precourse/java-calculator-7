@@ -9,6 +9,8 @@ import java.util.*;
 // 아무 입력 없으면 0 출력
 // 커스텀 구분자만 있고 출력 없으면 0 출력?
 // 음수, 0 입력 시 예외처리 후 앱 종료
+// -1, 2, 3 등 음수가 섞여서 들어왔을 때 문제를 해결
+// 숫자와 구분자 사이 스페이스가 포함되는 경우
 
 public class Application {
     public static void main(String[] args) {
@@ -33,11 +35,14 @@ public class Application {
 
         // - custom 구분자를 찾아 추가
         customDivider = findDivider(inputString);
-        if (customDivider != null) {
-            // \n 다음의 숫자 부분 추출
-            String tmpNum = inputString.substring(inputString.indexOf("\\n") + 2);
-
+        if(customDivider != null) {
             divider.add(customDivider);
+        }
+        if (!divider.isEmpty()) {
+            // \n 다음의 숫자 부분 추출
+            String tmpNum = inputString.contains("\\n") ? inputString.substring(inputString.indexOf("\\n") + 2) : inputString;
+
+
             // 구분자로 문자열 분리
             // customDivider를 기준으로 문자열을 분리
 
