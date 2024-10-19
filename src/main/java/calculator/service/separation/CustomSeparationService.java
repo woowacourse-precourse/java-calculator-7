@@ -1,6 +1,7 @@
 package calculator.service.separation;
 
 import static calculator.service.exception.SeparationExceptionType.NOT_EXIST_CUSTOM_SEPARATOR;
+import static calculator.service.validation.SeparationValidator.validate;
 
 import calculator.domain.Number;
 import calculator.domain.Numbers;
@@ -23,6 +24,8 @@ public class CustomSeparationService implements SeparationService {
     public Numbers getNumbers(String input, String... separators) {
         String inputWithoutNotation = removeNotation(input);
         String customSeparator = extractCustomSeparator(input);
+
+        validate(inputWithoutNotation, customSeparator);
 
         String[] split = split(inputWithoutNotation, customSeparator);
         List<Number> values = Arrays.stream(split)
