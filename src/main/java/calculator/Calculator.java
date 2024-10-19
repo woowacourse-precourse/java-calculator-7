@@ -14,7 +14,7 @@ public class Calculator {
     private static int total = 0;
 
     public static void run() {
-        userInput = InputUtils.getUserInput();
+        userInput = InputUtils.getInput("덧셈할 문자열을 입력해 주세요.");
         calculating();
     }
 

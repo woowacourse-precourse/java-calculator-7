@@ -3,12 +3,12 @@ package calculator.utils;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputUtils {
-    public static String getUserInput() {
-        String userInput;
+    public static String getInput(String message) {
+        String input;
 
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        userInput = Console.readLine();
+        System.out.println(message);
+        input = Console.readLine();
 
-        return userInput;
+        return input;
     }
 }
