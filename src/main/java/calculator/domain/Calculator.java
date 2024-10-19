@@ -20,6 +20,15 @@ public class Calculator {
         }
     }
 
+    public Double getSum(){
+        Double sum = 0.0;
+
+        for (Double number : numbers) {
+            sum += number;
+        }
+
+        return sum;
+    }
     public List<Double> getNumbers() {
         return numbers;
     }

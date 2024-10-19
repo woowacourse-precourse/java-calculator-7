@@ -36,4 +36,14 @@ class CalculatorTest {
 
     }
 
+    @Test
+    @DisplayName("숫자의 합을 반환한다")
+    void 숫자_합_반환(){
+        List<Double> numbers = new ArrayList<>(Arrays.asList(1.0, 1.1, 2.0));
+
+        Calculator calculator = new Calculator(numbers);
+
+        Assertions.assertThat(calculator.getSum()).isEqualTo(4.1);
+    }
+
 }
