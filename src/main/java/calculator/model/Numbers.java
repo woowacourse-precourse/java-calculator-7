@@ -23,7 +23,7 @@ public class Numbers {
     }
 
     public Integer isValidate(String splitInput) {
-        if (compareSplitInputToZero(splitInput)) {
+        if (checkIsSplitInputZero(splitInput)) {
             return ZERO;
         }
         Integer number = CalculateException.catchNumberFormatException(splitInput);
@@ -31,7 +31,7 @@ public class Numbers {
         return number;
     }
 
-    public boolean compareSplitInputToZero(String splitInput) {
+    public boolean checkIsSplitInputZero(String splitInput) {
         return splitInput.equals(ZERO_STRING);
     }
 
