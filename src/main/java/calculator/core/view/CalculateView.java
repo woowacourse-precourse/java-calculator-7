@@ -5,8 +5,8 @@ import camp.nextstep.edu.missionutils.Console;
 import java.math.BigInteger;
 import java.util.function.Function;
 
-import static calculator.constant.CalculateMessage.INPUT;
-import static calculator.constant.CalculateMessage.RESULT_FORMAT;
+import static calculator.message.CalculateMessage.INPUT;
+import static calculator.message.CalculateMessage.RESULT_FORMAT;
 
 public class CalculateView {
 

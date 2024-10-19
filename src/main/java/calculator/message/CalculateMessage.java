@@ -1,6 +1,6 @@
-package calculator.constant;
+package calculator.message;
 
-public enum CalculateMessage {
+public enum CalculateMessage implements Message {
 
     INPUT("덧셈할 문자열을 입력해 주세요."),
     RESULT_FORMAT("결과 : %d");
@@ -11,11 +11,13 @@ public enum CalculateMessage {
         this.message = message;
     }
 
+    @Override
     public String getMessage() {
         return message;
     }
 
+    @Override
     public String getFormatMessage(Object... args) {
-        return String.format(message, args);
+        return String.format(getMessage(), args);
     }
 }
