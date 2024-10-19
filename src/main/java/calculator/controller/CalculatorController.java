@@ -9,13 +9,21 @@ import calculator.view.StartView;
 public class CalculatorController {
 
     public static void runCalculator() {
-        StartView.printStartView();
-        String input = StartView.getInputView();
+        String input = startCalculator();
 
-        String delimiters = DelimiterFactory.getDelimiters(input);
-        int[] formatResult = Formatter.formatInput(input, delimiters);
-        int result = Adder.addNum(formatResult);
+        int result = proceedCalculator(input);
 
         EndView.printEndView(result);
+    }
+
+    private static String startCalculator() {
+        StartView.printStartView();
+        return StartView.getInputView();
+    }
+
+    private static int proceedCalculator(String input) {
+        String delimiters = DelimiterFactory.getDelimiters(input);
+        int[] formatResult = Formatter.formatInput(input, delimiters);
+        return Adder.addNum(formatResult);
     }
 }
