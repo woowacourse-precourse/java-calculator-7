@@ -14,13 +14,10 @@ public class DelimiterMaker {
 	private static final String DEFAULT_DELIMITER_COLON = ":";
 	private static final String CUSTOM_DELIMITER_PREFIX = "//";
 	private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
-	private static final int STRING_START_INDEX = 0;
 
-	public List<String> getDelimitersFrom(String delimiterMixedNumbers) {
+	public List<String> getDelimitersFrom(String delimiterSection) {
 
-		String delimiterString = getDelimiterStringFrom(delimiterMixedNumbers);
-
-		String[] splitDelimiter = delimiterString.split(Pattern.quote(CUSTOM_DELIMITER_SUFFIX));
+		String[] splitDelimiter = delimiterSection.split(Pattern.quote(CUSTOM_DELIMITER_SUFFIX));
 		validateAllDelimiter(splitDelimiter);
 
 		List<String> delimiters = new ArrayList<>(Arrays.asList(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON));
@@ -29,11 +26,6 @@ public class DelimiterMaker {
 			.forEach(delimiters::add);
 
 		return delimiters;
-	}
-
-	public String getDelimiterStringFrom(String delimiterMixedNumbers) {
-		return delimiterMixedNumbers.substring(STRING_START_INDEX,
-			delimiterMixedNumbers.lastIndexOf(CUSTOM_DELIMITER_SUFFIX));
 	}
 
 	private void validateAllDelimiter(String[] splitDelimiter) {
