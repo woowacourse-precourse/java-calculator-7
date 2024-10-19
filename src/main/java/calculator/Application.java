@@ -2,13 +2,9 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-
 public class Application {
     static final String CUSTOM_DELIM_START = "//";
-    static final String CUSTOM_DELIM_END = "\n";
+    static final String CUSTOM_DELIM_END = "\\n";
 
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -29,6 +25,11 @@ public class Application {
 
         if(input.startsWith(CUSTOM_DELIM_START)) {
             int delimiterIndex = input.indexOf(CUSTOM_DELIM_END);
+
+            if(delimiterIndex == -1) {
+                throw new IllegalArgumentException("not a valid custom delimiter input type");
+            }
+
             String customDelimiter = input.substring(CUSTOM_DELIM_START.length(), delimiterIndex);
             delimiter.append('|');
             delimiter.append(customDelimiter);
@@ -52,7 +53,17 @@ public class Application {
     }
 
     static int toPositiveNumber(String input) {
-        int result = Integer.parseInt(input);
+        int result;
+
+        try {
+            result = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(e.toString());
+        }
+
+        if(result < 1) {
+            throw new IllegalArgumentException("only natural numbers can be entered");
+        }
 
         return result;
     }
