@@ -15,13 +15,13 @@
 
 #### Calculator(Abstract)
 > 계산기 클래스의 추상 클래스 제공
-- [ ] 더하기 추상 메소드 작성
+- [x] 더하기 추상 메소드 작성
 
 #### StringCalculator
 > 문자열을 바탕으로 사칙연산을 수행한다. Calculator를 상속받아 구체화한다.
-- [ ] NumberExtractor를 사용 하여 숫자 배열 추출
-- [ ] 더하기 메서드 구현
-    - [ ] 숫자 배열의 모든 값 더한 후 결과 값 반환
+- [x] NumberExtractor를 사용 하여 숫자 배열 추출
+- [x] 더하기 메서드 구현
+    - [x] 숫자 배열의 모든 값 더한 후 결과 값 반환
 
 ##### NumberExtractor
 > 문자열에서 숫자를 추출 한다.
