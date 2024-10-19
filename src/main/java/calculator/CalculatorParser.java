@@ -4,9 +4,9 @@ public class CalculatorParser {
     private static final String CUSTOM_PREFIX = "//";
     private static final String CUSTOM_SUFFIX = "\\n";
     private static final int CUSTOM_LENGTH = 1;
-    private static final int TOTAL_CUSTOM_LENGTH = CUSTOM_PREFIX.length() + CUSTOM_LENGTH + CUSTOM_SUFFIX.length();
     private static final int CUSTOM_START_INDEX = CUSTOM_PREFIX.length();
     private static final int CUSTOM_END_INDEX = CUSTOM_START_INDEX + CUSTOM_LENGTH;
+    private static final int TOTAL_CUSTOM_LENGTH = CUSTOM_END_INDEX + CUSTOM_SUFFIX.length();
 
     private String customDelimiter = "";
     private final String expression;
