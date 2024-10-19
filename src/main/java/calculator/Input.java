@@ -49,4 +49,17 @@ public class Input {
                 && validLastSeparator(input);
     }
 
+    /** 공통 모듈 **/
+    //사용자가 입력한 기본 구분자만 들어갔는지 검증
+    public static boolean validSeparator(String input){
+        for(char c : input.toCharArray()){
+            if(!Character.isDigit(c)){
+                if(!(c == ',' || c == ':')){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 }
