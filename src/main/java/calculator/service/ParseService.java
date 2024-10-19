@@ -19,7 +19,7 @@ public class ParseService {
         if (matcher.find()) {
             char separator = matcher.group(1).charAt(0);
             if (Character.isDigit(separator)) {
-                throw new IllegalArgumentException(Message.SELECTOR_EXCEPTION_MESSAGE + "숫자 형태의 구분자");
+                throw new IllegalArgumentException(Message.SELECTOR_EXCEPTION_MESSAGE);
             }
             separators.addOperators(separator);
             return matcher.group(2);

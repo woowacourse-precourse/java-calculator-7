@@ -24,11 +24,10 @@ public class CalculateService {
         if (addFlag) {
             throw new IllegalArgumentException(Message.CALCULATION_EXCEPTION_MESSAGE);
         }
-
         return sum;
     }
 
-    private static int addExact(int sum, int tokenValue) {
+    static private int addExact(int sum, int tokenValue) {
         try {
             return Math.addExact(sum, tokenValue);
         } catch (ArithmeticException e) {

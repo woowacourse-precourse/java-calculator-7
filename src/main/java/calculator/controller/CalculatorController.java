@@ -9,8 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CalculatorController {
-    public void stringAdd() {
-        Operators operators = new Operators(new ArrayList<>(List.of(';', ',')));
+    static public void stringAdd() {
+        final List<Character> basicOperator = List.of(';', ',');
+
+        Operators operators = new Operators(new ArrayList<>(basicOperator));
         Expression expression = new Expression();
 
         String sentence = CalculatorView.input();
