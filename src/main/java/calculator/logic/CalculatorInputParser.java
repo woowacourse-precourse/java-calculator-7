@@ -8,20 +8,17 @@ public class CalculatorInputParser {
     private final ValidationUtil validationUtil = new ValidationUtil();
 
     public List<Integer> splitInitialString(String initialString) {
-        String seporators = ",|:";
+        String separators = ",|:";
 
-//        !@#$%^&* 특수문자 고려
         if (initialString.startsWith("//")) {
-            seporators = seporators + "|" + setExtraSeparator(initialString);
+//          구분자가 //<문자>\n 형태인가
+            validationUtil.isValidSeparatorType(initialString);
+            separators = separators + "|" + setExtraSeparator(initialString);
             initialString = initialString.substring(5);
         }
-//        System.out.println(seporators);
-//        for (Character c : seporators) {
-////            구분자 어떻게 처리할건지...
-//            String[] s = initialString.split(Character.toString(c));
-//        }
+        System.out.println(separators);
 
-        String[] numList = initialString.split(seporators);
+        String[] numList = initialString.split(separators);
         List<Integer> integerList = new ArrayList<>();
 
         for (String s : numList) {
@@ -37,9 +34,15 @@ public class CalculatorInputParser {
 
     }
 
-    private Character setExtraSeparator(String initialString) {
-//      "//" 뒤에 문자 하나만 오는지 확인
-        return initialString.charAt(2);
+    private String setExtraSeparator(String initialString) {
+//      구분자가 특수문자일 경우 처리
+//      !@#$%^&* 특수문자 고려
+        char extraSeparator = initialString.charAt(2);
+        if (validationUtil.isSpecialSeparator(extraSeparator)) {
+            return "\\" + extraSeparator;
+        }
+        return initialString.substring(2, 3);
+
     }
 
 }
