@@ -4,6 +4,9 @@ import calculator.exception.ExceptionType;
 
 public enum SeparationExceptionType implements ExceptionType {
 
+    // SeparationService
+    NO_INPUT("값을 입력하지 않았습니다."),
+    // CustomSeparationService
     NOT_EXIST_CUSTOM_SEPARATOR("커스텀 구분자가 존재하지 않습니다.")
     ;
 
