@@ -3,8 +3,8 @@ package calculator.parsing;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListParsing {
-    private ListParsing() {
+public class ListParser {
+    private ListParser() {
 
     }
 

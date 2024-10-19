@@ -2,8 +2,8 @@ package calculator.adder;
 
 import java.util.List;
 
-public class DataSumming {
-    private DataSumming(){}
+public class ListAdder {
+    private ListAdder(){}
 
     public static Integer sumData(List<Integer> numbers){
         int sum = 0;

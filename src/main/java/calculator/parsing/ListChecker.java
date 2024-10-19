@@ -3,7 +3,7 @@ package calculator.parsing;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListChecking {
+public class ListChecker {
     public String checklist;
     public List<String> delimiters = new ArrayList<>();   //구분자는 최대 3개
     public String numbers;
