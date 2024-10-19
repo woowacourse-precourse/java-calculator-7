@@ -26,10 +26,27 @@ public class Calculator implements AutoCloseable {
     public void readInput(String input) {
         output = parser.parseString(input);
         // output은 "//.\n"가 delete된 문자열.
+        sum(output);
     }
 
-    public void add() {
+    public void sum(String strippedInput) {
+        String digitString = "";
 
+        for (char c : strippedInput.toCharArray()) {
+            if (Character.isDigit(c)) {
+                digitString += Character.toString(c);
+            } else if (delimiterManager.delimiters.indexOf(c) != -1) {
+                add(digitString);
+                digitString = "";
+            } else {
+                throw new IllegalArgumentException("Invalid String: The input contains invalid characters.");
+            }
+        }
+        add(digitString);
+    }
+
+    public void add(String digitString) {
+        sum += Double.valueOf(digitString);
     }
 
     public void printSum() {
@@ -44,7 +61,7 @@ public class Calculator implements AutoCloseable {
     private class Parser {
 
         private static final String DELIMITER_PREFIX = "//";
-        private static final String DELIMITER_SUFFIX = "\n";
+        private static final String DELIMITER_SUFFIX = "\\n";
         private static final int CUSTOM_DELIMITER = 0;
         StringBuilder strippedStringBuilder;
 
@@ -100,7 +117,7 @@ public class Calculator implements AutoCloseable {
         private int count;
 
         private DelimiterManager() {
-            String delimiters = ",:";
+            delimiters = ",:";
             count = 2;
         }
 
