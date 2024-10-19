@@ -1,17 +1,25 @@
 package calculator.generator.number.impl;
 
 import calculator.generator.number.NumberCreateService;
+import calculator.number.domain.NumberService;
+import calculator.number.util.NumberConvertorService;
 import calculator.sentence.domain.Sentence;
 
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class NumberCreateProcess implements NumberCreateService {
+
     @Override
-    public <R> R createNumber(Sentence sentence,
-                              Function<String, List<String>> transFunction,
-                              Function<List<String>, R> constructor) {
+    public NumberService createNumber(
+            Sentence sentence,
+            Function<String, List<String>> transFunction,
+            Supplier<NumberConvertorService> convertorService,
+            Function<List<Number>, NumberService> constructor) {
         List<String> stringToSplitBySeparator = transFunction.apply(sentence.getSentence());
-        return constructor.apply(stringToSplitBySeparator);
+        NumberConvertorService numberConvertorService = convertorService.get();
+        List<Number> converterValue = numberConvertorService.stringListToNumberList(stringToSplitBySeparator);
+        return constructor.apply(converterValue);
     }
 }

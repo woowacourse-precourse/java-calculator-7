@@ -1,13 +1,17 @@
 package calculator.generator.number;
 
+import calculator.number.domain.NumberService;
+import calculator.number.util.NumberConvertorService;
 import calculator.sentence.domain.Sentence;
 
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public interface NumberCreateService {
-    <R> R createNumber(
+    NumberService createNumber(
             Sentence sentence,
             Function<String, List<String>> transFunction,
-            Function<List<String>, R> constructor);
+            Supplier<NumberConvertorService> convertorServiceSupplier,
+            Function<List<Number>, NumberService> constructor);
 }

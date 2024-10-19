@@ -1,10 +1,12 @@
 package calculator.generator.number;
 
-import calculator.number.domain.Number;
-import calculator.number.domain.impl.PositiveNumber;
+import calculator.number.domain.NumberService;
+import calculator.number.util.NumberConvertorService;
 import calculator.sentence.domain.Sentence;
 
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class NumberGenerator {
     private final NumberExtractService extractor;
@@ -15,11 +17,11 @@ public class NumberGenerator {
         this.createService = createService;
     }
 
-    public Number create(Sentence sentence) {
-        return createService.createNumber(
-                sentence,
-                this::extractorPositiveNumber,
-                PositiveNumber::of);
+    public NumberService create(Sentence sentence,
+                                Supplier<NumberConvertorService> convertorServiceSupplier,
+                                Function<List<Number>, NumberService> function) {
+
+        return createService.createNumber(sentence, this::extractorPositiveNumber, convertorServiceSupplier, function);
     }
 
     private List<String> extractorPositiveNumber(String sentence) {

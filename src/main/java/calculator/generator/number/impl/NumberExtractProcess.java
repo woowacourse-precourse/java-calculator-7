@@ -1,7 +1,7 @@
 package calculator.generator.number.impl;
 
 import calculator.generator.number.NumberExtractService;
-import calculator.separator.domain.RegexPattern;
+import calculator.regex.domain.RegexPattern;
 
 import java.util.List;
 
