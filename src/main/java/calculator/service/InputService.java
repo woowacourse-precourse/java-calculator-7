@@ -11,7 +11,7 @@ public class InputService {
     private char customDelimiter; // 사용자가 입력한 커스텀 구분자
 
     public InputService() {
-//        this.userInput = "//.\\n33:4:5";
+//        this.userInput = "//.\\n33.4.5";
     }
 
     // 사용자의 입력을 받는다.

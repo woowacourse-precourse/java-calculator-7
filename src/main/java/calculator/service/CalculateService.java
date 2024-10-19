@@ -22,4 +22,8 @@ public class CalculateService {
     public long getSum() {
         return sum;
     }
+
+    public void printResult() {
+        System.out.println("결과 : " + this.getSum());
+    }
 }

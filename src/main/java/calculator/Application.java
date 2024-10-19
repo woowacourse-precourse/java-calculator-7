@@ -24,6 +24,6 @@ public class Application {
             calculateService = new CalculateService(numbers);
         }
         calculateService.calculate();
-        System.out.println("결과 : " + calculateService.getSum());
+        calculateService.printResult();
     }
 }
