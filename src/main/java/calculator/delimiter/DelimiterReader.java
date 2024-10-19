@@ -4,14 +4,15 @@ public class DelimiterReader {
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
     private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
 
-    public String readDelimiter(String line) {
+    public Delimiter readDelimiter(String line) {
         if(hasNoDelimiterOption(line))
-            return "";
+            return Delimiter.DEFAULT_DELIMITER;
         if(hasNoPrefix(line) || hasNoSuffix(line))
             throw new IllegalArgumentException("잘못된 형식의 구분자 입력");
 
         String delimiterLine = getDelimiterLine(line);
-        return removeWords(delimiterLine, CUSTOM_DELIMITER_PREFIX, CUSTOM_DELIMITER_SUFFIX);
+        String delimiter = removeWords(delimiterLine, CUSTOM_DELIMITER_PREFIX, CUSTOM_DELIMITER_SUFFIX);
+        return Delimiter.create(delimiter);
     }
 
     private boolean hasNoDelimiterOption(String line) {

@@ -29,4 +29,8 @@ public class Delimiter {
     private boolean hasCustomDelimiter() {
         return !customDelimiter.isEmpty();
     }
+
+    String getCustomDelimiter() {
+        return customDelimiter;
+    }
 }
