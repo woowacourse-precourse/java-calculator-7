@@ -17,6 +17,11 @@ public class Application {
                 calculatorService
         );
 
-        calculatorControllerBean.run();
+        try {
+            calculatorControllerBean.run();
+        } catch (IllegalArgumentException e) {
+            outputViewBean.errorPage(e.getMessage());
+            throw e;
+        }
     }
 }
