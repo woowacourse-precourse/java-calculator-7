@@ -16,32 +16,32 @@ public class Application {
         return Console.readLine();
     }
 
-    // 커스텀 구분자 유무를 판단하기
-    private static boolean checkCustomDelimiter(String str) {
-        String regex = "//(.*?)\n";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(str);
-        return matcher.find();
-    }
-
     // 커스텀 구분자 존재 시, 커스텀 구분자 부분 분리하여 구분자에 추가하기
     private static String[] getCustomDelimiter(String str) {
-        String regex = "//(.*?)\n";
+        String regex = "//(.*?)\\\\n";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(str);
-        return new String[]{matcher.group(1), str.substring(matcher.end())};
+        if(matcher.find()) {
+            return new String[]{matcher.group(1), str.substring(matcher.end())};
+        }
+        return new String[]{"", str};
     }
+
+    // 나머지 문자열을 구분자로 파싱하기
+    private static String[] parseString(String delimiter, String str) {
+        return str.split(delimiter);
+    }
+
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         StringBuilder delimiter = new StringBuilder();
         delimiter.append(".|:");
         init_print();
         String str = input();
-        if(checkCustomDelimiter(str)) {
-            String[] tempResult = getCustomDelimiter(str);
-            delimiter.append("|").append(tempResult[0]);
-            str = tempResult[1];
-        }
-
+        String[] tempResult = getCustomDelimiter(str);
+        delimiter.append("|").append(tempResult[0]);
+        str = tempResult[1];
+        System.out.println(str);
+        String[] result = parseString(delimiter.toString(), str);
     }
 }
