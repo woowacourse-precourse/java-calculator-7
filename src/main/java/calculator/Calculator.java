@@ -6,7 +6,6 @@ import java.util.List;
 public class Calculator {
     private final String userInput;
     private final List<String> delimiters;
-    private ArrayList<Integer> integers;
 
     //Generator: 기본 구별자, 유저 입력 값 설정
     public Calculator(String userInput) {
@@ -16,14 +15,14 @@ public class Calculator {
     }
 
     //print(): 결과인 합을 계산
-    public int printResult() {
+    public void printResult() {
         int sum = 0;
 
         for (Integer integer : getIntegers()) {
             sum += integer;
         }
 
-        return sum;
+        System.out.println("결과 : " + sum);
     }
 
     //getIntegers(): 구분자를 사용하여 문자열에서 숫자만 분리하기
