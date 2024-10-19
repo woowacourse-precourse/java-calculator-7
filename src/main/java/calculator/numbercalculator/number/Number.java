@@ -1,4 +1,4 @@
-package calculator.number;
+package calculator.numbercalculator.number;
 
 public record Number(int value) {
 

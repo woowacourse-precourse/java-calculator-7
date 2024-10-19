@@ -1,6 +1,6 @@
-package calculator.extractor;
+package calculator.numbercalculator;
 
-import calculator.delimiter.Delimiter;
+import calculator.numbercalculator.delimiter.Delimiter;
 
 public class CustomDelimiterCalculator {
     private static final String CUSTOM_DELIMITER_PREFIX = "//";

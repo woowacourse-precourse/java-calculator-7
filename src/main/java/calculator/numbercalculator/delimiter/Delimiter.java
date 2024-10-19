@@ -1,4 +1,4 @@
-package calculator.delimiter;
+package calculator.numbercalculator.delimiter;
 
 public record Delimiter(String value) {
     private static final int DELIMITER_SIZE = 1;

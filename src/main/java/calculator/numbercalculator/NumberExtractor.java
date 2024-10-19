@@ -1,8 +1,8 @@
-package calculator.extractor;
+package calculator.numbercalculator;
 
-import calculator.delimiter.Delimiter;
-import calculator.delimiter.Delimiters;
-import calculator.number.Numbers;
+import calculator.numbercalculator.delimiter.Delimiter;
+import calculator.numbercalculator.delimiter.Delimiters;
+import calculator.numbercalculator.number.Numbers;
 import java.util.List;
 
 public class NumberExtractor {

@@ -1,4 +1,4 @@
-package calculator.delimiter;
+package calculator.numbercalculator.delimiter;
 
 import java.util.ArrayList;
 import java.util.List;

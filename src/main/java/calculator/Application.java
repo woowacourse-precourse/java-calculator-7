@@ -1,8 +1,9 @@
 package calculator;
 
-import calculator.extractor.NumberExtractor;
-import calculator.io.InputHandler;
-import calculator.io.OutputHandler;
+import calculator.numbercalculator.NumberCalculator;
+import calculator.numbercalculator.NumberExtractor;
+import calculator.numbercalculator.io.InputHandler;
+import calculator.numbercalculator.io.OutputHandler;
 
 public class Application {
 
@@ -11,8 +12,8 @@ public class Application {
         OutputHandler outputHandler = new OutputHandler();
         NumberExtractor numberExtractor = new NumberExtractor();
 
-        Calculator calculator = new Calculator(inputHandler, outputHandler, numberExtractor);
+        NumberCalculator numberCalculator = new NumberCalculator(inputHandler, outputHandler, numberExtractor);
 
-        calculator.run();
+        numberCalculator.run();
     }
 }
