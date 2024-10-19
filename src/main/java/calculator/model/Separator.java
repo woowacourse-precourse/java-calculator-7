@@ -20,7 +20,7 @@ public class Separator {
             int end = expression.indexOf(CUSTOM_DELIMITER_SUFFIX);
             String customSeparator = expression.substring(start, end);
             if (customSeparator.contains(BACKSLASH)) {
-                customSeparator += BACKSLASH;
+                customSeparator = customSeparator.replace(BACKSLASH, BACKSLASH + BACKSLASH);
             }
             return defaultSeparator + customSeparator;
         }

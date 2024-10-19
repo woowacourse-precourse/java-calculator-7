@@ -6,14 +6,25 @@ public class Term {
     private final int value;
 
     public Term(String value) {
-        validate(value);
-        this.value = Integer.parseInt(value);
+        this.value = validate(value);
     }
 
-    private void validate(String value) {
-        if (!value.matches(POSTIVE_REGEX)) {
+    private int validate(String value) {
+        if (value.isBlank()) {
+            return 0;
+        }
+        validatePostivie(value);
+        return Integer.parseInt(value);
+    }
+
+    private void validatePostivie(String value) {
+        if (hasNotPositiveValue(value)) {
             throw new IllegalArgumentException(ERROR_MESSAGE);
         }
+    }
+
+    private boolean hasNotPositiveValue(String value) {
+        return !value.matches(POSTIVE_REGEX);
     }
 
     public int getValue() {

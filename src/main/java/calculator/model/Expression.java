@@ -16,7 +16,7 @@ public class Expression {
     private final Terms terms;
 
     public Expression(String expression) {
-        this.separator = new Separator(parseFormularExpression(expression));
+        this.separator = new Separator(expression);
         validateExpression(expression);
         this.terms = new Terms(parseFormularExpression(expression), separator);
     }
