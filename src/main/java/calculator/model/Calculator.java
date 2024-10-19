@@ -16,8 +16,8 @@ public class Calculator {
         return this.answer;
     }
 
-    public boolean validateNull(){
-        return this.str.isEmpty();
+    public boolean isValidationNullOrEmpty(){
+        return this.str == null || this.str.isEmpty();
     }
 
     public void split(){
