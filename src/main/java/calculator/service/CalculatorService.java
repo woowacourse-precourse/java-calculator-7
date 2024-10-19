@@ -7,14 +7,16 @@ import java.util.stream.Collectors;
 
 public class CalculatorService {
 
-    public String calculateSumFormString(DelimiterInputDto delimiterInputDto) {
+    public int calculateSumFormString(DelimiterInputDto delimiterInputDto) {
 
         setDelimiter(delimiterInputDto);
 
         List<String> numbers = parseNumber(delimiterInputDto);
         List<Integer> parseNumbers = parseIntegerNumber(numbers);
+        long sum = sumNumber(parseNumbers);
+        validIntegerRange(sum);
 
-        return delimiterInputDto.getInputString();
+        return (int) sum;
     }
 
     public void setDelimiter(DelimiterInputDto delimiterInputDto) {
@@ -64,6 +66,16 @@ public class CalculatorService {
     public void validRangeMinus(int number) {
         if (number < 0) {
             throw new IllegalArgumentException("양수가 아닙니다.");
+        }
+    }
+
+    public long sumNumber(List<Integer> numbers) {
+        return numbers.stream().mapToLong(Integer::longValue).sum();
+    }
+
+    public void validIntegerRange(long number) {
+        if (number > Integer.MAX_VALUE) {
+            throw new IllegalArgumentException("숫자는 Integer 범위를 벗어날 수 없습니다.");
         }
     }
 

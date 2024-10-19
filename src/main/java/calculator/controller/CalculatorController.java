@@ -7,7 +7,7 @@ public class CalculatorController {
 
     private final CalculatorService calculatorService = new CalculatorService();
 
-    public String calculateSum(DelimiterInputDto delimiterInputDto) {
+    public int calculateSum(DelimiterInputDto delimiterInputDto) {
         return calculatorService.calculateSumFormString(delimiterInputDto);
     }
 }

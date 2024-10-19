@@ -229,7 +229,7 @@ class CalculatorServiceTest {
 
     @DisplayName("숫자 파싱 기능 테스트")
     @Test
-    void parseIntegerNumber(){
+    void parseIntegerNumber() {
 
         //given
         List<String> numbers = List.of("1", "13", "54");
@@ -246,7 +246,7 @@ class CalculatorServiceTest {
 
     @DisplayName("숫자 파싱 실패 테스트")
     @Test
-    void parseIntegerNumberException(){
+    void parseIntegerNumberException() {
         //given
         List<String> emptyNumber = List.of("");
         List<String> blankNumber = List.of(" 1");
@@ -262,6 +262,45 @@ class CalculatorServiceTest {
         assertThatThrownBy(() -> calculatorService.parseIntegerNumber(wordNumber))
                 .isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> calculatorService.parseIntegerNumber(minusNumber))
+                .isInstanceOf(IllegalArgumentException.class);
+
+    }
+
+    @DisplayName("숫자 합 기능 구현")
+    @Test
+    void sumNumber() {
+
+        //given
+        List<Integer> numbers = new ArrayList<>(List.of(1, 5, 123, 5, 8, 11));
+
+        //when
+        long sum = calculatorService.sumNumber(numbers);
+
+        //then
+        assertThat(sum).isEqualTo(153);
+    }
+
+    @DisplayName("숫자합 범위가 Integer범위인지 검증")
+    @Test
+    void validIntegerRange() {
+
+        //given
+        long number = 123456;
+
+        //when - then
+        assertThatCode(() -> calculatorService.validIntegerRange(number))
+                .doesNotThrowAnyException();
+    }
+
+    @DisplayName("숫자 합 범위가 Integer범위를 초과한 경우 테스트")
+    @Test
+    void validIntegerRangeException() {
+
+        //given
+        long number = Integer.MAX_VALUE + 1L;
+
+        //when - then
+        assertThatThrownBy(() -> calculatorService.validIntegerRange(number))
                 .isInstanceOf(IllegalArgumentException.class);
 
     }
