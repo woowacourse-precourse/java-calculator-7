@@ -1,6 +1,6 @@
 package calculator.controller;
 
-import calculator.Service.CalculatorService;
+import calculator.service.CalculatorService;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -19,6 +19,7 @@ public class CalculatorController {
     public void calculate() {
         outputView.printPrompt();
         String input = inputView.strInput();
+        Long sum = calculatorService.calculateSumFromString(input);
     }
 
 }
