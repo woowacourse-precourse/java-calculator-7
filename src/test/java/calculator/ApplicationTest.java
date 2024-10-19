@@ -2,6 +2,7 @@ package calculator;
 
 import static calculator.service.exception.SeparationExceptionType.ENDS_WITH_SEPARATOR;
 import static calculator.service.exception.SeparationExceptionType.INVALID_SEPARATOR;
+import static calculator.service.exception.SeparationExceptionType.NOT_A_POSITIVE_NUMBER;
 import static calculator.service.exception.SeparationExceptionType.STARTS_WITH_SEPARATOR;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -102,5 +103,14 @@ class ApplicationTest extends NsTest {
             customSeparationService.getNumbers(input, CUSTOM_SEPARATOR);
         });
         assertEquals(INVALID_SEPARATOR.message(), exception.getMessage());
+    }
+
+    @Test
+    void 커스텀_구분자를_사용하고_커스텀_구분자로_나뉘어진_모든_요소가_양수가_아닌_경우() {
+        String input = "//&\\n1&2&0";
+        SeparationException exception = assertThrows(SeparationException.class, () -> {
+            customSeparationService.getNumbers(input, CUSTOM_SEPARATOR);
+        });
+        assertEquals(NOT_A_POSITIVE_NUMBER.message(), exception.getMessage());
     }
 }
