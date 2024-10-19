@@ -1,14 +1,18 @@
 package calculator.view.input.parser;
 
+import calculator.view.input.validator.NumberValidator;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class DefaultDelimiterParser {
     private static final String WHITESPACE = " ";
+    private final NumberValidator numberValidator = new NumberValidator();
 
     public List<Integer> parseInputNumbers(String input) {
         input = removeDelimiter(input);
+        
+        numberValidator.validate(input);
 
         return Arrays.stream(input.split(WHITESPACE))
                 .map(Integer::parseInt)
