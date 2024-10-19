@@ -29,7 +29,7 @@ public class Calculator {
         for (String number:strings) {
             number = isEmptyString(number);
             BigInteger bigInteger = convertStringToNumber(number);
-            result = bigInteger.add(bigInteger);
+            result = result.add(bigInteger);
         }
         return result;
     }
