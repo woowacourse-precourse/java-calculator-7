@@ -1,4 +1,4 @@
-package calculator;
+package calculator.domain;
 
 public class SumValue {
     private final int value;

@@ -1,4 +1,4 @@
-package calculator;
+package calculator.domain;
 
 public class CustomDelimiter {
     private final String value;
