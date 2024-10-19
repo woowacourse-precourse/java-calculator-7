@@ -2,7 +2,7 @@ package calculator.service;
 
 import java.util.regex.Pattern;
 
-public class SplitMethod {
+public class CalculateService {
     public int split(String input) {
 
         int sum = 0;
