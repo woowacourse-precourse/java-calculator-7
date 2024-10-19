@@ -65,13 +65,21 @@ public class Delimiter {
 
     private void extractDelimiters(String inputString, int index) {
         for (int i = 2; i < index; i++) {
-            addDelimiter(inputString.charAt(i));
+            char currentDelimiter = inputString.charAt(i);
+            validateDelimiterIsPeriod(currentDelimiter);
+            addDelimiter(currentDelimiter);
         }
     }
 
     private void validateSingleDelimiter() {
         if (!hasSingleDelimiter()) {
             throw new IllegalArgumentException("커스텀 구분자는 하나여야 합니다.");
+        }
+    }
+
+    private void validateDelimiterIsPeriod(char Delimiter) {
+        if (Delimiter == '.') {
+            throw new IllegalArgumentException("커스텀 구분자에 '.'이 들어올 수 없습니다.");
         }
     }
 }
