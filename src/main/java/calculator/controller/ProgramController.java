@@ -4,7 +4,9 @@ import calculator.domain.Calculator;
 import calculator.dto.FormulaDto;
 import calculator.dto.DelimitersDto;
 import calculator.dto.NumbersDto;
+import calculator.dto.SumDto;
 import calculator.view.InputView;
+import calculator.view.OutputView;
 
 public class ProgramController {
 	private final DrawController drawController;
@@ -16,17 +18,22 @@ public class ProgramController {
 	}
 
 	public void run() {
-		System.out.print("입력하세요: ");
+		printInformationMessage();
+
 		FormulaDto formulaDto = generateFormulaRequest();
 
-		DelimitersDto delimiterDto = delimiterController.extractDelimiters(formulaDto.formula());
+		DelimitersDto delimiterDto = extractDelimiters(formulaDto);
+
 		NumbersDto numbersDto = drawNumber(formulaDto, delimiterDto);
-		Calculator calculator = new Calculator(numbersDto.numbers());
-		calculator.calculateSum();
 
-		System.out.print("결과 : ");
-		System.out.println(calculator.getSum());
+		SumDto sumDto = calculateSum(numbersDto);
 
+		printResultMessage(sumDto);
+
+	}
+
+	private void printInformationMessage() {
+		OutputView.printInformationMessage();
 	}
 
 	private FormulaDto generateFormulaRequest() {
@@ -34,8 +41,21 @@ public class ProgramController {
 		return new FormulaDto(formula);
 	}
 
+	private DelimitersDto extractDelimiters(FormulaDto formulaDto) {
+		return delimiterController.extractDelimiters(formulaDto.formula());
+	}
+
 	private NumbersDto drawNumber(FormulaDto formulaDto, DelimitersDto delimiterDto) {
 		return drawController.drawNumbers(formulaDto, delimiterDto);
 	}
 
+	private SumDto calculateSum(NumbersDto numbersDto){
+		Calculator calculator = new Calculator(numbersDto.numbers());
+		calculator.calculateSum();
+		return new SumDto(calculator.getSum());
+	}
+
+	private void printResultMessage(SumDto sumDto) {
+		OutputView.printResultMessage(sumDto);
+	}
 }
