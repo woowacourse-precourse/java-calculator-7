@@ -40,7 +40,12 @@ public class CalculatorParser {
 
     private void processCustomDelimiter(String sentence) {
         String[] result = sentence.split("\n");
+
+        if (result[0].length() != 3) {
+            throw new IllegalArgumentException("커스텀 구분자가 1글자를 초과했습니다.");
+        }
         delimiters.add(result[0].charAt(2));
     }
+
 }
 

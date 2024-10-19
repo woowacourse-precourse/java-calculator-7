@@ -30,4 +30,15 @@ class CalculatorParserTest {
         // then
         assertThat(operands).isEqualTo(new ArrayList<>(Arrays.asList(1.0, 2.0, 3.0)));
     }
+
+    @Test
+    void 커스텀_구분자가_1글자인지_검증한다(){
+        final var calculatorParser = new CalculatorParser();
+
+        // when & then
+        assertThatThrownBy(() -> calculatorParser.parse("//;;;;\n1;2;3"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("커스텀 구분자가 1글자를 초과했습니다.");
+    }
+
 }
