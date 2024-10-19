@@ -32,9 +32,12 @@ public class Validator {
     private void validateCustomDelimiterInput(String input) {
         Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
         if (matcher.find()) {
-            String customDelimiter = Pattern.quote(matcher.group(1));
+            String customDelimiter = matcher.group(1);
+            if (Character.isDigit(customDelimiter.charAt(0))) {
+                throw new IllegalArgumentException("구분자로 숫자를 사용할 수 없습니다.");
+            }
             String numbers = matcher.group(2);
-            String allDelimiters = customDelimiter + "|" + DEFAULT_DELIMITERS;
+            String allDelimiters = Pattern.quote(customDelimiter) + "|" + DEFAULT_DELIMITERS;
             validateNumbers(numbers, allDelimiters);
         } else {
             throw new IllegalArgumentException("커스텀 구분자 형식이 잘못되었습니다.");
