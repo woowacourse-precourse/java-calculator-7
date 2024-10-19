@@ -4,31 +4,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Processor {
-
-    public Processor() {
-    }
-
     private static final String DELIMITER_DECLARATION_SECTION = "//";
     private static final String DELIMITER_AND_NUMBERS_SEPARATOR = "\\n";
     private List<String> delimiters = new ArrayList<>(List.of(",", ":"));
+    private String input;
 
-    public void execute(String input) {
+    public Processor(String input) {
+        this.input = input;
+    }
+
+    public void execute() {
         if (input.startsWith(DELIMITER_DECLARATION_SECTION)) {
-            String customDelimiter = extractCustomDelimiter(input);
+            String customDelimiter = extractCustomDelimiter();
             delimiters.add(customDelimiter);
         }
-
-        String[] splittedStrings = splitByDelimiters(input);
     }
 
-    public String extractCustomDelimiter(String input) {
+    public String extractCustomDelimiter() {
         int delimiterStart = DELIMITER_DECLARATION_SECTION.length();
         int delimiterEnd = input.indexOf(DELIMITER_AND_NUMBERS_SEPARATOR);
-        return input.substring(delimiterStart, delimiterEnd);
+        String customDelimiter = input.substring(delimiterStart, delimiterEnd);
 
+        input = input.substring(delimiterEnd + 1);
+
+        return customDelimiter;
     }
 
-    private String[] splitByDelimiters(String input) {
+    private String[] splitByDelimiters() {
         String regex = String.join("|", delimiters.stream()
                 .map(delimiter -> "\\" + delimiter)
                 .toArray(String[]::new));
