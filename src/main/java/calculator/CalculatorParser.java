@@ -1,41 +1,41 @@
 package calculator;
 
 public class CalculatorParser {
-    private static final int CUSTOM_DELIMITER_LENGTH = 1;
-    private static final String CUSTOM_START = "//";
-    private static final String CUSTOM_END = "\\n";
+    private static final String CUSTOM_PREFIX = "//";
+    private static final String CUSTOM_SUFFIX = "\\n";
+    private static final int CUSTOM_LENGTH = 1;
+    private static final int TOTAL_CUSTOM_LENGTH = CUSTOM_PREFIX.length() + CUSTOM_LENGTH + CUSTOM_SUFFIX.length();
+    private static final int CUSTOM_START_INDEX = CUSTOM_PREFIX.length();
+    private static final int CUSTOM_END_INDEX = CUSTOM_START_INDEX + CUSTOM_LENGTH;
 
     private String customDelimiter = "";
     private final String expression;
 
     public CalculatorParser(String line) {
-        int expressionStartIdx = 0;
+        int expressionStartIndex = 0;
 
-        if (line.startsWith(CUSTOM_START)) {
-            parseCustomDelimiter(line);
-            checkEndsWithCustomEnd(line);
-            expressionStartIdx = CUSTOM_START.length() + CUSTOM_DELIMITER_LENGTH + CUSTOM_END.length();
+        if (hasCustomDelimiter(line)) {
+            this.customDelimiter = line.substring(CUSTOM_START_INDEX, CUSTOM_END_INDEX);
+            expressionStartIndex = TOTAL_CUSTOM_LENGTH;
         }
 
-        this.expression = line.substring(expressionStartIdx);
+        this.expression = line.substring(expressionStartIndex);
     }
 
-    private void parseCustomDelimiter(String line) {
-        // 커스텀 구분자가 없다면
-        if (line.length() == CUSTOM_START.length()) {
-            throw new IllegalArgumentException();
+    private static boolean hasCustomDelimiter(String line) {
+        if (line.length() < TOTAL_CUSTOM_LENGTH) {
+            return false;
         }
 
-        this.customDelimiter = line.charAt(CUSTOM_START.length()) + "";
-    }
-
-    private static void checkEndsWithCustomEnd(String line) {
-        int customEndStart = CUSTOM_START.length() + CUSTOM_DELIMITER_LENGTH;
-
-        // CUSTOM_END로 끝나지 않는다면
-        if (!line.startsWith(CUSTOM_END, customEndStart)) {
-            throw new IllegalArgumentException();
+        if (!line.startsWith(CUSTOM_PREFIX)) {
+            return false;
         }
+
+        if (!line.startsWith(CUSTOM_SUFFIX, CUSTOM_END_INDEX)) {
+            return false;
+        }
+
+        return true;
     }
 
     public String getCustomDelimiter() {
