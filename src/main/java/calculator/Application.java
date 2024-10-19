@@ -33,7 +33,11 @@ public class Application {
         for (String token : tokens) {
             if (!token.isEmpty()) {
                 try {
-                    numbers.add(Long.parseLong(token));
+                    Long number = Long.parseLong(token);
+                    if(number < 0){
+                        throw new IllegalArgumentException("음수가 포함되어 있습니다.");
+                    }
+                    numbers.add(number);
                 } catch (NumberFormatException e) {
                     throw new IllegalArgumentException("잘못된 입력입니다.");
                 }
