@@ -91,5 +91,19 @@ class LetterManagerTest {
         Assertions.assertThat(letterManager.getNumbers().toInteger().size()).isEqualTo(3);
     }
 
+    @Test
+    void 커스텀_구분자가_두_번_나올_때_커스텀_구분자_추출() {
+        //given
+        String letters = "//;\\n1//@\\n2@3";
+        LetterManager letterManager;
 
+        letterManager = new LetterManager(letters);
+
+        //when
+
+        //then
+        Assertions.assertThat(letterManager.getSeparators().contains(";")).isEqualTo(true);
+        Assertions.assertThat(letterManager.getSeparators().contains("@")).isEqualTo(true);
+        Assertions.assertThat(letterManager.getNumbers().toInteger().size()).isEqualTo(3);
+    }
 }
