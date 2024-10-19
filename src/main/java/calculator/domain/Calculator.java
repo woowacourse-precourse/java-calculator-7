@@ -9,12 +9,14 @@ import java.util.regex.Pattern;
 
 public class Calculator {
     private static final Pattern CUSTOM_SEPERATOR_PATTERN=Pattern.compile(RegexType.CUSTOM_SEPERATOR.getRegex());
+    private static final Pattern NEGATIVE_PATTERN=Pattern.compile("-[0-9]");
     private static String seperatorRegex=",|:";
 
     public static int inputCalculate(String input){
         //커스텀 구분자 패턴이 존재하는지 확인한다
         input=checkExtractor(input);
-
+        //음수를 입력했는지 확인한다
+        checkNegative(input);
         return calculate(input);
     }
 
@@ -44,11 +46,20 @@ public class Calculator {
 
     }
 
+    //음수를 입력하면 예외 출력
+    private static void checkNegative(String input) {
+        Matcher matcher=NEGATIVE_PATTERN.matcher(input);
+
+        if (matcher.find()) {
+            throw new InvalidInputException(MessageType.NEGATIVE_INPUT);
+        }
+    }
+
     private static boolean isSpace(String num) {
         return num.equals("");
     }
 
-    private static void isNumber(String num) {
+    private static void isNumber(String num) { //커스텀구분자가 아닌 구분자 입력
         if (!(num.matches("[0-9]{0,}"))){
             throw new InvalidInputException(MessageType.INVALID_SEPERATOR);
         }
