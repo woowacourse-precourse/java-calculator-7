@@ -10,7 +10,6 @@ import java.util.regex.Pattern;
 public class InputHandler {
     private String inputString;
     private String customSeparator = null;
-
     private Vector<Integer> extractedNumbers = new Vector<>();
 
 
@@ -21,13 +20,12 @@ public class InputHandler {
 
     public void ensureCustomSeparator() {
         String regExp = "^//(.)\\\\n";
-        Pattern pattern = Pattern.compile(regExp);
 
+        Pattern pattern = Pattern.compile(regExp);
         Matcher matcher = pattern.matcher(inputString);
 
         if (matcher.find()) {
-            String capturedText = matcher.group(1);
-            customSeparator = capturedText;
+            customSeparator = matcher.group(1);
         }
 
     }
@@ -37,11 +35,7 @@ public class InputHandler {
         String target = inputString;
         String regExp = "[" + customSeparator + ",:]+";
 
-        // 커스텀 구분자 추가 하는 부분 제거.
-        if (customSeparator != null) {
-            String targetToDelete = "^//" + customSeparator + "\\\\n";
-            target = target.replaceFirst(targetToDelete, "");
-        }
+        target = removeSeparatorCreator(target);
 
         String[] extractedStrings = target.split(regExp);
         ErrorHandler.validateExtractedNumbers(extractedStrings);
@@ -50,6 +44,15 @@ public class InputHandler {
             int extractedNumber = Integer.parseInt(extractedString);
             extractedNumbers.add(extractedNumber);
         }
+
+    }
+
+    public String removeSeparatorCreator(String target) {
+        if (customSeparator != null) {
+            String targetToDelete = "^//" + customSeparator + "\\\\n";
+            target = target.replaceFirst(targetToDelete, "");
+        }
+        return target;
     }
 
     public void printResult() {
