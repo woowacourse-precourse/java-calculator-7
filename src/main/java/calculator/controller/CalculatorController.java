@@ -1,22 +1,22 @@
 package calculator.controller;
 
-import calculator.service.CalculatorService;
+import calculator.model.Calculator;
 import calculator.view.CalculatorView;
 
 public class CalculatorController {
 
-    private final CalculatorService calcService;
+    private final Calculator calculator;
     private final CalculatorView calcView;
 
     public CalculatorController() {
-        this.calcService = new CalculatorService();
+        this.calculator = new Calculator();
         this.calcView = new CalculatorView();
     }
 
     public void run() {
         String input = calcView.getInput(); // 사용자 입력받기
 
-        int result = calcService.caculate(input);
+        int result = calculator.caculate(input);
         calcView.displayResult(result);
     }
 }
