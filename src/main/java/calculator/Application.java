@@ -10,6 +10,6 @@ public class Application {
         CalculatorModel calculatorModel = new CalculatorModel();
         CalculatorController calculatorController = new CalculatorController(calculatorView, calculatorModel);
 
-        calculatorController.start();
+        calculatorController.calculate();
     }
 }
