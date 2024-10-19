@@ -2,7 +2,6 @@ package calculator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 public class Calculator {
     private final String userInput;
@@ -29,14 +28,16 @@ public class Calculator {
 
     //getIntegers(): 구분자를 사용하여 문자열에서 숫자만 분리하기
     private List<Integer> getIntegers(){
-
         String DelimTotal = getDelimTotal();
+        String[] tokens = userInput.split(DelimTotal);
 
-        StringTokenizer stringTokenizer = new StringTokenizer(userInput, DelimTotal);
         List<Integer> resultIntegers = new ArrayList<>();
-        while (stringTokenizer.hasMoreTokens()){
-            int outInteger = Integer.parseInt(stringTokenizer.nextToken());
-            resultIntegers.add(outInteger);
+
+        for (String token : tokens) {
+            token = token.trim();
+            if (!token.isEmpty()) {
+                resultIntegers.add(Integer.parseInt(token));
+            }
         }
 
         return resultIntegers;
