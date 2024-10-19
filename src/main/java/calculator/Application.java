@@ -10,7 +10,7 @@ public class Application {
         String UserInput = valueInput();
 
         if (UserInput.isEmpty()) {
-            System.out.println("결과 : 0");
+            resultPrint(0);
             return;
         }
 
@@ -37,5 +37,9 @@ public class Application {
         } catch (StringIndexOutOfBoundsException e) {
             return false;
         }
+    }
+
+    static void resultPrint(int AllCombinedValues) {
+        System.out.println("결과 : " + AllCombinedValues);
     }
 }
