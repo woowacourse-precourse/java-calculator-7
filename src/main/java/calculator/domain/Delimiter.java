@@ -1,5 +1,6 @@
-package calculator.model;
+package calculator.domain;
 
+import calculator.domain.constant.DefaultDelimiter;
 import java.util.ArrayList;
 
 public class Delimiter {
@@ -9,8 +10,7 @@ public class Delimiter {
 
     public Delimiter(String inputString) {
         this.inputString = inputString;
-        delimiterList.add(",");
-        delimiterList.add(":");
+        delimiterList.addAll(DefaultDelimiter.getDefaultDelimiters());
     }
 
     public void setCustomDelimiter() {

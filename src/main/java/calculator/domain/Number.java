@@ -1,4 +1,4 @@
-package calculator.model;
+package calculator.domain;
 
 public class Number {
     private String[] numString;
@@ -21,13 +21,13 @@ public class Number {
 
         numbers = new int[numString.length];
         for (int i = 0; i < numString.length; ++i) {
-            numbers[i] = isPositiveInt(numString[i]);
+            numbers[i] = parseAndValidateInt(numString[i]);
         }
     }
 
-    public int isPositiveInt(String tmpString) {
+    private int parseAndValidateInt(String checkString) {
         try {
-            int number = Integer.parseInt(tmpString);
+            int number = Integer.parseInt(checkString);
             if (number < 1) {
                 throw new IllegalArgumentException("양수만 입력 가능합니다.");
             }

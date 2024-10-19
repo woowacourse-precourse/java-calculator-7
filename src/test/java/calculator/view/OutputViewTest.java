@@ -3,8 +3,8 @@ package calculator.view;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import calculator.Application;
-import calculator.model.Delimiter;
-import calculator.model.Number;
+import calculator.domain.Delimiter;
+import calculator.domain.Number;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

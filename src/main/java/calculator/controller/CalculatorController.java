@@ -1,7 +1,7 @@
 package calculator.controller;
 
-import calculator.model.Delimiter;
-import calculator.model.Number;
+import calculator.domain.Delimiter;
+import calculator.domain.Number;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
