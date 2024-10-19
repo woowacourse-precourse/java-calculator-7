@@ -5,7 +5,7 @@ import calculator.util.CommonConstant;
 
 public class CalculateService {
 
-    private StringAddCalculator stringAddCalculator;
+    private final StringAddCalculator stringAddCalculator;
 
     public CalculateService(StringAddCalculator stringAddCalculator) {
         this.stringAddCalculator = stringAddCalculator;
@@ -23,7 +23,7 @@ public class CalculateService {
                     && str.charAt(1) == '/'
                     && str.charAt(3) == '\\'
                     && str.charAt(4) == 'n') {
-                //추가 구분자 구성이 잘된 경우
+
                 char del = str.charAt(2);
                 delimeter += "|" + del;
 
@@ -56,7 +56,7 @@ public class CalculateService {
                 if (part < 0) {
                     throw new IllegalArgumentException();
                 }
-            } catch (NumberFormatException e) {
+            } catch (Exception e) {
                 throw new IllegalArgumentException();
             }
             sum += part;
