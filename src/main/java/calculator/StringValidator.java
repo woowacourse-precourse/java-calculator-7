@@ -12,8 +12,8 @@ public class StringValidator {
 
     public static List<String> userInputValidator(String userInput) {
         vaildateNulll(userInput);
-        
         List<Delimiter> delimiter = delimiterValidator(userInput);
+
         return setDelimiter(userInput, delimiter);
     }
 
@@ -68,7 +68,7 @@ public class StringValidator {
 
     public static void vaildateNulll(String userInput) throws IllegalArgumentException {
         if (userInput.isEmpty()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("빈 문자열 입니다.");
         }
     }
 
@@ -84,12 +84,15 @@ public class StringValidator {
         }
     }
 
-    public static String getSumString(String userInput, Delimiter delimiter) throws IllegalArgumentException {
+    public static String getSumString(String userInput, List<String> delimiter) throws IllegalArgumentException {
         String sumString = "";
-        if (isCustom(delimiter)) {
-            sumString = getSumCustomString(userInput);
-        } else {
-            sumString = userInput;
+        for (String d : delimiter) {
+            Delimiter delimiterEnum = Delimiter.fromDelimiter(d);
+            if (delimiterEnum == Delimiter.COLON || delimiterEnum == Delimiter.COMMA) {
+                sumString = userInput;
+            } else {
+                sumString = getSumCustomString(userInput);
+            }
         }
         return sumString;
     }
