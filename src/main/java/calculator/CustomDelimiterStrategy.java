@@ -19,14 +19,16 @@ public class CustomDelimiterStrategy implements DelimiterStrategy {
                 input = input.replace(delimiter, ",");
             }
         }
+
         String[] tokens = input.split(",");
-        validateAndParseNumbers(tokens);
+        validateAndParseNumbers(input, tokens);
         return tokens;
     }
 
-    private void validateAndParseNumbers(String[] tokens) {
-        for (String token : tokens) {
+    private void validateAndParseNumbers(String input, String[] tokens) {
 
+        for (String token : tokens) {
+            System.out.println(token);
             if (token.isEmpty()) {
                 throw new IllegalArgumentException("구분자가 연속으로 입력되었습니다.");
             }
@@ -42,7 +44,7 @@ public class CustomDelimiterStrategy implements DelimiterStrategy {
                     throw new IllegalArgumentException("소수는 허용되지 않습니다: " + token);
                 }
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("유효하지 않은 숫자입니다: " + token);
+                throw new IllegalArgumentException("유효하지 않은 구분자입니다: " + token);
             }
         }
     }
