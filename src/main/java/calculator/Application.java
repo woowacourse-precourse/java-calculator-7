@@ -53,12 +53,6 @@ public class Application {
         }
 
         String[] eachNumbers = getEachNumbers(numberPart, delimiterPart);
-        /*
-        여러개의 구분자가 연속될 경우 빈 문자열이 리스트에 들어갈 수 있다.
-        e.g. 1,,2,3의 경우 numbers List에는 [1, "", 2, 3] 이 들어가게 된다.
-
-        -> validateNoNegativeNumbers, add 메서드에서 빈 문자열에 대한 처리로직을 추가해주어야한다.
-        */
 
         int[] parsedNumbers = parseNumbers(eachNumbers);
 
