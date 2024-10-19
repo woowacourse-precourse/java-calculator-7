@@ -26,6 +26,8 @@ class StringCalculator{
             return Integer.parseInt(input);
         } //하나의 숫자만 입력할 경우 그 숫자를 반환
 
+        String[] numbers = input.split("[,:]"); // 구분자로 문자열 분리
+
 
         return -1;
     }
