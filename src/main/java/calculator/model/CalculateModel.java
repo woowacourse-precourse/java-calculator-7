@@ -1,12 +1,6 @@
 package calculator.model;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-public class Model {
-
-    // 커스텀 구분자 추출 정규식 패턴
-    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+public class CalculateModel {
 
     // 기본 구분자
     private static final String DEFAULT_DELIMITERS = ",|:";
@@ -17,13 +11,10 @@ public class Model {
 
         String delimiters = DEFAULT_DELIMITERS;
         // 커스텀 구분자 확인
-        if (input.startsWith("//")) {
+        if (input.startsWith("//") && input.contains("\\n")) {
             // 커스텀 구분자 추출
-            Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
-            if (!matcher.find()) throw new IllegalArgumentException("잘못된 입력 형식입니다.");
-
-            delimiters += "|" + Pattern.quote(matcher.group(1));
-            input = matcher.group(2); // 커스텀 구분자 이후의 숫자 추출
+            delimiters += "|" + input.charAt(2);
+            input = input.substring(5);
         }
 
         return sum(input.split(delimiters)); // 숫자를 구분자로 분리 후 덧셈
