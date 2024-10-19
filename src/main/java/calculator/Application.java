@@ -64,5 +64,21 @@ public class Application {
         return sumNumbers;
     }
 
-    public static void digitsToNumber (Stack<String> digits, List<Integer> sumNumbers) {}
+    public static void digitsToNumber (Stack<String> digits, List<Integer> sumNumbers) {
+        if (digits.size() == 1) {
+            sumNumbers.add(Integer.valueOf(digits.pop()));
+        } else {
+            int sum = 0;
+            while (!digits.empty()) {
+                int count = digits.size();
+                int a = Integer.parseInt(digits.pop());
+
+                for (int i = 0; i < count - 1; i++) {
+                    a = a * 10;
+                }
+                sum += a;
+            }
+            sumNumbers.add(sum);
+        }
+    }
 }
