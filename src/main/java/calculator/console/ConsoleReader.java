@@ -21,7 +21,7 @@ public class ConsoleReader {
             && target.startsWith("/")){
                 int startIndex = target.indexOf("//");
                 int endIndex = target.indexOf("\\n");
-                if(endIndex - startIndex != 1){ // 커스텀 문자가 두 개 이상인 경우
+                if(endIndex - startIndex != 1){ // 커스텀 문자가 없거나 두 개 이상인 경우
                     throw new IllegalArgumentException();
                 }else{
                     customSeperator = target.charAt(startIndex+2);
