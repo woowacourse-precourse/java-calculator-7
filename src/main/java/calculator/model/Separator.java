@@ -12,6 +12,6 @@ public class Separator {
     }
 
     public String getSeparators(){
-        return separators;
+        return "["+separators+"]";
     }
 }

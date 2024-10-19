@@ -6,11 +6,14 @@ import java.util.Arrays;
 public class Numbers {
     private ArrayList<Integer> numbers;
 
-    public Numbers(int[] numbers){
+
+
+    public Numbers(){
         this.numbers = new ArrayList<>();
-        for (int i : numbers) {
-            this.numbers.add(i);
-        }
+    }
+
+    public void add(int i){
+        this.numbers.add(i);
     }
 
     public ArrayList<Integer> getNumbers(){
