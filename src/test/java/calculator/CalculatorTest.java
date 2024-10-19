@@ -37,6 +37,13 @@ public class CalculatorTest {
         assertEquals(calculator.calcSum(number), 781);
     }
     @Test
+    @DisplayName("합계 출력4")
+    public void 합계를_출력4() {
+        number.getInputText("// \n-534 -567:1882");
+        assertEquals(calculator.calcSum(number), 781);
+    }
+
+    @Test
     @DisplayName("합계 출력 예외1")
     public void 합계를_출력_예외1() {
         assertThrows(IllegalArgumentException.class, () -> {
@@ -49,6 +56,14 @@ public class CalculatorTest {
     public void 합계를_출력_예외2() {
         number.getInputText("//\n\n\n3\n\n4\n\n5");
         assertEquals(calculator.calcSum(number), 12);
+    }
+    @Test
+    @DisplayName("합계 출력 예외3")
+    public void 합계를_출력_예외3() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            number.getInputText("//\n-534;-567;1882");
+            assertEquals(calculator.calcSum(number), 781);
+        });
     }
 
     @Test
