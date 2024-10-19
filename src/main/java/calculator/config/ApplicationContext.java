@@ -1,10 +1,14 @@
 package calculator.config;
 
+import calculator.domain.CustomDelimiter;
+import calculator.domain.DefaultDelimiter;
+import calculator.domain.Delimiter;
 import calculator.presentation.StringAdditionController;
 import calculator.application.DelimiterProcessor;
 import calculator.application.StringSumCalculator;
 import calculator.io.InputHandler;
 import calculator.io.ResultPrinter;
+import java.util.List;
 
 public class ApplicationContext {
 
@@ -16,7 +20,7 @@ public class ApplicationContext {
 
     public ApplicationContext() {
         this.inputHandler = new InputHandler();
-        this.delimiterProcessor = new DelimiterProcessor();
+        this.delimiterProcessor = new DelimiterProcessor(createDelimiters());
         this.stringSumCalculator = new StringSumCalculator();
         this.resultPrinter = new ResultPrinter();
 
@@ -26,5 +30,9 @@ public class ApplicationContext {
 
     public StringAdditionController getStringAdditionController() {
         return stringAdditionController;
+    }
+
+    private List<Delimiter> createDelimiters() {
+        return List.of(new DefaultDelimiter(), new CustomDelimiter());
     }
 }
