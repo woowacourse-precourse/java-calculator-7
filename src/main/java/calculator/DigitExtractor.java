@@ -11,10 +11,17 @@ public class DigitExtractor {
     private List<String> tokens = new ArrayList<>(); // 구분자 기준으로 분리한 문자열 토큰
 
     /**
-     * TODO 문자열에서 숫자 추출
+     * 문자열에서 숫자 추출
      */
     public List<Integer> extractDigits(String input) {
-        return null;
+        if (!isValidateInput(input)) {
+            throw new IllegalArgumentException("Invalid input: " + input);
+        }
+        List<Integer> digits = new ArrayList<>(List.of(0)); // 입력이 빈 문자열("")인 경우 0 반환
+        if (!tokens.getFirst().isEmpty()) {
+            digits = tokens.stream().map(Integer::parseInt).collect(Collectors.toList());
+        }
+        return digits;
     }
 
     /**
