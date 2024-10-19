@@ -9,7 +9,7 @@ public class CalculatorView {
         return input;
     }
 
-    public void printString(Integer sum) {
+    public void printResult(Integer sum) {
         System.out.println("결과 : " + sum);
     }
 }
