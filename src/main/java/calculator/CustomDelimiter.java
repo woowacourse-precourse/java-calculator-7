@@ -10,7 +10,7 @@ public class CustomDelimiter {
         return delimiters;
     }
 
-    public static void findDelimiter(String inputMessage) {
+    private static void findDelimiter(String inputMessage) {
         int start = 0;
         int end = 2;
 
@@ -32,16 +32,20 @@ public class CustomDelimiter {
     }
 
     private static void validateAndAddDelimiter(String delimiter) {
-        if (isNonNumeric(delimiter)) {
-            addDelimiter(delimiter);
+        String escapedChars = ".*+?^${}[]()|";
+
+        isNonNumeric(delimiter);
+        if (escapedChars.contains(delimiter) && !delimiter.isEmpty()) {
+            delimiter = "\\" + delimiter;
         }
+        addDelimiter(delimiter);
     }
 
-    public static void addDelimiter(String delimiter) {
+    private static void addDelimiter(String delimiter) {
         delimiters += "|" + delimiter;
     }
 
-    public static boolean isNonNumeric(String delmiter) {
+    private static void isNonNumeric(String delmiter) {
         char[] cArr = delmiter.toCharArray();
 
         for (char c : cArr) {
@@ -49,6 +53,5 @@ public class CustomDelimiter {
                 throw new IllegalArgumentException("숫자는 구분자가 될 수 없습니다.");
             }
         }
-        return true;
     }
 }
