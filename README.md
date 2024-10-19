@@ -21,13 +21,13 @@
 
 ## 구현에 필요한 기능 목록
 1. Input View
-   - [ ] ```Console API```를 이용하여 문자열 입력 받은 후, 반환  
+   - [X] ```Console API```를 이용하여 문자열 입력 받은 후, 반환  
 2. Split Model
    - [ ] 커스텀 구분자를 포함한 경우, 커스텀 구분자를 찾음
    - [ ] 구분자를 이용하여 문자열 분리
 3. Calculator Model
    - [ ] 숫자의 합을 계산하여 반환
 4. Output View
-   - [ ] 결과를 요구 사항에 명시된 출력 형식에 맞게 출력
+   - [X] 결과를 요구 사항에 명시된 출력 형식에 맞게 출력
 5. Split Controller
    - [ ] Model, View 결합
