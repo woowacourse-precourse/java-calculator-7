@@ -7,7 +7,13 @@ public class Calculator {
     private static final String CUSTOM_PREFIX = "//";
     private static final String CUSTOM_SUFFIX = "\\n";
 
-    public int splitStr(String s) {
+    private static int result = 0;
+
+    public void run(String s) {
+        System.out.println("결과 : " + split(s));
+    }
+
+    private int split(String s) {
         if (s.isEmpty()) {
             return 0;
         }
@@ -21,16 +27,33 @@ public class Calculator {
                 String sliceS = s.substring(5);
 
                 String[] customArr = sliceS.split(DEFAULT_DELIMITER1 + "|" + DEFAULT_DELIMITER2 + "|" + custom);
-                // TODO 반복문 돌며 양수 아닌값 있을 시 예외처리 후 종료
-                // TODO 양수만 있다면 합 반환
+
+                numberExtract(customArr);
+                return result;
             } else {
-                // TODO "\n" 없다면 예외처리 후 종료
+                throw new IllegalArgumentException();
             }
         }
         // 커스텀 구분자 없을 경우
         String[] defaultArr = s.split(DEFAULT_DELIMITER1 + "|" + DEFAULT_DELIMITER2);
-        // TODO 반복문 돌며 양수 아닌값 있을 시 예외처리 후 종료
-        // TODO 양수만 있다면 합 반환
+
+        numberExtract(defaultArr);
+        return result;
     }
 
+    // 양수 추출 및 더하기, 양수 이외의 값일 경우 예외처리
+    private void numberExtract(String[] arr) {
+        for (String str : arr) {
+            try {
+                int positiveNum = Integer.parseInt(str);
+                // 0 또는 음수일 경우 예외처리
+                if (positiveNum <= 0) {
+                    throw new IllegalArgumentException();
+                }
+                result += positiveNum;
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException();
+            }
+        }
+    }
 }
