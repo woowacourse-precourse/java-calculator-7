@@ -2,6 +2,8 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.Arrays;
+
 public class Application {
     public static void main(String[] args) {
         // 사용자 입력 받는 부분
@@ -39,10 +41,26 @@ public class Application {
             // 구분자 기준으로 문자열 분리
             String[] tokens = numbers.split(delimiter);
 
-            // 각 숫자의 합 계산
+            // 숫자 합 저장 변수 선언
             int sum = 0;
+
+            // 음수 값 저장 용도 배열
+            int[] negativeNumbers = new int[tokens.length];
+            int negativeCount = 0;
+
+            // 각 숫자 합산 도출
             for (String token : tokens) {
-                sum += Integer.parseInt(token.trim()); // 문자열을 정수로 변환하여 합산
+                int number = Integer.parseInt(token.trim()); // 문자열을 정수로 변환하여 합산
+                if (number < 0) {
+                    negativeNumbers[negativeCount++] = number;
+                }
+                sum += number;
+            }
+
+            // 음수가 있을 경우 예외 발생
+            if (negativeCount > 0) {
+                throw new IllegalArgumentException("Negative numbers are not allowed: "
+                        + Arrays.toString(Arrays.copyOf(negativeNumbers, negativeCount)));
             }
 
             return sum;
