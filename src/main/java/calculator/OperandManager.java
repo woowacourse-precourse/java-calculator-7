@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 public class OperandManager {
-    private List<BigDecimal> operands;
+    private final List<BigDecimal> operands;
 
     public OperandManager() {
         this.operands = new LinkedList<>();
