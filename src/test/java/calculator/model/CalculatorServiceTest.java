@@ -41,4 +41,14 @@ public class CalculatorServiceTest {
             calculatorService.calculate(input);
         });
     }
+
+    @Test
+    @DisplayName("0이 포함된 기본 구분자 연산")
+    void testContainZeroDefaultDelimiter() {
+        String input = "1,0,1";
+        assertThrows(IllegalArgumentException.class, () -> {
+            calculatorService.calculate(input);
+        });
+
+    }
 }
