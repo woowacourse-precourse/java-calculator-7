@@ -17,15 +17,7 @@ public class InputValidator {
 
         if (input.startsWith("//")) {
             String[] tokens = input.split("\\\\n");
-            if (tokens.length > 2)
-                throw new IllegalArgumentException("Invalid syntax");
-
-            String separator = tokens[0].substring(2);;
-            if (separator.length() != 1)
-                throw new IllegalArgumentException("Invalid error : length of custom separator is must 1");
-
-            if (Character.isDigit(separator.charAt(0)))
-                throw new IllegalArgumentException("Invalid error : custom separator is not number");
+            validCustomSeparator(input);
 
             if (tokens.length == 1) // "//-\n" 로만 이루어진 문자열도 결과값을 출력해야함.
                 return;
@@ -36,7 +28,20 @@ public class InputValidator {
         validExpression(expression, CalculatorUtil.getSeparatorRegex(input));
     }
 
+    private static void validCustomSeparator(String input) {
 
+        String[] tokens = input.split("\\\\n");
+
+        if (tokens.length > 2)
+            throw new IllegalArgumentException("Invalid syntax");
+
+        String separator = tokens[0].substring(2);
+        if (separator.length() != 1)
+            throw new IllegalArgumentException("Invalid error : length of custom separator is must 1");
+
+        if (Character.isDigit(separator.charAt(0)))
+            throw new IllegalArgumentException("Invalid error : custom separator is not number");
+    }
 
     private static void validExpression(String expression, String separatorRegex) {
         String[] numbers = expression.split(separatorRegex);
@@ -52,5 +57,4 @@ public class InputValidator {
                 throw new IllegalArgumentException("Invalid error : first char of a number cannot be 0");
         }
     }
-
 }
