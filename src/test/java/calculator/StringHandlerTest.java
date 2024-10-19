@@ -2,6 +2,8 @@ package calculator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import calculator.util.SeparatorManager;
+import calculator.util.StringHandler;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
