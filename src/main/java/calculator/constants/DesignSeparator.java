@@ -5,7 +5,7 @@ public enum DesignSeparator implements EnumClass {
     START("//"),
     END("\\n");
 
-    private String symbol;
+    private final String symbol;
 
     DesignSeparator(String symbol) {
         this.symbol = symbol;
