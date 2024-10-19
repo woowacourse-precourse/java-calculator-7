@@ -6,6 +6,8 @@ public enum ErrorMessage {
 	USE_CUSTOM_DELIMITER_PREFIX_AT_CUSTOM_DELIMITER("커스텀 구분자 지정을 위한 문자(//)는 커스텀 구분자로 사용할 수 없습니다."),
 	USE_NUMBER_AT_CUSTOM_DELIMITER("숫자는 커스텀 구분자로 사용할 수 없습니다."),
 	USE_BLANK_OR_CUSTOM_DELIMITER_SUFFIX_AT_CUSTOM_DELIMITER("빈 문자열이나 커스텀 구분자 지정을 위한 문자(\\n)는 커스텀 구분자로 사용할 수 없습니다."),
+	INVALID_NUMBER_FORMAT("구분자 사이에는 숫자만 입력 가능합니다."),
+	NEGATIVE_NUMBER_NOT_ALLOWED("양수만 입력 가능합니다.")
 	;
 
 	private final String message;
