@@ -80,6 +80,25 @@ class ApplicationTest extends NsTest {
 
 
     @Test
+    void 입력값_숫자_추출() {
+        // given
+        String input = "//+\\n1+2:3,4";
+        Calculation calculation = new Calculation();
+        CalculationService service = new CalculationService(calculation);
+        calculation.setRawValue(input);
+
+        List<Integer> expectedList = Arrays.asList(1, 2, 3, 4);
+
+        // when
+        List<Integer> numberList = service.extractNumbersToList();
+
+        // then
+        assertThat(numberList).isEqualTo(expectedList);
+    }
+
+
+
+    @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1");
