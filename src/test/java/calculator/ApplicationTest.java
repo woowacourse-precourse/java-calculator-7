@@ -50,6 +50,14 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 두자리_숫자_덧셈() {
+        assertSimpleTest(() -> {
+            run("11,22:33");
+            assertThat(output()).contains("결과 : 66");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});

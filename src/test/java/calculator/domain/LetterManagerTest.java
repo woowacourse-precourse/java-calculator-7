@@ -121,4 +121,18 @@ class LetterManagerTest {
         Assertions.assertThat(letterManager.getNumbers().toInteger().contains(2)).isEqualTo(true);
         Assertions.assertThat(letterManager.getNumbers().toInteger().contains(3)).isEqualTo(true);
     }
+
+    @Test
+    void 두자리_숫자_추출() {
+        //given
+        String letters = "11,22";
+        LetterManager letterManager;
+
+        //when
+        letterManager = new LetterManager(letters);
+
+        //then
+        Assertions.assertThat(letterManager.getNumbers().toInteger().contains(11)).isEqualTo(true);
+        Assertions.assertThat(letterManager.getNumbers().toInteger().contains(22)).isEqualTo(true);
+    }
 }
