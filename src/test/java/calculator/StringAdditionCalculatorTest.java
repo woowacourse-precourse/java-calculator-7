@@ -12,7 +12,7 @@ class StringAdditionCalculatorTest extends NsTest {
     void 기본구분자_숫자추출_테스트() {
         assertSimpleTest(() -> {
             run("1,2:3");
-            assertThat(output()).contains("[1, 2, 3]");
+            assertThat(output()).contains("결과 : 6");
         });
     }
 
@@ -20,7 +20,7 @@ class StringAdditionCalculatorTest extends NsTest {
     void 커스텀구분자_숫자추출_테스트() {
         assertSimpleTest(() -> {
             run("//;\\n1");
-            assertThat(output()).contains("[1]");
+            assertThat(output()).contains("결과 : 1");
         });
     }
 
