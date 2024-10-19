@@ -3,14 +3,10 @@ package calculator.service;
 import calculator.dto.OperandDTO;
 import java.util.ArrayList;
 
+import static calculator.utils.Constants.*;
 import static calculator.utils.InvalidInputStringFormatException.errorCheck;
 
 public class ParsingService {
-    private static final int CUSTOM_DELIMITER_INDEX = 2;
-    private static final int EXCEPT_CUSTOM_DELIMITER_INDEX = 5;
-    private static final char DEFAULT_DELIMITER1 = ',';
-    private static final char DEFAULT_DELIMITER2 = ':';
-
     private ArrayList<Character> delimiters = new ArrayList<>();
     private ArrayList<Integer> operandList = new ArrayList<>();
 
