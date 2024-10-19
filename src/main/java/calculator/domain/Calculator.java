@@ -7,34 +7,28 @@ import java.util.regex.Pattern;
 
 public class Calculator {
     private static final Pattern CUSTOM_SEPERATOR_PATTERN=Pattern.compile("^//(.)\\\\n{1}(.*)");
-
     private static String seperatorRegex=",|:";
-    private String input;
 
-    public Calculator(String input){
-        this.input=input;
-    }
-
-    //입력을 처리한다
-    public int inputCalculate(){
+    public static int inputCalculate(String input){
         //커스텀 구분자 패턴이 존재하는지 확인한다
-        checkExtractor();
+        input=checkExtractor(input);
 
         return calculate(input);
     }
 
-    private void checkExtractor(){
+    private static String checkExtractor(String input){
         Matcher matcher=CUSTOM_SEPERATOR_PATTERN.matcher(input);
 
         if (matcher.find()){//일치한다면
             String customSeperator=matcher.group(1);
             //잘못된 구분자 입력-> 예외를 터뜨린다
             checkBadSeperator(customSeperator);
-            String editedInput= matcher.group(2);
+            input= matcher.group(2);
             //SEPERATOR_REGEX에 더한다
             addRegex(customSeperator);
-            editInput(editedInput);
         }
+
+        return input;
     }
 
     private static int calculate(String input) {
@@ -56,10 +50,6 @@ public class Calculator {
         if (!(num.matches("[0-9]{0,}"))){
             throw new IllegalArgumentException(MessageType.INVALID_SEPERATOR.getMessage());
         }
-    }
-
-    private void editInput (String editedInput) {
-        this.input=editedInput;
     }
 
     private static void addRegex(String customSeperator) {
