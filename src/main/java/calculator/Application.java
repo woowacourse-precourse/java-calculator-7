@@ -72,19 +72,29 @@ public class Application {
     private static List<Integer> changeToInteger(List<String> numStrings) {
         List<Integer> nums = new ArrayList<>();
 
-        for (String numString : numStrings) {
-            Integer tempNum = Integer.parseInt(numString);
-            nums.add(tempNum);
+        try {
+            for (String numString : numStrings) {
+                Integer tempNum = Integer.parseInt(numString);
+                nums.add(tempNum);
+            }
+        } catch (NumberFormatException e) {
+            // parseInt 함수에서 int 범위를 벗어난 경우에 대한 예외 처리
+            throw new IllegalArgumentException();
         }
 
         return nums;
     }
 
     private static Integer calculate(List<Integer> nums) {
-        Integer sum = 0;
+        Long sum = 0L;
 
-        for (Integer num : nums) {
-            sum += num;
+        try {
+            for (Integer num : nums) {
+                sum = Math.addExact(sum, num);
+            }
+        } catch (ArithmeticException e) {
+            // 수들의 합이 long 범위를 넘어가는 경우에 대한 오류처리
+            throw new IllegalArgumentException();
         }
 
         return sum;
