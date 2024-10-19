@@ -1,8 +1,6 @@
 package calculator;
 
-import java.util.Arrays;
 import java.util.regex.Pattern;
-import java.util.stream.IntStream;
 
 public class StringFilter {
     private final String DEFAULT_DELIMITER = "[,:]";
@@ -39,11 +37,11 @@ public class StringFilter {
     private static String[] findCustomDelimiter(String Input) {
         String replaceString = Input.replace("//", "").replace("\\n", "");
         String customDelimiter = replaceString.substring(0, 1);
-        return splitByDelimiter(replaceString, customDelimiter);
+        return splitCustomDelimiter(replaceString, customDelimiter);
     }
     
     //커스텀 구분자로 나누기
-    private static String[] splitByDelimiter(String replaceString, String customDelimiter) {
+    private static String[] splitCustomDelimiter(String replaceString, String customDelimiter) {
         return replaceString.substring(1).split(Pattern.quote(customDelimiter));
     }
 }

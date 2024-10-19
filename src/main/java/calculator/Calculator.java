@@ -3,7 +3,7 @@ package calculator;
 import java.util.Arrays;
 
 public class  Calculator {
-       private final StringFilter stringFilter = new StringFilter();
+    private final StringFilter stringFilter = new StringFilter();
     public int calculate(String input) {
         if (input.isEmpty())
             return 0;
