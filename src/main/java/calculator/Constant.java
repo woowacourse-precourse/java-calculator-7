@@ -1,9 +1,9 @@
 package calculator;
 
 public class Constant {
-    public static final String EXTRACT_REGEX_APP = "//(.+?)\\\\n";
+    public static final String EXTRACT_REGEX_APP = "\\/\\/(.*?)\\\\n";
 
-    public static final String EXTRACT_REGEX_TEST = "//(.+?)\n";
+    public static final String EXTRACT_REGEX_TEST = "\\/\\/(.+?)\n";
 
     public static final String CUSTOM_SEPARATOR_END_STR_APP = "\\n";
 
