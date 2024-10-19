@@ -5,9 +5,10 @@ import calculator.global.DefaultDelimiter;
 public class InputParser {
 
     private static final InputParser INSTANCE = new InputParser();
-    private final Delimiter delimiter = new Delimiter();
+    private final Delimiter delimiter;
 
     private InputParser() {
+        this.delimiter = Delimiter.getInstance();
     }
 
     public static InputParser getInstance() {

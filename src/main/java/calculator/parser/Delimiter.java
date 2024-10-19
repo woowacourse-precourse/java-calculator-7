@@ -5,6 +5,14 @@ import calculator.global.DelimiterSyntaxIndex;
 
 public class Delimiter {
 
+    private static final Delimiter INSTANCE = new Delimiter();
+
+    private Delimiter() {}
+
+    public static Delimiter getInstance() {
+        return INSTANCE;
+    }
+
     public String extractDelimiter(String input) {
         if (validateStartsWith(input) && validateEndsWith(input)) {
             return String.valueOf(input.charAt(DelimiterSyntaxIndex.DELIMITER_INDEX.getKey()));
