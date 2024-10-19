@@ -6,9 +6,8 @@ import java.util.regex.Pattern;
 public class CustomDelimiter implements Delimiter {
 
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
-    private static final String NUMBER_REGEX_PREFIX = "[0-9]+([,|:|";
-    private static final String NUMBER_REGEX_SUFFIX = "][0-9]+)*";
-    private static final String DELIMITER_REGEX_PREFIX = ",|:|";
+    private static final String NUMBER_REGEX = "[0-9]+([,|:|%s][0-9]+)*";
+    private static final String DELIMITER_REGEX = ",|:|%s";
 
     @Override
     public boolean supports(String input) {
@@ -18,19 +17,18 @@ public class CustomDelimiter implements Delimiter {
         }
         String customDelimiter = matcher.group(1);
         String numberString = matcher.group(2);
-        String numberPattern = NUMBER_REGEX_PREFIX + Pattern.quote(customDelimiter) + NUMBER_REGEX_SUFFIX;
+        String numberPattern = NUMBER_REGEX.formatted(Pattern.quote(customDelimiter));
         return numberString.matches(numberPattern);
     }
 
     @Override
     public String[] split(String input) {
+        validate(input);
         Matcher matcher = getMatcher(input);
-        if (!matcher.matches()) {
-            throw new IllegalArgumentException("잘못된 입력 형식입니다.");
-        }
+        matcher.matches();
         String customDelimiter = matcher.group(1);
         String numberString = matcher.group(2);
-        String delimiterRegex = DELIMITER_REGEX_PREFIX + Pattern.quote(customDelimiter);
+        String delimiterRegex = DELIMITER_REGEX.formatted(Pattern.quote(customDelimiter));
         return numberString.split(delimiterRegex);
     }
 
