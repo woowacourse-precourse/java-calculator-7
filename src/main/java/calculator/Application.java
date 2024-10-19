@@ -3,8 +3,6 @@ package calculator;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
@@ -37,10 +35,8 @@ public class Application {
         // 숫자 부분에 숫자와 구분자 외의 글자가 들어온 경우
         try {for( int i = 0; i < nums.length; i++ ) result[i] = Integer.parseInt( nums[i] );}
         catch( NumberFormatException e ) {throw new IllegalArgumentException();}
-
         return result;
     }
-
     static int sum( int[] numbers ){
         int result = 0;
         if( numbers.length == 0 ) return 0;
@@ -50,20 +46,16 @@ public class Application {
         }
         return result;
     }
-
     static boolean validateInput( String input ){
+        if( input.equals("") ) return true;
         StringTokenizer tokenizer = new StringTokenizer( input, "\\n" );
         String numberPart;
-        //// 커스텀 구분자 부분
         if( tokenizer.countTokens() > 1 ){
             numberPart = input.substring( input.indexOf( "\\n") + 2 );
+            if( !Character.isDigit( numberPart.toCharArray()[0] ) ) return false;
             String customDelimiterPart = input.substring( 0, input.indexOf( "\\n") );
-            // 맨 앞에 //가 있는지 확인
             if( !customDelimiterPart.substring(0,2).equals("//") ) return false;
         }
-        else numberPart = input;
-        //// 공통 부분
-
         return true;
     }
 
@@ -77,7 +69,7 @@ public class Application {
             String[] delimiterList = setDelimiter( input );
             int[] numbers = getNumbers( input, delimiterList );
             result = sum( numbers );
-            System.out.println( "결과: " + result );
+            System.out.println( "결과 : " + result );
             bufferedReader.close();
         } catch (IOException e ){e.printStackTrace();}
     }
