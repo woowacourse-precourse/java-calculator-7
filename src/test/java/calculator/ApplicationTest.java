@@ -98,6 +98,24 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    @DisplayName("음수를 사용했을때 예외 처리하기")
+    void 음수_사용_예외() {
+        assertSimpleTest(() -> {
+
+            //음수끼리 더하려는 상황
+            assertThatThrownBy(() -> runException("-1:-4"))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("양수끼리의 계산만 지원합니다.");
+
+            //음수와 양수끼리 더하려는 상황
+            assertThatThrownBy(() -> runException("-2:3"))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("양수끼리의 계산만 지원합니다.");
+
+        });
+    }
+
     @Override
     public void runMain() {
         try {
