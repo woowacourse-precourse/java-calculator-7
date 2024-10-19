@@ -1,6 +1,6 @@
 package calculator.exception;
 
-import calculator.validation.MessageType;
+import calculator.domain.MessageType;
 
 public class InvalidInputException extends IllegalArgumentException{
 

@@ -1,7 +1,6 @@
 package calculator.domain;
 
 import calculator.exception.InvalidInputException;
-import calculator.validation.MessageType;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,7 +1,6 @@
 package calculator.domain;
 
 import calculator.exception.InvalidInputException;
-import calculator.validation.MessageType;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
