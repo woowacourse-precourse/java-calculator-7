@@ -2,11 +2,18 @@ package calculator.domain;
 
 import java.util.List;
 
+/**
+ * 추출된 숫자들의 결과 값을 계산하는 클래스
+ */
 public class ResultCalculator {
-
-    // List 내부의 수를 모두 합한 후 반환
+    /**
+     * 추출된 숫자 List의 합을 반환
+     * @param numbers 추출된 숫자 List
+     * @return List 내부 숫자들의 합
+     */
     public long getSum(List<Integer> numbers) {
-        long sum = 0;
+        long sum = 0; // 숫자 합
+
         for (Integer number : numbers) {
             sum += number;
         }
