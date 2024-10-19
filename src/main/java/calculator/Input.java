@@ -39,4 +39,14 @@ public class Input {
                 && validSequenceSeparator(input)
                 && validLastSeparator(input);
     }
+
+    /** 커스텀 구분자 입력 검증 **/
+    //사용자가 커스텀 구분자를 사용하였을 경우
+    public static boolean validCustomUserInput(String input){
+        return validCustomFrontAndCharacter(input)
+                && validSeparator(input, input.charAt(2))
+                && validSequenceSeparator(input)
+                && validLastSeparator(input);
+    }
+
 }
