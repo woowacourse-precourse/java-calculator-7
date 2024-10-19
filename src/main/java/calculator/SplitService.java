@@ -13,27 +13,37 @@ public class SplitService {
     }
 
     public List<String> split(String input) {
-        String numbers = addDelimiter(input);
-        String[] splitNumbers = numbers.split(delimiterSetToString());
-        return Arrays.stream(splitNumbers).toList();
+        String expressionStr = extractExpression(input);
+        String[] numbers = expressionStr.split(delimiterSetToString());
+        return Arrays.stream(numbers).toList();
     }
 
-    public String addDelimiter(String input) {
+
+    private String extractExpression(String input) {
         if (input.startsWith(START_POINT) && input.contains(END_POINT)) {
-            int startIndex = START_POINT.length();
+            addDelimiter(input);
             int endIndex = input.indexOf(END_POINT);
-            String customDelimiter = input.substring(startIndex, endIndex);
-            delimiterSet.add(customDelimiter);
             return input.substring(endIndex + END_POINT.length());
         }
         return input;
     }
-    private String delimiterSetToString(){
+
+    private void addDelimiter(String input) {
+        int startIndex = START_POINT.length();
+        int endIndex = input.indexOf(END_POINT);
+        String customDelimiter = input.substring(startIndex, endIndex);
+        if (customDelimiter.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+        delimiterSet.add(customDelimiter);
+    }
+
+    private String delimiterSetToString() {
         StringBuilder builder = new StringBuilder();
         for (String delimiter : delimiterSet) {
             builder.append(delimiter).append("|");
         }
-        builder.setLength(builder.length()-1);
+        builder.setLength(builder.length() - 1);
         return builder.toString();
     }
 }
