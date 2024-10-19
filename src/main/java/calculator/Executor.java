@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.Objects;
+
 public class Executor {
 	private IOController ioController;
 	private Parser parser;
@@ -18,4 +20,23 @@ public class Executor {
 		this.calculator = calculator;
 	}
 
+	/**
+	 * 구분자 에러 확인
+	 *
+	 * @param splitStr
+	 */
+	private void checkSeparatorErrors(String[] splitStr) {
+		// check 구분자 에러
+		for (String s : splitStr) {
+			if (Objects.equals(s, "")) {
+				throw new IllegalArgumentException("구분자는 문자열의 앞 또는 뒤에 위치할 수 없습니다.");
+			}
+
+			try {
+				Integer.parseInt(s);
+			} catch (Exception e) {
+				throw new IllegalArgumentException("지정되지 않은 구분자는 사용할 수 없습니다.");
+			}
+		}
+	}
 }
