@@ -152,7 +152,7 @@ class CalculatorServiceTest {
 
     @DisplayName("inputString에 구분자 설정 문자 파싱 테스트")
     @Test
-    void updateInputString(){
+    void updateInputString() {
 
         //given
         String customDelimiter = "&";
@@ -164,5 +164,40 @@ class CalculatorServiceTest {
 
         //then
         assertThat(delimiterInputDto.getInputString()).isEqualTo("1&2&3");
+    }
+
+    @DisplayName("구분자를 정규식으로 파싱 기능 테스트")
+    @Test
+    void formatDelimiters() {
+
+        //given
+        List<String> delimiters = new ArrayList<>(List.of(",", ":", "&"));
+
+        //when
+        String formatDelimiters = calculatorService.formatDelimiters(delimiters);
+
+        //then
+        assertThat(formatDelimiters).isEqualTo("[,:&]");
+    }
+
+    @DisplayName("입력된 숫자를 구분자 기준으로 분리")
+    @Test
+    void parseNumber() {
+
+        //given
+        String inputNumber = "1,2:3$4";
+        List<String> delimiterList = new ArrayList<>(List.of(",", ":", "$"));
+        DelimiterInputDto delimiterInputDto = new DelimiterInputDto(inputNumber, delimiterList);
+
+        //when
+        List<String> numbers = calculatorService.parseNumber(delimiterInputDto);
+
+        //then
+        assertThat(numbers.size()).isEqualTo(4);
+        assertThat(numbers.contains("1")).isTrue();
+        assertThat(numbers.contains("2")).isTrue();
+        assertThat(numbers.contains("3")).isTrue();
+        assertThat(numbers.contains("4")).isTrue();
+
     }
 }

@@ -1,12 +1,15 @@
 package calculator.service;
 
 import calculator.dto.DelimiterInputDto;
+import java.util.Arrays;
+import java.util.List;
 
 public class CalculatorService {
 
     public String calculateSumFormString(DelimiterInputDto delimiterInputDto) {
 
         setDelimiter(delimiterInputDto);
+        List<String> numbers = parseNumber(delimiterInputDto);
 
         return delimiterInputDto.getInputString();
     }
@@ -28,9 +31,18 @@ public class CalculatorService {
         return inputString.substring(2, inputString.indexOf("\n"));
     }
 
-    public void updateInputString(DelimiterInputDto delimiterInputDto){
+    public void updateInputString(DelimiterInputDto delimiterInputDto) {
         String inputString = delimiterInputDto.getInputString();
-        delimiterInputDto.setInputString(inputString.substring(inputString.indexOf("\n") +1));
+        delimiterInputDto.setInputString(inputString.substring(inputString.indexOf("\n") + 1));
+    }
+
+    public List<String> parseNumber(DelimiterInputDto delimiterInputDto) {
+        return Arrays.stream(delimiterInputDto.getInputString()
+                .split(formatDelimiters(delimiterInputDto.getDelimiters()))).toList();
+    }
+
+    public String formatDelimiters(List<String> delimiters) {
+        return "[" + String.join("", delimiters) + "]";
     }
 
     public void validCustomDelimiter(String delimiter) {
