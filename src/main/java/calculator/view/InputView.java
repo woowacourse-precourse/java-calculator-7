@@ -8,6 +8,7 @@ public class InputView {
 
     public static String inputStringWithoutSpaces() {
         String input = Console.readLine().replace(SPACE, EMPTY_STRING);
+        if(input.equals("")) return "0";
         return input;
     }
 }
