@@ -30,7 +30,7 @@
     - [X] 커스텀 구분자로 숫자가 들어올 경우, 해당 수는 구분자로 우선함
     - [X] 빈 문자열("")은 0으로 취급함
     - [X] 추출한 숫자들은 BigInteger List에 저장함
-    - [ ] 추출 과정에서의 에러는 모두 IllegalArgumentException을 발생시킴
+    - [X] 추출 과정에서의 에러는 모두 IllegalArgumentException을 발생시킴
 
 - [X] 숫자 덧셈
     - [X] 추출한 숫자 리스트가 비어있는 경우 0을 반환함
