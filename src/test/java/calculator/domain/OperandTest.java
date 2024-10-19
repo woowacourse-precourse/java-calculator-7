@@ -17,7 +17,7 @@ public class OperandTest {
         // when, then
         assertThatThrownBy(() -> new Calculator(inputs))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("숫자가 아닌 문자열이 입력되었습니다.");
+                .hasMessage("피연산자에 숫자가 아닌 문자열이 입력되었습니다.");
     }
 
     @DisplayName("문자열 입력 실패 : 양수가 아닌 수 입력")
@@ -29,6 +29,6 @@ public class OperandTest {
         // when, then
         assertThatThrownBy(() -> new Calculator(inputs))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("입력된 숫자가 양수가 아닙니다.");
+                .hasMessage("피연산자에 입력된 숫자가 양수가 아닙니다.");
     }
 }

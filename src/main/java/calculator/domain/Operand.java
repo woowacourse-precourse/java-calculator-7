@@ -1,8 +1,8 @@
 package calculator.domain;
 
 public class Operand {
-    private final static String NOT_STRING_MESSAGE = "숫자가 아닌 문자열이 입력되었습니다.";
-    private final static String NOT_POSITIVE_MESSAGE = "입력된 숫자가 양수가 아닙니다.";
+    private final static String NOT_STRING_MESSAGE = "피연산자에 숫자가 아닌 문자열이 입력되었습니다.";
+    private final static String NOT_POSITIVE_MESSAGE = "피연산자에 입력된 숫자가 양수가 아닙니다.";
 
     private int operand;
 
