@@ -11,20 +11,20 @@
 - docs 폴더를 만들고 새로 README.md를 만들까 고민중.
 
 ## 🚀기능구현 목록
-- [ ] V. class 생성및 필드 선언
+- [X] V. class 생성및 필드 선언
     - class Application -> Main
     - class IOManager -> input, output 처리
     - class Calculation -> 데이터 연산 처리
         - 필드로 ArrayList 타입의 숫자,구분자 만들기
-- [ ] A. IOManager의 함수 
-    - [ ] 1. 문자열 입력받기
-    - [ ] 2. 결과 출력하기
-- [X] B. Calculation의 함수
-    - ~~[X] 0. getter, setter~~
-    - [X] 1. 입력 받은 문자열 분석하고 필드에 저장하기
+- [X] A. IOManager의 함수 
+    - [X] 1. 문자열 입력받기
+    - [X] 2. 결과 출력하기
+- [ ] B. Calculation의 함수
+    - ~~[ ] 0. getter, setter~~
+    - [ ] 1. 입력 받은 문자열 분석하고 필드에 저장하기
         - public void splitInputString(String input)
         - private void checkCustomSperator()
-    - [X] 2. 필드 데이터 연산하고, 결과값 리턴하기
+    - [ ] 2. 필드 데이터 연산하고, 결과값 리턴하기
         - public int returnAddition()
 
 ## 환경설정
