@@ -1,5 +1,6 @@
 package calculator;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static calculator.Extractor.extractDelimiter;
@@ -8,7 +9,7 @@ import static calculator.Extractor.extractNumberPart;
 public class Validator {
     private static final String ERROR_INVALID_DELIMITER = "커스텀 구분자로 숫자 또는 공백을 사용할 수 없습니다.";
     private static final String ERROR_INVALID_FORMAT = "커스텀 구분자 형식이 올바르지 않습니다.";
-    private static final String ERROR_DELIMITER_TYPE = "커스텀 구분자는 영어,숫자,공백을 허용하지 않습니다.: ";
+    private static final String ERROR_DELIMITER_TYPE = "커스텀 구분자는 '-',영어,숫자,공백을 허용하지 않습니다.: ";
     private static final String ERROR_NUMBER_TYPE = "잘못된 숫자 형식입니다: ";
     private static final String ERROR_DELIMITER_DUPLICATE = "중복된 구분자는 허용하지 않습니다.";
     private static final String ERROR_DELIMITER_INVALID_CHARACTER = "구분자가 아닌 잘못된 문자가 포함되어 있습니다.";
@@ -36,10 +37,11 @@ public class Validator {
     }
 
     private void validateDelimiterInput(String numberPart, String delimiter) {
-        int expectedSplitCount = numberPart.length() / 2 + 1;
-        int actualSplitCount = numberPart.split(delimiter).length;
-        if (expectedSplitCount != actualSplitCount) {
-            throw new IllegalArgumentException(ERROR_DELIMITER_INVALID_CHARACTER);
+        String[] numberStrings = numberPart.split(delimiter);
+        for (String number : numberStrings) {
+            if (number.trim().isEmpty() || !number.matches("-?\\d+")) {
+                throw new IllegalArgumentException(ERROR_DELIMITER_INVALID_CHARACTER);
+            }
         }
     }
 
@@ -71,7 +73,7 @@ public class Validator {
     }
 
     private void validateDelimiterType(String value, String delimiter){
-        if (!value.trim().isEmpty() && delimiter.matches("[a-zA-Z0-9]+")) {
+        if (!value.trim().isEmpty() && delimiter.matches(".*[\\d\\sA-Za-z-].*")) {
             throw new IllegalArgumentException(ERROR_DELIMITER_TYPE + value);
         }
     }
