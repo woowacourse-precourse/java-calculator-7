@@ -31,7 +31,13 @@ public class CalculatorController {
                 isPreviousValueNumeric = false;
                 continue;
             }
-            // 만약 테스트 실패나오면 while 문으로 다음 문자가 숫자가 아닐때까지 돌린 후 숫자로 변환하고 덧셈
+            /* 테스트 실패하면
+            int[2] result = extractNumber(String.valueOf(userInput.charAt(i)),i);
+            sum += result[0];
+            i = result[1];
+            isPreviousValueNumeric = true;
+            변경 + 테스트 코드 만들기!
+            * */
             sum += extractNumber(String.valueOf(userInput.charAt(i)));
             isPreviousValueNumeric = true;
         }
@@ -44,4 +50,22 @@ public class CalculatorController {
         }
         return Integer.parseInt(str);
     }
+
+    /*
+    public int extractNumber(String input,int idx){
+        int[] sumAndIdx = new int[2];
+        if(!NumberChecker.isNumber(input.charAt(idx))){
+            throw new IllegalArgumentException("잘못된 형식입니다.");
+        }
+        String number = input.charAt(idx);
+        while(true){
+            idx++;
+            if(!NumberChecker.isNumber(input.charAt(idx)) break;
+            number += input.charAt(idx);
+        }
+        int[0] = Integer.parseInt(number);
+        int[1] = idx;
+        return sumAndIdx;
+    }
+    */
 }
