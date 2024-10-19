@@ -14,19 +14,21 @@ public class Number {
     // 값을 검증하는 메서드
     private void validateNumberArray(String[] array) {
         for (String str : array) {
+            // 숫자가 아닐 경우
             if (!isNumeric(str)) {
                 throw new IllegalArgumentException("기본 구분자와 커스텀 구분자 외의 문자가 입력되었습니다.");
             }
 
+            // 양수가 아닌 숫자가 입력된 경우
             int number = Integer.parseInt(str);
-            if (number < 0) {
+            if (number <= 0) {
                 throw new IllegalArgumentException("양수를 입력해주세요.");
             }
             addNumber(number);
         }
     }
 
-    // 숫자인지 확인
+    // 숫자인지 확인하는 메서드
     private boolean isNumeric(String str) {
         try {
             Integer.parseInt(str);
