@@ -7,8 +7,8 @@ public class InputSequence {
     public static final long SUM_INITIAL_VALUE = 0L;
     private final List<Long> sequence;
 
-    public InputSequence(String input) {
-        sequence = InputPreprocessing.of(input);
+    public InputSequence(List<Long> sequence) {
+        this.sequence = sequence;
     }
 
     public Long sum() {
