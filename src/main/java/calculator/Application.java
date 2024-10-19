@@ -36,12 +36,21 @@ public class Application {
     }
 
     public static String extractCustomDelimiter(String input) {
+        // '\\'는 다른 특수문자보다 먼저 처리되어야 하므로 배열의 맨 앞에 위치해야 함
+        String[] SPECIAL_CHARS = {"\\", "^", "$", ".", "*", "+", "?", "|", "(", ")", "[", "]"};
         int delimiterEndIndex = input.indexOf("\\n");
         String customDelimiter = input.substring(2, delimiterEndIndex);
 
         if (customDelimiter.isEmpty()) {
             System.out.println("커스텀 구분자를 입력하지 않았습니다.");
             throw new IllegalArgumentException();
+        }
+
+        for (String character : SPECIAL_CHARS) {
+            if (customDelimiter.contains(character)) {
+                customDelimiter = customDelimiter.replace(character, "\\" + character);
+            }
+            System.out.println(customDelimiter);
         }
 
         return customDelimiter;
