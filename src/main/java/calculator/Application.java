@@ -2,7 +2,6 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
-import java.net.InterfaceAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -48,7 +47,6 @@ public class Application {
     // 문자열을 구분자로 구분해주는 메서드
     private static List<Integer> splitter(String delimiter, String str) {
         String[] splitedStringList = str.split("[" + Pattern.quote(delimiter) + ",:]");
-        System.out.println("strSplitByDelimiter : " + Arrays.toString(splitedStringList));
 
         List<Integer> intList = new ArrayList<>();
 
@@ -64,5 +62,18 @@ public class Application {
         return intList;
     }
 
+    // 합을 구하는 메서드
+    public static int calculator(List<Integer> intList){
+        int sum = 0;
 
+        for (int num : intList){
+            if (num > 0){
+                sum += num;
+            } else {
+                throw new IllegalArgumentException("양수만 입력해 주세요.");
+            }
+        }
+
+        return sum;
+    }
 }
