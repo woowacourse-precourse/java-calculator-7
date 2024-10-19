@@ -35,4 +35,25 @@ class SeparatorManagerTest {
                 .getSeparatedStringNumber(invalidCaseString))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void separatingWithNumberSeparatorTest() {
+        SeparatorManager numberSeparatorManager = new SeparatorManager('3');
+
+        String testString = "123456,789;123";
+
+        assertThat(numberSeparatorManager.getSeparatedStringNumber(testString))
+                .contains("12", "456", "789", "12");
+    }
+
+    @Test
+    void separatingConsecutiveSeparatorsStringTest(){
+        SeparatorManager separatorManager = new SeparatorManager(null);
+
+        String testString = "1,;,;;,;,;,;,;,;,;;,;,;,;2";
+
+        assertThat(separatorManager.getSeparatedStringNumber(testString))
+                .containsExactly("1", "2");
+
+    }
 }
