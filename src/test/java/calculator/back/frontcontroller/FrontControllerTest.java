@@ -1,6 +1,7 @@
 package calculator.back.frontcontroller;
 
 import calculator.back.controller.CalculatorController;
+import calculator.back.exception.InvalidInputException;
 import calculator.back.resolver.ArgumentResolver;
 import calculator.back.service.impl.CalculatorServiceImpl;
 import calculator.front.enums.ViewMessage;
@@ -70,7 +71,51 @@ class FrontControllerTest {
                 (message + expectedValue).replaceAll("\\s+", ""));
     }
 
-    private static List<String> inputs = List.of("//|\\n1|2:3", "//|\\n");
+    @ParameterizedTest
+    @MethodSource("emptyInput")
+    @DisplayName("빈 문자열에 대해 0을 반환")
+    void 어플리케이션_통합_테스트3(ByteArrayInputStream in) {
+        //given
+        // Scanner의 nextLine()에 입력할 값
+        System.setIn(in);
+        // 예상 값
+        String expectedValue = "0";
+
+        //when
+        frontController.run();
+
+        //then
+        assertThat(byteArrayOutputStream.toString().replaceAll("\\s+", "")).isEqualTo(
+                (message + expectedValue).replaceAll("\\s+", ""));
+    }
+
+    @ParameterizedTest
+    @MethodSource("dummyInput")
+    @DisplayName("더미 입력에 대한 예외 반환")
+    void 어플리케이션_통합_테스트4(ByteArrayInputStream in) {
+        //given
+        // Scanner의 nextLine()에 입력할 값
+        System.setIn(in);
+
+        //when
+        //then
+        assertThatThrownBy(frontController::run).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @MethodSource("delimitedNegativeNumbers")
+    @DisplayName("음수 입력에 대한 예외 반환")
+    void 어플리케이션_통합_테스트5(ByteArrayInputStream in) {
+        //given
+        // Scanner의 nextLine()에 입력할 값
+        System.setIn(in);
+
+        //when
+        //then
+        assertThatThrownBy(frontController::run).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    private static final List<String> inputs = List.of("//|\\n1|2:3", "//|\\n", "\n", "asdasd12as", "-1,2,3");
 
     static Stream<ByteArrayInputStream> validTestInput() {
         return Stream.of(new ByteArrayInputStream(inputs.get(0).getBytes()));
@@ -78,6 +123,18 @@ class FrontControllerTest {
 
     static Stream<ByteArrayInputStream> noDelimitedNumbers() {
         return Stream.of(new ByteArrayInputStream(inputs.get(1).getBytes()));
+    }
+
+    static Stream<ByteArrayInputStream> emptyInput() {
+        return Stream.of(new ByteArrayInputStream(inputs.get(2).getBytes()));
+    }
+
+    static Stream<ByteArrayInputStream> dummyInput() {
+        return Stream.of(new ByteArrayInputStream(inputs.get(3).getBytes()));
+    }
+
+    static Stream<ByteArrayInputStream> delimitedNegativeNumbers() {
+        return Stream.of(new ByteArrayInputStream(inputs.get(3).getBytes()));
     }
 
 }
