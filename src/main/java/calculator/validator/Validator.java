@@ -1,5 +1,7 @@
 package calculator.validator;
 
+import java.util.ArrayList;
+
 public class Validator {
 
     //문자열이 비어있는지 검사하는 메소드
@@ -17,5 +19,18 @@ public class Validator {
             }
         }
         return false;
+    }
+
+    //커스텀 구분자를 사용하였는지 검사
+    public void checkCustomSeparator(String input, ArrayList<String> separator) {
+        if (input.charAt(0) != '/' && input.charAt(1) != '/') {
+            return;
+        }
+        for (int i = 2; i < input.length(); i++) {
+            if (input.charAt(i) == '\\' && input.charAt(i + 1) == 'n') {
+                separator.add(input.substring(2, i));
+                return;
+            }
+        }
     }
 }
