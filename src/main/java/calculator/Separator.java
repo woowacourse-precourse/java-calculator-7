@@ -1,7 +1,6 @@
 package calculator;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Separator {
@@ -61,15 +60,13 @@ public class Separator {
     }
 
     private int getFirstSeparatorIndex() {
-        List<Integer> index = new ArrayList<>();
-        for (Character separator : separators) {
-            int idx = string.indexOf(separator);
-            if (idx != -1) {
-                index.add(idx);
+        int idx = 0;
+        for (; idx < string.length(); idx++) {
+            if (!(string.charAt(idx) - '0' >= 0 && string.charAt(idx) - '0' <= 9)) {
+                break;
             }
         }
-        Collections.sort(index);
-        return index.getFirst();
+        return idx;
     }
 
     public int calculateSum() {
