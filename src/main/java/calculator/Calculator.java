@@ -25,7 +25,7 @@ public class Calculator {
         // 커스텀 구분자 설정
         Matcher matcher = customSeparatorCmdPattern.matcher(cmd);
         if (matcher.find()) { // 사용자가 커스텀 구분자 설정 명령을 입력했을 시
-            registerCustomSeparator(matcher);
+            registerCustomSeparator(matcher.group().charAt(customSeparatorIdx));
 
             // 구분자 등록에 사용됐던 명령어 제거
             cmd = cmd.replace(matcher.group(), "");
@@ -64,9 +64,7 @@ public class Calculator {
      *
      * @throws IllegalArgumentException 숫자를 커스텀 구분자로 등록하려는 경우
      */
-    private void registerCustomSeparator(Matcher matcher) {
-        char customSeparator = matcher.group().charAt(customSeparatorIdx);
-
+    private void registerCustomSeparator(char customSeparator) {
         if (Character.isDigit(customSeparator)) {
             throw new IllegalArgumentException("숫자는 커스텀 구분자로 등록 불가");
         }
