@@ -18,4 +18,11 @@ public class Validator {
 
     return matcher.find();
   }
+  public static Boolean checkRemainStringFormat(String remainingInput, String customDelimiter) {
+    String rex = "^[0-9]+([" + customDelimiter + "]\\d+)*$";
+    Pattern pattern = Pattern.compile(rex);
+    Matcher matcher = pattern.matcher(remainingInput);
+
+    return matcher.find();
+  }
 }
