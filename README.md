@@ -13,8 +13,8 @@
    2. 주어진 피연산자(정수이며, 정책을 따름이 보장됨)와 연산을 통해 최종 결과값을 반환
 
 ## 리팩토링
-~~### exception 처리
-단순 IllegalArgumentException + msg 조합으로 새로운 exceptions 정의~~
+~~### exception 처리  
+단순 IllegalArgumentException + msg 조합으로 새로운 exceptions 정의~~  
 기존의 방식대로 IllegalArgumentException에 msg를 적는것으로 대체
 
 ## 문서 작성
