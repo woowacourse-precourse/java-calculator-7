@@ -15,9 +15,9 @@ public class StringCalculator {
 	}
 
 	private static String[] splitWithCustomSplitter(String input){
-		int splitterFindStartIndex = input.indexOf("\\n");
-		String customSplitter = input.substring(2, splitterFindStartIndex);
-		String inputSubString = input.substring(splitterFindStartIndex + 2);
+		int splitterFindEndIndex = input.indexOf("\\n");
+		String customSplitter = input.substring(2, splitterFindEndIndex);
+		String inputSubString = input.substring(splitterFindEndIndex + 2);
 		return inputSubString.split(customSplitter);
 	}
 
