@@ -3,7 +3,8 @@ package calculator;
 public class Application {
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        Input input = new Input();
+        String inputString = camp.nextstep.edu.missionutils.Console.readLine();
+        Input input = new Input(inputString);
         if (input.isValid()) {
             int result = Calculator.sum(input.getNumbersFromInput());
             System.out.println("결과 : " + result);

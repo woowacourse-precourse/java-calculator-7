@@ -2,30 +2,15 @@ package calculator;
 
 import java.util.ArrayList;
 
-public class Input {
-    private final String input;
-
-    public Input() {
-        this.input = readInput();
-    }
-
-    private String readInput() {
-        return camp.nextstep.edu.missionutils.Console.readLine();
-    }
-
-
-    public String getInput() {
-        return input;
-    }
-
+public record Input(String inputString) {
     public boolean isValid() {
-        if (input.isEmpty() || input.matches("\\d+")) {
+        if (inputString.isEmpty() || inputString.matches("\\d+")) {
             return true;
         } else {
-            if (input.matches("\\d+([,:]\\d+)*")) {
+            if (inputString.matches("\\d+([,:]\\d+)*")) {
                 return true;
-            } else if (input.charAt(0) == '/') {
-                ArrayList<String> customDelimiters = Delimiter.getCustomDelimiters(input);
+            } else if (inputString.charAt(0) == '/') {
+                ArrayList<String> customDelimiters = Delimiter.getCustomDelimiters(inputString);
                 if (customDelimiters.isEmpty()) {
                     return false;
                 } else {
@@ -34,9 +19,8 @@ public class Input {
                         delimiterPattern.append(delimiter);
                     }
                     String regex = "(//(.)\\\\n)+\\d+([" + delimiterPattern + "]\\d+)*";
-                    return input.matches(regex);
+                    return inputString.matches(regex);
                 }
-
             } else {
                 return false;
             }
@@ -44,18 +28,19 @@ public class Input {
     }
 
     private String[] splitStringByDelimiter() {
-        StringBuilder inputPart = new StringBuilder(input);
+        StringBuilder inputPart = new StringBuilder(inputString);
 
         if (inputPart.isEmpty()) {
             return new String[]{"0"};
         }
+
         if (inputPart.charAt(0) == '/') {
             while (inputPart.charAt(0) == '/') {
                 inputPart.delete(0, 5);
             }
         }
 
-        ArrayList<String> delimiters = Delimiter.getCustomDelimiters(input);
+        ArrayList<String> delimiters = Delimiter.getCustomDelimiters(inputString);
         delimiters.add(",");
         delimiters.add(":");
 
