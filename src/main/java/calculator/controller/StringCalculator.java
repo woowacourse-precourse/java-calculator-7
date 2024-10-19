@@ -9,12 +9,15 @@ import calculator.view.InputView;
 import calculator.view.OutputView;
 import java.util.List;
 
+/**
+ * 문자열 계산기 Controller
+ */
 public class StringCalculator {
-    private InputView inputView;
-    private OutputView outputView;
-    private DelimiterExtractor delimiterExtractor;
-    private DelimiterTokenizer delimiterTokenizer;
-    private ResultCalculator resultCalculator;
+    private InputView inputView;     // 콘솔 입력
+    private OutputView outputView;      // 콘솔 출력
+    private DelimiterExtractor delimiterExtractor;      // 구분자 추출 객체
+    private DelimiterTokenizer delimiterTokenizer;      // 구분자를 기준으로 문자를 분리하는 객체
+    private ResultCalculator resultCalculator;      // 결과 값 계산 객체
 
     public StringCalculator(InputView inputView, OutputView outputView, DelimiterExtractor delimiterExtractor,
                             DelimiterTokenizer delimiterTokenizer, ResultCalculator resultCalculator) {
