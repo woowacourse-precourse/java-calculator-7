@@ -3,7 +3,7 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 
-public class CalculatorDisplay implements ICalculatorDisplay {
+public class CalculatorDisplayImpl implements ICalculatorDisplay {
 
     private static final String inputMessage = "덧셈할 문자열을 입력해 주세요.";
     private static final String outputMessage = "결과 : %d";
