@@ -30,6 +30,7 @@ public class Application {
             delimiter = addCustomDelimiter(delimiter, input);  // 기본 구분자에 커스텀 구분자 추가
             input = Console.readLine();
         }
+        System.out.println(delimiter);
         // 문자열을 구분자로 분리하여 숫자 배열 추출
         numbers = extractNumbers(input, delimiter);
         sum = Arrays.stream(numbers).sum();  // 숫자들 합 계산
@@ -48,6 +49,9 @@ public class Application {
         for (int i = 2; i < input.length(); i++) {
             char currentChar = input.charAt(i);
             if (currentChar == '\\') {
+                if( i+1 < input.length() && input.charAt(i+1) == 'n'){
+                    break;
+                }
                 delimiterBuilder.append("|\\\\");
             } else {
                 delimiterBuilder.append("|").append(currentChar);
