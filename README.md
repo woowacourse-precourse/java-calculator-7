@@ -3,8 +3,8 @@
 ### 기능 목록
 
 1. **Application**
-    - 컨트롤러를 통해 프로그램 실행
-    - 컨트롤러를 통해 프로그램 종료(System.exit()를 호출하지 않는다.)
+    - Calculator를 통해 프로그램 실행
+    - Calculator를 통해 프로그램 종료(System.exit()를 호출하지 않는다.)
 
 2. **Calculator**
     - 계산 실행
