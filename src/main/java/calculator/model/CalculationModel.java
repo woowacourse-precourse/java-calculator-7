@@ -6,6 +6,9 @@ public class CalculationModel {
     private ArrayList<Integer> numbers = new ArrayList<>();
     private ArrayList<Character> separate = new ArrayList<>();
 
+    public int calculateSum() {
+        return numbers.stream().mapToInt(Integer::intValue).sum();
+    }
 
     public void parseInput(String input){
         if(input == null || input.isEmpty()){
