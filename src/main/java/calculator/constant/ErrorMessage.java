@@ -1,17 +1,9 @@
 package calculator.constant;
 
-public enum ErrorMessage {
+public class ErrorMessage {
 
-    INVALID_INPUT("유효하지 않은 입력입니다."),
-    REQUIRED_POSITIVE_NUMBER("양수로 구성된 문자열을 입력해주세요.");
+    private static final String ERROR = "[ERROR]";
+    public static final String INVALID_INPUT = ERROR + "유효하지 않은 입력입니다.";
+    public static final String REQUIRED_POSITIVE_NUMBER = ERROR + "양수로 구성된 문자열을 입력해주세요.";
 
-    private final String message;
-
-    ErrorMessage(String message) {
-        this.message = message;
-    }
-
-    public String getMessage() {
-        return message;
-    }
 }
