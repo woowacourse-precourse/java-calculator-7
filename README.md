@@ -8,9 +8,9 @@
 
 - [X] 계산기 시작 안내 문자열 출력
 
-- [ ] 입력 받기
+- [X] 입력 받기
 
-    - [ ] `camp.nextstep.edu.missionutils.Console`의 readLine() 활용
+    - [X] `camp.nextstep.edu.missionutils.Console`의 readLine() 활용
 
 ### 구분자 설정 기능
 
