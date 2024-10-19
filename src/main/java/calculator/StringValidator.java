@@ -12,7 +12,7 @@ public class StringValidator {
 
     public static List<String> userInputValidator(String userInput) {
         vaildateNulll(userInput);
-
+        
         List<Delimiter> delimiter = delimiterValidator(userInput);
         return setDelimiter(userInput, delimiter);
     }
@@ -71,5 +71,26 @@ public class StringValidator {
             throw new IllegalArgumentException();
         }
     }
-    
+
+    public static String getSumCustomString(String userInput) throws IllegalArgumentException {
+        Pattern customPattern = Pattern.compile("//(.)\\\\n|//(.)\n");
+        Matcher matcher = customPattern.matcher(userInput);
+
+        if (matcher.find()) {
+            int sumStringIndex = matcher.end();
+            return userInput.substring(sumStringIndex);
+        } else {
+            throw new IllegalArgumentException("계산할 문자열이 존재하지 않습니다.");
+        }
+    }
+
+    public static String getSumString(String userInput, Delimiter delimiter) throws IllegalArgumentException {
+        String sumString = "";
+        if (isCustom(delimiter)) {
+            sumString = getSumCustomString(userInput);
+        } else {
+            sumString = userInput;
+        }
+        return sumString;
+    }
 }
