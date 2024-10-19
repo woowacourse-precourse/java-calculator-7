@@ -3,13 +3,13 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class StringCalculator {
+    private String userInput;
 
     public void run() {
-        String input = inputString();
+        userInput = getUserInput();
     }
 
-    private String inputString() {
-        String input = Console.readLine();
-        return input;
+    private String getUserInput() {
+        return Console.readLine();
     }
 }
