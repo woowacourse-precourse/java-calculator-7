@@ -1,6 +1,5 @@
 package calculator.core.service;
 
-import calculator.core.service.CalculateService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -79,49 +78,34 @@ public class CalculateServiceTest {
     }
 
     @Test
-    void 기본_잘못된_입력값_양수아닐떄_예외처리() {
+    void 커스텀_구분자_포맷_불일치_양수_예외처리() {
+        //given
+        String input = "// | \\n1|2|33";
+
+        //when
+        assertThatThrownBy(() -> calculateService.calculate(input)).isExactlyInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 기본_구분자_양수_예외처리() {
         //given
         String input = "1:2,a";
 
         //when
-        assertThatThrownBy(() -> calculateService.calculate(input)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> calculateService.calculate(input)).isExactlyInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    void 커스텀_잘못된_입력값_양수아닐떄_예외처리() {
+    void 커스텀_구분자_양수_예외처리() {
         //given
         String input = "//|\\n1|2|-3";
 
         //when
-        assertThatThrownBy(() -> calculateService.calculate(input)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> calculateService.calculate(input)).isExactlyInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    void 정상_테스트케이스1() {
-        //given
-        String input = "//;\\n1";
-
-        //when
-        BigInteger sum = calculateService.calculate(input);
-
-        //then
-        assertThat(sum).isEqualTo(1);
-    }
-
-    @Test
-    void 정상_테스트케이스2() {
-        //given
-        String input = "//;\\n1";
-
-        //when
-        BigInteger sum = calculateService.calculate(input);
-
-        //then
-        assertThat(sum).isEqualTo(1);
-    }
-
-    @Test
-    void 정상_테스트케이스3() {
+    void 커스텀_구분자_공백_문자_허용() {
         //given
         String input = "// \\n1 2 3";
 
@@ -133,21 +117,47 @@ public class CalculateServiceTest {
     }
 
     @Test
-    void 정상_테스트케이스4() {
+    void 기본_Long타입_MAX_VALUE_계산() {
         //given
-        String input = "//\\\\n1\\2\\3";
+        String input = "9223372036854775807,9223372036854775807";
+        BigInteger expectSum = BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.valueOf(Long.MAX_VALUE));
 
         //when
         BigInteger sum = calculateService.calculate(input);
 
         //then
-        assertThat(sum).isEqualTo(6);
+        assertThat(sum).isEqualTo(expectSum);
     }
 
     @Test
-    void 정상_테스트케이스5() {
+    void 커스텀_Long타입_MAX_VALUE_계산() {
         //given
-        String input = "// \\n1 2:3";
+        String input = "//}\\n9223372036854775807}9223372036854775807";
+        BigInteger expectSum = BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.valueOf(Long.MAX_VALUE));
+
+        //when
+        BigInteger sum = calculateService.calculate(input);
+
+        //then
+        assertThat(sum).isEqualTo(expectSum);
+    }
+
+    @Test
+    void 커스텀_구분자가_기본_구분자_동일_허용() {
+        //given
+        String input = "//:\\n123:456,789,10";
+
+        //when
+        BigInteger sum = calculateService.calculate(input);
+
+        //then
+        assertThat(sum).isEqualTo(1378);
+    }
+
+    @Test
+    void 커스텀_구분자_역슬래쉬_허용() {
+        //given
+        String input = "//\\\\n1\\2\\3";
 
         //when
         BigInteger sum = calculateService.calculate(input);

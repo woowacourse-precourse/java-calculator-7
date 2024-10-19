@@ -8,17 +8,17 @@ import java.math.BigInteger;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class StringToBigIntegerConverterTest {
+public class StringToPositiveBigIntegerConverterTest {
 
-    StringToBigIntegerConverter converter;
+    StringToPositiveBigIntegerConverter converter;
 
     @BeforeEach
     void before() {
-        converter = new StringToBigIntegerConverter();
+        converter = new StringToPositiveBigIntegerConverter();
     }
 
     @Test
-    void TDD_문자열_숫자_변환_실패() {
+    void TDD_문자_양수_변환_실패() {
         //given
         String input = "test";
 
@@ -27,7 +27,25 @@ public class StringToBigIntegerConverterTest {
     }
 
     @Test
-    void 문자열_숫자_변환_성공() {
+    void TDD_문자_숫자_혼합_양수_변환_실패() {
+        //given
+        String input = "3123abcd\n";
+
+        //when
+        assertThatThrownBy(() -> converter.convert(input)).isExactlyInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void TDD_정수_양수_변환_실패() {
+        //given
+        String input = "0";
+
+        //when
+        assertThatThrownBy(() -> converter.convert(input)).isExactlyInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 문자_양수_변환_성공() {
         //given
         String input = "123";
 
@@ -36,23 +54,5 @@ public class StringToBigIntegerConverterTest {
 
         //then
         assertThat(result).isEqualTo(BigInteger.valueOf(123));
-    }
-
-    @Test
-    void TDD_문자열_숫자_변환_실패시_예외처리() {
-        //given
-        String input = "3123\n";
-
-        //when
-        assertThatThrownBy(() -> converter.convert(input)).isExactlyInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    void TDD_문자열_양수_아닐시_예외처리() {
-        //given
-        String input = "0";
-
-        //when
-        assertThatThrownBy(() -> converter.convert(input)).isExactlyInstanceOf(IllegalArgumentException.class);
     }
 }
