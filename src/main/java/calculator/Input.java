@@ -49,6 +49,19 @@ public class Input {
                 && validLastSeparator(input);
     }
 
+    /** 커스텀 구분자 모듈 **/
+    //사용자가 커스텀 구분자를 사용하였을 경우, 앞 열 위치인지, 구분자가 문자인지 검증
+    public static boolean validCustomFrontAndCharacter(String input){
+        if(input.length() > 1){
+            return input.indexOf("/") == 0
+                    && input.indexOf("/") == 1
+                    && !Character.isDigit(input.charAt(2))
+                    && input.indexOf("\n") == 3;
+        }else{
+            return false;
+        }
+    }
+
     /** 공통 모듈 **/
     //사용자가 입력한 기본 구분자만 들어갔는지 검증
     public static boolean validSeparator(String input){
