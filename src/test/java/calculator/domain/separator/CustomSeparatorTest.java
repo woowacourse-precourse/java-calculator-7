@@ -4,7 +4,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import calculator.domain.number.Number;
-import java.util.List;
+import calculator.domain.number.Numbers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -21,17 +21,17 @@ class CustomSeparatorTest {
     @ParameterizedTest
     @ValueSource(strings = "//;\\n1;2;3")
     void 커스텀구분자(String value) {
-        List<Number> numbers = customSeparator.separate(value);
+        Numbers numbers = customSeparator.separate(value);
 
-        assertThat(numbers.size()).isEqualTo(3);
+        assertThat(numbers.getNumbers().size()).isEqualTo(3);
     }
 
     @ParameterizedTest
     @ValueSource(strings = "//;\\n1.2;2.3;3.3")
     void 커스텀구분자실수(String value) {
-        List<Number> numbers = customSeparator.separate(value);
+        Numbers numbers = customSeparator.separate(value);
 
-        assertThat(numbers.size()).isEqualTo(3);
+        assertThat(numbers.getNumbers().size()).isEqualTo(3);
     }
 
     @ParameterizedTest
@@ -58,10 +58,10 @@ class CustomSeparatorTest {
     @ParameterizedTest
     @ValueSource(strings = "//;\\n")
     void 커스텀구분자빈문자열(String value) {
-        List<Number> numbers = customSeparator.separate(value);
-        Number number = numbers.getFirst();
+        Numbers numbers = customSeparator.separate(value);
+        Number number = numbers.getNumbers().getFirst();
 
-        assertThat(numbers.size()).isEqualTo(1);
+        assertThat(numbers.getNumbers().size()).isEqualTo(1);
         assertThat(number.getValue()).isEqualTo(0);
     }
 }
