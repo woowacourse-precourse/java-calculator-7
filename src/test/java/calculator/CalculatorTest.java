@@ -86,7 +86,7 @@ class CalculatorTest {
 	void sumNumbers_throwsExceptionForOverflow() {
 		//given
 		Calculator calculator = new Calculator();
-		List<Integer> testInput = List.of(2100000000, 500000000);
+		List<Integer> testInput = List.of(Integer.MAX_VALUE, 1);
 
 		//when & then
 		assertThatThrownBy(() -> calculator.sumNumbers(testInput))
