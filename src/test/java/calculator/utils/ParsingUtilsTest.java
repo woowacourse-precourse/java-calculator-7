@@ -25,7 +25,7 @@ class ParsingUtilsTest {
     @Test
     @DisplayName("사용자 입력 두 부분 나누기 - 커스텀 O")
     void 사용자_입력_분리_커스텀_O_테스트(){
-        String userInput = "//[]\n1,2:3";
+        String userInput = "//[]\\n1,2:3";
 
         List<String> parsedUserInput = parsingUserInput(userInput);
 
