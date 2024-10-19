@@ -8,7 +8,7 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class Application {
 
-    public static String sep = ",|:";
+    public static String sep = "\\,|\\:";
 
     public static int add_arrays(int[] nums){
 
@@ -49,15 +49,42 @@ public class Application {
         return result;
     }
 
+    public static String set_custom(String str){
+
+        String[] strs = str.split("\\\\n");
+        for(int i = 0; i<strs.length; i++){
+            if(strs[i].charAt(0) == '/'){
+                // 커스텀 구분자 지정일것
+                if(strs[i].length() == 3){
+                    if(strs[i].charAt(1) == '/') {
+                        sep += ("|" + strs[i].charAt(2));
+                        continue;
+                    }
+                }
+                // 길이가 3이 아니란건
+                // //문자열 <- 형식을 지키지 않았다는것!
+                throw new IllegalArgumentException("이상하오...");
+            }else{
+                // 커스텀 구분자는 아님!
+                return strs[i];
+            }
+        }
+
+        return "";
+    }
+
     public static void main(String[] args) {
         // TODO: 프로그램 구현
 
 
 
         String inputtext = readLine();
-        int[] nums = parsing_string(inputtext);
 
-        System.out.println(add_arrays(nums));
+        String strnums = set_custom(inputtext);
+
+        int[] nums = parsing_string(strnums);
+
+        System.out.println("결과 : " + add_arrays(nums));
 
     }
 }
