@@ -33,7 +33,16 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 숫자만_입력_예외_테스트() {
+    void 숫자0_입력_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("0"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+
+    @Test
+    void 숫자만_입력_테스트() {
         assertSimpleTest(() -> {
             run("910");
             assertThat(output()).contains("결과 : 910");
@@ -41,7 +50,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 빈문자_입력_예외_테스트() {
+    void 빈문자_입력_테스트() {
 
         assertSimpleTest(() -> {
             run("\n");
@@ -50,7 +59,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 구분자만_입력_예외_테스트() {
+    void 구분자만_입력_테스트() {
         assertSimpleTest(() -> {
             run(":");
             assertThat(output()).contains("결과 : 0");
@@ -58,7 +67,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀_구분자가_여러개인_입력_예외_테스트() {
+    void 커스텀_구분자가_여러개인_입력_테스트() {
         assertSimpleTest(() -> {
             run("4,5//%\\n6%7//,\\n8,9");
             assertThat(output()).contains("결과 : 147");
@@ -74,10 +83,18 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀구분자가_여러_문자인_입력_예외_테스트() {
+    void 커스텀구분자가_여러_문자인_입력_테스트() {
         assertSimpleTest(() -> {
             run("4:;4//:;\\n");
             assertThat(output()).contains("결과 : 8");
+        });
+    }
+
+    @Test
+    void 커스텀구분자를_지정하는_문자열만_있는_입력_테스트() {
+        assertSimpleTest(() -> {
+            run("//%\\n");
+            assertThat(output()).contains("결과 : 0");
         });
     }
 
