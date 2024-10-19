@@ -1,5 +1,8 @@
 package calculator.model.number;
 
+import static calculator.model.delimiter.CustomDelimiter.CUSTOM_DELIMITER_SUFFIX;
+
+import calculator.model.delimiter.CustomDelimiter;
 import calculator.model.delimiter.Delimiter;
 import calculator.model.delimiter.DelimiterParser;
 import java.util.ArrayList;
@@ -25,7 +28,10 @@ public class NumberParser {
     }
 
     private String extractTargetString(final String input) {
-        return input.substring(delimiter.getDelimiterEnd() + 2);
+        if (delimiter instanceof CustomDelimiter) {
+            return input.substring(input.indexOf(CUSTOM_DELIMITER_SUFFIX) + CUSTOM_DELIMITER_SUFFIX.length());
+        }
+        return input;
     }
 
     public List<Number> getNumbers() {

@@ -4,6 +4,4 @@ import java.util.Set;
 
 public interface Delimiter {
     Set<String> getDelimiters();
-
-    int getDelimiterEnd();
 }
