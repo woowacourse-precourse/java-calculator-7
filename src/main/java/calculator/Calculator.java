@@ -51,7 +51,6 @@ public class Calculator {
     }
 
     private void printResult() {
-        System.out.print("결과 : ");
         System.out.println("결과 : " + Arrays.stream(operand).sum());
     }
 
