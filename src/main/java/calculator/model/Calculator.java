@@ -1,5 +1,7 @@
 package calculator.model;
 
+import static calculator.util.ErrorMessages.ERROR_NUMBER_TYPE;
+
 public class Calculator {
     private String str;
     private String[] strArr;
@@ -18,31 +20,40 @@ public class Calculator {
         return this.str.isEmpty();
     }
 
-    public void parseNumbers(){
-        if(validateCustom()) customParse();
-        else normalParse();
+    public void split(){
+        if(validateCustom())
+            customSplit();
+        else
+            normalSplit();
     }
 
     public boolean validateCustom(){
-        return str.startsWith("/");
+        return str.startsWith("//");
     }
 
-    public void customParse(){
+    public void customSplit(){
         String separator = String.valueOf(this.str.charAt(2));
         this.str = this.str.substring(5);
         this.strArr = this.str.split(separator);
     }
 
-    public void normalParse(){
-        this.strArr = this.str.split("[,;]");
+    public void normalSplit(){
+        this.strArr = this.str.split("[,:]");
     }
 
     public int sumNumbers(){
+        if(isValidationNullOrEmpty())
+            return 0;
+
         for(String a : this.strArr){
             int number = Integer.parseInt(a);
-            if(number < 0) throw new IllegalArgumentException();
+            if(number < 0) throw new IllegalArgumentException(ERROR_NUMBER_TYPE);
             this.answer += number;
         }
         return answer;
+    }
+
+    public void validateNumbers(){
+
     }
 }
