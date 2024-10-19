@@ -1,21 +1,52 @@
 # java-calculator-precourse
 
-## 구현 목록 정리
+### 구현 목록 정리
+
 - [x] 문자열 입력
-  - [x] Console API 파악
-  - [x] 입력받은 문자열 원본 저장하기
+    - [x] Console API 파악
+    - [x] 입력받은 문자열 원본 저장하기
 - [x] 구분자 파싱
-  - [x] 커스텀 구분자 파싱 및 배열에 추가
-  - [x] 일반 구분자 배열에 추가
+    - [x] 커스텀 구분자 파싱 및 배열에 추가
+    - [x] 일반 구분자 배열에 추가
 - [x] 피연산자 파싱
-  - [x] 구분자 제거
-  - [x] 피연산자 배열에 추가
+    - [x] 구분자 제거
+    - [x] 피연산자 배열에 추가
 - [x] 예외처리
 - [ ] 리팩토링
 - [ ] 테스트코드 작성
 - [x] 결과 출력
 
+### 파일 구조
+
+```agsl
+└── src
+    ├── main
+    │   └── java
+    │       └── calculator
+    │           ├── Application.java
+    │           ├── controller
+    │           │   └── CalculatorController.java
+    │           ├── model
+    │           │   └── CalculatorModel.java
+    │           ├── utils
+    │           │   └── Parser.java
+    │           └── view
+    │               └── CalculatorView.java
+    └── test
+        └── java
+            └── calculator
+                └── ApplicationTest.java
+
+```
+
+### 클래스 다이어그램
+
+![우테코diagram.png](..%2F..%2F..%2F..%2FDownloads%2F%EC%9A%B0%ED%85%8C%EC%BD%94diagram.png)
+
+---
+
 # Github
+
 ## 커밋 메시지 포맷
 
 ```
@@ -29,12 +60,14 @@
 길이 제한: 각 줄은 100자를 넘지 않도록 해야 하며, 이는 GitHub 및 기타 Git 도구에서 읽기 쉽게 하기 위함입니다.
 
 ## Subject Line
+
 간결하게 변경 사항을 설명합니다.
 명령형, 현재 시제를 사용합니다. (“change” not “changed” nor “changes”)
 첫 글자를 대문자로 쓰지 않습니다.
 마지막에 마침표를 넣지 않습니다.
 
 ## Allowed <type>
+
 ```
 feat: 새로운 기능
 fix: 버그 수정
@@ -45,18 +78,26 @@ test: 테스트 추가
 chore: 기타 유지보수 작업
 ```
 
-
 ## Allowed <scope>
+
 변경 사항이 발생한 위치를 명시합니다. (예: $location, $browser, $compile)
+
 ## \<subject> Text
+
 명령형, 현재 시제를 사용합니다. (“change” not “changed” nor “changes”)
 첫 글자를 소문자로 시작하고, 마침표를 사용하지 않습니다.
+
 ## Message Body
+
 제목과 마찬가지로 명령형, 현재 시제를 사용합니다.
 변경의 동기와 이전 동작과의 차이점을 설명합니다.
+
 ## Message Footer
+
 ### Breaking Changes
+
 모든 호환되지 않는 변경 사항은 꼬리말에 명시해야 하며, 변경 사항 설명과 함께 마이그레이션 가이드를 포함해야 합니다.
+
 ```
 BREAKING CHANGE: 설명 내용...
 
@@ -77,9 +118,8 @@ myExpression: '&'
 }
 ```
 
-
-
 ### Referencing Issues
+
 해결된 버그는 꼬리말에서 Closes 키워드로 참조합니다.
 
 `Closes #123`
@@ -88,6 +128,7 @@ myExpression: '&'
 `Closes #123, #245, #992`
 
 ## Examples
+
 ```
 feat($browser): onUrlChange event (popstate/hashchange/polling)
 
@@ -98,7 +139,6 @@ Added new event to $browser:
 
 BREAKING CHANGE: $browser.onHashChange was removed. Use onUrlChange instead.
 ```
-
 
 ```
 fix($compile): couple of unit tests for IE9
