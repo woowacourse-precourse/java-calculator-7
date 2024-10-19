@@ -11,8 +11,6 @@ public class Application {
             System.out.println("연산 가능한 범위를 초과했습니다.");
         } catch (Exception e) {
             System.out.println("에러가 발생했습니다.");
-        } finally {
-            System.exit(0);
         }
     }
 }
