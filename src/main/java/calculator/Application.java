@@ -2,6 +2,24 @@ package calculator;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+
+        String input = getInput();
+
+        int result = processInput(input);
+
+        printOutput(result);
     }
+
+    private static String getInput() {
+        return "";
+    }
+
+    private static int processInput(String input) {
+        return 0;
+    }
+
+
+    private static void printOutput(int result) {
+    }
+
 }
