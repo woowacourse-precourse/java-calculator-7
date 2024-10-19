@@ -4,8 +4,6 @@ public class CustomInspector extends ContentInspector {
     protected String originalContent;
     private String convertedContent;
     private String separator = ",|:";
-    private String separatorPrefix;
-    private String separatorSuffix;
 
     public CustomInspector(String originalContent) {
         this.originalContent = originalContent;

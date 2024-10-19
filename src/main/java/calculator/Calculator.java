@@ -49,7 +49,7 @@ public class Calculator {
     }
 
     private void detectNegativeValueException(BigInteger bigInteger) {
-        if (bigInteger.compareTo(BigInteger.ZERO) == -1) {
+        if (bigInteger.compareTo(BigInteger.ZERO) < 0) {
             throw new IllegalArgumentException("음수가 입력되었음");
         }
     }
