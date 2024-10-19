@@ -22,4 +22,18 @@ class InputViewTest {
 
         Assertions.assertThat(result).isEqualTo(input);
     }
+
+    @ParameterizedTest
+    @DisplayName("허용된 형식을 입력하지 않으면 예외가 발생한다.")
+    @ValueSource(strings = {"1,", "1,,", ",", "1+1",
+            "//a\\na", "//\\n1:1", "//a\\n1+1", "//"})
+    void validateByRegex(String input) {
+        InputStream inputStream = new ByteArrayInputStream(input.getBytes());
+        System.setIn(inputStream);
+
+        InputView inputView = new InputView();
+
+        Assertions.assertThatThrownBy(inputView::getInput).isInstanceOf(IllegalArgumentException.class);
+        Console.close();
+    }
 }
