@@ -11,10 +11,15 @@ public class StringCalculator {
 
     public void run() {
         String input = askForStringInput();
+
         String[] extractedNumbers = extractNumbersFrom(input);
+
         validateInput(extractedNumbers);
+
         int sum = calulateSum(extractedNumbers);
+
         showSum(sum);
+
         close();
     }
 
@@ -24,10 +29,9 @@ public class StringCalculator {
     }
 
     private String[] extractNumbersFrom(String input) {
-        if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
-            return splitByCustomDelimiter(input);
-        }
-        return splitByDefaultDelimiter(input);
+        return input.startsWith(CUSTOM_DELIMITER_PREFIX)
+                ? splitByCustomDelimiter(input)
+                : splitByDefaultDelimiter(input);
     }
 
     private static String[] splitByDefaultDelimiter(String input) {
@@ -48,7 +52,10 @@ public class StringCalculator {
 
     private void validateInput(String[] numbers) {
         for (String number : numbers) {
-            if (number.isEmpty()) continue;
+            if (number.isEmpty()) {
+                continue;
+            }
+
             isNagative(number);
         }
     }
@@ -62,14 +69,17 @@ public class StringCalculator {
     private int calulateSum(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
-            if (number.isEmpty()) continue;
+            if (number.isEmpty()) {
+                continue;
+            }
+
             sum += Integer.parseInt(number);
         }
+
         return sum;
     }
 
     private void showSum(int sum) {
         System.out.println("결과 : " + sum);
     }
-
 }
