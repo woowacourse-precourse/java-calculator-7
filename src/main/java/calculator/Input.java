@@ -64,4 +64,15 @@ public class Input {
         return new String(inputPart).split(regex);
     }
 
+    public int[] getNumbersFromInput() {
+        String[] stringArr = this.splitStringByDelimiter();
+        int[] numArr = new int[stringArr.length];
+
+        for (int i = 0; i < stringArr.length; i++) {
+            numArr[i] = Integer.parseInt(stringArr[i].trim());
+        }
+
+        return numArr;
+    }
+
 }
