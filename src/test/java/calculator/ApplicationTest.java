@@ -181,4 +181,13 @@ class ApplicationTest extends NsTest {
         });
         assertEquals(ENDS_WITH_SEPARATOR.message(), exception.getMessage());
     }
+
+    @Test
+    void 기본_구분자를_사용하고_기본_구분자로_나뉘어진_모든_요소가_숫자가_아닌_경우() {
+        final String input = "1,2:A";
+        SeparationException exception = assertThrows(SeparationException.class, () -> {
+            basicSeparationService.getNumbers(input, BASIC_SEPARATOR_COMMA, BASIC_SEPARATOR_COLON);
+        });
+        assertEquals(INVALID_SEPARATOR.message(), exception.getMessage());
+    }
 }
