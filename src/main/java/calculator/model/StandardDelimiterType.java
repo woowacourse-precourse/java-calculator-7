@@ -2,7 +2,7 @@ package calculator.model;
 
 public enum StandardDelimiterType {
     COMMA(","),
-    COLON(";");
+    COLON(":");
 
     private final String delimiter;
 

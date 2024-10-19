@@ -2,7 +2,7 @@ package calculator.model;
 
 public class CustomDelimiter{
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
-    private static final String CUSTOM_DELIMITER_SUFFIX = "\n";
+    private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
     private static final int PREFIX_LENGTH = 2;
     private final String delimiter;
 
@@ -26,7 +26,7 @@ public class CustomDelimiter{
 
     public String getAffixDelimiter(){
         return delimiter != null
-            ? CUSTOM_DELIMITER_PREFIX + delimiter + CUSTOM_DELIMITER_PREFIX
+            ? CUSTOM_DELIMITER_PREFIX + delimiter + CUSTOM_DELIMITER_SUFFIX
             : null;
     }
 }

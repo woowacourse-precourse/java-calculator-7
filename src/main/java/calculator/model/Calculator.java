@@ -17,5 +17,4 @@ public class Calculator {
             mapToInt(Integer::intValue)
             .sum();
     }
-
 }

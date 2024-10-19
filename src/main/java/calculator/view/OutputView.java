@@ -15,7 +15,7 @@ public class OutputView {
     }
 
     public void printResult(int result){
-        System.out.println(RESULT_MESSAGE + result);
+        System.out.print(RESULT_MESSAGE + result);
     }
 
     public void closeOutputView() {
