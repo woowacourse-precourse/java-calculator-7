@@ -21,7 +21,7 @@ public class Application {
             if (input.length() < 4 || input.charAt(3) != '\n') {
                 throw new IllegalArgumentException("커스텀 구분자 문법이 잘못 입력되었습니다.");
             }
-            
+
             delimiter = String.valueOf(input.charAt(2));
             numbers = input.substring(4);
 
@@ -57,7 +57,7 @@ public class Application {
             int result = add(input);
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
-            System.err.println(e.getMessage());
+            throw new IllegalArgumentException("오류가 발생했습니다." + '\n' + e.getMessage());
         } finally {
             Console.close();
         }
