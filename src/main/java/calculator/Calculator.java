@@ -18,7 +18,7 @@ public class Calculator {
             }
 
             double toAdd = parseDouble(token);
-            if (isNotPositive(toAdd)) {
+            if (toAdd <= 0) {
                 throw new IllegalArgumentException();
             }
 
@@ -29,9 +29,7 @@ public class Calculator {
 
     private static double parseDouble(String token) {
         // Double.parseDouble에서 공백문자는 예외처리하지 않아 따로 처리
-        if (containsSpace(token)) {
-            throw new IllegalArgumentException();
-        }
+        checkSpace(token);
 
         try {
             return Double.parseDouble(token);
@@ -40,21 +38,11 @@ public class Calculator {
         }
     }
 
-    private static boolean containsSpace(String token) {
+    private static void checkSpace(String token) {
         for (int i = 0; i < token.length(); ++i) {
-            if (isSpace(token.charAt(i))) {
-                return true;
+            if (token.charAt(i) <= ' ') { // Double.parseDouble에서 trim이 자르는 문자
+                throw new IllegalArgumentException();
             }
         }
-
-        return false;
-    }
-
-    private static boolean isSpace(char ch) {
-        return ch <= ' '; // Double.parseDouble에서 trim이 자르는 문자
-    }
-
-    private static boolean isNotPositive(double value) {
-        return value <= 0;
     }
 }
