@@ -2,6 +2,9 @@ package calculator.domain;
 
 import calculator.domain.delimiter.CustomDelimiter;
 import calculator.domain.delimiter.Delimiter;
+
+import static calculator.domain.delimiter.CustomDelimiterPattern.CUSTOM_DELIMITER_END;
+import static calculator.domain.delimiter.CustomDelimiterPattern.CUSTOM_DELIMITER_START;
 import static calculator.domain.delimiter.DelimiterState.REGISTERED_DELIMITER;
 
 public class CharAnalyzer {
@@ -54,7 +57,7 @@ public class CharAnalyzer {
     }
 
     private boolean isCustomDelimiterStart() {
-        return input.startsWith("//", currentIndex);
+        return input.startsWith(CUSTOM_DELIMITER_START.getPattern(), currentIndex);
     }
 
     private void processNumber(char currentChar) {
@@ -67,7 +70,7 @@ public class CharAnalyzer {
 
     private void processCustomDelimiter() {
         customDelimiter.registerCustomDelimiter(input.substring(currentIndex), delimiter);
-        currentIndex = input.indexOf("\\n", currentIndex) + 2;
+        currentIndex = input.indexOf(CUSTOM_DELIMITER_END.getPattern(), currentIndex) + 2;
     }
 
     private boolean isPositiveNumber(char ch) {

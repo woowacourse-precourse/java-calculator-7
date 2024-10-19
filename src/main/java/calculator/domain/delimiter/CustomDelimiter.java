@@ -1,13 +1,15 @@
 package calculator.domain.delimiter;
 
+import static calculator.domain.delimiter.CustomDelimiterPattern.CUSTOM_DELIMITER_END;
+
 public class CustomDelimiter {
 
     public void registerCustomDelimiter(String input, Delimiter delimiter) {
-        if (!input.contains("\\n")) {
+        if (!input.contains(CUSTOM_DELIMITER_END.getPattern())) {
             throw new IllegalArgumentException("커스텀 구분자 설정 형식이 잘못되었습니다. '\\n'이 없습니다.");
         }
 
-        int newLineIndex = input.indexOf("\\n");
+        int newLineIndex = input.indexOf(CUSTOM_DELIMITER_END.getPattern());
 
         String customDelimiterPart = input.substring(2, newLineIndex);
 
