@@ -56,13 +56,28 @@ public class Application {
         }
 
         private List<Integer> findOperands(String operandString) {
-            List<String> operands = List.of(operandString.split(BASE_OPERANDS_SEPARATOR));
-            return operands.stream().map(Integer::valueOf).toList();
+            try {
+                List<String> operands = List.of(operandString.split(BASE_OPERANDS_SEPARATOR));
+                return operands.stream().map(this::makeStringToOperand).toList();
+            } catch (NumberFormatException exception) {
+                throw new IllegalArgumentException("숫자가 아닌 데이터나 너무 큰 값이 피연산자로 입력되었습니다.");
+            }
         }
 
         private List<Integer> findOperands(String operandString, char customSeparator) {
-            List<String> operands = List.of(operandString.split(BASE_OPERANDS_SEPARATOR + "|" + customSeparator));
-            return operands.stream().map(Integer::valueOf).toList();
+            try {
+                List<String> operands = List.of(operandString.split(BASE_OPERANDS_SEPARATOR + "|" + customSeparator));
+                return operands.stream().map(this::makeStringToOperand).toList();
+            } catch (NumberFormatException exception) {
+                throw new IllegalArgumentException("숫자가 아닌 데이터나 너무 큰 값이 피연산자로 입력되었습니다.");
+            }
+        }
+
+        private int makeStringToOperand(String target) {
+            if (target.startsWith("-")) {
+                throw new NumberFormatException();
+            }
+            return Integer.parseInt(target);
         }
 
         public List<Integer> getOperands() {
