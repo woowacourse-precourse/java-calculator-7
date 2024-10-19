@@ -20,6 +20,8 @@ public class Application {
                 break;
 
             String[] exactNumbers = calculation.filterNumbers(input);
+            int result = calculation.sumNumbers(exactNumbers);
+            System.out.println(result);
         }
         System.out.println("지금까지 문자열 덧셈 계산기였습니다.");
     }
