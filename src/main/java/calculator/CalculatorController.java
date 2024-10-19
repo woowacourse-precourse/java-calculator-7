@@ -27,12 +27,13 @@ public class CalculatorController {
                 delimiters.stream().anyMatch(d -> inputString.endsWith(String.valueOf(d)))) {
             throw new IllegalArgumentException("문자열을 잘못 입력하였습니다.");
         }
+
+        splitString(inputString);
     }
 
     private static String checkCustomDelimiter(String inputString) {
         String prefix = inputString.substring(0, 2);
         String suffix = inputString.substring(3, 5);
-        int len = inputString.length();
 
         if (prefix.equals("//") && suffix.equals("\\n")) {
             delimiters.add(inputString.charAt(2));
@@ -40,6 +41,16 @@ public class CalculatorController {
         }
 
         throw new IllegalArgumentException("커스텀 문자열을 잘못 입력하였습니다.");
+    }
+
+    private static void splitString(String inputString) {
+        for (char ch : inputString.toCharArray()) {
+            if (Character.isDigit(ch)) {
+                nums.add(Integer.parseInt(String.valueOf(ch)));
+            } else if (!delimiters.contains(ch)) {
+                throw new IllegalArgumentException("유효하지 않은 구분자입니다.");
+            }
+        }
     }
 
 }
