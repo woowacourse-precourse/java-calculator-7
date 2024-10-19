@@ -37,4 +37,19 @@ public class DelimiterExtractor {
     private String remove(String regex, String target) {
         return target.replaceAll(regex, " ");
     }
+
+    public String extractCustomDelimiter() {
+        final String PREFIX = "//";
+        final String LINE_BREAK = "\\n";
+        final int DELIMITER_LOCATION = 0;
+
+        if (DelimiterType.CUSTOM.equals(this.type())) {
+            return this.text
+                    .split(LINE_BREAK)[DELIMITER_LOCATION]
+                    .replaceAll(PREFIX, "")
+                    .trim();
+        }
+
+        return "";
+    }
 }

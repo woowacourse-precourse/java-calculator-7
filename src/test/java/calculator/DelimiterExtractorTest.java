@@ -9,6 +9,18 @@ public class DelimiterExtractorTest {
     private final String positiveNumberPattern = "[0-9]+\\.?[0-9]*";
 
     @Test
+    void 커스텀_구분자_문자열에서_사용자가_정의한_구분자를_추출한다() {
+        String input = "//;\n1;2;3";
+        DelimiterExtractor delimiterExtractor = new DelimiterExtractor(input);
+
+        String input2 = "//-\n1-2-3";
+        DelimiterExtractor delimiterExtractor2 = new DelimiterExtractor(input2);
+
+        assertEquals(";", delimiterExtractor.extractCustomDelimiter());
+        assertEquals("-", delimiterExtractor2.extractCustomDelimiter());
+    }
+
+    @Test
     void 커스텀_구분자_문자열에_사용된_구분자를_추출한다() {
         String input = "//;\n1;2;3";
         DelimiterExtractor delimiterExtractor = new DelimiterExtractor(input);
