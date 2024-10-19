@@ -1,8 +1,10 @@
 package calculator.controller;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import calculator.service.CalculatorService;
 import calculator.viiew.CalculatorView;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -64,7 +66,7 @@ class CalculatorControllerTest {
     void calculatorCustomException() {
         setupControllerWithException("//:\\n1:2a:3");
     }
-    
+
     private void setupController(String input, int expectedResult) {
         calculatorView = new CalculatorView() {
             @Override
@@ -74,7 +76,7 @@ class CalculatorControllerTest {
 
             @Override
             public void resultOutput(int result) {
-                Assertions.assertThat(result).isEqualTo(expectedResult);
+                assertThat(result).isEqualTo(expectedResult);
             }
         };
         calculatorController = new CalculatorController(calculatorService, calculatorView);
@@ -89,7 +91,7 @@ class CalculatorControllerTest {
         };
 
         calculatorController = new CalculatorController(calculatorService, calculatorView);
-        Assertions.assertThatThrownBy(() -> calculatorController.calculate())
+        assertThatThrownBy(() -> calculatorController.calculate())
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("잘못된 값이 입력되었습니다.");
     }

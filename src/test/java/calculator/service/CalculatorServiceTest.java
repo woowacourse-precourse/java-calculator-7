@@ -1,8 +1,10 @@
 package calculator.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import java.util.Arrays;
 import java.util.List;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,8 +18,8 @@ class CalculatorServiceTest {
         CalculatorService service = new CalculatorService();
         int calculateSum = service.calculateSum(values);
 
-        Assertions.assertThat(calculateSum).isEqualTo(17);
-        Assertions.assertThat(calculateSum).isNotEqualTo(20);
+        assertThat(calculateSum).isEqualTo(17);
+        assertThat(calculateSum).isNotEqualTo(20);
     }
 
     @DisplayName("올바른 문자열을 숫자로 변환하여 숫자 리스트로 반환")
@@ -28,8 +30,8 @@ class CalculatorServiceTest {
         CalculatorService service = new CalculatorService();
         List<Integer> values = service.convertToNumbers(parts);
 
-        Assertions.assertThat(values).containsAll(List.of(1, 2, 4, 10));
-        Assertions.assertThat(values).doesNotContainSequence(List.of(15, 42, 4, 10));
+        assertThat(values).containsAll(List.of(1, 2, 4, 10));
+        assertThat(values).doesNotContainSequence(List.of(15, 42, 4, 10));
     }
 
     @DisplayName("빈 문자열 입력 시 0으로 변환")
@@ -39,8 +41,8 @@ class CalculatorServiceTest {
         CalculatorService service = new CalculatorService();
         List<Integer> values = service.convertToNumbers(parts);
 
-        Assertions.assertThat(values).containsAll(List.of(0, 2, 0, 10));
-        Assertions.assertThat(values).doesNotContainSequence(List.of(2, 10));
+        assertThat(values).containsAll(List.of(0, 2, 0, 10));
+        assertThat(values).doesNotContainSequence(List.of(2, 10));
     }
 
     @DisplayName("올바르지 않은 문자열 입력 시 IllegalArgumentException 발생")
@@ -50,7 +52,7 @@ class CalculatorServiceTest {
 
         CalculatorService service = new CalculatorService();
 
-        Assertions.assertThatThrownBy(() -> service.convertToNumbers(parts))
+        assertThatThrownBy(() -> service.convertToNumbers(parts))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("잘못된 값이 입력되었습니다.");
     }
@@ -62,7 +64,7 @@ class CalculatorServiceTest {
 
         CalculatorService service = new CalculatorService();
 
-        Assertions.assertThatThrownBy(() -> service.convertToNumbers(parts))
+        assertThatThrownBy(() -> service.convertToNumbers(parts))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("잘못된 값이 입력되었습니다.");
     }
@@ -78,9 +80,9 @@ class CalculatorServiceTest {
         String[] paresInput2 = service.paresInput(line2);
         String[] paresInput3 = service.paresInput(line3);
 
-        Assertions.assertThat(paresInput1).containsAll(Arrays.asList("1", "2", "4", "5"));
-        Assertions.assertThat(paresInput2).containsAll(Arrays.asList("1", "1", "2a", "4", "5"));
-        Assertions.assertThat(paresInput3).containsAll(Arrays.asList("1", " ", "2", "4", "5"));
+        assertThat(paresInput1).containsAll(Arrays.asList("1", "2", "4", "5"));
+        assertThat(paresInput2).containsAll(Arrays.asList("1", "1", "2a", "4", "5"));
+        assertThat(paresInput3).containsAll(Arrays.asList("1", " ", "2", "4", "5"));
     }
 
     @DisplayName("커스텀 구분자입력시 문자열 분리")
@@ -92,9 +94,9 @@ class CalculatorServiceTest {
         String[] parses3 = service.paresInput("//;\\n1;2:2");
         String[] parses4 = service.paresInput("//;\\n1; ;2");
 
-        Assertions.assertThat(parses1).containsAll(Arrays.asList("1", "2"));
-        Assertions.assertThat(parses2).containsAll(Arrays.asList("1", "2"));
-        Assertions.assertThat(parses3).containsAll(Arrays.asList("1", "2:2"));
-        Assertions.assertThat(parses4).containsAll(Arrays.asList("1", " ", "2"));
+        assertThat(parses1).containsAll(Arrays.asList("1", "2"));
+        assertThat(parses2).containsAll(Arrays.asList("1", "2"));
+        assertThat(parses3).containsAll(Arrays.asList("1", "2:2"));
+        assertThat(parses4).containsAll(Arrays.asList("1", " ", "2"));
     }
 }
