@@ -45,6 +45,18 @@ class ValidatorTest {
         assertThatCode(() -> validator.execute(input, candidates))
                 .doesNotThrowAnyException();
     }
+    @Test
+    void 입력_예외_발생_X_커스텀구분자_여러개() {
+        //given
+        String input = "//%\\n//^\\n1,2:3%4^5";
+        List<Candidate> candidates = storage.getNumberCandidates();
+
+        //when
+
+        //then
+        assertThatCode(() -> validator.execute(input, candidates))
+                .doesNotThrowAnyException();
+    }
 
     @Test
     void 입력_예외_발생_O_문자로시작() {
