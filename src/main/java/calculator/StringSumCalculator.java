@@ -14,7 +14,7 @@ public class StringSumCalculator {
 
     public void sum() {
         String input = inputHandler.input();
-        if (input.startsWith(Delimiter.CUSTOM_DELIMITER_PREFIX) && input.contains(Delimiter.CUSTOM_DELIMITER_SUFFIX)) {
+        if (Delimiter.isCustomDelimiter(input)) {
             Delimiter customDelimiter = Delimiter.createCustomDelimiter(input);
             String numbersWithDelimiter = input.substring(input.indexOf(Delimiter.CUSTOM_DELIMITER_SUFFIX) + 2);
             splitAndSum(numbersWithDelimiter, customDelimiter);

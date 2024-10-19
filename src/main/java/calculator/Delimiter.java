@@ -20,7 +20,7 @@ public class Delimiter {
     }
 
     public static Delimiter createCustomDelimiter(String value) {
-        if (!value.startsWith(CUSTOM_DELIMITER_PREFIX) || !value.contains(CUSTOM_DELIMITER_SUFFIX)) {
+        if (isNotCustomDelimiter(value)) {
             throw new IllegalArgumentException("[ERROR] 커스텀 구분자가 잘못된 형식입니다. 형식은 " + CUSTOM_DELIMITER_PREFIX
                     + "와 구분자, 그리고 " + CUSTOM_DELIMITER_SUFFIX + "으로 시작해야 합니다.");
         }
@@ -30,6 +30,14 @@ public class Delimiter {
             throw new IllegalArgumentException("[ERROR] 커스텀 구분자가 존재하지 않습니다.");
         }
         return new Delimiter(customDelimiter);
+    }
+
+    public static boolean isCustomDelimiter(String value) {
+        return value.startsWith(CUSTOM_DELIMITER_PREFIX) && value.contains(CUSTOM_DELIMITER_SUFFIX);
+    }
+
+    public static boolean isNotCustomDelimiter(String value) {
+        return !isCustomDelimiter(value);
     }
 
     @Override

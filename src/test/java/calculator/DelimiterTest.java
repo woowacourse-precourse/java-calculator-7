@@ -32,4 +32,16 @@ class DelimiterTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 커스텀 구분자가 존재하지 않습니다.");
     }
+
+    @Test
+    void 커스텀_구분자인지_판별한다() {
+        // given
+        String input = "//;\\n1;2;3";
+
+        // when
+        boolean isCustomDelimiter = Delimiter.isCustomDelimiter(input);
+
+        // then
+        assertThat(isCustomDelimiter).isTrue();
+    }
 }
