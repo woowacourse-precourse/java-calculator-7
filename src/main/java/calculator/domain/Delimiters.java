@@ -36,7 +36,7 @@ public class Delimiters {
         return String.join("|", this.delimiters);
     }
 
-    public String getDelimiters() {
+    public String getRegex() {
         return String.join("", this.delimiters);
     }
 

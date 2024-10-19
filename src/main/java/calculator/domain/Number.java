@@ -3,10 +3,6 @@ package calculator.domain;
 public class Number {
     private final int value;
 
-    public Number() {
-        this.value = 0;
-    }
-
     public Number(int value) {
         this.value = value;
         validate(value);

@@ -14,6 +14,7 @@ public class Extractor {
 
     public static final String NUMBER_PART_REGEX = "-?\\d+([%s]-?\\d+)*";
     public static final String SPLIT_NUMBER_PART_REGEX = "\\\\n";
+    public static final String REPLACE_EMPTY_VALUE = "0";
 
     private final Delimiters delimiters;
     private final String numberPart;
@@ -27,7 +28,10 @@ public class Extractor {
         return new Extractor(input);
     }
 
-    public String extractNumberPart(String userInput) {
+    private String extractNumberPart(String userInput) {
+        if (userInput.isBlank()) {
+            return REPLACE_EMPTY_VALUE;
+        }
         if (delimiters.isCustomDelimiter()) {
             return userInput.split(SPLIT_NUMBER_PART_REGEX)[1];
         }
@@ -35,22 +39,31 @@ public class Extractor {
     }
 
     public Numbers extractNumbers() {
-        List<Number> numbers = new ArrayList<>();
-        if (numberPart.isEmpty()) {
-            numbers.add(new Number());
-            return Numbers.from(numbers);
-        }
-        Pattern pattern = Pattern.compile(String.format(NUMBER_PART_REGEX, delimiters.getDelimiters()));
+        validateNumberPart();
+        List<Number> numbers = convertNumbers();
+        return Numbers.from(numbers);
+    }
+
+    private void validateNumberPart() {
+        Pattern pattern = Pattern.compile(String.format(NUMBER_PART_REGEX, delimiters.getRegex()));
         Matcher matcher = pattern.matcher(numberPart);
         if (!matcher.matches()) {
             throw new IllegalArgumentException("숫자와 구분자로만 이루어져야 합니다.");
         }
-        String splitRegex = delimiters.getSplitRegex();
-        String[] extractedNumbers = numberPart.split(splitRegex);
+    }
+
+    private List<Number> convertNumbers() {
+        List<Number> numbers = new ArrayList<>();
+        String[] extractedNumbers = splitNumberPart();
         Arrays.stream(extractedNumbers)
             .map(Integer::parseInt)
             .forEach(value -> numbers.add(new Number(value)));
-        return Numbers.from(numbers);
+        return numbers;
+    }
+
+    private String[] splitNumberPart() {
+        String splitRegex = delimiters.getSplitRegex();
+        return numberPart.split(splitRegex);
     }
 
 }
