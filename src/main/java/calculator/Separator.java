@@ -32,4 +32,17 @@ public class Separator {
     private boolean isWrongSeparator(char separator) {
         return separator == '/' || separator == '\\' || separator == 'n';
     }
+
+    public boolean isValidFormula() {
+        return string.matches(createRegex());
+    }
+
+    private String createRegex() {
+        StringBuilder regex = new StringBuilder("^([0-9]+([");
+        for (Character separator : separators) {
+            regex.append(separator);
+        }
+        regex.append("][0-9]+)*)?$");
+        return regex.toString();
+    }
 }
