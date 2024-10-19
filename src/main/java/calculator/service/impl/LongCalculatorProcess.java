@@ -1,10 +1,12 @@
-package calculator.service;
+package calculator.service.impl;
 
 import calculator.constant.ErrorMessage;
 import calculator.number.domain.NumberService;
+import calculator.service.CalculatorService;
 
-public class CalculatorProcess {
-    public static Long sum(NumberService<? extends Number> number) {
+public class LongCalculatorProcess implements CalculatorService {
+    @Override
+    public Number sum(NumberService number) {
         try {
             return number.getNumbers()
                     .stream()
