@@ -1,6 +1,8 @@
 package calculator.model;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CalculatorModel {
 
@@ -15,13 +17,18 @@ public class CalculatorModel {
     }
 
     public String CustomExtraction(String customInput) {
-        String extraction = customInput.substring(customInput.indexOf("//") + 2, customInput.indexOf("\\n"));
-        if (extraction.length() > 1 || extraction.matches("\\d+")) {
-            throw new IllegalArgumentException();
-        } else if (extraction.isEmpty()) {
+        Pattern compiledPattern = Pattern.compile("//" + "(.*?)" + "\\\\n");
+        Matcher matcher = compiledPattern.matcher(customInput);
+        if (matcher.find()) {
+            String extraction = matcher.group(1).trim();
+            System.out.println(extraction);
+            if (extraction.length() > 1 || extraction.matches("\\d+")) {
+                throw new IllegalArgumentException();
+            }
+            return extraction;
+        } else {
             return null;
         }
-        return extraction;
     }
 
     public String[] operationSetting(String operationInput, ArrayList<String> separate) {
