@@ -2,6 +2,14 @@ package calculator;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        String inputString = camp.nextstep.edu.missionutils.Console.readLine();
+        Input input = new Input(inputString);
+        if (input.isValid()) {
+            int result = Calculator.sum(input.getNumbersFromInput());
+            System.out.println("결과 : " + result);
+        } else {
+            throw new IllegalArgumentException("입력이 유효하지 않습니다.");
+        }
     }
 }
