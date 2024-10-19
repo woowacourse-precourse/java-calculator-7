@@ -1,7 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.math.BigDecimal;
+import java.math.BigInteger;
 
 public class Application {
     public static void main(String[] args) {
@@ -23,7 +23,7 @@ public class Application {
         operandManager.save(inputManager.getOperandCandidates(), separatorManager.getSeparators());
 
         Operator operator = new Operator();
-        BigDecimal result = operator.add(operandManager.getOperands());
+        BigInteger result = operator.add(operandManager.getOperands());
 
         System.out.println("결과 : " + result);
     }

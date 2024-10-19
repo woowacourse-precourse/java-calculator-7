@@ -1,12 +1,12 @@
 package calculator;
 
-import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 
 public class Operator {
-    public BigDecimal add(List<BigDecimal> operands) {
-        BigDecimal result = BigDecimal.ZERO;
-        for (BigDecimal operand : operands) {
+    public BigInteger add(List<BigInteger> operands) {
+        BigInteger result = BigInteger.ZERO;
+        for (BigInteger operand : operands) {
             result = result.add(operand);
         }
         return result;
