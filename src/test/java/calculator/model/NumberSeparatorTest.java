@@ -42,4 +42,11 @@ class NumberSeparatorTest {
 	void validateSeparateNumberPosition(String invalidData) {
 		assertThrows(IllegalArgumentException.class, () -> NumberSeparator.from(invalidData).separate());
 	}
+
+	@DisplayName("문자열에 기본 구분자, 커스텀 구분자 외의 구분자가 올 수 없다")
+	@ParameterizedTest
+	@ValueSource(strings = {"//!\\n1:2,3!4?5"})
+	void validateSeparateNumberOtherDelimiter(String invalidData) {
+		assertThrows(IllegalArgumentException.class, () -> NumberSeparator.from(invalidData).separate());
+	}
 }
