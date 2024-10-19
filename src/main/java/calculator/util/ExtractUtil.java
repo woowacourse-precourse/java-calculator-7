@@ -25,8 +25,8 @@ public class ExtractUtil {
     }
 
     public String extractPositiveString(String input, String customDelimiter) {
-        String remove = createRemoveString(customDelimiter);
-        return input.replace(remove, EMPTY);
+        String removalLine = createRemoveString(customDelimiter);
+        return input.replace(removalLine, EMPTY);
     }
 
     private String createRemoveString(String customDelimiter) {
