@@ -32,6 +32,13 @@ class CalculatorTest {
     }
 
     @Test
+    void 공백이_구분자일떄_문자열_계산(){
+        String input="// \\n2 3 4";
+
+        assertThat(Calculator.inputCalculate(input)).isEqualTo(9);
+    }
+
+    @Test
     void 존재하지_않는_커스텀구분자_예외_발생(){
         String input="//!\\n1:~2";
 
