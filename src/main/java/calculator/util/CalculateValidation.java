@@ -20,4 +20,8 @@ public class CalculateValidation {
     public static boolean checkIsNotUserInputZero(String userInput) {
         return !userInput.equals(ZERO_STRING);
     }
+
+    public static boolean checkIsNotUserInputNumber(String userInput) {
+        return !userInput.matches("[+-]?\\d*(\\.\\d+)?");
+    }
 }

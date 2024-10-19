@@ -25,7 +25,7 @@ public class CalculateException {
     }
 
     public static void catchWrongNumberSeparator(String userInput) {
-        if (CalculateValidation.checkIsNotUserInputZero(userInput) && CalculateValidation.checkNotContainAllSeparator(userInput)) {
+        if (CalculateValidation.checkIsNotUserInputZero(userInput) && CalculateValidation.checkIsNotUserInputNumber(userInput) && CalculateValidation.checkNotContainAllSeparator(userInput)) {
             throwException(ExceptionMessage.INPUT_IS_WRONG_EXCEPTION);
         }
     }
