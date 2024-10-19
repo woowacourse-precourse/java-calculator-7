@@ -23,6 +23,7 @@ public class Input {
     "//7\n172,3"
      */
 
+    /** 사용자 입력 검증 **/
     public static void validUserInput(String input){
         if(input.isEmpty() || validGeneralUserInput(input) || validCustomUserInput(input)){
             return;
@@ -31,4 +32,11 @@ public class Input {
         }
     }
 
+    /** 기본 구분자 입력 검증 **/
+    //사용자가 기본 구분자를 사용하였을 경우
+    public static boolean validGeneralUserInput(String input){
+        return validSeparator(input)
+                && validSequenceSeparator(input)
+                && validLastSeparator(input);
+    }
 }
