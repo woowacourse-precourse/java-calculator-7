@@ -9,19 +9,6 @@ public class InputManager {
         this.input = input;
     }
 
-    public void validate() {
-        if(input.matches("[1-9,:]+")) {
-            return;
-        }
-        if(!(input.startsWith("//") && input.contains("\\n"))) {
-            throw new IllegalArgumentException("입력 형식이 유효하지 않습니다.");
-        }
-    }
-
-    public boolean isCustomSeparatorCandidateExisted() {
-        return this.input.startsWith("//");
-    }
-
     public String getSeparatorCandidate() {
         if(separatorCandidate == null) {
             int startIndex = input.indexOf("//") + 2;
@@ -40,5 +27,18 @@ public class InputManager {
             operandCandidates = input.substring(startIndex);
         }
         return this.operandCandidates;
+    }
+
+    public void validate() {
+        if(input.matches("[1-9,:]+")) {
+            return;
+        }
+        if(!(input.startsWith("//") && input.contains("\\n"))) {
+            throw new IllegalArgumentException("입력 형식이 유효하지 않습니다.");
+        }
+    }
+
+    public boolean isCustomSeparatorCandidateExisted() {
+        return this.input.startsWith("//");
     }
 }
