@@ -14,9 +14,7 @@ public class SeparatorTest extends NsTest {
             run("1,2,3");
 
             String[] result = obj.separate("1,2,3", ",");
-            assertThat(result)
-                    .satisfiesExactly(item1 -> assertThat(item1).contains("1").contains("2").contains("3"));
-            assertThat(output()).contains("결과 : 1");
+            assertThat(result).containsExactly("1", "2", "3");
         });
     }
 
@@ -27,8 +25,7 @@ public class SeparatorTest extends NsTest {
             run("1:2:3");
 
             String[] result = obj.separate("1:2:3", ":");
-            assertThat(result)
-                    .satisfiesExactly(item1 -> assertThat(item1).contains("1").contains("2").contains("3"));
+            assertThat(result).containsExactly("1", "2", "3");
         });
     }
 
@@ -39,8 +36,7 @@ public class SeparatorTest extends NsTest {
             run("1,2:3");
 
             String[] result = obj.separate("1,2:3", ",|:");
-            assertThat(result)
-                    .satisfiesExactly(item1 -> assertThat(item1).contains("1").contains("2").contains("3"));
+            assertThat(result).containsExactly("1", "2", "3");
         });
     }
 
@@ -51,8 +47,7 @@ public class SeparatorTest extends NsTest {
             run("//;\\n1;2;3");
 
             String[] result = obj.separate("1;2;3", ";");
-            assertThat(result)
-                    .satisfiesExactly(item1 -> assertThat(item1).contains("1").contains("2").contains("3"));
+            assertThat(result).containsExactly("1", "2", "3");
         });
     }
 
@@ -63,8 +58,7 @@ public class SeparatorTest extends NsTest {
             run("//;\\n1;2,3:4");
 
             String[] result = obj.separate("1;2,3:4", ";|,|:");
-            assertThat(result)
-                    .satisfiesExactly(item1 -> assertThat(item1).contains("1").contains("2").contains("3"));
+            assertThat(result).containsExactly("1", "2", "3", "4");
         });
     }
 
