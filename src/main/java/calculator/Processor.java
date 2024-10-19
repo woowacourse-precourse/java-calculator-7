@@ -34,4 +34,10 @@ public class Processor {
                 .toArray(String[]::new));
         return input.split(regex);
     }
+
+    private int[] convertToIntArray(String[] splittedInput) {
+        return java.util.Arrays.stream(splittedInput)
+                .mapToInt(Integer::parseInt)
+                .toArray();
+    }
 }
