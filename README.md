@@ -31,44 +31,76 @@
 ![첫주차미션_유스케이스_다이어그램](https://github.com/user-attachments/assets/f0f818d0-6ee7-40fc-bb6d-8f81956f2dec)
 
 ## MVC
-### 🔵 Model
-#### Calculator 👉 **입력 받은 숫자로 구성된 문자열을 계산하기 위한 클래스**
-- **Field**
-  - `numbers` : 입력받은 숫자로 구성된 문자열
+🔵 **Model**
 
-- **Method**
-  - `calculator()` : 생성자
-  - `plus()` : 모든 숫자 더하기
-  - `checkSeparator()` : 구분자 여부 확인하기
+### Calculator
+👉 입력받은 숫자 문자열 배열을 합산하는 클래스
 
-### 🟡 View
-#### InputView 👉 **입력을 받기 위한 클래스**
-- **Field**
-  - `USER_NUMBERS` : "덧셈할 문자열을 입력해 주세요."
+**메서드**  
+`String plus(String[] splitedNumbers)`: 분할된 숫자들의 합산한 결과 구하기
 
-- **Method**
-  - `readUserNumbers()` : 숫자로 구성된 문자열 입력 받기
-#### OutputView 👉 **출력하기 위한 클래스**
-- **Field**
-  - `RESULT_MESSAGE` : "결과 : "
+### CustomDelimiter
+👉 사용자로부터 입력받은 수식에서 커스텀 구분자를 처리하는 클래스
 
-- **Method**
-  - `printSumToUser()` : 계산 결과를 출력하기
+**필드**  
+`String formula`: 사용자로부터 입력받은 수식 문자열
 
-### 🟢 Controller
-#### MainController 👉 **전체 시스템에서 사용자의 요청을 처리하고, 모델과 상호작용을 위한 클래스**
-- **Method**
-  - `start()` : 애플리케이션 시작하기
-  - `readUserNumbers()` : 사용자로부터 입력 받기
-  - `calculate()` : 입력 받은 숫자를 계산하기
-  - `printSumToUser()` : 계산 결과를 사용자에게 출력하기
+**생성자**  
+`CustomDelimiter(String formula)`: 수식 문자열을 초기화하기
 
-### 🔴 Validation
-#### InputValidator 👉 **예외를 확인하기 위한 클래스**
-- **Field**
-  - `NON_NATURAL_NUMBER` : "자연수가 아닙니다."
-  - `INVALID_CUSTOM_DELIMITER` : "커스텀 구분자가 정상적으로 입력되지 않았습니다."
+**메서드**  
+`String getFormula()`: 수식 문자열을 반환하기  
+`String getCustomDelimiter()`: 커스텀 구분자를 추출하기
+`Integer checkCustomDelimiter()`: 커스텀 구분자의 위치를 반환하기  
+`String getNumbersPart()`: 수식에서 연산부분만을 추출하기
 
-- **Method**
-  - `validateNaturalNumber()` : 사용자가 제시한 문자열 유효성 검사
-  - `validateCustomDelimiter()` : 사용자가 제시한 커스텀 구분자 유효성 검사
+### Splitter
+👉 수식 문자열을 구분자를 기준으로 분할하는 클래스
+
+**필드**  
+`String[] splittedNumbers`: 분할된 숫자 문자열 배열
+
+**생성자**  
+`Splitter(CustomDelimiter customDelimiter)`: 숫자 문자열 배열을 초기화하기
+
+**메서드**  
+`String[] getSplittedNumbers()`: 분할된 숫자 문자열 배열을 반환하기  
+`String[] splitNumbers(CustomDelimiter customDelimiter)`: 구분자 기준으로 수식 문자열을 분할하기
+
+---
+
+🟡 **View**
+
+### InputView
+👉 사용자로부터 입력을 받는 클래스
+
+**상수 필드**  
+`USER_NUMBERS`: "덧셈할 문자열을 입력해 주세요."
+
+**메서드**  
+`String readUserNumbers()`: 사용자로부터 수식 문자열을 입력받기
+
+### OutputView
+👉 계산 결과를 출력하는 클래스
+
+**상수 필드**  
+`RESULT_MESSAGE`: "결과 : "
+
+**메서드**  
+`void printSumToUser(String sumOfNumbers)`: 계산 결과를 출력하기
+
+---
+
+🔴 **Validation**
+
+### Validator
+👉 입력값의 유효성을 검사하는 클래스
+
+**상수 필드**  
+`INVALID_OPERAND`: "피연산자가 잘못 입력되었습니다."  
+`INVALID_CUSTOM_DELIMITER`: "커스텀 구분자가 정상적으로 입력되지 않았습니다."
+
+**메서드**  
+`static int parseNumber(String token)`: 0 이하의 수나 숫자가 아닌 경우 예외를 발생시키기 
+`static void isValidDelimiter(String delimiter)`: 커스텀 구분자가 숫자를 포함할 경우 예외를 발생시키기 
+`static void isThereSeparator(int delimiterEndIndex)`: 커스텀 구분자의 종료 문자가 없는 경우 예외를 발생시키기

@@ -24,9 +24,6 @@ public class Validator {
         if (determiter.matches(".*\\d.*")){
             throw new IllegalArgumentException(INVALID_CUSTOM_DELIMITER);
         }
-        if (determiter.isEmpty()){
-            throw new IllegalArgumentException(INVALID_CUSTOM_DELIMITER);
-        }
     }
 
     public static void isThereSeparator(int delimiterEndIndex){
