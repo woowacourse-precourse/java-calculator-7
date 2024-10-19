@@ -7,6 +7,8 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import calculator.service.Calculator;
+
 class CalculatorTest {
 
 	@DisplayName("여러 숫자 리스트를 받아 덧셈 결과를 반환한다.")

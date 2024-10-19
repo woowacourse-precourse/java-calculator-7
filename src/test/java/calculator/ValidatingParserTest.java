@@ -7,6 +7,8 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import calculator.service.ValidatingParser;
+
 class ValidatingParserTest {
 
 	@DisplayName("커스텀 구분자가 들어간 문자열의 숫자 리스트를 반환한다.")

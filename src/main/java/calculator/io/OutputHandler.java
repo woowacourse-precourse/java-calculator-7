@@ -1,4 +1,4 @@
-package calculator;
+package calculator.io;
 
 public class OutputHandler {
 	private static final String PROMPT_MESSAGE = "덧셈할 문자열을 입력해 주세요.";
