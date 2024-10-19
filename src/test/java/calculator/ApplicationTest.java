@@ -49,7 +49,7 @@ class ApplicationTest extends NsTest {
     @DisplayName("커스텀 구분자가 두개 이상일 때 테스트")
     void manyCustomSepTest() {
         assertSimpleTest(() -> {
-            run("//;;0;0\\\\0-\\n1;2,3:4;;5\\6");
+            run("//;;0;0\\0-\\n1;2,3:4;;5\\6");
             assertThat(output()).contains("결과 : 21");
         });
     }
