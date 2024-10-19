@@ -25,12 +25,23 @@ public class Application {
 
         // 숫자로 분리
         List<String> numStrings = splitByDelimiter(input, delimiters);
-        List<Integer> nums = changeToInteger(numStrings);
 
-        // 계산
-        Integer answer = calculate(nums);
+        // 실수값인지 확인
+        Boolean isDecimal = isDecimal(numStrings);
+        if (isDecimal) {
+            // 문자열 list 수로 변환
+            List<Double> nums = changeToDouble(numStrings);
+            // 계산
+            Double answer = calculateDecimal(nums);
+            System.out.println("결과 : " + answer);
 
-        System.out.println("결과 : " + answer);
+        } else {
+            // 문자열 list 수로 변환
+            List<Integer> nums = changeToInteger(numStrings);
+            // 계산
+            Long answer = calculateInteger(nums);
+            System.out.println("결과 : " + answer);
+        }
     }
 
     private static char checkDelimiter(String input) {
@@ -47,12 +58,18 @@ public class Application {
         int i;
         for (i = 0; i < input.length(); i++) {
             if (delimiter.contains(input.charAt(i))) {
+                // 숫자 마지막에 .이 오는 경우에 대한 예외 처리
+                if (curNum.length() != 0 && curNum.charAt(curNum.length() - 1) == '.') {
+                    throw new IllegalArgumentException();
+                }
                 response.add(curNum);
                 curNum = "";
             } else if (input.charAt(i) >= '1' && input.charAt(i) <= '9') {
                 curNum += input.charAt(i);
             } else if (input.charAt(i) == '0' && !curNum.isEmpty()) {
                 curNum += '0';
+            } else if (input.charAt(i) == '.' && !curNum.contains(".") && !curNum.isEmpty()) {
+                curNum += '.';
             } else {
                 // 숫자의 가장 앞에 0이 등장하는 경우
                 // 입력으로 구분자나 숫자가 아닌 문자가 들어온 경우 예외 처리
@@ -69,6 +86,15 @@ public class Application {
         return response;
     }
 
+    private static Boolean isDecimal(List<String> numStrings) {
+        for (String numString : numStrings) {
+            if (numString.contains(".")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private static List<Integer> changeToInteger(List<String> numStrings) {
         List<Integer> nums = new ArrayList<>();
 
@@ -81,11 +107,20 @@ public class Application {
             // parseInt 함수에서 int 범위를 벗어난 경우에 대한 예외 처리
             throw new IllegalArgumentException();
         }
-
         return nums;
     }
 
-    private static Integer calculate(List<Integer> nums) {
+    private static List<Double> changeToDouble(List<String> numStrings) {
+        List<Double> nums = new ArrayList<>();
+
+        for (String numString : numStrings) {
+            Double tempNum = Double.parseDouble(numString);
+            nums.add(tempNum);
+        }
+        return nums;
+    }
+
+    private static Long calculateInteger(List<Integer> nums) {
         Long sum = 0L;
 
         try {
@@ -97,6 +132,14 @@ public class Application {
             throw new IllegalArgumentException();
         }
 
+        return sum;
+    }
+
+    private static Double calculateDecimal(List<Double> nums) {
+        Double sum = 0.0;
+        for (Double num : nums) {
+            sum += num;
+        }
         return sum;
     }
 }
