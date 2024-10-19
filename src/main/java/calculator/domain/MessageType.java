@@ -1,4 +1,4 @@
-package calculator.validation;
+package calculator.domain;
 
 public enum MessageType {
 
