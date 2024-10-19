@@ -25,6 +25,10 @@ public class CalculatorModel {
         }
         String[] numbers = input.split(delimiter);
 
+        if (numbers.length == 0 || input.matches(delimiter + "+")) {
+            throw new IllegalArgumentException("구분자를 쓸 때는 숫자를 입력해 주세요.");
+        }
+
         return numbers;
     }
 
