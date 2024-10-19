@@ -7,6 +7,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CalculatorService {
+    private final String manualString =
+            """
+            =================
+            | 문자열 덧셈 계산기 |
+            =================
+            *사용방법*
+            1. 더하고자 하는 숫자 사이에 [,] 또는 [:] 입력해 덧셈을 계산할 수 있습니다. ( 입력 예시 : 1,2:3 )
+            2. [//], [\\n] 사이에 커스텀 구분자를 등록해 덧셈할 수 있습니다. ( 입력 예시 : //@\\n1,2@3 )
+            3. 커스텀 구분자 사이에 [0]을 입력해 여러개를 등록해 덧셈할 수 있습니다. ( 입력 예시 : //@0#0$\\n1@2#3$4 )
+            4. 계산식에 음수를 입력하거나 등록하지 않은 구분자는 사용할 수 없습니다. 
+            """;
     private final String startString = "덧셈할 문자열을 입력해 주세요.";
     private final Pattern pattern = Pattern.compile("//\\D+(0?\\D)*\\\\n");
     private final Pattern wrongPattern = Pattern.compile("//([1-9]+.*|.*[1-9]+.*|[1-9]+)\\\\n");
@@ -20,6 +31,7 @@ public class CalculatorService {
     private String[] numList;
     private String[] sepList;
     public void printStartString(){
+        System.out.println(manualString);
         System.out.println(startString);
     }
 
