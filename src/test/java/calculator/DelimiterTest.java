@@ -60,7 +60,7 @@ class DelimiterTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"//;\\1", "/;\n1", "//;\\ n1", ";//;\\n1"})
+    @ValueSource(strings = {"//;\\1", "//;|n1", "//;\\ n1", ";//;\\n1"})
     @DisplayName("유효하지 않은 구분자 등록 문자가 존재하면 예외가 발생해야 한다.")
     void invalidDelimiterPrefixAndSuffixExceptionTest(String value) {
         // when, then
