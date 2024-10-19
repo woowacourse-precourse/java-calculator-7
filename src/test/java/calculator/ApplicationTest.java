@@ -35,6 +35,13 @@ class ApplicationTest extends NsTest {
                         .hasMessage("[ERROR] 연속된 콤마(,,)는 사용할 수 없습니다."));
     }
 
+    @Test
+    void 연속된_콜론_사용_예외테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1:2::3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage("[ERROR] 연속된 콜론(::)은 사용할 수 없습니다."));
+    }
 
     @Override
     public void runMain() {
