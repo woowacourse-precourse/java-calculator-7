@@ -25,7 +25,7 @@ class StringParserTest {
         stringParser.addDelimiterFromInput(input);
 
         // then
-        assertThat(stringParser.getDelimiters()).hasSize(3);
+        assertThat(stringParser.getDelimiterCount()).isEqualTo(3);
     }
 
     @Test
@@ -46,7 +46,7 @@ class StringParserTest {
         stringParser.addDelimiterFromInput(input);
 
         // then
-        assertThat(stringParser.getDelimiters()).hasSize(2);
+        assertThat(stringParser.getDelimiterCount()).isEqualTo(2);
     }
 
     @Test
@@ -103,12 +103,13 @@ class StringParserTest {
     void 문자열을_숫자로_변환할_수_있다() {
         // given
         String input = "1,2,3";
-
-        // when
         List<String> numbers = stringParser.split(input);
 
+        // when
+        List<Integer> convertedNumbers = stringParser.convertToIntArray(numbers);
+
         // then
-        assertThat(numbers).isEqualTo(List.of(1, 2, 3));
+        assertThat(convertedNumbers).isEqualTo(List.of(1, 2, 3));
     }
 
     @Test
