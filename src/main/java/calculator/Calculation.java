@@ -13,4 +13,14 @@ public class Calculation {
                 .filter(number -> !number.isEmpty())
                 .toArray(String[]::new);
     }
+
+    public int sumNumbers(String[] exactNumbers) {
+        int result = 0;
+
+        for (String exactNumber : exactNumbers) {
+            result += Integer.parseInt(exactNumber);
+        }
+
+        return result;
+    }
 }
