@@ -5,7 +5,6 @@ import calculator.exception.CalculatorExceptionMessage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class Delimiters {
 
@@ -29,7 +28,7 @@ public class Delimiters {
         final String findCustomDelimiter = findCustomDelimiter(input);
 
         if (!isDefaultDelimiter(findCustomDelimiter)) {
-            validateSingleDelimiter(findCustomDelimiter);
+            validateDelimiter(findCustomDelimiter);
             delimiters.add(findCustomDelimiter);
         }
 
@@ -45,9 +44,13 @@ public class Delimiters {
         return BLANK_DELIMITER;
     }
 
-    private void validateSingleDelimiter(final String delimiter) {
-        if (delimiter.length() != 1) {
+    private void validateDelimiter(final String delimiter) {
+        if (isNotSingleDelimiter(delimiter)) {
             throw new BusinessException(CalculatorExceptionMessage.MULTIPLE_CUSTOM_DELIMITERS_EXCEPTION);
+        }
+
+        if (isNumeric(delimiter)) {
+            throw new BusinessException(CalculatorExceptionMessage.DELIMITER_MUST_ACCEPT_NO_NUMBER);
         }
     }
 
@@ -56,6 +59,19 @@ public class Delimiters {
     }
 
     private boolean isDefaultDelimiter(String findCustomDelimiter) {
-        return findCustomDelimiter.isBlank();
+        return findCustomDelimiter.isEmpty();
+    }
+
+    private boolean isNotSingleDelimiter(String delimiter) {
+        return delimiter.length() != 1;
+    }
+
+    private boolean isNumeric(String delimiter) {
+        try {
+            Integer.parseInt(delimiter);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

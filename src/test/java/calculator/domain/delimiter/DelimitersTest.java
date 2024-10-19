@@ -1,6 +1,7 @@
 package calculator.domain.delimiter;
 
 import calculator.exception.BusinessException;
+import calculator.exception.CalculatorExceptionMessage;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -56,17 +57,19 @@ public class DelimitersTest {
         // when & then
         assertThatThrownBy(() -> {
             delimiters.getAllDelimiters(input);
-        }).isInstanceOf(BusinessException.class);
+        }).isInstanceOf(BusinessException.class)
+                .hasMessageContaining(CalculatorExceptionMessage.MULTIPLE_CUSTOM_DELIMITERS_EXCEPTION.getErrorMessage());
     }
 
     @Test
-    void 커스텀_구분자가_비어있는경우_BusinessException() {
+    void 커스텀_구분자에_숫자가_존재하는경우_BusinessException() {
         // given
-        String input = "//\n1-2-3";
+        String input = "//1\n11213";
 
         // when & then
         assertThatThrownBy(() -> {
             delimiters.getAllDelimiters(input);
-        }).isInstanceOf(BusinessException.class);
+        }).isInstanceOf(BusinessException.class)
+                .hasMessageContaining(CalculatorExceptionMessage.DELIMITER_CANT_BLANK.getErrorMessage());
     }
 }

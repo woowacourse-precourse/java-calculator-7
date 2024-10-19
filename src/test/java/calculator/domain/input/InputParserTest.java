@@ -58,4 +58,15 @@ public class InputParserTest {
             inputParser.extractNumbersFromInput(input);
         }).isInstanceOf(BusinessException.class);
     }
+
+    @Test
+    void 커스텀_구분자가_아닌_문자가_문자열에_있는경우_BusinessException() {
+        // given
+        String input = "//;\n1-2-3";
+
+        // when & then
+        assertThatThrownBy(() -> {
+            inputParser.extractNumbersFromInput(input);
+        }).isInstanceOf(BusinessException.class);
+    }
 }
