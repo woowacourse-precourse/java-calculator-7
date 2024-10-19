@@ -1,5 +1,7 @@
 package calculator.model;
 
+import java.util.List;
+
 public interface CalculatorService {
-    Integer calculate(String input);
+    Integer sum(List<Integer> input);
 }
