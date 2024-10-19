@@ -48,10 +48,6 @@ public class Application {
         return input.substring(2);
     }
 
-    private static String removeDelimiter(String input) {
-        int delimiterIndex = input.indexOf("\n");  // 구분자 위치 찾기
-        return input.substring(delimiterIndex + 1).trim();
-    }
     private static int[] extractNumbers(String input, String delimiter) {
         String[] tokens = input.split(delimiter);  // 구분자를 사용해 문자열 분리
         return Arrays.stream(tokens)
