@@ -10,10 +10,19 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
     @Test
-    void Input_공백제거(){
+    void Input_커스텀구문자_추가1(){
         assertSimpleTest(() ->{
-            run(" t e s t ");
-            assertThat(output()).contains("test");
+            run("//#\\n3924");
+            assertThat(output()).contains("[,, :, #]");
+            assertThat(output()).contains("3924");
+        });
+    }
+    @Test
+    void Input_커스텀구문자_추가2(){
+        assertSimpleTest(() ->{
+            run("72//#\\n28");
+            assertThat(output()).contains("[,, :, #]");
+            assertThat(output()).contains("7228");
         });
     }
     /*
