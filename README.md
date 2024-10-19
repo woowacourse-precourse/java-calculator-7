@@ -19,16 +19,21 @@
 - [X] A. IOManager의 함수 
     - [X] 1. 문자열 입력받기
     - [X] 2. 결과 출력하기
-- [ ] B. Calculation의 함수
+- [X] B. Calculation의 함수
     - ~~ [ ] 0. getter, setter~~
     - [X] 1. 입력 받은 문자열 분석하고 필드에 저장하기
         - public void splitInputString(String input)
         - private void checkCustomSperator()
     - [X] 2. 필드 데이터 연산하고, 결과값 리턴하기
         - public int returnAddition()
+- [ ] C. Exception 처리하기: 잘못된 값을 입력할 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료(exit()함수 사용 불가) 
+    - 1. 숫자도 구분자도 아닌 문자의 경우 에러 처리 
+    - 2. 입력받은 문자열에 음수가 포함되는 경우(커스텀 구분자가 아닌 정수로 인식될 때)
 
 ## 환경설정
 - Style 폴더를 만들고, Google과 우테코 스타일 파일을 넣었다. Google스타일 적용후 인덴트설정, 열제한(120줄)설정.
+
+
 
 
 #### 아이콘: 📮✏️🎯

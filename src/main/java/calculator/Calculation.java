@@ -15,12 +15,12 @@ public class Calculation {
     }
 
     // 입력 문자열을 분해해서 필드에 저장하기
-    public void splitInputString(String input)
+    public boolean splitInputString(String input)
     {
         // 입력값이 비어있는지 확인
         if (input.isEmpty()) {
             // 빈 문자열 처리
-            return;
+            return true;
         }
 
         if (input.startsWith("//")) {
@@ -43,10 +43,11 @@ public class Calculation {
             }
             // 숫자도 구분자도 아닌 경우 에러 처리
             else {
-                System.err.println("Error: Invalid seperator");
+                throw new IllegalArgumentException();
             }
         }
         valList.add(Integer.parseInt(tmp)); // 마지막 value 추가
+        return true;
     }
 
     // 커스텀 구분자가 있는 경우 해당 구분자를 추가
