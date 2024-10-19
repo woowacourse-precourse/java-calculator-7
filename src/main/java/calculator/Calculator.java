@@ -7,15 +7,15 @@ public class Calculator {
 
     private final SeparatorProcessor separatorProcessor;
     private final Pattern customSeparatorCmdPattern;
-    private final int customSeparatorIdx = 2;
-    private final String customSeparatorCmdRegex = "^(\\/\\/.\\\\n)";
-    private final String minusDigitRegex = "-[0-9]*";
-    private final String positiveDigitRegex = "\\d*";
+    private final int CUSTOM_SEPARATOR_IDX = 2;
+    private final String CUSTOM_SEPARATOR_CMD_REGEX = "^(\\/\\/.\\\\n)";
+    private final String MINUS_DIGIT_REGEX = "-[0-9]*";
+    private final String POSITIVE_DIGIT_REGEX = "\\d*";
     private final ICalculatorDisplay calculatorDisplay;
 
     public Calculator(ICalculatorDisplay calculatorDisplay) {
         this.separatorProcessor = new SeparatorProcessor(',', ':');
-        this.customSeparatorCmdPattern = Pattern.compile(customSeparatorCmdRegex);
+        this.customSeparatorCmdPattern = Pattern.compile(CUSTOM_SEPARATOR_CMD_REGEX);
         this.calculatorDisplay = calculatorDisplay;
     }
 
@@ -25,7 +25,7 @@ public class Calculator {
         // 커스텀 구분자 설정
         Matcher matcher = customSeparatorCmdPattern.matcher(cmd);
         if (matcher.find()) { // 사용자가 커스텀 구분자 설정 명령을 입력했을 시
-            registerCustomSeparator(matcher.group().charAt(customSeparatorIdx));
+            registerCustomSeparator(matcher.group().charAt(CUSTOM_SEPARATOR_IDX));
 
             // 구분자 등록에 사용됐던 명령어 제거
             cmd = cmd.replace(matcher.group(), "");
@@ -78,10 +78,10 @@ public class Calculator {
      * @throws IllegalArgumentException 음수이거나, 숫자 이외의 값일 경우
      */
     private boolean validateNumber(String str) {
-        if (str.matches(minusDigitRegex)) {
+        if (str.matches(MINUS_DIGIT_REGEX)) {
             throw new IllegalArgumentException("음수 계산 불가");
         }
-        if (!str.matches(positiveDigitRegex)) {
+        if (!str.matches(POSITIVE_DIGIT_REGEX)) {
             throw new IllegalArgumentException("숫자 이외의 값은 계산 불가");
         }
 
