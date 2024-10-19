@@ -1,9 +1,11 @@
 package calculator.validate;
 
 import static calculator.validate.StringValidate.isInputStartWithSlash;
-import static calculator.validate.StringValidate.validateBackString;
+import static calculator.validate.StringValidate.validateCalFormula;
 import static calculator.validate.StringValidate.validateNewLineInput;
 import static calculator.validate.StringValidate.validateNotNullInput;
+import static calculator.validate.StringValidate.validateSeperator;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -43,12 +45,20 @@ class StringValidateTest {
     }
 
     @Test
+    @DisplayName("구분자에는 숫자가 있어서는 안된다.")
+    void noNumInSeperator() {
+        String seperator = ",:[]1";
+
+        assertThrows(IllegalArgumentException.class, () -> validateSeperator(seperator));
+    }
+
+    @Test
     @DisplayName("계산해야 하는 문자열에 숫자, 구분자 외 다른 문자가 있으면 IllegalArgumentException가 발생한다.")
     void otherCharInBackString() {
         String string = "1a2B3c";
         String separator = "abc";
 
-        assertThrows(IllegalArgumentException.class, () -> validateBackString(string, separator));
+        assertThrows(IllegalArgumentException.class, () -> validateCalFormula(string, separator));
     }
 
     @Test
@@ -57,7 +67,7 @@ class StringValidateTest {
         String string = "123456";
         String separator = "abc";
 
-        assertTrue(validateBackString(string, separator));
+        assertDoesNotThrow(() -> validateCalFormula(string, separator));
     }
 
     @Test
@@ -66,7 +76,7 @@ class StringValidateTest {
         String string = "abcabc";
         String separator = "abc";
 
-        assertTrue(validateBackString(string, separator));
+        assertDoesNotThrow(() -> validateCalFormula(string, separator));
     }
 
     @Test
@@ -75,7 +85,7 @@ class StringValidateTest {
         String string = "";
         String separator = "abc";
 
-        assertTrue(validateBackString(string, separator));
+        assertDoesNotThrow(() -> validateCalFormula(string, separator));
     }
 
     @Test
@@ -84,6 +94,6 @@ class StringValidateTest {
         String string = "1234";
         String separator = "";
 
-        assertTrue(validateBackString(string, separator));
+        assertDoesNotThrow(() -> validateCalFormula(string, separator));
     }
 }

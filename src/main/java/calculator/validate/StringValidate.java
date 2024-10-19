@@ -19,19 +19,24 @@ public class StringValidate {
         }
     }
 
-    public static boolean validateBackString(String string, String separator) {
-        if (Objects.equals(string, "")) {
-            return true;
+    public static void validateSeperator(String seperator) {
+        for (char c : seperator.toCharArray()) {
+            if (Character.isDigit(c)) {
+                throw new IllegalArgumentException("해당 문자열은 문자로만 이루어져야 합니다.");
+            }
         }
+    }
 
-        for (String s : string.split("")) {
-            if (Character.isDigit(s.charAt(0))) {
-                continue;
-            }
-            if (!separator.contains(s)) {
-                throw new IllegalArgumentException("계산해야 하는 문자열에 구분자가 아닌 문자가 있습니다.");
+    public static void validateCalFormula(String string, String separator) {
+        if (!Objects.equals(string, "")) {
+            for (String s : string.split("")) {
+                if (Character.isDigit(s.charAt(0))) {
+                    continue;
+                }
+                if (!separator.contains(s)) {
+                    throw new IllegalArgumentException("계산해야 하는 문자열에 구분자가 아닌 문자가 있습니다.");
+                }
             }
         }
-        return true;
     }
 }
