@@ -9,22 +9,28 @@ public class CalculatorParser {
 
     public List<Double> parse(String sentence){
         if(isDelimiterCustom(sentence)){
-            processCustomDelimiter(sentence);
+            parseAndValidCustomDelimiter(sentence);
             sentence = removeCustomDelimiterDefinition(sentence);
         }
         return parseAndValidateOperands(sentence);
     }
 
-    private boolean isDelimiterCustom(String sentence){
-        return sentence.startsWith("//");
+    private boolean isDelimiterCustom(String input){
+        return input.startsWith("//");
     }
 
-    private void processCustomDelimiter(String sentence) {
-        String[] result = sentence.split("\n");
-        if (result[0].length() != 3) {
-            throw new IllegalArgumentException("커스텀 구분자가 1글자를 초과했습니다.");
+    private void parseAndValidCustomDelimiter(String input) {
+        String regex = "^//(.)\\n.*";
+
+        if(input.matches(regex)){
+            char delimiter = input.charAt(2);
+            if(Character.isDigit(delimiter)){
+                throw new IllegalArgumentException("숫자는 구분자로 사용할 수 없습니다.");
+            }
+            delimiters.add(delimiter);
+        } else{
+            throw new IllegalArgumentException("구분자는 길이가 1인 문자여야 합니다.");
         }
-        delimiters.add(result[0].charAt(2));
     }
 
     private String removeCustomDelimiterDefinition(String sentence){
