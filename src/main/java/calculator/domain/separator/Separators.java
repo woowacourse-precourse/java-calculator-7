@@ -1,4 +1,4 @@
-package calculator.domain.letter;
+package calculator.domain.separator;
 
 import static calculator.global.constant.Config.INITIAL_SEPARATORS;
 import static java.util.Arrays.stream;

@@ -4,7 +4,7 @@ import static calculator.global.constant.Config.*;
 import static calculator.global.util.Validator.validateCustomIndex;
 import static calculator.global.util.Validator.validateSeparator;
 
-import calculator.domain.letter.Separators;
+import calculator.domain.separator.Separators;
 import calculator.domain.number.Numbers;
 
 

@@ -1,4 +1,4 @@
-package calculator.domain.letter;
+package calculator.domain.separator;
 
 import java.util.Objects;
 

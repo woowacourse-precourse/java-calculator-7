@@ -1,4 +1,4 @@
-package calculator.domain.letter;
+package calculator.domain.separator;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
