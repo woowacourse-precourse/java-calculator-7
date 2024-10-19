@@ -15,11 +15,11 @@ public class CalculatorController {
     // 프로그램 실행
     public void run() {
         try {
-            String input = view.getInput();
-            int result = calculator.add(input);
-            view.printResult(result); // 출력
+            String input = view.getUserInput();
+            int result = calculator.claculateSumFromInput(input);
+            view.showResult(result); // 출력
         } catch (NoSuchElementException e) {
-            view.printResult(0); // 빈 입력에 대해 기본 값 반환
+            view.showResult(0); // 빈 입력에 대해 기본 값 반환
         }
     }
 }
