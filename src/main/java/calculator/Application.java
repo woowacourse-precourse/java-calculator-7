@@ -8,7 +8,7 @@ public class Application {
 
         View view = new View();
         CalculatorConfig calculatorConfig = new CalculatorConfig();
-        Calculator calculator = new Calculator(calculatorConfig.calculatorService());
+        CalculatorController calculator = new CalculatorController(calculatorConfig.calculatorService());
 
         view.printMessage();
         String input = view.input();
