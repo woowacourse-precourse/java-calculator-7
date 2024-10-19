@@ -29,16 +29,16 @@ public class CalculatorService {
     }
 
     public boolean isCustomDelimiter(String inputString) {
-        return inputString.startsWith("//") && inputString.contains("\n");
+        return inputString.startsWith("//") && inputString.contains("\\n");
     }
 
     public String parseCustomDelimiter(String inputString) {
-        return inputString.substring(2, inputString.indexOf("\n"));
+        return inputString.substring(2, inputString.indexOf("\\n"));
     }
 
     public void updateInputString(DelimiterInputDto delimiterInputDto) {
         String inputString = delimiterInputDto.getInputString();
-        delimiterInputDto.setInputString(inputString.substring(inputString.indexOf("\n") + 1));
+        delimiterInputDto.setInputString(inputString.substring(inputString.indexOf("\\n") + 2));
     }
 
     public List<String> parseNumber(DelimiterInputDto delimiterInputDto) {
