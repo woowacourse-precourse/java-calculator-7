@@ -78,12 +78,12 @@ List<String> splitByDelimiter(String input, List<Character> delimiter);
 1. 문자열을 구분자를 바탕으로 split
 2. 분리된 문자열 list 반환
 
-### 3. 숫자 (String → Integer) 변환 Method
+### + 정수/실수 처리 방법 확인 method
 
 **시그니처**
 
 ```java
-List<Integer> changeToInteger(List<String> numStrings);
+Boolean isDecimal(List<String> numStrings);
 ```
 
 **입력**
@@ -92,7 +92,31 @@ List<Integer> changeToInteger(List<String> numStrings);
 
 **출력**
 
-- 리스트 각각의 문자를 Integer로 변환하여 반환
+- 리스트의 숫자들 중 실수가 있으면 true 아니면 false 반환
+
+**로직**
+
+1. 입력 문자들을 탐색
+2. '.'이 존재한다면 true 반환
+3. 모두 탐색했다면 false 반환
+
+### 3. 숫자 (String → Integer/Double) 변환 Method
+
+**시그니처**
+
+```java
+List<Integer> changeToInteger(List<String> numStrings);
+
+List<Double> changeToDouble(List<String> numStrings);
+```
+
+**입력**
+
+- 양수로 구성된 문자열 리스트
+
+**출력**
+
+- 리스트 각각의 문자를 Integer/Double로 변환하여 반환
 
 **로직**
 
@@ -103,7 +127,9 @@ List<Integer> changeToInteger(List<String> numStrings);
 **시그니처**
 
 ```java
-Integer calculate(List<Integer> nums);
+Integer calculateInteger(List<Integer> nums);
+
+Double calculateDecimal(List<Double> nums);
 ```
 
 **입력**
