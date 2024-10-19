@@ -12,6 +12,13 @@ public class ProgramOutput {
 
     public void printCalculateResult(String inputString) {
         System.out.print(GUIDE_RESULT_MESSAGE);
+        int result = calculateResult(inputString);
+        System.out.print(result);
+    }
+
+    private int calculateResult(String inputString) {
+        Calculator calculator = new Calculator(inputString);
+        return calculator.calculate(inputString);
     }
 
 
