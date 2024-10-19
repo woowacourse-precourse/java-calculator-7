@@ -2,10 +2,10 @@ package calculator.validation;
 
 
 public class OperandValidator {
-    private static final String NON_NATURAL_NUMBER = "자연수가 아닌 값이 포함되어 있습니다.";
+    private static final String NON_NATURAL_NUMBER = "음수나 숫자가 아닌 것이 포함되어 있습니다.";
 
 
-    public static int parsePositiveNumber(String token) {
+    public static int parseNumber(String token) {
         try {
             if (token == null || token.isEmpty()) {
                 return 0;

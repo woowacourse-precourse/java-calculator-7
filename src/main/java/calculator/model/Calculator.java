@@ -6,7 +6,7 @@ public class Calculator {
     public String plus(String[] splitedNumbers){
         int sumOfNumbers = 0;
         for (String token : splitedNumbers) {
-            int number = OperandValidator.parsePositiveNumber(token);
+            int number = OperandValidator.parseNumber(token);
             sumOfNumbers += number;
         }
         return String.valueOf(sumOfNumbers);
