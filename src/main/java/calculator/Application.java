@@ -45,10 +45,15 @@ public class Application {
         }
 
         private void printResult(int result) {
+            System.out.println("결과 : "+result);
         }
 
-        private int calculateNumbers(ArrayList<Integer> extractedNumArr) {
-            return 0;
+        private int calculateNumbers(ArrayList<Integer> extractedNumbers) {
+            int result = 0;
+            for(int n:extractedNumbers){
+                result+=n;
+            }
+            return result;
         }
 
         public boolean isValidString(ArrayDeque<String> splitStringDeq) {
