@@ -68,6 +68,8 @@ class ApplicationTest extends NsTest {
             "//;\\n1.2;2;3",
             "//;\\n-1;2;3",
             "//;\\n1; ;3",
+            "//;\\n1;2,3",
+            "//\\n1,2,3"
     })
     void 예외_테스트_커스텀_구분자(String input) {
         assertSimpleTest(() ->
