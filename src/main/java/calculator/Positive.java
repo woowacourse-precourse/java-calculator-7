@@ -18,7 +18,11 @@ public class Positive {
 		return new Positive(0);
 	}
 
-	public Positive add(int other) {
-		return new Positive(other + this.num);
+	public int getNum() {
+		return num;
+	}
+
+	public Positive add(Positive other) {
+		return new Positive(other.getNum() + this.num);
 	}
 }
