@@ -7,7 +7,7 @@ public class StartNumber {
 
     private static final Pattern formatCheck = Pattern.compile("\\d+([,:]\\d+)*");
 
-    public int readNumInput (String input) {
+    public ArrayList<Integer> readNumInput (String input) {
 
         if (!formatCheck.matcher(input).matches()) {
             throw new IllegalArgumentException();
@@ -20,7 +20,6 @@ public class StartNumber {
             numbers.add(Integer.parseInt(temp));
         }
 
-        Calculate calculate = new Calculate();
-        return calculate.AddNumbers(numbers);
+        return numbers;
     }
 }
