@@ -6,6 +6,17 @@ public class Calculator {
     private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
     private static final int CUSTOM_DELIMITER_START_INDEX = 2;
 
+    // 커스텀 구분자가 있는 경우 커스텀 구분자 선언 부분을 제외한 숫자 부분 추출
+    public String extractNumbersPart(String userInput, String customDelimiter) {
+        if (!customDelimiter.isEmpty()) {
+            int customDelimiterEndIndex = userInput.indexOf(CUSTOM_DELIMITER_SUFFIX);
+            int numberPartLength = customDelimiterEndIndex + CUSTOM_DELIMITER_SUFFIX.length();
+            String numberPart = userInput.substring(numberPartLength);
+            return numberPart;
+        }
+        return userInput;
+    }
+
     public String extractCustomDelimiter(String userInput) {
         String customDelimiter = "";
         if (userInput.startsWith(CUSTOM_DELIMITER_PREFIX) && userInput.contains(CUSTOM_DELIMITER_SUFFIX)) {
