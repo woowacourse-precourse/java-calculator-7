@@ -5,7 +5,7 @@ import static calculator.constants.DelimiterConstants.COMMA;
 
 public class DelimiterHandler {
 
-    private static final String NUMBER_FIRST_REGEX = "^[1-9].*";
+    private static final String NUMBER_FIRST_REGEX = "^-?\\d.*";
     private static final String EMPTY_STRING = "";
 
     private final CustomDelimiterExtractor customDelimiterExtractor;
