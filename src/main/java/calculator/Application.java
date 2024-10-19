@@ -1,13 +1,15 @@
 package calculator;
 
+import calculator.CalculationManager.Calculator;
+import calculator.CalculationManager.Validator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
-    private final InputValidator inputValidator;
-    private final StringAddCalculator stringAddCalculator;
+    private final Validator inputValidator;
+    private final Calculator stringAddCalculator;
 
     // 의존성 주입
-    public Application(InputValidator inputValidator, StringAddCalculator stringAddCalculator) {
+    public Application(Validator inputValidator, Calculator stringAddCalculator) {
         this.inputValidator = inputValidator;
         this.stringAddCalculator = stringAddCalculator;
     }
@@ -29,8 +31,8 @@ public class Application {
 
     public static void main(String[] args) {
         // 객체를 생성하여 Application에 주입
-        InputValidator validator = new InputValidator();
-        StringAddCalculator calculator = new StringAddCalculator();
+        Validator validator = new InputValidator();
+        Calculator calculator = new StringAddCalculator();
         Application app = new Application(validator, calculator);
 
         // 프로그램 실행
