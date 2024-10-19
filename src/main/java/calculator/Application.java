@@ -6,17 +6,13 @@ public class Application {
     public int addition(String[] strArr) throws IllegalArgumentException {
         int sum = 0;
         for(String number : strArr) {
-            try {
-                if(Integer.parseInt(number)<0) {
-                    throw new IllegalArgumentException();
-                } else {
-                    sum += Integer.parseInt(number);
-                }
-            } catch (NumberFormatException e) {
+            if(Integer.parseInt(number)<0) {
                 throw new IllegalArgumentException();
+            } else {
+                sum += Integer.parseInt(number);
             }
         }
-        return  sum;
+        return sum;
     }
 
     public int separate(String str) throws IllegalArgumentException {
