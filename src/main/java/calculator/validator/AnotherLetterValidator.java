@@ -1,14 +1,14 @@
 package calculator.validator;
 
 public class AnotherLetterValidator {
-    private String input;
+
 
     public AnotherLetterValidator(String input) {
-        this.input = input;
-        validateAnotherLetter();
+
+        validateAnotherLetter(input);
     }
 
-    private void validateAnotherLetter() {
+    private void validateAnotherLetter(String input) {
         if (input.charAt(0) != '/' && (input.chars().anyMatch(c -> !Character.isDigit(c) && c != ','))) {
             throw new IllegalArgumentException("허용되지 않는 문자가 존재합니다.");
         }

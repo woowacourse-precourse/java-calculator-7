@@ -1,20 +1,20 @@
 package calculator;
 
 public class FormulaGenerator {
-    private String input;
+
     private String formula;
 
     public FormulaGenerator(String input) {
-        this.input = input;
-        this.formula = makeFormula(this.input);
+
+        this.formula = makeFormula(input);
     }
 
     private String makeFormula(String input) {
-        if(input.charAt(0)=='/'){
+        if (input.charAt(0) == '/') {
             InputParser inputParser = new InputParser(input);
-            input = inputParser.getparsedInput();
+            input = inputParser.getParsedInput();
         }
-        if(input.isEmpty()) return "0";
+        if (input.isEmpty()) return "0";
         for (int i = 1; i < input.length(); i++) {
             input = changeSeparator(input, i);
         }
@@ -32,8 +32,8 @@ public class FormulaGenerator {
         return formula;
     }
 
-    private boolean isSeparate(char input){
-        return '0'> input || input > '9';
+    private boolean isSeparate(char input) {
+        return '0' > input || input > '9';
     }
 
     private char changeSeparatorToPlusSign() {

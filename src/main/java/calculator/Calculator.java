@@ -1,7 +1,6 @@
 package calculator;
 
 public class Calculator {
-    String formula;
     int result;
 
     public int getResult() {
@@ -9,7 +8,6 @@ public class Calculator {
     }
 
     public Calculator(String formula) {
-        this.formula = formula;
         result = calculate(formula);
     }
 

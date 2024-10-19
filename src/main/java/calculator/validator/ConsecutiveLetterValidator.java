@@ -1,14 +1,14 @@
 package calculator.validator;
 
 public class ConsecutiveLetterValidator {
-    private String input;
+
 
     public ConsecutiveLetterValidator(String input) {
-        this.input = input;
-        validateConsecutiveLetters();
+
+        validateConsecutiveLetters(input);
     }
 
-    private void validateConsecutiveLetters() {
+    private void validateConsecutiveLetters(String input) {
         if (input.charAt(0) != '/' && checkConsecutiveLetter(input)) {
             throw new IllegalArgumentException("같은 문자가 두 번 연속 입력되었습니다.");
         }

@@ -2,8 +2,8 @@ package calculator.validator;
 
 public class EdgeCharValidator {
     public EdgeCharValidator(String input) {
-        if(input.charAt(0) != '/') validateEdgeChar(input);
-        if(input.charAt(0) == '/') validateEdgeChar(input.substring(5));
+        if (input.charAt(0) != '/') validateEdgeChar(input);
+        if (input.charAt(0) == '/') validateEdgeChar(input.substring(5));
     }
 
     private void validateEdgeChar(String input) {

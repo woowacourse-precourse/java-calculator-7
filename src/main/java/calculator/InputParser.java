@@ -1,16 +1,17 @@
 package calculator;
 
 public class InputParser {
-    private String input;
+    private String parsedinput;
+
     public InputParser(String input) {
-        this.input = input;
-        parseInput();
-    }
-    private void parseInput() {
-        input = input.substring(5);
+        parsedinput = parseInput(input);
     }
 
-    public String getparsedInput() {
-        return input;
+    private String parseInput(String input) {
+        return input.substring(5);
+    }
+
+    public String getParsedInput() {
+        return parsedinput;
     }
 }
