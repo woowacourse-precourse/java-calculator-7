@@ -8,7 +8,7 @@ public class ExtractorDto {
 
     public void settingExtractorDto(List<String> delimiters, String values) {
         this.delimiters = delimiters;
-        this.values=values;
+        this.values = values;
     }
 
     public List<String> getDelimiters() {

@@ -12,11 +12,17 @@ public class Controller {
     Calculator calculator = new Calculator();
     OutputView outputView = new OutputView();
 
-    public void calculate(){
-        String calculationValue=inputView.inputCalculationValue();
-        extractor.extractValues(calculationValue);
-        Numbers numbers = extractor.extractValues(calculationValue);
-        int resultValue=calculator.plusCalculator(numbers);
-        outputView.printResultValue(resultValue);
+    public void calculate() {
+        final int INIT_VALUE = 0;
+
+        String calculationValue = inputView.inputCalculationValue(outputView);
+        if (calculationValue.isEmpty()) {
+            outputView.printResultValue(INIT_VALUE);
+        } else if (!calculationValue.isEmpty()) {
+            extractor.extractValues(calculationValue);
+            Numbers numbers = extractor.extractValues(calculationValue);
+            int resultValue = calculator.plusCalculator(numbers);
+            outputView.printResultValue(resultValue);
+        }
     }
 }

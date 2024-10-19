@@ -4,21 +4,21 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Extractor {
-    public ExtractorDto saveExtractorDto(String calculationValue){
+    public ExtractorDto saveExtractorDto(String calculationValue) {
         final String START_POINT_DELIMITER = "//";
         final String END_POINT_DELIMITER = "\\n";
-        final String SPLIT_POINT= "\n";
+        final String SPLIT_POINT = "\n";
         Delimiter delimiter = new Delimiter();
-        ExtractorDto extractorDto= new ExtractorDto();
+        ExtractorDto extractorDto = new ExtractorDto();
 
-        if(calculationValue.contains(START_POINT_DELIMITER)&& calculationValue.contains(END_POINT_DELIMITER)){
+        if (calculationValue.contains(START_POINT_DELIMITER) && calculationValue.contains(END_POINT_DELIMITER)) {
             calculationValue = calculationValue.replace(START_POINT_DELIMITER, "");
             calculationValue = calculationValue.replace(END_POINT_DELIMITER, SPLIT_POINT);
             String[] divideDelimiterAndNumber = calculationValue.split(SPLIT_POINT);
-            extractorDto = saveCustomDelimiter(extractorDto,delimiter,divideDelimiterAndNumber);
+            extractorDto = saveCustomDelimiter(extractorDto, delimiter, divideDelimiterAndNumber);
             return extractorDto;
         }
-        extractorDto.settingExtractorDto(delimiter.getDelimiters(),calculationValue);
+        extractorDto.settingExtractorDto(delimiter.getDelimiters(), calculationValue);
         return extractorDto;
     }
 
@@ -46,10 +46,19 @@ public class Extractor {
 
         List<Number> values = new ArrayList<>();
         for (String value : valuesBeforeExtract) {
-            Number number = new Number(Integer.parseInt(value.trim()));
+            value = value.trim();
+            if (value.isEmpty()) value = "0";
+            numericErrorDiscriminator(value);
+            Number number = new Number(Integer.parseInt(value));
             values.add(number);
         }
         Numbers numbers = new Numbers(values);
         return numbers;
+    }
+
+    public void numericErrorDiscriminator(String value) {
+        if (!value.matches("-?\\d+")) {
+            throw new IllegalArgumentException("입력된 값이 숫자가 아닙니다.");
+        }
     }
 }

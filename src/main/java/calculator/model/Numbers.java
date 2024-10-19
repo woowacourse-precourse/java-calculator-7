@@ -5,7 +5,7 @@ import java.util.List;
 public class Numbers {
     private List<Number> values;
 
-    Numbers(List<Number> values){
+    Numbers(List<Number> values) {
         this.values = values;
     }
 
