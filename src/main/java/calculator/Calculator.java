@@ -16,33 +16,29 @@ public class Calculator {
     }
 
     private static String[] checkDelimiter(String input) {
-        
-        StringBuilder delimiters = new StringBuilder(); 
-        
-        //기본 구분자
+        StringBuilder delimiters = new StringBuilder();
+
+        // 기본 구분자
         delimiters.append(",").append(":");
 
         // 커스텀 구분자
-        if (input.startsWith("//")) {
+        while (input.startsWith("//")) {
+
             int start = 2;
-            int end = input.indexOf('\n', start);
+            int end = input.indexOf("\\n", start);
 
-            while (end != -1) {
-                String customDelimiter = input.substring(start, end);
-                delimiters.append(customDelimiter);
-                start = end + 1;
-
-                if (input.startsWith("//", start)) {
-                    start += 2;
-                    end = input.indexOf('\n', start);
-                } else {
-                    break;
-                }
+            if (end == -1) {
+                break;
             }
-            input = input.substring(end + 1);
+
+            String customDelimiter = input.substring(start, end);
+            delimiters.append(customDelimiter);
+
+            input = input.substring(end + 2);
         }
 
         return new String[] { delimiters.toString(), input };
     }
+
 
 }
