@@ -2,7 +2,7 @@ package calculator.validation;
 
 
 public class OperandValidator {
-    private static final String NON_NATURAL_NUMBER = "음수나 숫자가 아닌 것이 포함되어 있습니다.";
+    private static final String INVALID_OPERAND = "피연산자가 잘못 입력되었습니다.";
 
 
     public static int parseNumber(String token) {
@@ -12,11 +12,11 @@ public class OperandValidator {
             } 
             int number = Integer.parseInt(token);
             if (number <= 0) {
-                throw new IllegalArgumentException(NON_NATURAL_NUMBER);
+                throw new IllegalArgumentException(INVALID_OPERAND);
             }
             return number;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(NON_NATURAL_NUMBER);
+            throw new IllegalArgumentException(INVALID_OPERAND);
         }
     }
 
