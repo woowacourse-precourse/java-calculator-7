@@ -23,6 +23,8 @@
 - **예외처리**
     - 빈 문자열 입력시 0 반환
         - 예: `""`
+    - readLine() 사용할때 `""` 입력시 0으로 반환
+        - 예 `run("")`
     - 음수 입력시 `IllegalArgumentException` 을 반환
         - 예: `"1,-2,3"`
     - 숫자가 아닌 값 입력시 `IllegalArgumentException` 을 반환
