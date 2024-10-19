@@ -41,6 +41,14 @@ public class Application {
         }
     }
 
+    private long calculateSum(List<Long> numbers) {
+        long sum = 0;
+        for(Long number : numbers) {
+            sum += number;
+        }
+        return sum;
+    }
+
     public void startApplication() {
         List<Long> numbers = new ArrayList<>();
 
@@ -48,8 +56,8 @@ public class Application {
         String input = Console.readLine();
 
         extractCustomDelimiter(input, delimiters);
-
-       long sum = 0;
+        extractNumbers(input, numbers);
+        long sum = calculateSum(numbers);
 
         System.out.println("결과 : " + sum);
     }
