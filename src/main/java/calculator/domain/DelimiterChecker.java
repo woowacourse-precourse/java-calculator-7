@@ -5,27 +5,35 @@ import java.util.List;
 
 public class DelimiterChecker {
 
-    private static List<Character> DELIMITERS = List.of(',', ':');
+    private final String input;
+    private List<Character> delimiters;
+
     private static final String CUSTOM_DELIMITER_BEGIN = "//";
     private static final String CUSTOM_DELIMITER_END = "\\n";
     private static final int CUSTOM_DELIMITER_INDEX = 2;
 
-    public static List<Integer> checkDelimiter(String input) {
-        if (isCustomed(input)) addDelimiter(input);
+    public DelimiterChecker(String input) {
+        this.input = input;
+        this.delimiters = new ArrayList<>(List.of(',', ':'));
 
-        return leaveOnlyNumbers(input);
+        if (isCustomed())
+            addDelimiter();
     }
 
-    public static boolean isCustomed(String input) {
+    public List<Integer> getNumbers() {
+        return leaveOnlyNumbers();
+    }
+
+    private boolean isCustomed() {
         return input.startsWith(CUSTOM_DELIMITER_BEGIN) &&
                 input.contains(CUSTOM_DELIMITER_END);
     }
 
-    public static void addDelimiter(String input) {
-        DELIMITERS.add(input.charAt(CUSTOM_DELIMITER_INDEX));
+    private void addDelimiter() {
+        delimiters.add(input.charAt(CUSTOM_DELIMITER_INDEX));
     }
 
-    public static List<Integer> leaveOnlyNumbers(String input) {
+    private List<Integer> leaveOnlyNumbers() {
         int endIndex = input.indexOf(CUSTOM_DELIMITER_END);
         List<Integer> numbers = new ArrayList<>();
         String number = "";
@@ -41,8 +49,8 @@ public class DelimiterChecker {
         return numbers;
     }
 
-    public static boolean isRightDelimiter(char currentChar) {
-        if (DELIMITERS.contains(currentChar)) return true;
+    private boolean isRightDelimiter(char currentChar) {
+        if (delimiters.contains(currentChar)) return true;
         else throw new IllegalArgumentException();
     }
 }
