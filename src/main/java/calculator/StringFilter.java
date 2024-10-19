@@ -1,5 +1,6 @@
 package calculator;
 
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class StringFilter {
@@ -9,15 +10,12 @@ public class StringFilter {
     //입력값을 정수 배열로 변환
     public int[] convertToIntArray(String input){
         String[] splitInput = checkDelimiterType(input);
-
         validator.validateString(splitInput);
         validator.validateNegativeNumber(splitInput);
 
-        int[] result = new int[splitInput.length];
-        for (int i = 0; i < splitInput.length; i++) {
-                result[i] = Integer.parseInt(splitInput[i]);
-        }
-        return result;
+        return Arrays.stream(splitInput)
+                .mapToInt(Integer::parseInt)
+                .toArray();
     }
     
     //구분자 타입 확인
