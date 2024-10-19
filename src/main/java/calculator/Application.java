@@ -51,8 +51,7 @@ public class Application {
             delimiter.append("|").append(Pattern.quote(tempResult[0]));  // 커스텀 구분자를 정규식으로 처리
         }
         str = tempResult[1];
-        System.out.println(str);
         String[] result = parseString(delimiter.toString(), str);
-        System.out.println(add(result));
+        System.out.println("결과 : " + add(result));
     }
 }
