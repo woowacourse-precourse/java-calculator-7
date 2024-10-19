@@ -26,6 +26,12 @@ public class Process {
         return userInput.substring(startIndex, endIndex);
     }
 
+    public void addStringToCharList(String separator) {
+        for(int i = 0; i < separator.length(); i++) {
+            basicSeparator.add(separator.charAt(i));
+        }
+    }
+
 }
 
 
