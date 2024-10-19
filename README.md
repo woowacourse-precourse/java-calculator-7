@@ -5,44 +5,57 @@
 ## 구현
 ***
 
+
+
 ### Controller
 - 프로그램 동작 과정을 제어하는 클래스
 - [ ] `void startProcess()`
-    - 프로그램 시작점
-    - 프로그램 전반의 흐름 제어
-      1. DataStore 생성
-      2. 입력 받기
-      3. 구분자 체크
-      4. 합연산
-      5. 결과 출력
 
-### DataStore
-- 과정에 필요한 값들을 저장하고 처리할 클래스
-- [ ] `String target`
-- [ ] `List<Character> delimiter`
-- [ ] `Integer sum`
+### CalculatorManager
+- 계산 관련 기능 처리 클래스
+  - `String userInput`
+  - `String parsedUserInput`
+  - `List<Character> delimiter`
+  - `int sum`
 
-### InputHandler
-- 입력을 책임지는 클래스
-- [ ] `String makeInput()`
 
-### OutputHandler
-- 출력을 책임지는 클래스
+- [ ] `String makeUserInput(String userInput)`
+- [ ] `List<Character> makeDelimiter(List<Character> delimiter)`
+- [ ] `String parseMarker(String parsedUserInput)`
+- [ ] `void checkCompatibility()`
+- [ ] `int calculateSum()`
 - [ ] `void printAnswer()`
 
-### CheckDelimiter
-- 구분자를 등록하는 클래스
-- [ ] `List addBasicDelimiter()`
-- [ ] `List addSpecialDelimiter()`
-    - [ ] `Character extractDelimiter()`
-      - `StringBuilder`의 `substring`
+### InputHandler
+- 문자열을 사용자로부터 입력받는 클래스
+- [ ] `String getUserInput()`
 
-### SumCalculator
-- 합을 구하는 클래스
-- [ ] `Integer makeSum()`
+### DelimiterParser
+- 구분자를 파싱하는 클래스
+- [ ] `List<Character> parseDelimiter(String userInput)`
+    - [ ] `void addBasicDelimiter()`
+    - [ ] `void addSpecialDelimiter()`
+- [ ] `String parseMarker(String userInput)`
+
+### CheckCompatibility
+- 문자열이 계산을 진행하기에 알맞는지 체크하는 클래스
+- [ ] `void checkInvalidInput(String parsedUserInput)`
+
+### Calculator
+- 계산하는 클래스
+  `String[] splitNumbers`
+  `int sum`
+
+- [ ] `int getSum(String[] splitNumbers)`
+    - [ ] `void makeSplitNumbers(String parsedUserInput, List<Character> delimiter)`
+
+### OutputHandler
+- 답을 출력하는 클래스
+- [ ] `void printAnswer()`
+
 
 ### ExceptionHandler
-- 예외처리를 다루는 클래스
+- TBD
 
 
 
