@@ -11,6 +11,7 @@ public class DelimiterChecker {
     private static final String CUSTOM_DELIMITER_BEGIN = "//";
     private static final String CUSTOM_DELIMITER_END = "\\n";
     private static final int CUSTOM_DELIMITER_INDEX = 2;
+    private static final int CUSTOM_MARK_END_INDEX = 5;
 
     public DelimiterChecker() {
     }
@@ -20,6 +21,10 @@ public class DelimiterChecker {
     }
 
     public List<Integer> getNumbers() {
+        if (isCustomed()) {
+            addDelimiter();
+            deleteCustomMark();
+        }
         return leaveOnlyNumbers();
     }
 
@@ -32,11 +37,14 @@ public class DelimiterChecker {
         delimiters.add(input.charAt(CUSTOM_DELIMITER_INDEX));
     }
 
+    private void deleteCustomMark() {
+        input.substring(CUSTOM_MARK_END_INDEX);
+    }
+
     private List<Integer> leaveOnlyNumbers() {
-        int endIndex = input.indexOf(CUSTOM_DELIMITER_END);
         List<Integer> numbers = new ArrayList<>();
         String number = "";
-        for (int current = endIndex + 2; current < input.length(); current++) {
+        for (int current = 0; current < input.length(); current++) {
             char currentChar = input.charAt(current);
 
             if (Character.isDigit(currentChar)) number += currentChar;
@@ -45,6 +53,7 @@ public class DelimiterChecker {
                 number = "";
             }
         }
+        if (!number.isEmpty()) numbers.add(Integer.parseInt(number));
         return numbers;
     }
 
