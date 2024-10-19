@@ -1,66 +1,70 @@
 package calculator.split;
 
-import static calculator.split.StringSplit.getBackString;
-import static calculator.split.StringSplit.getFrontString;
+import static calculator.split.StringSplit.getCustomCalFormula;
+import static calculator.split.StringSplit.getCustomSeparator;
+import static calculator.split.StringSplit.getDefaultSeparator;
 import static calculator.split.StringSplit.splitStringBySeparator;
 import static calculator.split.StringSplit.stringToNumber;
-import static calculator.validate.StringValidate.validateFrontString;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class StringSplitTest {
     @Test
-    @DisplayName("문자열에서 '\n' 앞 부분을 올바르게 추출했는지 검증")
-    void extractFrontString() {
+    @DisplayName("커스텀 구분자를 가진 문자열에서 '\n' 구분자를 올바르게 추출했는지 검증")
+    void extractCustomSeparator() {
         String string = "//abc\n123";
+        String customSeparator = "abc,:";
 
-        assertEquals("abc", getFrontString(string));
+        assertEquals(customSeparator, getCustomSeparator(string));
     }
 
     @Test
-    @DisplayName("문자열에서 '\n' 뒷 부분을 올바르게 추출했는지 검증")
-    void extractBackString() {
+    @DisplayName("커스텀 구분자를 가진 문자열에서 '\n' 계산해야 하는 문자열을 올바르게 추출했는지 검증")
+    void extractCustomCalFormula() {
         String string = "//abc\n123";
+        String calFormula = "123";
 
-        assertEquals("123", getBackString(string));
+        assertEquals(calFormula, getCustomCalFormula(string));
     }
 
     @Test
-    @DisplayName("첫번째로 나오는 '\n'로 문자열을 자른다.")
+    @DisplayName("커스텀 구분자를 가진 문자열에서 첫번째로 나오는 '\n'로 문자열을 자른다.")
     void splitAtFirstNewline() {
         String string = "//abc\n\n123";
+        String customSeparator = "abc,:";
+        String calFormula = "\n123";
 
-        assertEquals("abc", getFrontString(string));
-        assertEquals("\n123", getBackString(string));
+        assertEquals(customSeparator, getCustomSeparator(string));
+        assertEquals(calFormula, getCustomCalFormula(string));
     }
 
     @Test
-    @DisplayName("문자열에서 '\n' 뒷 부분이 빈 문자열인 경우")
+    @DisplayName("커스텀 구분자를 가진 문자열에서 '\n' 뒷 부분이 빈 문자열인 경우")
     void backStringEmpty() {
         String string = "//abc\n";
+        String calFormula = "";
 
-        assertEquals("", getBackString(string));
+        assertEquals(calFormula, getCustomCalFormula(string));
     }
 
     @Test
-    @DisplayName("앞 문자열이 문자로만 구성되어 있으면 true 반환")
-    void onlyCharacterInFrontString() {
-        String string = "abc";
+    @DisplayName("기본 구분자 검증")
+    void testDefaultSeparator() {
+        String defaultSeparator = ",:";
 
-        Assertions.assertTrue(validateFrontString(string));
+        assertEquals(defaultSeparator, getDefaultSeparator());
     }
 
     @Test
-    @DisplayName("앞 문자열에 숫자가 있으면 IllegalArgumentException 발생")
-    void isNumberInFrontString() {
-        String string = "1abc";
+    @DisplayName("기본 구분자를 가진 문자열에서 계산해야 하는 문자열 반환 검증")
+    void testDefaultCalFormula() {
+        String input = "1,2::3";
+        String defaultCalFormula = "1,2::3";
 
-        assertThrows(IllegalArgumentException.class, () -> validateFrontString(string));
+        assertEquals(input, defaultCalFormula);
     }
 
     @Test
