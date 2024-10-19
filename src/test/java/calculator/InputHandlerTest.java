@@ -41,4 +41,15 @@ public class InputHandlerTest {
         char result = runner.extractCustomDelimiter(userInput);
         assertThat(result).isEqualTo('a');
     }
+
+    @Test
+    void 커스텀_구분자_포함_여부() {
+        String mockInput = "1,2:3";
+        System.setIn(new ByteArrayInputStream(mockInput.getBytes()));
+
+        var runner = new InputHandler();
+        String userInput = runner.readInput();
+
+        assertThat(runner.isCustomDelimiterPresent(userInput)).isFalse();
+    }
 }
