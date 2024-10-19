@@ -44,11 +44,11 @@ public enum SeparatorType {
     }
 
     public static boolean isPermitted(String value) {
-        try {
-            return valueOf(value).isPermitted;
-        } catch (IllegalArgumentException e) {
-            return true;
-        }
+        return Arrays.stream(values())
+                .filter(separator -> separator.getValue().equals(value))
+                .findFirst()
+                .map(SeparatorType::isPermitted)
+                .orElse(true);
     }
 
     public String getValue() {
