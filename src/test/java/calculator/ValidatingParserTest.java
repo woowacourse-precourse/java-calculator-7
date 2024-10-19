@@ -14,7 +14,7 @@ class ValidatingParserTest {
 	void validatedNumbersFrom_custom_separator() {
 		//given
 		ValidatingParser parser = new ValidatingParser();
-		String testInput = "//ak\n1ak2ak3";
+		String testInput = "//ak\\n1ak2ak3";
 		List<Integer> expectedResult = List.of(1, 2, 3);
 
 		//when

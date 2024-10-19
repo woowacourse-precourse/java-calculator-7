@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ValidatingParser {
 	private static final String START_CUSTOM_SEPARATOR = "//";
-	private static final String END_CUSTOM_SEPARATOR = "\n";
+	private static final String END_CUSTOM_SEPARATOR = "\\n";
 	private static final String DEFAULT_SEPARATORS = "[,:]";
 	private static final String ERROR_MESSAGE_NOT_NUMBER = "입력값이 숫자가 아닙니다.";
 	private static final String ERROR_MESSAGE_NEGATIVE_NUMBER = "입력값이 양수가 아닙니다.";
