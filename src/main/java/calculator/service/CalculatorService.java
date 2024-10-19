@@ -14,12 +14,7 @@ public class CalculatorService {
             String delimiters = "[,|:]";
             if (input.startsWith("//")) {
                 String[] split = input.split("\n", 2);
-                String customDelimiter = split[0].substring(2);
-                // 커스텀 구분자에 숫자가 포함된 경우 예외 발생
-                if (customDelimiter.matches(".*\\d.*")) {
-                    throw new IllegalArgumentException(ExceptionMessage.CONTAIN_NUMBER_IN_DELIMITER.getMessage());
-                }
-                delimiters = "[" + delimiters.substring(1, 4) + "|" + customDelimiter + "]";
+                delimiters = addCustomDelimiter(split, delimiters);
                 input = split[1];
             }
 
@@ -34,6 +29,16 @@ public class CalculatorService {
         }
         calculator.doSum();
         return calculator.getSum();
+    }
+
+    private static String addCustomDelimiter(String[] split, String delimiters) {
+        String customDelimiter = split[0].substring(2);
+        // 커스텀 구분자에 숫자가 포함된 경우 예외 발생
+        if (customDelimiter.matches(".*\\d.*")) {
+            throw new IllegalArgumentException(ExceptionMessage.CONTAIN_NUMBER_IN_DELIMITER.getMessage());
+        }
+        delimiters = "[" + delimiters.substring(1, 4) + "|" + customDelimiter + "]";
+        return delimiters;
     }
 
     private static void validateDelimiter(String[] splitInput, int i) {
