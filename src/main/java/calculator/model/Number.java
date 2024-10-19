@@ -1,7 +1,7 @@
 package calculator.model;
 
 public class Number {
-    private int number;
+    private final int number;
 
     public Number(String number) {
         int tempNumber = parseNumber(number);

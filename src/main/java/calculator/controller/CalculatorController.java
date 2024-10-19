@@ -7,7 +7,7 @@ import calculator.view.CalculatorOutputView;
 public class CalculatorController {
     CalculatorInputView calculatorInputView = new CalculatorInputView();
     CalculatorOutputView calculatorOutputView = new CalculatorOutputView();
-    public void joinStrings(){
+    public void execAdditionCommand(){
         calculatorOutputView.printAddGreetingMessage();
         AdditionCommand additionCommand = calculatorInputView.getAdditionCommand();
         double commandResult = additionCommand.exec();
