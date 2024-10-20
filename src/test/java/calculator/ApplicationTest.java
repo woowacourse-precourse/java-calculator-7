@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
@@ -21,6 +22,43 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    @DisplayName("구분자가 없을 경우 예외를 발생한다.")
+    void meetsAllStringByNumber_Then_Exception() {
+        // given
+        String input = "123456789";
+        // when & then
+        assertThatThrownBy(() -> runException(input))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("구분자 뒤에 숫자가 없을 경우 예외를 발생한다.")
+    void meetsAllStringByOperator_Then_Exception() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("1,2,3,"))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자를 등록했음에도, 구분자 뒤에 숫자가 없을 경우 예외를 발생한다.")
+    void meetsAllStringByCustomSeparator_Then_Exception() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("//;\\n1;2,3;"))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    @DisplayName("잘못된 구분자가 숫자앞에 올 경우 예외를 발생한다.")
+    void meetsWrongSeparator_Then_Exception() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
