@@ -61,7 +61,7 @@ public class Application {
         if (isNumeric(str)) {
             // A1 숫자만 있는 경우
             return Integer.parseInt(str);
-        } else if (str.isEmpty() || str.trim().isEmpty()) {
+        } else if (str.isEmpty() ) {
             // A2 공백만 있는 경우
             return 0;
         } else if (str.length() > 4 && str.substring(0, 2).equals("//") && str.substring(3, 5).equals("\\n")) { // //@\n 꼴의 양식인가?
