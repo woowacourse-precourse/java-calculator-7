@@ -6,22 +6,22 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         Application app = new Application();
-        app.Calculator();
+        app.Calculate();
     }
 
-    public void Calculator() {
+    public void Calculate() {
         String defaultSeparator = ",:";
 
         printUserInputMessage();
         String userInput = getUserInput();
 
         if (isStringWithDefaultSeparator(userInput, defaultSeparator)) {
-            int result = sum(userInput, defaultSeparator);
+            int result = calculateSum(userInput, defaultSeparator);
             printResult(result);
         } else if (isStringWithCustomSeparator(userInput)) {
             String formattedInput = formatBackslash(userInput);
             String refinedInput = removeSeparatorInitializer(formattedInput);
-            int result = sum(refinedInput, getCustomSeparator(userInput));
+            int result = calculateSum(refinedInput, getCustomSeparator(userInput));
             printResult(result);
         } else {
             throw new IllegalArgumentException("잘못된 입력입니다.");
@@ -81,7 +81,7 @@ public class Application {
         return "[" + separator.replace("\\", "\\\\") + "]";
     }
 
-    private int sum(String input, String separator) {
+    private int calculateSum(String input, String separator) {
         if (input.isEmpty()) {
             return 0;
         }
