@@ -8,7 +8,7 @@ public class Validator {
     private static final String DEFAULT = "default";
     private static final String PREFIX_CUSTOM_START = "//";
     private static final String PREFIX_CUSTOM_LAST = "\\n";
-    private static final String WRONG_INPUT_MESSAGE = "입력값이 잘못되었습니다.";
+    private static final String WRONG_INPUT_MESSAGE = "잘못된 입력입니다.";
     private static final String WRONG_CUSTOM_SEPARATOR_FORM_MESSAGE = "custom 구분자의 형식이 잘못되었습니다.";
     private static final String IS_BEYOND_COMPUTE_MESSAGE = "계산할 수 없는 범위입니다.";
 
