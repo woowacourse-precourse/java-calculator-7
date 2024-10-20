@@ -16,13 +16,11 @@ public class Parser {
         List<String> stringList = splitByDelimiter(str);
         List<Integer> intList = convertToIntList(stringList);
 
-        // 정수 리스트에 음수가 있다면 예외 처리
         Validator.isNegativeNumber(intList);
 
         return intList;
     }
 
-    // 구분자를 기준으로 문자열을 나눠서 리스트에 저장
     public static List<String> splitByDelimiter(String str) {
         checkAndApplyCustomDelimiter();
 
@@ -35,7 +33,6 @@ public class Parser {
         }
     }
 
-    // 문자열 리스트를 정수 리스트로 변환
     private static List<Integer> convertToIntList(List<String> stringList) {
         List<Integer> intList = new ArrayList<>();
 
