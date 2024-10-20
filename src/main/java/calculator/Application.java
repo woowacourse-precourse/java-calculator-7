@@ -23,8 +23,19 @@ public class Application {
     }
 
     private static String[] splitInput(String input) {
-        // 쉼표(,)와 콜론(:)을 기본 구분자로 처리
-        String delimiter = ",|:";
+        String delimiter = ",|:"; // 기본 구분자
+        if (input.startsWith("//")) {
+            // 커스텀 구분자 처리
+            int delimiterEndIndex = input.indexOf("\\n");
+            if (delimiterEndIndex == -1) {
+                System.out.println("잘못된 형식입니다. '\\n'을 찾을 수 없습니다.");
+                throw new IllegalArgumentException("잘못된 형식입니다.");
+            }
+            delimiter = input.substring(2, delimiterEndIndex); // "//"와 "\n" 사이의 구분자를 추출
+            input = input.substring(delimiterEndIndex + 2); // "\n" 이후의 숫자 문자열 추출
+            System.out.println("커스텀 구분자: " + delimiter);
+            System.out.println("숫자 문자열: " + input);
+        }
         return input.split(delimiter);
     }
 
