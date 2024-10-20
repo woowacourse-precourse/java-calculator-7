@@ -10,6 +10,9 @@ public class SumCalculator {
     public int calculateSum(String[] numbers) {
         int total = 0;
         for (String number : numbers) {
+            if (number.isEmpty()) {
+                number = "0";
+            }
             total += numberValidator.validateAndParse(number);
         }
         return total;
