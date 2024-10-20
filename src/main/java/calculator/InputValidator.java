@@ -13,13 +13,11 @@ public class InputValidator {
         }
     }
 
-    public void validateUnspecifiedCharacters(String[] splitResults) {
-        for(String s : splitResults) {
-            try {
-                Integer.parseInt(s);
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException(e + " 숫자와 구분자만 입력할 수 있습니다.");
-            }
+    public void validateUnspecifiedCharacters(String splitResult) {
+        try {
+            Integer.parseInt(splitResult);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(e + " 숫자와 구분자만 입력할 수 있습니다.");
         }
     }
 }

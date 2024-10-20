@@ -32,14 +32,11 @@ public class DelimiterParserTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1:/,2", "//a\\n1b2:c", "1!2:3"})
+    @ValueSource(strings = {"/", "!", "a"})
     void 지정하지_않은_문자열_예외(String mockInput) {
-        var delimiterParser = new DelimiterParser();
         var inputValidator = new InputValidator();
-        String[] splitResults = delimiterParser.splitByDelimiter(mockInput);
-
         assertThrows(IllegalArgumentException.class, () -> {
-            inputValidator.validateUnspecifiedCharacters(splitResults);
+            inputValidator.validateUnspecifiedCharacters(mockInput);
         });
     }
 
@@ -49,9 +46,14 @@ public class DelimiterParserTest {
         int[] expectedResults = {1, 23, 4};
 
         var delimiterParser = new DelimiterParser();
-        int[] actualResults = delimiterParser.convertToNumber(mockSplitResults);
+        int[] actualResults = new int[mockSplitResults.length];
+
+        for (int i = 0; i < mockSplitResults.length; i++) {
+            actualResults[i] = delimiterParser.convertToNumber(mockSplitResults[i]);
+        }
 
         assertArrayEquals(expectedResults, actualResults);
     }
+
 }
 

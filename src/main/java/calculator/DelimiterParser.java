@@ -16,13 +16,9 @@ public class DelimiterParser {
         return userInput.split(" ");
     }
 
-    public int[] convertToNumber(String[] splitResults) {
+    public int convertToNumber(String splitResults) {
         validateDelimiterParser(splitResults);
-        int[] result = new int[splitResults.length];
-        for(int i = 0; i < splitResults.length; i++) {
-            result[i] = Integer.parseInt(splitResults[i]);
-        };
-        return result;
+        return Integer.parseInt(splitResults);
     }
 
     // 덧셈할 문자열만 남기는 메서드 (커스텀 구분자 문자열 제거)
@@ -30,8 +26,8 @@ public class DelimiterParser {
         return userInput.substring(5);
     }
 
-    private void validateDelimiterParser(String[] splitResults) {
-        var inputVaidator = new InputValidator();
-        inputVaidator.validateUnspecifiedCharacters(splitResults);
+    private void validateDelimiterParser(String splitResults) {
+        var inputValidator = new InputValidator();
+        inputValidator.validateUnspecifiedCharacters(splitResults);
     }
 }
