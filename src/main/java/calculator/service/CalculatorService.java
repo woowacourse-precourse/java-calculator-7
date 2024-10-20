@@ -1,5 +1,7 @@
 package calculator.service;
 
+import java.util.regex.Pattern;
+
 public class CalculatorService {
 
     /**
@@ -15,11 +17,11 @@ public class CalculatorService {
         //커스텀 구분자 포함시
         if(inputString.startsWith("//")){
             int idx = inputString.indexOf("\\n"); // \n인덱스
-            delim = inputString.substring(2, idx); //구분자
 
             if(idx == -1){
                 throw new IllegalStateException("\\n가 입력되지 않았습니다.");
             }
+            delim = Pattern.quote(inputString.substring(2, idx))+ "|,|:";
             inputString = inputString.substring(idx + 2); // \n 이후 문자열
 
         }
