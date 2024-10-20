@@ -19,8 +19,8 @@ public class Application {
         // 값 유효성 검사
         try{
             validateInput(numbers);
-        }catch(IllegalAccessException e){
-            System.out.println("IllegalAccessException 오류 " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            throw e;
         }
 
         // 합 구하기
@@ -55,14 +55,17 @@ public class Application {
     }
 
     // 값이 유효한지 확인
-    public static void validateInput(String[] numbers) throws IllegalAccessException {
+    public static void validateInput(String[] numbers) throws IllegalArgumentException {
         for(String number : numbers){
             String trimNumber = number.trim();
             if(!trimNumber.isEmpty()){
                 try{
-                    Integer.parseInt(trimNumber);
+                    int value = Integer.parseInt(trimNumber);
+                    if(value < 0){
+                        throw new IllegalArgumentException();
+                    }
                 }catch(NumberFormatException e){
-                    throw new IllegalAccessException();
+                    throw new IllegalArgumentException();
                 }
             }
         }
