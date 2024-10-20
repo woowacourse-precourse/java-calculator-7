@@ -9,17 +9,19 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해주세요.");
         String input = Console.readLine();
         String validTarget = input;
+        String escapedDelimiters = delimiters;
 
         if (isCustomDelimiterDefined(input)) {
             delimiters = getCustomDelimiter(input);
             validTarget = input.substring(input.indexOf("\\n") + 2);
+            escapedDelimiters = escapeSpecialCharacters(delimiters);
         }
 
-        if (!isValidInput(validTarget, delimiters)) {
+        if (!isValidInput(validTarget, escapedDelimiters)) {
             throw new IllegalArgumentException("입력값이 유효하지 않습니다.");
         }
 
-        int sumResult = sumNumbers(validTarget, delimiters);
+        int sumResult = sumNumbers(validTarget, escapedDelimiters);
 
         System.out.println("결과 : " + sumResult);
     }
@@ -30,8 +32,22 @@ public class Application {
         }
 
         String regex = "^\\d+(" + "[" + delimiters + "]" + "\\d+)*$";
+        System.out.println("regex = " + regex);
 
         return validTarget.matches(regex);
+    }
+
+    private static String escapeSpecialCharacters(String delimiter) {
+        StringBuilder escapedDelimiter = new StringBuilder();
+
+        for (char ch : delimiter.toCharArray()) {
+            if ("|*+()[]{}.^$\\&".indexOf(ch) != -1) {
+                escapedDelimiter.append("\\"); // 이스케이프 문자 추가
+            }
+            escapedDelimiter.append(ch);
+        }
+
+        return escapedDelimiter.toString();
     }
 
     private static boolean isCustomDelimiterDefined(String input) {
