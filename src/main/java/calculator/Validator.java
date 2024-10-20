@@ -2,7 +2,7 @@ package calculator;
 
 import java.util.List;
 
-public class Validation {
+public class Validator {
     private static final String WRONG_INPUT_MESSAGE = "입력값이 잘못되었습니다.";
     private static final String WRONG_CUSTOM_SEPARATOR_FORM_MESSAGE = "custom 구분자의 형식이 잘못되었습니다.";
     private static final String IS_BEYOND_COMPUTE_MESSAGE = "계산할 수 없는 범위입니다.";
