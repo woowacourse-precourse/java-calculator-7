@@ -63,11 +63,12 @@ public class CalculatorService {
     }
 
     public void deleteDelimiter() {
-        String removeDelimiters = formatInput.chars()
-                .filter(i -> isDelimiter((char) i))
-                .mapToObj(c -> (char) c)
-                .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
-                .toString();
+        String removeDelimiters = "";
+        for(int i = 0; i < formatInput.length(); i++) {
+            if(!isDelimiter(formatInput.charAt(i))) {
+                removeDelimiters += formatInput.charAt(i);
+            }
+        }
 
         isNumeric(removeDelimiters);
     }
@@ -86,7 +87,7 @@ public class CalculatorService {
                 break;
             }
         }
-        return !isDelimiter;
+        return isDelimiter;
     }
 
     private void isNumeric(String removeDelimiters) {
