@@ -14,6 +14,8 @@ public record Command(
 
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile(CUSTOM_DELIMITER_REGEX);
 
+    private static final String DELIMITER_FORMAT = "[%s,:]";
+
     public static Command from(String command) {
         Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(command);
         String header = "";
@@ -29,7 +31,7 @@ public record Command(
     }
 
     public List<Number> extractNumbers() {
-        String splitter = String.format("[%s,:]", header);
+        String splitter = String.format(DELIMITER_FORMAT, header);
         return Arrays.stream(content.split(splitter)).map(Number::from).toList();
     }
 
