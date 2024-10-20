@@ -31,27 +31,27 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 커스텀_구분자_테스트() {
-        Assertions.assertEquals(3, calcModel.calcResult("//;\n1;2"));
+        Assertions.assertEquals(3, calcModel.calcResult("//;\\n1;2"));
     }
 
     @Test
     void 커스텀_구분자_여러문자_테스트1() {
-        Assertions.assertEquals(5, calcModel.calcResult("//*(\n1*(2*(2"));
+        Assertions.assertEquals(5, calcModel.calcResult("//*(\\n1*(2*(2"));
     }
 
     @Test
     void 커스텀_구분자_여러문자_테스트2() {
-        Assertions.assertEquals(7, calcModel.calcResult("//%%%\n2%%%4%%%1"));
+        Assertions.assertEquals(7, calcModel.calcResult("//%%%\\n2%%%4%%%1"));
     }
 
     @Test
     void 잘못된_커스텀_구분자_정의_예외_테스트() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> calcModel.calcResult("//\n1*2*3"));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> calcModel.calcResult("//\\n1*2*3"));
     }
 
     @Test
     void 정의되지_않은_구분자_예외_테스트() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> calcModel.calcResult("//;;\n1,2,3"));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> calcModel.calcResult("//;;\\n1,2,3"));
     }
 
     @Test
