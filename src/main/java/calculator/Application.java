@@ -19,10 +19,11 @@ public class Application {
             System.out.println(RESULT_STATEMENT + 0);
             return;
         }
-        run(input);
+
+        System.out.println("결과 : " + run(input));;
     }
 
-    private static void run(String input) {
+    private static int run(String input) {
         String regex = DEFAULT_REGEX;
 
         // 커스텀 지정자를 사용하는 경우
@@ -36,8 +37,8 @@ public class Application {
 
         // regex를 통해 구분자를 기준으로 문자열 분할
         String[] splited = input.split(regex);
-        // 덧셈 연산 수행 및 출력
-        System.out.println(RESULT_STATEMENT + calculate(splited));
+        // 덧셈 연산 수행 결과 반환
+        return calculate(splited);
     }
 
     private static int calculate(String[] numbers) {
