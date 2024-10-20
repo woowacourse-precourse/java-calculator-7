@@ -15,6 +15,6 @@ public class CalculatorInputView {
             throw new IllegalArgumentException(Message.NO_INPUT.getMessage());
         }
 
-        return input;
+        return input.stripLeading().stripTrailing();
     }
 }
