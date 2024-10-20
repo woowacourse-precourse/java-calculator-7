@@ -9,23 +9,23 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 public class ValidateTest {
 
     @Test
-    @DisplayName("입력 문자열이 null일 때 IllegalArgumentException을 발생시킨다.")
+    @DisplayName("입력 문자열이 null일 때 NullPointerException 발생시킨다.")
     void validate_nullInput_throwsException() {
         // given
         String input = null;
 
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> InputValidator.validate(input));
+        assertThrows(NullPointerException.class, () -> InputValidator.validate(input));
     }
 
     @Test
-    @DisplayName("입력 문자열이 빈 문자열일 때 IllegalArgumentException을 발생시킨다.")
+    @DisplayName("입력 문자열이 빈 문자열일 때 NullPointerException을 발생시킨다.")
     void validate_emptyInput_throwsException() {
         // given
         String input = "";
 
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> InputValidator.validate(input));
+        assertThrows(NullPointerException.class, () -> InputValidator.validate(input));
     }
 
     @Test
