@@ -1,5 +1,6 @@
 package calculator;
 
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class Application {
@@ -9,6 +10,10 @@ public class Application {
 }
 
 class Calculator {
+    private static int defaultSeparator(String input){
+        String[] separators = {",", ":"};
+        return calculateNumber(input, Arrays.toString(separators));
+    }
     private static int calculateNumber(String input, String separator) {
         int sum = 0;
 
