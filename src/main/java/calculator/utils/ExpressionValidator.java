@@ -18,6 +18,8 @@ public class ExpressionValidator {
             String customSeparator = String.valueOf(expression.charAt(2)); // 커스텀 구분자
             if (Character.isDigit(customSeparator.charAt(0))) { // 커스텀 구분자로 숫자가 전달된 경우
                 throw new IllegalArgumentException();
+            } else if (Character.isWhitespace(customSeparator.charAt(0))) {
+                throw new IllegalArgumentException();
             }
             this.separators += customSeparator;
             this.expression = expression.replace(CUSTOM_PREFIX + customSeparator + CUSTOM_SUFFIX, BLANK);
