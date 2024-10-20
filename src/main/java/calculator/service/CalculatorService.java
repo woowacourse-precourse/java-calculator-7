@@ -9,9 +9,15 @@ public class CalculatorService {
         String cleanedExpression = expression.replaceAll("\\s+", "");
         this.tokens = cleanedExpression.split(String.join("|", separators));
         validateIsNumber(tokens);
+        validateIsPositiveNumber(tokens);
     }
 
     private void validateIsNumber(String[] tokens) {
         Validator.isNumber(tokens);
     }
+
+    private void validateIsPositiveNumber(String[] tokens) {
+        Validator.isPositiveNumber(tokens);
+    }
+
 }
