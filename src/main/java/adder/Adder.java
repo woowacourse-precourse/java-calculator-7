@@ -1,7 +1,6 @@
 package adder;
 
 import java.util.ArrayList;
-import java.util.Stack;
 import separator.Separator;
 
 public class Adder {
@@ -94,27 +93,13 @@ public class Adder {
     }
 
     public boolean isValidated(ArrayList<String> calculationFormula) {
-        Stack<String> numberStack = new Stack<>();
 
         for (String element : calculationFormula) {
-            if (isNumber(element)) {
-                numberStack.push(element);
-
-            } else if (isSeparator(element)) {
-                if (numberStack.isEmpty()) {
-                    return false;
-                }
-
-                numberStack.pop();
-
-            } else {
+            if (!isNumber(element) && !isSeparator(element)) {
                 return false;
             }
         }
 
-        if (numberStack.isEmpty()) {
-            return false;
-        }
         return true;
     }
 
@@ -133,6 +118,5 @@ public class Adder {
 
         return numbers;
     }
-
 
 }
