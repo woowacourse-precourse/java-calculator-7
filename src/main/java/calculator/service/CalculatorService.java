@@ -25,6 +25,21 @@ public class CalculatorService {
         }
         return input;
     }
+    static int answer;
+
+    public void exceptionFirst(String[] afterSplit) {
+        for(String temp : afterSplit) {
+            try{
+                int number = Integer.parseInt(temp);
+                answer+=number;
+                if (number < 0) {
+                    throw new IllegalArgumentException();
+                }
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException();
+            }
+        }
+    }
 
 
 }
