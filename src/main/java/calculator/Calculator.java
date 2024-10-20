@@ -28,7 +28,7 @@ public class Calculator {
      * 유효하지 않은 입력값 예외 처리
      */
     public static void handleInvalidInput(String input) {
-        System.out.println("유효하지 않은 문자열 입니다. 프로그램을 종료합니다.");
+        System.out.println("유효하지 않은 문자열입니다. 프로그램을 종료합니다.");
         throw new IllegalArgumentException("Invalid input: " + input);
     }
 
