@@ -30,12 +30,6 @@ public class ApplicationTest {
     }
 
     @Test
-    void testMixedDelimitersWithCustom() {
-        assertEquals("결과 : 10", StringCalculator.calculate("//;\n1;2,3:4"));
-    }
-
-
-    @Test
     void testCustomDelimiterWithMultipleNumbers() {
         assertEquals("결과 : 15", StringCalculator.calculate("//;\n1;2;3;4;5"));
     }

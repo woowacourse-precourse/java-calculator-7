@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.exception.InvalidInputException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -7,7 +8,7 @@ import java.util.regex.Pattern;
 
 public class DelimiterParser {
 
-    private static final String CUSTOM_DELIMITER_PATTERN = "//(.*)\n(.*)";
+    private static final String CUSTOM_DELIMITER_PATTERN = "//(.*?)\n(.*)";
     private static final String DEFAULT_DELIMITERS = "[,|:]";
 
     public static List<String> parse(String input) {
@@ -22,9 +23,9 @@ public class DelimiterParser {
         if (matcher.matches()) {
             String customDelimiter = Pattern.quote(matcher.group(1));
             String numbers = matcher.group(2);
-            return split(numbers, customDelimiter + "|" + DEFAULT_DELIMITERS);
+            return split(numbers, customDelimiter);
         }
-        throw new IllegalArgumentException("잘못된 커스텀 구분자 형식입니다.");
+        throw new InvalidInputException("잘못된 커스텀 구분자 형식입니다.");
     }
 
     private static List<String> parseWithDefaultDelimiters(String input) {
