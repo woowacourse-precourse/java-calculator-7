@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Calculator {
     private final Calculate operation;
+    private final String OUTPUT_MESSAGE = "결과 : ";
     private List<Integer> numbers;
     public Calculator(Calculate operation) {
         this.operation = operation;
@@ -23,6 +24,7 @@ public class Calculator {
     }
     // use strategy
     public int calculate() {
+        System.out.print(OUTPUT_MESSAGE);
         return operation.computeOperation(numbers);
     }
 
