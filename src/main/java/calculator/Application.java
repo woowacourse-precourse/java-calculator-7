@@ -37,7 +37,8 @@ public class Application {
             }
         }
 
-        Calc calculator = new Calc();
+        // SumCalculator 인스턴스 생성
+        SumCalculator calculator = new SumCalculator();
         int totalSum = calculator.calculate(inputString, delimiterPattern);
 
         System.out.println("결과 : " + totalSum);

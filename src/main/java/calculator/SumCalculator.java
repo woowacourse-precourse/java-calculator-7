@@ -1,6 +1,6 @@
 package calculator;
 
-public class Calc {
+public class SumCalculator {
     public int calculate(String input, String delimiterPattern) {
         int sum = 0;
 
