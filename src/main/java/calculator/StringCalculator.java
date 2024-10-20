@@ -74,4 +74,11 @@ public class StringCalculator {
     public void printResult(){
         System.out.println("결과 : "+result);
     }
+
+    public void calculate(){
+        this.setInput();
+        this.addDelimiter();
+        this.sumDelimitedNumbers();
+        this.printResult();
+    }
 }
