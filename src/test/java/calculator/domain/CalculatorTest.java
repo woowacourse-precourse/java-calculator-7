@@ -12,14 +12,14 @@ class CalculatorTest {
         String input="23:3,";
         String seperator=",|:";
 
-        assertThat(Calculator.inputCalculate(input,seperator)).isEqualTo(26);
+        assertThat(Calculator.calculate(input,seperator)).isEqualTo(26);
     }
 
     @Test
     void 공백을_입력했을때_0_반환(){
         String input="";
         String seperator=",|:";
-        assertThat(Calculator.inputCalculate(input,seperator)).isEqualTo(0);
+        assertThat(Calculator.calculate(input,seperator)).isEqualTo(0);
 
     }
 
@@ -30,7 +30,7 @@ class CalculatorTest {
 
         String OVERFLOW_RESULT="덧셈의 결과가 int 범위를 넘어갔습니다";
 
-        assertThatThrownBy(()->Calculator.inputCalculate(input,seperator))
+        assertThatThrownBy(()->Calculator.calculate(input,seperator))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(OVERFLOW_RESULT);
     }
@@ -42,7 +42,7 @@ class CalculatorTest {
 
         String OVERFLOW_NUMBER="특정 수가 int 범위를 넘어갔습니다";
 
-        assertThatThrownBy(()->Calculator.inputCalculate(input,seperator))
+        assertThatThrownBy(()->Calculator.calculate(input,seperator))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(OVERFLOW_NUMBER);
     }

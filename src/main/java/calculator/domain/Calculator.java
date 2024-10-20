@@ -14,12 +14,7 @@ public class Calculator {
 
     private static final String BLANK="";
 
-    public static int inputCalculate(String input,String seperatorRegex){
-        //커스텀 구분자 패턴이 존재하는지 확인한다
-       return calculate(input,seperatorRegex);
-    }
-
-    private static int calculate(String input,String seperatorRegex) {
+    public static int calculate(String input,String seperatorRegex) {
         int result= Arrays.stream(input.split(seperatorRegex))
                 .filter(num->!isBlank(num))
                 .filter(num->validateCustomSeperator(num))

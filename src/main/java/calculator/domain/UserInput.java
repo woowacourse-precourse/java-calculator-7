@@ -48,7 +48,7 @@ public class UserInput {
     }
 
     public int startCalculate(){
-        return Calculator.inputCalculate(input,seperatorRegex);
+        return Calculator.calculate(input,seperatorRegex);
     }
 
     private void validateNegative(String input) {
