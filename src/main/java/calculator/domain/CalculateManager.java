@@ -10,8 +10,8 @@ import java.util.Arrays;
 public class CalculateManager {
     private final InputView inputView;
     private final OutputView outputView;
-    private LetterManager letterManager;
-    private Calculator calculator;
+    private final LetterManager letterManager;
+    private final Calculator calculator;
     private final CustomSeparatorSplitter customSeparatorSplitter;
     private final Separators separators;
     private final NumberSplitter numberSplitter;
@@ -33,12 +33,24 @@ public class CalculateManager {
         printReadLettersMessage();
         String letters = readLetters();
         String[] customSeparators = extractCustomSeparator(letters);
-        String newLetters = letterManager.replaceCustomSeparatorToSeparator(letters, customSeparators);
+        String newLetters = ReplaceCustomSeparatorToSeparator(letters, customSeparators);
         registerCustomSeparator(customSeparators);
-        String[] extractedNumbers = numberSplitter.getNumbersFromLetters(newLetters, separators);
+        String[] extractedNumbers = getNumbersFromLetters(newLetters);
         registerNumbers(extractedNumbers);
-        int sum = calculator.sumNumbers(numbers);
+        int sum = calculateSum();
         printResult(sum);
+    }
+
+    private int calculateSum() {
+        return calculator.sumNumbers(numbers);
+    }
+
+    private String[] getNumbersFromLetters(String newLetters) {
+        return numberSplitter.getNumbersFromLetters(newLetters, separators);
+    }
+
+    private String ReplaceCustomSeparatorToSeparator(String letters, String[] customSeparators) {
+        return letterManager.replaceCustomSeparatorToSeparator(letters, customSeparators);
     }
 
     private void registerNumbers(String[] extractedNumbers) {
