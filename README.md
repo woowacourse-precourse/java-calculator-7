@@ -1,5 +1,40 @@
 # java-calculator-precourse
 
+## 📁 디렉토리 구조
+```
+calculator
+├── controller
+│   └── CalculatorController.java
+├── dto
+│   ├── InputRequest.java
+│   └── OutputResponse.java
+├── error
+│   ├── CustomException.java
+├── message
+│   ├── ErrorMessage.java
+│   ├── InputMessage.java
+│   └── OutputMessage.java
+├── model
+│   ├── Calculator.java
+│   ├── Operator.java
+│   ├── PlusCalculator.java
+│   └── PlusOperator.java
+├── parser
+│   ├── CalculatorParser.java
+│   ├── DelimiterPattern.java
+│   └── InputParser.java
+├── service
+│   └── CalculatorService.java
+├── validation
+│   ├── CalculateValidator.java
+│   └── InputValidator.java
+└── view
+├── InputView.java
+└── OutputView.java
+```
+
+---
+
 ## 🎯 학습 목표
 
 - Git, GitHub, IDE 등 실제 개발을 위한 환경에 익숙해진다.
