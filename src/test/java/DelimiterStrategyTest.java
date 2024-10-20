@@ -21,7 +21,7 @@ public class DelimiterStrategyTest {
         //when
         List<String> customDelimiter = delimiterStrategy.decideDelimiter("//;\n1;2;3");
         //then
-        assertThat(customDelimiter).isEqualTo(List.of(";"));
+        assertThat(customDelimiter).isEqualTo(List.of("1;2;3", ";"));
     }
 
     @Test
