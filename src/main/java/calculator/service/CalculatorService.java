@@ -56,7 +56,7 @@ public class CalculatorService {
         if (Arrays.stream(separatedStringArr)
                 .flatMapToInt(String::chars)
                 .anyMatch(it -> it < '0' || it > '9')) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("입력한 문자열에 구분자, 숫자 외의 문자가 존재합니다.");
         }
     }
 
