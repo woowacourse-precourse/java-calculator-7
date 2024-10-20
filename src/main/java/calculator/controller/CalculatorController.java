@@ -58,7 +58,7 @@ public class CalculatorController {
     }
 
     private static void print(Integer sum) {
-        System.out.println(sum);
+        System.out.println("결과 : " + sum);
     }
 
     private static void validation(List<String> values) {
