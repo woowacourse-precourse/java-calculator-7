@@ -1,6 +1,6 @@
-package calculator;
+package calculator.factory;
 
-import calculator.domain.calculation.Calculator;
+import calculator.calculatorApplication.Calculator;
 import calculator.domain.calculation.InputValidator;
 import calculator.domain.calculation.NumberExtractor;
 import calculator.domain.calculation.NumberParser;

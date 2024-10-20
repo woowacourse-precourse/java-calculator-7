@@ -1,5 +1,6 @@
 package calculator.domain.calculation;
 
+import calculator.calculatorApplication.Calculator;
 import calculator.domain.parser.vo.PositiveNumbers;
 import java.util.List;
 

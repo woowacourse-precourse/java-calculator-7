@@ -13,6 +13,7 @@ public class NumberExtractorChain implements NumberExtractor {
     }
 
     public List<String> extract(String input) {
+
         for (DelimitedNumberExtractor extractor : extractors) {
             ExtractResult result = extractor.extract(input);
             if (result.isExtracted()) {
@@ -22,12 +23,6 @@ public class NumberExtractorChain implements NumberExtractor {
         throw new IllegalArgumentException("적용 가능한 구분자가 없습니다");
     }
 
-    public void addExtractor(DelimitedNumberExtractor extractor) {
-        extractors.add(extractor);
-    }
 
-    public void removeExtractor(DelimitedNumberExtractor extractor) {
-        extractors.remove(extractor);
-    }
 }
 

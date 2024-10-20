@@ -1,6 +1,6 @@
 package calculator.mock;
 
-import calculator.inputReader.InputReader;
+import calculator.calculatorApplication.InputReader;
 
 public class FakeInputReader implements InputReader {
     private final String input;

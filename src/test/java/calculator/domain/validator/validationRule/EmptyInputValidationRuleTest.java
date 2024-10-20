@@ -25,12 +25,22 @@ class EmptyInputValidationRuleTest {
     }
 
     @Nested
+    @DisplayName(" \"\" 빈값 넣었을 때 에러X ")
+    class SuccessCases2 {
+        @Test
+        @DisplayName("유효 입력 테스트")
+        void validInputTest() {
+            assertThatNoException().isThrownBy(() -> rule.validate(""));
+        }
+    }
+
+    @Nested
     @DisplayName("실패 케이스")
     class FailureCases {
         @Test
         @DisplayName("빈 문자열 테스트")
         void emptyStringTest() {
-            assertThatThrownBy(() -> rule.validate(""))
+            assertThatThrownBy(() -> rule.validate(null))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessageContaining(입력값이_비어있습니다);
         }

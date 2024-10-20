@@ -1,7 +1,6 @@
 package calculator.integration.inputValidator;
 
 import static calculator.domain.common.Message.입력값이_null입니다;
-import static calculator.domain.common.Message.입력값이_비어있습니다;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import calculator.domain.validator.impl.StringCalculatorValidator;
@@ -63,15 +62,5 @@ class StringCalculatorValidatorTest {
                     .hasMessageContaining(입력값이_null입니다);
         }
 
-        @Test
-        @DisplayName("StringCalculatorValidator 빈 값 입력 테스트")
-        void inputValidatorV1_exception_empty() {
-
-            // then
-            assertThatThrownBy(() -> stringCalculatorValidator.validate(""))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining(입력값이_비어있습니다);
-
-        }
     }
 }

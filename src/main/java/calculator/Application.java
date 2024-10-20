@@ -1,17 +1,20 @@
 package calculator;
 
-import calculator.domain.calculation.Calculator;
-import calculator.inputReader.ConsoleInputReader;
+import calculator.calculatorApplication.Calculator;
+import calculator.calculatorApplication.CalculatorApplication;
+import calculator.calculatorApplication.InputReader;
+import calculator.calculatorApplication.OutputPrinter;
+import calculator.factory.CalculatorFactory;
+import calculator.factory.IOFactory;
 
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
+        InputReader inputReader = IOFactory.createInputReader();
+        OutputPrinter outputPrinter = IOFactory.createOutputPrinter();
         Calculator calculator = CalculatorFactory.createCalculator();
-        ConsoleInputReader consoleInputReader = new ConsoleInputReader();
 
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String readLine = consoleInputReader.readLine();
-        int result = calculator.calculate(readLine);
-        System.out.println("결과 : " + result);
+        CalculatorApplication calculatorApplication = new CalculatorApplication(inputReader, outputPrinter, calculator);
+        calculatorApplication.run();
     }
 }

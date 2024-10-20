@@ -2,6 +2,7 @@ package calculator.inputReader;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import calculator.calculatorApplication.InputReader;
 import calculator.mock.FakeInputReader;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

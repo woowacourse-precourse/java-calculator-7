@@ -2,6 +2,7 @@ package calculator.inputReader;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
+import calculator.io.inputReader.ConsoleInputReader;
 import java.util.NoSuchElementException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
