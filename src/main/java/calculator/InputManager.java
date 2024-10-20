@@ -11,7 +11,7 @@ public class InputManager {
         input = DEFAULT_INPUT;
     }
 
-    public void validate() {
+    private void validate() {
         if (input.matches(VALID_DEFAULT_INPUT_REGEX)) {
             return;
         }
