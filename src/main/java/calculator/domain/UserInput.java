@@ -6,12 +6,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class UserInput {
-    // //-\n일 떄 예외발생
     private static final Pattern MINUS_SEPERATOR=Pattern.compile("^//-\\\\n");
-    // //3\n일 때 예외발생
     private static final Pattern NUMBER_SEPERATOR=Pattern.compile("^//[0-9]\\\\n");
-    //음수 입력시 예외 발생 //?-3
     private static final Pattern NEGATIVE=Pattern.compile("-[0-9]");
+
+    private static final String NEGATIVE_INPUT="음수를 입력했습니다";
+    private static final String MINUS_SEPERATOR_INPUT="마이너스 구분자를 입력했습니다";
+    private static final String NUMBER_SEPERATOR_INPUT="숫자를 구분자로 입력했습니다";
 
     String input;
 
