@@ -5,6 +5,7 @@ import java.util.List;
 import calculator.model.CustomDelimiterValidator;
 import calculator.model.NumberExtractor;
 import calculator.model.StringValidator;
+import calculator.model.SumCalculator;
 import calculator.view.Input;
 import calculator.view.Output;
 
@@ -30,5 +31,7 @@ public class StringCalculator {
 		stringValidator.validate(inputString);
 		NumberExtractor numberExtractor = new NumberExtractor();
 		List<Integer> numbers = numberExtractor.extractNumbers(inputString);
+		SumCalculator sumCalculator = new SumCalculator();
+		int answer = sumCalculator.calculate(numbers);
 	}
 }
