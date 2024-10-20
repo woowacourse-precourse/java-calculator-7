@@ -11,27 +11,30 @@ public class InputValidator {
 
             validateCustomDelimiterForm(delimiter);
             validateInputWithCustomDelimiter(userInput.getInput(), delimiter);
-        }
-        else
+        } else {
             validateInputWithNormalDelimiter(userInput.getInput());
+        }
     }
 
     private static void validateInputWithCustomDelimiter(String input, String delimiter) {
         String escapedDelimiter = Pattern.quote(delimiter);
-        String pattern = InputValidationConstants.CUSTOM_DELIMITER_PATTERN_PREFIX + escapedDelimiter + InputValidationConstants.CUSTOM_DELIMITER_PATTERN_SUFFIX;
-        if (!Pattern.matches(pattern, input.substring(delimiter.length()+4)))
+        String pattern =
+                InputValidationConstants.CUSTOM_DELIMITER_PATTERN_PREFIX
+                + escapedDelimiter
+                + InputValidationConstants.CUSTOM_DELIMITER_PATTERN_SUFFIX;
+        if (!Pattern.matches(pattern, input.substring(delimiter.length()+4))) {
             throw new IllegalArgumentException(InputValidationConstants.INVALID_INPUT_EXCEPTION_MESSAGE);
+        }
     }
 
     private static void validateCustomDelimiterForm(String delimiter) {
-        if (delimiter.isEmpty() || Pattern.matches(InputValidationConstants.CONTAINS_NUMBERS_PATTERN, delimiter))
+        if (delimiter.isEmpty() || Pattern.matches(InputValidationConstants.CONTAINS_NUMBERS_PATTERN, delimiter)) {
             throw new IllegalArgumentException(InputValidationConstants.INVALID_INPUT_EXCEPTION_MESSAGE);
+        }
     }
 
     private static void validateInputWithNormalDelimiter(String input) {
-        if(input.isEmpty())
-            return;
-        if(!Pattern.matches(InputValidationConstants.NORMAL_DELIMITER_INPUT_PATTERN, input)) {
+        if(!input.isEmpty() && !Pattern.matches(InputValidationConstants.NORMAL_DELIMITER_INPUT_PATTERN, input)) {
             throw new IllegalArgumentException(InputValidationConstants.INVALID_INPUT_EXCEPTION_MESSAGE);
         }
     }
