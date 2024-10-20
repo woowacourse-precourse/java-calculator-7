@@ -27,4 +27,9 @@ public class Application {
         }
         return escapeSpecailCharactersInDelimiter(input.substring(2, delimiterEndIndex));
     }
+
+    private static String extractNumbersSection(String input) {
+        int delimiterEndIndex = input.indexOf("\\n");
+        return input.substring(delimiterEndIndex + 2);
+    }
 }
