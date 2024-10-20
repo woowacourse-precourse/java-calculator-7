@@ -1,5 +1,6 @@
 package calculator.delimiterStrategy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DefaultDelimiterStrategy implements DelimiterStrategy {
@@ -7,6 +8,9 @@ public class DefaultDelimiterStrategy implements DelimiterStrategy {
 
     @Override
     public List<String> decideDelimiter(String userInput) {
-        return defaultDelimiters;
+        List<String> results = new ArrayList<>();
+        results.add(userInput);
+        results.addAll(defaultDelimiters);
+        return results;
     }
 }

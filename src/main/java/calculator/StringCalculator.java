@@ -2,6 +2,7 @@ package calculator;
 
 import calculator.calculateStrategy.CalculateStrategy;
 import calculator.delimiterStrategy.DelimiterStrategy;
+import java.util.List;
 
 public class StringCalculator {
     private CalculateStrategy calculate;
@@ -26,8 +27,8 @@ public class StringCalculator {
     }
 
     public Integer operate() {
+        List<String> results = delimiterStrategy.decideDelimiter(userInput);
         return calculate.add(
-                numberStrategy.extractNumber(userInput,
-                        delimiterStrategy.decideDelimiter(userInput)));
+                numberStrategy.extractNumber(results.get(0), results.subList(1, results.size())));
     }
 }

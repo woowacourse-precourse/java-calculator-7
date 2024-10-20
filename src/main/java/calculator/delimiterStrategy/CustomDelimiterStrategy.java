@@ -15,7 +15,12 @@ public class CustomDelimiterStrategy implements DelimiterStrategy {
         if (!isChar(delimiter)) {
             throw new IllegalArgumentException("하나의 문자만 커스텀 구분자로 지정한다");
         }
-        return List.of(delimiter);
+        return List.of(withoutDelimiterPattern(userInput), delimiter);
+    }
+
+    private String withoutDelimiterPattern(String userInput) {
+        int endIndex = userInput.indexOf(endDelimiterPattern) + endDelimiterPattern.length();
+        return userInput.substring(endIndex);
     }
 
     private String extractDelimiter(String userInput) {
