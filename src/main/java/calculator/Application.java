@@ -6,58 +6,57 @@ import java.util.regex.Pattern;
 
 public class Application {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         System.out.print("덧셈할 문자열을 입력해주세요: ");
-        
+        String input = scanner.nextLine();
+        scanner.close();
+
         try {
-            String input = sc.nextLine();
-            sc.close();
-            
-            int sum = calculateSum(input);
-            System.out.println("결과 : " + sum);
+            int result = calculateSum(input);
+            System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.out.println("에러: " + e.getMessage());
+            return; // 에러 발생 시 프로그램 종료
         }
     }
 
-    private static int calculateSum(String input) {
-        if (input == null || input.isEmpty()) {
+    public static int calculateSum(String input) {
+        if (input == null || input.trim().isEmpty()) {
             return 0;
         }
 
         String delimiter = ",|:";
+        String numbersPart = input;
+
+        // 커스텀 구분자 처리
         if (input.startsWith("//")) {
-            Matcher matcher = Pattern.compile("//(.)\\n(.*)").matcher(input);
-            if (matcher.find()) {
-                delimiter = matcher.group(1);
-                input = matcher.group(2);
-            } else {
-                throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
+            int delimiterIndex = input.indexOf('\n');
+            if (delimiterIndex == -1) {
+                throw new IllegalArgumentException("잘못된 커스텀 구분자 형식입니다.");
             }
+            delimiter = Pattern.quote(input.substring(2, delimiterIndex));
+            numbersPart = input.substring(delimiterIndex + 1);
         }
 
-        String[] numbers = input.split(delimiter);
+        String[] numbers = numbersPart.split(delimiter);
         int sum = 0;
 
         for (String number : numbers) {
-            int num = toPositiveNumber(number);
-            if (num != -1) {
-                sum += num;
-            }
+            int num = parseNumber(number);
+            sum += num;
         }
 
         return sum;
     }
 
-    private static int toPositiveNumber(String number) {
-        try {
-            int result = Integer.parseInt(number);
-            if (result < 0) {
-                throw new IllegalArgumentException("음수는 허용되지 않습니다.");
-            }
-            return result;
-        } catch (NumberFormatException e) {
-            return -1;
+    private static int parseNumber(String number) {
+        if (number.isEmpty()) {
+            return 0; // 빈 문자열은 0으로 처리
         }
+        int num = Integer.parseInt(number);
+        if (num < 0) {
+            throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+        }
+        return num;
     }
 }
