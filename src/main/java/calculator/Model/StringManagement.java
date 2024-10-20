@@ -21,11 +21,11 @@ public class StringManagement {
     public ArrayList<Double> strToDouble(String input) {
         ArrayList<Double> splitNum = new ArrayList<>();
         String[] splitInput = input.split("["+delimiter+"]");
-        for(int i=0; i<splitInput.length; i++) {
-            if (splitInput[i].indexOf("-") != -1){
+        for (String s : splitInput) {
+            if (s.contains("-")) {
                 throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
             }
-            double num = Double.parseDouble(splitInput[i]);
+            double num = Double.parseDouble(s);
             splitNum.add(num);
         }
         return splitNum;

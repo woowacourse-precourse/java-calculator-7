@@ -1,7 +1,5 @@
 package calculator.Model;
 
-import calculator.Model.StringManagement;
-
 import java.util.ArrayList;
 
 public class Calculate{
@@ -11,8 +9,8 @@ public class Calculate{
         double addNum = 0;
         input = sm.customDelimiter(input);
         ArrayList<Double> num = sm.strToDouble(input);
-        for(int i=0;i<num.size();i++){
-            addNum += num.get(i);
+        for (Double aDouble : num) {
+            addNum += aDouble;
         }
         return addNum;
     }
