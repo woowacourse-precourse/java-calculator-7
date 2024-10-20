@@ -36,16 +36,16 @@ public class InputProcessor {
         }
     }
 
-    public boolean isValidInput() {
+    public void isValidInput() {
         if (input.isEmpty()) {
             input = "0";
-            return true;
+            return;
         } else if (isDefaultCase()) {
             if (!input.replaceAll(regex + "|[0-9]", "").isEmpty()) {
                 throw new IllegalArgumentException("잘못된 입력입니다. 입력 문자열은 " +
                         "커스텀 구분자 외 다른 문자를 포함할 수 없습니다.");
             }
-            return true;
+            return;
         } else if (isCustomCase()) {
             getCustomDelimiter();
             regex = String.join("|", delimiterList);
@@ -58,7 +58,7 @@ public class InputProcessor {
                         "커스텀 구분자 외 다른 문자를 포함할 수 없습니다.");
             }
 
-            return true;
+            return;
         }
         throw new IllegalArgumentException("잘못된 입력입니다. 입력 포맷을 확인해주세요.");
     }
