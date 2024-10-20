@@ -35,7 +35,7 @@ public class CustomDelimiter implements Delimiter {
         }
     }
 
-    private String escapeMetaCharacter(String delimiter) {
+    private String escapeMetaCharacter(final String delimiter) {
         return Pattern.quote(delimiter);
     }
 
