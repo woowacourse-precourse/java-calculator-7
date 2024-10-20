@@ -55,4 +55,8 @@ public class CalculatorService {
         }
         return result;
     }
+
+    public void printResult(int result) {
+        System.out.println("결과 : " + result);
+    }
 }
