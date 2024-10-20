@@ -14,7 +14,6 @@ public class InputParser {
     private static final String SEPARATOR_FORM_BEGIN_STR = "//";
     private static final String SEPARATOR_FORM_END_STR = "\\n";
     private static final int SEPARATOR_LOCATION_INDEX = 2;
-    private static final int INIT_SIZE_IN_SPLIT_STR = 0;
 
     public void validateInputStr(String inputStr) {
         validateInputStrHasNoSpaces(inputStr);
