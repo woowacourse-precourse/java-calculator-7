@@ -25,6 +25,7 @@ public class CustomDelimiter implements Delimiter {
 
     private String extractDelimiter(String input) {
         int newLineIndex = input.indexOf(NEW_LINE);
+
         return input.substring(PREFIX_LENGTH, newLineIndex);
     }
 
