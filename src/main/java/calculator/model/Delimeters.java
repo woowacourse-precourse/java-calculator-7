@@ -50,6 +50,13 @@ public class Delimeters {
     //올바른 Delimeter 인지 판단.
     private void checkDelimeter(final String delimeter) {
 
+        List<String> banList = new ArrayList<>(Arrays.asList("0", "1", "2", "3", "4", "5", "6", "7", "8", "9"));
+
+        for (int i = 0; i < banList.size(); i++) {
+            if (delimeter.contains(banList.get(i))) {
+                throw new IllegalArgumentException("숫자 형식은 구분자로 사용할 수 없습니다");
+            }
+        }
     }
 
 
