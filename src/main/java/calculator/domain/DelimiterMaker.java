@@ -81,4 +81,8 @@ public class DelimiterMaker {
 		return input.contains(CUSTOM_DELIMITER_PREFIX) || input.contains(CUSTOM_DELIMITER_SUFFIX);
 	}
 
+	public String getDelimiterEndSign() {
+		return CUSTOM_DELIMITER_SUFFIX;
+	}
+
 }

@@ -30,7 +30,8 @@ public class CalculatorService {
 
 	private List<String> getDelimiters(String useInput) {
 		if (delimiterMaker.hasCustomSeparator(useInput)) {
-			String delimiterSection = inputParser.getDelimiterSectionFrom(useInput);
+			String delimiterEndSign = delimiterMaker.getDelimiterEndSign();
+			String delimiterSection = inputParser.getDelimiterSectionFrom(useInput, delimiterEndSign);
 			return delimiterMaker.getDelimitersFrom(delimiterSection);
 		}
 
@@ -44,7 +45,8 @@ public class CalculatorService {
 
 	private String getNumberSection(String userInput) {
 		if (delimiterMaker.hasCustomSeparator(userInput)) {
-			return inputParser.getNumberSectionFrom(userInput);
+			String delimiterEndSign = delimiterMaker.getDelimiterEndSign();
+			return inputParser.getNumberSectionFrom(userInput, delimiterEndSign);
 		}
 
 		return userInput;
