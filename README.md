@@ -6,7 +6,6 @@
     - [ ] Output
 - Model
     - [ ] CustomDelimiterValidator
-    - [ ] CustomDelimiterRemover
     - [ ] StringValidator
     - [ ] NumberExtractor
     - [ ] SumCalculator
@@ -14,7 +13,6 @@
     - [ ] StringCalculator
 - Test
     - [ ] CustomDelimiterValidatorTest
-    - [ ] CustomDelimiterRemoverTest
     - [ ] InputValidatorTest
     - [ ] NumberExtractorTest
     - [ ] SumCalculatorTest
