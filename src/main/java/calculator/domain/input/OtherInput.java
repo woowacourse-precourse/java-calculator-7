@@ -14,15 +14,10 @@ public class OtherInput extends Input {
 
     @Override
     public Long[] createCalculationInputs() {
-        InputValidator.validatePositive(
-                InputValidator.validateOnlyPlainNumber(text)
-        );
+        Long number = InputValidator.validateOnlyPlainNumber(text);
+        InputValidator.validatePositive(number);
 
-        return new Long[]{toLong(text)};
-    }
-
-    private Long toLong(String text) {
-        return Long.valueOf(text);
+        return new Long[]{number};
     }
 
 }
