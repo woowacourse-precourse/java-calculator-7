@@ -7,6 +7,10 @@ public class StringCalculator {
 
     private static final String DEFAULT_DELIMITERS = ",|:";  // 기본 구분자: 쉼표 또는 콜론
 
+    // 입력이 빈 문자열 또는 null인지 확인하는 메서드
+    private boolean isEmpty(String input) {
+        return input == null || input.isEmpty();
+    }
 
     // 숫자 문자열을 추출하여 배열로 반환하는 메서드
     private String[] extractNumbers(String input) {
