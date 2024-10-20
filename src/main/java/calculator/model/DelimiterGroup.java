@@ -10,6 +10,8 @@ import java.util.List;
 public class DelimiterGroup {
 
     public static final String WHITE_SPACE = " ";
+    public static final String EMPTY_STRING = "";
+
 
     private final List<BasicDelimiter> basicDelimiters = new ArrayList<>();
 
@@ -47,6 +49,10 @@ public class DelimiterGroup {
         }
 
         checkDelimiterBoundaries(input);
+
+        if (input.equals(EMPTY_STRING)) {
+            return List.of("0");
+        }
 
         return Arrays.stream(input.split(WHITE_SPACE)).toList();
     }
