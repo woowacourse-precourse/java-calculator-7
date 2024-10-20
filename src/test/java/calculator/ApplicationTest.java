@@ -233,6 +233,12 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void validateCustomDelimiterNotContainMinus() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//!!!\\n12!!!345!!!-1")).isInstanceOf(IllegalArgumentException.class).hasMessage("커스텀 구분자부분의 피연산자에서 음수를 포함합니다");
+        });
+    }
 
     @Test
     void validateCustomDelimiterExpressionOnlyContaining_Positive_Delimiter() {

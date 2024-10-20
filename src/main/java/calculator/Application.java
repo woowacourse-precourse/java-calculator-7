@@ -27,6 +27,7 @@ public class Application {
     private static final String ERROR_BASIC_DELIMITER_CONTAIN_ZERO = "0을 포함합니다";
     private static final String ERROR_BASIC_DELIMITER_CONTAIN_MINUS = "음수를 포함합니다";
     private static final String ERROR_CUSTOM_DELIMITER_CONTAIN_ZERO = "커스텀 구분자부분의 피연산자에서 0을 포함합니다";
+    private static final String ERROR_CUSTOM_DELIMITER_CONTAIN_MINUS = "커스텀 구분자부분의 피연산자에서 음수를 포함합니다";
     private static final String ERROR_BASIC_DELIMITER_ONLY_DELIMITER_SUPPORT = " 밖에 없습니다";
 
 
@@ -79,6 +80,9 @@ public class Application {
                 for (BigInteger inputNumber : operands) {
                     if (inputNumber.compareTo(BigInteger.ZERO) == 0) {
                         throw new IllegalArgumentException(ERROR_CUSTOM_DELIMITER_CONTAIN_ZERO);
+                    }
+                    if (inputNumber.compareTo(BigInteger.ZERO) < 0) {
+                        throw new IllegalArgumentException(ERROR_CUSTOM_DELIMITER_CONTAIN_MINUS);
                     }
                 }
 
