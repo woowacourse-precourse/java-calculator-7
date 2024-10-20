@@ -51,6 +51,7 @@ public class StringCalculator {
 
     public void removeDividerSettings() {
         this.noBlankInput = this.noBlankInput.replaceAll("//(.+)\\\\n", "");
+        this.noBlankInput = this.noBlankInput.replaceAll("//\\\\n", "");
     }
 
     public void makeStringForSplit() {
