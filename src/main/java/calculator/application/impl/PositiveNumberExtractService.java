@@ -1,7 +1,6 @@
 package calculator.application.impl;
 
 import calculator.application.ExtractService;
-import calculator.utility.CharacterUtils;
 import java.math.BigInteger;
 import java.util.List;
 
