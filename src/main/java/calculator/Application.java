@@ -6,15 +6,21 @@ import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
-        System.out.println("Please enter the string to be added.");
-        String input = Console.readLine();
+        try{
+            System.out.println("Please enter the string to be added.");
+            String input = Console.readLine();
 
-        String[] result = extractCustomDelimiter(input);
-        String delimiter = result[0];
-        String numberString = result[1];
+            String[] result = extractCustomDelimiter(input);
+            String delimiter = result[0];
+            String numberString = result[1];
 
-        List<Integer> numbers = parseNumbers(numberString, delimiter);
-        System.out.println("Parsed numbers: " + numbers);
+            List<Integer> numbers = parseNumbers(numberString, delimiter);
+            int sum = add(numbers);
+
+            System.out.println("Result: " + sum);
+        } catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public static String[] extractCustomDelimiter(String input) {
@@ -36,6 +42,12 @@ public class Application {
         List<Integer> numbers = new ArrayList<>();
         String[] splitNumbers = input.split(delimiter);
 
+        // input이 0일때 예외 처리
+        if (input.isEmpty()) {
+            numbers.add(0);
+            return numbers;
+        }
+
         for (String number : splitNumbers) {
             try {
                 int parsedNumber = Integer.parseInt(number.trim());
@@ -46,5 +58,9 @@ public class Application {
         }
 
         return numbers;
+    }
+
+    public static int add(List<Integer> numbers) {
+        return numbers.stream().mapToInt(Integer::intValue).sum();
     }
 }
