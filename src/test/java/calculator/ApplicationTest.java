@@ -62,6 +62,14 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 커스텀_구분자_숫자_등록_오류() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//12\\n1:2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
 
     @Test
     void 예외_테스트() {
