@@ -41,21 +41,14 @@ public class Calculator {
 
     // 분리된 문자열을 숫자로 바꿔 더하는 메서드
     private int sumNumbers(String[] numbers) {
-        CheckMinus checkMinus = new CheckMinus();
+        CheckMinus validator = new CheckMinus();
+        ConvertParseInt parser = new ConvertParseInt();
         int sum = 0;
         for (String number : numbers) {
-            int num = convertParseInt(number);
-            checkMinus.checkMinus(num);
+            int num = parser.convertParseInt(number);
+            validator.checkMinus(num);
             sum += num;
         }
         return sum;
-    }
-
-    //분리한 String을 숫자로 바꾸며 빈칸은 0으로 바꾸는 메서드
-    private int convertParseInt(String number) {
-        if (number == null || number.isBlank()) {
-            return 0;
-        }
-        return Integer.parseInt(number);
     }
 }
