@@ -10,12 +10,14 @@ public class InputView {
     public String getInputString() {
         System.out.println("덧셈할 문자열을 입력해주세요.");
 
-        String input = Console.readLine();
+        return Console.readLine();
+    }
 
-        if (input.startsWith("//")) {    // 커스텀 문자열을 입력하는 경우
-            input += "\\n" + Console.readLine();
+    public String getInputStringFromNextLine(String inputString) {
+        if (inputString.startsWith("//") && inputString.substring(5).isEmpty()) {
+            inputString += "\\n" + Console.readLine();
         }
-        return input;
+        return inputString;
     }
 
 }

@@ -27,6 +27,8 @@ public class CalculatorController {
 
         validateInputString(input);
 
+        input = inputView.getInputStringFromNextLine(input);
+
         InputString inputString = new InputString(input);
 
         long resultSum = inputString.calculate();  // 문자열 계산
