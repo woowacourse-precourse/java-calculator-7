@@ -45,4 +45,18 @@ public class StringAddCalculator {
     private String[] extractNumbersForStandard(String input) {
         return input.split(findStandardDelimiter());
     }
+
+    private String findCustomDelimiter(String input) {
+        if (input.startsWith("//")) {
+            input = input.replace("\\n", "\n");
+            int index = input.indexOf("\n");
+            if (index == -1) {
+                throw new IllegalArgumentException("커스텀 구분자가 없습니다.");
+            }
+            String customDelimiter = input.substring(2, index);
+            return customDelimiter;
+        }
+        throw new IllegalArgumentException("커스텀 구분자가 없습니다.");
+    }
+
 }
