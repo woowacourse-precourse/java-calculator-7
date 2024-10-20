@@ -11,6 +11,7 @@ public class Numbers {
     }
 
     public int sum() {
-        return Arrays.stream(numbers).sum();
+        return Arrays.stream(numbers)
+                .sum();
     }
 }
