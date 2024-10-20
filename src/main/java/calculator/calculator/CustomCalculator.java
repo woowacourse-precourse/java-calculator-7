@@ -28,7 +28,7 @@ public class CustomCalculator {
         if (matcher.find()) {
             return matcher.group(1);
         }
-        return "";
+        throw new IllegalArgumentException("타깃 문자열을 찾을 수 없습니다.");
     }
 
     private boolean isTargetStringEmpty(String targetString) {
