@@ -7,7 +7,7 @@ import java.util.List;
 public class StringValidator {
 
 	private static final String COMMA_DELIMITER = ",";
-	private static final String COLON_DELIMITER = ",";
+	private static final String COLON_DELIMITER = ":";
 	private static final int DIGIT = 0;
 	private static final int DELIMITER = 1;
 	private static final int INPUT_START_INDEX = 0;
