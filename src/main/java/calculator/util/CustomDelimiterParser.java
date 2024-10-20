@@ -2,7 +2,7 @@ package calculator.util;
 
 import static calculator.constant.ExceptionMessage.*;
 
-public class CustomDelimeterParser {
+public class CustomDelimiterParser {
     public static String[] parse(String inputStr, String delimiter) {
         if(inputStr.startsWith("//")){
             String[] split_str = inputStr.split("\\\\n");

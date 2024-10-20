@@ -1,53 +1,67 @@
 package calculator.util;
 
-import calculator.util.NumberExtractor;
-import org.junit.jupiter.api.Test;
+import calculator.constant.ExceptionMessage;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
+import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class NumberExtractorTest {
-    @Test
-    void 숫자_추출_성공() {
-        //given
-        String inputStr = "1,2:3";
-        String delimiter = ",|:";  // 기본 구분자
-
-        //when
+    @DisplayName("숫자 추출이 성공적으로 이루어지는지 테스트합니다.")
+    @ParameterizedTest
+    @MethodSource("extractData")
+    void extract(String inputStr, List<Integer> expectedResult) {
+        String delimiter = ",|:|;|\\.";
         List<Integer> result = NumberExtractor.extractNums(inputStr, delimiter);
-
-        //then
-        assertEquals(List.of(1, 2, 3), result);
+        assertThat(result).isEqualTo(expectedResult);
     }
 
-    @Test
-    void 숫자_추출_음수_예외() {
-        //given
-        String inputStr = "1,-2,3";
+    @DisplayName("음수 또는 0이 포함된 숫자일 경우 예외를 던지는지 테스트합니다.")
+    @ParameterizedTest
+    @MethodSource("underZeroData")
+    void validateNegativeOrZeroNumber(String inputStr) {
         String delimiter = ",|:";
-
-        //when
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            NumberExtractor.extractNums(inputStr, delimiter);
-        });
-
-        //then
-        assertEquals("음수는 허용되지 않습니다.", exception.getMessage());
+        assertThatIllegalArgumentException().isThrownBy(() -> NumberExtractor.extractNums(inputStr,delimiter))
+                .withMessage(ExceptionMessage.UNDER_ZERO_NOT_ALLOW);
     }
 
-    @Test
-    void 숫자_잘못된형태_예외() {
-        //given
-        String inputStr = "1,abc,3";
+    @DisplayName("잘못된 형식의 숫자일 경우 예외를 던지는지 테스트합니다.")
+    @ParameterizedTest
+    @MethodSource("invalidNumberFormatData")
+    void validateInvalidNumberFormat(String inputStr) {
         String delimiter = ",|:";
+        assertThatIllegalArgumentException().isThrownBy(() -> NumberExtractor.extractNums(inputStr,delimiter))
+                .withMessage(ExceptionMessage.INVALID_NUMBER_FORMAT);
+    }
 
-        //when
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            NumberExtractor.extractNums(inputStr, delimiter);
-        });
+    static Stream<Arguments> extractData() {
+        return Stream.of(
+                Arguments.of("1,2,3", List.of(1,2,3)),
+                Arguments.of("1:2:3", List.of(1,2,3)),
+                Arguments.of("1;2;3", List.of(1,2,3)),
+                Arguments.of("1.2.3", List.of(1,2,3)),
+                Arguments.of("5.10;15", List.of(5,10,15))
+        );
+    }
 
-        //then
-        assertEquals("잘못된 숫자 형태입니다.", exception.getMessage());
+    static Stream<Arguments> underZeroData() {
+        return Stream.of(
+                Arguments.of("-1,2,3"),
+                Arguments.of("0,2,3"),
+                Arguments.of("1,2,0")
+        );
+    }
+
+    static Stream<Arguments> invalidNumberFormatData() {
+        return Stream.of(
+                Arguments.of("1,2,abc"),
+                Arguments.of("1,1.5,3")
+        );
     }
 }

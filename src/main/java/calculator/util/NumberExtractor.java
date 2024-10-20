@@ -11,7 +11,7 @@ public class NumberExtractor {
         for(String str_num : str_nums){
             try{
                 int int_num = Integer.parseInt(str_num.trim());
-                if (int_num < 0) {
+                if (int_num <= 0) {
                     throw new IllegalArgumentException(UNDER_ZERO_NOT_ALLOW);
                 }
                 numbers.add(int_num);
