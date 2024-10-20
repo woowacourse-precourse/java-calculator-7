@@ -43,11 +43,7 @@
 - 예외처리
 
 ```java
-사용자가 잘못된
-값을 입력할
-경우 IllegalArgumentException
-를 발생시키고
-프로그램을 종료시킨다.
+사용자가 잘못된값을 입력할경우 IllegalArgumentException 를 발생시키고프로그램을 종료시킨다.
 ```
 
 - [x] 빈칸을 입력한 경우.
@@ -69,11 +65,7 @@
 - 예외처리
 
 ```java
-사용자가 잘못된
-값을 입력할
-경우 IllegalArgumentException
-를 발생시키고
-프로그램을 종료시킨다.
+사용자가 잘못된값을 입력할경우 IllegalArgumentException 를 발생시키고 프로그램을 종료시킨다.
 ```
 
 - [x] 커스텀 구분자에 숫자가 들어가는 경우.
@@ -96,11 +88,7 @@
 - 예외처리
 
 ```java
-사용자가 잘못된
-값을 입력할
-경우 IllegalArgumentException
-를 발생시키고
-프로그램을 종료시킨다.
+사용자가 잘못된값을 입력할경우 IllegalArgumentException 를 발생시키고 프로그램을 종료시킨다.
 ```
 
 - [x] 커스텀 구분자 및 기본 구분자가 사용되지 않을경우
@@ -115,11 +103,7 @@
 - 예외처리
 
 ```java
-사용자가 잘못된
-값을 입력할
-경우 IllegalArgumentException
-를 발생시키고
-프로그램을 종료시킨다.
+사용자가 잘못된값을 입력할 경우 IllegalArgumentException 를 발생시키고 프로그램을 종료시킨다.
 ```
 
 - [x] 입력값이 공백으로 시작하는 경우.
