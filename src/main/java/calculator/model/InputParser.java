@@ -6,10 +6,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
+import calculator.validation.InputValidator;
+
 public class InputParser {
 	List<String> delimiters;
+	private final InputValidator inputValidator;
 
 	public InputParser(String input) {
+		this.inputValidator = new InputValidator();
 		// 만약 사용자가 커스텀 구분자를 입력했다면, 커스텀 구분자를 따로 추출해서 구분자 목록에 추가한다..
 		List<String> delimiter = new ArrayList<>(List.of(",", ":"));
 		extractCustomDelimiter(input).ifPresent(delimiter::add);
@@ -32,7 +36,7 @@ public class InputParser {
 	// 구분자들을 이용해 정규식을 만들고, 이를 이용해 입력값을 분리
 	private String[] splitInput(String input, List<String> delimiters) {
 		String processedInput = removeCustomDelimiter(input);
-		validateInvalidDelimiter(processedInput);
+		inputValidator.validateInvalidDelimiter(processedInput);
 
 		String regex = String.join("|",
 			delimiters.stream()
@@ -59,15 +63,6 @@ public class InputParser {
 		return input.startsWith("//");
 	}
 
-	private void validateInvalidDelimiter(String input) {
-		String regex = "[\\d" + String.join("", delimiters) + "]*";
-		String filteredInput = input.replaceAll(regex, "");
-
-		if (!input.matches(regex)) {
-			throw new IllegalArgumentException("허용되지 않은 구분자가 포함되어 있습니다: " + filteredInput);
-		}
-	}
-
 	// 분리된 각 부분에서 숫자로 변환하여 리스트에 추가
 	private List<Integer> saveNumbers(String[] splitParts) {
 		List<Integer> numbers = new ArrayList<>();
@@ -75,8 +70,8 @@ public class InputParser {
 			.map(String::trim)
 			.map(this::replaceBlankWithZero)
 			.forEach(part -> {
-				validateDigit(part);
-				validateNumberPositive(part);
+				inputValidator.validateDigit(part);
+				inputValidator.validateNumberPositive(part);
 				numbers.add(Integer.parseInt(part));
 			});
 
@@ -89,20 +84,6 @@ public class InputParser {
 		}
 
 		return part;
-	}
-
-	private void validateDigit(String s) {
-		try {
-			Integer.parseInt(s);
-		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException("구분자 사이에 정수가 아닌 값이 포함되어 있습니다.");
-		}
-	}
-
-	private void validateNumberPositive(String s) {
-		if (Integer.parseInt(s) <= 0) {
-			throw new IllegalArgumentException("0 또는 음수가 포함되어 있습니다.");
-		}
 	}
 
 	/**
