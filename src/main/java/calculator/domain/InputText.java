@@ -12,12 +12,14 @@ public class InputText {
         text = divideTextAndSeparateList(input.trim());
     }
 
-    private String divideTextAndSeparateList(String input){
+    public String divideTextAndSeparateList(String input){
         if (input.startsWith("//")){
             int lastIndex = input.lastIndexOf("\\n");
-            String separator = input.substring(2,lastIndex);
-            separatorList.add(separator);
-            return input.substring(lastIndex+2);
+            if (lastIndex != -1) {
+                String separator = input.substring(2, lastIndex);
+                separatorList.add(separator);
+                return input.substring(lastIndex + 2);
+            }
         }
         return input;
     }
