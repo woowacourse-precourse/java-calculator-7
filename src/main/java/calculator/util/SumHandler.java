@@ -1,7 +1,5 @@
 package calculator.util;
 
-import calculator.util.NegativeNumberHandler;
-
 public class SumHandler {
     // 문자열을 숫자로 분리하고 합산하는 메서드
     public static int sumNumbers(String str, String delimiter) {
