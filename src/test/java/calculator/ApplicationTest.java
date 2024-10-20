@@ -24,6 +24,14 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 미확인_구분자_사용() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("15,8,12|4"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
