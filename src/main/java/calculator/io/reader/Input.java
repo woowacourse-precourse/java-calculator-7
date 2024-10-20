@@ -1,4 +1,4 @@
-﻿package calculator.io.reader;
+package calculator.io.reader;
 
 import java.util.List;
 

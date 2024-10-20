@@ -1,4 +1,4 @@
-﻿package calculator.io.reader;
+package calculator.io.reader;
 
 import camp.nextstep.edu.missionutils.Console;
 

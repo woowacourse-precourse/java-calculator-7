@@ -1,4 +1,4 @@
-﻿package calculator.io.writer;
+package calculator.io.writer;
 
 public class SystemOut implements Output{
     @Override

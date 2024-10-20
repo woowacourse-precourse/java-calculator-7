@@ -1,4 +1,4 @@
-﻿package calculator.operation.basic;
+package calculator.operation.basic;
 
 import calculator.operation.Calculator;
 
