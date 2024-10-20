@@ -22,6 +22,7 @@ public class CalculatorController {
     public void run() {
         String input = inputReader.readLine();
         String[] numbers = calculator.extractNumbers(input);
+        int[] numbersArray = validator.validateAndConvert(numbers);
     }
 
 }
