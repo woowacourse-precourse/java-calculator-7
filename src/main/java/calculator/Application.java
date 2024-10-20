@@ -23,6 +23,10 @@ public class Application {
                 System.out.println(number);
             }
 
+            int sum = calculateSumWithForLoop(numbers);
+
+            System.out.println("합계: " + sum);
+
         } catch (IllegalArgumentException e) {
             System.err.println("입력 값이 잘못되었습니다: " + e.getMessage());
         }
@@ -46,5 +50,13 @@ public class Application {
             }
         }
         return numbers;
+    }
+
+    private static int calculateSumWithForLoop(List<Integer> numbers) {
+        int sum = 0;
+        for (int number : numbers) {
+            sum += number;
+        }
+        return sum;
     }
 }
