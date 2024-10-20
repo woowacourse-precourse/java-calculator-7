@@ -1,7 +1,11 @@
 package calculator;
 
-public class Application {
-    public static void main(String[] args) {
-        // TODO: 프로그램 구현
-    }
+public class Application{
+	public static void main(String[] args) {
+		Model model = new Model();
+		View view = new View();
+		Controller controller = new Controller(model, view);
+		
+		controller.run();
+	}
 }
