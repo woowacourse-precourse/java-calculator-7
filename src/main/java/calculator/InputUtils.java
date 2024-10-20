@@ -2,10 +2,13 @@ package calculator;
 
 public class InputUtils {
 
-    public static final String DEFAULT_DELIMITER = "[,:]";
+    public final static String DEFAULT_DELIMITER = "[,:]";
 
-    public static final String CUSTOM_DELIMITER_PREFIX = "//";
-    public static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
+    public final static String CUSTOM_DELIMITER_PREFIX = "//";
+    public final static  String CUSTOM_DELIMITER_SUFFIX = "\\n";
+
+    private final static int CUSTOM_DELIMITER_POSITION = 2;
+    private final static int CUSTOM_DELIMITER_SUFFIX_POSITION = 3;
 
     public static String[] splitInputs(String input, String delimiter){
         return input.split(delimiter);
@@ -20,14 +23,14 @@ public class InputUtils {
     }
     public static boolean isCustomDelimiter(String input){
         if(input.startsWith(CUSTOM_DELIMITER_PREFIX)){
-            return input.indexOf(CUSTOM_DELIMITER_SUFFIX) == 3;
+            return input.indexOf(CUSTOM_DELIMITER_SUFFIX) == CUSTOM_DELIMITER_SUFFIX_POSITION;
         }return false;
     }
     public static String extractNumbers(String input){
         return input.substring(input.indexOf(CUSTOM_DELIMITER_SUFFIX) + CUSTOM_DELIMITER_SUFFIX.length());
     }
     public static String extractDelimiter(String input){
-        return Character.toString(input.charAt(2));
+        return Character.toString(input.charAt(CUSTOM_DELIMITER_POSITION));
     }
     public static void validateInput(String input){
         int number;
