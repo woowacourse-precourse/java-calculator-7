@@ -21,13 +21,7 @@ public class Delimiter {
     }
 
     public String[] split(String line) {
-        if(hasCustomDelimiter())
-            return line.split(customDelimiter);
-        return line.split(DEFAULT_DELIMITER_REGEX);
-    }
-
-    private boolean hasCustomDelimiter() {
-        return !customDelimiter.isEmpty();
+        return line.split(customDelimiter);
     }
 
     String getCustomDelimiter() {
