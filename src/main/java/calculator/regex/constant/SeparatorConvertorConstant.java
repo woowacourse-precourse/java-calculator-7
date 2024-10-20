@@ -8,4 +8,5 @@ public class SeparatorConvertorConstant {
     public static final String FORWARD_SLASH = "/";
     public static final String DOT = ".";
     public static final String DOT_REGEX = "\\.";
+    public static final String DEFAULT_SEPARATOR = ",|:";
 }
