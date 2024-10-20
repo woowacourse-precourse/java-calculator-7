@@ -168,4 +168,21 @@ class CalculatorServiceTest {
         assertEquals(0, result);
     }
 
+    @DisplayName("커스텀 구분자를 사용하고 숫자가 하나만 들어왔을 때 해당 숫자를 반환")
+    @ParameterizedTest
+    @CsvSource({
+            "'//;\n5', 5",    // 세미콜론 구분자와 숫자 5
+            "'//|\n10', 10",  // 파이프 구분자와 숫자 10
+            "'//#\n15', 15",  // 샵 구분자와 숫자 15
+            "'//@\n20', 20",  // 앳 구분자와 숫자 20
+            "'//.\n25', 25"   // 점 구분자와 숫자 25
+    })
+    void add_customDelimiterWithSingleNumber_returnsNumber(String input, int expected) {
+        // 입력 문자열에 숫자가 하나만 있을 때 해당 숫자가 반환되어야 함
+        int result = CalculatorService.add(input);
+
+        // 결과가 기대한 숫자와 일치해야 함
+        assertEquals(expected, result);
+    }
+
 }
