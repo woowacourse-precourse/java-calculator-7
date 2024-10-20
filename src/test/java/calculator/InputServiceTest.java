@@ -1,5 +1,6 @@
 package calculator;
 
+import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import calculator.service.InputService;
@@ -12,21 +13,23 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class InputServiceTest extends NsTest {
     @Test
     void 커스텀_구분자_추출_테스트() {
-        Map<String, String> resultMap = InputService.extractCustomDelimiter("//r\ntest");
+        assertSimpleTest(() -> {
+            Map<String, String> resultMap = InputService.extractCustomDelimiter("//r\ntest");
 
-        assertThat(resultMap.get("customDelimiter")).isEqualTo("r");
-        assertThat(resultMap.get("calculateString")).isEqualTo("test");
-
+            assertThat(resultMap).containsEntry("customDelimiter", "r");
+            assertThat(resultMap).containsEntry("calculateString", "test");
+        });
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"test", "/qwer", "\nasdf"})
     void 커스텀_없는_추출_테스트(String text) {
-        Map<String, String> resultMap = InputService.extractCustomDelimiter(text);
+        assertSimpleTest(() -> {
+            Map<String, String> resultMap = InputService.extractCustomDelimiter(text);
 
-        assertThat(resultMap.get("customDelimiter")).isEqualTo(null);
-        assertThat(resultMap.get("calculateString")).isEqualTo(text);
-
+            assertThat(resultMap).containsEntry("customDelimiter", null);
+            assertThat(resultMap).containsEntry("calculateString", text);
+        });
     }
 
     @Override
