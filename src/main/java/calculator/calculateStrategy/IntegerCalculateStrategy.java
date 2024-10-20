@@ -8,6 +8,10 @@ public class IntegerCalculateStrategy implements CalculateStrategy {
 
     @Override
     public Integer add(List<Integer> operands) {
-        return null;
+        Integer addResult = 0;
+        for (Integer operand : operands) {
+            addResult += operand;
+        }
+        return addResult;
     }
 }
