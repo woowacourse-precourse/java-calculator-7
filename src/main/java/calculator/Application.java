@@ -128,6 +128,10 @@ public class Application {
      * @param customDelimiter 커스텀 구분자
      */
     private static void validateCustomDelimiter(String input, String customDelimiter) {
+        // 커스텀 구분자가 빈 문자열, 알파벳이거나 숫자인 경우 예외 처리
+        if (customDelimiter.isEmpty() || customDelimiter.matches("[a-zA-Z0-9]")) {
+            throw new IllegalArgumentException("유효하지 않은 커스텀 구분자입니다: " + customDelimiter);
+        }
         // 커스텀 구분자 외의 다른 구분자가 사용되었는지 확인
         for (char c : input.toCharArray()) {
             // 커스텀 구분자, 숫자, 그리고 공백을 제외한 다른 문자가 있는지 확인
