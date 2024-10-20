@@ -13,7 +13,14 @@ public class Application {
         } else if (input.startsWith("//")) {
             String[] s = input.split("");
             if((s[3].equals("\\")) && (s[4].equals("n"))) {
-
+                delimiter += input.charAt(2);
+                if(input.length() == 5) {
+                    return 0;
+                }
+                input = input.substring(5);
+                if(input == null || input.isEmpty() || input.isBlank()) {
+                    return 0;
+                }
             } else {
                 throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
             }
