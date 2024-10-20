@@ -13,6 +13,9 @@ public class Application {
         // "//"로 시작하면 Custom 구분자
         if(input.startsWith("//")){
             String deli = input.substring(2); // "//" 제거해서 구분자만 받기
+            if(deli.isEmpty()){
+                throw new IllegalArgumentException("구분자가 공백입니다.");
+            }
             String input_nums = Console.readLine();
             CustomInput customInput = new CustomInput();
             result = customInput.customParseSum(deli, input_nums);
