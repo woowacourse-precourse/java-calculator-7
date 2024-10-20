@@ -69,5 +69,10 @@ public class Application {
             throw new IllegalArgumentException("음수는 허용되지 않습니다");
         }
     }
+    //5. 결과출력
+    private static void printResult(int result)
+    {
+        System.out.println("결과 : "+result);
+    }
 
 }
