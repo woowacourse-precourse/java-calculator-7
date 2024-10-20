@@ -13,6 +13,9 @@ public class InputParser {
     private void parseInput() {
         if (isCustomSeparator(inputText)) {
             this.separator = inputText.substring(2, 3);
+            if (this.separator.equals("\\")) {
+                this.separator = "\\\\";
+            }
             this.numbers = inputText.substring(5).split(separator);
         } else if (isDefaultSeparator(inputText)) {
             this.separator = "[,:]";
