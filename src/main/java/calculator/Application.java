@@ -46,7 +46,8 @@ public class Application {
 
     public static boolean isValidCustomDivider(String token) {
         String tokenWithoutStartSign = token.substring(2);
-        boolean isValid = token.startsWith("//") && !tokenWithoutStartSign.contains(SignAndDivider.startSign);
+        boolean isValid = token.startsWith("//") && !tokenWithoutStartSign.contains(SignAndDivider.startSign)
+                && !tokenWithoutStartSign.matches("[0-9]");
 
         if (!isValid) {
             throw new IllegalArgumentException();
