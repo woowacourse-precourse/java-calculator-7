@@ -43,7 +43,9 @@ public class Application {
 
     private static boolean isAllNumbers(String[] nums) {
         for (String num : nums) {
-            if (!num.matches("\\d*")) return false;
+            if (!num.matches("\\d+")) {
+                throw new IllegalArgumentException();
+            };
         }
         return true;
     }
@@ -60,10 +62,14 @@ public class Application {
 
     private static String getCustomDelimiter(String input) {
 
-        if (!input.startsWith("//")) return null;   // 형식 예외처리 필요
+        if (!input.startsWith("//")) {
+            throw new IllegalArgumentException();
+        };
 
         String delimiter = input.substring(2);
-        if (delimiter.length() > 1) return null;    // 구분자 길이 예외처리 필요
+        if (delimiter.length() > 1) {
+            throw new IllegalArgumentException();
+        };
 
         return delimiter;
     }
