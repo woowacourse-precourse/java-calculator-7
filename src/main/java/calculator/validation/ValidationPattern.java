@@ -3,8 +3,8 @@ package calculator.validation;
 import java.util.regex.Pattern;
 
 public enum ValidationPattern {
-    CUSTOM_DELIMITER_PATTERN("^//([^\\n]{1,5})\\n"),
-    INTEGER_PATTERN("^[0-9]+$");
+    CUSTOM_DELIMITER_PATTERN("^//(.{1,5})\\\\n"),
+    INTEGER_PATTERN("\\d+");
 
     private final Pattern pattern;
 
@@ -16,4 +16,5 @@ public enum ValidationPattern {
         return pattern;
     }
 }
+
 
