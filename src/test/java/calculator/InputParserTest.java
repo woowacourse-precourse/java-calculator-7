@@ -17,9 +17,9 @@ public class InputParserTest {
     }
     @Test
     void 커스텀_구분자로_파싱() {
-        String input = "//;\n1;2;3";
+        String input = "//@@!*!@\\n1@@!*!@2,3";
         String[] result = inputParser.parse(input);
 
-        assertArrayEquals(new String[]{"1", "2", "3"}, result);
+        assertArrayEquals(new String[]{"1","2","3"}, result);
     }
 }
