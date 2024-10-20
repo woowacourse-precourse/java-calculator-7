@@ -11,7 +11,7 @@ public class Calculator {
             int result = StringCalculate(input);
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
-            System.out.println("예외 발생: " + e.getMessage());
+            throw e;
         }
     }
 
