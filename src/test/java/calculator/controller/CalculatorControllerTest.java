@@ -2,7 +2,6 @@ package calculator.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 import calculator.dto.DelimiterInputDto;
 import java.util.ArrayList;
@@ -40,7 +39,7 @@ class CalculatorControllerTest {
                 new DelimiterInputDto(inputString, new ArrayList<>(List.of(",", ":")));
 
         //when - then
-        assertThatThrownBy(() ->  calculatorController.calculateSum(delimiterInputDto))
+        assertThatThrownBy(() -> calculatorController.calculateSum(delimiterInputDto))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -59,10 +58,10 @@ class CalculatorControllerTest {
                 new DelimiterInputDto(emptyCustomRange, new ArrayList<>(List.of(",", ":")));
 
         //when - then
-        assertThatThrownBy(() ->  calculatorController.calculateSum(delimiterInputDto1))
+        assertThatThrownBy(() -> calculatorController.calculateSum(delimiterInputDto1))
                 .isInstanceOf(IllegalArgumentException.class);
 
-        assertThatThrownBy(() ->  calculatorController.calculateSum(delimiterInputDto2))
+        assertThatThrownBy(() -> calculatorController.calculateSum(delimiterInputDto2))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -76,7 +75,7 @@ class CalculatorControllerTest {
                 new DelimiterInputDto(inputString, new ArrayList<>(List.of(",", ":")));
 
         //when - then
-        assertThatThrownBy(() ->  calculatorController.calculateSum(delimiterInputDto))
+        assertThatThrownBy(() -> calculatorController.calculateSum(delimiterInputDto))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -93,9 +92,9 @@ class CalculatorControllerTest {
                 new DelimiterInputDto(customPlus, new ArrayList<>(List.of(",", ":")));
 
         //when - then
-        assertThatThrownBy(() ->  calculatorController.calculateSum(delimiterInputDto1))
+        assertThatThrownBy(() -> calculatorController.calculateSum(delimiterInputDto1))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() ->  calculatorController.calculateSum(delimiterInputDto2))
+        assertThatThrownBy(() -> calculatorController.calculateSum(delimiterInputDto2))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -109,7 +108,7 @@ class CalculatorControllerTest {
                 new DelimiterInputDto(inputString, new ArrayList<>(List.of(",", ":")));
 
         //when - then
-        assertThatThrownBy(() ->  calculatorController.calculateSum(delimiterInputDto))
+        assertThatThrownBy(() -> calculatorController.calculateSum(delimiterInputDto))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -7,24 +7,24 @@ public class DelimiterInputDto {
     private String inputString;
     private final List<String> delimiters;
 
-    public DelimiterInputDto(String inputString, List<String> delimiters){
+    public DelimiterInputDto(String inputString, List<String> delimiters) {
         this.inputString = inputString;
         this.delimiters = delimiters;
     }
 
-    public void setInputString(String inputString){
+    public void setInputString(String inputString) {
         this.inputString = inputString;
     }
 
-    public String getInputString(){
+    public String getInputString() {
         return inputString;
     }
 
-    public void addDelimiter(String delimiter){
+    public void addDelimiter(String delimiter) {
         delimiters.add(delimiter);
     }
 
-    public List<String> getDelimiters(){
+    public List<String> getDelimiters() {
         return new ArrayList<>(delimiters);
     }
 }
