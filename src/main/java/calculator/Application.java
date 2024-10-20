@@ -17,7 +17,7 @@ public class Application {
             String line = Console.readLine();
 
             if(line.matches(".*[A-Z가-힣]+.*"))
-                throw new IllegalArgumentException("한글은 입력할 수 없습니다.");
+                throw new IllegalArgumentException("한글과 알파벳은 입력할 수 없습니다.");
 
             if (line.isEmpty()) {
                 throw new IllegalArgumentException("입력이 비어 있습니다.");
@@ -38,9 +38,12 @@ public class Application {
 
             for (int i = 0; i < str.length; i++) {
                 try {
+                    if (str[i].isEmpty()) {
+                        throw new IllegalArgumentException("숫자 부분이 비어있습니다.");
+                    }
                     total += Integer.parseInt(str[i]);
                 } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("숫자를 입력하세요.");
+                    throw new IllegalArgumentException("숫자가 아닌 값이 입력되었습니다.");
                 }
             }
 
