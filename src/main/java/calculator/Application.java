@@ -9,20 +9,17 @@ public class Application {
 
         String customDelimiter = extractCustomDelimiter(input); // 커스텀 구분자 추출
         String numbersPart = extractNumbersPart(input); // 커스텀 구분자 지정 문자 제외한 부분 추출
-        System.out.println("nums: " + numbersPart);
+        System.out.println(numbersPart);
 
         String regex = "[," + customDelimiter + ":]";
         String[] numbers = numbersPart.split(regex);
-        for (String number : numbers) {
-            System.out.println(number);
+        for (String s : numbers) {
+            System.out.println(s);
         }
 
-        try {
-            int sum = sumNumbers(numbers); // 숫자들의 합 계산
-            System.out.println("Sum: " + sum);
-        } catch (IllegalArgumentException e) {
-            System.err.println("Error: " + e.getMessage());
-        }
+        validateNumbers(numbers);
+        int sum = sumNumbers(numbers);
+        System.out.println("결과 : " + sum);
     }
 
     public static String extractNumbersPart(String input) {
@@ -48,17 +45,35 @@ public class Application {
         return "";
     }
 
-    public static int sumNumbers(String[] numbers) {
-        int sum = 0;
+    public static void validateNumbers(String[] numbers) {
         for (String number : numbers) {
-            try {
-                // 숫자 변환 시도
-                sum += Integer.parseInt(number.trim());
-            } catch (NumberFormatException e) {
-                // 숫자가 아닐 경우 예외 발생
+            number = number.trim(); // 공백 제거
+            // 숫자가 아닌지 검사
+            if (!isNumeric(number)) {
+                throw new IllegalArgumentException("Invalid number: " + number);
+            }
+            // 양수인지 검사
+            if (!isPositive(number)) {
                 throw new IllegalArgumentException("Invalid number: " + number);
             }
         }
-        return sum;
+    }
+
+    public static boolean isNumeric(String number) {
+        // 문자열이 숫자인지 확인
+        return number.matches("\\d+");
+    }
+
+    public static boolean isPositive(String number) {
+        int parsedNumber = Integer.parseInt(number);
+        return parsedNumber >= 0;
+    }
+
+    public static int sumNumbers(String[] numbers) {
+        int sum = 0;
+        for (String number : numbers) {
+            sum += Integer.parseInt(number.trim()); // 합산
+        }
+        return sum; // 합계 반환
     }
 }
