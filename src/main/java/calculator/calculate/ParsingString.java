@@ -1,8 +1,6 @@
 package calculator.calculate;
-
 import calculator.global.GlobalConstant;
 import calculator.exception.Exception;
-
 import java.util.ArrayList;
 
 public class ParsingString {
@@ -14,7 +12,7 @@ public class ParsingString {
     private String input;
     private String parsingInput;
 
-    public void AddDelemeter() {
+    private void AddDelemeter() {
         if (LenCheck()) return;
         ParsingPattern();
         if (check_slash.equals("//") && check_line.equals("\\n")) {
@@ -25,17 +23,17 @@ public class ParsingString {
         }
     }
 
-    public void ParsingPattern(){
+    private void ParsingPattern(){
         check_slash = input.substring(0,2);
         check_line = input.substring(3,5);
     }
 
-    public boolean LenCheck(){
+    private boolean LenCheck(){
         if(input.length() < 5) return true;
         else return false;
     }
 
-    public ArrayList<Integer> MakeNumList() {
+    private ArrayList<Integer> MakeNumList() {
         parsingInput = input.substring(GlobalConstant.StartIndex);
         String tmp = "";
         for (int i = 0; i < parsingInput.length(); i++) {
@@ -67,6 +65,11 @@ public class ParsingString {
             int num = Exception.IsPositiveNum(tmp);
             numlist.add(num);
         }
+    }
+
+    public ArrayList<Integer> ParsingNum(){
+        AddDelemeter();
+        return MakeNumList();
     }
 
     public ParsingString(String input){
