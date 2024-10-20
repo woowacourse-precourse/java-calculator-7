@@ -13,7 +13,7 @@ public class CustomDelimiterStrategy implements DelimiterStrategy {
         if (isNumber(delimiter)) {
             throw new IllegalArgumentException("커스텀 구분자는 숫자를 포함하면 안 된다");
         }
-        if (!isChar(delimiter)) {
+        if (isNotChar(delimiter)) {
             throw new IllegalArgumentException("하나의 문자만 커스텀 구분자로 지정한다");
         }
         if (metaChar.contains(delimiter)) {
@@ -37,8 +37,8 @@ public class CustomDelimiterStrategy implements DelimiterStrategy {
         return delimiter.matches(".*\\d.*");
     }
 
-    private boolean isChar(String delimiter) {
-        return delimiter.length() == 1;
+    private boolean isNotChar(String delimiter) {
+        return delimiter.length() != 1;
     }
 
     private String convertMetaChar(String delimiter) {
