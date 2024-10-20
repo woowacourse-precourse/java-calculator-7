@@ -1,5 +1,25 @@
 # java-calculator-precourse
 
+    calculator
+    ┣ config
+    ┃ ┗ Configuration.java
+    ┣ constant
+    ┃ ┗ CalConst.java
+    ┣ controller
+    ┃ ┗ CalculatorController.java
+    ┣ dto
+    ┃ ┗ CheckSeparatorDto.java
+    ┣ service
+    ┃ ┣ separator
+    ┃ ┃ ┗ Separator.java
+    ┃ ┣ validator
+    ┃ ┃ ┗ Validator.java
+    ┃ ┗ CalculatorService.java
+    ┣ view
+    ┃ ┣ InputView.java
+    ┃ ┗ OutputView.java
+    ┗ Application.java
+
 ## 구현할 기능 목록
 
 ### 1. 문자열을 입력 받는 기능
