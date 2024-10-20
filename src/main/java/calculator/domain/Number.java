@@ -32,6 +32,9 @@ public class Number {
 
     private Integer convertToInteger(String separatedVal){
         try {
+            if(separatedVal.isEmpty()){
+                return 0;
+            }
             return Integer.parseInt(separatedVal);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(CANNOT_INPUT_CHARACTER);
