@@ -21,7 +21,7 @@ public class Validator {
 
     public static void isCorrectDefaultInput(String input) {
         for (int i = 0; i < input.length(); i++) {
-            if (!(input.charAt(i) == ',' || input.charAt(i) == ':' || isNumber(input.charAt(i)))) {
+            if (!(input.charAt(i) == ',' || input.charAt(i) == ':' || Character.isDigit(input.charAt(i)))) {
                 throw new IllegalArgumentException(WRONG_INPUT_MESSAGE);
             }
         }
@@ -65,10 +65,5 @@ public class Validator {
             return true;
         }
         return false;
-    }
-
-
-    private static boolean isNumber(char c) {
-        return c >= '0' && c <= '9';
     }
 }
