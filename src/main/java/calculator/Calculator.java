@@ -7,7 +7,7 @@ public class Calculator {
         this.alu = alu;
     }
 
-    public Long calculate() {
+    public Long excute() {
         return alu.calculate();
     }
 }

@@ -8,6 +8,6 @@ public class Application {
         Parser parser = new DefaultParser(calculatorInputHandler.input());
         Alu addUnit = new AddUnit(parser.parse());
         Calculator calculator = new Calculator(addUnit);
-        calculatorOutputHandler.output(calculator.calculate());
+        calculatorOutputHandler.output(calculator.excute());
     }
 }
