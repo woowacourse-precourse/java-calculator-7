@@ -58,21 +58,8 @@ public class Number {
         return rawText;
     }
 
-    public void validInputText(char endChar) {
-        if (!('0' < endChar && endChar <= '9')) {
-            throw new IllegalArgumentException("입력이 올바르지 않습니다. 마지막 문자는 숫자여야 합니다.");
-        }
-    }
-
-    public String dealEmpty(String rawText) {
-        if (rawText.length() == 0) {
-            return "0";
-        }
-        return rawText;
-    }
-
     public boolean checkValidNumber(int number) {
-        return 0 < number && number <= Integer.MAX_VALUE;
+        return 0 <= number && number <= Integer.MAX_VALUE;
     }
 
     public int parseInt(String numberString) {
@@ -100,10 +87,6 @@ public class Number {
     }
 
     public void getInputText(String rawText) {
-        rawText = dealEmpty(rawText);
-
-        validInputText(rawText.charAt(rawText.length()-1));
-
         int customDelimiterEndIndex = checkHasCustomDelimiter(rawText);
         String customDelimiter = splitCustomDelimiter(customDelimiterEndIndex, rawText);
 
