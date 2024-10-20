@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class StringCalculator {
 
-    private static final String DEFAULT_DELIMITERS = "[,|:]";
+    private static final String DEFAULT_DELIMITERS = ",|:";
 
     public static String calculate(String input) {
         if (input == null || input.isEmpty()) {
@@ -23,8 +23,8 @@ public class StringCalculator {
             if (delimiterIndex == -1) {
                 throw new InvalidInputException("잘못된 구분자 형식입니다.");
             }
-            delimiter = Pattern.quote(input.substring(2, delimiterIndex)); // 정규 표현식으로 안전하게 추가
-            numbers = input.substring(delimiterIndex + 1);
+            delimiter = Pattern.quote(input.substring(2, delimiterIndex));
+            numbers = input.substring(delimiterIndex + 1);  // '\n' 다음부터 잘라냄
         }
 
         // Step 3: 숫자 추출 및 유효성 검사
@@ -43,7 +43,7 @@ public class StringCalculator {
                 }
                 parsedNumbers.add(number);
             } catch (NumberFormatException e) {
-                throw new InvalidInputException("숫자 이외의 값이 포함되었습니다: " + token);
+                throw new InvalidInputException("숫자 이외의 값이 포함되었습니다.");
             }
         }
 
