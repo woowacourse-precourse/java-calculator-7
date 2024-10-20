@@ -1,11 +1,11 @@
 package calculator;
 
-public class DelimiterParser {
+public class DelimiterExtractor {
 
     private String numbersPart;
     private DelimiterStrategy delimiterStrategy;
 
-    public DelimiterParser(String input) {
+    public DelimiterExtractor(String input) {
         if (input.startsWith("//")) {
             int newlineIndex = input.indexOf("\\n");
             if (newlineIndex == -1) {

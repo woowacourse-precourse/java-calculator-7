@@ -2,10 +2,10 @@ package calculator;
 
 public class DefaultParser implements Parser {
 
-    private final DelimiterParser delimiterParser;
+    private final DelimiterExtractor delimiterParser;
 
     public DefaultParser(String input) {
-        delimiterParser = new DelimiterParser(input);
+        delimiterParser = new DelimiterExtractor(input);
     }
 
     @Override
