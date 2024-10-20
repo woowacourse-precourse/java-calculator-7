@@ -1,43 +1,24 @@
 package calculator;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringParser {
-    List<String> delimiters = new ArrayList<>(List.of(",", ":"));
-
     public int[] parseString(String input) {
-        input = extractDelimiter(input);
+        DelimiterExtractor delimiterExtractor = new DelimiterExtractor();
+        DelimiterExtractionResult extractionResult = delimiterExtractor.extractDelimiter(input);
 
         StringBuilder builder = new StringBuilder("[");
-        for (String delimeter : delimiters) {
-            builder.append(delimeter);
+        for (String delimiter : extractionResult.delimiters) {
+            builder.append(delimiter);
         }
         builder.append("]");
 
         Pattern pattern = Pattern.compile(builder.toString());
-        String[] tokens = input.split(pattern.toString());
+        String[] tokens = extractionResult.input.split(pattern.toString());
 
         return Arrays.stream(tokens).map(InputValidator::validateToken)
                 .mapToInt(Integer::parseInt)
                 .toArray();
-    }
-
-    private String extractDelimiter(String input) {
-        Pattern pattern = Pattern.compile("//(.+)\\\\n");
-        Matcher matcher = pattern.matcher(input);
-
-        while (matcher.find()) {
-            if (matcher.group(1).length() > 1) {
-                throw new IllegalArgumentException("커스텀 구분자가 문자열입니다. 문자로 입력해 주세요.");
-            }
-            delimiters.add(matcher.group(1));
-            input = input.replaceFirst(Pattern.quote(matcher.group()), "");
-        }
-
-        return input;
     }
 }
