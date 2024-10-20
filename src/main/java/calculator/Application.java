@@ -11,5 +11,6 @@ public class Application {
             sum += Integer.parseInt(num);
         }
 
+        System.out.println("sum = " + sum);
     }
 }
