@@ -1,5 +1,6 @@
 package calculator.service;
 
+import calculator.dto.ExtractionResult;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -9,14 +10,14 @@ public class DelimiterExtractor {
     private static final String CUSTOM_DELIMITER_PATTERN = "//(.+)\n";
     private static final Pattern PATTERN = Pattern.compile(CUSTOM_DELIMITER_PATTERN);
 
-    public List<String> extract(String input) {
+    public ExtractionResult extract(String input) {
         List<String> customDelimiters = new ArrayList<>();
 
         if (!input.startsWith("//")) {
             if (PATTERN.matcher(input).find()) {
                 throw new IllegalArgumentException("커스텀 구분자는 문자열의 시작 부분에만 위치해야 합니다.");
             }
-            return customDelimiters;
+            return ExtractionResult.of(customDelimiters, input);
         }
 
         String remainingInput = input;
@@ -37,6 +38,6 @@ public class DelimiterExtractor {
             throw new IllegalArgumentException("커스텀 구분자는 문자열의 시작 부분에만 위치해야 합니다.");
         }
 
-        return customDelimiters;
+        return ExtractionResult.of(customDelimiters, remainingInput);
     }
 }

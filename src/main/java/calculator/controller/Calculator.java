@@ -2,9 +2,9 @@ package calculator.controller;
 
 import calculator.domain.DelimiterFactory;
 import calculator.domain.Delimiters;
+import calculator.dto.ExtractionResult;
 import calculator.service.DelimiterExtractor;
 import calculator.view.InputView;
-import java.util.List;
 
 public class Calculator {
     private final InputView inputView;
@@ -18,8 +18,8 @@ public class Calculator {
     public void run() {
         String userInput = inputView.readStringToAdd();
 
-        List<String> extractedDelimiter = delimiterExtractor.extract(userInput);
-        Delimiters delimiters = DelimiterFactory.createDelimitersFrom(extractedDelimiter);
+        ExtractionResult extractionResult = delimiterExtractor.extract(userInput);
+        Delimiters delimiters = DelimiterFactory.createDelimitersFrom(extractionResult.delimiters());
 
 
     }
