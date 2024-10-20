@@ -1,7 +1,9 @@
 package calculator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DelimiterParser {
     private final DelimiterManager delimiterManager;
@@ -35,6 +37,14 @@ public class DelimiterParser {
         }
 
         return input;
+    }
+
+    public List<String> extractDelimiters(String input) {
+        String[] delimiters = input.split("\\d+");
+
+        return Arrays.stream(delimiters)
+                .filter(delimiter -> !delimiter.isEmpty())
+                .collect(Collectors.toList());
     }
 
     private String[] splitByDelimiters(String input) {
