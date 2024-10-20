@@ -1,7 +1,6 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -62,8 +61,8 @@ public class Calculator {
     }
 
     private void validateNonZeroDigit() {
-        char c = customDelimiter.charAt(0);
-        if(Character.isDigit(c) && c != '0'){
+        char delimiter = customDelimiter.charAt(0);
+        if(Character.isDigit(delimiter) && delimiter != '0'){
             throw new IllegalArgumentException("잘못된 입력입니다.");
         }
     }

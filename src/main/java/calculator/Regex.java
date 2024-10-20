@@ -15,24 +15,26 @@ public class Regex {
     }
 
     public void setNumbers(String delimiter){
-        numbers = getList(delimiter);
+        numbers = parseNumbersFromExpression(delimiter);
     }
 
-    private List<Integer> getList(String delimiter) {
+    private List<Integer> parseNumbersFromExpression(String delimiter) {
         return Arrays.stream(expression.split(delimiter))
-                .map(value -> {
-                    if (value.isEmpty()) {
-                        return 0;
-                    }
-                    try {
-                        int number = Integer.parseInt(value);
-                        validateIsPositive(number);
-                        return number;
-                    } catch (IllegalArgumentException e) {
-                        throw new IllegalArgumentException("잘못된 입력값입니다.");
-                    }
-                })
+                .map(this::parseExpression)
                 .collect(Collectors.toList());
+    }
+
+    private int parseExpression(String value) {
+        if (value.isEmpty()) {
+            return 0;
+        }
+        try {
+            int number = Integer.parseInt(value);
+            validateIsPositive(number);
+            return number;
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("잘못된 입력값입니다.");
+        }
     }
 
     private void validateIsPositive(int value) {
