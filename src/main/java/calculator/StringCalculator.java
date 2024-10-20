@@ -18,6 +18,7 @@ public class StringCalculator {
     String customDivider;
     List<String> dividerList;
     String regexString;
+    int[] intNumbers;
 
     public void getUserInput() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -56,5 +57,16 @@ public class StringCalculator {
     public void makeStringForSplit() {
         regexString = String.join("|", dividerList);
         System.out.println("구분자 정규식 문자열 : " + regexString); //메서드 기능 점검용 코드
+    }
+
+    public void extractNumbers() {
+        String[] StringNumbers = noBlankInput.split(regexString);
+        for (String strArrays : StringNumbers) {
+            System.out.println(strArrays);
+        }
+        intNumbers = new int[StringNumbers.length];
+        for (int i = 0; i < StringNumbers.length; i++) {
+            intNumbers[i] = Integer.parseInt(StringNumbers[i]);
+        }
     }
 }
