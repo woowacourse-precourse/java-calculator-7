@@ -8,6 +8,8 @@ import calculator.model.NumberStringConverter;
 import calculator.model.NumberStringConverterImpl;
 import calculator.model.NumberStringSplitter;
 import calculator.model.NumberStringSplitterImpl;
+import calculator.model.SumCalculator;
+import calculator.model.SumCalculatorImpl;
 import calculator.view.CalculatorInputView;
 import calculator.view.CalculatorOutputView;
 
@@ -29,9 +31,11 @@ public class Application {
                                                                 CustomStringParser customStringParser) {
         NumberStringSplitter numberStringSplitter = new NumberStringSplitterImpl(delimiterManagerImpl);
         NumberStringConverter numberStringConverter = new NumberStringConverterImpl();
+        SumCalculator sumCalculator = new SumCalculatorImpl();
         CalculatorOutputView calculatorOutputView = new CalculatorOutputView();
 
-        return new CalculatorController(customStringParser, numberStringSplitter, numberStringConverter,
-                calculatorOutputView);
+        return new CalculatorController(
+                customStringParser, numberStringSplitter, numberStringConverter, sumCalculator, calculatorOutputView
+        );
     }
 }
