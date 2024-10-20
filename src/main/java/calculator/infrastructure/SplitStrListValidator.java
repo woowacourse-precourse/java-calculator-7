@@ -13,7 +13,7 @@ public class SplitStrListValidator {
                 numberList.add(Long.parseLong(splitStr));
             } catch
             (NumberFormatException e) {
-                throw new InvalidSplitStrException(splitStr);
+                throw new InvalidSplitStrException(splitStr, e);
             }
         }
         return numberList;
