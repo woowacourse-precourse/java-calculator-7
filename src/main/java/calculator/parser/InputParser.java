@@ -12,11 +12,9 @@ public class InputParser {
             throw new IllegalArgumentException("Error: 하나의 문자열만 입력해야 합니다.");
         }
     }
-
     public String processSpace(String input) {
         return input.trim();
     }
-
     public List<Integer> parse(String input) {
         String[] splitInput = input.split("[,:]");
         List<Integer> numbers = new ArrayList<>();
