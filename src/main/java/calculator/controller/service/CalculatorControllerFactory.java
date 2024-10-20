@@ -5,7 +5,7 @@ import calculator.service.generator.controller.GenerateController;
 import calculator.service.generator.number.NumberGenerator;
 import calculator.service.generator.number.impl.NumberCreateProcess;
 import calculator.service.generator.number.impl.NumberExtractProcess;
-import calculator.regex.service.RegexPatternServiceResolver;
+import calculator.regex.service.RegexServiceRegistry;
 import calculator.view.input.handler.InputHandlerService;
 import calculator.view.input.handler.impl.NumberInputHandler;
 import calculator.view.input.service.impl.InputView;
@@ -16,10 +16,10 @@ public class CalculatorControllerFactory {
         InputHandlerService inputHandlerService = new NumberInputHandler(new InputView(new LongOutputProcess()));
         NumberGenerator numberGenerator = new NumberGenerator(new NumberExtractProcess(), new NumberCreateProcess());
         GenerateController generateController = new GenerateController(numberGenerator);
-        RegexPatternServiceResolver numberTypeController = new RegexPatternServiceResolver();
+        RegexServiceRegistry regexServiceRegistry = new RegexServiceRegistry();
         return new CalculatorController(
                 generateController,
                 inputHandlerService,
-                numberTypeController);
+                regexServiceRegistry);
     }
 }
