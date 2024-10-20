@@ -7,6 +7,6 @@ public class DefaultDelimiterStrategy implements DelimiterStrategy {
 
     @Override
     public List<String> decideDelimiter(String userInput) {
-        return null;
+        return List.of(",", ":");
     }
 }
