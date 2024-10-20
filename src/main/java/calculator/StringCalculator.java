@@ -1,5 +1,6 @@
 package calculator;
 
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -57,5 +58,15 @@ public class StringCalculator {
         }
         return total;
     }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 
+        // 사용자로부터 입력 받기
+        System.out.print("입력하세요: ");
+        String input = sc.nextLine();
+
+        // 계산 결과 출력
+        System.out.println("결과: " + calc(input));
+    }
 }
+

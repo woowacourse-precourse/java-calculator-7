@@ -12,5 +12,12 @@ public class Application {
 
         String input = Console.readLine();
         // camp.nextstep.edu.missionutils.Console readLine() 메서드 호출
+
+        try {
+            int result = StringCalculator.calc(input);
+            System.out.println("결과 : " + result);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("오류로 인해 프로그램을 종료합니다");
+        }
     }
 }
