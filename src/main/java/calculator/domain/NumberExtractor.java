@@ -3,18 +3,19 @@ package calculator.domain;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import calculator.constant.ErrorMessage;
 import calculator.util.NumberChecker;
 
 public class NumberExtractor {
 
-	private static final String OR_SIGN = "|";
+	private static final String OR_SIGN = "|\\";
 	private static final long ZERO = 0L;
 	private static final int STRING_START_INDEX = 0;
 	private static final String NUMBER_REGEX = "\\d";
 
-	public List<Long> getNumbers(String numberSection, List<String> delimiters) {
+	public List<Long> getNumbers(String numberSection, Set<String> delimiters) {
 
 		if (numberSection.isBlank()) {
 			return new ArrayList<>(List.of(ZERO));
@@ -31,13 +32,13 @@ public class NumberExtractor {
 			.toList();
 	}
 
-	private void validateNumberSection(String numberSection, List<String> delimiters) {
+	private void validateNumberSection(String numberSection, Set<String> delimiters) {
 		validateStartWithDelimiter(numberSection, delimiters);
 		validateEndWithDelimiter(numberSection, delimiters);
 		validateUsingUnregisteredDelimiter(numberSection, delimiters);
 	}
 
-	private void validateUsingUnregisteredDelimiter(String numberSection, List<String> delimiters) {
+	private void validateUsingUnregisteredDelimiter(String numberSection, Set<String> delimiters) {
 
 		String[] split = numberSection.split(NUMBER_REGEX);
 		Arrays.stream(split)
@@ -48,7 +49,7 @@ public class NumberExtractor {
 			});
 	}
 
-	private void validateStartWithDelimiter(String numberSection, List<String> delimiters) {
+	private void validateStartWithDelimiter(String numberSection, Set<String> delimiters) {
 
 		for (String delimiter : delimiters) {
 			int startValueLength = delimiter.length();
@@ -60,7 +61,7 @@ public class NumberExtractor {
 		}
 	}
 
-	private void validateEndWithDelimiter(String numberSection, List<String> delimiters) {
+	private void validateEndWithDelimiter(String numberSection, Set<String> delimiters) {
 
 		for (String delimiter : delimiters) {
 			int endValueStartIndex = numberSection.length() - delimiter.length();
