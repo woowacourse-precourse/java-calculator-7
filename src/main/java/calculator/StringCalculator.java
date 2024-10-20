@@ -2,40 +2,31 @@ package calculator;
 
 import calculator.calculateStrategy.CalculateStrategy;
 import calculator.delimiterStrategy.DelimiterStrategy;
+import calculator.numberStrategy.NumberStrategy;
 import java.util.List;
 
 public class StringCalculator {
-    private final String startCustomPattern;
-    private final String endCustomPattern;
-    private CalculateStrategy calculateStrategy;
-    private DelimiterStrategy delimiterStrategy;
-    private calculator.numberStrategy.NumberStrategy numberStrategy;
+    private final static String startCustomPattern = "//";
+    private final static String endCustomPattern = "\n";
+    private final DelimiterStrategy delimiterStrategy;
+    private final NumberStrategy numberStrategy;
+    private final CalculateStrategy calculateStrategy;
     private final String userInput;
 
-    public StringCalculator(String userInput) {
-        this.startCustomPattern = "//";
-        this.endCustomPattern = "\n";
+    public StringCalculator(String userInput, DelimiterStrategy delimiterStrategy, NumberStrategy numberStrategy,
+                            CalculateStrategy calculateStrategy) {
         this.userInput = userInput;
-    }
-
-    public String getStartCustomPattern() {
-        return startCustomPattern;
-    }
-
-    public String getEndCustomPattern() {
-        return endCustomPattern;
-    }
-
-    public void setCalculateStrategy(CalculateStrategy calculateStrategy) {
+        this.delimiterStrategy = delimiterStrategy;
+        this.numberStrategy = numberStrategy;
         this.calculateStrategy = calculateStrategy;
     }
 
-    public void setDelimiterStrategy(DelimiterStrategy delimiterStrategy) {
-        this.delimiterStrategy = delimiterStrategy;
+    public static String getStartCustomPattern() {
+        return startCustomPattern;
     }
 
-    public void setNumberStrategy(calculator.numberStrategy.NumberStrategy numberStrategy) {
-        this.numberStrategy = numberStrategy;
+    public static String getEndCustomPattern() {
+        return endCustomPattern;
     }
 
     public Integer operate() {
