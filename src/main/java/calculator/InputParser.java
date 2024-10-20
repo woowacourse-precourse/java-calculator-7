@@ -37,7 +37,7 @@ public class InputParser {
 
         ArrayList<Integer> numbers = new ArrayList<>();
 
-        if (inputData.length() == 0) {
+        if (inputData.isEmpty()) {
             numbers.add(0);
         } else {
             String[] values = inputData.split(regex);
