@@ -15,17 +15,11 @@ public class StringCalculator {
     }
 
     private static boolean isDefaultPattern(String input) {
-        return matchPattern(input, "^\\d*([,:]\\d+)*$");
+        return Pattern.matches("^\\d*([,:]\\d+)*$", input);
     }
 
     private static boolean isCustomPattern(String input) {
-        return matchPattern(input, "^//(.)\\\\n\\d*(\\1\\d+)*$");
-    }
-
-    private static boolean matchPattern(String input, String regex) {
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(input);
-        return matcher.matches();
+        return Pattern.matches("^//(.)\\\\n\\d*(\\1\\d+)*$", input);
     }
 
     private static int sumWithDefaultSeparators(String input) {
