@@ -15,6 +15,10 @@ public class Calculator {
             return 0;
         }
 
+        if (input.matches("\\d+")) {
+            return Integer.parseInt(input);
+        }
+
         // 쉼표, 콜론으로 숫자 분리
         if (input.contains(",") || input.contains(":")) {
             String[] numbers = delimiters.defaultDelimiter(input);
@@ -23,7 +27,7 @@ public class Calculator {
 
         // 커스텀 구분자 처리
         if (input.startsWith("//")) {
-            String[] numbers = delimiters.CustomDelimiter(input);
+            String[] numbers = delimiters.customDelimiter(input);
             return adder.sumNumbers(numbers);
         }
         throw new IllegalArgumentException();

@@ -9,7 +9,7 @@ public class Delimiters {
     }
 
     // 커스텀 구분자로 숫자를 분리하는 메서드
-    public String[] CustomDelimiter(String input) {
+    public String[] customDelimiter(String input) {
         int idx = input.indexOf("\\n");
         String customDelimiter = input.substring(2, idx); // 구분자 추출
         String str = input.substring(idx + 2); // \n 이후 부분 추출
