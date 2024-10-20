@@ -1,4 +1,4 @@
-package calculator.constant;
+package calculator.common;
 
 public class DelimiterConstant {
     public static final String CUSTOM_DELIMITER_PREFIX = "//";
