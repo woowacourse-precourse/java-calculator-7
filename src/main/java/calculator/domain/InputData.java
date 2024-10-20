@@ -26,6 +26,7 @@ public class InputData {
             return numbersForSum;
         }
         separators = SeparatorValidator.extractCustomSeparator(separators, firstInputData);
+        extractedStrings = SeparatorValidator.removeSeparator(separators, firstInputData);
     }
 
     private boolean hasEmptyString() {
