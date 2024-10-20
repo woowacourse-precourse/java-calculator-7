@@ -125,30 +125,30 @@
 
 # ✅ 과제 진행 요구 사항
 
-- [ ]  [java-calculator-7](https://github.com/woowacourse-precourse/java-calculator-7) 저장소를 Fork & Clone
-- [ ]  `README.md`에 구현할 기능 목록을 정리해 추가
+- [x]  [java-calculator-7](https://github.com/woowacourse-precourse/java-calculator-7) 저장소를 Fork & Clone
+- [x]  `README.md`에 구현할 기능 목록을 정리해 추가
 - [ ]  완료 후 Pull Request
 - [ ]  우아한테크코스 지원 플랫폼에 소감 작성 후 제출
 - [ ]  제출한 후 결과 확인, 통과하지 못했다면 수정해 다시 제출
 
 # ✅ 프로그래밍 요구 사항
 
-- [ ]  JDK 21 버전에서 실행 가능해야 한다.
-- [ ]  애플리케이션 실행의 시작점은`Application`의`main()`이다.
-- [ ]  `build.gradle`파일은 변경할 수 없으며,**제공된 라이브러리 이외의 외부 라이브러리는 사용하지 않는다.**
-- [ ]  애플리케이션 종료 시`System.exit()`를 호출하지 않는다.
-- [ ]  프로그래밍 요구 사항에서 달리 명시하지 않는 한 파일, 패키지 등의 이름을 바꾸거나 이동하지 않는다.
-- [ ]  [Java Style Guide](https://github.com/woowacourse/woowacourse-docs/tree/main/styleguide/java)를 원칙으로 프로그래밍
+- [x]  JDK 21 버전에서 실행 가능해야 한다.
+- [x]  애플리케이션 실행의 시작점은`Application`의`main()`이다.
+- [x]  `build.gradle`파일은 변경할 수 없으며,**제공된 라이브러리 이외의 외부 라이브러리는 사용하지 않는다.**
+- [x]  애플리케이션 종료 시`System.exit()`를 호출하지 않는다.
+- [x]  프로그래밍 요구 사항에서 달리 명시하지 않는 한 파일, 패키지 등의 이름을 바꾸거나 이동하지 않는다.
+- [x]  [Java Style Guide](https://github.com/woowacourse/woowacourse-docs/tree/main/styleguide/java)를 원칙으로 프로그래밍
 
 ## 라이브러리 요구 사항
 
-- [ ]  `camp.nextstep.edu.missionutils`에서 제공하는 `Console` API를 사용하여 구현해야 한다.
-- [ ]  사용자가 입력하는 값은 `camp.nextstep.edu.missionutils.Console`의 `readLine()`을 활용한다.
+- [x]  `camp.nextstep.edu.missionutils`에서 제공하는 `Console` API를 사용하여 구현해야 한다.
+- [x]  사용자가 입력하는 값은 `camp.nextstep.edu.missionutils.Console`의 `readLine()`을 활용한다.
 
 # ⭐️ 1주차 목표
 
-- [ ]  MVC 패턴 적용
+- [x]  MVC 패턴 적용
 - [ ]  TDD 개발 방법론 준수
-- [ ]  자바의 Streams API 연습 및 활용
-- [ ]  람다 표현식을 효과적으로 코드에 적용
-- [ ]  SOLID 원칙 준수
+- [x]  자바의 Streams API 연습 및 활용
+- [x]  람다 표현식을 효과적으로 코드에 적용
+- [x]  SOLID 원칙 준수
