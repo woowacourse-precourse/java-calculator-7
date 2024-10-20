@@ -33,12 +33,23 @@ public class CalculationModel {
             //커스텀구분자 넣기
             char customSeparator = input.charAt(customIndexStart);
             regex = "[" + customSeparator + ",:]";
-
-            // 숫자만 추출
             substr = input.substring(customIndexEnd + 2);
+        }
+        System.out.println(substr);
+        if (containsInvalidSeparator(substr, regex)) {
+            throw new IllegalArgumentException("잘못된 입력: 유효하지 않은 구분자가 포함되어 있습니다.");
         }
 
         parseNumbers(substr, regex);
+    }
+
+    private boolean containsInvalidSeparator(String input, String regex) {
+        for (char c : input.toCharArray()) {
+            if (regex.indexOf(c) == -1 && !Character.isDigit(c)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void parseNumbers(String input, String regex) {
@@ -54,7 +65,7 @@ public class CalculationModel {
                         throw new IllegalArgumentException("잘못된 입력: 음수가 포함되었습니다.");
                     }
                     numbers.add(num);
-                } catch (NumberFormatException e) {
+                } catch (IllegalArgumentException e) {
                     throw new IllegalArgumentException("잘못된 입력: 숫자가 아닌 값이 들어가 있습니다.");
                 }
             }
