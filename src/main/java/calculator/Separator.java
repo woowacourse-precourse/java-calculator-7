@@ -21,16 +21,16 @@ public class Separator {
         return separateNums(m.group(2), separators);
     }
 
-    private int[] separateNums(String input, String separators) {
-        String[] stringNums = input.split(separators);
-        return Arrays.stream(stringNums).mapToInt(this::stringToInt).toArray();
-    }
-
     private String buildSeparators(String customSeparators) {
         String basicSeparators = Constant.BASIC_SEPARATOR;
         customSeparators = customSeparators.replace("\\n", "");
         customSeparators = customSeparators.replace("//", "|");
         return basicSeparators + customSeparators;
+    }
+
+    private int[] separateNums(String input, String separators) {
+        String[] stringNums = input.split(separators);
+        return Arrays.stream(stringNums).mapToInt(this::stringToInt).toArray();
     }
 
     private int stringToInt(String stringNum) {
