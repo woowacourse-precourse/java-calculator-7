@@ -23,9 +23,9 @@ public class Calculator {
                 System.out.println("결과 : " + letters);
                 return;
             }
-            if(letters.matches(".*[" +customSeparator + "]{2,}.*")){
-                throw new IllegalArgumentException("ERROR : 구분자를 연속으로 사용할 수 없습니다.");
-            }
+
+            validateDuplicatedSeparator(letters,customSeparator);
+
             if(customSeparator == null){
                 throw new IllegalArgumentException("ERROR : 입력한 구분자를 확인해주세요.");
             }
@@ -38,9 +38,8 @@ public class Calculator {
             if(!input.contains(",") && !input.contains(":")){
                 throw new IllegalArgumentException("ERROR : 계산할 수 없는 입력입니다.");
             }
-            if(input.matches(".*[,:]{2,}.*")){
-                throw new IllegalArgumentException("ERROR : 구분자를 연속으로 사용할 수 없습니다.");
-            }
+
+            validateDuplicatedSeparator(input,separator);
 
             tmp = input.split(separator);
         }
@@ -82,6 +81,11 @@ public class Calculator {
         return null;
     }
 
+    private static void validateDuplicatedSeparator(String input, String separator){
+        if(input.matches(".*[" + separator +"]{2,}.*")){
+            throw new IllegalArgumentException("ERROR : 구분자를 연속으로 사용할 수 없습니다.");
+        }
+    }
 
 
 
