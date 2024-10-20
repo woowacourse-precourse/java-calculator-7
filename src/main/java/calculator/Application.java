@@ -20,7 +20,16 @@ public class Application {
             nums = in.split(customDelimiter);
         }
         for (String num : nums) {
-            sum += Integer.parseInt(num);
+            try {
+                int number = Integer.parseInt(num);
+                if(number < 0) {
+                    throw new IllegalArgumentException();
+                }
+                sum += number;
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException();
+            }
+
         }
         return sum;
     }
