@@ -1,14 +1,20 @@
 package divide;
 
-public class BasicDivide implements Divide {
+import static separate.Separator.BASIC;
+
+public class BasicDivide implements Divide {	// 기본 구분자로 분리
 	@Override
-	public void divide(final String str) {
-		String[] arr = {};
+	public int[] divideNumbers(final String str) {
+		String[] strArr = {};
 		
-		if (str.equals("")) {
-			arr = new String[] {"0"};
-		} else if (str.contains(",") || str.contains(":")) {
-			arr = str.split("[,:]");
+		if (BASIC.hasOneSeparators(str)) {
+			strArr = str.split("[,:]");
+		} else if (str.equals("")) {
+			strArr = new String[] {"0"};
+		} else {
+			strArr = new String[] {str};
 		}
+		
+		return toIntArr(strArr);	// 숫자 배열로 변환하여 리턴
 	}
 }
