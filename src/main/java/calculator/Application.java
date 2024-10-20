@@ -1,7 +1,6 @@
 package calculator;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -9,20 +8,39 @@ import java.util.regex.Pattern;
 public class Application {
 
     public static void main(String[] args) {
-        List<String> delimiters = new ArrayList<>();
-        delimiters.add(","); // 기본 구분자
-        delimiters.add(":"); // 기본 구분자
-
         Scanner sc = new Scanner(System.in);
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = sc.nextLine();
 
+        try {
+            int sum = calculateSum(input);
+            System.out.printf("결과 : %d%n", sum);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Input error: " + e.getMessage(), e);
+        }
+    }
+
+    private static int calculateSum(String input) {
+        String[] numbersStr = getSplitNumbers(input);
+        List<Integer> numbersInt = parseIntWithConditions(numbersStr);
+        int total = 0; // 합계 초기화
+        for (int num : numbersInt) {
+            total += num; // 합계에 추가
+        }
+        return total; // 최종 합계 반환
+    }
+
+    private static String[] getSplitNumbers(String input) {
+        List<String> delimiters = new ArrayList<>();
+        delimiters.add(",");
+        delimiters.add(":");
+
         if (input.startsWith("//")) {
-            int newlineIndex = input.indexOf("\\n"); // '\n'의 위치 확인
-            if (newlineIndex != -1) { // '\n'이 있는 경우
-                String customDelimiter = input.substring(2, newlineIndex).trim(); // 커스텀 구분자 추출
-                delimiters.add(customDelimiter); // 커스텀 구분자 리스트에 추가
-                input = input.substring(newlineIndex + 2); // 커스텀 구분자 부분 제거
+            int newlineIndex = input.indexOf("\\n");
+            if (newlineIndex != -1) {
+                String customDelimiter = input.substring(2, newlineIndex).trim();
+                delimiters.add(customDelimiter);
+                input = input.substring(newlineIndex + 2);
             } else {
                 throw new IllegalArgumentException("Invalid input: missing newline after custom delimiter.");
             }
@@ -30,24 +48,25 @@ public class Application {
 
         StringBuilder regexBuilder = new StringBuilder();
         for (String delimiter : delimiters) {
-            regexBuilder.append(Pattern.quote(delimiter)).append("|"); // 각 구분자를 이스케이프
+            regexBuilder.append(Pattern.quote(delimiter)).append("|");
         }
         String delimiterRegex = regexBuilder.substring(0, regexBuilder.length() - 1);
 
-        String[] splitNums = input.split(delimiterRegex);
-
-        int sum = 0;
-        for (String num : splitNums) {
+        return input.split(delimiterRegex);
+    }
+    private static List<Integer> parseIntWithConditions(String[] numberStrs) {
+        List<Integer> numbers = new ArrayList<>();
+        for (String numberStr : numberStrs) {
             try {
-                int number = Integer.parseInt(num);
+                int number = Integer.parseInt(numberStr);
                 if (number < 0) {
-                    throw new IllegalArgumentException("Negative numbers are not allowed");
+                    throw new IllegalArgumentException("Negative numbers are not allowed: " + number);
                 }
-                sum += number;
+                numbers.add(number);
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Invalid input: invalid number.");
+                throw new IllegalArgumentException("Invalid input: " + numberStr + " is not a valid number.");
             }
         }
-        System.out.printf("결과 : %d%n", sum);
+        return numbers;
     }
 }
