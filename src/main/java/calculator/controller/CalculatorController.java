@@ -3,8 +3,6 @@ package calculator.controller;
 import calculator.domain.Calculator;
 import calculator.view.InputView;
 import calculator.view.OutputView;
-import calculator.util.validator.InputValidator;
-import calculator.util.parser.NumberParser;
 
 public class CalculatorController {
 

@@ -2,8 +2,6 @@ package calculator.domain;
 
 import calculator.util.parser.NumberParser;
 
-import java.util.Arrays;
-
 import static calculator.util.validator.InputValidator.validate;
 
 public class Calculator {
@@ -18,7 +16,7 @@ public class Calculator {
     }
 
     public int sum() {
-        String[] numbers = NumberParser.parse(input);
+        String[] numbers = numberParser.parse(input);
         return add(numbers);
     }
 
