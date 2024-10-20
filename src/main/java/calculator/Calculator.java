@@ -20,7 +20,7 @@ public class Calculator {
 
             if (matcher.matches()) {
                 delimiter = Pattern.quote(matcher.group(1));
-                input = matcher.group(5);
+                input = matcher.group(2); // 정규 표현식에서 두번째 그룹을 가져오는 것이므로 2가 맞다.
             }
             else {
                 throw new IllegalArgumentException("잘못된 입력입니다: " + input);
