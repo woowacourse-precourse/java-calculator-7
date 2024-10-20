@@ -4,12 +4,12 @@ import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 class ApplicationTest extends NsTest {
+
     @Test
-    void 커스텀_구분자_사용() {
+    void customDelimiterUsage() {
         assertSimpleTest(() -> {
             run("//;\\n1");
             assertThat(output()).contains("결과 : 1");
@@ -17,15 +17,23 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트() {
+    void exceptionTest() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
+    @Test
+    void exceptionTest2() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1:b:5"))
+                    .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
-        Application.main(new String[]{});
+            Application.main(new String[]{});
     }
 }
