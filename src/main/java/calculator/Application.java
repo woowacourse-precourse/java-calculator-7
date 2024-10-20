@@ -4,10 +4,12 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
-        try{
-
-
-        }finally{
+        Calculator calculator = new Calculator();
+        try {
+            String targetString = Input.read();
+            int result = calculator.process(targetString);
+            Output.handleResult(result);
+        } finally {
             Console.close();
         }
     }
@@ -16,6 +18,8 @@ public class Application {
 
 class Calculator {
     public int process(String input) {
+        if (input.trim().isEmpty()) return 0;
+
         Parser parser = new ProxyParser(chooseParser(input));  // 파서 선택
         String[] parsedNumbers = parser.parse(input);
         int[] numbers = convertToNumbers(parsedNumbers);
@@ -48,13 +52,14 @@ class Calculator {
 }
 
 
-
 interface Parser {
     String[] parse(String input) throws IllegalArgumentException;
 }
 
 class ProxyParser implements Parser {
     private final Parser realParser;
+    private static final String startLetter = "//";
+    private static final String endLetter = "\\n";
 
     public ProxyParser(Parser realParser) {
         this.realParser = realParser;
@@ -80,12 +85,12 @@ class ProxyParser implements Parser {
             throw new IllegalArgumentException("Input cannot be null or empty.");
         }
 
-        if (input.startsWith("//") && !input.contains("\n")) {
+        if (input.startsWith(startLetter) && !(input.contains(endLetter))) {
             throw new IllegalArgumentException("Invalid custom format.");
         }
 
-        if (input.startsWith("//")) {
-            String customDelimiterPart = input.substring(2, input.indexOf("\n"));
+        if (input.startsWith(startLetter)) {
+            String customDelimiterPart = input.substring(2, input.indexOf(endLetter));
 
             if (customDelimiterPart.isEmpty() || customDelimiterPart.trim().isEmpty()) {
                 throw new IllegalArgumentException("Custom delimiter cannot be empty or whitespace.");
@@ -96,7 +101,7 @@ class ProxyParser implements Parser {
             }
         }
 
-        if (input.contains("\n") && !input.startsWith("//")) {
+        if (input.contains(endLetter) && !input.startsWith(startLetter)) {
             throw new IllegalArgumentException("Invalid format: Custom delimiter must be defined at the start of the string.");
         }
     }
@@ -119,6 +124,7 @@ class ProxyParser implements Parser {
 }
 
 class DefaultParser implements Parser {
+
     @Override
     public String[] parse(String input) {
         return input.split(",|:");
@@ -126,19 +132,22 @@ class DefaultParser implements Parser {
 }
 
 class CustomParser implements Parser {
+    private static final String endLetter = "\\n";
+
     @Override
     public String[] parse(String input) {
-        String delimiter = input.substring(2, input.indexOf("\n"));
-        String numbersPart = input.substring(input.indexOf("\n") + 1);
+        String delimiter = input.substring(2, input.indexOf(endLetter));
+        String numbersPart = input.substring(input.indexOf(endLetter) + (endLetter.length()));
         return numbersPart.split(delimiter);
     }
+
 }
 
 
 class Input {
     private static final String INPUT_INSTRUCTION = "덧셈할 문자열을 입력해 주세요.";
 
-    public static String read(){
+    public static String read() {
         System.out.println(INPUT_INSTRUCTION);
         return Console.readLine();
     }
@@ -147,8 +156,8 @@ class Input {
 class Output {
     private static final String OUTPUT_FORMAT = "결과 : ";
 
-    public static void handleResult(int result){
+    public static void handleResult(int result) {
         if (result < 0) return;
-        System.out.println(OUTPUT_FORMAT+result);
+        System.out.println(OUTPUT_FORMAT + result);
     }
 }
