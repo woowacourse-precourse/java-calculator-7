@@ -68,6 +68,9 @@ public class Extractor {
         return result;
     }
 
+    // 입력에 커스텀 구분자가 있는지 확인
+    private boolean hasCustomDelimiter(String input) {
+        return input.startsWith("//");
     }
 
     // 숫자인지 여부를 검증
