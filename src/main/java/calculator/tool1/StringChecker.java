@@ -14,8 +14,7 @@ public class StringChecker {
   }
 
   public static boolean checkCustomDelimiter(String inputString) {
-    if (inputString.contains("//") &&
-        inputString.contains("\n")) {
+    if (inputString.contains("//")) {
       return true;
     } else {
       return false;
