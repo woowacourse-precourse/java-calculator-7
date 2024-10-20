@@ -8,16 +8,11 @@ public class Parser {
 
     private static final String CUSTOM = "custom";
     private static final String DEFAULT = "default";
-    private static final String PREFIX_CUSTOM_START = "//";
     private static final String WRONG_INPUT_MESSAGE = "잘못된 입력입니다.";
 
     public static List<Integer> parse(String input) {
         List<Integer> list = new ArrayList<>();
-        String type = checkType(input);
-
-        if (type.equals(CUSTOM)) {
-            Validator.validateCustomSeparator(input);
-        }
+        String type = Validator.validateType(input);
 
         String separators = getSeparator(input, type);
         String contents = getNumberString(input, type);
@@ -36,11 +31,13 @@ public class Parser {
         return new String(customSeparatorArr);
     }
 
-    private static String checkType(String input) {
-        if (input.startsWith(PREFIX_CUSTOM_START)) {
-            return CUSTOM;
+    private static String getNumberString(String input, String type) {
+        String contents = input;
+        if (type.equals(CUSTOM)) {
+            int startIdx = getLastSeparatorIdx(input);
+            contents = input.substring(startIdx);
         }
-        return DEFAULT;
+        return contents;
     }
 
     private static String getSeparator(String input, String type) {
@@ -49,23 +46,10 @@ public class Parser {
         separators.add(":");
 
         if (type.equals(DEFAULT)) {
-            Validator.isCorrectDefaultInput(input);
             return String.join("", separators);
         }
-        Validator.validateCustomSeparator(input);
         appendCustomSeparators(separators, input);
         return String.join("", separators);
-    }
-
-    private static void appendNumbers(StringTokenizer st, List<Integer> list) {
-        try {
-            while (st.hasMoreTokens()) {
-                int num = Integer.parseInt(st.nextToken());
-                list.add(num);
-            }
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(WRONG_INPUT_MESSAGE);
-        }
     }
 
     private static void appendCustomSeparators(List<String> separators, String input) {
@@ -77,13 +61,15 @@ public class Parser {
         }
     }
 
-    private static String getNumberString(String input, String type) {
-        String contents = input;
-        if (type.equals(CUSTOM)) {
-            int startIdx = getLastSeparatorIdx(input);
-            contents = input.substring(startIdx);
+    private static void appendNumbers(StringTokenizer st, List<Integer> list) {
+        try {
+            while (st.hasMoreTokens()) {
+                int num = Integer.parseInt(st.nextToken());
+                list.add(num);
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(WRONG_INPUT_MESSAGE);
         }
-        return contents;
     }
 
     private static int getLastSeparatorIdx(String input) {
