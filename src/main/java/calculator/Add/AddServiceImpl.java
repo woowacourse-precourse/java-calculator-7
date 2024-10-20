@@ -4,8 +4,15 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 
 public class AddServiceImpl implements AddService {
+    private BigInteger addResult = new BigInteger("0");
     @Override
-    public BigInteger add(ArrayList<BigInteger> numbers) {
-        return null;
+    public void add(ArrayList<BigInteger> numbers) {
+        for (BigInteger number : numbers) {
+            addResult=addResult.add(number);
+        }
+    }
+
+    public BigInteger getAddResult() {
+        return addResult;
     }
 }

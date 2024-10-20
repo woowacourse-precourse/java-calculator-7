@@ -25,11 +25,18 @@ public class ParsingNumberServiceImpl implements ParsingNumberService {
                 number.append(ch);
             }
             else  if (delimiters.contains(ch)){
-                if (!number.isEmpty()){
-                numbers.add(new BigInteger(number.toString()));
-                number.setLength(0);
-            }
-                else throw new IllegalArgumentException("유효하지 않은 문자열입니다.");
+                if (!number.isEmpty()) {
+
+                    if (i == s.length() - 1) {
+                        throw new IllegalArgumentException("유효하지 않은 문자열입니다.");
+                    }
+
+                    numbers.add(new BigInteger(number.toString()));
+                    number.setLength(0);
+
+                } else {
+                    throw new IllegalArgumentException("유효하지 않은 문자열입니다.");
+                }
             }
 
             else throw new IllegalArgumentException("유효하지 않은 문자열입니다.");
