@@ -1,13 +1,17 @@
 package calculator.controller;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import calculator.model.CustomDelimiter;
 import calculator.model.DefaultDelimiter;
+import calculator.model.Delimiter;
 import calculator.model.InputData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import java.util.stream.Stream;
 
 @DisplayName("구분자 작동 테스트")
 class DelimiterControllerTest {
@@ -18,20 +22,18 @@ class DelimiterControllerTest {
         delimiterController = new DelimiterController();
     }
 
-    @Test
-    @DisplayName("커스텀 구분자가 있는 데이터 객체를 받아 커스텀 구분자 객체를 생성한다")
-    void createCustomDelimiterInstance() {
-        InputData inputData = new InputData("//;\\n1;2;3");
-        assertThat(delimiterController.createDelimiterPart(inputData))
-                .isInstanceOf(CustomDelimiter.class);
+    static Stream<Arguments> inputData() {
+        return Stream.of(
+                Arguments.of(new InputData("//;\\n1;2;3"), CustomDelimiter.class, "커스텀 구분자 객체 생성"),
+                Arguments.of(new InputData("1,2,3"), DefaultDelimiter.class, "기본 구분자 객체 생성")
+        );
     }
 
-    @Test
-    @DisplayName("커스텀 구분자가 없는 데이터 객체를 받아 기본 구분자 객체를 생성한다")
-    void createDefaultDelimiterInstance() {
-        InputData inputData = new InputData("1,2,3");
+    @ParameterizedTest(name = "{2}")
+    @MethodSource("inputData")
+    @DisplayName("데이터 객체를 받아 구분자 객체를 생성한다")
+    void createDelimiterInstance(InputData inputData, Class<? extends Delimiter> delimiterClass, String testCase) {
         assertThat(delimiterController.createDelimiterPart(inputData))
-                .isInstanceOf(DefaultDelimiter.class);
+                .isInstanceOf(delimiterClass);
     }
-
 }
