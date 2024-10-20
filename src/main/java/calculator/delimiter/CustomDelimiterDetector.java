@@ -13,4 +13,9 @@ public class CustomDelimiterDetector implements CustomDelimiterDetectorInterface
         }
         return "";
     }
+
+    @Override
+    public String removeCustomDelimiter(String text, String delimiter){
+        return text.replace(DELIMITER_PREFIX + delimiter + DELIMITER_SUFFIX, "");
+    }
 }
