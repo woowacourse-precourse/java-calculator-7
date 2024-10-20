@@ -5,11 +5,11 @@ import camp.nextstep.edu.missionutils.Console;
 public class Application {
 
     public static void main(String[] args) {
-        System.out.println("Please enter a string to add.");
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
         try {
             int result = add(input);
-            System.out.println("Result: " + result);
+            System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
@@ -41,9 +41,12 @@ public class Application {
             }
             separator = text.substring(2, delimiterEnd); // 커스텀 구분자 추출
             text = text.substring(delimiterEnd + 2); // 개행 문자 이후 문자열로 업데이트
+
+            // 정규 표현식 메타 문자 이스케이프
+            separator = separator.replaceAll("([.*+?^${}()|\\[\\]\\\\])", "\\\\$1");
         }
 
-        return text.split(separator); // 기본 또는 커스텀 구분자로 분리
+        return text.split(separator + "|,|:"); // 기본 및 커스텀 구분자와 함께 분리
     }
 
     // 숫자로 변환하는 메소드
@@ -52,10 +55,10 @@ public class Application {
         try {
             num = Integer.parseInt(text); // 숫자로 변환
             if (num < 0) {
-                throw new IllegalArgumentException("Negative numbers are not allowed: " + num);
+                throw new IllegalArgumentException("Negative numbers are not allowed");
             }
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Non-numeric value found: " + text);
+            throw new IllegalArgumentException("Non-numeric value found");
         }
         return num;
     }
