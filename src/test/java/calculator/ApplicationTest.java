@@ -49,6 +49,11 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 숫자가_0인경우_예외() {
+        assertThatThrownBy(() -> runException("0,1"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 
     @Override
     public void runMain() {
