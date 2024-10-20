@@ -7,7 +7,8 @@ public class Application {
         view.printStart();
         String input = Input.getInput();
 
-        Calculator calculator = new Calculator();
+        Adder adder = new Adder();
+        Calculator calculator = new Calculator(adder);
 
         try {
             int result = calculator.calculate(input);
