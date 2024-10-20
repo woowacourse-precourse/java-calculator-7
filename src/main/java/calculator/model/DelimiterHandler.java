@@ -10,7 +10,6 @@ public class DelimiterHandler {
     private static final int CUSTOM_DELIMITER_INDEX = 2;
 
     private String delimiters = ",:";
-    private boolean customDelimiterFlag = false;
 
     public DelimiterHandler(String expression) {
         setDelimiter(expression);
@@ -19,24 +18,16 @@ public class DelimiterHandler {
     private void setDelimiter(String expression) {
         if (checkDelimiter(expression)) {
             delimiters += expression.charAt(CUSTOM_DELIMITER_INDEX);
-            customDelimiterFlag = true;
         }
     }
 
     private boolean checkDelimiter(String expression) {
-        if (expression.indexOf(CUSTOM_START) == CUSTOM_START_INDEX
-                && expression.indexOf(CUSTOM_END) == CUSTOM_END_INDEX) {
-            return true;
-        }
-        return false;
+        return expression.indexOf(CUSTOM_START) == CUSTOM_START_INDEX
+                && expression.indexOf(CUSTOM_END) == CUSTOM_END_INDEX;
     }
 
     public String getAllDelimiters() {
         return delimiters;
-    }
-
-    public boolean getCustomDelimiterFlag() {
-        return customDelimiterFlag;
     }
 
 }
