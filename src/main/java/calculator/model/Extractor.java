@@ -1,5 +1,8 @@
 package calculator.model;
 
+import calculator.error.CustomException;
+import calculator.error.ErrorCode;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -59,6 +62,9 @@ public class Extractor {
         for (String number : numbers) {
             number = number.trim();
             validateDigit(number);
+            validateNumberPositive(number);
+            result.add(Long.parseLong(number));
+        }
         return result;
     }
 
@@ -71,4 +77,10 @@ public class Extractor {
                 .orElseThrow(() -> new CustomException(ErrorCode.INVALID_NUMBER_FORMAT));
     }
 
+    // 숫자가 양수인지 검증
+    private void validateNumberPositive(String s) {
+        if (Long.parseLong(s) <= 0) {
+            throw new CustomException(ErrorCode.NOT_ALLOWED_NEGATIVE_NUMBER);
+        }
+    }
 }
