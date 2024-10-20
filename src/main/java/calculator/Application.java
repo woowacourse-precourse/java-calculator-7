@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
+        // 문자열을 입력받는다.
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String userInput = Console.readLine();
 
@@ -13,6 +14,14 @@ public class Application {
         // 배열 요소 중 잘못된 값이 들어있는지 확인한다.
         checkValidation(stringArray);
 
+        // 배열 요소에 대하여 String 에서 int 로 형 변환한다.
+        int[] numberArray = typeChangeArray(stringArray);
+
+        // 배열 요소의 합계를 구한다.
+        int sum =  addNumbers(numberArray);
+
+        // 합계 결과를 출력한다.
+        System.out.println("결과 : "+sum);
     }
 
     private static String[] getStringArray(String userInput) {
@@ -43,4 +52,20 @@ public class Application {
         }
     }
 
+    private static int[] typeChangeArray(String[] arr) {
+        int[] numbersArray = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            numbersArray[i] = Integer.parseInt(arr[i]);
+        }
+        return numbersArray;
+    }
+
+    private static int addNumbers(int[] arr) {
+        // 배열 요소의 합계를 구한다.
+        int sum = 0;
+        for (int i=0; i < arr.length; i++) {
+            sum += arr[i];
+        }
+        return sum;
+    }
 }
