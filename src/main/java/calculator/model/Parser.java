@@ -8,14 +8,14 @@ public class Parser {
 
     public Parser(final String input) {
         this.input = input;
-        setParsingStrategy(input);
+        setParsingStrategy();
     }
 
     public List<Integer> parse() {
         return parsingStrategy.parse(input);
     }
 
-    private void setParsingStrategy(final String input) {
+    private void setParsingStrategy() {
         if (hasCustomDelimiter()) {
             parsingStrategy = new CustomDelimiterParsingStrategy();
         }
