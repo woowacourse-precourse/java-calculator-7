@@ -16,4 +16,10 @@ public class Application {
         }
         return -1; // 추후에 추가할 기능을 위해 임시로 -1 반환
     }
+
+    private static String[] splitInput(String input) {
+        // 쉼표(,)와 콜론(:)을 기본 구분자로 처리
+        String delimiter = ",|:";
+        return input.split(delimiter);
+    }
 }
