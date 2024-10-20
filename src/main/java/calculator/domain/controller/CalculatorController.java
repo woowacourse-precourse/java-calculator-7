@@ -5,13 +5,13 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 
 import calculator.domain.dto.InputDTO;
 import calculator.domain.dto.ResultDTO;
-import calculator.domain.service.CalculateService;
+import calculator.domain.service.CalculatorService;
 
 
 public class CalculatorController {
-    private final CalculateService calculateService;
+    private final CalculatorService calculateService;
 
-    public CalculatorController(CalculateService calculateService) {
+    public CalculatorController(CalculatorService calculateService) {
         this.calculateService = calculateService;
     }
 

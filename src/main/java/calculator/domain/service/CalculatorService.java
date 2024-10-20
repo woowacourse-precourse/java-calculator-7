@@ -1,14 +1,15 @@
 package calculator.domain.service;
 
-import dto.InputDTO;
-import dto.ResultDTO;
 
-public class CalculateService {
+import calculator.domain.dto.InputDTO;
+import calculator.domain.dto.ResultDTO;
+
+public class CalculatorService  {
     private final NormalCalculator normalCalculator;
     private final SpecialCalculator specialCalculator;
 
     //생성자 구현
-    public CalculateService(NormalCalculator normalCalculator, SpecialCalculator specialCalculator) {
+    public CalculatorService(NormalCalculator normalCalculator, SpecialCalculator specialCalculator) {
         this.normalCalculator = normalCalculator;
         this.specialCalculator = specialCalculator;
     }
