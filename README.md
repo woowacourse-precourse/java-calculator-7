@@ -68,7 +68,7 @@
 
 ```text
 - DataParser 를 CustomDataParser 와 DefaultDataParser 로 분리
-- 기존 DataParser 를 interface 로 변경
+- 확장성을 고려하여 기존 DataParser 를 interface 로 변경
 - 입력받은 문자열에 대해 적절한 DataParser 를 실행시키는 ParseManager 생성
 - Parser 들은 정수 리스트를 반환하도록 변경
 
