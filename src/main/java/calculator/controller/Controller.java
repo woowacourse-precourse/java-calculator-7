@@ -9,6 +9,7 @@ import calculator.view.OutputView;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.junit.jupiter.params.shadow.com.univocity.parsers.common.processor.core.AbstractMasterDetailListProcessor;
 
 public class Controller {
     InputView inputView = new InputView();
@@ -23,6 +24,8 @@ public class Controller {
 
     private void setNumbersSepartorProcess(){
         String input = inputView.getString();
+        Validator.validateNull(input);
+
         Separator separator = service.setSeparator(",:");
 
         if(input.startsWith("//")){
@@ -36,7 +39,14 @@ public class Controller {
         String[] nums = input.split(separator.getSeparators());
         ArrayList<Integer> numsInt = new ArrayList<>();
         for (String i : nums){
+            try{
+                Validator.validateNull(i);
+            }
+            catch (IllegalArgumentException e){
+                continue;
+            }
             Validator.validateDigit(i);
+
             int n = Integer.parseInt(i);
             numsInt.add(n);
         }
