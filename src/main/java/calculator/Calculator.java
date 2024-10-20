@@ -14,7 +14,7 @@ public class Calculator {
         if (input.isEmpty()) {
             return 0;
         }
-        return Arrays.stream(inputStringParser.parseAndSplit(input))
+        return Arrays.stream(inputStringParser.split(input))
                 .mapToInt(Integer::parseInt)
                 .sum();
     }

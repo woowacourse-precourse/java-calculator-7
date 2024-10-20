@@ -19,6 +19,9 @@ public class InputValidator {
     }
 
     public static void validateNumbers(String[] inputNumbers) {
+        if (inputNumbers.length == 0) {
+            throw new IllegalArgumentException("숫자가 입력되지 않았습니다.");
+        }
         for (String number : inputNumbers) {
             int parsedNumber;
             if (number.isEmpty()) {
