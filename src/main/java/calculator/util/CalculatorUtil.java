@@ -15,7 +15,7 @@ public class CalculatorUtil {
     public static List<Integer> getNumberList(String inputValue) {
         List<String> delimiters = extractDelimiter(inputValue);
 
-        return splitByDelimiters(delimiters, inputValue);
+        return splitByDelimiters(delimiters, formattingString(inputValue));
     }
 
     public static List<String> extractDelimiter(String inputValue) {

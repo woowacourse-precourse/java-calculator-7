@@ -9,10 +9,9 @@ import java.util.regex.Pattern;
 
 public class InputValidator {
     public Boolean isValidInput(String input) {
-        if (isOnlyOneCustomDeclare(input)) return false;
+        if (!isOnlyOneCustomDeclare(input)) return false;
 
         if (isContainInvalidChar(input)) return false;
-
         return true;
     }
 
