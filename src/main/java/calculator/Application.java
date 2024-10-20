@@ -33,13 +33,8 @@ public class Application {
     }
 
     public static String findSeparator(String user_input) {
-        if (user_input.substring(0, 2).equals("//") == false)
-            return user_input;
-
         int limit = user_input.indexOf("\\n");
-        if (limit == -1) {
-            return user_input;
-        } else if (limit == 2) {
+        if (limit == 2) {
             throw new IllegalArgumentException();
         }
 
@@ -59,9 +54,26 @@ public class Application {
         System.out.println(String.format("결과 : %d", answer));
     }
 
+    public static boolean isCustom(String user_input) {
+        if (user_input.length() < 5) {
+            return false;
+        }
+
+        if (user_input.substring(0, 2).equals("//") == false) {
+            return false;
+        }
+
+        if (user_input.indexOf("\\n") == -1) {
+            return false;
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         String user_input = inputByUser();
-        user_input = findSeparator(user_input);
+        if (isCustom(user_input))
+            user_input = findSeparator(user_input);
         printOutput(calculateValue(user_input));
     }
 }
