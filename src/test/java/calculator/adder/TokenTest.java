@@ -10,6 +10,18 @@ import org.junit.jupiter.api.Test;
 public class TokenTest {
 
     @Test
+    void 요청_값을_토큰으로_생성한다() {
+        // given
+        String value = "1";
+
+        // when
+        Token token = new Token(value);
+
+        // then
+        assertThat(token.getValue()).isEqualTo(Integer.parseInt(value));
+    }
+
+    @Test
     void 요청_값이_blank값일_경우_0으로_변환하여_저장한다() {
         // given
         String value1 = "";
@@ -24,18 +36,6 @@ public class TokenTest {
             softly.assertThat(token1.getValue()).isEqualTo(0);
             softly.assertThat(token2.getValue()).isEqualTo(0);
         });
-    }
-
-    @Test
-    void 요청_값을_토큰으로_생성한다() {
-        // given
-        String value = "1";
-
-        // when
-        Token token = new Token(value);
-
-        // then
-        assertThat(token.getValue()).isEqualTo(Integer.parseInt(value));
     }
 
     @Test
