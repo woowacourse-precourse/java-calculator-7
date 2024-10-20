@@ -14,6 +14,8 @@ public class Parser {
     // 구분자 파싱 중 사용될 임시 배열
     private Stack<Character> buffer = new Stack<>();
 
+    private String removedString = "";
+
     // 기본 구분자 배열에 추가
     public void addBasicSeparators() {
         separators.add(':');
@@ -34,12 +36,14 @@ public class Parser {
                 if (inputString.charAt(i + 3) == '\\' && inputString.charAt(i + 4) == 'n') {
                     // 충족 시 구분자 배열에 추가 후 버퍼에서 삭제
                     separators.add(buffer.pop());
-                    i += 5; // 커스텀 구분자 조건에 포함되는 부분 skip
+                    i += 4; // 커스텀 구분자 조건에 포함되는 부분 skip
 
                 } else {
                     // 버퍼에 저장된 커스텀 구분자 후보 삭제
                     buffer.pop();
                 }
+            } else {
+                removedString += inputString.charAt(i);
             }
         }
     }
@@ -50,12 +54,14 @@ public class Parser {
     }
 
     // 피연산자 파싱
-    public void parsingOperands(String inputString) {
+    public void parsingOperands() {
+
         // 피연산자 파싱 중 사용될 임시 문자열
         String tmpOperand = "";
 
-        for (int i = 0; i < inputString.length(); i++) {
-            boolean isSeparator = isSeparator(inputString.charAt(i));
+        for (int i = 0; i < removedString.length(); i++) {
+            Character currentChar = removedString.charAt(i);
+            boolean isSeparator = isSeparator(removedString.charAt(i));
 
             if (isSeparator) { // 구분자면
                 if (!tmpOperand.isEmpty()) { // 문자열이 비어있으면 skip
@@ -64,12 +70,15 @@ public class Parser {
                     tmpOperand = ""; // 문자열 초기화
                 }
 
-            } else if (Character.isDigit(inputString.charAt(i))) { // 숫자면
-                tmpOperand += inputString.charAt(i); // 임시 문자열에 누적 저장
+            } else if (Character.isDigit(currentChar)) { // 숫자면
+                tmpOperand += currentChar; // 임시 문자열에 누적 저장
+
+            } else if (currentChar == '-') {
+                throw new IllegalArgumentException("입력 문자열에 음수가 존재합니다.");
+
+            } else { // 구분자도 숫자도 아니면 skip?
+                throw new IllegalArgumentException("등록되지 않은 구분자가 포함되어있습니다.");
             }
-//            } else { // 구분자도 숫자도 아니면 skip?
-//                throw new IllegalArgumentException("등록되지 않은 구분자가 포함되어있습니다.");
-//            }
         }
 
         // 문자열에 숫자가 존재하면 피연산자 배열에 추가
@@ -82,7 +91,7 @@ public class Parser {
     public void parseString(String inputString) {
         addBasicSeparators();
         parsingCustomSeparators(inputString);
-        parsingOperands(inputString);
+        parsingOperands();
     }
 
     public List<Character> getSeparators() {

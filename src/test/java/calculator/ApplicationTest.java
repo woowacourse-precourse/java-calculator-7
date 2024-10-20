@@ -41,7 +41,7 @@ class ApplicationTest extends NsTest {
         // when
         parser.addBasicSeparators(); // 기본 구분자 추가
         parser.parsingCustomSeparators(inputString); // 커스텀 구분자 파싱
-        parser.parsingOperands(inputString); // 피연산자 파
+        parser.parsingOperands(); // 피연산자 파싱
 
         // then
         assertThat(parser.getOperands())
