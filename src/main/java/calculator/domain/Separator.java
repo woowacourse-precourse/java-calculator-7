@@ -6,6 +6,7 @@ import java.util.List;
 public class Separator {
     private static final String DEFAULT_COMMA = ",";
     private static final String DEFAULT_COLON = ":";
+    private static final String DOT = ".";
     private final List<String> availableSeparators;
     private final List<String> extractedNumbers;
 
@@ -45,13 +46,16 @@ public class Separator {
         if(Character.isDigit(customSeparator.charAt(0))) {
             throw new IllegalArgumentException();
         }
+        if(customSeparator.equals(DOT)) {
+            throw new IllegalArgumentException();
+        }
         availableSeparators.add(customSeparator);
         return numbers.substring(newlineIndex+2);
     }
 
     private void validateSeparators(String numbers) {
         for(char ch : numbers.toCharArray()) {
-            if(!Character.isDigit(ch) && !availableSeparators.contains(String.valueOf(ch))) {
+            if(!Character.isDigit(ch) && ch != DOT.charAt(0) && !availableSeparators.contains(String.valueOf(ch))) {
                 throw new IllegalArgumentException();
             }
         }
@@ -61,7 +65,8 @@ public class Separator {
     private void extractNumbers(String numbers) {
         StringBuilder number = new StringBuilder();
         for(int i = 0; i < numbers.length(); i ++) {
-            if(Character.isDigit(numbers.charAt(i))) {
+            char currentChar = numbers.charAt(i);
+            if(Character.isDigit(currentChar) || currentChar == '.') {
                 number.append(numbers.charAt(i));
                 continue;
             }
