@@ -33,6 +33,9 @@ public class DelimiterService { // 코드 실행 제어 서비스 클래스
         String[] sumToken = remainingInput.split(customDelimiter);
 
         for (String token : sumToken) {
+            if (token.isEmpty()) {
+                continue;  // 빈 문자열 건너뛰기
+            }
             sum += Long.parseLong(token);
         }
 

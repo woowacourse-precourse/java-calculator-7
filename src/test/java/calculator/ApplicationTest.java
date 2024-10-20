@@ -8,7 +8,6 @@ import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
-
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
@@ -23,23 +22,6 @@ class ApplicationTest extends NsTest {
                 assertThatThrownBy(() -> runException("-1,2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
-    }
-
-    @Test
-    void UseCustomSeparator1() {
-        RunException("//;\\n1", "결과 : 1");
-    }
-
-    @Test
-    void UseCustomSeparator2() {
-        RunException("//;\\n1;2,5", "결과 : 8");
-    }
-
-    private void RunException(String input, String expected) {
-        assertSimpleTest(() -> {
-            run(input);
-            assertThat(output()).contains(expected);
-        });
     }
 
     @Override

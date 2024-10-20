@@ -28,6 +28,7 @@ public class InputValidation { // 입력의 유효성을 확인하는 클래스�
         if (input.isEmpty()) {
             return null;
         }
+
         String delimiter = "[,:]";  // 기본 구분자 처리
         if (customDelimiter != null && !customDelimiter.isBlank()) {
             delimiter += "|" + Pattern.quote(customDelimiter); // 커스텀 구분자가 존재했으면 이를 포함하여 검사한다.
@@ -35,6 +36,9 @@ public class InputValidation { // 입력의 유효성을 확인하는 클래스�
 
         String[] tokens = input.split(delimiter); // 구분자를 바탕으로 문자열을 분류한다.
         for (String token : tokens) {
+            if (token.isEmpty()) {
+                continue;  // 빈 문자열 건너뛰기
+            }
             CheckNumber(token);
         }
 
