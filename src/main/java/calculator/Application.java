@@ -3,14 +3,14 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
 
-    //입력 형식 검증 - 커밋
+    //입력 형식 검증
     private static void inputCheck(String input) {
         if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException("잘못된 입력 형식");
         }
     }
 
-    //커스텀 구분자 구분 -커밋
+    //커스텀 구분자 구분
     private static String[] split(String input) {
         String delimiter = ",|:"; // 기본 구분자 쉼표(,)와 콜론(:)
         String numbers = input;
@@ -28,7 +28,7 @@ public class Application {
         return numbers.split(delimiter); //구분자를 기준으로 문자열 분리
     }
 
-    //숫자 합계 계산 -커밋
+    //숫자 합계 계산
     private static int sum(String[] numbers) {
         int sum = 0;
         for (String n : numbers) {
@@ -43,7 +43,7 @@ public class Application {
         return sum;
     }
 
-    // 계산 함수 -커밋
+    // 계산 함수
     public static int calc(String input) {
         inputCheck(input); //입력 체크
         String[] numbers = split(input); //구분자로 문자열 분리
