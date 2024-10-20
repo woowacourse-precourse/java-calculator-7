@@ -1,5 +1,6 @@
 package calculator;
 
+import static calculator.StringParsing.splitNpushString;
 import static calculator.StringParsing.stringValidateCheck;
 
 public class Calculator {
@@ -16,28 +17,20 @@ public class Calculator {
         if (delimiter.length() > 3) {
             userInput = userInput.substring(userInput.indexOf("\\n") + 2);
         }
-        String[] userInputArr = stringValidateCheck(userInput, delimiter); // 이름이 validate인데 validate를 안함
-        return userInputArrIsNum(userInputArr); // 이 메서드에서 validate를 하고 있음
+        String[] userInputArr = splitNpushString(userInput, delimiter);
+        stringValidateCheck(userInputArr);
+        return calculateTotal(userInputArr);
     }
 
-    private static int userInputArrIsNum(String[] userInputArr) {
+    private static int calculateTotal(String[] userInputArr) {
         long sum = 0;
-
         for (String s : userInputArr) {
-            if (s.isEmpty()) {
-                continue;
-            }
-            try {
-                //int num = Integer.parseInt(s);
-                //sum += num;
+            if (!s.isEmpty()) {
                 long num = Long.parseLong(s);
                 sum += num;
-
                 if (sum > Integer.MAX_VALUE || sum < Integer.MIN_VALUE) {
                     throw new IllegalArgumentException("합계가 int 범위를 벗어났습니다");
                 }
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다");
             }
         }
         return (int) sum;
