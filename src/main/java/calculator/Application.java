@@ -9,9 +9,9 @@ public class Application {
         try {
             StringCalculator calculator = new StringCalculator(input);
             int result = calculator.addAll();
-            System.out.println("결과 : " + result);
+            System.out.print("결과 : " + result);
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            throw e;
         }
     }
 }
@@ -57,12 +57,12 @@ class StringCalculator {
             try {
                 int num = Integer.parseInt(piece);
                 if (num<0){
-                    throw new IllegalArgumentException("음수는 허용되지 않는다");
+                    throw new IllegalArgumentException();
                 }
                 nums[count++]= num;
             }
             catch (NumberFormatException e){
-                throw new IllegalArgumentException("숫자가 아닌 값이 사용되었다");
+                throw new IllegalArgumentException(e.getMessage());
             }
         }
         int[] result = new int[count];
