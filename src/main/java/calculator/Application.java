@@ -13,9 +13,10 @@ public class Application {
             } else {
                 result = defaultCalculateSum(input);
             }
-            System.out.println("결과: " + result);
+            System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.out.println("IllegalArgumentException: " + e.getMessage());
+            throw e;
         }
     }
 
@@ -48,7 +49,7 @@ public class Application {
         String customDelimiter = escapeSpecialCharacters(input.substring(startDelimiterIndex + 2, endDelimiterIndex).trim());
 
         // 숫자 문자열 추출
-        String numbers = input.substring(endDelimiterIndex + 2).trim(); // "\n" 이후의 숫자 문자열
+        String numbers = input.substring(endDelimiterIndex + 2).trim();
 
         // 커스텀 구분자로 문자열을 분리
         String[] numberArray = numbers.split(customDelimiter);
@@ -61,15 +62,19 @@ public class Application {
         return delimiter.replaceAll("([\\[\\]{}()*+?^$|.])", "\\\\$1");
     }
 
-
     // 공통적인 숫자 덧셈 기능
     private static int sumNumbers(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
+            int num = 0;
             try {
-                sum += Integer.parseInt(number);
+                num = Integer.parseInt(number.trim());
+                if (num < 0) {
+                    throw new IllegalArgumentException("음수는 허용되지 않습니다: " + num);
+                }
+                sum += num;
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("잘못된 숫자가 포함되어 있습니다: "+number);
+                throw new IllegalArgumentException("잘못된 숫자가 포함되어 있습니다: " + number);
             }
         }
         return sum;
