@@ -24,7 +24,7 @@ public class PositiveNumber {
         return number < MIN_RANGE;
     }
 
-    public int sumNumber(int sum) {
+    public int addNumber(int sum) {
         return sum + this.number;
     }
 }

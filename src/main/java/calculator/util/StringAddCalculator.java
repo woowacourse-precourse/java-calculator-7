@@ -29,7 +29,7 @@ public class StringAddCalculator {
         int sum = ZERO_VALUE;
         for (String splitNumber : splitInput) {
             PositiveNumber positiveNumber = PositiveNumber.create(toInt(splitNumber));
-            sum = positiveNumber.sumNumber(sum);
+            sum = positiveNumber.addNumber(sum);
         }
         return sum;
     }
