@@ -18,7 +18,7 @@ public class CalculatorController {
     public void run() {
         String input = readLine();
         String[] values = parseByDelimiter(input);
-        validatePositiveNumber(values);
+        validateNumber(values);
         int[] numbers = convertToInt(values);
         int sum = getSum(numbers);
         outputView.print(sum);
@@ -42,7 +42,7 @@ public class CalculatorController {
         return inputParser.parseByDelimiter(cutInput, allDelimiters);
     }
 
-    private void validatePositiveNumber(String[] values) {
+    private void validateNumber(String[] values) {
         NumberValidator numberValidator = NumberValidator.getInstance();
         numberValidator.validateNumbers(values);
     }
