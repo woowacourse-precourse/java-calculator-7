@@ -46,4 +46,19 @@ class LineSplitterTest {
         // then
         assertThatIllegalArgumentException().isThrownBy(() -> lineSplitter.getOperands(line));
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "2:3:", ",2,3", "-1,2,3",
+            "@,3,4", "3,4,@", "3,@,4",
+            "//;\\n;2;3", "//;\\n2;3;", "//;\\n2;3;",
+            "//;\\nd;2;3", "//;\\n2;d;3", "//;\\n2;3;d",
+            "2;3;4", "//;\\n2;3@4"
+    })
+    void 예외_테스트(String input) {
+        // given
+        // when
+        // then
+        assertThatIllegalArgumentException().isThrownBy(() -> lineSplitter.getOperands(input));
+    }
 }

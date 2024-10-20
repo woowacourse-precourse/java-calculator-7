@@ -1,5 +1,7 @@
 package calculator.domain.machine;
 
+import calculator.ExceptionInfo;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,7 +21,7 @@ public class DelimiterExtractor {
             String group = matcher.group();
             return group.substring(2, group.length() - 2);
         } else {
-            throw new IllegalArgumentException("[ERROR] 커스텀 구분자는 공백일 수 없습니다.");
+            throw new IllegalArgumentException(ExceptionInfo.EXCEPTION_MESSAGE);
         }
     }
 
