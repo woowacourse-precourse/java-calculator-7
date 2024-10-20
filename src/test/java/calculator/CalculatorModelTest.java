@@ -11,7 +11,7 @@ public class CalculatorModelTest {
     CalculatorModel calculatorModel = new CalculatorModel();
 
     @Test
-    void 구분자_수_나누기_테스트() {
+    void 구분자_나누기_테스트() {
         String[] inputs = {"1,2,3", "1,2:3", "1:2:3"};
         String[][] expectedOutputs = {
                 {"1", "2", "3"},
@@ -26,6 +26,38 @@ public class CalculatorModelTest {
                     .as("Input: %s", inputs[i])
                     .containsExactly(expectedOutputs[i]);
         }
+    }
+
+    @Test
+    void 커스텀_구분자_합_테스트() {
+        NumberRequest request = new NumberRequest("//;\\n1;2;3");
+        CalculatorResultResponse result = calculatorModel.calculateSum(request);
+
+        assertThat(result.sumResult()).isEqualTo(6);
+    }
+
+    @Test
+    void 커스텀_구분자_합_예외_테스트1() {
+        NumberRequest request = new NumberRequest("//\n\n1;2;3");
+
+        assertThatThrownBy(() -> calculatorModel.calculateSum(request))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 커스텀_구분자_합_예외_테스트2() {
+        NumberRequest request = new NumberRequest("//2\n1;2;3");
+
+        assertThatThrownBy(() -> calculatorModel.calculateSum(request))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 커스텀_구분자_합_예외_테스트3() {
+        NumberRequest request = new NumberRequest("//\n3\n1;2;3");
+
+        assertThatThrownBy(() -> calculatorModel.calculateSum(request))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -69,18 +101,20 @@ public class CalculatorModelTest {
     }
 
     @Test
-    void 빈_문자열_입력_예외_테스트() {
+    void 빈_문자열_입력_0반환_테스트() {
         NumberRequest request = new NumberRequest("");
 
-        assertThatThrownBy(() -> calculatorModel.calculateSum(request))
-                .isInstanceOf(IllegalArgumentException.class);
+        CalculatorResultResponse result = calculatorModel.calculateSum(request);
+
+        assertThat(result.sumResult()).isEqualTo(0);
     }
 
     @Test
-    void 빈_공백입력_예외_테스트() {
-        NumberRequest request = new NumberRequest("   ");
+    void 빈_공백입력_0반환_테스트() {
+        NumberRequest request = new NumberRequest("    ");
 
-        assertThatThrownBy(() -> calculatorModel.calculateSum(request))
-                .isInstanceOf(IllegalArgumentException.class);
+        CalculatorResultResponse result = calculatorModel.calculateSum(request);
+
+        assertThat(result.sumResult()).isEqualTo(0);
     }
 }
