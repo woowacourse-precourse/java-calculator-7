@@ -46,8 +46,27 @@ public class Application {
         // 주어진 문자열에서 커스텀 구분자 추가하고 제외
         sentence = parseDelimiter(sentence);
 
+        // 결과를 저장할 변수
+        int sum = 0;
+        
+        // 구분자들을 기준으로 문자열을 분리하여 덧셈 계산
         String[] numbers = sentence.split(delimiters);
+        for (String number : numbers) {
+            try {
+                // 문자형 숫자를 정수형으로 변환
+                int parsedNumber = Integer.parseInt(number);
 
-        return 0;
+                // 입력은 양의 정수만 가능
+                if (parsedNumber < 0)
+                    throw new IllegalArgumentException("음수는 계산에 포함될 수 없습니다. 양수만 입력해주세요.");
+
+                sum += parsedNumber;
+
+            } catch (NumberFormatException nfe) {
+                throw new IllegalArgumentException("잘못된 문자가 포함되어 있습니다: 구분자 또는 숫자를 확인해주세요.");
+            }
+        }
+
+        return sum;
     }
 }
