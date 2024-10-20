@@ -2,12 +2,10 @@ package calculator;
 
 public class DelimiterParser {
 
-    private final String input;
     private String numbersPart;
     private DelimiterStrategy delimiterStrategy;
 
     public DelimiterParser(String input) {
-        this.input = input;
         if (input.startsWith("//")) {
             int newlineIndex = input.indexOf("\\n");
             if (newlineIndex == -1) {
