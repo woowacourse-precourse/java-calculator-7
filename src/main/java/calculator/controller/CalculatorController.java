@@ -1,6 +1,7 @@
 package calculator.controller;
 
 import calculator.domain.Calculator;
+import calculator.domain.Input;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -16,9 +17,9 @@ public class CalculatorController {
 
     public void run() {
         String inputForSum = inputView.readInputForSum();
-
+        Input input = new Input(inputForSum);
         Calculator calculator = new Calculator();
 
-        outputView.printResult(calculator.calculate(inputForSum));
+        outputView.printResult(calculator.calculate(input));
     }
 }
