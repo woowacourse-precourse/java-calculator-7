@@ -5,7 +5,6 @@
 - CalculatorDependencyConfig를 통해 의존성 주입을 설정한다.
 - 사용자는 CalculatorController를 갖는다.
 - 사용자는 Calculator를 이용할 수 있는 View를 갖는다.
-- 계산기는 While문을 통해 IllegalArgumentException 발생 전까지 프로그램을 실행한다.
 
 # 2. Controller
 
