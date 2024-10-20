@@ -61,4 +61,20 @@ public class CalculatorService {
         return numbers.split(delimiterRegex);
     }
 
+    private int sum(String[] numbers) {
+
+        int sum = 0;
+
+        for (String number : numbers) {
+
+            if (number.isEmpty()) {
+                number = "0";
+            }
+
+            sum += Integer.parseInt(number);
+        }
+
+        return sum;
+    }
+
 }
