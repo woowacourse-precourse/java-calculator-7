@@ -35,6 +35,8 @@ public class Application {
             return ;
         }
 
+        validateContinuousDelimiters(numbers, delimiter);
+
 
 
     }
@@ -79,6 +81,18 @@ public class Application {
         Pattern pattern = Pattern.compile("^[0-9,:]*$");
         Matcher matcher = pattern.matcher(input);
         return matcher.matches();
+    }
+
+    private static void validateContinuousDelimiters(String numbers, String delimiter) {
+        if (!delimiter.equals(",|:")) {
+            if (numbers.contains(delimiter + delimiter)) {
+                throw new IllegalArgumentException("커스텀 구분자가 연속될 수 없습니다: " + delimiter);
+            }
+        } else {
+            if (numbers.contains(",,") || numbers.contains("::")) {
+                 throw new IllegalArgumentException("연속된 쉼표(,) 또는 콜론(:)은 허용되지 않습니다.");
+            }
+        }
     }
 
 
