@@ -2,7 +2,7 @@ package calculator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import calculator.constants.CalculatorConstraint;
+import calculator.constants.CalculatorMessages;
 import calculator.view.View;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -41,7 +41,7 @@ class ViewTest {
         input.printMessage();
 
         // then
-        assertEquals(CalculatorConstraint.INPUT_MESSAGE, out.toString().trim());
+        assertEquals(CalculatorMessages.INPUT_MESSAGE, out.toString().trim());
 
         System.setOut(System.out);
     }
@@ -58,7 +58,7 @@ class ViewTest {
         input.printResultMessage(6);
 
         // then
-        assertEquals(CalculatorConstraint.RESULT_MESSAGE + 6, out.toString().trim());
+        assertEquals(CalculatorMessages.RESULT_MESSAGE + 6, out.toString().trim());
 
         System.setOut(System.out);
     }

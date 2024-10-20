@@ -1,6 +1,6 @@
 package calculator.view;
 
-import calculator.constants.CalculatorConstraint;
+import calculator.constants.CalculatorMessages;
 import camp.nextstep.edu.missionutils.Console;
 
 public class View {
@@ -14,10 +14,10 @@ public class View {
         return Console.readLine();
     }
     public void printMessage() {
-        System.out.println(CalculatorConstraint.INPUT_MESSAGE);
+        System.out.println(CalculatorMessages.INPUT_MESSAGE);
     }
 
     public void printResultMessage(Integer result) {
-        System.out.println(CalculatorConstraint.RESULT_MESSAGE + result);
+        System.out.println(CalculatorMessages.RESULT_MESSAGE + result);
     }
 }
