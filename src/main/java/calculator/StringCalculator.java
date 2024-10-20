@@ -52,7 +52,7 @@ public class StringCalculator {
         if (separator.equals("defaultSeparator")) {
             return defaultSeperateMachine();
         } else {
-            return customSeperateMachine();
+            return customSeperateMachine(separator);
         }
     }
 
@@ -96,9 +96,39 @@ public class StringCalculator {
     }
 
     // 구현 예정
-    private List<Integer> customSeperateMachine() {
+    private List<Integer> customSeperateMachine(String seperator) {
         List<Integer> splitedNums = new ArrayList<>();
-        splitedNums.add(0);
+        Character seperatorToChar = seperator.charAt(0);
+        String splitedNum = "";
+        String seperatorRemovedInput = input.substring(5);
+        String[] seperatorRemovedInputSplit = seperatorRemovedInput.split("");
+
+        for (int i = 0; i != seperatorRemovedInput.length(); i++) {
+            char charInput = seperatorRemovedInputSplit[i].charAt(0);
+            // 구분자일 경우
+            if (charInput == seperatorToChar) {
+                // 구분자가 나왔지만 앞에 숫자가 없었을 경우
+                if (splitedNum == "") {
+                    splitedNums.add(0);
+                    continue;
+                }
+                splitedNums.add(Integer.parseInt(splitedNum));
+                splitedNum = "";
+                continue;
+            }
+            // 숫자일 경우
+            if (Character.isDigit(charInput)) {
+                splitedNum = splitedNum + charInput;
+                // 배열의 마지막 번째에 숫자가 나왔을 경우
+                if (i == seperatorRemovedInput.length() - 1) {
+                    splitedNums.add(Integer.parseInt(splitedNum));
+                }
+            }
+            // 숫자나 커스텀 구분자가 아닐경우 에러 발생
+            else {
+                throw new IllegalArgumentException("커스텀 구분자, 숫자가 아닌 문자가 들어왔다는 에러 구현 예정");
+            }
+        }
         return splitedNums;
     }
 
