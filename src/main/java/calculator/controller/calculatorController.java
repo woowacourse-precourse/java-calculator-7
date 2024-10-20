@@ -10,7 +10,7 @@ public class calculatorController {
             String input = Console.readLine();
             addOperation addOperation = new addOperation();
             int result = addOperation.add(input);
-            System.out.println("결과: " + result);
+            System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.err.println("잘못된 입력입니다: " + e.getMessage());
         }

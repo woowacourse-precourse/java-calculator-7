@@ -34,7 +34,7 @@ public class addOperation {
             input = input.substring(endIdx + 2); // 구분자를 제외한 값
         }
 
-        if(!isValidFormat(input, delimiter)) throw new IllegalArgumentException("문자열 형태가 올바르지 않습니다 (숫자 구분자 숫자)");
+        //if(!isValidFormat(input, delimiter)) throw new IllegalArgumentException("문자열 형태가 올바르지 않습니다 (숫자 구분자 숫자)");
 
         String[] tokens = input.split(delimiter); // 구분자 기준으로 숫자 저장하기
 
