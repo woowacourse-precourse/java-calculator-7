@@ -10,6 +10,7 @@ public class Application {
         String seperator = DecideSeparatorInString(input);
         String[] arr = DevideStringToSeparator(input, seperator);
         System.out.println(String.join(" ", arr));
+        System.out.println("is Correct input? " + isCorrectInput(arr, seperator));
         Console.close();
     }
 
@@ -33,7 +34,25 @@ public class Application {
 
     private static String[] DevideStringToSeparator(String string, String separator) {
         int indexNewline = string.indexOf("\\n");
-        string = string.substring(indexNewline + 2);
+        if(indexNewline != -1) {
+            string = string.substring(indexNewline + 2);
+        }
+        if (separator.isEmpty()) {
+            return new String[]{string};
+        }
         return string.split(String.format("[%s]",separator));
+    }
+
+    private static boolean isCorrectInput(String[] input, String separator) {
+        String temp = separator.replaceAll("[,:]+", "");
+        if (temp.length() >= 2) {
+            return false;
+        }
+        for (int i = 0; i < input.length; i++) {
+            if (!input[i].matches("^[0-9]*$")) {
+                return false;
+            }
+        }
+        return true;
     }
 }
