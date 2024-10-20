@@ -1,7 +1,7 @@
 package calculator;
 
 public class StringAddCalculator {
-    public static int split(String input) {
+    public static int split(String input) throws IllegalArgumentException {
         int result = 0;
 
         String delimiter = ",|:";
@@ -24,7 +24,12 @@ public class StringAddCalculator {
 
         String[] parts = input.split(delimiter);
         for (String part : parts) {
-            result += Integer.parseInt(part);
+            int target = Integer.parseInt(part);
+            if (target > 0) {
+                result += target;
+            } else {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            }
         }
 
         return result;
