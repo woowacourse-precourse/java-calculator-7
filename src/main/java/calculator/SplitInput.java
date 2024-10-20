@@ -11,7 +11,15 @@ public class SplitInput {
     }
 
     static String[] split(String input, String delimiter) {
-        CheckValid.checkContinuousDelimiters(input);
-        return input.split(delimiter);
+
+        String[] numbers = input.split(delimiter);
+
+        CheckValid.checkContinuousDelimiters(numbers);
+
+        // 각 숫자 항목을 검증하고 유효하지 않은 값 처리
+        for (String num : numbers) {
+            CheckValid.isValidString(num);
+        }
+        return numbers;
     }
 }
