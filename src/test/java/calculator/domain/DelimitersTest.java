@@ -41,7 +41,7 @@ class DelimitersTest {
         Delimiters delimiters = new Delimiters();
         String input = "//;;;;\\n1;2;3";
 
-        assertThatThrownBy(() -> delimiters.findCustomDelimiter(input))
+        assertThatThrownBy(() -> delimiters.getAllDelimiters(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("구분자는 길이가 1인 문자여야 합니다.");
     }
