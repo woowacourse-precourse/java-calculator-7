@@ -5,6 +5,8 @@ import java.util.List;
 
 public class DelimeterHandler {
     private static final String DEFAULT_DELIMITERS = ",:";
+    private static final String CUSTOM_DELIMITERS_START = "//";
+    private static final String CUSTOM_DELIMITERS_END = "\\n";
 
     public static List<Character> extractDelimiters(String input) {
         List<Character> delimiterList = new ArrayList<>();
@@ -12,13 +14,13 @@ public class DelimeterHandler {
         for (char delimiter : DEFAULT_DELIMITERS.toCharArray()) {
             delimiterList.add(delimiter);
         }
-
         if (hasCustomDelimiter(input) == true) {
-            int newlineIdx = input.indexOf("\\n");
+            int customDelimiterStartIndex = input.indexOf(CUSTOM_DELIMITERS_START) + CUSTOM_DELIMITERS_START.length();
+            int customDelimiterEndIndex = input.indexOf(CUSTOM_DELIMITERS_END);
 
-            String customDelimiter = input.substring(2, newlineIdx);
-            for (int i = 0; i < customDelimiter.length(); i++) {
-                char delimiterChar = customDelimiter.charAt(i);
+            String customDelimiters = input.substring(customDelimiterStartIndex, customDelimiterEndIndex);
+            for (int i = 0; i < customDelimiters.length(); i++) {
+                char delimiterChar = customDelimiters.charAt(i);
 
                 if (delimiterList.contains(delimiterChar) == true) {
                     throw new IllegalArgumentException("duplicate delimiter: " + delimiterChar);
@@ -29,7 +31,6 @@ public class DelimeterHandler {
                 delimiterList.add(delimiterChar);
             }
         }
-
         return delimiterList;
     }
 
