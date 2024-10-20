@@ -8,8 +8,8 @@ public class InputValidate {
 
     public static String checkCustom(String userInput) {
         if (userInput.startsWith(customStart)) {
-            if (userInput.indexOf("\\n", 2) != 3) { // 2번째 인자는 없어도 좋을듯
-                throw new IllegalArgumentException("입력 값이 올바르지 않습니다."); // 예외 메시지 구체적이면 좋을 듯
+            if (userInput.indexOf("\\n") != 3) {
+                throw new IllegalArgumentException("입력 값이 올바르지 않습니다.");
             }
             customValidateCheck(userInput.charAt(2));
         }
