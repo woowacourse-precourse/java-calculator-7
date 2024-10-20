@@ -23,6 +23,15 @@ class Calculator {
         }
         return sum;
     }
+
+
+    public Parser chooseParser(String input) {
+        if (input.startsWith("//")) {
+            return new CustomParser();
+        } else {
+            return new DefaultParser();
+        }
+    }
 }
 
 
