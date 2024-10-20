@@ -30,9 +30,14 @@
 - 프로그래밍 요구 사항에서 달리 명시하지 않는 한 파일, 패키지 등의 이름을 바꾸거나 이동하지 않는다.
 - 자바 코드 컨벤션을 지키면서 프로그래밍한다.
 - 기본적으로 Java Style Guide를 원칙으로 한다.
-- 라이브러리
+### 라이브러리 ###
   - camp.nextstep.edu.missionutils에서 제공하는 Console API를 사용하여 구현해야 한다.
   - 사용자가 입력하는 값은 camp.nextstep.edu.missionutils.Console의 readLine()을 활용한다.
+
+### 테스트 실행 가이드 ###
+- 터미널에서 java -version을 실행하여 Java 버전이 21인지 확인한다. Eclipse 또는 IntelliJ IDEA와 같은 IDE에서 Java 21로 실행되는지 확인한다.
+- 터미널에서 Mac 또는 Linux 사용자의 경우 ./gradlew clean test 명령을 실행하고, Windows 사용자의 경우 gradlew.bat clean test 또는 .\gradlew.bat clean test 명령을 실행할 때 모든 테스트가 아래와 같이 통과하는지 확인한다.
+- 성공 시 BUILD SUCCESSFUL in 0s
 
 ### **구현할 기능 목록**
 1. **feat: 사용자 입력 및 구분자 추출 - 커스텀 구분자를 추출하고 기본 구분자와 결합하는 로직 구현**
@@ -53,4 +58,3 @@
 5. **fix: 추가 예외 처리 - 입력값 검증 및 예외 발생 로직 구현**
 - 잘못된 입력 발생 시 IllegalArgumentException을 발생시킨다.
   - 테스트 케이스 실행하여 오류 수정
-6. **feat : 테스트 실행 메서드 제거**

@@ -40,7 +40,7 @@ public class InputHandler {
             if (metaCharacters.indexOf(c) != -1) {
                 escaped.append("\\"); // 메타문자면 이스케이프 추가
             }
-            escaped.append(c); // 문자 추가
+            escaped.append(c);
         }
         return escaped.toString();
     }
