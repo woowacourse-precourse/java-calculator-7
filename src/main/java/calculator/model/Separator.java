@@ -25,9 +25,17 @@ public class Separator {
             System.out.println("커스텀 구분자 : " + customSeparator );
             activeSeparator = DEFAULT_SEPARATOR + "|" + customSeparator;
             System.out.println(activeSeparator);
+            cleanInput(input);
             return activeSeparator;
         }
         System.out.println("커스텀 구분자 없음");
+        return input;
+    }
+
+    public static String cleanInput(String input) {
+        System.out.println("음>?" +input);
+        input = input.split("\\\\n", 2)[1];
+        System.out.println("커스텀 구분자가 있고, 숫자만 분리해놓음" + input);
         return input;
     }
 
