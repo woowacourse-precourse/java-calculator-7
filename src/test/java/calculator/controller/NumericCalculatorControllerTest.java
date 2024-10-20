@@ -23,7 +23,7 @@ class NumericCalculatorControllerTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3,4","1:2:3"})
-    @DisplayName("기본 연산자를 사용한 데이터 객체를 받아서 연산부분 객체를 생성한다")
+    @DisplayName("기본 구분자를 사용한 데이터 객체를 받아서 연산부분 객체를 생성한다")
     void createCalculatorWithDefaultDelimiter(String input) {
         InputData inputData = new InputData(input);
         Delimiter delimiter = new DefaultDelimiter();
@@ -41,7 +41,7 @@ class NumericCalculatorControllerTest {
 
     @ParameterizedTest
     @MethodSource("customDelimiterData")
-    @DisplayName("커스텀 연산자를 사용한 데이터 객체를 받아서 연산부분 객체를 생성한다")
+    @DisplayName("커스텀 구분자를 사용한 데이터 객체를 받아서 연산부분 객체를 생성한다")
     void createCalculatorWithCustomDelimiter(List<String> input) {
         InputData inputData = new InputData(input.get(0));
         Delimiter delimiter = new CustomDelimiter(input.get(1));
