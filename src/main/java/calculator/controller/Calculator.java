@@ -7,7 +7,10 @@ import calculator.view.OutputView;
 public class Calculator {
     public void run() {
         String input = readInput();
-        Data data = handleInput(input);
+
+        Data data = new Data(input);
+        handleUserInput(data);
+
         int result = makeResult(data);
         printOutput(result);
     }
@@ -16,8 +19,8 @@ public class Calculator {
         return InputView.readUserInput();
     }
 
-    private Data handleInput(String input) {
-        return new Data(input);
+    private void handleUserInput(Data data) {
+        data.handleInput();
     }
 
     private int makeResult(Data data) {
