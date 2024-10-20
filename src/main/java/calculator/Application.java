@@ -3,6 +3,33 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
+
+    public static void main(String[] args) {
+        System.out.println("Please enter your input");
+        String input = Console.readLine();
+
+        String[] delimiterAndContent = getCustomDelimiterAndContent(input);
+
+        String customDelimiter = delimiterAndContent[0];
+        String contentWithoutDelimiter = delimiterAndContent[1];
+
+        String[] numberArray;
+        int resultSum;
+        try {
+            checkValidDelimiters(contentWithoutDelimiter, customDelimiter);
+            numberArray = splitByDelimiter(contentWithoutDelimiter, customDelimiter);
+            resultSum = calculateSum(numberArray);
+
+            System.out.print("Sum: " + resultSum);
+
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+        } finally {
+            Console.close();
+        }
+
+    }
+
     public static String[] getCustomDelimiterAndContent(String input) {
         if (input.startsWith("//")) {
             int delimiterEndIndex = input.indexOf("\\n");
@@ -41,29 +68,4 @@ public class Application {
         return total;
     }
 
-    public static void main(String[] args) {
-        System.out.println("Please enter your input");
-        String input = Console.readLine();
-
-        String[] delimiterAndContent = getCustomDelimiterAndContent(input);
-
-        String customDelimiter = delimiterAndContent[0];
-        String contentWithoutDelimiter = delimiterAndContent[1];
-
-        String[] numberArray;
-        int resultSum;
-        try {
-            checkValidDelimiters(contentWithoutDelimiter, customDelimiter);
-            numberArray = splitByDelimiter(contentWithoutDelimiter, customDelimiter);
-            resultSum = calculateSum(numberArray);
-
-            System.out.print("Sum: " + resultSum);
-
-        } catch (IllegalArgumentException e) {
-            System.err.println(e.getMessage());
-        } finally {
-            Console.close();
-        }
-
-    }
 }
