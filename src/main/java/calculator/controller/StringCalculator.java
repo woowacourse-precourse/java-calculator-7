@@ -22,8 +22,7 @@ public class StringCalculator {
 	public void run() {
 		String inputString = getInput();
 		inputString = validateInput(inputString);
-		NumberExtractor numberExtractor = new NumberExtractor();
-		List<Integer> numbers = numberExtractor.extractNumbers(inputString);
+		List<Integer> numbers = extractNumbers(inputString);
 		SumCalculator sumCalculator = new SumCalculator();
 		int answer = sumCalculator.calculate(numbers);
 		output.printAnswerMessage(answer);
@@ -43,5 +42,10 @@ public class StringCalculator {
 		}
 		stringValidator.validate(inputString);
 		return inputString;
+	}
+
+	private List<Integer> extractNumbers(String inputString) {
+		NumberExtractor numberExtractor = new NumberExtractor();
+		return numberExtractor.extractNumbers(inputString);
 	}
 }
