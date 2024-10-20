@@ -3,7 +3,7 @@
 **입력 처리**
 1. 문자열 형태의 입력을 받는다.
    1. 입력은 Request DTO에 담아 Controller로 전달한다.
-2. 입력이 `null`이거나 빈 문자열인 경우 `IllegalArgumentException`을 발생시킵니다.
+2. 입력이 `null`이거나 빈 문자열인 경우 `IllegalArgumentException`을 발생시킨다.
 
 **입력 검증**
 1. 입력이 숫자가 아닌 경우 예외를 발생시킨다.
