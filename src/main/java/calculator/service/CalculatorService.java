@@ -34,8 +34,17 @@ public class CalculatorService {
     }
 
     private List<Double> splitExpressionToPositiveNumber(Expression expression) {
-        String[] separatedValues = expression.split(separators.getValues());
+        String[] separatedValues = expression.split(separators);
+        validateOperandsAndSeparatorsCount(expression);
         return convertToPositiveNumber(separatedValues);
+    }
+
+    private void validateOperandsAndSeparatorsCount(Expression expression) {
+        long operandsCount = expression.getOperandCount(separators);
+        long separatorsCount = expression.getSeparatorCount(separators);
+        if (operandsCount != separatorsCount + 1) {
+            throw new IllegalArgumentException("구분자와 숫자의 개수가 맞지 않습니다. 입력값을 확인해주세요.");
+        }
     }
 
     private List<Double> convertToPositiveNumber(String[] separatedValues) {
