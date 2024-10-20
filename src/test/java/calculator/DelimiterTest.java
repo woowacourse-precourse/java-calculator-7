@@ -39,4 +39,15 @@ public class DelimiterTest {
         Assertions.assertThat(delimiter.splitWithCustomDelimiter("//;\n1;2,3")).containsExactly("1", "2", "3");
     }
 
+    @Test
+    @DisplayName("허용되지 않은 구분자 있을 시 예외 발생")
+    void 허용되지_않은_구분자() {
+        Delimiter delimiter = new Delimiter();
+
+        Assertions.assertThatThrownBy(
+                        () -> delimiter.splitWithCustomDelimiter("//;\n1;2^3")
+                ).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("허용되지 않은 구분자가 존재합니다");
+    }
+
 }

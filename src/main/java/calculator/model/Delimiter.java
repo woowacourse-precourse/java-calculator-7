@@ -1,5 +1,6 @@
 package calculator.model;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -31,7 +32,23 @@ public class Delimiter {
         delimiter.add(customDelimiter);
         String delimiterToUse = customAndBasicDelimiter();
         String[] splitedExpression = m.group(2).split(delimiterToUse);
+        checkExpressionHasInvalidExpression(splitedExpression);
         return splitedExpression;
+    }
+
+    private static void checkExpressionHasInvalidExpression(String[] splitedExpression) {
+        Arrays.stream(splitedExpression)
+                .forEach(i -> {
+                    validOperandHasInvalidDelimiter(i);
+                });
+    }
+
+    private static void validOperandHasInvalidDelimiter(String i) {
+        for (char s : i.toCharArray()) {
+            if (!Character.isDigit(s)) {
+                throw new NumberFormatException("허용되지 않은 구분자가 존재합니다");
+            }
+        }
     }
 
     public static String[] splitWithDelimiter(String expression) {
