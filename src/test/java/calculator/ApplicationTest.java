@@ -8,6 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
+
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
@@ -21,6 +22,22 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 공백_입력_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(" "))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 문자_입력_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("a,b,c"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
