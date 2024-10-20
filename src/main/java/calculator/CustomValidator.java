@@ -1,6 +1,16 @@
 package calculator;
 
 public class CustomValidator {
+    
+    public static boolean validate(String inputData) {
+        if (inputData.matches("\\d*")) {
+            return false;
+        } else if (inputData.matches("^(\\d+([,:]\\d+)*)*$")) {
+            return false;
+        } else {
+            return customValidate(inputData);
+        }
+    }
 
     public static boolean customValidate(String inputData) {
         if (inputData.matches("^//(.*?)\\\\n.*")) {
