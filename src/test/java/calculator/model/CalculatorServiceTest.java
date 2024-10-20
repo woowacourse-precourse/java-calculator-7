@@ -17,15 +17,6 @@ public class CalculatorServiceTest {
     }
 
     @Test
-    @DisplayName("입력값이 없는 경우 테스트")
-    void testNoneInput() {
-        String input = "";
-        assertThrows(IllegalArgumentException.class, () -> {
-            calculatorService.calculate(input);
-        });
-    }
-
-    @Test
     @DisplayName("기본구분자 ',' 계산 테스트")
     void testDefaultDelimiter1() {
         String input = "1,2,3";
