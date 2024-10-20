@@ -40,6 +40,7 @@
           └── ExceptionUtil.java // Implement Static Method to check Runtime Exception
                 + checkParamsIsNotEmpty(String str, String delim, boolean custom) : void
                 + checkNextTargetIsLiteral(String str) : int
+                + checkStringHasRightNumOfTarget(String str, String delim);
         
 
 ```
@@ -133,5 +134,20 @@
     ㄴ 개인적으로 프리코스 자체가 많은 고민을 하게 해주고, 사람들과 소통하며 많이 배우는것 같다. 하지만 코드를 작성하면서 스프링 강의에 영향을 받는 것도 크다고 느꼈다.
         ㄴ 여전히 나는 스프링 강의와 학교 공부, 다양한 공부를 병행하면서 복합적으로 성장해 나가야겠다.
         
+        
+```
+### 2024.10.20 Sun
+``` 
+    
+    오늘의 목표 : "보이지 않는 위협"
+
+    ㄴ 예외 처리 관련 내용 수정
+        ㄴ 계산을 위한 데이터는 입력되었으나 "1,2,"와 같이 마지막에 데이터가 없어도 정상 작동되는 경우 즉, Delimiter의 개수와 계산 대상의 개수는 꼭 +1 차이가 나야한다.
+        ㄴ 사용하지 않는 기존 예외처리 함수 삭제
+
+
+    ✅ 구현 후 느낀점 / 추가 개선사항 
+    
+
         
 ```
