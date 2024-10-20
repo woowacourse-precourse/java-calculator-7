@@ -12,14 +12,21 @@ public class Converter {
         String separator = DEFAULT_SEPARATORS;
 
         if (inputValidator.isCustomPattern(input)) {
-            String customPattern = String.valueOf(input.charAt(2));
-            input = input.substring(5);
-
-            separator = Pattern.quote(customPattern); // 특수문자 처리
+            separator = getSeparator(input);
+            input = extractNumbers(input);
         }
 
         return Arrays.stream(input.split(separator))
                 .peek(inputValidator::isInvalidNumber)
                 .toArray(String[]::new);
+    }
+
+    private static String extractNumbers(String input) {
+        return input.substring(5);
+    }
+
+    private static String getSeparator(String input) {
+        String customPattern = String.valueOf(input.charAt(2));
+        return Pattern.quote(customPattern); // 특수문자 처리
     }
 }
