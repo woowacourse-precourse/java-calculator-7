@@ -1,18 +1,20 @@
 package calculator.service;
 
+import calculator.util.StringValidator;
+
 import java.util.HashSet;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 public class CalculatorService {
-    private final Set<String> separators = new HashSet<>();
+    private final Set<String> separators = new HashSet<>(Set.of(",", ":"));
 
     public int strCalculator(String input) {
-        String processedInput = customSplit(input);
-        return extractNumber(processedInput);
+        return extractNumber(customSplit(input));
     }
 
     /* 구분자 추출 과정 */
-    public String customSplit(String input) {
+    private String customSplit(String input) {
         if (input.startsWith("//")) {
             input = input.replace("\\n", "\n");
             int separatorIndex = input.indexOf("\n");
@@ -30,29 +32,25 @@ public class CalculatorService {
             input = input.substring(separatorIndex + 1);
         }
 
-        separators.add(",");
-        separators.add(":");
-
         return input;
     }
 
     /* 숫자 추출 과정 */
-    public int extractNumber(String input) {
+    private int extractNumber(String input) {
+        StringTokenizer st = new StringTokenizer(input, String.join("", separators));
+
         int sum = 0;
 
-        String[] numbers = input.split("[" + String.join("", separators) + "]");
+        while (st.hasMoreTokens()) {
+            String numberStr = st.nextToken();
 
-        for (String numberStr : numbers) {
-            numberStr = numberStr.trim();
-
-            if (!numberStr.isEmpty()) {
-                try {
-                    sum += Integer.parseInt(numberStr);
-                } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException();
-                }
+            if (!StringValidator.isNumeric(numberStr)) {
+                throw new IllegalArgumentException();
             }
+
+            sum += Integer.parseInt(numberStr);
         }
+
         return sum;
     }
 }

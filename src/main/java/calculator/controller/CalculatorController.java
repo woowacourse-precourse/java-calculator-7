@@ -12,9 +12,7 @@ public class CalculatorController {
     }
 
     public CalculatorResponse processInput(CalculatorRequest calculatorRequest) {
-        String input = calculatorRequest.input();
-
-        int sum = calculatorService.strCalculator(input);
+        int sum = calculatorService.strCalculator(calculatorRequest.input());
         return CalculatorResponse.from(sum);
     }
 }

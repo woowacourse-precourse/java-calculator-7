@@ -7,12 +7,11 @@ import calculator.service.CalculatorService;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
-public class CalculatorRun {
-    public static void run() {
-        InputView inputView = new InputView();
-        CalculatorController calculatorController = new CalculatorController(new CalculatorService());
+public class CalculatorRunner {
+    private static final CalculatorController calculatorController = new CalculatorController(new CalculatorService());
 
-        String input = inputView.input();
+    public static void run() {
+        String input = InputView.input();
 
         CalculatorResponse calculatorResponse = calculatorController.processInput(CalculatorRequest.from(input));
 

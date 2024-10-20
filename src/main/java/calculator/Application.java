@@ -1,9 +1,9 @@
 package calculator;
 
-import calculator.util.CalculatorRun;
+import calculator.util.CalculatorRunner;
 
 public class Application {
     public static void main(String[] args) {
-        CalculatorRun.run();
+        CalculatorRunner.run();
     }
 }
