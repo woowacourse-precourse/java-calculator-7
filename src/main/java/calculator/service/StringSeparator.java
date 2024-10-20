@@ -1,6 +1,8 @@
 package calculator.service;
 
 import calculator.domain.Calculator;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,7 +14,7 @@ public class StringSeparator {
         this.calculator = calculator;
     }
 
-    public void divideSeparator(String str) {
+    public void extractAndProcessSeparators(String str) {
         String customSeparator = null;
         String numbersPart = str;
 
@@ -28,16 +30,16 @@ public class StringSeparator {
                 throw new IllegalArgumentException("잘못된 입력입니다.");
             }
         }
-        parseAndCalculate(numbersPart, customSeparator);
+        parseAndCalculate(numbersPart);
     }
 
-    private void parseAndCalculate(String numbersPart, String customSeparator) {
-        String separators = ",|:";
-
-        if (customSeparator != null) {
-            separators += "|" + Pattern.quote(customSeparator);
+    private void parseAndCalculate(String numbersPart) {
+        List<String> escapedSeparators = new ArrayList<>();
+        for (String sep : calculator.getSeparators()) {
+            escapedSeparators.add(Pattern.quote(sep));
         }
 
+        String separators = String.join("|", escapedSeparators);
         String[] tokens = numbersPart.split(separators);
 
         for (String token : tokens) {
@@ -46,7 +48,7 @@ public class StringSeparator {
                     int number = Integer.parseInt(token);
                     calculator.addNumber(number);
                 } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
+                    throw new IllegalArgumentException("잘못된 입력입니다.");
                 }
             }
         }
