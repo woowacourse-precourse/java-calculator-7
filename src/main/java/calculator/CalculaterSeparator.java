@@ -20,7 +20,6 @@ public class CalculaterSeparator {
             if (delimiterEndIndex == -1) {
                 throw new IllegalArgumentException("\\n이 없습니다.");
             }
-
             String customDelimiterPart = input.substring(2, delimiterEndIndex);
 
             if (delimiters.contains(customDelimiterPart)) {
@@ -30,10 +29,8 @@ public class CalculaterSeparator {
             if (customDelimiterPart.length() > 1) {
                 throw new IllegalArgumentException("커스텀 구분자는 하나만 입력할 수 있습니다.");
             }
-
             delimiters.add(customDelimiterPart);
             remainingString = input.substring(delimiterEndIndex + 2);
-
             if (remainingString.contains("//")) {
                 throw new IllegalArgumentException("커스텀 구분자는 하나만 입력할 수 있습니다.");
             }
