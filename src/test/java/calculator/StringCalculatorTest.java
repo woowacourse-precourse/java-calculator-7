@@ -2,6 +2,8 @@ package calculator;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -34,5 +36,17 @@ class StringCalculatorTest {
         assertThat(calculator.removeHeaderFromInput("//;\\")).isEqualTo("//;\\");
         assertThat(calculator.removeHeaderFromInput("")).isEqualTo("");
         assertThat(calculator.removeHeaderFromInput("1//;\\n")).isEqualTo("1//;\\n");
+    }
+
+    @Test
+    void splitStringByDelimiters() {
+        StringCalculator calculator = new StringCalculator();
+
+        assertThat(calculator.splitStringByDelimiters("1,2;3", List.of(";", ","))).containsExactly("1", "2", "3");
+        assertThat(calculator.splitStringByDelimiters("1,2:3", List.of(";", ","))).containsExactly("1", "2:3");
+        assertThat(calculator.splitStringByDelimiters("", List.of(";", ","))).containsExactly();
+        assertThat(calculator.splitStringByDelimiters("2;;3", List.of(";", ","))).containsExactly("2", "", "3");
+        assertThat(calculator.splitStringByDelimiters("133221333123111", List.of(";", ","))).containsExactly("133221333123111");
+        assertThat(calculator.splitStringByDelimiters("1\\2n3", List.of("\\", "n"))).containsExactly("1", "2", "3");
     }
 }
