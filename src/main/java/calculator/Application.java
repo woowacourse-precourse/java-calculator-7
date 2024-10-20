@@ -29,6 +29,9 @@ public class Application {
             String[] nums = input.split(String.format(",|:|%c", custom));
 
             for (String num : nums) {
+                if (Integer.parseInt(num) < 0) {
+                    throw new IllegalArgumentException("음수 예외 발생");
+                }
                 sum += Integer.parseInt(num);
             }
         } catch (Exception e) {
