@@ -2,6 +2,8 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.NoSuchElementException;
+
 import static utility.Constant.INPUT_MESSAGE;
 import static utility.Constant.OUTPUT_MESSAGE;
 
@@ -13,24 +15,31 @@ public class CalculatorProcess {
 
     // 문자열 입력받기
     static private void input(){
-        System.out.println(INPUT_MESSAGE);
-        String inputString = Console.readLine();
-        checkInput(inputString);
+        try{
+            System.out.println(INPUT_MESSAGE);
+            String inputString = Console.readLine();
+            if(inputString.trim().isEmpty()){
+                printAnswer(0);
+            }
+            else{
+                checkInput(inputString);
+            }
+        }catch (NoSuchElementException e){  // 입력 문자열이 ""일 경우, 0 리턴해주기
+            printAnswer(0);
+        }
     }
 
     // 입력 받은 문자열 종류 구분하기
     static private void checkInput(String inputString){
         int idx = inputString.indexOf("\\n");
 
-        if('0'<=inputString.charAt(0) && inputString.charAt(0) <='9'){
+        if ('0' <= inputString.charAt(0) && inputString.charAt(0) <= '9') {
             // 쉼표(,) 또는 콜론(:)을 구분자로 가지는 문자열
             validateInput(inputString);
-        }
-        else if("//".equals(inputString.substring(0,2)) && idx!=-1){
+        } else if ("//".equals(inputString.substring(0, 2)) && idx != -1) {
             // 커스텀 구분자를 가지는 문자열
             modifyDelimiter(inputString);
-        }
-        else{
+        } else {
             // 유효하지 않은 문자열 (문자열이 숫자로 시작하지 않고, "//"로 시작하지 않는 경우)
             throw new IllegalArgumentException();
         }
