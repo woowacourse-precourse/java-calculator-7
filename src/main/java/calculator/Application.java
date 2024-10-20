@@ -8,7 +8,7 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
-        String determine = "[,:]";
+        String determine = ",|:";
 
         if (input.startsWith("//")) { // 커스텀 구분자 선언이 있을 경우
             int endIndex = input.indexOf("\\n");
@@ -18,7 +18,7 @@ public class Application {
                 if(customDetermine.length() > 1){
                     throw new IllegalArgumentException();
                 }
-                determine = "[,:" + customDetermine + "]";
+                determine += "|" + customDetermine;
                 input = input.substring(endIndex + 2);
 
                 if(!input.contains(customDetermine)){ // 커스텀 구분자로 구분되지 않을 경우
