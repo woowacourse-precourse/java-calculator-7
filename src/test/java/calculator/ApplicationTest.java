@@ -19,7 +19,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 구분자만_입력된_경우() {
         assertSimpleTest(() -> {
-            run("//;\\n;");
+            run("//;\\n;;");
             assertThat(output()).contains("결과 : 0");
         });
     }

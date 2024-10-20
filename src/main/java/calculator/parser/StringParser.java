@@ -18,14 +18,16 @@ public class StringParser {
     public String[] parseInput(String input) {
         String[] strings = input.split(getSeparator(input));
 
-        if(strings[0].equals("//")){
-            int index = strings[1].indexOf("\\n");
-            strings[1] = input.substring(index + 1);
+        if(strings.length != 0){
+            if(strings[0].equals("//")){
+                int index = strings[1].indexOf("\\n");
+                strings[1] = strings[1].substring(index + 2);
+                System.out.println(strings[1]);
+            }
         }
 
         validateChar(strings);
         return strings;
     }
-
 
 }

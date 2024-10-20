@@ -12,12 +12,12 @@ public class Validator {
 
     public static void validateChar(String[] strings) {
         for(String s : strings) {
-            if (!s.trim().isEmpty()) {
+            if (!s.isEmpty() && !s.equals("//")) {
                 try {
                     int number = Integer.parseInt(s);
                     validateNegative(number);
                 } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("숫자가 아닌 형식이 있습니다: " + s);
+                    throw new IllegalArgumentException("숫자가 아닌 형식이 있습니다" + s);
                 }
             }
         }
@@ -25,7 +25,7 @@ public class Validator {
 
     public static void validateNegative(int number) {
         if (number < 0) {
-            throw new IllegalArgumentException("음수가 있습니다: " + number);
+            throw new IllegalArgumentException("음수가 있습니다");
         }
     }
 }
