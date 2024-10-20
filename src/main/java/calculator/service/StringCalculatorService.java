@@ -1,6 +1,7 @@
 package calculator.service;
 
 import calculator.constant.CalculatorConstants;
+import calculator.constant.ExceptionMessageConstants;
 import calculator.validator.InputValidator;
 import java.util.List;
 
@@ -20,7 +21,8 @@ public class StringCalculatorService {
 
         if (input.length() > CalculatorConstants.MAX_INPUT_LENGTH) {
             throw new IllegalArgumentException(
-                    "입력 문자열이 너무 깁니다. 최대 " + CalculatorConstants.MAX_INPUT_LENGTH + "자까지 입력 가능합니다.");
+                    String.format(ExceptionMessageConstants.INPUT_TOO_LONG,
+                            CalculatorConstants.MAX_INPUT_LENGTH)); // 상수 사용
         }
 
         inputValidator.validate(input);
@@ -40,10 +42,12 @@ public class StringCalculatorService {
 
     private void validateNumberRange(long num) {
         if (num < 0) {
-            throw new IllegalArgumentException("음수는 허용되지 않습니다: " + num);
+            throw new IllegalArgumentException(
+                    String.format(ExceptionMessageConstants.NEGATIVE_NOT_ALLOWED, num)); // 상수 사용
         }
         if (num > CalculatorConstants.MAX_NUMBER) {
-            throw new IllegalArgumentException("숫자가 너무 큽니다. 최대 " + CalculatorConstants.MAX_NUMBER + "까지 허용됩니다.");
+            throw new IllegalArgumentException(
+                    String.format(ExceptionMessageConstants.NUMBER_TOO_LARGE, CalculatorConstants.MAX_NUMBER)); // 상수 사용
         }
     }
 }

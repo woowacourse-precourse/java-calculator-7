@@ -1,6 +1,7 @@
 package calculator.service;
 
 import calculator.constant.CalculatorConstants;
+import calculator.constant.ExceptionMessageConstants;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -16,7 +17,7 @@ public class StringSplitter {
     private List<String> splitWithCustomDelimiter(String input) {
         int delimiterEnd = input.indexOf(CalculatorConstants.CUSTOM_DELIMITER_SUFFIX);
         if (delimiterEnd == -1) {
-            throw new IllegalArgumentException("올바른 형식의 커스텀 구분자를 입력해 주세요.");
+            throw new IllegalArgumentException(ExceptionMessageConstants.INVALID_CUSTOM_DELIMITER);
         }
 
         String customDelimiter = input.substring(CalculatorConstants.CUSTOM_DELIMITER_PREFIX.length(), delimiterEnd);
