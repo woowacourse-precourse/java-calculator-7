@@ -6,6 +6,16 @@ public class ParseNumber {
             return 0;
         }
 
-        return Integer.parseInt(number);
+        try {
+            int parsedNumber = Integer.parseInt(number);
+
+            if (parsedNumber < 0) {
+                throw new IllegalArgumentException("문자열에 음수값이 있습니다.");
+            }
+
+            return parsedNumber;
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(e.getMessage());
+        }
     }
 }
