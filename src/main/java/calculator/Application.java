@@ -25,7 +25,14 @@ public class Application {
                 userInput = userInput.substring(userInput.indexOf("\\n") + "\\n".length());
             }
 
-            // TODO: loop thorough userDelimiterInput by char
+            for (char delimiter : userDelimiterInput.toCharArray()) {
+                // banned delimiters
+                if (delimiter >= '0' && delimiter <= '9') {
+                    throw new IllegalArgumentException("숫자를 구분자로 사용할 수 없습니다.");
+                }
+
+                delimiterRegex += "|" + Pattern.quote(Character.toString(delimiter));
+            }
         }
 
         int sumResult = 0;
