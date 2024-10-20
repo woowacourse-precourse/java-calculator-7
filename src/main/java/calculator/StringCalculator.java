@@ -5,13 +5,25 @@ import calculator.delimiterStrategy.DelimiterStrategy;
 import java.util.List;
 
 public class StringCalculator {
+    private final String startCustomPattern;
+    private final String endCustomPattern;
     private CalculateStrategy calculateStrategy;
     private DelimiterStrategy delimiterStrategy;
     private calculator.numberStrategy.NumberStrategy numberStrategy;
     private final String userInput;
 
     public StringCalculator(String userInput) {
+        this.startCustomPattern = "//";
+        this.endCustomPattern = "\n";
         this.userInput = userInput;
+    }
+
+    public String getStartCustomPattern() {
+        return startCustomPattern;
+    }
+
+    public String getEndCustomPattern() {
+        return endCustomPattern;
     }
 
     public void setCalculateStrategy(CalculateStrategy calculateStrategy) {
