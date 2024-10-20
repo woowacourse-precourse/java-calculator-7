@@ -5,7 +5,6 @@ import camp.nextstep.edu.missionutils.Console;
 public class Input {
 
     private static String firstInput;
-    private static String secondInput;
 
     public void readFirstInput() {
         firstInput = Console.readLine();

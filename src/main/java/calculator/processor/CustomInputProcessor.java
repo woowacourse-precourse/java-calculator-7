@@ -1,4 +1,4 @@
-package calculator.domain.input;
+package calculator.processor;
 
 import calculator.domain.Separator;
 import calculator.validate.InputValidator;

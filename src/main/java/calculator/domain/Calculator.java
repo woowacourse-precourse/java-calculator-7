@@ -1,8 +1,8 @@
 package calculator.domain;
 
-import calculator.domain.input.CustomInputProcessor;
-import calculator.domain.input.DefaultInputProcessor;
-import calculator.domain.input.InputProcessor;
+import calculator.processor.CustomInputProcessor;
+import calculator.processor.DefaultInputProcessor;
+import calculator.processor.InputProcessor;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -45,6 +45,4 @@ public class Calculator {
         inputView.showStartMessage();
         input.readFirstInput();
     }
-
-
 }
