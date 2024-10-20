@@ -14,5 +14,13 @@ public class Application {
         convertedStr = inputStr.replace(":",",");
         StringBuilder entireStr = new StringBuilder(convertedStr);
 
+        //커스텀 구분자 여부 확인 및 적용
+        int strLength = convertedStr.length();
+        if (strLength>=5){
+            if(convertedStr.startsWith("//") && (convertedStr.substring(3, 5).equals("\\n"))){
+                entireStr = new StringBuilder(convertedStr.replace(convertedStr.charAt(2), ','));
+                entireStr = new StringBuilder(entireStr.substring(5));
+            }
+        }
     }
 }
