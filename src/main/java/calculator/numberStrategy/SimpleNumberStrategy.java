@@ -8,6 +8,8 @@ public class SimpleNumberStrategy implements NumberStrategy {
 
     @Override
     public List<Integer> extractNumber(String userInput, List<String> delimiter) {
+        String regex = String.join("|", delimiter);
+        String[] splitResults = userInput.split(regex, -1);
         return null;
     }
 }
