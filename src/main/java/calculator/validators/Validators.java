@@ -5,9 +5,9 @@ import java.util.List;
 
 public class Validators {
 
-    public boolean validateDelimiterDeclaration(String s) {
-        if (s.startsWith("//")) {
-            if (!s.contains("\\n")) {
+    public boolean validateDelimiterDeclaration(String inputString) {
+        if (inputString.startsWith("//")) {
+            if (!inputString.contains("\\n")) {
                 throw new IllegalArgumentException();
             }
             return true;
@@ -15,25 +15,25 @@ public class Validators {
         return false;
     }
 
-    public void validateAllowedCharacters(List<Character> cha, String s) {
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (!Character.isDigit(c) && !cha.contains(c)) {
+    public void validateAllowedCharacters(List<Character> delimiters, String inputString) {
+        for (int i = 0; i < inputString.length(); i++) {
+            char delimiter = inputString.charAt(i);
+            if (!Character.isDigit(delimiter) && !delimiters.contains(delimiter)) {
                 throw new IllegalArgumentException();
             }
         }
     }
 
-    public void validateDelimiterSurroundings(Calculator calculator, String s) {
-        String[] split = s.split("[" + calculator.getDelimitersAsString() + "]");
+    public void validateDelimiterSurroundings(Calculator calculator, String inputString) {
+        String[] sections = inputString.split("[" + calculator.getDelimitersAsString() + "]");
 
-        for (int i = 0; i < split.length; i++) {
-            String part = split[i];
+        for (int i = 0; i < sections.length; i++) {
+            String section = sections[i];
 
-            if (part.isEmpty()) {
+            if (section.isEmpty()) {
                 throw new IllegalArgumentException();
             }
-            if (!isNumber(part)) {
+            if (!isNumber(section)) {
                 throw new IllegalArgumentException();
             }
         }
@@ -41,9 +41,9 @@ public class Validators {
 
     }
 
-    private boolean isNumber(String part) {
+    private boolean isNumber(String section) {
         try {
-            Integer.parseInt(part);
+            Integer.parseInt(section);
             return true;
         } catch (NumberFormatException e) {
             return false;
