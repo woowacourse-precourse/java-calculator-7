@@ -1,5 +1,7 @@
 package calculator.domain;
 
+import calculator.domain.vo.CustomValues;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,11 +13,11 @@ public class StringCalculator {
 
     public static final String BEGIN_DATA = "//";
 
-    public String extractCustomValue(String value) {
+    public CustomValues extractCustomValue(String value) {
         if (value.startsWith(BEGIN_DATA)) {
-            return value.substring(2, 3);
+            return new CustomValues(value.substring(2,3));
         }
-        return DISTINGUISHED;
+        return new CustomValues(DISTINGUISHED);
     }
 
     public String removeValue(String value) {

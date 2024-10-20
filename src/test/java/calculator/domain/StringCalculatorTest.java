@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import calculator.domain.vo.CustomValues;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -15,23 +16,21 @@ public class StringCalculatorTest {
         StringCalculator stringCalculator = new StringCalculator();
         String value = "//;\\n1;2;3";
         String basicValue = "1,2;3";
-        String basicExpectValue = "[,;]";
-
+        CustomValues basicExpectValue = new CustomValues("[,;]");
 
         // when
-        String result = stringCalculator.extractCustomValue(value);
-        String basicResult = stringCalculator.extractCustomValue(basicValue);
+        CustomValues result = stringCalculator.extractCustomValue(value);
+        CustomValues basicResult = stringCalculator.extractCustomValue(basicValue);
 
-        String expect = ";";
-        String incorrectExpect = ",";
+        CustomValues expect = new CustomValues(";");
+        CustomValues incorrectExpect = new CustomValues(",");
 
         // then
         Assertions.assertAll(
-                () -> Assertions.assertEquals(result, expect),
-                () -> Assertions.assertEquals(basicResult, basicExpectValue),
-                () -> Assertions.assertNotEquals(incorrectExpect, result)
+                () -> Assertions.assertEquals(expect.value(), result.value()),
+                () -> Assertions.assertEquals(basicExpectValue.value(), basicResult.value()),
+                () -> Assertions.assertNotEquals(incorrectExpect.value(), result.value())
         );
-
     }
 
     @Test
@@ -46,9 +45,7 @@ public class StringCalculatorTest {
         String expect = "1;2;3";
 
         // then
-
-        Assertions.assertEquals(result, expect);
-
+        Assertions.assertEquals(expect, result);
     }
 
     @Test
@@ -58,20 +55,19 @@ public class StringCalculatorTest {
         StringCalculator stringCalculator = new StringCalculator();
         String value = "1;2;3";
         String basicValue = "1,2;3";
-        String customValue = ";";
-        String basicCustomValue = "[,;]";
+        CustomValues customValue = new CustomValues(";");
+        CustomValues basicCustomValue = new CustomValues("[,;]");
 
         // when
-        String[] result = stringCalculator.createNewValue(value, customValue);
-        String[] basicResult = stringCalculator.createNewValue(basicValue, basicCustomValue);
+        String[] result = stringCalculator.createNewValue(value, customValue.value());
+        String[] basicResult = stringCalculator.createNewValue(basicValue, basicCustomValue.value());
         String[] expect = {"1", "2", "3"};
 
         // then
         Assertions.assertAll(
-                () -> Assertions.assertArrayEquals(basicResult, expect),
-                () -> Assertions.assertArrayEquals(result, expect)
+                () -> Assertions.assertArrayEquals(expect, result),
+                () -> Assertions.assertArrayEquals(expect, basicResult)
         );
-
     }
 
     @Test
@@ -86,8 +82,7 @@ public class StringCalculatorTest {
         List<Integer> expect = Arrays.asList(1, 2, 3);
 
         // then
-        Assertions.assertEquals(result, expect);
-
+        Assertions.assertEquals(expect, result);
     }
 
     @Test
@@ -104,7 +99,7 @@ public class StringCalculatorTest {
 
         // then
         Assertions.assertAll(
-                () -> Assertions.assertEquals(result, expect),
+                () -> Assertions.assertEquals(expect, result),
                 () -> Assertions.assertNotEquals(incorrectExpect, result)
         );
     }
