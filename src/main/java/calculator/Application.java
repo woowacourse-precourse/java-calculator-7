@@ -1,6 +1,8 @@
 package calculator;
 
 import calculator.controller.CalculatorController;
+import calculator.model.CustomStringParser;
+import calculator.model.CustomStringParserImpl;
 import calculator.model.DelimiterManagerImpl;
 import calculator.view.CalculatorInputView;
 import calculator.view.CalculatorOutputView;
@@ -11,7 +13,9 @@ public class Application {
         DelimiterManagerImpl delimiterManagerImpl = new DelimiterManagerImpl();
         delimiterManagerImpl.init();
 
-        CalculatorController calculatorController = new CalculatorController(new CalculatorOutputView());
+        CustomStringParser customStringParser = new CustomStringParserImpl(delimiterManagerImpl);
+        CalculatorController calculatorController = new CalculatorController(customStringParser,
+                new CalculatorOutputView());
         CalculatorInputView calculatorInputView = new CalculatorInputView();
 
         String inputStr = calculatorInputView.inputExpression();
