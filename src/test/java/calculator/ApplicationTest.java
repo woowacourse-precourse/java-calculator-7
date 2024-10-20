@@ -25,6 +25,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 문자_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("asf"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
     void 공백_문자열_테스트() {
         assertSimpleTest(() -> {
             run("             ");
