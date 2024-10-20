@@ -31,7 +31,7 @@ public class NumbersTest {
         assertThat(numbers.sum()).isEqualTo(correctResult);
     }
 
-    @DisplayName("숫자는 문자열 배열을 변환할 때 문자열에 문자가 포함되어 있으면 예외를 반환한다")
+    @DisplayName("숫자는 문자열 배열을 변환할 때 문자열에 문자가 포함되어있거나 숫자 사이에 공백이 있으면 예외를 반환한다")
     @ParameterizedTest
     @MethodSource("stringIncludeCharacter")
     void isNumber(List<String> invalidData) {
@@ -68,7 +68,9 @@ public class NumbersTest {
                 Arguments.of(Arrays.asList("1", "2", "5f5")),
                 Arguments.of(Arrays.asList("1", "2", "55", "1!")),
                 Arguments.of(Arrays.asList("!", "2", "55", "1")),
-                Arguments.of(Arrays.asList("z", "55", "1"))
+                Arguments.of(Arrays.asList("z", "55", "1")),
+                Arguments.of(Arrays.asList("1", "2 3", "4")),
+                Arguments.of(Arrays.asList("1", "2", "3 4 5"))
         );
     }
 

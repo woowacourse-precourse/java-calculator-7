@@ -45,20 +45,13 @@ class NumberSeparatorTest {
                 .hasMessageContaining(ErrorMessage.NUMBER_SEPARATOR_CUSTOM_DELIMITER_MUST_NOT_DEFAULT.getMessage());
     }
 
-    // TODO: 에러 메세지 및 검증 추가
-    @DisplayName("숫자 사이의 공백은 허용하지 않는다")
-    @ParameterizedTest
-    @ValueSource(strings = {"1 2:3,4", "34\t2:2"})
-    void isNotEmpty(String invalidData) {
-        assertThrows(IllegalArgumentException.class, () -> NumberSeparator.from(invalidData).separate());
-    }
-
-    // TODO: 에러 메세지 및 검증 추가
     @DisplayName("분리기의 커스텀 구분자는 입력 문자열 맨 앞에 있어야 한다")
     @ParameterizedTest
     @ValueSource(strings = {"1:2!3,4//!\\n", "1:2//!\\n!3", "1//!\\n!3!4"})
     void isForefront(String invalidData) {
-        assertThrows(IllegalArgumentException.class, () -> NumberSeparator.from(invalidData).separate());
+        assertThatThrownBy(() -> NumberSeparator.from(invalidData))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ErrorMessage.NUMBER_SEPARATOR_CUSTOM_DELIMITER_POSITION_FOREFRONT.getMessage());
     }
 
     // TODO: 에러 메세지 및 검증 추가
