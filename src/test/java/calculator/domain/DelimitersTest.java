@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DelimitersTest {
@@ -15,10 +16,10 @@ class DelimitersTest {
         Delimiters delimiters = new Delimiters();
 
         // when
-        List<Character> defaultDelimiters = delimiters.getDelimiters() ;
+        List<String> defaultDelimiters = delimiters.getDelimiters();
 
         // then
-        assertThat(defaultDelimiters).isEqualTo(Arrays.asList(',',':'));
+        assertThat(defaultDelimiters).isEqualTo(Arrays.asList(",",":"));
     }
 
     @Test
@@ -26,12 +27,22 @@ class DelimitersTest {
         // given
         Delimiters delimiters = new Delimiters();
         String input = "//;\\n1;2;3";
+
         // when
-        char customDelimiter = delimiters.findCustomDelimiter(input) ;
+        String customDelimiter = delimiters.findCustomDelimiter(input) ;
 
         // then
-        assertThat(customDelimiter).isEqualTo(';');
+        assertThat(customDelimiter).isEqualTo(";");
     }
 
+    @Test
+    void 구분자는_1글자여야_한다(){
+        // given
+        Delimiters delimiters = new Delimiters();
+        String input = "//;;;;\\n1;2;3";
 
+        assertThatThrownBy(() -> delimiters.findCustomDelimiter(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("구분자는 길이가 1인 문자여야 합니다.");
+    }
 }
