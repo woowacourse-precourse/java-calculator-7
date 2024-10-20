@@ -21,13 +21,7 @@ public class StringCalculator {
 
 	public void run() {
 		String inputString = getInput();
-		CustomDelimiterValidator customDelimiterValidator = new CustomDelimiterValidator();
-		StringValidator stringValidator = new StringValidator();
-		if (customDelimiterValidator.hasCustomDelimiter(inputString)) {
-			stringValidator.addCustomDelimiter(customDelimiterValidator.getCustomDelimiter(inputString));
-			inputString = customDelimiterValidator.removeCustomDelimiter(inputString);
-		}
-		stringValidator.validate(inputString);
+		inputString = validateInput(inputString);
 		NumberExtractor numberExtractor = new NumberExtractor();
 		List<Integer> numbers = numberExtractor.extractNumbers(inputString);
 		SumCalculator sumCalculator = new SumCalculator();
@@ -38,5 +32,16 @@ public class StringCalculator {
 	private String getInput() {
 		output.printInitialMessage();
 		return input.getString();
+	}
+
+	private String validateInput(String inputString) {
+		CustomDelimiterValidator customDelimiterValidator = new CustomDelimiterValidator();
+		StringValidator stringValidator = new StringValidator();
+		if (customDelimiterValidator.hasCustomDelimiter(inputString)) {
+			stringValidator.addCustomDelimiter(customDelimiterValidator.getCustomDelimiter(inputString));
+			inputString = customDelimiterValidator.removeCustomDelimiter(inputString);
+		}
+		stringValidator.validate(inputString);
+		return inputString;
 	}
 }
