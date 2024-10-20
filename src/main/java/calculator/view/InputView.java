@@ -6,7 +6,7 @@ import camp.nextstep.edu.missionutils.Console;
 import static calculator.util.Constants.*;
 
 public class InputView {
-    public String getInput(){
+    public static String getInput(){
         System.out.println(INPUT_MESSAGE);
         return Console.readLine();
     }
