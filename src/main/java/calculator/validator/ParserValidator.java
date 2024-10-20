@@ -1,6 +1,12 @@
 package calculator.validator;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class ParserValidator {
+
+    private Set<String> separatorSet = new HashSet<>();
+
     public boolean isCustomSeparator(int inputSeparatorArraySize) {
         if (inputSeparatorArraySize < 2) {
             return false;
@@ -24,9 +30,26 @@ public class ParserValidator {
         return false;
     }
 
-    // TODO: 구분자가 중복되어 입력되었는지 확인한다.
+    public boolean isValidSeparator(String separators) {
+        for (int inputSeparatorListIndex = 0; inputSeparatorListIndex < separators.length();
+             inputSeparatorListIndex++) {
+            char separator = separators.charAt(inputSeparatorListIndex);
+            int separatorASCIIIndex = (int) separator;
+            if (isSeparatorNumber(separatorASCIIIndex)) {
+                return false;
+            }
+            if (isDuplicatedSeparator(String.valueOf(separator))) {
+                return false;
+            }
+            separatorSet.add(String.valueOf(separator));
+        }
+        return true;
+    }
 
-
-    // TODO: 구분자가 유효한지 확인한다.
-
+    private boolean isDuplicatedSeparator(String separator) {
+        if (separatorSet.contains(separator)) {
+            throw new IllegalArgumentException("구분자가 중복되어 입력되었습니다.");
+        }
+        return false;
+    }
 }
