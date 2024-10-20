@@ -45,6 +45,10 @@ public class Application {
         try {
             // 문자열 배열에 저장된 각 숫자들을 int 타입으로 변환하여 누적 합 연산.
             for (String number : numbers) {
+                // 양수가 아닌 경우 예외 발생.
+                if (Integer.parseInt(number) <= 0) {
+                    throw new IllegalArgumentException();
+                }
                 sum += Integer.parseInt(number);
             }
         } catch (NumberFormatException e) {
