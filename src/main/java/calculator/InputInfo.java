@@ -15,7 +15,7 @@ public class InputInfo {
             format = "basic";
         }
 
-        if(input.length() > 5 && input.substring(0,2).equals("//") && input.substring(3,5).equals("\\n")) {
+        if(input.length() >= 5 && input.substring(0,2).equals("//") && input.substring(3,5).equals("\\n")) {
             /* custom format */
             separator = input.substring(2,3);
             format = "custom";
@@ -34,6 +34,8 @@ public class InputInfo {
          * 알맞은 구분자와 숫자 이외의 문자가 들어온 경우
          * 양의 정수가 아닌 수가 들어오는 경우
          */
+
+        if(str.length() == 0) return;
 
         if(!str.matches("[0-9" + separator + "]+")) {
             throw new IllegalArgumentException("구분자와 숫자만 입력할 수 있습니다.");

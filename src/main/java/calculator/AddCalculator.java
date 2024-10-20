@@ -20,7 +20,8 @@ public class AddCalculator {
         String[] tokens = str.split("[" + separator + "]");
 
         for(String token : tokens) {
-            numbers.add(Integer.parseInt(token));
+            if(token.equals("")) numbers.add(0);
+            else numbers.add(Integer.parseInt(token));
         }
     }
 
