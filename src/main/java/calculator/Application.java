@@ -24,11 +24,9 @@ public class Application {
         stringCalculator.setNumberStrategy(new SimpleNumberStrategy());
         configureDelimiterStrategy(userInput);
         configureCalculateStrategy(userInput);
-        
-        try {
-            System.out.println(outputPhrase + stringCalculator.operate());
-        } catch (IllegalArgumentException e) {
-        }
+
+        System.out.println(outputPhrase + stringCalculator.operate());
+
     }
 
     private static boolean isCustomDelimiter(String userInput) {
