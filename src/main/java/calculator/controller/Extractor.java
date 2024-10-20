@@ -2,7 +2,7 @@ package calculator.controller;
 
 import static calculator.constants.Regex.CUSTOM_DELIMITER_PATTERN;
 import static calculator.constants.Regex.DELIMITER;
-import static calculator.validate.Validator.validateMatcher;
+import static calculator.validate.Validator.validateMatchPattern;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,7 +31,7 @@ public class Extractor {
     private static Matcher findGroupByRegex(String input) {
         Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_PATTERN);
         Matcher matcher = pattern.matcher(input);
-        validateMatcher(matcher);
+        validateMatchPattern(matcher);
         return matcher;
     }
 }

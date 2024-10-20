@@ -19,7 +19,7 @@ public class Validator {
         }
     }
 
-    public static void validateMatcher(Matcher matcher) {
+    public static void validateMatchPattern(Matcher matcher) {
         if (!matcher.find()) {
             throw new IllegalArgumentException(ErrorMessage.MATCHER_NOT_FOUND);
         }
