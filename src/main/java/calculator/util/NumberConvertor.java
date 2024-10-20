@@ -3,8 +3,10 @@ package calculator.util;
 import calculator.domain.Delimiter;
 import calculator.validator.DelimiterValidator;
 import calculator.validator.NumberValidator;
+import calculator.global.exception.ErrorMessage;
 
 import java.util.Arrays;
+
 
 public class NumberConvertor {
 
@@ -25,8 +27,12 @@ public class NumberConvertor {
 
     private static int parseAndValidate(String str) {
         DelimiterValidator.validateIncludeDelimiter(str);
-        int number = Integer.parseInt(str);
-        NumberValidator.validatePositiveNumber(number);
-        return number;
+        try {
+            int number = Integer.parseInt(str);
+            NumberValidator.validatePositiveNumber(number);
+            return number;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_STRING_FORMAT_ERROR.getMessage());
+        }
     }
 }
