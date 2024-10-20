@@ -1,15 +1,12 @@
 package calculator.service;
 
-import calculator.validator.CalculatorValidator;
+import calculator.service.validator.Validator;
 
 public class CalculatorService {
-    private final CalculatorValidator calculatorValidator;
+    private final Validator validator = new Validator();
     private String inputString;
     private String customSeparator;
 
-    public CalculatorService() {
-        this.calculatorValidator = new CalculatorValidator();
-    }
 
     /**
      * 덧셈 로직을 순차적으로 진행한다.
@@ -18,7 +15,7 @@ public class CalculatorService {
         this.inputString = inputString;
         boolean hasCustomSeparator = checkCustomSeparator();
         String[] separatedString = separate(hasCustomSeparator);
-        calculatorValidator.hasNaN(separatedString);
+        validator.hasNaN(separatedString);
         return sumSeparatedStringArr(separatedString);
     }
 

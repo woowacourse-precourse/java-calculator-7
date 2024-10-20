@@ -1,8 +1,8 @@
-package calculator.validator;
+package calculator.service.validator;
 
 import java.util.Arrays;
 
-public class CalculatorValidator {
+public class Validator {
 
     /**
      * 숫자가 아닌 문자열이 있는지 확인한다. 만약 있다면 IllegalArgumentException 으로 처리한다.
