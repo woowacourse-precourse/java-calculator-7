@@ -23,6 +23,16 @@ public class Application {
         }
     }
 
+    public static String[] splitByDelimiter(String content, String delimiter) {
+        if (content == null || content.isEmpty()) {
+            return new String[]{"0"};
+        }
+
+        String splitPattern = "[" + delimiter + ",:]";
+
+        return content.split(splitPattern);
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter your input");
