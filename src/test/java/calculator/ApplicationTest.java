@@ -17,10 +17,26 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자_사용2(){
+    assertSimpleTest(() -> {
+        run("//@#$%\\n12@3456#789$1234567%8");
+        assertThat(output()).contains("결과 : 1238832");
+    });
+}
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트2() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//@#-%\\n12@3456#789$1234567%8"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
