@@ -15,7 +15,7 @@ public class Delimiter {
     public Delimiter(String operand){
         initDelimeter();
         setDelimiter(operand);
-        validateDelimiter(operand);
+        validateDelimiter();
     }
 
     private void initDelimeter(){
@@ -23,33 +23,17 @@ public class Delimiter {
         delimiter.add(':');
     }
 
-    private void validateDelimiter(String operand){
-        Pattern pattern = Pattern.compile("//(.*)");
-        Matcher matcher = pattern.matcher(operand);
-
-        // 패턴에 맞지 않으면 예외를 던짐
-        if (!matcher.matches()) {
-            throw new IllegalArgumentException();
-        }
-
-        // 구분자에 숫자가 포함되었는지 검사
-        String delimiters = matcher.group(1);  // 구분자 그룹을 추출
-        for (char delimiter : delimiters.toCharArray()) {
-            if (Character.isDigit(delimiter)) {
+    private void validateDelimiter(){
+        for (char delimiterChar : delimiter) {
+            if (Character.isDigit(delimiterChar)) {
                 throw new IllegalArgumentException();
             }
         }
     }
 
     private void setDelimiter(String customDelimeters) {
-        Pattern pattern = Pattern.compile("//(.*)");
-        Matcher matcher = pattern.matcher(customDelimeters);
-
-        if (matcher.find()) {
-            String customDelimiters = matcher.group(1);  // 커스텀 구분자 추출
-            for (char customDelimiter : customDelimiters.toCharArray()) {
-                delimiter.add(customDelimiter);  // 커스텀 구분자 추가
-            }
+        for (char customDelimiter : customDelimeters.toCharArray()) {
+            delimiter.add(customDelimiter);  // 커스텀 구분자 추가
         }
     }
 

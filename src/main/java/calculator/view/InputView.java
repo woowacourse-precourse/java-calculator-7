@@ -8,13 +8,8 @@ import java.util.regex.Pattern;
 
 public class InputView {
 
-    public List<String> getOperand(){
-        List<String> inputs = new ArrayList<>();
-        inputs.add(Console.readLine());
+    public String getOperand(){
 
-        if(!Pattern.matches("^\\d.*", inputs.get(0)) && !inputs.get(0).isEmpty()) {
-            inputs.add(Console.readLine());
-        }
-        return inputs;
+        return Console.readLine();
     }
 }

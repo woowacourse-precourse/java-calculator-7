@@ -23,11 +23,7 @@ public class CalculatorController {
 
     public Calculator getCalculator(){
         outputView.printGetOperand();
-        List<String> inputs = inputView.getOperand();
-        if(inputs.size()==1){
-            return new Calculator(inputs.get(0));
-        }
-        return new Calculator(inputs.get(0), inputs.get(1));
+        return new Calculator(inputView.getOperand());
     }
 
     public void calculate(Calculator calculator){
