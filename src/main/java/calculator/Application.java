@@ -19,9 +19,13 @@ public class Application {
 
         if (input.startsWith("//")) {
             int newlineIndex = input.indexOf("\\n"); // '\n'의 위치 확인
-            String customDelimiter = input.substring(2, newlineIndex).trim(); // 커스텀 구분자 추출
-            delimiters.add(customDelimiter); // 커스텀 구분자 리스트에 추가
-            input = input.substring(newlineIndex + 2); // 커스텀 구분자 부분 제거
+            if (newlineIndex != -1) { // '\n'이 있는 경우
+                String customDelimiter = input.substring(2, newlineIndex).trim(); // 커스텀 구분자 추출
+                delimiters.add(customDelimiter); // 커스텀 구분자 리스트에 추가
+                input = input.substring(newlineIndex + 2); // 커스텀 구분자 부분 제거
+            } else {
+                throw new IllegalArgumentException("Invalid input: missing newline after custom delimiter.");
+            }
         }
 
         StringBuilder regexBuilder = new StringBuilder();
@@ -34,8 +38,15 @@ public class Application {
 
         int sum = 0;
         for (String num : splitNums) {
-            int number = Integer.parseInt(num);
-            sum += number;
+            try {
+                int number = Integer.parseInt(num);
+                if (number < 0) {
+                    throw new IllegalArgumentException("Negative numbers are not allowed");
+                }
+                sum += number;
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid input: invalid number.");
+            }
         }
         System.out.printf("결과 : %d%n", sum);
     }
