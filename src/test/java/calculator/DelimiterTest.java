@@ -31,4 +31,12 @@ public class DelimiterTest {
         Assertions.assertThat(delimiter.splitWithCustomDelimiter("//;\n1;2;3")).containsExactly("1", "2", "3");
     }
 
+    @Test
+    @DisplayName("커스텀 구분자와 기본구분자는 동시에 사용할 수 있어야 한다")
+    void 커스텀_기본_구분자_둘다_분리() {
+        Delimiter delimiter = new Delimiter();
+
+        Assertions.assertThat(delimiter.splitWithCustomDelimiter("//;\n1;2,3")).containsExactly("1", "2", "3");
+    }
+
 }
