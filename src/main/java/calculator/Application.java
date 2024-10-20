@@ -13,16 +13,11 @@ public class Application {
     Calculator calculator = new Calculator(Console.readLine().trim());
 
     try {
-      if (calculator.inputValidator()) {
+      calculator.inputValidator();
 
-        calculator.matchesAndInsert();
+      int[] numbersArray = calculator.allPositiveNumber().getNumbers();
+      System.out.println("결과 : " + Calculator.add(numbersArray));
 
-        int[] numbersArray = calculator.allPositiveNumber().getNumbers();
-        System.out.println("결과 : " + Calculator.add(numbersArray));
-
-      } else {
-        throw new IllegalArgumentException("입력을 잘못하였습니다.");
-      }
     } catch (IllegalArgumentException e) {
       System.err.println(e.getMessage());
 

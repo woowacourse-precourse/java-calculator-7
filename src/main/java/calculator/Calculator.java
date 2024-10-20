@@ -14,12 +14,13 @@ public class Calculator extends RegexCheck {
   }
 
   private int parseInt(String strNumber) {
-    return Integer.parseInt(strNumber);
+
+    return strNumber.isEmpty() ? 0 : Integer.parseInt(strNumber);
   }
 
   public Calculator allPositiveNumber() throws IllegalArgumentException {
     numbers = new int[getStringNumbers().length];
-
+    System.out.println(Arrays.toString(getStringNumbers()));
     for (int i = 0; i < getStringNumbers().length; i++) {
       int number = parseInt(getStringNumbers()[i]);
       if (number < 0) {
