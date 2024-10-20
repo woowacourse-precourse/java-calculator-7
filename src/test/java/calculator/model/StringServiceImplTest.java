@@ -24,11 +24,11 @@ class StringServiceImplTest {
         String input = "1,2:3";
 
         //when
-        List<String> parsedList = stringService.parse(input);
+        List<Integer> parsedList = stringService.parse(input);
 
         //then
         assertThat(parsedList)
-                .isEqualTo(new ArrayList<>(Arrays.asList("1", "2", "3")));
+                .isEqualTo(new ArrayList<>(Arrays.asList(1, 2, 3)));
     }
 
     @Test
@@ -37,11 +37,11 @@ class StringServiceImplTest {
         String input = "1";
 
         //when
-        List<String> parsedList = stringService.parse(input);
+        List<Integer> parsedList = stringService.parse(input);
 
         //then
         assertThat(parsedList)
-                .isEqualTo(new ArrayList<>(List.of("1")));
+                .isEqualTo(new ArrayList<>(List.of(1)));
     }
 
     @Test
@@ -68,11 +68,11 @@ class StringServiceImplTest {
         String input = "//-\\n1-2-3";
 
         //when
-        List<String> parsedList = stringService.parse(input);
+        List<Integer> parsedList = stringService.parse(input);
 
         //then
         assertThat(parsedList)
-                .isEqualTo(new ArrayList<>(Arrays.asList("1", "2", "3")));
+                .isEqualTo(new ArrayList<>(Arrays.asList(1, 2, 3)));
     }
 
     @Test
@@ -81,11 +81,11 @@ class StringServiceImplTest {
         String input = "//-\\n1";
 
         //when
-        List<String> parsedList = stringService.parse(input);
+        List<Integer> parsedList = stringService.parse(input);
 
         //then
         assertThat(parsedList)
-                .isEqualTo(new ArrayList<>(List.of("1")));
+                .isEqualTo(new ArrayList<>(List.of(1)));
     }
 
     @Test
@@ -94,7 +94,7 @@ class StringServiceImplTest {
         String input = "//-\\n";
 
         //when
-        List<String> parsedList = stringService.parse(input);
+        List<Integer> parsedList = stringService.parse(input);
 
         //then
         assertThat(parsedList)
@@ -107,11 +107,11 @@ class StringServiceImplTest {
         String input = "//|\\n1|2|3";
 
         //when
-        List<String> parsedList = stringService.parse(input);
+        List<Integer> parsedList = stringService.parse(input);
 
         //then
         assertThat(parsedList)
-                .isEqualTo(new ArrayList<>(Arrays.asList("1", "2", "3")));
+                .isEqualTo(new ArrayList<>(Arrays.asList(1, 2, 3)));
     }
 
     @Test
@@ -120,11 +120,11 @@ class StringServiceImplTest {
         String input = "//**\\n1**2**3";
 
         //when
-        List<String> parsedList = stringService.parse(input);
+        List<Integer> parsedList = stringService.parse(input);
 
         //then
         assertThat(parsedList)
-                .isEqualTo(new ArrayList<>(Arrays.asList("1", "2", "3")));
+                .isEqualTo(new ArrayList<>(Arrays.asList(1, 2, 3)));
     }
 
     @DisplayName("커스텀 input 파싱 예외")
@@ -152,7 +152,7 @@ class StringServiceImplTest {
         String input = "";
 
         //when
-        List<String> parsedList = stringService.parse(input);
+        List<Integer> parsedList = stringService.parse(input);
 
         assertThat(parsedList)
                 .isEqualTo(new ArrayList<>());
@@ -179,5 +179,8 @@ class StringServiceImplTest {
         //when
         assertThatThrownBy(() -> stringService.toIntegerList(stringList)).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void
 
 }

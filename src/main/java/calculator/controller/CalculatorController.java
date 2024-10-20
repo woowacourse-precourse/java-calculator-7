@@ -25,7 +25,7 @@ public class CalculatorController {
         String inputString = inputView.input();
 
         /* Controller가 실행 흐름 담당 */
-        List<Integer> integerList = stringService.toIntegerList(stringService.parse(inputString));
+        List<Integer> integerList = stringService.parse(inputString);
         Integer result = calculatorService.sum(integerList);
 
         outputView.printResult(result);
