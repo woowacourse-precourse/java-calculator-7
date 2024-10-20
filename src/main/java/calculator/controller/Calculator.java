@@ -4,6 +4,8 @@ import static calculator.common.Constants.INVALID_INPUT_FORMAT;
 import static calculator.common.InputValidator.isCustomSeparator;
 import static calculator.common.InputValidator.startNumber;
 
+import calculator.domain.Number;
+import calculator.domain.Numbers;
 import calculator.view.InputView;
 
 public class Calculator {
@@ -15,15 +17,14 @@ public class Calculator {
 
     public void run () {
         String input = inputView.getInput();
-        handleInput(input);
+        Numbers numbers = handleInput(input);
     }
 
-    public void handleInput (String input) {
+    public Numbers handleInput (String input) {
         validateInput(input);
 
-        if (input.isBlank()) {
+        return new Numbers(input);
 
-        }
     }
 
     private void validateInput (String input) {

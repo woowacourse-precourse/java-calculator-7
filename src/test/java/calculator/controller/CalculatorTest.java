@@ -13,12 +13,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class CalculatorTest {
-    private InputView inputView;
     private Calculator calculator;
 
     @BeforeEach
     void setup () {
-        inputView = new InputView();
+        InputView inputView = new InputView();
         calculator = new Calculator(inputView);
     }
 
