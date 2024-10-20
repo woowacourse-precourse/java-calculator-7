@@ -23,9 +23,11 @@ public class StringCalculator {
     public void run() {
         userInput = getUserInput();
         String customDelimiter = getCustomDelimiter(userInput);
-        addCustomDelimiter(customDelimiter);
+        if (customDelimiter != null)
+            addCustomDelimiter(customDelimiter);
 
         long result = calculateSum(userInput, delimiters);
+        System.out.printf("결과 : %d", result);
     }
 
     private String getUserInput() {
@@ -56,12 +58,15 @@ public class StringCalculator {
         String removed = removeHeaderFromInput(userInput);
         List<String> numbers = splitStringByDelimiters(removed, delimiters);
 
-        // TEST
-        for (String s : numbers) {
-            System.out.println(s);
+        long result = 0;
+        for (String number : numbers) {
+            try {
+                result += Long.parseLong(number);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("The value entered is not a number.");
+            }
         }
-
-        return 0;
+        return result;
     }
 
     public List<String> splitStringByDelimiters(String target, List<String> delimiters) {
