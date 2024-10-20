@@ -8,3 +8,25 @@ public class Application {
         String input = Console.readLine().replace("\"", "").trim();
     }
 }
+
+class StringCalculator {
+    private final String input;
+    private String delim = ",|:";
+
+    public StringCalculator(String input){
+        this.input = input;
+    }
+
+    public int addAll(){
+        String numbers = getNumsPart();
+        String[] pieces = splitNums(numbers);
+        return 0;
+    }
+
+    private String getNumsPart(){
+        return input;
+    }
+    private String[] splitNums(String numbers) {
+        return numbers.split("[" + delim + "]");
+    }
+}
