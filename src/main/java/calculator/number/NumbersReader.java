@@ -1,7 +1,7 @@
 package calculator.number;
 
 import calculator.command.NumbersLine;
-import calculator.delimiter.Delimiter;
+import calculator.delimiter.DelimiterRegex;
 import calculator.number.rule.NumbersRule;
 
 import java.util.Arrays;
@@ -13,11 +13,11 @@ public class NumbersReader {
 
     private final NumbersRule validator;
 
-    public int[] readNumbers(NumbersLine numbersLine, Delimiter delimiter) {
+    public int[] readNumbers(NumbersLine numbersLine, DelimiterRegex delimiterRegex) {
         if(numbersLine.isEmpty())
             return new int[]{0};
 
-        int[] result = toIntegerArray(delimiter.split(numbersLine));
+        int[] result = toIntegerArray(delimiterRegex.split(numbersLine));
         if(validator.isInvalid(result))
             throw new IllegalArgumentException("");
         return result;

@@ -5,19 +5,19 @@ import calculator.command.NumbersLine;
 
 import java.util.regex.Pattern;
 
-public class Delimiter {
+public class DelimiterRegex {
     private static final String DEFAULT_DELIMITER_REGEX = "[,:]";
-    public static final Delimiter DEFAULT_DELIMITER = new Delimiter(DEFAULT_DELIMITER_REGEX);
+    public static final DelimiterRegex DEFAULT = new DelimiterRegex(DEFAULT_DELIMITER_REGEX);
 
     private final String regex;
 
-    public static Delimiter create(DelimiterLine delimiterLine) {
+    public static DelimiterRegex create(DelimiterLine delimiterLine) {
         if(delimiterLine == null || isNotSingleCharacter(delimiterLine))
             throw new IllegalArgumentException("잘못된 형식의 구분자");
 
         if(delimiterLine.isEmpty())
-            return DEFAULT_DELIMITER;
-        return new Delimiter(escape(delimiterLine.value()));
+            return DEFAULT;
+        return new DelimiterRegex(escape(delimiterLine.value()));
     }
 
     private static String escape(String value) {
@@ -28,7 +28,7 @@ public class Delimiter {
         return !delimiterLine.isEmpty() && delimiterLine.value().length() != 1;
     }
 
-    private Delimiter(String regex) {
+    private DelimiterRegex(String regex) {
         this.regex = regex;
     }
 

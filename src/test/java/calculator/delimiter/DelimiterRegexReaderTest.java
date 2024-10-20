@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-class DelimiterReaderTest {
+class DelimiterRegexReaderTest {
     DelimiterReader delimiterReader;
 
     @BeforeEach
@@ -22,7 +22,7 @@ class DelimiterReaderTest {
     void test1() {
         String testLine = "1;2;3";
 
-        assertThat(delimiterReader.readDelimiter(testLine)).isEqualTo(Delimiter.DEFAULT_DELIMITER);
+        assertThat(delimiterReader.readDelimiter(testLine)).isEqualTo(DelimiterRegex.DEFAULT);
     }
 
     @Test
@@ -30,7 +30,7 @@ class DelimiterReaderTest {
     void test2() {
         String testLine = "//;\\n1;2;3";
 
-        Delimiter result = delimiterReader.readDelimiter(testLine);
+        DelimiterRegex result = delimiterReader.readDelimiter(testLine);
 
         assertThat(result.getRegex()).isEqualTo(Pattern.quote(";"));
     }

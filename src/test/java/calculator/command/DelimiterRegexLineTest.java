@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-class DelimiterLineTest {
+class DelimiterRegexLineTest {
 
     @Test
     @DisplayName("길이, 형식에 상관없이 구분자 저장 가능")

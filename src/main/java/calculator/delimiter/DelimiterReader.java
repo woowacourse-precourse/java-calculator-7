@@ -6,15 +6,15 @@ public class DelimiterReader {
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
     private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
 
-    public Delimiter readDelimiter(String line) {
+    public DelimiterRegex readDelimiter(String line) {
         if(hasNoDelimiterOption(line))
-            return Delimiter.DEFAULT_DELIMITER;
+            return DelimiterRegex.DEFAULT;
         if(hasNoPrefix(line) || hasNoSuffix(line))
             throw new IllegalArgumentException("잘못된 형식의 구분자 입력");
 
         String delimiterLine = getDelimiterLine(line);
         String delimiter = removeWords(delimiterLine, CUSTOM_DELIMITER_PREFIX, CUSTOM_DELIMITER_SUFFIX);
-        return Delimiter.create(new DelimiterLine(delimiter));
+        return DelimiterRegex.create(new DelimiterLine(delimiter));
     }
 
     private boolean hasNoDelimiterOption(String line) {

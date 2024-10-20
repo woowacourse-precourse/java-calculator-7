@@ -2,7 +2,7 @@ package calculator;
 
 import calculator.command.DelimiterLine;
 import calculator.command.NumbersLine;
-import calculator.delimiter.Delimiter;
+import calculator.delimiter.DelimiterRegex;
 import calculator.number.NumbersReader;
 
 import java.util.Arrays;
@@ -15,8 +15,8 @@ public class MyCalculator {
     }
 
     public int calculate(DelimiterLine delimiterLine, NumbersLine numbersLine) {
-        Delimiter delimiter = Delimiter.create(delimiterLine);
-        return sum(numbersReader.readNumbers(numbersLine, delimiter));
+        DelimiterRegex delimiterRegex = DelimiterRegex.create(delimiterLine);
+        return sum(numbersReader.readNumbers(numbersLine, delimiterRegex));
     }
 
     private int sum(int[] numbers) {
