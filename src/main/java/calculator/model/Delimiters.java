@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Delimiters {
-    private static final String CUSTOM_DELIMITER_PREFIX = "//";
-    private static final List<String> DEFAULT_DELIMITERS = List.of(",", ":");
+    private static final List<String> DEFAULT_DELIMITERS = List.of(
+            DelimiterConstant.VALIDATOR_COMMA.getValue(),
+            DelimiterConstant.VALIDATOR_COLON.getValue());
     private final List<String> delimiters;
 
     public Delimiters() {
@@ -13,13 +14,9 @@ public class Delimiters {
     }
 
     public void addCustomDelimiter(final String input) {
-        String customDelimiter = input.substring(CUSTOM_DELIMITER_PREFIX.length(),
-                CUSTOM_DELIMITER_PREFIX.length() + 1);
+        int prefixLength = DelimiterConstant.CUSTOM_VALIDATOR_PREFIX.getValue().length();
+        String customDelimiter = input.substring(prefixLength, prefixLength + 1);
         add(customDelimiter);
-    }
-
-    public boolean hasCustomDelimiter(final String input) {
-        return input.startsWith(CUSTOM_DELIMITER_PREFIX);
     }
 
     public String toConcatenatedString() {

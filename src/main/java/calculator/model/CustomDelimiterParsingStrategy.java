@@ -8,14 +8,15 @@ import java.util.StringTokenizer;
 public class CustomDelimiterParsingStrategy implements ParsingStrategy {
     private final Delimiters delimiters;
 
-    public CustomDelimiterParsingStrategy(final Delimiters delimiters) {
-        this.delimiters = delimiters;
+    public CustomDelimiterParsingStrategy() {
+        this.delimiters = new Delimiters();
     }
 
     @Override
     public List<Integer> parse(final String input) {
         delimiters.addCustomDelimiter(input);
-        String substring = input.substring(5);
+        int offset = Integer.parseInt(DelimiterConstant.CUSTOM_VALIDATOR_EXPRESSION_LENGTH.getValue());
+        String substring = input.substring(offset);
         List<String> result = new ArrayList<>();
         StringTokenizer stringTokenizer = new StringTokenizer(substring, delimiters.toConcatenatedString());
         while (stringTokenizer.hasMoreTokens()) {

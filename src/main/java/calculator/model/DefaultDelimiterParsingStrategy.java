@@ -8,8 +8,8 @@ import java.util.StringTokenizer;
 public class DefaultDelimiterParsingStrategy implements ParsingStrategy {
     private final Delimiters delimiters;
 
-    public DefaultDelimiterParsingStrategy(final Delimiters delimiters) {
-        this.delimiters = delimiters;
+    public DefaultDelimiterParsingStrategy() {
+        delimiters = new Delimiters();
     }
 
     @Override
