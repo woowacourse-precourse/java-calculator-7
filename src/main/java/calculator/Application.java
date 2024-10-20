@@ -18,7 +18,7 @@ public class Application {
             String[] splits = input.substring(5).split(regex);
 
             if (isPositive(splits)) {
-                System.out.println("결과" + sumNumber(splits));
+                System.out.println("결과 : " + sumNumber(splits));
             } else {
                 throw new IllegalArgumentException("올바르지 않은 입력입니다.");
 
@@ -27,7 +27,7 @@ public class Application {
         } else {
             String[] splits = input.split("[,:]");
             if (isPositive(splits)) {
-                System.out.println("결과" + sumNumber(splits));
+                System.out.println("결과 : " + sumNumber(splits));
             } else {
                 throw new IllegalArgumentException("올바르지 않은 입력입니다.");
             }
