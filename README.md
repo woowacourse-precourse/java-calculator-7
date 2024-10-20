@@ -44,3 +44,6 @@ Calculator 기능 구현
    - // \n 부분을 제외한 나머지를 반환
 2. 구분자로 숫자를 추출하는 기능
 3. 추출한 숫자를 더하는 기능
+
+<br>
+<img width="592" alt="image" src="https://github.com/user-attachments/assets/d6ff4fb1-fe9b-4ee4-9a2f-9abf65dab017">
