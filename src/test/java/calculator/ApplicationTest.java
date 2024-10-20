@@ -10,6 +10,16 @@ import org.junit.jupiter.api.Test;
 class ApplicationTest extends NsTest {
 
     @Test
+    void 기본_구분자로_숫자_분리() {
+        Application application = new Application();
+        String input = "1,2:3";
+
+        String[] parsedNumbers = application.parseInput(input);
+
+        assertThat(parsedNumbers).isEqualTo(new String[]{"1", "2", "3"});
+    }
+
+    @Test
     void 커스텀_구분자_추출() {
         Application application = new Application();
         String input = "//;\\n1;2;3";

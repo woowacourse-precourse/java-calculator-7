@@ -21,7 +21,7 @@ public class Application {
 
             return splitNumbers(numbersSection, combinedDelimiters);
         } else {
-            return splitNumbers(input, ",|;");
+            return splitNumbers(input, ",|:");
         }
     }
 
