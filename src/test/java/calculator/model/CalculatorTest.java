@@ -16,4 +16,10 @@ public class CalculatorTest {
         assertThat(calculator.calculate(numbers))
                 .isEqualTo(15);
     }
+
+    @Test
+    void Numbers가_비었다면_0_리턴() {
+        assertThat(calculator.calculate(numbers))
+                .isEqualTo(0);
+    }
 }
