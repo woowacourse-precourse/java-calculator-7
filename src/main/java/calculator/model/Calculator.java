@@ -34,8 +34,15 @@ public class Calculator {
 
     private int parseInt(String token){
         try {
-            return Integer.parseInt(token);
-        } catch (NumberFormatException e) {
+            int number = Integer.parseInt(token);
+
+            if (number < 0) {// 음수일 경우 예외처리
+                    throw new IllegalArgumentException(Message.NEGATIVE_NUMBER_ERROR.toString());
+            }
+
+            return number;
+        }
+        catch (NumberFormatException e) {
             throw new IllegalArgumentException(Message.ILLEGAL_ARGUMENT_ERROR.toString());
         }
     }
