@@ -19,11 +19,11 @@ class RegexUtilsTest {
         delimiters.add(new DefaultDelimiter(","));
         delimiters.add(new DefaultDelimiter(":"));
         delimiters.add(new CustomDelimiter("="));
-        String expected = ",|:|=";
+        String expected = "\\Q,\\E|\\Q:\\E|\\Q=\\E";
 
         //when
         String result = RegexUtils.makeAllOfDelimiters(delimiters);
-
+        System.out.println(result);
         //then
         assertThat(result).isEqualTo(expected);
     }
