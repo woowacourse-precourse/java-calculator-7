@@ -31,6 +31,10 @@ public class Application {
         separatorList.add(',');
         separatorList.add(':');
 
+        if (inputString.length() < 5){
+            return separatorList;
+        }
+
         // 커스텀 구분자 찾기
         String s1 = inputString.substring(0,2);
         String s2 = inputString.substring(3,5);
