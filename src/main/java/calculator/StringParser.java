@@ -21,7 +21,7 @@ public class StringParser {
         Pattern pattern = Pattern.compile(builder.toString());
         String[] tokens = input.split(pattern.toString());
 
-        return Arrays.stream(tokens).map(this::validateToken)
+        return Arrays.stream(tokens).map(InputValidator::validateToken)
                 .mapToInt(Integer::parseInt)
                 .toArray();
     }
@@ -39,12 +39,5 @@ public class StringParser {
         }
 
         return input;
-    }
-
-    private String validateToken(String token) {
-        if (!token.matches("^[0-9]+$")) {
-            throw new IllegalArgumentException("문자열에 구분자, 양수 외 문자가 포함되어 있습니다.");
-        }
-        return token;
     }
 }
