@@ -22,10 +22,10 @@ public class Application {
             return false;
         return true;
     }
-
-    public boolean isSpecialRegexChar(char c) {
+    // 구분자가 특수문자인지 확인하는 메서드
+    public static boolean isSpecialRegexChar(char delimiter) {
         String specialChars = ".^$*+?()[]{}\\|/";
-        return specialChars.indexOf(c) != -1;
+        return specialChars.indexOf(delimiter) != -1;
     }
 
     // 커스텀 구분자 찾는 메서드, 유효하지 않을 시 기본 구분자 반환
@@ -34,11 +34,11 @@ public class Application {
 
         if(validCustomDelimiter(input)){
             delimiter += "|";
-            if()
+            if(isSpecialRegexChar(input.charAt(2))) {
+                delimiter += "\\";
+            }
             delimiter+= input.charAt(2);
         }
-
-        System.out.println(delimiter);
         return delimiter;
     }
 
@@ -53,7 +53,6 @@ public class Application {
         int sum = 0;
         for(String number: numbers){
             int num = stringToInt(number);
-            System.out.println(number);
             if(num<0)
                 return -1;
             sum+=num;
