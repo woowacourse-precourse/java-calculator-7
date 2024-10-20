@@ -35,7 +35,7 @@ public class StringCalculator {
             throw new IllegalArgumentException("커스텀 구분자는 숫자가 될 수 없습니다.");
         }
 
-        separators.append(customSeparator);
+        addCustomSeparator(customSeparator);
     }
 
     private boolean isMoreThanOneCustomSeparator(String customSeparator) {
@@ -48,6 +48,12 @@ public class StringCalculator {
 
     private boolean isDigit(char c) {
         return c - 48 >= 0 && c - 48 <= 9;
+    }
+
+    private void addCustomSeparator(String customSeparator) {
+        if (!separators.toString().contains(customSeparator)) {
+            separators.append(customSeparator);
+        }
     }
 
     private void splitNumbers() {
