@@ -3,6 +3,7 @@ package calculator.domain;
 import java.util.regex.Pattern;
 
 public class DelimiterProcessor {
+
     private String expression;
 
     public DelimiterProcessor(String expression) {
