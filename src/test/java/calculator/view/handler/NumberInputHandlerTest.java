@@ -1,7 +1,7 @@
 package calculator.view.handler;
 import calculator.constant.ErrorMessage;
 import calculator.sentence.dto.Sentence;
-import calculator.view.input.handler.NumberInputHandler;
+import calculator.view.input.handler.impl.NumberInputHandler;
 import calculator.view.input.service.InputService;
 import calculator.view.input.validator.InputValidator;
 import org.junit.jupiter.api.DisplayName;
