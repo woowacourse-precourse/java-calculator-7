@@ -58,6 +58,13 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 숫자_0_처리_테스트() {
+        assertSimpleTest(() -> {
+            run("0,1,2");
+            assertThat(output()).contains("결과 : 3");
+        });
+    }
 
     @Override
     public void runMain() {
