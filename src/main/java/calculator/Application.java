@@ -15,9 +15,9 @@ public class Application {
             System.out.println("결과: 0");
             return;
         }
-        //쉼표 or 콜론을 구분자로 숫자 추출 후 합산
+        //기본 구분자 설정
         String delimiter = ",|:";
-        String[] numbers = input.split(delimiter);
+        String[] numbers;
 
         //커스텀 구분자 처리
         if (input.length() > 2 && input.charAt(0) == '/' && input.charAt(1) == '/') {
@@ -25,11 +25,10 @@ public class Application {
             if (nindex == -1) {
                 throw new IllegalArgumentException("커스텀 구분자 형식이 잘못되었습니다.");
             }
-            delimiter = delimiter + "|" + input.substring(2, nindex);
-            numbers = (input.substring(nindex + 1)).split(delimiter);
-
-
-
+            String customDelimiter = input.substring(2, nindex);
+            numbers = (input.substring(nindex + 1)).split(customDelimiter);
+        } else {
+            numbers = input.split(delimiter);
         }
 
         int sum = 0;
