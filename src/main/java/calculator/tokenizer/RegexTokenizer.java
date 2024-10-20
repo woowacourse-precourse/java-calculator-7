@@ -26,17 +26,7 @@ public class RegexTokenizer implements Tokenizer {
     }
 
     @Override
-    public void setCustomDelimiter(String input) {
-        if (!input.contains("\\n")) {
-            return;
-        }
-        String customInput = input.split("[\\\\r\\\\n]+")[0];
-
-        if (!customInput.startsWith("//")) {
-            throw new IllegalArgumentException();
-        }
-        String delimiter = customInput.substring(2);
-
-        delimiters.addCustomDelimiter(delimiter);
+    public void setCustomDelimiter(String customDelimiter) {
+        delimiters.addCustomDelimiter(customDelimiter);
     }
 }

@@ -7,6 +7,11 @@
 
 이 2가지는 해당 서비스의 핵심 비즈니스라 판단하여 변할 수 있는 가능성이 적다고 판단했습니다.
 
+### 입력값 받기
+- [x] 입력 값을 받는다.
+  - 입력 값은 `CalculatorRequest`로 받는다. 
+  - [x] 구분자 등록 마크가 있다면 커스텀 구분자를 파싱한다.
+  - [x] 구분자 등록 마크가 없다면 커스텀 구분자는 null 처리한다.
 ### 숫자 구분하기
 - [x] 구분자를 등록한다.
   - [x] 구분자는 숫자, null, empty 값이 될 수 없다. 
@@ -34,3 +39,9 @@
 - 숫자 체크
 
   [Check If a String Is Numeric in Java - baeldung](https://www.baeldung.com/java-check-string-number)
+
+- 자바 개행 문자 split 방법
+
+  [Split Java String by Newline - baeldung](https://www.baeldung.com/java-string-split-by-newline)
+
+  [Strange String.split("\n") behavior - stackoverflow](https://stackoverflow.com/questions/4539878/strange-string-split-n-behavior/46288888)

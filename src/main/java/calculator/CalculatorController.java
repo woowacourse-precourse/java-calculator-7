@@ -3,27 +3,30 @@ package calculator;
 import calculator.adder.NumberAdder;
 import calculator.adder.NumberAdderRequest;
 import calculator.adder.NumberAdderResponse;
+import calculator.presentation.CalculatorInput;
+import calculator.presentation.request.CalculatorRequest;
 import calculator.tokenizer.TokenResponse;
 import calculator.tokenizer.Tokenizer;
-import camp.nextstep.edu.missionutils.Console;
 
 public class CalculatorController {
 
     private final NumberAdder numberAdder;
     private final Tokenizer tokenizer;
+    private final CalculatorInput input;
 
-    public CalculatorController(NumberAdder numberAdder, Tokenizer tokenizer) {
+    public CalculatorController(NumberAdder numberAdder, Tokenizer tokenizer, CalculatorInput input) {
         this.numberAdder = numberAdder;
         this.tokenizer = tokenizer;
+        this.input = input;
     }
 
     public void run() {
-        System.out.println("덧셈할 문자열을 입력해 주세요");
-        String input = Console.readLine();
+        CalculatorRequest calculatorRequest = input.read();
 
-        tokenizer.setCustomDelimiter(input);
-
-        TokenResponse tokenResponse = tokenizer.parse(input);
+        if (calculatorRequest.getCustomDelimiter() != null) {
+            tokenizer.setCustomDelimiter(calculatorRequest.getCustomDelimiter());
+        }
+        TokenResponse tokenResponse = tokenizer.parse(calculatorRequest.getTokens());
 
         NumberAdderRequest numberAdderRequest = NumberAdderRequest.of(tokenResponse.getSeperatedValues());
         NumberAdderResponse numberAdderResponse = numberAdder.addNumberToken(numberAdderRequest);
