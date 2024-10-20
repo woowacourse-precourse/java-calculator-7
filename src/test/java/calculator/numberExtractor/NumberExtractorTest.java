@@ -3,6 +3,8 @@ package calculator.numberExtractor;
 import calculator.delimiterExtractor.CustomDelimiterExtractor;
 import calculator.dto.DelimiterDto;
 import calculator.dto.NumberDto;
+import calculator.validator.Validator;
+import calculator.validator.ValidatorImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
@@ -20,9 +22,9 @@ public class NumberExtractorTest {
     @BeforeEach
     @Test
     void beforeEach() {
-
-        customNumberExtractor = new CustomNumberExtractor();
-        defaultNumberExtractor = new DefaultNumberExtractor();
+        Validator validator = new ValidatorImpl();
+        customNumberExtractor = new CustomNumberExtractor(validator);
+        defaultNumberExtractor = new DefaultNumberExtractor(validator);
     }
 
 
