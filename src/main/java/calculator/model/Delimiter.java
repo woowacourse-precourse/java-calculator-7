@@ -15,20 +15,21 @@ public class Delimiter {
 
     private static final Pattern pattern = Pattern.compile(CUSTOM_DELIMITER);
     public static final String STRING_BETWEEN_DELIMITER = "|";
+    public static final String COMMA = ",";
+    public static final String COLON = ":";
 
     private static Set<String> delimiter;
 
     public Delimiter() {
         delimiter = new HashSet<>();
-        delimiter.add(",");
-        delimiter.add(":");
+        delimiter.add(COMMA);
+        delimiter.add(COLON);
     }
 
     public String[] splitWithCustomDelimiter(String expression) {
         Matcher m = pattern.matcher(expression.replace("\\n", "\n"));
         if (m.find()) {
-            String[] splitedExpression = splitExpression(m);
-            return splitedExpression;
+            return splitExpression(m);
         }
         String[] splitedExpression = splitWithDelimiter(expression);
         checkExpressionHasInvalidExpression(splitedExpression);
@@ -37,7 +38,6 @@ public class Delimiter {
 
     private String[] splitExpression(Matcher m) {
         String customDelimiter = m.group(1);
-
         for (char c : customDelimiter.toCharArray()) {
             delimiter.add(String.valueOf(c));
         }
