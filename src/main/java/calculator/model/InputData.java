@@ -18,13 +18,13 @@ public class InputData {
     }
 
     public boolean isDelimiter(){
-        Matcher delimiterMatcher = getMatcher(Regex.DELIMITER_GROUP_FORMAT.getRegex());
+        Matcher delimiterMatcher = getMatcher();
 
         return delimiterMatcher.matches();
     }
 
     public String convertDelimiterPart(){
-        Matcher delimiterMatcher = getMatcher(Regex.DELIMITER_GROUP_FORMAT.getRegex());
+        Matcher delimiterMatcher = getMatcher();
         String delimiter = Message.BLANK.getSentence();
 
         if(delimiterMatcher.matches()){
@@ -34,22 +34,18 @@ public class InputData {
     }
 
     public String convertCalculatorPart() {
-        Matcher calculatorMatcher = getMatcher(Regex.DELIMITER_GROUP_FORMAT.getRegex());
+        Matcher calculatorMatcher = getMatcher();
         String calculator = input;
 
         if(calculatorMatcher.matches()){
             calculator = calculatorMatcher.group(ARITHMETIC_GROUP);
         }
 
-        if(calculator.isEmpty()){
-            calculator = Message.DEFAULT_NUMBER.getSentence();
-        }
-
         return calculator;
     }
 
-    private Matcher getMatcher(String regex){
-        Pattern pattern = Pattern.compile(regex);
+    private Matcher getMatcher(){
+        Pattern pattern = Pattern.compile(Regex.DELIMITER_GROUP_FORMAT.getRegex());
         return pattern.matcher(input);
     }
 }
