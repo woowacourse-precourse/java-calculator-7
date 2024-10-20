@@ -5,7 +5,7 @@ import java.util.List;
 public class CustomDelimiterStrategy implements DelimiterStrategy {
     public static final String startDelimiterPattern = "//";
     public static final String endDelimiterPattern = "\n";
-    private static final List<String> metaChar = List.of("+", "^", "*");
+    private static final List<String> metaChar = List.of("+", "^", "*", "?");
 
     @Override
     public List<String> decideDelimiter(String userInput) throws IllegalArgumentException {
