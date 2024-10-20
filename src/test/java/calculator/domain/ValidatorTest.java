@@ -18,4 +18,13 @@ class ValidatorTest {
                 .hasMessageContaining(MessageType.INVALID_SEPERATOR.getMessage());
     }
 
+    @Test
+    void 숫자가_오버플로우일때_예외_발생(){
+        String input=Long.toString(Long.MAX_VALUE);
+
+        assertThatThrownBy(()->Validator.validateInteger(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(MessageType.OVERFLOW_NUMBER.getMessage());
+    }
+
 }
