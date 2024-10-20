@@ -19,6 +19,6 @@ public class Application {
 
         long result = Calculator.sum(numbers);
 
-        Io.print(Long.toString(result));
+        Io.print("결과 : " + result);
     }
 }
