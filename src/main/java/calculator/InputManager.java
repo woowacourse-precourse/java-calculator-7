@@ -1,11 +1,15 @@
 package calculator;
 
 public class InputManager {
-    private final String input;
+    private String input;
     private String separatorCandidate;
     private String operandCandidates;
 
-    public InputManager(String input) {
+    public InputManager() {
+        this.input = "base";
+    }
+
+    public void save(String input) {
         this.input = input;
         validate();
     }
