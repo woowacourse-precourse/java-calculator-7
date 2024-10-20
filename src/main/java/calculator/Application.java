@@ -17,8 +17,7 @@ public class Application {
                 delimiter = escapeSpecialRegexChars(numbers.substring(2, delimiterIndex));
                 numberString = numbers.substring(delimiterIndex + 2); // +2 to skip "\\n"
             } else {
-                System.out.println("error0");
-                return 0;
+                throw new IllegalArgumentException("Invalid input format: missing newline after custom delimiter.");
             }
         }
 
@@ -29,8 +28,7 @@ public class Application {
             try {
                 sum += Integer.parseInt(num.trim());
             } catch (NumberFormatException e) {
-                System.out.println("error" + num);
-                return 0;
+                throw new IllegalArgumentException("Invalid input: non-numeric value found -> " + num);
             }
         }
 
@@ -46,7 +44,12 @@ public class Application {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-        int result = add(input);
-        System.out.println(result);
+        try{
+            int result = add(input);
+            System.out.println(result);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 }
