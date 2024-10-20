@@ -12,4 +12,12 @@ public class Numbers {
     public static Numbers createNumbers(final List<String> numbers) {
         return new Numbers(numbers);
     }
+
+    public int add() {
+        int sum = 0;
+        for (String number : numbers) {
+            sum += Integer.parseInt(number);
+        }
+        return sum;
+    }
 }

@@ -18,6 +18,7 @@ public class CalculatorController {
     public void run() {
         StringHandler stringHandler = setCalculationInput();
         Numbers numbers = extractString(stringHandler);
+        calculate(numbers);
     }
 
     private StringHandler setCalculationInput() {
@@ -30,5 +31,8 @@ public class CalculatorController {
         return stringHandler.extractNumbers();
     }
 
+    private void calculate(Numbers numbers) {
+        outputView.printMessage(Output.RESULT_MESSAGE, numbers.add());
+    }
 
 }
