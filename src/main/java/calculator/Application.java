@@ -11,6 +11,10 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         String inputString = readLine();
+        if(inputString.isBlank()){
+            System.out.println("결과 : 0.0");
+            return;
+        }
         try{
             Validation validation = new Validation();
             String separator = validation.validateString(inputString);
