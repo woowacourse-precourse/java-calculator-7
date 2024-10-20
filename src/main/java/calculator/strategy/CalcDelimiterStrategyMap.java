@@ -1,14 +1,15 @@
 package calculator.strategy;
 
 import calculator.exception.InvalidDelimiterStrategyException;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class CalcDelimiterStrategyMap {
     private final Map<CalcDelimiterStrategyType, CalculatorDelimiterStrategy> strategyMap;
 
     public CalcDelimiterStrategyMap() {
-        this.strategyMap = new HashMap<>();
+        this.strategyMap = new EnumMap<>(CalcDelimiterStrategyType.class);
     }
 
     public void addStrategy(CalcDelimiterStrategyType type, CalculatorDelimiterStrategy strategy) {
@@ -16,9 +17,7 @@ public class CalcDelimiterStrategyMap {
     }
 
     public CalculatorDelimiterStrategy getStrategy(CalcDelimiterStrategyType type) {
-        if (!strategyMap.containsKey(type)) {
-            throw new InvalidDelimiterStrategyException();
-        }
-        return strategyMap.get(type);
+        return Optional.ofNullable(strategyMap.get(type))
+                .orElseThrow(InvalidDelimiterStrategyException::new);
     }
 }
