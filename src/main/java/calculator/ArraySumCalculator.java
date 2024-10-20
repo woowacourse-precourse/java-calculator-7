@@ -11,6 +11,7 @@ public class ArraySumCalculator implements ArrayCalculator {
     }
 
     // 배열의 각 요소를 더하는 메서드
+    @Override
     public int sumArrayElements(String input) {
         // 입력 문자열을 구분자에 따라 분리
         String[] numbers = stringsplitter.splitString(input);
