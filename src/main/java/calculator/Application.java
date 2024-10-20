@@ -36,13 +36,13 @@ public class Application {
                 try {
                     total += Integer.parseInt(str[i]);
                 } catch (NumberFormatException e) {
-                    total += 0;
+                    throw new IllegalArgumentException("숫자를 입력하세요.");
                 }
             }
 
             System.out.println("결과 : " + total);
         } catch(IllegalArgumentException e){
-
+            System.out.println("입력이 올바르지 않습니다." + e.getMessage());
         }
     }
 }
