@@ -1,9 +1,10 @@
-package calculator;
+package calculator.infrastructure;
 
 import calculator.exception.InvalidSeparatorException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class InputStringProcessor {
 
@@ -37,6 +38,14 @@ public class InputStringProcessor {
         return inputStr;
     }
 
+    public String removeSeparator(Set<Character> separators, String slicedStr) {
+        return slicedStr.chars()
+                .mapToObj(c -> (char) c)
+                .filter(c -> !separators.contains(c))
+                .map(String::valueOf)
+                .collect(Collectors.joining());
+    }
+
     private boolean checkIfSeparatorForm(String inputStr) {
         if (inputStr.length() < STR_MIN_LENGTH_FOR_SEPARATOR_EXIST) {
             return false;
@@ -52,5 +61,4 @@ public class InputStringProcessor {
             throw new InvalidSeparatorException(separator);
         }
     }
-
 }
