@@ -24,7 +24,7 @@ public class StringAddCalculator {
                 throw new IllegalArgumentException("커스텀 구분자를 찾을 수 없습니다.");
             }
         } else {
-            delimiter = ",|:";
+            delimiter = "[,:]";
         }
 
         numbers = exp.split(delimiter);
@@ -34,7 +34,7 @@ public class StringAddCalculator {
             try {
                 strToNum = Integer.parseInt(number);
                 result += strToNum;
-                if(strToNum <= 0)
+                if(strToNum < 0)
                     throw new IllegalArgumentException("양수만 입력 가능합니다: " + strToNum);
             } catch (NumberFormatException e) {
                 if (number == "") {

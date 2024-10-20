@@ -3,10 +3,27 @@ package calculator;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
+import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
+    @Test
+    void 커스텀_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("//;\\n1");
+            assertThat(output()).contains("결과 : 1");
+        });
+    }
+
+    @Test
+    void 예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Test
     void 아무_것도_입력하지_않으면_0_출력() {
         StringAddCalculator calculator = new StringAddCalculator();
@@ -25,23 +42,9 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀_구분자_사용() {
-        StringAddCalculator calculator = new StringAddCalculator();
-        assertThat(calculator.splitAndSum("//;\n1;2;3")).isEqualTo(6);
-    }
-
-    @Test
     void 커스텀_구분자_두글자_이상_사용() {
         StringAddCalculator calculator = new StringAddCalculator();
         assertThat(calculator.splitAndSum("//;:\n1;:2;:3")).isEqualTo(6);
-    }
-
-    @Test
-    void 예외_테스트_음수_입력() {
-        StringAddCalculator calculator = new StringAddCalculator();
-        assertThatThrownBy(() -> calculator.splitAndSum("-1,2;3"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("양수만 입력 가능합니다: -1");
     }
 
     @Test
