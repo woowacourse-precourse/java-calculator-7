@@ -24,6 +24,11 @@ class Calculator {
         this.result = separatorLocator(input);
     }
 
+    public static void init() {
+        Calculator calculator = Calculator.getCalculate();
+        System.out.println(FINISH_MESSAGE + calculator.getResult());
+    }
+
     private static Calculator getCalculate() {
         System.out.println(GET_STRING_MESSAGE);
         String userInput = readLine();
