@@ -8,11 +8,12 @@ public class StringAddCalculator {
     private static final String PATTERN = "[,:]";
     private static final String CUSTOM_PATTERN = "//(.)\\\\n(.*)";
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile(CUSTOM_PATTERN);
+    private static final int EMPTY_VALUE = 0;
     private static final int PATTERN_IN_GROUP = 1;
     private static final int NUMBERS_IN_GROUP = 2;
 
     public int calculate(String input) {
-        return splitAndSumNumber(input);
+        return validateEmptyInput(input) ? EMPTY_VALUE : splitAndSumNumber(input);
     }
 
     private int splitAndSumNumber(String input) {
@@ -23,10 +24,15 @@ public class StringAddCalculator {
         String pattern = PATTERN;
         Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
 
-        if(matcher.find()) {
+        if (matcher.find()) {
             pattern = matcher.group(PATTERN_IN_GROUP);
             input = matcher.group(NUMBERS_IN_GROUP);
         }
+
         return input.split(pattern);
+    }
+
+    private boolean validateEmptyInput(String input) {
+        return input == null || input.trim().isEmpty();
     }
 }
