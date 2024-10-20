@@ -15,26 +15,41 @@ public class InputParser {
     private final String SINGLE_INPUT = "-?\\d+";
 
     public List<Integer> parseInputToIntList(String input) {
-        if (input.isBlank())
-            return List.of(0);
+        if (input.isBlank()) return List.of(0);
 
-        if (input.matches(SINGLE_INPUT))
-            return convertToIntList(input);
+        if (isSingleInput(input)) return convertToIntList(input);
 
         String standardizedInput = replaceDelimiters(input);
         return convertToIntList(standardizedInput);
     }
 
     private String replaceDelimiters(String input) {
-        if (isCustomDelimiter(input)) {
-            String customDelimiter = input.substring(CUSTOM_DELIMITER_START_INDEX, findDelimiterEndIndex(input));
-            String numbersPart = input.substring(findDelimiterEndIndex(input) + NEWLINE_OFFSET);
-            return numbersPart.replaceAll(Pattern.quote(customDelimiter), COMMON_DELIMITER);
+        if (isStartingWithCustom(input)) {
+            int delimiterEndIndex = findDelimiterEndIndex(input);
+            String customDelimiter = input.substring(
+                    CUSTOM_DELIMITER_START_INDEX,
+                    delimiterEndIndex
+            );
+            String numbersPart = input.substring(
+                    delimiterEndIndex + NEWLINE_OFFSET
+            );
+            return replaceAll(numbersPart, customDelimiter);
         }
-        return input.replaceAll(DEFAULT_DELIMITER_PATTERN, COMMON_DELIMITER);
+        return replaceAll(input, DEFAULT_DELIMITER_PATTERN);
     }
 
-    private boolean isCustomDelimiter(String input) {
+    private String replaceAll(String input, String delimiter) {
+        if (input.contains(",") || input.contains(":")) {
+            return input.replaceAll(delimiter, COMMON_DELIMITER);
+        }
+        return input.replaceAll(Pattern.quote(delimiter), COMMON_DELIMITER);
+    }
+
+    private boolean isSingleInput(String input) {
+        return input.matches(SINGLE_INPUT);
+    }
+
+    private boolean isStartingWithCustom(String input) {
         return input.startsWith(CUSTOM_DELIMITER_START_POSITION);
     }
 
