@@ -1,25 +1,47 @@
-# Simple Calculator
+# Java String Calculator
 
-This Java application is a simple calculator that performs addition of numbers entered as a string by the user. It's designed to demonstrate basic Java programming concepts such as loops, conditionals, and string manipulation.
+This Java application is a simple string calculator that allows users to input strings containing numbers separated by commas or colons, and it calculates their sum. Additionally, it supports custom delimiters specified at the start of the string.
 
 ## Features
 
-- Takes a string input from the user.
-- Extracts all numeric characters from the input.
-- Sums up the numeric values.
-- Displays the result of the summation.
+- **Default Delimiters:** By default, the calculator can process numbers separated by commas (,) or colons (:).
+- **Custom Delimiters:** Users can specify a custom single-character delimiter at the beginning of the string.
+- **Exception Handling:** The calculator handles various exceptions such as invalid number formats, use of negative numbers, or incorrect delimiter specifications.
 
-## Prerequisites
+## How to Use
 
-Before you begin, ensure you have met the following requirements:
-- You have installed Java JDK 8 or above.
-- You have a basic understanding of running Java applications from the command line.
-
-## Installation
-
-To install the Simple Calculator, follow these steps:
-
-1. Download the latest version of the code from this repository.
-2. Compile the code using `javac`:
+1. **Compile and Run the Application:**
+   Ensure you have Java installed on your machine and compile the `Application.java` file using:
    ```bash
    javac Application.java
+   Then, run the compiled Java class:
+   java Application
+2. **Input the String:**
+   For default delimiters, input a string like 1,2:3.
+   For a custom delimiter, format the input like //;\\n1;2;3.
+3. **View the Result:**
+   After inputting the string, the calculator will display the sum of the numbers.
+
+## Error Handling
+
+If the input string is empty or null, the sum will be 0.
+If the input string starts with // but is followed by an incorrect custom delimiter format, an error message will appear indicating the format is wrong.
+If the string contains non-numeric characters or negative numbers, an appropriate error message will display, indicating the issue.
+
+## Closing the Scanner
+
+The Scanner class is used for taking input from the user, and it is properly closed after reading the input to avoid resource leaks.
+
+## Example
+Here is an example of using the calculator with a custom delimiter:
+
+**Input:**
+
+//;\\n1;2;3
+
+**Output:**
+
+결과 : 6
+
+This calculator simplifies processing and summing numbers from a formatted string input, handling errors gracefully and allowing for flexible delimiter specifications.
+This README provides a detailed overview of how to use and what to expect from your Java calculator application.
