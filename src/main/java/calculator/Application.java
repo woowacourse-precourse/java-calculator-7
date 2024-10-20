@@ -1,5 +1,8 @@
 package calculator;
 
+import calculator.util.StringSplitter;
+import calculator.util.StringValidator;
+
 public class Application {
     // 의존성 주입
     private final InputHandler inputhandler;
@@ -14,7 +17,7 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         // StringValidatorImpl 객체를 생성하여 StringSplitter에 주입
-        StringValidator validator = new StringValidatorImpl();
+        StringValidator validator = new StringValidator();
         StringSplitter splitter = new StringSplitter(validator);  // 의존성 주입
 
         // ArraySumCalculator에 StringSplitter 의존성 주입

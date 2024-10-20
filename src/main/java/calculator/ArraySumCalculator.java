@@ -1,5 +1,7 @@
 package calculator;
 
+import calculator.util.StringSplitter;
+
 public class ArraySumCalculator {
     private final StringSplitter stringsplitter;
 
@@ -20,7 +22,6 @@ public class ArraySumCalculator {
                 sum += Integer.parseInt(number.trim());
             }
         }
-
         return sum;
     }
 }
