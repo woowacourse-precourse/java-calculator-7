@@ -33,7 +33,7 @@ public class ValidChecker {
 
     public void lastCharCheck(String input, String delimiter) {   // 맨 끝 문자가 구분자인 경우
         String pattern = delimiter + "$";
-        System.out.println(pattern);
+
         if (input.matches(".*" + pattern)) {
             throw new IllegalArgumentException();
         }
