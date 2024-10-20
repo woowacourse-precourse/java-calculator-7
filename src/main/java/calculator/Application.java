@@ -4,6 +4,16 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.StringTokenizer;
 
 public class Application {
+    //기본 구분자와 커스텀 구분자를 제외한 다른 구분자를 포함하고 있는지 검사
+    public static boolean isInvalidSeperator(String[] nums) {
+        for (String num : nums) {
+            if (!num.chars().allMatch(Character::isDigit)) {
+                throw new IllegalArgumentException("기본 구분자 또는 커스텀 구분자를 입력해 주세요.");
+            }
+        }
+        return true;
+    }
+
     //분리한 문자열이 모두 양수인지 검사
     public static boolean isPositiveNumber(String[] nums) {
         for (String num : nums) {
