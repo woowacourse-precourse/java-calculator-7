@@ -90,7 +90,14 @@ class DefaultParser implements Parser {
     }
 }
 
-
+class CustomParser implements Parser {
+    @Override
+    public String[] parse(String input) {
+        String delimiter = input.substring(2, input.indexOf("\n"));
+        String numbersPart = input.substring(input.indexOf("\n") + 1);
+        return numbersPart.split(delimiter);
+    }
+}
 
 
 class Input {
