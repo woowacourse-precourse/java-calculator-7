@@ -51,7 +51,7 @@ public class InputValidation { // 입력의 유효성을 확인하는 클래스�
             if (number < 0) {
                 throw new IllegalArgumentException();
             }
-        } catch (NumberFormatException e) {
+        } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException();
         }
     }
