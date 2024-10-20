@@ -51,14 +51,10 @@ public class WoowahanTokenizerTest {
     }
 
     @Test
-    void 연속된_구분자가_포함된_문자열() {
+    void 커스텀_구분자가_마이너스_기호이고_커스텀_구분자가_연속으로_포함된_문자열() {
         assertThrows(IllegalArgumentException.class, 
             ()->{
-                WoowahanTokenizer wt = new WoowahanTokenizer("1::2");
-            });
-        assertThrows(IllegalArgumentException.class, 
-            ()->{
-                WoowahanTokenizer wt = new WoowahanTokenizer("//?\n1::2?3???4");
+                WoowahanTokenizer wt = new WoowahanTokenizer("//-\n1--2");
             });
     }
 }

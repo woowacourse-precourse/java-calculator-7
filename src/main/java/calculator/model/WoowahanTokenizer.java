@@ -29,17 +29,13 @@ public class WoowahanTokenizer {
     }
     private void validateString() {
         // validate no consecutive separator
-        // 연속한 구분자가 없는지 검증
+        // 커스텀 구분자가 - 일 때, 연속한 커스텀 구분자가 없는지 검증
+        if (!customSeparator.equals("-")) return;
         for (int i = 0; i < inputString.length() - 1; i++) {
-            if (isSeparator(inputString.charAt(i)) && isSeparator(inputString.charAt(i + 1))) {
+            if (inputString.charAt(i) == '-' && inputString.charAt(i + 1) == '-') {
                 throw new IllegalArgumentException();
             }
         }
-    }
-    private boolean isSeparator(char c) {
-        if (c == ',' || c == ':' || customSeparator != "" && c == customSeparator.charAt(0)) 
-            return true;
-        return false;
     }
     private void tokenizeString() {
         String separator = defaultSeparator + customSeparator;
