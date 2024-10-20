@@ -3,6 +3,7 @@ package calculator;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 public class Application {
     public static void main(String[] args) throws IOException {
@@ -14,6 +15,11 @@ public class Application {
 
         String separator = getSeparator(lines[0]);
         int[] numbers =  getNumbers(lines[1], separator);
+
+        int result = Arrays.stream(numbers)
+                .sum();
+
+        System.out.println("결과 : " + result);
     }
 
     private static int[] getNumbers(String input, String separator) {
