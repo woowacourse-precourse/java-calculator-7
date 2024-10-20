@@ -63,7 +63,6 @@ public class Separator {
         return false;
     }
 
-    //
     public String parseString(String string) {
         if (string.substring(0, 4).equals("//\\n")) {
             return string.substring(4);
