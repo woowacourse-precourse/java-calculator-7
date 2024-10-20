@@ -38,15 +38,27 @@ public class Application {
         return input.split(delimiter);
     }
 
-    // 문자열 더하는 메서드
+    // 문자열 더하는 메서드(number가 숫자가 아닌 경우 예외처리 필요)
     public static int addString(String[] numbers){
         int sum = 0;
-        for(String num: numbers){
-            sum += Integer.parseInt(num);
+        for(String number: numbers){
+            int num = stringToInt(number);
+            if(num<0)
+                return -1;
+            sum+=num;
         }
         return sum;
     }
 
+    public static int stringToInt(String number){
+        for(int i=0;i<number.length();i++){
+            if(!(number.charAt(i)>='0'&&number.charAt(i)<='9'))
+                return -1;
+        }
+        return Integer.parseInt(number);
+    }
+
+    
 
 
 
