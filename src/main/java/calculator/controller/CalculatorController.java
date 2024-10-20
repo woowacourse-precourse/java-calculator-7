@@ -1,5 +1,6 @@
 package calculator.controller;
 
+import calculator.domain.Expression;
 import calculator.service.CalculatorService;
 import calculator.view.CalculatorView;
 
@@ -8,7 +9,7 @@ public class CalculatorController {
     private final CalculatorService calculator = new CalculatorService();
 
     public void run(){
-        String input = view.getInput();
-        view.showResult(calculator.add(input));
+        Expression expression = new Expression(view.getInput());
+        view.showResult(calculator.add(expression));
     }
 }
