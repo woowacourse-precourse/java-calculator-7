@@ -59,6 +59,16 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 문자열에_구분자_숫자_외에_다른_문자가_존재하는_경우(){
+        // given
+        String invalidInput = "//a\\n1:2w3,4";
+        //when & then
+        assertThrows(IllegalArgumentException.class, () ->{
+            Application.inputValidationCheck(invalidInput);
+        });
+    }
+
+    @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1");
