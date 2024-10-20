@@ -11,11 +11,12 @@ import java.util.regex.Pattern;
 public class Application {
     public static int subStringStartIndex = 0;
     public static String delimiters = StringConstants.COLON_DELIMITER + "|" + StringConstants.COMMA_DELIMITER;
+    public static String aNewDelimiter = null;
 
     public static void main(String[] args) {
         String inputString = getInputString();
         setConditionValues(inputString);
-        checkStringContainOtherChar(inputString.substring(subStringStartIndex), delimiters);
+        checkStringContainOtherChar(inputString.substring(subStringStartIndex));
         System.out.println("결과: " + getNumbersSum(inputString));
     }
 
@@ -47,12 +48,16 @@ public class Application {
         }
     }
 
-    private static void checkStringContainOtherChar(String inputString, String delimiters) {
+    private static void checkStringContainOtherChar(String inputString) {
         int beforeLength = inputString.length();
+        if (inputString.charAt(0) == ',' || inputString.charAt(0) == ':'
+                || (aNewDelimiter != null && inputString.charAt(0) == aNewDelimiter.charAt(0))) {
+            throw new IllegalArgumentException("문자열 첫 입력값이 올바르지 않습니다.");
+        }
         String str = inputString.replaceAll(delimiters, "");
         int afterLength = str.length();
         if (beforeLength - afterLength >= beforeLength / 2) {
-            throw new IllegalArgumentException("구분자가 연산할 문자열의 맨 앞에 위치할 수 없습니다.");
+            throw new IllegalArgumentException("구분자가 연속 등장할 수 없습니다.");
         }
         if (!(inputString.isEmpty() || inputString == null)) {
             if (!str.matches(ONLY_NUMBERS)) {
@@ -65,7 +70,7 @@ public class Application {
         if (inputString.startsWith("//")) {
             if (inputString.contains("\\n")) {
                 if (inputString.substring(0, inputString.indexOf("\\n")).isEmpty()
-                        || (inputString.indexOf("\\n") - inputString.indexOf("//")) != 2) {
+                        || (inputString.indexOf("\\n") - inputString.indexOf("//")) != 3) {
                     throw new IllegalArgumentException("신규 구분자의 형식이 올바르지 않습니다.");
                 }
                 return true;
@@ -78,6 +83,7 @@ public class Application {
     private static String getNewDelimiter(String inputString) {
         String newDelimiter;
         newDelimiter = inputString.substring(2, inputString.indexOf("\\n"));
+        aNewDelimiter = newDelimiter;
         if (newDelimiter.matches(ONLY_NUMBERS)) {
             throw new IllegalArgumentException("신규 구분자에 숫자를 포함할 수 없습니다.");
         }
@@ -89,9 +95,6 @@ public class Application {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         try {
             String input = br.readLine();
-            if (input.charAt(0) == ',' || input.charAt(0) == ':') {
-                throw new IllegalArgumentException("문자열 첫 입력값이 올바르지 않습니다.");
-            }
             return input;
         } catch (IOException e) {
             throw new IllegalArgumentException("잘못된 입력값이 입력되었습니다.");
