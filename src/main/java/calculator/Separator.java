@@ -6,8 +6,8 @@ import java.util.regex.Pattern;
 
 public class Separator {
     public int[] separateInput(String input) {
-        String separators = ",|:";
-        String pattern = "^(//.+\\\\n)*([0-9]+(.+[0-9]+)*|)$";
+        String separators = Constant.BASIC_SEPARATOR;
+        String pattern = Constant.INPUT_PATTERN;
         Pattern p = Pattern.compile(pattern);
         Matcher m = p.matcher(input);
 
@@ -27,7 +27,7 @@ public class Separator {
     }
 
     private String buildSeparators(String customSeparators) {
-        String basicSeparators = ",|:";
+        String basicSeparators = Constant.BASIC_SEPARATOR;
         customSeparators = customSeparators.replace("\\n", "");
         customSeparators = customSeparators.replace("//", "|");
         return basicSeparators + customSeparators;
