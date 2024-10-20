@@ -3,6 +3,7 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -10,7 +11,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
-
     String userInput;
     String noBlankInput;
     Matcher userInputForCheck;
@@ -18,7 +18,7 @@ public class StringCalculator {
     String customDivider;
     List<String> dividerList;
     String regexString;
-    int[] intNumbers;
+    List<Integer> intNumbers;
     int sum = 0;
 
     public void getUserInput() {
@@ -37,7 +37,6 @@ public class StringCalculator {
         Set<String> duplicationFilter = new LinkedHashSet<>(defaultDividerList);
 
         this.userInputForCheck = Pattern.compile("//(.+)\\\\n(.*)").matcher(this.noBlankInput);
-
         if (userInputForCheck.find()) {
             customDivider = userInputForCheck.group(1);
             customDividerList = Arrays.asList(customDivider.split(""));
@@ -61,13 +60,12 @@ public class StringCalculator {
     }
 
     public void extractNumbers() {
-        String[] StringNumbers = noBlankInput.split(regexString);
-        for (String strArrays : StringNumbers) {
-            System.out.println(strArrays);
-        }
-        intNumbers = new int[StringNumbers.length];
-        for (int i = 0; i < StringNumbers.length; i++) {
-            intNumbers[i] = Integer.parseInt(StringNumbers[i]);
+        List<String> stringNumbers = Arrays.asList(noBlankInput.split(regexString));
+        Collections.replaceAll(stringNumbers, "", "0");
+
+        intNumbers = new ArrayList<>();
+        for (String stringNumber : stringNumbers) {
+            intNumbers.add(Integer.parseInt(stringNumber));
         }
     }
 
