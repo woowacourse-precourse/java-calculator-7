@@ -1,12 +1,14 @@
 package calculator;
 
+import static calculator.Constants.*;
+
 public class InputManager {
     private String input;
     private String separatorCandidate;
     private String operandCandidates;
 
     public InputManager() {
-        this.input = "base";
+        this.input = DEFAULT_INPUT;
     }
 
     public void save(String input) {
@@ -15,9 +17,9 @@ public class InputManager {
     }
 
     public String getSeparatorCandidate() {
-        if(separatorCandidate == null) {
-            int startIndex = input.indexOf("//") + 2;
-            int endIndex = input.lastIndexOf("\\n");
+        if (separatorCandidate == null) {
+            int startIndex = input.indexOf(CUSTOM_SEPARATOR_PREFIX) + CUSTOM_SEPARATOR_PREFIX.length();
+            int endIndex = input.lastIndexOf(CUSTOM_SEPARATOR_POSTFIX);
             separatorCandidate = input.substring(startIndex, endIndex);
         }
         return this.separatorCandidate;
@@ -27,23 +29,24 @@ public class InputManager {
         if (operandCandidates == null) {
             int startIndex = 0;
             if (isCustomSeparatorCandidateExisted()) {
-                startIndex = input.lastIndexOf("\\n") + 2;
+                startIndex = input.lastIndexOf(CUSTOM_SEPARATOR_POSTFIX) + 2;
             }
             operandCandidates = input.substring(startIndex);
         }
         return this.operandCandidates;
     }
 
+
     public void validate() {
-        if(input.matches("[1-9,:]+")) {
+        if (input.matches(VALID_DEFAULT_INPUT_REGEX)) {
             return;
         }
-        if(!(input.startsWith("//") && input.contains("\\n"))) {
-            throw new IllegalArgumentException("입력 형식이 유효하지 않습니다.");
+        if (!(input.startsWith(CUSTOM_SEPARATOR_PREFIX) && input.contains(CUSTOM_SEPARATOR_POSTFIX))) {
+            throw new IllegalArgumentException(ERROR_INVALID_FORMAT);
         }
     }
 
     public boolean isCustomSeparatorCandidateExisted() {
-        return this.input.startsWith("//");
+        return this.input.startsWith(CUSTOM_SEPARATOR_PREFIX);
     }
 }
