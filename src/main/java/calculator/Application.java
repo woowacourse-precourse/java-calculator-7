@@ -11,9 +11,23 @@ public class Application {
             System.out.println("덧셈할 문자열을 입력해 주세요.");
             String str = readLine();
 
+            ArrayList<Integer> tempList = new ArrayList<>();
+            ArrayList<Integer> wholeList = new ArrayList<>();
+
             while(!str.equals("exit")) {
-                ArrayList<Integer> tempList = new ArrayList<>();
-                ArrayList<Integer> wholeList = new ArrayList<>();
+
+                boolean isCustom;
+                if(str.length() == 0) {
+                    isCustom = false;
+                } else {
+                    isCustom = (str.charAt(0) == '/') && (str.charAt(1) == '/') && (str.charAt(3) == '\\') && (str.charAt(4) == 'n');
+                }
+
+                char custom = '0';
+                if(isCustom) {
+                    custom = str.charAt(2);
+                    str = str.substring(5);
+                }
 
                 for(int i = 0; i < str.length(); i++) {
 
@@ -24,7 +38,12 @@ public class Application {
                         tempList.add(tempInt);
                     }
                     else {
-                        if(tempChar == ',' || tempChar == ':') {
+                        boolean plusCustom = (tempChar == ',') || (tempChar == ':');
+                        if(custom != '0') {
+                            plusCustom = (tempChar == ',') || (tempChar == ':') || (tempChar == custom);
+                        }
+
+                        if(plusCustom) {
                             tempListToWholeList(tempList, wholeList);
                         }
                         else {
@@ -42,6 +61,9 @@ public class Application {
                     finalSum += wholeList.get(i);
                 }
                 System.out.println("결과 : " + finalSum);
+                System.out.println();
+
+                wholeList.clear();
 
                 System.out.println("덧셈할 문자열을 입력해 주세요.");
                 str = readLine();
