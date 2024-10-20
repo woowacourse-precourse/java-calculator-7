@@ -5,7 +5,7 @@ import calculator.domain.Numbers;
 import calculator.domain.Separator;
 import calculator.view.InputView;
 import calculator.view.OutputView;
-import java.util.List;
+import java.util.Set;
 
 public class MainController {
 
@@ -36,7 +36,7 @@ public class MainController {
     }
 
     private String[] splitString(String input) {
-        final List<String> defaultSeparator = List.of(DEFAULT_SEPARATOR1, DEFAULT_SEPARATOR2);
+        final Set<String> defaultSeparator = Set.of(DEFAULT_SEPARATOR1, DEFAULT_SEPARATOR2);
         final Separator separator = new Separator(defaultSeparator);
         input = separator.addCustomSeparator(input, REGEX);
         return separator.separateString(input);

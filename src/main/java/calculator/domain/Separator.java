@@ -2,17 +2,17 @@ package calculator.domain;
 
 import static calculator.error.ErrorType.EMPTY_CUSTOM_SEPARATOR_ERROR;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Separator {
 
-    private List<String> separators;
+    private Set<String> separators;
 
-    public Separator(List<String> defaultSeparator) {
-        this.separators = new ArrayList<>(defaultSeparator);
+    public Separator(Set<String> defaultSeparator) {
+        this.separators = new HashSet<>(defaultSeparator);
     }
 
     public String addCustomSeparator(String input, String customRegex) {
@@ -32,7 +32,7 @@ public class Separator {
         return input.trim().split(regex);
     }
 
-    public List<String> getSeparators() {
+    public Set<String> getSeparators() {
         return separators;
     }
 }
