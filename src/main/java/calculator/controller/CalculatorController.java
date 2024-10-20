@@ -1,23 +1,25 @@
 package calculator.controller;
 
 import calculator.model.CalculatorModel;
-import calculator.model.StringProcessor;
+import calculator.model.DelimiterParser;
+import calculator.model.StringSplitter;
 import calculator.view.CalculatorView;
 
 public class CalculatorController {
 
     private final CalculatorModel calculatorModel;
     private final CalculatorView calculatorView;
-    private final StringProcessor stringProcessor;
+    private final StringSplitter stringSplitter;
 
     public CalculatorController() {
         this.calculatorModel = new CalculatorModel();
         this.calculatorView = new CalculatorView();
-        this.stringProcessor = new StringProcessor();
+        DelimiterParser delimiterParser = new DelimiterParser();
+        this.stringSplitter = new StringSplitter(delimiterParser);
     }
 
     public int calculate(String input) {
-        String[] numbers = stringProcessor.StringSplitter(input);
+        String[] numbers = stringSplitter.split(input);
         int result = calculatorModel.add(numbers);
         return result;
     }
