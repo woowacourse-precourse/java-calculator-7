@@ -38,10 +38,10 @@ class InputValidatorTest {
             .hasMessage(INPUT_IS_NOT_ENDED_WITH_NUMBER.getMessage());
     }
 
-    @Test
-    void 입력_값에_제대로_된_커스텀_구분자_Prefix_값이_없을때_예외를_발생() {
+    @ParameterizedTest
+    @ValueSource(strings = {";\\n1;2;3", "/n;\\n1,2,3"})
+    void 입력_값에_제대로_된_커스텀_구분자_Prefix_값이_없을때_예외를_발생(String input) {
         // given
-        String input = ";\\n1;2;3";
         CalculationRequest calculationRequest = new CalculationRequest(input);
 
         // when & then
@@ -50,7 +50,9 @@ class InputValidatorTest {
             .hasMessage(INPUT_IS_NOT_PROPER_CUSTOM_DELIMITER.getMessage());
     }
 
-    @Test
+
+    @ParameterizedTest
+                @ValueSource(strings = {"//1;2;3", "//@/n1,2,3"})
     void 입력_값에_제대로_된_커스텀_구분자_Suffix_값이_없을때_예외를_발생() {
         // given
         String input = "//1;2;3";
@@ -84,4 +86,31 @@ class InputValidatorTest {
         Assertions.assertThatCode(() -> inputValidator.validate(calculationRequest))
             .doesNotThrowAnyException();
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1,,2,3", "1,2,,3", "1,2::3"})
+    void 입력값이_연속된_구분자를_포함할_때_예외를_발생(String input) {
+        // given
+
+        CalculationRequest calculationRequest = new CalculationRequest(input);
+
+        // when & then
+        Assertions.assertThatThrownBy(() -> inputValidator.validate(calculationRequest))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage(CONSECUTIVE_DELIMITER.getMessage());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\\n1;;2;3", "//;\\n1,2,;3"})
+    void 커스텀_구분자가_연속으로_사용될_때_예외를_발생(String input) {
+        // given
+        CalculationRequest calculationRequest = new CalculationRequest(input);
+
+        // when & then
+        Assertions.assertThatThrownBy(() -> inputValidator.validate(calculationRequest))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage(CONSECUTIVE_DELIMITER.getMessage());
+    }
+
+
 }

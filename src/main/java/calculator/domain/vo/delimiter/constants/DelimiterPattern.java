@@ -5,6 +5,7 @@ public enum DelimiterPattern {
     COLON(":"),
     EMPTY(""),
     PIPE("|"),
+
     CUSTOM_DELIMITER_PREFIX("//"),
     CUSTOM_DELIMITER_SUFFIX("\\n");
 
