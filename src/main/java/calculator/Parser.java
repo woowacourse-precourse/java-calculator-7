@@ -7,13 +7,15 @@ import java.util.List;
  * numbers.
  *
  * @see SimpleParser
+ * @see calculator.myParser.MyParser
  */
 public interface Parser {
     /**
-     * Parse input string to numbers. Throw an <code>IllegalArgumentException</code> if the input string is invalid.
+     * Parse input string to numbers.
      *
      * @param input input string to parse
      * @return list of numbers parsed from input string
+     * @throws IllegalArgumentException if the input string is invalid
      */
     List<Double> parse(String input);
 }

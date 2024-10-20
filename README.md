@@ -35,3 +35,24 @@ sequenceDiagram
     P -->>- M: numbers
     M -->>- U: sum of the numbers
 ```
+
+### `MyParser` (`Parser`와 `Lexer` 분리)
+
+```mermaid
+sequenceDiagram
+    actor U as User
+    box rgba(50, 150, 150, 0.5)
+        participant M as Main
+        participant P as Parser
+        participant L as Lexer
+    end
+
+    U ->>+ M: numbers with or without delimiters
+    M ->>+ P: parse user input
+    loop until get all tokens
+        P ->>+ L: get next token
+        L -->>- P: token
+    end
+    P -->>- M: numbers
+    M -->>- U: sum of the numbers
+```

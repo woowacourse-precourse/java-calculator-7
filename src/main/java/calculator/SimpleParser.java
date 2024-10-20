@@ -1,5 +1,9 @@
 package calculator;
 
+import static calculator.Message.ERR_MSG_WHEN_DELIMITER_CONSISTS_OF_RESERVED_CHAR;
+import static calculator.Message.ERR_MSG_WHEN_NEGATIVE_NUMBER;
+import static calculator.Util.mapNumbersFromStrToDouble;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -15,10 +19,6 @@ public class SimpleParser implements Parser {
     public static final String INPUT_DELIMITERS_PATTERN = "^//.*\\\\n";
     public static final String DEFAULT_DELIMITERS = "[,:]";
     public static final String RESERVED_CHARACTERS = "[0-9eE.-]";
-
-    public static final String ERR_MSG_WHEN_NEGATIVE_NUMBER = "음수는 입력할 수 없습니다.";
-    public static final String ERR_MSG_WHEN_FAIL_TO_PARSE_NUMBER = "숫자가 아닌 값이 입력되었습니다.";
-    public static final String ERR_MSG_WHEN_DELIMITER_CONSISTS_OF_RESERVED_CHAR = "수 표기에 사용하는 문자는 구분자로 사용할 수 없습니다.";
 
     @Override
     public List<Double> parse(String input) {
@@ -52,16 +52,6 @@ public class SimpleParser implements Parser {
         validateDelimiters(delimiters);
         String numbers = input.substring(matched.length());
         return new DelimitersAndNumbers("[" + delimiters + "]", numbers);
-    }
-
-    private List<Double> mapNumbersFromStrToDouble(List<String> numbersStr) {
-        try {
-            return numbersStr.stream()
-                    .map(Double::parseDouble)
-                    .toList();
-        } catch (NumberFormatException _ignored) {
-            throw new IllegalArgumentException(ERR_MSG_WHEN_FAIL_TO_PARSE_NUMBER);
-        }
     }
 
     private void validateDelimiters(String delimiters) {
