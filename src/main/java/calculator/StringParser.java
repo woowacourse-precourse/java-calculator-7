@@ -10,15 +10,8 @@ public class StringParser {
 
     public static List<BigInteger> extractNumbers(String input) {
         List<BigInteger> numberList = new ArrayList<>();
-        String inputWithoutCustomDelimiter;
+        String inputWithoutCustomDelimiter = removeCustomDelimiter(input);
         List<Character> delimiters = DelimeterHandler.extractDelimiters(input);
-
-        if (DelimeterHandler.hasCustomDelimiter(input) == true) {
-            int customDelimiterEndIndex = input.indexOf(CUSTOM_DELIMITERS_END);
-            inputWithoutCustomDelimiter = input.substring(customDelimiterEndIndex + CUSTOM_DELIMITERS_END.length());
-        } else {
-            inputWithoutCustomDelimiter = input;
-        }
 
         int numberStartIdx = 0;
         for (int i = 0; i < inputWithoutCustomDelimiter.length(); i++) {
@@ -39,8 +32,15 @@ public class StringParser {
                 numberStartIdx = i + 1;
             }
         }
-
         return numberList;
     }
 
+    private static String removeCustomDelimiter(String input) {
+        if (DelimeterHandler.hasCustomDelimiter(input) == true) {
+            int customDelimiterEndIndex = input.indexOf(CUSTOM_DELIMITERS_END);
+            return input.substring(customDelimiterEndIndex + CUSTOM_DELIMITERS_END.length());
+        } else {
+            return input;
+        }
+    }
 }
