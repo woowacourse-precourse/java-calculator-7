@@ -1,5 +1,6 @@
 package calculator.controller;
 
+import calculator.exception.InputBlankException;
 import calculator.model.CustomDelimiter;
 import calculator.model.Delimiters;
 import calculator.model.InputParser;
@@ -17,13 +18,17 @@ public class CalculatorController {
     private final OutputView outputView = OutputView.INSTANCE;
 
     public void run() {
-        String input = readLine();
-        validateInput(input);
-        String[] values = parseByDelimiter(input);
-        validateNumber(values);
-        int[] numbers = convertToInt(values);
-        int sum = getSum(numbers);
-        outputView.print(sum);
+        try {
+            String input = readLine();
+            validateInput(input);
+            String[] values = parseByDelimiter(input);
+            validateNumber(values);
+            int[] numbers = convertToInt(values);
+            int sum = getSum(numbers);
+            outputView.print(sum);
+        } catch (InputBlankException e) {
+            outputView.print(0);
+        }
     }
 
     private String readLine() {
