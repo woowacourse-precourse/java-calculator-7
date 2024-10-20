@@ -24,6 +24,10 @@ public class DelimiterParser {
         return input;
     }
 
+    public String[] split(String input, String delimiter) {
+        return input.split(delimiter);
+    }
+
     private int findDelimiterIndex(String input) {
         int delimiterIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
         if (delimiterIndex == -1) {
