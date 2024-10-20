@@ -12,7 +12,6 @@ public class Number {
     }
 
     private void validate(String number) {
-
         if (number.isBlank()) {
             throw new IllegalArgumentException("숫자에 빈 값을 입력할 수 없습니다");
         }
@@ -24,6 +23,7 @@ public class Number {
         if (Integer.parseInt(number) < Constants.MIN_ALLOWED_NUMBER) {
             throw new IllegalArgumentException("음수를 입력할 수 없습니다");
         }
+
     }
 
     public String getNumber() {

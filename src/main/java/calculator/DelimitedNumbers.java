@@ -14,7 +14,6 @@ public class DelimitedNumbers {
         if (stringNumbers.equals(Constants.ZERO_STRING)) {
             return;
         }
-
         validateContainsDelimiter(stringNumbers, regex);
 
     }
@@ -49,4 +48,5 @@ public class DelimitedNumbers {
     public String getStringNumbers() {
         return stringNumbers;
     }
+
 }

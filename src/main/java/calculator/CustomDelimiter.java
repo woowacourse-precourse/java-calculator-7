@@ -21,7 +21,7 @@ public class CustomDelimiter {
             throw new IllegalArgumentException("커스텀 구분자에 기본 구분자를 입력할수 없습니다");
         }
 
-        if (customDelimiter.equals("\\n")) {
+        if (customDelimiter.equals(Constants.CUSTOM_END_PREFIX)) {
             throw new IllegalArgumentException("커스텀 구분자에 \\n를 입력할수 없습니다");
         }
 
