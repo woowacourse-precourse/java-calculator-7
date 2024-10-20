@@ -2,6 +2,7 @@ package calculator;
 
 public class NumberValidator {
     private static final String NEGATIVE_SIGN = "-";
+    private static final String NUMBER_REGEX = "^[0-9]*$";
     private static final String NEGATIVE_ERROR_MESSAGE = "문자열에 음수가 포함되어 있습니다.";
     private static final String NOT_NUMBER_ERROR_MESSAGE = "문자열에 숫자가 아닌 문자가 포함되어 있습니다.";
 
@@ -19,6 +20,6 @@ public class NumberValidator {
     }
 
     private static boolean isNumber(String number) {
-        return number.matches("[0-9]+");
+        return number.matches(NUMBER_REGEX);
     }
 }
