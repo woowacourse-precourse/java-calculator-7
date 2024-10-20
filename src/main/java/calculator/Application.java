@@ -14,14 +14,13 @@ public class Application {
      * @return 합계
      */
     static int calculate(String s) {
-
-        String refinedString = s;
-        String listOfDelimiters = ",|:";
-        int sumResult = 0;
-
         if (s.equals("")) {
             return 0;
         }
+
+
+        String refinedString = s;
+        String listOfDelimiters = ",|:";
 
         // 커스텀 구분자 처리
         if (s.startsWith("//")) {
@@ -32,10 +31,11 @@ public class Application {
             refinedString = s.substring(startOfNumbers);
         }
 
-        StringTokenizer st = new StringTokenizer(refinedString, listOfDelimiters);
 
-        while (st.hasMoreElements()) {
-            String stringToken = String.valueOf(st.nextElement());
+        String[] tokens = refinedString.split(listOfDelimiters);
+        int sumResult = 0;
+
+        for (String stringToken : tokens) {
             int integerToken = Integer.parseInt(stringToken);
 
             if (integerToken <= 0) {
