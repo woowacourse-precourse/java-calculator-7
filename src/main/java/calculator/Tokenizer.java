@@ -13,6 +13,15 @@ public class Tokenizer {
         return str.split(String.valueOf(separators.get(0)));
     }
 
+    public static boolean AreTokensUnavailable(String[] tokens) {
+        for (String token: tokens) {
+            if (!token.matches("\\d+")){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static int[] tokensToNums(String[] tokens) {
         int[] nums = new int[tokens.length];
         for (int i=0; i< tokens.length; i++) {
