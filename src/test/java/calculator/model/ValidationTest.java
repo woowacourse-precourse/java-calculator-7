@@ -1,6 +1,7 @@
 package calculator.model;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -61,5 +62,16 @@ public class ValidationTest {
         assertThat(validation.isCustomFrom(inputString4)).isTrue();
         assertThat(validation.isCustomFrom(inputString5)).isTrue();
         assertThat(validation.isCustomFrom(inputString6)).isTrue();
+    }
+
+    @Test
+    @DisplayName("잘못된 양식의 문자열 검증 테스트")
+    public void notAllowedFromTest() {
+        // given
+        String inputString = "1.2:3";
+
+        // when, then
+        assertThatThrownBy(() -> validation.validate(inputString))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

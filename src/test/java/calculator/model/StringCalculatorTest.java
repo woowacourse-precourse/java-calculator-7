@@ -1,7 +1,6 @@
 package calculator.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,36 +14,6 @@ public class StringCalculatorTest {
     @BeforeEach
     public void setUp() {
         stringCalculator = new StringCalculator();
-    }
-
-    @Test
-    @DisplayName("허용된 문자열 양식 검증 테스트")
-    public void InputStringFromTest() {
-        // given
-        String input1 = "1:2,3";
-        String input2 = "1,2,3";
-        String input3 = "1:2:3";
-        String input4 = "12:3456:789";
-
-        // when
-        String allowedFrom = stringCalculator.getAllowedFrom();
-
-        // then
-        assertThat(input1.matches(allowedFrom)).isTrue();
-        assertThat(input2.matches(allowedFrom)).isTrue();
-        assertThat(input3.matches(allowedFrom)).isTrue();
-        assertThat(input4.matches(allowedFrom)).isTrue();
-    }
-
-    @Test
-    @DisplayName("잘못된 양식의 문자열 검증 테스트")
-    public void notAllowedFromTest() {
-        // given
-        String input = "1.2:3";
-
-        // when, then
-        assertThatThrownBy(() -> stringCalculator.calculate(input))
-                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

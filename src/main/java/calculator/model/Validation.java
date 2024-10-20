@@ -18,5 +18,18 @@ public class Validation {
         return inputString.matches(CUSTOM_FROM);
     }
 
+    public void validate(String inputString) {
+        if (isZeroFrom(inputString)) {
+            return;
+        }
+        if (isAllowedFrom(inputString)) {
+            return;
+        }
+        if (isCustomFrom(inputString)) {
+            return;
+        }
+        throw new IllegalArgumentException("Invalid input: " + inputString + "는 잘못된 입력 양식입니다. ");
+    }
+
 
 }
