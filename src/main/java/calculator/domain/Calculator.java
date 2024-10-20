@@ -29,6 +29,10 @@ public class Calculator {
     }
 
     private void setOperands(String calculation){
+        if(calculation.isEmpty()){
+            operands.add(0);
+            return;
+        }
         String[] tokens = calculation.split(delimiter.getDelimiters());
 
         for (String token : tokens) {

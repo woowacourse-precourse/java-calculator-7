@@ -12,7 +12,7 @@ public class InputView {
         List<String> inputs = new ArrayList<>();
         inputs.add(Console.readLine());
 
-        if(!Pattern.matches("^\\d.*", inputs.get(0))){
+        if(!Pattern.matches("^\\d.*", inputs.get(0)) && !inputs.get(0).isEmpty()) {
             inputs.add(Console.readLine());
         }
         return inputs;
