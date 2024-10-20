@@ -1,4 +1,4 @@
-package calculator.domain;
+package calculator.common;
 
 import java.util.HashSet;
 import java.util.Set;
