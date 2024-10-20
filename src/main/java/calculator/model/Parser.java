@@ -1,11 +1,9 @@
 package calculator.model;
 
-import java.util.regex.Pattern;
-
 public class Parser {
 
     public int[] parseNumbersFromExpression(String expression, String delimiter) {
-        String[] tokens = expression.split(Pattern.quote(delimiter));
+        String[] tokens = expression.split(delimiter);
         int[] result = new int[tokens.length];
 
         for (int i = 0; i < tokens.length; i++) {
