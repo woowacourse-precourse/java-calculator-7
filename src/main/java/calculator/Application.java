@@ -27,5 +27,14 @@ public class Application {
         String finalStr = new String(entireStr);
         separatedNumbers = finalStr.split(",");
         System.out.println(separatedNumbers);
+
+        // 합계 도출하기
+        int sum=0;
+        for (String num : separatedNumbers){
+            int partNum = 0;
+            partNum = Integer.parseInt(num);
+            sum+=partNum;
+        }
+        System.out.println("결과 : "+sum);
     }
 }
