@@ -28,18 +28,7 @@ public class Application {
         // 커스텀 구분자가 있는지 확인하고 처리
         if (checkCustomDelimiter(input)) {
             delimiter = addCustomDelimiter(delimiter, input);  // 기본 구분자에 커스텀 구분자 추가
-            // 1. \n이 포함되어 있는지 확인
-            if (input.contains("\n")) {
-                input = input.substring(input.indexOf("\n") + 1);
-            }
-            // 2. \\n이 포함되어 있는지 확인
-            else if (input.contains("\\n")) {
-                input = input.substring(input.indexOf("\\n") + 2);
-            }
-            // 3. 둘 다 없을 때 새로운 문장을 받기
-            else {
-                input = Console.readLine();
-            }
+            input = handleInputWithDelimiter(input);
             if (input == null || input.isEmpty()) {
                 return 0;
             }
@@ -73,7 +62,22 @@ public class Application {
         return delimiterBuilder.toString();  // 수정된 구분자 반환
     }
 
-
+    private static String handleInputWithDelimiter(String input) {
+        String newInput;
+        // 1. \n이 포함되어 있는지 확인
+        if (input.contains("\n")) {
+            newInput = input.substring(input.indexOf("\n") + 1);
+        }
+        // 2. \\n이 포함되어 있는지 확인
+        else if (input.contains("\\n")) {
+            newInput = input.substring(input.indexOf("\\n") + 2);
+        }
+        // 3. 둘 다 없을 때 새로운 문장을 받기
+        else {
+            newInput = Console.readLine();
+        }
+        return  newInput;
+    }
     private static int[] extractNumbers(String input, String delimiter) {
         String[] tokens = input.split(delimiter);  // 구분자를 사용해 문자열 분리
         return Arrays.stream(tokens)
