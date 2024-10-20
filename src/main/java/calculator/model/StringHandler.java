@@ -30,7 +30,7 @@ public class StringHandler {
         if (splitDelimiter[0].startsWith(CUSTOM_DELIMITER_START)) {
             validateDelimiter(matcher);
             input = splitDelimiter[1];
-            this.delimiters =  createDelimiters(matcher.group(1).charAt(0));
+            this.delimiters = createDelimiters(matcher.group(1).charAt(0));
             return;
         }
         input = splitDelimiter[0];
