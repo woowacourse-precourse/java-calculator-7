@@ -11,5 +11,6 @@ public class CalculatorController {
     }
 
     public void execute() {
+        calculatorService.printPrompt();
     }
 }
