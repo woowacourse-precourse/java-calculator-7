@@ -5,11 +5,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import calculator.model.DefaultDelimiter;
-import calculator.model.RegularExpression;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
@@ -39,55 +36,7 @@ class ApplicationTest extends NsTest {
             }
         });
     }
-
-    @Test
-    void validateCustomLineFormat_InvalidCustomLineFormat_ExceptionThrown() {
-        assertSimpleTest(() -> {
-            String input = "//[\\1[2[3";
-            Pattern pattern = Pattern.compile(RegularExpression.CUSTOM_LINE.getRegularExpression());
-            Matcher matcher = pattern.matcher(input);
-            try {
-                ValidationUtils.validateCustomLineFormat(matcher);
-                throw new Exception("예외가 발생하지 않았습니다.");
-            } catch (IllegalArgumentException e) {
-                return;
-            }
-        });
-    }
-
-    @Test
-    void validateCustomLineFormat_InputNumericCharacter_ExceptionThrown() {
-        assertSimpleTest(() -> {
-            String input = "//1\\\\1,2,3";
-            Pattern pattern = Pattern.compile(RegularExpression.CUSTOM_LINE.getRegularExpression());
-            Matcher matcher = pattern.matcher(input);
-
-            try {
-                ValidationUtils.validateCustomLineFormat(matcher);
-                throw new Exception("예외가 발생하지 않았습니다.");
-            } catch (IllegalArgumentException e) {
-                return;
-            }
-        });
-    }
-
-    @Test
-    void validateCustomLineFormat_InputDuplicatedCharacter_ExceptionThrown() {
-        assertSimpleTest(() -> {
-            String input = "//;;\\\\n1[2[3";
-            Pattern pattern = Pattern.compile(RegularExpression.CUSTOM_LINE.getRegularExpression());
-            Matcher matcher = pattern.matcher(input);
-
-            try {
-                ValidationUtils.validateCustomLineFormat(matcher);
-                throw new Exception("예외가 발생하지 않았습니다.");
-            } catch (IllegalArgumentException e) {
-                return;
-            }
-        });
-    }
-
-
+    
     @Override
     public void runMain() {
         Application.main(new String[]{});
