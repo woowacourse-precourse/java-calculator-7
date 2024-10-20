@@ -1,16 +1,17 @@
 package calculator;
 
+
 public class CalculatorApplication {
-    private Delimiter delimiter;
     private DelimiterParser delimiterParser;
+    private Delimiter delimiter;
     private InputView inputView;
     private OutputView outputView;
 
     public CalculatorApplication() {
-        delimiter = new Delimiter();
-        delimiterParser = new DelimiterParser();
-        inputView = new InputView();
-        outputView = new OutputView();
+        this.delimiterParser = new DelimiterParser();
+        this.delimiter = new Delimiter();
+        this.inputView = new InputView();
+        this.outputView = new OutputView();
     }
 
 

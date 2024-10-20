@@ -1,8 +1,7 @@
 package calculator;
 
-public class Calculator {
-    // 델리미터 객체, 인풋 메세지 받아서 객체 생성
 
+public class Calculator {
     private Delimiter delimiter;
     private String input = "";
     private long result = 0L;
@@ -14,49 +13,33 @@ public class Calculator {
 
     public long calculate() {
         if (input.isEmpty()) {
-            return result;
+            return 0;
         }
 
-        int start = 0;
-        int end = 1;
+        String[] numbers = input.split(delimiter.getRegex());
 
-        if (delimiter.isContain(input.charAt(0))) {
-            input = input.substring(1);
-        }
-
-        if (delimiter.isContain(input.charAt(input.length() - 1))) {
-            input = input.substring(0, input.length() - 1);
-        }
-
-        while (end < input.length()) {
-            if (delimiter.isContain(input.charAt(end))) {
-                String temp = input.substring(start, end);
-
-                try {
-                    int value = Integer.parseInt(temp);
-                    if (value <= 0) {
-                        throw new IllegalArgumentException();
-                    }
-                    result += value;
-                    start = end + 1;
-                    end++;
-                } catch (Exception e) {
-                    throw new IllegalArgumentException();
-                }
+        for (String number : numbers) {
+            if (number.equals("")) {
+                continue;
             }
-            end++;
+            result += convertToNumber(number);
         }
+            return result;
+    }
 
-        String temp = input.substring(start, end);
-
+    private int convertToNumber(String number) {
         try {
-            int value = Integer.parseInt(temp);
-            result += value;
-
-        } catch (Exception e) {
+            int value = Integer.parseInt(number);
+            validPositiveNumber(value);
+            return value;
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }
+    }
 
-        return result;
+    private static void validPositiveNumber(int value) {
+        if (value <= 0) {
+            throw new IllegalArgumentException();
+        }
     }
 }

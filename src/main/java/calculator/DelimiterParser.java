@@ -4,8 +4,7 @@ public class DelimiterParser {
 
     private static final String CUSTOM_DELIMITER_START = "//";
     private static final String CUSTOM_DELIMITER_END = "\\n";
-
-    // 내부에서 한번에 파싱하고, 계산까지 하도록 리팩토링? 어떤 구조가 더 좋은지 고민하기.
+    
     public String findCustomDelimiter(String str) {
         StringBuilder sb = new StringBuilder();
 
@@ -13,19 +12,14 @@ public class DelimiterParser {
             int start = str.indexOf(CUSTOM_DELIMITER_START);
             int end = str.indexOf(CUSTOM_DELIMITER_END);
 
-            if (end == -1) {
-                throw new IllegalArgumentException();
-            }
+            validEndDelimiterExist(end);
 
-            if (end < start) {
-                throw new IllegalArgumentException();
-            }
+            validDelimiterFormat(start, end);
 
-            String customDelimiter = str.substring(start + 2, end);
-
-            sb.append(customDelimiter);
+            sb.append(str, start + 2, end);
             str = str.substring(end + 2);
         }
+
         return sb.toString();
     }
 
@@ -37,6 +31,7 @@ public class DelimiterParser {
             int start = str.indexOf(CUSTOM_DELIMITER_START);
             int end = str.indexOf(CUSTOM_DELIMITER_END);
 
+            // 커스텀 구분자를 추가하는 부분이 없으면 모두 StringBuilder 객체에 추가함
             if (start == -1 && end == -1) {
                 sb.append(str, index, str.length());
                 return sb.toString();
@@ -46,6 +41,18 @@ public class DelimiterParser {
             sb.append(str, start + 2, start + 3);
             index = end + 2;
             str = str.substring(index);
+        }
+    }
+
+    private void validDelimiterFormat(int start, int end) {
+        if (end < start) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void validEndDelimiterExist(int end) {
+        if (end == -1) {
+            throw new IllegalArgumentException();
         }
     }
 }

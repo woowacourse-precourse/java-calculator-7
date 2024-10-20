@@ -11,9 +11,9 @@ class DelimiterTest {
     void 기본_구분자_확인_테스트() {
         Delimiter delimiter = new Delimiter();
 
-        assertThat(delimiter.isContain(',')).isTrue();
-        assertThat(delimiter.isContain(':')).isTrue();
-        assertThat(delimiter.isContain('!')).isFalse();
+        assertThat(delimiter.getRegex().contains(",")).isTrue();
+        assertThat(delimiter.getRegex().contains(":")).isTrue();
+        assertThat(delimiter.getRegex().contains("!")).isFalse();
     }
 
     @Test
@@ -22,12 +22,12 @@ class DelimiterTest {
 
         delimiter.addCustomDelimiter("!'/@");
 
-        assertThat(delimiter.isContain('!')).isTrue();
-        assertThat(delimiter.isContain('\'')).isTrue();
-        assertThat(delimiter.isContain('@')).isTrue();
-        assertThat(delimiter.isContain('/')).isTrue();
-        assertThat(delimiter.isContain('*')).isFalse();
-        assertThat(delimiter.isContain('+')).isFalse();
+        assertThat(delimiter.getRegex().contains("!")).isTrue();
+        assertThat(delimiter.getRegex().contains("'")).isTrue();
+        assertThat(delimiter.getRegex().contains("@")).isTrue();
+        assertThat(delimiter.getRegex().contains("/")).isTrue();
+        assertThat(delimiter.getRegex().contains("*")).isFalse();
+        assertThat(delimiter.getRegex().contains("+")).isFalse();
     }
 
     @Test
