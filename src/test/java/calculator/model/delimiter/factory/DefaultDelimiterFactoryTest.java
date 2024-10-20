@@ -1,6 +1,5 @@
 package calculator.model.delimiter.factory;
 
-import calculator.model.custom_delimiter.validator.DelimiterValidator;
 import calculator.model.delimiter.domain.Delimiter;
 import calculator.model.delimiter.domain.Delimiters;
 import org.junit.jupiter.api.BeforeAll;
@@ -23,12 +22,9 @@ public class DefaultDelimiterFactoryTest {
 
     @BeforeAll
     static void setUp() {
-        defaultDelimiterFactory = new DefaultDelimiterFactory(new DelimiterValidator() {
-            @Override
-            public void validate(String delimiterString) {
-                if (delimiterString.equals(wrongDelimiter)) {
-                    throw new RuntimeException();
-                }
+        defaultDelimiterFactory = new DefaultDelimiterFactory(delimiterString -> {
+            if (delimiterString.equals(wrongDelimiter)) {
+                throw new RuntimeException();
             }
         });
     }
