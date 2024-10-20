@@ -22,4 +22,3 @@ public enum DelimiterEnum {
         return value;
     }
 }
-

@@ -1,13 +1,12 @@
 package calculator.controller;
 
+import static calculator.constants.DelimiterEnum.CUSTOM_DELIMITER_FORWARD;
+
 import calculator.model.Calculate;
 import calculator.validation.DelimiterValidator;
 import calculator.validation.InputValidator;
 import calculator.view.InputView;
 import calculator.view.OutputView;
-
-import static calculator.constants.DelimiterEnum.CUSTOM_DELIMITER_FORWARD;
-
 
 public class Controller {
     private final InputView inputView;
