@@ -1,34 +1,35 @@
 package calculator.controller;
 
-import calculator.input.Input;
-import calculator.staticValue.StaticValue;
+import calculator.input.InputValidator;
+import calculator.staticValue.RegexPatterns;
 
 
 public class Calculator {
 
-    private static final Input input = new Input();
+    private static final InputValidator inputValidator = new InputValidator();
+
     private static final CalculatorService calculatorController = new CalculatorService();
 
 
-    public int Calculate(String inputString) {
+    public int Calculate(String input) {
 
-        if (input.hasEmptyInput(inputString)) {
+        if (inputValidator.isInputEmpty(input)) {
             return 0;
         }
 
-        if (input.hasParticularValue(inputString, StaticValue.CUSTOM_SEPARATOR_REGEX.getValue())) {
-            String[] splitInput = calculatorController.SplitStringUsingSeparators(
-                    inputString);
-            return calculateAvailableInput(splitInput);
+        if (inputValidator.matchesPattern(input, RegexPatterns.CUSTOM_SEPARATOR.getValue())) {
+            String[] splitInputs = calculatorController.SplitInputBySeparators(
+                    input);
+            return calculateAvailableInput(splitInputs);
         } else {
-            String[] splitInputByBasicSeparators = inputString.split(StaticValue.BASIC_SEPARATORS_REGEX.getValue());
+            String[] splitInputByBasicSeparators = input.split(RegexPatterns.BASIC_SEPARATORS.getValue());
             return calculateAvailableInput(splitInputByBasicSeparators);
         }
     }
 
-    private int calculateAvailableInput(String[] inputString) {
-        input.checkInputAvailable(inputString);
-        return calculatorController.calculateSum(inputString);
+    private int calculateAvailableInput(String[] splitInputs) {
+        inputValidator.validateInput(splitInputs);
+        return calculatorController.calculateSum(splitInputs);
     }
 
 }
