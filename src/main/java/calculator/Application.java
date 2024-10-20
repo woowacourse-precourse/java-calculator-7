@@ -11,15 +11,13 @@ public class Application {
 
         InputManager inputManager = new InputManager(input);
         SeparatorManager separatorManager = new SeparatorManager();
+        OperandManager operandManager = new OperandManager(separatorManager);
+        Operator operator = new Operator();
 
         if(inputManager.isCustomSeparatorCandidateExisted()) {
             separatorManager.save(inputManager.getSeparatorCandidate());
         }
-
-        OperandManager operandManager = new OperandManager(separatorManager);
         operandManager.save(inputManager.getOperandCandidates());
-
-        Operator operator = new Operator();
         BigInteger result = operator.add(operandManager.getOperands());
 
         System.out.print("결과 : " + result);
