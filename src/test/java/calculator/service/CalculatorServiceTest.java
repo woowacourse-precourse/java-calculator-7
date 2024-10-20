@@ -117,4 +117,20 @@ public class CalculatorServiceTest {
             assertTrue(e.getMessage().equals("커스텀 구분자에 숫자와 '-'를 포함할 수 없습니다."));
         }
     }
+
+    @Test
+    void 앞에_0이_붙은_숫자_예외_테스트() {
+        //given: "003"
+        CalculatorService calculatorService = new CalculatorService();
+        String input = "003";
+
+        // when & then
+        try {
+            calculatorService.calculate(input);
+            fail("IllegalArgumentException 발생 안 함");
+        } catch (IllegalArgumentException e) {
+            // 예외가 발생하면 성공
+            assertTrue(e.getMessage().equals("유효하지 않은 숫자 형식입니다."));
+        }
+    }
 }
