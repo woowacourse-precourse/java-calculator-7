@@ -2,15 +2,20 @@ package calculator;
 
 import java.util.List;
 
-import static java.lang.Integer.sum;
 
 public class StringAddCalculator {
-    public static int calculate(String input) {
+    private final InputParser inputParser;
+
+    public StringAddCalculator(InputParser inputParser) {
+        this.inputParser = inputParser;
+    }
+
+    public int calculate(String input) {
         if (input == null || input.isEmpty()) {
             return 0;
         }
 
-        List<Integer> numbers = InputParser.parse(input);
+        List<Integer> numbers = inputParser.parse();
 
         return sum(numbers);
     }
