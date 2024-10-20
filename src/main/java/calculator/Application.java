@@ -5,6 +5,7 @@ import static calculator.StringConstants.ONLY_NUMBERS;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Application {
     public static int subStringStartIndex = 0;
@@ -14,10 +15,16 @@ public class Application {
         String inputString = getInputString();
         setConditionValues(inputString);
         checkStringContainOtherChar(inputString.substring(subStringStartIndex), delimiters);
-        //입력 값 숫자로 처리
-        //연산
-        //결과 출력
-        //System.out.println(output);
+        System.out.println("결과: "+getNumbersSum(inputString));
+    }
+
+    private static int getNumbersSum(String inputString) {
+        int sum = 0;
+        StringTokenizer st = new StringTokenizer(inputString.substring(subStringStartIndex), delimiters);
+        while (st.hasMoreTokens()) {
+            sum += Integer.parseInt(st.nextToken());
+        }
+        return sum;
     }
 
     private static void setConditionValues(String inputString) {
