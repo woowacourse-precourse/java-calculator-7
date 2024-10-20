@@ -8,11 +8,12 @@ public class Parser {
     public String[] split(String input) {
         StringBuilder delimiter = new StringBuilder(DEFAULT_DELIMITERS);
 
-        Pattern pattern = Pattern.compile("//(.)\n");
+        Pattern pattern = Pattern.compile("//(.*)\\\\n");
         Matcher matcher = pattern.matcher(input);
 
-        while (matcher.find()) {
+        if (matcher.find()) {
             String customDelimiter = matcher.group(1);
+            System.out.println("d" + customDelimiter);
 
             if (customDelimiter.isEmpty()) {
                 throw new IllegalArgumentException("커스텀 구분자가 입력되지 않았습니다.");
@@ -22,8 +23,7 @@ public class Parser {
             }
 
             delimiter.append("|").append(Pattern.quote(customDelimiter));
-
-            input = input.substring(matcher.end());
+            input = matcher.replaceFirst("");
         }
 
         return input.split(delimiter.toString());
