@@ -18,4 +18,22 @@ public class DividersAndNumberSequence {
     public String getNumberSequence() {
         return numberSequence;
     }
+
+    public void setNumberSequence(String numberSequence) {
+        this.numberSequence = numberSequence;
+    }
+
+    public void updateNumberSequence() {
+        if (this.getNumberSequence() == null) {
+           throw new IllegalArgumentException();
+        }
+
+        String newNumberSequence = this.getNumberSequence();
+
+        for (String divider : dividers) {
+            newNumberSequence = newNumberSequence.replace(divider, SignAndDivider.defaultDivider1);
+        }
+
+        this.setNumberSequence(newNumberSequence);
+    }
 }

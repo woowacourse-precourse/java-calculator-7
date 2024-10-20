@@ -15,6 +15,7 @@ public class Application {
         String input = readLine();
 
         DividersAndNumberSequence dividersAndNumberSequence = getDividersAndNumberSequence(input);
+        dividersAndNumberSequence.updateNumberSequence();
     }
 
     public static DividersAndNumberSequence getDividersAndNumberSequence(String input) {
