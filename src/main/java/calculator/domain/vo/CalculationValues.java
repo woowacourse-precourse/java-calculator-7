@@ -1,10 +1,11 @@
 package calculator.domain.vo;
 
+import calculator.domain.vo.exception.NegativeException;
+import calculator.domain.vo.exception.NullEmptyException;
+
 import java.util.List;
 
-public class CalculationValues {
-
-    private final List<Integer> numbers;
+public record CalculationValues(List<Integer> numbers) {
 
     public CalculationValues(final List<Integer> numbers) {
         this.numbers = numbers;
@@ -13,12 +14,12 @@ public class CalculationValues {
 
     private void validateCalculation(List<Integer> beforeValidateCalculation) {
         if (beforeValidateCalculation.isEmpty()) {
-            throw new IllegalArgumentException();
+            throw new NullEmptyException();
         }
 
         if (beforeValidateCalculation.stream()
                 .anyMatch(n -> n < 0)) {
-            throw new IllegalArgumentException();
+            throw new NegativeException();
         }
     }
 
