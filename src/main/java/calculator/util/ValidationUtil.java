@@ -1,7 +1,7 @@
 package calculator.util;
 
 import static calculator.constant.ErrorMessage.INVALID_INPUT;
-import static calculator.constant.ErrorMessage.INVALID_SEPERATOR;
+import static calculator.constant.ErrorMessage.INVALID_SEPARATOR;
 import static calculator.constant.ErrorMessage.REQUIRED_POSITIVE_NUMBER;
 
 import java.util.regex.Matcher;
@@ -26,7 +26,7 @@ public class ValidationUtil {
         Matcher matcher = pattern.matcher(initialString);
 
         if (!matcher.find()) {
-            throw new IllegalArgumentException(INVALID_SEPERATOR);
+            throw new IllegalArgumentException(INVALID_SEPARATOR);
         }
     }
 
