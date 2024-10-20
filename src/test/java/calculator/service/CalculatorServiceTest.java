@@ -212,4 +212,18 @@ class CalculatorServiceTest {
         int result = CalculatorService.add(input);
         assertEquals(expectedSum, result);
     }
+
+    @DisplayName("글자 커스텀 구분자를 사용한 성공 로직 테스트")
+    @ParameterizedTest
+    @CsvSource({
+            "'//a\n1a2a3', 6",      // 'a'를 커스텀 구분자로 사용
+            "'//ㄱ\n1ㄱ2ㄱ3', 6",    // 'ㄱ'를 커스텀 구분자로 사용
+            "'//가\n1가2가3', 6"     // '가'를 커스텀 구분자로 사용
+    })
+    void add_withCustomLetterDelimiters_returnsSum(String input, int expectedSum) {
+        int result = CalculatorService.add(input);
+        assertEquals(expectedSum, result);
+    }
+
+    
 }
