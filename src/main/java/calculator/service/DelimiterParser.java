@@ -11,7 +11,7 @@ public class DelimiterParser {
     private static final String DEFAULT_DELIMITERS = "[,:]";
 
     public static CalculatorRequest parseDelimiters(String input) {
-        if (!input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
+        if (input.isEmpty() || Character.isDigit(input.charAt(0))) {
             return CalculatorRequest.of(DEFAULT_DELIMITERS, input);
         }
 
