@@ -12,8 +12,6 @@ import java.util.NoSuchElementException;
 public class Application {
     private static final String inputPhrase = "덧셈할 문자열을 입력해 주세요.";
     private static final String outputPhrase = "결과 : ";
-    private static final String startCustomPattern = "//";
-    private static final String endCustomPattern = "\n";
     private static StringCalculator stringCalculator;
 
     public static void main(String[] args) {
@@ -38,7 +36,8 @@ public class Application {
     }
 
     private static boolean isCustomDelimiter(String userInput) {
-        return userInput.startsWith(startCustomPattern) && userInput.contains(endCustomPattern);
+        return userInput.startsWith(stringCalculator.getStartCustomPattern())
+                && userInput.contains(stringCalculator.getEndCustomPattern());
     }
 
     private static void configureDelimiterStrategy(String userInput) {
