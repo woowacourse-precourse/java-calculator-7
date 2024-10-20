@@ -30,7 +30,7 @@ class ArrayFunction {
     }
 
     // 문자형 배열을 전달받고 파싱하여 더한 값을 리턴해준다.
-    static int resultSumValue(String[] parseArray) {
+    static long resultSumValue(String[] parseArray) {
         int[] numArray = Arrays.stream(parseArray).mapToInt(value -> {
             try {
                 value = value.replace(" ", "");
@@ -49,6 +49,8 @@ class ArrayFunction {
                 return 0;
             } catch (NumberFormatException nfe) {
                 throw new IllegalArgumentException("지정되지 않은 기호가 문자열에 있습니다.");
+            } catch (Exception e){
+                throw new IllegalArgumentException("오류가 발생했습니다.");
             }
         }).toArray();
 
