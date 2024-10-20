@@ -56,6 +56,14 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 구분자_위치_오류() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("1//;\\n1;2,3"))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
