@@ -12,7 +12,7 @@ public class Application {
             int result = calculator.calc(input);
             System.out.println(result);
         } catch (IllegalArgumentException e) {
-            System.out.println("잘못된 입력 : " + e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 }
