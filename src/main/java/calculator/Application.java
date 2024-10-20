@@ -32,6 +32,14 @@ class Calculator {
             return new DefaultParser();
         }
     }
+
+    private int[] convertToNumbers(String[] parsedNumbers) {
+        int[] numbers = new int[parsedNumbers.length];
+        for (int i = 0; i < parsedNumbers.length; i++) {
+            numbers[i] = Integer.parseInt(parsedNumbers[i]);
+        }
+        return numbers;
+    }
 }
 
 
