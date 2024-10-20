@@ -8,10 +8,10 @@ public interface NumberExtractor {
 
     public NumberDto extractNumbers(String input, String delimiter);
 
-    default Integer parseNumber(String split) {
+    default Long parseNumber(String split) {
 
         try {
-            int parseInt = Integer.parseInt(split);
+            long parseInt = Long.parseLong(split);
             return parseInt;
         } catch (NumberFormatException e) {
             ExceptionUtils.throwCanNotParseToNumberException();

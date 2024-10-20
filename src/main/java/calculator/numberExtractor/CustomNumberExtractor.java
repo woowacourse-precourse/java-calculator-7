@@ -31,7 +31,7 @@ public class CustomNumberExtractor implements NumberExtractor {
     private void saveValidatedNumber(String[] splitDelimiter, NumberRepository numberRepository) {
         for (String split : splitDelimiter) {
 
-            int parseNumber = parseNumber(split);
+            long parseNumber = parseNumber(split);
             validator.validate(parseNumber);
             numberRepository.saveNumber(parseNumber);
         }

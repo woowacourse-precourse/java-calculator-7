@@ -25,7 +25,7 @@ public class DefaultNumberExtractor implements NumberExtractor {
     private void saveValidatedNumber(String[] splitDefaultDelimiter, NumberRepository numberRepository) {
         for (String splitDefault : splitDefaultDelimiter) {
 
-            int parseNumber = parseNumber(splitDefault);
+            long parseNumber = parseNumber(splitDefault);
             validator.validate(parseNumber);
             numberRepository.saveNumber(parseNumber);
 

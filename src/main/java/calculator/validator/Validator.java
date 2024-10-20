@@ -5,7 +5,7 @@ import calculator.utils.ExceptionUtils;
 
 public interface Validator {
 
-    default void validate(int number) {
+    default void validate(long number) {
         if (number <= 0) {
 
             ExceptionUtils.throwInvalidNumberException();
