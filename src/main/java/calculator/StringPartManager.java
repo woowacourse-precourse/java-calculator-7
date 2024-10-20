@@ -6,7 +6,7 @@ public class StringPartManager {
         for (int i = 0; i < str.length(); i++) {
             char c = str.charAt(i);
             if (!isSeparator(c, separators) && !Character.isDigit(c)) {
-                throw new IllegalArgumentException("문자열 에러");
+                throw new IllegalArgumentException("커스텀 구분자 지정을 제외한 문자열은 양수와 구분자로 이루어져야 합니다");
             }
         }
     }
