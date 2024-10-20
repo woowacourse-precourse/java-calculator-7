@@ -10,5 +10,16 @@ public class Application {
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         String input = bufferedReader.readLine();
+        String[] lines = input.split("\\\\n");
+
+        String separator = getSeparator(lines[0]);
+    }
+
+    private static String getSeparator(String header) {
+        if (header.startsWith("//")) {
+            return header.substring(2);
+        }
+
+        return "[,:]";
     }
 }
