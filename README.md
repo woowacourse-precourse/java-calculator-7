@@ -31,3 +31,6 @@ feat (기능): 새로운 기능을 추가할 때 사용
 
 ## 4. 테스트 코드 : ApplicationTest
 발생할 수 있는 모든 오류와 성공 경우의 수를 테스트한다.
+
+## 5. 코드 컨밴션 준수
+intellij-java-wooteco-style를 준수한다.
