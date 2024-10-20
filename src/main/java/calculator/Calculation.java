@@ -11,6 +11,7 @@ public class Calculation {
 
         String[] parseredString = parser.split(input);
 
+        //숫자가 아닌 문자들은 공백으로 변환
         return Arrays.stream(parseredString)
                 .map(number -> number.replaceAll("[^0-9]", ""))
                 .filter(number -> !number.isEmpty())
