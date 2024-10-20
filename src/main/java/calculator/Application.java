@@ -21,6 +21,13 @@ public class Application {
                 if(input == null || input.isEmpty() || input.isBlank()) {
                     return 0;
                 }
+                String first = "" + input.charAt(0);
+                String last = "" + input.charAt(input.length()-1);
+                if(first.equals(":") || first.equals(",") || first.equals(delimiter)) {
+                    throw new IllegalArgumentException("구분자로 시작할 수 없습니다.");
+                } else if(last.equals(":") || last.equals(",") || last.equals(delimiter)) {
+                    throw new IllegalArgumentException("구분자로 끝날 수 없습니다.");
+                }
             } else {
                 throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
             }
