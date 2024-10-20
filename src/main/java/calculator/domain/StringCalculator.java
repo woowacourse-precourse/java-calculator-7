@@ -7,7 +7,9 @@ import java.util.List;
 public class StringCalculator {
 
     private List<Integer> numbers = new ArrayList<>();
-    private String[] delimiter = new String[]{",", ":"};
+    private static String[] delimiter = new String[]{",", ":"};
+    private final int CUSTOM_DELIMITER_OFFSET = 2;
+
 
     public StringCalculator(String input) {
         this.numbers = split(input);
@@ -49,7 +51,7 @@ public class StringCalculator {
         if (input.startsWith("//") && input.contains("\\n")) {
             int endIndex = input.indexOf("\\n");  // 실제 개행 문자 \n 처리
             addCustomDelimiter(input, endIndex); // 커스텀 구분자 추가
-            input = input.substring(endIndex + 2);  // 개행 문자 뒤로 이동
+            input = input.substring(endIndex + CUSTOM_DELIMITER_OFFSET);  // 개행 문자 뒤로 이동
         }
 
         // 기본 구분자 또는 커스텀 구분자로 문자열을 분리한 후 숫자 리스트로 변환
