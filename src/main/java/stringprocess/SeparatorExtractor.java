@@ -39,7 +39,7 @@ class SeparatorExtractor {
                 throw new IllegalArgumentException(ErrorMessage.CUSTOM_SEPARATOR__DECLARATION_ORDER_ERROR);
             }
 
-            if (separator.isBlank()) {
+            if (separator.isEmpty()) {
                 throw new IllegalArgumentException(ErrorMessage.SPACE_OR_CHANGING_CHAR_CANNOT_USE);
             }
 
