@@ -27,7 +27,7 @@ public class InputParser {
     public static String parseSeparator(String data) {
         StringBuilder sb = new StringBuilder(data);
         int endIndex = sb.indexOf("\\");
-        String customSeparator = sb.substring(2, endIndex).toString();
+        String customSeparator = sb.substring(2, endIndex);
         buildRegex(customSeparator);
         return customSeparator;
     }
