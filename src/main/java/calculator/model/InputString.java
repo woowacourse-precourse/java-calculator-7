@@ -51,9 +51,11 @@ public class InputString {
      * @return 문자열에서 추출한 숫자 리스트
      */
     private long[] splitStringByDelimiters(String delimiters) {
+
         String[] numbersInString = this.inputString.split(delimiters);
 
         return Arrays.stream(numbersInString)
+                .filter(s -> !s.isEmpty())
                 .mapToLong(Long::parseLong)
                 .toArray();
     }
