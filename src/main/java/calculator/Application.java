@@ -18,11 +18,13 @@ public class Application {
     public static void main(String[] args) {
         System.out.println(inputPhrase);
         String userInput = readLine();
-        stringCalculator = new StringCalculator(userInput);
+        userInput = userInput.replace("\\n", "\n");
 
+        stringCalculator = new StringCalculator(userInput);
         stringCalculator.setNumberStrategy(new SimpleNumberStrategy());
         configureDelimiterStrategy(userInput);
         configureCalculateStrategy(userInput);
+        
         try {
             System.out.println(outputPhrase + stringCalculator.operate());
         } catch (IllegalArgumentException e) {
