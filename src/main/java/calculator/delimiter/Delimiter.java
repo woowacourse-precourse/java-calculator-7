@@ -30,9 +30,7 @@ public abstract class Delimiter {
 
         if (!hasCustomDelimiter(s)) {
             if (hasDelimiter(s)) {
-                result = Arrays.stream(s.split("[:,]"))
-                        .map(str -> str.isEmpty() ? "0" : str)
-                        .toList();
+                result = divideByDelimiter(s);
 
                 if (!areDigits(result)) {
                     CalculatorException.causeException("잘못된 문자가 들어있습니다.");
@@ -59,6 +57,12 @@ public abstract class Delimiter {
 
     public boolean isDigit(String s) {
         return s.matches("\\d+"); //부호 포함x
+    }
+
+    protected List<String> divideByDelimiter(String s) {
+        return Arrays.stream(s.split("[:,]"))
+                .map(str -> str.isEmpty() ? "0" : str)
+                .toList();
     }
 
     public abstract boolean hasCustomDelimiter(String s);

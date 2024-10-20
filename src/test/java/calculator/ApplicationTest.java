@@ -43,6 +43,18 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    @DisplayName("커스텀 구분자 테스트")
+    void CustomDelimiterTest() {
+        assertAll(
+                //`//` `\n` 사이에 있는 문자의 경우 커스텀 구분자로 사용한다.
+                () -> assertSimpleTest(() -> {
+                    run("//;\\n1;2;3");
+                    assertThat(output()).contains("6");
+                })
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});

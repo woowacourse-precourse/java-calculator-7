@@ -17,6 +17,8 @@ public class Input {
             CalculatorException.causeException("띄어쓰기를 포함시킬 수 없습니다.");
         }
 
+        input = input.replace("\\n", "\n");
+
         return input;
     }
 
