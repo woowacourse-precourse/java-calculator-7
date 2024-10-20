@@ -50,6 +50,14 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 단일_숫자_입력_테스트() {
+        assertSimpleTest(() -> {
+            run("5");
+            assertThat(output()).contains("결과 : 5");
+        });
+    }
+
 
     @Override
     public void runMain() {
