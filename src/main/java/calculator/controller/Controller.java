@@ -43,7 +43,7 @@ public class Controller {
 
         validators.validateDelimiterSurroundings(calculator, inputString);
 
-        int[] numbers = utils.convertStringToIntList(inputString, calculator);
+        int[] numbers = utils.convertStringToIntList(calculator, inputString);
 
         return utils.sumIntList(numbers);
     }

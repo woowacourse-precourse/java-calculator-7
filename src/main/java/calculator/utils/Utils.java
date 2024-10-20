@@ -24,7 +24,7 @@ public class Utils {
         return sections[1];
     }
 
-    public int[] convertStringToIntList(String inputString, Calculator calculator) {
+    public int[] convertStringToIntList(Calculator calculator, String inputString) {
         String result = calculator.getDelimitersAsString();
         String[] sections = inputString.split(result);
 
