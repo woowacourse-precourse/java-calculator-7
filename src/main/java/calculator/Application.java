@@ -69,5 +69,18 @@ public class Application {
             }
             letterIndex++;
         }
+
+        // 마지막 숫자 처리
+        if (curNum.length() > 0) {
+            numArr.add(Integer.parseInt(curNum.toString()));
+        }
+
+        // 결과 계산
+        int ans = 0;
+        for (int num : numArr) {
+            ans += num;
+        }
+
+        System.out.println("결과 : " + ans);
     }
 }
