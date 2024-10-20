@@ -5,7 +5,6 @@ public class Separator {
     private static final String ZERO = "";
 
     private final Validation validation;
-    private String inputString;
 
     public Separator() {
         this.validation = new Validation();
