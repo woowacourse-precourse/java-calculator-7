@@ -38,17 +38,6 @@ public class NumberExtractor {
 		validateUsingUnregisteredDelimiter(numberSection, delimiters);
 	}
 
-	private void validateUsingUnregisteredDelimiter(String numberSection, Set<String> delimiters) {
-
-		String[] split = numberSection.split(NUMBER_REGEX);
-		Arrays.stream(split)
-			.filter(delimiter -> !delimiters.contains(delimiter) && !delimiter.isBlank())
-			.findAny()
-			.ifPresent(delimiter -> {
-				throw new IllegalArgumentException(ErrorMessage.USE_UNREGISTERED_DELIMITER.getMessage() + delimiter);
-			});
-	}
-
 	private void validateStartWithDelimiter(String numberSection, Set<String> delimiters) {
 
 		for (String delimiter : delimiters) {
@@ -71,6 +60,17 @@ public class NumberExtractor {
 				throw new IllegalArgumentException(ErrorMessage.END_WITH_DELIMITER.getMessage());
 			}
 		}
+	}
+
+	private void validateUsingUnregisteredDelimiter(String numberSection, Set<String> delimiters) {
+
+		String[] split = numberSection.split(NUMBER_REGEX);
+		Arrays.stream(split)
+			.filter(delimiter -> !delimiters.contains(delimiter) && !delimiter.isBlank())
+			.findAny()
+			.ifPresent(delimiter -> {
+				throw new IllegalArgumentException(ErrorMessage.USE_UNREGISTERED_DELIMITER.getMessage() + delimiter);
+			});
 	}
 
 	private void validateNumber(String number) {
