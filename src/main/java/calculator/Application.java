@@ -23,7 +23,6 @@ public class Application {
         //결과 처리
         int result = calculator.add(inputString);
         writer.write("결과 : " + result);
-        writer.newLine();
         writer.flush();
     }
 }
