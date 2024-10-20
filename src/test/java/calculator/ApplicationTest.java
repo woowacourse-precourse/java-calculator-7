@@ -17,6 +17,61 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자_중복_등록() {
+        assertSimpleTest(() -> {
+            run("//;;\\n1;2");
+            assertThat(output()).contains("결과 : 3");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_여러개_등록() {
+        assertSimpleTest(() -> {
+            run("//;-\\n1-2;3:4,5");
+            assertThat(output()).contains("결과 : 15");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_등록_생략() {
+        assertSimpleTest(() -> {
+            run("//\\n1,3,4:10");
+            assertThat(output()).contains("결과 : 18");
+        });
+    }
+
+    @Test
+    void 구분자만_있는_경우() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(":::,,"))
+                        .isInstanceOf(IllegalArgumentException.class));
+    }
+
+    @Test
+    void 정수_범위를_넘는_경우() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("999999999:999999999999"))
+                        .isInstanceOf(IllegalArgumentException.class));
+    }
+
+    @Test
+    void 커스텀_등록_문자열_시작_위치_오류() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("3//:\\n3:2,1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_숫자_등록_오류() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//12\\n1:2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
