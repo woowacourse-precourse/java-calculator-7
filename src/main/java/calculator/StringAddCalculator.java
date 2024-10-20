@@ -19,7 +19,7 @@ public class StringAddCalculator {
             Matcher matcher = Pattern.compile("//(.+)\n").matcher(exp);
             if(matcher.find()) {
                 delimiter = matcher.group(1);
-                exp = exp.substring(exp.indexOf("\n") + 1);
+                exp = exp.substring(matcher.end());
             } else {
                 throw new IllegalArgumentException("커스텀 구분자를 찾을 수 없습니다.");
             }
