@@ -29,6 +29,17 @@ public class Parser {
         String[] nums = input.split(separator);
         List<Integer> result = new ArrayList<>();
 
+        for (String num : nums) {
+            num = num.trim();
+            if (!num.isEmpty()) {
+                int number = Integer.parseInt(num);
+                if (number < 0) {
+                    throw new IllegalArgumentException("음수는 허용되지 않습니다: " + num);
+                }
+                result.add(number);
+            }
+        }
+
         return result;
     }
 
