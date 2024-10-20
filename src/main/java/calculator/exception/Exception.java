@@ -9,7 +9,7 @@ public class Exception {
                 throw new NumberFormatException();
             }
             int num = Integer.parseInt(s);
-            if(num < 0){
+            if(num <= 0){
                 throw new IllegalArgumentException();
             }
             return num;
@@ -25,6 +25,11 @@ public class Exception {
     }
     public static void IsArrayNotEmpty(ArrayList<Integer> array){
         if(array.size() == 0){
+            throw new IllegalArgumentException();
+        }
+    }
+    public static void IsEmptyInput(String s){
+        if(s.length() == 0){
             throw new IllegalArgumentException();
         }
     }

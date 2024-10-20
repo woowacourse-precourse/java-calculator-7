@@ -10,7 +10,6 @@ import calculator.view.OutputView;
 import java.util.ArrayList;
 
 public class Application {
-
     public static void main(String[] args) {
         GlobalConstant.StartIndex = 0;
         ArrayList<Integer> numlist;
