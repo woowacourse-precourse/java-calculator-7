@@ -12,7 +12,9 @@ public class Application {
 
         List<Integer> nums = StringParser.intListWithoutSeparator(input);
 
+        Integer sum = 0;
         for(Integer num : nums)
-            System.out.println(num);
+            sum += num;
+        System.out.println("결과 : " + sum);
     }
 }
