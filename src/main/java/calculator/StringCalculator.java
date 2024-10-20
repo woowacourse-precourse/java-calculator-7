@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,5 +45,18 @@ public class StringCalculator {
         }
 
         return userInput;
+    }
+
+    public int splitAndSum(String userInput) {
+        String separator = customSeparator.isEmpty() ? BASIC_SEPARATOR : BASIC_SEPARATOR + "|" + customSeparator;
+
+        if (this.isInvalid(userInput, separator)) {
+            throw new IllegalArgumentException();
+        }
+
+        return Arrays.stream(userInput.split(separator))
+                .filter(s -> !s.isEmpty())
+                .mapToInt(Integer::parseInt)
+                .sum();
     }
 }
