@@ -16,11 +16,7 @@ public class IOHandler {
      */
     public static String input() {
         System.out.println(INPUT_PROMPT_MESSAGE);
-        String input = Console.readLine();
-        if (input.isEmpty()) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_EMPTY_INPUT);
-        }
-        return input;
+        return Console.readLine();
     }
 
     /**
