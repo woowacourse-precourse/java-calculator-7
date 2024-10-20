@@ -77,7 +77,6 @@ public class StringCalculator {
 
     public void run() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-
         input = Console.readLine().trim();
 
         if (input.startsWith("//") && input.contains("\\n")) {
