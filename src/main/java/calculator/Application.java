@@ -20,15 +20,17 @@ public class Application {
         // 구분자가 숫자면 에러
         if(input.charAt(2)>='0'&&input.charAt(2)<='9')
             throw new IllegalArgumentException("숫자는 구분자로 설정할 수 없습니다.");
+
         return true;
     }
+
     // 구분자가 특수문자인지 확인하는 메서드
     public static boolean isSpecialRegexChar(char delimiter) {
         String specialChars = ".^$*+?()[]{}\\|/";
         return specialChars.indexOf(delimiter) != -1;
     }
 
-    // 커스텀 구분자 찾는 메서드, 유효하지 않을 시 기본 구분자 반환
+    // 커스텀 구분자 찾는 메서드, 커스텀 구분자 형식이 아닐 시 기본 구분자 반환
     public static String findCustomDelimiter(String input) {
         String delimiter = ",|:";
 
@@ -51,11 +53,13 @@ public class Application {
     // 문자열 더하는 메서드(number가 숫자가 아닌 경우 예외처리 필요)
     public static int addString(String[] numbers){
         int sum = 0;
-        for(String number: numbers){
-            int num = stringToInt(number);
-            if(num<=0) // 숫자는 양수로만 구성되어야 하므로 0도 예외처리
-                throw new IllegalArgumentException("구분자와 양수가 아닌 값은 입력할 수 없습니다.");
-            sum+=num;
+        try {
+            for (String number : numbers) {
+                int num = stringToInt(number);
+                sum += num;
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
         }
         return sum;
     }
@@ -63,7 +67,7 @@ public class Application {
     public static int stringToInt(String number){
         for(int i=0;i<number.length();i++){
             if(!(number.charAt(i)>='0'&&number.charAt(i)<='9'))
-                return -1;
+                throw new IllegalArgumentException(number +"에 유효하지 않은 문자가 포함되어 있습니다. 양수와 구분자로만 입력하세요.");
         }
         return Integer.parseInt(number);
     }
