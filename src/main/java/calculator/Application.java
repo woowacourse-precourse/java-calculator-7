@@ -9,18 +9,13 @@ public class Application {
     private static final String CUSTOM_DELIMITER_SUFFIX = "\\n"; // 커스텀 구분자 접미사
 
     public static void main(String[] args) {
-        try { //TODO: 제출할 땐 try-catch 블록을 제거
-            // 사용자 입력 받기
-            System.out.println("덧셈할 문자열을 입력해 주세요.");
-            String input = Console.readLine();
+        // 사용자 입력 받기
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        String input = Console.readLine();
 
-            // 계산 결과 출력
-            int result = calculate(input);
-            System.out.println("결과 : " + result);
-        } catch (IllegalArgumentException e) {
-            // 예외 발생 시 stack trace 출력
-            e.printStackTrace();
-        }
+        // 계산 결과 출력
+        int result = calculate(input);
+        System.out.println("결과 : " + result);
     }
 
     /**
