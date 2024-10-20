@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -11,6 +12,9 @@ public class Numbers {
     }
 
     public static Numbers from(String[] split) throws NumberFormatException {
+        if(split.length==1&&split[0].isBlank()) {
+            return new Numbers(new ArrayList<>());
+        }
         List<Integer> integers = Stream.of(split)
                 .map(Integer::parseInt)
                 .toList();
