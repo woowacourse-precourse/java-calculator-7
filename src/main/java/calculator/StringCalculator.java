@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -57,7 +58,14 @@ public class StringCalculator {
     }
 
     public void extractNumbers() {
-        List<String> stringNumbers = Arrays.asList(noBlankInput.split(regexString));
+        StringTokenizer st = new StringTokenizer(noBlankInput, regexString);
+        List<String> stringNumbers = new ArrayList<>();
+
+        while (st.hasMoreTokens()) {
+            String token = st.nextToken();
+            stringNumbers.add(token);
+        }
+
         Collections.replaceAll(stringNumbers, "", "0");
 
         intNumbers = new ArrayList<>();
