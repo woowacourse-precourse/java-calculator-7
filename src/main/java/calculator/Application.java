@@ -1,5 +1,6 @@
 package calculator;
 
+import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
@@ -8,8 +9,11 @@ public class Application {
         String result = "결과 : ";
 
         System.out.println(description);
-        String input = camp.nextstep.edu.missionutils.Console.readLine();
+        String input = Console.readLine();
 
+        if (input.isEmpty()) {
+            throw new IllegalArgumentException("Input String is empty. please check");
+        }
         Calculator cal = new calculator.Calculator();
         String res = cal.doTask(input);
 
