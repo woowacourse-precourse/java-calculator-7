@@ -18,6 +18,10 @@ public class Application {
             return 0;
         }
         String[] numbers = split(userInput);
+        return sum(numbers);
+    }
+
+    private static int sum(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
             sum += Integer.parseInt(number);
