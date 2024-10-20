@@ -42,8 +42,7 @@ public class Application {
         String customDelimiter = input.substring(2, delimiterEndIndex);
 
         if (customDelimiter.isEmpty()) {
-            System.out.println("커스텀 구분자를 입력하지 않았습니다.");
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("커스텀 구분자를 입력하지 않았습니다.");
         }
 
         for (String character : SPECIAL_CHARS) {
@@ -71,22 +70,19 @@ public class Application {
         }
 
         if (!isNumeric(string)) {
-            System.out.println("잘못된 입력입니다.");
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("잘못된 입력입니다.");
         }
 
         try {
             long number = Long.parseLong(string);
 
             if (number <= 0) {
-                System.out.println("양수만 입력할 수 있습니다.");
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("양수만 입력할 수 있습니다.");
             }
 
             return number;
         } catch (NumberFormatException e) {
-            System.out.println("숫자가 범위를 초과했습니다.");
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("숫자가 범위를 초과했습니다.");
         }
     }
 
