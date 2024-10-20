@@ -18,7 +18,7 @@ public class ParsingNumberServiceImpl implements ParsingNumberService {
 
         for (int i=0;i<s.length();i++) {
             char ch=s.charAt(i);
-            if (delimiterSize>2 && i<=4){
+            if (delimiterSize>2 && i<=delimiterSize+1){
                 continue;
             }
             else if (ch<=57 && ch>=48){

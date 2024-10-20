@@ -10,7 +10,7 @@ public class Application {
         String s= Console.readLine();
         Config config= new Config(s);
         CalculatorService calculatorService=config.calculatorService();
-        System.out.println(calculatorService.calculate());
+        System.out.println("결과 : "+calculatorService.calculate());
 
 
 

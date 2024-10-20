@@ -21,8 +21,17 @@ public class DelimiterStorageServiceImpl implements DelimiterStorageService {
         if (s.length()<=5){
             return;
         }
-        if (s.charAt(0)=='/' && s.charAt(1)=='/' && s.charAt(3)==92 && s.charAt(4)=='n'){
-            delimiters.add(s.charAt(2));
+
+        if (s.startsWith("//") ){
+            int n=s.indexOf(110);
+
+            if (n ==-1 || s.charAt(n-1)!=92){
+                throw  new IllegalArgumentException("잘못된 문자열입니다");
+            }
+            for (int i=2;i<n-1;i++){
+                delimiters.add(s.charAt(i));
+            }
+
         }
 
     }
