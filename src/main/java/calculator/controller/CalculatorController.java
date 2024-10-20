@@ -4,7 +4,11 @@ import calculator.service.CalculatorService;
 
 public class CalculatorController {
 
-    CalculatorService service = new CalculatorService();
+    private final CalculatorService service;
+
+    public CalculatorController(CalculatorService service) {
+        this.service = service;
+    }
 
     public void input() {
         service.input();
