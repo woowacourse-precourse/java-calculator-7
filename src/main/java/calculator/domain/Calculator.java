@@ -1,6 +1,5 @@
 package calculator.domain;
 
-import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -9,24 +8,22 @@ public class Calculator {
 
     private String input;
     private List<Delimiter> delimiters;
-    private SingleCustomDelimiterParser singleCustomDelimiterParser;
+    private CustomDelimiterParser customDelimiterParser;
     private String analyzingTarget;
     private Adder adder;
     private DelimiterSplitter delimiterSplitter;
 
-    public Calculator(Adder adder) {
-        printStartMessage();
+    public Calculator(Adder adder, CustomDelimiterParser customDelimiterParser) {
         this.delimiters = new ArrayList<>(List.of(new Delimiter(","), new Delimiter(":")));
-        this.singleCustomDelimiterParser = new SingleCustomDelimiterParser(input);
+        this.customDelimiterParser = customDelimiterParser;
         this.adder = adder;
         this.analyzingTarget = "";
     }
 
-    public void start() {
+    public int calculate() {
         parsingCustomDelimiter();
         List<Number> sumTargets = getSumTargets();
-        int sum = adder.calculateSum(sumTargets);
-        System.out.println("결과 : " + sum);
+        return adder.calculateSum(sumTargets);
     }
 
     private List<Number> getSumTargets() {
@@ -35,14 +32,8 @@ public class Calculator {
     }
 
     private void parsingCustomDelimiter() {
-        Optional<Delimiter> customDelimiter = singleCustomDelimiterParser.getCustomDelimiter();
+        Optional<Delimiter> customDelimiter = customDelimiterParser.getCustomDelimiter();
         customDelimiter.ifPresent(s -> delimiters.add(s));
-        this.analyzingTarget = singleCustomDelimiterParser.getRemainingInput();
+        this.analyzingTarget = customDelimiterParser.getRemainingInput();
     }
-
-    private void printStartMessage() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        this.input = Console.readLine();
-    }
-
 }

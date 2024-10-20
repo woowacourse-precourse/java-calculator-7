@@ -4,7 +4,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SingleCustomDelimiterParser {
+public class SingleCustomDelimiterParser implements CustomDelimiterParser {
     private String regex = "^//(.*?)\\\\n";
     private String input;
 
