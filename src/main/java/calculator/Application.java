@@ -8,7 +8,15 @@ public class Application {
         if (input == null || input.isEmpty()) {
             return 0;
         }
-        return Integer.parseInt(input);
+
+        String[] tokens = input.split(",|:");
+        int sum = 0;
+
+        for (String token : tokens) {
+            sum += Integer.parseInt(token);
+        }
+
+        return sum;
     }
 
     public static void main(String[] args) {
