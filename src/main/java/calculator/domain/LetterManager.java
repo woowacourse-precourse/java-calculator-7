@@ -72,10 +72,15 @@ public class LetterManager {
     }
 
     private void replaceCustomSeparatorToSeparator(String customSeparator) {
-        String separatorString = START_OF_CUSTOM_SEPARATOR_LETTER + customSeparator + END_OF_CUSTOM_SEPARATOR_LETTER;
-        int startIndex = letters.indexOf(separatorString);
-        letters.replace(startIndex, startIndex + separatorString.length(), customSeparator);
+        String regex = Pattern.quote(START_OF_CUSTOM_SEPARATOR_LETTER) + Pattern.quote(customSeparator) + Pattern.quote(END_OF_CUSTOM_SEPARATOR_LETTER);
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(letters.toString());
+        String result = matcher.replaceAll(customSeparator);
+        letters.setLength(0);
+        letters.append(result);
     }
+
+
 
     public Separators getSeparators() {
         return separators;
