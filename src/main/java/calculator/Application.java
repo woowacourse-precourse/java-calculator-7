@@ -35,9 +35,13 @@ public class Application {
 
         String[] split = input.split(",");
 
+        // 합 구하기
+        int result = 0;
         for (String s : split) {
-            System.out.println(s);
+                result += Integer.parseInt(s);
         }
+
+        System.out.println("결과 : " + result);
 
     }
 }
