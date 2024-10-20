@@ -12,20 +12,25 @@ public class Calculator {
     private CustomDelimiterParser customDelimiterParser;
     private String analyzingTarget;
     private DelimiterChecker delimiterChecker;
-    private int sum;
 
     public Calculator() {
         printStartMessage();
         this.delimiter = new ArrayList<>(List.of(",", ":"));
-        this.sum = 0;
         this.customDelimiterParser = new CustomDelimiterParser(input);
         this.analyzingTarget = "";
     }
 
-    public int start() {
+    public void start() {
         parsingCustomDelimiter();
         List<Integer> sumTarget = getSumTarget();
-        return 0;
+        int sum = calculateSum(sumTarget);
+        System.out.println("결과 : " + sum);
+    }
+
+    private int calculateSum(List<Integer> sumTarget) {
+        return sumTarget.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
     private List<Integer> getSumTarget() {
