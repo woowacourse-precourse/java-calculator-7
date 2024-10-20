@@ -21,6 +21,9 @@ public class Application {
             // 커스텀 구분자 지정
             if (input.charAt(0) == '/' && input.charAt(1) == '/' && input.charAt(3) == '\\' && input.charAt(4) == 'n') {
                 custom = input.charAt(2);
+                if (custom >= '0' && custom <= '9') {
+                    throw new IllegalArgumentException("숫자 커스텀 구분자 예외 발생");
+                }
                 input = input.substring(5);
             }
 
