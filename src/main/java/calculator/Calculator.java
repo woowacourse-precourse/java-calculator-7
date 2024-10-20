@@ -2,46 +2,50 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Calculator {
     private String input;
     private String operator = ",:";
+    private String customOperator = "";
     private String[] splitStr;
-    public String readLine(){
-        return input = Console.readLine();
+
+    public void readLine(){
+        input = Console.readLine();
     }
 
     public String[] splitInput(){
-        Pattern pattern = Pattern.compile("//.\\\\n");
+        Pattern pattern = Pattern.compile("//(.*)\\\\n");
         Matcher matcher = pattern.matcher(input);
         while(matcher.find()){
-            char c = matcher.group(0).charAt(2);
-            if(c == '\\'){
-                operator += "\\\\";
-            }else {
-                operator += c;
+            customOperator = matcher.group(1);
+            if(customOperator.equals("\\")){
+                customOperator = "\\\\";
             }
         }
 
-        String[] temp = input.split(pattern.pattern());
-        splitStr = temp[temp.length - 1].split("["+operator+"]");
-
+        //패턴제거 ex) //;\n3:4:5 -> 3:4:5
+        String temp = input.replaceAll(pattern.pattern(), "");
+        splitStr = temp.split("[" + operator + customOperator + "]");
         return splitStr;
+    }
+
+    boolean checkCustomOperator(){
+        return customOperator.isEmpty() || customOperator.equals("\\\\")
+                || (customOperator.length() == 1 && (customOperator.charAt(0) < '0' || customOperator.charAt(0) > '9'));
     }
 
 
     public void isValid() throws IllegalArgumentException{
-        for(int i=2; i<operator.length(); i++){
-           if(operator.charAt(i)>= '0' && operator.charAt(i)<= '9'){
-               throw new IllegalArgumentException("Invalid operator");
-           }
+        if(!checkCustomOperator()){
+            throw new IllegalArgumentException("Invalid operator");
         }
 
         for(String str : splitStr){
             if(!str.matches("^[0-9]*$") || str.equals("0")){
-                throw new IllegalArgumentException("Invalid number");
+                throw new IllegalArgumentException("Invalid format");
             }
         }
     }
