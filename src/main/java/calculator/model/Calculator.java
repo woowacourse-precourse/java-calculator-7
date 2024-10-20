@@ -1,6 +1,5 @@
 package calculator.model;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,6 +15,11 @@ public class Calculator {
     private List<String> splitString(String input){
 
         String delimeter = ",|:"; //기본 구문자 지정
+
+        if(input.startsWith("//") && input.indexOf("\\n")== 3){
+            String customDelimeter = input.substring(2,3);
+            delimeter += "|" + customDelimeter;
+        }
 
         String [] inputTokens = input.split(delimeter);
         return Arrays.asList(inputTokens);
