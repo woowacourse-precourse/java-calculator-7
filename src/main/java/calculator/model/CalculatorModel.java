@@ -12,23 +12,22 @@ public class CalculatorModel {
     private static final int SECOND_START = 3;
     private static final int SECOND_END = 5;
     private String delimiter = ",:";
-    private String clientNumInput = "";
+    private String input = "";
 
     private void extraDelimiter() {
-        if (!Objects.equals(clientNumInput.substring(FIRST_START, FIRST_END), FIRST_DEL)) {
+        if (!Objects.equals(input.substring(FIRST_START, FIRST_END), FIRST_DEL)) {
             return;
         }
-        if (!Objects.equals(clientNumInput.substring(SECOND_START, SECOND_END), SECOND_DEL)) {
+        if (!Objects.equals(input.substring(SECOND_START, SECOND_END), SECOND_DEL)) {
             throw new IllegalArgumentException("구분자가 잘못되었습니다.");
         }
-        delimiter += clientNumInput.substring(FIRST_DEL.length(), FIRST_DEL.length() + 1);
-        clientNumInput = clientNumInput.substring(SECOND_END);
+        delimiter += input.substring(FIRST_DEL.length(), FIRST_DEL.length() + 1);
+        input = input.substring(SECOND_END);
     }
 
-    public List<Integer> parser(String input) {
-        clientNumInput = input;
+    public List<Integer> parser() {
         extraDelimiter();
-        String[] parsedInput = clientNumInput.split("[" + delimiter + ']');
+        String[] parsedInput = input.split("[" + delimiter + ']');
         List<Integer> result = new ArrayList<>();
 
         for (String s : parsedInput) {
@@ -43,5 +42,9 @@ public class CalculatorModel {
 
     public int add(List<Integer> operands) {
         return operands.stream().mapToInt(Integer::intValue).sum();
+    }
+
+    public void setInput(String viewInput) {
+        input = viewInput;
     }
 }
