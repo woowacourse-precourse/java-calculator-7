@@ -65,6 +65,38 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자_사용_3() {
+        assertSimpleTest(() -> {
+            run("//+\\n1+2,7");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_4() {
+        assertSimpleTest(() -> {
+            run("//-\\n1-2,7");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_5() {
+        assertSimpleTest(() -> {
+            run("//*\\n1*2,7");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_6() {
+        assertSimpleTest(() -> {
+            run("///\\n1/2,7");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
     void 기본_구분자와_커스텀_구분자_혼합_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1;2,4");

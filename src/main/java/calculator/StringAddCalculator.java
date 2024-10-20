@@ -17,7 +17,17 @@ public class StringAddCalculator {
         // 입력된 구분자가 있는지 탐색
         if (startDelimiter == 0 && endDelimiter == 3) {
             // 있는 경우, 기존 구분자 케이스에 추가
-            delimiter += "|" + input.charAt(2);
+            char customDelimiter = input.charAt(2);
+
+            if (customDelimiter == '+' ||
+                customDelimiter == '-' ||
+                customDelimiter == '*' ||
+                customDelimiter == '/') {
+                delimiter += "|\\" + customDelimiter;
+            } else {
+                delimiter += "|" + customDelimiter;
+            }
+
             // 구분자 범위를 제외하고 숫자에 해당하는 부분만 추출하여 연산
             input = input.substring(endDelimiter + 2, input.length());
         }
