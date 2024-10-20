@@ -28,8 +28,8 @@ public class ApplicationContext {
      * 등록된 빈을 찾아 반환한다.
      *
      * @param cls 클래스
-     * @return 등록된 빈
      * @param <T> 클래스 타입
+     * @return 등록된 빈
      */
     public <T> T getBean(Class<T> cls) {
         Object bean = beans.get(cls);
@@ -80,9 +80,9 @@ public class ApplicationContext {
 
     /**
      * 클래스의 구현체를 찾아 반환한다.
-     *   - 빈으로 등록되어 있다면, 빈을 반환한다.
-     *   - 인터페이스라면, 인터페이스의 구현체를 등록하고 반환한다.
-     *   - 빈으로 등록되어 있지 않다면, 등록하고 반환한다.
+     * - 빈으로 등록되어 있다면, 빈을 반환한다.
+     * - 인터페이스라면, 인터페이스의 구현체를 등록하고 반환한다.
+     * - 빈으로 등록되어 있지 않다면, 등록하고 반환한다.
      *
      * @param cls 클래스
      * @return 등록된 빈(인스턴스)
@@ -135,10 +135,10 @@ public class ApplicationContext {
 
     /**
      * 빈을 등록한다.
-     *   - 클래스를 키로 인스턴스를 등록한다.
-     *   - 클래스의 인터페이스를 키로 인스턴스를 등록한다.
+     * - 클래스를 키로 인스턴스를 등록한다.
+     * - 클래스의 인터페이스를 키로 인스턴스를 등록한다.
      *
-     * @param cls 클래스
+     * @param cls      클래스
      * @param instance 인스턴스
      */
     private void registerBean(Class<?> cls, Object instance) {

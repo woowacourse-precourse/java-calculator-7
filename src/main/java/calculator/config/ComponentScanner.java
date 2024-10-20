@@ -33,7 +33,7 @@ public class ComponentScanner {
      * Component 어노테이션이 붙은 클래스를 찾아서 반환한다.
      *
      * @param packageName 기준 패키지
-     * @param file 기준 파일
+     * @param file        기준 파일
      * @return 스캔된 클래스 리스트
      */
     private static List<Class<?>> process(String packageName, File file) {
