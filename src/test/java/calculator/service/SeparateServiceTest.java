@@ -7,7 +7,10 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class SeparateServiceTest {
+    private static final String COMMA = ",";
+
     private static SeparateService separateService;
+
 
     @BeforeAll
     static void setUp() {
@@ -19,7 +22,7 @@ class SeparateServiceTest {
     void separate() {
         // given
         String input = "1,2,3";
-        String[] expected = input.split(",");
+        String[] expected = input.split(COMMA);
 
         // when
         String[] real = separateService.separate(input);
