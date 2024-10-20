@@ -3,9 +3,12 @@ package calculator;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.Scanner;
+
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 class ApplicationTest extends NsTest {
     @Test
@@ -21,6 +24,14 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("2:3:4");
             assertThat(output()).contains("결과 : 9");
+        });
+    }
+
+    @Test
+    void 공백_입력() {
+        assertSimpleTest(() -> {
+            run("\r\n");
+            assertThat(output()).contains("결과 : 0");
         });
     }
 

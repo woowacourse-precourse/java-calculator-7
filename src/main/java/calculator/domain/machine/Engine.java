@@ -11,6 +11,10 @@ public class Engine {
     }
 
     public Long operate(String target) {
+        if (target.isEmpty()) {
+            return 0L;
+        }
+
         List<Long> operands = lineSplitter.getOperands(target);
 
         return getResultOfAddition(operands);

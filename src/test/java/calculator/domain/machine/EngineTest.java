@@ -2,6 +2,7 @@ package calculator.domain.machine;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -20,5 +21,16 @@ class EngineTest {
 
         // then
         Assertions.assertEquals(9, operate);
+    }
+
+    @Test
+    @DisplayName("blank값 입력 시 0 반환")
+    void 공백_입력_결과() {
+        // given
+        // when
+        Long operate = engine.operate("");
+
+        // then
+        Assertions.assertEquals(0, operate);
     }
 }
