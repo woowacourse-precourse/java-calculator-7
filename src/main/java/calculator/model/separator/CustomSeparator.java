@@ -33,13 +33,11 @@ public class CustomSeparator implements Separator {
             throw new IllegalArgumentException(ErrorCode.INVALID_CUSTOM_SEPARATOR.getMessage());
         }
 
-        // 커스텀 구분자 추출
         String customSeparator = input.substring(input.indexOf(CUSTOM_SEPARATOR_START) + 2, separatorIndex);
         validateCustomSeparator(customSeparator);
 
-        // 기본 구분자와 커스텀 구분자를 결합한 새로운 정규식 생성
         String combinedSeparator = defaultSeparator + "|" + Pattern.quote(customSeparator);
-        return new CombinedSeparator(combinedSeparator); // 새로운 Separator를 반환
+        return new CombinedSeparator(combinedSeparator);
     }
 
     private static void validateCustomSeparator(String customSeparator) {
