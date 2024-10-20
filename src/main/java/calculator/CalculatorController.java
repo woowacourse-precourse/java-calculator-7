@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 public class CalculatorController {
     private static final CalculatorView calculatorView = new CalculatorView();
     private static final List<Integer> nums = new ArrayList<>();
-    private static final List<String> delimiters = new ArrayList<>(List.of(",", ":"));
+    private static final Delimiters delimiters = new Delimiters();
 
     public static void run() {
         startCalculator();
@@ -30,8 +30,8 @@ public class CalculatorController {
             return;
         }
 
-        if (delimiters.stream().anyMatch(d -> inputString.startsWith(String.valueOf(d))) ||
-                delimiters.stream().anyMatch(d -> inputString.endsWith(String.valueOf(d)))) {
+        if (delimiters.getDelimiters().stream().anyMatch(d -> inputString.startsWith(String.valueOf(d))) ||
+                delimiters.getDelimiters().stream().anyMatch(d -> inputString.endsWith(String.valueOf(d)))) {
             throw new IllegalArgumentException("문자열을 잘못 입력하였습니다.");
         }
 
@@ -43,7 +43,7 @@ public class CalculatorController {
         String suffix = inputString.substring(3, 5);
 
         if (prefix.equals("//") && suffix.equals("\\n")) {
-            delimiters.add(inputString.substring(2, 3));
+            delimiters.addDelimiter(inputString.substring(2, 3));
             return inputString.substring(5);
         }
 
@@ -51,7 +51,7 @@ public class CalculatorController {
     }
 
     private static void splitString(String inputString) {
-        String regex = "[" + delimiters.stream()
+        String regex = "[" + delimiters.getDelimiters().stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining()) + "]";
 
