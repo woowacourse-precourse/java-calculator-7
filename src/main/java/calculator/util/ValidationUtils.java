@@ -24,6 +24,12 @@ public class ValidationUtils {
         }
     }
 
+    private static void validateDelimiterAbsent(String input, List<String> delimiters) {
+        if (delimiters.stream().noneMatch(input::contains)) {
+            throw new IllegalArgumentException("구분자가 없습니다. 입력값은 구분자를 포함한 형식의 문자열이어야 합니다");
+        }
+    }
+
     public static void validatePositiveNumbers(List<Integer> numbers) {
         List<Integer> invalidNumbers = findNonPositiveNumbers(numbers);
 
@@ -31,6 +37,7 @@ public class ValidationUtils {
             throw new IllegalArgumentException("구분자와 양수만 입력 가능합니다. 문제가 되는 입력값: " + invalidNumbers);
         }
     }
+
 
     private static List<Integer> findNonPositiveNumbers(List<Integer> numbers) {
         return numbers.stream()
