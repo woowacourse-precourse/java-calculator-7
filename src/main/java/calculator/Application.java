@@ -24,9 +24,9 @@ public class Application {
         }
         int sum = 0;
         for (int i = 0; i < arr.length; i++) {
-            System.out.println(arr[i]);
             sum += Integer.parseInt(arr[i]);
         }
+        System.out.println("결과 : " + sum);
         Console.close();
     }
 
