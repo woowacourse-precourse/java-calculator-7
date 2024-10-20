@@ -25,8 +25,10 @@ class Splitter {
                 tokens.add(token);
                 token = "";
             }
-            else
+            else if (Character.isDigit(ch))
                 token += ch;
+            else
+                throw new IllegalArgumentException("숫자와 구분자 이외의 값은 입력할 수 없습니다.");
         }
         tokens.add(token);
 
