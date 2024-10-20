@@ -9,10 +9,18 @@ public class ExpressionToPositiveIntegerOperandConverter implements Converter<Ex
 
     @Override
     public PositiveIntegerOperand convert(final Expression expression) {
+        if (isSingleBlankOperand(expression)) {
+            return new PositiveIntegerOperand(List.of());
+        }
+
         final List<Integer> numbers = expression.getOperands().stream()
                 .map(this::parseAndValidatePositiveInteger)
                 .collect(Collectors.toList());
         return new PositiveIntegerOperand(numbers);
+    }
+
+    private boolean isSingleBlankOperand(final Expression expression) {
+        return expression.getOperands().size() == 1 && expression.getOperands().getFirst().isBlank();
     }
 
     private int parseAndValidatePositiveInteger(final String numberStr) {
@@ -30,8 +38,8 @@ public class ExpressionToPositiveIntegerOperandConverter implements Converter<Ex
     }
 
     private static void validatePositive(int parsedNumber) {
-        if (parsedNumber < 0) {
-            throw new IllegalArgumentException("음수는 허용되지 않습니다: " + parsedNumber);
+        if (parsedNumber <= 0) {
+            throw new IllegalArgumentException("0이나 음수는 허용되지 않습니다: " + parsedNumber);
         }
     }
 }
