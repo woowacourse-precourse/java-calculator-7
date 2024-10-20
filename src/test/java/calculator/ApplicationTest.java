@@ -73,7 +73,6 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 3");
         });
     }
-
     @Override
     public void runMain() {
         Application.main(new String[]{});
