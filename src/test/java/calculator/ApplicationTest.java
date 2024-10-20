@@ -34,6 +34,7 @@ public class ApplicationTest {
         assertEquals("결과 : 10", StringCalculator.calculate("//;\n1;2,3:4"));
     }
 
+
     @Test
     void testCustomDelimiterWithMultipleNumbers() {
         assertEquals("결과 : 15", StringCalculator.calculate("//;\n1;2;3;4;5"));
@@ -47,7 +48,7 @@ public class ApplicationTest {
     // 실패 케이스
     @Test
     void testInvalidCustomDelimiterFormat() {
-        assertThrows(InvalidInputException.class, () -> StringCalculator.calculate("//;\n1"));
+        assertThrows(InvalidInputException.class, () -> StringCalculator.calculate("//;\n1;2;3:"));
     }
 
     @Test
@@ -72,17 +73,17 @@ public class ApplicationTest {
 
     @Test
     void testCustomDelimiterWithAlphaCharacters() {
-        assertThrows(InvalidInputException.class, () -> StringCalculator.calculate("//;\n1;2,3:a"));
+        assertThrows(InvalidInputException.class, () -> StringCalculator.calculate("//;\\n1;2,3:a"));
     }
 
     @Test
     void testCustomDelimiterWithNonNumericCharacters() {
-        assertThrows(InvalidInputException.class, () -> StringCalculator.calculate("//;\n1;2;ㅁ;4;5"));
+        assertThrows(InvalidInputException.class, () -> StringCalculator.calculate("//;\\n1;2;ㅁ;4;5"));
     }
 
     @Test
     void testUnknownDelimiter() {
-        assertThrows(InvalidInputException.class, () -> StringCalculator.calculate("//;\n1;2,3:4?5"));
+        assertThrows(InvalidInputException.class, () -> StringCalculator.calculate("//;\\n1;2,3:4?5"));
     }
 
     @Test
