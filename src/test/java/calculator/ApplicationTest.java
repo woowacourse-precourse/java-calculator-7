@@ -62,6 +62,15 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    @DisplayName("아무 입력값도 주어지지 않았을 경우 0을 반환한다.")
+    void meetsEmptyString_Then_Zero() {
+        assertSimpleTest(() -> {
+            run("");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
