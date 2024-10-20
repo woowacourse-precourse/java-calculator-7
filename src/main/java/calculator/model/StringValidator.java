@@ -19,6 +19,15 @@ public class StringValidator {
 		delimiters.add(customDelimiter);
 	}
 
+	public void validate(String input) {
+		int currentStatus = checkStartStatus(input);
+		int index = INPUT_START_INDEX;
+		while (index < input.length()) {
+			index = checkInputStatus(input, index, currentStatus);
+			currentStatus = changeStatus(currentStatus);
+		}
+	}
+
 	private int checkStartStatus(String input) {
 		char start = input.charAt(INPUT_START_INDEX);
 		if (Character.isDigit(start)) {
