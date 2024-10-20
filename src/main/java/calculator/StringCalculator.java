@@ -28,8 +28,9 @@ public class StringCalculator {
      * 문자열 입력받는 기능
      */
     public void setInput() {
-        System.out.println("덧셈할 문자열을 입력해주세요");
+        System.out.println("덧셈할 문자열을 입력해주세요.");
         this.input = Console.readLine();
+        System.out.println(input);
     }
 
     /**
@@ -38,7 +39,6 @@ public class StringCalculator {
     public void addDelimiter(){
         if(input.length() >= 5) {
             for (int i = 0; i < input.length() - 5; i ++) {
-                System.out.println(input.substring(i, i+5));
                 if (input.startsWith("//", i) && input.startsWith("\\n", i + 3)) {
                     delimiter += input.charAt(i + 2);
                     // 원본 문자열에서 커스텀문자열 추가 부분 제거
@@ -49,13 +49,15 @@ public class StringCalculator {
             }
         }
         delimiter+="]";
-        System.out.println("delimiter : " + delimiter);
+//        System.out.println("delimiter : " + delimiter);
     }
 
-    // 문자열에서 구분자를 기준으로 숫자들을 추출하고 합을 구하는 기능
+    /**
+     *문자열에서 구분자를 기준으로 숫자들을 추출하고 합을 구하는 기능
+     */
     public void sumDelimitedNumbers(){
         String[] numList = input.split(delimiter);
-        System.out.println("numList : "+Arrays.toString(numList));
+//        System.out.println("numList : "+Arrays.toString(numList));
         for(String c : numList){
             // 구분자를 제외한 문자가 있을경우 예외처리
             if(!c.matches("^[0-9]*$")){
@@ -63,10 +65,12 @@ public class StringCalculator {
             }
             this.result += Integer.parseInt(c);
         }
-        System.out.println("sum : "+ result);
+//        System.out.println("sum : "+ result);
     }
 
-    // 결과값을 출력하는 기능
+    /**
+     * 결과값을 출력하는 기능
+     */
     public void printResult(){
         System.out.println("결과 : "+result);
     }
