@@ -11,12 +11,9 @@ public class CalculatorController {
 
     public void runProgram() {
         String userInput = calculatorView.getUserInput();
-        long[] operandArray = calculatorModel.changeStringtoLongOperandArray(userInput);
+        long result = calculatorModel.calculateSum(userInput);
+        System.out.println("result:" + result);
 
-        // test용
-        for (int i = 0; i < operandArray.length; i++) {
-            System.out.println(operandArray[i]);
-        }
 
     }
 }

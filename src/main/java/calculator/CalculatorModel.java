@@ -16,8 +16,6 @@ public class CalculatorModel {
             int lastDeliiterIndex = getLastCustomDelimiterIndex(userInput);
             System.out.println(lastDeliiterIndex);
             String delimiter = getCustomDelimiter(userInput, lastDeliiterIndex);
-            System.out.println(delimiter);
-
             String operandSubString = userInput.substring(lastDeliiterIndex + 2, userInput.length());
 
             long[] operandArrayinLong = getLongArrayFromStringArray(operandSubString, delimiter);
@@ -57,9 +55,11 @@ public class CalculatorModel {
         if (userInput.length() < 3) {
             throw new IllegalArgumentException("커스텀 구분자를 입력하지 않으셨습니다.");
         }
-
-        int delimiterIndex = userInput.lastIndexOf("\\n");
-
+        int delimiterIndex = userInput.indexOf("\\n");
+        while (delimiterIndex + 2 < userInput.length() && !Character.isDigit(userInput.charAt(delimiterIndex + 2))) {
+            delimiterIndex = userInput.indexOf("\\n", delimiterIndex + 2);
+        }
+        System.out.println("delimiterIndex: " + delimiterIndex);
         // 예외처리: \n이 끝까지 안나오는 경우
         if (delimiterIndex == -1) {
             throw new IllegalArgumentException("커스텀 구분자를 입력하지 않으셨습니다.");
@@ -79,5 +79,21 @@ public class CalculatorModel {
             throw new IllegalArgumentException("피연산자를 입력하지 않으셨습니다.");
         }
         return userInput.substring(2, delimiterIndex);
+    }
+
+    public long calculateSum(String userInput) {
+        long sum = 0;
+        long[] operandArray = changeStringtoLongOperandArray(userInput);
+
+        // test용
+        for (int i = 0; i < operandArray.length; i++) {
+            System.out.println(operandArray[i]);
+        }
+
+        for (int i = 0; i < operandArray.length; i++) {
+            sum += operandArray[i];
+        }
+
+        return sum;
     }
 }
