@@ -15,17 +15,22 @@ public class Application {
 
 
 class Calculator {
+    public int process(String input) {
+        Parser parser = new ProxyParser(chooseParser(input));  // 파서 선택
+        String[] parsedNumbers = parser.parse(input);
+        int[] numbers = convertToNumbers(parsedNumbers);
+        return calculate(numbers);
+    }
 
-    public int calculate(String[] numbers) {
+    private int calculate(int[] numbers) {
         int sum = 0;
-        for (String number : numbers) {
-            sum += Integer.parseInt(number);
+        for (int number : numbers) {
+            sum += number;
         }
         return sum;
     }
 
-
-    public Parser chooseParser(String input) {
+    private Parser chooseParser(String input) {
         if (input.startsWith("//")) {
             return new CustomParser();
         } else {
