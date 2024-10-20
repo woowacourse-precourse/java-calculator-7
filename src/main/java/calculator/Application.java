@@ -26,6 +26,24 @@ public class Application {
         return sum;
     }
 
+    private static int parseNumber(String num) {
+        int value;
+
+        try {
+            value = Integer.parseInt(num);
+            checkForNonPositiveValue(value);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("구분자와 양수 값만 입력 가능합니다: " + num);
+        }
+        return value;
+    }
+
+    private static void checkForNonPositiveValue(int value) {
+        if (value <= 0) {
+            throw new IllegalArgumentException("양수 값만 입력 가능합니다: " + value);
+        }
+    }
+
     public static void main(String[] args) {
         // TODO: 프로그램 구현
     }
