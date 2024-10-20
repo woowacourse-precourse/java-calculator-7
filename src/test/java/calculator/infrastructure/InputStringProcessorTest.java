@@ -78,13 +78,13 @@ class InputStringProcessorTest {
     }
 
     @ParameterizedTest
-    @MethodSource("provideSlicedStr")
+    @MethodSource("provideSlicedStrAndSplitStrList")
     void 문자열에서_구분자를_기준으로_잘라서_리스트를_반환하는_테스트(String slicedStr, Set<Character> separators, List<String> strList) {
         InputStringProcessor inputStringProcessor = new InputStringProcessor();
         assertThat(inputStringProcessor.splitStrBySeparator(separators, slicedStr)).isEqualTo(strList);
     }
 
-    private static Stream<Arguments> provideSlicedStr() {
+    private static Stream<Arguments> provideSlicedStrAndSplitStrList() {
         Set<Character> defaultSeparators = Set.of(':', ',');
         return Stream.of(
                 Arguments.of("12345", defaultSeparators, List.of("12345")),
