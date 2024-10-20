@@ -7,8 +7,8 @@ import java.util.regex.Pattern;
 public class Splitter implements SplitterInterface {
     private Seperator seperator;
 
-    public Splitter() {
-        this.seperator = new Seperator();
+    public void setSeperator(Seperator seperator) {
+        this.seperator = seperator;
     }
 
     @Override
