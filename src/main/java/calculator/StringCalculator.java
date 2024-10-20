@@ -2,10 +2,22 @@ package calculator;
 
 public class StringCalculator {
     public String[] splitInput(String input) {
+        if (input == null) {
+            throw new IllegalArgumentException("입력값이 null입니다.");
+        }
+
         if (input.startsWith("//")) {
             int customIdx = input.indexOf("\n");
+            if (customIdx == -1) {
+                throw new IllegalArgumentException("커스텀 구분자 형식이 올바르지 않습니다.");
+            }
+
             String custom = input.substring(2, customIdx);
             String numberString = input.substring(customIdx + 1);
+
+            if (custom.isEmpty()) {
+                throw new IllegalArgumentException("커스텀 구분자가 비어있습니다.");
+            }
 
             return numberString.split(custom);
         }
