@@ -37,4 +37,8 @@ public class StringAddCalculator {
         }
         return sum;
     }
+
+    private String findStandardDelimiter() {
+        return ",|:";
+    }
 }
