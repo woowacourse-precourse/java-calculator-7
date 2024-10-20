@@ -1,8 +1,8 @@
 package calculator.domain;
 
-import static calculator.TestConstants.BLACK_NUMBER_SIZE;
 import static calculator.TestConstants.BLANK_INPUT;
 import static calculator.TestConstants.BLANK_NUMBER;
+import static calculator.TestConstants.BLANK_NUMBER_SIZE;
 import static calculator.TestConstants.FIRST_IDX;
 import static calculator.TestConstants.FIRST_NUM;
 import static calculator.TestConstants.INPUT_CUSTOM_SEPARATOR;
@@ -14,8 +14,6 @@ import static calculator.TestConstants.THIRD_IDX;
 import static calculator.TestConstants.THIRD_NUM;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +29,7 @@ class NumbersTest {
 
         // then
         Number expectedNumber = new Number(BLANK_NUMBER);
-        assertThat(numbers.size()).isEqualTo(BLACK_NUMBER_SIZE);
+        assertThat(numbers.size()).isEqualTo(BLANK_NUMBER_SIZE);
         assertThat(numbers.compareNumber(FIRST_IDX, expectedNumber)).isTrue();
     }
 
