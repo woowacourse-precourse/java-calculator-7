@@ -6,9 +6,9 @@ public class StringCalculator {
     public int add(String input) {
         try {
             if (input.startsWith("//")) {
-                int delimiterIndex = input.indexOf("\n");
+                int delimiterIndex = input.indexOf("\\n");
                 String customDelimiter = input.substring(2, delimiterIndex);
-                input = input.substring(delimiterIndex + 1);
+                input = input.substring(delimiterIndex + 2);
                 return Arrays.stream(input.split(customDelimiter)).mapToInt(Integer::parseInt).sum();
             }
             return Arrays.stream(input.split("[,|:]")).mapToInt(Integer::parseInt).sum();
@@ -17,4 +17,3 @@ public class StringCalculator {
         }
     }
 }
-
