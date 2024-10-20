@@ -11,9 +11,13 @@ public class Application {
         // TODO: 프로그램 구현
         String input = Console.readLine();
 
-        input = parseCustomDelimiter(input);
+        String parsedInput = parseCustomDelimiter(input);
 
-        if(validateInput(input)) throw new IllegalArgumentException("잘못된 입력입니다.");
+        if(validateInput(parsedInput)) throw new IllegalArgumentException("잘못된 입력입니다.");
+
+        List<Integer> intList = extractNumberFromString(parsedInput);
+
+
     }
 
     private static String parseCustomDelimiter(String str){
@@ -36,5 +40,21 @@ public class Application {
     private static boolean isDigit(char ch){
         int chValue = ch - '0';
         return chValue >= 0 && chValue <= 9;
+    }
+
+    private static List<Integer> extractNumberFromString(String str){
+        List<Integer> result = new ArrayList<>();
+
+        int beginIdx = 0;
+        boolean delimiterDetected = false;
+
+        for (int i = 0; i < str.length(); i++) {
+            if(!isDigit(str.charAt(i))){
+                result.add(Integer.parseInt(str.substring(beginIdx, i)));
+                beginIdx = i + 1;
+            }
+        }
+
+        return result;
     }
 }
