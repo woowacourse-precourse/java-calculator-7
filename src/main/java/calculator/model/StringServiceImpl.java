@@ -45,7 +45,7 @@ public class StringServiceImpl implements StringService {
     }
 
     public static InputWithDelimiter extractCustomInputAndDelimiter(String customInput) {
-        Matcher matcher = Pattern.compile("//(.+)\\\\n(.*)").matcher(customInput);
+        Matcher matcher = Pattern.compile("//(.)\\\\n(.*)").matcher(customInput);
         if (matcher.matches()) {
             CalculatorDelimiter delimiter = new CalculatorDelimiter();
             String customDelimiter = matcher.group(1);

@@ -120,11 +120,7 @@ class StringServiceImplTest {
         String input = "//**\\n1**2**3";
 
         //when
-        List<Integer> parsedList = stringService.parse(input);
-
-        //then
-        assertThat(parsedList)
-                .isEqualTo(new ArrayList<>(Arrays.asList(1, 2, 3)));
+        assertThatThrownBy(() -> stringService.parse(input)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("커스텀 input 파싱 예외")

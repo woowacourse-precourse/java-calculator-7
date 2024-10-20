@@ -34,16 +34,16 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 커스텀_구분자가_여러문자() {
-        assertSimpleTest(() -> {
-            run("//;;\\n1;;2;;3");
-            assertThat(output()).contains("결과 : 6");
-        });
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;;\\n1;;2;;3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Test
     void 커스텀_구분자_외에_숫자_안주어짐() {
         assertSimpleTest(() -> {
-            run("//;|\\n");
+            run("//;\\n");
             assertThat(output().contains("결과 : 0"));
         });
     }
