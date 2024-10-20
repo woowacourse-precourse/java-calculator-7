@@ -21,6 +21,11 @@ public class StringParser {
                     throw new IllegalArgumentException("구분자로 역슬래시(\\)는 사용할 수 없습니다.");
                 }
 
+                // 숫자인 경우 예외 처리
+                if (isNumeric(customDelimiter)) {
+                    throw new IllegalArgumentException("숫자는 구분자로 사용할 수 없습니다");
+                }
+
                 delimiter = escapeSpecialCharacters(customDelimiter);
 
                 // 기존 방식: \n = 1글자 => Index + 1
@@ -38,5 +43,15 @@ public class StringParser {
     // 특수 문자 escape 처리
     private String escapeSpecialCharacters(String delimiter) {
         return delimiter.replaceAll("([\\[\\]\\{\\}\\(\\)\\*\\+\\?\\^\\$\\|\\.])", "\\\\$1");
+    }
+
+    // 숫자인지
+    private boolean isNumeric(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
