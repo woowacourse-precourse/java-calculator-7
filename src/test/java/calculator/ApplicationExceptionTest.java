@@ -136,10 +136,5 @@ public class ApplicationExceptionTest extends NsTest {
         public static ExceptionArgument of(String input, Class<? extends Exception> expected) {
             return new ExceptionArgument(input, expected);
         }
-
-        @Override
-        public String toString() {
-            return "{ input='" + input + "', expected=" + expected + " }";
-        }
     }
 }
