@@ -26,11 +26,12 @@ public class Application {
             }
             String strippedTokens = customPatternMatcher.group(2);
             String[] tokens = strippedTokens.split(quotedDelimiter);
-
             int sum = Arrays.stream(tokens)
                     .filter(string -> !string.isEmpty())
                     .mapToInt(Application::parsePositiveInt)
                     .sum();
+
+            System.out.println("결과 : " + sum);
             return;
         }
 
@@ -39,6 +40,8 @@ public class Application {
                 .filter(string -> !string.isEmpty())
                 .mapToInt(Application::parsePositiveInt)
                 .sum();
+
+        System.out.println("결과 : " + sum);
     }
 
     private static int parsePositiveInt(String str) {
