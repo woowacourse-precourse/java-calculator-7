@@ -17,14 +17,21 @@ public class Application {
         if (isNullOrEmpty(userInput)) {
             return 0;
         }
-        String[] numbers = split(userInput);
-        return sum(numbers);
+        return sum(toIntArray(split(userInput)));
     }
 
-    private static int sum(String[] numbers) {
+    private static int[] toIntArray(String[] numbers) {
+        int[] result = new int[numbers.length];
+        for (int i = 0; i < numbers.length; i++) {
+            result[i] = Integer.parseInt(numbers[i]);
+        }
+        return result;
+    }
+
+    private static int sum(int[] numbers) {
         int sum = 0;
-        for (String number : numbers) {
-            sum += Integer.parseInt(number);
+        for (int number : numbers) {
+            sum += number;
         }
         return sum;
     }
