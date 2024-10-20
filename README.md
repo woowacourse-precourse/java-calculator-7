@@ -41,8 +41,8 @@
 
 # 예외 처리
 
--[X] **IllegalArgumentException** : 사용자가 잘못된 값을 입력한 경우
+- [X] **IllegalArgumentException** : 사용자가 잘못된 값을 입력한 경우
 
--[X] **NumberFormatException** : 구분자가 쉼표나 콜론, 커스텀 구분자가 아닐 경우
+- [X] **NumberFormatException** : 구분자가 쉼표나 콜론, 커스텀 구분자가 아닐 경우
 
--[X] **EmptyException** : 아무 것도 입력되지 않을 경우
+- [X] **EmptyException** : 아무 것도 입력되지 않을 경우
