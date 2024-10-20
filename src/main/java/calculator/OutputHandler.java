@@ -9,13 +9,13 @@ public class OutputHandler {
 
     private static String formatResult(double result) {
         if (isInteger(result)) {
-            return String.valueOf((int) result);
+            return String.valueOf(Math.round(result));
         }
 
         return String.valueOf(result);
     }
 
     private static boolean isInteger(double number) {
-        return number == (int) number;
+        return number % 1 == 0.0;
     }
 }
