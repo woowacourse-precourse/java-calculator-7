@@ -15,5 +15,6 @@ public class CalculatorController {
         String rawInput = calculatorService.input();
         String[] paredInput = calculatorService.parsingInput(rawInput);
         String[] nums = calculatorService.validateInput(paredInput);
+        int result = calculatorService.sum(nums);
     }
 }

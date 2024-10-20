@@ -47,4 +47,12 @@ public class CalculatorService {
         }
         return paredInput;
     }
+
+    public int sum(String[] nums) {
+        int result = 0;
+        for (String num : nums) {
+            result += Integer.parseInt(num);
+        }
+        return result;
+    }
 }
