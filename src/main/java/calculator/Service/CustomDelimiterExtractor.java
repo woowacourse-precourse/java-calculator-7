@@ -12,21 +12,27 @@ public class CustomDelimiterExtractor {
     public List<String> extractDelimiter(StringCalculatorDTO inputDTO) {
         List<String> detachedInputList = inputDTO.getDetachedInput();
         List<String> result = new ArrayList<>();
-        
-        // 각 문자열에서 커스텀 구분자를 찾아 처리
-        for (String input : detachedInputList) {
-            // 정규식을 이용해 커스텀 구분자 탐색
-            Matcher matcher = Pattern.compile("//(.)\\\\n").matcher(input);
-            if (matcher.find()) {
-                // 커스텀 구분자를 추출
-                char delimiter = matcher.group(1).charAt(0);
-                System.out.println("커스텀 구분자 딜리미터 : " + delimiter);
-                // \\n 이후의 본문 문자열을 추출
-                String content = input.substring(matcher.end());
-                System.out.println("커스텀 구분자 추출 후 본문 : " + content);
-                // 본문을 커스텀 구분자로 분리하고 결과 리스트에 추가
-                result.addAll(extractCustomDelimiter(content, delimiter));
-            }
+
+        // 첫 번째 요소에서 커스텀 구분자를 추출
+        char delimiter = ',';
+        String content = "";
+
+        // 첫 번째 요소에 커스텀 구분자가 있는지 확인
+        Matcher matcher = Pattern.compile("//(.)\\\\n").matcher(detachedInputList.get(0));
+        if (matcher.find()) {
+            // 커스텀 구분자 추출
+            delimiter = matcher.group(1).charAt(0);
+
+            // 첫 번째 요소에서 본문 내용 추출
+            content = detachedInputList.get(0).substring(matcher.end());
+        }
+
+        // 첫 번째 요소의 본문 데이터 처리
+        result.addAll(extractCustomDelimiter(content, delimiter));
+
+        // 나머지 요소 처리 (커스텀 구분자를 동일하게 적용)
+        for (int i = 1; i < detachedInputList.size(); i++) {
+            result.addAll(extractCustomDelimiter(detachedInputList.get(i), delimiter));
         }
 
         return result;
@@ -52,7 +58,6 @@ public class CustomDelimiterExtractor {
         if (current.length() > 0) {
             result.add(current.toString());
         }
-        System.out.println("custom : " + result);
         return result;
     }
 }
