@@ -4,7 +4,6 @@ import camp.nextstep.edu.missionutils.Console;
 public class Input {
     public static String getUserInput() {
         String input = Console.readLine();
-        System.out.print(input.charAt(4));
         validUserInput(input);
         return input;
     }
