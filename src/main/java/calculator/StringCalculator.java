@@ -1,16 +1,20 @@
 package calculator;
 
-public class Calculator {
+public class StringCalculator {
+    private int sum = 0;
+
+    private final InputManager inputManager;
+    private final OutputManager outputManager;
     private final Validator validator;
 
-    public Calculator() {
+    public StringCalculator() {
+        this.inputManager = new InputManager();
+        this.outputManager = new OutputManager();
         this.validator = new Validator();
     }
 
-    private int sum = 0;
-
     private boolean isCustomInput(String str) {
-        return str.contains(Application.CUSTOM_DELIMITER_FRONT) && str.contains(Application.CUSTOM_DELIMITER_BACK);
+        return str.contains(Constants.CUSTOM_DELIMITER_FRONT) && str.contains(Constants.CUSTOM_DELIMITER_BACK);
     }
 
     private boolean isBasicInput(String str) {
@@ -18,12 +22,12 @@ public class Calculator {
     }
 
     private String parseCustomDelimiter(String str) {
-        return str.substring(str.indexOf(Application.CUSTOM_DELIMITER_FRONT) + 2,
-                str.indexOf(Application.CUSTOM_DELIMITER_BACK));
+        return str.substring(str.indexOf(Constants.CUSTOM_DELIMITER_FRONT) + 2,
+                str.indexOf(Constants.CUSTOM_DELIMITER_BACK));
     }
 
     private String deleteCustomDelimiter(String str) {
-        return str.substring(str.indexOf(Application.CUSTOM_DELIMITER_BACK) + 2);
+        return str.substring(str.indexOf(Constants.CUSTOM_DELIMITER_BACK) + 2);
     }
 
     private String replaceCustomToBasic(String delimiter, String str) {
@@ -41,7 +45,7 @@ public class Calculator {
     }
 
     private int calculateSum(String str) {
-        String[] numbers = str.split(Application.BASIC_DELIMITER);
+        String[] numbers = str.split(Constants.BASIC_DELIMITER);
         int sum = 0;
 
         for (String number : numbers) {
@@ -54,18 +58,22 @@ public class Calculator {
         return sum;
     }
 
-    public int processCalculate(String str) {
-        if (isCustomInput(str)) {
-            sum = handleCustomInput(str);
-        } else if (isBasicInput(str)) {
-            sum = calculateSum(str);
-        } else if (str.isEmpty()) {
+    public void processCalculate() {
+
+        String input = inputManager.inputStr();
+
+        if (isCustomInput(input)) {
+            sum = handleCustomInput(input);
+        } else if (isBasicInput(input)) {
+            sum = calculateSum(input);
+        } else if (input.isEmpty()) {
             sum = 0;
-        } else if (str.matches("[0-9]+")) {
-            sum = Integer.parseInt(str);
+        } else if (input.matches("[0-9]+")) {
+            sum = Integer.parseInt(input);
         } else {
-            validator.checkCustomStyle(str);
+            validator.checkCustomStyle(input);
         }
-        return sum;
+
+        outputManager.outputSum(sum);
     }
 }
