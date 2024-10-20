@@ -52,6 +52,16 @@ class SeparatorTest {
     }
 
     @Test
+    @DisplayName("기본 구분 테스트 - 입력의 양 끝이 숫자가 아닌 경우")
+    void givenInputWithInvalidBoundaries_whenSeparate_thenThrowsException() {
+        String input1 = "1,2:3:";
+        Assertions.assertThrows(IllegalArgumentException.class, () -> separator.separate(input1));
+
+        String input2 = ",1,2:3";
+        Assertions.assertThrows(IllegalArgumentException.class, () -> separator.separate(input2));
+    }
+
+    @Test
     @DisplayName("커스텀 구분 테스트 - 올바른 1글자의 커스텀 구분자 입력시 올바른 분리가 이루어진다.")
     void givenCustomDelimiterOfACharacter_whenSeparate_thenReturnsCorrectResult() {
         String input = "//a\\n1a2a3a4";
@@ -76,5 +86,15 @@ class SeparatorTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> separator.separate("//a\\\n1a2a3"));
         Assertions.assertThrows(IllegalArgumentException.class, () -> separator.separate("/a\\n1a2a3"));
         Assertions.assertThrows(IllegalArgumentException.class, () -> separator.separate("//a\\\n1a2a3a"));
+    }
+
+    @Test
+    @DisplayName("커스텀 구분 테스트 - 입력의 양 끝이 숫자가 아닌 경우")
+    void givenCustomInputWithInvalidBoundaries_whenSeparate_thenThrowsException() {
+        String input1 = "//b\\n1b2b3b";
+        Assertions.assertThrows(IllegalArgumentException.class, () -> separator.separate(input1));
+
+        String input2 = "//b\\nb1b2b3";
+        Assertions.assertThrows(IllegalArgumentException.class, () -> separator.separate(input2));
     }
 }
