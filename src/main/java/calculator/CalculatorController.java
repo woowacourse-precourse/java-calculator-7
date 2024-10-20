@@ -23,7 +23,7 @@ public class CalculatorController {
     }
 
     public void calculate() {
-        String input = inputView.inputString();
+        String input = inputView.inputForAddition();
 
         Separators separators = getSeparators(input);
         String inputWithoutCustomSeparators = customSeparatorManager.sliceCustomSeparators(input);
