@@ -8,8 +8,8 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class InputString {
 
-    private String inputString = "";
-    private List<String> separators = new ArrayList<>();
+    private static String inputString = "";
+    private static List<String> separators = new ArrayList<>();
 
     public List<Integer> input(){ //문자열 입력받기
         inputString = readLine();
@@ -23,19 +23,9 @@ public class InputString {
         separators.add(",");
         separators.add(":");
 
-        Integer startIdx = inputString.indexOf("//");
-
-        if(startIdx!=-1){ //커스텀 문자를 지정해주는 경우, 여러 개를 지정하는 경우도 처리
-            Integer endIdx = null;
-            while(startIdx!=-1){
-
-                endIdx = inputString.indexOf("\\n", startIdx+1);
-                if(endIdx!=-1){
-                    separators.add(inputString.substring(startIdx+2, endIdx-1));
-                }
-                startIdx = inputString.indexOf("//", endIdx+1);
-            }
-            inputString = inputString.substring(endIdx+2); // 커스텀 문자열 입력 부분 제거
+        while (inputString.startsWith("//") && inputString.contains("\\n")){
+            separators.add(inputString.substring(2, inputString.indexOf("\\n")));
+            inputString = inputString.substring(inputString.indexOf("\\n")+2, inputString.length());
         }
 
         List<Integer> number = new ArrayList<>();
@@ -57,7 +47,6 @@ public class InputString {
                 if(i.contains(separator)){ //고려해야 할 구분자를 포함하고 있다면
                     pharseNum.remove(i);
                     nums = i.split(separator);
-
                     for (String num : nums) {
                         if(isStringInteger(num)) {
                             Integer n = Integer.valueOf(num);
