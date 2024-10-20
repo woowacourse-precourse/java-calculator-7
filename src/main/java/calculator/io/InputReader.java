@@ -7,5 +7,4 @@ public class InputReader {
     public String readInput() {
         return Console.readLine();
     }
-
 }
