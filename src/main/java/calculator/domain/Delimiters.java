@@ -51,7 +51,7 @@ public class Delimiters {
         return input.startsWith(CUSTOM_DELIMITER_START_SEPARATOR);
     }
 
-    public void validateDelimiter(String delimiter){
+    private void validateDelimiter(String delimiter){
         if(!isSingleCharacterDelimiter(delimiter)){
             throw new IllegalArgumentException("구분자는 길이가 1인 문자여야 합니다.");
         }
