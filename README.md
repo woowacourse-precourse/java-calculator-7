@@ -49,6 +49,11 @@
 
 - Constants : StringCalculator, StringValidator, 그 외 테스트 클래스에서 사용되는 상수 정의
 
+## [클래스 다이어그램]
+
+![1차 기능구현](https://github.com/user-attachments/assets/a37971e5-dd94-48d0-86f3-780e8800b8c1)
+
+
 ## [2차 기능 구현]
 
 #### 수정 일시 : 2024. 10. 17 오후 11시
@@ -108,3 +113,7 @@
 5. constants
 
 - InValidInputConstants : 잘못된 문자열이 입력되었을 때 유형에 알맞은 출력 문구 정의
+
+## [클래스 다이어그램]
+
+![2차 기능구현](https://github.com/user-attachments/assets/98d959a7-74e8-492a-b37d-d1f24c69f904)
