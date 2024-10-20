@@ -9,7 +9,7 @@
 - Windows 사용자의 경우 gradlew.bat clean test 또는 .\gradlew.bat clean test 명령을 실행할 때 모든 테스트가 아래와 같이 통과하는지 확인한다.
 BUILD SUCCESSFUL in 0s
 
-- AngularJS Git Commit Message Conventions (https://gist.github.com/stephenparish/9941e89d80e2bc58a153)을 참고해 커밋 메시지를 작성한다.
+- AngularJS Git Commit Message Conventions (https://gist.github.com/stephenparish/9941e89d80e2bc58a153) 을 참고해 커밋 메시지를 작성한다.
 - 자바 코드 컨벤션을 지키면서 프로그래밍한다 : 기본적으로 Java Style Guide를 원칙으로 한다.
 - 라이브러리 camp.nextstep.edu.missionutils에서 제공하는 Console API를 사용하여 구현해야 한다.
   - 사용자가 입력하는 값은 camp.nextstep.edu.missionutils.Console의 readLine()을 활용한다.
