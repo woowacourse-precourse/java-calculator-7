@@ -66,6 +66,11 @@ public class Application {
             }
         }
 
+        // (커스텀 구분자 지정 문구를 제외한) 문자열 입력이 없는 경우
+        if (inputString.length() == 0){
+            throw new IllegalArgumentException("덧셈을 진행할 문자열을 입력하세요.");
+        }
+
         return inputString;
     }
 
