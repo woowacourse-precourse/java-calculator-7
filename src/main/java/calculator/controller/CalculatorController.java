@@ -16,7 +16,7 @@ public class CalculatorController {
     public void calculate() {
         String input = calculatorView.getInput();
         calculatorModel.setInput(input);
-        List<Integer> operands = calculatorModel.parser();
+        List<Integer> operands = calculatorModel.parse();
         int result = calculatorModel.add(operands);
         calculatorView.printResult(result);
     }

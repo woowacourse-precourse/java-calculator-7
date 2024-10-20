@@ -25,7 +25,7 @@ public class CalculatorModel {
         input = input.substring(SECOND_END);
     }
 
-    public List<Integer> parser() {
+    public List<Integer> parse() {
         extraDelimiter();
         String[] parsedInput = input.split("[" + delimiter + ']');
         List<Integer> result = new ArrayList<>();
