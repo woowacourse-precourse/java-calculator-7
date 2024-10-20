@@ -16,8 +16,8 @@ public class CalculationString {
 
         List<SumValue> sumValues = Arrays.stream(splitValueWithDelimiters(regex))
                 .map(str -> stringToInteger(str))
-                .map(SumValue::new)
-                .collect(Collectors.toList());
+                        .map(SumValue::new)
+                                .collect(Collectors.toList());
 
         return new SumValues(sumValues);
     }

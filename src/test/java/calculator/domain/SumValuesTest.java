@@ -14,12 +14,7 @@ class SumValuesTest {
     public void sumAll() {
         //given
         SumValues sumValues = new SumValues(
-                Arrays.asList(
-                        new SumValue(1),
-                        new SumValue(2),
-                        new SumValue(3),
-                        new SumValue(4)
-                )
+                Arrays.asList(new SumValue(1), new SumValue(2), new SumValue(3), new SumValue(4))
         );
 
         //when

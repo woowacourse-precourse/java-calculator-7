@@ -11,7 +11,8 @@ public class Delimiters {
         delimiters.add(",");
 
         if (customDelimiter != null) {
-            delimiters.add(customDelimiter.getValue());
+            String customDelimiterValue = customDelimiter.getValue();
+            delimiters.add(customDelimiterValue);
         }
     }
 

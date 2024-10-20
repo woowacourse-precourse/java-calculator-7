@@ -7,7 +7,7 @@ public class StringCalculator {
 
         return inputString
                 .extractCalculationString()
-                .getSumValues(delimiters)
-                .sumAll();
+                        .getSumValues(delimiters)
+                                .sumAll();
     }
 }

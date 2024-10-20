@@ -15,7 +15,8 @@ class SumValueTest {
         SumValue result = new SumValue(1);
 
         //then
-        assertThat(result.getValue()).isEqualTo(1);
+        assertThat(result.getValue())
+                .isEqualTo(1);
     }
     
     @Test
@@ -26,6 +27,6 @@ class SumValueTest {
         //then
         assertThatThrownBy(() -> new SumValue(-1))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("양수만 입력");
+                        .hasMessage("양수만 입력");
     }
 }

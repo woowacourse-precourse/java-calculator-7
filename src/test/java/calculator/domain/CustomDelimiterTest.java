@@ -15,7 +15,8 @@ class CustomDelimiterTest {
         CustomDelimiter result = new CustomDelimiter("t");
 
         //then
-        assertThat(result.getValue()).isEqualTo("t");
+        assertThat(result.getValue())
+                .isEqualTo("t");
     }
 
     @Test
@@ -26,6 +27,6 @@ class CustomDelimiterTest {
         //then
         assertThatThrownBy(() -> new CustomDelimiter("test"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("구분자는 길이 1의 문자여야합니다");
+                        .hasMessage("구분자는 길이 1의 문자여야합니다");
     }
 }
