@@ -8,7 +8,8 @@ public class Application {
         String input = Input.getInput();
 
         Adder adder = new Adder();
-        Calculator calculator = new Calculator(adder);
+        Delimiters delimiters = new Delimiters();
+        Calculator calculator = new Calculator(adder, delimiters);
 
         try {
             int result = calculator.calculate(input);
