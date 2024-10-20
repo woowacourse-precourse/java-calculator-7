@@ -14,11 +14,24 @@ public class Application {
         if (input.startsWith("//")) {
             input = separator.extractCustomSeparatorFrom(input);
         }
+
+//        출력하기.
+        System.out.print("결과 : " + getSum(separator.getNumbersFrom(input)));
+
+
     }
 
     public static String getInput() {
         System.out.println("덧셈할 문자열을 입력해 주세요. ");
         return Console.readLine();
+    }
+
+    public static int getSum(String[] numbers) {
+        int sum = 0;
+        for (String number : numbers) {
+            sum += getValidatedNumber(number);
+        }
+        return sum;
     }
 
     public static int getValidatedNumber(String number) {
