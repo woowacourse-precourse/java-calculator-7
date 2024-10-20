@@ -18,6 +18,7 @@ public class NumberCalculatorController extends CalculatorController {
 
     @Override
     public void run() {
+        outputView.printBeforeReadUserInput();
         String input = inputView.readUserInput();
 
         List<? extends Number> numbers = convertToNumbers(input);
