@@ -1,7 +1,6 @@
 package calculator.controller;
 
 import calculator.Delimiter;
-import calculator.Number;
 import calculator.UserInputString;
 import calculator.view.InputView;
 import calculator.view.OutputView;
@@ -19,11 +18,7 @@ public class CalculatorController {
 
         String delimiterRegex = new Delimiter(userInput.getInput()).getDelimiterRegex();
 
-        List<String> parser = userInput.parser(delimiterRegex);
-        List<Long> inputNumbers = parser.stream().map(token -> {
-            Number number = new Number(token);
-            return number.getInputNumbers();
-        }).toList();
+        List<Long> inputNumbers = userInput.parser(delimiterRegex);
 
         if (inputNumbers.size() > 10) {
             throw new IllegalArgumentException("10개 이상의 숫자를 더할 수 없습니다.");

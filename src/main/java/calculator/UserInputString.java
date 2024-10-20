@@ -21,7 +21,7 @@ public class UserInputString {
         return input.isEmpty();
     }
 
-    public List<String> parser(String delimiterRegex) {
+    public List<Long> parser(String delimiterRegex) {
         String numbers = "";
         if (delimiterRegex.equals(",|:")) {
             numbers = input;
@@ -33,7 +33,15 @@ public class UserInputString {
             }
 
         }
-        InputParser inputParser = new InputParser(delimiterRegex, numbers);
-        return inputParser.parse();
+        return convertToLongList(new InputParser(delimiterRegex, numbers).parse());
+    }
+
+    private List<Long> convertToLongList(List<String> userInputNumbers) {
+        return userInputNumbers
+                .stream()
+                .map(token -> {
+                    Number number = new Number(token);
+                    return number.getInputNumber();
+                }).toList();
     }
 }

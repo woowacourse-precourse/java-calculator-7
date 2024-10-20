@@ -23,7 +23,7 @@ public class Number {
         }
     }
 
-    public Long getInputNumbers() {
+    public Long getInputNumber() {
         return inputNumber;
     }
 }
