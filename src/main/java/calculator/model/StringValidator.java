@@ -27,6 +27,14 @@ public class StringValidator {
 		return DELIMITER;
 	}
 
+	private int checkInputStatus(String input, int index, int currentStatus) {
+		return switch (currentStatus) {
+			case DIGIT -> checkInputDigit(input, index);
+			case DELIMITER -> checkInputDelimiter(input, index);
+			default -> throw new IllegalArgumentException("잘못된 문자열 형식입니다.");
+		};
+	}
+
 	private int checkInputDigit(String input, int index) {
 		if (!Character.isDigit(input.charAt(index))) {
 			throw new IllegalArgumentException("잘못된 문자열 형식입니다.");
