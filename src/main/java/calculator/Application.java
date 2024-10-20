@@ -10,16 +10,10 @@ import java.util.regex.Pattern;
 public class Application {
     static List<String> separator = new ArrayList<>(Arrays.asList(",", ":"));
     public static void main(String[] args) {
-        try {
             String userInput = Console.readLine();
             userInput = addSeparator(userInput);
-            int[] numbers = separatorNum(userInput);
-            System.out.println("결과 : " + cal_sum(numbers));
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            throw e;
-        }
-
+            int[] numbers = separateNum(userInput);
+            System.out.println("결과 : " + calculateSum(numbers));
     }
 
     public static String addSeparator(String userInput) {
@@ -35,7 +29,7 @@ public class Application {
         return userInput;
     }
 
-    public static int[] separatorNum(String userInput) {
+    public static int[] separateNum(String userInput) {
         StringBuilder separator_sb = new StringBuilder();
         for (String str : separator) {
             if (!separator_sb.isEmpty()) {
@@ -44,6 +38,8 @@ public class Application {
             separator_sb.append(Pattern.quote(str));
         }
         String[] strarr =  userInput.split(separator_sb.toString(), -1);
+
+
         int[] intarr = new int[strarr.length];
 
 
@@ -54,14 +50,14 @@ public class Application {
                     throw new IllegalArgumentException("오류: 음수는 허용되지 않습니다.");
                 }
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("오류: 허용하지 않는 구분자를 사용하였습니다: " + strarr[i]);
+                throw new IllegalArgumentException("오류: 입력값이 올바르지 않습니다.");
             }
         }
 
         return intarr;
     }
 
-    public static int cal_sum(int[] numbers) {
+    public static int calculateSum(int[] numbers) {
         int sum = 0;
         for(int i : numbers) {
             sum += i;
