@@ -12,7 +12,6 @@ public class DefaultDelimiter implements Delimiter {
 
     @Override
     public String[] split(String input) {
-        validate(input);
         return input.split(DELIMITER_REGEX);
     }
 }

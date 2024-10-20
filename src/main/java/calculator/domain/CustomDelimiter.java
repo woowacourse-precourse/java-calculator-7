@@ -23,7 +23,6 @@ public class CustomDelimiter implements Delimiter {
 
     @Override
     public String[] split(String input) {
-        validate(input);
         Matcher matcher = getMatcher(input);
         matcher.matches();
         String customDelimiter = matcher.group(1);
