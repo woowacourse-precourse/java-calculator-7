@@ -30,19 +30,17 @@ public class Application {
             if (input.contains("\\n")) {
                 // 문자로 처리
                 String[] customDelimiterParts = input.split("\\\\n");
-                /*
-                for (int i = 0; i < customDelimiterParts.length; i++) {
-                    System.out.println(customDelimiterParts[i]);
-                }
-                */
+
                 // 커스텀 구분자 처리
                 int index = 0;
                 while (index < customDelimiterParts.length && customDelimiterParts[index].startsWith("//")) {
-                    // 구분자 스트링에 커스텀 구분자 추가
-                    delimiters += "|" + customDelimiterParts[index].substring(2); // // 이후의 구분자만 추출
+                    // 구분자 스트링에 커스텀 구분자 추가 (정규식 특수 문자 이스케이프 처리)
+                    String customDelimiter = customDelimiterParts[index].substring(2);
+                    // 특수 문자 이스케이프
+                    customDelimiter = escapeCharacter(customDelimiter);
+                    delimiters += "|" + customDelimiter;
                     index++;
                 }
-                //System.out.println("사용된 구분자: " + delimiters);
 
                 // 구분자 이후 숫자 부분 처리
                 if (index < customDelimiterParts.length) {
@@ -50,7 +48,6 @@ public class Application {
                 } else {
                     numbers = "";
                 }
-                //System.out.println("숫자 부분: " + numbers);
 
                 // 숫자 부분이 없을 경우 0 반환
                 if (numbers.trim().isEmpty()) {
@@ -75,4 +72,11 @@ public class Application {
         // 덧셈 처리 전 임시 값
         return -1;
     }
+
+    // 정규식에서 특수 문자를 이스케이프 처리하는 메서드
+    private static String escapeCharacter(String delimiter) {
+        return delimiter.replaceAll("([\\W])", "\\\\$1");
+    }
+
+
 }
