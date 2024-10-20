@@ -1,4 +1,4 @@
-package calculator;
+package calculator.machine;
 
 import java.util.List;
 

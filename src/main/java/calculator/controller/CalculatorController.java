@@ -1,5 +1,9 @@
-package calculator;
+package calculator.controller;
 
+import calculator.machine.CalculatingMachine;
+import calculator.separator.CustomSeparator;
+import calculator.separator.DefaultSeparator;
+import calculator.separator.Separator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class CalculatorController {
