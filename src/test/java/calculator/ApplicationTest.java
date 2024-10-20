@@ -44,7 +44,7 @@ class ApplicationTest extends NsTest {
     void 기본_구분자가_아닌_구분자를_사용() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1.2;3"))
-                        .isInstanceOf(NumberFormatException.class)
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
