@@ -7,10 +7,7 @@ import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        // 사용자에게 문자열 입력 요청
-        String input = InputHandler.getInput(scanner);
+        String input = InputHandler.getInput();
 
         StringSumCalculator calculator = new StringSumCalculator();
         try {
@@ -20,8 +17,6 @@ public class Application {
         } catch (IllegalArgumentException e) {
             // 잘못된 입력이 있을 경우 예외 처리
             throw e;
-        } finally {
-            scanner.close();
         }
     }
 }
