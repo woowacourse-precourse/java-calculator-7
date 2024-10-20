@@ -13,7 +13,7 @@ public class ConsoleView {
 
     // 계산 결과를 콘솔에 출력하는 메서드
     public void printResult(int result) {
-        System.out.println("결과 : " +  result);
+        System.out.println("결과 : " + result);
     }
 
 }

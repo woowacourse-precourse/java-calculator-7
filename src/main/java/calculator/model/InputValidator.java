@@ -12,8 +12,8 @@ public class InputValidator {
 
     // 입력을 받아 검증하고 숫자 배열을 반환하는 메서드
     public String[] validate(String input) {
-        if(input == null || input.isEmpty()) {
-            return new String[] {"0"}; // 빈 입력일 경우 기본값 반환
+        if (input == null || input.isEmpty()) {
+            return new String[]{"0"}; // 빈 입력일 경우 기본값 반환
         }
 
         if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
@@ -35,7 +35,7 @@ public class InputValidator {
         int delimiterIndex = input.indexOf(NEWLINE);
 
         // 구분자 포맷이 잘못된 경우 예외 발생
-        if (delimiterIndex == -1 ) {
+        if (delimiterIndex == -1) {
             throw new IllegalArgumentException("입력 형식이 잘못되었습니다. 커스텀 구분자는 //로 시작하고 \\n으로 끝나야 합니다.");
         }
 
@@ -48,7 +48,7 @@ public class InputValidator {
         }
 
         // 구분자 이후 숫자 부분 추출
-        String numbersPart = input.substring(delimiterIndex +2); // 구분자 이후 숫자 부분 추출
+        String numbersPart = input.substring(delimiterIndex + 2); // 구분자 이후 숫자 부분 추출
 
         if (numbersPart.isEmpty()) {
             throw new IllegalArgumentException("숫자 부분이 비어 있습니다.");
