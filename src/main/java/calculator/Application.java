@@ -19,6 +19,7 @@ public class Application {
         } else {
             DividersAndNumberSequence dividersAndNumberSequence = getDividersAndNumberSequence(input);
             dividersAndNumberSequence.updateNumberSequence();
+            getNumberList(dividersAndNumberSequence.getNumberSequence());
         }
     }
 
@@ -69,6 +70,29 @@ public class Application {
         }
 
         return true;
+    }
+
+    public static List<Integer> getNumberList (String numberSequence) {
+        String[] numberByDefaultDivider1 = numberSequence.split(SignAndDivider.defaultDivider1);
+        List<Integer> numberList = new ArrayList<>();
+
+        for (String token : numberByDefaultDivider1) {
+            if (isValidFormatNumber(token)) {
+                numberList.add(Integer.parseInt(token));
+            }
+        }
+
+        return numberList;
+    }
+
+    public static boolean isValidFormatNumber(String token) {
+        boolean isValid = token.matches("\\d+") && !token.startsWith("-");
+
+        if (isValid) {
+            return true;
+        }
+
+        throw new IllegalArgumentException();
     }
 }
 
