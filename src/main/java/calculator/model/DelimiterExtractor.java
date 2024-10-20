@@ -11,6 +11,9 @@ public class DelimiterExtractor {
             Matcher matcher = Pattern.compile("//(.)\\\\n").matcher(input);
             if (matcher.find()) {
                 String customDelimiter = matcher.group(1);
+                if (customDelimiter.equals("-")) {
+                    return Pattern.quote(customDelimiter) + "|—|" + DEFAULT_DELIMITERS;
+                }
                 return Pattern.quote(customDelimiter) + "|" + DEFAULT_DELIMITERS;
             }
         }
