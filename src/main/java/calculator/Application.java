@@ -27,9 +27,14 @@ public class Application {
             if ((token = st.nextToken()).contains("-")) {
                 throw new IllegalArgumentException("양수만 입력해야합니다.");
             }
-            if(token.equals(" "))
+            if (token.equals(" ")) {
                 throw new IllegalArgumentException("공란이 아닌 유효한 양수만 입력해야합니다.");
-            sum += Integer.parseInt(token);
+            }
+            try {
+                sum += Integer.parseInt(token);
+            }catch (Exception e){
+                throw new IllegalArgumentException("구분자가 아닌 문자가 포함되어 있습니다.");
+            }
         }
         return sum;
     }
