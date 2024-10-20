@@ -13,4 +13,14 @@ public class Application {
         String input = scanner.nextLine();
         return input;
     }
+
+    public int[] sliceString(String input){
+        String[] slice = input.split("[,;]");
+        int[] numList = new int[slice.length];
+
+        for (int i = 0; i < slice.length; i++) {
+            numList[i] = Integer.parseInt(slice[i]);
+        }
+        return numList;
+    }
 }
