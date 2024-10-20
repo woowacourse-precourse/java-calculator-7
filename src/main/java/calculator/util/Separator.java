@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class Separator {
     private static final String CUSTOM_PATTERN = "^//(.*)\\\\n(.*)";
     private static final String DEFAULT_PATTERN = "[,:]";
-    private static final String DIGITS_PATTERN = "\\d+";
+    private static final String ONLY_DIGITS_PATTERN = "\\d+";
     private static final Pattern COMPILE_PATTERN = Pattern.compile(CUSTOM_PATTERN);
     private static final int CUSTOM_DELIMITER_GROUP_INDEX = 1;
     private static final int VALUES_GROUP_INDEX = 2;
@@ -51,6 +51,6 @@ public class Separator {
     }
 
     private static boolean isDigitsOnly(String input) {
-        return input.matches(DIGITS_PATTERN);
+        return input.matches(ONLY_DIGITS_PATTERN);
     }
 }
