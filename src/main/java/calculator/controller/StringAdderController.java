@@ -27,10 +27,9 @@ public class StringAdderController {
         }
 
         List<String> tokens = inputView.separateStringToList(additionInput, delimiters);
-        NumberValidator.validateContainsOnlyDigits(tokens);
+        NumberValidator.validateContainsOnlyPositiveDigits(tokens);
 
         List<Integer> operands = inputView.getOperands(tokens);
-        NumberValidator.validateContainsOnlyPositiveNumber(operands);
 
         int sum = adderService.sumAll(operands);
         outputView.printSumResult(sum);
