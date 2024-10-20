@@ -3,8 +3,6 @@ package calculatorservice;
 import static vaildation.InputValidation.CheckCustomDelimiter;
 import static vaildation.InputValidation.CheckInput;
 
-import exception.CustomDelimiterException;
-
 public class DelimiterService { // 코드 실행 제어 서비스 클래스
     public long DelimiterProcess(String input) {
         long sumResult = 0;
@@ -19,7 +17,7 @@ public class DelimiterService { // 코드 실행 제어 서비스 클래스
             }
             customDelimiter = CheckInput(input, customDelimiter); // 입력 유효성
             sumResult = SumInput(input, customDelimiter); // 숫자의 합
-        } catch (CustomDelimiterException e) {
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }
 
@@ -28,14 +26,14 @@ public class DelimiterService { // 코드 실행 제어 서비스 클래스
 
     //입력의 유효성이 증명되면 덧셈을 수행한다.
     public static long SumInput(String remainingInput, String customDelimiter) {
+        if (remainingInput.isEmpty()) {
+            return 0;
+        }
         long sum = 0;
         String[] sumToken = remainingInput.split(customDelimiter);
 
         for (String token : sumToken) {
-            if (!token.isBlank()) //중복되어 구분자가 사용될 경우 빈칸으로 인식
-            {
-                sum += Long.parseLong(token);
-            }
+            sum += Long.parseLong(token);
         }
 
         return sum;

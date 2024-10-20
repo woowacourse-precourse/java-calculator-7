@@ -1,6 +1,7 @@
 package vaildation;
 
-import exception.CustomDelimiterException;
+
+import java.util.regex.Pattern;
 
 public class InputValidation { // 입력의 유효성을 확인하는 클래스이다.
 
@@ -12,9 +13,8 @@ public class InputValidation { // 입력의 유효성을 확인하는 클래스�
         if (input.contains("//") && input.contains("\\n")) {
             int start = input.indexOf("//");
             int end = input.indexOf("\\n");
-            if (start != 0 || start > end || end - start > 3) {
-                throw new CustomDelimiterException("커스텀 구분자는 숫자가 아닌 단일 문자로써 처음에 위치해야 합니다. \n"
-                        + "\"//\"와 \"\\n\"으로 문자를 둘러싼 형식으로 작성하세요.");
+            if (start != 0 || start > end) {
+                throw new IllegalArgumentException();
             }
             checkResult[0] = input.substring(start + 2, end); // 커스텀 구분자
             checkResult[1] = input.substring(end + 2); // 커스텀구분자와 지정문자 이후의 input으로 업데이트한다.
@@ -25,17 +25,17 @@ public class InputValidation { // 입력의 유효성을 확인하는 클래스�
 
     //Input 자체의 유효성을 확인하는 메서드이다.
     public static String CheckInput(String input, String customDelimiter) {
-        String delimiter = "[, :";  // 기본 구분자 처리
-        if (customDelimiter != null && !customDelimiter.isBlank()) {
-            delimiter += customDelimiter; // 커스텀 구분자가 존재했으면 이를 포함하여 검사한다.
+        if (input.isEmpty()) {
+            return null;
         }
-        delimiter += "]";
+        String delimiter = "[,:]";  // 기본 구분자 처리
+        if (customDelimiter != null && !customDelimiter.isBlank()) {
+            delimiter += "|" + Pattern.quote(customDelimiter); // 커스텀 구분자가 존재했으면 이를 포함하여 검사한다.
+        }
 
         String[] tokens = input.split(delimiter); // 구분자를 바탕으로 문자열을 분류한다.
         for (String token : tokens) {
-            if (!token.isBlank()) {
-                CheckNumber(token);
-            }
+            CheckNumber(token);
         }
 
         return delimiter;
