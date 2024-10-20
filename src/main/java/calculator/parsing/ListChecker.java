@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListChecker {
-    private static final int MAX_DELIMITERS = 3;
     private static final String DEFAULT_DELIMITER1 = ":";
     private static final String DEFAULT_DELIMITER2 = ",";
 
