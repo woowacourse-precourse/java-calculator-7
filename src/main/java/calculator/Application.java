@@ -16,14 +16,6 @@ public class Application {
         }
         // 구분자 분리 기능
         String[] splitInputNumber = splitInputNumber(inputNumber);
-
-        // 빈 배열인 경우
-        System.out.println(splitInputNumber.length);
-//        if (splitInputNumber.length == 1) {
-//            System.out.println("결과 : 0");
-//            return;
-//        }
-
         // 구분된 문자열이 양수인 문자열인지 체크1
         validateSplitNumber(splitInputNumber);
         // 결과 출력
@@ -52,7 +44,6 @@ public class Application {
         } else {
             // 커스텀 구분자가 없을 때
             splitInputNumber = inputNumber.split(defaultDelimiter);
-//            System.out.println(Arrays.toString(splitInputNumber));
         }
         return splitInputNumber;
     }
@@ -68,8 +59,6 @@ public class Application {
     }
 
     private static void validateSplitNumber(String[] splitInputNumber) {
-        System.out.println(Arrays.toString(splitInputNumber));
-
         for (String number : splitInputNumber) {
             if (!number.matches("\\d+")) {
                 throw new IllegalArgumentException();
