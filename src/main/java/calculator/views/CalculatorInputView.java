@@ -14,7 +14,7 @@ public class CalculatorInputView {
         System.out.println(INPUT_PROMPT);
     }
 
-    public static void displayResult(long result) {
+    public static void displayResult(String result) {
         System.out.println(RESULT_MESSAGE + result);
     }
 }
