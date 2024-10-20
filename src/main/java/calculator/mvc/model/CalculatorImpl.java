@@ -1,7 +1,6 @@
 package calculator.mvc.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CalculatorImpl implements Calculator {
@@ -34,7 +33,7 @@ public class CalculatorImpl implements Calculator {
     private boolean existCustomSeparator(String input) throws IllegalStateException {
         if (input.startsWith(customSeparators.get(0))) {
             if (input.indexOf(customSeparators.get(1)) == -1) {
-                throw new IllegalArgumentException("\"\n\"가 문자열에 존재하지 않습니다.");
+                throw new IllegalArgumentException("\"\\n\"가 문자열에 존재하지 않습니다.");
             }
 
             if (input.indexOf(customSeparators.get(1)) > 3) {
