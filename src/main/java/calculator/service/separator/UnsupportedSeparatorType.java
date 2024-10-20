@@ -5,7 +5,7 @@ import java.util.Arrays;
 public enum UnsupportedSeparatorType {
 
     BLANK(" ", "인식되지 않는 구분자"),
-    NEW_LINE("\n", "인식되지 않는 구분자"),
+    BACKSLASH("\\", "인식되지 않는 구분자"),
 
     PLUS("+", "수학적 기호"),
     MINUS("-", "수학적 기호"),
