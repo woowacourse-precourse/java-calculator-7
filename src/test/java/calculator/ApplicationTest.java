@@ -65,6 +65,14 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 기본_구분자만_입력() {
+        assertSimpleTest(() -> {
+            run(",");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
     // 예외 테스트 케이스
     @Test
     void 기본_구분자_외의_문자_입력() {
