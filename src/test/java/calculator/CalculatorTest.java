@@ -98,14 +98,16 @@ class CalculatorTest {
   public void checkIsNumeric() throws Exception{
       //given
       char[] isNumeric = new char[]{'1', '2', '3', '4', '5'};
-      char[] custom = new char[]{'/','/', ';', '\', '\', 'n'};
+
 
     //when
       boolean expect = true;
 
       for (char element : isNumeric) {
         assertEquals(expect, actual);
+
       }
+
 
   }
 
@@ -114,11 +116,14 @@ class CalculatorTest {
   public void validInput() throws Exception{
       //given
       char[] delimeters = new char[]{',', ':', ';'};
+      char[] custom = new char[]{'/','/', ';', '\', '\', 'n'};
       boolean expect = true;
       for (char element : delimeters) {
         //then
         assertEquals(expect, calculator.valid(element));
       }
+    boolean actualCustom = calculator.readline.subString(0, 5) == custom;
+    assertEquals(expect, actualCustom);
   }
 
 }
