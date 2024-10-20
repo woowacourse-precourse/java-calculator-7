@@ -13,9 +13,7 @@ public class IOService {
         return input;
     }
 
-    // 입력된 숫자와 구분자의 유효성을 검사하는 메서드
     private void validateInput(String input) {
-        // 입력의 첫 번째와 마지막 문자가 숫자가 아닌 경우 예외 처리
         if (input.contains(" ")) {
             throw new IllegalArgumentException("공백을 입력할 수 없습니다.");
         }
