@@ -13,7 +13,7 @@ public class DigitExtractor {
      * 문자열에서 숫자 추출
      */
     public List<Integer> extractDigits(String input, String regex) {
-        if (!validateInput(input, regex)) {
+        if (!isValidInput(input, regex)) {
             throw new IllegalArgumentException("유효하지 않은 문자열입니다. 프로그램을 종료합니다.");
         }
         List<Integer> digits = new ArrayList<>(List.of(0)); // 입력이 빈 문자열("")인 경우 0 반환
@@ -27,7 +27,7 @@ public class DigitExtractor {
     /**
      * 문자열의 유효성 검증
      */
-    private boolean validateInput(String input, String regex) {
+    private boolean isValidInput(String input, String regex) {
         tokens = Stream.of(input.split(regex)).map(String::trim).collect(Collectors.toList()); // 토큰 분리
         return tokens.stream().noneMatch(token -> token.matches(".*[^0-9].*"));
     }
