@@ -8,10 +8,9 @@ import camp.nextstep.edu.missionutils.Console;
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String inputStr = Console.readLine();  // 입력 받기
-
+//        System.out.println("입력한 문자 : " + inputStr);
         ArrayList<String> delimiters = getDelimiter(inputStr);
 
         if (inputStr == null || inputStr.isEmpty()) {
@@ -40,7 +39,13 @@ public class Application {
 //        for (String delimiter : delimiters) {
 //            System.out.println(delimiter.getClass().getName());
 //        }
-        int sumNum = splitDelimiterAddNum(changeInputStr, delimiters);
+        int sumNum = 0;
+        try{
+            sumNum = splitDelimiterAddNum(changeInputStr, delimiters);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+
         System.out.println("결과 : " + sumNum);
     }
     public static ArrayList<String> getDelimiter(String inputString){
@@ -96,7 +101,7 @@ public class Application {
     public static int splitDelimiterAddNum(String inputString, ArrayList delimiters){
         StringBuilder newString = new StringBuilder();
         int sumNum = 0;
-
+        // 음수 해결
         for (int i =0;i<inputString.length();i++){
             char ch = inputString.charAt(i);
 
@@ -105,9 +110,10 @@ public class Application {
                 newString.delete(0,newString.length());
             } else if (Character.isDigit(ch)) {
                 newString.append(ch);
+            } else if (ch == '-') {
+                newString.append(ch);
             } else {
-                System.out.println("Error 발생 : " +ch);
-//                throw new IllegalArgumentException("특수문자가 발생");
+                throw new IllegalArgumentException();
             }
         }
         sumNum += Integer.parseInt(newString.toString());
