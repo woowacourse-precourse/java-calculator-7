@@ -7,6 +7,8 @@ public class Application {
         String[] nums;
         String separator = ",|:";
 
+        System.out.println("덧셈할 문자열을 입력해주세요.");
+
         String string = Console.readLine();
         if (string.startsWith("//")) {
             nums = string.split("\\\\n", 2);
@@ -27,7 +29,7 @@ public class Application {
             }
         }
 
-        System.out.println("sum = " + sum);
+        System.out.println("결과 : " + sum);
     }
 
 }
