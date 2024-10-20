@@ -22,11 +22,6 @@ public class CalculatorController {
     private Stream<Integer> convertString(String input) {
         String[] stringNums = extractStringNumber(input);
 
-        // ",", ":", 커스텀 구분자 외 구분자가 사용되면 빈 스트링이 존재함
-        if (Arrays.asList(stringNums).contains("")) {
-            throw new IllegalArgumentException("구분자가 잘못 입력되었습니다.");
-        }
-
         return convertToNumber(stringNums);
     }
 
@@ -56,11 +51,13 @@ public class CalculatorController {
     }
 
     private Stream<Integer> convertToNumber(String[] stringNums) {
-        try {
-            return Arrays.stream(stringNums).map(Integer::parseInt);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자가 아닌 입력값이 있습니다.");
-        }
+        return Arrays.stream(stringNums).map(str -> {
+            try {
+                return Integer.parseInt(str);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("숫자가 아닌 입력값이 있습니다: " + str);
+            }
+        });
     }
 
     private String extractNewDelimiter(String str) {
