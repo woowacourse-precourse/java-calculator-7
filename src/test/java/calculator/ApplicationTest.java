@@ -42,7 +42,6 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트_커스텀_구분자_문자열_오류() {
     void 커스텀_문자열_시작_오류_예외_테스트() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("/;\\n1;2,3"))
@@ -50,6 +49,16 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 잘못된_입력값_포함시_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\\n1;a;3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_숫자입력_예외_테스트() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//;;\\n1;;2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
