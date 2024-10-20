@@ -7,6 +7,8 @@ import java.util.regex.Pattern;
 
 public class InputString {
     private final String inputString;
+    private final String NUMBER_REGEX = "^\\d.*";
+    private final String PATTERN_REGEX = "^//([^0-9])\\\\n(.*)";
 
     public InputString(String inputString) {
         this.inputString = inputString;
@@ -21,7 +23,7 @@ public class InputString {
     }
 
     public boolean notContainsCustomSeperator() {
-        Pattern compile = Pattern.compile("^\\d.*");
+        Pattern compile = Pattern.compile(NUMBER_REGEX);
         Matcher matcher = compile.matcher(inputString);
         return matcher.matches();  // 숫자로 시작하는지
     }
@@ -29,7 +31,7 @@ public class InputString {
     public List<String> extractCustomSeperator() {
         List<String> list = new ArrayList<>();
 
-        Pattern compile = Pattern.compile("^//([^0-9])\\\\n(.*)");
+        Pattern compile = Pattern.compile(PATTERN_REGEX);
         Matcher matcher = compile.matcher(inputString);
 
         validateCustomDelimiter(inputString);
