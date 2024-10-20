@@ -33,6 +33,19 @@ public class CalculableValidator {
         }
     }
 
+    public static void validateNumberSize(String input, Delimiters delimiters) {
+        String delimiterPattern = buildDelimiterPattern(delimiters);
+        String[] numbers = input.split(delimiterPattern);
+
+        for (String number : numbers) {
+            try {
+                Long.parseLong(number);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException(ErrorMessage.NUMBER_TOO_LARGE.getMessage());
+            }
+        }
+    }
+
     private static String buildDelimiterPattern(Delimiters delimiters) {
         Set<String> allDelimiters = delimiters.getDelimiters();
         return allDelimiters.stream()
