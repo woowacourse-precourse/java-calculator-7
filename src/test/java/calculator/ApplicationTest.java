@@ -58,7 +58,29 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀_구분자_한개_3번_사용() {
+    void 구분자가_앞뒤에_있을_경우() {
+        String[] inputStrings = {":1:2", "1:2:", ",1:2", "1:2,", ",1,2", "1,2,"};
+        for (String inputString : inputStrings) {
+            assertSimpleTest(() -> {
+                run(inputStrings);
+                assertThat(output()).contains("결과 : 3");
+            });
+        }
+    }
+
+    @Test
+    void 두자리_숫자() {
+        String[] inputStrings = {"11:22", "10:23", "23:10", "9:24", "1,32", "33,0"};
+        for (String inputString : inputStrings) {
+            assertSimpleTest(() -> {
+                run(inputStrings);
+                assertThat(output()).contains("결과 : 33");
+            });
+        }
+    }
+
+    @Test
+    void 커스텀_구분자_한개_2번_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1;2;3");
             assertThat(output()).contains("결과 : 6");
@@ -82,17 +104,6 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 구분자가_앞뒤에_있을_경우() {
-        String[] inputStrings = {":1:2", "1:2:", ",1:2", "1:2,", ",1,2", "1,2,"};
-        for (String inputString : inputStrings) {
-            assertSimpleTest(() -> {
-                run(inputStrings);
-                assertThat(output()).contains("결과 : 3");
-            });
-        }
-    }
-
-    @Test
     void 커스텀_구분자가_특수문자1() {
         String[] inputStrings = {"//#\\n1#2", "//!\\n1!2", "//@\\n1@2", "//\\$\\n1$2", "//%\\n1%2", "//\\^\\n1^2",
                 "//&\\n1&2", "//\\*\\n1*2", "//\\(\\n1(2", "//\\)\\n1)2", "//-\\n1-2", "//\\+\\n1+2", "//=\\n1=2",
@@ -102,7 +113,6 @@ class ApplicationTest extends NsTest {
                 run(inputString);
                 assertThat(output()).contains("결과 : 3");
             });
-
         }
     }
 
