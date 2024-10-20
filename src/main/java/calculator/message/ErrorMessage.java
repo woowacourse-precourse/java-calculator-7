@@ -7,4 +7,5 @@ public class ErrorMessage {
     public static final String EMPTY_ELEMENT_MESSAGE = ERROR_PREFIX + " 구분자를 연속으로 두 개 사용할 수 없습니다." + NEW_LINE;
     public static final String INVALID_ELEMENT_MESSAGE = ERROR_PREFIX + " 구분자를 제외하고는 숫자만 입력하셔야 합니다." + NEW_LINE;
     public static final String NEGATIVE_NUMBER_MESSAGE = ERROR_PREFIX + " 양수만 입력하셔야 합니다." + NEW_LINE;
+    public static final String TOO_LARGE_NUMBER_MESSAGE = ERROR_PREFIX + " int 타입을 벗어나는 큰 수는 입력할 수 없습니다." + NEW_LINE;
 }
