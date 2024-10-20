@@ -19,12 +19,22 @@ public class CustomInput {
         String numberPart = parts[1];
 
         // 구분자로 숫자 나누기
-        String[] numbers = numberPart.split(delimiterPart);
+        String[] tokens = numberPart.split(delimiterPart);
         int result = 0;
 
-        for(String number : numbers) {
-            // 빈 문자열이 아닌 경우에만 숫자 합산
-            result += Integer.parseInt(number);
+        for(String token : tokens) {
+            // 토큰이 숫자인지 확인
+            if(!token.matches("\\d+")){
+                throw new IllegalArgumentException("숫자가 아닌 문자가 포함되어 있습니다");
+            }
+            int tokenToInt = Integer.parseInt(token);
+
+            // 숫자가 양수가 아닌 경우 예외 발생
+            if (tokenToInt <= 0) {
+                throw new IllegalArgumentException("양수가 아닌 값이 포함되어 있습니다");
+            }
+            // 양수일 경우에는 숫자 합산
+            result += tokenToInt;
         }
         return result;
     }
