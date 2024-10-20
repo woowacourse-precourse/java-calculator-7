@@ -30,7 +30,7 @@ public class StringCalculator {
         delimiters.add(delimiter);
     }
 
-    private String getCustomDelimiter(String userInput) {
+    public String getCustomDelimiter(String userInput) {
         String customDelimiterPattern = "^//(.)\\\\n";
         String checkNumberPattern = "[0-9]";
 
