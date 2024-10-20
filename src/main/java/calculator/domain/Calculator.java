@@ -17,4 +17,16 @@ public class Calculator {
         this.numberParser = new NumberParser();
     }
 
+    public int sum() {
+        String[] numbers = NumberParser.parse(input);
+        return add(numbers);
+    }
+
+    private int add(String[] numbers) {
+        int total = 0;
+        for (String number : numbers) {
+            total += Integer.parseInt(number);
+        }
+        return total;
+    }
 }
