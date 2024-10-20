@@ -3,19 +3,19 @@ package calculator.model.delimiter.service;
 import calculator.model.custom_delimiter.service.CustomDelimiterService;
 import calculator.model.delimiter.domain.Delimiter;
 import calculator.model.delimiter.domain.Delimiters;
-import calculator.model.delimiter.factory.DelimiterFactory;
+import calculator.model.delimiter.factory.DelimitersFactory;
 
 import java.util.List;
 
 public abstract class DelimiterService {
 
-    protected final DelimiterFactory delimiterFactory;
+    protected final DelimitersFactory delimitersFactory;
     protected final CustomDelimiterService customDelimiterService;
 
     public DelimiterService(
-            DelimiterFactory delimiterFactory,
+            DelimitersFactory delimitersFactory,
             CustomDelimiterService customDelimiterService) {
-        this.delimiterFactory = delimiterFactory;
+        this.delimitersFactory = delimitersFactory;
         this.customDelimiterService = customDelimiterService;
     }
 
@@ -28,6 +28,6 @@ public abstract class DelimiterService {
     }
 
     protected Delimiters createDelimiters(Delimiter... additionalDelimiters) {
-        return delimiterFactory.createDelimiters(additionalDelimiters);
+        return delimitersFactory.createDelimiters(additionalDelimiters);
     }
 }

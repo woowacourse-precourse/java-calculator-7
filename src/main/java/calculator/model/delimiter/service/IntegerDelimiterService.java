@@ -3,7 +3,7 @@ package calculator.model.delimiter.service;
 import calculator.common.exception.ExceptionFactory;
 import calculator.model.custom_delimiter.service.CustomDelimiterService;
 import calculator.model.delimiter.domain.Delimiters;
-import calculator.model.delimiter.factory.DelimiterFactory;
+import calculator.model.delimiter.factory.DelimitersFactory;
 import calculator.util.pattern.PatternUtils;
 
 import java.util.ArrayList;
@@ -14,10 +14,10 @@ import static calculator.common.exception.ExceptionType.NOT_DELIMITER;
 public class IntegerDelimiterService extends NumberDelimiterService {
 
     public IntegerDelimiterService(
-            DelimiterFactory delimiterFactory,
+            DelimitersFactory delimitersFactory,
             CustomDelimiterService customDelimiterService) {
 
-        super(delimiterFactory, customDelimiterService);
+        super(delimitersFactory, customDelimiterService);
     }
 
     @Override
