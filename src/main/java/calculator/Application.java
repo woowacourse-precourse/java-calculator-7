@@ -130,6 +130,7 @@ public class Application {
             sum = StringCalculator(input);
         } catch (IllegalArgumentException e) {
 //            System.out.println("Error: " + e.getMessage());
+            System.exit(0);
         }
 
         System.out.println("결과 : " + sum);
