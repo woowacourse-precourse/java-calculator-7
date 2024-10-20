@@ -1,19 +1,33 @@
 package calculator.util;
 
+import calculator.domain.Expression;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputUtils {
+    public static Expression convertToExpression(String input) {
+        String delimiter = "[,:]";
+        boolean isCustomDelimiter = false;
+        if (input.startsWith("//")) {
+            int delimiterIndex = input.indexOf("\\n");
+            if (delimiterIndex == -1) {
+                throw new IllegalArgumentException();
+            }
+            delimiter = input.substring(2, delimiterIndex);
+            if (delimiter.isEmpty()) {
+                throw new IllegalArgumentException();
+            }
+            isCustomDelimiter = true;
+            input = input.substring(delimiterIndex + 1);
+        }
+
+        validateExpression(input);
+        return new Expression(input, delimiter, isCustomDelimiter);
+    }
+
     public static String readInput() {
         String input = Console.readLine();
         validateNullInput(input);
         validateWhitespaceInput(input);
-        if (input.startsWith("//")) {
-            validateCustomDelimiterInput(input);
-        } else if (input.isEmpty()){
-            input = "0";
-        } else {
-            validateDefaultDelimiterInput(input);
-        }
         return input;
     }
 
@@ -27,27 +41,6 @@ public class InputUtils {
         if (input.startsWith(" ") || input.endsWith(" ")) {
             throw new IllegalArgumentException();
         }
-    }
-
-    private static void validateCustomDelimiterInput(String input) {
-        int delimiterIndex = input.indexOf("\\n");
-        if (delimiterIndex == -1) {
-            throw new IllegalArgumentException();
-        }
-        String delimiter = input.substring(2, delimiterIndex);
-        if (delimiter.isEmpty()) {
-            throw new IllegalArgumentException();
-        }
-        String expression = input.substring(delimiterIndex + 2);
-        validateExpression(expression);
-        String[] tokens = expression.split(delimiter);
-        validateTokens(tokens);
-    }
-
-    private static void validateDefaultDelimiterInput(String input) {
-        validateExpression(input);
-        String[] tokens = input.split("[,:]");
-        validateTokens(tokens);
     }
 
     private static void validateExpression(String expression) {
