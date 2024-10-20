@@ -12,6 +12,7 @@ public class NumberExtractor {
 
     public NumberExtractor(String rawString) {
         this.extractedNumbers = new ArrayList<>();
+        extractNumbers(rawString);
     }
 
     public List<Integer> getExtractedNumbers() {
