@@ -30,6 +30,24 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자로_시작하는지_검사_커스텀_구분자를_사용하는_경우(){
+        // given
+        String inputWithCustomSeparator = "//?\\n";
+        // when & then
+        assertThat(Application.checkCustomSeparatorExist(inputWithCustomSeparator))
+                .isEqualTo(true);
+    }
+
+    @Test
+    void 커스텀_구분자로_시작하는지_검사_커스텀_구분자를_사용하지_않는_경우(){
+        // given
+        String inputWithCustomSeparator = "1:2:3";
+        // when & then
+        assertThat(Application.checkCustomSeparatorExist(inputWithCustomSeparator))
+                .isEqualTo(false);
+    }
+
+    @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1");
