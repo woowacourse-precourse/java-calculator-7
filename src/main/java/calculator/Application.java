@@ -52,7 +52,7 @@ public class Application {
             dividerList.add(inputList.get(2));
             System.out.println("커스텀 구분자 : "+inputList.get(2));
             inputList = inputList.subList(5, inputList.size());
-
+            System.out.println("분석할 문자열 : "+inputList);
             sum = processNumbers(inputList, dividerList, tmpNum, countOfDivider);
         } else {
             throw new IllegalArgumentException();
@@ -70,8 +70,37 @@ public class Application {
 
     private static int processNumbers(List<Character> inputList, List<Character> dividerList,
                                       List<Integer> tmpNum, int countOfDivider) {
-        // TODO
-        System.out.println("아직 processNumbers 기능이 구현되지 않았습니다. 임시결과로 999가 출력됩니다.");
-        return 999;
+        int sum = 0;
+
+        for (Character character : inputList) {
+            // 구분자를 연속 2번 이상 사용한 경우 예외 처리
+            if (countOfDivider > 1) {
+                throw new IllegalArgumentException();
+            }
+
+            if (Character.isDigit(character)) {
+                countOfDivider = 0;
+                tmpNum.add(Character.getNumericValue(character));
+            } else if (dividerList.contains(character)) {
+                sum += parseStringToInt(tmpNum);
+                tmpNum.clear();
+                countOfDivider++;
+                System.out.println("구분자 연속 사용 횟수 : "+countOfDivider);
+            }
+        }
+
+        // 구분자가 맨 뒤에 위치한 경우 예외 처리
+        if (countOfDivider != 0) {
+            throw new IllegalArgumentException();
+        }
+        sum += parseStringToInt(tmpNum);
+        return sum;
+    }
+
+    private static int parseStringToInt(List<Integer> tmpNum) {
+        // TODO : parsing 로직 구현
+        System.out.println("가공되지 않은 tmpNum : "+tmpNum);
+        System.out.println("아직 문자를 숫자로 바꾸는 기능이 구현되지 않았습니다. 피연산자를 10으로 간주합니다.");
+        return 10;
     }
 }
