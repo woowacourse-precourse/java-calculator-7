@@ -16,15 +16,14 @@ public class Application {
         // 2. 구분자 setting
         DelimiterHandler delimiterHandler = new DelimiterHandler(expression);
         String delimiters = delimiterHandler.getAllDelimiters();
-        boolean customDelimiterFlag = delimiterHandler.getCustomDelimiterFlag();
 
         // 3. 문자열 tokenizing
-        ExpressionHandler expressionHandler = new ExpressionHandler(expression, delimiters, customDelimiterFlag);
-        StringTokenizer tokenizedExpression = expressionHandler.tokenizeExpression();
+        ExpressionHandler expressionHandler = new ExpressionHandler(expression, delimiters);
+        StringTokenizer tokenizedExpression = expressionHandler.getTokenizedExpression();
 
         // 4. 덧셈
         TokenCalculator tokenCalculator = new TokenCalculator(tokenizedExpression, delimiters);
-        int result = tokenCalculator.getSum();
+        int result = tokenCalculator.getSumOfTokens();
 
         // 5. 출력
         consoleView.showResult(result);

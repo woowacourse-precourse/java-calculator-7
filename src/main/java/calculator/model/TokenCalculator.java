@@ -12,21 +12,21 @@ public class TokenCalculator {
         this.delimiters = delimiters;
     }
 
-    public int getSum() {
+    public int getSumOfTokens() {
         TokenChecker tokenChecker = new TokenChecker(delimiters);
 
         int sum = 0;
-        int t = 0;
+        int tokenCounter = -1;
         while (tokenizedExpression.hasMoreTokens()) {
             String token = tokenizedExpression.nextToken();
+            tokenCounter++;
 
-            if (tokenChecker.isNumericToken(token, t)) {
+            if (tokenChecker.isNumericToken(token, tokenCounter)) {
                 sum += Integer.parseInt(token);
             }
-            t++;
         }
 
-        if (tokenChecker.isDelimiterEnding(t)) {
+        if (tokenChecker.isDelimiterEnding(tokenCounter)) {
             throw new IllegalArgumentException();
         }
 

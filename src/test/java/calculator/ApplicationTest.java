@@ -43,28 +43,28 @@ class ApplicationTest extends NsTest {
     void filterExpressionTest1() {
         String expression = "//;\\n1,2,";
         String delimiter = ",:;";
-        ExpressionHandler expressionHandler = new ExpressionHandler(expression, delimiter, true);
+        ExpressionHandler expressionHandler = new ExpressionHandler(expression, delimiter);
         assertThat(expressionHandler.getExpression()).contains("1,2,");
     }
 
     @Test
     void filterExpressionTest2() {
         String expression = "/;\\n1,2,";
-        String delimiter = ",:;";
-        ExpressionHandler expressionHandler = new ExpressionHandler(expression, delimiter, false);
+        String delimiter = ",:";
+        ExpressionHandler expressionHandler = new ExpressionHandler(expression, delimiter);
         assertThat(expressionHandler.getExpression()).contains("/;\\n1,2,");
     }
 
     @Test
-    void getSumTest1() {
+    void getSumOfTokensTest1() {
         String expression = "1,2:33";
         String delimiters = ",:";
 
-        ExpressionHandler expressionHandler = new ExpressionHandler(expression, delimiters, false);
-        StringTokenizer tokenizedExpression = expressionHandler.tokenizeExpression();
+        ExpressionHandler expressionHandler = new ExpressionHandler(expression, delimiters);
+        StringTokenizer tokenizedExpression = expressionHandler.getTokenizedExpression();
 
         TokenCalculator tokenCalculator = new TokenCalculator(tokenizedExpression, delimiters);
-        int result = tokenCalculator.getSum();
+        int result = tokenCalculator.getSumOfTokens();
 
         assertThat(result).isEqualTo(1 + 2 + 33);
     }
