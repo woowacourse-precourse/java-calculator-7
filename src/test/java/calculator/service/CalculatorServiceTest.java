@@ -44,4 +44,12 @@ class CalculatorServiceTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR] 음수는 허용되지 않습니다");
     }
+
+    @Test
+    void 잘못된_숫자_입력_예외_테스트() {
+        String input = "1,a,3";
+        assertThatThrownBy(() -> calculatorService.calculate(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR] 잘못된 입력 값: a");
+    }
 }
