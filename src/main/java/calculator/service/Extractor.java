@@ -4,7 +4,6 @@ import calculator.domain.Delimiters;
 import calculator.domain.Number;
 import calculator.domain.Numbers;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -14,37 +13,42 @@ public class Extractor {
 
     public static final String NUMBER_PART_REGEX = "-?\\d+([%s]-?\\d+)*";
     public static final String SPLIT_NUMBER_PART_REGEX = "\\\\n";
-    public static final String REPLACE_EMPTY_VALUE = "0";
+    public static final int REPLACE_EMPTY_VALUE = 0;
 
     private final Delimiters delimiters;
-    private final String numberPart;
+    private final Numbers numbers;
 
     private Extractor(String input) {
         this.delimiters = Delimiters.from(input);
-        this.numberPart = extractNumberPart(input);
+        this.numbers = extractNumbers(input);
     }
 
     public static Extractor from(String input) {
         return new Extractor(input);
     }
 
-    private String extractNumberPart(String userInput) {
+    private Numbers extractNumbers(String userInput) {
         if (userInput.isBlank()) {
-            return REPLACE_EMPTY_VALUE;
+            return Numbers.from(List.of(new Number(REPLACE_EMPTY_VALUE)));
         }
         if (delimiters.isCustomDelimiter()) {
-            return userInput.split(SPLIT_NUMBER_PART_REGEX)[1];
+            String numberPart = userInput.split(SPLIT_NUMBER_PART_REGEX)[1];
+            return convertToNumbers(numberPart);
         }
-        return userInput;
+        return convertToNumbers(userInput);
     }
 
-    public Numbers extractNumbers() {
-        validateNumberPart();
-        List<Number> numbers = convertNumbers();
+    private Numbers convertToNumbers(String numberPart) {
+        validateNumberPart(numberPart);
+        String[] extractedNumbers = splitNumberPart(numberPart);
+        List<Number> numbers = Arrays.stream(extractedNumbers)
+            .map(Integer::parseInt)
+            .map(Number::new)
+            .toList();
         return Numbers.from(numbers);
     }
 
-    private void validateNumberPart() {
+    private void validateNumberPart(String numberPart) {
         Pattern pattern = Pattern.compile(String.format(NUMBER_PART_REGEX, delimiters.getRegex()));
         Matcher matcher = pattern.matcher(numberPart);
         if (!matcher.matches()) {
@@ -52,18 +56,13 @@ public class Extractor {
         }
     }
 
-    private List<Number> convertNumbers() {
-        List<Number> numbers = new ArrayList<>();
-        String[] extractedNumbers = splitNumberPart();
-        Arrays.stream(extractedNumbers)
-            .map(Integer::parseInt)
-            .forEach(value -> numbers.add(new Number(value)));
-        return numbers;
-    }
-
-    private String[] splitNumberPart() {
+    private String[] splitNumberPart(String numberPart) {
         String splitRegex = delimiters.getSplitRegex();
         return numberPart.split(splitRegex);
+    }
+
+    public Numbers getNumbers() {
+        return numbers;
     }
 
 }

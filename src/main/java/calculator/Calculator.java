@@ -1,4 +1,4 @@
-package calculator.controller;
+package calculator;
 
 import calculator.domain.Numbers;
 import calculator.io.InputHandler;
@@ -23,7 +23,7 @@ public class Calculator {
 
     private Numbers extractNumbers(String userInput) {
         Extractor extractor = Extractor.from(userInput);
-        return extractor.extractNumbers();
+        return extractor.getNumbers();
     }
 
     private String getUserInput() {
