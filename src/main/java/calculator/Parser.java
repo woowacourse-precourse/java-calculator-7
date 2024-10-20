@@ -2,9 +2,55 @@ package calculator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
+
+
+    /**
+     * 문자열에서 기본 구분자(쉼표, 콜론) 및 1개 이상의 커스텀 구분자를 추출합니다.
+     *
+     * @param input 사용자가 입력한 모든 문자열
+     * @return 추출된 커스텀 구분자를 나타내는 문자열을 반환합니다.
+     */
+    public String extractCustomSeparators(String input) {
+
+        // 정규식 패턴: "//{문자}\n" 형식으로 시작하는 패턴에서 문자를 추출
+        String regex = "^//(.*?)\\n";
+
+        // Pattern과 Matcher 객체 생성
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input);
+
+        // 패턴이 일치할 경우 첫 번째 그룹(구분자)을 반환
+        if (matcher.find()) {
+            return matcher.group(1);  // 첫 번째 그룹은 정규식에서 (.)로 매칭된 부분
+        } else {
+            return null;  // 구분자가 없는 경우
+        }
+    }
+
+    /**
+     * 입력한 커스텀 구분자가 올바른 형식인지 확인합니다.
+     *
+     * @param input 사용자가 입력한 모든 문자열
+     * @return 커스텀 구분자 형식이 올바르면 true 아니면 false
+     */
+    public boolean isCustomSeparatorsValid(String input) {
+        String customSeparators = extractCustomSeparators(input);
+
+        if (customSeparators != null) {     // 커스텀 구분자의 숫자가 포함되는 지 확인
+            String numberContainRegex = ".*\\d.*";
+            return !Pattern.matches(numberContainRegex, input);
+        }
+
+        return true;
+    }
+
+
+
+
 
     /**
      * 문자열에서 기본 구분자(쉼표, 콜론) 및 1개 이상의 커스텀 구분자를 사용하여 숫자를 추출합니다.

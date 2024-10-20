@@ -14,9 +14,10 @@
     - [ ] 정수형으로 변환 된 숫자들의 합을 출력합니다.
 
   - [ ] 예외 처리
-    - [ ] 입력 문자열이 빈 문자열일 경우, `IllegalArgumentException` 을 발생시킵니다.
-    - [ ] 커스텀 구분자가 문자일 경우 
-    - [ ] 구분자로 분리된 문자가 양수로 구성된 문자가 아닐 시 `IllegalArgumentException`을 발생시킵니다.
+    - [ ] 커스텀 구분자가 숫자일 경우 `IllegalArgumentException`을 발생시킵니다.
+    - [ ] 기본 구분자와 커스텀 구분자로 숫자가 분리되어 있지 않을 시 `IllegalArgumentException`을 발생시킵니다.
+    - [ ] 구분자로 숫자가 올바르게 분리 되어 있지 않을 시 `IllegalArgumentException`을 발생시킵니다.
+    - [ ] 구분자로 분리된 숫자가 양수가 아닐 시 `IllegalArgumentException`을 발생시킵니다.
 
   - [ ] 테스트 코드 작성
 
