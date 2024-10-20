@@ -86,21 +86,29 @@ public class Application {
         }
 
         long result = 0;
-        boolean isNumber = true;
+        StringBuilder builder = initStringBuilder();
+
         for (int i = 0; i < numberInputString.length(); i++) {
             char character = numberInputString.charAt(i);
-            if(isNumber && Character.isDigit(character)) {
-                isNumber = false;
-                result += (long)(character - '0');
-            } else if (!isNumber && !Character.isDigit(character) && delimiters.contains(character)) {
-                isNumber = true;
+            if (Character.isDigit(character)) {
+                builder.append(character);
+            } else if (delimiters.contains(character)) {
+                result += Long.parseLong(builder.toString());
+                builder = initStringBuilder();
             } else {
                 throw new IllegalArgumentException("올바르지 않는 형식의 문자열 입력입니다.");
             }
         }
 
+        if (!builder.toString().isEmpty()) {
+            result += Long.parseLong(builder.toString());
+        }
+
         return result;
     }
 
+    private static StringBuilder initStringBuilder() {
+        return new StringBuilder();
+    }
 
 }
