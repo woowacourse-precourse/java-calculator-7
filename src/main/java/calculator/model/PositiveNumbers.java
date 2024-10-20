@@ -1,5 +1,6 @@
 package calculator.model;
 
+import java.util.Collections;
 import java.util.List;
 
 public class PositiveNumbers {
@@ -11,7 +12,7 @@ public class PositiveNumbers {
 
     private PositiveNumbers(List<Integer> numbers) {
         validatePositiveNumbers(numbers);
-        this.numbers = numbers;
+        this.numbers = Collections.unmodifiableList(numbers);
     }
 
     public static PositiveNumbers from(List<Integer> numbers) {
