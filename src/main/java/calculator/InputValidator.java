@@ -5,6 +5,7 @@ import java.util.List;
 public class InputValidator {
     private static final String DEFAULT_DELIMITER_PATTERN = "^(\\d+((.)\\d+)*)?$";
     private static final String CUSTOM_DELIMITER_PATTERN = "^//(.)\\\\n\\d+((.)\\d+)*$";
+    private static final String SINGLE_NUMBER_PATTERN = "^\\d+$";
 
     private final DelimiterManager delimiterManager;
 
@@ -14,6 +15,10 @@ public class InputValidator {
 
     public boolean isEmptyInput(String input) {
         return input.isEmpty();
+    }
+
+    public boolean isSingleNumberInput(String input) {
+        return input.matches(SINGLE_NUMBER_PATTERN);
     }
 
     public void validateUnregisteredDelimiter(List<String> delimiters) {
