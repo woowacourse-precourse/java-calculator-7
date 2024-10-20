@@ -1,15 +1,13 @@
 package calculator.domain;
 
+import java.util.Arrays;
+
 public class Numbers {
 
     public int[] parseToIntArray(String[] strNumbers) {
-        int[] intNumbers = new int[strNumbers.length];
-
-        for (int i = 0; i < strNumbers.length; i++) {
-            intNumbers[i] = parseToInt(strNumbers[i]);
-        }
-
-        return intNumbers;
+        return Arrays.stream(strNumbers)
+                .mapToInt(this::parseToInt)
+                .toArray();
     }
 
     private int parseToInt(String number) {
