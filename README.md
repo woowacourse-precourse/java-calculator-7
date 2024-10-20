@@ -35,6 +35,7 @@
 - [x] 양수 검증 메서드 - checkIsPositiveNumber()
 - [x] 숫자 형식 검증 메서드 - checkHasNumberFormat()
   - checkNumberIsValid()로 통합 / isNumeric() 메서드 추가 (58333870)
+    - checkIsNumberValid()로 명칭 변경 (0d479577)
   - 파라미터 타입 List<String> 에서 String 변경 (1c6e4e10)
 
 * 결과 반환**
