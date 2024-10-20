@@ -17,10 +17,20 @@ public class StringAddCalculator {
     }
 
     private int calculate(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            throw new IllegalArgumentException("입력값이 올바르지 않습니다.");
+        }
         InputParser parser = InputParser.from(input);
         return Stream.of(parser.split())
+                .peek(this::validateNumber)
                 .mapToInt(Integer::parseInt)
                 .sum();
+    }
+
+    private void validateNumber(String number) {
+        if (!number.matches("\\d+")) {
+            throw new IllegalArgumentException("입력값이 올바르지 않습니다: " + number);
+        }
     }
 
     private record InputParser(String text, String delimiter) {
@@ -41,13 +51,35 @@ public class StringAddCalculator {
         }
 
         private static InputParser parseCustomDelimiter(String input) {
-            int suffixIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
+            int suffixIndex = getSuffixIndex(input);
+            String customDelimiter = extractCustomDelimiter(input, suffixIndex);
+            validateCustomDelimiter(customDelimiter);
+            return createDelimiterInfo(input, suffixIndex, customDelimiter);
+        }
 
-            String customDelimiter = input.substring(CUSTOM_DELIMITER_PREFIX.length(), suffixIndex);
+        private static int getSuffixIndex(String input) {
+            int suffixIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
+            if (suffixIndex == -1) {
+                throw new IllegalArgumentException("커스텀 구분자 형식이 올바르지 않습니다.");
+            }
+            return suffixIndex;
+        }
+
+        private static String extractCustomDelimiter(String input, int suffixIndex) {
+            return input.substring(CUSTOM_DELIMITER_PREFIX.length(), suffixIndex);
+        }
+
+        private static void validateCustomDelimiter(String delimiter) {
+            if (delimiter.length() != 1 || Character.isDigit(delimiter.charAt(0))) {
+                throw new IllegalArgumentException("커스텀 구분자는 숫자가 아닌 한 글자여야 합니다.");
+            }
+        }
+
+        private static InputParser createDelimiterInfo(String input, int suffixIndex, String customDelimiter) {
             String numberPart = input.substring(suffixIndex + CUSTOM_DELIMITER_SUFFIX.length());
             String combinedDelimiter = String.format("[%s,:]", customDelimiter);
-
             return new InputParser(numberPart, combinedDelimiter);
         }
+
     }
 }
