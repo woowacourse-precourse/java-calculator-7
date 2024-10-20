@@ -1,13 +1,14 @@
 package calculator;
 
 import calculator.exception.InvalidInputException;
-import camp.nextstep.edu.missionutils.Console;
+import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("문자열을 입력하세요.");
 
-        String input = Console.readLine();
+        String input = scanner.nextLine();
         try {
             String result = StringCalculator.calculate(input);
             System.out.println(result);

@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 public class DelimiterParser {
 
-    private static final String CUSTOM_DELIMITER_PATTERN = "//(.*?)\n(.*)";
+    private static final String CUSTOM_DELIMITER_PATTERN = "//(.*)\n(.*)";
     private static final String DEFAULT_DELIMITERS = "[,|:]";
 
     public static List<String> parse(String input) {
