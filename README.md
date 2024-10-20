@@ -42,6 +42,6 @@
 
 ## Application Class
 
-- [ ] 사용자 입력 추가
+- [x] 사용자 입력 추가
 - [x] Calculator 객체 생성
 - [ ] try-catch문 작성
