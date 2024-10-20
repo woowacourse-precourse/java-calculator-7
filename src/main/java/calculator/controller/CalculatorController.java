@@ -3,8 +3,6 @@ package calculator.controller;
 import calculator.model.CalculatorModel;
 import calculator.view.CalculatorView;
 
-import java.util.Arrays;
-
 public class CalculatorController {
     private final CalculatorModel calculatorModel;
     private final CalculatorView calculatorView;
