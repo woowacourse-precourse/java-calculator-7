@@ -1,8 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-
-import java.util.StringTokenizer;
+import java.util.regex.Pattern;
 
 
 public class Application {
@@ -25,7 +24,9 @@ public class Application {
         // 커스텀 구분자 처리
         if (s.startsWith("//")) {
             int endOfDelimiter = s.indexOf("\\n");
-            listOfDelimiters += "|" + s.substring(2, endOfDelimiter);
+
+            String customDelimiter = s.substring(2, endOfDelimiter);
+            listOfDelimiters += "|" + Pattern.quote(customDelimiter);
 
             int startOfNumbers = endOfDelimiter + 2;
             refinedString = s.substring(startOfNumbers);
