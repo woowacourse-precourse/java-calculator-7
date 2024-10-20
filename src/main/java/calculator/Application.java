@@ -6,7 +6,14 @@ public class Application {
     static int calculator(String in) {
         int sum = 0;
         String[] nums = in.split(",|:");
+        if (in.startsWith("//")) {
+            in = in.replaceFirst("//", "").replace("\\n", "\n");
+            String[] temp = in.split("\n", 2);
+            String customDelimiter = temp[0];
+            in = temp[1];
 
+            nums = in.split(customDelimiter);
+        }
         for (String num : nums) {
             sum += Integer.parseInt(num);
         }
