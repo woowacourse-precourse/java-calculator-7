@@ -2,6 +2,23 @@ package calculator;
 
 public class CalculateString {
 
+
+    public int customString(String str) {
+        int endCheck = str.indexOf("\\n");
+        if (endCheck == -1) {
+            return basicString(str);
+        }
+
+        String userCustom = String.valueOf(str.charAt(2));
+        String inputString = str.substring(endCheck + 2).trim();
+
+        int finalValue = calString(inputString, userCustom);
+        if (finalValue == 0) {
+            return 0;
+        }
+        return finalValue;
+    }
+
     public int basicString(String str) {
         int finalValue = calString(str, "[;,]");
         if (finalValue == 0) {
