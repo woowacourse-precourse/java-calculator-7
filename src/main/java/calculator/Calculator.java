@@ -7,7 +7,6 @@ public class Calculator {
 
     public int sum(List<Integer> numbers) {
         // 숫자의 합 계산 로직
-
-        return 0;
+        return numbers.stream().mapToInt(Integer::intValue).sum();
     }
 }
