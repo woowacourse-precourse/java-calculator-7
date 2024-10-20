@@ -16,7 +16,7 @@ public class Parser {
         String type = checkType(input);
 
         if (type.equals(CUSTOM)) {
-            Validator.checkCustomSeparator(input);
+            Validator.validateCustomSeparator(input);
         }
 
         String separators = getSeparator(input, type);
@@ -52,7 +52,7 @@ public class Parser {
             Validator.isCorrectDefaultInput(input);
             return String.join("", separators);
         }
-        Validator.isCorrectCustomSeparatorForm(input);
+        Validator.validateCustomSeparator(input);
         appendCustomSeparators(separators, input);
         return String.join("", separators);
     }
@@ -88,7 +88,7 @@ public class Parser {
 
     private static int getLastSeparatorIdx(String input) {
         int idx = input.length() - 1;
-        while (idx >= 0 && input.charAt(idx) != 'n') {
+        while (idx >= 1 && (input.charAt(idx) != 'n' || input.charAt(idx - 1) != '\\')) {
             idx--;
         }
         return idx + 1;
