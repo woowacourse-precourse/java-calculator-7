@@ -10,14 +10,12 @@ import java.util.ArrayList;
 public class CalculateController {
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
-    private final Tokenizer tokenizer = new Tokenizer();
     private final Calculator calculator = new Calculator();
 
     public void run(){
         String input = inputView.input();
-        int num=0;
-        ArrayList<Integer> tokens = tokenizer.tokenize(input);
-        num = calculator.calculateSum(tokens);
+        ArrayList<Integer> tokens = Tokenizer.tokenize(input);
+        int num = calculator.calculateSum(tokens); // 바로 값 할당
         outputView.output(num);
     }
 }
