@@ -140,6 +140,46 @@ class ApplicationTest extends NsTest {
     }
 
 
+    @Test
+    void 커스텀_구분자로_숫자_입력시_테스트() {
+        assertSimpleTest(() -> {
+            run("//6\\n2163:3");
+            assertThat(output()).contains("결과 : 27");
+        });
+    }
+
+    @Test
+    void 소숫점이_들어온_케이스_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1.23:4.56"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 소숫점을_커스텀_구분자로_추가한_경우_테스트() {
+        assertSimpleTest(() -> {
+            run("//.\\n1.23:4.56");
+            assertThat(output()).contains("결과 : 84");
+        });
+    }
+
+    @Test
+    void 정규식에_사용되는_기호를_구분자로_추가했을_때_테스트() {
+        assertSimpleTest(() -> {
+            run("//+\\n1+23");
+            assertThat(output()).contains("결과 : 24");
+        });
+    }
+
+    @Test
+    void or구분자를_추가하였을때__테스트() {
+        assertSimpleTest(() -> {
+            run("//|\\n1|2|33");
+            assertThat(output()).contains("결과 : 36");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
