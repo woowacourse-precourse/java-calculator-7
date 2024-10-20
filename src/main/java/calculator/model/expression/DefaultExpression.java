@@ -1,6 +1,5 @@
 package calculator.model.expression;
 
-import java.util.Collections;
 import java.util.List;
 
 public final class DefaultExpression implements Expression {
@@ -25,9 +24,6 @@ public final class DefaultExpression implements Expression {
     }
 
     private List<String> extractOperands(final String input) {
-        if (input.isBlank()) {
-            return Collections.singletonList("0");
-        }
         return List.of(input.split(delimiter));
     }
 

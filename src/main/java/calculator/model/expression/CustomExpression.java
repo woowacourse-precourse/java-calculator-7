@@ -1,6 +1,5 @@
 package calculator.model.expression;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -45,9 +44,6 @@ public final class CustomExpression implements Expression {
 
     private List<String> extractOperands(final int delimiterEndIndex) {
         final String numbersPart = input.substring(delimiterEndIndex + CUSTOM_DELIMITER_SEPARATOR.length());
-        if (numbersPart.isBlank()) {
-            return Collections.singletonList("0");
-        }
         return List.of(numbersPart.split(delimiter));
     }
 
