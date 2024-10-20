@@ -38,9 +38,11 @@ public class Calculator {
      */
     private int parseNumber(String token) {
         try {
+            System.out.println(token);
             return Integer.parseInt(token);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다: " + token);
+            System.out.println(e.getMessage());
+            throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다");
         }
     }
 
