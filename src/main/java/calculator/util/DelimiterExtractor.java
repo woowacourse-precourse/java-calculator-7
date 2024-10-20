@@ -24,12 +24,23 @@ public class DelimiterExtractor {
             }
 
             String delimiter = extractDelimiter(input, currentIndex, suffixIndex);
+            validateDelimiter(delimiter);
             delimiters.add(delimiter);
 
             currentIndex = suffixIndex + DELIMITER_SUFFIX.length();
         }
 
         return delimiters;
+    }
+
+    private static void validateDelimiter(String delimiter) {
+        validateNotEmpty(delimiter);
+    }
+
+    private static void validateNotEmpty(String delimiter) {
+        if (delimiter.isEmpty()) {
+            throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_NOT_FOUND.getMessage());
+        }
     }
 
     private static int findPrefixIndex(String input, int currentIndex) {
