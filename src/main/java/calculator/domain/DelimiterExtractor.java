@@ -46,5 +46,4 @@ public class DelimiterExtractor {
     private void validateDelimiter(String input, String delimiter, Matcher matcher) {
         new DelimiterValidator(input, delimiter, matcher);
     }
-
 }

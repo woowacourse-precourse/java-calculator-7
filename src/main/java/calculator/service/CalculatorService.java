@@ -6,6 +6,11 @@ import calculator.domain.DelimiterExtractor;
 public class CalculatorService {
 
     private Command calculator;
+    private final DelimiterExtractor extractor;
+
+    public CalculatorService(DelimiterExtractor extractor) {
+        this.extractor = extractor;
+    }
 
     public void setCommand(Command calculator) {
         this.calculator = calculator;
@@ -25,7 +30,6 @@ public class CalculatorService {
     }
 
     private String[] split(String input) {
-        DelimiterExtractor extractor = new DelimiterExtractor();
         String delimiterRegex = extractor.generateDelimiterRegex(input);
         String expression = extractor.getExpression();
         return expression.split(delimiterRegex);

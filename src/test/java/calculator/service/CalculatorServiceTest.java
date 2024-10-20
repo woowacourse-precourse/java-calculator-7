@@ -1,16 +1,16 @@
-package calculator;
+package calculator.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import calculator.command.SumCommand;
-import calculator.service.CalculatorService;
+import calculator.domain.DelimiterExtractor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CalculatorServiceTest {
 
-    private final CalculatorService calculator = new CalculatorService();
+    private final CalculatorService calculator = new CalculatorService(new DelimiterExtractor());
 
     @BeforeEach
     void setUp() {
