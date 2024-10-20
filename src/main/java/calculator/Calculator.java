@@ -42,33 +42,33 @@ public class Calculator {
         return input.split(DEFAULT_DELIMITERS);
     }
 
-    public static int sum(String[] str) {
+    public static int sum(String[] inputArrayString) {
         int result = 0;
-        for (String s : str) {
-            result += Integer.parseInt(s);
+        for (String inputString : inputArrayString) {
+            result += Integer.parseInt(inputString);
         }
         return result;
     }
 
-    public static int preExceptionHandler(String input) {
-        if (input.matches("[,:]+")) {
+    public static int preExceptionHandler(String inputString) {
+        if (inputString.matches("[,:]+")) {
             throw new IllegalArgumentException("구분자로만 이루어진 입력은 허용되지 않습니다.");
         }
-        if (input.matches(".*[,:]$|^[,:].*")) {  // 구분자로 끝나거나 시작하는 경우 체크
+        if (inputString.matches(".*[,:]$|^[,:].*")) {  // 구분자로 끝나거나 시작하는 경우 체크
             throw new IllegalArgumentException("입력되지 않은 수가 있습니다.");
         }
         return 1;
     }
 
-    public static int postExceptionHandler(String[] input) {
-        for (String str : input) {
+    public static int postExceptionHandler(String[] inputArrayString) {
+        for (String intputString : inputArrayString) {
             try {
-                int number = Integer.parseInt(str);
+                int number = Integer.parseInt(intputString);
                 if (number < 0) {
                     throw new IllegalArgumentException("음수는 허용되지 않습니다 : " + number);
                 }
             } catch (NumberFormatException e) { // 구분자에 의해 분리시킨 값이 숫자가 아닐경우
-                throw new IllegalArgumentException("숫자가 아닌 값이 입력되었습니다 : " + str);
+                throw new IllegalArgumentException("숫자가 아닌 값이 입력되었습니다 : " + intputString);
             }
         }
         return 1;
