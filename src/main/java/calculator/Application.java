@@ -20,5 +20,24 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요. ");
         return Console.readLine();
     }
+
+    public static int getValidatedNumber(String number) {
+        if (number.isEmpty()) {
+            return 0;
+        }
+
+        try {
+//            숫자가 아닌 경우 예외 발생
+            int num = Integer.parseInt(number.trim());
+
+//            0, 음수일 경우 예외 발생
+            if (num <= 0) {
+                throw new IllegalArgumentException("음수와 0은 입력할 수 없습니다. ");
+            }
+
+            return num;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("구분자와 양수만 입력 가능합니다. ");
+        }
     }
 }

@@ -31,4 +31,9 @@ public class Separator {
 //         커스텀 구분자 정의를 제외하고 반환
         return input.substring(endOfCustomSeparator + 2);
     }
+
+    public String[] getNumbersFrom(String input) {
+        return input.split(
+            "[" + DEFAULT_SEPARATOR[0] + DEFAULT_SEPARATOR[1] + this.customSeparator + "]");
+    }
 }
