@@ -33,6 +33,14 @@ public class Application {
         return content.split(splitPattern);
     }
 
+    public static int calculateSum(String[] numbers) {
+        int total = 0;
+        for (String number : numbers) {
+            total += Integer.parseInt(number);
+        }
+        return total;
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter your input");
@@ -43,8 +51,14 @@ public class Application {
         String customDelimiter = delimiterAndContent[0];
         String contentWithoutDelimiter = delimiterAndContent[1];
 
+        String[] numberArray;
+        int resultSum;
         try {
             checkValidDelimiters(contentWithoutDelimiter, customDelimiter);
+            numberArray = splitByDelimiter(contentWithoutDelimiter, customDelimiter);
+            resultSum = calculateSum(numberArray);
+
+            System.out.print("Sum: " + resultSum);
 
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
