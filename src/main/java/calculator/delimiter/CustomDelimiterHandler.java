@@ -1,24 +1,33 @@
 package calculator.delimiter;
 
 import calculator.DelimiterHandler;
+import calculator.exception.InvalidInputException;
 
 public class CustomDelimiterHandler implements DelimiterHandler {
 
-    @Override
-    public String[] split(String input) {
-        // 커스텀 구분자 추출: //과 \n 사이의 구분자를 추출
-        String delimiter = input.substring(2, input.indexOf("\n"));
-
-        // 실제 숫자 부분 추출
-        String numbers = input.substring(input.indexOf("\n") + 1);
-
-        // 커스텀 구분자로 분리
-        return numbers.split(delimiter);
+    public static boolean isCustomDelimiter(String input) {
+        return input.startsWith("//");
     }
 
-    // 커스텀 구분자가 포함되었는지 확인하는 메서드
-    public static boolean isCustomDelimiter(String input) {
-        // //으로 시작하고 \n이 포함된 경우 커스텀 구분자라고 판단
-        return input.startsWith("//") && input.contains("\n");
+    @Override
+    public String[] split(String input) {
+        if (!isCustomDelimiter(input)) {
+            throw new InvalidInputException("유효하지 않은 구분자입니다.");
+        }
+
+        // 커스텀 구분자 추출
+        int endIndex = input.indexOf("\n");
+        if (endIndex == -1) {
+            throw new InvalidInputException("//와 \n을 사용하여 커스텀 구분자를 지정해야 합니다.");
+        }
+
+        String customDelimiter = input.substring(2, endIndex);
+        if (customDelimiter.length() != 1) {
+            throw new InvalidInputException("커스텀 구분자는 한 글자여야 합니다.");
+        }
+
+        // 숫자 부분 추출
+        String numbersPart = input.substring(endIndex + 1);
+        return numbersPart.split(customDelimiter); // 커스텀 구분자로 문자열 분리
     }
 }
