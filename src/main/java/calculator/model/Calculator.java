@@ -12,7 +12,6 @@ public class Calculator {
     }
 
     public int calculateSum(InputManager inputManager) {
-
         return inputManager.stringToIntegers().stream()
                 .mapToInt(Integer::intValue)
                 .sum();
