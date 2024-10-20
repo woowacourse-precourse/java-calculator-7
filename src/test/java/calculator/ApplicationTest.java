@@ -4,7 +4,9 @@ import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import calculator.separator.CustomSeparator;
 import camp.nextstep.edu.missionutils.test.NsTest;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
@@ -61,9 +63,32 @@ class ApplicationTest extends NsTest {
     @Test
     void 기본_구분자_개수_초과시_오류() {
         assertSimpleTest(
-                () -> assertThatThrownBy(() -> runException("1,2,3"))
+                () -> assertThatThrownBy(() -> runException("1,,2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+    @Test
+    void 구분자가_숫자일시_오류() {
+        assertSimpleTest(
+
+                () -> assertThatThrownBy(() -> runException("//1\n21314"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_정규표현식_테스트() {
+        String regex = "//([^0-9])\\\\n(\\d+\\1)*\\d+"; //\\이스케이프처리..
+        String test = "//?\\n1?2?3";
+        assertThat(test.matches(regex)).isEqualTo(true);
+    }
+
+    @Test
+    void 커스텀_표현식_추출_테스트() {
+        CustomSeparator separator = new CustomSeparator();
+        List<Long> nums = separator.separate("//?\\n1?2?3");
+        assertThat(nums).isEqualTo(List.of(1L, 2L, 3L));
     }
 
     @Override
