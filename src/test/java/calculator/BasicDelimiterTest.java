@@ -15,6 +15,7 @@ class BasicDelimiterTest extends NsTest {
         });
     }
 
+
     @Test
     void 여러_기본_구분자로_계산() {
         assertSimpleTest(() -> {
