@@ -1,6 +1,8 @@
 package calculator.domain;
 
 public class Validator {
+
+    // 입력된 숫자 문자열 배열 검증 후 정수 배열로 변환
     public int[] validateAndConvert(String[] numbers) {
         if(numbers.length == 0) {
             throw new IllegalArgumentException("입력된 숫자가 존재하지 않습니다.");
@@ -16,7 +18,7 @@ public class Validator {
                     throw new IllegalArgumentException(numbersArray[i] + "는 음수 값입니다.");
                 }
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException(numbers[i]+ "는 유효한 숫자가 아닙니다.");
+                throw new IllegalArgumentException(numbers[i] + "는 유효한 숫자가 아닙니다.");
             }
         }
         return numbersArray;

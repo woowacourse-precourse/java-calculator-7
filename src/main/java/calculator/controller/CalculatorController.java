@@ -7,10 +7,10 @@ import calculator.view.OutputWriter;
 
 public class CalculatorController {
 
-    private InputReader inputReader;
-    private OutputWriter outputWriter;
-    private Validator validator;
-    private Calculator calculator;
+    private final InputReader inputReader;
+    private final OutputWriter outputWriter;
+    private final Validator validator;
+    private final Calculator calculator;
 
     public CalculatorController(InputReader inputReader, OutputWriter outputWriter, Validator validator, Calculator calculator) {
         this.inputReader = inputReader;
