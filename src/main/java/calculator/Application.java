@@ -22,11 +22,13 @@ public class Application {
         }catch(IllegalAccessException e){
             System.out.println("IllegalAccessException 오류 " + e.getMessage());
         }
+
+        // 합 구하기
+        int sum = sumNumber(numbers);
     }
 
     // 구분자 확인 메소드
     public static String getSeparator(String input){
-
         if(input.startsWith("//")){
             int separatorIndex = input.indexOf("\\n");
             if(separatorIndex != -1){
@@ -39,7 +41,6 @@ public class Application {
 
     // 문자열 분리 메소드
     public static String[] splitInput(String input, String separator){
-
         if(input.startsWith("//")){
             int startNumberIndex = input.indexOf("\\n");
             if(startNumberIndex != -1){
@@ -62,5 +63,16 @@ public class Application {
                 }
             }
         }
+    }
+
+    // 숫자들의 합 계산 메소드
+    public static int sumNumber(String[] numbers){
+        int sum = 0;
+
+        for(String number : numbers){
+            sum += Integer.parseInt(number.trim());
+        }
+
+        return sum;
     }
 }
