@@ -1,5 +1,7 @@
 package calculator;
 
+import java.math.BigInteger;
+
 public class Calculator {
     private final InputParser parser;
 
@@ -7,23 +9,31 @@ public class Calculator {
         this.parser = parser;
     }
 
-    public int calculateTotalSum() {
-        int totalSum = 0;
+    public Number calculateTotalSum() {
+        BigInteger totalSum = BigInteger.ZERO;
         String[] numbers = parser.getNumbers();
 
         for (String num : numbers) {
-            try {
-                int inputNum = Integer.parseInt(num);
-                if (inputNum < 0) {
-                    System.out.println("입력 오류: 양수를 입력해주세요");
-                    throw new IllegalArgumentException();
-                }
-                totalSum += inputNum;
-            } catch (NumberFormatException e) {
-                System.out.println("입력 오류: 숫자를 입력해주세요");
+            BigInteger inputNum = stringToNum(num);
+            if (inputNum.compareTo(BigInteger.ZERO) < 0) {
+                System.out.println("입력 오류: 양수를 입력해주세요");
                 throw new IllegalArgumentException();
             }
+            totalSum = totalSum.add(inputNum);
+        }
+        // 가능하면 int 자료형으로 처리
+        if (totalSum.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) <= 0) {
+            return totalSum.intValue();
         }
         return totalSum;
+    }
+
+    private BigInteger stringToNum(String number) {
+        try {
+            return new BigInteger(number);
+        } catch (NumberFormatException e) {
+            System.out.println("입력 오류: 숫자를 입력해주세요");
+            throw new IllegalArgumentException();
+        }
     }
 }

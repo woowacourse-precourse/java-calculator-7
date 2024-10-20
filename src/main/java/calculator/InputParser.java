@@ -1,5 +1,7 @@
 package calculator;
 
+import java.math.BigInteger;
+
 public class InputParser {
     private final String inputText;
     private String separator;
@@ -62,7 +64,7 @@ public class InputParser {
 
     private static boolean isNumeric(String inputText) {
         try {
-            Integer.parseInt(inputText);
+            new BigInteger(inputText);
             return true;
         } catch (NumberFormatException e) {
             return false;

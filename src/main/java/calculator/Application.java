@@ -7,7 +7,7 @@ public class Application {
         String inputText = Console.readLine();
         InputParser inputParser = new InputParser(inputText);
         Calculator calculator = new Calculator(inputParser);
-        int totalSum = calculator.calculateTotalSum();
-        System.out.printf("결과 : %d\n", totalSum);
+        Number totalSum = calculator.calculateTotalSum();
+        System.out.printf("결과 : %s\n", totalSum);
     }
 }
