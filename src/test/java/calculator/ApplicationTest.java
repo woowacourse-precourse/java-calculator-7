@@ -64,6 +64,14 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 숫자가_커스텀_구분자일_때_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//2\n12121"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
