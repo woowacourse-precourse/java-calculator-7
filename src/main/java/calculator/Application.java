@@ -1,6 +1,5 @@
 package calculator;
 
-import java.util.Scanner;
 import camp.nextstep.edu.missionutils.Console;
 import static calculator.CalculatorFunctions.*;
 
@@ -18,6 +17,7 @@ public class Application {
                 throw new IllegalArgumentException("잘못된 형식 : 커스텀 구분자 구조가 잘못 설정되었습니다.");
             }
         }
+
         // 각 숫자의 합을 구하기
         result = splitAndSum(str);
         System.out.println("결과 : " + result);
