@@ -6,6 +6,13 @@ import java.util.StringTokenizer;
 public class Application {
     static String str;
 
+    // 결과 출력
+    public static void printResult(String[] nums) {
+        if (isInvalidSeperator(nums) && isPositiveNumber(nums)) {
+            System.out.println("결과 : " + calculate(nums));
+        }
+    }
+
     // 구분자들을 기준으로 문자열 분리
     public static String[] seperateString(String seperators) {
         StringTokenizer st = new StringTokenizer(str, seperators);
@@ -76,5 +83,6 @@ public class Application {
 
         String seperators = makeSeperators();
         String[] nums = seperateString(seperators);
+        printResult(nums);
     }
 }
