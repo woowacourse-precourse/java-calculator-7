@@ -82,10 +82,10 @@ public class InputValidator {
         }
     }
 
-    // 커스텀 구분자 지정문자 뒤에 숫자가 오지 않을 경우
+    // 커스텀 구분자 지정문자 뒤에 숫자가 오지 않을 경우 + 아무것도 오지 않을 경우
     // findCustomSeparator에 추가(customValidator)
     private void notNumAfterCustom(String expression) {
-        if (!Character.isDigit(expression.charAt(0))) {
+        if (expression.isBlank() || !Character.isDigit(expression.charAt(0))) {
             throwIllegalArgument("[ERROR]커스텀 구분자 선언자 뒤에 수식이 숫자로 시작하지 않습니다.");
         }
     }
