@@ -32,7 +32,11 @@ public class Application {
 
 
     public Integer calculate() {
-        return 0;
+        Integer sumOfList = 0;
+        for (Integer element : numbersList) {
+            sumOfList = element;
+        }
+        return sumOfList;
     }
 
     private void initialize() {
