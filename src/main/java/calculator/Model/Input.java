@@ -14,7 +14,7 @@ public class Input {
         String rawText = Console.readLine();
 
         if (rawText.length() == 0) {
-            return "0";
+            throw new IllegalArgumentException("입력이 올바르지 않습니다. 공백은 허용되지 않습니다.");
         }
         validInputText(rawText.charAt(rawText.length()-1));
 
