@@ -3,6 +3,9 @@ package calculator;
 import java.util.List;
 
 public class Validator {
+
+    private static final String PREFIX_CUSTOM_START = "//";
+    private static final String PREFIX_CUSTOM_LAST = "\\n";
     private static final String WRONG_INPUT_MESSAGE = "입력값이 잘못되었습니다.";
     private static final String WRONG_CUSTOM_SEPARATOR_FORM_MESSAGE = "custom 구분자의 형식이 잘못되었습니다.";
     private static final String IS_BEYOND_COMPUTE_MESSAGE = "계산할 수 없는 범위입니다.";
@@ -37,14 +40,14 @@ public class Validator {
     private static void isCorrectPair(String input) {
         boolean flag = false;
         for (int i = 0; i < input.length(); i++) {
-            if (input.startsWith("//", i)) {
+            if (input.startsWith(PREFIX_CUSTOM_START, i)) {
                 if (i + 4 >= input.length() || !isCorrectLastElement(input, i + 3)) {
                     throw new IllegalArgumentException(WRONG_CUSTOM_SEPARATOR_FORM_MESSAGE);
                 }
                 flag = true;
                 i++;
             }
-            if (input.startsWith("\\n", i)) {
+            if (input.startsWith(PREFIX_CUSTOM_LAST, i)) {
                 if (!flag) {
                     throw new IllegalArgumentException(WRONG_CUSTOM_SEPARATOR_FORM_MESSAGE);
                 }
