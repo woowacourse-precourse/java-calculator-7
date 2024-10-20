@@ -1,6 +1,8 @@
 package calculator.model;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Extractor {
 
@@ -56,9 +58,17 @@ public class Extractor {
         List<Long> result = new ArrayList<>();
         for (String number : numbers) {
             number = number.trim();
+            validateDigit(number);
         return result;
     }
 
+    }
+
+    // 숫자인지 여부를 검증
+    private void validateDigit(String s) {
+        Optional.of(s)
+                .map(Long::parseLong)
+                .orElseThrow(() -> new CustomException(ErrorCode.INVALID_NUMBER_FORMAT));
     }
 
 }
