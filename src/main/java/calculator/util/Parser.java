@@ -45,15 +45,23 @@ public class Parser {
                 throw new IllegalArgumentException(INVALID_FLOAT_INPUT_MESSAGE);
             }
 
-            try {
-                int number = Integer.parseInt(element);
-                intList.add(number);
-            } catch (NumberFormatException e) {
+            if (!isInteger(element)) {
                 throw new IllegalArgumentException(INVALID_ELEMENT_MESSAGE);
             }
+
+            intList.add(Integer.parseInt(element));
         }
 
         return intList;
+    }
+
+    private static boolean isInteger(String element) {
+        try {
+            Integer.parseInt(element);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     private static boolean isFloat(String element) {
