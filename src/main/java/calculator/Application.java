@@ -26,8 +26,11 @@ public class Application {
         for (String token : tokens) {
             try {
                 numbers.add(Integer.parseInt(token));
+                if (Integer.parseInt(token) < 0) {
+                    throw new IllegalArgumentException();
+                }
             } catch (NumberFormatException e) {
-                System.out.println("숫자X " + token);
+                throw new IllegalArgumentException();
             }
         }
 
@@ -36,7 +39,7 @@ public class Application {
             sum += i;
         }
 
-        System.out.println(sum);
+        System.out.println("결과 : " + sum);
 
     }
 }
