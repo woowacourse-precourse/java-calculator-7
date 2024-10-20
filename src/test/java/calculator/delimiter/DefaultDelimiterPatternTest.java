@@ -26,6 +26,7 @@ class DefaultDelimiterPatternTest {
             "'1,2:3'",
             "'1:2,3'",
             "'1:25:3'",
+            "'1:25:1000'"
     })
     public void 정상적인_상황_성공(String input) {
         assertThat(pattern.validate(input)).isTrue();
@@ -80,5 +81,28 @@ class DefaultDelimiterPatternTest {
     })
     public void 숫자앞에_0이_포함될때(String input) {
         assertThat(pattern.validate(input)).isFalse();
+    }
+
+    @Test
+    public void 최대_숫자_범위_1000을_넘을때() {
+        assertThat(pattern.validate("1,2,1001")).isFalse();
+    }
+
+    @Test
+    void 숫자_갯수가_50개일때() {
+        StringBuilder input = new StringBuilder("1");
+        for (int i = 2; i <= 50; i++) {
+            input.append(",").append(i);
+        }
+        assertThat(pattern.validate(input.toString())).isTrue();
+    }
+
+    @Test
+    void 숫자_갯수_50개를_넘을때() {
+        StringBuilder input = new StringBuilder("1");
+        for (int i = 2; i <= 51; i++) {
+            input.append(",").append(i);
+        }
+        assertThat(pattern.validate(input.toString())).isFalse();
     }
 }
