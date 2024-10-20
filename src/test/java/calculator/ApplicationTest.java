@@ -162,6 +162,22 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    @DisplayName("'-' 또는 숫자가 커스텀 구분자로 들어올 경우 예외처리")
+    void 불가능한_커스텀_구분자_예외() {
+        assertSimpleTest(() -> {
+
+            //'-'를 커스텀 구분자로 선언하려는 상황
+            assertThatThrownBy(() -> runException("//-\\n4-1"))
+                    .hasMessage("'-' 또는 숫자는 커스텀 구분자로 사용할 수 없습니다.");
+
+            //숫를 커스텀 구분자로 선언하려는 상황
+            assertThatThrownBy(() -> runException("//4\\n541"))
+                    .hasMessage("'-' 또는 숫자는 커스텀 구분자로 사용할 수 없습니다.");
+
+        });
+    }
+
     @Override
     public void runMain() {
         try {

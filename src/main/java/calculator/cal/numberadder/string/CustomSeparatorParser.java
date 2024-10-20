@@ -78,7 +78,12 @@ public class CustomSeparatorParser {
                     case '$':
                         separatorRegex.append("\\$");
                         break;
+                    case '-':
+                        throw new IllegalArgumentException("'-' 또는 숫자는 커스텀 구분자로 사용할 수 없습니다.");
                     default:
+                        if (Character.isDigit(currentChar)) {
+                            throw new IllegalArgumentException("'-' 또는 숫자는 커스텀 구분자로 사용할 수 없습니다.");
+                        }
                         separatorRegex.append(currentChar);
                         break;
                 }
