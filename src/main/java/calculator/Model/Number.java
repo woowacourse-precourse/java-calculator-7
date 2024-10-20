@@ -34,9 +34,19 @@ public class Number {
         return 0;
     }
 
+    public void isCustomDelimiterNumber(String customDelimiter) {
+        try {
+            Integer.parseInt(customDelimiter);
+        } catch (NumberFormatException exception) {
+            return;
+        }
+        throw new IllegalArgumentException("숫자는 커스텀 구분자로 입력할 수 없습니다.");
+    }
     public String splitCustomDelimiter(int customDelimiterEndIndex, String rawText) {
         if (customDelimiterEndIndex > 0) {
-            return rawText.substring(2, customDelimiterEndIndex);
+            String customDelimiter = rawText.substring(2, customDelimiterEndIndex);
+            isCustomDelimiterNumber(customDelimiter);
+            return customDelimiter;
         }
         return null;
     }
