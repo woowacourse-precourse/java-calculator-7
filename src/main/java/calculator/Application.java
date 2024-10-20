@@ -26,7 +26,8 @@ class StringCalculator {
     public int addAll(){
         String numbers = getNumsPart();
         String[] pieces = splitNums(numbers);
-        return 0;
+        int[] numArray = makeNums(pieces);
+        return addNums(numArray);
     }
 
     private String getNumsPart(){
@@ -39,5 +40,34 @@ class StringCalculator {
 
     private String[] splitNums(String numbers) {
         return numbers.split("[" + delim + "]");
+    }
+
+    private int[] makeNums(String[] pieces){
+        int[] nums = new int[pieces.length];
+        int count = 0;
+
+        for(String piece : pieces){
+            try {
+                int num = Integer.parseInt(piece);
+                if (num<0){
+                    throw new IllegalArgumentException("음수는 허용되지 않는다");
+                }
+                nums[count++]= num;
+            }
+            catch (NumberFormatException e){
+                throw new IllegalArgumentException("숫자가 아닌 값이 사용되었다");
+            }
+        }
+        int[] result = new int[count];
+        System.arraycopy(nums, 0, result, 0, count);
+        return result;
+    }
+
+    private int addNums(int[] nums){
+        int total = 0;
+        for(int num : nums){
+            total += num;
+        }
+        return total;
     }
 }
