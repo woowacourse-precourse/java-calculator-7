@@ -35,22 +35,17 @@ public class InputView {
 
     public static List<String> splitInput(List<String> input) {
 
-        return input.stream()
-                .flatMap(str -> Arrays.stream(str.split(getRegex())))
-                .filter(s -> !s.isEmpty())
+        return input.stream().flatMap(str -> Arrays.stream(str.split(getRegex()))).filter(s -> !s.isEmpty())
                 .collect(Collectors.toList());
     }
 
     private static String getRegex() {
-        return COMMA.getSeperator() + "|"
-                + COLON.getSeperator() + "|"
-                + REGEX_QUOTE_START
-                + CUSTOM.getSeperator()
+        return COMMA.getSeperator() + "|" + COLON.getSeperator() + "|" + REGEX_QUOTE_START + CUSTOM.getSeperator()
                 + REGEX_QUOTE_END;
     }
 
     private static void validate(List<String> numbers) {
-        
+
         validateNumber(numbers);
         validatePositiveNumber(numbers);
     }
@@ -74,17 +69,13 @@ public class InputView {
     }
 
     private static List<Double> typeConvert(List<String> numbers) {
-        return numbers.stream()
-                .filter(number -> !number.isEmpty())
-                .map(number -> Double.parseDouble(number))
+        return numbers.stream().filter(number -> !number.isEmpty()).map(number -> Double.parseDouble(number))
                 .collect(Collectors.toList());
     }
 
     public static List<String> removeUnUsedSentence(String input) {
 
-        return Arrays.asList(input.split(DOUBLE_SLASH + CUSTOM.getSeperator() + NEW_LINE))
-                .stream()
-                .filter(sentence -> !sentence.isEmpty())
-                .collect(Collectors.toList());
+        return Arrays.asList(input.split(DOUBLE_SLASH + CUSTOM.getSeperator() + NEW_LINE)).stream()
+                .filter(sentence -> !sentence.isEmpty()).collect(Collectors.toList());
     }
 }
