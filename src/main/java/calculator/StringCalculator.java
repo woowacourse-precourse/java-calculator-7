@@ -5,18 +5,26 @@ public class StringCalculator {
         if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException();
         }
-        String[] numbers = split(input);
 
+        String[] numbers = split(input);
         int sum = 0;
         for (String number : numbers) {
-            try {
-                sum += Integer.parseInt(number);
-            } catch (Exception e) {
+            int num = parseNumber(number);
+            if (num <= 0) {
                 throw new IllegalArgumentException();
             }
+            sum += num;
         }
 
         return sum;
+    }
+
+    private int parseNumber(String number) {
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
     }
 
     private String[] split(String input) {
