@@ -23,18 +23,15 @@
       >
       > 옳은 양식이라면 "//"과 "\n"의 위치는 고정
       >
-      > 문자열의 0~4번 index 확인 후 입력 양식 판단
+      > 문자열의 앞부분 입력 양식 판단
       >
-      > [yes] -> custom 구분자 할당 후 return
-      >
-      > [no] -> 그냥 return
-      > (이때 custom 구분자는 디폴트 구분자로 초기화되어 있음)
+      > 기본 구분자에 custom 구분자 추가
       >
       > (error판단은 여기서 하지않음)
 
 3. 문자열 tokenizing
     - custom 구분자 양식 자르기
-      > customDelimiterFlag에 따라 문자열 앞의 5칸을 자름
+      > custom 구분자가 있다면 문자열 앞의 5칸을 자름
       >
       > expression이 남게됨
     - tokenize expression
