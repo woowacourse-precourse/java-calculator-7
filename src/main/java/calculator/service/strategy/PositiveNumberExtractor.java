@@ -7,11 +7,11 @@ import calculator.model.delimiter.Delimiter;
 
 public class PositiveNumberExtractor {
     private final SplitPatternGenerator splitPatternGenerator;
-    private final PatternMatcherUtil patternMatcherUtil;
+    private final PatternMatcher patternMatcher;
 
-    public PositiveNumberExtractor(SplitPatternGenerator splitPatternGenerator, PatternMatcherUtil patternMatcherUtil) {
+    public PositiveNumberExtractor(SplitPatternGenerator splitPatternGenerator, PatternMatcher patternMatcher) {
         this.splitPatternGenerator = splitPatternGenerator;
-        this.patternMatcherUtil = patternMatcherUtil;
+        this.patternMatcher = patternMatcher;
     }
 
     public PositiveNumber extractPositiveNumber(Delimiter delimiter, String inputString) {
@@ -22,7 +22,7 @@ public class PositiveNumberExtractor {
     }
 
     private String extractPositiveNumberLine(String inputString) {
-        return patternMatcherUtil.match(NUMBER_LINE.getRegularExpression(), inputString);
+        return patternMatcher.findFirstGroup(NUMBER_LINE.getRegularExpression(), inputString);
     }
 
     private PositiveNumber createPositiveNumber(String[] positiveNumberString) {

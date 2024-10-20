@@ -3,8 +3,8 @@ package calculator.service.strategy;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PatternMatcherUtil {
-    public String match(String regularExpression, String inputString) {
+public class PatternMatcher {
+    public String findFirstGroup(String regularExpression, String inputString) {
         Pattern pattern = Pattern.compile(regularExpression);
         Matcher matcher = pattern.matcher(inputString);
         if (matcher.find()) {

@@ -3,16 +3,16 @@ package calculator.service.strategy.customstrategy;
 import static calculator.model.RegularExpression.CUSTOM_LINE;
 
 import calculator.model.delimiter.Delimiter;
-import calculator.service.strategy.PatternMatcherUtil;
+import calculator.service.strategy.PatternMatcher;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class CustomDelimiterExtractor {
-    private final PatternMatcherUtil patternMatcherUtil;
+    private final PatternMatcher patternMatcher;
 
-    public CustomDelimiterExtractor(PatternMatcherUtil patternMatcherUtil) {
-        this.patternMatcherUtil = patternMatcherUtil;
+    public CustomDelimiterExtractor(PatternMatcher patternMatcher) {
+        this.patternMatcher = patternMatcher;
     }
 
     public Delimiter extractCustomDelimiter(String inputString) {
@@ -26,6 +26,6 @@ public class CustomDelimiterExtractor {
     }
 
     private String extractCustomDelimiterToString(String inputString) {
-        return patternMatcherUtil.match(CUSTOM_LINE.getRegularExpression(), inputString);
+        return patternMatcher.findFirstGroup(CUSTOM_LINE.getRegularExpression(), inputString);
     }
 }
