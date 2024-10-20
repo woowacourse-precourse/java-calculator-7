@@ -4,7 +4,7 @@
 ---
 ## \<controller>
 ### Controller
-* `calculate`: 빈 문자열일 경우 결과값 0으로 출력히는 기능
+* `calculate`: 빈 문자열일 경우 결과값 0으로 출력히는 기능, 여러 model과 view를 연결해주는 기능
 ---
 
 
