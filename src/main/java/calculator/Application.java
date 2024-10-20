@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
@@ -76,5 +77,24 @@ public class Application {
                 throw new IllegalArgumentException("잘못된 값이 입력되었습니다. 프로그램을 종료합니다.");
             }
         }
+    }
+
+    /**
+     * 기능 4 구현
+     */
+    public static List<Integer> extractPositiveInteger(String token) {
+        /** 정수 리스트 선언 */
+        List<Integer> list = new ArrayList<>();
+
+        /** 토큰이 0~9의 양의 정수이면 리스트에 추가 */
+        if (token.matches("\\d+")) {
+            list.add(Integer.parseInt(token));
+        } else {
+            /** 음수 또는 실수 발견 시 예외 발생 */
+            throw new IllegalArgumentException("잘못된 값이 입력되었습니다. 프로그램을 종료합니다.");
+        }
+
+        /** 리스트를 반환 */
+        return list;
     }
 }
