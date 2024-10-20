@@ -9,8 +9,8 @@ public class DelimeterHandler {
     public static List<Character> extractDelimiters(String input) {
         List<Character> delimiterList = new ArrayList<>();
 
-        for (int i = 0; i < DEFAULT_DELIMITERS.length(); i++) {
-            delimiterList.add(DEFAULT_DELIMITERS.charAt(i));
+        for (char delimiter : DEFAULT_DELIMITERS.toCharArray()) {
+            delimiterList.add(delimiter);
         }
 
         if (hasCustomDelimiter(input) == true) {
