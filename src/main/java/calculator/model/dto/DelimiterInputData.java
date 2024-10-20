@@ -4,9 +4,9 @@ public class DelimiterInputData {
     public static Character COMMA = ',';
     public static Character COLON = ':';
 
-    private Character customedDelimiter;
+    private final Character customedDelimiter;
 
-    private String input;
+    private final String input;
 
     public DelimiterInputData(Character customedDelimiter, String input) {
         this.customedDelimiter = customedDelimiter;
