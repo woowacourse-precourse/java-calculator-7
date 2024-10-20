@@ -6,6 +6,8 @@
 
 사용자가 일정한 규칙에 따라 입력한 문자열에서 숫자를 추출하고 덧셈하여 결과를 반환하는 계산기 프로그램입니다.
 
+![java-calculator_JunHakLee03](https://github.com/user-attachments/assets/da311476-eb0b-4142-8938-4441f0f8e5a8)
+
 ---
 
 ### <규칙>
