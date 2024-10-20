@@ -11,7 +11,8 @@ public enum ErrorMessage {
 	END_WITH_DELIMITER("구분자로 끝날 수 없습니다. ex) 1,2,3"),
 	USE_CONTINUOUS_DELIMITER("연속된 구분자는 사용할 수 없습니다. ex) 1,2,3"),
 	USE_UNREGISTERED_DELIMITER("등록되지 않은 구분자는 사용할 수 없습니다 -> "),
-	NEGATIVE_NUMBER_NOT_ALLOWED("음수는 사용할 수 없습니다.")
+	NEGATIVE_NUMBER_NOT_ALLOWED("음수는 사용할 수 없습니다."),
+	OVER_FLOW_INPUT_VALUE("정해진 범위를 초과한 숫자가 입력되었습니다.")
 	;
 
 	private final String message;

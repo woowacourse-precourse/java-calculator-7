@@ -27,7 +27,7 @@ public class NumberExtractor {
 			.forEach(this::validateNumber);
 
 		return Arrays.stream(split)
-			.map(Long::parseLong)
+			.map(this::validateRangeAndParse)
 			.toList();
 	}
 
@@ -38,7 +38,7 @@ public class NumberExtractor {
 	}
 
 	private void validateUsingUnregisteredDelimiter(String numberSection, List<String> delimiters) {
-		
+
 		String[] split = numberSection.split(NUMBER_REGEX);
 		Arrays.stream(split)
 			.filter(delimiter -> !delimiters.contains(delimiter) && !delimiter.isBlank())
@@ -93,6 +93,14 @@ public class NumberExtractor {
 	private void validateUsingNegativeNumber(String number) {
 		if (NumberChecker.isNegativeNumber(number)) {
 			throw new IllegalArgumentException(ErrorMessage.NEGATIVE_NUMBER_NOT_ALLOWED.getMessage());
+		}
+	}
+
+	private long validateRangeAndParse(String number) {
+		try {
+			return Long.parseLong(number);
+		} catch (NumberFormatException nfe) {
+			throw new IllegalArgumentException(ErrorMessage.OVER_FLOW_INPUT_VALUE.getMessage());
 		}
 	}
 
