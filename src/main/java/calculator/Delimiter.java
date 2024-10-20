@@ -50,9 +50,9 @@ public class Delimiter {
         addDelimiter(',');
         if (inputString.startsWith("//")) {
             clearDelimiters();
-            int index = findLastDelimiterIndex(inputString);
+            index = findLastDelimiterIndex(inputString);
             validateCustomDelimiterFormat(inputString);
-            extractDelimiters(inputString, index);
+            extractDelimiters(inputString);
 
             validateSingleDelimiter();
 
@@ -79,7 +79,7 @@ public class Delimiter {
         return delimiterExpression.toString();
     }
 
-    private void extractDelimiters(String inputString, int index) {
+    private void extractDelimiters(String inputString) {
         for (int i = 2; i < index; i++) {
             char currentDelimiter = inputString.charAt(i);
             validateDelimiterIsPeriod(currentDelimiter);
