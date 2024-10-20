@@ -9,5 +9,5 @@
 - [X] 덧셈 수행
 - [ ] 시작 메시지 출력
 - [ ] 결과 메시지 출력
-- [ ] 예외 처리
-    - [ ] 구분자로 분리한 문자가 정수 형식이 아니면 `IllegalArgumentException` 발생
+- [X] 예외 처리
+    - [X] 구분자로 분리한 문자가 정수 형식이 아니면 `IllegalArgumentException` 발생
