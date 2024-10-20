@@ -22,4 +22,8 @@ public class Delimiters {
     public void addCustomDelimiters(Set<String> customDelimiters) {
         delimiters.addAll(customDelimiters);
     }
+
+    public Set<String> getDelimiters() {
+        return delimiters;
+    }
 }
