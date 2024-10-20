@@ -13,12 +13,12 @@ public class Adder {
         this(Delimiters.of(), operands);
     }
 
-    public Adder(Delimiters delimiters, List<String> customOperands) {
+    public Adder(Delimiters delimiters, List<String> operands) {
         Delimiters.check(delimiters);
-        Expression.checkOperandsConstraints(customOperands);
+        Expression.checkOperandsConstraints(operands);
 
         this.delimiters = delimiters;
-        this.operands = new ArrayList<>(customOperands);
+        this.operands = new ArrayList<>(operands);
     }
 
     public Adder(Expression expression) {
