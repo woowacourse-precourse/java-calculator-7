@@ -1,68 +1,55 @@
 package calculator;
 
-import java.util.Arrays;
-
 public class Calculator {
+    // 기본 구분자로 숫자 분리 및 합 계산 기능 구현
 
-    public static int add(String input) {
-        if (input.isEmpty()) {
+    private static final String DEFAULT_DELIMITER = ",|:";
+    private static final String CUSTOM_DELIMITER_PREFIX = "//";
+    private static final String NEWLINE_REPLACEMENT = "\\n";
+
+    public int calculateSumFromInput(String userInput) {
+        if (userInput == null || userInput.isEmpty()) { // 공백 문자열 처리
             return 0;
         }
 
-        String delimiter = detectDelimiter(input);
-        String[] numbers = splitNumbers(input, delimiter);
+        String delimiter = DEFAULT_DELIMITER; // 기본 구분자
 
-        return Arrays.stream(numbers)
-                .mapToInt(Calculator::parseNumber)
-                .sum();
-    }
+        if (userInput.startsWith(CUSTOM_DELIMITER_PREFIX)) {
+            userInput = userInput.replace(NEWLINE_REPLACEMENT, "\n");
+            int delimiterIndex = userInput.indexOf("\n");
+            delimiter = userInput.substring(2, delimiterIndex);
+            userInput = userInput.substring(delimiterIndex + 1);
 
-    private static String detectDelimiter(String input) {
-        if (input.startsWith("//")) {
-            int newlineIndex = input.indexOf("\n");
-            if (newlineIndex == -1) {
-                throw new IllegalArgumentException("입력 형식이 올바르지 않아요. 다시 확인해 주세요!"); // 오류 메시지 수정
-            }
-            // 커스텀 구분자 감지
-            String customDelimiter = input.substring(2, newlineIndex);
-            if (customDelimiter.isEmpty()) {
-                throw new IllegalArgumentException("입력 형식이 올바르지 않아요: 커스텀 구분자가 비어 있어요!"); // 오류 메시지 수정
-            }
-            return escapeDelimiter(customDelimiter);
-        }
-        return ",|:"; // 기본 구분자
-    }
-
-    private static String escapeDelimiter(String customDelimiter) {
-        // 정규 표현식에 맞게 구분자를 이스케이프 처리
-        return customDelimiter.replaceAll("([{}()\\[\\].+*?^$|])", "\\\\$1");
-    }
-
-    private static String[] splitNumbers(String input, String delimiter) {
-        // 커스텀 구분자가 포함된 경우 문자열에서 커스텀 구분자 부분을 제거
-        if (input.startsWith("//")) {
-            int newlineIndex = input.indexOf("\n");
-            input = input.substring(newlineIndex + 1);
-        }
-
-        String[] numbers = input.split(delimiter);
-        validateNumbers(numbers);
-        return numbers;
-    }
-
-    private static void validateNumbers(String[] numbers) {
-        for (String number : numbers) {
-            if (!number.trim().matches("-?\\d+")) { // 숫자 형식 체크
-                throw new IllegalArgumentException("웅, 잘못된 숫자예요: " + number + "는 안돼요!"); // 오류 메시지 수정
+            if (userInput == null || userInput.isEmpty()) { // 공백 문자열 처리
+                return 0;
             }
         }
+
+        String[] splitNumbers = userInput.split(delimiter);
+        return sumParsedNumbers(splitNumbers);
     }
 
-    private static int parseNumber(String numberStr) {
-        int number = Integer.parseInt(numberStr.trim());
-        if (number < 0) {
-            throw new IllegalArgumentException("아이고! 음수는 허용되지 않아요: " + number + "는 안돼요!"); // 오류 메시지 수정
+    // 숫자의 합 계산
+    private int sumParsedNumbers(String[] splitNumbers) {
+        int sum = 0;
+        for (String number : splitNumbers) {
+            int num = validateAndConvertToInt(number);
+            sum += num;
         }
-        return number;
+        return sum;
     }
+
+    // 유효성 검사 및 숫자 변환
+    private int validateAndConvertToInt(String number) {
+        try {
+            int num = Integer.parseInt(number);
+            if (num < 0) {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + num);
+            }
+            return num;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("잘못된 입력 값입니다: " + number);
+        }
+    }
+
 }
