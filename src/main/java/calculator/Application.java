@@ -10,7 +10,11 @@ public class Application {
         String input = Console.readLine();
     }
 
-    public static boolean isCustom(String str) {
-        return str.startsWith("//");
+    public static int useCustomSeparator(String str) {
+        int separatorIndex = str.indexOf("\\n");
+        String customSeparator = str.substring(2, separatorIndex);
+        String numbers = str.substring(separatorIndex + 2);
+        return numberSum(numbers.split(Pattern.quote(customSeparator)));
     }
+
 }
