@@ -77,14 +77,7 @@ public class Application {
                     throw new IllegalArgumentException(ERROR_CUSTOM_DELIMITER_OPERANDS_CONTAIN_OTHER_CHAR);
                 }
 
-                for (BigInteger inputNumber : operands) {
-                    if (inputNumber.compareTo(BigInteger.ZERO) == 0) {
-                        throw new IllegalArgumentException(ERROR_CUSTOM_DELIMITER_CONTAIN_ZERO);
-                    }
-                    if (inputNumber.compareTo(BigInteger.ZERO) < 0) {
-                        throw new IllegalArgumentException(ERROR_CUSTOM_DELIMITER_CONTAIN_MINUS);
-                    }
-                }
+                validatePositive(operands, ERROR_CUSTOM_DELIMITER_CONTAIN_ZERO, ERROR_CUSTOM_DELIMITER_CONTAIN_MINUS);
 
                 return operands.stream().reduce(BigInteger.valueOf(0), BigInteger::add);
             }
@@ -122,17 +115,20 @@ public class Application {
             throw new IllegalArgumentException(ERROR_BASIC_DELIMITER_PARSING_PROBLEM);
         }
 
-        for (BigInteger inputNumber : bigIntegerParsedInputs) {
-            if (inputNumber.compareTo(BigInteger.ZERO) == 0) {
-                throw new IllegalArgumentException(ERROR_BASIC_DELIMITER_CONTAIN_ZERO);
-            }
-
-            if (inputNumber.compareTo(BigInteger.ZERO) < 0) {
-                throw new IllegalArgumentException(ERROR_BASIC_DELIMITER_CONTAIN_MINUS);
-            }
-        }
+        validatePositive(bigIntegerParsedInputs, ERROR_BASIC_DELIMITER_CONTAIN_ZERO, ERROR_BASIC_DELIMITER_CONTAIN_MINUS);
 
         return bigIntegerParsedInputs.stream().reduce(BigInteger.valueOf(0), BigInteger::add);
+    }
+
+    private static void validatePositive(List<BigInteger> operands, String errorCustomDelimiterContainZero, String errorCustomDelimiterContainMinus) {
+        for (BigInteger inputNumber : operands) {
+            if (inputNumber.compareTo(BigInteger.ZERO) == 0) {
+                throw new IllegalArgumentException(errorCustomDelimiterContainZero);
+            }
+            if (inputNumber.compareTo(BigInteger.ZERO) < 0) {
+                throw new IllegalArgumentException(errorCustomDelimiterContainMinus);
+            }
+        }
     }
 
     private static void validateOnlyDelimiter(String input, String delimiter) {
