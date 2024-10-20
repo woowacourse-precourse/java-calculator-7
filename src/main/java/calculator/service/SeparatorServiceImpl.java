@@ -33,28 +33,21 @@ public class SeparatorServiceImpl implements SeparatorService{
     @Override
     public String extractCustomSeparator(String input) {
         String[] parts = input.split(SeparatorConstants.CUSTOM_SEPARATOR_NEWLINE, 2);
-        String customSeparator = parts[0].substring(SeparatorConstants.CUSTOM_SEPARATOR_PREFIX.length());
-
+        char customSeparator = parts[0].charAt(SeparatorConstants.CUSTOM_SEPARATOR_PREFIX.length());
+        System.out.println(customSeparator);
         validateCustomSeparator(customSeparator);
 
-        join(new Separator(customSeparator.charAt(0)));
+        join(new Separator(customSeparator));
 
         return parts.length > 1 ? parts[1] : "";
     }
 
-    private void validateCustomSeparator(String customDelimiter) {
-        validateSingleCharacter(customDelimiter);
+    private void validateCustomSeparator(char customDelimiter) {
         validateNonDigitCharacter(customDelimiter);
     }
 
-    private void validateSingleCharacter(String customDelimiter) {
-        if (customDelimiter.length() != 1) {
-            throw new IllegalArgumentException("커스텀 구분자는 단일 문자여야 합니다.");
-        }
-    }
-
-    private void validateNonDigitCharacter(String customDelimiter) {
-        if (Character.isDigit(customDelimiter.charAt(0))) {
+    private void validateNonDigitCharacter(char customDelimiter) {
+        if (Character.isDigit(customDelimiter)) {
             throw new IllegalArgumentException("커스텀 구분자는 숫자가 아니어야 합니다.");
         }
     }

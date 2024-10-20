@@ -15,7 +15,7 @@ class ParserTest {
     @Test
     void parseCustomSeparator() {
         Parser parser = appConfig.parser();
-        String inputString = "//!\n123,456!789";
+        String inputString = "//!\\n123,456!789";
 
         List<Integer> integers = parser.parse(inputString);
 

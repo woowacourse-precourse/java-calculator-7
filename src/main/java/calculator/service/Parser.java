@@ -65,8 +65,8 @@ public class Parser {
     }
 
     private void validateNumber(String token) {
-    if (token.charAt(0) == '-') {
-        throw new IllegalArgumentException("음수는 허용되지 않습니다: " + token);
+        if (token.startsWith("-")) {
+            throw new IllegalArgumentException("음수는 허용되지 않습니다: " + token);
+        }
     }
-}
 }
