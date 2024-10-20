@@ -41,24 +41,18 @@ public class Application {
                 // 만약 실제 줄바꿈 문자가 없다면, 이스케이프된 "\\n"을 처리
                 if (endIndexDelimiter == -1) {
                     endIndexDelimiter = input.indexOf("\\n");
-                    if (endIndexDelimiter == -1) {
-                        throw new IllegalArgumentException("잘못된 입력 형식으로 커스텀 구분자 선언 후 줄바꿈을 포함해야 합니다.");
-                    }
-
-                    // 이스케이프된 \\n을 처리하는 경우, 구분자를 이에 맞춰서 추출
-                    delimiterPart = input.substring(2, endIndexDelimiter);
-                    numbers = input.substring(endIndexDelimiter + 2);  // \\n이 2글자이므로 +2
-                } else {
-                    // 실제 줄바꿈을 처리하는 경우
-                    delimiterPart = input.substring(2, endIndexDelimiter);
-                    numbers = input.substring(endIndexDelimiter + 1);  // \n은 한 글자이므로 +1
+                }
+                if (endIndexDelimiter == -1) {
+                    throw new IllegalArgumentException("잘못된 입력 형식으로 커스텀 구분자 선언 후 줄바꿈을 포함해야 합니다.");
                 }
 
-                if (delimiterPart.startsWith("[") && delimiterPart.endsWith("]")) {
-                    delimiter = extractMultipleDelimiters(delimiterPart);
-                } else {
-                    delimiter = escapeSpecialCharacters(delimiterPart);
-                }
+                // 줄바꿈 문자 여부에 따른 구분자 처리 추출
+                delimiterPart = input.substring(2, endIndexDelimiter);
+                numbers = input.substring(endIndexDelimiter + (input.contains("\\n") ? 2 : 1));
+
+                delimiter = delimiterPart.startsWith("[") && delimiterPart.endsWith("]")
+                        ? extractMultipleDelimiters(delimiterPart)
+                        : escapeSpecialCharacters(delimiterPart);
             }
 
             // 구분자 기준으로 문자열 분리
