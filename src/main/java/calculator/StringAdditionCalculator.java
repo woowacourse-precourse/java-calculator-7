@@ -6,15 +6,21 @@ import java.util.regex.Pattern;
 
 public class StringAdditionCalculator {
     private static final String SEPARATOR_PATTERN = "//(.+)\\\\n";
+    private static final String NUMBER_PATTERN = "[0-9]+";
+    private static final String CUSTOM_SEPARATOR_STARTS = "//";
     private static final String DEFAULT_SEPARATOR = "[,:]";
+    private static final String LINE_FEED_FOR_REGEX = "\\\\n";
+    private static final String LINE_FEED = "\\n";
+
+    private static final int SPLIT_COUNT = 2;
+    private static final int NUMBER_STRING_INDEX = 1;
 
     public static int calc(String addition) {
-        boolean customSeparatorDefined = Pattern.compile(SEPARATOR_PATTERN)
-                .matcher(addition)
-                .find();
+        boolean customSeparatorDefined = addition.startsWith(CUSTOM_SEPARATOR_STARTS) && addition.contains(LINE_FEED);
+        System.out.println(addition.startsWith(CUSTOM_SEPARATOR_STARTS));
 
         String separator = customSeparatorDefined ? getSeparator(addition) : DEFAULT_SEPARATOR;
-        String numbersString = customSeparatorDefined ? addition.split("\\\\n", 2)[1] : addition;
+        String numbersString = customSeparatorDefined ? addition.split(LINE_FEED_FOR_REGEX, SPLIT_COUNT)[NUMBER_STRING_INDEX] : addition;
 
         int[] numbers =  getNumbers(numbersString, separator);
         return Arrays.stream(numbers)
@@ -34,7 +40,7 @@ private static int[] getNumbers(String input, String separator) {
 }
 
     private static void validateNumber(String number) {
-        if (!number.matches("[0-9]+")) {
+        if (!number.matches(NUMBER_PATTERN)) {
             throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
         }
     }
