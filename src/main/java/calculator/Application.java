@@ -17,7 +17,15 @@ public class Application {
             return 0;
         }
 
-        String[] tokens = input.split(",|:");
+        String delimiter = ",|:";
+
+        if (input.startsWith("//")) {
+            int delimiterEndIndex = input.indexOf("\\n");
+            delimiter = input.substring(2, delimiterEndIndex);
+            input = input.substring(delimiterEndIndex + 2);
+        }
+
+        String[] tokens = input.split(delimiter);
         int sum = 0;
 
         for (String token : tokens) {
