@@ -1,5 +1,5 @@
 package calculator.delimiter;
 
-public interface CustomDelimiterInterface {
+public interface CustomDelimiterDetecterInterface {
     String findCustomDelimiter(String text);
 }
