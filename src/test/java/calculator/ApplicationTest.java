@@ -60,10 +60,19 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_숫자입력_예외_테스트() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//;;\\n1;;2,3"))
+                assertThatThrownBy(() -> runException("//3\\n132333"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
+
+    @Test
+    void 다중_커스텀_구분자_위치_중간_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//x\\n2x//x\\n3x2x3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
