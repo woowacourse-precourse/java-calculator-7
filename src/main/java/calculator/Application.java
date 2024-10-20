@@ -17,6 +17,15 @@ public class Application {
         return "";
     }
 
+    public static int add(String[] nums) {
+        int sum = 0;
+
+        for (String num : nums) {
+            sum += parseNumber(num);
+        }
+        return sum;
+    }
+
     public static void main(String[] args) {
         // TODO: 프로그램 구현
     }
