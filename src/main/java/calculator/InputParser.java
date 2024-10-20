@@ -11,6 +11,10 @@ public class InputParser {
     }
 
     private void parseInput() {
+        if (inputText.isEmpty()) {
+            this.numbers = new String[]{"0"};
+            return;
+        }
         if (isCustomSeparator(inputText)) {
             this.separator = inputText.substring(2, 3);
             if (this.separator.equals("\\")) {
@@ -21,8 +25,12 @@ public class InputParser {
             this.separator = "[,:]";
             this.numbers = inputText.split(separator);
         } else {
-            System.out.println("입력 오류: 올바른 구분자를 입력해주세요");
-            throw new IllegalArgumentException();
+            if (isNumeric(inputText)) {
+                this.numbers = new String[]{inputText};
+            } else {
+                System.out.println("입력 오류: 올바른 구분자를 입력해주세요");
+                throw new IllegalArgumentException();
+            }
         }
     }
 
@@ -50,6 +58,15 @@ public class InputParser {
 
     private static boolean isDefaultSeparator(String inputText) {
         return inputText.contains(",") || inputText.contains(":");
+    }
+
+    private static boolean isNumeric(String inputText) {
+        try {
+            Integer.parseInt(inputText);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     public String getSeparator() {

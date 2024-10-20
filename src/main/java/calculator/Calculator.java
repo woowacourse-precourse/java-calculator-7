@@ -14,7 +14,7 @@ public class Calculator {
         for (String num : numbers) {
             try {
                 int inputNum = Integer.parseInt(num);
-                if (inputNum <= 0) {
+                if (inputNum < 0) {
                     System.out.println("입력 오류: 양수를 입력해주세요");
                     throw new IllegalArgumentException();
                 }
