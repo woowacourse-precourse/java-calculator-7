@@ -18,12 +18,8 @@ public class Application {
         DelimiterInputDto delimiterInputDto =
                 new DelimiterInputDto(calculatorRequest.inputString(), new ArrayList<>(List.of(",", ":")));
 
-        try {
-            int result = calculatorController.calculateSum(delimiterInputDto);
-            calculatorResponse.printResult(result);
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
+        int result = calculatorController.calculateSum(delimiterInputDto);
+        calculatorResponse.printResult(result);
 
     }
 }
