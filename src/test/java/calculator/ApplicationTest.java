@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.controller.Application;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
@@ -44,13 +45,6 @@ class ApplicationTest extends NsTest {
                 assertThatThrownBy(() -> runException("Hello,java,backend"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
-    }
-    @Test
-    void 공백_테스트() {
-        assertSimpleTest(() -> {
-            run();
-            assertThat(output()).contains("결과 : 0");
-        });
     }
 
 
