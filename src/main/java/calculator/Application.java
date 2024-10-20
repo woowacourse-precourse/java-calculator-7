@@ -12,8 +12,8 @@ public class Application {
      * @param s 합을 계산할 문자열
      * @return 합계
      */
-    static int calculate(String s) {
-        if (s.equals("")) {
+    static double calculate(String s) {
+        if (s == null || s.isEmpty()) {
             return 0;
         }
 
@@ -34,16 +34,16 @@ public class Application {
 
 
         String[] tokens = refinedString.split(listOfDelimiters);
-        int sumResult = 0;
+        double sumResult = 0;
 
         for (String stringToken : tokens) {
-            int integerToken = Integer.parseInt(stringToken);
+            double doubleToken = Double.parseDouble(stringToken);
 
-            if (integerToken <= 0) {
+            if (doubleToken <= 0) {
                 throw new IllegalArgumentException("양수가 아닙니다.");
             }
 
-            sumResult += integerToken;
+            sumResult += doubleToken;
         }
 
         return sumResult;
@@ -56,7 +56,7 @@ public class Application {
 
         String inputString = Console.readLine();
 
-        int result = calculate(inputString);
+        double result = calculate(inputString);
         System.out.println("결과 : " + result);
 
     }
