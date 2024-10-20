@@ -18,7 +18,6 @@ public class AdditionCalculator {
                 .sum();
     }
 
-
     public int getResult() {
         return result;
     }
