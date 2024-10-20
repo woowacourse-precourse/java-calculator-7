@@ -1,26 +1,41 @@
 package calculator;
 
+import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class StringCalculatorTest {
-
+class StringCalculatorTest extends NsTest {
 
     @Test
-    @DisplayName("숫자들의 합을 구한다.")
-    void testCalculateSum() {
-        // given
-        int[] input1 = new int[]{1, 2, 3};
-        int[] input2 = new int[]{1};
+    @DisplayName("문자열 덧셈 계산기를 실행한다.")
+    void testStringPlusCalculator() {
+        assertSimpleTest(() -> {
+            run("6");
+            assertThat(output()).contains("결과 : 6");
+        });
+        assertSimpleTest(() -> {
+            run("1:2,3");
+            assertThat(output()).contains("결과 : 6");
+        });
+        assertSimpleTest(() -> {
+            run("1,2,3");
+            assertThat(output()).contains("결과 : 6");
+        });
+        assertSimpleTest(() -> {
+            run("//;\\n1;2;3");
+            assertThat(output()).contains("결과 : 6");
+        });
+        assertSimpleTest(() -> {
+            run("//@\\n1@2@3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
 
-        // when
-        int result1 = StringCalculator.calculateSum(input1);
-        int result2 = StringCalculator.calculateSum(input2);
-
-        // then
-        assertThat(result1).isEqualTo(6);
-        assertThat(result2).isEqualTo(1);
+    @Override
+    public void runMain() {
+        Application.main(new String[]{});
     }
 }
