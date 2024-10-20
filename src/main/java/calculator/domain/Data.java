@@ -1,35 +1,37 @@
 package calculator.domain;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Data {
     private static final String EMPTY_STRING = "";
     private final String input;
     private final Separator separator;
-    private final List<Integer> numbersForSum;
+    private final Number number;
 
     public Data(String input) {
         this.input = input;
         separator = new Separator(input);
-        numbersForSum = handleInput();
+        number = new Number();
     }
 
     public int calculateAddition() {
         int sum = 0;
-        for (int number : numbersForSum) {
+        for (int number : number.getNumbers()) {
             sum += number;
         }
         return sum;
     }
 
-    public List<Integer> handleInput() {
+    public void handleInput() {
         if (hasEmptyString()) {
-            numbersForSum.add(0);
-            return numbersForSum;
+            number.handleEmptyData();
+            return;
         }
-        String[] extractedStrings = separator.removeSeparator();
-        SeparatorValidator.validate(extractedStrings);
-        return NumberValidator.convertNumbers(extractedStrings);
+        List<String> extractedStrings = Arrays.stream(separator.removeSeparator()).toList();
+        SeparatorValidator.validateSeparator(extractedStrings);
+        number.convertNumbers(extractedStrings);
+        NumberValidator.validateNumber(number.getNumbers());
     }
 
     private boolean hasEmptyString() {
