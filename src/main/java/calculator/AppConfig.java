@@ -2,6 +2,7 @@ package calculator;
 
 import calculator.IO.InputOutput;
 import calculator.controller.Controller;
+import calculator.parser.ExtractNumber;
 import calculator.parser.StringParser;
 
 public class AppConfig {
@@ -13,7 +14,11 @@ public class AppConfig {
         return new StringParser();
     }
 
+    public ExtractNumber extractNumber() {
+        return new ExtractNumber();
+    }
+
     public Controller controller() {
-        return new Controller(inputOutput(), stringParser());
+        return new Controller(inputOutput(), stringParser(), extractNumber());
     }
 }

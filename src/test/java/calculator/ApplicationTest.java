@@ -52,7 +52,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 예외_테스트3() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("1.2.3&4"))
+                assertThatThrownBy(() -> runException("//d\\nt1d2:3,4"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }

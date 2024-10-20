@@ -1,8 +1,5 @@
 package calculator.parser;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static calculator.validation.Validator.*;
 
 public class StringParser {
@@ -18,38 +15,17 @@ public class StringParser {
         return separator;
     }
 
-
-    public int extractionNumber(String input){
-        List<Integer> numbers = new ArrayList<>();
+    public String[] parseInput(String input) {
         String[] strings = input.split(getSeparator(input));
 
-
-        for(String s : strings){
-            StringBuilder num = new StringBuilder();
-
-            for(int i = 0; i < s.length(); i++){
-                if(Character.isDigit(s.charAt(i))){
-                    num.append(s.charAt(i));
-                }
-            }
-
-            if(!num.isEmpty()){
-                numbers.add(Integer.parseInt(String.valueOf(num)));
-            }
+        if(strings[0].equals("//")){
+            int index = strings[1].indexOf("\\n");
+            strings[1] = input.substring(index + 1);
         }
 
-        validateNegative(numbers);
-
-        return sumNumber(numbers);
+        validateChar(strings);
+        return strings;
     }
 
-    int sumNumber(List<Integer> numbers){
-        int sum = 0;
 
-        for(Integer i : numbers) {
-            sum += i;
-        }
-
-        return sum;
-    }
 }

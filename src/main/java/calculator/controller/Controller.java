@@ -1,15 +1,20 @@
 package calculator.controller;
 
 import calculator.IO.InputOutput;
+import calculator.parser.ExtractNumber;
 import calculator.parser.StringParser;
 
-public class Controller {
-    private InputOutput inputOutput;
-    private StringParser stringParser;
+import static calculator.validation.Validator.validateCustomSeparator;
 
-    public Controller(InputOutput inputOutput, StringParser stringParser) {
+public class Controller {
+    private final InputOutput inputOutput;
+    private final StringParser stringParser;
+    private final ExtractNumber extractNumber;
+
+    public Controller(InputOutput inputOutput, StringParser stringParser, ExtractNumber extractNumber) {
         this.inputOutput = inputOutput;
         this.stringParser = stringParser;
+        this.extractNumber = extractNumber;
     }
 
     public void calculator(){
@@ -17,10 +22,11 @@ public class Controller {
         int result = 0;
 
         if(!input.isEmpty()){
-            result = stringParser.extractionNumber(input);
+            validateCustomSeparator(input);
+            String[] strings =  stringParser.parseInput(input);
+            result = extractNumber.extractNumbers(strings);
         }
 
         inputOutput.outputResult(result);
     }
-
 }
