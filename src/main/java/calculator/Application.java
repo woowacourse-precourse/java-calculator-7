@@ -29,10 +29,22 @@ public class Application {
             input = input.substring(5);
         }
         containsOnlyDelimitersAndDigits(input);
+        isEndWithDigit(input);
+    }
+
+    public static boolean isEmptyInput(String input){
+        return input == null || input.isEmpty();
+    }
+
+    public static void isEndWithDigit(String input) {
+        if (isEmptyInput(input)) return;
+        if (!Character.isDigit(input.charAt(input.length() - 1))){
+            throw new IllegalArgumentException("마지막 문자가 숫자가 아닙니다.");
+        }
     }
 
     public static void containsOnlyDelimitersAndDigits(String input) {
-        if (input == null || input.isEmpty()) return;
+        if (isEmptyInput(input)) return;
         String regex = "[0-9" + baseSeparator+"]+";
         if (!input.matches(regex)) throw new IllegalArgumentException("지정 구분자, 숫자 외의 다른 문자가 존재합니다.");
     }
