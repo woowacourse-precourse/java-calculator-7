@@ -2,6 +2,7 @@ package validator;
 
 import static constants.Constants.CUSTOM_START_TEXT;
 import static constants.Constants.EMPTY_TEXT;
+import static constants.ExceptionMessage.*;
 
 public class InputValidator {
 
@@ -24,7 +25,7 @@ public class InputValidator {
 
     private static void hasNumberAndDelimiter(final String inputs) {
         if (inputs.length() == 0 || inputs.contains(" ")) {
-            throw new IllegalArgumentException("올바른 구분자와 양수를 입력해야 합니다.");
+            throw new IllegalArgumentException(ENTER_WITH_POSITIVE_NUMBER.getMessage());
         }
     }
 
@@ -35,7 +36,7 @@ public class InputValidator {
             }
         }
 
-        throw new IllegalArgumentException("양수도 함께 입력해야 합니다.");
+        throw new IllegalArgumentException(ENTER_WITH_POSITIVE_NUMBER.getMessage());
     }
 
     private static void hasDelimiter(final String inputs) {
@@ -56,7 +57,7 @@ public class InputValidator {
             }
         }
 
-        throw new IllegalArgumentException("올바른 구분자도 함께 입력해야 합니다.");
+        throw new IllegalArgumentException(ENTER_WITH_VALID_DELIMITER.getMessage());
     }
 
     private static void hasDefaultDelimiter(final String inputs) {
@@ -66,7 +67,7 @@ public class InputValidator {
             }
         }
 
-        throw new IllegalArgumentException("올바른 구분자도 함께 입력해야 합니다.");
+        throw new IllegalArgumentException(ENTER_WITH_VALID_DELIMITER.getMessage());
     }
 
     private static void hasMinusNumber(final String inputs) {
@@ -79,13 +80,13 @@ public class InputValidator {
     private static void checkMinusNumber(final char currentValue, final char beforeValue) {
         if (Character.isDigit(currentValue)) {
             if (!isMinusDelimiter && MINUS_DELIMITER.equals(String.valueOf(beforeValue))) {
-                throw new IllegalArgumentException("양수를 입력해야 합니다.");
+                throw new IllegalArgumentException(ENTER_POSITIVE_NUMBER.getMessage());
             }
         }
 
         if (MINUS_DELIMITER.equals(String.valueOf(currentValue))) {
             if (isMinusDelimiter && MINUS_DELIMITER.equals(String.valueOf(beforeValue))) {
-                throw new IllegalArgumentException("양수를 입력해야 합니다,");
+                throw new IllegalArgumentException(ENTER_POSITIVE_NUMBER.getMessage());
             }
         }
     }
