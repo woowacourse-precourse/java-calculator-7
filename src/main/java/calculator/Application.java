@@ -14,6 +14,17 @@ public class Application {
         String delimiter = ",|:"; // 기본 구분자 쉼표와 콜론
         String numbers = input;
 
+        // 커스텀 구분자가 있는 경우
+        if (input.startsWith("//")) {
+            // "//"와 "\n" 사이의 구분자를 추출
+            int delimiterStart = input.indexOf("//") + 2; // "//" 이후
+            int delimiterEnd = input.indexOf("\\n");
+            if (delimiterEnd != -1) {
+                delimiter = input.substring(delimiterStart, delimiterEnd); // 구분자 추출
+                numbers = input.substring(delimiterEnd + 2); // 구분자 뒤의 숫자 문자열
+            }
+        }
+
         // 구분자를 기준으로 숫자 분리
         String[] tokens = numbers.split(delimiter);
 
