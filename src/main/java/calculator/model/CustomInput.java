@@ -21,7 +21,8 @@ public class CustomInput extends UserInput {
 
         extractCustomDelimiterAndAdd(userInput, delimiterStartIdx, delimiterEndIdx);
 
-        String[] splitValues = splitCalculatePartByDelimiters(extractCalculatePart(userInput, delimiterEndIdx + 2));
+        String calculatePart = extractCalculatePart(userInput, delimiterEndIdx + 2);
+        String[] splitValues = splitCalculatePartByDelimiters(calculatePart);
 
         try {
             inputNumbers = Arrays.stream(splitValues)
@@ -32,6 +33,7 @@ public class CustomInput extends UserInput {
             throw new IllegalArgumentException(ExceptionMessage.CALCULATE_PART_IS_INVALID.getValue());
         }
 
+        checkValidCalculatePart(calculatePart);
     }
 
     @Override

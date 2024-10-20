@@ -53,4 +53,19 @@ public abstract class UserInput {
         return true;
     }
 
+    protected void checkValidCalculatePart(String calculatePart) {
+        if (getDelimiterCntInCalculatePart(calculatePart) >= inputNumbers.length) {
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_INPUT.getValue());
+        }
+    }
+
+    private int getDelimiterCntInCalculatePart(String calculatePart) {
+        int delimCnt = 0;
+        for (String s : calculatePart.split("")) {
+            if (delimiters.contains(s)) delimCnt++;
+        }
+
+        return delimCnt;
+    }
+
 }

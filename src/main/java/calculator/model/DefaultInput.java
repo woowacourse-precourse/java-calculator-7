@@ -16,13 +16,13 @@ public class DefaultInput extends UserInput {
         inputNumbers = userInput.isEmpty()
                 ? new long[]{0}
                 : parseStringToLongArray(userInput);
+
+        checkValidCalculatePart(userInput);
     }
 
     private long[] parseStringToLongArray(String userInput) {
-        String[] splitValues = splitCalculatePartByDelimiters(userInput);
-
         try {
-            return Arrays.stream(splitValues)
+            return Arrays.stream(splitCalculatePartByDelimiters(userInput))
                     .mapToLong(Long::parseLong)
                     .filter(this::checkNumIsPositive)
                     .toArray();
