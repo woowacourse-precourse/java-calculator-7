@@ -57,7 +57,7 @@ class StringCalculator {
         private boolean isNumeric(String str) {
             try {
                 Integer.parseInt(str); // 정수로 변환 시도
-                    return true; // 변환 성공
+                return true; // 변환 성공
             } catch (NumberFormatException e) {
                 return false; // 변환 실패
             }
