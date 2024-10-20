@@ -1,6 +1,7 @@
 package calculator.controller;
 
 import calculator.service.AdderService;
+import calculator.validation.NumberValidator;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -25,7 +26,12 @@ public class StringAdderController {
             additionInput = inputView.deleteCustomDelimiter(additionInput);
         }
 
-        List<Integer> operands = inputView.getOperands(additionInput, delimiters);
+        List<String> tokens = inputView.separateStringToList(additionInput, delimiters);
+        NumberValidator.validateContainsOnlyDigits(tokens);
+
+        List<Integer> operands = inputView.getOperands(tokens);
+        NumberValidator.validateContainsOnlyPositiveNumber(operands);
+
         int sum = adderService.sumAll(operands);
         outputView.printSumResult(sum);
     }

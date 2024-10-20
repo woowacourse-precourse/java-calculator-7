@@ -32,8 +32,7 @@ public class InputView {
         return DEFAULT_DELIMITERS;
     }
 
-    public List<Integer> getOperands(String additionInput, String delimiters) {
-        List<String> separatedInput = separateStringToList(additionInput, delimiters);
+    public List<Integer> getOperands(List<String> separatedInput) {
         List<Integer> operands = new ArrayList<>();
         for(String token : separatedInput) {
             operands.add(Integer.parseInt(token));
@@ -41,7 +40,7 @@ public class InputView {
         return operands;
     }
 
-    private List<String> separateStringToList(String s, String delimiters) {
+    public List<String> separateStringToList(String s, String delimiters) {
         List<String> tokens = List.of(s.split(delimiters));
         return tokens;
     }
