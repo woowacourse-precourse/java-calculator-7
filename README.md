@@ -3,7 +3,7 @@
 <img src="./img/class_diagram.png">
 
 ## 동작 과정
-<img src="./img/working_process.png.png">
+<img src="./img/working_process.png">
 
 ## 프로그램 구현 사항
 ### 입력
