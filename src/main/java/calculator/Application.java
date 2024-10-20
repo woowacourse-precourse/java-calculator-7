@@ -13,7 +13,7 @@ public class Application {
             String inputString = Console.readLine();
             double result = processInput(inputString);
 
-            System.out.println("결과 : " + result);
+            System.out.println("결과 : " + formatNumber(result));
         } catch (Exception e) {
             throw e;
         }
@@ -113,4 +113,19 @@ public class Application {
 
     }
 
+    /**
+     * 숫자의 출력 형식을 지정합니다.
+     *
+     * @param number 숫자
+     * @return 숫자의 출력 형식이 지정된 문자열 결과
+     */
+    static String formatNumber(double number) {
+        if (number % 1 == 0) {
+            return String.valueOf((int) number);
+        } else {
+            return String.valueOf(number);
+        }
+    }
+
 }
+
