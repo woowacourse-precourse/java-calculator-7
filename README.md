@@ -31,7 +31,5 @@
         - 예: `"1,abc,3"` 또는 `"//;\n1;a;3"`
     - 구분자가 없거나 잘못된 위치에 있을 때 `IllegalArgumentException` 을 반환
         - 예: `"1,,2"` 또는 `"1:2:"`
-    - 커스텀 구분자 지정 형식 오류 `IllegalArgumentException` 을 반환
-        - 예: `"//;\n1,2;3"` 또는 `"//;\n123"`
     - 정수 범위 초과 `IllegalArgumentException` 을 반환
         - 예: `"1,2,2147483648"`
