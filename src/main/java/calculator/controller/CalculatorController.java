@@ -42,5 +42,7 @@ public class CalculatorController {
 
         Calculator calculator = new SumCalculator(positiveIntegers);
         AdditionResult additionResult = AdditionResult.from(calculator.calculate());
+
+        OutputView.printResult(additionResult);
     }
 }
