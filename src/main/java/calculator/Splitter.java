@@ -22,6 +22,9 @@ class Splitter {
 
         for (char ch : target.toCharArray()) {
             if (separators.contains(ch)) {
+                if (token.equals(""))
+                    throw new IllegalArgumentException("구분자는 연속으로 올 수 없습니다.");
+
                 tokens.add(token);
                 token = "";
             }
