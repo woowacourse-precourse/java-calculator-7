@@ -11,6 +11,8 @@ public class Calculator {
 
     public int calculate(String input) {
 
+        input = input.trim();
+
         if (input == null || input.isBlank()) {
             return 0;
         }
