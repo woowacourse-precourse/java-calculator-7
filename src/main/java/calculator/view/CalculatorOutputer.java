@@ -1,5 +1,7 @@
 package calculator.view;
 
+import java.text.DecimalFormat;
+
 public class CalculatorOutputer {
 
     public void printIntro() {
@@ -7,6 +9,7 @@ public class CalculatorOutputer {
     }
 
     public void printResult(float result) {
-        System.out.println("결과 : " + result);
+        DecimalFormat df = new DecimalFormat("#.####");
+        System.out.println("결과 : " + df.format(result));
     }
 }
