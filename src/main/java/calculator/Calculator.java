@@ -19,9 +19,6 @@ public class Calculator {
 
     public int parseAndValidate(String num) {
 
-        if (num == null || num.isEmpty()) {
-            return 0;
-        }
         if (!num.matches("\\d+")) {
             throw new IllegalArgumentException("유효하지 않은 숫자 형식입니다: ");
         }
@@ -31,7 +28,7 @@ public class Calculator {
 
     public int sum(String str) {
 
-        if (str == null || str.isEmpty()) {
+        if (str == null) {
             return 0;
         }
 
@@ -41,6 +38,10 @@ public class Calculator {
         if (custom != null) {
             separatorRegex += "|" + custom;
             str = str.substring(5);
+        }
+
+        if (str.isEmpty()) {
+            return 0;
         }
 
         String[] nums = str.split(separatorRegex);
