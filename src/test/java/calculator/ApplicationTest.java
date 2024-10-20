@@ -33,7 +33,15 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀_구분자_테스트() {
+    void 잘못된_구분자_입력_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1=2=3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_사용_테스트() {
         assertSimpleTest(() -> {
             run("//!\\n1!2,3");
             assertThat(output()).contains("결과 : 6");
@@ -41,7 +49,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀_구분자_형식_오류_테스트() {
+    void 잘못된_형식의_커스텀_구분자_입력_예외_테스트() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//!1!2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
