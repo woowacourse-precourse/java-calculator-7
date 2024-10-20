@@ -4,6 +4,16 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.StringTokenizer;
 
 public class Application {
+    //분리한 문자열이 모두 양수인지 검사
+    public static boolean isPositiveNumber(String[] nums) {
+        for (String num : nums) {
+            if (Integer.parseInt(num) <= 0) {
+                throw new IllegalArgumentException("양수를 입력해 주세요.");
+            }
+        }
+        return true;
+    }
+
     //분리한 문자열을 숫자로 변환하여 더하기
     public static int calculate(String[] nums) {
         int sum = 0;
@@ -26,11 +36,6 @@ public class Application {
         // 숫자가 포함되어 있지 않은 경우
         if (!str.matches(".*[0-9].*")) {
             throw new IllegalArgumentException("숫자를 포함하여 입력해 주세요.");
-        }
-
-        // 0이 포함되어 있는 경우
-        if (str.contains("0")) {
-            throw new IllegalArgumentException("0을 제외한 양수를 입력해 주세요.");
         }
 
         // 기본 구분자가 있는 경우 기본 구분자를 기준으로 문자열 분리하기
