@@ -32,8 +32,9 @@ public class Calculator {
             String[] parts = inputProcessor.processInput(input.getFirstInput(), separator);
             number = new Numbers(parts);
             showResultProcess();
+            input.scClose();
         } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 

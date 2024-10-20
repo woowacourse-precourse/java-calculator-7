@@ -17,4 +17,8 @@ public class Input {
     public String getFirstInput() {
         return firstInput;
     }
+
+    public void scClose() {
+        Console.close();
+    }
 }
