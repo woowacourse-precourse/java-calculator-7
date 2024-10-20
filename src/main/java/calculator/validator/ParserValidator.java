@@ -17,9 +17,16 @@ public class ParserValidator {
         return true;
     }
 
-    // TODO: 구분자가 유효한지 확인한다.
-
-    // TODO: 구분자가 숫자인지 확인한다.
+    private boolean isSeparatorNumber(int inputSeparatorASCIIIndex) {
+        if (inputSeparatorASCIIIndex >= 48 && inputSeparatorASCIIIndex <= 57) {
+            throw new IllegalArgumentException("구분자는 숫자가 될 수 없습니다.");
+        }
+        return false;
+    }
 
     // TODO: 구분자가 중복되어 입력되었는지 확인한다.
+
+
+    // TODO: 구분자가 유효한지 확인한다.
+
 }
