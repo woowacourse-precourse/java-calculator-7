@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class CalculatorTest {
+class ExceptionTest {
     @Test
     void 공백_예외_테스트() {
         assertThatThrownBy(() -> {
