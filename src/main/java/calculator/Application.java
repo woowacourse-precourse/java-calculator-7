@@ -1,10 +1,16 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Application {
 
+    private static final String DEFAULT_SEPERATOR_REGEX = ",|:";
+    private static final String CUSTOM_SEPERATOR_REGEX = "//(.)\\\\n(.*)";
+
     public static void main(String[] args) {
+
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String expression = getExpression();
 
@@ -15,6 +21,7 @@ public class Application {
     }
 
     private static void validateExpression(String expression) {
+
         if (expression.isEmpty() || expression == null) {
             throw new IllegalArgumentException("입력값이 없습니다.");
         }
@@ -27,6 +34,7 @@ public class Application {
     }
 
     private static int getResult(String[] list) {
+
         int result = 0;
         for (String num : list) {
             try {
@@ -43,16 +51,18 @@ public class Application {
     }
 
     private static String[] parseNumbersFromExpression(String expression) {
-        if (expression.startsWith("//")) { // //로 시작하는 경우 커스텀 구분자 사용
-            String seperator = expression.substring(2, expression.indexOf("\\n")); // 커스텀 구분자
-            String numberExpression = expression.substring(expression.indexOf("\\n") + 2); // 숫자 문자열
-            return numberExpression.split(seperator); // 커스텀 구분자로 숫자 문자열 분리
-        } else {
-            return expression.split(",|:");
+
+        Matcher matcher = Pattern.compile(CUSTOM_SEPERATOR_REGEX).matcher(expression);
+        if (matcher.find()) {
+            String customSeperator = matcher.group(1);
+            String numberExpression = matcher.group(2);
+            return numberExpression.split(customSeperator);
         }
+        return expression.split(DEFAULT_SEPERATOR_REGEX);
     }
 
     private static String getExpression() {
+
         // 사용자 입력 후 자원 해제 및 반환
         String input = Console.readLine();
         Console.close();
