@@ -27,7 +27,7 @@
     - [X] 구분자가 문자열을 올바르게 분리하지 못하는 경우 `IllegalArgumentException` 발생 ex. "1,", ":"
 - [X] 추출 문자열 숫자로 변환
     - [X] 숫자 이외 문자가 섞인 경우 `IllegalArgumentException` 발생 ex. "b"
-    - [ ] 숫자가 Integer 범위를 넘어갈 경우 `IllegalArgumentException` 발생 ex. "2147483648"
+    - [X] 숫자가 Integer 범위를 넘어갈 경우 `IllegalArgumentException` 발생 ex. "2147483648"
 
 ### 계산 기능
 
