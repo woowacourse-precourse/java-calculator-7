@@ -106,7 +106,7 @@ public class Application {
         String[] numbers = input.split(delimiter);
 
         if (numbers.length == 0) // 구분자로만 이루어져있는 경우
-            throw new IllegalArgumentException("계산할 숫자가 없습니다.");
+            return 0;
 
         sum = addString(numbers);
 
