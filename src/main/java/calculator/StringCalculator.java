@@ -24,15 +24,18 @@ public class StringCalculator {
         this.delimiter = "[,:";
     }
 
-    // 입력받기
-    public void setInput(   ) {
+    /**
+     * 문자열 입력받는 기능
+     */
+    public void setInput() {
         System.out.println("덧셈할 문자열을 입력해주세요");
         this.input = Console.readLine();
     }
 
-    // 커스텀 구분자를 구하는 기능
+    /**
+     * 커스텀 구분자를 구하는 기능
+     * */
     public void addDelimiter(){
-        // 커스텀 구분자가 추가될려면 문자열 길이 5 이상
         if(input.length() >= 5) {
             for (int i = 0; i < input.length() - 5; i ++) {
                 System.out.println(input.substring(i, i+5));
@@ -40,7 +43,8 @@ public class StringCalculator {
                     delimiter += input.charAt(i + 2);
                     // 원본 문자열에서 커스텀문자열 추가 부분 제거
                     this.input = input.substring(0, i) + input.substring(i + 5);
-                    System.out.println(input.charAt(i + 2));
+                    // 인덱스 조정
+                    i-=1;
                 }
             }
         }
