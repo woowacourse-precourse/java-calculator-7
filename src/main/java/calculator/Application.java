@@ -38,7 +38,11 @@ public class Application {
         // 합 구하기
         int result = 0;
         for (String s : split) {
+            try {
                 result += Integer.parseInt(s);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException();
+            }
         }
 
         System.out.println("결과 : " + result);
