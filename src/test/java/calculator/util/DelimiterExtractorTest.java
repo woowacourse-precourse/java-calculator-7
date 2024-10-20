@@ -53,5 +53,16 @@ class DelimiterExtractorTest {
             // when & then
             assertThatNoException().isThrownBy(() -> DelimiterExtractor.parse(input));
         }
+
+        @Test
+        void 커스텀_구분자에_숫자가_포함된_경우_예외를_발생시킨다() {
+            // given
+            String input = "//1\\n1,2,3";
+
+            // when & then
+            assertThatThrownBy(() -> DelimiterExtractor.parse(input))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(ErrorMessage.CUSTOM_DELIMITER_CANNOT_CONTAIN_NUMERIC.getMessage());
+        }
     }
 }
