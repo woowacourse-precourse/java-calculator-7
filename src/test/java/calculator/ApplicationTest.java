@@ -22,6 +22,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 "//;\n1:2@3;4"
 "//7\n172,3"
 "//\n1,2:2"
+"//;\n1;10,100:1"
+"10,100:1"
 */
 
 class ApplicationTest extends NsTest {
@@ -58,6 +60,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자_사용4() {
+        assertSimpleTest(() -> {
+            run("//;\\n1;10,100:1");
+            assertThat(output()).contains("결과 : 112");
+        });
+    }
+
+    @Test
     void 기본_구분자_사용1() {
         assertSimpleTest(() -> {
             run("1,2,3");
@@ -70,6 +80,14 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("1,2:3");
             assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 기본_구분자_사용3() {
+        assertSimpleTest(() -> {
+            run("10,100:1");
+            assertThat(output()).contains("결과 : 111");
         });
     }
 
@@ -141,6 +159,22 @@ class ApplicationTest extends NsTest {
     void 예외_테스트8() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//\\n1,2:2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트9() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//@\\n1,10@ 100"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트10() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("10,100@1"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
