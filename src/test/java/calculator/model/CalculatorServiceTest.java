@@ -17,6 +17,15 @@ public class CalculatorServiceTest {
     }
 
     @Test
+    @DisplayName("입력값이 없는 경우 테스트")
+    void testNoneInput() {
+        String input = "";
+        assertThrows(IllegalArgumentException.class, () -> {
+            calculatorService.calculate(input);
+        });
+    }
+
+    @Test
     @DisplayName("기본구분자 ',' 계산 테스트")
     void testDefaultDelimiter1() {
         String input = "1,2,3";
@@ -52,9 +61,9 @@ public class CalculatorServiceTest {
     }
 
     @Test
-    @DisplayName("dangling 문자 구분자 사용시 숫자 추출 테스트")
+    @DisplayName("특수문자 구분자 사용시 숫자 추출 테스트")
     void extractDanglingNumbers() {
-        String input = "//?\n1?2?3";
+        String input = "//.\n1.2.3";
         int result = calculatorService.calculate(input);
         assertThat(result).isEqualTo(6);
     }

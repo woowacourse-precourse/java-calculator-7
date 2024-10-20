@@ -4,12 +4,14 @@ package calculator.model;
 import java.util.List;
 
 public class ValidationUtils {
+
+
     public void validateInput(String input) {
         if (input.isEmpty()) {
             throw new IllegalArgumentException("입력값이 없습니다.");
         }
     }
-    
+
 
     public void numbersCheck(List<Integer> numbers) {
         for (Integer number : numbers) {
@@ -18,4 +20,5 @@ public class ValidationUtils {
             }
         }
     }
+
 }
