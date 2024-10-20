@@ -46,4 +46,18 @@ class StringParser {
 
         return delimiter;
     }
+
+    //문자열을 구분자를 이용해 토큰화 하는 메서드(tokenize)
+    public String[] tokenize(String delimiter, String user_input) {
+        String[] num_list;
+
+        if (delimiter.equals("default")) {
+            num_list = user_input.split(":|,");
+        } else {
+            user_input = user_input.substring(5);
+            num_list = user_input.split(delimiter);
+        }
+
+        return num_list;
+    }
 }
