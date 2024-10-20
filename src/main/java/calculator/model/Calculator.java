@@ -25,6 +25,7 @@ public class Calculator {
         if(input.startsWith("//") && input.indexOf("\\n")== 3){
             String customDelimeter = input.substring(2,3);
             delimeter += "|" + customDelimeter;
+            input = input.substring(5);
         }
 
         String [] inputTokens = input.split(delimeter);
