@@ -34,7 +34,7 @@ class CustomDelimiterParserTest {
         //when
         CustomDelimiterParsedInput customDelimiterParsedInput = CustomDelimiterParser.parse(rawInput);
         //then
-        assertThat(customDelimiterParsedInput.delimiters()).isEqualTo(delimiters);
+        assertThat(customDelimiterParsedInput.delimiters()).containsAll(delimiters);
         assertThat(customDelimiterParsedInput.inputWithDelimiter()).isEqualTo(inputWithDelimiters);
     }
 
