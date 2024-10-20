@@ -1,6 +1,7 @@
 package calculator.service;
 
 import calculator.utils.Validator;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,7 +9,7 @@ public class CalculatorService {
     private static final Pattern CUSTOM_SEPARATOR_REGEX = Pattern.compile("//(.*)\\\\n(.*)");
     private String[] tokens;
 
-    public void separate(String[] separators, String expression) {
+    public void separate(List<String> separators, String expression) {
         String cleanedExpression = expression.replaceAll("\\s+", "");
         customSeparate(cleanedExpression);
 
