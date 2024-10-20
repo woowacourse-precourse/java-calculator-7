@@ -28,4 +28,21 @@ public class CalculatorService {
         return delimiterAndNumberInput;
     }
 
+    private ArrayList<String> extractEscapedAndCustomDelimiter(String delimiter) {
+        ArrayList<String> customDelimiter = new ArrayList<>();
+        String specialChars = ".*+?^$[]{}()|\\";
+
+        for (int i = 0; i < delimiter.length(); i++) {
+            char ch = delimiter.charAt(i);
+            if (specialChars.indexOf(ch) >= 0) {
+                customDelimiter.add("\\" + ch);
+            } else {
+                customDelimiter.add(String.valueOf(ch));
+            }
+        }
+
+        return customDelimiter;
+    }
+
+
 }
