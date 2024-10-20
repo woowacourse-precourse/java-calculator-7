@@ -10,11 +10,10 @@ public class StringCalculator {
         this.input = input;
     }
 
-    public int calculate() {
+    public void calculate() {
         String separator = findSeperator();
         List<Integer> seperatedNums = separateMachine(separator);
-        // 구현 예정
-        return 0;
+        int totalNum = addAllNums(seperatedNums);
     }
 
     private String findSeperator() {
@@ -130,6 +129,14 @@ public class StringCalculator {
             }
         }
         return splitedNums;
+    }
+
+    private int addAllNums(List<Integer> seperatedNums) {
+        int totalNum = 0;
+        for (int i = 0; i != seperatedNums.size(); i++) {
+            totalNum += seperatedNums.get(i);
+        }
+        return totalNum;
     }
 
 }
