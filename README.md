@@ -8,14 +8,14 @@
 - 프로그램 흐름
 - 메서드 설명
 - main 메서드
-- readInput 메서드
-- extractDelimiter 메서드
-- extractNumbers 메서드
-- splitNumbers 메서드
-- calculateSum 메서드
-- parseNumber 메서드
-- validateNegative 메서드
-- printResult 메서드
+- readInput 메서드 => 사용자 입력받기 
+- extractDelimiter 메서드 => 구분자 추출 
+- extractNumbers 메서드  => 숫자 부분 추출 
+- splitNumbers 메서드 => 숫자 문자열 분리 
+- calculateSum 메서드 = > 숫자 변환 및 합계 계산 
+- parseNumber 메서드 = > 문자열을 숫자로 변환 
+- validateNegative 메서드 => 음수 확인 
+- printResult 메서드 => 결과 출력 
 
 ## 프로그램 흐름
 1. 사용자 입력 받기:  문자열을 입력받습니다.
