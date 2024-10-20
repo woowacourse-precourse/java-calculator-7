@@ -1,10 +1,9 @@
-package calculator.controller;
+package calculator;
 
 import calculator.model.CalculatorModel;
 import calculator.view.CalculatorView;
 
 import java.util.List;
-import java.util.*;
 
 public class Application {
     public static void main(String[] args) {
