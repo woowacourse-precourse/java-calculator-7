@@ -6,10 +6,12 @@ public class StringCalculator {
 
     private final DelimiterExtractor delimiterExtractor;
     private final StringValidator stringValidator;
+    private final NumberParser numberParser;
 
-    public StringCalculator(DelimiterExtractor delimiterExtractor, StringValidator stringValidator) {
+    public StringCalculator(DelimiterExtractor delimiterExtractor, StringValidator stringValidator, NumberParser numberParser) {
         this.delimiterExtractor = delimiterExtractor;
         this.stringValidator = stringValidator;
+        this.numberParser = numberParser;
     }
 
     public long calculate(String string) {
@@ -24,6 +26,9 @@ public class StringCalculator {
 
         // 문자열 검사
         stringValidator.validate(trimmedString, delimiterList);
+
+        // 문자열 나누기
+        List<Long> numbers = numberParser.parse(trimmedString, delimiterList);
 
         return 0L;
     }
