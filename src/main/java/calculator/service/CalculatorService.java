@@ -8,11 +8,6 @@ import calculator.model.separator.Separator;
 public class CalculatorService {
     private static final int NON_POSITIVE_THRESHOLD = 0;
 
-    private static void validateInput(String input) {
-        if (input == null || input.trim().isEmpty()) {
-            throw new IllegalArgumentException(ErrorCode.EMPTY_INPUT.getMessage());
-        }
-    }
 
     private static int calculatePrefixSum(String input, String separator) {
         String prefix = input.substring(0, input.indexOf(CustomSeparator.getStartOfSeparator())).trim();
@@ -43,7 +38,9 @@ public class CalculatorService {
     }
 
     public int add(String input) {
-        validateInput(input);
+        if (input == null || input.isEmpty()) {
+            return 0;
+        }
 
         Separator separator = new DefaultSeparator();
         int sum = 0;

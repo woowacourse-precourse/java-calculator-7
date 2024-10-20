@@ -1,7 +1,6 @@
 package calculator.exception;
 
 public enum ErrorCode {
-    EMPTY_INPUT("입력 값이 비어있습니다."),
     INVALID_CUSTOM_SEPARATOR("커스텀 구분자 형식이 잘못되었습니다."),
     INVALID_CUSTOM_SEPARATOR_LENGTH("커스텀 구분자는 한 글자만 가능합니다."),
     BLANK_CUSTOM_SEPARATOR("커스텀 구분자는 공백이 될 수 없습니다."),

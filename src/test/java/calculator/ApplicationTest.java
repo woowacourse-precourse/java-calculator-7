@@ -10,6 +10,14 @@ import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
     @Test
+    void 빈_문자열_입력() {
+        assertSimpleTest(() -> {
+            run(" ");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
     void 기본_구분자_사용() {
         assertSimpleTest(() -> {
             run("1,2:3");
@@ -55,15 +63,6 @@ class ApplicationTest extends NsTest {
             run("1//;\\n2;3");
             assertThat(output()).contains("결과 : 6");
         });
-    }
-
-    @Test
-    void 빈_문자열_예외_테스트() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException(" "))
-                        .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessage(ErrorCode.EMPTY_INPUT.getMessage())
-        );
     }
 
     @Test
