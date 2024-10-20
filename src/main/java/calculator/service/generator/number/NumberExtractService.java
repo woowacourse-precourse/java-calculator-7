@@ -1,4 +1,4 @@
-package calculator.generator.number;
+package calculator.service.generator.number;
 
 import java.util.List;
 

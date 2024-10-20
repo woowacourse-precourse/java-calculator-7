@@ -1,10 +1,10 @@
 package calculator.controller.service;
 
 import calculator.controller.CalculatorController;
-import calculator.generator.controller.GenerateController;
-import calculator.generator.number.NumberGenerator;
-import calculator.generator.number.impl.NumberCreateProcess;
-import calculator.generator.number.impl.NumberExtractProcess;
+import calculator.service.generator.controller.GenerateController;
+import calculator.service.generator.number.NumberGenerator;
+import calculator.service.generator.number.impl.NumberCreateProcess;
+import calculator.service.generator.number.impl.NumberExtractProcess;
 import calculator.regex.service.RegexPatternServiceResolver;
 import calculator.view.input.handler.InputHandlerService;
 import calculator.view.input.handler.impl.NumberInputHandler;

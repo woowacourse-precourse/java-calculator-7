@@ -1,7 +1,7 @@
-package calculator.generator.controller;
+package calculator.service.generator.controller;
 
 import calculator.number.domain.NumberService;
-import calculator.generator.number.NumberGenerator;
+import calculator.service.generator.number.NumberGenerator;
 import calculator.number.util.NumberConvertorService;
 import calculator.sentence.dto.Sentence;
 

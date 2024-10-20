@@ -1,4 +1,4 @@
-package calculator.generator.number;
+package calculator.service.generator.number;
 
 import calculator.number.domain.NumberService;
 import calculator.number.util.NumberConvertorService;

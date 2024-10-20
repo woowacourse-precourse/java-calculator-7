@@ -1,6 +1,6 @@
 package calculator.controller;
 
-import calculator.generator.controller.GenerateController;
+import calculator.service.generator.controller.GenerateController;
 import calculator.number.domain.NumberService;
 import calculator.sentence.dto.Sentence;
 import calculator.regex.domain.RegexPattern;

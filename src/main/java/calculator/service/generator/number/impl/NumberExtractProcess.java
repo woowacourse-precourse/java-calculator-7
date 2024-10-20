@@ -1,6 +1,6 @@
-package calculator.generator.number.impl;
+package calculator.service.generator.number.impl;
 
-import calculator.generator.number.NumberExtractService;
+import calculator.service.generator.number.NumberExtractService;
 import calculator.regex.domain.RegexPattern;
 
 import java.util.List;
