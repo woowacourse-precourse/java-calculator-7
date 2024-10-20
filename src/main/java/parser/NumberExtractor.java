@@ -17,6 +17,9 @@ public class NumberExtractor {
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("유효하지 않은 숫자 형식입니다.");
             }
+            if (Integer.parseInt(token.trim()) < 0) {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            }
         }
         return numbers;
     }
