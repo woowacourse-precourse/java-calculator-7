@@ -1,18 +1,22 @@
 package calculator.controller;
 
+import calculator.dto.InputRequest;
+import calculator.dto.OutputResponse;
 import calculator.service.CalculatorService;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
 public class CalculatorController {
 
-    private final CalculatorService calculatorService = new CalculatorService();
-    private final InputView inputView = new InputView();
-    private final OutputView outputView = new OutputView();
+    private final CalculatorService calculatorService;
+
+    public CalculatorController() {
+        this.calculatorService = new CalculatorService();
+    }
 
     public void run() {
-        String input = inputView.read();                  // 입력
-        long result = calculatorService.calculate(input); // 계산
-        outputView.print(result);                         // 출력
+        InputRequest input = InputView.getInputRequest();
+        OutputResponse result = calculatorService.calculate(input);
+        OutputView.outputMessage(result);
     }
 }
