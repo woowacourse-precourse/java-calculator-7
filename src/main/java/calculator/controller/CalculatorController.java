@@ -5,6 +5,7 @@ import calculator.extractorProvider.ExtractorProvider;
 import calculator.numberExtractor.NumberExtractor;
 import calculator.service.Service;
 import calculator.validator.Validator;
+import calculator.view.View;
 import java.util.ArrayList;
 
 public class CalculatorController {
@@ -17,8 +18,7 @@ public class CalculatorController {
     }
 
     public void execute() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = camp.nextstep.edu.missionutils.Console.readLine();
+        String input = View.getInput();
 
         ExtractorProvider extractorProvider = new ExtractorProvider(validator);
         String inputType = service.checkTypeOfInput(input, validator);
@@ -28,7 +28,8 @@ public class CalculatorController {
         String extractedDelimiter = service.extractDelimiter(delimiterExtractor, input);
         ArrayList<Integer> extractNumbers = service.extractNumbers(extractedDelimiter, numberExtractor, input);
         int sum = service.addAll(extractNumbers);
-        System.out.println("결과 : " + sum);
+
+        View.showResult(sum);
 
 
     }
