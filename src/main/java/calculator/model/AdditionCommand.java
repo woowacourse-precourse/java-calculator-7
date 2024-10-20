@@ -3,10 +3,6 @@ package calculator.model;
 import calculator.util.DelimiterParser;
 import calculator.util.NumberParser;
 
-import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class AdditionCommand { ;
     private final String customDelimiter;
     private final NumberParser numberParser = new NumberParser();
