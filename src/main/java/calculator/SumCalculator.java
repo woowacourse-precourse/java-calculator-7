@@ -46,6 +46,11 @@ public class SumCalculator {
   private int customSum(String input, String customDelimiter){
     // 커스텀 구분자는 쉼표, 클론과 함께 지정한 구분자를 기준으로 숫자의 합을 수행한다.
     int answer = 0;
+
+    // 구분자로 "\"를 사용하려는 경우
+    if(customDelimiter.equals("\\")){
+      customDelimiter = "\\\\";
+    }
     String[] number = input.split("[,|:"+customDelimiter+"]");
     if(number.length == 0){
       throw new IllegalArgumentException("계산식이 잘못되었습니다.");
