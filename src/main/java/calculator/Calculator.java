@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Calculator {
     private static String userInput;
-    private static List<String> numberList = new ArrayList<>();
+    private static List<String> numbers = new ArrayList<>();
     private static int total = 0;
 
     public static void run() {
@@ -19,20 +19,20 @@ public class Calculator {
     }
 
     private static void calculating() {
-        numberList = SplitUtils.getCalculationSection(userInput);
+        numbers = SplitUtils.getCalculationSection(userInput);
         checkEachInputIsValid();
         getTotal();
         PrintUtils.print("결과 : " + total);
     }
 
     private static void checkEachInputIsValid() {
-        for (String number : numberList) {
+        for (String number : numbers) {
             ValidateUtils.checkNumberIsValid(number);
         }
     }
 
     private static void getTotal() {
-        for (String number : numberList) {
+        for (String number : numbers) {
             total += Integer.parseInt(number);
         }
     }
