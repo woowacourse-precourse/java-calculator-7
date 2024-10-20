@@ -1,19 +1,16 @@
 package calculator.domain;
 
-import static calculator.error.ErrorType.INPUT_FORMAT_ERROR;
-import static calculator.error.ErrorType.INPUT_NEGATIVE_NUMBER_ERROR;
+import static calculator.error.ErrorType.*;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class Expression {
+public class Numbers {
     private final List<Integer> numbers;
-    private final int result;
 
-    public Expression(final String[] input) {
+    public Numbers(final String[] input) {
         this.numbers = convertToIntegers(input);
         validate();
-        this.result = calculate();
     }
 
     private void validate() {
@@ -35,11 +32,7 @@ public class Expression {
         }
     }
 
-    private int calculate() {
-        return numbers.stream().reduce(0, Integer::sum);
-    }
-
-    public int getResult() {
-        return result;
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 }

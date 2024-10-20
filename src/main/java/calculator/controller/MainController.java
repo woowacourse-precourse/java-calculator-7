@@ -1,6 +1,7 @@
 package calculator.controller;
 
-import calculator.domain.Expression;
+import calculator.domain.Calculator;
+import calculator.domain.Numbers;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 import java.util.regex.Matcher;
@@ -10,21 +11,24 @@ public class MainController {
 
     private static final String SEPARATOR = ",|:";
     private static final String REGEX = "^//(.*)\\\\n";
+    private final Calculator calculator;
 
-    private MainController() {
+    public MainController(final Calculator calculator) {
+        this.calculator = calculator;
     }
 
     public static MainController create() {
-        return new MainController();
+        return new MainController(new Calculator());
     }
 
     public void run() {
         final String input = InputView.startInput();
         final String[] stringNumber = splitString(input);
 
-        Expression expression = new Expression(stringNumber);
+        final Numbers numbers = new Numbers(stringNumber);
+        final int result = calculator.calculate(numbers);
 
-        OutputView.printResultMessage(expression.getResult());
+        OutputView.printResultMessage(result);
     }
 
     private String[] splitString(String input) {
