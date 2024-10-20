@@ -6,13 +6,13 @@ import java.util.List;
 public class StringParser {
 
     public List<Integer> parseBySeparator(String inputString, String separator) {
-        List<Integer> numbers = new ArrayList<>();
 
         //구분자로 숫자 추출
         if (inputString == null || inputString.isBlank()) {
             throw new IllegalArgumentException("식을 입력하지 않았습니다.");
         }
 
+        //커스텀 구분자에 공백이 있는지 판단
         if (separator.contains(" ")) {
             inputString = inputString.trim();
         } else {
@@ -20,7 +20,15 @@ public class StringParser {
         }
         String[] numberStrings = inputString.split(separator);
 
-        //형변환
+        //문자열을 정수 형태로 변환
+        List<Integer> numbers = convertNumberStringsToNumbers(numberStrings);
+
+        return numbers;
+    }
+
+    private static List<Integer> convertNumberStringsToNumbers(String[] numberStrings) {
+        List<Integer> numbers = new ArrayList<>();
+
         for (String numberString : numberStrings) {
             Integer number = 0;
 
@@ -36,7 +44,6 @@ public class StringParser {
 
             numbers.add(number);
         }
-
         return numbers;
     }
 
