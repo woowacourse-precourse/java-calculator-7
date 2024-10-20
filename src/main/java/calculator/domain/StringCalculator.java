@@ -15,12 +15,14 @@ public class StringCalculator {
 
     public int calculate() {
         int result = 0;
+
         for (int num : numbers) {
             if (num < 0) {
                 throw new IllegalArgumentException();
             }
             result += num;
         }
+
         return result;
     }
 
@@ -52,10 +54,13 @@ public class StringCalculator {
 
         // 기본 구분자 또는 커스텀 구분자로 문자열을 분리한 후 숫자 리스트로 변환
         try {
+            // 숫자 추출 후 공백 포함 여부 확인 (단, 공백이 커스텀 구분자일 경우 허용)
             List<Integer> numberList = Arrays.stream(input.split(String.join("|", delimiter)))
-                    .map(String::trim)           // 공백 제거
                     .filter(s -> !s.isEmpty())   // 빈 문자열 필터링
-                    .map(Integer::parseInt)      // 문자열을 정수로 변환
+                    .map(str -> {
+                        // 커스텀 구분자가 공백이 아닌 경우에만 공백을 체크
+                        return Integer.parseInt(str.trim());  // 문자열을 정수로 변환 (공백이 구분자일 경우도 처리)
+                    })
                     .toList();
 
             // 음수 값 처리
@@ -64,8 +69,8 @@ public class StringCalculator {
                     throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
                 }
             }
-
             return numberList;
+
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자가 아닌 문자가 포함되어 있습니다.");
         }
