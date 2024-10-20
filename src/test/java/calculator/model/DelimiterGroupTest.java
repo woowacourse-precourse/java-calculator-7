@@ -104,4 +104,16 @@ class DelimiterGroupTest {
         // then
         assertEquals(List.of("1", "2", "3", "4", "5"), result);
     }
+
+    @Test
+    void 입력이_빈_문자열_일때_0을_가진_배열_반환() {
+        // given
+        String input = "";
+
+        // when
+        List<String> result = delimiterGroup.split(input);
+
+        // then
+        assertEquals(List.of("0"), result);
+    }
 }
