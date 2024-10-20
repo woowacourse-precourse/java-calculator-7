@@ -69,9 +69,10 @@ public class Validator {
     public boolean checkHasNegative(String  input, ArrayList<String> separators) {
         // 커스텀 구분자가 있을 경우 처리
         input = getStringAfterCustomSeparator(input);
-        boolean hasMinus = false;
-        int minusSize = 0;
+        boolean hasMinus = false; //구분자에 "-" 존재여부
+        int minusSize = 0;//"-"의 개수
         for (int i = 0; i < separators.size(); i++) {
+            //"-"로 시작하는 구분자의 길이를 구함
             if (separators.get(i).startsWith("-")){
                 minusSize = separators.get(i).length();
                 hasMinus = true;
@@ -79,6 +80,7 @@ public class Validator {
         }
         for (int i = 0; i < input.length(); i++) {
             if (input.charAt(i) == '-') {
+                //"-"구분자의 길이만큼 넘어서도 -가 있으면 음수
                 if (hasMinus && input.charAt(i + 1)  + minusSize!= '-') {
                     return false;
                 }
@@ -88,6 +90,7 @@ public class Validator {
         return true;
     }
 
+    //커스텀 구분자 이후의 문자열 반환
     public String getStringAfterCustomSeparator(String input) {
         if (input.startsWith("//")) {
             // "\n"의 위치 찾기

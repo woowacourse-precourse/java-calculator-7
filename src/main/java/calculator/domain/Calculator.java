@@ -6,8 +6,16 @@ public class Calculator {
 
     int sum;
 
+    ArrayList<String> separators = new ArrayList<>();
+
     public Calculator() {
         this.sum = 0;
+        separators.add(",");
+        separators.add(":");
+    }
+
+    public ArrayList<String> getSeparators() {
+        return separators;
     }
 
     public int sumNumber(String input, ArrayList<String> separator) {

@@ -12,15 +12,12 @@ public class CalculatorController {
     OutputView outputView = new OutputView();
     Validator validator = new Validator();
     Calculator calculator = new Calculator();
-    ArrayList<String> separators = new ArrayList<>();
 
-    public CalculatorController() {
-        separators.add(",");
-        separators.add(":");
-    }
+
 
     public void run() {
         String input = inputView.readSentence();
+        ArrayList<String> separators = calculator.getSeparators();
 
         if (!validator.checkIsEmpty(input) && !validator.checkHasNumber(input)) {
             System.out.println("0");
