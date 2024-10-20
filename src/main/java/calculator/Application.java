@@ -23,16 +23,14 @@ public class Application {
         }else if (isValidDefaultPattern(input)) {
             delimiter = ",|:";
             numbers = input;
-            System.out.println("기본 구분자를 사용합니다. 입력값: " + input);
+
         }else {
 
             throw new IllegalArgumentException("잘못된 입력입니다.");
         }
 
-        if(numbers.isEmpty()){
-
-            System.out.println("결과: 0");
-            return ;
+        if (isEmptyString(numbers)) {
+            return;
         }
 
         validateContinuousDelimiters(numbers, delimiter);
@@ -112,6 +110,14 @@ public class Application {
                  throw new IllegalArgumentException("연속된 쉼표(,) 또는 콜론(:)은 허용되지 않습니다.");
             }
         }
+    }
+
+    private static boolean isEmptyString(String numbers) {
+        if (numbers.isEmpty()) {
+            System.out.println("결과: 0");
+            return true;
+        }
+        return false;
     }
 
 
