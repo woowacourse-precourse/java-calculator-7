@@ -26,7 +26,11 @@ public class Application {
     private static int[] toIntArray(String[] numbers) {
         int[] result = new int[numbers.length];
         for (int i = 0; i < numbers.length; i++) {
-            result[i] = Integer.parseInt(numbers[i]);
+            int number = Integer.parseInt(numbers[i]);
+            if (number < 0) {
+                throw new IllegalArgumentException("양수만 입력해주세요!");
+            }
+            result[i] = number;
         }
         return result;
     }
