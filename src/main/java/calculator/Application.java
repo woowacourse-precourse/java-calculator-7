@@ -7,6 +7,7 @@ public class Application {
         stringCalculator.setInput();
         stringCalculator.addDelimiter();
         stringCalculator.sumDelimitedNumbers();
+        stringCalculator.printResult();
     }
 }
 

@@ -14,13 +14,13 @@ public class StringCalculator {
     // 입력받은 문자열
     private String input;
     // 결과값
-    private int sum;
+    private int result;
     // 숫자 구분자
     private String delimiter;
     // 추출한 숫자 리스트
 
     public StringCalculator(){
-        this.sum = 0;
+        this.result = 0;
         this.delimiter = "[,:";
     }
 
@@ -56,8 +56,13 @@ public class StringCalculator {
             if(!c.matches("^[0-9]*$")){
                 throw new IllegalArgumentException("잘못된 값을 입력하였습니다");
             }
-            this.sum += Integer.parseInt(c);
+            this.result += Integer.parseInt(c);
         }
-        System.out.println("sum : "+sum);
+        System.out.println("sum : "+ result);
+    }
+
+    // 결과값을 출력하는 기능
+    public void printResult(){
+        System.out.println("결과 : "+result);
     }
 }
