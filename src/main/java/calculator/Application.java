@@ -7,11 +7,12 @@ public class Application {
     public static void main(String[] args) {
         int result;
         Scanner scanner = new Scanner(System.in);
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = scanner.nextLine();
 
         try {
             result = calculateResult(input);
-            System.out.println(result);
+            System.out.printf("결과 : %d",result);
         } catch (IllegalArgumentException e) {
             System.err.println("입력 형식이 잘못되었습니다. ");
         }
