@@ -2,8 +2,7 @@ package calculator;
 
 import java.util.List;
 
-public abstract class AbstractSeparator {
-    private String separator; //구분자
+public interface Separator {
 
     public abstract List<Long> separate(String userInput); //자식 클래스에서 꼭 구현
 
