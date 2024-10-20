@@ -37,6 +37,23 @@ public class Application {
 
         validateContinuousDelimiters(numbers, delimiter);
 
+        String[] tokens = numbers.split(delimiter);
+
+        long sum = 0;
+        for (String token : tokens) {
+            long number;
+            try {
+                number = Long.parseLong(token);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("입력 값이 long의 범위를 초과합니다: " + token);
+            }
+
+            if ( sum > Long.MAX_VALUE - number) {
+                throw new IllegalArgumentException("덧셈 결과가 long의 범위를 초과합니다.");
+            }
+
+            sum += number;
+        }
 
 
     }
