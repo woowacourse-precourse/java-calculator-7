@@ -54,8 +54,10 @@ public class Application {
     private static boolean isContainNewDelimiter(String inputString) {
         if (inputString.startsWith("//")) {
             if (inputString.contains("\\n")) {
-                if(inputString.substring(0, inputString.indexOf("\\n")).isEmpty() || (inputString.indexOf("//")-inputString.indexOf("\\n"))<3)
+                if (inputString.substring(0, inputString.indexOf("\\n")).isEmpty()
+                        || (inputString.indexOf("\\n") - inputString.indexOf("//")) < 3) {
                     throw new IllegalArgumentException("신규 구분자로 공백이 올 수 없습니다.");
+                }
                 return true;
             }
             throw new IllegalArgumentException("신규 구분자 지정 문법에 맞지 않습니다.");
