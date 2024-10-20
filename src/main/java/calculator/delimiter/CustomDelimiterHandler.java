@@ -5,6 +5,8 @@ import calculator.exception.InvalidInputException;
 
 public class CustomDelimiterHandler implements DelimiterHandler {
 
+    private static final String DEFAULT_DELIMITERS = "[,:]";
+
     public static boolean isCustomDelimiter(String input) {
         return input.startsWith("//");
     }
@@ -26,8 +28,9 @@ public class CustomDelimiterHandler implements DelimiterHandler {
             throw new InvalidInputException("커스텀 구분자는 한 글자여야 합니다.");
         }
 
-        // 숫자 부분 추출
+        // 기본 구분자와 커스텀 구분자 모두 사용
         String numbersPart = input.substring(endIndex + 1);
-        return numbersPart.split(customDelimiter); // 커스텀 구분자로 문자열 분리
+        String combinedDelimiters = customDelimiter + DEFAULT_DELIMITERS;
+        return numbersPart.split("[" + combinedDelimiters + "]");
     }
 }

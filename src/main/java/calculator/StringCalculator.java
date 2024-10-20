@@ -1,58 +1,58 @@
 package calculator;
 
-import calculator.delimiter.BasicDelimiterHandler;
-import calculator.delimiter.CustomDelimiterHandler;
 import calculator.exception.InvalidInputException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringCalculator {
 
+    private static final String DEFAULT_DELIMITERS = ",|:";
+    private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
+
     public int calculate(String input) {
-        if (input == null || input.trim().isEmpty()) {
-            throw new InvalidInputException("입력값이 없습니다.");  // 빈 문자열일 경우 예외 발생
+        if (input == null || input.isEmpty()) {
+            return 0;  // 빈 문자열 또는 null은 0을 반환
         }
 
-        // 입력값이 숫자 하나만 있는 경우 바로 반환
-        try {
-            int singleNumber = Integer.parseInt(input.trim());
-            return singleNumber;
-        } catch (NumberFormatException e) {
-            // 숫자가 아닌 경우 구분자 처리 계속 진행
+        Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(input);
+        String delimiter = DEFAULT_DELIMITERS;
+        String numbers = input;
+
+        if (matcher.matches()) {
+            delimiter = matcher.group(1);
+            numbers = matcher.group(2);
         }
 
-        if (!CustomDelimiterHandler.isCustomDelimiter(input) && !input.contains(",") && !input.contains(":")) {
-            throw new InvalidInputException("유효하지 않은 구분자입니다."); // 커스텀 구분자와 기본 구분자가 아닌 경우 예외 발생
-        }
-
-        DelimiterHandler delimiterHandler = CustomDelimiterHandler.isCustomDelimiter(input)
-                ? new CustomDelimiterHandler()
-                : new BasicDelimiterHandler();
-
-        String[] numbers = delimiterHandler.split(input);
-        return sum(numbers);
+        return sum(numbers, delimiter);
     }
 
+    private int sum(String numbers, String delimiter) {
+        String[] tokens = numbers.split(delimiter + "|" + DEFAULT_DELIMITERS);  // 커스텀 구분자와 기본 구분자를 모두 사용
+        int sum = 0;
 
-    private int sum(String[] numbers) {
-        int total = 0;
-        for (String number : numbers) {
-            int num = parseNumber(number);
-            if (num < 0) {
-                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + num);
+        for (String token : tokens) {
+            if (token.isEmpty()) {
+                continue;  // 빈 문자열은 무시
             }
-            total += num;
+            int number = parseNumber(token);
+            validateNonNegative(number);
+            sum += number;
         }
-        return total;
+
+        return sum;
     }
 
-    private int parseNumber(String number) {
-        if (number.trim().isEmpty()) {
-            throw new IllegalArgumentException("유효하지 않은 숫자: " + number);
-        }
-
+    private int parseNumber(String token) {
         try {
-            return Integer.parseInt(number.trim());
+            return Integer.parseInt(token);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("유효하지 않은 숫자: " + number);
+            throw new InvalidInputException("잘못된 입력입니다.");  // 숫자가 아닌 경우 예외 발생
+        }
+    }
+
+    private void validateNonNegative(int number) {
+        if (number < 0) {
+            throw new InvalidInputException("음수는 허용되지 않습니다.");  // 음수 입력 시 예외 발생
         }
     }
 }
