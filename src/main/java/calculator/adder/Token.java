@@ -7,12 +7,15 @@ public final class Token {
     private final int value;
 
     public Token(String token) {
-        int parsed = parseInteger(token);
-        validateNumber(parsed);
-        this.value = parsed;
+        int number = parseNumber(token);
+        validatePositiveNumber(number);
+        this.value = number;
     }
 
-    private int parseInteger(String value) {
+    private int parseNumber(String value) {
+        if (value.isBlank()) {
+            return 0;
+        }
         try {
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {
@@ -20,7 +23,7 @@ public final class Token {
         }
     }
 
-    private void validateNumber(int value) {
+    private void validatePositiveNumber(int value) {
         if (!isPositiveNumber(value)) {
             throw new IllegalArgumentException();
         }
