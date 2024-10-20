@@ -54,7 +54,9 @@ public class Application {
                     continue;
                 }
                 int num = stringToInt(number);
-
+                if (sum > Integer.MAX_VALUE - num) {
+                    throw new IllegalArgumentException("합계가 int 범위를 초과했습니다.");
+                }
                 sum += num;
             }
         } catch (IllegalArgumentException e) {
