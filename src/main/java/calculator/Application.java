@@ -9,7 +9,7 @@ public class Application {
         String input = Console.readLine();
         Calculator calculator = new Calculator();
         int sum = calculator.add(input);
-        System.out.print("결과: " + sum);
+        System.out.print("결과 : " + sum);
     }
 
 }

@@ -17,13 +17,27 @@ public class Calculator {
     public int add(String input) {
         int sum = 0;
         input = input.trim();
-        input = checkingUseCustomDelimiter(input);
+        input = checkUseCustomDelimiter(input);
+        checkValidInput(input);
         int[] numbers = splitToNumbers(input);
         for (int number : numbers) {
             sum += number;
         }
 
         return sum;
+    }
+
+    private void checkValidInput(String input) {
+        try {
+            String delimiterChars = String.join("", basicDelimiters);
+            for (char c : input.toCharArray()) {
+                if (!delimiterChars.contains(String.valueOf(c)) && !Character.isDigit(c)) {
+                    throw new Exception();
+                }
+            }
+        } catch (Exception e) {
+            throw new IllegalArgumentException("잘못된 입력입니다.");
+        }
     }
 
     private int[] splitToNumbers(String input) {
@@ -36,7 +50,7 @@ public class Calculator {
                 .toArray();
     }
 
-    private String checkingUseCustomDelimiter(String input) {
+    private String checkUseCustomDelimiter(String input) {
         if (input.startsWith(checkingDelimiters[0])) {
             try {
                 int secondDelimiterIndex = input.indexOf(checkingDelimiters[1]);
@@ -44,8 +58,7 @@ public class Calculator {
                     customDelimiter = input.substring(checkingDelimiters[0].length(), secondDelimiterIndex);
                     basicDelimiters.add(customDelimiter);
                     return input.substring(secondDelimiterIndex + checkingDelimiters[1].length());
-                }
-                else {
+                } else {
                     throw new Exception();
                 }
             } catch (Exception e) {
