@@ -4,12 +4,12 @@ import java.util.List;
 
 public class Calculator {
 
-    public static int sum(List<Integer> input) {
+    public static int sum(List<Integer> numbers) {
         int sum = 0;
-        for (int number : input) {
+        for (int number : numbers) {
             sum += number;
         }
-        Validator.isIntegerRangeSum(sum, input);
+        Validator.isIntegerRangeSum(sum, numbers);
         return sum;
     }
 }
