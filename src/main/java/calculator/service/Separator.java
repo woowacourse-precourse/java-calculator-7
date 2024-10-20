@@ -3,6 +3,7 @@ package calculator.service;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 public class Separator {
     private static final String BASIC_SEPARATOR_COMMA = ",";
@@ -30,10 +31,18 @@ public class Separator {
         Matcher matcher = CUSTOM_SEPARATOR_PATTERN.matcher(content);
         if (matcher.find()) {
             String customSeparator = matcher.group(1);
-            String[] splitedContent = content.substring(matcher.end()).split(customSeparator);
+            String[] splitedContent = splitByCustomSeparator(content.substring(matcher.end()), customSeparator);
             return Arrays.stream(splitedContent).mapToInt(this::convertToNumber).toArray();
         }
         throw new IllegalArgumentException("[ERROR] Separator: 타당하지 않은 형식의 커스텀 구분자");
+    }
+
+    private String[] splitByCustomSeparator(String content, String customSeparator) {
+        try {
+            return content.split(customSeparator);
+        } catch (PatternSyntaxException e) {
+            throw new IllegalArgumentException("[ERROR] Separator: 타당하지 않은 형식의 커스텀 구분자!");
+        }
     }
 
     private int convertToNumber(String input) {
