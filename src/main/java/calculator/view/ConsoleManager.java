@@ -17,8 +17,8 @@ public class ConsoleManager {
         StringParser parser = ParserSelector.select(str);
         List<String> list = parser.parse(str);
         int result = Calculator.sum(list);
-//
-//        printResultMessage(result);
+
+        printResultMessage(result);
     }
     public void printWelcomeMessage(){
         System.out.println(WELCOME_MESSAGE);

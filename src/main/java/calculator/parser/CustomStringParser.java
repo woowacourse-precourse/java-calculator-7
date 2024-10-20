@@ -10,7 +10,7 @@ public class CustomStringParser implements StringParser{
     private String customDelimiter;
     public void parseDelimiter(String input){
         if (input.startsWith("//")) {
-            int delimiterEndIndex = input.indexOf("\n");
+            int delimiterEndIndex = input.indexOf("\\n");
             customDelimiter = input.substring(2, delimiterEndIndex);
         }
     }
@@ -18,7 +18,7 @@ public class CustomStringParser implements StringParser{
     @Override
     public List<String> parse(String input) {
         parseDelimiter(input);
-        String str = input.startsWith("//") ? input.split("\n", 2)[1] : input;
+        String str = input.startsWith("//") ? input.split("\\\\n")[1] : input;
 
         String customRegex = customDelimiter != null
                 ? BASIC_DELIMITER_REGEX + "|" + Pattern.quote(customDelimiter)
