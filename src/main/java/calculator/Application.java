@@ -40,7 +40,7 @@ public class Application {
          */
         if (hasCustomDelimiter(input)) {
             int indexOfEndSign = input.indexOf(CUSTOM_DELIMITER_END_SIGN); // 개행문자가 아닌 \n라는 문자를 찾는다
-            if (indexOfEndSign == -1) {
+            if (isEndSignMissing(indexOfEndSign)) {
                 throw new IllegalArgumentException("커스텀 구분자 선언 후 '\\n'이 필요합니다.");
             }
 
@@ -62,6 +62,9 @@ public class Application {
         return add(parsedNumbers);
     }
 
+    private static boolean isEndSignMissing(int indexOfEndSign) {
+        return indexOfEndSign == -1;
+    }
 
     private static String[] getCustomDelimiters(String input, int indexOfEndSign) {
         return input
