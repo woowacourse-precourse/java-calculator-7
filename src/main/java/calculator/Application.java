@@ -2,6 +2,6 @@ package calculator;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: ÇÁ·Î±×·¥ ±¸Çö
+        System.out.println("ë§ì…ˆí•  ë¬¸ìì—´ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”.");
     }
 }
