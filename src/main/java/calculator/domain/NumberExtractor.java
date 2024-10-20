@@ -11,12 +11,15 @@ public class NumberExtractor {
 
 	private static final String OR_SIGN = "|";
 	private static final long ZERO = 0L;
+	private static final int STRING_START_INDEX = 0;
+	private static final String NUMBER_REGEX = "\\d";
 
 	public List<Long> getNumbers(String numberSection, List<String> delimiters) {
 
-		if(numberSection.isBlank()) {
+		if (numberSection.isBlank()) {
 			return new ArrayList<>(List.of(ZERO));
 		}
+		validateNumberSection(numberSection, delimiters);
 
 		String delimiter = String.join(OR_SIGN, delimiters);
 		String[] split = numberSection.split(delimiter);
@@ -28,9 +31,57 @@ public class NumberExtractor {
 			.toList();
 	}
 
+	private void validateNumberSection(String numberSection, List<String> delimiters) {
+		validateStartWithDelimiter(numberSection, delimiters);
+		validateEndWithDelimiter(numberSection, delimiters);
+		validateUsingUnregisteredDelimiter(numberSection, delimiters);
+	}
+
+	private void validateUsingUnregisteredDelimiter(String numberSection, List<String> delimiters) {
+		
+		String[] split = numberSection.split(NUMBER_REGEX);
+		Arrays.stream(split)
+			.filter(delimiter -> !delimiters.contains(delimiter) && !delimiter.isBlank())
+			.findAny()
+			.ifPresent(delimiter -> {
+				throw new IllegalArgumentException(ErrorMessage.USE_UNREGISTERED_DELIMITER.getMessage() + delimiter);
+			});
+	}
+
+	private void validateStartWithDelimiter(String numberSection, List<String> delimiters) {
+
+		for (String delimiter : delimiters) {
+			int startValueLength = delimiter.length();
+			String startValue = numberSection.substring(STRING_START_INDEX, startValueLength);
+
+			if (delimiters.contains(startValue)) {
+				throw new IllegalArgumentException(ErrorMessage.START_WITH_DELIMITER.getMessage());
+			}
+		}
+	}
+
+	private void validateEndWithDelimiter(String numberSection, List<String> delimiters) {
+
+		for (String delimiter : delimiters) {
+			int endValueStartIndex = numberSection.length() - delimiter.length();
+			String endValue = numberSection.substring(endValueStartIndex);
+
+			if (delimiters.contains(endValue)) {
+				throw new IllegalArgumentException(ErrorMessage.END_WITH_DELIMITER.getMessage());
+			}
+		}
+	}
+
 	private void validateNumber(String number) {
+		validateUsingContinuousDelimiter(number);
 		validateNumberFormat(number);
-		validatePositiveNumber(number);
+		validateUsingNegativeNumber(number);
+	}
+
+	private void validateUsingContinuousDelimiter(String number) {
+		if (number.isBlank()) {
+			throw new IllegalArgumentException(ErrorMessage.USE_CONTINUOUS_DELIMITER.getMessage());
+		}
 	}
 
 	private void validateNumberFormat(String number) {
@@ -39,7 +90,7 @@ public class NumberExtractor {
 		}
 	}
 
-	private void validatePositiveNumber(String number) {
+	private void validateUsingNegativeNumber(String number) {
 		if (NumberChecker.isNegativeNumber(number)) {
 			throw new IllegalArgumentException(ErrorMessage.NEGATIVE_NUMBER_NOT_ALLOWED.getMessage());
 		}
