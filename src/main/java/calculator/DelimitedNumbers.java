@@ -27,7 +27,7 @@ public class DelimitedNumbers {
             return;
         }
 
-        String[] validDelimiters = makeValidateRegex(regex);
+        String[] validDelimiters = extractValidDelimiters(regex);
 
         for (char delimiter : stringNumbers.toCharArray()) {
             if (!Arrays.asList(validDelimiters).contains(String.valueOf(delimiter)) && !Character.isDigit(delimiter)
@@ -38,7 +38,7 @@ public class DelimitedNumbers {
 
     }
 
-    private String[] makeValidateRegex(DelimiterResult regex) {
+    private String[] extractValidDelimiters(DelimiterResult regex) {
         String delimiterResult = regex.getDelimiterResult();
         String delimiters = regex.getDelimiterResult().substring(1, delimiterResult.length() - 1);
 
