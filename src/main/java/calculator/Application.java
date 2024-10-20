@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class Application {
@@ -39,6 +40,14 @@ public class Application {
 
             /** realData 를 커스텀 구분자를 기준으로 분리 */
             String[] separatedData = realData.split(Pattern.quote(customDelimiter));
+
+            for (String token : separatedData) {
+                List<Integer> numbers = extractPositiveInteger(token);      /** 양수 추출 메소드 호출 */
+                for (int number : numbers) {
+                    sum += number;
+                }
+            }
+            System.out.println("결과 : " + sum);
         }
     }
 }
