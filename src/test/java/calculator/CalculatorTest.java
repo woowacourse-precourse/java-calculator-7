@@ -49,7 +49,6 @@ class CalculatorTest {
       // //;\n
 
       // charArray 인덱스0부터 5까지의 값이 "//;\n" 인지 체크
-      // 여기를 어떻게 구현하지..흠 🤔🤔
       boolean validCustomSeparator = string.substring(0, 5) == "//;\\n";
       if (validCustomSeparator) {
         // 맞다면 커스텀 구분자 ';'인지 체크하고 건너뛰거나
@@ -59,7 +58,7 @@ class CalculatorTest {
         // 정상적인 커스텀 구분자가 아닌 경우 IllegalArgumentException
         throw new IllegalArgumentException("커스텀 구분자를 확인해주세요 ('//;\\n'를 맨 앞에 선언 후 ';' 사용");
       }
-      // 탐색 인덱스가 정수 변환 가능한 경우
+      // [x] 탐색 인덱스가 정수 변환 가능한 경우
       if (Character.isDigit(index)) {
         // actual과 합산을 반복
         int target = Integer.parseInt(valueOf(index));
@@ -90,8 +89,35 @@ class CalculatorTest {
 
       //then
     assertThrows(IllegalArgumentException.class, () -> {
-      calculator.calculating()
-    })
+      calculator.calculating();
+    });
+  }
+
+  @DisplayName("탐색 인덱스가 정수 변환 가능한지 확인한다")
+  @Test
+  public void checkIsNumeric() throws Exception{
+      //given
+      char[] isNumeric = new char[]{'1', '2', '3', '4', '5'};
+
+      //when
+      boolean expect = true;
+
+      for (char element : isNumeric) {
+        assertEquals(expect, actual);
+      }
+
+  }
+
+  @DisplayName("입력값이 유효한 경우를 확인한다")
+  @Test
+  public void validInput() throws Exception{
+      //given
+      char[] delimeters = new char[]{',', ':', ';'};
+      boolean expect = true;
+      for (char element : delimeters) {
+        //then
+        assertEquals(expect, calculator.valid(element));
+      }
   }
 
 }
