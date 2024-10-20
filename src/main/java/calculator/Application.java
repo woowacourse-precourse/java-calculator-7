@@ -7,9 +7,12 @@ public class Application {
         // TODO: 프로그램 구현
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
+        if(input.isEmpty()) {
+            input = "0";
+        }
         String seperator = DecideSeparatorInString(input);
         String[] arr = DevideStringToSeparator(input, seperator);
-        System.out.println(String.join(" ", arr));
+
         try {
             if(!isCorrectInput(arr, seperator)) {
                 throw new IllegalArgumentException("IllegalArgumentException");
@@ -19,7 +22,10 @@ public class Application {
             Console.close();
             return;
         }
-
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println(arr[i]);
+        }
         Console.close();
     }
 
