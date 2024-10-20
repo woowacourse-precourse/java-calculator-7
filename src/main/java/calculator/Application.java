@@ -10,9 +10,11 @@ public class Application {
 
         // dependencies
         DelimiterExtractor delimiterExtractor = new DelimiterExtractor();
+        StringValidator stringValidator = new StringValidator();
+
 
         // StringCalculator
-        StringCalculator calculator = new StringCalculator(delimiterExtractor);
+        StringCalculator calculator = new StringCalculator(delimiterExtractor, stringValidator);
         long sum = calculator.calculate(string);
 
         // output
