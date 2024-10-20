@@ -31,4 +31,8 @@ public class StringCalculator {
         return calculate.add(
                 numberStrategy.extractNumber(results.get(0), results.subList(1, results.size())));
     }
+
+    public Integer emptyStringOperate() {
+        return calculate.add(List.of(0));
+    }
 }
