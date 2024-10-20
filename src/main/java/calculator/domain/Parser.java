@@ -34,7 +34,7 @@ public class Parser {
 		String[] parts = input.split(CUSTOM_SEPARATOR_SUFFIX);
 		return parts.length > 1
 			? getCustomSeparator(parts[0])
-			: DEFAULT_SEPARATOR;
+			: getDefaultSeparator();
 	}
 
 	private String getCustomSeparator(String part) {
@@ -49,6 +49,10 @@ public class Parser {
 	private String createRegexPattern(char separator) {
 		String customSeparator = Pattern.quote(String.valueOf(separator));
 		return "[" + customSeparator + DEFAULT_SEPARATOR + "]";
+	}
+
+	private String getDefaultSeparator() {
+		return "[" + DEFAULT_SEPARATOR + "]";
 	}
 
 	private String[] getItems(String input, String separator) {
