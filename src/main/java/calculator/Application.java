@@ -12,6 +12,5 @@ public class Application {
         spliter.calculate();
 
         System.out.println("결과 : " + spliter.getResultValue());
-
     }
 }
