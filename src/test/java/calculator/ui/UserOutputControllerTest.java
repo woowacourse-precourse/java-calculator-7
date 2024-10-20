@@ -3,7 +3,7 @@ package calculator.ui;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class UserOutputInterfaceTest {
+class UserOutputControllerTest {
 
     @Test
     void 내용전달() {
@@ -12,9 +12,9 @@ class UserOutputInterfaceTest {
         final OutputUi outputUi = message1 -> {
             result.append(message1);
         };
-        final UserOutputInterface userOutputInterface = new UserOutputInterface(outputUi);
+        final UserOutputController userOutputController = new UserOutputController(outputUi);
 
-        userOutputInterface.printResult(new ResultMessage(message));
+        userOutputController.printResult(new ResultMessage(message));
 
         Assertions.assertThat(result.toString().equals("결과 : " + message));
     }
@@ -25,9 +25,9 @@ class UserOutputInterfaceTest {
         final OutputUi outputUi = message1 -> {
             result.append(message1);
         };
-        final UserOutputInterface userOutputInterface = new UserOutputInterface(outputUi);
+        final UserOutputController userOutputController = new UserOutputController(outputUi);
 
-        userOutputInterface.printInputInformation();
+        userOutputController.printInputInformation();
 
         Assertions.assertThat(result.toString()).isEqualTo("덧셈할 문자열을 입력해 주세요.");
     }

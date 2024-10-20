@@ -1,10 +1,10 @@
 package calculator.ui;
 
-public class UserOutputInterface {
+public class UserOutputController {
 
     private final OutputUi outputUi;
 
-    public UserOutputInterface(final OutputUi outputUi) {
+    public UserOutputController(final OutputUi outputUi) {
         this.outputUi = outputUi;
     }
 

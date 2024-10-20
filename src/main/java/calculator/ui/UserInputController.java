@@ -1,10 +1,10 @@
 package calculator.ui;
 
-public class UserInputInterface {
+public class UserInputController {
 
     private final InputUi inputUi;
 
-    public UserInputInterface(final InputUi inputUi) {
+    public UserInputController(final InputUi inputUi) {
         this.inputUi = inputUi;
     }
 

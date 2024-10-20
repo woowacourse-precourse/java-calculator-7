@@ -2,13 +2,13 @@ package calculator.ui;
 
 public class UiInitializer {
 
-    public UserInputInterface initInputInterface() {
+    public UserInputController initInputController() {
         final InputUi inputUi = new InputConsole();
-        return new UserInputInterface(inputUi);
+        return new UserInputController(inputUi);
     }
 
-    public UserOutputInterface initOutputInterface() {
+    public UserOutputController initOutputController() {
         final OutputUi outputUi = new OutputConsole();
-        return new UserOutputInterface(outputUi);
+        return new UserOutputController(outputUi);
     }
 }
