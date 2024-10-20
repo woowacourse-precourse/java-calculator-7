@@ -10,7 +10,7 @@ public class Calculator {
     private final int CUSTOM_SEPARATOR_IDX = 2;
     private final String CUSTOM_SEPARATOR_CMD_REGEX = "^(\\/\\/.\\\\n)";
     private final String MINUS_DIGIT_REGEX = "-[0-9]*";
-    private final String DIGIT_REGEX = "-?\\d*";
+    private final String DIGIT_REGEX = "-?\\d+";
     private final ICalculatorDisplay calculatorDisplay;
 
     public Calculator(ICalculatorDisplay calculatorDisplay) {
