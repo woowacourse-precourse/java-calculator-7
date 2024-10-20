@@ -1,4 +1,4 @@
-package calculator.controller;
+package calculator;
 
 
 import calculator.view.InputView;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Process {
+public class Calculator {
 
     private final InputView inputView = new InputView();
     private String userInput;
