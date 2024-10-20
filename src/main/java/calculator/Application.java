@@ -32,6 +32,10 @@ class Calculator {
         return new Calculator(userInput);
     }
 
+    public int getResult() {
+        return result;
+    }
+
     private static int defaultSeparator(String input){
         String[] separators = {",", ":"};
         return calculateNumber(input, Arrays.toString(separators));
