@@ -5,6 +5,7 @@ import java.util.List;
 public class CustomDelimiterStrategy implements DelimiterStrategy {
     public static final String startDelimiterPattern = "//";
     public static final String endDelimiterPattern = "\n";
+    private static final List<String> metaChar = List.of("+", "^", "*");
 
     @Override
     public List<String> decideDelimiter(String userInput) throws IllegalArgumentException {
@@ -14,6 +15,9 @@ public class CustomDelimiterStrategy implements DelimiterStrategy {
         }
         if (!isChar(delimiter)) {
             throw new IllegalArgumentException("하나의 문자만 커스텀 구분자로 지정한다");
+        }
+        if (metaChar.contains(delimiter)) {
+            delimiter = convertMetaChar(delimiter);
         }
         return List.of(withoutDelimiterPattern(userInput), delimiter);
     }
@@ -35,5 +39,9 @@ public class CustomDelimiterStrategy implements DelimiterStrategy {
 
     private boolean isChar(String delimiter) {
         return delimiter.length() == 1;
+    }
+
+    private String convertMetaChar(String delimiter) {
+        return "\\" + delimiter;
     }
 }
