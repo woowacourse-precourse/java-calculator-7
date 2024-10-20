@@ -1,6 +1,8 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.NoSuchElementException;
+import java.util.regex.Pattern;
 
 public class Calculator {
 
@@ -24,15 +26,18 @@ public class Calculator {
             String customTempDelimiter = input.substring(CUSTOM_DELIMITER_PREFIX.length(), delimiterIndex);
             String number = input.substring(CUSTOM_DELIMITER_PREFIX.length() + customTempDelimiter.length()
                     + CUSTOM_DELIMITER_POSTFIX.length());
-            customDelimiter = "[" + customTempDelimiter + ",:]"; // 새로운 정규식 생성
+            customDelimiter = Pattern.quote(customTempDelimiter) + "|" + DEFAULT_DELIMITERS;
             // 커스텀 구분자로만 이루어진 입력 체크
-            if (number.matches(customTempDelimiter + "+")) {
+            if (number.matches(Pattern.quote(customTempDelimiter) + "+")) {
                 throw new IllegalArgumentException("커스텀 구분자로만 이루어진 입력은 허용되지 않습니다.");
             }
+
             // ex) //;\n;;; - o
 
             // 구분자로 끝나거나 시작하는 경우 체크
-            if (number.matches(".*" + customTempDelimiter + "$|^" + customTempDelimiter + ".*")) {
+            if (number.matches(
+                    ".*" + Pattern.quote(customTempDelimiter) + "$|^"
+                            + Pattern.quote(customTempDelimiter) + ".*")) {
                 throw new IllegalArgumentException("입력되지 않은 수가 있습니다.");
             }
             // ex) //;\n10;;; || //;\n;;;10
@@ -57,10 +62,6 @@ public class Calculator {
         3. 빈 문자열이 들어왔을 때에는 0을 반환 - o
         4. 구분자만 들어오면? -> IllegalArgumentException, 잘못된 입력이다
          */
-        if (input.isEmpty()) { // 빈 문자열이 들어왔을 시에 0 return
-            return 0;
-        }
-
         if (input.matches("[,:]+")) {
             throw new IllegalArgumentException("구분자로만 이루어진 입력은 허용되지 않습니다.");
         }
@@ -96,15 +97,18 @@ public class Calculator {
     }
 
     public static int run() {
-        String input = inputString();
+        String input;
+        try {
+            input = inputString();
+        } catch (NoSuchElementException e) {
+            return 0;  // 입력이 없는 경우 0 반환
+        }
         if (preExceptionHandler(input) == 0) {
             return 0;
         }
         String[] str = extractNumber(input);
-        int postExceptionNumber = postExceptionHandler(str);
-        if (postExceptionNumber == -1) {
-            return -1;
-        }
+        postExceptionHandler(str);
         return sum(str);
+
     }
 }
