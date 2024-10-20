@@ -40,10 +40,14 @@ public class Application {
     }
 
     private static int parseNumbers(String numbers) {
-        int number = Integer.parseInt(numbers);
-        if(number < 0){
-            throw new IllegalArgumentException();
+        try {
+            int number = Integer.parseInt(numbers);
+            if(number < 0){
+                throw new IllegalArgumentException();
+            }
+            return number;
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(e);
         }
-        return number;
     }
 }
