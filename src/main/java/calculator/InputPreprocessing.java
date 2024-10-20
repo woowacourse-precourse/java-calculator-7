@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class InputPreprocessing {
+    private static final long EMPTY_VALUE = 0L;
     private final Delimiter delimiter;
 
     public InputPreprocessing(Delimiter delimiter) {
@@ -37,11 +38,14 @@ public class InputPreprocessing {
         }
     }
 
-    private long castingElementToLong(String input) {
+    private long castingElementToLong(String element) {
         try {
-            long number = Long.parseLong(input);
-            validatePositive(number);
-            return number;
+            if (!element.isEmpty()) {
+                long number = Long.parseLong(element);
+                validatePositive(number);
+                return number;
+            }
+            return EMPTY_VALUE;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("더하는 값 중 너무 큰 수가 존재합니다.");
         }
