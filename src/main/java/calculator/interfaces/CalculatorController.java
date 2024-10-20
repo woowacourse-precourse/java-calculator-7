@@ -19,7 +19,7 @@ public class CalculatorController {
 
     private Long calculate(String inputStr) {
         calculatorService.validateUserInput(inputStr);
-        List<String> splitStrBySeparators = calculatorService.splitStrBySeparators(inputStr);
+        String[] splitStrBySeparators = calculatorService.splitStrBySeparators(inputStr);
         List<Long> numberList = calculatorService.makeNumberList(splitStrBySeparators);
         return calculatorService.sum(numberList);
     }

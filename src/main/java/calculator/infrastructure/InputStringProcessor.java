@@ -2,10 +2,8 @@ package calculator.infrastructure;
 
 import calculator.exception.InvalidInputStrException;
 import calculator.exception.InvalidSeparatorException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class InputStringProcessor {
@@ -45,25 +43,12 @@ public class InputStringProcessor {
         return inputStr;
     }
 
-    // TODO: 리팩토링
-    public List<String> splitStrBySeparator(Set<Character> separators, String slicedStr) {
-        List<String> splitStrList = new ArrayList<>();
-        StringBuilder sb = new StringBuilder();
-
-        for (char c : slicedStr.toCharArray()) {
-            if (separators.contains(c)) {
-                if (!sb.isEmpty()) {
-                    splitStrList.add(sb.toString());
-                    sb.setLength(INIT_SIZE_IN_SPLIT_STR);
-                }
-                continue;
-            }
-            sb.append(c);
-        }
-        if (!sb.isEmpty()) {
-            splitStrList.add(sb.toString());
-        }
-        return splitStrList;
+    public String[] splitStrBySeparator(Set<Character> separators, String slicedStr) {
+        String delimiter = getDelimiter(separators);
+        String[] splitStr = slicedStr.split(delimiter);
+        return Arrays.stream(splitStr)
+                .filter(str -> !str.trim().isEmpty())
+                .toArray(String[]::new);
     }
 
     private void validateInputStrHasNoSpaces(String inputStr) {
@@ -86,5 +71,18 @@ public class InputStringProcessor {
         if (Character.isDigit(separator)) {
             throw new InvalidSeparatorException(separator);
         }
+    }
+
+    private String getDelimiter(Set<Character> separators) {
+        StringBuilder delimiter = new StringBuilder();
+        delimiter.append("[");
+        for (Character separator : separators) {
+            if (separator == '-' || separator == '[' || separator == ']') {
+                delimiter.append("\\");
+            }
+            delimiter.append(separator);
+        }
+        delimiter.append("]");
+        return delimiter.toString();
     }
 }
