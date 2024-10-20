@@ -20,7 +20,7 @@ public class DelimiterService { // 코드 실행 제어 서비스 클래스
             customDelimiter = CheckInput(input, customDelimiter); // 입력 유효성
             sumResult = SumInput(input, customDelimiter); // 숫자의 합
         } catch (CustomDelimiterException e) {
-            System.out.println("[커스텀 문자 지정 오류] 메시지: " + e.getMessage());
+            throw new IllegalArgumentException();
         }
 
         return sumResult;
