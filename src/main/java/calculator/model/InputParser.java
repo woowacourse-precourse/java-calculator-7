@@ -68,7 +68,6 @@ public class InputParser {
 		List<Integer> numbers = new ArrayList<>();
 		Arrays.stream(splitParts)
 			.map(String::trim)
-			.map(this::replaceBlankWithZero)
 			.forEach(part -> {
 				inputValidator.validateDigit(part);
 				inputValidator.validateNumberPositive(part);
@@ -76,14 +75,6 @@ public class InputParser {
 			});
 
 		return numbers;
-	}
-
-	private String replaceBlankWithZero(String part) {
-		if (part.isBlank()) {
-			return "0";
-		}
-
-		return part;
 	}
 
 	/**
