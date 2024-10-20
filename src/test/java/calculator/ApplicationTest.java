@@ -11,7 +11,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
-            run("//;\\n1");
+            run("//;\\n1,2,3");
             assertThat(output()).contains("결과 : 1");
         });
     }
@@ -57,22 +57,6 @@ class ApplicationTest extends NsTest {
                 .isInstanceOf(IllegalArgumentException.class)
         );
     }
-
-//    @Test
-//    void 입력_테스트(){ //입력이 제대로 받아지는지 테스트
-//        assertSimpleTest(() -> {
-//            run("//;\\n1");
-//            assertThat(output()).contains("입력 문자열 : " + "//;\\n1");
-//        });
-//    }
-//
-//    @Test
-//    void 숫자_추출_테스트(){ //입력 문자열에서 숫자가 제대로 추출이 되는지 테스트
-//        assertSimpleTest(() -> {
-//            run("1,2:3,4");
-//            assertThat(output()).contains("숫자: [1, 4, 2, 3]");
-//        });
-//    }
 
     @Override
     public void runMain() {

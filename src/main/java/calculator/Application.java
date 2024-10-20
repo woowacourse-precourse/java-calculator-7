@@ -12,7 +12,7 @@ public class Application {
         String st = inputString.input();
 
         Parser parser = new Parser(st);
-        List<Integer> numbers = parser.getNumbers();
+        List<Integer> numbers = parser.extractNumber();
 
         Add add = new Add();
         Integer sum = add.addNum(numbers);
