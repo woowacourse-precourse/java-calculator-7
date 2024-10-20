@@ -12,8 +12,12 @@ public class StringSplitter {
 
     public String[] split(String input) {
         String customDelimiter = delimiterValidator.getCustomDelimiter(input);
-        customDelimiter = Pattern.quote(customDelimiter);
 
-        return input.split("[" + DEFAULT_DELIMITERS + customDelimiter + "]", -1);
+        if (customDelimiter.isEmpty()) {
+            return input.split("[" + DEFAULT_DELIMITERS + "]", -1);
+        }
+
+        customDelimiter = Pattern.quote(customDelimiter);
+        return input.substring(5).split("[" + DEFAULT_DELIMITERS + customDelimiter + "]", -1);
     }
 }
