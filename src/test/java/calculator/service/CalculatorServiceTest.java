@@ -201,5 +201,15 @@ class CalculatorServiceTest {
         assertEquals(expected, result);
     }
 
-
+    @DisplayName("커스텀 구분자가 없는 경우 성공 로직 테스트")
+    @ParameterizedTest
+    @CsvSource({
+            "'//\n1,2,3', 6",   // 커스텀 구분자가 없고 쉼표 구분자 사용
+            "'//\n1:2:3', 6",   // 커스텀 구분자가 없고 콜론 구분자 사용
+            "'//\n4,5:6', 15"   // 커스텀 구분자가 없고 쉼표와 콜론 혼합 사용
+    })
+    void add_withEmptyCustomDelimiter_returnsSum(String input, int expectedSum) {
+        int result = CalculatorService.add(input);
+        assertEquals(expectedSum, result);
+    }
 }
