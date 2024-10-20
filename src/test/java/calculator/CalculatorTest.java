@@ -9,7 +9,7 @@ public class CalculatorTest {
     void 기본구분자입력(){
         //given
         String input1 = "1,2,3";
-        String input2 = "1,2,3";
+        String input2 = "1,2:3";
 
         //when
         int result1 = calculator.calculate(input1);
