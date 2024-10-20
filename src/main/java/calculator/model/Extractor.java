@@ -51,6 +51,14 @@ public class Extractor {
         }
     }
 
+    private List<Long> splitAndTrimNumbers(String input) {
+        String[] numbers = input.split("[,:]");
+        List<Long> result = new ArrayList<>();
+        for (String number : numbers) {
+            number = number.trim();
+        return result;
+    }
+
     }
 
 }
