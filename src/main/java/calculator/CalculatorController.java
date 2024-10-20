@@ -24,6 +24,10 @@ public class CalculatorController {
     }
 
     private static void checkString(String inputString) {
+        if (inputString.isEmpty()) {
+            calculatorView.printResult(0);
+        }
+
         if (delimiters.stream().anyMatch(d -> inputString.startsWith(String.valueOf(d))) ||
                 delimiters.stream().anyMatch(d -> inputString.endsWith(String.valueOf(d)))) {
             throw new IllegalArgumentException("문자열을 잘못 입력하였습니다.");
