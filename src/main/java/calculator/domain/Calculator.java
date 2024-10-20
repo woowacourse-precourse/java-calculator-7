@@ -6,8 +6,8 @@ import java.util.Set;
 
 public class Calculator {
 
-    private ArrayList<Integer> numbers;
-    private Set<String> seperators;
+    private final ArrayList<Integer> numbers;
+    private final Set<String> seperators;
 
     public Calculator() {
         numbers = new ArrayList<>();
@@ -17,7 +17,7 @@ public class Calculator {
     }
 
     public void addNumber(String number) {
-        numbers.add(Integer.parseInt(number));
+        numbers.add(Integer.parseInt(number.trim()));
     }
 
     public void addSeperator(String seperator) {
@@ -30,7 +30,7 @@ public class Calculator {
 
     public int calculate() {
         int result = 0;
-        for(int number : numbers) {
+        for (int number : numbers) {
             result += number;
         }
         return result;
