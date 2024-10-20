@@ -8,6 +8,7 @@ public class ConsoleInputHandler implements InputHandler {
 
     @Override
     public String getUserInput() {
+        //인풋을 위한 메시지 출력 view 호출
         consoleView.displayInputMessage();
         return Console.readLine();
     }
