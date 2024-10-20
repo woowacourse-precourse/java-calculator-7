@@ -8,6 +8,7 @@ public class Validator {
         checkContainsNegative(userInput, delimiter);
         checkContainsInvalidDelimiter(numbers, delimiter);
         checkNumbersOnly(userInput);
+        checkDelimitersOnly(numbers);
     }
 
     private void checkContainsNegative(String userInput, String delimiter) {
@@ -36,6 +37,12 @@ public class Validator {
             }
         }
         throw new IllegalArgumentException("숫자만 입력되었습니다.");
+    }
+
+    private void checkDelimitersOnly(List<String> numbers) {
+        if (numbers.size() == 0) {
+            throw new IllegalArgumentException("구분자만 입력되었습니다.");
+        }
     }
 
     private boolean isNumeric(String target) {
