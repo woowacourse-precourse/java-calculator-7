@@ -32,13 +32,21 @@
     - 사용자가 잘못된 값을 입력할 경우 `IllegalArgumentException`을 발생시킨 후 애플리케이션은 종료되어야 한다.
     - 숫자 영역에 양수가 아닌 값이 포함된 경우도 잘못된 값으로 간주한다.
     - 커스텀 구분자 지정 양식에 어긋난 경우도 잘못된 값으로 간주한다.
-      (`//`이후에 `\n`이 나타나지 않는 경우, 커스텀 구분자가 `문자`가 아닌 `문자열`로 주어진 경우)
+        - `//`이후에 `\n`이 나타나지 않는 경우
+        - 커스텀 구분자가 `문자`가 아닌 `문자열`로 주어진 경우
+        - 커스텀 구분자가 공백인 경우
+        - 커스텀 구분자가 숫자인 경우
     - 예시:
         - 입력: `"-1,2,3"` -> `IllegalArgumentException` 발생
         - 입력: `"//;\n-1;2;3"` -> `IllegalArgumentException` 발생
         - 입력: `"1,a,2"` -> `IllegalArgumentException` 발생
         - 입력: `"//;1;2"` -> `IllegalArgumentException` 발생
         - 입력: `"//?!\n1"` -> `IllegalArgumentException` 발생
+        - 입력: `"//\n"` -> `IllegalArgumentException` 발생
+        - 입력: `"//1\n1,12"` -> `IllegalArgumentException` 발생
+      
+    + 입력에 공백이 포함된 경우 공백 제거 (`1 , 2` => `1,2`)
+   
 
 ## 개발 환경
 - **Java** 21

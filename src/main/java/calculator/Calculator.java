@@ -21,7 +21,7 @@ public class Calculator {
         for(String token : tokens){
             // 빈 문자열이 아닌 경우에만 처리
             if(!token.isEmpty())
-                sum += Integer.parseInt(token);
+                sum += InputValidator.validateParseInt(token);
         }
         return sum;
     }
