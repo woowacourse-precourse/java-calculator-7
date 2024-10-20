@@ -86,7 +86,7 @@ public class MainService {
             result += numberList.get(i);
         }
         //숫자 단일로 나올 겨웅
-        if(numberList.size() == 0 && 48<=newStr.charAt(0) || newStr.charAt(0) <=57){
+        if(numberList.isEmpty() && 48<=newStr.charAt(0) && newStr.charAt(0) <=57){
             result = newStr.charAt(0) - 48;
         }
         return result;
