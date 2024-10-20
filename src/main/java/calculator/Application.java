@@ -8,38 +8,21 @@ public class Application {
         String inputText = Console.readLine();
         String separator = "";
         int totalSum = 0;
-        if (inputText.startsWith("//")) {
-            // "//"로 시작했기 때문에 "//문자\n" 형태여야 함. [5:]
-            try {
-                if (inputText.startsWith("\\n", 3)) {
-                    separator = inputText.substring(2, 3);
-                    String[] splitText = inputText.substring(5).split(separator);
-                    for (String num : splitText) {
-                        try {
-                            int inputNum = Integer.parseInt(num);
-                            if (inputNum <= 0) {
-                                System.out.println("입력 오류: 양수를 입력해주세요");
-                                throw new IllegalArgumentException();
-                            }
-                            totalSum += inputNum;
-                        } catch (NumberFormatException e) {
-                            System.out.println("입력 오류: 숫자를 입력해주세요");
-                            throw new IllegalArgumentException();
-                        }
+        if (isCustomSeparator(inputText)) {
+            separator = inputText.substring(2, 3);
+            String[] splitText = inputText.substring(5).split(separator);
+            for (String num : splitText) {
+                try {
+                    int inputNum = Integer.parseInt(num);
+                    if (inputNum <= 0) {
+                        System.out.println("입력 오류: 양수를 입력해주세요");
+                        throw new IllegalArgumentException();
                     }
-                }
-                else {
-                    // 에러 식별을 위한 확인
-                    if (inputText.contains("\\n")) {
-                        System.out.println("입력 오류: 커스텀 구분자 길이가 2 이상입니다.");
-                    } else {
-                        System.out.println("입력 오류: 커스텀 구분자 양식을 확인해주세요");
-                    }
+                    totalSum += inputNum;
+                } catch (NumberFormatException e) {
+                    System.out.println("입력 오류: 숫자를 입력해주세요");
                     throw new IllegalArgumentException();
                 }
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("입력 오류: 커스텀 구분자 양식을 확인해주세요");
-                throw new IllegalArgumentException();
             }
         } else {
             // 2. 커스텀 문자열로 시작하지 않는다면, 기본 구분자를 포함하는지 확인
@@ -66,5 +49,28 @@ public class Application {
             }
         }
         System.out.printf("결과 : %d\n", totalSum);
+    }
+
+    private static boolean isCustomSeparator(String inputText) {
+        if (inputText.startsWith("//")) {
+            try {
+                // "//문자\n" 형태라면 올바른 입력
+                if (inputText.startsWith("\\n", 3)) {
+                    return true;
+                } else {
+                    // 에러 식별
+                    if (inputText.contains("\\n")) {
+                        System.out.println("입력 오류: 커스텀 구분자가 두 글자 이상입니다.");
+                    } else {
+                        System.out.println("입력 오류: 올바른 커스텀 구분자 양식이 아닙니다.");
+                    }
+                    throw new IllegalArgumentException();
+                }
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("입력 오류: 커스텀 구분자 양식을 확인해주세요");
+                throw new IllegalArgumentException();
+            }
+        }
+        return false;
     }
 }
