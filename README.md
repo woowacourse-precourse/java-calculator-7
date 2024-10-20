@@ -79,4 +79,7 @@ main 메서드에서 예외를 캐치하여 예외 메시지를 출력합니다.
 1abc2abc4
 
 결과 : 7
+![11](https://github.com/user-attachments/assets/1f33fd05-c873-48f5-bac6-96fe5bad91f7)
+
+
 
