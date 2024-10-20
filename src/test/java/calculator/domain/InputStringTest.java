@@ -17,7 +17,8 @@ class InputStringTest {
         CustomDelimiter result = inputString.extractCustomDelimiter();
 
         //then
-        assertThat(result.getValue()).isEqualTo(";");
+        assertThat(result.getValue())
+                .isEqualTo(";");
     }
 
     @Test
@@ -43,6 +44,7 @@ class InputStringTest {
         CalculationString result = inputString.extractCalculationString();
 
         //then
-        assertThat(result.equals("34")).isTrue();
+        assertThat(result.equals("34"))
+                .isTrue();
     }
 }
