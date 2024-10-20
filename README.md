@@ -37,7 +37,7 @@
 ## Calculator Class
 
 - [x] 테스트 코드 작성
-- [ ] 로직에 필요한 객체 생성
+- [x] 로직에 필요한 객체 생성
 - [x] 빈 입력값 시, 결과값 0으로 처리 추가
 
 ## Application Class
