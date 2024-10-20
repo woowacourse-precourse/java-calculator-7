@@ -12,4 +12,8 @@ public enum DefaultDelimiter {
     public String getSymbol() {
         return symbol;
     }
+
+    public static boolean hasDefaultDelimiter(String input) {
+        return input.contains(COMMA.symbol) || input.contains(COLON.symbol);
+    }
 }
