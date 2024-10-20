@@ -15,17 +15,23 @@ public class InputValidator {
 		}
 	}
 
-	public void validateDigit(String s) {
+	public void validateDigit(String input) {
 		try {
-			Integer.parseInt(s);
+			Integer.parseInt(input);
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException("구분자 사이에 정수가 아닌 값이 포함되어 있습니다.");
 		}
 	}
 
-	public void validateNumberPositive(String s) {
-		if (Integer.parseInt(s) <= 0) {
+	public void validateNumberPositive(String input) {
+		if (Integer.parseInt(input) <= 0) {
 			throw new IllegalArgumentException("0 또는 음수가 포함되어 있습니다.");
+		}
+	}
+
+	public void validateEmpty(String input) {
+		if (input.isEmpty()) {
+			throw new IllegalArgumentException("커스텀 구분자에는 빈 문자열이 올 수 없습니다.");
 		}
 	}
 }

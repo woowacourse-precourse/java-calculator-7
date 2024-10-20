@@ -86,6 +86,7 @@ public class InputParser {
 			return Optional.empty();
 		}
 		String customDelimiter = parseCustomDelimiter(input);
+		inputValidator.validateEmpty(customDelimiter);
 
 		return Optional.of(customDelimiter);
 	}
