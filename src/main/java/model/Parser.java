@@ -15,6 +15,7 @@ public class Parser {
             return splitByCustomDelimiter(text);
         }
         return splitByDefaultDelimiter(text);
+
     }
 
     private boolean containsCustomDelimiter(String text) {
