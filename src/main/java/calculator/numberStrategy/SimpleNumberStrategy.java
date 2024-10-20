@@ -26,9 +26,12 @@ public class SimpleNumberStrategy implements NumberStrategy {
         return true;
     }
 
-    private List<Integer> parseInt(String[] splitResults) {
+    private List<Integer> parseInt(String[] splitResults) throws IllegalArgumentException {
         List<Integer> operands = new ArrayList<>();
         for (String splitResult : splitResults) {
+            if (splitResult.matches(".*\\D.*")) {
+                throw new IllegalArgumentException("양수 이외에 다른 문자가 들어왔다");
+            }
             Integer operand = Integer.parseInt(splitResult);
             operands.add(operand);
         }
