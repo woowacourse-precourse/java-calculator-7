@@ -33,7 +33,7 @@ public class Calculator {
 
     private static void checkEachInputIsValid() {
         for (String number : numbers) {
-            Validator.checkNumberIsValid(number);
+            Validator.checkIsNumberValid(number);
         }
     }
 
