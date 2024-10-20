@@ -16,22 +16,11 @@ public class Calculator {
             return new AdditionCalculator(InputView.inputString());
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return null;
+            throw new IllegalArgumentException("프로그램을 종료합니다.");
         }
     }
 
     public void add() {
-        try {
-            validateAdditionCalculator();
-            OutputView.printResult(additionCalculator.getResult());
-        } catch (IllegalArgumentException e) {
-            OutputView.printErrorMessage(e.getMessage());
-        }
-    }
-
-    private void validateAdditionCalculator() {
-        if (additionCalculator == null) {
-            throw new IllegalArgumentException("오류가 발생하여 애플리케이션을 종료합니다.");
-        }
+        OutputView.printResult(additionCalculator.getResult());
     }
 }
