@@ -10,7 +10,7 @@ public class ConsoleOutputHandler implements OutputHandler {
     }
 
     @Override
-    public void showAdditionResult(int calculateResult) {
+    public void showAdditionResult(long calculateResult) {
         System.out.println("결과 : " + calculateResult);
     }
 

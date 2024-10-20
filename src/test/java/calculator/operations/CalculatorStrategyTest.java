@@ -11,11 +11,11 @@ class CalculatorStrategyTest {
     @DisplayName("숫자를 모두 더한 후 결과를 반환한다.")
     void addCalculate() {
         // given
-        int[] numbers = {1, 2, 3};
+        long[] numbers = {1, 2, 3};
         Calculator calculator = new Calculator(new AdditionStrategy());
 
         // when
-        int result = calculator.execute(numbers);
+        long result = calculator.execute(numbers);
 
         // then
         assertThat(result).isEqualTo(6);

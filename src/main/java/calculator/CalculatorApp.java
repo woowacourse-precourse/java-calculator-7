@@ -46,7 +46,7 @@ public class CalculatorApp implements CalculatorRunnable {
             String numbersWithDelimiter = extractNumbersWithDelimiter(userInput, delimiterHandler);
             String[] splitNumbers = extractNumbersWithRegex(numbersWithDelimiter);
 
-            int result = calculator.execute(convertToIntArray(splitNumbers));
+            long result = calculator.execute(convertToLongArray(splitNumbers));
             outputHandler.showAdditionResult(result);
         } catch (CalculatorException e) {
             outputHandler.showExceptionMessage(e);
@@ -75,9 +75,11 @@ public class CalculatorApp implements CalculatorRunnable {
         return numbersWithDelimiter.split(delimiter.buildDelimiterRegex());
     }
 
-    private static int[] convertToIntArray(String[] splitNumbers) {
+    private long[] convertToLongArray(String[] splitNumbers) {
         try {
-            return Arrays.stream(splitNumbers).mapToInt(Integer::valueOf).toArray();
+            return Arrays.stream(splitNumbers)
+                    .mapToLong(Long::valueOf)
+                    .toArray();
         } catch (NumberFormatException e) {
             throw new CalculatorException("입력값 중 숫자로 변환할 수 없는 값이 포함되어 있습니다.");
         }

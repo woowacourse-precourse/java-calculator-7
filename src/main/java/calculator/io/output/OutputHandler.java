@@ -6,7 +6,7 @@ public interface OutputHandler {
 
     void showUserInputMessage();
 
-    void showAdditionResult(int calculateResult);
+    void showAdditionResult(long calculateResult);
 
     void showExceptionMessage(CalculatorException e);
 

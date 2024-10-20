@@ -8,7 +8,7 @@ public class Calculator {
         this.calculatorStrategy = calculatorStrategy;
     }
 
-    public int execute(int[] numbers) {
+    public long execute(long[] numbers) {
         return calculatorStrategy.calculate(numbers);
     }
 
