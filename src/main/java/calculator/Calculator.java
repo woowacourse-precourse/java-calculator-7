@@ -1,5 +1,6 @@
 package calculator;
 
+import java.awt.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,14 +17,20 @@ public class Calculator {
 
         if(input.startsWith("//")){
 
-            if (input.contains("\n")) {
-                delimiter = "["+input.substring(2, input.indexOf("n")-2)+"]";
-                input = input.substring(input.indexOf("n")+1);
+            System.out.println("original :" +input);
+
+            if(input.contains("\\n")){
+                delimiter = String.valueOf(input.charAt(2));
+                input = input.substring(5);
+                System.out.println("after: "+input);
             }
-            else {
+            else{
                 throw new IllegalArgumentException("잘못된 입력입니다: " + input);
             }
+
         }
+
+
         String[] tokens = input.split(delimiter); //쉼표나 콜론을 구분자로 분리
 
         int number;
