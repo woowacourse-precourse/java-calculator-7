@@ -23,6 +23,16 @@ public class Application {
         return true;
     }
 
+    // 커스텀 구분자 찾는 메서드, 유효하지 않을 시 기본 구분자 반환
+    public static String findCustomDelimiter(String input) {
+        String delimiter = ",|:";
+        if(validCustomDelimiter(input)){
+            delimiter = String.valueOf(input.charAt(2));
+        }
+        return delimiter;
+    }
+
+  
 
     public static String[] splitString(String input, String delimiter){
         return input.split(delimiter);
