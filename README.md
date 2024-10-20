@@ -100,37 +100,37 @@
 ```bash
 └── src
     ├── main
-    │   └── java
-    │       └── calculator
-    │           ├── Application.java
-    │           ├── Constants
-    │           │   ├── DelimiterConstants.java
-    │           │   ├── ErrorMessages.java
-    │           │   ├── InputMessages.java
-    │           │   └── OutputMessages.java
-    │           ├── Controller
-    │           │   └── CalculatorController.java
-    │           ├── Model
-    │           │   ├── Delimiter.java
-    │           │   ├── Number.java
-    │           │   ├── Numbers.java
-    │           │   └── OriginalInput.java
-    │           ├── Utils
-    │           │   ├── NumberUtils.java
-    │           │   └── StringSplitter.java
-    │           └── View
-    │               ├── InputView.java
-    │               └── OutputView.java
+    │  └── java
+    │      └── calculator
+    │          ├── Application.java
+    │          ├── constants
+    │          │   ├── DelimiterConstants.java
+    │          │   ├── ErrorMessages.java
+    │          │   ├── InputMessages.java
+    │          │   └── OutputMessages.java
+    │          ├── controller
+    │          │   └── CalculatorController.java
+    │          ├── model
+    │          │   ├── Delimiter.java
+    │          │   ├── Number.java
+    │          │   ├── Numbers.java
+    │          │   └── OriginalInput.java
+    │          ├── utils
+    │          │   ├── NumberUtils.java
+    │          │   └── StringSplitter.java
+    │          └── view
+    │              ├── InputView.java
+    │              └── OutputView.java
     └── test
         └── java
             └── calculator
                 ├── ApplicationTest.java
-                ├── Model
+                ├── model
                 │   ├── DelimiterTest.java
                 │   ├── NumberTest.java
                 │   └── NumbersTest.java
                 ├── MyApplicationTest.java
-                └── Utils
+                └── utils
                     ├── NumberUtilsTest.java
                     └── StringSplitterTest.java
 ```
