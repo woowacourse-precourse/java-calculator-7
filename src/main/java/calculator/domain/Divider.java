@@ -2,7 +2,7 @@ package calculator.domain;
 
 public class Divider {
     private final static String COMMA = ",";
-    private final static String CLON = ":";
+    private final static String COLON = ":";
     private String customDivider;
 
     public Divider() {
@@ -12,15 +12,15 @@ public class Divider {
         this.customDivider = customDivider;
     }
 
-    public String getComma(){
+    public String getComma() {
         return COMMA;
     }
 
-    public String getClon(){
-        return CLON;
+    public String getColon() {
+        return COLON;
     }
 
-    public String getCustomDivider(){
+    public String getCustomDivider() {
         return customDivider;
     }
 
