@@ -13,20 +13,30 @@ public class Application {
 
     private static int addNumbers(String input) {
         // 빈 문자열 처리
-        if (input.isEmpty()) {
+        if (input == null || input.isEmpty()) {
             return 0;
         }
 
-        // 사용자 정의 구분자 확인
-        String delimiter = "[,:]"; // 기본 구분자
-        if (input.startsWith("//")) {
-            delimiter = input.substring(2, 3);
-            // 사용자 정의 구분자가 여러 문자일 수 있으므로 정규 표현식으로 감싸기
-            input = input.substring(5); // 문자열에서 구분자 부분 제거
+        input = input.replace("\\n", "\n");
+
+        // 기본 구분자 설정
+        String delimiter = "[,:]";
+        if (input.startsWith("//") && input.contains("\n")) {
+            int delimiterIdx = input.indexOf("\n");
+            String customDelimiter = input.substring(2, delimiterIdx);
+            input = input.substring(delimiterIdx + 1); // 구분자 부분 제거
+
+            // 커스텀 구분자로 문자열을 분리
+            String[] numbers = input.split(customDelimiter);
+            return sumNumbers(numbers);
         }
 
-        // 구분자를 사용하여 숫자 분리
+        // 기본 구분자로 숫자 분리
         String[] numbers = input.split(delimiter);
+        return sumNumbers(numbers);
+    }
+
+    private static int sumNumbers(String[] numbers) {
         int sum = 0;
 
         for (String number : numbers) {
@@ -37,15 +47,15 @@ public class Application {
         return sum;
     }
 
-
     private static int parseNumber(String number) {
         if (number.isEmpty()) {
             return 0; // 빈 문자열일 경우 0으로 처리
         }
+
         try {
             int num = Integer.parseInt(number);
             if (num < 0) {
-                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + num);
+                throw new IllegalArgumentException("음수입니다. " + num);
             }
             return num;
         } catch (NumberFormatException e) {
