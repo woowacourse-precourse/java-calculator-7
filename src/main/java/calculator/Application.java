@@ -68,6 +68,10 @@ class Calculator {
         for (String number : numbers) {
             int value = Integer.parseInt(number.trim());
 
+            if (value <= 0){
+                throw new IllegalArgumentException();
+            }
+
             sum += value;
         }
 
