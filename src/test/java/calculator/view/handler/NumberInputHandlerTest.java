@@ -132,8 +132,6 @@ public class NumberInputHandlerTest {
     void onlyTextTest() {
         String s = "n";
         String s2 = "//n\\s";
-        String s3 = "n0.1";
-        String s4 = "//n\\s0.1";
 
         assertThatThrownBy(() -> new NumberInputHandler(new InputTest(s))
                 .receive(Sentence::new))
@@ -141,16 +139,6 @@ public class NumberInputHandlerTest {
                 .hasMessage(ErrorMessage.REGEX_ERROR);
 
         assertThatThrownBy(() -> new NumberInputHandler(new InputTest(s2))
-                .receive(Sentence::new))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.REGEX_ERROR);
-
-        assertThatThrownBy(() -> new NumberInputHandler(new InputTest(s3))
-                .receive(Sentence::new))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.REGEX_ERROR);
-
-        assertThatThrownBy(() -> new NumberInputHandler(new InputTest(s4))
                 .receive(Sentence::new))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.REGEX_ERROR);
@@ -223,10 +211,13 @@ public class NumberInputHandlerTest {
                 .hasMessage(ErrorMessage.MAX_VALUE_ERROR);
     }
     @Test
-    @DisplayName("0만 있을 경우")
+    @DisplayName("0이 있을 경우 part1")
     void zeroTest() {
         String s = "0";
-        String s2 = "0.0";
+        String s2 = "1,213:0";
+
+        String s3 = "0.0";
+        String s4 = "0.123123,0.0";
         assertThatThrownBy(() -> new NumberInputHandler(new InputTest(s))
                 .receive(Sentence::new))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -236,9 +227,20 @@ public class NumberInputHandlerTest {
                 .receive(Sentence::new))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.REGEX_ERROR);
+
+
+        assertThatThrownBy(() -> new NumberInputHandler(new InputTest(s3))
+                .receive(Sentence::new))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.REGEX_ERROR);
+
+        assertThatThrownBy(() -> new NumberInputHandler(new InputTest(s4))
+                .receive(Sentence::new))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.REGEX_ERROR);
     }
     @Test
-    @DisplayName("0이 먼저 나올 경우")
+    @DisplayName("0이 있을 경우 part2")
     void startsWithZeroTest() {
         String s = "0,2,3";
         String s2 = "//s\\n0s2s3";
@@ -289,7 +291,10 @@ public class NumberInputHandlerTest {
     @DisplayName("숫자만 있을 경우")
     void NumberTest() {
         String s = "123";
+        String s2 = "5.123";
         new NumberInputHandler(new InputTest(s)).receive(Sentence::new);
+        new NumberInputHandler(new InputTest(s2)).receive(Sentence::new);
+
     }
     @Test
     @DisplayName("기본 구분자")
