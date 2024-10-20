@@ -10,7 +10,7 @@ public class Application {
 
         Character customSeparator = SeparatorManager.getCustomSeparator(input);
         if(customSeparator != null) {
-            input = input.substring(4);
+            input = input.substring(5);
         }
 
         List<String> numbers = new SeparatorManager(customSeparator).getSeparatedStringNumber(input);

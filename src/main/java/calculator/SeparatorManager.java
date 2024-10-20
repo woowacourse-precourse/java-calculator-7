@@ -22,7 +22,7 @@ public class SeparatorManager {
     }
 
     public static Character getCustomSeparator(String Input) {
-        if(Input.startsWith("//") && Input.charAt(3)=='\n'){
+        if(Input.startsWith("//") && Input.startsWith("\\n", 3)){
             return Input.charAt(2);
         }
         return null;
