@@ -2,6 +2,19 @@ package calculator;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        StringCalculator calculator = new StringCalculator();
+
+        try {
+            calculator.getUserInput();
+            calculator.removeBlank();
+            calculator.addCustomDivider();
+            calculator.removeDividerSettings();
+            calculator.makeStringForToken();
+            calculator.extractNumbers();
+            calculator.sum();
+            calculator.printResult();
+        } catch (IllegalArgumentException illegalArgumentException) {
+            throw illegalArgumentException;
+        }
     }
 }
