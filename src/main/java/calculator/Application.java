@@ -19,4 +19,12 @@ public class Application {
     private static boolean hasCustomDelimiter(String input) {
         return input.startsWith("//");
     }
+
+    private static String extractCustomDelimiter(String input) {
+        int delimiterEndIndex = input.indexOf("\\n");
+        if (delimiterEndIndex == -1) {
+            throw new IllegalArgumentException("잘못된 입력 형식입니다. 커스텀 구분자는 //과 \\n을 포함해야 합니다.");
+        }
+        return escapeSpecailCharactersInDelimiter(input.substring(2, delimiterEndIndex));
+    }
 }
