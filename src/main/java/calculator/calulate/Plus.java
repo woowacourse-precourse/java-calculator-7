@@ -12,7 +12,10 @@ public class Plus {
             if (isListSizeOne(numbers)) {
                 result = numbers.get(0);
             } else {
-                result = String.valueOf(getResultForInteger(numbers));
+                Integer resultForInteger = getResultForInteger(numbers);
+                isArithmeticExceptionThenThrowException(resultForInteger);
+
+                result = String.valueOf(resultForInteger);
             }
         } catch (NumberFormatException | ArithmeticException e) {
             result = getResultForBigInteger(numbers).toString();
@@ -31,6 +34,12 @@ public class Plus {
 
     private boolean isListSizeOne(List<String> numbers) {
         return numbers.size() == 1;
+    }
+
+    private void isArithmeticExceptionThenThrowException(Integer integer) {
+        if (integer < 0) {
+            throw new ArithmeticException();
+        }
     }
 
 }

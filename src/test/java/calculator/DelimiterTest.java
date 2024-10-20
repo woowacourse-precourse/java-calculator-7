@@ -30,6 +30,26 @@ public class DelimiterTest extends NsTest {
         });
     }
 
+    @Test
+    @DisplayName("음수가 들어있을 경우 예외 발생")
+    void NotMinus() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> run("1:-2:3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage("0 또는 음수를 입력할 수 없습니다.")
+        );
+    }
+
+    @Test
+    @DisplayName("0을 입력할 경우 예외 발생")
+    void NotZero() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> run("1:-2:3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage("잘못된 문자가 들어있습니다.")
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});

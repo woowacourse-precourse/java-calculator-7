@@ -62,7 +62,7 @@ public class CustomDelimiter extends Delimiter {
     @Override
     protected List<String> divideByDelimiter(String s) {
         return Arrays.stream(s.split(makeRegexByDelimiter()))
-                .map(str -> str.isEmpty() ? "0" : str)
+                .map(this::isZeroThenThrow)
                 .toList();
     }
 

@@ -14,7 +14,7 @@ public class Input {
     private String validateInput(String input) {
 
         if (isNull(input) || isInputBlank(input)) {
-            CalculatorException.causeException("띄어쓰기를 포함시킬 수 없습니다.");
+            CalculatorException.causeException("띄어쓰기만 입력할 수 없습니다.");
         }
 
         input = input.replace("\\n", "\n");

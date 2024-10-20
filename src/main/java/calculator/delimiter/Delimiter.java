@@ -59,9 +59,25 @@ public abstract class Delimiter {
         return s.matches("\\d+"); //부호 포함x
     }
 
+    public boolean isZero(String s) {
+        return s != null && s.equals("0");
+    }
+
+    public String isZeroThenThrow(String s) {
+        if (isZero(s)) {
+            CalculatorException.causeException("0 또는 음수를 입력할 수 없습니다.");
+        }
+
+        return isEmptyThenReturnZero(s);
+    }
+
+    public String isEmptyThenReturnZero(String s) {
+        return s.isEmpty() ? "0" : s;
+    }
+
     protected List<String> divideByDelimiter(String s) {
         return Arrays.stream(s.split("[:,]"))
-                .map(str -> str.isEmpty() ? "0" : str)
+                .map(this::isZeroThenThrow)
                 .toList();
     }
 
