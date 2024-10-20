@@ -10,6 +10,10 @@ public class NumberParser {
         String calculation = request.calculation();
         String delimiters = request.delimiters();
 
+        if (calculation.isEmpty()) {
+            return List.of(0);
+        }
+
         String[] tokens = splitByDelimiters(calculation, delimiters);
         List<Integer> numbers = new ArrayList<>();
 
@@ -25,6 +29,14 @@ public class NumberParser {
     }
 
     private static int parseToInt(String number) {
-        return Integer.parseInt(number.trim());
+        try {
+            int parsedNumber = Integer.parseInt(number.trim());
+            if (parsedNumber < 0) {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            }
+            return parsedNumber;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("유효하지 않은 입력입니다: " + number);
+        }
     }
 }
