@@ -8,7 +8,7 @@ public class CalculatorController {
     public int processInput(String input) {
         String[] numbers = separatorHandler.getSeparatedNumbers(input);
 
-        ArrayNullChecker.checkNumbersNull(numbers);
+        InputHandler.checkNumbersNull(numbers);
 
         return calculator.getTotal(numbers);
     }

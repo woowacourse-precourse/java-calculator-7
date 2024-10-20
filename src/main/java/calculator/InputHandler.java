@@ -17,4 +17,10 @@ public class InputHandler {
             throw new IllegalArgumentException("빈 입력값");
         }
     }
+
+    public static void checkNumbersNull(String[] numbers) {
+        if (numbers == null || numbers.length == 0) {
+            throw new IllegalArgumentException("숫자 X");
+        }
+    }
 }
