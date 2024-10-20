@@ -13,11 +13,11 @@ class CustomDelimiterHandlerTest {
     @Test
     @DisplayName("//와 \n 사이에 하나 이상의 구분자 문자가 포함되어야 한다.")
     void when_custom_delimiter_is_between_double_slash_and_newline_then_return_true() {
-        assertThat(handler.isSupport("//;\\n1;2;3")).isTrue();
-        assertThat(handler.isSupport("//;\\n1")).isTrue();
-        assertThat(handler.isSupport("//;\\n")).isTrue();
-        assertThat(handler.isSupport("//\\n")).isFalse();
-        assertThat(handler.isSupport("")).isFalse();
+        assertThat(handler.supports("//;\\n1;2;3")).isTrue();
+        assertThat(handler.supports("//;\\n1")).isTrue();
+        assertThat(handler.supports("//;\\n")).isTrue();
+        assertThat(handler.supports("//\\n")).isFalse();
+        assertThat(handler.supports("")).isFalse();
     }
 
     @Test

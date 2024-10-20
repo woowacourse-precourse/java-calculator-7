@@ -11,7 +11,7 @@ public class CustomDelimiterHandler implements DelimiterHandler {
 
     @Override
     public List<String> split(String str) {
-        if (!isSupport(str)) {
+        if (!supports(str)) {
             throw new IllegalArgumentException("형식이 일치하지 않습니다.");
         }
         String delimiter = extractDelimiter(str);
@@ -21,7 +21,7 @@ public class CustomDelimiterHandler implements DelimiterHandler {
         if (str.isEmpty()) {
             return new ArrayList<>();
         }
-        
+
         if (!str.matches("\\d+(?:" + Pattern.quote(delimiter) + "\\d+)*")) {
             throw new IllegalArgumentException("형식이 일치하지 않습니다.");
         }
@@ -31,7 +31,7 @@ public class CustomDelimiterHandler implements DelimiterHandler {
     }
 
     @Override
-    public boolean isSupport(String str) {
+    public boolean supports(String str) {
         return !str.isEmpty() && str.matches("^//.\\\\n.*");
     }
 

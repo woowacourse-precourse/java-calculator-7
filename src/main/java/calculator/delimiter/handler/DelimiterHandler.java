@@ -3,7 +3,8 @@ package calculator.delimiter.handler;
 import java.util.List;
 
 public interface DelimiterHandler {
-    List<String> split(String str) throws IllegalArgumentException;
+    List<String> split(String str);
 
-    boolean isSupport(String string);
+    boolean supports(String str);
 }
+

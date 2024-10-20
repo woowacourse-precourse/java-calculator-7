@@ -19,7 +19,7 @@ class NoDelimiterHandlerTest {
         List<String> stringList = handler.split(str);
 
         // then
-        assertThat(handler.isSupport(str)).isTrue();
+        assertThat(handler.supports(str)).isTrue();
         assertThat(stringList.isEmpty()).isTrue();
     }
 
@@ -33,7 +33,7 @@ class NoDelimiterHandlerTest {
         List<String> stringList = handler.split(str);
 
         // then
-        assertThat(handler.isSupport(str)).isTrue();
+        assertThat(handler.supports(str)).isTrue();
         assertThat(stringList).hasSize(1)
                 .containsExactly("1234");
     }
@@ -47,8 +47,8 @@ class NoDelimiterHandlerTest {
         String str3 = "//-\\n1-2-3-4";
 
         // when, then
-        assertThat(handler.isSupport(str1)).isFalse();
-        assertThat(handler.isSupport(str2)).isFalse();
-        assertThat(handler.isSupport(str3)).isFalse();
+        assertThat(handler.supports(str1)).isFalse();
+        assertThat(handler.supports(str2)).isFalse();
+        assertThat(handler.supports(str3)).isFalse();
     }
 }

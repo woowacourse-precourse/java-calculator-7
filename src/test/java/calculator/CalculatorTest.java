@@ -26,6 +26,7 @@ class CalculatorTest {
         String s8 = "//-\\n4-5-6";
         String s9 = "// \\n4 5 6";
         String s10 = "//|\\n7";
+        String s11 = "//\\\\n7\\8";
 
         assertThat(calculator.sum(s1)).isEqualTo(10);
         assertThat(calculator.sum(s2)).isEqualTo(1110);
@@ -37,6 +38,7 @@ class CalculatorTest {
         assertThat(calculator.sum(s8)).isEqualTo(15);
         assertThat(calculator.sum(s9)).isEqualTo(15);
         assertThat(calculator.sum(s10)).isEqualTo(7);
+        assertThat(calculator.sum(s11)).isEqualTo(15);
     }
 
     @Test

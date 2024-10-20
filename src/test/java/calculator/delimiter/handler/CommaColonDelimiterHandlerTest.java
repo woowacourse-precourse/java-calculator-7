@@ -13,11 +13,11 @@ class CommaColonDelimiterHandlerTest {
     @Test
     @DisplayName("support() 메서드는 구분자로 ,와 :만 들어올 수 있다.")
     void when_delimiter_is_comma_or_colon_then_return_true() {
-        assertThat(handler.isSupport(",,,")).isTrue();
-        assertThat(handler.isSupport(":::")).isTrue();
-        assertThat(handler.isSupport(",:")).isTrue();
-        assertThat(handler.isSupport(",:;")).isFalse();
-        assertThat(handler.isSupport("!@#$%^&*()")).isFalse();
+        assertThat(handler.supports(",,,")).isTrue();
+        assertThat(handler.supports(":::")).isTrue();
+        assertThat(handler.supports(",:")).isTrue();
+        assertThat(handler.supports(",:;")).isFalse();
+        assertThat(handler.supports("!@#$%^&*()")).isFalse();
     }
 
     @Test

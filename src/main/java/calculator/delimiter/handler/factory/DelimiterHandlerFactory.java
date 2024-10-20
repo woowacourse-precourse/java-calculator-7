@@ -19,7 +19,7 @@ public class DelimiterHandlerFactory {
 
     public DelimiterHandler getHandler(String str) {
         for (DelimiterHandler handler : handlers) {
-            if (handler.isSupport(str)) {
+            if (handler.supports(str)) {
                 return handler;
             }
         }

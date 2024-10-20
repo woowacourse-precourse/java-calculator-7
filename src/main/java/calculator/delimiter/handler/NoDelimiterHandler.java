@@ -6,7 +6,7 @@ import java.util.List;
 public class NoDelimiterHandler implements DelimiterHandler {
     @Override
     public List<String> split(String str) {
-        if (!isSupport(str)) {
+        if (!supports(str)) {
             throw new IllegalArgumentException("형식이 일치하지 않습니다.");
         }
         List<String> ret = new ArrayList<>();
@@ -18,7 +18,7 @@ public class NoDelimiterHandler implements DelimiterHandler {
 
     // 문자열이 비어있거나, 양수만 포함하는 문자열이 들어오는 경우 처리한다.
     @Override
-    public boolean isSupport(String str) {
+    public boolean supports(String str) {
         return str.isEmpty() || str.matches("\\d+");
     }
 }
