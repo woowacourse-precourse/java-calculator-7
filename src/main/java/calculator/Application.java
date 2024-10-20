@@ -9,13 +9,19 @@ public class Application {
     private static final String CUSTOM_DELIMITER_SUFFIX = "\\n"; // 커스텀 구분자 접미사
 
     public static void main(String[] args) {
-        // 사용자 입력 받기
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = Console.readLine();
+        try { //TODO: 제출할 땐 try-catch 블록을 제거
+            // 사용자 입력 받기
+            System.out.println("덧셈할 문자열을 입력해 주세요.");
+            String input = Console.readLine();
 
-        // 계산 결과 출력
-        int result = calculate(input);
-        System.out.println("결과 : " + result);
+            // 계산 결과 출력
+            int result = calculate(input);
+            System.out.println("결과 : " + result);
+        } catch (IllegalArgumentException e) {
+            // 예외 발생 시 예외 메시지와 stack trace 출력
+            System.err.println("예외 발생: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -45,6 +51,9 @@ public class Application {
             numbers = split(input, DEFAULT_DELIMITERS);
         }
 
+        // 숫자 배열 및 입력에 대한 유효성 검사
+        validateInput(numbers, input);
+
         return sum(numbers);
     }
 
@@ -71,5 +80,21 @@ public class Application {
             result += Integer.parseInt(number);
         }
         return result;
+    }
+
+    /**
+     * 입력값을 검증하는 메소드
+     *
+     * @param numbers 분리된 숫자 배열
+     * @param input   원본 입력 문자열
+     */
+    private static void validateInput(String[] numbers, String input) {
+        // 음수 입력 검증
+        for (String number : numbers) {
+            int num = Integer.parseInt(number);
+            if (num < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+            }
+        }
     }
 }
