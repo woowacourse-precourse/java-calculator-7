@@ -17,13 +17,8 @@ public class StringCalculator {
     }
 
     private String validateStringCalculator(String input) {
-        if (input.isBlank()) {
+        if (input == null || input.isBlank()) {
             return "0";
-        }
-
-        if (input == null) {
-            //INPUT_NULL.getMessage()
-            throw new IllegalArgumentException();
         }
 
         return input;
