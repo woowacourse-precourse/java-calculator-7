@@ -24,8 +24,12 @@ public class Application {
         String[] tokens = numbers.split(delimiter);
         int sum = 0;
 
-        for (String token : tokens) {
-            sum += Integer.parseInt(token);
+        try {
+            for (String token : tokens) {
+                sum += Integer.parseInt(token);
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
         }
 
         return sum;
@@ -35,7 +39,11 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
-        int result = add(input);
-        System.out.println("결과 : " + result);
+        try {
+            int result = add(input);
+            System.out.print("결과 : " + result);
+        } catch (IllegalArgumentException e) {
+            return;
+        }
     }
 }
