@@ -26,7 +26,7 @@ public class CalcModel {
     }
 
     public int sumWithCustomDelimiter(String inputString) {
-        Matcher matcher = Pattern.compile("//(.*)\n(.*)").matcher(inputString);
+        Matcher matcher = Pattern.compile("//(.*)\\\\n(.*)").matcher(inputString);
         if (!matcher.matches())
             throw new IllegalArgumentException(DELIMITER_NOT_VALID);
 
