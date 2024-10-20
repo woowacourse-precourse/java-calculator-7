@@ -9,7 +9,7 @@ public class Delimiter {
     }
 
     public static String extractDelimiter(String input) {
-        int delimiterEndIndex = input.indexOf("\n");
+        int delimiterEndIndex = input.indexOf("\\n");
 
         if (delimiterEndIndex == -1) {
             throw new IllegalArgumentException();
