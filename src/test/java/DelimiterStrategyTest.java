@@ -31,7 +31,7 @@ public class DelimiterStrategyTest {
         //when //then
         IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
                 () -> delimiterStrategy.decideDelimiter("//6\n1"));
-        assertThat(e.getMessage()).isEqualTo("커스텀 구분자는 숫자 제외 문자만 가능하다");
+        assertThat(e.getMessage()).isEqualTo("커스텀 구분자는 숫자를 포함하면 안 된다");
     }
 
     @ParameterizedTest
