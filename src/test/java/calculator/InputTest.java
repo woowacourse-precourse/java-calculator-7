@@ -65,6 +65,15 @@ public class InputTest extends NsTest {
         });
     }
 
+    @Test
+    @DisplayName("구분자가 연속해서 나오는 케이스")
+    void againSeparator() {
+        assertSimpleTest(() -> {
+            run("1,2:,:4:5");
+            assertThat(output()).contains(OUTPUT_MESSAGE + "12");
+        });
+    }
+
     @Override
     protected void runMain() {
         Application.main(new String[]{});
