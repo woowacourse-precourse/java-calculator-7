@@ -5,9 +5,9 @@ public class CalculatorService {
     /**
      * 사용자로부터 얻어온 String을 계산하는 로직
      */
-    public int calculate(String inputString){
+    public Number calculate(String inputString){
 
-        int sum =0;
+        double sum =0.0; //총합
 
         String[] cal;
         String delim = "[,:]";
@@ -23,7 +23,7 @@ public class CalculatorService {
 
         for(String num : cal){
             try{
-                int number = Integer.parseInt(num);
+                double number = Double.parseDouble(num);
 
                 if(number<0){
                     throw new IllegalStateException("양수를 입력해주세요");
@@ -35,7 +35,12 @@ public class CalculatorService {
             }
         }
 
-        return sum;
+        //합계가 정수형인지 실수형인지 판단
+        if(sum %1 ==0){
+            return (int)sum;
+        }else{
+            return sum;
 
+        }
     }
 }

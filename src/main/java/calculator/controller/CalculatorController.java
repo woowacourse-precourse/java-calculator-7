@@ -22,7 +22,7 @@ public class CalculatorController {
      */
     public void start(){
         String inputString = InputStringFromInputView();
-        int result = calculatorService.calculate(inputString);
+        Number result = calculatorService.calculate(inputString);
         outputView.result(result);
     }
 
