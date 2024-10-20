@@ -21,4 +21,8 @@ public class DelimiterExtractor {
         }
         return DEFAULT_DELIMITERS;
     }
+
+    public String extractNumbers(String input) {
+        return input;
+    }
 }
