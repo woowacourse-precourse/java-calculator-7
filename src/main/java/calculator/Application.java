@@ -11,6 +11,20 @@ public class Application {
 
         // 기본 구분자를 ",:"d으로 정함
         String separator = "[,:]";
+
+        // 커스텀 구분자가 있는지 확인
+        if (str.startsWith("//")) {
+            // "//"과 "\n" 문자열이 있는지 확인
+            int separatorIndex = str.indexOf("\\n");
+            if (separatorIndex != -1) {
+                // "//"과 "\n" 사이의 커스텀 구분자로 구분자 변경
+                separator = str.substring(2,separatorIndex);
+                // 커스텀 구분자 제외한 나머지 문자열 확인
+                str = str.substring(separatorIndex + 2);
+            }
+        }
+
+        // 설정된 구분자로 문자열 분리
         String[] numbers = str.split(separator);
 
         // 숫자 합계 출력
