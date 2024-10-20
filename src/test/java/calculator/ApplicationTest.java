@@ -72,6 +72,30 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 숫자_문자열에_구분자가_중복일_때_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\\n1;;2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 구분자_중복_입력되었을때_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//,;\\n1;2;3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_형식이_중복_입력되었을_때_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\\n//s\\n1;2s3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
