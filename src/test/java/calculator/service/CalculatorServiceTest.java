@@ -100,4 +100,18 @@ class CalculatorServiceTest {
         assertEquals(expectedSum, result);
     }
 
+    @DisplayName("구분자에 대한 성공 로직 테스트")
+    @ParameterizedTest
+    @CsvSource({
+            "'1,2,3', 6",           // 쉼표 구분자
+            "'1:2:3', 6",           // 콜론 구분자
+            "'1,2:3', 6",           // 쉼표와 콜론 혼합 구분자
+    })
+    void add_withValidInput_returnsSum(String input, int expectedSum) {
+        // 입력 문자열을 기반으로 숫자 합계를 계산
+        int result = CalculatorService.add(input);
+
+        // 결과가 예상된 값과 같은지 확인
+        assertEquals(expectedSum, result);
+    }
 }
