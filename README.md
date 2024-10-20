@@ -20,4 +20,4 @@
   - [X] 음수 처리
   - [X] IllegalArgumentException 발생
 - [X] 정수가 아닌 양수 처리
-- [ ] 테스트 코드 작성
+- [X] 테스트 코드 작성
