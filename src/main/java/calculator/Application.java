@@ -17,9 +17,7 @@ public class Application {
         separators.add(customSeparator);
         validateInput(input, separators);
 
-        if (customSeparator != null) {
-            input = input.substring(input.indexOf("\\n") + 2);
-        }
+        input = isolateInput(customSeparator, input);
 
         long result = calculate(input, separators);
         System.out.println("결과 : " + result);
@@ -54,6 +52,13 @@ public class Application {
         if (!m.replaceAll("").isEmpty()) {
             throw new IllegalArgumentException("입력 형식이 잘못되었습니다.");
         }
+    }
+
+    private static String isolateInput(String customSeparator, String input) {
+        if (customSeparator != null) {
+            input = input.substring(input.indexOf("\\n") + 2);
+        }
+        return input;
     }
 
     private static long calculate(String input, List<String> separators) {
