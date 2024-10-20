@@ -30,6 +30,17 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 빈_문자열은_0을_반환() {
+        Application application = new Application();
+        String input = "";
+
+        String[] parsedNumbers = application.parseInput(input);
+        int sum = application.sumParsedNumbers(parsedNumbers);
+
+        assertThat(sum).isEqualTo(0);
+    }
+
+    @Test
     void 커스텀_구분자_추출() {
         Application application = new Application();
         String input = "//;\\n1;2;3";
