@@ -91,6 +91,21 @@
 
 ---
 
+🟢 **Controller**
+#### MainController
+ 👉 사용자 요청을 처리여 모델과 상호작용 후 응답을 다시 사용자에서 전달하기 위한 클래스**
+
+**- 필드**  
+`CustomDelimiter customDelimiter`: customDelimiter 객체
+
+**- 메서드**  
+`void start()` : 애플리케이션 시작하기  
+`void readUserNumbers()` : 사용자로부터 입력 받기  
+`void calculate()` : 입력 받은 숫자를 계산하기  
+`void printSumToUser(String[] splittedNumbers)` : 계산 결과를 사용자에게 출력하기
+
+---
+
 🔴 **Validation**
 
 ### Validator
