@@ -4,8 +4,10 @@ import calculator.error.CustomException;
 import calculator.error.ErrorCode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Extractor {
 
@@ -68,17 +70,16 @@ public class Extractor {
                 .orElse(input);
     }
 
+    // 문자열을 구분자로 나누고 유효성 검사 진행 로직
     private List<Long> splitAndTrimNumbers(String input) {
-        String[] numbers = input.split("[,:]");
-        List<Long> result = new ArrayList<>();
-        for (String number : numbers) {
-            number = number.trim();
-            validateDigit(number);
-            validateNumberPositive(number);
-            result.add(Long.parseLong(number));
-        }
-        return result;
+        return Arrays.stream(input.split("[,:]"))
+                .map(String::trim)
+                .peek(this::validateDigit)
+                .peek(this::validateNumberPositive)
+                .map(Long::parseLong)
+                .collect(Collectors.toList()); // 숫자 리스트 반환
     }
+
 
     // 입력에 커스텀 구분자가 있는지 확인
     private boolean hasCustomDelimiter(String input) {
