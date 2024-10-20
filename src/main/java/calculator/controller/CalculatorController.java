@@ -2,6 +2,7 @@ package calculator.controller;
 
 import static calculator.model.InputString.CUSTOM_DELIMITER_RANGE;
 
+import calculator.model.DelimiterTokenizer;
 import calculator.model.InputString;
 import calculator.view.InputView;
 import calculator.view.OutputView;
@@ -11,10 +12,12 @@ import calculator.view.OutputView;
  */
 public class CalculatorController {
 
+    private final DelimiterTokenizer delimiterTokenizer;
     private final InputView inputView;
     private final OutputView outputView;
 
-    public CalculatorController(InputView inputView, OutputView outputView) {
+    public CalculatorController(DelimiterTokenizer delimiterTokenizer, InputView inputView, OutputView outputView) {
+        this.delimiterTokenizer = delimiterTokenizer;
         this.inputView = inputView;
         this.outputView = outputView;
     }
@@ -32,8 +35,15 @@ public class CalculatorController {
         }
 
         InputString inputString = new InputString(input);
+        String customDelimiter = inputString.getCustomDelimiterFromInput();
+        String delimiters = delimiterTokenizer.combineDelimiters(customDelimiter);
 
-        long resultSum = inputString.calculate();  // 문자열 계산
+        String validInputString = inputString.validateInputString(delimiters);
+
+        long[] numberList = delimiterTokenizer.tokenizeString(validInputString);
+        long[] savedNumberList = inputString.saveNumberList(numberList);
+
+        long resultSum = sum(savedNumberList);
 
         outputView.getOutputResult(resultSum);
     }
@@ -48,6 +58,19 @@ public class CalculatorController {
         if (input.startsWith("//") && !input.contains("\\n") && input.length() > 3) {
             throw new IllegalArgumentException("올바른 커스텀 구분자 입력 형식이 아닙니다.");
         }
+    }
+
+    /**
+     * 덧셈 계산
+     */
+    private long sum(long[] numberList) {
+        long resultSum = 0;
+
+        for (long number : numberList) {
+            resultSum += number;
+        }
+
+        return resultSum;
     }
 
 }
