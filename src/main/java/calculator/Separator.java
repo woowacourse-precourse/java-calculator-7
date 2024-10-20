@@ -19,7 +19,6 @@ public class Separator {
             input = deleteCustomSeparatorConvention(input, prefixIdx, suffixIdx);
 
             regex = addCustomSeparator(regex, customSeparator);
-            System.out.println(regex);
         }
 
         return input.split(regex);
