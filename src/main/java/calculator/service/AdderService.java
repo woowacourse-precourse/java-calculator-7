@@ -8,7 +8,7 @@ public class AdderService {
 
     public static Integer sumAll(List<Integer> operands) {
         int sum = 0;
-        for(Integer operand : operands) {
+        for (Integer operand : operands) {
             sum += operand;
         }
         return sum;
