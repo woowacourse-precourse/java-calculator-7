@@ -2,7 +2,7 @@ package calculator.controller;
 
 import calculator.service.CalculatorService;
 
-import java.util.Scanner;
+import camp.nextstep.edu.missionutils.Console;
 
 public class CalculatorController {
 
@@ -17,9 +17,7 @@ public class CalculatorController {
         int result;
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-
-        Scanner sc = new Scanner(System.in);
-        input = sc.nextLine();
+        input = Console.readLine();
 
         result = calculatorService.getUserInput(input);
 
