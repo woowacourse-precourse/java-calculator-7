@@ -24,7 +24,7 @@ public class StringCalculator {
 
     public StringCalculator(){
         this.sum = 0;
-        this.delimiter = ",:";
+        this.delimiter = "[,:";
         this.numList = new ArrayList<>();
     }
 
@@ -33,4 +33,22 @@ public class StringCalculator {
         System.out.println("덧셈할 문자열을 입력해주세요");
         this.input = Console.readLine();
     }
+
+    // 커스텀 구분자를 구하는 기능
+    public void addDelimiter(){
+        // 커스텀 구분자가 추가될려면 문자열 길이 5 이상
+        if(input.length() < 5){
+            return;
+        }
+        for(int i=0; i<input.length()-5; i+=5){
+            if(input.startsWith("//", i) && input.startsWith("\\n", i+3)){
+                delimiter += input.charAt(i+2);
+                System.out.println(input.charAt(i+2));
+            }
+        }
+        delimiter+="]";
+        System.out.println(delimiter);
+    }
+
+
 }
