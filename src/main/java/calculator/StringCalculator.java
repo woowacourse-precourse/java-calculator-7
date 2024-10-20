@@ -40,6 +40,10 @@ public class StringCalculator {
             customDividerList = Arrays.asList(customDivider.split(""));
         }
 
+        if (customDivider != null && customDivider.matches("(.*)[0-9](.*)")) {
+            throw new IllegalArgumentException();
+        }
+
         duplicationFilter.addAll(customDividerList);
         dividerList = new ArrayList<>(duplicationFilter);
     }
