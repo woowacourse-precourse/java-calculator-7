@@ -69,6 +69,45 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 기본적_계산() {
+        assertSimpleTest(() -> {
+            run("1,3,5,7,9,22121,213412");
+            assertThat(output()).contains("결과 : 235558");
+        });
+    }
+
+    @Test
+    void 큰_계산() {
+        assertSimpleTest(() -> {
+            run("1,2147483647");
+            assertThat(output()).contains("결과 : 2147483648");
+        });
+    }
+
+    @Test
+    void 생각보다_많은_계산() {
+        assertSimpleTest(() -> {
+            run("1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,"
+                    + "1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1"
+                    + ",1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1"
+                    + ",1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1"
+                    + ",1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1"
+                    + ",1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1"
+                    + ",1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1"
+                    + ",1,1,1,1,1,1,1,1,1,1,1,1");
+            assertThat(output()).contains("결과 : 200");
+        });
+    }
+
+    @Test
+    void 생각보다_복잡한_구분자_추가된_계산() {
+        assertSimpleTest(() -> {
+            run("//;\\n1:1,1,1,1:1,1,1,1,1,1,1:1,1,1,1,1;1,1,1;1,1,1,1,1,1");
+            assertThat(output()).contains("결과 : 26");
+        });
+    }
+
+    @Test
     void 빈_문자() {
         assertSimpleTest(() -> {
             run("");
@@ -96,6 +135,14 @@ class ApplicationTest extends NsTest {
     void 음수_전달() {
         assertSimpleTest((() -> {
             assertThatThrownBy(() -> runException("-1,2,3"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        }));
+    }
+
+    @Test
+    void 이상한_인자() {
+        assertSimpleTest((() -> {
+            assertThatThrownBy(() -> runException("#,2,3"))
                     .isInstanceOf(IllegalArgumentException.class);
         }));
     }
