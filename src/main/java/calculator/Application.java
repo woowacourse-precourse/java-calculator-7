@@ -15,7 +15,7 @@ public class Application {
             int delimiterIndex = numbers.indexOf("\\n");
             if (delimiterIndex != -1) {
                 delimiter = escapeSpecialRegexChars(numbers.substring(2, delimiterIndex));
-                numberString = numbers.substring(delimiterIndex + 2); // +2 to skip "\\n"
+                numberString = numbers.substring(delimiterIndex + 2);
             } else {
                 throw new IllegalArgumentException("Invalid input format: missing newline after custom delimiter.");
             }
