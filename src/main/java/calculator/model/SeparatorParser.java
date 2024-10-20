@@ -20,6 +20,22 @@ public class SeparatorParser {
 
         HashMap<String, String> separatorAndNumberString = new HashMap<>();
 
+        if (!parserValidator.isCustomSeparator(splitInputString.length)) {
+            if (parserValidator.isOnlySeparator(splitInputString[separatorStringIndex])) {
+                separatorAndNumberString.put("type", "onlySeparatorString");
+                return separatorAndNumberString;
+            }
+            separatorAndNumberString.put("type", "onlyNumberString");
+            String basicSeparator = "";
+            for (int separatorIndex = 0; separatorIndex < BASIC_SEPARATOR.length; separatorIndex++) {
+                basicSeparator += BASIC_SEPARATOR[separatorIndex];
+            }
+            separatorAndNumberString.put("separator", basicSeparator);
+            separatorAndNumberString.put("numberString", splitInputString[numberStringIndex]);
+
+            return separatorAndNumberString;
+        }
+
         String separators = splitInputString[separatorStringIndex];
 
         for (int basicSeparatorIndex = 0; basicSeparatorIndex < BASIC_SEPARATOR.length; basicSeparatorIndex++) {
