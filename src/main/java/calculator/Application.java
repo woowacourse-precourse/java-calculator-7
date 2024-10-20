@@ -6,7 +6,7 @@ public class Application {
         StringAdder stringAdder = new StringAdder();
 
         String input = ConsoleIO.getInput();
-        int result = stringAdder.add(input);
+        double result = stringAdder.add(input);
         ConsoleIO.printResult(result);
     }
 }

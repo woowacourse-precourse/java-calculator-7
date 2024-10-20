@@ -21,14 +21,19 @@ public class InputValidator {
 
     public static void validate(String[] numbers) {
         for (String number : numbers) {
-            int num;
+            double num;
             try {
-                num = Integer.parseInt(number);
+                num = Double.parseDouble(number);
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("잘못된 입력 입니다.");
+                throw new IllegalArgumentException("잘못된 입력이 포함되어 있습니다." + number);
             }
+
             if (num < 0) {
-                throw new IllegalArgumentException("음수가 포함되어 있습니다.");
+                throw new IllegalArgumentException("음수가 포함되어 있습니다." + number);
+            }
+
+            if (Double.isInfinite(num)) {
+                throw new IllegalArgumentException("숫자가 너무 커서 계산할 수 없습니다.");
             }
         }
     }

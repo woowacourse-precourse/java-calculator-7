@@ -45,15 +45,18 @@ public class StringAdder {
         return inputArray;
     }
 
-    private int sumNumbers(String[] numbers) {
-        int sum = 0;
+    private double sumNumbers(String[] numbers) {
+        double sum = 0;
         for (String number : numbers) {
-            sum = Math.addExact(sum, Integer.parseInt(number));
+            sum += Double.parseDouble(number);
+            if (Double.isInfinite(sum)) {
+                throw new ArithmeticException("계산 가능한 범위를 초과했습니다.");
+            }
         }
         return sum;
     }
 
-    public int add(String input) {
+    public double add(String input) {
         if (InputValidator.isNullInput(input)) {
             return 0;
         }
