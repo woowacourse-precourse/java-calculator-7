@@ -7,7 +7,6 @@ import java.util.Set;
  * 문자열 덧셈 클래스입니다.
  */
 public class Calculator {
-
     /**
      * 문자열에서 숫자를 추출하여 더하여 반환합니다.
      * 문자열에서 구분자를 기준으로 숫자를 추출하여 더합니다.

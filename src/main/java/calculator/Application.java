@@ -17,8 +17,6 @@ public class Application {
         String input = Console.readLine();
 
         System.out.println("결과 : " + Calculator.calculate(input));
-
     }
-
 
 }
