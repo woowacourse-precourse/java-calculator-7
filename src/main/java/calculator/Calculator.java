@@ -20,16 +20,7 @@ public class Calculator {
             return;
         }
 
-        String numberString = delimiter.extractNumberString(inputString);
-
-        StringBuilder delimiterExpression = new StringBuilder();
-        for (char delimiter : delimiter.getDelimiters()) {
-            this.delimiter.appendDelimiter(delimiterExpression, delimiter);
-        }
-
-        String delimiterStr = delimiterExpression.toString();
-
-        String[] numList = numberString.split(delimiterStr);
+        String[] numList = delimiter.extractNumberString(inputString);
 
         int sum = 0;
 

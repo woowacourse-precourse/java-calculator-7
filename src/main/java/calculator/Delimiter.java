@@ -45,10 +45,9 @@ public class Delimiter {
         delimiters.clear();
     }
 
-    public String extractNumberString(String inputString) {
+    public String[] extractNumberString(String inputString) {
         addDelimiter(':');
         addDelimiter(',');
-
         if (inputString.startsWith("//")) {
             clearDelimiters();
             int index = findLastDelimiterIndex(inputString);
@@ -57,10 +56,27 @@ public class Delimiter {
 
             validateSingleDelimiter();
 
-            return inputString.substring(index + 2);
+            return getNumList(inputString.substring(index + 2));
         }
 
-        return inputString;
+        return getNumList(inputString);
+    }
+
+    private String[] getNumList(String inputString) {
+        StringBuilder delimiterExpression = new StringBuilder();
+        for (char delimiter : getDelimiters()) {
+            appendDelimiter(delimiterExpression, delimiter);
+        }
+
+        return inputString.split(getDelimiterExpression());
+    }
+
+    private String getDelimiterExpression() {
+        StringBuilder delimiterExpression = new StringBuilder();
+        for (char delimiter : getDelimiters()) {
+            appendDelimiter(delimiterExpression, delimiter);
+        }
+        return delimiterExpression.toString();
     }
 
     private void extractDelimiters(String inputString, int index) {
