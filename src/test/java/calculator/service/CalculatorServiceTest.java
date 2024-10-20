@@ -36,4 +36,12 @@ class CalculatorServiceTest {
         int result = calculatorService.calculate(input);
         assertThat(result).isEqualTo(10);
     }
+
+    @Test
+    void 음수_입력_예외_테스트() {
+        String input = "-1,2,3";
+        assertThatThrownBy(() -> calculatorService.calculate(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR] 음수는 허용되지 않습니다");
+    }
 }
