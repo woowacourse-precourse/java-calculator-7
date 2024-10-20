@@ -27,7 +27,7 @@ class Calculator {
      * 입력 받은 문자열에 커스텀 구분자가 있다면 추출한다.
      */
     private void checkCustomSeparator() {
-        // 커스텀 문자열이 있는지 확인
+        // 커스텀 문자 있는지 확인
         if (input.startsWith("//")) {
             if (!input.contains("\\n")) {
                 throw new IllegalArgumentException("커스텀 구분자 형식이 잘못되었습니다.");
@@ -38,7 +38,7 @@ class Calculator {
     }
 
     /***
-     * 입력 받은 문자열이 구분자와 숫자로만 이루어져 있는지 확인한다.
+     * 입력 받은 문자열이 알맞은 형식인지 확인한다.
      */
     private void checkInput() {
         if (input.isEmpty()) {
