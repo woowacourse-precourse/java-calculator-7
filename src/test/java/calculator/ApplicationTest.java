@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import java.util.NoSuchElementException;
 import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
@@ -37,6 +38,32 @@ class ApplicationTest extends NsTest {
     void 숫자형식_변환중_잘못된_형식이면_예외가_발생한다() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1q,2,3:4"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage("잘못된 숫자 입니다.")
+        );
+    }
+
+    @Test
+    void 공백만_포함된_입력값이_들어오면_파싱부문에서_예외가_발생한다() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("    "))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage("잘못된 숫자 입니다.")
+        );
+    }
+
+    @Test
+    void 빈_입력값이_들어오면_프리코스에서_주어진_라이브러리에서의_Scanner의_nextLine에서_예외가_발생한다() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> run(""))
+                        .isInstanceOf(NoSuchElementException.class));
+
+    }
+
+    @Test
+    void 계행문자만_있는_입력값이_들어오면_파싱_부문에서_예외가_발생한다() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("\n"))
                         .isInstanceOf(IllegalArgumentException.class)
                         .hasMessage("잘못된 숫자 입니다.")
         );

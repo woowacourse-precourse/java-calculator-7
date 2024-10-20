@@ -18,13 +18,11 @@ public class StringCalculator {
     public void run() {
         System.out.println(USER_INPUT_PROMPT);
         String input = Console.readLine();
-        String[] stringNumbers;
-        stringNumbers = delimiter.split(input);
 
-        int[] numbers;
-        numbers = parser.parseToNumber(stringNumbers);
-
+        String[] stringNumbers = delimiter.split(input);
+        int[] numbers = parser.parseToNumber(stringNumbers);
         int summary = Arrays.stream(numbers).sum();
+
         System.out.println(RESULT_PREFIX + summary);
     }
 }
