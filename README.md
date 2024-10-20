@@ -36,4 +36,22 @@
 
 ## 최적화
 - 기능 요구사항 구현과 리팩토링을 마친 이후에 진행할 예정입니다.
+- 최적화 전 실행시간입니다. 테스트를 직접 10번 돌리고 나서 평균을 내는 방식으로 수행했습니다.
+- 반복문으로 돌리게 되면, 컴파일러가 캐싱을 수행하거나 다른 동작으로 최적화를 하는 것 같습니다. 2번째 수행부터 시간이 현저히 줄어 테스트에 적합하지 않은 것 같아 제외했습니다.
+```text
+Execution time: 52.67 ms
+Execution time: 55.29 ms
+Execution time: 52.24 ms
+Execution time: 51.51 ms
+Execution time: 46.39 ms
+Execution time: 52.71 ms
+Execution time: 45.36 ms
+Execution time: 46.96 ms
+Execution time: 42.87 ms
+Execution time: 52.22 ms
+
+Average Execution time: 50.32ms
+- ```
+- 최적화 리팩토링 전 최적화 시간은 `50.32ms` 나왔습니다.
 ### 최적화 목록
+- [ ] 정규표현식을 사용하는 문자열의 split을 Matcher, Patterns 클래스로 변경
