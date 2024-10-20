@@ -11,7 +11,7 @@ public class InputHandler {
 
     private String delimiter = "[,:]";
 
-    public int isCustomDelimiter(String input) {
+    public int findCustomDelimiter(String input) {
         int prefixLength = CUSTOM_DELIMITER_PREFIX.length();
         int suffixIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
 

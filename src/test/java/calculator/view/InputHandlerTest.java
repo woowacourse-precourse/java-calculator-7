@@ -24,7 +24,7 @@ class InputHandlerTest {
         //setUp 메서드에서 제공
 
         //when
-        int length = inputHandler.isCustomDelimiter(input);
+        int length = inputHandler.findCustomDelimiter(input);
 
         //then
         Assertions.assertThat(length).isEqualTo(expected);

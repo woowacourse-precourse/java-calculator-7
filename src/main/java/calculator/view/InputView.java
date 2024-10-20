@@ -17,7 +17,7 @@ public class InputView {
         System.out.println(INPUT_MESSAGE);
         String input = Console.readLine();
 
-        int index = inputHandler.isCustomDelimiter(input);
+        int index = inputHandler.findCustomDelimiter(input);
         input = input.substring(index);
         return inputHandler.parseNumbers(input);
     }
