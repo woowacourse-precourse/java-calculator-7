@@ -53,8 +53,8 @@ public class Application {
                 if (number.isEmpty()) {
                     continue;
                 }
-                System.out.println(number);
                 int num = stringToInt(number);
+
                 sum += num;
             }
         } catch (IllegalArgumentException e) {
@@ -65,6 +65,10 @@ public class Application {
 
     // 문자열을 숫자로 변환하는 메서드
     public static int stringToInt(String number) {
+        if(number.charAt(0) == '0') {
+            throw new IllegalArgumentException("숫자는 0으로 시작할 수 없습니다.");
+        }
+
         for (int i = 0; i < number.length(); i++) {
             if (!(number.charAt(i) >= '0' && number.charAt(i) <= '9'))
                 throw new IllegalArgumentException("양수와 구분자로만 입력하세요.");
@@ -91,7 +95,7 @@ public class Application {
         }
         // 구분자를 기준으로 문자열 자르기
         String[] numbers = input.split(delimiter);
-        
+
         if (numbers.length == 0) // 구분자로만 이루어져있는 경우
             throw new IllegalArgumentException("계산할 숫자가 없습니다.");
 
