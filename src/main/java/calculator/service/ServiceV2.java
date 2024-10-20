@@ -5,10 +5,13 @@ import calculator.constants.StringConst;
 import calculator.delimiterExtractor.DelimiterExtractor;
 import calculator.dto.DelimiterDto;
 import calculator.dto.NumberDto;
+import calculator.inputType.InputType;
+import calculator.inputType.InputTypeProvider;
 import calculator.numberExtractor.NumberExtractor;
 import java.util.ArrayList;
+import java.util.List;
 
-public class Service {
+public class ServiceV2 implements Service {
 
 
     public String extractDelimiter(DelimiterExtractor extractor, String input) {
@@ -26,17 +29,23 @@ public class Service {
 
 
     public String checkTypeOfInput(String input) {
-        char[] inputToCharArray = input.toCharArray();
 
-        if (input.startsWith(StringConst.CUSTOM_START_STRING) && input.contains(StringConst.LINE_SEPARATOR_STRING)) {
-            return "CustomInput";
+        List<InputType> inputTypelist = InputTypeProvider.provideInputTypelist();
+
+        InputType customInput = inputTypelist.get(0);
+        String customInputName = customInput.getType();
+        if (customInput.check(input) && customInputName.equals(StringConst.CUSTOM_INPUT)) {
+            return StringConst.CUSTOM_INPUT;
         }
 
-        if (input.contains(StringConst.COMMA) || input.contains(StringConst.COLON)) {
-            return "DefaultInput";
+        InputType defaultInput = inputTypelist.get(1);
+        String defaultInputName = defaultInput.getType();
+        if (defaultInput.check(input) && defaultInputName.equals(StringConst.DEFAULT_INPUT)) {
+            return StringConst.DEFAULT_INPUT;
         }
 
         throw new IllegalArgumentException();
+
     }
 
 
