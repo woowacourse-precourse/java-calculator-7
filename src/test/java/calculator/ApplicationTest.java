@@ -64,6 +64,14 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 커스텀_구분자_숫자입력_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//3\\n1:2:3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
 
     @Override
     public void runMain() {
