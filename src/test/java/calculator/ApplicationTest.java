@@ -112,6 +112,22 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void Int_자료형_범위를_넘어가는_덧셈(){
+        assertSimpleTest(() -> {
+            run("2147483647,1");
+            assertThat(output()).contains("결과 : 2147483648");
+        });
+    }
+
+    @Test
+    void Long_자료형_범위를_넘어가는_덧셈(){
+        assertSimpleTest(() -> {
+            run("922337236854775807,1");
+            assertThat(output()).contains("결과 : 922337236854775808");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
