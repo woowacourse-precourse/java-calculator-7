@@ -28,10 +28,13 @@ public class Application {
             }
 
             if (inputStr.contains("-")){
-                throw new IllegalArgumentException("잘못된 입력입니다. 자연수만 압력해주세요.");
+                throw new IllegalArgumentException("잘못된 입력입니다. 자연수만 입력해주세요.");
             }
         } catch (StringIndexOutOfBoundsException e) {
             result = 0;
+        } catch (IllegalArgumentException e){
+            System.out.print(e.getMessage());
+            return;
         }
 
         System.out.print("결과 : "+ result);
