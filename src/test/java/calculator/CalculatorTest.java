@@ -88,6 +88,17 @@ class CalculatorTest {
     }
 
     @Test
+    void 숫자_입력값_오버플로우_예외_테스트() {
+        assertThatThrownBy(() -> calculator.splitAndSum("2147483648,1"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("입력한 숫자가 정수 범위를 초과했습니다. 문제가 되는 입력값: [2147483648]");
+
+        assertThatThrownBy(() -> calculator.splitAndSum("//;\\n2147483648;1"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("입력한 숫자가 정수 범위를 초과했습니다. 문제가 되는 입력값: [2147483648]");
+    }
+
+    @Test
     void 계산_결과_오버플로우_예외_테스트() {
         assertThatThrownBy(() -> calculator.splitAndSum("2147483647,1"))
                 .isInstanceOf(IllegalArgumentException.class)
