@@ -28,7 +28,7 @@ public class Controller {
             return OutputIsZero;
         }
         String [] splitStrings = parser.parsingStringToInteger();
-        int [] foundNumber = inputValidator.parseNumbers(splitStrings);
+        int [] foundNumber = parser.convertStringsToNumbers(splitStrings);
         return String.valueOf(calculator.calculate(foundNumber));
     }
 }
