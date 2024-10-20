@@ -8,6 +8,7 @@ public class Application {
         String input = null;
         String delimiter = ",|:";
         int sum = 0;
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         try {
             input = Console.readLine();  // 사용자로부터 입력 받음
         } catch (NoSuchElementException e) {
@@ -37,11 +38,11 @@ public class Application {
         }
         String[] numbers = input.split(delimiter);
 
-        if (isCustomDelimiter && !input.contains(delimiter)) {//구분자가 다를때
+        /*if (isCustomDelimiter && !input.contains(delimiter)) {//구분자가 다를때
             throw new IllegalArgumentException("커스텀 구분자와 입력된 구분자가 다릅니다.");
         } else if (!isCustomDelimiter && !input.contains(",") && !input.contains(":")) {//구분자가 다를때
             throw new IllegalArgumentException("구분자와 입력된 구분자가 다릅니다.");
-        }
+        }*/
         boolean isContainsNumber = false;
         for (String number : numbers) {
 
