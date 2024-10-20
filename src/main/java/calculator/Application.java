@@ -9,6 +9,16 @@ public class Application {
 
         String delimiterPattern = "[,:]";
 
+        if (inputString.startsWith("//")) {
+            int endIndex = inputString.indexOf("\\n");
+            if (endIndex != -1) {
+                delimiterPattern = inputString.substring(2, endIndex);
+                inputString = inputString.substring(endIndex + 2);
+            } else {
+                throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
+            }
+        }
+
         Calc calculator = new Calc();
         int totalSum = calculator.calculate(inputString, delimiterPattern);
 
