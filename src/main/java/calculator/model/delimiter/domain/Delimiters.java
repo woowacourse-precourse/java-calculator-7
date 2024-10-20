@@ -13,11 +13,11 @@ public class Delimiters {
     private final List<Delimiter> values;
 
     public Delimiters(List<Delimiter> delimiters) {
-        this.values = delimiters;
+        this.values = List.copyOf(delimiters);
     }
 
     public List<Delimiter> getValues() {
-        return List.copyOf(values);
+        return values;
     }
 
     public String splitRegex() {
