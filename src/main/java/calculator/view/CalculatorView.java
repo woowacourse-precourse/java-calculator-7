@@ -11,6 +11,10 @@ public class CalculatorView {
         return input;
     }
 
+    public static void printResult(int result){
+        System.out.println(Message.PRINT_RESULT.toString() + result);
+    }
+
     public static void printError(String message){
         System.out.println(message);
     }

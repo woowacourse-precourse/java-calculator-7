@@ -15,6 +15,7 @@ public class CalculatorController {
         try{
             String input = CalculatorView.getInput();
             int result = calculator.add(input);
+            CalculatorView.printResult(result);
         }
         catch (IllegalArgumentException e){
             CalculatorView.printError(e.getMessage());
