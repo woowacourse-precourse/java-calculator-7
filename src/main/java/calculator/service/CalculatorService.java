@@ -12,7 +12,7 @@ public class CalculatorService {
             calculator.setNumbers(new int[]{0});
         } else {
             String delimiters = "[,|:]";
-            if (input.startsWith("//")) {
+            if (input.startsWith("//") && input.contains("\n")) {
                 String[] split = input.split("\n", 2);
                 delimiters = addCustomDelimiter(split, delimiters);
                 input = split[1];
@@ -22,7 +22,7 @@ public class CalculatorService {
             int[] splitNum = new int[splitInput.length];
 
             for (int i = 0; i < splitInput.length; i++) {
-                validateDelimiter(splitInput, i);
+                validateSplitString(splitInput, i);
                 splitNum[i] = Integer.parseInt(splitInput[i]);
             }
             calculator.setNumbers(splitNum);
@@ -31,17 +31,31 @@ public class CalculatorService {
         return calculator.getSum();
     }
 
+    private static void validateInput(String input) {
+        //공백 입력되면 예외발생
+        if (input.contains(" ")) {
+            throw new IllegalArgumentException(ExceptionMessage.EMPTY_INPUT.getMessage());
+        }
+        //'0' 입력되면 예외발생
+        if (input.contains("0")) {
+            throw new IllegalArgumentException(ExceptionMessage.MINUS_OR_ZERO_INPUT.getMessage());
+        }
+    }
+
     private static String addCustomDelimiter(String[] split, String delimiters) {
         String customDelimiter = split[0].substring(2);
-        // 커스텀 구분자에 숫자가 포함된 경우 예외 발생
-        if (customDelimiter.matches(".*\\d.*")) {
-            throw new IllegalArgumentException(ExceptionMessage.CONTAIN_NUMBER_IN_DELIMITER.getMessage());
+        // 커스텀 구분자에 숫자 or '-' 포함된 경우 예외 발생
+        if (customDelimiter.matches(".*[\\d-].*")) {
+            throw new IllegalArgumentException(ExceptionMessage.FORBIDDEN_WORDS_IN_DELIMITER.getMessage());
         }
+
         delimiters = "[" + delimiters.substring(1, 4) + "|" + customDelimiter + "]";
         return delimiters;
     }
 
-    private static void validateDelimiter(String[] splitInput, int i) {
+    private static void validateSplitString(String[] splitInput, int i) {
+        // 경계에 구분자가 있는지, 중복된 구분자인지 판단해서 예외 발생
+        // 공백이 존재한다는 것은 구분자가 중복되어 split 할 때 ""값이 들어왔다는 뜻
         if (splitInput[i].isEmpty()) {
             if (i == 0 || i == splitInput.length - 1) {
                 throw new IllegalArgumentException(ExceptionMessage.BOUNDARY_DELIMITER.getMessage());
@@ -49,22 +63,14 @@ public class CalculatorService {
                 throw new IllegalArgumentException(ExceptionMessage.DUPLICATE_DELIMITER.getMessage());
             }
         }
-        //커스텀 구분자로 "-"가 들어올 수도 있기 때문에 음수는 여기서 판별함
-        //int로 변환할 때 문자가 들어가 있으면 NumberFormatException 터지므로 이를 try-catch
-        try {
-            if (Integer.parseInt(splitInput[i]) < 0) {
-                throw new IllegalArgumentException(ExceptionMessage.MINUS_OR_ZERO_INPUT.getMessage());
-            }
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ExceptionMessage.NOT_DELIMITER.getMessage());
-        }
-    }
 
-    private static void validateInput(String input) {
-        if (input.contains(" ")) {
-            throw new IllegalArgumentException(ExceptionMessage.EMPTY_INPUT.getMessage());
+        // 숫자가 아닌 문자 들어왔을 때 예외 발생
+        if (!splitInput[i].matches("-?\\d+")) {
+            throw new IllegalArgumentException(ExceptionMessage.NOT_DELIMITER_OR_NUMBER.getMessage());
         }
-        if (input.contains("0")) {
+
+        // 음수일 때 예외 발생
+        if (Integer.parseInt(splitInput[i]) < 0) {
             throw new IllegalArgumentException(ExceptionMessage.MINUS_OR_ZERO_INPUT.getMessage());
         }
     }

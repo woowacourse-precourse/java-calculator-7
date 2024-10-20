@@ -1,9 +1,9 @@
 package calculator.service;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
 
 public class CalculatorServiceTest {
     @Test
@@ -34,7 +34,7 @@ public class CalculatorServiceTest {
             fail("IllegalArgumentException 발생 안 함");
         } catch (IllegalArgumentException e) {
             // 예외가 발생하면 성공
-            assertTrue(e.getMessage().equals("경계값에는 구분자가 들어갈 수 없습니다."));
+            assertTrue(e.getMessage().equals("경계값에 구분자가 들어갈 수 없습니다."));
         }
     }
 
@@ -50,7 +50,7 @@ public class CalculatorServiceTest {
             fail("IllegalArgumentException 발생 안 함");
         } catch (IllegalArgumentException e) {
             // 예외가 발생하면 성공
-            assertTrue(e.getMessage().equals("구분자가 아닌 문자는 입력할 수 없습니다."));
+            assertTrue(e.getMessage().equals("숫자와 구분자를 제외한 문자는 입력할 수 없습니다."));
         }
     }
 
@@ -82,7 +82,7 @@ public class CalculatorServiceTest {
             fail("IllegalArgumentException 발생 안 함");
         } catch (IllegalArgumentException e) {
             // 예외가 발생하면 성공
-            assertTrue(e.getMessage().equals("구분자를 중첩해서 입력할 수 없습니다."));
+            assertTrue(e.getMessage().equals("구분자를 연속해서 입력할 수 없습니다."));
         }
     }
 
@@ -98,7 +98,23 @@ public class CalculatorServiceTest {
             fail("IllegalArgumentException 발생 안 함");
         } catch (IllegalArgumentException e) {
             // 예외가 발생하면 성공
-            assertTrue(e.getMessage().equals("커스텀 구분자에 숫자를 포함할 수 없습니다."));
+            assertTrue(e.getMessage().equals("커스텀 구분자에 숫자와 '-'를 포함할 수 없습니다."));
+        }
+    }
+
+    @Test
+    void 커스텀_구분자_하이픈_예외_테스트() {
+        //given: "//3\\n231"
+        CalculatorService calculatorService = new CalculatorService();
+        String input = "//-\\n231";
+
+        // when & then
+        try {
+            calculatorService.calculate(input);
+            fail("IllegalArgumentException 발생 안 함");
+        } catch (IllegalArgumentException e) {
+            // 예외가 발생하면 성공
+            assertTrue(e.getMessage().equals("커스텀 구분자에 숫자와 '-'를 포함할 수 없습니다."));
         }
     }
 }
