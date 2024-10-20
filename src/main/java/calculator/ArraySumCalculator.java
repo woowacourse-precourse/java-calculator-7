@@ -2,7 +2,7 @@ package calculator;
 
 import calculator.util.StringSplitter;
 
-public class ArraySumCalculator {
+public class ArraySumCalculator implements ArrayCalculator {
     private final StringSplitter stringsplitter;
 
     // StringSplitter 의존성 주입
