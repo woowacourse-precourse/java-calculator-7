@@ -84,6 +84,13 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 무거운_계산() {
+        assertSimpleTest(() -> {
+            run("1234567890,9876543210");
+            assertThat(output()).contains("결과 : 2147483648");
+        });
+    }
 
     @Test
     void 생각보다_많은_계산() {
