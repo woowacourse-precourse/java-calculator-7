@@ -19,4 +19,10 @@ public class CustomTest {
         String CUSTOM_DELIMITER_FORMAT = "//.\\\\n.*";
         assertThat(Pattern.matches(CUSTOM_DELIMITER_FORMAT, "2:3,2")).isFalse();
     }
+
+    @Test
+    void 커스텀_구분자가_백슬래시인_경우() {
+        String CUSTOM_DELIMITER_FORMAT = "//.\\\\n.*";
+        assertThat(Pattern.matches(CUSTOM_DELIMITER_FORMAT, "//\\\n2:3,2")).isTrue();
+    }
 }
