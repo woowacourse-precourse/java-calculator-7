@@ -85,6 +85,7 @@ public class ServiceTest extends NsTest {
         Assertions.assertEquals("1;2;3", result[1]);
     }
 
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
