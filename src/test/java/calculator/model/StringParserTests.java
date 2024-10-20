@@ -4,12 +4,15 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class StringParserTests {
 
@@ -48,16 +51,32 @@ class StringParserTests {
         Assertions.assertEquals(expected, result);
     }
 
-    @Test
+    @ParameterizedTest
+    @DisplayName("숫자 형식을 지키지 않은 경우 예외 발생")
+    @CsvSource(value = {"1.:2.:3.", ".1:.2:.3"})
+    public void testIfNumberFormatInvalid(String input) {
+        sample = new StringParser<>(input);
+        assertThatThrownBy(() -> sample.parse(Double::parseDouble))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
     @DisplayName("정규표현식의 예약문자를 커스텀 구분자로 사용하여 숫자 추출 가능")
+    @MethodSource("provideStringToExpression")
     public void testIfUseMetaLetterAsDelimiter() {
-        String input = "//[](){}.*+?^$\\|\\n1[2(3{4.5*6+7?8^9$10|11";
-        List<Double> expected = Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0);
+        String input = "//[](){}.*+?^\\\\$\\|\\n1[2(3{4.5*6+7?8^9$10|11\\12";
+        List<Double> expected = Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0);
 
         sample = new StringParser<>(input);
 
         List<Double> result = sample.parse(Double::parseDouble);
         Assertions.assertEquals(expected, result);
+    }
+    private static Stream<Arguments> provideStringToExpression() {
+        return Stream.of(
+                Arguments.of("//[](){}.*+?^\\\\$\\|\\n1[2(3{4.5*6+7?8^9$10|11\\12"),
+                Arguments.of("//[](){}*+?^\\\\$\\|\\n1.0[2.0(3.0{4.0\\5.0*6.0+7.0?8.0^9.0$10.0|11.0\\12.0")
+        );
     }
 
     @ParameterizedTest

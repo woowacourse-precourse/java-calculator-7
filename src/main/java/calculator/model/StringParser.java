@@ -43,10 +43,9 @@ public class StringParser<T> implements Parser<T> {
     }
 
     private T changeNumberTypeOrThrowException(String token, Function<String, T> typeToChange) {
-        try {
+        if (!token.startsWith(".") && !token.endsWith(".")) {
             return typeToChange.apply(token);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(String.format("%s : 숫자 자료형으로 변환할 수 없는 문자열입니다.", token));
         }
+        throw new IllegalArgumentException(String.format("%s : 올바른 숫자 입력 형식이 아닙니다.", token));
     }
 }
