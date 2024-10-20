@@ -24,16 +24,7 @@ class DelimiterTest {
         String numberLine = "1a2a3";
         Delimiter delimiter = Delimiter.create(createLine("a"));
 
-        assertArrayEquals(delimiter.split(numberLine), new String[]{"1","2","3"});
-    }
-
-//    @Test
-    @DisplayName(". 구분자로 분리 가능")
-    void testEdge() {
-        String numberLine = "1.2.3";
-        Delimiter delimiter = Delimiter.create(createLine("."));
-
-        assertArrayEquals(delimiter.split(numberLine), new String[]{"1","2","3"});
+        assertArrayEquals(delimiter.split(numberLine), new String[]{"1", "2", "3"});
     }
 
     @Test
@@ -52,6 +43,24 @@ class DelimiterTest {
     @DisplayName("빈 라인은 디폴트 구분자를 반환")
     void test5() {
         Assertions.assertThat(Delimiter.create(DelimiterLine.EMPTY_LINE)).isEqualTo(Delimiter.DEFAULT_DELIMITER);
+    }
+
+    @Test
+    @DisplayName(". 구분자로 분리 가능")
+    void test6() {
+        String numberLine = "1.2.3";
+        Delimiter delimiter = Delimiter.create(createLine("."));
+
+        assertArrayEquals(delimiter.split(numberLine), new String[]{"1","2","3"});
+    }
+
+    @Test
+    @DisplayName("공백 구분자로 분리 가능")
+    void test7() {
+        String numberLine = "1 2 3";
+        Delimiter delimiter = Delimiter.create(createLine(" "));
+        
+        assertArrayEquals(delimiter.split(numberLine), new String[]{"1","2","3"});
     }
 
     private static DelimiterLine createLine(String value) {

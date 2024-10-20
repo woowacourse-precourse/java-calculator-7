@@ -3,11 +3,13 @@ package calculator.delimiter;
 import calculator.command.DelimiterLine;
 import calculator.command.NumbersLine;
 
+import java.util.regex.Pattern;
+
 public class Delimiter {
     private static final String DEFAULT_DELIMITER_REGEX = "[,:]";
     public static final Delimiter DEFAULT_DELIMITER = new Delimiter(DEFAULT_DELIMITER_REGEX);
 
-    private final String customDelimiter;
+    private final String regex;
 
     public static Delimiter create(DelimiterLine delimiterLine) {
         if(delimiterLine == null || isNotSingleCharacter(delimiterLine))
@@ -15,26 +17,30 @@ public class Delimiter {
 
         if(delimiterLine.isEmpty())
             return DEFAULT_DELIMITER;
-        return new Delimiter(delimiterLine.value());
+        return new Delimiter(escape(delimiterLine.value()));
+    }
+
+    private static String escape(String value) {
+        return Pattern.quote(value);
     }
 
     private static boolean isNotSingleCharacter(DelimiterLine delimiterLine) {
         return !delimiterLine.isEmpty() && delimiterLine.value().length() != 1;
     }
 
-    private Delimiter(String delimiter) {
-        customDelimiter = delimiter;
+    private Delimiter(String regex) {
+        this.regex = regex;
     }
 
     public String[] split(String line) {
-        return line.split(customDelimiter);
+        return line.split(regex);
     }
 
     public String[] split(NumbersLine numbersLine) {
-        return numbersLine.value().split(customDelimiter);
+        return numbersLine.value().split(regex);
     }
 
-    String getCustomDelimiter() {
-        return customDelimiter;
+    String getRegex() {
+        return regex;
     }
 }

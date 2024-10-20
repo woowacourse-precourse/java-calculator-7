@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.regex.Pattern;
+
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,7 +32,7 @@ class DelimiterReaderTest {
 
         Delimiter result = delimiterReader.readDelimiter(testLine);
 
-        assertThat(result.getCustomDelimiter()).isEqualTo(";");
+        assertThat(result.getRegex()).isEqualTo(Pattern.quote(";"));
     }
 
     @Test
