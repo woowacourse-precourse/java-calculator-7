@@ -51,4 +51,10 @@ class InputValidatorTest {
                 .hasMessage("잘못된 커스텀 구분자 형식입니다.");
     }
 
+    @Test
+    void 입력값이_숫자_하나일_때() {
+        String input = "123";
+        assertThat(inputValidator.isSingleNumberInput(input)).isTrue();
+    }
+
 }
