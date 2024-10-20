@@ -17,7 +17,7 @@ public class Calculator {
                 continue;
             }
 
-            double toAdd = parseDouble(token);
+            final double toAdd = parseDouble(token);
             if (toAdd <= 0) {
                 throw new IllegalArgumentException();
             }

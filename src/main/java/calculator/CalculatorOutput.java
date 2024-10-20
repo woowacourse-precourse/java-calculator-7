@@ -6,7 +6,7 @@ public class CalculatorOutput {
     private CalculatorOutput() {
     }
 
-    public static void print(double result) {
+    public static void print(final double result) {
         System.out.println(PRINT_PREFIX + result);
     }
 }
