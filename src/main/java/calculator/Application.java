@@ -23,7 +23,11 @@ public class Application {
     private int calculateSum(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
-            sum += Integer.parseInt(number);
+            int intValue = Integer.parseInt(number);
+            if (intValue < 0) {
+                throw new IllegalArgumentException();
+            }
+            sum += intValue;
         }
         return sum;
     }
