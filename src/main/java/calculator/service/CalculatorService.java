@@ -9,7 +9,7 @@ public class CalculatorService {
     /**
      * 덧셈 로직을 순차적으로 진행한다.
      */
-    public int sum(String s) {
+    public int add(String s) {
         this.s = s;
         boolean hasCustomSeparator = checkCustomSeparator();
         String[] separatedString = separate(hasCustomSeparator);
