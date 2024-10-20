@@ -1,5 +1,6 @@
 package calculator.output;
 
 public interface OutputManager {
-    void doPrint(final int result);
+    void printResult(final int result);
+    void printPrompt();
 }

@@ -44,7 +44,6 @@ public class SeparatorUtils {
      */
     public static char StringToChar(final String separator) {
 
-        System.out.println(separator);
         //검증 코드
         if(separator.length() != 1) {
             throw new IllegalArgumentException("구분자가 문자 형식이 아닙니다.");
