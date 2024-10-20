@@ -15,11 +15,14 @@ public class CalculatorService {
 
         if (customSeparator != null) {
             separators.add(customSeparator);
+            cleanedExpression = removeCustomSeparatorDefinition(cleanedExpression);
         }
 
-//        this.tokens = cleanedExpression.split(String.join("|", separators));
-//        validateIsNumber(tokens);
-//        validateIsPositiveNumber(tokens);
+        this.tokens = cleanedExpression.split(String.join("|", separators));
+
+        validateStartPositiveNumber(tokens[0]);
+        validateIsNumber(tokens);
+        validateIsPositiveNumber(tokens);
     }
 
     private String extractCustomSeparator(String expression) {
@@ -44,12 +47,24 @@ public class CalculatorService {
         Validator.validateSingleCharacterSeparator(separator);
     }
 
+    private String removeCustomSeparatorDefinition(String expression) {
+        Matcher matcher = CUSTOM_SEPARATOR_REGEX.matcher(expression);
+        if (matcher.find()) {
+            return matcher.group(2);
+        }
+        return expression;
+    }
+
     private void validateIsNumber(String[] tokens) {
         Validator.isNumber(tokens);
     }
 
     private void validateIsPositiveNumber(String[] tokens) {
         Validator.isPositiveNumber(tokens);
+    }
+
+    private void validateStartPositiveNumber(String startToken) {
+        Validator.startPositiveNumber(startToken);
     }
 
 }
