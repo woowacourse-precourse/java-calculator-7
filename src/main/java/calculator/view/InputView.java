@@ -19,6 +19,7 @@ public class InputView {
         customSeperator = getCustomSeperator(input);
         CheckCustomSeperatorPos.validate(input);
         HasMultiCustomSeperators.validate(input, customSeperator);
+        HasNegativeNumber.validate(input, customSeperator);
         return input;
     }
     private static String getCustomSeperator(String input) {
