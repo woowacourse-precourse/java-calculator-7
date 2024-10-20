@@ -69,8 +69,8 @@ public class Application {
             return 0;
         }
 
-        // 덧셈 처리 전 임시 값
-        return -1;
+        // 덧셈 처리
+        return sumNumbers(numberTokens);
     }
 
     // 정규식에서 특수 문자를 이스케이프 처리하는 메서드
@@ -78,5 +78,19 @@ public class Application {
         return delimiter.replaceAll("([\\W])", "\\\\$1");
     }
 
+    //덧셈과 양수를 제외한 0과 음수에 대해 예외 처리하는 함수
+    private static int sumNumbers(String[] numbers) {
+        int sum = 0;
+        for (String number : numbers) {
+            if (!number.isEmpty()) {
+                int num = Integer.parseInt(number);
+                if (num <= 0) {
+                    throw new IllegalArgumentException();
+                }
+                sum += num;
+            }
+        }
+        return sum;
+    }
 
 }
