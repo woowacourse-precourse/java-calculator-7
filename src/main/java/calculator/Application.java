@@ -19,7 +19,13 @@ public class Application {
 
         String[] numbers;
 
-        if (data.contains(",")){
+        if (data.startsWith("//")){
+            int lastIndex = data.indexOf("\\n");
+            System.out.println(lastIndex);
+            String customSeparator = data.substring(2,lastIndex);
+            data = data.substring(lastIndex + 2);
+            numbers = data.split(customSeparator);
+        } else if (data.contains(",")){
             numbers = data.split(",");
         } else if (data.contains(":")) {
             numbers = data.split(":");
