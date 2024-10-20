@@ -25,8 +25,6 @@ public class CalculatorService {
             sum += Integer.parseInt(num);
         }
 
-        System.out.println(sum);
-
         return sum;
 
     }

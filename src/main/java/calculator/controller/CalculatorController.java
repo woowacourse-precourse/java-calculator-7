@@ -2,15 +2,18 @@ package calculator.controller;
 
 import calculator.service.CalculatorService;
 import calculator.view.InputView;
+import calculator.view.OutputView;
 
 public class CalculatorController {
 
     private final CalculatorService calculatorService;
     private final InputView inputView;
+    private final OutputView outputView;
 
-    public CalculatorController(CalculatorService calculatorService, InputView inputView){
+    public CalculatorController(CalculatorService calculatorService, InputView inputView,OutputView outputView){
         this.calculatorService =calculatorService;
         this.inputView =inputView;
+        this.outputView = outputView;
     }
 
     /**
@@ -19,7 +22,8 @@ public class CalculatorController {
      */
     public void start(){
         String inputString = InputStringFromInputView();
-        calculatorService.calculate(inputString);
+        int result = calculatorService.calculate(inputString);
+        outputView.result(result);
     }
 
 
