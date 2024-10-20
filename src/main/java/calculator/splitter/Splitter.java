@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import static java.lang.Integer.parseInt;
+
 public class Splitter implements SplitterInterface {
     private Seperator seperator;
 
@@ -23,14 +25,18 @@ public class Splitter implements SplitterInterface {
 
         for (String number : numberString) {
             number = number.trim();
+            if (parseInt(number) < 0){
+                throw new NumberFormatException();
+            }
             if (!number.isEmpty()) {
                 try{
-                    numbers.add(Integer.parseInt(number));
-                } catch (IllegalArgumentException e){
-
+                    numbers.add(parseInt(number));
+                } catch (NumberFormatException e){
+                    throw new IllegalArgumentException();
                 }
             }
         }
         return numbers;
     }
+
 }
