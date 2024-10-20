@@ -43,7 +43,12 @@ public class Application {
                     }
                     total += Integer.parseInt(str[i]);
                 } catch (NumberFormatException e) {
-                    total +=0 ;
+                    if(str[i]==""){
+                        total += 0;
+                    }
+                    else{
+                        throw new IllegalArgumentException("숫자가 아닙니다.");
+                    }
                 }
             }
 
