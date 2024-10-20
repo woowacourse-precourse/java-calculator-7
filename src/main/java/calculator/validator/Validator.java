@@ -87,7 +87,7 @@ public class Validator {
                 return true;
             }
         }
-        return true;
+        return false;
     }
 
     //커스텀 구분자 이후의 문자열 반환
