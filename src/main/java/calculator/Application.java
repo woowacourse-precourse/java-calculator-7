@@ -2,6 +2,9 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Application {
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -37,6 +40,11 @@ public class Application {
     }
 
     private static String[] split(String userInput) {
+        Matcher matcher = Pattern.compile("//(.)\\\\n(.*)").matcher(userInput);
+        if (matcher.find()) {
+            String custom = matcher.group(1);
+            return matcher.group(2).trim().split(custom);
+        }
         return userInput.split(",|:");
     }
 
