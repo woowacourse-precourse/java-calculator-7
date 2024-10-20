@@ -10,8 +10,10 @@ public class Application {
         TokenSplitter splitter = new TokenSplitter();
         String[] tokens = splitter.split(input);
 
-        for (String token : tokens) {
-            System.out.println(token); // 분리된 토큰 출력 (디버깅용)
-        }
+        StringCalculator calculator = new StringCalculator();
+        int result = calculator.sumTokens(tokens);
+
+        System.out.println("결과 : " + result); // 합산 결과 출력
     }
+
 }
