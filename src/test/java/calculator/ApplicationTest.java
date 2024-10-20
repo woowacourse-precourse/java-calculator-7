@@ -26,11 +26,12 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트() {
-        assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
-        );
+    void 음수_입력_예외_테스트() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("1,-2,3"))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("음수는 허용되지 않습니다: -2");
+        });
     }
 
     @Override
