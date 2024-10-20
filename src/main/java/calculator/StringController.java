@@ -1,5 +1,7 @@
 package calculator;
 
+import java.math.BigInteger;
+
 public class StringController {
     private final InputView inputView;
     private final OutputView outputView;
@@ -17,7 +19,7 @@ public class StringController {
         if (input.isEmpty()) {
             System.out.println("결과 : 0");
         } else {
-            int answer = stringFacadeService.addNumbersFromInput(input);
+            BigInteger answer = stringFacadeService.addNumbersFromInput(input);
             outputView.displayResult(answer);
         }
     }
