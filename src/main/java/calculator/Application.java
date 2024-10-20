@@ -6,6 +6,9 @@ public class Application {
     // handle custom delimiter
     public static String handleCustomDelimiter(String input) {
         int custom_end_idx = input.indexOf("\\n");
+        if (custom_end_idx == -1) {
+            throw new IllegalArgumentException("커스텀 구분자를 위한 \\n이 존재하지 않습니다.");
+        }
         String custom_delimiter = input.substring(2, custom_end_idx);
 
         // handling special characters in Java
@@ -52,8 +55,11 @@ public class Application {
         // 기능 1,2,3 : basic & custom delimiters + handling incorrect input exception
         if (!input.isEmpty()) {
             // custom delimiter
-            if (input.contains("//")) {
+            if (input.startsWith("//")) {
                 input = handleCustomDelimiter(input);
+            }
+            else if (input.contains("//")) {
+                throw new IllegalArgumentException("//가 문자열 앞부분에 위치하지 않습니다.");
             }
 
             calculateResult(input);
