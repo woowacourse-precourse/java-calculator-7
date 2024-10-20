@@ -14,11 +14,11 @@ public class Calculator {
     private Adder adder;
     private DelimiterSplitter delimiterSplitter;
 
-    public Calculator() {
+    public Calculator(Adder adder) {
         printStartMessage();
         this.delimiters = new ArrayList<>(List.of(new Delimiter(","), new Delimiter(":")));
         this.singleCustomDelimiterParser = new SingleCustomDelimiterParser(input);
-        this.adder = new PositiveAdder();
+        this.adder = adder;
         this.analyzingTarget = "";
     }
 
