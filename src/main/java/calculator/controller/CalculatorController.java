@@ -28,9 +28,11 @@ public class CalculatorController {
             expression = calculatorService.removeCustomSeparatorDefinition(expression);
         }
 
-        int[] number = calculatorService.separate(calculator.getSeparators(), expression);
+        String[] totkens = calculatorService.separate(calculator.getSeparators(), expression);
+        int[] number = calculatorService.convertToIntArray(totkens);
 
         calculator.setNumber(number);
+        
         calculator.calc();
         OutputView.executionResult(calculator.getResult());
     }
