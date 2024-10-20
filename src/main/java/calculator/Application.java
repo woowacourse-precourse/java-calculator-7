@@ -19,7 +19,11 @@ public class Application {
         separator.add(",");
         separator.add(":");
 
-        extractCustomSep(input, separator);
+        if (input.startsWith("//")) {
+            extractCustomSep(input, separator);
+        }
+
+        String[] separatedNumber = splitNumberBySeparator(input, separator);
 
     }
 
@@ -31,5 +35,34 @@ public class Application {
             separator.add(customSep);
         }
     }
+
+    private static String[] splitNumberBySeparator(String input, List<String> separator) {
+        // custom구분자가 있는 경우
+        if (input.startsWith("//")) {
+            int sepEndIndex = input.indexOf("\\n");
+            System.out.println("sepEndIndex = " + sepEndIndex);
+
+            // 커스텀 구분자가 있으면 구분자 이후의 문자열만 input에 넣음
+            input = input.substring(sepEndIndex + 2);
+            System.out.println("input = " + input);
+        }
+
+        String[] separatedNumber = input.split(separator.get(0));
+
+        for (int i = 1; i < separator.size(); i++) {
+            List<String> tempStorage = new ArrayList<>();
+            for (String numStr : separatedNumber) {
+                System.out.println("numStr = " + numStr);
+                String[] tempSplit = numStr.split(separator.get(i));
+                for (String s : tempSplit) {
+                    System.out.println("s = " + s);
+                    tempStorage.add(s.trim());
+                }
+            }
+            separatedNumber = tempStorage.toArray(new String[0]);
+        }
+        return separatedNumber;
+    }
+
 
 }
