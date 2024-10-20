@@ -10,11 +10,8 @@ public class Application {
         String input = Console.readLine();
     }
 
-    public static int useCustomSeparator(String str) {
-        int separatorIndex = str.indexOf("\\n");
-        String customSeparator = str.substring(2, separatorIndex);
-        String numbers = str.substring(separatorIndex + 2);
-        return numberSum(numbers.split(Pattern.quote(customSeparator)));
+    public static int basicSeparator(String str) {
+        return numberSum(str.split("[,:]"));
     }
 
 }
