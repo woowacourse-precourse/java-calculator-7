@@ -32,6 +32,7 @@ public class StringCalculator {
 
     private String getCustomDelimiter(String userInput) {
         String customDelimiterPattern = "^//(.)\\\\n";
+        String checkNumberPattern = "[0-9]";
 
         Pattern pattern = Pattern.compile(customDelimiterPattern);
         Matcher matcher = pattern.matcher(userInput);
@@ -40,7 +41,7 @@ public class StringCalculator {
             return null;
 
         String result = matcher.group(1);
-        if (Pattern.matches("[0-9]", result))
+        if (Pattern.matches(checkNumberPattern, result))
             throw new IllegalArgumentException("Cannot specify a number with a custom delimiter.");
 
         return result;
