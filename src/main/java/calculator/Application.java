@@ -2,39 +2,22 @@ package calculator;
 
 import adder.Adder;
 import camp.nextstep.edu.missionutils.Console;
-import java.util.ArrayList;
+import parser.Parser;
 import separator.Separator;
 
 public class Application {
     public static void main(String[] args) {
+
         Adder adder = new Adder();
         Separator separator = new Separator();
+        Parser parser = new Parser();
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
-        String calculatorFormula = input;
-        // 구분자 추출
-        if (separator.validateCustomSeparatorForParsing(input)) {
-            Character customSeparator = separator.parseCustomSeparator(input);
-            separator.addNewSeparator(customSeparator);
-
-            calculatorFormula = separator.parseString(input);
-        }
-
-        // 계산 시작
-        ArrayList<String> parsedCalculatorFormula = adder.parseStringWithSeparators(calculatorFormula);
-
-        if (!adder.isValidated(parsedCalculatorFormula)) {
-            throw new IllegalArgumentException();
-        }
-
-        ArrayList<Integer> numbers = adder.parseOnlyNumbers(parsedCalculatorFormula);
-        if (!adder.isAllPositiveInteger(numbers)) {
-            throw new IllegalArgumentException();
-        }
-
-        int result = adder.addNumbers(numbers);
+        separator.saveSeparator(input);
+        String stringToCalculate = parser.parseStringToCalculate(input);
+        int result = adder.add(stringToCalculate);
 
         System.out.println("결과 : " + result);
 
