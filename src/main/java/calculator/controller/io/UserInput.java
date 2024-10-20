@@ -1,4 +1,4 @@
-package calculator.io;
+package calculator.controller.io;
 
 public class UserInput {
 

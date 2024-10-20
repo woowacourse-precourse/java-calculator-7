@@ -1,4 +1,4 @@
-package calculator.io;
+package calculator.controller.io;
 
 import calculator.error.ErrorMessage;
 import java.util.Arrays;

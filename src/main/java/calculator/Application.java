@@ -1,8 +1,8 @@
 package calculator;
 
 import calculator.controller.Calculator;
-import calculator.io.InputHandler;
-import calculator.io.OutputHandler;
+import calculator.controller.io.InputHandler;
+import calculator.controller.io.OutputHandler;
 
 public class Application {
 

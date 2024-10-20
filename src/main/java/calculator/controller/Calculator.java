@@ -1,8 +1,8 @@
 package calculator.controller;
 
-import calculator.io.InputHandler;
-import calculator.io.OutputHandler;
-import calculator.io.UserInput;
+import calculator.controller.io.InputHandler;
+import calculator.controller.io.OutputHandler;
+import calculator.controller.io.UserInput;
 import calculator.model.InputText;
 import calculator.model.Tokens;
 
