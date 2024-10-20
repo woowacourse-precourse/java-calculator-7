@@ -12,16 +12,16 @@ public class MainController {
         readUserFormula();
     }
 
-    public void readUserFormula(){
+    private void readUserFormula(){
         this.formulaHandler = new FormulaHandler(InputView.readUserNumbers());
         calculate();
     }
 
-    public void calculate(){
+    private void calculate(){
         showSumToUser(Calculator.plus(formulaHandler));
     }
 
-    public void showSumToUser(String sumOfNumbers){
+    private void showSumToUser(String sumOfNumbers){
         OutputView.printSumToUser(sumOfNumbers);
     }
 }
