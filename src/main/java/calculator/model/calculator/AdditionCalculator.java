@@ -13,12 +13,11 @@ public class AdditionCalculator {
     }
 
     private int calculate() {
-        int sum = 0;
-        for (Number n : numberParser.getNumbers()) {
-            sum += n.getNumber();
-        }
-        return sum;
+        return numberParser.getNumbers().stream()
+                .mapToInt(Number::getNumber)
+                .sum();
     }
+
 
     public int getResult() {
         return result;
