@@ -51,18 +51,10 @@ public class Calculator {
             // 공백 제거
             number = number.trim();
             // 숫자인지 검사
-            if (!isNumeric(number)) {
-                throw new IllegalArgumentException("숫자가 아닙니다: " + number);
-            }
-            // 양수인지 검사
-            if (!isPositive(number)) {
-                throw new IllegalArgumentException("양수가 아닙니다: " + number);
+            if (!number.matches("\\d+")) {
+                throw new IllegalArgumentException("유효한 숫자가 아닙니다: " + number);
             }
         }
-    }
-
-    public boolean isNumeric(String number) {
-        return number.matches("\\d+");
     }
 
     public boolean isPositive(String number) {
