@@ -8,6 +8,7 @@ public class InputValidator {
     // 기본 구분자 선언
     private static final String DEFAULT_DELIMITERS = ",|:";
 
+    // 입력을 검증하는 메서드
     public static void validate(String userInput) {
         checkNullOrEmpty(userInput);
         checkNegativeNumbers(userInput);
@@ -22,7 +23,7 @@ public class InputValidator {
     // 입력이 null이거나 빈 문자열인지 확인하는 메서드
     private static void checkNullOrEmpty(String userInput) {
         if (userInput == null || userInput.trim().isEmpty()) {
-            throw new IllegalArgumentException("입력 문자열이 null이거나 빈 문자열입니다.");
+            throw new NullPointerException();
         }
     }
 
