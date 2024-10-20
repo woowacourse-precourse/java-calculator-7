@@ -59,4 +59,12 @@ public class StringAddCalculator {
         throw new IllegalArgumentException("커스텀 구분자가 없습니다.");
     }
 
+    private String[] extractNumbersForCustom(String input) {
+        String customDelimiter = findCustomDelimiter(input);
+        input = input.replace("\\n", "\n");
+        int index = input.indexOf("\n");
+        return input.substring(index + 1).split(customDelimiter);
+    }
+
+
 }
