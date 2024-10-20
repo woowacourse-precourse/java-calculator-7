@@ -19,5 +19,6 @@ public class CalculatorController {
     public void runCalculator() {
         Calculator calculator = new Calculator(inputView.inputNumber());
         int result = calculator.sum();
+        outputView.printResult(result);
     }
 }
