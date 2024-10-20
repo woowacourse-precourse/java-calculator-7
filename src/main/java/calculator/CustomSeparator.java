@@ -3,11 +3,10 @@ package calculator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomSeparator extends AbstractSeparator {
+public class CustomSeparator implements Separator {
     private String separator = "";
     private final String customPrefix = "//";
     private final String customSuffix = "\\n";
-    private final String regex = "(\\d+(separator))+\\d";
 
     @Override
     public List<Long> separate(String userInput) {
