@@ -71,6 +71,8 @@ public class Application {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
+        System.out.println("계산기가 종료되었습니다.");
     }
 
     public static void tempListToWholeList(ArrayList<Integer> tempList, ArrayList<Integer> wholeList) {
