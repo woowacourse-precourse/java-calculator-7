@@ -2,7 +2,7 @@
 
 ## 기능 목록
 - Application 클래스의 main 메소드
-  - readLine()을 이용해 덧셈할 문자열을 입력받아 Calculator.add()에 전달하고 결과값을 출력한다.
+  - ✅ readLine()을 이용해 덧셈할 문자열을 입력받아 Calculator.add()에 전달하고 결과값을 출력한다.
     (IllegalArgumentException이 발생한 경우, 프로그램을 종료한다.)
   - 결과값이 정수 형태인 경우, 정수로 변환하여 출력한다.
 - Calculator 클래스의 add 메소드
