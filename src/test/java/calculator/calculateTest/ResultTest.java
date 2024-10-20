@@ -136,6 +136,14 @@ class ResultTest extends NsTest {
         });
     }
 
+    @Test
+    void 백슬래시_슬래시_커스텀_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("//\\/\\n1\\/2\\/3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
