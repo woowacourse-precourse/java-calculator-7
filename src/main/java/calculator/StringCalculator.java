@@ -9,10 +9,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
+    private final String checkDelimiterPattern = "^//(.)\\\\n";
+
+
     private String userInput;
     private List<String> delimiters;
 
     public StringCalculator() {
+        userInput = null;
         delimiters = new ArrayList<String>(Arrays.asList(",", ":"));
     }
 
@@ -20,6 +24,8 @@ public class StringCalculator {
         userInput = getUserInput();
         String customDelimiter = getCustomDelimiter(userInput);
         addCustomDelimiter(customDelimiter);
+
+        calculateSum(userInput, delimiters);
     }
 
     private String getUserInput() {
@@ -31,10 +37,9 @@ public class StringCalculator {
     }
 
     public String getCustomDelimiter(String userInput) {
-        String customDelimiterPattern = "^//(.)\\\\n";
         String checkNumberPattern = "[0-9]";
 
-        Pattern pattern = Pattern.compile(customDelimiterPattern);
+        Pattern pattern = Pattern.compile(checkDelimiterPattern);
         Matcher matcher = pattern.matcher(userInput);
 
         if (!matcher.find())
@@ -45,5 +50,19 @@ public class StringCalculator {
             throw new IllegalArgumentException("Cannot specify a number with a custom delimiter.");
 
         return result;
+    }
+
+    public void calculateSum(String userInput, List<String> delimiters) {
+        String removed = removeHeaderFromInput(userInput);
+    }
+
+    public String removeHeaderFromInput(String userInput) {
+        Pattern pattern = Pattern.compile(checkDelimiterPattern);
+        Matcher matcher = pattern.matcher(userInput);
+
+        if (!matcher.find())
+            return userInput;
+
+        return matcher.replaceAll("");
     }
 }
