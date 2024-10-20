@@ -16,7 +16,6 @@ public class CalculatorController {
 
     public void calStart() {
         String[] digits = calculatorView.getDigits();
-        System.out.println(Arrays.toString(digits));
         calResult(calculatorModel.getResult(digits));
     }
 
