@@ -96,6 +96,14 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 구분자가_잘못_입력되었을_때_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\\n1;2a3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
