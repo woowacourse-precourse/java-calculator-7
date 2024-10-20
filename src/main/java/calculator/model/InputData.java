@@ -10,13 +10,6 @@ public class InputData {
 
     public InputData(String input) {
         this.input = input;
-        validate();
-    }
-
-    public void validate(){
-        if (!isDelimiter() && !convertCalculatorPart().matches("^[0-9,:]*$")) {
-            throw new IllegalArgumentException(ErrorMessage.INPUT_DATA_WITH_DEFAULT_DELIMITER_FORMAT.getError());
-        }
     }
 
     public boolean isDelimiter(){
