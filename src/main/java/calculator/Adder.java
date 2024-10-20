@@ -3,6 +3,7 @@ package calculator;
 import java.util.List;
 
 public class Adder {
+
     private List<Integer> numbers;
 
     public Adder(List<Integer> numbers) {

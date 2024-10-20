@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Delimiters {
+
     private List<String> separators;
 
     public Delimiters(String rawString) {

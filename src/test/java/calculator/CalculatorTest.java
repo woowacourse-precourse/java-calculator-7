@@ -7,6 +7,7 @@ import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
 class CalculatorTest extends NsTest {
+
     @Test
     void 커스텀_구분자_여러_개_사용() {
         assertSimpleTest(() -> {
