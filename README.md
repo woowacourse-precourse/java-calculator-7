@@ -23,4 +23,4 @@
 
 ### 클래스 다이어그램
 
-![Class Diagram.png](img%2FClass%20Diagram.png)
+![Class Diagram.svg](img%2FClass%20Diagram.svg)
