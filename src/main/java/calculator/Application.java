@@ -50,13 +50,13 @@ public class Application {
         // input의 두 번째 문자 이후 모든 문자를 구분자로 추가
         for (int i = 2; i < input.length(); i++) {
             char currentChar = input.charAt(i);
-            if (currentChar == '\\') {
-                if( i+1 < input.length() && input.charAt(i+1) == 'n'){
-                    break;
-                }
-                delimiterBuilder.append("|\\\\");
-            } else {
+            if (currentChar != '\\') {
                 delimiterBuilder.append("|").append(currentChar);
+            }
+            else if (i + 1 < input.length() && input.charAt(i + 1) == 'n') {
+                break;
+            } else {
+                delimiterBuilder.append("|\\\\");
             }
         }
         return delimiterBuilder.toString();  // 수정된 구분자 반환
