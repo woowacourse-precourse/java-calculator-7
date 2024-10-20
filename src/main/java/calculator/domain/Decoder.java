@@ -45,14 +45,9 @@ public class Decoder {
     }
 
     private void validateCustomDelimiter(String customDelimiter) {
-        if (isBlank(customDelimiter) || isInt(customDelimiter)) {
+        if (customDelimiter.isBlank() || isInt(customDelimiter)) {
             throw new IllegalArgumentException();
         }
-    }
-
-    // 커스텀 구분자가 비어있는지 확인
-    private boolean isBlank(String customDelimiter) {
-        return customDelimiter.isBlank();
     }
 
     // 커스텀 구분자가 숫자인지 확인
@@ -69,7 +64,7 @@ public class Decoder {
     private void collectNumbers(String encodedString, String delimiter) {
         String[] tokens = encodedString.split(delimiter);
         for (String t : tokens) {
-            if (t.isBlank()) {
+            if (t.isEmpty()) {
                 continue;
             }
             try {
