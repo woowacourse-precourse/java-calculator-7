@@ -1,9 +1,12 @@
 package calculator.util;
 
+import calculator.exception.util.InputValidateErrorMessage;
 import calculator.exception.util.NumberExtractorErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static calculator.exception.util.InputValidateErrorMessage.*;
+import static calculator.exception.util.NumberExtractorErrorMessage.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -46,7 +49,7 @@ public class NumberExtractorTest {
         // when & then
         assertThatThrownBy(() -> NumberExtractor.extract(input, delimiters))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(NumberExtractorErrorMessage.INVALID_CHARACTER.getMessage());
+                .hasMessageContaining(INVALID_CHARACTER.getMessage());
     }
 
     @Test
@@ -59,7 +62,7 @@ public class NumberExtractorTest {
         // when & then
         assertThatThrownBy(() -> NumberExtractor.extract(input, delimiters))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(NumberExtractorErrorMessage.NEGATIVE_OR_ZERO_NUMBER.getMessage());
+                .hasMessageContaining(NEGATIVE_OR_ZERO_NUMBER.getMessage());
     }
 
     @Test
@@ -72,7 +75,7 @@ public class NumberExtractorTest {
         // when & then
         assertThatThrownBy(() -> NumberExtractor.extract(input, delimiters))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(NumberExtractorErrorMessage.INVALID_CHARACTER.getMessage());
+                .hasMessageContaining(INVALID_CHARACTER.getMessage());
     }
 
     @Test
@@ -85,7 +88,7 @@ public class NumberExtractorTest {
         // when & then
         assertThatThrownBy(() -> NumberExtractor.extract(input, delimiters))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(NumberExtractorErrorMessage.INVALID_SPLIT.getMessage());
+                .hasMessageContaining(INVALID_SPLIT.getMessage());
     }
 
     @Test
@@ -98,7 +101,7 @@ public class NumberExtractorTest {
         // when & then
         assertThatThrownBy(() -> NumberExtractor.extract(input, delimiters))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(NumberExtractorErrorMessage.OUT_OF_INT_RANGE.getMessage());
+                .hasMessageContaining(OUT_OF_INT_RANGE.getMessage());
     }
 
     @Test
@@ -111,6 +114,19 @@ public class NumberExtractorTest {
         // when & then
         assertThatThrownBy(() -> NumberExtractor.extract(input, delimiters))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(NumberExtractorErrorMessage.INVALID_CHARACTER.getMessage());
+                .hasMessageContaining(INVALID_CHARACTER.getMessage());
+    }
+
+    @Test
+    @DisplayName("기본 구분자가 여러개 들어갈 경우")
+    void 기본_구분자_여러개() {
+        // given
+        String input = "13:::::34:2";
+        String[] delimiters = {",", ":", "&"};
+
+        // when & then
+        assertThatThrownBy(() -> NumberExtractor.extract(input, delimiters))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(INVALID_SPLIT.getMessage());
     }
 }

@@ -35,7 +35,7 @@ public class NumberExtractor {
     }
 
     private static void validateToken(String token) {
-        token = token.trim(); // 공백 제거
+        token = token.trim();
 
         // 빈 문자열 검사
         if (token.isEmpty()) {

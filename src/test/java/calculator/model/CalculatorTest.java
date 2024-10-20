@@ -71,7 +71,7 @@ public class CalculatorTest {
     @DisplayName("숫자가 아닌 문자 포함 시 예외 발생")
     void 숫자가_아닌_문자_포함된_문자열_예외_테스트() {
         // given
-        String input = "1,2:abc";
+        String input = "1,2:abc:3";
         Calculator calculator = new Calculator(input);
 
         // when & then
