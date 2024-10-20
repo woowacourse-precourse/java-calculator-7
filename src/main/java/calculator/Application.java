@@ -32,7 +32,6 @@ public class Application {
     public int sumInString(String input) {
         // 숫자 추출 및 합산 로직을 수행
         // 숫자와 부호를 추출하기 위한 StringBuilder
-        Application app = new Application();
         StringBuilder currentNumber = new StringBuilder();
         StringBuilder result = new StringBuilder();
         int sum = 0;
@@ -41,49 +40,44 @@ public class Application {
             char c = input.charAt(i);
 
             // 문자열에 음수가 포함된 경우 예외 발생
-            app.checkForNegativeNumbers(c, i, input);
+            checkForNegativeNumbers(c, i, input);
 
-            if (Character.isDigit(c)) {
-                currentNumber.append(c);
-            } else {
-                if (currentNumber.length() > 0) {
-                    String numStr = currentNumber.toString();
-                    int number = Integer.parseInt(numStr);
-                    sum += number;
-
-                    // 결과 문자열에 추가
-                    if (result.length() > 0) {
-                        result.append(", ");
-                    }
-                    result.append(numStr);
-
-                    // StringBuilder 초기화
-                    currentNumber.setLength(0);
-                }
-            }
-        }
-
-        // 마지막 숫자 처리
-        if (currentNumber.length() > 0) {
-            String numStr = currentNumber.toString();
-            int number = Integer.parseInt(numStr);
-            sum += number;
-
-            if (result.length() > 0) {
-                result.append(", ");
-            }
-            result.append(numStr);
+            sum = numFindInString(c, sum, currentNumber, result);
         }
 
         return sum;
     }
 
-    public void numFindInString() {
+    public int numFindInString(char c, int sum, StringBuilder currentNumber, StringBuilder result) {
 
+        if (Character.isDigit(c)) {
+            currentNumber.append(c);
+        } else {
+            sum = findTheTotal(sum, currentNumber, result);
+        }
+
+        sum = findTheTotal(sum, currentNumber, result);
+
+        return sum;
     }
 
-    public void findTheTotal() {
+    public int findTheTotal(int sum, StringBuilder currentNumber, StringBuilder result) {
+        if (currentNumber.length() > 0) {
+            String numStr = currentNumber.toString();
+            int number = Integer.parseInt(numStr);
+            sum += number;
 
+            // 결과 문자열에 추가
+            if (result.length() > 0) {
+                result.append(", ");
+            }
+            result.append(numStr);
+
+            // StringBuilder 초기화
+            currentNumber.setLength(0);
+        }
+
+        return sum;
     }
 
     public void printResult(int sum) {
