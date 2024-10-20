@@ -68,6 +68,15 @@ public class Application {
         for (String s : numArray) {
             try{
                 int tmp = Integer.parseInt(s);
+
+                try{
+                    if(tmp < 0){
+                        throw new ArithmeticException("음수 불가");
+                    }
+                }catch (ArithmeticException e){
+                    throw new IllegalArgumentException(e.getMessage());
+                }
+
                 numbers.add(tmp);
             }catch (NumberFormatException e){
                 throw new IllegalArgumentException("문자열 정수로 변환 불가");
