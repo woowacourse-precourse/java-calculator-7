@@ -25,6 +25,7 @@ public class Application {
 
         String[] separatedNumber = splitNumberBySeparator(input, separator);
 
+        validateNumbers(separatedNumber);
     }
 
     // 커스텀 구분자(Separator, Sep)를 추출
@@ -64,5 +65,15 @@ public class Application {
         return separatedNumber;
     }
 
+    // separatedNumber가 양수 맞는지 검증
+    private static void validateNumbers(String[] separatedNumber) {
+        for (String number : separatedNumber) {
+            int parseNum = Integer.parseInt(number);
+            if (parseNum < 1) {
+                throw new IllegalArgumentException("0과 음수는 입력할 수 없습니다.");
+
+            }
+        }
+    }
 
 }
