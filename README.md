@@ -18,6 +18,7 @@
 - 커스텀 구분자가 2개 이상 들어온다면, IllegalArgumentException을 발생시키고 종료한다.
 - 커스텀 구분자를 지정하는 형식이 잘못됐다면, IllegalArgumentException을 발생시키고 종료한다.
 - 커스텀 구분자가 "." 이라면, IllegalArgumentException을 발생시키고 종료한다.
+- 커스텀 구분자가 숫자라면, IllegalArgumentException을 발생시키고 종료한다.
 - 구분자로 나눈 문자에서 숫자가 아닌 값이 포함된다면 IllegalArgumentException을 발생시키고 종료한다.
 - 구분자로 나눈 문자에서 음수가 포함된다면 IllegalArgumentException을 발생시키고 종료한다.
 
