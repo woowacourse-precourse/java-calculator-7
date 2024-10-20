@@ -14,7 +14,7 @@
 - [x] 구분자를 따로 관리 하는 기능 (유지보수 및 확장성 고려) -> Delimiters.java
 
 [ Test ]
-- [] test case 추가
+- [x] test case 추가
 
 [ Util ]
 - [] 잘못된 값을 입력할 경우 예외처리하는 기능 -> Validator.java
