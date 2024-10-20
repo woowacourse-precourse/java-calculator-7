@@ -1,17 +1,30 @@
 package calculator;
 
+import java.util.ArrayList;
+
+import static calculator.UserView.*;
+
 public class AdditionCalculator {
-    private final UserView userView = new UserView();
-    private int result = 0;
     private String userInput;
+    private ArrayList<Integer> extractedNumber;
 
     public void run(){
-        userView.printStartCalculator();
         setUserInput();
-        userView.printResult(result);
+        NumberExtraction numberExtraction = new NumberExtraction();
+        extractedNumber = numberExtraction.run(userInput);
+        printResult(getSumList());
     }
 
     public void setUserInput() {
-        userInput = userView.readInputString();
+        printStartCalculator();
+        userInput = readInputString();
+    }
+
+    public int getSumList(){
+        int total = 0;
+        for (Integer n : extractedNumber) {
+            total += n;
+        }
+        return total;
     }
 }
