@@ -2,6 +2,8 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.math.BigInteger;
+
 public class Application {
     static final String CUSTOM_DELIM_START = "//";
     static final String CUSTOM_DELIM_END = "\\n";
@@ -12,7 +14,7 @@ public class Application {
 
         String[] parsedStrings = parse(input);
 
-        int sum = calculateSum(parsedStrings);
+        BigInteger sum = calculateSum(parsedStrings);
 
         StringBuilder result = new StringBuilder("결과 : ");
         result.append(sum);
@@ -41,27 +43,27 @@ public class Application {
         return result;
     }
 
-    static int calculateSum(String[] parsedStrings) {
-        int sum = 0;
+    static BigInteger calculateSum(String[] parsedStrings) {
+        BigInteger sum = new BigInteger("0");
 
         for (String parsedString: parsedStrings) {
-            int positiveNumber = toPositiveNumber(parsedString);
-            sum += positiveNumber;
+            BigInteger positiveNumber = toPositiveNumber(parsedString);
+            sum = sum.add(positiveNumber);
         }
 
         return sum;
     }
 
-    static int toPositiveNumber(String input) {
-        int result;
+    static BigInteger toPositiveNumber(String input) {
+        BigInteger result;
 
         try {
-            result = Integer.parseInt(input);
+            result = new BigInteger(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(e.toString());
         }
 
-        if(result < 1) {
+        if(result.compareTo(BigInteger.ONE) < 0) {
             throw new IllegalArgumentException("only natural numbers can be entered");
         }
 
