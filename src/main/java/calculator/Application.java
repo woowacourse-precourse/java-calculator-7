@@ -7,22 +7,14 @@ public class Application {
 
     public static void main(String[] args) {
 
-        int sum = 0;
+        InputManager inputManager = new InputManager();
+        OutputManager outputManager = new OutputManager();
+        Calculator calculator = new Calculator();
 
-        String input = InputManager.inputStr();
+        int sum;
 
-        if (Calculator.isCustomInput(input)) {
-            sum = Calculator.handleCustomInput(input);
-        } else if (Calculator.isBasicInput(input)) {
-            sum = Calculator.calculateSum(input);
-        } else if (input.isEmpty()) {
-            sum = 0;
-        } else if (input.matches("[0-9]+")) {
-            sum = Integer.parseInt(input);
-        } else {
-            Validator.checkCustomStyle(input);
-        }
-
-        OutputManager.outputSum(sum);
+        String input = inputManager.inputStr();
+        sum = calculator.processCalculate(input);
+        outputManager.outputSum(sum);
     }
 }
