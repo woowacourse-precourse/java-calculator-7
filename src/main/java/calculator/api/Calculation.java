@@ -1,13 +1,13 @@
 package calculator.api;
 
 public class Calculation {
-    private Integer sum;
+    private Double sum;
 
     public Calculation(){
-        this.sum=0;
+        this.sum=0.0;
     }
 
-    public Integer calculationString(String separator, String input){
+    public Double calculationString(String separator, String input){
 
         if(!separator.equals("[,;]")){
             int i = input.indexOf("\\");
@@ -18,7 +18,7 @@ public class Calculation {
 
         try{
             for(String temp : split){
-                sum+=Integer.parseInt(temp);
+                sum+=Double.parseDouble(temp);
             }
         } catch(NumberFormatException err){
             throw new IllegalArgumentException();

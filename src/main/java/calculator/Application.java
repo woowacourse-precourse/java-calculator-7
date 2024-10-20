@@ -16,7 +16,7 @@ public class Application {
             String separator = validation.validateString(inputString);
 
             Calculation calculation = new Calculation();
-            Integer result = calculation.calculationString(separator,inputString);
+            Double result = calculation.calculationString(separator,inputString);
             System.out.println("결과 : " + result);
         }catch (IllegalStateException err){
             return;
