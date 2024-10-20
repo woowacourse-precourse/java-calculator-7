@@ -5,6 +5,7 @@ import java.util.stream.Stream;
 
 public enum DefaultDelimiter {
 
+    // 이 변수들은 enum 메서드인 values()에 쓰이므로 주의할 것
     COLON(":"),
     COMMA(",");
 
