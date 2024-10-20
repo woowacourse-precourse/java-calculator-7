@@ -12,6 +12,10 @@ public class Application {
 
         // 구분자 확인
         String separator = getSeparator(input);
+
+        // 문자열 분리
+        String[] numbers = splitInput(input, separator);
+
     }
 
     // 구분자 확인 메소드
@@ -25,5 +29,18 @@ public class Application {
         }
 
         return "[,:]";
+    }
+
+    // 문자열 분리 메소드
+    public static String[] splitInput(String input, String separator){
+
+        if(input.startsWith("//")){
+            int startNumberIndex = input.indexOf("\\n");
+            if(startNumberIndex != -1){
+                input = input.substring(startNumberIndex + 2);
+            }
+        }
+
+        return input.split(separator);
     }
 }
