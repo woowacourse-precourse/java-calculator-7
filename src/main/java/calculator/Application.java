@@ -8,9 +8,7 @@ import java.util.Objects;
 
 public class Application {
     public static String[] extraction(String input) {
-
         List<String> delimiters = new ArrayList<>();
-
         delimiters.add(",");
         delimiters.add(":");
 
@@ -27,27 +25,31 @@ public class Application {
 
         return numbers;
     }
-
     private static void validData(String[] numbers, String input) {
         for (String num : numbers) {
             num = num.trim();
 
             if (Objects.equals(num, input)) {
-                throw new IllegalArgumentException("구분자가 포함되어있지 않습니다. 다시 입력해주세요.");
+                throw new IllegalArgumentException(
+                        "구분자가 포함되어있지 않습니다. 다시 입력해주세요."
+                );
             }
 
             if (!num.matches("\\d+")) {
-                throw new IllegalArgumentException("입력 형태가 잘못되었습니다. 다시 입력해주세요.");
+                throw new IllegalArgumentException(
+                        "입력 형태가 잘못되었습니다. 다시 입력해주세요."
+                );
             }
 
             int n = Integer.parseInt(num);
             if (n < 0) {
-                throw new IllegalArgumentException("음수는 허용되지 않습니다. 다시 입력해주세요.");
+                throw new IllegalArgumentException(
+                        "음수는 허용되지 않습니다. 다시 입력해주세요."
+                );
             }
         }
 
     }
-
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
@@ -61,7 +63,6 @@ public class Application {
                 int n = Integer.parseInt(num);
                 answer += n;
             }
-
             System.out.println("결과 : " + answer);
 
         } catch (IllegalArgumentException e) {
