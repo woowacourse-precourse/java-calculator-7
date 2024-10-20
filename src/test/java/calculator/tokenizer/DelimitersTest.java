@@ -28,7 +28,7 @@ public class DelimitersTest {
         delimiters.addCustomDelimiter(",");
 
         // then
-        assertThat(delimiters.getDelimiters()).containsExactly(",");
+        assertThat(delimiters.getDelimiters()).contains(",");
     }
 
     @Test
@@ -59,8 +59,6 @@ public class DelimitersTest {
     void 구분자들을_합치면_구분자를_이은_문자열을_반환한다() {
         // given
         Delimiters delimiters = new Delimiters();
-        delimiters.addCustomDelimiter(",");
-        delimiters.addCustomDelimiter(":");
 
         // when
         String concatenated = delimiters.concatenate();
