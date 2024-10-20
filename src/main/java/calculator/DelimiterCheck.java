@@ -49,7 +49,9 @@ public class DelimiterCheck {
     private void getSplitFormula() {
         // 분리된 문자열을 splitFormula[] 배열로 저장, 추가) trim()으로 공백문자 지워줌
         inputString = inputString.replaceAll(" ", "");
-
+        if (inputString.contains("-")) {
+            throw new IllegalArgumentException("잘못된 구분자를 입력하셨습니다.");
+        }
         // 구분자 없이 하나만 입력되었을 때 하나의 배열로만 입력
         try {
             splitFormulaArray = inputString.trim().split("\\s*" + delimiter + "\\s*");

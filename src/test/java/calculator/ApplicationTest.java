@@ -51,14 +51,6 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 음수_사용() {
-        assertSimpleTest(() -> {
-            run("-1,2,3");
-            assertThat(output()).contains("결과 : 4");
-        });
-    }
-
-    @Test
     void 실수_사용() {
         assertSimpleTest(() -> {
             run("1.1,2,3");
@@ -126,6 +118,14 @@ class ApplicationTest extends NsTest {
     void 예외_테스트7() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1//[[\\n1[[1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트8() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("-1,2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
