@@ -14,11 +14,11 @@
 
 ### Calculator
 
-- `displayPrompt()` : 상수로 지정한 프롬프트 메시지를 출력합니다.
 - `readInput()` : 입력 값을 받아 해석하고 처리합니다.
 - `sum()` : 숫자형 문자의 값을 더합니다.
 - `add()` : 지금까지 합산한 값에 인자로 들어온 값을 더합니다.
-- `printSum()` : 결과값을 출력합니다.
+- `displayPrompt()` : 상수로 지정한 프롬프트 메시지를 출력합니다.
+- `printSum()` : 지정한 형식으로 결과값을 출력합니다.
 
 ### Parser
 
@@ -29,4 +29,3 @@
 ### DelimeterManager
 
 - `addDelimeter()` : 기존의 구분자(",", ":")에 커스텀 구분자를 더합니다.
-- `getDelimiters()` : 구분자 문자열을 반환합니다.
