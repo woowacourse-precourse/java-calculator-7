@@ -8,15 +8,16 @@ public class StringValidator {
             return "결과 : 0";
         }
 
-        String singleNumber = isSinglePositiveNumber(input);
-        if (singleNumber != null) {
-            return "결과 : " + singleNumber;
+        String delimiter = DEFAULT_DELIMITER;
+        String numbersString = input;
+
+        if (isCustomDelimiter(input)) {
+            delimiter = extractCustomDelimiter(input);
+            numbersString = extractNumbersString(input);
         }
 
-        String delimiter = determineDelimiter(input);
-        String numbersString = extractNumbersString(input);
-
-        return calculateSum(numbersString, delimiter);
+        int sum = calculateSum(numbersString, delimiter);
+        return "결과 : " + sum;
     }
 
     private boolean isEmpty(String input) {
@@ -28,61 +29,50 @@ public class StringValidator {
     }
 
     private String extractCustomDelimiter(String input) {
-        int delimiterSeparatorIndex = input.indexOf("\n");
-        if (delimiterSeparatorIndex <= 2) {
-            throw new IllegalArgumentException();
+        int delimiterEnd = input.indexOf("\n");
+        if (delimiterEnd == -1) {
+            delimiterEnd = input.indexOf("\\n");
+            if (delimiterEnd == -1) {
+                throw new IllegalArgumentException();
+            }
         }
-
-        String delimiter = input.substring(2, delimiterSeparatorIndex);
-        if (isNumeric(delimiter)) {
-            throw new IllegalArgumentException();
-        }
-
-        return delimiter;
-    }
-
-    private String determineDelimiter(String input) {
-        if (isCustomDelimiter(input)) {
-            return extractCustomDelimiter(input);
-        }
-        return DEFAULT_DELIMITER;
+        return input.substring(2, delimiterEnd);
     }
 
     private String extractNumbersString(String input) {
-        if (isCustomDelimiter(input)) {
-            int delimiterSeparatorIndex = input.indexOf("\n");
-            return input.substring(delimiterSeparatorIndex + 1);
+        int numbersStart = input.indexOf("\n");
+        if (numbersStart == -1) {
+            numbersStart = input.indexOf("\\n");
+            if (numbersStart == -1) {
+                throw new IllegalArgumentException();
+            }
+            numbersStart += 2;
+        } else {
+            numbersStart += 1;
         }
-        return input;
+        return input.substring(numbersStart);
     }
 
-    private String calculateSum(String input, String delimiter) {
+    private int calculateSum(String input, String delimiter) {
         String[] numbers = input.split(delimiter);
         int sum = 0;
         for (String number : numbers) {
-            sum += parsePositiveInt(number.trim());
+            if (!number.trim().isEmpty()) {
+                sum += parsePositiveInt(number.trim());
+            }
         }
-        return "결과 : " + sum;
-    }
-
-    private String isSinglePositiveNumber(String input) {
-        try {
-            int value = parsePositiveInt(input.trim());
-            return (!input.contains(",") && !input.contains(":")) ? String.valueOf(value) : null;
-        } catch (IllegalArgumentException e) {
-            return null;
-        }
+        return sum;
     }
 
     private int parsePositiveInt(String number) {
-        int value = Integer.parseInt(number);
-        if (value < 0) {
+        try {
+            int value = Integer.parseInt(number);
+            if (value < 0) {
+                throw new IllegalArgumentException();
+            }
+            return value;
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }
-        return value;
-    }
-
-    private boolean isNumeric(String text) {
-        return text.chars().allMatch(Character::isDigit);
     }
 }
