@@ -17,10 +17,34 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자_공백() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//  \\n1  2  3"))
+                        .isInstanceOf(IllegalArgumentException.class));
+    }
+
+
+    @Test
     void 오직_숫자() {
         assertSimpleTest(() -> {
             run("1");
             assertThat(output()).contains("결과 : 1");
+        });
+    }
+
+    @Test
+    void 일반_구분자_소수() {
+        assertSimpleTest(() -> {
+            run("//;\\n1.1;2.1;3.1");
+            assertThat(output()).contains("결과 : 6.3");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_소수() {
+        assertSimpleTest(() -> {
+            run("1.1, 2.1, 3.1");
+            assertThat(output()).contains("결과 : 6.3");
         });
     }
 
@@ -31,6 +55,8 @@ class ApplicationTest extends NsTest {
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
+
+
 
 //    @Test
 //    void 숫자_컴마() {
