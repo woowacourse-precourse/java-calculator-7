@@ -9,8 +9,7 @@ public class Calculator {
         String userInput = CalStart.inputMessage();
         String delimiter = InputValidate.checkCustom(userInput);
         int sum = calculateSum(userInput, delimiter);
-
-        System.out.println("결과 : " + sum);
+        CalFinish.print(sum);
     }
 
     private static int calculateSum(String userInput, String delimiter) {
