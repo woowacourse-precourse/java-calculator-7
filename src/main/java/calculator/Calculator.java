@@ -44,6 +44,19 @@ public class Calculator {
         }
     }
 
+
+    /**
+     * 숫자가 음수인지 확인하고 음수일 경우 예외를 발생시킵니다.
+     *
+     * @param number 양수인지 음수인지 모를 수를 매개변수로 받습니다.
+     * @throws IllegalArgumentException 음수일 경우 예외 발생시킵니다.
+     */
+    private void isNegativeNumber(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException("입력값이 음수입니다");
+        }
+    }
+
     /**
      * <ul>
      *     <li>빈 문자열일 경우 0을 반환합니다.</li>
@@ -62,6 +75,8 @@ public class Calculator {
         String[] tokens = splitInput(input);
         for (String token : tokens) {
             int number = parseNumber(token);
+            isNegativeNumber(number);
+            total += number;
         }
         return total;
     }
