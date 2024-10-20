@@ -11,7 +11,7 @@ public class Calculator {
 
     private String inputString;
     private final List<String> delimiter = new ArrayList<>();
-    private final List<Integer> numbers = new ArrayList<>();
+    private final List<Long> numbers = new ArrayList<>();
 
     public Calculator() {
         this.delimiter.addAll(List.of(":", "."));
@@ -43,20 +43,20 @@ public class Calculator {
         String[] split = inputString.split(String.valueOf(delimiter));
         for (String s : split) {
             try {
-                numbers.add(Integer.parseInt(s));
+                numbers.add(Long.parseLong(s));
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("잘못된 입력값 입니다.");
             }
         }
 
-        for (Integer i : numbers) {
+        for (Long i : numbers) {
             if (i < 0) {
                 throw new IllegalArgumentException("음수는 입력하실 수 없습니다.");
             }
         }
     }
 
-    public int sum(){
-        return numbers.stream().mapToInt(i -> i).sum();
+    public long sum(){
+        return numbers.stream().mapToLong(i -> i).sum();
     }
 }
