@@ -9,7 +9,7 @@ public class Application {
 
     public static final char BASIC_SEP_ONE = ':';
     public static final char BASIC_SEP_TWO = ',';
-    private static final char NO_CUSTOM_SEP = '1';
+    private static final char NO_CUSTOM_SEP = '\0';
     public static char customSep  = NO_CUSTOM_SEP;
 
     // BASIC_SEP, CustomSep, 숫자인지 유효성 검사
@@ -63,6 +63,7 @@ public class Application {
         // 입력받기 및 입력값 검증
         System.out.println("PLEASE_ENTER_THE_STRING_TO_BE_ADDED");
         String input = Console.readLine();
+        Console.close();
         isValid(input);
         System.out.println("결과 : " + calculate(input));
     }
