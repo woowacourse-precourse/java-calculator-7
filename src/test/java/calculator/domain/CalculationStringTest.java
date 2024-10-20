@@ -23,6 +23,20 @@ class CalculationStringTest {
     }
 
     @Test
+    @DisplayName("CalculationString은_정규표현식의_예약어_문자를_구분자로_SumValues를_반환할_수_있다")
+    public void getSumValues_withRegexExpressionDelimiter() {
+        //given
+        Delimiters delimiters = new Delimiters(new CustomDelimiter("*"));
+        CalculationString calculationString = new CalculationString("5:3,6*6");
+
+        //when
+        SumValues result = calculationString.getSumValues(delimiters);
+
+        //then
+        assertThat(result.sumAll()).isEqualTo(20);
+    }
+
+    @Test
     @DisplayName("CalculationString은_분리_시_구분자와_정수_외_다른_문자가_있으면_예외를_던진다")
     public void stringToIntegerNumberFormatException() {
         //given
