@@ -9,7 +9,9 @@ public class Calculator {
 
         List <String> tokens = splitString(input);
 
-        return tokens.stream().mapToInt(this::parseInt).sum();
+        return tokens.stream()
+                .mapToInt(this::parseInt)
+                .sum();
     }
 
     private List<String> splitString(String input){
