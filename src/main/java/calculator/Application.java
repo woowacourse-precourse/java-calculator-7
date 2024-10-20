@@ -16,9 +16,23 @@ public class Application {
         String input = Console.readLine();
         //커스텀 구분자 사용 시 다음줄 입력받기.
         if (input.startsWith("//") && input.contains("\n")) {
-            String nextLine=Console.readLine();
-            input +="\n"+nextLine;
+            String nextLine = Console.readLine();
+            input += "\n" + nextLine;
         }
         return input;
     }
+
+    //2. 커스텀 구분자 추출
+    private static String extraDelimiter(String input) {
+        String delimiter = ",|:";
+        if (input.startsWith("//")) {
+            int delimiterIndex = input.indexOf("\n");
+            if (delimiterIndex == -1) {
+                throw new IllegalArgumentException("입력 형식이 잘못되었습니다.");
+            }
+            delimiter = Pattern.quote(input.substring(2, delimiterIndex));
+        }
+        return delimiter;
+    }
+
 }
