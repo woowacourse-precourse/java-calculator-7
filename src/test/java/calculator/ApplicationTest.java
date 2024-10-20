@@ -1,12 +1,11 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.Test;
-
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+
+import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
     /**
@@ -64,12 +63,64 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 3");
         });
     }
-//
+
+    /**
+     * 예외처리 관련 테스트
+     */
+    @Test
+    void 예외_빈_문자열() {
+        StringCalculator sc = new StringCalculator();
+        assertThatThrownBy(() -> sc.add(""))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 예외_잘못된_문자열() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,,2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1;2;"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_구분자_지정형식오류() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//\n1;2;3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//1;2;3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_잘못된_구분자_사용() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\n1*2:3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_공백_사용() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1 2;3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
 //    @Test
 //    void 예외_테스트() {
 //        assertSimpleTest(() ->
-//            assertThatThrownBy(() -> runException("-1,2,3"))
-//                .isInstanceOf(IllegalArgumentException.class)
+//                assertThatThrownBy(() -> runException("-1,2,3"))
+//                        .isInstanceOf(IllegalArgumentException.class)
 //        );
 //    }
 
