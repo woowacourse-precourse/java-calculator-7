@@ -9,12 +9,8 @@ public class Calculator {
     public void run() {
         String input = Console.readLine();
 
-        try {
-            int sum = calculate(input);
-            System.out.println("결과 : " + sum);
-        } catch (IllegalArgumentException e) {
-            throw e;
-        }
+        int sum = calculate(input);
+        System.out.println("결과 : " + sum);
     }
 
     /**
@@ -81,14 +77,13 @@ public class Calculator {
      *
      * @param str 확인하고 싶은 문자
      * @return 숫자일 경우, true
-     * @throws NumberFormatException 숫자가 아닌 경우
+     * @throws IllegalArgumentException 숫자가 아닌 경우
      */
     private boolean isNumber(String str) {
         try {
             Integer.parseInt(str);
         } catch (NumberFormatException e) {
-            System.out.println("입력된 값이 숫자가 아닙니다: " + str);
-            throw e;
+            throw new IllegalArgumentException("입력된 값이 숫자가 아닙니다: " + str);
         }
 
         return true;
