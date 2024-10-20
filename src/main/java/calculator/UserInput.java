@@ -43,7 +43,7 @@ public class UserInput {
         }
     }
     public static boolean isEmptyString(String input) {
-        input = input.replaceAll(regex,"");
+        input = input.replaceFirst(regex,"");
         if(input.equals("") || input.equals("\\n"))
             return true;
         else
