@@ -16,6 +16,10 @@ public class Calc {
         }else{
             String[] inputArr = s.split(determine);
             for(String c : inputArr){
+                if(c.equals("")){
+                    throw new IllegalArgumentException();
+                }
+
                 if(!Character.isDigit(c.charAt(0))){
                     throw new IllegalArgumentException();
                 }
