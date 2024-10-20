@@ -9,9 +9,6 @@ import calculator.view.InputView;
 import calculator.view.OutputView;
 
 public class CalculatorController {
-    private static final ParsingService parsingService = new ParsingService();
-    private static final CalculateService calculateService = new CalculateService();
-
     public static void run(){
         UserInputDTO userInputDTO = getUserInput();
 
@@ -33,7 +30,7 @@ public class CalculatorController {
     }
 
     public static OperandDTO parseOperand(String operandStr){
-        return parsingService.parseOperandStr(operandStr);
+        return ParsingService.parseOperandStr(operandStr);
     }
 
     public static ResultDTO addOperand(OperandDTO operandDTO){

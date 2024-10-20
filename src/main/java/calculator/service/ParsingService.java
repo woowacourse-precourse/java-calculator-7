@@ -7,7 +7,7 @@ import static calculator.utils.Constants.*;
 import static calculator.validators.InvalidInputStringFormatException.errorCheck;
 
 public class ParsingService {
-    public OperandDTO parseOperandStr(String operandStr) {
+    public static OperandDTO parseOperandStr(String operandStr) {
         ArrayList<Character> delimiters = new ArrayList<>();
         ArrayList<Integer> operandList = new ArrayList<>();
 
@@ -23,7 +23,7 @@ public class ParsingService {
         return new OperandDTO(operandList);
     }
 
-    public void addDefaultDelimiters(ArrayList<Character> delimiters) {
+    public static void addDefaultDelimiters(ArrayList<Character> delimiters) {
         delimiters.add(DEFAULT_DELIMITER1);
         delimiters.add(DEFAULT_DELIMITER2);
     }
@@ -34,7 +34,7 @@ public class ParsingService {
         return false;
     }
 
-    private void parse(String operandStr, ArrayList<Character> delimiters, ArrayList<Integer> operandList){
+    private static void parse(String operandStr, ArrayList<Character> delimiters, ArrayList<Integer> operandList){
         //custom 구분자 추출
         if(operandStr.startsWith("//")){
             delimiters.add(operandStr.charAt(CUSTOM_DELIMITER_INDEX));
