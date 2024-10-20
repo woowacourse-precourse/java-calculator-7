@@ -11,11 +11,16 @@ public class Application {
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();  // 입력 데이터 읽기
-//        System.out.println("input : " + input); // 입력 데이터 확인
 
+        try {
+            int result = add(input);
+            System.out.println("결과 : " + result);
+        } catch (IllegalArgumentException e) {  // 예외 발생
+            throw new IllegalArgumentException();
+        } finally { // Console 종료
+            Console.close();
+        }
 
-        int result = add(input);
-        System.out.println("결과 : " + result);
     }
 
     public static int add(String input) {   // 입력 받은 문자열을 구분자를 기준으로 숫자로 분리하여 더함
@@ -48,8 +53,15 @@ public class Application {
     }
 
     private static int toPositiveNumber(String token) { // 문자열 숫자를 정수형으로 형변환
-        int number = Integer.parseInt(token);   // 문자형을 정수형으로 형변환
-        return number;
+        try {
+            int number = Integer.parseInt(token);   // 문자형을 정수형으로 형변환
+            if (number < 0) {   // 변환된 숫자가 음수이면 예외 발생
+                throw new IllegalArgumentException();
+            }
+            return number;
+        } catch (NumberFormatException e) { // 숫자가 아니면 예외 발생
+            throw new IllegalArgumentException();
+        }
 
     }
 }
