@@ -225,5 +225,16 @@ class CalculatorServiceTest {
         assertEquals(expectedSum, result);
     }
 
-    
+    @DisplayName("여러 커스텀 구분자를 쉼표로 구분하여 처리하는 성공 로직 테스트")
+    @ParameterizedTest
+    @CsvSource({
+            "'//;,:,|\n1;2|3:4', 10",     // 세미콜론, 콜론, 파이프를 커스텀 구분자로 사용
+            "'//#,*,%\n5#6*7%8', 26",     // 해시, 별표, 퍼센트를 커스텀 구분자로 사용
+            "'//@,!,^\n9@10!11^12', 42",  // 앳, 느낌표, 캐럿을 커스텀 구분자로 사용
+            "'//가,나,다\n1가2나3다4', 10", // 한글 구분자 (가, 나, 다) 사용
+    })
+    void add_withMultipleCustomDelimiters_returnsSum(String input, int expectedSum) {
+        int result = CalculatorService.add(input);
+        assertEquals(expectedSum, result);
+    }
 }
