@@ -1,4 +1,4 @@
-package calculator.model.exception;
+package calculator.exception;
 
 public class CalculatorException extends IllegalArgumentException {
     public CalculatorException(CalculatorErrorMessage errorMessage) {

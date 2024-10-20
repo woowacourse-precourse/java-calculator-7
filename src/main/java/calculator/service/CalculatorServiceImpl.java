@@ -1,14 +1,11 @@
 package calculator.service;
 
-import calculator.dto.request.CalculatorRequest;
 import calculator.dto.request.ConverterRequest;
 import calculator.dto.request.DelimiterExtractRequest;
-import calculator.dto.response.CalculatorResponse;
 import calculator.dto.response.ConverterResponse;
 import calculator.dto.response.DelimiterExtractResponse;
-import calculator.model.Calculator;
-import calculator.model.exception.CalculatorErrorMessage;
-import calculator.model.exception.CalculatorException;
+import calculator.exception.CalculatorErrorMessage;
+import calculator.exception.CalculatorException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +20,17 @@ public class CalculatorServiceImpl implements CalculatorService{
     private final String CONTINUOUS_REGEX = "{2,}";
 
     @Override
-    public CalculatorResponse calculateInput(CalculatorRequest calculatorRequest) {
-        DelimiterExtractResponse extracted = extractDelimiter(new DelimiterExtractRequest((calculatorRequest.getInput())));
+    public int addInput(String input) {
+        DelimiterExtractResponse extracted = extractDelimiter(new DelimiterExtractRequest(input));
         ConverterResponse converted = convertToList(new ConverterRequest(extracted.getDelimiter(), extracted.getRemainInput()));
-        Calculator calculator = new Calculator(converted.getNumbers());
-        return new CalculatorResponse(calculator.getSum());
+
+        return addNumbers(converted.getNumbers());
+    }
+
+    public int addNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
     @Override
