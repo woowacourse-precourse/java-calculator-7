@@ -26,20 +26,27 @@
 ## 2. 주요 기능
 
 - **구분자로 구분된 숫자들의 합을 출력합니다.**
+
   ![Normal Sum](images/Normal_Sum.PNG)
+
   기본 구분자는 ','와 ':' 입니다. <br><br><br>
 
 - **기본 구분자 이외에 커스텀 구분자를 지정할 수 있습니다.**
+
   ![Separator Sum](images/Separator_Sum.PNG)
+
   //(구분자)\n 형식으로 커스텀 구분자를 지정 가능합니다. 위 예시에는 ';' 을 커스텀 구분자로 지정했습니다.
   <br><br><br>
 
 - **커스텀 구분자를 복수 지정할 수 있습니다.**
+
   ![Separators Sum](images/Separators_Sum.PNG)
+
   //(구분자)\n 형식을 이어서 작성하는 것으로 여러 개의 커스텀 구분자를 지정할 수 있습니다 위 예시는 ';'와 '+'를 커스텀 구분자로 지정했습니다.
   <br><br><br>
 
 - **프로그램을 실행할 시에 사용자에게 위 기능을 설명하는 설명서를 제공합니다.**
+
   ![Description](images/Description.PNG)
 
 ## 3. 설치 및 시작하기
