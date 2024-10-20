@@ -1,6 +1,8 @@
 package calculator;
 
+import camp.nextstep.edu.missionutils.Console;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
@@ -10,6 +12,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class InputHandlerTest {
     private final InputStream originalIn = System.in;
+
+    @BeforeEach
+    void setUp() {
+        Console.close();
+    }
 
     @AfterEach
     void tearDown() {
@@ -31,7 +38,6 @@ public class InputHandlerTest {
     @Test
     void 커스텀_구분자_추출() {
         String mockInput = "//a\\n1,2:3";
-
         System.setIn(new ByteArrayInputStream(mockInput.getBytes()));
 
         var runner = new InputHandler();
