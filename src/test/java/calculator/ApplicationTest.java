@@ -9,10 +9,26 @@ import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
     @Test
-    void 커스텀_구분자_사용() {
+    void 커스텀_구분자_사용1() {
         assertSimpleTest(() -> {
             run("//;\\n1;2");
             assertThat(output()).contains("결과 : 3");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용2() { // 2개 이상의 커스텀 구분자
+        assertSimpleTest(() -> {
+            run("//^;\\n1^2;3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용3() {
+        assertSimpleTest(() -> {
+            run("//^;\\n");
+            assertThat(output()).contains("결과 : 0");
         });
     }
 
@@ -41,6 +57,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 백의_자리_수_인식() {
+        assertSimpleTest(() -> {
+            run("1,200:3");
+            assertThat(output()).contains("결과 : 204");
+        });
+    }
+
+    @Test
     void 예외_테스트_공통1() { // 숫자로 혹은 '/'로 시작하지 않는 문자열
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("a:2,3"))
@@ -49,7 +73,15 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트_기본1() { // ',', ':' 외의 구분자
+    void 예외_테스트_공통2() { // 숫자, 구분자 외의 문자가 포함된 문자열
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1:2,a:3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_기본1() { // ',', ':' 외의 구분자(문자)
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("1[2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
@@ -81,17 +113,25 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트_커스텀4() { // 기본/커스텀 외의 구분자
+    void 예외_테스트_커스텀4() { // 커스텀 설정 시 오류4
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//^\\n1^2+3"))
+                assertThatThrownBy(() -> runException("//^"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
     @Test
-    void 예외_테스트_커스텀5() { // 2개 이상의 커스텀 구분자
+    void 예외_테스트_커스텀5() { // 커스텀 설정 시 오류5
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//^;\\n1^2;3"))
+                assertThatThrownBy(() -> runException("//^\\"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_커스텀6() { // 기본/커스텀 외의 구분자
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//^\\n1^2+3"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
