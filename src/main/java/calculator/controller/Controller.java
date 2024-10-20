@@ -6,6 +6,6 @@ import calculator.view.OutputView;
 
 public class Controller {
     public static void run() {
-        OutputView.showOutput(Calculator.calculate(InputView.getString()));
+        OutputView.showOutput(Calculator.calculate(InputView.getInput()));
     }
 }
