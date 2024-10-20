@@ -7,7 +7,18 @@ import java.io.InputStreamReader;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+
+        StringParser processor = new StringParser();
+
+        String user_input = processor.getUserInput();
+
+        String delimiter = processor.findDelimiter(user_input);
+
+        String[] number_list = processor.tokenize(delimiter, user_input);
+
+        String result = processor.sumNumbers(number_list);
+
+        System.out.printf("결과 : %s \n", result);
     }
 }
 
