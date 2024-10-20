@@ -3,6 +3,8 @@ package calculator.service;
 import java.math.BigInteger;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CalculatorService {
 
@@ -13,7 +15,7 @@ public class CalculatorService {
     private final String SEPARATOR_COMMA = ",";
     private final String SEPARATOR_COLON = ":";
 
-    public ArrayDeque<String> detectSeparator(String input) {
+    public ArrayDeque<String> detectNormalSeparator(String input) {
 
         ArrayDeque<String> separatorStack = new ArrayDeque<>();
 
@@ -25,25 +27,38 @@ public class CalculatorService {
             separatorStack.addLast(SEPARATOR_COMMA);
         }
 
-        if (input.contains(SPECIAL_PREFIX) && input.contains(SPECIAL_SUFFIX)) {
-            String specialSub = getSpecialSubstr(input);
-            separatorStack.addLast(findSpecialSepBySubStr(specialSub));
-        }
-
-        System.out.println("separatorStack = " + separatorStack.toString());
-
         return separatorStack;
     }
 
+    public Map<String, String> specialSepProcessing(String input) {
+
+        Map<String, String> specialProcessingResult = new HashMap<>();
+
+        String specialSub = getSpecialSubstr(input);
+
+        specialProcessingResult.put("sep",findSpecialSepBySubStr(specialSub));
+        specialProcessingResult.put("input", modifyInputBySpecialSub(input, specialSub));
+
+        return specialProcessingResult;
+    }
+
+    private String modifyInputBySpecialSub(String input, String specialSub){
+        return input.substring(specialSub.length() -1);
+    }
+
+    public boolean hasSpecialSeparator(String input) {
+
+        return input.contains(SPECIAL_PREFIX) && input.contains(SPECIAL_SUFFIX);
+    }
 
     private String getSpecialSubstr(String input) {
 
         int prefixLen = SPECIAL_PREFIX.length();
         int suffixLen = SPECIAL_SUFFIX.length();
         String prefixSub = input.substring(0, prefixLen);
-        String suffixSub = input.substring(prefixLen+1, prefixLen + suffixLen + 1);
+        String suffixSub = input.substring(prefixLen + 1, prefixLen + suffixLen + 1);
 
-        if(!prefixSub.equals(SPECIAL_PREFIX) || !suffixSub.equals(SPECIAL_SUFFIX)) {
+        if (!prefixSub.equals(SPECIAL_PREFIX) || !suffixSub.equals(SPECIAL_SUFFIX)) {
             throw new IllegalArgumentException("커스텀 구분자 설정 형식이 잘못되었습니다");
         }
 
