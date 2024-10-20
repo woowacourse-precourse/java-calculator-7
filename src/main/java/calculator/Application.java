@@ -98,9 +98,12 @@ public class Application {
     }
 
     private static int parseStringToInt(List<Integer> tmpNum) {
-        // TODO : parsing 로직 구현
-        System.out.println("가공되지 않은 tmpNum : "+tmpNum);
-        System.out.println("아직 문자를 숫자로 바꾸는 기능이 구현되지 않았습니다. 피연산자를 10으로 간주합니다.");
-        return 10;
+        int sum = 0;
+        Collections.reverse(tmpNum);
+        for (int i = 0; i < tmpNum.size(); i++) {
+            sum += (int) (tmpNum.get(i) * Math.pow(10, i));
+        }
+
+        return sum;
     }
 }
