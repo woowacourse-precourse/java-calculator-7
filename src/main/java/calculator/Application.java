@@ -28,7 +28,7 @@ public class Application {
         return numbers.split(delimiter); //구분자를 기준으로 문자열 분리
     }
 
-    //숫자 합계 계산
+    //숫자 합계 계산 -커밋
     private static int sum(String[] numbers) {
         int sum = 0;
         for (String n : numbers) {
