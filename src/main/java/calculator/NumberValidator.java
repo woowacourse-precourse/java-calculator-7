@@ -1,6 +1,6 @@
 package calculator;
 
-public class PositiveNumberValidator {
+public class NumberValidator {
     public long validateAndParse(String number) {
         try {
             long parsedNumber = Long.parseLong(number.trim());

@@ -4,11 +4,11 @@ import java.util.Arrays;
 
 public class StringAdditionCalculator {
     private final CustomDelimiterParser parser;
-    private final PositiveNumberValidator validator;
+    private final NumberValidator validator;
 
     public StringAdditionCalculator() {
         this.parser = new CustomDelimiterParser();
-        this.validator = new PositiveNumberValidator();
+        this.validator = new NumberValidator();
     }
 
     public long calculate(String input) {

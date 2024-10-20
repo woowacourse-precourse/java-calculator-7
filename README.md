@@ -12,7 +12,7 @@
 │   │   │   ├── ConsoleIO.java
 │   │   │   ├── Application.java
 │   │   │   ├── CustomDelimiterParser.java
-│   │   │   ├── PositiveNumberValidator.java
+│   │   │   ├── NumberValidator.java
 │   │   │   └── StringAdditionCalculator.java
 │   ├── test/
 │   │   ├── java/
