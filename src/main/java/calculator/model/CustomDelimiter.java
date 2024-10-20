@@ -3,15 +3,10 @@ package calculator.model;
 import calculator.validation.Validator;
 
 public class CustomDelimiter {
-    
     private String formula;
 
     public CustomDelimiter(String formula){
         this.formula = formula.replace("\\n", "\n");
-    }
-
-    public String getFormula(){
-        return this.formula;
     }
 
     public String getCustomDelimiter(){
@@ -23,7 +18,6 @@ public class CustomDelimiter {
         Validator.isValidDelimiter(customDelimiter);
         return customDelimiter;
     }
-
 
     public Integer checkCustomDelimiter(){
         if (formula.startsWith("//")){
