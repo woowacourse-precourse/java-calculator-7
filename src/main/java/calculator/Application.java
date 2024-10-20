@@ -3,8 +3,10 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 public class Application {
+    private static final String DEFAULT_DELIMITER = "[,:]";
     public static void main(String[] args) {
         // 사용자 입력 받는 부분
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -56,7 +58,8 @@ public class Application {
             }
 
             // 구분자 기준으로 문자열 분리
-            String[] tokens = numbers.split(delimiter);
+            Pattern pattern = compilePattern(delimiter);
+            String[] tokens = pattern.split(numbers);
 
             // 숫자 합 저장 변수 선언
             int sum = 0;
@@ -85,6 +88,10 @@ public class Application {
             }
 
             return sum;
+        }
+
+        private static Pattern compilePattern(String delimiter) {
+            return Pattern.compile(delimiter);
         }
 
         private static String extractMultipleDelimiters(String delimiterPart) {
