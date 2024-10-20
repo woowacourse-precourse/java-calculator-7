@@ -1,0 +1,23 @@
+- refactor: Delimiter 클래스 생성
+- refactor: ErrorMessage 분리
+- feat(application): 계산기 실행 구현
+- docs: 체크박스 업데이트
+- feat: Validator 구현
+- test: Validator 테스트 구현
+- feat: 덧셈 기능 구현
+- test: 덧셈 기능 테스트 구현
+- feat: 구분자 유형 분류 기능 구현
+- test: 구분자 유형 핸들러 테스트 구현
+- feat: 커스텀 구분자 예외처리 기능 구현
+- test: 커스텀 구분자 처리 예외 테스트 추가
+- feat: 커스텀 구분자 처리 기능 구현
+- test: 커스텀 구분자 처리 테스트 구현
+- docs: 기능 목록 체크박스 추가
+- feat: 기본 구분자 처리 예외처리 기능 구현
+- test: 기본 구분자 처리 예외 테스트 추가
+- test: 기본 구분자 처리 예외 테스트 구현
+- feat: 기본 구분자 처리 기능 구현
+- test: 기본 구분자 처리 테스트 구현
+- feat(application): 사용자 입력 구현
+- docs: 기능 목록 생성
+- feat: setup project
