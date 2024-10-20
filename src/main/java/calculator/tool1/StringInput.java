@@ -2,52 +2,44 @@ package calculator.tool1;
 
 import camp.nextstep.edu.missionutils.Console;
 
-import java.util.NoSuchElementException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringInput {
 
-  private String delimiters;
+  private String delimiterRegex;
 
   private String nums;
 
-  private boolean isCustomDelimiter;
-
-  public String getDelimiters() {
-    return delimiters;
+  public String getDelimiterRegex() {
+    return delimiterRegex;
   }
 
   public String getNums() {
     return nums;
   }
 
-  public boolean getIsCustomDelimiter() {
-    return isCustomDelimiter;
-  }
-
   public StringInput() {
 
-    try {
-      //입력을 \n 문자열 기준으로 받음
-      System.out.println("덧셈할 문자열을 입력해 주세요.");
-      this.delimiters = Console.readLine();
+    //입력을 \n 문자열 기준으로 받음
+    System.out.println("덧셈할 문자열을 입력해 주세요.");
+    String stringInput = Console.readLine();
 
-      if (!StringChecker
-          .checkCustomDelimiter(delimiters)) {
-        this.nums = this.delimiters;
-        this.delimiters = "//:,";
-        this.isCustomDelimiter = false;
-      } else {
-        this.nums = Console.readLine();
-        this.isCustomDelimiter = true;
-      }
+    stringInput = stringInput.replace("\\n", "\n");
 
+    delimiterRegex = ":|,";
 
-    } catch (NoSuchElementException noSuchElementException) {
-      throw new IllegalArgumentException();
-    } catch (IllegalArgumentException illegalArgumentException) {
-      throw new IllegalArgumentException();
-    } finally {
-      Console.close();
+    Matcher m = Pattern.compile("//(.*?)\\n(.*)", Pattern.DOTALL).matcher(stringInput);
+
+    if (m.find()) {
+      String customDelimiter = m.group(1); //구분자 부분
+
+      this.nums = m.group(2);       // 숫자 부분
+
+      this.delimiterRegex += "|" + Pattern.quote(customDelimiter);
+
+    } else{
+      this.nums = stringInput;
     }
 
   }
