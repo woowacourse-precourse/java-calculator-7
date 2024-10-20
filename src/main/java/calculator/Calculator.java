@@ -23,4 +23,11 @@ public class Calculator {
             throw new IllegalArgumentException("ERROR: invalid input");
     }
 
+    public int sumUserInput(){
+        int result = 0;
+        String numberWithDelimiter = userInput.replaceAll("//.\\\\n", "");
+        for(String number : numberWithDelimiter.split(delimiter))
+            result += Integer.parseInt(number);
+        return result;
+    }
 }
