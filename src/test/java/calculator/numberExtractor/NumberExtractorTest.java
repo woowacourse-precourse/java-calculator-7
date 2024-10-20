@@ -31,8 +31,8 @@ public class NumberExtractorTest {
     @Test
     void 기본구분자_숫자추출() {
         NumberDto numberDTO = defaultNumberExtractor.extractNumbers("1,2:3", ",|:");
-        ArrayList<Integer> extractNumbers = numberDTO.getNumberRepository();
-        ArrayList<Integer> expectedNumbers = new ArrayList<Integer>(List.of(1, 2, 3));
+        ArrayList<Long> extractNumbers = numberDTO.getNumberRepository();
+        ArrayList<Long> expectedNumbers = new ArrayList<Long>(List.of(1L, 2L, 3L));
         Assertions.assertEquals(expectedNumbers, extractNumbers);
     }
 
@@ -40,8 +40,8 @@ public class NumberExtractorTest {
     @ValueSource(strings = {"1,2,3,4", "1:2:3:4", "1,2,3:4"})
     void 기본구분자_숫자추출_여러케이스(String input) {
         NumberDto numberDTO = defaultNumberExtractor.extractNumbers(input, ",|:");
-        ArrayList<Integer> extractNumbers = numberDTO.getNumberRepository();
-        ArrayList<Integer> expectedNumbers = new ArrayList<Integer>(List.of(1, 2, 3, 4));
+        ArrayList<Long> extractNumbers = numberDTO.getNumberRepository();
+        ArrayList<Long> expectedNumbers = new ArrayList<Long>(List.of(1L, 2L, 3L, 4L));
         Assertions.assertEquals(expectedNumbers, extractNumbers);
     }
 
@@ -54,8 +54,8 @@ public class NumberExtractorTest {
 
         String extractDelimiter = delimiterDto.getDelimiter();
         NumberDto numberDTO = customNumberExtractor.extractNumbers(input, extractDelimiter);
-        ArrayList<Integer> extractNumbers = numberDTO.getNumberRepository();
-        ArrayList<Integer> expectedNumbers = new ArrayList<Integer>(List.of(1, 2, 37));
+        ArrayList<Long> extractNumbers = numberDTO.getNumberRepository();
+        ArrayList<Long> expectedNumbers = new ArrayList<Long>(List.of(1L, 2L, 37L));
 
         Assertions.assertEquals(expectedNumbers, extractNumbers);
     }

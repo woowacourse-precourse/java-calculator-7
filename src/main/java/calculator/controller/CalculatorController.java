@@ -26,8 +26,8 @@ public class CalculatorController {
         NumberExtractor numberExtractor = extractorProvider.getNumberExtractor(inputType);
 
         String extractedDelimiter = service.extractDelimiter(delimiterExtractor, input);
-        ArrayList<Integer> extractNumbers = service.extractNumbers(extractedDelimiter, numberExtractor, input);
-        int sum = service.addAll(extractNumbers);
+        ArrayList<Long> extractNumbers = service.extractNumbers(extractedDelimiter, numberExtractor, input);
+        long sum = service.addAll(extractNumbers);
 
         View.showResult(sum);
 

@@ -11,13 +11,13 @@ public interface Service {
     public String extractDelimiter(DelimiterExtractor extractor, String input);
 
 
-    public ArrayList<Integer> extractNumbers(String delimiter, NumberExtractor numberExtractor, String input);
+    public ArrayList<Long> extractNumbers(String delimiter, NumberExtractor numberExtractor, String input);
 
 
     public String checkTypeOfInput(String input, Validator validator);
 
 
-    public int addAll(ArrayList<Integer> extractNumbers);
+    public long addAll(ArrayList<Long> extractNumbers);
 
 
 }

@@ -4,10 +4,10 @@ import calculator.dto.NumberDto;
 import java.util.ArrayList;
 
 public class NumberRepository {
-    private final ArrayList<Integer> numberRepository = new ArrayList<>();
+    private final ArrayList<Long> numberRepository = new ArrayList<>();
 
 
-    public void saveNumber(int number) {
+    public void saveNumber(long number) {
         numberRepository.add(number);
     }
 

@@ -5,15 +5,15 @@ import java.util.ArrayList;
 public class NumberDto {
 
 
-    private final ArrayList<Integer> numberRepository;
+    private final ArrayList<Long> numberRepository;
 
 
-    public NumberDto(ArrayList<Integer> numberRepository) {
+    public NumberDto(ArrayList<Long> numberRepository) {
         this.numberRepository = numberRepository;
     }
 
 
-    public ArrayList<Integer> getNumberRepository() {
+    public ArrayList<Long> getNumberRepository() {
         return numberRepository;
     }
 

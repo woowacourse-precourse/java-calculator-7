@@ -17,7 +17,7 @@ public class ServiceV2 implements Service {
     }
 
 
-    public ArrayList<Integer> extractNumbers(String delimiter, NumberExtractor numberExtractor, String input) {
+    public ArrayList<Long> extractNumbers(String delimiter, NumberExtractor numberExtractor, String input) {
         NumberDto numberDTO = numberExtractor.extractNumbers(input, delimiter);
         return numberDTO.getNumberRepository();
 
@@ -31,7 +31,7 @@ public class ServiceV2 implements Service {
     }
 
 
-    public int addAll(ArrayList<Integer> extractNumbers) {
+    public long addAll(ArrayList<Long> extractNumbers) {
         return Calculator.allSum(extractNumbers);
     }
 

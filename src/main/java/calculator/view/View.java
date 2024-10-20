@@ -9,7 +9,7 @@ public class View {
     }
 
 
-    public static void showResult(int sum) {
+    public static void showResult(long sum) {
         System.out.println(ViewConst.SHOW_RESULT + sum);
     }
 }
