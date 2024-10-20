@@ -4,13 +4,7 @@ import java.util.List;
 
 public class Calculation {
     public int calculate(List<String> separated) {
-        // 숫자만 배열에 담아 반환
-        int[] numbers = pickNumbers(separated);
-
-        // 더한 값 반환
-        int answer = sum(numbers);
-
-        return answer;
+        return sum(pickNumbers(separated));
     }
 
     private int[] pickNumbers(List<String> separated) {
