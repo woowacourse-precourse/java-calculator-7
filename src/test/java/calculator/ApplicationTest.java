@@ -88,7 +88,7 @@ class ApplicationTest extends NsTest {
     void 무거운_계산() {
         assertSimpleTest(() -> {
             run("1234567890,9876543210");
-            assertThat(output()).contains("결과 : 2147483648");
+            assertThat(output()).contains("결과 : 11111111100");
         });
     }
 

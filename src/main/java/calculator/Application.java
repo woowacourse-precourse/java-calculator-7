@@ -36,7 +36,7 @@ public class Application {
         long Result = Constant.ZERO;
         for (String s : NumberList) {
             if (s.matches(Constant.MATCHER_CHECK)) {
-                Result += Integer.parseInt(s);
+                Result += Long.parseLong(s);
             } else if (s.matches(Constant.NONE_INPUT)) {
                 Result += Constant.ZERO;
             } else {
