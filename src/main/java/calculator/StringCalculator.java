@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.regex.Pattern;
+
 public class StringCalculator {
     public String[] splitInput(String input) {
         if (input == null) {
@@ -19,7 +21,7 @@ public class StringCalculator {
                 throw new IllegalArgumentException("커스텀 구분자가 비어있습니다.");
             }
 
-            return numberString.split(custom);
+            return numberString.split(Pattern.quote(custom));
         }
 
         return input.split("[,:]");
