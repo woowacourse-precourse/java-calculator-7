@@ -14,19 +14,24 @@ public class StringParser {
         String numbersStr = input;
 
         if (input.startsWith("//")) {
-            Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+            Matcher matcher = Pattern.compile("//(.)\\\\n(.*)").matcher(input);
             if (matcher.matches()) {
                 String customDelimiter = matcher.group(1);
 
-                if (customDelimiter.matches("\\d")) {
-                    throw new IllegalArgumentException();
+                if (Character.isDigit(customDelimiter.charAt(0))) {
+                    throw new IllegalArgumentException("구분자는 숫자가 될 수 없습니다.");
                 }
 
-                delimiter = "[" + Pattern.quote(customDelimiter) + ",:]";
+                delimiter = "[,:" + Pattern.quote(customDelimiter) + "]";
                 numbersStr = matcher.group(2);
             } else {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
             }
+        }
+
+        String regex = delimiter + "{2,}";
+        if (Pattern.compile(regex).matcher(numbersStr).find()) {
+            throw new IllegalArgumentException("연속된 구분자가 사용되었습니다.");
         }
 
         try {
@@ -35,7 +40,7 @@ public class StringParser {
                     .mapToInt(this::toInt)
                     .toArray();
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("숫자 형식이 올바르지 않습니다.");
         }
     }
 
