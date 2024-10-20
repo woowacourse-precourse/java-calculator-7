@@ -2,6 +2,7 @@ package calculator;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
@@ -17,18 +18,10 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 예외_테스트() {
-        assertSimpleTest(() -> {
-            run("-1,2,3");
-            assertThat(output()).contains("음수는 입력할 수 없습니다: -1");
-        });
-    }
-
-    @Test
-    void 음수_입력_예외() {
-        assertSimpleTest(() -> {
-            run("-1,2,3");
-            assertThat(output()).contains("음수는 입력할 수 없습니다: -1");
-        });
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Test
@@ -41,10 +34,10 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 문자_입력_예외() {
-        assertSimpleTest(() -> {
-            run("1,a,3");
-            assertThat(output()).contains("유효하지 않은 숫자가 포함되어 있습니다: a");
-        });
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,a,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Test
@@ -65,10 +58,10 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 긴_숫자_입력() {
-        assertSimpleTest(() -> {
-            run("1,999999999999999999999999");
-            assertThat(output()).contains("유효하지 않은 숫자가 포함되어 있습니다: 999999999999999999999999");
-        });
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,999999999999999999999999"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Override
