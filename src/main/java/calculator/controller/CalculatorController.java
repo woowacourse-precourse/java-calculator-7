@@ -1,5 +1,7 @@
 package calculator.controller;
 
+import calculator.dto.CalculationResponseDTO;
+
 public class CalculatorController {
     private final CalculatorService calculatorService;
 
