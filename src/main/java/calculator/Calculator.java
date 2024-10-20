@@ -28,10 +28,16 @@ public class Calculator {
         splitInput();
 
         for (String num : parts) {
-            sum += Double.parseDouble(num);
+            double number = Double.parseDouble(num);
+
+            if (number < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+            }
+
+            sum += number;
         }
 
-        return Result(sum);
+        return formatResult(sum);
     }
 
     public boolean isEmpty() {
@@ -73,7 +79,7 @@ public class Calculator {
         return escaped;
     }
 
-    private String Result(double sum) {
+    private String formatResult(double sum) {
         return "결과 : " + sum;
     }
 }
