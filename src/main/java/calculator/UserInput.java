@@ -5,7 +5,11 @@ import java.util.List;
 
 public class UserInput {
 
-    private final FormulaSeparator formulaSeparator = new FormulaSeparator();
+    private final FormulaSeparator formulaSeparator;
+
+    public UserInput(FormulaSeparator formulaSeparator) {
+        this.formulaSeparator = formulaSeparator;
+    }
 
     public List<Integer> createFormula() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");

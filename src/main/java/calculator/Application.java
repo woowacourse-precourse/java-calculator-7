@@ -2,7 +2,9 @@ package calculator;
 
 public class Application {
     public static void main(String[] args) {
-        UserInput userInput = new UserInput();
+        FormulaSeparator formulaSeparator = new FormulaSeparator();
+        UserInput userInput = new UserInput(formulaSeparator);
+
         Calculator calculator = new SumCalculator();
         OutputView outputView = new OutputView();
 
