@@ -1,6 +1,7 @@
 package calculator.util;
 
 import calculator.enums.ErrorMessage;
+import calculator.enums.RegexPattern;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -35,11 +36,18 @@ public class DelimiterExtractor {
 
     private static void validateDelimiter(String delimiter) {
         validateNotEmpty(delimiter);
+        validateNotNumeric(delimiter);
     }
 
     private static void validateNotEmpty(String delimiter) {
         if (delimiter.isEmpty()) {
             throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_NOT_FOUND.getMessage());
+        }
+    }
+
+    private static void validateNotNumeric(String delimiter) {
+        if (RegexPattern.CONTAINS_NUMERIC.matches(delimiter)) {
+            throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_CANNOT_CONTAIN_NUMERIC.getMessage());
         }
     }
 

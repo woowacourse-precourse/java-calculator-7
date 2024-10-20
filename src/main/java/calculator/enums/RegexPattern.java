@@ -4,7 +4,8 @@ import java.util.regex.Pattern;
 
 public enum RegexPattern {
     BLANK_IN_START(Pattern.compile("^\\s.*")),
-    BLANK_IN_END(Pattern.compile(".*\\s$"));
+    BLANK_IN_END(Pattern.compile(".*\\s$")),
+    CONTAINS_NUMERIC(Pattern.compile(".*\\d+.*"));
 
     private final Pattern pattern;
 
