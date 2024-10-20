@@ -3,6 +3,10 @@ package calculator.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import static calculator.constant.DelimiterConstants.CUSTOM_DELIMITER_DEFINITION_SIZE;
+import static calculator.constant.DelimiterConstants.CUSTOM_DELIMITER_START_SEPARATOR;
+import static calculator.constant.ErrorMessages.*;
+
 
 public class InputParser {
     private final Delimiters delimiters;
@@ -14,8 +18,8 @@ public class InputParser {
     public List<Double> parse(String input){
         List<Double> numbers = new ArrayList<>();
 
-        String delimiterRegex = getDelimiterRegex(input);
-        input = removeDelimiterDefenition(input);
+        String delimiterRegex = delimiters.getDelimiterRegex(input);
+        input = removeDelimiterDefinition(input);
 
         for(String number : input.split(delimiterRegex)) {
             validateNumber(number);
@@ -24,24 +28,13 @@ public class InputParser {
         return numbers;
     }
 
-    private String getDelimiterRegex(String input){
-        StringBuilder delimiterRegex = new StringBuilder();
-        for(String delimiter : delimiters.getAllDelimiters(input)){
-            delimiterRegex.append(delimiter);
-            delimiterRegex.append("|");
-        }
-        String result = delimiterRegex.toString();
-        result = result.substring(0, result.length() - 1);
-        return result;
-    }
-
     private void validateNumber(String number){
         if(!isNumeric(number)){
-            throw new IllegalArgumentException("피연산자가 숫자가 아닙니다.");
+            throw new IllegalArgumentException(OPERAND_NOT_NUMBER);
         }
 
         if(!isPositive(number)){
-            throw new IllegalArgumentException("피연산자가 양수가 아닙니다.");
+            throw new IllegalArgumentException(OPERAND_NOT_POSITIVE);
         }
     }
 
@@ -58,9 +51,9 @@ public class InputParser {
         return Double.parseDouble(number) > 0;
     }
 
-    private String removeDelimiterDefenition(String input){
-        if(input.startsWith("//")){
-            return input.substring(5);
+    private String removeDelimiterDefinition(String input){
+        if(input.startsWith(CUSTOM_DELIMITER_START_SEPARATOR)){
+            return input.substring(CUSTOM_DELIMITER_DEFINITION_SIZE);
         }
         return input;
     }

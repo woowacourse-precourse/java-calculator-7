@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
+import static calculator.constant.DelimiterConstants.*;
+import static calculator.constant.ErrorMessages.DELIMITER_CANNOT_BE_NUMBER;
+import static calculator.constant.ErrorMessages.INVALID_DELIMITER_LENGTH;
 
 public class Delimiters {
-    private final String CUSTOM_DELIMITER_START_SEPARATOR = "//";
-    private final String NO_CUSTOM_DELIMITER = "";
     private final List<String> delimiters = new ArrayList<>();
 
     public Delimiters(){
@@ -23,6 +26,12 @@ public class Delimiters {
         return delimiters;
     }
 
+    public String getDelimiterRegex(String input){
+        return getAllDelimiters(input)
+                .stream()
+                .collect(Collectors.joining("|"));
+    }
+
     public List<String> getAllDelimiters(String input){
         String customDelimiter = findCustomDelimiter(input);
 
@@ -35,9 +44,7 @@ public class Delimiters {
 
     public String findCustomDelimiter(String input) {
         if(hasCustomDelimiter(input)){
-            String regex = "^//(.*)\\\\n(.*)";
-
-            Pattern pattern = Pattern.compile(regex);
+            Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
             Matcher matcher = pattern.matcher(input);
 
             if (matcher.find()) {
@@ -53,11 +60,11 @@ public class Delimiters {
 
     private void validateDelimiter(String delimiter){
         if(!isSingleCharacterDelimiter(delimiter)){
-            throw new IllegalArgumentException("구분자는 길이가 1인 문자여야 합니다.");
+            throw new IllegalArgumentException(INVALID_DELIMITER_LENGTH);
         }
 
         if(isNumeric(delimiter)){
-            throw new IllegalArgumentException("구분자는 숫자가 될 수 없습니다.");
+            throw new IllegalArgumentException(DELIMITER_CANNOT_BE_NUMBER);
         }
     }
 
