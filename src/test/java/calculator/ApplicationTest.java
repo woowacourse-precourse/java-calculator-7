@@ -19,9 +19,50 @@ class ApplicationTest extends NsTest {
     @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+    @Test
+    void 기본_입력_테스트() {
+        assertSimpleTest(() -> {
+            run("1:2,3");
+            assertThat(output()).contains("결과 : 6");
+
+            assertThatThrownBy(() -> runException("-1:2.3"))
+                    .isInstanceOf(IllegalArgumentException.class);
+
+            assertThatThrownBy(() -> runException(":1:2,3"))
+                    .isInstanceOf(IllegalArgumentException.class);
+
+            assertThatThrownBy(() -> runException("1::2,3"))
+                    .isInstanceOf(IllegalArgumentException.class);
+
+            assertThatThrownBy(() -> runException("1:-2,3"))
+                    .isInstanceOf(IllegalArgumentException.class);
+
+            assertThatThrownBy(() -> runException("0:2,3"))
+                    .isInstanceOf(IllegalArgumentException.class);
+
+            assertThatThrownBy(() -> runException("1:2,n"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
+    void 커스텀_입력_테스트() {
+        assertSimpleTest(() -> {
+            run("//;\\n1:2;3");
+            assertThat(output()).contains("결과 : 6");
+
+            run("//;@#\\n1;2:3@4#5");
+            assertThat(output()).contains("결과 : 15");
+
+            assertThatThrownBy(() -> runException("//\\n1:2:3")).isInstanceOf(IllegalArgumentException.class);
+
+            assertThatThrownBy(() -> runException("3//;\\n1;2:3")).isInstanceOf(IllegalArgumentException.class);
+        });
     }
 
     @Override

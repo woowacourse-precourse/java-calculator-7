@@ -77,7 +77,7 @@ public class Calculator {
     }
 
     private boolean isPositiveNumber(int number) {
-        if (number < 0) {
+        if (number <= 0) {
             throw new IllegalArgumentException();
         }
         return true;
