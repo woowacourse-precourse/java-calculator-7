@@ -2,14 +2,14 @@ package input;
 
 import calculator.Calculator;
 import camp.nextstep.edu.missionutils.Console;
-import error.ErrorHandler;
+import error.InputValidator;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InputHandler {
     private String inputString;
-    private String customSeparator = null;
+    private String customDelimiter = null;
     private Vector<Integer> extractedNumbers = new Vector<>();
 
 
@@ -18,14 +18,14 @@ public class InputHandler {
         this.inputString = Console.readLine();
     }
 
-    public void ensureCustomSeparator() {
+    public void ensureCustomDelimiter() {
         String regExp = "^//(.)\\\\n";
 
         Pattern pattern = Pattern.compile(regExp);
         Matcher matcher = pattern.matcher(inputString);
 
         if (matcher.find()) {
-            customSeparator = matcher.group(1);
+            customDelimiter = matcher.group(1);
         }
 
     }
@@ -33,12 +33,12 @@ public class InputHandler {
 
     public void extractNumbers() {
         String target = inputString;
-        String regExp = "[" + customSeparator + ",:]+";
+        String regExp = "[" + customDelimiter + ",:]+";
 
-        target = removeSeparatorCreator(target);
+        target = removeDelimiterCreator(target);
 
         String[] extractedStrings = target.split(regExp);
-        ErrorHandler.validateExtractedNumbers(extractedStrings);
+        InputValidator.validateExtractedNumbers(extractedStrings);
 
         for (String extractedString : extractedStrings) {
             int extractedNumber = Integer.parseInt(extractedString);
@@ -47,9 +47,9 @@ public class InputHandler {
 
     }
 
-    public String removeSeparatorCreator(String target) {
-        if (customSeparator != null) {
-            String targetToDelete = "^//" + customSeparator + "\\\\n";
+    public String removeDelimiterCreator(String target) {
+        if (customDelimiter != null) {
+            String targetToDelete = "^//" + customDelimiter + "\\\\n";
             target = target.replaceFirst(targetToDelete, "");
         }
         return target;

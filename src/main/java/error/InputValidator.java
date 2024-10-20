@@ -1,6 +1,6 @@
 package error;
 
-public class ErrorHandler {
+public class InputValidator {
 
     public static void validatePositiveNumber(int number) {
         if (number <= 0) {
