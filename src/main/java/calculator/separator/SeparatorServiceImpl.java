@@ -57,8 +57,18 @@ public class SeparatorServiceImpl implements SeparatorService{
         return separator;
     }
 
+    /**
+     * 구분자를 기준으로 문자열을 분리합니다.
+     * @param input 사용자 입력 문자열
+     * @param separator 구분자
+     * @return 구분자로 분리된 문자열 배열
+     */
     @Override
     public String[] splitBySeparator(String input, String separator) {
-        return new String[0];
+        try {
+            return input.split(separator);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("입력이 올바르지 않습니다.");
+        }
     }
 }
