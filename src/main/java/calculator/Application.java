@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 public class Application {
     private static final String CUSTOM_SEPARATOR_REGEX = "//(.*?)\\\\n";
 
@@ -12,11 +13,8 @@ public class Application {
             System.out.println("덧셈할 문자열을 입력해 주세요.");
             String input = Console.readLine();
             String[] sepArr = splitInput(input); // 커스텀 구분자 지정 및 구분자 기준으로 나누는 메서드 호출, 배열에 저장
-            int sum = 0;
-            for (String numStr : sepArr) {
-                sum += splitNumber(numStr);
-            }
-            System.out.print(sum);
+            int sum = calculator(sepArr); // 합계 구하는 메서드 호출
+            printResult(sum); // 출력 메서드
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage()); // 예외 발생 따로 처리
         }
@@ -43,6 +41,14 @@ public class Application {
 
     }
 
+    private static int calculator(String[] sepArr) {
+        int sum = 0;
+        for (String numStr : sepArr) {
+            sum += splitNumber(numStr);
+        }
+        return sum;
+    }
+
     private static int splitNumber(String numStr) {
         int sum = 0;
         numStr = numStr.trim(); // 문자열의 앞뒤 공백 제거
@@ -61,4 +67,7 @@ public class Application {
         }
     }
 
+    public static void printResult(int sum) {
+        System.out.println("결과 : " + sum);
+    }
 }
