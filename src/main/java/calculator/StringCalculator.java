@@ -41,7 +41,7 @@ public class StringCalculator {
             throw new IllegalArgumentException("숫자 형식이 아닌 문자열입니다.");
         }
         if(sum <0) {
-            throw new ArithmeticException("오버플로우 발생");
+            throw new IllegalArgumentException("오버플로우 발생");
         }
         printResult(sum);
     }
