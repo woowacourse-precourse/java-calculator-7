@@ -34,7 +34,7 @@ public class CalculationString {
         try {
             return Integer.parseInt(str);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("구분자와 양수 이외 다른 문자는 입력x");
+            throw new IllegalArgumentException("구분자와 정수 이외 다른 문자는 입력x");
         }
     }
 }
