@@ -16,11 +16,19 @@ public class InputValidator {
 	}
 
 	public void validateDigit(String input) {
-		try {
-			Integer.parseInt(input);
-		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException("구분자 사이에 정수가 아닌 값이 포함되어 있습니다.");
+		if (!isDigit(input)) {
+ 			throw new IllegalArgumentException("구분자 사이에 정수가 아닌 값이 포함되어 있습니다.");
 		}
+	}
+
+	public void validateNonDigit(String input) {
+		if (isDigit(input)) {
+			throw new IllegalArgumentException("커스텀 구분자가 정수입니다.");
+		}
+	}
+
+	private boolean isDigit(String input) {
+		return input.chars().allMatch(Character::isDigit);
 	}
 
 	public void validateNumberPositive(String input) {
