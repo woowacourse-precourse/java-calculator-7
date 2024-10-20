@@ -9,6 +9,7 @@ public class Parser {
 	private static final String CUSTOM_DELIMITER_PREFIX = "//";
 	private static final String CUSTOM_DELIMITER_POSTFIX = "\\n";
 	private static final int CUSTOM_DELIMITER_INDEX = 2;
+	private static final int PURE_EXPRESSION_START_INDEX = 5;
 
 	private final List<String> delimiters;
 
@@ -17,16 +18,18 @@ public class Parser {
 	}
 
 	public List<Integer> parse(String expression) {
-		// TODO: 커스텀 구분자 추출
+		String pureExpression = expression;
+
 		if (existsCustomDelimiter(expression)) {
 			validateCustomDelimiterFormat(expression);
 
 			String delimiter = extractCustomDelimiter(expression);
 			delimiters.add(delimiter);
+
+			pureExpression = changeToPureExpression(expression);
 		}
 
-		// TODO: 커스텀 구분자 문자열 없앤 순수 식 만들기
-
+		validateStartAndEndWithDigit(pureExpression);
 
 		// TODO: 순수 식에서 구분자로 숫자 파싱
 		return Collections.emptyList();
@@ -52,5 +55,19 @@ public class Parser {
 
 	private String extractCustomDelimiter(String expression) {
 		return String.valueOf(expression.charAt(CUSTOM_DELIMITER_INDEX));
+	}
+
+	private String changeToPureExpression(String expression) {
+		return expression.substring(PURE_EXPRESSION_START_INDEX);
+	}
+
+	private void validateStartAndEndWithDigit(String expression) {
+		if (!Character.isDigit(expression.charAt(0))) {
+			throw new IllegalArgumentException("수식은 숫자로 시작해야 합니다.");
+		}
+
+		if (!Character.isDigit(expression.charAt(expression.length() - 1))) {
+			throw new IllegalArgumentException("수식은 숫자로 끝나야 합니다.");
+		}
 	}
 }
