@@ -19,6 +19,7 @@ public class NumberExtractor {
             if (delimiter.contains(tmp)) {
                 if (!stringBuilder.isEmpty()) {
                     Long parsedNum = parseAndReset(stringBuilder);
+                    result.add(parsedNum);
                 }
                 continue;
             }
