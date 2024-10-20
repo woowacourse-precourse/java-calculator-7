@@ -1,9 +1,9 @@
 # java-calculator-precourse
 ## Class 다이어그램
-![class 다이어그램](https://github.com/user-attachments/assets/80b759ed-8398-44bb-b040-b34a6ef527ed)
+<img src="./img/class_diagram.png">
 
 ## 동작 과정
-![Working Process](https://github.com/user-attachments/assets/d8435f0a-e42f-442c-bfa4-c5c1aade570a)
+<img src="./img/working_process.png.png">
 
 ## 프로그램 구현 사항
 ### 입력
