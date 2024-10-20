@@ -1,20 +1,17 @@
 package calculator.controller;
 
-import calculator.service.DelimiterService;
+import calculator.model.Formula;
 import calculator.view.InputView;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import calculator.view.OutputView;
 
 public class CalculatorController {
 
     InputView inputView = new InputView();
-    DelimiterService delimiterService = new DelimiterService();
-    List<String> initialDelimiters = new ArrayList<>(Arrays.asList(",", ":"));
+    OutputView outputView = new OutputView();
 
     public void run() {
-        String userInput = inputView.input("덧셈할 문자열을 입력해 주세요.");
-        delimiterService.addDelimiters(initialDelimiters);
-        delimiterService.addCustomDelimiter(userInput);
+        String userInput = inputView.newlineInput("덧셈할 문자열을 입력해 주세요.");
+        Formula formula = new Formula(userInput);
+        outputView.printMessageWithNumber("결과 : ", formula.calculate());
     }
 }
