@@ -15,8 +15,8 @@ public class StringCalculator {
         }
     }
 
-    public int addString(String[] numbers){
-        int sum=0;
+    public long addString(String[] numbers){
+        long sum=0;
         for(String number:numbers){
 
             int num = stringToInt(number);
@@ -27,7 +27,7 @@ public class StringCalculator {
         return sum;
     }
 
-    public int stringCalculate(String input){
+    public long stringCalculate(String input){
         if(input.isEmpty())
             return 0;
 
@@ -49,7 +49,7 @@ public class StringCalculator {
             }
         }
         String[] numbers = splitString(input, delimiter);
-        int sum = addString(numbers);
+        long sum = addString(numbers);
 
         return sum;
     }
