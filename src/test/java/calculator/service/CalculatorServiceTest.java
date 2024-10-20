@@ -140,7 +140,6 @@ class CalculatorServiceTest {
     @ParameterizedTest
     @CsvSource({
             "'//;\n1;2;3', 6",      // 세미콜론을 커스텀 구분자로 사용
-            "'//|\n1|2|3', 6",      // 파이프를 커스텀 구분자로 사용
             "'//@\n2@3@4', 9",      // @를 커스텀 구분자로 사용
             "'//#\n1#2#3#4', 10",   // #을 커스텀 구분자로 사용
             "'//.\n5.6.7', 18"      // 점(.)을 커스텀 구분자로 사용
@@ -172,7 +171,6 @@ class CalculatorServiceTest {
     @ParameterizedTest
     @ValueSource(strings = {
             "//;\n",    // 커스텀 구분자만 있고 숫자가 없음
-            "//|\n",    // 커스텀 구분자만 있고 숫자가 없음
             "//#\n",    // 커스텀 구분자만 있고 숫자가 없음
             "//@\n",    // 커스텀 구분자만 있고 숫자가 없음
     })
@@ -188,7 +186,6 @@ class CalculatorServiceTest {
     @ParameterizedTest
     @CsvSource({
             "'//;\n5', 5",    // 세미콜론 구분자와 숫자 5
-            "'//|\n10', 10",  // 파이프 구분자와 숫자 10
             "'//#\n15', 15",  // 샵 구분자와 숫자 15
             "'//@\n20', 20",  // 앳 구분자와 숫자 20
             "'//.\n25', 25"   // 점 구분자와 숫자 25
@@ -225,16 +222,17 @@ class CalculatorServiceTest {
         assertEquals(expectedSum, result);
     }
 
-    @DisplayName("여러 커스텀 구분자를 쉼표로 구분하여 처리하는 성공 로직 테스트")
+    @DisplayName("여러 커스텀 구분자를 파이프로 구분하여 처리하는 성공 로직 테스트")
     @ParameterizedTest
     @CsvSource({
-            "'//;,:,|\n1;2|3:4', 10",     // 세미콜론, 콜론, 파이프를 커스텀 구분자로 사용
-            "'//#,*,%\n5#6*7%8', 26",     // 해시, 별표, 퍼센트를 커스텀 구분자로 사용
-            "'//@,!,^\n9@10!11^12', 42",  // 앳, 느낌표, 캐럿을 커스텀 구분자로 사용
-            "'//가,나,다\n1가2나3다4', 10", // 한글 구분자 (가, 나, 다) 사용
+            "'//;|:|\\|\n1;2|3:4', 10",     // 세미콜론, 콜론, 파이프를 커스텀 구분자로 사용
+            "'//#|*|%\n5#6*7%8', 26",       // 해시, 별표, 퍼센트를 커스텀 구분자로 사용
+            "'//@|!|^\n9@10!11^12', 42",    // 앳, 느낌표, 캐럿을 커스텀 구분자로 사용
+            "'//가|나|다\n1가2나3다4', 10"   // 한글 구분자 (가, 나, 다) 사용
     })
-    void add_withMultipleCustomDelimiters_returnsSum(String input, int expectedSum) {
+    void add_withMultipleCustomDelimitersUsingPipe_returnsSum(String input, int expectedSum) {
         int result = CalculatorService.add(input);
         assertEquals(expectedSum, result);
     }
+
 }
