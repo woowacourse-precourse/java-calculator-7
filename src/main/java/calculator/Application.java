@@ -4,9 +4,10 @@ public class Application {
     public static void main(String[] args) {
         InputService inputService = new InputService();
         OutputService outputService = new OutputService();
+        CustomDelimiter customDelimiter = new CustomDelimiter();
+        InputValidator inputValidator = new InputValidator(customDelimiter);
+
         outputService.welcome();
-
-        outputService.printResult(InputValidator.validate(inputService.getInput()));
-
+        outputService.printResult(inputValidator.validate(inputService.getInput()));
     }
 }

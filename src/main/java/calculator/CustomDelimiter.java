@@ -5,7 +5,8 @@ public class CustomDelimiter {
     private static String customDelimiter = "";
     private static final int LENGTH_OF_CUSTOM_DELIMITER_EXPRESSION = "//?\n".length();
     private static final int INDEX_OF_CUSTOM_DELIMITER = "//?\n".indexOf("?");
-    private static final String[] META_CHARACTERS = {".", "*", "+", "?", "|", "^", "$", "(", ")", "[", "]", "{", "}", "\\"};
+    private static final String[] META_CHARACTERS = {".", "*", "+", "?", "|", "^", "$", "(", ")", "[", "]", "{", "}",
+            "\\"};
 
     public static String extractCustomDelimiter(String input) {
         if (isValidExpression(input)) {
