@@ -36,8 +36,9 @@ public class NumberTest {
     public void 커스텀_구분자_없이_올바른_입력_값4() {
         String testText = "-3,-4:-5,-6:-7";
         Number number = new Number();
-        number.getInputText(testText);
-        assertTrue(number.size() > 0);
+        assertThrows(IllegalArgumentException.class, () -> {
+            number.getInputText(testText);
+        });
     }
     @Test
     @DisplayName("커스텀 구분자가 없이 올바르게 입력된다.")

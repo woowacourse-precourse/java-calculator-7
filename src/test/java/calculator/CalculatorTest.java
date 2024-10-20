@@ -31,16 +31,12 @@ public class CalculatorTest {
         assertEquals(calculator.calcSum(number), 1479);
     }
     @Test
-    @DisplayName("합계 출력3")
+    @DisplayName("합계 출력3 _ 예외")
     public void 합계를_출력3() {
-        number.getInputText("//;\n-534;-567;1882");
-        assertEquals(calculator.calcSum(number), 781);
-    }
-    @Test
-    @DisplayName("합계 출력4")
-    public void 합계를_출력4() {
-        number.getInputText("// \n-534 -567:1882");
-        assertEquals(calculator.calcSum(number), 781);
+        assertThrows(IllegalArgumentException.class, () -> {
+            number.getInputText("//;\n-534;-567;1882");
+            calculator.calcSum(number);
+        });
     }
 
     @Test
@@ -85,8 +81,17 @@ public class CalculatorTest {
     @Test
     @DisplayName("최소치 초과하여 예외 발생")
     public void 정수형_최소치_초과() {
-        number.getInputText("-2147483648:-5");
         assertThrows(IllegalArgumentException.class, () -> {
+            number.getInputText("-2147483648:-5");
+            calculator.calcSum(number);
+        });
+    }
+
+    @Test
+    @DisplayName("예외 발생")
+    public void 음수_입력() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            number.getInputText("-3:4:8");
             calculator.calcSum(number);
         });
     }
