@@ -1,5 +1,7 @@
 package calculator.delimiter;
 
+import calculator.command.DelimiterLine;
+
 public class DelimiterReader {
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
     private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
@@ -12,7 +14,7 @@ public class DelimiterReader {
 
         String delimiterLine = getDelimiterLine(line);
         String delimiter = removeWords(delimiterLine, CUSTOM_DELIMITER_PREFIX, CUSTOM_DELIMITER_SUFFIX);
-        return Delimiter.create(delimiter);
+        return Delimiter.create(new DelimiterLine(delimiter));
     }
 
     private boolean hasNoDelimiterOption(String line) {
