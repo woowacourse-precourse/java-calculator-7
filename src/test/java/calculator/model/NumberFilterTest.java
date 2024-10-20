@@ -62,4 +62,19 @@ public class NumberFilterTest {
         assertThat(numbers4).containsExactly(139L, 20L, 3576L);
         assertThat(numbers5).containsExactly(1L, 3L, 4L);
     }
+
+    @Test
+    @DisplayName("제로(쌍다움표) 필터링 테스트")
+    public void doubleQuotesTest() {
+        // given
+        String inputString = "\"\"";
+
+        // when
+        List<Long> numbers = numberFilter.filter(inputString, "[:|,]");
+
+        // then
+        assertThat(numbers).containsExactly(0L);
+
+
+    }
 }

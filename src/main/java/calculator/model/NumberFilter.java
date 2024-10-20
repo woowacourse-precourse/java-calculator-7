@@ -11,6 +11,10 @@ public class NumberFilter {
 
 
     public List<Long> filter(String inputString, String separator) {
+        if (validation.isZeroFrom(inputString)) {
+            return Arrays.asList(0L);
+        }
+
         if (validation.isCustomFrom(inputString)) {
             return customFilter(inputString, separator);
         }

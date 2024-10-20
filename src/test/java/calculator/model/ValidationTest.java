@@ -20,7 +20,7 @@ public class ValidationTest {
     @DisplayName("빈 문자열 양식 입력 검증")
     public void isZeroFromTest() {
         // given
-        String inputString = "";
+        String inputString = "\"\"";
         // when, then
         assertThat(validation.isZeroFrom(inputString)).isTrue();
     }
