@@ -18,6 +18,8 @@ public class ParsingService {
             return new OperandDTO(operandList);
         }
         errorCheck(operandStr);
+        operandStr = parseCustomDelimiter(operandStr, delimiters);
+
         parse(operandStr, delimiters, operandList);
 
         return new OperandDTO(operandList);
@@ -34,9 +36,8 @@ public class ParsingService {
         return false;
     }
 
+    //구분자에 따라 문자열을 분리하는 기능
     private static void parse(String operandStr, ArrayList<Character> delimiters, ArrayList<Integer> operandList){
-        operandStr = parseCustomDelimiter(operandStr, delimiters);
-
         StringBuilder sb = new StringBuilder();
         //구분자로 구분
         for(char ch : operandStr.toCharArray()){
@@ -62,6 +63,15 @@ public class ParsingService {
             operandStr = operandStr.substring(EXCEPT_CUSTOM_DELIMITER_INDEX);
         }
         return operandStr;
+    }
+
+    private static String createRegexFromDelimiters(ArrayList<Character> delimiters){
+        StringBuilder regexBuilder = new StringBuilder("[");
+        for(char ch : delimiters){
+            regexBuilder.append(ch);
+        }
+        regexBuilder.append("]");
+        return regexBuilder.toString();
     }
 
     private static void checkInteger(char ch){
