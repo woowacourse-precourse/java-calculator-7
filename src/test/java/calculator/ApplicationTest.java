@@ -17,21 +17,9 @@ class ApplicationTest extends NsTest {
         });
     }
 
-    @Test
-    void 예외_테스트() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("-1,2,3"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
-    }
-
-    @Override
-    public void runMain() {
-        Application.main(new String[]{});
-    }
 
     @Test
-    void 커스텀_구분자_파싱_테스트() {
+    void 여러개_커스텀_구분자_파싱_테스트() {
         // given
         String inputString = "//;\\n2///!/n//*\\n";
         Parser parser = new Parser();
@@ -53,11 +41,25 @@ class ApplicationTest extends NsTest {
         // when
         parser.addBasicSeparators(); // 기본 구분자 추가
         parser.parsingCustomSeparators(inputString); // 커스텀 구분자 파싱
-        parser.parsingOperands(inputString); // 피연산자 파싱
+        parser.parsingOperands(inputString); // 피연산자 파
 
         // then
         assertThat(parser.getOperands())
                 .containsExactly(2, 32, 15);
+    }
+
+    @Test
+    void 입력문자열_음수_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+
+    @Override
+    public void runMain() {
+        Application.main(new String[]{});
     }
 
 }
