@@ -18,14 +18,29 @@ public class TextCalculator {
             if(customDelimiterMatcher.group(1).length() > 1) {
                 throw new IllegalArgumentException("커스텀 구분자 형식이 올바르지 않습니다");
             }
+            return;
         }
 
-        String textRegex = "^[0-9,:]+$";
+        String textRegex = "[0-9,:]+$";
 
         // 문자열에 기본 구분자와 숫자 외 다른 문자가 있을 경우
         if(!inputText.matches(textRegex)) {
             throw new IllegalArgumentException("문자열의 형식이 올바르지 않습니다.");
         }
+    }
+
+    public int calculateSum(String inputText) {
+        int sum = 0;
+
+        String numberRegex = "\\d+";
+        Pattern numberPattern = Pattern.compile(numberRegex);
+        Matcher numberMatcher = numberPattern.matcher(inputText);
+
+        while(numberMatcher.find()) {
+            sum += Integer.parseInt(numberMatcher.group());
+        }
+
+        return sum;
     }
 
 }
