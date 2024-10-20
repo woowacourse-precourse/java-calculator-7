@@ -9,7 +9,6 @@ public class InputParserUtilTest {
 
     InputParserUtil inputParserUtil = new InputParserUtil();
 
-
     @Test
     @DisplayName("커스텀 구분자를 판별 후, 구분자를 기준으로 문자열을 분리한다.")
     void testSeperator() {
