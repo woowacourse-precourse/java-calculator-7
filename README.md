@@ -21,12 +21,12 @@
    - [x] 해당 커스텀 구분자를 사용하여 문자열을 분리한다.
 
 - 예외 처리   
-   - [ ] 잘못된 입력(구분자와 양수가 아닌 값)이 들어올 경우 IllegalArgumentException을 발생시킨다.
-   - [ ] 예외 발생 시 프로그램은 종료된다.
-   - [ ] 정의 되지 않은 커스텀 구분자로 계산 시도 시 IllegalArgumentException 발생.
+   - [x] 잘못된 입력(구분자와 양수가 아닌 값)이 들어올 경우 IllegalArgumentException을 발생시킨다.
+   - [x] 예외 발생 시 프로그램은 종료된다.
+   - [x] 정의 되지 않은 커스텀 구분자로 계산 시도 시 IllegalArgumentException 발생.
 
 - 결과 출력   
-   - [ ] 계산된 결과를 사용자에게 출력한다.
+   - [x] 계산된 결과를 사용자에게 출력한다.
 
 ## 주의해야 할 점
 - camp.nextstep.edu.missionutils.Console의 readLine() 메소드를 사용하여 입력을 받는다.
