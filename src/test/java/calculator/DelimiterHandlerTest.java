@@ -1,35 +1,33 @@
 package calculator;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import calculator.delimiter.BasicDelimiterHandler;
-import calculator.delimiter.CustomDelimiterHandler;
 import calculator.exception.InvalidInputException;
 import org.junit.jupiter.api.Test;
 
-class DelimiterHandlerTest {
+class DelimiterCalculatorTest {
 
     @Test
-    void 기본_구분자로_문자열을_분리한다() {
-        BasicDelimiterHandler handler = new BasicDelimiterHandler();
-        String result = String.join(",", handler.split("1,2:3")); // 배열을 문자열로 변환
+    void 기본_구분자로_문자열을_계산한다() {
+        StringCalculator calculator = new StringCalculator();
+        int result = calculator.calculate("1,2:3");  // 기본 구분자(, :)로 문자열 계산
         System.out.println("결과 : " + result);
-        assertArrayEquals(new String[]{"1", "2", "3"}, handler.split("1,2:3"));
+        assertEquals(6, result);  // 1 + 2 + 3 = 6
     }
 
     @Test
-    void 커스텀_구분자로_문자열을_분리한다() {
-        CustomDelimiterHandler handler = new CustomDelimiterHandler();
-        String result = String.join(",", handler.split("//;\n1;2;3")); // 배열을 문자열로 변환
+    void 커스텀_구분자로_문자열을_계산한다() {
+        StringCalculator calculator = new StringCalculator();
+        int result = calculator.calculate("//;\n1;2;3");  // 커스텀 구분자(;)로 문자열 계산
         System.out.println("결과 : " + result);
-        assertArrayEquals(new String[]{"1", "2", "3"}, handler.split("//;\n1;2;3"));
+        assertEquals(6, result);  // 1 + 2 + 3 = 6
     }
 
     @Test
     void 유효하지_않은_커스텀_구분자_입력시_예외가_발생한다() {
-        CustomDelimiterHandler handler = new CustomDelimiterHandler();
-        assertThatThrownBy(() -> handler.split("1;2;3"))
+        StringCalculator calculator = new StringCalculator();
+        assertThatThrownBy(() -> calculator.calculate("1;2;3"))  // 커스텀 구분자 형식이 아닌 경우
                 .isInstanceOf(InvalidInputException.class)
                 .hasMessage("유효하지 않은 구분자입니다.");
     }
