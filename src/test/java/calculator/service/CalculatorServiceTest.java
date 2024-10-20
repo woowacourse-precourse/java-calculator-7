@@ -29,4 +29,11 @@ class CalculatorServiceTest {
         int result = calculatorService.calculate(input);
         assertThat(result).isEqualTo(6);
     }
+
+    @Test
+    void 커스텀_구분자와_기본_구분자_혼합_테스트() {
+        String input = "//;\\n1;2,3:4";
+        int result = calculatorService.calculate(input);
+        assertThat(result).isEqualTo(10);
+    }
 }
