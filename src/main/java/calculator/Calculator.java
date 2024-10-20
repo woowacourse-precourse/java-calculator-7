@@ -8,15 +8,15 @@ import java.util.Optional;
 public class Calculator {
 
     private String input;
-    private List<String> delimiter;
-    private CustomDelimiterParser customDelimiterParser;
+    private List<Delimiter> delimiters;
+    private SingleCustomDelimiterParser singleCustomDelimiterParser;
     private String analyzingTarget;
     private DelimiterChecker delimiterChecker;
 
     public Calculator() {
         printStartMessage();
-        this.delimiter = new ArrayList<>(List.of(",", ":"));
-        this.customDelimiterParser = new CustomDelimiterParser(input);
+        this.delimiters = new ArrayList<>(List.of(new Delimiter(","), new Delimiter(":")));
+        this.singleCustomDelimiterParser = new SingleCustomDelimiterParser(input);
         this.analyzingTarget = "";
     }
 
@@ -34,14 +34,14 @@ public class Calculator {
     }
 
     private List<Integer> getSumTarget() {
-        delimiterChecker = new DelimiterChecker(analyzingTarget, delimiter);
+        delimiterChecker = new DelimiterChecker(analyzingTarget, delimiters);
         return delimiterChecker.splitByDelimiter();
     }
 
     private void parsingCustomDelimiter() {
-        Optional<String> customDelimiter = customDelimiterParser.getCustomDelimiter();
-        customDelimiter.ifPresent(s -> delimiter.add(s));
-        this.analyzingTarget = customDelimiterParser.getRemainingInput();
+        Optional<Delimiter> customDelimiter = singleCustomDelimiterParser.getCustomDelimiter();
+        customDelimiter.ifPresent(s -> delimiters.add(s));
+        this.analyzingTarget = singleCustomDelimiterParser.getRemainingInput();
     }
 
     private void printStartMessage() {

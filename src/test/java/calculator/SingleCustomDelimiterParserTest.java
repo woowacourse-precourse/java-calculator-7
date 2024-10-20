@@ -5,16 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-public class CustomDelimiterParserTest {
+public class SingleCustomDelimiterParserTest {
 
     @Test
     void 커스텀_구분자_사용_구분자_분리_성공() {
         // given
         String input = "//;\\n1";
-        CustomDelimiterParser customDelimiterParser = new CustomDelimiterParser(input);
+        SingleCustomDelimiterParser singleCustomDelimiterParser = new SingleCustomDelimiterParser(input);
 
         // when
-        String customDelimiter = customDelimiterParser.getCustomDelimiter().get();
+        String customDelimiter = singleCustomDelimiterParser.getCustomDelimiter().get().getValue();
 
         // then
         assertThat(customDelimiter).isEqualTo(";");
@@ -24,10 +24,10 @@ public class CustomDelimiterParserTest {
     void 커스텀_구분자_미사용_구분자_분리_성공() {
         // given
         String input = "1";
-        CustomDelimiterParser customDelimiterParser = new CustomDelimiterParser(input);
+        SingleCustomDelimiterParser singleCustomDelimiterParser = new SingleCustomDelimiterParser(input);
 
         // when
-        boolean customDelimiter = customDelimiterParser.getCustomDelimiter().isPresent();
+        boolean customDelimiter = singleCustomDelimiterParser.getCustomDelimiter().isPresent();
 
         // then
         assertThat(customDelimiter).isFalse();
@@ -37,11 +37,11 @@ public class CustomDelimiterParserTest {
     void 컴스텀_구분자_길이가_1이_아닌_경우_실패() {
         // given
         String input = "//;;\\n1";
-        CustomDelimiterParser customDelimiterParser = new CustomDelimiterParser(input);
+        SingleCustomDelimiterParser singleCustomDelimiterParser = new SingleCustomDelimiterParser(input);
 
         // when & then
         assertThrows(IllegalArgumentException.class, () -> {
-            customDelimiterParser.getCustomDelimiter().get();
+            singleCustomDelimiterParser.getCustomDelimiter().get();
         });
     }
 
@@ -49,10 +49,10 @@ public class CustomDelimiterParserTest {
     void 커스텀_구분자_제거후_문자열_올바름() {
         // given
         String input = "//;\\n1";
-        CustomDelimiterParser customDelimiterParser = new CustomDelimiterParser(input);
+        SingleCustomDelimiterParser singleCustomDelimiterParser = new SingleCustomDelimiterParser(input);
 
         // when
-        String remainingInput = customDelimiterParser.getRemainingInput();
+        String remainingInput = singleCustomDelimiterParser.getRemainingInput();
 
         // then
         assertThat(remainingInput).isEqualTo("1");
@@ -62,10 +62,10 @@ public class CustomDelimiterParserTest {
     void 커스텀_구분자_미사용_제거후_문자열_올바름() {
         // given
         String input = "1";
-        CustomDelimiterParser customDelimiterParser = new CustomDelimiterParser(input);
+        SingleCustomDelimiterParser singleCustomDelimiterParser = new SingleCustomDelimiterParser(input);
 
         // when
-        String remainingInput = customDelimiterParser.getRemainingInput();
+        String remainingInput = singleCustomDelimiterParser.getRemainingInput();
 
         // then
         assertThat(remainingInput).isEqualTo("1");
@@ -75,11 +75,11 @@ public class CustomDelimiterParserTest {
     void 비어있는_커스텀_구분자_실패() {
         // given
         String input = "//\\n1";
-        CustomDelimiterParser customDelimiterParser = new CustomDelimiterParser(input);
+        SingleCustomDelimiterParser singleCustomDelimiterParser = new SingleCustomDelimiterParser(input);
 
         // when & then
         assertThrows(IllegalArgumentException.class, () -> {
-            customDelimiterParser.getCustomDelimiter().get();
+            singleCustomDelimiterParser.getCustomDelimiter().get();
         });
     }
 }

@@ -2,21 +2,19 @@ package calculator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class DelimiterChecker {
 
     private String target;
-    private List<String> delimiter;
+    private List<Delimiter> delimiter;
 
-
-    public DelimiterChecker(String target, List<String> delimiter) {
+    public DelimiterChecker(String target, List<Delimiter> delimiter) {
         this.target = target;
         this.delimiter = delimiter;
     }
 
     public List<Integer> splitByDelimiter() {
-        String regex = String.join("|", escapeDelimiters(delimiter));
+        String regex = String.join("|", changeDelimiterToStringList(delimiter));
         String trimmedTarget = target.replaceAll("^(" + regex + ")+|(" + regex + ")+$", ""); //문자열의 앞뒤에 있는 구분자를 제거
         String[] split = trimmedTarget.split(regex);
         List<Integer> result = changeToNumber(split);
@@ -40,9 +38,9 @@ public class DelimiterChecker {
         return resultNumbers;
     }
 
-    private List<String> escapeDelimiters(List<String> delimiters) {
+    private List<String> changeDelimiterToStringList(List<Delimiter> delimiters) {
         return delimiters.stream()
-                .map(delimiter -> delimiter.replaceAll("([\\W])", "\\\\$1")) // 정규식에서 특수 문자를 이스케이프 처리
+                .map(Delimiter::getValue)
                 .toList();
     }
 }

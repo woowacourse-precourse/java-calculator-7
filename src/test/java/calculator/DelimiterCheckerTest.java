@@ -11,7 +11,7 @@ class DelimiterCheckerTest {
     void 기본구분자_분리_성공() {
         // given
         String target = "1,2:3";
-        DelimiterChecker delimiterChecker = new DelimiterChecker(target, List.of(",", ":"));
+        DelimiterChecker delimiterChecker = new DelimiterChecker(target, List.of(new Delimiter(","), new Delimiter(":")));
 
         // when
         List<Integer> result = delimiterChecker.splitByDelimiter();
@@ -24,7 +24,7 @@ class DelimiterCheckerTest {
     void 숫자아닌문자_포함된_경우_실패() {
         // given
         String target = "1,2:3,a";
-        DelimiterChecker delimiterChecker = new DelimiterChecker(target, List.of(",", ":"));
+        DelimiterChecker delimiterChecker = new DelimiterChecker(target, List.of(new Delimiter(","), new Delimiter(":")));
 
         // when & then
         assertThrows(IllegalArgumentException.class, () -> {
@@ -36,7 +36,7 @@ class DelimiterCheckerTest {
     void 숫자가_정수범위를_넘어갈_경우_실패(){
         // given
         String target = "1,2:3,1000000000000000000000000000000";
-        DelimiterChecker delimiterChecker = new DelimiterChecker(target, List.of(",", ":"));
+        DelimiterChecker delimiterChecker = new DelimiterChecker(target, List.of(new Delimiter(","), new Delimiter(":")));
 
         // when
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -51,7 +51,7 @@ class DelimiterCheckerTest {
     void 구분자가_앞뒤로_있어도_성공(){
         // given
         String target = ",1,2:3,";
-        DelimiterChecker delimiterChecker = new DelimiterChecker(target, List.of(",", ":"));
+        DelimiterChecker delimiterChecker = new DelimiterChecker(target, List.of(new Delimiter(","), new Delimiter(":")));
 
         // when
         List<Integer> result = delimiterChecker.splitByDelimiter();
@@ -64,7 +64,7 @@ class DelimiterCheckerTest {
     void 커스텀_구분자가_숫자여도_성공(){
         // given
         String target = "1213:4";
-        DelimiterChecker delimiterChecker = new DelimiterChecker(target, List.of(",", ":","1"));
+        DelimiterChecker delimiterChecker = new DelimiterChecker(target, List.of(new Delimiter("1"), new Delimiter(":")));
 
         // when
         List<Integer> result = delimiterChecker.splitByDelimiter();
@@ -77,7 +77,7 @@ class DelimiterCheckerTest {
     void 구분자가_연속될_경우_실패() {
         // given
         String target = "1,,2:3";
-        DelimiterChecker delimiterChecker = new DelimiterChecker(target, List.of(",", ":"));
+        DelimiterChecker delimiterChecker = new DelimiterChecker(target, List.of(new Delimiter(","), new Delimiter(":")));
 
         // when
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -92,7 +92,7 @@ class DelimiterCheckerTest {
     void 음수가_들어왔을_때_실패() {
         // given
         String target = "1,-2:3";
-        DelimiterChecker delimiterChecker = new DelimiterChecker(target, List.of(",", ":"));
+        DelimiterChecker delimiterChecker = new DelimiterChecker(target, List.of(new Delimiter(","), new Delimiter(":")));
 
         // when
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
