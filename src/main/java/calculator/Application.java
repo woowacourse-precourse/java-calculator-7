@@ -49,10 +49,17 @@ public class Application {
     }
 
     private static String[] extractNumbers(String word, String delimiter) {
+
         if (word.startsWith("//")) {
             int idx = word.indexOf("\\n");
             word = word.substring(idx+2);
         }
+
+        // 마지막에 구분자가 있는 경우 체크
+        if (word.endsWith(",") || word.endsWith(":") || word.endsWith(delimiter)) {
+            throw new IllegalArgumentException("구분자 뒤에는 숫자가 있어야 합니다.");
+        }
+
         return word.split(delimiter);
     }
 
