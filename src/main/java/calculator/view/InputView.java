@@ -10,7 +10,14 @@ public class InputView {
     public String readString() {
         System.out.println(INPUT_MESSAGE);
         String inputString = Console.readLine();
+        if (isBlank(inputString)) {
+            return inputString;
+        }
         inputValidator.isValidInput(inputString);
         return inputString;
+    }
+
+    private boolean isBlank(String input) {
+        return input == null || input.trim().isEmpty();
     }
 }

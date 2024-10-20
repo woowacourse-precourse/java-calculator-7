@@ -25,14 +25,21 @@ public class CalculatorController {
 
     public void calculatorRun() {
         String inputString = getInputString();
+        if (isBlank(inputString)) {
+            printResult("0");
+        } else {
+            HashMap<String, String> separatorAndNumbersMap = getSeparatorAndNumbersMap(inputString);
 
-        HashMap<String, String> separatorAndNumbersMap = getSeparatorAndNumbersMap(inputString);
+            ArrayList<String> parsedNumberList = getParsedNumberList(separatorAndNumbersMap);
 
-        ArrayList<String> parsedNumberList = getParsedNumberList(separatorAndNumbersMap);
+            String result = getResult(parsedNumberList);
 
-        String result = getResult(parsedNumberList);
+            printResult(result);
+        }
+    }
 
-        printResult(result);
+    private boolean isBlank(String input) {
+        return input == null || input.trim().isEmpty();
     }
 
     private String getInputString() {
