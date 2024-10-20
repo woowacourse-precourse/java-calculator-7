@@ -24,6 +24,22 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 마지막_숫자인지아닌지() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,2,3,;"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 특수문자_연속인지아닌지() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
