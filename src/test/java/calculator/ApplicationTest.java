@@ -133,6 +133,30 @@ class ApplicationTest extends NsTest {
                         .hasMessage("숫자 형식은 구분자로 사용할 수 없습니다"));
     }
 
+    @Test
+    void 커스텀_구분자_사용_정상_경우_숫자없이_커스텀_구분자만() {
+        assertSimpleTest(() -> {
+            run("//,\\n,,,,");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_정상_경우_숫자일부와함께_커스텀_구분자() {
+        assertSimpleTest(() -> {
+            run("//,\\n,,3,,5");
+            assertThat(output()).contains("결과 : 8");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용_정상_경우_입력X() {
+        assertSimpleTest(() -> {
+            run("\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
 
     @Override
     public void runMain() {
