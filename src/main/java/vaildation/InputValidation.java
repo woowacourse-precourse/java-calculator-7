@@ -1,8 +1,6 @@
 package vaildation;
 
 
-import java.util.regex.Pattern;
-
 public class InputValidation { // 입력의 유효성을 확인하는 클래스이다.
 
     //커스텀 구분자의 유효성에 대해 확인하는 메서드이다.
@@ -13,7 +11,7 @@ public class InputValidation { // 입력의 유효성을 확인하는 클래스�
         if (input.contains("//") && input.contains("\\n")) {
             int start = input.indexOf("//");
             int end = input.indexOf("\\n");
-            if (start != 0 || start > end) {
+            if (start != 0 || start > end || end - start > 3) {
                 throw new IllegalArgumentException();
             }
             checkResult[0] = input.substring(start + 2, end); // 커스텀 구분자
@@ -29,10 +27,11 @@ public class InputValidation { // 입력의 유효성을 확인하는 클래스�
             return null;
         }
 
-        String delimiter = "[,:]";  // 기본 구분자 처리
+        String delimiter = "[,:";  // 기본 구분자 처리
         if (customDelimiter != null && !customDelimiter.isBlank()) {
-            delimiter += "|" + Pattern.quote(customDelimiter); // 커스텀 구분자가 존재했으면 이를 포함하여 검사한다.
+            delimiter += customDelimiter; // 커스텀 구분자가 존재했으면 이를 포함하여 검사한다.
         }
+        delimiter += "]";
 
         String[] tokens = input.split(delimiter); // 구분자를 바탕으로 문자열을 분류한다.
         for (String token : tokens) {
