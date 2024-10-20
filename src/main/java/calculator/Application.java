@@ -18,7 +18,14 @@ public class Application {
             separators.add(c);
         }
         user_input = Tokenizer.removeHeader(user_input);
+        if(user_input == "") {
+            System.out.println("결과 : 0");
+            return;
+        }
         String[] tokens = Tokenizer.tokenize(separators,user_input);
+        if (Tokenizer.AreTokensUnavailable(tokens)) {
+            throw new IllegalArgumentException();
+        }
         int[] nums = Tokenizer.tokensToNums(tokens);
         System.out.println("결과 : " + IntStream.of(nums).sum());
     }
