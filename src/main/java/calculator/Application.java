@@ -27,7 +27,9 @@ public class Application {
             input = input.substring(5);
         }
         String[] numbers = input.split(delimiter);
-
+        if(numbers.length==0){
+            return;
+        }
         for (String number : numbers) {
             try{
                 int num=0;
