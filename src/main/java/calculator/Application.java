@@ -16,8 +16,12 @@ public class Application {
             System.out.println("덧셈할 문자열을 입력해주세요. ");
             String line = Console.readLine();
 
-            if(line.matches(".*[가-힣]+.*"))
+            if(line.matches(".*[A-Z가-힣]+.*"))
                 throw new IllegalArgumentException("한글은 입력할 수 없습니다.");
+
+            if (line.isEmpty()) {
+                throw new IllegalArgumentException("입력이 비어 있습니다.");
+            }
 
             Pattern pattern = Pattern.compile("//(.)\\\\n(.*)");
             Matcher sep = pattern.matcher(line);
