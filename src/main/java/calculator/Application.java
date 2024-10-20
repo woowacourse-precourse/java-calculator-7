@@ -49,10 +49,6 @@ public class Application {
     }
 
     public static int sumCalculate(int[] number) {
-        int result = 0;
-
-        for (int i : number) result += i;
-
-        return result;
+        return Arrays.stream(number).sum();
     }
 }
