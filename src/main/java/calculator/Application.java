@@ -25,7 +25,7 @@ public class Application {
     private static String parseCustomDelimiter(String str){
         if(str.startsWith("//")){
             delimContainer.add(str.charAt(2));
-            return str.substring(5);
+            return str.substring(6);
         }
         return str;
     }
