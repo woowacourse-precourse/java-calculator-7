@@ -13,6 +13,8 @@ public class DelimiterSplitter {
     }
 
     public String[] split() {
+        validateUserInput(str);
+
         if (str.isBlank()) {
             return new String[0];
         }
@@ -34,5 +36,11 @@ public class DelimiterSplitter {
             return numbers.isBlank() ? new String[0] : numbers.split(customDelimiter);
         }
         return new String[0];
+    }
+
+    private static void validateUserInput(String str) {
+        if (str.matches(".*-\\d+.*") || str.matches("//(.)\n(.*-\\d+.*)")) {
+            throw new UserInputException("[계산 실패] 음수는 입력할 수 없습니다.");
+        }
     }
 }
