@@ -20,9 +20,12 @@ public class Application {
             if (Character.isDigit(c)) {
                 valuesToCalculate.add(Character.getNumericValue(c));
             }
-
         }
+        int sum = valuesToCalculate.stream().mapToInt(Integer::intValue).sum();
         System.out.println(valuesToCalculate);
+        System.out.println("결과 : " + sum);
+
     }
+
 
 }
