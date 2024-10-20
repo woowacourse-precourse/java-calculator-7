@@ -9,7 +9,7 @@ public class Calculator {
         String input = readInput();
         Data data = handleInput(input);
         int result = makeResult(data);
-        OutputView.printResult(result);
+        printOutput(result);
     }
 
     private String readInput() {
