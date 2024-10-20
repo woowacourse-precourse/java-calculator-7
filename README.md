@@ -95,6 +95,7 @@ BUILD SUCCESSFUL in 0s
 
 ### 2. 예외처리
 - 정수가 아닌 잘못된 값일 경우 예외 발생
+- 음수일 경우 예외 발생
 - 사용자가 잘못된 값을 입력할 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료
 
 ---
