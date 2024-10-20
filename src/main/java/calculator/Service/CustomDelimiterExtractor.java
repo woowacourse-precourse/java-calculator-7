@@ -25,6 +25,9 @@ public class CustomDelimiterExtractor {
 
             // 첫 번째 요소에서 본문 내용 추출
             content = detachedInputList.get(0).substring(matcher.end());
+        } else {
+            // 커스텀 구분자가 없으면 넘겨받은 문자열 리스트를 그대로 반환
+            return detachedInputList;
         }
 
         // 첫 번째 요소의 본문 데이터 처리
