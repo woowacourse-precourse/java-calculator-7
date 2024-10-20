@@ -6,8 +6,8 @@ import java.util.regex.Pattern;
 
 public class DefaultCustomDelimiterPatternMatcher implements CustomDelimiterPatternMatcher {
 
-    private final String DELIMITER_PREFIX = "//";
-    private final String DELIMITER_SUFFIX = "\\\\n";
+    public final String DELIMITER_PREFIX = "//";
+    public final String DELIMITER_SUFFIX = "\\\\n";
     private final Pattern DELIMITER_PATTERN = Pattern.compile(
             "^" + DELIMITER_PREFIX + "(.*)" + DELIMITER_SUFFIX + "(.*)"
     );
