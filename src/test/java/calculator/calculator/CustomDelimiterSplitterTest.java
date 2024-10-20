@@ -17,4 +17,13 @@ public class CustomDelimiterSplitterTest {
         assertThat(result.isSuccess()).isTrue();
         assertThat(result.result()).containsExactlyInAnyOrder("1", "1", "3");
     }
+
+    @Test
+    public void 커스텀_구분자_매칭_실패() {
+        CustomDelimiterSplitter splitter = new CustomDelimiterSplitter();
+
+        SplitResult result = splitter.split("/.\n1.1.3");
+
+        assertThat(result.isSuccess()).isFalse();
+    }
 }
