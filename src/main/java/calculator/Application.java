@@ -22,6 +22,8 @@ public class Application {
             if (delimiterEnd != -1) {
                 delimiter = input.substring(delimiterStart, delimiterEnd); // 구분자 추출
                 numbers = input.substring(delimiterEnd + 2); // 구분자 뒤의 숫자 문자열
+            } else {
+                throw new IllegalArgumentException("잘못된 입력 형식입니다.");
             }
         }
 
@@ -30,8 +32,24 @@ public class Application {
 
         int sum = 0;
         for (String token : tokens) {
-            sum += Integer.parseInt(token);
+            try {
+                sum += Integer.parseInt(token);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("숫자가 아닌 값이 입력되었습니다.");
+            }
         }
         return sum;
+    }
+    public static void main(String[] args) {
+
+        // 사용자로부터 문자열 입력받기
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        String input = Console.readLine();
+        try {
+            int result = add(input);
+            System.out.println("결과 :  " + result);
+        } catch (IllegalArgumentException e) {
+            System.out.println("에러: " + e.getMessage());
+        }
     }
 }
