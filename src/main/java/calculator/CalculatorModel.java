@@ -4,7 +4,9 @@ public class CalculatorModel {
     private final Util util = new Util();
 
     public long[] changeStringtoLongOperandArray(String userInput) {
-
+        int lastIndex = getLastIndexofCustomDelimiter(userInput);
+        System.out.println(lastIndex);
+        
         if (!util.checkforInvalidPrefix(userInput)) {
             throw new IllegalArgumentException("잘못된 입력값입니다: " + userInput);
         }
@@ -24,6 +26,7 @@ public class CalculatorModel {
 
             return operandArrayinLong;
         }
+
     }
 
     public long[] changeStringArrtoLongArr(String[] stringArr) {
@@ -38,4 +41,31 @@ public class CalculatorModel {
         }
         return longArr;
     }
+
+    public int getLastIndexofCustomDelimiter(String userInput) {
+
+        // 예외처리: //만 입력후 끝난 경우
+        if (userInput.length() < 3) {
+            throw new IllegalArgumentException("커스텀 구분자를 입력하지 않으셨습니다.");
+        }
+
+        int delimiter = userInput.lastIndexOf("\\n");
+        //System.out.println(delimiter);
+
+        // 예외처리: \n이 끝까지 안나오는 경우
+        if (delimiter == -1) {
+            throw new IllegalArgumentException("커스텀 구분자를 입력하지 않으셨습니다.");
+        }
+
+        // 예외처리: // 과 마지막 \n에 사이에 아무것도 없는 경우:
+        if (delimiter == 2) {
+            throw new IllegalArgumentException("커스텀 구분자를 입력하지 않으셨습니다.");
+        }
+
+        // System.out.println(delimiter);
+
+        return delimiter;
+    }
+
+
 }
