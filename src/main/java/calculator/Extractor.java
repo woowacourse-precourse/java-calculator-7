@@ -16,7 +16,7 @@ public class Extractor {
     public String extractOptionField(String input) {
 
         // 정규식 패턴: "//{문자}\n" 형식으로 시작하는 패턴에서 문자를 추출
-        String regex = "^//.*?\\n";
+        String regex = "^//.*?\\\\n";
 
         // Pattern과 Matcher 객체 생성
         Pattern pattern = Pattern.compile(regex);
@@ -38,9 +38,9 @@ public class Extractor {
      */
     public String extractTargetField(String input) {
         if (input.startsWith("//")) {
-            int firstIndex = input.indexOf("\n");
+            int firstIndex = input.indexOf("\\n");
             if (firstIndex != -1) {
-                return input.substring(firstIndex + 1);
+                return input.substring(firstIndex + 2);
             }
         }
 

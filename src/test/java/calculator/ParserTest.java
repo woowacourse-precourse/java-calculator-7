@@ -21,7 +21,7 @@ public class ParserTest {
 
     @Test
     void 커스텀_구분자가_1개_있을_때_테스트() {
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
         List<Double> expected = List.of(1.0, 2.0, 3.0);
         List<Double> result = parser.parseInput(input);
 
@@ -30,7 +30,7 @@ public class ParserTest {
 
     @Test
     void 커스텀_구분자가_설정_영역은_있지만_커스텀_구분자가_없는_경우_성공_테스트() {
-        String input = "//\n1,2:3";
+        String input = "//\\n1,2:3";
         List<Double> expected = List.of(1.0, 2.0, 3.0);
         List<Double> result = parser.parseInput(input);
 
