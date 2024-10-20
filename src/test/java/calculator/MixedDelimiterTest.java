@@ -16,6 +16,7 @@ class MixedDelimiterTest extends NsTest {
         });
     }
 
+
     @Test
     void 잘못된_커스텀_구분자_예외_테스트() {
         assertSimpleTest(() ->
