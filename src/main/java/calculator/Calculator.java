@@ -1,5 +1,6 @@
-package calculator.businessLogic;
+package calculator;
 
+import calculator.businessLogic.Input;
 import calculator.domain.CalculatorParam;
 
 import static calculator.message.Message.결과안내문;

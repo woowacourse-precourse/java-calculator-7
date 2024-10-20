@@ -5,12 +5,12 @@ import java.util.List;
 
 public class CalculatorParam {
 
-    private List<Character> delimiters;
+    private List<String> delimiters;
     private List<String> stringNumbers;
     private List<Integer> numbers;
 
     protected CalculatorParam() {
-        this.delimiters = List.of(',', ':');
+        this.delimiters = List.of(",", ":");
         this.numbers = new ArrayList<>();
         this.stringNumbers = new ArrayList<>();
     }
@@ -19,7 +19,7 @@ public class CalculatorParam {
         return new CalculatorParam();
     }
 
-    public void changeUserDelimiters(List<Character> delimiters) {
+    public void changeUserDelimiters(List<String> delimiters) {
         this.delimiters = delimiters;
     }
 
@@ -39,7 +39,7 @@ public class CalculatorParam {
         return this.numbers;
     }
 
-    public List<Character> getDelimiters() {
+    public List<String> getDelimiters() {
         return this.delimiters;
     }
 

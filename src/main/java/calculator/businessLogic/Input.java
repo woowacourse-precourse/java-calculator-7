@@ -46,7 +46,7 @@ public class Input {
         if(validator.validDelimiters(userInput)) {
             validator.isNullDelimiters(domain.getStringNumbers());
             List<String> splitInput = domain.getStringNumbers();
-            List<Character> delimiter = splitInput.get(구분자인덱스).chars().mapToObj(c -> (char) c).toList();
+            List<String> delimiter = List.of(splitInput.get(구분자인덱스));
             domain.changeUserDelimiters(delimiter);
         }
     }

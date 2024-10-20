@@ -5,6 +5,7 @@ public abstract class Message {
     public static String 구분자시작 = "//";
     public static String 입력끝구분자 = "\\\\n";
     public static String 결과안내문 = "결과 : ";
+
     public static Integer 구분자인덱스 = 1;
     public static Integer 음수확인 = 0;
     public static Integer 구분자크기 = 3;

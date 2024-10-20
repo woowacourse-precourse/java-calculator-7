@@ -32,17 +32,17 @@ public class Split {
         String stringNumbers = domain.getStringNumbers().getLast();
         List<String> stringNumberList = new ArrayList<>(List.of(stringNumbers));
 
-        for (Character delimiter : domain.getDelimiters()) {
+        for (String delimiter : domain.getDelimiters()) {
             stringNumberList = splitNumber(stringNumberList, delimiter);
         }
         domain.splitStringNumbers(stringNumberList);
     }
 
-    private List<String> splitNumber(List<String> inputNumberData, Character delimiters) {
+    private List<String> splitNumber(List<String> inputNumberData, String delimiters) {
         List<String> stringNumberList = new ArrayList<>();
 
         inputNumberData.forEach(i -> {
-            stringNumberList.addAll(splitString(i, delimiters.toString()));
+            stringNumberList.addAll(splitString(i, delimiters));
         });
         return stringNumberList;
     }
