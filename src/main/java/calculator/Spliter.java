@@ -30,6 +30,7 @@ public class Spliter {
         // result 배열 내 잘못된 변수 존재 시 프로그램 종료
         if(inspectionValue(result) == true) {
             // result 배열 합 계산
+            sum(result);
         } else {
             System.out.println("에러 발생");
             //throw new IllegalAccessException("dd");
@@ -59,4 +60,12 @@ public class Spliter {
     public boolean inspectionValue(String[] result) {
         return true;
     }
+
+    public void sum(String[] result) {
+        System.out.println("커스텀 구분자 = " + customSeparator1 + ", result = " + Arrays.toString(result));
+        for(int i=0; i<result.length; i++) {
+            this.resultValue += Integer.parseInt(result[i]);
+        }
+    }
+
 }
