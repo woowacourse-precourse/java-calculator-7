@@ -72,7 +72,7 @@ public class CustomDelimiter extends Delimiter {
     private String isDelimiterRightThenTrim(String delimiter) {
         delimiter = delimiter.trim();
 
-        if (hasCustomDelimiter(delimiter)) {
+        if (hasCustomDelimiter(delimiter) || delimiter.isEmpty()) {
             CalculatorException.causeException("잘못된 커스텀 구분자입니다.");
         }
 

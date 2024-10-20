@@ -61,6 +61,17 @@ class ApplicationTest extends NsTest {
                 () -> assertSimpleTest(() -> {
                     run("////;3\\n");
                     assertThat(output()).contains("0");
+                }),
+
+                // 커스텀 구분자가 비어있는 경우 예외 호출
+                () -> assertThatThrownBy(() -> run("//\\n1,2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage("잘못된 커스텀 구분자입니다."),
+
+                //커스텀 구분자로만 이루어져 있는 경우 0으로 계산한다.
+                () -> assertSimpleTest(() -> {
+                    run("//;\\n;");
+                    assertThat(output()).contains("0");
                 })
         );
     }
