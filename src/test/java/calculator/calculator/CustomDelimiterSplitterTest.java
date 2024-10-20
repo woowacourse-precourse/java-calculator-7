@@ -3,7 +3,7 @@ package calculator.calculator;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import calculator.CustomDelimiterSplitter;
-import java.util.List;
+import calculator.SplitResult;
 import org.junit.jupiter.api.Test;
 
 public class CustomDelimiterSplitterTest {
@@ -12,8 +12,9 @@ public class CustomDelimiterSplitterTest {
     public void 커스텀_구분자() {
         CustomDelimiterSplitter splitter = new CustomDelimiterSplitter();
 
-        List<String> result = splitter.split("//.\n1.1.3");
+        SplitResult result = splitter.split("//.\n1.1.3");
 
-        assertThat(result).containsExactlyInAnyOrder("1", "1", "3");
+        assertThat(result.isSuccess()).isTrue();
+        assertThat(result.result()).containsExactlyInAnyOrder("1", "1", "3");
     }
 }

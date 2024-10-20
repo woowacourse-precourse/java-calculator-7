@@ -1,23 +1,27 @@
 package calculator;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CustomDelimiterSplitter {
+public class CustomDelimiterSplitter extends AbstractDelimiterSplitter {
 
-    public List<String> split(String value) {
-        Pattern compile = Pattern.compile("//(.+)\\n(.*)");
+    private static final Pattern compile = Pattern.compile("//(.+)\\n(.*)");
+
+    @Override
+    protected boolean splitValue(Container container, String value) {
         Matcher matcher = compile.matcher(value);
-        boolean matches = matcher.matches();
+        if (isNotMatch(matcher)) {
+            return false;
+        }
+
         String delimiter = matcher.group(1);
         String target = matcher.group(2);
-
-        return toList(target.split(Pattern.quote(delimiter)));
+        container.contain(target.split(Pattern.quote(delimiter)));
+        return true;
     }
 
-    private List<String> toList(String[] value) {
-        return Arrays.asList(value);
+    private boolean isNotMatch(Matcher matcher) {
+        return !matcher.matches();
     }
+
 }

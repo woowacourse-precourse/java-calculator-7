@@ -3,7 +3,7 @@ package calculator.calculator;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import calculator.DefaultDelimiterSplitter;
-import java.util.List;
+import calculator.SplitResult;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -14,8 +14,9 @@ public class DefaultDelimiterSplitterTest {
     public void 기본구분자_분리(String value) {
         DefaultDelimiterSplitter splitter = new DefaultDelimiterSplitter();
 
-        List<String> result = splitter.split(value);
+        SplitResult result = splitter.split(value);
 
-        assertThat(result).containsExactlyInAnyOrder("3", "1", "1");
+        assertThat(result.isSuccess()).isTrue();
+        assertThat(result.result()).containsExactlyInAnyOrder("3", "1", "1");
     }
 }
