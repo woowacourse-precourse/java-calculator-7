@@ -1,26 +1,42 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.Test;
-
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import calculator.fixture.CustomDelimiterFixture;
+import calculator.fixture.DefaultDelimiterFixture;
+import calculator.fixture.ExceptionFixture;
+import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
+
 class ApplicationTest extends NsTest {
-    @Test
-    void 커스텀_구분자_사용() {
+
+    @ParameterizedTest
+    @EnumSource(CustomDelimiterFixture.class)
+    void 커스텀_구분자_사용(CustomDelimiterFixture fixture) {
         assertSimpleTest(() -> {
-            run("//;\\n1");
-            assertThat(output()).contains("결과 : 1");
+            run(fixture.getInput());
+            assertThat(output()).contains(fixture.getResult());
         });
     }
 
-    @Test
-    void 예외_테스트() {
+    @ParameterizedTest
+    @EnumSource(DefaultDelimiterFixture.class)
+    void 기본_구분자_사용(DefaultDelimiterFixture fixture) {
+        assertSimpleTest(() -> {
+            run(fixture.getInput());
+            assertThat(output()).contains(fixture.getResult());
+        });
+    }
+
+    @ParameterizedTest
+    @EnumSource(ExceptionFixture.class)
+    void 예외_테스트(ExceptionFixture fixture) {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException(fixture.getInvalidInput()))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
