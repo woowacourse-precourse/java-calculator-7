@@ -1,8 +1,6 @@
 package calculator.controller;
 
 import calculator.domain.Operator;
-import calculator.domain.number.Number;
-import calculator.domain.number.Numbers;
 import calculator.service.calculator.CalculatorService;
 import calculator.service.separator.SeparatorHandler;
 
@@ -18,9 +16,9 @@ public class Calculator {
     }
 
     public void run() {
-        Numbers numbers = separatorHandler.process(UIController.receive());
-        Number result = calculatorService.operate(Operator.PLUS, numbers);
-
-        UIController.printSumResult(result.getValue());
+        UIController.printSumResult(
+                calculatorService.operate(Operator.PLUS,
+                        separatorHandler.process(UIController.receive()))
+        );
     }
 }
