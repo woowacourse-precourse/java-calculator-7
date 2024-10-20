@@ -2,6 +2,7 @@ package calculator;
 
 import calculator.controller.CalculatorController;
 import calculator.dto.DelimiterInputDto;
+import calculator.service.CalculatorService;
 import calculator.view.CalculatorRequest;
 import calculator.view.CalculatorResponse;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ public class Application {
     public static void main(String[] args) {
         CalculatorRequest calculatorRequest = new CalculatorRequest();
         CalculatorResponse calculatorResponse = new CalculatorResponse();
-        CalculatorController calculatorController = new CalculatorController();
+        CalculatorController calculatorController = new CalculatorController(new CalculatorService());
 
         calculatorRequest.getStartMessage();
 

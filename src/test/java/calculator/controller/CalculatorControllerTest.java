@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import calculator.dto.DelimiterInputDto;
+import calculator.service.CalculatorService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -11,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 class CalculatorControllerTest {
 
-    private final CalculatorController calculatorController = new CalculatorController();
+    private final CalculatorController calculatorController = new CalculatorController(new CalculatorService());
 
     @DisplayName("문자열 덧셈 계산기 통합 테스트 성공")
     @Test
