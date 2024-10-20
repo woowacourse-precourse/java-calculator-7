@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.regex.Pattern;
+
 public class StringCalculator {
     public int calculate(String input) {
         if (input.isEmpty()) {
@@ -11,8 +13,11 @@ public class StringCalculator {
 
         if (input.startsWith("//")) {
             if (input.charAt(3) == '\\' && input.charAt(4) == 'n') {
-                delimiter = String.valueOf(input.charAt(2));
+                String customDelimiter = Pattern.quote(String.valueOf(input.charAt(2)));
+                delimiter = delimiter + "|" + customDelimiter;
                 numberString = input.substring(5);
+            } else {
+                throw new IllegalArgumentException("유효하지 않은 구분자 형식입니다.");
             }
         }
 
@@ -29,10 +34,26 @@ public class StringCalculator {
     private int sumNumbers(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
-            if(!number.isEmpty()) {
-                sum += Integer.parseInt(number);
+            if (!number.trim().isEmpty()) {
+                int num = parseNumber(number.trim());
+                validateNumber(num);
+                sum += num;
             }
         }
         return sum;
+    }
+
+    private int parseNumber(String number) {
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자 변환에 실패했습니다.");
+        }
+    }
+
+    private void validateNumber(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+        }
     }
 }
