@@ -15,13 +15,30 @@ public class Application {
         return new String[]{"", input};
     }
 
+    public static void checkValidDelimiters(String content, String delimiter) {
+        String validDelimiterPattern = "[\\d" + delimiter + ",:]*";
+
+        if (!content.matches(validDelimiterPattern)) {
+            throw new IllegalArgumentException("Error: Invalid delimiters");
+        }
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter your input");
         String input = scanner.nextLine();
 
         String[] delimiterAndContent = getCustomDelimiterAndContent(input);
-        System.out.println("Custom Delimiter: " + delimiterAndContent[0]);
-        System.out.println("Content: " + delimiterAndContent[1]);
+
+        String customDelimiter = delimiterAndContent[0];
+        String contentWithoutDelimiter = delimiterAndContent[1];
+
+        try {
+            checkValidDelimiters(contentWithoutDelimiter, customDelimiter);
+
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+            System.exit(1);
+        }
     }
 }
