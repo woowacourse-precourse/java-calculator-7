@@ -3,6 +3,7 @@ package calculator.controller;
 import java.util.List;
 
 import calculator.domain.Delimiter;
+import calculator.domain.DelimiterFactory;
 import calculator.domain.PositiveNumber;
 import calculator.domain.PositiveNumbers;
 import calculator.view.InputView;
@@ -12,8 +13,10 @@ public class Controller {
 
     public void run() {
         String input = readInput();
+        
+        Delimiter delimiter = DelimiterFactory.create(input);
 
-        PositiveNumber total = sum(input);
+        PositiveNumber total = sum(delimiter.split());
 
         printResult(total);
     }
@@ -23,9 +26,7 @@ public class Controller {
         return inputView.read();
     }
 
-    private PositiveNumber sum(final String input) {
-        Delimiter delimiter = new Delimiter();
-        List<String> numbers = delimiter.split(input);
+    private PositiveNumber sum(final List<String> numbers) {
         PositiveNumbers positiveNumbers = PositiveNumbers.from(numbers);
         return positiveNumbers.sum();
     }
