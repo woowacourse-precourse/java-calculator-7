@@ -7,8 +7,8 @@ public class IntegerOperand implements Operand {
     private final int[] numbers;
 
     public IntegerOperand(final List<Integer> numbers) {
-        this.numbers = numbers.stream().mapToInt(Integer::intValue).toArray();
         validateSize(numbers);
+        this.numbers = numbers.stream().mapToInt(Integer::intValue).toArray();
     }
 
     private void validateSize(final List<Integer> numbers) {
