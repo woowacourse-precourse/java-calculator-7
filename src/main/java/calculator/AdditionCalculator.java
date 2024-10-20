@@ -69,10 +69,6 @@ public class AdditionCalculator {
 
     // 배열에 있는 모든 값들의 합을 구한다
     public int addNumbers() {
-        int result = 0;
-        for (int number : additionNumbers) {
-            result += number;
-        }
-        return result;
+        return additionNumbers.stream().mapToInt(Integer::intValue).sum();
     }
 }
