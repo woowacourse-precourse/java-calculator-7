@@ -75,7 +75,7 @@ public class CalculatorServiceImpl implements CalculatorService{
         String delimiter = converterRequest.getDelimiter();
         String remainInput = converterRequest.getRemainInput();
 
-        if(remainInput.isEmpty()){
+        if(remainInput.isBlank()){
             return new ConverterResponse(new ArrayList<>());
         }
 

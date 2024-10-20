@@ -16,9 +16,14 @@ public class UserView {
     public void run(){
         System.out.println(INPUT_MESSAGE);
         String input = Console.readLine();
+        StringBuilder sb = new StringBuilder(OUTPUT_MESSAGE);
+
+        if(input.isBlank()){
+            System.out.println(sb.append(0));
+            return;
+        }
 
         int result = calculatorController.run(input);
-        StringBuilder sb = new StringBuilder(OUTPUT_MESSAGE);
         System.out.println(sb.append(result));
     }
 }
