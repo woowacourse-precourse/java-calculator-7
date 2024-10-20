@@ -26,7 +26,10 @@ public class Numbers {
                 .anyMatch(number -> number <= STANDARD);
     }
 
-    public List<Integer> getNumbers() {
-        return numberList;
+    public int getSummary() {
+        return numberList
+                .stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 }
