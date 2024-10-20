@@ -15,4 +15,22 @@ public class CalculatorService {
         }
         return text;
     }
+
+    public String[] parsingInput(String rawInput) {
+        if (rawInput.contains(",") || rawInput.contains(":")) {
+            if (rawInput.startsWith(",") || rawInput.endsWith(":") || rawInput.startsWith(":") || rawInput.endsWith(",")) {
+                throw new IllegalArgumentException("잘못된 입력값입니다.");
+            }
+            return rawInput.split("[,:]");
+        } else if (rawInput.startsWith("//") && rawInput.contains("\\n")) {
+            int index = rawInput.indexOf("\\n");
+            String custom = rawInput.substring(2, index);
+            rawInput = rawInput.substring(index+2);
+            if ((rawInput.startsWith(custom) || rawInput.endsWith(custom))) {
+                throw new IllegalArgumentException("잘못된 입력값입니다.");
+            }
+            return rawInput.split(custom);
+        }
+        return new String[]{rawInput};
+    }
 }
