@@ -33,7 +33,6 @@ public class Application {
         String[] parts;
         if(input.charAt(3) == '\\' && input.charAt(4) == 'n'){
             delimiters = delimiters.substring(0, 3) +  input.substring(2, 3) + "]";
-//            delimiters += "|" + input.substring(2, 3);
             parts = input.split("n");
         }
         else{ // \n가 없거나 커스텀 구분자가 여러개라면 예외처리
@@ -45,6 +44,7 @@ public class Application {
 
     private static int sum (String numbers) {
         int SUM = 0;
+        verifyWrongInput(numbers);
         String[] splitedNumbers = numbers.split(delimiters);
         for (String number : splitedNumbers) {
                 int NUM = Integer.parseInt(number);
@@ -54,5 +54,23 @@ public class Application {
             SUM += NUM;
         }
         return SUM;
+    }
+
+    private static void verifyWrongInput (String numbers) {
+        // 1. 다른 구분자가 포함되어 있는지 확인하기
+        if(!numbers.matches("^[0-9" + delimiters + "]*$")) {
+            throw new IllegalArgumentException("양수와 구분자외에 다른문자가 포함되어 있습니다.");
+        }
+
+        // 2. 구분자가 여러개 나오거나 잘못된 위치에 있는지 확인하기
+        String[] splitedNumbers = numbers.split(delimiters);
+        for (String number : splitedNumbers) {
+            if(number.isEmpty()) {
+                throw new IllegalArgumentException("구분자가 겹쳐있거나 문자열 맨앞에 위치해 있습니다.");
+            }
+        }
+        if(!isDigit(numbers.charAt(numbers.length() - 1))){
+            throw new IllegalArgumentException("구분자가 문자열 맨뒤에 위치해 있습니다.");
+        }
     }
 }
