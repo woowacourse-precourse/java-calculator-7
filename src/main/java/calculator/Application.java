@@ -45,8 +45,13 @@ public class Application {
 
                 // 커스텀 구분자 추출 (//와 \n 사이의 문자 추출)
                 String sub = str.substring(2, endIndex);
+                // 모든 특수 문자를 이스케이프 처리 (. * # 등과 같은 특수 문자)
+                // . => \.
+                sub = sub.replaceAll("([\\W])", "\\\\$1");
+
                 // 숫자 부분 추출 (커스텀 구분자 이후의 문자열)
                 content = str.substring(endIndex+2);
+
 
                 // 기본 구분자 기준 분리에 커스텀 구분자 추가
                 parts = content.split(sub + "|[, :]");
