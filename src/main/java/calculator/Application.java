@@ -3,14 +3,14 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
 
-    //입력 형식 검증
+    //입력 형식 검증 - 커밋
     private static void inputCheck(String input) {
         if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException("잘못된 입력 형식");
         }
     }
 
-    //커스텀 구분자
+    //커스텀 구분자 구분 -커밋
     private static String[] split(String input) {
         String delimiter = ",|:"; // 기본 구분자 쉼표(,)와 콜론(:)
         String numbers = input;
