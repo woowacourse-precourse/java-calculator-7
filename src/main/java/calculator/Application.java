@@ -39,8 +39,10 @@ public class Application {
     }
 
     private void isValidString() {
-        hasCustomSeparator();
-        isValidCustomSeparator();
+        if (hasCustomSeparator()) {
+            customSeparator = inputString.charAt(CUSTOM_SEPARATOR_POS);
+            isValidCustomSeparator();
+        }
         for (int i = getStartIndex(); i < inputString.length(); i++) {
             if (Character.isDigit(inputString.charAt(i))) {
                 continue;
