@@ -9,6 +9,8 @@ public class Application {
 	private static final String CUSTOM_DELIMETERS_SUFFIX = "\\n";
 	
     public static void main(String[] args) {
+        int sum = 0;
+        
         System.out.println(INPUT_REQUEST_MESSAGE);
         String input = Console.readLine();
         
@@ -29,8 +31,10 @@ public class Application {
         
         String[] tokens = defaultInput.split(delimiters);
         
-        for (int i = 0; i < tokens.length; i++) {
-            System.out.println(tokens[i]);
-        }    
+        for(int i=0; i<tokens.length; i++) {
+        	sum += Integer.parseInt(tokens[i]);
+        }
+        
+        System.out.println("결과 : " + sum);
     }
 }
