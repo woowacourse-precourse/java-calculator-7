@@ -10,6 +10,11 @@ public class CustomInput {
         // 첫 파트는 구분자 설정. 맨 앞에 있는 //를 자르면 구분자만 남는다.
         String delimiterPart = parts[0].substring(2).trim();
 
+        // 구분자가 없는 경우 예외 처리
+        if (delimiterPart.isEmpty()) {
+            throw new IllegalArgumentException("구분자가 공백입니다.");
+        }
+
         // 두 번째 파트는 숫자로 이루어진 문자열.
         String numberPart = parts[1];
 
