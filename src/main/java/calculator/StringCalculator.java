@@ -6,18 +6,11 @@ public class StringCalculator {
         if (input == null || input.isEmpty()) {
             return 0;
         }
-        if (input.matches("\\d+")) {
-            return Integer.parseInt(input);
-        }
 
-        String delimiter = "[,|:]";
-        if (input.startsWith("//")) {
-            int delimiterIndex = input.indexOf("\n");
-            delimiter = input.substring(2, delimiterIndex);
-            input = input.substring(delimiterIndex + 1);
-        }
+        Delimiter delimiter = new Delimiter(input);
+        StringParser parser = new StringParser(delimiter);
+        String[] numbers = parser.parse(input);
 
-        String[] numbers = input.split(delimiter);
         int sum = 0;
         for (String number : numbers) {
             int num = Integer.parseInt(number);
