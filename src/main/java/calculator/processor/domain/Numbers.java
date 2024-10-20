@@ -8,7 +8,7 @@ public class Numbers {
     private final List<Number> numbers;
 
     public Numbers(String[] numbers) {
-        if (numbers.length == 1 && numbers[0].isEmpty()) {
+        if (numbers.length == 1 && (numbers[0].isEmpty() || numbers[0].isBlank())) {
             this.numbers = List.of(Number.ZERO);
         } else {
             this.numbers = Arrays.stream(numbers)
