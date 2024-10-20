@@ -20,6 +20,8 @@ public class Application {
         }
 
         int sumResult = sumNumbers(input, delimiters);
+
+        System.out.println("결과 : " + sumResult);
     }
 
     private static boolean isValidInput(String input, String delimiters, boolean isCustomDelimiter) {
