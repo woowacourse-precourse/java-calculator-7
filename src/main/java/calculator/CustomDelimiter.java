@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.regex.Pattern;
+
 public class CustomDelimiter {
     private static String delimiters = ",|:";
 
@@ -32,17 +34,12 @@ public class CustomDelimiter {
     }
 
     private static void validateAndAddDelimiter(String delimiter) {
-        String escapedChars = ".*+?^${}[]()|";
-
         isNonNumeric(delimiter);
-        if (escapedChars.contains(delimiter) && !delimiter.isEmpty()) {
-            delimiter = "\\" + delimiter;
-        }
         addDelimiter(delimiter);
     }
 
     private static void addDelimiter(String delimiter) {
-        delimiters += "|" + delimiter;
+        delimiters += "|" + Pattern.quote(String.valueOf(delimiter));
     }
 
     private static void isNonNumeric(String delmiter) {

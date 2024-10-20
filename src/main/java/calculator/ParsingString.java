@@ -11,7 +11,7 @@ public class ParsingString {
         return parseString;
     }
 
-    public static void findStartString(String input, String delimiter) {
+    private static void findStartString(String input, String delimiter) {
         if (delimiter.length() != BASIC_DELIMITER_SIZE) {
             findStartIndex = 5;
             if (delimiter.length() == 4) {
@@ -21,7 +21,7 @@ public class ParsingString {
         parseString = input.substring(findStartIndex);
     }
 
-    public static void isNumeric(String startString, String delimiter) {
+    private static void isNumeric(String startString, String delimiter) {
         String[] list = startString.split(delimiter);
 
         for (String digit : list) {

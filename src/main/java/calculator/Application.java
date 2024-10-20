@@ -13,5 +13,3 @@ public class Application {
         printManager.outputMessage(calculator.add(parseString, delimiters));
     }
 }
-
-// 이스케이프가 필요한 구분자 추가 구현
