@@ -4,26 +4,28 @@ import calculator.dto.OperandDTO;
 import java.util.ArrayList;
 
 import static calculator.utils.Constants.*;
-import static calculator.utils.InvalidInputStringFormatException.errorCheck;
+import static calculator.validators.InvalidInputStringFormatException.errorCheck;
 
 public class ParsingService {
-    private ArrayList<Character> delimiters = new ArrayList<>();
-    private ArrayList<Integer> operandList = new ArrayList<>();
-
-    public ParsingService() {
-        delimiters.add(DEFAULT_DELIMITER1);
-        delimiters.add(DEFAULT_DELIMITER2);
-    }
-
     public OperandDTO parseOperandStr(String operandStr) {
+        ArrayList<Character> delimiters = new ArrayList<>();
+        ArrayList<Integer> operandList = new ArrayList<>();
+
+        addDefaultDelimiters(delimiters);
+
         if(checkIFStringEmpty(operandStr)){
             operandList.add(0);
             return new OperandDTO(operandList);
         }
         errorCheck(operandStr);
-        parse(operandStr);
+        parse(operandStr, delimiters, operandList);
 
         return new OperandDTO(operandList);
+    }
+
+    public void addDefaultDelimiters(ArrayList<Character> delimiters) {
+        delimiters.add(DEFAULT_DELIMITER1);
+        delimiters.add(DEFAULT_DELIMITER2);
     }
 
     //입력받은 문자열이 없을 때 true return
@@ -32,7 +34,7 @@ public class ParsingService {
         return false;
     }
 
-    private void parse(String operandStr){
+    private void parse(String operandStr, ArrayList<Character> delimiters, ArrayList<Integer> operandList){
         //custom 구분자 추출
         if(operandStr.startsWith("//")){
             delimiters.add(operandStr.charAt(CUSTOM_DELIMITER_INDEX));

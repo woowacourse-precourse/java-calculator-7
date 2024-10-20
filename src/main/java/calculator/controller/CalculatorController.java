@@ -15,25 +15,27 @@ public class CalculatorController {
     public static void run(){
         UserInputDTO userInputDTO = getUserInput();
 
+        //문자열 입력 처리
         String operandStr = userInputDTO.getOperandStr();
+
+        //문자열 파싱 처리
         OperandDTO operandDTO = parseOperand(operandStr);
+
+        //덧셈연산계산
         ResultDTO resultDTO = addOperand(operandDTO);
 
         OutputView.printCalculationResultMessage(resultDTO);
     }
 
-    //문자열 입력 처리
     public static UserInputDTO getUserInput(){
         OutputView.printRequireOperandStringMessage();
         return InputView.getOperandInput();
     }
 
-    //문자열 파싱 처리
     public static OperandDTO parseOperand(String operandStr){
         return parsingService.parseOperandStr(operandStr);
     }
 
-    //덧셈연산계산
     public static ResultDTO addOperand(OperandDTO operandDTO){
         return CalculateService.addOperand(operandDTO);
     }

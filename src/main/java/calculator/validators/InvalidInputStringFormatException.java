@@ -1,4 +1,4 @@
-package calculator.utils;
+package calculator.validators;
 
 public class InvalidInputStringFormatException {
     public static void errorCheck(String operandStr){
