@@ -10,43 +10,74 @@ public class StringCalculator {
         }
 
         // 문자 앞뒤 공백 허용(예시: " 1,2")
-        String trimmed = str.trim();
+        String numbersPart = str.trim();
 
-        if (trimmed.isEmpty()) { // empty, blank 문자 처리
+        // empty, blank 문자 처리
+        if (numbersPart.isEmpty()) {
             return 0;
         }
 
-        List<Integer> numbers = extractNumbers(str, ',', ':');
+        // 기본 구분자
+        List<Character> delimiterList = new ArrayList<>();
+        delimiterList.add(',');
+        delimiterList.add(':');
+
+        // 커스텀 구분자 추가(한 글자로 제한함)
+        if (numbersPart.startsWith("//")) {
+            int newlineIndex = numbersPart.indexOf("\\n");
+            if (newlineIndex != 3) { // "//x\n" 형식 검증
+                throw new IllegalArgumentException("커스텀 구분자 지정이 잘못되었습니다.");
+            }
+            char customDelimiter = numbersPart.charAt(2); // "//x\n"에서 'x' 추출
+            delimiterList.add(customDelimiter);
+            numbersPart = numbersPart.substring(newlineIndex + 2); // "//x\n1x2"에서 "1x2"로 변환
+        }
+
+        // 숫자 분리해서 합 구하기
+        String[] strings = splitByDelimiters(numbersPart, delimiterList);
         int sum = 0;
-        for (Integer number : numbers) {
-            sum += number;
+        try {
+            for (String string : strings) {
+                sum += Integer.parseInt(string);
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("문자를 숫자로 변환하는 과정에서 문제가 발생하였습니다.");
         }
 
         return sum;
     }
 
-    private static List<Integer> extractNumbers(String str, char... delimiters) {
-        String regex = buildRegex(delimiters);
-        String[] numberStrings = str.split(regex);
+    /**
+     * 구분자 리스트를 기반으로 문자열을 분리하여 배열로 반환합니다. 예를 들어, str이 "apple,banana+carrot"이고 delimiters가 [',','+']인
+     * 경우 {"apple","banana","carrot"}을 반환합니다.
+     * @param str 대상 문자열
+     * @param delimiters 구분자 리스트
+     * @return 분리된 문자열 배열
+     */
+    private static String[] splitByDelimiters(String str, List<Character> delimiters) {
+        String regex = buildDelimitersRegex(delimiters);
+        String[] strings = str.split(regex);
 
-        try {
-            List<Integer> numbers = new ArrayList<>();
-            for (String numberString : numberStrings) {
-                numbers.add(Integer.parseInt(numberString));
-            }
-            return numbers;
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("문자를 파싱하는 데 문제가 발생했습니다.");
-        }
+        return strings;
     }
 
-    private static String buildRegex(char[] delimiters) {
+    /**
+     * 구분자에 의한 문자열 분리에 사용될 정규표현식을 생성합니다.
+     * @param delimiters 문자열 구분자 리스트
+     * @return 문자열 분리에 사용될 정규표현식
+     */
+    private static String buildDelimitersRegex(List<Character> delimiters) {
         StringBuilder regexBuilder = new StringBuilder();
-        for (char delimiter : delimiters) {
+        for (Character delimiter : delimiters) {
             if (!regexBuilder.isEmpty()) {
                 regexBuilder.append("|"); // 이전에 구분자가 있었다면 or 연산자 추가
             }
-            regexBuilder.append("\\").append(delimiter);
+            // 메타문자 처리
+            if ("\\.^$|?*+()[]{}".indexOf(delimiter) != -1) {
+                regexBuilder.append("\\").append(delimiter);
+            } else {
+                regexBuilder.append(delimiter);
+            }
         }
         return regexBuilder.toString();
     }
