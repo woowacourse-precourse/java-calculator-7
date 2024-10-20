@@ -12,11 +12,23 @@ public class Delimiters {
         this.delimiters = new ArrayList<>(DEFAULT_DELIMITERS);
     }
 
+    public void addCustomDelimiter(String input) {
+        String customDelimiter = input.substring(CUSTOM_DELIMITER_PREFIX.length(),
+                CUSTOM_DELIMITER_PREFIX.length() + 1);
+        add(customDelimiter);
+    }
+
     public boolean hasCustomDelimiter(String input) {
         return input.startsWith(CUSTOM_DELIMITER_PREFIX);
     }
 
     public String toConcatenatedString() {
         return delimiters.stream().reduce("", (a, b) -> a + b);
+    }
+
+    private void add(String delimiter) {
+        if (!delimiters.contains(delimiter)) {
+            delimiters.add(delimiter);
+        }
     }
 }

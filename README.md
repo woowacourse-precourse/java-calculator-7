@@ -15,7 +15,7 @@
 ### Delimiter
 
 - [x] Custom Delimiter 갖고 있는지 판단한다.
-- [ ] Custom Delimiter 추출한다.
+- [x] Custom Delimiter 추출한다.
 - [x] Delimiter를 문자열로 반환한다
 
 ### 입력
