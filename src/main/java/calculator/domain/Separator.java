@@ -1,5 +1,7 @@
 package calculator.domain;
 
+import static calculator.error.ErrorType.EMPTY_CUSTOM_SEPARATOR_ERROR;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -15,6 +17,9 @@ public class Separator {
     public String addCustomSeparator(String input, String customRegex) {
         final Matcher matcher = Pattern.compile(customRegex).matcher(input);
         if (matcher.find()) {
+            if(matcher.group(1).isEmpty()) {
+                throw new IllegalArgumentException(EMPTY_CUSTOM_SEPARATOR_ERROR.getMessage());
+            }
             separators.add(Pattern.quote(matcher.group(1)));
             input = input.substring(matcher.end());
         }
