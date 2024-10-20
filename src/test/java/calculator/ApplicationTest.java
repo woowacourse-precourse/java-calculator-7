@@ -36,6 +36,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 두자리_이상_숫자_입력_시() {
+        assertSimpleTest(() -> {
+            run("//;\\n//^\\n123;245^367,1:1234");
+            assertThat(output()).contains("결과 : 1970");
+        });
+    }
+
+    @Test
     void 저장된_구분자_사용_안한_경우() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//;\\n1;2^3"))
