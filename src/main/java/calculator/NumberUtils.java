@@ -14,7 +14,6 @@ public class NumberUtils {
                 .toList();
     }
 
-
     public static int sum(List<Integer> numbers) {
         return numbers.stream()
                 .mapToInt(Integer::intValue)

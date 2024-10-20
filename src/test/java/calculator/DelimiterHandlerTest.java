@@ -13,7 +13,7 @@ class DelimiterHandlerTest {
     void test_extractCustomDelimiterAndNumbers() {
         DelimiterHandler delimiterHandler = new DelimiterHandler();
 
-        DelimiterAndNumber delimiterAndNumber = delimiterHandler.extractCustomDelimiterAndNumbers1("//;\\n1;2;3");
+        DelimiterAndNumber delimiterAndNumber = delimiterHandler.extractCustomDelimiterAndNumbers("//;\\n1;2;3");
 
         assertThat(delimiterAndNumber.delimiters()).isEqualTo(":|,|\\Q;\\E");
         assertThat(delimiterAndNumber.numbersString()).isEqualTo("1;2;3");
@@ -26,7 +26,7 @@ class DelimiterHandlerTest {
         DelimiterHandler delimiterHandler = new DelimiterHandler();
 
         assertThatThrownBy(() ->
-                delimiterHandler.extractCustomDelimiterAndNumbers1(input))
+                delimiterHandler.extractCustomDelimiterAndNumbers(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("커스텀 구분자는 한글자이어야 합니다.");
     }

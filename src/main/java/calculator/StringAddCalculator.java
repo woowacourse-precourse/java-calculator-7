@@ -29,7 +29,7 @@ public class StringAddCalculator {
     }
 
     private int sumWithCustomDelimiter(String input) {
-        DelimiterAndNumber delimiterAndNumber = delimiterHandler.extractCustomDelimiterAndNumbers1(input);
+        DelimiterAndNumber delimiterAndNumber = delimiterHandler.extractCustomDelimiterAndNumbers(input);
         List<Integer> numbers = NumberUtils.splitNumbers(delimiterAndNumber);
         InputValidator.validateNumbers(numbers);
         return sum(numbers);
@@ -38,7 +38,6 @@ public class StringAddCalculator {
     private int sumWithDefaultDelimiter(String input) {
         delimiterHandler.validateDefaultDelimiter(input);
         String[] splitNumbers = input.split(DefaultDelimiter.getAllDelimiters());
-
         List<Integer> numbers = Arrays.stream(splitNumbers)
                 .map(Integer::parseInt)
                 .toList();

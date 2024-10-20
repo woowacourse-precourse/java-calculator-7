@@ -15,7 +15,7 @@ public class DelimiterHandler {
     public static final int CUSTOM_DELIMITER_INDEX = 2;
     public static final String AND = "|";
 
-    public DelimiterAndNumber extractCustomDelimiterAndNumbers1(String input) {
+    public DelimiterAndNumber extractCustomDelimiterAndNumbers(String input) {
         int startIndex = input.indexOf(DELIMITER_PREFIX);
         int endIndex = input.indexOf(DELIMITER_SUFFIX);
         if (startIndex == DELIMITER_PREFIX_INDEX && endIndex == DELIMITER_SUFFIX_INDEX) {
