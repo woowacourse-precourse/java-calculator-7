@@ -19,7 +19,7 @@ public class StringCalculator {
             return 0;
         }
 
-        List<String> delimiters = delimiterParser.parseDelimiter();
+        List<String> delimiters = delimiterParser.parseDelimiter(input);
         String[] tokens = delimiterParser.split(input, delimiters);
         List<Integer> numbers = numberParser.parseNumbers(tokens);
 
