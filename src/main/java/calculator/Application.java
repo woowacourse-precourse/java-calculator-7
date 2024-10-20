@@ -1,62 +1,50 @@
-package calculator;
+package calculator.domain;
 
-import java.util.Scanner;
-import java.util.regex.Matcher;
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
-public class Application {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("덧셈할 문자열을 입력해주세요: ");
-        String input = scanner.nextLine();
-        scanner.close();
+public class Calculator {
+    private static final int CUSTOM_DELIMITER_START_INDEX = 2;
+    private static final int CUSTOM_DELIMITER_END_INDEX = 3;
+    private static final int CUSTOM_INPUT_START_INDEX = 5;
+    private static final String DEFAULT_DELIMITERS = ",|:";
+    private static final String PARSE_ERROR_MESSAGE = "잘못된 값을 입력했습니다.";
+    private final String[] formulas;
 
+    public Calculator() {
+        this("");
+    }
+
+    public Calculator(String input) {
+        this.formulas = split(input);
+    }
+
+    private String[] split(String input) {
+        if (input.startsWith("//") && input.contains("\\n")) {
+            String delimiter = Pattern.quote(input.substring(CUSTOM_DELIMITER_START_INDEX, CUSTOM_DELIMITER_END_INDEX));
+            input = input.substring(input.indexOf("\\n") + 2);  // "\\n" 이후의 문자열을 추출합니다.
+            return input.split(delimiter);
+        }
+        return input.split(DEFAULT_DELIMITERS);
+    }
+
+    public int sum() {
+        return Arrays.stream(formulas).mapToInt(this::parse).sum();
+    }
+
+    private int parse(String input) {
         try {
-            int result = calculateSum(input);
-            System.out.println("결과 : " + result);
-        } catch (IllegalArgumentException e) {
-            System.out.println("에러: " + e.getMessage());
-            return; // 에러 발생 시 프로그램 종료
+            int number = Integer.parseInt(input.trim());  // trim을 추가하여 입력에서 공백을 제거합니다.
+            return validate(number);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(PARSE_ERROR_MESSAGE, e);
         }
     }
 
-    public static int calculateSum(String input) {
-        if (input == null || input.trim().isEmpty()) {
-            return 0;
-        }
-
-        String delimiter = ",|:";
-        String numbersPart = input;
-
-        // 커스텀 구분자 처리
-        if (input.startsWith("//")) {
-            int delimiterIndex = input.indexOf('\n');
-            if (delimiterIndex == -1) {
-                throw new IllegalArgumentException("잘못된 커스텀 구분자 형식입니다.");
-            }
-            delimiter = Pattern.quote(input.substring(2, delimiterIndex));
-            numbersPart = input.substring(delimiterIndex + 1);
-        }
-
-        String[] numbers = numbersPart.split(delimiter);
-        int sum = 0;
-
-        for (String number : numbers) {
-            int num = parseNumber(number);
-            sum += num;
-        }
-
-        return sum;
-    }
-
-    private static int parseNumber(String number) {
-        if (number.isEmpty()) {
-            return 0; // 빈 문자열은 0으로 처리
-        }
-        int num = Integer.parseInt(number);
-        if (num < 0) {
+    private int validate(int number) {
+        if (number < 0) {
             throw new IllegalArgumentException("음수는 허용되지 않습니다.");
         }
-        return num;
+        return number;
     }
 }
