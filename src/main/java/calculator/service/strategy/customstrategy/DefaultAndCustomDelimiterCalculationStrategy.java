@@ -3,6 +3,7 @@ package calculator.service.strategy.customstrategy;
 import calculator.dto.CalculationRequestDTO;
 import calculator.model.PositiveNumber;
 import calculator.service.strategy.CalculationStrategy;
+import calculator.service.strategy.PositiveNumberExtractor;
 
 public class DefaultAndCustomDelimiterCalculationStrategy implements CalculationStrategy {
     private final CustomDelimiterExtractor customDelimiterExtractor;
