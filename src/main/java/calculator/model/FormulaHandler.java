@@ -3,7 +3,7 @@ package calculator.model;
 import calculator.validation.Validator;
 
 public class FormulaHandler {
-    private String formula;
+    private final String formula;
 
     public FormulaHandler(String formula){
         this.formula = formula.replace("\\n", "\n");
