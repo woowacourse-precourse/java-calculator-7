@@ -11,16 +11,25 @@ public class StringCalculator {
 
     public int calculate(String input) {
         if (input == null || input.isEmpty()) {
-            return 0;  // 빈 문자열 또는 null은 0을 반환
+            throw new InvalidInputException("입력값이 없습니다.");  // 빈 문자열 예외 처리
         }
 
         Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(input);
         String delimiter = DEFAULT_DELIMITERS;
         String numbers = input;
 
+        // 커스텀 구분자 패턴이 매칭되면
         if (matcher.matches()) {
             delimiter = matcher.group(1);
             numbers = matcher.group(2);
+            // 구분자 뒤에 숫자가 없을 경우 예외 발생
+            if (numbers == null || numbers.isEmpty() || numbers.trim().isEmpty()) {
+                throw new InvalidInputException("잘못된 입력입니다.");  // 구분자가 없거나 잘못된 경우
+            }
+            // 구분자가 유효한지 검사 (여기서 세미콜론을 허용하지 않도록 추가)
+            if (delimiter == null || delimiter.trim().isEmpty()) {
+                throw new InvalidInputException("잘못된 입력입니다.");  // 구분자가 없거나 잘못된 경우
+            }
         }
 
         return sum(numbers, delimiter);
@@ -44,7 +53,11 @@ public class StringCalculator {
 
     private int parseNumber(String token) {
         try {
-            return Integer.parseInt(token);
+            int number = Integer.parseInt(token);
+            if (number == 0) {
+                throw new InvalidInputException("0은 허용되지 않습니다.");  // 0 예외 처리
+            }
+            return number;
         } catch (NumberFormatException e) {
             throw new InvalidInputException("잘못된 입력입니다.");  // 숫자가 아닌 경우 예외 발생
         }

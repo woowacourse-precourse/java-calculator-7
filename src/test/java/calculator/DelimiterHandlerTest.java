@@ -37,6 +37,6 @@ class DelimiterHandlerTest {
         StringCalculator calculator = new StringCalculator();
         assertThatThrownBy(() -> calculator.calculate("1;2;3"))  // 커스텀 구분자 형식이 아닌 경우
                 .isInstanceOf(InvalidInputException.class)
-                .hasMessage("유효하지 않은 구분자입니다.");
+                .hasMessage("잘못된 입력입니다.");
     }
 }

@@ -36,16 +36,16 @@ class StringCalculatorTest {
     void 음수_입력시_예외가_발생한다() {
         StringCalculator calculator = new StringCalculator();
         assertThatThrownBy(() -> calculator.calculate("1,-2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("음수는 허용되지 않습니다: -2");
+                .isInstanceOf(InvalidInputException.class)
+                .hasMessage("음수는 허용되지 않습니다.");
     }
 
     @Test
     void 유효하지_않은_숫자_입력시_예외가_발생한다() {
         StringCalculator calculator = new StringCalculator();
         assertThatThrownBy(() -> calculator.calculate("1,a,3"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("유효하지 않은 숫자: a");
+                .isInstanceOf(InvalidInputException.class)
+                .hasMessage("잘못된 입력입니다.");
     }
 
     @Test
@@ -53,6 +53,6 @@ class StringCalculatorTest {
         StringCalculator calculator = new StringCalculator();
         assertThatThrownBy(() -> calculator.calculate("1;2;3"))
                 .isInstanceOf(InvalidInputException.class)
-                .hasMessage("유효하지 않은 구분자입니다.");
+                .hasMessage("잘못된 입력입니다.");
     }
 }
