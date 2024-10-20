@@ -3,21 +3,21 @@ package calculator.parser;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-public class BasicNumberParser implements NumberParser{
+public class BasicNumberParser implements NumberParser {
+
   @Override
-  public Number parseNumber(String token){
-    if(!token.contains(".") && !token.contains("e") && !token.contains("E")){
+  public Number parseNumber(String token) {
+    if (!token.contains(".") && !token.contains("e") && !token.contains("E")) {
       return tryParseLong(token);
-    }
-    else{
+    } else {
       return new BigDecimal(token);
     }
   }
 
   private Number tryParseLong(String token) {
-    try{
+    try {
       return Long.parseLong(token);
-    } catch(NumberFormatException e){
+    } catch (NumberFormatException e) {
       return new BigInteger(token);
     }
   }

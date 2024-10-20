@@ -6,7 +6,8 @@ import calculator.validator.NumberValidator;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-public class StringSumCalculatorService implements SumCalculatorService{
+public class StringSumCalculatorService implements SumCalculatorService {
+
   private final DelimiterParser delimiterParser;
   private final NumberParser numberParser;
   private final NumberValidator numberValidator;
@@ -17,9 +18,12 @@ public class StringSumCalculatorService implements SumCalculatorService{
     this.numberParser = numberParser;
     this.numberValidator = numberValidator;
   }
+
   @Override
-  public String calculate(String input){
-    if(input.isEmpty()) return "0";
+  public String calculate(String input) {
+    if (input.isEmpty()) {
+      return "0";
+    }
 
     String[] tokens = delimiterParser.parse(input);
 
@@ -31,54 +35,47 @@ public class StringSumCalculatorService implements SumCalculatorService{
       numberValidator.validateNumber(token);
       Number number = numberParser.parseNumber(token);
 
-      if(number instanceof Long){
-        long lValue = (Long)number;
-        if(bdSum != null){
+      if (number instanceof Long) {
+        long lValue = (Long) number;
+        if (bdSum != null) {
           bdSum = bdSum.add(BigDecimal.valueOf(lValue));
-        }
-        else {
-          if(biSum == null){
+        } else {
+          if (biSum == null) {
             if (isOverFlow(lsum, lValue)) {
               biSum = BigInteger.valueOf(lsum).add(BigInteger.valueOf(lValue));
-            }
-            else{
+            } else {
               lsum += lValue;
             }
-          }
-          else{
+          } else {
             biSum = biSum.add(BigInteger.valueOf(lValue));
           }
         }
-      }
-      else if (number instanceof BigInteger) {
-        if(bdSum != null){
+      } else if (number instanceof BigInteger) {
+        if (bdSum != null) {
           bdSum = bdSum.add(new BigDecimal((BigInteger) number));
-        }
-        else {
-          if(biSum == null){
+        } else {
+          if (biSum == null) {
             biSum = BigInteger.valueOf(lsum).add((BigInteger) number);
-          }
-          else{
-            biSum = biSum.add((BigInteger)number);
+          } else {
+            biSum = biSum.add((BigInteger) number);
           }
         }
-      }
-      else if (number instanceof BigDecimal) {
+      } else if (number instanceof BigDecimal) {
         bdSum = createBigDecimalSum(bdSum, lsum, biSum);
         bdSum = bdSum.add((BigDecimal) number);
       }
     }
 
-    if(bdSum!= null){
-      if(biSum != null){
+    if (bdSum != null) {
+      if (biSum != null) {
         bdSum = bdSum.add(new BigDecimal(biSum));
       }
-      if(lsum != 0){
+      if (lsum != 0) {
         bdSum = bdSum.add(BigDecimal.valueOf(lsum));
       }
       return bdSum.stripTrailingZeros().toPlainString();
     }
-    if(biSum != null){
+    if (biSum != null) {
       return biSum.toString();
     }
     return Long.toString(lsum);
@@ -93,11 +90,10 @@ public class StringSumCalculatorService implements SumCalculatorService{
   }
 
   private BigDecimal createBigDecimalSum(BigDecimal bdSum, long lsum, BigInteger biSum) {
-    if(bdSum == null){
-      if(biSum != null){
+    if (bdSum == null) {
+      if (biSum != null) {
         bdSum = new BigDecimal(biSum);
-      }
-      else{
+      } else {
         bdSum = new BigDecimal(lsum);
       }
     }
