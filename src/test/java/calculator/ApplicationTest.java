@@ -85,6 +85,22 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 커스텀_구분자_숫자_형식_포함_예외_테스트1() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//1\n1112\n".replace("\n","\\n")))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_숫자_형식_포함_예외_테스트2() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//:1;\n1:1;12\n".replace("\n","\\n")))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
