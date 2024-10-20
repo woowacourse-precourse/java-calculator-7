@@ -40,7 +40,12 @@ public class StringCalculator {
     }
 
     private static int sum(String[] numbers) {
-
-        return 0;
+        int total = 0;
+        for (String number : numbers) {
+            if (number.matches("\\d+")) {
+                total += Integer.parseInt(number);
+            }
+        }
+        return total;
     }
 }
