@@ -60,6 +60,20 @@ public class CalculatorProcess {
         divideByDelimiter(inputString);
     }
 
+    // 구분자(콜론)를 기준으로 숫자 나누기
     static private void divideByDelimiter(String inputString){
+        String[] divideString = inputString.split(":");
+        int[] divideInteger = new int[divideString.length];
+        for(int i=0;i<divideString.length;i++){
+            divideInteger[i] = Integer.parseInt(divideString[i]);
+            if(divideInteger[i]==0){
+                // 유효하지 않은 문자열 (구분자를 제외한 문자열이 숫자 0을 포함하고 있을 경우)
+                throw new IllegalArgumentException();
+            }
+        }
+        sum(divideInteger);
+    }
+
+    static private void sum(int[] divideInteger){
     }
 }
