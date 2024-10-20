@@ -1,8 +1,12 @@
 package calculator.util;
 
 public enum Limit {
-    MAX_DIGIT(30),
-    MAX_NUMBER(1000);
+    MAX_DIGIT_LENGTH(30),
+    MAX_NUMBER(1000),
+    MIN_NUMBER(0),
+    MAX_CUSTOM_DELIMITER(3),
+    REGEX_ESCAPE_CORRECTION(4),
+    ;
 
     int value;
 

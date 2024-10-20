@@ -1,6 +1,8 @@
 package calculator.model;
 
 import calculator.util.ErrorMessage;
+import calculator.util.Limit;
+import calculator.util.Regex;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,10 +15,10 @@ public class CustomDelimiter extends Delimiter {
 
     @Override
     public void validate() {
-        Matcher inValidDelimiter = createMatcher("[0-9\\-/]|\\\\(?!Q|E)");
-        Matcher duplicateDelimiter = createMatcher("[,:]");
+        Matcher inValidDelimiter = createMatcher(Regex.CUSTOM_DELIMITER_INVALID_FORMAT.getRegex());
+        Matcher duplicateDelimiter = createMatcher(Regex.DEFAULT_DELIMITER_FORMAT.getRegex());
 
-        if (delimiter.length() > 7) {
+        if (delimiter.length() > Limit.MAX_CUSTOM_DELIMITER.getValue() + Limit.REGEX_ESCAPE_CORRECTION.getValue()) {
             throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_LIMIT.getError());
         }
 
