@@ -49,6 +49,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 기본_구분자_공백_숫자() {
+        assertSimpleTest(() -> {
+            run("1,2 : 10:42");
+            assertThat(output()).contains("결과 : 55");
+        });
+    }
+
+    @Test
     void 기본_구분자_큰단위_숫자() {
         assertSimpleTest(() -> {
             run("1,100:200:1000");
