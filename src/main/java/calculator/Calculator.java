@@ -23,6 +23,7 @@ public class Calculator {
         }
 
         List<Integer> numbers = extractNumbers(input, delimeter);
+
         int sum = sumCalculator(numbers);
 
         return sum;
@@ -33,9 +34,11 @@ public class Calculator {
         Pattern pattern = Pattern.compile("\\d");
         Matcher matcher = pattern.matcher(input);
         int index = 0;
+        //숫자가 첫번째로 나오는 인덱스 기준으로 설정
         if (matcher.find()) {
             index = matcher.start();
         } else {
+            //숫자가 없는 경우 예외 처리
             if (input.endsWith("\\n")) {
                 System.out.println("결과 : 0");
                 System.exit(0);
@@ -43,18 +46,22 @@ public class Calculator {
                 throw new IllegalArgumentException();
             }
         }
+        //커스텀 구분자 추출
         String delimiter = input.substring(2, index - 2);
+        //커스텀 구분자 부분(앞부분) 제거한 입력값
         String newInput = input.substring(index);
         return new String[]{delimiter, newInput};
     }
 
+    //기본, 커스텀 구분자 기준으로 숫자 추출
     public List<Integer> extractNumbers(String input, String delimiter) {
+        //메타문자 포함 할 수도 있어서 이스케이프 처리
         String escapedDelimiter = Pattern.quote(delimiter);
         String[] extracted = input.split(",|:|" + escapedDelimiter);
         List<Integer> numbers = new ArrayList<>();
         //정수형 리스트로 변환
         for (String a : extracted) {
-            //예외 처리 - 음수, 숫자가 아닌경우
+            //예외 처리 - 음수이거나 숫자가 아닌경우
             try {
                 int number = Integer.parseInt(a);
                 if (number < 0) {
