@@ -21,7 +21,7 @@ public class CalculatorController {
 
     private void saveInputString() {
         inputString.setUserInput(inputView.enterInputString());
-        List<Integer> userOperand = stringValidator.convertStringToIntegerList(inputString.getUserInput());
+        List<Integer> userOperand = stringValidator.validate(inputString.getUserInput());
         inputString.setUserOperand(userOperand);
     }
 
