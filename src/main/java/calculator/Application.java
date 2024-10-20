@@ -53,7 +53,7 @@ public class Application {
         int sum = 0;
         for(String number: numbers){
             int num = stringToInt(number);
-            if(num<0)
+            if(num<=0) // 숫자는 양수로만 구성되어야 하므로 0도 예외처리
                 return -1;
             sum+=num;
         }
