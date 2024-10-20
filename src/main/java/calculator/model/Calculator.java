@@ -2,7 +2,7 @@ package calculator.model;
 
 import java.util.List;
 
-public interface Calculator<E extends Number> {
+public interface Calculator<T extends Number> {
 
-    E calculate(List<E> numbers);
+    T calculate(List<T> numbers);
 }
