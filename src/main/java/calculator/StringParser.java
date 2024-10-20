@@ -21,8 +21,7 @@ public class StringParser {
                     throw new IllegalArgumentException("구분자로 역슬래시(\\)는 사용할 수 없습니다.");
                 }
 
-                // 커스텀 구분자가 2글자 이상일 경우를 가정 -> 정규 표현식 사용
-                delimiter = "[" + customDelimiter + "]";
+                delimiter = escapeSpecialCharacters(customDelimiter);
 
                 // 기존 방식: \n = 1글자 => Index + 1
                 // 현재 방식: \\n = 2글자 => Index + 2 (escape 문자 고려)
@@ -34,5 +33,10 @@ public class StringParser {
 
         // 정의된 구분자로 문자열 처리
         return input.split(delimiter);
+    }
+
+    // 특수 문자 escape 처리
+    private String escapeSpecialCharacters(String delimiter) {
+        return delimiter.replaceAll("([\\[\\]\\{\\}\\(\\)\\*\\+\\?\\^\\$\\|\\.])", "\\\\$1");
     }
 }
