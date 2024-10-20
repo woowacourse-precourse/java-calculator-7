@@ -2,7 +2,7 @@ package calculator.controller;
 
 import java.util.List;
 
-public class Addition {
+public class Calculation {
     public int calculate(List<String> separated) {
         // 숫자만 배열에 담아 반환
         int[] numbers = pickNumbers(separated);

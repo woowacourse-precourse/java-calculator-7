@@ -1,6 +1,6 @@
 package calculator;
 
-import calculator.controller.Addition;
+import calculator.controller.Calculation;
 import calculator.controller.FunctionOperator;
 import calculator.controller.Preprocessing;
 import calculator.view.InputView;
@@ -11,9 +11,9 @@ public class Application {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
         Preprocessing preprocessing = new Preprocessing();
-        Addition addition = new Addition();
+        Calculation calculation = new Calculation();
 
-        FunctionOperator operator = new FunctionOperator(inputView, outputView, preprocessing, addition);
+        FunctionOperator operator = new FunctionOperator(inputView, outputView, preprocessing, calculation);
         operator.run();
     }
 }
