@@ -21,7 +21,7 @@ public class SeparatorRepositoryTest {
 
     @Test
     void 구분자가_정상적으로_저장되는가() {
-        String separator = "//d";
+        String separator = "//d\\n";
         List<Character> expected = List.of('d');
 
         separatorRepository.saveSeparator(separator);
@@ -37,7 +37,7 @@ public class SeparatorRepositoryTest {
      */
     @Test
     void 구분자가_저장될때_올바르지_않은_형식이라면_오류가_발생() {
-        String separator = "/s";
+        String separator = "//sdf\\n";
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> separatorRepository.saveSeparator(separator));
     }

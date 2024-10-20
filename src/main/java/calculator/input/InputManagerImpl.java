@@ -1,10 +1,13 @@
 package calculator.input;
 
+import calculator.Constants;
 import calculator.repository.number.NumberRepository;
 import calculator.repository.separator.SeparatorRepository;
 import calculator.utils.SeparatorUtils;
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
@@ -27,8 +30,7 @@ public class InputManagerImpl implements InputManager {
      * Console API를 이용해서 구분자와 숫자를 리포지토리에 저장함
      *
      * @throws IllegalStateException saveSeparatorAndNumbers를 여러번 호출할 경우 발생
-     * @throws IllegalArgumentException
-     * 입력의 형식이 잘못되었을 때 발생한다
+     * @throws IllegalArgumentException 입력의 형식이 잘못되었을 때 발생한다
      */
     @Override
     public void saveSeparatorAndNumbers() {
@@ -41,40 +43,57 @@ public class InputManagerImpl implements InputManager {
 
         //첫번째 라인 읽기
         //비어있으면 에러를 잡고 빈 문자열을 넣는다
-        String firstLine;
+        String line;
         try {
-            firstLine = Console.readLine();
+            line = Console.readLine();
         } catch (NoSuchElementException e) {
-            firstLine = "";
+            line = "";
         }
 
         try {
             //s가 구분자인지 확인
-            if (SeparatorUtils.isSeparator(firstLine)) {
-                separatorRepository.saveSeparator(firstLine);
+            if (SeparatorUtils.hasSeparator(line)) {
+                List<String> splitList = splitSeparatorAndNumbers(line);
 
-                String secondLine = Console.readLine();
-                numberRepository.saveNumbers(secondLine);
+                //splitList의 0번 인덱스에 있는 구분자를 저장
+                separatorRepository.saveSeparator(splitList.get(0));
+
+                //splitList의 1번 인덱스에 있는 숫자를 저장
+                numberRepository.saveNumbers(splitList.get(1));
             } else {
-                numberRepository.saveNumbers(firstLine);
+                //구분자가 없으므로 숫자만 저장
+                numberRepository.saveNumbers(line);
             }
         } catch (NoSuchElementException e) {
             //readLine에서 읽을 라인이 없을때 발생한다
             throw new IllegalArgumentException("입력의 형식이 잘못되었습니다");
         }
 
-        // /n이 여러번 들어가 예측하지 못한 라인이 더 들어가 있을 경우
-        try {
-            String MoreLine = Console.readLine();
+        //Console의 모든 기능이 종료되었음으로 close를 통해 scanner를 닫는다
+//        Console.close();
+    }
 
-            //정상 작동되지 않을 때 실행된다
+    /**
+     * @throws IllegalArgumentException \\n이 발견되지 않을때 예외 발생
+     *
+     * @param line 구분자와 숫자가 포함되어있는 전체 문자열
+     *
+     * @return
+     * 구분자를 인덱스0에 리턴
+     * 숫자를 인덱스1에 리턴
+     */
+    private List<String> splitSeparatorAndNumbers(final String line) {
+        List<String> splitList = new ArrayList<>();
+        int index = line.indexOf(Constants.POSTFIX);
+
+        // \\n이 발견되지 않을 때
+        if(index == -1) {
             throw new IllegalArgumentException("입력의 형식이 잘못되었습니다");
-
-        } catch (NoSuchElementException e) {
-            //정상 작동이다
         }
 
-        //Console의 모든 기능이 종료되었음으로 close를 통해 scanner를 닫는다
-        Console.close();
+        splitList.add(line.substring(0, index+Constants.POSTFIX.length()));
+        splitList.add(line.substring(index+Constants.POSTFIX.length()));
+
+        return splitList;
     }
 }

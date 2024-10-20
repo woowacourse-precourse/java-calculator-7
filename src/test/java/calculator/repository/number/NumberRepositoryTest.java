@@ -1,5 +1,6 @@
 package calculator.repository.number;
 
+import calculator.Constants;
 import calculator.repository.separator.SeparatorRepository;
 import calculator.repository.separator.SeparatorRepositoryImpl;
 import org.junit.jupiter.api.Assertions;
@@ -17,8 +18,8 @@ public class NumberRepositoryTest {
     public NumberRepositoryTest() {
         separatorRepository.clearAll();
         //기본 구분자 추가
-        separatorRepository.saveSeparator("//:");
-        separatorRepository.saveSeparator("//,");
+        separatorRepository.saveSeparator(Constants.DEFAULT_SEPARATOR_1);
+        separatorRepository.saveSeparator(Constants.DEFAULT_SEPARATOR_2);
     }
 
     @BeforeEach

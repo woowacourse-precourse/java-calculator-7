@@ -10,26 +10,26 @@ public class SeparatorUtilsTest {
 
     @Test
     void prefix를_제대로_감지하는가_1() {
-        String separator = "//d";
+        String separator = "//d\\n";
 
-        boolean isExist = SeparatorUtils.isSeparator(separator);
+        boolean isExist = SeparatorUtils.hasSeparator(separator);
         Assertions.assertTrue(isExist);
     }
 
     @Test
     void prefix를_제대로_감지하는가_2() {
-        String separator = "/d";
+        String separator = "/d\\n";
 
-        boolean isExist = SeparatorUtils.isSeparator(separator);
+        boolean isExist = SeparatorUtils.hasSeparator(separator);
         Assertions.assertFalse(isExist);
     }
 
     @Test
-    void prefix가_제대로_제거되는가() {
-        String separator = "//$";
+    void prefix와_postfix를_제대로_제거되는가() {
+        String separator = "//$\\n";
         String expected = "$";
 
-        String prefixRemovedSeparator = SeparatorUtils.removePrefix(separator);
+        String prefixRemovedSeparator = SeparatorUtils.removePrefixAndPostfix(separator);
 
         Assertions.assertEquals(expected, prefixRemovedSeparator);
     }

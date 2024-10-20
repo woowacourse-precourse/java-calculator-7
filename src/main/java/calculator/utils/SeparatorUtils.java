@@ -1,15 +1,11 @@
 package calculator.utils;
 
+import calculator.Constants;
+
 /**
  * 구분자와 관련된 유틸리티 클레스
  */
 public class SeparatorUtils {
-
-    /**
-     * //의 길이는 2
-     */
-    private static final String PREFIX = "//";
-    private static final int PREFIX_LENGTH = 2;
 
     /**
      * 문자열이 주어지면 PREFIX로 시작하는지 확인
@@ -20,8 +16,8 @@ public class SeparatorUtils {
      * PREFIX가 있으면 true를 반환
      * PREFIX가 없으면 false를 반환
      */
-    public static boolean isSeparator(String string) {
-        return string.startsWith(PREFIX);
+    public static boolean hasSeparator(String string) {
+        return string.startsWith(Constants.PREFIX);
     }
 
     /**
@@ -31,8 +27,8 @@ public class SeparatorUtils {
      *
      * @return //가 제거된 문자열 형태의 구분자
      */
-    public static String removePrefix(final String separatorLine) {
-        return separatorLine.substring(PREFIX_LENGTH);
+    public static String removePrefixAndPostfix(final String separatorLine) {
+        return separatorLine.substring(Constants.PREFIX_LENGTH, separatorLine.length() - Constants.POSTFIX_LENGTH);
     }
 
     /**
@@ -48,6 +44,7 @@ public class SeparatorUtils {
      */
     public static char StringToChar(final String separator) {
 
+        System.out.println(separator);
         //검증 코드
         if(separator.length() != 1) {
             throw new IllegalArgumentException("구분자가 문자 형식이 아닙니다.");

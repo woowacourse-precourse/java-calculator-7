@@ -44,7 +44,7 @@ public class SeparatorRepositoryImpl implements SeparatorRepository {
      */
     @Override
     public void saveSeparator(final String separatorLine) {
-        String separator = SeparatorUtils.removePrefix(separatorLine);
+        String separator = SeparatorUtils.removePrefixAndPostfix(separatorLine);
         char separatorChar = SeparatorUtils.StringToChar(separator);
 
         separators.add(separatorChar);
