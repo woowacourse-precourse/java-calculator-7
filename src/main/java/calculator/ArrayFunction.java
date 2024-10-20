@@ -18,7 +18,7 @@ class ArrayFunction {
                 customSymbol = matcher.group(1);
             }
 
-            inputVal = inputVal.replace("//.*?\\\\n", "");
+            inputVal = inputVal.replaceAll("//.*?\\\\n", "");
         }
 
         if (customSymbol.isEmpty()) {
