@@ -55,7 +55,7 @@ public class StringCalculator {
             }
         }
         delimiter+="]";
-        System.out.println("delimiter : " + delimiter);
+//        System.out.println("delimiter : " + delimiter);
     }
 
     /**
@@ -63,7 +63,7 @@ public class StringCalculator {
      */
     public void sumDelimitedNumbers(){
         String[] numList = input.split(delimiter);
-        System.out.println("numList : "+Arrays.toString(numList));
+//        System.out.println("numList : "+Arrays.toString(numList));
         for(String c : numList){
             // 구분자를 제외한 문자가 있을경우 예외처리
             if(!c.matches("^[0-9]*$")){
@@ -71,7 +71,7 @@ public class StringCalculator {
             }
             this.result += Integer.parseInt(c);
         }
-        System.out.println("sum : "+ result);
+//        System.out.println("sum : "+ result);
     }
 
     /**
