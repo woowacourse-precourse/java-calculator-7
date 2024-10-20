@@ -92,7 +92,7 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 구분자를_숫자_표기에_필요한_문자로_설정시_오류_테스트() {
-        assertSimpleTest(() -> assertThatThrownBy(() -> runException("//e\\n1"))
+        assertSimpleTest(() -> assertThatThrownBy(() -> runException("//2\\n1"))
                 .isInstanceOf(IllegalArgumentException.class));
     }
 

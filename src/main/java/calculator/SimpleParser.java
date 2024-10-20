@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 public class SimpleParser implements Parser {
     public static final String INPUT_DELIMITERS_PATTERN = "^//.*\\\\n";
     public static final String DEFAULT_DELIMITERS = "[,:]";
-    public static final String RESERVED_CHARACTERS = "[0-9eE.-]";
+    public static final String RESERVED_CHARACTERS = "[0-9]";
 
     @Override
     public List<Double> parse(String input) {

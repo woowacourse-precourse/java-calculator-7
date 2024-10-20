@@ -5,7 +5,6 @@ import static calculator.Message.SUM_RESULT_FORMAT;
 import static calculator.Message.USER_INPUT_PROMPT_MSG;
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
-import calculator.myParser.MyParser;
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -15,8 +14,8 @@ public class Application {
         System.out.println(USER_INPUT_PROMPT_MSG);
         String userInput = readLine();
 
-//        Parser parser = new SimpleParser();
-        Parser parser = new MyParser();
+        Parser parser = new SimpleParser();
+//        Parser parser = new MyParser();
         List<Double> numbers = parser.parse(userInput);
 
         double sum = numbers.stream().mapToDouble(Double::doubleValue).sum();
