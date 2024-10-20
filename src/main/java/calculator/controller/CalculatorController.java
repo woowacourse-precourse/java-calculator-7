@@ -1,3 +1,6 @@
+
+
+
 package calculator.controller;
 
 import calculator.model.Calculator;
@@ -29,12 +32,15 @@ public class CalculatorController {
             printResult("0");
         } else {
             HashMap<String, String> separatorAndNumbersMap = getSeparatorAndNumbersMap(inputString);
+            if (separatorAndNumbersMap.get("type").equals("onlySeparatorString")) {
+                printResult("0");
+            } else {
+                ArrayList<String> parsedNumberList = getParsedNumberList(separatorAndNumbersMap);
 
-            ArrayList<String> parsedNumberList = getParsedNumberList(separatorAndNumbersMap);
+                String result = getResult(parsedNumberList);
 
-            String result = getResult(parsedNumberList);
-
-            printResult(result);
+                printResult(result);
+            }
         }
     }
 
@@ -62,3 +68,4 @@ public class CalculatorController {
         outputView.printResult(result);
     }
 }
+
