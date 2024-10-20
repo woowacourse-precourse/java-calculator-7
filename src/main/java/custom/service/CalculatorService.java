@@ -11,9 +11,9 @@ public class CalculatorService {
     }
 
     private int validateInput(String input) {
-        // 유효성 case 1
+        // 유효성 case 1: ""을 입력받은 경우
         if (input.isEmpty()) {
-            return 1;
+            return 1; // 결과 값은 0으로 출력
         }
         // 유효성 case 2: "//"로 시작하는 경우
         if (input.startsWith("//")) {
@@ -31,11 +31,11 @@ public class CalculatorService {
             }
             // 커스텀 구분자 설정만 있는 경우
             if (input.length() == 5) {
-                return 1;
+                return 1; // 결과 값은 0으로 출력
             }
         } else { // 유효성 case 3: "//"로 시작하지 않는 경우
             for (char c : input.toCharArray()) {
-                if (!Character.isDigit(c) && c != ',' && c != ':') {
+                if (!Character.isDigit(c) && c != ',' && c != ':') { // 유효한 값은 숫자와 기본 구분자
                     throw new IllegalArgumentException();
                 }
             }
@@ -56,7 +56,6 @@ public class CalculatorService {
         } else { // "//"로 시작하지 않는 경우
             numberStrings = input.split("[,:" + "]+");
         }
-
         return convertStringToInt(numberStrings);
     }
 
