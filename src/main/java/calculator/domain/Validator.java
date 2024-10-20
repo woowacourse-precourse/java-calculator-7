@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 public class Validator {
 
     private static final String NUMBER_REGEX="[0-9]{0,}";
+    private static final String MINUS="-";
 
     private static final Pattern NEGATIVE=Pattern.compile("-[0-9]");
 
@@ -24,7 +25,7 @@ public class Validator {
     }
 
     private static void checkIfMinus(String customSeperator) {
-        if (customSeperator.equals("-")){
+        if (customSeperator.equals(MINUS)){
             throw new InvalidInputException(MessageType.MINUS_SEPERATOR);
         }
     }
