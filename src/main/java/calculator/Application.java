@@ -29,7 +29,7 @@ public class Application {
         System.out.println("value is number four : " + app.add("1,2,3,4"));
         System.out.println("value is number three : " + app.add("1,2\n3"));
         System.out.println("value is number three : " + app.add("1\n2\n3"));
-
+        System.out.println();
 
     }
 }
