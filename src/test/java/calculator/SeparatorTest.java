@@ -66,13 +66,38 @@ public class SeparatorTest extends NsTest {
     void testSeparateMethod() {
 
         assertSimpleTest(() -> {
-            String test1 = "//;\\n1;2,3:4";
-            String test2 = "1:2,3:4";
-
             Separator obj = new Separator();
-            run(test2);
+            String[] result = obj.separate("//;\\n1;2,3:4");
+            assertThat(result).containsExactly("1", "2", "3", "4");
+        });
 
-            String[] result = obj.separate(test1);
+        assertSimpleTest(() -> {
+            Separator obj = new Separator();
+            String[] result = obj.separate("//;\\n1;;2,,3:4");
+            assertThat(result).containsExactly("1", "2", "3", "4");
+        });
+
+        assertSimpleTest(() -> {
+            Separator obj = new Separator();
+            String[] result = obj.separate("//;\\n1;;2,,,,3:4");
+            assertThat(result).containsExactly("1", "2", "3", "4");
+        });
+
+        assertSimpleTest(() -> {
+            Separator obj = new Separator();
+            String[] result = obj.separate("//;\\n//!\\n//#\\n1;2!3#4");
+            assertThat(result).containsExactly("1", "2", "3", "4");
+        });
+
+        assertSimpleTest(() -> {
+            Separator obj = new Separator();
+            String[] result = obj.separate("//!\\n1;2,3!4");
+            assertThat(result).containsExactly("1", "2", "3", "4");
+        });
+
+        assertSimpleTest(() -> {
+            Separator obj = new Separator();
+            String[] result = obj.separate("1,2,3:4");
             assertThat(result).containsExactly("1", "2", "3", "4");
         });
     }
