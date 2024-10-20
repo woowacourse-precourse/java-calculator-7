@@ -10,6 +10,8 @@ import java.util.List;
 
 public class CalculatorService {
 
+    private static final NumberInputValidator numberInputValidator = new NumberInputValidator();
+
     private static final int DEFAULT_SIZE = 1;
     private static final int CUSTOM_SIZE = 3;
 
@@ -26,7 +28,7 @@ public class CalculatorService {
     private Numbers validateAndParse(List<String> splitNumbers) {
         List<Integer> numberList = splitNumbers
                 .stream()
-                .map(NumberInputValidator::validateOnlyNumeric)
+                .map(numberInputValidator::validateOnlyNumeric)
                 .toList();
 
         return new Numbers(numberList);

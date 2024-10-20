@@ -4,7 +4,7 @@ import calculator.exception.ErrorMessage;
 
 public class NumberInputValidator {
 
-    public static int validateOnlyNumeric(String value) {
+    public int validateOnlyNumeric(String value) {
         if (isNotNumeric(value)) {
             throw new IllegalArgumentException(ErrorMessage.IS_NOT_CUSTOMIZED.getMessage());
         }
@@ -12,7 +12,7 @@ public class NumberInputValidator {
         return Integer.parseInt(value);
     }
 
-    private static boolean isNotNumeric(String str) {
+    private boolean isNotNumeric(String str) {
         try {
             Integer.parseInt(str);
             return false;
