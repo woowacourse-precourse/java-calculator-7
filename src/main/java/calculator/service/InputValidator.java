@@ -2,6 +2,7 @@ package calculator.service;
 
 import static calculator.util.CalculatorUtil.*;
 
+import calculator.constants.RegexPatterns;
 import calculator.util.CalculatorUtil;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -17,10 +18,24 @@ public class InputValidator {
 
         if (isEmptyInput(input)) return false;
 
+        if (isStartOrEndWithWord(input)) return false;
+
         if (!isOnlyOneCustomDeclare(input)) return false;
 
         if (isContainInvalidChar(input)) return false;
         return true;
+    }
+
+    public Boolean isStartOrEndWithWord(String input) {
+        String formattingString = formattingString(input);
+
+        Pattern startPattern = Pattern.compile(RegexPatterns.START_WITH_WORD);
+        Pattern endPattern = Pattern.compile(RegexPatterns.END_WITH_WORD);
+
+        Matcher startMatcher = startPattern.matcher(formattingString);
+        Matcher endMatcher = endPattern.matcher(formattingString);
+
+        return startMatcher.find() || endMatcher.find();
     }
 
     public Boolean isEmptyInput(String input) {

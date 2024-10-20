@@ -1,6 +1,6 @@
 package calculator.view;
 
-import calculator.constraint.CalculatorConstraint;
+import calculator.constants.CalculatorConstraint;
 import camp.nextstep.edu.missionutils.Console;
 
 public class View {

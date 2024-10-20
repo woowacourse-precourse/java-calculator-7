@@ -2,7 +2,7 @@ package calculator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import calculator.constraint.CalculatorConstraint;
+import calculator.constants.CalculatorConstraint;
 import calculator.view.View;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
