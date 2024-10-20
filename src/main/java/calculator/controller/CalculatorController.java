@@ -16,7 +16,7 @@ public class CalculatorController {
 
         List<Double> numbers = inputParser.parse(input);
         Calculator calculator = new Calculator(numbers);
-        double result = calculator.plus();
+        Number result = calculator.plus();
 
         OutputView.printResult(result);
     }
