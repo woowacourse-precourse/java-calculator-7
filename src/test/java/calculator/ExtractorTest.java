@@ -2,6 +2,9 @@ package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import calculator.domain.Extractor;
 import org.junit.jupiter.api.Test;
@@ -29,16 +32,16 @@ class ExtractorTest {
     }
 
     @Test
-    public void 문자열에서_커스텀_구분자를_추출한다2() {
+    public void 문자열에서_커스텀_구분자를_추출한다() {
         //given
         Extractor ex = new Extractor();
-        String input = "1,2;3";
+        String input = "//;\\n1;2;3";
 
         //when
-        String result = ex.extractDelimiter(input);
+        String result = ex.extractCustomDelimiter(input);
 
         //then
-        assertThat(result).isEqualTo("");
+        assertThat(result).isEqualTo(";");
     }
 
     @Test
@@ -48,8 +51,8 @@ class ExtractorTest {
         String input = "//?\\n1?2?3";
 
         //when
-        String delimiter = ex.extractDelimiter(input);
-        int[] result = ex.makeNumberArray(input, delimiter);
+        String delimiter = ex.extractCustomDelimiter(input);
+        int[] result = ex.extractNumbersWithCustomDelimiter(input, delimiter);
 
         //then
         assertArrayEquals(new int[]{1, 2, 3}, result);
@@ -62,8 +65,8 @@ class ExtractorTest {
         String input = "//[\\n1[2[3";
 
         //when
-        String delimiter = ex.extractDelimiter(input);
-        int[] result = ex.makeNumberArray(input, delimiter);
+        String delimiter = ex.extractCustomDelimiter(input);
+        int[] result = ex.extractNumbersWithCustomDelimiter(input, delimiter);
 
         //then
         assertArrayEquals(new int[]{1, 2, 3}, result);
@@ -74,10 +77,9 @@ class ExtractorTest {
         //given
         Extractor extractor = new Extractor();
         String input = "1,2:3";
-        String delimiter = extractor.extractDelimiter(input);
 
         //when
-        int[] result = extractor.makeNumberArray(input, delimiter);
+        int[] result = extractor.extractNumbersWithDefaultDelimiter(input);
 
         //then
         assertArrayEquals(new int[]{1, 2, 3}, result);

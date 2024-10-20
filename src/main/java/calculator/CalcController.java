@@ -19,10 +19,15 @@ public class CalcController {
     public void run() {
         outputView.printInputRequest();
         String numsWithDelimiter = inputView.readNumbers();
+        int[] nums;
 
         Extractor ex = new Extractor();
-        String delimiter = ex.extractDelimiter(numsWithDelimiter);
-        int[] nums = ex.makeNumberArray(numsWithDelimiter, delimiter);
+        if (ex.hasCustomDelimiter(numsWithDelimiter)) {
+            String customDelimiter = ex.extractCustomDelimiter(numsWithDelimiter);
+            nums = ex.extractNumbersWithCustomDelimiter(numsWithDelimiter, customDelimiter);
+        } else {
+            nums = ex.extractNumbersWithDefaultDelimiter(numsWithDelimiter);
+        }
 
         Calculator calc = new PositiveCalculator(nums);
         outputView.printCalculatedResult(calc.sum());

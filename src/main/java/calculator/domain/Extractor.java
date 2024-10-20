@@ -14,30 +14,30 @@ public class Extractor {
         return numsWithCustomDelimiter.startsWith(HEADER);
     }
 
-        String[] splitNumbers = nums.split(regexDelimiter);
-
-        return Arrays.stream(splitNumbers).mapToInt(Integer::parseInt).toArray();
+    public String extractCustomDelimiter(String numsWithDelimiter) {
+        return numsWithDelimiter.substring(2, 3);
     }
 
+    public int[] extractNumbersWithDefaultDelimiter(String delimitedNumsWithDefault) {
+        String[] splitNumbers = delimitedNumsWithDefault.split(DEFAULT_DELIMITER);
+        return Arrays.stream(splitNumbers).mapToInt(this::parseNumber).toArray();
+    }
 
-    public String extractDelimiter(String delimitedNumbers) {
-        int beginIndex = delimitedNumbers.indexOf(HEADER);
-        int endIndex = delimitedNumbers.indexOf(FOOTER);
+    public int[] extractNumbersWithCustomDelimiter(String delimitedNumsWithCustom, String customDelimiter) {
+        String regex = Pattern.quote(customDelimiter);
+        String[] splitNumbers = getNumbersWithoutPrefix(delimitedNumsWithCustom).split(regex);
+        return Arrays.stream(splitNumbers).mapToInt(this::parseNumber).toArray();
+    }
 
-        if (beginIndex == -1 || endIndex == -1) {
-            return "";
+    private String getNumbersWithoutPrefix(String delimitedNumsWithCustom) {
+        return delimitedNumsWithCustom.substring(NUMBER_BEGIN_INDEX);
+    }
+
+    private int parseNumber(String num) {
+        try {
+            return Integer.parseInt(num);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("입력 형식이 올바르지 않습니다.");
         }
-        return delimitedNumbers.substring(beginIndex + HEADER.length(), endIndex);
-    }
-
-    private String makeRegexDelimiter(String delimiter) {
-        return delimiter.isEmpty() ? DEFAULT_DELIMITER : Pattern.quote(delimiter);
-    }
-
-    private String extractNumbers(String numsWithDelimiter, String delimiter) {
-        if (delimiter.isEmpty()) {
-            return numsWithDelimiter;
-        }
-        return numsWithDelimiter.substring(NUMBER_BEGIN_INDEX);
     }
 }
