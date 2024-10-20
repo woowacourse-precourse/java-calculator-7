@@ -1,23 +1,29 @@
 package calculator;
 
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Application {
+
     public int stringAdd(String text) {
         if (text == null || text.isBlank()) {
             return 0;
         }
-        String[] numbers = text.split(",|:");
-        Pattern pattern = Pattern.compile("//(.)\n(.*)");
-        Matcher matcher = pattern.matcher(text);
-
-        if (matcher.find()) {
-            String customDelimiter = Pattern.quote(matcher.group(1));
-            numbers = matcher.group(2).split(customDelimiter);
-        }
+        String[] numbers = splitNumbers(text);
         return calculateSum(numbers);
+
+    }
+
+    private static String[] splitNumbers(String text) {
+        if (text.startsWith("//")) {
+            int delimiterIndex = text.indexOf("\\n");
+            if (delimiterIndex != -1) {
+                String delimiter = text.substring(2, delimiterIndex);
+                String numberPart = text.substring(delimiterIndex + 2);
+                return numberPart.split(Pattern.quote(delimiter));
+            }
+        }
+        return text.split(",|:");
     }
 
     private int calculateSum(String[] numbers) {
