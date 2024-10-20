@@ -51,4 +51,11 @@ public class StringValidator {
 		}
 		return index + DELIMITER_LENGTH;
 	}
+
+	private int changeStatus(int currentStatus) {
+		if (currentStatus == DIGIT) {
+			return DELIMITER;
+		}
+		return DIGIT;
+	}
 }
