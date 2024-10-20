@@ -10,6 +10,7 @@ public class CalculatorModel {
     public int calculate(CalculatorDate date) {
         if (parser.isEmpty(date.getText())) {
             throw new IllegalArgumentException("입력이 비어 있습니다.");
+
         }
 
         int[] numbers = parser.parseNumbers(date);
