@@ -14,11 +14,8 @@ public class Calculator {
     }
 
     public int calculate(Input input) {
-        String delimiterPart = input.getDelimiterPart();
-        String numberPart = input.getNumberPart();
-
-        Set<Character> delimiters = delimiterExtractor.extractDelimiters(delimiterPart);
-        List<String> invalidNumbers = numberSplitter.split(numberPart, delimiters);
+        Set<Character> delimiters = delimiterExtractor.extractDelimiters(input.getDelimiterPart());
+        List<String> invalidNumbers = numberSplitter.split(input.getNumberPart(), delimiters);
 
         PositiveNumbers numbers = new PositiveNumbers(invalidNumbers);
         return numbers.calculateSum();
