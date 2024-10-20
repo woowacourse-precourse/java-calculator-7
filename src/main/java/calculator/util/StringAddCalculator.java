@@ -56,7 +56,7 @@ public class StringAddCalculator {
     private static int calculateSum(String[] splitInput) {
         int sum = ZERO_VALUE;
         for (String splitNumber : splitInput) {
-            PositiveNumber positiveNumber = PositiveNumber.create(toInt(splitNumber));
+            PositiveNumber positiveNumber = PositiveNumber.of(toInt(splitNumber));
             sum = positiveNumber.addNumber(sum);
         }
         return sum;
