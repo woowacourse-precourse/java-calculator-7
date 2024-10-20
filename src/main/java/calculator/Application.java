@@ -11,10 +11,11 @@ public class Application {
 
     public static final String MESSAGE_NORMAL_REQUEST = "덧셈할 문자열을 입력해 주세요.";
     public static final String MESSAGE_NORMAL_RESULT = "결과";
-    public static final String MESSAGE_ERROR_NUMBER_AS_DELIMITER = "숫자를 구분자로 사용할 수 없습니다.";
+    public static final String MESSAGE_ERROR_PREFIX = "[ERROR] ";
+    public static final String MESSAGE_ERROR_NUMBER_AS_DELIMITER = MESSAGE_ERROR_PREFIX + "숫자를 구분자로 사용할 수 없습니다.";
+    public static final String MESSAGE_ERROR_ILLEGAL_FORMULA = MESSAGE_ERROR_PREFIX + "소수(-)나 음수가 아닌, 정수와 구분자를 입력하세요.";
+    public static final String MESSAGE_ERROR_NEGATIVE_NUMBER = MESSAGE_ERROR_PREFIX + "음수가 아닌 정수만 입력하세요.";
     public static final String MESSAGE_ERROR_PROBLEMATIC_INPUT = " 문제가 된 입력: ";
-    public static final String MESSAGE_ERROR_ILLEGAL_FORMULA = "소수(-)나 음수가 아닌, 정수와 구분자를 입력하세요.";
-    public static final String MESSAGE_ERROR_NEGATIVE_NUMBER = "음수가 아닌 정수만 입력하세요.";
 
     public static void main(String[] args) {
         System.out.println(MESSAGE_NORMAL_REQUEST);
