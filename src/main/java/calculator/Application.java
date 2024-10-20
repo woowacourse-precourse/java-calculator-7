@@ -60,15 +60,12 @@ public class Application {
             }
         }
 
-
         String answer = numbers[0];
         for (int i = 1; i < numbers.length; i++) {
-            System.out.println("numbers = " + numbers[i]);
             String nowNumber = numbers[i];
 
             answer = new BigInteger(answer).add(new BigInteger(nowNumber)).toString();
         }
-
 
         System.out.println("결과 : " + answer);
     }
