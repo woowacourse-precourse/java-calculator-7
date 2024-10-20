@@ -10,8 +10,17 @@ public class Separator {
         separators.add(':');
     }
 
+    public void saveSeparator(String input) {
+        if (!this.validateCustomSeparatorForParsing(input)) {
+            throw new IllegalArgumentException();
+        }
+
+        Character customSeparator = parseCustomSeparator(input);
+        addNewSeparator(customSeparator);
+    }
+
     public void addNewSeparator(Character separator) {
-        if(separator == null){
+        if (separator == null) {
             return;
         }
         separators.add(separator);
@@ -20,7 +29,7 @@ public class Separator {
     public Character parseCustomSeparator(String string) {
         Character customSeparator = null;
 
-        if(string.substring(0, 4).equals("//\\n")){
+        if (string.substring(0, 4).equals("//\\n")) {
             return customSeparator;
         }
 
@@ -29,33 +38,34 @@ public class Separator {
         return customSeparator;
     }
 
-    public boolean validateCustomSeparatorForParsing(String string){
+    public boolean validateCustomSeparatorForParsing(String string) {
 
-        if(string.length() < 4){
+        if (string.length() < 4) {
             return false;
         }
 
         String separatorWithPadding = string.substring(0, 4);
-        if(separatorWithPadding.equals("//\\n")){
+        if (separatorWithPadding.equals("//\\n")) {
             return true;
         }
 
-        if(string.length() < 5){
+        if (string.length() < 5) {
             return false;
         }
 
         separatorWithPadding = string.substring(0, 5);
         boolean hasStartPadding = separatorWithPadding.substring(0, 2).equals("//");
         boolean hasEndPadding = separatorWithPadding.substring(3, 5).equals("\\n");
-        if(hasStartPadding && hasEndPadding){
+        if (hasStartPadding && hasEndPadding) {
             return true;
         }
 
         return false;
     }
 
+    //
     public String parseString(String string) {
-        if(string.substring(0, 4).equals("//\\n")){
+        if (string.substring(0, 4).equals("//\\n")) {
             return string.substring(4);
         }
 
