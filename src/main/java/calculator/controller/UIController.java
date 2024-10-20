@@ -1,5 +1,6 @@
 package calculator.controller;
 
+import calculator.domain.number.Number;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -12,11 +13,11 @@ public class UIController {
         return InputView.readValue();
     }
 
-    public static void printSumResult(double number) {
+    public static void printSumResult(Number number) {
         OutputView.print(fitFormat(number));
     }
 
-    private static String fitFormat(double number) {
-        return RESULT_FORMAT + number;
+    private static String fitFormat(Number number) {
+        return RESULT_FORMAT + number.getValue();
     }
 }
