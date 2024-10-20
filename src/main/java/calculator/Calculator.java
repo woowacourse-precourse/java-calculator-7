@@ -43,8 +43,8 @@ public class Calculator {
     private int validateAndConvertToInt(String number) {
         try {
             int num = Integer.parseInt(number);
-            if (num < 0) {
-                throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + num);
+            if (num <= 0) {
+                throw new IllegalArgumentException("0과 음수는 입력할 수 없습니다: " + num);
             }
             return num;
         } catch (NumberFormatException e) {
