@@ -2,6 +2,7 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.List;
+import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
 public class Application {
@@ -43,6 +44,22 @@ public class Application {
 
             for (String token : separatedData) {
                 List<Integer> numbers = extractPositiveInteger(token);      /** 양수 추출 메소드 호출 */
+                for (int number : numbers) {
+                    sum += number;
+                }
+            }
+            System.out.println("결과 : " + sum);
+        }
+        /** 기능 3-4 구현
+         *  기본 구분자의 경우
+         */
+        else if ((inputData.contains(",") || inputData.contains(":"))) {
+            /** 기본 구분자를 기준으로 입력값 분리 */
+            StringTokenizer seperatedData = new StringTokenizer(inputData, basicDelimiter);
+
+            while (seperatedData.hasMoreTokens()) {
+                String token = seperatedData.nextToken();
+                List<Integer> numbers = extractPositiveInteger(token);          /** 양수 추출 메소드 호출 */
                 for (int number : numbers) {
                     sum += number;
                 }
