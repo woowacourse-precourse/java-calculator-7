@@ -23,15 +23,7 @@ public class Application {
 
         // 문자열 숫자가 아닌 경우 예외 처리
         boolean isStringNumber = true;
-        for (String s : inputStrList) {
-            if(!s.matches("\\d+")){
-                isStringNumber = false;
-            }
-        }
-
-        if(!isStringNumber){
-            throw new IllegalArgumentException("숫자 제외 입력 금지");
-        }
+        isStrNum(isStringNumber, inputStrList);
 
         // 분리된 문자열 숫자로 변환하기
         int[] strToIntList = new int[inputStrList.length];
@@ -105,5 +97,16 @@ public class Application {
         return inputStrList;
     }
 
+    // 예외처리 -1: 문자열 숫자가 아닌 경우
+    private static void isStrNum(boolean isStringNumber, String[] inputStrList){
+        for (String s : inputStrList) {
+            if(!s.matches("\\d+")){
+                isStringNumber = false;
+            }
+        }
+        if(!isStringNumber){
+            throw new IllegalArgumentException("숫자 제외 입력 금지");
+        }
+    }
 
 }
