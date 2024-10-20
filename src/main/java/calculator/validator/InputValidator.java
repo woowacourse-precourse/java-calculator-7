@@ -8,7 +8,7 @@ public class InputValidator {
 
     private InputValidator() {}
 
-    private static final Pattern CUSTOM_DELIMITER_REGEX = Pattern.compile("//(.)\\\\n(.*)");
+    private static final Pattern CUSTOM_DELIMITER_REGEX = Pattern.compile("//(.*)\\\\n(.*)");
 
     public static void checkInputNull(String input) {
         if(input == null) {
