@@ -50,33 +50,33 @@ public class RegexPatternServiceResolver {
     }
 
     private void initNumberService() {
-        serviceMap.put(RegexPattern.ONLY_NUMBER_DOUBLE_SEPARATOR, DoubleNumber::of);
+        serviceMap.put(RegexPattern.DEFAULT_DOUBLE_SEPARATOR, DoubleNumber::of);
         serviceMap.put(RegexPattern.CUSTOM_SEPARATOR_DOUBLE, DoubleNumber::of);
-        serviceMap.put(RegexPattern.ONLY_NUMBER_SEPARATOR, LongNumber::of);
+        serviceMap.put(RegexPattern.DEFAULT_SEPARATOR, LongNumber::of);
         serviceMap.put(RegexPattern.CUSTOM_SEPARATOR, LongNumber::of);
         serviceMap.put(RegexPattern.BLANK, LongNumber::of);
     }
 
     private void initNumberConvertorService() {
-        convertorServiceMap.put(RegexPattern.ONLY_NUMBER_DOUBLE_SEPARATOR, DoubleConvertor::new);
+        convertorServiceMap.put(RegexPattern.DEFAULT_DOUBLE_SEPARATOR, DoubleConvertor::new);
         convertorServiceMap.put(RegexPattern.CUSTOM_SEPARATOR_DOUBLE, DoubleConvertor::new);
-        convertorServiceMap.put(RegexPattern.ONLY_NUMBER_SEPARATOR, LongConvertor::new);
+        convertorServiceMap.put(RegexPattern.DEFAULT_SEPARATOR, LongConvertor::new);
         convertorServiceMap.put(RegexPattern.CUSTOM_SEPARATOR, LongConvertor::new);
         convertorServiceMap.put(RegexPattern.BLANK, LongConvertor::new);
     }
 
     private void initCalculatorService() {
-        calculatorServicMap.put(RegexPattern.ONLY_NUMBER_DOUBLE_SEPARATOR, new DoubleCalculatorProcess());
+        calculatorServicMap.put(RegexPattern.DEFAULT_DOUBLE_SEPARATOR, new DoubleCalculatorProcess());
         calculatorServicMap.put(RegexPattern.CUSTOM_SEPARATOR_DOUBLE, new DoubleCalculatorProcess());
-        calculatorServicMap.put(RegexPattern.ONLY_NUMBER_SEPARATOR, new LongCalculatorProcess());
+        calculatorServicMap.put(RegexPattern.DEFAULT_SEPARATOR, new LongCalculatorProcess());
         calculatorServicMap.put(RegexPattern.CUSTOM_SEPARATOR, new LongCalculatorProcess());
         calculatorServicMap.put(RegexPattern.BLANK, new LongCalculatorProcess());
     }
 
     private void initResultService() {
-        resultServiceMap.put(RegexPattern.ONLY_NUMBER_DOUBLE_SEPARATOR, new DoubleOutputProcess());
+        resultServiceMap.put(RegexPattern.DEFAULT_DOUBLE_SEPARATOR, new DoubleOutputProcess());
         resultServiceMap.put(RegexPattern.CUSTOM_SEPARATOR_DOUBLE, new DoubleOutputProcess());
-        resultServiceMap.put(RegexPattern.ONLY_NUMBER_SEPARATOR, new LongOutputProcess());
+        resultServiceMap.put(RegexPattern.DEFAULT_SEPARATOR, new LongOutputProcess());
         resultServiceMap.put(RegexPattern.CUSTOM_SEPARATOR, new LongOutputProcess());
         resultServiceMap.put(RegexPattern.BLANK, new LongOutputProcess());
     }
