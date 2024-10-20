@@ -11,7 +11,8 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
-            run("//;\\n1");
+            // 두 개의 입력을 별도로 전달
+            run("//;", "1");
             assertThat(output()).contains("결과 : 1");
         });
     }
@@ -19,7 +20,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
+            assertThatThrownBy(() -> runException("", "-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
         );
     }
