@@ -25,4 +25,14 @@ public class StringValidator {
 		}
 		return DELIMITER;
 	}
+
+	private int checkInputDigit(String input, int index) {
+		if (!Character.isDigit(input.charAt(index))) {
+			throw new IllegalArgumentException("잘못된 문자열 형식입니다.");
+		}
+		while (index < input.length() && Character.isDigit(input.charAt(index))) {
+			index++;
+		}
+		return index;
+	}
 }
