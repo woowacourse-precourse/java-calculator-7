@@ -16,6 +16,10 @@ public class Delimiters {
         this.values = delimiters;
     }
 
+    public List<Delimiter> getValues() {
+        return List.copyOf(values);
+    }
+
     public String splitRegex() {
         return join(SPLIT_DELIMITER);
     }

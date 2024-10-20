@@ -11,7 +11,7 @@ import java.util.List;
 
 public class DefaultDelimiterFactory extends DelimiterFactory {
 
-    private final List<Delimiter> DEFAULT_DELIMITERS = List.of(
+    private final List<Delimiter> defaultDelimiters = List.of(
             new Delimiter(","),
             new Delimiter(":")
     );
@@ -20,9 +20,13 @@ public class DefaultDelimiterFactory extends DelimiterFactory {
         super(delimiterValidator);
     }
 
+    public List<Delimiter> getDefaultDelimiters() {
+        return List.copyOf(defaultDelimiters);
+    }
+
     @Override
     public Delimiters createDelimiters(Delimiter... additionalDelimiters) {
-        List<Delimiter> delimiters = new ArrayList<>(DEFAULT_DELIMITERS);
+        List<Delimiter> delimiters = new ArrayList<>(defaultDelimiters);
         delimiters.addAll(Arrays.asList(additionalDelimiters));
         return new Delimiters(delimiters);
     }
