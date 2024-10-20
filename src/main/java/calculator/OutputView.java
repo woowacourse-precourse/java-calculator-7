@@ -8,4 +8,9 @@ public class OutputView {
         System.out.println("결과 : " + result);
         Console.close();
     }
+
+    public void displayResultZero() {
+        System.out.println("결과 : 0");
+        Console.close();
+    }
 }

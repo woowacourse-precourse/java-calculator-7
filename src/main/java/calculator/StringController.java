@@ -2,6 +2,9 @@ package calculator;
 
 import java.math.BigInteger;
 
+/**
+ * 사용자로부터 입력을 받고 주요한 연사
+ */
 public class StringController {
     private final InputView inputView;
     private final OutputView outputView;
@@ -17,7 +20,7 @@ public class StringController {
     public void start() {
         String input = inputView.getUserInput();
         if (input.isEmpty()) {
-            System.out.println("결과 : 0");
+            outputView.displayResultZero();
         } else {
             BigInteger answer = stringFacadeService.addNumbersFromInput(input);
             outputView.displayResult(answer);
