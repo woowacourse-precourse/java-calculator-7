@@ -18,19 +18,19 @@
 
 - 입력된 문자열이 유효한지 검증한다.
 - 다양한 예외 상황을 처리하고 상세한 에러 메시지를 반환한다.
+    - [x] **숫자가 아닌 문자의 포함 여부**: 숫자가 아닌 문자가 포함된 경우 `IllegalArgumentException`을 발생시킨다.
+        - **예시**: `"1,a:3"` → `IllegalArgumentException("숫자가 아닌 문자가 포함되었습니다.")` 발생
 -
-- - [x] **숫자가 아닌 문자의 포함 여부**: 숫자가 아닌 문자가 포함된 경우 `IllegalArgumentException`을 발생시킨다.
-    - **예시**: `"1,a:3"` → `IllegalArgumentException("숫자가 아닌 문자가 포함되었습니다.")` 발생
-- - [x] **음수 처리**: 음수가 포함된 경우 `IllegalArgumentException`을 발생시킨다.
-    - **예시**: `"1,-2,3"` → `IllegalArgumentException("음수는 허용되지 않습니다: -2")` 발생
-- - [x] **잘못된 커스텀 구분자 처리**: 커스텀 구분자가 잘못된 형식일 경우 `IllegalArgumentException`을 발생시킨다.
-    - **예시**: `"//;\n1;2;3"` → 정상 처리
-    - **예시**: `"//\n1;2;3"` → `IllegalArgumentException("잘못된 커스텀 구분자 형식입니다.")` 발생
-- - [x] **숫자가 없는 경우 처리**: 커스텀 구분자는 정의되었지만 숫자가 없는 경우 `IllegalArgumentException`을 발생시킨다.
-    - **예시**: `"//;\n"` → 커스텀 구분자는 정의되었지만 숫자가 없는 경우 `IllegalArgumentException`("숫자가 없습니다.")을 발생
-- - [x] **구분자가 중복된 경우 처리**: 입력된 문자열에서 구분자가 연속해서 사용된 경우 IllegalArgumentException을 발생시킨다.
-    - **예시**: `"1,,2" 또는 "1::3"` → IllegalArgumentException("연속된 구분자 형식입니다.") 발생
-    - **예시**: `"커스텀 구분자가 연속된 경우`: `"//;\n1;;2"` → IllegalArgumentException("잘못된 커스텀 문자입니다.")
+    - [x] **음수 처리**: 음수가 포함된 경우 `IllegalArgumentException`을 발생시킨다.
+        - **예시**: `"1,-2,3"` → `IllegalArgumentException("음수는 허용되지 않습니다: -2")` 발생
+-
+    - [x] **잘못된 커스텀 구분자 처리**: 커스텀 구분자가 잘못된 형식일 경우 `IllegalArgumentException`을 발생시킨다.
+        - **예시**: `"//;\n1;2;3"` → 정상 처리
+        - **예시**: `"//\n1;2;3"` → `IllegalArgumentException("잘못된 커스텀 구분자 형식입니다.")` 발생
+-
+    - [x] **구분자가 중복된 경우 처리**: 입력된 문자열에서 구분자가 연속해서 사용된 경우 IllegalArgumentException을 발생시킨다.
+        - **예시**: `"1,,2" 또는 "1::3"` → IllegalArgumentException("연속된 구분자 형식입니다.") 발생
+        - **예시**: `"커스텀 구분자가 연속된 경우`: `"//;\n1;;2"` → IllegalArgumentException("잘못된 커스텀 문자입니다.")
 
 - [x] **4. 계산기 기능 (Model)**
 
@@ -42,6 +42,10 @@
 - 커스텀 구분자가 지정된 경우 해당 구분자로 숫자를 분리한다.
 
 •    **예시**: "//;\n1;2;3" → 6
+
+- 구분자로 끝나는 경우에는 "" -> 0 을 적용하여 예외를 던지지 않도록 한다.
+
+•    **예시** : "1,2," -> 3
 
 - 합산된 결과를 반환한다.
 
