@@ -14,11 +14,11 @@ public class StringAdditionService {
             try {
                 int number = Integer.parseInt(token);
                 if (number < 0) {
-                    throw new IllegalArgumentException("Negative numbers are not allowed: " + number);
+                    throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
                 }
                 sum += number;
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Invalid input: " + token);
+                throw new IllegalArgumentException("잘못된 입력: " + token);
             }
         }
         return sum;
