@@ -3,11 +3,12 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 import delimiter.Delimiter;
 import delimiter.base.BaseDelimiter;
+import java.util.regex.Pattern;
 
-public class CaculatorMachine {
+public class CalculatorMachine {
 
-    // 구분자 선언
-    String baseDelimiter = BaseDelimiter.COMMA.getDescription() + "|" + BaseDelimiter.COLON.getDescription();
+    String baseDelimiter = Pattern.quote(BaseDelimiter.COMMA.getDescription()) + "|" + Pattern.quote(
+            BaseDelimiter.COLON.getDescription());
 
     Delimiter delimiter = Delimiter.of(baseDelimiter);
 
@@ -30,13 +31,12 @@ public class CaculatorMachine {
         userInput = delimiter.checkDelimiter(userInput);
 
         // 구분자를 기준으로 문자열 분리
-        if (delimiter.hasDelimiter(userInput, baseDelimiter)) {
-            return calculateSum(userInput, baseDelimiter);
+        if (delimiter.hasDelimiter(userInput, delimiter.getDelimiters())) {
+            return sum(userInput, delimiter.getDelimiters());
         } else {
             // 커스텀 구분자 선언은 존재하나, 사용하지 않은 경우
             return Integer.parseInt(userInput);
         }
-
     }
 
     // 문자열이 공백인지 판단
@@ -45,8 +45,8 @@ public class CaculatorMachine {
     }
 
     // 숫자의 합을 계산
-    private static int calculateSum(String userInput, String baseDelimiter) {
-        String[] numbers = userInput.split(baseDelimiter);
+    private static int sum(String userInput, String delimiters) {
+        String[] numbers = userInput.split(delimiters);
         // 숫자의 합을 저장할 변수
         int sum = 0;
         for (String number : numbers) {

@@ -5,13 +5,13 @@ public enum CustomDelimiter {
     START("//"),
     END("\\n");
 
-    private final String descripton;
+    private final String description;
 
-    CustomDelimiter(String descripton) {
-        this.descripton = descripton;
+    CustomDelimiter(String description) {
+        this.description = description;
     }
 
-    public String getDescripton() {
-        return descripton;
+    public String getDescription() {
+        return description;
     }
 }
