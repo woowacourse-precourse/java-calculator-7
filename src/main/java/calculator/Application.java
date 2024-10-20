@@ -10,7 +10,7 @@ public class Application {
     }
 
     private static MainController setUpController() {
-        SeparateService separateService = SeparateService.initiate();
-        return MainController.initiate(separateService);
+        SeparateService separateService = new SeparateService();
+        return new MainController(separateService);
     }
 }

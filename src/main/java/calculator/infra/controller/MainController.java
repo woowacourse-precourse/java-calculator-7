@@ -5,19 +5,14 @@ import calculator.model.CalculateSystem;
 import calculator.model.io.InputManager;
 import calculator.model.io.OutputManager;
 import calculator.service.SeparateService;
-
 import java.util.List;
 
 public class MainController {
 
     private final SeparateService separateService;
 
-    private MainController(SeparateService separateService) {
+    public MainController(SeparateService separateService) {
         this.separateService = separateService;
-    }
-
-    public static MainController initiate(SeparateService separateService) {
-        return new MainController(separateService);
     }
 
     public void runCalculator() {
@@ -31,6 +26,5 @@ public class MainController {
 
         OutputManager outputManager = OutputManager.getInstance();
         outputManager.offerCalculateResult(resultView);
-
     }
 }
