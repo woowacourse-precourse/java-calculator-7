@@ -46,6 +46,10 @@ public class Application {
     static BigInteger calculateSum(String[] parsedStrings) {
         BigInteger sum = new BigInteger("0");
 
+        if(parsedStrings.length == 1 && parsedStrings[0].isBlank()) {
+            return sum;
+        }
+
         for (String parsedString: parsedStrings) {
             BigInteger positiveNumber = toPositiveNumber(parsedString);
             sum = sum.add(positiveNumber);
