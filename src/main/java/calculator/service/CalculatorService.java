@@ -32,9 +32,19 @@ public class CalculatorService {
         int sum = 0;
 
         for(String token : tokens){
-            int number = Integer.parseInt(token);
+            int number = checkCorrectNumber(token);
             sum += number;
         }
         return sum;
+    }
+
+    private int checkCorrectNumber(String token){
+        int number;
+        try {
+            number = Integer.parseInt(token);
+        }catch(NumberFormatException e){
+            throw new IllegalArgumentException("숫자가 아닙니다" + token);
+        }
+        return number;
     }
 }
