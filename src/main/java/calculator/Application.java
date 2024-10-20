@@ -16,6 +16,12 @@ public class Application {
         // 문자열 분리
         String[] numbers = splitInput(input, separator);
 
+        // 값 유효성 검사
+        try{
+            validateInput(numbers);
+        }catch(IllegalAccessException e){
+            System.out.println("IllegalAccessException 오류 " + e.getMessage());
+        }
     }
 
     // 구분자 확인 메소드
@@ -42,5 +48,19 @@ public class Application {
         }
 
         return input.split(separator);
+    }
+
+    // 값이 유효한지 확인
+    public static void validateInput(String[] numbers) throws IllegalAccessException {
+        for(String number : numbers){
+            String trimNumber = number.trim();
+            if(!trimNumber.isEmpty()){
+                try{
+                    Integer.parseInt(trimNumber);
+                }catch(NumberFormatException e){
+                    throw new IllegalAccessException();
+                }
+            }
+        }
     }
 }
