@@ -1,13 +1,13 @@
 package calculator.error;
 
-public class CustomException extends IllegalArgumentException {
-    private String message;
+import calculator.message.MessageProvider;
 
-    public CustomException(ErrorCode errorCode) {
-        super(errorCode.getMessage());
+public class CustomException extends IllegalArgumentException {
+    private CustomException(MessageProvider messageProvider) {
+        super(messageProvider.getMessage());
     }
 
-    public static CustomException from(ErrorCode errorCode) {
-        return new CustomException(errorCode);
+    public static CustomException from(MessageProvider messageProvider) {
+        return new CustomException(messageProvider);
     }
 }
