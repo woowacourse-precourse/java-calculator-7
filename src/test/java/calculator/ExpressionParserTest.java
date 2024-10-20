@@ -31,4 +31,12 @@ class ExpressionParserTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("숫자가 아닌 값이 포함되어 있습니다");
     }
+
+    @Test
+    void 구분자가_이스케이프_문자로_시작하는_경우_구분자에_이스케이프_문자를_추가한다() {
+        List<String> delimiters = List.of("\\");
+        ExpressionParser expressionParser = new ExpressionParser(delimiters);
+        List<Integer> numbers = expressionParser.parse("1\\2\\3");
+        assertThat(numbers).containsExactly(1, 2, 3);
+    }
 }

@@ -8,6 +8,7 @@ public class ExpressionParser {
 
     private static final int CUSTOM_DELIMITER_LENGTH = 1;
     private static final String REGEX_OR = "|";
+    private static final String ESCAPE_CHARACTER = "\\";
 
     private final String delimiterPattern;
 
@@ -15,7 +16,7 @@ public class ExpressionParser {
         StringJoiner joiner = new StringJoiner(REGEX_OR);
         for (String delimiter : delimiters) {
             validateDelimiterLength(delimiter);
-            joiner.add(delimiter);
+            joiner.add(escapeDelimiter(delimiter));
         }
         this.delimiterPattern = joiner.toString();
     }
@@ -24,6 +25,13 @@ public class ExpressionParser {
         if (delimiter.length() != CUSTOM_DELIMITER_LENGTH) {
             throw new IllegalArgumentException("구분자는 %d 글자여야 합니다.".formatted(CUSTOM_DELIMITER_LENGTH));
         }
+    }
+
+    private String escapeDelimiter(String delimiter) {
+        if (delimiter.startsWith(ESCAPE_CHARACTER)) {
+            return ESCAPE_CHARACTER + delimiter;
+        }
+        return delimiter;
     }
 
     public List<Integer> parse(String expression) {
