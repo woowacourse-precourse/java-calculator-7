@@ -21,13 +21,22 @@ public class Extractor {
 
     // 입력에서 숫자 추출
     public List<Long> extractNumbers(String input) {
+        checkIsNull(input);
         String processedInput = trimAndValidateInput(input);
         String customDelimiter = extractCustomDelimiter(processedInput).orElse("");
         processedInput = addCustomDelimiter(processedInput, customDelimiter);
         return splitAndTrimNumbers(processedInput);
     }
 
-    // 입력값 공백 제거 후 유효성 검사
+    // null 및 빈 문자열 체크
+    private List<Long> checkIsNull(String input) {
+        if (input == null || input.isBlank()) {
+            return List.of(0L); // 빈 문자열 또는 null일 경우 0L 반환
+        }
+        return null;
+    }
+
+    // ""경우를 제외한 공백에 대한 유효성 검증
     private String trimAndValidateInput(String input) {
         return Optional.of(input)
                 .filter(s -> !s.isBlank())
@@ -79,7 +88,6 @@ public class Extractor {
                 .map(Long::parseLong)
                 .collect(Collectors.toList()); // 숫자 리스트 반환
     }
-
 
     // 입력에 커스텀 구분자가 있는지 확인
     private boolean hasCustomDelimiter(String input) {
