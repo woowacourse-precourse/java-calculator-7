@@ -22,7 +22,7 @@
   - 에러를 확인하는 함수 checkForErrors - 추가 case를 생각해 봐야함
   - String 과 구분자를 사용해서 문자를 나눠서 숫자로 더하는 함수 splitByDelimiter - 리팩토링 필요
 
-#### checkForErrors
+#### checkForErrors 
 - IllegalArgumentException 발생되는 case 생각해 보기.
   - 알파벳이 있을 때 - 기본 구분자 외 특수 구분자를 특수기호 중 하나로 지정하고, 알파벳은 오류 처리
   - 정규표현식으로 알파벳이 있는지 확인 python(re.sub[^a-zA-Z])
@@ -30,13 +30,13 @@
   - 구분자와 특수 구분자를 제외한 모든 특수기호가 잇다면, 에러를 발생시킨다.
   - 특수 구분자를 제외한 알파벳이 있다면, 에러를 발생시킨다.
 
-#### checkSpecialDelimiter
+#### checkSpecialDelimiter ✅
 - 기능
   - input : 입력 받은 문자열
   - 특수 구분자관련 문자열을 파악
   - output : Stirng "//(특수구분자)\n"
 
-#### getDelimiter
+#### getDelimiter ✅
 - 기능
   - input : 문자열
   - 기본적인 구분자(쉼표, 콜론)을 배열에 넣어준다.
@@ -44,13 +44,13 @@
     - 있다면, 특수 구분자를 빼내기 위해 getSpecialDelimiter를 사용
   - output : 특수 구분자 or null
 
-#### getSpecialDelimiter
+#### getSpecialDelimiter ✅
 - 기능
   - input : Stirng "//(특수구분자)\n"
   - .substring을 활용해서 특수구분자만 빼낸다.
   - return : 특수 구분자.
   
-#### changeInputStr
+#### changeInputStr ✅
 - 기능
   - input : Stirng "//(특수구분자)\n" 와 입력 받은 문자열
   - return : 특수 구분자를 제외한 문자열
@@ -78,10 +78,20 @@
   - input : String 문자열 Array, 구분자
   - 문자열을 반복하여, 구분자와 문자열의 원소 하나를 splitString으로 넣어준다.
   - output :
-#### convertAndSumWithRemainder
+#### convertAndSumWithRemainder 
 - 기능
   - array를 받아서 반복한다.
   - 숫자면 다 더해준다.
   - 나머지는 Array에 넣어준다.
   - input : split 후 return array
   - output : 숫자와 array 
+
+#### splitDelimiterAddNum
+- 더 빠르고 간단하지만, 구분자가 두개 일 땐 다른 방법을 사용해야함 
+- 기능 
+  - input : inputString 과 구분자 array
+  - inputString에서 char을 하나씩 꺼내서 구분자 array에 들어가 있는지 없는지를 확인한다. 
+    - 없다면 새로운 스트링에 담아두고 
+    - 있다면 이전 스트링을 숫자로 변경 후 int형에 더해준다.
+    - 이렇게 해도 남는다면 오류 발생 시켜야 함
+  - return : 숫자를 다 더한 값 
