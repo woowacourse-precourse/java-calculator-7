@@ -52,6 +52,20 @@ public class Application {
         }
     }
 
+    public static int calculateSum(String input) {
+        int sum = 0;
+        String[] numbers = splitNumberString(input);
+
+        for (String token : numbers) {
+            int number = parseNumber(token);
+            if (number < 0) {
+                throw new IllegalArgumentException();
+            }
+            sum += number;
+        }
+        return sum;
+    }
+
     public static void main(String[] args) {
         // TODO: 프로그램 구현
 
