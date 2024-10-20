@@ -13,7 +13,8 @@ public class Application {
     public void run() {
         String input = getInput();
         int[] numbers = this.customParser.parse(input);
-        System.out.println("결과 : " + Arrays.toString(numbers));
+        int result = calculate(numbers);
+        System.out.println("결과 : " + result);
     }
 
     private String getInput() {
@@ -21,6 +22,14 @@ public class Application {
         String input = Console.readLine();
         Console.close();
         return input;
+    }
+
+    private int calculate(int[] numbers) {
+        int sum = 0;
+        for (int number : numbers) {
+            sum += number;
+        }
+        return sum;
     }
 
     public static void main(String[] args) {
