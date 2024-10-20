@@ -1,9 +1,9 @@
 package calculator.regex.domain;
 
 import calculator.constant.ErrorMessage;
-import calculator.sentence.domain.Sentence;
+import calculator.regex.constant.SeparatorConvertorConstant;
+import calculator.sentence.dto.Sentence;
 import calculator.regex.constant.RegexConstant;
-import calculator.separator.domain.DefaultSeparator;
 import calculator.regex.util.SeparatorConvertor;
 
 import java.util.Arrays;
@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public enum RegexPattern {
-    ONLY_NUMBER_SEPARATOR(RegexConstant.ONLY_NUMBER_SEPARATOR_REGEX),
-    ONLY_NUMBER_DOUBLE_SEPARATOR(RegexConstant.ONLY_NUMBER_SEPARATOR_DOUBLE_REGEX),
+    DEFAULT_SEPARATOR(RegexConstant.DEFAULT_SEPARATOR_REGEX),
+    DEFAULT_DOUBLE_SEPARATOR(RegexConstant.DEFAULT_SEPARATOR_DOUBLE_REGEX),
     CUSTOM_SEPARATOR(RegexConstant.CUSTOM_SEPARATOR_REGEX) {
         @Override
         public String extractSeparator(String input) {
@@ -66,7 +66,7 @@ public enum RegexPattern {
     }
 
     public String extractSeparator(String input) {
-        return DefaultSeparator.getDefaultSeparator();
+        return SeparatorConvertorConstant.DEFAULT_SEPARATOR;
     }
 
     public List<String> extractNumber(String input, String separator) {
