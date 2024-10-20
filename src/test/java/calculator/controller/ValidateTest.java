@@ -2,7 +2,7 @@ package calculator.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.ArrayList;
+import java.util.regex.Pattern;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -16,18 +16,49 @@ class ValidateTest {
     @Test
     void trueCaseTest() {
         //given
-        ArrayList<String> trueSamples = new ArrayList<>();
-        trueSamples.add("1,2:3");
-        trueSamples.add("1,2");
-        trueSamples.add("1,2,3");
-        trueSamples.add("//a\\n1a2a3");
-        trueSamples.add("//.\\n1231.156454.15867651");
+        String sampleString = "1,2:3";
+        String samplePattern = "(//.\\n)?\\d+([" + ",:" + "]\\d+)*$";
 
         //when
+        int result = Validate.isValidForm(sampleString, Pattern.compile(samplePattern));
         //then
-        trueSamples.forEach(sample -> {
-            assertEquals(true, Validate.isValidForm(sample));
-        });
+        assertEquals(1, result);
+    }
+
+    @Test
+    void trueCaseTest2() {
+        //given
+        String sampleString = "1,2:3,4";
+        String samplePattern = "(//.\\n)?\\d+([" + ",:" + "]\\d+)*$";
+
+        //when
+        int result = Validate.isValidForm(sampleString, Pattern.compile(samplePattern));
+        //then
+        assertEquals(1, result);
+    }
+
+    @Test
+    void trueCaseTest3() {
+        //given
+        String sampleString = "1,2:3,4a5";
+        String samplePattern = "(//.\\n)?\\d+([" + "a,:" + "]\\d+)*$";
+
+        //when
+        int result = Validate.isValidForm(sampleString, Pattern.compile(samplePattern));
+        //then
+        assertEquals(1, result);
+    }
+
+    @Test
+    void trueCaseTest4() {
+        //given
+        String sampleString = "1,2:3,4^5";
+        String samplePattern = "(//.\\n)?\\d+([,^:;]\\d+)*$";
+
+        //when
+        int result = Validate.isValidForm(sampleString, Pattern.compile(samplePattern));
+        //then
+        assertEquals(1, result);
     }
 
     /**
@@ -36,17 +67,24 @@ class ValidateTest {
     @Test
     void falseCaseTest() {
         //given
-        ArrayList<String> falseSamples = new ArrayList<>();
-        falseSamples.add("1,2:3,");
-        falseSamples.add("1,2,");
-        falseSamples.add("askv;jasdfnlvalksdkjaxc;nlkasd");
-        falseSamples.add("0,");
-        falseSamples.add("");
+        String sampleString = "1,2:3,4a5";
+        String samplePattern = "(//.\\n)?\\d+([" + ",:" + "]\\d+)*$";
 
         //when
+        int result = Validate.isValidForm(sampleString, Pattern.compile(samplePattern));
         //then
-        falseSamples.forEach(sample -> {
-            assertEquals(false, Validate.isValidForm(sample));
-        });
+        assertEquals(0, result);
+    }
+
+    @Test
+    void falseCaseTest2() {
+        //given
+        String sampleString = "1,2:3,4;5";
+        String samplePattern = "(//.\\n)?\\d+([" + "^,:" + "]\\d+)*$";
+
+        //when
+        int result = Validate.isValidForm(sampleString, Pattern.compile(samplePattern));
+        //then
+        assertEquals(0, result);
     }
 }

@@ -3,7 +3,7 @@ package calculator.controller;
 import java.util.regex.Pattern;
 
 /**
- * 입력값을 검증하는 Validate 클래스. 단, 공백인 경우에는 false을 반환합니다.
+ * 입력값을 검증하는 Validate 클래스
  */
 public class Validate {
     /**
@@ -12,12 +12,15 @@ public class Validate {
     private Validate() {
     }
 
-    private static final Pattern PATTERN = Pattern.compile("(//.\\\\n)?\\d+(.\\d+)*$");
-
     /**
-     * 입력받는 문자열 검증(숫자와 기본 구분자로 이루어져 있는지 확인)
+     * 입력받는 문자열 검증(입력 요구 사항에 맞는 지 확인) 반환값이 0이면 오류 반환값이 1이면 문자열이 비어있지 않고, 입력 요구 사항에 맞음 반환값이 2이면 문자열이 비어있음
      */
-    public static boolean isValidForm(String input) {
-        return PATTERN.matcher(input).matches();
+    public static int isValidForm(String input, Pattern pattern) {
+        if (pattern.matcher(input).matches()) {
+            return 1;
+        } else if (input.isEmpty()) {
+            return 2;
+        }
+        return 0;
     }
 }
