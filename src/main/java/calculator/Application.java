@@ -5,26 +5,25 @@ public class Application {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        System.out.print("덧셈할 문자열을 입력해 주세요.\n");
+        while(true) {
+            System.out.print("덧셈할 문자열을 입력해 주세요.\n");
 
-
-        try{
-            final String input = scanner.nextLine();
-            int result = makeCalculation(input);
-            printResult(result);
-        } catch (IllegalArgumentException e) {
-            return;
-        } finally {
-            scanner.close();
+            try{
+                final String input = scanner.nextLine();
+                int result = makeCalculation(input);
+                printResult(result);
+            } catch (IllegalArgumentException e) {
+                scanner.close();
+                return;
+            }
         }
-
     }
 
 
     public static int makeCalculation(final String input) throws IllegalArgumentException {
         int i = 0;
         int sum = 0;
-        String Num = "";
+        String Num = "0";
 
         while (i != input.length()) {
             char curVal = input.charAt(i);
@@ -35,13 +34,17 @@ public class Application {
                 sum += Integer.parseInt(Num);
                 Num = "";
             } else if(curVal == '/'){
-                char nxtVal = input.charAt(i+1); /*Index Out of Bounds 처리 해줘야함*/
-                if(nxtVal == '/'){
-                    find_escapeN(i+2, input);
-                } else{
-                    throw new IllegalArgumentException();
-                }
+                if( (i+1) <= input.length() ) {
+                    char nxtVal = input.charAt(i+1); /*Index Out of Bounds 처리 해줘야함*/
+                    if(nxtVal == '/'){
+                        i = FindEscapeN(i+2, input);
+                        sum += Integer.parseInt(Num);
+                        Num = "";
 
+                    } else{
+                        throw new IllegalArgumentException();
+                    }
+                }
             } else{
                 throw new IllegalArgumentException();
             }
@@ -57,7 +60,7 @@ public class Application {
         System.out.println("결과 : " + result);
     }
 
-    public static boolean find_escapeN(int idx, final String input) {
+    public static int FindEscapeN(int idx, final String input) {
 
         while( idx != input.length() ) { //\n 검색
             char curVal = input.charAt(idx);
@@ -65,7 +68,7 @@ public class Application {
                 if( (idx+1) <= input.length() )  {
                     char nxtVal = input.charAt(idx+1);
                     if(nxtVal == 'n'){  //\n 검색 성공
-                        return true;
+                        return idx+1;
                     } else{
                         ++idx; continue; //\n 아닐시, \을 커스텀 구분자의 일부로 판단
                     }
@@ -74,7 +77,7 @@ public class Application {
             ++idx;
         }
 
-        /*throw new IllegalArgumentException(); //검색 실패*/
+        throw new IllegalArgumentException(); //검색 실패*/
     }
 }
 
