@@ -1,9 +1,32 @@
 package calculator.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Calculator {
 
-    private String[] splitString(String input){
+    public int add(String input){
+
+        List <String> tokens = splitString(input);
+
+        return tokens.stream().mapToInt(this::parseInt).sum();
+    }
+
+    private List<String> splitString(String input){
+
         String delimeter = ",|:"; //기본 구문자 지정
-        return input.split(delimeter);
+
+        String [] inputTokens = input.split(delimeter);
+        return Arrays.asList(inputTokens);
+    }
+
+    private int parseInt(String token){
+        try {
+            return Integer.parseInt(token);
+        } catch (NumberFormatException e) {
+            //TODO 오류 메시지 출력
+            return 0;
+        }
     }
 }
