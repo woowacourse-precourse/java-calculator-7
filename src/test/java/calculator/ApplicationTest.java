@@ -25,6 +25,30 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 테스트케이스_구분자에n이들어가는경우(){
+        assertSimpleTest(() -> {
+            run("//;na\\n1a2");
+            assertThat(output()).contains("결과 : 3");
+        });
+    }
+
+
+    @Test
+    void 테스트케이스1_많은구분자(){
+        assertSimpleTest(() -> {
+            run("//;naspqur\\n1a2p4q6:7;82");
+            assertThat(output()).contains("결과 : 102");
+        });
+    }
+
+    @Test
+    void 테스트케이스2_매우큰수(){
+        assertSimpleTest(() -> {
+            run("//;na\\n111111111111111111111111111n222222222222222222222222222");
+            assertThat(output()).contains("결과 : 333333333333333333333333333");
+        });
+    }
 
 
     @Override
