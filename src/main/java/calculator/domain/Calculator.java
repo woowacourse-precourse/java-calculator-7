@@ -15,7 +15,6 @@ public class Calculator {
     public static int inputCalculate(String input){
         //커스텀 구분자 패턴이 존재하는지 확인한다
         input=checkExtractor(input);
-        Validator.validatePositive(input);
         return calculate(input);
     }
 
@@ -24,12 +23,10 @@ public class Calculator {
 
         if (matcher.find()){//일치한다면
             String customSeperator=matcher.group(1);
-            Validator.validateSeperator(customSeperator);
             input= matcher.group(2);
             //SEPERATOR_REGEX에 더한다
             addRegex(customSeperator);
         }
-
         return input;
     }
 
@@ -56,7 +53,6 @@ public class Calculator {
         if (a>Integer.MAX_VALUE-b){
             throw new IllegalArgumentException("덧셈의 결과가 int 범위를 넘어갔습니다");
         }
-
         return a+b;
     }
 
@@ -86,5 +82,4 @@ public class Calculator {
 
         return customSeperator.toString();
     }
-
 }

@@ -1,7 +1,6 @@
 package calculator.domain;
 
 import calculator.exception.InvalidInputException;
-import calculator.validation.MessageType;
 
 import org.junit.jupiter.api.Test;
 
@@ -40,12 +39,20 @@ class CalculatorTest {
     }
 
     @Test
-    void 음수를_입력했을때_예외_발생(){
-        String input="//!\\n-34";
+    void 숫자가_오버플로우일때_예외_발생(){
+        String input=Long.toString(Long.MAX_VALUE);
 
         assertThatThrownBy(()->Calculator.inputCalculate(input))
-                .isInstanceOf(InvalidInputException.class)
-                .hasMessageContaining(MessageType.NEGATIVE_INPUT.getMessage());
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("특정 수가 int 범위를 넘어갔습니다");
+    }
 
+    @Test
+    void 덧셈이_오버플로우일때_예외_발생(){
+        String input="1111111111:1111111111";
+
+        assertThatThrownBy(()->Calculator.inputCalculate(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("덧셈의 결과가 int 범위를 넘어갔습니다");
     }
 }
