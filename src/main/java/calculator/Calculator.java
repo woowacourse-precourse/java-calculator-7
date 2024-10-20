@@ -23,9 +23,7 @@ public class Calculator {
             throw new IllegalArgumentException("유효하지 않은 숫자 형식입니다: " + s);
         }
 
-        int number = Integer.parseInt(s);
-
-        return number;
+        return Integer.parseInt(s);
     }
 
     public int sum(String str) {
