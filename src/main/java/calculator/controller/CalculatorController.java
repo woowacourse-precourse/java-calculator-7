@@ -5,7 +5,6 @@ import calculator.logic.CalculatorInputParser;
 import calculator.util.InputUtil;
 import calculator.util.MessageUtil;
 import calculator.util.ValidationUtil;
-import java.util.Arrays;
 import java.util.List;
 
 public class CalculatorController {
@@ -29,8 +28,8 @@ public class CalculatorController {
     private List<Integer> getIntegerListInfo() {
         String initialInput = inputUtil.userInput();
 
-        if (initialInput == null || initialInput.isEmpty()) {
-            return Arrays.asList(0);
+        if (initialInput.trim().isEmpty()) {
+            return List.of(0);
         }
 
         validationUtil.isValidInput(initialInput);
