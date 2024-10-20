@@ -12,20 +12,19 @@ public class Application {
         boolean customized = false;
         char custom = ',';
 
+        // 커스텀 구분자 지정
         if (input.charAt(0) == '/' && input.charAt(1) == '/' && input.charAt(3) == '\\' && input.charAt(4) == 'n') {
             customized = true;
             custom = input.charAt(2);
-            input = input.substring(5, input.length());
+            input = input.substring(5);
         }
 
-        for (byte value : input.getBytes()) {
-            if (value >= '0' && value <= '9') {
-                sum += value - '0';
-            } else if (customized && value != (byte) custom) {
-                throw new IllegalArgumentException();
-            } else if (!customized && (value != ',' && value != ':')) {
-                throw new IllegalArgumentException();
-            }
+        // 구분자를 기준으로 숫자 추출
+        // 여러 개의 구분자를 표현하기 위해 정규식 사용
+        String[] nums = input.split(",|:");
+
+        for (String num : nums) {
+            sum += Integer.parseInt(num);
         }
 
         System.out.println("결과 : " + sum);
