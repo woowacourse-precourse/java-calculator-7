@@ -4,6 +4,7 @@ import calculator.util.ErrorMessage;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class Arithmetic {
     private List<Integer> arithmetic;
@@ -24,14 +25,14 @@ public class Arithmetic {
     }
 
     public void validateWithDefaultDelimiter(InputData inputData){
-        if (!inputData.convertCalculatorPart().matches("^[0-9\\-,:]*$")) {
+        if (!inputData.convertCalculatorPart().matches("^(?!.*-0)[0-9\\-\\s,:]*$")) {
             throw new IllegalArgumentException(ErrorMessage.INPUT_DATA_WITH_DEFAULT_DELIMITER_FORMAT.getError());
         }
     }
 
     public void validateWithCustomDelimiter(Delimiter delimiter, InputData inputData){
         if (!inputData.convertCalculatorPart()
-                .matches("^[0-9\\-" + new DefaultDelimiter().getDelimiter() + delimiter.getDelimiter() + "]*$")) {
+                .matches("^[0-9\\-\\s" + new DefaultDelimiter().getDelimiter() + delimiter.getDelimiter() + "]*$")) {
             throw new IllegalArgumentException(ErrorMessage.ARITHMETIC_WITH_CUSTOM_DELIMITER_FORMAT.getError());
         }
     }
@@ -49,11 +50,15 @@ public class Arithmetic {
     public List<Integer> splitArithmetic(Delimiter delimiter, String calculatorPart) {
         List<String> temp = Arrays.stream(
                         calculatorPart.split("[" + new DefaultDelimiter().getDelimiter() + "]"))
+                .map(s -> s.replaceAll("\\s", ""))
+                .map(s -> Optional.of(s).filter(str -> !str.isEmpty()).orElse("0"))
                 .toList();
 
         if (delimiter.getClass() == CustomDelimiter.class) {
             temp = temp.stream()
                     .flatMap(str -> Arrays.stream(str.split("[" + delimiter.getDelimiter() + "]")))
+                    .map(String::trim)
+                    .map(s -> Optional.of(s).filter(str -> !str.isEmpty()).orElse("0"))
                     .toList();
         }
 
