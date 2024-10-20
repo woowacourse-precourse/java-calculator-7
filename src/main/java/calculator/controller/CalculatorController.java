@@ -9,7 +9,8 @@ public class CalculatorController {
     CalculatorOutputView calculatorOutputView = new CalculatorOutputView();
     public void execAdditionCommand(){
         calculatorOutputView.printAddGreetingMessage();
-        AdditionCommand additionCommand = calculatorInputView.getAdditionCommand();
+        String commandInput = calculatorInputView.getCommandInput();
+        AdditionCommand additionCommand = new AdditionCommand(commandInput);
         double commandResult = additionCommand.exec();
         calculatorOutputView.printAdditionResult(commandResult);
     }
