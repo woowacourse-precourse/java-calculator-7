@@ -15,8 +15,14 @@ public class CalculableValidator {
     private CalculableValidator() {
     }
 
-    public static void validateAllowedDelimiters(String input, Delimiters delimiters) {
+    public static void validate(String input, Delimiters delimiters) {
         String delimiterPattern = buildDelimiterPattern(delimiters);
+        validateAllowedDelimiters(input, delimiterPattern);
+        validateDelimiterPosition(input, delimiterPattern);
+        validateNumberSize(input, delimiterPattern);
+    }
+
+    private static void validateAllowedDelimiters(String input, String delimiterPattern) {
         String validPattern = String.format(VALID_PATTERN_TEMPLATE, delimiterPattern);
 
         if (!Pattern.matches(validPattern, input)) {
@@ -24,17 +30,19 @@ public class CalculableValidator {
         }
     }
 
-    public static void validateDelimiterPosition(String input, Delimiters delimiters) {
-        String delimiterPattern = buildDelimiterPattern(delimiters);
-        String positionPattern = String.format(VALID_PATTERN_DELIMITER_BETWEEN_NUMBERS_TEMPLATE, delimiterPattern);
+    private static void validateDelimiterPosition(String input, String delimiterPattern) {
+        String[] numbers = input.split(delimiterPattern);
+        if (numbers.length < 2) {
+            return;
+        }
 
+        String positionPattern = String.format(VALID_PATTERN_DELIMITER_BETWEEN_NUMBERS_TEMPLATE, delimiterPattern);
         if (!Pattern.matches(positionPattern, input)) {
             throw new IllegalArgumentException(ErrorMessage.DELIMITER_MUST_BE_BETWEEN_NUMBERS.getMessage());
         }
     }
 
-    public static void validateNumberSize(String input, Delimiters delimiters) {
-        String delimiterPattern = buildDelimiterPattern(delimiters);
+    private static void validateNumberSize(String input, String delimiterPattern) {
         String[] numbers = input.split(delimiterPattern);
 
         for (String number : numbers) {

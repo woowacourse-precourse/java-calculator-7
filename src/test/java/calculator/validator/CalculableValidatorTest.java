@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Test;
 class CalculableValidatorTest {
 
     @Nested
-    @DisplayName("validateAllowedDelimiters 메서드는")
-    class ValidateAllowedDelimitersMethod {
+    @DisplayName("validate 메서드는")
+    class ValidateMethod {
 
         @Test
         void 허용된_구분자만_사용된_경우_예외를_발생시키지_않는다() {
@@ -23,7 +23,7 @@ class CalculableValidatorTest {
             String input = "1,2:3";
 
             // when & then
-            assertThatNoException().isThrownBy(() -> CalculableValidator.validateAllowedDelimiters(input, delimiters));
+            assertThatNoException().isThrownBy(() -> CalculableValidator.validate(input, delimiters));
         }
 
         @Test
@@ -33,7 +33,7 @@ class CalculableValidatorTest {
             String input = "1@2:3";
 
             // when & then
-            assertThatThrownBy(() -> CalculableValidator.validateAllowedDelimiters(input, delimiters))
+            assertThatThrownBy(() -> CalculableValidator.validate(input, delimiters))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(ErrorMessage.INVALID_DELIMITER_INCLUDED.getMessage());
         }
@@ -46,7 +46,7 @@ class CalculableValidatorTest {
             String input = "1&2,3";
 
             // when & then
-            assertThatNoException().isThrownBy(() -> CalculableValidator.validateAllowedDelimiters(input, delimiters));
+            assertThatNoException().isThrownBy(() -> CalculableValidator.validate(input, delimiters));
         }
 
         @Test
@@ -57,15 +57,10 @@ class CalculableValidatorTest {
             String input = "1&2;3";
 
             // when & then
-            assertThatThrownBy(() -> CalculableValidator.validateAllowedDelimiters(input, delimiters))
+            assertThatThrownBy(() -> CalculableValidator.validate(input, delimiters))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(ErrorMessage.INVALID_DELIMITER_INCLUDED.getMessage());
         }
-    }
-
-    @Nested
-    @DisplayName("validateDelimiterPosition 메서드는")
-    class ValidateDelimiterPositionMethod {
 
         @Test
         void 구분자가_숫자_사이에_위치하는_경우_검증에_성공한다() {
@@ -75,7 +70,7 @@ class CalculableValidatorTest {
             delimiters.addCustomDelimiters(Set.of("@"));
 
             // when & then
-            assertThatNoException().isThrownBy(() -> CalculableValidator.validateDelimiterPosition(input, delimiters));
+            assertThatNoException().isThrownBy(() -> CalculableValidator.validate(input, delimiters));
         }
 
         @Test
@@ -86,9 +81,31 @@ class CalculableValidatorTest {
             Delimiters delimiters = new Delimiters();
 
             // when & then
-            assertThatThrownBy(() -> CalculableValidator.validateDelimiterPosition(input, delimiters))
+            assertThatThrownBy(() -> CalculableValidator.validate(input, delimiters))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(ErrorMessage.DELIMITER_MUST_BE_BETWEEN_NUMBERS.getMessage());
+        }
+
+        @Test
+        void 숫자가_너무_큰_경우_NUMBER_TOO_LARGE_예외를_발생시킨다() {
+            // given
+            String input = "9999999999999999999999999";
+            Delimiters delimiters = new Delimiters();
+
+            // when & then
+            assertThatThrownBy(() -> CalculableValidator.validate(input, delimiters))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(ErrorMessage.NUMBER_TOO_LARGE.getMessage());
+        }
+
+        @Test
+        void 숫자가_Long_범위_내에_있으면_예외를_발생시키지_않는다() {
+            // given
+            String input = "100";
+            Delimiters delimiters = new Delimiters();
+
+            // when & then
+            assertThatNoException().isThrownBy(() -> CalculableValidator.validate(input, delimiters));
         }
     }
 }
