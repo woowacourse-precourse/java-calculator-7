@@ -1,5 +1,6 @@
 package calculator.service;
 
+import calculator.domain.BigIntegerCalculator;
 import calculator.domain.Calculator;
 import calculator.util.StringParser;
 import calculator.validator.InputValidator;
@@ -20,9 +21,7 @@ public class StringAddCalculatorService {
 
         String[] splitStringArr = stringParse(input);
 
-        Calculator calculator = new Calculator();
-
-        return stringAdd(splitStringArr, calculator);
+        return stringAdd(splitStringArr);
     }
 
     private String validateEmptyAndNumber(String input) {
@@ -36,14 +35,26 @@ public class StringAddCalculatorService {
         return null;
     }
 
-    private String stringAdd(String[] splitStringArr, Calculator calculator) {
+    private String stringAdd(String[] splitStringArr) {
+        Calculator calculator = new Calculator();
+        try {
+            for (String s : splitStringArr) {
+                inputValidator.validateIsNumber(s);
+
+                calculator.add(s);
+            }
+        } catch (NumberFormatException e) {
+            return stringAddBig(splitStringArr);
+        }
+        return calculator.getResult();
+    }
+
+    private String stringAddBig(String[] splitStringArr) {
+        BigIntegerCalculator calculator = new BigIntegerCalculator();
         for (String s : splitStringArr) {
             inputValidator.validateIsNumber(s);
-            inputValidator.validateIsLong(s);
 
-            long num = Long.parseLong(s);
-            calculator.add(num);
-
+            calculator.add(s);
         }
         return calculator.getResult();
     }
