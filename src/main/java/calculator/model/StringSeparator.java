@@ -5,6 +5,8 @@ import java.util.List;
 
 public class StringSeparator {
 
+    private static final String BASIC_SEPARATOR = ",|;";
+
     public List<Integer> extractNumbers(String input) {
         verifyNegativeSeparator(input);
         try {
@@ -21,13 +23,13 @@ public class StringSeparator {
         if (inputString.substring(0, 2).equals("//") && inputString.substring(3, 5).equals("\\n")) {
             return separateNumbersByCustom(inputString);
         }
-        return inputString.split(",|;");
+        return inputString.split(BASIC_SEPARATOR);
     }
 
     private String[] separateNumbersByCustom(String input) {
         char customSeparator = input.charAt(2);
         String numbers = input.substring(5);
-        return numbers.split(",|;|" + customSeparator);
+        return numbers.split(String.format("%s|%s", BASIC_SEPARATOR, customSeparator));
     }
 
     private void verifyNegativeSeparator(String input) {
