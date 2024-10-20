@@ -30,22 +30,20 @@ public class CalculatorController {
         return convertToNumber(stringNums);
     }
 
-    private String[] extractStringNumber(String input) {
+    public String[] extractStringNumber(String input) {
         InputCase inputCase = separateCase(input);
-        return switch(inputCase) {
+        return switch (inputCase) {
             case InputCase.NONE -> new String[0];
-            case InputCase.DEFAULT -> input.replaceAll("[,|:]", " ")
-                    .split(" ");
+            case InputCase.DEFAULT -> input.replaceAll("[,|:]", " ").split(" ");
             case InputCase.CUSTOM -> {
                 String customDelimiter = extractNewDelimiter(input);
                 String slicedInput = input.substring(customDelimiter.length() + 4); // 4 == "//\n".length()
-                yield slicedInput.replaceAll("[,|:|" + customDelimiter+ "]", " ")
-                        .split(" ");
+                yield slicedInput.replaceAll("[,|:|" + customDelimiter + "]", " ").split(" ");
             }
         };
     }
 
-    private InputCase separateCase(String input) {
+    public InputCase separateCase(String input) {
         if (input.matches("")) {
             return InputCase.NONE;
         } else if (startsWithPositiveNumber(input)) {
@@ -59,7 +57,7 @@ public class CalculatorController {
 
     private Stream<Integer> convertToNumber(String[] stringNums) {
         try {
-           return Arrays.stream(stringNums).map(Integer::parseInt);
+            return Arrays.stream(stringNums).map(Integer::parseInt);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자가 아닌 입력값이 있습니다.");
         }
@@ -71,15 +69,17 @@ public class CalculatorController {
     }
 
     private boolean isCustomFormat(String str) {
-        if(!str.startsWith("//")) throw new IllegalArgumentException("커스텀 구분자 입력은 //으로 시작해야합니다.");
-        if(!str.contains("\\n")) throw new IllegalArgumentException("커스텀 구분자는 입력은 \\n 로 끝나야합니다.");
+        if (!str.startsWith("//")) throw new IllegalArgumentException("커스텀 구분자 입력은 //으로 시작해야합니다.");
+        if (!str.contains("\\n")) throw new IllegalArgumentException("커스텀 구분자는 입력은 \\n 로 끝나야합니다.");
         return true;
     }
 
     private boolean startsWithPositiveNumber(String str) {
-        if (str.matches("[1-9].*")) {
+        if (str.matches("-[0-9]")) {
+            throw new IllegalArgumentException("숫자는 양수만 입력할 수 있습니다.");
+        } else if (str.matches("[1-9].*")) {
             return true;
-        } else throw new IllegalArgumentException("숫자는 양수만 입력할 수 있습니다.");
+        } else return false;
     }
 }
 
