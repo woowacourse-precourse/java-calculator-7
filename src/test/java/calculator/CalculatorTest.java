@@ -78,6 +78,17 @@ class CalculatorTest {
     }
 
     @Test
+    void 여러_개의_커스텀_구분자_추출_문자열이_포함된_경우_예외_테스트() {
+        assertThatThrownBy(() -> calculator.splitAndSum("//;\\n//'\\n1;2'3"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("여러 개의 커스텀 구분자 추출 문자열이 포함된 잘못된 입력값입니다.");
+
+        assertThatThrownBy(() -> calculator.splitAndSum("//;\\n//|\\n1;2|3"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("여러 개의 커스텀 구분자 추출 문자열이 포함된 잘못된 입력값입니다.");
+    }
+
+    @Test
     void 숫자가_아닌_값이_포함된_경우_테스트() {
         assertThatThrownBy(() -> calculator.splitAndSum("1,a,2"))
                 .isInstanceOf(IllegalArgumentException.class)

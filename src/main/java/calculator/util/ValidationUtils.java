@@ -29,7 +29,7 @@ public class ValidationUtils {
         Matcher matcher = pattern.matcher(input);
 
         if (matcher.find()) {
-            throw new IllegalArgumentException("여러 개의 커스텀 구분 문자 추출 문자열이 포함된 잘못된 입력입니다. 입력값: [" + input + "]");
+            throw new IllegalArgumentException("여러 개의 커스텀 구분자 추출 문자열이 포함된 잘못된 입력값입니다.");
         }
     }
 
