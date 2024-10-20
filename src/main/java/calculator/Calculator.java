@@ -1,8 +1,6 @@
 package calculator;
 
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Calculator {
     void start() {
@@ -13,7 +11,8 @@ public class Calculator {
 
     private void work() {
         String input = inputString();
-        printResult(0);
+        int result = calculateSum(input);
+        printResult(result);
     }
 
     private String inputString() {
@@ -25,43 +24,35 @@ public class Calculator {
         System.out.println("결과 : " + result);
     }
 
-    private int calculateSum(String input) {
+    public int calculateSum(String input) {
         if (input == null || input.isEmpty()) {
             return 0;
         }
 
+        String delimiter = "[,|:]"; // 기본 구분자 설정
+
+        // 커스텀 구분자 확인
         if (input.startsWith("//")) {
-            return customDelimiterSum(input);
-        } else {
-            return defaultDelimiterSum(input);
-        }
-    }
-
-    private int defaultDelimiterSum(String input) {
-        String[] numbers = input.split(",|:");
-        return sumNumbers(numbers);
-    }
-
-    private int customDelimiterSum(String input) {
-        Matcher matcher = Pattern.compile("//(.*)\n(.*)").matcher(input);
-        if (!matcher.find()) {
-            throw new IllegalArgumentException("잘못된 입력 형식입니다.");
+            int delimiterIndex = input.indexOf("\\n");
+            if (delimiterIndex != -1) {
+                delimiter = input.substring(2, delimiterIndex);
+                input = input.substring(delimiterIndex + 2);
+            }
         }
 
-        String customDelimiters = matcher.group(1);
-        String numbersPart = matcher.group(2);
-
-        String[] numbers = numbersPart.split("[" + Pattern.quote(customDelimiters) + "]");
-        return sumNumbers(numbers);
+        return sumTokens(input, delimiter);
     }
 
-    private int sumNumbers(String[] numbers) {
+    private int sumTokens(String input, String delimiter) {
+        String[] tokens = input.split(delimiter);
         int sum = 0;
-        for (String number : numbers) {
-            try {
-                sum += Integer.parseInt(number);
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("잘못된 숫자 형식이 포함되어 있습니다.");
+        for (String token : tokens) {
+            if (!token.isEmpty()) {
+                int number = Integer.parseInt(token);
+                if (number < 0) {
+                    throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+                }
+                sum += number;
             }
         }
         return sum;
