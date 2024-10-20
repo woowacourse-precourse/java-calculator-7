@@ -28,7 +28,6 @@ public class Application {
         }
 
         output(result);
-
     }
 
     public static void output(long result) {
@@ -48,16 +47,11 @@ public class Application {
 
         delimiters = "\\Q" + customDelimiter + "\\E" + "|" + delimiters;
 
-        System.out.println(customDelimiter);
-        System.out.println(text);
-        System.out.println(delimiters);
-
         return new String[]{text, delimiters};
     }
 
     public static long calculateSum(String text, String delimiters) {
         String[] textSplitArr = text.split(delimiters, -1);
-        //System.out.println(Arrays.toString(textSplitArr));
 
         long sum = 0;
         for (String s : textSplitArr) {
@@ -73,7 +67,5 @@ public class Application {
         if (s.isBlank() || !Pattern.matches("^[0-9]*$", s)) {
             throw new IllegalArgumentException();
         }
-
     }
-
 }
