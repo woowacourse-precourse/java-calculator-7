@@ -4,6 +4,10 @@ import java.util.Scanner;
 
 public class Application {
     public static int add(String numbers) {
+        if (numbers.isEmpty()) {
+            return 0;
+        }
+
         String delimiter = "[,:]";
         String numberString = numbers;
 
@@ -13,8 +17,7 @@ public class Application {
                 delimiter = escapeSpecialRegexChars(numbers.substring(2, delimiterIndex));
                 numberString = numbers.substring(delimiterIndex + 2);
             } else {
-                System.out.println("error0");
-                return 0;
+                throw new IllegalArgumentException("Invalid input format: missing newline after custom delimiter.");
             }
         }
 
@@ -25,8 +28,7 @@ public class Application {
             try {
                 sum += Integer.parseInt(num.trim());
             } catch (NumberFormatException e) {
-                System.out.println("error" + num);
-                return 0;
+                throw new IllegalArgumentException("Invalid input: non-numeric value found -> " + num);
             }
         }
 
@@ -37,10 +39,17 @@ public class Application {
         return delimiter.replaceAll("([\\\\.*+?^${}()|\\[\\]])", "\\\\$1");
     }
 
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
-        int result = add(input);
-        System.out.println("결과 : " + result);
+        try{
+            int result = add(input);
+            System.out.println("결과 : " + result);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            System.exit(1);
+        }
+
     }
 }
