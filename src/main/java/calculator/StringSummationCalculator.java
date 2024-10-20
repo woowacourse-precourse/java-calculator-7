@@ -33,10 +33,14 @@ public class StringSummationCalculator implements Calculator<BigInteger> {
 
         try{
             for (String value : args){
-                int num = Integer.parseInt(value);
+                int num;
+
+                if((num = Integer.parseInt(value))< 0){
+                    throw new IllegalArgumentException("음수를 입력할 수 없습니다.");
+                }
+
                 result = result.add(BigInteger.valueOf(num));
             }
-
         }catch(NumberFormatException e){
             throw new IllegalArgumentException("올바른 정수 값이 입력되지 않았거나, 선언되지 않은 구분자가 포함되어 있습니다.");
         }
