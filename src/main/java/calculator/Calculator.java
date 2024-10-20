@@ -34,7 +34,8 @@ public class Calculator {
     return (char) parseInt(numeric);
   }
 
-  private void validProcess(char index) {
+  // 입력값이 유효한 경우를 확인한다
+  public void validProcess(char index) {
     //  인덱스가 기본 구분자 ‘,’ , ‘:’ 인 경우
     if (index == ',' || index == ':') {
       // 건너뛴다

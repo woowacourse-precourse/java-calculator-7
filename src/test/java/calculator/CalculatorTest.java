@@ -109,6 +109,7 @@ class CalculatorTest {
       boolean expect = true;
 
       for (char element : isNumeric) {
+        boolean actual = Character.isDigit(element);
         assertEquals(expect, actual);
 
       }
@@ -126,7 +127,7 @@ class CalculatorTest {
       boolean expect = true;
       for (char element : delimeters) {
         //then
-        assertEquals(expect, calculator.valid(element));
+        assertEquals(expect, calculator.validProcess(element));
       }
     boolean actualCustom = calculator.readline.subString(0, 5) == custom;
     assertEquals(expect, actualCustom);
