@@ -8,7 +8,6 @@ public class Application {
         String inputStr;
         String convertedStr;
         inputStr = camp.nextstep.edu.missionutils.Console.readLine();
-        System.out.println(inputStr);
 
         // 구분자 1차 병합 (":" -> ",")
         convertedStr = inputStr.replace(":",",");
@@ -22,5 +21,11 @@ public class Application {
                 entireStr = new StringBuilder(entireStr.substring(5));
             }
         }
+
+        //","를 기준으로 숫자 분할하기
+        String[] separatedNumbers;
+        String finalStr = new String(entireStr);
+        separatedNumbers = finalStr.split(",");
+        System.out.println(separatedNumbers);
     }
 }
