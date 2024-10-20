@@ -22,6 +22,9 @@ class SplitStrListValidatorTest {
 
     private static Stream<Arguments> provideSplitStrBySeparatorsAndExpectedNumberList() {
         return Stream.of(
+                Arguments.of(List.of("012", "0012", "0001234567890", "00000000000000000000",
+                                "00000000000000000000000000000000000000000000000"),
+                        List.of(12L, 12L, 1234567890L, 0L, 0L)),
                 Arguments.of(List.of("123", "12", "3"), List.of(123L, 12L, 3L)),
                 Arguments.of(List.of("12345"), List.of(12345L)),
                 Arguments.of(List.of("1234567890123456789", "1234567890", "123456789012345"),
