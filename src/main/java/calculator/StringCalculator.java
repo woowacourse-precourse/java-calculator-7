@@ -6,6 +6,9 @@ public class StringCalculator {
         if (input == null || input.isEmpty()) {
             return 0;
         }
-        return -1;  // 이후 기능 구현을 위한 임시 반환 값
+        if (input.matches("\\d+")) {  // 숫자 하나일 경우
+            return Integer.parseInt(input);
+        }
+        return -1;
     }
 }
