@@ -50,7 +50,7 @@ public class Application {
                 int num = Integer.parseInt(number);
 
                 // 음수 처리
-                if (num < 0) {
+                if (num <= 0) {
                     throw new IllegalArgumentException("0 또는 음수 값은 허용되지 않습니다: " + num);
                 }
 
