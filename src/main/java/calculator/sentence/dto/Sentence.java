@@ -1,4 +1,4 @@
-package calculator.sentence.domain;
+package calculator.sentence.dto;
 
 
 public class Sentence {
