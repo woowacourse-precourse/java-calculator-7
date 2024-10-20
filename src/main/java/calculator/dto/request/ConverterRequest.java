@@ -1,10 +1,10 @@
-package calculator.dto.response;
+package calculator.dto.request;
 
-public class DelimiterExtractResponse {
-    private String delimiter;
-    private String remainInput;
+public class ConverterRequest {
+    private final String delimiter;
+    private final String remainInput;
 
-    public DelimiterExtractResponse(String delimiter, String remainInput) {
+    public ConverterRequest(String delimiter, String remainInput) {
         this.delimiter = delimiter;
         this.remainInput = remainInput;
     }

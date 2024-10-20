@@ -1,14 +1,13 @@
 package calculator.dto.request;
 
-public class DelimiterExtractRequest {
+public class CalculatorRequest {
     private final String input;
 
-    public DelimiterExtractRequest(String input){
+    public CalculatorRequest(String input) {
         this.input = input;
     }
 
     public String getInput() {
         return input;
     }
-
 }
