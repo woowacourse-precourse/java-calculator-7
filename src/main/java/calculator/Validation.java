@@ -1,8 +1,11 @@
 package calculator;
 
+import java.util.List;
+
 public class Validation {
-    private static final String WRONG_INPUT = "입력값이 잘못되었습니다.";
-    private static final String WRONG_CUSTOM_SEPARATOR_FORM = "custom 구분자의 형식이 잘못되었습니다.";
+    private static final String WRONG_INPUT_MESSAGE = "입력값이 잘못되었습니다.";
+    private static final String WRONG_CUSTOM_SEPARATOR_FORM_MESSAGE = "custom 구분자의 형식이 잘못되었습니다.";
+    private static final String IS_BEYOND_COMPUTE_MESSAGE = "계산할 수 없는 범위입니다.";
 
     public static void checkCustomSeparator(String input) {
         isCorrectCustomSeparatorForm(input);
@@ -16,8 +19,18 @@ public class Validation {
     public static void isCorrectInput(String input) {
         for (int i = 0; i < input.length(); i++) {
             if (!(input.charAt(i) == ',' || input.charAt(i) == ':' || isNumber(input.charAt(i)))) {
-                throw new IllegalArgumentException(WRONG_INPUT);
+                throw new IllegalArgumentException(WRONG_INPUT_MESSAGE);
             }
+        }
+    }
+
+    public static void isIntegerRangeSum(int sum, List<Integer> input) {
+        long longSum = 0;
+        for (Integer num : input) {
+            longSum += num;
+        }
+        if (longSum != sum) {
+            throw new IllegalArgumentException(IS_BEYOND_COMPUTE_MESSAGE);
         }
     }
 
@@ -28,7 +41,7 @@ public class Validation {
         for (int i = 0; i < input.length(); i++) {
             if (input.charAt(i) == '/' && input.charAt(i + 1) == '/') {
                 if (i + 4 >= input.length() || !isCorrectLastElement(input, i + 3)) {
-                    throw new IllegalArgumentException(WRONG_CUSTOM_SEPARATOR_FORM);
+                    throw new IllegalArgumentException(WRONG_CUSTOM_SEPARATOR_FORM_MESSAGE);
                 }
                 startPair++;
                 flag = 1;
@@ -36,7 +49,7 @@ public class Validation {
             }
             if (input.charAt(i) == '\\' && input.charAt(i + 1) == 'n') {
                 if (flag == 0) {
-                    throw new IllegalArgumentException(WRONG_CUSTOM_SEPARATOR_FORM);
+                    throw new IllegalArgumentException(WRONG_CUSTOM_SEPARATOR_FORM_MESSAGE);
                 }
                 lastPair++;
                 flag = 0;
@@ -44,7 +57,7 @@ public class Validation {
             }
         }
         if ((startPair == lastPair) && startPair == 0) {
-            throw new IllegalArgumentException(WRONG_CUSTOM_SEPARATOR_FORM);
+            throw new IllegalArgumentException(WRONG_CUSTOM_SEPARATOR_FORM_MESSAGE);
         }
     }
 
