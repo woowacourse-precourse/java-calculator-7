@@ -1,17 +1,48 @@
 package calculator.service;
 
 import calculator.domain.CustomDelimiter;
+import calculator.domain.Numbers;
 import calculator.util.InputFilter;
-import calculator.util.Parser;
+import calculator.util.Splitter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CalculatorService {
 
-    private static final InputFilter FILTER = new InputFilter();
+    private static final int DEFAULT_SIZE = 1;
+    private static final int CUSTOM_SIZE = 3;
 
-    public CustomDelimiter extractCustomDelimiter(String input) {
+    public Numbers extractNumbers(String input) {
         InputFilter.doOutWrong(input);
-        String[] custom = Parser.splitByTag(input);
+        String[] splitValues = Splitter.splitOut(input);
 
-        return new CustomDelimiter(custom[1]);
+        List<String> splitNumbers = splitWithDelimiter(splitValues);
+        Numbers numbers = parseToInt(splitNumbers);
+
+        return numbers;
+    }
+
+    private Numbers parseToInt(List<String> splitNumbers) {
+        List<Integer> numberList = splitNumbers
+                .stream()
+                .map(Integer::parseInt)
+                .toList();
+
+        return new Numbers(numberList);
+    }
+
+    private List<String> splitWithDelimiter(String[] splitValues) {
+        List<String> numbers = new ArrayList<>();
+
+        if (splitValues.length == CUSTOM_SIZE) {
+            CustomDelimiter delimiter = new CustomDelimiter(splitValues[1]);
+            numbers = Splitter.splitToCustom(delimiter, splitValues);
+        }
+
+        if (splitValues.length == DEFAULT_SIZE) {
+            numbers = Splitter.splitToDefault(splitValues);
+        }
+
+        return numbers;
     }
 }

@@ -14,7 +14,7 @@ public class CalculatorServiceTest {
         String input = "//--\\n333";
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            calculatorService.extractCustomDelimiter(input);
+            calculatorService.extractNumbers(input);
         });
     }
 
@@ -24,7 +24,7 @@ public class CalculatorServiceTest {
         String input = "//0\\n3333";
 
         org.assertj.core.api.Assertions.assertThatThrownBy(() -> {
-            calculatorService.extractCustomDelimiter(input);
+            calculatorService.extractNumbers(input);
         }).hasMessage("커스텀 구분자에 숫자는 입력할 수 없습니다.");
     }
 
@@ -34,15 +34,15 @@ public class CalculatorServiceTest {
         String input = "//:\\n333";
 
         org.assertj.core.api.Assertions.assertThatThrownBy(() ->
-                        calculatorService.extractCustomDelimiter(input))
+                        calculatorService.extractNumbers(input))
                 .hasMessage("기본 구분자는 커스텀으로 사용할 수 없습니다.");
     }
 
     @Test
     @DisplayName("올바른 값을 입력한 경우 정상적으로 작동")
     void run_when_delimiter_is_correct_character() {
-        String input = "//*\\n3*3*3";
+        String input = "//-\\n3-3-3-3";
 
-        Assertions.assertDoesNotThrow(() -> calculatorService.extractCustomDelimiter(input));
+        Assertions.assertDoesNotThrow(() -> calculatorService.extractNumbers(input));
     }
 }

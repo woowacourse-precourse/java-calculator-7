@@ -34,4 +34,8 @@ public class CustomDelimiter {
             throw new IllegalArgumentException(ErrorMessage.CUSTOM_CANT_BE_DEFAULT.getMessage());
         }
     }
+
+    public String getDelimiter() {
+        return delimiter;
+    }
 }

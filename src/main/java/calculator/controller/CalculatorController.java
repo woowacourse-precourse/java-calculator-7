@@ -1,6 +1,6 @@
 package calculator.controller;
 
-import calculator.domain.CustomDelimiter;
+import calculator.domain.Numbers;
 import calculator.service.CalculatorService;
 import calculator.view.CalculatorView;
 
@@ -18,7 +18,6 @@ public class CalculatorController {
 
     public void run() {
         String userInput = CalculatorView.getUserInput();
-
-        CustomDelimiter delimiter = calculatorService.extractCustomDelimiter(userInput);
+        Numbers numbers = calculatorService.extractNumbers(userInput);
     }
 }
