@@ -24,6 +24,8 @@ public class Calculator {
         int result = adder.add(stringToCalculate);
 
         o.output(result);
+
+        separator.separators.clear();
     }
 
 
