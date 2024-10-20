@@ -1,5 +1,8 @@
 package calculator.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StringCalculator {
 
     public int calculate(String input) {
@@ -7,6 +10,8 @@ public class StringCalculator {
             return 0;
         }
 
-        return 0;
+        List<Integer> numbers = new ArrayList<>();
+
+        return numbers.stream().mapToInt(Integer::intValue).sum();
     }
 }
