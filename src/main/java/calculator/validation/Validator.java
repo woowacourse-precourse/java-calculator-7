@@ -20,13 +20,13 @@ public class Validator {
         }
     }
 
-    public static void isValidDelimiter(String determiter){
+    public static void validateDelimiter(String determiter){
         if (determiter.matches(".*\\d.*")){
             throw new IllegalArgumentException(INVALID_CUSTOM_DELIMITER);
         }
     }
 
-    public static void isThereSeparator(int delimiterEndIndex){
+    public static void validateSeparator(int delimiterEndIndex){
         if (delimiterEndIndex == -1) {
             throw new IllegalArgumentException(INVALID_CUSTOM_DELIMITER);
         }

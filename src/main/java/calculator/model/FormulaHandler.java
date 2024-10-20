@@ -15,14 +15,14 @@ public class FormulaHandler {
             return null;
         }
         String customDelimiter = formula.substring(2, delimiterEndIndex);
-        Validator.isValidDelimiter(customDelimiter);
+        Validator.validateDelimiter(customDelimiter);
         return customDelimiter;
     }
 
     public Integer checkCustomDelimiter(){
         if (formula.startsWith("//")){
             int delimiterEndIndex = formula.indexOf("\n");
-            Validator.isThereSeparator(delimiterEndIndex);
+            Validator.validateSeparator(delimiterEndIndex);
             return delimiterEndIndex;
         }
         return null;
