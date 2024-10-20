@@ -5,8 +5,7 @@ import camp.nextstep.edu.missionutils.Console;
 public class StringCalculator {
 
     void run() {
-        printInputMsg();
-        String input = Console.readLine();
+        String input = readUserInput();
 
         Data data = InputManager.validateInput(input);
         String str = data.getStr();
@@ -17,8 +16,10 @@ public class StringCalculator {
         printOutputMsg(sumValue);
     }
 
-    void printInputMsg() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
+    String readUserInput() {
+        String INPUT_MESSAGE = "덧셈할 문자열을 입력해 주세요.";
+        System.out.println(INPUT_MESSAGE);
+        return Console.readLine();
     }
 
     void printOutputMsg(int sumValue) {
