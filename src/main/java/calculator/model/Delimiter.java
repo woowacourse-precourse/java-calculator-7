@@ -7,7 +7,6 @@ import static calculator.constants.ErrorMessages.INVALID_CUSTOM_SEPARATOR_DOT_ME
 import static calculator.constants.ErrorMessages.INVALID_CUSTOM_SEPARATOR_EMPTY_MESSAGE;
 
 import calculator.utils.NumberUtils;
-import java.util.Objects;
 
 public class Delimiter {
     private final String delimiter;
@@ -41,7 +40,7 @@ public class Delimiter {
     }
 
     private void validateDot(String delimiter) {
-        if (Objects.equals(delimiter, DOT)) {
+        if (delimiter.equals(DOT)) {
             throw new IllegalArgumentException(INVALID_CUSTOM_SEPARATOR_DOT_MESSAGE.getErrorMessage());
         }
     }
