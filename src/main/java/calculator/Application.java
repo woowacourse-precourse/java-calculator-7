@@ -13,14 +13,8 @@ public class Application {
         String seperator = DecideSeparatorInString(input);
         String[] arr = DevideStringToSeparator(input, seperator);
 
-        try {
-            if(!isCorrectInput(arr, seperator)) {
-                throw new IllegalArgumentException("IllegalArgumentException");
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            Console.close();
-            return;
+        if(!isCorrectInput(arr, seperator)) {
+            throw new IllegalArgumentException("IllegalArgumentException");
         }
         int sum = 0;
         for (int i = 0; i < arr.length; i++) {
