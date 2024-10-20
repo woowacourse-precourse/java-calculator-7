@@ -18,8 +18,15 @@ public class Calculator {
     double calculate(String[] inputString){
         double sum = 0;
         for(String number : inputString){
-            double doubleNumber = Double.parseDouble(number);
-            sum += doubleNumber;
+            double doubleNumber;
+            try{
+                doubleNumber = Double.parseDouble(number);
+            }catch (Exception e){
+                throw new IllegalArgumentException("입력 형식이 잘못되었습니다.");
+            }
+            if (doubleNumber <= 0){
+                throw new IllegalArgumentException("양수만 계산 가능합니다.");
+            }
         }
         return sum;
     }
