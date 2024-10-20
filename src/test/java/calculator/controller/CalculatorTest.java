@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import calculator.domain.Numbers;
 import calculator.view.InputView;
+import calculator.view.OutputView;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -23,7 +24,8 @@ class CalculatorTest {
     @BeforeEach
     void setup () {
         InputView inputView = new InputView();
-        calculator = new Calculator(inputView);
+        OutputView outputView = new OutputView();
+        calculator = new Calculator(inputView, outputView);
     }
 
     @Test

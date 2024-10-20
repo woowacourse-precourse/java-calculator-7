@@ -6,12 +6,15 @@ import static calculator.common.InputValidator.isCustomSeparator;
 
 import calculator.domain.Numbers;
 import calculator.view.InputView;
+import calculator.view.OutputView;
 
 public class Calculator {
     private final InputView inputView;
+    private final OutputView outputView;
 
-    public Calculator(InputView inputView) {
+    public Calculator(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
+        this.outputView = outputView;
     }
 
     public void run () {
@@ -24,6 +27,8 @@ public class Calculator {
         // 덧셈
         Integer sum = numbers.sum();
 
+        // 결과
+        outputView.printResult(sum);
     }
 
     public Numbers handleInput (String input) {
