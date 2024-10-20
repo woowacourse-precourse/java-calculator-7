@@ -39,8 +39,9 @@ public class CalculatorUtil {
         String combinedDelimiters = delimiters.stream()
                 .map(Pattern::quote)
                 .collect(Collectors.joining("|"));
+        System.out.println(combinedDelimiters);
 
-        return Arrays.stream(inputValue.split(combinedDelimiters))
+        return Arrays.stream(Pattern.compile(combinedDelimiters).split(inputValue))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
