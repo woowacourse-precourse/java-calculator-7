@@ -49,7 +49,11 @@ public class Application {
 
     private static int parseNumber(String number) {
         try {
-            return Integer.parseInt(number);
+            int parsedNumber = Integer.parseInt(number);
+            if (parsedNumber < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+            }
+            return parsedNumber;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("잘못된 입력입니다: " + number);
         }
