@@ -1,11 +1,11 @@
 package calculator.model;
 
 public class InputText {
-    private final String delimiter;
+    private final Delimiter delimiter;
     private final String plainText;
 
     public InputText(String delimiter, String text) {
-        this.delimiter = delimiter;
+        this.delimiter = new Delimiter(delimiter);
         this.plainText = text;
     }
 }
