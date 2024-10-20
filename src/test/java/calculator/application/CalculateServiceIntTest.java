@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import calculator.application.impl.PositiveNumberExtractService;
 import calculator.application.impl.StringCalculatorSeparateService;
+import java.math.BigInteger;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +23,7 @@ class CalculateServiceIntTest {
         String command = "1,2:3";
 
         // when
-        long sum = calculateService.splitAndSum(command);
+        BigInteger sum = calculateService.splitAndSum(command);
 
         // then
         assertThat(sum).isEqualTo(6);

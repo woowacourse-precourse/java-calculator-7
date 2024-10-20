@@ -1,6 +1,7 @@
 package calculator.application;
 
 import calculator.domain.Calculator;
+import java.math.BigInteger;
 import java.util.List;
 
 public class CalculateService {
@@ -16,9 +17,9 @@ public class CalculateService {
         this.extractService = extractService;
     }
 
-    public long splitAndSum(String command) {
+    public BigInteger splitAndSum(String command) {
         List<String> separated = separatorService.separate(command);
-        List<Long> numbers = extractService.extractNumbers(separated);
+        List<BigInteger> numbers = extractService.extractNumbers(separated);
 
         return new Calculator().sum(numbers);
     }

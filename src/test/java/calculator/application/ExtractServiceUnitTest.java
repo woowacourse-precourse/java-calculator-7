@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import calculator.application.impl.PositiveNumberExtractService;
+import java.math.BigInteger;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,10 +20,10 @@ class ExtractServiceUnitTest {
         List<String> numberStrings = List.of("1", "12", "123");
 
         // when
-        List<Long> result = extractService.extractNumbers(numberStrings);
+        List<BigInteger> result = extractService.extractNumbers(numberStrings);
 
         // then
-        List<Long> expected = List.of(1L, 12L, 123L);
+        List<BigInteger> expected = List.of(BigInteger.ONE, BigInteger.valueOf(12), BigInteger.valueOf(123));
         assertThat(result).isEqualTo(expected);
     }
 
@@ -33,7 +34,7 @@ class ExtractServiceUnitTest {
         List<String> numberStrings = List.of("1");
 
         // when
-        List<Long> result = extractService.extractNumbers(numberStrings);
+        List<BigInteger> result = extractService.extractNumbers(numberStrings);
 
         // then
         assertThat(result.size()).isOne();
@@ -46,7 +47,7 @@ class ExtractServiceUnitTest {
         List<String> numberStrings = List.of();
 
         // when
-        List<Long> result = extractService.extractNumbers(numberStrings);
+        List<BigInteger> result = extractService.extractNumbers(numberStrings);
 
         // then
         assertThat(result.size()).isZero();
@@ -82,10 +83,10 @@ class ExtractServiceUnitTest {
         List<String> numberStrings = List.of(String.valueOf(maxValue), String.valueOf(maxValue));
 
         // when
-        List<Long> result = extractService.extractNumbers(numberStrings);
+        List<BigInteger> result = extractService.extractNumbers(numberStrings);
 
         // then
-        List<Long> expected = List.of(maxValue, maxValue);
+        List<BigInteger> expected = List.of(BigInteger.valueOf(maxValue), BigInteger.valueOf(maxValue));
         assertThat(result).isEqualTo(expected);
     }
 

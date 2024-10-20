@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import calculator.fake.FakeExtractService;
 import calculator.fake.FakeSeparateService;
+import java.math.BigInteger;
 import org.junit.jupiter.api.Test;
 
 class CalculateServiceUnitTest {
@@ -16,7 +17,7 @@ class CalculateServiceUnitTest {
         String any = "";
 
         // when
-        long result = calculateService.splitAndSum(any);
+        BigInteger result = calculateService.splitAndSum(any);
 
         // then
         assertThat(result).isEqualTo(6);

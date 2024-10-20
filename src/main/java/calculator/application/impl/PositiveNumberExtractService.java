@@ -2,37 +2,31 @@ package calculator.application.impl;
 
 import calculator.application.ExtractService;
 import calculator.utility.CharacterUtils;
+import java.math.BigInteger;
 import java.util.List;
 
 public class PositiveNumberExtractService implements ExtractService {
 
     @Override
-    public List<Long> extractNumbers(List<String> data) {
+    public List<BigInteger> extractNumbers(List<String> data) {
         return data.stream()
                 .map(this::parseNumber)
                 .toList();
     }
 
-    private Long parseNumber(String data) {
-        validateNumber(data);
-        return Long.valueOf(data);
-    }
+    private BigInteger parseNumber(String data) {
+        try {
+            BigInteger number = new BigInteger(data);
+            validatePositive(number);
 
-    private void validateNumber(String data) {
-        validateNotNullOrEmpty(data);
-        validateOnlyDigits(data);
-    }
-
-    private void validateOnlyDigits(String data) {
-        for (char word: data.toCharArray()) {
-            if (CharacterUtils.isNotDigit(word)) {
-                throw new IllegalArgumentException();
-            }
+            return number;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
         }
     }
 
-    private void validateNotNullOrEmpty(String data) {
-        if (data == null || data.isEmpty()) {
+    private void validatePositive(BigInteger number) {
+        if (number.compareTo(BigInteger.ZERO) < 0) {
             throw new IllegalArgumentException();
         }
     }

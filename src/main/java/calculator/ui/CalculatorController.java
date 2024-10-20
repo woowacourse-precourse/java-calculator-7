@@ -3,6 +3,7 @@ package calculator.ui;
 import calculator.application.CalculateService;
 import calculator.ui.view.CalculatorInputView;
 import calculator.ui.view.CalculatorOutputView;
+import java.math.BigInteger;
 
 public class CalculatorController {
 
@@ -22,7 +23,7 @@ public class CalculatorController {
 
     public void stringAdditionCalculate() {
         String command = calculatorInputView.splitAndSumInput();
-        long result = calculateService.splitAndSum(command);
+        BigInteger result = calculateService.splitAndSum(command);
         calculatorOutputView.splitAndSumOutput(result);
     }
 
