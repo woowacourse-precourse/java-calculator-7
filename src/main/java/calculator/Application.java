@@ -65,6 +65,10 @@ class Calculator {
 
         String [] numbers = input.split(separator);
 
+        if (!input.matches("([0-9" + Pattern.quote(separator) + "\\s]+)")) {
+            throw new IllegalArgumentException();
+        }
+
         for (String number : numbers) {
             int value = Integer.parseInt(number.trim());
 
