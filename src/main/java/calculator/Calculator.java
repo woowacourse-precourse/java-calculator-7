@@ -56,7 +56,7 @@ public class Calculator {
         try {
             int number = Integer.parseInt(token);
             if (number < 0) {
-                throw new IllegalArgumentException("음수는 허용되지 않습니다."); // 음수 예외 처리
+                throw new RuntimeException("음수는 허용되지 않습니다."); // 음수 예외 처리
             }
             return number;
         } catch (NumberFormatException e) {
