@@ -9,32 +9,34 @@ public class CalculatorModel {
     public int add(String input, Set<Character> delimiters) {
         String[] numbers = splitByDelimiters(input, delimiters);
         return Stream.of(numbers)
-                .mapToInt(this::parsePositiveInteger)  // 빈 문자열도 처리
+                .mapToInt(this::parsePositiveInteger)
                 .sum();
     }
 
-    public String[] splitByDelimiters(String input, Set<Character> delimiters) {
+    private String[] splitByDelimiters(String input, Set<Character> delimiters) {
         String delimiterPattern = delimiters.stream()
                 .map(c -> Pattern.quote(c.toString()))
                 .reduce((a, b) -> a + "|" + b)
                 .orElse("");
-
         return input.split(delimiterPattern);
     }
 
     private int parsePositiveInteger(String number) {
         if (number.isEmpty()) {
-            return 0; // 빈 문자열을 0으로 처리
+            return 0;
         }
-
         try {
             int parsedNumber = Integer.parseInt(number);
-            if (parsedNumber < 0) {
-                throw new IllegalArgumentException("Negative numbers are not allowed");
-            }
+            validatePositiveNumber(parsedNumber);
             return parsedNumber;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid number format");
+            throw new IllegalArgumentException("Invalid number format: " + number);
+        }
+    }
+
+    private void validatePositiveNumber(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException("Negative numbers are not allowed: " + number);
         }
     }
 }
