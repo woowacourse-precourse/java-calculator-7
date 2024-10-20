@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 public class StringCalculationTest {
 
-
     @Test
     @DisplayName("덧셈 기능 구현")
     void 덧셈_기능_테스트() {
@@ -26,6 +25,17 @@ public class StringCalculationTest {
                         () -> stringCalculation.calculate(new String[]{"-1", "2", "3"})
                 ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("음수는 덧셈 대상이 아님");
+    }
+
+    @Test
+    @DisplayName("두 정수의 피연산자의 덧셈 후 오버플로 발생 시 음수")
+    void 덧셈_오버플로_예외처리() {
+        StringCalculation stringCalculation = new StringCalculation();
+
+        Assertions.assertThatThrownBy(
+                        () -> stringCalculation.calculate(new String[]{"2100000000", "100000000"})
+                ).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("정수형의 숫자 범위를 넘어갑니다");
     }
 
     @Test
