@@ -1,5 +1,7 @@
 package calculator.model;
 
+import calculator.exception.ErrorMessage;
+
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,11 +26,16 @@ public class Tokenizer {
                 expression = matcher.group(2); // 표현식은 두 번째 그룹
             }
             else{
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException(ErrorMessage.INVALID_FORMAL.getErrorMessage());
             }
         } else {
             delimiter = DEFAULT_DELIMITER;
             expression = str;
+        }
+
+        // 유효한 기본 구분자만 있는지 확인
+        if (!expression.matches("[0-9" + delimiter + "]+")) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_DELIMITER.getErrorMessage());
         }
 
         String[] tokens = expression.split(delimiter);
@@ -36,13 +43,13 @@ public class Tokenizer {
 
         for (String token : tokens) {
             if (!isNumeric(token)) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException(ErrorMessage.INVALID_TYPE.getErrorMessage());
             }
             int number = Integer.parseInt(token);
             if (number < 0) {
-                throw new IllegalArgumentException("음수 값은 허용되지 않습니다: " + token);
+                throw new IllegalArgumentException(ErrorMessage.INVALID_NUMBER.getErrorMessage());
             }
-            numbers.add(Integer.parseInt(token));
+            numbers.add(number);
         }
 
         return numbers;
