@@ -26,6 +26,6 @@
      
      c. 더하기 기능을 제공하기 위해 Calculate인터페이스의 puls 메서드를 구현한 CalculateImpl 구현 객체
      
-     d. 문자열을 구분자를 기준으로 숫자를 추출해주는 CalculateFactory 객체 구현
+     d. 문자열을 구분자를 기준으로 분리해서 숫자로 바꿔주는 CalculateMapper 객체 구현
 
      e. 추출된 숫자가 계산 가능한 상태의 숫자인지 검증하기 위한 Verify 객체 구현 (음수나, null인 경우 등)
