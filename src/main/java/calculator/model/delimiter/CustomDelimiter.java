@@ -1,4 +1,4 @@
-package calculator.model;
+package calculator.model.delimiter;
 
 public class CustomDelimiter{
     private static final String CUSTOM_DELIMITER_PREFIX = "//";

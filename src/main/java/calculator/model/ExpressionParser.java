@@ -1,5 +1,7 @@
 package calculator.model;
 
+import calculator.model.delimiter.CustomDelimiter;
+import calculator.model.delimiter.StandardDelimiterType;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
