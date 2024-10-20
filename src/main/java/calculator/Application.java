@@ -23,4 +23,12 @@ public class Application {
         }
         return numList;
     }
+
+    public int sumList(int[] numList){
+        int sum = 0;
+        for (int j : numList) {
+            sum += j;
+        }
+        return sum;
+    }
 }
