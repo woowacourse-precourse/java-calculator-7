@@ -25,7 +25,7 @@ public class StringCalculator {
         String customDelimiter = getCustomDelimiter(userInput);
         addCustomDelimiter(customDelimiter);
 
-        calculateSum(userInput, delimiters);
+        long result = calculateSum(userInput, delimiters);
     }
 
     private String getUserInput() {
@@ -52,8 +52,25 @@ public class StringCalculator {
         return result;
     }
 
-    public void calculateSum(String userInput, List<String> delimiters) {
+    public long calculateSum(String userInput, List<String> delimiters) {
         String removed = removeHeaderFromInput(userInput);
+        List<String> numbers = splitStringByDelimiters(removed, delimiters);
+
+        // TEST
+        for (String s : numbers) {
+            System.out.println(s);
+        }
+
+        return 0;
+    }
+
+    public List<String> splitStringByDelimiters(String target, List<String> delimiters) {
+        if (target.isEmpty())
+            return new ArrayList<>();
+
+        String pattern = "[%s]".formatted(String.join("", delimiters));
+        String[] result = target.split(pattern);
+        return List.of(result);
     }
 
     public String removeHeaderFromInput(String userInput) {
