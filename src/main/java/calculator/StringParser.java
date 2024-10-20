@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class StringParser {
     private static final List<String> DEFAULT_DELIMITER = Arrays.asList(",", ":");
-    private static final String EXTRACT_DELIMITER_REGEX = "//(.{1})\\\\n";
+    private static final String EXTRACT_DELIMITER_REGEX = "//(.)\\\\n";
     private static final String DIGIT_OR_POINT_REGEX = "[0-9.]";
     private static final String NUMERIC_REGEX = "^-?\\d+(\\.\\d+)?$";
     private final String inputString;
@@ -40,13 +40,13 @@ public class StringParser {
             validateInvalidDelimiter(delimiter);
             return delimiter;
         } else {
-            throw new IllegalArgumentException("커스텀 구분자 입력 양식이 유효하지 않습니다.");
+            throw new IllegalArgumentException(ErrorMessage.INVALID_CUSTOM_DELIMITER_FORMAT.getMessage());
         }
     }
 
     private void validateInvalidDelimiter(String delimiter) {
         if (delimiter.matches(DIGIT_OR_POINT_REGEX)) {
-            throw new IllegalArgumentException("숫자와 마침표(.)는 구분자로 사용할 수 없습니다.");
+            throw new IllegalArgumentException(ErrorMessage.INVALID_CUSTOM_DELIMITER_VALUE.getMessage());
         }
     }
 
@@ -70,7 +70,7 @@ public class StringParser {
     private void validateNumeric(List<String> stringNumbers) {
         stringNumbers.forEach(string -> {
             if (!string.matches(NUMERIC_REGEX)) {
-                throw new IllegalArgumentException("숫자 또는 구분자만 입력 가능합니다.");
+                throw new IllegalArgumentException(ErrorMessage.INPUT_NON_NUMERIC_CHARACTER.getMessage());
             }
         });
     }
@@ -78,7 +78,7 @@ public class StringParser {
     private void validatePositive(List<Double> numbers) {
         numbers.forEach(number -> {
             if (number <= 0) {
-                throw new IllegalArgumentException("양수만 입력 가능합니다.");
+                throw new IllegalArgumentException(ErrorMessage.INPUT_NON_POSITIVE_NUMBER.getMessage());
             }
         });
     }
