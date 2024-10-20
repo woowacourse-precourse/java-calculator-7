@@ -6,6 +6,24 @@ import separator.Separator;
 
 public class Adder {
 
+    public int add(String stringToCalculate) {
+
+        ArrayList<String> parsedStringWithSeparators
+                = parseStringWithSeparators(stringToCalculate);
+
+        if (!isValidated(parsedStringWithSeparators)) {
+            throw new IllegalArgumentException();
+        }
+
+        ArrayList<Integer> numbers = parseOnlyNumbers(parsedStringWithSeparators);
+
+        if (!isAllPositiveInteger(numbers)) {
+            throw new IllegalArgumentException();
+        }
+
+        return addNumbers(numbers);
+    }
+
     public Integer addNumbers(ArrayList<Integer> numbers) {
 
         int result = 0;
