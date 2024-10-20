@@ -6,8 +6,6 @@ import java.util.Arrays;
 public class Numbers {
     private ArrayList<Integer> numbers;
 
-
-
     public Numbers(){
         this.numbers = new ArrayList<>();
     }
