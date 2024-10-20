@@ -20,11 +20,16 @@ public class CalculatorService {
     private void customSeparate(String expression) {
         Matcher matcher = CUSTOM_SEPARATOR_REGEX.matcher(expression);
         if (hasCustomSeparator(expression, matcher)) {
-
+            String customSeparator = extractCustomSeparator(matcher);
+            validateSingleCharacterSeparator(customSeparator);
         }
 
     }
 
+    private String extractCustomSeparator(Matcher matcher) {
+        System.out.println(matcher.group(1));
+        return matcher.group(1);
+    }
 
     private boolean hasCustomSeparator(String expression, Matcher matcher) {
         if (expression.startsWith("//") && matcher.find()) {
@@ -34,6 +39,10 @@ public class CalculatorService {
         return false;
     }
 
+    private void validateSingleCharacterSeparator(String separator) {
+        Validator.validateSingleCharacterSeparator(separator);
+
+    }
 
     private void validateIsNumber(String[] tokens) {
         Validator.isNumber(tokens);
