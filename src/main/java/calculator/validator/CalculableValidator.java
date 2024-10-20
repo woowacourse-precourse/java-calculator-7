@@ -18,6 +18,10 @@ public class CalculableValidator {
     }
 
     public static void validate(String input, Delimiters delimiters) {
+        if (input.isEmpty()) {
+            return;
+        }
+
         String delimiterPattern = buildDelimiterPattern(delimiters);
         validateAllowedDelimiters(input, delimiterPattern);
         validateDelimiterPosition(input, delimiterPattern);

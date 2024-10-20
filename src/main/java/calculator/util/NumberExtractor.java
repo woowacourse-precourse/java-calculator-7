@@ -8,11 +8,16 @@ import java.util.stream.Collectors;
 
 public class NumberExtractor {
     private static final String REGEX_OR = "|";
+    private static final Long ZERO = 0L;
 
     private NumberExtractor() {
     }
 
     public static List<Long> parseNumbers(String cleanedInput, Delimiters delimiters) {
+        if (cleanedInput.isEmpty()) {
+            return List.of(ZERO);
+        }
+
         String delimiterPattern = delimiters.getDelimiters().stream()
                 .map(Pattern::quote)
                 .collect(Collectors.joining(REGEX_OR));
