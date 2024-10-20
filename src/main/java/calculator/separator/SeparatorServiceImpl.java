@@ -14,6 +14,9 @@ public class SeparatorServiceImpl implements SeparatorService{
     // 정규 표현식에서 사용하는 메타 문자 목록 (특수 문자를 구분자로 사용할 경우 이스케이프 처리를 위해 사용)
     private static final String META_CHARACTERS = "[](){}.*+?^$|\\";
 
+    // 커스텀 구분자가 위치하는 인덱스 (커스텀 구분자는 입력 문자열에서 세 번째 위치에 있음)
+    private static final int INDEX_OF_CUSTOM_SEPARATOR = 2;
+
 
     /**
      * 입력에서 커스텀 구분자가 있는지 확인합니다.
