@@ -54,7 +54,7 @@ public class InputValidator {
     // (첫글자가 `/`일 경우) 그 뒤에 `//xx\n`형식이 온전히 이어지지 않을 경우
     // findCustomSeparator에 추가(customValidator)
     private List<String> checkForm(String given) {
-        String regex = "//(.*)\\n(.*)"; // 정규 표현식
+        String regex = "//(.*)\\\\n(.*)"; // 정규 표현식
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(given);
 
