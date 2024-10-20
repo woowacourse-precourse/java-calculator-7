@@ -3,29 +3,48 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Calculator {
-    public void run() throws IllegalArgumentException {
+    public void run() {
         String input = Console.readLine();
-        int sum = 0;
-        String[] inputSplit;
 
-        if (input.startsWith("//")) {
-            int start = input.indexOf("\\n");
-            if (start == -1) throw new IllegalArgumentException("잘못된 입력입니다: " + input);
-            String delimiter = input.substring(2, start);
-            String num = input.substring(start + 2);
-            inputSplit = num.split(delimiter);
+        try {
+            int sum = calculate(input);
+            System.out.println("결과 : " + sum);
+        } catch (IllegalArgumentException e) {
+            throw e;
         }
-        else inputSplit = input.split(",|:");
+    }
 
-        if (!input.isEmpty())
-            for (int i = 0; i < inputSplit.length; i++) {
-                int num = 0;
-                if (isNumber(inputSplit[i])) num = Integer.parseInt(inputSplit[i]);
-                if (num < 0) throw new IllegalArgumentException("잘못된 입력입니다: " + num);
-                sum += num;
-            }
+    private int calculate(String input) {
+        if (input.isEmpty()) return 0;
 
-        System.out.println("결과 : " + sum);
+        String[] inputSplit = splitStr(input);
+        return sumNumber(inputSplit);
+    }
+
+    private String[] splitStr(String str) {
+        String delimiter = ",|:";
+        if (str.startsWith("//")) {
+            int start = str.indexOf("\\n");
+            if (start == -1)
+                throw new IllegalArgumentException("잘못된 입력입니다: " + str);
+            str = str.substring(start + 2);
+        }
+
+        return str.split(delimiter);
+    }
+
+    private int sumNumber(String[] str) {
+        int sum = 0;
+        int num = 0;
+
+        for (String s : str) {
+            if (isNumber(s)) num = Integer.parseInt(s);
+            if (num < 0)
+                throw new IllegalArgumentException("잘못된 입력입니다: " + num);
+            sum += num;
+        }
+
+        return sum;
     }
 
     private boolean isNumber(String str) {
