@@ -67,6 +67,6 @@ public abstract class Delimiter {
 
     public abstract boolean hasCustomDelimiter(String s);
 
-    protected abstract void addDelimiter(String delimiter);
+    protected abstract String addDelimiter(String delimiter);
 
 }

@@ -10,6 +10,9 @@ import java.util.regex.Pattern;
 public class CustomDelimiter extends Delimiter {
 
     private static final String REGEX = "//(.*?)(\\\\n)";
+    private static final String REGEX2 = "(" + REGEX + ")";
+    private static final String DOUBLE_SLASH = "//";
+    private static final String NEW_LINE = "\\n";
 
     private Pattern pattern = Pattern.compile(REGEX);
 
@@ -19,28 +22,31 @@ public class CustomDelimiter extends Delimiter {
 
     @Override
     public boolean hasCustomDelimiter(String s) {
-        return s.contains("//") && s.contains("\\n");
+        return s.contains(DOUBLE_SLASH) && s.contains(NEW_LINE);
     }
 
     @Override
-    protected void addDelimiter(String s) {
+    protected String addDelimiter(String s) {
         Matcher matcher = pattern.matcher(s);
+
         while (matcher.find()) {
             String group = matcher.group(1);
 
-            if (group != null) {
-                delimiters.add(group.trim());
+            if (!isNull(s)) {
+                delimiters.add(isDelimiterRightThenTrim(group));
+                s = removeCustomDelimiter(s);
             }
 
         }
+
+        return s;
     }
 
     @Override
     public List<String> divideCharacter(String s) {
 
         if (hasCustomDelimiter(s)) {
-            addDelimiter(s);
-            s = s.substring(s.lastIndexOf("\\n") + 2);
+            s = addDelimiter(s);
         }
 
         List<String> result = divideByDelimiter(s);
@@ -61,5 +67,28 @@ public class CustomDelimiter extends Delimiter {
 
     private String makeRegexByDelimiter() {
         return String.join("|", delimiters);
+    }
+
+    private String isDelimiterRightThenTrim(String delimiter) {
+        delimiter = delimiter.trim();
+
+        if (hasCustomDelimiter(delimiter)) {
+            CalculatorException.causeException("잘못된 커스텀 구분자입니다.");
+        }
+
+        return delimiter;
+    }
+
+    private String removeCustomDelimiter(String s) {
+        Matcher matcher = Pattern.compile(REGEX2).matcher(s);
+
+        if (matcher.find()) {
+            s = s.replace(matcher.group(1), "");
+        }
+        return s;
+    }
+
+    private boolean isNull(String s) {
+        return s == null;
     }
 }

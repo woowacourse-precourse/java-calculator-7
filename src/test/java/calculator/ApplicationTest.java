@@ -47,10 +47,20 @@ class ApplicationTest extends NsTest {
     @DisplayName("커스텀 구분자 테스트")
     void CustomDelimiterTest() {
         assertAll(
-                //`//` `\n` 사이에 있는 문자의 경우 커스텀 구분자로 사용한다.
+                // `//` `\n` 사이에 있는 문자의 경우 커스텀 구분자로 사용한다.
                 () -> assertSimpleTest(() -> {
                     run("//;\\n1;2;3");
                     assertThat(output()).contains("6");
+                }),
+
+                // `//`로 시작해서 `\n`로 닫히지 않고 안의 문자열에 `//`와 `\n`이 포함 되어있는 경우
+                // `IllegalArgumentException`을 발생시킨다.
+                () -> assertThatThrownBy(() -> run("////;\\n3\\n"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage("잘못된 문자가 들어있습니다."),
+                () -> assertSimpleTest(() -> {
+                    run("////;3\\n");
+                    assertThat(output()).contains("0");
                 })
         );
     }
