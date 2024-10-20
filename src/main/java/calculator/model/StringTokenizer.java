@@ -1,33 +1,33 @@
 package calculator.model;
 
+import calculator.validator.Validator;
+
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 public class StringTokenizer implements Tokenizer {
     private final StringBuilder delimiters;
+    private final Validator validator;
 
-    public StringTokenizer(StringBuilder delimiters) {
+    public StringTokenizer(StringBuilder delimiters, Validator validator) {
         this.delimiters = delimiters;
+        this.validator = validator;
         addDelimiter(",");
         addDelimiter(":");
     }
 
     private void addDelimiter(String delimiter) {
-        if (isSpecialDelimiter(delimiter)) {
+        if (validator.isSpecialDelimiter(delimiter)) {
             delimiters.append("\\");
         }
 
         delimiters.append(delimiter);
-        delimiters.append("|");
     }
 
-    @Override
-    public List<String> tokenize(String input) {
+    private List<String> tokenize(String input) {
         String string = input;
 
-        if (customDelimiterContains(string)) {
+        if (validator.customDelimiterContains(string)) {
             string = addCustomDelimiter(string);
         }
 
@@ -41,24 +41,28 @@ public class StringTokenizer implements Tokenizer {
         return stringList;
     }
 
+    @Override
+    public List<Integer> InputString2IntegerList(String input) {
+        if(input.isBlank()) {
+            return List.of(0);
+        }
+
+        List<String> inputList = tokenize(input);
+        List<Integer> list = inputList.stream()
+                .map(Integer::valueOf)
+                .toList();
+
+        if(validator.hasNegativeValue(list)) {
+            return list;
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
     private String addCustomDelimiter(String input) {
         String[] split = input.split("//|\\\\n");
         addDelimiter(split[1]);
 
         return split[2];
-    }
-
-    private boolean customDelimiterContains(String input) {
-        return input.startsWith("//");
-    }
-
-    private boolean isSpecialDelimiter(String string) {
-        if (string.equals("\"") || string.equals("\'") || string.equals("\\") || string.equals("(") ||
-                string.equals(")") || string.equals("[") || string.equals("]") || string.equals("}") ||
-                string.equals("{") || string.equals("?") || string.equals("*") || string.equals("|")) {
-            return true;
-        }
-
-        return false;
     }
 }
