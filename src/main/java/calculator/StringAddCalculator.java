@@ -26,4 +26,15 @@ public class StringAddCalculator {
     private int StringToInt(String value) {
         return Integer.parseInt(value);
     }
+
+    private int calculateSum(String[] values) {
+        int sum = 0;
+        for (String value : values) {
+            if (StringToInt(value) < 0) {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            }
+            sum += StringToInt(value);
+        }
+        return sum;
+    }
 }
