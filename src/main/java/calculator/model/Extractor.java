@@ -22,9 +22,18 @@ public class Extractor {
                         throw new CustomException(ErrorCode.MISSING_CUSTOM_DELIMITER_END);
                     }
                     String customDelimiter = str.substring(delimiterStart, delimiterEnd);
+                    validateCustomDelimiter(customDelimiter);
                     return customDelimiter;
                 });
     }
+
+    // 커스텀 구분자로 숫자가 추가된 경우 예외처리
+    private void validateCustomDelimiter(String delimiter) {
+        if (delimiter.chars().anyMatch(Character::isDigit)) {
+            throw new CustomException(ErrorCode.MISSING_CUSTOM_DELIMITER_END);
+        }
+    }
+
     }
 
 }
