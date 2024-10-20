@@ -1,7 +1,11 @@
 package calculator;
-
+import calculator.global.GlobalConstant;
+import calculator.view.InputView;
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        GlobalConstant.StartIndex = 0;
+        InputView input_view = new InputView();
     }
 }
+
+
