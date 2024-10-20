@@ -88,16 +88,21 @@ public class Application {
      * @param input   원본 입력 문자열
      */
     private static void validateInput(String[] numbers, String input) {
+        // 공백이 포함된 경우 확인
+        if (input.contains(" ")) {
+            throw new IllegalArgumentException("입력에 공백이 포함될 수 없습니다.");
+        }
+        
         // 입력이 '//'로 시작하지 않고 숫자로 시작하지 않으면 예외 발생
-        if (!input.startsWith("//") || !input.matches("^[0-9].*")) {
+        if (!input.startsWith("//") && !Character.isDigit(input.charAt(0))) {
             throw new IllegalArgumentException("입력은 '//'로 시작하거나 숫자로 시작해야 합니다.");
         }
 
         // 입력이 숫자로 끝나지 않으면 예외 발생
-        if (!input.matches(".*\\d$")) {
+        if (!Character.isDigit(input.charAt(input.length() - 1))) {
             throw new IllegalArgumentException("입력은 숫자로 끝나야 합니다.");
         }
-        
+
         for (String number : numbers) {
             if (number.isEmpty()) { // 구분자가 연속으로 나오는 경우
                 throw new IllegalArgumentException("연속된 구분자는 허용되지 않습니다.");
