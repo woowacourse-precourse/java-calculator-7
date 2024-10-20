@@ -4,14 +4,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static calculator.Message.Message.ERROR_MESSAGE;
+import static calculator.Message.Message.*;
 
 public class CalculatorService {
     List<String> separatorList = new ArrayList<>();
     List<String> numberList = new ArrayList<>();
-    int sum = 0;
+    Long sum;
 
     public void calculateSum(String formula, String customSeparator) {
+        separatorList.clear();
+        numberList.clear();
+        sum = 0L;
+
         // 구분자 설정
         separatorList.add(",");
         separatorList.add(":");
@@ -52,11 +56,13 @@ public class CalculatorService {
 
     public void addNumbers() {
         for (String number : numberList) {
-            sum += Integer.parseInt(number);
+            if (number.isEmpty())
+                continue;
+            sum += Long.parseLong(number);
         }
     }
 
-    public int getSum() {
+    public Long getSum() {
         return sum;
     }
 }

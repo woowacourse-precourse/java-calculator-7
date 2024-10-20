@@ -5,9 +5,12 @@ import static calculator.Message.Message.INPUT_MESSAGE;
 
 public class InputService {
     private String formula;
-    private String customSeparator = null;
+    private String customSeparator;
 
     public void getInput() {
+        formula = null;
+        customSeparator = null;
+
         // 덧셈할 문자열 입력 받기
         readFormula();
 

@@ -19,6 +19,15 @@ public class InputTest extends NsTest {
         });
     }
 
+    @Test
+    @DisplayName("구분자만 입력되는 케이스")
+    void onlySeparator() {
+        assertSimpleTest(() -> {
+            run(",,:,::");
+            assertThat(output()).contains(OUTPUT_MESSAGE + "0");
+        });
+    }
+
     @Override
     protected void runMain() {
         Application.main(new String[]{});
