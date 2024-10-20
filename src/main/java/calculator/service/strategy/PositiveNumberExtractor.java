@@ -4,6 +4,7 @@ import static calculator.model.RegularExpression.NUMBER_LINE;
 
 import calculator.model.CustomDelimiter;
 import calculator.model.PositiveNumber;
+import calculator.validator.ValidationUtils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,9 +31,9 @@ public class PositiveNumberExtractor {
 
     private String getPositiveNumberLine(String inputString) {
         Pattern pattern = Pattern.compile(NUMBER_LINE.getRegularExpression());
-        Matcher delimiter = pattern.matcher(inputString);
-        CalculationNumberFormatValidator.validate(delimiter);
-        return delimiter.group(2);
+        Matcher numberLineMatcher = pattern.matcher(inputString);
+        ValidationUtils.validateNumberLineExist(numberLineMatcher);
+        return numberLineMatcher.group(2);
     }
 
     private PositiveNumber createPositiveNumber(String[] positiveNumberString) {

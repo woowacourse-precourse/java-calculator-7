@@ -35,4 +35,10 @@ public class ValidationUtils {
             }
         }
     }
+
+    public static void validateNumberLineExist(Matcher numberLineMatcher) {
+        if (!numberLineMatcher.find()) {
+            throw new IllegalArgumentException("숫자 라인이 입력되지 않았습니다.");
+        }
+    }
 }
