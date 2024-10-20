@@ -24,4 +24,12 @@ public class CustomDelimiterProcessorTest {
                 customDelimiterProcessor.addCustomDelimiters("/%$\\n5,3", delimiters))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 커스텀_구분자_포맷_예외_2() {
+        assertThatThrownBy(() ->
+                customDelimiterProcessor.addCustomDelimiters("//$\\%5,3", delimiters))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 }
