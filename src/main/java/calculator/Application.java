@@ -82,7 +82,7 @@ public class Application {
 
     // 숫자만 더하는 메서드
     public static int StringCalculator(String input) {
-        if (input.isEmpty()) // 빈문자열 입력 시 0을 출력한다.
+        if (input.isEmpty()||input==null) // 빈문자열 입력 시 0을 출력한다.
             return 0;
         int sum = 0;
 
