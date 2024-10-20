@@ -91,6 +91,8 @@ class StringCalculatorTest {
                 new Object[]{"//^\\n1:2*3",6},
                 new Object[]{"//,\\n1:2,3",6},
                 new Object[]{"//:\\n1:2,3",6},
+                new Object[]{"//#\\n//#\\n1",1},
+                new Object[]{"//#\\n//#\\n",0},
 
                 new Object[]{"\\:\\n1:2,3",6},
 

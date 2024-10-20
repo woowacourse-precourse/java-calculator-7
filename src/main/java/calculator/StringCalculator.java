@@ -8,7 +8,7 @@ import java.util.Optional;
 public class StringCalculator {
     private final String defaultRegex = "[:,]";
     private String customRegex;
-    private final String isPositiveNumberRegex = "^[^0]\\d*";
+    private final String isPositiveNumberRegex = "^[^0-]\\d*";
 
     public void run() {
         System.out.print("덧셈할 문자열을 입력해 주세요. ");
