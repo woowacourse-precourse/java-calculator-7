@@ -19,9 +19,9 @@ public class Application {
     // 입력값 검증
     public static void isValid(String input){
         if(input.isEmpty()){
-            System.out.println(0);
             return;
         }
+        if(input.contains("-")) throw new IllegalArgumentException();
         if((input.charAt(0) == '/' && input.length() < 5)) {
             throw new IllegalArgumentException("Input is not valid.");
         }
