@@ -95,10 +95,15 @@ public class Application {
         Pattern pattern2 = Pattern.compile(startError);
         Matcher matcher2 = pattern2.matcher(inputString);
 
-        if (matcher1.find()) {
+        // 숫자로 끝나지 않으면 오류
+        String endError = "[0-9]$";
+        Pattern pattern3 = Pattern.compile(endError);
+        Matcher matcher3 = pattern3.matcher(inputString);
+
+        if (matcher1.find()) { // 특수구분자와 '-'기호를 제외한 알파벳과 특수 기호 시 에러
             throw new IllegalArgumentException();
         }
-        if (matcher2.find() == false) {
+        if (matcher2.find() == false || matcher3.find() == false) { // 숫자로 시작하지 않으면 에러 or 숫자로 끝나지 않으면 에러
             throw new IllegalArgumentException();
         }
     }
