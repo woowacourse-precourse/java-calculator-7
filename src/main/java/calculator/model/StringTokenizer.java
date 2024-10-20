@@ -41,20 +41,17 @@ public class StringTokenizer implements Tokenizer {
 
     @Override
     public List<Integer> InputString2IntegerList(String input) {
-        if(input.isBlank()) {
+        if(input.isBlank() || input.isEmpty()) {
             return List.of(0);
         }
 
-        List<String> inputList = tokenize(input);
-        List<Integer> list = inputList.stream()
+        List<String> stringList = tokenize(input);
+
+        InputValidatorUtils.isInvalidInput(stringList);
+
+        return stringList.stream()
                 .map(Integer::valueOf)
                 .toList();
-
-        if(InputValidatorUtils.hasNegativeValue(list)) {
-            return list;
-        } else {
-            throw new IllegalArgumentException();
-        }
     }
 
     private String addCustomDelimiter(String input) {
