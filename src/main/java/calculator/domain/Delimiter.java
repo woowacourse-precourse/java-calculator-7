@@ -33,7 +33,7 @@ public class Delimiter {
 
     private void setDelimiter(String customDelimeters) {
         for (char customDelimiter : customDelimeters.toCharArray()) {
-            delimiter.add(customDelimiter);  // 커스텀 구분자 추가
+            delimiter.add(customDelimiter);
         }
     }
 
@@ -43,12 +43,13 @@ public class Delimiter {
 
         for (int i = 0; i < delimiter.size(); i++) {
             if (i > 0) {
-                regexBuilder.append("|");  // 구분자 사이에 "|" 추가
+                regexBuilder.append("|");
             }
-            regexBuilder.append(String.valueOf(delimiter.get(i)));
+            String escapedDelimiter = Pattern.quote(String.valueOf(delimiter.get(i)));
+            regexBuilder.append(escapedDelimiter);
         }
 
-        return regexBuilder.toString();  // 최종 정규표현식 반환
+        return regexBuilder.toString();
     }
 
 }
