@@ -6,8 +6,6 @@ import java.util.List;
 public class DelimiterService {
     private List<String> delimiters = new ArrayList<>();
     private String input;
-    private String delimiterRegex;
-
 
     //Generator: 기본 구분자 추가
     public DelimiterService(String input) {
@@ -16,12 +14,9 @@ public class DelimiterService {
         delimiters.add(":");
     }
 
-    //isNumberString(): true일 때 커스텀 구별자가 모두 끝난 것
+    //isDelimStarting(): true일 때 커스텀 구별자가 모두 끝난 것
     protected boolean isDelimStarting(){
-        if (input.startsWith("//")){
-            return true;
-        }
-            return false;
+        return input.startsWith("//");
     }
 
     //addDelimiter(): 문자열에서 커스텀 구분자를 분리 -> 구분자 리스트에 추가, userInput 잘라서 초기화
@@ -34,11 +29,17 @@ public class DelimiterService {
         }
 
         String customDelimiter = input.substring(2, endDelimIndex);
+
+        // 구분자가 숫자일 때 예외처리
+        if(isNumberic(customDelimiter)){
+            throw new IllegalArgumentException("잘못된 구분자 형식입니다. 숫자는 구분자가 될 수 없습니다.");
+        }
+
         delimiters.add(customDelimiter);
         input = input.substring(endDelimIndex + 2);
     }
 
-    //replacePatterQ(): 정규식 패턴 문자가 구분자로 입력될 때 backslash 더함
+    //replacePattern(): 정규식 패턴 문자가 구분자로 입력될 때 backslash 더함
     protected void replacePattern() {
         delimiters.replaceAll(delim -> {
             String patterns = "\\ ( [ { ^ $ . * + ? | ₩ x X";
@@ -50,12 +51,7 @@ public class DelimiterService {
         });
     }
 
-    //getDelimTotal(): 연산자 모두 합쳐서 String 정규식으로 만들기
-    private void getDelimTotal() {
-
-    }
-
-    //getDelimiters()
+    //getDelimiters(): 구분자 List를 정규식 형태의 하나의 문자열로 바꾼다
     protected String getDelimiters() {
         StringBuilder delimiterRegex = new StringBuilder();
 
@@ -69,8 +65,19 @@ public class DelimiterService {
         return delimiterRegex.toString();
     }
 
-    public String getInput() {
+    //getInput(): 숫자만 남은 문자열을 반환
+    protected String getInput() {
         return input.trim();
+    }
+
+    //isNumberic(): 구분자 중 숫자가 있는지 확인 - addDelimiter()에서 사용
+    private boolean isNumberic(String str) {
+        try {
+            Double.parseDouble(str);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
     }
 }
 

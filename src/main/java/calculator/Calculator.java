@@ -2,7 +2,6 @@ package calculator;
 
 public class Calculator implements AutoCloseable{
     private String input;
-    private int sum;
 
     //Generator: 기본 구분자 추가
     public Calculator(String input) {
@@ -12,15 +11,15 @@ public class Calculator implements AutoCloseable{
     //process() : 구분자 처리, 숫자만 남은 문자열 처리, 합 계산 과정
     public void process() {
         DelimiterService delimiterService = new DelimiterService(input);
+
         while(delimiterService.isDelimStarting()) {
             delimiterService.addDelimiter();
         }
-
         delimiterService.replacePattern();
 
         input = delimiterService.getInput();
         if(input.isEmpty()) {
-            sum = 0;
+            int sum = 0;
             return;
         }
 
