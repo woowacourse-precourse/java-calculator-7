@@ -19,10 +19,10 @@ class ExtractServiceUnitTest {
         List<String> numberStrings = List.of("1", "12", "123");
 
         // when
-        List<Integer> result = extractService.extractNumbers(numberStrings);
+        List<Long> result = extractService.extractNumbers(numberStrings);
 
         // then
-        List<Integer> expected = List.of(1, 12, 123);
+        List<Long> expected = List.of(1L, 12L, 123L);
         assertThat(result).isEqualTo(expected);
     }
 
@@ -33,7 +33,7 @@ class ExtractServiceUnitTest {
         List<String> numberStrings = List.of("1");
 
         // when
-        List<Integer> result = extractService.extractNumbers(numberStrings);
+        List<Long> result = extractService.extractNumbers(numberStrings);
 
         // then
         assertThat(result.size()).isOne();
@@ -46,7 +46,7 @@ class ExtractServiceUnitTest {
         List<String> numberStrings = List.of();
 
         // when
-        List<Integer> result = extractService.extractNumbers(numberStrings);
+        List<Long> result = extractService.extractNumbers(numberStrings);
 
         // then
         assertThat(result.size()).isZero();
@@ -72,6 +72,21 @@ class ExtractServiceUnitTest {
         // when, then
         assertThatThrownBy(() -> extractService.extractNumbers(numberStrings))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("int 최댓값의 문자열 입력이 주어질 경우, 정수로 추출된 정보를 반환한다.")
+    void givenMaxIntegerList_whenExtractNumbers_thenReturnNumberList() {
+        // given
+        long maxValue = Integer.MAX_VALUE;
+        List<String> numberStrings = List.of(String.valueOf(maxValue), String.valueOf(maxValue));
+
+        // when
+        List<Long> result = extractService.extractNumbers(numberStrings);
+
+        // then
+        List<Long> expected = List.of(maxValue, maxValue);
+        assertThat(result).isEqualTo(expected);
     }
 
 }

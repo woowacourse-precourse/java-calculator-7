@@ -6,8 +6,8 @@ import java.util.List;
 public class FakeExtractService implements ExtractService {
 
     @Override
-    public List<Integer> extractNumbers(List<String> data) {
-        return List.of(1, 2, 3);
+    public List<Long> extractNumbers(List<String> data) {
+        return List.of(1L, 2L, 3L);
     }
 
 }

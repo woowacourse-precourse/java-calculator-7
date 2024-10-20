@@ -1,5 +1,6 @@
 package calculator.application;
 
+import calculator.domain.Calculator;
 import java.util.List;
 
 public class CalculateService {
@@ -15,12 +16,11 @@ public class CalculateService {
         this.extractService = extractService;
     }
 
-    public int splitAndSum(String command) {
+    public long splitAndSum(String command) {
         List<String> separated = separatorService.separate(command);
+        List<Long> numbers = extractService.extractNumbers(separated);
 
-        return extractService.extractNumbers(separated)
-                .stream()
-                .reduce(0, Integer::sum);
+        return new Calculator().sum(numbers);
     }
 
 }

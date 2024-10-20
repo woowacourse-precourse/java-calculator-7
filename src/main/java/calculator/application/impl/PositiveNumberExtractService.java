@@ -7,15 +7,15 @@ import java.util.List;
 public class PositiveNumberExtractService implements ExtractService {
 
     @Override
-    public List<Integer> extractNumbers(List<String> data) {
+    public List<Long> extractNumbers(List<String> data) {
         return data.stream()
                 .map(this::parseNumber)
                 .toList();
     }
 
-    private Integer parseNumber(String data) {
+    private Long parseNumber(String data) {
         validateNumber(data);
-        return Integer.valueOf(data);
+        return Long.valueOf(data);
     }
 
     private void validateNumber(String data) {

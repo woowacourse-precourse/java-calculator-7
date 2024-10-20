@@ -22,7 +22,7 @@ public class CalculatorController {
 
     public void stringAdditionCalculate() {
         String command = calculatorInputView.splitAndSumInput();
-        int result = calculateService.splitAndSum(command);
+        long result = calculateService.splitAndSum(command);
         calculatorOutputView.splitAndSumOutput(result);
     }
 

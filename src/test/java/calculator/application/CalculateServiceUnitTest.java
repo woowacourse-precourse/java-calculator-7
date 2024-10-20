@@ -16,7 +16,7 @@ class CalculateServiceUnitTest {
         String any = "";
 
         // when
-        int result = calculateService.splitAndSum(any);
+        long result = calculateService.splitAndSum(any);
 
         // then
         assertThat(result).isEqualTo(6);

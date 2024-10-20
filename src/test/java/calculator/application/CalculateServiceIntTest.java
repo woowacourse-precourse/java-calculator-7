@@ -22,7 +22,7 @@ class CalculateServiceIntTest {
         String command = "1,2:3";
 
         // when
-        int sum = calculateService.splitAndSum(command);
+        long sum = calculateService.splitAndSum(command);
 
         // then
         assertThat(sum).isEqualTo(6);

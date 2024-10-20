@@ -1,52 +1,54 @@
-/*
 package calculator.domain;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import calculator.fake.FakeCalculatorPrompt;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class CalculatorTest {
 
+    Calculator calculator = new Calculator();
 
     @Test
     @DisplayName("빈 문자열 입력일 경우, 0을 반환한다.")
-    void givenHadEmptyString_whenSum_thenReturnZero() {
+    void givenEmptyList_whenSum_thenReturnZero() {
         // given
-        Calculator calculator = new Calculator(new FakeCalculatorPrompt(""));
+        List<Long> numbers = List.of();
 
         // when, then
-        int sum = calculator.sum();
+        long sum = calculator.sum(numbers);
 
         // then
         assertThat(sum).isZero();
     }
 
     @Test
-    @DisplayName("올바른 숫자 정보가 입력되는 경우, 합을 반환한다.")
-    void givenAnyInput_whenSum_thenReturnSumOfNumbers() {
+    @DisplayName("숫자 리스트가 주어질 경우, 합을 반환한다.")
+    void givenNumbers_whenSum_thenReturnSumOfNumbers() {
         // given
-        Calculator calculator = new Calculator(new FakeCalculatorPrompt("any"));
+        List<Long> numbers = List.of(1L, 2L, 3L);
 
         // when, then
-        int sum = calculator.sum();
+        long sum = calculator.sum(numbers);
 
         // then
         assertThat(sum).isEqualTo(6);
     }
 
     @Test
-    @DisplayName("커스텀 구분자 입력이 주어질 경우, 숫자의 합을 반환한다.")
-    void givenCustomDelimiterInput_whenSum_thenReturnSumOfNumbers() {
+    @DisplayName("Int형 최대 정수 두 개가 주어질 경우, 합을 반환한다.")
+    void givenMaxIntegerNumbers_whenSum_thenReturnSumOfNumbers() {
         // given
-        Calculator calculator = new Calculator(new FakeCalculatorPrompt("custom"));
+        long number = Integer.MAX_VALUE;
+        List<Long> numbers = List.of(number, number);
 
         // when, then
-        int sum = calculator.sum();
+        long sum = calculator.sum(numbers);
 
         // then
-        assertThat(sum).isEqualTo(10);
+        long expected = number + number;
+        assertThat(sum).isEqualTo(expected);
     }
 
-}*/
+}
