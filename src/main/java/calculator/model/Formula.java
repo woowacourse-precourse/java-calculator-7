@@ -8,8 +8,8 @@ public class Formula {
 
     private final String formula;
     private final Validation validation = new Validation();
-    private final Pattern defaultPattern = Pattern.compile("[0-9:,]*");
-    private String customDelimiter = "";
+    private final String symbolPattern = "//|\\\\n|:|,|";
+    private boolean isCustom = false;
 
     public Formula(String formula) {
         this.formula = validate(formula);
@@ -26,17 +26,9 @@ public class Formula {
         throw new IllegalArgumentException();
     }
 
-    public boolean validateDelimiter(String formula) {
-        if (!defaultPattern.matcher(formula).matches() && !customPattern.matcher(formula).matches()) {
-            return false;
-        }
-        customDelimiter = extractCustomDelimiter(formula);
-        String customValidationPattern = "^//" + customDelimiter + "\\\\n[0-9:," + customDelimiter + "]*";
-        return Pattern.matches(customValidationPattern, formula);
-    }
-
-    public String extractCustomDelimiter(String formula) {
-        return formula.substring(2, 4);
+    public Integer calculate() {
+        return extractNumbers().stream()
+                .reduce(0, Integer::sum);
     }
 
     private List<Integer> extractNumbers() {
