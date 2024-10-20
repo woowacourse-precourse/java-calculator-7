@@ -3,12 +3,13 @@ package calculator.model;
 import java.util.ArrayList;
 
 public class Calculator {
-    public int numberCalculator(ArrayList<String> numbers) {
-        int sum = 0;
+    public String numberCalculator(ArrayList<String> numbers) {
+        String result = "";
+        long sum = 0;
         for (String number : numbers) {
-            int operandInt = Integer.parseInt(number);
-            sum += operandInt;
+            sum += Long.parseLong(number);
         }
-        return sum;
+        result = String.valueOf(sum);
+        return result;
     }
 }
