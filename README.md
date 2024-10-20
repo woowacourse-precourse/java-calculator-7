@@ -65,6 +65,7 @@
   - validateCustomDelimiterPattern()
   - validateDefaultDelimiterPattern()
   - validateUnregisteredDelimiter()
+  - isSingleNumberInput()
 - ResultPrinter
   - printResult()
 
