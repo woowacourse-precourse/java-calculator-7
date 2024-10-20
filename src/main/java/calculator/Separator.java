@@ -1,5 +1,8 @@
 package calculator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Separator {
     private String SEPARATOR = ",|:";
 
@@ -9,36 +12,22 @@ public class Separator {
 
     public String[] separate(String input, String separator) {
         String regex = separator;
-
-        if (isContainsCustomSeparatorSymbol(input)) {
-            int prefixIdx = input.indexOf(Constants.CUSTOM_SEPARATOR_PREFIX);
-            int suffixIdx = input.lastIndexOf(Constants.CUSTOM_SEPARATOR_SUFFIX);
-
-            String customSeparator = getCustomSeparator(input, suffixIdx);
-
-            input = deleteCustomSeparatorConvention(input, prefixIdx, suffixIdx);
-
-            regex = addCustomSeparator(regex, customSeparator);
-        }
-
         return input.split(regex);
-    }
-
-    public boolean isContainsCustomSeparatorSymbol(String input) {
-        return input.startsWith(Constants.CUSTOM_SEPARATOR_PREFIX) && input.contains(Constants.CUSTOM_SEPARATOR_SUFFIX);
-    }
-
-    public String getCustomSeparator(String input, int suffixIdx) {
-        return String.valueOf(input.charAt(suffixIdx - 1));
-    }
-
-    public String deleteCustomSeparatorConvention(String input, int prefixIdx, int suffixIdx) {
-        StringBuilder sb = new StringBuilder(input);
-        sb.delete(prefixIdx, suffixIdx + 2);
-        return sb.toString();
     }
 
     public String addCustomSeparator(String regex, String customSeparator) {
         return regex.concat("|" + customSeparator);
+    }
+
+    public String getSeparator(String input) {
+        String regex = SEPARATOR;
+        Matcher match = Pattern.compile(Constants.REGEX_CUSTOM_SEPARATOR_PATTERN).matcher(input);
+
+        while (match.find()) {
+            String customSeparator = match.group(1);
+            regex = addCustomSeparator(regex, customSeparator);
+        }
+
+        return regex;
     }
 }
