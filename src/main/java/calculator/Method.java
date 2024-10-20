@@ -15,6 +15,9 @@ public class Method {
 
         for (int i = 0; i < toArray.length; i++) {
             toArray[i] = toArray[i].replaceAll("[^0-9]", "");
+            if(toArray[i].isEmpty()){
+                throw new IllegalArgumentException();
+            }
         }
 
         return toArray;
