@@ -1,6 +1,13 @@
 # java-calculator-precourse
-# 기능 목록
 
+# Refactor 세부 사항
+1. Integer 형으로 반환
+2. 양수 덧셈 인지 후 0 보다 크게 설정
+3. Integer -> Long 타입으로 변환
+4. 부동소수점 로직 추가
+
+
+# 기능 목록
 - 예외사항
 - [x] //\n 사이에 아무 값도 없으면 에러
 - [x] //1\n 사이에 정수가 있으면 에러
@@ -9,6 +16,8 @@
 - [x] 커스텀 구분자 설정해서 다른 구분자가 있으면 에러
 - [x] 문자열 뒷부분에 //와 \n가 있으면 에러
 - [x] Long.MAX_VALUE 를 입력 하거나 합이 넘을 경우 에러
+
+
 
 # Requirements
 1. Default Separator = 쉼표(,), 콜론(:)
@@ -49,7 +58,11 @@
 4. SeparatorConvertorTest
    - [x] 구분자 추출 로직 테스트
    - [x] 숫자 생성 로직 테스트
+5. RegexPatternTest
+   - [x] DefaultSeparator
+   - [x] DefaultSeparatorDouble
+   - [x] CustomSeparator
+   - [x] CustomSeparatorDouble
+   - [x] Blank
 
-# 번외로 어떤 상황에도 유연하게 만들 수 있게 해보자 (제일 중요)]
-부동소수점을 만들어보자
 
