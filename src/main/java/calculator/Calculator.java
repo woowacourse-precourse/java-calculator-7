@@ -18,19 +18,30 @@ public class Calculator {
         if(input.startsWith("//")){
             String customSeparator = findCustomSeparator(input);
             String letters = input.substring(5);
+
             if (letters.length() == 1) {
                 System.out.println("결과 : " + letters);
                 return;
             }
-            if(customSeparator == null){
-                throw new IllegalArgumentException("ERROR : 구분자가 없습니다.");
+            if(letters.matches(".*[" +customSeparator + "]{2,}.*")){
+                throw new IllegalArgumentException("ERROR : 구분자를 연속으로 사용할 수 없습니다.");
             }
+            if(customSeparator == null){
+                throw new IllegalArgumentException("ERROR : 입력한 구분자를 확인해주세요.");
+            }
+
             tmp = letters.split(customSeparator);
+
         }else{
             String separator = "[,:]";
+
             if(!input.contains(",") && !input.contains(":")){
                 throw new IllegalArgumentException("ERROR : 계산할 수 없는 입력입니다.");
             }
+            if(input.matches(".*[,:]{2,}.*")){
+                throw new IllegalArgumentException("ERROR : 구분자를 연속으로 사용할 수 없습니다.");
+            }
+
             tmp = input.split(separator);
         }
 
@@ -41,10 +52,10 @@ public class Calculator {
     private static int sum(String[] tokens){
         int total = 0;
         for(String token : tokens){
-            String trimmedToken = token.trim();
-            if(!trimmedToken.matches("^[0-9]*$") ){
+            if(!token.matches("^[0-9]*$") || token.isBlank()){
                 throw new IllegalArgumentException("ERROR : 계산할 수 없는 입력입니다.");
             }
+            String trimmedToken = token.trim();
             int value = Integer.parseInt(trimmedToken);
             if (value < 0) {
                 throw new IllegalArgumentException("ERROR : 음수는 허용되지 않습니다.");
