@@ -24,6 +24,7 @@ public class Application {
             String customDelimiter = String.valueOf(input.charAt(2));
             customDelimiter = customDelimiter.replaceAll("([\\\\\\[\\]{}()*+?^$|.])", "\\\\$1");
             delimiter += "|" + customDelimiter;
+            input = input.substring(5);
         }
         String[] numbers = input.split(delimiter);
 
