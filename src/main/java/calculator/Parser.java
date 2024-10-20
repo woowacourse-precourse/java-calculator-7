@@ -15,7 +15,7 @@ public class Parser {
         String type = checkType(input);
 
         if (type.equals(CUSTOM)) {
-            Validation.checkCustomSeparator(input);
+            Validator.checkCustomSeparator(input);
         }
 
         String separators = getSeparator(input, type);
@@ -41,10 +41,10 @@ public class Parser {
         separators.add(":");
 
         if (type.equals(DEFAULT)) {
-            Validation.isCorrectInput(input);
+            Validator.isCorrectInput(input);
             return String.join("", separators);
         }
-        Validation.isCorrectCustomSeparatorForm(input);
+        Validator.isCorrectCustomSeparatorForm(input);
 
         addCustomSeparators(separators, input);
 
