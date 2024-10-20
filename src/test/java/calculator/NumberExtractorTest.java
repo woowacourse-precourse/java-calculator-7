@@ -10,6 +10,16 @@ import org.junit.jupiter.api.Test;
 public class NumberExtractorTest {
 
     @Test
+    void 추출한_수가_양수가_아니면_IllegalArgumentException_예외가_발생한다() {
+        String basicDelimiterRegex = ",|:";
+        String input = "0,1:-2";
+
+        NumberExtractor numberExtractor = new NumberExtractor(input);
+
+        assertThrows(IllegalArgumentException.class, () -> numberExtractor.validate(basicDelimiterRegex));
+    }
+
+    @Test
     void 문자열에_숫자가_없으면_0을_반환한다() {
         String basicDelimiterRegex = ",|:";
         String input = "";

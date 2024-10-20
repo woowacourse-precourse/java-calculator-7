@@ -29,4 +29,14 @@ public class NumberExtractor {
     private boolean hasNumber() {
         return !this.text.isBlank();
     }
+
+    public void validate(String regex) {
+        List<Double> numberLeft = extract(regex);
+        numberLeft
+                .forEach(number -> {
+                    if (number < 0) {
+                        throw new IllegalArgumentException("[" + number +"] 입력한 숫자가 0보다 작으면 안돼요.");
+                    }
+                });
+    }
 }
