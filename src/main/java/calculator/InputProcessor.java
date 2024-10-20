@@ -40,11 +40,11 @@ public class InputProcessor {
     private boolean isInputHasCustomDelim(String input) {
         if (input.charAt(0) == '/') {
             for (int i = 0; i < 2; i++) {
-                exceptionHandler.checkIncorrectDelimGenerateInput(input.charAt(i));
+                exceptionHandler.checkIncorrectCustomDelimGenerateInput(input.charAt(i));
             }
 
             for (int i = 3; i < 5; i++) {
-                exceptionHandler.checkIncorrectDelimGenerateInput(input.charAt(i));
+                exceptionHandler.checkIncorrectCustomDelimGenerateInput(input.charAt(i));
             }
 
             return true;

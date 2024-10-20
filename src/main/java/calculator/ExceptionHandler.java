@@ -15,7 +15,7 @@ public class ExceptionHandler {
         return instance;
     }
 
-    public void checkIncorrectDelimGenerateInput(char elem) {
+    public void checkIncorrectCustomDelimGenerateInput(char elem) {
         if (elem != '/' && elem != 'n' && elem != '\\') {
             throw new IllegalArgumentException(
                     "지정된 구분자인 쉼표와 콜론, 양의 정수, 커스텀 구분자를 지정하기 위한 슬래시와 역슬래시 그리고 n 이외에는 입력하실 수 없습니다.");
