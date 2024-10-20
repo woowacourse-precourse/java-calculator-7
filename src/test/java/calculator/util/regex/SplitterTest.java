@@ -2,6 +2,8 @@ package calculator.util.regex;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import calculator.domain.delimiter.Delimiter;
+import calculator.domain.delimiter.Delimiters;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,15 +12,15 @@ import org.junit.jupiter.api.Test;
 class SplitterTest {
 
     @Test
-    @DisplayName("주어진 정규식으로 문자열을 쪼갠다")
-    void 성공_정규식으로문자열쪼개기_주어진정규식() {
+    @DisplayName("구분자로 문자열을 쪼갠다")
+    void 성공_문자열쪼개기_주어진구분자() {
         // Given
         String input = "//!!\\n1!!2";
-        Regex regex = new Regex("//(.+?)\\\\n|\\Q,\\E|\\Q:\\E|\\Q!!\\E");
+        Delimiters delimiters = new Delimiters(List.of(new Delimiter("!!")));
         Splitter splitter = new Splitter();
 
         // When
-        List<String> splitInput = splitter.splitByDelimiters(input, regex);
+        List<String> splitInput = splitter.splitByDelimiters(input, delimiters);
 
         // Then
         assertThat(splitInput).containsAll(List.of("1", "2"));
