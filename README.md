@@ -5,7 +5,7 @@
   - [x] Controller : splitAndSum 메서드를 통해 model, view, validate 의 객체들을 연결해 줍니다.
 - [x] view
   - [x] InputView : userInput 메서드를 통해 사용자로 부터 문자열을 입력받습니다.
-  - [x] OutputView : printResult, printZeor 메서드를 통해 예외가 아닌 경우에 결과를 사용자에게 출력합니다.
+  - [x] OutputView : printResult, printZero 메서드를 통해 예외가 아닌 경우에 결과를 사용자에게 출력합니다.
 - [x] model
   - [x] Model : userInputSplit, calculateSum, stringToInt 메서드를 통해 사용자에게 받은 문자열을 가공합니다. 
 - [x] validate
