@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.exception.InvalidInputException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -24,7 +25,7 @@ public class DelimiterParser {
             String numbers = matcher.group(2);
             return split(numbers, customDelimiter);
         }
-        throw new IllegalArgumentException("잘못된 커스텀 구분자 형식입니다.");
+        throw new InvalidInputException("구분자가 잘못되었습니다. '//[구분자]\\n[숫자]' 형식을 따라야 합니다.");
     }
 
     private static List<String> parseWithDefaultDelimiters(String input) {

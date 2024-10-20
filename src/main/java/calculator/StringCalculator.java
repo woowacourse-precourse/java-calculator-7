@@ -19,12 +19,12 @@ public class StringCalculator {
 
         // Step 2: 커스텀 구분자 처리
         if (input.startsWith("//")) {
-            int delimiterIndex = input.indexOf("\\n");
+            int delimiterIndex = input.indexOf("\n");
             if (delimiterIndex == -1) {
-                throw new InvalidInputException("잘못된 구분자 형식입니다.");
+                throw new InvalidInputException("구분자가 잘못되었습니다. '//[구분자]\\n[숫자]' 형식을 따라야 합니다.");
             }
             delimiter = Pattern.quote(input.substring(2, delimiterIndex));
-            numbers = input.substring(delimiterIndex + 2);
+            numbers = input.substring(delimiterIndex + 1); // "\n" 바로 다음부터 가져옴
         }
 
         // Step 3: 숫자 추출 및 유효성 검사
@@ -43,7 +43,7 @@ public class StringCalculator {
                 }
                 parsedNumbers.add(number);
             } catch (NumberFormatException e) {
-                throw new InvalidInputException("숫자 이외의 값이 포함되었습니다.");
+                throw new InvalidInputException("숫자 이외의 값이 포함되었습니다: " + token);
             }
         }
 
