@@ -5,7 +5,12 @@ build/
 !**/src/main/**
 !**/src/test/**
 
-### STS ###
+### Gradle ###
+/.gradle/               # Gradle 캐시 폴더
+!/gradle/wrapper/       # Gradle Wrapper 유지 (필요할 수 있으므로)
+/gradle/wrapper/gradle-wrapper.properties # Wrapper 설정 파일 무시
+
+### STS (Spring Tool Suite) ###
 .apt_generated
 .classpath
 .factorypath
@@ -15,7 +20,7 @@ build/
 .sts4-cache
 
 ### IntelliJ IDEA ###
-.idea
+.idea/                 # IntelliJ IDEA 설정 폴더
 *.iws
 *.iml
 *.ipr
