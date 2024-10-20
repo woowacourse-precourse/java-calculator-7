@@ -33,4 +33,18 @@ public class CalculatorService {
         }
         return new String[]{rawInput};
     }
+
+    public String[] validateInput(String[] paredInput) {
+        for (String s : paredInput) {
+            try {
+                int num = Integer.parseInt(s);
+                if (num < 0) {
+                    throw new IllegalArgumentException("잘못된 입력값입니다.");
+                }
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("잘못된 입력값입니다.");
+            }
+        }
+        return paredInput;
+    }
 }

@@ -14,5 +14,6 @@ public class CalculatorController {
         calculatorService.printPrompt();
         String rawInput = calculatorService.input();
         String[] paredInput = calculatorService.parsingInput(rawInput);
+        String[] nums = calculatorService.validateInput(paredInput);
     }
 }
