@@ -10,9 +10,9 @@ public class Delimiters {
         delimiters.add(":");
         delimiters.add(",");
 
-        if (customDelimiter != null) {
-            String customDelimiterValue = customDelimiter.getValue();
-            delimiters.add(customDelimiterValue);
+        if (customDelimiter.isValueExist()) {
+            String value = customDelimiter.getValue();
+            delimiters.add(value);
         }
     }
 

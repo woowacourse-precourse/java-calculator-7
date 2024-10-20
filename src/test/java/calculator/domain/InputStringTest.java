@@ -31,7 +31,8 @@ class InputStringTest {
         CustomDelimiter result = inputString.extractCustomDelimiter();
 
         //then
-        assertThat(result).isNull();
+        assertThat(result.getValue())
+                .isNull();
     }
 
     @Test

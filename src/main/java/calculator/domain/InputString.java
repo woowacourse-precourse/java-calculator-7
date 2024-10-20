@@ -10,20 +10,20 @@ public class InputString {
     }
 
     public CustomDelimiter extractCustomDelimiter() {
-        if (!isValueHasCustomDelimiter()) {
-            return null;
+        String customDelimiter = null;
+        if (isValueHasCustomDelimiter()) {
+            customDelimiter = value.substring(getCustomPrefixLength(), getCustomSuffixBeginIndex());
         }
 
-        String customDelimiter = value.substring(getCustomPrefixLength(), getCustomSuffixIndex());
         return new CustomDelimiter(customDelimiter);
     }
 
     public CalculationString extractCalculationString() {
-        if (!isValueHasCustomDelimiter()) {
-            return new CalculationString(value);
+        String calculationString = value;
+        if (isValueHasCustomDelimiter()) {
+            calculationString = value.substring(getCalculationStringBeginIndex());
         }
 
-        String calculationString = value.substring(getCalculationStringIndex());
         return new CalculationString(calculationString);
     }
 
@@ -32,15 +32,15 @@ public class InputString {
                 && value.contains(CUSTOM_SUFFIX);
     }
 
-    private int getCalculationStringIndex() {
-        return getCustomSuffixIndex() + CUSTOM_SUFFIX.length();
+    private int getCalculationStringBeginIndex() {
+        return getCustomSuffixBeginIndex() + CUSTOM_SUFFIX.length();
     }
 
     private int getCustomPrefixLength() {
         return CUSTOM_PREFIX.length();
     }
 
-    private int getCustomSuffixIndex() {
+    private int getCustomSuffixBeginIndex() {
         return value.lastIndexOf(CUSTOM_SUFFIX);
     }
 }
