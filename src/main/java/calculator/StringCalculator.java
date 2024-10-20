@@ -34,7 +34,11 @@ public class StringCalculator {
         int sum = 0;
         try {
             for (String string : strings) {
-                sum += Integer.parseInt(string);
+                int number = Integer.parseInt(string);
+                if (number <= 0) {
+                    throw new IllegalArgumentException("양수가 아닌 숫자는 허용되지 않습니다.");
+                }
+                sum += number;
             }
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("문자를 숫자로 변환하는 과정에서 문제가 발생하였습니다.");

@@ -12,7 +12,6 @@ class StringCalculatorTest {
     void testBasicDelimiters() {
         assertThat(StringCalculator.calculate("1,2:3")).isEqualTo(6);
         assertThat(StringCalculator.calculate("2")).isEqualTo(2);
-        assertThat(StringCalculator.calculate("0,2:0")).isEqualTo(2);
         assertThat(StringCalculator.calculate("100,200:300")).isEqualTo(600);
     }
 
