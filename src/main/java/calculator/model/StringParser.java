@@ -41,12 +41,13 @@ public class StringParser {
 
     public String[] separateElements(String input) {    //  입력된 문자열에서 구분자를 기준으로 분리하는 메서드
         String delimiters = INITIAL_DELIMITER;
+        String expression = input;
         if (isCustomDelimiterUsed(input)) {
             String customDelimiterSubstring = input.substring(0, input.indexOf(CUSTOM_DELIMITER_SUFFIX) + 2);
             String customDelimiter = extractCustomDelimiter(customDelimiterSubstring);
             delimiters += "|" + customDelimiter;
+            expression = input.substring(input.indexOf(CUSTOM_DELIMITER_SUFFIX) + 2);
         }
-        String expression = input.substring(input.indexOf(CUSTOM_DELIMITER_SUFFIX) + 2);
         return expression.split(delimiters);
     }
 
