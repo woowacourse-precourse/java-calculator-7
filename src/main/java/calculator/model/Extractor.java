@@ -1,17 +1,28 @@
 package calculator.model;
 
+import calculator.global.CustomDelimiterIndex;
+import calculator.global.DefaultDelimiter;
+import calculator.global.DelimiterMarker;
+import calculator.global.MakeRegexDelimiter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Extractor {
 
-    private List<Character> delimiters = new ArrayList<>(Arrays.asList(',', ':'));
+    private List<Character> delimiters = new ArrayList<>(
+            Arrays.asList(DefaultDelimiter.COMMA.getKey(), DefaultDelimiter.COLON.getKey()));
     private boolean isCustomDelimiter = false;
 
     public void extractCustomDelimiter(String input) {
-        if (input.startsWith("//") && input.substring(3, 5).equals("\\n")) {
-            char delimiter = input.charAt(2);
+
+        if (input.startsWith(DelimiterMarker.PREFIX.getKey()) &&
+                input.substring(CustomDelimiterIndex.CUSTOM_DELIMITER_SUFFIX_START.getKey(),
+                                CustomDelimiterIndex.CUSTOM_DELIMITER_SUFFIX_END.getKey() + 1)
+                        .equals(DelimiterMarker.SUFFIX.getKey())
+        ) {
+
+            char delimiter = input.charAt(CustomDelimiterIndex.CUSTOM_DELIMITER_INDEX.getKey());
 
             isNumber(delimiter);
 
@@ -47,18 +58,18 @@ public class Extractor {
     //커스텀 구분자를 제거하는 메소드
     private String removeCustomDelimiter(String input) {
         if (isCustomDelimiter) {
-            input = input.substring(5);
+            input = input.substring(CustomDelimiterIndex.CUSTOM_DELIMITER_SUFFIX_END.getKey() + 1);
         }
         return input;
     }
 
     //구분자를 생성하는 메소드
     private String makeRegex() {
-        StringBuilder regex = new StringBuilder("[");
+        StringBuilder regex = new StringBuilder(MakeRegexDelimiter.OPEN_BRACKET.getKey());
         for (char delimiter : delimiters) {
-            regex.append("\\").append(delimiter);
+            regex.append(MakeRegexDelimiter.START.getKey()).append(delimiter);
         }
-        regex.append("]");
+        regex.append(MakeRegexDelimiter.CLOSE_BRACKET.getKey());
 
         return regex.toString();
     }
