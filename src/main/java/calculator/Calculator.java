@@ -11,9 +11,8 @@ public class Calculator {
         try {
             Input input = new Input(Console.readLine());
             String[] splitString = splitManager.splitString(input);
-
-            int sum = !splitString[0].isEmpty() ? sum(splitString) : 0;
-            System.out.println("결과 : " + sum);
+            int result = sum(splitString);
+            System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
@@ -22,7 +21,7 @@ public class Calculator {
     private int sum(String[] splitString) {
         int sum = 0;
         for (String str : splitString) {
-            sum += Integer.parseInt(str);
+            sum += str.isEmpty() ? 0 : Integer.parseInt(str);
         }
         return sum;
     }
