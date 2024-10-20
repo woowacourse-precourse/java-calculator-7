@@ -4,6 +4,7 @@ import calculator.controller.CalculatorController;
 import calculator.service.CalculatorService;
 import calculator.service.strategy.CalculationStrategy;
 import calculator.service.strategy.CalculationStrategySelector;
+import calculator.service.strategy.PatternMatcherUtil;
 import calculator.service.strategy.PositiveNumberExtractor;
 import calculator.service.strategy.SplitPatternGenerator;
 import calculator.service.strategy.customstrategy.CustomDelimiterExtractor;
@@ -35,7 +36,7 @@ public class CalculatorDependencyConfig {
     }
 
     private PositiveNumberExtractor positiveNumberExtractor() {
-        return new PositiveNumberExtractor(splitStringMaker());
+        return new PositiveNumberExtractor(splitStringMaker(), patternMatcherUtil());
     }
 
     private SplitPatternGenerator splitStringMaker() {
@@ -43,6 +44,10 @@ public class CalculatorDependencyConfig {
     }
 
     private CustomDelimiterExtractor customDelimiterListExtractor() {
-        return new CustomDelimiterExtractor();
+        return new CustomDelimiterExtractor(patternMatcherUtil());
+    }
+
+    private PatternMatcherUtil patternMatcherUtil() {
+        return new PatternMatcherUtil();
     }
 }

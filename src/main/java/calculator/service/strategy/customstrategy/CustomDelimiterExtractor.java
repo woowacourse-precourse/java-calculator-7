@@ -3,13 +3,18 @@ package calculator.service.strategy.customstrategy;
 import static calculator.model.RegularExpression.CUSTOM_LINE;
 
 import calculator.model.CustomDelimiter;
-import calculator.validator.ValidationUtils;
+import calculator.service.strategy.PatternMatcherUtil;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class CustomDelimiterExtractor {
+    private final PatternMatcherUtil patternMatcherUtil;
+
+    public CustomDelimiterExtractor(PatternMatcherUtil patternMatcherUtil) {
+        this.patternMatcherUtil = patternMatcherUtil;
+    }
+
     public CustomDelimiter extractCustomDelimiter(String inputString) {
         String customDelimiterString = extractCustomDelimiterToString(inputString);
         return CustomDelimiter.createCustomDelimiter(customDelimiterStringToList(customDelimiterString));
@@ -21,9 +26,6 @@ public class CustomDelimiterExtractor {
     }
 
     private String extractCustomDelimiterToString(String inputString) {
-        Pattern pattern = Pattern.compile(CUSTOM_LINE.getRegularExpression());
-        Matcher matcher = pattern.matcher(inputString);
-        ValidationUtils.validateCustomLineFormat(matcher);
-        return matcher.group(1);
+        return patternMatcherUtil.match(CUSTOM_LINE.getRegularExpression(), inputString);
     }
 }
