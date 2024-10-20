@@ -12,21 +12,31 @@ public class Application {
     public static void main(String[] args) {
         System.out.println(inputMessage);
 
-        String input = readLine();
+        String input = readLine().trim();
 
-        DividersAndNumberSequence dividersAndNumberSequence = getDividersAndNumberSequence(input);
-        dividersAndNumberSequence.updateNumberSequence();
+        if(input.equals("")) {
+
+        } else {
+            DividersAndNumberSequence dividersAndNumberSequence = getDividersAndNumberSequence(input);
+            dividersAndNumberSequence.updateNumberSequence();
+        }
     }
 
     public static DividersAndNumberSequence getDividersAndNumberSequence(String input) {
         String[] inputByEndSign = input.split(SignAndDivider.endSign);
         int customSignLength = inputByEndSign.length - 1;
 
-        String numberSequence = inputByEndSign[customSignLength];
+        String numberSequence = "";
         List<String> dividers = addDefaultDivider();
 
-        for (int i = 0; i < customSignLength; i++) {
+        for (int i = 0; i <= customSignLength; i++) {
             String token = inputByEndSign[i];
+
+            // 커스텀 구분자는 설정하고 숫자는 안 작성했을 경우를 대비
+            if(i == customSignLength && Character.isDigit(token.charAt(0))) {
+                numberSequence = token;
+                break;
+            }
 
             if (isValidCustomDivider(token)) {
                 dividers.add(token.substring(2));
@@ -46,6 +56,10 @@ public class Application {
     }
 
     public static boolean isValidCustomDivider(String token) {
+        if (token.length() < 2) {
+            throw new IllegalArgumentException();
+        }
+
         String tokenWithoutStartSign = token.substring(2);
         boolean isValid = token.startsWith("//") && !tokenWithoutStartSign.contains(SignAndDivider.startSign)
                 && !tokenWithoutStartSign.matches("[0-9]");
@@ -56,6 +70,5 @@ public class Application {
 
         return true;
     }
-
 }
 
