@@ -1,5 +1,6 @@
 package calculator.view;
 
+import calculator.validator.InputValidator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
@@ -8,6 +9,8 @@ public class InputView {
     }
 
     public static String inputCalculationString() {
-        return Console.readLine();
+        String input = Console.readLine();
+        InputValidator.validate(input);
+        return input;
     }
 }
