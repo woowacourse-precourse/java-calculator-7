@@ -15,8 +15,8 @@ public class CalculatorController {
     }
 
     public void run() {
-        InputRequest input = InputView.getInputRequest();
-        OutputResponse result = calculatorService.calculate(input);
-        OutputView.outputMessage(result);
+        InputRequest input = InputView.getInputRequest();           // 입력
+        OutputResponse result = calculatorService.calculate(input); // 계산
+        OutputView.outputMessage(result);                           // 출력
     }
 }
