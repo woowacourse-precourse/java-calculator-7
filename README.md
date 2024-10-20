@@ -22,9 +22,9 @@
 
 ### 학습할 목록
   - [ ] `Angular JS Git Commit Message Conventions` 정리
-    - 링크: 
+    - 링크: https://jolly-restaurant-d2f.notion.site/Angular-JS-Git-Convention-121b51098aa0818da6cfd307aa725501?pvs=4
   - [ ] 예외 처리에 대한 학습
-    - 링크: 
+    - 링크: https://jolly-restaurant-d2f.notion.site/Java-121b51098aa0805c8e2eeb4ba6992bfa?pvs=4
   - [ ] `Console 입력`에 대한 학습
     - 링크:
   - [ ] `String.split()` 메서드에 대한 인자와, 반환값 학습
