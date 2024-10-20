@@ -9,4 +9,8 @@ public class Application {
         String input = Console.readLine();
     }
 
+    private static boolean isCustomDelimiterDefined(String input) {
+        return input.startsWith("//") && (input.indexOf("\n") == input.indexOf("//") + 3);
+    }
+
 }
