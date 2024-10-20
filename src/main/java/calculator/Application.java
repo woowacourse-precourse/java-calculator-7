@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static camp.nextstep.edu.missionutils.Console.readLine;
+
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
@@ -20,6 +22,14 @@ class Calculator {
     Calculator(String input) {
         this.input = input;
         this.result = separatorLocator(input);
+    }
+
+    private static Calculator getCalculate() {
+        System.out.println(GET_STRING_MESSAGE);
+        String userInput = readLine();
+        separatorLocator(userInput);
+
+        return new Calculator(userInput);
     }
 
     private static int defaultSeparator(String input){
