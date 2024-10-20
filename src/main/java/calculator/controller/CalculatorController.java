@@ -14,9 +14,10 @@ public class CalculatorController {
     public int process() {
         String userInput = inputView.input();
 
-        if (userInput.equals("0")) {
+        if (userInput.isBlank()) {
             return 0;
         }
+
         UserString userString = new UserString(userInput);
         return userString.sum();
     }
