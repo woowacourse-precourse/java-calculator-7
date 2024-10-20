@@ -31,7 +31,9 @@ public class Extractor {
         }
     }
 
-    public void extractNumbers(String input, List<Long> numbers) {
+    public List<Long> extractNumbers(String input) {
+
+        List<Long> numbers = new ArrayList<>();
 
         input = removeCustomDelimiter(input);
 
@@ -47,6 +49,8 @@ public class Extractor {
                 numbers.add(number);
             }
         }
+
+        return numbers;
     }
 
     private void isNumber(char input) {

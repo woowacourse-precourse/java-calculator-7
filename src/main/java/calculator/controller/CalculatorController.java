@@ -4,8 +4,6 @@ import calculator.model.Calculator;
 import calculator.model.Extractor;
 import calculator.view.InputView;
 import calculator.view.OutputView;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class CalculatorController {
@@ -23,13 +21,12 @@ public class CalculatorController {
     }
 
     public void run() {
-        List<Long> numbers = new ArrayList<>();
 
         String input = inputView.read();
         inputView.close();
 
         extractor.extractCustomDelimiter(input);
-        extractor.extractNumbers(input, numbers);
+        List<Long> numbers = extractor.extractNumbers(input);
 
         long result = calculator.calculateSum(numbers);
 
