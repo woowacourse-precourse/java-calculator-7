@@ -31,7 +31,7 @@ public class CalculatorService {
                 sum+=number;
 
             }catch (NumberFormatException e){
-                throw new IllegalStateException("숫자를 입력해주세요.");
+                throw new IllegalStateException("구분자로[: 혹은 ,]와 숫자로만 입력해주세요:");
             }
         }
 
