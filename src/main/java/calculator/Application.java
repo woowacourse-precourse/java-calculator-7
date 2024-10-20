@@ -2,9 +2,8 @@ package calculator;
 
 import adder.Adder;
 import camp.nextstep.edu.missionutils.Console;
-import separator.Separator;
-
 import java.util.ArrayList;
+import separator.Separator;
 
 public class Application {
     public static void main(String[] args) {
@@ -16,7 +15,7 @@ public class Application {
 
         String calculatorFormula = input;
         // 구분자 추출
-        if(separator.validateCustomSeparatorForParsing(input)){
+        if (separator.validateCustomSeparatorForParsing(input)) {
             Character customSeparator = separator.parseCustomSeparator(input);
             separator.addNewSeparator(customSeparator);
 
@@ -25,14 +24,13 @@ public class Application {
 
         // 계산 시작
         ArrayList<String> parsedCalculatorFormula = adder.parseStringWithSeparators(calculatorFormula);
-        System.out.println("parsedCalculatorFormula = " + parsedCalculatorFormula);
 
-        if(!adder.isValidated(parsedCalculatorFormula)){
+        if (!adder.isValidated(parsedCalculatorFormula)) {
             throw new IllegalArgumentException();
         }
 
         ArrayList<Integer> numbers = adder.parseOnlyNumbers(parsedCalculatorFormula);
-        if(!adder.isAllPositiveInteger(numbers)){
+        if (!adder.isAllPositiveInteger(numbers)) {
             throw new IllegalArgumentException();
         }
 
