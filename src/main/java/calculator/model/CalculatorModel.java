@@ -15,6 +15,9 @@ public class CalculatorModel {
     private String input = "";
 
     private void extraDelimiter() {
+        if (input.length() < SECOND_END) {
+            return;
+        }
         if (!Objects.equals(input.substring(FIRST_START, FIRST_END), FIRST_DEL)) {
             return;
         }

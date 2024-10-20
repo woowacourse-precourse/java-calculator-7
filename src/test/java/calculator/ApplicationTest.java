@@ -57,9 +57,25 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 한글자_문자열() {
+        assertSimpleTest(() -> {
+            run("1");
+            assertThat(output()).contains("결과 : 1");
+        });
+    }
+
+    @Test
     void 구분자_위치_오류() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("1//;\\n1;2,3"))
+                .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 빈문자열_오류() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException(" "))
                 .isInstanceOf(IllegalArgumentException.class)
         );
     }
