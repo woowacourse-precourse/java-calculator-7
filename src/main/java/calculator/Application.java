@@ -1,10 +1,10 @@
 package calculator;
 
-import calculator.interfaces.CalculateRequest;
+import calculator.io.CalculatorIO;
 
 public class Application {
 
     public static void main(String[] args) {
-        CalculateRequest.add();
+        CalculatorIO.add();
     }
 }
