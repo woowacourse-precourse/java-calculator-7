@@ -9,12 +9,17 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
     @Test
-    void null_공백_테스트() {
+    void null_테스트() {
         assertSimpleTest(() -> {
             run("");
             assertThat(output()).contains("결과 : 0");
+        });
+    }
 
-            run(" ");
+    @Test
+    void 공백_테스트() {
+        assertSimpleTest(() -> {
+            run("    ");
             assertThat(output()).contains("결과 : 0");
         });
     }
