@@ -1,7 +1,6 @@
 package calculator;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,22 +11,17 @@ public class Application {
         // TODO: 프로그램 구현
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String inputString = readLine();
-        try {
-            // 결과 출력
-            System.out.printf("결과 : %d%n", createSeparator(inputString));
-        } catch (IllegalArgumentException e) {
-            // 예외 출력
-            System.err.println("예외 발생: " + e.getMessage());
-        }
+        System.out.printf("결과 : %d%n", createSeparator(inputString));
     }
 
     private static int createSeparator(String inputString){
         // 입력값이 없을 경우
-        if (inputString.length() == 0) {
+        int lenString = inputString.length();
+        if (lenString == 0) {
             return 0;
         }
 
-        // 정규표현식 생성 및 입력 값과 일치하는 부분 찾기
+        // 커스텀 구분자를 찾기 위한 정규표현식 생성
         Pattern pattern = Pattern.compile("//(.*?)\n");
         Matcher matcher = pattern.matcher(inputString.replace("\\n", "\n"));
 
@@ -36,35 +30,34 @@ public class Application {
         separatorList.add(":");
         separatorList.add(",");
 
-        // 커스텀 구분자 공백으로 대체 및 커스텀 구분자 추가
+        // 커스텀 구분자 ,로 대체 및 커스텀 구분자 추가
         while (matcher.find()) {
-            inputString = inputString.replace(matcher.group(0).replace("\n", "\\n"), " ");
+            inputString = inputString.replace(matcher.group(0).replace("\n", "\\n"), ",");
             separatorList.add(matcher.group(1));
         }
 
-        // 구분자를 공백으로 대체
+        // 모든 구분자를 ,로 대체
         for (String i : separatorList) {
-            inputString = inputString.replace(i, " ");
+            inputString = inputString.replace(i, ",");
         }
 
-        // 공백기준으로 배열 생성
-        String[] calArray = inputString.split(" ");
-
-        // 음수가 배열에 남아있는 경우 예외처리
+        // 음수가 문자열에 남아있는 경우 예외처리
         if (inputString.contains("-")) {
             throw new IllegalArgumentException("음수가 포함되어 있으면 안 됩니다.");
         }
 
-        // 0이 배열에 남아있는 경우 예외처리
-        boolean hasZero = Arrays.asList(calArray).contains("0");
-        if (hasZero) {
+        // 0이 문자열에 남아있는 경우 예외처리
+        if (inputString.matches(".*\\b0\\b.*")) {
             throw new IllegalArgumentException("0이 포함되어 있으면 안 됩니다.");
         }
+
+        // "," 기준으로 숫자 배열 만들기
+        String[] calArray = inputString.split(",");
 
         // 숫자들의 합
         int sumNumbers = 0;
 
-        // 구분자가 아닌 문자가 배열에 남아있는 경우 예외처리
+        // 구분자가 아닌 문자가 배열에 남아있는 경우 예외처리 및 숫자들의 합 계산
         for (String i : calArray) {
             for (char j : i.toCharArray()) {
                 if (!Character.isDigit(j)) {
@@ -75,7 +68,6 @@ public class Application {
                 sumNumbers += Integer.parseInt(i);
             }
         }
-
         return sumNumbers;
     }
 }
