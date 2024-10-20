@@ -62,7 +62,7 @@ public class Parser {
      * @return List 입력된 숫자 리스트
      */
     public List<Integer> parsePositiveIntegers(String input, Character customDelimiter) {
-        String integersAndDelimiters = null;
+        String integersAndDelimiters = input;
 
         // customDelimiter가 존재하는 경우 = //*\n이 존재하는 경우
         if (customDelimiter != null) {
@@ -71,7 +71,6 @@ public class Parser {
         }
 
         // customDelimiter가 존재하지 않는 경우 = 바로 숫자부터 시작하는 경우
-        integersAndDelimiters = input;
         List<Integer> integers = new ArrayList<>();
         try {
             String[] integerStrs = integersAndDelimiters.split(",|:");
