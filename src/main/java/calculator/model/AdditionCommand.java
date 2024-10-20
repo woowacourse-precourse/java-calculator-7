@@ -1,5 +1,7 @@
 package calculator.model;
 
+import calculator.util.NumberParser;
+
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,6 +10,7 @@ public class AdditionCommand {
     private static final String customDelimiterFormat = "^//.*\\\\n";
     private static final Pattern customDelimiterPattern = Pattern.compile("^//(.*)\\\\n");
     private final String customDelimiter;
+    private final NumberParser numberParser = new NumberParser();
     private Number[] numbers;
     public AdditionCommand(String input){
         validateInput(input);
@@ -15,11 +18,7 @@ public class AdditionCommand {
         if (!customDelimiter.isBlank()){
             input = removeCustomDelimiter(input);
         }
-        String[] strings = splitStrings(input, customDelimiter);
-        numbers = new Number[strings.length];
-        for (int i = 0; i< strings.length; i++){
-            numbers[i] = new Number(strings[i]);
-        }
+        numbers = numberParser.parse(input,customDelimiter);
     }
 
     public Double exec(){
