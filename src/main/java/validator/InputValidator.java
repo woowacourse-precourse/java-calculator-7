@@ -79,15 +79,19 @@ public class InputValidator {
 
     private static void checkMinusNumber(final char currentValue, final char beforeValue) {
         if (Character.isDigit(currentValue)) {
-            if (!isMinusDelimiter && MINUS_DELIMITER.equals(String.valueOf(beforeValue))) {
+            if (!checkPreviousMinusDelimiter(beforeValue)) {
                 throw new IllegalArgumentException(ENTER_POSITIVE_NUMBER.getMessage());
             }
         }
 
         if (MINUS_DELIMITER.equals(String.valueOf(currentValue))) {
-            if (isMinusDelimiter && MINUS_DELIMITER.equals(String.valueOf(beforeValue))) {
+            if (checkPreviousMinusDelimiter(beforeValue)) {
                 throw new IllegalArgumentException(ENTER_POSITIVE_NUMBER.getMessage());
             }
         }
+    }
+
+    private static boolean checkPreviousMinusDelimiter(final char beforeValue) {
+        return isMinusDelimiter && MINUS_DELIMITER.equals(String.valueOf(beforeValue));
     }
 }
