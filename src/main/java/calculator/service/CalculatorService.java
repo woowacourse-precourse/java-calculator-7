@@ -27,4 +27,14 @@ public class CalculatorService {
         String[] tokens = numbers.split(delimiter);
         return 0;
     }
+
+    public int sumNumbers(String[] tokens){
+        int sum = 0;
+
+        for(String token : tokens){
+            int number = Integer.parseInt(token);
+            sum += number;
+        }
+        return sum;
+    }
 }
