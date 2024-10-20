@@ -18,12 +18,22 @@ public class Deform {
     /**
      * 입력받는 문자열 내부 숫자들을 Integer 리스트에 담아서 반환. 입력 받는 문자열은 반드시 숫자와 구분자로만 이루어져야 함.
      */
-    public List<Integer> extractNumbers(String input, Character separator) {
+    public List<Integer> extractNumbers(String input) {
         ArrayList<Integer> numbers = new ArrayList<>();
 
-        for (String number : input.split(separator.toString())) {
-            numbers.add(Integer.parseInt(number));
+        List<Character> inputCharArr = strToCharArr(input);
+        for (int i = 0; i < inputCharArr.size(); i++) {
+            numbers.add(Character.getNumericValue(inputCharArr.get(i)));
         }
+
         return numbers;
+    }
+
+    List<Character> strToCharArr(String input) {
+        List<Character> charArr = new ArrayList<>();
+        for (int i = 0; i < input.length(); i += 2) {
+            charArr.add(input.charAt(i));
+        }
+        return charArr;
     }
 }

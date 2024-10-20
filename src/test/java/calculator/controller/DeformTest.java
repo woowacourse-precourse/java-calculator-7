@@ -23,12 +23,11 @@ class DeformTest {
     void extractNumbers() {
         //given
         String sampleString = "1;2;3";
-        char separator = ';';
 
         //when
         Deform deform = new Deform();
 
-        List<Integer> result = deform.extractNumbers(sampleString, separator);
+        List<Integer> result = deform.extractNumbers(sampleString);
 
         //then
         assertEquals(1, result.get(0));
