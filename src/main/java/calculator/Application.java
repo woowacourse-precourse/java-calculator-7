@@ -27,12 +27,12 @@ public class Application {
         }
 
         // 유효성 검사
-        if (!Character.isDigit(value.charAt(0)) && Character.isDigit(value.charAt(value.length() - 1))) {
+        if (!isValidInput(value)) {
             throw new IllegalArgumentException("잘못된 입력값입니다.");
         }
 
         // 계산 후 결과 반환
-        String delimiters = String.format("[%s,:]", customDelimiter);
+        String delimiters = String.format("[%s,:]", escapeRegex(customDelimiter));
         String[] numbers = value.split(delimiters);
         long result = 0;
         for (String number : numbers) {
@@ -42,4 +42,16 @@ public class Application {
         return result;
     }
 
+    // 입력 유효성 검사
+    private static boolean isValidInput(String value) {
+        return Character.isDigit(value.charAt(0)) && Character.isDigit(value.charAt(value.length() - 1));
+    }
+
+    // 정규식에서 메타문자 처리
+    private static String escapeRegex(char delimiter) {
+        if ("^$.|?*+[](){}".indexOf(delimiter) >= 0) {
+            return "\\" + delimiter;
+        }
+        return String.valueOf(delimiter);
+    }
 }
