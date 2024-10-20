@@ -22,6 +22,10 @@ public class UserInput {
         this.input=input;
     }
 
+    public int startCalculate(){
+        return Calculator.inputCalculate(input);
+    }
+
     private void validateNegative(String input) {
         Matcher matcher=NEGATIVE.matcher(input);
 

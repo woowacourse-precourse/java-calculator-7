@@ -7,6 +7,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class UserInputTest {
 
+
     @Test
     void 구분자가_숫자이면_예외_발생(){
         String input="//3\\n123";
