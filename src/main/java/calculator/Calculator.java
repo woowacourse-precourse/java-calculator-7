@@ -40,6 +40,9 @@ public class Calculator {
             }
         }
 
+        // 문자열 유효성 검사
+        validateInput(input, delimiter);
+
         return sumTokens(input, delimiter);
     }
 
@@ -48,13 +51,24 @@ public class Calculator {
         int sum = 0;
         for (String token : tokens) {
             if (!token.isEmpty()) {
-                int number = Integer.parseInt(token);
-                if (number < 0) {
-                    throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+                try {
+                    int number = Integer.parseInt(token);
+                    if (number < 0) {
+                        throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+                    }
+                    sum += number;
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("허용되지 않는 문자가 포함되어 있습니다: " + token);
                 }
-                sum += number;
             }
         }
         return sum;
+    }
+
+    private void validateInput(String input, String delimiter) {
+        String allowedPattern = "[0-9" + delimiter + "//" + "\\n]*";
+        if (!input.matches(allowedPattern)) {
+            throw new IllegalArgumentException("허용되지 않는 문자가 포함되어 있습니다.");
+        }
     }
 }
