@@ -13,12 +13,11 @@ public class Application {
             }
             String[] textValues = splitText(userInputText);
             int[] sumValues = checkValue(textValues);
-            for (int i = 0; i < sumValues.length; i++) {
-                System.out.println(sumValues[i]);
-            }
-            //System.out.println("결과 : " + userInputText);
+            int result = sumValue(sumValues);
+            System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.out.println("오류: " + e.getMessage());
+            throw e;
         }
     }
 
@@ -57,7 +56,13 @@ public class Application {
     }
 
 
-
+    public static int sumValue(int[] values) { //형변환까지 완료한 값들을 덧셈계산해주는 메서드
+        int sum = 0;
+        for (int i = 0; i < values.length; i++) {
+            sum += values[i];
+        }
+        return sum;
+    }
 
 
 }
