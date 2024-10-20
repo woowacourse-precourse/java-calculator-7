@@ -3,7 +3,7 @@ package calculator.infrastructure;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import calculator.common.exception.InvalidInputStrException;
+import calculator.common.exception.ContainsBlankException;
 import java.util.Set;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,7 +30,7 @@ class InputParserTest {
     })
     void 잘못된_사용자_입력이_들어왔을때_예외를_발생시키는_테스트(String inputStr) {
         assertThatThrownBy(() -> inputParser.validateInputStr(inputStr))
-                .isInstanceOf(InvalidInputStrException.class);
+                .isInstanceOf(ContainsBlankException.class);
     }
 
 

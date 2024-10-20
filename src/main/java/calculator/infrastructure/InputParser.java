@@ -1,6 +1,6 @@
 package calculator.infrastructure;
 
-import calculator.common.exception.InvalidInputStrException;
+import calculator.common.exception.ContainsBlankException;
 import calculator.common.exception.InvalidSeparatorException;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -52,7 +52,7 @@ public class InputParser {
 
     private void validateInputStrHasNoSpaces(String inputStr) {
         if (inputStr.contains(" ")) {
-            throw new InvalidInputStrException(inputStr);
+            throw new ContainsBlankException(inputStr);
         }
     }
 
