@@ -13,7 +13,7 @@ public class StringNumberAdder implements NumberAdder {
         int sum = 0;
 
         //커스텀 구분자 추출
-        String[] separatorAndInputString = customSeparatorParser.separatorParse(inputString);
+        String[] separatorAndInputString = customSeparatorParser.parseSeparator(inputString);
         String separator = separatorAndInputString[0];
         inputString = separatorAndInputString[1];
 

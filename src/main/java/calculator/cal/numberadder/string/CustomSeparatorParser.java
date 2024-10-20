@@ -2,7 +2,7 @@ package calculator.cal.numberadder.string;
 
 public class CustomSeparatorParser {
 
-    public String[] separatorParse(String inputString) {
+    public String[] parseSeparator(String inputString) {
         //입력이 있는지 판단
         if (inputString == null || inputString.isBlank()) {
             throw new IllegalArgumentException("문자열을 입력하지 않았습니다.");
