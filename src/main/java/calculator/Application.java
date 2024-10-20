@@ -6,10 +6,6 @@ import calculator.view.CalculatorView;
 
 public class Application {
     public static void main(String[] args) {
-        StringCalculator stringCalculator = new StringCalculator();
-        CalculatorView CalculatorView = new CalculatorView();
-        CalculatorController controller = new CalculatorController(stringCalculator, CalculatorView);
-
-        controller.run();
+        new CalculatorController(new StringCalculator(), new CalculatorView()).run();
     }
 }
