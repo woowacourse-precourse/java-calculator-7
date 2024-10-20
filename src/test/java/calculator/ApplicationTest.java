@@ -1,93 +1,64 @@
 package calculator;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class CalculatorTest extends NsTest {
+class ApplicationTest extends NsTest {
 
-    private Calculator calculator;
-
-    @BeforeEach
-    void setUp() {
-        calculator = new Calculator();
+    @Test
+    void 기본_덧셈_테스트() {
+        assertSimpleTest(() -> {
+            run("1,2,3");
+            assertThat(output()).contains("결과: 6");
+        });
     }
 
     @Test
-    void 빈문자열_테스트() {
-        assertEquals(0, calculator.add(""));
+    void 커스텀_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("//;\\n1;2;3");
+            assertThat(output()).contains("결과: 6");
+        });
     }
 
     @Test
-    void 단일숫자_테스트() {
-        assertEquals(1, calculator.add("1"));
+    void 콜론_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("1:2:3");
+            assertThat(output()).contains("결과: 6");
+        });
     }
 
     @Test
-    void 두개의숫자_테스트() {
-        assertEquals(3, calculator.add("1,2"));
+    void 혼합_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("1,2:3");
+            assertThat(output()).contains("결과: 6");
+        });
     }
 
     @Test
-    void 여러개의숫자_테스트() {
-        assertEquals(6, calculator.add("1,2,3"));
+    void 음수_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Test
-    void 새줄구분자_사용시_예외발생_테스트() {
-        assertThrows(IllegalArgumentException.class, () -> calculator.add("1\n2,3"));
-    }
-
-    @Test
-    void 사용자정의구분자_테스트() {
-        assertEquals(6, calculator.add("//;\n1;2;3"));
-    }
-
-    @Test
-    void 음수_테스트() {
-        assertThrows(IllegalArgumentException.class, () -> calculator.add("-1,2"));
-    }
-
-    @Test
-    void 유효하지않은숫자_테스트() {
-        assertThrows(IllegalArgumentException.class, () -> calculator.add("1,a"));
-    }
-
-    @Test
-    void 유효하지않은사용자정의구분자_테스트() {
-        assertThrows(IllegalArgumentException.class, () -> calculator.add("//\n1;2"));
-    }
-
-    @Test
-    void 사용자정의구분자_덧셈결과_테스트() {
-        assertEquals(3, calculator.add("//;\n1;2"));
-    }
-
-    @Test
-    void 사용자정의구분자_여러숫자_테스트() {
-        assertEquals(6, calculator.add("//;\n1;2;3"));
-    }
-
-    @Test
-    void 사용자정의구분자_여러문자_테스트() {
-        assertEquals(6, calculator.add("//;;\n1;;2;;3"));
-    }
-
-    @Test
-    void 사용자정의구분자_특수문자_테스트() {
-        assertEquals(6, calculator.add("//***\n1***2***3"));
-    }
-
-    @Test
-    void 커스텀구분자_기본구분자_동시사용_테스트() {
-        assertEquals(10, calculator.add("//;\n1;2:3,4"));
+    void 유효하지_않은_입력_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,a,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Override
-    protected void runMain() {
-        Application.main(new String[0]);
+    public void runMain() {
+        Application.main(new String[]{});
     }
 }
