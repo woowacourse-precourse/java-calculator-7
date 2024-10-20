@@ -35,4 +35,12 @@ public class Application {
                 .mapToInt(Application::parseNumbers)
                 .sum();
     }
+
+    private static int parseNumbers(String numbers) {
+        int number = Integer.parseInt(numbers);
+        if(number < 0){
+            throw new IllegalArgumentException();
+        }
+        return number;
+    }
 }
