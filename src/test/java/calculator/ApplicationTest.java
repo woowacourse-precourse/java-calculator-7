@@ -17,10 +17,34 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 구분자만_있을_경우() {
+        assertSimpleTest(() -> {
+            run(":,");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 숫자_하나만_있을_경우() {
+        assertSimpleTest(() -> {
+            run("3");
+            assertThat(output()).contains("결과 : 3");
+        });
+    }
+
+    @Test
+    void 빈_문자열일_경우() {
+        assertSimpleTest(() -> {
+            run("");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
