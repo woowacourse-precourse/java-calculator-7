@@ -4,7 +4,7 @@ import static vaildation.InputValidation.*;
 import exception.CustomDelimiterException;
 
 public class DelimiterService { // 코드 실행 제어 서비스 클래스
-    public long sendMessage(String input) {
+    public long DelimiterProcess(String input) {
         long sumResult = 0;
         String[] Custom;
         String customDelimiter = "";
