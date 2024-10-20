@@ -58,19 +58,13 @@ class ApplicationTest extends NsTest {
     @Test
     @DisplayName("입력값에 음수가 존재할 때 예외가 발생한다.")
     void inputNegativeNumberException1() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("-1,2,3"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
-    }
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("-1,2,3"))
+                    .isInstanceOf(IllegalArgumentException.class);
 
-    @Test
-    @DisplayName("입력값에 음수가 존재할 때 예외가 발생한다.")
-    void inputNegativeNumberException2() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//;\n1;-2;3"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
+            assertThatThrownBy(() -> runException("//;\n1;-2;3"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
     }
 
     @Override

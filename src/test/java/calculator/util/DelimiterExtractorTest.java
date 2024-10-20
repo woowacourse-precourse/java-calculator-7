@@ -1,14 +1,12 @@
-package calculator.service;
+package calculator.util;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import calculator.util.DelimiterExtractor;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class DelimiterExtractorTest {
-
 
     @Test
     @DisplayName("기본 구분자를 사용할 경우 리스트로 반환한다.")
