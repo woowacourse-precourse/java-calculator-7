@@ -13,7 +13,7 @@ public class Application {
             System.out.println("개행문자가 포함되어 있습니다.");
         } else {
             System.out.println("개행문자가 포함되어 있지 않습니다.");
-        }*/
+        }
 
         input = input.replace("\\n", "\n");
         if (input.contains("\n")) {
@@ -22,8 +22,7 @@ public class Application {
             System.out.println(input.indexOf("\n"));
         } else {
             System.out.println("개행문자가 포함되어 있지 않습니다.");
-        }
-
+        } */
 
     }
 }
