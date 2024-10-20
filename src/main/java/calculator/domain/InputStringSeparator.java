@@ -5,11 +5,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class InputStringSeparator {
+    private static final int CUSTOM_SEPARATOR_START_INDEX = 2;
     private String inputString;
-    private String finalSeparator;
+    private String finalSeparator = ",|:";
     private String customSeparator = "";
     private String[] inputNumberString;
-    private ArrayList<Integer> inputNUmberInt = new ArrayList<>();
+    private ArrayList<Integer> inputNumberInt = new ArrayList<>();
     private int startIndex;
     private int lastIndex;
     private boolean isCustomSeparatorContained = false;
@@ -17,23 +18,27 @@ public class InputStringSeparator {
     public InputStringSeparator(String inputString) {
         validateInputString(inputString);
         setInputString(inputString);
-        setCustomSeparator();
-        setFinalSeparator();
+        if (isCustomSeparatorContained) {
+            setCustomSeparator();
+            addToFinalSeparator();
+            extractInputNumber();
+        }
         setInputNumber();
     }
 
     private void validateInputString(String inputString) {
         boolean isFirstCustomSeparator = inputString.contains("//");
         boolean isLastCustomSeparator = inputString.contains("\\n");
+        if (!isFirstCustomSeparator && !isLastCustomSeparator) {
+            return;
+        }
         if (isFirstCustomSeparator != isLastCustomSeparator) {
             throw new IllegalArgumentException("형식을 지켜 커스텀 구분자를 지정해야 합니다.");
         }
         if (isFirstCustomSeparator && inputString.indexOf("//") != 0) {
             throw new IllegalArgumentException("커스텀 구분자를 먼저 지정한 후 숫자를 입력하세요.");
         }
-        if (isFirstCustomSeparator && isLastCustomSeparator) {
-            this.isCustomSeparatorContained = true;
-        }
+        this.isCustomSeparatorContained = true;
     }
 
     private void setInputString(String inputString) {
@@ -41,18 +46,12 @@ public class InputStringSeparator {
     }
 
     private void setCustomSeparator() {
-        if (isCustomSeparatorContained) {
-            startIndex = inputString.indexOf("//") + 2;
-            lastIndex = inputString.indexOf("\\n");
-            this.customSeparator = inputString.substring(startIndex, lastIndex);
-        }
+        startIndex = inputString.indexOf("//") + CUSTOM_SEPARATOR_START_INDEX;
+        lastIndex = inputString.indexOf("\\n");
+        this.customSeparator = inputString.substring(startIndex, lastIndex);
     }
 
-    private void setFinalSeparator() {
-        if (this.customSeparator.isEmpty()) {
-            this.finalSeparator = ",|:";
-            return;
-        }
+    private void addToFinalSeparator() {
         this.finalSeparator = ",|:|" + escapeSpecialChars(customSeparator);
     }
 
@@ -73,16 +72,13 @@ public class InputStringSeparator {
                 .replace("$", "\\$");
     }
 
-    private void setInputNumber() {
-        extractInputNumber();
-        separateInputNumber();
-        changeToInt();
+    private void extractInputNumber() {
+        this.inputString = inputString.substring(lastIndex + 2);
     }
 
-    private void extractInputNumber() {
-        if (isCustomSeparatorContained) {
-            this.inputString = inputString.substring(lastIndex + 2);
-        }
+    private void setInputNumber() {
+        separateInputNumber();
+        changeToInt();
     }
 
     private void separateInputNumber() {
@@ -97,11 +93,11 @@ public class InputStringSeparator {
             if (parseInt < 0) {
                 throw new IllegalArgumentException("숫자는 양수를 입력해야 합니다.");
             }
-            this.inputNUmberInt.add(parseInt);
+            this.inputNumberInt.add(parseInt);
         }
     }
 
     public List<Integer> getInputNumber() {
-        return Collections.unmodifiableList(inputNUmberInt);
+        return Collections.unmodifiableList(inputNumberInt);
     }
 }
