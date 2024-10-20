@@ -4,6 +4,7 @@ import static calculator.message.Delimiter.CUSTOM_DELIMITER;
 import static calculator.message.Delimiter.DELIMITERS;
 import static calculator.message.ErrorMessage.EMPTY_ELEMENT_MESSAGE;
 import static calculator.message.ErrorMessage.INVALID_ELEMENT_MESSAGE;
+import static calculator.message.ErrorMessage.TOO_LARGE_NUMBER_MESSAGE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,6 +47,8 @@ public class Parser {
             try {
                 int number = Integer.parseInt(element);
                 intList.add(number);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException(TOO_LARGE_NUMBER_MESSAGE);
             } catch (Exception e) {
                 throw new IllegalArgumentException(INVALID_ELEMENT_MESSAGE);
             }
