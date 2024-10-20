@@ -17,7 +17,7 @@ public class Application {
 
             Calculation calculation = new Calculation();
             Double result = calculation.calculationString(separator,inputString);
-            System.out.println("결과 = " + result);
+            System.out.println("결과 : " + result);
         }catch (IllegalStateException err){
             return;
         }
