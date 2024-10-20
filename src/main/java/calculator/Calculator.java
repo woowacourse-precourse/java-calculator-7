@@ -46,8 +46,8 @@ public class Calculator {
                     .replace("\\n", "")
                     .replace(customSeparator, "");
             try {
-                int intValue = Integer.parseInt(str);
-                if (intValue < 0) {
+                long changedValue = Long.parseLong(str);
+                if (changedValue < 0) {
                     throw new IllegalArgumentException(INVALID_INPUT_MESSAGE);
                 }
             } catch (Exception e) {
@@ -56,22 +56,22 @@ public class Calculator {
         }
     }
 
-    public int outputResult(String inStr, String customSeparator) {
+    public long outputResult(String inStr, String customSeparator) {
         if (!"".equals(customSeparator)) {
             int subIdx = inStr.indexOf("\\n");
             inStr = inStr.substring(subIdx + 2);
         }
 
-        int returnInt = 0;
+        long returnNum = 0;
         StringBuilder delim = new StringBuilder();
         for (String separator : this.separator) {
             delim.append(separator);
         }
         StringTokenizer st = new StringTokenizer(inStr, delim.toString());
         while (st.hasMoreTokens()) {
-            returnInt += Integer.parseInt(st.nextToken());
+            returnNum += Long.parseLong(st.nextToken());
         }
-        return returnInt;
+        return returnNum;
     }
 
 }
