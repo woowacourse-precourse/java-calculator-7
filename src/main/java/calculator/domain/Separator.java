@@ -9,13 +9,13 @@ import java.util.regex.Pattern;
 
 public class Separator {
 
-    private Set<String> separators;
+    private final Set<String> separators;
 
     public Separator(Set<String> defaultSeparator) {
         this.separators = new HashSet<>(defaultSeparator);
     }
 
-    public String addCustomSeparator(String input, String customRegex) {
+    public String addCustomSeparator(String input, final String customRegex) {
         final Matcher matcher = Pattern.compile(customRegex).matcher(input);
         if (matcher.find()) {
             if(matcher.group(1).isEmpty()) {
