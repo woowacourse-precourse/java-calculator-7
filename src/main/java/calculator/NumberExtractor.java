@@ -5,51 +5,48 @@ import java.util.List;
 
 public class NumberExtractor {
 
-    public static List<Long> parseInput(DelimiterInputDTO delimiterInputDTO) {
+    public static List<Long> parseInput(String input, List<Character> delimiters) {
 
-        String input = delimiterInputDTO.getInput();
-        List<Character> delimiter = delimiterInputDTO.getDelimiter();
         StringBuilder stringBuilder = new StringBuilder();
-
         List<Long> result = new ArrayList<>();
 
         for (int i = 0; i < input.length(); i++) {
-            char tmp = input.charAt(i);
+            char currentChar = input.charAt(i);
 
-            if (delimiter.contains(tmp)) {
+            if (delimiters.contains(currentChar)) {
                 if (!stringBuilder.isEmpty()) {
-                    Long parsedNum = parseAndReset(stringBuilder);
-                    result.add(parsedNum);
+                    parseAndReset(result, stringBuilder);
                 }
                 continue;
             }
 
-            if (Character.isDigit(tmp)) {
-                appendDigit(tmp, stringBuilder);
+            if (Character.isDigit(currentChar)) {
+                appendDigit(currentChar, stringBuilder);
             } else {
                 throw new IllegalArgumentException();
             }
         }
 
         if (!stringBuilder.isEmpty()) {
-            result.add(parseAndReset(stringBuilder));
+            parseAndReset(result, stringBuilder);
         }
 
         return result;
     }
 
-    private static Long parseAndReset(StringBuilder stringBuilder) {
+    private static void parseAndReset(List<Long> result, StringBuilder stringBuilder) {
         Long parsedNum = Long.parseLong(stringBuilder.toString());
         stringBuilder.setLength(0);
-
-        return parsedNum;
+        result.add(parsedNum);
     }
 
-    private static void appendDigit(char tmp, StringBuilder stringBuilder) {
-        Long num = Long.parseLong(String.valueOf(tmp));
+    private static void appendDigit(char currentChar, StringBuilder stringBuilder) {
+        long num = Long.parseLong(String.valueOf(currentChar));
+
         if (num <= 0) {
             throw new IllegalArgumentException("숫자는 0보다 커야 합니다.");
         }
-        stringBuilder.append(tmp);
+
+        stringBuilder.append(currentChar);
     }
 }

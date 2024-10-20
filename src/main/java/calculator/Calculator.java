@@ -11,8 +11,8 @@ public class Calculator {
     public void calculate() {
 
         String input = readInput();
-        DelimiterInputDTO delimiter = generateDelimiterInputDTO(input);
-        List<Long> parsedInput = parseInput(delimiter);
+        DelimiterInputDTO delimiterInputDTO = generateDelimiterInputDTO(input);
+        List<Long> parsedInput = parseInput(delimiterInputDTO.getInput(), delimiterInputDTO.getDelimiter());
 
         Long sum = parsedInput.stream().reduce(0L, Long::sum);
 
