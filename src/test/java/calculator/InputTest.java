@@ -84,6 +84,32 @@ public class InputTest extends NsTest {
         );
     }
 
+    @Test
+    @DisplayName("커스텀 구분자 지정 - 커스텀 구분자가 존재하지 않는 케이스")
+    void noneCustomSeparator() {
+        assertSimpleTest(() -> {
+            run("//&\\n1,2,3,4,5");
+            assertThat(output()).contains(OUTPUT_MESSAGE + "15");
+        });
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자 지정 - 커스텀 구분자와 기본 구분자 혼용하는 케이스")
+    void customWithDefaultSeparator() {
+        assertSimpleTest(() -> {
+            run("//&\\n1&2,3&4,5");
+            assertThat(output()).contains(OUTPUT_MESSAGE + "15");
+        });
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자 지정 - 커스텀 구분자만 존재하는 케이스")
+    void onlyCustomSeparator() {
+        assertSimpleTest(() -> {
+            run("//&\\n1&2&3&4&5");
+            assertThat(output()).contains(OUTPUT_MESSAGE + "15");
+        });
+    }
 
     @Override
     protected void runMain() {
