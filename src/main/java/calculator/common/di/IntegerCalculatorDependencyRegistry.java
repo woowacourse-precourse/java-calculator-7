@@ -42,14 +42,17 @@ public class IntegerCalculatorDependencyRegistry implements NumberCalculatorDepe
         return delimiterFactory;
     }
 
+    @Override
     public DelimiterService getDelimiterService() {
         return delimiterService;
     }
 
+    @Override
     public InputView getInputView() {
         return inputView;
     }
 
+    @Override
     public OutputView getOutputView() {
         return outputView;
     }
