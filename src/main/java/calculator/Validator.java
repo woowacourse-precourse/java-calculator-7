@@ -5,7 +5,7 @@ public class Validator {
         if (str.isEmpty()) return 0;
 
         if (isNotDigit(str))
-            throw new IllegalArgumentException("[ERROR] 지정되지 않은 구분자입니다.");
+            throw new IllegalArgumentException("[ERROR] 숫자가 아닌 값이 포함되었습니다.");
 
         try {
             long num = Long.parseLong(str);
