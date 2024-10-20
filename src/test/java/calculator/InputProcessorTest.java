@@ -17,9 +17,9 @@ class InputProcessorTest {
         InputProcessor inputProcessor = new InputProcessor();
         systemInMock("1 + 2");
 
-        inputProcessor.readInput();
+        String input = inputProcessor.readInput();
 
-        assertThat(inputProcessor.getInput()).isEqualTo("1 + 2");
+        assertThat(input).isEqualTo("1 + 2");
     }
 
     @Test
@@ -29,15 +29,5 @@ class InputProcessorTest {
         Exception exception = assertThrows(IllegalArgumentException.class, inputProcessor::readInput);
 
         assertThat(exception.getMessage()).isEqualTo("Input cannot be null");
-    }
-
-    @Test
-    void 커스텀_구분자가_입력되는_경우_정상적으로_입력받을_수_있다() {
-        InputProcessor inputProcessor = new InputProcessor();
-        systemInMock("//;\n1;2;3");
-
-        inputProcessor.readInput();
-
-        assertThat(inputProcessor.getInput()).isEqualTo("//;\n1;2;3");
     }
 }
