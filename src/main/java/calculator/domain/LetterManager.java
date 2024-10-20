@@ -1,13 +1,13 @@
 package calculator.domain;
 
 import static calculator.global.constant.Config.*;
-import static calculator.global.util.Validator.validateCustomIndex;
 import static calculator.global.util.Validator.validateSeparator;
 
 import calculator.domain.separator.Separators;
 import calculator.domain.number.Numbers;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class LetterManager {
@@ -33,19 +33,16 @@ public class LetterManager {
     }
 
     private String[] getCustomSeparatorFromLetters() {
-        List<String> separators = new ArrayList<>();
-        int startIndex = 0;
-        while (true) {
-            startIndex = getStartIndex(START_OF_CUSTOM_SEPARATOR_LETTER, startIndex);
-            int endIndex = getStartIndex(END_OF_CUSTOM_SEPARATOR_LETTER, startIndex);
-            validateCustomIndex(startIndex, endIndex);
-            if (!isFindCustomSeparator(startIndex)) {
-                break;
-            }
-            String separator = extractCustomSeparator(startIndex, endIndex);
-            separators.add(separator);
-            startIndex = endIndex;
-        }
+        String regex = Pattern.quote(START_OF_CUSTOM_SEPARATOR_LETTER) + "(.*?)" + Pattern.quote(
+                END_OF_CUSTOM_SEPARATOR_LETTER);
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(letters);
+
+        List<String> separators = matcher.results()
+                .map(result -> result.group(1))
+                .toList();
+
         return separators.toArray(String[]::new);
     }
 
@@ -72,18 +69,6 @@ public class LetterManager {
         String lettersString = letters.toString();
         String separator = separators.toString();
         return lettersString.split(separator);
-    }
-
-    private int getStartIndex(String letter, int startIndex) {
-        return letters.indexOf(letter, startIndex);
-    }
-
-    private boolean isFindCustomSeparator(int startIndex) {
-        return startIndex != -1;
-    }
-
-    private String extractCustomSeparator(int startIndex, int endIndex) {
-        return letters.substring(startIndex + START_OF_CUSTOM_SEPARATOR_LETTER.length(), endIndex);
     }
 
     private void replaceCustomSeparatorToSeparator(String customSeparator) {
