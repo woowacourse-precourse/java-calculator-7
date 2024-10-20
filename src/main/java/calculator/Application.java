@@ -23,5 +23,15 @@ public class Application {
 
         int sum = 0;
 
+        /** 기능 3-3 구현
+         * 커스텀 구분자의 경우
+         */
+        if (inputData.startsWith("//") && (inputData.contains("\\n"))) {
+            /** "\n" 문자열의 시작 위치를 index 변수에 저장 */
+            int index = inputData.indexOf("\\n");
+
+            /** 커스텀 구분자 초기화 */
+            String customDelimiter = inputData.substring(2, index);
+        }
     }
 }
