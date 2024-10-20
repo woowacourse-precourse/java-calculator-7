@@ -19,7 +19,7 @@ public class DelimiterParser {
                 return matcher.group(1);
             }
         }
-        return "[,;]";
+        return "[,:]";
     }
 
     public boolean hasCustomDelimiterIn(String userInput) {
