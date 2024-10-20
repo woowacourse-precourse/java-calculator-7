@@ -43,6 +43,31 @@ public class InputParser {
 		return processedInput.split(regex);
 	}
 
+	// 입력값에서 커스텀 구분자를 제거한 문자열을 반환
+	private String removeCustomDelimiter(String input) {
+		if (hasCustomDelimiter(input)) {
+			int delimiterEnd = input.indexOf("\\n");
+
+			return input.substring(delimiterEnd + 2); // \n 이후의 문자열 반환
+		}
+
+		return input; // 커스텀 구분자가 없을 경우 원본 문자열 반환
+	}
+
+	// 입력값에 커스텀 구분자가 있는지 확인
+	private boolean hasCustomDelimiter(String input) {
+		return input.startsWith("//");
+	}
+
+	private void validateInvalidDelimiter(String input) {
+		String regex = "[\\d" + String.join("", delimiters) + "]*";
+		String filteredInput = input.replaceAll(regex, "");
+
+		if (!input.matches(regex)) {
+			throw new IllegalArgumentException("허용되지 않은 구분자가 포함되어 있습니다: " + filteredInput);
+		}
+	}
+
 	// 분리된 각 부분에서 숫자로 변환하여 리스트에 추가
 	private List<Integer> saveNumbers(String[] splitParts) {
 		List<Integer> numbers = new ArrayList<>();
@@ -98,30 +123,5 @@ public class InputParser {
 		}
 
 		return customDelimiter;
-	}
-
-	// 입력값에서 커스텀 구분자를 제거한 문자열을 반환
-	private String removeCustomDelimiter(String input) {
-		if (hasCustomDelimiter(input)) {
-			int delimiterEnd = input.indexOf("\\n");
-
-			return input.substring(delimiterEnd + 2); // \n 이후의 문자열 반환
-		}
-
-		return input; // 커스텀 구분자가 없을 경우 원본 문자열 반환
-	}
-
-	// 입력값에 커스텀 구분자가 있는지 확인
-	private boolean hasCustomDelimiter(String input) {
-		return input.startsWith("//");
-	}
-
-	private void validateInvalidDelimiter(String input) {
-		String regex = "[\\d" + String.join("", delimiters) + "]*";
-		String filteredInput = input.replaceAll(regex, "");
-
-		if (!input.matches(regex)) {
-			throw new IllegalArgumentException("허용되지 않은 구분자가 포함되어 있습니다: " + filteredInput);
-		}
 	}
 }
