@@ -23,8 +23,8 @@ public class Calculator implements AutoCloseable{
             return;
         }
 
-        String delimiters = delimiterService.getDelimiters();
-        IntegerService integerService = new IntegerService(input, delimiters);
+        String delimiterRegex = delimiterService.getDelimiters();
+        IntegerService integerService = new IntegerService(input, delimiterRegex);
         integerService.getIntegers();
         integerService.printSum();
     }
