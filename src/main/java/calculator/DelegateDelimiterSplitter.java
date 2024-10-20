@@ -14,6 +14,10 @@ public class DelegateDelimiterSplitter {
     }
 
     public List<String> split(String value) {
+        if (isNull(value)) {
+            throw new IllegalArgumentException("null을 입력 할 수 없습니다.");
+        }
+
         for (AbstractDelimiterSplitter delimiterSplitter : delimiterSplitters) {
             SplitResult result = delimiterSplitter.split(value);
             if (result.isSuccess()) {
@@ -22,5 +26,9 @@ public class DelegateDelimiterSplitter {
         }
 
         throw new IllegalArgumentException("처리 할 수 없는 패턴입니다.");
+    }
+
+    private boolean isNull(String value) {
+        return null == value;
     }
 }
