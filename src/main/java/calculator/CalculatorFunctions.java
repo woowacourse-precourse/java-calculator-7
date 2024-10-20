@@ -1,0 +1,72 @@
+package calculator;
+
+public class CalculatorFunctions {
+
+    private static String DEFAULT_DELIMITER = ",|:";
+
+    public static boolean checkStructure(String str) {
+        String forward = str.substring(0,2);
+        String back = str.substring(3,5);
+
+        return forward.equals("//") && back.equals("\\n");
+    }
+
+    public static int splitAndSum(String str) {
+        String[] token = str.split(DEFAULT_DELIMITER);
+        return addToken(token);
+    }
+
+    public static int addToken(String[] tokens) {
+        int sum = 0;
+
+        for (String token : tokens) {
+            if(token.isEmpty()) {
+                throw new IllegalArgumentException("잘못된 형식: 구분자를 연속으로 사용하였습니다.");
+            }
+
+            if(!token.matches("-?\\d+")) {
+                throw new IllegalArgumentException("잘못된 형식 : 숫자가 아닌 값이 포함되었습니다.");
+            }
+
+            if(Integer.parseInt(token) < 0) {
+                throw new IllegalArgumentException("잘못된 형식 : 음수가 입력되었습니다.");
+            }
+
+            sum += Integer.parseInt(token);
+        }
+
+        return sum;
+    }
+
+    public static String customDelimiter(String input) {
+        int delimiterIndex = input.indexOf("\\n");
+        String customDelimiter = input.substring(2, delimiterIndex);
+
+        if(customDelimiter.length() != 1) {
+            throw new IllegalArgumentException("잘못된 형식 : 커스텀 구분자가 두글자 이상입니다");
+        }
+
+        String str = input.substring(delimiterIndex + 2);
+        addNewDelimiter(changeMetaCharacters(customDelimiter));
+
+        return str;
+    }
+
+    public static String changeMetaCharacters(String customDelimiter) {
+        String[] metaCharacters = {".", "*", "+", "?", "^", "$", "(", ")", "[", "]", "{", "}", "|", "\\"};
+
+        // 각 메타 문자를 이스케이프 처리
+        for (String metaCharacter : metaCharacters) {
+            if (customDelimiter.contains(metaCharacter)) {
+                customDelimiter = "\\" + customDelimiter;
+                break;
+            }
+        }
+
+        return customDelimiter;
+    }
+
+    public static void addNewDelimiter(String customDelimiter) {
+         DEFAULT_DELIMITER = DEFAULT_DELIMITER + "|" + customDelimiter;
+    }
+}
