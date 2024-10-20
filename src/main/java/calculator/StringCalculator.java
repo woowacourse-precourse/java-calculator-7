@@ -11,7 +11,8 @@ public class StringCalculator {
 
         if (input.startsWith("//")) {
             if (input.charAt(3) == '\\' && input.charAt(4) == 'n') {
-                delimiter = String.valueOf(input.charAt(2));
+                String customDelimiter = String.valueOf(input.charAt(2));
+                delimiter = delimiter + "|" + customDelimiter;
                 numberString = input.substring(5);
             } else {
                 throw new IllegalArgumentException("유효하지 않은 구분자 형식입니다.");
@@ -44,13 +45,13 @@ public class StringCalculator {
         try {
             return Integer.parseInt(number);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자 변환에 실패했습니다: " + number);
+            throw new IllegalArgumentException("숫자 변환에 실패했습니다.");
         }
     }
 
     private void validateNumber(int number) {
         if (number < 0) {
-            throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + number);
+            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
         }
     }
 }
