@@ -12,14 +12,12 @@ public class InputHandlerTest extends NsTest{
 
   @Test
   void 입력값_테스트(){
-    assertSimpleTest(() -> {
-      run("1,2:3");
+    run("1,2:3");
 
-      InputHandler inputhandler = new InputHandler();
-      String result = inputhandler.readInput();
+    InputHandler inputhandler = new InputHandler();
+    String result = inputhandler.readInput();
 
-      assertThat(result).isEqualTo("1,2:3");
-    });
+    assertThat(result).isEqualTo("1,2:3");
   }
   @Override
   public void runMain(){}

@@ -8,60 +8,48 @@ import calculator.error.ErrorCode;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
-public class InputValidatorTest extends NsTest {
+public class InputValidatorTest{
 
   private final InputValidator validator = new CustomInputValidator();
 
   @Test
   void 입력값이_null인_경우_예외(){
-    assertSimpleTest(() ->{
-      assertThatThrownBy(() -> validator.validateInput(null))
-          .isInstanceOf(IllegalArgumentException.class)
-          .hasMessageContaining(ErrorCode.NULL_INPUT.toString());
-    });
+    assertThatThrownBy(() -> validator.validateInput(null))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessageContaining(ErrorCode.NULL_INPUT.toString());
   }
 
   @Test
   void 입력값이_공백인_경우_예외(){
-    assertSimpleTest(() -> {
-      assertThatThrownBy(() -> validator.validateInput(" "))
-          .isInstanceOf(IllegalArgumentException.class)
-          .hasMessageContaining(ErrorCode.EMPTY_INPUT.toString());
-    });
+    assertThatThrownBy(() -> validator.validateInput(" "))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessageContaining(ErrorCode.EMPTY_INPUT.toString());
   }
 
   @Test
   void 올바른_커스텀_구분자_형식(){
-    assertSimpleTest(() ->{
-      assertDoesNotThrow(() -> validator.validateInput("//@\n1@2@3@"));
-    });
+    assertDoesNotThrow(() -> validator.validateInput("//@\n1@2@3@"));
   }
 
   @Test
   void 커스텀_구분자_형식_예외(){
-    assertSimpleTest(() -> {
-      assertThatThrownBy(() -> validator.validateInput("//a1;2;3"))
-          .isInstanceOf(IllegalArgumentException.class)
-          .hasMessageContaining(ErrorCode.CUSTOM_DELIMITER_FORMAT_ERROR.toString());
-    });
+    assertThatThrownBy(() -> validator.validateInput("//a1;2;3"))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessageContaining(ErrorCode.CUSTOM_DELIMITER_FORMAT_ERROR.toString());
   }
 
   @Test
   void 커스텀_구분자_길이_예외(){
-    assertSimpleTest(() -> {
-      assertThatThrownBy(() -> validator.validateInput("//##\n1,2:3"))
-          .isInstanceOf(IllegalArgumentException.class)
-          .hasMessageContaining("구분자는 한 글자여야 합니다.");
-    });
+    assertThatThrownBy(() -> validator.validateInput("//##\n1,2:3"))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessageContaining("구분자는 한 글자여야 합니다.");
   }
 
   @Test
   void 커스텀_구분자_내용_예외(){
-    assertSimpleTest(() -> {
-      assertThatThrownBy(() -> validator.validateInput("//1\n2,3"))
-          .isInstanceOf(IllegalArgumentException.class)
-          .hasMessageContaining(ErrorCode.INVALID_DELIMITER_ERROR.toString());
-    });
+    assertThatThrownBy(() -> validator.validateInput("//1\n2,3"))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessageContaining(ErrorCode.INVALID_DELIMITER_ERROR.toString());
   }
 
 //  @Test
@@ -81,9 +69,4 @@ public class InputValidatorTest extends NsTest {
 //          .hasMessageContaining(ErrorCode.DISALLOWED_CHAR_ERROR.formatMessage("[%, $, ^]"));
 //    });
 //  }
-
-  @Override
-  public void runMain(){
-
-  }
 }
