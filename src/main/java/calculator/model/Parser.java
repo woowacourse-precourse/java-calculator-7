@@ -15,4 +15,10 @@ public class Parser {
     private boolean usesCustomValidator() {
         return input.startsWith(CUSTOM_DELIMITER_PREFIX);
     }
+
+    private void findCustomDelimiter() {
+        String customDelimiter = input.substring(CUSTOM_DELIMITER_PREFIX.length(),
+                CUSTOM_DELIMITER_PREFIX.length() + 1);
+        delimiters.add(customDelimiter);
+    }
 }
