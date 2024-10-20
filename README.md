@@ -49,3 +49,4 @@
     - [X] 커스텀 문자 입력하지 않음: "//\n1;2;3" 예상 결과: IllegalArgumentException 발생
     - [X] 잘못된 커스텀 구분자: "//;\n1$2$3" 예상 결과: IllegalArgumentException 발생
     - [X] 올바르지 않은 구분자: "1$2$3" 예상 결과: IllegalArgumentException 발생
+    - [x] 구분자만 입력: "," 예상 결과: "IllegalArgumentException" 발생

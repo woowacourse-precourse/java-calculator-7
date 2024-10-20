@@ -93,6 +93,15 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 구분자만_입력했을시_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(","))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining("구분자를 쓸 때는 숫자를 입력해 주세요.")
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
