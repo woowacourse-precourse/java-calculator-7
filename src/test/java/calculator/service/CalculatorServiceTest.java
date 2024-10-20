@@ -136,6 +136,22 @@ class CalculatorServiceTest {
         assertEquals("숫자는 커스텀 구분자로 사용할 수 없습니다", exception.getMessage());
     }
 
+    @DisplayName("파이프(`|`)가 구분자 외에 다른 위치에서 사용되면 IllegalArgumentException 발생")
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "//|\n1,2,3",  // | 는 커스텀 구분자가 될 수 없음
+            "//||\n2,3,4",  // | 는 커스텀 구분자가 될 수 없음
+            "//|||\n3:4:5",  // | 는 커스텀 구분자가 될 수 없음
+    })
+    void add_withNumberOrPipeMisusedAsCustomDelimiter_throwsException(String input) {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            CalculatorService.add(input);
+        });
+
+        // 예외 메시지가 예상된 것과 일치하는지 확인
+        assertEquals("커스텀 구분자 등록의 형식이 잘못되었습니다. 파이프(`|`)는 커스텀 구분자를 구분하는 용도로만 사용할 수 있습니다", exception.getMessage());
+    }
+
     @DisplayName("커스텀 구분자에 대한 성공 로직 테스트")
     @ParameterizedTest
     @CsvSource({
@@ -234,5 +250,6 @@ class CalculatorServiceTest {
         int result = CalculatorService.add(input);
         assertEquals(expectedSum, result);
     }
+
 
 }
