@@ -1,6 +1,6 @@
 package calculator.controller;
 
-import calculator.model.AdditionCalculator;
+import calculator.model.calculator.AdditionCalculator;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -16,10 +16,6 @@ public class Calculator {
     }
 
     public void add() {
-        try {
-            OutputView.printResult(additionCalculator.calculate());
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+        OutputView.printResult(additionCalculator.getResult());
     }
 }
