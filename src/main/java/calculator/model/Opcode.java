@@ -13,10 +13,4 @@ public enum Opcode {
         return symbol;
     }
 
-    public Opcode of(char symbol) {
-        if (symbol == '+') {
-            return PLUS;
-        }
-        return null;
-    }
 }
