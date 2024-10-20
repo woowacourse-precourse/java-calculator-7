@@ -1,6 +1,6 @@
 package calculator.calculator;
 
-import calculator.input.InputString;
+import calculator.io.InputString;
 
 
 public class Calculator {
