@@ -44,7 +44,7 @@ public class Input {
 
     public final List<Long> toLongList() {
         if (this.numList == null) {
-            this.numList = Arrays.stream(strNums).mapToLong(NumUtil::toLong).boxed().toList();
+            this.numList = Arrays.stream(strNums).mapToLong(NumUtil::parseLong).boxed().toList();
         }
         return this.numList;
     }

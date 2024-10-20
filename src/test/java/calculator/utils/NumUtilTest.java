@@ -30,7 +30,7 @@ class NumUtilTest {
         char c = '0';
         // when & then
         for (int i = 0; i < 10; i++) {
-            assertEquals(i, NumUtil.toLong(String.valueOf((char) (c + i))));
+            assertEquals(i, NumUtil.parseLong(String.valueOf((char) (c + i))));
         }
     }
 
@@ -39,7 +39,7 @@ class NumUtilTest {
         // given
         String invalidNum = "3.2";
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> NumUtil.toLong(invalidNum));
+        assertThrows(IllegalArgumentException.class, () -> NumUtil.parseLong(invalidNum));
     }
 
     @Test
@@ -47,7 +47,7 @@ class NumUtilTest {
         // given
         String invalidNum = " ";
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> NumUtil.toLong(invalidNum));
+        assertThrows(IllegalArgumentException.class, () -> NumUtil.parseLong(invalidNum));
     }
 
     @Test
@@ -55,7 +55,7 @@ class NumUtilTest {
         // given
         long negative = -1L;
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> NumUtil.toLong(String.valueOf(negative)));
+        assertThrows(IllegalArgumentException.class, () -> NumUtil.parseLong(String.valueOf(negative)));
     }
 
     @Test
@@ -63,7 +63,7 @@ class NumUtilTest {
         // given
         long longValue = 2147483648L;
         // when & then
-        long result = NumUtil.toLong(String.valueOf(longValue));
+        long result = NumUtil.parseLong(String.valueOf(longValue));
         assertEquals(longValue, result);
     }
 }
