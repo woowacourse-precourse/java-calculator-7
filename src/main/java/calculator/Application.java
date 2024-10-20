@@ -1,7 +1,11 @@
 package calculator;
 
+import calculator.global.config.BeanConfig;
+import calculator.global.frontController.FrontController;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        FrontController frontController = BeanConfig.getBean(FrontController.class);
+        frontController.run();
     }
 }
