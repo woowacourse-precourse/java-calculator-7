@@ -10,10 +10,27 @@ public class Calculation {
     }
 
     public static int stringCalculation(String input){
+        String result = "";
         int sum = 0;
-        for(char c : input.toCharArray()){
-            if(Character.isDigit(c)){
-                sum += Integer.parseInt(Character.toString(c));
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            if (Character.isDigit(c)) {
+                result += input.charAt(i);
+                if (i != input.length() - 1 && Character.isDigit(input.charAt(i + 1))) {
+                    result += input.charAt(i + 1);
+                    i++;
+                    if(i != input.length() - 1){
+                        continue;
+                    }
+                }
+                sum += Integer.parseInt(result);
+                result = "";
+            }else{
+                if(result.isEmpty()){
+                    result = "0";
+                }
+                sum += Integer.parseInt(result);
+                result = "";
             }
         }
         return sum;
