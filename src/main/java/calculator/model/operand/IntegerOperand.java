@@ -50,7 +50,7 @@ public class IntegerOperand implements Operand {
     @Override
     public int divide() {
         if (numbers.length == 0) {
-            throw new ArithmeticException("피연산자가 비어있습니다.");
+            return 0;
         }
         int result = numbers[0];
         for (int i = 1; i < numbers.length; i++) {

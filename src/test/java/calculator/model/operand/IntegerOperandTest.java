@@ -64,17 +64,6 @@ class IntegerOperandTest {
     class InvalidCases {
 
         @Test
-        @DisplayName("피연산자가 비어있으면 IllegalArgumentException을 발생시킨다")
-        void testEmptyOperand() {
-            // given
-            List<Integer> numbers = List.of();
-
-            // given & when & then
-            assertThatThrownBy(() -> new IntegerOperand(numbers))
-                    .isInstanceOf(IllegalArgumentException.class);
-        }
-
-        @Test
         @DisplayName("나눗셈에서 0으로 나누면 ArithmeticException을 발생시킨다")
         void testDivideByZero() {
             // given

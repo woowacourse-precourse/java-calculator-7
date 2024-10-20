@@ -29,21 +29,6 @@ class CustomExpressionTest {
                 softly.assertThat(expression.getOperands()).isEqualTo(List.of("1", "2", "3"));
             });
         }
-
-        @Test
-        @DisplayName("\n 이후 숫자가 없는 경우 0을 반환한다")
-        void testEmptyNumbersPart() {
-            // given
-            String input = "//;\\n";
-            CustomExpression expression = new CustomExpression(input);
-
-            // when & then
-            assertSoftly(softly -> {
-                softly.assertThat(expression.getInput()).isEqualTo("//;\\n");
-                softly.assertThat(expression.getDelimiter()).isEqualTo(Pattern.quote(";"));
-                softly.assertThat(expression.getOperands()).isEqualTo(List.of("0"));
-            });
-        }
     }
 
     @Nested

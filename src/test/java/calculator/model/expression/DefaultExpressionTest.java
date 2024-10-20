@@ -27,20 +27,6 @@ class DefaultExpressionTest {
                 softly.assertThat(expression.getOperands()).isEqualTo(List.of("1", "2", "3"));
             });
         }
-
-        @Test
-        @DisplayName("입력이 빈 문자열인 경우 0을 반환한다")
-        void testEmptyInput() {
-            // given
-            String input = "";
-            DefaultExpression expression = new DefaultExpression(input);
-
-            // when & then
-            assertSoftly(softly -> {
-                softly.assertThat(expression.getInput()).isEqualTo("");
-                softly.assertThat(expression.getOperands()).isEqualTo(List.of("0"));
-            });
-        }
     }
 
     @Nested

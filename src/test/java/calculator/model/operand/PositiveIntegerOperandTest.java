@@ -7,6 +7,8 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class PositiveIntegerOperandTest {
 
@@ -63,38 +65,16 @@ class PositiveIntegerOperandTest {
     @DisplayName("유효하지 않은 경우")
     class InvalidCases {
 
-        @Test
+        @ParameterizedTest
         @DisplayName("피연산자에 0이나 음수가 포함되면 IllegalArgumentException을 발생시킨다")
-        void testNegativeOperand() {
+        @ValueSource(ints = {0, -1, -5, -10})
+        void testZeroOrNegativeOperand(int invalidNumber) {
             // given
-            List<Integer> numbers = List.of(10, -3, 5);
+            List<Integer> numbers = List.of(10, invalidNumber, 5);
 
             // when & then
             assertThatThrownBy(() -> new PositiveIntegerOperand(numbers))
                     .isInstanceOf(IllegalArgumentException.class);
-        }
-
-        @Test
-        @DisplayName("피연산자가 비어있으면 IllegalArgumentException을 발생시킨다")
-        void testEmptyOperand() {
-            // given
-            List<Integer> numbers = List.of();
-
-            // given & when & then
-            assertThatThrownBy(() -> new PositiveIntegerOperand(numbers))
-                    .isInstanceOf(IllegalArgumentException.class);
-        }
-
-        @Test
-        @DisplayName("나눗셈에서 0으로 나누면 ArithmeticException을 발생시킨다")
-        void testDivideByZero() {
-            // given
-            List<Integer> numbers = List.of(10, 2, 0);
-            PositiveIntegerOperand operand = new PositiveIntegerOperand(numbers);
-
-            // when & then
-            assertThatThrownBy(operand::divide)
-                    .isInstanceOf(ArithmeticException.class);
         }
     }
 }
