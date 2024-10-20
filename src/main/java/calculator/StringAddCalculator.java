@@ -1,14 +1,14 @@
 package calculator;
 
 public class StringAddCalculator {
-    public static int split(String input) throws IllegalArgumentException {
-        int result = 0;
+    public static <T extends Number> T split(String input) throws IllegalArgumentException {
+        double result = 0;
 
         String delimiter = ",|:";
 
         // 공백인 경우 return
         if (input.isEmpty()) {
-            return 0;
+            return (T) Integer.valueOf(0);
         }
 
         int startDelimiter = input.indexOf("//");
@@ -24,7 +24,7 @@ public class StringAddCalculator {
 
         String[] parts = input.split(delimiter);
         for (String part : parts) {
-            int target = Integer.parseInt(part);
+            double target = Double.parseDouble(part);
             if (target > 0) {
                 result += target;
             } else {
@@ -32,6 +32,10 @@ public class StringAddCalculator {
             }
         }
 
-        return result;
+        if (result == (int) result) {
+            return (T) Integer.valueOf((int) result);
+        } else {
+            return (T) Double.valueOf(result);
+        }
     }
 }
