@@ -38,6 +38,15 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    @DisplayName("여러 커스텀 구분자를 사용했을 때 기대한 결과값이 나온다.")
+    void usingMultipleCustomDelimiter() {
+        assertSimpleTest(() -> {
+            run("//;\\n//&\\n1;2&3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
     @DisplayName("커스텀 구분자를 사용했을 때 기대한 결과값이 나온다.")
     void usingCustomDelimiter() {
         assertSimpleTest(() -> {
