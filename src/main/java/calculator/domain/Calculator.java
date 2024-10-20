@@ -1,19 +1,18 @@
 package calculator.domain;
 
 import calculator.domain.parser.InputParser.ParsedInput;
-import calculator.dto.CalculatorResponseDto;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 
 public class Calculator {
 
-    public CalculatorResponseDto calculate(ParsedInput parsedInput) {
-        BigInteger result = BigInteger.ZERO;
+    public String calculate(ParsedInput parsedInput) {
+        BigDecimal result = BigDecimal.ZERO;
         for (String numStr : parsedInput.numbers()) {
-            BigInteger num = new BigInteger(numStr);
+            BigDecimal num = new BigDecimal(numStr);
             result = result.add(num);
         }
 
-        return new CalculatorResponseDto(result.toString());
+        return result.toPlainString();
     }
 
 }
