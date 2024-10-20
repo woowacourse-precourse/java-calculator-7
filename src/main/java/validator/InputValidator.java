@@ -82,11 +82,11 @@ public class InputValidator {
                 return;
             }
 
-            if(!isMinusDelimiter) {
+            if(isMinusDelimiter && checkPreviousMinusDelimiter(beforeValue)) {
                 return;
             }
 
-            if (!checkPreviousMinusDelimiter(beforeValue)) {
+            if (checkPreviousMinusDelimiter(beforeValue)) {
                 throw new IllegalArgumentException(ENTER_POSITIVE_NUMBER.getMessage());
             }
         }
