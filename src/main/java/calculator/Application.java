@@ -9,16 +9,24 @@ public class Application {
         // TODO: 프로그램 구현
 
         //testg
-        String strs = "//;\n1;2;3,4,5:6";
+        String strs = "//;\n1;2;3,4,5:6a";
         String strs1 = "1,2,3,4:5";
         ArrayList<String> delimiters = getDelimiter(strs);
-
+//        if (strs == " ") {
+//            return 0;
+//        }
         if (delimiters.size() > 2) {
             String regex = checkSpecialDelimiter(strs);
             strs = changeInputStr(regex,strs);
             // DEBUG
-            System.out.println(strs);
         }
+        // error case 확인
+        try {
+            checkForErrors(strs);
+        } catch (IllegalArgumentException e) {
+            System.out.println("에러발생 " + e.getMessage());
+        }
+
         // debug
         for (String delimiter : delimiters) {
             System.out.println(delimiter);
@@ -61,5 +69,16 @@ public class Application {
         String[] modStr = InputString.split(matchStr);
         String changeStr = modStr[modStr.length - 1];
         return changeStr;
+    }
+
+
+    public static void checkForErrors (String inputString){
+        String ErrorCase1 = ".*[a-zA-Z].*";//"[^a-zA-Z]";
+        Pattern pattern1 = Pattern.compile(ErrorCase1);
+        Matcher matcher1 = pattern1.matcher(inputString);
+
+        if (matcher1.find()) {
+            throw new IllegalArgumentException("알파벳이 존재");
+        }
     }
 }
