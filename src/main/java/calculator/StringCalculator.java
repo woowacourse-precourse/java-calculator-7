@@ -1,5 +1,6 @@
 package calculator;
 
+import static calculator.NumberList.extractNumbersFrom;
 import static camp.nextstep.edu.missionutils.Console.close;
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
@@ -12,11 +13,9 @@ public class StringCalculator {
     public void run() {
         String input = askForStringInput();
 
-        String[] extractedNumbers = extractNumbersFrom(input);
+        String[] splitedInput = splitInputByDelimiter(input);
 
-        validateInput(extractedNumbers);
-
-        int sum = calulateSum(extractedNumbers);
+        int sum = extractNumbersFrom(splitedInput).getSum();
 
         showSum(sum);
 
@@ -28,55 +27,26 @@ public class StringCalculator {
         return readLine();
     }
 
-    private String[] extractNumbersFrom(String input) {
+    private String[] splitInputByDelimiter(String input) {
         return input.startsWith(CUSTOM_DELIMITER_PREFIX)
                 ? splitByCustomDelimiter(input)
                 : splitByDefaultDelimiter(input);
     }
 
-    private static String[] splitByDefaultDelimiter(String input) {
+    private String[] splitByDefaultDelimiter(String input) {
         return input.split(DEFAULT_DELIMITER);
     }
 
     private String[] splitByCustomDelimiter(String input) {
         String[] splitedInput = input.split(CUSTOM_DELIMITER_SUFFIX);
-        String customDelimiter = extractCustomDelimiter(splitedInput[0]);
+        String customDelimiter = getCustomDelimiter(splitedInput[0]);
         return splitedInput[1].split(customDelimiter);
     }
 
-    private String extractCustomDelimiter(String input) {
+    private String getCustomDelimiter(String input) {
         int customDelimiterIndex = input.length() - 1;
         char customDelimiter = input.charAt(customDelimiterIndex);
         return String.valueOf(customDelimiter);
-    }
-
-    private void validateInput(String[] numbers) {
-        for (String number : numbers) {
-            if (number.isEmpty()) {
-                continue;
-            }
-
-            isNagative(number);
-        }
-    }
-
-    private void isNagative(String number) {
-        if (Integer.parseInt(number) < 0) {
-            throw new IllegalArgumentException("잘못된 값을 입력하였습니다.");
-        }
-    }
-
-    private int calulateSum(String[] numbers) {
-        int sum = 0;
-        for (String number : numbers) {
-            if (number.isEmpty()) {
-                continue;
-            }
-
-            sum += Integer.parseInt(number);
-        }
-
-        return sum;
     }
 
     private void showSum(int sum) {
