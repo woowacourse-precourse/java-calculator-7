@@ -7,7 +7,6 @@ import calculator.part.CalculatorAdder;
 import calculator.separator.AddSeparator;
 import calculator.separator.DefaultSeparator;
 import calculator.separator.SeparatorStorage;
-import java.math.BigInteger;
 
 public class Calculator {
 
@@ -29,7 +28,7 @@ public class Calculator {
         String userInput = consoleInputHandler.getUserInput();
 
         if (IsUserInputEmptyString(userInput)) {
-            consoleOutputHandler.showFinalOutput(BigInteger.ZERO);
+            consoleOutputHandler.showFinalOutput(NumberWrapper.ZERO);
             return;
         }
 
@@ -40,8 +39,8 @@ public class Calculator {
         try {
             String parsedInput = AddSeparator.addCustomSeparator(userInput);
 
-            BigInteger[] toSumArrays = defaultSeparator.separateStringToSum(parsedInput, separatorStorage);
-            BigInteger sum = calculateComposition.makeSum(toSumArrays);
+            NumberWrapper[] toSumArrays = defaultSeparator.separateStringToSum(parsedInput, separatorStorage);
+            NumberWrapper sum = calculateComposition.makeSum(toSumArrays);
 
             consoleOutputHandler.showFinalOutput(sum);
         }

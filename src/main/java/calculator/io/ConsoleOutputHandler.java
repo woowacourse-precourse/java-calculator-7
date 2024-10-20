@@ -1,6 +1,6 @@
 package calculator.io;
 
-import java.math.BigInteger;
+import calculator.NumberWrapper;
 
 public class ConsoleOutputHandler {
 
@@ -8,7 +8,7 @@ public class ConsoleOutputHandler {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
     }
 
-    public void showFinalOutput(BigInteger sum) {
-        System.out.println("결과 : " + sum);
+    public void showFinalOutput(NumberWrapper sum) {
+        System.out.println("결과 : " + sum.getValue());
     }
 }

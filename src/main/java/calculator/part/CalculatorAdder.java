@@ -1,11 +1,11 @@
 package calculator.part;
 
-import java.math.BigInteger;
+import calculator.NumberWrapper;
 import java.util.Arrays;
 
 public class CalculatorAdder {
 
-    public BigInteger calculateAdd(BigInteger[] arrays){
+    public NumberWrapper calculateAdd(NumberWrapper[] arrays){
 
         if(isAllPositive(arrays))
             return getSum(arrays);
@@ -13,14 +13,14 @@ public class CalculatorAdder {
         throw new IllegalArgumentException("양수만 입력가능합니다.");
     }
 
-    private static boolean isAllPositive(BigInteger[] arrays) {
+    private static boolean isAllPositive(NumberWrapper[] arrays) {
         return Arrays.stream(arrays)
-                .allMatch(num -> num.compareTo(BigInteger.ZERO) == 1);
+                .allMatch(num -> num.compareTo(NumberWrapper.ZERO) == 1);
     }
 
-    private static BigInteger getSum(BigInteger[] arrays) {
+    private static NumberWrapper getSum(NumberWrapper[] arrays) {
         return Arrays.stream(arrays)
-                .reduce(BigInteger.ZERO, BigInteger::add);
+                .reduce(NumberWrapper.ZERO, NumberWrapper::add);
     }
 
 }
