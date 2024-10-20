@@ -10,12 +10,12 @@ public class OperandManager {
     private final SeparatorManager separatorManager;
 
     public OperandManager(SeparatorManager separatorManager) {
-        this.operands = new LinkedList<>();
+        operands = new LinkedList<>();
         this.separatorManager = separatorManager;
     }
 
     public List<Integer> getOperands() {
-        return this.operands;
+        return operands;
     }
 
     public void save(String operandCandidates) {
