@@ -48,7 +48,7 @@ public class Application {
             int result = add(input);
             System.out.println("결과 :  " + result);
         } catch (IllegalArgumentException e) {
-            System.out.println("에러: " + e.getMessage());
+            throw e;
         }
     }
 }
