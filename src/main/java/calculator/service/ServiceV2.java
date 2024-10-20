@@ -1,18 +1,14 @@
 package calculator.service;
 
 import calculator.calculator.Calculator;
-import calculator.constants.StringConst;
 import calculator.delimiterExtractor.DelimiterExtractor;
 import calculator.dto.DelimiterDto;
 import calculator.dto.NumberDto;
-import calculator.inputType.InputType;
-import calculator.inputType.InputTypeProvider;
 import calculator.numberExtractor.NumberExtractor;
+import calculator.validator.Validator;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ServiceV2 implements Service {
-
 
     public String extractDelimiter(DelimiterExtractor extractor, String input) {
         DelimiterDto delimiterDto = extractor.extractDelimiter(input);
@@ -28,23 +24,9 @@ public class ServiceV2 implements Service {
     }
 
 
-    public String checkTypeOfInput(String input) {
+    public String checkTypeOfInput(String input, Validator validator) {
 
-        List<InputType> inputTypelist = InputTypeProvider.provideInputTypelist();
-
-        InputType customInput = inputTypelist.get(0);
-        String customInputName = customInput.getType();
-        if (customInput.check(input) && customInputName.equals(StringConst.CUSTOM_INPUT)) {
-            return StringConst.CUSTOM_INPUT;
-        }
-
-        InputType defaultInput = inputTypelist.get(1);
-        String defaultInputName = defaultInput.getType();
-        if (defaultInput.check(input) && defaultInputName.equals(StringConst.DEFAULT_INPUT)) {
-            return StringConst.DEFAULT_INPUT;
-        }
-
-        throw new IllegalArgumentException();
+        return validator.canParseToNumber(input);
 
     }
 

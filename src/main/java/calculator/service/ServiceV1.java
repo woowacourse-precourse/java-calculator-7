@@ -7,6 +7,8 @@ import calculator.delimiterExtractor.DelimiterExtractor;
 import calculator.dto.DelimiterDto;
 import calculator.dto.NumberDto;
 import calculator.numberExtractor.NumberExtractor;
+import calculator.utils.ExceptionUtils;
+import calculator.validator.Validator;
 import java.util.ArrayList;
 
 public class ServiceV1 implements Service {
@@ -26,7 +28,7 @@ public class ServiceV1 implements Service {
     }
 
 
-    public String checkTypeOfInput(String input) {
+    public String checkTypeOfInput(String input, Validator validator) {
 
         if (input.startsWith(StringConst.CUSTOM_START_STRING) && input.contains(StringConst.LINE_SEPARATOR_STRING)) {
             return StringConst.CUSTOM_INPUT;
@@ -36,7 +38,8 @@ public class ServiceV1 implements Service {
             return StringConst.DEFAULT_INPUT;
         }
 
-        throw new IllegalArgumentException();
+        ExceptionUtils.throwCanNotParseToNumberException();
+        return null;
     }
 
 
