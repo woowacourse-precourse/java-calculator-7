@@ -8,7 +8,7 @@ public class Validator {
     public static int validate(String token){
         try{
             int number = Integer.parseInt(token);
-            if(number < 1){
+            if(number <= 0){
                 throw new CustomException(ErrorMessage.NEGATIVE_NUMBER);
             }
             return number;
