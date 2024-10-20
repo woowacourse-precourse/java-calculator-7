@@ -66,28 +66,44 @@
 ## 구현해야 할 기능 목록
 
 - **입출력 클래스**
-  - [ ] 사용자로부터 문자열 입력을 받는 기능
-  - [ ] 계산 결과를 출력하는 기능
-  - [ ] 에러 발생 시 오류 메시지를 출력하는 기능
+  - [x] 사용자로부터 문자열 입력을 받는 기능
+  - [x] 계산 결과를 출력하는 기능
+  - [x] 에러 발생 시 오류 메시지를 출력하는 기능
 
 <br />
 
 - **입력된 문자열을 처리하여 계산 결과를 반환하는 클래스**
-    - [ ] 쉼표(,) 또는 콜론(:)을 구분자로 사용하는 기본 계산 기능
-    - [ ] 커스텀 구분자("//;\n" 등)을 처리하는 기능
-    - [ ] 음수 입력 시 예외 발생 기능
-    - [ ] 잘못된 입력 형식에 대한 예외 처리 기능
+  - [x] 쉼표(,) 또는 콜론(:)을 구분자로 사용하는 기본 계산 기능
+  - [x] 커스텀 구분자("//;\n" 등)을 처리하는 기능
+  - [x] 음수 입력 시 예외 발생 기능
+  - [x] 잘못된 입력 형식에 대한 예외 처리 기능
 
 <br />
 
 # 테스트
-> 테스트 코드
+- **테스트 코드**
+```java
+@Test
+void 커스텀_구분자_사용() {
+    assertSimpleTest(() -> {
+        run("//;\\n1");
+        assertThat(output()).contains("결과 : 1");
+    });
+}
+
+@Test
+void 예외_테스트() {
+    assertSimpleTest(() ->
+        assertThatThrownBy(() -> runException("-1,2,3"))
+            .isInstanceOf(IllegalArgumentException.class)
+    );
+}
+```
 
 
+> 아래의 출력 결과처럼 테스트가 잘 됐음을 알 수 있다.
 
-> 아래의 출력 결과(일부)처럼 테스트가 잘 됐음을 알 수 있다.
-
-
+<img src="https://github.com/user-attachments/assets/03ba9aa5-1a98-42f5-b3ec-9bb62668869f" width="700;" alt="">
 
 <br />
 
@@ -95,20 +111,30 @@
 
 > 과제 수행 중 발생한 실수와 해결 방법에 대한 기록
 
-- 실수 코드
-```js
-
+- **실수 코드**
+```java
+if (input.startsWith("//")) {
+    // 커스텀 구분자 추출
+    Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
+    if (!matcher.find()) throw new IllegalArgumentException("잘못된 입력 형식입니다.");
+    delimiters += "|" + Pattern.quote(matcher.group(1));
+    input = matcher.group(2); // 커스텀 구분자 이후의 숫자 추출
+}
 ```
 
-- 개선된 코드
-```js
-
+- **개선된 코드**
+```java
+if (input.startsWith("//") && input.contains("\\n")) {
+    // 커스텀 구분자 추출
+    delimiters += "|" + input.charAt(2);
+    input = input.substring(5);
+}
 ```
 
-- 문제점
-    - 
+- **문제점**
+    - 실수 코드에서는 정규 표현식을 통해 커스텀 구분자를 처리하고 있었는데, 이 과정에서 코드가 복잡해지고 개행문자 처리가 잘 되지 않는 문제가 있었다.
 
-- 해결 방법
-    - 
+- **해결 방법**
+    - 개선된 코드에서는 정규식을 사용하지 않고, 커스텀 구분자가 항상 //로 시작하고 1글자의 구분자 이후에 \n이 있는 단순한 패턴임을 고려해 문자열 처리 방식으로 해결했다. 이렇게 하여 코드가 간결해지고, 성능적으로도 더 효율적인 방식이 되었다.
 
 <br />
