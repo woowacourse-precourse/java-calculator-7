@@ -11,6 +11,6 @@ public class Application {
         calculator.parseAndAddNumbers(inputStr);
         int result = calculator.sum();
 
-        System.out.println("결과: " + result);
+        System.out.println("결과 : " + result);
     }
 }

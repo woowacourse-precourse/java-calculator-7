@@ -15,7 +15,7 @@ class ApplicationTest extends NsTest {
     void 빈_문자열_입력_테스트() {
         assertSimpleTest(() -> {
             run("");
-            assertThat(output()).contains("결과: 0");
+            assertThat(output()).contains("결과 : 0");
         });
     }
 
@@ -24,7 +24,7 @@ class ApplicationTest extends NsTest {
     void 공백_문자열_입력_테스트() {
         assertSimpleTest(() -> {
             run("    ");
-            assertThat(output()).contains("결과: 0");
+            assertThat(output()).contains("결과 : 0");
         });
     }
 
@@ -33,6 +33,33 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("//;\\n1");
             assertThat(output()).contains("결과 : 1");
+        });
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자가 정상적으로 작동하고 숫자 합산이 정확한지 확인한다")
+    void 커스텀_구분자_여러_숫자_테스트() {
+        assertSimpleTest(() -> {
+            run("//;\\n1;2;3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자로 특수 문자를 사용했을 때 올바르게 작동하는지 확인한다")
+    void 커스텀_구분자_특수문자_테스트() {
+        assertSimpleTest(() -> {
+            run("//#\\n1#2#3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자로 공백 문자를 사용했을 때 올바르게 작동하는지 확인한다")
+    void 커스텀_구분자_공백_테스트() {
+        assertSimpleTest(() -> {
+            run("// \\n1 2 3");
+            assertThat(output()).contains("결과 : 6");
         });
     }
 
