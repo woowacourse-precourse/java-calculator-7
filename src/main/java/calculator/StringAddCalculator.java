@@ -6,15 +6,11 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
     public int splitAndSum(String exp) {
         String[] numbers;
-        String delimiter = "";
+        String delimiter;
         int result = 0;
 
-        // 빈 문자열 확인
-        if(exp==null) {
-            throw new IllegalArgumentException("문자열이 입력되지 않았습니다.");
-        }
-
-        if(exp.isEmpty()) {
+        // 빈 문자열
+        if(exp==null || exp.trim().isEmpty()) {
             return 0;
         }
 
@@ -41,6 +37,9 @@ public class StringAddCalculator {
                 if(strToNum <= 0)
                     throw new IllegalArgumentException("양수만 입력 가능합니다: " + strToNum);
             } catch (NumberFormatException e) {
+                if (number == "") {
+                    return 0;
+                }
                 throw new IllegalArgumentException("잘못된 형식의 입력값입니다: " + number);
             }
         }

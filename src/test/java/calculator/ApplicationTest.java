@@ -12,6 +12,11 @@ class ApplicationTest extends NsTest {
         StringAddCalculator calculator = new StringAddCalculator();
         assertThat(calculator.splitAndSum("")).isEqualTo(0);
     }
+    @Test
+    void 커스텀_구분자_입력_후_아무_것도_입력하지_않으면_0_출력() {
+        StringAddCalculator calculator = new StringAddCalculator();
+        assertThat(calculator.splitAndSum("//;\n")).isEqualTo(0);
+    }
 
     @Test
     void 기본_구분자_사용_정수() {
