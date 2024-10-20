@@ -20,4 +20,8 @@
 - [x] 사용자 입력 받기
 - [x] 기본 문자열 처리하기
 - [x] 커스텀 구분자 추가하기
-- [ ] 종료 처리하기
+- [x] 종료 처리하기
+
+
+### 학습 과정 
+[Notion](https://daffy-dichondra-513.notion.site/week-1-6ae3893a940a4bef9c94c85723097663?pvs=4)
