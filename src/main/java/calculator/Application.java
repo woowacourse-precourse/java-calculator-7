@@ -27,6 +27,8 @@ public class Application {
             if ((token = st.nextToken()).contains("-")) {
                 throw new IllegalArgumentException("양수만 입력해야합니다.");
             }
+            if(token.equals(" "))
+                throw new IllegalArgumentException("공란이 아닌 유효한 양수만 입력해야합니다.");
             sum += Integer.parseInt(token);
         }
         return sum;
