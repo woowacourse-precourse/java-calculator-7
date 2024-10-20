@@ -1,11 +1,11 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.Test;
-
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
     @Test
@@ -16,11 +16,117 @@ class ApplicationTest extends NsTest {
         });
     }
 
+
     @Test
-    void 예외_테스트() {
+    void 커스텀_구분자_사용2() {
+        assertSimpleTest(() -> {
+            run("1,1,2//;\\n1;1:1");
+            assertThat(output()).contains("결과 : 7");
+        });
+    }
+
+
+    @Test
+    void 커스텀_구분자_사용3() {
+        assertSimpleTest(() -> {
+            run("1//!!!\\n1!!!2");
+            assertThat(output()).contains("결과 : 4");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_사용4() {
+        assertSimpleTest(() -> {
+            run("1:1,1//;;\\n1:1;;1");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 정수_사용() {
+        assertSimpleTest(() -> {
+            run("1,2:3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 실수_사용() {
+        assertSimpleTest(() -> {
+            run("1.1,2,3");
+            assertThat(output()).contains("결과 : 6.1");
+        });
+    }
+
+    @Test
+    void 공백_입력() {
+        assertSimpleTest(() -> {
+            run("\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 예외_테스트1() {
+        assertSimpleTest(() -> {
+            run(",1   1");
+            assertThat(output()).contains("결과 : 11");
+        });
+    }
+
+    @Test
+    void 예외_테스트2() {
+        assertSimpleTest(() -> {
+            run("1 , 1, 1  1");
+            assertThat(output()).contains("결과 : 13");
+        });
+    }
+
+    @Test
+    void 예외_테스트3() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("////가나다라"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트4() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//-\\n1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트5() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//..\\n1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트6() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("123//[..]\\n1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트7() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1//[[\\n1[[1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트8() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
