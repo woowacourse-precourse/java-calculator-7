@@ -74,6 +74,15 @@ public class CalculatorProcess {
         sum(divideInteger);
     }
 
+    // 나눈 숫자를 모두 더하기
     static private void sum(int[] divideInteger){
+        int total = 0;
+        for(int score : divideInteger){
+            total+=score;
+        }
+        printAnswer(total);
+    }
+
+    static private void printAnswer(int answer){
     }
 }
