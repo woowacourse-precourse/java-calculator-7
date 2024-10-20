@@ -2,6 +2,8 @@ package calculator.utils;
 
 import calculator.constants.ErrorConst;
 import calculator.exception.CanNotParseToNumberException;
+import calculator.exception.DelimiterCanNotBeNumberException;
+import calculator.exception.InvalidFormatException;
 import calculator.exception.InvalidNumberException;
 import calculator.exception.NotHaveNextTokenException;
 
@@ -20,7 +22,11 @@ public class ExceptionUtils {
     }
 
     public static void throwInvalidFormatException() {
-        throw new CanNotParseToNumberException(ErrorConst.INVALID_FORMAT_ERROR);
+        throw new InvalidFormatException(ErrorConst.INVALID_FORMAT_ERROR);
+    }
+
+    public static void throwDelimiterCanNotBeNumberException() {
+        throw new DelimiterCanNotBeNumberException(ErrorConst.DELIMITER_CAN_NOT_BE_NUMBER_ERROR);
     }
 
 
