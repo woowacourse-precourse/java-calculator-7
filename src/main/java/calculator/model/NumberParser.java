@@ -31,9 +31,11 @@ public class NumberParser {
 
         for (String number : numbers) {
             String trimmedNumber = number.trim();
-            parsedNumberList.add(trimmedNumber);
+            if (numberValidator.isNumberOrSeparator(trimmedNumber)) {
+                parsedNumberList.add(trimmedNumber);
+            }
         }
-
+        
         return parsedNumberList;
     }
 }
