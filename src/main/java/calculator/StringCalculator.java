@@ -24,7 +24,7 @@ public class StringCalculator {
 		return calculateSum(toInts(splitString));
 	}
 
-	private static Positive calculateSum(Positive[] positives) {
+	public static Positive calculateSum(Positive[] positives) {
 		Positive zero = Positive.zero();
 		for (Positive positive : positives) {
 			zero.add(positive);
@@ -32,7 +32,7 @@ public class StringCalculator {
 		return zero;
 	}
 
-	private static Positive[] toInts(String[] splitString) {
+	public static Positive[] toInts(String[] splitString) {
 		Positive[] positives = new Positive[splitString.length];
 		for ( int i = 0; i < splitString.length ; i++) {
 			Positive positive = Positive.inputPositive(splitString[i]);
