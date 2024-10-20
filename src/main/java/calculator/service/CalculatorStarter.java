@@ -12,12 +12,12 @@ public class CalculatorStarter {
 
     public void calculate() {
         String input = InputHandler.consoleInput();
+        CalculateResponse result=CalculateResponse.from(0);
 
-        if (input.isEmpty()) {
-            OutputHandler.consoleOutput(CalculateResponse.from(0));
-        } else {
-            CalculateResponse result = calculatorController.calculate(CalculateRequest.from(input));
-            OutputHandler.consoleOutput(result);
+        if (!input.isEmpty()) {
+            result = calculatorController.calculate(CalculateRequest.from(input));
         }
+
+        OutputHandler.consoleOutput(result);
     }
 }
