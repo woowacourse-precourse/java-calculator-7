@@ -16,6 +16,11 @@ public class Number {
     // 값을 검증하는 메서드
     private void validateNumberArray(String[] array) {
         for (String str : array) {
+            // 빈 문자열일 경우 continue, split 메서드의 경우 빈 문자열도 배열에 포함하기 때문에
+            if (str.isEmpty()) {
+                continue;
+            }
+
             // 숫자가 아닐 경우
             if (!isNumeric(str)) {
                 throw new IllegalArgumentException(NOT_NUMERIC_ERROR);
