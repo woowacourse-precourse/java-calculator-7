@@ -41,24 +41,23 @@ public class Application {
 
         for (String number : numbers) {
             int num = toPositiveNumber(number);
-            sum += num;
+            if (num != -1) {
+                sum += num;
+            }
         }
 
         return sum;
     }
 
     private static int toPositiveNumber(String number) {
-        int result;
         try {
-            result = Integer.parseInt(number);
+            int result = Integer.parseInt(number);
+            if (result < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+            }
+            return result;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자 형식이 올바르지 않습니다.");
+            return -1;
         }
-
-        if (result < 0) {
-            throw new IllegalArgumentException("음수는 허용되지 않습니다.");
-        }
-
-        return result;
     }
 }
