@@ -16,9 +16,7 @@ public class Application {
         String input = readLine().trim();
         int sum = 0;
 
-        if(input.equals("")) {
-
-        } else {
+        if(!input.isEmpty()) {
             DividersAndNumberSequence dividersAndNumberSequence = getDividersAndNumberSequence(input);
             dividersAndNumberSequence.updateNumberSequence();
             List<Integer> numberList = getNumberList(dividersAndNumberSequence.getNumberSequence());
