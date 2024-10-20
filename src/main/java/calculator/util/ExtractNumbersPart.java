@@ -1,6 +1,6 @@
 package calculator.util;
 
-public class extractNumbersPart {
+public class ExtractNumbersPart {
     // 커스텀 구분자 이후 숫자파트 추출하는 메서드
     public static String extractNumbersPart(String input) {
         int index = input.lastIndexOf("\n");

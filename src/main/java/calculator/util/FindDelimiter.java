@@ -2,7 +2,7 @@ package calculator.util;
 
 import java.util.List;
 
-public class findDelimiter {
+public class FindDelimiter {
     // 주어진 위치에서 구분자를 찾는 메서드
     public static String findDelimiter(String input, int startIndex, List<String> delimiters) {
         for (String delimiter : delimiters) {

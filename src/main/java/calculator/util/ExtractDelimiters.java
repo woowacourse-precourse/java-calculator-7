@@ -3,7 +3,7 @@ package calculator.util;
 import java.util.ArrayList;
 import java.util.List;
 
-public class extractDelimiters {
+public class ExtractDelimiters {
     // 커스텀 구분자와 기본 구분자를 추출하는 메서드
     public static List<String> extractDelimiters(String input) {
         List<String> delimiters = new ArrayList<>();

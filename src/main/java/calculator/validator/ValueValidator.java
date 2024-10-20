@@ -1,6 +1,6 @@
 package calculator.validator;
 
-import static calculator.util.extractNumbersPart.extractNumbersPart;
+import static calculator.util.ExtractNumbersPart.extractNumbersPart;
 
 public class ValueValidator {
 

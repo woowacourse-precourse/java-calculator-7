@@ -6,14 +6,14 @@ import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
-class findDelimiterTest {
+class FindDelimiterTest {
 
     @Test
     void testFindDelimiterWithValidDelimiter() {
         String input = "1;2:3";
         List<String> delimiters = Arrays.asList(";", ":");
         int index = 1; // 위치 1에서 찾기 시작
-        String result = findDelimiter.findDelimiter(input, index, delimiters);
+        String result = FindDelimiter.findDelimiter(input, index, delimiters);
         assertEquals(";", result); // 위치 1에서 ';'를 찾아야 함
     }
 
@@ -22,7 +22,7 @@ class findDelimiterTest {
         String input = "1;2:3";
         List<String> delimiters = Arrays.asList(";", ":");
         int index = 3; // 위치 3에서 찾기 시작
-        String result = findDelimiter.findDelimiter(input, index, delimiters);
+        String result = FindDelimiter.findDelimiter(input, index, delimiters);
         assertEquals(":", result); // 위치 3에서 ':'를 찾아야 함
     }
 
@@ -31,7 +31,7 @@ class findDelimiterTest {
         String input = "1;2:3";
         List<String> delimiters = Arrays.asList(";", ":");
         int index = 0; // 위치 0에서 찾기 시작
-        String result = findDelimiter.findDelimiter(input, index, delimiters);
+        String result = FindDelimiter.findDelimiter(input, index, delimiters);
         assertEquals(null, result); // 위치 0에서 ';'를 찾아야 함
     }
 
@@ -40,7 +40,7 @@ class findDelimiterTest {
         String input = "123456";
         List<String> delimiters = Arrays.asList(";", ":");
         int index = 0; // 위치 0에서 찾기 시작
-        String result = findDelimiter.findDelimiter(input, index, delimiters);
+        String result = FindDelimiter.findDelimiter(input, index, delimiters);
         assertEquals(null, result); // 구분자가 없으므로 null 반환
     }
 
@@ -49,7 +49,7 @@ class findDelimiterTest {
         String input = "";
         List<String> delimiters = Arrays.asList(";", ":");
         int index = 0; // 위치 0에서 찾기 시작
-        String result = findDelimiter.findDelimiter(input, index, delimiters);
+        String result = FindDelimiter.findDelimiter(input, index, delimiters);
         assertEquals(null, result); // 빈 문자열에서 구분자를 찾을 수 없음
     }
 
@@ -58,7 +58,7 @@ class findDelimiterTest {
         String input = ";:";
         List<String> delimiters = Arrays.asList(";", ":");
         int index = 0; // 위치 0에서 찾기 시작
-        String result = findDelimiter.findDelimiter(input, index, delimiters);
+        String result = FindDelimiter.findDelimiter(input, index, delimiters);
         assertEquals(";", result); // 위치 0에서 ';'를 찾아야 함
     }
 }

@@ -1,8 +1,8 @@
 package calculator.validator;
 
-import static calculator.util.extractDelimiters.extractDelimiters;
-import static calculator.util.extractNumbersPart.extractNumbersPart;
-import static calculator.util.findDelimiter.findDelimiter;
+import static calculator.util.ExtractDelimiters.extractDelimiters;
+import static calculator.util.ExtractNumbersPart.extractNumbersPart;
+import static calculator.util.FindDelimiter.findDelimiter;
 
 import java.util.List;
 
