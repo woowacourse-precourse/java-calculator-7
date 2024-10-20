@@ -10,6 +10,9 @@
 - [x] 문자열에서 숫자를 추출하는 기능 -> Extractor.java
 - [] 추출된 숫자의 합을 구하는 기능 -> Calculator.java
 
+[ Tool ]
+- [x] 구분자를 따로 관리 하는 기능 (유지보수 및 확장성 고려) -> Delimiters.java
+
 [ Util ]
 - [] 잘못된 값을 입력할 경우 예외처리하는 기능 -> Validator.java
    - [] 문자열에 음수가 포함된 경우
