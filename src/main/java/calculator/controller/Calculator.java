@@ -12,10 +12,26 @@ public class Calculator {
     }
 
     private AdditionCalculator start() {
-        return new AdditionCalculator(InputView.inputString());
+        try {
+            return new AdditionCalculator(InputView.inputString());
+        } catch (IllegalArgumentException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return null;
+        }
     }
 
     public void add() {
-        OutputView.printResult(additionCalculator.getResult());
+        try {
+            validateAdditionCalculator();
+            OutputView.printResult(additionCalculator.getResult());
+        } catch (IllegalArgumentException e) {
+            OutputView.printErrorMessage(e.getMessage());
+        }
+    }
+
+    private void validateAdditionCalculator() {
+        if (additionCalculator == null) {
+            throw new IllegalArgumentException("오류가 발생하여 애플리케이션을 종료합니다.");
+        }
     }
 }
