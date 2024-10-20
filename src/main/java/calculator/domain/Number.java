@@ -7,6 +7,10 @@ public class Number {
         this.number = number;
     }
 
+    public int getValue() {
+        return number;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -19,4 +23,5 @@ public class Number {
     public int hashCode() {
         return number.hashCode();
     }
+
 }

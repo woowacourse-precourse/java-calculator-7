@@ -18,6 +18,10 @@ public class Numbers {
         this.numbers = extractNumbers(input);
     }
 
+    public Numbers(List<Number> numbers) {
+        this.numbers = numbers;
+    }
+
     private List<Number> extractNumbers (String input) {
         List<Number> extractedNumbers = new ArrayList<>();
 
@@ -45,6 +49,12 @@ public class Numbers {
                 .map(Integer::parseInt)
                 .map(Number::new)
                 .toList();
+    }
+
+    public Integer sum () {
+        return numbers.stream()
+                .mapToInt(Number::getValue)
+                .sum();
     }
 
     public Integer size () {

@@ -15,8 +15,15 @@ public class Calculator {
     }
 
     public void run () {
+        // 입력
         String input = inputView.getInput();
+
+        // 빈 입력 처리 및 숫자 추출
         Numbers numbers = handleInput(input);
+
+        // 덧셈
+        Integer sum = numbers.sum();
+
     }
 
     public Numbers handleInput (String input) {

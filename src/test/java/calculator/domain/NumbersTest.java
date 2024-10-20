@@ -14,6 +14,7 @@ import static calculator.TestConstants.THIRD_IDX;
 import static calculator.TestConstants.THIRD_NUM;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -74,4 +75,5 @@ class NumbersTest {
         assertThat(numbers.compareNumber(THIRD_IDX, expectedThirdNum)).isTrue();
 
     }
+
 }
