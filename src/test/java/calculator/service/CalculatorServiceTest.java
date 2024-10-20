@@ -44,4 +44,24 @@ class CalculatorServiceTest {
         assertEquals("구분자가 적절하지 않습니다", exception.getMessage());
     }
 
+    @DisplayName("글자 입력이 들어오면, 에러 발생")
+    @ParameterizedTest
+    @CsvSource({
+            "'1a2,3'",    // 영어 'a'가 구분자로 들어온 경우
+            "'1,2b3'",    // 영어 'b'가 구분자로 들어온 경우
+            "'1가2:3'",   // 한글 '가'가 구분자로 들어온 경우
+            "'1,나2,3'",  // 한글 '나'가 구분자로 들어온 경우
+            "'1,2c3,4'",  // 영어 'c'가 구분자로 들어온 경우
+            "'1,2,3한4'", // 한글 '한'이 구분자로 들어온 경우
+            "'1d2:3,4'"   // 영어 'd'가 구분자로 들어온 경우
+    })
+    void add_invalidCharacterDelimiter_throwsException(String input) {
+
+        // 영어 또는 한글이 구분자로 포함되어 있으면 예외가 발생해야 함
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            CalculatorService.add(input);
+        });
+
+        assertEquals("글자는 들어올 수 없습니다", exception.getMessage());
+    }
 }
