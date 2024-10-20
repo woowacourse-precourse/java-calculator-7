@@ -54,6 +54,15 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    @DisplayName("공백이 3개이상이어도 되어야한다")
+    void 여러_개의_공백() {
+        assertSimpleTest(() -> {
+            run("     ,                ,            ");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
     @DisplayName("파이프(|) 기호를 적용할 떄")
     void 파이프_기호_적용() {
         assertSimpleTest(() -> {
@@ -86,6 +95,32 @@ class ApplicationTest extends NsTest {
             run("//;\\n1;2;3,4,;5");
             assertThat(output()).contains("결과 : 15");
         });
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자와 기본구분자를 섞어도 작동해야한다.")
+    void 커스텀_기본_문자_더하기() {
+        assertSimpleTest(() -> {
+            run("//&\\n1&2,3&4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
+    @DisplayName("구분자 사이에 빈 문자열이 존재할때 정상작동해야함")
+    void 구분자_사이의_빈_문자열() {
+        assertSimpleTest(() -> {
+            run("//;\\n1; 2; 3; , ; 4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
+    @DisplayName("지정되지 않은 기호가 들어왔을때 예외가 나타나야함")
+    void 지정되지_않은_기호() {
+        assertThatThrownBy(() -> {
+            run("//;\\n1;@2;3;4");
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Override
