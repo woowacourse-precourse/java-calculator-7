@@ -16,6 +16,13 @@ public class Application {
         for (String number : numbers) {
             System.out.println(number);
         }
+
+        try {
+            int sum = sumNumbers(numbers); // 숫자들의 합 계산
+            System.out.println("Sum: " + sum);
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
     }
 
     public static String extractNumbersPart(String input) {
@@ -23,10 +30,9 @@ public class Application {
             int delimiterEndIndex = input.indexOf("\\n");
             if (delimiterEndIndex != -1 && delimiterEndIndex > 2) {
                 return input.substring(delimiterEndIndex + 2);
-            } else {
-                return input; // \n이 없으면 전체 문자열을 반환
             }
         }
+        return input;
     }
 
     public static String extractCustomDelimiter(String input) {
@@ -40,5 +46,19 @@ public class Application {
         }
         // 커스텀 구분자가 없으면 빈 문자열 반환
         return "";
+    }
+
+    public static int sumNumbers(String[] numbers) {
+        int sum = 0;
+        for (String number : numbers) {
+            try {
+                // 숫자 변환 시도
+                sum += Integer.parseInt(number.trim());
+            } catch (NumberFormatException e) {
+                // 숫자가 아닐 경우 예외 발생
+                throw new IllegalArgumentException("Invalid number: " + number);
+            }
+        }
+        return sum;
     }
 }
