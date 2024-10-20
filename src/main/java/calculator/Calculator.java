@@ -1,7 +1,6 @@
 package calculator;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Pattern;
 
 public class Calculator {
@@ -23,10 +22,12 @@ public class Calculator {
             delimiters += "|" + Pattern.quote(customDelimiter);
         }
 
-        // TODO: 문자열에서 숫자를 파싱해 operands 에 추가하는 로직 구현
+        String[] tokens = numbersSection.split(delimiters);
+        InputValidator.validateNumbers(tokens);
 
-        List<Integer> numbers = new ArrayList<>();
-        operands.addAll(numbers);
+        for (String token : tokens) {
+            operands.add(Integer.parseInt(token.trim()));
+        }
     }
 
     public int sum() {
