@@ -97,6 +97,36 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @DisplayName("쉼표(,) 또는 콜론(:) 또는 커스텀 구분자가 아닌 다른 구분자는 사용할 수 없다")
+    @Test
+    void exception9() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//=\\n1-2,13,9"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage("쉼표(,) 또는 콜론(:) 또는 커스텀 구분자가 아닌 다른 구분자는 사용할 수 없습니다.")
+        );
+    }
+
+    @DisplayName("연속으로 구분자를 넣을 수 없다.")
+    @Test
+    void exception10() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//=\\n1==2,13,9"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage("구분자를 연속으로 작성할 수 없습니다.")
+        );
+    }
+
+    @DisplayName("숫자는 양수만 들어올 수 있습니다.")
+    @Test
+    void exception11() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//=\\n0=2,13,9"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage("숫자는 양수여야 합니다.")
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
