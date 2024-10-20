@@ -10,9 +10,11 @@ public class Application {
         System.out.println("구분자와 양수 구성된 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
+        input = input.replace("\\n", "\n");
+
         //빈 문자열 또는 null이 입력된 경우 0을 반환
         if(input == null || input.equals("")) {
-            System.out.println("결과: 0");
+            System.out.println("결과 : 0");
             return;
         }
         //기본 구분자 설정
@@ -43,18 +45,14 @@ public class Application {
                 sum += parseNumber;
             }
         } catch (NumberFormatException e) {
-            System.out.println("잘못된 입력값이 있습니다.");
-            return;
+            throw new IllegalArgumentException("잘못된 입력값이 있습니다.", e);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return;
-
-
-
+            throw e;
         }
 
-        //테스트용 결과 출력
-        System.out.println("결과: " + sum);
+        //결과 출력
+        System.out.println("결과 : " + sum);
 
 
 
