@@ -12,8 +12,9 @@ public class Application {
                 throw new IllegalArgumentException("입력한 값이 없습니다.확인 후 다시 입력해주세요");
             }
             String[] textValues = splitText(userInputText);
-            for (String textValue : textValues) {
-                System.out.println(textValue);
+            int[] sumValues = checkValue(textValues);
+            for (int i = 0; i < sumValues.length; i++) {
+                System.out.println(sumValues[i]);
             }
             //System.out.println("결과 : " + userInputText);
         } catch (IllegalArgumentException e) {
@@ -37,6 +38,26 @@ public class Application {
             return text.split("[:,]");
         }
     }
+
+    public static int[] checkValue(String[] textValues) { //문자열을 배열로 나눈후 값에 대한 오류를 체크 하는 함수(형변환 포함)
+        int[] values = new int[textValues.length];
+        for (int i = 0; i < textValues.length; i++) {
+            try {
+                int parseIntVal = Integer.parseInt(textValues[i].trim());
+                if (parseIntVal <= 0) {
+                    throw new IllegalArgumentException("양수의 정수를 입력하셔야 합니다.확인 후 다시 입력해주세요.");
+                } else {
+                    values[i] = parseIntVal;
+                }
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("숫자가 아닌 문자 또는 빈칸을 같이 입력하셨습니다.확인 후 다시 입력해주세요.");
+            }
+        }
+        return values;
+    }
+
+
+
 
 
 }
