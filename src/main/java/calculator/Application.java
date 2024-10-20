@@ -58,7 +58,20 @@ public class Application {
         return Integer.parseInt(number);
     }
 
-    
+    public static int StringCalculator(String input){
+        int sum;
+        String delimiter = findCustomDelimiter(input);
+
+        if(delimiter!=",|:"){
+            input = input.substring(5);
+        }
+        String[] numbers = splitString(input,delimiter);
+
+        sum = addString(numbers);
+        
+        return sum;
+    }
+
 
 
 
