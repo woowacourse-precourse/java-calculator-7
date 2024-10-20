@@ -4,15 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 //숫자 리스트에 대한 클래스
-public class PositiveNumbers {
+public class PositiveNumbers implements Numbers {
 
     private List<Integer> numbers = new ArrayList<>();
 
 
+    @Override
     public List<Integer> getNumbers() {
         return numbers;
     }
 
+    @Override
     public void addNumber(int number) {
 
         checkPositive(number);

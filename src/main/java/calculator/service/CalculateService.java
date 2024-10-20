@@ -2,7 +2,7 @@ package calculator.service;
 
 import calculator.model.Calculator;
 import calculator.model.Delimeters;
-import calculator.model.PositiveNumbers;
+import calculator.model.Numbers;
 import java.util.List;
 
 //계산기의 전반적인 기능을 담당하는 클래스
@@ -10,6 +10,11 @@ public class CalculateService {
 
     private static final String customDelimeterPrefix = "//";
     private static final String customDelimeterPostfix = "\\n";
+    private final Numbers numbers;
+
+    public CalculateService(final Numbers numbers) {
+        this.numbers = numbers;
+    }
 
     //임시 메서드
     public long calculate(final String userInput) {
@@ -17,11 +22,11 @@ public class CalculateService {
         Delimeters delimeters = new Delimeters();
         addDelimeter(userInput, delimeters);
 
-        PositiveNumbers positiveNumbers = getPositiveNumbersByDelimeter(userInput, delimeters);
+        getNumbersByDelimeter(userInput, delimeters);
 
         Calculator calculator = new Calculator();
 
-        return calculator.addCalculate(positiveNumbers);
+        return calculator.addCalculate(numbers);
 
     }
 
@@ -64,23 +69,20 @@ public class CalculateService {
     }
 
     //input 으로 부터 Delimeter 로 PositiveNumbers 추출 및 반환
-    private PositiveNumbers getPositiveNumbersByDelimeter(final String userInput, final Delimeters delimters) {
+    private void getNumbersByDelimeter(final String userInput, final Delimeters delimters) {
 
         String calculationFormula = delimters.hasCustomDelimeter() ?
                 userInput.substring(userInput.indexOf(customDelimeterPostfix) + 2)
                 : userInput.substring(0);
 
-        List<String> numbers = delimters.getNumbersFromCalculationFormula(calculationFormula);
-
-        PositiveNumbers positiveNumbers = new PositiveNumbers();
+        List<String> targetNumbers = delimters.getNumbersFromCalculationFormula(calculationFormula);
 
         try {
-            numbers.forEach(number -> positiveNumbers.addNumber(Integer.valueOf(number)));
+            targetNumbers.forEach(number -> numbers.addNumber(Integer.valueOf(number)));
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자 int 형식으로 전환되지 못했습니다");
         }
 
-        return positiveNumbers;
     }
 
 
