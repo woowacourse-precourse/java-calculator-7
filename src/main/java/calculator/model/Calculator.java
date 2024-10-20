@@ -21,7 +21,6 @@ public class Calculator {
         return numberContent.split(delimiter);
     }
 
-
     public BigDecimal getResult() {
         return result;
     }

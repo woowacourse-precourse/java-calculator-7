@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class Extractor {
 
     public String extractDelimiter(String input) {
-        if (isContainDelimiter(input)) {
+        if (isContainCustomDelimiter(input)) {
             String customDelimiter = findGroupByRegex(input).group(1);
             return DELIMITER + "|" + Pattern.quote(customDelimiter);
         }
@@ -18,13 +18,13 @@ public class Extractor {
     }
 
     public String extractNumberContent(String input) {
-        if (isContainDelimiter(input)) {
+        if (isContainCustomDelimiter(input)) {
             return findGroupByRegex(input).group(2);
         }
         return input;
     }
 
-    private static boolean isContainDelimiter(String input) {
+    private static boolean isContainCustomDelimiter(String input) {
         return input.startsWith("//");
     }
 

@@ -17,8 +17,10 @@ public class Regex {
     public static final String NUMBER_CONTENT_PATTERN = "(^" + POSITIVE_NUMBER_PATTERN + "[\\s\\S]*$)";
 
     // 커스텀 구분자 패턴
-    public static final String CUSTOM_DELIMITER_PATTERN =
-            CUSTOM_DELIMITER_PREFIX + DELIMITER_CONTENT + NEWLINE_PATTERN + NUMBER_CONTENT_PATTERN;
+    public static final String CUSTOM_DELIMITER_PATTERN = CUSTOM_DELIMITER_PREFIX
+            + DELIMITER_CONTENT
+            + NEWLINE_PATTERN
+            + NUMBER_CONTENT_PATTERN;
 
     // 기본 구분자
     public static final String DELIMITER = "[,:]";
