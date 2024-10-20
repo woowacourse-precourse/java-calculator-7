@@ -3,14 +3,16 @@ package calculator.cal.numberadder.string;
 public class CustomSeparatorParser {
 
     public String[] separatorParse(String inputString) {
-        //첫번째 인덱스는 커스텀 구분자, 두번째 인덱스는 계산식
-        String[] separatorAndInputString = new String[]{",|:", inputString};
-        StringBuilder separatorRegex = new StringBuilder(",|:|");
-
         //입력이 있는지 판단
         if (inputString == null || inputString.isBlank()) {
             throw new IllegalArgumentException("문자열을 입력하지 않았습니다.");
+        } else {
+            inputString = inputString.trim();
         }
+
+        //첫번째 인덱스는 커스텀 구분자, 두번째 인덱스는 계산식
+        String[] separatorAndInputString = new String[]{",|:", inputString};
+        StringBuilder separatorRegex = new StringBuilder(",|:|");
 
         //커스텀 구분자가 있는지 판단
         if (inputString.startsWith("//")) {

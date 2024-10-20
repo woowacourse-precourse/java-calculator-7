@@ -155,6 +155,10 @@ class ApplicationTest extends NsTest {
             run("//, \\n4 3,1 2");
             assertThat(output()).contains("결과 : 10"); //4+3+1+2=10
 
+            //커스텀 구분자 선언문 앞뒤에 공백이 있는 상황
+            run(" //!;\\n 5!3;2");
+            assertThat(output()).contains("결과 : 10"); //5+3+2=10
+
         });
     }
 
