@@ -1,1 +1,32 @@
 # java-calculator-precourse
+
+# 기능구현목록
+
+---
+
+## MODEL
+
+
+#### Number
+- [ ] 숫자가 양수인지 검증한다.
+#### Separator
+- [ ] 덧셈 문자열을 특정 문자로 구분하여, List< Number> 을 반환한다.
+#### Adder
+- [ ] List< Number>를 덧셈한다.
+---
+## VIEW
+
+
+#### InputView
+- [ ] 사용자로부터 문자열을 입력받는다.
+- [ ] 문자열을 검증한다.
+  - 커스텀 구분자 형식을 검증
+  - 덧셈 문자열 검증
+#### OutputView
+-   [ ] 문자열을 출력한다.
+
+---
+##  Controller
+#### CalculatorController
+-  [ ] 계산기를 실행한다.
+---
