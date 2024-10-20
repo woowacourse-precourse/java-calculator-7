@@ -20,6 +20,9 @@ public class CalculateString {
 
         int total = 0;
         for (int i = 0; i < splitString.length; i++) {
+            if (Integer.parseInt(splitString[i]) < 0) {
+                throw new IllegalArgumentException("값을 잘못 입력하셨습니다.");
+            }
             total += Integer.parseInt(splitString[i].trim());
         }
 
