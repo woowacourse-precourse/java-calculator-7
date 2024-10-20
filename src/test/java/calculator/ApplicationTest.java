@@ -49,7 +49,7 @@ class ApplicationTest extends NsTest {
 //            assertThat(output()).contains("결과 : 11111");
 //        });
 //    }
-
+//
 //    @Test
 //    void 커스텀_테스트3() {
 //        assertSimpleTest(() -> {
@@ -57,9 +57,9 @@ class ApplicationTest extends NsTest {
 //            assertThat(output()).contains("결과 : 10");
 //        });
 //    }
-
+//
 //    @Test
-//    void 커스텀_테스트3() {
+//    void 커스텀_테스트4() {
 //        assertSimpleTest(() -> {
 //            run("//a\\n");
 //            assertThat(output()).contains("결과 : 0");
@@ -113,10 +113,10 @@ class ApplicationTest extends NsTest {
 //                        .isInstanceOf(IllegalArgumentException.class)
 //        );
 //    }
-
+//
     //fail
     @Test
-    void 기본_테스트2() {
+    void 기본_테스트4() {
         assertSimpleTest(() -> {
             run("");
             assertThat(output()).contains("결과 : 0");
