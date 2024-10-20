@@ -18,7 +18,7 @@ public class CalculatorModel {
         return input;
     }
 
-    public List<Integer> parser(String input) throws IllegalArgumentException {
+    public List<Integer> parser(String input) {
         input = extraDelimiter(input);
         String[] parsedInput = input.split("[" + delimiter + ']');
         List<Integer> result = new ArrayList<>();
