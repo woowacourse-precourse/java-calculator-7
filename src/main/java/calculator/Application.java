@@ -88,9 +88,12 @@ public class Application {
      * @param input   원본 입력 문자열
      */
     private static void validateInput(String[] numbers, String input) {
-        // 음수 입력 검증
         for (String number : numbers) {
-            int num = Integer.parseInt(number);
+            if (number.isEmpty()) { // 구분자가 연속으로 나오는 경우
+                throw new IllegalArgumentException("연속된 구분자는 허용되지 않습니다.");
+            }
+            int num = Integer.parseInt(number); // 문자열을 정수로 변환
+            // 음수 입력 검증
             if (num < 0) {
                 throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
             }
