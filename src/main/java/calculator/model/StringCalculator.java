@@ -22,6 +22,7 @@ public class StringCalculator {
         List<String> delimiters = delimiterParser.parseDelimiter(input);
         String[] tokens = delimiterParser.split(input, delimiters);
         List<Integer> numbers = numberParser.parseNumbers(tokens);
+        numberParser.validateNumbers(numbers);
 
         return numbers.stream().mapToInt(Integer::intValue).sum();
     }
