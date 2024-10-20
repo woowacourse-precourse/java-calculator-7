@@ -11,6 +11,11 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
+            run("//\\n");
+            assertThat(output()).contains("결과 : 0");
+        });
+
+        assertSimpleTest(() -> {
             run("//;\\n1");
             assertThat(output()).contains("결과 : 1");
         });
@@ -39,6 +44,11 @@ class ApplicationTest extends NsTest {
             run("//뷁\\n1뷁2뷁3");
             assertThat(output()).contains("결과 : 6");
         });
+
+        assertSimpleTest(() -> {
+            run("//|;\"\\n1\"2|3;4");
+            assertThat(output()).contains("결과 : 6");
+        });
     }
 
     @Test
@@ -46,6 +56,11 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("1");
             assertThat(output()).contains("결과 : 1");
+        });
+
+        assertSimpleTest(() -> {
+            run("\n");
+            assertThat(output()).contains("결과 : 0");
         });
 
         assertSimpleTest(() -> {
