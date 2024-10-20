@@ -7,8 +7,12 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
 
         String data = Console.readLine();
-        int result = calculate(data);
+        try{
+            int result = calculate(data);
         System.out.println("결과 : " + result);
+        } catch (IllegalArgumentException e){
+            System.out.println(e);
+        }
     }
 
 
@@ -21,7 +25,9 @@ public class Application {
 
         if (data.startsWith("//")){
             int lastIndex = data.indexOf("\\n");
-            System.out.println(lastIndex);
+            if (lastIndex == -1){
+                throw new IllegalArgumentException("커스텀 구분자 형식 오류가 발생 했습니다.");
+            }
             String customSeparator = data.substring(2,lastIndex);
             data = data.substring(lastIndex + 2);
             numbers = data.split(customSeparator);
