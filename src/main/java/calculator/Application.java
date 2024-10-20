@@ -6,6 +6,8 @@ public class Application {
     public static void main(String[] args) {
         try {
             String input = Input.readString();
+            StringCalculator calculator = new StringCalculator();
+            int sum = calculator.calculateSum(input);
         } finally {
             Console.close();
         }
