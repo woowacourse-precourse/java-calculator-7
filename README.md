@@ -6,7 +6,7 @@
 
 ---
 
-- [ ] `camp.nextstep.edu.missionutils.Console`의 `readLine()`을 활용해서 사용자의 문자열 입력을 받는다.
+- [x] `camp.nextstep.edu.missionutils.Console`의 `readLine()`을 활용해서 사용자의 문자열 입력을 받는다.
 
 
 - 예외 발생 경우
