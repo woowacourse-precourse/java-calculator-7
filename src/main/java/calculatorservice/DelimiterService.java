@@ -1,17 +1,16 @@
-package calculator;
+package calculatorservice;
 
-import static calculator.InputValidation.*;
+import static vaildation.InputValidation.*;
 import exception.CustomDelimiterException;
-import java.util.StringTokenizer;
 
-public class DelimiterService { // 연결을 위한 중간 흐름
-    public int sendMessage(String input) {
-        int sumResult = 0;
+public class DelimiterService { // 코드 실행 제어 서비스 클래스
+    public long sendMessage(String input) {
+        long sumResult = 0;
         String[] Custom;
         String customDelimiter = "";
 
         try { // 정상 흐름
-            Custom = checkCustomDelimiter(input); // 커스텀 구분자
+            Custom = checkCustomDelimiter(input); // 커스텀 구분자 검사
             if (Custom != null) {
                 customDelimiter = Custom[0];
                 input = Custom[1];
@@ -28,13 +27,14 @@ public class DelimiterService { // 연결을 위한 중간 흐름
     }
 
     //입력의 유효성이 증명되면 덧셈을 수행한다.
-    public static int sumInput(String remainingInput, String customDelimiter) {
-        int sum = 0;
-        StringTokenizer st = new StringTokenizer(remainingInput, customDelimiter);
+    public static long sumInput(String remainingInput, String customDelimiter) {
+        long sum = 0;
+        String[] sumToken = remainingInput.split(customDelimiter);
 
-        while (st.hasMoreTokens()) {
-            sum += Integer.parseInt(st.nextToken().strip());
+        for (String token : sumToken) {
+            sum += Long.parseLong(token);
         }
+
         return sum;
     }
 }

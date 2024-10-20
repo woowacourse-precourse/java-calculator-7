@@ -1,20 +1,11 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.Console;
+import controller.runCalculator;
 
 public class Application {
     public static void main(String[] args) {
-        DelimiterService delimiterService = new DelimiterService();
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = Console.readLine().strip(); // 문자를 입력받고 앞뒤 공백을 제거.
-
-        if (input.isEmpty()) { // 빈 입력이면 0 반환
-            return;
-        }
-        int sumResult = delimiterService.sendMessage(input);
-        if(sumResult != 0) {
-            System.out.println("결과 : " + sumResult);
-        }
+        runCalculator runCalculator = new runCalculator();
+        runCalculator.run();
 
     }
 }
