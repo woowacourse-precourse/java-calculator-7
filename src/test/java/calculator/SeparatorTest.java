@@ -67,19 +67,19 @@ public class SeparatorTest extends NsTest {
 
         assertSimpleTest(() -> {
             Separator obj = new Separator();
-            String[] result = obj.separate("1;2,3:4", ",|:|;");
+            String[] result = obj.separate("//;\\n1;2,3:4", ",|:|;");
             assertThat(result).containsExactly("1", "2", "3", "4");
         });
 
         assertSimpleTest(() -> {
             Separator obj = new Separator();
-            String[] result = obj.separate("1;2!3#4", ",|:|!|#");
+            String[] result = obj.separate("//;\\n//#\\n//!\\n1;2#3!4", ",|:|!|#|;");
             assertThat(result).containsExactly("1", "2", "3", "4");
         });
 
         assertSimpleTest(() -> {
             Separator obj = new Separator();
-            String[] result = obj.separate("1;2,3!4", ",|:|;|!");
+            String[] result = obj.separate("//;\\n//!\\n1;2,3!4", ",|:|;|!");
             assertThat(result).containsExactly("1", "2", "3", "4");
         });
 
