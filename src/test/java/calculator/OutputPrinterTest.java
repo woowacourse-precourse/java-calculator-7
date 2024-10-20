@@ -29,4 +29,11 @@ public class OutputPrinterTest {
         runner.promptForInput();
         assertThat(outputStreamCaptor.toString().trim()).isEqualTo("덧셈할 문자열을 입력해 주세요.");
     }
+
+    @Test
+    void 결과_메시지() {
+        var runner = new OutputPrinter();
+        runner.printResult(10);
+        assertThat(outputStreamCaptor.toString().trim()).isEqualTo("결과 : 10");
+    }
 }
