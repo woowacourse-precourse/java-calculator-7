@@ -2,7 +2,6 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -14,7 +13,7 @@ public class Application {
         String numberPart = Input.validateInput(input);
         List<String> separators = Input.extractSeparator(input);
         List<String> numbers = Sum.extractNumber(numberPart, separators);
-        System.out.println(numbers);
+        Integer totalSum = Sum.calculate(numbers);
     }
 }
 
@@ -69,5 +68,15 @@ class Sum {
 
         // 정규식 패턴에 맞춰서 split
         return List.of(numberPart.split(separatorPattern));
+    }
+
+    public static Integer calculate(List<String> numbers) {
+        int total = 0;
+
+        for (String number : numbers) {
+            total += Integer.parseInt(number);
+        }
+
+        return total;
     }
 }
