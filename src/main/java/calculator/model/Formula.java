@@ -45,7 +45,14 @@ public class Formula {
                 .toList();
     }
 
-    public Integer numberParser(String number) {
+    private String getCustomDelimiter() {
+        if (isCustom) {
+            return Util.getCustomDelimiter(formula);
+        }
+        return "";
+    }
+
+    private Integer numberParser(String number) {
         if (number.isEmpty()) {
             return 0;
         }
