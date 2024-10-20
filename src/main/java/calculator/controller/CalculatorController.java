@@ -22,6 +22,7 @@ public class CalculatorController {
         String userInput = calcView.getUserInput();
 
         //TODO: 구분자 찾기, split
+        calcService.detectSeparator(userInput);
         BigInteger result = calcService.calcInput(userInput);
 
         calcView.printResultMsg(result);
