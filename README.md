@@ -10,15 +10,21 @@
 </li>
 <br>
 
-<li>IllegalArgumentException 예외 처리</li>
+<li>IllegalArgumentException 예외 처리
+<ul>
+<li>잘못된 값을 입력할 경우 예외를 발생시킨다.</li>
+<li>음수를 입력 받은 경우 예외를 발생시킨다.</li>
+</ul>
+</li>
 <br>
 
 <li>커스텀 구분자 사용 기능
 <ul>
 <li>커스텀 구분자를 지정하는 경우, 기본 구분자도 사용 가능하다.<br>
-ex) 커스텀 구분자: 마침표(.)
+ex) 커스텀 구분자: 마침표(.)<br>
 "1.2,3:4" => 10
 </li>
+<li>커스텀 구분자로 숫자는 사용될 수 없다.</li>
 </ul>
 </li>
 </ol>
