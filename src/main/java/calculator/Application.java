@@ -7,14 +7,15 @@ import java.util.Arrays;
 public class Application {
     public static void main(String[] args) {
         // 사용자 입력 받는 부분
-        System.out.println("더하기 진행할 문자열을 입력해주세요.");
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
         try {
             int result = StringAddCalculator.add(input);
-            System.out.println("계산 결과: " + result);
+            System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.out.println("잘못된 입력입니다: " + e.getMessage());
+            throw e;
         }
     }
 
@@ -31,11 +32,33 @@ public class Application {
 
             // 커스텀 구분자 입력 확인 및 처리
             if (input.startsWith("//")) {
+                // 우선 실제 줄바꿈 문자("\n")를 찾음
                 int endIndexDelimiter = input.indexOf("\n");
-                delimiter = input.substring(2, endIndexDelimiter);
-                numbers = input.substring(endIndexDelimiter + 1);
 
-                delimiter = escapeSpecialCharacters(delimiter);
+                // 구분자 부분을 저장할 변수 선언
+                String delimiterPart;
+
+                // 만약 실제 줄바꿈 문자가 없다면, 이스케이프된 "\\n"을 처리
+                if (endIndexDelimiter == -1) {
+                    endIndexDelimiter = input.indexOf("\\n");
+                    if (endIndexDelimiter == -1) {
+                        throw new IllegalArgumentException("잘못된 입력 형식으로 커스텀 구분자 선언 후 줄바꿈을 포함해야 합니다.");
+                    }
+
+                    // 이스케이프된 \\n을 처리하는 경우, 구분자를 이에 맞춰서 추출
+                    delimiterPart = input.substring(2, endIndexDelimiter);
+                    numbers = input.substring(endIndexDelimiter + 2);  // \\n이 2글자이므로 +2
+                } else {
+                    // 실제 줄바꿈을 처리하는 경우
+                    delimiterPart = input.substring(2, endIndexDelimiter);
+                    numbers = input.substring(endIndexDelimiter + 1);  // \n은 한 글자이므로 +1
+                }
+
+                if (delimiterPart.startsWith("[") && delimiterPart.endsWith("]")) {
+                    delimiter = extractMultipleDelimiters(delimiterPart);
+                } else {
+                    delimiter = escapeSpecialCharacters(delimiterPart);
+                }
             }
 
             // 구분자 기준으로 문자열 분리
@@ -61,13 +84,27 @@ public class Application {
                 }
             }
 
-            // 음수가 있을 경우 예외 발생
             if (negativeCount > 0) {
+                // 음수 값들을 포함하는 배열을 읽고 예외 발생
                 throw new IllegalArgumentException("Negative numbers are not allowed: "
                         + Arrays.toString(Arrays.copyOf(negativeNumbers, negativeCount)));
             }
 
             return sum;
+        }
+
+        private static String extractMultipleDelimiters(String delimiterPart) {
+            String[] delimiters = delimiterPart.substring(1, (delimiterPart.length() - 1)).split("]\\[");
+            StringBuilder delimiterRegex = new StringBuilder();
+
+            for (int i = 0; i < delimiters.length; i++) {
+                delimiterRegex.append(escapeSpecialCharacters(delimiters[i]));
+                if (i < (delimiters.length - 1)) {
+                    delimiterRegex.append("|");
+                }
+            }
+
+            return delimiterRegex.toString();
         }
 
         // 정규식 특수문자 처리용 메소드
