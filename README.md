@@ -2,9 +2,7 @@
 
 ![Generic badge](https://img.shields.io/badge/precourse-week1-green.svg)
 ![Generic badge](https://img.shields.io/badge/version-1.0.1-brightgreen.svg)
-![Generic badge](https://img.shields.io/badge/test-20_passed-blue.svg)
-
----
+![Generic badge](https://img.shields.io/badge/test-22_passed-blue.svg)
 
 ## 목차
 
@@ -29,8 +27,6 @@
 <br>
 
 ## 🚀 요구사항
-
----
 
 ### ✔️ 기능 요구사항
 
@@ -62,12 +58,10 @@
 
 ## 🎯 기능 목록
 
----
-
 ### ✔️ 입력
 
-- [ ] console로 입력을 받는다.
-- [ ] 콘솔 입력 외 다른 방식으로 입력 받을 수 있도록 전략 패턴을 사용한다.
+- [x] console로 입력을 받는다.
+- [x] 콘솔 입력 외 다른 방식으로 입력 받을 수 있도록 전략 패턴을 사용한다.
 
 <br>
 
@@ -104,11 +98,9 @@
 
 ## 결과
 
----
-
 ### ✔️ 실행 예시
 
-<br>
+<img src="https://github.com/user-attachments/assets/cde49caa-f02b-41bf-a3f0-d16f1e1b206b">
 
 ### ✔️ 클래스 다이어그램
 
@@ -120,5 +112,4 @@
 
 ## 블로그 포스팅
 
----
 
