@@ -27,8 +27,16 @@ public class StringCalculator {
         String[] tokens = input.split(delimiter);
         int sum = 0;
         for (String token : tokens) {
-            sum += Integer.parseInt(token);
+            sum += parseNumber(token);
         }
         return sum;
+    }
+
+    private static int parseNumber(String token) {
+        try {
+            return Integer.parseInt(token);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("잘못된 입력 값: " + token);
+        }
     }
 }
