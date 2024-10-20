@@ -21,6 +21,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining("음수가 입력되었습니다.")
         );
     }
 
@@ -91,10 +92,11 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 커스텀_구분자에_숫자가_포함된_경우() {
-        assertSimpleTest(() -> {
-            assertThatThrownBy(() -> runException("//3\\n1,2,3,4"))
-                    .isInstanceOf(IllegalArgumentException.class);
-        });
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//3\\n1,2,3,4"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining("커스텀 구분자에 숫자가 포함될 수 없습니다: ")
+        );
     }
 
     @Override
