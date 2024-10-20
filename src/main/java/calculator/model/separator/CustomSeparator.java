@@ -1,5 +1,6 @@
 package calculator.model.separator;
 
+import calculator.exception.ErrorCode;
 import java.util.regex.Pattern;
 
 public class CustomSeparator implements Separator {
@@ -19,7 +20,7 @@ public class CustomSeparator implements Separator {
     public static Separator extractAndCombine(String input, String defaultSeparator) {
         int separatorIndex = input.indexOf("\\n");
         if (separatorIndex == -1) {
-            throw new IllegalArgumentException("커스텀 구분자 형식이 잘못되었습니다.");
+            throw new IllegalArgumentException(ErrorCode.INVALID_CUSTOM_SEPARATOR.getMessage());
         }
 
         // 커스텀 구분자 추출
@@ -33,13 +34,13 @@ public class CustomSeparator implements Separator {
 
     private static void validateCustomSeparator(String customSeparator) {
         if (customSeparator.length() > MAX_CUSTOM_SEPARATOR_LENGTH) {
-            throw new IllegalArgumentException("커스텀 구분자는 한 글자만 가능합니다.");
+            throw new IllegalArgumentException(ErrorCode.INVALID_CUSTOM_SEPARATOR_LENGTH.getMessage());
         }
         if (customSeparator.isEmpty() || customSeparator.trim().isEmpty()) {
-            throw new IllegalArgumentException("커스텀 구분자는 공백이 될 수 없습니다.");
+            throw new IllegalArgumentException(ErrorCode.BLANK_CUSTOM_SEPARATOR.getMessage());
         }
         if (customSeparator.matches("\\d")) {
-            throw new IllegalArgumentException("커스텀 구분자는 숫자가 될 수 없습니다.");
+            throw new IllegalArgumentException(ErrorCode.NUMERIC_CUSTOM_SEPARATOR.getMessage());
         }
     }
 }

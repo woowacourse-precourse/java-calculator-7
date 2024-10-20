@@ -1,5 +1,6 @@
 package calculator.service;
 
+import calculator.exception.ErrorCode;
 import calculator.model.separator.CustomSeparator;
 import calculator.model.separator.DefaultSeparator;
 import calculator.model.separator.Separator;
@@ -27,7 +28,7 @@ public class CalculatorService {
 
     private static void validateInput(String input) {
         if (input == null || input.trim().isEmpty()) {
-            throw new IllegalArgumentException("입력 값이 비어있습니다.");
+            throw new IllegalArgumentException(ErrorCode.EMPTY_INPUT.getMessage());
         }
     }
 
@@ -52,11 +53,11 @@ public class CalculatorService {
                 try {
                     int num = Integer.parseInt(number.trim());
                     if (num < MIN_NUMBER) {
-                        throw new IllegalArgumentException("숫자는 1 이상의 양수여야 합니다.");
+                        throw new IllegalArgumentException(ErrorCode.NON_POSITIVE_NUMBER.getMessage());
                     }
                     sum += num;
                 } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("문자열은 숫자와 구분자로만 이루어져야 합니다.");
+                    throw new IllegalArgumentException(ErrorCode.INVALID_NUMBER_FORMAT.getMessage());
                 }
             }
         }
