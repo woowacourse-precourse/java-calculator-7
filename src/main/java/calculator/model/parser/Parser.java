@@ -25,16 +25,18 @@ public class Parser {
         Object[] result = inputValidator.findCustomDelimiter(UserInput);
         String CustomDelimiter = (String) result[0];
         int startInputIndex = (int) result[1];
+
         if(startInputIndex!=DelimiterNotExitsIntValue) {
             UserInput = UserInput.substring( startInputIndex);
             finalDelimiter = Delimiter + "|" + CustomDelimiter;
         }
+
     }
 
     public long[] convertStringsToNumbers(String[] splitStrings) {
         inputValidator.validateNumbers(splitStrings);
-
         long[] numbers = new long[splitStrings.length];
+
         for (int i = 0; i < splitStrings.length; i++) {
             numbers[i] = Long.parseLong(splitStrings[i]);
         }
