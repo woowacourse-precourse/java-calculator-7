@@ -8,6 +8,7 @@ public class Parser {
 
     private static final String CUSTOM = "custom";
     private static final String DEFAULT = "default";
+    private static final String PREFIX_CUSTOM_START = "//";
     private static final String WRONG_INPUT_MESSAGE = "잘못된 입력입니다.";
 
     public static List<Integer> parse(String input) {
@@ -35,6 +36,13 @@ public class Parser {
         return new String(customSeparatorArr);
     }
 
+    private static String checkType(String input) {
+        if (input.startsWith(PREFIX_CUSTOM_START)) {
+            return CUSTOM;
+        }
+        return DEFAULT;
+    }
+
     private static String getSeparator(String input, String type) {
         List<String> separators = new ArrayList<>();
         separators.add(",");
@@ -60,13 +68,6 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(WRONG_INPUT_MESSAGE);
         }
-    }
-
-    private static String checkType(String input) {
-        if (input.startsWith("//")) {
-            return CUSTOM;
-        }
-        return DEFAULT;
     }
 
     private static void addCustomSeparators(List<String> separators, String input) {
