@@ -13,6 +13,7 @@
     
     파싱된 모든 정수 더하기 
     
+
 2. 사용자 입력 커스텀 구분자 추가 
     
     ( //<Separator>\n<Number1><Separator><Number2><Separator><Number3> )
@@ -22,21 +23,21 @@
     확인된 커스텀 구분자 기준으로 문자열을 자르기
     
     1번 루틴으로 이동 
+
     
 3. 잘못 입력된 경우 예외처리<IllegaIArgumentException>후 애플리케이션 종료
     
-     정수범위가 아닐 경우 예외처리로 애플리케이션 종료
+     정수범위가 아닐 경우 예외처리로 종료
     
-     정수판단 함수 isDigit(), isNumeric() 판단
+     정수판단 함수 isDigit() or isNumeric() 판단
     
      정규표현식 함수 matches() 판단
+
     
 4. 예외상황
-    
-    최대 N자릿수 정수 처리 방법 > integer array 사용으로 고려할 필요 없음
-    
-    실수처리 > round() 반올림 처리 
-    
+   
+   정수 외 문자 처리    
+
     커스텀 구분자 문자열 체크  > 정규표현식 사용으로 Start와 End String 체크
     
     객체화 > 중복되는 코드 통일
