@@ -1,12 +1,11 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.Console;
-
 public class Application {
 
 
     public static void main(String[] args) {
-		Positive positive = StringCalculator.input();
+		StringController stringController = new StringController();
+		Positive positive = stringController.start();
 		positive.printResult();
     }
 }
