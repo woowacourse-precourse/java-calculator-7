@@ -2,6 +2,6 @@ package calculator.calculateStrategy;
 
 import java.util.List;
 
-public interface Calculate {
+public interface CalculateStrategy {
     public Integer add(List<Integer> operands);
 }
