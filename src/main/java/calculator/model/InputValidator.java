@@ -1,5 +1,7 @@
 package calculator.model;
 
+import static calculator.exception.ExceptionMessage.INPUT_IS_INVALID;
+
 public class InputValidator {
 
     public static InputValidator getInstance() {
@@ -12,7 +14,7 @@ public class InputValidator {
     public void validate(String input) {
         if (!(DefaultDelimiter.hasDefaultDelimiter(input) || CustomDelimiter.getInstance()
                 .hasCustomDelimiter(input))) {
-            throw new IllegalArgumentException("잘못된 입력입니다.");
+            throw new IllegalArgumentException(INPUT_IS_INVALID);
         }
     }
 }

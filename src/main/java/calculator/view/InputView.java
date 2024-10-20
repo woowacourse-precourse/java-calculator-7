@@ -1,5 +1,7 @@
 package calculator.view;
 
+import static calculator.exception.ExceptionMessage.INPUT_IS_BLANK;
+
 import calculator.exception.InputBlankException;
 import camp.nextstep.edu.missionutils.Console;
 
@@ -14,7 +16,7 @@ public class InputView {
         System.out.println(PROMPT);
         String input = Console.readLine().trim();
         if (input.isBlank()) {
-            throw new InputBlankException("입력이 공백입니다.");
+            throw new InputBlankException(INPUT_IS_BLANK);
         }
         Console.close();
         return input;

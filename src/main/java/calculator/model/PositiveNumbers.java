@@ -1,5 +1,7 @@
 package calculator.model;
 
+import static calculator.exception.ExceptionMessage.NOT_POSITIVE;
+
 import java.util.Arrays;
 
 public class PositiveNumbers {
@@ -21,7 +23,7 @@ public class PositiveNumbers {
 
     private void validatePositive(Integer number) {
         if (number <= 0) {
-            throw new IllegalArgumentException("양수가 아닙니다.");
+            throw new IllegalArgumentException(NOT_POSITIVE);
         }
     }
 }
