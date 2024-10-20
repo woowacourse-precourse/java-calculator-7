@@ -38,7 +38,7 @@ public class Application {
                 } catch (NumberFormatException e) { // 숫자가 아닌 경우 IllegalArgumentException 발생
                     throw new IllegalArgumentException("잘못된 숫자 형식입니다.");
                 }
-                if(num<=0)
+                if(num<0)
                     throw new IllegalArgumentException("양의 정수가 아닙니다.");
                 sum += num;
             } catch (IllegalArgumentException e){
