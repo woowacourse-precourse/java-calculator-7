@@ -22,4 +22,8 @@ public class StringAddCalculator {
         }
         return calculateSum(values);
     }
+
+    private int StringToInt(String value) {
+        return Integer.parseInt(value);
+    }
 }
