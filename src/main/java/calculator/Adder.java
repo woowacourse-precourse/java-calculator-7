@@ -9,6 +9,7 @@ public class Adder {
         this.numList = numList;
     }
 
+    // 추출된 모든 숫자를 합산하여 반환
     public int addAll() {
         int sum = 0;
         for(String number : numList) {

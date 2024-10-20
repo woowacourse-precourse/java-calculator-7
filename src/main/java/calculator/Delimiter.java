@@ -12,6 +12,7 @@ public class Delimiter {
         delimiterList.add(":");
     }
 
+    // 구분자 리스트 반환
     public List<String> getDelimiters(String input) {
         String newDelimiter = checkCustomDelimiter(input);
 
@@ -22,6 +23,7 @@ public class Delimiter {
         return delimiterList;
     }
 
+    // 커스텀 구분자 존재 여부 확인
     private String checkCustomDelimiter(String input) {
         if(!input.startsWith("//")) {
             return null;
@@ -45,6 +47,7 @@ public class Delimiter {
         return customDelimiter;
     }
 
+    // 커스텀 구분자를 구분자 리스트에 추가
     private void addDelimiter(String newDelimiter) {
         delimiterList.add(newDelimiter);
     }
