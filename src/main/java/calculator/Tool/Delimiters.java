@@ -3,7 +3,7 @@ package calculator.Tool;
 public enum Delimiters {
     COMMA(","),
     COLON(";"),
-    CUSTOM("//(.*?)\\\\n");
+    CUSTOM("//.\\\\n");
     private final String delimiter;
 
     Delimiters(String delimiter) {
