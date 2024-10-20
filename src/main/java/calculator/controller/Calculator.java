@@ -6,18 +6,18 @@ import static calculator.view.View.displayResult;
 import calculator.domain.InputProcessor;
 
 public class Calculator {
-    InputProcessor inputHandler = new InputProcessor();
+    InputProcessor inputProcessor = new InputProcessor();
 
     public void start() {
         displayInputPrompt();
-        inputHandler.setInputString();
+        inputProcessor.setInputString();
     }
 
     public void process() {
-        inputHandler.processInputString();
+        inputProcessor.processInputString();
     }
 
     public void display() {
-        displayResult(inputHandler);
+        displayResult(inputProcessor);
     }
 }
