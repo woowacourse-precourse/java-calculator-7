@@ -1,4 +1,4 @@
-package calculator.constant;
+package calculator.validator.constant;
 
 public class ErrorMessage {
     public static final String ERROR_MESSAGE = "[ERROR] 발생";

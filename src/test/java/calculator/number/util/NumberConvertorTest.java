@@ -1,6 +1,6 @@
 package calculator.number.util;
 
-import calculator.constant.ErrorMessage;
+import calculator.validator.constant.ErrorMessage;
 import calculator.number.util.impl.DoubleConvertor;
 import calculator.number.util.impl.LongConvertor;
 import org.junit.jupiter.api.Test;

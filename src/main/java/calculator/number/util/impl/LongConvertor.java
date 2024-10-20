@@ -1,6 +1,6 @@
 package calculator.number.util.impl;
 
-import calculator.constant.ErrorMessage;
+import calculator.validator.constant.ErrorMessage;
 import calculator.number.util.NumberConvertorService;
 import java.util.List;
 

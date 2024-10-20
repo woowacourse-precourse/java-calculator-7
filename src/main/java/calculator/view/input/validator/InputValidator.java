@@ -1,6 +1,6 @@
 package calculator.view.input.validator;
 
-import calculator.constant.ErrorMessage;
+import calculator.validator.constant.ErrorMessage;
 import calculator.regex.domain.RegexPattern;
 
 public class InputValidator {

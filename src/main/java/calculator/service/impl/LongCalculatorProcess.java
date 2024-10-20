@@ -1,6 +1,6 @@
 package calculator.service.impl;
 
-import calculator.constant.ErrorMessage;
+import calculator.validator.constant.ErrorMessage;
 import calculator.number.domain.NumberService;
 import calculator.service.CalculatorService;
 

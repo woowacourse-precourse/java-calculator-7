@@ -1,6 +1,6 @@
 package calculator.regex.domain;
 
-import calculator.constant.ErrorMessage;
+import calculator.validator.constant.ErrorMessage;
 import calculator.regex.constant.SeparatorConvertorConstant;
 import calculator.sentence.dto.Sentence;
 import calculator.regex.constant.RegexConstant;

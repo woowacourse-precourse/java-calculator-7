@@ -1,6 +1,6 @@
 package calculator.regex.util;
 
-import calculator.constant.ErrorMessage;
+import calculator.validator.constant.ErrorMessage;
 import calculator.regex.constant.SeparatorConvertorConstant;
 
 import java.util.stream.IntStream;

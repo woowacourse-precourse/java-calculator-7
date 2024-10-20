@@ -1,5 +1,5 @@
 package calculator.regex.domain;
-import calculator.constant.ErrorMessage;
+import calculator.validator.constant.ErrorMessage;
 import calculator.sentence.dto.Sentence;
 import org.junit.jupiter.api.Test;
 
