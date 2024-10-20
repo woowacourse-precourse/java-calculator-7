@@ -2,7 +2,7 @@ package view;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.io.ByteArrayInputStream;
@@ -68,7 +68,7 @@ public class InputViewTest {
         InputView inputView = new InputView();
         String input = inputView.getInput();
 
-        assertTrue(getOutput().contains("덧셈할 문자열을 입력해 주세요."));
+        assertEquals(getOutput(), "덧셈할 문자열을 입력해 주세요.");
         assertThat(input).isEqualTo("1,2,3");
     }
 
@@ -78,7 +78,7 @@ public class InputViewTest {
         InputView inputView = new InputView();
         String input = inputView.getInput();
 
-        assertTrue(getOutput().contains("덧셈할 문자열을 입력해 주세요."));
+        assertEquals(getOutput(), "덧셈할 문자열을 입력해 주세요.");
         assertThat(input).isEqualTo("//;\n1;2;3");
     }
 
@@ -88,7 +88,7 @@ public class InputViewTest {
         InputView inputView = new InputView();
         String input = inputView.getInput();
 
-        assertTrue(getOutput().contains("덧셈할 문자열을 입력해 주세요."));
+        assertEquals(getOutput(), "덧셈할 문자열을 입력해 주세요.");
         assertThat(input).isEqualTo("//;1");
     }
 
@@ -98,7 +98,7 @@ public class InputViewTest {
         InputView inputView = new InputView();
         String input = inputView.getInput();
 
-        assertTrue(getOutput().contains("덧셈할 문자열을 입력해 주세요."));
+        assertEquals(getOutput(), "덧셈할 문자열을 입력해 주세요.");
         assertThat(input).isEqualTo(" ");
     }
 
@@ -108,7 +108,8 @@ public class InputViewTest {
         InputView inputView = new InputView();
 
         assertThatThrownBy(inputView::getInput)
-                .isInstanceOf(NoSuchElementException.class);
+                .isInstanceOf(NoSuchElementException.class)
+                .hasMessage("입력값이 없습니다.");
     }
 
 }
