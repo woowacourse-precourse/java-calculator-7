@@ -10,8 +10,14 @@ public class StringCalculator {
             return Integer.parseInt(input);
         }
 
-        // 쉼표 또는 콜론으로 구분하여 숫자 합산
-        String[] numbers = input.split("[,|:]");
+        String delimiter = "[,|:]";  // 기본 구분자
+        if (input.startsWith("//")) {  // 커스텀 구분자 처리
+            int delimiterIndex = input.indexOf("\n");
+            delimiter = input.substring(2, delimiterIndex);  // 구분자 추출
+            input = input.substring(delimiterIndex + 1);  // 숫자 부분만 남김
+        }
+
+        String[] numbers = input.split(delimiter);
         int sum = 0;
         for (String number : numbers) {
             sum += Integer.parseInt(number);
