@@ -13,10 +13,10 @@ public class DelimiterParser {
             int delimiterStartIndex = currentIndex + 2;
             int delimiterEndIndex = inputString.indexOf("\\n", delimiterStartIndex);
             if (delimiterEndIndex == -1) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("'//'에 매칭되는 '\\n' 이 있어야 합니다.");
             }
             if (delimiterEndIndex - delimiterStartIndex != 1) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("커스텀 구분자로는 길이가 1인 문자를 지정해야 합니다.");
             }
             delimiters.add(inputString.charAt(delimiterStartIndex));
             currentIndex = delimiterEndIndex + 2;

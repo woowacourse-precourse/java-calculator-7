@@ -14,11 +14,11 @@ public class Calculator {
             try {
                 int tokenValue = Integer.parseInt(token);
                 if (tokenValue < 0) {
-                    throw new IllegalArgumentException();
+                    throw new IllegalArgumentException("숫자는 양수만 입력할 수 있습니다.");
                 }
                 sum += tokenValue;
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("구분자와 양수만 입력할 수 있습니다.");
             }
         }
         return sum;
