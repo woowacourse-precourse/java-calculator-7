@@ -26,30 +26,27 @@ public class NumberExtraction {
 
     //커스텀 구분자가 있다면 separation에 add 후 구분자 지정 구문이 끝나는 idx+1 반환.
     private int checkCustomSeparation(String input){
+        System.out.println(input);
+        int customEndIdx = input.indexOf("\\n");
         if (input.startsWith("//")){
-            System.out.println(input);
+            if(customEndIdx == -1){
+                throwArgumentException("커스텀 구분자는 //와 \\n 사이에 입력해야 합니다.");
+            }
             int i = 0;
 
-            boolean checkEnd = false;
             for(String s : inputArray){
                 System.out.println(s);
                 if (i++ < 2) continue;
+                if (i > customEndIdx) break;
 
                 if (isNumber.contains(s)){
                     throwArgumentException("숫자는 구분자가 될 수 없습니다.");
                 }
                 else{
-                    if(s.equals("\n")) {
-                        checkEnd = true;
-                        break;
-                    }
                     separationSet.add(s);
                 }
             }
-            if (checkEnd) return i;
-            else{
-                throwArgumentException("커스텀 구분자는 //와 \\n 사이에 입력해야 합니다.");
-            }
+            return i+1;
         }
         return 0;
     }
