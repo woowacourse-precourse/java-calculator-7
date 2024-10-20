@@ -1,6 +1,7 @@
 package calculator;
 
 import static calculator.DelimiterGenerator.generateDelimiter;
+import static calculator.NumberExtractor.parseInput;
 import static calculator.UserInputReader.readInput;
 
 import java.util.List;
@@ -9,7 +10,8 @@ public class Calculator {
     public void calculate() {
 
         String input = readInput();
-        List<Character> delimiter = generateDelimiter(input);
+        DelimiterInputDTO delimiter = generateDelimiter(input);
+        List<Long> parsedInput = parseInput(delimiter);
 
     }
 }
