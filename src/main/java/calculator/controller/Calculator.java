@@ -20,7 +20,7 @@ public class Calculator {
         String userInput = calculatorViewer.readUserInput();
         PatternType patternType = stringType.findPatternType(userInput);
 
-        String regex;
+        String regex = null;
         switch (patternType){
             case DEFAULT_PATTERN -> regex = "[,:]";
             case CUSTOM_PATTERN -> regex = ""+userInput.charAt(2);
