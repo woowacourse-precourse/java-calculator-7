@@ -20,28 +20,27 @@ public class StringValidator {
 	}
 
 	public void validate(String input) {
-		int currentStatus = checkStartStatus(input);
 		int index = INPUT_START_INDEX;
 		while (index < input.length()) {
-			index = checkInputStatus(input, index, currentStatus);
-			currentStatus = changeStatus(currentStatus);
+			index = checkInputStatus(input, index);
 		}
 	}
 
-	private int checkStartStatus(String input) {
-		char start = input.charAt(INPUT_START_INDEX);
-		if (Character.isDigit(start)) {
-			return DIGIT;
-		}
-		return DELIMITER;
-	}
-
-	private int checkInputStatus(String input, int index, int currentStatus) {
+	private int checkInputStatus(String input, int index) {
+		int currentStatus = checkStatus(input, index);
 		return switch (currentStatus) {
 			case DIGIT -> checkInputDigit(input, index);
 			case DELIMITER -> checkInputDelimiter(input, index);
 			default -> throw new IllegalArgumentException("잘못된 문자열 형식입니다.");
 		};
+	}
+
+	private int checkStatus(String input, int index) {
+		char start = input.charAt(index);
+		if (Character.isDigit(start)) {
+			return DIGIT;
+		}
+		return DELIMITER;
 	}
 
 	private int checkInputDigit(String input, int index) {
@@ -59,12 +58,5 @@ public class StringValidator {
 			throw new IllegalArgumentException("잘못된 문자열 형식입니다.");
 		}
 		return index + DELIMITER_LENGTH;
-	}
-
-	private int changeStatus(int currentStatus) {
-		if (currentStatus == DIGIT) {
-			return DELIMITER;
-		}
-		return DIGIT;
 	}
 }
