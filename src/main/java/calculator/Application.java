@@ -26,6 +26,8 @@ public class Application {
         String[] separatedNumber = splitNumberBySeparator(input, separator);
 
         validateNumbers(separatedNumber);
+        int result = addNumber(separatedNumber);
+        System.out.println("결과 : " + result);
     }
 
     // 커스텀 구분자(Separator, Sep)를 추출
@@ -78,6 +80,15 @@ public class Application {
         if (parseNum < 1) {
             throw new IllegalArgumentException("0과 음수는 입력할 수 없습니다.");
         }
+    }
+
+    // 숫자끼리 덧셈
+    private static int addNumber(String[] separatedNumber) {
+        int sum = 0;
+        for (String numStr : separatedNumber) {
+            sum += Integer.parseInt(numStr);
+        }
+        return sum;
     }
 
 }
