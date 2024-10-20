@@ -26,8 +26,8 @@ public class Calculator {
             case CUSTOM_PATTERN -> regex = ""+userInput.charAt(2);
             case INVALID_PATTERN -> throw new IllegalArgumentException("ERROR: invalid argument");
         }
-
-        int sum = stringAdder.addString(userInput, regex);
+        String s = userInput.replaceAll("//.\\\\n", "");
+        int sum = stringAdder.addString(s, regex);
 
         calculatorViewer.printResult(sum);
     }
