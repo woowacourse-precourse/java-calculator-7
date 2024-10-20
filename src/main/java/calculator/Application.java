@@ -30,9 +30,9 @@ public class Application {
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("Invalid input: non-numeric value found -> " + num);
             }
-            
-        return sum;
         }
+
+        return sum;
     }
 
     public static String escapeSpecialRegexChars(String delimiter) {
@@ -50,5 +50,6 @@ public class Application {
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
+
     }
 }
