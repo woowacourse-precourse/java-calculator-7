@@ -1,7 +1,6 @@
-package calculator;
+package calculator.util;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Converter {
     public List<Integer> convert(List<String> input) {
