@@ -29,7 +29,7 @@ public class Calculator {
         // 4. 덧셈
         int sum = 0;
         for (String number : numbers) {
-            if (!number.matches("\\d+")) {
+            if (!number.matches("-?\\d+")) {
                 throw new IllegalArgumentException("숫자 이외의 값은 입력할 수 없습니다.");
             }
             int num = Integer.parseInt(number);
@@ -38,7 +38,7 @@ public class Calculator {
                 throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
             }
             sum += num;
-        } // 1,2:3   //;\n1;2;3
+        } // 1,2:3   //;\n1;2;3    1,-2,3
 
         return sum;
     }
