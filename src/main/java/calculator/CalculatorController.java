@@ -2,11 +2,12 @@ package calculator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CalculatorController {
     private static final CalculatorView calculatorView = new CalculatorView();
     private static final List<Integer> nums = new ArrayList<>();
-    private static final List<Character> delimiters = new ArrayList<>(List.of(',', ':'));
+    private static final List<String> delimiters = new ArrayList<>(List.of(",", ":"));
 
     public static void run() {
         startCalculator();
@@ -26,6 +27,7 @@ public class CalculatorController {
     private static void checkString(String inputString) {
         if (inputString.isEmpty()) {
             calculatorView.printResult(0);
+            return;
         }
 
         if (delimiters.stream().anyMatch(d -> inputString.startsWith(String.valueOf(d))) ||
@@ -41,7 +43,7 @@ public class CalculatorController {
         String suffix = inputString.substring(3, 5);
 
         if (prefix.equals("//") && suffix.equals("\\n")) {
-            delimiters.add(inputString.charAt(2));
+            delimiters.add(inputString.substring(2, 3));
             return inputString.substring(5);
         }
 
@@ -49,12 +51,17 @@ public class CalculatorController {
     }
 
     private static void splitString(String inputString) {
-        for (char ch : inputString.toCharArray()) {
-            if (Character.isDigit(ch)) {
-                nums.add(Integer.parseInt(String.valueOf(ch)));
-            } else if (!delimiters.contains(ch)) {
-                throw new IllegalArgumentException("유효하지 않은 구분자입니다.");
+        String regex = "[" + delimiters.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining()) + "]";
+
+        String[] splitString = inputString.split(regex);
+
+        for (String part : splitString) {
+            if (!part.chars().allMatch(Character::isDigit)) {
+                throw new IllegalArgumentException("구분자를 잘못 입력하였습니다.");
             }
+            nums.add(Integer.parseInt(part));
         }
     }
 
