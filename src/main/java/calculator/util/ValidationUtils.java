@@ -21,6 +21,7 @@ public class ValidationUtils {
     public static void validateInput(String input, List<String> delimiters) {
         validateIncorrectDelimiterPosition(input, delimiters);
         validateConsecutiveDelimiters(input, delimiters);
+        validateWhitespaceBetweenDelimiters(input, delimiters);
     }
 
     public static void validateValidInteger(String value) {
@@ -65,6 +66,17 @@ public class ValidationUtils {
 
         if (matcher.find()) {
             throw new IllegalArgumentException("연속된 구분자가 포함된 잘못된 입력입니다. 입력값: [" + input + "]");
+        }
+    }
+
+    private static void validateWhitespaceBetweenDelimiters(String input, List<String> delimiters) {
+        String delimiterPattern = String.join("|", delimiters);
+        String[] tokens = input.split(delimiterPattern);
+
+        for (String token : tokens) {
+            if (token.trim().isEmpty()) {
+                throw new IllegalArgumentException("구분자 사이에 공백이 포함된 잘못된 입력입니다. 입력값: [" + input + "]");
+            }
         }
     }
 
