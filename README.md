@@ -45,3 +45,5 @@
    - Adder : 덧셈기 (인터페이스)
      - PositiveAdder : 양수 덧셈기 (구현체)
    - AppConfig : 객체 생성 및 의존성 주입
+   - Input : 입력 창
+   - Output : 출력 창
