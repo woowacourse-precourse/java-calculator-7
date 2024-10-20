@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 public class InputValidator {
     public static void validate(UserInput userInput){
         if(userInput.hasCustomDelimiter()){
-            String delimiter = Parser.extractCustomDelimiter(userInput.getInput());
+            String delimiter = userInput.getDelimiters().getFirst();
 
             validateCustomDelimiterForm(delimiter);
             validateInputWithCustomDelimiter(userInput.getInput(), delimiter);
