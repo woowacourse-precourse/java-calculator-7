@@ -13,29 +13,23 @@ public class DigitExtractor {
      * 문자열에서 숫자 추출
      */
     public List<Integer> extractDigits(String input, String regex) {
-        parseTokens(input, regex);
-        if (!validateInput(input)) {
-            throw new IllegalArgumentException("Invalid input: " + input);
+        if (!validateInput(input, regex)) {
+            throw new IllegalArgumentException("유효하지 않은 문자열입니다. 프로그램을 종료합니다.");
         }
         List<Integer> digits = new ArrayList<>(List.of(0)); // 입력이 빈 문자열("")인 경우 0 반환
         if (!tokens.getFirst().isEmpty()) {
+            digits.clear();
             digits = tokens.stream().map(Integer::parseInt).collect(Collectors.toList());
         }
         return digits;
     }
 
     /**
-     * 토큰 분리
-     */
-    private void parseTokens(String input, String regex) {
-        tokens = Stream.of(input.split(regex)).map(String::trim).collect(Collectors.toList());
-    }
-
-    /**
      * 문자열의 유효성 검증
      */
-    private boolean validateInput(String input) {
-        return tokens.stream().noneMatch(token -> token.trim().matches(".*[^0-9].*"));
+    private boolean validateInput(String input, String regex) {
+        tokens = Stream.of(input.split(regex)).map(String::trim).collect(Collectors.toList()); // 토큰 분리
+        return tokens.stream().noneMatch(token -> token.matches(".*[^0-9].*"));
     }
 
 }
