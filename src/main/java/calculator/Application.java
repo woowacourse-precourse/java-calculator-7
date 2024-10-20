@@ -7,6 +7,7 @@ public class Application {
     // 커스텀 구분자를 지정한 문자열의 패턴
     private final String CUSTOM_SEPARATOR_PATTERN = "^//.\\\\n.*";
 
+
     private final Integer CUSTOM_SEPARATOR_POS = 2;
     // 기본 구분자 리스트
     private final List<Character> DEFAULT_SEPARATOR_LIST = List.of(':', ',');
@@ -63,6 +64,14 @@ public class Application {
         if (Character.isDigit(customSeparator)) {
             throw new IllegalArgumentException();
         }
+    }
+
+    // 시작 위치를 찾아 반환한다.
+    private Integer getStartIndex() {
+        if (startIndex != null) {
+            return startIndex;
+        }
+        return startIndex = (hasCustomSeparator() ? 5 : 0);
     }
 
     public static void main(String[] args) {
