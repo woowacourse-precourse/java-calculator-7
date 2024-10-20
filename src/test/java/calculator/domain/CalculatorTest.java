@@ -2,6 +2,7 @@ package calculator.domain;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
 import org.junit.jupiter.api.*;
 
 class CalculatorTest {
@@ -18,7 +19,7 @@ class CalculatorTest {
 
         // when & then
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            calculator.calculate(operation, a, b);
+            calculator.calculate(operation, List.of(a, b));
         });
         assertEquals("덧셈 중 오버플로우가 발생했습니다.", exception.getMessage());
     }
@@ -35,7 +36,7 @@ class CalculatorTest {
 
         // when & then
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            calculator.calculate(operation, a, b);
+            calculator.calculate(operation, List.of(a, b));
         });
         assertEquals("덧셈 중 오버플로우가 발생했습니다.", exception.getMessage());
     }
@@ -54,7 +55,7 @@ class CalculatorTest {
         Number expected = new Number(6);
 
         // when
-        Number actual = calculator.calculate(operation, n1, n2, n3);
+        Number actual = calculator.calculate(operation, List.of(n1, n2, n3));
 
         // then
         assertEquals(expected, actual);

@@ -1,6 +1,6 @@
 package calculator.domain;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class Calculator {
 
@@ -12,9 +12,9 @@ public class Calculator {
         return instance;
     }
 
-    Number calculate(Operation operation, Number... numbers) {
-        return Arrays
-            .stream(numbers)
+    public Number calculate(Operation operation, List<Number> numbers) {
+        return numbers
+            .stream()
             .reduce(operation::execute)
             .orElseThrow(() -> new IllegalArgumentException("피연산자는 1개 이상이어야합니다."));
     }
