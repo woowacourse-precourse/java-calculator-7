@@ -12,6 +12,9 @@ public class CustomDelimiterStrategy implements DelimiterStrategy {
         if (isNumber(delimiter)) {
             throw new IllegalArgumentException("커스텀 구분자는 숫자를 포함하면 안 된다");
         }
+        if (!isChar(delimiter)) {
+            throw new IllegalArgumentException("하나의 문자만 커스텀 구분자로 지정한다");
+        }
         return List.of(delimiter);
     }
 
@@ -23,5 +26,9 @@ public class CustomDelimiterStrategy implements DelimiterStrategy {
 
     private boolean isNumber(String delimiter) {
         return delimiter.matches(".*\\d.*");
+    }
+
+    private boolean isChar(String delimiter) {
+        return delimiter.length() == 1;
     }
 }

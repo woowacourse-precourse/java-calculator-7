@@ -19,7 +19,7 @@
 - [ ] 커스텀 구분자 설정 기능
     - [X] 구분자 추출 함수
         - [X] 구분자로 숫자가 포함될 경우 `IllegalArgumentException` 발생 ex. "//6\n1"
-        - [ ] 구분자가 하나의 문자가 아닌 경우 `IllegalArgumentException` 발생 ex. "//^^\n1^^2"
+        - [X] 구분자가 하나의 문자가 아닌 경우 `IllegalArgumentException` 발생 ex. "//^^\n1^^2"
 
 ### 숫자 추출 기능
 
