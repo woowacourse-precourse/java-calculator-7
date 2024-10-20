@@ -10,17 +10,21 @@ public class StringCalculator {
             return Integer.parseInt(input);
         }
 
-        String delimiter = "[,|:]";  // 기본 구분자
-        if (input.startsWith("//")) {  // 커스텀 구분자 처리
+        String delimiter = "[,|:]";
+        if (input.startsWith("//")) {
             int delimiterIndex = input.indexOf("\n");
-            delimiter = input.substring(2, delimiterIndex);  // 구분자 추출
-            input = input.substring(delimiterIndex + 1);  // 숫자 부분만 남김
+            delimiter = input.substring(2, delimiterIndex);
+            input = input.substring(delimiterIndex + 1);
         }
 
         String[] numbers = input.split(delimiter);
         int sum = 0;
         for (String number : numbers) {
-            sum += Integer.parseInt(number);
+            int num = Integer.parseInt(number);
+            if (num < 0) {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + number);
+            }
+            sum += num;
         }
         return sum;
     }
