@@ -6,7 +6,6 @@ import camp.nextstep.edu.missionutils.Console;
 public class InputUtils {
     public static Expression convertToExpression(String input) {
         String delimiter = "[,:]";
-        boolean isCustomDelimiter = false;
         if (input.startsWith("//")) {
             int delimiterIndex = input.indexOf("\\n");
             if (delimiterIndex == -1) {
@@ -16,12 +15,11 @@ public class InputUtils {
             if (delimiter.isEmpty()) {
                 throw new IllegalArgumentException();
             }
-            isCustomDelimiter = true;
             input = input.substring(delimiterIndex + 1);
         }
 
         validateExpression(input);
-        return new Expression(input, delimiter, isCustomDelimiter);
+        return new Expression(input, delimiter);
     }
 
     public static String readInput() {
