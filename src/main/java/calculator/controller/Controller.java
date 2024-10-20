@@ -8,43 +8,30 @@ import calculator.view.OutputView;
 
 public class Controller {
 
+    private final InputView inputView = new InputView();
+    private final OutputView outputView = new OutputView();
+    private final Parser parser = new Parser();
+    private final Validator validator = new Validator();
+    private final Calculator calculator = new Calculator();
+
     public void run() {
-        String inputNumber = getNumber();
+        // 입력 받아오기
+        String inputNumber = inputView.inputValue();
 
-        // 계산 메서드
-        String[] inputArr = parseInput(inputNumber);
+        // 파싱 및 검증
+        String[] inputArr = parseAndValidate(inputNumber);
 
-        int sum = calculate(inputArr);
+        // 계산
+        int sum = calculator.sumNumber(inputArr);
 
-        // 결과값 출력
-        String result = getResult(sum);
+        // 결과 출력
+        String result = outputView.getResult(sum);
         System.out.println(result);
     }
 
-    private String getNumber() {
-        InputView inputView = new InputView();
-        String input = inputView.inputValue();
-
-        return input;
-    }
-
-    private String getResult(int answer) {
-        OutputView outputView = new OutputView();
-        return outputView.getResult(answer);
-    }
-
-    private String[] parseInput(String input) {
-        Parser parser = new Parser();
-        Validator validator = new Validator();
-        String[] inputArr = parser.parse(input);
-
-        validator.validate(inputArr);
-
-        return inputArr;
-    }
-
-    private int calculate(String[] numbers) {
-        Calculator calculator = new Calculator();
-        return calculator.sumNumber(numbers);
+    private String[] parseAndValidate(String input) {
+        String[] parsedInput = parser.parse(input);
+        validator.validate(parsedInput);
+        return parsedInput;
     }
 }
