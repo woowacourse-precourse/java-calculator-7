@@ -9,28 +9,34 @@ public class Calculator {
 
     private String input;
     private List<String> delimiter;
-    private CustomDelimterParser customDelimterParser;
+    private CustomDelimiterParser customDelimiterParser;
     private String analyzingTarget;
+    private DelimiterChecker delimiterChecker;
     private int sum;
 
     public Calculator() {
         printStartMessage();
         this.delimiter = new ArrayList<>(List.of(",", ":"));
         this.sum = 0;
-        this.customDelimterParser = new CustomDelimterParser(input);
+        this.customDelimiterParser = new CustomDelimiterParser(input);
         this.analyzingTarget = "";
     }
 
     public int start() {
         parsingCustomDelimiter();
-        System.out.println(analyzingTarget);
+        List<Integer> sumTarget = getSumTarget();
         return 0;
     }
 
+    private List<Integer> getSumTarget() {
+        delimiterChecker = new DelimiterChecker(analyzingTarget, delimiter);
+        return delimiterChecker.splitByDelimiter();
+    }
+
     private void parsingCustomDelimiter() {
-        Optional<String> customDelimiter = customDelimterParser.getCustomDelimiter();
+        Optional<String> customDelimiter = customDelimiterParser.getCustomDelimiter();
         customDelimiter.ifPresent(s -> delimiter.add(s));
-        this.analyzingTarget = customDelimterParser.getRemainingInput();
+        this.analyzingTarget = customDelimiterParser.getRemainingInput();
     }
 
     private void printStartMessage() {

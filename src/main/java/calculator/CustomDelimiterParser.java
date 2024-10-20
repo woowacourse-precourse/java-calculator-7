@@ -4,11 +4,11 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CustomDelimterParser {
+public class CustomDelimiterParser {
     private String regex = "^//(.*?)\\\\n";
     private String input;
 
-    public CustomDelimterParser(String input) {
+    public CustomDelimiterParser(String input) {
         this.input = input;
     }
 
