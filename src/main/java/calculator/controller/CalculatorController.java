@@ -14,7 +14,7 @@ public class CalculatorController {
 
     public void run() {
         String input = calculatorView.readCalculatorInput();
-        int result = calculatorService.sum(input);
+        String result = calculatorService.sum(input);
         calculatorView.printCalculatorResult(result);
     }
 }
