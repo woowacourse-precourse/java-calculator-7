@@ -34,8 +34,8 @@ public class Delimiter {
     }
 
     private static String customAndBasicDelimiter() {
-        return delimiter.stream().
-                collect(Collectors.joining("|"));
+        return delimiter.stream()
+                .collect(Collectors.joining("|"));
     }
 
 
