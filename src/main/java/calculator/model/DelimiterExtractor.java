@@ -1,5 +1,6 @@
 package calculator.model;
 
+import calculator.exception.InvalidInputException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,6 +17,7 @@ public class DelimiterExtractor {
                 }
                 return Pattern.quote(customDelimiter) + "|" + DEFAULT_DELIMITERS;
             }
+            throw new InvalidInputException("커스텀 구분자 형식이 올바르지 않습니다.");
         }
         return DEFAULT_DELIMITERS;
     }
