@@ -1,6 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Application {
@@ -36,6 +37,23 @@ public class Application {
 
     private void initialize() {
 
+    }
+
+    private List<Integer> parsingString() {
+        List<Integer> numberList = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        for (int i = getStartIndex(); i < inputString.length(); i++) {
+            if (Character.isDigit(inputString.charAt(i))) {
+                sb.append(inputString.charAt(i));
+                continue;
+            }
+            numberList.add(Integer.parseInt(sb.toString()));
+            sb.setLength(0);
+        }
+        if (!sb.isEmpty()) {
+            numberList.add(Integer.parseInt(sb.toString()));
+        }
+        return numberList;
     }
 
     private void isValidString() {
