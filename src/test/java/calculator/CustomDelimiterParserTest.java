@@ -70,4 +70,16 @@ public class CustomDelimiterParserTest {
         // then
         assertThat(remainingInput).isEqualTo("1");
     }
+
+    @Test
+    void 비어있는_커스텀_구분자_실패() {
+        // given
+        String input = "//\\n1";
+        CustomDelimiterParser customDelimiterParser = new CustomDelimiterParser(input);
+
+        // when & then
+        assertThrows(IllegalArgumentException.class, () -> {
+            customDelimiterParser.getCustomDelimiter().get();
+        });
+    }
 }

@@ -23,6 +23,8 @@ public class CustomDelimiterParser {
 
         if(customDelimiter.length() > 1)
             throw new IllegalArgumentException("커스텀 구분자는 1자리여야 합니다.");
+        if(customDelimiter.isEmpty())
+            throw new IllegalArgumentException("커스텀 구분자는 비어있을 수 없습니다.");
 
         return Optional.of(customDelimiter);
     }
