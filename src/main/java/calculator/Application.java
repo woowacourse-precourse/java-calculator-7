@@ -80,6 +80,8 @@ public class Application {
     static String sum(List<String> nums) {
         List<Byte> arr = new ArrayList<>();
 
+        arr.add((byte) 0);
+
         byte n = 0;
         for (String num: nums) {
             for (int i=num.length()-1; i>=0; i--) {
