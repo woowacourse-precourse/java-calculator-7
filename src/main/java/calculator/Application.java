@@ -11,11 +11,12 @@ public class Application {
         try {
             System.out.println("덧셈할 문자열을 입력해 주세요.:");
             String inputString = Console.readLine();
+            inputString = inputString.replace("\\n", "\n");
 
             String delimiter = "[,:]";
+
             if (inputString.startsWith("//")) {
-                // 개행 문자 \n을 \\n로 찾을 수 있도록 함
-                int delimiterEndIndex = inputString.indexOf("\\n");
+                int delimiterEndIndex = inputString.indexOf("\n");
                 if (delimiterEndIndex == -1) {
                     throw new IllegalArgumentException("커스텀 구분자가 미완성되었습니다.");
                 }
@@ -25,7 +26,7 @@ public class Application {
                 }
                 // 커스텀 구분자와 기존 구분자를 함께 사용하도록 함
                 delimiter = Pattern.quote(customDelimiter) + "|,|:";
-                inputString = inputString.substring(delimiterEndIndex + 2);
+                inputString = inputString.substring(delimiterEndIndex + 1);
             }
 
             String[] tokens = inputString.split(delimiter);
