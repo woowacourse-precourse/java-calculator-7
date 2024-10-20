@@ -1,7 +1,13 @@
 package calculator;
 
+import calculator.io.ConsoleDisplay;
+import calculator.io.ConsoleInputReceiver;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        ConsoleDisplay display = new ConsoleDisplay();
+        ConsoleInputReceiver inputReceiver = new ConsoleInputReceiver();
+        SeparatorExpressionCalculator calculator = new SeparatorExpressionCalculator(inputReceiver, display);
+        calculator.operate();
     }
 }
