@@ -1,6 +1,9 @@
 package calculator;
 
 public class Constants {
+    public static final String PROMPT_MESSAGE = "덧셈할 문자열을 입력해주세요.";
+    public static final String OUTPUT_MESSAGE = "결과 : ";
+
     public static final String DEFAULT_SEPARATOR_COMMA = ",";
     public static final String DEFAULT_SEPARATOR_COLON = ":";
     public static final String CUSTOM_SEPARATOR_PREFIX = "//";
