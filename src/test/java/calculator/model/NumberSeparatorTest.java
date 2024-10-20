@@ -2,7 +2,6 @@ package calculator.model;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import calculator.constant.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
@@ -54,11 +53,12 @@ class NumberSeparatorTest {
                 .hasMessageContaining(ErrorMessage.NUMBER_SEPARATOR_CUSTOM_DELIMITER_POSITION_FOREFRONT.getMessage());
     }
 
-    // TODO: 에러 메세지 및 검증 추가
     @DisplayName("문자열에 기본 구분자, 커스텀 구분자 외의 구분자가 올 수 없다")
     @ParameterizedTest
     @ValueSource(strings = {"//!\\n1:2,3!4?5"})
     void isRegisteredDelimiter(String invalidData) {
-        assertThrows(IllegalArgumentException.class, () -> NumberSeparator.from(invalidData).separate());
+        assertThatThrownBy(() -> NumberSeparator.from(invalidData).separate())
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ErrorMessage.NUMBERS_MUST_NUMBER.getMessage());
     }
 }
