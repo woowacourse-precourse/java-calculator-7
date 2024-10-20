@@ -1,4 +1,4 @@
-package calculator.model.constants;
+package calculator.domain.constants;
 
 public enum DefaultDelimiter {
     COMMA(","),

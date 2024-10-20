@@ -1,6 +1,6 @@
 package calculator.view;
 
-import calculator.model.InputHandler;
+import calculator.domain.InputHandler;
 
 public class View {
 

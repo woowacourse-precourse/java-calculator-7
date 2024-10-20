@@ -3,7 +3,7 @@ package calculator.controller;
 import static calculator.view.View.displayInputPrompt;
 import static calculator.view.View.displayResult;
 
-import calculator.model.InputHandler;
+import calculator.domain.InputHandler;
 
 public class Controller {
     InputHandler inputHandler = new InputHandler();
@@ -13,12 +13,12 @@ public class Controller {
         inputHandler.setInputString(); // 문자열 받는 메서드
     }
 
-    public void calculate() {
-        inputHandler.ensureCustomDelimiter();// 커스텀 구분자가 있는 지 확인
+    public void process() {
+        inputHandler.ensureCustomDelimiter();
         inputHandler.extractNumbers();
     }
 
-    public void resulting() {
+    public void display() {
         inputHandler.getResult();
         displayResult(inputHandler);
     }

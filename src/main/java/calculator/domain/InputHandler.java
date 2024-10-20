@@ -1,9 +1,9 @@
-package calculator.model;
+package calculator.domain;
 
-import static calculator.model.Calculator.getSum;
-import static calculator.model.InputValidator.validateExtractedNumbers;
+import static calculator.domain.Calculator.getSum;
+import static calculator.domain.InputValidator.validateExtractedNumbers;
 
-import calculator.model.constants.DefaultDelimiter;
+import calculator.domain.constants.DefaultDelimiter;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.Vector;
 import java.util.regex.Matcher;
@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 public class InputHandler {
     private String inputString;
-    private String customDelimiter = null;
+    private String customDelimiter = "";
     private Vector<Integer> extractedNumbers = new Vector<>();
 
 
