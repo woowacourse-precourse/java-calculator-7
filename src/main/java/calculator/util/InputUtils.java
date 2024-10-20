@@ -30,20 +30,32 @@ public class InputUtils {
     }
 
     private static void validateCustomDelimiterInput(String input) {
-        String delimiter = input.substring(2, input.indexOf("\\n"));
-        String expression = input.substring(input.indexOf("\\n") + 2);
+        int delimiterIndex = input.indexOf("\\n");
+        if (delimiterIndex == -1) {
+            throw new IllegalArgumentException();
+        }
+        String delimiter = input.substring(2, delimiterIndex);
+        if (delimiter.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+        String expression = input.substring(delimiterIndex + 2);
+        validateExpression(expression);
         String[] tokens = expression.split(delimiter);
         validateTokens(tokens);
     }
 
     private static void validateDefaultDelimiterInput(String input) {
-        char firstChar = input.charAt(0);
-        char lastChar = input.charAt(input.length() - 1);
+        validateExpression(input);
+        String[] tokens = input.split("[,:]");
+        validateTokens(tokens);
+    }
+
+    private static void validateExpression(String expression) {
+        char firstChar = expression.charAt(0);
+        char lastChar = expression.charAt(expression.length() - 1);
         if (!Character.isDigit(firstChar) || !Character.isDigit(lastChar)) {
             throw new IllegalArgumentException();
         }
-        String[] tokens = input.split("[,:]");
-        validateTokens(tokens);
     }
 
     // 토큰이 유효한지 검증하는 메서드
