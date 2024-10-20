@@ -11,24 +11,21 @@ public class SaveTokens {
         input = input.replace("\\n", "\n");
 
 
-        if(input.startsWith("//")){
-            String newInput = input.replace("//","");
-            String distinguisher = "";
+        if (input.startsWith("//")) {
             String regex = "//(.)\n(.*)";
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(input);
 
+            if (matcher.find()) {
+                String distinguisher = Pattern.quote(matcher.group(1));
+                String newInput = matcher.group(2);
 
-            if(matcher.find()){
-                distinguisher = Pattern.quote(matcher.group(1));
                 return newInput.split(distinguisher);
             }
-        }else if(input.contains(",") || input.contains(":")){
+        } else if(input.contains(",") || input.contains(":")){
             return input.split("[,:]");
-
         }else{
             throw new IllegalArgumentException(ERROR_MESSAGE);
-
         }
         throw new IllegalArgumentException(UNEXPECTABLE_ERROR_MESSAGE);
     }
