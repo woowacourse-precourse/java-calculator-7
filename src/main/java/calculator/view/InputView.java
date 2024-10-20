@@ -19,13 +19,13 @@ public class InputView {
         return input;
     }
 
-    private void validateNull(String string) {
+    private void validateNull(final String string) {
         if (string == null) {
             throw new IllegalArgumentException(ErrorMessage.NULL_INPUT.getMessage());
         }
     }
 
-    private void validateByRegex(String input) {
+    private void validateByRegex(final String input) {
         if (!REGULAR_EXPRESSION.matcher(input).matches() &&
                 !REGULAR_EXPRESSION_CUSTOM_DELIMITER.matcher(input).matches()) {
             throw new IllegalArgumentException(ErrorMessage.REGEX_NOT_MATCH_INPUT.getMessage());

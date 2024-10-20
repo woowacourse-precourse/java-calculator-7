@@ -11,7 +11,7 @@ public class CalculatorController {
     private final Calculator calculator;
     private Parser parser;
 
-    public CalculatorController(InputView inputView, OutputView outputView, Calculator calculator) {
+    public CalculatorController(final InputView inputView, final OutputView outputView, final Calculator calculator) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.calculator = calculator;
