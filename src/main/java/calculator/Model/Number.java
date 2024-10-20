@@ -72,10 +72,9 @@ public class Number {
 
     public String removeDelimiter(String rawNumber, String customDelimiter) {
         if (customDelimiter != null) {
-            rawNumber = rawNumber.replace(customDelimiter, ",");
+            return rawNumber.replace(customDelimiter, ",");
         }
-        rawNumber = rawNumber.replace(":", ",");
-        return rawNumber;
+        return rawNumber.replace(":", ",");
     }
 
     public void registerNumber(String numberString) {
