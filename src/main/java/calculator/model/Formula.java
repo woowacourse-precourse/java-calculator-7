@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 public class Formula {
 
     private final String formula;
-    private final Pattern customPattern = Pattern.compile("^//.\\\\n.*");
+    private final Validation validation = new Validation();
     private final Pattern defaultPattern = Pattern.compile("[0-9:,]*");
     private String customDelimiter = "";
 
@@ -15,8 +15,12 @@ public class Formula {
         this.formula = validate(formula);
     }
 
-    public String validate(String formula) {
-        if (validateDelimiter(formula)) {
+    private String validate(String formula) {
+        if (validation.validateCustomDelimiter(formula)) {
+            isCustom = true;
+            return formula;
+        }
+        if (validation.validateDefaultDelimiter(formula)) {
             return formula;
         }
         throw new IllegalArgumentException();
