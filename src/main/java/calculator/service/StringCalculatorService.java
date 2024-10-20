@@ -5,26 +5,27 @@ import calculator.validator.InputValidator;
 import java.util.List;
 
 public class StringCalculatorService {
+    private static final int MAX_INPUT_LENGTH = 1000;
+    private static final long MAX_NUMBER = Integer.MAX_VALUE;
     private final InputValidator inputValidator;
+    private final StringSplitter stringSplitter;
 
-    public StringCalculatorService(InputValidator inputValidator) {
+    public StringCalculatorService(InputValidator inputValidator, StringSplitter stringSplitter) {
         this.inputValidator = inputValidator;
+        this.stringSplitter = stringSplitter;
     }
 
     public int calculate(String input) {
-        if (input.isEmpty()) {
+        if (input == null || input.trim().isEmpty()) {
             return 0;
         }
 
-        inputValidator.validate(input);
-        StringSplitter splitter = new StringSplitter(input);
-        List<String> numbers;
-        if (input.startsWith("//")) {
-            numbers = splitter.split("");  // 커스텀 구분자는 StringSplitter 내에서 처리됨
-        } else {
-            numbers = splitter.split(",|:");
+        if (input.length() > MAX_INPUT_LENGTH) {
+            throw new IllegalArgumentException("입력 문자열이 너무 깁니다. 최대 " + MAX_INPUT_LENGTH + "자까지 입력 가능합니다.");
         }
 
+        inputValidator.validate(input);
+        List<String> numbers = stringSplitter.split(input);
         return sum(numbers);
     }
 
@@ -32,14 +33,18 @@ public class StringCalculatorService {
         return numbers.stream()
                 .map(String::trim)
                 .filter(s -> !s.isEmpty())
-                .mapToInt(Integer::parseInt)
-                .peek(this::validateNonNegative)
+                .mapToLong(Long::parseLong)
+                .peek(this::validateNumberRange)
+                .mapToInt(Math::toIntExact)
                 .sum();
     }
 
-    private void validateNonNegative(int num) {
+    private void validateNumberRange(long num) {
         if (num < 0) {
             throw new IllegalArgumentException("음수는 허용되지 않습니다: " + num);
+        }
+        if (num > MAX_NUMBER) {
+            throw new IllegalArgumentException("숫자가 너무 큽니다. 최대 " + MAX_NUMBER + "까지 허용됩니다.");
         }
     }
 }
