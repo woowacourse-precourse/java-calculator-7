@@ -42,6 +42,5 @@ public class InputHandler {
             throw new IllegalArgumentException();
         }
         dataRepository.setInputString(tempInput);
-        System.out.println(tempInput);
     }
 }

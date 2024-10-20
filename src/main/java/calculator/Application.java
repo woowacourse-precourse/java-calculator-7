@@ -18,6 +18,8 @@ public class Application {
         List<String> stringList = logicHandler.splitInputString(dataRepository.getCustomSplitter(),
             dataRepository.getInputString());
 
+        logicHandler.removeEmpty(stringList);
+        logicHandler.checkInputString(stringList);
         System.out.println(stringList.toString());
 
     }

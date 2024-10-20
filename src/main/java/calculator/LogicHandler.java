@@ -18,4 +18,19 @@ public class LogicHandler {
         return new ArrayList<>(Arrays.asList(inputString.split(sb.toString())));
     }
 
+    public void removeEmpty(List<String> inputString) {
+        inputString.removeIf(str -> str == null || str.isEmpty());
+    }
+
+    public void checkInputString(List<String> inputString) {
+        for (String i : inputString) {
+            if (!i.matches("\\d+")) {
+                throw new IllegalArgumentException();
+            }
+            if (Integer.parseInt(i) <= 0) {
+                throw new IllegalArgumentException();
+            }
+        }
+    }
+
 }
