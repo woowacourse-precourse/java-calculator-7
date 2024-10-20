@@ -2,8 +2,6 @@ package calculator;
 
 public class Calculator {
 
-    CustomSeparator customSeparator = new CustomSeparator();
-
     public int calculate(String st) {
         // 입력값이 없는 경우에 대한 예외 처리
         if (st.isEmpty()) {
@@ -22,7 +20,7 @@ public class Calculator {
         }
 
         // 구분자 생성
-        String separator = customSeparator.separator(st);
+        String separator = new CustomSeparator().separator(st);
 
         // 커스텀 구분자가 있을 경우 \n 이후의 문자열부터 슬라이싱
         if (st.startsWith("/")) {
