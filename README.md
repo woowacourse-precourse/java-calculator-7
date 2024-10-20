@@ -56,3 +56,9 @@ sequenceDiagram
     P -->>- M: numbers
     M -->>- U: sum of the numbers
 ```
+
+## 파서 성능 비교
+
+> 테스트 방법은 `src/test/java/calculator/PerformanceTest`를 참고하세요.
+
+![image](https://github.com/user-attachments/assets/3551c557-6538-49a2-a8d6-d554d861ed06)
