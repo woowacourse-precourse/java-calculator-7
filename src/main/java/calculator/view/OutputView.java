@@ -1,9 +1,9 @@
 package calculator.view;
 
-public class OutputView {
-    private static final String RESULT_MESSAGE = "결과 : ";
+import static calculator.view.ViewMessage.RESULT_MESSAGE;
 
+public class OutputView {
     public void printResult(int result) {
-        System.out.println(RESULT_MESSAGE + result);
+        System.out.println(RESULT_MESSAGE.getResultMessage(result));
     }
 }

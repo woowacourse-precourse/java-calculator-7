@@ -1,14 +1,17 @@
 package calculator.model;
 
+import static calculator.model.token.ParsingPattern.DEFAULT_DELIMITER_PATTERN;
+
 import calculator.model.token.CustomDelimiterToken;
 import calculator.model.token.NumbersToken;
 import calculator.model.token.Tokenizer;
-import java.util.Arrays;
 
 public class Calculator {
 
     private boolean defaultMode;
     private Tokenizer tokenizer;
+
+    private static final int EMPTY_RESULT = 0;
 
     public Calculator() {
         this.tokenizer = new Tokenizer();
@@ -19,13 +22,10 @@ public class Calculator {
 
         Delimiter delimiter = selectDelimiter(input);
 
-        String[] split = input.split(",", -1);
-        System.out.println(Arrays.toString(split));
-
         NumbersToken numbersToken = tokenizer.createNumbersToken(input);
 
         if (numbersToken.isEmpty()) {
-            return 0;
+            return EMPTY_RESULT;
         }
 
         Numbers numbers = numbersToken.convertToNumbers(delimiter);
@@ -39,7 +39,7 @@ public class Calculator {
 
     public Delimiter selectDelimiter(String input) {
         if (defaultMode) {
-            return new Delimiter(",|:");
+            return new Delimiter(DEFAULT_DELIMITER_PATTERN.getPattern());
         }
 
         CustomDelimiterToken customDelimiterToken = tokenizer.createCustomDelimiterToken(input);

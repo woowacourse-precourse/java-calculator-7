@@ -1,7 +1,12 @@
 package calculator.model;
 
+import static calculator.model.ExceptionMessage.NUMERIC_EXCEPTION;
+import static calculator.model.ExceptionMessage.RANGE_EXCEPTION;
+
 public class Number {
-    private int number;
+    private final int number;
+
+    private static final int NUMBER_RANGE_CONDITION = 1;
 
     public Number(String number) {
         validate(number);
@@ -27,14 +32,13 @@ public class Number {
         try {
             Integer.parseInt(number);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("입력 값이 숫자가 아닙니다.");
+            throw new IllegalArgumentException(NUMERIC_EXCEPTION.getMessage());
         }
     }
 
     public void validateRange(String number) {
-        if (Integer.parseInt(number) < 1) {
-            throw new IllegalArgumentException("숫자는 양의 정수만 입력 가능합니다.");
+        if (Integer.parseInt(number) < NUMBER_RANGE_CONDITION) {
+            throw new IllegalArgumentException(RANGE_EXCEPTION.getMessage());
         }
-        ;
     }
 }

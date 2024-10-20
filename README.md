@@ -43,9 +43,9 @@
 
 - [x] 파싱한 문자열 원소들을 각각 숫자로 변환합니다.
     - exception
-        - [] 숫자로 변환되지 않는 값이 있다면 IllegalArgumentException을 발생
-        - [] 양의 정수로 변환되지 않는 값에 대해서는 IllegalArgumentException을 발생
-        - [] 중간에 빈 문자열이 존재하는 경우에 대해서는 IllegalArgumentException을 발생
+        - [x] 숫자로 변환되지 않는 값이 있다면 IllegalArgumentException을 발생
+        - [x] 양의 정수로 변환되지 않는 값에 대해서는 IllegalArgumentException을 발생
+        - [x] 중간에 빈 문자열이 존재하는 경우에 대해서는 IllegalArgumentException을 발생
 
 
 - [x] 변환되어진 각 숫자의 합을 구합니다.

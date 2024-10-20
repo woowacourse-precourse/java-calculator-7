@@ -1,11 +1,17 @@
 package calculator.model;
 
+import static calculator.model.ExceptionMessage.DELIMITER_SIZE_EXCEPTION;
+import static calculator.model.ExceptionMessage.EMPTY_DELIMITER_EXCEPTION;
+import static calculator.model.token.ParsingPattern.DEFAULT_DELIMITER_PATTERN;
+
 public class Delimiter {
 
-    private String delimiter;
+    private final String delimiter;
+
+    private static final int DELIMITER_SIZE = 1;
 
     public Delimiter(String delimiter) {
-        if (delimiter.equals(",|:")) {
+        if (delimiter.equals(DEFAULT_DELIMITER_PATTERN.getPattern())) {
             this.delimiter = delimiter;
             return;
         }
@@ -25,13 +31,13 @@ public class Delimiter {
 
     private void validateEmptyDelimiter(String delimiter) {
         if (delimiter == null || delimiter.isEmpty()) {
-            throw new IllegalArgumentException("구분자는 빈 값일 수 없습니다.");
+            throw new IllegalArgumentException(EMPTY_DELIMITER_EXCEPTION.getMessage());
         }
     }
 
     private void validateSize(String delimiter) {
-        if (delimiter.length() > 1) {
-            throw new IllegalArgumentException("구분자는 한 개의 문자만 이용 가능합니다.");
+        if (delimiter.length() != DELIMITER_SIZE) {
+            throw new IllegalArgumentException(DELIMITER_SIZE_EXCEPTION.getMessage());
         }
     }
 }

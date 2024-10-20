@@ -1,5 +1,7 @@
 package calculator.model.token;
 
+import static calculator.model.token.ParsingPattern.NUMBER_SPLIT_LIMIT;
+
 import calculator.model.Delimiter;
 import calculator.model.Number;
 import calculator.model.Numbers;
@@ -13,7 +15,7 @@ public class NumbersToken {
     }
 
     public String[] extractNumbers(Delimiter delimiter) {
-        return token.split(delimiter.getDelimiter(), -1);
+        return token.split(delimiter.getDelimiter(), NUMBER_SPLIT_LIMIT.getNumber());
     }
 
     public Numbers convertToNumbers(Delimiter delimiter) {
