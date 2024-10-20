@@ -11,8 +11,8 @@ public class Application {
 
         int sum = app.sumInString(input);
 
-//            System.out.println("추출된 숫자: " + result.toString()); // 출력: -1, 77, -33
-        System.out.println("결과 : " + sum); // 출력 -> 결과 : 43
+//      System.out.println("추출된 숫자: " + result.toString()); // 출력: -1, 77, -33
+        app.printResult(sum);
     }
 
     // 문자열에 음수가 포함된 경우 IllegalArgumentException 발생
@@ -30,7 +30,7 @@ public class Application {
     }
 
     public int sumInString(String input) {
-        // 음수가 없으면, 숫자 추출 및 합산 로직을 수행
+        // 숫자 추출 및 합산 로직을 수행
         // 숫자와 부호를 추출하기 위한 StringBuilder
         Application app = new Application();
         StringBuilder currentNumber = new StringBuilder();
@@ -86,7 +86,7 @@ public class Application {
 
     }
 
-    public void printResult() {
-
+    public void printResult(int sum) {
+        System.out.println("결과 : " + sum); // 출력 -> 결과 : 43
     }
 }
