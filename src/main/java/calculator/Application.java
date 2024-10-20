@@ -32,7 +32,7 @@ public class Application {
             }
             try {
                 sum += Integer.parseInt(token);
-            }catch (Exception e){
+            } catch (Exception e) {
                 throw new IllegalArgumentException("구분자가 아닌 문자가 포함되어 있습니다.");
             }
         }
@@ -48,8 +48,13 @@ public class Application {
     }
 
     private static void checkStringContainOtherChar(String inputString, String delimiters) {
+        int beforeLength = inputString.length();
         String str = inputString.replaceAll(delimiters, "");
-        if (!(inputString.isEmpty() || inputString==null)) {
+        int afterLength = str.length();
+        if (beforeLength - afterLength >= beforeLength / 2) {
+            throw new IllegalArgumentException("구분자가 연산할 문자열의 맨 앞에 위치할 수 없습니다.");
+        }
+        if (!(inputString.isEmpty() || inputString == null)) {
             if (!str.matches(ONLY_NUMBERS)) {
                 throw new IllegalArgumentException("구분자 외 문자가 포함되어 있습니다.");
             }
@@ -60,8 +65,8 @@ public class Application {
         if (inputString.startsWith("//")) {
             if (inputString.contains("\\n")) {
                 if (inputString.substring(0, inputString.indexOf("\\n")).isEmpty()
-                        || (inputString.indexOf("\\n") - inputString.indexOf("//")) < 3) {
-                    throw new IllegalArgumentException("신규 구분자로 공백이 올 수 없습니다.");
+                        || (inputString.indexOf("\\n") - inputString.indexOf("//")) != 2) {
+                    throw new IllegalArgumentException("신규 구분자의 형식이 올바르지 않습니다.");
                 }
                 return true;
             }
@@ -84,6 +89,9 @@ public class Application {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         try {
             String input = br.readLine();
+            if (input.charAt(0) == ',' || input.charAt(0) == ':') {
+                throw new IllegalArgumentException("문자열 첫 입력값이 올바르지 않습니다.");
+            }
             return input;
         } catch (IOException e) {
             throw new IllegalArgumentException("잘못된 입력값이 입력되었습니다.");
