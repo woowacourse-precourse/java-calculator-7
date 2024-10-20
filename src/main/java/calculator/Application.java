@@ -37,8 +37,10 @@ public class Application {
             String customDelimiter = input.substring(CUSTOM_DELIMITER_PREFIX.length(),
                     customDelimiterEnd); // 커스텀 구분자 추출
             // TODO: 커스텀 구분자에 대한 예외 처리
+            // 커스텀 구분자와 기본 구분자 모두를 처리하도록 구분자 연결
+            String combinedDelimiters = customDelimiter + "|" + DEFAULT_DELIMITERS; // OR 연산자로 구분자 연결
             numbers = split(input.substring(customDelimiterEnd + CUSTOM_DELIMITER_SUFFIX.length()),
-                    customDelimiter); // 구분자를 기준으로 문자열 분리
+                    combinedDelimiters); // 구분자를 기준으로 문자열 분리
         } else {
             numbers = split(input, DEFAULT_DELIMITERS);
         }
