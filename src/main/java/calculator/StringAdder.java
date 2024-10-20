@@ -16,7 +16,7 @@ public class StringAdder {
         int delimiterEndIndex = findDelimiterEndIndex(input);
         if (delimiterEndIndex != -1) {
             delimiter = input.substring(2, delimiterEndIndex);
-            InputValidator.delimiterValidate(delimiter);
+            InputValidator.validateDelimiter(delimiter);
         }
         return delimiter;
     }
@@ -66,7 +66,7 @@ public class StringAdder {
 
         String[] numbers = splitNumbers(input, delimiter);
 
-        InputValidator.validate(numbers);
+        InputValidator.validateNumbers(numbers);
 
         return sumNumbers(numbers);
     }

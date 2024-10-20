@@ -10,7 +10,7 @@ public class InputValidator {
         return input == null || input.isEmpty();
     }
 
-    public static void delimiterValidate(String delimiter) {
+    public static void validateDelimiter(String delimiter) {
         try {
             Integer.parseInt(delimiter);
             throw new IllegalArgumentException("숫자는 구분자가 될 수 없습니다.");
@@ -19,7 +19,7 @@ public class InputValidator {
         }
     }
 
-    public static void validate(String[] numbers) {
+    public static void validateNumbers(String[] numbers) {
         for (String number : numbers) {
             double num;
             try {
@@ -33,7 +33,7 @@ public class InputValidator {
             }
 
             if (Double.isInfinite(num)) {
-                throw new IllegalArgumentException("숫자가 너무 커서 계산할 수 없습니다.");
+                throw new IllegalArgumentException("계산 가능한 범위를 초과했습니다.");
             }
         }
     }
