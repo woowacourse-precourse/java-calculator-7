@@ -80,9 +80,6 @@ public class StringCalculator {
 
     public void sum() {
         for (int number : intNumbers) {
-            if (number < 0) {
-                throw new IllegalArgumentException();
-            }
             sum = sum + number;
         }
     }
