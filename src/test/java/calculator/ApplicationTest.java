@@ -98,9 +98,18 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
     void 커스텀_구분자가_음수표현() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//-\\n1-2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 숫자0_입력() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("0,5"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }

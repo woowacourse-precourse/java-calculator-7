@@ -121,3 +121,9 @@ main/
 
 - 입력: `//-\n1-2,3`
 - 출력: `IllegalArgumentException` 발생 후 종료 ('-'는 음수 표현에 사용)
+
+**테스트 case 11**: 숫자0 입력
+
+- 입력: `0,5`
+- 출력: `IllegalArgumentException` 발생 후 종료 (양수가 아니므로 예외 처리)
+

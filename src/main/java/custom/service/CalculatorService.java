@@ -68,6 +68,9 @@ public class CalculatorService {
 
         // tempArray 에서 숫자가 저장된 부분만 복사
         for (int i = 0; i < count; i++) {
+            if (tempArray[i] == 0) { // 0은 양수가 아니므로
+                throw new IllegalArgumentException();
+            }
             resultArray[i] = tempArray[i];
         }
         return resultArray;
