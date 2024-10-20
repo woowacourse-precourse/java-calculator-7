@@ -29,7 +29,11 @@ public class Calculator {
     }
 
     private int sumTokens(String[] tokens) {
+        int sum = 0;
+        for (String token : tokens) {
+            sum += Integer.parseInt(token);
+        }
+        return sum;
     }
-
 
 }
