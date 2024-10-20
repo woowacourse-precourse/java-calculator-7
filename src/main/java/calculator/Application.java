@@ -52,9 +52,14 @@ public class Application {
 
     // 문자열 더하는 메서드(number가 숫자가 아닌 경우 예외처리 필요)
     public static int addString(String[] numbers){
+
         int sum = 0;
         try {
             for (String number : numbers) {
+                if (number.isEmpty()) {
+                    continue;
+                }
+                System.out.println(number);
                 int num = stringToInt(number);
                 sum += num;
             }
@@ -67,7 +72,7 @@ public class Application {
     public static int stringToInt(String number){
         for(int i=0;i<number.length();i++){
             if(!(number.charAt(i)>='0'&&number.charAt(i)<='9'))
-                throw new IllegalArgumentException(number +"에 유효하지 않은 문자가 포함되어 있습니다. 양수와 구분자로만 입력하세요.");
+                throw new IllegalArgumentException("양수와 구분자로만 입력하세요.");
         }
         return Integer.parseInt(number);
     }
