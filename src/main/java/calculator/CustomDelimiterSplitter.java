@@ -7,6 +7,14 @@ public class CustomDelimiterSplitter extends AbstractDelimiterSplitter {
 
     private static final Pattern compile = Pattern.compile("//(.+)\\n(.*)");
 
+    public CustomDelimiterSplitter() {
+        this(0);
+    }
+
+    public CustomDelimiterSplitter(int order) {
+        super(order);
+    }
+
     @Override
     protected boolean splitValue(Container container, String value) {
         Matcher matcher = compile.matcher(value);
