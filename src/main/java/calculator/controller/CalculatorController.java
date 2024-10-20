@@ -10,7 +10,6 @@ public class CalculatorController {
     private final OutputView outputView;
     private final Calculator calculator;
     private Parser parser;
-    boolean isRunningState = true;
 
     public CalculatorController(InputView inputView, OutputView outputView, Calculator calculator) {
         this.inputView = inputView;
@@ -19,11 +18,9 @@ public class CalculatorController {
     }
 
     public void run() {
-        while (isRunningState) {
-            String input = inputView.getInput();
-            parser = new Parser(input);
-            int sum = calculator.add(parser.parse());
-            outputView.printSum(sum);
-        }
+        String input = inputView.getInput();
+        parser = new Parser(input);
+        int sum = calculator.add(parser.parse());
+        outputView.printSum(sum);
     }
 }
