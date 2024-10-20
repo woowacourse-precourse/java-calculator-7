@@ -1,8 +1,8 @@
 package calculator.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import calculator.constant.ErrorMessage;
@@ -15,16 +15,16 @@ public class DelimiterMaker {
 	private static final String CUSTOM_DELIMITER_PREFIX = "//";
 	private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
 
-	public List<String> getDefaultDelimiters() {
-		return new ArrayList<>(List.of(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON));
+	public Set<String> getDefaultDelimiters() {
+		return new HashSet<>(Set.of(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON));
 	}
 
-	public List<String> getDelimitersFrom(String delimiterSection) {
+	public Set<String> getDelimitersFrom(String delimiterSection) {
 
 		String[] splitDelimiter = delimiterSection.split(Pattern.quote(CUSTOM_DELIMITER_SUFFIX));
 		validateAllDelimiter(splitDelimiter);
 
-		List<String> delimiters = getDefaultDelimiters();
+		Set<String> delimiters = getDefaultDelimiters();
 		Arrays.stream(splitDelimiter)
 			.map(separator -> separator.substring(CUSTOM_DELIMITER_PREFIX.length()))
 			.forEach(delimiters::add);

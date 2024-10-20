@@ -1,6 +1,7 @@
 package calculator.service;
 
 import java.util.List;
+import java.util.Set;
 
 import calculator.domain.Calculator;
 import calculator.domain.DelimiterMaker;
@@ -23,12 +24,12 @@ public class CalculatorService {
 	}
 
 	public long calculate(String input) {
-		List<String> delimiters = getDelimiters(input);
+		Set<String> delimiters = getDelimiters(input);
 		List<Long> numbers = getNumbers(input, delimiters);
 		return calculator.calculate(numbers);
 	}
 
-	private List<String> getDelimiters(String useInput) {
+	private Set<String> getDelimiters(String useInput) {
 		if (delimiterMaker.hasCustomSeparator(useInput)) {
 			String delimiterEndSign = delimiterMaker.getDelimiterEndSign();
 			String delimiterSection = inputParser.getDelimiterSectionFrom(useInput, delimiterEndSign);
@@ -38,7 +39,7 @@ public class CalculatorService {
 		return delimiterMaker.getDefaultDelimiters();
 	}
 
-	private List<Long> getNumbers(String input, List<String> delimiters) {
+	private List<Long> getNumbers(String input, Set<String> delimiters) {
 		String numberSection = getNumberSection(input);
 		return numberExtractor.getNumbers(numberSection, delimiters);
 	}
