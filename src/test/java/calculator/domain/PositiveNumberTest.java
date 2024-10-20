@@ -1,6 +1,8 @@
 package calculator.domain;
 
-import org.assertj.core.api.Assertions;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -19,7 +21,7 @@ class PositiveNumberTest {
         int actual = positiveNumber.getNumber();
 
         // then
-        Assertions.assertThat(actual).isEqualTo(expected);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @ParameterizedTest
@@ -27,7 +29,7 @@ class PositiveNumberTest {
     @DisplayName("PositiveNumber 생성 빈 문자열, 양수, Integer 범위 초과 테스트")
     void testPositiveNumberFail(String numberString) {
         // when then
-        Assertions.assertThatThrownBy(() -> new PositiveNumber(numberString))
+        assertThatThrownBy(() -> new PositiveNumber(numberString))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -1,7 +1,9 @@
 package calculator.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import java.util.List;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +21,7 @@ class PositiveNumbersTest {
         int actual = positiveNumbers.calculateSum();
 
         // then
-        Assertions.assertThat(actual).isEqualTo(expected);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
@@ -30,7 +32,7 @@ class PositiveNumbersTest {
         PositiveNumbers positiveNumbers = new PositiveNumbers(numbers);
 
         // when then
-        Assertions.assertThatThrownBy(positiveNumbers::calculateSum)
+        assertThatThrownBy(positiveNumbers::calculateSum)
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

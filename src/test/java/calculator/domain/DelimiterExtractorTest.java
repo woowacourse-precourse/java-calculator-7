@@ -1,7 +1,8 @@
 package calculator.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Set;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,7 +22,7 @@ class DelimiterExtractorTest {
         Set<Character> actual = delimiterExtractor.extractDelimiters(input);
 
         // then
-        Assertions.assertThat(actual).hasSize(expected.size()).isEqualTo(expected);
+        assertThat(actual).hasSize(expected.size()).isEqualTo(expected);
     }
 
     @ParameterizedTest
@@ -38,7 +39,7 @@ class DelimiterExtractorTest {
         Set<Character> actual = delimiterExtractor.extractDelimiters(input);
 
         // then
-        Assertions.assertThat(actual).hasSize(expected.size()).isEqualTo(expected);
+        assertThat(actual).hasSize(expected.size()).isEqualTo(expected);
     }
 
     @ParameterizedTest
@@ -53,7 +54,7 @@ class DelimiterExtractorTest {
         Set<Character> actual = delimiterExtractor.extractDelimiters(input);
 
         // then
-        Assertions.assertThat(actual).hasSize(expected.size()).isEqualTo(expected);
+        assertThat(actual).hasSize(expected.size()).isEqualTo(expected);
     }
 
     @ParameterizedTest
@@ -68,7 +69,7 @@ class DelimiterExtractorTest {
         Set<Character> actual = delimiterExtractor.extractDelimiters(input);
 
         //then
-        Assertions.assertThat(actual).hasSize(expected.size()).isEqualTo(expected);
+        assertThat(actual).hasSize(expected.size()).isEqualTo(expected);
     }
 
     @ParameterizedTest
@@ -83,6 +84,6 @@ class DelimiterExtractorTest {
         Set<Character> actual = delimiterExtractor.extractDelimiters(input);
 
         // then
-        Assertions.assertThat(actual).hasSize(expected.size()).isEqualTo(expected);
+        assertThat(actual).hasSize(expected.size()).isEqualTo(expected);
     }
 }
