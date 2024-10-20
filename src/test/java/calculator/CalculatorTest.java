@@ -1,15 +1,25 @@
 package calculator;
 
+import static java.lang.String.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Scanner;
 import java.util.Stack;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class CalculatorTest {
+
+  Calculator calculator;
+
+
+  @BeforeEach
+  void setUp() {
+    calculator = new Calculator();
+  }
 
   public static InputStream setReadLine(String readLine) {
     return new ByteArrayInputStream(readLine.getBytes());
@@ -47,16 +57,19 @@ class CalculatorTest {
           continue;
         }
         // 정상적인 커스텀 구분자가 아닌 경우 IllegalArgumentException
-        throw new IllegalArgumentException("커스텀 구분자를 확인해주세요");
+        throw new IllegalArgumentException("커스텀 구분자를 확인해주세요 ('//;\\n'를 맨 앞에 선언 후 ';' 사용");
       }
       // 탐색 인덱스가 정수 변환 가능한 경우
       if (Character.isDigit(index)) {
         // actual과 합산을 반복
-        int target = Integer.parseInt(String.valueOf(index));
+        int target = Integer.parseInt(valueOf(index));
         actual += target;
       }
       // 잘못된 입력값은 예외처리
-      throw new IllegalArgumentException("입력 가능한 문자열인지 확인해주세요. ',', ':', ';' ");
+      boolean validInput = valueOf(index).equals(",") || valueOf(index).equals(":");
+      if (!validInput) {
+        throw new IllegalArgumentException("입력 가능한 문자열인지 확인해주세요. ',', ':' ");
+      }
 
     }
     int expected = 6;
@@ -65,6 +78,20 @@ class CalculatorTest {
     //then
     assertEquals(expected, actual);
 
+  }
+
+  @DisplayName("입력값이 잘못된 경우 예외 처리한다")
+  @Test
+  public void illegalArgument() throws Exception{
+      //given
+    // 잘못된 입력값이 들어온 경우 예외처리한다
+   char[] invalidInput = new char[]{'.', '/', '>', '!', '?'};
+      //when
+
+      //then
+    assertThrows(IllegalArgumentException.class, () -> {
+      calculator.calculating()
+    })
   }
 
 }
