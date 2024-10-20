@@ -36,7 +36,11 @@ public class Separator {
 
         return parts[1];
 
+    }
 
+    public static String[] splitInput(String token){
+        String[] tokens = token.split(activeSeparator);
+        return tokens;
     }
 
 
