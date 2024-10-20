@@ -30,7 +30,7 @@ public class Calculator implements AutoCloseable{
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() throws IllegalArgumentException {
         System.out.println("종료되었습니다.");
     }
 }
