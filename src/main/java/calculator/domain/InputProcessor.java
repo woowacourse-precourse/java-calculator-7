@@ -1,7 +1,7 @@
 package calculator.domain;
 
-import static calculator.domain.Calculator.getSum;
 import static calculator.domain.InputValidator.validateExtractedNumbers;
+import static calculator.domain.MathOperator.getSum;
 
 import calculator.domain.constants.DefaultDelimiter;
 import camp.nextstep.edu.missionutils.Console;
@@ -9,7 +9,7 @@ import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class InputHandler {
+public class InputProcessor {
     private String inputString;
     private String customDelimiter = "";
     private int result = 0;

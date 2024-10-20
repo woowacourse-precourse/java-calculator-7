@@ -3,14 +3,14 @@ package calculator.controller;
 import static calculator.view.View.displayInputPrompt;
 import static calculator.view.View.displayResult;
 
-import calculator.domain.InputHandler;
+import calculator.domain.InputProcessor;
 
-public class Controller {
-    InputHandler inputHandler = new InputHandler();
+public class Calculator {
+    InputProcessor inputHandler = new InputProcessor();
 
     public void start() {
         displayInputPrompt();
-        inputHandler.setInputString(); // 문자열 받는 메서드
+        inputHandler.setInputString();
     }
 
     public void process() {
