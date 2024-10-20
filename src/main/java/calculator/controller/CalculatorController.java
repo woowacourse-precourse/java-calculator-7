@@ -5,7 +5,6 @@ import calculator.view.InputView;
 import calculator.view.OutputView;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
 
 public class CalculatorController {
@@ -23,11 +22,12 @@ public class CalculatorController {
     private Stream<Integer> convertString(String input) {
         String[] stringNums = extractStringNumber(input);
 
+        // ",", ":", 커스텀 구분자 외 구분자가 사용되면 빈 스트링이 존재함
         if (Arrays.asList(stringNums).contains("")) {
             throw new IllegalArgumentException("구분자가 잘못 입력되었습니다.");
         }
 
-        return extractNumber(stringNums);
+        return convertToNumber(stringNums);
     }
 
     private String[] extractStringNumber(String input) {
@@ -48,14 +48,16 @@ public class CalculatorController {
     private InputCase separateCase(String input) {
         if (input.matches("")) {
             return InputCase.NONE;
-        } else if (startsWithNumber(input)) {
+        } else if (startsWithPositiveNumber(input)) {
             return InputCase.DEFAULT;
-        } else {
+        } else if (isCustomFormat(input)) {
             return InputCase.CUSTOM;
+        } else {
+            throw new IllegalArgumentException("잘못된 형식의 입력입니다.");
         }
     }
 
-    private Stream<Integer> extractNumber(String[] stringNums) {
+    private Stream<Integer> convertToNumber(String[] stringNums) {
         try {
            return Arrays.stream(stringNums).map(Integer::parseInt);
         } catch (NumberFormatException e) {
@@ -68,19 +70,16 @@ public class CalculatorController {
         return str.substring(2, indexOfFormatLast);
     }
 
-    private boolean checkInputFormat(String str) {
-        if(!str.startsWith("//")) throw new IllegalArgumentException("잘못된 형식의 입력입니다.");
-        if(!str.contains("\\n")) throw new IllegalArgumentException("잘못된 형식의 입력입니다.");
+    private boolean isCustomFormat(String str) {
+        if(!str.startsWith("//")) throw new IllegalArgumentException("커스텀 구분자 입력은 //으로 시작해야합니다.");
+        if(!str.contains("\\n")) throw new IllegalArgumentException("커스텀 구분자는 입력은 \\n 로 끝나야합니다.");
         return true;
     }
 
-    private boolean startsWithNumber(String str) {
-        String first = String.valueOf(str.charAt(0));
-        return first.matches("[0-9]+");
-    }
-
-    private Stream<Integer> convertToInt(List<String> strs) {
-        return strs.stream().map(Integer::parseInt);
+    private boolean startsWithPositiveNumber(String str) {
+        if (str.matches("[1-9].*")) {
+            return true;
+        } else throw new IllegalArgumentException("숫자는 양수만 입력할 수 있습니다.");
     }
 }
 
