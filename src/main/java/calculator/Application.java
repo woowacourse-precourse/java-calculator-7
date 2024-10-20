@@ -13,6 +13,7 @@ public class Application {
 
 class StringParser {
     String user_input;
+    String result;
 
     public StringParser() {
     }
@@ -60,4 +61,40 @@ class StringParser {
 
         return num_list;
     }
+
+    //토큰을 숫자로 형변환한 뒤 최종 결과값을 구하는 메서드(sumNumbers)
+    public String sumNumbers(String[] number_list) throws IllegalArgumentException {
+        //기본값은 실수
+        double resultNum = 0;
+        String type = "Integer";
+
+        for (String x : number_list) {
+            //정수일 때
+            if (x.matches("[0-9]+")) {
+                int added = Integer.parseInt(x);
+                resultNum += added;
+            }
+            //실수일 때, type 변수를 Double로 설정
+            else if (x.matches("[0-9]+\\.[0-9]+")) {
+                double added = Double.parseDouble(x);
+                resultNum += added;
+
+                type = "Double";
+            } else {
+                throw new IllegalArgumentException("문자열의 형식이 올바르지 않습니다.");
+            }
+        }
+        //type 자료형이 처음과 똑같이 Integer일 경우 정수끼리의 덧셈이므로 결과를 정수로 출력
+        if (type.equals("Integer")) {
+            int changeFormat = (int) Math.round(resultNum);
+            result = Integer.toString(changeFormat);
+        }
+        //그 외는 더하는 수에 실수가 포함된 경우이므로, 결과를 실수로 출력
+        else {
+            result = Double.toString(resultNum);
+        }
+
+        return result;
+    }
+
 }
