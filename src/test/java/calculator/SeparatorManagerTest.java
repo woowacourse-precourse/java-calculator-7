@@ -19,15 +19,15 @@ class SeparatorManagerTest {
 
         assertThat(someSeparatorList).contains('x');
         assertThat(defaultSeparatorList1).containsOnlyOnce(',');
-        assertThat(defaultSeparatorList2).containsExactlyInAnyOrder(',', ';');
+        assertThat(defaultSeparatorList2).containsExactlyInAnyOrder(',', ':');
     }
 
     @Test
     void basicSeparatingTest() {
         SeparatorManager separatorManager = new SeparatorManager('*');
 
-        String normalCase = "123*456,789;123";
-        String invalidCase = "-123*456,789;123";
+        String normalCase = "123*456,789:123";
+        String invalidCase = "-123*456,789:123";
 
         assertThat(separatorManager.getSeparatedStringNumber(normalCase))
                 .containsExactly("123", "456", "789", "123");
@@ -40,7 +40,7 @@ class SeparatorManagerTest {
     void separatingWithNumberSeparatorTest() {
         SeparatorManager numberSeparatorManager = new SeparatorManager('3');
 
-        String testInput = "123456,789;123";
+        String testInput = "123456,789:123";
 
         assertThat(numberSeparatorManager.getSeparatedStringNumber(testInput))
                 .containsExactly("12", "456", "789", "12");
@@ -50,7 +50,7 @@ class SeparatorManagerTest {
     void separatingEndsWithSeparatorStringTest() {
         SeparatorManager separatorManager = new SeparatorManager(null);
 
-        String endsWithSeparator = "123;";
+        String endsWithSeparator = "123:";
 
         assertThat(separatorManager.getSeparatedStringNumber(endsWithSeparator))
                 .containsExactly("123");
@@ -60,7 +60,7 @@ class SeparatorManagerTest {
     void separatingConsecutiveSeparatorsStringTest(){
         SeparatorManager separatorManager = new SeparatorManager(null);
 
-        String consecutiveSeparators = "1,;,;;,;,;,;,;,;,;;,;,;,;2";
+        String consecutiveSeparators = "1,:,::,:,:,:,:,:,::,:,:,:2";
 
         assertThat(separatorManager.getSeparatedStringNumber(consecutiveSeparators))
                 .containsExactly("1", "2");

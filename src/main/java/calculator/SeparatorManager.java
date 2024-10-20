@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SeparatorManager {
-    private static final List<Character> defaultSeparatorList = List.of(';', ',');
+    private static final List<Character> defaultSeparatorList = List.of(':', ',');
     private final List<Character> separatorList;
 
     public SeparatorManager(Character separator) {
