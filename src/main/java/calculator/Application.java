@@ -22,7 +22,7 @@ public class Application {
             System.out.println(0);
             System.exit(0);
         }
-        if((input.charAt(0) == '/' && input.length() < 5) ) {
+        if((input.charAt(0) == '/' && input.length() < 5)) {
             throw new IllegalArgumentException("Input is not valid.");
         }
         if(input.startsWith("//") && input.charAt(3) == '\\'
@@ -61,7 +61,7 @@ public class Application {
         String input = "";
         // 입력받기 및 입력값 검증
             try{
-                System.out.println("덧셈할 문자열을 입력해 주세요.");
+                System.out.println("PLEASE_ENTER_THE_STRING_TO_BE_ADDED");
                 input = Console.readLine();
                 isValid(input);
             }catch (IllegalArgumentException e){
@@ -69,7 +69,7 @@ public class Application {
             System.exit(0);
         }
 
-        System.out.println("결과 : " + calculate(input));
+        System.out.println("result : " + calculate(input));
 
     }
 }
