@@ -4,7 +4,7 @@ import calculator.Constants.OutputMessages;
 import calculator.Utils.NumberUtils;
 
 public class OutputView {
-    OutputView() {
+    private OutputView() {
     }
 
     public static void printResultMessage() {

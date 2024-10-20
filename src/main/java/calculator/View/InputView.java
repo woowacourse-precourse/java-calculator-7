@@ -4,7 +4,8 @@ import calculator.Constants.InputMessages;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
-    InputView() {
+    private InputView() {
+        
     }
 
     public static void printInsertMessage() {

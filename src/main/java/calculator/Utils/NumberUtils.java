@@ -2,7 +2,7 @@ package calculator.Utils;
 
 public class NumberUtils {
 
-    NumberUtils() {
+    private NumberUtils() {
 
     }
 

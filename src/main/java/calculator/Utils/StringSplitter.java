@@ -11,7 +11,7 @@ import java.util.List;
 public class StringSplitter {
     public final static String BLANK = "";
 
-    StringSplitter() {
+    private StringSplitter() {
 
     }
 
