@@ -16,5 +16,11 @@ public class Validator {
         }
     }
 
-
+    public static void validateInteger(String num){
+        try{
+            Integer.parseInt(num);
+        }catch(IllegalArgumentException e){
+            throw new IllegalArgumentException("특정 수가 int 범위를 넘어갔습니다");
+        }
+    }
 }

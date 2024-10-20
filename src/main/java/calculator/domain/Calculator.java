@@ -34,19 +34,11 @@ public class Calculator {
         int result= Arrays.stream(input.split(seperatorRegex))
                 .filter(num->!isBlank(num))
                 .peek(num->Validator.validateCustomSeperator(num))
-                .peek(num->checkIfInteger(num))
+                .peek(num->Validator.validateInteger(num))
                 .mapToInt(Integer::parseInt)
                 .reduce(0,(a,b)->addTwoNum(a,b));
 
         return result;
-    }
-
-    private static void checkIfInteger(String num) {
-        try{
-            Integer.parseInt(num);
-        }catch(IllegalArgumentException e){
-            throw new IllegalArgumentException("특정 수가 int 범위를 넘어갔습니다");
-        }
     }
 
     private static int addTwoNum(int a,int b) {
