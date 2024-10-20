@@ -3,6 +3,7 @@ package calculator.service;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 public class InputService {
 
@@ -17,7 +18,13 @@ public class InputService {
      */
     public static String input() {
         System.out.println(INPUT_SENTENCE);
-        return Console.readLine();
+
+        try {
+            return Console.readLine();
+        }catch (NoSuchElementException e){
+            return "";
+        }
+
     }
 
     /**
