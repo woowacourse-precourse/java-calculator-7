@@ -24,6 +24,21 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    // 커스텀 구분자가 이스케이프가 필요한 경우 -> [ ] \
+    @Test
+    public void 커스텀_구분자_예외_테스트(){
+        assertSimpleTest(()->{
+            run("//[\\n3[3");
+            assertThat(output().contains("결과 : 6"));
+
+            run("//]\\n3]3");
+            assertThat(output().contains("결과 : 6"));
+
+            run("//\\\\n3\\3");
+            assertThat(output().contains("결과 : 6"));
+        });
+
+    }
     @Override
     public void runMain() {
         Application.main(new String[]{});

@@ -39,8 +39,14 @@ public class StringCalculator {
     public void addDelimiter(){
         if(input.length() >= 5) {
             for (int i = 0; i < input.length() - 5; i ++) {
+                char now = input.charAt(i + 2);
                 if (input.startsWith("//", i) && input.startsWith("\\n", i + 3)) {
-                    delimiter += input.charAt(i + 2);
+                    //정규 표현식 예외
+                    if(now=='[' || now ==']' || now == '\\'){
+                        System.out.println("now : "+now);
+                        delimiter += '\\';
+                    }
+                    delimiter += now;
                     // 원본 문자열에서 커스텀문자열 추가 부분 제거
                     this.input = input.substring(0, i) + input.substring(i + 5);
                     // 인덱스 조정
@@ -49,7 +55,7 @@ public class StringCalculator {
             }
         }
         delimiter+="]";
-//        System.out.println("delimiter : " + delimiter);
+        System.out.println("delimiter : " + delimiter);
     }
 
     /**
@@ -57,7 +63,7 @@ public class StringCalculator {
      */
     public void sumDelimitedNumbers(){
         String[] numList = input.split(delimiter);
-//        System.out.println("numList : "+Arrays.toString(numList));
+        System.out.println("numList : "+Arrays.toString(numList));
         for(String c : numList){
             // 구분자를 제외한 문자가 있을경우 예외처리
             if(!c.matches("^[0-9]*$")){
@@ -65,7 +71,7 @@ public class StringCalculator {
             }
             this.result += Integer.parseInt(c);
         }
-//        System.out.println("sum : "+ result);
+        System.out.println("sum : "+ result);
     }
 
     /**
