@@ -11,7 +11,7 @@ public class Separator {
     public Separator() {
         separatorList = new ArrayList<>();
         separatorList.add(",");
-        separatorList.add(";");
+        separatorList.add(":");
     }
 
     public void addCustomSeparator(String customSeparator) {
