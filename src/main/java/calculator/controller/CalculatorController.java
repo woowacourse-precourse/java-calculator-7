@@ -4,28 +4,30 @@ import calculator.machine.CalculatingMachine;
 import calculator.separator.CustomSeparator;
 import calculator.separator.DefaultSeparator;
 import calculator.separator.Separator;
-import camp.nextstep.edu.missionutils.Console;
+import calculator.view.CalculatorView;
 
 public class CalculatorController {
-    private String userInput;
-    private final String startComment = "덧셈할 문자열을 입력해 주세요.";
     private final String customPrefix = "//";
     private Separator separator;
-    private CalculatingMachine calculatingMachine;
+    private final CalculatingMachine calculatingMachine;
+    private final CalculatorView calculatorView;
 
     public CalculatorController() {
-        this.userInput = "";
         this.calculatingMachine = new CalculatingMachine();
+        this.calculatorView = new CalculatorView();
     }
 
-    public Long startCalculate() {
-        System.out.println(startComment);
-        this.userInput = Console.readLine();
+    //todo: 리팩토링 필요
+    public void startCalculate() {
+        String userInput = calculatorView.getUserInput();
         if (userInput.startsWith(customPrefix)) {
             this.separator = new CustomSeparator();
-            return calculatingMachine.calculate(separator.separate(userInput));
+            Long result = calculatingMachine.calculate(separator.separate(userInput));
+            calculatorView.getResult(result);
+            return;
         }
         this.separator = new DefaultSeparator();
-        return calculatingMachine.calculate(separator.separate(userInput));
+        Long result = calculatingMachine.calculate(separator.separate(userInput));
+        calculatorView.getResult(result);
     }
 }
