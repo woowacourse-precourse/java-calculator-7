@@ -4,7 +4,6 @@ import calculator.application.DelimiterProcessor;
 import calculator.application.StringSumCalculator;
 import calculator.io.InputHandler;
 import calculator.io.ResultPrinter;
-import java.util.Optional;
 
 public class StringAdditionController {
 

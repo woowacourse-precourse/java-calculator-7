@@ -1,12 +1,8 @@
 package calculator.application;
 
 import calculator.common.ErrorMessage;
-import calculator.domain.CustomDelimiter;
-import calculator.domain.DefaultDelimiter;
 import calculator.domain.Delimiter;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class DelimiterProcessor {
 

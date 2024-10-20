@@ -1,13 +1,13 @@
 package calculator.config;
 
+import calculator.application.DelimiterProcessor;
+import calculator.application.StringSumCalculator;
 import calculator.domain.CustomDelimiter;
 import calculator.domain.DefaultDelimiter;
 import calculator.domain.Delimiter;
-import calculator.presentation.StringAdditionController;
-import calculator.application.DelimiterProcessor;
-import calculator.application.StringSumCalculator;
 import calculator.io.InputHandler;
 import calculator.io.ResultPrinter;
+import calculator.presentation.StringAdditionController;
 import java.util.List;
 
 public class ApplicationContext {
