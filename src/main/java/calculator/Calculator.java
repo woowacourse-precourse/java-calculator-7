@@ -1,5 +1,7 @@
 package calculator;
 
+import static exception.ErrorMsg.INVALID_INPUT_MESSAGE;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.StringTokenizer;
@@ -7,7 +9,6 @@ import java.util.StringTokenizer;
 public class Calculator {
 
     private ArrayList<String> separator;
-    private static final String INVALID_INPUT_MESSAGE = "유효하지 않은 입력값입니다.";
 
     public void addSeparator(String newSeparator) {
         this.separator.add(newSeparator);
@@ -38,7 +39,7 @@ public class Calculator {
         return "";
     }
 
-    public void inspectConsoleStr(String inStr, String customSeparator) {
+    public void inspectInStr(String inStr, String customSeparator) {
         if (!"".equals(inStr)) {
             String str = inStr.replace(",", "")
                     .replace(":", "")
@@ -56,7 +57,7 @@ public class Calculator {
         }
     }
 
-    public long outputResult(String inStr, String customSeparator) {
+    public long calculateResult(String inStr, String customSeparator) {
         if (!"".equals(customSeparator)) {
             int subIdx = inStr.indexOf("\\n");
             inStr = inStr.substring(subIdx + 2);

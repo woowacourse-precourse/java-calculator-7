@@ -10,7 +10,7 @@ public class Application {
         Calculator calculator = new Calculator();
         calculator.setDefaultSeparator(new String[]{",", ":"});
         String customSeparator = calculator.getCustomSeparator(inStr);
-        calculator.inspectConsoleStr(inStr, customSeparator);
-        System.out.println("결과 : " + calculator.outputResult(inStr, customSeparator));
+        calculator.inspectInStr(inStr, customSeparator);
+        System.out.println("결과 : " + calculator.calculateResult(inStr, customSeparator));
     }
 }
