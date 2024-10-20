@@ -13,8 +13,8 @@ public class StringAddCalculator {
         if (input.isEmpty()) {
             return this.result;
         }
-        DelimiterAndNumber delimiterAndNumber = delimiterExtractor.extract(input);
-        List<Integer> numbers = numberExtractor.extractNumbers(delimiterAndNumber);
+        DelimiterNumberHandler delimiterNumberHandler = delimiterExtractor.extract(input);
+        List<Integer> numbers = numberExtractor.extractNumbers(delimiterNumberHandler);
         InputValidator.validateNumbers(numbers);
         return numbers.stream()
                 .reduce(result, Integer::sum);

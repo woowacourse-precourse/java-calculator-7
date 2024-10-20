@@ -14,7 +14,7 @@ class NumberExtractorTest {
         NumberExtractor numberExtractor = new NumberExtractor();
 
         List<Integer> numbers = numberExtractor.extractNumbers(
-                new DelimiterAndNumber(";", "1;2;3")
+                new DelimiterNumberHandler(";", "1;2;3")
         );
 
         Assertions.assertThat(numbers).isEqualTo(List.of(1, 2, 3));
