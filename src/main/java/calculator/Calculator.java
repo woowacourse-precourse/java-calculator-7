@@ -42,6 +42,7 @@ public class Calculator {
                 throw new IllegalArgumentException("잘못된 숫자 형식입니다.");
             }
         }
+
         return sum;
     }
 }

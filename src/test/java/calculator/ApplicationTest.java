@@ -12,7 +12,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 단일_숫자_입력(){
         assertSimpleTest(() -> {
-            assertThat(Calculator.add("5")).isEqualTo(5);
+            assertThat(Calculator.add("7")).isEqualTo(7);
         });
     }
 
