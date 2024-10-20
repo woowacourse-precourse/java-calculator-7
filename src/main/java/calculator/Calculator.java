@@ -17,14 +17,18 @@ public class Calculator {
     }
 
     public void getNumbers(String inputString) {
-        String[] customStrings = inputString.split(division);
-        List<String> strings;
+        String regex;
 
-        for (String customString : customStrings) {
-            strings = Arrays.asList(customString.split(",|:"));
-            for (String string : strings) {
-                numbers.add(Integer.parseInt(string));
-            }
+        if (division != null) {
+            regex = ",|" + division + "|:";
+        } else {
+            regex = ",|;";
+        }
+        List<String> strings = Arrays.asList(inputString.split(regex));
+
+        for (String string : strings) {
+            int number = Integer.parseInt(string);
+            numbers.add(Integer.parseInt(string));
         }
     }
 
