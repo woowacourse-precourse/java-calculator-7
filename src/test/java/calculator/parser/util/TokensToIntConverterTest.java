@@ -13,7 +13,7 @@ class TokensToIntConverterTest {
 
     @Test
     @DisplayName("토큰을 Integer로 변환 성공")
-    void convertTokensToIntegers() {
+    void convertTokensToInts() {
         // given
         TokensToIntConverter converter = new TokensToIntConverter();
         ArrayList<String> tokens = new ArrayList<>();
@@ -22,31 +22,31 @@ class TokensToIntConverterTest {
         tokens.add("3");
 
         // when
-        ArrayList<Integer> doubleList = converter.convertToInt(tokens);
+        ArrayList<Integer> intList = converter.convertToInt(tokens);
 
         // then
         ArrayList<Integer> expectedTokens = new ArrayList<>(List.of(1, 2, 3));
-        assertIterableEquals(expectedTokens, doubleList);
+        assertIterableEquals(expectedTokens, intList);
     }
 
     @Test
     @DisplayName("빈 리스트 변환 시 빈 Integer 리스트 반환")
-    void convertEmptyTokenListToIntegers() {
+    void convertEmptyTokens() {
         // given
         TokensToIntConverter converter = new TokensToIntConverter();
         ArrayList<String> tokens = new ArrayList<>();
 
         // when
-        ArrayList<Integer> doubleList = converter.convertToInt(tokens);
+        ArrayList<Integer> intList = converter.convertToInt(tokens);
 
         // then
         ArrayList<Integer> expectedTokens = new ArrayList<>();
-        assertIterableEquals(expectedTokens, doubleList);
+        assertIterableEquals(expectedTokens, intList);
     }
 
     @Test
     @DisplayName("음수 토큰 변환 시 예외 발생")
-    void convertNegativeTokensToIntegersThrowsException() {
+    void negativeTokensException() {
         // given
         TokensToIntConverter converter = new TokensToIntConverter();
         ArrayList<String> tokens = new ArrayList<>();
@@ -61,7 +61,7 @@ class TokensToIntConverterTest {
 
     @Test
     @DisplayName("허용되지 않은 문자 토큰 변환 시 예외 발생")
-    void convertInvalidCharacterTokensToIntegersThrowsException() {
+    void invalidCharacterException() {
         // given
         TokensToIntConverter converter = new TokensToIntConverter();
         ArrayList<String> tokens = new ArrayList<>();

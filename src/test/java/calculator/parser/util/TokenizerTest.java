@@ -12,7 +12,7 @@ class TokenizerTest {
 
     @Test
     @DisplayName("기본 구분자로 토큰화 성공")
-    void tokenizeWithDefaultDelimiters() {
+    void tokenizeDefaultDelimiters() {
         // Given
         Tokenizer tokenizer = new Tokenizer(",:", "//", "\n");
 
@@ -26,7 +26,7 @@ class TokenizerTest {
 
     @Test
     @DisplayName("콤마와 콜론을 구분자로 사용하여 토큰화 성공")
-    void tokenizeWithCommaAndColonDelimiters() {
+    void tokenizeCommaColon() {
         // Given
         Tokenizer tokenizer = new Tokenizer(",:", "//", "\n");
 
@@ -42,7 +42,7 @@ class TokenizerTest {
 
     @Test
     @DisplayName("커스텀 구분자 '.'으로 토큰화 성공")
-    void tokenizeWithCustomDelimiterDot() {
+    void tokenizeCustomDot() {
         Tokenizer tokenizer = new Tokenizer(",:", "//", "\n");
 
         ArrayList<String> tokens = tokenizer.tokenize("//.\n1:2,3:4", '.');
@@ -52,7 +52,7 @@ class TokenizerTest {
 
     @Test
     @DisplayName("커스텀 구분자 'a'로 토큰화 성공")
-    void tokenizeWithCustomDelimiterA() {
+    void tokenizeCustomA() {
         Tokenizer tokenizer = new Tokenizer(",:", "//", "\n");
 
         ArrayList<String> tokens = tokenizer.tokenize("//a\n1:2,3:4", 'a');
@@ -62,7 +62,7 @@ class TokenizerTest {
 
     @Test
     @DisplayName("빈 입력값 토큰화 시 빈 리스트 반환")
-    void tokenizeWithEmptyInputReturnsEmptyList() {
+    void tokenizeEmptyInput() {
         Tokenizer tokenizer = new Tokenizer(",:", "//", "\n");
 
         ArrayList<String> tokens = tokenizer.tokenize("", null);
@@ -71,7 +71,7 @@ class TokenizerTest {
 
     @Test
     @DisplayName("null 입력값 토큰화 시 빈 리스트 반환")
-    void tokenizeWithNullInputReturnsEmptyList() {
+    void tokenizeNullInput() {
         Tokenizer tokenizer = new Tokenizer(",:", "//", "\n");
 
         ArrayList<String> tokens = tokenizer.tokenize(null, null);
@@ -80,7 +80,7 @@ class TokenizerTest {
 
     @Test
     @DisplayName("커스텀 구분자 정보 제거 테스트")
-    void removeCustomDelimiterInfoSuccessfully() {
+    void removeCustomInfo() {
         Tokenizer tokenizer = new Tokenizer(",:", "//", "\n");
 
         String s = tokenizer.removeCustomDelimiterInfo("1:2,3:4//.\n");
@@ -89,7 +89,7 @@ class TokenizerTest {
 
     @Test
     @DisplayName("커스텀 구분자 정보 제거 - prefix와 suffix 동일")
-    void removeCustomDelimiterInfoWithSamePrefixSuffix() {
+    void removeCustomSamePrefixSuffix() {
         Tokenizer tokenizer = new Tokenizer(",:", "//", "//");
 
         String s = tokenizer.removeCustomDelimiterInfo("1:2,3:4//.//");
@@ -98,7 +98,7 @@ class TokenizerTest {
 
     @Test
     @DisplayName("커스텀 구분자 정보 제거 - 구분자가 'a'")
-    void removeCustomDelimiterInfoWithDelimiterA() {
+    void removeCustomWithA() {
         Tokenizer tokenizer = new Tokenizer(",:", "//", "\\n");
 
         String s = tokenizer.removeCustomDelimiterInfo("//a\\n1");

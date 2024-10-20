@@ -13,7 +13,7 @@ class SumCalculatorTest {
 
     @Test
     @DisplayName("정수 리스트의 합계 계산 성공")
-    void sumWithValidIntegers() {
+    void sumValidIntegers() {
         int result = SumCalculator.sum(new ArrayList<>(List.of(1, 2, 3)));
 
         assertThat(result).isEqualTo(6);
@@ -21,7 +21,7 @@ class SumCalculatorTest {
 
     @Test
     @DisplayName("오버플로우 발생 시 예외 처리")
-    void sumWithOverflowThrowsException() {
+    void sumOverflowException() {
         ArrayList<Integer> numbers = new ArrayList<>(List.of(Integer.MAX_VALUE, 1));
 
         assertThatThrownBy(() -> SumCalculator.sum(numbers)).isInstanceOf(IllegalArgumentException.class)

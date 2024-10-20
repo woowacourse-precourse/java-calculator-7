@@ -11,7 +11,7 @@ class CustomDelimiterParserTest {
 
     @Test
     @DisplayName("단일 커스텀 구분자 파싱 성공")
-    void parseSingleCustomDelimiter() {
+    void parseSingleCustom() {
         // given
         CustomDelimiterParser customDelimiterParser = new CustomDelimiterParser("//", "\\n");
         String input = "//;\\n1;2,3";
@@ -25,7 +25,7 @@ class CustomDelimiterParserTest {
 
     @Test
     @DisplayName("단일 문자 커스텀 구분자 'a' 파싱 성공")
-    void parseCustomDelimiterA() {
+    void parseCustomA() {
         // given
         CustomDelimiterParser customDelimiterParser = new CustomDelimiterParser("//", "\\n");
         String input = "//a\\n1;2,3";
@@ -39,7 +39,7 @@ class CustomDelimiterParserTest {
 
     @Test
     @DisplayName("여러 개의 커스텀 구분자 파싱 시 예외 발생")
-    void parseWithMultipleCustomDelimitersThrowsException() {
+    void multipleDelimitersException() {
         // given
         CustomDelimiterParser customDelimiterParser = new CustomDelimiterParser("//", "\\n");
         String input = "//+\\n1;2,3//-\\n";
@@ -51,7 +51,7 @@ class CustomDelimiterParserTest {
 
     @Test
     @DisplayName("문자열 길이의 커스텀 구분자 파싱 시 예외 발생")
-    void parseWithLongCustomDelimiterThrowsException() {
+    void longCustomException() {
         // given
         CustomDelimiterParser customDelimiterParser = new CustomDelimiterParser("//", "\\n");
         String input = "//++\\n1;2,3";
@@ -63,7 +63,7 @@ class CustomDelimiterParserTest {
 
     @Test
     @DisplayName("빈 커스텀 구분자 파싱 시 예외 발생")
-    void parseWithEmptyCustomDelimiterThrowsException() {
+    void emptyCustomException() {
         // given
         CustomDelimiterParser customDelimiterParser = new CustomDelimiterParser("//", "\\n");
         String input = "//\\n1;2,3";
@@ -75,7 +75,7 @@ class CustomDelimiterParserTest {
 
     @Test
     @DisplayName("숫자로 된 커스텀 구분자 파싱 시 예외 발생")
-    void parseWithNumericCustomDelimiterThrowsException() {
+    void numericCustomException() {
         // given
         CustomDelimiterParser customDelimiterParser = new CustomDelimiterParser("//", "\\n");
         String input = "//1\\n1;2,3";
