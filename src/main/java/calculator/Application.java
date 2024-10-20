@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Application {
     public static final String inputMessage = "덧셈할 문자열을 입력해 주세요.";
+    public static final String outputMessage = "결과 : ";
 
     public static void main(String[] args) {
         System.out.println(inputMessage);
@@ -24,7 +25,7 @@ public class Application {
             sum = sumNumber(numberList);
         }
 
-        System.out.println(sum);
+        System.out.println(outputMessage + sum);
     }
 
     public static DividersAndNumberSequence getDividersAndNumberSequence(String input) {
