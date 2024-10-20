@@ -10,6 +10,8 @@ public class Application {
 
         Calculator calculator = new Calculator();
         long result = calculator.calculate(input);
+
+        printResult(result);
     }
 
     private static String readInput() {
@@ -19,5 +21,9 @@ public class Application {
         } catch (NoSuchElementException e) {  //입력이 없는 경우
             return "";
         }
+    }
+
+    private static void printResult(long result) {
+        System.out.print("결과 : " + result);
     }
 }
