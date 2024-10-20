@@ -50,5 +50,33 @@ public class Process {
         return userInput;
     }
 
+    public int calculateSum(String number) {
+        String result = "";
+        int num = 0;
+        boolean lastCharFlag = false;
+        for (char ch : number.toCharArray()) {
+            if (Character.isDigit(ch)) {
+                result += ch;
+                lastCharFlag = false;
+            } else if (lastCharFlag) {
+                throw new IllegalArgumentException("구분자가 연속으로 존재합니다.");
 
+            } else if (basicSeparator.contains(ch)) {
+                if (!result.isEmpty()) {
+                    num += Integer.parseInt(result);
+                    result = "";
+
+                    lastCharFlag = true;
+                }
+            } else if (!basicSeparator.contains(ch)) {
+                throw new IllegalArgumentException("잘못된 구분자가 포함되어 있습니다.");
+            }
+        }
+
+        if (!result.isEmpty()) {
+            num += Integer.parseInt(result);
+        }
+
+        return num;
+    }
 }
