@@ -46,10 +46,10 @@
 
 ### [✅] JDK 21 버전에서 실행 가능해야 한다.
 ### [✅]  build.gradle 파일은 변경할 수 없으며, 제공된 라이브러리 이외의 외부 라이브러리는 사용하지 않는다.
-### [] 자바 코드 컨벤션을 지키면서 프로그래밍한다.
-### [] 기본적으로 Java Style Guide를 원칙으로 한다.
+### [✅] 자바 코드 컨벤션을 지키면서 프로그래밍한다.
+### [✅] 기본적으로 Java Style Guide를 원칙으로 한다.
 
-## []  라이브러리
+### [✅]  라이브러리
 - camp.nextstep.edu.missionutils에서 제공하는 Console API를 사용하여 구현해야 한다.
 - 사용자가 입력하는 값은 camp.nextstep.edu.missionutils.Console의 readLine()을 활용한다.
 
