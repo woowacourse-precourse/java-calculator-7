@@ -19,12 +19,12 @@ public class Application {
 
         CalculatorController calculatorController = new CalculatorController(calculatorService);
 
-        System.out.println("덧셈할 문자열을 입력해 주세요.\n");
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         String str = Console.readLine();
         try {
             System.out.println("결과 : " + calculatorController.calculate(str));
         } catch (Exception e) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(e);
         }
     }
 }

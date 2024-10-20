@@ -11,9 +11,9 @@ public class InputStringProcessor {
 
     private static final int BEGIN_INDEX = 0;
     private static final int STR_MIN_LENGTH_FOR_SEPARATOR_EXIST = 5;
-    private static final int CUSTOM_SEPARATOR_END_INDEX = 4;
+    private static final int CUSTOM_SEPARATOR_END_INDEX = 5;
     private static final String SEPARATOR_FORM_BEGIN_STR = "//";
-    private static final String SEPARATOR_FORM_END_STR = "\n";
+    private static final String SEPARATOR_FORM_END_STR = "\\n";
     private static final int SEPARATOR_LOCATION_INDEX = 2;
     private static final int INIT_SIZE_IN_SPLIT_STR = 0;
 

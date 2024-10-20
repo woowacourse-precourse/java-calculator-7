@@ -26,10 +26,11 @@ class InputStringProcessorTest {
                 Arguments.of("//12345", false),
                 Arguments.of("123\n:,5", false),
                 Arguments.of("//+\1234:,", false),
-                Arguments.of("//,\n12,3+4:5", true),
-                Arguments.of("//:\n12,3+4:5", true),
-                Arguments.of("//+\n12,3+4:5", true),
-                Arguments.of("//-\n12,3+4:5", true)
+                Arguments.of("//,\\n12,3+4:5", true),
+                Arguments.of("//:\\n12,3+4:5", true),
+                Arguments.of("//+\\n12,3+4:5", true),
+                Arguments.of("//-\\n12,3+4:5", true),
+                Arguments.of("//;\\n1", true)
         );
     }
 
@@ -48,10 +49,10 @@ class InputStringProcessorTest {
                 Arguments.of("//12345", false, defaultSeparators),
                 Arguments.of("123\n:,5", false, defaultSeparators),
                 Arguments.of("//+\1234:,", false, defaultSeparators),
-                Arguments.of("//:\n12,3+4:5", true, defaultSeparators),
-                Arguments.of("//,\n12,3+4:5", true, defaultSeparators),
-                Arguments.of("//+\n12,3+4:5", true, Set.of(':', ',', '+')),
-                Arguments.of("//-\n12,3+4:5", true, Set.of(':', ',', '-'))
+                Arguments.of("//:\\n12,3+4:5", true, defaultSeparators),
+                Arguments.of("//,\\n12,3+4:5", true, defaultSeparators),
+                Arguments.of("//+\\n12,3+4:5", true, Set.of(':', ',', '+')),
+                Arguments.of("//-\\n12,3+4:5", true, Set.of(':', ',', '-'))
         );
     }
 
@@ -70,10 +71,11 @@ class InputStringProcessorTest {
                 Arguments.of("//12345", false, "//12345"),
                 Arguments.of("123\n:,5", false, "123\n:,5"),
                 Arguments.of("//+\1234:,", false, "//+\1234:,"),
-                Arguments.of("//:\n12,3+4:5", true, "12,3+4:5"),
-                Arguments.of("//,\n12,3+4:5", true, "12,3+4:5"),
-                Arguments.of("//+\n12,3+4:5", true, "12,3+4:5"),
-                Arguments.of("//-\n12,3+4:5", true, "12,3+4:5")
+                Arguments.of("//;\\n1", true, "1"),
+                Arguments.of("//:\\n12,3+4:5", true, "12,3+4:5"),
+                Arguments.of("//,\\n12,3+4:5", true, "12,3+4:5"),
+                Arguments.of("//+\\n12,3+4:5", true, "12,3+4:5"),
+                Arguments.of("//-\\n12,3+4:5", true, "12,3+4:5")
         );
     }
 
