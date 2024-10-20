@@ -27,9 +27,9 @@ public class Application {
     }
 
     private static String extractCustomDelimiter(String input) {
-        if (input.startsWith("//") && input.contains("\n")) {
+        if (input.startsWith("//") && input.contains("\\n")) {
             int start = input.indexOf("//") + 2;
-            int end = input.indexOf("\n");
+            int end = input.indexOf("\\n");
             return input.substring(start, end);
         }
         return "";
