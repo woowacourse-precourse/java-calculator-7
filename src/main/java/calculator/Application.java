@@ -15,7 +15,6 @@ public class Application {
     }
 
     public static int add(String input) {
-        StringBuilder modifiInput = new StringBuilder(input);
         String delimiter = ",|:";
 
         while (input.contains("//")) {
