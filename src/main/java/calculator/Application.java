@@ -76,4 +76,37 @@ public class Application {
 
         return result;
     }
+
+    static String sum(List<String> nums) {
+        List<Byte> arr = new ArrayList<>();
+
+        byte n = 0;
+        for (String num: nums) {
+            for (int i=num.length()-1; i>=0; i--) {
+                int now = num.charAt(i)-'0';
+                int idx = num.length()-1-i;
+
+                if (arr.size()-1<idx) {
+                    arr.add((byte) 0);
+                }
+
+                now+=arr.get(idx);
+                now+=n;
+                n=(byte) (now/10);
+                arr.set(idx, (byte) (now%10));
+            }
+        }
+
+        if (n==1) {
+            arr.add((byte) 1);
+        }
+
+        StringBuilder sb = new StringBuilder();
+
+        for (int i=arr.size()-1; i>=0; i--) {
+            sb.append(arr.get(i));
+        }
+
+        return sb.toString();
+    }
 }
