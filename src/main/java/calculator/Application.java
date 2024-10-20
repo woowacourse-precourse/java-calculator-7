@@ -96,7 +96,7 @@ public class Application {
         if (token.matches("\\d+")) {
             list.add(Integer.parseInt(token));
         } else {
-            /** 음수 또는 실수 발견 시 예외 발생 */
+            /** 잘못된 입력값 발견 시 예외 발생 */
             throw new IllegalArgumentException("잘못된 값이 입력되었습니다. 프로그램을 종료합니다.");
         }
 
