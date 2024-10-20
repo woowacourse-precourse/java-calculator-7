@@ -44,9 +44,9 @@ public class StringSplitter {
     private void appendEscapedDelimiter(StringBuilder regexBuilder, String delimiter) {
         if (delimiter.equals(MINUS)) {
             regexBuilder.append(ESCAPED_HYPHEN);
-        } else {
-            regexBuilder.append(makeDelimiterRegexWithEscape(delimiter));
         }
+
+        regexBuilder.append(makeDelimiterRegexWithEscape(delimiter));
     }
 
     private void appendOrOperatorWhenNeeded(StringBuilder regexBuilder) {
