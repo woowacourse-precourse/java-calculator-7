@@ -74,7 +74,7 @@ public class Application {
                 sum += num; // 덧셈
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
-
+                throw e;
             }
         }
         System.out.println("결과 : " + sum);
