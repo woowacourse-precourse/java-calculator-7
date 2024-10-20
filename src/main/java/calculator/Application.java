@@ -17,16 +17,16 @@ public class Application {
             // 커스텀 구분자와 숫자를 분류
             int defaultIndex = input.indexOf("\\n");
             if (defaultIndex == -1) {
-                throw new IllegalArgumentException(" 커스텀 구분자가 잘못된 형식입니다.");
+                throw new IllegalArgumentException();
             }
 
             // 커스텀 구분자를 추출하여 기본 구분자로 설정
             String customSeparator = input.substring(2, defaultIndex);
             if (customSeparator.length() != 1) {
-                throw new IllegalArgumentException(" 커스텀 구분자는 한 개의 문자만 가능합니다.");
+                throw new IllegalArgumentException();
             }
             if (customSeparator.length() == 1 && Character.isDigit(customSeparator.charAt(0))) {
-                throw new IllegalArgumentException(" 숫자는 구분자로 사용할 수 없습니다.");
+                throw new IllegalArgumentException();
             }
 
             defaultSeparator = customSeparator + "|[,:]"; // 커스텀 구분자 설정 -> 커스텀 구분자와 기본 구분자를 둘 다 사용할 수 있도록
@@ -43,19 +43,18 @@ public class Application {
                     int number = toPositiveInt(token);
                     sum += number;
                 } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException(e.getMessage());
+                    throw new IllegalArgumentException();
                 }
             }
         }
         return sum;
     }
 
-
     // 숫자 문자열을 양의 정수로 변환, 음수인 경우 예외 발생
     private static int toPositiveInt(String token) {
         int number = Integer.parseInt(token.trim());
         if (number < 0) {
-            throw new IllegalArgumentException(" 양수를 입력해주세요.");
+            throw new IllegalArgumentException();
         }
         return number;
     }
@@ -69,11 +68,7 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
-        try {
-            int result = add(input);
-            System.out.println("결과 : " + result);
-        } catch (IllegalArgumentException e) {
-            System.out.println("오류" + e.getMessage());
-        }
+        int result = add(input);
+        System.out.println("결과 : " + result);
     }
 }
