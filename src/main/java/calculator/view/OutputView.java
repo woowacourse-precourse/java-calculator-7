@@ -8,7 +8,7 @@ public class OutputView {
 
     public void printResult(final String total) {
         NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.KOREA);
-        System.out.println("결과 : " + numberFormat.format(new BigInteger(total)));
+        System.out.println(String.join(" : ", "결과", numberFormat.format(new BigInteger(total))));
     }
 
 }
