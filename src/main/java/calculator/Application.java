@@ -17,5 +17,11 @@ public class Application {
             System.out.println("결과 : 0");
             return;
         }
+
+        /** 기능 3-2 구현 */
+        String basicDelimiter = ",|:";
+
+        int sum = 0;
+
     }
 }
