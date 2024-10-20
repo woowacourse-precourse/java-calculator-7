@@ -73,6 +73,8 @@ public class CalculatorImpl implements Calculator {
             input = input.substring(5);
         }
 
+        //여기서 오류가 계속 남
+        // //[\n1,2[3
         String[] tokens = input.split(regExTmp.toString());
 
         for (String s : tokens) {
@@ -93,6 +95,11 @@ public class CalculatorImpl implements Calculator {
             if (num <= 0) {
                 throw new IllegalArgumentException("양수가 아니므로 더하기 계산을 할 수 없습니다.");
             }
+
+            if (tmp > Long.MAX_VALUE - num) {
+                throw new IllegalArgumentException("결과값이 유효한 범위를 벗어났습니다.");
+            }
+
             tmp += num;
         }
 

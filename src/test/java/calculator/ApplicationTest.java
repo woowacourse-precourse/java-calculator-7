@@ -168,6 +168,170 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    // 예외
+    @Test
+    void 예외_테스트_숫자_대신_공백() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,2::3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_숫자_대신_문자_1() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,2:ㅁ:3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_숫자_대신_문자_2() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,2: :3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_숫자_대신_문자_3() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,2:a:3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_숫자_대신_문자_4() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,2:(:3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_양수_대신_음수() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,-1:3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_양수_대신_0() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,0:3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_양수_대신_소수() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,0.2:3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_합이_자료형을_넘어갈_때() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("9223372036854775800,9223372036854775800"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    //다시 체크
+    @Test
+    void 예외_테스트_커스텀구분자가_길이가_2이상_1() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//[]\n1:2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    //다시 체크
+    @Test
+    void 예외_테스트_커스텀구분자가_길이가_2이상_2() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//\\\n1:2\3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_커스텀구분자가_길이가_2이상_3() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//&^%$\\n1:2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    //다시 체크
+    @Test
+    void 예외_테스트_커스텀구분자가_길이가_0() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//\n1:2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_커스텀구분자를_인식할_수_없을_때_1() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//1:2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_커스텀구분자를_인식할_수_없을_때_2() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//a\1:2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_커스텀구분자를_인식할_수_없을_때_3() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//하n1:2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_커스텀구분자를_인식할_수_없을_때_4() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("~\n1:2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_커스텀구분자를_인식할_수_없을_때_5() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("/~\n1:2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_커스텀구분자를_인식할_수_없을_때_6() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1:2,3//,\\n"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_커스텀구분자를_인식할_수_없을_때_7() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//2\\n1:2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
