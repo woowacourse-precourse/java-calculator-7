@@ -9,20 +9,18 @@ import calculator.view.OutputView;
  */
 public class CalculatorController {
 
-    private final InputView inputView = new InputView();
-    private final OutputView outputView = new OutputView();
+    private final InputView inputView;
+    private final OutputView outputView;
 
-    /**
-     * 애플리케이션 시작
-     */
-    public void run() {
-        createInputString();
+    public CalculatorController(InputView inputView, OutputView outputView) {
+        this.inputView = inputView;
+        this.outputView = outputView;
     }
 
     /**
      * 사용자로부터 문자열을 입력받는다.
      */
-    private void createInputString() {
+    public void run() {
         String input = inputView.getInputString();  // 덧셈할 문자열을 입력해주세요.
 
         validateInputString(input);
