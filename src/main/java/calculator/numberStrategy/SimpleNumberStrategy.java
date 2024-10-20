@@ -1,4 +1,4 @@
-package calculator.NumberStrategy;
+package calculator.numberStrategy;
 
 import java.util.List;
 

@@ -2,8 +2,8 @@ package calculator.calculateStrategy;
 
 import java.util.List;
 
-public class integerCalculateStrategy implements CalculateStrategy {
-    public integerCalculateStrategy() {
+public class EmptyStringCalculateStrategy implements CalculateStrategy {
+    public EmptyStringCalculateStrategy() {
     }
 
     @Override
