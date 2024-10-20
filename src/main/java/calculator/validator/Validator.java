@@ -1,0 +1,125 @@
+package calculator.validator;
+
+import java.util.ArrayList;
+
+public class Validator {
+
+    //입력값 검증
+    public boolean validateInput(String input, ArrayList<String> separators) {
+        //문자열이 비어있거나 구분자만 있으면 false, 다른 경우는 예외 발생
+        if (!checkIsEmpty(input) && !checkHasNumber(input)) {
+            return false;
+        }
+        if (!checkCustomSeparator(input, separators)) {
+            throw new IllegalArgumentException("커스텀 구분자를 잘못 입력하였습니다.");
+        }
+        if (checkHasNegative(input, separators)) {
+            throw new IllegalArgumentException("음수를 입력하였습니다.");
+        }
+        if (!checkIsCorrectString(input, separators)) {
+            throw new IllegalArgumentException("올바른 문자열이 아닙니다.");
+        }
+
+        return true;
+    }
+
+    //문자열이 비어있는지 검사
+    private boolean checkIsEmpty(String input) {
+        //문장이 비어있으면 false, 존재하면 true
+        return !input.isEmpty();
+    }
+
+    //문자열에 숫자가 존재하는지 검사
+    private boolean checkHasNumber(String input) {
+        for (int i = 0; i < input.length(); i++) {
+            //숫자가 하나라도 있으면 true
+            if (Character.isDigit(input.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //커스텀 구분자를 사용하였는지 검사
+    private boolean checkCustomSeparator(String input, ArrayList<String> separators) {
+        // "//"로 시작안하면 커스텀 구분자를 사용안하기 때문에 리턴
+        if (!input.startsWith("//")) {
+            return true;
+        }
+        for (int i = 2; i < input.length(); i++) {
+            if (input.charAt(i) == '\\' && input.charAt(i + 1) == 'n') {
+                separators.add(input.substring(2, i));
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //구분자가 아닌 다른 문자가 있는지 검사
+    private boolean checkIsCorrectString(String input, ArrayList<String> separators) {
+        // 커스텀 구분자가 있는지 확인
+        input = getStringAfterCustomSeparator(input);
+        int i = 0;
+        while (i < input.length()) {
+            boolean isSeparator = false;
+
+            // 구분자가 여러 글자일 수 있으므로, 구분자 리스트에서 체크
+            for (String separator : separators) {
+                if (i + separator.length() <= input.length() && input.startsWith(separator, i)) {
+                    isSeparator = true;
+                    i += separator.length(); // 구분자 길이만큼 건너뛰기
+                    break;
+                }
+            }
+
+            // 구분자가 아닌 경우, 해당 문자가 숫자인지 확인
+            if (!isSeparator) {
+                char currentChar = input.charAt(i);
+                if (!Character.isDigit(currentChar)) {
+                    return false; // 숫자도 구분자도 아닌 경우
+                }
+                i++; // 다음 문자로 이동
+            }
+        }
+        return true; // 모든 문자가 숫자이거나 구분자인 경우
+    }
+
+    //음수가 있는지 검사
+    private boolean checkHasNegative(String  input, ArrayList<String> separators) {
+        // 커스텀 구분자가 있을 경우 처리
+        input = getStringAfterCustomSeparator(input);
+        boolean hasMinus = false; //구분자에 "-" 존재여부
+        int minusSize = 0;//"-"의 개수
+        for (int i = 0; i < separators.size(); i++) {
+            //"-"로 시작하는 구분자의 길이를 구함
+            if (separators.get(i).startsWith("-")){
+                minusSize = separators.get(i).length();
+                hasMinus = true;
+            }
+        }
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == '-') {
+                //"-"구분자의 길이만큼 넘어서도 -가 있으면 음수
+                if (hasMinus && input.charAt(i + 1)  + minusSize!= '-') {
+                    return false;
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //커스텀 구분자 이후의 문자열 반환
+    private String getStringAfterCustomSeparator(String input) {
+        if (input.startsWith("//")) {
+            // "\n"의 위치 찾기
+            int newlineIndex = input.indexOf("\\n");
+            if (newlineIndex <= 2) {
+                return input; // 형식이 잘못된 경우
+            }
+            // 커스텀 구분자 이후의 문자열만 처리
+            input = input.substring(newlineIndex + 2);
+        }
+        return input;
+    }
+}
