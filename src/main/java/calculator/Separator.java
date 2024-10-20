@@ -21,7 +21,8 @@ public class Separator {
     }
 
     public boolean isContainsCustomSeparatorSymbol(String input) {
-        return input.startsWith(Constants.CUSTOM_SEPARATOR_PREFIX) && input.contains(Constants.CUSTOM_SEPARATOR_SUFFIX);
+        return input.startsWith(Constants.CUSTOM_SEPARATOR_PREFIX) &&
+                input.contains(Constants.CUSTOM_SEPARATOR_SUFFIX);
     }
 
     public String deleteCustomSeparatorConvention(String input) {
