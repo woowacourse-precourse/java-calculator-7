@@ -23,8 +23,10 @@ public class Application {
         stringCalculator.setNumberStrategy(new SimpleNumberStrategy());
         configureDelimiterStrategy(userInput);
         configureCalculateStrategy(userInput);
-
-        System.out.println(outputPhrase + stringCalculator.operate());
+        try {
+            System.out.println(outputPhrase + stringCalculator.operate());
+        } catch (IllegalArgumentException e) {
+        }
     }
 
     private static boolean isCustomDelimiter(String userInput) {
