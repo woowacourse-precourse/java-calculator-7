@@ -9,20 +9,24 @@ public class DelimiterParser {
 
     private String changeDelimiter(String input) {
         StringBuilder result = new StringBuilder();
-        for (char element : input.toCharArray()) {
-            if (isDelimiter(element)) {
+        Delimiters delimiters = new Delimiters();
+        String originalInput = input;
+
+        if (input.startsWith("//") && input.contains("\n")) {
+            String[] splitInput = input.substring("//".length()).split("\n");
+
+            String newDelimiter = splitInput[0];
+            delimiters.add(newDelimiter);
+            originalInput = splitInput[1];
+        }
+
+        for (char element : originalInput.toCharArray()) {
+            if (delimiters.isDelimiter(String.valueOf(element))) {
                 result.append(',');
                 continue;
             }
             result.append(element);
         }
         return result.toString();
-    }
-
-    private boolean isDelimiter(char element) {
-        if (element == ',' || element == ':') {
-            return true;
-        }
-        return false;
     }
 }
