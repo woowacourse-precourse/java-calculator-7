@@ -1,5 +1,7 @@
 package calculator.model;
 
+import calculator.util.Util;
+import calculator.validation.Validation;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -32,8 +34,9 @@ public class Formula {
     }
 
     private List<Integer> extractNumbers() {
-        return Arrays.stream(formula.split("//|\\\\n|:|,|" + customDelimiter))
-                .map(this::numberParser)
+        return Arrays.stream(
+                        formula.split(symbolPattern + Pattern.quote(getCustomDelimiter()))
+                ).map(this::numberParser)
                 .toList();
     }
 
