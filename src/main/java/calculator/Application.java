@@ -1,7 +1,14 @@
 package calculator;
 
+import calculator.adapters.input.cli.CliInputAdapter;
+import calculator.infrastructure.config.AppConfig;
+
 public class Application {
+
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        AppConfig appConfig = new AppConfig();
+
+        CliInputAdapter cliInputAdapter = appConfig.getCliInputAdapter();
+        cliInputAdapter.run();
     }
 }

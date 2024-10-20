@@ -33,3 +33,6 @@ out/
 
 ### Mac OS ###
 .DS_Store
+
+# Ignore .class files
+*.class
