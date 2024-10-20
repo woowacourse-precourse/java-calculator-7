@@ -1,4 +1,5 @@
 package calculator.parser;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,6 +31,14 @@ public class InputParserTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> parser.validateInput(invalidInput))
                         .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void 공백처리_테스트() {
+        String hasSpacesInput = "  1, 2, 3   ";
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> parser.processSpace(hasSpacesInput))
+                .isInstanceOf(IllegalArgumentException.class)
         );
     }
 }

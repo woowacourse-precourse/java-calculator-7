@@ -1,5 +1,8 @@
 package calculator.parser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class InputParser {
     public void validateInput(String input) {
         if (input == null) {
@@ -9,7 +12,12 @@ public class InputParser {
             throw new IllegalArgumentException("Error: 하나의 문자열만 입력해야 합니다.");
         }
     }
-    public String parse(String input) {
-        return input.trim();
+    public String processSpace(String input) {
+        String trimmedInput = input.trim();
+
+        if (trimmedInput.contains(" ")) {
+            throw new IllegalArgumentException("Error: 커스텀 구분자가 아닌 공백은 불가능합니다.");
+        }
+        return trimmedInput;
     }
 }
