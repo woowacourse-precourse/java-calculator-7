@@ -10,6 +10,7 @@ Notion: https://bit.ly/403pBxN
 ### 문자열 입력 기능
 - camp.nextstep.edu.missionutils에서 제공하는 Console API를 사용하여 구현해야 한다.
     - 사용자가 입력하는 값은 camp.nextstep.edu.missionutils.Console의 readLine()을 활용한다.
+    - 공백은 0으로 취급한다.
 
 ---
 ### 커스텀 구분자 등록 기능
@@ -20,6 +21,7 @@ Notion: https://bit.ly/403pBxN
 - 다음 경우들을 체크하는 검사기를 만든다.
     - 숫자 앞에 구분자가 없는 경우
         - 기본 구분자와 커스텀 구분자 모두 없는 경우
+        - 문자열의 길이가 1인 경우(하나만 들어온 경우)는 구분자가 없어도 통과
     - 구분자 뒤에 숫자가 없는 경우
         - ex) `:,1`
 
