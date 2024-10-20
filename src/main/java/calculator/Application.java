@@ -6,8 +6,12 @@ public class Application {
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
-        int result = add(input);
-        System.out.println("결과 : " + result);
+        try {
+            int result = add(input);
+            System.out.println("결과 : " + result);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static int add(String input) {
@@ -33,6 +37,10 @@ public class Application {
     }
 
     private static int parseNumber(String number) {
-        return Integer.parseInt(number);
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("잘못된 입력입니다: " + number);
+        }
     }
 }
