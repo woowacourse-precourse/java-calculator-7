@@ -1,7 +1,5 @@
 package calculator;
 
-import java.util.Arrays;
-
 public class Calculator {
 
     public int run(String input) {
@@ -19,8 +17,14 @@ public class Calculator {
         }
 
         String[] numberArray = numberString.split(delimiter);
-        System.out.println(Arrays.toString(numberArray));
+        int sum = 0;
 
-        return 0;
+        for (String number : numberArray) {
+            if (!number.isEmpty()) {
+                sum += Integer.parseInt(number);
+            }
+        }
+
+        return sum;
     }
 }
