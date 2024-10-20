@@ -1,5 +1,7 @@
 package calculator.domain;
 
+import java.util.regex.Pattern;
+
 public class Calculator {
     private String expression;
 
@@ -25,7 +27,7 @@ public class Calculator {
 
     // //와 \n 사이의 문자열을 ,로 변경
     private void replaceCustomDelimiter() {
-        if (expression.contains("//")) {
+        if (expression.startsWith("//")) {
             int startIdx = expression.indexOf("//");
             int endIdx = expression.indexOf("\\n");
 
@@ -35,7 +37,7 @@ public class Calculator {
             String afterCustomDelimiter = expression.substring(endIdx + 2);
 
             expression = (beforeCustomDelimiter + afterCustomDelimiter)
-                    .replaceAll(customDelimiter, ",");
+                    .replaceAll(Pattern.quote(customDelimiter), ",");
         }
     }
 
