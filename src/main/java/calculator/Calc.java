@@ -1,6 +1,8 @@
 package calculator;
 
 
+import java.util.Arrays;
+
 public class Calc {
     public int calculate(String s, String determine) {
         int sum = 0;
@@ -14,10 +16,14 @@ public class Calc {
         }else{
             String[] inputArr = s.split(determine);
             for(String c : inputArr){
+                if(!Character.isDigit(c.charAt(0))){
+                    throw new IllegalArgumentException();
+                }
 
                 sum += Integer.parseInt(c);
-                }
+
             }
+        }
 
             return sum;
         }
