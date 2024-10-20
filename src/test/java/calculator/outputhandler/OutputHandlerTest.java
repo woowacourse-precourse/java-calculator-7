@@ -1,4 +1,4 @@
-package calculator.inputhandler;
+package calculator.outputhandler;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -6,17 +6,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
-class InputHandlerTest extends NsTest {
+class OutputHandlerTest extends NsTest {
 
     @Test
-    void getInput() {
-        String userInput = "1,2";
+    void printResult() {
+        String prompt = "결과 : ";
+        String result = "3";
 
         assertSimpleTest(() -> {
-            run(userInput);
-
-            String result = InputHandler.getInput("덧셈할 문자열을 입력해 주세요.\n");
-            assertThat(result).isEqualTo(userInput);
+            OutputHandler.printResult(prompt, result);
+            assertThat(output()).contains(prompt + result);
         });
     }
 
