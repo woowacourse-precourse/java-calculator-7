@@ -20,7 +20,7 @@ public class DelimiterParserTest{
 
   @Test
   void 커스텀_구분자_테스트(){
-    String input = "//#\n123#234#345";
+    String input = "//#\\n123#234#345";
     String[] result = parser.parse(input);
     String[] expected = {"123", "234", "345"};
     assertArrayEquals(expected, result);
@@ -28,7 +28,7 @@ public class DelimiterParserTest{
 
   @Test
   void 복합_구분자_테스트(){
-    String input = "//#\n0.1,2.3:3e+10#4#5";
+    String input = "//#\\n0.1,2.3:3e+10#4#5";
     String[] result = parser.parse(input);
     String[] expected = {"0.1", "2.3", "3e+10", "4", "5"};
     assertArrayEquals(expected, result);

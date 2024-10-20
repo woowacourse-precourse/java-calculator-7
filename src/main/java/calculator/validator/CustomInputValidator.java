@@ -23,7 +23,7 @@ public class CustomInputValidator implements InputValidator{
   }
 
   private char extractCustomDelimiter(String input) {
-    int endIdx = input.indexOf("\n");
+    int endIdx = input.indexOf("\\n");
     if(endIdx == -1){
       throw new IllegalArgumentException(ErrorCode.CUSTOM_DELIMITER_FORMAT_ERROR.toString());
     }

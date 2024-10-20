@@ -28,7 +28,7 @@ public class InputValidatorTest{
 
   @Test
   void 올바른_커스텀_구분자_형식(){
-    assertDoesNotThrow(() -> validator.validateInput("//@\n1@2@3@"));
+    assertDoesNotThrow(() -> validator.validateInput("//@\\n1@2@3@"));
   }
 
   @Test
@@ -40,14 +40,14 @@ public class InputValidatorTest{
 
   @Test
   void 커스텀_구분자_길이_예외(){
-    assertThatThrownBy(() -> validator.validateInput("//##\n1,2:3"))
+    assertThatThrownBy(() -> validator.validateInput("//##\\n1,2:3"))
         .isInstanceOf(IllegalArgumentException.class)
         .hasMessageContaining(ErrorCode.CUSTOM_DELIMITER_LENGTH_ERROR.toString());
   }
 
   @Test
   void 커스텀_구분자_내용_예외(){
-    assertThatThrownBy(() -> validator.validateInput("//1\n2,3"))
+    assertThatThrownBy(() -> validator.validateInput("//1\\n2,3"))
         .isInstanceOf(IllegalArgumentException.class)
         .hasMessageContaining(ErrorCode.INVALID_DELIMITER_ERROR.toString());
   }

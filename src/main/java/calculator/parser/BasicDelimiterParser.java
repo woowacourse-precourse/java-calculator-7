@@ -8,7 +8,7 @@ public class BasicDelimiterParser implements DelimiterParser{
     String delimiter = ",|:";
     if(input.startsWith("//")){
       char customDelimiter = input.charAt(2);
-      input = input.substring(4);
+      input = input.substring(5);
       delimiter = delimiter + "|" + Pattern.quote(String.valueOf(customDelimiter));
     }
 

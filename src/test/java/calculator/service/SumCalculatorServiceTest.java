@@ -39,7 +39,7 @@ public class SumCalculatorServiceTest {
 
   @Test
   public void 커스텀_구분자_정수_처리(){
-    String result = calculatorService.calculate("//;\n1;2;3,4:5");
+    String result = calculatorService.calculate("//;\\n1;2;3,4:5");
     assertThat(result).isEqualTo("15");
   }
 
@@ -57,7 +57,7 @@ public class SumCalculatorServiceTest {
     BigInteger bi = BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.TEN);
     String lmax = String.valueOf(Long.MAX_VALUE);
 
-    String result = calculatorService.calculate("//;\n" + lmax + ";10");
+    String result = calculatorService.calculate("//;\\n" + lmax + ";10");
     assertThat(result).isEqualTo(bi.toString());
   }
 
@@ -72,7 +72,7 @@ public class SumCalculatorServiceTest {
   @Test
   public void 커스텀_구분자_소수_BigDecimal_처리() {
     BigDecimal bd = new BigDecimal("1.5").add(new BigDecimal("2.75")).add(new BigDecimal("3"));
-    String result = calculatorService.calculate("//;\n1.5;2.75;3");
+    String result = calculatorService.calculate("//;\\n1.5;2.75;3");
 
     assertThat(result).isEqualTo(bd.toString());
   }
@@ -88,7 +88,7 @@ public class SumCalculatorServiceTest {
   @Test
   public void 커스텀_구분자_과학적_표기법_BigDecimal_처리() {
     BigDecimal bd = new BigDecimal("1e+5").add(new BigDecimal("2e+5"));
-    String result = calculatorService.calculate("//$\n1e+5$2e+5");
+    String result = calculatorService.calculate("//$\\n1e+5$2e+5");
 
     assertThat(result).isEqualTo(bd.toPlainString());
   }
@@ -110,7 +110,7 @@ public class SumCalculatorServiceTest {
     BigDecimal bd = new BigDecimal("1.5").add(new BigDecimal("2.75")).add(lmax)
         .add(new BigDecimal("1e+5")).add(lmax.add(BigDecimal.ONE));
 
-    String input = "//;\n1.5;2.75:" + lmax + ",1e+5;9223372036854775808";
+    String input = "//;\\n1.5;2.75:" + lmax + ",1e+5;9223372036854775808";
     String result = calculatorService.calculate(input);
     assertThat(result).isEqualTo(bd.toString());
   }
