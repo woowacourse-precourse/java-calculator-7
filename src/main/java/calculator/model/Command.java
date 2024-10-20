@@ -9,10 +9,13 @@ public record Command(
     String header,
     String content
 ) {
-    private static final Pattern customPattern = Pattern.compile("^//(.+?)\\\\n");
+    private static final String CONTAINS_DIGIT_REGEX = ".*\\d.*";
+    private static final String CUSTOM_DELIMITER_REGEX = "^//(.+?)\\\\n";
+
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile(CUSTOM_DELIMITER_REGEX);
 
     public static Command from(String command) {
-        Matcher matcher = customPattern.matcher(command);
+        Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(command);
         String header = "";
         String content = command;
         if (matcher.find()) {
@@ -31,6 +34,6 @@ public record Command(
     }
 
     private static boolean containsDigit(String input) {
-        return input.matches(".*\\d.*");
+        return input.matches(CONTAINS_DIGIT_REGEX);
     }
 }
