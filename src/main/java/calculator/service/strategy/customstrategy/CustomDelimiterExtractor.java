@@ -3,6 +3,7 @@ package calculator.service.strategy.customstrategy;
 import static calculator.model.RegularExpression.CUSTOM_LINE;
 
 import calculator.model.CustomDelimiter;
+import calculator.validator.ValidationUtils;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,7 +23,7 @@ public class CustomDelimiterExtractor {
     private String extractCustomDelimiterToString(String inputString) {
         Pattern pattern = Pattern.compile(CUSTOM_LINE.getRegularExpression());
         Matcher matcher = pattern.matcher(inputString);
-        CalculationCustomFormatValidator.validate(matcher);
+        ValidationUtils.validateCustomLineFormat(matcher);
         return matcher.group(1);
     }
 }
