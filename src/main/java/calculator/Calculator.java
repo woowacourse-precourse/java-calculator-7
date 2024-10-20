@@ -10,7 +10,8 @@ public class Calculator {
         int sum = 0;
         if (custom(str)) { //커스텀 구분자
             String a = ConvertSep(String.valueOf(str.charAt(2)));
-            String sep = "[,:" + a + "]";
+            //String sep = "[,:" + a + "]";
+            String sep = "[,:".concat(a).concat("]");
             str = str.substring(5);
             //구분자이면 구분자를 sep에 추가하고 계산할 값 잘라줌
             sum = getSum(str, sep);
@@ -19,8 +20,7 @@ public class Calculator {
             sum = getSum(str, sep);
         }
         System.out.println("결과 : " + sum);
-        System.out.println("sss");
-        System.out.println("ddd");
+
     }
 
     // 구분자가 [, \, ] 인 경우 구분자 조정  
@@ -32,10 +32,7 @@ public class Calculator {
         } else if (a.equals("]")) {
             a = "\\]";
         }
-        System.out.println("dsdsds");
         return a;
-
-
     }
 
     //사용자의 입력을 받는 메서드
@@ -59,7 +56,7 @@ public class Calculator {
             }
             int num;
             try {
-                num = Integer.valueOf(s); //문자열이면... 예외처리!
+                num = Integer.valueOf(s); //
             } catch (NumberFormatException e) {
                 //:21 같은 경우 num이 null값이 되기 때문에 0으로
                 num = 0;
