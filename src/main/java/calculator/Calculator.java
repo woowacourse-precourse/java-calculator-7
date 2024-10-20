@@ -14,7 +14,9 @@ public class Calculator {
 
         for (String s : split) {
             try {
-                result += Integer.parseInt(s);
+                int parse = Integer.parseInt(s);
+                if(parse < 0) throw new IllegalArgumentException("잘못된 값을 입력하였습니다. 양수를 입력하세요");
+                result += parse;
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("잘못된 값을 입력하였습니다, 구분자로 \",\" 나 \":\" 를 사용하세요");
             }
@@ -25,10 +27,10 @@ public class Calculator {
     private int customConvert(String str) {
         String custom;
         int result = 0;
-        int idx = str.indexOf("\n");
+        int idx = str.indexOf("\\n");
 
         if(idx == -1) {
-            throw new IllegalArgumentException("잘못된 형식입니다, 커스텀 구분자를 \"\\\" \"\n\" 사이에 넣으세요");
+            throw new IllegalArgumentException("잘못된 형식입니다, 커스텀 구분자를 \"//\" \"\\n\" 사이에 넣으세요");
         }
         // 커스텀이 하나일경우
         custom = str.substring(2, idx);
@@ -40,7 +42,7 @@ public class Calculator {
                 custom += "|" + tmp[i];
             }
         }
-        String substring = str.substring(str.lastIndexOf("\n") + 1);
+        String substring = str.substring(str.indexOf("\\n") + 2);
         String[] split = substring.split(custom);
 
         for (String s : split) {

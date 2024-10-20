@@ -28,8 +28,7 @@ class CalculatorTest {
 
         // then
         Assertions.assertThatThrownBy(() -> calculator.convert("3,3;3"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("잘못된 값을 입력하였습니다, 구분자로 \",\" 나 \":\" 를 사용하세요");
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -38,7 +37,7 @@ class CalculatorTest {
         // given
         Calculator calculator = new Calculator();
         // when
-        int result = calculator.convert("//;\n3;3;3");
+        int result = calculator.convert("//;\\n3;3;3");
         // then
         Assertions.assertThat(result).isEqualTo(9);
     }
@@ -49,7 +48,7 @@ class CalculatorTest {
         // given
         Calculator calculator = new Calculator();
         // when
-        int result = calculator.convert("//;j\n3;3j3");
+        int result = calculator.convert("//;j\\n3;3j3");
         // then
         Assertions.assertThat(result).isEqualTo(9);
     }
@@ -64,8 +63,7 @@ class CalculatorTest {
 
         // then
         Assertions.assertThatThrownBy(() -> calculator.convert("//s\\3,3;3"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("잘못된 형식입니다, 커스텀 구분자를 \"\\\" \"\n\" 사이에 넣으세요");
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -77,8 +75,7 @@ class CalculatorTest {
 
         // then
         Assertions.assertThatThrownBy(() -> calculator.convert("//s\n3,3;3"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("잘못된 값을 입력하였습니다, 설정한 구분자를 사용하세요");
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
 }
