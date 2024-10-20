@@ -14,9 +14,24 @@ public class SeparatorServiceImpl implements SeparatorService{
     // 정규 표현식에서 사용하는 메타 문자 목록 (특수 문자를 구분자로 사용할 경우 이스케이프 처리를 위해 사용)
     private static final String META_CHARACTERS = "[](){}.*+?^$|\\";
 
+
+    /**
+     * 입력에서 커스텀 구분자가 있는지 확인합니다.
+     * @param input 사용자 입력 문자열
+     * @return 커스텀 구분자가 있는 경우 true, 그렇지 않으면 false
+     */
     @Override
     public boolean checkCustomSeparator(String input) {
-        return false;
+        if(!(input.length() < 5)){
+            return false;
+        }
+        if (!input.startsWith("//")){
+            return false;
+        }
+        if (!input.startsWith("\\n",3)){
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -28,6 +43,4 @@ public class SeparatorServiceImpl implements SeparatorService{
     public String[] splitBySeparator(String input, String separator) {
         return new String[0];
     }
-
-
 }
