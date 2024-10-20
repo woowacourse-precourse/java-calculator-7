@@ -10,14 +10,14 @@ public class Application {
         String inputStr = getInput();
 
         // 입력한 문자열에서 기본 구분자, 커스텀 구분자 찾아내기
-        String customPolymer = findCustomPolymer(inputStr);
+        String customSeparator = findCustomSeparator(inputStr);
 
         // 기본 구분자 리스트에 커스텀 구분자 추가하기
-        String basicPolymerList = "[,:]";
-        String customPolymerList = addPolymerList(customPolymer, basicPolymerList);
+        String basicSeparatorList = "[,:]";
+        String customSeparatorList = addSeparatorList(customSeparator, basicSeparatorList);
 
         // 입력한 문자열에서 구분자를 기준으로 숫자 문자열 분리시키기
-        String[] inputStrList = separateStr(inputStr, customPolymer, basicPolymerList, customPolymerList);
+        String[] inputStrList = separateStr(inputStr, customSeparator, basicSeparatorList, customSeparatorList);
 
         // 문자열 숫자가 아닌 경우 예외 처리
         boolean isStringNumber = true;
@@ -45,37 +45,37 @@ public class Application {
     }
 
     // 입력한 문자열에서 기본 구분자, 커스텀 구분자 찾아내기
-    private static String findCustomPolymer(String inputStr) {
-        String customPolymerPattern = "//[^\\w\\s]";
-        String customPolymer = "";
+    private static String findCustomSeparator(String inputStr) {
+        String customSeparatorPattern = "//[^\\w\\s]";
+        String customSeparator = "";
 
-        Pattern pattern = Pattern.compile(customPolymerPattern);
+        Pattern pattern = Pattern.compile(customSeparatorPattern);
         Matcher matcher = pattern.matcher(inputStr);
 
         if (matcher.find() && inputStr.substring(3, 5).equals("\\n")) {
-            customPolymer = inputStr.substring(2, 3);
+            customSeparator = inputStr.substring(2, 3);
         }
 
-        return customPolymer;
+        return customSeparator;
     }
 
     // 기본 구분자 리스트에 커스텀 구분자 추가하기
-    private static String addPolymerList(String customPolymer, String basicPolymerList) {
-        String customPolymerList = "";
-        if (customPolymer.length() > 0) {
-            customPolymerList = basicPolymerList.substring(0, basicPolymerList.length() - 1) + customPolymer + "]";
+    private static String addSeparatorList(String customSeparator, String basicSeparatorList) {
+        String customSeparatorList = "";
+        if (customSeparator.length() > 0) {
+            customSeparatorList = basicSeparatorList.substring(0, basicSeparatorList.length() - 1) + customSeparator + "]";
         }
-        return customPolymerList;
+        return customSeparatorList;
     }
 
     // 입력한 문자열에서 구분자를 기준으로 숫자 문자열 분리시키기
-    private static String[] separateStr(String inputStr, String customPolymer,
-                                        String basicPolymerList, String customPolymerList) {
+    private static String[] separateStr(String inputStr, String customSeparator,
+                                        String basicSeparatorList, String customSeparatorList) {
         String[] inputStrList;
-        if (customPolymer.length() == 1) {
-            inputStrList = inputStr.substring(5).split(customPolymerList);
+        if (customSeparator.length() == 1) {
+            inputStrList = inputStr.substring(5).split(customSeparatorList);
         } else {
-            inputStrList = inputStr.split(basicPolymerList);
+            inputStrList = inputStr.split(basicSeparatorList);
         }
         return inputStrList;
     }
