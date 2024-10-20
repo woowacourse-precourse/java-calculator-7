@@ -77,7 +77,7 @@ class DelimitersTest {
         //when
         String regex = delimiters.getSplitRegex();
         //then
-        assertThat(regex).isEqualTo(";");
+        assertThat(regex).contains(";");
     }
 
     @DisplayName("구분자를 통해 기본 정규식을 반환한다.")
@@ -101,7 +101,7 @@ class DelimitersTest {
         //when
         String regex = delimiters.getSplitRegex();
         //then
-        assertThat(regex).isEqualTo(";");
+        assertThat(regex).contains(";");
     }
 
 

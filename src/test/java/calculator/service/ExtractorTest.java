@@ -95,4 +95,28 @@ class ExtractorTest {
             .withMessage("숫자와 구분자로만 이루어져야 합니다.");
     }
 
+    @DisplayName("커스텀 구분자로 '\\'를 사용 할 수 있다.")
+    @Test
+    void useCustomDelimiterFromBackSlash() {
+        //given
+        String input = "//\\\\n1\\2\\3";
+        //when
+        Extractor extractor = Extractor.from(input);
+        //then
+        assertThat(extractor).extracting("delimiters.delimiters").isEqualTo(Set.of("\\"));
+        assertThat(extractor.getNumbers()).isEqualTo(Numbers.from(List.of(new Number(1), new Number(2), new Number(3))));
+    }
+
+    @DisplayName("커스텀 구분자로 특수문자가 아닌 영어를 사용 할 수 있다.")
+    @Test
+    void useCustomDelimiterFromAlphabet() {
+        //given
+        String input = "//a\\n1a2a3";
+        //when
+        Extractor extractor = Extractor.from(input);
+        //then
+        assertThat(extractor).extracting("delimiters.delimiters").isEqualTo(Set.of("a"));
+        assertThat(extractor.getNumbers()).isEqualTo(Numbers.from(List.of(new Number(1), new Number(2), new Number(3))));
+    }
+
 }

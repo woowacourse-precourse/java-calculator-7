@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Delimiters {
 
@@ -33,11 +34,15 @@ public class Delimiters {
     }
 
     public String getSplitRegex() {
-        return String.join("|", this.delimiters);
+        return this.delimiters.stream()
+            .map(Pattern::quote)
+            .collect(Collectors.joining("|"));
     }
 
     public String getRegex() {
-        return String.join("", this.delimiters);
+        return this.delimiters.stream()
+            .map(Pattern::quote)
+            .collect(Collectors.joining());
     }
 
 }
