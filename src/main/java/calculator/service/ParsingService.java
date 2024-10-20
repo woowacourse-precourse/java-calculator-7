@@ -35,16 +35,12 @@ public class ParsingService {
     }
 
     private static void parse(String operandStr, ArrayList<Character> delimiters, ArrayList<Integer> operandList){
-        //custom 구분자 추출
-        if(operandStr.startsWith("//")){
-            delimiters.add(operandStr.charAt(CUSTOM_DELIMITER_INDEX));
-            operandStr = operandStr.substring(EXCEPT_CUSTOM_DELIMITER_INDEX);
-        }
+        operandStr = parseCustomDelimiter(operandStr, delimiters);
 
         StringBuilder sb = new StringBuilder();
         //구분자로 구분
         for(char ch : operandStr.toCharArray()){
-            if(delimiters.contains(ch) && !sb.isEmpty()){  //구분자 바로 다음에 또 구분자 나온다면 error
+            if(delimiters.contains(ch) && !sb.isEmpty()){
                 operandList.add(Integer.parseInt(sb.toString()));
                 sb.setLength(0);
             }
@@ -57,6 +53,15 @@ public class ParsingService {
             }
         }
         operandList.add(Integer.parseInt(sb.toString()));
+    }
+
+    private static String parseCustomDelimiter(String operandStr, ArrayList<Character> delimiters){
+        //custom 구분자 추출
+        if(operandStr.startsWith("//")){
+            delimiters.add(operandStr.charAt(CUSTOM_DELIMITER_INDEX));
+            operandStr = operandStr.substring(EXCEPT_CUSTOM_DELIMITER_INDEX);
+        }
+        return operandStr;
     }
 
     private static void checkInteger(char ch){
