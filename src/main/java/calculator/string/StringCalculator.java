@@ -15,19 +15,23 @@ public class StringCalculator {
         int result;
         String[] nums = str.split(regex);
 
-        try {
-             result = Arrays.stream(nums)
-                     .mapToInt(num -> {
-                         int number = Integer.parseInt(num);
-                         if (number < 0) {
-                             throw new IllegalArgumentException(); // "음수"
-                         }
-                         return number;})
-                     .sum();
-        }catch (NumberFormatException e) {
-            throw new IllegalArgumentException(); // 유효X
-        }
+        result = Arrays.stream(nums)
+                .mapToInt(this::customParseToInt)
+                .sum();
 
         return result;
+    }
+
+    private int customParseToInt(String str) {
+        int num;
+        try {
+            num = Integer.parseInt(str);
+        }catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
+        if (num < 0) {
+            throw new IllegalArgumentException();
+        }
+        return num;
     }
 }
