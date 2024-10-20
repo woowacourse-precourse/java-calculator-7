@@ -1,20 +1,25 @@
 package calculator.controller;
 
 import calculator.model.CalculatorService;
-import calculator.model.CalculatorServiceImpl;
 import calculator.model.StringService;
-import calculator.model.StringServiceImpl;
-import calculator.view.CalculatorInput;
-import calculator.view.CalculatorOutput;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 import java.util.List;
 
 public class CalculatorController {
-    InputView inputView = new CalculatorInput();
-    StringService stringService = new StringServiceImpl();
-    CalculatorService calculatorService = new CalculatorServiceImpl();
-    OutputView outputView = new CalculatorOutput();
+
+    InputView inputView;
+    OutputView outputView;
+    CalculatorService calculatorService;
+    StringService stringService;
+
+    public CalculatorController(InputView inputView, OutputView outputView, CalculatorService calculatorService,
+                                StringService stringService) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+        this.calculatorService = calculatorService;
+        this.stringService = stringService;
+    }
 
     public void calculate() {
         String inputString = inputView.input();

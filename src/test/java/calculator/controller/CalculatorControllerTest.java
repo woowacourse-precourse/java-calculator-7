@@ -1,5 +1,9 @@
 package calculator.controller;
 
+import calculator.model.CalculatorServiceImpl;
+import calculator.model.StringServiceImpl;
+import calculator.view.CalculatorInput;
+import calculator.view.CalculatorOutput;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -16,7 +20,12 @@ class CalculatorControllerTest {
 
     @BeforeEach
     void setUp() {
-        calculatorController = new CalculatorController();
+        calculatorController = new CalculatorController(
+                new CalculatorInput(),
+                new CalculatorOutput(),
+                new CalculatorServiceImpl(),
+                new StringServiceImpl()
+        );
         out = new ByteArrayOutputStream();
     }
 
