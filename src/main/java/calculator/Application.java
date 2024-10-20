@@ -52,12 +52,18 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
+        int answer = 0;
+
         try {
             String[] numbers = extraction(input);
 
             for (String num : numbers) {
-                System.out.println(num);
+                int n = Integer.parseInt(num);
+                answer += n;
             }
+
+            System.out.println("결과 : " + answer);
+
         } catch (IllegalArgumentException e) {
             System.err.println("예외: " + e.getMessage());
         }
