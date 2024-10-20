@@ -13,8 +13,8 @@ public class InputProcessor {
         String inputNumbers = input;
 
         if (Delimiter.hasCustomDelimiter(input)) {
-            delimiter = Delimiter.extractDelimiter(input);
-            inputNumbers = input.substring(input.indexOf("\n") + 1);
+            delimiter += "|" + Delimiter.extractDelimiter(input);
+            inputNumbers = input.substring(input.indexOf("\\n") + 2);
         }
 
         return Arrays.asList(inputNumbers.split(delimiter));
