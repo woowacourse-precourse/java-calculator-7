@@ -60,6 +60,17 @@ class CalculatorTest {
     }
 
     @Test
+    void 구분자_사이에_공백이_포함된_경우_예외_테스트() {
+        assertThatThrownBy(() -> calculator.splitAndSum("1,  ,2"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("구분자 사이에 공백이 포함된 잘못된 입력입니다. 입력값: [1,  ,2]");
+
+        assertThatThrownBy(() -> calculator.splitAndSum("//;\\n1;  ;2"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("구분자 사이에 공백이 포함된 잘못된 입력입니다. 입력값: [1;  ;2]");
+    }
+
+    @Test
     void 여러_개의_커스텀_구분자_예외_테스트() {
         assertThatThrownBy(() -> calculator.splitAndSum("//;[]\\n1;[]2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
