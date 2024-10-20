@@ -52,6 +52,7 @@ public class Application {
     static void printResult(int result){
         System.out.println("결과 : " + result);
     }
+    //git commit -am "테스트"
 }
 
 
