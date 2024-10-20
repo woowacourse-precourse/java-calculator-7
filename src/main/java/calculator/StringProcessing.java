@@ -23,18 +23,12 @@ public class StringProcessing {
 
 
     private static void findCustomSeperator(String rawString) {
-        StringBuilder tempSeperator= new StringBuilder();
-        boolean isFind = false;
-        for(int i = 2; i < rawString.length()-2; i++){
-            if (rawString.substring(i, i+2).equals("\\n")) {
-                isFind = true;
-                break;
-            }
-            tempSeperator.append(rawString.charAt(i));
-        }
-        if (!isFind)
-            throw new IllegalArgumentException("커스텀 구분자는 //와 \\n사이에 위치해야 합니다.");
-        seperators.add(tempSeperator.toString());
+
+
+        if(!rawString.startsWith("//") || !rawString.startsWith("\\n", 3))
+            throw new IllegalArgumentException("커스텀 구분자를 잘못 입력했습니다.");
+
+        seperators.add(rawString.charAt(2)+"");
 
     }
 
@@ -52,7 +46,7 @@ public class StringProcessing {
                     numbers.add(Integer.parseInt(tempNumber.toString()));
                     tempNumber.setLength(0);
                 } catch (NumberFormatException e) {
-                    throw new NumberFormatException("구분자 사이에는 숫자만 입력해야 합니다.");
+                    throw new IllegalArgumentException("구분자 사이에는 숫자만 입력해야 합니다.");
                 }
             }
             else
