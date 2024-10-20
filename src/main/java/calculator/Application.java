@@ -23,6 +23,12 @@ public class Application {
     }
 
     private static int checkInput(String word) {
+        if (word == null ) {
+            throw new IllegalArgumentException("입력값이 비어있습니다.");
+        }
+        if (word.isEmpty()) {
+            return 0;
+        }
         return -1;
     }
 
