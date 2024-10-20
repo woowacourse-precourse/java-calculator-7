@@ -43,8 +43,13 @@ public class Application {
     private static String[] parseString(String delimiter, String str) {
         checkLastCharacter(delimiter, str);
         String[] result = str.split(delimiter);
-        if(result.length == 1 && str.length() != 1) {
-            throw new IllegalArgumentException("입력 문자열에 유효한 구분자가 없습니다.");
+        if(result.length == 1) {
+            if(str.matches("\\d+")) {
+                return result;
+            }
+            else {
+                throw new IllegalArgumentException("입력 문자열에 유효한 구분자가 없습니다.");
+            }
         }
         return result;
     }
