@@ -10,7 +10,7 @@
 
 ## Class Diagram
 
-![java-calculator-7-class-diagram](./class-diagram.png)
+![java-calculator-7-class-diagram](./class-diagram-v2.png)
 
 ## Separator Class
 
