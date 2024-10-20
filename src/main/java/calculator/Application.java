@@ -57,13 +57,17 @@ public class Application {
         int answer = 0;
 
         try {
-            String[] numbers = extraction(input);
+            if (Objects.equals(input, "")) {
+                System.out.println("결과 : " + 0);
+            } else {
+                String[] numbers = extraction(input);
 
-            for (String num : numbers) {
-                int n = Integer.parseInt(num);
-                answer += n;
+                for (String num : numbers) {
+                    int n = Integer.parseInt(num);
+                    answer += n;
+                }
+                System.out.println("결과 : " + answer);
             }
-            System.out.println("결과 : " + answer);
 
         } catch (IllegalArgumentException e) {
             System.err.println("예외: " + e.getMessage());
