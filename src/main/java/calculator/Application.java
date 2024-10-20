@@ -32,8 +32,8 @@ public class Application {
         return delimiter;
     }
 
-  
 
+    // 구분자를 기준으로 문자열 자르는 메서드
     public static String[] splitString(String input, String delimiter){
         return input.split(delimiter);
     }
