@@ -34,10 +34,40 @@ public class Application {
         }
         return delimiter;
     }
+
     //3.숫자와 문자열 분리
-    private static String[] splitNumbers(String input,String delimiter)
-    {
+    private static String[] splitNumbers(String input, String delimiter) {
         return input.split(delimiter);// ex ) 1:2:3 을 구분자 기준으로 나눔
+    }
+
+    //4. 숫자 변환 및 합계 계산
+    private static int calculateSum(String[] numbers) {
+        int sum = 0;
+        for (String number : numbers) {
+            if (number.isEmpty()) {
+                continue;
+            }
+            int num = parseNumber(number);
+            validateNegative(num);
+            sum += num;
+        }
+        return sum;
+    }
+
+    //숫자 변환
+    private static int parseNumber(String number) {
+        try {
+            return Integer.parseInt(number.trim());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다");
+        }
+    }
+
+    //음수 확인
+    private static void validateNegative(int num) {
+        if (num < 0) {
+            throw new IllegalArgumentException("음수는 허용되지 않습니다");
+        }
     }
 
 }
