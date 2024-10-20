@@ -8,7 +8,7 @@ import static calculator.constant.ErrorMessage.PREFIX;
 import static calculator.constant.Limit.DEFAULT_VALUE;
 
 public class NumbersValidator {
-    public static final int NUMBER_RANGE_LIMIT = 2000000000;
+    public static final int NUMBER_RANGE_LIMIT = 200000000;
     public static final int NUMBER_SIZE_LIMIT = 10;
     public static final String ONLY_NUMBER_REGEX = "^[0-9]*$";
     public static final String CHAR_ONLY_CAN_USE_AS_CUSTOM = "문자는 커스텀 구분자로 지정 후 사용할 수 있습니다.";
