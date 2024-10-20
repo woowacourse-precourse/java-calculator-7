@@ -19,11 +19,22 @@ public class Calculator {
 
         if (!input.isEmpty())
             for (int i = 0; i < inputSplit.length; i++) {
-                int num = Integer.parseInt(inputSplit[i]);
+                int num = 0;
+                if (isNumber(inputSplit[i])) num = Integer.parseInt(inputSplit[i]);
                 if (num < 0) throw new IllegalArgumentException("잘못된 입력입니다: " + num);
                 sum += num;
             }
 
         System.out.println("결과 : " + sum);
+    }
+
+    private boolean isNumber(String str) {
+        try {
+            Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            System.out.println("입력된 값이 숫자가 아닙니다: " + str);
+            throw e;
+        }
+        return true;
     }
 }
