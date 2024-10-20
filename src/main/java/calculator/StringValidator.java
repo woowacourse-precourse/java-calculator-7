@@ -7,7 +7,7 @@ public class StringValidator {
     public void validate(String string, List<Character> delimiters) {
         String regex = regexPattern(delimiters);
 
-        if (!string.matches(regex)) {
+        if (!string.isEmpty() && !string.matches(regex)) {
             throw new IllegalArgumentException("구분자가 아닌 문자가 있습니다");
         }
     }
