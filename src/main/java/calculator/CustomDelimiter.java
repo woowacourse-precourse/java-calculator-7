@@ -3,17 +3,18 @@ package calculator;
 
 public class CustomDelimiter {
     protected static String result = "";
-    protected static String customDelimiter = "0";
+    protected static String customDelimiter = "";
     private static final int lengthOfCustomDelimiterExpression = "//?\n".length();
     private static final int indexOfCustomDelimiter = "//?\n".indexOf("?");
     private static final String[] metaCharacters = {".", "*", "+", "?", "|", "^", "$", "(", ")", "[", "]", "{", "}" ,"\\"};
 
     public static String extractCustomDelimiter(String input) {
         if (isValidExpression(input)) {
-            customDelimiter = String.valueOf(input.charAt(indexOfCustomDelimiter));
+            customDelimiter = input.substring(2, 3);
 
             customDelimiter = escapeMetaCharacters(customDelimiter);
-            return result = input.substring(lengthOfCustomDelimiterExpression);
+            result = input.substring(lengthOfCustomDelimiterExpression+1);
+            return result;
         }
 
         if (Character.isDigit(Integer.parseInt(customDelimiter))){
@@ -27,18 +28,20 @@ public class CustomDelimiter {
 
 
     public static boolean isValidExpression(String input) {
-        if(input.contains("\\")) {
-            return isValidExpressionWhileContainEscapeCaracter(input);
+        if(input.contains("\\n")) {
+            return true;
         }
 
         if (!isValidExpressionLength(input)) {
             throw new IllegalArgumentException("커스텀 구분자 표현이 잘못되었습니다.");
         }
 
-        return true;
+        throw new IllegalArgumentException();
 
     }
 
+//    private static boolean isValidExpressionWhileContainCaracter(String input) {
+//    }
 
 
     private static boolean isValidExpressionWhileContainEscapeCaracter(String input) {

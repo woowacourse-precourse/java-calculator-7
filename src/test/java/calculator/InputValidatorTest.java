@@ -2,10 +2,16 @@ package calculator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class InputValidatorTest {
+
+    @BeforeEach
+    void resetParserResult() {
+        Parser.result = 0;  // 각 테스트 실행 전 result 초기화
+    }
 
 
     @DisplayName("커스텀 구분자가 없는 문자열 입력에 정상 동작")
@@ -23,7 +29,7 @@ class InputValidatorTest {
     @Test
     void properResultStartsFromCustomDelimiter() {
         //given
-        String input = "//.\n1:2,3.4";
+        String input = "//.\\n1:2,3.4";
         //when
         InputValidator.validate(input);
         //then

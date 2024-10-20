@@ -10,7 +10,7 @@ public static String welcomeMessage = "덧셈할 문자열을 입력해 주세�
         System.out.println(welcomeMessage);
     }
 
-    public String getInput() {
+    public static String getInput() {
         return Console.readLine();
     }
 }

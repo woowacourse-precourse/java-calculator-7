@@ -13,7 +13,7 @@ class CustomDelimiterTest {
     @Test
     void checkExpresstionContiansExcapeCharacter() {
         //given
-        String input = "//\\\n11";
+        String input = "//\\\\n11";
         //when
 
         //then
@@ -28,7 +28,7 @@ class CustomDelimiterTest {
     @Test
     void canExtractCustomDelimiterProperly() {
         //given
-        String input = "//!\n11";
+        String input = "//!\\n11";
         //when
         extractCustomDelimiter(input);
         //then
