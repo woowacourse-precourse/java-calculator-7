@@ -17,6 +17,12 @@ public class InputParser {
     }
 
     public List<Integer> parseInputToIntList(String input) {
+        if (input.isBlank()) {
+            return List.of(0);
+        }
+        if (input.matches("\\d+")) {
+            return List.of(Integer.parseInt(input));
+        }
         String standardizedInput = replaceDelimiters(input);
         return convertToIntList(standardizedInput);
     }
