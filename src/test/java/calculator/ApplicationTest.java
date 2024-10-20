@@ -69,6 +69,16 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 마지막_문자가_숫자가_아닌경우(){
+        // given
+        String endsWithChar = "1:2,3,";
+        //when & then
+        assertThrows(IllegalArgumentException.class, () ->{
+            Application.isEndWithDigit(endsWithChar);
+        });
+    }
+
+    @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1");
