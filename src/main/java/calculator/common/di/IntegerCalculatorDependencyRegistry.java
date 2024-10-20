@@ -28,24 +28,6 @@ public class IntegerCalculatorDependencyRegistry implements NumberCalculatorDepe
     private static final InputView inputView = new InputView();
     private static final OutputView outputView = new OutputView();
 
-    private static final IntegerCalculatorDependencyRegistry instance = new IntegerCalculatorDependencyRegistry();
-
-    private IntegerCalculatorDependencyRegistry() {
-    }
-
-    public static IntegerCalculatorDependencyRegistry getInstance() {
-        return instance;
-    }
-
-    public CustomDelimiterService getCustomDelimiterService() {
-        return customDelimiterService;
-    }
-
-
-    public DelimitersFactory getDelimitersFactory() {
-        return delimitersFactory;
-    }
-
     @Override
     public DelimiterService getDelimiterService() {
         return delimiterService;
