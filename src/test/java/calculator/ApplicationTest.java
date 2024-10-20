@@ -200,6 +200,14 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 커스텀_구분자_잘못된_위치() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("?//\\n1,2,3?4:5"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
 
     @Override
     public void runMain() {
