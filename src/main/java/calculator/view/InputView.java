@@ -9,7 +9,7 @@ public class InputView {
         this.io = new CommonIo();
     }
 
-    public String InputData() {
+    public String inputData() {
         return io.receiveInput();
     }
 }

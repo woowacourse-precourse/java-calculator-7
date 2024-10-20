@@ -11,7 +11,7 @@ public class StringCalculatorController {
     }
 
     public InputData handoverInput(){
-        String input = inputView.InputData();
+        String input = inputView.inputData();
         return new InputData(input);
     }
 
