@@ -24,16 +24,14 @@ public class InputProcessor {
     public List<Integer> getInputFromUser() {
         String input = Console.readLine();
         List<String> delimiters = makeBasicDelimiters();
-        char customDelim = '0';
         boolean customDelimFlag = isInputHasCustomDelim(input);
 
         if (customDelimFlag) {
             delimiters.add(getCustomDelim(input));
             input = input.substring(5);
-            customDelim = delimiters.getLast().charAt(0);
         }
 
-        validateIsInputIncorrect(input, customDelimFlag, customDelim);
+        validateIsInputIncorrect(input, customDelimFlag, delimiters);
         List<String> splitElems = makeSplitElemsList(input, delimiters);
 
         return makeNumsList(splitElems);
@@ -62,8 +60,9 @@ public class InputProcessor {
         return String.valueOf(delim);
     }
 
-    private void validateIsInputIncorrect(String input, boolean customDelimFlag, char customDelim) {
+    private void validateIsInputIncorrect(String input, boolean customDelimFlag, List<String> delimiters) {
         if (customDelimFlag) {
+            char customDelim = delimiters.getLast().charAt(0);
             exceptionHandler.checkIncorrectInputWithCustomDelim(input.toCharArray(), customDelim);
             return;
         }
