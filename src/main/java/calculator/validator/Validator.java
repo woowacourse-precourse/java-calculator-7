@@ -4,10 +4,11 @@ import java.util.ArrayList;
 
 public class Validator {
 
-    public void validateInput(String input, ArrayList<String> separators) {
+    //입력값 검증
+    public boolean validateInput(String input, ArrayList<String> separators) {
+        //문자열이 비어있거나 구분자만 있으면 false, 다른 경우는 예외 발생
         if (!checkIsEmpty(input) && !checkHasNumber(input)) {
-            System.out.println("0");
-            return;
+            return false;
         }
         if (!checkCustomSeparator(input, separators)) {
             throw new IllegalArgumentException("커스텀 구분자를 잘못 입력하였습니다.");
@@ -18,6 +19,8 @@ public class Validator {
         if (!checkIsCorrectString(input, separators)) {
             throw new IllegalArgumentException("올바른 문자열이 아닙니다.");
         }
+
+        return true;
     }
 
     //문자열이 비어있는지 검사

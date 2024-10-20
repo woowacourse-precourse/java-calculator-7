@@ -19,7 +19,12 @@ public class CalculatorController {
         String input = inputView.readSentence();
         ArrayList<String> separators = calculator.getSeparators();
 
-        validator.validateInput(input, separators);
+        //입력값 검증
+        if (!validator.validateInput(input, separators)){
+            //문자열이 비어있거나 구분자만 있으면 0출력
+            outputView.printResult(0);
+            return;
+        }
 
         int sum = calculator.sumNumber(input, separators);
         outputView.printResult(sum);
