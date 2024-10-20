@@ -18,10 +18,10 @@ public class DelimiterStorageServiceImpl implements DelimiterStorageService {
 
     @Override
     public void delimeterStore(String s) {
-        if (s.length()<4){
+        if (s.length()<=5){
             return;
         }
-        if (s.charAt(0)=='/' && s.charAt(1)=='/' && s.charAt(3)=='\n'){
+        if (s.charAt(0)=='/' && s.charAt(1)=='/' && s.charAt(3)==92 && s.charAt(4)=='n'){
             delimiters.add(s.charAt(2));
         }
 
