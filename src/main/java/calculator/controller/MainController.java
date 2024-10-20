@@ -9,6 +9,7 @@ import calculator.view.Input;
 import calculator.view.Output;
 
 public class MainController {
+
     public void main() {
         Divider divider = createDivider();
         CalculatedValue calculatedValue = createCalculatedValue();
