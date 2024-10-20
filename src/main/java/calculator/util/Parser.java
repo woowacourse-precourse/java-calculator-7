@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Parser {
+
     public static boolean hasCustomDelimiter(String string){
-        if(string == null || string.length() < 5) {
+        if(string == null || string.length() < DelimiterConstants.CUSTOM_DELIMITER_BOUND_LENGTH+1) {
             return false;
         }
 
@@ -47,7 +48,7 @@ public class Parser {
         StringBuilder number = new StringBuilder();
 
         int delimiterLength = delimiters.size() == 2 ? 1 : delimiters.getFirst().length();
-        int index = delimiters.size() == 2 ? 0 : delimiterLength + 4;
+        int index = delimiters.size() == 2 ? 0 : delimiterLength + DelimiterConstants.CUSTOM_DELIMITER_BOUND_LENGTH;
 
         while (index < string.length()) {
             if (matchesDelimiter(string, index, delimiters)) {

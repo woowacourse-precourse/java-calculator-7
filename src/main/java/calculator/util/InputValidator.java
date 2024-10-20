@@ -1,5 +1,6 @@
 package calculator.util;
 
+import calculator.constants.DelimiterConstants;
 import calculator.constants.InputValidationConstants;
 import calculator.domain.UserInput;
 import calculator.exception.InputErrorMessage;
@@ -23,7 +24,7 @@ public class InputValidator {
                 InputValidationConstants.CUSTOM_DELIMITER_PATTERN_PREFIX
                 + escapedDelimiter
                 + InputValidationConstants.CUSTOM_DELIMITER_PATTERN_SUFFIX;
-        if (!Pattern.matches(pattern, input.substring(delimiter.length()+4))) {
+        if (!Pattern.matches(pattern, input.substring(delimiter.length()+ DelimiterConstants.CUSTOM_DELIMITER_BOUND_LENGTH))) {
             throw new IllegalArgumentException(InputErrorMessage.INPUT_ERROR);
         }
     }
