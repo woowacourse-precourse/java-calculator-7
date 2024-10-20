@@ -1,10 +1,11 @@
-package calculatorservice;
+package calculator;
 
-import static vaildation.InputValidation.CheckCustomDelimiter;
-import static vaildation.InputValidation.CheckInput;
+
+import static calculator.InputValidation.CheckCustomDelimiter;
+import static calculator.InputValidation.CheckInput;
 
 public class DelimiterService { // 코드 실행 제어 서비스 클래스
-    public int DelimiterProcess(String input) {
+    public static int DelimiterProcess(String input) {
         int sumResult;
         String[] Custom;
         String customDelimiter = "";

@@ -1,4 +1,4 @@
-package vaildation;
+package calculator;
 
 
 public class InputValidation { // 입력의 유효성을 확인하는 클래스이다.
