@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Preprocessing {
     private final InputValidator inputValidator = new InputValidator();
-    private static final List<String> DEFAULT_SEPARATORS = Arrays.asList(",", ":");
+    private static final List<String> DEFAULT_SEPARATORS = new ArrayList<>(Arrays.asList(",", ":"));
 
     public List<String> processInput(String input) {
         if (firstLetter(input)) { // 첫글자가 `/`일 경우
