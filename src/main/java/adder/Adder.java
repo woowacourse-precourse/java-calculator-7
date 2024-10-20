@@ -87,7 +87,10 @@ public class Adder {
 
             number.append(element);
         }
-        parsedString.add(number.toString());
+
+        if (!calculationFormula.isEmpty()) {
+            parsedString.add(number.toString());
+        }
 
         return parsedString;
     }
