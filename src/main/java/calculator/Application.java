@@ -15,6 +15,16 @@ public class Application {
 
 		System.out.println("결과 : " + result);
 	}
+
+	private static void solution() {
+		if (input.equals(""))
+			return;
+
+		String[] tokens = split(input);
+
+		add(tokens);
+	}
+
 	private static String[] split(String input) {
 		if (input.startsWith("//")) {
 			int enterIndex = input.indexOf("\\n");
