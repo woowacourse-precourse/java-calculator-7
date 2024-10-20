@@ -7,6 +7,15 @@ public class StringCalculator {
 
     private static final String DEFAULT_DELIMITERS = ",|:";  // 기본 구분자: 쉼표 또는 콜론
 
+
+    // 숫자 문자열을 추출하여 배열로 반환하는 메서드
+    private String[] extractNumbers(String input) {
+        if (input.startsWith("//")) {
+            return splitWithCustomDelimiter(input);  // 커스텀 구분자 처리
+        }
+        return splitWithDefaultDelimiters(input);  // 기본 구분자 처리
+    }
+
     // 커스텀 구분자가 있는 문자열을 처리하여 숫자를 분리하는 메서드
     private String[] splitWithCustomDelimiter(String input) {
         Matcher matcher = Pattern.compile("//(.+)\n(.*)").matcher(input);
