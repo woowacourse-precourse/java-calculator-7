@@ -109,6 +109,7 @@ public class Application {
         if (isCDelimiter(input)) {
             int index = input.indexOf("\\n");
             String s = delimiterCheck(input, index);
+            isSpace(s);
             return ",|:|" + s;
         }
         return "[,:]";
@@ -136,4 +137,5 @@ public class Application {
     public static boolean isCDelimiter(String input) {
         return input.startsWith("//") && input.contains("\\n");
     }
+    
 }
