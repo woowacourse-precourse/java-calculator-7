@@ -81,6 +81,11 @@ class CalculatorTest extends NsTest {
         assertEquals(6, calculator.add("//***\n1***2***3"));
     }
 
+    @Test
+    void 커스텀구분자_기본구분자_동시사용_테스트() {
+        assertEquals(10, calculator.add("//;\n1;2:3,4"));
+    }
+
     @Override
     protected void runMain() {
         Application.main(new String[0]);
