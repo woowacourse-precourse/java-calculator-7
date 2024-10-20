@@ -18,13 +18,27 @@ public class Application {
         //get splited String[]
         if(input.startsWith("//"))
             // custom
-            //strs = input.substring(5, input.length()).split(String.valueOf(input.charAt(2)));
-            strs = input.substring(5, input.length()).split("[,:"+String.valueOf(input.charAt(2))+"]");
+            strs = getStringArrayCostom(input);
         else
             // defualt 정규식!!
-            strs = input.split("[,:]");
+            strs = getStringArrayDefault(input);
 
+        answer = getIntegerFromArray(strs);
+
+        Console.close();
+        return "결과 : "+String.valueOf(answer);
+    }
+
+    private String[] getStringArrayCostom(String input){
+        return input.substring(5, input.length()).split("[,:"+String.valueOf(input.charAt(2))+"]");
+    }
+
+    private String[] getStringArrayDefault(String input){
+        return input.split("[,:]");
+    }
+    private int getIntegerFromArray(String[] strs){
         //get int from String[]
+        int answer = 0;
         for(String str : strs) {
             int v;
             try {
@@ -36,8 +50,6 @@ public class Application {
                 throw new IllegalArgumentException();
             answer += v;
         }
-
-        Console.close();
-        return "결과 : "+String.valueOf(answer);
+        return answer;
     }
 }
