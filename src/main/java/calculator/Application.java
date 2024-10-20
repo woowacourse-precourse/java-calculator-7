@@ -10,8 +10,13 @@ public class Application {
         String input = Console.readLine();
     }
 
-    public static int basicSeparator(String str) {
-        return numberSum(str.split("[,:]"));
+    public static int numberSum(String[] numbers) {
+        int sum = 0;
+        for (String number : numbers) {
+            int num = makeInt(number);
+            checkMinus(num);
+            sum += num;
+        }
+        return sum;
     }
-
 }
