@@ -32,21 +32,14 @@ public class Calculator {
             if (!number.matches("\\d+")) {
                 throw new IllegalArgumentException("숫자 이외의 값은 입력할 수 없습니다.");
             }
-            sum += parsePositiveNumber(number);
+            int num = Integer.parseInt(number);
+
+            if (num < 0) {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            }
+            sum += num;
         } // 1,2:3   //;\n1;2;3
 
         return sum;
-    }
-
-    private int parsePositiveNumber(String number) {
-        if (number.trim().isEmpty()) {
-            return 0; // 빈 문자열일 경우 0으로 처리
-        }
-
-        int num = Integer.parseInt(number);
-        if (num < 0) {
-            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
-        }
-        return num;
     }
 }
