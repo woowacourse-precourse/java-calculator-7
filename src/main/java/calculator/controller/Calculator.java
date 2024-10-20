@@ -1,8 +1,8 @@
 package calculator.controller;
 
-import calculator.domain.DelimiterExtractor;
 import calculator.domain.DelimiterFactory;
 import calculator.domain.Delimiters;
+import calculator.service.DelimiterExtractor;
 import calculator.view.InputView;
 import java.util.List;
 
@@ -21,6 +21,6 @@ public class Calculator {
         List<String> extractedDelimiter = delimiterExtractor.extract(userInput);
         Delimiters delimiters = DelimiterFactory.createDelimitersFrom(extractedDelimiter);
 
-        
+
     }
 }
