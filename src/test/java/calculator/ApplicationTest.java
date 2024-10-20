@@ -25,6 +25,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자_기본_구분자_혼용_사용() {
+        assertSimpleTest(() -> {
+            run("//;\\n1,2;5");
+            assertThat(output()).contains("결과 : 8");
+        });
+    }
+
+    @Test
     void 구분자_없을_경우_테스트() {
         assertSimpleTest(() -> {
             run("3");
