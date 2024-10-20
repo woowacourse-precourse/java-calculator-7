@@ -6,7 +6,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import calculator.model.DefaultDelimiter;
 import calculator.model.RegularExpression;
-import calculator.validator.ValidationUtils;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import java.util.List;
 import java.util.regex.Matcher;
