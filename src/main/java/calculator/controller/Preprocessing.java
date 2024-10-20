@@ -9,8 +9,28 @@ import java.util.List;
 public class Preprocessing extends InputValidator {
     private static final List<String> DEFAULT_SEPARATORS = Arrays.asList(",", ":");
 
+    public List<String> processInput (String input) {
+        List<String> separated = new ArrayList<>();
+
+        if (firstLetter(input)) { // 첫글자가 `/`일 경우
+            // 커스텀 구분자 추출
+            List<String> customAndLeft = findCustomSeparator(input);
+
+            // 기본 구분자를 새로운 리스트에 복사하여 사용
+            List<String> separators = new ArrayList<>(DEFAULT_SEPARATORS);
+            separators.add(customAndLeft.get(0));
+
+            // 숫자 - !숫자 구분
+            separated = separation(customAndLeft.get(1), separators);
+        } else { // 첫글자가 숫자일 경우
+            // 숫자 - !숫자 구분
+            separated = separation(input, DEFAULT_SEPARATORS);
+        }
+        return separated;
+    }
+
     // 첫 글자가 "/"로 시작하는지 아닌지에 따라 메소드 실행
-    public boolean firstLetter(String given) {
+    private boolean firstLetter(String given) {
         char firstLetter = given.charAt(0);
         validatingFirstLetter(firstLetter);
 
@@ -22,7 +42,7 @@ public class Preprocessing extends InputValidator {
     }
 
     // <숫자 - 숫자 외 모든것> 분리
-    public List<String> separation(String given, List<String> separtors) {
+    private List<String> separation(String given, List<String> separtors) {
         // 결괏값으로 반환할 분리된 List
         List<String> separated = new ArrayList<>();
 
@@ -47,7 +67,7 @@ public class Preprocessing extends InputValidator {
     }
 
     // 커스텀 구분자 저장
-    public List<String> findCustomSeparator(String given) {
+    private List<String> findCustomSeparator(String given) {
         String customSeparator = customValidator(given);
 
         return Arrays.asList(customSeparator, given.substring(given.indexOf("\\n") + 2));
