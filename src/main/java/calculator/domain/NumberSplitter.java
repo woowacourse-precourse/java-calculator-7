@@ -12,7 +12,7 @@ public class NumberSplitter {
     }
 
     private String replaceDelimiters(String numberPart, Set<Character> delimiters) {
-        for (Character delimiter : delimiters) {
+        for (char delimiter : delimiters) {
             numberPart = numberPart.replace(delimiter, ' ');
         }
         return numberPart;
