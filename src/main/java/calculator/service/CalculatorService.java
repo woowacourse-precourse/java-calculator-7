@@ -80,9 +80,12 @@ public class CalculatorService {
     public ArrayList<String> processingInputBySepStack(String input, ArrayDeque<String> sepStack) {
 
         ArrayList<String> resultList = new ArrayList<>();
-        resultList.add(input);
 
-        while (!sepStack.isEmpty()) {
+        if(!input.isEmpty()) {
+            resultList.add(input);
+        }
+
+        while (!sepStack.isEmpty() && !input.isEmpty()) {
             String sep = sepStack.removeLast();
             resultList = splitStrListBySep(resultList, sep);
         }

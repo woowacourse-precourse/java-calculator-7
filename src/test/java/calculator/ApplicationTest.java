@@ -36,14 +36,14 @@ class ApplicationTest extends NsTest {
     void 결과_문구_출력() {
         assertSimpleTest(() -> {
             run("//;\\n1");
-            assertThat(output()).contains("결과  : ");
+            assertThat(output()).contains("결과 : ");
         });
     }
 
     @Test
     void 무입력_테스트() {
         assertSimpleTest(() -> {
-            run("");
+            run("\n");
             assertThat(output()).contains("결과 : 0");
         });
     }
