@@ -39,7 +39,7 @@ public class Formula {
         return formula.substring(2, 4);
     }
 
-    public List<Integer> extractNumbers() {
+    private List<Integer> extractNumbers() {
         return Arrays.stream(formula.split("//|\\\\n|:|,|" + customDelimiter))
                 .map(this::numberParser)
                 .toList();
