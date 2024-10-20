@@ -3,7 +3,6 @@ package model;
 public class CalculatorDate {
     private final String text;
     private int[] sumNumbers;
-    private String[] strings;
 
     public CalculatorDate(String text) {
         this.text = text;
@@ -21,11 +20,4 @@ public class CalculatorDate {
         this.sumNumbers = sumNumbers;
     }
 
-    public String[] getStrings() {
-        return strings;
-    }
-
-    public void setStrings(String[] strings) {
-        this.strings = strings;
-    }
 }
