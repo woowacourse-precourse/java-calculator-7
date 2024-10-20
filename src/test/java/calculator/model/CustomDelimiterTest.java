@@ -44,4 +44,19 @@ class CustomDelimiterTest {
                 .doesNotThrowAnyException();
     }
 
+    @Test
+    @DisplayName("동일한 커스텀 구분자가 중복지정되면 예외가 발생한다.")
+    void isCustomDelimiterDuplicate() {
+        assertThatThrownBy(() -> new CustomDelimiter(";;#").validate())
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.DUPLICATE_CUSTOM_DELIMITER.getError());
+    }
+
+    @Test
+    @DisplayName("동일한 커스텀 구분자가 지정되지 않으면 예외가 발생히지 않는다.")
+    void isCustomDelimiterUnique() {
+        assertThatCode(() -> new CustomDelimiter(";!?").validate())
+                .doesNotThrowAnyException();
+    }
+
 }

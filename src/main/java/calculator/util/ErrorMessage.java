@@ -13,6 +13,9 @@ public enum ErrorMessage {
     DUPLICATE_CUSTOM_DEFAULT_DELIMITER(
             "[F0004]",
             "기본 구분자(, :)를 다시 커스텀 구분자로 정의할 수 없습니다."),
+    DUPLICATE_CUSTOM_DELIMITER(
+            "[F0005]",
+            "중복된 커스텀 구분자는 정의할 수 없습니다."),
     CUSTOM_DELIMITER_LIMIT(
             "[R0001]",
             "커스텀 구분자는 최대 3개까지 등록 가능합니다."),

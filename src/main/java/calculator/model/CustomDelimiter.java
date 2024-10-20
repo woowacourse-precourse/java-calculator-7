@@ -4,10 +4,15 @@ import calculator.util.ErrorMessage;
 import calculator.util.Limit;
 import calculator.util.Regex;
 
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class CustomDelimiter extends Delimiter {
+    private final int ONE = 1;
+    private final int ESCAPE_LENGTH = 2;
+
     public CustomDelimiter(String delimiter) {
         super(Pattern.quote(delimiter));
         validate();
@@ -29,6 +34,20 @@ public class CustomDelimiter extends Delimiter {
         if (duplicateDelimiter.find()) {
             throw new IllegalArgumentException(ErrorMessage.DUPLICATE_CUSTOM_DEFAULT_DELIMITER.getError());
         }
+
+        if (isSameDelimiter()) {
+            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_CUSTOM_DELIMITER.getError());
+        }
+
+    }
+
+    private boolean isSameDelimiter() {
+        String delimiter = getDelimiter().substring(ESCAPE_LENGTH, getDelimiter().length() - ESCAPE_LENGTH);
+        return delimiter.chars()
+                .mapToObj(c -> (char) c)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .values().stream()
+                .anyMatch(count -> count > ONE);
     }
 
     private Matcher createMatcher(String regex) {
