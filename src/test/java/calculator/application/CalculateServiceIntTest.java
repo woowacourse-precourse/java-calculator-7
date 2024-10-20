@@ -4,12 +4,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import calculator.application.impl.PositiveNumberExtractService;
+import calculator.application.impl.StringCalculatorSeparateService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class CalculateServiceIntTest {
 
-    CalculateService calculateService = new CalculateService(new PositiveNumberExtractService());
+    CalculateService calculateService = new CalculateService(
+            new StringCalculatorSeparateService(),
+            new PositiveNumberExtractService()
+    );
 
     @Test
     @DisplayName("splitAndSum 요청시 정수를 반환한다.")

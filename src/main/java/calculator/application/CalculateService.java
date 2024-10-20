@@ -1,20 +1,24 @@
 package calculator.application;
 
-import calculator.domain.Separator;
+import java.util.List;
 
 public class CalculateService {
 
+    private final SeparateService separatorService;
     private final ExtractService extractService;
 
-    public CalculateService(ExtractService extractService) {
+    public CalculateService(
+            SeparateService separatorService,
+            ExtractService extractService
+    ) {
+        this.separatorService = separatorService;
         this.extractService = extractService;
     }
 
     public int splitAndSum(String command) {
-        Separator separator = new Separator();
-        separator.separate(command);
+        List<String> separated = separatorService.separate(command);
 
-        return extractService.extractNumbers(separator.getResult())
+        return extractService.extractNumbers(separated)
                 .stream()
                 .reduce(0, Integer::sum);
     }

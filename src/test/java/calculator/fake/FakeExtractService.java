@@ -7,7 +7,7 @@ public class FakeExtractService implements ExtractService {
 
     @Override
     public List<Integer> extractNumbers(List<String> data) {
-        return List.of();
+        return List.of(1, 2, 3);
     }
 
 }
