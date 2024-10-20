@@ -33,7 +33,7 @@
 
 - [X] 특별한 케이스의 계산 기능
 - [X] 일반적인 케이스의 덧셈 기능
-    - [ ] 숫자의 합이 Integer 범위를 넘어갈 경우 `IllegalArgumentException` 발생
+    - [X] 숫자의 합이 Integer 범위를 넘어갈 경우 `IllegalArgumentException` 발생
 
 ### 계산 결과를 출력하는 기능
 
