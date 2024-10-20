@@ -21,7 +21,6 @@ public class Calculator {
         } else {
             regex = "[,:]";
         }
-
         return numbersPart.split(regex);
     }
 
