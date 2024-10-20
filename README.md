@@ -37,16 +37,16 @@
 👉 입력받은 숫자 문자열 배열을 합산하는 클래스
 
 **- 메서드**  
-`String plus(String[] splitedNumbers)`: 분할된 숫자들의 합산한 결과 구하기
+`String plus(FormulaHandler formulaHandler)`: 숫자들의 합산한 결과 구하기
 
-### CustomDelimiter
-👉 사용자로부터 입력받은 수식에서 커스텀 구분자를 처리하는 클래스
+### FormulaHandler
+👉 사용자로부터 입력받은 수식을 처리하는 클래스
 
 **- 필드**  
 `String formula`: 사용자로부터 입력받은 수식 문자열
 
 **- 생성자**  
-`CustomDelimiter(String formula)`: 수식 문자열을 초기화하기
+`FormulaHandler(String formula)`: 수식 문자열을 초기화하기
 
 **- 메서드**  
 `String getFormula()`: 수식 문자열을 반환하기  
@@ -57,15 +57,8 @@
 ### Splitter
 👉 수식 문자열을 구분자를 기준으로 분할하는 클래스
 
-**- 필드**  
-`String[] splittedNumbers`: 분할된 숫자 문자열 배열
-
-**- 생성자**  
-`Splitter(CustomDelimiter customDelimiter)`: 숫자 문자열 배열을 초기화하기
-
-**- 메서드**  
-`String[] getSplittedNumbers()`: 분할된 숫자 문자열 배열을 반환하기  
-`String[] splitNumbers(CustomDelimiter customDelimiter)`: 구분자 기준으로 수식 문자열을 분할하기
+**- 메서드**   
+`String[] splitNumbers(FormulaHandler formulaHandler)`: 구분자 기준으로 수식 문자열을 분할하기
 
 ---
 
@@ -96,13 +89,13 @@
  👉 사용자 요청을 처리여 모델과 상호작용 후 응답을 다시 사용자에서 전달하기 위한 클래스**
 
 **- 필드**  
-`CustomDelimiter customDelimiter`: customDelimiter 객체
+`FormulaHandler formulaHandler`: formulaHandler 객체
 
 **- 메서드**  
 `void start()` : 애플리케이션 시작하기  
 `void readUserNumbers()` : 사용자로부터 입력 받기  
 `void calculate()` : 입력 받은 숫자를 계산하기  
-`void printSumToUser(String[] splittedNumbers)` : 계산 결과를 사용자에게 출력하기
+`void showSumToUser(String sumOfNumbers)` : 계산 결과를 사용자에게 출력하기
 
 ---
 
