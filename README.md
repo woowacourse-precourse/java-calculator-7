@@ -28,7 +28,7 @@
 
 - 사용자가 잘못된 값을 입력할 경우 (`UserInputException`)
   - `IllegalArgumentException` 발생 → 종료  
-- [ ] 문자열 입력
+- [x] 숫자 외에 영어, 한글이 입력
 - [x] 음수 입력
 - [ ] 다른 구분자 입력 ex) `,`,`:`,`//(.)\n` 이외의 구분자
 

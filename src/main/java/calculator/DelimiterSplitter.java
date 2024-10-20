@@ -41,6 +41,8 @@ public class DelimiterSplitter {
     private static void validateUserInput(String str) {
         if (str.matches(".*-\\d+.*") || str.matches("//(.)\n(.*-\\d+.*)")) {
             throw new UserInputException("[계산 실패] 음수는 입력할 수 없습니다.");
+        } else if (str.matches(".*[a-zA-Zㄱ-ㅎ가-힣].*") || str.matches("//(.)\n(.*[a-zA-Zㄱ-ㅎ가-힣].*)")) {
+            throw new UserInputException("[계산 실패] 숫자 외에 영어나 한글은 입력할 수 없습니다.");
         }
     }
 }
