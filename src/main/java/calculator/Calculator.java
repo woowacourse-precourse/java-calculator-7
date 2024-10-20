@@ -18,6 +18,10 @@ public class Calculator {
             numbers = input.substring(delimiterIndex + 2);
         }
 
+        if (input == null || input.trim().isEmpty()) {
+            return 0;
+        }
+
         String[] tokens = numbers.split(delimiter);
         int sum = 0;
 
