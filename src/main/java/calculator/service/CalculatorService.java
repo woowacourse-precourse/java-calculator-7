@@ -21,6 +21,15 @@ public class CalculatorService {
             if(idx == -1){
                 throw new IllegalStateException("\\n가 입력되지 않았습니다.");
             }
+
+            // 커스텀 구분자 추출
+            String customDelimiter = inputString.substring(2, idx);
+
+            // 커스텀 구분자에 숫자가 포함되어 있는지 체크
+            if (customDelimiter.chars().anyMatch(Character::isDigit)) {
+                throw new IllegalStateException("구분자로 숫자는 사용할 수 없습니다.");
+            }
+
             delim = Pattern.quote(inputString.substring(2, idx))+ "|,|:";
             inputString = inputString.substring(idx + 2); // \n 이후 문자열
 
