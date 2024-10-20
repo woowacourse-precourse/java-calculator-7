@@ -8,6 +8,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CalculatorTest {
 
     @Test
+    @DisplayName("입력이 빈 문자열인 경우 0을 반환")
+    void testCalculateWithEmptyString() {
+        // given
+        String input = "";
+
+        // when
+        int result = ExpressionCalculator.calculate(input);
+
+        // then
+        assertEquals(0, result);
+    }
+
+    @Test
     @DisplayName("기본 구분자 (쉼표, 콜론)로 문자열을 계산")
     void testCalculateWithDefaultDelimiters() {
         // given
