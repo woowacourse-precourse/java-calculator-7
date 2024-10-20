@@ -19,35 +19,36 @@ public class Application {
     }
 
     private static int calSum(String input) {
-        if(input.isEmpty()){
+        if (input.isEmpty()) {
             return 0;
         }
         String separator = ",|:";
         String numbers = input;
 
-        if(input.startsWith("//")){
+        if (input.startsWith("//")) {
             Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
-            if(matcher.find()){
+            if (matcher.find()) {
                 separator = Pattern.quote(matcher.group(1));
                 numbers = matcher.group(2);
-            } else{
-                throw new IllegalArgumentException();
+            } else {
+                throw new IllegalArgumentException("커스텀 구분자 형식이 잘못되었습니다.");
             }
         }
         return Arrays.stream(numbers.split(separator))
+                .filter(s -> !s.isEmpty())
                 .mapToInt(Application::parseNumbers)
                 .sum();
     }
 
     private static int parseNumbers(String numbers) {
         try {
-            int number = Integer.parseInt(numbers);
-            if(number < 0){
+            int number = Integer.parseInt(numbers.trim());
+            if (number < 0) {
                 throw new IllegalArgumentException();
             }
             return number;
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(e);
+            throw new IllegalArgumentException("유효하지 않은 숫자 형식: " + numbers);
         }
     }
 }
