@@ -12,13 +12,7 @@ public class StringSumCalculator {
 
         int sum = 0;
         for (String number : numbers) {
-            validateInput(number);
-            int parsedNumber = Integer.parseInt(number.trim());
-
-            if (parsedNumber < 0) {
-                throw new IllegalArgumentException("음수 불가. 다시 실행하시오.");
-            }
-            sum += parsedNumber;
+            sum += parsePositiveNumber(number);
         }
         return sum;
     }
@@ -35,6 +29,15 @@ public class StringSumCalculator {
             splitNumbers = input.split(",|:");
         }
         return splitNumbers;
+    }
+
+    private int parsePositiveNumber(String input) {
+        int number = Integer.parseInt(input.trim());
+
+        if (number < 0) {
+            throw new IllegalArgumentException("음수 불가. 다시 실행하시오.");
+        }
+        return number;
     }
 
     private void validateInput(String input) {
