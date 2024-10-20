@@ -1,13 +1,21 @@
 package parser;
 
+import separator.Separator;
+
 public class Parser {
 
-    public String parseStringToCalculate(String string) {
-        if (string.substring(0, 4).equals("//\\n")) {
-            return string.substring(4);
+    public String parseStringToCalculate(String input) {
+
+        Separator separator = new Separator();
+        if (!separator.validateCustomSeparatorForParsing(input)) {
+            throw new IllegalArgumentException();
         }
 
-        return string.substring(5);
+        if (input.substring(0, 4).equals("//\\n")) {
+            return input.substring(4);
+        }
+
+        return input.substring(5);
     }
 
 }
