@@ -1,5 +1,6 @@
 # java-calculator-precourse
 
+<<<<<<< HEAD
 ## 기능 설명
 
 ### 1. feat: 빈 입력값 처리
@@ -33,5 +34,4 @@
 ### 7. feat: 숫자가 아닌 경우
 
 - 숫자가 아닌 경우가 입력될 경우 `IllegalArgumentException`을 발생시킨다.
-
 
