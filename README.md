@@ -15,12 +15,16 @@
 
 ###  Basic 함수 구현 1차
 
-#### Solution 함수
+#### Main 함수
 - 기능
   - 빈 문장일 경우 0을 반환
-  - 특별 구분자를 확인하는 함수 getSpecialDelimiter- 리팩토링 필요
+  - 기본 구분자와 특별구분자 넣은 arrayList로 반환 받는 함수 getDelimiter 
+    - 특수 구분자가 있다면 특별 구분자를 확인하는 함수를 사용 checkSpecialDelimiter 
+    - checkSpecialDelimiter 에서 특수구분자를 분별해 내는 문자열 자체를 반환(ex : "//;\n")
+    - 반환받은 문자열을 사용하여, inputString에서 해당 앞부분을 없애준다. changeInputStr   
+
   - 에러를 확인하는 함수 checkForErrors - 추가 case를 생각해 봐야함
-  - String 과 구분자를 사용해서 문자를 나눠서 숫자로 더하는 함수 splitByDelimiter - 리팩토링 필요
+  - String을 하나씩 빼서 구분자와 숫자를 나눠서 처리하는 함수 splitDelimiterAddNum - 리팩토링 필요
 
 #### checkForErrors ✅ 
 - IllegalArgumentException 발생되는 case 생각해 보기.
@@ -32,6 +36,7 @@
   - 추가 : 구분자를 제외한 모든 특수기호가 있으면 에러를 발생시킨다. (음수 기호'-'도 제외)
   - 추가 : 숫자로 시작하지 않으면 에러 (특별 구분자 외에 구분자가 맨 앞에 나오는 경우)
   - 추가 : 숫자로 끝나지 않으면 에러 
+
   - return : void
 
 
