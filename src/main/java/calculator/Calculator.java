@@ -1,23 +1,31 @@
 package calculator;
 
 public class Calculator {
-    private static boolean isCustomDelimiter;
-    private static char customDelimiter;
+    private static int curIdx;
 
-    public static int calculate(String input) {
-        Parser.parse(input);
+    public static int calculate() {
+//        System.out.println(Application.getInput().length());
+//        if (Application.getInput().length() == 0)
+//            return 0;
+        Parser.parse();
+        return iterateString();
+    }
+
+    public static int iterateString() {
+        String input = Application.getInput();
+        char[] charString = input.toCharArray();
+        int size = input.length();
 
         int res = 0;
+
+        while (curIdx < size) {
+            res += Parser.parseInteger();
+        }
+
         return res;
     }
 
-    public static void setIsCustomDelimiter(boolean value) {
-        isCustomDelimiter = value;
-    }
-    public static void setCustomDelimiter(char delimiter) { customDelimiter = delimiter; }
+    public static void setCurIdx(int newIdx) { curIdx = newIdx; }
 
-    public static boolean getIsCustomDelimiter() {
-        return isCustomDelimiter;
-    }
-    public static char getCustomDelimiter() { return customDelimiter; }
+    public static int getCurIdx() { return curIdx; }
 }
