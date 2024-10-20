@@ -11,6 +11,15 @@ public class Extractor {
         this.delimiters = new ArrayList<>(List.of(",", ":"));
         extractCustomDelimiter(input).ifPresent(delimiters::add);
     }
+
+    // 입력에서 숫자 추출
+    public List<Long> extractNumbers(String input) {
+        String processedInput = trimAndValidateInput(input);
+        String customDelimiter = extractCustomDelimiter(processedInput).orElse("");
+        processedInput = replaceCustomDelimiter(processedInput, customDelimiter);
+        return splitAndTrimNumbers(processedInput);
+    }
+
     // 커스텀 구분자 추출
     private Optional<String> extractCustomDelimiter(String input) {
         return Optional.of(input)
