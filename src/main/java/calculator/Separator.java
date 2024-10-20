@@ -17,17 +17,18 @@ public class Separator {
     public List<Integer> separateString(String input) {
         List<String> delimiterList = delimiter.getDelimiters(input);
 
-        if(delimiterList.size() == 3) {
-            input = input.substring(5);
+        if (input.startsWith("//")) {
+            int delimiterEndIndex = input.indexOf("\\n");
+            input = input.substring(delimiterEndIndex + 2);
         }
 
+        System.out.println(input);
         StringBuilder delimiterString = new StringBuilder();
         for (String delim : delimiterList) {
             delimiterString.append(delim);
         }
 
         StringTokenizer st = new StringTokenizer(input, delimiterString.toString());
-        StringBuilder sb = new StringBuilder();
         while(st.hasMoreTokens()) {
             String separatedStr = st.nextToken();
 
@@ -43,14 +44,5 @@ public class Separator {
         }
 
         return numList;
-    }
-
-    // 해당 문자가 구분자인지 확인. 구분자가 아닌 문자열이 존재하면 예외 발생
-    private void checkDelimiter(String separatedStr, List<String> delimiterList) {
-        if(!delimiterList.contains(separatedStr)) {
-            throw new IllegalArgumentException(
-                "구분자가 아닌 문자열이 존재합니다. 지정된 구분자만 사용할 수 있습니다."
-            );
-        }
     }
 }

@@ -29,16 +29,18 @@ public class Delimiter {
             return null;
         }
 
-        if(!input.contains("\n")) {
+        int delimiterEndIndex = input.indexOf("\\n");
+        if (delimiterEndIndex == -1) {
             throw new IllegalArgumentException(
                 "커스텀 구분자 지정 양식이 잘못되었습니다. 구분자를 //(구분자)\\n 형태로 감싸야 합니다."
             );
         }
 
-        int delimiterEndIndex = input.indexOf("\n");
+        // 구분자를 추출 (// 이후부터 \n 이전까지)
         String customDelimiter = input.substring(2, delimiterEndIndex);
 
-        if(customDelimiter.length() != 1) {
+        // 구분자가 1자가 아닌 경우 예외 처리
+        if (customDelimiter.length() != 1) {
             throw new IllegalArgumentException(
                 "커스텀 구분자가 존재하지 않거나 2자 이상입니다. 커스텀 구분자는 1자로 제한됩니다."
             );
