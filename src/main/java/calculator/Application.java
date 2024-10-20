@@ -14,7 +14,6 @@ public class Application {
      * @return 합계
      */
     static int calculate(String s) {
-        //System.out.println(s);
 
         String refinedString = s;
         String listOfDelimiters = ",|:";
@@ -36,9 +35,14 @@ public class Application {
         StringTokenizer st = new StringTokenizer(refinedString, listOfDelimiters);
 
         while (st.hasMoreElements()) {
-            String token = String.valueOf(st.nextElement());
+            String stringToken = String.valueOf(st.nextElement());
+            int integerToken = Integer.parseInt(stringToken);
 
-            sumResult += Integer.parseInt(token);
+            if (integerToken <= 0) {
+                throw new IllegalArgumentException("양수가 아닙니다.");
+            }
+
+            sumResult += integerToken;
         }
 
         return sumResult;
@@ -49,9 +53,15 @@ public class Application {
 
         System.out.println("덧셈할 문자열을 입력해 주세요.");
 
-        String inputString = Console.readLine();
+        try {
+            String inputString = Console.readLine();
 
-        int result = calculate(inputString);
-        System.out.println("결과 : " + result);
+            int result = calculate(inputString);
+            System.out.println("결과 : " + result);
+        }
+        catch (IllegalArgumentException e) {
+            System.out.println("잘못된 입력 값 : " + e.getMessage());
+        }
+
     }
 }
