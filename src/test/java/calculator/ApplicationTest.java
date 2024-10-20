@@ -1,15 +1,20 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.Test;
-
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import calculator.model.DelimiterHandler;
+import calculator.model.ExpressionHandler;
+import calculator.model.TokenCalculator;
+import camp.nextstep.edu.missionutils.test.NsTest;
+import java.util.StringTokenizer;
+import org.junit.jupiter.api.Test;
+
 class ApplicationTest extends NsTest {
+    // 문제에서 제공한 테스트 2개
     @Test
-    void 커스텀_구분자_사용() {
+    void usingCustomDelimiterTest() {
         assertSimpleTest(() -> {
             run("//;\\n1");
             assertThat(output()).contains("결과 : 1");
@@ -17,11 +22,124 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트() {
+    void exceptionTest() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+    // 개인 테스트
+    @Test
+    void getCustomDelimiterTest() {
+        assertSimpleTest(() -> {
+            String expression = "//.\\n1,2";
+            DelimiterHandler delimiterHandler = new DelimiterHandler(expression);
+            assertThat(delimiterHandler.getAllDelimiters().contains(".,:"));
+        });
+    }
+
+    @Test
+    void filterExpressionTest1() {
+        String expression = "//;\\n1,2,";
+        String delimiter = ",:;";
+        ExpressionHandler expressionHandler = new ExpressionHandler(expression, delimiter);
+        assertThat(expressionHandler.getExpression()).contains("1,2,");
+    }
+
+    @Test
+    void filterExpressionTest2() {
+        String expression = "/;\\n1,2,";
+        String delimiter = ",:";
+        ExpressionHandler expressionHandler = new ExpressionHandler(expression, delimiter);
+        assertThat(expressionHandler.getExpression()).contains("/;\\n1,2,");
+    }
+
+    @Test
+    void getSumOfTokensTest1() {
+        String expression = "1,2:33";
+        String delimiters = ",:";
+
+        ExpressionHandler expressionHandler = new ExpressionHandler(expression, delimiters);
+        StringTokenizer tokenizedExpression = expressionHandler.getTokenizedExpression();
+
+        TokenCalculator tokenCalculator = new TokenCalculator(tokenizedExpression, delimiters);
+        int result = tokenCalculator.getSumOfTokens();
+
+        assertThat(result).isEqualTo(1 + 2 + 33);
+    }
+
+    // input case test
+    @Test
+    void inputErrorCaseTest1() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(",1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void inputErrorCaseTest2() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,2,3:"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void inputErrorCaseTest3() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(","))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void inputErrorCaseTest4() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("-1,-2,-3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void inputErrorCaseTest5() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("///\n1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void inputWellCaseTest1() {
+        assertSimpleTest(() -> {
+            run("//.\\n1.2");
+            assertThat(output()).contains("결과 : 3");
+        });
+    }
+
+    @Test
+    void inputWellCaseTest2() {
+        assertSimpleTest(() -> {
+            run("//.\\n1.2,3:4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
+    void inputWellCaseTest3() {
+        assertSimpleTest(() -> {
+            run("//\\\\n1\\2,3:4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
+    void inputWellCaseTest4() {
+        assertSimpleTest(() -> {
+            run("//0\\n102,3:4");
+            assertThat(output()).contains("결과 : 10");
+        });
     }
 
     @Override
