@@ -1,7 +1,6 @@
 package calculator;
 
 public class Calculator {
-
     public static boolean isCustomInput(String str) {
         return str.contains(Application.CUSTOM_DELIMITER_FRONT) && str.contains(Application.CUSTOM_DELIMITER_BACK);
     }
