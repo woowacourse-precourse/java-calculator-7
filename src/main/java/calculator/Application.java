@@ -30,10 +30,8 @@ public class Application {
         boolean isMinus = false;
         strToInt(strToIntList, inputStrList, isMinus);
 
-        // 음수인 경우 에러처리
-        if(isMinus){
-            throw new IllegalArgumentException("음수 입력 불가");
-        }
+        // 음수인 경우 예외 처리
+        checkMinusNum(isMinus);
 
         // 변환된 숫자를 더하기
         int sum = 0;
@@ -111,6 +109,13 @@ public class Application {
                 isMinus = true;
             }
             index++;
+        }
+    }
+
+    // 예외 처리 -2 : 음수인 경우
+    private static void checkMinusNum(boolean isMinus){
+        if(isMinus){
+            throw new IllegalArgumentException("음수 입력 불가");
         }
     }
 }
