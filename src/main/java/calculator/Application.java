@@ -26,10 +26,10 @@ public class Application {
 
         // 커스텀 구분자 처리
         if (s.startsWith("//")) {
-            int endOfDelimeter = s.indexOf("\\n");
-            listOfDelimiters += "|" + s.substring(2, endOfDelimeter);
+            int endOfDelimiter = s.indexOf("\\n");
+            listOfDelimiters += "|" + s.substring(2, endOfDelimiter);
 
-            int startOfNumbers = endOfDelimeter + 2;
+            int startOfNumbers = endOfDelimiter + 2;
             refinedString = s.substring(startOfNumbers);
         }
 
