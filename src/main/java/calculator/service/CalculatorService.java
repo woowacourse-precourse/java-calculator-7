@@ -16,7 +16,12 @@ public class CalculatorService {
         if(inputString.startsWith("//")){
             int idx = inputString.indexOf("\\n"); // \n인덱스
             delim = inputString.substring(2, idx); //구분자
+
+            if(idx == -1){
+                throw new IllegalStateException("\\n가 입력되지 않았습니다.");
+            }
             inputString = inputString.substring(idx + 2); // \n 이후 문자열
+
         }
 
         cal = inputString.split(delim);
