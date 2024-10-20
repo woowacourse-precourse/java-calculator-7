@@ -7,24 +7,39 @@ import java.util.regex.Pattern;
 
 public class DelimiterGenerator {
 
-    public static DelimiterInputDTO generateDelimiter(String input) {
+    private static final String DELIMITER_PATTERN = "//(.)\\\\n(.*)";
+    private static final char DEFAULT_DELIMITER1 = ',';
+    private static final char DEFAULT_DELIMITER2 = ':';
+
+    public static DelimiterInputDTO generateDelimiterInputDTO(String input) {
 
         DelimiterInputDTO delimiterInputDTO = new DelimiterInputDTO(input);
 
-        List<Character> delimiter = new ArrayList<>(List.of(',', ':'));
+        List<Character> delimiters = createDefaultDelimiters();
 
-        Pattern delimiterFormatPattern = Pattern.compile("//(.)\\\\n(.*)");
-        Matcher delimiterFormat = delimiterFormatPattern.matcher(input);
-
+        Matcher delimiterFormat = getDelimiterFormat(input);
         if (delimiterFormat.matches()) {
-            delimiterInputDTO.setInput(delimiterFormat.group(2));
-
-            delimiter.add(delimiterFormat.group(1).charAt(0));
+            updateDelimiterInputDTO(delimiterInputDTO, delimiterFormat, delimiters);
         }
 
-        delimiterInputDTO.setDelimiter(delimiter);
+        delimiterInputDTO.setDelimiter(delimiters);
 
         return delimiterInputDTO;
 
+    }
+
+    private static void updateDelimiterInputDTO(DelimiterInputDTO delimiterInputDTO, Matcher delimiterFormat,
+                                                List<Character> delimiters) {
+        delimiterInputDTO.setInput(delimiterFormat.group(2));
+        delimiters.add(delimiterFormat.group(1).charAt(0));
+    }
+
+    private static List<Character> createDefaultDelimiters() {
+        return new ArrayList<>(List.of(DEFAULT_DELIMITER1, DEFAULT_DELIMITER2));
+    }
+
+    private static Matcher getDelimiterFormat(String input) {
+        Pattern delimiterFormatPattern = Pattern.compile(DELIMITER_PATTERN);
+        return delimiterFormatPattern.matcher(input);
     }
 }
