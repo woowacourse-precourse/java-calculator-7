@@ -17,6 +17,11 @@ public class Application {
         if (userInput == null || userInput.trim().isEmpty()) {
             return 0;
         }
-        return Integer.parseInt(userInput);
+        String[] numbers = userInput.split(",");
+        int sum = 0;
+        for (String number : numbers) {
+            sum += Integer.parseInt(number);
+        }
+        return sum;
     }
 }
