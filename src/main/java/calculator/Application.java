@@ -1,7 +1,12 @@
 package calculator;
 
+import calculator.service.Calculator;
+
 public class Application {
+
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+
+        Calculator calculator = Calculator.getCalculator();
+        calculator.calculate();
     }
 }
