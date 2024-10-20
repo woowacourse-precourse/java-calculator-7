@@ -13,11 +13,15 @@ public class Separators {
     }
 
     public static Separators init() {
-        List<Separator> defaultSeparators = DefaultSeparatorType.getDefaults()
+        List<Separator> defaultSeparators = getDefaultSeparators();
+        return new Separators(defaultSeparators);
+    }
+
+    private static List<Separator> getDefaultSeparators() {
+        return DefaultSeparatorType.getDefaults()
                 .stream()
                 .map(Separator::new)
                 .collect(Collectors.toList());
-        return new Separators(defaultSeparators);
     }
 
     public void add(Separator separator) {
@@ -40,9 +44,9 @@ public class Separators {
                 .anyMatch(defaultSeparator -> defaultSeparator.equals(regex));
     }
 
-    public List<String> getValues() {
+    public String toRegexPattern() {
         return separators.stream()
                 .map(Separator::regex)
-                .toList();
+                .collect(Collectors.joining(Constants.OR));
     }
 }
