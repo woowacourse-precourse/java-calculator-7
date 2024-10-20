@@ -2,7 +2,7 @@ package calculator.service;
 
 import java.util.List;
 
-public interface SeparatorFactory {
+interface SeparatorFactory {
 
     public List<NumberSeparator> getSeparators();
 

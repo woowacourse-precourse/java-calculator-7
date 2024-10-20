@@ -1,6 +1,6 @@
 package calculator.ui;
 
-public interface OutputUi {
+interface OutputUi {
 
     public void printMessage(final String message);
 }
