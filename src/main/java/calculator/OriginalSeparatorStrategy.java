@@ -8,7 +8,19 @@ public class OriginalSeparatorStrategy implements CalculatorStrategy {
 
     public void calculate(String inputText) {
         String arr[] = calculator.extractNumber(inputText);
-        int totalSum = calculator.sum(arr);
-        System.out.println("결과 : " + totalSum);
+        Double totalSum = calculator.sum(arr).doubleValue();
+        if (checkFloatingPoint(totalSum)) {
+            System.out.println("결과 : " + totalSum);
+        }
+        if (!checkFloatingPoint(totalSum)) {
+            System.out.println("결과 : " + totalSum.intValue());
+        }
+    }
+
+    private Boolean checkFloatingPoint(Double totalSum) {
+        if (totalSum.intValue() == totalSum){
+            return false;
+        }
+        return true;
     }
 }

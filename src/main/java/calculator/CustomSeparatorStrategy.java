@@ -11,7 +11,19 @@ public class CustomSeparatorStrategy implements CalculatorStrategy {
         String text = calculator.removeCustomReserveWord(inputText);
 
         String arr[] = calculator.extractNumber(customSeparator, text);
-        int totalSum = calculator.sum(arr);
-        System.out.println("결과 : " + totalSum);
+        Double totalSum = calculator.sum(arr).doubleValue();
+        if (checkFloatingPoint(totalSum)) {
+            System.out.println("결과 : " + totalSum);
+        }
+        if (!checkFloatingPoint(totalSum)) {
+            System.out.println("결과 : " + totalSum.intValue());
+        }
+    }
+
+    private Boolean checkFloatingPoint(Double totalSum) {
+        if (totalSum.intValue() == totalSum){
+            return false;
+        }
+        return true;
     }
 }
