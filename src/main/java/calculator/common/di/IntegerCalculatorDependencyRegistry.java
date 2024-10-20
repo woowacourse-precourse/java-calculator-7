@@ -41,8 +41,9 @@ public class IntegerCalculatorDependencyRegistry implements NumberCalculatorDepe
         return customDelimiterService;
     }
 
-    public DelimiterFactory getDelimiterFactory() {
-        return delimiterFactory;
+
+    public DelimitersFactory getDelimitersFactory() {
+        return delimitersFactory;
     }
 
     @Override
