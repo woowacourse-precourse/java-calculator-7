@@ -1,5 +1,6 @@
 package calculator;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -56,6 +57,10 @@ public class StringParser {
     }
 
     private List<Double> parseNumbers(String expression, Set<String> delimiters) {
+        if (expression.isEmpty()) {
+            return new ArrayList<>();
+        }
+
         String delimiterRegEx = "[" + String.join("", delimiters) + "]";
         List<String> stringNumbers = Arrays.asList(expression.split(delimiterRegEx));
 
