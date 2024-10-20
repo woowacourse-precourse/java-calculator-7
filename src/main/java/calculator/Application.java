@@ -96,7 +96,7 @@ public class Application {
             int[] b = stringToIntArray(token, max_len);
             addArrays(a, b, token.length());
         }
-        return "";
+        return flipAndGetResult(a);
     }
 
     private static int[] stringToIntArray(String token, int max_len) {
@@ -119,6 +119,18 @@ public class Application {
                 }
             }
         }
+    }
+
+    private static String flipAndGetResult(int[] a) {
+        StringBuilder result = new StringBuilder();
+        int last = a.length - 1;
+        if (a[last] != 0) { // 마지막 올림수
+            result.append(a[last]);
+        }
+        for (int i = last - 1; i >= 0; i--) {
+            result.append(a[i]);
+        }
+        return result.toString();
     }
 }
 
