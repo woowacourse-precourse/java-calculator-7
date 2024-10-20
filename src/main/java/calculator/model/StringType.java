@@ -6,6 +6,7 @@ public class StringType {
     private static final Pattern defaultPattern = Pattern.compile("([1-9][0-9]*([,:][1-9][0-9]*)*)?");
     private static final Pattern customPattern = Pattern.compile("//(.)\\\\n([1-9][0-9]*(\\1[1-9][0-9]*)*)?");
 
+
     private boolean isDefaultPattern(String input){
         return defaultPattern.matcher(input).matches();
     }
