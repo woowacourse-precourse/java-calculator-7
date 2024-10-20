@@ -31,6 +31,14 @@ public class Application {
             throw new IllegalArgumentException("잘못된 입력값입니다.");
         }
 
+        // 계산 후 결과 반환
+        String delimiters = String.format("[%s,:]", customDelimiter);
+        String[] numbers = value.split(delimiters);
+        long result = 0;
+        for (String number : numbers) {
+            result += Integer.parseInt(number);
+        }
+
         return result;
     }
 
