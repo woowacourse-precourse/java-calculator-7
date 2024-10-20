@@ -31,7 +31,7 @@ public class Calculator {
         }
         String customDelimiter = Pattern.quote(matcher.group(1));
         String numbersPart = matcher.group(2);
-        return sumNumbers(parseInput(numbersPart, customDelimiter));
+        return sumNumbers(parseInput(numbersPart, customDelimiter + "|" + DEFAULT_DELIMITERS));
     }
 
     private int[] parseInput(String input, String delimiter) {
