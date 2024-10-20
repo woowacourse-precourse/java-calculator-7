@@ -21,6 +21,7 @@ public class Application {
         int sum = 0;
 
         for (String token : tokens) {
+            token = token.trim();
             int number = Integer.parseInt(token);
             sum += number;
         }
