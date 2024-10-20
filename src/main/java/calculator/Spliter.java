@@ -1,7 +1,5 @@
 package calculator;
 
-import java.util.Arrays;
-
 public class Spliter {
     private String inputString;
     private char customSeparator1;
@@ -55,8 +53,13 @@ public class Spliter {
         if(inputString.length() >= 5) {
             char[] inputArray = inputString.toCharArray();
 
-            // '//?\n' 형태로 시작하면 커스텀 구분자 등록 후 문자열 시작위치 변경
-            customSeparator1 = inputArray[2];
+            // 커스텀 구분자 등록 후 문자열 시작위치 변경
+            if(inputArray[0] == '/' && inputArray[1] == '/' && inputArray[3] == '\\' && inputArray[4] == 'n') {
+                customSeparator1 = inputArray[2];
+            } else {
+                //System.out.println("[커스텀 구분자 생성]잘못된 값을 입력하였습니다!");
+                throw new IllegalArgumentException();
+            }
             this.inputString = inputString.substring(5);
         }
     }
