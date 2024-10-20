@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 public class StringParser {
     private static final List<String> DEFAULT_DELIMITER = Arrays.asList(",", ":");
+    private static final String CUSTOM_DELIMITER_START_MARK = "//";
     private static final String EXTRACT_DELIMITER_REGEX = "//(.)\\\\n";
     private static final String DIGIT_OR_POINT_REGEX = "[0-9.]";
     private static final String NUMERIC_REGEX = "^-?\\d+(\\.\\d+)?$";
@@ -22,7 +23,7 @@ public class StringParser {
         Set<String> delimiters = new HashSet<>(DEFAULT_DELIMITER);
         String expression = this.inputString;
 
-        if (expression.startsWith("//")) {
+        if (expression.startsWith(CUSTOM_DELIMITER_START_MARK)) {
             String customDelimiter = extractCustomDelimiter();
             delimiters.add(customDelimiter);
             expression = removeDelimiterDefinition();
