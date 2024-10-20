@@ -1,11 +1,10 @@
-package calculator.stringprocess;
+package stringprocess;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import constant.Constant;
 import org.junit.jupiter.api.Test;
-import stringprocess.Validator;
 
 class ValidatorTest {
 
@@ -15,8 +14,6 @@ class ValidatorTest {
     void 문자열_유효성_검사_성공() {
         //given
         String[] input = {"//*\n1,2:3*4", "//*\n", "1,2,3:4", "1,2,3:4//*\n", "//;\n2;3;4"};
-
-        //when
 
         //then
         for (String str : input) {

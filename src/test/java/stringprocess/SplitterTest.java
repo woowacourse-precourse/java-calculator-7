@@ -1,16 +1,22 @@
-package calculator.stringprocess;
+package stringprocess;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import constant.Constant;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SplitterTest {
-    List<String> customSeparator = new ArrayList<>();
+    private List<String> customSeparator;
+    private Splitter splitter;
 
-    private final Splitte splitter = new Splitter();
-
+    @BeforeEach
+    void init() {
+        customSeparator = new ArrayList<>();
+        splitter = new Splitter(Constant.BASIC_SEPARATOR_REGEX, customSeparator);
+    }
 
     @Test
     void 기본구분자로_쪼개기() {
@@ -35,7 +41,7 @@ class SplitterTest {
         customSeparator.add("&&&");
 
         //when
-        List<String> result = splitter.splitByCustomSeparator(input, customSeparator);
+        List<String> result = splitter.splitByCustomSeparator(input);
 
         // 결과 출력
         assertThat(result.size()).isEqualTo(7);
