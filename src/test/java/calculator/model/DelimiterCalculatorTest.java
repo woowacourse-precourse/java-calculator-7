@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import calculator.exception.ErrorMessage;
+import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -137,6 +138,30 @@ class DelimiterCalculatorTest {
     }
 
     @Test
+    void 기본_구분자_특수문자() {
+        //given
+        String input = "1,@,2";
+
+        //when & then
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            delimiterCalculator.calculate(input);
+        });
+        assertEquals(ErrorMessage.INVALID_INPUT, exception.getMessage());
+    }
+
+    @Test
+    void 기본_구분자_최대길이_입력() {
+        //given
+        String input = String.join(",", Collections.nCopies(10000, "1"));
+
+        //when
+        int result = delimiterCalculator.calculate(input);
+
+        //then
+        assertEquals(10000, result);
+    }
+
+    @Test
     void 커스텀_구분자_문자() {
         //given
         String input = "//;\\n1;2;a";
@@ -182,5 +207,17 @@ class DelimiterCalculatorTest {
             delimiterCalculator.calculate(input);
         });
         assertEquals(ErrorMessage.CONSECUTIVE_DELIMITERS, exception.getMessage());
+    }
+
+    @Test
+    void 커스텀_구분자_비어있는_경우() {
+        //given
+        String input = "//\\n1,2";
+
+        //when & then
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            delimiterCalculator.calculate(input);
+        });
+        assertEquals(ErrorMessage.INVALID_INPUT, exception.getMessage());
     }
 }
