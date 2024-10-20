@@ -11,6 +11,10 @@ public class CalculatorInputView {
         calculatorOutputView.printInstruction();
         String input = Console.readLine();
 
+        if (input == null) {
+            throw new IllegalArgumentException(Message.NO_INPUT.getMessage());
+        }
+
         return input;
     }
 }
