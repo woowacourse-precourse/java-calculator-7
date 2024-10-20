@@ -12,6 +12,13 @@ public class ValidatorTest extends NsTest {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> {
                 Validator obj = new Validator();
+                obj.validate(";1;2;3");
+            }).isInstanceOf(IllegalArgumentException.class);
+        });
+        
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> {
+                Validator obj = new Validator();
                 obj.validate("//;1;2;3");
             }).isInstanceOf(IllegalArgumentException.class);
         });
