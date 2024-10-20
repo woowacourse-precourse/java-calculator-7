@@ -23,6 +23,27 @@ class ApplicationTest extends NsTest {
         });
     }
     @Test
+    void 커스텀_구분자_2개_사용() {
+        assertSimpleTest(() -> {
+            run("//!;\\n1!2;3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+    @Test
+    void 커스텀_구분자_3개_사용() {
+        assertSimpleTest(() -> {
+            run("//!;^\\n1!2;3^4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+    @Test
+    void 커스텀_구분자_4개_사용() {
+        assertSimpleTest(() -> {
+            run("//!;^@\\n1!2;3^4@5");
+            assertThat(output()).contains("결과 : 15");
+        });
+    }
+    @Test
     void 커스텀_구분자와_기본_구분자_함께_사용() {
         assertSimpleTest(() -> {
             run("//!\\n1!2,3,4:");

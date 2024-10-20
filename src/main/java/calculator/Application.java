@@ -33,13 +33,13 @@ public class Application {
                 throw new IllegalArgumentException("잘못된 값입니다.");
             }
             String customDelimiter = numbers.substring(2, newLineIndex);
-            if(customDelimiter.isEmpty() || customDelimiter.contains(",") || customDelimiter.contains(":")){
-                throw new IllegalArgumentException("잘못된 값입니다.");
-            }
+            String[] delimiters = customDelimiter.split("");
+
             numbers = numbers.substring(newLineIndex + 2);
-
-            String[] delimiters = new String[]{customDelimiter, ",", ":"};
-
+            String[] allDelimiters = new String[delimiters.length + 2];
+            System.arraycopy(delimiters, 0, allDelimiters, 0, delimiters.length);
+            allDelimiters[delimiters.length] = ",";
+            allDelimiters[delimiters.length + 1] = ":";
             for (String delim : delimiters) {
                 numbers = numbers.replace(delim, ",");
             }
