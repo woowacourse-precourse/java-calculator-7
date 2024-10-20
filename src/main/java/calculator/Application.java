@@ -61,4 +61,8 @@ public class Application {
         }
         return sum;
     }
+
+    public static String escapeSpecailCharactersInDelimiter(String delimiter) {
+        return delimiter.replaceAll("([\\\\.^$|?*+()\\[\\]{}])", "\\\\$1");
+    }
 }
