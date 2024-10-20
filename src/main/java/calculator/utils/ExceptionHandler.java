@@ -1,5 +1,6 @@
-package calculator;
+package calculator.utils;
 
+import calculator.enums.ExceptionMessages;
 import java.util.List;
 
 public class ExceptionHandler {

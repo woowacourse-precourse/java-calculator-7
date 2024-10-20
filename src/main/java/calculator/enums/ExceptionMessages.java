@@ -1,4 +1,4 @@
-package calculator;
+package calculator.enums;
 
 public enum ExceptionMessages {
     INCORRECT_INPUT_MSG("에러: 지정된 구분자인 쉼표와 콜론, 양의 정수, 커스텀 구분자를 지정하기 위한 슬래시와 역슬래시 그리고 n 이외에는 입력하실 수 없습니다."),

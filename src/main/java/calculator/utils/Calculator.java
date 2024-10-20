@@ -1,4 +1,4 @@
-package calculator;
+package calculator.utils;
 
 import java.util.List;
 

@@ -1,5 +1,8 @@
 package calculator;
 
+import calculator.io.InputProcessor;
+import calculator.io.OutputProcessor;
+import calculator.utils.Calculator;
 import java.util.List;
 
 public class Application {

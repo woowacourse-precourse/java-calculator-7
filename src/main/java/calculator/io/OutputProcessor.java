@@ -1,4 +1,4 @@
-package calculator;
+package calculator.io;
 
 public class OutputProcessor {
     // 결과 메세지 헤더
