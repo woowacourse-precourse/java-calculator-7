@@ -18,6 +18,10 @@
 ##5.출력한다.
 
 
+#설계 방식
 
+![image](/Users/ihojae/Desktop/java-calculator-7/우테코 1주차 과제 설계.jpeg)
+
+이러한 방식으로 설계해보겠다.
 
 
