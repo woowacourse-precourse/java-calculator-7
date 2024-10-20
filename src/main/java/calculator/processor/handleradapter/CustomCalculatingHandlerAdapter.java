@@ -10,7 +10,7 @@ public class CustomCalculatingHandlerAdapter extends AbstractCalculatingHandlerA
 
     @Override
     public boolean supports(Request request) {
-        String body = (String) request.body();
+        String body = request.body().toString();
         if (body.length() < 4) {
             return false;
         }
