@@ -1,8 +1,10 @@
 package calculator.model;
 
+import calculator.ErrorMessage;
 import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -22,6 +24,24 @@ class ParserTest {
     void parseWithCustomDelimiter(String input, int numberOfNumbers) {
         Parser parser = new Parser(input);
         Assertions.assertThat(parser.parse().size()).isEqualTo(numberOfNumbers);
+    }
+
+    @Test
+    @DisplayName("기본 구분자를 사용할 때 음수 또는 0이 포함된 문자열이 들어오면 예외를 발생시킨다")
+    void parseWithNegativeNumber() {
+        Parser parser = new Parser("1,2,0");
+        Assertions.assertThatThrownBy(parser::parse)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.INTEGER_OUT_OF_RANGE.getMessage());
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자를 사용할 때 음수 또는 0 문자열이 들어오면 예외를 발생시킨다")
+    void parseWithNegativeNumberWithCustomDelimiter() {
+        Parser parser = new Parser("//a\\n1a2,-3");
+        Assertions.assertThatThrownBy(parser::parse)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.INTEGER_OUT_OF_RANGE.getMessage());
     }
 
     private static Stream<Arguments> provideTestCaseForParse() {

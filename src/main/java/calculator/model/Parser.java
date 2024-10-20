@@ -1,5 +1,6 @@
 package calculator.model;
 
+import calculator.ErrorMessage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -29,7 +30,8 @@ public class Parser {
         while (st.hasMoreTokens()) {
             result.add(st.nextToken());
         }
-        return result.stream().map(Integer::parseInt).toList();
+        return result.stream().map(Integer::parseInt)
+                .map(this::getPositiveNumber).toList();
     }
 
 
@@ -49,5 +51,12 @@ public class Parser {
             appendedDelimiters.append(delimiter);
         }
         return appendedDelimiters.toString();
+    }
+
+    private Integer getPositiveNumber(Integer number) {
+        if (number <= 0) {
+            throw new IllegalArgumentException(ErrorMessage.INTEGER_OUT_OF_RANGE.getMessage());
+        }
+        return number;
     }
 }
