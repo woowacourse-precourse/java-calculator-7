@@ -1,5 +1,8 @@
 package calculator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Calculator {
     public int calculate(String input) {
 
@@ -13,8 +16,15 @@ public class Calculator {
 
         if(input.startsWith("//")){
 
-            delimiter = String.valueOf(input.charAt(2));
-            input = input.substring(5);
+            Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+
+            if (matcher.matches()) {
+                delimiter = Pattern.quote(matcher.group(1));
+                input = matcher.group(5);
+            }
+            else {
+                throw new IllegalArgumentException("잘못된 입력입니다: " + input);
+            }
         }
         String[] tokens = input.split(delimiter); //쉼표나 콜론을 구분자로 분리
 
