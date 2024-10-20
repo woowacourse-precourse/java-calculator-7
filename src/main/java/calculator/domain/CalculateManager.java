@@ -57,7 +57,7 @@ public class CalculateManager {
         Arrays.stream(extractedNumbers)
                 .filter(number -> !number.isEmpty())
                 .forEach(number -> {
-                    Validator.validateSeparator(number);
+                    Validator.validateExtractedNumber(number);
                     numbers.addNumber(number);
                 });
     }
