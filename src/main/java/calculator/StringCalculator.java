@@ -30,6 +30,18 @@ public class StringCalculator {
         String[] numbers = splitInput(input);
         int sum = 0;
 
+        for (String number : numbers) {
+            try {
+                int num = Integer.parseInt(number);
+                if (num < 0) {
+                    throw new IllegalArgumentException("음수는 허용되지 않습니다: " + num);
+                }
+                sum += num;
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("숫자가 아닌 값이 입력되었습니다: " + number);
+            }
+        }
+
         return sum;
     }
 
