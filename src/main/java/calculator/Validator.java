@@ -12,8 +12,7 @@ public class Validator {
     }
 
     public static void isValidDefaultCharacter(char character) {
-       if (character != '-' && character != '+' &&
-           character != ',' && character != ':' &&
+       if (character != ',' && character != ':' &&
            Character.isDigit(character) == false)
            throw new IllegalArgumentException(Constants.INVALID_FORMAT);
     }
@@ -28,8 +27,6 @@ public class Validator {
         char[] charString = Application.getInputToCharArray();
         int curIdx = Calculator.getCurIdx();
 
-        if (charString[curIdx] == '+' || charString[curIdx] == '-')
-            curIdx++;
         while (curIdx < Application.getInputSize() && charString[curIdx] != delimiter) {
             if (Character.isDigit(charString[curIdx]) == false)
                 throw new IllegalArgumentException(Constants.INVALID_FORMAT);
@@ -38,10 +35,8 @@ public class Validator {
         return curIdx;
     }
 
-
     public static void setDelimiter(char newDelimiter) {
         delimiter = newDelimiter;
-//        System.out.println("delemiter: " + delimiter);
     }
 
     public static char getDelimiter() { return delimiter; }
