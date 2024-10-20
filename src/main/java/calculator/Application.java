@@ -69,7 +69,7 @@ public class Application {
                 sum += num;
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage());
+//            System.out.println("Error: " + e.getMessage());
         }
         return sum;
     }
@@ -101,7 +101,7 @@ public class Application {
         try {
             delimiter = findCustomDelimiter(input); // 커스텀 구분자 찾기
         } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage());
+//            System.out.println("Error: " + e.getMessage());
         }
 
         if (!delimiter.equals(",|:")) { // 커스텀 구분자 사용 시, 5번째 문자부터 읽기
@@ -129,7 +129,7 @@ public class Application {
         try {
             sum = StringCalculator(input);
         } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage());
+//            System.out.println("Error: " + e.getMessage());
         }
 
         System.out.println("결과 : " + sum);
