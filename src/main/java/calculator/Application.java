@@ -34,4 +34,15 @@ public class Application {
         return arr;
     }
 
+    public static int[] parseInteger(String[] arr){
+        int[] numbers = new int[arr.length];
+
+        for(int i = 0; i < arr.length; i++){
+            numbers[i] = Integer.parseInt(arr[i].replaceAll(" ", ""));
+        }
+
+        return numbers;
+    }
+
+
 }
