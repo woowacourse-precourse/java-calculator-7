@@ -17,6 +17,7 @@ public class Application {
             System.out.println("결과 : " + cal_sum(numbers));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
+            throw e;
         }
 
     }
