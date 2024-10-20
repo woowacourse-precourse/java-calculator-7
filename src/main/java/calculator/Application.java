@@ -19,6 +19,7 @@ public class Application {
             // 입력된 문자열에서 구분자를 추출하고 파싱하는 기능
             Parser parser = new Parser();
             List<String> numberList = parser.extractNumberList(userInput);
+            List<Integer> parsedNumberList = parser.parseNumberList(numberList);
         }
     }
 }

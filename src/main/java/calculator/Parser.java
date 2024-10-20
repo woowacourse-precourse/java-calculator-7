@@ -1,9 +1,12 @@
 package calculator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
 public class Parser {
+
+    // 커스텀 구분자와 기본 구분자로 문자열 분리 기능
     public List<String> extractNumberList(String userInput) {
         //구분자 목록 선언
         String separators = ",|:";
@@ -19,5 +22,18 @@ public class Parser {
         List<String> numberList = List.of(userInput.split(separators));
 
         return numberList;
+    }
+
+    // 분리한 문자열 정수로 파싱 기능
+    public List<Integer> parseNumberList(List<String> numberList) {
+
+        List<Integer> parsedNumberList = new ArrayList<>();
+
+        for (int i = 0; i < numberList.size(); i++) {
+            Integer parsedNumber = Integer.parseInt(numberList.get(i));
+            parsedNumberList.add(parsedNumber);
+        }
+        
+        return parsedNumberList;
     }
 }
