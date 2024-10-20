@@ -30,4 +30,17 @@ public class Calculator {
             result += Integer.parseInt(number);
         return result;
     }
+
+    public void runCalculator(){
+        try{
+            System.out.println("덧셈할 문자열을 입력해 주세요.");
+            this.readUserInput();
+            this.detectDelimiter();
+            int result = this.sumUserInput();
+            System.out.println("결과 : " + result);
+        }
+        catch(IllegalArgumentException e){
+
+        }
+    }
 }
