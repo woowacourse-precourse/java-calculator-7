@@ -26,7 +26,6 @@ public class Application {
     }
 
     private static int getResult(String input) {
-        // 비어있을 경우 0을 반환하자 (3.1 예외)
         if (input.isEmpty()) {
             return EMPTY_INPUT_RETURN_VALUE;
         }
@@ -58,7 +57,7 @@ public class Application {
 
         int[] parsedNumbers = parseNumbers(eachNumbers);
 
-        validateNoNegativeNumbers(parsedNumbers); // 음수 있으면 예외 발생 (3.8 예외)
+        validateNoNegativeNumbers(parsedNumbers);
 
         return add(parsedNumbers);
     }
@@ -67,7 +66,7 @@ public class Application {
     private static String[] getCustomDelimiters(String input, int indexOfEndSign) {
         return input
                 .substring(CUSTOM_DELIMITER_START_SIGN_LENGTH, indexOfEndSign)
-                .split(""); // 여러 커스텀 구분자 받는 경우 포함
+                .split("");
     }
 
     private static void validateCustomDelimiters(String[] customDelimiters) {
