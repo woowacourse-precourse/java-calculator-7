@@ -23,7 +23,8 @@ public class CalculatorController {
         String input = inputReader.readLine();
         String[] numbers = calculator.extractNumbers(input);
         int[] numbersArray = validator.validateAndConvert(numbers);
-        calculator.sum(numbersArray);
+        int result = calculator.sum(numbersArray);
+        outputWriter.print(result);
     }
 
 }
