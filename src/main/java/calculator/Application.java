@@ -68,11 +68,15 @@ public class Application {
     // separatedNumber가 양수 맞는지 검증
     private static void validateNumbers(String[] separatedNumber) {
         for (String number : separatedNumber) {
+            System.out.println("number = " + number);
             int parseNum = Integer.parseInt(number);
-            if (parseNum < 1) {
-                throw new IllegalArgumentException("0과 음수는 입력할 수 없습니다.");
+            validatePositiveNumbers(parseNum);
+        }
+    }
 
-            }
+    private static void validatePositiveNumbers(int parseNum) {
+        if (parseNum < 1) {
+            throw new IllegalArgumentException("0과 음수는 입력할 수 없습니다.");
         }
     }
 
