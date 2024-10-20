@@ -14,6 +14,7 @@ public class InputView {
         String customSeperator = "";
         System.out.print(ViewMessage.INPUT_STRING);
         String input = Console.readLine();
+        StartWithCharacter.validate(input);
         customSeperator = getCustomSeperator(input);
         return input;
     }
