@@ -151,4 +151,21 @@ class CalculatorServiceTest {
         // 결과가 예상된 값과 같은지 확인
         assertEquals(expectedSum, result);
     }
+
+    @DisplayName("커스텀 구분자를 사용하더라도 값이 없으면 0을 반환")
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "//;\n",    // 커스텀 구분자만 있고 숫자가 없음
+            "//|\n",    // 커스텀 구분자만 있고 숫자가 없음
+            "//#\n",    // 커스텀 구분자만 있고 숫자가 없음
+            "//@\n",    // 커스텀 구분자만 있고 숫자가 없음
+    })
+    void add_customDelimiterWithNoValues_returnsZero(String input) {
+        // 입력 문자열에 값이 없을 때 결과가 0이어야 함
+        int result = CalculatorService.add(input);
+
+        // 결과가 0이어야 함
+        assertEquals(0, result);
+    }
+
 }
