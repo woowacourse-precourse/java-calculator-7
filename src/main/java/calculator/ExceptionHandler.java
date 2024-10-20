@@ -17,16 +17,14 @@ public class ExceptionHandler {
 
     public void checkIncorrectCustomDelimGenerateInput(char elem) {
         if (elem != '/' && elem != 'n' && elem != '\\') {
-            throw new IllegalArgumentException(
-                    "지정된 구분자인 쉼표와 콜론, 양의 정수, 커스텀 구분자를 지정하기 위한 슬래시와 역슬래시 그리고 n 이외에는 입력하실 수 없습니다.");
+            throw new IllegalArgumentException(ExceptionMessages.INCORRECT_INPUT_MSG.getMsg());
         }
     }
 
     public void checkIncorrectInputWithoutCustomDelim(char[] elems) {
         for (char elem : elems) {
             if (elem != ',' && elem != ':' && elem != '-' && !Character.isDigit(elem)) {
-                throw new IllegalArgumentException(
-                        "지정된 구분자인 쉼표와 콜론, 양의 정수, 커스텀 구분자를 지정하기 위한 슬래시와 역슬래시 그리고 n 이외에는 입력하실 수 없습니다.");
+                throw new IllegalArgumentException(ExceptionMessages.INCORRECT_INPUT_MSG.getMsg());
             }
         }
     }
@@ -34,22 +32,21 @@ public class ExceptionHandler {
     public void checkIncorrectInputWithCustomDelim(char[] elems, char customDelim) {
         for (char elem : elems) {
             if (elem != ',' && elem != ':' && elem != customDelim && elem != '-' && !Character.isDigit(elem)) {
-                throw new IllegalArgumentException(
-                        "지정된 구분자인 쉼표와 콜론, 양의 정수, 커스텀 구분자를 지정하기 위한 슬래시와 역슬래시 그리고 n 이외에는 입력하실 수 없습니다.");
+                throw new IllegalArgumentException(ExceptionMessages.INCORRECT_INPUT_MSG.getMsg());
             }
         }
     }
 
     public void checkIncorrectDelim(char delim) {
         if (delim == ',' || delim == ':') {
-            throw new IllegalArgumentException("기본 구분자는 커스텀 구분자로 설정할 수 없습니다.");
+            throw new IllegalArgumentException(ExceptionMessages.INCORRECT_CUSTOM_DELIM_MSG.getMsg());
         }
     }
 
     public void checkZeroAndNegativeDigit(List<Integer> nums) {
         for (int num : nums) {
             if (num <= 0) {
-                throw new IllegalArgumentException("0 또는 음수는 입력할 수 없습니다! 양수만 입력해주세요.");
+                throw new IllegalArgumentException(ExceptionMessages.ZERO_AND_NEGATIVE_MSG.getMsg());
             }
         }
     }
