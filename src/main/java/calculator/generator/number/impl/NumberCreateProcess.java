@@ -3,7 +3,7 @@ package calculator.generator.number.impl;
 import calculator.generator.number.NumberCreateService;
 import calculator.number.domain.NumberService;
 import calculator.number.util.NumberConvertorService;
-import calculator.sentence.domain.Sentence;
+import calculator.sentence.dto.Sentence;
 
 import java.util.List;
 import java.util.function.Function;
