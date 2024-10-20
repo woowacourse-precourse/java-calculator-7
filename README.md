@@ -1,7 +1,7 @@
 # java-calculator-precourse
 # 미션 - 문자열 덧셈 계산기
 
-## 🔍 진행 방식
+## 진행 방식
 
 - 미션은 과제 진행 요구 사항, 기능 요구 사항, 프로그래밍 요구 사항 세 가지로 구성되어 있다.
 - 세 개의 요구 사항을 만족하기 위해 노력한다. 특히 기능을 구현하기 전에 기능 목록을 만들고, 기능 단위로 커밋 하는 방식으로 진행한다.
@@ -10,7 +10,7 @@
     - 정해진 시간을 지키지 않을 경우 미션을 제출하지 않은 것으로 간주한다.
     - 종료 일시 이후에는 추가 푸시를 허용하지 않는다.
   
-## 📮 미션 제출 방법
+## 미션 제출 방법
 
 - 미션 구현을 완료한 후 GitHub을 통해 제출해야 한다.
     - GitHub을 활용한 제출 방법은 [프리코스 과제 제출 문서](https://github.com/woowacourse/woowacourse-docs/tree/main/precourse#%EC%A0%9C%EC%B6%9C-%EA%B0%80%EC%9D%B4%EB%93%9C)를 참고해 제출한다.
@@ -18,7 +18,7 @@
     - 자세한 안내는 [제출 가이드](https://github.com/woowacourse/woowacourse-docs/tree/main/precourse#%EC%A0%9C%EC%B6%9C-%EA%B0%80%EC%9D%B4%EB%93%9C)를 참고한다.
     - 과제를 수행하면서 느낀 점, 배운 점, 많은 시간을 투자한 부분 등 자유롭게 작성한다.
 
-## 🚨 과제 제출 전 체크 리스트
+## 과제 제출 전 체크 리스트
 
 - 기능 구현을 올바르게 구현했더라도 **요구 사항에 명시된 출력 형식을 따르지 않으면 0점**을 받게 된다.
 - 기능 구현을 완료한 후 아래 가이드에 따라 모든 테스트가 성공적으로 실행되는지 확인한다.
@@ -33,15 +33,22 @@ BUILD SUCCESSFUL in 0s
 ```
 
 ---
+## 과제 진행 요구 사항
+- 미션은 [문자열 덧셈 계산기](https://github.com/woowacourse-precourse/java-calculator-7) 저장소를 포크하고 클론하는 것으로 시작한다.
+-  기능을 구현하기 전 `README.md`에 구현할 기능 목록을 정리해 추가한다.
+- Git의 커밋 단위는 앞 단계에서 `README.md`에 정리한 기능 목록 단위로 추가한다.
+  - [AngularJS Git Commit Message Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153)을 참고해 커밋 메시지를 작성한다.
+- 자세한 과제 진행 방법은 프리코스 진행 가이드 문서를 참고한다.
+---
 
-## 🚀 기능 요구 사항
-아래의 기능 요구 사항을 모두 해결해야 한다.
-
+## 기능 요구 사항
+### 기능 추가 목록입니다.
+- [문자열 덧셈 계산기](./docs/PROBLEM1.md)
 
 
 ---
 
-## 🎯 프로그래밍 요구 사항
+## 프로그래밍 요구 사항
 
 - JDK 21 버전에서 실행 가능해야 한다. 
 - 프로그램 실행의 시작점은 ` Applicatioin `의 ` main() `이다.
@@ -52,7 +59,7 @@ BUILD SUCCESSFUL in 0s
     - 기본적으로 Java Style Guide를 원칙으로 한다.
 ---
 
-## ✏️라이브러리
+## 라이브러리
 
 - ` camp.nextstep.edu.missionutils `에서 제공하는 ` Console ` API를 사용하여 구현해야 한다.
     - 사용자가 입력하는 값은 ` camp.nextstep.edu.missionutils.Console `의 ` readLine() `을 활용한다.
