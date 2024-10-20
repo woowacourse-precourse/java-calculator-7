@@ -1,8 +1,9 @@
 package calculator.util;
 
 import static calculator.message.Delimiter.CUSTOM_DELIMITER;
+import static calculator.message.ErrorMessage.EMPTY_INPUT_MESSAGE;
+import static calculator.message.ErrorMessage.NEGATIVE_NUMBER_MESSAGE;
 
-import calculator.message.ErrorMessage;
 import java.util.List;
 
 public class Validator {
@@ -16,7 +17,7 @@ public class Validator {
     // 입력받은 문자열이 공백이라면 예외 처리 (0 을 반환하도록 리팩토링 할 예정)
     private static void isBlank(String str) {
         if (str.isBlank()) {
-            throw new IllegalArgumentException(ErrorMessage.EMPTY_INPUT_MESSAGE);
+            throw new IllegalArgumentException(EMPTY_INPUT_MESSAGE);
         }
     }
 
@@ -24,7 +25,7 @@ public class Validator {
     public static void isNegativeNumber(List<Integer> numbers) {
         numbers.forEach(number -> {
             if (number < 0) {
-                throw new IllegalArgumentException(ErrorMessage.NEGATIVE_NUMBER_MESSAGE);
+                throw new IllegalArgumentException(NEGATIVE_NUMBER_MESSAGE);
             }
         });
     }
