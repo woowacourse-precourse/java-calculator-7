@@ -25,6 +25,7 @@ class TokenizerTest {
         final Tokenizer tokenizer = new Tokenizer(input);
         tokenizer.addSeparator(new CharacterSequenceSeparator(","));
         tokenizer.addSeparator(new CharacterSequenceSeparator(":"));
+
         Assertions.assertThatThrownBy(() -> tokenizer.tokenize())
                 .isInstanceOf(IllegalArgumentException.class);
     }

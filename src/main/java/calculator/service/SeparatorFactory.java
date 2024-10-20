@@ -5,5 +5,4 @@ import java.util.List;
 interface SeparatorFactory {
 
     public List<NumberSeparator> getSeparators();
-
 }

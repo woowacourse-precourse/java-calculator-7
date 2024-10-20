@@ -8,7 +8,6 @@ class CharacterSequenceSeparator implements NumberSeparator {
         this.separateCharacterSequence = separateCharacterSequence;
     }
 
-
     @Override
     public boolean available(final String numberMessage) {
         if (numberMessage.startsWith(this.separateCharacterSequence)) {
