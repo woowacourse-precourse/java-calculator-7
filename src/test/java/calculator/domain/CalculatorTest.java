@@ -12,7 +12,7 @@ class CalculatorTest {
     void 피연산자들을_모두_더한다(){
         // given & when
         final var calculator = new Calculator(Arrays.asList(1.0, 2.0, 3.0));
-        double result = calculator.plus();
+        Number result = calculator.plus();
 
         // then
         assertThat(result).isEqualTo(6);
