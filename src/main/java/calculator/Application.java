@@ -19,6 +19,11 @@ public class Application {
 
         // 사용자 정의 구분자 확인
         String delimiter = "[,:]"; // 기본 구분자
+        if (input.startsWith("//")) {
+            delimiter = input.substring(2, 3);
+            // 사용자 정의 구분자가 여러 문자일 수 있으므로 정규 표현식으로 감싸기
+            input = input.substring(5); // 문자열에서 구분자 부분 제거
+        }
 
         // 구분자를 사용하여 숫자 분리
         String[] numbers = input.split(delimiter);
