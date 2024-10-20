@@ -9,6 +9,10 @@ public class Delimiter {
         this.value = value;
     }
 
+    public boolean doesNotSupport(String delimiterValue) {
+        return !value.contains(delimiterValue);
+    }
+
     private void validate(String value) {
         if (isNumber(value)) {
             throw new IllegalArgumentException("커스텀 구분자는 숫자일 수 없습니다.");

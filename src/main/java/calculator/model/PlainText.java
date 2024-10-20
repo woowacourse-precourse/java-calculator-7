@@ -13,6 +13,19 @@ public class PlainText {
         this.value = text;
     }
 
+    public boolean hasCharExcluding(Delimiter delimiter) {
+        for (int i = 0; i < value.length(); i++) {
+            if (Character.isDigit(value.charAt(i))) {
+                continue;
+            }
+            String delimiterValue = String.valueOf(value.charAt(i));
+            if (delimiter.doesNotSupport(delimiterValue)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void validate(String value) {
         Matcher matcher = NEGATIVE_OR_ZERO_PATTERN.matcher(value);
         if (matcher.find()) {
