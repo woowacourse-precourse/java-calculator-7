@@ -4,7 +4,7 @@ import calculator.model.StringProcessor;
 import calculator.view.InputView;
 import calculator.view.ResultView;
 
-public class StringCalculation {
+public class CalculationController {
 
     public void startCalculate() {
 

@@ -1,14 +1,14 @@
 package calculator;
 
-import calculator.controller.StringCalculation;
+import calculator.controller.CalculationController;
 
 public class Application {
 
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        StringCalculation stringCalculation = new StringCalculation();
+        CalculationController calculationController = new CalculationController();
 
-        stringCalculation.startCalculate();
+        calculationController.startCalculate();
     }
 
 }
