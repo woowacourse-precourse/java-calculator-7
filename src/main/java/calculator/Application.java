@@ -9,7 +9,7 @@ public class Application {
             calculator.removeBlank();
             calculator.addCustomDivider();
             calculator.removeDividerSettings();
-            calculator.makeStringForSplit();
+            calculator.makeStringForToken();
             calculator.extractNumbers();
             calculator.sum();
             calculator.printResult();
