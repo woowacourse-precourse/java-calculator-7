@@ -27,7 +27,7 @@ public class CalculatorServiceTest {
         List<Integer> list = calculatorService.checkAndParseInput(empty);
 
         //then
-        assertThat(list).isEqualTo(List.of(0, 0));
+        assertThat(list).isEqualTo(List.of());
     }
 
     @Test

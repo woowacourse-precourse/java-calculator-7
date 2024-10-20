@@ -79,7 +79,7 @@ class InputParserTest {
         assertThat(result1).isEqualTo(List.of(1, 2, 3));
         assertThat(result2).isEqualTo(List.of(1));
         assertThat(result3).isEqualTo(List.of(4, 5, 6));
-        assertThat(result4).isEqualTo(List.of(0,0)); // 숫자부분 빈 문자열 List(0,0) 처리
+        assertThat(result4).isEqualTo(List.of()); // 숫자부분 빈 문자열 처리
     }
 
     @Test
