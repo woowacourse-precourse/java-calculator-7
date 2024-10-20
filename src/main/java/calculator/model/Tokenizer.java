@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class Tokenizer {
 
-    private static final Pattern CUSTOM_OPERATION_PATTERN = Pattern.compile("^//(.*)\n(.*)");
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("^//(.*)\\\\n(.*)");
     private static final String DEFAULT_DELIMITER = ",|:";
 
     public static ArrayList<Integer> tokenize(String str){
@@ -18,7 +18,7 @@ public class Tokenizer {
         String expression;
 
         if (str.startsWith("//")) {
-            Matcher matcher = CUSTOM_OPERATION_PATTERN.matcher(str);
+            Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(str);
             if(matcher.find()){
                 delimiter = Pattern.quote(matcher.group(1)); // 커스텀 구분자를 사용
                 expression = matcher.group(2); // 표현식은 두 번째 그룹
