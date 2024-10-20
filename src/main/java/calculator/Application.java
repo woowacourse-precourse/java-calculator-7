@@ -2,6 +2,10 @@ package calculator;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        // 입력 규칙 안내
+        InputRulePrinter rulePrinter = new InputRulePrinter();
+        rulePrinter.printInputRules();
+
+        // 입력 처리 및 계산 로직 추가 필요
     }
 }
