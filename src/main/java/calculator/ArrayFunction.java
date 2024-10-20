@@ -26,7 +26,6 @@ class ArrayFunction {
         } else {
             parseArray = inputVal.split("[:|,|" + customSymbol + "]");
         }
-
         return parseArray;
     }
 
@@ -34,11 +33,13 @@ class ArrayFunction {
     static int resultSumValue(String[] parseArray) {
         int[] numArray = Arrays.stream(parseArray).mapToInt(value -> {
             try {
+                value = value.replace(" ", "");
+
                 if (value.isEmpty()) {
                     return 0;
                 }
 
-                int idNum =  Integer.parseInt(value.replace(" ", ""));
+                int idNum =  Integer.parseInt(value);
                 if (idNum > 0) {
                     return idNum;
                 } else if(idNum < 0) {
