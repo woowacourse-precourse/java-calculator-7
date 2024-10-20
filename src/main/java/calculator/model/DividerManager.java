@@ -21,7 +21,6 @@ public class DividerManager {
 
 
     public List<String> getDividers() {
-        System.out.println(dividers.toString());
         return dividers;
     }
 }

@@ -10,7 +10,7 @@ public class CalculatorView {
     }
 
     public void displayResult(int result) {
-        System.out.println("결과 : " + result);
+        System.out.print("결과 : " + result);
         Console.close();
     }
 
