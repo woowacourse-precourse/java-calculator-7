@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class InputStringProcessor {
+public class InputParser {
 
     private static final int BEGIN_INDEX = 0;
     private static final int STR_MIN_LENGTH_FOR_SEPARATOR_EXIST = 5;

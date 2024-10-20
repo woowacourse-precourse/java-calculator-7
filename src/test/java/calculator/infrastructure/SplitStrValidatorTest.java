@@ -10,12 +10,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-class SplitStrListValidatorTest {
+class SplitStrValidatorTest {
 
     @ParameterizedTest
     @MethodSource("provideSplitStrBySeparatorsAndExpectedNumberList")
     void 구분자로_분리된_문자열_리스트를_숫자_리스트로_변환하는_테스트(String[] splitStrBySeparators, List<Long> expectedNumberList) {
-        SplitStrListValidator validator = new SplitStrListValidator();
+        SplitStrValidator validator = new SplitStrValidator();
         assertThat(validator.makeNumberList(splitStrBySeparators)).isEqualTo(expectedNumberList);
     }
 
@@ -35,8 +35,8 @@ class SplitStrListValidatorTest {
     @ParameterizedTest
     @MethodSource("provideInvalidSplitStrBySeparators")
     void 구분자로_분리된_문자열_리스트를_숫자_리스트로_변환하는데_실패하여_예외를_발생시키는_테스트(String[] splitStrBySeparators) {
-        SplitStrListValidator splitStrListValidator = new SplitStrListValidator();
-        assertThatThrownBy(() -> splitStrListValidator.makeNumberList(splitStrBySeparators))
+        SplitStrValidator splitStrValidator = new SplitStrValidator();
+        assertThatThrownBy(() -> splitStrValidator.makeNumberList(splitStrBySeparators))
                 .isInstanceOf(InvalidSplitStrException.class);
     }
 

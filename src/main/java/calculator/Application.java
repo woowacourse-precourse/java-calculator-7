@@ -1,21 +1,21 @@
 package calculator;
 
 import calculator.domain.CalculatorService;
-import calculator.infrastructure.InputStringProcessor;
-import calculator.infrastructure.NumberAddProcessor;
-import calculator.infrastructure.SplitStrListValidator;
+import calculator.infrastructure.AddCalculator;
+import calculator.infrastructure.InputParser;
+import calculator.infrastructure.SplitStrValidator;
 import calculator.interfaces.CalculatorController;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
 
     public static void main(String[] args) {
-        InputStringProcessor inputStringProcessor = new InputStringProcessor();
-        NumberAddProcessor numberAddProcessor = new NumberAddProcessor();
-        SplitStrListValidator splitStrListValidator = new SplitStrListValidator();
+        InputParser inputParser = new InputParser();
+        AddCalculator addCalculator = new AddCalculator();
+        SplitStrValidator splitStrValidator = new SplitStrValidator();
 
-        CalculatorService calculatorService = new CalculatorService(inputStringProcessor, splitStrListValidator,
-                numberAddProcessor);
+        CalculatorService calculatorService = new CalculatorService(inputParser, splitStrValidator,
+                addCalculator);
 
         CalculatorController calculatorController = new CalculatorController(calculatorService);
 

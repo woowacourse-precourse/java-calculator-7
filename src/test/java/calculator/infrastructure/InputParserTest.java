@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
-class InputStringProcessorTest {
+class InputParserTest {
 
     @ParameterizedTest
     @CsvSource({
@@ -21,7 +21,7 @@ class InputStringProcessorTest {
             "12345 '"
     })
     void 잘못된_사용자_입력이_들어왔을때_예외를_발생시키는_테스트(String inputStr) {
-        InputStringProcessor processor = new InputStringProcessor();
+        InputParser processor = new InputParser();
         assertThatThrownBy(() -> processor.validateInputStr(inputStr))
                 .isInstanceOf(InvalidInputStrException.class);
     }
@@ -30,8 +30,8 @@ class InputStringProcessorTest {
     @ParameterizedTest
     @MethodSource("provideInputStrAndIfContainsCustomSeparator")
     void 문자열에_커스텀_구분자가_존재하는지_확인하는_테스트(String inputStr, boolean hasCustomSeparator) {
-        InputStringProcessor inputStringProcessor = new InputStringProcessor();
-        assertThat(inputStringProcessor.checkIfInputStringContainsSeparator(inputStr)).isEqualTo(hasCustomSeparator);
+        InputParser inputParser = new InputParser();
+        assertThat(inputParser.checkIfInputStringContainsSeparator(inputStr)).isEqualTo(hasCustomSeparator);
     }
 
     private static Stream<Arguments> provideInputStrAndIfContainsCustomSeparator() {
@@ -52,8 +52,8 @@ class InputStringProcessorTest {
     @ParameterizedTest
     @MethodSource("provideInputStrAndExpectedSeparators")
     void 구분자_리스트를_만드는_테스트(String inputStr, boolean hasCustomSeparator, Set<Character> expectedSeparators) {
-        InputStringProcessor inputStringProcessor = new InputStringProcessor();
-        assertThat(inputStringProcessor.getSeparatorList(hasCustomSeparator, inputStr)).isEqualTo(expectedSeparators);
+        InputParser inputParser = new InputParser();
+        assertThat(inputParser.getSeparatorList(hasCustomSeparator, inputStr)).isEqualTo(expectedSeparators);
     }
 
     private static Stream<Arguments> provideInputStrAndExpectedSeparators() {
@@ -75,8 +75,8 @@ class InputStringProcessorTest {
     @MethodSource("provideInputStrAndExpectedSlicedStr")
     void 커스텀_문자열을_포함하는_경우_이를_제거하고_그렇지_않다면_문자열을_그대로_반환하는_테스트(String inputStr, boolean hasCustomSeparator,
                                                             String slicedStr) {
-        InputStringProcessor inputStringProcessor = new InputStringProcessor();
-        assertThat(inputStringProcessor.removeSeparatorForm(hasCustomSeparator, inputStr)).isEqualTo(slicedStr);
+        InputParser inputParser = new InputParser();
+        assertThat(inputParser.removeSeparatorForm(hasCustomSeparator, inputStr)).isEqualTo(slicedStr);
     }
 
     private static Stream<Arguments> provideInputStrAndExpectedSlicedStr() {
@@ -97,8 +97,8 @@ class InputStringProcessorTest {
     @ParameterizedTest
     @MethodSource("provideSlicedStrAndSplitStrList")
     void 문자열에서_구분자를_기준으로_자르는_테스트(String slicedStr, Set<Character> separators, String[] strList) {
-        InputStringProcessor inputStringProcessor = new InputStringProcessor();
-        assertThat(inputStringProcessor.splitStrBySeparator(separators, slicedStr)).isEqualTo(strList);
+        InputParser inputParser = new InputParser();
+        assertThat(inputParser.splitStrBySeparator(separators, slicedStr)).isEqualTo(strList);
     }
 
     private static Stream<Arguments> provideSlicedStrAndSplitStrList() {

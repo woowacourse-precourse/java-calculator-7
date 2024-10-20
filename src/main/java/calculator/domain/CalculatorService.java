@@ -1,26 +1,26 @@
 package calculator.domain;
 
-import calculator.infrastructure.InputStringProcessor;
-import calculator.infrastructure.NumberAddProcessor;
-import calculator.infrastructure.SplitStrListValidator;
+import calculator.infrastructure.AddCalculator;
+import calculator.infrastructure.InputParser;
+import calculator.infrastructure.SplitStrValidator;
 import java.util.List;
 import java.util.Set;
 
 public class CalculatorService {
 
-    private final InputStringProcessor inputStringProcessor;
-    private final SplitStrListValidator splitStrListValidator;
-    private final NumberAddProcessor numberAddProcessor;
+    private final InputParser inputParser;
+    private final SplitStrValidator splitStrValidator;
+    private final AddCalculator addCalculator;
 
-    public CalculatorService(InputStringProcessor inputStringProcessor, SplitStrListValidator splitStrListValidator,
-                             NumberAddProcessor numberAddProcessor) {
-        this.inputStringProcessor = inputStringProcessor;
-        this.splitStrListValidator = splitStrListValidator;
-        this.numberAddProcessor = numberAddProcessor;
+    public CalculatorService(InputParser inputParser, SplitStrValidator splitStrValidator,
+                             AddCalculator addCalculator) {
+        this.inputParser = inputParser;
+        this.splitStrValidator = splitStrValidator;
+        this.addCalculator = addCalculator;
     }
 
     public void validateUserInput(String inputStr) {
-        inputStringProcessor.validateInputStr(inputStr);
+        inputParser.validateInputStr(inputStr);
     }
 
     /*
@@ -30,18 +30,18 @@ public class CalculatorService {
      * 4. 남은 문자열을 커스텀 구분자를 기준으로 자르고, 리스트로 반환한다.
      */
     public String[] splitStrBySeparators(String inputStr) {
-        boolean hasCustomSeparator = inputStringProcessor.checkIfInputStringContainsSeparator(inputStr);
-        Set<Character> separators = inputStringProcessor.getSeparatorList(hasCustomSeparator, inputStr);
-        String strRemovedSeparatorForm = inputStringProcessor.removeSeparatorForm(hasCustomSeparator, inputStr);
-        return inputStringProcessor.splitStrBySeparator(separators, strRemovedSeparatorForm);
+        boolean hasCustomSeparator = inputParser.checkIfInputStringContainsSeparator(inputStr);
+        Set<Character> separators = inputParser.getSeparatorList(hasCustomSeparator, inputStr);
+        String strRemovedSeparatorForm = inputParser.removeSeparatorForm(hasCustomSeparator, inputStr);
+        return inputParser.splitStrBySeparator(separators, strRemovedSeparatorForm);
     }
 
     public List<Long> makeNumberList(String[] splitStrBySeparators) {
         // 리스트의 각 요소를 검증하고,  Long 타입으로 변환하여 반환한다.
-        return splitStrListValidator.makeNumberList(splitStrBySeparators);
+        return splitStrValidator.makeNumberList(splitStrBySeparators);
     }
 
     public long sum(List<Long> numberList) {
-        return numberAddProcessor.addAllNumbers(numberList);
+        return addCalculator.addAllNumbers(numberList);
     }
 }
