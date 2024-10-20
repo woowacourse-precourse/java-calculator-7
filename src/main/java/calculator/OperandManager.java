@@ -2,7 +2,6 @@ package calculator;
 
 import static calculator.Constants.*;
 
-import java.math.BigInteger;
 import java.util.LinkedList;
 import java.util.List;
 
