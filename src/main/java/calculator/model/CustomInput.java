@@ -22,6 +22,9 @@ public class CustomInput extends UserInput {
         extractCustomDelimiterAndAdd(userInput, delimiterStartIdx, delimiterEndIdx);
 
         String calculatePart = extractCalculatePart(userInput, delimiterEndIdx + 2);
+
+        if (isCalculatePartEmpty(calculatePart)) return;
+
         String[] splitValues = splitCalculatePartByDelimiters(calculatePart);
 
         try {
@@ -34,6 +37,14 @@ public class CustomInput extends UserInput {
         }
 
         checkValidCalculatePart(calculatePart);
+    }
+
+    private boolean isCalculatePartEmpty(String calculatePart) {
+        if (calculatePart.isEmpty()) {
+            inputNumbers = new long[]{0};
+            return true;
+        }
+        return false;
     }
 
     @Override
