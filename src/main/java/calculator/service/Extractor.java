@@ -41,11 +41,11 @@ public class Extractor {
     private Numbers convertToNumbers(String numberPart) {
         validateNumberPart(numberPart);
         String[] extractedNumbers = splitNumberPart(numberPart);
-        List<Number> numbers = Arrays.stream(extractedNumbers)
+        List<Number> selectedNumbers = Arrays.stream(extractedNumbers)
             .map(Integer::parseInt)
             .map(Number::new)
             .toList();
-        return Numbers.from(numbers);
+        return Numbers.from(selectedNumbers);
     }
 
     private void validateNumberPart(String numberPart) {

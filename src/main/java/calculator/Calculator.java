@@ -21,14 +21,14 @@ public class Calculator {
         outputHandler.showResultMessageWith(numbers.totalSum());
     }
 
-    private Numbers extractNumbers(String userInput) {
-        Extractor extractor = Extractor.from(userInput);
-        return extractor.getNumbers();
-    }
-
     private String getUserInput() {
         outputHandler.showInitialMessage();
         return inputHandler.getUserAction().value();
+    }
+
+    private Numbers extractNumbers(String userInput) {
+        Extractor extractor = Extractor.from(userInput);
+        return extractor.getNumbers();
     }
 
 }
