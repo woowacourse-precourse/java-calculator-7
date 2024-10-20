@@ -12,4 +12,11 @@ public class StringCalculator {
         }
         return sum;
     }
+    private int parseNumber(String token) {
+        try {
+            return Integer.parseInt(token);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("잘못된 입력 값입니다.");
+        }
+    }
 }
