@@ -4,10 +4,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
+    //기본 구분자
     private static final String DEFAULT_DELIMITERS = "[,:]";
+
+    /**
+     * 입력 받은 문자열에서 구분자로 문자열을 배열로 분리
+     */
     public String[] split(String input) {
         StringBuilder delimiter = new StringBuilder(DEFAULT_DELIMITERS);
 
+        //커스텀 구분자 패턴 구분
         Pattern pattern = Pattern.compile("//(.*)\\\\n");
         Matcher matcher = pattern.matcher(input);
 

@@ -3,6 +3,9 @@ package calculator;
 import java.util.Arrays;
 
 public class Calculation {
+    /**
+     * 구분된 문자열 배열에서 숫자를 제외한 모든 문자 필터링
+     */
     public String[] filterNumbers(String input) {
         Parser parser = new Parser();
 
@@ -14,6 +17,9 @@ public class Calculation {
                 .toArray(String[]::new);
     }
 
+    /**
+     * 필터링된 문자열 배열에서 숫자로 변환 후 합 연산
+     */
     public int sumNumbers(String[] exactNumbers) {
         int result = 0;
 
