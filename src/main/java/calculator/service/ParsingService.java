@@ -1,17 +1,35 @@
-package calculator.util;
+package calculator.service;
 
+import calculator.util.StringValidator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class StringParser {
+public class ParsingService {
 
-    // 기본 구분자 상수 정의
     private static final String DEFAULT_DELIMITERS = ",|:";
+    private final StringValidator validator;
 
-    // 입력받은 문자열을 구분자와 양수로 구성된 문자열 List 로 분리함
+    public ParsingService() {
+        this.validator = new StringValidator();
+    }
+
     public List<String> parse(String input) {
+
+        // 입력 유효성 검사
+        validator.validate(input);
+
+        // 문자열 파싱
+        List<String> numbers = stringParse(input);
+
+        // 파싱된 숫자 유효성 검사
+        validator.validateNumbers(numbers);
+
+        return numbers;
+    }
+
+    public List<String> stringParse(String input) {
         String delimiterPattern = DEFAULT_DELIMITERS;
 
         // 커스텀 구분자 정의 조건에 해당할 경우
