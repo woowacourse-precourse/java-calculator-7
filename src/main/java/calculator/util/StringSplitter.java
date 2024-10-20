@@ -18,7 +18,7 @@ public class StringSplitter {
     public static String[] splitUserInput(String userInput) {
         Pattern pattern = Pattern.compile(CUSTOM_SPLITTER_PATTERN);
         Matcher matcher = pattern.matcher(userInput);
-        if (matcher.matches()) {
+        if (matcher.find()) {
             String customDelimiter = matcher.group(1);
             String content = matcher.group(2);
 
