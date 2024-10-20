@@ -4,7 +4,6 @@ import calculator.constants.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -14,7 +13,7 @@ class PositiveNumbersTest {
     @DisplayName("음수인 경우, 예외가 발생한다.")
     public void validatePositive() {
         // given
-        List<Integer> numbers = new ArrayList<>(List.of(-1, 1, 2));
+        List<Integer> numbers = List.of(-1, 1, 2);
 
         // when & then
         assertThatThrownBy(() -> new PositiveNumbers(numbers))
