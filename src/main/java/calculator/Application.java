@@ -19,9 +19,7 @@ public class Application {
 
         try{
             separator = validateString(inputString);
-
             Double result = calculationString(separator,inputString);
-
             System.out.println("결과 : " + result);
         }catch (IllegalStateException err){
             return;
@@ -51,14 +49,13 @@ public class Application {
 
     public static Double calculationString(String separator, String input){
 
-        Double sum=0.0;
-
         if(!separator.equals("[,:]")){
             int i = input.indexOf("\\");
             input = input.substring(i+2);
         }
 
         String[] split = input.split(separator);
+        Double sum=0.0;
 
         try{
             for(String temp : split){
