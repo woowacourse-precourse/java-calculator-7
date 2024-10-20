@@ -1,13 +1,14 @@
-package calculator;
+package calculator.service;
 
+import calculator.domain.Validator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StringConverter {
-    private NumberValidator numberValidator;
+public class ConverterService {
+    private final Validator validator;
 
-    public StringConverter(NumberValidator numberValidator) {
-        this.numberValidator = numberValidator;
+    public ConverterService() {
+        this.validator = new Validator();
     }
 
     public List<Integer> toNumbers(List<String> stringInputs) {
@@ -16,7 +17,7 @@ public class StringConverter {
         return convertToNumbers(sanitizedInputs);
     }
 
-    private List<String> sanitizeInputs(List<String> stringInputs) {
+    public List<String> sanitizeInputs(List<String> stringInputs) { // 공백 0으로 처리
         List<String> sanitizedInputs = new ArrayList<>();
         for (String s : stringInputs) {
             sanitizedInputs.add(sanitizeInput(s));
@@ -24,19 +25,20 @@ public class StringConverter {
         return sanitizedInputs;
     }
 
-    private String sanitizeInput(String input) {
+    public String sanitizeInput(String input) {
         return input.trim().isEmpty() ? "0" : input.trim();  // 한 개 이상 공백 0으로 처리
     }
 
-    private void validateInputs(List<String> sanitizedInputs) {
-        numberValidator.validate(sanitizedInputs);
+    public void validateInputs(List<String> sanitizedInputs) {
+        validator.validateInputs(sanitizedInputs);
     }
 
-    private List<Integer> convertToNumbers(List<String> sanitizedInputs) {
+    public List<Integer> convertToNumbers(List<String> sanitizedInputs) {
         List<Integer> numberInputs = new ArrayList<>();
         for (String s : sanitizedInputs) {
             numberInputs.add(Integer.parseInt(s));
         }
         return numberInputs;
     }
+
 }

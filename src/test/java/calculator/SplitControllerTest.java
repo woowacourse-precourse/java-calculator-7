@@ -1,23 +1,26 @@
 package calculator;
 
+import calculator.domain.Separator;
+import calculator.service.SeparatorService;
+import calculator.service.SplitterService;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class StringSplitterTest {
+class SplitControllerTest {
 
     @Test
     void shouldSplitStringWithoutCustomSeparator() {
-        SeparatorManager sepManager = new SeparatorManager();
-        StringSplitter splitter = new StringSplitter(sepManager);
+        Separator sepManager = new Separator();
+        SplitterService splitterService = new SplitterService();
 
         // 기본 구분자만 있는 문자열
         String input = "1,2:3";
         List<String> separators = sepManager.getSeparators(); // 기본 구분자 리스트 (쉼표, 콜론)
 
         // split 메서드 실행
-        List<String> result = splitter.split(input, separators);
+        List<String> result = splitterService.split(input, separators);
 
         // 결과 확인
         assertEquals(3, result.size(), "입력이 세 부분으로 분리되어야 합니다.");
@@ -29,14 +32,15 @@ class StringSplitterTest {
     @Test
     void shouldSplitStringWithCustomSeparator() {
         String input = "//;\\n1;2,3";
-        SeparatorManager sepManager = new SeparatorManager();
-        String processedInput = sepManager.addCustomSeparatorAndTrim(input); // 커스텀 구분자 세미콜론 추가
-        StringSplitter splitter = new StringSplitter(sepManager);
+        Separator separator = new Separator();
+        SeparatorService separatorService = new SeparatorService(separator);
+        String processedInput = separatorService.processCustomSeparator(input); // 커스텀 구분자 세미콜론 추가
+        SplitterService splitterService = new SplitterService();
 
-        List<String> separators = sepManager.getSeparators(); // 기본 + 커스텀 구분자
+        List<String> separators = separator.getSeparators(); // 기본 + 커스텀 구분자
 
         // split 메서드 실행
-        List<String> result = splitter.split(processedInput, separators);
+        List<String> result = splitterService.split(processedInput, separators);
 
         // 결과 확인
         assertEquals(3, result.size(), "입력이 세 부분으로 분리되어야 합니다.");

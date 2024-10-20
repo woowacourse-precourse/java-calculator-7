@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.service.ConverterService;
 import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
@@ -10,46 +11,39 @@ class StringConverterTest {
 
     @Test
     void shouldThrowExceptionForInvalidCharacterInInput() {
-        NumberValidator numberValidator = new NumberValidator();
-        StringConverter stringConverter = new StringConverter(numberValidator);
+        ConverterService converterService = new ConverterService();
 
         // 유효하지 않은 문자가 포함된 입력
         List<String> input = Arrays.asList("1", "2", "abc", "4");
 
         // 유효하지 않은 문자가 포함되어 있을 때 예외가 발생하는지 확인
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            stringConverter.toNumbers(input);
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> converterService.toNumbers(input));
 
         assertEquals("유효하지 않은 형식입니다: abc", exception.getMessage());
     }
 
     @Test
     void shouldThrowExceptionForNegativeNumbersInInput() {
-        NumberValidator numberValidator = new NumberValidator();
-        StringConverter stringConverter = new StringConverter(numberValidator);
+        ConverterService converterService = new ConverterService();
 
         // 음수가 포함된 입력
         List<String> input = Arrays.asList("1", "-2", "3", "4");
 
         // 음수가 포함되어 있을 때 예외가 발생하는지 확인
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            stringConverter.toNumbers(input);
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> converterService.toNumbers(input));
 
         assertEquals("양수만 허용됩니다: -2", exception.getMessage());
     }
 
     @Test
     void shouldConvertValidStringInputsToIntegerList() {
-        NumberValidator numberValidator = new NumberValidator();
-        StringConverter stringConverter = new StringConverter(numberValidator);
+        ConverterService converterService = new ConverterService();
 
         // 적절한 입력
         List<String> input = Arrays.asList("1", "2", "3", "4");
 
         // 입력을 Integer 리스트로 변환
-        List<Integer> result = stringConverter.toNumbers(input);
+        List<Integer> result = converterService.toNumbers(input);
 
         // 결과 확인
         assertEquals(4, result.size(), "정수 4개가 포함되어야 합니다.");

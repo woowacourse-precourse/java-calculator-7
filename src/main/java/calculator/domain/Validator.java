@@ -1,17 +1,16 @@
-package calculator;
+package calculator.domain;
 
 import java.util.List;
 
-public class NumberValidator {
-
-    public void validate(List<String> stringInputs) {
+public class Validator {
+    public void validateInputs(List<String> stringInputs) {
         for (String s : stringInputs) {
             validateNumberFormat(s);
             validatePositiveNumber(s);
         }
     }
 
-    // 정수인지 확인
+    // 문자열 : 정수인지 확인
     private void validateNumberFormat(String s) {
         try {
             Integer.parseInt(s);
@@ -20,7 +19,7 @@ public class NumberValidator {
         }
     }
 
-    // 양수인지 확인
+    // 문자열 : 양수인지 확인
     private void validatePositiveNumber(String s) {
         int value = Integer.parseInt(s);
         if (value < 0) {
