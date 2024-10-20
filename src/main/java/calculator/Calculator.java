@@ -11,9 +11,16 @@ public class Calculator {
     private static final String CUSTOM_DELIMITER_PATTERN = "//(.*?)\\\\n(.*)";
     private String input;
     private List<String> delimiters = new ArrayList<>(Arrays.asList(",", ":"));
+    private List<String> parts;
 
     public Calculator(String input) {
         this.input = input != null ? input : "";
+    }
+
+    public String add() {
+        addCustomDelimiter();
+        splitInput();
+        return "";
     }
 
     public void addCustomDelimiter() {
@@ -23,9 +30,20 @@ public class Calculator {
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
             input = matcher.group(2);
-
             delimiters.add(Pattern.quote(customDelimiter));
         }
     }
 
+    public void splitInput() {
+        String combinedDelimiters = String.join("|", escapeDelimiters(delimiters));
+        parts = Arrays.asList(input.split(combinedDelimiters));
+    }
+
+    private static List<String> escapeDelimiters(List<String> delimiter) {
+        List<String> escaped = new ArrayList<>();
+        for (String deli : delimiter) {
+            escaped.add(Pattern.quote(deli));
+        }
+        return escaped;
+    }
 }
