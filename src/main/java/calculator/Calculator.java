@@ -33,13 +33,26 @@ public class Calculator {
             return;
         }
 
-        String parsedInput = AddSeparator.addCustomSeparator(userInput);
+        if(WhenInputIsMinusAndSeparatorIsMinus(userInput)){
+            throw new IllegalArgumentException("양수만 입력가능합니다");
+        }
 
-        BigInteger[] toSumArrays = defaultSeparator.separateStringToSum(parsedInput,separatorStorage);
+        try {
+            String parsedInput = AddSeparator.addCustomSeparator(userInput);
 
-        BigInteger sum = calculateComposition.makeSum(toSumArrays);
+            BigInteger[] toSumArrays = defaultSeparator.separateStringToSum(parsedInput, separatorStorage);
+            BigInteger sum = calculateComposition.makeSum(toSumArrays);
 
-        consoleOutputHandler.showFinalOutput(sum);
+            consoleOutputHandler.showFinalOutput(sum);
+        }
+        catch (IllegalArgumentException e){
+            throw e;
+        }
+
+    }
+
+    private static boolean WhenInputIsMinusAndSeparatorIsMinus(String userInput) {
+        return userInput.contains("--");
     }
 
     private static boolean IsUserInputEmptyString(String userInput) {
