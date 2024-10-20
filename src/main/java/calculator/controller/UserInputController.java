@@ -1,18 +1,30 @@
 package calculator.controller;
 
 import calculator.domain.Delimiter;
+import calculator.domain.InputParser;
+import calculator.domain.NumberStorage;
 import calculator.view.UserInput;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserInputController {
-    private final UserInput userInput;
     private final String userInputMessage;
     private final Delimiter delimiter;
 
     public UserInputController(UserInput userInput){
-        this.userInput = userInput;
-        userInputMessage = userInput.promptUserInput();
+        this.userInputMessage = userInput.promptUserInput();
+
         checkDelimiterAndNumber(userInputMessage);
-        delimiter = updateDelimiter(userInputMessage);
+        this.delimiter = updateDelimiter(userInputMessage);
+    }
+
+    public Delimiter getDelimiter() {
+        return delimiter;
+    }
+
+    public String getUserInputMessage() {
+        return userInputMessage;
     }
 
     public static boolean checkNumber(char targetChar){
@@ -49,8 +61,4 @@ public class UserInputController {
             return new Delimiter();
         }
     }
-
-    //커스텀 구분자 이용 사용자 입력이 정상적인지 확인
-
-
 }

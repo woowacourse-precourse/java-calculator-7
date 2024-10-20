@@ -19,4 +19,13 @@ public class Delimiter {
         else throw new IllegalArgumentException();
     }
 
+    public boolean checkDelimiter(char targetChar){
+        if(targetChar == COMMA_DELIMITER || targetChar == COLON_DELIMITER){
+            return true;
+        }
+        else if(CUSTOM_DELIMITER != null && targetChar == CUSTOM_DELIMITER){
+            return true;
+        }
+        else return false;
+    }
 }
