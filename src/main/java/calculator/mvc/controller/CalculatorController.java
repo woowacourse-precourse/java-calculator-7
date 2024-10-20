@@ -38,4 +38,8 @@ public class CalculatorController {
             view.finishProgram();
         }
     }
+
+    public void reset() {
+        model = CalculatorImpl.reset();
+    }
 }

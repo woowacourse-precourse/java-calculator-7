@@ -4,6 +4,7 @@ import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import calculator.mvc.controller.CalculatorController;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,7 @@ import org.junit.jupiter.api.Test;
 class ApplicationTest extends NsTest {
     @BeforeEach
     void setUp() {
-        
+        CalculatorController.getInstance().reset();
     }
 
     @Test
@@ -138,8 +139,8 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀구분자_한글_또는_영어_1() {
         assertSimpleTest(() -> {
-            run("//\\\\n1\\2\\3\\4");
-            assertThat(output()).contains("결과 : 10");
+            run("//가\\n1,2가3");
+            assertThat(output()).contains("결과 : 6");
         });
     }
 

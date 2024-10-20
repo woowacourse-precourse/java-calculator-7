@@ -18,6 +18,10 @@ public class CalculatorImpl implements Calculator {
         return instance;
     }
 
+    public static Calculator reset() {
+        return new CalculatorImpl();
+    }
+
     public void findCustomSeparator(String input) throws IllegalStateException {
         int idx = 2;
 
