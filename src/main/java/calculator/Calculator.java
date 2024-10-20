@@ -12,37 +12,43 @@ public class Calculator {
 
     // [] 입력 문자열 탐색중
     for (int i = 0; i < readLine.length(); i++) {
-      // 문자열이 커스텀 구분자로 시작하면
-      if (readLine.startsWith("//;\\n")) {
-        // 비정상 입력을 체크하고
 
-        // 정상인 경우 결과를 합산한다
-        String numeric = valueOf(readLine.charAt(i));
-        addNumbers(convertToNumber(numeric));
-      }
+      processCustomDelimeter(readLine, i);
       char index = readLine.charAt(i);
+
+      //  인덱스가 기본 구분자 ‘,’ , ‘:’ 인 경우
+      if (index == ',' || index == ':') {
+        // 다음 인덱스 탐색으로 넘어간다
+        continue;
+      }
       // 예외 체크
       checkException(index);
-      // 처리
-      validProcess(index);
+      // 처리 : 정수 요소의 덧셈 결과를 합산한다
+      addNumbers(index);
     }
     // 전달
     return target;
   }
+
+  private void processCustomDelimeter(String readLine, int i) {
+    // 문자열이 커스텀 구분자로 시작하면
+    if (readLine.startsWith("//;\\n")) {
+      // 비정상 입력을 체크하고
+
+      // 정상인 경우 결과를 합산한다
+      String numeric = valueOf(readLine.charAt(i));
+      addNumbers(convertToNumber(numeric));
+    }
+  }
+
   // 문자열을 숫자로 변환
   private static char convertToNumber(String numeric) {
     return (char) parseInt(numeric);
   }
 
-  // 입력값이 유효한 경우를 확인한다
-  public void validProcess(char index) {
-    //  인덱스가 기본 구분자 ‘,’ , ‘:’ 인 경우
-    if (index == ',' || index == ':') {
-      // 건너뛴다
-      return;
-    }
-    addNumbers(index);
-  }
+
+
+
 
   private void addNumbers(char index) {
     // [] 입력 문자열 탐색 중 인덱스가 정수 변환 가능한 경우
@@ -60,10 +66,5 @@ public class Calculator {
       // [] 비정상 입력 예외 처리
       throw new IllegalArgumentException("입력 가능한 문자열인지 확인해주세요. ',', ':'");
     }
-
-
-
-
-
   }
 }

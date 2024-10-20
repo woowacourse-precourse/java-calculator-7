@@ -13,11 +13,6 @@ class FrontendTest {
   private Frontend frontend;
   private PrintStream printStream = System.out;
 
-  @BeforeEach
-  void setUp()  {
-    frontend = new Frontend();
-  }
-
   @AfterEach
   void tearDown() {
     System.setOut(System.out);

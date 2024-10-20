@@ -121,16 +121,15 @@ class CalculatorTest {
   @Test
   public void 입력값이_유효한_경우를_확인한다() throws Exception{
       //given
-      char[] delimeters = new char[]{',', ':', ';'};
+      String customDelimeter = "//;\\n1;2;3";
+      String defaultDelimeter = "1,0:5,9";
+
+    // "this.calculator" is null
+    int calculateCustom = calculator.calculating(customDelimeter);
+    int calculateDefault = calculator.calculating(defaultDelimeter);
 
 
-      boolean expect = true;
-      for (char element : delimeters) {
-        //then
-        assertEquals(expect, calculator.validProcess(element));
-      }
-    boolean actualCustom = calculator.readline.subString(0, 5) == custom;
-    assertEquals(expect, actualCustom);
+
   }
 
 }
