@@ -3,10 +3,11 @@ package calculator;
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        // 문자열 입력받기
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
         String inputStr;
         String convertedStr;
+
+        // 문자열 입력받기
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         inputStr = camp.nextstep.edu.missionutils.Console.readLine();
         // 문자열이 ""인 경우 0 출력
         if (inputStr==""){
@@ -31,15 +32,13 @@ public class Application {
         String[] separatedNumbers;
         String finalStr = new String(entireStr);
         separatedNumbers = finalStr.split(",");
-        System.out.println(separatedNumbers);
-
 
         // 합계 도출하기
         int sum=0;
         IllegalArgumentException printError = new IllegalArgumentException();
         for (String num : separatedNumbers){
             //구분자 사이 숫자가 없는 경우 고려
-            if(num==""){
+            if(num.isEmpty()){
                 continue;
             }
 
