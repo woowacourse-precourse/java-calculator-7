@@ -7,8 +7,8 @@ public class CalculatorController {
 
     private final Calculator calculator;
 
-    public CalculatorController(Calculator calculator) {
-        this.calculator = calculator;
+    public CalculatorController() {
+        this.calculator = new Calculator();
     }
 
     public void run(){
