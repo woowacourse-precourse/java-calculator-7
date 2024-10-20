@@ -26,7 +26,7 @@ public class Separators {
     }
 
     private void validateSeparator(Separator separator) {
-        if (isDefaultSeparator(separator.getRegex())) {
+        if (isDefaultSeparator(separator.regex())) {
             throw new IllegalArgumentException("기본 구분자인 쉼표(,)와 콜론(:)은 커스텀 구분자로 사용할 수 없어요. 다른 구분자를 사용해주세요.");
         }
         if (separators.size() >= Constants.MAX_SEPARATORS) {
@@ -42,7 +42,7 @@ public class Separators {
 
     public List<String> getValues() {
         return separators.stream()
-                .map(Separator::getRegex)
+                .map(Separator::regex)
                 .toList();
     }
 }

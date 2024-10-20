@@ -1,4 +1,4 @@
-package calculator.service;
+package calculator.service.command;
 
 import calculator.service.separator.Separator;
 import calculator.util.Constants;

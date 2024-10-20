@@ -2,13 +2,10 @@ package calculator.service.separator;
 
 import calculator.util.Constants;
 
-public class Separator {
+public record Separator(String regex) {
 
-    private final String regex;
-
-    private Separator(String regex) {
+    public Separator {
         validateRegex(regex);
-        this.regex = regex;
     }
 
     public static Separator create(String regex) {
@@ -30,9 +27,5 @@ public class Separator {
             throw new IllegalArgumentException(
                     String.format("해당 구분자(%s)는 커스텀 구분자로 사용할 수 없어요. (사유: %s) 다른 구분자를 사용해주세요.", regex, reason));
         }
-    }
-
-    public String getRegex() {
-        return regex;
     }
 }

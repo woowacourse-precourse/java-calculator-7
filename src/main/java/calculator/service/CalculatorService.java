@@ -1,5 +1,8 @@
 package calculator.service;
 
+import calculator.service.command.Command;
+import calculator.service.command.CommandExtractor;
+import calculator.service.command.ExpressionSplitter;
 import calculator.service.separator.Separators;
 import calculator.util.Constants;
 import java.util.Arrays;
