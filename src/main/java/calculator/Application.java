@@ -46,6 +46,10 @@ public class Application {
             }
         }
 
+        System.out.println(MESSAGE_NORMAL_RESULT + " : " + getSumResult(userInput, delimiterRegex));
+    }
+
+    private static int getSumResult(String userInput, String delimiterRegex) {
         int sumResult = 0;
 
         for (String numberToken : userInput.split(delimiterRegex)) {
@@ -66,8 +70,7 @@ public class Application {
             }
             sumResult += parsedInt;
         }
-
-        System.out.println(MESSAGE_NORMAL_RESULT + " : " + sumResult);
+        return sumResult;
     }
 
     private static String getProblematicInputMessage(String problematicInput) {
