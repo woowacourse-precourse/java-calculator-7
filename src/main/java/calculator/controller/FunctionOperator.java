@@ -22,29 +22,17 @@ public class FunctionOperator {
     }
 
     public void run() {
-        outputView.askInput();
-        String input = inputView.input();
+        // 입력 받기
+        String input = inputView.askInput();
 
-        List<String> separated = new ArrayList<>();
-        List<String> separators = new ArrayList<>(Arrays.asList(",", ":"));
-        // 전처리
-        if (preprocessing.firstLetter(input)) {
-            // 커스텀 구분자 추출
-            List<String> customAndLeft = preprocessing.findCustomSeparator(input);
-            separators.add(customAndLeft.get(0));
+        // 전처리: 구분자 처리 및 숫자 추출
+        List<String> separated = preprocessing.processInput(input);
 
-            // 숫자 - !숫자 구분
-            separated = preprocessing.separation(customAndLeft.get(1), separators);
-        } else {
-            // 숫자 - !숫자 구분
-            separated = preprocessing.separation(input, separators);
-        }
-
-        // 구분자 유효하면 sum
-        int answer = addition.pickNumbers(separated);
+        // 계산하기
+        int result = addition.calculate(separated);
 
         // 결과 출력
-        outputView.printAnswer(answer);
+        outputView.printResult(result);
     }
 
 }
