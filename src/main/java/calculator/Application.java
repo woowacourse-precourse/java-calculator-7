@@ -34,6 +34,16 @@ public class Application {
     private static String[] split(String input) {
         String delimiter = ",|:";  // 기본 구분자: 쉼표와 콜론
 
+        if (input.startsWith("//")) {
+            int delimiterIndex = input.indexOf("\n");
+            if (delimiterIndex == -1) {
+                throw new IllegalArgumentException("커스텀 구분자가 올바르지 않습니다.");
+            }
+            // 커스텀 구분자 추출
+            delimiter = input.substring(2, delimiterIndex);
+            input = input.substring(delimiterIndex + 1);  // 구분자 이후의 숫자들만 남김
+        }
+
         return input.split(delimiter);  // 기본 및 커스텀 구분자에 따라 분리
     }
 
