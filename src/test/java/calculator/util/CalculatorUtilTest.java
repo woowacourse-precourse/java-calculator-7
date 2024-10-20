@@ -3,6 +3,7 @@ package calculator.util;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import calculator.common.util.CalculatorUtil;
 import calculator.service.InputValidator;
 import java.util.ArrayList;
 import java.util.List;

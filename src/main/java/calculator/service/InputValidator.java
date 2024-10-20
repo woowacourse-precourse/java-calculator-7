@@ -1,9 +1,8 @@
 package calculator.service;
 
-import static calculator.util.CalculatorUtil.*;
+import static calculator.common.util.CalculatorUtil.*;
 
-import calculator.constants.RegexPatterns;
-import calculator.util.CalculatorUtil;
+import calculator.common.constants.RegexPatterns;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

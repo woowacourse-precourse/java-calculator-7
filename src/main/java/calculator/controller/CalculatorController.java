@@ -3,7 +3,7 @@ package calculator.controller;
 import calculator.service.InputValidator;
 import calculator.view.View;
 import calculator.service.CalculatorService;
-import calculator.util.CalculatorUtil;
+import calculator.common.util.CalculatorUtil;
 
 public class CalculatorController {
     private final CalculatorService calculatorService;

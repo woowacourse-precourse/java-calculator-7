@@ -2,7 +2,7 @@ package calculator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import calculator.constants.CalculatorMessages;
+import calculator.common.constants.CalculatorMessages;
 import calculator.view.View;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
