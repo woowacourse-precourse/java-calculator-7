@@ -11,8 +11,11 @@ public class StringAdditionService {
         String[] tokens = StringUtils.extractNumbers(input);
         int sum = 0;
         for (String token : tokens) {
+            if (StringUtils.isEmpty(token)) {
+                continue;
+            }
             try {
-                int number = Integer.parseInt(token);
+                int number = Integer.parseInt(token.trim());
                 if (number < 0) {
                     throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
                 }

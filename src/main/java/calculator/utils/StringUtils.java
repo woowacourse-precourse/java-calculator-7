@@ -12,9 +12,9 @@ public class StringUtils {
 
     public static String[] extractNumbers(String input) {
         String delimiters = DEFAULT_DELIMITERS;
-        Matcher matcher = Pattern.compile("^//(.)\\n(.*)").matcher(input);
+        Matcher matcher = Pattern.compile("^//(.)\\\\n(.*)").matcher(input);
         if (matcher.find()) {
-            delimiters = matcher.group(1);
+            delimiters = Pattern.quote(matcher.group(1));
             input = matcher.group(2);
         }
         return input.split(delimiters);
