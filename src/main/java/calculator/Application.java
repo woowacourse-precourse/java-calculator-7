@@ -36,7 +36,9 @@ public class Application {
     }
 
     private static char getCustomDelimiter(String input) {
-
+        if (input.length() < 5) {
+            throw new IllegalArgumentException();
+        }
         for (int i = 1; i <= 4; i++) {
             if (i == 1 && input.charAt(i) != CUSTOM_DELIMITER_FORMAT.charAt(1)) {
                 throw new IllegalArgumentException();
