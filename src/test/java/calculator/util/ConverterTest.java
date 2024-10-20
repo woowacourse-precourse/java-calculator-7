@@ -13,7 +13,16 @@ class ConverterTest {
 
     @Test
     void customDelimiterTest() {
-        String string = "//customDelimiter\n1,2customDelimiter3,4";
-        Assertions.assertThat(Converter.stringToNumbers(string)).isEqualTo(List.of(1, 2, 3, 4));
+        String string1 = "//\\n1,2,3"; // "//;\n1";
+        Assertions.assertThat(Converter.stringToNumbers(string1)).isEqualTo(List.of(1, 2, 3));
+
+        String string2 = "//;\\n1;2;3"; // "//;\n1;2;3
+        Assertions.assertThat(Converter.stringToNumbers(string2)).isEqualTo(List.of(1, 2, 3));
+
+        String string3 = "// \\n1 2 3"; // "// \n1 2 3"
+        Assertions.assertThat(Converter.stringToNumbers(string3)).isEqualTo(List.of(1, 2, 3));
+
+        String string4 = "//\\\\n1\\2\\3"; // "//\\n1\2\3"
+        Assertions.assertThat(Converter.stringToNumbers(string4)).isEqualTo(List.of(1, 2, 3));
     }
 }
