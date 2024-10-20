@@ -17,10 +17,18 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트() {
+    void 예외_테스트_음수() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_숫자가_아닌_경우() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("1,2,3,a"))
+                .isInstanceOf(NumberFormatException.class)
         );
     }
 
