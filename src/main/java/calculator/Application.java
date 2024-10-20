@@ -9,6 +9,7 @@ public class Application {
     public static void main(String[] args) {
         int result = 0;
 
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
         ArrayList <String> delimiters = new ArrayList<>(Arrays.asList(",",":"));
         // 재사용성을 위해 값을 유동적으로 추가할 수 있는 리스트로 설정
@@ -52,7 +53,7 @@ public class Application {
                 }
                 result += Integer.parseInt(a);
             }
-            System.out.println(result); // 결과 출력!(성공)
+            System.out.println("결과 : "+result); // 결과 출력!(성공)
 
         }catch (IllegalArgumentException e){
             System.out.println(e.getMessage());
