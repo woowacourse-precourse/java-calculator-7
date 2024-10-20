@@ -89,6 +89,14 @@ class ResultTest extends NsTest {
     }
 
     @Test
+    void 다중_백슬래시_커스텀_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("//\\\\\\n1\\\\2\\\\3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
     void 백슬래시_문자_커스텀_구분자_사용() {
         assertSimpleTest(() -> {
             run("//\\x\\n1\\x2\\x3");
