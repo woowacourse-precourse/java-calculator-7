@@ -12,6 +12,10 @@ public class CalculatorService {
 
     public Integer calculateNumberTotal(String input) {
         List<Integer> numbers = separator.extractNumbers(input);
-        return calculator.calculateTotal(numbers);
+        try {
+            return calculator.calculateTotal(numbers);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("계산 과정에서 오류가 발생하였습니다.");
+        }
     }
 }
