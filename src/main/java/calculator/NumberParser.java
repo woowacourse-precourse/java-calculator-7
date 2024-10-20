@@ -7,16 +7,11 @@ public class NumberParser {
 
     public static final String NEGATIVE_PATTERN = "-\\d+";
 
-    public String[] replaceNumber(String[] inputArr) {
-        for (int i = 0; i < inputArr.length; i++) {
-
-            if (checkNegative(inputArr[i])) {
-                throw new IllegalArgumentException();
-            }
-
-            inputArr[i] = inputArr[i].replaceAll("[^0-9]", "");
+    public String[] removeNonDigits(String[] splitArr) {
+        for (int i = 0; i < splitArr.length; i++) {
+            splitArr[i] = splitArr[i].replaceAll("[^0-9]", "");
         }
-        return inputArr;
+        return splitArr;
     }
 
     public int sumNumber(String[] inputArr) {
@@ -29,10 +24,15 @@ public class NumberParser {
         return sum;
     }
 
-    public boolean checkNegative(String input) {
+    public boolean checkNegative(String[] inputArr) {
         Pattern pattern = Pattern.compile(NEGATIVE_PATTERN);
-        Matcher matcher = pattern.matcher(input);
 
-        return matcher.find();
+        for (int i = 0; i < inputArr.length; i++) {
+            Matcher matcher = pattern.matcher(inputArr[i]);
+            if (matcher.matches()) {
+                throw new IllegalArgumentException();
+            }
+        }
+        return true;
     }
 }
