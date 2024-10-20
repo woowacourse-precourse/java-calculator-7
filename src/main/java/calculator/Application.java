@@ -20,4 +20,18 @@ public class Application {
         return input != null && !input.isEmpty();
     }
 
+    public static String[] seperator(String input){
+        String[] arr;
+
+        if(input.contains("//") && input.contains("\\n")){
+            int i = input.indexOf("//");
+            String s = "" + input.charAt(i+2);
+            arr = input.split(s);
+        } else {
+            arr = input.split(",|:");
+        }
+
+        return arr;
+    }
+
 }
