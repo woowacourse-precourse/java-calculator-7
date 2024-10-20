@@ -17,6 +17,10 @@ class ExpressionModel {
         this.operand = new ArrayList<>();
     }
 
+    int isCustom(String input) {
+        return input.indexOf("//");
+    }
+
     int plusData() {
         return cntData;
     }
