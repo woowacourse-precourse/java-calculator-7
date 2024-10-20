@@ -4,12 +4,12 @@ package calculator.util;
 public class CustomSeparatorParser {
 
 
-    public static final String CUSTOM_SEPARATOR_SUFFIX = "//";
-    public static final String CUSTOM_SEPARATOR_PREFIX = "\\n";
+    public static final String CUSTOM_SEPARATOR_PREFIX = "//";
+    public static final String CUSTOM_SEPARATOR_SUFFIX = "\\n";
 
     public static Boolean hasCustomSeparator(String input) {
-        String suffix = input.substring(0, 2);
-        String prefix = input.substring(3, 5);
+        String prefix = input.substring(0, 2);
+        String suffix = input.substring(3, 5);
 
         return CUSTOM_SEPARATOR_PREFIX.equals(prefix) && CUSTOM_SEPARATOR_SUFFIX.equals(suffix);
     }
