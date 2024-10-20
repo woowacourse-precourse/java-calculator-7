@@ -3,7 +3,7 @@ package calculator.infrastructure;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import calculator.exception.InvalidInputStrException;
+import calculator.common.exception.InvalidInputStrException;
 import java.util.Set;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;

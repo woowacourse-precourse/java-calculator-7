@@ -1,7 +1,7 @@
 package calculator.infrastructure;
 
-import calculator.exception.InvalidSplitStrException;
-import calculator.exception.NonNumericCharacterException;
+import calculator.common.exception.InvalidSplitStrException;
+import calculator.common.exception.NonNumericCharacterException;
 import java.util.ArrayList;
 import java.util.List;
 

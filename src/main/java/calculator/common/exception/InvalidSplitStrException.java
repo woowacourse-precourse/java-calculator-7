@@ -1,4 +1,4 @@
-package calculator.exception;
+package calculator.common.exception;
 
 public class InvalidSplitStrException extends RuntimeException {
     public InvalidSplitStrException(String splitStr, Exception e) {

@@ -1,4 +1,4 @@
-package calculator.exception;
+package calculator.common.exception;
 
 public class NonNumericCharacterException extends RuntimeException {
     public NonNumericCharacterException(char c) {

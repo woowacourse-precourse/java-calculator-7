@@ -1,4 +1,4 @@
-package calculator.exception;
+package calculator.common.exception;
 
 public class InvalidInputStrException extends RuntimeException {
     public InvalidInputStrException(String inputStr) {

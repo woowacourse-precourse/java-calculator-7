@@ -1,4 +1,4 @@
-package calculator.exception;
+package calculator.common.exception;
 
 public class OutOfLongRangeException extends RuntimeException {
     public OutOfLongRangeException(Long sum, Long number, Exception e) {

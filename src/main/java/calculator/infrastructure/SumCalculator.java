@@ -1,6 +1,6 @@
 package calculator.infrastructure;
 
-import calculator.exception.OutOfLongRangeException;
+import calculator.common.exception.OutOfLongRangeException;
 import java.util.List;
 
 public class SumCalculator {
