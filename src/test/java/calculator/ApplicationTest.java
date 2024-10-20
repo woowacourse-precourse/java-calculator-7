@@ -112,6 +112,17 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 연산할_숫자보다_더_많은_구분자_사용_예외_테스트() {
+        assertSimpleTest(() -> {
+                    assertThatThrownBy(() -> runException("1::3"))
+                            .isInstanceOf(IllegalArgumentException.class);
+                    assertThatThrownBy(() -> runException("1:2:3:"))
+                            .isInstanceOf(IllegalArgumentException.class);
+                }
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
