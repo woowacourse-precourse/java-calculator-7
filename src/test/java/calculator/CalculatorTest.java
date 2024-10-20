@@ -1,8 +1,9 @@
 package calculator;
 
-import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import org.junit.jupiter.api.Test;
 
 class CalculatorTest {
     @Test
@@ -79,5 +80,27 @@ class CalculatorTest {
 
         //Then
         assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    void 예외_음수가_있을_경우() {
+        //given
+        final Calculator calculator = new Calculator();
+        final String str = "-3,3,2";
+
+        //when, Then
+        assertThatThrownBy(() -> calculator.sum(str))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 예외_플러스_기호가_있을_경우() {
+        //given
+        final Calculator calculator = new Calculator();
+        final String str = "3,+3,2";
+
+        //when, Then
+        assertThatThrownBy(() -> calculator.sum(str))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -17,16 +17,27 @@ public class Calculator {
         return null;
     }
 
+    public int parseAndValidate(String s) {
+
+        if (!s.matches("\\d+")) {
+            throw new IllegalArgumentException("유효하지 않은 숫자 형식입니다: " + s);
+        }
+
+        int number = Integer.parseInt(s);
+
+        return number;
+    }
+
     public int sum(String str) {
 
-        if(str == null || str.isEmpty()) {
+        if (str == null || str.isEmpty()) {
             return 0;
         }
 
         String custom = findCustomSeparator(str);
         String regex = ",|:";
 
-        if(custom != null) {
+        if (custom != null) {
             regex += "|" + custom;
             str = str.substring(5);
         }
@@ -34,13 +45,8 @@ public class Calculator {
         String[] nums = str.split(regex);
         int sum = 0;
 
-        for(String s : nums) {
-            try {
-                int number = Integer.parseInt(s);
-                sum += number;
-            } catch (Exception e) {
-                throw new IllegalArgumentException();
-            }
+        for (String s : nums) {
+            sum += parseAndValidate(s);
         }
 
         return sum;
