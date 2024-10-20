@@ -26,4 +26,8 @@ public class CustomDelimterParser {
 
         return Optional.of(customDelimiter);
     }
+
+    public String getRemainingInput() {
+        return input.replaceFirst(regex, "");  // 커스텀 구분자 부분 제거
+    }
 }

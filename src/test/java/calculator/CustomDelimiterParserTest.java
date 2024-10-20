@@ -44,4 +44,30 @@ public class CustomDelimiterParserTest {
             customDelimterParser.getCustomDelimiter().get();
         });
     }
+
+    @Test
+    void 커스텀_구분자_제거() {
+        // given
+        String input = "//;\\n1";
+        CustomDelimterParser customDelimterParser = new CustomDelimterParser(input);
+
+        // when
+        String remainingInput = customDelimterParser.getRemainingInput();
+
+        // then
+        assertThat(remainingInput).isEqualTo("1");
+    }
+
+    @Test
+    void 커스텀_구분자_제거_미사용() {
+        // given
+        String input = "1";
+        CustomDelimterParser customDelimterParser = new CustomDelimterParser(input);
+
+        // when
+        String remainingInput = customDelimterParser.getRemainingInput();
+
+        // then
+        assertThat(remainingInput).isEqualTo("1");
+    }
 }

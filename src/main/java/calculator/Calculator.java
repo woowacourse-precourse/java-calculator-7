@@ -30,6 +30,7 @@ public class Calculator {
     private void parsingCustomDelimiter() {
         Optional<String> customDelimiter = customDelimterParser.getCustomDelimiter();
         customDelimiter.ifPresent(s -> delimiter.add(s));
+        this.analyzingTarget = customDelimterParser.getRemainingInput();
     }
 
     private void printStartMessage() {
