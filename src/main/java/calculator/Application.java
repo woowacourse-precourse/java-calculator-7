@@ -1,6 +1,6 @@
 package calculator;
 
-import java.util.Scanner;
+import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static String[] getCustomDelimiterAndContent(String input) {
@@ -42,9 +42,8 @@ public class Application {
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter your input");
-        String input = scanner.nextLine();
+        String input = Console.readLine();
 
         String[] delimiterAndContent = getCustomDelimiterAndContent(input);
 
@@ -64,5 +63,7 @@ public class Application {
             System.err.println(e.getMessage());
             System.exit(1);
         }
+
+        Console.close();
     }
 }
