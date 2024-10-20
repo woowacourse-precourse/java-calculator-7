@@ -14,19 +14,19 @@ public class StringParser {
         List<Character> delimiters = DelimeterHandler.extractDelimiters(input);
 
         int numberStartIdx = 0;
+        int numberEndIdx = 0;
         for (int i = 0; i < inputWithoutCustomDelimiter.length(); i++) {
-            if (delimiters.contains(inputWithoutCustomDelimiter.charAt(i)) == true
-                    || i == inputWithoutCustomDelimiter.length() - 1) {
+            boolean isLastCharacter = (i == inputWithoutCustomDelimiter.length() - 1);
+            boolean isDelimiter = delimiters.contains(inputWithoutCustomDelimiter.charAt(i));
 
-                int ifend = 0;
-                if (i == inputWithoutCustomDelimiter.length() - 1) {
-                    ifend = 1;
-                }
-                String number = inputWithoutCustomDelimiter.substring(numberStartIdx, i + ifend);
+            if (isDelimiter == true || isLastCharacter == true) {
+                numberEndIdx = isLastCharacter ? i : i - 1;
+                String number = inputWithoutCustomDelimiter.substring(numberStartIdx, numberEndIdx + 1);
 
                 if (number.matches(NUMBER_REGEX) == false) {
                     throw new IllegalArgumentException("Invalid number: " + number);
                 }
+
                 BigInteger bigint = new BigInteger(number);
                 numberList.add(bigint);
                 numberStartIdx = i + 1;
