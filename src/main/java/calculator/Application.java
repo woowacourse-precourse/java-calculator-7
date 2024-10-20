@@ -44,8 +44,8 @@ public class Application {
 
     private static String[] separateNumbers(String input) {
         return Arrays.stream(input.split("[:,]")).map(String::trim)
-                .filter(s -> !s.isEmpty())
-                .toArray(String[]::new);
+            .filter(s -> !s.isEmpty())
+            .toArray(String[]::new);
     }
 
     private static void emptyCheck(String[] numbers) {
