@@ -11,12 +11,11 @@ public class CalculatorInputParser {
         String separators = ",|:";
 
         if (initialString.startsWith("//")) {
-//          구분자가 //<문자>\n 형태인가
             validationUtil.isValidSeparatorType(initialString);
             separators = separators + "|" + setExtraSeparator(initialString);
             initialString = initialString.substring(5);
         }
-        System.out.println(separators);
+//        System.out.println(separators);
 
         String[] numList = initialString.split(separators);
         List<Integer> integerList = new ArrayList<>();
@@ -31,7 +30,6 @@ public class CalculatorInputParser {
 //            System.out.println(Integer.valueOf(s));
         }
         return integerList;
-
     }
 
     private String setExtraSeparator(String initialString) {
@@ -42,7 +40,5 @@ public class CalculatorInputParser {
             return "\\" + extraSeparator;
         }
         return initialString.substring(2, 3);
-
     }
-
 }
