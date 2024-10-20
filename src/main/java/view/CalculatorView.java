@@ -17,5 +17,6 @@ public class CalculatorView {
 
     public void showResult(int result) {
         System.out.printf("결과 : %d%n", result);
+
     }
 }
