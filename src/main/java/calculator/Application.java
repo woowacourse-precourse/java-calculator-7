@@ -2,6 +2,7 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -9,10 +10,9 @@ import java.util.Stack;
 public class Application {
 
     public static void main(String[] args) {
-
         List<String> number = new ArrayList<>();
-        List<Integer> sumList;
-        int total = 0;
+        List<BigInteger> sumList;
+        BigInteger total = BigInteger.ZERO;
 
         for (int i = 0; i < 10; i++) {
             number.add(String.valueOf(i));
@@ -33,7 +33,7 @@ public class Application {
 
         // 출력
         for (int i = 0; i < sumList.size(); i++) {
-            total += sumList.get(i);
+            total = total.add(sumList.get(i));
         }
 
         System.out.println("결과 : " + total);
@@ -48,9 +48,9 @@ public class Application {
         }
     }
 
-    public static List<Integer> checkStr (String[] splitStr, int start, List<String> number, String delimiter) {
+    public static List<BigInteger> checkStr (String[] splitStr, int start, List<String> number, String delimiter) {
         Stack<String> digits = new Stack<>();
-        List<Integer> sumNumbers = new ArrayList<>();
+        List<BigInteger> sumNumbers = new ArrayList<>();
 
         for (int i = start; i < splitStr.length; i++) {
             if (splitStr[i].equals(",") || splitStr[i].equals(":") || splitStr[i].equals(delimiter)) {
@@ -69,19 +69,19 @@ public class Application {
         return sumNumbers;
     }
 
-    public static void digitsToNumber (Stack<String> digits, List<Integer> sumNumbers) {
+    public static void digitsToNumber (Stack<String> digits, List<BigInteger> sumNumbers) {
         if (digits.size() == 1) {
-            sumNumbers.add(Integer.valueOf(digits.pop()));
+            sumNumbers.add(new BigInteger(digits.pop()));
         } else {
-            int sum = 0;
+            BigInteger sum = BigInteger.ZERO;
             while (!digits.empty()) {
                 int count = digits.size();
-                int a = Integer.parseInt(digits.pop());
+                BigInteger a = new BigInteger(digits.pop());
 
                 for (int i = 0; i < count - 1; i++) {
-                    a = a * 10;
+                    a = a.multiply(BigInteger.TEN);
                 }
-                sum += a;
+                sum = sum.add(a);
             }
             sumNumbers.add(sum);
         }
