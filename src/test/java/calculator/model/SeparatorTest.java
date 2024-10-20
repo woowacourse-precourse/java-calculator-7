@@ -3,6 +3,7 @@ package calculator.model;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,16 @@ import org.junit.jupiter.api.TestMethodOrder;
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class SeparatorTest {
+    /**
+     * 테스트 종료 후 Separator의 구분자를 초기화한다.
+     */
+    @AfterAll
+    static void tearDown() {
+        Separator.getSeparators().clear();
+        Separator.addSeparator(',');
+        Separator.addSeparator(':');
+    }
+
     /**
      * 기본 구분자인 ','와 ':'가 포함된 구분자 리스트를 반환하는지 확인한다.
      */
