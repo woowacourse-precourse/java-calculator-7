@@ -1,6 +1,8 @@
 package calculator.util;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class StringSplitter {
     private String input;
@@ -10,17 +12,15 @@ public class StringSplitter {
     }
 
     public List<String> split(String delimiter) {
-        // 먼저 \\n을 실제 줄 바꿈 문자로 변환
-        input = input.replace("\\n", "\n");
-
         if (input.startsWith("//")) {
-            String[] parts = input.split("\n", 2);  // \n을 기준으로 구분
-            if (parts.length < 2) {
+            int newLineIndex = input.indexOf("\\n");
+            if (newLineIndex == -1) {
                 throw new IllegalArgumentException("올바른 형식의 커스텀 구분자를 입력해 주세요.");
             }
-            String customSeparator = parts[0].substring(2);  // 커스텀 구분자 추출
-            return List.of(parts[1].split(customSeparator));
+            String customDelimiter = input.substring(2, newLineIndex);
+            String numbers = input.substring(newLineIndex + 2); // "\\n" 다음부터 시작
+            return Arrays.asList(numbers.split(Pattern.quote(customDelimiter)));
         }
-        return List.of(input.split(delimiter));  // 기본 구분자 처리
+        return Arrays.asList(input.split(delimiter));
     }
 }
