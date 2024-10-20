@@ -13,6 +13,25 @@ public class Application {
         String[] lines = input.split("\\\\n");
 
         String separator = getSeparator(lines[0]);
+        int[] numbers =  getNumbers(lines[1], separator);
+    }
+
+    private static int[] getNumbers(String input, String separator) {
+        String[] tokens = input.split(separator);
+        int[] numbers = new int[tokens.length];
+
+        for (int i = 0; i < tokens.length; i++) {
+            validateNumber(tokens[i]);
+            numbers[i] = Integer.parseInt(tokens[i]);
+        }
+
+        return numbers;
+    }
+
+    private static void validateNumber(String number) {
+        if (!number.matches("[0-9]+")) {
+            throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
+        }
     }
 
     private static String getSeparator(String header) {
