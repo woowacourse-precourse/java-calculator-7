@@ -1,24 +1,21 @@
 package calculator;
 
-import calculator.controller.InputController;
-import calculator.service.CalculatorService;
-import calculator.view.ConsoleView;
-
 public class Application {
-
     public static void main(String[] args) {
-        String input = InputController.getInput();
+        // 입력과 출력 담당
+        ConsoleService consoleService = new ConsoleService();
 
+        // 구분자 처리 담당
+        DelService delService = new DelService();
+
+        // 숫자 처리 및 계산 담당
         CalculatorService calculatorService = new CalculatorService();
 
-        if (input.startsWith("//")) {
-            InputController.addCustomDelimiter(input);
-        }
+        // DependencyInjection 필요한 의존성 주입
+        DependencyInjection dependencyInjection = new DependencyInjection(consoleService, delService,
+                calculatorService);
 
-        calculatorService.validate(input);
-        calculatorService.calculate(input);
-
-        ConsoleView.showResult(calculatorService.getResult());
-        calculatorService.resetResult();
+        // 프로그램 실행
+        dependencyInjection.execute();
     }
 }
