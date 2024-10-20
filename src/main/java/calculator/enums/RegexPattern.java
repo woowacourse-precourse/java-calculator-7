@@ -7,7 +7,8 @@ public enum RegexPattern {
     BLANK_IN_START(Pattern.compile("^\\s.*")),
     BLANK_IN_END(Pattern.compile(".*\\s$")),
     CONTAINS_NUMERIC(Pattern.compile(".*\\d+.*")),
-    CUSTOM_DELIMITER_DECLARATION(Pattern.compile("//(.*?)\\\\n"));
+    CUSTOM_DELIMITER_DECLARATION(Pattern.compile("//(.*?)\\\\n")),
+    FIRST_NUMBER_PATTERN(Pattern.compile("\\d"));
 
     private final Pattern pattern;
 

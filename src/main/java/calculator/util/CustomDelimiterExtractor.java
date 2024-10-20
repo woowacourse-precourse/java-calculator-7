@@ -4,31 +4,25 @@ import calculator.enums.ErrorMessage;
 import calculator.enums.RegexPattern;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Matcher;
 
 public class CustomDelimiterExtractor {
-    public static final String DELIMITER_PREFIX = "//";
-    public static final String DELIMITER_SUFFIX = "\\n";
-
 
     private CustomDelimiterExtractor() {
     }
 
     public static Set<String> parse(String input) {
         Set<String> delimiters = new HashSet<>();
+        int firstNumberIndex = findFirstNumberIndex(input);
 
-        int currentIndex = 0;
+        Matcher customDelimiterMatcher = RegexPattern.CUSTOM_DELIMITER_DECLARATION.matcher(input);
 
-        while (findPrefixIndex(input, currentIndex) != -1) {
-            int suffixIndex = findSuffixIndex(input, currentIndex);
-            if (suffixIndex == -1) {
-                throw new IllegalArgumentException(ErrorMessage.DELIMITER_SUFFIX_NOT_FOUND.getMessage());
-            }
+        while (customDelimiterMatcher.find()) {
+            validateCustomDelimiterPosition(firstNumberIndex, customDelimiterMatcher.start());
 
-            String delimiter = extractDelimiter(input, currentIndex, suffixIndex);
+            String delimiter = customDelimiterMatcher.group(1);
             validateDelimiter(delimiter);
             delimiters.add(delimiter);
-
-            currentIndex = suffixIndex + DELIMITER_SUFFIX.length();
         }
 
         return delimiters;
@@ -37,6 +31,11 @@ public class CustomDelimiterExtractor {
     private static void validateDelimiter(String delimiter) {
         validateNotEmpty(delimiter);
         validateNotNumeric(delimiter);
+    }
+
+    private static int findFirstNumberIndex(String input) {
+        Matcher matcher = RegexPattern.FIRST_NUMBER_PATTERN.matcher(input);
+        return matcher.find() ? matcher.start() : -1;
     }
 
     private static void validateNotEmpty(String delimiter) {
@@ -51,15 +50,9 @@ public class CustomDelimiterExtractor {
         }
     }
 
-    private static int findPrefixIndex(String input, int currentIndex) {
-        return input.indexOf(DELIMITER_PREFIX, currentIndex);
-    }
-
-    private static int findSuffixIndex(String input, int startIndex) {
-        return input.indexOf(DELIMITER_SUFFIX, startIndex + DELIMITER_PREFIX.length());
-    }
-
-    private static String extractDelimiter(String input, int startIndex, int endIndex) {
-        return input.substring(startIndex + DELIMITER_PREFIX.length(), endIndex);
+    private static void validateCustomDelimiterPosition(int firstNumberIndex, int prefixIndex) {
+        if (firstNumberIndex != -1 && firstNumberIndex < prefixIndex) {
+            throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_MUST_BE_IN_FRONT.getMessage());
+        }
     }
 }

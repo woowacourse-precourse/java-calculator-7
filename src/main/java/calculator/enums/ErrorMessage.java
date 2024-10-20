@@ -6,7 +6,8 @@ public enum ErrorMessage {
     LAST_CHAR_CANNOT_BE_SPACE("입력 문자열의 마지막 문자는 공백일 수 없습니다."),
     DELIMITER_SUFFIX_NOT_FOUND("구분자 접두사에 대응하는 구분자 접미사를 찾을 수 없습니다."),
     CUSTOM_DELIMITER_NOT_FOUND("\"//\"'와 \"\\n\" 사이에 구분자가 입력되지 않았습니다."),
-    CUSTOM_DELIMITER_CANNOT_CONTAIN_NUMERIC("커스텀 구분자에는 숫자가 포함될 수 없습니다");
+    CUSTOM_DELIMITER_CANNOT_CONTAIN_NUMERIC("커스텀 구분자에는 숫자가 포함될 수 없습니다."),
+    CUSTOM_DELIMITER_MUST_BE_IN_FRONT("커스텀 구분자는 문자열 앞쪽에 위치해야 합니다.");
 
     private final String message;
 
