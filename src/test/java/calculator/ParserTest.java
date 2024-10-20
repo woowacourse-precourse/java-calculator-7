@@ -77,7 +77,19 @@ class ParserTest {
 		//then
 		assertThat(parser.getSeparators().size()).isEqualTo(3);
 		assertThat(parser.getSeparators().contains(";")).isEqualTo(true);
+	}
 
+	@Test
+	public void 커스텀_구분자가_기존과_동일() {
+		//given
+		Parser parser = new Parser();
+
+		//when
+		parser.savePersonalSeparator(":");
+
+		//then
+		assertThat(parser.getSeparators().size()).isEqualTo(2);
+		assertThat(parser.getSeparators().contains(":")).isEqualTo(true);
 	}
 
 	@Test
