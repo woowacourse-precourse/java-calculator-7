@@ -59,8 +59,8 @@ class DelimiterExtractorTest {
         @Test
         void 여러개의_커스텀_구분자를_처리한다() {
             // given
-            String input = "//@\\n//&\\n4&6@7";
-            Set<String> expectedDelimiters = Set.of("@", "&");
+            String input = "//@\\n//&%\\n4&%6@7";
+            Set<String> expectedDelimiters = Set.of("@", "&%");
 
             // when
             Set<String> result = CustomDelimiterExtractor.parse(input);
@@ -78,6 +78,19 @@ class DelimiterExtractorTest {
             assertThatThrownBy(() -> CustomDelimiterExtractor.parse(input))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(ErrorMessage.CUSTOM_DELIMITER_MUST_BE_IN_FRONT.getMessage());
+        }
+
+        @Test
+        void 여러_글자로_된_커스텀_구분자를_처리한다() {
+            // given
+            String input = "//@@\\n1@@2@@3";
+            Set<String> expectedDelimiters = Set.of("@@");
+
+            // when
+            Set<String> result = CustomDelimiterExtractor.parse(input);
+
+            // then
+            assertThat(result).isEqualTo(expectedDelimiters);
         }
 
     }
