@@ -18,6 +18,8 @@ class CalculatorTest {
 
     @Test
     void 기본_구분자_사용() {
+        assertThat(calculator.splitAndSum("1,2,3")).isEqualTo(6);
+        assertThat(calculator.splitAndSum("1:2:3")).isEqualTo(6);
         assertThat(calculator.splitAndSum("1,2:3")).isEqualTo(6);
     }
 
@@ -26,6 +28,17 @@ class CalculatorTest {
         assertThat(calculator.splitAndSum("//;\\n1;2;3")).isEqualTo(6);
         assertThat(calculator.splitAndSum("//.\\n1.2.3")).isEqualTo(6);
         assertThat(calculator.splitAndSum("//;\\n1;2,3:4")).isEqualTo(10);
+    }
+
+    @Test
+    void 구분자가_잘못된_위치에_있는_경우_예외_테스트() {
+        assertThatThrownBy(() -> calculator.splitAndSum(",1,2"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("구분자가 잘못된 위치에 있습니다. 입력값: [,1,2]");
+
+        assertThatThrownBy(() -> calculator.splitAndSum("1,2,"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("구분자가 잘못된 위치에 있습니다. 입력값: [1,2,]");
     }
 
     @Test
