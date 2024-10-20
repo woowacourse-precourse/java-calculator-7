@@ -13,13 +13,13 @@ public class Application {
             int total = 0;
             String separator = null;
             String num = null;
-            String[] str;
+            String[] str= null;
 
             System.out.println("덧셈할 문자열을 입력해주세요. ");
             String line = Console.readLine();
 
             if(line.isEmpty()|| line==null){
-                str[0] = 0 ;
+                str[0] = String.valueOf(0);
             }
 
             if(line.matches(".*[가-힣]+.*")|| line.contains("-"))
