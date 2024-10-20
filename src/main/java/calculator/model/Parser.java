@@ -1,42 +1,28 @@
 package calculator.model;
 
-import calculator.ErrorMessage;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 public class Parser {
     private Delimiters delimiters;
     private String input;
+    private ParsingStrategy parsingStrategy;
 
     public Parser(String input) {
         this.input = input;
         this.delimiters = new Delimiters();
+        setParsingStrategy(input);
     }
 
     public List<Integer> parse() {
+        return parsingStrategy.parse(input);
+    }
+
+    private void setParsingStrategy(String input) {
         if (delimiters.hasCustomDelimiter(input)) {
-            delimiters.addCustomDelimiter(input);
-            input = input.substring(5);
-            return getIntegers();
+            parsingStrategy = new CustomDelimiterParsingStrategy(delimiters);
         }
-        return getIntegers();
-    }
-
-    private List<Integer> getIntegers() {
-        List<String> result = new ArrayList<>();
-        StringTokenizer stringTokenizer = new StringTokenizer(input, delimiters.toConcatenatedString());
-        while (stringTokenizer.hasMoreTokens()) {
-            result.add(stringTokenizer.nextToken());
+        if (!delimiters.hasCustomDelimiter(input)) {
+            parsingStrategy = new DefaultDelimiterParsingStrategy(delimiters);
         }
-        return result.stream().map(this::getPositiveNumber).toList();
-    }
-
-    private Integer getPositiveNumber(String number) {
-        Integer integerNumber = Integer.parseInt(number);
-        if (integerNumber <= 0) {
-            throw new IllegalArgumentException(ErrorMessage.INTEGER_OUT_OF_RANGE.getMessage());
-        }
-        return integerNumber;
     }
 }
