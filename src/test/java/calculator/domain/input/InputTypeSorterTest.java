@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class InputTypeSorterTest {
 
-    @Testgit
+    @Test
     void 빈_문자열_입력() {
         assertThat(InputTypeSorter.sort("")).isEqualTo(EmptyInput.from(""));
         assertThat(InputTypeSorter.sort(null)).isEqualTo(EmptyInput.from(null));

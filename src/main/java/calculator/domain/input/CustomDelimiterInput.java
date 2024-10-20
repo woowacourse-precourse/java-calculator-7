@@ -30,7 +30,7 @@ public class CustomDelimiterInput extends Input {
         String[] strings = StringUtil.splitText(
                 findString(matcher), findCustom(matcher)
         );
-
+        
         return Arrays.stream(strings)
                 .map(InputValidator::validateOnlyPlainNumber)
                 .peek(InputValidator::validatePositive)
