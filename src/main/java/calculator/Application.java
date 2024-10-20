@@ -27,10 +27,10 @@ public class Application {
             input = input.substring(5);
         }
         String[] numbers = input.split(delimiter);
-        if(numbers.length==0){
-            return;
-        }
+
         for (String number : numbers) {
+            if(number.equals(""))
+                continue;
             try{
                 int num=0;
                 try {
