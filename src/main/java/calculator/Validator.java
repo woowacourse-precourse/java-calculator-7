@@ -5,9 +5,9 @@ public class Validator {
 
     public static void isValidCustomDelimiter() {
         String input = Application.getInput();
-        if (input.substring(0, 2).equals("//") == false ||
-                input.substring(3, 5).equals("\\n") == false)
-            throw new IllegalArgumentException("Format is invalid.");
+        if (Application.getSubstringOfInput(0, 2).equals("//") == false ||
+                Application.getSubstringOfInput(3, 5).equals("\\n") == false)
+            throw new IllegalArgumentException(Constants.INVALID_FORMAT);
 
     }
 
@@ -15,26 +15,24 @@ public class Validator {
        if (character != '-' && character != '+' &&
            character != ',' && character != ':' &&
            Character.isDigit(character) == false)
-           throw new IllegalArgumentException("Format is invalid.");
+           throw new IllegalArgumentException(Constants.INVALID_FORMAT);
     }
 
 //    public static boolean isValidCustomDelimiterString() {
 //        String input = Application.getInput();
-//            throw new IllegalArgumentException("Format is invalid.");
+//            throw new IllegalArgumentException(Constants.INVALID_FORMAT);
 //        return true;
 //    }
 
     public static int isValidCharacterPosition() {
-        String input = Application.getInput();
-        char[] charString = input.toCharArray();
+        char[] charString = Application.getInputToCharArray();
         int curIdx = Calculator.getCurIdx();
-        boolean signFlag = false;
 
         if (charString[curIdx] == '+' || charString[curIdx] == '-')
             curIdx++;
-        while (curIdx < input.length() && charString[curIdx] != delimiter) {
+        while (curIdx < Application.getInputSize() && charString[curIdx] != delimiter) {
             if (Character.isDigit(charString[curIdx]) == false)
-                throw new IllegalArgumentException("Format is invalid.");
+                throw new IllegalArgumentException(Constants.INVALID_FORMAT);
             curIdx++;
         }
         return curIdx;
