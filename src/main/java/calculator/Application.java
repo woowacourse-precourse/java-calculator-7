@@ -83,7 +83,6 @@ class CalculatorModel {
     private final DelimiterModel delimiter = new DelimiterModel();
 
     public int calculate(ExpressionModel expressionModel) {
-        // 커스텀 구분자 등록
         String nonDelimiterSection = expressionModel.getExpression();
 
         if (expressionModel.hasCustomDelimiter()) {
@@ -91,11 +90,9 @@ class CalculatorModel {
             nonDelimiterSection = expressionModel.nonDelimiterSection();
         }
 
-        // 구분자로 문자열 자르기
         String[] numbers = nonDelimiterSection.split(delimiter.getDelimiter());
 
         PositiveNumberModel sum = new PositiveNumberModel(0);
-        // 숫자 합 계산
         for (String nowNum : numbers) {
             sum.plus(nowNum);
         }
@@ -126,7 +123,7 @@ class CalculatorController {
         this.view = view;
     }
 
-    public void calculate(int cnt) {
+    public void run() {
         String expression = view.getUserInput();
 
         // 데이터 처리
