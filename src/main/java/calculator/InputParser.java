@@ -10,20 +10,20 @@ public class InputParser {
     private final String DEFAULT_DELIMITER_PATTERN = "[,:]";
     private final String CUSTOM_DELIMITER_START_POSITION = "//";
     private final String CUSTOM_DELIMITER_END_POSITION = "\\n";
+    private final String SINGLE_INPUT = "-?\\d+";
     private final int CUSTOM_DELIMITER_START_INDEX = 2;
     private final int NEWLINE_OFFSET = 2;
-    private final String SINGLE_INPUT = "-?\\d+";
 
     public List<Integer> parseInputToIntList(String input) {
         if (input.isBlank()) return List.of(0);
 
         if (isSingleInput(input)) return convertToIntList(input);
 
-        String standardizedInput = replaceDelimiters(input);
+        String standardizedInput = standardizeDelimiters(input);
         return convertToIntList(standardizedInput);
     }
 
-    private String replaceDelimiters(String input) {
+    private String standardizeDelimiters(String input) {
         if (isStartingWithCustom(input)) {
             int delimiterEndIndex = findDelimiterEndIndex(input);
             String customDelimiter = input.substring(
@@ -33,12 +33,12 @@ public class InputParser {
             String numbersPart = input.substring(
                     delimiterEndIndex + NEWLINE_OFFSET
             );
-            return replaceAll(numbersPart, customDelimiter);
+            return replaceDelimiterToCommon(numbersPart, customDelimiter);
         }
-        return replaceAll(input, DEFAULT_DELIMITER_PATTERN);
+        return replaceDelimiterToCommon(input, DEFAULT_DELIMITER_PATTERN);
     }
 
-    private String replaceAll(String input, String delimiter) {
+    private String replaceDelimiterToCommon(String input, String delimiter) {
         if (input.contains(",") || input.contains(":")) {
             return input.replaceAll(delimiter, COMMON_DELIMITER);
         }

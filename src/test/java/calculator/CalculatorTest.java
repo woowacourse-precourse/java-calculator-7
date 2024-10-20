@@ -109,6 +109,11 @@ class CalculatorTest {
         int result2 = calculator.calculate(case2);
         int result3 = calculator.calculate(case3);
         //then
+        Assertions.assertAll(
+                () -> assertEquals(60, result1),
+                () -> assertEquals(606, result2),
+                () -> assertEquals(6066, result3)
+        );
         assertEquals(60, result1);
         assertEquals(606, result2);
         assertEquals(6066, result3);
