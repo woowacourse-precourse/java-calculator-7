@@ -64,4 +64,23 @@ class CalculatorServiceTest {
 
         assertEquals("글자는 들어올 수 없습니다", exception.getMessage());
     }
+
+    @DisplayName("음수 입력이 들어오면, 에러 발생")
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "1,-2,3",   // 음수가 두 번째 위치
+            "-1,2,3",   // 음수가 첫 번째 위치
+            "1,2,-3",   // 음수가 세 번째 위치
+            "-1,-2,3",  // 음수가 첫 번째와 두 번째 위치
+            "1,-2:-3"   // 음수가 두 번째와 세 번째 위치, 콜론과 쉼표 혼합
+    })
+    void add_negativeNumber_throwsException(String input) {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            CalculatorService.add(input);
+        });
+
+        // 예외 메시지에 음수가 포함되어 있는지 확인
+        assertEquals("음수는 허용되지 않습니다", exception.getMessage());
+    }
+
 }
