@@ -61,6 +61,13 @@ public class Application {
 
     private static int sumNumbers(String[] numbers) {
         int sum = 0;
+        for (String number : numbers) {
+            try {
+                sum += Integer.parseInt(number.trim());
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("잘못된 숫자 형식입니다.");
+            }
+        }
         return sum;
     }
 }
