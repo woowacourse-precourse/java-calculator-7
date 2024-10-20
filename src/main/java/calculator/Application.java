@@ -35,7 +35,11 @@ public class Application {
             //공백인 경우
             total = 0;
 
-        }else if(!Character.isDigit(userInput.charAt(0))){
+        }else if(userInput.startsWith("0")){
+            //양수에 대해서만 처리하므로 0은 잘못된 형식의 값
+            throw new IllegalArgumentException();
+        }
+        else if(!Character.isDigit(userInput.charAt(0))){
             //문자열이 숫자로 시작하지 않는 경우(잘못된 입력)
             throw new IllegalArgumentException();
 
