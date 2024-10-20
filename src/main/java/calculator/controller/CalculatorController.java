@@ -20,6 +20,8 @@ public class CalculatorController {
 
     private void play() {
         String expression = InputView.expression();
-        calculatorService.separate(calculator.getSeparators(), expression);
+        int[] number = calculatorService.separate(calculator.getSeparators(), expression);
+        calculator.setNumber(number);
+        calculator.calc();
     }
 }

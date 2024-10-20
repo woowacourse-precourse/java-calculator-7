@@ -6,6 +6,7 @@ import java.util.List;
 public class Calculator {
 
     private List<String> separators;
+
     private int[] number;
     private int result;
 
@@ -24,5 +25,21 @@ public class Calculator {
         if (!separators.contains(separator)) {
             separators.add(separator);
         }
+    }
+
+    public int[] getNumber() {
+        return number;
+    }
+
+    public void setNumber(int[] number) {
+        this.number = number;
+    }
+
+    public void calc() {
+        int sum = 0;
+        for (int num : number) {
+            sum += num;
+        }
+        this.result = sum;
     }
 }

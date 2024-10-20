@@ -7,9 +7,8 @@ import java.util.regex.Pattern;
 
 public class CalculatorService {
     private static final Pattern CUSTOM_SEPARATOR_REGEX = Pattern.compile("//(.*)\\\\n(.*)");
-    private String[] tokens;
 
-    public void separate(List<String> separators, String expression) {
+    public int[] separate(List<String> separators, String expression) {
         String cleanedExpression = expression.replaceAll("\\s+", "");
         String customSeparator = extractCustomSeparator(cleanedExpression);
 
@@ -18,11 +17,21 @@ public class CalculatorService {
             cleanedExpression = removeCustomSeparatorDefinition(cleanedExpression);
         }
 
-        this.tokens = cleanedExpression.split(String.join("|", separators));
+        String[] tokens = cleanedExpression.split(String.join("|", separators));
 
         validateStartPositiveNumber(tokens[0]);
         validateIsNumber(tokens);
         validateIsPositiveNumber(tokens);
+
+        return convertToIntArray(tokens);
+    }
+
+    private int[] convertToIntArray(String[] tokens) {
+        int[] numbers = new int[tokens.length];
+        for (int i = 0; i < tokens.length; i++) {
+            numbers[i] = Integer.parseInt(tokens[i]);
+        }
+        return numbers;
     }
 
     private String extractCustomSeparator(String expression) {
