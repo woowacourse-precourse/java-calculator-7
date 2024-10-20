@@ -1,13 +1,14 @@
 package calculator.input;
+
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class DefaultInput {
-    public int defaultParseSum(String input){
+    public int defaultParseSum(String input) {
         StringTokenizer tokenizer = new StringTokenizer(input, ",:");
         ArrayList<Integer> tokens = new ArrayList<>();  // 구분된 토큰을 저장할 리스트
 
-        while(tokenizer.hasMoreTokens()){
+        while (tokenizer.hasMoreTokens()) {
             String token = tokenizer.nextToken();
 
             // 구분자를 통해 분리한 토큰이 숫자가 아닌 경우 예외 처리
@@ -28,7 +29,7 @@ public class DefaultInput {
         }
         // 합을 저장할 변수
         int result = 0;
-        for(int num:tokens){
+        for (int num : tokens) {
             result += num;
         }
         return result;

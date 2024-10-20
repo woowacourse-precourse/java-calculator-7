@@ -11,11 +11,10 @@ public class Application {
         // 덧셈 결과 저장할 변수
         int result = 0;
 
-        if(input.startsWith("//")){
+        if (input.startsWith("//")) {
             CustomInput customInput = new CustomInput();
             result = customInput.customParseSum(input);
-        }
-        else{
+        } else {
             DefaultInput defaultInput = new DefaultInput();
             result = defaultInput.defaultParseSum(input);
         }

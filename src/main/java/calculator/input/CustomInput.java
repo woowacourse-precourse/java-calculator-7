@@ -1,4 +1,5 @@
 package calculator.input;
+
 import java.util.ArrayList;
 
 public class CustomInput {
@@ -22,9 +23,9 @@ public class CustomInput {
         String[] tokens = numberPart.split(delimiterPart);
         int result = 0;
 
-        for(String token : tokens) {
+        for (String token : tokens) {
             // 토큰이 숫자인지 확인
-            if(!token.matches("\\d+")){
+            if (!token.matches("\\d+")) {
                 throw new IllegalArgumentException("숫자가 아닌 문자가 포함되어 있습니다");
             }
             int tokenToInt = Integer.parseInt(token);
