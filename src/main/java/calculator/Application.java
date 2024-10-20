@@ -1,7 +1,10 @@
 package calculator;
 
+import calculator.service.CalculatorStarter;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        final CalculatorStarter calculatorStarter = new CalculatorStarter();
+        calculatorStarter.calculate();
     }
 }
