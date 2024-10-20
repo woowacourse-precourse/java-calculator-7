@@ -46,7 +46,7 @@ public class Application {
             if (num < 0) {
                 throw new IllegalArgumentException("음수 입력 불가능 합니다." );
             }
-            sum += Integer.parseInt(number);
+            sum += num;
         }
         return sum;
 
