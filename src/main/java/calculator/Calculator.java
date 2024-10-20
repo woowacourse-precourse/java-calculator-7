@@ -34,19 +34,18 @@ public class Calculator {
             throw new IllegalArgumentException();
         }
         String customDelimiter = input.substring(2, idx); // 구분자 추출
-        System.out.println("customDelimiter = " + customDelimiter);
         String str = input.substring(idx + 2); // \n 이후 부분 추출
         String escapedDelimiter = Pattern.quote(customDelimiter);
-        System.out.println("escapedDelimiter = " + escapedDelimiter);
         return str.split(escapedDelimiter); // 이스케이프된 구분자로 분리
     }
 
     // 분리된 문자열을 숫자로 바꿔 더하는 메서드
     private int sumNumbers(String[] numbers) {
+        CheckMinus checkMinus = new CheckMinus();
         int sum = 0;
         for (String number : numbers) {
             int num = convertParseInt(number);
-            checkMinus(num);
+            checkMinus.checkMinus(num);
             sum += num;
         }
         return sum;
@@ -58,12 +57,5 @@ public class Calculator {
             return 0;
         }
         return Integer.parseInt(number);
-    }
-
-    // 음수 체크
-    private void checkMinus(int num) {
-        if (num < 0) {
-            throw new IllegalArgumentException();
-        }
     }
 }

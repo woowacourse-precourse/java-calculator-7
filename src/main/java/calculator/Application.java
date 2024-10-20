@@ -15,7 +15,5 @@ public class Application {
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException();
         }
-
-
     }
 }
