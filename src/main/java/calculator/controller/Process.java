@@ -1,9 +1,8 @@
 package calculator.controller;
 
-import calculator.exception.SeparatorException;
+
 import calculator.view.InputView;
 import calculator.view.OutputView;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +14,7 @@ public class Process {
     private List<Character> basicSeparator = new ArrayList<>(Arrays.asList(':', ','));
     OutputView outputView = new OutputView();
 
-    public void run() throws SeparatorException {
+    public void run() {
 
         userInput = inputView.getInput();
         if (isSeparator()) {
