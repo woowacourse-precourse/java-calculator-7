@@ -30,7 +30,7 @@ public class Extracts {
   }
 
   private String convertToRegex(String[] delimiters) {
-    String regex = "[";
+    String regex = "[:,";
     for (String delimiter : delimiters) {
       regex += delimiter;
     }
