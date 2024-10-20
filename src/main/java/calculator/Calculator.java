@@ -13,7 +13,6 @@ public class Calculator {
             return;
         }
 
-
         String[] tmp;
 
         if(input.startsWith("//")){
@@ -23,18 +22,19 @@ public class Calculator {
                 System.out.println("결과 : " + letters);
                 return;
             }
-            assert customSeparator != null;
+            if(customSeparator == null){
+                throw new IllegalArgumentException("ERROR : 구분자가 없습니다.");
+            }
             tmp = letters.split(customSeparator);
         }else{
-
-            String separator = "[,:;]";
+            String separator = "[,:]";
+            if(!input.contains(",") && !input.contains(":")){
+                throw new IllegalArgumentException("ERROR : 계산할 수 없는 입력입니다.");
+            }
             tmp = input.split(separator);
         }
 
-
-
         System.out.println("결과 : " + sum(tmp));
-
 
     }
 
@@ -42,15 +42,18 @@ public class Calculator {
         int total = 0;
         for(String token : tokens){
             String trimmedToken = token.trim();
+            if(!trimmedToken.matches("^[0-9]*$") ){
+                throw new IllegalArgumentException("ERROR : 계산할 수 없는 입력입니다.");
+            }
             int value = Integer.parseInt(trimmedToken);
             if (value < 0) {
-                throw new IllegalArgumentException("ERROR : 음수는 허용되지 않습니다." + value);
+                throw new IllegalArgumentException("ERROR : 음수는 허용되지 않습니다.");
             }
             total += value;
         }
         return total;
     }
-    
+
 
     private static String findCustomSeparator(String input){
         input = input.replace("\\n", "\n"); // \\n을 실제 줄바꿈 \n으로 변환
