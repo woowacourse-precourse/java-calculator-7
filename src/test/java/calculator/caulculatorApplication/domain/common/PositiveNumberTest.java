@@ -1,7 +1,7 @@
-package calculator.caulculatorApplication.domain.parser;
+package calculator.caulculatorApplication.domain.common;
 
-import static calculator.calculatorApplication.domain.parser.vo.PositiveNumberExceptionMessage.NO_EMPTY;
-import static calculator.calculatorApplication.domain.parser.vo.PositiveNumberExceptionMessage.NO_NEGATIVE;
+import static calculator.calculatorApplication.domain.common.PositiveNumberExceptionMessage.NO_EMPTY;
+import static calculator.calculatorApplication.domain.common.PositiveNumberExceptionMessage.NO_NEGATIVE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;

@@ -1,8 +1,8 @@
 package calculator.calculatorApplication.domain.parser.impl;
 
 import calculator.calculatorApplication.domain.calculation.NumberParser;
+import calculator.calculatorApplication.domain.common.PositiveNumbers;
 import calculator.calculatorApplication.domain.parser.StringProcessor;
-import calculator.calculatorApplication.domain.parser.vo.PositiveNumbers;
 import java.util.List;
 import java.util.stream.Collectors;
 

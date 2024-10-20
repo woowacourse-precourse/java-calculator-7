@@ -1,4 +1,4 @@
-package calculator.calculatorApplication.domain.parser.vo;
+package calculator.calculatorApplication.domain.common;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,4 +1,4 @@
-package calculator.caulculatorApplication.domain.parser;
+package calculator.caulculatorApplication.domain.common;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class PositiveNumbersTest {
+public class PositiveNumbersTest {
     private final List<PositiveNumberTest> numbers;
 
     public PositiveNumbersTest(List<Integer> numbers) {

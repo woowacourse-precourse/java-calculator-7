@@ -1,4 +1,4 @@
-package calculator.calculatorApplication.domain.parser.vo;
+package calculator.calculatorApplication.domain.common;
 
 public class PositiveNumber {
     private static final int ZERO = 0;

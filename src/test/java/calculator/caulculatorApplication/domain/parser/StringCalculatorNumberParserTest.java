@@ -1,10 +1,11 @@
 package calculator.caulculatorApplication.domain.parser;
 
-import static calculator.caulculatorApplication.domain.parser.PositiveNumberExceptionMessageTest.NO_NEGATIVE;
+import static calculator.caulculatorApplication.domain.common.PositiveNumberExceptionMessageTest.NO_NEGATIVE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 
+import calculator.caulculatorApplication.domain.common.PositiveNumbersTest;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;

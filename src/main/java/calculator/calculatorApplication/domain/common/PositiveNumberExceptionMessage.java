@@ -1,4 +1,4 @@
-package calculator.calculatorApplication.domain.parser.vo;
+package calculator.calculatorApplication.domain.common;
 
 public enum PositiveNumberExceptionMessage {
 
