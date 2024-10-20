@@ -16,11 +16,27 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 커스텀_구분자_소수_사용() {
+        assertSimpleTest(() -> {
+            run("//;\\n0.3;0.3");
+            assertThat(output()).contains("결과 : 0.6");
+        });
+    }
+
 
     @Test
     void 기본_구분자_사용() {
         assertSimpleTest(() -> {
             run("1:2,3:4,5:6,10");
+            assertThat(output()).contains("결과 : 31");
+        });
+    }
+
+    @Test
+    void 기본_구분자_소수_사용() {
+        assertSimpleTest(() -> {
+            run("1.5:1.5,2.5:3.5,5.5:6.5,10");
             assertThat(output()).contains("결과 : 31");
         });
     }

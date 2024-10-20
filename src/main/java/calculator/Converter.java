@@ -2,13 +2,13 @@ package calculator;
 
 public class Converter {
 
-    public int convertToValidInteger(String token) {
+    public double convertToValidNumber(String token) {
         String trimToken = (token.trim());
         if (trimToken.isEmpty()) {
             return 0;
         }
         try {
-            int num = Integer.parseInt(trimToken);
+            double num = Double.parseDouble(trimToken);
 
             validateNonNegative(num);
             return num;
@@ -20,7 +20,7 @@ public class Converter {
     }
 
 
-    private void validateNonNegative(int num) {
+    private void validateNonNegative(double num) {
         if (num < 0) {
             throw new IllegalArgumentException("음수는 허용되지 않습니다.");
         }

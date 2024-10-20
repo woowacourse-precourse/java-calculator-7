@@ -22,16 +22,20 @@ public class Calculator {
 
         String[] numList = delimiter.getNumList(inputString);
 
-        int sum = 0;
+        double sum = 0;
 
         for (String token : numList) {
 
             String trimToken = token.trim();
 
-            sum += converter.convertToValidInteger(trimToken);
+            sum += converter.convertToValidNumber(trimToken);
 
         }
 
-        System.out.println("결과 : " + sum);
+        if (Math.floor(sum) == sum) {
+            System.out.println("결과 : " + (int) sum);
+        } else {
+            System.out.println("결과 : " + sum);
+        }
     }
 }
