@@ -77,8 +77,8 @@ public class Delimiter {
         }
     }
 
-    private void validateDelimiterIsPeriod(char Delimiter) {
-        if (Delimiter == '.') {
+    private void validateDelimiterIsPeriod(char delimiter) {
+        if (delimiter == '.') {
             throw new IllegalArgumentException("커스텀 구분자에 '.'이 들어올 수 없습니다.");
         }
     }
