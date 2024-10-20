@@ -46,7 +46,10 @@ public class InputHandler {
         String[] extractedStrings = target.split(regExp);
 
         validateExtractedNumbers(extractedStrings);
+        addToExtractedNumbers(extractedStrings);
+    }
 
+    public void addToExtractedNumbers(String[] extractedStrings) {
         for (String extractedString : extractedStrings) {
             int extractedNumber = Integer.parseInt(extractedString);
             extractedNumbers.add(extractedNumber);
@@ -58,7 +61,6 @@ public class InputHandler {
         String comma = DefaultDelimiter.COMMA.getValue();
 
         return "[" + String.join(customDelimiter, colon, comma) + "]+";
-
     }
 
     public String removeDelimiterCreator(String target) {
