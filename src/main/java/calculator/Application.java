@@ -17,8 +17,13 @@ public class Application {
             System.out.println("결과: 0");
             return;
         }
+        String[] strArr = input.split(",|:");
+        int sum = 0;
+        for (String str : strArr) {
+            sum += Integer.parseInt(str);
+        }
+        System.out.println("결과: " + sum);
     }
 
 
 }
-
