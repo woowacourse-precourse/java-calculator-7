@@ -15,7 +15,7 @@ public class DelimiterValidator {
             delimiter = input.substring(start + CUSTOM_DELIMITER_PREFIX.length(), end);
         }
         if (delimiter.length() > CUSTOM_DELIMITER_LIMIT) {
-            throw new RuntimeException("커스텀 구분자는 문자 " + CUSTOM_DELIMITER_LIMIT + "개까지만 지정 가능합니다. 입력한 구분자: " + delimiter);
+            throw new IllegalArgumentException("커스텀 구분자는 문자 " + CUSTOM_DELIMITER_LIMIT + "개까지만 지정 가능합니다. 입력한 구분자: " + delimiter);
         }
         for (char c : delimiter.toCharArray()) {
             if (Character.isDigit(c)) {
