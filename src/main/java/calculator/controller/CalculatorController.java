@@ -6,6 +6,7 @@ import calculator.model.SeparatorParser;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CalculatorController {
     private final Calculator calculator;
@@ -25,11 +26,11 @@ public class CalculatorController {
     public void calculatorRun() {
         String inputString = getInputString();
 
-        String[] separatedString = getSeparatedString(inputString);
+        HashMap<String, String> separatorAndNumbersMap = getSeparatorAndNumbersMap(inputString);
 
-        ArrayList<String> operandList = getOperandList(separatedString);
+        ArrayList<String> parsedNumberList = getParsedNumberList(separatorAndNumbersMap);
 
-        int result = getResult(operandList);
+        String result = getResult(parsedNumberList);
 
         printResult(result);
     }
@@ -38,19 +39,19 @@ public class CalculatorController {
         return inputView.readString();
     }
 
-    private String[] getSeparatedString(String inputString) {
-        return separatorParser.separatorParse(inputString);
+    private HashMap<String, String> getSeparatorAndNumbersMap(String inputString) {
+        return separatorParser.parseSeparator(inputString);
     }
 
-    private ArrayList<String> getOperandList(String[] separatoredString) {
-        return numberParser.inputNumberParse(separatoredString);
+    private ArrayList<String> getParsedNumberList(HashMap<String, String> separatorAndNumbersMap) {
+        return numberParser.parseNumberString(separatorAndNumbersMap);
     }
 
-    private int getResult(ArrayList<String> operandList) {
-        return calculator.numberCalculator(operandList);
+    private String getResult(ArrayList<String> parsedNumberList) {
+        return calculator.numberCalculator(parsedNumberList);
     }
 
-    private void printResult(int result) {
+    private void printResult(String result) {
         outputView.printResult(result);
     }
 }
