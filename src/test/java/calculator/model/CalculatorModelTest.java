@@ -15,7 +15,6 @@ class CalculatorModelTest {
         Assertions.assertThat(cm.CustomDiscrimination(input)).isEqualTo(true);
     }
 
-
     @ParameterizedTest
     @ValueSource(strings = {"//;1,2:3", ";\\n1,2,3;4"})
     void 커스텀_구분자_지정_문자_사용_예외(String input) {
@@ -23,5 +22,13 @@ class CalculatorModelTest {
         assertThatThrownBy(() -> cm.CustomDiscrimination(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3", "n1,2;3", " 1,2,3,4"})
+    void 커스텀_구분자_지정_X(String input) {
+        CalculatorModel cm = new CalculatorModel();
+        Assertions.assertThat(cm.CustomDiscrimination(input)).isEqualTo(false);
+    }
+
 
 }
