@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class StringAdditionCalculatorTest extends NsTest {
 
@@ -54,6 +55,22 @@ class StringAdditionCalculatorTest extends NsTest {
             run("//;\\n   ");
             assertThat(output()).contains("결과 : 0");
         });
+    }
+
+    @Test
+    void 구분자외_문자포함_테스트() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> runException("//;\\n;)9;1"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    @Test
+    void 음수_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Override
