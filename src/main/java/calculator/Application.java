@@ -45,4 +45,15 @@ public class Application {
         Application.str = str.substring(newlineIndex + 2);
     }
 
+    private static long addSum(String[] numbers) {
+        long sum = 0L;
+        for (String s : numbers) {
+            if (Long.parseLong(s) < 0 || !s.matches("-?\\d+")) {
+                throw new IllegalArgumentException();
+            } else {
+                sum += Long.parseLong(s);
+            }
+        }
+        return sum;
+    }
 }
