@@ -30,6 +30,9 @@ public class Application {
     }
 
     public static int[] separateNum(String userInput) {
+        if(userInput.equals("")){
+            return new int[]{0};
+        }
         StringBuilder separator_sb = new StringBuilder();
         for (String str : separator) {
             if (!separator_sb.isEmpty()) {
@@ -38,8 +41,6 @@ public class Application {
             separator_sb.append(Pattern.quote(str));
         }
         String[] strarr =  userInput.split(separator_sb.toString(), -1);
-
-
         int[] intarr = new int[strarr.length];
 
 
