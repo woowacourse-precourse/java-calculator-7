@@ -2,6 +2,8 @@ package inspector;
 
 import static exceptHandler.ExceptHandler.detectCustomSeparatorFormat;
 
+import java.util.regex.Pattern;
+
 public class CustomInspector extends ContentInspector {
     protected String originalContent;
     private String convertedContent;
@@ -23,7 +25,8 @@ public class CustomInspector extends ContentInspector {
 
 
     private void separatorRegistration() {
-        separator = separator.concat("|" + originalContent.charAt(2));
+        String addendsSeparator = Pattern.quote(originalContent.substring(2, 3));
+        separator = separator.concat("|" + addendsSeparator);
     }
 
     private String convertContentFromOriginal(String originalContent) {

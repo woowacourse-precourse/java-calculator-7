@@ -40,9 +40,9 @@ public class Calculator {
 
     private void calculation() {
         for (String content : parsedContent) {
-            BigInteger addedBigInteger = convertStringToBigInteger(content);
-            detectNegativeValueException(addedBigInteger);
-            result = result.add(addedBigInteger);
+            BigInteger addendsBigInteger = convertStringToBigInteger(content);
+            detectNegativeValueException(addendsBigInteger);
+            result = result.add(addendsBigInteger);
         }
     }
 
