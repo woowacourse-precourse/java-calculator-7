@@ -1,10 +1,11 @@
 package calculator.infrastructure;
 
 import calculator.exception.InvalidSeparatorException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class InputStringProcessor {
 
@@ -14,6 +15,7 @@ public class InputStringProcessor {
     private static final String SEPARATOR_FORM_BEGIN_STR = "//";
     private static final String SEPARATOR_FORM_END_STR = "\n";
     private static final int SEPARATOR_LOCATION_INDEX = 2;
+    private static final int INIT_SIZE_IN_SPLIT_STR = 0;
 
     public boolean checkIfInputStringContainsSeparator(String inputStr) {
         if (!checkIfSeparatorForm(inputStr)) {
@@ -38,12 +40,25 @@ public class InputStringProcessor {
         return inputStr;
     }
 
-    public String removeSeparator(Set<Character> separators, String slicedStr) {
-        return slicedStr.chars()
-                .mapToObj(c -> (char) c)
-                .filter(c -> !separators.contains(c))
-                .map(String::valueOf)
-                .collect(Collectors.joining());
+    // TODO: 리팩토링
+    public List<String> splitStrBySeparator(Set<Character> separators, String slicedStr) {
+        List<String> splitStrList = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+
+        for (char c : slicedStr.toCharArray()) {
+            if (separators.contains(c)) {
+                if (!sb.isEmpty()) {
+                    splitStrList.add(sb.toString());
+                    sb.setLength(INIT_SIZE_IN_SPLIT_STR);
+                }
+                continue;
+            }
+            sb.append(c);
+        }
+        if (!sb.isEmpty()) {
+            splitStrList.add(sb.toString());
+        }
+        return splitStrList;
     }
 
     private boolean checkIfSeparatorForm(String inputStr) {

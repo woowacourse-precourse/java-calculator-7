@@ -81,7 +81,7 @@ class InputStringProcessorTest {
     @MethodSource("provideSlicedStr")
     void 문자열에서_구분자를_기준으로_잘라서_리스트를_반환하는_테스트(String slicedStr, Set<Character> separators, List<String> strList) {
         InputStringProcessor inputStringProcessor = new InputStringProcessor();
-        assertThat(inputStringProcessor.removeSeparator(separators, slicedStr)).isEqualTo(strList);
+        assertThat(inputStringProcessor.splitStrBySeparator(separators, slicedStr)).isEqualTo(strList);
     }
 
     private static Stream<Arguments> provideSlicedStr() {
