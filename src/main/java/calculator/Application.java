@@ -15,8 +15,6 @@ public class Application {
             input = input.substring(2);
 
             if (input.contains("\\n")) {
-
-                System.out.println("\\n 포함됨");
                 for (int i = 1; i < input.length() - 2; i++) {
                     if (input.substring(i, i+2).equals("\\n")) {
                         customDivision = input.substring(0, i);
@@ -31,8 +29,15 @@ public class Application {
             }
         }
 
-        System.out.println("customDivision : " + customDivision);
-        System.out.println("input : " + input);
+        // 구분자로 문자열 나누기
+        input = input.replace(":", ",");
+        input = input.replace(customDivision, ",");
+
+        String[] split = input.split(",");
+
+        for (String s : split) {
+            System.out.println(s);
+        }
 
     }
 }
