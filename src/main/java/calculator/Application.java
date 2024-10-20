@@ -23,7 +23,7 @@ public class Application {
 
             Calculator calculator = new Calculator();
             Integer result = calculator.sum(parsedNumberList);
-            System.out.println(result);
+            System.out.println("결과 : " + result);
         }
     }
 }
