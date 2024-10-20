@@ -21,8 +21,22 @@ public class CalculatorServiceImpl implements CalculatorService {
         return sum;
     }
 
+    /**
+     * 문자열 배열을 정수 배열로 변환합니다.
+     * 현재는 기본 구현 상태로, 추후 구현 예정입니다.
+     *
+     * @param inputString 문자열 배열
+     * @return 정수 배열 (현재는 빈 배열 반환)
+     */
     @Override
-    public int[] parseIntArray(String[] inputStrings) {
-        return new int[0];
+    public int[] parseIntArray(String[] inputString) {
+        int[] result = new int[inputString.length];
+        for (int i = 0; i < inputString.length; i++) {
+            if (inputString[i].isEmpty()) {
+                continue;
+            }
+            result[i] = Integer.parseInt(inputString[i]);
+        }
+        return result;
     }
 }
