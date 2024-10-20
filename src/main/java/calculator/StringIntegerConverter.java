@@ -13,7 +13,7 @@ public class StringIntegerConverter {
             } else if (s.matches("[0-9]+")) {
                 result.add(convertToPositiveInteger(s));
             } else {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("양의 정수를 입력해주십시오.");
             }
         }
 
@@ -26,7 +26,7 @@ public class StringIntegerConverter {
         if (number > 0) {
             return number;
         } else {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("양수를 입력해주십시오.");
         }
     }
 }

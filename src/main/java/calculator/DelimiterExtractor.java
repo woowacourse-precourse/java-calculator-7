@@ -1,42 +1,45 @@
 package calculator;
 
-public class DelimiterExtractor {
-    public String extractDelimiterRegex(String input) {
-        // 구분자를 정규식으로 치환
-        StringBuilder regexBuilder = new StringBuilder();
-        regexBuilder.append("[,:]");
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-        // 커스텀 구분자 유무 확인 후, 정규식 추가
+public class DelimiterExtractor {
+    private static final String CUSTOM_DELIMITER_PREFIX = "//";
+    private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
+
+    public List<String> extractDelimiters(String input) {
+        List<String> delimiters = new ArrayList<>();
+        delimiters.add(",");
+        delimiters.add(":");
+
         if (checkCustomDelimiter(input)) {
-            String customDelimiter = extractCustomDelimiter(input);
-            regexBuilder.insert(3, customDelimiter);
+            String[] customDelimiters = extractCustomDelimiter(input);
+            delimiters.addAll(Arrays.asList(customDelimiters));
         }
 
-        String regex = regexBuilder.toString();
-        
-        return regex;
+        if (delimiters.size() != delimiters.stream().distinct().count()) {
+            delimiters = removeDuplicates(delimiters);
+        }
+
+        return delimiters;
     }
 
     private boolean checkCustomDelimiter(String input) {
-        return input.startsWith("//")
-                && input.contains("\\n")
-                && input.indexOf("\\n") - 2 > 0;
+        return input.startsWith(CUSTOM_DELIMITER_PREFIX)
+                && input.contains(CUSTOM_DELIMITER_SUFFIX)
+                && input.indexOf(CUSTOM_DELIMITER_SUFFIX) - 2 > 0;
     }
 
-    private String extractCustomDelimiter(String input) {
-        StringBuilder customDelimiterBuilder = new StringBuilder();
-        customDelimiterBuilder.append(input, 2, input.indexOf("\\n"));
+    private String[] extractCustomDelimiter(String input) {
+        String customDelimiterStr = input.substring(CUSTOM_DELIMITER_PREFIX.length(),
+                input.indexOf(CUSTOM_DELIMITER_SUFFIX));
+        String[] customDelimiters = customDelimiterStr.split("");
 
-        if (customDelimiterBuilder.toString().contains("[")) {
-            int index = customDelimiterBuilder.indexOf("[");
-            customDelimiterBuilder.insert(index, "\\");
-        }
+        return customDelimiters;
+    }
 
-        if (customDelimiterBuilder.toString().contains("]")) {
-            int index = customDelimiterBuilder.indexOf("]");
-            customDelimiterBuilder.insert(index, "\\");
-        }
-
-        return customDelimiterBuilder.toString();
+    private List<String> removeDuplicates(List<String> delimiters) {
+        return delimiters.stream().distinct().toList();
     }
 }

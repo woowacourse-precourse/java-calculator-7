@@ -14,9 +14,11 @@ class StringSplitterTest {
         String str = "1,2:3";
 
         DelimiterExtractor extractor = new DelimiterExtractor();
+        RegexGenerator generator = new RegexGenerator();
 
         // when
-        String regex = extractor.extractDelimiterRegex(str);
+        List<String> delimiters = extractor.extractDelimiters(str);
+        String regex = generator.create(delimiters);
         List<String> list = splitter.split(str, regex);
 
         // then
@@ -34,9 +36,11 @@ class StringSplitterTest {
         String str = "//;\\n1;2;3";
 
         DelimiterExtractor extractor = new DelimiterExtractor();
+        RegexGenerator generator = new RegexGenerator();
 
         // when
-        String regex = extractor.extractDelimiterRegex(str);
+        List<String> delimiters = extractor.extractDelimiters(str);
+        String regex = generator.create(delimiters);
         List<String> list = splitter.split(str, regex);
 
         // then
@@ -54,9 +58,11 @@ class StringSplitterTest {
         String str = "//;\\n1";
 
         DelimiterExtractor extractor = new DelimiterExtractor();
+        RegexGenerator generator = new RegexGenerator();
 
         // when
-        String regex = extractor.extractDelimiterRegex(str);
+        List<String> delimiters = extractor.extractDelimiters(str);
+        String regex = generator.create(delimiters);
         List<String> list = splitter.split(str, regex);
 
         // then
@@ -72,9 +78,11 @@ class StringSplitterTest {
         String str = "//[\\n1[2,3";
 
         DelimiterExtractor extractor = new DelimiterExtractor();
+        RegexGenerator generator = new RegexGenerator();
 
         // when
-        String regex = extractor.extractDelimiterRegex(str);
+        List<String> delimiters = extractor.extractDelimiters(str);
+        String regex = generator.create(delimiters);
         List<String> list = splitter.split(str, regex);
 
         // then
