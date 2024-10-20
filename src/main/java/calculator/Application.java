@@ -13,7 +13,16 @@ public class Application {
     }
 
     private static String[] parseInput(String input) {
-        return splitNumbers(input, ",|;");
+        if (hasCustomDelimiter(input)) {
+            String customDelimiter = extractCustomDelimiter(input);
+            String numbersSection = extractNumbersSection(input);
+
+            String combinedDelimiters = customDelimiter + "|,|:";
+
+            return splitNumbers(numbersSection, combinedDelimiters);
+        } else {
+            return splitNumbers(input, ",|;");
+        }
     }
 
     private static boolean hasCustomDelimiter(String input) {
