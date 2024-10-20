@@ -104,6 +104,14 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 구분자_연속_입력_예외테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//#$%\\n1##2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
 
     @Override
     public void runMain() {
