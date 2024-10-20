@@ -10,3 +10,6 @@
 - [ ] 분리된 숫자를 변환한다.
 - [x] null입력 시 IllegalArgumentException를 출력한다.
 - [x] a,b,c같이 분리된 문자가 숫자가 아닐 시 IllegalArgumentException를 발생 시킨다.
+- [ ] 변환된 숫자를 합한다.
+- [ ] 덧셈할 문자열을 입력해 주세요.를 출력 후 패턴을 입력 받는다.
+- [ ] 결과 : 를 출력 후 결과를 출력한다.
