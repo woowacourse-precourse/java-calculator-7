@@ -20,7 +20,7 @@ public class Calc {
                     throw new IllegalArgumentException();
                 }
 
-                if(!Character.isDigit(c.charAt(0))){
+                if(!c.matches("[+]?\\d")){
                     throw new IllegalArgumentException();
                 }
 
@@ -29,7 +29,6 @@ public class Calc {
                 }
 
                 sum += Integer.parseInt(c);
-
             }
         }
 
