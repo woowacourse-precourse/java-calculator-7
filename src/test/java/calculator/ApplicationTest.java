@@ -43,6 +43,13 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 예외_테스트_커스텀_구분자_문자열_오류() {
+    void 커스텀_문자열_시작_오류_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("/;\\n1;2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//;;\\n1;;2,3"))
                         .isInstanceOf(IllegalArgumentException.class)
