@@ -30,10 +30,10 @@ public class Extractor {
 
     // null 및 빈 문자열 체크
     private List<Long> checkIsNull(String input) {
-        if (input == null || input.isBlank()) {
-            return List.of(0L); // 빈 문자열 또는 null일 경우 0L 반환
-        }
-        return null;
+        return Optional.ofNullable(input)
+                .filter(s -> !s.isBlank())
+                .map(s -> List.of(Long.valueOf(0)))
+                .orElseGet(() -> List.of(0L)); // 빈 문자열 또는 null일 경우 0L 반환
     }
 
     // ""경우를 제외한 공백에 대한 유효성 검증
