@@ -13,7 +13,7 @@ public class DelimiterParser {
         List<String> delimiters = new ArrayList<>(DELIMITERS);
 
         if (input.startsWith("//")) {
-            Matcher matcher = Pattern.compile("//(.)\\n(.*)").matcher(input);
+            Matcher matcher = Pattern.compile("//(.*?)\\\\n(.*)", Pattern.DOTALL).matcher(input);
             if (matcher.matches()) {
                 String customDelimiter = matcher.group(1);
                 delimiters.add(Pattern.quote(customDelimiter));
@@ -25,7 +25,8 @@ public class DelimiterParser {
 
     public String[] split(String input, List<String> delimiters) {
         if (input.startsWith("//")) {
-            input = input.substring(input.indexOf("\n") + 1);
+            int index = input.indexOf("\\n");
+            input = input.substring(index + 2);
         }
 
         return input.split(String.join("|", delimiters));
