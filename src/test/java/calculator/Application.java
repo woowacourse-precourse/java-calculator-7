@@ -39,23 +39,23 @@ public class Application {
         }
 
         private String[] parseNumbers(String input) {
-            if (hasCustomDelimiter(input)) {
-                return parseWithCustomDelimiter(input);
+            if (hasCustomSeparator(input)) {
+                return parseWithCustomSeparator(input);
             }
             return input.split(DEFAULT_SEPARATOR);
         }
 
-        private boolean hasCustomDelimiter(String input) {
+        private boolean hasCustomSeparator(String input) {
             return input.startsWith(CUSTOM_SEPARATOR_PREFIX);
         }
 
-        private String[] parseWithCustomDelimiter(String input) {
-            String delimiter = extractCustomDelimiter(input);
+        private String[] parseWithCustomSeparator(String input) {
+            String delimiter = extractCustomSeparator(input);
             String numbersString = extractNumbersString(input);
             return numbersString.split(delimiter);
         }
 
-        private String extractCustomDelimiter(String input) {
+        private String extractCustomSeparator(String input) {
             int delimiterStart = CUSTOM_SEPARATOR_PREFIX.length();
             int delimiterEnd = input.indexOf(NEW_LINE);
             return Pattern.quote(input.substring(delimiterStart, delimiterEnd));
