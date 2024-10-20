@@ -115,6 +115,6 @@ public class Application {
             System.out.println("Error: " + e.getMessage());
         }
 
-        System.out.println("결과 : " + sum);
+        System.out.println("결과: " + sum);
     }
 }
