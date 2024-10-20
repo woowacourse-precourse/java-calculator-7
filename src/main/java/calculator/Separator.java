@@ -76,6 +76,7 @@ public class Separator {
 
     private BigDecimal sumExpression(String userInput, String delimiter) {
         List<String> numbers = Arrays.asList(userInput.split(delimiter));
+        validator.validate(userInput, numbers, delimiter);
         BigDecimal sum = BigDecimal.ZERO;
 
         for (String number : numbers) {
