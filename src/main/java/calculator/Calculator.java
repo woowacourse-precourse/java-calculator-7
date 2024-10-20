@@ -27,8 +27,17 @@ public class Calculator {
 
         for (String token : tokens) {
             token = token.trim();
-            int number = Integer.parseInt(token);
-            sum += number;
+            if(!token.isEmpty()){
+                try {
+                    int number = Integer.parseInt(token);
+                    if (number < 0) {
+                        throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+                    }
+                    sum += number;
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("유효하지 않은 숫자 형식입니다: " + token);
+                }
+            }
         }
 
         return sum;
