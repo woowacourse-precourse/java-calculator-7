@@ -11,6 +11,7 @@ public class UserOutputView {
     }
 
     public void printTokens(String[] tokens){
+        System.out.print("token: ");
         for(String token : tokens){
             System.out.print(token + " ");
         }
@@ -19,8 +20,7 @@ public class UserOutputView {
 
 
     public void printResult(int result){
-        System.out.println("결과 값 : " + result);
+        System.out.println("결과 : " + result);
     }
-
 
 }
