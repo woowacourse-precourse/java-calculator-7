@@ -41,4 +41,16 @@ class CustomDelimiterExtractorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("잘못된 커스텀 구분자 형식입니다.");
     }
+
+    @DisplayName("커스텀 구분자가 숫자이면 NUMBER_CUSTOM_DELIMITER 예외가 발생한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"//1\\n21314", "//-1\\n4-15-16", "//0\\n70809"})
+    void throwsExceptionWhenCustomDelimiterIsNumber(String stringWithDelimiter) {
+        //given
+        //when
+        //then
+        assertThatThrownBy(() -> customDelimiterExtractor.getCustomDelimiter(stringWithDelimiter))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("커스텀 구분자는 숫자일 수 없습니다.");
+    }
 }

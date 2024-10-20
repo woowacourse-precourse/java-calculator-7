@@ -32,6 +32,7 @@ public class CustomDelimiterExtractor {
 
         String customDelimiter = stringWithDelimiter.substring(CUSTOM_DELIMITER_BEGIN_INDEX, endIndex);
         validateEmptyCustomDelimiter(customDelimiter);
+        validateNumberCustomDelimiter(customDelimiter);
 
         return customDelimiter;
     }
