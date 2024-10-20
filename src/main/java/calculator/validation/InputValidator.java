@@ -26,7 +26,9 @@ public class InputValidator {
     // 구분자에 숫자가 포함된 경우 유효성 검증
     public static void validateDelimiter(String customDelimiter) {
         Optional.of(customDelimiter)
-                .filter(delimiter -> !ValidationPattern.INTEGER_PATTERN.getPattern().matcher(delimiter).find())
-                .orElseThrow(() -> CustomException.from(ErrorMessage.MISSING_CUSTOM_DELIMITER_END));
+                .filter(delimiter -> ValidationPattern.INTEGER_PATTERN.getPattern().matcher(delimiter).find()) // 숫자가 포함된 경우
+                .ifPresent(delimiter -> {
+                    throw CustomException.from(ErrorMessage.MISSING_CUSTOM_DELIMITER_END);
+                });
     }
 }
