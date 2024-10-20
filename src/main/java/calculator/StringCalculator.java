@@ -1,18 +1,15 @@
 package calculator;
 
-import java.util.Arrays;
-
 public class StringCalculator {
     public int add(String input) {
         String[] numbers = split(input);
 
-        // Todo: 문자열 변환 및 합계
+        int sum = 0;
+        for (String number : numbers) {
+            sum += Integer.parseInt(number);
+        }
 
-        return -1;
-    }
-
-    public String[] splitTest(String input) {
-        return split(input);
+        return sum;
     }
 
     private String[] split(String input) {

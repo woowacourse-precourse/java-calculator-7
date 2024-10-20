@@ -1,7 +1,6 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
-import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
@@ -14,12 +13,41 @@ class ApplicationTest extends NsTest {
      * split 관련 테스트
      */
     @Test
-    void 기본구분자_처리() {
-        StringCalculator sc = new StringCalculator();
+    void 쉼표로_구분된_문자열_분리() {
         assertSimpleTest(() -> {
-            String[] splitedNumbers = sc.splitTest("1");
+            run("1,2");
+            assertThat(output()).contains("결과 : 3");
+        });
 
-            assertArrayEquals(splitedNumbers, new String[] {"1"});
+        assertSimpleTest(() -> {
+            run("1,2,3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 콜론으로_구분된_문자열_분리() {
+        assertSimpleTest(() -> {
+            run("1:2");
+            assertThat(output()).contains("결과 : 3");
+        });
+
+        assertSimpleTest(() -> {
+            run("1:2:3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 쉼표와콜론이_함께_있는_문자열_분리() {
+        assertSimpleTest(() -> {
+            run("1,2:3");
+            assertThat(output()).contains("결과 : 6");
+        });
+
+        assertSimpleTest(() -> {
+            run("1:2,3");
+            assertThat(output()).contains("결과 : 6");
         });
     }
 
@@ -44,3 +72,4 @@ class ApplicationTest extends NsTest {
         Application.main(new String[]{});
     }
 }
+
