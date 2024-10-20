@@ -10,10 +10,6 @@ public class CalculateController {
     // userInput 을 받아 caculateService 에 넘김.
     public long insertUserInput(final String userInput) {
 
-        if (userInput.isEmpty()) {
-            return 0L;
-        }
-
         return calculateService.calculate(userInput);
 
     }
