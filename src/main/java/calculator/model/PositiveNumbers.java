@@ -24,7 +24,7 @@ public class PositiveNumbers implements Numbers {
     private void checkPositive(int number) {
 
         if (number <= 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("양수만 입력이 가능합니다");
         }
 
     }
