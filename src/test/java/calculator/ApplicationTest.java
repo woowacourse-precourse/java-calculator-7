@@ -24,6 +24,41 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    public void 정상적인_입력_1(){
+        String input = "1,2,3,4";
+        assertSimpleTest(() -> {
+            run(input);
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+    @Test
+    public void 정상적인_입력_2(){
+        String input = "1;2,3;4";
+        assertSimpleTest(() -> {
+            run(input);
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+    @Test
+    public void 커스텀_지정자만_있는_경우(){
+        String input = "//;\\n";
+        assertSimpleTest(() -> {
+            run(input);
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    public void 빈_문자가_입력되는_경우(){
+        String input = "";
+        assertSimpleTest(() -> {
+            run(input);
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
