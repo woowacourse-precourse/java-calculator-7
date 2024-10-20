@@ -29,7 +29,7 @@ public class Calculator {
         input = normalizeDelimiters(input, delimiters);
         List<Long> numbers = splitToNumbers(input);
 
-        return 0;
+        return sum(numbers);
     }
 
     private boolean isEmpty(String input) {
@@ -91,5 +91,14 @@ public class Calculator {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("범위를 초과하는 입력입니다.");
         }
+    }
+
+    private long sum(List<Long> numbers) {
+        long sum = 0;
+        for (long number : numbers) {
+            sum += number;
+        }
+
+        return sum;
     }
 }
