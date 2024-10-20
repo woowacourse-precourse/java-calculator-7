@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 public class Application {
     private static final String DEFAULT_DELIMITER = "[,:]";
+
     public static void main(String[] args) {
         // 사용자 입력 받는 부분
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -46,7 +47,7 @@ public class Application {
                     endIndexDelimiter = input.indexOf("\\n");
                 }
                 if (endIndexDelimiter == -1) {
-                    throw new IllegalArgumentException("잘못된 입력 형식으로 커스텀 구분자 선언 후 줄바꿈을 포함해야 합니다.");
+                    throw new IllegalArgumentException("Invalid input format: custom delimiter declaration must be followed by a newline.");
                 }
 
                 // 줄바꿈 문자 여부에 따른 구분자 처리 추출
@@ -81,8 +82,7 @@ public class Application {
             }
 
             if (!negativeNumbers.isEmpty()) {
-                // 음수 값들을 포함하는 배열을 읽고 예외 발생
-                throw new IllegalArgumentException("Negative numbers are not allowed: " + negativeNumbers);
+                throw new IllegalArgumentException(buildNegativeNumbersExceptionMessage(negativeNumbers));
             }
 
             return sum;
@@ -106,9 +106,14 @@ public class Application {
             return delimiterRegex.toString();
         }
 
-        // 정규식 특수문자 처리용 메소드
         private static String escapeSpecialCharacters(String delimiter) {
+            // 정규식 특수문자 처리용 메소드
             return delimiter.replaceAll("([\\[\\]{}()*+?^$\\\\|.])", "\\\\$1");
+        }
+
+        private static String buildNegativeNumbersExceptionMessage(List<Integer> negativeNumbers) {
+            // 음수 값들을 포함하는 배열을 읽고 예외 발생
+            return "Negative numbers are not allowed: " + negativeNumbers.toString();
         }
     }
 }
