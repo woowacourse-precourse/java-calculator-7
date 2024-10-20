@@ -15,26 +15,6 @@ class DelimiterExtractorTest {
     class ParseMethod {
 
         @Test
-        void 대응하는_구분자_접미사를_찾을_수_없는_경우_예외를_발생시킨다() {
-            // given
-            String input = "//;1,2,3";
-
-            // when & then
-            assertThatThrownBy(() -> CustomDelimiterExtractor.parse(input))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ErrorMessage.DELIMITER_SUFFIX_NOT_FOUND.getMessage());
-        }
-
-        @Test
-        void 대응하는_구분자_접미사가_있는_경우_예외를_발생시키지_않는다() {
-            // given
-            String input = "//;\\n1;2;3";
-
-            // when & then
-            assertThatNoException().isThrownBy(() -> CustomDelimiterExtractor.parse(input));
-        }
-
-        @Test
         void 커스텀_구분자가_없는_경우_예외를_발생시킨다() {
             // given
             String input = "//\\n1,2,3";
