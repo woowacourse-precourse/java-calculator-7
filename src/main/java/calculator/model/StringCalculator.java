@@ -1,8 +1,5 @@
 package calculator.model;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class StringCalculator {
     private static final String ALLOWED_FROM = "^[0-9]*[:,][0-9]*[:,][0-9]*$";
     private static final String NUMBER_FROM = "^[0-9]+$";
@@ -24,10 +21,4 @@ public class StringCalculator {
         validateInputStringFrom(inputString);
     }
 
-    public List<Long> filter(String inputString) {
-        return Arrays.stream(inputString.split("\\D"))
-                .filter(token -> token.matches(NUMBER_FROM))
-                .map(Long::parseLong)
-                .toList();
-    }
 }
