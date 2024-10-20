@@ -1,7 +1,7 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.Arrays;
+import java.util.StringTokenizer;
 
 public class Application {
     public static void main(String[] args) {
@@ -26,9 +26,21 @@ public class Application {
 
         // 기본 구분자가 있는 경우 기본 구분자를 기준으로 문자열 분리하기
         if (str.contains(",") || str.contains(":")) {
-            String[] tmp = str.split(",|:");
-            System.out.println(Arrays.toString(tmp));
+            String[] nums = str.split(",|:");
         }
 
+        // 커스텀 구분자가 있는 경우 커스텀 구분자를 기준으로 문자열 분리하기
+        if (str.contains("//") && str.contains("\\n")) {
+            int idx = str.indexOf("\\n");
+            String custom = str.substring(2, idx);
+            str = str.substring(idx + 2);
+            StringTokenizer st = new StringTokenizer(str, custom);
+            String[] nums = new String[st.countTokens()];
+            int i = 0;
+            while (st.hasMoreTokens()) {
+                nums[i] = st.nextToken();
+                i++;
+            }
+        }
     }
 }
