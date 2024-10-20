@@ -9,7 +9,7 @@ public class OutputUtil {
         System.out.print("결과 : ");
     }
 
-    public void printResult(int result){
+    public void printResult(Long result){
         System.out.print(result);
     }
 

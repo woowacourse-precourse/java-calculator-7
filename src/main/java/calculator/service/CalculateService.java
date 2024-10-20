@@ -3,11 +3,11 @@ import calculator.domain.Numbers;
 import java.util.LinkedList;
 
 public class CalculateService {
-    public int calculateSum(Numbers numbers) {
-        int sumResult =0;
+    public Long calculateSum(Numbers numbers) {
+        Long sumResult = 0L;
         LinkedList<Integer> numberList = numbers.getNumbersList();
-        for(int i=0;i<numberList.size();i++) {
-            sumResult += numberList.get(i);
+        for (Integer integer : numberList) {
+            sumResult += integer;
         }
         return sumResult;
     }

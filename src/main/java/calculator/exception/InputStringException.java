@@ -63,6 +63,7 @@ public class InputStringException {
         for(String s : stringNumbers){
             if(s.isEmpty()) continue;
             checkNumberFormat(s);
+            checkIfNumberIsInteger(s);
             checkIfPositiveNumber(s);
         }
         return extractService.addStringNumberToNumbers(stringNumbers, numbers);
@@ -71,6 +72,14 @@ public class InputStringException {
     public static void checkNumberFormat(String stringNumber){
         if(stringNumber.length() !=1 && stringNumber.charAt(0)=='0'){
             throw new IllegalArgumentException("숫자의 형태가 아닙니다.");
+        }
+    }
+
+    public static void checkIfNumberIsInteger(String stringNumber){
+        try{
+            int tmpNumber = Integer.parseInt(stringNumber);
+        }catch(NumberFormatException e){
+            throw new IllegalArgumentException("입력된 숫자는 2,147,483,647보다 작아야 합니다.");
         }
     }
 
