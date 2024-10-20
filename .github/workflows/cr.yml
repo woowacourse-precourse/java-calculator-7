@@ -1,4 +1,4 @@
-name: Code Review From ChatGPT
+name: ChatGPT CodeReviewer
 
 permissions:
   contents: read
@@ -9,10 +9,10 @@ on:
     types: [ opened, synchronize ]
 
 jobs:
-  code-review:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - uses: anc95/ChatGPT-CodeReview@main
+      - uses: anc95/ChatGPT-CodeReview@v1.0.13
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
