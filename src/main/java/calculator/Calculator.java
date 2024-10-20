@@ -1,7 +1,6 @@
 package calculator;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -45,16 +44,14 @@ class Calculator {
         if (input.isEmpty()) {
             throw new IllegalArgumentException("입력값이 없습니다.");
         }
-        String validRegex = "[" + separators.stream()
+        // 계산 가능한 패턴인지 확인
+        String validRegex = "[0-9]+([" + separators.stream()
                 .map(Pattern::quote)
                 .reduce((s1, s2) -> s1 + s2)
                 .orElse("")
-                + "0-9]+";
+                + "][0-9])*";
         if (!input.matches(validRegex)) {
-            System.out.println("input = " + input);
-            System.out.println("validRegex = " + validRegex);
-            System.out.println("separators = " + separators);
-            throw new IllegalArgumentException("숫자와 구분자로만 이루어진 문자열이 아닙니다.");
+            throw new IllegalArgumentException("올바른 입력 형식이 아닙니다.");
         }
     }
 
@@ -85,7 +82,9 @@ class Calculator {
         checkCustomSeparator();
         checkInput();
         extractNumbers();
-        System.out.println("numbers = " + numbers);
+        for (Integer number : numbers) {
+            result += number;
+        }
         return this.result;
     }
 }
