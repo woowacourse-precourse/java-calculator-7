@@ -1,4 +1,4 @@
-package calculator.split;
+package calculator.splitter;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
