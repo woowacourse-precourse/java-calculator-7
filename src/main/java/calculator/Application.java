@@ -33,6 +33,21 @@ public class Application {
     }
 
     private static String getDelimiter(String word) {
+
+        // 커스텀 구분자가 있는 경우
+        if (word.startsWith("//")) {
+            int seperateIdx = word.indexOf("\\n");
+            System.out.println(seperateIdx);
+            if (seperateIdx == -1) {
+                throw new IllegalArgumentException("잘못된 입력입니다.");
+            }
+            return word.substring(2, seperateIdx);
+        } else {
+            // 커스텀 구분자가 없을 경우 , 또는 :로 되어있는지 체크
+            if (!word.matches(".*[,:].*")) {
+                throw new IllegalArgumentException("입력값에는 구분자가 포함되어야 합니다.");
+            }
+        }
         return "[,:]";
     }
 
