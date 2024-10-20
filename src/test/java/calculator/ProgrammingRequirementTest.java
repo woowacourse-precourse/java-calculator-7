@@ -3,7 +3,6 @@ package calculator;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +14,7 @@ public class ProgrammingRequirementTest extends NsTest {
     @Test
     public void testJavaVersion21() {
         String javaVersion = System.getProperty(JAVA_VERSION_PROPERTIY);
-        Assertions.assertTrue(javaVersion.startsWith("21"));
+        assertTrue(javaVersion.startsWith("21"));
     }
 
     @Override

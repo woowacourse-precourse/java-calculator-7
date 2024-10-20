@@ -8,9 +8,9 @@ public class StudyTest {
 
     @Test
     @DisplayName("String.Blank 학습 - 공백으로 이루어진 문자열은 true 이다")
-    void testBlankStringTrue(){
+    void testBlankStringTrue() {
         //given
-        String blankString="    ";
+        String blankString = "    ";
         //when
         boolean isBlank = blankString.isBlank();
         //then
@@ -19,9 +19,9 @@ public class StudyTest {
 
     @Test
     @DisplayName("String.Blank 학습 - 아무런 문자도 없는 문자열은 true 이다")
-    void testEmptyStringTrue(){
+    void testEmptyStringTrue() {
         //given
-        String blankString="";
+        String blankString = "";
         //when
         boolean isBlank = blankString.isBlank();
         //then
@@ -30,9 +30,9 @@ public class StudyTest {
 
     @Test
     @DisplayName("String.Blank 학습 - 계행 문자만 있는 문자열은 true 이다")
-    void testEmptyStringTrue2(){
+    void testEmptyStringTrue2() {
         //given
-        String blankString="\n";
+        String blankString = "\n";
         //when
         boolean isBlank = blankString.isBlank();
         //then
