@@ -2,12 +2,11 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
-import java.util.Arrays;
-
 public class Application {
     private static final String DEFAULT_SEPERATOR = ",|:";
     private static final String CUSTOM_SEPERATE_START = "//";
     private static final String CUSTOM_SEPERATE_END = "\\n";
+    private static final String EXCEPTION_MESSAGE = "잘못된 값";
 
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -15,13 +14,9 @@ public class Application {
         String customSeperator = "";
 
         if (isCustomSeperator(input)) customSeperator = extractCustomSeperator(input);
+        String[] number = splitBySeperator(input, customSeperator);
 
-        try {
-            int[] number = Arrays.stream(splitBySeperator(input, customSeperator)).mapToInt(Integer::parseInt).toArray();
-            int result = sumCalculate(number);
-
-            System.out.println("결과 : " + result);
-        } catch (IllegalArgumentException e) {}
+        System.out.println("결과 : " + sumCalculate(number));
     }
 
     public static boolean isCustomSeperator(String input) {
@@ -32,6 +27,7 @@ public class Application {
         int start = input.indexOf(CUSTOM_SEPERATE_START) + 2; // 커스텀 문자 인덱스 시작
         int end = input.indexOf(CUSTOM_SEPERATE_END); // 커스텀 문자 인덱스 끝
 
+        if (end == -1 || start == end) throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         return input.substring(start, end);
     }
 
@@ -40,14 +36,28 @@ public class Application {
         if (input.equals("")) return new String[]{"0"};
 
         if (!customSeperator.equals("")) {
-            input = input.replaceFirst(CUSTOM_SEPERATE_START + customSeperator + CUSTOM_SEPERATE_END, "");
+            input = input.replace(CUSTOM_SEPERATE_START + customSeperator + CUSTOM_SEPERATE_END, "");
             seperator = DEFAULT_SEPERATOR + "|" + customSeperator;
         }
 
         return input.split(seperator);
     }
 
-    public static int sumCalculate(int[] number) {
-        return Arrays.stream(number).sum();
+    public static int sumCalculate(String[] number) {
+        int sum = 0;
+
+        for (String num : number) {
+            int value;
+            try {
+                value = Integer.parseInt(num.trim());
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException(EXCEPTION_MESSAGE);
+            }
+            if (value < 0) {
+                throw new IllegalArgumentException(EXCEPTION_MESSAGE);
+            }
+            sum += value;
+        }
+        return sum;
     }
 }
