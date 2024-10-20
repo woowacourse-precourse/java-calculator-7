@@ -16,14 +16,18 @@ public class Application {
         String inputString = getInputString();
         setConditionValues(inputString);
         checkStringContainOtherChar(inputString.substring(subStringStartIndex), delimiters);
-        System.out.println("결과: "+getNumbersSum(inputString));
+        System.out.println("결과: " + getNumbersSum(inputString));
     }
 
     private static int getNumbersSum(String inputString) {
         int sum = 0;
+        String token;
         StringTokenizer st = new StringTokenizer(inputString.substring(subStringStartIndex), delimiters);
         while (st.hasMoreTokens()) {
-            sum += Integer.parseInt(st.nextToken());
+            if ((token = st.nextToken()).contains("-")) {
+                throw new IllegalArgumentException("양수만 입력해야합니다.");
+            }
+            sum += Integer.parseInt(token);
         }
         return sum;
     }
