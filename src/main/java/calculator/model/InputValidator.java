@@ -1,4 +1,4 @@
-package error;
+package calculator.model;
 
 public class InputValidator {
 
@@ -7,7 +7,7 @@ public class InputValidator {
             throw new IllegalArgumentException("Number must be positive");
         }
     }
-    
+
 
     public static void validateOnlyDigits(String number) {
         try {

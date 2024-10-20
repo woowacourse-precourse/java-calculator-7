@@ -1,6 +1,6 @@
-package view;
+package calculator.view;
 
-import input.InputHandler;
+import calculator.model.InputHandler;
 
 public class View {
     InputHandler inputHandler = new InputHandler();

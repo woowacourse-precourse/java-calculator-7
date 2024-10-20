@@ -1,8 +1,6 @@
-package input;
+package calculator.model;
 
-import calculator.Calculator;
 import camp.nextstep.edu.missionutils.Console;
-import error.InputValidator;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
