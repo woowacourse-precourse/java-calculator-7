@@ -1,10 +1,8 @@
 package calculator.controller;
 
-import static calculator.common.Constants.DELIMITER;
-import static calculator.common.Constants.FIRST_IDX;
-import static calculator.common.Constants.FOURTH_IDX;
 import static calculator.common.Constants.INVALID_INPUT_FORMAT;
-import static calculator.common.Constants.SLASH;
+import static calculator.common.InputValidator.isCustomSeparator;
+import static calculator.common.InputValidator.startNumber;
 
 import calculator.view.InputView;
 
@@ -22,6 +20,10 @@ public class Calculator {
 
     public void handleInput (String input) {
         validateInput(input);
+
+        if (input.isBlank()) {
+
+        }
     }
 
     private void validateInput (String input) {
@@ -30,11 +32,4 @@ public class Calculator {
         }
     }
 
-    private Boolean isCustomSeparator (String input) {
-        return input.startsWith(SLASH) && input.charAt(FOURTH_IDX) == DELIMITER;
-    }
-
-    private Boolean startNumber (String input) {
-        return Character.isDigit(input.charAt(FIRST_IDX));
-    }
 }
