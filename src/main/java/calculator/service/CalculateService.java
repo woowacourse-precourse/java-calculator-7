@@ -44,7 +44,7 @@ public class CalculateService {
 
         if (!((firstIndexOfPrefix == 0 && firstIndexOfPostfix == 3) || (firstIndexOfPrefix == -1
                 && firstIndexOfPostfix == -1))) {
-            
+
             throw new IllegalArgumentException("올바른 형식이 아니거나 이스케이프 문자가 포함되어 있습니다");
         }
 
@@ -77,7 +77,7 @@ public class CalculateService {
         try {
             numbers.forEach(number -> positiveNumbers.addNumber(Integer.valueOf(number)));
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("안된다니까!");
+            throw new IllegalArgumentException("숫자 int 형식으로 전환되지 못했습니다");
         }
 
         return positiveNumbers;
