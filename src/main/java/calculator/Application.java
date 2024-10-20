@@ -65,13 +65,8 @@ public class Application {
         // TODO: 프로그램 구현
         System.out.println("덧셈할 문자열을 입력해 주세요. ");
         String str = Console.readLine();
-
-        try {
-            // 덧셈 결과 출력
-            int answer = calculateString(str);
-            System.out.println("결과 : " + answer);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+        // 결과 출력
+        int answer = calculateString(str);
+        System.out.println("결과 : " + answer);
     }
 }
