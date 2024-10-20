@@ -9,6 +9,7 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         String input = Console.readLine();
+        int result = 0;
         List<String> seperator = new ArrayList<>();
         seperator.add(",");
         seperator.add(";");
@@ -19,6 +20,12 @@ public class Application {
             seperator.add(cumtomSeperator);
         }
 
-//        String[] splitedInput = input.split(" ");
+        String[] splitedInput = input.split(",|;");
+        for (String inputNumber : splitedInput) {
+            int number = Integer.parseInt(inputNumber);
+            result += number;
+        }
+
+//        System.out.println("결과 : " + result);
     }
 }

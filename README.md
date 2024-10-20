@@ -43,15 +43,15 @@
 ## 기능 목록
 
 사용자 입력 `input`
-- [ ] `camp.nextstep.edu.missionutils.Console`의 `readLine()` 사용하여 사용자 입력 구현
+- [x] `camp.nextstep.edu.missionutils.Console`의 `readLine()` 사용하여 사용자 입력 구현
 
 문자열 필터링 `filtering`
-- [ ] 사용자가 커스텀 구분자를 지정했는지 확인하고, 지정했다면 커스텀 구분자 저장
-- [ ] 사용자가 입력한 문자열에서 구분자 기준으로 숫자 분리
-- [ ] 기본 구분자(",", ";")와 커스텀 구분자 외에 다른 문자 입력시 `IllegalArgumentException` 예외처리
+- [x] 사용자가 커스텀 구분자를 지정했는지 확인하고, 지정했다면 커스텀 구분자 저장
+- [x] 사용자가 입력한 문자열에서 구분자 기준으로 숫자 분리
+- [ ] 구분자 외에 다른 문자 입력시 `IllegalArgumentException` 예외처리
 
 계산 처리 `calculate`
-- [ ] 문자열 필터링에서 구한 숫자로 덧셈 계산 후 `result` 변수에 저장
+- [x] 문자열 필터링에서 구한 숫자로 덧셈 계산 후 `result` 변수에 저장
 
 출력 `output`
 - [ ] `결과 : result` 형식으로 출력
