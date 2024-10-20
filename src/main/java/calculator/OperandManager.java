@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class OperandManager {
-    private final List<BigInteger> operands;
+    private final List<Integer> operands;
     private final SeparatorManager separatorManager;
 
     public OperandManager(SeparatorManager separatorManager) {
@@ -15,7 +15,7 @@ public class OperandManager {
         this.separatorManager = separatorManager;
     }
 
-    public List<BigInteger> getOperands() {
+    public List<Integer> getOperands() {
         return this.operands;
     }
 
@@ -23,8 +23,13 @@ public class OperandManager {
         String[] splitOperandCandidates = split(operandCandidates);
         for (String operandCandidate : splitOperandCandidates) {
             validate(operandCandidate);
-            if(!operandCandidate.isEmpty()) {
-                operands.add(new BigInteger(operandCandidate));
+            if(operandCandidate.isEmpty()) {
+                continue;
+            }
+            try {
+                operands.add(Integer.parseInt(operandCandidate));
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException(EXCEEDS_LIMIT_MESSAGE);
             }
         }
     }
@@ -40,7 +45,7 @@ public class OperandManager {
         if(operandCandidate.isEmpty()) {
             return;
         }
-        if (!operandCandidate.matches(VALID_OPERAND_REGEX)) {
+        if (operandCandidate.equals("0") || !operandCandidate.matches(VALID_OPERAND_REGEX)) {
             throw new IllegalArgumentException(ERROR_INVALID_OPERAND);
         }
     }
