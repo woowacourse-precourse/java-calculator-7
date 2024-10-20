@@ -1,11 +1,9 @@
 package calculator.view;
 
+import calculator.model.Result;
 import camp.nextstep.edu.missionutils.Console;
 
 public class CalculationView {
-
-    public CalculationView() {
-    }
 
     public String getInput() {
 
@@ -17,7 +15,7 @@ public class CalculationView {
         return input;
     }
 
-    public void displayResult(long result) {
-        System.out.println("결과 : " + result);
+    public void displayResult(Result result) {
+        System.out.println("결과 : " + result.getNumber());
     }
 }
