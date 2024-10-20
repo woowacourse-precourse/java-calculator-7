@@ -67,8 +67,7 @@ public class Application {
     }
 
     private static String[] getCustomDelimiters(String input, int indexOfEndSign) {
-        return input
-                .substring(CUSTOM_DELIMITER_START_SIGN_LENGTH, indexOfEndSign)
+        return input.substring(CUSTOM_DELIMITER_START_SIGN_LENGTH, indexOfEndSign)
                 .split("");
     }
 
@@ -85,7 +84,8 @@ public class Application {
             delim = delim.trim();
 
             if (!delim.isEmpty()) { // 빈 문자열로 파싱되지 않았다면
-                delimiterPart.append("|")
+                delimiterPart
+                        .append("|")
                         .append(toRegex(delim));
             }
         }
@@ -123,15 +123,18 @@ public class Application {
     }
 
     private static int add(int[] numbers) {
-        return Arrays.stream(numbers).sum();
+        return Arrays.stream(numbers)
+                .sum();
     }
 
     private static boolean containsDigit(String delim) {
-        return delim.chars().anyMatch(Character::isDigit);
+        return delim.chars()
+                .anyMatch(Character::isDigit);
     }
 
     private static boolean isNotEmpty(String n) {
-        return !n.trim().isEmpty();
+        return !n.trim()
+                .isEmpty();
     }
 
     private static String toRegex(String delim) {
