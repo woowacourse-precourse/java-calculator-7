@@ -27,7 +27,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 공백_입력() {
         assertSimpleTest(() -> {
-            run("");
+            run(" ");
             assertThat(output()).contains("결과 : 0");
         });
     }
@@ -36,7 +36,7 @@ class ApplicationTest extends NsTest {
     void 커스텀_구분자() {
         assertSimpleTest(()->{
             run("//@\\n1@2@3");
-            assertThat(output()).contains("결과 : 7");
+            assertThat(output()).contains("결과 : 6");
         });
     }
 
