@@ -5,6 +5,7 @@ import calculator.Service.CustomDelimiterExtractor;
 import calculator.Service.DelimiterExtractor;
 import calculator.Service.InputReader;
 import calculator.Service.SumCalculator;
+import calculator.View.StringCalculatorView;
 import java.util.List;
 
 public class StringProcessorController {
@@ -13,15 +14,18 @@ public class StringProcessorController {
     private final DelimiterExtractor delimiterExtractor;
     private final CustomDelimiterExtractor customDelimiterExtractor;
     private final SumCalculator sumCalculator;
+    private final StringCalculatorView stringCalculatorView;
 
     // 생성자에서 외부로부터의 의존성 주입
     public StringProcessorController(InputReader inputReader, DelimiterExtractor delimiterExtractor,
-                                     CustomDelimiterExtractor customDelimiterExtractor, SumCalculator sumCalculator) {
+                                     CustomDelimiterExtractor customDelimiterExtractor, SumCalculator sumCalculator,
+                                     StringCalculatorView stringCalculatorView) {
 
         this.inputReader = inputReader;
         this.delimiterExtractor = delimiterExtractor;
         this.customDelimiterExtractor = customDelimiterExtractor;
         this.sumCalculator = sumCalculator;
+        this.stringCalculatorView = stringCalculatorView;
     }
 
     // 전체 프로세스 조율
@@ -39,7 +43,8 @@ public class StringProcessorController {
 
         // 구분자들로 분리된 문자열들을 계산해주는 로직 호출
         sumCalculator.sum(inputDTO);
+
+        // View를 호출해 결과 출력
+        stringCalculatorView.displayResult(inputDTO);
     }
-
-
 }
