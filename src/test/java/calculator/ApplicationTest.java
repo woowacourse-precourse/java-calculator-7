@@ -16,7 +16,8 @@ class ApplicationTest extends NsTest {
   @Test
   void 입력_확인() {
     assertSimpleTest(() -> {
-      run("//:,\n1:2:3");
+      run("//:,\\n1:2:3");
+
       assertThat(output()).contains("덧셈할 문자열을 입력해 주세요.");
 
     });
@@ -34,7 +35,7 @@ class ApplicationTest extends NsTest {
       );
 
       assertSimpleTest(() ->
-          assertThatThrownBy(() -> runException("//\n"))
+          assertThatThrownBy(() -> runException("//\n\n"))
               .isInstanceOf(IllegalArgumentException.class)
 
       );
@@ -44,66 +45,21 @@ class ApplicationTest extends NsTest {
   }
 
   @Test
-  void 구분자_추출() {
-
-    assertSimpleTest(() -> {
-      Extracts extracts =
-          new Extracts("1:2:3", "//:,");
-
-      assertThat(extracts.extractDelimiter()).contains(":", ",");
-    });
-
-  }
-
-  @Test
-  void 숫자_추출() {
-    assertSimpleTest(() -> {
-      Extracts extracts =
-          new Extracts("1:2:3", "//:,");
-
-      assertThat(extracts.extractDelimiter()).contains(":", ",");
-      assertThat(extracts.extractNum()).contains(1, 2, 3);
-    });
-  }
-
-  @Test
-  void 정답_계산() {
-    assertSimpleTest(() -> {
-
-      Extracts extracts =
-          new Extracts("1:2:3", "//:,");
-      extracts.extractDelimiter();
-      extracts.extractNum();
-
-      Answer answer = new Answer(extracts.getNums());
-
-      assertThat(answer.calSum()).isEqualTo(6);
-
-    });
-  }
-
-  @Test
-  void 정답_출력() {
-    assertSimpleTest(() -> {
-      Extracts extracts =
-          new Extracts("1:2:3", "//:,");
-      extracts.extractDelimiter();
-      extracts.extractNum();
-
-      Answer answer = new Answer(extracts.getNums());
-
-      answer.printAns();
-
-      assertThat(output()).isEqualTo("결과 : 6");
-    });
-  }
-
-  @Test
   void 예제_케이스_추가(){
     assertSimpleTest(() -> {
       run("1,2:3");
       assertThat(output()).contains("결과 : 6");
     });
+  }
+
+  @Test
+  void 예제_음수케이스_추가(){
+    assertSimpleTest(() ->
+        assertThatThrownBy(() -> runException("//;\\n-1;2"))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("숫자가 아니거나 음수입니다.")
+
+    );
   }
 
 
