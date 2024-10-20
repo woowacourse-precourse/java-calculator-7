@@ -38,8 +38,8 @@ public class Application {
 
     public static boolean isValidNumbers(ArrayList<String> numbers) {
         for (String number : numbers) {
-            if (!number.matches("^[0-9]*$")) {
-                throw new IllegalArgumentException("숫자가 아닌 문자 포함");
+            if (!number.matches("^[0-9]*$") || number.equals("0")) {
+                throw new IllegalArgumentException("양수가 아닌 문자 포함");
             }
         }
         return true;
