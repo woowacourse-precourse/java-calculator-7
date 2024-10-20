@@ -8,8 +8,8 @@ import calculator.view.CalculatorInputView;
 import calculator.view.CalculatorOutputView;
 
 public class Application {
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
         DelimiterManagerImpl delimiterManagerImpl = new DelimiterManagerImpl();
         delimiterManagerImpl.init();
 
