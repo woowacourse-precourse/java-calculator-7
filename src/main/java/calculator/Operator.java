@@ -1,13 +1,17 @@
 package calculator;
 
-import java.math.BigInteger;
+import static calculator.Constants.*;
+
 import java.util.List;
 
 public class Operator {
-    public BigInteger add(List<BigInteger> operands) {
-        BigInteger result = BigInteger.ZERO;
-        for (BigInteger operand : operands) {
-            result = result.add(operand);
+    public int add(List<Integer> operands) {
+        int result = 0;
+        for (Integer operand : operands) {
+            if ((long) result + operand > MAX_ADD_VALUE) {
+                throw new IllegalArgumentException(EXCEEDS_LIMIT_MESSAGE);
+            }
+            result += operand;
         }
         return result;
     }
