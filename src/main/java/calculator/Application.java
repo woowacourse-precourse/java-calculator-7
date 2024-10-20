@@ -9,12 +9,12 @@ public class Application {
         String input = Console.readLine();
 
         StringPreprocessor preprocessor = new StringPreprocessor();
-        Delimiter delimiter = new Delimiter();
+        DelimiterFinder delimiterFinder = new DelimiterFinder();
         NumberExtractor numberExtractor = new NumberExtractor();
         Calculator calculator = new Calculator();
 
         String numbersPart = preprocessor.removeDelimiterPart(input);
-        String delimiters = delimiter.findDelimiter(input);
+        String delimiters = delimiterFinder.findDelimiter(input);
 
         List<Integer> numbers = numberExtractor.extractNumbers(numbersPart, delimiters);
         int result = calculator.calculate(numbers);

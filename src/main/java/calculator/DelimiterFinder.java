@@ -2,7 +2,7 @@ package calculator;
 
 import java.util.regex.Pattern;
 
-public class Delimiter {
+public class DelimiterFinder {
 
     private static final String DEFAULT_DELIMITERS = ",|:";
     private static final String CUSTOM_DELIMITER_START = "//";

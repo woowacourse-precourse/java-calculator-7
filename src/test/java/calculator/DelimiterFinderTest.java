@@ -5,17 +5,17 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 
-class DelimiterTest {
+class DelimiterFinderTest {
     
     @DisplayName("기본 구분자(쉼표,클론)를 찾아 반환한다.")
     @Test
     void findDefaultDelimiters() {
         // given
-        Delimiter delimiter = new Delimiter();
+        DelimiterFinder delimiterFinder = new DelimiterFinder();
         String input = "1,2:3";
 
         // when
-        String delimiters = delimiter.findDelimiter(input);
+        String delimiters = delimiterFinder.findDelimiter(input);
 
         // then
         assertThat(delimiters).isEqualTo(",|:");
@@ -25,11 +25,11 @@ class DelimiterTest {
     @Test
     void findCustomDelimiters() {
         // given
-        Delimiter delimiter = new Delimiter();
+        DelimiterFinder delimiterFinder = new DelimiterFinder();
         String input = "//;\\n1;2;3";
 
         // when
-        String delimiters = delimiter.findDelimiter(input);
+        String delimiters = delimiterFinder.findDelimiter(input);
 
         // then
         assertThat(delimiters).isEqualTo(",|:|\\Q;\\E");
@@ -39,11 +39,11 @@ class DelimiterTest {
     @Test
     void findAllDelimiters() {
         // given
-        Delimiter delimiter = new Delimiter();
+        DelimiterFinder delimiterFinder = new DelimiterFinder();
         String input = "//;\\n1;2,3:4";
 
         // when
-        String delimiters = delimiter.findDelimiter(input);
+        String delimiters = delimiterFinder.findDelimiter(input);
 
         // then
         assertThat(delimiters).isEqualTo(",|:|\\Q;\\E");
@@ -53,11 +53,11 @@ class DelimiterTest {
     @Test
     void findDelimiters_emptyInput() {
         // given
-        Delimiter delimiter = new Delimiter();
+        DelimiterFinder delimiterFinder = new DelimiterFinder();
         String input = "";
 
         // when
-        String delimiters = delimiter.findDelimiter(input);
+        String delimiters = delimiterFinder.findDelimiter(input);
 
         // then
         assertThat(delimiters).isEqualTo(",|:");
@@ -67,11 +67,11 @@ class DelimiterTest {
     @Test
     void findDelimiters_emptyCustomDelimiter() {
         // given
-        Delimiter delimiter = new Delimiter();
+        DelimiterFinder delimiterFinder = new DelimiterFinder();
         String input = "//\\n1,2,3";
 
         // when
-        String delimiters = delimiter.findDelimiter(input);
+        String delimiters = delimiterFinder.findDelimiter(input);
 
         // then
         assertThat(delimiters).isEqualTo(",|:");
@@ -81,10 +81,10 @@ class DelimiterTest {
     @Test
     void findDelimiters_escape() {
         // given
-        Delimiter delimiter = new Delimiter();
+        DelimiterFinder delimiterFinder = new DelimiterFinder();
         String input = "//\\\\n1,2,3";
         // when
-        String delimiters = delimiter.findDelimiter(input);
+        String delimiters = delimiterFinder.findDelimiter(input);
 
         // then
         // \Q와 \E로 둘러싼 부분에 있는 특수문자를 이스케이프
