@@ -71,6 +71,6 @@
 
 - <a href="https://velog.io/@chan7in/%EC%9A%B0%ED%85%8C%EC%BD%94-BE-7%EA%B8%B0-%ED%9A%8C%EA%B3%A0-1%EC%A3%BC%EC%B0%A8-%EA%B3%84%EC%82%B0%EA%B8%B0-indexOf-substring-%EC%9D%B4%EC%8A%A4%EC%BC%80%EC%9D%B4%ED%94%84-%EB%AC%B8%EC%9E%90">indexOf(), substring(), 이스케이프 문자 사용 시 주의할 점</a>
 - <a href="https://velog.io/@chan7in/%EC%9A%B0%ED%85%8C%EC%BD%94-BE-7%EA%B8%B0-%ED%9A%8C%EA%B3%A0-PRE-1-%EA%B3%84%EC%82%B0%EA%B8%B0-%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D-%EA%B0%80%EB%B3%80%EC%9D%B8%EC%9E%90">정규표현식, 가변인자</a>
-- <a href="https://velog.io/@chan7in/%EC%9A%B0%ED%85%8C%EC%BD%94-%ED%94%84%EB%A6%AC%EC%BD%94%EC%8A%A4-%ED%9A%8C%EA%B3%A0-1%EC%A3%BC%EC%B0%A8-Supplier">Supplier</a>
+- <a href="https://velog.io/@chan7in/%EC%9A%B0%ED%85%8C%EC%BD%94-%ED%94%84%EB%A6%AC%EC%BD%94%EC%8A%A4-%ED%9A%8C%EA%B3%A0-1%EC%A3%BC%EC%B0%A8-Supplier">Supplier 를 활용한 리팩토링</a>
 
 
