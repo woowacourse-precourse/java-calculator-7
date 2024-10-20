@@ -61,22 +61,16 @@ public class Application {
             return;
         }
         // 커스텀 구분자를 가질 경우
-//        if(input.startsWith("//") && input.contains("\n") || input.contains("\\n")){
         if(input.startsWith("//") && input.contains("\n")){
-//            if (input.contains("\\n")){
-//                input = input.replace("\\n", "\n");
-//            }
 
             String delimiter = input.substring(2, input.indexOf("\n"));
-            System.out.println("delimiter="+delimiter);
 
             String regex = "[0-9]+(" + java.util.regex.Pattern.quote(delimiter) + "[0-9]+)*";
 
             String subInput = input.substring(input.indexOf("\n") + 1);
-            System.out.println("subinput="+subInput);
 
-            // 구분자의 길이가 1이며 숫자를 포함하지 않고, 구분자 정의 섹션 외의 문자열에 구분자와 숫자만 갖는지 확인
-            if (subInput.matches("[0-9]+") || (!delimiter.matches(".*[0-9].*") && subInput.matches(regex))){
+            // 구분자 정의 섹션 외의 문자열에 숫자만 있거나 구분자와 숫자만 갖는지 확인
+            if ((subInput.matches("[0-9]+") || subInput.matches(regex)) && !delimiter.matches(".*[a-zA-Z0-9].*")){
                 return;
             }
         }

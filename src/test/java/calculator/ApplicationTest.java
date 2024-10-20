@@ -4,8 +4,7 @@ import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 class ApplicationTest extends NsTest {
     @Test
@@ -46,8 +45,53 @@ class ApplicationTest extends NsTest {
      "//;*\n1;2;3", 커스텀구분자가 /,\n," 중에 있을 경우를 테스트
      */
     @Test
-    void 기본구분자와_숫자만_있는경우_예외_없음(){
+    void 기본_구분자와_숫자만_있는경우_예외_없음(){
         String input = "1,2:3";
+        Application.validateInput(input);
+        assertThat(true).isTrue();
+    }
+    @Test
+    void 커스텀_구분자_예외_없음(){
+        String input = "//;\n1;2;3";
+        Application.validateInput(input);
+        assertThat(true).isTrue();
+    }
+    @Test
+    void 커스텀_구분자에_숫자가_포함될_경우_예외_발생(){
+        String input = "//2\n123";
+        assertThatThrownBy(() -> Application.validateInput(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 숫자_대신_알파벳일_경우_예외_발생(){
+        String input = "a,b;c";
+        assertThatThrownBy(() -> Application.validateInput(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 커스텀_구분자에_알파벳이_포함된_경우_예외_발생(){
+        String input = "//a\n123";
+        assertThatThrownBy(() -> Application.validateInput(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 숫자_대신_알파벳이_있을_경우_예외_발생(){
+        String input = "//;\\na1;23";
+        assertThatThrownBy(() -> Application.validateInput(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+    @Test
+    void 커스텀_구분자의_일부만_있을_경우_예외_발생(){
+        String input = "//;*\\n1;2;3";
+        assertThatThrownBy(() -> Application.validateInput(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+    @Test
+    void 커스텀_구분자에_이스케이프_문자가_포함될_경우_예외_없음(){
+        String input = "//\\\n1\\2";
         Application.validateInput(input);
         assertThat(true).isTrue();
     }
