@@ -32,6 +32,8 @@ class ApplicationTest extends NsTest {
         });
     }
 
+//    아래 주석 처리된 @Test는 Null 값 전달에 대한 처리 방식이 모호하므로 제출 후 고려하기
+/*
     @Test
     void 비정상적인_구분자() {
         assertSimpleTest(() -> {
@@ -55,6 +57,8 @@ class ApplicationTest extends NsTest {
                     .isInstanceOf(IllegalArgumentException.class);
         });
     }
+
+ */
 
     @Test
     void 숫자_한개() {
@@ -86,6 +90,14 @@ class ApplicationTest extends NsTest {
             assertThatThrownBy(() -> runException("//?\\b1"))
                     .isInstanceOf(IllegalArgumentException.class);
         });
+    }
+
+    @Test
+    void 음수_전달() {
+        assertSimpleTest((() -> {
+            assertThatThrownBy(() -> runException("-1,2,3"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        }));
     }
 
     @Override

@@ -7,19 +7,20 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
 
+        int StartIndex = Constant.ZERO;
+        int Result = Constant.ZERO;
+
         String UserInput = valueInput();
-        String matcherCheck = "[0-9]+";
-        int StartIndex = 0;
         String AllSeparator;
 
         if (UserInput.isEmpty()) {
-            resultPrint(0);
+            resultPrint(Constant.ZERO);
             return;
         }
 
         if (hasPattern(UserInput)) {
-            AllSeparator = ",|:|" + UserInput.substring(2);
-            StartIndex = 5;
+            AllSeparator = ",|:|" + UserInput.substring(Constant.CUSTOM_PATTERN_INDEX);
+            StartIndex = Constant.CUSTOM_PATTERN_STARTINDEX;
         } else {
             AllSeparator = ",|:";
         }
@@ -27,19 +28,17 @@ public class Application {
         String[] NumberList =
                 UserInput.substring(StartIndex).split(AllSeparator);
 
-        int result = 0;
-
         for (String s : NumberList) {
-            if (s.matches(matcherCheck)) {
-                result += Integer.parseInt(s);
+            if (s.matches(Constant.MATCHER_CHECK)) {
+                Result += Integer.parseInt(s);
             } else if (s.matches("")) {
-                result += 0;
+                Result += Constant.ZERO;
             } else {
                 throw new IllegalArgumentException();
             }
         }
 
-        resultPrint(result);
+        resultPrint(Result);
     }
 
 
