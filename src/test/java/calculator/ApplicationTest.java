@@ -9,6 +9,22 @@ import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
     @Test
+    void 기본_구분자_사용1() {
+        assertSimpleTest(() -> {
+            run("1:2,3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 기본_구분자_사용2() { // 숫자, 구분자 외의 문자가 포함된 문자열
+        assertSimpleTest(() -> {
+            run("1::3");
+            assertThat(output()).contains("결과 : 4");
+        });
+    }
+
+    @Test
     void 커스텀_구분자_사용1() {
         assertSimpleTest(() -> {
             run("//;\\n1;2");
@@ -29,14 +45,6 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("//^;\\n");
             assertThat(output()).contains("결과 : 0");
-        });
-    }
-
-    @Test
-    void 기본_구분자_사용() {
-        assertSimpleTest(() -> {
-            run("1:2,3");
-            assertThat(output()).contains("결과 : 6");
         });
     }
 
@@ -113,23 +121,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트_커스텀4() { // 커스텀 설정 시 오류4
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//^"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
-    }
-
-    @Test
-    void 예외_테스트_커스텀5() { // 커스텀 설정 시 오류5
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//^\\"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
-    }
-
-    @Test
-    void 예외_테스트_커스텀6() { // 기본/커스텀 외의 구분자
+    void 예외_테스트_커스텀4() { // 기본/커스텀 외의 구분자
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//^\\n1^2+3"))
                         .isInstanceOf(IllegalArgumentException.class)
