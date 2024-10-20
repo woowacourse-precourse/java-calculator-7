@@ -13,17 +13,25 @@ public class Application {
         String inputStr = Console.readLine();  // 입력 받기
 
         ArrayList<String> delimiters = getDelimiter(inputStr);
-//        if (strs == " ") {
-//            return 0;
-//        }
+
+        if (inputStr == null || inputStr.isEmpty()) {
+            System.out.println("결과 : " + 0);
+        }
+        String changeInputStr;
+//        System.out.println("특별 구분자 확인 "+delimiters);
+
         if (delimiters.size() > 2) {
             String regex = checkSpecialDelimiter(inputStr);
-            inputStr = changeInputStr(regex,inputStr);
+            changeInputStr = changeInputStr(regex,inputStr);
+        }else {
+            changeInputStr = inputStr;
         }
+//        System.out.println("변경 된 문자열 "+ changeInputStr);
+
 
         // error case 확인
         try {
-            checkForErrors(inputStr);
+            checkForErrors(changeInputStr);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
@@ -32,7 +40,7 @@ public class Application {
 //        for (String delimiter : delimiters) {
 //            System.out.println(delimiter.getClass().getName());
 //        }
-        int sumNum = splitDelimiterAddNum(inputStr, delimiters);
+        int sumNum = splitDelimiterAddNum(changeInputStr, delimiters);
         System.out.println("결과 : " + sumNum);
     }
     public static ArrayList<String> getDelimiter(String inputString){
@@ -42,6 +50,7 @@ public class Application {
         delimiters.add(":");
 
         String regex = checkSpecialDelimiter(inputString);
+
         if (regex != null) {
             String specialDelimiter = getSpecialDelimiter(regex);
             delimiters.add(specialDelimiter);
@@ -58,9 +67,10 @@ public class Application {
         // 정규표현식
         // 특수 구분자가 하나의 char이 아닐수 있음
         // //n으로 주는지 /n으로 주어지는지 모르겠다.
-        String regex = "^//.*\\n";
+        String regex = "^//.*\\\\n";
         Pattern pattern =Pattern.compile(regex);
         Matcher matcher1 = pattern.matcher (inputString);
+
         if (matcher1.find()) {
             String delimiter = matcher1.group();
             return delimiter;
@@ -69,8 +79,8 @@ public class Application {
         }
     }
     public static String changeInputStr(String matchStr, String InputString){
-        String[] modStr = InputString.split(matchStr);
-        String changeStr = modStr[modStr.length - 1];
+        String changeStr = InputString.replace(matchStr,"");
+//        System.out.println(changeStr);
         return changeStr;
     }
 
