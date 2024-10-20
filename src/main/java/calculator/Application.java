@@ -10,7 +10,16 @@ public class Application {
         String seperator = DecideSeparatorInString(input);
         String[] arr = DevideStringToSeparator(input, seperator);
         System.out.println(String.join(" ", arr));
-        System.out.println("is Correct input? " + isCorrectInput(arr, seperator));
+        try {
+            if(!isCorrectInput(arr, seperator)) {
+                throw new IllegalArgumentException("IllegalArgumentException");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            Console.close();
+            return;
+        }
+
         Console.close();
     }
 
