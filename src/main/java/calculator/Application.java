@@ -10,12 +10,7 @@ public class Application {
         String input = Console.readLine();
     }
 
-    public static boolean isNumber(String str) {
-        try {
-            Integer.parseInt(str.trim());
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
+    public static boolean isCustom(String str) {
+        return str.startsWith("//");
     }
 }
