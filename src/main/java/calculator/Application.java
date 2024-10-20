@@ -8,7 +8,7 @@ import camp.nextstep.edu.missionutils.Console;
 public class Application {
     private static final List<Character> delimContainer = new ArrayList<>(Arrays.asList(',', '.'));
     public static void main(String[] args){
-        // TODO: 프로그램 구현
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
         String parsedInput = parseCustomDelimiter(input);
@@ -19,7 +19,7 @@ public class Application {
 
         Integer result = addIntList(intList);
 
-        System.out.println(result);
+        System.out.println("결과 : " +  result);
     }
 
     private static String parseCustomDelimiter(String str){
