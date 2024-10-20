@@ -30,6 +30,9 @@ public class Application {
 
         if (matcher.find()) {
             separator3 = matcher.group(1); // 추출된 문자가 존재한다면 구분자로 지정
+            if (separator3.length() > 1) { // 두 글자 이상인 경우
+                throw new IllegalArgumentException("구분자는 한 글자여야 합니다: " + separator3);
+            }
             input = input.substring(matcher.end()).trim(); // 구분자 지정하는 구간 삭제
         }
 
@@ -52,7 +55,8 @@ public class Application {
         int sum = 0;
         numStr = numStr.trim(); // 문자열의 앞뒤 공백 제거
         if (numStr.isEmpty()) {
-            throw new IllegalArgumentException("공백입니다.");
+            return 0;
+
         }
         try {
             int number = Integer.parseInt(numStr); // 형변환
