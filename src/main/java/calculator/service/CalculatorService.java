@@ -13,6 +13,8 @@ import java.util.regex.Pattern;
 public class CalculatorService {
 
     private static final List<String> DEFAULT_DELIMITERS = Arrays.asList(",", ":");
+    private static final DelimiterValidation validation = new DelimiterValidation();
+
 
     // 기본 구분자, 커스텀 구분자 타입 체크
     private DelimiterAndNumber isDelimiterCustomOrDefault(String input, DelimiterValidation validation) {
@@ -25,6 +27,28 @@ public class CalculatorService {
         }
 
         return delimiterAndNumberInput;
+    }
+
+    // 커스텀 구분자 파싱
+    private DelimiterAndNumber getCustomInputParse(String input) {
+        Pattern pattern = DelimiterValidation.getCustomDelimiterPattern();  // 커스텀 패턴 가져오기
+        Matcher matcher = pattern.matcher(input);
+
+        if (matcher.matches()) {
+            String customDelimiter = matcher.group(1);  // 커스텀 구분자 추출
+            String numbers = matcher.group(2);          // 숫자 부분 추출
+
+            ArrayList<String> delimiters = new ArrayList<>(DEFAULT_DELIMITERS);
+
+            ArrayList<String> customDelimiters = extractEscapedAndCustomDelimiter(customDelimiter);
+
+            isCheckSameDelimiterName(delimiters, customDelimiters);
+
+            validation.isCheckAllowedDelimiter(numbers, delimiters);
+
+            return new DelimiterAndNumber(delimiters, numbers);
+        }
+        throw new CalculatorException("잘못된 커스텀 구분자 형식입니다.");
     }
 
     private ArrayList<String> extractEscapedAndCustomDelimiter(String delimiter) {
