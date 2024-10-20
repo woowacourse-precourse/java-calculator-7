@@ -13,7 +13,7 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
 
-        List<String> sepList = inputSeparate(input);
+        List<String> sepList = separateInput(input);
 
         String delimiter = sepList.get(0);
         String str = sepList.get(1);
@@ -22,13 +22,13 @@ public class Application {
         if (str.isEmpty()){
             System.out.println("결과 : " + 0);
         } else {
-            int sum = calculator(splitter(delimiter, str));
+            int sum = calculate(splitByDelimiter(delimiter, str));
             System.out.println("결과 : " + sum);
         }
     }
 
     // 입력을 구분자파트와 문자열파트로 분리하는 메서드
-    public static List<String> inputSeparate(String input){
+    public static List<String> separateInput(String input){
         int start = input.indexOf("//");
         int end = input.indexOf("\\n");
 
@@ -42,13 +42,14 @@ public class Application {
             String strPart = input.substring(end + 2);
 
             return Arrays.asList(delPart, strPart);
-        } else {
-            throw new IllegalArgumentException("올바른 입력값을 넣어주세요.");
         }
+
+        throw new IllegalArgumentException("올바른 입력값을 넣어주세요.");
+
     }
 
     // 문자열을 구분자로 구분해주는 메서드
-    private static List<Integer> splitter(String delimiter, String str) {
+    private static List<Integer> splitByDelimiter(String delimiter, String str) {
         String[] splitedStringList = str.split("[" + Pattern.quote(delimiter) + ",:]");
 
         List<Integer> intList = new ArrayList<>();
@@ -66,15 +67,14 @@ public class Application {
     }
 
     // 합을 구하는 메서드
-    public static int calculator(List<Integer> intList){
+    public static int calculate(List<Integer> intList){
         int sum = 0;
 
         for (int num : intList){
             if (num > 0){
                 sum += num;
-            } else {
-                throw new IllegalArgumentException("양수만 입력해 주세요.");
             }
+            throw new IllegalArgumentException("양수만 입력해 주세요.");
         }
 
         return sum;
