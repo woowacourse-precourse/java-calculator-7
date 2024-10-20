@@ -38,11 +38,12 @@ public class Application {
 
     // 입력 문자열에서 커스텀 구분자를 추출하는 함수
     public static String getDelimiter(String input) {
-        Pattern customDelimiterPattern = Pattern.compile("//(.)\\\\n(.*)");
+        Pattern customDelimiterPattern = Pattern.compile("//(.*)\\\\n(.*)");
         Matcher matcher = customDelimiterPattern.matcher(input);
 
         if (matcher.matches()) {
-            return Pattern.quote(matcher.group(1)); // 커스텀 구분자 반환
+            String delimiter = Pattern.quote(matcher.group(1));
+            return delimiter + "|,|:"; // 커스텀 구분자 반환
         }
 
         return ",|:"; // 기본 구분자
