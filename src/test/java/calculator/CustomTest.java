@@ -25,4 +25,9 @@ public class CustomTest {
         String CUSTOM_DELIMITER_FORMAT = "//.\\\\n.*";
         assertThat(Pattern.matches(CUSTOM_DELIMITER_FORMAT, "//\\\\n2:3,2")).isTrue();
     }
+
+    @Test
+    void 빈_문자열이_입력된_경우() {
+        assertThat(Application.run("")).isEqualTo(0);
+    }
 }
