@@ -3,8 +3,8 @@ package calculator;
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
 import calculator.NumberStrategy.SimpleNumberStrategy;
-import calculator.calculateStrategy.emptyStringCalculate;
-import calculator.calculateStrategy.integerCalculate;
+import calculator.calculateStrategy.emptyStringCalculateStrategy;
+import calculator.calculateStrategy.integerCalculateStrategy;
 import calculator.delimiterStrategy.CustomDelimiterStrategy;
 import calculator.delimiterStrategy.DefaultDelimiterStrategy;
 
@@ -41,9 +41,9 @@ public class Application {
 
     private static void configureCalculateStrategy(String userInput) {
         if (userInput.isEmpty()) {
-            stringCalculator.setCalculate(new emptyStringCalculate());
+            stringCalculator.setCalculate(new emptyStringCalculateStrategy());
         } else {
-            stringCalculator.setCalculate(new integerCalculate());
+            stringCalculator.setCalculate(new integerCalculateStrategy());
         }
     }
 }

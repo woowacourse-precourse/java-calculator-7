@@ -1,8 +1,8 @@
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import calculator.calculateStrategy.Calculate;
-import calculator.calculateStrategy.integerCalculate;
+import calculator.calculateStrategy.CalculateStrategy;
+import calculator.calculateStrategy.integerCalculateStrategy;
 import java.util.ArrayList;
 import java.util.List;
 import org.assertj.core.api.Assertions;
@@ -13,11 +13,11 @@ import org.junit.jupiter.api.Test;
 
 @DisplayName("계산 기능 테스트")
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
-public class CalculateTest {
+public class CalculateStrategyTest {
     @Test
     void 리스트의_숫자들의_합을_올바르게_구한다() {
         //given
-        Calculate calculate = new integerCalculate();
+        CalculateStrategy calculate = new integerCalculateStrategy();
         List<Integer> operands = new ArrayList<>();
         operands.add(1);
         operands.add(3);
@@ -33,7 +33,7 @@ public class CalculateTest {
     @Test
     void 숫자의_합이_정수범위를_넘어가면_예외가_발생한다() {
         //given
-        Calculate calculate = new integerCalculate();
+        CalculateStrategy calculate = new integerCalculateStrategy();
         List<Integer> operands = new ArrayList<>();
         operands.add(2147483647);
         operands.add(1);

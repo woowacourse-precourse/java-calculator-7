@@ -1,10 +1,10 @@
 package calculator;
 
-import calculator.calculateStrategy.Calculate;
+import calculator.calculateStrategy.CalculateStrategy;
 import calculator.delimiterStrategy.DelimiterStrategy;
 
 public class StringCalculator {
-    private Calculate calculate;
+    private CalculateStrategy calculate;
     private DelimiterStrategy delimiterStrategy;
     private calculator.NumberStrategy.NumberStrategy numberStrategy;
     private final String userInput;
@@ -13,7 +13,7 @@ public class StringCalculator {
         this.userInput = userInput;
     }
 
-    public void setCalculate(Calculate calculate) {
+    public void setCalculate(CalculateStrategy calculate) {
         this.calculate = calculate;
     }
 
