@@ -17,12 +17,10 @@ public class Calculator {
 
         if(input.startsWith("//")){
 
-            System.out.println("original :" +input);
 
             if(input.contains("\\n")){
                 delimiter = String.valueOf(input.charAt(2));
                 input = input.substring(5);
-                System.out.println("after: "+input);
             }
             else{
                 throw new IllegalArgumentException("잘못된 입력입니다: " + input);
