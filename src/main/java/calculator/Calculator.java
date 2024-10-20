@@ -7,32 +7,32 @@ public class Calculator {
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
     private static final String NEWLINE_REPLACEMENT = "\\n";
 
-    public int calculateSumFromInput(String input) {
-        if (input == null || input.isEmpty()) { // 공백 문자열 처리
+    public int calculateSumFromInput(String userInput) {
+        if (userInput == null || userInput.isEmpty()) { // 공백 문자열 처리
             return 0;
         }
 
         String delimiter = DEFAULT_DELIMITER; // 기본 구분자
 
-        if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
-            input = input.replace(NEWLINE_REPLACEMENT, "\n");
-            int delimiterIndex = input.indexOf("\n");
-            delimiter = input.substring(2, delimiterIndex);
-            input = input.substring(delimiterIndex + 1);
+        if (userInput.startsWith(CUSTOM_DELIMITER_PREFIX)) {
+            userInput = userInput.replace(NEWLINE_REPLACEMENT, "\n");
+            int delimiterIndex = userInput.indexOf("\n");
+            delimiter = userInput.substring(2, delimiterIndex);
+            userInput = userInput.substring(delimiterIndex + 1);
 
-            if (input == null || input.isEmpty()) { // 공백 문자열 처리
+            if (userInput == null || userInput.isEmpty()) { // 공백 문자열 처리
                 return 0;
             }
         }
 
-        String[] numbers = input.split(delimiter);
-        return sumParsedNumbers(numbers);
+        String[] splitNumbers = userInput.split(delimiter);
+        return sumParsedNumbers(splitNumbers);
     }
 
     // 숫자의 합 계산
-    private int sumParsedNumbers(String[] numbers) {
+    private int sumParsedNumbers(String[] splitNumbers) {
         int sum = 0;
-        for (String number : numbers) {
+        for (String number : splitNumbers) {
             int num = validateAndConvertToInt(number);
             sum += num;
         }
