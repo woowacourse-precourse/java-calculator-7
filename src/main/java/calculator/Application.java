@@ -39,7 +39,7 @@ public class Application {
          * 1.2 커스텀 구분자를 포함하여 입력된 경우
          */
         if (hasCustomDelimiter(input)) {
-            int indexOfEndSign = input.indexOf(CUSTOM_DELIMITER_END_SIGN); // 개행문자가 아닌 \n라는 문자를 찾는다
+            int indexOfEndSign = input.indexOf(CUSTOM_DELIMITER_END_SIGN); // 개행문자가 아닌 '\n'라는 문자를 찾는다
             if (isEndSignMissing(indexOfEndSign)) {
                 throw new IllegalArgumentException("커스텀 구분자 선언 후 '\\n'이 필요합니다.");
             }
@@ -87,7 +87,7 @@ public class Application {
         for (String delim : customDelimiters) {
             delim = delim.trim();
 
-            if (!delim.isEmpty()) { // 빈 문자열로 파싱되지 않았다면 (구분자가 연속으로 입력된 경우)
+            if (!delim.isEmpty()) { // 빈 문자열로 파싱되지 않았다면 (3.3 구분자가 연속으로 입력된 경우)
                 delimiterPart
                         .append("|")
                         .append(toRegex(delim));
