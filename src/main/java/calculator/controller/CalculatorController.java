@@ -3,6 +3,8 @@ package calculator.controller;
 import calculator.domain.StringCalculator;
 
 import calculator.domain.vo.CalculationValues;
+import calculator.domain.vo.CustomValues;
+
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -22,12 +24,12 @@ public class CalculatorController {
 
     public void applicationRun() {
         String value = inputView.receiveValue();
-        String customValue = stringCalculator.extractCustomValue(value);
+        CustomValues customValue = stringCalculator.extractCustomValue(value);
         String rawValue = stringCalculator.removeValue(value);
-        String[] pureValue = stringCalculator.createNewValue(rawValue, customValue);
+        String[] pureValue = stringCalculator.createNewValue(rawValue, customValue.value());
         List<Integer> saveValue = stringCalculator.saveValue(pureValue);
-        new CalculationValues(saveValue);
-        int result = stringCalculator.calculateSum(saveValue);
+        CalculationValues calculationValues = new CalculationValues(saveValue);
+        int result = stringCalculator.calculateSum(calculationValues.numbers());
         outputView.outputResult(result);
     }
 }
