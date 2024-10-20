@@ -21,5 +21,9 @@ public class Application {
         StringFilter filter = new StringFilter(processedInput, delimiters);
         List<Integer> numbers = filter.extractNumbers();
 
+        NumberCalculator numberCalculator = new NumberCalculator();
+        Number result = numberCalculator.sum(numbers);
+
+        System.out.println("결과 : " + result);
     }
 }
