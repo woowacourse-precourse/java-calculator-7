@@ -48,6 +48,17 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 구분자를_숫자로_지정한_경우(){
+        // given
+        String numericSeparator = "//3\\n1";
+
+        //when & then
+        assertThrows(IllegalArgumentException.class, () ->{
+            Application.inputValidationCheck(numericSeparator);
+        });
+    }
+
+    @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1");
