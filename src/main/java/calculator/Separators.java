@@ -19,10 +19,6 @@ public class Separators {
                 Arrays.asList(BasicSeparator.COMMA.getSymbol(), BasicSeparator.COLON.getSymbol()));
     }
 
-    public List<String> getSeparators() {
-        return separators;
-    }
-
     public String containCustomSeparator(String input) {
         if (input == null) {
             throw new IllegalArgumentException(NULL_INPUT.getMessage());
