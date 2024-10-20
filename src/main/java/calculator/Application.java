@@ -9,7 +9,6 @@ public class Application {
 
         String input = Console.readLine();
         int sum = 0;
-        boolean customized = false;
         char custom = ',';
 
         // 빈 문자열을 받는 경우 0 출력
@@ -21,14 +20,13 @@ public class Application {
         try {
             // 커스텀 구분자 지정
             if (input.charAt(0) == '/' && input.charAt(1) == '/' && input.charAt(3) == '\\' && input.charAt(4) == 'n') {
-                customized = true;
                 custom = input.charAt(2);
                 input = input.substring(5);
             }
 
             // 구분자를 기준으로 숫자 추출
             // 여러 개의 구분자를 표현하기 위해 정규식 사용
-            String[] nums = input.split(",|:");
+            String[] nums = input.split(String.format(",|:|%c", custom));
 
             for (String num : nums) {
                 sum += Integer.parseInt(num);
