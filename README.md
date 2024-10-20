@@ -26,7 +26,7 @@ This Java application is a simple string calculator that allows users to input s
 
 - If the input string is empty or null, the sum will be 0.
 - If the input string starts with // but is followed by an incorrect custom delimiter format, an error message will appear indicating the format is wrong.
-- If the string contains non-numeric characters or negative numbers, an appropriate error message will display, indicating the issue.
+- If the string contains negative numbers, an appropriate error message will display, indicating the issue.
 
 ## Closing the Scanner
 
