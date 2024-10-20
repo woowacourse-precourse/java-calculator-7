@@ -1,7 +1,8 @@
 package calculator;
 
 import java.text.DecimalFormat;
-import java.util.Scanner;
+import camp.nextstep.edu.missionutils.Console;
+import java.util.NoSuchElementException;
 
 public class Application {
 
@@ -9,16 +10,15 @@ public class Application {
         // TODO: 프로그램 구현
         String REGEX = "[,:]";
         System.out.println("덧셈할 문자열을 입력해주세요");
-        Scanner sc = new Scanner(System.in);
 
-        if (!sc.hasNextLine()) {
+        String user_input = "";
+        try {
+            user_input = Console.readLine();
+        } catch (NoSuchElementException e) {
             System.out.print("결과 : 0");
             return;
         }
 
-        String user_input = sc.nextLine();
-
-        sc.close();
         if (user_input.startsWith("//")) {
             int endIndex = user_input.indexOf("\\n");
             REGEX = user_input.substring("//".length(), endIndex);
