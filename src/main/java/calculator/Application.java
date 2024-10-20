@@ -16,13 +16,13 @@ public class Application {
 
         // 공백이 입력된 경우(입력값이 없는 경우)
         if (input.isEmpty()){
-            System.out.println(result);
+            System.out.println("결과 : "+result);
             return;
         }
 
         // 단일 숫자가 입력된 경우
         if (input.matches("[-+]?[0-9]+")){
-            System.out.println(Integer.parseInt(input));
+            System.out.println("결과 : "+Integer.parseInt(input));
             return;
         }
 
