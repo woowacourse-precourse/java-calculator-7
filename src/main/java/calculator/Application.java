@@ -8,11 +8,10 @@ public class Application {
     public static final String RIGHT_CUSTOM_DELIMITER = "\\n";
     public static final String ILLEGAL_EXCEPTION_MESSAGE = "잘못된 값입니다.";
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
         Application app = new Application();
         String input = app.userInputManager();
-        int Result = app.inputSeparator(input);
-        app.outputManager(Result);
+        int result = app.inputSeparator(input);
+        app.outputManager(result);
     }
     public String userInputManager() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
@@ -26,6 +25,7 @@ public class Application {
             return 0;
         }
         String numbers = userInput.trim();
+
         if (numbers.startsWith(LEFT_CUSTOM_DELIMITER)) {
             int newLineIndex = numbers.indexOf(RIGHT_CUSTOM_DELIMITER);
             if (newLineIndex == -1) {
@@ -34,6 +34,7 @@ public class Application {
             String customDelimiter = numbers.substring(2, newLineIndex);
             String[] delimiters = customDelimiter.split("");
             numbers = numbers.substring(newLineIndex + 2);
+
             for (String delim : delimiters) {
                 numbers = numbers.replace(delim, ",");
             }
@@ -46,15 +47,16 @@ public class Application {
 
         for (String num : nums) {
             num = num.trim();
+            int value;
             try {
-                int value = Integer.parseInt(num);
-                if (value <= 0) {
-                    throw new IllegalArgumentException(ILLEGAL_EXCEPTION_MESSAGE);
-                }
-                sum += value;
+                value = Integer.parseInt(num);
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException(ILLEGAL_EXCEPTION_MESSAGE);
             }
+            if (value <= 0) {
+                throw new IllegalArgumentException(ILLEGAL_EXCEPTION_MESSAGE);
+            }
+            sum += value;
         }
         return sum;
     }
