@@ -40,10 +40,14 @@
 
 ## CustomDelmiterExtractor
 
-- 커스텀 구분자를 추출
+- PatternMatcherUtil을 이용해 커스텀 라인에서 String으로 구분자를 뽑아낸다.
+- `(예시: "//$\n1$2$2" => "$")`
+- 커스텀 구분자를 뽑아낸다.
 
 ## PositiveNumberExtractor
 
+- 양수 라인을 PatternMatcherUtil을 이용해 뽑아낸다.
+- `(예시: "//$\n1$2$2" => "1$2$2")`
 - 구분자 분리 표현식 생성기에 구분자 분리 표현식을 요청
 - 구분자 분리 표현식을 통해 양추 추출
 
