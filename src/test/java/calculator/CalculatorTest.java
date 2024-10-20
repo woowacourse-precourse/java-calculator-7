@@ -41,14 +41,14 @@ class CalculatorTest {
 
       char index = string.charAt(i);
 
-      // 문자열이 구분자인 경우 건너뛰고
+      // [x] 문자열이 구분자인 경우 건너뛰고
       if (index == ',' || index == ':') {
         continue;
       }
-      // 커스텀 구분자가 문자열 맨 앞에 지정된 경우
+      // [x] 커스텀 구분자가 문자열 맨 앞에 지정된 경우
       // //;\n
 
-      // charArray 인덱스0부터 5까지의 값이 "//;\n" 인지 체크
+      // [x] charArray 인덱스0부터 5까지의 값이 "//;\n" 인지 체크
       boolean validCustomSeparator = string.substring(0, 5) == "//;\\n";
       if (validCustomSeparator) {
         // 맞다면 커스텀 구분자 ';'인지 체크하고 건너뛰거나
