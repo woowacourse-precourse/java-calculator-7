@@ -10,6 +10,10 @@ class Number {
         this.number = parse(number);
     }
 
+    public String getNumber() {
+        return this.number;
+    }
+
     private static String parse(final String number) {
         if (number.isBlank()) {
             return "0";

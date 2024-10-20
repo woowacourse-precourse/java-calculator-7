@@ -1,7 +1,7 @@
 # java-calculator-precourse
 # 구현목록
 
-- [ ] 기능간 연결
+- [X] 기능간 연결
 ---
 ### UI 기능
 - [X] 입력 안내 출력 기능

@@ -29,4 +29,12 @@ class Numbers {
         Numbers numbers1 = (Numbers) o;
         return Objects.equals(numbers, numbers1.numbers);
     }
+
+    public String getSum() {
+        Number number = new Number("0");
+        for (final Number tempNumber : numbers) {
+            number = number.add(tempNumber);
+        }
+        return number.getNumber();
+    }
 }
