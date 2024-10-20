@@ -64,7 +64,7 @@ class CalculatorTest {
         int target = Integer.parseInt(valueOf(index));
         actual += target;
       }
-      // 잘못된 입력값은 예외처리
+      // [X] 잘못된 입력값은 예외처리
       boolean validInput = valueOf(index).equals(",") || valueOf(index).equals(":");
       if (!validInput) {
         throw new IllegalArgumentException("입력 가능한 문자열인지 확인해주세요. ',', ':' ");
@@ -98,8 +98,9 @@ class CalculatorTest {
   public void checkIsNumeric() throws Exception{
       //given
       char[] isNumeric = new char[]{'1', '2', '3', '4', '5'};
+      char[] custom = new char[]{'/','/', ';', '\', '\', 'n'};
 
-      //when
+    //when
       boolean expect = true;
 
       for (char element : isNumeric) {
