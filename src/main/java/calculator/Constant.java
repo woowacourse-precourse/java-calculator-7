@@ -1,6 +1,6 @@
 package calculator;
 
-public class Constants {
+public class Constant {
     public static final String CUSTOM_DELIMITER_FRONT = "//";
     public static final String CUSTOM_DELIMITER_BACK = "\\n";
     public static final String BASIC_DELIMITER = "[,:]";

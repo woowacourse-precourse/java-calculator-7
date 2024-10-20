@@ -14,7 +14,7 @@ public class StringCalculator {
     }
 
     private boolean isCustomInput(String str) {
-        return str.contains(Constants.CUSTOM_DELIMITER_FRONT) && str.contains(Constants.CUSTOM_DELIMITER_BACK);
+        return str.contains(Constant.CUSTOM_DELIMITER_FRONT) && str.contains(Constant.CUSTOM_DELIMITER_BACK);
     }
 
     private boolean isBasicInput(String str) {
@@ -22,12 +22,12 @@ public class StringCalculator {
     }
 
     private String parseCustomDelimiter(String str) {
-        return str.substring(str.indexOf(Constants.CUSTOM_DELIMITER_FRONT) + 2,
-                str.indexOf(Constants.CUSTOM_DELIMITER_BACK));
+        return str.substring(str.indexOf(Constant.CUSTOM_DELIMITER_FRONT) + 2,
+                str.indexOf(Constant.CUSTOM_DELIMITER_BACK));
     }
 
     private String deleteCustomDelimiter(String str) {
-        return str.substring(str.indexOf(Constants.CUSTOM_DELIMITER_BACK) + 2);
+        return str.substring(str.indexOf(Constant.CUSTOM_DELIMITER_BACK) + 2);
     }
 
     private String replaceCustomToBasic(String delimiter, String str) {
@@ -45,7 +45,7 @@ public class StringCalculator {
     }
 
     private int calculateSum(String str) {
-        String[] numbers = str.split(Constants.BASIC_DELIMITER);
+        String[] numbers = str.split(Constant.BASIC_DELIMITER);
         int sum = 0;
 
         for (String number : numbers) {
