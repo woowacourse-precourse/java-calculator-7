@@ -30,8 +30,10 @@ public class Coordinator {
             IOService.printResult(result);
         } catch (IllegalArgumentException e) {
             System.err.println("잘못된 입력: " + e.getMessage());
+            throw e;
         } catch (Exception e) {
             System.err.println("오류 발생: " + e.getMessage());
+            throw e;
         }
     }
 }
