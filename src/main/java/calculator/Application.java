@@ -8,7 +8,7 @@ public class Application {
             int delimiterEndIndex = input.indexOf("\\n");
             if (delimiterEndIndex != -1) {
                 String customDelimiter = input.substring(2, delimiterEndIndex);
-                String content = input.substring(delimiterEndIndex + 1);
+                String content = input.substring(delimiterEndIndex + 2);
                 return new String[]{customDelimiter, content};
             }
         }
