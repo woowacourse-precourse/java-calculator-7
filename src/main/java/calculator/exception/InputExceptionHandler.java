@@ -21,11 +21,8 @@ public class InputExceptionHandler {
         }
     }
 
-    public void validateInputNumber(String[] inputSplit, Separator separator) {
-        String[] numbers = inputSplit[1].split(
-                separator.getComma() + "|" + separator.getColon() + "|" + separator.getCustom());
-
-        for (String number : numbers) {
+    public void validateInputNumber(String[] splitNumbers, Separator separator) {
+        for (String number : splitNumbers) {
             if (!number.matches("^[1-9]\\d*$")) {
                 throw new IllegalArgumentException(ExceptionMessage.INVALID_INPUT_FORMAT.getMessage() + 2);
             }

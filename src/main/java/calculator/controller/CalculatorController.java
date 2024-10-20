@@ -26,9 +26,9 @@ public class CalculatorController {
             separator.setCustomSeparator(inputSplit[0].substring(2));
         }
 
-        inputService.handleInput(inputSplit, separator);
-
         String[] splitNumbers = inputService.splitSeparator(inputSplit[1], separator);
+
+        inputService.handleInput(inputSplit, separator, splitNumbers);
 
         int result = calculatorService.sumSplitNumbers(splitNumbers);
 

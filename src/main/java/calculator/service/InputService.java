@@ -20,10 +20,10 @@ public class InputService {
         return splitInput;
     }
 
-    public void handleInput(String[] inputSplit, Separator separator) {
+    public void handleInput(String[] inputSplit, Separator separator, String[] splitNumbers) {
         exceptionHandler.validateInputEmpty(inputSplit[1]);
         exceptionHandler.validateInputFormat(inputSplit);
-        exceptionHandler.validateInputNumber(inputSplit, separator);
+        exceptionHandler.validateInputNumber(splitNumbers, separator);
     }
 
     public String[] splitSeparator(String input, Separator separator) {
