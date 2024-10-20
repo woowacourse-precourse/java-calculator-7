@@ -7,8 +7,10 @@ import calculator.view.OutputView;
 
 public class Application {
     public static void main(String[] args) {
-        CalculatorController calculatorController = new CalculatorController(new InputView(), new OutputView(),
-                new Calculator());
+        InputView inputView = new InputView();
+        OutputView outputView = new OutputView();
+        Calculator calculator = new Calculator();
+        CalculatorController calculatorController = new CalculatorController(inputView, outputView, calculator);
         calculatorController.run();
     }
 }
