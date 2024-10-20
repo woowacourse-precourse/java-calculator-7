@@ -13,7 +13,7 @@ class ApplicationTest extends NsTest {
     void 기본_덧셈_테스트() {
         assertSimpleTest(() -> {
             run("1,2,3");
-            assertThat(output()).contains("결과: 6");
+            assertThat(output()).contains("결과 : 6");
         });
     }
 
@@ -21,7 +21,7 @@ class ApplicationTest extends NsTest {
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1;2;3");
-            assertThat(output()).contains("결과: 6");
+            assertThat(output()).contains("결과 : 6");
         });
     }
 
@@ -29,7 +29,7 @@ class ApplicationTest extends NsTest {
     void 콜론_구분자_사용() {
         assertSimpleTest(() -> {
             run("1:2:3");
-            assertThat(output()).contains("결과: 6");
+            assertThat(output()).contains("결과 : 6");
         });
     }
 
@@ -37,7 +37,7 @@ class ApplicationTest extends NsTest {
     void 혼합_구분자_사용() {
         assertSimpleTest(() -> {
             run("1,2:3");
-            assertThat(output()).contains("결과: 6");
+            assertThat(output()).contains("결과 : 6");
         });
     }
 
