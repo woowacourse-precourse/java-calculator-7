@@ -23,7 +23,7 @@ public class InputValidator {
 
     // 유효하지 않은 구분자 검증
     public void validateInvalidDelimiter(String text, String validDelimiters) {
-        String invalidCharacters = text.replaceAll("[" + validDelimiters + "0-9\\s]", "");  // 숫자와 구분자를 제외한 문자
+        String invalidCharacters = text.replaceAll("[" + validDelimiters + "0-9\\s]", "");
         if (!invalidCharacters.isEmpty()) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_DELIMITER_FORMAT);
         }

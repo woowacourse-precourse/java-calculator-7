@@ -54,6 +54,8 @@
 - view
   - InputView
   - OutputView
+- parser
+  - Parser
 - validation
   - InputValidator
 - constants
