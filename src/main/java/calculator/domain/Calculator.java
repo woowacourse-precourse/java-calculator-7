@@ -17,4 +17,15 @@ public class Calculator {
         }
         return input.split(separator);
     }
+
+    // 숫자 배열 덧셈 처리
+    public int sum(int[] numbersArray) {
+        int sum = 0;
+
+        for (int num : numbersArray) {
+            sum += num;
+        }
+
+        return sum;
+    }
 }
