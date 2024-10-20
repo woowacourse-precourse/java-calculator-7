@@ -74,4 +74,33 @@ class ApplicationTest extends NsTest {
                 "//~\\n1~2~3", "//<\\n1<2<3", "//>\\n1>2>3", "///\\n1/2/3", "//\\\\n1\\2\\3"
         );
     }
+
+    @ParameterizedTest
+    @MethodSource("customDelimiterWithNegativeQNumberInputs")
+    void 구분자_음수_사용(String input) throws Exception {
+        assertSimpleTest(() -> {
+           assertThatThrownBy(() -> run(input))
+                   .isInstanceOf(IllegalArgumentException.class);
+        });
+    }
+
+    static Stream<String> customDelimiterWithNegativeQNumberInputs() {
+        return Stream.of(
+                "//'\\n1'-2'3",
+                "//\"\\n1\"-2\"3",
+                "//,\\n1,-2,3",
+                "//;\\n1;-2;3",
+                "//:\\n1:-2:3",
+                "//.\\n1.-2.3",
+                "//*\\n1*-2*3",
+                "//_\\n1_-2_3",
+                "//+\\n1+-2+3", "//?\\n1?-2?3", "//[\\n1[-2[3", "//]\\n1]-2]3", "//{\\n1{-2{3", "//}\\n1}-2}3"
+                ,"//(\\n1(-2(3", "//)\\n1)-2)3", "//|\\n1|-2|3", "//^\\n1^-2^3", "//$\\n1$-2$3", "//!\\n1!-2!3",
+                "//@\\n1@-2@3",
+                "//#\\n1#-2#3",
+                "//&\\n1&-&3", "//`\\n1`-2`3",
+                "//~\\n1~-2~3", "//<\\n1<-2<3", "//>\\n1>-2>3", "///\\n1/-2/3", "//\\\\n1\\-2\\3",
+                "//-\\n1--2-3"
+        );
+    }
 }
