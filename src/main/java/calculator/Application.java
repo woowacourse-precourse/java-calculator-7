@@ -15,6 +15,22 @@ public class Application {
             System.out.println("0");
             return;
         }
+        //쉼표 or 콜론을 구분자로 숫자 추출 후 합산
+        String delimiter = ",|:";
+        String[] numbers = input.split(delimiter);
+
+        int sum = 0;
+        for (String number : numbers) {
+            sum += Integer.parseInt(number.trim());
+        }
+
+        //테스트용 결과 출력
+        System.out.println(sum);
+
+
+
+
+
 
 
     }
