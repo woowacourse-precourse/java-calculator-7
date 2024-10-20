@@ -8,7 +8,8 @@ public class Application {
         String input = Console.readLine();
 
         if(checkInput(input)) {
-
+            int result = getSum(parseInteger(seperator(input)));
+            System.out.println("결과 : " + result);
         } else {
             throw new IllegalArgumentException();
         }
