@@ -1,5 +1,7 @@
 package calculator.model;
 
+import java.util.regex.Pattern;
+
 public class Delimiter {
 
     private final String value;
@@ -11,6 +13,17 @@ public class Delimiter {
 
     public boolean doesNotSupport(String delimiterValue) {
         return !value.contains(delimiterValue);
+    }
+
+    public boolean isEmpty() {
+        return value.isEmpty();
+    }
+
+    public String getValue() {
+        if (isEmpty()) {
+            return value;
+        }
+        return "[" + Pattern.quote(value) + "]";
     }
 
     private void validate(String value) {

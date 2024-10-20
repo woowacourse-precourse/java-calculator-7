@@ -1,5 +1,7 @@
 package calculator.model;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,6 +26,14 @@ public class PlainText {
             }
         }
         return false;
+    }
+
+    public List<Token> tokenizedBy(Delimiter delimiter) {
+        return Arrays.stream(value.split(delimiter.getValue()))
+                .map(String::valueOf)
+                .filter(string -> !string.isEmpty())
+                .map(Token::new)
+                .toList();
     }
 
     private void validate(String value) {

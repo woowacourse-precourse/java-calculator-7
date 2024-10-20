@@ -1,6 +1,5 @@
 package calculator.model;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class InputText {
@@ -13,11 +12,8 @@ public class InputText {
         validateAfterInitialize(this.delimiter, this.plainText);
     }
 
-    public List<Integer> tokenize() {
-        return Arrays.stream(plainText.getValue().split(delimiter.getValue()))
-                .filter(string -> !string.isEmpty())
-                .map(Integer::parseInt)
-                .toList();
+    public List<Token> tokenize() {
+        return plainText.tokenizedBy(delimiter);
     }
 
     private void validateAfterInitialize(Delimiter delimiter, PlainText plainText) {
