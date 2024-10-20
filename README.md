@@ -1,6 +1,10 @@
-# 📈기능 구현 목록 - 문자열 덧셈 계산기
+# 📈Sequence Diagram
+
+![SequenceDiagram](https://github.com/user-attachments/assets/fde3dd86-7475-4183-bd2c-ddc6a41bac29)
 
 ---
+
+# ✅ 기능 구현 목록 - 문자열 덧셈 계산기
 
 ## 🗂 Model
 
