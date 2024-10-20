@@ -23,6 +23,12 @@ public class DelimiterExtractor {
     }
 
     public String extractNumbers(String input) {
+        if (input.startsWith("//")) {
+            Matcher matcher = Pattern.compile("//(.)\\\\n(.*)").matcher(input);
+            if (matcher.find()) {
+                return matcher.group(2);
+            }
+        }
         return input;
     }
 }
