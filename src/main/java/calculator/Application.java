@@ -5,8 +5,7 @@ public class Application {
         CalculatorInputHandler calculatorInputHandler = new CalculatorInputHandler();
         CalculatorOutputHandler calculatorOutputHandler = new CalculatorOutputHandler();
 
-        String input = calculatorInputHandler.input();
-        Parser parser = new DefaultParser(input);
+        Parser parser = new DefaultParser(calculatorInputHandler.input());
         Alu AddUnit = new AddUnit(parser.parse());
         Calculator calculator = new Calculator(AddUnit);
         calculatorOutputHandler.output(calculator.calculate());
