@@ -8,7 +8,7 @@ public class UserInput {
     private String delimiterSection;
     private String numberString;
     private String input;
-    private String regex = "^(\\/\\/)([^a-zA-Z0-9,: ]{1})";
+    private static String regex = "^(\\/\\/)([^a-zA-Z0-9,: ]{1})";
 
     public UserInput(String input) {
         this.input = input;
@@ -32,14 +32,22 @@ public class UserInput {
         }
     }
 
-    private void extractDelimiter(String delimiterSection) {
+    private boolean extractDelimiter(String delimiterSection) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(delimiterSection);
         if(matcher.matches()) {
             customDelimiter = matcher.group(2);
+            return true;
         }else {
             throw new IllegalArgumentException("커스텀 구분자 형식이 일치하지 않습니다.");
         }
+    }
+    public static boolean isEmptyString(String input) {
+        input = input.replaceAll(regex,"");
+        if(input.equals("") || input.equals("\\n"))
+            return true;
+        else
+            return false;
     }
     public boolean isCustomDelimiterPresent() {
         return customDelimiter != null;
@@ -56,5 +64,4 @@ public class UserInput {
     public static void main(String[] args) {
         new UserInput("//,\\n1;2;3");
     }
-
 }

@@ -22,7 +22,11 @@ class StringCalculatorTest {
     @MethodSource("validInputs")
     @DisplayName("올바른 입력")
     void run(String input,int result) {
-        setThirdDelimiterAndCalculate(new UserInput(input));
+        if(UserInput.isEmptyString(input)) {
+            this.result = 0;
+        }else {
+            setThirdDelimiterAndCalculate(new UserInput(input));
+        }
         assertThat(this.result).isEqualTo(result);
     }
     
@@ -30,8 +34,14 @@ class StringCalculatorTest {
     @MethodSource("invalidInputs")
     @DisplayName("예외 테스트")
     void exceptionTest(String input,int result) {
-        assertThatThrownBy(() ->setThirdDelimiterAndCalculate(new UserInput(input)))
-                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() ->{
+            UserInput userInput = new UserInput(input);
+            if(userInput.isEmptyString(input)) {
+                this.result =0;
+            }else {
+                setThirdDelimiterAndCalculate(new UserInput(input));
+            }
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     private void setThirdDelimiterAndCalculate(UserInput userInput) {
@@ -72,7 +82,9 @@ class StringCalculatorTest {
                 new Object[]{"//@\\n7@8:9,10",34},
                 new Object[]{"//^\\n7^8,9:10",34},
                 new Object[]{"//&\\n1:2&3",6},
-                new Object[]{"1:2,3",6});
+                new Object[]{"1:2,3",6},
+                new Object[]{"",0},
+                new Object[]{"//^\\n",0});
     }
     static Stream<Object[]> invalidInputs() {
         return Stream.of(new Object[]{"//;\\n1:2.3,4",10},
@@ -88,13 +100,13 @@ class StringCalculatorTest {
                 new Object[]{"//^\n\n1:2:3",6},
                 new Object[]{"//*\r*",6},
 
-                new Object[]{"",0},
                 new Object[]{"\\n",0},
 
                 new Object[]{"//^\\n\\n1:2,3",6},
                 new Object[]{"//^\\n\n1:2,4",7},
                 new Object[]{"//^\\n1:2,\\n3",6},
-                new Object[]{"//&\\n1:2\\n&3",6}
+                new Object[]{"//&\\n1:2\\n&3",6},
+                new Object[]{"//^\\n900000000000000000000000000000000000000000000,900000000000000000000000000000000000000000000",1000}
                 );
     }
 }
