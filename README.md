@@ -16,5 +16,5 @@
 
 ### 4. 예외처리
 
-- [ ] 음수가 포함된 경우 IllegalArgumentException 예외를 발생시킨다.
-- [ ] 숫자 이외의 값이 포함된 경우 IllegalArgumentException 예외를 발생시킨다.
+- [x] 음수가 포함된 경우 IllegalArgumentException 예외를 발생시킨다.
+- [x] 숫자 이외의 값이 포함된 경우 IllegalArgumentException 예외를 발생시킨다.

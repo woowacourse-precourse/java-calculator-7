@@ -15,6 +15,7 @@ public class Calculator {
     }
 
     private static String[] split(String text) {
+//        Matcher matcher = Pattern.compile("//(.)\\\\n(.*)").matcher(text);
         Matcher matcher = Pattern.compile("//(.)\\\\n(.*)").matcher(text);
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
@@ -26,8 +27,21 @@ public class Calculator {
     private static int sum(String[] values) {
         int sum = 0;
         for (String value : values) {
-            sum += Integer.parseInt(value);
+            int number = toPositive(value);
+            sum += number;
         }
         return sum;
+    }
+
+    private static int toPositive(String value) {
+        try {
+            int number = Integer.parseInt(value);
+            if (number < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + value);
+            }
+            return number;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다: " + value);
+        }
     }
 }
