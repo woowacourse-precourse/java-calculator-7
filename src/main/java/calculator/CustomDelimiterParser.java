@@ -6,6 +6,13 @@ public class CustomDelimiterParser {
     private static final String DEFAULT_DELIMITER = ",|:";
     private String delimiter = DEFAULT_DELIMITER;
 
+    /**
+     * 입력 문자열을 파싱하여 숫자 배열로 반환합니다.
+     * 입력이 "//"로 시작하면 커스텀 구분자를 처리합니다.
+     *
+     * @param input 파싱할 입력 문자열
+     * @return 구분자로 분리된 숫자 문자열 배열
+     */
     public String[] parse(String input) {
         if (input.startsWith("//")) {
             input = handleCustomDelimiter(input);
@@ -13,6 +20,13 @@ public class CustomDelimiterParser {
         return input.split(delimiter);
     }
 
+    /**
+     * 커스텀 구분자를 처리하고 실제 입력 문자열을 반환합니다.
+     *
+     * @param input 커스텀 구분자를 포함한 입력 문자열
+     * @return 커스텀 구분자가 제거된 실제 입력 문자열
+     * @throws IllegalArgumentException 커스텀 구분자 형식이 잘못된 경우
+     */
     private String handleCustomDelimiter(String input) {
         int newLineIndex = input.indexOf("\\n");
         if (newLineIndex == -1) {
