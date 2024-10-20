@@ -8,7 +8,11 @@ public class OutputView {
 		printMessage(SystemMessages.RESULT_RESPONSE_PREFIX.getMessage() + operationResult);
 	}
 
-	public void printMessage(String message) {
+	public void printExpressionRequestMessage() {
+		printMessage(SystemMessages.INPUT_REQUEST_PREFIX.getMessage());
+	}
+
+	private void printMessage(String message) {
 		System.out.println(message);
 	}
 }
