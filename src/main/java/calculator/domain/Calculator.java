@@ -5,21 +5,24 @@ import calculator.view.OutputView;
 
 public class Calculator {
 
-    private Input input;
-    private Separator separator;
+    private final Input input;
+    private final Separator separator;
+    private final InputView inputView;
+    private final OutputView outputView;
+
     private Numbers number;
-    private InputView inputView;
-    private OutputView outputView;
+
+    public Calculator(Input input, Separator separator, InputView inputView,
+        OutputView outputView) {
+        this.input = input;
+        this.separator = separator;
+        this.inputView = inputView;
+        this.outputView = outputView;
+    }
 
     public void start() {
-        inputView = new InputView();
-        outputView = new OutputView();
-        inputView.showStartMessage();
+        startProcess();
 
-        input = new Input();
-        input.readFirstInput();
-
-        separator = new Separator();
         try { //!!추후에 else문 분리해야함!!
             if (input.isDefaultInput()) {
                 // 기본 구분자 기능 실행
@@ -34,7 +37,7 @@ public class Calculator {
                 number = new Numbers(parts);
 
                 //결과 출력
-                outputView.showResult(number.calculate());
+                showResultProcess();
             } else {
                 // 커스텀 구분자 기능 실행
                 input.splitCustomSeparator();
@@ -55,11 +58,21 @@ public class Calculator {
                 number = new Numbers(parts);
 
                 //결과 출력
-                outputView.showResult(number.calculate());
+                showResultProcess();
             }
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }
+    }
+
+    private void showResultProcess() {
+        outputView.showResult(number.calculate());
+    }
+
+    private void startProcess() {
+        inputView.showStartMessage();
+
+        input.readFirstInput();
     }
 
 
