@@ -8,6 +8,7 @@ public class Application {
 
     private static final String DEFAULT_SEPERATOR_REGEX = ",|:";
     private static final String CUSTOM_SEPERATOR_REGEX = "//(.)\\\\n(.*)";
+    private static final String POSITIVE_NUMBER_REGX = "^[0-9]*$";
 
     public static void main(String[] args) {
 
@@ -22,14 +23,9 @@ public class Application {
 
     private static void validateExpression(String expression) {
 
+        // 입력값이 없거나 null인 경우 예외 처리
         if (expression.isEmpty() || expression == null) {
             throw new IllegalArgumentException("입력값이 없습니다.");
-        }
-
-        if (expression.startsWith("//")) {
-            if (!expression.contains("\\n")) {
-                throw new IllegalArgumentException("커스텀 구분자가 잘못되었습니다.");
-            }
         }
     }
 
@@ -37,17 +33,21 @@ public class Application {
 
         int result = 0;
         for (String num : list) {
-            try {
-                int number = Integer.parseInt(num);
-                if (number < 0) {
-                    throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
-                }
-                result += number;
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("숫자도 구분자도 아닌 값이 포함되어 있습니다.");
-            }
+            int number = checkPositiveNumber(num);
+            result += number;
         }
         return result;
+    }
+
+    private static int checkPositiveNumber(String number) {
+
+        if (number.contains("-")) {
+            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+        }
+        if (!number.matches(POSITIVE_NUMBER_REGX)) {
+            throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
+        }
+        return Integer.parseInt(number);
     }
 
     private static String[] parseNumbersFromExpression(String expression) {
