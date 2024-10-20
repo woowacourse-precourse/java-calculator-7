@@ -16,7 +16,7 @@ public class Validator {
         isCorrectPair(input);
     }
 
-    public static void isCorrectInput(String input) {
+    public static void isCorrectDefaultInput(String input) {
         for (int i = 0; i < input.length(); i++) {
             if (!(input.charAt(i) == ',' || input.charAt(i) == ':' || isNumber(input.charAt(i)))) {
                 throw new IllegalArgumentException(WRONG_INPUT_MESSAGE);
@@ -35,28 +35,24 @@ public class Validator {
     }
 
     private static void isCorrectPair(String input) {
-        int startPair = 0;
-        int lastPair = 0;
-        int flag = 0;
+        boolean flag = false;
         for (int i = 0; i < input.length(); i++) {
-            if (input.charAt(i) == '/' && input.charAt(i + 1) == '/') {
+            if (input.startsWith("//", i)) {
                 if (i + 4 >= input.length() || !isCorrectLastElement(input, i + 3)) {
                     throw new IllegalArgumentException(WRONG_CUSTOM_SEPARATOR_FORM_MESSAGE);
                 }
-                startPair++;
-                flag = 1;
+                flag = true;
                 i++;
             }
-            if (input.charAt(i) == '\\' && input.charAt(i + 1) == 'n') {
-                if (flag == 0) {
+            if (input.startsWith("\\n", i)) {
+                if (!flag) {
                     throw new IllegalArgumentException(WRONG_CUSTOM_SEPARATOR_FORM_MESSAGE);
                 }
-                lastPair++;
-                flag = 0;
+                flag = false;
                 i++;
             }
         }
-        if ((startPair == lastPair) && startPair == 0) {
+        if (flag) {
             throw new IllegalArgumentException(WRONG_CUSTOM_SEPARATOR_FORM_MESSAGE);
         }
     }
