@@ -63,7 +63,7 @@ public class InputValidator {
 
     //음수 검증
     //사용자 잘못된 값 입력 시 `IllegalArgumentException` 발생하여 프로그램 종료
-    public void checkNegativeNumbers(String[] numbers) {
+    private void checkNegativeNumbers(String[] numbers) {
         for (String number : numbers) {
             if (!number.isEmpty()) { // 빈 문자열이 아닌 경우만 처리
                 int num = Integer.parseInt(number);
