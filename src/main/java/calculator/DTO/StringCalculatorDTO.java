@@ -23,6 +23,10 @@ public class StringCalculatorDTO {
         this.detachedInput = detachedInput;
     }
 
+    public int getSum() {
+        return sum;
+    }
+
     public void setSum(int sum) {
         this.sum = sum;
     }
