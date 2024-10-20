@@ -37,8 +37,8 @@ public class Calculator {
     private static int calculate(String input,String seperatorRegex) {
         int result= Arrays.stream(input.split(seperatorRegex))
                 .filter(num->!isBlank(num))
-                .peek(num->validateCustomSeperator(num))
-                .peek(num->validateInteger(num))
+                .filter(num->validateCustomSeperator(num))
+                .filter(num->validateInteger(num))
                 .mapToInt(Integer::parseInt)
                 .reduce(0,(a,b)->addTwoNum(a,b));
 
@@ -46,18 +46,20 @@ public class Calculator {
     }
 
     //존재하지 않는 커스텀 구분자 예외발생
-    private static void validateCustomSeperator(String num){
+    private static boolean validateCustomSeperator(String num){
         if (!(num.matches(NUMBER_REGEX))){
             throw new IllegalArgumentException(INVALID_SEPERATOR);
         }
+        return true;
     }
 
-    private static void validateInteger(String num){
+    private static boolean validateInteger(String num){
         try{
             Integer.parseInt(num);
         }catch(IllegalArgumentException e){
             throw new IllegalArgumentException(OVERFLOW_NUMBER);
         }
+        return true;
     }
 
     private static int addTwoNum(int a,int b) {
