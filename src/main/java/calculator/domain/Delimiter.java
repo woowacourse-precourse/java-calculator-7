@@ -53,8 +53,8 @@ public class Delimiter {
     }
 
     private String getCustomDelimiter(final List<String> delimiterAndNumbers) {
-        return delimiterAndNumbers.getFirst()
-                .replaceAll(CUSTOM_DELIMITER_START, "");
+        return Pattern.quote(delimiterAndNumbers.getFirst()
+                .replaceAll(CUSTOM_DELIMITER_START, ""));
     }
 
     private boolean isNumbersEmpty(final List<String> numbers) {
