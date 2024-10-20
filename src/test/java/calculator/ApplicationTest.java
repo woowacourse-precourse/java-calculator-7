@@ -11,8 +11,8 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
-            run("//;\\n1");
-            assertThat(output()).contains("결과 : 1");
+            run("//;\n1;2;3"); // 커스텀 구분자로 ;을 사용
+            assertThat(output()).contains("결과 : 6"); // 기대 결과 : 6
         });
     }
 
@@ -21,6 +21,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("음수는 입력할 수 없습니다.")
         );
     }
 
