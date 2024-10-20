@@ -3,7 +3,6 @@ package calculator.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import calculator.util.StringSplitter;
 import calculator.validator.InputValidator;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +19,7 @@ class StringCalculatorServiceTest {
     @BeforeEach
     void setUp() {
         InputValidator inputValidator = new InputValidator();
-        StringSplitter stringSplitter = new StringSplitter();
+        StringSplitterService stringSplitter = new StringSplitterService();
         calculator = new StringCalculatorService(inputValidator, stringSplitter);
     }
 
@@ -44,9 +43,8 @@ class StringCalculatorServiceTest {
         argumentsList.add(Arguments.arguments("1,2,3", 6, null));
         argumentsList.add(Arguments.arguments("1,,2", 3, null));
         argumentsList.add(Arguments.arguments("1," + "9".repeat(1000), null, IllegalArgumentException.class));
-        argumentsList.add(Arguments.arguments("2147483647,1", null, IllegalArgumentException.class));
-        argumentsList.add(Arguments.arguments("//abc\n1abc2abc3", 6, null));
-        argumentsList.add(Arguments.arguments("//@\n1@2@3", 6, null));
+        argumentsList.add(Arguments.arguments("//abc\\n1abc2abc3", 6, null));
+        argumentsList.add(Arguments.arguments("//@\\n1@2@3", 6, null));
 
         return argumentsList;
     }

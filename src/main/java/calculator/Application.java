@@ -1,7 +1,7 @@
 package calculator;
 
 import calculator.service.StringCalculatorService;
-import calculator.util.StringSplitter;
+import calculator.service.StringSplitterService;
 import calculator.validator.InputValidator;
 import calculator.view.InputView;
 import calculator.view.OutputView;
@@ -9,7 +9,7 @@ import calculator.view.OutputView;
 public class Application {
     public static void main(String[] args) {
         InputValidator inputValidator = new InputValidator();
-        StringSplitter stringSplitter = new StringSplitter();
+        StringSplitterService stringSplitter = new StringSplitterService();
 
         StringCalculatorService calculatorService = new StringCalculatorService(inputValidator, stringSplitter);
 

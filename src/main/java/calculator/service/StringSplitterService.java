@@ -1,11 +1,10 @@
-package calculator.util;
+package calculator.service;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class StringSplitter {
-    private static final int MAX_CUSTOM_DELIMITER_LENGTH = 5;
+public class StringSplitterService {
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
     private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
 
@@ -23,11 +22,10 @@ public class StringSplitter {
         }
 
         String customDelimiter = input.substring(CUSTOM_DELIMITER_PREFIX.length(), delimiterEnd);
-        if (customDelimiter.isEmpty() || customDelimiter.length() > MAX_CUSTOM_DELIMITER_LENGTH) {
-            throw new IllegalArgumentException("커스텀 구분자는 1~" + MAX_CUSTOM_DELIMITER_LENGTH + "자 사이여야 합니다.");
-        }
-
         String numbers = input.substring(delimiterEnd + CUSTOM_DELIMITER_SUFFIX.length());
+        if (numbers.isEmpty()) {
+            return Arrays.asList();
+        }
         return Arrays.asList(numbers.split(Pattern.quote(customDelimiter)));
     }
 

@@ -1,6 +1,5 @@
 package calculator.service;
 
-import calculator.util.StringSplitter;
 import calculator.validator.InputValidator;
 import java.util.List;
 
@@ -8,9 +7,9 @@ public class StringCalculatorService {
     private static final int MAX_INPUT_LENGTH = 1000;
     private static final long MAX_NUMBER = Integer.MAX_VALUE;
     private final InputValidator inputValidator;
-    private final StringSplitter stringSplitter;
+    private final StringSplitterService stringSplitter;
 
-    public StringCalculatorService(InputValidator inputValidator, StringSplitter stringSplitter) {
+    public StringCalculatorService(InputValidator inputValidator, StringSplitterService stringSplitter) {
         this.inputValidator = inputValidator;
         this.stringSplitter = stringSplitter;
     }
