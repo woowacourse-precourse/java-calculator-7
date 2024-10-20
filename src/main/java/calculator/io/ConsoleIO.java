@@ -23,7 +23,7 @@ public class ConsoleIO extends IO {
     }
 
     @Override
-    public void write(String value) {
-        System.out.printf("결과 : %s", value);
+    public void write(String result) {
+        System.out.printf("결과 : %s", result);
     }
 }
