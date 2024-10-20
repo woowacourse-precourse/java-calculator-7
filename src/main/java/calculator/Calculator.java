@@ -13,5 +13,6 @@ public class Calculator {
         DelimiterInputDTO delimiter = generateDelimiter(input);
         List<Long> parsedInput = parseInput(delimiter);
 
+        Long sum = parsedInput.stream().reduce(0L, Long::sum);
     }
 }
