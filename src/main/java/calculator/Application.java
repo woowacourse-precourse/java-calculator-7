@@ -55,7 +55,7 @@ public class Application {
 
         System.out.println("덧셈할 문자열을 입력해주세요.");
 
-        String str = camp.nextstep.edu.missionutils.Console.readLine();
+        String str = Console.readLine();
 
         int ans = 0;
         ans = summarize(str);
