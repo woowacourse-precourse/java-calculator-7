@@ -26,12 +26,10 @@ public class CalculatorUtil {
         if (inputValue.contains(",")) delimiters.add(",");
 
         if (inputValue.contains(":")) delimiters.add(":");
-        if (matcher.find()) {
-            String[] customDelimiters = matcher.group(1).split("\\|");
 
-            for (String delimiter : customDelimiters) {
-                delimiters.add(delimiter.trim());
-            }
+        if (matcher.find()) {
+            String customDelimiters = matcher.group(1);
+            delimiters.add(customDelimiters);
         }
 
         return delimiters;
