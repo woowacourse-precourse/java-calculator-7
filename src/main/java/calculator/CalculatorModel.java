@@ -46,7 +46,11 @@ public class CalculatorModel {
         String delimiters = "[,:]";
         if (extendedMode && input.length() > 2) {
             char additionalDelimiter = input.charAt(2);
-            delimiters = "[,:" + additionalDelimiter + "]";
+            if (additionalDelimiter == '\\') {
+                delimiters = "[,:\\\\]";
+            } else {
+                delimiters = "[,:" + additionalDelimiter + "]";
+            }
         }
 
         String substringToProcess = extendedMode && input.length() > 5 ? input.substring(5) : input;
