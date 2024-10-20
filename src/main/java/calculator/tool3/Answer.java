@@ -2,11 +2,11 @@ package calculator.tool3;
 
 public class Answer {
 
-  private long[] nums;
+  private int[] nums;
 
   public long calSum() {
     long sum = 0;
-    for (long num : this.nums) {
+    for (int num : this.nums) {
       sum += num;
     }
     return sum;
@@ -16,7 +16,7 @@ public class Answer {
     System.out.println("결과 : " + this.calSum());
   }
 
-  public Answer(long[] nums) {
+  public Answer(int[] nums) {
     this.nums = nums;
   }
 
