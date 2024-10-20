@@ -36,7 +36,25 @@ public class Application {
         }
 
         int sumResult = 0;
-        // TODO: parse user formula
+
+        for (String numberToken : userInput.split(delimiterRegex)) {
+            if (numberToken.isEmpty()) {
+                continue;
+            }
+            int parsedInt;
+            try {
+                parsedInt = Integer.parseInt(numberToken);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException(
+                        "음수가 아닌 정수와 구분자를 입력하세요. 문제가 된 입력: \"" + numberToken + "\"");
+            }
+            if (parsedInt < 0) {
+                throw new IllegalArgumentException(
+                        "음수가 아닌 정수만 입력하세요. 문제가 된 입력: \"" + numberToken + "\"");
+            }
+            sumResult += parsedInt;
+        }
+
         System.out.println("결과 : " + sumResult);
     }
 }
