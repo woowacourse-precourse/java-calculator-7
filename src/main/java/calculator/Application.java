@@ -15,19 +15,27 @@ public class Application {
         if (value.isEmpty()) {
             valuesToCalculate.add(0);
         } else {
-            String[] tokens = value.split("[,:]");
 
-            for (String token : tokens) {
-                int num = Integer.parseInt(token.trim());
-                valuesToCalculate.add(num);
+            if (value.contains(",") || value.contains(":")) {
+                String[] tokens = value.split("[,:]");
+                for (String token : tokens) {
+                    int num = Integer.parseInt(token.trim());
+                    valuesToCalculate.add(num);
+                }
+            } else {
+
+                for (char c : value.toCharArray()) {
+                    if (Character.isDigit(c)) {
+                        valuesToCalculate.add(Character.getNumericValue(c));
+                    }
+                }
+
             }
+            int sum = valuesToCalculate.stream().mapToInt(Integer::intValue).sum();
+            System.out.println(valuesToCalculate);
+            System.out.println("결과 : " + sum);
 
         }
-        int sum = valuesToCalculate.stream().mapToInt(Integer::intValue).sum();
-        System.out.println(valuesToCalculate);
-        System.out.println("결과 : " + sum);
-
     }
 }
-
 
