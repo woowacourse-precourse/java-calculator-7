@@ -8,17 +8,7 @@ import java.util.regex.Pattern;
 public class InputParserValidator {
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("^//(.{1,5})\\\\n");
     private static final Pattern INTEGER_PATTERN = Pattern.compile("\\d+");
-
-    /**
-     * 입력 문자열의 양쪽 공백을 제거합니다.
-     *
-     * @param input 공백을 제거할 입력 문자열
-     * @return 양쪽 공백이 제거된 문자열
-     */
-    public static String removeLeadingAndTrailingSpaces(String input) {
-        return input.trim();
-    }
-
+    
     /**
      * 입력 문자열이 null이거나 비어 있는지 확인합니다.
      *

@@ -22,17 +22,16 @@ public abstract class InputParser {
      */
     public static InputRequest parseDelimiterAndInput(String input) {
         InputParserValidator.checkForEmptyInput(input);
-        String trimmedText = InputParserValidator.removeLeadingAndTrailingSpaces(input);
 
         // 사용자 정의 구분자가 없는 경우 기본 구분자로 반환
-        if (!trimmedText.startsWith(CUSTOM_DELIMITER_PREFIX)) {
-            if (!trimmedText.isEmpty() && !Character.isDigit(trimmedText.charAt(0))) {
+        if (!input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
+            if (!input.isEmpty() && !Character.isDigit(input.charAt(0))) {
                 throw InputException.from(ErrorMessage.DEFAULT_INPUT_MUST_START_WITH_NUMBER);
             }
-            return InputRequest.of(DEFAULT_DELIMITER, trimmedText);
+            return InputRequest.of(DEFAULT_DELIMITER, input);
         }
 
-        Matcher matcher = InputParserValidator.validateCustomDelimiter(trimmedText);
+        Matcher matcher = InputParserValidator.validateCustomDelimiter(input);
 
         String customDelimiter = matcher.group(1);
         String targetInput = input.substring(matcher.end());
