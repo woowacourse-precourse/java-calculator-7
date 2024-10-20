@@ -60,7 +60,7 @@ public class Application {
                 sum += num;
             }
         } catch (IllegalArgumentException e) {
-//            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
         return sum;
     }
@@ -79,13 +79,15 @@ public class Application {
 
             }
         } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
             System.exit(0);
         }
-        try {
-            return Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자가 int 범위를 초과했습니다.");
-        }
+        return Integer.parseInt(number);
+//        try {
+//            return Integer.parseInt(number);
+//        } catch (NumberFormatException e) {
+//            throw new IllegalArgumentException("숫자가 int 범위를 초과했습니다.");
+//        }
     }
 
     // 숫자만 더하는 메서드
@@ -94,13 +96,8 @@ public class Application {
             return 0;
         int sum = 0;
 
-        String delimiter = ",|:";
 
-        try {
-            delimiter = findCustomDelimiter(input); // 커스텀 구분자 찾기
-        } catch (IllegalArgumentException e) {
-//            System.out.println("Error: " + e.getMessage());
-        }
+        String delimiter = findCustomDelimiter(input);
 
         if (!delimiter.equals(",|:")) { // 커스텀 구분자 사용 시, 5번째 문자부터 읽기
             if (input.length() < 6) { // 길이가 6보다 짧은 경우 예외 처리
@@ -129,7 +126,7 @@ public class Application {
         try {
             sum = StringCalculator(input);
         } catch (IllegalArgumentException e) {
-//            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
             System.exit(0);
         }
 
