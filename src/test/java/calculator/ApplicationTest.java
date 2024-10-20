@@ -42,6 +42,15 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 공백_포함된_숫자_테스트() {
+        assertSimpleTest(() -> {
+            run(" 1, 2 :3 ");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+
     @Override
     public void runMain() {
         Application.main(new String[]{});

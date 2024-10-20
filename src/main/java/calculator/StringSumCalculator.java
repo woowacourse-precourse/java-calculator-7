@@ -12,7 +12,7 @@ public class StringSumCalculator {
 
         int sum = 0;
         for (String number : numbers) {
-            validateInput(number);
+            validateInput(number.trim());
             sum += parsePositiveNumber(number);
         }
         return sum;
