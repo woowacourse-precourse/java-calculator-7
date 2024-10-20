@@ -34,6 +34,9 @@ public class Application {
         int result;
         try {
             result = Integer.parseInt(str.substring(startIndex, arr.get(0)));
+            if (result < 0) {
+                throw new IllegalArgumentException("입력 형식이 잘못되었습니다. ");
+            }
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new IllegalArgumentException("입력 형식이 잘못되었습니다. " );
         }
@@ -42,6 +45,9 @@ public class Application {
             try {
                 String substring = str.substring(arr.get(i) + 1, arr.get(i + 1));
                 int num = Integer.parseInt(substring);
+                if (num < 0) {
+                    throw new IllegalArgumentException("입력 형식이 잘못되었습니다. ");
+                }
                 result += num;
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("입력 형식이 잘못되었습니다." );
@@ -50,6 +56,11 @@ public class Application {
 
         return result;
     }
+
+    //구분자가 처음 혹은 끝에 있을 때 구분해야함
+    //구분자의 위치가 0일때(지정구분자인 경우 5일때), 첫번째의 result에 더해주는 과정은 생략
+    //구분자의 위치가 str.length-1 일때, 마지막의 result에 더해주는 과정은 생략
+    //",," 일때 0 반환
 
     // 합치는 코드 만들기
     public static int calculateResult(String str) {
@@ -61,8 +72,8 @@ public class Application {
         if (isNumeric(str)) {
             // A1 숫자만 있는 경우
             return Integer.parseInt(str);
-        } else if (str.isEmpty() ) {
-            // A2 공백만 있는 경우
+        } else if (str.isEmpty()) {
+            // A2 아무것도 없는 경우
             return 0;
         } else if (str.length() > 4 && str.substring(0, 2).equals("//") && str.substring(3, 5).equals("\\n")) { // //@\n 꼴의 양식인가?
             // A3 구분 지정자(//@\n) 경우
@@ -84,6 +95,9 @@ public class Application {
 
                 //마지막 숫자를 제외한 나머지를 더하는 과정
                 result = parseAndSum(str, delimiterPositions, 5);
+                if (result < 0) {
+                    throw new IllegalArgumentException("입력 형식이 잘못되었습니다.");
+                }
 
                 // 마지막 숫자 처리
                 if (delimiterPositions.get(delimiterPositions.size() - 1) == str.length() - 1) { // 만약 문자로 끝나는 경우
@@ -106,7 +120,12 @@ public class Application {
 
             //마지막 숫자 처리
             try {
-                result += Integer.parseInt(str.substring(delimiterPositions.get(delimiterPositions.size() - 1) + 1)); // 여기서 오류가 발생할 수 있음
+                int lastNumber = Integer.parseInt(str.substring(delimiterPositions.get(delimiterPositions.size() - 1) + 1));
+                if (lastNumber<0){
+                    throw new IllegalArgumentException("입력 형식이 잘못되었습니다. ");
+                } else {
+                    result += lastNumber;
+                }
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 throw new IllegalArgumentException("입력 형식이 잘못되었습니다. " );
             }
