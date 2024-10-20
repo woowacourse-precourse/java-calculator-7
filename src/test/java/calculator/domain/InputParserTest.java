@@ -6,15 +6,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class CalculatorParserTest {
+class InputParserTest {
     @Test
     void 기본_구분자로_피연산자를_분리한다() {
         // given & when
-        final var calculatorParser = new CalculatorParser();
+        final var calculatorParser = new InputParser();
         List<Double> operands = calculatorParser.parse("1,2:3");
 
         // then
@@ -24,7 +23,7 @@ class CalculatorParserTest {
     @Test
     void 커스텀_구분자로_피연산자를_분리한다() {
         // given & when
-        final var calculatorParser = new CalculatorParser();
+        final var calculatorParser = new InputParser();
         List<Double> operands = calculatorParser.parse("//;\\n1;2;3");
 
         // then
@@ -33,7 +32,7 @@ class CalculatorParserTest {
 
     @Test
     void 커스텀_구분자가_1글자인지_검증한다(){
-        final var calculatorParser = new CalculatorParser();
+        final var calculatorParser = new InputParser();
 
         // when & then
         assertThatThrownBy(() -> calculatorParser.parse("//;;;;\\n1;2;3"))
@@ -43,7 +42,7 @@ class CalculatorParserTest {
 
     @Test
     void 구분자로_구분된_값이_양수인지_검증한다_숫자가_아닌_경우(){
-        final var calculatorParser = new CalculatorParser();
+        final var calculatorParser = new InputParser();
 
         // when & then
         assertThatThrownBy(() -> calculatorParser.parse("//;\\n1;aaaa;3"))
@@ -53,7 +52,7 @@ class CalculatorParserTest {
 
     @Test
     void 구분자로_구분된_값이_양수인지_검증한다_음수인_경우(){
-        final var calculatorParser = new CalculatorParser();
+        final var calculatorParser = new InputParser();
 
         // when & then
         assertThatThrownBy(() -> calculatorParser.parse("//;\\n1;-2;3"))

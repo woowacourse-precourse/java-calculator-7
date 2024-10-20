@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CalculatorParser {
+public class InputParser {
     private final List<Character> delimiters = new ArrayList<>(Arrays.asList(':',','));
 
     public List<Double> parse(String input){
@@ -66,7 +66,6 @@ public class CalculatorParser {
 
     private double parseOperand(String word){
         try{
-            System.out.println(word);
             return Double.parseDouble(word);
         } catch (NumberFormatException e){
             throw new IllegalArgumentException("피연산자가 숫자가 아닙니다.");
