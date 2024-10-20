@@ -2,12 +2,14 @@ package calculator.utils;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class NumUtilTest {
 
+    @DisplayName("[정상] 양수인지 검증")
     @Test
-    void 정수_검증() {
+    void checkPositiveInt() {
         // given
         char c = '0';
         // when & then
@@ -16,16 +18,18 @@ class NumUtilTest {
         }
     }
 
+    @DisplayName("[양수 검증 실패] 문자가 포함된 경우")
     @Test
-    void 정수_검증_예외__문자_포함() {
+    void invalidNum() {
         // given
         String invalidChar = "1..";
         // when & then
         assertFalse(NumUtil.isPositiveNum(invalidChar));
     }
 
+    @DisplayName("[정상] 문자열을 양수로 변환")
     @Test
-    void 문자열을_정수로_변환() {
+    void parseLong() {
         // given
         char c = '0';
         // when & then
@@ -34,32 +38,36 @@ class NumUtilTest {
         }
     }
 
+    @DisplayName("[양수 변환 예외] 문자가 포함된 경우")
     @Test
-    void 정수_변환_예외__문자_포함() {
+    void invalidParseLongWithChar() {
         // given
         String invalidNum = "3.2";
         // when & then
         assertThrows(IllegalArgumentException.class, () -> NumUtil.parseLong(invalidNum));
     }
 
+    @DisplayName("[양수 변환 예외] 빈 문자열인 경우")
     @Test
-    void 정수_변환_예외__공백() {
+    void invalidParseLongWithEmpty() {
         // given
-        String invalidNum = " ";
+        String invalidNum = "";
         // when & then
         assertThrows(IllegalArgumentException.class, () -> NumUtil.parseLong(invalidNum));
     }
 
+    @DisplayName("[양수 변환 예외] 음수인 경우")
     @Test
-    void 숫자_변환_예외__음수() {
+    void invalidParseLongWithNegative() {
         // given
         long negative = -1L;
         // when & then
         assertThrows(IllegalArgumentException.class, () -> NumUtil.parseLong(String.valueOf(negative)));
     }
 
+    @DisplayName("[정상] int 오버플로우인 경우")
     @Test
-    void 정수_변환__int_오버플로우() {
+    void intOverFlow() {
         // given
         long longValue = 2147483648L;
         // when & then

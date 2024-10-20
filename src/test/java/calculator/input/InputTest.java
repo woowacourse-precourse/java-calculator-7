@@ -3,12 +3,14 @@ package calculator.input;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class InputTest {
 
+    @DisplayName("[정상] 기본 객체 생성")
     @Test
-    void 객체_생성() {
+    void instance() {
         // given & when
         Input input = Input.from("1;2;3");
         // then
@@ -16,8 +18,9 @@ class InputTest {
         assertNotNull(input);
     }
 
+    @DisplayName("[정상] 기본 구분자 (,) (:) 확인")
     @Test
-    void 기본_구분자_확인() {
+    void defaultInputSeparator() {
         // given & when
         Input input = Input.from("1,2:3");
         // then
@@ -25,8 +28,9 @@ class InputTest {
         assertTrue(input.matchesSeparator(":"));
     }
 
+    @DisplayName("[정상] 콜론으로 리스트 변환")
     @Test
-    void 정수_리스트_변환_콜론() {
+    void parseLongListWithColon() {
         // given
         Input input = Input.from("1:2:3");
         // when
@@ -37,8 +41,9 @@ class InputTest {
         assertEquals(3, longList.get(2));
     }
 
+    @DisplayName("[정상] 콜론으로 리스트 변환")
     @Test
-    void 정수_리스트_변환_콤마() {
+    void parseLongListWithComma() {
         // given
         Input input = Input.from("1,3");
         // when
@@ -48,8 +53,9 @@ class InputTest {
         assertEquals(3, longList.get(1));
     }
 
+    @DisplayName("[리스트 변환 예외] 기본 구분자와 다른 경우")
     @Test
-    void 정수_리스트_예외__기본_구분자와_다름() {
+    void invalidSeparator() {
         // given
         Input input = Input.from("1,3?2");
         // when & then
