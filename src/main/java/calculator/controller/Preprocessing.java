@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Preprocessing extends InputValidator {
+public class Preprocessing {
+    private final InputValidator inputValidator = new InputValidator();
     private static final List<String> DEFAULT_SEPARATORS = Arrays.asList(",", ":");
 
     public List<String> processInput (String input) {
@@ -32,7 +33,7 @@ public class Preprocessing extends InputValidator {
     // 첫 글자가 "/"로 시작하는지 아닌지에 따라 메소드 실행
     private boolean firstLetter(String given) {
         char firstLetter = given.charAt(0);
-        validatingFirstLetter(firstLetter);
+        inputValidator.validatingFirstLetter(firstLetter);
 
         if (firstLetter == '/') { // 커스텀 구분자 추출해야 됨
             return true;
@@ -60,15 +61,15 @@ public class Preprocessing extends InputValidator {
         separated.add(temp);
 
         //예외 검증
-        validatingSeparator(separated, separtors);
-        lastElement(separated);
+        inputValidator.validatingSeparator(separated, separtors);
+        inputValidator.lastElement(separated);
 
         return separated;
     }
 
     // 커스텀 구분자 저장
     private List<String> findCustomSeparator(String given) {
-        String customSeparator = customValidator(given);
+        String customSeparator = inputValidator.customValidator(given);
 
         return Arrays.asList(customSeparator, given.substring(given.indexOf("\\n") + 2));
     }
