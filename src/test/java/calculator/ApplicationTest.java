@@ -29,7 +29,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 형식에서_벗어남_예외_테스트() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("/a\n12"))
+                assertThatThrownBy(() -> runException("/a\\n12"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
@@ -61,7 +61,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 구분자_한글자_초과_예외() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//ak\n1"))
+                assertThatThrownBy(() -> runException("//ak\\n1"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
@@ -85,7 +85,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 숫자_커스텀_구분자_사용() {
         assertSimpleTest(() -> {
-            run("//2\n123");
+            run("//2\\n123");
             assertThat(output()).contains("결과 : 4");
         });
     }
@@ -93,7 +93,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 여러_커스텀_구분자() {
         assertSimpleTest(() -> {
-            run("//2\n//4\n12345");
+            run("//2\\n//4\\n12345");
             assertThat(output()).contains("결과 : 9");
         });
     }
