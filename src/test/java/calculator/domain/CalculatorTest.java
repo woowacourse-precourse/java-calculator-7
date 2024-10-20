@@ -1,7 +1,10 @@
 package calculator.domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class CalculatorTest {
@@ -27,7 +30,8 @@ class CalculatorTest {
                 .hasMessageContaining("구분자로 시작할 수 없습니다.");
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(strings = {"//;n1;2,3","//;\\n1]2,3","//;\\n1;2,3"})
     void 유효하지_않은_구분자_검증() {
         assertThatThrownBy(() -> new Calculator("1,2:3,-4"))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -39,6 +43,14 @@ class CalculatorTest {
         assertThatThrownBy(() -> new Calculator("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("유효하지 않은 구분자입니다.");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1:2,3","1,2,3","//;\\n1;2,3"})
+    void 정수_합계_계산(String input) {
+        Calculator calculator = new Calculator(input);
+        int result = calculator.sum();
+        assertThat(result).isEqualTo(6);
     }
 
 }
