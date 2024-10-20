@@ -18,12 +18,17 @@ public class Application {
         if (isStringWithDefaultSeparator(userInput, defaultSeparator)) {
             int result = calculateSum(userInput, defaultSeparator);
             printResult(result);
-        } else if (isStringWithCustomSeparator(userInput)) {
+        }
+
+        else if (isStringWithCustomSeparator(userInput)) {
             String formattedInput = formatBackslash(userInput);
             String refinedInput = removeSeparatorInitializer(formattedInput);
+
             int result = calculateSum(refinedInput, getCustomSeparator(userInput));
             printResult(result);
-        } else {
+        }
+
+        else {
             throw new IllegalArgumentException("잘못된 입력입니다.");
         }
     }
@@ -68,12 +73,15 @@ public class Application {
         String str = formatBackslash(input);
 
         int idx = str.indexOf("\\n");
+
         if (idx == -1) {
             throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
         }
+
         str = removeSeparatorInitializer(str);
         str = removeNumber(str);
         str = removeSeparator(str, getCustomSeparator(input));
+
         return input.indexOf("//") == 0 && str.isEmpty();
     }
 
@@ -88,9 +96,15 @@ public class Application {
 
         String[] nums = input.split(formatSeparator(separator));
         int result = 0;
+
         for (String num : nums) {
+            if (num.isEmpty()) {
+                continue;
+            }
+
             result += Integer.parseInt(num);
         }
+
         return result;
     }
 
