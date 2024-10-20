@@ -28,7 +28,7 @@ public class CalculatorModel {
             if (num < 0) {
                 throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
             }
-            result.add(Integer.parseInt(s));
+            result.add(num);
         }
         return result;
     }
