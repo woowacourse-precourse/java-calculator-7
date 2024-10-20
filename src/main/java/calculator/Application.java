@@ -13,7 +13,6 @@ public class Application {
             String userInput = Console.readLine();
             addSeparator(userInput);
             int[] numbers = separatorNum(userInput);
-
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
@@ -26,6 +25,7 @@ public class Application {
             if (nsep.matches(".*[0-9].*")) {
                 throw new IllegalArgumentException("오류: 구분자에 숫자가 포함되어 있습니다.");
             }
+
             separator.add(nsep);
         }
     }
@@ -54,6 +54,14 @@ public class Application {
         }
 
         return intarr;
+    }
+
+    public static int cal_sum(int[] numbers) {
+        int sum = 0;
+        for(int i : numbers) {
+            sum += i;
+        }
+        return sum;
     }
 
 }
