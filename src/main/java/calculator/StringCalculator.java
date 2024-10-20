@@ -6,9 +6,16 @@ public class StringCalculator {
         if (input == null || input.isEmpty()) {
             return 0;
         }
-        if (input.matches("\\d+")) {  // 숫자 하나일 경우
+        if (input.matches("\\d+")) {
             return Integer.parseInt(input);
         }
-        return -1;
+
+        // 쉼표 또는 콜론으로 구분하여 숫자 합산
+        String[] numbers = input.split("[,|:]");
+        int sum = 0;
+        for (String number : numbers) {
+            sum += Integer.parseInt(number);
+        }
+        return sum;
     }
 }
