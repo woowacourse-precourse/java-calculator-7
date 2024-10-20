@@ -1,7 +1,6 @@
 package calculator.extract;
 
 public class ExtractService {
-    public static final int IDENTIFIER_LENGTH = 4;
     public static final String ILLEGAL_STRING = "잘못된 문자열 형식입니다.";
     public static final int CUSTOM_SEPARATOR_LENGTH = 1;
 
