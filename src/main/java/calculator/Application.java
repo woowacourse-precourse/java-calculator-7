@@ -28,14 +28,7 @@ public class Application {
         // 분리된 문자열 숫자로 변환하기
         int[] strToIntList = new int[inputStrList.length];
         boolean isMinus = false;
-        int index = 0;
-        for (String str : inputStrList) {
-            strToIntList[index] = Integer.parseInt(str);
-            if (strToIntList[index] < 0){
-                isMinus = true;
-            }
-            index++;
-        }
+        strToInt(strToIntList, inputStrList, isMinus);
 
         // 음수인 경우 에러처리
         if(isMinus){
@@ -109,4 +102,15 @@ public class Application {
         }
     }
 
+    // 분리된 문자열 숫자로 변환하기
+    private static void strToInt(int[] strToIntList, String[] inputStrList, boolean isMinus){
+        int index = 0;
+        for (String str : inputStrList) {
+            strToIntList[index] = Integer.parseInt(str);
+            if (strToIntList[index] < 0){
+                isMinus = true;
+            }
+            index++;
+        }
+    }
 }
