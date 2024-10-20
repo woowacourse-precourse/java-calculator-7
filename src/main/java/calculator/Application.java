@@ -51,7 +51,7 @@ public class Application {
 
         String inputString = Console.readLine();
 
-        calculate(inputString);
-        //System.out.println("결과 : " + calculate(inputString));
+        int result = calculate(inputString);
+        System.out.println("결과 : " + result);
     }
 }
