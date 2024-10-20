@@ -39,5 +39,23 @@ public class ValidateInput {
 
         input.setInputString(inputString); //구분자 제거한 문자열 저장
         input.setDelimiters(delimiters); // 업데이트된 구분자 리스트 저장
+
+        //기본 구분자(",", ":"),커스텀 구분자, 양수만 허용하는 정규식 (빈 문자열도 허용함)
+        StringBuilder regex = new StringBuilder("^[0-9]*(");
+        for (String delimiter : delimiters) {
+            regex.append(delimiter).append("|"); // 각 구분자를 추가하고 '|'를 붙임
+        }
+
+        // 마지막 '|' 제거
+        if (regex.toString().endsWith("|")) {
+            regex = new StringBuilder(regex.substring(0, regex.length() - 1));
+        }
+
+        regex.append("[0-9]*)*$");
+
+        //정규식과 일치하지 않을 때 IllegalArgumentException
+        if (!input.getInputString().matches(regex.toString())) {
+            throw new IllegalArgumentException("잘못된 입력값입니다.");
+        }
     }
 }
