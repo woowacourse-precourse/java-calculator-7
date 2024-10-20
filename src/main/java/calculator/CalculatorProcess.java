@@ -3,6 +3,7 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 import static utility.Constant.INPUT_MESSAGE;
+import static utility.Constant.OUTPUT_MESSAGE;
 
 public class CalculatorProcess {
 
@@ -83,6 +84,8 @@ public class CalculatorProcess {
         printAnswer(total);
     }
 
+    // 정답 출력하기
     static private void printAnswer(int answer){
+        System.out.print(OUTPUT_MESSAGE+answer);
     }
 }
