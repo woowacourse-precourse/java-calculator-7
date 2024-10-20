@@ -76,6 +76,11 @@ public class InputValidator {
 
     private static void checkMinusNumber(final char currentValue, final char beforeValue) {
         if (Character.isDigit(currentValue)) {
+
+            if("n".equals(String.valueOf(beforeValue))) {
+                return;
+            }
+
             if (!checkPreviousMinusDelimiter(beforeValue)) {
                 throw new IllegalArgumentException(ENTER_POSITIVE_NUMBER.getMessage());
             }
