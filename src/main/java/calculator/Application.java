@@ -12,7 +12,6 @@ public class Application {
         int result = 0;
 
         ArrayList<Character> delimiters = new ArrayList<>();
-        ArrayList<Integer> numbers = new ArrayList<>();
 
         delimiters.add(',');
         delimiters.add(':');
@@ -45,12 +44,37 @@ public class Application {
             }
 
             if (flag){
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("잘못된 커스텀 구분자 지정입니다.");
             }
 
+            for (int i = pos; i < input.length(); i++) {
+                char ch = input.charAt(i);
+                if (delimiters.contains(ch)) {
+                    if (prev) {
+                        throw new IllegalArgumentException("구분자를 연속으로 사용했습니다.");
+                    }
+                    prev = true;
+                    result += number;
+                    number = 0;
+                } else if (Character.isDigit(ch)) {
+                    int num = ch - '0';
+                    number = number * 10 + num;
+                    prev = false;
+                } else {
+                    throw new IllegalArgumentException("잘못된 입력입니다.");
+                }
+            }
+
+            if (prev){
+                throw new IllegalArgumentException("문자열의 마지막이 구분자입니다.");
+            } else {
+                result += number;
+            }
 
         } catch (IOException e) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("잘못된 입력입니다.");
         }
+
+        System.out.println("결과 : " + result);
     }
 }
