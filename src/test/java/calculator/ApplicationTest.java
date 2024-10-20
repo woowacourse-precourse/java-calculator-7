@@ -22,7 +22,13 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 1");
         });
     }
-
+    @Test
+    void 빈_문자열_확인() {
+        assertSimpleTest(() -> {
+            run("");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
     @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
