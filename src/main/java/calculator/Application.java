@@ -6,6 +6,10 @@ public class Application {
         InputRulePrinter rulePrinter = new InputRulePrinter();
         rulePrinter.printInputRules();
 
+        // 입력 문자열 받기
+        InputHandler inputHandler = new InputHandler();
+        String userInput = inputHandler.getUserInput();
+
         // 입력 처리 및 계산 로직 추가 필요
     }
 }
