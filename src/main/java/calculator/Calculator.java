@@ -20,7 +20,7 @@ public class Calculator {
             return;
         }
 
-        String[] numList = delimiter.extractNumberString(inputString);
+        String[] numList = delimiter.getNumList(inputString);
 
         int sum = 0;
 

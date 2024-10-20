@@ -5,91 +5,74 @@ import java.util.List;
 
 public class Delimiter {
     private final List<Character> delimiters = new ArrayList<>();
-    private int index = 2;
+    private int index = 0;
 
-    public void addDelimiter(char delimiter) {
+
+    private void addDelimiter(char delimiter) {
         delimiters.add(delimiter);
     }
 
-    public List<Character> getDelimiters() {
+    private List<Character> getDelimiters() {
         return new ArrayList<>(delimiters);
     }
 
-    public boolean hasSingleDelimiter() {
-        return delimiters.size() == 1;
-    }
+    public String[] getNumList(String inputString) {
 
-    public int findLastDelimiterIndex(String inputString) {
-        int length = inputString.length();
+        addDefaultDelimiters();
 
-        while (index < length - 1) {
-            char currentChar = inputString.charAt(index);
-            char nextChar = inputString.charAt(index + 1);
-
-            if (currentChar == '\\' && nextChar == 'n') {
-                return index;
-            }
-            index++;
+        if (inputString.startsWith("//")) {
+            setIndexAndResetDelimiters(inputString);
         }
-        return index;
+        String numString = inputString.substring(index);
+        return numString.split(getDelimiterExpression());
     }
 
-    public void appendDelimiter(StringBuilder expression, char delimiter) {
+
+    private void addDefaultDelimiters() {
+        delimiters.clear();
+        addDelimiter(':');
+        addDelimiter(',');
+    }
+
+
+    private void setIndexAndResetDelimiters(String inputString) {
+
+        delimiters.clear();
+        index = inputString.indexOf("\\n");
+        validateCustomDelimiterFormat();
+        addDelimiterToDelimiters(inputString);
+        index += 2;
+    }
+
+    private String getDelimiterExpression() {
+        StringBuilder delimiterExpression = new StringBuilder();
+        for (char delimiter : getDelimiters()) {
+            appendDelimiterToExpression(delimiterExpression, delimiter);
+        }
+        return delimiterExpression.toString();
+    }
+
+    private void appendDelimiterToExpression(StringBuilder expression, char delimiter) {
         if (!expression.isEmpty()) {
             expression.append("|");
         }
         expression.append("\\").append(delimiter);
     }
 
-    public void clearDelimiters() {
-        delimiters.clear();
-    }
-
-    public String[] extractNumberString(String inputString) {
-        addDelimiter(':');
-        addDelimiter(',');
-        if (inputString.startsWith("//")) {
-            clearDelimiters();
-            index = findLastDelimiterIndex(inputString);
-            validateCustomDelimiterFormat(inputString);
-            extractDelimiters(inputString);
-
-            validateSingleDelimiter();
-
-            return getNumList(inputString.substring(index + 2));
-        }
-
-        return getNumList(inputString);
-    }
-
-    private String[] getNumList(String inputString) {
-        StringBuilder delimiterExpression = new StringBuilder();
-        for (char delimiter : getDelimiters()) {
-            appendDelimiter(delimiterExpression, delimiter);
-        }
-
-        return inputString.split(getDelimiterExpression());
-    }
-
-    private String getDelimiterExpression() {
-        StringBuilder delimiterExpression = new StringBuilder();
-        for (char delimiter : getDelimiters()) {
-            appendDelimiter(delimiterExpression, delimiter);
-        }
-        return delimiterExpression.toString();
-    }
-
-    private void extractDelimiters(String inputString) {
+    private void addDelimiterToDelimiters(String inputString) {
         for (int i = 2; i < index; i++) {
             char currentDelimiter = inputString.charAt(i);
             validateDelimiterIsPeriod(currentDelimiter);
             validateDelimiterIsDigit(currentDelimiter);
             addDelimiter(currentDelimiter);
         }
+
+        validateSingleDelimiter();
+
     }
 
     private void validateSingleDelimiter() {
-        if (!hasSingleDelimiter()) {
+        if (delimiters.size() != 1) {
             throw new IllegalArgumentException("커스텀 구분자는 하나여야 합니다.");
         }
     }
@@ -106,8 +89,8 @@ public class Delimiter {
         }
     }
 
-    private void validateCustomDelimiterFormat(String inputString) {
-        if (index == inputString.length() - 1) {
+    private void validateCustomDelimiterFormat() {
+        if (index == -1) {
             throw new IllegalArgumentException("커스텀 구분자 입력이 잘못되었습니다.");
         }
     }
