@@ -1,8 +1,6 @@
 package calculator.util;
 
 import static org.assertj.core.api.Assertions.*;
-
-import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
 public class ValidatorUtilsTest {
