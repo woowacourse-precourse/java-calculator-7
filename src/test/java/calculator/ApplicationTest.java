@@ -92,6 +92,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 예외_테스트_5() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() ->  runException("//0\\n2021032"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
     void 빈문자열_테스트() {
         assertSimpleTest(() -> {
             run(" ");
