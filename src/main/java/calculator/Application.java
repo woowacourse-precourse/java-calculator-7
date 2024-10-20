@@ -36,7 +36,9 @@ public class Application {
     }
 
     public static String getUserInput() {
-        return Console.readLine();
+        String input = Console.readLine();
+        Console.close();
+        return input;
     }
 
     public static boolean isNumber(String input) {
