@@ -1,7 +1,6 @@
 package calculator.config;
 
 import calculator.controller.CalculatorController;
-import calculator.service.CalculatorService;
 
 public class Configuration {
     private static final Configuration configuration = new Configuration();
