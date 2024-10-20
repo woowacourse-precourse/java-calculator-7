@@ -1,6 +1,7 @@
 package calculator.domain;
 
-import calculator.util.NumberValidator;
+import calculator.exception.NumberException;
+import calculator.validator.EmptyStringValidator;
 
 public class Number {
     private String[] numString;
@@ -14,20 +15,20 @@ public class Number {
     }
 
     public void convertStringToInt() {
-        if (NumberValidator.isNullString(numString)) {
+        if (EmptyStringValidator.isEmptyString(numString)) {
             return;
         }
 
         numbers = new int[numString.length];
         for (int i = 0; i < numString.length; ++i) {
-            numbers[i] = NumberValidator.parseAndValidateInt(numString[i]);
+            numbers[i] = NumberException.parseAndValidateInt(numString[i]);
         }
     }
 
     public int calculateSum() {
-        convertStringToInt(); // calculateSum() 메서드가 먼저 호출되면 numbers 에 아무 문자열이 없으므로 방지를 위해 내부에 선언
+        convertStringToInt();
 
-        if (!NumberValidator.isNullString(numString)) {
+        if (!EmptyStringValidator.isEmptyString(numString)) {
             for (int num : numbers) {
                 sum += num;
             }

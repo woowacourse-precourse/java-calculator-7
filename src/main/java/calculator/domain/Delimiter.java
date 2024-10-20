@@ -1,7 +1,8 @@
 package calculator.domain;
 
 import calculator.domain.constant.DefaultDelimiter;
-import calculator.util.DelimiterValidator;
+import calculator.exception.DelimiterException;
+import calculator.validator.EmptyStringValidator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +11,10 @@ public class Delimiter {
     private List<String> delimiterList = new ArrayList<>();
     private String customDelimiter;
 
-    private final String startCustomDelimiter = "//";
-    private final String endCustomDelimiter = "\\n";
+    private final String CUSTOM_DELIMITER_START = "//";
+    private final String CUSTOM_DELIMITER_END = "\\n";
+    private final String SPECIAL_REGEX_CHARS = "([\\[\\]\\\\.^$|?*+(){}])";
+    private final String ESCAPE_CHAR = "\\\\$1";
 
     public Delimiter(String inputString) {
         this.inputString = inputString;
@@ -23,28 +26,24 @@ public class Delimiter {
     }
 
     private void setCustomDelimiter() {
-        DelimiterValidator.checkTypeOfCustomDelimiter(findDelimiterEndIndex());
+        if (inputString.startsWith(CUSTOM_DELIMITER_START)) {
+            DelimiterException.validateCustomDelimiterFormat(findDelimiterEndIndex());
 
-        customDelimiter = inputString.substring(2, findDelimiterEndIndex());
-        DelimiterValidator.afterFindCustomDelimiter(customDelimiter);
+            customDelimiter = inputString.substring(2, findDelimiterEndIndex());
+            DelimiterException.validateCustomDelimiter(customDelimiter);
 
-        delimiterList.add(escapeSpecialRegexChars(customDelimiter));
-        inputString = inputString.substring(findDelimiterEndIndex() + 2);
-    }
-
-    private int findDelimiterEndIndex() {
-        return inputString.indexOf(endCustomDelimiter);
-    }
-
-    private void checkCustomDelimiter() {
-        if (inputString.startsWith(startCustomDelimiter)) {
-            setCustomDelimiter();
+            delimiterList.add(escapeSpecialRegexChars(customDelimiter));
+            inputString = inputString.substring(findDelimiterEndIndex() + 2);
         }
     }
 
+    private int findDelimiterEndIndex() {
+        return inputString.indexOf(CUSTOM_DELIMITER_END);
+    }
+
     public String[] getSplitString() {
-        checkCustomDelimiter();
-        if (inputString == null || inputString.trim().isEmpty()) {
+        setCustomDelimiter();
+        if (EmptyStringValidator.isEmptyString(inputString)) {
             return null;
         }
         String delimiterRegex = String.join("|", delimiterList); // ",|:|customDeli"
@@ -52,10 +51,12 @@ public class Delimiter {
     }
 
     private String escapeSpecialRegexChars(String delimiter) {
-        return delimiter.replaceAll("([\\[\\]\\\\.^$|?*+(){}])", "\\\\$1");
+        return delimiter.replaceAll(SPECIAL_REGEX_CHARS, ESCAPE_CHAR);
     }
 
     public String getCustomDelimiter() {
         return customDelimiter;
     }
+
+
 }
