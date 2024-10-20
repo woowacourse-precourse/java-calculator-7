@@ -1,16 +1,17 @@
 package calculator.Controller;
 
-import calculator.Model.Calculate;
+import calculator.Model.CheckDouble;
 import calculator.View.Input;
 import calculator.View.Result;
 
 public class Controller {
     Input input = new Input();
     Result result = new Result();
-    Calculate calc = new Calculate();
+
+    CheckDouble check = new CheckDouble();
 
     public void calculator(){
         String userInput = input.userInput();
-        result.result(calc.plusNum(userInput));
+        result.result(check.checkDecimalPoint(userInput));
     }
 }
