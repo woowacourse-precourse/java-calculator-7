@@ -21,14 +21,12 @@ public class Application {
                     } else if (eachIndex == customChar) {       // 커스텀문자 확인 되면 넘어감
                         continue;
                     } else {
-                        System.out.println("IllegalArgumentException");
-                        return;                                 // 올바르지 않은 입력시 출력
+                        throw new IllegalArgumentException();                                 // 올바르지 않은 입력시 출력
                     }
                 }
             }
             else{
-                System.out.println("IllegalArgumentException");
-                return;                                         // 올바르지 않은 입력시 출력
+                throw new IllegalArgumentException();           // 올바르지 않은 입력시 출력
             }
         }
         else {
@@ -40,8 +38,7 @@ public class Application {
                 } else if (eachIndex == ',' || eachIndex == ':') {
                     continue;
                 } else {
-                    System.out.println("IllegalArgumentException");
-                    return;
+                    throw new IllegalArgumentException();
                 }
             }
         }
