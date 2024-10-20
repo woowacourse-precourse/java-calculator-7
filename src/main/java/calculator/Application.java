@@ -15,7 +15,7 @@ public class Application {
 
             System.out.println("결과 : " + result);
         } catch (Exception e) {
-            throw new IllegalArgumentException(e.getMessage());
+            throw e;
         }
 
     }
@@ -48,6 +48,9 @@ public class Application {
     static String getCustomDelimiter(String s) {
         if (s.startsWith("//")) {
             int endOfDelimiter = s.indexOf("\\n");
+            if (endOfDelimiter == -1) {
+                throw new IllegalArgumentException("커스텀 구분자는 \"//\"와 \"\\n\" 사이에 위치해야 합니다.");
+            }
 
             return s.substring(2, endOfDelimiter);
         }
