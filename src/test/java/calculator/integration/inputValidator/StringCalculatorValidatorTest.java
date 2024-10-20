@@ -1,16 +1,16 @@
 package calculator.integration.inputValidator;
 
-import static calculator.util.Message.입력값이_null입니다;
-import static calculator.util.Message.입력값이_비어있습니다;
+import static calculator.domain.common.Message.입력값이_null입니다;
+import static calculator.domain.common.Message.입력값이_비어있습니다;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-import calculator.validationRule.BasicFormatValidationRule;
-import calculator.validationRule.CompositeValidationRule;
-import calculator.validationRule.CustomTokenFormatValidationRule;
-import calculator.validationRule.EmptyInputValidationRule;
-import calculator.validationRule.NullInputValidationRule;
-import calculator.validationRule.ValidationRule;
-import calculator.validator.StringCalculatorValidator;
+import calculator.domain.validator.impl.StringCalculatorValidator;
+import calculator.domain.validator.impl.ValidationRule;
+import calculator.domain.validator.impl.validationRule.BasicFormatValidationRule;
+import calculator.domain.validator.impl.validationRule.CompositeValidationRule;
+import calculator.domain.validator.impl.validationRule.CustomTokenFormatValidationRule;
+import calculator.domain.validator.impl.validationRule.EmptyInputValidationRule;
+import calculator.domain.validator.impl.validationRule.NullInputValidationRule;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
