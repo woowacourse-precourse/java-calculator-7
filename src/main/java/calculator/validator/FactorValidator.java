@@ -12,8 +12,8 @@ public class FactorValidator {
         try{
             number = Integer.parseInt(factor);
 
-            if(number < 0) {
-                throw new FactorException("입력 값에 음수가 존재합니다.");
+            if(number <= 0) {
+                throw new FactorException("양수가 아닌 수가 존재합니다.");
             }
 
         } catch (NumberFormatException e) {
