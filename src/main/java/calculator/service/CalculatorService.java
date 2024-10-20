@@ -42,4 +42,12 @@ public class CalculatorService {
     }
 
 
+    public String[] splitInput(String input) {
+
+        return input.split(seperate);
+    }
+
+
+
+
 }
