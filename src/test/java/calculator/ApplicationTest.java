@@ -25,6 +25,22 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자_여러개_사용() {
+        assertSimpleTest(() -> {
+            run("//;\\n1;2;3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 두자리수_입력_테스트() {
+        assertSimpleTest(() -> {
+            run("10,20,30");
+            assertThat(output()).contains("결과 : 60");
+        });
+    }
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))
@@ -53,7 +69,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_누락_예외() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//\n1;2;3"))
+                assertThatThrownBy(() -> runException("//\\n1;2;3"))
                         .isInstanceOf(IllegalArgumentException.class)
                         .hasMessageContaining("커스텀 구분자를 입력해 주세요.")
         );
@@ -64,7 +80,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//;\\n1$2$3"))
                         .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessageContaining("올바르지 않은 커스텀 구분자입니다.")
+                        .hasMessageContaining("올바르지 않은 구분자입니다.")
         );
     }
 
