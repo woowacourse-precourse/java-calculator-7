@@ -12,7 +12,7 @@ public class CalculatorService {
         try(Calculator calculator = new Calculator(input)) {
             calculator.process();
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("잘못된 입력입니다.");
         } catch (Exception e){
             System.out.println("예기치 못한 오류입니다. 종료합니다.");
             System.out.println("[개발자용 로그]: " + e.getMessage());

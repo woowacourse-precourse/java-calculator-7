@@ -32,7 +32,7 @@ public class DelimiterService {
 
         // 구분자가 숫자일 때 예외처리
         if(isNumberic(customDelimiter)){
-            throw new IllegalArgumentException("잘못된 구분자 형식입니다. 숫자는 구분자가 될 수 없습니다.");
+            throw new IllegalArgumentException("숫자는 구분자가 될 수 없습니다.");
         }
 
         delimiters.add(customDelimiter);

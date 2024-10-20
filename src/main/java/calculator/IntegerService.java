@@ -43,7 +43,7 @@ public class IntegerService {
         }
 
         if(!token.matches("\\d+")) {
-           throw new IllegalArgumentException("잘못된 숫자 입력입니다. 0과 자연수만 계산 가능합니다.");
+           throw new IllegalArgumentException("0 이상의 정수만 계산 가능합니다.");
         }
 
         return Integer.parseInt(token);
