@@ -10,19 +10,10 @@ public class Application {
         if(input.isEmpty()) {
             input = "0";
         }
-        String seperator = DecideSeparatorInString(input);
-        String[] arr = DevideStringToSeparator(input, seperator);
-
-        if(!isCorrectInput(arr, seperator)) {
-            throw new IllegalArgumentException("IllegalArgumentException");
-        }
-        int sum = 0;
-        for (int i = 0; i < arr.length; i++) {
-            if(arr[i].isEmpty()) {
-                continue;
-            }
-            sum += Integer.parseInt(arr[i]);
-        }
+        String separator = DecideSeparatorInString(input);
+        String[] arr = DevideStringToSeparator(input, separator);
+        ValidateInput(arr, separator);
+        int sum = CalculateSum(arr);
         System.out.println("결과 : " + sum);
         Console.close();
     }
@@ -67,5 +58,22 @@ public class Application {
             }
         }
         return true;
+    }
+
+    private static void ValidateInput(String[] input, String separator) {
+        if(!isCorrectInput(input, separator)) {
+            throw new IllegalArgumentException("IllegalArgumentException");
+        }
+    }
+
+    private static int CalculateSum(String[] numbers) {
+        int sum = 0;
+        for (int i = 0; i < numbers.length; i++) {
+            if(numbers[i].isEmpty()) {
+                continue;
+            }
+            sum += Integer.parseInt(numbers[i]);
+        }
+        return sum;
     }
 }
