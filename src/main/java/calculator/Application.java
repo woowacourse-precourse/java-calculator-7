@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
+import java.util.regex.Pattern;
 
 public class Application {
     public static int subStringStartIndex = 0;
@@ -31,6 +32,7 @@ public class Application {
         if (isContainNewDelimiter(inputString)) {
             subStringStartIndex = inputString.indexOf("\\n") + 2;
             delimiters += "|" + getNewDelimiter(inputString);
+            delimiters = Pattern.quote(delimiters);
         }
     }
 
