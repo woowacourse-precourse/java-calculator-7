@@ -74,8 +74,7 @@ public class Preprocessing {
 
     // 커스텀 구분자 저장
     private List<String> findCustomSeparator(String given) {
-        String customSeparator = inputValidator.customValidator(given);
-
-        return Arrays.asList(customSeparator, given.substring(given.indexOf("\\n") + 2));
+        // 커스텀 구분자 + 수식 반환
+        return inputValidator.customValidator(given);
     }
 }

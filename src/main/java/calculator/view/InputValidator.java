@@ -1,7 +1,9 @@
 package calculator.view;
 
-import javax.security.auth.callback.CallbackHandler;
+import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class InputValidator {
     private void throwIllegalArgument(String message) {
@@ -39,22 +41,30 @@ public class InputValidator {
     }
 
     // findCustomSeparator에 추가
-    public String customValidator(String given) {
-        checkForm(given);
+    public List<String> customValidator(String given) {
+        List<String> customSeparatorAndExpression = checkForm(given);
 
-        String customSepartor = given.substring(2, given.indexOf("\\n"));
-        checkContent(customSepartor);
+        checkContent(customSeparatorAndExpression.get(0));
 
-        notNumAfterCustom(given);
+        notNumAfterCustom(customSeparatorAndExpression.get(1));
 
-        return customSepartor;
+        return customSeparatorAndExpression;
     }
 
     // (첫글자가 `/`일 경우) 그 뒤에 `//xx\n`형식이 온전히 이어지지 않을 경우
     // findCustomSeparator에 추가(customValidator)
-    private void checkForm(String given) {
-        if (!given.contains("//") || ! given.contains("\\n")) { // 조건식 맞는지 확인
+    private List<String> checkForm(String given) {
+        String regex = "//(.*)\\n(.*)"; // 정규 표현식
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(given);
+
+        if (matcher.find()) {
+            String customSeparator = matcher.group(1); // 커스텀 구분자
+            String expression = matcher.group(2); // 수식 부분
+            return Arrays.asList(customSeparator, expression);
+        } else {
             throwIllegalArgument("[ERROR]커스텀 구분자 선언자가 올바르게 사용되지 않았습니다.");
+            return null; //TODO: 불필요한 코드
         }
     }
 
@@ -74,8 +84,8 @@ public class InputValidator {
 
     // 커스텀 구분자 지정문자 뒤에 숫자가 오지 않을 경우
     // findCustomSeparator에 추가(customValidator)
-    private void notNumAfterCustom(String given) {
-        if (!Character.isDigit(given.charAt(given.indexOf("\\n") + 2))) {
+    private void notNumAfterCustom(String expression) {
+        if (!Character.isDigit(expression.charAt(0))) {
             throwIllegalArgument("[ERROR]커스텀 구분자 선언자 뒤에 수식이 숫자로 시작하지 않습니다.");
         }
     }
