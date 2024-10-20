@@ -50,7 +50,7 @@ class CalculatorServiceTest {
         String inputString = "//*\\n1*2*3";
 
         //when
-        String delimiter = calculatorService.parseCustomDelimiter(inputString);
+        String delimiter = calculatorService.extractCustomDelimiter(inputString);
 
         //then
         assertThat(delimiter).isEqualTo("*");
@@ -160,7 +160,7 @@ class CalculatorServiceTest {
         DelimiterInputDto delimiterInputDto = new DelimiterInputDto(inputString, new ArrayList<>(List.of(",", ":")));
 
         //when
-        calculatorService.updateInputString(delimiterInputDto);
+        calculatorService.removeDelimiterDefinition(delimiterInputDto);
 
         //then
         assertThat(delimiterInputDto.getInputString()).isEqualTo("1&2&3");

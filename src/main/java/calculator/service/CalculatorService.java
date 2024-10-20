@@ -22,10 +22,10 @@ public class CalculatorService {
 
     public void setDelimiter(DelimiterInputDto delimiterInputDto) {
         if (isCustomDelimiter(delimiterInputDto.getInputString())) {
-            String customDelimiter = parseCustomDelimiter(delimiterInputDto.getInputString());
+            String customDelimiter = extractCustomDelimiter(delimiterInputDto.getInputString());
             validCustomDelimiter(customDelimiter);
             delimiterInputDto.addDelimiter(customDelimiter);
-            updateInputString(delimiterInputDto);
+            removeDelimiterDefinition(delimiterInputDto);
         }
     }
 
@@ -33,11 +33,11 @@ public class CalculatorService {
         return inputString.startsWith("//") && inputString.contains("\\n");
     }
 
-    public String parseCustomDelimiter(String inputString) {
+    public String extractCustomDelimiter(String inputString) {
         return inputString.substring(2, inputString.indexOf("\\n"));
     }
 
-    public void updateInputString(DelimiterInputDto delimiterInputDto) {
+    public void removeDelimiterDefinition(DelimiterInputDto delimiterInputDto) {
         String inputString = delimiterInputDto.getInputString();
         delimiterInputDto.setInputString(inputString.substring(inputString.indexOf("\\n") + 2));
     }
