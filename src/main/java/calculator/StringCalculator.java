@@ -20,6 +20,9 @@ public class StringCalculator {
         for (String number : numbers) {
             try{
                 int parsedNumber = Integer.parseInt(number);
+                if (parsedNumber < 0) {
+                    throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+                }
                 sum += parsedNumber;
             } catch (NumberFormatException e){
                 throw new IllegalArgumentException("숫자가 아닌 값이 입력되었습니다.");
