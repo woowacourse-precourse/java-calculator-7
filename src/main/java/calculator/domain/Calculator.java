@@ -7,6 +7,9 @@ import java.util.regex.Pattern;
 public class Calculator {
     private static final Pattern CUSTOM_SEPERATOR_PATTERN=Pattern.compile("^//(.)\\\\n{1}(.*)");
 
+    private static final String OVERFLOW_RESULT="덧셈의 결과가 int 범위를 넘어갔습니다";
+    private static final String OVERFLOW_NUMBER="특정 수가 int 범위를 넘어갔습니다";
+    private static final String INVALID_SEPERATOR="커스텀 구분자가 아닌 기호를 입력했습니다";
     private static final String BLANK="";
 
     public static int inputCalculate(String input){
@@ -23,8 +26,6 @@ public class Calculator {
             input= matcher.group(2);
 
             SeperatorFactory.addRegex(customSeperator);
-            //SEPERATOR_REGEX에 더한다
-            //addRegex(customSeperator);
         }
 
         String seperatorRegex=SeperatorFactory.getSeperatorRegex();
@@ -45,7 +46,7 @@ public class Calculator {
 
     private static int addTwoNum(int a,int b) {
         if (a>Integer.MAX_VALUE-b){
-            throw new IllegalArgumentException(MessageType.OVERFLOW_RESULT.getMessage());
+            throw new IllegalArgumentException(OVERFLOW_RESULT);
         }
         return a+b;
     }
