@@ -3,9 +3,7 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class Application {
 
@@ -26,9 +24,9 @@ public class Application {
         // 구분자 확인
         if (splitStr[0].equals("/")) {
             String delimiter = findDelimiter(splitStr);
-            sumList = checkStr(splitStr, 5, number, delimiter);
+            sumList = digitsToNumber(str, splitStr, 5, number, delimiter);
         } else {
-            sumList = checkStr(splitStr, 0, number, null);
+            sumList = digitsToNumber(str, splitStr, 0, number, null);
         }
 
         // 출력
@@ -48,42 +46,34 @@ public class Application {
         }
     }
 
-    public static List<BigInteger> checkStr (String[] splitStr, int start, List<String> number, String delimiter) {
-        Stack<String> digits = new Stack<>();
+    // 문자열 구분 -> 덧셈리스트 추가
+    public static List<BigInteger> digitsToNumber (String str, String[] splitStr, int start, List<String> number, String delimiter) {
         List<BigInteger> sumNumbers = new ArrayList<>();
+        int index = start;
+        BigInteger num;
 
         for (int i = start; i < splitStr.length; i++) {
             if (splitStr[i].equals(",") || splitStr[i].equals(":") || splitStr[i].equals(delimiter)) {
-                digitsToNumber(digits, sumNumbers);
-            } else if (number.contains(splitStr[i])) {
-                digits.add(splitStr[i]);
-            } else {
+                if (i == 0 || splitStr[i - 1].equals(",") || splitStr[i - 1].equals(":") || splitStr[i - 1].equals(delimiter)) {
+                    index = i + 1;
+                    continue;
+                }
+                if (index != i) {
+                    num = new BigInteger(str.substring(index, i));
+                } else {
+                    num = new BigInteger(str.substring(index));
+                }
+                sumNumbers.add(num);
+                index = i + 1;
+            } else if (!number.contains(splitStr[i])) {
                 throw new IllegalArgumentException();
             }
         }
 
-        if (!digits.isEmpty()) {
-            digitsToNumber(digits, sumNumbers);
-        }
+        num = new BigInteger(str.substring(index));
+        sumNumbers.add(num);
 
         return sumNumbers;
     }
 
-    public static void digitsToNumber (Stack<String> digits, List<BigInteger> sumNumbers) {
-        if (digits.size() == 1) {
-            sumNumbers.add(new BigInteger(digits.pop()));
-        } else {
-            BigInteger sum = BigInteger.ZERO;
-            while (!digits.empty()) {
-                int count = digits.size();
-                BigInteger a = new BigInteger(digits.pop());
-
-                for (int i = 0; i < count - 1; i++) {
-                    a = a.multiply(BigInteger.TEN);
-                }
-                sum = sum.add(a);
-            }
-            sumNumbers.add(sum);
-        }
-    }
 }
