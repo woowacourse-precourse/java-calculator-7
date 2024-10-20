@@ -31,6 +31,9 @@ public class StringCalculator {
 
         // 숫자 분리해서 합 구하기
         String[] strings = splitByDelimiters(numbersPart, delimiterList);
+        if (strings.length == 0) {
+            throw new IllegalArgumentException("계산될 숫자가 필요합니다.");
+        }
         int sum = 0;
         try {
             for (String string : strings) {
