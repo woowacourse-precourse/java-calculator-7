@@ -5,6 +5,7 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class InputManager {
 
+    public static final String CUSTOM_DELIMITER_END = "\\n";
     private static String customDelimiter;
 
     public static String consoleInput() {
@@ -23,11 +24,11 @@ public class InputManager {
     }
 
     private static boolean validateCustomDelimiter(String input) {
-        if (!input.contains("\n")) {
+        if (!input.contains(CUSTOM_DELIMITER_END)) {
             throw new IllegalArgumentException("잘못된 커스텀 구분자 형식입니다.");
         }
 
-        int delimiterEndIndex = input.indexOf("\n");
+        int delimiterEndIndex = input.indexOf(CUSTOM_DELIMITER_END);
         String custom = input.substring(2, delimiterEndIndex);
 
         if (custom.length() != 1) {
