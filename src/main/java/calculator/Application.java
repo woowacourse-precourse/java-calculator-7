@@ -17,7 +17,8 @@ public class Application {
             if (delimiterIndex == -1) {
                 throw new IllegalArgumentException();
             }
-            delimiter = input.substring(2, delimiterIndex);
+            String customDelimiter = input.substring(2, delimiterIndex);
+            delimiter += "|" + customDelimiter;
             numbers = input.substring(delimiterIndex + 1);
         }
 
@@ -26,7 +27,9 @@ public class Application {
 
         try {
             for (String token : tokens) {
-                sum += Integer.parseInt(token);
+                if (!token.isEmpty()) {
+                    sum += Integer.parseInt(token);
+                }
             }
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
