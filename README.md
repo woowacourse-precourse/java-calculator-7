@@ -45,7 +45,7 @@
 
 ### 1. 입력
 
-- [ ] 덧셈할 문자열을 입력해 주세요.
+- [x] 덧셈할 문자열을 입력해 주세요.
 - [x] 사용자로부터 문자열을 입력받는다.
 - [x] 입력받은 문자열이 빈 문자열일 경우 0을 반환한다.
 
@@ -62,8 +62,8 @@
 
 - [x] 음수가 포함된 경우 IllegalArgumentException 예외를 발생시킨다.
 - [x] 숫자 이외의 값이 포함된 경우 IllegalArgumentException 예외를 발생시킨다.
-- [ ] 커스텀 구분자가 숫자인 경우 IllegalArgumentException 예외를 발생시킨다.
-- [ ] 커스텀 구분자의 길이가 1이 아닌 경우 IllegalArgumentException 예외를 발생시킨다.
-- [ ] 커스텀 구분자가 기본 구분자와 중복되는 경우 IllegalArgumentException 예외를 발생시킨다.
-- [ ] 계산 결과가 표현 범위를 초과하는 경우 IllegalArgumentException 예외를 발생시킨다.
+- [x] 커스텀 구분자가 숫자인 경우 IllegalArgumentException 예외를 발생시킨다.
+- [x] 커스텀 구분자의 길이가 1이 아닌 경우 IllegalArgumentException 예외를 발생시킨다.
+- [x] 커스텀 구분자가 기본 구분자와 중복되는 경우 IllegalArgumentException 예외를 발생시킨다.
+- [x] 계산 결과가 표현 범위를 초과하는 경우 IllegalArgumentException 예외를 발생시킨다.
 
