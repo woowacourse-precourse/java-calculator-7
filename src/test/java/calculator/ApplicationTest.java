@@ -30,7 +30,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 음수_포함시_예외발생() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//;\n-1;2;3"))
+                assertThatThrownBy(() -> runException("//;\\n-1;2;3"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
