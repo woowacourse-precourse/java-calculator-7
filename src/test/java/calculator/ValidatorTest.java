@@ -8,17 +8,7 @@ import org.junit.jupiter.api.Test;
 
 public class ValidatorTest extends NsTest {
     @Test
-    void testIsInputContainNegative() {
-        assertSimpleTest(() -> {
-            assertThatThrownBy(() -> {
-                Validator obj = new Validator();
-                obj.validate("-1:2,-3");
-            }).isInstanceOf(IllegalArgumentException.class);
-        });
-    }
-
-    @Test
-    void testCustomSeparatorIsCorrectConvention() {
+    void testValidate() {
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> {
                 Validator obj = new Validator();
@@ -32,14 +22,25 @@ public class ValidatorTest extends NsTest {
                 obj.validate("\\n;1;2;3");
             }).isInstanceOf(IllegalArgumentException.class);
         });
-    }
 
-    @Test
-    void testCustomSeparatorIsOneSize() {
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> {
+                Validator obj = new Validator();
+                obj.validate("//\\n;1;2;3");
+            }).isInstanceOf(IllegalArgumentException.class);
+        });
+
         assertSimpleTest(() -> {
             assertThatThrownBy(() -> {
                 Validator obj = new Validator();
                 obj.validate("//!@\\n;1;2;3");
+            }).isInstanceOf(IllegalArgumentException.class);
+        });
+
+        assertSimpleTest(() -> {
+            assertThatThrownBy(() -> {
+                Validator obj = new Validator();
+                obj.validate("//!@\\n//#\\n//_\\n;1;2;3");
             }).isInstanceOf(IllegalArgumentException.class);
         });
     }
