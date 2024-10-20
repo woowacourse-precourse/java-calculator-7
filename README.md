@@ -11,3 +11,4 @@
 - [X] 결과 메시지 출력
 - [X] 예외 처리
     - [X] 구분자로 분리한 문자가 정수 형식이 아니면 `IllegalArgumentException` 발생
+    - [X] 피연산자가 음수이면 `IllegalArgumentException` 발생
