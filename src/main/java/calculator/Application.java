@@ -17,6 +17,12 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = sc.nextLine();
 
+        if (input.startsWith("//")) {
+            int newlineIndex = input.indexOf("\\n"); // '\n'의 위치 확인
+            String customDelimiter = input.substring(2, newlineIndex).trim(); // 커스텀 구분자 추출
+            delimiters.add(customDelimiter); // 커스텀 구분자 리스트에 추가
+            input = input.substring(newlineIndex + 2); // 커스텀 구분자 부분 제거
+        }
 
         StringBuilder regexBuilder = new StringBuilder();
         for (String delimiter : delimiters) {
