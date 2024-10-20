@@ -1,5 +1,8 @@
 package calculator.domain.calculator.domain;
 
+import static calculator.global.exception.ErrorMessage.CUSTOM_DELIMITER_CLOSING_CHAR_MISSING;
+
+import calculator.global.exception.ErrorMessage;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -26,7 +29,7 @@ public class Delimiter {
 
         int newLineIndex = input.indexOf("\\n");
         if (newLineIndex == -1) {
-            throw new IllegalArgumentException("커스텀 구분자를 닫는 문자가 없습니다.");
+            throw new IllegalArgumentException(CUSTOM_DELIMITER_CLOSING_CHAR_MISSING.getMessage());
         }
 
         final String customDelimiterPart = input.substring(2, newLineIndex);

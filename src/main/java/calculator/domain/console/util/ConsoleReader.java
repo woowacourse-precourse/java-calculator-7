@@ -1,5 +1,7 @@
 package calculator.domain.console.util;
 
+import static calculator.global.exception.ErrorMessage.EMPTY_INPUT;
+
 import camp.nextstep.edu.missionutils.Console;
 
 public final class ConsoleReader {
@@ -10,7 +12,7 @@ public final class ConsoleReader {
 
     private static String validateBlankInput(final String message) {
         if (message.isBlank()) {
-            throw new IllegalArgumentException("입력값이 비어있습니다.");
+            throw new IllegalArgumentException(EMPTY_INPUT.getMessage());
         }
 
         return message;
