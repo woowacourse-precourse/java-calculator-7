@@ -3,9 +3,9 @@ package calculator.parser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CustomDelimiterParser implements DelimiterParser {
+public class CustomDelimiterParser extends DefaultDelimiterParser {
 
-    private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
+    private static final String CUSTOM_DELIMITER_PATTERN = "//(.*)\\\\n(.*)";
 
     /**
      * 커스텀 구분자를 사용하여 문자열을 분리합니다.
@@ -20,7 +20,8 @@ public class CustomDelimiterParser implements DelimiterParser {
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
             String numbers = matcher.group(2);
-            return numbers.split(Pattern.quote(customDelimiter));
+            String combinedDelimiters = DEFAULT_DELIMITERS.replace("]", "|" + customDelimiter + "]");
+            return numbers.split(combinedDelimiters);
         }
         throw new IllegalArgumentException("잘못된 커스텀 구분자 형식입니다.");
     }

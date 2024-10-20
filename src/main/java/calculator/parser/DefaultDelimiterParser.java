@@ -2,7 +2,7 @@ package calculator.parser;
 
 public class DefaultDelimiterParser implements DelimiterParser {
 
-    private static final String DEFAULT_DELIMITERS = "[,|:]";
+    protected static final String DEFAULT_DELIMITERS = "[,|:]";
 
     /**
      * 기본 구분자를 사용하여 문자열을 분리합니다.
