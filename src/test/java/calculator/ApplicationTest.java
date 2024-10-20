@@ -157,6 +157,23 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 숫자_integer_형식_정상적인_경우() {
+        assertSimpleTest(() -> {
+            run("//,\\n2147483647,1");
+            assertThat(output()).contains("결과 : 2147483648");
+        });
+    }
+
+    @Test
+    void 숫자_integer_형식_초과하는_경우() {
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//,\\n2147483648,1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage("숫자 int 형식으로 전환되지 못했습니다"));
+    }
+
 
     @Override
     public void runMain() {
