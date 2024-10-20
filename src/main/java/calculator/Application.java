@@ -15,7 +15,7 @@ public class Application {
 
         String customSeparator = extractCustomSeparator(input);
         separators.add(customSeparator);
-        validInput(input, separators);
+        validateInput(input, separators);
 
         if (customSeparator != null) {
             input = input.substring(input.indexOf("\\n") + 2);
@@ -29,12 +29,12 @@ public class Application {
         String customSeparator = null;
         if (input.indexOf("//") == 0 && input.indexOf("\\n") >= 3) {
             customSeparator = input.substring(2, input.indexOf("\\n"));
-            validSeparator(customSeparator);
+            validateSeparator(customSeparator);
         }
         return customSeparator;
     }
 
-    private static void validSeparator(String separator) {
+    private static void validateSeparator(String separator) {
         if (separator.length() > 1) {
             throw new IllegalArgumentException("구분자는 한 글자만 가능합니다.");
         }
@@ -43,7 +43,7 @@ public class Application {
         }
     }
 
-    private static void validInput(String input, List<String> customSeparator) {
+    private static void validateInput(String input, List<String> customSeparator) {
         Pattern pattern = Pattern.compile(
                 "((^//)[^0-9](\\\\n))?([0-9]*["
                         + String.join("", customSeparator)
@@ -60,8 +60,7 @@ public class Application {
         if (input.isEmpty()) {
             return 0;
         }
-        return Arrays
-                .stream(input.split(String.join("|", separators))).
-                mapToLong(Long::parseLong).sum();
+        return Arrays.stream(input.split(String.join("|", separators)))
+                .mapToLong(Long::parseLong).sum();
     }
 }
