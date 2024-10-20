@@ -27,19 +27,22 @@ public class StringParser {
         DelimiterValidator.validateDelimiterFormat(prefixIndex, suffixIndex);
 
         if (prefixIndex < suffixIndex) {
-            String customDelimiter = inputExpression.substring(prefixIndex + CUSTOM_DELIMITER_PREFIX.length(),
-                    suffixIndex);
-
-            DelimiterValidator.validateCustomDelimiter(customDelimiter);
-
-            delimiters.add(customDelimiter.charAt(0));
-
-            String numbersWithoutDelimiterSection =
-                    inputExpression.substring(0, prefixIndex) + inputExpression.substring(suffixIndex + 1);
-
-            return new ParsedComponents(delimiters, numbersWithoutDelimiterSection);
+            return handleCustomDelimiterCase(prefixIndex, suffixIndex, delimiters);
         }
 
         return new ParsedComponents(delimiters, inputExpression);
+    }
+
+    private ParsedComponents handleCustomDelimiterCase(int prefixIndex, int suffixIndex, List<Character> delimiters) {
+        String customDelimiter = inputExpression.substring(prefixIndex + CUSTOM_DELIMITER_PREFIX.length(), suffixIndex);
+
+        DelimiterValidator.validateCustomDelimiter(customDelimiter);
+
+        delimiters.add(customDelimiter.charAt(0));
+
+        String operationalExpression =
+                inputExpression.substring(0, prefixIndex) + inputExpression.substring(suffixIndex + 1);
+
+        return new ParsedComponents(delimiters, operationalExpression);
     }
 }
