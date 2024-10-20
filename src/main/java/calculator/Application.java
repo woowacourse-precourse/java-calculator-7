@@ -42,7 +42,7 @@ public class Application {
 
     private static void checkStringContainOtherChar(String inputString, String delimiters) {
         String str = inputString.replaceAll(delimiters, "");
-        if (!inputString.equals("")) {
+        if (!(inputString.isEmpty() || inputString==null)) {
             if (!str.matches(ONLY_NUMBERS)) {
                 throw new IllegalArgumentException("구분자 외 문자가 포함되어 있습니다.");
             }
