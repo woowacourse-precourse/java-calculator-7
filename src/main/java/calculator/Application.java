@@ -18,6 +18,6 @@ public class Application {
 
         Operand operand = extractor.extract(input);
 
-        System.out.println("결과 : " + calculator.calculate(operand));
+        System.out.println("결과 : " + calculator.calculate(operand.getNumbers()));
     }
 }
