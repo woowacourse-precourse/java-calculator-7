@@ -6,7 +6,7 @@ public class ApplicationViewer {
     private ApplicationViewer(){}
 
     public static String input(){
-       return Console.readLine(); // TEMP: Scanner 를 싱글톤으로 접근케 하는 오브젝트
+       return Console.readLine();
     }
 
     public static void outputLine(String msg){

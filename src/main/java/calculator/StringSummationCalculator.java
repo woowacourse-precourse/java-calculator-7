@@ -38,7 +38,7 @@ public class StringSummationCalculator implements Calculator<BigInteger> {
             }
 
         }catch(NumberFormatException e){
-            throw new IllegalArgumentException("올바른 정수 값이 입력되지 않았거나, 등록된 구분자가 아닙니다.");
+            throw new IllegalArgumentException("올바른 정수 값이 입력되지 않았거나, 선언되지 않은 구분자가 포함되어 있습니다.");
         }
 
         return result;

@@ -35,8 +35,4 @@ class StringToken {
     public String getTokenDeclarationRegex(){
         return String.format("%s(.*?)%s",this.startToken,this.endToken);
     }
-
-    public String getTokenValue(String tokenDeclaration){
-        return tokenDeclaration.replace(startToken,"").replace(endToken,"");
-    }
 }
