@@ -3,7 +3,9 @@ package calculator;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.*;
+
+import java.util.stream.Stream;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -33,12 +35,12 @@ class ApplicationTest extends NsTest {
 
     @ParameterizedTest
     @ValueSource(strings = {
-            "//'\\n1", "//\"\\n1", "//,\\n1", "//;\\n1", "//:\\n1", "//-\\n1", "//.\\n1", "//*\\n1","//_\\n1",
+            "//'\\n1", "//\"\\n1", "//,\\n1", "//;\\n1", "//:\\n1", "//-\\n1", "//.\\n1", "//*\\n1", "//_\\n1",
             "//+\\n1", "//?\\n1", "//[\\n1", "//]\\n1", "//{\\n1", "//}\\n1"
-            ,"//(\\n1","//)\\n1","//|\\n1","//^\\n1","//$\\n1","//!\\n1","//@\\n1","//#\\n1", "//&\\n1","//`\\n1",
-            "//~\\n1","//<\\n1","//>\\n1","///\\n1","//\\\\n1"
+            , "//(\\n1", "//)\\n1", "//|\\n1", "//^\\n1", "//$\\n1", "//!\\n1", "//@\\n1", "//#\\n1", "//&\\n1", "//`\\n1",
+            "//~\\n1", "//<\\n1", "//>\\n1", "///\\n1", "//\\\\n1"
     })
-    void 커스텀_구분자_단독(String input) throws Exception {
+    void 커스텀_구분자_양수와_단독_사용(String input) throws Exception {
         assertSimpleTest(() -> {
             run(input);
             assertThat(output()).contains("결과 : 1");
