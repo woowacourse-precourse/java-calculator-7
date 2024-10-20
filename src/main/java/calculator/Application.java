@@ -11,6 +11,17 @@ public class Application {
 }
 
 class Calculator {
+    private static final String GET_STRING_MESSAGE = "덧셈할 문자열을 입력해 주세요.";
+    private static final String FINISH_MESSAGE = "결과 : ";
+
+    private String input;
+    private int result;
+
+    Calculator(String input) {
+        this.input = input;
+        this.result = separatorLocator(input);
+    }
+
     private static int defaultSeparator(String input){
         String[] separators = {",", ":"};
         return calculateNumber(input, Arrays.toString(separators));
