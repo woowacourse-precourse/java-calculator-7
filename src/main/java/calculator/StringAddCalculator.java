@@ -23,6 +23,10 @@ public class StringAddCalculator {
         }
 
         String[] parts = input.split(delimiter);
+        if (parts.length <= 1) {
+            throw new IllegalArgumentException("수가 하나이거나 구분자가 잘못되었습니다.");
+        }
+
         for (String part : parts) {
             double target = Double.parseDouble(part);
             if (target > 0) {
