@@ -25,15 +25,16 @@ class SeparatorServiceTest {
         // given
         Input input = new Input("//5\\n//6\\n");
 
-        SeparatorSet expected = new SeparatorSet();
-        expected.addSeparator(new Separator("5"));
-        expected.addSeparator(new Separator("6"));
+        SeparatorSet separatorSet = new SeparatorSet();
+        separatorSet.addSeparator(new Separator("5"));
+        separatorSet.addSeparator(new Separator("6"));
+        RegexStr expected = separatorSet.toRegexStr();
 
         // when
-        SeparatorSet result = separatorService.getCustomSeparators(input);
+        RegexStr result = separatorService.getCustomSeparators(input);
 
         // then
-        assertThat(result).isEqualTo(expected);
+        assertThat(expected).isEqualTo(result);
     }
 
     /**
@@ -69,7 +70,7 @@ class SeparatorServiceTest {
         idxQueue.offer(new Index(0));
         idxQueue.offer(new Index(5));
 
-        RefinedInput expected = new RefinedInput("ux1,2,3,4,5");
+        RefinedInput expected = new RefinedInput("1,2,3,4,5");
 
         // when
         RefinedInput result = separatorService.refineInput(input, idxQueue);
