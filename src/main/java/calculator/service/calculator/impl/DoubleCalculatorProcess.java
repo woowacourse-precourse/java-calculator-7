@@ -1,7 +1,7 @@
-package calculator.service.impl;
+package calculator.service.calculator.impl;
 
 import calculator.number.domain.NumberService;
-import calculator.service.CalculatorService;
+import calculator.service.calculator.CalculatorService;
 
 public class DoubleCalculatorProcess implements CalculatorService{
     @Override

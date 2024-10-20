@@ -4,7 +4,7 @@ import calculator.generator.controller.GenerateController;
 import calculator.number.domain.NumberService;
 import calculator.sentence.dto.Sentence;
 import calculator.regex.domain.RegexPattern;
-import calculator.service.CalculatorService;
+import calculator.service.calculator.CalculatorService;
 import calculator.regex.service.RegexPatternServiceResolver;
 import calculator.view.input.handler.InputHandlerService;
 import calculator.view.output.ResultService;

@@ -1,8 +1,8 @@
-package calculator.service.impl;
+package calculator.service.calculator.impl;
 
 import calculator.validator.constant.ErrorMessage;
 import calculator.number.domain.NumberService;
-import calculator.service.CalculatorService;
+import calculator.service.calculator.CalculatorService;
 
 public class LongCalculatorProcess implements CalculatorService {
     @Override

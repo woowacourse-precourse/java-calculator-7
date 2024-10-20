@@ -1,4 +1,4 @@
-package calculator.service;
+package calculator.service.calculator;
 
 import calculator.number.domain.NumberService;
 

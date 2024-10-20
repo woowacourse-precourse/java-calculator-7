@@ -1,9 +1,10 @@
 package calculator.service;
 
+import calculator.service.calculator.CalculatorService;
 import calculator.validator.constant.ErrorMessage;
 import calculator.number.domain.NumberService;
-import calculator.service.impl.DoubleCalculatorProcess;
-import calculator.service.impl.LongCalculatorProcess;
+import calculator.service.calculator.impl.DoubleCalculatorProcess;
+import calculator.service.calculator.impl.LongCalculatorProcess;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
