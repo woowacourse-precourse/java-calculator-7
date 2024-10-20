@@ -56,13 +56,13 @@ class ApplicationTest extends NsTest {
         assertThrows(IllegalArgumentException.class, () -> separator.parseNumbers(input));
     }
 
-    @Test
-    void 가능한_음수() {
-        String input = "-1:2:3";
-        String[] expected = {"-1", "2", "3"};
-        String[] actual = separator.parseNumbers(input);
-        assertArrayEquals(expected, actual);
-    }
+//    @Test
+//    void 가능한_음수() {
+//        String input = "-1:2:3";
+//        String[] expected = {"-1", "2", "3"};
+//        String[] actual = separator.parseNumbers(input);
+//        assertArrayEquals(expected, actual);
+//    }
 
     @Test
     void 불가능한_음수() {

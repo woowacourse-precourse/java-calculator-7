@@ -13,7 +13,7 @@ public class ValidChecker {
 
     public void numberCheck(String[] input) {     // 숫자가 아닌 문자 확인
         Optional<String> findChar = Arrays.stream(input)
-                .filter(s -> !s.matches("-?\\d+"))
+                .filter(s -> !s.matches("\\d+"))
                 .findFirst();
 
         if (findChar.isPresent()) {

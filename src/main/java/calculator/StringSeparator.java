@@ -41,10 +41,6 @@ public class StringSeparator {
 
         String allDelimiter = String.format("(%s|%s)", DEFAULT_DELIMITER, Pattern.quote(delimiter));
 
-        if ("-".equals(delimiter) && numbers.contains("-")) {    // 커스텀 구분자가 '-'이면 음수 불가능
-            throw new IllegalArgumentException();
-        }
-
         String[] splitStrings = numbers.split(allDelimiter);
         validChecker.numberCheck(splitStrings);     // 숫자가 아닌 문자 확인
         validChecker.delimiterCheck(splitStrings);  // 맨 끝에 구분자 혹은 구분자가 연속해서 두 개인 경우 (비어있는 문자열이 분리된 문자열에 포함되어 있음)
