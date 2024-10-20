@@ -21,7 +21,7 @@ public class DelimiterExtractor {
         return delimiters;
     }
 
-    public boolean isContainDelimiter(String delimiterPart) {
+    private boolean isContainDelimiter(String delimiterPart) {
         return delimiterPart.startsWith(START_PATTERN) && delimiterPart.endsWith(END_PATTERN);
     }
 
