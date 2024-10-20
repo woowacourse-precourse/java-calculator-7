@@ -29,12 +29,16 @@ public class Application {
         String[] nums = input.split(delimiter);
         int result = 0;
 
-        for (String num : nums) {
-            int number = Integer.parseInt(num);
-            if (number < 0) {
-                throw new IllegalArgumentException("음수가 입력 되었습니다.");
+        try {
+            for (String num : nums) {
+                int number = Integer.parseInt(num);
+                if (number < 0) {
+                    throw new IllegalArgumentException("음수가 입력 되었습니다.");
+                }
+                result += number;
             }
-            result += number;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자 형식이 아닙니다.");
         }
 
         System.out.println("결과 : " + result);
