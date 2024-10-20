@@ -2,6 +2,7 @@ package calculator.service;
 
 import calculator.domain.CustomDelimiter;
 import calculator.domain.Numbers;
+import calculator.domain.validation.NumberInputValidator;
 import calculator.util.InputFilter;
 import calculator.util.Splitter;
 import java.util.ArrayList;
@@ -17,15 +18,15 @@ public class CalculatorService {
         String[] splitValues = Splitter.splitOut(input);
 
         List<String> splitNumbers = splitWithDelimiter(splitValues);
-        Numbers numbers = parseToInt(splitNumbers);
+        Numbers numbers = validateAndParse(splitNumbers);
 
         return numbers;
     }
 
-    private Numbers parseToInt(List<String> splitNumbers) {
+    private Numbers validateAndParse(List<String> splitNumbers) {
         List<Integer> numberList = splitNumbers
                 .stream()
-                .map(Integer::parseInt)
+                .map(NumberInputValidator::validateOnlyNumeric)
                 .toList();
 
         return new Numbers(numberList);

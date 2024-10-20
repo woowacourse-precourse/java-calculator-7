@@ -1,5 +1,6 @@
 package calculator.service;
 
+import calculator.exception.ErrorMessage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,7 +26,7 @@ public class CalculatorServiceTest {
 
         org.assertj.core.api.Assertions.assertThatThrownBy(() -> {
             calculatorService.extractNumbers(input);
-        }).hasMessage("커스텀 구분자에 숫자는 입력할 수 없습니다.");
+        }).hasMessage(ErrorMessage.CUSTOM_TYPE_IS_NOT_NUMBER.getMessage());
     }
 
     @Test
@@ -35,7 +36,17 @@ public class CalculatorServiceTest {
 
         org.assertj.core.api.Assertions.assertThatThrownBy(() ->
                         calculatorService.extractNumbers(input))
-                .hasMessage("기본 구분자는 커스텀으로 사용할 수 없습니다.");
+                .hasMessage(ErrorMessage.CUSTOM_CANT_BE_DEFAULT.getMessage());
+    }
+
+    @Test
+    @DisplayName("지정한 구분자 외에 다른 구분자를 입력하면 예외 발생")
+    void throws_when_contains_none_customized() {
+        String input = "//-\\n3,3,3-3";
+
+        org.assertj.core.api.Assertions.assertThatThrownBy(() ->
+                        calculatorService.extractNumbers(input))
+                .hasMessage(ErrorMessage.IS_NOT_CUSTOMIZED.getMessage());
     }
 
     @Test
