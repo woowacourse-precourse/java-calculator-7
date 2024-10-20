@@ -7,6 +7,7 @@ import calculator.calculateStrategy.IntegerCalculateStrategy;
 import calculator.delimiterStrategy.CustomDelimiterStrategy;
 import calculator.delimiterStrategy.DefaultDelimiterStrategy;
 import calculator.numberStrategy.SimpleNumberStrategy;
+import java.util.NoSuchElementException;
 
 public class Application {
     private static final String inputPhrase = "덧셈할 문자열을 입력해 주세요.";
@@ -17,16 +18,23 @@ public class Application {
 
     public static void main(String[] args) {
         System.out.println(inputPhrase);
-        String userInput = readLine();
-        userInput = userInput.replace("\\n", "\n");
+        String userInput;
+        try {
+            userInput = readLine();
+            userInput = userInput.replace("\\n", "\n");
 
-        stringCalculator = new StringCalculator(userInput);
-        stringCalculator.setNumberStrategy(new SimpleNumberStrategy());
-        configureDelimiterStrategy(userInput);
-        configureCalculateStrategy(userInput);
+            stringCalculator = new StringCalculator(userInput);
+            stringCalculator.setNumberStrategy(new SimpleNumberStrategy());
+            stringCalculator.setCalculate(new IntegerCalculateStrategy());
+            configureDelimiterStrategy(userInput);
 
-        System.out.println(outputPhrase + stringCalculator.operate());
-
+            System.out.println(outputPhrase + stringCalculator.operate());
+        } catch (NoSuchElementException e) {
+            userInput = "";
+            stringCalculator = new StringCalculator(userInput);
+            stringCalculator.setCalculate(new EmptyStringCalculateStrategy());
+            System.out.println(outputPhrase + stringCalculator.emptyStringOperate());
+        }
     }
 
     private static boolean isCustomDelimiter(String userInput) {
@@ -38,14 +46,6 @@ public class Application {
             stringCalculator.setDelimiterStrategy(new CustomDelimiterStrategy());
         } else {
             stringCalculator.setDelimiterStrategy(new DefaultDelimiterStrategy());
-        }
-    }
-
-    private static void configureCalculateStrategy(String userInput) {
-        if (userInput.isEmpty()) {
-            stringCalculator.setCalculate(new EmptyStringCalculateStrategy());
-        } else {
-            stringCalculator.setCalculate(new IntegerCalculateStrategy());
         }
     }
 }
