@@ -9,7 +9,7 @@ public class Calculator {
         for (int number : input) {
             sum += number;
         }
-        Validation.isIntegerRangeSum(sum, input);
+        Validator.isIntegerRangeSum(sum, input);
         return sum;
     }
 }
