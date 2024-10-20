@@ -9,12 +9,13 @@ import java.util.Set;
 
 public class CalculatorService {
 
+    private static final Set<Character> DEFAULT_DELIMITERS = Set.of(',', ':');
     private static final String regex = "^//[^0-9]\\\\n.*";
 
     public Integer addCalculator(String userInput) {
         validateNullInput(userInput);
         Calculator calculator = new Calculator();
-        Delimiters delimiters = new Delimiters(Set.of(',', ':'));
+        Delimiters delimiters = new Delimiters(DEFAULT_DELIMITERS);
         String parsedInput = extractCustomDelimiter(userInput, delimiters);
         calculator.addNumbers(splitNumbers(parsedInput, delimiters));
         return calculator.calculateSum();
