@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StringParser {
-    private static final String DEFAULTDELEMETERS = ",:";
-
     public static List<BigInteger> extractNumbers(String input) {
         List<BigInteger> numberList = new ArrayList<>();
         String inputWithoutCustomDelimiter;
