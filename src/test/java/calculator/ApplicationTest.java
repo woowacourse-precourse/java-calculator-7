@@ -20,16 +20,16 @@ class ApplicationTest extends NsTest {
     @Test
     void 커스텀_구분자_위치_테스트() {
         assertSimpleTest(() -> {
-            run("12;3//;\\n");
-            assertThat(output()).contains("커스텀 구분자는 문자열 처음에서만 추가할 수 있습니다.");
+            assertThatThrownBy(() -> run("12;3//;\\n"))
+                    .isInstanceOf(IllegalArgumentException.class);
         });
     }
 
     @Test
     void 커스텀_구분자_개수_테스트() {
         assertSimpleTest(() -> {
-            run("//!@;\\n");
-            assertThat(output()).contains("한개의 커스텀 구분자만 추가할 수 있습니다.");
+            assertThatThrownBy(() -> run("//!@;\\n"))
+                    .isInstanceOf(IllegalArgumentException.class);
         });
     }
 
