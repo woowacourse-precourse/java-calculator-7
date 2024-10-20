@@ -1,4 +1,3 @@
-# java-calculator-precourse
 # 문자열 덧셈 계산기
 
 ## 프로젝트 소개
