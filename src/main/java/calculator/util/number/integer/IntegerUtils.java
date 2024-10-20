@@ -4,10 +4,13 @@ import calculator.common.exception.ExceptionFactory;
 
 import java.util.List;
 
-import static calculator.common.exception.ExceptionType.PARSE_INTEGER_FAILED;
-import static calculator.common.exception.ExceptionType.SUM_INTEGER_OVERFLOW;
+import static calculator.common.exception.ExceptionType.*;
 
-public class IntegerUtils {
+public final class IntegerUtils {
+
+    private IntegerUtils() {
+        throw ExceptionFactory.createException(CAN_NOT_INSTANTIATE);
+    }
 
     public static int sum(List<Integer> numbers) {
         return numbers.stream()

@@ -8,9 +8,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
+import static calculator.common.exception.ExceptionType.CAN_NOT_INSTANTIATE;
 import static calculator.common.exception.ExceptionType.UNSUPPORTED_NUMBER_CLASS;
 
-public class NumberUtils {
+public final class NumberUtils {
 
     private static final Map<Class<? extends Number>, Function<List<? extends Number>, Number>> SUM_FUNCTIONS = new HashMap<>();
     private static final Map<Class<? extends Number>, Function<List<String>, List<? extends Number>>> PARSE_FUNCTIONS = new HashMap<>();
@@ -19,6 +20,10 @@ public class NumberUtils {
         SUM_FUNCTIONS.put(Integer.class, numbers -> IntegerUtils.sum(numbers.stream().map(Number::intValue).toList()));
 
         PARSE_FUNCTIONS.put(Integer.class, IntegerUtils::parseIntegers);
+    }
+
+    private NumberUtils() {
+        throw ExceptionFactory.createException(CAN_NOT_INSTANTIATE);
     }
 
     public static Number sum(List<? extends Number> numbers, Class<? extends Number> numberClass) {
