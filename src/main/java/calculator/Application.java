@@ -1,6 +1,6 @@
 package calculator;
 
-import java.util.Scanner;
+import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
@@ -12,7 +12,6 @@ public class Application {
 class Input {
     public static String inputString() {
         System.out.println("Please enter the strings to add.");
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
+        return Console.readLine();
     }
 }
