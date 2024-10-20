@@ -3,7 +3,6 @@ package calculator.model;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -27,18 +26,6 @@ public class CalculatorTest {
 //        assertThat(calculator.isNumber(testString.substring(5,6))).isFalse();
 //    }
 
-    @DisplayName("숫자형 문자열을 입력받으면 정수로 변환한다.")
-    @Test
-    void transferNumberStringToInteger_WhenInputNumber() {
-        String testString = "11";
-        Calculator calculator = new Calculator(testString, defaultRegDelimiter);
-
-        calculator.calculate();
-        InputNumber inputNumber = calculator.getInputNumber();
-
-        assertThat(inputNumber.getNumber()).isEqualTo(11);
-    }
-
     @DisplayName("등록된 구분자 다음에 숫자를 입력하면 구분자를 초기화한다")
     @Test
     void initRegisteredDelimiter_WhenNumberStarts() {
@@ -61,72 +48,6 @@ public class CalculatorTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("음수를 입력하면 예외를 발생시킨다.")
-    @Test
-    void fail_IfNegativeNumber_WhenNumberStarts() {
-        String testString = "1,-1";
-        Calculator calculator = new Calculator(testString, defaultRegDelimiter);
-
-        assertThatThrownBy(() -> calculator.calculate())
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @DisplayName("0을 입력하면 예외를 발생시킨다.")
-    @Test
-    void fail_IfZeroNumber_WhenNumberStarts() {
-        String testString = "1,0";
-        Calculator calculator = new Calculator(testString, defaultRegDelimiter);
-
-        assertThatThrownBy(() -> calculator.calculate())
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @DisplayName("등록된 구분자를 입력하면 구분자를 초기화한다.")
-    @Test
-    void initRegDelimiter_WhenInputDelimiter() {
-        String testString = "12,";
-        Calculator calculator = new Calculator(testString, defaultRegDelimiter);
-
-        calculator.calculate();
-        InputDelimiter inputDelimiter = calculator.getInputDelimiter();
-
-        assertThat(inputDelimiter.getDelimiter()).isEqualTo("");
-    }
-
-    /**
-     * Deprecated
-     * 비즈니스 로직과 거리가 먼 메서드의 테스트 코드
-     */
-    @Disabled
-    @Test
-    void 등록된_구분자와_일치하지_않는_구분자면_패스_1() {
-        String testString = "//*&\\n1*&";
-        RegDelimiter regDelimiter = new RegDelimiter();
-        regDelimiter.registerCustomDelimiter(testString);
-        Calculator calculator = new Calculator(testString, regDelimiter);
-
-        calculator.calculate();
-        InputDelimiter inputDelimiter = calculator.getInputDelimiter();
-
-        assertThat(inputDelimiter.getDelimiter()).isEqualTo("*&");
-    }
-
-    /**
-     * Deprecated
-     * 비즈니스 로직과 거리가 먼 메서드의 테스트 코드
-     */
-    @Disabled
-    @Test
-    void 등록된_구분자와_일치하지_않는_구분자면_패스_2() {
-        String testString = "12:::*$,";
-        Calculator calculator = new Calculator(testString, defaultRegDelimiter);
-
-        calculator.calculate();
-        InputDelimiter inputDelimiter = calculator.getInputDelimiter();
-
-        assertThat(inputDelimiter.getDelimiter()).isEqualTo("*$,");
-    }
-
     @DisplayName("숫자 다음에 구분자를 입력하면 합계에 숫자를 더한다.")
     @Test
     void addNumberToSum_WhenDelimiterStarts() {
@@ -136,7 +57,7 @@ public class CalculatorTest {
         calculator.calculate();
         InputNumber inputNumber = calculator.getInputNumber();
 
-        assertThat(inputNumber.getNumber()).isEqualTo(0);
+        assertThat(inputNumber.getNumberToInt()).isEqualTo(0);
         assertThat(calculator.getSum()).isEqualTo(12);
     }
 

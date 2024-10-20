@@ -8,7 +8,6 @@ public class Constants {
 
     public static final String ZERO = "0";
     public static final String MINUS = "-";
-    public static final String NONE = "";
     public static final String[] DEFAULT_DELIMITERS = new String[]{",", ":"};
     public static final int DEFAULT_CUSTOM_DELI_END_IDX = -1;
     public static final String CUSTOM_DELI_START_SIGNAL = "//";

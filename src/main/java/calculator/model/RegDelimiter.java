@@ -30,10 +30,6 @@ public class RegDelimiter {
         return delimiters;
     }
 
-    public CustomDelimiter getCustomDeli() {
-        return customDeli;
-    }
-
     public int getCustomDeliEndIdx() {
         return customDeli.getValueEndIdx();
     }

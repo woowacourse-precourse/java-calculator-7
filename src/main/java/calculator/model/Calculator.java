@@ -1,18 +1,12 @@
 package calculator.model;
 
-import static calculator.model.Mode.*;
 import static calculator.util.Constants.*;
-import static calculator.util.Validations.*;
-
-import java.util.List;
 
 public class Calculator {
     private String inputValue;
     private int sum;
     private InputNumber inputNumber;
     private InputDelimiter inputDelimiter;
-    private List<String> regDelimiters;
-    private Mode mode;
 
     public Calculator(String inputValue, RegDelimiter regDelimiter) {
         this.inputValue = inputValue.substring(
@@ -20,9 +14,7 @@ public class Calculator {
         );
         this.sum = 0;
         this.inputNumber = new InputNumber();
-        this.inputDelimiter = new InputDelimiter();
-        this.regDelimiters = regDelimiter.getDelimiters();
-        this.mode = Mode.NONE;
+        this.inputDelimiter = new InputDelimiter(regDelimiter);
     }
 
     public void calculate() {
@@ -50,52 +42,30 @@ public class Calculator {
     }
 
     private void calculateNumber(String value) {
-        if (isStartOfNumber()) {
-            validateCorrectDelimiter(mode);
-            validatePositiveNumber(value);
+        if (inputNumber.isNotStarted()) {
+            inputDelimiter.validate();
             inputDelimiter.initDelimiter();
         }
         inputNumber.addNumber(value);
-        updateMode(NUM);
-    }
-
-    private boolean isStartOfNumber() {
-        return mode != NUM;
-    }
-
-    private void updateMode(Mode mode) {
-        this.mode = mode;
     }
 
     private void calculateDelimiter(String value) {
-        if (isStartOfDelimiter()) {
-            addNumberToSum(inputNumber.getNumber());
+        if (inputDelimiter.isNotStarted()) {
+            inputNumber.validate();
+            addNumberToSum(inputNumber.getNumberToInt());
             inputNumber.initNumber();
         }
-        inputDelimiter.addDelimiter(value);
-        checkDelimiterAndUpdateMode();
-    }
-
-    private boolean isStartOfDelimiter() {
-        return mode == NUM;
+        inputDelimiter.updateDelimiter(value);
     }
 
     private void addNumberToSum(int number) {
         this.sum += number;
     }
 
-    private void checkDelimiterAndUpdateMode() {
-        if (inputDelimiter.isDelimiter(regDelimiters)) {
-            inputDelimiter.initDelimiter();
-            updateMode(DELI);
-        } else {
-            updateMode(WRONG_DELI);
-        }
-    }
-
     private void calculateLastInputValue() {
-        validateCorrectDelimiter(mode);
-        addNumberToSum(inputNumber.getNumber());
+        inputDelimiter.validate();
+        inputNumber.validate();
+        addNumberToSum(inputNumber.getNumberToInt());
     }
 
     public InputDelimiter getInputDelimiter() {

@@ -1,7 +1,5 @@
 package calculator.model;
 
-import static calculator.util.Constants.NONE;
-
 import calculator.util.Validations;
 
 public class InputNumber {
@@ -11,17 +9,25 @@ public class InputNumber {
         this.number = "";
     }
 
+    public boolean isNotStarted() {
+        return number.isEmpty();
+    }
+
+    public void addNumber(String value) {
+        number += value;
+    }
+
     public void initNumber() {
         this.number = "";
     }
 
-    public void addNumber(String value) {
+    public void validate() {
+        Validations.validatePositiveNumber(number);
         Validations.validateNumberMaxLength(number);
-        number += value;
     }
 
-    public int getNumber() {
-        if (number.equals(NONE)) {
+    public int getNumberToInt() {
+        if (number.isEmpty()) {
             return 0;
         }
         return Integer.parseInt(number);
