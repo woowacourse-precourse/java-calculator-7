@@ -8,7 +8,7 @@ public class ContentParser {
         this.separator = separator;
     }
 
-    public String[] parsing(String targetContent) {
+    public String[] parse(String targetContent) {
         parsedContent = targetContent.split(separator);
         return parsedContent;
     }

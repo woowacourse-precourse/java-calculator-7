@@ -1,6 +1,6 @@
 package inspector;
 
-import static exceptHandler.CalculatorException.detectContentForamt;
+import static exceptHandler.ExceptHandler.detectContentForamt;
 
 public abstract class ContentInspector {
 

@@ -1,6 +1,6 @@
 package calculator;
 
-import static exceptHandler.CalculatorException.detectNegativeValueException;
+import static exceptHandler.ExceptHandler.detectNegativeValueException;
 
 import camp.nextstep.edu.missionutils.Console;
 import inspector.ContentInspector;
@@ -9,7 +9,7 @@ import java.math.BigInteger;
 import parser.ContentParser;
 
 public class Calculator {
-    private BigInteger Result = BigInteger.ZERO;
+    private BigInteger result = BigInteger.ZERO;
     private String originalContent;
     private String convertedContent;
     private String separator;
@@ -21,7 +21,7 @@ public class Calculator {
         separator = contentInspector.getSeparator();
         convertedContent = contentInspector.getConvertedContent();
         ContentParser contentParser = new ContentParser(separator);
-        parsedContent = contentParser.parsing(convertedContent);
+        parsedContent = contentParser.parse(convertedContent);
         calculation();
         printResult();
     }
@@ -29,6 +29,10 @@ public class Calculator {
     private void inputContent() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         originalContent = Console.readLine();
+        detectContentEmpty();
+    }
+
+    private void detectContentEmpty() {
         if (originalContent.isEmpty()) {
             printResult();
         }
@@ -38,7 +42,7 @@ public class Calculator {
         for (String content : parsedContent) {
             BigInteger addedBigInteger = convertStringToBigInteger(content);
             detectNegativeValueException(addedBigInteger);
-            Result = Result.add(addedBigInteger);
+            result = result.add(addedBigInteger);
         }
     }
 
@@ -51,6 +55,6 @@ public class Calculator {
     }
 
     private void printResult() {
-        System.out.println("결과 : " + Result);
+        System.out.println("결과 : " + result);
     }
 }

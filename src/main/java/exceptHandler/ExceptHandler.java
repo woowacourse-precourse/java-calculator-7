@@ -3,7 +3,7 @@ package exceptHandler;
 import java.math.BigInteger;
 import java.util.regex.Pattern;
 
-public class CalculatorException {
+public class ExceptHandler {
     public static void detectContentForamt(String regex, String content) {
         if (!Pattern.matches(regex, content)) {
             throw new IllegalArgumentException("잘못된 구분자 입력");

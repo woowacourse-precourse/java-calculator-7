@@ -1,6 +1,6 @@
 package inspector;
 
-import static exceptHandler.CalculatorException.detectCustomSeparatorFormat;
+import static exceptHandler.ExceptHandler.detectCustomSeparatorFormat;
 
 public class CustomInspector extends ContentInspector {
     protected String originalContent;
