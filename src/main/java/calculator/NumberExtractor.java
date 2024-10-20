@@ -11,6 +11,7 @@ public class NumberExtractor {
             return extractCustomNumbers(str, delimiter);
         }
     }
+
     private String extractCustomString(String str){
         String[] arr = str.split("");
         String delimiter = "";
@@ -33,27 +34,34 @@ public class NumberExtractor {
 
         try{
             for(String text : extractedString){
-                result.add(Integer.parseInt(text));
+                int number = Integer.parseInt(text);
+                if (number < 0) {
+                    throw new IllegalArgumentException();
+                }
+                result.add(number);
             }
-        } catch (NumberFormatException e){
-            System.out.print("입력이 잘못되었습니다.");
+        } catch (NumberFormatException e) {
             Application.flag = true;
         }
 
         return result;
     }
+
     private ArrayList<Integer> extractCustomNumbers(String str, String delimiter){
         String removedString = removeCustomString(str);
 
         String [] extractedString = removedString.split(",|:|"+delimiter);
         ArrayList<Integer> result = new ArrayList<>();
 
-        try{
-            for(String text : extractedString){
-                result.add(Integer.parseInt(text));
+        try {
+            for (String text : extractedString) {
+                int number = Integer.parseInt(text);
+                if (number < 0) {
+                    throw new IllegalArgumentException();
+                }
+                result.add(number);
             }
-        } catch (NumberFormatException e){
-            System.out.print("입력이 잘못되었습니다.");
+        } catch (NumberFormatException e) {
             Application.flag = true;
         }
 
