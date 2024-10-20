@@ -1,43 +1,70 @@
 package calculator.domain.delimiter;
 
-import java.util.ArrayList;
+import static calculator.domain.delimiter.DelimiterPattern.CUSTOM_DELIMITER;
+
+import calculator.util.regex.Regex;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Delimiters {
 
     private static final String CONTAINING_ALL_START_REGEX = "^.*(";
     private static final String CONTAINING_ALL_END_REGEX = ").*";
-    private static final String DEFAULT_DELIMITER_REGEX = ",|:";
+    private static final String NON_MATCH = "(?!)";
 
     private final List<Delimiter> delimiters;
 
     public Delimiters(final List<Delimiter> delimiters) {
-        this.delimiters = new ArrayList<>(delimiters);
+        this.delimiters = delimiters;
     }
 
-    public void addDelimiter(final Delimiter delimiter) {
+    public Delimiters addDelimiter(final Delimiter delimiter) {
         validateDelimiters(delimiter);
 
-        delimiters.add(delimiter);
+        return new Delimiters(concatDelimiters(delimiter));
+    }
+
+    public Regex makeDelimiterAreaRegex() {
+        Regex regex = new Regex(CUSTOM_DELIMITER.getRegex());
+        for (Delimiter delimiter : delimiters) {
+            regex.addContinuously(delimiter.delimiter());
+        }
+
+        return regex;
+    }
+
+    private List<Delimiter> concatDelimiters(final Delimiter delimiter) {
+
+        return Stream.concat(delimiters.stream(), Stream.of(new Delimiter(delimiter.delimiter())))
+                .toList();
     }
 
     private void validateDelimiters(final Delimiter delimiter) {
-        checkIfDefaultDelimiterIncluded(delimiter);
-        checkIfOtherDelimiterIncluded(delimiter);
+        checkIfDelimiterContainsOther(delimiter);
     }
 
-    private void checkIfOtherDelimiterIncluded(final Delimiter delimiter) {
-        if (delimiters.contains(delimiter)) {
-            throw new IllegalArgumentException("구분자는 다른 커스텀 구분자를 포함할 수 없습니다.");
+    private void checkIfDelimiterContainsOther(final Delimiter newDelimiter) {
+        Regex existingDelimitersRegex = makeExistingDelimitersRegex();
+        Regex checkContainmentRegex = makeCheckContainmentRegex(existingDelimitersRegex);
+
+        if (newDelimiter.matches(checkContainmentRegex)) {
+            throw new IllegalArgumentException("구분자를 중복 선언하거나, 내부에 다른 구분자를 포함할 수 없습니다.");
         }
     }
 
-    private void checkIfDefaultDelimiterIncluded(final Delimiter delimiter) {
-        String totalRegex = CONTAINING_ALL_START_REGEX + DEFAULT_DELIMITER_REGEX + CONTAINING_ALL_END_REGEX;
-        if (delimiter.matches(totalRegex)) {
-            throw new IllegalArgumentException("구분자 내부에 기본 구분자를 포함할 수 없습니다.");
+    private Regex makeExistingDelimitersRegex() {
+        Regex existingDelimitersRegex = new Regex(NON_MATCH);
+        for (Delimiter existingDelimiter : delimiters) {
+            existingDelimitersRegex.addContinuously(existingDelimiter.delimiter());
         }
+
+        return existingDelimitersRegex;
+    }
+
+    private Regex makeCheckContainmentRegex(final Regex existingDelimitersRegex) {
+        return new Regex(
+                CONTAINING_ALL_START_REGEX + existingDelimitersRegex.getRegex() + CONTAINING_ALL_END_REGEX);
     }
 
     public List<Delimiter> getDelimiters() {

@@ -6,11 +6,14 @@ import java.util.regex.Matcher;
 
 public class DelimiterExtractor {
 
-    public void extractDelimitersFrom(final String input, final Delimiters delimiters) {
+    public Delimiters extractDelimitersFrom(final String input, final Delimiters delimiters) {
         Matcher matcher = CUSTOM_DELIMITER.getPattern().matcher(input);
+        Delimiters totalDelimiters = delimiters;
         while (matcher.find()) {
-            delimiters.addDelimiter(new Delimiter(matcher.group(1)));
+            totalDelimiters = totalDelimiters.addDelimiter(new Delimiter(matcher.group(1)));
         }
+
+        return totalDelimiters;
     }
 
 }
