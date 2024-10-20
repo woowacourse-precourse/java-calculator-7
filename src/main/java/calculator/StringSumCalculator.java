@@ -18,6 +18,8 @@ public class StringSumCalculator {
     }
 
     private String[] splitNumbers(String input) {
+        input = input.replace("\\n", "\n");
+
         String[] splitNumbers;
 
         if (input.startsWith("//") && input.contains("\n")) {
