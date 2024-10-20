@@ -9,16 +9,17 @@ public class CalculatorController {
     private final InputView inputView;
     private final OutputView outputView;
     private final Calculator calculator;
+    private final InputValidator validator;
 
     public CalculatorController() {
-        inputView = new InputView();
-        outputView = new OutputView();
-        calculator = new Calculator();
+        this.inputView = new InputView();
+        this.outputView = new OutputView();
+        this.calculator = new Calculator();
+        this.validator = InputValidator.getInstance();
     }
     public void start() {
         String input = inputView.getInput();
         try {
-            InputValidator validator = new InputValidator();
             validator.validate(input);
             int result = calculator.add(input);
             outputView.displayResult(result);
