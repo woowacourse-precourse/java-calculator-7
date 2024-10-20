@@ -3,7 +3,7 @@ package calculator.domain;
 public class SeperatorFactory {
     private static final String SPLITOR="|";
     private static final String ESCAPE_CHAR="\\";
-
+    private static final String DEFAULT_SEPERATOR_REGEX = ",|:";
     private static String seperatorRegex=",|:";
 
     public static void addRegex(String customSeperator) {
@@ -31,5 +31,9 @@ public class SeperatorFactory {
 
     public static String getSeperatorRegex(){
         return seperatorRegex;
+    }
+
+    public static void resetSeperatorRegex() {
+        seperatorRegex=DEFAULT_SEPERATOR_REGEX;
     }
 }
