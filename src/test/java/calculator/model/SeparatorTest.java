@@ -22,21 +22,9 @@ class SeparatorTest {
     }
 
     @Test
-    void 음수_포함_문자열_분리() {
-        String[] result = separator.splitByAllSeparators("-1,2:-3,4:-5");
-        assertArrayEquals(new String[]{"-1", "2", "-3", "4", "-5"}, result);
-    }
-
-    @Test
     void 소수_포함_문자열_분리() {
         String[] result = separator.splitByAllSeparators("1.1,2.2:3.3");
         assertArrayEquals(new String[]{"1.1", "2.2", "3.3"}, result);
-    }
-
-    @Test
-    void 음수와_소수_혼합_문자열_분리() {
-        String[] result = separator.splitByAllSeparators("-1.1,2.2:-3.3,4.4:-5.5");
-        assertArrayEquals(new String[]{"-1.1", "2.2", "-3.3", "4.4", "-5.5"}, result);
     }
 
     @Test

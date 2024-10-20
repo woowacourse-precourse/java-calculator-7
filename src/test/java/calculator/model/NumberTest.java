@@ -20,6 +20,12 @@ class NumberTest {
     }
 
     @Test
+    void 음수로_Number_객체를_생성하면_예외가_발생한다() {
+        assertThrows(IllegalArgumentException.class, () ->
+                Number.from("-1"));
+    }
+
+    @Test
     void 소수를_가장한_숫자로_Number_객체를_생성하면_예외가_발생한다() {
         assertThrows(IllegalArgumentException.class, () ->
                 Number.from("1.0.0"));

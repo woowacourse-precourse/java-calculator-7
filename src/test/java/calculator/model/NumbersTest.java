@@ -27,12 +27,6 @@ class NumbersTest {
     }
 
     @Test
-    void 음수를_포함한_Numbers_객체의_합계_계산() {
-        Numbers numbers = Numbers.from(new String[]{"-1", "2", "-3"});
-        assertEquals(Number.from("-2"), numbers.sumNumbers());
-    }
-
-    @Test
     void 큰_숫자를_포함한_Numbers_객체의_합계_계산() {
         Numbers numbers = Numbers.from(new String[]{"1000", "2000", "3000"});
         assertEquals(Number.from("6000"), numbers.sumNumbers());

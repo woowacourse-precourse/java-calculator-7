@@ -16,7 +16,11 @@ public class Number {
 
     public static Number from(String value) {
         try {
-            return new Number(new BigDecimal(value));
+            BigDecimal number = new BigDecimal(value);
+            if (number.compareTo(BigDecimal.ZERO) < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + value);
+            }
+            return new Number(number);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("유효하지 않은 숫자 형식입니다: " + value);
         }
