@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.HashSet;
 
 public class Application {
-    private static int sum;
+    private static long sum;
 
     public static void main(String[] args) {
         System.out.println("덧셈할 문자열을 입력해주세요.");
