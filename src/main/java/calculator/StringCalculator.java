@@ -5,17 +5,13 @@ import java.util.List;
 
 public class StringCalculator {
     public static int calculate(String str) {
-        if (str == null) { // null 처리
-            return 0;
+        // null, 빈 문자 처리
+        if (str == null || str.isEmpty() || str.isBlank()) { // null 처리
+            throw new IllegalArgumentException("빈 문자는 허용되지 않습니다.");
         }
 
         // 문자 앞뒤 공백 허용(예시: " 1,2")
         String numbersPart = str.trim();
-
-        // empty, blank 문자 처리
-        if (numbersPart.isEmpty()) {
-            return 0;
-        }
 
         // 기본 구분자
         List<Character> delimiterList = new ArrayList<>();
@@ -56,9 +52,7 @@ public class StringCalculator {
      */
     private static String[] splitByDelimiters(String str, List<Character> delimiters) {
         String regex = buildDelimitersRegex(delimiters);
-        String[] strings = str.split(regex);
-
-        return strings;
+        return str.split(regex);
     }
 
     /**
