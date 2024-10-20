@@ -8,6 +8,7 @@ public class OriginalSeparatorStrategy implements CalculatorStrategy {
 
     public void calculate(String inputText) {
         String arr[] = calculator.extractNumber(inputText);
-        calculator.sum(arr);
+        int totalSum = calculator.sum(arr);
+        System.out.println("결과 : " + totalSum);
     }
 }
