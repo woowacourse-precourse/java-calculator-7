@@ -58,8 +58,11 @@ public class Application {
         }
     }
 
-    private Boolean isValidCustomSeparator() {
-        return !Character.isDigit(customSeparator);
+    // 커스텀 구분자가 숫자이면 예외처리
+    private void isValidCustomSeparator() {
+        if (Character.isDigit(customSeparator)) {
+            throw new IllegalArgumentException();
+        }
     }
 
     public static void main(String[] args) {
