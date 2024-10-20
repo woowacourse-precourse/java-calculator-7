@@ -7,8 +7,9 @@ public class InputString {
     private List<Integer> userOperand;
 
     public void setUserInput(String userInput) {
-        this.userInput = userInput;
+        this.userInput = userInput.replaceAll("[,:]", " ");
     }
+
     public String getUserInput() {
         return userInput;
     }
