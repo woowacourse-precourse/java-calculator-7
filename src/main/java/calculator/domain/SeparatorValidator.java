@@ -21,7 +21,10 @@ public class SeparatorValidator {
     }
 
     public static String[] removeSeparator(List<String> separators, String inputData) {
-        String str = removeCustomSeparatorFormat(inputData);
+        String str = inputData;
+        if (containsCustomSeparator(inputData)) {
+            str = removeCustomSeparatorFormat(inputData);
+        }
         String[] separatedString = separateString(separators, str);
 
         for (String string : separatedString) {
