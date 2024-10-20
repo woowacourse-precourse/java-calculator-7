@@ -28,7 +28,10 @@ public class Calculator {
 
         for (String string : strings) {
             int number = Integer.parseInt(string);
-            numbers.add(Integer.parseInt(string));
+            if(number < 1){
+                throw new IllegalArgumentException();
+            }
+            numbers.add(number);
         }
     }
 
