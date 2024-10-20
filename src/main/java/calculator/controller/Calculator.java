@@ -29,6 +29,8 @@ public class Calculator {
         String s = userInput.replaceAll("//.\\\\n", "");
         long sum = stringAdder.addString(s, regex);
 
+        if(sum < 0)
+            throw new IllegalArgumentException("ERROR: too large string");
         calculatorViewer.printResult(sum);
     }
 }
