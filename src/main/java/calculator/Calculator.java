@@ -31,5 +31,14 @@ public class Calculator {
         return input.split(delimiter); // 구분자로 문자열 분리
     }
 
-    static double sum(String[] tokens) {}
+    static double sum(String[] tokens) {
+        double sum = 0;
+        for (String token : tokens) {
+            double number = Double.parseDouble(token);
+            if (number > 0) {
+                sum += number;
+            }
+        }
+        return sum;
+    }
 }
