@@ -1,25 +1,25 @@
 package calculator;
 
-import calculator.io.InputHandler;
-import calculator.io.OutputHandler;
+import calculator.view.InputHandler;
+import calculator.view.OutputHandler;
 import java.util.Arrays;
 
 public class Calculator {
     private final InputHandler inputHandler;
     private final OutputHandler outputHandler;
-    private String delimiter;
 
     public Calculator(InputHandler inputHandler, OutputHandler outputHandler) {
         this.inputHandler = inputHandler;
         this.outputHandler = outputHandler;
-        delimiter = "[,;]";
     }
 
     public void run() {
+        DelimiterParser delimiterParser = new DelimiterParser();
         String userInput = inputHandler.getUserInput();
-        String parsedInput = extractCustomDelimiter(userInput);
+        String delimiter = delimiterParser.extractDelimiter(userInput);
+        String extractedInput = delimiterParser.extractExpression(userInput);
 
-        String[] inputStringNumbers = splitUserInput(parsedInput, delimiter);
+        String[] inputStringNumbers = parseUserInput(extractedInput, delimiter);
         int[] inputIntegerNumbers = changeStringArrayToIntegerArray(inputStringNumbers);
         int result = sumAllNumbers(inputIntegerNumbers);
         outputHandler.printMessage(String.valueOf(result));
@@ -35,19 +35,7 @@ public class Calculator {
                 .toArray();
     }
 
-    private String[] splitUserInput(String userInput, String delimiter) {
+    private String[] parseUserInput(String userInput, String delimiter) {
         return userInput.split(delimiter);
-    }
-
-    private String extractCustomDelimiter(String userInput) {
-        if (hasCustomDelimiterIn(userInput)) {
-            delimiter = "" + userInput.charAt(2);
-            return userInput.substring(5);
-        }
-        return userInput;
-    }
-
-    private boolean hasCustomDelimiterIn(String userInput) {
-        return userInput.startsWith("//") && userInput.startsWith("/n", 3);
     }
 }

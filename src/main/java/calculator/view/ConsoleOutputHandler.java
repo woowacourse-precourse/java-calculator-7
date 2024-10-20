@@ -1,4 +1,4 @@
-package calculator.io;
+package calculator.view;
 
 public class ConsoleOutputHandler implements OutputHandler {
     @Override

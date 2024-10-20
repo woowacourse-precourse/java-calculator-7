@@ -1,7 +1,7 @@
 package calculator;
 
-import calculator.io.ConsoleInputHandler;
-import calculator.io.ConsoleOutputHandler;
+import calculator.view.ConsoleInputHandler;
+import calculator.view.ConsoleOutputHandler;
 
 public class Application {
     public static void main(String[] args) {
