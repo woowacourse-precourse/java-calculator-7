@@ -9,4 +9,9 @@ public class CalculatorView {
         return result;
     }
 
+    private static final String message = "결과 : ";
+    public static void printResult(int sum) {
+        System.out.println(message + sum);
+    }
+
 }
