@@ -30,11 +30,20 @@ public class Application {
 
         // 합계 도출하기
         int sum=0;
+        IllegalArgumentException printError = new IllegalArgumentException();
         for (String num : separatedNumbers){
             int partNum = 0;
-            partNum = Integer.parseInt(num);
+            try{
+                partNum = Integer.parseInt(num);
+                if (partNum<=0){
+                    throw printError;
+                }
+            } catch(Exception ex){
+                throw printError;
+            }
             sum+=partNum;
         }
         System.out.println("결과 : "+sum);
+
     }
 }
