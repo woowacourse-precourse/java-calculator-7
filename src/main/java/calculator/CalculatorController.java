@@ -16,13 +16,13 @@ public class CalculatorController {
         calculatorView.printInputMessage();
         String input = calculatorView.readInput();
 
-        // 문자열 구분하기
+        // 문자열 구분해서 정수 리스트로 변환
         List<Integer> values = calculatorModel.splitString(input);
 
-        // 문자열 계산하기
-        int result = calculatorModel.calculateSum(values);
+        // 결과 계산
+        int result = calculatorModel.sum(values);
 
-        // 결과 출력하기
+        // 결과 출력
         calculatorView.printOutputMessage(result);
     }
 }

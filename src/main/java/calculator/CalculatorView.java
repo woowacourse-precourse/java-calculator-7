@@ -1,7 +1,5 @@
 package calculator;
 
-import calculator.exception.ErrorMessage;
-import calculator.exception.InvalidInputException;
 import camp.nextstep.edu.missionutils.Console;
 
 public class CalculatorView {
@@ -9,15 +7,7 @@ public class CalculatorView {
     public static final String OUTPUT_MESSAGE = "결과 : %d";
 
     public String readInput() {
-        String input = Console.readLine().trim();
-        validateString(input);
-        return input;
-    }
-
-    private void validateString(String input) {
-        if (input == null || input.isBlank()) {
-            throw new InvalidInputException(input, ErrorMessage.EMPTY_INPUT);
-        }
+        return Console.readLine().trim();
     }
 
     public void printInputMessage() {

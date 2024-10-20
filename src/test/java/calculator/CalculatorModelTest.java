@@ -1,6 +1,7 @@
 package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
@@ -14,9 +15,22 @@ class CalculatorModelTest {
 
     @Nested
     class SplitStringTests {
+        @Test
+        void 빈문자열_0반환() {
+            // given
+            List<Integer> expected = List.of(0);
+            String input = "";
+
+            // when
+            List<Integer> result = calculatorModel.splitString(input);
+
+            // then
+            assertThat(result).isEqualTo(expected);
+        }
+
         @ParameterizedTest
         @ValueSource(strings = {"1,2,3", "1:2:3", "1,2:3"})
-        void 기본_문자열_구분자로_문자열_구분_성공(String input) {
+        void 기본_문자열_구분자로_문자열_구분_성공_올바른값_반환(String input) {
             // given
             List<Integer> expected = List.of(1, 2, 3);
 
@@ -28,6 +42,14 @@ class CalculatorModelTest {
         }
 
         @ParameterizedTest
+        @ValueSource(strings = {"12,32:33123", "1", "1,2:3", "1,2,3,4,5,6,7,8,9,10"})
+        void 기본_문자열_구분자로_문자열_구분_성공_예외_발생안함(String input) {
+            // when then
+            assertThatCode(() -> calculatorModel.splitString(input))
+                    .doesNotThrowAnyException();
+        }
+
+        @ParameterizedTest
         @ValueSource(strings = {"1,2,3,", ",1,2,3", "1,,2,3,", "1,2!3", "잘못 입력"})
         void 문자열_형식오류_예외발생(String input) {
             // when then
@@ -36,7 +58,7 @@ class CalculatorModelTest {
         }
 
         @ParameterizedTest
-        @ValueSource(strings = {"//;\\n1;2;3", "//d\\n1d2d3", "//d\\n1d2;3"})
+        @ValueSource(strings = {"//;\\n1;2;3", "//d\\n1d2d3", "//d\\n1d2:3"})
         void 커스텀_문자열_구분자로_문자열_구분_성공(String input) {
             // given
             List<Integer> expected = List.of(1, 2, 3);
@@ -49,7 +71,7 @@ class CalculatorModelTest {
         }
 
         @ParameterizedTest
-        @ValueSource(strings = {"//;1;2;3", ";\\n1;2;3", "//\\n1;2;3", "//1\\n11213"})
+        @ValueSource(strings = {"//;1;2;3", ";\\n1;2;3", "//\\n1;2;3", "//1\\n11213", "//da\\n1d2:3"})
         void 커스텀_문자열_형식오류_예외발생(String input) {
             // when then
             assertThatThrownBy(() -> calculatorModel.splitString(input))
@@ -66,11 +88,9 @@ class CalculatorModelTest {
                     .isInstanceOf(IllegalArgumentException.class);
         }
 
-        @Test
-        void 음수_포함_문자열_구분_실패_예외발생() {
-            // given
-            String input = "-1,2,3";
-
+        @ParameterizedTest
+        @ValueSource(strings = {"-11,2,3", "31,-2,3", "1,2132,-3"})
+        void 음수_포함_문자열_구분_실패_예외발생(String input) {
             // when then
             assertThatThrownBy(() -> calculatorModel.splitString(input))
                     .isInstanceOf(IllegalArgumentException.class);
@@ -86,7 +106,7 @@ class CalculatorModelTest {
             int expected = 6;
 
             // when
-            int result = calculatorModel.calculateSum(values);
+            int result = calculatorModel.sum(values);
 
             // then
             assertThat(result).isEqualTo(expected);
