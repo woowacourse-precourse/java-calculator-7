@@ -102,6 +102,24 @@ class CalculatorServiceTest {
         assertEquals("잘못된 형식입니다. 숫자 또는 '//'로 시작해야 합니다.", exception.getMessage());
     }
 
+    @DisplayName("커스텀 구분자 정의 시 '\\n'이 누락되면, IllegalArgumentException 발생")
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "//;1;2;3",   // '\n'이 없고 바로 숫자가 나옴
+            "//|1|2|3",   // '\n'이 없고 바로 숫자가 나옴
+            "//.123",     // '\n'이 없이 바로 숫자가 나옴
+            "//#1#2"      // '\n'이 없고 바로 숫자가 나옴
+    })
+    void add_missingNewlineAfterCustomDelimiter_throwsException(String input) {
+        // 문자열의 앞부분이 "//"인데 그 뒤에 '\n'이 없으면 IllegalArgumentException이 발생하는지 확인
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            CalculatorService.add(input);
+        });
+
+        // 예외 메시지가 예상된 것과 일치하는지 확인
+        assertEquals("잘못된 형식입니다. 커스텀 구분자 뒤에 '\\n'이 있어야 합니다.", exception.getMessage());
+    }
+
     @DisplayName("커스텀 구분자에 대한 성공 로직 테스트")
     @ParameterizedTest
     @CsvSource({
