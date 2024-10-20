@@ -5,10 +5,13 @@ import java.util.regex.Pattern;
 
 public class Application {
     public static void main(String[] args) {
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+
         String input = Console.readLine();
+        int sum = 0;
 
         if(input.isEmpty()){
-            System.out.println("result : 0" );
+            System.out.println("결과 : " + sum );
             return;
         }
 
@@ -23,23 +26,21 @@ public class Application {
 
         String[] inputNumbers = input.split(delimiter);
 
-        int sum = 0;
-
         for (String numberString : inputNumbers) {
             if (numberString.trim().isEmpty()) continue;
 
             try {
                 int number = Integer.parseInt(numberString.trim());
                 if (number < 0) {
-                    throw new IllegalArgumentException("invalid value(negative integer)" + number);
+                    throw new IllegalArgumentException("음수는 입력하지 않는다." + number);
                 }
                 sum += number;
             } catch (IllegalArgumentException e) {
-                System.out.println("invalid value(not integer)");
+                System.out.println("입력 형식이 잘못 되었습니다.");
                 return;
             }
         }
 
-        System.out.println("result : " + sum);
+        System.out.println("결과 : " + sum);
     }
 }
