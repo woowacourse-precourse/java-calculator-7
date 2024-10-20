@@ -52,6 +52,12 @@
 - 커스텀 구분자 + 기본 구분자를 포함한 구분자 분리 표현식 생성
 - 기본 구분자를 포함한 구분자 분리 표현식 생성
 
+## PatternMatcherUtil
+
+- PositiveNumber, CustomDelimiter에서 PatternMatcher가 반복되어 사용됨
+- 리팩터링으로, 새로운 클래스를 만들어 책임 분산
+- 패턴을 받아, String으로 return
+
 # 4.Model
 
 ## CustomDelmiter
