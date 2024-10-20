@@ -2,11 +2,19 @@ package calculator;
 
 import java.math.BigInteger;
 
+
 public class CalculatorModel {
 
     public BigInteger processInput(String input, boolean extendedMode) {
         if (input.isEmpty()) {
             return BigInteger.ZERO;
+        }
+
+        if (extendedMode && input.length() > 2) {
+            char additionalDelimiter = input.charAt(2);
+            if (Character.isWhitespace(additionalDelimiter)) {
+                throw new IllegalArgumentException("커스텀 구분자에 공백이 포함될 수 없습니다.");
+            }
         }
 
         String substringToCheck = extendedMode && input.length() > 5 ? input.substring(5) : input;

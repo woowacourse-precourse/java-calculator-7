@@ -9,6 +9,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
 
+    @Test
+    void 기본() {
+        assertSimpleTest(() -> {
+            run("");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
 
     @Test
     void 기본_구분자_쉼표와_콜론() {
