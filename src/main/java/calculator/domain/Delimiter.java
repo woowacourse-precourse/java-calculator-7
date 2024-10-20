@@ -26,6 +26,10 @@ public class Delimiter {
         addDelimiter(escapeSpecialCharacters(customDelimiter));
     }
 
+    private static void addDelimiter(String customDelimiter) {
+        delimiter += DELIMITER_SEPARATOR + customDelimiter;
+    }
+
     public static String removeEnrollmentString(String str) {
         if (!DelimiterValidator.hasCustomDelimiter(str)) {
             return str;
@@ -44,10 +48,6 @@ public class Delimiter {
         int startIndex = str.indexOf(PREFIX) + PREFIX.length();
         int endIndex = str.indexOf(SUFFIX);
         return str.substring(startIndex, endIndex);
-    }
-
-    private static void addDelimiter(String customDelimiter) {
-        delimiter += DELIMITER_SEPARATOR + customDelimiter;
     }
 
     private static String escapeSpecialCharacters(String customDelimiter) {
