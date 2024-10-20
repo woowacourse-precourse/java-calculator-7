@@ -1,28 +1,26 @@
 package calculator.service;
 
+import calculator.constant.CalculatorConstants;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class StringSplitterService {
-    private static final String CUSTOM_DELIMITER_PREFIX = "//";
-    private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
-
+public class StringSplitter {
     public List<String> split(String input) {
-        if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
+        if (input.startsWith(CalculatorConstants.CUSTOM_DELIMITER_PREFIX)) {
             return splitWithCustomDelimiter(input);
         }
         return splitWithDefaultDelimiter(input);
     }
 
     private List<String> splitWithCustomDelimiter(String input) {
-        int delimiterEnd = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
+        int delimiterEnd = input.indexOf(CalculatorConstants.CUSTOM_DELIMITER_SUFFIX);
         if (delimiterEnd == -1) {
             throw new IllegalArgumentException("올바른 형식의 커스텀 구분자를 입력해 주세요.");
         }
 
-        String customDelimiter = input.substring(CUSTOM_DELIMITER_PREFIX.length(), delimiterEnd);
-        String numbers = input.substring(delimiterEnd + CUSTOM_DELIMITER_SUFFIX.length());
+        String customDelimiter = input.substring(CalculatorConstants.CUSTOM_DELIMITER_PREFIX.length(), delimiterEnd);
+        String numbers = input.substring(delimiterEnd + CalculatorConstants.CUSTOM_DELIMITER_SUFFIX.length());
         if (numbers.isEmpty()) {
             return Arrays.asList();
         }
@@ -30,6 +28,6 @@ public class StringSplitterService {
     }
 
     private List<String> splitWithDefaultDelimiter(String input) {
-        return Arrays.asList(input.split(",|:"));
+        return Arrays.asList(input.split(CalculatorConstants.DEFAULT_DELIMITERS));
     }
 }
