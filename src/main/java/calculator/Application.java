@@ -34,10 +34,7 @@ public class Application {
         checkMinusNum(isMinus);
 
         // 변환된 숫자를 더하기
-        int sum = 0;
-        for (int number : strToIntList) {
-            sum += number;
-        }
+        int sum = sumNumList(strToIntList);
 
         // 덧셈 결과 출력하기
         System.out.println("결과 : " + sum);
@@ -117,5 +114,14 @@ public class Application {
         if(isMinus){
             throw new IllegalArgumentException("음수 입력 불가");
         }
+    }
+
+    // 변환된 숫자를 더하기
+    private static int sumNumList(int[] strToIntList){
+        int sum = 0;
+        for (int number : strToIntList) {
+            sum += number;
+        }
+        return sum;
     }
 }
