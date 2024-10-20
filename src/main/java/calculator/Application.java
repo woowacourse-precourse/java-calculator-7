@@ -18,7 +18,6 @@ public class Application {
         }
     }
 
-    // 문자열에서 합계를 계산하는 함수
     public static int calculateSum(String input) {
         if (isEmptyInput(input)) {
             return 0;
@@ -31,33 +30,33 @@ public class Application {
         return sumNumbers(numberArray);
     }
 
-    // 입력이 빈 문자열인지 확인
     public static boolean isEmptyInput(String input) {
         return input == null || input.isEmpty();
     }
 
-    // 입력 문자열에서 커스텀 구분자를 추출하는 함수
     public static String getDelimiter(String input) {
         Pattern customDelimiterPattern = Pattern.compile("//(.*)\\\\n(.*)");
         Matcher matcher = customDelimiterPattern.matcher(input);
 
         if (matcher.matches()) {
             String delimiter = Pattern.quote(matcher.group(1));
-            return delimiter + "|,|:"; // 커스텀 구분자 반환
+            return delimiter + "|,|:";
         }
 
-        return ",|:"; // 기본 구분자
+        return ",|:";
     }
 
-    // 커스텀 구분자가 있는 경우 숫자 문자열을 추출
     public static String getNumbersString(String input, String delimiter) {
         if (input.startsWith("//")) {
-            return input.split("\\\\n", 2)[1]; // 커스텀 구분자 이후의 숫자 문자열
+            String[] parts = input.split("\\\\n", 2);
+            if (parts.length < 2 || parts[1].isEmpty()) {
+                throw new IllegalArgumentException("잘못된 형식의 입력입니다.");
+            }
+            return parts[1];
         }
         return input;
     }
 
-    // 문자열 배열에서 합을 계산하는 함수
     public static int sumNumbers(String[] numberArray) {
         int total = 0;
         for (String numberStr : numberArray) {
@@ -70,7 +69,6 @@ public class Application {
         return total;
     }
 
-    // 문자열을 숫자로 변환하는 함수 (형식 오류 처리)
     public static int parseNumber(String numberStr) {
         try {
             return Integer.parseInt(numberStr);
