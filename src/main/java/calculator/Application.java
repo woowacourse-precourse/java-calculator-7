@@ -6,6 +6,7 @@ public class Application {
         StringCalculator stringCalculator = new StringCalculator();
         stringCalculator.setInput();
         stringCalculator.addDelimiter();
+
     }
 }
 

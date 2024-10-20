@@ -20,12 +20,11 @@ public class StringCalculator {
     // 숫자 구분자
     private String delimiter;
     // 추출한 숫자 리스트
-    private ArrayList<Integer> numList;
+    private String[] numList;
 
     public StringCalculator(){
         this.sum = 0;
         this.delimiter = "[,:";
-        this.numList = new ArrayList<>();
     }
 
     // 입력받기
@@ -43,6 +42,8 @@ public class StringCalculator {
         for(int i=0; i<input.length()-5; i+=5){
             if(input.startsWith("//", i) && input.startsWith("\\n", i+3)){
                 delimiter += input.charAt(i+2);
+                // 원본 문자열에서 커스텀문자열 추가 부분 제거
+                this.input = input.substring(0,i) + input.substring(i+5);
                 System.out.println(input.charAt(i+2));
             }
         }
