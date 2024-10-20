@@ -1,8 +1,8 @@
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import calculator.NumberStrategy.NumberStrategy;
-import calculator.NumberStrategy.SimpleNumberStrategy;
+import calculator.numberStrategy.NumberStrategy;
+import calculator.numberStrategy.SimpleNumberStrategy;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

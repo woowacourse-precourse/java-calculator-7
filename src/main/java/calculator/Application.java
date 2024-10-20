@@ -2,11 +2,11 @@ package calculator;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
-import calculator.NumberStrategy.SimpleNumberStrategy;
-import calculator.calculateStrategy.emptyStringCalculateStrategy;
-import calculator.calculateStrategy.integerCalculateStrategy;
+import calculator.calculateStrategy.EmptyStringCalculateStrategy;
+import calculator.calculateStrategy.IntegerCalculateStrategy;
 import calculator.delimiterStrategy.CustomDelimiterStrategy;
 import calculator.delimiterStrategy.DefaultDelimiterStrategy;
+import calculator.numberStrategy.SimpleNumberStrategy;
 
 public class Application {
     private static final String inputPhrase = "덧셈할 문자열을 입력해 주세요.";
@@ -41,9 +41,9 @@ public class Application {
 
     private static void configureCalculateStrategy(String userInput) {
         if (userInput.isEmpty()) {
-            stringCalculator.setCalculate(new emptyStringCalculateStrategy());
+            stringCalculator.setCalculate(new EmptyStringCalculateStrategy());
         } else {
-            stringCalculator.setCalculate(new integerCalculateStrategy());
+            stringCalculator.setCalculate(new IntegerCalculateStrategy());
         }
     }
 }

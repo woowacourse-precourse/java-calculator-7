@@ -6,7 +6,7 @@ import calculator.delimiterStrategy.DelimiterStrategy;
 public class StringCalculator {
     private CalculateStrategy calculate;
     private DelimiterStrategy delimiterStrategy;
-    private calculator.NumberStrategy.NumberStrategy numberStrategy;
+    private calculator.numberStrategy.NumberStrategy numberStrategy;
     private final String userInput;
 
     public StringCalculator(String userInput) {
@@ -21,7 +21,7 @@ public class StringCalculator {
         this.delimiterStrategy = delimiterStrategy;
     }
 
-    public void setNumberStrategy(calculator.NumberStrategy.NumberStrategy numberStrategy) {
+    public void setNumberStrategy(calculator.numberStrategy.NumberStrategy numberStrategy) {
         this.numberStrategy = numberStrategy;
     }
 
