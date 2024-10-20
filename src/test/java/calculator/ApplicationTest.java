@@ -9,15 +9,15 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
     @Test
-    void ì»¤ìŠ¤í…€_êµ¬ë¶„ìž_ì‚¬ìš©() {
+    void Ä¿½ºÅÒ_±¸ºÐÀÚ_»ç¿ë() {
         assertSimpleTest(() -> {
             run("//;\\n1");
-            assertThat(output()).contains("ê²°ê³¼ : 1");
+            assertThat(output()).contains("°á°ú : 1");
         });
     }
 
     @Test
-    void ì˜ˆì™¸_í…ŒìŠ¤íŠ¸() {
+    void ¿¹¿Ü_Å×½ºÆ®() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
