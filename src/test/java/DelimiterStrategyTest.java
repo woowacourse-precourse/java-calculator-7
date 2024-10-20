@@ -25,6 +25,16 @@ public class DelimiterStrategyTest {
     }
 
     @Test
+    void 특별한_커스텀_구분자를_사용한다() {
+        //given
+        DelimiterStrategy delimiterStrategy = new CustomDelimiterStrategy();
+        //when
+        List<String> customDelimiter = delimiterStrategy.decideDelimiter("//+\n1+2+3");
+        //then
+        assertThat(customDelimiter).isEqualTo(List.of("1+2+3", "\\+"));
+    }
+
+    @Test
     void 커스텀_구분자로_숫자가_들어오면_예외가_발생한다() {
         //given
         DelimiterStrategy delimiterStrategy = new CustomDelimiterStrategy();
