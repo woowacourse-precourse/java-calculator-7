@@ -27,22 +27,41 @@ public class CalculatorController {
             return;
         }
 
-        StringParser stringParser = new StringParser(validatedInput);
-        ParsedComponents parsedComponents = stringParser.parse();
+        AdditionResult additionResult = processInput(validatedInput);
+        OutputView.printResult(additionResult);
+    }
 
+    private AdditionResult processInput(String input) {
+        ParsedComponents parsedComponents = parseInput(input);
+        Pattern delimiterPattern = createDelimiterPattern(parsedComponents);
+        List<String> splittedExpression = splitExpression(parsedComponents, delimiterPattern);
+        List<Integer> positiveIntegers = convertToPositiveIntegers(splittedExpression);
+        return calculateResult(positiveIntegers);
+    }
+
+    private ParsedComponents parseInput(String input) {
+        StringParser stringParser = new StringParser(input);
+        return stringParser.parse();
+    }
+
+    private Pattern createDelimiterPattern(ParsedComponents parsedComponents) {
         DelimiterManager delimiterManager = new DelimiterManager(parsedComponents.delimiters());
-        Pattern delimiterPattern = delimiterManager.createDelimiterPattern();
+        return delimiterManager.createDelimiterPattern();
+    }
 
+    private List<String> splitExpression(ParsedComponents parsedComponents, Pattern delimiterPattern) {
         ExpressionSplitter expressionSplitter = new ExpressionSplitter(delimiterPattern,
                 parsedComponents.operationalExpression());
-        List<String> splittedExpression = expressionSplitter.splitOperationalExpressionByDelimiters();
+        return expressionSplitter.splitOperationalExpressionByDelimiters();
+    }
 
+    private List<Integer> convertToPositiveIntegers(List<String> splittedExpression) {
         PositiveIntegerConverter positiveIntegerConverter = new PositiveIntegerConverter(splittedExpression);
-        List<Integer> positiveIntegers = positiveIntegerConverter.convertToPositiveIntegers();
+        return positiveIntegerConverter.convertToPositiveIntegers();
+    }
 
+    private AdditionResult calculateResult(List<Integer> positiveIntegers) {
         Calculator calculator = new SumCalculator(positiveIntegers);
-        AdditionResult additionResult = AdditionResult.from(calculator.calculate());
-
-        OutputView.printResult(additionResult);
+        return AdditionResult.from(calculator.calculate());
     }
 }
