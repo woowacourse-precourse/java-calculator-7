@@ -18,12 +18,12 @@ public class Application {
             String customDelimiter = userInput.substring(start,end);//커스컴 구분자
             numberLine = userInput.substring(end+2);
             arrayUserInput = splitDelimiters(numberLine,customDelimiter);
-            System.out.println(Arrays.toString(arrayUserInput));
         }else {
             numberLine = userInput;
             arrayUserInput = splitDelimiters(numberLine);
-            System.out.println(Arrays.toString(arrayUserInput));//쉼표 또는 콜론 구분자로 분리 된 리스트
         }
+
+        System.out.println(arrSum(arrayUserInput));
 
     }
 
@@ -34,7 +34,7 @@ public class Application {
 
     public static int[] splitDelimiters(String numberLine, String delimiter){
 
-        //빈 문자열이 입력 되었을 경우
+        //빈 문자열이 입력 되었을 경우 처리
         if (numberLine.isEmpty()){
             return new int[]{};
         }
@@ -49,7 +49,20 @@ public class Application {
             numbers[i] = Integer.parseInt(stringNumbers[i].trim());
         }
         return numbers;
+    }
+    public static int arrSum(int[] numbers){
+        int sum = 0;
 
+        //빈 배열을 입력 되었을 경우 처리
+        if(numbers.length == 0){
+            return 0;
+        }
+
+        for(int number:numbers){
+            sum += number;
+        }
+
+        return sum;
     }
 }
 
