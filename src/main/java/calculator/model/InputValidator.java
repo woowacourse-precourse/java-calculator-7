@@ -56,7 +56,7 @@ public class InputValidator {
 
         //커스텀 구분자로 숫자 분리
         String[] numbers = numbersPart.split(Pattern.quote(delimiter));
-        checkNegativeNumbers(numbers); // 음수 확인
+        checkNegativeNumbers(numbers); // 음수 검증
         return numbers;
     }
 
