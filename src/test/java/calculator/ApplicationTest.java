@@ -14,8 +14,7 @@ class ApplicationTest extends NsTest {
     void setUp() {
         Application.delim = new StringBuilder(",:");
     }
-
-
+    
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
@@ -39,7 +38,6 @@ class ApplicationTest extends NsTest {
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
-
 
     @Test
     void 커스텀_구분자로_분리() {
