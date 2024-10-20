@@ -60,6 +60,12 @@ public class CalculatorTest extends NsTest {
             assertThat(result).isEqualTo(10);
         });
 
+        assertSimpleTest(() -> {
+            Calculator obj = new Calculator();
+            int result = obj.calc("//!\\n//;\\n//#\\n1;2!3!4#5,6");
+            assertThat(result).isEqualTo(21);
+        });
+
     }
 
     @Override
