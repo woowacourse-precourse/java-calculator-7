@@ -124,6 +124,15 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 커스텀_구분자_숫자() {
+
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//3\\n1:235"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage("숫자 형식은 구분자로 사용할 수 없습니다"));
+    }
+
 
     @Override
     public void runMain() {
