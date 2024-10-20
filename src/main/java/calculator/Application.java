@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,4 +44,36 @@ public class Application {
 
         return delimiters;
     }
+
+    /**
+     * 주어진 입력을 구분자로 구분하고 정수로 변환하여 반환함
+     * @param input 숫자로 변환할 문자열
+     * @param delimiter 여러개의 구분자
+     * @return 구분된 문자를 정수 List로 변환하여 반환함
+     * @throws NumberFormatException 정수로 변환할 수 없는 값이 포함된 경우
+     */
+    private static List<Integer> getNumbers(String input, String delimiter) throws NumberFormatException{
+        // 숫자 부분을 분리함
+        String numberPart = input;
+        if (input.startsWith("//")) {
+            int delimiterEnd = input.indexOf("\\n");
+            numberPart = input.substring(delimiterEnd + 2);
+        }
+
+        List<Integer> numbers = new ArrayList<>();
+        if (numberPart.isEmpty()) {
+            return numbers;
+        }
+        // 숫자부분을 구분하여 정수로 변환함
+        String[] numberStrings = numberPart.split(delimiter);
+
+        for (String numberString : numberStrings) {
+            System.out.println(numberString);
+            Integer number = Integer.parseInt(numberString);
+            numbers.add(number);
+        }
+
+        return numbers;
+    }
+
 }
