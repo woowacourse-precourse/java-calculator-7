@@ -62,4 +62,33 @@ class CalculableValidatorTest {
                     .hasMessage(ErrorMessage.INVALID_DELIMITER_INCLUDED.getMessage());
         }
     }
+
+    @Nested
+    @DisplayName("validateDelimiterPosition 메서드는")
+    class ValidateDelimiterPositionMethod {
+
+        @Test
+        void 구분자가_숫자_사이에_위치하는_경우_검증에_성공한다() {
+            // given
+            String input = "1@2:3";
+            Delimiters delimiters = new Delimiters();
+            delimiters.addCustomDelimiters(Set.of("@"));
+
+            // when & then
+            assertThatNoException().isThrownBy(() -> CalculableValidator.validateDelimiterPosition(input, delimiters));
+        }
+
+        @Test
+        @DisplayName("구분자가 숫자 사이에 위치하지 않는 경우 예외가 발생한다")
+        void 구분자가_숫자_사이에_위치하지_않는_경우_예외_발생() {
+            // given
+            String input = "1,,2:3";
+            Delimiters delimiters = new Delimiters();
+
+            // when & then
+            assertThatThrownBy(() -> CalculableValidator.validateDelimiterPosition(input, delimiters))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(ErrorMessage.DELIMITER_MUST_BE_BETWEEN_NUMBERS.getMessage());
+        }
+    }
 }
