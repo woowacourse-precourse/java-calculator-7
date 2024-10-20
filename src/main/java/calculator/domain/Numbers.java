@@ -14,10 +14,6 @@ public class Numbers {
         numbers.add(new Number(numberStr));
     }
 
-    public int size() {
-        return numbers.size();
-    }
-
     public long sum() {
         long sum = 0;
         for (Number number : numbers) {
