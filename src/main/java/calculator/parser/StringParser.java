@@ -1,5 +1,7 @@
 package calculator.parser;
 
+import java.util.regex.Pattern;
+
 import static calculator.validation.Validator.*;
 
 public class StringParser {
@@ -9,7 +11,9 @@ public class StringParser {
 
         if(input.startsWith("//")){
             int index = input.indexOf("\\n");
-            separator += "|" + input.substring(2, index);
+            String customSeparator = input.substring(2, index);
+
+            separator += "|" + Pattern.quote(customSeparator);
         }
 
         return separator;
@@ -22,7 +26,6 @@ public class StringParser {
             if(strings[0].equals("//")){
                 int index = strings[1].indexOf("\\n");
                 strings[1] = strings[1].substring(index + 2);
-                System.out.println(strings[1]);
             }
         }
 
