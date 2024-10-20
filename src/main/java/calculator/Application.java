@@ -54,7 +54,10 @@ public class Application {
                 || (aNewDelimiter != null && inputString.charAt(0) == aNewDelimiter.charAt(0))) {
             throw new IllegalArgumentException("문자열 첫 입력값이 올바르지 않습니다.");
         }
-        String str = inputString.replaceAll(delimiters, "");
+
+        String str = inputString.replaceAll(",|:", "");
+        str = str.replaceAll(aNewDelimiter, "");
+
         int afterLength = str.length();
         if (beforeLength - afterLength >= beforeLength / 2) {
             throw new IllegalArgumentException("구분자가 연속 등장할 수 없습니다.");
