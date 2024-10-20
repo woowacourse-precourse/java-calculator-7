@@ -16,4 +16,10 @@ class CalculatorServiceTest {
         assertThat(result).isEqualTo(0);
     }
 
+    @Test
+    void 기본_구분자_입력_테스트() {
+        String input = "1,2:3";
+        int result = calculatorService.calculate(input);
+        assertThat(result).isEqualTo(6);
+    }
 }
