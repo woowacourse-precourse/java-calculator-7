@@ -86,9 +86,9 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀_구분자에_1에서_9까지의_숫자가_포함되어_있을_경우_예외가_발생한다() {
+    void 커스텀_구분자에_0에서_9까지의_숫자가_포함되어_있을_경우_예외가_발생한다() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("//3\\n1"))
+                assertThatThrownBy(() -> runException("//0\\n1"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
@@ -121,6 +121,46 @@ class ApplicationTest extends NsTest {
     void 기본_구분자와_커스텀_구분자_이외의_문자가_발견될_경우_예외가_발생한다() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("//$\\n1*"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 피연산자에_0이_포함되어_있을_경우_얘외가_발생한다() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1:0,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 피연산자가_21억일_경우_정상적으로_출력된다() {
+        assertSimpleTest(() -> {
+            run("2100000000:");
+            assertThat(output()).contains("결과 : 2100000000");
+        });
+    }
+
+    @Test
+    void 피연산자가_21억을_초과할_경우_예외가_발생한다() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("2100000001:1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 결과값이_21억일_경우_정상적으로_출력된다() {
+        assertSimpleTest(() -> {
+            run("1000000000:1100000000");
+            assertThat(output()).contains("결과 : 2100000000");
+        });
+    }
+
+    @Test
+    void 결과값이_21억을_초과할_경우_예외가_발생한다() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1000000000:1100000001"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
