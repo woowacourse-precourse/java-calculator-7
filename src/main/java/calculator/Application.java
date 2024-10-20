@@ -14,7 +14,7 @@ public class Application {
         System.out.println(inputString);
         Map<String, String> splitString = calculator.split(inputString);
 
-//        calculator.getDivision(splitString.get("division"));
+        calculator.getDivision(splitString.get("division"));
 //        calculator.getNumbers(splitString.get("number"));
         int result = calculator.calculateNumber();
 

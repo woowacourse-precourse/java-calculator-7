@@ -7,13 +7,12 @@ import java.util.List;
 import java.util.Map;
 
 public class Calculator {
-    private String division = " ";
+    private String division;
     private final List<Integer> numbers = new ArrayList<>();
 
     public void getDivision(String inputString) {
-        if (inputString.startsWith("//")) {
-            String[] strings = inputString.split("\n");
-            division = strings[0].substring(2);
+        if (inputString != null && inputString.startsWith("//")) {
+            division = inputString.replace("//", "");
         }
     }
 
