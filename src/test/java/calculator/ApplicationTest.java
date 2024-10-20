@@ -32,6 +32,13 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 예외_테스트_커스텀_구분자_문자열_오류() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;;\\n1;;2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
     @Override
     public void runMain() {
         Application.main(new String[]{});
