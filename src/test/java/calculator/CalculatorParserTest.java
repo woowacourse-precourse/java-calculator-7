@@ -92,7 +92,8 @@ class CalculatorParserTest {
                 Arguments.of("-1:2:3"),
                 Arguments.of("2:-1:3"),
                 Arguments.of("//?\n2?-1?3"),
-                Arguments.of("//?\n2?A?3")
+                Arguments.of("//?\n2?A?3"),
+                Arguments.of("//^\n1?A?2")
         );
     }
 
@@ -113,5 +114,12 @@ class CalculatorParserTest {
                 Arguments.of(""),
                 Arguments.of("//?\n")
         );
+    }
+
+    @Test
+    void Integer보다_큰_값을_표현식에_사용할_수_없습니다() {
+        assertThrows(NumberFormatException.class, () -> {
+            CalculatorParser.parse("2111412941209438124902148");
+        });
     }
 }

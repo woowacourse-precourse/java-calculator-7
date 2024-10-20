@@ -11,10 +11,13 @@ public class Calculator {
     }
 
     static public int sum(List<Integer> nums) {
-        int sum = 0;
+        long sum = 0;
         for (int i : nums) {
             sum += i;
+            if (sum > Integer.MAX_VALUE) {
+                throw new ArithmeticException(String.format("%d를 초과한 값을 계산할 수 없습니다", Integer.MAX_VALUE));
+            }
         }
-        return sum;
+        return (int) sum;
     }
 }
