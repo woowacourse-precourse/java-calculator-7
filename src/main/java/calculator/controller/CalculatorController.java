@@ -7,7 +7,6 @@ import calculator.separator.Separator;
 import calculator.view.CalculatorView;
 
 public class CalculatorController {
-    private final String customPrefix = "//";
     private Separator separator;
     private final CalculatingMachine calculatingMachine;
     private final CalculatorView calculatorView;
@@ -17,17 +16,18 @@ public class CalculatorController {
         this.calculatorView = new CalculatorView();
     }
 
-    //todo: 리팩토링 필요
     public void startCalculate() {
         String userInput = calculatorView.getUserInput();
-        if (userInput.startsWith(customPrefix)) {
+        setSeparator(userInput);
+        Long result = calculatingMachine.calculate(separator.separate(userInput));
+        calculatorView.getResult(result);
+    }
+
+    public void setSeparator(String userInput) {
+        if (userInput.startsWith("//")) {
             this.separator = new CustomSeparator();
-            Long result = calculatingMachine.calculate(separator.separate(userInput));
-            calculatorView.getResult(result);
             return;
         }
         this.separator = new DefaultSeparator();
-        Long result = calculatingMachine.calculate(separator.separate(userInput));
-        calculatorView.getResult(result);
     }
 }
