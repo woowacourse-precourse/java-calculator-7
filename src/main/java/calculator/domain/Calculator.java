@@ -76,7 +76,7 @@ public class Calculator {
 
     private int parseAndValidateNumber(String number) {
         ValidationUtils.validateValidInteger(number);
-        return Integer.parseInt(number);
+        return Integer.parseInt(number.trim());
     }
 
     private int safeSum(int sum, int nextNumber) {

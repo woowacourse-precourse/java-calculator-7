@@ -25,7 +25,10 @@ public class ValidationUtils {
 
     public static void validateValidInteger(String value) {
         try {
-            Integer.parseInt(value);
+            long parsedLong = Long.parseLong(value.trim());
+            if (parsedLong > Integer.MAX_VALUE) {
+                throw new IllegalArgumentException("입력한 숫자가 정수 범위를 초과했습니다. 문제가 되는 입력값: [" + value + "]");
+            }
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("입력된 값이 유효한 정수가 아닙니다. 문제가 되는 입력값: [" + value + "]");
         }
