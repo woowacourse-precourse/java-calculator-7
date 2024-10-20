@@ -13,6 +13,7 @@ public class CalculatorService {
 
         List<String> numbers = parseNumber(delimiterInputDto);
         List<Integer> parseNumbers = parseIntegerNumber(numbers);
+
         long sum = sumNumber(parseNumbers);
         validIntegerRange(sum);
 
