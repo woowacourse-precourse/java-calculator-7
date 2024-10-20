@@ -67,16 +67,4 @@ class CalculatorDelimiterTest {
             assertThat(regex).contains(";");
         });
     }
-
-    @Test
-    void test() {
-        List<String> tmp = new ArrayList<>(){{
-            add("");
-            add("1");
-            add("2");
-        }};
-
-        String str = String.join("|", tmp);
-        System.out.println(str);
-    }
 }
