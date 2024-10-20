@@ -1,6 +1,6 @@
 package calculator.model.delimiter;
 
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.Set;
 
 public class CustomDelimiter implements Delimiter {
@@ -9,16 +9,14 @@ public class CustomDelimiter implements Delimiter {
     private final Set<String> delimiters;
 
     protected CustomDelimiter(final String input) {
-        this.delimiters = findCustomDelimiter(input);
+        this.delimiters = Collections.singleton(findCustomDelimiter(input));
     }
 
-    private Set<String> findCustomDelimiter(final String input) {
-        final Set<String> customDelimiter = new HashSet<>();
+    private String findCustomDelimiter(final String input) {
         final int delimiterStart = input.indexOf(CUSTOM_DELIMITER_PREFIX);
         final int delimiterEnd = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
         validateCustomDelimiterPosition(delimiterStart, delimiterEnd);
-        customDelimiter.add(input.substring(delimiterStart + 2, delimiterEnd));
-        return customDelimiter;
+        return input.substring(delimiterStart + 2, delimiterEnd);
     }
 
     private void validateCustomDelimiterPosition(final int delimiterStart, final int delimiterEnd) {
