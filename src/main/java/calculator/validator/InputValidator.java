@@ -1,9 +1,12 @@
 package calculator.validator;
 
 public class InputValidator {
-    // TODO: 잘못된 입력이었을 경우에는 예외를 발생시킨다. 입력이 유효한지 검증한다.
 
-    // TODO: 숫자가 음수인지 확인한다.
+    private boolean isNegativeNumber(String input) {
+        return input.matches("-\\d+");
+    }
+
+    // TODO: 잘못된 입력이었을 경우에는 예외를 발생시킨다. 입력이 유효한지 검증한다.
 
     // TODO: 커스텀 구분자를 형식에 맞게 입력했는지 확인한다.
 
