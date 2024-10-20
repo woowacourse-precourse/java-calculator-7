@@ -29,6 +29,13 @@ public class Application {
             throw new IllegalArgumentException("잘못된 입력입니다.");
         }
 
+        if(numbers.isEmpty()){
+
+            System.out.println("결과: 0");
+            return ;
+        }
+
+
 
     }
     private static boolean isCustomDelimiterPattern(String input) {
