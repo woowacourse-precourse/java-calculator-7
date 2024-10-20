@@ -12,4 +12,8 @@ public class PositiveIntegerOperands extends Operands<Long> {
     public void addOperand(String operand) {
         this.data.add(Long.parseLong(operand));
     }
+
+    public Class<Long> getType() {
+        return Long.class;
+    }
 }

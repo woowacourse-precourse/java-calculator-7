@@ -13,6 +13,6 @@ public class Application {
         Parser parser = new Parser(input);
         Operands<Long> operands = parser.parseEquation(new PositiveIntegerOperands());
 
-        io.write(operands.getData().toString());
+        io.write(Long.toString(Operator.summation(operands)));
     }
 }

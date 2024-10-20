@@ -8,13 +8,15 @@ public abstract class Operands<E extends Number> {
     public static final String ZERO = "0";
     protected final List<E> data;
 
-    Operands() {
+    protected Operands() {
         this.data = new ArrayList<>();
     }
 
     public List<E> getData() {
         return this.data;
     }
+
+    public abstract Class<E> getType();
 
     public abstract boolean validate(String operand);
 
