@@ -21,10 +21,7 @@ public class CalculatorController {
 
     public void run(){
         String userInput = userInputView.receiveInput();
-        userOutputView.printUserOutput(userInput);
         String[] tokens = saveTokens.saveTokens(userInput);
-        userOutputView.printTokens(tokens);
         userOutputView.printResult(calculator.operationAdd(tokens));
-
     }
 }
