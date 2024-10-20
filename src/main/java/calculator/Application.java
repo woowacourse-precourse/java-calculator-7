@@ -1,9 +1,6 @@
 package calculator;
 
-import calculator.util.TestEvironment;
 import camp.nextstep.edu.missionutils.Console;
-
-
 
 public class Application {
   public static void main(String[] args) {
@@ -29,9 +26,7 @@ public class Application {
     } catch (IllegalArgumentException e) {
       System.err.println(e.getMessage());
 
-      if(TestEvironment.isRunningInTest()){
-        throw e;
-      }
+      throw e;
 
     } finally {
       Console.close();

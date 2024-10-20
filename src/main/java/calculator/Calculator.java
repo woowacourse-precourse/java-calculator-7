@@ -2,7 +2,7 @@ package calculator;
 
 import java.util.Arrays;
 
-public class Calculator extends RegexCheck  {
+public class Calculator extends RegexCheck {
   private int[] numbers;
 
   Calculator(String input) {
