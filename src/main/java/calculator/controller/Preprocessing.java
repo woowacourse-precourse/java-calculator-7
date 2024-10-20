@@ -53,7 +53,7 @@ public class Preprocessing {
         List<String> separated = new ArrayList<>();
 
         // 0번째 주소에 있는 원소 temp에 저장
-        String temp = given.substring(0, 1); // String??
+        String temp = given.substring(0, 1);
 
         for (int i = 1; i < given.length(); i++) {
             if (Character.isDigit(given.charAt(i)) == Character.isDigit(given.charAt(i - 1))) {

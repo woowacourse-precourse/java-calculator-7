@@ -12,6 +12,7 @@ public class Application {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
         Preprocessing preprocessing = new Preprocessing();
+
         IOProcessor ioProcessor = new IOProcessor(inputView, outputView, preprocessing);
         Calculation calculation = new Calculation();
 
