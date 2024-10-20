@@ -36,17 +36,25 @@ public class Application {
                 tokens.add(token);
             } else if (token.contains("//") && token.contains("\\n")) { // 커스텀 구분자 등록
                 String[] customArray = token.split("//");
-                if (!customArray[0].isEmpty()) {
+                if (!customArray[0].isEmpty() && isNumber(customArray[0])) {
                     tokens.add(customArray[0]);
                 }
                 customArray = customArray[1].split("\\\\n"); // \n 문자 그대로 분리
-                delim.append(customArray[0]);
+                registerDelim(customArray);
                 splitInput(customArray[1], tokens);
             } else if (isDelimIn(token)) { // 커스텀 구분자 등록 후 기본 구분자 다음에 나오는 토큰 ex. 1,2//;\n1,2;3
                 splitInput(token, tokens);
             } else {  // 음수 혹은, 기본 구분자와 커스텀 구분자가 아닌 문자열
                 throw new IllegalArgumentException("입력 문자열에 허용되지 않는 문자열이 포함되어 있습니다. (ex. 음수, 기본 지정자와 커스텀 지정자 외의 문자)");
             }
+        }
+    }
+
+    private static void registerDelim(String[] customArray) {
+        if (customArray[0].length() == 1) {
+            delim.append(customArray[0]);
+        } else {
+            throw new IllegalArgumentException("커스텀 구분자는 문자 하나만 등록 가능합니다.");
         }
     }
 
