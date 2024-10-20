@@ -64,5 +64,14 @@ class DelimiterExtractorTest {
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(ErrorMessage.CUSTOM_DELIMITER_CANNOT_CONTAIN_NUMERIC.getMessage());
         }
+
+        @Test
+        void 커스텀_구분자로_공백을_허용한다() {
+            // given
+            String input = "// \\n1 2 3";
+
+            // when & then
+            assertThatNoException().isThrownBy(() -> DelimiterExtractor.parse(input));
+        }
     }
 }
