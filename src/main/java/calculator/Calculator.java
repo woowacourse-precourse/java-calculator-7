@@ -8,11 +8,14 @@ public class Calculator {
 			throw new IllegalArgumentException("빈 사용자 입력"); 
 		}
 		String customDelimiter = findDelimiter(input);
-		int delmiiterEndIdx = findDelimiterEndIndex(input);
-		String[] numbers = splitString(input, customDelimiter, delmiiterEndIdx);
+		int beginIndex = findDelimiterEndIndex(input);
+		String[] numbers = splitString(input, customDelimiter, beginIndex);
 		long result = 0;
 		for (String num : numbers){
-			result += atoi(num);
+			if (result + charToInt(num) > Integer.MAX_VALUE){
+				throw new IllegalArgumentException("INT를 초과하는 합 : " + result + " + " + charToInt(num));
+			}
+			result += charToInt(num);
 		}
 		System.out.println("결과 : " + result);
 	}
@@ -45,7 +48,7 @@ public class Calculator {
 		return customSuffixIndex + 2; // 커스텀 구분자 지정 문자를 뺀 끝 인덱스 반환
 	}
 
-	public static String[] splitString(String input, String delimiter, int beginIndex) {
+	private static String[] splitString(String input, String delimiter, int beginIndex) {
 		String newString = input;
 
 		if (beginIndex != 0) {
@@ -55,7 +58,7 @@ public class Calculator {
 		return newString.split("[" + delimiter + "]"); // 복수의 커스텀 구분자를 분리해서 사용 []
 	}
 
-	public static int atoi(String num) {
+	private static int charToInt(String num) {
 		long	result = 0;
 		int		digit;
 		char	charNum;
@@ -66,6 +69,9 @@ public class Calculator {
 				throw new IllegalArgumentException("잘못된 사용자 입력 : " + charNum);
 			}
 			digit = charNum - '0';
+			if (result * 10 + digit > Integer.MAX_VALUE){
+				throw new IllegalArgumentException("INT를 초과하는 값");
+			}
 			result = result * 10 + (digit);
 		}
 		return (int)result;
