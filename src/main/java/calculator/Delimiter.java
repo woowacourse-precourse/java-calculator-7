@@ -15,21 +15,11 @@ public class Delimiter {
         this.value = value;
     }
 
-    public static Delimiter createDefaultDelimiter() {
-        return new Delimiter(COMMA_DELIMITER + COLON_DELIMITER);
-    }
-
-    public static Delimiter createCustomDelimiter(String value) {
-        if (isNotCustomDelimiter(value)) {
-            throw new IllegalArgumentException("[ERROR] 커스텀 구분자가 잘못된 형식입니다. 형식은 " + CUSTOM_DELIMITER_PREFIX
-                    + "와 구분자, 그리고 " + CUSTOM_DELIMITER_SUFFIX + "으로 시작해야 합니다.");
+    public static Delimiter create(String value) {
+        if (isCustomDelimiter(value)) {
+            return createCustomDelimiter(value);
         }
-
-        String customDelimiter = value.substring(2, locateCustomDelimiterSuffix(value));
-        if (customDelimiter.isEmpty()) {
-            throw new IllegalArgumentException("[ERROR] 커스텀 구분자가 존재하지 않습니다.");
-        }
-        return new Delimiter(customDelimiter);
+        return createDefaultDelimiter();
     }
 
     public static int locateCustomDelimiterSuffix(String value) {
@@ -38,10 +28,6 @@ public class Delimiter {
 
     public static boolean isCustomDelimiter(String value) {
         return value.startsWith(CUSTOM_DELIMITER_PREFIX) && value.contains(CUSTOM_DELIMITER_SUFFIX);
-    }
-
-    public static boolean isNotCustomDelimiter(String value) {
-        return !isCustomDelimiter(value);
     }
 
     @Override
@@ -62,5 +48,17 @@ public class Delimiter {
 
     public String getValue() {
         return value;
+    }
+
+    private static Delimiter createDefaultDelimiter() {
+        return new Delimiter(COMMA_DELIMITER + "|" + COLON_DELIMITER);
+    }
+
+    private static Delimiter createCustomDelimiter(String value) {
+        String customDelimiter = value.substring(2, locateCustomDelimiterSuffix(value));
+        if (customDelimiter.isEmpty()) {
+            throw new IllegalArgumentException("[ERROR] 커스텀 구분자가 존재하지 않습니다.");
+        }
+        return new Delimiter(customDelimiter);
     }
 }

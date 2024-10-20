@@ -14,14 +14,16 @@ public class StringSumCalculator {
 
     public void sum() {
         String input = inputHandler.input();
+        Delimiter delimiter = Delimiter.create(input);
+        String numbersWithDelimiter = removeDelimiterDefinition(input);
+        splitAndSum(numbersWithDelimiter, delimiter);
+    }
+
+    private String removeDelimiterDefinition(String input) {
         if (Delimiter.isCustomDelimiter(input)) {
-            Delimiter customDelimiter = Delimiter.createCustomDelimiter(input);
-            String numbersWithDelimiter = input.substring(Delimiter.locateCustomDelimiterSuffix(input) + 2);
-            splitAndSum(numbersWithDelimiter, customDelimiter);
-        } else {
-            Delimiter defaultDelimiter = Delimiter.createDefaultDelimiter();
-            splitAndSum(input, defaultDelimiter);
+            return input.substring(Delimiter.locateCustomDelimiterSuffix(input) + 2);
         }
+        return input;
     }
 
     private void splitAndSum(String numbersWithDelimiter, Delimiter delimiter) {
