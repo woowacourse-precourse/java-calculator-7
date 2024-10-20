@@ -10,7 +10,14 @@ public class ConsoleInputHandler implements InputHandler {
     @Override
     public String getUserInput() {
         String userInput = Console.readLine();
+        if (inputIsEmpty(userInput)) {
+            return "0";
+        }
         return convertEscapeNewLine(userInput);
+    }
+
+    private boolean inputIsEmpty(String userInput) {
+        return "".equals(userInput);
     }
 
     private String convertEscapeNewLine(String input) {
