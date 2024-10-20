@@ -10,6 +10,11 @@ public class UserOutputView {
         System.out.println("사용자가 입력한 값 : " + userInput);
     }
 
+    public void printTokens(String[] tokens){
+        for(String token : tokens){
+            System.out.print(token + " ");
+        }
+    }
 
 
 }
