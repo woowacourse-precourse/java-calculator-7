@@ -18,6 +18,7 @@ public class InputValidator {
         hasNumber(input);
         hasDelimiter(input);
         hasMinusNumber(input);
+        isMinusDelimiter = false;
     }
 
     private static void hasNumberAndDelimiter(final String inputs) {
@@ -81,6 +82,10 @@ public class InputValidator {
                 return;
             }
 
+            if(!isMinusDelimiter) {
+                return;
+            }
+
             if (!checkPreviousMinusDelimiter(beforeValue)) {
                 throw new IllegalArgumentException(ENTER_POSITIVE_NUMBER.getMessage());
             }
@@ -94,6 +99,6 @@ public class InputValidator {
     }
 
     private static boolean checkPreviousMinusDelimiter(final char beforeValue) {
-        return isMinusDelimiter && MINUS_DELIMITER.equals(String.valueOf(beforeValue));
+        return MINUS_DELIMITER.equals(String.valueOf(beforeValue));
     }
 }
