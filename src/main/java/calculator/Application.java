@@ -1,7 +1,14 @@
 package calculator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Application {
+
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        // Declare Strategy Context Class, Calculator
+        Calculator addCalculator = new Calculator(new Add());
     }
+
 }
