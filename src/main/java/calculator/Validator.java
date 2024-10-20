@@ -7,7 +7,6 @@ public class Validator {
     public void validate(String userInput, List<String> numbers, String delimiter) {
         checkContainsNegative(userInput, delimiter);
         checkContainsInvalidDelimiter(numbers, delimiter);
-        checkNumbersOnly(userInput);
         checkDelimitersOnly(numbers);
         checkContinuousDelimiter(numbers);
         checkCustomDelimiterNotNumber(delimiter);
@@ -29,16 +28,6 @@ public class Validator {
                 }
             }
         }
-    }
-
-    private boolean checkNumbersOnly(String userInput) {
-        String[] split = userInput.split("");
-        for (String s : split) {
-            if (!isNumeric(s)) {
-                return false;
-            }
-        }
-        throw new IllegalArgumentException("숫자만 입력되었습니다.");
     }
 
     private void checkDelimitersOnly(List<String> numbers) {
