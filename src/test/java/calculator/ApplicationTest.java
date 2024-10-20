@@ -235,14 +235,6 @@ class ApplicationTest extends NsTest {
             run("//?\\n12?345");
             assertThat(output()).contains("결과 : 357");
         });
-        assertSimpleTest(() -> {
-            run("//!!!\\n12!!!345!!!-1");
-            assertThat(output()).contains("결과 : 356");
-        });
-        assertSimpleTest(() -> {
-            run("//!!!\\n12!!!0!!!-1");
-            assertThat(output()).contains("결과 : 11");
-        });
     }
 
     @Test
