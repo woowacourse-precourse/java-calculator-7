@@ -1,13 +1,14 @@
 package calculator;
 
 public class Output {
-    private final int result;
+    private static final String INITIAL_COMMENT = "덧셈할 문자열을 입력해 주세요.";
+    private static final String RESULT_COMMENT = "결과 : ";
 
-    public Output(int result) {
-        this.result = result;
+    public Output() {
+        System.out.println(INITIAL_COMMENT);
     }
 
-    public void printResult() {
-        System.out.print("결과 : " + result);
+    public void printResult(int result) {
+        System.out.print(RESULT_COMMENT + result);
     }
 }

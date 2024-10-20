@@ -2,6 +2,7 @@ package calculator;
 
 public class Application {
     public static void main(String[] args) {
+        Output output = new Output();
         Input input = new Input();
         Separator separator = new Separator(input.getInput());
         separator.extractSeparatorFromInput();
@@ -9,7 +10,6 @@ public class Application {
             throw new IllegalArgumentException();
         }
         separator.separate();
-        Output output = new Output(separator.calculateSum());
-        output.printResult();
+        output.printResult(separator.calculateSum());
     }
 }
