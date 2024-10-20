@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.List;
 
 import calculator.model.Calculator;
+import calculator.model.Command;
 import calculator.model.Number;
 import calculator.view.InputView;
 import calculator.view.OutputView;
@@ -21,7 +22,8 @@ public class CalculatorController {
     }
 
     public void run() {
-        List<Number> numbers = inputView.readNumbers();
+        Command command = Command.from(inputView.readCommand());
+        List<Number> numbers = command.extractNumbers();
         BigInteger result = calculator.sum(numbers);
         outputView.printResult(result);
     }
