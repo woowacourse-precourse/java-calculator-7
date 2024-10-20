@@ -34,7 +34,6 @@ public class Adder {
     }
 
     public int addAll(Queue<String> string) {
-        System.out.println(string);
         while (!string.isEmpty()) {
             separatedNumberString = string.poll();
             try {
