@@ -49,5 +49,4 @@ class CalculationStringTest {
                 .isInstanceOf(IllegalArgumentException.class)
                         .hasMessage("구분자와 정수 이외 다른 문자는 입력x");
     }
-
 }
