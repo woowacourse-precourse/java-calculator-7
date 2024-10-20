@@ -7,17 +7,19 @@ import java.util.Set;
 
 public class OperandManager {
     private final List<BigInteger> operands;
+    private final SeparatorManager separatorManager;
 
-    public OperandManager() {
+    public OperandManager(SeparatorManager separatorManager) {
         this.operands = new LinkedList<>();
+        this.separatorManager = separatorManager;
     }
 
     public List<BigInteger> getOperands() {
         return this.operands;
     }
 
-    public void save(String operandCandidates, Set<String> separators) {
-        String[] splitOperandCandidates = split(operandCandidates, separators);
+    public void save(String operandCandidates) {
+        String[] splitOperandCandidates = split(operandCandidates);
         for (String operandCandidate : splitOperandCandidates) {
             validate(operandCandidate);
             if(!operandCandidate.isEmpty()) {
@@ -26,8 +28,8 @@ public class OperandManager {
         }
     }
 
-    private String[] split(String operandCandidates, Set<String> separators) {
-        for (String separator : separators) {
+    private String[] split(String operandCandidates) {
+        for (String separator : separatorManager.getSeparators()) {
             operandCandidates = operandCandidates.replace(separator, " ");
         }
         return operandCandidates.trim().split("\\s+");

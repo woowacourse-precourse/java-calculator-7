@@ -16,8 +16,8 @@ public class Application {
             separatorManager.save(inputManager.getSeparatorCandidate());
         }
 
-        OperandManager operandManager = new OperandManager();
-        operandManager.save(inputManager.getOperandCandidates(), separatorManager.getSeparators());
+        OperandManager operandManager = new OperandManager(separatorManager);
+        operandManager.save(inputManager.getOperandCandidates());
 
         Operator operator = new Operator();
         BigInteger result = operator.add(operandManager.getOperands());
