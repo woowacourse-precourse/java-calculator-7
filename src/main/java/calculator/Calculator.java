@@ -1,7 +1,5 @@
 package calculator;
 
-import java.util.regex.Pattern;
-
 public class Calculator {
     public int calculate(String input) {
         if (input.trim().isEmpty() || input == null) {
@@ -21,10 +19,8 @@ public class Calculator {
 
             // 커스텀 구분자 추출
             String customDelimiter = input.substring(2, delimiterIndex);
-            delimiter = Pattern.quote(customDelimiter); // Regex에서 사용할 수 있도록 이스케이프
-            input = input.substring(delimiterIndex + 1);
-
-            System.out.println("커스텀 구분자 : " + customDelimiter);
+            delimiter = customDelimiter;
+            input = input.substring(delimiterIndex + 2);
         }
 
         // 3. 숫자 처리
