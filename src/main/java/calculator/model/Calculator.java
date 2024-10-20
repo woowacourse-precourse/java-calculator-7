@@ -3,8 +3,8 @@ package calculator.model;
 import calculator.validation.Validator;
 
 public class Calculator {
-    public static String plus(FormulaHandler customDelimiter){
-        String[] splitedNumbers = Splitter.splitNumbers(customDelimiter);
+    public static String plus(FormulaHandler formulaHandler){
+        String[] splitedNumbers = Splitter.splitNumbers(formulaHandler);
         int sumOfNumbers = 0;
 
         for (String token : splitedNumbers) {
