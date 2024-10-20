@@ -12,8 +12,13 @@ public class StringParser {
         if (inputString == null || inputString.isBlank()) {
             throw new IllegalArgumentException("식을 입력하지 않았습니다.");
         }
-        String noSpaceString = inputString.replace(" ", "");
-        String[] numberStrings = noSpaceString.split(separator);
+
+        if (separator.contains(" ")) {
+            inputString = inputString.trim();
+        } else {
+            inputString = inputString.replace(" ", "");
+        }
+        String[] numberStrings = inputString.split(separator);
 
         //형변환
         for (String numberString : numberStrings) {

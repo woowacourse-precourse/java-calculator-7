@@ -151,6 +151,10 @@ class ApplicationTest extends NsTest {
             run("//,:\\n4:3,1");
             assertThat(output()).contains("결과 : 8"); //4+3+1=8
 
+            //커스텀 구분자에 공백을 사용한 상황
+            run("//, \\n4 3,1 2");
+            assertThat(output()).contains("결과 : 10"); //4+3+1+2=10
+
         });
     }
 
