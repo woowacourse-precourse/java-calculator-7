@@ -30,6 +30,10 @@ public class InputParser {
     public void extractNumbers(Vector<Integer> extractedNumbers) {
         String target = inputString;
         target = removeDelimiterCreator(target);
+        
+        if (target.isEmpty()) {
+            return;
+        }
 
         String regExp = generateRegex();
         String[] extractedStrings = target.split(regExp);

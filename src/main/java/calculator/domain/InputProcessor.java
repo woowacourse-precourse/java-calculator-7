@@ -20,7 +20,6 @@ public class InputProcessor {
             inputParser.parseInput(inputString, extractedNumbers);
             result = getSum(extractedNumbers);
         }
-
     }
 
     public int getResult() {
