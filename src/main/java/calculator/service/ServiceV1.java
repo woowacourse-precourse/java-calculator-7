@@ -27,14 +27,13 @@ public class ServiceV1 implements Service {
 
 
     public String checkTypeOfInput(String input) {
-        char[] inputToCharArray = input.toCharArray();
 
         if (input.startsWith(StringConst.CUSTOM_START_STRING) && input.contains(StringConst.LINE_SEPARATOR_STRING)) {
-            return "CustomInput";
+            return StringConst.CUSTOM_INPUT;
         }
 
         if (input.contains(StringConst.COMMA) || input.contains(StringConst.COLON)) {
-            return "DefaultInput";
+            return StringConst.DEFAULT_INPUT;
         }
 
         throw new IllegalArgumentException();
