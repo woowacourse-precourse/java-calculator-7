@@ -38,6 +38,8 @@ public class Application {
             // 숫자만 있는 경우
             if (isNumeric(str)) { // 문자열에 문자가 포함되어 있나?
                 return Integer.parseInt(str);
-            }
+            } //공백만 있는 경우
+            else if (str.isEmpty() || str.trim().isEmpty()) { // 문자가 포함되어 있지만 공백만 있나?
+                return 0;
         }
     }
