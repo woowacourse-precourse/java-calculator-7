@@ -11,38 +11,37 @@ public class CalculatorService {
 
     public void separate(List<String> separators, String expression) {
         String cleanedExpression = expression.replaceAll("\\s+", "");
-        customSeparate(cleanedExpression);
+        String customSeparator = extractCustomSeparator(cleanedExpression);
+
+        if (customSeparator != null) {
+            separators.add(customSeparator);
+        }
 
 //        this.tokens = cleanedExpression.split(String.join("|", separators));
 //        validateIsNumber(tokens);
 //        validateIsPositiveNumber(tokens);
     }
 
-    private void customSeparate(String expression) {
+    private String extractCustomSeparator(String expression) {
         Matcher matcher = CUSTOM_SEPARATOR_REGEX.matcher(expression);
         if (hasCustomSeparator(expression, matcher)) {
-            String customSeparator = extractCustomSeparator(matcher);
+            String customSeparator = matcher.group(1);
             validateSingleCharacterSeparator(customSeparator);
+            return customSeparator;
         }
+        return null;
 
-    }
-
-    private String extractCustomSeparator(Matcher matcher) {
-        System.out.println(matcher.group(1));
-        return matcher.group(1);
     }
 
     private boolean hasCustomSeparator(String expression, Matcher matcher) {
         if (expression.startsWith("//") && matcher.find()) {
             return true;
         }
-
         return false;
     }
 
     private void validateSingleCharacterSeparator(String separator) {
         Validator.validateSingleCharacterSeparator(separator);
-
     }
 
     private void validateIsNumber(String[] tokens) {

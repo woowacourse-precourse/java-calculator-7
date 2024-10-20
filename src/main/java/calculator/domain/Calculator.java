@@ -20,4 +20,9 @@ public class Calculator {
         return separators;
     }
 
+    public void addSeparator(String separator) {
+        if (!separators.contains(separator)) {
+            separators.add(separator);
+        }
+    }
 }
