@@ -33,6 +33,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자_및_기본구분자_외에_사용(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\\n1;2=3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
@@ -55,6 +63,8 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 965");
         });
     }
+
+
 
     @Test
     void 숫자만_입력_될_경우(){
