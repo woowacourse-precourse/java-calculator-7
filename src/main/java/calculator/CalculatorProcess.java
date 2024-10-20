@@ -77,8 +77,8 @@ public class CalculatorProcess {
         int[] divideInteger = new int[divideString.length];
         for(int i=0;i<divideString.length;i++){
             divideInteger[i] = Integer.parseInt(divideString[i]);
-            if(divideInteger[i]==0){
-                // 유효하지 않은 문자열 (구분자를 제외한 문자열이 숫자 0을 포함하고 있을 경우)
+            if(divideInteger[i]<=0){
+                // 유효하지 않은 문자열 (구분자를 제외한 문자열이 숫자 0이나 음수를 포함하고 있을 경우)
                 throw new IllegalArgumentException();
             }
         }
