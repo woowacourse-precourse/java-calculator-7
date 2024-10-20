@@ -94,7 +94,7 @@ public class Application {
         for (int i = 1; i < tokens.size(); i++) {
             String token = tokens.get(i);
             int[] b = stringToIntArray(token, max_len);
-
+            addArrays(a, b, token.length());
         }
         return "";
     }
@@ -107,5 +107,18 @@ public class Application {
         return array;
     }
 
+    private static void addArrays(int[] a, int[] b, int min_len) {
+        for (int i = 0; i < a.length; i++) {
+            int value = a[i] + b[i];
+            a[i] = value % 10;
+            if (value > 9) {
+                a[i + 1] = a[i + 1] + 1;
+            } else {
+                if (i > min_len) {
+                    break;
+                }
+            }
+        }
+    }
 }
 
