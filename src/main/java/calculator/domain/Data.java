@@ -36,6 +36,7 @@ public class Data {
         }
         separators = handleSeparator();
         String[] extractedStrings = removeSeparator();
+        SeparatorValidator.validate(extractedStrings);
         return NumberValidator.convertNumbers(extractedStrings);
     }
 
