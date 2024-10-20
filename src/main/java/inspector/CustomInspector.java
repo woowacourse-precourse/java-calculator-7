@@ -1,5 +1,7 @@
 package inspector;
 
+import static exceptHandler.CalculatorException.detectCustomSeparatorFormat;
+
 public class CustomInspector extends ContentInspector {
     protected String originalContent;
     private String convertedContent;
@@ -19,11 +21,6 @@ public class CustomInspector extends ContentInspector {
         inspecting(separator, convertedContent);
     }
 
-    private void detectCustomSeparatorFormat(String prefix, String suffix) {
-        if (!prefix.equals("//") || !suffix.equals("\\n")) {
-            throw new IllegalArgumentException("커스텀 구분자의 생성 형식에 맞지 않음");
-        }
-    }
 
     private void separatorRegistration() {
         separator = separator.concat("|" + originalContent.charAt(2));

@@ -1,5 +1,7 @@
 package calculator;
 
+import static exceptHandler.CalculatorException.detectNegativeValueException;
+
 import camp.nextstep.edu.missionutils.Console;
 import inspector.ContentInspector;
 import inspector.InspectorSelector;
@@ -45,12 +47,6 @@ public class Calculator {
             return BigInteger.ZERO;
         } else {
             return new BigInteger(content);
-        }
-    }
-
-    private void detectNegativeValueException(BigInteger bigInteger) {
-        if (bigInteger.compareTo(BigInteger.ZERO) < 0) {
-            throw new IllegalArgumentException("음수가 입력되었음");
         }
     }
 
