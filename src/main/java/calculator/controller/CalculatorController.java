@@ -2,6 +2,7 @@ package calculator.controller;
 
 import calculator.model.UserString;
 import calculator.view.InputView;
+import java.math.BigInteger;
 
 public class CalculatorController {
 
@@ -11,11 +12,11 @@ public class CalculatorController {
         this.inputView = inputView;
     }
 
-    public int process() {
+    public BigInteger process() {
         String userInput = inputView.input();
 
         if (userInput.isBlank()) {
-            return 0;
+            return new BigInteger("0");
         }
 
         UserString userString = new UserString(userInput);
