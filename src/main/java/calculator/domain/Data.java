@@ -20,6 +20,14 @@ public class Data {
         numbersForSum = handleInputString();
     }
 
+    public int calculateAddition() {
+        int sum = 0;
+        for (int number : numbersForSum) {
+            sum += number;
+        }
+        return sum;
+    }
+
     private List<Integer> handleInputString() {
         if (hasEmptyString()) {
             numbersForSum.add(0);
