@@ -1,4 +1,4 @@
-package calculator.service;
+package calculator.service.separator;
 
 import calculator.util.Constants;
 import java.util.List;
@@ -13,7 +13,7 @@ public class Separators {
     }
 
     public static Separators init() {
-        List<Separator> defaultSeparators = SeparatorType.getDefaults()
+        List<Separator> defaultSeparators = DefaultSeparatorType.getDefaults()
                 .stream()
                 .map(Separator::create)
                 .collect(Collectors.toList());
@@ -29,13 +29,13 @@ public class Separators {
         if (isDefaultSeparator(separator.getRegex())) {
             throw new IllegalArgumentException("기본 구분자인 쉼표(,)와 콜론(:)은 커스텀 구분자로 사용할 수 없어요. 다른 구분자를 사용해주세요.");
         }
-        if (separators.size() >= Constants.MAX_CUSTOM_SEPARATORS) {
+        if (separators.size() >= Constants.MAX_SEPARATORS) {
             throw new IllegalArgumentException("한 번에 하나의 커스텀 구분자만 추가할 수 있어요.");
         }
     }
 
     private boolean isDefaultSeparator(String regex) {
-        List<String> defaultSeparators = SeparatorType.getDefaults();
+        List<String> defaultSeparators = DefaultSeparatorType.getDefaults();
         return defaultSeparators.stream()
                 .anyMatch(defaultSeparator -> defaultSeparator.equals(regex));
     }

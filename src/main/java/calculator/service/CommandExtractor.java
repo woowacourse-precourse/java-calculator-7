@@ -1,5 +1,6 @@
 package calculator.service;
 
+import calculator.service.separator.Separator;
 import calculator.util.Constants;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

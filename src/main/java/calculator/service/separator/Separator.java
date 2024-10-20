@@ -1,4 +1,4 @@
-package calculator.service;
+package calculator.service.separator;
 
 import calculator.util.Constants;
 
@@ -25,8 +25,8 @@ public class Separator {
         if (regex.matches(Constants.POSITIVE_NUMBER_REGEX)) {
             throw new IllegalArgumentException("숫자는 커스텀 구분자로 사용할 수 없어요. 다른 구분자를 사용해주세요.");
         }
-        if (!SeparatorType.isPermitted(regex)) {
-            String reason = SeparatorType.getReason(regex);
+        if (!UnsupportedSeparatorType.isUnsupportedSeparator(regex)) {
+            String reason = UnsupportedSeparatorType.getReason(regex);
             throw new IllegalArgumentException(
                     String.format("해당 구분자(%s)는 커스텀 구분자로 사용할 수 없어요. (사유: %s) 다른 구분자를 사용해주세요.", regex, reason));
         }
