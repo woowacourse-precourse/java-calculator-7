@@ -43,23 +43,15 @@ public class StringCalculator {
 
     private int sum(String[] numbers) {
         int total = 0;
-        List<Integer> negatives = new ArrayList<>();
-
         for (String number : numbers) {
             if (!number.trim().isEmpty()) {
                 int num = parseNumber(number.trim());
                 if (num < 0) {
-                    negatives.add(num);
-                } else {
-                    total += num;
+                    throw new IllegalArgumentException("음수는 허용되지 않습니다: " + num);
                 }
+                total += num;
             }
         }
-
-        if (!negatives.isEmpty()) {
-            throw new IllegalArgumentException("음수는 허용되지 않습니다: " + negatives);
-        }
-
         return total;
     }
 

@@ -13,6 +13,7 @@ public class Application {
             outputHandler.printResult(result);
         } catch (IllegalArgumentException e) {
             outputHandler.printError(e.getMessage());
+            throw e;  // 예외를 다시 throw하여 프로그램을 종료하도록 변경
         }
     }
 }
