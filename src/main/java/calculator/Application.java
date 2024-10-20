@@ -8,35 +8,27 @@ public class Application {
         Scanner scanner = new Scanner(System.in);
         System.out.print("덧셈할 문자열을 입력해 주세요.\n");
         String input = scanner.nextLine();
-        int sum = 0;
+        double result;
 
         if (input.startsWith("//")) {
             // 커스텀 문자열 사용
             String [] customInfo = input.split("\\\\n", 2);
-            if (customInfo[0].equals("//") && customInfo[1].startsWith("\\n")){
-                String numbersString = customInfo[1].substring(2);
-                String[] parsedInput = numbersString.split(",|:|\\\\n");
-                for (String number : parsedInput) {
-                    sum += Integer.parseInt(number);
-                }
-            }
-            else{
-                String customString = Pattern.quote(customInfo[0].substring(2));
-                String numbersString = customInfo[1];
-                String[] parsedInput = numbersString.split(String.format("%s|,|:", customString));
-                for (String number : parsedInput) {
-                    sum += Integer.parseInt(number);
-                }
-            }
+            String customString = Pattern.quote(customInfo[0].substring(2));
+            Calculator calculator = new Calculator(customString);
+            String[] parsedInput = calculator.parseString(customInfo[1]);
+            result = calculator.calculate(parsedInput);
         }
         else {
             // 커스텀 문자열 미사용
-            String[] parsedInput = input.split("[,:]");
-
-            for (String s : parsedInput) {
-                sum += Integer.parseInt(s);
-            }
+            Calculator calculator = new Calculator();
+            String[] parsedInput = calculator.parseString(input);
+            result = calculator.calculate(parsedInput);
         }
-        System.out.println("결과 : " + sum);
+
+        if (result == (long) result) {
+            System.out.println("결과 : " + (long) result);
+        } else {
+            System.out.println("결과 : " + result);
+        }
     }
 }
