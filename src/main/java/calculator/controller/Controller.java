@@ -41,4 +41,9 @@ public class Controller {
 
         return utils.sumIntList(lists);
     }
+
+    public void displayCalculationResult(int i) {
+        outputView.printCalculatorResult(i);
+        outputView.printCalculatorEndMessage();
+    }
 }
