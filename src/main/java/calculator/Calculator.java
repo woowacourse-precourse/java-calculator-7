@@ -10,6 +10,8 @@ public class Calculator {
       char index = readLine.charAt(i);
       valid(index);
 
+      Calculator
+
 
     }
     return 0;
