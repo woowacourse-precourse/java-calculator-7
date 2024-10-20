@@ -45,4 +45,15 @@ public class Application {
     private static String[] splitNumbers(String input, String delimiter) {
         return input.split(delimiter);
     }
+
+    private static int sumParsedNumbers(String[] numbers) {
+        int sum = 0;
+        for (String number : numbers) {
+            if (!number.isEmpty()) {
+                int parsedNumber = Integer.parseInt(number);
+                sum += parsedNumber;
+            }
+        }
+        return sum;
+    }
 }
