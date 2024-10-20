@@ -5,6 +5,8 @@ import camp.nextstep.edu.missionutils.Console;
 public class Application {
 
     private static final String DEFAULT_DELIMITERS = ",|:"; // 쉼표 또는 콜론을 기본 구분자로 정의
+    private static final String CUSTOM_DELIMITER_PREFIX = "//"; // 커스텀 구분자 접두사
+    private static final String CUSTOM_DELIMITER_SUFFIX = "\\n"; // 커스텀 구분자 접미사
 
     public static void main(String[] args) {
         // 사용자 입력 받기
@@ -29,7 +31,17 @@ public class Application {
 
         String[] numbers;
 
-        numbers = split(input, DEFAULT_DELIMITERS);
+        // 커스텀 구분자 처리
+        if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
+            int customDelimiterEnd = input.indexOf(CUSTOM_DELIMITER_SUFFIX);  // 커스텀 구분자 끝 인덱스
+            String customDelimiter = input.substring(CUSTOM_DELIMITER_PREFIX.length(),
+                    customDelimiterEnd); // 커스텀 구분자 추출
+            // TODO: 커스텀 구분자에 대한 예외 처리
+            numbers = split(input.substring(customDelimiterEnd + CUSTOM_DELIMITER_SUFFIX.length()),
+                    customDelimiter); // 구분자를 기준으로 문자열 분리
+        } else {
+            numbers = split(input, DEFAULT_DELIMITERS);
+        }
 
         return sum(numbers);
     }
