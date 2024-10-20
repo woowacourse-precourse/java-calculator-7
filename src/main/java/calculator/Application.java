@@ -18,6 +18,8 @@ public class Application {
         if (!isValidInput(input, delimiters, isCustomDelimiter)) {
             throw new IllegalArgumentException("입력값이 유효하지 않습니다.");
         }
+
+        int sumResult = sumNumbers(input, delimiters);
     }
 
     private static boolean isValidInput(String input, String delimiters, boolean isCustomDelimiter) {
@@ -48,5 +50,18 @@ public class Application {
         String customDelimiter = input.substring(startIndex, endIndex);
 
         return customDelimiter;
+    }
+
+    private static int sumNumbers(String input, String delimiters) {
+        String regDelimiters = "[" + delimiters + "]";
+        String[] extractedNums = input.split(regDelimiters);
+
+        int sum = 0;
+
+        for (String num : extractedNums) {
+            sum += Integer.parseInt(num);
+        }
+
+        return sum;
     }
 }
