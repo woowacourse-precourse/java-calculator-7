@@ -1,6 +1,7 @@
 package calculator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -50,6 +51,9 @@ class Calculator {
                 .orElse("")
                 + "0-9]+";
         if (!input.matches(validRegex)) {
+            System.out.println("input = " + input);
+            System.out.println("validRegex = " + validRegex);
+            System.out.println("separators = " + separators);
             throw new IllegalArgumentException("숫자와 구분자로만 이루어진 문자열이 아닙니다.");
         }
     }
@@ -59,6 +63,18 @@ class Calculator {
      * 구분자를 기준으로 숫자를 추출한다.
      */
     private void extractNumbers() {
+        String splitRegex = "[" + separators.stream()
+                .map(Pattern::quote)
+                .reduce((s1, s2) -> s1 + "|" + s2)
+                .orElse("") + "]";
+        String[] split = input.split(splitRegex);
+        for (String s : split) {
+            try {
+                numbers.add(Integer.parseInt(s));
+            } catch (Exception e) {
+                throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
+            }
+        }
     }
 
     /***
@@ -68,6 +84,8 @@ class Calculator {
     public int calculate() {
         checkCustomSeparator();
         checkInput();
+        extractNumbers();
+        System.out.println("numbers = " + numbers);
         return this.result;
     }
 }
