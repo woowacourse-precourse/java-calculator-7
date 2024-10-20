@@ -17,14 +17,9 @@ public class Application {
         String basicPolymerList = "[,:]";
         String customPolymerList = addPolymerList(customPolymer, basicPolymerList);
 
-        // 입력한 문자열에서 구분자를 기준으로 숫자 문자열 분리시키기
-        String[] inputStrList;
 
-        if(customPolymer.length() == 1){
-            inputStrList = inputStr.substring(5,inputStr.length()).split(customPolymerList);
-        } else {
-            inputStrList = inputStr.split(basicPolymerList);
-        }
+        // 입력한 문자열에서 구분자를 기준으로 숫자 문자열 분리시키기
+        String[] inputStrList = separateStr(inputStr, customPolymer, basicPolymerList, customPolymerList);
 
         // 문자열 숫자가 아닌 경우 예외 처리
         boolean isStringNumber = true;
@@ -93,8 +88,22 @@ public class Application {
         if(customPolymer.length() > 0){
             customPolymerList = basicPolymerList.substring(0,basicPolymerList.length()-1) + customPolymer + "]";
         }
-
         return customPolymerList;
     }
+
+    // 입력한 문자열에서 구분자를 기준으로 숫자 문자열 분리시키기
+    private static String[] separateStr(String inputStr, String customPolymer,
+                                        String basicPolymerList, String customPolymerList){
+        String[] inputStrList;
+
+        if(customPolymer.length() == 1){
+            inputStrList = inputStr.substring(5,inputStr.length()).split(customPolymerList);
+        } else {
+            inputStrList = inputStr.split(basicPolymerList);
+        }
+
+        return inputStrList;
+    }
+
 
 }
