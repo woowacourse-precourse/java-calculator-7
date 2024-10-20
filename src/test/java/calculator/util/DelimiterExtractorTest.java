@@ -33,5 +33,25 @@ class DelimiterExtractorTest {
             // when & then
             assertThatNoException().isThrownBy(() -> DelimiterExtractor.parse(input));
         }
+
+        @Test
+        void 커스텀_구분자가_없는_경우_예외를_발생시킨다() {
+            // given
+            String input = "//\\n1,2,3";
+
+            // when & then
+            assertThatThrownBy(() -> DelimiterExtractor.parse(input))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(ErrorMessage.CUSTOM_DELIMITER_NOT_FOUND.getMessage());
+        }
+
+        @Test
+        void 커스텀_구분자가_있는_경우_예외를_발생시키지_않는다() {
+            // given
+            String input = "//;\\n1;2;3";
+
+            // when & then
+            assertThatNoException().isThrownBy(() -> DelimiterExtractor.parse(input));
+        }
     }
 }
