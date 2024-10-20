@@ -24,6 +24,12 @@ public class Application {
         return custom_delimiter_numbers;
     }
 
+    private static String[] addCustomDelimiter(String input, String delimiter) {
+        String[] custom_delimiter_numbers = extractCustomDelimiterNumbers(input);
+        custom_delimiter_numbers[0] = String.join("|", delimiter, custom_delimiter_numbers[0]);
+        return custom_delimiter_numbers;
+    }
+
     public static void main(String[] args) {
         // TODO: 프로그램 구현
 
