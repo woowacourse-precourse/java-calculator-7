@@ -14,7 +14,7 @@ public class RunCalculator {
             return;
         }
         long sumResult = delimiterService.DelimiterProcess(input);
-        if(sumResult != 0) {
+        if (sumResult != 0) {
             System.out.println("결과 : " + sumResult);
         }
     }
