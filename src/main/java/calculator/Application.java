@@ -16,18 +16,22 @@ public class Application {
         StringTokenizer st = null;
         BigInteger result = BigInteger.ZERO;
 
-        if (input.matches(pattern)) {
-            String delim = input.substring(2, input.indexOf("\\n"));
-            st = new StringTokenizer(input.substring(input.indexOf("\\n") + 2), delim);
-        } else {
-            st = new StringTokenizer(input, ",:");
+        try {
+            if (input.matches(pattern)) {
+                String delim = input.substring(2, input.indexOf("\\n"));
+                st = new StringTokenizer(input.substring(input.indexOf("\\n") + 2), delim);
+            } else {
+                st = new StringTokenizer(input, ",:");
+            }
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Invalid input");
         }
 
         while (st.hasMoreTokens()) {
             BigInteger value = new BigInteger(st.nextToken());
 
             if (value.signum() < 0) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("Invalid input");
             }
 
             result = result.add(value);
