@@ -18,26 +18,42 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 구분자_단독_존재() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(","))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 빈_문자열(){
         assertSimpleTest(() -> {
-            run(",:");
+            run("");
             assertThat(output()).contains("결과 : 0");
         });
     }
 
     @Test
-    void 음수_구분자_존재(){
+    void 음수_구분자_존재() {
         assertSimpleTest(() -> {
-            run("//-\\n-1-2");
+            run("//-\\n1-2");
             assertThat(output()).contains("결과 : 3");
         });
+    }
+
+    @Test
+    void 잘못된_구분자_존재() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//-\\n-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
 
     @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
@@ -48,9 +64,6 @@ class ApplicationTest extends NsTest {
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
-
-
-
 
 
     @Override
