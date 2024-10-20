@@ -2,9 +2,10 @@ package calculator.view;
 
 public class OutputView {
 
-    private OutputView(){}
+    private OutputView() {
+    }
 
-    public static OutputView createOutputView(){
+    public static OutputView createOutputView() {
         return new OutputView();
     }
 
