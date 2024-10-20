@@ -9,10 +9,22 @@ import java.util.regex.Pattern;
 
 public class InputValidator {
     public Boolean isValidInput(String input) {
+        // TODO: 올바른 형식으로 입력했는지 확인합니다.
+        /* *
+         * 1. 숫자 앞이나 뒤에 문자가 포함되어있는지 확인합니다
+         * 2. 공백 input 이면 return false
+         * **/
+
+        if (isEmptyInput(input)) return false;
+
         if (!isOnlyOneCustomDeclare(input)) return false;
 
         if (isContainInvalidChar(input)) return false;
         return true;
+    }
+
+    public Boolean isEmptyInput(String input) {
+        return input.length() == 0;
     }
 
     public Boolean isOnlyOneCustomDeclare(String inputValue) {
