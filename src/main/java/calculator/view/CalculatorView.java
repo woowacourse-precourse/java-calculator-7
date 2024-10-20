@@ -1,5 +1,7 @@
 package calculator.view;
 
+import calculator.view.constant.ViewMessage;
+
 public class CalculatorView {
 
     public static void inputView() {
