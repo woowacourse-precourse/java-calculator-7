@@ -24,7 +24,7 @@ public class Application {
     public static String[] splitText(String text) { //입력받은 문자열을 구분자로 나눠주는 메서드
         int firstGubunja = text.split("//").length;
         int secondGubunja = text.split("\\\\n").length;
-        if (firstGubunja > 1 && secondGubunja > 1) {
+        if (firstGubunja > 1 && secondGubunja > 1) {//커스텀 구분자 오류 분기처리
             String[] textSplitFirst = text.split("//");
             String[] textSplitSecond = textSplitFirst[1].split("\\\\n");
             String gubunja = textSplitSecond[0];
@@ -48,7 +48,7 @@ public class Application {
                 } else {
                     values[i] = parseIntVal;
                 }
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {//형변환 에러 분기처리
                 throw new IllegalArgumentException("숫자가 아닌 문자 또는 빈칸을 같이 입력하셨습니다.확인 후 다시 입력해주세요.");
             }
         }
