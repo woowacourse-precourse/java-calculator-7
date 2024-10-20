@@ -59,13 +59,17 @@ public class StringParser {
         String delimiterRegEx = "[" + String.join("", delimiters) + "]";
         List<String> stringNumbers = Arrays.asList(expression.split(delimiterRegEx));
 
+        List<Double> numbers = convertStringToDouble(stringNumbers);
+        validatePositiveDoubleRange(numbers);
+
+        return numbers;
+    }
+
+    private List<Double> convertStringToDouble(List<String> stringNumbers) {
         validateNumeric(stringNumbers);
-        List<Double> numbers = stringNumbers.stream()
+        return stringNumbers.stream()
                 .map(Double::parseDouble)
                 .toList();
-
-        validatePositive(numbers);
-        return numbers;
     }
 
     private void validateNumeric(List<String> stringNumbers) {
@@ -76,10 +80,12 @@ public class StringParser {
         });
     }
 
-    private void validatePositive(List<Double> numbers) {
+    private void validatePositiveDoubleRange(List<Double> numbers) {
         numbers.forEach(number -> {
             if (number <= 0) {
                 throw new IllegalArgumentException(ErrorMessage.INPUT_NON_POSITIVE_NUMBER.getMessage());
+            } else if (number > Double.MAX_VALUE) {
+                throw new IllegalArgumentException(ErrorMessage.INPUT_DOUBLE_OVERFLOW_NUMBER.getMessage());
             }
         });
     }
