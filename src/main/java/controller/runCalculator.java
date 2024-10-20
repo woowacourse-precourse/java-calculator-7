@@ -3,7 +3,7 @@ package controller;
 import calculatorservice.DelimiterService;
 import camp.nextstep.edu.missionutils.Console;
 
-public class runCalculator {
+public class RunCalculator {
     public void run() {
         DelimiterService delimiterService = new DelimiterService();
         System.out.println("덧셈할 문자열을 입력해 주세요.");

@@ -2,29 +2,28 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
-
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static vaildation.InputValidation.CheckInput;
 
 class ApplicationTest extends NsTest {
 
     @Test
-    void UseCustomSeparator() {
-        assertSimpleTest(() -> {
-            run("//;\\n1");
-            assertThat(output()).contains("결과 : 1");
-        });
+    void UseCustomSeparator1() {
+        RunException("//;\\n1", "결과 : 1");
     }
 
     @Test
-    void exception_test() {
+    void UseCustomSeparator2() {
+        RunException("//;\\n1;2,5", "결과 : 8");
+    }
+
+    private void RunException(String input, String expected) {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> CheckInput("-1,2,3", ","))
-                    .isInstanceOf(IllegalArgumentException.class);
+            run(input);
+            assertThat(output()).contains(expected);
         });
     }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});

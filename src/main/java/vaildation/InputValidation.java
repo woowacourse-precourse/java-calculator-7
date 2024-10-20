@@ -5,7 +5,7 @@ import exception.CustomDelimiterException;
 public class InputValidation { // 입력의 유효성을 확인하는 클래스이다.
 
     //커스텀 구분자의 유효성에 대해 확인하는 메서드이다.
-    public static String[] checkCustomDelimiter(String input) {
+    public static String[] CheckCustomDelimiter(String input) {
         String[] checkResult = new String[2];
 
         //커스텀 구분자가 존재한다면 유효성 검사와 함께 추출을 시도한다.
@@ -33,7 +33,8 @@ public class InputValidation { // 입력의 유효성을 확인하는 클래스�
 
         String[] tokens = input.split(delimiter); // 구분자를 바탕으로 문자열을 분류한다.
         for (String token : tokens) {
-            CheckNumber(token);
+            if(!token.isBlank())
+                CheckNumber(token);
         }
 
         return delimiter;
