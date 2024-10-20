@@ -9,7 +9,13 @@ import java.util.stream.Collectors;
 
 public class Delimiter {
 
-    private static final Pattern pattern = Pattern.compile("//(.*)\n(.*)");
+    public static final String CUSTOM_DELIMITER = "//(.*)\n(.*)";
+    public static final String BASIC_DELIMITER = ",|:";
+    public static final String INVALID_DELIMITER = "허용되지 않은 구분자가 존재합니다";
+
+    private static final Pattern pattern = Pattern.compile(CUSTOM_DELIMITER);
+    public static final String STRING_BETWEEN_DELIMITER = "|";
+
     private static Set<String> delimiter;
 
     public Delimiter() {
@@ -41,28 +47,26 @@ public class Delimiter {
         return splitedExpression;
     }
 
+    public String[] splitWithDelimiter(String expression) {
+        return expression.split(BASIC_DELIMITER);
+    }
+
+    private String customAndBasicDelimiter() {
+        return delimiter.stream()
+                .collect(Collectors.joining(STRING_BETWEEN_DELIMITER));
+    }
+
     private void checkExpressionHasInvalidExpression(String[] splitedExpression) {
         Arrays.stream(splitedExpression)
-                .forEach(i -> {
-                    validOperandHasInvalidDelimiter(i);
-                });
+                .forEach(i -> validOperandHasInvalidDelimiter(i));
     }
 
     private void validOperandHasInvalidDelimiter(String i) {
         for (char s : i.toCharArray()) {
             if (!Character.isDigit(s)) {
-                throw new NumberFormatException("허용되지 않은 구분자가 존재합니다");
+                throw new IllegalArgumentException(INVALID_DELIMITER);
             }
         }
-    }
-
-    public String[] splitWithDelimiter(String expression) {
-        return expression.split(",|:");
-    }
-
-    private String customAndBasicDelimiter() {
-        return delimiter.stream()
-                .collect(Collectors.joining("|"));
     }
 
 }
