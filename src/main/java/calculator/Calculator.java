@@ -9,6 +9,13 @@ public class Calculator {
         this.delimiters = delimiters;
     }
 
+    /**
+     * 조건에 따라 입력된 문자열의 숫자를 계산하는 메서드입니다. 공백 처리, 숫자만 입력된 경우, 기본 구분자 및 커스텀 구분자를 처리하여 숫자를 합산합니다.
+     *
+     * @param input 사용자 입력 문자열
+     * @return 계산된 합계 결과
+     * @throws IllegalArgumentException 잘못된 형식의 입력이 주어진 경우 발생합니다.
+     */
     public int calculate(String input) {
 
         input = input.trim();
@@ -17,11 +24,12 @@ public class Calculator {
             return 0;
         }
 
+        //숫자만 입력될 때
         if (input.matches("\\d+")) {
             return Integer.parseInt(input);
         }
 
-        // 쉼표, 콜론으로 숫자 분리
+        // 기본 구분자 처리
         if (input.contains(",") || input.contains(":")) {
             String[] numbers = delimiters.defaultDelimiter(input);
             return adder.sumNumbers(numbers);
