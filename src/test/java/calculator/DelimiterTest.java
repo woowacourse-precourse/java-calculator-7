@@ -4,6 +4,8 @@ import calculator.model.Delimiter;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class DelimiterTest {
 
@@ -32,6 +34,14 @@ public class DelimiterTest {
     }
 
     @Test
+    @DisplayName("커스텀 구분자 여러개일 때")
+    void 커스텀_구분자_2개이상_사용() {
+        Delimiter delimiter = new Delimiter();
+
+        Assertions.assertThat(delimiter.splitWithCustomDelimiter("//;@\n1;2@3")).containsExactly("1", "2", "3");
+    }
+
+    @Test
     @DisplayName("커스텀 구분자와 기본구분자는 동시에 사용할 수 있어야 한다")
     void 커스텀_기본_구분자_둘다_분리() {
         Delimiter delimiter = new Delimiter();
@@ -39,7 +49,8 @@ public class DelimiterTest {
         Assertions.assertThat(delimiter.splitWithCustomDelimiter("//;\n1;2,3")).containsExactly("1", "2", "3");
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\n1;2^3", "1;2^3"})
     @DisplayName("허용되지 않은 구분자 있을 시 예외 발생")
     void 허용되지_않은_구분자() {
         Delimiter delimiter = new Delimiter();

@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class Delimiter {
 
-    private static final Pattern pattern = Pattern.compile("//(.)\n(.*)");
+    private static final Pattern pattern = Pattern.compile("//(.*)\n(.*)");
     private static Set<String> delimiter;
 
     public Delimiter() {
@@ -24,12 +24,17 @@ public class Delimiter {
             String[] splitedExpression = splitExpression(m);
             return splitedExpression;
         }
-        return splitWithDelimiter(expression);
+        String[] splitedExpression = splitWithDelimiter(expression);
+        checkExpressionHasInvalidExpression(splitedExpression);
+        return splitedExpression;
     }
 
     private static String[] splitExpression(Matcher m) {
         String customDelimiter = m.group(1);
-        delimiter.add(customDelimiter);
+
+        for (char c : customDelimiter.toCharArray()) {
+            delimiter.add(String.valueOf(c));
+        }
         String delimiterToUse = customAndBasicDelimiter();
         String[] splitedExpression = m.group(2).split(delimiterToUse);
         checkExpressionHasInvalidExpression(splitedExpression);
