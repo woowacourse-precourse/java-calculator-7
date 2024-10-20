@@ -18,12 +18,13 @@ public class Application {
         String[] splitInputNumber = splitInputNumber(inputNumber);
 
         // 빈 배열인 경우
-        if (splitInputNumber.length == 1) {
-            System.out.println("결과 : 0");
-            return;
-        }
+        System.out.println(splitInputNumber.length);
+//        if (splitInputNumber.length == 1) {
+//            System.out.println("결과 : 0");
+//            return;
+//        }
 
-        // 구분된 문자열이 양수인 문자열인지 체크
+        // 구분된 문자열이 양수인 문자열인지 체크1
         validateSplitNumber(splitInputNumber);
         // 결과 출력
         printResult(splitInputNumber);
@@ -51,6 +52,7 @@ public class Application {
         } else {
             // 커스텀 구분자가 없을 때
             splitInputNumber = inputNumber.split(defaultDelimiter);
+//            System.out.println(Arrays.toString(splitInputNumber));
         }
         return splitInputNumber;
     }
@@ -77,7 +79,6 @@ public class Application {
 
     private static void printResult(String[] splitInputNumber) {
         int result = 0;
-
         for (String number : splitInputNumber) {
             result += Integer.parseInt(number);
         }
