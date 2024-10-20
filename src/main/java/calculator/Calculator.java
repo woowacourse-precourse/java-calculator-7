@@ -11,7 +11,7 @@ public class Calculator {
     private List<Delimiter> delimiters;
     private SingleCustomDelimiterParser singleCustomDelimiterParser;
     private String analyzingTarget;
-    private DelimiterChecker delimiterChecker;
+    private DelimiterSplitter delimiterSplitter;
 
     public Calculator() {
         printStartMessage();
@@ -22,20 +22,20 @@ public class Calculator {
 
     public void start() {
         parsingCustomDelimiter();
-        List<Integer> sumTarget = getSumTarget();
-        int sum = calculateSum(sumTarget);
+        List<Number> numbers = getNumbers();
+        int sum = calculateSum(numbers);
         System.out.println("결과 : " + sum);
     }
 
-    private int calculateSum(List<Integer> sumTarget) {
-        return sumTarget.stream()
-                .mapToInt(Integer::intValue)
+    private int calculateSum(List<Number> numbers) {
+        return numbers.stream()
+                .mapToInt(Number::getValue)
                 .sum();
     }
 
-    private List<Integer> getSumTarget() {
-        delimiterChecker = new DelimiterChecker(analyzingTarget, delimiters);
-        return delimiterChecker.splitByDelimiter();
+    private List<Number> getNumbers() {
+        delimiterSplitter = new DelimiterSplitter(analyzingTarget, delimiters);
+        return delimiterSplitter.splitByDelimiter();
     }
 
     private void parsingCustomDelimiter() {
