@@ -36,17 +36,17 @@ public class Application {
                     if(Character.isDigit(tempChar)) {
                         int tempInt = tempChar - '0';
                         tempList.add(tempInt);
-                    }
-                    else {
-                        boolean plusCustom = (tempChar == ',') || (tempChar == ':');
+                    } else {
+                        boolean plusCustom;
                         if(custom != '0') {
                             plusCustom = (tempChar == ',') || (tempChar == ':') || (tempChar == custom);
+                        } else {
+                            plusCustom = (tempChar == ',') || (tempChar == ':');
                         }
 
                         if(plusCustom) {
                             tempListToWholeList(tempList, wholeList);
-                        }
-                        else {
+                        } else {
                             throw new IllegalArgumentException("잘못된 값이 입력되었습니다.");
                         }
                     }
@@ -71,8 +71,6 @@ public class Application {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
-        System.out.println("계산기가 종료되었습니다.");
     }
 
     public static void tempListToWholeList(ArrayList<Integer> tempList, ArrayList<Integer> wholeList) {
