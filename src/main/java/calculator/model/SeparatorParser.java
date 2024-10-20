@@ -1,37 +1,37 @@
 package calculator.model;
 
+import calculator.validator.ParserValidator;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
 
 public class SeparatorParser {
-    private final String SEPARATOR_FORMAT_STRING = "//|\\\\n";
-    private final String BASIC_SEPERATOR = "\\,|\\:";
+    private final String CUSTOM_SEPARATOR_FORMAT_STRING = "//|\\\\n";
+    private final String[] BASIC_SEPARATOR = new String[]{",", ":"};
+    private final ParserValidator parserValidator = new ParserValidator();
 
-    public String[] separatorParse(String input) {
-        List<String> inputSeparatorList = Arrays.stream(input.split(SEPARATOR_FORMAT_STRING))
+    public HashMap<String, String> parseSeparator(String input) {
+        String[] splitInputString = Arrays.stream(input.split(CUSTOM_SEPARATOR_FORMAT_STRING))
                 .map(String::trim)
-                .filter(s -> (!s.isEmpty()))
-                .toList();
+                .filter(s -> !s.isEmpty())
+                .toArray(String[]::new);
 
-        String separator = "";
-        separator += BASIC_SEPERATOR;
+        int numberStringIndex = 0;
+        int separatorStringIndex = 0;
 
-        // validator 과정
-        for (int inputSeparatorListIndex = 0; inputSeparatorListIndex < inputSeparatorList.size() - 1;
-             inputSeparatorListIndex++) {
-            String inputSeparator = inputSeparatorList.get(inputSeparatorListIndex);
-            int inputSeparatorASCIIIndex = (int) inputSeparator.charAt(0);
-            if ((inputSeparatorASCIIIndex >= 65 && inputSeparatorASCIIIndex <= 90) || (
-                    inputSeparatorASCIIIndex >= 97 && inputSeparatorASCIIIndex <= 122)) {
-                separator += ("|" + inputSeparator);
-            } else if ((inputSeparatorASCIIIndex >= 33 && inputSeparatorASCIIIndex <= 47)
-                    || inputSeparatorASCIIIndex >= 58) {
-                separator += ("|\\" + inputSeparator);
-            }
+        HashMap<String, String> separatorAndNumberString = new HashMap<>();
+
+        String separators = splitInputString[separatorStringIndex];
+
+        for (int basicSeparatorIndex = 0; basicSeparatorIndex < BASIC_SEPARATOR.length; basicSeparatorIndex++) {
+            separators += BASIC_SEPARATOR[basicSeparatorIndex];
         }
-        String[] separatedString = new String[2];
-        separatedString[0] = separator;
-        separatedString[1] = inputSeparatorList.getLast();
-        return separatedString;
+
+        separatorAndNumberString.put("separator", separators);
+
+        separatorAndNumberString.put("type", "numberStringWithCustomSeparator");
+        separatorAndNumberString.put("numberString", splitInputString[++numberStringIndex]);
+
+        return separatorAndNumberString;
     }
+
 }
