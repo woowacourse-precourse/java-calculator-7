@@ -45,23 +45,20 @@ public class StringParser {
             String customDelimiterSubstring = input.substring(0, input.indexOf(CUSTOM_DELIMITER_SUFFIX) + 2);
             String customDelimiter = extractCustomDelimiter(customDelimiterSubstring);
             delimiters += "|" + customDelimiter;
-            System.out.println("delimiters : " + delimiters);
         }
         String expression = input.substring(input.indexOf(CUSTOM_DELIMITER_SUFFIX) + 2);
         return expression.split(delimiters);
     }
 
-    public List<Integer> extractNumbers(String input) { //  입력된 문자열에서 올바른 숫자를 추출하는 메서드 
+    public List<Integer> extractNumbers(String input) { //  입력된 문자열에서 올바른 숫자를 추출하는 메서드
         String[] elements = separateElements(input);
         List<Integer> validNumberList = new ArrayList<>();
         for (String element : elements) {
-            System.out.print(element + " ");
-            if (!element.matches("^-?\\d+$")) {
+            if (!element.matches("^\\d+$")) {
                 throw new IllegalArgumentException("잘못된 값을 입력하였습니다.");
             }
             validNumberList.add(Integer.parseInt(element));
         }
-        System.out.println();
         return validNumberList;
     }
 }
