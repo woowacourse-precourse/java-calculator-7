@@ -5,17 +5,18 @@ public class StringValidator {
 
     public String validateAndProcess(String input) {
         if (isEmpty(input)) {
-            return "0";
+            return "결과 : 0";
         }
 
-        if (isSinglePositiveNumber(input)) {
-            return input;
+        String singleNumber = isSinglePositiveNumber(input);
+        if (singleNumber != null) {
+            return "결과 : " + singleNumber;
         }
 
         String delimiter = determineDelimiter(input);
         String numbersString = extractNumbersString(input);
 
-        return validateNumbers(numbersString, delimiter);
+        return calculateSum(numbersString, delimiter);
     }
 
     private boolean isEmpty(String input) {
@@ -55,25 +56,21 @@ public class StringValidator {
         return input;
     }
 
-    private String validateNumbers(String input, String delimiter) {
+    private String calculateSum(String input, String delimiter) {
         String[] numbers = input.split(delimiter);
-        StringBuilder result = new StringBuilder();
+        int sum = 0;
         for (String number : numbers) {
-            int value = parsePositiveInt(number.trim());
-            result.append(value).append(",");
+            sum += parsePositiveInt(number.trim());
         }
-        if (!result.isEmpty()) {
-            result.setLength(result.length() - 1);
-        }
-        return result.toString();
+        return "결과 : " + sum;
     }
 
-    private boolean isSinglePositiveNumber(String input) {
+    private String isSinglePositiveNumber(String input) {
         try {
-            parsePositiveInt(input.trim());
-            return !input.contains(",") && !input.contains(":");
+            int value = parsePositiveInt(input.trim());
+            return (!input.contains(",") && !input.contains(":")) ? String.valueOf(value) : null;
         } catch (IllegalArgumentException e) {
-            return false;
+            return null;
         }
     }
 
