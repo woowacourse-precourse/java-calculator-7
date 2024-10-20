@@ -7,30 +7,30 @@ public class Calculator {
     private String output;
     private double sum;
     private boolean hasCustomDelimiter;
-    //    private String customDelimiter;
+    private String customDelimiter;
     private final Parser parser;
     private final DelimiterManager delimiterManager;
 
     public Calculator() {
-//        customDelimiter = "";
+        customDelimiter = "";
         parser = new Parser();
         delimiterManager = new DelimiterManager();
     }
 
     public void readInput(String input) {
+        // 구분자 문자열이 제거된 String 타입의 문자열이 반환됩니다.
         output = parser.parseString(input);
-        // output은 "//.\n"가 delete된 문자열.
         sum(output);
     }
 
     public void sum(String strippedInput) {
         String digitString = "";
         if (Character.isDigit(strippedInput.charAt(0)) != true) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Invalid String: The input contains invalid characters.");
         }
 
         for (char c : strippedInput.toCharArray()) {
-            if (Character.isDigit(c)) {
+            if (Character.isDigit(c) || (!customDelimiter.equals(".") && c == '.')) {
                 digitString += Character.toString(c);
             } else if (delimiterManager.delimiters.indexOf(c) != -1) {
                 add(digitString);
@@ -46,16 +46,30 @@ public class Calculator {
         sum += Double.valueOf(digitString);
     }
 
+    /**
+     * 지정된 메시지를 프롬프트에 출력하는 메서드
+     */
     public void displayPrompt() {
         System.out.println(PROMPT_MESSAGE);
     }
 
+    /**
+     * 지정된 형식으로 문자열에서 추출한 숫자를 더한 값을 출력하는 메서드
+     */
     public void printSum() {
         System.out.println(String.format("결과 : %.0f", sum));
     }
 
+
+    /** 입력받은 문자열을 파싱하는 클래스 */
     private class Parser {
 
+        /**
+         * DELIMITER_PREFIX: 커스텀 구분자 정의 접두사
+         * DELIMITER_SUFFIX: 커스텀 구분자 정의 접미사
+         * START_INDEX: StringBuilder.delete() 메서드 호출 시, 잘라낼 문자열의 시작 인덱스 값을 나타냅니다.
+         * strippedStringBuilder: String의 가변 객체로, 구분자 섹션을 잘라내기 위해 사용합니다.
+         */
         private static final String DELIMITER_PREFIX = "//";
         private static final String DELIMITER_SUFFIX = "\\n";
         private static final int START_INDEX = 0;
@@ -65,9 +79,8 @@ public class Calculator {
         }
 
         private String parseString(String inputString) {
-            // 문자열 양 끝에 존재하는 Whitespace 및 유니코드 공백 제거
             String strippedString = inputString.strip();
-            // 빈 문자열 처리
+
             if (strippedString.isEmpty()) {
                 return "0";
             }
@@ -91,7 +104,7 @@ public class Calculator {
         }
 
         private void removeDelimiterSuffix(StringBuilder targetStringBuilder) {
-            String customDelimiter = Character.toString(targetStringBuilder.charAt(START_INDEX));
+            customDelimiter = Character.toString(targetStringBuilder.charAt(START_INDEX));
             // DelimiterManager 인스턴스에 customDelimiter 전달
             delimiterManager.addDelimiter(customDelimiter);
             // targetStringBuilder의 customDelimiter 제거
@@ -106,14 +119,20 @@ public class Calculator {
         }
     }
 
-    /* 구분자를 관리하는 클래스. 커스텀 구분자 지정 시, 예외처리와 커스텀 구분자 저장을 담당합니다. */
+    /**
+     * 구분자를 관리하는 클래스.
+     * 커스텀 구분자 지정 시, 예외 처리와 커스텀 구분자 저장을 담당합니다.
+     */
     private class DelimiterManager {
 
-        /* 커스텀 구분자를 포함한 구분자 문자열의 최대 길이 */
+        /**
+         * MAX_CUSTOM_DELIMITERS: 커스텀 구분자를 포함한 구분자 문자열의 최대 길이
+         * delimiters: 구분자 문자열
+         * count: 현재 구분자 문자열의 길이
+         */
+
         private static final int MAX_CUSTOM_DELIMITERS = 3;
-        /* 구분자 문자열 */
         private String delimiters;
-        /* 현재 구분자 문자열의 길이 */
         private int count;
 
         private DelimiterManager() {
