@@ -17,4 +17,9 @@ public class Validator {
                 throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
     }
+
+    public static void validateNull(String input){
+        if(input.isEmpty())
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
+    }
 }
