@@ -21,7 +21,7 @@ public class Extractor {
     public List<Long> extractNumbers(String input) {
         String processedInput = trimAndValidateInput(input);
         String customDelimiter = extractCustomDelimiter(processedInput).orElse("");
-        processedInput = replaceCustomDelimiter(processedInput, customDelimiter);
+        processedInput = addCustomDelimiter(processedInput, customDelimiter);
         return splitAndTrimNumbers(processedInput);
     }
 
@@ -54,6 +54,18 @@ public class Extractor {
         if (delimiter.chars().anyMatch(Character::isDigit)) {
             throw new CustomException(ErrorCode.MISSING_CUSTOM_DELIMITER_END);
         }
+    }
+
+    // 커스텀 구분자 수가
+    private String addCustomDelimiter(String input, String customDelimiter) {
+        return Optional.of(customDelimiter)
+                .filter(delimiter -> !delimiter.isEmpty())
+                .map(delimiter -> {
+                    int delimiterEndIndex = input.indexOf("\\n") + 2;
+                    String mainPart = input.substring(delimiterEndIndex);
+                    return mainPart.replace(delimiter, ","); // 구분자는 쉼표로 바꿔 구분
+                })
+                .orElse(input);
     }
 
     private List<Long> splitAndTrimNumbers(String input) {
