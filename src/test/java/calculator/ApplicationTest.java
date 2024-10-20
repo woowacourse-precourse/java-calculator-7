@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatRuntimeException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
@@ -94,6 +95,14 @@ class ApplicationTest extends NsTest {
       answer.printAns();
 
       assertThat(output()).isEqualTo("결과 : 6");
+    });
+  }
+
+  @Test
+  void 예제_케이스_추가(){
+    assertSimpleTest(() -> {
+      run("1,2:3");
+      assertThat(output()).contains("결과 : 6");
     });
   }
 
