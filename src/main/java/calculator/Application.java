@@ -14,6 +14,19 @@ public class Application {
 }
 
 
+class Calculator {
+
+    public int calculate(String[] numbers) {
+        int sum = 0;
+        for (String number : numbers) {
+            sum += Integer.parseInt(number);
+        }
+        return sum;
+    }
+}
+
+
+
 interface Parser {
     String[] parse(String input) throws IllegalArgumentException;
 }
