@@ -48,7 +48,7 @@ public class UserInput {
         return userInput.substring(endIndex + 2);
     }
 
-    public boolean isCustom() {
+    public boolean hasCustomDelimiter() {
         return userInput.startsWith(Constants.CUSTOM_DELIMITER_PREFIX);
     }
 
