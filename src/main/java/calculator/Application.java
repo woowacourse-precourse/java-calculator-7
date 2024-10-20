@@ -3,24 +3,27 @@ package calculator;
 import utils.ExceptionMessages;
 
 import java.util.Arrays;
-import java.util.Scanner;
+import java.util.NoSuchElementException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
+import camp.nextstep.edu.missionutils.*;
+
 
 public class Application {
     private final static String OR = "|";
     private final static String DEFAULT_SEPARATOR = ",|:";
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = "";
-        if (scanner.hasNextLine()) { // 입력 문자열이 null이 아니라면, 버퍼로부터 입력값을 가져온다.
-            input = scanner.nextLine();
-        }else{ // 빈 문자열의 경우 0 출력 후 바로 종료한다.
+        String input;
+        try {
+            input = Console.readLine();
+        }catch (NoSuchElementException ex){
             System.out.println("결과 : 0");
             return;
+        }catch (Exception ex){
+            throw new IllegalArgumentException();
         }
 
         // 커스텀 구분자를 감싸는 정규식
