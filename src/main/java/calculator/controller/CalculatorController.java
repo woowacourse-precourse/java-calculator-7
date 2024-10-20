@@ -1,11 +1,13 @@
 package calculator.controller;
 
 import calculator.domain.DelimiterManager;
+import calculator.domain.ExpressionSplitter;
 import calculator.domain.StringParser;
 import calculator.dto.AdditionInput;
 import calculator.dto.ParsedComponents;
 import calculator.view.InputView;
 import calculator.view.OutputView;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class CalculatorController {
@@ -26,5 +28,9 @@ public class CalculatorController {
 
         DelimiterManager delimiterManager = new DelimiterManager(parsedComponents.delimiters());
         Pattern delimiterPattern = delimiterManager.createDelimiterPattern();
+
+        ExpressionSplitter expressionSplitter = new ExpressionSplitter(delimiterPattern,
+                parsedComponents.operationalExpression());
+        List<String> splittedExpression = expressionSplitter.splitOperationalExpressionByDelimiters();
     }
 }
