@@ -55,6 +55,8 @@ public class Application {
             sum += number;
         }
 
+        System.out.println("결과 : " + sum);
+
 
     }
     private static boolean isCustomDelimiterPattern(String input) {
