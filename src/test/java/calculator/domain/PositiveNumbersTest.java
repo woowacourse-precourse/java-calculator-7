@@ -2,6 +2,7 @@ package calculator.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -27,6 +28,15 @@ class PositiveNumbersTest {
         PositiveNumbers positiveNumbers = PositiveNumbers.from(numbers);
 
         assertThat(positiveNumbers.sum()).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("덧셈 결과가 15자리를 초과하면 실패한다")
+    void 덧셈_계산_실패() {
+        PositiveNumbers positiveNumbers = PositiveNumbers.from(List.of("1", "999999999999999"));
+
+        assertThatThrownBy(positiveNumbers::sum)
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     private static Stream<Arguments> provideNumbersAndExpectedValue() {
