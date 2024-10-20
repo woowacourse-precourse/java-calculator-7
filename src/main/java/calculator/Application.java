@@ -14,6 +14,8 @@ public class Application {
         int result = 0;
 
         try {
+            System.out.println("덧셈할 문자열을 입력해 주세요.");
+
             if (!scanner.hasNextLine()) {
                 System.out.println("결과 : " + result);
                 return;
@@ -76,7 +78,7 @@ public class Application {
                 } catch (IllegalArgumentException e) {
                     // 숫자가 아닌 부분은 무시하거나 오류 처리
                     System.err.println(e.getMessage());
-                    System.exit(1);
+                    throw e;
                 }
             }
 
@@ -84,7 +86,7 @@ public class Application {
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.err.println("오류 : " + e.getMessage());
-            System.exit(1);
+            throw e;
         } finally {
             scanner.close();
         }
