@@ -1,8 +1,7 @@
-package calculator;
+package calculator.utils;
 
 import static org.assertj.core.api.Assertions.*;
 
-import calculator.utils.ExceptionHandler;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
