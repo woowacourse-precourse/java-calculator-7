@@ -17,10 +17,11 @@ public class CalculatorController {
         String input = calculatorView.readInput();
 
         // 문자열 구분해서 정수 리스트로 변환
-        List<Integer> values = calculatorModel.splitString(input);
+        List<String> numberStrings = calculatorModel.splitString(input);
+        List<Integer> numbers = calculatorModel.convertStringListToIntList(numberStrings);
 
         // 결과 계산
-        int result = calculatorModel.calculateSum(values);
+        int result = calculatorModel.calculateSum(numbers);
 
         // 결과 출력
         calculatorView.printOutputMessage(result);

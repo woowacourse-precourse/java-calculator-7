@@ -18,11 +18,11 @@ class CalculatorModelTest {
         @Test
         void 빈문자열_0반환() {
             // given
-            List<Integer> expected = List.of(0);
+            List<String> expected = List.of("0");
             String input = "";
 
             // when
-            List<Integer> result = calculatorModel.splitString(input);
+            List<String> result = calculatorModel.splitString(input);
 
             // then
             assertThat(result).isEqualTo(expected);
@@ -32,10 +32,10 @@ class CalculatorModelTest {
         @ValueSource(strings = {"1,2,3", "1:2:3", "1,2:3"})
         void 기본_문자열_구분자로_문자열_구분_성공_올바른값_반환(String input) {
             // given
-            List<Integer> expected = List.of(1, 2, 3);
+            List<String> expected = List.of("1", "2", "3");
 
             // when
-            List<Integer> result = calculatorModel.splitString(input);
+            List<String> result = calculatorModel.splitString(input);
 
             // then
             assertThat(result).isEqualTo(expected);
@@ -61,10 +61,10 @@ class CalculatorModelTest {
         @ValueSource(strings = {"//;\\n1;2;3", "//d\\n1d2d3", "//d\\n1d2:3"})
         void 커스텀_문자열_구분자로_문자열_구분_성공(String input) {
             // given
-            List<Integer> expected = List.of(1, 2, 3);
+            List<String> expected = List.of("1", "2", "3");
 
             // when
-            List<Integer> result = calculatorModel.splitString(input);
+            List<String> result = calculatorModel.splitString(input);
 
             // then
             assertThat(result).isEqualTo(expected);
