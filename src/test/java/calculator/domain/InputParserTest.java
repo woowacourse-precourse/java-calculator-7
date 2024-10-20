@@ -13,8 +13,8 @@ class InputParserTest {
     @Test
     void 기본_구분자로_피연산자를_분리한다() {
         // given & when
-        final var calculatorParser = new InputParser();
-        List<Double> operands = calculatorParser.parse("1,2:3");
+        final var inputParser = new InputParser(new Delimiters());
+        List<Double> operands = inputParser.parse("1,2:3");
 
         // then
         assertThat(operands).isEqualTo(new ArrayList<>(Arrays.asList(1.0, 2.0, 3.0)));
@@ -23,7 +23,7 @@ class InputParserTest {
     @Test
     void 커스텀_구분자로_피연산자를_분리한다() {
         // given & when
-        final var calculatorParser = new InputParser();
+        final var calculatorParser = new InputParser(new Delimiters());
         List<Double> operands = calculatorParser.parse("//;\\n1;2;3");
 
         // then
@@ -31,18 +31,9 @@ class InputParserTest {
     }
 
     @Test
-    void 커스텀_구분자가_1글자인지_검증한다(){
-        final var calculatorParser = new InputParser();
-
-        // when & then
-        assertThatThrownBy(() -> calculatorParser.parse("//;;;;\\n1;2;3"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("구분자는 길이가 1인 문자여야 합니다.");
-    }
-
-    @Test
     void 구분자로_구분된_값이_양수인지_검증한다_숫자가_아닌_경우(){
-        final var calculatorParser = new InputParser();
+        // given
+        final var calculatorParser = new InputParser(new Delimiters());
 
         // when & then
         assertThatThrownBy(() -> calculatorParser.parse("//;\\n1;aaaa;3"))
@@ -52,7 +43,8 @@ class InputParserTest {
 
     @Test
     void 구분자로_구분된_값이_양수인지_검증한다_음수인_경우(){
-        final var calculatorParser = new InputParser();
+        // given
+        final var calculatorParser = new InputParser(new Delimiters());
 
         // when & then
         assertThatThrownBy(() -> calculatorParser.parse("//;\\n1;-2;3"))

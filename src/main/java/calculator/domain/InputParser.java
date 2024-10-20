@@ -1,81 +1,68 @@
 package calculator.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 public class InputParser {
-    private final List<Character> delimiters = new ArrayList<>(Arrays.asList(':',','));
+    private final Delimiters delimiters;
+
+    public InputParser(Delimiters delimiters) {
+        this.delimiters = delimiters;
+    }
 
     public List<Double> parse(String input){
-        if(isDelimiterCustom(input)){
-            input = parseAndValidCustomDelimiter(input);
+        List<Double> numbers = new ArrayList<>();
+
+        String delimiterRegex = getDelimiterRegex(input);
+        input = removeDelimiterDefenition(input);
+
+        for(String number : input.split(delimiterRegex)) {
+            validateNumber(number);
+            numbers.add(Double.parseDouble(number));
         }
-        return parseAndValidateOperands(input);
+        return numbers;
     }
 
-    private boolean isDelimiterCustom(String input){
-        return input.startsWith("//");
-    }
-
-    private String parseAndValidCustomDelimiter(String input) {
-        String regex = "^//(.)\\\\n(.*)";
-
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(input);
-
-        if(matcher.find()){
-            char delimiter = matcher.group(1).charAt(0);
-            String pureInput = matcher.group(2);
-
-            if(Character.isDigit(delimiter)){
-                throw new IllegalArgumentException("숫자는 구분자로 사용할 수 없습니다.");
-            }
-            delimiters.add(delimiter);
-            return pureInput;
-        } else{
-            throw new IllegalArgumentException("구분자는 길이가 1인 문자여야 합니다.");
-        }
-    }
-
-
-    private List<Double> parseAndValidateOperands(String sentence){
-        List<Double> operands = new ArrayList<>();
-        double operand;
-        for(String word : sentence.split(generateDelimiterRegex())){
-            operand = parseOperand(word);
-            validateOperand(operand);
-            operands.add(operand);
-        }
-        return operands;
-    }
-
-    private String generateDelimiterRegex(){
+    private String getDelimiterRegex(String input){
         StringBuilder delimiterRegex = new StringBuilder();
-        for(int i=0; i<delimiters.size(); i++){
-            delimiterRegex.append(delimiters.get(i));
-            if(i == delimiters.size()-1){
-                continue;
-            }
+        for(String delimiter : delimiters.getAllDelimiters(input)){
+            delimiterRegex.append(delimiter);
             delimiterRegex.append("|");
         }
-        return delimiterRegex.toString();
+        String result = delimiterRegex.toString();
+        result = result.substring(0, result.length() - 1);
+        return result;
     }
 
-    private double parseOperand(String word){
-        try{
-            return Double.parseDouble(word);
-        } catch (NumberFormatException e){
+    private void validateNumber(String number){
+        if(!isNumeric(number)){
             throw new IllegalArgumentException("피연산자가 숫자가 아닙니다.");
         }
-    }
 
-    private void validateOperand(double operand){
-        if(operand <= 0){
+        if(!isPositive(number)){
             throw new IllegalArgumentException("피연산자가 양수가 아닙니다.");
         }
+    }
+
+    private boolean isNumeric(String number){
+        try{
+            Double.parseDouble(number);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+    }
+
+    private boolean isPositive(String number){
+        return Double.parseDouble(number) > 0;
+    }
+
+    private String removeDelimiterDefenition(String input){
+        if(input.startsWith("//")){
+            return input.substring(5);
+        }
+        return input;
     }
 }
 
