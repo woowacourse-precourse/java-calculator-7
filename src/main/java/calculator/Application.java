@@ -18,14 +18,16 @@ public class Application {
     // 문자열을 받아서 숫자를 더한 결과를 반환하는 함수
     public static int add(String input) {
         if (input == null || input.isEmpty()) {
-            return 0;  // 빈 문자열 처리
+            return 0;  // 빈 문자열이거나 null인 경우 0 반환
         }
 
         String[] numbers = split(input);  // 구분자를 기준으로 문자열 분리
         int sum = 0;
         for (String number : numbers) {
-            int num = toPositiveInt(number);  // 문자열을 정수로 변환
-            sum += num;
+            if (!number.isEmpty()) {  // 숫자가 비어있지 않을 때만 처리
+                int num = toPositiveInt(number);  // 문자열을 정수로 변환
+                sum += num;
+            }
         }
         return sum;
     }
