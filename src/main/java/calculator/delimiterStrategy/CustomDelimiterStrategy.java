@@ -10,7 +10,7 @@ public class CustomDelimiterStrategy implements DelimiterStrategy {
     @Override
     public List<String> setUpDelimiter(String userInput) throws IllegalArgumentException {
         String delimiter = extractDelimiter(userInput);
-        if (isNumber(delimiter)) {
+        if (isContainNumber(delimiter)) {
             throw new IllegalArgumentException("커스텀 구분자는 숫자를 포함하면 안 된다");
         }
         if (isNotChar(delimiter)) {
@@ -33,7 +33,7 @@ public class CustomDelimiterStrategy implements DelimiterStrategy {
         return userInput.substring(start, end);
     }
 
-    private boolean isNumber(String delimiter) {
+    private boolean isContainNumber(String delimiter) {
         return delimiter.matches(".*\\d.*");
     }
 
