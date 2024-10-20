@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Calculator {
-    private static String userInput;
-    private static List<String> numbers = new ArrayList<>();
-    private static int total = 0;
+    private String userInput;
+    private List<String> numbers = new ArrayList<>();
+    private int total = 0;
 
-    public static void run() {
+    public void run() {
         userInput = InputUtils.getInput("덧셈할 문자열을 입력해 주세요.");
 
         if (userInput.isEmpty()) {
@@ -24,20 +24,20 @@ public class Calculator {
         calculating();
     }
 
-    private static void calculating() {
+    private void calculating() {
         numbers = Splitter.getCalculationSectionSplitByDelimiter(userInput);
         checkEachInputIsValid();
         getTotal();
         PrintUtils.print("결과 : " + total);
     }
 
-    private static void checkEachInputIsValid() {
+    private void checkEachInputIsValid() {
         for (String number : numbers) {
             Validator.checkIsNumberValid(number);
         }
     }
 
-    private static void getTotal() {
+    private void getTotal() {
         for (String number : numbers) {
             total += Integer.parseInt(number);
         }
