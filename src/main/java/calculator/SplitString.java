@@ -11,6 +11,7 @@ public class SplitString {
             }
             String customDelimiter = input.substring(2, delimiterIndex);
             delimiter += "|" + customDelimiter;
+            input = input.substring(delimiterIndex + 2);
         }
         return input.split(delimiter);
     }
