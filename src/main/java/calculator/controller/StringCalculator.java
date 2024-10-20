@@ -24,7 +24,7 @@ public class StringCalculator {
 		inputString = validateInput(inputString);
 		List<Integer> numbers = extractNumbers(inputString);
 		int answer = getAnswer(numbers);
-		output.printAnswerMessage(answer);
+		printAnswer(answer);
 	}
 
 	private String getInput() {
@@ -51,5 +51,9 @@ public class StringCalculator {
 	private int getAnswer(List<Integer> numbers) {
 		SumCalculator sumCalculator = new SumCalculator();
 		return sumCalculator.calculate(numbers);
+	}
+
+	private void printAnswer(int answer) {
+		output.printAnswerMessage(answer);
 	}
 }
