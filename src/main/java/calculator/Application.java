@@ -3,34 +3,37 @@ package calculator;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
 
-        //testg
-        String strs = "//;\n1;2;3,4,5:6a";
-        String strs1 = "1,2,3,4:5";
-        ArrayList<String> delimiters = getDelimiter(strs);
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        String inputStr = Console.readLine();  // 입력 받기
+
+        ArrayList<String> delimiters = getDelimiter(inputStr);
 //        if (strs == " ") {
 //            return 0;
 //        }
         if (delimiters.size() > 2) {
-            String regex = checkSpecialDelimiter(strs);
-            strs = changeInputStr(regex,strs);
-            // DEBUG
-        }
-        // error case 확인
-        try {
-            checkForErrors(strs);
-        } catch (IllegalArgumentException e) {
-            System.out.println("에러발생 " + e.getMessage());
+            String regex = checkSpecialDelimiter(inputStr);
+            inputStr = changeInputStr(regex,inputStr);
         }
 
-        // debug
-        for (String delimiter : delimiters) {
-            System.out.println(delimiter);
+        // error case 확인
+        try {
+            checkForErrors(inputStr);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
+
+//        // debug
+//        for (String delimiter : delimiters) {
+//            System.out.println(delimiter.getClass().getName());
+//        }
+        int sumNum = splitDelimiterAddNum(inputStr, delimiters);
+        System.out.println("결과 : " + sumNum);
     }
     public static ArrayList<String> getDelimiter(String inputString){
         ArrayList<String> delimiters = new ArrayList<>();
@@ -71,14 +74,33 @@ public class Application {
         return changeStr;
     }
 
-
     public static void checkForErrors (String inputString){
         String ErrorCase1 = ".*[a-zA-Z].*";//"[^a-zA-Z]";
         Pattern pattern1 = Pattern.compile(ErrorCase1);
         Matcher matcher1 = pattern1.matcher(inputString);
 
         if (matcher1.find()) {
-            throw new IllegalArgumentException("알파벳이 존재");
+            throw new IllegalArgumentException();
         }
+    }
+    public static int splitDelimiterAddNum(String inputString, ArrayList delimiters){
+        StringBuilder newString = new StringBuilder();
+        int sumNum = 0;
+
+        for (int i =0;i<inputString.length();i++){
+            char ch = inputString.charAt(i);
+
+            if (delimiters.contains(String.valueOf(ch))) {
+                sumNum += Integer.parseInt(newString.toString());
+                newString.delete(0,newString.length());
+            } else if (Character.isDigit(ch)) {
+                newString.append(ch);
+            } else {
+                System.out.println("Error 발생 : " +ch);
+//                throw new IllegalArgumentException("특수문자가 발생");
+            }
+        }
+        sumNum += Integer.parseInt(newString.toString());
+        return sumNum;
     }
 }
