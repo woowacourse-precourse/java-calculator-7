@@ -26,6 +26,10 @@ public abstract class CalculatorParser {
 
         String[] splitData = targetInput.split(delimiters, -1);
         List<Integer> numbers = new ArrayList<>();
+        
+        if (targetInput.isEmpty()) {
+            return numbers;
+        }
 
         Arrays.stream(splitData)
                 .filter(data -> {
@@ -35,7 +39,7 @@ public abstract class CalculatorParser {
                     return true;
                 })
                 .forEach(data -> numbers.add(CalculatorParserValidator.parseToInt(data)));
-        
+
         return numbers;
     }
 }

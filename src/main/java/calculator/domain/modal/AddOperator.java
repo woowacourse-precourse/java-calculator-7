@@ -17,7 +17,7 @@ public class AddOperator implements Operator {
         int sum = numbers.stream()
                 .mapToInt(Integer::intValue)
                 .sum();
-        if (sum <= 0) {
+        if (sum < 0) {
             throw InputException.from(ErrorMessage.INTEGER_OUT_OF_RANGE);
         }
         return sum;
