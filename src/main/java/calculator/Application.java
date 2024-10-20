@@ -66,5 +66,15 @@ public class Application {
             }
             System.out.println("결과 : " + sum);
         }
+        /** 기능 3-5 구현
+         * 구분자 없을 경우
+         */
+        else {
+            if (inputData.matches("\\d+")) {                             /** 0~9의 양의 정수 형태 정규표현식 */
+                System.out.println("결과 : " + inputData);
+            } else {
+                throw new IllegalArgumentException("잘못된 값이 입력되었습니다. 프로그램을 종료합니다.");
+            }
+        }
     }
 }
