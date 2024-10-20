@@ -3,6 +3,7 @@ package calculator.controller;
 import calculator.model.CustomDelimiter;
 import calculator.model.Delimiters;
 import calculator.model.InputParser;
+import calculator.model.InputValidator;
 import calculator.model.NumberValidator;
 import calculator.model.PositiveNumbers;
 import calculator.util.PositiveNumberConverter;
@@ -17,6 +18,7 @@ public class CalculatorController {
 
     public void run() {
         String input = readLine();
+        validateInput(input);
         String[] values = parseByDelimiter(input);
         validateNumber(values);
         int[] numbers = convertToInt(values);
@@ -26,6 +28,11 @@ public class CalculatorController {
 
     private String readLine() {
         return inputView.read();
+    }
+
+    private void validateInput(String input) {
+        InputValidator inputValidator = InputValidator.getInstance();
+        inputValidator.validate(input);
     }
 
     private String[] parseByDelimiter(String input) {
