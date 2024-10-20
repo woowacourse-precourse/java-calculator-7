@@ -33,4 +33,17 @@ class StringParser {
 
         return user_input;
     }
+
+    //구분자 설정하는 메서드(findDelimiter)
+    public String findDelimiter(String user_input) {
+        String delimiter;
+
+        if (user_input.matches("^//([^0-9])\\\\(n)(.+)")) {
+            delimiter = String.valueOf(user_input.charAt(2));
+        } else {
+            delimiter = "default";
+        }
+
+        return delimiter;
+    }
 }
