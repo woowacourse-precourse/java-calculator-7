@@ -15,14 +15,15 @@ public class CalculateController {
     }
 
     public void run() {
-        getResult(inputView.inputStrings());
+        int result = calculateSum(inputView.inputStrings());
+        displayResult(result);
     }
 
     private int calculateSum(String input) {
         return StringAddCalculator.splitAndSum(input);
     }
 
-    private void getResult(String input) {
-        outputView.printResult(calculateSum(input));
+    private void displayResult(int result) {
+        outputView.printResult(result);
     }
 }
