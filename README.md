@@ -97,3 +97,105 @@
         ```
         예시 : 2,147,483,648 + 1
         ```
+
+# 고민했던 점들
+
+## 1. 숫자 판단 기준
+
+- 숫자는 int, long, double, short 등이 있다.
+- 그럼 어떤 숫자를 사용할 것인가?
+    - 입출력 요구사항 예시를 고려하면 `int` 를 사용하는 것이 가장 적절하다.
+    - 하지만, 숫자 계산기이므로, 추후 `double`, `long` 등의 숫자 타입을 사용하게 될 가능성이 있다.
+    - 따라서, 숫자 타입을 추후 변경하기 쉽도록 `Number` 타입을 사용하는 것이 좋다고 판단.
+- 결과적으로, 계산기에서는 `Number`, 실제 추출은 `Integer` 를 사용하도록 하고, 내부 로직에서 다른 숫자 타입을 사용하고 싶다면, `NumberDelimiterService` 를 상속받는 클래스를
+  만들어 사용하도록 한다.
+
+## 2. 구분자 추출 기준 및 방법
+
+- 구분자는 Factory 패턴을 사용하여 생산한다.
+    - `DelimiterFactory` 를 사용하여 구분자를 생성한다.
+    - `DelimiterFactory` 는 `Delimiter` 를 생성하는 역할을 한다.
+    - `DelimiterFactory` 는 기본 구분자들을 관리하고, 커스텀 구분자를 생성하는 역할을 한다.
+- 구분자는 `Delimiter` 레코드를 사용해 값 변화를 최소화한다.
+- `Delimiters` 일급 컬렉션을 사용해 여러 구분자를 관리한다.
+    - `List<Delimiter>` 를 다른 클래스에서 직접 사용하지 않고, `Delimiters` 를 사용한다.
+    - 이를 통해 구분자들에 대한 상태와 행위를 한 곳에서 관리할 수 있다.
+
+## 3. 여러 의존성 관리 방법
+
+- `DelimiterFactory`, `CustomDelimiterService`, `DelimiterService` 는 여러 인터페이스들에 대한 의존성이 있다.
+- 의존성 역전 원칙을 지키기 위해 위 클래스들에서 필요한 의존성은 인터페이스로 구현되어 있다.
+- 이를 통해, 의존성을 주입할 때, 인터페이스를 사용하여 의존성을 주입할 수 있다.
+- 하지만, 어떤 클래스에 어떤 구현체를 주입할 지 결정해야 한다.
+- `Application` 에서 구현체를 주입할 수도 있지만, 다음과 같은 문제점이 있다고 판단했다.
+    - `Application` 에서 구현체를 주입하면, `Application` 이 구현체에 대한 의존성을 가지게 된다.
+    - `Application` 이 구현체에 대한 의존성을 가지게 되면, 구현체를 변경할 때, `Application` 의 코드를 변경해야 한다.
+    - `Application` 은 애플리케이션을 실행하는 책임을 가진 클래스이므로, 구현체에 대한 의존성을 가지면 안된다.
+- 이 문제점을 해결하기 위해, 의존성 주입을 책임지는 `CalculatorDependencyRegistry` 인터페이스를 만들었다.
+- `CalculatorDependencyRegistry` 는 일종의 애플리케이션 템플릿으로, 애플리케이션 구동에 필요한 클래스들 간의 구현체를 주입하는 역할을 한다.
+- 만약, 특정 클래스의 구현체를 변경하고 싶다면, `CalculatorDependencyRegistry` 에서 구현체를 변경하면 된다.
+- 현재는 정수 계산기를 구현했으므로, `IntegerCalculatorDependencyRegistry` 를 사용하도록 한다.
+
+## 4. 구분자 추출 방법
+
+- 처음에는 `String.split()` 을 사용하여 구분자를 추출하려 했다.
+- 하지만, `String.split()` 을 사용하게 되면, 코드가 복잡해지고, 가독성이 떨어진다고 판단했다.
+- 따라서, `Patten` 을 사용하여 구분자를 추출하는 방법을 사용하도록 했다.
+- `Pattern` 을 사용하면, 정규식을 사용하여 구분자를 추출할 수 있다.
+- 이를 통해, 구분자를 추출하는 로직을 간단하게 만들 수 있다.
+
+## 5. 유지보수하기 쉬운 예외 처리
+
+- 기존에는, 예외가 발생되어야 하는 지점에서 직접 예외를 발생시켰다.
+- 하지만, 직접 예외를 발생시키면, 유지보수가 힘들 수 있다고 판단했다.
+    - 각 상황 별로 예외 클래스가 변경되어야 한다면? 예외를 발생시키는 코드를 모두 변경해야 한다.
+    - 예외 메시지가 변경되어야 한다면? 예외를 발생시키는 코드를 모두 변경해야 한다.
+- 따라서, 예외를 발생시키는 로직을 별도의 클래스로 분리하고, 예외를 발생시키는 로직을 분리하도록 했다.
+- `ExceptionType` Enum 을 사용하여 예외 타입을 관리하고, `ExceptionFactory` 를 사용하여 예외를 발생시키는 로직을 분리하도록 했다.
+- 이를 통해, 예외를 발생시키는 로직을 변경할 때, `ExceptionFactory` 만 변경하면 된다.
+
+## 6. 추후 확장성을 고려한 구조
+
+- 현재는 숫자 - `Integer` 에 대한 계산기를 구현했다.
+- 추후에는 `Double`, `Long` 등의 숫자 타입을 사용할 수 있을 것이다.
+- 또한, 숫자 뿐 아니라, 문자열 계산기, 불리언 계산기 등 다양한 계산기를 구현할 수 있을 것이다.
+- 이를 고려하여, 여러 인터페이스를 사용하고, 구현체를 주입할 수 있도록 했다.
+- 다른 숫자 계산기를 구현해야 하는 경우(`Double` 계산기로 예를 든다)
+    - `DelimiterService` 를 상속받는 `Double` 타입의 `Service` 를 구현한 후.
+    - `NumberCalculatorDependencyRegistry` 의 새로운 구현체인 `DoubleCalculatorDependencyRegistry` 를 만든다.
+    - `Application` 에서 `DoubleCalculatorDependencyRegistry` 를 사용하도록 변경하면 된다.
+- 숫자가 아닌 다른 계산기를 구현해야 하는 경우(`String` 계산기를 예로 든다)
+    - `NumbeCalculatorDependencyRegistry` 대신, `StringCalculatorDependencyRegistry` 를 만들어 사용하면 된다.
+    - `DelimiterService` 를 상속받는 `String` 타입의 `Service` 를 구현한 후.
+    - `CalculatorDependencyRegistry`의 구현체인 `StringCalculatorDependencyRegistry` 를 만든다.
+    - `Application` 에서 `StringCalculatorDependencyRegistry` 를 사용하도록 변경하면 된다.
+
+## 7. 입/출력의 중앙화
+
+- 현재 요구사항에 따르면, 입력 시, `Console.readLine()` 을 사용하여 입력을 받아야 한다.
+- 현재 요구사항에 따르면, 출력 시, `System.out.println()`, `System.out.print()` 등을 사용하여 출력을 해야 한다.
+- 하지만, 입력 시, `Scanner` 를 사용하도록 요구사항이 변경되면 어떻게 될까?
+    - 모든 `Console.readLine()` 을 `Scanner.nextLine()` 로 변경해야 한다.
+    - 이는 유지보수하기 어렵다.
+- 따라서, 입/출력을 중앙화하는 방법을 사용하도록 했다.
+- `IOConsole` 유틸을 사용하여 입/출력을 중앙화하고, `IOConsole` 을 사용하여 입/출력을 처리하도록 했다.
+- 애플리케이션 전체에서 `IOConsole` 을 사용하도록 하면, 입/출력을 변경할 때, `IOConsole` 만 변경하면 된다.
+
+## 8. InputView 와 OutputView 의 구조
+
+- `InputView` 와 `OutputView` 를 사용하여 입/출력을 처리하도록 했다.
+- 두 가지 옵션이 있었다.
+- **옵션 A**: 모든 input, output 별로 view 클래스 만들기 (예: `SumInputView`, `SumResultOutputView` 등)
+    - 장점 1: 입출력 메서드를 명확하게 분리할 수 있음.
+    - 장점 2: 한 클래스가 너무 많은 책임을 지게 하지 않을 수 있음.
+    - 단점 1: 입출력이 너무 많아지면 클래스가 너무 많아짐.
+    - 단점 2: 클래스가 너무 많아지면, 유지보수가 어려워짐.
+- **옵션 B**: `InputView`, `OutputView` 클래스만 만들고, 내부 메서드로 구분하기
+    - 장점 1: 클래스가 너무 많아지지 않음.
+    - 장점 2: 입출력 메서드가 적을 때 유지보수가 쉬움.
+    - 단점 1: 한 클래스가 너무 많은 책임을 지게 됨.
+    - 단점 2: 입출력 메서드가 너무 많아질 경우, 클래스가 너무 커짐.
+- 결과적으로, **옵션 B**를 선택했다.
+    - 현재 입출력 메서드가 많지 않으므로, 한 클래스에 모든 메서드를 넣어도 괜찮다고 판단했다.
+    - "책임" 의 관점에서 보면, 입력, 출력을 각각 하나의 책임으로 볼 수 있기 때문에, 한 클래스에 모든 메서드를 넣어도 괜찮다고 판단했다.
+    - 만약, 입출력 메서드가 많아진다면, `InputView`, `OutputView` 를 분리할 수 있다 (예: `SumInputView`, `SumResultOutputView` 등).
