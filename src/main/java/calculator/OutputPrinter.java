@@ -1,11 +1,14 @@
 package calculator;
 
+import static calculator.enums.PrintText.PRINT_RESULT;
+import static calculator.enums.PrintText.PROMPT_FOR_INPUT;
+
 public class OutputPrinter {
     public void promptForInput() {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        System.out.println(PROMPT_FOR_INPUT.getPrintText());
     }
 
     public void printResult(int result) {
-        System.out.println("결과 : " + result);
+        System.out.println(PRINT_RESULT.getPrintText() + result);
     }
 }
