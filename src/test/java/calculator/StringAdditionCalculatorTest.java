@@ -1,11 +1,11 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.Test;
-
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.Test;
 
 class StringAdditionCalculatorTest extends NsTest {
 
@@ -59,10 +59,10 @@ class StringAdditionCalculatorTest extends NsTest {
 
     @Test
     void 구분자외_문자포함_테스트() {
-        assertSimpleTest(() -> {
+        assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("//;\\n;)9;1"))
-                    .isInstanceOf(IllegalArgumentException.class);
-        });
+                    .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Test

@@ -1,9 +1,7 @@
 package calculator.controller;
 
-import calculator.model.CalculationInput;
 import calculator.service.CalculatorService;
 import calculator.view.CalculatorView;
-import java.util.ArrayList;
 
 public class CalculatorController {
 
