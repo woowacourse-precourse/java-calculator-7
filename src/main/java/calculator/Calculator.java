@@ -15,7 +15,9 @@ public class Calculator {
     }
 
     private int calculate(String input) {
-        if (input.isEmpty()) return 0;
+        if (input.isEmpty()) {
+            return 0;
+        }
 
         String[] inputSplit = splitStr(input);
         return sumNumber(inputSplit);
@@ -25,8 +27,9 @@ public class Calculator {
         String delimiter = ",|:";
         if (str.startsWith("//")) {
             int start = str.indexOf("\\n");
-            if (start == -1)
+            if (start == -1) {
                 throw new IllegalArgumentException("잘못된 입력입니다: " + str);
+            }
             str = str.substring(start + 2);
         }
 
@@ -38,9 +41,12 @@ public class Calculator {
         int num = 0;
 
         for (String s : str) {
-            if (isNumber(s)) num = Integer.parseInt(s);
-            if (num < 0)
+            if (isNumber(s)) {
+                num = Integer.parseInt(s);
+            }
+            if (num < 0) {
                 throw new IllegalArgumentException("잘못된 입력입니다: " + num);
+            }
             sum += num;
         }
 
@@ -54,6 +60,7 @@ public class Calculator {
             System.out.println("입력된 값이 숫자가 아닙니다: " + str);
             throw e;
         }
+
         return true;
     }
 }
