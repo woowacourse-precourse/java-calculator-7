@@ -4,9 +4,9 @@
 
 > ### 1️⃣문자열 파싱 기능
 > &emsp; **문자열 입력 및 구분자 처리**
-> - [ ] 문자열 입력 (`camp.nextstep.edu.missionutils.Console`의 `readLine()` 활용)
-> - [ ] 기본 구분자를 기준으로 문자열을 분할
-> - [ ] 커스텀 구분자 추출 및 구분 (`//`와 `\n` 사이의 문자)
+> - [x] 문자열 입력 (`camp.nextstep.edu.missionutils.Console`의 `readLine()` 활용)
+> - [x] 기본 구분자를 기준으로 문자열을 분할
+> - [x] 커스텀 구분자 추출 및 구분 (`//`와 `\n` 사이의 문자)
 
 > ### 2️⃣숫자 처리 기능
 > &emsp; **계산 처리**
