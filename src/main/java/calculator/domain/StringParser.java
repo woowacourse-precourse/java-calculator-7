@@ -8,7 +8,7 @@ import java.util.List;
 public class StringParser {
 
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
-    private static final String CUSTOM_DELIMITER_SUFFIX = "\n";
+    private static final String CUSTOM_DELIMITER_SUFFIX = "\\n";
     private static final char COMMA_DELIMITER = ',';
     private static final char COLON_DELIMITER = ':';
 
@@ -41,7 +41,7 @@ public class StringParser {
         delimiters.add(customDelimiter.charAt(0));
 
         String operationalExpression =
-                inputExpression.substring(0, prefixIndex) + inputExpression.substring(suffixIndex + 1);
+                inputExpression.substring(0, prefixIndex) + inputExpression.substring(suffixIndex + 2);
 
         return new ParsedComponents(delimiters, operationalExpression);
     }
