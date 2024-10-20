@@ -44,6 +44,9 @@ public class CalculationModel {
     private void parseNumbers(String input, String regex) {
         String[] tokens = input.split(regex);
         for (String token : tokens) {
+            if (token == null || token.trim().isEmpty()) {
+                throw new IllegalArgumentException("잘못된 입력: 공백이나 잘못된 값이 포함되어 있습니다.");
+            }
             if (!token.isEmpty()) {
                 try {
                     int num = Integer.parseInt(token);
