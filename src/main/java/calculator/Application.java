@@ -14,6 +14,7 @@ public class Application {
         List<String> separators = Input.extractSeparator(input);
         List<String> numbers = Sum.extractNumber(numberPart, separators);
         Integer totalSum = Sum.calculate(numbers);
+        Output.outputString(totalSum);
     }
 }
 
@@ -78,5 +79,11 @@ class Sum {
         }
 
         return total;
+    }
+}
+
+class Output {
+    public static void outputString(Integer totalSum) {
+        System.out.println("결과 : " + totalSum);
     }
 }
