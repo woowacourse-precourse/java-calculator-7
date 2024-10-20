@@ -14,6 +14,7 @@ public class Application {
             calculator.inputValidator();
 
             int[] numbersArray = calculator.allPositiveNumber().getNumbers();
+
             System.out.println("결과 : " + Calculator.add(numbersArray));
 
         } catch (IllegalArgumentException e) {
