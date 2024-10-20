@@ -7,21 +7,30 @@ public class Application {
 
     // 유효한 커스텀 구분자 갖고 있는지 확인하는 메서드
     public static boolean validCustomDelimiter(String input) {
-        if (input.length() < 5) { // 커스텀 구분자 없는 것으로 간주
+        // 최소 길이 검사
+        if (input.length() < 6) { // 커스텀 구분자가 없거나 잘못된 경우
             return false;
         }
-        if (!input.startsWith("//")) { // 커스텀 구분자 없는 것으로 간주
+
+        // "//"로 시작하는지 확인
+        if (!input.startsWith("//")) {
             return false;
         }
+
+        // "\n"가 3번째와 4번째 문자에 위치하는지 확인
         if (!(input.charAt(3) == '\\' && input.charAt(4) == 'n')) {
             throw new IllegalArgumentException("올바르지 않은 커스텀 구분자 형식입니다.");
         }
-        // 구분자가 숫자면 에러
-        if (input.charAt(2) >= '0' && input.charAt(2) <= '9')
-            throw new IllegalArgumentException("숫자는 구분자로 설정할 수 없습니다.");
 
-        return true;
+        // 구분자를 확인하는 부분
+        char delimiter = input.charAt(2);
+        if (Character.isDigit(delimiter)) { // 구분자가 숫자인지 확인
+            throw new IllegalArgumentException("숫자는 구분자로 설정할 수 없습니다.");
+        }
+
+        return true; // 모든 검사 통과 시 true 반환
     }
+
 
     // 구분자가 특수문자인지 확인하는 메서드
     public static boolean isSpecialRegexChar(char delimiter) {
