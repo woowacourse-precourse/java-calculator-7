@@ -46,4 +46,32 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 1");
         });
     }
+
+    @ParameterizedTest
+    @MethodSource("customDelimiterInputs")
+    void 구분자_3개_양수와_사용(String input) throws Exception {
+        assertSimpleTest(() -> {
+            run(input);
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    static Stream<String> customDelimiterInputs() {
+        return Stream.of(
+                "//'\\n1'2'3",
+                "//\"\\n1\"2\"3",
+                "//,\\n1,2,3",
+                "//;\\n1;2;3",
+                "//:\\n1:2:3",
+                "//-\\n1-2-3",
+                "//.\\n1.2.3",
+                "//*\\n1*2*3",
+                "//_\\n1_2_3",
+                "//+\\n1+2+3", "//?\\n1?2?3", "//[\\n1[2[3", "//]\\n1]2]3", "//{\\n1{2{3", "//}\\n1}2}3"
+                , "//(\\n1(2(3", "//)\\n1)2)3", "//|\\n1|2|3", "//^\\n1^2^3", "//$\\n1$2$3", "//!\\n1!2!3", "//@\\n1@2@3",
+                "//#\\n1#2#3",
+                "//&\\n1&2&3", "//`\\n1`2`3",
+                "//~\\n1~2~3", "//<\\n1<2<3", "//>\\n1>2>3", "///\\n1/2/3", "//\\\\n1\\2\\3"
+        );
+    }
 }
