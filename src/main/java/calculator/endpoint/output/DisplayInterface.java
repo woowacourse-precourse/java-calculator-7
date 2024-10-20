@@ -6,6 +6,6 @@ public class DisplayInterface {
     }
 
     public static void displayAnswer(int answer) {
-        System.out.println("결과 :" + answer);
+        System.out.println("결과 : " + answer);
     }
 }
