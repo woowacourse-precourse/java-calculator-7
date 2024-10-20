@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Validators {
 
-    public static boolean validateDelimiterDeclaration(String s) {
+    public boolean validateDelimiterDeclaration(String s) {
         if (s.startsWith("//")) {
             if (!s.contains("\\n")) {
                 throw new IllegalArgumentException();
@@ -15,7 +15,7 @@ public class Validators {
         return false;
     }
 
-    public static void validateAllowedCharacters(List<Character> cha, String s) {
+    public void validateAllowedCharacters(List<Character> cha, String s) {
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
             if (!Character.isDigit(c) && !cha.contains(c)) {
@@ -24,7 +24,7 @@ public class Validators {
         }
     }
 
-    public static void validateDelimiterSurroundings(Calculator calculator, String s) {
+    public void validateDelimiterSurroundings(Calculator calculator, String s) {
         String[] split = s.split("[" + calculator.getDelimitersAsString() + "]");
 
         for (int i = 0; i < split.length; i++) {
@@ -41,7 +41,7 @@ public class Validators {
 
     }
 
-    private static boolean isNumber(String part) {
+    private boolean isNumber(String part) {
         try {
             Integer.parseInt(part);
             return true;
