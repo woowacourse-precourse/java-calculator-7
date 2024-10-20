@@ -2,40 +2,35 @@ package calculator.model;
 
 import java.util.regex.Pattern;
 
-//입력 검증
+// 입력 검증 클래스
 public class InputValidator {
 
-    //입력을 받아 검증하고 숫자 배열 반환
+    // 입력을 받아 검증하고 숫자 배열을 반환하는 메서드
     public String[] validate(String input) {
         if(input == null || input.isEmpty()) {
-            return new String[] {"0"};
+            return new String[] {"0"}; // 빈 입력일 경우 기본값 반환
         }
 
         if (input.startsWith("//")) {
-            // 커스텀 구분자가 있을 때 처리
-            return validateCustomDelimiter(input);
+            return validateCustomDelimiter(input); // 커스텀 구분자 처리
         } else {
-            // 기본 구분자(쉼표, 콜론) 처리
-            return validateDefaultDelimiter(input);
+            return validateDefaultDelimiter(input); // 기본 구분자(쉼표, 콜론) 처리
         }
     }
 
-    // 기본 구분자 쉼표(,) 또는 콜론(:) 처리
+    // 기본 구분자(쉼표, 콜론)로 입력을 처리하는 메서드
     private String[] validateDefaultDelimiter(String input) {
         String[] numbers = input.split(",|:");
-        checkNegativeNumbers(numbers);
+        checkNegativeNumbers(numbers); // 음수 검증 수행
         return numbers;
     }
 
-    //커스텀 구분자 입력값 처리 및 검증
-    //`"//"`와 `"\n"` 사이에 커스텀 구분자 지정 가능
-    //커스텀 구분자가 지정되면 기본 구분자 사용 불가
-    //구분자와 구분자 설정 외에는 모두 양수인지 검증
+    // 커스텀 구분자 처리 및 검증하는 메서드
     private String[] validateCustomDelimiter(String input) {
         int delimiterIndex = input.indexOf("\\n");
 
-        // '\n' 위치 파악 (찾지 못한 경우 예외 처리)
-        if (delimiterIndex == -1 ) { //|| delimiterIndex <= 2
+        // 구분자 포맷이 잘못된 경우 예외 발생
+        if (delimiterIndex == -1 ) {
             throw new IllegalArgumentException("입력 형식이 잘못되었습니다. 커스텀 구분자는 //로 시작하고 \\n으로 끝나야 합니다.");
         }
 
@@ -47,7 +42,7 @@ public class InputValidator {
             throw new IllegalArgumentException("구분자가 비어있을 수 없습니다.");
         }
 
-        //구분자 이후 숫자 추출
+        // 구분자 이후 숫자 부분 추출
         String numbersPart = input.substring(delimiterIndex +2); // 구분자 이후 숫자 부분 추출
 
         if (numbersPart.isEmpty()) {
@@ -56,16 +51,14 @@ public class InputValidator {
 
         //커스텀 구분자로 숫자 분리
         String[] numbers = numbersPart.split(Pattern.quote(delimiter));
-        //음수 예외 처리
-        checkNegativeNumbers(numbers);
+        checkNegativeNumbers(numbers); // 음수 확인
         return numbers;
     }
 
-    //음수 검증
-    //사용자 잘못된 값 입력 시 `IllegalArgumentException` 발생하여 프로그램 종료
+    // 음수 값을 검증하는 메서드
     private void checkNegativeNumbers(String[] numbers) {
         for (String number : numbers) {
-            if (!number.isEmpty()) { // 빈 문자열이 아닌 경우만 처리
+            if (!number.isEmpty()) { //빈 문자열 무시
                 int num = Integer.parseInt(number);
                 if (num < 0) {
                     throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + num);
