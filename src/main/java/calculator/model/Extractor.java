@@ -20,6 +20,14 @@ public class Extractor {
         return splitAndTrimNumbers(processedInput);
     }
 
+    // 입력값 공백 제거 후 유효성 검사
+    private String trimAndValidateInput(String input) {
+        return Optional.of(input)
+                .filter(s -> !s.isBlank())
+                .map(String::trim)
+                .orElseThrow(() -> new CustomException(ErrorCode.EMPTY_INPUT));
+    }
+
     // 커스텀 구분자 추출
     private Optional<String> extractCustomDelimiter(String input) {
         return Optional.of(input)
