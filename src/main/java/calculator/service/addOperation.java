@@ -17,16 +17,19 @@ public class addOperation {
         }
 
         String delimiter = ",|:";  // 기본 구분자 쉼표와 콜론
+        System.out.println("delimiter = " + delimiter);
         if (input.startsWith("//")) {
             int startIdx = input.indexOf("//");
             int endIdx = input.indexOf("\\n");
+            System.out.println("endIdx = " + endIdx);
 
             if(startIdx + 2 == endIdx) throw new IllegalArgumentException("구분자가 정의되지 않았습니다");
 
             if (endIdx == -1) {
                 throw new IllegalArgumentException("커스텀 구분자가 올바르지 않습니다.");
             }
-            delimiter = input.substring(2, endIdx);
+            String customDelimiter = input.substring(2, endIdx);
+            delimiter = delimiter + "|" + customDelimiter;
 
             input = input.substring(endIdx + 2); // 구분자를 제외한 값
         }
