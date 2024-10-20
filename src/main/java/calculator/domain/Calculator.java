@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class Calculator {
@@ -15,13 +16,7 @@ public class Calculator {
     }
 
     public int sum() {
-        int result = 0;
-
-        for (int number : getIntNumbers()) {
-            result += number;
-        }
-
-        return result;
+        return Arrays.stream(getIntNumbers()).sum();
     }
 
     private int[] getIntNumbers() {
