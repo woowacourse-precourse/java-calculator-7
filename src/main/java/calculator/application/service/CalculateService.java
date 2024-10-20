@@ -38,6 +38,10 @@ public class CalculateService implements CalculateUseCase {
      * @throws IllegalArgumentException 잘못된 문자열 오류
      */
     private List<Long> parseNumber(CalculateExpression expression) throws IllegalArgumentException {
+        if (expression.getExpression().isEmpty()) {
+            return List.of(0L);
+        }
+
         String delimiterRegex = makeDelimiterRegex(expression.getDelimiters());
 
         return Arrays.stream(expression.getExpression().split(delimiterRegex))
