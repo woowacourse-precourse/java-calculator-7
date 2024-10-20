@@ -57,7 +57,7 @@ public class Parser {
         String[] numbers = equation.split(regEx);
         for (String number : numbers) {
             if (number.isEmpty()) {
-                operands.addOperand(Operands.ZERO);
+                continue;
             } else if (!operands.validate(number)) {
                 throw new IllegalArgumentException();
             } else {
