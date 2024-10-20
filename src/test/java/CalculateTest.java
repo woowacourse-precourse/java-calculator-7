@@ -1,8 +1,8 @@
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import calculateStrategy.Calculate;
-import calculateStrategy.integerCalculate;
+import calculator.calculateStrategy.Calculate;
+import calculator.calculateStrategy.integerCalculate;
 import java.util.ArrayList;
 import java.util.List;
 import org.assertj.core.api.Assertions;
