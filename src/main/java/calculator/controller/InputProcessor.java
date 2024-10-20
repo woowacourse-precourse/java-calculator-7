@@ -7,7 +7,7 @@ import java.util.List;
 
 public class InputProcessor {
 
-    private NumberParser numberParser;
+    private final NumberParser numberParser;
 
     public InputProcessor(String input) {
 
