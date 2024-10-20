@@ -67,7 +67,6 @@ public class SeparatorServiceImpl implements SeparatorService {
                 idxQueue.poll();
                 continue;
             }
-
             refinedInput.appendLetter(input, idx);
 
             idx = idx.increase();
