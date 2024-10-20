@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class CalculatorService {
 	private static final String DEFAULT_DELIMITERS = ",|:";
-	private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+	private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.*)\n(.*)");
 
 	public int add(String text) {
 		Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(text);
@@ -29,8 +29,10 @@ public class CalculatorService {
 	private int calculateSum(String[] numbers) {
 		int sum = 0;
 		for (String number : numbers) {
-			int num = parsePositiveNumber(number);
-			sum += num;
+			if (!number.isEmpty()) {
+				int num = parsePositiveNumber(number);
+				sum += num;
+			}
 		}
 		return sum;
 	}
