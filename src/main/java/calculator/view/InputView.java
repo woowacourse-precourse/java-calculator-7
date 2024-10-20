@@ -19,7 +19,11 @@ public class InputView {
 
     private static String scanString(){
         try{
-            return  readLine();
+            String userInput = readLine();
+            if(userInput == null || userInput.isEmpty()){
+                return EMPTY_VALUE;
+            }
+            return  userInput;
         }catch (NoSuchElementException e){
             return EMPTY_VALUE;
         }

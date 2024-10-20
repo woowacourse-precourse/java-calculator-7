@@ -10,7 +10,7 @@ public class StringValueService {
     }
 
     public static boolean isEmpty(StringValue stringValue){
-        if(stringValue.getOriginalValue().isBlank() || stringValue.getOriginalValue() == null){
+        if(stringValue.getOriginalValue().isBlank()){
             return true;
         }else{
             return false;
