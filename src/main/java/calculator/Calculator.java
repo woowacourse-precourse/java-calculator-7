@@ -21,6 +21,9 @@ public class Calculator {
         // 커스텀 구분자가 있는 경우
         if (input.startsWith("//")) {
             int delimiterEndIndex = input.indexOf("\\n");
+            if (delimiterEndIndex == -1) {
+                throw new IllegalArgumentException();
+            }
             delimiter = Pattern.quote(input.substring(2, delimiterEndIndex)); // 커스텀 구분자 추출
             input = input.substring(delimiterEndIndex + 2); // 숫자 부분만 추출
         }
