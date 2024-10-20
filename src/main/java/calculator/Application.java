@@ -8,6 +8,7 @@ public class Application {
 
         System.out.println("덧셈할 문자열을 입력해주세요.");
         String input = Console.readLine();
+
         String validTarget = input;
         String escapedDelimiters = delimiters;
 
@@ -71,7 +72,9 @@ public class Application {
         int sum = 0;
 
         for (String num : extractedNums) {
-            sum += Integer.parseInt(num);
+            if (!num.isBlank()) {
+                sum += Integer.parseInt(num);
+            }
         }
 
         return sum;
