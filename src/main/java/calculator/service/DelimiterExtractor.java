@@ -19,7 +19,26 @@ public class DelimiterExtractor {
             throw new IllegalArgumentException(ErrorMessage.IS_NOT_CUSTOM_DELIMITER_PATTERN.getMessage());
         }
 
-        return matcher.group(2);
+        return appropriateDelimiter(matcher);
+    }
 
+    // 커스텀 구분자에 \가 포함된 경우 적절한 \개수를 설정해주기 위한 메소드
+    public static String appropriateDelimiter(Matcher matcher) {
+        String appropriateDelimiter = "";
+        // matcher.group(2)는 커스텀 구분자를 의미함
+        char[] charArray = matcher.group(2).toCharArray();
+
+        // 만약 커스텀 구분자에 \가 있다면 \\\\를 더해, 문자열에서 \\으로 나타날 수 있도록 함
+        for(int i = 0; i < charArray.length; i++){
+            if(charArray[i] == '\\'){
+                appropriateDelimiter += "\\\\";
+            }
+            // \가 아닌 경우는 그냥 더한다
+            else{
+                appropriateDelimiter += charArray[i];
+            }
+        }
+
+        return appropriateDelimiter;
     }
 }
