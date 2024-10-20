@@ -50,7 +50,6 @@ public class Application {
             if (customDelimiter.contains(character)) {
                 customDelimiter = customDelimiter.replace(character, "\\" + character);
             }
-            System.out.println(customDelimiter);
         }
 
         return customDelimiter;
