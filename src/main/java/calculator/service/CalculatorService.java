@@ -8,15 +8,13 @@ import java.util.regex.Pattern;
 public class CalculatorService {
     private static final Pattern CUSTOM_SEPARATOR_REGEX = Pattern.compile("//(.*)\\\\n(.*)");
 
+    public String getCustomSeparator(String expression) {
+        String cleanedExpression = removeSpace(expression);
+        return extractCustomSeparator(cleanedExpression);
+    }
+
     public int[] separate(List<String> separators, String expression) {
-        String cleanedExpression = expression.replaceAll("\\s+", "");
-        String customSeparator = extractCustomSeparator(cleanedExpression);
-
-        if (customSeparator != null) {
-            separators.add(customSeparator);
-            cleanedExpression = removeCustomSeparatorDefinition(cleanedExpression);
-        }
-
+        String cleanedExpression = removeSpace(expression);
         String[] tokens = cleanedExpression.split(String.join("|", separators));
 
         validateStartPositiveNumber(tokens[0]);
@@ -24,6 +22,10 @@ public class CalculatorService {
         validateIsPositiveNumber(tokens);
 
         return convertToIntArray(tokens);
+    }
+
+    private String removeSpace(String expression) {
+        return expression.replaceAll("\\s+", "");
     }
 
     private int[] convertToIntArray(String[] tokens) {
@@ -42,7 +44,6 @@ public class CalculatorService {
             return customSeparator;
         }
         return null;
-
     }
 
     private boolean hasCustomSeparator(String expression, Matcher matcher) {
@@ -56,7 +57,7 @@ public class CalculatorService {
         Validator.validateSingleCharacterSeparator(separator);
     }
 
-    private String removeCustomSeparatorDefinition(String expression) {
+    public String removeCustomSeparatorDefinition(String expression) {
         Matcher matcher = CUSTOM_SEPARATOR_REGEX.matcher(expression);
         if (matcher.find()) {
             return matcher.group(2);

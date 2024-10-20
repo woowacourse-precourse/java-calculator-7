@@ -21,7 +21,15 @@ public class CalculatorController {
 
     private void play() {
         String expression = InputView.expression();
+        String customSeparator = calculatorService.getCustomSeparator(expression);
+
+        if (customSeparator != null) {
+            calculator.addSeparator(customSeparator);
+            expression = calculatorService.removeCustomSeparatorDefinition(expression);
+        }
+
         int[] number = calculatorService.separate(calculator.getSeparators(), expression);
+
         calculator.setNumber(number);
         calculator.calc();
         OutputView.executionResult(calculator.getResult());
