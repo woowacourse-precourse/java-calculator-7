@@ -14,6 +14,7 @@ public class CustomDelimiter extends Delimiter {
     @Override
     public void validate() {
         Matcher inValidDelimiter = createMatcher("[0-9\\-/]|\\\\(?!Q|E)");
+        Matcher duplicateDelimiter = createMatcher("[,:]");
 
         if (delimiter.length() > 7) {
             throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_LIMIT.getError());
@@ -21,6 +22,10 @@ public class CustomDelimiter extends Delimiter {
 
         if (inValidDelimiter.find()) {
             throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_FORMAT.getError());
+        }
+
+        if (duplicateDelimiter.find()) {
+            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_CUSTOM_DEFAULT_DELIMITER.getError());
         }
     }
 

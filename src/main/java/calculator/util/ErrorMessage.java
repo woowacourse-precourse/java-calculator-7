@@ -10,6 +10,9 @@ public enum ErrorMessage {
     ARITHMETIC_WITH_CUSTOM_DELIMITER_FORMAT(
             "[F0003]",
             "커스텀 구분자는 정해진 //와 \\n 사이에 정의되어야 합니다."),
+    DUPLICATE_CUSTOM_DEFAULT_DELIMITER(
+            "[F0004]",
+            "기본 구분자(, :)를 다시 커스텀 구분자로 정의할 수 없습니다."),
     CUSTOM_DELIMITER_LIMIT(
             "[R0001]",
             "커스텀 구분자는 최대 3개까지 등록 가능합니다."),
