@@ -18,7 +18,7 @@ public class CalculatorRunner {
 
         userInput = IOHelper.getInput();
 
-        if (userInput == null) {
+        if (userInput == null || userInput.trim().isEmpty()) {
             IOHelper.printResult(0);
             return;
         }
