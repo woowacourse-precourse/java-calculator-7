@@ -35,6 +35,17 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\\n1,2,3", "//;\\na;b;c", "//;\\n1;2_3",
+            "//;\\n;", "//;\\n1;;;2", "//;\\n;1;2", "//;\\n1;2;", "//\\n123",
+            "//;\\n\\n1;2;3", "/////123", "/", "\\n1,2,3"})
+    void 커스텀_입력값_검증_예외_테스트(String input) {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(input))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
