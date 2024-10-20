@@ -1,13 +1,10 @@
 package calculator;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args){
         // TODO: 프로그램 구현
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String input = br.readLine();
+        String input = Console.readLine();
         System.out.println(input);
     }
 }
