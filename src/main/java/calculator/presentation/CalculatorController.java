@@ -6,20 +6,20 @@ import calculator.application.CalculatorService;
 
 public class CalculatorController {
 
-    private final Input input;
-    private final Output output;
-    private final CalculatorService calculatorService;
+  private final Input input;
+  private final Output output;
+  private final CalculatorService calculatorService;
 
-    public CalculatorController() {
-        this.input = new Input();
-        this.output = new Output();
-        this.calculatorService = new CalculatorService();
-    }
+  public CalculatorController() {
+    this.input = new Input();
+    this.output = new Output();
+    this.calculatorService = new CalculatorService();
+  }
 
-    public void run() {
-        String userInput = input.getInput();
+  public void run() {
+    String userInput = input.getInput();
 
-        int result = calculatorService.calculate(userInput);
-        output.printResult(result);
-    }
+    int result = calculatorService.calculate(userInput);
+    output.printResult(result);
+  }
 }
