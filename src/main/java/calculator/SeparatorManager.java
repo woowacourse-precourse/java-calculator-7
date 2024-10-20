@@ -2,12 +2,16 @@ package calculator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class SeparatorManager {
-    static ArrayList<String> separators = new ArrayList<>(Arrays.asList(",", ":"));
+    private final ArrayList<String> separators;
     private String numberString;
 
-    // 커스텀 구분자 추가하기
+    public SeparatorManager() {
+        this.separators = new ArrayList<>(Arrays.asList(",", ":"));
+    }
+
     public void processInput(String input) {
         if (!input.startsWith("//") || !input.contains("\\n")) {
             throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
@@ -23,21 +27,24 @@ public class SeparatorManager {
             }
         }
 
-        // 구분자를 올바르게 분리하여 숫자 문자열 설정
-        numberString = parts.get(1); // 숫자 부분은 항상 두 번째 부분입니다.
+        numberString = parts.get(1);
 
-        // 구분자를 ',' 또는 ':'로 추가
         ArrayList<String> customSeparatorList = new ArrayList<>(Arrays.asList(customSeparators.split("[,\\:]")));
         separators.addAll(customSeparatorList);
     }
 
-    // 숫자 부분 넘겨주기
     public String getNumberString() {
         return numberString;
     }
 
-    public ArrayList<String> getSeparators() {
-        return separators;
+    public String[] split(String input) {
+        String regex = String.join("|", separators.stream()
+                .map(this::escapeSeparator)
+                .collect(Collectors.toList()));
+        return input.split(regex);
     }
 
+    private String escapeSeparator(String separator) {
+        return separator.replaceAll("([\\\\*+\\[\\](){}.^$|?])", "\\\\$1");
+    }
 }
