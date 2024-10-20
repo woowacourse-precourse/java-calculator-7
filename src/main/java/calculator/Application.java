@@ -27,22 +27,37 @@ public class Application {
         // 설정된 구분자로 문자열 분리
         String[] numbers = str.split(separator);
 
-        // 숫자 합계 출력
+        // 숫자 합계 계산
         int result = 0;
         for (String number : numbers) {
-            result += Integer.parseInt(number);
+            result += validateInput(number);
         }
         return result;
     }
 
+    private static int validateInput(String number) {
+        try {
+            int num = Integer.parseInt(number);
+            if (num < 0) {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            }
+            return num;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("잘못된 입력입니다.");
+        }
+    }
+
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-
-        System.out.println("덧셈할 문자열 : ");
+        System.out.println("덧셈할 문자열을 입력해 주세요. ");
         String str = Console.readLine();
 
-        // 덧셈 결과 출력
-        int answer = stringCalc(str);
-        System.out.println("결과 : " + answer);
+        try {
+            // 덧셈 결과 출력
+            int answer = stringCalc(str);
+            System.out.println("결과 : " + answer);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
