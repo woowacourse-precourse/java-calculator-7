@@ -9,5 +9,13 @@ public class Application {
 
         /** 기능 2 구현 */
         String inputData = Console.readLine();
+
+        /** 기능 3-1 구현
+         * 빈 값의 경우
+         */
+        if (inputData.isEmpty()) {
+            System.out.println("결과 : 0");
+            return;
+        }
     }
 }
