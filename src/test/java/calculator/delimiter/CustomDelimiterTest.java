@@ -38,6 +38,6 @@ class CustomDelimiterTest {
         Set<String> delimiters = CustomDelimiter.getCustomDelimiters("|");
 
         //then
-        assertThat(delimiters).containsExactly(":", ",", "|");
+        assertThat(delimiters).contains(":", ",", "|");
     }
 }

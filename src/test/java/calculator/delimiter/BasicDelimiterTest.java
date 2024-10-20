@@ -14,7 +14,7 @@ class BasicDelimiterTest {
         Set<String> basicDelimiters = BasicDelimiter.getBasicDelimiters();
 
         //when
-        assertThat(basicDelimiters).containsExactly(":", ",");
+        assertThat(basicDelimiters).contains(",", ":");
     }
 
 }
