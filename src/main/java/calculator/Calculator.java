@@ -59,6 +59,16 @@ public class Calculator {
         String combinedDelimiters = String.join("|", escapeDelimiters(delimiters));
         parts = Arrays.asList(input.split(combinedDelimiters));
         parts = filterEmptyParts(parts);
+
+        for (String part : parts) {
+            if (!part.matches("^[0-9.]+$")) {
+                throw new IllegalArgumentException("입력된 값에 문자가 있습니다.");
+            }
+
+            if (doubleCheck(part)) {
+                throw new IllegalArgumentException("잘못된 소수점 형식입니다.");
+            }
+        }
     }
 
     private List<String> filterEmptyParts(List<String> parts) {
@@ -77,6 +87,10 @@ public class Calculator {
             escaped.add(Pattern.quote(deli));
         }
         return escaped;
+    }
+
+    public boolean doubleCheck(String part) {
+        return (part.startsWith(".") || part.endsWith(".") || part.contains(".."));
     }
 
     private String formatResult(double sum) {
