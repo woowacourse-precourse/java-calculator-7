@@ -35,7 +35,7 @@ class CalculableValidatorTest {
             // when & then
             assertThatThrownBy(() -> CalculableValidator.validate(input, delimiters))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ErrorMessage.INVALID_DELIMITER_INCLUDED.getMessage());
+                    .hasMessage(ErrorMessage.INVALID_CHAR_INCLUDED.getMessage());
         }
 
         @Test
@@ -59,7 +59,7 @@ class CalculableValidatorTest {
             // when & then
             assertThatThrownBy(() -> CalculableValidator.validate(input, delimiters))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ErrorMessage.INVALID_DELIMITER_INCLUDED.getMessage());
+                    .hasMessage(ErrorMessage.INVALID_CHAR_INCLUDED.getMessage());
         }
 
         @Test

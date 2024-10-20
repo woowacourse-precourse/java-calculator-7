@@ -26,7 +26,7 @@ public class CalculableValidator {
         String validPattern = String.format(VALID_PATTERN_TEMPLATE, delimiterPattern);
 
         if (!Pattern.matches(validPattern, input)) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_DELIMITER_INCLUDED.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.INVALID_CHAR_INCLUDED.getMessage());
         }
     }
 
