@@ -30,6 +30,8 @@
 **입력 값 검증**
 - [x] 빈 입력 값 검증 메서드 - checkIsInputEmpty()
   - 제거하고 getCalculationSection() 안에서 검증 후 빈 값이면 빈 리스트 반환하는 것으로 변경 (f456c9e1)
+  - getCalculationSection() -> getCalculationSectionSplitByDelimiter()로 변경 (49fb1c1d)
+  - 빈 값 검증하는 부분을 제거하고 Calculator 에서 첫 값 입력시 검증하도록 수정 (49fb1c1d)
 - [x] 양수 검증 메서드 - checkIsPositiveNumber()
 - [x] 숫자 형식 검증 메서드 - checkHasNumberFormat()
   - checkNumberIsValid()로 통합 / isNumeric() 메서드 추가 (58333870)
@@ -46,9 +48,17 @@
   - 구분자에 숫자가 입력되었을때
 
 **기타**
-- run() 추가 (b5a07369)
-- calculating() 추가 (b5a07369)
-- checkEachInputIsValid() 추가 (b5a07369)
+<b5a07369>
+- run() 추가
+- calculating() 추가
+- checkEachInputIsValid() 추가
+
+<49fb1c1d>
+- getCalculationSection() 추가 및 분리
+- getCustomSection() 추가 및 분리
+- getCustomSection() 추가 및 분리
+- getCustomDelimiter() 추가 및 분리
+- validateDelimiter() 추가 및 분리
 
 ## ✅ 입출력 요구 사항 점검
 
