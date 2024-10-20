@@ -4,6 +4,9 @@
 
 ## 패지키 구조
 
+<img width="686" alt="스크린샷 2024-10-21 오전 3 50 17" src="https://github.com/user-attachments/assets/10e4d606-4daa-4742-b12f-7816db818f96">
+
+
 <div>
 <table>
 <tr>
