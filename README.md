@@ -8,7 +8,7 @@
 
 [ Domain ]
 - [x] 문자열에서 숫자를 추출하는 기능 -> Extractor.java
-- [] 추출된 숫자의 합을 구하는 기능 -> Calculator.java
+- [x] 추출된 숫자의 합을 구하는 기능 -> Calculator.java
 
 [ Tool ]
 - [x] 구분자를 따로 관리 하는 기능 (유지보수 및 확장성 고려) -> Delimiters.java
