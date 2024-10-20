@@ -11,7 +11,7 @@ public class Application {
 
         String input = getInput();
 
-        input = delimiterCheck(input);
+        input = customDelimiterCheck(input);
 
         String[] numbers = getNumbers(input);
 
@@ -68,7 +68,7 @@ public class Application {
         }
     }
 
-    private static String delimiterCheck(String input) {
+    private static String customDelimiterCheck(String input) {
         boolean isDelimiterOpened = false;
 
         StringBuilder customDelimiterString = new StringBuilder();
