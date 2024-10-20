@@ -22,7 +22,7 @@ public class Calculator {
                 delimiters.add(customDelimiter);
                 i = 5;
             } else {
-                throw new IllegalArgumentException("커스텀 구분자는 //과 \\n 사이에 위치해야합니다.");
+                throw new IllegalArgumentException("커스텀 구분자는 //과 \\n 사이에 위치한 문자여야 합니다.");
             }
         }
 
