@@ -26,8 +26,19 @@ IllegalArgumentException을 발생시킨다.
 
 ## 📌 최종 기능 명세
 
-| Class | Method | Input | Output | Description |
-|-------|--------|-------|--------|-------------|
+| Class      | Method            | Input          | Output           | Description                 |
+|------------|-------------------|----------------|------------------|-----------------------------|
+| Calculator | calculate	        | String         | int 	            | 입력된 문자열을 파싱하고 숫자의 합을 계산해 반환 |
+| Delimiter	 | defaultDelimiter	 | String         | 	String[]	       | 쉼표(,)와 콜론(:)을 기준으로 문자열을 분리  |
+|            | customDelimiter   | 	String 	      | String[]	        | 커스텀 구분자를 기준으로 문자열을 분리       |
+|            | escapeCharacters	 | String         | 	String          | 	특수 문자를 이스케이프 처리하여 반환       |
+| Converter	 | convertToNumbers  | 	String[]      | 	List\<Integer>	 | 문자열 배열을 정수 리스트로 변환          |
+| Adder      | sum               | List\<Integer> | int              | 정수 리스트의 숫자들을 합산하여 반환        |
+| Validator  | isEmpty           | String         | boolean          | 입력값이 빈 문자열 또는 null인지 확인     |
+|            | isInteger         | String         | boolean          | 입력값이 양의 정수인지 확인             |
+|            | isNegative        | String         |                  | 입력에 음수가 포함되어 있을 경우 예외를 던짐   |
+| Input      | getInput          |                | String           | 사용자로부터 문자열 입력을 받음           |
+| Output     | printResult       | int            |                  | 계산 결과를 출력                   |
 
 <br>
 
