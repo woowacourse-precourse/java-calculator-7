@@ -1,7 +1,9 @@
 package calculator;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,10 +26,10 @@ public class CustomStringSplitter implements StringSplitter{
         String conjoinedDelimiter = DEFAULT_DELIMITER + customDelimiter;
 
         String numbersAndDelimiter = matcher.group(2);
-        String[] split = numbersAndDelimiter.split(conjoinedDelimiter);
-        validateContinuousDelimiter(split, str);
+        List<String> result = splitSubstring(conjoinedDelimiter, numbersAndDelimiter);
+        validateContinuousDelimiter(result, str);
 
-        return Arrays.asList(split);
+        return result;
     }
 
     private String generatePatternRegex() {
@@ -57,9 +59,19 @@ public class CustomStringSplitter implements StringSplitter{
             throw new IllegalArgumentException(str);
         }
     }
+
+    private List<String> splitSubstring(String conjoinedDelimiter, String numbersAndDelimiter) {
+        StringTokenizer stringTokenizer = new StringTokenizer(numbersAndDelimiter, conjoinedDelimiter);
+
+        List<String> strings = new ArrayList<>();
+        while (stringTokenizer.hasMoreTokens()) {
+            strings.add(stringTokenizer.nextToken());
+        }
+        return strings;
+    }
     
-    private void validateContinuousDelimiter(String[] split, String str) {
-        boolean hasContinuousDelimiter = Arrays.stream(split)
+    private void validateContinuousDelimiter(List<String> split, String str) {
+        boolean hasContinuousDelimiter = split.stream()
                 .anyMatch(s -> s.isEmpty());
 
         if (hasContinuousDelimiter) {
