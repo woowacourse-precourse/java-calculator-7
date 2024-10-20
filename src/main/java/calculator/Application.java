@@ -17,7 +17,6 @@ public class Application {
 
         //문자열 가공
         numbers = StringProcessing.processString(rawString);
-
         //계산
         result = Calculator.sumNumbers(numbers);
         System.out.print(Constants.RESULT+result);

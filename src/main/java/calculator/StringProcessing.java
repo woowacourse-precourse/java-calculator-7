@@ -43,7 +43,10 @@ public class StringProcessing {
         for(int i = 0; i < rawString.length(); i++){
             if (Character.toString(rawString.charAt(i)).equals(key)) {
                 try {
-                    numbers.add(Integer.parseInt(tempNumber.toString()));
+                    int number = Integer.parseInt(tempNumber.toString());
+                    if (number < 0)
+                        throw new IllegalArgumentException("숫자는 0보다 큰 수이어야 합니다. ");
+                    numbers.add(number);
                     tempNumber.setLength(0);
                 } catch (NumberFormatException e) {
                     throw new IllegalArgumentException("구분자 사이에는 숫자만 입력해야 합니다.");
@@ -52,8 +55,12 @@ public class StringProcessing {
             else
                 tempNumber.append(rawString.charAt(i));
         }
+
         try{
-            numbers.add(Integer.parseInt(tempNumber.toString()));
+            int number = Integer.parseInt(tempNumber.toString());
+            if (number < 0)
+                throw new IllegalArgumentException("숫자는 0보다 큰 수이어야 합니다. ");
+            numbers.add(number);
         }
         catch (NumberFormatException e){
             throw new IllegalArgumentException("구분자 뒤에 숫자를 입력해야 합니다.");
