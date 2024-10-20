@@ -2,10 +2,10 @@ package calculator.model;
 
 import calculator.validation.Validator;
 
-public class CustomDelimiter {
+public class FormulaHandler {
     private String formula;
 
-    public CustomDelimiter(String formula){
+    public FormulaHandler(String formula){
         this.formula = formula.replace("\\n", "\n");
     }
 

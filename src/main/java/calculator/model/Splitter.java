@@ -3,10 +3,10 @@ import java.util.regex.Pattern;
 
 
 public class Splitter {
-    public static String[] splitNumbers(CustomDelimiter customDelimiter){
+    public static String[] splitNumbers(FormulaHandler formulaHandler){
         String delimiter = ",|:";
-        String numbers = customDelimiter.getNumbersPart();
-        String customDelim = customDelimiter.getCustomDelimiter();
+        String numbers = formulaHandler.getNumbersPart();
+        String customDelim = formulaHandler.getCustomDelimiter();
         if(customDelim != null){
             delimiter = delimiter + "|" + Pattern.quote(customDelim);
         }

@@ -3,7 +3,7 @@ package calculator.model;
 import calculator.validation.Validator;
 
 public class Calculator {
-    public static String plus(CustomDelimiter customDelimiter){
+    public static String plus(FormulaHandler customDelimiter){
         String[] splitedNumbers = Splitter.splitNumbers(customDelimiter);
         int sumOfNumbers = 0;
 
