@@ -11,10 +11,7 @@ import org.junit.jupiter.api.Test;
 
 class CalculatorTest {
 
-  Calculator calculator;
 
-
-  // 이것도 외부 라이브러리 사용인건가??????
 
   /**
    *
@@ -91,7 +88,7 @@ class CalculatorTest {
    char[] invalidInput = new char[]{'.', '/', '>', '!', '?'};
       //when
      String readLine = "배달의 민족 삭제";
-
+    Calculator calculator = new Calculator(readLine);
       //then
     assertThrows(IllegalArgumentException.class, () -> {
       calculator.calculating(readLine);
@@ -126,8 +123,10 @@ class CalculatorTest {
 
     // "this.calculator" is null
     // "calculator.Calculator.calculating(String)" because "this.calculator" is null
-    int calculateCustom = calculator.calculating(customDelimeter);
-    int calculateDefault = calculator.calculating(defaultDelimeter);
+    Calculator customCalculator = new Calculator(customDelimeter);
+    Calculator defaultCalculator = new Calculator(defaultDelimeter);
+    int calculateCustom = customCalculator.calculating(customDelimeter);
+    int calculateDefault = defaultCalculator.calculating(defaultDelimeter);
 
 
 
