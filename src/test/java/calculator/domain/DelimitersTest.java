@@ -21,4 +21,17 @@ class DelimitersTest {
         assertThat(defaultDelimiters).isEqualTo(Arrays.asList(',',':'));
     }
 
+    @Test
+    void 커스텀_구분자는_문자열_앞부분의_슬러시_두개와_개행문자_사이에_위치하는_문자이다(){
+        // given
+        Delimiters delimiters = new Delimiters();
+        String input = "//;\\n1;2;3";
+        // when
+        char customDelimiter = delimiters.findCustomDelimiter(input) ;
+
+        // then
+        assertThat(customDelimiter).isEqualTo(';');
+    }
+
+
 }
