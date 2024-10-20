@@ -38,16 +38,3 @@
 1,2:3
 결과 : 6
 ```
-
-## 프로그래밍 요구 사항
-
-- JDK 21 버전에서 실행 가능해야 한다.
-- `build.gradle` 파일은 변경할 수 없으며, 제공된 라이브러리 이외의 외부 라이브러리는 사용하지 않는다.
-- 프로그램 종료 시 `System.exit()`를 호출하지 않는다.
-- 자바 코드 컨벤션을 지키면서 프로그래밍한다.
-    - 기본적으로 [Java Style Guide](https://google.github.io/styleguide/javaguide.html)를 원칙으로 한다.
-
-## 라이브러리
-
-- `camp.nextstep.edu.missionutils`에서 제공하는 `Console` API를 사용하여 구현해야 한다.
-    - 사용자 입력은 `Console.readLine()`을 활용한다.
