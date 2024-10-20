@@ -34,7 +34,8 @@ class PositiveNumbersTest {
                 Arguments.of(List.of(""), PositiveNumber.zero()),
                 Arguments.of(List.of("", "1"), PositiveNumber.from("1")),
                 Arguments.of(List.of("0", "1"), PositiveNumber.from("1")),
-                Arguments.of(List.of("0", "1", "2", "3"), PositiveNumber.from("6"))
+                Arguments.of(List.of("0", "1", "2", "3"), PositiveNumber.from("6")),
+                Arguments.of(List.of("1", "999999999999998"), PositiveNumber.from("999999999999999"))
         );
     }
 
