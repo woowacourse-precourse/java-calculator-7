@@ -101,7 +101,7 @@
      입력값 : //\n123, // \n1 2 3
      결과 : 예외 발생, 어플리케이션 종료
      ```
-   * ``숫자``는 커스텀 구분자가 될 수 없다.
+   * 숫자는 커스텀 구분자가 될 수 없다.
      ```
      입력값 : //0\n102
      결과 : 예외 발생, 어플리케이션 종료
@@ -137,7 +137,7 @@
    * 커스텀 구분자를 중복하여 지정해도 한 개의 커스텀 구분자로 판단하는지 확인한다. [✔] → ``CustomSeparators``
    * 기본 구분자를 커스텀 구분자로 지정해도 커스텀 구분자로 판단하는지 확인한다. [✔] → ``CustomSeparators``
    * 커스텀 구분자를 연속으로 입력하거나 계산 부분의 앞 뒤에 입력해도 정상 계산 처리 하는지 확인한다. [✔] → ``CustomSeparators``
-   * 공백, ``숫자``를 커스텀 구분자로 지정하면 ``IllegalArgumentException`` 발생하는지 확인한다. [✔] → ``CustomSeparators``
+   * 공백, 숫자를 커스텀 구분자로 지정하면 ``IllegalArgumentException`` 발생하는지 확인한다. [✔] → ``CustomSeparators``
    * 커스텀 구분자의 개수가 2개를 초과하면 ``IllegalArgumentException`` 발생하는지 확인한다. [✔] → ``CustomSeparators``
    * 지정한 구분자 이외의 문자를 함꼐 입력하면 ``IllegalArgumentException`` 발생하는지 확인한다. [✔] → ``CustomSeparators``
 3. 기본 구분자 확인 [✔]
