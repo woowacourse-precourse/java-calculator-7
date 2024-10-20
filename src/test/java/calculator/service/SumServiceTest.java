@@ -15,17 +15,17 @@ class SumServiceTest {
 
     @Test
     void testCalculateSumWithCustomDelimiter() {
-        assertEquals(6, sumService.calculateSum("//;\n1;2;3"));
+        assertEquals(6, sumService.calculateSum("//;\\n1;2;3"));
     }
 
     @Test
     void testCalculateSumWithMixedDelimiters() {
-        assertEquals(10, sumService.calculateSum("//;\n1;2,3:4"));
+        assertEquals(10, sumService.calculateSum("//;\\n1;2,3:4"));
     }
 
     @Test
     void testCalculateSumWithMultiDelimiters() {
-        assertEquals(10, sumService.calculateSum("//;\n//a\n1;2a3:4"));
+        assertEquals(10, sumService.calculateSum("//;\\n//a\\n1;2a3:4"));
     }
 
     @Test

@@ -38,7 +38,7 @@ class DelimiterValidatorTest {
         assertFalse(validator.containsInvalidDelimiters("1:2"));
 
         // 커스텀 구분자가 있는 경우 (valid)
-        assertFalse(validator.containsInvalidDelimiters("//;\n1;2;3"));
+        assertFalse(validator.containsInvalidDelimiters("//;\\n1;2;3"));
 
         // 빈 문자열
         assertFalse(validator.containsInvalidDelimiters(""));

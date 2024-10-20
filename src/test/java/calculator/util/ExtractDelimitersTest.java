@@ -9,7 +9,7 @@ class ExtractDelimitersTest {
 
     @Test
     void testExtractSingleCustomDelimiter() {
-        String input = "//;\n1;2,3";
+        String input = "//;\\n1;2,3";
         List<String> delimiters = ExtractDelimiters.extractDelimiters(input);
         assertEquals(3, delimiters.size());
         assertEquals(";", delimiters.get(0)); // 커스텀 구분자
@@ -19,7 +19,7 @@ class ExtractDelimitersTest {
 
     @Test
     void testExtractMultipleCustomDelimiters() {
-        String input = "//;\n//a\n1;2:3";
+        String input = "//;\\n//a\\n1;2:3";
         List<String> delimiters = ExtractDelimiters.extractDelimiters(input);
         assertEquals(4, delimiters.size());
         assertEquals(";", delimiters.get(0)); // 첫 번째 커스텀 구분자
@@ -48,7 +48,7 @@ class ExtractDelimitersTest {
 
     @Test
     void testExtractSingleCustomDelimiterNoNumbers() {
-        String input = "//;\n";
+        String input = "//;\\n";
         List<String> delimiters = ExtractDelimiters.extractDelimiters(input);
         assertEquals(3, delimiters.size());
         assertEquals(";", delimiters.get(0)); // 커스텀 구분자

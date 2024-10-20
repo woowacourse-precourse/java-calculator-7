@@ -12,8 +12,8 @@ class InputValidatorTest {
     @Test
     void testIsValidInput() {
         assertTrue(validator.isValidInput("1,2:3"));
-        assertTrue(validator.isValidInput("//;\n1;2;3"));
-        assertTrue(validator.isValidInput("//;\n1;2,3"));
+        assertTrue(validator.isValidInput("//;\\n1;2;3"));
+        assertTrue(validator.isValidInput("//;\\n1;2,3"));
         assertFalse(validator.isValidInput("1,a,3"));
         assertFalse(validator.isValidInput("123a"));
     }

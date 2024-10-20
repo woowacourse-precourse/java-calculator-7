@@ -12,13 +12,13 @@ public class ExtractDelimiters {
         int index = 0;
         while (input.startsWith("//", index)) {
             int delimiterStart = index + 2;
-            int delimiterEnd = input.indexOf("\n", delimiterStart);
+            int delimiterEnd = input.indexOf("\\n", delimiterStart);
             if (delimiterEnd == -1) {
                 break;
             }
 
             delimiters.add(input.substring(delimiterStart, delimiterEnd));
-            index = delimiterEnd + 1;
+            index = delimiterEnd + 2;
         }
 
         // 기본 구분자를 리스트에 추가

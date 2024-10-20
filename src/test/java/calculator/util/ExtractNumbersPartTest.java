@@ -8,14 +8,14 @@ class ExtractNumbersPartTest {
 
     @Test
     void testExtractNumbersPartWithCustomDelimiter() {
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
         String result = ExtractNumbersPart.extractNumbersPart(input);
         assertEquals("1;2;3", result); // 커스텀 구분자 사용 시 숫자 부분
     }
 
     @Test
     void testExtractNumbersPartWithMultipleCustomDelimiters() {
-        String input = "//;\n//:\n1;2:3";
+        String input = "//;\\n//:\\n1;2:3";
         String result = ExtractNumbersPart.extractNumbersPart(input);
         assertEquals("1;2:3", result); // 여러 커스텀 구분자를 사용할 경우
     }
@@ -36,14 +36,14 @@ class ExtractNumbersPartTest {
 
     @Test
     void testExtractNumbersPartWithOnlyCustomDelimiter() {
-        String input = "//;\n";
+        String input = "//;\\n";
         String result = ExtractNumbersPart.extractNumbersPart(input);
         assertEquals("", result); // 커스텀 구분자만 있는 경우
     }
 
     @Test
     void testExtractNumbersPartWithWhitespace() {
-        String input = "   //;\n   1; 2; 3  ";
+        String input = "   //;\\n   1; 2; 3  ";
         String result = ExtractNumbersPart.extractNumbersPart(input);
         assertEquals("1; 2; 3", result.trim()); // 공백이 포함된 경우
     }

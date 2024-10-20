@@ -12,16 +12,16 @@ class ValueValidatorTest {
     @Test
     void testHasValue() {
         assertFalse(validator.hasValue(""));
-        assertFalse(validator.hasValue("//;\n"));
+        assertFalse(validator.hasValue("//;\\n"));
         assertTrue(validator.hasValue("1,2:3"));
-        assertTrue(validator.hasValue("//;\n1;2;3"));
+        assertTrue(validator.hasValue("//;\\n1;2;3"));
     }
 
     @Test
     void testIsLastDigit() {
         assertTrue(validator.isLastDigit("1,2:3"));
-        assertTrue(validator.isLastDigit("//;\n1;2;3"));
-        assertFalse(validator.isLastDigit("//;\n1;2;3a"));
+        assertTrue(validator.isLastDigit("//;\\n1;2;3"));
+        assertFalse(validator.isLastDigit("//;\\n1;2;3a"));
         assertFalse(validator.isLastDigit("123a"));
     }
 }
