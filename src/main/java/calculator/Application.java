@@ -58,8 +58,19 @@ public class Application {
 
     //문자열 형태의 수를 int로 반환하는 함수
     private static int parseStringToInt(String val){
+        if(val.isEmpty()){
+            //::와 같은 경우 "" 공백이 나눠지게 되는데 이는 조건에 따라 0의 값을 갖음
+            return 0;
+        }
         try {
-            return Integer.parseInt(val);
+            int resultNum = Integer.parseInt(val);
+            //입력값이 양수인 경우 정상 반환
+            if(resultNum > 0){
+                return resultNum;
+            }else{
+                //입력값이 양수가 아닌 경우 잘못된 형식으로 예외 처리
+                throw new IllegalArgumentException();
+            }
         }catch (NumberFormatException e){
             //parseInt함수의 경우 형식이 안 맞으면 NumberFormatException을 발생시키는데
             throw new IllegalArgumentException(e);  //이를 IllegalArgumentException으로 반환하여 처리
