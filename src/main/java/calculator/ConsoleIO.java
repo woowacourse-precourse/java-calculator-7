@@ -3,8 +3,8 @@ package calculator;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.NoSuchElementException;
 
-public class ConsoleIO implements IO {
-    
+public class ConsoleIO extends IO {
+
     @Override
     public String read() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
