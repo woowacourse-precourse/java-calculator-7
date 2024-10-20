@@ -14,7 +14,7 @@ public class InputServiceTest extends NsTest {
     @Test
     void 커스텀_구분자_추출_테스트() {
         assertSimpleTest(() -> {
-            Map<String, String> resultMap = InputService.extractCustomDelimiter("//r\ntest");
+            Map<String, String> resultMap = InputService.extractCustomDelimiter("//r\\ntest");
 
             assertThat(resultMap).containsEntry("customDelimiter", "r");
             assertThat(resultMap).containsEntry("calculateString", "test");
@@ -22,7 +22,7 @@ public class InputServiceTest extends NsTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"test", "/qwer", "\nasdf"})
+    @ValueSource(strings = {"test", "/qwer", "\\nasdf"})
     void 커스텀_없는_추출_테스트(String text) {
         assertSimpleTest(() -> {
             Map<String, String> resultMap = InputService.extractCustomDelimiter(text);

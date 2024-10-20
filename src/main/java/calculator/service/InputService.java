@@ -9,7 +9,7 @@ public class InputService {
 
     private static final String INPUT_SENTENCE = "덧셈할 문자열을 입력해 주세요.";
     private static final String CUSTOM_PREFIX = "//";
-    private static final String CUSTOM_SUFFIX = "\n";
+    private static final String CUSTOM_SUFFIX = "\\n";
 
     /**
      * 사용자로부터 문자열을 입력받음
@@ -21,7 +21,7 @@ public class InputService {
 
         try {
             return Console.readLine();
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             return "";
         }
 
@@ -41,7 +41,7 @@ public class InputService {
         Map<String, String> extractedString = new HashMap<>();
 
         // 예외처리
-        if (customDividerStartIndex != 0){
+        if (customDividerStartIndex != 0) {
             extractedString.put(
                     "customDelimiter",
                     null
