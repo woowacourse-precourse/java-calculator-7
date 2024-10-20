@@ -11,6 +11,5 @@ public class Application {
         OutputView outputView = new OutputView();
         StringCalculator stringCalculator = new StringCalculator(inputView.getInputString());
         outputView.printResult(stringCalculator.calculate());
-
 ;    }
 }

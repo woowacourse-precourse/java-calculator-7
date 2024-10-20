@@ -16,10 +16,14 @@ public class StringCalculator {
     public int calculate() {
         int result = 0;
         for (int num : numbers) {
+            if (num < 0) {
+                throw new IllegalArgumentException();
+            }
             result += num;
         }
         return result;
     }
+
 
     public void addCustomDelimiter(String input, int endIndex) {
         String delimiterPart = input.substring(2, endIndex);
@@ -34,20 +38,37 @@ public class StringCalculator {
     }
 
     public List<Integer> split(String input) {
-        List<Integer> numberList = new ArrayList<>();
-
-        if (input.startsWith("//") && input.contains("\\n")) {
-            int endIndex = input.indexOf("\\n");
-            addCustomDelimiter(input, endIndex);
-            input = input.substring(endIndex + 2);
+        // 빈 문자열 처리
+        if (input == null || input.isEmpty()) {
+            return List.of(0);
         }
 
-        numberList.addAll(
-                Arrays.stream(input.split(String.join("|", delimiter)))
-                        .map(Integer::parseInt)
-                        .toList()
-        );
+        // 커스텀 구분자 처리
+        if (input.startsWith("//") && input.contains("\\n")) {
+            int endIndex = input.indexOf("\\n");  // 실제 개행 문자 \n 처리
+            addCustomDelimiter(input, endIndex); // 커스텀 구분자 추가
+            input = input.substring(endIndex + 2);  // 개행 문자 뒤로 이동
+        }
 
-        return numberList;
+        // 기본 구분자 또는 커스텀 구분자로 문자열을 분리한 후 숫자 리스트로 변환
+        try {
+            List<Integer> numberList = Arrays.stream(input.split(String.join("|", delimiter)))
+                    .map(String::trim)           // 공백 제거
+                    .filter(s -> !s.isEmpty())   // 빈 문자열 필터링
+                    .map(Integer::parseInt)      // 문자열을 정수로 변환
+                    .toList();
+
+            // 음수 값 처리
+            for (int num : numberList) {
+                if (num < 0) {
+                    throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+                }
+            }
+
+            return numberList;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자가 아닌 문자가 포함되어 있습니다.");
+        }
     }
+
 }

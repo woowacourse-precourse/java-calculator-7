@@ -6,6 +6,8 @@ public class OutputView {
     }
 
     public void printResult(int result) {
-        System.out.println("결과 : " + result);
+        if(result >= 0) {
+            System.out.println("결과 : " + result);
+        }
     }
 }
