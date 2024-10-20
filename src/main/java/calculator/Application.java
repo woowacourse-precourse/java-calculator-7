@@ -15,6 +15,12 @@ class StringCalculator {
 
     public StringCalculator(String input){
         this.input = input;
+        if(input.startsWith("//")){
+            String[] temp = input.split("\\\\n", 2);
+            if(temp.length>1 && temp[0].startsWith("//")){
+                delim= temp[0].substring(2);
+            }
+        }
     }
 
     public int addAll(){
@@ -24,8 +30,13 @@ class StringCalculator {
     }
 
     private String getNumsPart(){
+        if (input.startsWith("//")){
+            String[] temp = input.split("\\\\n", 2);
+            return temp.length > 1 ? temp[1] : "";
+        }
         return input;
     }
+
     private String[] splitNums(String numbers) {
         return numbers.split("[" + delim + "]");
     }
