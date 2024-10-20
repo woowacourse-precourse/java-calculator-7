@@ -21,7 +21,10 @@ public class Application {
             DividersAndNumberSequence dividersAndNumberSequence = getDividersAndNumberSequence(input);
             dividersAndNumberSequence.updateNumberSequence();
             List<Integer> numberList = getNumberList(dividersAndNumberSequence.getNumberSequence());
+            sum = sumNumber(numberList);
         }
+
+        System.out.println(sum);
     }
 
     public static DividersAndNumberSequence getDividersAndNumberSequence(String input) {
@@ -94,6 +97,16 @@ public class Application {
         }
 
         throw new IllegalArgumentException();
+    }
+
+    public static int sumNumber(List<Integer> numberList) {
+        int sum = 0;
+
+        for (int number : numberList) {
+            sum += number;
+        }
+
+        return sum;
     }
 }
 
