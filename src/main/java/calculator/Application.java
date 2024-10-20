@@ -52,6 +52,10 @@ public class Application {
     }
 
     private static String[] extractNumbers(String word, String delimiter) {
+        if (word.startsWith("//")) {
+            int idx = word.indexOf("\\n");
+            word = word.substring(idx+2);
+        }
         return word.split(delimiter);
     }
 
