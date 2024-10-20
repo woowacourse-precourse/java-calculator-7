@@ -9,9 +9,9 @@ class DeilimitersTest {
     void 구분자_조회() {
         Delimiters delimiters = Delimiters.create();
         List<String> allDelimiters = delimiters.getAllDelimiters();
-        Assertions.assertEquals(Delimiter.values().length, allDelimiters.size());
-        Assertions.assertTrue(allDelimiters.contains(Delimiter.COLON.getSymbol()));
-        Assertions.assertTrue(allDelimiters.contains(Delimiter.COMMA.getSymbol()));
+        Assertions.assertEquals(DefaultDelimiter.values().length, allDelimiters.size());
+        Assertions.assertTrue(allDelimiters.contains(DefaultDelimiter.COLON.getSymbol()));
+        Assertions.assertTrue(allDelimiters.contains(DefaultDelimiter.COMMA.getSymbol()));
     }
 
     @Test
@@ -19,9 +19,9 @@ class DeilimitersTest {
         String customDelimiter = "&";
         Delimiters delimiters = Delimiters.createWithCustomDelimiter(customDelimiter);
         List<String> allDelimiters = delimiters.getAllDelimiters();
-        Assertions.assertEquals(Delimiter.values().length + 1, allDelimiters.size());
-        Assertions.assertTrue(allDelimiters.contains(Delimiter.COLON.getSymbol()));
-        Assertions.assertTrue(allDelimiters.contains(Delimiter.COMMA.getSymbol()));
+        Assertions.assertEquals(DefaultDelimiter.values().length + 1, allDelimiters.size());
+        Assertions.assertTrue(allDelimiters.contains(DefaultDelimiter.COLON.getSymbol()));
+        Assertions.assertTrue(allDelimiters.contains(DefaultDelimiter.COMMA.getSymbol()));
         Assertions.assertTrue(allDelimiters.contains(customDelimiter));
     }
 }

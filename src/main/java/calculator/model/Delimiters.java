@@ -18,16 +18,16 @@ public class Delimiters {
 
     private Delimiters() {
         List<String> extendedDelimiters = new ArrayList<>();
-        for (Delimiter delimiter : Delimiter.values()) {
-            extendedDelimiters.add(delimiter.getSymbol());
+        for (DefaultDelimiter defaultDelimiter : DefaultDelimiter.values()) {
+            extendedDelimiters.add(defaultDelimiter.getSymbol());
         }
         this.delimiters = new HashSet<>(extendedDelimiters);
     }
 
     private Delimiters(String customDelimiter) {
         List<String> extendedDelimiters = new ArrayList<>();
-        for (Delimiter delimiter : Delimiter.values()) {
-            extendedDelimiters.add(delimiter.getSymbol());
+        for (DefaultDelimiter defaultDelimiter : DefaultDelimiter.values()) {
+            extendedDelimiters.add(defaultDelimiter.getSymbol());
         }
         extendedDelimiters.add(customDelimiter);
         this.delimiters = new HashSet<>(extendedDelimiters);
