@@ -32,4 +32,29 @@ public class Service {
 
         return nums;
     }
+
+    /**
+     * 숫자 배열을 받아서 합을 구하는 함수
+     */
+    public static int add(String[] nums) {
+        int sum = 0;
+        for (String num : nums) {
+            // 숫자가 없다면
+            if (num.isEmpty()) {
+                throw new IllegalArgumentException("입력된 숫자가 존재하지 않습니다.");
+            }
+
+            int number;
+            try {
+                number = Integer.parseInt(num);
+                if (number < 0) {
+                    throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + number);
+                }
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다: " + num);
+            }
+            sum += number;
+        }
+        return sum;
+    }
 }
