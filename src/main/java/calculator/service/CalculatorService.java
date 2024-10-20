@@ -3,14 +3,14 @@ package calculator.service;
 import java.util.Arrays;
 
 public class CalculatorService {
-    private String s;
+    private String inputString;
     private String customSeparator;
 
     /**
      * 덧셈 로직을 순차적으로 진행한다.
      */
-    public int add(String s) {
-        this.s = s;
+    public int add(String inputString) {
+        this.inputString = inputString;
         boolean hasCustomSeparator = checkCustomSeparator();
         String[] separatedString = separate(hasCustomSeparator);
         hasNaN(separatedString);
@@ -23,9 +23,9 @@ public class CalculatorService {
      * @return 만약 커스텀 구분자가 있다면 true, 없다면 false 를 반환한다.
      */
     private boolean checkCustomSeparator() {
-        if (s.length() >= 5 && s.startsWith("//") && s.startsWith("\\n", 3)) {
-            customSeparator = String.valueOf(s.charAt(2));
-            s = s.substring(5);
+        if (inputString.length() >= 5 && inputString.startsWith("//") && inputString.startsWith("\\n", 3)) {
+            customSeparator = String.valueOf(inputString.charAt(2));
+            inputString = inputString.substring(5);
             return true;
         }
         return false;
@@ -39,12 +39,12 @@ public class CalculatorService {
      */
     private String[] separate(boolean hasCustomSeparator) {
         if (!hasCustomSeparator) {
-            return s.split("[:,]");
+            return inputString.split("[:,]");
         }
         if (customSeparator.equals("\\")) {
-            return s.split("[:," + customSeparator.repeat(2) + "]");
+            return inputString.split("[:," + customSeparator.repeat(2) + "]");
         }
-        return s.split("[:," + customSeparator + "]");
+        return inputString.split("[:," + customSeparator + "]");
     }
 
     /**
