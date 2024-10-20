@@ -1,5 +1,6 @@
 package Factory;
 
+import exception.ExceptionMessage;
 import separator.CustomSeparator;
 import separator.CustomSeparatorFormat;
 import separator.DefaultSeparator;
@@ -27,13 +28,13 @@ public class SeparatorFactory {
         return new CustomSeparator(replaceInput, customSeparatorFormat);
     }
 
-    private String normalizeInputData() {
+    public String normalizeInputData() {
         String replaceInput = inputData.replace(" ", "");
         replaceInput = replaceBlankOrEmptyWithDefault(replaceInput);
         return replaceInput;
     }
 
-    private static String replaceBlankOrEmptyWithDefault(String replaceInput) {
+    public String replaceBlankOrEmptyWithDefault(String replaceInput) {
         if(replaceInput.isBlank() || replaceInput.isEmpty()){
             replaceInput ="0";
         }
@@ -45,6 +46,9 @@ public class SeparatorFactory {
             Integer.parseInt(replaceInput.substring(0, 1));
             return true;
         } catch (NumberFormatException e) {
+            if(!replaceInput.substring(0,2).contains("//")){
+                throw new IllegalArgumentException(ExceptionMessage.INVALID_CUSTOM_SEPARATOR_FORMAT.getMessage());
+            }
             return false;
         }
     }

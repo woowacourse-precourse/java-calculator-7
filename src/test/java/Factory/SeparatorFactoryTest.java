@@ -1,5 +1,6 @@
 package Factory;
 
+import exception.ExceptionMessage;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -45,18 +46,24 @@ class SeparatorFactoryTest {
         List<String> defaultSeparators = List.of(",", ":");
         String inputData ="2341,2031:22122";
         String inputData2 ="//!@\\n2341,2031:22122";
+        String inputData3 ="?//!@\\n2341,2031:22122";
         SeparatorFactory separatorFactory = new SeparatorFactory(defaultSeparators,new CustomSeparatorFormat(),inputData);
         SeparatorFactory separatorFactory2 = new SeparatorFactory(defaultSeparators,new CustomSeparatorFormat(),inputData2);
+        SeparatorFactory separatorFactory3 = new SeparatorFactory(defaultSeparators,new CustomSeparatorFormat(),inputData3);
         String replaceInput = inputData.replace(" ", "");
         String replaceInput2 = inputData2.replace(" ", "");
+        String replaceInput3 = inputData3.replace(" ", "");
 
         //when
         Boolean aBoolean = separatorFactory.isDefaultSeparator(replaceInput);
         Boolean aBoolean2 = separatorFactory2.isDefaultSeparator(replaceInput2);
 
+
         //then
         Assertions.assertThat(aBoolean).isTrue();
         Assertions.assertThat(aBoolean2).isFalse();
+        Assertions.assertThatThrownBy(() -> separatorFactory3.isDefaultSeparator(replaceInput3)).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ExceptionMessage.INVALID_CUSTOM_SEPARATOR_FORMAT.getMessage());
     }
 
     @DisplayName("input값의 공백을 제거한다.")
@@ -65,19 +72,19 @@ class SeparatorFactoryTest {
         //given
         List<String> defaultSeparators = List.of(",", ":");
         String inputData ="  2341,2031:22122";
-        String inputData2 ="//!@\\n2341,2031:22122";
+        String inputData2 ="  ";
         SeparatorFactory separatorFactory = new SeparatorFactory(defaultSeparators,new CustomSeparatorFormat(),inputData);
-        SeparatorFactory separatorFactory2 = new SeparatorFactory(defaultSeparators,new CustomSeparatorFormat(),inputData2);
         String replaceInput = inputData.replace(" ", "");
         String replaceInput2 = inputData2.replace(" ", "");
 
+
         //when
-        Boolean aBoolean = separatorFactory.isDefaultSeparator(replaceInput);
-        Boolean aBoolean2 = separatorFactory2.isDefaultSeparator(replaceInput2);
+        String s = separatorFactory.replaceBlankOrEmptyWithDefault(replaceInput);
+        String s2 = separatorFactory.replaceBlankOrEmptyWithDefault(replaceInput2);
 
         //then
-        Assertions.assertThat(aBoolean).isTrue();
-        Assertions.assertThat(aBoolean2).isFalse();
+        Assertions.assertThat(s).isEqualTo("2341,2031:22122");
+        Assertions.assertThat(s2).isEqualTo("0");
     }
 
 }

@@ -1,11 +1,11 @@
 package separator;
 
-import Factory.SeparatorFactory;
 import exception.ExceptionMessage;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.List;
+import java.util.regex.Matcher;
 
 class CustomSeparatorTest {
     @DisplayName("커스텀구분자에 숫자는 들어갈 수 없다.")
@@ -61,7 +61,7 @@ class CustomSeparatorTest {
     void validateCustomSeparatorFormat_NotBackSpace() {
         //given
         CustomSeparatorFormat customSeparatorFormat = new CustomSeparatorFormat();
-        String inputData = "//\\\n2341@!2031@!22122";
+        String inputData = "//\\\\n2341@!2031@!22122";
         CustomSeparator customSeparator = new CustomSeparator(inputData, List.of("@!"),customSeparatorFormat);
 
         //when
@@ -70,6 +70,8 @@ class CustomSeparatorTest {
         Assertions.assertThatThrownBy(customSeparator::validateCustomSeparatorFormat).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ExceptionMessage.INVALID_CUSTOM_SEPARATOR_CONTAINS_BACKSPACE.getMessage());
     }
+
+
     @DisplayName("구분자가 없을 때 에러 출력")
     @Test
     void validateCustomSeparatorFormat_NotEmpty() {
@@ -79,10 +81,96 @@ class CustomSeparatorTest {
         CustomSeparator customSeparator = new CustomSeparator(inputData,customSeparatorFormat);
 
         //when
-        System.out.println(customSeparator.getSeparator().get(0));
         customSeparator.validateCustomSeparatorFormat();
 
         //then
     }
+
+    @DisplayName("계산할 숫자가 없을 때, 초기값  설정")
+    @Test
+    void findGroupOrDefault() {
+        //given
+        CustomSeparatorFormat customSeparatorFormat = new CustomSeparatorFormat();
+        String inputData = "//\\n";
+        CustomSeparator customSeparator = new CustomSeparator(inputData,customSeparatorFormat);
+        Matcher matcher = customSeparatorFormat.getPattern().matcher(inputData);
+
+        //when
+
+        String groupOrDefault = customSeparator.findGroupOrDefault(matcher);
+        //then
+        Assertions.assertThat(groupOrDefault).isEqualTo("0");
+    }
+
+    @DisplayName("inputDaga 가져오기")
+    @Test
+    void getInputData() {
+        //given
+        CustomSeparatorFormat customSeparatorFormat = new CustomSeparatorFormat();
+        String inputData = "//@!\\n1@!2@!3";
+        CustomSeparator customSeparator = new CustomSeparator(inputData,customSeparatorFormat);
+
+
+        //when
+        String inputData1 = customSeparator.getInputData();
+        //then
+        Assertions.assertThat(inputData1).isEqualTo(inputData);
+    }
+
+
+    @DisplayName("계산할 숫자가 없을 때, 초기값  설정")
+    @Test
+    void splitGroupByCustomSeparator() {
+        //given
+        CustomSeparatorFormat customSeparatorFormat = new CustomSeparatorFormat();
+        String inputData = "3//@\\n1@2@3";
+        CustomSeparator customSeparator = new CustomSeparator(inputData,customSeparatorFormat);
+        Matcher matcher = customSeparatorFormat.getPattern().matcher(inputData);
+        String groupOrDefault1 = customSeparator.findGroupOrDefault(matcher);
+
+        //when
+        String[] strings = customSeparator.splitGroupByCustomSeparator(groupOrDefault1);
+
+        //then
+        Assertions.assertThat(strings[0]).isEqualTo("1");
+    }
+
+
+    @DisplayName("구분자가 없을 때, 숫자만 반환")
+    @Test
+    void EmptyCustomSeparate() {
+        //given
+        CustomSeparatorFormat customSeparatorFormat = new CustomSeparatorFormat();
+        String inputData = "//\\n123";
+        CustomSeparator customSeparator = new CustomSeparator(inputData,customSeparatorFormat);
+
+        //when
+        String[] strings1 = customSeparator.splitInputDataBySeparator();
+
+        //then
+        Assertions.assertThat(strings1[0]).isEqualTo("123");
+    }
+
+
+    @DisplayName("구분자를 찾을 수 없을 때, 에러 반환")
+    @Test
+    void findSeparator() {
+        //given
+        CustomSeparatorFormat customSeparatorFormat = new CustomSeparatorFormat();
+        String inputData = "//\\n123";
+        String inputData2 = "//\\n";
+        CustomSeparator customSeparator = new CustomSeparator(inputData,customSeparatorFormat);
+        CustomSeparator customSeparator2 = new CustomSeparator(inputData2,List.of(""),customSeparatorFormat);
+
+        //when
+        String separator = customSeparator.findSeparator();
+        String separator2 = customSeparator2.findSeparator();
+
+        //then
+        Assertions.assertThat(separator).isEqualTo("");
+        Assertions.assertThat(separator2).isEqualTo("");
+    }
+
+
 
 }

@@ -5,7 +5,6 @@ import exception.ExceptionMessage;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 
 
 public class CustomSeparator implements Separator {
@@ -24,36 +23,49 @@ public class CustomSeparator implements Separator {
         this.customSeparatorFormat = customSeparatorFormat;
         this.customSeparators = customSeparators;
     }
+
     public String findSeparator() {
         validateCustomSeparatorFormat();
         Matcher matcher = customSeparatorFormat.getPattern().matcher(inputData);
         if (matcher.find()) {
             return matcher.group(1);
         }
-
-        throw new IllegalArgumentException(ExceptionMessage.CUSTOM_SEPARATOR_NOT_FOUND.getMessage());
-
+        return "";
     }
 
     public void validateCustomSeparatorFormat() {
-        // TODO validate 책임 나누기
         Pattern pattern = Pattern.compile("//+(.*?)\\\\n");
         Matcher inputMatcher = customSeparatorFormat.getPattern().matcher(inputData);
         Matcher separatorMatcher = pattern.matcher(inputData);
-        if (separatorMatcher.find()) {
-            if (separatorMatcher.group(1).contains("\\")) {
-                throw new IllegalArgumentException(ExceptionMessage.INVALID_CUSTOM_SEPARATOR_CONTAINS_BACKSPACE.getMessage());
-            }
-        }
+
+        //구분자 안에 포함된 백스페이스 검증
+        validateSeparatorDoesNotContainBackslash(separatorMatcher);
+
+        // 커스텀구분자에 포함된 숫자검증
         String firstSeparatorChar = inputData.substring(2, 3);
+        validateSeparatorDoesNotContainNumber(firstSeparatorChar);
+
+        //커스텀 구분자 형식 검증
+        if (!inputMatcher.find()) {
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_CUSTOM_SEPARATOR_FORMAT.getMessage());
+        } ;
+    }
+
+    private void validateSeparatorDoesNotContainNumber(String firstSeparatorChar) {
         try {
             Integer.parseInt(firstSeparatorChar);
             throw new IllegalArgumentException(ExceptionMessage.INVALID_CUSTOM_SEPARATOR_CONTAINS_NUMBER.getMessage());
         } catch (NumberFormatException ignored) {
 
         }
-        if (!inputMatcher.find())
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_CUSTOM_SEPARATOR_FORMAT.getMessage());
+    }
+
+    private void validateSeparatorDoesNotContainBackslash(Matcher separatorMatcher) {
+        if (separatorMatcher.find()) {
+            if (separatorMatcher.group(1).contains("\\")) {
+                throw new IllegalArgumentException(ExceptionMessage.INVALID_CUSTOM_SEPARATOR_CONTAINS_BACKSPACE.getMessage());
+            }
+        }
     }
 
     @Override
@@ -64,32 +76,31 @@ public class CustomSeparator implements Separator {
     @Override
     public String[] splitInputDataBySeparator() {
         Matcher matcher = customSeparatorFormat.getPattern().matcher(inputData);
-        String group = findGroupOrThrow(matcher);
+        String group = findGroupOrDefault(matcher);
         return splitGroupByCustomSeparator(group);
     }
 
-    private String[] splitGroupByCustomSeparator(String group) {
+    public String[] splitGroupByCustomSeparator(String group) {
         if (isEmptyCustomSeparate()) {
             return new String[]{group};
         }
-        try {
-            return group.split(customSeparators.get(0));
-        } catch (PatternSyntaxException e) {
-            throw new IllegalArgumentException(ExceptionMessage.CUSTOM_SEPARATOR_NOT_FOUND.getMessage());
-        }
+        return group.split(customSeparators.get(0));
+
     }
 
-    private static String findGroupOrThrow(Matcher matcher) {
-        String group;
+    public String findGroupOrDefault(Matcher matcher) {
+        String group = "";
         if (matcher.find()) {
             group = matcher.group(2);
-        } else {
-            throw new IllegalArgumentException(ExceptionMessage.CUSTOM_SEPARATOR_NOT_FOUND.getMessage());
         }
+        if (group.isEmpty()) {
+            group = "0";
+        }
+
         return group;
     }
 
-    private boolean isEmptyCustomSeparate() {
+    public boolean isEmptyCustomSeparate() {
         return customSeparators.get(0).isEmpty();
     }
 
@@ -97,6 +108,4 @@ public class CustomSeparator implements Separator {
     public String getInputData() {
         return inputData;
     }
-
-
 }

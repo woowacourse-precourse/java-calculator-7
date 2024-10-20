@@ -42,8 +42,6 @@ public class Calculator {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ExceptionMessage.ONLY_NUMBERS_ALLOWED_EXCEPT_SEPARATOR.getMessage());
 
-        } catch (NullPointerException e) {
-            return new BigInteger("0");
         }
     }
 
