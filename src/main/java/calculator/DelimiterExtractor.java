@@ -1,12 +1,13 @@
 package calculator;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class DelimiterExtractor {
 
-    public List<Character> extract(String string) {
-        List<Character> delimiters = new ArrayList<>(List.of(',', ':'));
+    public Set<Character> extract(String string) {
+        Set<Character> delimiters = new HashSet<>(List.of(',', ':'));
 
         // 커스텀 구분자 존재 여부와 커스텀 구분자 형식 검사
         boolean hasDelimiter = validate(string);

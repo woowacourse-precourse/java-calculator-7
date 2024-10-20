@@ -1,6 +1,7 @@
 package calculator;
 
 import java.util.List;
+import java.util.Set;
 
 public class StringCalculator {
 
@@ -16,11 +17,11 @@ public class StringCalculator {
 
     public long calculate(String string) {
         // 구분자 리스트 추출
-        List<Character> delimiterList = delimiterExtractor.extract(string);
+        Set<Character> delimiterList = delimiterExtractor.extract(string);
 
         // 커스텀 구분자 prefix 제거
         String trimmedString = string;
-        if (delimiterList.size() > 2) {
+        if (string.startsWith("//") && string.startsWith("\\n", 3)) {
             trimmedString = string.substring(5);
         }
 

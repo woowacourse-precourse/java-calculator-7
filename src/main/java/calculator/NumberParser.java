@@ -2,10 +2,11 @@ package calculator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class NumberParser {
 
-    public List<Long> parse(String string, List<Character> delimiters) {
+    public List<Long> parse(String string, Set<Character> delimiters) {
         String regex = delimitersToRegex(delimiters);
         String[] splitted = string.split(regex);
 
@@ -28,7 +29,7 @@ public class NumberParser {
         return numbers;
     }
 
-    private String delimitersToRegex(List<Character> delimiters) {
+    private String delimitersToRegex(Set<Character> delimiters) {
         StringBuilder regex = new StringBuilder("[");
         for (Character delimiter : delimiters) {
             if (!Character.isLetterOrDigit(delimiter)) {

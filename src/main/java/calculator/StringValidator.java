@@ -1,10 +1,10 @@
 package calculator;
 
-import java.util.List;
+import java.util.Set;
 
 public class StringValidator {
 
-    public void validate(String string, List<Character> delimiters) {
+    public void validate(String string, Set<Character> delimiters) {
         String regex = regexPattern(delimiters);
 
         if (!string.isEmpty() && !string.matches(regex)) {
@@ -12,7 +12,7 @@ public class StringValidator {
         }
     }
 
-    private String regexPattern(List<Character> delimiters) {
+    private String regexPattern(Set<Character> delimiters) {
         StringBuilder regex = new StringBuilder("[0-9");
         for (Character delimiter : delimiters) {
             if (!Character.isLetterOrDigit(delimiter)) {
