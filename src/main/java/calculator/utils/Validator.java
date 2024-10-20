@@ -2,7 +2,7 @@ package calculator.utils;
 
 import calculator.constant.ErrorMessage;
 
-public class ValidateUtils {
+public class Validator {
     public static void checkNumberIsValid(String number) {
         if (!isNumeric(number)) {
             throw new IllegalArgumentException(ErrorMessage.NOT_A_NUMBER.getMessage());
