@@ -25,12 +25,12 @@ public class DelimiterParser {
     }
 
     public String parseCustomDelimiter(String input) {
-        int index = input.indexOf("\n");
+        int index = input.indexOf("\\n");
         return input.substring(2, index);
     }
 
     public String removeCustomDelimiter(String input) {
-        int index = input.indexOf("\n");
+        int index = input.indexOf("n");
 
         if (index != -1) {
             return input.substring(index + 1);
