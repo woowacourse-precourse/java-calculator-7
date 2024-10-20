@@ -36,12 +36,12 @@ public class Application {
                 tokens.add(token);
             } else if (token.contains("//") && token.contains("\\n")) { // 커스텀 구분자 등록
                 String[] customArray = token.split("//");
-                if (!customArray[0].isEmpty() && isNumber(customArray[0])) {
+                if (!customArray[0].isEmpty() && isNumber(customArray[0])) { // 숫자가 먼저 나온 경우 ex. 1,2//;\n1,2;3
                     tokens.add(customArray[0]);
                 }
                 customArray = customArray[1].split("\\\\n"); // \n 문자 그대로 분리
                 registerDelim(customArray);
-                splitInput(customArray[1], tokens);
+                splitInput(customArray[1], tokens); // 재귀 호출로 토큰 분리
             } else if (isDelimIn(token)) { // 커스텀 구분자 등록 후 기본 구분자 다음에 나오는 토큰 ex. 1,2//;\n1,2;3
                 splitInput(token, tokens);
             } else {  // 음수 혹은, 기본 구분자와 커스텀 구분자가 아닌 문자열
@@ -82,7 +82,7 @@ public class Application {
         return add(tokens);
     }
 
-    private static String add(List<String> tokens) {
+    private static String add(List<String> tokens) { // overflow 막기 위해 토큰의 문자를 숫자로 변환한 뒤 덧셈
         int max_len = 0;
         for (String token : tokens) {
             if (token.length() > max_len) {
@@ -96,7 +96,7 @@ public class Application {
             int[] b = stringToIntArray(token, max_len);
             addArrays(a, b, token.length());
         }
-        return flipAndGetResult(a);
+        return getReversedResult(a);
     }
 
     private static int[] stringToIntArray(String token, int max_len) {
@@ -121,7 +121,7 @@ public class Application {
         }
     }
 
-    private static String flipAndGetResult(int[] a) {
+    private static String getReversedResult(int[] a) {
         StringBuilder result = new StringBuilder();
         int last = a.length - 1;
         if (a[last] != 0) { // 마지막 올림수
