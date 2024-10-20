@@ -5,11 +5,12 @@ public class StringCalculator {
 	private static final int SPLITTER_FIND_START_INDEX = 2;
 
 	public static Positive splitAndSum(String input) {
-		String[] splitString = splitWithOriginalSplitter(input);
-		if (splitString.length > 1) {
+		if (input.contains(",") || input.contains("|")) {
+			String[] splitString = StringSplitter.splitWithOriginalSplitter(input);
 			return calculateSum(toInts(splitString));
 		}
-		return calculateSum(toInts(splitWithCustomSplitter(input)));
+		String[] splitString = StringSplitter.splitWithCustomSplitter(input);
+		return calculateSum(toInts(splitString));
 	}
 
 	private static String[] splitWithOriginalSplitter(String input) {
