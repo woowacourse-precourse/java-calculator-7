@@ -3,7 +3,7 @@ package calculator.view.constants;
 public enum ViewMessage {
 
     INPUT_VIEW_MESSAGE("덧셈할 문자열을 입력해 주세요."),
-    OUTPUT_VIEW_MESSAGE("결과 : %d"),
+    OUTPUT_VIEW_MESSAGE("결과 : %s"),
     ;
 
     private final String message;
