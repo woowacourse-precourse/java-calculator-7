@@ -6,7 +6,6 @@ public class InputModel {
 	private final String input;
 
 	public InputModel(String input) {
-		validateInput(input);
 		this.input = input;
 	}
 
@@ -14,9 +13,4 @@ public class InputModel {
 		return input;
 	}
 
-	private void validateInput(String input) {
-		if (input == null || input.trim().isEmpty()) {
-			throw new IllegalArgumentException(ExceptionMessage.INPUT_EMPTY);
-		}
-	}
 }
