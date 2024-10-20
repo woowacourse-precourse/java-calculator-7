@@ -17,10 +17,34 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트() {
+    void 입력받은_숫자_더하기() {
+        assertSimpleTest(() -> {
+            run("1,2:3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 예외_테스트_음수가_존재() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("-1,2,3"))
                 .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_구분자와_양수_외_문자가_존재(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1@2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_커스텀_구분자_입력_형식을_지키지_않음(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("/&\\1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
