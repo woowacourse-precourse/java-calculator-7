@@ -15,7 +15,7 @@ public class CalculatorService {
         int sum = 0;
 
         // 커스텀 구분자
-        while (input.contains("//")) {
+        while (input.contains(CustomSeparator.getStartOfSeparator())) {
             separator = CustomSeparator.extractAndCombine(input, separator.getSeparator());
             sum += calculatePrefixSum(input, separator.getSeparator());
             input = updateInputString(input);
@@ -33,15 +33,12 @@ public class CalculatorService {
     }
 
     private static int calculatePrefixSum(String input, String separator) {
-        String prefix = input.substring(0, input.indexOf("//")).trim();
-        if (!prefix.isEmpty()) {
-            return sumNumbers(prefix.split(separator));
-        }
-        return 0;
+        String prefix = input.substring(0, input.indexOf(CustomSeparator.getStartOfSeparator())).trim();
+        return sumNumbers(prefix.split(separator));
     }
 
     private static String updateInputString(String input) {
-        int separatorIndex = input.indexOf("\\n");
+        int separatorIndex = input.indexOf(CustomSeparator.getEndOfSeparator());
         return input.substring(separatorIndex + 2);
     }
 
