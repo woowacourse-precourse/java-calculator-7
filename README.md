@@ -12,7 +12,6 @@
 - List<String> extract(String)
   - 구분자를 기준으로 숫자 분리
   - 예외 처리
-    - 구분자가 연속으로 나오는 경우
     - 구분자 혹은 숫자를 제외한 글자가 나오는 경우
 - String sum(List<String>)
   - 두 숫자를 더함
