@@ -11,7 +11,7 @@ public class Delimiters {
     private final Set<Delimiter> value;
 
     private Delimiters(Set<Delimiter> delimiters) {
-        this.value = new HashSet<>(delimiters);
+        this.value = delimiters;
     }
 
     public static Delimiters createWithDefault() {
