@@ -3,6 +3,7 @@ package calculator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class NumberParser {
     private static final String DEFAULT_DELIMITER = "[,:]";
@@ -34,7 +35,7 @@ public class NumberParser {
         int index = input.indexOf(CUSTOM_SUFFIX);
         String customDelimiter = input.substring(CUSTOM_PREFIX_LENGTH, index);
         String result = input.substring(index + CUSTOM_SUFFIX_LENGTH);
-        return result.split(customDelimiter);
+        return result.split(Pattern.quote(customDelimiter));
     }
 
     private List<Integer> convertToIntegerList(String[] numbers) {
