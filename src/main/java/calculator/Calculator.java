@@ -8,7 +8,6 @@ public class Calculator {
 
         String customDelimiter = extractCustomDelimiter(input); // 커스텀 구분자 추출
         String numbersPart = extractNumbersPart(input); // 커스텀 구분자 지정 문자 제외한 부분 추출
-        System.out.println(numbersPart);
 
         String regex;
         if (customDelimiter != null) {
@@ -20,8 +19,7 @@ public class Calculator {
         String[] numbers = numbersPart.split(regex);
 
         validateNumbers(numbers);
-        int sum = sumNumbers(numbers);
-        return sum;
+        return sumNumbers(numbers);
     }
 
     public String extractCustomDelimiter(String input) {
@@ -54,11 +52,11 @@ public class Calculator {
             number = number.trim();
             // 숫자인지 검사
             if (!isNumeric(number)) {
-                throw new IllegalArgumentException("Invalid number: " + number);
+                throw new IllegalArgumentException("숫자가 아닙니다: " + number);
             }
             // 양수인지 검사
             if (!isPositive(number)) {
-                throw new IllegalArgumentException("Invalid number: " + number);
+                throw new IllegalArgumentException("양수가 아닙니다: " + number);
             }
         }
     }
