@@ -20,7 +20,6 @@ public class Calculator {
         String delimiterRegex = inputProcessor.getDelimiterRegex(); // 사용하는 구분자의 정규표현식
         List<Integer> digits = digitExtractor.extractDigits(operationInput, delimiterRegex);
         int result = operationProcessor.calculate(digits);
-
         System.out.println("결과 : " + result);
         Console.close();
     }
