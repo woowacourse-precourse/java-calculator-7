@@ -48,6 +48,30 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 예외_테스트_커스텀_구분자_형식체크1() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\n1;1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_커스텀_구분자_형식체크2() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;n1;1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 예외_테스트_커스텀_구분자_형식체크3() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;1;1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
