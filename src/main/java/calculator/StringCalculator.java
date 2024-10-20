@@ -40,7 +40,8 @@ public class StringCalculator {
         List<String> delimiters = new ArrayList<>(Arrays.asList(",", ":"));
 
         if (!customDelimiter.isEmpty()) {
-            delimiters.add(customDelimiter);
+            String delimiter = customDelimiter.equals("\\") ? "\\\\" : customDelimiter;
+            delimiters.add(delimiter);
         }
 
         return String.join("|", delimiters);
