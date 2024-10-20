@@ -24,4 +24,22 @@ class InputValidatorTest {
                 .hasMessage("등록되지 않은 구분자가 포함되어 있습니다.");
     }
 
+    @Test
+    void 기본_구분자_형식_검증_테스트_숫자_형식() {
+        String input = "1:2;123b";
+
+        assertThatThrownBy(() -> inputValidator.validateInput(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("잘못된 형식의 입력입니다.");
+    }
+
+    @Test
+    void 기본_구분자_형식_검증_테스트_숫자_누락() {
+        String input = "1:;123";
+
+        assertThatThrownBy(() -> inputValidator.validateInput(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("잘못된 형식의 입력입니다.");
+    }
+
 }
