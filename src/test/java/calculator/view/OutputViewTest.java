@@ -8,7 +8,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class OutputViewTest {
-
     @Test
     @DisplayName("결과를 출력한다.")
     void printSum() {
@@ -20,5 +19,4 @@ class OutputViewTest {
 
         Assertions.assertThat(out.toString()).isEqualTo(expected);
     }
-
 }

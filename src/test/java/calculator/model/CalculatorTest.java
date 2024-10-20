@@ -9,7 +9,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class CalculatorTest {
-
     @ParameterizedTest(name = "숫자 : {0}, 합 : {1}")
     @DisplayName("숫자들에 대한 덧셈을 진행한다.")
     @MethodSource("addedNumbersAndSum")

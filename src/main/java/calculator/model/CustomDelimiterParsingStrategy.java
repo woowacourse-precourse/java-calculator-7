@@ -15,7 +15,6 @@ public class CustomDelimiterParsingStrategy implements ParsingStrategy {
     @Override
     public List<Integer> parse(final String input) {
         delimiters.addCustomDelimiter(input);
-
         String substring = input.substring(5);
         List<String> result = new ArrayList<>();
         StringTokenizer stringTokenizer = new StringTokenizer(substring, delimiters.toConcatenatedString());

@@ -5,7 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class DelimitersTest {
-
     @Test
     @DisplayName("커스텀 구분자를 갖고 있는지 판단할 수 있다.")
     void hasCustomDelimiter() {
