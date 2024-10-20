@@ -14,7 +14,7 @@ class ApplicationTest extends NsTest {
     void setUp() {
         Application.delim = new StringBuilder(",:");
     }
-    
+
     @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
@@ -54,6 +54,15 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 78");
         });
     }
+
+    @Test
+    void 오버플로우_테스트() {
+        assertSimpleTest(() -> {
+            run("9223372036854775807,1//-\\n2-3:4");
+            assertThat(output()).contains("결과 : 9223372036854775817");
+        });
+    }
+
 
     @Override
     public void runMain() {
