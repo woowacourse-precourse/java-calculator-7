@@ -2,26 +2,22 @@ package calculator.model;
 
 import calculator.common.ExceptionMessage;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public abstract class UserInput {
     private static final String DEFAULT_DELIMITER_COMMA = ",";
     private static final String DEFAULT_DELIMITER_COLON = ":";
     protected static final String REGEX_DELIMITER = "|";
-    protected static final String ZERO_VALUE = "0";
 
-    protected final List<String> delimiters;
+    protected final Set<String> delimiters;
     protected long[] inputNumbers;
 
     protected UserInput(String userInput) {
-        delimiters = new ArrayList<>();
+        delimiters = new HashSet<>();
         delimiters.add(DEFAULT_DELIMITER_COMMA);
         delimiters.add(DEFAULT_DELIMITER_COLON);
 
         parseInputForCalculate(userInput);
-        checkInputNumsIsPositive();
     }
 
     /***
@@ -46,27 +42,30 @@ public abstract class UserInput {
     protected abstract String[] splitCalculatePartByDelimiters(String calculatePart);
 
     /***
-     * 계산해야 할 값이 숫자로만 이루어져있는지 확인합니다.
-     * @param splitStringByDelimiter : 구분자에 의해 split 된 배열
+     * 계산할 값이 양수인지 체크합니다.
+     * @param num : 파싱된 값
+     * @return : 양수면 true 리턴, 음수면 예외 출력
      */
-    protected void checkValueToCalculateIsNumber(String[] splitStringByDelimiter) {
-        try {
-            Arrays.stream(splitStringByDelimiter)
-                    .map(value -> value.isEmpty() ? ZERO_VALUE : value)
-                    .mapToLong(Long::parseLong)
-                    .forEach(value -> {}); // 스트림의 최종연산 (반환값이 필요 없기에 검증을 위한 코드)
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ExceptionMessage.CALCULATE_PART_IS_INVALID.getValue());
+    protected boolean checkNumIsPositive(Long num) {
+        if (num < 0) {
+            throw new IllegalArgumentException(ExceptionMessage.NUMBER_NOT_POSITIVE.getValue());
+        }
+        return true;
+    }
+
+    protected void checkValidCalculatePart(String calculatePart) {
+        if (getDelimiterCntInCalculatePart(calculatePart) >= inputNumbers.length) {
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_INPUT.getValue());
         }
     }
 
-    /***
-     * 계산할 값들이 양수로만 이루어져있는지 확인합니다.
-     */
-    private void checkInputNumsIsPositive() {
-        if (Arrays.stream(this.inputNumbers).anyMatch(inputNumber -> inputNumber < 0)) {
-            throw new IllegalArgumentException(ExceptionMessage.NUMBER_NOT_POSITIVE.getValue());
+    private int getDelimiterCntInCalculatePart(String calculatePart) {
+        int delimCnt = 0;
+        for (String s : calculatePart.split("")) {
+            if (delimiters.contains(s)) delimCnt++;
         }
+
+        return delimCnt;
     }
 
 }

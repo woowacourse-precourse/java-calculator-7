@@ -1,5 +1,7 @@
 package calculator.model;
 
+import calculator.common.ExceptionMessage;
+
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
@@ -11,13 +13,22 @@ public class DefaultInput extends UserInput {
 
     @Override
     protected void parseInputForCalculate(String userInput) {
-        String[] splitValues = splitCalculatePartByDelimiters(userInput);
-        checkValueToCalculateIsNumber(splitValues);
+        inputNumbers = userInput.isEmpty()
+                ? new long[]{0}
+                : parseStringToLongArray(userInput);
 
-        inputNumbers = Arrays.stream(splitValues)
-                .map(value -> value.isEmpty() ? ZERO_VALUE : value)  // 빈 문자열을 "0"으로 치환
-                .mapToLong(Long::parseLong) // Long으로 변환
-                .toArray();
+        checkValidCalculatePart(userInput);
+    }
+
+    private long[] parseStringToLongArray(String userInput) {
+        try {
+            return Arrays.stream(splitCalculatePartByDelimiters(userInput))
+                    .mapToLong(Long::parseLong)
+                    .filter(this::checkNumIsPositive)
+                    .toArray();
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ExceptionMessage.CALCULATE_PART_IS_INVALID.getValue());
+        }
     }
 
     @Override

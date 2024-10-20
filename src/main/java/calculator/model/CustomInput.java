@@ -21,13 +21,30 @@ public class CustomInput extends UserInput {
 
         extractCustomDelimiterAndAdd(userInput, delimiterStartIdx, delimiterEndIdx);
 
-        String[] splitValues = splitCalculatePartByDelimiters(extractCalculatePart(userInput, delimiterEndIdx + 2));
-        checkValueToCalculateIsNumber(splitValues);
+        String calculatePart = extractCalculatePart(userInput, delimiterEndIdx + 2);
 
-        inputNumbers = Arrays.stream(splitValues)
-                .map(value -> value.isEmpty() ? ZERO_VALUE : value) // 빈 문자열을 "0"으로 치환
-                .mapToLong(Long::parseLong) // Long으로 변환
-                .toArray();
+        if (isCalculatePartEmpty(calculatePart)) return;
+
+        String[] splitValues = splitCalculatePartByDelimiters(calculatePart);
+
+        try {
+            inputNumbers = Arrays.stream(splitValues)
+                    .mapToLong(Long::parseLong)
+                    .filter(this::checkNumIsPositive)
+                    .toArray();
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ExceptionMessage.CALCULATE_PART_IS_INVALID.getValue());
+        }
+
+        checkValidCalculatePart(calculatePart);
+    }
+
+    private boolean isCalculatePartEmpty(String calculatePart) {
+        if (calculatePart.isEmpty()) {
+            inputNumbers = new long[]{0};
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -41,7 +58,7 @@ public class CustomInput extends UserInput {
     }
 
     /***
-     * 커스텀 구분자포맷이 지켜졌는지 확인합니다.
+     * 커스텀 구분자포맷("//_\n)이 지켜졌는지 확인합니다.
      * @param userInput : 사용자의 입력
      */
     private void checkCustomDelimFormat(String userInput) {
@@ -57,7 +74,10 @@ public class CustomInput extends UserInput {
      * @param endIdx : 커스텀 구분자의 추출 마지막 인덱스
      */
     private void extractCustomDelimiterAndAdd(String userInput, int startIdx, int endIdx) {
-        delimiters.add(userInput.substring(startIdx, endIdx));
+        String customDelimiter = userInput.substring(startIdx, endIdx);
+        checkCustomDelimiterIncludeNumber(customDelimiter);
+
+        delimiters.add(customDelimiter);
     }
 
     /***
@@ -68,5 +88,15 @@ public class CustomInput extends UserInput {
      */
     private String extractCalculatePart(String userInput, int startIdx) {
         return userInput.substring(startIdx);
+    }
+
+    /***
+     * 커스텀 구분자에 숫자가 사용되어있는지 검사합니다.
+     * @param customDelimiter : 추출된 커스텀 구분자
+     */
+    private void checkCustomDelimiterIncludeNumber(String customDelimiter) {
+        if (customDelimiter.chars().anyMatch(Character::isDigit)) {
+            throw new IllegalArgumentException(ExceptionMessage.CUSTOM_DELIMITER_NOT_INCLUDE_NUMBER.getValue());
+        }
     }
 }
