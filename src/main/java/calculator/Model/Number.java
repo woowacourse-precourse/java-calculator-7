@@ -49,7 +49,7 @@ public class Number {
     }
 
     public void validInputText(char endChar) {
-        if (!('0' <= endChar && endChar <= '9')) {
+        if (!('0' < endChar && endChar <= '9')) {
             throw new IllegalArgumentException("입력이 올바르지 않습니다. 마지막 문자는 숫자여야 합니다.");
         }
     }
@@ -62,7 +62,7 @@ public class Number {
     }
 
     public boolean checkValidNumber(int number) {
-        return 0 <= number && number <= Integer.MAX_VALUE;
+        return 0 < number && number <= Integer.MAX_VALUE;
     }
 
     public int parseInt(String numberString) {
