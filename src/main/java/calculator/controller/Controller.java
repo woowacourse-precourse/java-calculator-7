@@ -24,8 +24,8 @@ public class Controller {
 
     public void calculate() {
         startWithDelimiterInitialization();
-        int i = processUserInputAndCalculate();
-        displayCalculationResult(i);
+        int result = processUserInputAndCalculate();
+        displayCalculationResult(result);
     }
 
     public void startWithDelimiterInitialization() {
@@ -33,23 +33,23 @@ public class Controller {
     }
 
     public int processUserInputAndCalculate() {
-        String s = inputView.startCalculatorWithInput();
-        if (validators.validateDelimiterDeclaration(s)) {
-            utils.addCustomDelimiters(calculator, s);
-            s = utils.extractCalculationString(s);
+        String inputString = inputView.startCalculatorWithInput();
+        if (validators.validateDelimiterDeclaration(inputString)) {
+            utils.addCustomDelimiters(calculator, inputString);
+            inputString = utils.extractCalculationString(inputString);
         }
 
-        validators.validateAllowedCharacters(calculator.delimiters, s);
+        validators.validateAllowedCharacters(calculator.delimiters, inputString);
 
-        validators.validateDelimiterSurroundings(calculator, s);
+        validators.validateDelimiterSurroundings(calculator, inputString);
 
-        int[] lists = utils.convertStringToIntList(s, calculator);
+        int[] numbers = utils.convertStringToIntList(inputString, calculator);
 
-        return utils.sumIntList(lists);
+        return utils.sumIntList(numbers);
     }
 
-    public void displayCalculationResult(int i) {
-        outputView.printCalculatorResult(i);
+    public void displayCalculationResult(int result) {
+        outputView.printCalculatorResult(result);
         outputView.printCalculatorEndMessage();
     }
 }
