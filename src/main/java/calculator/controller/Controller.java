@@ -14,4 +14,8 @@ public class Controller {
         this.outputView = outputView;
         this.calculator = calculator;
     }
+
+    public void startWithDelimiterInitialization() {
+        calculator.init();
+    }
 }
