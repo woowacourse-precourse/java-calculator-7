@@ -39,7 +39,7 @@ public class InputValidatorTest {
     @Test
     void validate_잘못된구분자_기본구분자사용() {
         // given
-        String userInput = "//,\\n1,2,3"; // 기본 구분자인 ','를 커스텀 구분자로 사용할 경우
+        String userInput = "//,\\n1,2,3";
 
         // when & then
         Assertions.assertThrows(IllegalArgumentException.class, () -> new InputValidator(userInput),
@@ -49,7 +49,7 @@ public class InputValidatorTest {
     @Test
     void validate_잘못된구분자_숫자사용() {
         // given
-        String userInput = "//1\\n1;2;3"; // 구분자로 숫자를 사용할 경우
+        String userInput = "//1\\n1;2;3";
 
         // when & then
         Assertions.assertThrows(IllegalArgumentException.class, () -> new InputValidator(userInput),
@@ -59,7 +59,7 @@ public class InputValidatorTest {
     @Test
     void validate_잘못된입력형식_유효하지않은문자() {
         // given
-        String userInput = "1;2;a"; // 유효하지 않은 문자가 포함된 경우
+        String userInput = "1;2;a";
 
         // when & then
         Assertions.assertThrows(IllegalArgumentException.class, () -> new InputValidator(userInput),
