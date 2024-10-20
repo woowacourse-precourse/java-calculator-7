@@ -13,6 +13,10 @@ public class Application {
     }
 
     private static int calculate(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            return 0;
+        }
+
         String[] tokens = input.split(",|:");
         int sum = 0;
 
