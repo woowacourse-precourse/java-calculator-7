@@ -51,7 +51,8 @@ Execution time: 42.87 ms
 Execution time: 52.22 ms
 
 Average Execution time: 50.32ms
-- ```
+```
+
 - 최적화 리팩토링 전 최적화 시간은 `50.32ms` 나왔습니다.
 ### 최적화 목록
 - [ ] 정규표현식을 사용하는 문자열의 split을 Matcher, Patterns 클래스로 변경
