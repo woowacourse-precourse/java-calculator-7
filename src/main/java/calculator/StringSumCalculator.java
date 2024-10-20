@@ -1,24 +1,14 @@
 package calculator;
 
-public class StringSumCalculator {
+import java.util.regex.Pattern;
 
+public class StringSumCalculator {
     public int add(String input) {
         if (input == null || input.isEmpty()) {
             return 0;
         }
 
-        String[] numbers;
-
-        if (input.startsWith("//") && input.contains("\n")) {
-            int delimiterIndex = input.indexOf("\n");
-            String customDelimiter = input.substring(2, delimiterIndex);
-
-            String numbersWithDelimiter = input.substring(delimiterIndex + 1);
-
-            numbers = numbersWithDelimiter.split(customDelimiter);
-        } else {
-            numbers = input.split(",|:");
-        }
+        String[] numbers = splitNumbers(input);
 
         int sum = 0;
         for (String number : numbers) {
@@ -31,6 +21,20 @@ public class StringSumCalculator {
             sum += parsedNumber;
         }
         return sum;
+    }
+
+    private String[] splitNumbers(String input) {
+        String[] splitNumbers;
+
+        if (input.startsWith("//") && input.contains("\n")) {
+            int delimiterIdx = input.indexOf("\n");
+            String customDelimiter = input.substring(2, delimiterIdx);
+            String numbersWithDelimiter = input.substring(delimiterIdx + 1);
+            splitNumbers = numbersWithDelimiter.split(Pattern.quote(customDelimiter));
+        } else {
+            splitNumbers = input.split(",|:");
+        }
+        return splitNumbers;
     }
 
     private void validateInput(String input) {
