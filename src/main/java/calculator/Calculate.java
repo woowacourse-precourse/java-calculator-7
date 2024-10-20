@@ -13,7 +13,7 @@ public class Calculate {
         for (int newToken : newTokens) {
             sum += newToken;
         }
-        
+
         System.out.println("결과 : " + sum);
     }
 
@@ -44,7 +44,11 @@ public class Calculate {
             if (tokens[i].isEmpty()) {
                 tokens[i] = "0";
             }
-            newTokens[i] = Integer.parseInt(tokens[i]);
+            try {
+                newTokens[i] = Integer.parseInt(tokens[i]);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("숫자 형식이 아닌 값이 포함되어 있습니다.");
+            }
 
             if (newTokens[i] < 0) {
                 throw new IllegalArgumentException("음수 값이 포함되어 있습니다.");
