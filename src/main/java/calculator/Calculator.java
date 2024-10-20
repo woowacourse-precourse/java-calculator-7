@@ -3,6 +3,7 @@ package calculator;
 import java.util.regex.Pattern;
 
 public class Calculator {
+    private Pattern defaultPattern = Pattern.compile(",|:");
     private Pattern customString;
     public Calculator(){
         this.customString = Pattern.compile(":|,");
@@ -12,7 +13,7 @@ public class Calculator {
     }
 
     String[] parseString(String input){
-        return input.split(customString.pattern());
+        return this.customString.split(input);
     }
 
     double calculate(String[] inputString){
@@ -27,6 +28,7 @@ public class Calculator {
             if (doubleNumber <= 0){
                 throw new IllegalArgumentException("양수만 계산 가능합니다.");
             }
+            sum += doubleNumber;
         }
         return sum;
     }
