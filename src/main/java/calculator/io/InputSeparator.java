@@ -1,6 +1,7 @@
 package calculator.io;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,12 +18,24 @@ public class InputSeparator {
         if (customPatternMatcher.matches()) {
             String delimiter = customPatternMatcher.group(1);
             String string = customPatternMatcher.group(2);
+            validateDelimiterAndString(delimiter, string);
             return new UserInput(delimiter, string);
         }
 
         Set<String> possibleDelimiters = extractPossibleDelimiter(input);
         String delimiters = String.join(EMPTY_STRING, possibleDelimiters);
+        validateDelimiterAndString(delimiters, input);
+        validateStringIsEmpty(input, delimiters);
         return new UserInput(delimiters, input);
+    }
+
+    private void validateDelimiterAndString(String delimiter, String string) {
+        if (delimiterIsEmpty(delimiter) && !stringIsEmpty(string)) {
+            throw new IllegalArgumentException("구분자는 공백일 수 없습니다.");
+        }
+        if (!delimiterIsEmpty(delimiter) && stringIsEmpty(string)) {
+            throw new IllegalArgumentException("문자열은 공백일 수 없습니다.");
+        }
     }
 
     private Set<String> extractPossibleDelimiter(String input) {
@@ -33,5 +46,24 @@ public class InputSeparator {
 
     private boolean isDefaultDelimiters(String string) {
         return string.equals(QUOTE_DELIMITER) || string.equals(COLON_DELIMITER);
+    }
+
+    private void validateStringIsEmpty(String input, String delimiters) {
+        if (!stringIsEmpty(input)) {
+            String quotedDelimiters = "[" + Pattern.quote(delimiters) + "]";
+            List<String> availableStrings = Arrays.stream(input.split(quotedDelimiters))
+                    .toList();
+            if (availableStrings.isEmpty()) {
+                throw new IllegalArgumentException("문자열은 공백일 수 없습니다.");
+            }
+        }
+    }
+
+    private boolean delimiterIsEmpty(String delimiter) {
+        return delimiter.isEmpty();
+    }
+
+    private boolean stringIsEmpty(String string) {
+        return string.isEmpty();
     }
 }
