@@ -1,5 +1,6 @@
 package calculator.infrastructure;
 
+import calculator.exception.InvalidInputStrException;
 import calculator.exception.InvalidSeparatorException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +17,11 @@ public class InputStringProcessor {
     private static final String SEPARATOR_FORM_END_STR = "\\n";
     private static final int SEPARATOR_LOCATION_INDEX = 2;
     private static final int INIT_SIZE_IN_SPLIT_STR = 0;
+
+    public void validateInputStr(String inputStr) {
+        validateInputStrIsNotEmpty(inputStr);
+        validateInputStrHasNoSpaces(inputStr);
+    }
 
     public boolean checkIfInputStringContainsSeparator(String inputStr) {
         if (!checkIfSeparatorForm(inputStr)) {
@@ -59,6 +65,18 @@ public class InputStringProcessor {
             splitStrList.add(sb.toString());
         }
         return splitStrList;
+    }
+
+    private void validateInputStrHasNoSpaces(String inputStr) {
+        if (inputStr == null || inputStr.isEmpty()) {
+            throw new InvalidInputStrException(inputStr);
+        }
+    }
+
+    private void validateInputStrIsNotEmpty(String inputStr) {
+        if (inputStr.contains(" ")) {
+            throw new InvalidInputStrException(inputStr);
+        }
     }
 
     private boolean checkIfSeparatorForm(String inputStr) {
