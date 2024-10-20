@@ -10,16 +10,12 @@ public class Calculator {
     }
 
     private void sumNumbers(Numbers numbers) {
-        int sum = 0;
-        for (Integer number : numbers.toInteger()) {
-            sum += number;
-        }
-        this.sum = sum;
+        this.sum = numbers.toInteger().stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
     public int getSum() {
         return sum;
     }
-
-
 }

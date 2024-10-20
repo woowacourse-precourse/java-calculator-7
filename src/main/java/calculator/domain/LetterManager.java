@@ -5,6 +5,7 @@ import static calculator.global.util.Validator.validateSeparator;
 
 import calculator.domain.separator.Separators;
 import calculator.domain.number.Numbers;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,10 +27,12 @@ public class LetterManager {
 
     private void RegisterCustomSeparator() {
         String[] separators = getCustomSeparatorFromLetters();
-        for (String separator : separators) {
-            replaceCustomSeparatorToSeparator(separator);
-            this.separators.addSeparator(separator);
-        }
+
+        Arrays.stream(separators)
+                .forEach(separator -> {
+                    replaceCustomSeparatorToSeparator(separator);
+                    this.separators.addSeparator(separator);
+                });
     }
 
     private String[] getCustomSeparatorFromLetters() {
@@ -52,12 +55,9 @@ public class LetterManager {
     }
 
     private void addSeparatedNumbersToNumbers(String[] numbers) {
-        for (String number : numbers) {
-            if (number.isEmpty()) {
-                continue;
-            }
-            addSeparatedNumberToNumbers(number);
-        }
+        Arrays.stream(numbers)
+                .filter(number -> !number.isEmpty())
+                .forEach(this::addSeparatedNumberToNumbers);
     }
 
     private void addSeparatedNumberToNumbers(String number) {
