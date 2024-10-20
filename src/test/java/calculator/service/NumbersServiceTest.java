@@ -42,7 +42,7 @@ class NumbersServiceTest {
                 Arguments.of("", Numbers.class, "공백 입력"),
                 Arguments.of(" ", Numbers.class, "white space 입력"),
                 Arguments.of("1", Numbers.class, "숫자 1만 입력"),
-                Arguments.of("2000000000", Numbers.class, "숫자 20억 입력")
+                Arguments.of("200000000", Numbers.class, "숫자 2억 입력")
         );
     } // generateData
 
@@ -58,7 +58,7 @@ class NumbersServiceTest {
         return Stream.of(
                 Arguments.of(";123", "숫자만으로 구성되지 않았을 때"),
                 Arguments.of("-2", "음수일 때"),
-                Arguments.of("20000000001", "20억 초과일 때")
+                Arguments.of("2000000001", "2억 초과일 때")
         );
     } // generateExceptionData
 
