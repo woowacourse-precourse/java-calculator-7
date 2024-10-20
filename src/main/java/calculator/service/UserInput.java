@@ -2,6 +2,7 @@ package calculator.service;
 
 import calculator.model.Global;
 import camp.nextstep.edu.missionutils.Console;
+import java.util.NoSuchElementException;
 
 public class UserInput {
 
@@ -13,6 +14,11 @@ public class UserInput {
 
     public void readLine() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        global.setInput(Console.readLine());
+        try {
+            String input = Console.readLine();
+            global.setInput(input);
+        } catch (NoSuchElementException e) {
+            throw new IllegalArgumentException();
+        }
     }
 }
