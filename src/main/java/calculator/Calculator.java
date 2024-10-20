@@ -53,7 +53,7 @@ public class Calculator {
 
   // 문자열의 요소가 유효하지 않으면 예외 처리한다
   private void checkException(char index) {
-    // [] 디버깅 :  first type:  boolean,  second type: char
+    // [x] 디버깅 :  오타 수정 && -> !=
     // 특정 구분자가 아닌 경우
     if (index != ',' && index != ':' && isDigit(index)) {
       // [] 비정상 입력 예외 처리

@@ -7,8 +7,6 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Scanner;
 import java.util.Stack;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class CalculatorTest {
@@ -16,10 +14,16 @@ class CalculatorTest {
   Calculator calculator;
 
 
-  @BeforeEach
-  void setUp() {
-    calculator = new Calculator();
-  }
+  // 이것도 외부 라이브러리 사용인건가??????
+
+  /**
+   *
+   * @BeforeEach
+   *   void setUp() {
+   *     calculator = new Calculator();
+   *   }
+   */
+
 
   public static InputStream setReadLine(String readLine) {
     return new ByteArrayInputStream(readLine.getBytes());
@@ -27,8 +31,7 @@ class CalculatorTest {
 
 
   @Test
-  @DisplayName("문자열이 입력되면 구분자와 정수를 분리한다")
-  public void separateInteger() throws Exception{
+  public void 문자열이_입력되면_구분자와_정수를_분리한다() throws Exception{
     //given
     String input = "1, 2, 3";
     System.setIn(new ByteArrayInputStream(input.getBytes()));
@@ -81,28 +84,28 @@ class CalculatorTest {
 
 
 
-  @DisplayName("입력값이 잘못된 경우 예외 처리한다")
-  @Test
-  public void illegalArgument() throws Exception{
+
+  public void 입력값이_잘못된_경우_예외_처리한다() throws Exception{
       //given
     // 잘못된 입력값이 들어온 경우 예외처리한다
    char[] invalidInput = new char[]{'.', '/', '>', '!', '?'};
       //when
+     String readLine = "배달의 민족 삭제";
 
       //then
     assertThrows(IllegalArgumentException.class, () -> {
-      calculator.calculating();
+      calculator.calculating(readLine);
     });
   }
 
-  @DisplayName("탐색 인덱스가 정수 변환 가능한지 확인한다")
+
   @Test
-  public void checkIsNumeric() throws Exception{
+  public void 탐색_인덱스가_정수_변환_가능한지_확인한다() throws Exception{
       //given
       char[] isNumeric = new char[]{'1', '2', '3', '4', '5'};
 
 
-    //when
+      //when
       boolean expect = true;
 
       for (char element : isNumeric) {
@@ -113,11 +116,12 @@ class CalculatorTest {
 
   }
 
-  @DisplayName("입력값이 유효한 경우를 확인한다")
+
   @Test
-  public void validInput() throws Exception{
+  public void 입력값이_유효한_경우를_확인한다() throws Exception{
       //given
       char[] delimeters = new char[]{',', ':', ';'};
+
 
       boolean expect = true;
       for (char element : delimeters) {
