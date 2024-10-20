@@ -20,6 +20,10 @@ public class Calc {
                     throw new IllegalArgumentException();
                 }
 
+                if(Integer.parseInt(c) < 0){
+                    throw new IllegalArgumentException();
+                }
+
                 sum += Integer.parseInt(c);
 
             }
