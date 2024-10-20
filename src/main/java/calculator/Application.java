@@ -20,13 +20,22 @@ public class Application {
         int sum = 0;
         String delimiter = ",|:";
 
-        if(input.startsWith("//")&&input.charAt(3)=='\\'&&input.charAt(4)=='n'){
-            String customDelimiter = String.valueOf(input.charAt(2));
-            customDelimiter = customDelimiter.replaceAll("([\\\\\\[\\]{}()*+?^$|.])", "\\\\$1");
-            delimiter += "|" + customDelimiter;
-            input = input.substring(5);
+        try{
+            if(input.startsWith("//")){
+                if(input.charAt(3)=='\\'&&input.charAt(4)=='n') {
+                    String customDelimiter = String.valueOf(input.charAt(2));
+                    customDelimiter = customDelimiter.replaceAll("([\\\\\\[\\]{}()*+?^$|.])", "\\\\$1");
+                    delimiter += "|" + customDelimiter;
+                    input = input.substring(5);
+                } else{
+                    throw new IllegalArgumentException("유효하지 않은 구분자 형식입니다.");
+                }
+            }
         }
-        String[] numbers = input.split(delimiter);
+        catch(Exception e){
+            System.out.println("error: " + e.getMessage());
+        }
+        String[] numbers = input.split(delimiter, -1);
 
         for (String number : numbers) {
             if(number.equals(""))
