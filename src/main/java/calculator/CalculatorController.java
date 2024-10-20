@@ -12,7 +12,7 @@ public class CalculatorController {
     public void runProgram() {
         String userInput = calculatorView.getUserInput();
         long result = calculatorModel.calculateSum(userInput);
-        System.out.println("result:" + result);
+        calculatorView.showResult(result);
 
 
     }

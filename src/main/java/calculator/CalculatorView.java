@@ -10,5 +10,9 @@ public class CalculatorView {
         return userInput;
     }
 
+    public void showResult(long result) {
+        System.out.println("결과 : " + result);
+    }
+
 
 }
