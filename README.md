@@ -13,13 +13,13 @@
     - [ ] 구분된 숫자의 타입을 정수형으로 변환시킵니다.
     - [ ] 정수형으로 변환 된 숫자들의 합을 출력합니다.
 
-  - [ ] 예외 처리
-    - [ ] 커스텀 구분자가 숫자일 경우 `IllegalArgumentException`을 발생시킵니다.
-    - [ ] 기본 구분자와 커스텀 구분자로 숫자가 분리되어 있지 않을 시 `IllegalArgumentException`을 발생시킵니다.
-    - [ ] 구분자로 숫자가 올바르게 분리 되어 있지 않을 시 `IllegalArgumentException`을 발생시킵니다.
-    - [ ] 구분자로 분리된 숫자가 양수가 아닐 시 `IllegalArgumentException`을 발생시킵니다.
+  - [x] 예외 처리
+    - [x] 커스텀 구분자가 숫자일 경우 `IllegalArgumentException`을 발생시킵니다.
+    - [x] 기본 구분자와 커스텀 구분자로 숫자가 분리되어 있지 않을 시 `IllegalArgumentException`을 발생시킵니다.
+    - [x] 구분자로 숫자가 올바르게 분리 되어 있지 않을 시 `IllegalArgumentException`을 발생시킵니다.
+    - [x] 구분자로 분리된 숫자가 양수가 아닐 시 `IllegalArgumentException`을 발생시킵니다.
 
-  - [ ] 테스트 코드 작성
+  - [x] 테스트 코드 작성
 
 ### 학습할 목록
   - [ ] `Angular JS Git Commit Message Conventions` 정리
