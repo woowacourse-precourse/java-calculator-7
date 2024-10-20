@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.regex.Pattern;
+
 public class InputInfo {
 
     private String separator;
@@ -43,6 +45,7 @@ public class InputInfo {
             throw new IllegalArgumentException("구분자로 끝날 수 없습니다.");
         }
 
+        separator = Pattern.quote(separator);
         if(!str.matches("[0-9" + separator + "]+")) {
             throw new IllegalArgumentException("구분자와 숫자만 입력할 수 있습니다.");
         }
