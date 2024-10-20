@@ -18,9 +18,16 @@ public class Calculator {
     }
 
     public String add() {
+        double sum = 0;
+
         addCustomDelimiter();
         splitInput();
-        return "";
+
+        for (String num : parts) {
+            sum += Double.parseDouble(num);
+        }
+
+        return Result(sum);
     }
 
     public void addCustomDelimiter() {
@@ -45,5 +52,9 @@ public class Calculator {
             escaped.add(Pattern.quote(deli));
         }
         return escaped;
+    }
+
+    private String Result(double sum) {
+        return "결과 : " + sum;
     }
 }
