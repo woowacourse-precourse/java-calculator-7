@@ -97,8 +97,7 @@ public class Classifier {
      * @return 커스텀 구분자를 제외한 문자열
      */
     private String getExcludedString(String input) {
-        Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_END);
-        return pattern.split(input)[1];
+        return Pattern.compile(CUSTOM_DELIMITER_END).split(input)[1];
     }
 
     /**

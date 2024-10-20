@@ -56,3 +56,22 @@ Average Execution time: 50.32ms
 - 최적화 리팩토링 전 실행 시간은 `50.32ms` 나왔습니다.
 ### 최적화 목록
 - [x] 정규표현식을 사용하는 문자열의 비교와 처리를 Matcher, Patterns 클래스로 변경
+
+### 결과: 실패?
+```text
+Execution time: 51.80 ms
+Execution time: 49.28 ms
+Execution time: 49.21 ms
+Execution time: 50.08 ms
+Execution time: 49.86 ms
+Execution time: 52.05 ms
+Execution time: 42.97 ms
+Execution time: 49.78 ms
+Execution time: 44.96 ms
+Execution time: 46.61 ms
+```
+- 최적화 리팩토링 후 실행시간은 평균 `43.68ms` 나왔습니다.
+- 각각의 실행시간 오차를 확인해보면 그렇게 유의미한 차이가 나오지 않았습니다.
+
+- 단일 성능상 좋은 것이 아니라 Matcher와 Pattern를 잘 사용하면 높은 재사용성으로 인해 성능에 결과가 달라집니다.
+- 하지만, 이번 미션은 미리 모든 정규표현식을 미리 만들어둘 수 없습니다. 프로그램 실행중에 결정되는 정규표현식도 있었기 때문에 재사용성이 높게 설계하기가 쉽지 않습니다.
