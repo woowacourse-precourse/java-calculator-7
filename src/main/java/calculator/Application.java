@@ -1,17 +1,30 @@
 package calculator;
 
-
+import camp.nextstep.edu.missionutils.Console;
 import java.util.regex.Pattern;
 
 public class Application {
+    public static void main(String[] args) {
+        try {
+            System.out.println("덧셈할 문자열을 입력해 주세요.");
+            String input = Console.readLine();
+            int result = stringAdd(input);
+            System.out.println("결과 : " + result);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            throw e;
+        } finally {
+            Console.close();
+        }
+    }
 
-    public int stringAdd(String text) {
-        if (text == null || text.isBlank()) {
+    public static int stringAdd(String text) {
+        if (text == null || text.isEmpty()) {
             return 0;
         }
+
         String[] numbers = splitNumbers(text);
         return calculateSum(numbers);
-
     }
 
     private static String[] splitNumbers(String text) {
@@ -26,15 +39,23 @@ public class Application {
         return text.split(",|:");
     }
 
-    private int calculateSum(String[] numbers) {
+    private static int calculateSum(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
-            int intValue = Integer.parseInt(number);
-            if (intValue < 0) {
-                throw new IllegalArgumentException();
+            int value = parseNumber(number.trim());
+            if (value < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다.");
             }
-            sum += intValue;
+            sum += value;
         }
         return sum;
+    }
+
+    private static int parseNumber(String number) {
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("유효하지 않은 입력 값입니다: " + number);
+        }
     }
 }
