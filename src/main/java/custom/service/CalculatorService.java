@@ -17,7 +17,8 @@ public class CalculatorService {
         }
         // 유효성 case 2: "//"로 시작하는 경우
         if (input.startsWith("//")) {
-            if (input.length() < 5) { // 최소 길이 체크
+            // 최소 길이 체크
+            if (input.length() < 5) {
                 throw new IllegalArgumentException();
             }
             // 3번 인덱스가 '\'인지, 4번 인덱스가 'n' 인지 확인
@@ -27,6 +28,10 @@ public class CalculatorService {
             // 2번 인덱스 위치에 숫자 또는 '-'가 있는 경우 예외 처리
             if (Character.isDigit(input.charAt(2)) || input.charAt(2) == '-') {
                 throw new IllegalArgumentException();
+            }
+            // 커스텀 구분자 설정만 있는 경우
+            if (input.length() == 5) {
+                return 1;
             }
         } else { // 유효성 case 3: "//"로 시작하지 않는 경우
             for (char c : input.toCharArray()) {
