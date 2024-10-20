@@ -1,6 +1,8 @@
 package calculator.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,6 +18,7 @@ public class MainService {
     private ArrayList<Integer> numberList;
 
     private static final String CUSTOM_DELIMITER_REGEX = "//(.)\\\\n"; // 커스텀 구분자 패턴
+    private static List<Character> DEFAULT_DELIMITERS = Arrays.asList(',', ':'); // 기본 구분자 목록
 
 
     public int sumDelimitedStr(String str){
@@ -61,6 +64,13 @@ public class MainService {
         if (matcher.find()) {
             customStr = matcher.group(1).charAt(0); // 커스텀 구분자 추출
             newStr = str.substring(matcher.end()); // 커스텀 구분자 이후의 문자열로 갱신
+
+            // 커스텀 구분자를 DEFAULT_DELIMITERS에 추가
+            if (!DEFAULT_DELIMITERS.contains(customStr)) {
+                DEFAULT_DELIMITERS = new ArrayList<>(DEFAULT_DELIMITERS);
+                DEFAULT_DELIMITERS.add(customStr);
+            }
+
         } else {
             newStr = str; // 커스텀 구분자가 없으면 입력 문자열 그대로
         }
@@ -70,13 +80,14 @@ public class MainService {
 
 
     private void extractedDelimited(String newStr, ArrayList<Integer> checkLocated, char customStr) {
+        // 기본 구분자 및 커스텀 구분자의 위치를 찾는 과정
         for (int i = 0; i < newStr.length(); i++) {
-            //각 , 또는 : 이 나오는 위치를 checkLocated 담기.
-            if (newStr.charAt(i) == ',' || newStr.charAt(i) == ':' || newStr.charAt(i) == customStr) {
+            if (DEFAULT_DELIMITERS.contains(newStr.charAt(i))) {
                 checkLocated.add(i);
             }
         }
     }
+
 
     /*
      * 계산 해주는 메서드
@@ -85,9 +96,9 @@ public class MainService {
         for(int i = 0; i < numberList.size(); i++){
             result += numberList.get(i);
         }
-        //숫자 단일로 나올 겨웅
-        if(numberList.isEmpty() && 48<=newStr.charAt(0) && newStr.charAt(0) <=57){
-            result = newStr.charAt(0) - 48;
+        //숫자 단일로 나올 경우
+        if (numberList.isEmpty() && Character.isDigit(newStr.charAt(0))) {
+            result = newStr.charAt(0) - '0'; // 문자로부터 정수로 변환
         }
         return result;
     }
