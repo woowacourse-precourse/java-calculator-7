@@ -6,6 +6,7 @@ import calculator.validator.Validator;
 import java.util.List;
 
 public class Calculator {
+    private static final int INVALID_INPUT_RESULT = 0;
 
     private final InputParser inputParser;
     private final Validator validator;
@@ -18,7 +19,7 @@ public class Calculator {
     public int calculate(String input) {
         //입력 유효성 검사
         if (validator.inputValidate(input)) {
-            return 0;
+            return INVALID_INPUT_RESULT;
         }
         List<Integer>numbers = inputParser.parse(input);
         return sum(numbers);
