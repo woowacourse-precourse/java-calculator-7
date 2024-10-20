@@ -8,7 +8,6 @@ public class CustomSeparator {
         if (!input.contains("\n")) {
             return null;
         }
-
         String[] part = input.split("\n");
 
         // 두 번째 조건: 첫 번째 부분이 "//"로 시작하는지 확인
