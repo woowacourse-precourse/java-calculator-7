@@ -3,6 +3,7 @@ package calculator.controller;
 import calculator.domain.Calculator;
 import calculator.service.CalculatorService;
 import calculator.view.InputView;
+import calculator.view.OutputView;
 
 public class CalculatorController {
     private final Calculator calculator;
@@ -23,5 +24,6 @@ public class CalculatorController {
         int[] number = calculatorService.separate(calculator.getSeparators(), expression);
         calculator.setNumber(number);
         calculator.calc();
+        OutputView.executionResult(calculator.getResult());
     }
 }

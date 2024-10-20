@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Calculator {
-
     private List<String> separators;
-
     private int[] number;
     private int result;
 
@@ -33,6 +31,10 @@ public class Calculator {
 
     public void setNumber(int[] number) {
         this.number = number;
+    }
+
+    public int getResult() {
+        return result;
     }
 
     public void calc() {
