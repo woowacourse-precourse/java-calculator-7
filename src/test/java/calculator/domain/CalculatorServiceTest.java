@@ -73,6 +73,7 @@ class CalculatorServiceTest {
                 Arguments.of(",|:", "//!1!\\n11!1!2!1!"),
                 Arguments.of(",|:", "//!!!!!!\\n1!!!!!!2"), // 1 ~ 5자를 초과한 구분자
                 Arguments.of(",|:", "//\\n12"), // 커스텀 구분자 미입력
+                Arguments.of(",|:", "2147483647:2"), // 정수형 표햔 범위를 벗어난 경우
                 Arguments.of(",|:", "                    ") //무분별한 공백
         );
     }
