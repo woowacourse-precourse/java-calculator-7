@@ -17,6 +17,7 @@ public class Application {
 
         List<Integer> intList = extractNumberFromString(parsedInput);
 
+        Integer result = addIntList(intList);
 
     }
 
@@ -56,5 +57,12 @@ public class Application {
         }
 
         return result;
+    }
+
+    private static Integer addIntList(List<Integer> intList){
+        return intList
+                .stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 }
