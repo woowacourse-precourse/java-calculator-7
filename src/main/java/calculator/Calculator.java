@@ -2,7 +2,9 @@ package calculator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Calculator {
     private String division = " ";
@@ -35,5 +37,21 @@ public class Calculator {
         }
 
         return result; // 계산 결과값 반환
+    }
+
+    public Map<String, String> split(String inputString) {
+        Map<String, String> splitString = new HashMap<>();
+
+        if (inputString.startsWith("//")) {
+            int index = inputString.indexOf("\\n");
+
+            splitString.put("division", inputString.substring(0, index));
+            splitString.put("number", inputString.substring(index + 2));
+        } else {
+            splitString.put("division", null);
+            splitString.put("number", inputString);
+        }
+
+        return splitString;
     }
 }
