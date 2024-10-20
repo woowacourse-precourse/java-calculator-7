@@ -21,7 +21,7 @@ class DelimiterParserTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"//;\n1;2;3", "//a\n1a2a3", "//a\n1a2,3"})
+    @ValueSource(strings = {"//;\\n1;2;3", "//a\\n1a2a3", "//a\\n1a2,3"})
     void 커스텀_구분자를_기준으로_분리한다(String input) {
         //given
         DelimiterParser parser = new DelimiterParser();

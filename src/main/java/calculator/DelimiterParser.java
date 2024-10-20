@@ -12,8 +12,9 @@ public class DelimiterParser {
         Delimiters delimiters = new Delimiters();
         String originalInput = input;
 
-        if (input.startsWith("//") && input.contains("\n")) {
-            String[] splitInput = input.substring("//".length()).split("\n");
+        if (input.startsWith("//") && input.contains("\\n")) {
+            String replacedInput = input.replace("\\n", "\n");
+            String[] splitInput = replacedInput.substring("//".length()).split("\\\n");
 
             String newDelimiter = splitInput[0];
             delimiters.add(newDelimiter);
