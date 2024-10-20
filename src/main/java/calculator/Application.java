@@ -22,6 +22,20 @@ public class Application {
             delimiterPattern = buildDelimiterPattern(COMMA_DELIMITER, COLON_DELIMITER, customDelimiterPattern);
             input = stripCustomDelimiter(input);
         }
+
+        int totalSum = sumFromNumbers(input, delimiterPattern);
+        System.out.println("결과 : " + totalSum);
+    }
+
+    private static int sumFromNumbers(String numbers, String delimiterPattern) {
+        if (numbers.isEmpty()) return 0;
+
+        String[] numberList = numbers.split(delimiterPattern);
+        int sum = 0;
+        for (String number : numberList) {
+            sum += convertToInt(number);
+        }
+        return sum;
     }
 
     private static String getCustomDelimiter(String input) {
