@@ -15,7 +15,6 @@ public class StringAddCalculator {
 
         // 커스텀 구분자 처리
         if (input.startsWith("//")) {
-            //group 메소드 확인하고 공부 하기
             Pattern customDelimiterPattern = Pattern.compile("^//([^0-9])\\\\n(.*)");
             Matcher matcher = customDelimiterPattern.matcher(input);
             if (!matcher.matches()) {
@@ -29,10 +28,25 @@ public class StringAddCalculator {
 
         int sum = 0;
         for (String token : result) {
-            int number = Integer.parseInt(token);
+            int number = validateAndParseInt(token);
             sum += number;
         }
         return sum;
+    }
+
+    //숫자 체크 및 변환 로직
+    private int validateAndParseInt(String number) {
+        if (number == null || number.isEmpty()) {
+            return 0;
+        }
+
+        int num;
+        try {
+            num = Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("입력한 숫자에 숫자가 아닌 값이 포함되어 있습니다.");
+        }
+        return num;
     }
 
 }
