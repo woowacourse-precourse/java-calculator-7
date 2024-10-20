@@ -11,10 +11,14 @@ public class Application {
 
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        InputHandler inputHandler = new InputHandler();
+        DataRepository dataRepository = new DataRepository();
+        new InputHandler(dataRepository);
+        LogicHandler logicHandler = new LogicHandler();
 
-//        System.out.println(inputHandler.getCustomSplitter());
-//        System.out.println(inputHandler.getInputString());
+        List<String> stringList = logicHandler.splitInputString(dataRepository.getCustomSplitter(),
+            dataRepository.getInputString());
+
+        System.out.println(stringList.toString());
 
     }
 
