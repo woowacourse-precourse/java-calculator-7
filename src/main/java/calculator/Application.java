@@ -6,7 +6,7 @@ public class Application {
     private static final String CUSTOM_SEPARATOR_START = "//";
     private static final String CUSTOM_SEPARATOR_END = "\\n";
     private static String userInput;
-    private static String baseSeparator = ",|:";
+    private static String baseSeparator = ",:";
 
     public static void main(String[] args) {
         run();
@@ -25,9 +25,16 @@ public class Application {
             if (Character.isDigit(customSeparator)){
                 throw new IllegalArgumentException("숫자를 구분자로 지정할 수 없습니다.");
             }
-            baseSeparator += "|" + customSeparator;
-            userInput = input.substring(5);
+            baseSeparator += customSeparator;
+            input = input.substring(5);
         }
+        containsOnlyDelimitersAndDigits(input);
+    }
+
+    public static void containsOnlyDelimitersAndDigits(String input) {
+        if (input == null || input.isEmpty()) return;
+        String regex = "[0-9" + baseSeparator+"]+";
+        if (!input.matches(regex)) throw new IllegalArgumentException("지정 구분자, 숫자 외의 다른 문자가 존재합니다.");
     }
 
     public static void checkMinusExist(String input) {
