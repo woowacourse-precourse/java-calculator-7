@@ -28,4 +28,12 @@ public class CalculatorView {
     public void showResult(int result) {
         // TODO: 계산 결과를 출력
     }
+
+    /**
+     * 인자로 받은 message를 에러 문구로 출력합니다.
+     * @param message
+     */
+    public void showError(String message) {
+        System.err.println("에러: " + message);
+    }
 }

@@ -5,7 +5,7 @@
 
 
 + [x] 입력 : 쉼표/콜론(:) 혹은 커스텀 구분자를 가진 문자열 입력
-  + [ ] 예외 : long 범위를 벗어난다면 IllegalArgugmentException 발생 후 종료 
+  + [x] 예외 : 입력이 null, long 범위를 벗어났거나, 음수라면 IllegalArgugmentException 발생 후 종료 
   + [ ] 기본 구분자 : 쉼표 또는 콜론을 구분자로 가질 경우 구분자를 기준으로 숫자들을 분리
   + [ ] 커스텀 구분자 : "//"와 "\n" 사이 지정된 커스텀 구분자를 사용할 경우 커스텀 구분자를 기준으로 숫자들을 분리
     + [ ] 예외 : 허용되지 않는 커스텀 구분자일 경우 IllegalArgugmentException 발생 후 종료
