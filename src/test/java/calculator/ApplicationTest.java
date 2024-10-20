@@ -42,6 +42,14 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 오버플로우_발생_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("123132313213213232132132132323312"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
