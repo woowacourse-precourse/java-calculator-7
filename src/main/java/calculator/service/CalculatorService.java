@@ -14,7 +14,6 @@ public class CalculatorService {
 
     private static final List<String> DEFAULT_DELIMITERS = Arrays.asList(",", ":");
 
-
     // 기본 구분자, 커스텀 구분자 타입 체크
     private DelimiterAndNumber isDelimiterCustomOrDefault(String input, DelimiterValidation validation) {
         DelimiterAndNumber delimiterAndNumberInput;
@@ -50,6 +49,16 @@ public class CalculatorService {
                 delimiters.add(delimiter);
             }
         }
+    }
+
+    private String[] splitNumbersByDelimiter(DelimiterAndNumber parsedInput) {
+        String numbers = parsedInput.getNumbers();
+        List<String> delimiters = parsedInput.getDelimiters();
+
+        // 구분자를 기준으로 숫자 분리
+        String delimiterRegex = String.join("|", delimiters);
+
+        return numbers.split(delimiterRegex);
     }
 
 }
