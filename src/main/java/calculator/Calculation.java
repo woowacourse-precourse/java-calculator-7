@@ -12,8 +12,18 @@ public class Calculation {
         String[] numbs = str.split(",");
 
         for(String num : numbs){
+
+            //10억이 넘는 수를 입력하지 못하도록 예외처리
+            if(num.length()>=10){
+                throw new IllegalArgumentException("10억이 넘는 수를 입력할 수 없습니다.");
+            }
+
             // 문자열 형태의 숫자를 int형으로 변경 후 sum에 더함
             sum += Integer.parseInt(num);
+
+            if(sum>=1000000000){
+                throw new IllegalArgumentException("덧셈의 결과가 10억을 넘을 수 없습니다.");
+            }
         }
 
         return sum;
