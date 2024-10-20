@@ -18,8 +18,8 @@ public class StringParser {
     }
 
     public ParsedComponents parse() {
-        List<Character> delimiters = new ArrayList<>(
-                List.of(DelimiterConstants.COMMA_DELIMITER, DelimiterConstants.COLON_DELIMITER));
+        List<Delimiter> delimiters = new ArrayList<>(List.of(new Delimiter(DelimiterConstants.COMMA_DELIMITER),
+                new Delimiter(DelimiterConstants.COLON_DELIMITER)));
 
         int prefixIndex = inputExpression.indexOf(CUSTOM_DELIMITER_PREFIX);
         int suffixIndex = inputExpression.indexOf(CUSTOM_DELIMITER_SUFFIX);
@@ -33,12 +33,12 @@ public class StringParser {
         return new ParsedComponents(delimiters, inputExpression);
     }
 
-    private ParsedComponents handleCustomDelimiterCase(int prefixIndex, int suffixIndex, List<Character> delimiters) {
+    private ParsedComponents handleCustomDelimiterCase(int prefixIndex, int suffixIndex, List<Delimiter> delimiters) {
         String customDelimiter = inputExpression.substring(prefixIndex + CUSTOM_DELIMITER_PREFIX.length(), suffixIndex);
 
         DelimiterValidator.validateCustomDelimiter(customDelimiter);
 
-        delimiters.add(customDelimiter.charAt(0));
+        delimiters.add(new Delimiter(customDelimiter.charAt(0)));
 
         String operationalExpression =
                 inputExpression.substring(0, prefixIndex) + inputExpression.substring(suffixIndex + 2);

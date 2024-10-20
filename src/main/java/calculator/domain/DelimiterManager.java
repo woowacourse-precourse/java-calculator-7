@@ -6,15 +6,15 @@ import java.util.stream.Collectors;
 
 public class DelimiterManager {
 
-    private final List<Character> delimiters;
+    private final List<Delimiter> delimiters;
 
-    public DelimiterManager(List<Character> delimiters) {
+    public DelimiterManager(List<Delimiter> delimiters) {
         this.delimiters = delimiters;
     }
 
     public Pattern createDelimiterPattern() {
         String regex = delimiters.stream()
-                .map(delimiter -> Pattern.quote(delimiter.toString()))
+                .map(Delimiter::asPattern)
                 .collect(Collectors.joining("|"));
 
         return Pattern.compile(regex);
