@@ -1,5 +1,6 @@
-package calculator;
+package calculator.util;
 
+import calculator.exception.CalculatorException;
 import java.util.List;
 import java.util.regex.Pattern;
 

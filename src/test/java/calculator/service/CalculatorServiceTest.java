@@ -1,4 +1,4 @@
-package calculator;
+package calculator.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -6,9 +6,9 @@ import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
-public class StringCalculatorTest {
+public class CalculatorServiceTest {
 
-    private final StringCalculator calculator = new StringCalculator();
+    private final CalculatorService calculator = new CalculatorService();
 
     @Test
     void 문자열_덧셈_기본() {

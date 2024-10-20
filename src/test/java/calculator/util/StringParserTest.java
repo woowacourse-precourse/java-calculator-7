@@ -1,4 +1,4 @@
-package calculator;
+package calculator.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

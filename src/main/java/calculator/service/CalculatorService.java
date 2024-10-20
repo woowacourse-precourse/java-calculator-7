@@ -1,9 +1,8 @@
-package calculator;
+package calculator.service;
 
 import java.util.List;
 
-public class StringCalculator {
-
+public class CalculatorService {
 
     // 문자열 List를 받아 문자열 간 덧셈을 진행
     public String add(List<String> numbers) {

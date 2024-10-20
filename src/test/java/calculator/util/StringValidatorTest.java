@@ -1,8 +1,9 @@
-package calculator;
+package calculator.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import calculator.exception.CalculatorException;
 import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
