@@ -18,14 +18,16 @@ public class CalculatorController {
     }
 
     /**
-     * 사용자로부터 문자열을 입력받는다.
+     * 문자열 계산기 실행
      */
     public void run() {
-        String input = inputView.getInputString();  // 덧셈할 문자열을 입력해주세요.
+        String input = inputView.getInputString();
 
         validateInputString(input);
 
-        input = inputView.getInputStringFromNextLine(input);
+        if (input.startsWith("//") && input.substring(3).isEmpty()) {
+            input = inputView.getInputStringFromNextLine(input);
+        }
 
         InputString inputString = new InputString(input);
 
@@ -38,7 +40,10 @@ public class CalculatorController {
      * 입력받은 문자열에 대해 유효성 검증
      */
     private void validateInputString(String input) {
-        if (input.startsWith("//") && !input.substring(3, 5).equals("\\n")) {
+        if (input.startsWith("//") && input.contains("\\n") && !input.startsWith("\\n", 3)) {
+            throw new IllegalArgumentException("올바른 커스텀 구분자 입력 형식이 아닙니다.");
+        }
+        if (input.startsWith("//") && !input.contains("\\n") && input.length() > 3) {
             throw new IllegalArgumentException("올바른 커스텀 구분자 입력 형식이 아닙니다.");
         }
     }

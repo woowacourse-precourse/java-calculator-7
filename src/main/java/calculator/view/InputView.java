@@ -13,11 +13,10 @@ public class InputView {
         return Console.readLine();
     }
 
-    public String getInputStringFromNextLine(String inputString) {
-        if (inputString.startsWith("//") && inputString.substring(5).isEmpty()) {
-            inputString += "\\n" + Console.readLine();
-        }
-        return inputString;
+    public String getInputStringFromNextLine(String input) {
+        input += "\\n" + Console.readLine();
+
+        return input;
     }
 
 }
