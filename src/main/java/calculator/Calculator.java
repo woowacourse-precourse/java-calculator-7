@@ -16,11 +16,9 @@ public class Calculator {
 
         if(input.startsWith("//")){
 
-            Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
-
-            if (matcher.matches()) {
-                delimiter = Pattern.quote(matcher.group(1));
-                input = matcher.group(2); // 정규 표현식에서 두번째 그룹을 가져오는 것이므로 2가 맞다.
+            if (input.contains("\n")) {
+                delimiter = "["+input.substring(2, input.indexOf("n")-2)+"]";
+                input = input.substring(input.indexOf("n")+1);
             }
             else {
                 throw new IllegalArgumentException("잘못된 입력입니다: " + input);
