@@ -39,8 +39,9 @@ class ParserTest {
 		Parser parser = new Parser();
 
 		//when, then
-		assertThatThrownBy(() -> parser.isPersonalSeparatorExist("1//:\n2,3"))
-				.isInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(() -> parser.isPersonalSeparatorExist("1//:\\n2,3"))
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessageContaining("커스텀 구분자는 처음에 위치");
 	}
 
 	@Test
@@ -49,8 +50,9 @@ class ParserTest {
 		Parser parser = new Parser();
 
 		//when, then
-		assertThatThrownBy(() -> parser.isPersonalSeparatorExist("1//:.\n"))
-				.isInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(() -> parser.isPersonalSeparatorExist("//:.\\n1"))
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessageContaining("1개 이상 입력할 수 없습니다");
 	}
 
 	@Test
@@ -59,8 +61,9 @@ class ParserTest {
 		Parser parser = new Parser();
 
 		//when, then
-		assertThatThrownBy(() -> parser.isPersonalSeparatorExist("1//6\n2,3"))
-				.isInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(() -> parser.isPersonalSeparatorExist("//1\\n2,3"))
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessageContaining("숫자");
 	}
 
 	@Test
