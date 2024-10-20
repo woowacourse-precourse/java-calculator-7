@@ -1,9 +1,11 @@
 package calculator.util;
 
+import static calculator.config.SystemConstantMessages.UTILITY_CLASS_MESSAGE;
+
 public class InputIntegerParser {
     private static final String NON_NUMBER_FORMAT_EXCEPTION_MESSAGE = "정수를 입력해주세요.";
     private InputIntegerParser() {
-        throw new IllegalStateException("Utility class");
+        throw new IllegalStateException(UTILITY_CLASS_MESSAGE);
     }
 
     public static Integer[] parseInputToInteger(String[] splitString) {

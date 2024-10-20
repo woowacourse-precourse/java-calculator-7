@@ -1,5 +1,7 @@
 package calculator.util;
 
+import static calculator.config.SystemConstantMessages.UTILITY_CLASS_MESSAGE;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -7,7 +9,7 @@ public class StringSplitter {
     private static final String DEFAULT_SPLITTER = "[,:]";
 
     private StringSplitter() {
-        throw new IllegalStateException("Utility class");
+        throw new IllegalStateException(UTILITY_CLASS_MESSAGE);
     }
 
     public static String[] splitUserInput(String userInput) {

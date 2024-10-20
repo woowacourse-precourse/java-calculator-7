@@ -1,10 +1,12 @@
 package calculator.validator;
 
+import static calculator.config.SystemConstantMessages.VALIDATOR_CLASS_MESSAGE;
+
 public class UserInputValidator {
     private static final String NEGATIVE_NUMBER_MESSAGE = "양수만 입력해주세요";
 
     private UserInputValidator() {
-        throw new IllegalStateException("Validate Class");
+        throw new IllegalStateException(VALIDATOR_CLASS_MESSAGE);
     }
 
     public static void validateNegativeInteger(Integer[] parsedNumbers) {
