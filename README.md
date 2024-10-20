@@ -1,30 +1,33 @@
-¹®ÀÚ¿­ µ¡¼À °è»ê±â
-##±â´É ¿ä±¸ »çÇ×
-ÀÔ·ÂÇÑ ¹®ÀÚ¿­¿¡¼­ ¼ýÀÚ¸¦ ÃßÃâÇÏ¿© ´õÇÏ´Â °è»ê±â¸¦ ±¸ÇöÇÑ´Ù.
-* ½°Ç¥(,) ¶Ç´Â ÄÝ·Ð(:)À» ±¸ºÐÀÚ·Î °¡Áö´Â ¹®ÀÚ¿­À» Àü´ÞÇÏ´Â °æ¿ì ±¸ºÐÀÚ¸¦ ±âÁØÀ¸·Î ºÐ¸®ÇÑ °¢ ¼ýÀÚÀÇ ÇÕÀ» ¹ÝÈ¯ÇÑ´Ù.
-* ¿¹: "" => 0, "1,2" => 3, "1,2,3" => 6, "1,2:3" => 6
-* ¾ÕÀÇ ±âº» ±¸ºÐÀÚ(½°Ç¥, ÄÝ·Ð) ¿Ü¿¡ Ä¿½ºÅÒ ±¸ºÐÀÚ¸¦ ÁöÁ¤ÇÒ ¼ö ÀÖ´Ù. Ä¿½ºÅÒ ±¸ºÐÀÚ´Â ¹®ÀÚ¿­ ¾ÕºÎºÐÀÇ "//"¿Í "\n" »çÀÌ¿¡ À§Ä¡ÇÏ´Â ¹®ÀÚ¸¦ Ä¿½ºÅÒ ±¸ºÐÀÚ·Î »ç¿ëÇÑ´Ù.
-* ¿¹¸¦ µé¾î "//;\n1;2;3"°ú °°ÀÌ °ªÀ» ÀÔ·ÂÇÒ °æ¿ì Ä¿½ºÅÒ ±¸ºÐÀÚ´Â ¼¼¹ÌÄÝ·Ð(;)ÀÌ¸ç, °á°ú °ªÀº 6ÀÌ ¹ÝÈ¯µÇ¾î¾ß ÇÑ´Ù.
-* »ç¿ëÀÚ°¡ Àß¸øµÈ °ªÀ» ÀÔ·ÂÇÒ °æ¿ì?IllegalArgumentExceptionÀ» ¹ß»ý½ÃÅ² ÈÄ ¾ÖÇÃ¸®ÄÉÀÌ¼ÇÀº Á¾·áµÇ¾î¾ß ÇÑ´Ù.
-##±â´É¸ñ·Ï
-1. main Å¬·¡½º¿¡¼­ ¹®ÀÚ¿­ ÀÔ·Â ¹Þ´Â ±â´É
-camp.nextstep.edu.missiononutils.ConsoleÀÇ readLine()È°¿ë.
-Àß¸øµÈ °ª ÀÔ·Â½Ã illegalArgumentException ¹ß»ý ÈÄ Á¾·á.
-1. ¹®ÀÚ¿­¿¡ ±¸ºÐÀÚ ÆÇº°ÇÏ´Â ÇÔ¼ö ¸¸µé±â
-,¿Í ; ±¸ºÐÀÚ ÆÇº° ÇÔ¼ö
-//¿Í \n Ä¿½ºÅÒ ±¸ºÐÀÚ ÆÇº°ÇÏ´Â ÇÔ¼ö
-1. ¼ýÀÚ ´õÇÏ´Â °è»ê Å¬·¡½º ¸¸µé±â
-ÆÇº°ÇÑ Á¤º¸¸¦ ¹Þ¾Æ¿Í¼­ µ¡¼ÀÀ» °è»êÇÏ´Â ÇÔ¼ö
-1. main Å¬·¡½º¿¡¼­ °á°ú Ãâ·ÂÇÏ±â
-##ÇÁ·Î±×·¡¹Ö ¿ä±¸»çÇ×
-* JDK 21 ¹öÀü¿¡¼­ ½ÇÇà °¡´ÉÇØ¾ß ÇÑ´Ù.
-* ÇÁ·Î±×·¥ ½ÇÇàÀÇ ½ÃÀÛÁ¡Àº?ApplicationÀÇ?main()ÀÌ´Ù.
-* build.gradle?ÆÄÀÏÀº º¯°æÇÒ ¼ö ¾øÀ¸¸ç,?Á¦°øµÈ ¶óÀÌºê·¯¸® ÀÌ¿ÜÀÇ ¿ÜºÎ ¶óÀÌºê·¯¸®´Â »ç¿ëÇÏÁö ¾Ê´Â´Ù.
-* ÇÁ·Î±×·¥ Á¾·á ½Ã?System.exit()¸¦ È£ÃâÇÏÁö ¾Ê´Â´Ù.
-* ÇÁ·Î±×·¡¹Ö ¿ä±¸ »çÇ×¿¡¼­ ´Þ¸® ¸í½ÃÇÏÁö ¾Ê´Â ÇÑ ÆÄÀÏ, ÆÐÅ°Áö µîÀÇ ÀÌ¸§À» ¹Ù²Ù°Å³ª ÀÌµ¿ÇÏÁö ¾Ê´Â´Ù.
-* ÀÚ¹Ù ÄÚµå ÄÁº¥¼ÇÀ» ÁöÅ°¸é¼­ ÇÁ·Î±×·¡¹ÖÇÑ´Ù.
-* ±âº»ÀûÀ¸·Î?Java Style Guide¸¦ ¿øÄ¢À¸·Î ÇÑ´Ù.
-###¶óÀÌºê·¯¸®
-* camp.nextstep.edu.missionutils¿¡¼­ Á¦°øÇÏ´Â?Console?API¸¦ »ç¿ëÇÏ¿© ±¸ÇöÇØ¾ß ÇÑ´Ù.
-* »ç¿ëÀÚ°¡ ÀÔ·ÂÇÏ´Â °ªÀº?camp.nextstep.edu.missionutils.ConsoleÀÇ?readLine()À» È°¿ëÇÑ´Ù.
+# âž•ë¬¸ìžì—´ ë§ì…ˆ ê³„ì‚°ê¸°
+
+## ê¸°ëŠ¥ ìš”êµ¬ ì‚¬í•­
+ìž…ë ¥í•œ ë¬¸ìžì—´ì—ì„œ ìˆ«ìžë¥¼ ì¶”ì¶œí•˜ì—¬ ë”í•˜ëŠ” ê³„ì‚°ê¸°ë¥¼ êµ¬í˜„í•œë‹¤.
+* ì‰¼í‘œ(,) ë˜ëŠ” ì½œë¡ (:)ì„ êµ¬ë¶„ìžë¡œ ê°€ì§€ëŠ” ë¬¸ìžì—´ì„ ì „ë‹¬í•˜ëŠ” ê²½ìš° êµ¬ë¶„ìžë¥¼ ê¸°ì¤€ìœ¼ë¡œ ë¶„ë¦¬í•œ ê° ìˆ«ìžì˜ í•©ì„ ë°˜í™˜í•œë‹¤.
+* ì˜ˆ: "" => 0, "1,2" => 3, "1,2,3" => 6, "1,2:3" => 6
+* ì•žì˜ ê¸°ë³¸ êµ¬ë¶„ìž(ì‰¼í‘œ, ì½œë¡ ) ì™¸ì— ì»¤ìŠ¤í…€ êµ¬ë¶„ìžë¥¼ ì§€ì •í•  ìˆ˜ ìžˆë‹¤. ì»¤ìŠ¤í…€ êµ¬ë¶„ìžëŠ” ë¬¸ìžì—´ ì•žë¶€ë¶„ì˜ "//"ì™€ "\n" ì‚¬ì´ì— ìœ„ì¹˜í•˜ëŠ” ë¬¸ìžë¥¼ ì»¤ìŠ¤í…€ êµ¬ë¶„ìžë¡œ ì‚¬ìš©í•œë‹¤.
+* ì˜ˆë¥¼ ë“¤ì–´ "//;\n1;2;3"ê³¼ ê°™ì´ ê°’ì„ ìž…ë ¥í•  ê²½ìš° ì»¤ìŠ¤í…€ êµ¬ë¶„ìžëŠ” ì„¸ë¯¸ì½œë¡ (;)ì´ë©°, ê²°ê³¼ ê°’ì€ 6ì´ ë°˜í™˜ë˜ì–´ì•¼ í•œë‹¤.
+* ì‚¬ìš©ìžê°€ ìž˜ëª»ëœ ê°’ì„ ìž…ë ¥í•  ê²½ìš°?IllegalArgumentExceptionì„ ë°œìƒì‹œí‚¨ í›„ ì• í”Œë¦¬ì¼€ì´ì…˜ì€ ì¢…ë£Œë˜ì–´ì•¼ í•œë‹¤.
+## ê¸°ëŠ¥ëª©ë¡
+1. **main í´ëž˜ìŠ¤ì—ì„œ ë¬¸ìžì—´ ìž…ë ¥ ë°›ëŠ” ê¸°ëŠ¥**:  
+   - camp.nextstep.edu.missiononutils.Consoleì˜ readLine() í™œìš©. ìž˜ëª»ëœ ê°’ ìž…ë ¥ ì‹œ illegalArgumentException ë°œìƒ í›„ ì¢…ë£Œ.
+   
+2. **ë¬¸ìžì—´ì— êµ¬ë¶„ìž íŒë³„í•˜ëŠ” í•¨ìˆ˜ ë§Œë“¤ê¸°**:  
+   - ,ì™€ ; êµ¬ë¶„ìž íŒë³„ í•¨ìˆ˜  
+   - //ì™€ \n ì»¤ìŠ¤í…€ êµ¬ë¶„ìž íŒë³„í•˜ëŠ” í•¨ìˆ˜
+
+3. **ìˆ«ìž ë”í•˜ëŠ” ê³„ì‚° í´ëž˜ìŠ¤ ë§Œë“¤ê¸°**:  
+   - íŒë³„í•œ ì •ë³´ë¥¼ ë°›ì•„ì™€ì„œ ë§ì…ˆì„ ê³„ì‚°í•˜ëŠ” í•¨ìˆ˜
+
+4. **main í´ëž˜ìŠ¤ì—ì„œ ê²°ê³¼ ì¶œë ¥í•˜ê¸°**
+## í”„ë¡œê·¸ëž˜ë° ìš”êµ¬ì‚¬í•­
+* JDK 21 ë²„ì „ì—ì„œ ì‹¤í–‰ ê°€ëŠ¥í•´ì•¼ í•œë‹¤.
+* í”„ë¡œê·¸ëž¨ ì‹¤í–‰ì˜ ì‹œìž‘ì ì€ Applicationì˜ main()ì´ë‹¤.
+* build.gradleíŒŒì¼ì€ ë³€ê²½í•  ìˆ˜ ì—†ìœ¼ë©°,ì œê³µëœ ë¼ì´ë¸ŒëŸ¬ë¦¬ ì´ì™¸ì˜ ì™¸ë¶€ ë¼ì´ë¸ŒëŸ¬ë¦¬ëŠ” ì‚¬ìš©í•˜ì§€ ì•ŠëŠ”ë‹¤.
+* í”„ë¡œê·¸ëž¨ ì¢…ë£Œ ì‹œ System.exit()ë¥¼ í˜¸ì¶œí•˜ì§€ ì•ŠëŠ”ë‹¤.
+* í”„ë¡œê·¸ëž˜ë° ìš”êµ¬ ì‚¬í•­ì—ì„œ ë‹¬ë¦¬ ëª…ì‹œí•˜ì§€ ì•ŠëŠ” í•œ íŒŒì¼, íŒ¨í‚¤ì§€ ë“±ì˜ ì´ë¦„ì„ ë°”ê¾¸ê±°ë‚˜ ì´ë™í•˜ì§€ ì•ŠëŠ”ë‹¤.
+* ìžë°” ì½”ë“œ ì»¨ë²¤ì…˜ì„ ì§€í‚¤ë©´ì„œ í”„ë¡œê·¸ëž˜ë°í•œë‹¤.
+* ê¸°ë³¸ì ìœ¼ë¡œ Java Style Guideë¥¼ ì›ì¹™ìœ¼ë¡œ í•œë‹¤.
+###ë¼ì´ë¸ŒëŸ¬ë¦¬
+* camp.nextstep.edu.missionutilsì—ì„œ ì œê³µí•˜ëŠ” Console APIë¥¼ ì‚¬ìš©í•˜ì—¬ êµ¬í˜„í•´ì•¼ í•œë‹¤.
+* ì‚¬ìš©ìžê°€ ìž…ë ¥í•˜ëŠ” ê°’ì€ camp.nextstep.edu.missionutils.Consoleì˜ readLine()ì„ í™œìš©í•œë‹¤.
 
