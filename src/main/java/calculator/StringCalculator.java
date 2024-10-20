@@ -43,7 +43,6 @@ public class StringCalculator {
                 if (input.startsWith("//", i) && input.startsWith("\\n", i + 3)) {
                     //정규 표현식 예외
                     if(now=='[' || now ==']' || now == '\\'){
-                        System.out.println("now : "+now);
                         delimiter += '\\';
                     }
                     delimiter += now;
