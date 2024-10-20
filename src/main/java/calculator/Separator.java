@@ -15,9 +15,9 @@ public class Separator {
             int suffixIdx = input.lastIndexOf(Constants.CUSTOM_SEPARATOR_SUFFIX);
 
             String customSeparator = getCustomSeparator(input, suffixIdx);
-            StringBuilder sb = new StringBuilder(input);
-            sb.delete(prefixIdx, suffixIdx + 2);
-            input = sb.toString();
+
+            input = deleteCustomSeparatorConvention(input, prefixIdx, suffixIdx);
+            
             regex = regex.concat("|" + customSeparator);
             System.out.println(regex);
         }
@@ -31,5 +31,11 @@ public class Separator {
 
     public String getCustomSeparator(String input, int suffixIdx) {
         return String.valueOf(input.charAt(suffixIdx - 1));
+    }
+
+    public String deleteCustomSeparatorConvention(String input, int prefixIdx, int suffixIdx) {
+        StringBuilder sb = new StringBuilder(input);
+        sb.delete(prefixIdx, suffixIdx + 2);
+        return sb.toString();
     }
 }
