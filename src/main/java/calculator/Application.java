@@ -25,14 +25,14 @@ public class Application {
 
             stringCalculator = new StringCalculator(userInput);
             stringCalculator.setNumberStrategy(new SimpleNumberStrategy());
-            stringCalculator.setCalculate(new IntegerCalculateStrategy());
+            stringCalculator.setCalculateStrategy(new IntegerCalculateStrategy());
             configureDelimiterStrategy(userInput);
 
             System.out.println(outputPhrase + stringCalculator.operate());
         } catch (NoSuchElementException e) {
             userInput = "";
             stringCalculator = new StringCalculator(userInput);
-            stringCalculator.setCalculate(new EmptyStringCalculateStrategy());
+            stringCalculator.setCalculateStrategy(new EmptyStringCalculateStrategy());
             System.out.println(outputPhrase + stringCalculator.emptyStringOperate());
         }
     }
