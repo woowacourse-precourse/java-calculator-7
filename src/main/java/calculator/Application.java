@@ -17,7 +17,14 @@ public class Application {
 
         nums = string.split(separator);
         for (String num : nums) {
-            sum += Integer.parseInt(num);
+            if (num.isEmpty()) {
+                continue;
+            }
+            try {
+                sum += Integer.parseInt(num);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("숫자가 아닌 입력 값");
+            }
         }
 
         System.out.println("sum = " + sum);
