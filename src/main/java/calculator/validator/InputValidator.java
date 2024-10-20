@@ -13,13 +13,4 @@ public class InputValidator {
             throw new IllegalArgumentException("입력값이 잘못되었습니다.");
         }
     }
-
-    public void validateIsLong(String s) {
-        try {
-            Long.parseLong(s);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("long 범위를 넘어가는 숫자가 입력되었습니다.");
-
-        }
-    }
 }
