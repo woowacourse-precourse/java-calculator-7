@@ -32,6 +32,14 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 숫자_추출_테스트(){ //입력 문자열에서 숫자가 제대로 추출이 되는지 테스트
+        assertSimpleTest(() -> {
+            run("1,2:3,4");
+            assertThat(output()).contains("숫자: [1, 4, 2, 3]");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
