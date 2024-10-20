@@ -3,8 +3,6 @@ package separator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.math.BigInteger;
 import java.util.List;
 
 class CustomSeparatorTest {
@@ -31,12 +29,9 @@ class CustomSeparatorTest {
         //given
         CustomSeparatorFormat customSeparatorFormat = new CustomSeparatorFormat();
         String inputData ="//@!\\n2341@!2031@!22122";
-        System.out.println("inputData : "+inputData);
         CustomSeparator customSeparator = new CustomSeparator(inputData,customSeparatorFormat);
-        System.out.println("customSeparator.getSeparator().get(0) : "+customSeparator.getSeparator().get(0));
         //when
         String[] split = customSeparator.splitInputDataBySeparator();
-        System.out.println("customSeparator.getSeparator().size()"+customSeparator.getSeparator().size());
         //then
         Assertions.assertThat(split[0]).isEqualTo("2341");
 

@@ -1,6 +1,7 @@
 package calculator;
 
 
+import view.InputGuidelines;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.List;
@@ -14,6 +15,7 @@ class InputGuidelinesTest {
     //when
         inputGuidelines.printInputGuidelines();
     //then
+
     }
 
     @DisplayName("기본 구분자가 하나의 문장으로 출력된다.")

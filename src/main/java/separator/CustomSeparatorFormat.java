@@ -3,8 +3,9 @@ package separator;
 import java.util.regex.Pattern;
 
 public class CustomSeparatorFormat {
-    private Pattern pattern = Pattern.compile("//+(.*)\\\\n+(.*)");
+    private final Pattern pattern;
     public CustomSeparatorFormat() {
+        this.pattern = Pattern.compile("//+(.*)\\\\n+(.*)");
     }
 
     public CustomSeparatorFormat(Pattern pattern) {
