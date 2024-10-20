@@ -59,9 +59,11 @@ class InputValidatorTest {
     @DisplayName("커스텀 구분자에 사용할 수 없는 구분자를 사용하였을 경우 예외가 발생한다.")
     void invalidCustomDelimiterException() {
         String input = "//\\n\\n1\\n2\\n3";
+        String input2 = "//\n123";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             validator.validate(input);
+            validator.validate(input2);
         });
 
         assertEquals("사용할 수 없는 구분자가 포함되어있습니다.", exception.getMessage());
