@@ -131,8 +131,9 @@ class CalculatorInputParseServiceTest {
         String input = "1,-2,3";
 
         // when & then
-        Assertions.assertThatThrownBy(() -> calculatorInputParseService.parseSumInput(input))
-                .isInstanceOf(IllegalArgumentException.class);
+        Assertions.assertThatThrownBy(() ->
+                calculatorInputParseService.parseSumInput(input)
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -142,8 +143,9 @@ class CalculatorInputParseServiceTest {
         String input = "1A,2,3";
 
         // when & then
-        Assertions.assertThatThrownBy(() -> calculatorInputParseService.parseSumInput(input))
-                .isInstanceOf(IllegalArgumentException.class);
+        Assertions.assertThatThrownBy(() ->
+                calculatorInputParseService.parseSumInput(input)
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -153,7 +155,8 @@ class CalculatorInputParseServiceTest {
         String input = "1;2;3//;\\n";
 
         // when & then
-        Assertions.assertThatThrownBy(() -> calculatorInputParseService.parseSumInput(input))
-                .isInstanceOf(IllegalArgumentException.class);
+        Assertions.assertThatThrownBy(() ->
+                calculatorInputParseService.parseSumInput(input)
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 }
