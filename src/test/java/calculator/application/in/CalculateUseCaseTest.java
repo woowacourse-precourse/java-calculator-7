@@ -3,7 +3,8 @@ package calculator.application.in;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import calculator.application.service.CalculateService;
+import calculator.Application;
+import calculator.config.ApplicationContext;
 import calculator.domain.CalculateExpression;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +13,9 @@ class CalculateUseCaseTest {
     private final CalculateUseCase calculateUseCase;
 
     public CalculateUseCaseTest() {
-        this.calculateUseCase = new CalculateService();
+        ApplicationContext context = ApplicationContext.fromEntry(Application.class);
+
+        this.calculateUseCase = context.getBean(CalculateUseCase.class);
     }
 
     @Test

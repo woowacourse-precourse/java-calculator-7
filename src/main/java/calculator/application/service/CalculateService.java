@@ -1,11 +1,13 @@
 package calculator.application.service;
 
 import calculator.application.in.CalculateUseCase;
+import calculator.config.annotation.Component;
 import calculator.domain.CalculateExpression;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class CalculateService implements CalculateUseCase {
 
     public CalculateService() {

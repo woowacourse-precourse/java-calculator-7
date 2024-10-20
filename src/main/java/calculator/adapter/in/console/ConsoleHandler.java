@@ -1,9 +1,11 @@
 package calculator.adapter.in.console;
 
 import calculator.application.in.CalculateUseCase;
+import calculator.config.annotation.Component;
 import calculator.domain.CalculateExpression;
 import camp.nextstep.edu.missionutils.Console;
 
+@Component
 public class ConsoleHandler {
 
     private final CalculateUseCase calculateUseCase;
