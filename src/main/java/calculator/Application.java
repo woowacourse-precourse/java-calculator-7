@@ -2,8 +2,6 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
-import java.util.NoSuchElementException;
-
 public class Application {
     public static void main(String[] args) {
         try {
@@ -14,7 +12,7 @@ public class Application {
             int sum = calculator.calculate(input);
 
             System.out.println("결과 : " + sum);
-        } catch (NoSuchElementException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
     }
