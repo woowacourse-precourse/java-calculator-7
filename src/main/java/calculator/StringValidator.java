@@ -57,10 +57,15 @@ public class StringValidator {
 
     private String validateNumbers(String input, String delimiter) {
         String[] numbers = input.split(delimiter);
+        StringBuilder result = new StringBuilder();
         for (String number : numbers) {
-            parsePositiveInt(number.trim());
+            int value = parsePositiveInt(number.trim());
+            result.append(value).append(",");
         }
-        return input;
+        if (!result.isEmpty()) {
+            result.setLength(result.length() - 1);
+        }
+        return result.toString();
     }
 
     private boolean isSinglePositiveNumber(String input) {
