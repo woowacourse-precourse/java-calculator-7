@@ -9,7 +9,6 @@ public interface ExtractorService {
      *
      * @param input 추출할 문자열
      * @return delimiter, expression을 가진 객체
-     * @throws IllegalArgumentException 잘못된 입력이 있을 경우 발생
      */
-    Operand extract(String input) throws IllegalArgumentException;
+    Operand extract(String input);
 }
