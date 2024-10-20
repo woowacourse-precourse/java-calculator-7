@@ -68,4 +68,10 @@ public class InputProcessor {
         return input.split(regex);
     }
 
+    public void isNegative(int num) {
+        if (num < 0) {
+            throw new IllegalArgumentException("잘못된 입력입니다. 음수는 지원하지 않습니다.");
+        }
+    }
+
 }
