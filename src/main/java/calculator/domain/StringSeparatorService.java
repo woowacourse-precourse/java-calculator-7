@@ -1,6 +1,7 @@
 package calculator.domain;
 
 import calculator.infrastructure.InputStringProcessor;
+import calculator.infrastructure.NumberAddProcessor;
 import calculator.infrastructure.SplitStrListValidator;
 import java.util.List;
 import java.util.Set;
@@ -9,10 +10,12 @@ public class StringSeparatorService {
 
     private final InputStringProcessor inputStringProcessor;
     private final SplitStrListValidator splitStrListValidator;
+    private final NumberAddProcessor numberAddProcessor;
 
     public StringSeparatorService() {
         inputStringProcessor = new InputStringProcessor();
         splitStrListValidator = new SplitStrListValidator();
+        numberAddProcessor = new NumberAddProcessor();
     }
 
     public List<String> splitStrBySeparators(String inputStr) {
@@ -29,5 +32,9 @@ public class StringSeparatorService {
     public List<Long> makeNumberList(List<String> splitStrBySeparators) {
         // 리스트의 각 요소를 검증하고,  Long 타입으로 변환하여 반환한다.
         return splitStrListValidator.makeNumberList(splitStrBySeparators);
+    }
+
+    public long sum(List<Long> numberList) {
+        return numberAddProcessor.addAllNumbers(numberList);
     }
 }
