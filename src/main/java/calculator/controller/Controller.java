@@ -22,6 +22,12 @@ public class Controller {
         this.utils = utils;
     }
 
+    public void calculate() {
+        startWithDelimiterInitialization();
+        int i = processUserInputAndCalculate();
+        displayCalculationResult(i);
+    }
+
     public void startWithDelimiterInitialization() {
         calculator.init();
     }
