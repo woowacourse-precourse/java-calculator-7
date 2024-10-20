@@ -3,8 +3,8 @@ package calculator;
 import java.util.List;
 
 public class InputValidator {
-    private static final String DEFAULT_DELIMITER_PATTERN = "^(\\d+([,:]\\d+)*)?$";
-    private static final String CUSTOM_DELIMITER_PATTERN = "^//(.+)\\n\\d+([,:]\\d+|\\\\1\\d+)*$";
+    private static final String DEFAULT_DELIMITER_PATTERN = "^(\\d+((.)\\d+)*)?$";
+    private static final String CUSTOM_DELIMITER_PATTERN = "^//(.)\\\\n\\d+((.)\\d+)*$";
 
     private final DelimiterManager delimiterManager;
 
