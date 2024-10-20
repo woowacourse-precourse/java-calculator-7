@@ -1,30 +1,26 @@
 package calculator;
 
-import java.util.Scanner;
+import camp.nextstep.edu.missionutils.Console;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.ArrayList;
 
 public class Application {
+    private static String delimitier = ",|:";
+
     public static void main(String[] args) {
-        int operandA = inPut();
-        int operandB = inPut();
-        int operandC = inPut();
+        String operand = inPut();
 
-
-        Queue<Integer> operandQueue = new LinkedList<>();
-        operandQueue.add(operandA);
-        operandQueue.add(operandB);
-        operandQueue.add(operandC);
-
-        int result = iterateCalculation(operandQueue);
-        System.out.println("결과 : " + result);
+        ArrayList<Integer> result = extractIntFromString(operand);
+        System.out.println("결과 : ");
+        for (int output : result) {
+            System.out.println(output);
+        }
     }
 
-    // 문자열에서 숫자 추출 기능 구현 시 리턴 타입과 구현 내용을 int -> String 으로 수정할 것
-    public static int inPut() {
-        System.out.println("덧셈할 정수를 입력해 주세요.");
-        Scanner operand = new Scanner(System.in);
-        return operand.nextInt();
+    public static String inPut() {
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        return Console.readLine();
     }
 
     public static int add(int operandA, int operandB) {
@@ -42,5 +38,18 @@ public class Application {
             operandA = add(operandA, operandB);
         }
         return operandA;
+    }
+
+    public static ArrayList<Integer> extractIntFromString(String input) {
+        String[] tmp = input.split(delimitier);
+
+        // split된 값에 정수 이외의 값이 있는지 확인하는 로직 필요.
+
+        ArrayList<Integer> operands = new ArrayList<>();
+        for (String stringValue : tmp) {
+            int intValue = Integer.parseInt(stringValue);
+            operands.add(intValue);
+        }
+        return operands;
     }
 }
