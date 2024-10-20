@@ -30,7 +30,7 @@ public class CalculatorProcess {
             modifyDelimiter(inputString);
         }
         else{
-            // 유효하지 않은 문자열
+            // 유효하지 않은 문자열 (문자열이 숫자로 시작하지 않고, "//"로 시작하지 않는 경우)
             throw new IllegalArgumentException();
         }
     }
@@ -44,7 +44,22 @@ public class CalculatorProcess {
         validateInput(inputString);
     }
 
+    // 구분자를 제외한 문자열이 숫자가 아닌 입력을 포함하고 있는지 확인하기
     static private void validateInput(String inputString){
+        inputString = inputString.replace(",",":");
 
+        for(int i=0;i<inputString.length();i++){
+            if(inputString.charAt(i)==':' || ('0' <= inputString.charAt(i) && inputString.charAt(i) <= '9')){
+                continue;
+            }
+            else{
+                // 유효하지 않은 문자열 (구분자를 제외한 문자열이 숫자가 아닌 입력을 포함하고 있는 경우)
+                throw new IllegalArgumentException();
+            }
+        }
+        divideByDelimiter(inputString);
+    }
+
+    static private void divideByDelimiter(String inputString){
     }
 }
