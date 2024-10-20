@@ -15,11 +15,11 @@ public class Application {
             return false;
         }
         if (!(input.charAt(3) == '\\' && input.charAt(4) == 'n')) {
-            return false;
+            throw new IllegalArgumentException("올바르지 않은 커스텀 구분자 형식입니다.");
         }
         // 구분자가 숫자면 에러
         if(input.charAt(2)>='0'&&input.charAt(2)<='9')
-            return false;
+            throw new IllegalArgumentException("숫자는 구분자로 설정할 수 없습니다.");
         return true;
     }
     // 구분자가 특수문자인지 확인하는 메서드
@@ -54,7 +54,7 @@ public class Application {
         for(String number: numbers){
             int num = stringToInt(number);
             if(num<=0) // 숫자는 양수로만 구성되어야 하므로 0도 예외처리
-                return -1;
+                throw new IllegalArgumentException("구분자와 양수가 아닌 값은 입력할 수 없습니다.");
             sum+=num;
         }
         return sum;
@@ -69,8 +69,16 @@ public class Application {
     }
 
     public static int StringCalculator(String input){
-        int sum;
-        String delimiter = findCustomDelimiter(input);
+        if(input.isEmpty())
+            return 0;
+        int sum=-1;
+        String delimiter = ",|:";
+
+        try {
+            delimiter = findCustomDelimiter(input); // 커스텀 구분자 찾기
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage()); // 예외 발생 시 에러 메시지 출력
+        }
 
         if(delimiter!=",|:"){
             input = input.substring(5);
@@ -87,8 +95,8 @@ public class Application {
 
     public static void main(String[] args) {
         String input = Console.readLine();
-//        String input = "-1,2,3";
         int sum = StringCalculator(input);
+
         System.out.println("결과 : "+sum);
     }
 }
