@@ -6,13 +6,8 @@ public class Application {
     public static void main(String[] args) {
         Printer.printInputMessage();
         Reader.readString();
-        System.out.println("input: \"" + input + "\"");
-        try {
-//            Printer.printResultMessage(Calculator.calculate());
-            System.out.println(Calculator.calculate());
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+        System.out.println("input: " + input);
+            Printer.printResultMessage(Calculator.calculate());
     }
 
     public static void setInput(String newInput) { input = newInput; }

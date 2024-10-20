@@ -43,7 +43,7 @@ public class Validator {
 
     public static void setDelimiter(char newDelimiter) {
         delimiter = newDelimiter;
-        System.out.println("delemiter: " + delimiter);
+//        System.out.println("delemiter: " + delimiter);
     }
 
     public static char getDelimiter() { return delimiter; }

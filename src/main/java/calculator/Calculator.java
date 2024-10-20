@@ -7,15 +7,14 @@ public class Calculator {
 //        System.out.println(Application.getInput().length());
 //        if (Application.getInput().length() == 0)
 //            return 0;
+        Calculator.setCurIdx(0);
         Parser.parse();
         return iterateString();
     }
 
     public static int iterateString() {
         String input = Application.getInput();
-        char[] charString = input.toCharArray();
         int size = input.length();
-
         int res = 0;
 
         while (curIdx < size) {

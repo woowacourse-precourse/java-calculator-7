@@ -49,6 +49,8 @@ public class Parser {
     }
 
     public static int parseInteger() {
+        System.out.println("parseInteger");
+
         int curIdx = Calculator.getCurIdx();
         int nextIdx = Validator.isValidCharacterPosition();
 
