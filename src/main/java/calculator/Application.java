@@ -19,6 +19,7 @@ public class Application {
 
         Integer result = addIntList(intList);
 
+        System.out.println(result);
     }
 
     private static String parseCustomDelimiter(String str){
