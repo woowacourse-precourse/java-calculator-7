@@ -13,13 +13,14 @@ public class Application {
         System.out.println(inputMessage);
 
         String input = readLine().trim();
+        int sum = 0;
 
         if(input.equals("")) {
 
         } else {
             DividersAndNumberSequence dividersAndNumberSequence = getDividersAndNumberSequence(input);
             dividersAndNumberSequence.updateNumberSequence();
-            getNumberList(dividersAndNumberSequence.getNumberSequence());
+            List<Integer> numberList = getNumberList(dividersAndNumberSequence.getNumberSequence());
         }
     }
 
@@ -27,7 +28,7 @@ public class Application {
         String[] inputByEndSign = input.split(SignAndDivider.endSign);
         int customSignLength = inputByEndSign.length - 1;
 
-        String numberSequence = "";
+        String numberSequence = "0";
         List<String> dividers = addDefaultDivider();
 
         for (int i = 0; i <= customSignLength; i++) {
@@ -63,7 +64,7 @@ public class Application {
 
         String tokenWithoutStartSign = token.substring(2);
         boolean isValid = token.startsWith("//") && !tokenWithoutStartSign.contains(SignAndDivider.startSign)
-                && !tokenWithoutStartSign.matches("[0-9]");
+                && tokenWithoutStartSign.matches("[^0-9]*");
 
         if (!isValid) {
             throw new IllegalArgumentException();
