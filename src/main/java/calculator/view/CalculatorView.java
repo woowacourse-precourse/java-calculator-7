@@ -12,7 +12,7 @@ public class CalculatorView {
         //커스텀 구분자
         int startIndex = input.indexOf("//"); //정규표현식도 고려해볼 것
         int endIndex = input.indexOf("\\n");
-        if (startIndex != -1 && endIndex != -1 && startIndex < endIndex) {
+        if (startIndex == 0 && endIndex != -1) {
             separator += input.substring(startIndex + 2, endIndex);
             input = input.substring(endIndex + 2);
         }
