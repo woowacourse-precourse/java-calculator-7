@@ -14,4 +14,4 @@
   - ✅ 이외의 경우, 잘못된 입력값으로 판단하고 IllegalArgumentException을 던진다.
 - Calculator 클래스의 sum 메소드
   - ✅ 토큰화된 문자열의 각 토큰을 숫자로 변환하고, 모든 토큰이 양수인 경우 그 합을 계산하여 반환한다.
-  - 변환된 토큰들이 양수가 아닌 경우, 잘못된 입력값으로 판단하고 IllegalArgumentException을 던진다.
+  - ✅ 변환된 토큰들이 양수가 아닌 경우, 잘못된 입력값으로 판단하고 IllegalArgumentException을 던진다.

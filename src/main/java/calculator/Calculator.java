@@ -37,6 +37,8 @@ public class Calculator {
             double number = Double.parseDouble(token);
             if (number > 0) {
                 sum += number;
+            } else {
+                throw new IllegalArgumentException();
             }
         }
         return sum;
