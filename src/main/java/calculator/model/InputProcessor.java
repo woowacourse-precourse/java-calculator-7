@@ -40,13 +40,13 @@ public class InputProcessor {
         if (input.isEmpty()) {
             input = "0";
             return true;
-        } else if (this.isDefaultCase()) {
+        } else if (isDefaultCase()) {
             if (!input.replaceAll(regex + "|[0-9]", "").isEmpty()) {
                 throw new IllegalArgumentException("잘못된 입력입니다. 입력 문자열은 " +
                         "커스텀 구분자 외 다른 문자를 포함할 수 없습니다.");
             }
             return true;
-        } else if (this.isCustomCase()) {
+        } else if (isCustomCase()) {
             getCustomDelimiter();
             regex = String.join("|", delimiterList);
             if (delimiterList.contains("")) {
@@ -61,6 +61,11 @@ public class InputProcessor {
             return true;
         }
         throw new IllegalArgumentException("잘못된 입력입니다. 입력 포맷을 확인해주세요.");
+    }
+
+    public String[] splitInput() {
+        isValidInput();
+        return input.split(regex);
     }
 
 }
