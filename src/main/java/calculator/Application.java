@@ -7,8 +7,12 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = camp.nextstep.edu.missionutils.Console.readLine();
 
-        int result = add(input);
-        System.out.println("결과 : " + result);
+        try {
+            int result = add(input);
+            System.out.println("결과 : " + result);
+        } catch (IllegalArgumentException e) {
+            System.err.println("에러: " + e.getMessage());
+        }
     }
 
     public static int add(String input) {
@@ -22,6 +26,8 @@ public class Application {
             if (matcher.find()) {
                 delimiter = Pattern.quote(matcher.group(1));
                 input = matcher.group(2);
+            } else {
+                throw new IllegalArgumentException("잘못된 형식의 커스텀 구분자입니다.");
             }
         }
 
@@ -32,9 +38,22 @@ public class Application {
     private static int calculateSum(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
-            int num = Integer.parseInt(number.trim());
-            sum += num;
+            sum += parseNumber(number);
         }
         return sum;
+    }
+
+    private static int parseNumber(String number) {
+        int num;
+        try {
+            num = Integer.parseInt(number.trim());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다: " + number);
+        }
+
+        if (num < 0) {
+            throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + num);
+        }
+        return num;
     }
 }
