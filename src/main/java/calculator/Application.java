@@ -8,7 +8,8 @@ public class Application {
 
     public static void main(String[] args) {
         String input = Console.readLine();
-        System.out.println("결과 : " + calculator(input));
+        int result = calculator(input);
+        System.out.println("결과 : " + result);
     }
 
     public static int calculator(String input) {

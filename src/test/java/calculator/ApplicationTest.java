@@ -61,6 +61,48 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 숫자_하나_테스트() {
+        assertSimpleTest(() -> {
+            run("5");
+            assertThat(output()).contains("결과 : 5");
+        });
+    }
+
+    @Test
+    void 구분자_없이_여러_숫자_테스트() {
+        assertSimpleTest(() -> {
+            run("12345");
+            assertThat(output()).contains("결과 : 12345");
+        });
+    }
+
+    @Test
+    void 구분자만_테스트() {
+        assertSimpleTest(() -> {
+            run(",,,");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_여러_문자_테스트() {
+        assertSimpleTest(() -> {
+            run("//;;;\\n1;;;2;;;3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 대규모_입력_테스트() {
+        assertSimpleTest(() -> {
+            String largeInput = "1," + "2,".repeat(1000) + "3";
+            run(largeInput);
+            assertThat(output()).contains("결과 : 2004");
+        });
+    }
+
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
