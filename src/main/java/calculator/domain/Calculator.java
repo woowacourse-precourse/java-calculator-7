@@ -14,29 +14,38 @@ public class Calculator {
         this.splitInputs = splitInputs;
     }
 
-    public long sum() {
+    public Number sum() {
         if (this.splitInputs.length == 0) {
             return 0L;
         }
 
-        return Arrays.stream(this.splitInputs)
-                .mapToLong(this::parsedNumber)
+        double result = Arrays.stream(this.splitInputs)
+                .mapToDouble(this::parsedNumber)
                 .filter(this::validatePositiveNumber)
                 .sum();
+
+        if (isNaturalNumber(result)) {
+            return (long) result;
+        }
+        return result;
     }
 
-    private long parsedNumber(String number) {
+    private double parsedNumber(String number) {
         try {
-            return Long.parseLong(number);
+            return Double.parseDouble(number);
         } catch (NumberFormatException e) {
             throw new CalculatorException(INVALID_INPUT_VALUE.getMessage());
         }
     }
 
-    private boolean validatePositiveNumber(long number) {
+    private boolean validatePositiveNumber(double number) {
         if (number <= 0) {
             throw new CalculatorException(NEGATIVE_VALUE_NOT_ALLOWED.getMessage());
         }
         return true;
+    }
+
+    private boolean isNaturalNumber(double number) {
+        return Math.floor(number) == number;
     }
 }

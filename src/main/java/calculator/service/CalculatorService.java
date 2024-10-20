@@ -14,7 +14,7 @@ public class CalculatorService {
         String[] splitInputs = inputSplitter.split(input);
 
         Calculator calculator = new Calculator(splitInputs);
-        long sumResult = calculator.sum();
+        Number sumResult = calculator.sum();
 
         return new CalculatorResponseDto(sumResult);
     }

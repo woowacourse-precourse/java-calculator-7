@@ -6,7 +6,7 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class OutputView {
 
-    public void print(long sumResult) {
+    public void print(Number sumResult) {
         String outputViewMessage = String.format(OUTPUT_VIEW_MESSAGE.getMessage(), sumResult);
         System.out.println(outputViewMessage);
         Console.close();

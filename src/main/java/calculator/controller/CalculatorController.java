@@ -16,7 +16,7 @@ public class CalculatorController {
 
         CalculatorRequestDto requestDto = new CalculatorRequestDto(input);
         CalculatorResponseDto responseDto = calculatorService.sum(requestDto);
-        long sumResult = responseDto.sumResult();
+        Number sumResult = responseDto.sumResult();
 
         OutputView outputView = new OutputView();
         outputView.print(sumResult);
