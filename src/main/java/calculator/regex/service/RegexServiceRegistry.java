@@ -20,12 +20,12 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class RegexPatternServiceResolver {
+public class RegexServiceRegistry {
     private final Map<RegexPattern, Function<List<Number>, NumberService>> serviceMap = new HashMap<>();
     private final Map<RegexPattern, Supplier<NumberConvertorService>> convertorServiceMap = new HashMap<>();
     private final Map<RegexPattern, CalculatorService> calculatorServicMap = new HashMap<>();
     private final Map<RegexPattern, ResultService> resultServiceMap = new HashMap<>();
-    public RegexPatternServiceResolver() {
+    public RegexServiceRegistry() {
         initNumberService();
         initNumberConvertorService();
         initCalculatorService();
