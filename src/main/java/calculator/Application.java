@@ -17,8 +17,8 @@ class ExpressionModel {
         this.operand = new ArrayList<>();
     }
 
-    int isCustom(String input) {
-        return input.indexOf("//");
+    int isCustom(String expression) {
+        return expression.indexOf("//");
     }
 
     int plusData() {
