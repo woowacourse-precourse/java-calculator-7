@@ -3,7 +3,7 @@ package calculator.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InputData {
+public class Data {
     private static final String EMPTY_STRING = "";
     private static final String SEPARATOR_COMMA = ",";
     private static final String SEPARATOR_COLON = ":";
@@ -12,12 +12,12 @@ public class InputData {
     private String[] extractedStrings;
     private List<Integer> numbersForSum;
 
-    public InputData(String firstInputData) {
+    public Data(String firstInputData) {
         this.firstInputData = firstInputData;
         separators = new ArrayList<>();
         separators.add(SEPARATOR_COLON);
         separators.add(SEPARATOR_COMMA);
-        numbersForSum = new ArrayList<>();
+        numbersForSum = handleInputString();
     }
 
     private List<Integer> handleInputString() {
@@ -27,6 +27,7 @@ public class InputData {
         }
         separators = SeparatorValidator.extractCustomSeparator(separators, firstInputData);
         extractedStrings = SeparatorValidator.removeSeparator(separators, firstInputData);
+        return NumberValidator.convertNumbers(extractedStrings);
     }
 
     private boolean hasEmptyString() {
