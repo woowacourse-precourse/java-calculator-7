@@ -1,5 +1,7 @@
 package calculator.domain;
 
+import calculator.util.NumberValidator;
+
 public class Number {
     private String[] numString;
     private int[] numbers;
@@ -11,42 +13,24 @@ public class Number {
         this.sum = 0;
     }
 
-    private boolean isNullString() {
-        return numString == null || numString.length == 0;
-    }
-
     public void convertStringToInt() {
-        if (isNullString()) {
+        if (NumberValidator.isNullString(numString)) {
             return;
         }
 
         numbers = new int[numString.length];
         for (int i = 0; i < numString.length; ++i) {
-            numbers[i] = parseAndValidateInt(numString[i]);
-        }
-    }
-
-    private int parseAndValidateInt(String checkString) {
-        try {
-            int number = Integer.parseInt(checkString);
-            if (number < 1) {
-                throw new IllegalArgumentException("양수만 입력 가능합니다.");
-            }
-            return number;
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("구분자 이외에 숫자만 입력가능합니다.");
+            numbers[i] = NumberValidator.parseAndValidateInt(numString[i]);
         }
     }
 
     public int calculateSum() {
         convertStringToInt(); // calculateSum() 메서드가 먼저 호출되면 numbers 에 아무 문자열이 없으므로 방지를 위해 내부에 선언
 
-        if (isNullString()) {
-            return sum;
-        }
-
-        for (int num : numbers) {
-            sum += num;
+        if (!NumberValidator.isNullString(numString)) {
+            for (int num : numbers) {
+                sum += num;
+            }
         }
         return sum;
     }
