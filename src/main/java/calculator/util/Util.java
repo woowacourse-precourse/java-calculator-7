@@ -14,9 +14,9 @@ public class Util {
     private static final String BASIC_SEPARATOR = "[,:]";
     private static final String CUSTOM_SEPARATOR_REGEX = "//(.)\\\\n(.*)";
 
-    public List<Integer> extract(String text) {
-        List<String> extractList = new ArrayList<>(separatorExtract(text));
-        extractList = checkListSize(extractList);
+    public List<Integer> extractNumbers(String text) {
+        List<String> extractList = new ArrayList<>(extractBasedOnSeparator(text));
+        extractList = getNonEmptyStrings(extractList);
         if (!extractList.isEmpty()) {
             validExtractList(extractList);
         }
@@ -24,24 +24,24 @@ public class Util {
                 .map(Integer::parseInt).collect(Collectors.toList());
     }
 
-    private List<String> checkListSize(List<String> list){
+    private List<String> getNonEmptyStrings(List<String> list){
         return list.stream()
                 .filter(s -> !s.isEmpty())
                 .collect(Collectors.toList());
     }
 
-    private List<String> separatorExtract(String text){
+    private List<String> extractBasedOnSeparator(String text){
         if(text.startsWith("//")){
-            return List.of(customSeparatorExtract(text));
+            return List.of(splitByCustomSeparator(text));
         }
-        return List.of(basicSeparatorExtract(text));
+        return List.of(splitByBasicSeparator(text));
     }
 
-    private String[] basicSeparatorExtract(String text){
+    private String[] splitByBasicSeparator(String text){
         return text.split(BASIC_SEPARATOR);
     }
 
-    private String[] customSeparatorExtract(String text){
+    private String[] splitByCustomSeparator(String text){
         validCustomSeparator(text);
         Matcher matcher = Pattern.compile(CUSTOM_SEPARATOR_REGEX).matcher(text);
         if (matcher.matches()) {

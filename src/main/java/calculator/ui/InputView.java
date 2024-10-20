@@ -17,7 +17,7 @@ public class InputView {
 
     public Result readText(){
         String text = readLine();
-        List<Integer> numbers = util.extract(text);
+        List<Integer> numbers = util.extractNumbers(text);
         return new Result(numbers);
     }
 }
