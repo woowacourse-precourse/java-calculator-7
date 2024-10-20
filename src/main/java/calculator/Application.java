@@ -62,6 +62,10 @@ public class Application {
         return add(parsedNumbers);
     }
 
+    private static boolean hasCustomDelimiter(String input) {
+        return input.startsWith(CUSTOM_DELIMITER_START_SIGN);
+    }
+
     private static boolean isEndSignMissing(int indexOfEndSign) {
         return indexOfEndSign == -1;
     }
@@ -83,7 +87,7 @@ public class Application {
         for (String delim : customDelimiters) {
             delim = delim.trim();
 
-            if (!delim.isEmpty()) { // 빈 문자열로 파싱되지 않았다면
+            if (!delim.isEmpty()) { // 빈 문자열로 파싱되지 않았다면 (구분자가 연속으로 입력된 경우)
                 delimiterPart
                         .append("|")
                         .append(toRegex(delim));
@@ -107,14 +111,6 @@ public class Application {
                 .toArray();
     }
 
-    private static int safeParseInt(String number) {
-        try {
-            return Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자부에 문자가 입력되었습니다. : " + number, e);
-        }
-    }
-
     private static void validateNoNegativeNumbers(int[] numbers) {
         if (Arrays.stream(numbers)
                 .anyMatch(n -> n < 0)) {
@@ -132,17 +128,21 @@ public class Application {
                 .anyMatch(Character::isDigit);
     }
 
+    private static String toRegex(String delim) {
+        return Pattern.quote(delim);
+    }
+
     private static boolean isNotEmpty(String n) {
         return !n.trim()
                 .isEmpty();
     }
 
-    private static String toRegex(String delim) {
-        return Pattern.quote(delim);
-    }
-
-    private static boolean hasCustomDelimiter(String input) {
-        return input.startsWith(CUSTOM_DELIMITER_START_SIGN);
+    private static int safeParseInt(String number) {
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자부에 문자가 입력되었습니다. : " + number, e);
+        }
     }
 
     private static void printInputMessage() {
