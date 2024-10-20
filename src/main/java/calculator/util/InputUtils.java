@@ -31,6 +31,19 @@ public class InputUtils {
         return input;
     }
 
+    public static int[] parseExpressionToIntArray (Expression expression) {
+        String expressionString = expression.getExpression();
+        String delimiter = expression.getDelimiter();
+
+        String[] tokens = expressionString.split(delimiter);
+        int[] numbers = new int[tokens.length];
+
+        for (int i = 0; i < tokens.length; i++) {
+            numbers[i] = validateTokens(tokens[i]);
+        }
+        return numbers;
+    }
+
     private static void validateNullInput(String input) {
         if (input == null) {
             throw new IllegalArgumentException();
@@ -52,17 +65,15 @@ public class InputUtils {
     }
 
     // 토큰이 유효한지 검증하는 메서드
-    private static void validateTokens(String[] tokens) {
-        for (String token : tokens) {
-            if (token.isEmpty()) {
-                throw new IllegalArgumentException();
-            }
-            validateNumericInput(token);
+    private static int validateTokens(String token) {
+        if (token.isEmpty()) {
+            throw new IllegalArgumentException();
         }
+        return validateNumericInput(token);
     }
 
     // 문자열이 양수인지 검증하는 메서드
-    private static void validateNumericInput(String token) {
+    private static int validateNumericInput(String token) {
         try {
             // 옳바른 양수인지 확인 01은 숫자가 아님
             if (token.charAt(0) == '0') {
@@ -72,6 +83,7 @@ public class InputUtils {
             if (number < 0) {
                 throw new IllegalArgumentException();
             }
+            return number;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }
