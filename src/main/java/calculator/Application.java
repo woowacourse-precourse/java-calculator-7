@@ -5,6 +5,6 @@ public class Application {
 
         StringCalculator stringCalculator = new StringCalculator();
 
-        stringCalculator.plusCalculate();
+        stringCalculator.stringPlusCalculator();
     }
 }
