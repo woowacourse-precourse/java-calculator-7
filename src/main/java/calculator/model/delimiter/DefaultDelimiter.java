@@ -1,4 +1,4 @@
-package calculator.model;
+package calculator.model.delimiter;
 
 import java.util.Arrays;
 import java.util.List;

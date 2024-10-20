@@ -1,10 +1,12 @@
 package calculator.validator;
 
+import java.util.List;
+
 public class DuplicatedCharacterValidator {
-    public static void validate(String delimiterString) {
+    public static void validate(List<String> delimiters) {
         StringBuilder checkedDelimiter = new StringBuilder();
-        for (char delimiter : delimiterString.toCharArray()) {
-            if (!checkedDelimiter.toString().contains(String.valueOf(delimiter))) {
+        for (String delimiter : delimiters) {
+            if (!checkedDelimiter.toString().contains(delimiter)) {
                 checkedDelimiter.append(delimiter);
                 continue;
             }

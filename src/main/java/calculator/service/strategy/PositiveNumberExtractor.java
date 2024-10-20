@@ -2,8 +2,8 @@ package calculator.service.strategy;
 
 import static calculator.model.RegularExpression.NUMBER_LINE;
 
-import calculator.model.CustomDelimiter;
 import calculator.model.PositiveNumber;
+import calculator.model.delimiter.Delimiter;
 
 public class PositiveNumberExtractor {
     private final SplitPatternGenerator splitStringMaker;
@@ -14,7 +14,7 @@ public class PositiveNumberExtractor {
         this.patternMatcherUtil = patternMatcherUtil;
     }
 
-    public PositiveNumber getPositiveNumberWithCustomDelimiter(CustomDelimiter customDelimiter,
+    public PositiveNumber getPositiveNumberWithCustomDelimiter(Delimiter customDelimiter,
                                                                String inputString) {
         String numberLine = getPositiveNumberLine(inputString);
         String[] positiveNumberString = numberLine.split(

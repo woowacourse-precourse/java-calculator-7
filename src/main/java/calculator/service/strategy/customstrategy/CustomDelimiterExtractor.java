@@ -2,10 +2,8 @@ package calculator.service.strategy.customstrategy;
 
 import static calculator.model.RegularExpression.CUSTOM_LINE;
 
-import calculator.model.CustomDelimiter;
+import calculator.model.delimiter.Delimiter;
 import calculator.service.strategy.PatternMatcherUtil;
-import calculator.validator.DuplicatedCharacterValidator;
-import calculator.validator.IllegalNumericDelimiterValidator;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -17,11 +15,9 @@ public class CustomDelimiterExtractor {
         this.patternMatcherUtil = patternMatcherUtil;
     }
 
-    public CustomDelimiter extractCustomDelimiter(String inputString) {
+    public Delimiter extractCustomDelimiter(String inputString) {
         String customDelimiterString = extractCustomDelimiterToString(inputString);
-        IllegalNumericDelimiterValidator.validate(customDelimiterString);
-        DuplicatedCharacterValidator.validate(customDelimiterString);
-        return CustomDelimiter.createCustomDelimiter(customDelimiterStringToList(customDelimiterString));
+        return Delimiter.createDelimiter(customDelimiterStringToList(customDelimiterString));
     }
 
     private List<String> customDelimiterStringToList(String customDelimiterString) {
