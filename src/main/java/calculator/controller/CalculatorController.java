@@ -1,5 +1,7 @@
 package calculator.controller;
 
+import static calculator.model.InputString.CUSTOM_DELIMITER_RANGE;
+
 import calculator.model.InputString;
 import calculator.view.InputView;
 import calculator.view.OutputView;
@@ -25,7 +27,7 @@ public class CalculatorController {
 
         validateInputString(input);
 
-        if (input.startsWith("//") && input.substring(3).isEmpty()) {
+        if (input.startsWith("//") && input.substring(CUSTOM_DELIMITER_RANGE).isEmpty()) {
             input = inputView.getInputStringFromNextLine(input);
         }
 
@@ -40,7 +42,7 @@ public class CalculatorController {
      * 입력받은 문자열에 대해 유효성 검증
      */
     private void validateInputString(String input) {
-        if (input.startsWith("//") && input.contains("\\n") && !input.startsWith("\\n", 3)) {
+        if (input.startsWith("//") && input.contains("\\n") && !input.startsWith("\\n", CUSTOM_DELIMITER_RANGE)) {
             throw new IllegalArgumentException("올바른 커스텀 구분자 입력 형식이 아닙니다.");
         }
         if (input.startsWith("//") && !input.contains("\\n") && input.length() > 3) {
