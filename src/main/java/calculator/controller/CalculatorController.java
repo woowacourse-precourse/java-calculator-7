@@ -11,16 +11,13 @@ public class CalculatorController {
 
     public void run() {
         OutputView.printStartMessage();
-        String inputStringForAddition = InputView.readInputString();
-
-        UserInputString userInput = new UserInputString(inputStringForAddition);
+        UserInputString userInput = new UserInputString(InputView.readInputString());
         if (userInput.isInputEmpty()) {
             OutputView.printResult("결과 : " + 0);
             return;
         }
 
-        Delimiter delimiter = new Delimiter(userInput.getInput());
-        String delimiterRegex = delimiter.getDelimiterRegex();
+        String delimiterRegex = new Delimiter(userInput.getInput()).getDelimiterRegex();
 
         List<String> parser = userInput.parser(delimiterRegex);
         List<Long> inputNumbers = parser.stream().map(token -> {
