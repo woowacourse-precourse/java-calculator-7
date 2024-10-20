@@ -12,7 +12,7 @@ class CustomDelimiterDetectorTest {
     @DisplayName("커스텀 구분자 찾기")
     void 커스텀_구분자_찾기(){
         // given
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
         // when
         String customDelimiter = detector.findCustomDelimiter(input);
         // then
@@ -34,7 +34,7 @@ class CustomDelimiterDetectorTest {
     @DisplayName("두 글자 이상의 커스텀 구분자")
     void 커스텀_구분자_over_two(){
         // given
-        String input = "//;;\n1;2;3";
+        String input = "//;;\\n1;2;3";
         // when
         String customDelimiter = detector.findCustomDelimiter(input);
         // then
@@ -45,7 +45,7 @@ class CustomDelimiterDetectorTest {
     @DisplayName("커스텀 구분자 순서가 바뀜")
     void 커스텀_구분자_순서바뀜(){
         // given
-        String input = "\n;//1;2;3";
+        String input = "\\n;//1;2;3";
         // when
         String customDelimiter = detector.findCustomDelimiter(input);
         // then

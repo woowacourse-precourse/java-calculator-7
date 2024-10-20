@@ -2,7 +2,7 @@ package calculator.delimiter;
 
 public class CustomDelimiterDetector implements CustomDelimiterDetectorInterface {
     private static final String DELIMITER_PREFIX = "//";
-    private static final String DELIMITER_SUFFIX = "\n";
+    private static final String DELIMITER_SUFFIX = "\\n";
 
     @Override
     public String findCustomDelimiter(String input) {
