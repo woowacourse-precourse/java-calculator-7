@@ -60,6 +60,13 @@ public class Application {
         }
     }
 
+    // 입력이 숫자로 끝나는지 확인하는 함수
+    public static void validateEndWithNumber(String input) {
+        if(!Character.isDigit(input.charAt(input.length() - 1))) {
+            throw new IllegalArgumentException("문자열의 마지막 문자가 숫자가 아닙니다.");
+        }
+    }
+
     public static void main(String[] args) {
         init();
         input();
@@ -69,5 +76,6 @@ public class Application {
             return;
         };
         validateBasicSeparator(userInput);
+        validateEndWithNumber(userInput);
     }
 }
