@@ -10,7 +10,7 @@ public class Separator {
     public String[] separate(String input, String separator) {
         String regex = separator;
 
-        if (input.startsWith(Constants.CUSTOM_SEPARATOR_PREFIX) && input.contains(Constants.CUSTOM_SEPARATOR_SUFFIX)) {
+        if (isContainsCustomSeparatorSymbol(input)) {
             int prefixIdx = input.indexOf(Constants.CUSTOM_SEPARATOR_PREFIX);
             int suffixIdx = input.lastIndexOf(Constants.CUSTOM_SEPARATOR_SUFFIX);
 
@@ -23,5 +23,9 @@ public class Separator {
         }
 
         return input.split(regex);
+    }
+
+    public boolean isContainsCustomSeparatorSymbol(String input) {
+        return input.startsWith(Constants.CUSTOM_SEPARATOR_PREFIX) && input.contains(Constants.CUSTOM_SEPARATOR_SUFFIX);
     }
 }
