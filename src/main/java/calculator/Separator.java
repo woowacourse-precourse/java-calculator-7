@@ -1,12 +1,14 @@
 package calculator;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Separator {
 
     private final Validator validator;
+    private final List<String> basicDelimiter = new ArrayList<>(Arrays.asList(",", ":"));
 
     public Separator(Validator validator) {
         this.validator = validator;
@@ -39,7 +41,7 @@ public class Separator {
             return zero;
         }
 
-        String delimiter = ",|:";
+        String delimiter = String.join("|", basicDelimiter);
         BigDecimal sum = sumExpression(userInput, delimiter);
 
         return sum;
@@ -51,16 +53,12 @@ public class Separator {
             return zero;
         }
 
-        String delimiter = ",|:";
         int index = userInput.indexOf("\\n");
         String customDelimiter = userInput.substring(2, 3);
         String expression = userInput.substring(index + 2);
+        basicDelimiter.add(customDelimiter);
 
-        StringBuilder sb = new StringBuilder();
-        sb.append(delimiter);
-        sb.append("|");
-        sb.append(customDelimiter);
-        String newDelimiter = sb.toString();
+        String newDelimiter = String.join("|", basicDelimiter);
 
         BigDecimal sum = sumExpression(expression, newDelimiter);
 
