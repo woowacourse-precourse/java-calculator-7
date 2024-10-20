@@ -4,6 +4,8 @@ import calculator.controller.CalculatorController;
 import calculator.model.CustomStringParser;
 import calculator.model.CustomStringParserImpl;
 import calculator.model.DelimiterManagerImpl;
+import calculator.model.NumberStringConverter;
+import calculator.model.NumberStringConverterImpl;
 import calculator.model.NumberStringSplitter;
 import calculator.model.NumberStringSplitterImpl;
 import calculator.view.CalculatorInputView;
@@ -26,10 +28,10 @@ public class Application {
     private static CalculatorController getCalculatorController(DelimiterManagerImpl delimiterManagerImpl,
                                                                 CustomStringParser customStringParser) {
         NumberStringSplitter numberStringSplitter = new NumberStringSplitterImpl(delimiterManagerImpl);
+        NumberStringConverter numberStringConverter = new NumberStringConverterImpl();
         CalculatorOutputView calculatorOutputView = new CalculatorOutputView();
 
-        return new CalculatorController(
-                customStringParser, numberStringSplitter, calculatorOutputView
-        );
+        return new CalculatorController(customStringParser, numberStringSplitter, numberStringConverter,
+                calculatorOutputView);
     }
 }
