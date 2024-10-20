@@ -76,6 +76,54 @@ class ApplicationTest extends NsTest {
                         .hasMessage("올바른 형식이 아니거나 이스케이프 문자가 포함되어 있습니다"));
     }
 
+    @Test
+    void 커스텀_구분자_비정상_사용_여러개일때() {
+        assertSimpleTest(() -> {
+
+            assertThatThrownBy(() -> {
+
+                for (int i = 0; i < customRegexList.size(); i++) {
+                    runException("//" + customRegexList.get(i) + customRegexList.get(i) + "\\n1:2"
+                            + customRegexList.get(i) + customRegexList.get(i) + "3,4");
+                }
+
+            }).isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("올바른 형식이 아니거나 이스케이프 문자가 포함되어 있습니다");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_형식_하나만_존재_POST() {
+        assertSimpleTest(() -> {
+
+            assertThatThrownBy(() -> {
+
+                for (int i = 0; i < customRegexList.size(); i++) {
+                    runException(customRegexList.get(i) + "\\n1:2"
+                            + customRegexList.get(i) + "3,4");
+                }
+
+            }).isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("올바른 형식이 아니거나 이스케이프 문자가 포함되어 있습니다");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_형식_하나만_존재_RPE() {
+        assertSimpleTest(() -> {
+
+            assertThatThrownBy(() -> {
+
+                for (int i = 0; i < customRegexList.size(); i++) {
+                    runException("//" + customRegexList.get(i) + "1:2"
+                            + customRegexList.get(i) + "3,4");
+                }
+
+            }).isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("올바른 형식이 아니거나 이스케이프 문자가 포함되어 있습니다");
+        });
+    }
+
 
     @Override
     public void runMain() {
