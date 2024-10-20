@@ -22,7 +22,7 @@ public class Application {
                 delimiter += "|" + customDelimiter;
                 numbers = input.substring(delimiterEnd + 2); // 구분자 뒤의 숫자 문자열
             } else {
-                throw new IllegalArgumentException("잘못된 입력 형식입니다.");
+                throw new IllegalArgumentException();
             }
         }
 
@@ -34,7 +34,7 @@ public class Application {
             try {
                 sum += Integer.parseInt(token);
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("숫자가 아닌 값이 입력되었습니다.");
+                throw new IllegalArgumentException();
             }
         }
         return sum;
