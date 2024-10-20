@@ -11,7 +11,6 @@ public class Application {
 
         int sum = app.sumInString(input);
 
-//      System.out.println("추출된 숫자: " + result.toString()); // 출력: -1, 77, -33
         app.printResult(sum);
     }
 
@@ -24,7 +23,7 @@ public class Application {
     }
 
     public String calculateSumFromInput() {
-        //        a-1b77c-33
+        // a-1b77c-33
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         return Console.readLine();
     }
@@ -33,48 +32,38 @@ public class Application {
         // 숫자 추출 및 합산 로직을 수행
         // 숫자와 부호를 추출하기 위한 StringBuilder
         StringBuilder currentNumber = new StringBuilder();
-        StringBuilder result = new StringBuilder();
         int sum = 0;
 
+        // 문자열 순회
         for (int i = 0; i < input.length(); i++) {
             char c = input.charAt(i);
 
-            // 문자열에 음수가 포함된 경우 예외 발생
+            // 음수 검사
             checkForNegativeNumbers(c, i, input);
 
-            sum = numFindInString(c, sum, currentNumber, result);
+            sum = numFindInString(c, sum, currentNumber);
         }
+
+        sum = findTheTotal(sum, currentNumber);
 
         return sum;
     }
 
-    public int numFindInString(char c, int sum, StringBuilder currentNumber, StringBuilder result) {
+    public int numFindInString(char c, int sum, StringBuilder currentNumber) {
 
         if (Character.isDigit(c)) {
             currentNumber.append(c);
         } else {
-            sum = findTheTotal(sum, currentNumber, result);
+            sum = findTheTotal(sum, currentNumber);
         }
-
-        sum = findTheTotal(sum, currentNumber, result);
 
         return sum;
     }
 
-    public int findTheTotal(int sum, StringBuilder currentNumber, StringBuilder result) {
+    public int findTheTotal(int sum, StringBuilder currentNumber) {
         if (currentNumber.length() > 0) {
-            String numStr = currentNumber.toString();
-            int number = Integer.parseInt(numStr);
-            sum += number;
-
-            // 결과 문자열에 추가
-            if (result.length() > 0) {
-                result.append(", ");
-            }
-            result.append(numStr);
-
-            // StringBuilder 초기화
-            currentNumber.setLength(0);
+            sum += Integer.parseInt(currentNumber.toString());
+            currentNumber.setLength(0);  // StringBuilder 초기화
         }
 
         return sum;
