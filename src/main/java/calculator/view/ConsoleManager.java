@@ -1,5 +1,6 @@
 package calculator.view;
 
+import calculator.calculator.Calculator;
 import calculator.parser.ParserSelector;
 import calculator.parser.StringParser;
 
@@ -15,7 +16,7 @@ public class ConsoleManager {
 
         StringParser parser = ParserSelector.select(str);
         List<String> list = parser.parse(str);
-//        int result = Calculator.sum(list);
+        int result = Calculator.sum(list);
 //
 //        printResultMessage(result);
     }
