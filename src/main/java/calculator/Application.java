@@ -1,46 +1,43 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
-
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
-
-        String strPlus= Console.readLine();
-        String index;
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        String inputStr= Console.readLine();
         String[] splitStr;
 
-        if(strPlus.startsWith("//")){
-            strPlus= strPlus.substring(4);
-            index=strPlus.substring(2,2);
-            splitStr= strPlus.split(",|;");
-
-//            for(int i=0; i<splitStr.length; i++){
-//                if(splitStr[i].startsWith(index)){
-//
-//                }
-//            }
-
-        }else{
-            splitStr= strPlus.split(",|;");
+        if(inputStr.startsWith("//")){
+            inputStr=changeString(inputStr);
         }
 
-        for (String s : splitStr) {
-            System.out.println(s);
-        }
+        splitStr=changeToArray(inputStr);
 
-        int answer=0;
-        List<Integer> integerList=Arrays.stream(splitStr).map(value
-                ->Integer.parseInt(value)).collect(Collectors.toList());
+        int answer= Arrays.stream(splitStr)
+                        .mapToInt(Integer::parseInt)
+                                .sum();
 
-
-        for (Integer i : integerList) {
-            answer+=i;
-        }
-        System.out.println(answer);
+        System.out.println("결과 : "+answer);
     }
+
+    public static String changeString(String input){
+        input= input.substring(4);
+        String index= input.substring(2,3);
+        input=input.replace(index,",");
+
+        return input;
+    }
+
+    public static String[] changeToArray(String changeInput){
+        String [] toArray= changeInput.split(",|;");
+
+        for (int i = 0; i < toArray.length; i++) {
+            toArray[i] = toArray[i].replaceAll("[^0-9]", "");
+        }
+
+        return toArray;
+    }
+
 }
