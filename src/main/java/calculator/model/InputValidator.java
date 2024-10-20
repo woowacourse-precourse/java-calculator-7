@@ -8,10 +8,6 @@ public class InputValidator {
         for (int i = 0; i < input.length; i++) {
             String number = input[i];
             if (!number.isEmpty()) {
-                // 문자열의 처음과 끝이 숫자인지 확인
-                if (!Character.isDigit(number.charAt(0)) || !Character.isDigit(number.charAt(number.length() - 1))) {
-                    throw new IllegalArgumentException(ErrorCode.INVALID_SEQUENCE.getMessage());
-                }
                 try {
                     int value = Integer.parseInt(number);
                     if (value < 0) {
