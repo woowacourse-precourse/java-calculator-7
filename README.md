@@ -17,10 +17,10 @@
 - Validator 클래스에 값이 유효한지 검증하는 메소드를 구현한다.
 
 1. ```camp.nextstep.edu.missionutils.Console```의 ```readLine()```으로 입력을 받는다.
-   - CalculatorController 클래스에 calculator 메소드를 생성하여 입력을 받는다.
-   - CalculatorService 클래스의 calculator 메소드를 호출하며 입력을 인자로 넘겨준다.
+   - CalculatorController 클래스에 calculate 메소드를 생성하여 입력을 받는다.
+   - CalculatorService 클래스의 calculate 메소드를 호출하며 입력을 인자로 넘겨준다.
 2. 입력이 없거나 빈 문자열인 경우 0을 반환한다.
-   - CalculatorService 클래스의 calculator 메소드에서 조건문을 사용하여 처리한다.
+   - CalculatorService 클래스의 calculate 메소드에서 조건문을 사용하여 처리한다.
 3. 기본 구분자로 구분한다. 기본 구분자는 쉼표(,) 또는 콜론(:)이다.
    - StringParser 클래스에 쉼표 또는 콜론으로 문자열을 구분하는 메소드를 구현한다.
    - split 메소드를 사용해 구분한다.
@@ -33,7 +33,7 @@
    - 구분된 숫자들의 배열을 반환한다.
 5. 구분된 숫자를 합산한다.
    - stream의 mapToInt와 sum 메소드를 사용해 문자형으로 된 숫자를 숫자형으로 반환하고 합을 계산한다.
-   - 값을 반환하여 CalculatorController 클래스에 calculator 메소드에서 출력한다.
+   - 값을 반환하여 CalculatorController 클래스에 calculate 메소드에서 출력한다.
 6. 양수가 아닌 문자가 있는 경우 예외 처리 한다. IllegalArgumentException을 발생시킨 후 애플리케이션을 종료한다.
    - 0 혹은 음수가 있는 경우
    - 구분자 사이에 숫자가 아닌 문자가 있는 경우
