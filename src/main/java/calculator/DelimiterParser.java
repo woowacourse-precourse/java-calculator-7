@@ -18,8 +18,8 @@ public class DelimiterParser {
     public String extractNumbers(String input) {
         if (input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
             int delimiterIndex = findDelimiterIndex(input);
-            String substring = input.substring(delimiterIndex + CUSTOM_DELIMITER_SUFFIX.length());
-            return substring;
+            String inputNumber = input.substring(delimiterIndex + CUSTOM_DELIMITER_SUFFIX.length());
+            return inputNumber;
         }
         return input;
     }
