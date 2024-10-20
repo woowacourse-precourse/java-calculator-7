@@ -11,5 +11,15 @@ public class Application {
             System.out.println("결과 : 0");
             return;
         }
+
+        String delimiter = ",|:";  // 기본 구분자 설정
+        String[] nums = input.split(delimiter);
+
+        int result = 0;
+        for (String num : nums) {
+            result += Integer.parseInt(num);
+        }
+
+        System.out.println("결과 : " + result);
     }
 }
