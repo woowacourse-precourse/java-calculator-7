@@ -2,7 +2,6 @@ package calculator.controller;
 
 import calculator.model.Calculator;
 import calculator.model.CustomDelimiter;
-import calculator.model.Splitter;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -19,11 +18,10 @@ public class MainController {
     }
 
     public void calculate(){
-        Splitter splitter = new Splitter(customDelimiter);
-        printSumToUser(splitter.getSplittedNumbers());
+        showSumToUser(Calculator.plus(customDelimiter));
     }
 
-    public void printSumToUser(String[] splittedNumbers){
-        OutputView.printSumToUser(Calculator.plus(splittedNumbers));
+    public void showSumToUser(String sumOfNumbers){
+        OutputView.printSumToUser(sumOfNumbers);
     }
 }
