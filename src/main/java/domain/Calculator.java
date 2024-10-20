@@ -13,10 +13,8 @@ public class Calculator {
     public int addNumber(List<Integer> numberCollection) {
         int sum = 0;
 
-        List<String> separators = separator.getSeparatorCollection();
-
         for (Integer number : numberCollection) {
-            sum += Integer.parseInt(String.valueOf(number));
+            sum += number;
         }
         calculationResult = sum;
         return sum;
