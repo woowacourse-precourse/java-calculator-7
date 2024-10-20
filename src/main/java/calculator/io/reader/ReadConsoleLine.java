@@ -38,12 +38,4 @@ public class ReadConsoleLine implements Input {
 
         return numberPart;
     }
-
-    @Override
-    public List<String> extractSeparator(String input) {
-        if (input.startsWith("//"))
-            return List.of(",", ":", input.substring(2, 3));
-        else
-            return List.of(",", ":");
-    }
 }
