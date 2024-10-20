@@ -2,6 +2,8 @@ package calculator.view;
 
 import calculator.domain.CalcTarget;
 
+import java.util.NoSuchElementException;
+
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class CalculatorInputView {
@@ -9,10 +11,17 @@ public class CalculatorInputView {
 
     public CalcTarget printInputView() {
         System.out.println(INPUT_EXPRESSION);
+        String inputVal = "";
         try {
-            return CalcTarget.input(readLine());
-        } catch (Exception e) {
-            throw new IllegalArgumentException("잘못된 입력값입니다.");
+            inputVal = readLine();
+            if (inputVal.isEmpty()) {
+                inputVal = "0";
+            }
+            return CalcTarget.input(inputVal);
+
+        } catch (NoSuchElementException e) {
+            inputVal = "0";
+            return CalcTarget.input(inputVal);
         }
     }
 }
