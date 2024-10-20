@@ -2,6 +2,7 @@ package calculator;
 
 public class Parser {
     public static void parse() {
+        Validator.isValidLastCharacter();
         if (checkDelimiterType() == true) {
             handleDefaultDelimiter();
         } else {
@@ -40,7 +41,7 @@ public class Parser {
 
     private static boolean checkDelimiterType() {
         char c = Application.getCharInInput(0);
-        return (Character.isDigit(c) || c == '+' || c == '-');
+        return Character.isDigit(c);
     }
 
     private static void extractCustomDelimiter() {

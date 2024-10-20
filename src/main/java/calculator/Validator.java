@@ -3,9 +3,15 @@ package calculator;
 public class Validator {
     private static char delimiter;
 
+    public static void isValidLastCharacter() {
+        if (Character.isDigit(Application.getCharInInput(Application.getInputSize() - 1)) == false) {
+            throw new IllegalArgumentException(Constants.INVALID_FORMAT);
+        }
+    }
+
     public static void isValidCustomDelimiter() {
-        String input = Application.getInput();
-        if (Application.getSubstringOfInput(0, 2).equals("//") == false ||
+        if (Application.getInputSize() < 6 ||
+                Application.getSubstringOfInput(0, 2).equals("//") == false ||
                 Application.getSubstringOfInput(3, 5).equals("\\n") == false) {
             throw new IllegalArgumentException(Constants.INVALID_FORMAT);
         }
@@ -22,6 +28,9 @@ public class Validator {
         char[] charString = Application.getInputToCharArray();
         int curIdx = Calculator.getCurIdx();
 
+        if (Character.isDigit(charString[curIdx]) == false) {
+            throw new IllegalArgumentException(Constants.INVALID_FORMAT);
+        }
         while (curIdx < Application.getInputSize() && charString[curIdx] != delimiter) {
             if (Character.isDigit(charString[curIdx]) == false) {
                 throw new IllegalArgumentException(Constants.INVALID_FORMAT);
