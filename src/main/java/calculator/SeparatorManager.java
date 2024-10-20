@@ -14,7 +14,7 @@ public class SeparatorManager {
         separators.add(DEFAULT_SEPARATOR_COLON);
     }
 
-    public void validate(String separatorCandidate) {
+    private void validate(String separatorCandidate) {
         if (separatorCandidate == null || separatorCandidate.isEmpty()) {
             throw new IllegalArgumentException(ERROR_EMPTY_SEPARATOR);
         }
