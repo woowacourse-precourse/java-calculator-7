@@ -12,10 +12,23 @@ public class Application {
 
         String userInput = readLine();
 
-        if(userInput.contains("//") && userInput.contains("\\n")) { //커스텀 구분자 or 기본 구분자 구분
+        //여는 커스텀 구분자만 있을 경우
+        if(userInput.contains("//") && !userInput.contains("\\n")){
+            throw new IllegalArgumentException("There is only a custom delimiter : " + userInput);
+        }
+        //커스텀 구분자 or 기본 구분자 구분
+        if(userInput.contains("//") && userInput.contains("\\n")) {
             int start = 2;
             int end = userInput.indexOf("\\n");
-            String customDelimiter = userInput.substring(start,end);//커스컴 구분자
+
+            //커스컴 구분자
+            String customDelimiter = userInput.substring(start,end);
+
+            //커스텀 구분자가 없을 경우 예외 처리
+            if (customDelimiter.isEmpty()){
+                throw new IllegalArgumentException("Custom delimiter cannot be empty.");
+            }
+
             numberLine = userInput.substring(end+2);
             arrayUserInput = splitDelimiters(numberLine,customDelimiter);
         }else {
@@ -46,7 +59,12 @@ public class Application {
         int[] numbers = new int[stringNumbers.length];
 
         for (int i = 0; i < stringNumbers.length; i++) {
-            numbers[i] = Integer.parseInt(stringNumbers[i].trim());
+            if (stringNumbers[i].matches("\\d+")){
+                numbers[i] = Integer.parseInt(stringNumbers[i].trim());
+            }else{
+                throw new IllegalArgumentException("The input contains invalid characters. Only numbers can be added : " + stringNumbers[i]);
+            }
+
         }
         return numbers;
     }
@@ -59,6 +77,10 @@ public class Application {
         }
 
         for(int number:numbers){
+            // 양수가 아닌 경우 예외 발생
+            if (number <= 0){
+                throw new IllegalArgumentException("Negative numbers or zero are not allowed : " + number);
+            }
             sum += number;
         }
 
