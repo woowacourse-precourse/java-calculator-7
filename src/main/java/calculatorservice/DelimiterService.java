@@ -1,6 +1,8 @@
 package calculatorservice;
 
-import static vaildation.InputValidation.*;
+import static vaildation.InputValidation.CheckCustomDelimiter;
+import static vaildation.InputValidation.CheckInput;
+
 import exception.CustomDelimiterException;
 
 public class DelimiterService { // 코드 실행 제어 서비스 클래스
@@ -19,8 +21,6 @@ public class DelimiterService { // 코드 실행 제어 서비스 클래스
             sumResult = SumInput(input, customDelimiter); // 숫자의 합
         } catch (CustomDelimiterException e) {
             System.out.println("[커스텀 문자 지정 오류] 메시지: " + e.getMessage());
-        } catch (IllegalArgumentException e) {
-            System.out.println("[입력 오류] 메시지: " + e.getMessage());
         }
 
         return sumResult;
@@ -32,8 +32,10 @@ public class DelimiterService { // 코드 실행 제어 서비스 클래스
         String[] sumToken = remainingInput.split(customDelimiter);
 
         for (String token : sumToken) {
-            if(!token.isBlank()) //중복되어 구분자가 사용될 경우 빈칸으로 인식
+            if (!token.isBlank()) //중복되어 구분자가 사용될 경우 빈칸으로 인식
+            {
                 sum += Long.parseLong(token);
+            }
         }
 
         return sum;
