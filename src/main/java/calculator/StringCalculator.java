@@ -9,7 +9,7 @@ public class StringCalculator {
 
     /**
      * This method returns default separators
-     * @return default separators
+     * @return A String of default separators
      */
     private String getDefaultSeparator() {
         return ",|:";
@@ -18,7 +18,7 @@ public class StringCalculator {
     /**
      * This method return custom separators
      * @param input The string to get custom separator
-     * @return A list of default separators + custom separator
+     * @return A String of custom separators and default separators sorted by each length
      */
     private String getCustomSeparator(String input) {
         String separators = getDefaultSeparator();
@@ -31,8 +31,6 @@ public class StringCalculator {
         Arrays.sort(separators_array, (s1, s2) -> s2.length() - s1.length());
 
         separators = String.join("|", separators_array);
-
-        System.out.println(separators);
 
         return separators;
     }
