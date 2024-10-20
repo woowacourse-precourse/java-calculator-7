@@ -1,8 +1,11 @@
 package separator;
 
+import Factory.SeparatorFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 import java.util.regex.Pattern;
 
 class CustomSeparatorFormatTest {
@@ -15,7 +18,6 @@ class CustomSeparatorFormatTest {
         CustomSeparatorFormat customSeparatorFormat = new CustomSeparatorFormat(pattern);
 
     //when
-        System.out.println(customSeparatorFormat.getPattern());
 
     //then
         Assertions.assertThat(customSeparatorFormat.getPattern()).isEqualTo(pattern);
@@ -27,12 +29,12 @@ class CustomSeparatorFormatTest {
         //given
         Pattern pattern = Pattern.compile("//+(.*)\\\\s+(.*)");
         CustomSeparatorFormat customSeparatorFormat = new CustomSeparatorFormat(pattern);
-
         //when
-        System.out.println(customSeparatorFormat.getPattern());
 
         //then
         Assertions.assertThat(customSeparatorFormat.getPattern().toString()).isEqualTo(pattern.toString());
     }
+
+
 
 }

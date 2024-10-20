@@ -1,6 +1,5 @@
 package separator;
 
-import java.math.BigInteger;
 import java.util.List;
 
 public interface Separator {

@@ -6,7 +6,7 @@ import separator.DefaultSeparator;
 import separator.Separator;
 
 import java.util.List;
-import java.util.regex.Matcher;
+
 
 public class SeparatorFactory {
     private final List<String> defaultSeparators;
@@ -20,27 +20,32 @@ public class SeparatorFactory {
     }
 
     public Separator generateSeparators() {
-        if (validateStartChar()) return new DefaultSeparator(this.inputData, this.defaultSeparators);
-
-        CustomSeparatorFormat customSeparatorFormat = new CustomSeparatorFormat();
-        validateCustomSeparatorFormat();
-        return new CustomSeparator(inputData, customSeparatorFormat);
-
+        String replaceInput = normalizeInputData();
+        if (isDefaultSeparator(replaceInput)) {
+            return new DefaultSeparator(replaceInput, this.defaultSeparators);
+        }
+        return new CustomSeparator(replaceInput, customSeparatorFormat);
     }
 
-    public Boolean validateStartChar() {
-        if (inputData.equals(" ")) return true;
+    private String normalizeInputData() {
+        String replaceInput = inputData.replace(" ", "");
+        replaceInput = replaceBlankOrEmptyWithDefault(replaceInput);
+        return replaceInput;
+    }
+
+    private static String replaceBlankOrEmptyWithDefault(String replaceInput) {
+        if(replaceInput.isBlank() || replaceInput.isEmpty()){
+            replaceInput ="0";
+        }
+        return replaceInput;
+    }
+
+    public Boolean isDefaultSeparator(String replaceInput) {
         try {
-            Integer.parseInt(inputData.substring(0, 1));
+            Integer.parseInt(replaceInput.substring(0, 1));
             return true;
         } catch (NumberFormatException e) {
             return false;
         }
     }
-
-    public void validateCustomSeparatorFormat() {
-        Matcher matcher = customSeparatorFormat.getPattern().matcher(inputData);
-        if (!matcher.find()) throw new IllegalArgumentException("커스텀구분자 생성형식을 확인해주세요.");
-    }
-
 }
