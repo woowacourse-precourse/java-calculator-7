@@ -31,7 +31,7 @@ class ApplicationTest extends NsTest {
     @DisplayName("실수일 경우")
     void 실수_테스트() {
         assertSimpleTest(() -> {
-            run("1.2:1.3,1"); // 실수도 계산 가능
+            run("1.2:1.3,1");
             assertThat(output()).contains("결과 : 3.5");
         });
     }
@@ -40,7 +40,7 @@ class ApplicationTest extends NsTest {
     @DisplayName("커스텀 구분자가 숫자일 경우")
     void 커스텀_구분자_숫자() {
         assertSimpleTest(() -> {
-            run("//1\\n21312"); // 1을 구분자로 판단
+            run("//1\\n21312");
             assertThat(output()).contains("결과 : 7");
         });
     }
@@ -49,14 +49,14 @@ class ApplicationTest extends NsTest {
     @DisplayName("커스텀 구분자가 점일 경우")
     void 커스텀_구분자_점() {
         assertSimpleTest(() -> {
-            run("//.\\n2.1.3.999"); // .을 구분자로 판단
+            run("//.\\n2.1.3.999");
             assertThat(output()).contains("결과 : 1005");
         });
     }
 
     @Test
     @DisplayName("빈 문자열")
-    void 빈_문자열() { // Console.readLine()에서 오류가 나는디?
+    void 빈_문자열() {
         assertSimpleTest(() -> {
             run("");
             assertThat(output()).contains("결과 : 0");
@@ -67,7 +67,7 @@ class ApplicationTest extends NsTest {
     @DisplayName("커스텀 구분자의 형식이 맞지 않을 경우")
     void 커스텀_구분자_예외() {
         assertSimpleTest(() -> {
-            assertThatThrownBy(() -> runException("//\\n")) // substring으로 자르면, OutOfBounds가 생긴다.
+            assertThatThrownBy(() -> runException("//\\n"))
                     .isInstanceOf(IllegalArgumentException.class);
 
             assertThatThrownBy(() -> runException("//"))
