@@ -19,6 +19,10 @@ public class Calculator {
     public void getNumbers(String inputString) {
         String regex;
 
+        if (inputString.isBlank()) {
+            return;
+        }
+
         if (division != null) {
             regex = ",|" + division + "|:";
         } else {
