@@ -1,13 +1,9 @@
-import calculator.Calculator;
-import calculator.CalculatorController;
-
-import javax.swing.text.View;
+package calculator;
 
 public class Application {
     public static void main(String[] args) {
-
         Calculator calculator = new Calculator();
-        View view = new View();
+        CalculatorView view = new CalculatorView();
         CalculatorController controller = new CalculatorController(calculator, view);
 
         controller.run();

@@ -1,14 +1,13 @@
 package calculator;
 
-import javax.swing.text.View;
 import java.util.NoSuchElementException;
 
 public class CalculatorController {
     private final Calculator calculator;
-    private final View view;
+    private final CalculatorView view; // CalculatorView로 변경
 
     // 생성자
-    public CalculatorController(Calculator calculator, View view) {
+    public CalculatorController(Calculator calculator, CalculatorView view) {
         this.calculator = calculator;
         this.view = view;
     }

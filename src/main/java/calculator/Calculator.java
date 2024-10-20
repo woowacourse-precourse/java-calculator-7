@@ -17,12 +17,14 @@ public class Calculator {
         if (userInput.startsWith(CUSTOM_DELIMITER_PREFIX)) {
             userInput = userInput.replace(NEWLINE_REPLACEMENT, "\n");
             int delimiterIndex = userInput.indexOf("\n");
-            delimiter = userInput.substring(2, delimiterIndex);
-            userInput = userInput.substring(delimiterIndex + 1);
-
-            if (userInput == null || userInput.isEmpty()) { // 공백 문자열 처리
-                return 0;
+            if (delimiterIndex == -1) {
+                throw new IllegalArgumentException("커스텀 구분자가 잘못되었습니다."); // 잘못된 구분자 처리
             }
+            delimiter = userInput.substring(2, delimiterIndex);
+            if (delimiter.isEmpty()) {
+                throw new IllegalArgumentException("커스텀 구분자가 잘못되었습니다."); // 구분자가 비어있을 때 처리
+            }
+            userInput = userInput.substring(delimiterIndex + 1);
         }
 
         String[] splitNumbers = userInput.split(delimiter);
@@ -51,5 +53,4 @@ public class Calculator {
             throw new IllegalArgumentException("잘못된 입력 값입니다: " + number);
         }
     }
-
 }
