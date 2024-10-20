@@ -24,10 +24,14 @@ public class Application {
             int startIdx = sentence.indexOf("//");
             int endIdx = sentence.indexOf("\\n");
             
-            // 커스텀 구분자 목록 업데이트
+            // 커스텀 구분자가 special token인 경우
             String customDelimiter = sentence.substring(startIdx + 2, endIdx);
+            customDelimiter = customDelimiter.replace("\\", "\\\\");
+            customDelimiter = customDelimiter.replace("|", "\\|");
+
+            // 커스텀 구분자 목록 업데이트
             stringBuilder.append("|").append(customDelimiter);
-            
+
             // 커스텀 구분자를 제외한 나머지 문자열
             sentence = sentence.substring(0, startIdx) + sentence.substring(endIdx + 2);
         }
@@ -41,6 +45,8 @@ public class Application {
     public static int calculator(String sentence) {
         // 주어진 문자열에서 커스텀 구분자 추가하고 제외
         sentence = parseDelimiter(sentence);
+
+        String[] numbers = sentence.split(delimiters);
 
         return 0;
     }
