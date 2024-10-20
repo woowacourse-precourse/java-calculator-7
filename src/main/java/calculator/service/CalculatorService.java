@@ -7,7 +7,6 @@ public interface CalculatorService {
      *
      * @param numbers 계산할 문자열
      * @return 덧셈 결과
-     * @throws IllegalArgumentException 잘못된 입력이 있을 경우 발생
      */
-    int calculate(int[] numbers) throws IllegalArgumentException;
+    int calculate(int[] numbers);
 }
