@@ -38,6 +38,17 @@ public class Application {
 
     }
 
+    private void isValidString() {
+        hasCustomSeparator();
+        isValidCustomSeparator();
+        for (int i = getStartIndex(); i < inputString.length(); i++) {
+            if (Character.isDigit(inputString.charAt(i))) {
+                continue;
+            }
+            isRegisteredSeparator(inputString.charAt(i));
+        }
+    }
+
     // 커스텀 구분자를 지정한 문자열이면 true, 아니라면 false를 반환해준다.
     private Boolean hasCustomSeparator() {
         if (usingCustomSeparatorFlag != null) {
