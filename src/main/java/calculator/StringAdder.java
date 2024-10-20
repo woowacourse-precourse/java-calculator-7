@@ -30,10 +30,19 @@ public class StringAdder {
     }
 
     private String[] splitNumbers(String input, String delimiter) {
+        String[] inputArray;
         if (delimiter.equals(",|:")) {
-            return input.split(delimiter);
+            inputArray = input.split(delimiter);
+        } else {
+            inputArray = input.split(Pattern.quote(delimiter));
         }
-        return input.split(Pattern.quote(delimiter));
+
+        for (int i = 0; i < inputArray.length; i++) {
+            if (inputArray[i].equals("")) {
+                inputArray[i] = "0";
+            }
+        }
+        return inputArray;
     }
 
     private int sumNumbers(String[] numbers) {
