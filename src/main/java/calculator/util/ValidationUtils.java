@@ -30,6 +30,14 @@ public class ValidationUtils {
         }
     }
 
+    private static void validateIncorrectDelimiterPosition(String input, List<String> delimiters) {
+        for (String delimiter : delimiters) {
+            if (input.startsWith(delimiter) || input.endsWith(delimiter)) {
+                throw new IllegalArgumentException("구분자가 잘못된 위치에 있습니다. 입력값: [" + input + "]");
+            }
+        }
+    }
+
     public static void validatePositiveNumbers(List<Integer> numbers) {
         List<Integer> invalidNumbers = findNonPositiveNumbers(numbers);
 
