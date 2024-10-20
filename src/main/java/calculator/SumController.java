@@ -1,7 +1,7 @@
 package calculator;
 
 public class SumController {
-    public static char[] separator = new char[3];
+    public static Character[] separator = new Character[3];
 
     public static int checkValue(String text) throws Exception {
         if(text.charAt(0) == '/' && text.charAt(1) == '/') {
@@ -22,7 +22,7 @@ public class SumController {
             return sum(text);
         }
         for(int i = 0; i<text.length(); i++) {
-            separatorExtraction(' ');
+            separatorExtraction(null);
             if(i % 2 == 0) {
                 if(text.charAt(i) <= '0' || text.charAt(i) >= '9') {
                     throw new IllegalArgumentException();
@@ -39,7 +39,7 @@ public class SumController {
         return sum(text);
     }
 
-    public static char[] separatorExtraction(char word) {
+    public static Character[] separatorExtraction(Character word) {
         separator[0] = ',';
         separator[1] = ':';
         separator[2] = word;
