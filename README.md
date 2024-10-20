@@ -107,5 +107,3 @@
     - 입력: `"    "`
     - 결과: `IllegalArgumentException ("입력 문자열이 null이거나 비어 있습니다")`
 ```
-
-![img.png](테스트코드_pass.png)
