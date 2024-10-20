@@ -49,4 +49,14 @@ public class Application {
 			throw new IllegalArgumentException("잘못된 입력입니다.");
 		}
 	}
+
+	private static void add(String[] tokens) {
+		long sum = 0;
+
+		for (String token : tokens) {
+			sum += numberFrom(token);
+		}
+
+		result = sum;
+	}
 }
