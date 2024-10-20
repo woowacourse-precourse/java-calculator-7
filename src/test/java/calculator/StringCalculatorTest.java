@@ -49,4 +49,24 @@ class StringCalculatorTest {
         assertThat(calculator.splitStringByDelimiters("133221333123111", List.of(";", ","))).containsExactly("133221333123111");
         assertThat(calculator.splitStringByDelimiters("1\\2n3", List.of("\\", "n"))).containsExactly("1", "2", "3");
     }
+
+    @Test
+    void calculateSum() {
+        StringCalculator calculator = new StringCalculator();
+
+        assertThat(calculator.calculateSum("1,2,3,4", List.of(";", ","))).isEqualTo(10);
+        assertThat(calculator.calculateSum("", List.of(";", ","))).isEqualTo(0);
+        assertThat(calculator.calculateSum("1,2:3;4", List.of(":", ",", ";"))).isEqualTo(10);
+
+        assertThatThrownBy(() -> calculator.calculateSum("1,1.0", List.of(":", ",", ";")))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> calculator.calculateSum("1,-2", List.of(":", ",", ";")))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> calculator.calculateSum("1,asdf", List.of(":", ",", ";")))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> calculator.calculateSum("//;\\n\"//;\\\\n1,2,3", List.of(":", ",", ";")))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> calculator.calculateSum("//;p\\n1,2,3", List.of(":", ",", ";")))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
