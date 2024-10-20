@@ -6,33 +6,73 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 
 public class Application {
-
-    static HashSet<Integer> delimiters = new HashSet<Integer>();
 
     public static void main(String[] args) throws IOException {
         // TODO: 프로그램 구현
         var bf = new BufferedReader(new InputStreamReader(System.in));
 
+        HashSet<Integer> delimiters = new HashSet<Integer>();
+        int idx = 0;
+
         delimiters.add((int)':');
         delimiters.add((int)',');
 
-        String now = bf.readLine();
+        String line = bf.readLine();
 
-        while (isCommand(now)) {
-            addDelimiter(now);
-            now = bf.readLine();
+        if (Objects.isNull(line)) {
+            System.out.println("결과 : 0");
+            return;
         }
 
-        List<String> nums = extract(now);
+        String now = getCommand(line, idx);
+        if (Objects.nonNull(now)) {
+            idx+=now.length()+2;
+        }
+
+        while (Objects.nonNull(now) && isCommand(now, delimiters)) {
+            addDelimiter(now, delimiters);
+            now = getCommand(line, idx);
+            if (Objects.nonNull(now)) {
+                idx+=now.length()+2;
+            }
+        }
+
+        if (idx < line.length()) {
+            throw new IllegalArgumentException();
+        }
+
+        if (Objects.isNull(now)) {
+            now = "";
+        }
+
+        List<String> nums = extract(now, delimiters);
 
         var result = sum(nums);
 
         System.out.println("결과 : " + result);
     }
 
-    static private boolean isCommand(String s) {
+    static private String getCommand(String s, int idx) {
+        for (int i=idx; i<s.length()-1; i++) {
+            if (s.charAt(i)=='\\' && s.charAt(i+1)=='n') {
+                String result = s.substring(idx, i);
+                idx = i+2;
+                return result;
+            }
+        }
+        if (idx<s.length()) {
+            String result = s.substring(idx);
+            idx = s.length();
+            return result;
+        } else {
+            return null;
+        }
+    }
+
+    static private boolean isCommand(String s, HashSet<Integer> delimiters) {
         if (s.isEmpty()) {
             return false;
         } else if (s.charAt(0)=='/' && s.charAt(1)=='/') {
@@ -48,7 +88,7 @@ public class Application {
         return '0'<=c && c<='9';
     }
 
-    static private void addDelimiter(String s) {
+    static private void addDelimiter(String s, HashSet<Integer> delimiters) {
         if (s.length()!=3) {
             throw new IllegalArgumentException();
         }
@@ -62,7 +102,7 @@ public class Application {
         delimiters.add(n);
     }
 
-    static List<String> extract(String s) {
+    static List<String> extract(String s, HashSet<Integer> delimiters) {
         List<String> result = new ArrayList<>();
 
         int start = 0;
