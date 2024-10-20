@@ -4,11 +4,10 @@ import calculator.cal.Calculator;
 import calculator.cal.CalculatorImpl;
 import calculator.cal.numberadder.string.StringNumberAdder;
 import camp.nextstep.edu.missionutils.Console;
-import java.io.IOException;
 import java.util.NoSuchElementException;
 
 public class Application {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Calculator calculator = new CalculatorImpl(new StringNumberAdder());
 
         //문자열 받기
