@@ -1,4 +1,3 @@
-# java-calculator-precourse
 # 문자열 덧셈 계산기
 
 ## **기능 요구 사항**
@@ -71,14 +70,36 @@
 
 - **설명:** 안내 문구와 결과 값을 출력합니다.
 - **기능 요소:**
-    - **displayMessage(message):** 사용자에게 안내 메시지를 출력합니다.
-    - **displayResult(result):** 계산된 최종 결과 값을 출력합니다.
+    - **printStart():** 사용자에게 안내 메시지를 출력합니다.
+    - printResult**(result):** 계산된 최종 결과 값을 출력합니다.
 
 ## 흐름도
 
-1. 프로그램 실행시 displayMessage(message) 함수로 안내 메세지를 출력합니다.
-2. 사용자에게 getUserInput() 함수로 입력을 받고 validateuserInput(input) 함수로 유효성을 검증합니다.
-3. findCumstomSeparator(input) 함수로 커스텀 구분자가 있는지 확인합니다
+1. 프로그램 실행시 printStart() 함수로 안내 메세지를 출력합니다.
+2. 사용자에게 input() 함수로 입력을 받고 findCustomSeparator(input) 함수로 커스텀 구분자와 숫자문자열을 분리한다.
+3. 입력값의 유효성을 검사한다exceptionHandler.validateInputEmpty(inputSplit[1]) 빈문자열을 넣었는지
+exceptionHandler.validateInputFormat(inputSplit) 옳바른 형식의 문자열을 넣었는지
+exceptionHandler.validateInputNumber(splitNumbers, separator)양의 정수의 숫자만 있는지
 4. splitSeparator(input, separator) 함수로 숫자배열을 생성합니다.
 5. sumSplitNumber(splitNumbers) 함수로 숫자의 합을 구합니다.
 6. displayResult(result) 함수로 결과값을 출력하고 프로그램을 종료합니다.
+
+# 회고
+
+### 배운 점
+
+깃 허브의 커밋을 기능 단위로 해야 하는 것은 알고 있었지만 어느정도로 나눠야 하는지 기준이 안서있었고 혼란스러웠는데 이번 미션을 진행하면서 여러 블로그들을 읽어보며 어느정도 기준이 생긴것 같다. 처음에는 함수가 완성할 때 마다 그 함수의 설명을 가지고 커밋을 해야한나 생각을 했지만 그것은 아니고 큰기능들로 나눠 그 기능이 개발이 되면 커밋하는 방식으로 하는 것이 커밋도 깔끔하고 좋은 것 같다 그리고 커밋메세지에 더 상세히 설명을 적으니 커밋이 깨끗하고 보기 좋아지는 것을 알게 되었다
+
+MVC패턴과 SOLID원칙을 최대한 지켜보려고 하면서 구현을 하니 완벽하지는 않지만 점점 기준이 생기는 것 같다. 하지만 아직 부족한 점이 많아 보이고 구현하는 기능들이 아직 크지 않아 실제로는 나누지 않고 구현하는게 더 실용적인 것 같지만 연습을 하기위해 나눈다고 생각하고 코딩을 한 것 같다
+
+### 궁금한 점
+
+기능을 좀 더 세세히 나눠서 커밋을 해야 하는가?
+
+단일책임의 원칙은 어디까지 나눠야 하는가?(직업이라 생각하고 나누면 되나..?)
+
+함수 이름은 어떻게 해야 가독성이 좋아지는가?
+
+모든 로직을 실행할 때 무조건 컨트롤러를 거쳐야 하는가?
+
+프리코스를 진행하며 궁금한 점이 해결이 되고 나만의 코드 스타일과 가치관이 생겼으면 좋겠다.
