@@ -41,7 +41,10 @@ public class Application {
             int customDelimiterEnd = input.indexOf(CUSTOM_DELIMITER_SUFFIX);  // 커스텀 구분자 끝 인덱스
             String customDelimiter = input.substring(CUSTOM_DELIMITER_PREFIX.length(),
                     customDelimiterEnd); // 커스텀 구분자 추출
-            // TODO: 커스텀 구분자에 대한 예외 처리
+
+            validateCustomDelimiter(input.substring(customDelimiterEnd + CUSTOM_DELIMITER_SUFFIX.length()),
+                    customDelimiter); // 커스텀 구분자 외의 다른 구분자 사용 여부 확인
+
             // 커스텀 구분자와 기본 구분자 모두를 처리하도록 구분자 연결
             String combinedDelimiters = customDelimiter + "|" + DEFAULT_DELIMITERS; // OR 연산자로 구분자 연결
             numbers = split(input.substring(customDelimiterEnd + CUSTOM_DELIMITER_SUFFIX.length()),
@@ -92,7 +95,7 @@ public class Application {
         if (input.contains(" ")) {
             throw new IllegalArgumentException("입력에 공백이 포함될 수 없습니다.");
         }
-        
+
         // 입력이 '//'로 시작하지 않고 숫자로 시작하지 않으면 예외 발생
         if (!input.startsWith("//") && !Character.isDigit(input.charAt(0))) {
             throw new IllegalArgumentException("입력은 '//'로 시작하거나 숫자로 시작해야 합니다.");
@@ -114,6 +117,22 @@ public class Application {
             }
             if (!number.matches("-?\\d+")) {  // 정수인지 확인 (음수 포함)
                 throw new IllegalArgumentException("숫자가 아닌 값이 포함되었습니다: " + number);
+            }
+        }
+    }
+
+    /**
+     * 커스텀 구분자 사용 시, 정의하지 않은 구분자가 사용되었는지 확인하는 메소드
+     *
+     * @param input           입력 문자열
+     * @param customDelimiter 커스텀 구분자
+     */
+    private static void validateCustomDelimiter(String input, String customDelimiter) {
+        // 커스텀 구분자 외의 다른 구분자가 사용되었는지 확인
+        for (char c : input.toCharArray()) {
+            // 커스텀 구분자, 숫자, 그리고 공백을 제외한 다른 문자가 있는지 확인
+            if (!Character.isDigit(c) && !Character.toString(c).equals(customDelimiter)) {
+                throw new IllegalArgumentException("커스텀 구분자 외에 다른 구분자가 포함되었습니다: " + c);
             }
         }
     }
