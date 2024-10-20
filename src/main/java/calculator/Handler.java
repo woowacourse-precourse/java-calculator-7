@@ -13,6 +13,14 @@ public class Handler {
         return transToInt(split);
     }
 
+    public int sumCalculator(int[] numbers) {
+        int sum = 0;
+        for (int i = 0; i < numbers.length; i++) {
+            sum += numbers[i];
+        }
+        return sum;
+    }
+
     private boolean indicateCustom(String input) {
         if (input.contains("//") || input.contains("\n")) {
             return true;
