@@ -2,7 +2,7 @@ package calculator.model;
 
 import java.util.List;
 
-public class StringCalculator implements Calculator {
+public class CalculatorImpl implements Calculator {
     @Override
     public int sum(List<Integer> list) {
         return list.stream()
