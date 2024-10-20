@@ -8,6 +8,7 @@ import calculator.model.delimiter.DelimiterParser;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class NumberParser {
     private final List<Number> numbers;
@@ -19,8 +20,9 @@ public class NumberParser {
     }
 
     private List<Number> parseNumber(final String input) {
+        final String regex = String.join("|", delimiter.getDelimiters().stream()
+                .map(Pattern::quote).toArray(String[]::new));
         final List<Number> numbers = new ArrayList<>();
-        final String regex = String.join("|", delimiter.getDelimiters());
         Arrays.stream(extractTargetString(input).split(regex))
                 .filter(num -> !num.isEmpty())
                 .forEach(num -> numbers.add(new Number(num)));
