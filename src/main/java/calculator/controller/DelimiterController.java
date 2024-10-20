@@ -16,8 +16,7 @@ public class DelimiterController {
 
         while (matcher.find()) {
             // "//"로 시작하고 "\n"으로 끝나는 문자열에서 "//"와 "\n"을 제거
-            String newDelimiter = matcher.group().replaceAll("[//|\\\\n]", "").trim();
-
+            String newDelimiter = matcher.group().replaceAll("[//\\\\n]", "");
             delimiter.addDelimiter(newDelimiter);
         }
     }

@@ -20,7 +20,7 @@ public class Delimiter {
     // 추출한 구분자들을 정규표현식 형태로 변경
     public String getDelimitersRegex() {
         return "[" + this.delimiters.stream()
-                .collect(Collectors.joining("|")) + "]";
+                .collect(Collectors.joining("")) + "]";
     }
 
     // 이미 존재하는 구분자를 커스텀 구분자로 입력한 경우 예외 처리
