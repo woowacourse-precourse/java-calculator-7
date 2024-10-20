@@ -12,6 +12,12 @@ public class Application {
         boolean customized = false;
         char custom = ',';
 
+        // 빈 문자열을 받는 경우 0 출력
+        if (input == "") {
+            System.out.println("결과 : " + sum);
+            return;
+        }
+
         // 커스텀 구분자 지정
         if (input.charAt(0) == '/' && input.charAt(1) == '/' && input.charAt(3) == '\\' && input.charAt(4) == 'n') {
             customized = true;
