@@ -7,6 +7,8 @@ import java.util.List;
 class Splitter {
 
     private final HashSet<Character> separators = new HashSet<>();
+    private static final String prefix = "//";
+    private static final String suffix = "\\n";
 
     public Splitter() {
         separators.add(',');
@@ -29,5 +31,16 @@ class Splitter {
         tokens.add(token);
 
         return tokens;
+    }
+
+    public String splitCustomSeparators(String inputValue) {
+        if (!inputValue.startsWith(prefix))
+            return inputValue;
+
+        int suffixIndex = inputValue.indexOf(suffix);
+        for (Character token : inputValue.substring(prefix.length(), suffixIndex).toCharArray())
+            separators.add(token);
+
+        return inputValue.substring(suffixIndex + suffix.length());
     }
 }
