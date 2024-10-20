@@ -21,13 +21,6 @@ public class SeparatorManager {
         return separatorList;
     }
 
-    public static Character getCustomSeparator(String Input) {
-        if(Input.startsWith("//") && Input.startsWith("\\n", 3)){
-            return Input.charAt(2);
-        }
-        return null;
-    }
-
     public List<String> getSeparatedStringNumber(String input) {
         List<String> separatedStringList = new ArrayList<>();
         int offset = 0;
