@@ -8,6 +8,6 @@ public class EmptyStringCalculateStrategy implements CalculateStrategy {
 
     @Override
     public Integer add(List<Integer> operands) {
-        return null;
+        return 0;
     }
 }
