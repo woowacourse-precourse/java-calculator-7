@@ -3,7 +3,6 @@ package calculator.model;
 public class CalculatorModel {
     public int add(String[] numbers) {
         int sum = 0;
-        int i = 0;
 
         if (numbers == null) {
             return sum;
