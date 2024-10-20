@@ -11,9 +11,11 @@ public class Application {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String input = Console.readLine();
         String delimiter;
+        String numbers;
 
         if (isCustomDelimiterPattern(input)) {
             delimiter = getCustomDelimiter(input);
+            numbers = getNumbersAfterDelimiter(input);
 
 
            System.out.println("Yes"+delimiter);
@@ -39,6 +41,15 @@ public class Application {
         }
 
         throw new IllegalArgumentException("올바른 커스텀 구분자가 없습니다.");
+    }
+
+    private static String getNumbersAfterDelimiter(String input) {
+        Pattern pattern = Pattern.compile("//.\\\\n(.*)");
+        Matcher matcher = pattern.matcher(input);
+        if (matcher.find()) {
+            return matcher.group(1);
+        }
+        return "";
     }
 
 
