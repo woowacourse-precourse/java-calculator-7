@@ -94,4 +94,23 @@ class ArithmeticTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.ARITHMETIC_LENGTH_LIMIT.getError());
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"0,1,2,3", "998,999,1000"})
+    @DisplayName("입력된 숫자가 0 이상 1000 이하이면 예외가 발생하지 않는다")
+    void arithmeticWithValidDigit(String input){
+        InputData inputData = new InputData(input);
+        assertThatCode(()->new Arithmetic(new DefaultDelimiter(), inputData))
+                .doesNotThrowAnyException();
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"-1,0,1,2,3", "998,999,1000,1001"})
+    @DisplayName("입력된 숫자가 음수이거나 1000을 초과하면 예외가 발생한다")
+    void arithmeticWithInvalidDigit(String input){
+        InputData inputData = new InputData(input);
+        assertThatThrownBy(()->new Arithmetic(new DefaultDelimiter(), inputData))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.ARITHMETIC_RANGE_LIMIT.getError());
+    }
 }

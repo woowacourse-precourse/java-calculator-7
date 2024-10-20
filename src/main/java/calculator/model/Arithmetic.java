@@ -24,14 +24,14 @@ public class Arithmetic {
     }
 
     public void validateWithDefaultDelimiter(InputData inputData){
-        if (!inputData.convertCalculatorPart().matches("^[0-9,:]*$")) {
+        if (!inputData.convertCalculatorPart().matches("^[0-9\\-,:]*$")) {
             throw new IllegalArgumentException(ErrorMessage.INPUT_DATA_WITH_DEFAULT_DELIMITER_FORMAT.getError());
         }
     }
 
     public void validateWithCustomDelimiter(Delimiter delimiter, InputData inputData){
         if (!inputData.convertCalculatorPart()
-                .matches("^[0-9" + new DefaultDelimiter().getDelimiter() + delimiter.getDelimiter() + "]*$")) {
+                .matches("^[0-9\\-" + new DefaultDelimiter().getDelimiter() + delimiter.getDelimiter() + "]*$")) {
             throw new IllegalArgumentException(ErrorMessage.ARITHMETIC_WITH_CUSTOM_DELIMITER_FORMAT.getError());
         }
     }
@@ -41,7 +41,9 @@ public class Arithmetic {
             throw new IllegalArgumentException(ErrorMessage.ARITHMETIC_LENGTH_LIMIT.getError());
         }
 
-
+        if (numbers.stream().anyMatch(number -> number < 0 || number > 1000)){
+            throw new IllegalArgumentException(ErrorMessage.ARITHMETIC_RANGE_LIMIT.getError());
+        }
     }
 
     public List<Integer> splitArithmetic(Delimiter delimiter, String calculatorPart) {
