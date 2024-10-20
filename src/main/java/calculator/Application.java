@@ -12,10 +12,10 @@ public class Application {
         String[] stringArray = getStringArray(userInput);
 
         // 배열 요소 중 잘못된 값이 들어있는지 확인한다.
-        checkValidation(stringArray);
+        String[] checkedArray = checkValidation(stringArray);
 
         // 배열 요소에 대하여 String 에서 int 로 형 변환한다.
-        int[] numberArray = typeChangeArray(stringArray);
+        int[] numberArray = typeChangeArray(checkedArray);
 
         // 배열 요소의 합계를 구한다.
         int sum =  addNumbers(numberArray);
@@ -44,12 +44,18 @@ public class Application {
         }
     }
 
-    private static void checkValidation(String[] arr) {
-        for (String text: arr) {
-            if (!text.matches("[1-9]\\d*") ) {
+    private static String[] checkValidation(String[] arr) {
+        for (String text : arr) {
+            // 입력된 값이 빈 값일 경우 0을 리턴한다.
+            if (text == null || text.isEmpty()) {
+                return new String[]{"0"};
+            }
+            // 입력된 값이 양수가 아닌 경우 에러를 발생한다.
+            else if (!text.matches("[1-9]\\d*")) {
                 throw new IllegalArgumentException("wrong text");
             }
         }
+        return arr;
     }
 
     private static int[] typeChangeArray(String[] arr) {
