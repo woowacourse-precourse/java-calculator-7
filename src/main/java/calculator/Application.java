@@ -73,7 +73,11 @@ public class Application {
             if (!(number.charAt(i) >= '0' && number.charAt(i) <= '9'))
                 throw new IllegalArgumentException("양수와 구분자로만 입력하세요.");
         }
-        return Integer.parseInt(number);
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자가 int 범위를 초과했습니다.");
+        }
     }
 
     // 숫자만 더하는 메서드
