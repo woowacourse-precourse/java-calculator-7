@@ -9,6 +9,7 @@ public class Validator {
         checkContainsInvalidDelimiter(numbers, delimiter);
         checkNumbersOnly(userInput);
         checkDelimitersOnly(numbers);
+        checkContinuousDelimiter(numbers);
     }
 
     private void checkContainsNegative(String userInput, String delimiter) {
@@ -42,6 +43,14 @@ public class Validator {
     private void checkDelimitersOnly(List<String> numbers) {
         if (numbers.size() == 0) {
             throw new IllegalArgumentException("구분자만 입력되었습니다.");
+        }
+    }
+
+    private void checkContinuousDelimiter(List<String> numbers) {
+        for (String number : numbers) {
+            if (number.isBlank()) {
+                throw new IllegalArgumentException("구분자가 연속으로 입력되었습니다.");
+            }
         }
     }
 
