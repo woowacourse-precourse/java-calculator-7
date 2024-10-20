@@ -16,6 +16,52 @@ public class CalculatorTest extends NsTest {
         });
     }
 
+    @Test
+    void testCalcMethod() {
+        assertSimpleTest(() -> {
+            Calculator obj = new Calculator();
+            int result = obj.calc("1,2");
+            assertThat(result).isEqualTo(3);
+        });
+
+        assertSimpleTest(() -> {
+            Calculator obj = new Calculator();
+            int result = obj.calc("1,2,3");
+            assertThat(result).isEqualTo(6);
+        });
+
+        assertSimpleTest(() -> {
+            Calculator obj = new Calculator();
+            int result = obj.calc("1,2:3");
+            assertThat(result).isEqualTo(6);
+        });
+
+        assertSimpleTest(() -> {
+            Calculator obj = new Calculator();
+            int result = obj.calc("1,2:3");
+            assertThat(result).isEqualTo(6);
+        });
+
+        assertSimpleTest(() -> {
+            Calculator obj = new Calculator();
+            int result = obj.calc("//;\\n1;2;3");
+            assertThat(result).isEqualTo(6);
+        });
+
+        assertSimpleTest(() -> {
+            Calculator obj = new Calculator();
+            int result = obj.calc("//;\\n1,2;3:4");
+            assertThat(result).isEqualTo(10);
+        });
+
+        assertSimpleTest(() -> {
+            Calculator obj = new Calculator();
+            int result = obj.calc("//!\\n1,2!3!4");
+            assertThat(result).isEqualTo(10);
+        });
+
+    }
+
     @Override
     protected void runMain() {
 
