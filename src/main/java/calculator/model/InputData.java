@@ -1,6 +1,5 @@
 package calculator.model;
 
-import calculator.util.ErrorMessage;
 import calculator.util.Message;
 import calculator.util.Regex;
 
@@ -17,17 +16,17 @@ public class InputData {
         this.input = input;
     }
 
-    public boolean isDelimiter(){
+    public boolean isDelimiter() {
         Matcher delimiterMatcher = getMatcher();
 
         return delimiterMatcher.matches();
     }
 
-    public String convertDelimiterPart(){
+    public String convertDelimiterPart() {
         Matcher delimiterMatcher = getMatcher();
         String delimiter = Message.BLANK.getSentence();
 
-        if(delimiterMatcher.matches()){
+        if (delimiterMatcher.matches()) {
             delimiter = delimiterMatcher.group(DELIMITER_GROUP);
         }
         return delimiter;
@@ -37,14 +36,14 @@ public class InputData {
         Matcher calculatorMatcher = getMatcher();
         String calculator = input;
 
-        if(calculatorMatcher.matches()){
+        if (calculatorMatcher.matches()) {
             calculator = calculatorMatcher.group(ARITHMETIC_GROUP);
         }
 
         return calculator;
     }
 
-    private Matcher getMatcher(){
+    private Matcher getMatcher() {
         Pattern pattern = Pattern.compile(Regex.DELIMITER_GROUP_FORMAT.getRegex());
         return pattern.matcher(input);
     }

@@ -10,11 +10,11 @@ public enum Limit {
 
     int value;
 
-    Limit(int value){
+    Limit(int value) {
         this.value = value;
     }
 
-    public int getValue(){
+    public int getValue() {
         return value;
     }
 }

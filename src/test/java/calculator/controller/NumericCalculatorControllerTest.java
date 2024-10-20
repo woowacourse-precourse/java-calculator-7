@@ -1,6 +1,10 @@
 package calculator.controller;
 
-import calculator.model.*;
+import calculator.model.Arithmetic;
+import calculator.model.CustomDelimiter;
+import calculator.model.DefaultDelimiter;
+import calculator.model.Delimiter;
+import calculator.model.InputData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,7 +26,7 @@ class NumericCalculatorControllerTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4","1:2:3"})
+    @ValueSource(strings = {"1,2,3,4", "1:2:3"})
     @DisplayName("기본 구분자를 사용한 데이터 객체를 받아서 연산부분 객체를 생성한다")
     void createCalculatorWithDefaultDelimiter(String input) {
         InputData inputData = new InputData(input);

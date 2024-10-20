@@ -10,11 +10,11 @@ public enum Message {
 
     String sentence;
 
-    Message(String sentence){
+    Message(String sentence) {
         this.sentence = sentence;
     }
 
-    public String getSentence(){
+    public String getSentence() {
         return sentence;
     }
 }

@@ -56,29 +56,24 @@ public class Arithmetic {
     }
 
     private List<Integer> splitArithmetic(Delimiter delimiter, String calculatorPart) {
-        List<String> temp = Arrays.stream(
-                        calculatorPart
-                                .split(Regex.OPEN.getRegex()
-                                        + new DefaultDelimiter().getDelimiter()
-                                        + Regex.CLOSE.getRegex()))
+        List<String> temp = Arrays.stream(calculatorPart
+                        .split(Regex.OPEN.getRegex()
+                                + new DefaultDelimiter().getDelimiter()
+                                + Regex.CLOSE.getRegex()))
                 .map(s -> s.replaceAll(Regex.WHITE_SPACE.getRegex(), Message.BLANK.getSentence()))
-                .map(s ->
-                        Optional.of(s).filter(str ->
-                                !str.isEmpty()).orElse(Message.DEFAULT_NUMBER.getSentence()))
+                .map(s -> Optional.of(s).filter(str ->
+                        !str.isEmpty()).orElse(Message.DEFAULT_NUMBER.getSentence()))
                 .toList();
 
         if (delimiter.getClass() == CustomDelimiter.class) {
-            temp = temp.stream()
-                    .flatMap(str ->
-                            Arrays.stream(
-                                    str.split(
+            temp = temp.stream().flatMap(str ->
+                            Arrays.stream(str.split(
                                     Regex.OPEN.getRegex()
-                                    + delimiter.getDelimiter()
-                                    + Regex.CLOSE.getRegex())))
+                                            + delimiter.getDelimiter()
+                                            + Regex.CLOSE.getRegex())))
                     .map(String::trim)
-                    .map(s ->
-                            Optional.of(s).filter(str ->
-                                    !str.isEmpty()).orElse(Message.DEFAULT_NUMBER.getSentence()))
+                    .map(s -> Optional.of(s).filter(str ->
+                            !str.isEmpty()).orElse(Message.DEFAULT_NUMBER.getSentence()))
                     .toList();
         }
 

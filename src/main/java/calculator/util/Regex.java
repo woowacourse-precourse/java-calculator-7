@@ -15,11 +15,11 @@ public enum Regex {
 
     String regularExpression;
 
-    Regex(String regularExpression){
+    Regex(String regularExpression) {
         this.regularExpression = regularExpression;
     }
 
-    public String getRegex(){
+    public String getRegex() {
         return regularExpression;
     }
 }

@@ -28,7 +28,7 @@ class CustomDelimiterTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"-","/","\\","0","9"})
+    @ValueSource(strings = {"-", "/", "\\", "0", "9"})
     @DisplayName("커스텀 구분자에 -,/,\\나 숫자를 입력하면 예외가 발생한다.")
     void isCustomDelimiterFormatInvalid(String delimiter) {
         assertThatThrownBy(() -> new CustomDelimiter(delimiter).validate())
@@ -37,7 +37,7 @@ class CustomDelimiterTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"@","!","a","가","+","=","^"})
+    @ValueSource(strings = {"@", "!", "a", "가", "+", "=", "^"})
     @DisplayName("커스텀 구분자에 -,/,\\나 숫자가 없으면 예외가 발생하지 않는다.")
     void isCustomDelimiterFormatValid(String delimiter) {
         assertThatCode(() -> new CustomDelimiter(delimiter).validate())

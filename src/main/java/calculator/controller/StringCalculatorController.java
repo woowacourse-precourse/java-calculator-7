@@ -21,19 +21,19 @@ public class StringCalculatorController {
         this.sumCalculator = builder.sumCalculator;
     }
 
-    public InputData handoverInput(){
+    public InputData handoverInput() {
         String input = inputView.inputData();
         return new InputData(input);
     }
 
-    public Arithmetic createArithmetic(){
+    public Arithmetic createArithmetic() {
         InputData inputData = handoverInput();
         Delimiter delimiter = delimiterController.createDelimiterPart(inputData);
 
         return new Arithmetic(delimiter, inputData);
     }
 
-    public void runApplication(){
+    public void runApplication() {
         outputView.printMessage(Message.INTRO.getSentence());
 
         Arithmetic arithmetic = createArithmetic();
