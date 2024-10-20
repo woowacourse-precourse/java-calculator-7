@@ -31,7 +31,7 @@
 
 ## 2. Validator
 
-유효성 검사
+커스텀 구분자 유효성 검사
 
 ## 3. Calculator
 
