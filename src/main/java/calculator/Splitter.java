@@ -44,6 +44,9 @@ class Splitter {
     }
 
     public String splitCustomSeparators(String inputValue) {
+        if (inputValue.contains(prefix) ^ inputValue.contains(suffix))
+            throw new IllegalArgumentException("커스텀 구분자를 지정하려면 '//'와 '\\n'을 모두 입력해야 합니다.");
+
         if (!inputValue.startsWith(prefix))
             return inputValue;
 
