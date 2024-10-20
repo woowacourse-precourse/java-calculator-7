@@ -15,6 +15,13 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("결과 : 1");
         });
     }
+    @Test
+    void 구분자_사용() {
+        assertSimpleTest(() -> {
+            run("1:1");
+            assertThat(output()).contains("결과 : 2");
+        });
+    }
 
     @Test
     void 예외_테스트() {
@@ -23,9 +30,48 @@ class ApplicationTest extends NsTest {
                 .isInstanceOf(IllegalArgumentException.class)
         );
     }
+    @Test
+    void 예외_테스트2() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("\\n-1//,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void 예외_테스트3() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//!1\n1"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void 예외_테스트4() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("\\n"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void 예외_테스트5() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("\\-1//,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    @Test
+    void 예외_테스트6() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("\\-1//,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
 
     @Override
     public void runMain() {
         Application.main(new String[]{});
     }
 }
+//  test : //!1\n1(fail)
+//  test : ://1\\n12
+//  test : enter
+
