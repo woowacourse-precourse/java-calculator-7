@@ -96,7 +96,7 @@ public class Application {
 
         if (!delimiter.equals(",|:")) { // 커스텀 구분자 사용 시, 5번째 문자부터 읽기
             if (input.length() < 6) { // 길이가 6보다 짧은 경우 예외 처리
-                throw new IllegalArgumentException("계산할 숫자가 없습니다.");
+                return 0;
             }
             input = input.substring(5);
         }
