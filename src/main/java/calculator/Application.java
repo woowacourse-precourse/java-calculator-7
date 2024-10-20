@@ -6,7 +6,12 @@ public class Application {
     public static void main(String[] args) {
         Printer.printInputMessage();
         Reader.readString();
-        Printer.printResultMessage(Calculator.calculate());
+        if (input.length() == 0) {
+            Printer.printResultMessage(0);
+        } else {
+            Printer.printResultMessage(Calculator.calculate());
+        }
+        return ;
     }
 
     public static void setInput(String newInput) { input = newInput; }

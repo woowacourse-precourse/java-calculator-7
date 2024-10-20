@@ -4,6 +4,10 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Reader {
     public static void readString() {
-        Application.setInput(Console.readLine());
+        try {
+            Application.setInput(Console.readLine());
+        } catch (java.util.NoSuchElementException e) {
+            Application.setInput("");
+        }
     }
 }
