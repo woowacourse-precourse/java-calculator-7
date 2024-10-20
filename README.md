@@ -28,7 +28,6 @@
 4. 3에서 커스텀 구분자를 반환받는다면 커스텀 구분자를 나타내는 문자열 앞부분을 제거한다. (Model/CustomDelimiterRemover)
 5. 구분자를 바탕으로 문자열의 유효성을 판별한다. (Model/StringValidator)
 - 구분자와 양수로 구성된 문자열이어야 한다.
-- 구분자 앞뒤에 수가 존재하지 않는다면 IllegalArgumentException을 발생시킨다.
 6. 문자열에 있는 정수를 분리하고 이를 리스트로 반환한다. (Model/NumberExtractor)
 7. 정수의 합을 반환한다. (Model/SumCalculator)
 8. 정답을 출력한다. (View/Output)
