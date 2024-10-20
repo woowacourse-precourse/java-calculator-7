@@ -6,7 +6,7 @@ public class CalculatorController {
     private String userInput;
     private final String startComment = "덧셈할 문자열을 입력해 주세요.";
     private final String customPrefix = "//";
-    private AbstractSeparator abstractSeparator;
+    private Separator separator;
     private CalculatingMachine calculatingMachine;
 
     public CalculatorController() {
@@ -18,10 +18,10 @@ public class CalculatorController {
         System.out.println(startComment);
         this.userInput = Console.readLine();
         if (userInput.startsWith(customPrefix)) {
-            this.abstractSeparator = new CustomSeparator();
-            return calculatingMachine.calculate(abstractSeparator.separate(userInput));
+            this.separator = new CustomSeparator();
+            return calculatingMachine.calculate(separator.separate(userInput));
         }
-        this.abstractSeparator = new DefaultSeparator();
-        return calculatingMachine.calculate(abstractSeparator.separate(userInput));
+        this.separator = new DefaultSeparator();
+        return calculatingMachine.calculate(separator.separate(userInput));
     }
 }
