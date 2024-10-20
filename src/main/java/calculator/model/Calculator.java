@@ -16,14 +16,11 @@ public class Calculator {
     }//Calculator
 
     public int calculate(String input) {
-
         //입력 유효성 검사
         if (validator.inputValidate(input)) {
             return 0;
         }
-
         List<Integer>numbers = inputParser.parse(input);
-
         return sum(numbers);
     }//calculate
 
