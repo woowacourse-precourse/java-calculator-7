@@ -31,7 +31,7 @@ public class Application {
 		String[] numbers = input.split("[,:" + custom + "]");
 		for (String s : numbers) {
 			if(Integer.parseInt(s)<0){
-				throw new IllegalArgumentException("음수가 입력되었습니다.");
+				throw new IllegalArgumentException();
 			}
 			sum += Integer.parseInt(s);
 		}
