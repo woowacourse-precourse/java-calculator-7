@@ -4,6 +4,7 @@ import calculator.Controller.StringProcessorController;
 import calculator.Service.CustomDelimiterExtractor;
 import calculator.Service.DelimiterExtractor;
 import calculator.Service.InputReader;
+import calculator.Service.SumCalculator;
 
 public class Application {
     public static void main(String[] args) {
@@ -15,11 +16,15 @@ public class Application {
         // DelimiterExtractor 객체 생성
         DelimiterExtractor delimiterExtractor = new DelimiterExtractor();
 
+        // CustomDelimiterExtractor 객체 생성
         CustomDelimiterExtractor customDelimiterExtractor = new CustomDelimiterExtractor();
+
+        // SumCalculator 객체 생성
+        SumCalculator sumCalculator = new SumCalculator();
 
         // StringProcessorController에 의존성 주입
         StringProcessorController stringProcessorController = new StringProcessorController(inputReader,
-                delimiterExtractor, customDelimiterExtractor);
+                delimiterExtractor, customDelimiterExtractor, sumCalculator);
 
         // 프로세스 시작
         stringProcessorController.process();
