@@ -30,15 +30,16 @@ public class Application {
         }
 
         if (isEmptyString(numbers)) {
-            return;
+            System.out.println("결과 : 0");
+        }else{
+            validateContinuousDelimiters(numbers, delimiter);
+
+            String[] tokens = numbers.split(delimiter);
+            long sum = calculateSum(tokens);
+
+            System.out.println("결과 : " + sum);
+
         }
-
-        validateContinuousDelimiters(numbers, delimiter);
-
-        String[] tokens = numbers.split(delimiter);
-        long sum = calculateSum(tokens);
-
-        System.out.println("결과 : " + sum);
 
 
     }
@@ -98,8 +99,7 @@ public class Application {
     }
 
     private static boolean isEmptyString(String numbers) {
-        if (numbers.isEmpty()) {
-            System.out.println("결과 : 0");
+        if (numbers == null ||  numbers.isBlank()) {
             return true;
         }
         return false;
