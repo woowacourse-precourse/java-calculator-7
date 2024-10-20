@@ -114,6 +114,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 큰_수() {
+        assertSimpleTest(() -> {
+            run("1236547898745632:1236547898745632");
+            assertThat(output()).contains("결과 : 2473095797491264");
+        });
+    }
+
+    @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1");

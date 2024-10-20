@@ -2,6 +2,7 @@ package calculator;
 
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ValidChecker {
@@ -17,6 +18,12 @@ public class ValidChecker {
                 .findFirst();
 
         if (findChar.isPresent()) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public void customDelimiterCheck(Matcher matcher) {
+        if(!matcher.find()) {      // 잘못된 커스텀 구분자 형식 처리
             throw new IllegalArgumentException();
         }
     }

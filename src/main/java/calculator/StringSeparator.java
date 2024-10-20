@@ -18,9 +18,7 @@ public class StringSeparator {
         }
 
         String[] splitStrings = input.split(DEFAULT_DELIMITER);
-        validChecker.numberCheck(splitStrings);     // 숫자가 아닌 문자 확인
-        validChecker.delimiterCheck(splitStrings);  // 맨 끝에 구분자 혹은 구분자가 연속해서 두 개인 경우 (비어있는 문자열이 분리된 문자열에 포함되어 있음)
-        validChecker.lastCharCheck(input, DEFAULT_DELIMITER);
+        standardValidations(input, splitStrings, DEFAULT_DELIMITER);
 
         return Arrays.stream(splitStrings)
                 .map(String::trim)
@@ -29,22 +27,21 @@ public class StringSeparator {
 
     private String[] parseWithCustomDelimiter(String input) {
         Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
-
-        if (!matcher.find()) {      // 잘못된 커스텀 구분자 형식 처리
-            throw new IllegalArgumentException();
-        }
+        validChecker.customDelimiterCheck(matcher);
 
         String delimiter = matcher.group(1);
+        String numbers = matcher.group(2);
         validChecker.customDelimiterNumCheck(delimiter);
 
-        String numbers = matcher.group(2);
-
         String allDelimiter = String.format("(%s|%s)", DEFAULT_DELIMITER, Pattern.quote(delimiter));
-
         String[] splitStrings = numbers.split(allDelimiter);
-        validChecker.numberCheck(splitStrings);     // 숫자가 아닌 문자 확인
-        validChecker.delimiterCheck(splitStrings);  // 맨 끝에 구분자 혹은 구분자가 연속해서 두 개인 경우 (비어있는 문자열이 분리된 문자열에 포함되어 있음)
-        validChecker.lastCharCheck(input, allDelimiter);
+        standardValidations(input, splitStrings, allDelimiter);
         return splitStrings;
+    }
+
+    private void standardValidations(String input, String[] splitStrings, String delimiter) {
+        validChecker.numberCheck(splitStrings);
+        validChecker.delimiterCheck(splitStrings);
+        validChecker.lastCharCheck(input, delimiter);
     }
 }
