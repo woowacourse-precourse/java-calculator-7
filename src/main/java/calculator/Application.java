@@ -48,7 +48,6 @@ public class Application {
             System.out.println("결과 : " + result);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            System.exit(1);
         }
 
     }
