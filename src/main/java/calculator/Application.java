@@ -1,9 +1,9 @@
 package calculator;
 
 import calculator.domain.CalculatorService;
-import calculator.infrastructure.AddCalculator;
 import calculator.infrastructure.InputParser;
 import calculator.infrastructure.SplitStrValidator;
+import calculator.infrastructure.SumCalculator;
 import calculator.interfaces.CalculatorController;
 import camp.nextstep.edu.missionutils.Console;
 
@@ -11,11 +11,11 @@ public class Application {
 
     public static void main(String[] args) {
         InputParser inputParser = new InputParser();
-        AddCalculator addCalculator = new AddCalculator();
+        SumCalculator sumCalculator = new SumCalculator();
         SplitStrValidator splitStrValidator = new SplitStrValidator();
 
         CalculatorService calculatorService = new CalculatorService(inputParser, splitStrValidator,
-                addCalculator);
+                sumCalculator);
 
         CalculatorController calculatorController = new CalculatorController(calculatorService);
 

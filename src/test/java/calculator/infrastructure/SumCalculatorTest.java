@@ -11,19 +11,19 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-class AddCalculatorTest {
+class SumCalculatorTest {
 
-    private AddCalculator addCalculator;
+    private SumCalculator sumCalculator;
 
     @BeforeEach
     void setUp() {
-        addCalculator = new AddCalculator();
+        sumCalculator = new SumCalculator();
     }
 
     @ParameterizedTest
     @MethodSource("provideNumberListAndExpectedSum")
     void 숫자_리스트의_요소를_모두_더해_성공적으로_반환하는_테스트(List<Long> numberList, Long expectedSum) {
-        assertThat(addCalculator.addAllNumbers(numberList)).isEqualTo(expectedSum);
+        assertThat(sumCalculator.addAllNumbers(numberList)).isEqualTo(expectedSum);
     }
 
     private static Stream<Arguments> provideNumberListAndExpectedSum() {
@@ -38,7 +38,7 @@ class AddCalculatorTest {
     @ParameterizedTest
     @MethodSource("provideInvalidNumberList")
     void 숫자_리스트의_요소를_모두_더한_결과_Long_범위를_벗어나_예외를_발생시키는_테스트(List<Long> numberList) {
-        assertThatThrownBy(() -> addCalculator.addAllNumbers(numberList))
+        assertThatThrownBy(() -> sumCalculator.addAllNumbers(numberList))
                 .isInstanceOf(OutOfLongRangeException.class);
     }
 

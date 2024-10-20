@@ -3,7 +3,7 @@ package calculator.infrastructure;
 import calculator.exception.OutOfLongRangeException;
 import java.util.List;
 
-public class AddCalculator {
+public class SumCalculator {
     public long addAllNumbers(List<Long> numberList) {
         long sum = 0L;
         for (long number : numberList) {

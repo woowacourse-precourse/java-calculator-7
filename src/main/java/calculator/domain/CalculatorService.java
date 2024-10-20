@@ -1,8 +1,8 @@
 package calculator.domain;
 
-import calculator.infrastructure.AddCalculator;
 import calculator.infrastructure.InputParser;
 import calculator.infrastructure.SplitStrValidator;
+import calculator.infrastructure.SumCalculator;
 import java.util.List;
 import java.util.Set;
 
@@ -10,13 +10,13 @@ public class CalculatorService {
 
     private final InputParser inputParser;
     private final SplitStrValidator splitStrValidator;
-    private final AddCalculator addCalculator;
+    private final SumCalculator sumCalculator;
 
     public CalculatorService(InputParser inputParser, SplitStrValidator splitStrValidator,
-                             AddCalculator addCalculator) {
+                             SumCalculator sumCalculator) {
         this.inputParser = inputParser;
         this.splitStrValidator = splitStrValidator;
-        this.addCalculator = addCalculator;
+        this.sumCalculator = sumCalculator;
     }
 
     public void validateUserInput(String inputStr) {
@@ -42,6 +42,6 @@ public class CalculatorService {
     }
 
     public long sum(List<Long> numberList) {
-        return addCalculator.addAllNumbers(numberList);
+        return sumCalculator.addAllNumbers(numberList);
     }
 }
