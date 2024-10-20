@@ -30,7 +30,12 @@ public class StringCalculator {
         // 문자열 나누기
         List<Long> numbers = numberParser.parse(trimmedString, delimiterList);
 
-        return 0L;
+        // 숫자의 합 반환하기
+        return sum(numbers);
+    }
+
+    private long sum(List<Long> numbers) {
+        return numbers.stream().reduce(0L, Long::sum);
     }
 
 }
