@@ -10,6 +10,7 @@ public class CalculatorDate {
 
     public String getText() {
         return text;
+
     }
 
     public int[] getSumNumbers() {
