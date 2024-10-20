@@ -3,9 +3,9 @@ package calculator;
 import java.util.List;
 
 public class Executor {
-	private IOController ioController;
-	private Parser parser;
-	private Calculator calculator;
+	private final IOController ioController;
+	private final Parser parser;
+	private final Calculator calculator;
 
 	/**
 	 * 생성자
