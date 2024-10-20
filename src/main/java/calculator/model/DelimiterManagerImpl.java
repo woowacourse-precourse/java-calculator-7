@@ -14,4 +14,11 @@ public class DelimiterManagerImpl implements DelimiterManager {
             delimiters.add(":");
         }
     }
+
+    @Override
+    public void addDelimiter(String delimiter) {
+        if (!delimiters.contains(delimiter)) {
+            delimiters.add(delimiter);
+        }
+    }
 }
