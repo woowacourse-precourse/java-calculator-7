@@ -4,8 +4,6 @@ import static calculator.common.constant.SystemConstant.emptyString;
 import static calculator.common.constant.SystemConstant.maxCustomDelimiterCount;
 import static calculator.model.separate.RegexCompileCache.CUSTOM_DELIMITER_COUNT;
 import static calculator.model.separate.RegexCompileCache.CUSTOM_DELIMITER_PARSE;
-import static calculator.model.separate.RegexCompileCache.CUSTOM_DELIMITER_PARSE_CONDITION;
-import static calculator.model.separate.RegexCompileCache.CUSTOM_DELIMITER_POSITION;
 import static calculator.model.separate.RegexCompileCache.REPLACE_CONDITION;
 import static calculator.model.separate.RegexCompileCache.buildMatcher;
 import static org.junit.platform.commons.util.StringUtils.isNotBlank;
@@ -34,10 +32,6 @@ public class SeparateManager {
         return new SeparateManager();
     }
 
-    public boolean canParseCustomDelimiter(String source) {
-        Matcher matcher = buildMatcher(source, CUSTOM_DELIMITER_PARSE_CONDITION);
-        return matcher.find();
-    }
 
     public void extractCustomDelimiter(String source) {
         String delimiter = parseCustomDelimiter(source);
@@ -56,7 +50,7 @@ public class SeparateManager {
         return emptyString();
     }
 
-    public void validateCustomDelimiterCount(String source) {
+    private void validateCustomDelimiterCount(String source) {
         Matcher matcher = buildMatcher(source, CUSTOM_DELIMITER_COUNT);
 
         int delimiterCount = 0;
@@ -68,11 +62,15 @@ public class SeparateManager {
         }
     }
 
-    public void validateCustomDelimiterPosition(String source) {
-        Matcher matcher = buildMatcher(source, CUSTOM_DELIMITER_POSITION);
-        if (!matcher.find()) {
+    private void validateCustomDelimiterPosition(String source) {
+        if (!canParseCustomDelimiter(source)) {
             throw new NotAllowedPositionException();
         }
+    }
+
+    public boolean canParseCustomDelimiter(String source) {
+        Matcher matcher = buildMatcher(source, CUSTOM_DELIMITER_PARSE);
+        return matcher.find();
     }
 
     public List<Integer> separate(String source) {
