@@ -10,11 +10,7 @@ public class StringValueService {
     }
 
     public static boolean isEmpty(StringValue stringValue){
-        if(stringValue.getOriginalValue().isBlank()){
-            return true;
-        }else{
-            return false;
-        }
+        return stringValue.getOriginalValue().isBlank();
     }
 
     public static String[] separateInputString(StringValue stringValue, Separator separator){

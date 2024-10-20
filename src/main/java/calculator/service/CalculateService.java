@@ -4,7 +4,7 @@ import calculator.domain.NumberValue;
 
 public class CalculateService {
 
-    public static Integer calc(NumberValue numbers){
+    public static int calc(NumberValue numbers){
         int result = 0;
         for(Integer number : numbers.getNumbers()){
             result += number;

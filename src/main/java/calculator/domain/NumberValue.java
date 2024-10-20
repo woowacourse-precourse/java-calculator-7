@@ -25,9 +25,8 @@ public class NumberValue {
     private boolean isPositiveNumber(int num){
         if(num<0){
             throw new IllegalArgumentException(CANNOT_INPUT_NEGATIVE_NUM);
-        }else{
-            return true;
         }
+        return true;
     }
 
     private Integer convertToInteger(String separatedVal){
