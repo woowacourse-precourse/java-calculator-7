@@ -15,7 +15,8 @@ public class InputParserUtil {
 
         if (matcher.find()) {
             String customDelimiter = matcher.group(CUSTOM_DELIMITER_GROUP_NUMBER);
-            return matcher.group(EXPRESSION_GROUP_NUMBER).split("\\" + customDelimiter, NO_LIMIT_SPLIT_NUMBER);
+            return matcher.group(EXPRESSION_GROUP_NUMBER)
+                    .split(BASIC_DELIMITERS + "|" + "\\" + customDelimiter, NO_LIMIT_SPLIT_NUMBER);
         }
 
         return input.split(BASIC_DELIMITERS);
