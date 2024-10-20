@@ -30,6 +30,20 @@ public class Application {
         return custom_delimiter_numbers;
     }
 
+    private static String[] splitNumberString(String input) {
+        boolean is_custom_delimiter;
+        String numbers = input;
+        String delimiter = String.join("|", ",", ":");
+
+        is_custom_delimiter = hasCustomDelimiter(input);
+        if (is_custom_delimiter) {
+            String[] custom_delimiter_numbers = addCustomDelimiter(input, delimiter);
+            delimiter = custom_delimiter_numbers[0];
+            numbers = custom_delimiter_numbers[1];
+        }
+        return numbers.split(delimiter);
+    }
+
     public static void main(String[] args) {
         // TODO: 프로그램 구현
 
