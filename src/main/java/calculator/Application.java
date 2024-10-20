@@ -32,23 +32,30 @@ public class Application {
         // 여러 자리 숫자일 수도 있으니 숫자를 만들 StringBuilder 선언
         StringBuilder sb = new StringBuilder();
 
+        // 문자열 순회하며 검사
         for (int i=0;i<string.length();i++) {
             char c= string.charAt(i);
             int n = c-'0';
+            // 숫자일 경우 StringBuilder에 넣음
             if (0<=n && n<=9) {
                 sb.append(c);
+                // 구분자일 경우 지금까지 만든 숫자를 결과값에 더함
             } else if (c==',' || c==':' || c==custom){
                 if (!sb.isEmpty()) {
                     answer += Integer.parseInt(sb.toString());
                     sb = new StringBuilder();
                 }
+                // 둘 다 아닐 경우 에러 발생
             } else {
                 throw new IllegalArgumentException();
             }
         }
+        // 마지막에 만들어진 숫자 결과값에 더하기
         if (!sb.isEmpty()) {
             answer += Integer.parseInt(sb.toString());
         }
+
+        // 결과값 출력
         System.out.println(answer);
     }
 }
