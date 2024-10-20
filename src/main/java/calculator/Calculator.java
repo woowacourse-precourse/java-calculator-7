@@ -1,56 +1,38 @@
 package calculator;
 
 public class Calculator {
-    // 기본 구분자로 숫자 분리 및 합 계산 기능 구현
-
-    private static final String DEFAULT_DELIMITER = ",|:";
-    private static final String CUSTOM_DELIMITER_PREFIX = "//";
-    private static final String NEWLINE_REPLACEMENT = "\\n";
-
-    public int calculateSumFromInput(String userInput) {
-        if (userInput == null || userInput.isEmpty()) { // 공백 문자열 처리
-            return 0;
+    public int add(String input) {
+        if (input.isEmpty()) {
+            return 0; // 빈 입력 처리
         }
 
-        String delimiter = DEFAULT_DELIMITER; // 기본 구분자
-
-        if (userInput.startsWith(CUSTOM_DELIMITER_PREFIX)) {
-            userInput = userInput.replace(NEWLINE_REPLACEMENT, "\n");
-            int delimiterIndex = userInput.indexOf("\n");
-            if (delimiterIndex == -1) {
-                throw new IllegalArgumentException("커스텀 구분자가 잘못되었습니다."); // 잘못된 구분자 처리
-            }
-            delimiter = userInput.substring(2, delimiterIndex);
-            if (delimiter.isEmpty()) {
-                throw new IllegalArgumentException("커스텀 구분자가 잘못되었습니다."); // 구분자가 비어있을 때 처리
-            }
-            userInput = userInput.substring(delimiterIndex + 1);
+        // 사용자 정의 구분자 처리
+        if (input.startsWith("//")) {
+            String[] parts = input.split("\n", 2);
+            String delimiter = parts[0].substring(2); // 구분자 추출
+            input = parts[1]; // 실제 숫자 부분
+            input = input.replace(delimiter, ","); // 사용자 정의 구분자를 쉼표로 대체
         }
 
-        String[] splitNumbers = userInput.split(delimiter);
-        return sumParsedNumbers(splitNumbers);
-    }
-
-    // 숫자의 합 계산
-    private int sumParsedNumbers(String[] splitNumbers) {
+        // 음수 검증
+        String[] numbers = input.split("[,;\n]");
+        StringBuilder negativeNumbers = new StringBuilder();
         int sum = 0;
-        for (String number : splitNumbers) {
-            int num = validateAndConvertToInt(number);
-            sum += num;
-        }
-        return sum;
-    }
 
-    // 유효성 검사 및 숫자 변환
-    private int validateAndConvertToInt(String number) {
-        try {
-            int num = Integer.parseInt(number);
+        for (String number : numbers) {
+            int num = Integer.parseInt(number.trim());
             if (num < 0) {
-                throw new IllegalArgumentException("음수는 입력할 수 없습니다: " + num);
+                negativeNumbers.append(num).append(" "); // 음수 목록 추가
+            } else {
+                sum += num; // 합산
             }
-            return num;
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("잘못된 입력 값입니다: " + number);
         }
+
+        // 음수 오류 처리
+        if (negativeNumbers.length() > 0) {
+            throw new IllegalArgumentException("잘못된 입력입니다: 입력값에 음수가 포함되어 있습니다: " + negativeNumbers.toString());
+        }
+
+        return sum;
     }
 }

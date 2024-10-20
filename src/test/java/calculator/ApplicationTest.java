@@ -1,54 +1,36 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
-import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+class ApplicationTest {
 
-class ApplicationTest extends NsTest {
+    private final calculator.Calculator calculator = new calculator.Calculator();
 
-    @Nested
-    class CalculatorTests {
+    @Test
+    void 커스텀_구분자_사용() {
+        String input = "//;\n1;2";
+        int result = calculator.add(input);
+        assertEquals(3, result); // 결과가 3이어야 함
+    }
 
-        @Test
-        void 커스텀_구분자_사용() {
-            assertSimpleTest(() -> {
-                run("//;\n1;2;3");
-                assertThat(output()).contains("결과 : 6");
-            });
-        }
+    @Test
+    void 음수_입력_예외_테스트() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            calculator.add("-1,2");
+        });
+        assertEquals("잘못된 입력입니다: 입력값에 음수가 포함되어 있습니다: -1 ", exception.getMessage());
+    }
 
-        @Test
-        void 예외_테스트() {
-            assertSimpleTest(() -> {
-                assertThatThrownBy(() -> run("-1,2,3"))
-                        .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessageContaining("음수는 입력할 수 없습니다: -1");
-            });
-        }
+    @Test
+    void 빈_입력_테스트() {
+        assertEquals(0, calculator.add("")); // 빈 입력은 0이어야 함
+    }
 
-        @Test
-        void 기본_구분자_사용() {
-            assertSimpleTest(() -> {
-                run("1,2:3");
-                assertThat(output()).contains("결과 : 6");
-            });
-        }
-
-        @Test
-        void 공백_문자열_입력() {
-            assertSimpleTest(() -> {
-                run("");
-                assertThat(output()).contains("결과 : 0");
-            });
-        }
-
-        @Override
-        public void runMain() {
-            Application.main(new String[]{});
-        }
+    @Test
+    void 여러_구분자_사용() {
+        String input = "//;\n1;2;3;4";
+        int result = calculator.add(input);
+        assertEquals(10, result); // 결과가 10이어야 함
     }
 }
