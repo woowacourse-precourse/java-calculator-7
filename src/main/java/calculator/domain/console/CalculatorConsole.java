@@ -16,24 +16,14 @@ public class CalculatorConsole {
 
     public void run() {
 
-        while (true) {
+        ConsoleWriter.write(DATE_REQUEST_MESSAGE);
+        final String read = ConsoleReader.read();
 
-            ConsoleWriter.write(DATE_REQUEST_MESSAGE);
-            final String read = ConsoleReader.read();
-
-            if ("q".equalsIgnoreCase(read)) {
-                System.out.println("계산기를 종료합니다.");
-                break;
-            }
-
-            try {
-                int result = controller.calculateString(read);
-                System.out.println("계산 결과: " + result);
-            } catch (IllegalArgumentException e) {
-                System.out.println("오류: " + e.getMessage());
-            }
-
-            System.out.println(); // 빈 줄 출력
+        try {
+            int result = controller.calculateString(read);
+            System.out.println("계산 결과: " + result);
+        } catch (IllegalArgumentException e) {
+            System.out.println("오류: " + e.getMessage());
         }
     }
 }
