@@ -1,6 +1,7 @@
 package calculator.service.strategy;
 
 import calculator.dto.CalculationRequestDTO;
+import calculator.validator.ValidationUtils;
 
 public class CalculationStrategySelector {
     private final CalculationStrategy defaultDelimiterCalculationStrategy;
@@ -15,7 +16,7 @@ public class CalculationStrategySelector {
 
     public CalculationStrategy selectStrategy(CalculationRequestDTO calculationRequestDTO) {
         String inputString = calculationRequestDTO.getInputString();
-        CalculationInputValidator.validate(inputString);
+        ValidationUtils.validateStartWithDoubleSlash(inputString);
         if (inputString.startsWith("//")) {
             return defatulWithCustomDelimiterCalculationStrategy;
         }
