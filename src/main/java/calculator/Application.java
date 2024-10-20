@@ -1,7 +1,10 @@
 package calculator;
 
+import calculator.controller.CalculatorController;
+
 public class Application {
     public static void main(String[] args) {
-        System.out.println("테스튼");
+        final CalculatorController calculatorController = new CalculatorController();
+        calculatorController.runCalculator();
     }
 }
