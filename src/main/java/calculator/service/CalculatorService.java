@@ -44,5 +44,12 @@ public class CalculatorService {
         return customDelimiter;
     }
 
+    private void isCheckSameDelimiterName(List<String> delimiters, List<String> customDelimiters) {
+        for (String delimiter : customDelimiters) {
+            if (!delimiters.contains(delimiter)) {
+                delimiters.add(delimiter);
+            }
+        }
+    }
 
 }
