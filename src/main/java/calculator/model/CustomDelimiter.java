@@ -3,14 +3,14 @@ package calculator.model;
 import java.util.List;
 
 public class CustomDelimiter {
-    private final List<String> delimiters;
+    private final List<String> customDelimiters;
 
     private CustomDelimiter(List<String> customDelimiter) {
-        delimiters = customDelimiter;
+        customDelimiters = customDelimiter;
     }
 
-    public List<String> getDelimiters() {
-        return delimiters;
+    public List<String> getCustomDelimiters() {
+        return customDelimiters;
     }
 
     public static CustomDelimiter createCustomDelimiter(List<String> customDelimiter) {
