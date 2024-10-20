@@ -4,7 +4,12 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
 
-    private static void checkIsValid(String str) {
+    private static final String CUSTOM_DELIMITER_FRONT = "//";
+    private static final String CUSTOM_DELIMITER_BACK = "\\n";
+    private static final String BASIC_DELIMITER = "[,:]";
+
+
+    private static void checkInputValid(String str) {
         for (char x : str.toCharArray()) {
             if (!Character.isDigit(x)) {
                 throw new IllegalArgumentException("문자열에 음수 혹은 숫자가 아닌 것은 포함될 수 없습니다.");
@@ -17,7 +22,7 @@ public class Application {
     }
 
     private static void checkCustomStyle(String str) {
-        if (!str.startsWith("//")) {
+        if (!str.startsWith(CUSTOM_DELIMITER_FRONT)) {
             throw new IllegalArgumentException("커스텀 구분자의 입력 양식이 맞지 않습니다.");
         }
     }
@@ -33,27 +38,28 @@ public class Application {
         String input = Console.readLine();
         int sum = 0;
 
-        if (input.contains("//") && input.contains("\\n")) {
+        if (input.contains(CUSTOM_DELIMITER_FRONT) && input.contains(CUSTOM_DELIMITER_BACK)) {
             checkCustomStyle(input);
-            String custom = input.substring(input.indexOf("//") + 2, input.indexOf("\\n"));
+            String custom = input.substring(input.indexOf(CUSTOM_DELIMITER_FRONT) + 2,
+                    input.indexOf(CUSTOM_DELIMITER_BACK));
             checkCustomEmpty(custom);
-            String newInput = input.substring(input.indexOf("\\n") + 2);
+            String newInput = input.substring(input.indexOf(CUSTOM_DELIMITER_BACK) + 2);
             String replacedInput = newInput.replace(custom, ",");
 
-            String[] strArrCustom = replacedInput.split("[,:]");
+            String[] strArrCustom = replacedInput.split(BASIC_DELIMITER);
 
             for (String str : strArrCustom) {
                 if (!str.isEmpty()) {
-                    checkIsValid(str);
+                    checkInputValid(str);
                     sum += Integer.parseInt(str);
                 }
             }
         } else if (input.contains(",") || input.contains(":")) {
-            String[] strArrBasic = input.split("[,:]");
+            String[] strArrBasic = input.split(BASIC_DELIMITER);
 
             for (String str : strArrBasic) {
                 if (!str.isEmpty()) {
-                    checkIsValid(str);
+                    checkInputValid(str);
                     sum += Integer.parseInt(str);
                 }
             }
