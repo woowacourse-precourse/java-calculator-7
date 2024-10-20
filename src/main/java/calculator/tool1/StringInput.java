@@ -34,7 +34,7 @@ public class StringInput {
       if (!StringChecker
           .checkCustomDelimiter(delimiters)) {
         this.nums = this.delimiters;
-        this.delimiters = "//:,\n";
+        this.delimiters = "//:,";
         this.isCustomDelimiter = false;
       } else {
         this.nums = Console.readLine();
