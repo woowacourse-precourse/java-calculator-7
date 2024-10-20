@@ -57,29 +57,14 @@ class CalculatorTest {
     }
 
     @Test
-    void 커스텀_문자열_찾기() {
-        //given
-        final Calculator calculator = new Calculator();
-        final String str = "//;\\n1;2;3";
-
-        //when
-        String result = calculator.findCustomSeparator(str);
-
-        //Then
-        assertThat(result).isEqualTo(";");
-    }
-
-    @Test
     void 예외_커스텀_문자열_안에_문자가_두개이상_들어있을_경우() {
         //given
         final Calculator calculator = new Calculator();
         final String str = "//;p\\n1;2;3";
 
-        //when
-        String result = calculator.findCustomSeparator(str);
-
-        //Then
-        assertThat(result).isEqualTo(null);
+        //when, Then
+        assertThatThrownBy(() -> calculator.sum(str))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

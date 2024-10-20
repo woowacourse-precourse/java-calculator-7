@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class Calculator {
 
-    public String findCustomSeparator(String str) {
+    private String findCustomSeparator(String str) {
 
         Pattern pattern = Pattern.compile("//(.)\\\\n(.*)");
         Matcher matcher = pattern.matcher(str);
@@ -17,7 +17,7 @@ public class Calculator {
         return null;
     }
 
-    public int parseAndValidate(String num) {
+    private int parseAndValidate(String num) {
 
         if (!num.matches("\\d+")) {
             throw new IllegalArgumentException("유효하지 않은 숫자 형식입니다: ");
