@@ -13,7 +13,7 @@ public class Application {
 
         String text = Console.readLine();
         String delimiters = "\\,|\\:";
-        int result;
+        long result;
 
         if (usesCustomDelimiter(text)) {
             String[] textAndDelimiters = extractCustomDelimiter(text, delimiters);
@@ -21,24 +21,17 @@ public class Application {
             delimiters = textAndDelimiters[1];
         }
 
-        result = calculateSum(text, delimiters);
+        if (text.isEmpty()) {
+            result = 0;
+        } else {
+            result = calculateSum(text, delimiters);
+        }
+
         output(result);
 
     }
 
-    public static int calculateSum(String text, String delimiters) {
-        String[] textSplitArr = text.split(delimiters);
-
-        int sum = 0;
-        for (String s : textSplitArr) {
-            int num = Integer.parseInt(s);
-            sum += num;
-        }
-
-        return sum;
-    }
-
-    public static void output(int result) {
+    public static void output(long result) {
         System.out.println("결과 : " + result);
     }
 
@@ -57,4 +50,29 @@ public class Application {
 
         return new String[]{text, delimiters};
     }
+
+    public static long calculateSum(String text, String delimiters) {
+        String[] textSplitArr = text.split(delimiters, -1);
+        //System.out.println(Arrays.toString(textSplitArr));
+
+        long sum = 0;
+        for (String s : textSplitArr) {
+            validateArrElement(s);
+            long num = Long.parseLong(s);
+            sum += num;
+        }
+
+        return sum;
+    }
+
+    public static void validateArrElement(String s) {
+        try {
+            if (s.isBlank() || !Pattern.matches("^[0-9]*$", s)) {
+                throw new IllegalArgumentException();
+            }
+        } catch (IllegalArgumentException e) {
+            System.exit(1);
+        }
+    }
+
 }
