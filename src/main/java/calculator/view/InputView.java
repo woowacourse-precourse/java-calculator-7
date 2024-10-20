@@ -19,7 +19,9 @@ public class InputView {
     }
 
     public static boolean containsCustomDelimiter(String additionInput) {
-        if(additionInput.length() >= 5 && additionInput.startsWith("//") && additionInput.substring(3, 5).equals("\\n")) return true;
+        if(additionInput.length() >= 5 &&
+                additionInput.startsWith("//") &&
+                additionInput.substring(3, 5).equals("\\n")) return true;
         return false;
     }
 
