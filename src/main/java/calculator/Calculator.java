@@ -5,7 +5,6 @@ public class Calculator {
     public int getTotal(String[] numberStrings) {
         int total = 0;
         for(String strNumber: numberStrings) {
-
             int parsedNumber = parseNumber(strNumber);
 
             checkPositiveNumber(parsedNumber);
@@ -17,14 +16,12 @@ public class Calculator {
 
 
     public int parseNumber(String stringNumber) {
-        int intNumber;
         try {
-            intNumber = Integer.parseInt(stringNumber);
+            return Integer.parseInt(stringNumber);
         }
         catch (NumberFormatException e) {
             throw new IllegalArgumentException("Exception> 숫자가 아닌 값 입력: " + stringNumber);
         }
-        return intNumber;
     }
 
 
