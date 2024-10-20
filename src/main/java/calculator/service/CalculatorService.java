@@ -20,7 +20,14 @@ public class CalculatorService {
     private static int sum(List<String> values) {
         int sum = 0;
         for (String value : values) {
-            sum += Integer.parseInt(value);
+            if(value == ""){
+                continue;
+            }
+            int dataToSum = Integer.parseInt(value);
+            if(dataToSum < 0) {
+                throw new IllegalArgumentException();
+            }
+            sum += dataToSum;
         }
         return sum;
     }
