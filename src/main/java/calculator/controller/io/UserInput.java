@@ -1,7 +1,6 @@
 package calculator.controller.io;
 
 public class UserInput {
-
     private final String delimiter;
     private final String plainText;
 

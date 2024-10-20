@@ -4,7 +4,6 @@ import calculator.error.ErrorMessage;
 import java.util.regex.Pattern;
 
 public class Delimiter {
-
     private final String value;
 
     public Delimiter(String value) {
