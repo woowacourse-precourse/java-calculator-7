@@ -1,6 +1,15 @@
 package calculator.validator;
 
 public class InputValidator {
+    public boolean isValidInput(String input) {
+        if (isNegativeNumber(input)) {
+            throw new IllegalArgumentException("음수가 포함되었습니다.");
+        }
+        if (!isValidFormat(input)) {
+            throw new IllegalArgumentException("커스텀 구분자가 잘못된 형식으로 입력되었습니다.");
+        }
+        return true;
+    }
 
     private boolean isNegativeNumber(String input) {
         return input.matches("-\\d+");
@@ -24,7 +33,4 @@ public class InputValidator {
         }
         return true;
     }
-
-    // TODO: 잘못된 입력이었을 경우에는 예외를 발생시킨다. 입력이 유효한지 검증한다.
-
 }

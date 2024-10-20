@@ -10,6 +10,7 @@ public class InputView {
     public String readString() {
         System.out.println(INPUT_MESSAGE);
         String inputString = Console.readLine();
+        inputValidator.isValidInput(inputString);
         return inputString;
     }
 }
