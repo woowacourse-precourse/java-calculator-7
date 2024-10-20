@@ -14,7 +14,7 @@ public class Application {
             String[] str;
 
             System.out.println("덧셈할 문자열을 입력해주세요. ");
-            String line = Console.readLine();
+            String line = Console.readLine().trim();
 
             if(line.matches(".*[A-Z가-힣]+.*"))
                 throw new IllegalArgumentException("한글과 알파벳은 입력할 수 없습니다.");
@@ -43,7 +43,7 @@ public class Application {
                     }
                     total += Integer.parseInt(str[i]);
                 } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("숫자가 아닌 값이 입력되었습니다.");
+                    total +=0 ;
                 }
             }
 
