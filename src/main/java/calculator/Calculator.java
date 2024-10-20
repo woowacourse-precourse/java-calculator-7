@@ -8,7 +8,7 @@ public class Calculator {
 
     private String input;
     private int result = 0;
-    private String[] separators = {".", ":"};
+    private String[] separators = {",", ":"};
     private String[] numbers;
 
     public Calculator() {
