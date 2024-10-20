@@ -1,4 +1,4 @@
-package calculator.presentation;
+package calculator.presentation.input;
 
 import calculator.presentation.parser.InputParser;
 import calculator.presentation.request.CalculatorRequest;

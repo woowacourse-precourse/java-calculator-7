@@ -2,7 +2,8 @@ package calculator;
 
 import calculator.adder.NumberAdder;
 import calculator.adder.NumberAdderImpl;
-import calculator.presentation.CalculatorInput;
+import calculator.presentation.CalculatorController;
+import calculator.presentation.input.CalculatorInput;
 import calculator.presentation.parser.InputParser;
 import calculator.presentation.parser.RegexInputParser;
 import calculator.tokenizer.Delimiters;

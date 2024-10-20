@@ -1,9 +1,9 @@
-package calculator;
+package calculator.presentation;
 
 import calculator.adder.NumberAdder;
 import calculator.adder.NumberAdderRequest;
 import calculator.adder.NumberAdderResponse;
-import calculator.presentation.CalculatorInput;
+import calculator.presentation.input.CalculatorInput;
 import calculator.presentation.request.CalculatorRequest;
 import calculator.tokenizer.TokenResponse;
 import calculator.tokenizer.Tokenizer;
