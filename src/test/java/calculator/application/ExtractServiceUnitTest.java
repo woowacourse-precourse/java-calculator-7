@@ -4,13 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import calculator.application.impl.PositiveNumberExtractService;
-import calculator.domain.CalculatorPrompt;
 import java.util.List;
-import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 class ExtractServiceUnitTest {
 
@@ -60,7 +56,7 @@ class ExtractServiceUnitTest {
     @DisplayName("숫자 이외에 문자가 포함된 문자열 추출 시, 예외가 발생한다")
     void givenHasNotNumberList_whenExtractNumbers_thenReturnError() {
         // given
-        List<String> numberStrings = List.of(",", "1", "2");
+        List<String> numberStrings = List.of(",", "", "2");
 
         // when, then
         assertThatThrownBy(() -> extractService.extractNumbers(numberStrings))

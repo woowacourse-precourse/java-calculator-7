@@ -53,7 +53,7 @@ class DelimiterTest {
     }
 
     @Test
-    @DisplayName("Delimiter는 3개 이상 구분자를 추가할 경우 예외가 발생한다.")
+    @DisplayName("Custom Delimiter는 2개 이상 구분자를 추가할 경우 예외가 발생한다.")
     void givenCustomDelimiterAndConstructedAndAdd_whenAdd_thenReturnError() {
         // given
         Delimiter delimiter = new Delimiter();

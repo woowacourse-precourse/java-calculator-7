@@ -1,6 +1,6 @@
 package calculator.application;
 
-import calculator.domain.CalculatorPrompt;
+import calculator.domain.Separator;
 
 public class CalculateService {
 
@@ -11,9 +11,10 @@ public class CalculateService {
     }
 
     public int splitAndSum(String command) {
-        CalculatorPrompt calculatorPrompt = new CalculatorPrompt(command);
+        Separator separator = new Separator();
+        separator.separate(command);
 
-        return extractService.extractNumbers(calculatorPrompt.getData())
+        return extractService.extractNumbers(separator.getResult())
                 .stream()
                 .reduce(0, Integer::sum);
     }

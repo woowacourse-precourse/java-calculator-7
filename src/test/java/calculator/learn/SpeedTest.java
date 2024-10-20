@@ -1,6 +1,6 @@
 package calculator.learn;
 
-import calculator.domain.CalculatorPrompt;
+import calculator.domain.Separator;
 
 class SpeedTest {
 
@@ -15,8 +15,9 @@ class SpeedTest {
     }
 
     private double separateTime(String data) {
+        Separator separator = new Separator();
         long start = System.nanoTime();
-        new CalculatorPrompt(data);
+        separator.separate(data);
         long end = System.nanoTime();
 
         return (end - start) / 1_000_000.0;
