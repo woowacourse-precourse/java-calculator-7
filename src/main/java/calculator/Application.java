@@ -25,15 +25,9 @@ public class Application {
 
         return numbers;
     }
-    private static void validData(String[] numbers, String input) {
+    public static void validData(String[] numbers, String input) {
         for (String num : numbers) {
             num = num.trim();
-
-            if (Objects.equals(num, input)) {
-                throw new IllegalArgumentException(
-                        "구분자가 포함되어있지 않습니다. 다시 입력해주세요."
-                );
-            }
 
             if (!num.matches("\\d+")) {
                 throw new IllegalArgumentException(
@@ -50,10 +44,8 @@ public class Application {
         }
 
     }
-    public static void main(String[] args) {
-        System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String input = Console.readLine();
 
+    public static void handling(String input) {
         int answer = 0;
 
         try {
@@ -68,9 +60,14 @@ public class Application {
                 }
                 System.out.println("결과 : " + answer);
             }
-
         } catch (IllegalArgumentException e) {
-            System.err.println("예외: " + e.getMessage());
+            System.err.println(e.getMessage());
+            throw e;
         }
+    }
+    public static void main(String[] args) {
+        System.out.println("덧셈할 문자열을 입력해 주세요.");
+        String input = Console.readLine();
+        handling(input);
     }
 }
