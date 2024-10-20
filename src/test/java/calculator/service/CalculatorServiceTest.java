@@ -83,4 +83,21 @@ class CalculatorServiceTest {
         assertEquals("음수는 허용되지 않습니다", exception.getMessage());
     }
 
+    @DisplayName("커스텀 구분자에 대한 성공 로직 테스트")
+    @ParameterizedTest
+    @CsvSource({
+            "'//;\n1;2;3', 6",      // 세미콜론을 커스텀 구분자로 사용
+            "'//|\n1|2|3', 6",      // 파이프를 커스텀 구분자로 사용
+            "'//@\n2@3@4', 9",      // @를 커스텀 구분자로 사용
+            "'//#\n1#2#3#4', 10",   // #을 커스텀 구분자로 사용
+            "'//.\n5.6.7', 18"      // 점(.)을 커스텀 구분자로 사용
+    })
+    void add_withCustomDelimiters_returnsSum(String input, int expectedSum) {
+        // 입력 문자열을 기반으로 숫자 합계를 계산
+        int result = CalculatorService.add(input);
+
+        // 결과가 예상된 값과 같은지 확인
+        assertEquals(expectedSum, result);
+    }
+
 }
