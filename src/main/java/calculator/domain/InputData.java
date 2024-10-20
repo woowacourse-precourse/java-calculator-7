@@ -17,7 +17,6 @@ public class InputData {
         separators = new ArrayList<>();
         separators.add(SEPARATOR_COLON);
         separators.add(SEPARATOR_COMMA);
-        extractedStrings = new String[];
         numbersForSum = new ArrayList<>();
     }
 
@@ -26,6 +25,7 @@ public class InputData {
             numbersForSum.add(0);
             return numbersForSum;
         }
+        separators = SeparatorValidator.extractCustomSeparator(separators, firstInputData);
     }
 
     private boolean hasEmptyString() {
