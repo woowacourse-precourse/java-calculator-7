@@ -74,4 +74,15 @@ public class ValidationTest {
         assertThatThrownBy(() -> validation.validate(inputString))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("음수 테스트")
+    public void minusTest() {
+        // given
+        String inputString = "-1:2:3";
+
+        // when, then
+        assertThatThrownBy(() -> validation.validate(inputString))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }

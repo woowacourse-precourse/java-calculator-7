@@ -27,7 +27,7 @@ public class Validation {
         if (isCustomFrom(inputString)) {
             return;
         }
-        throw new IllegalArgumentException("Invalid input: " + inputString + "는 잘못된 입력 양식입니다. ");
+        throw new IllegalArgumentException(inputString + "는 잘못된 입력 양식입니다. ");
     }
 
 
