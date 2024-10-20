@@ -2,32 +2,36 @@ package calculator;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
 public class Application {
-    static List<String> separator = Arrays.asList(",", ":");
+    static List<String> separator = new ArrayList<>(Arrays.asList(",", ":"));
     public static void main(String[] args) {
         try {
             String userInput = Console.readLine();
-            addSeparator(userInput);
+            userInput = addSeparator(userInput);
             int[] numbers = separatorNum(userInput);
+            System.out.println("결과 : " + cal_sum(numbers));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
     }
 
-    public static void addSeparator(String userInput) {
-        if (userInput.startsWith("//.*\n")) {
-            String nsep = userInput.substring(2, userInput.indexOf(10));
+    public static String addSeparator(String userInput) {
+        if (userInput.startsWith("//") && userInput.contains("\\n")) {
+            String nsep = userInput.substring(2, userInput.indexOf("\\n"));
             if (nsep.matches(".*[0-9].*")) {
                 throw new IllegalArgumentException("오류: 구분자에 숫자가 포함되어 있습니다.");
             }
+            userInput = userInput.substring(userInput.indexOf("\\n")+2);
 
             separator.add(nsep);
         }
+        return userInput;
     }
 
     public static int[] separatorNum(String userInput) {
