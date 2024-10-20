@@ -15,6 +15,7 @@ public class InputView {
 
     public String readNumber() {
         System.out.println(INPUT_MESSAGE);
+
         return Console.readLine();
     }
 }
