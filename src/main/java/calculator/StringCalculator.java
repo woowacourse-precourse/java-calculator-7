@@ -34,6 +34,10 @@ public class StringCalculator {
         if (strings.length == 0) {
             throw new IllegalArgumentException("계산될 숫자가 필요합니다.");
         }
+        return calculateSum(strings);
+    }
+
+    private static int calculateSum(String[] strings) {
         int sum = 0;
         try {
             for (String string : strings) {
@@ -48,7 +52,6 @@ public class StringCalculator {
         } catch (ArithmeticException e) {
             throw new IllegalArgumentException("합계가 정수의 최대값을 초과했습니다.");
         }
-
         return sum;
     }
 
