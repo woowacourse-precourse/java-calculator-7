@@ -31,6 +31,7 @@ public class Calculator {
             outputView.showResult(result);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
+            throw e;
         }
     }
 }
