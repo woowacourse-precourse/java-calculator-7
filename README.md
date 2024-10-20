@@ -1,5 +1,9 @@
 # 문자열 덧셈 계산기
 
+## 구조도
+
+![structure.png](structure.png)
+
 ## 기능 목록
 
 ### 1. 입력 처리
