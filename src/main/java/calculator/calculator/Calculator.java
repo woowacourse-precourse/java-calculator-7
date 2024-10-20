@@ -21,9 +21,9 @@ public class Calculator {
     public void run() {
         ViewService.viewInput();
         String input = readLine();
-        InputUtil.checkInputDigit(input);
 
         if (!InputUtil.checkEmptyInput(input)) {
+            InputUtil.checkInputDigit(input);
             String[] input_array = delimiterService.generateString(input);
             InputUtil.checkArrayNumber(input_array);
             result = calculateService.calculate(input_array);
