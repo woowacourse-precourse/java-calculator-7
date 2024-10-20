@@ -1,9 +1,10 @@
 # java-calculator-precourse
+
+## 기능 및 구현 계획
 요구사항 명세에 명시 되어있지 않던 부분은 🔺 표시
 
 ## Input
 
----
 
 ### [ Input 받기 ]
 ✅`Console` API의 `readLine()` 사용해 `String input` 를 받는다.
@@ -24,7 +25,7 @@
     - ex ) "//1\n112131" ⇒ exception
 
 ### [ Input ErrorException ]
-✅ `validateInput()` : input이 유효한지 확인하는 메서드
+✅ `validate()` : input이 유효한지 확인하는 메서드
   - Input은 아래의 경우들에 대해 `IllegalArgumentException`을 발생시킨다.
       1. 커스텀 구분자가 사용 되는 문자열일 때, 커스텀 구분자 외의 다른 문자가 포함될 경우 예외가 발생한다.
           - ex ) “//a\n3&1a9a1” ⇒ 구분자는 a인데 &가 포함되었으므로 exception
@@ -36,7 +37,6 @@
 
 ## Key Functions
 
----
 
 ### [ 구분자 및 숫자 Parsing ]
 ✅ `hasCustomDelimiter()` : input에 커스텀 구분자가 있는지 판단하는 메서드
@@ -61,12 +61,11 @@
 
 ## Output
 
----
 
 ### [ 계산 결과 출력하기 ]
 
 ✅ `parseNumbersFromInput()` 으로 추출한 모든 숫자들의 합 구해 출력하기
-  - 추출한 숫자들을 담은 List size가 0일 경우, 숫자가 없었다는 의미이므로 `answer = 0;`
+  - 추출한 숫자들을 담은 List size가 0일 경우, 숫자가 없었다는 의미이므로 결과는 0
 
 
 
