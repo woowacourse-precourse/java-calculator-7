@@ -10,7 +10,7 @@
 ### 숫자 구분하기
 - [x] 구분자를 등록한다.
   - [x] 구분자는 숫자, null, empty 값이 될 수 없다. 
-  - [ ] 커스텀 구분자 등록 마크가 있어야 등록할 수 있다.(`//`, `\n`)
+  - [x] 커스텀 구분자 등록 마크가 있어야 등록할 수 있다.(`//`, `\n`)
 - [x] 구분자를 통해 숫자를 추출한다.
   - [ ] 문자열에 구분자가 있어야 한다.
 
@@ -25,3 +25,7 @@
 - 일급 컬렉션
 
   [일급 컬렉션(First-Class Collection)이란? - dkswnkk](https://dkswnkk.tistory.com/696)
+
+- 숫자 체크
+
+  [Check If a String Is Numeric in Java - baeldung](https://www.baeldung.com/java-check-string-number)

@@ -26,7 +26,19 @@ public class RegexTokenizer implements Tokenizer {
     }
 
     @Override
-    public void setDelimiter(String delimiter) {
+    public void setCustomDelimiter(String input) {
+        if (!input.contains("\n")) {
+            throw new IllegalArgumentException();
+        }
 
+        String customInput = input.split("\n")[0];
+
+        if (!input.startsWith("//")) {
+            throw new IllegalArgumentException();
+        }
+
+        String delimiter = customInput.substring(2);
+
+        delimiters.addCustomDelimiter(delimiter);
     }
 }

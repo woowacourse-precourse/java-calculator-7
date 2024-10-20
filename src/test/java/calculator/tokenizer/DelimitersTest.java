@@ -26,7 +26,7 @@ public class DelimitersTest {
         Delimiters delimiters = new Delimiters();
 
         // when
-        delimiters.addDelimiter(",");
+        delimiters.addCustomDelimiter(",");
 
         // then
         assertThat(delimiters.getDelimiters()).containsExactly(",");
@@ -39,8 +39,8 @@ public class DelimitersTest {
 
         // when & then
         assertSoftly(softly -> {
-            assertThatThrownBy(() -> delimiters.addDelimiter(null)).isInstanceOf(IllegalArgumentException.class);
-            assertThatThrownBy(() -> delimiters.addDelimiter("")).isInstanceOf(IllegalArgumentException.class);
+            assertThatThrownBy(() -> delimiters.addCustomDelimiter(null)).isInstanceOf(IllegalArgumentException.class);
+            assertThatThrownBy(() -> delimiters.addCustomDelimiter("")).isInstanceOf(IllegalArgumentException.class);
         });
     }
 
@@ -51,8 +51,8 @@ public class DelimitersTest {
 
         // when & then
         assertSoftly(softly -> {
-            assertThatThrownBy(() -> delimiters.addDelimiter("123")).isInstanceOf(IllegalArgumentException.class);
-            assertThatThrownBy(() -> delimiters.addDelimiter("-200")).isInstanceOf(IllegalArgumentException.class);
+            assertThatThrownBy(() -> delimiters.addCustomDelimiter("123")).isInstanceOf(IllegalArgumentException.class);
+            assertThatThrownBy(() -> delimiters.addCustomDelimiter("-200")).isInstanceOf(IllegalArgumentException.class);
         });
     }
 
@@ -60,8 +60,8 @@ public class DelimitersTest {
     void 구분자들을_합치면_구분자를_이은_문자열을_반환한다() {
         // given
         Delimiters delimiters = new Delimiters();
-        delimiters.addDelimiter(",");
-        delimiters.addDelimiter(":");
+        delimiters.addCustomDelimiter(",");
+        delimiters.addCustomDelimiter(":");
 
         // when
         String concatenated = delimiters.concatenate();

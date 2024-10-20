@@ -13,7 +13,7 @@ public final class Delimiters {
         delimiters.add(":");
     }
 
-    public void addDelimiter(String delimiter) {
+    public void addCustomDelimiter(String delimiter) {
         validateDelimiter(delimiter);
         delimiters.add(delimiter);
     }

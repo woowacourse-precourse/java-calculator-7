@@ -4,5 +4,5 @@ public interface Tokenizer {
 
     TokenResponse parse(String input);
 
-    void setDelimiter(String delimiter);
+    void setCustomDelimiter(String input);
 }
