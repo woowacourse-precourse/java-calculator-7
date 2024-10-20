@@ -10,7 +10,6 @@ public class InputParser {
         if (input.startsWith(CUSTOM_DELIMITER_PREFIX) && input.contains(CUSTOM_DELIMITER_SUFFIX)) {
             extractCustomDelimiter(input);
             input = removeCustomDelimiter(input);
-            System.out.println("customDelimiter = " + customDelimiter);
             validator.validateCustomInput(input, customDelimiter);
         } else {
             validator.validateDefaultInput(input);
@@ -28,17 +27,13 @@ public class InputParser {
 
     private int[] parseInteger(String input) {
         int[] numbers = new int[input.length()];
-//        String middle = "|";
-//        if (customDelimiter == "[!@#$%^&*()]") { // TODO 특수문자 종류 체크
-//            middle = "|\\";
-//        }
-        String[] stringNumbers = input.split(DEFAULT_DELIMITERS + "|" + customDelimiter); // TODO escape \\ ?
+        String[] stringNumbers = input.split(DEFAULT_DELIMITERS + "|" + customDelimiter);
 
         for (int i = 0; i < stringNumbers.length; i++) {
-            if (stringNumbers[i].isEmpty()) {
+            if (Validator.isEmptyString(stringNumbers[i])) {
                 continue;
             }
-            numbers[i] = Integer.parseInt(stringNumbers[i]); // TODO 숫자 아닐경우 예외 처리
+            numbers[i] = Integer.parseInt(stringNumbers[i]);
         }
         return numbers;
     }

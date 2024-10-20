@@ -18,14 +18,7 @@ public class StringCalculator {
             Output.printResult(0);
             return;
         }
-//        String cleanedInput = parser.parseCustomDelimiter(inputValue);
-
-        // TODO 파싱을 먼저 하고 유효성 검사?
-//        validator.validateInput(cleanedInput);
-//
-//        int[] numbers = parser.parseInteger(cleanedInput);
         int[] numbers = parser.parse(inputValue, validator);
-
         int result = calculator.addNumbers(numbers);
         Output.printResult(result);
     }
