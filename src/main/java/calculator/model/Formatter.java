@@ -1,11 +1,14 @@
 package calculator.model;
 
+import static calculator.enumStatus.ExceptionMessage.INVALID_INPUT_CHAR;
+
 import java.util.Objects;
 
 public class Formatter {
     public static int[] formatInput(String input, String delimiters) {
         input = removeCustomSetting(input, delimiters);
 
+        validateInvalidChar(input, delimiters);
         String[] splitResult = input.split("[" + delimiters + "]");
 
         return generateFormatResult(splitResult);
@@ -16,6 +19,12 @@ public class Formatter {
             input = input.substring(5);
         }
         return input;
+    }
+
+    private static void validateInvalidChar(String input, String delimiters) {
+        if (!input.matches("[0-9" + delimiters + "]*")) {
+            throw new IllegalArgumentException(INVALID_INPUT_CHAR.toString());
+        }
     }
 
     private static int[] generateFormatResult(String[] splitResult) {
