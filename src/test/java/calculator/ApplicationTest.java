@@ -27,8 +27,16 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 커스텀_구분자_구분_반환() {
+    void 커스텀_구분자_구분_반환1() {
         String input = "//;\\n1,2;3:4";
+        String[] expected = {"1", "2", "3", "4"};
+        String[] actual = separator.parseNumbers(input);
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void 커스텀_구분자_구분_반환2() {
+        String input = "//?\\n1,2?3:4";
         String[] expected = {"1", "2", "3", "4"};
         String[] actual = separator.parseNumbers(input);
         assertArrayEquals(expected, actual);
@@ -85,8 +93,15 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 맨_끝에_구분자() {
+    void 맨_끝에_구분자1() {
         String input = "1:2:";
+
+        assertThrows(IllegalArgumentException.class, () -> separator.parseNumbers(input));
+    }
+
+    @Test
+    void 맨_끝에_구분자2() {
+        String input = "//;\\n1:2;";
 
         assertThrows(IllegalArgumentException.class, () -> separator.parseNumbers(input));
     }

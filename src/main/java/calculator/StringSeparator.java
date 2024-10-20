@@ -39,7 +39,7 @@ public class StringSeparator {
 
         String numbers = matcher.group(2);
 
-        String allDelimiter = String.format("%s|%s", DEFAULT_DELIMITER, delimiter);
+        String allDelimiter = String.format("(%s|%s)", DEFAULT_DELIMITER, Pattern.quote(delimiter));
 
         if ("-".equals(delimiter) && numbers.contains("-")) {    // 커스텀 구분자가 '-'이면 음수 불가능
             throw new IllegalArgumentException();
