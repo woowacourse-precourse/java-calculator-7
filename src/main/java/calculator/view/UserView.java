@@ -16,7 +16,11 @@ public class UserView {
     public void run() {
         System.out.println(inputMessage);
         String inputString = Console.readLine();
-        Integer answer = device.run(inputString);
-        System.out.println(outputMessage + answer);
+        if (inputString.isEmpty()||inputString.isBlank()) {
+            System.out.println(outputMessage + 0);
+        } else {
+            Integer answer = device.run(inputString);
+            System.out.println(outputMessage + answer);
+        }
     }
 }
