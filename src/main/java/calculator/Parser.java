@@ -31,9 +31,15 @@ public class Parser {
 
         for (int i = 0; i < numberList.size(); i++) {
             Integer parsedNumber = Integer.parseInt(numberList.get(i));
+
+            // parsedNumber가 양수가 아니면 IllegalArgumentException 발생하도록 예외 처리
+            if (parsedNumber <= 0) {
+                throw new IllegalArgumentException();
+            }
+
             parsedNumberList.add(parsedNumber);
         }
-        
+
         return parsedNumberList;
     }
 }
