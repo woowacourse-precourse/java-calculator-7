@@ -76,4 +76,29 @@ public class Application {
         return numbers;
     }
 
+    /**
+     * 주어진 입력을 처리하여 모두 더하여 반환함
+     * @param input 문자열로 주어진 입력
+     * @return 합산한 결과
+     * @throws IllegalArgumentException 음수가 포함되거나 숫자로 변환할 수 없는 경우
+     */
+    private static Integer add(String input) throws IllegalArgumentException {
+        String delimiter = getDelimiter(input);
+        List<Integer> numbers;
+        try {
+            numbers = getNumbers(input, delimiter);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자로 변환할 수 없는 값이 있습니다.");
+        }
+
+        Integer sum = 0;
+
+        for (Integer number : numbers) {
+            if (number < 0) throw new IllegalArgumentException("음수가 포함되어 있습니다.");
+            sum += number;
+        }
+
+        return sum;
+    }
+
 }
