@@ -32,10 +32,6 @@ public class Calculator {
             return;
         }
 
-        if(WhenInputIsMinusAndSeparatorIsMinus(userInput)){
-            throw new IllegalArgumentException("양수만 입력가능합니다");
-        }
-
         try {
             String parsedInput = AddSeparator.addCustomSeparator(userInput);
 
@@ -49,11 +45,6 @@ public class Calculator {
         }
 
     }
-
-    private static boolean WhenInputIsMinusAndSeparatorIsMinus(String userInput) {
-        return userInput.contains("--");
-    }
-
     private static boolean IsUserInputEmptyString(String userInput) {
         return userInput.trim().isEmpty();
     }
