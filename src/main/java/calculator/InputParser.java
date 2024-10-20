@@ -8,21 +8,19 @@ public class InputParser {
 
     private final String COMMON_DELIMITER = ",";
     private final String DEFAULT_DELIMITER_PATTERN = "[,:]";
-    private final String CUSTOM_DELIMITER_NEWLINE = "\\n";
+    private final String CUSTOM_DELIMITER_START_POSITION = "//";
+    private final String CUSTOM_DELIMITER_END_POSITION = "\\n";
     private final int CUSTOM_DELIMITER_START_INDEX = 2;
     private final int NEWLINE_OFFSET = 2;
+    private final String SINGLE_INPUT = "-?\\d+";
 
     public boolean hasDefaultDelimiters(String input) {
         return input.contains(":") || input.contains(",");
     }
 
     public List<Integer> parseInputToIntList(String input) {
-        if (input.isBlank()) {
-            return List.of(0);
-        }
-        if (input.matches("\\d+")) {
-            return List.of(Integer.parseInt(input));
-        }
+        if (input.isBlank()) return List.of(0);
+        if (input.matches(SINGLE_INPUT)) return convertToIntList(input);
         String standardizedInput = replaceDelimiters(input);
         return convertToIntList(standardizedInput);
     }
@@ -37,7 +35,7 @@ public class InputParser {
     }
 
     private int findDelimiterEndIndex(String input) {
-        return input.indexOf(CUSTOM_DELIMITER_NEWLINE);
+        return input.indexOf(CUSTOM_DELIMITER_END_POSITION);
     }
 
     private List<String> splitByCommonDelimiter(String input) {
