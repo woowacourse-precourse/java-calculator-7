@@ -9,7 +9,7 @@ public class Validator {
                 .compile(Constants.REGEX_INPUT_PATTERN)
                 .matcher(input);
 
-        if (!match.matches()) {
+        if (!match.matches() || input.contains("-")) {
             throw new IllegalArgumentException("입력된 값이 유효하지 않음.");
         }
     }
