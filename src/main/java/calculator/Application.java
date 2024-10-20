@@ -12,7 +12,7 @@ public class Application {
         System.out.println("결과 : " + sumResult);
     }
 
-    private static String[] parseInput(String input) {
+    public static String[] parseInput(String input) {
         if (hasCustomDelimiter(input)) {
             String customDelimiter = extractCustomDelimiter(input);
             String numbersSection = extractNumbersSection(input);
@@ -25,11 +25,11 @@ public class Application {
         }
     }
 
-    private static boolean hasCustomDelimiter(String input) {
+    public static boolean hasCustomDelimiter(String input) {
         return input.startsWith("//");
     }
 
-    private static String extractCustomDelimiter(String input) {
+    public static String extractCustomDelimiter(String input) {
         int delimiterEndIndex = input.indexOf("\\n");
         if (delimiterEndIndex == -1) {
             throw new IllegalArgumentException("잘못된 입력 형식입니다. 커스텀 구분자는 //과 \\n을 포함해야 합니다.");
@@ -37,16 +37,16 @@ public class Application {
         return escapeSpecailCharactersInDelimiter(input.substring(2, delimiterEndIndex));
     }
 
-    private static String extractNumbersSection(String input) {
+    public static String extractNumbersSection(String input) {
         int delimiterEndIndex = input.indexOf("\\n");
         return input.substring(delimiterEndIndex + 2);
     }
 
-    private static String[] splitNumbers(String input, String delimiter) {
+    public static String[] splitNumbers(String input, String delimiter) {
         return input.split(delimiter);
     }
 
-    private static int sumParsedNumbers(String[] numbers) {
+    public static int sumParsedNumbers(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
             if (!number.isEmpty()) {
