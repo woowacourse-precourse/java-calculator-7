@@ -1,6 +1,9 @@
 package calculator.controller;
 
 import calculator.model.InputData;
+import calculator.model.SumCalculator;
+import calculator.view.InputView;
+import calculator.view.OutputView;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,7 +18,12 @@ class StringCalculatorControllerTest extends NsTest {
 
     @BeforeEach
     void setUp() {
-        stringCalculatorController = new StringCalculatorController();
+        stringCalculatorController = new StringCalculatorController.Builder()
+                .withInputView(new InputView())
+                .withOutputView(new OutputView())
+                .withDelimiterController(new DelimiterController())
+                .withSumCalculator(new SumCalculator())
+                .build();
     }
 
     @Test
