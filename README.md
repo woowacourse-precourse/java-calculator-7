@@ -127,9 +127,9 @@
 
 - [x]  [java-calculator-7](https://github.com/woowacourse-precourse/java-calculator-7) 저장소를 Fork & Clone
 - [x]  `README.md`에 구현할 기능 목록을 정리해 추가
-- [ ]  완료 후 Pull Request
-- [ ]  우아한테크코스 지원 플랫폼에 소감 작성 후 제출
-- [ ]  제출한 후 결과 확인, 통과하지 못했다면 수정해 다시 제출
+- [x]  완료 후 Pull Request
+- [x]  우아한테크코스 지원 플랫폼에 소감 작성 후 제출
+- [x]  제출한 후 결과 확인, 통과하지 못했다면 수정해 다시 제출
 
 # ✅ 프로그래밍 요구 사항
 
