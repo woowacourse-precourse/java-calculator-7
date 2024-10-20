@@ -20,7 +20,7 @@ public class Application {
     public static void isValid(String input){
         if(input.isEmpty()){
             System.out.println(0);
-            System.exit(0);
+            return;
         }
         if((input.charAt(0) == '/' && input.length() < 5)) {
             throw new IllegalArgumentException("Input is not valid.");
@@ -58,18 +58,12 @@ public class Application {
     }
 
     public static void main(String[] args) {
-        String input = "";
         // 입력받기 및 입력값 검증
-            try{
                 System.out.println("PLEASE_ENTER_THE_STRING_TO_BE_ADDED");
-                input = Console.readLine();
+                String input = Console.readLine();
                 isValid(input);
-            }catch (IllegalArgumentException e){
-            System.out.println(e.getMessage());
-            System.exit(0);
-        }
 
-        System.out.println("result : " + calculate(input));
+        System.out.println("결과 : " + calculate(input));
 
     }
 }
