@@ -34,7 +34,8 @@ public class StringCalculator {
     public void addDelimiter(){
         // 커스텀 구분자가 추가될려면 문자열 길이 5 이상
         if(input.length() >= 5) {
-            for (int i = 0; i < input.length() - 5; i += 5) {
+            for (int i = 0; i < input.length() - 5; i ++) {
+                System.out.println(input.substring(i, i+5));
                 if (input.startsWith("//", i) && input.startsWith("\\n", i + 3)) {
                     delimiter += input.charAt(i + 2);
                     // 원본 문자열에서 커스텀문자열 추가 부분 제거
