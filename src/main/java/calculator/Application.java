@@ -2,6 +2,7 @@ package calculator;
 
 import calculator.io.Input;
 import calculator.io.View;
+import calculator.operator.Operator;
 
 public class Application {
     public static void main(String[] args) {
@@ -11,7 +12,8 @@ public class Application {
         view.printInstruction();
 
         String inputString = Input.readLine();
-        String result = appConfig.operator(inputString).toString();
+        Operator operator = appConfig.operator(inputString);
+        String result = operator.toString();
 
         view.printResult(result);
     }
