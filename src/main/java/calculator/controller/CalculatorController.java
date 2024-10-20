@@ -16,22 +16,19 @@ public class CalculatorController {
         this.view = view;
     }
 
-    //사용자 입력을 받아 모델의 덧셈 기능 호출
     public void run() {
-        try {
-            String input = view.getInput();
+        // 사용자의 입력을 받음
+        String input = view.getInput();
 
-            // 입력 검증 후 숫자 배열 반환
-            String[] numbers = validator.validate(input);
+        // 입력값 검증 수행
+        String[] validatedNumbers = validator.validate(input);
 
-            // 계산된 값을 받아 ConsoleView에 전달
-            int result = calculator.add(numbers);
-            view.printResult(result);
+        // 검증된 숫자 배열 계산 수행
+        int result = calculator.add(validatedNumbers);
 
-        }catch (IllegalArgumentException e) {
-            //사용자에게 잘못된 입력에 대한 예외 처리를 수행하여 적절한 메시지 출력
-            view.printErrorMessage(e.getMessage());
-        }
+        //결과 출력
+        view.printResult(result);
     }
+
 }
 
