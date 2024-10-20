@@ -18,9 +18,9 @@ public class Number {
     }
 
     public int getCustomDelimiterEndIndex(String rawText) {
-        int lastIndex = rawText.indexOf("\n");
-        while (rawText.charAt(lastIndex+1) == '\n') {
-            lastIndex++;
+        int lastIndex = rawText.indexOf("\\n");
+        while (lastIndex > 0 && rawText.substring(lastIndex+2, lastIndex+4).equals("\\n")) {
+            lastIndex += 2;
         }
         return lastIndex;
     }
@@ -43,7 +43,7 @@ public class Number {
 
     public String splitText(int customDelimiterEndIndex, String rawText) {
         if (customDelimiterEndIndex > 0) {
-            return rawText.substring(customDelimiterEndIndex+1);
+            return rawText.substring(customDelimiterEndIndex+2);
         }
         return rawText;
     }
