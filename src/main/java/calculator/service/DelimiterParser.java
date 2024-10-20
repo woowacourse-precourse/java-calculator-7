@@ -8,11 +8,10 @@ public class DelimiterParser {
 
     private static final String CUSTOM_DELIMITER_PREFIX = "//";
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("^//(.*)\\\\n");
-    private static final String DEFAULT_DELIMITERS = ",:";
+    private static final String DEFAULT_DELIMITERS = "[,:]";
 
     public static CalculatorRequest parseDelimiters(String input) {
         if (!input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
-            System.out.println("기본 구분자, 계산식: " + input);
             return CalculatorRequest.of(DEFAULT_DELIMITERS, input);
         }
 
@@ -22,7 +21,6 @@ public class DelimiterParser {
         }
         String customDelimiter = matcher.group(1);
         String calculation = input.substring(matcher.end());
-        System.out.println("커스텀 구분자: " + customDelimiter + ", 계산식: " + calculation);
-        return CalculatorRequest.of(customDelimiter, calculation);
+        return CalculatorRequest.of(DEFAULT_DELIMITERS + "|" + Pattern.quote(customDelimiter), calculation);
     }
 }
