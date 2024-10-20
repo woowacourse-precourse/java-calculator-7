@@ -34,11 +34,11 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트_음수_오류() {
-        assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("-1,2,3"))
-                        .isInstanceOf(IllegalArgumentException.class)
-        );
+    void 기본_구분자_혼합_사용_테스트() {
+        assertSimpleTest(() -> {
+            run("1,2:3,4");
+            assertThat(output()).contains("결과 : 10");
+        });
     }
 
     @Test
