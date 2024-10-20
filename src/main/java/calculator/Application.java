@@ -20,10 +20,12 @@ public class Application {
             if (!isValidCustomPattern(numbers, delimiter)) {
                 throw new IllegalArgumentException("잘못된 입력입니다. 커스텀 구분자와 숫자만 포함되어야 합니다.");
             }
-
-
-           System.out.println("Yes"+delimiter+ "d" + numbers);
+        }else if (isValidDefaultPattern(input)) {
+            delimiter = ",|:";
+            numbers = input;
+            System.out.println("기본 구분자를 사용합니다. 입력값: " + input);
         }
+
 
     }
     private static boolean isCustomDelimiterPattern(String input) {
@@ -61,6 +63,11 @@ public class Application {
         String regex = "^[0-9" + Pattern.quote(delimiter) + "]*$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(numbers);
+        return matcher.matches();
+    }
+    private static boolean isValidDefaultPattern(String input) {
+        Pattern pattern = Pattern.compile("^[0-9,:]*$");
+        Matcher matcher = pattern.matcher(input);
         return matcher.matches();
     }
 
