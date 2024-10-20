@@ -1,17 +1,19 @@
 package calculator;
 
-public class Calculator {
-    public int calculate(String s, String determine) {
+public class Calc {
+    public int calculate(String input, String delimiterPattern) {
         int sum = 0;
 
-        if (s.isBlank()) {  // 공백일 경우 0 반환
+        if (input == null || input.trim().isEmpty()) {
             return sum;
         }
 
-        // 구분자를 사용해 입력 문자열을 분리
-        String[] inputArr = s.split(determine);
-        for (String c : inputArr) {
-            sum += Integer.parseInt(c.trim());  // 각 숫자를 더함
+        String[] numbers = input.split(delimiterPattern);
+        for (String number : numbers) {
+            number = number.trim();
+            if (!number.isEmpty()) {
+                sum += Integer.parseInt(number);
+            }
         }
 
         return sum;
