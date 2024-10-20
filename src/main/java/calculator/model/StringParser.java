@@ -32,7 +32,7 @@ public class StringParser<T> implements Parser<T> {
                 .toList();
     }
 
-    public List<String> makeTokens() {
+    private List<String> makeTokens() {
         String input = expressionDTO.getExpression();
         if (input.isEmpty()) {
             return Collections.emptyList();

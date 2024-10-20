@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 
 public class CalculatorController {
 
+    // 추출한 실수형에 관한 빠른 덧셈 연산 수행용
     public static ResultDTO<Double> sum(double initialValue, String expression) {
         Parser<Double> parser = new StringParser<>(expression);
         Calculator<Double> calculator = new StringCalculator<>(
@@ -19,7 +20,7 @@ public class CalculatorController {
         return new ResultDTO<>(calculator.calculate(parser.parse(Double::parseDouble)));
     }
 
-    // Double형보다 큰 범위에서 덧셈 연산을 수행할 때 사용
+    // 추출한 실수형에 관한 정밀한 연산 수행용
     public static ResultDTO<BigDecimal> sum(BigDecimal initialValue, String expression) {
         Parser<BigDecimal> parser = new StringParser<>(expression);
         Calculator<BigDecimal> calculator = new StringCalculator<>(
