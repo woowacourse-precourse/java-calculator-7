@@ -14,6 +14,15 @@ public class OperandManager {
         this.separatorManager = separatorManager;
     }
 
+    private void validate(String operandCandidate) {
+        if(operandCandidate.isEmpty()) {
+            return;
+        }
+        if (operandCandidate.equals("0") || !operandCandidate.matches(VALID_OPERAND_REGEX)) {
+            throw new IllegalArgumentException(ERROR_INVALID_OPERAND);
+        }
+    }
+
     public List<Integer> getOperands() {
         return operands;
     }
@@ -38,14 +47,5 @@ public class OperandManager {
             operandCandidates = operandCandidates.replace(separator, " ");
         }
         return operandCandidates.trim().split(WHITESPACE_REGEX);
-    }
-
-    private void validate(String operandCandidate) {
-        if(operandCandidate.isEmpty()) {
-            return;
-        }
-        if (operandCandidate.equals("0") || !operandCandidate.matches(VALID_OPERAND_REGEX)) {
-            throw new IllegalArgumentException(ERROR_INVALID_OPERAND);
-        }
     }
 }
