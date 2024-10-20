@@ -5,10 +5,15 @@ import java.util.List;
 
 public abstract class Operands<E extends Number> {
 
+    public static final String ZERO = "0";
     protected final List<E> data;
 
     Operands() {
         this.data = new ArrayList<>();
+    }
+
+    public List<E> getData() {
+        return this.data;
     }
 
     public abstract boolean validate(String operand);
