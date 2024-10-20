@@ -26,7 +26,6 @@ public class NumberExtraction {
 
     //커스텀 구분자가 있다면 separation에 add 후 구분자 지정 구문이 끝나는 idx+1 반환.
     private int checkCustomSeparation(String input){
-        System.out.println(input);
         int customEndIdx = input.indexOf("\\n");
         if (input.startsWith("//")){
             if(customEndIdx == -1){
@@ -35,7 +34,6 @@ public class NumberExtraction {
             int i = 0;
 
             for(String s : inputArray){
-                System.out.println(s);
                 if (i++ < 2) continue;
                 if (i > customEndIdx) break;
 
