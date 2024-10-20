@@ -10,8 +10,12 @@ public class Application {
         String input = Console.readLine();
     }
 
-    public static boolean isBlank(String str) {
-        return str == null || str.trim().isBlank();
+    public static boolean isNumber(String str) {
+        try {
+            Integer.parseInt(str.trim());
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
-
 }
