@@ -32,8 +32,12 @@ public class SimpleNumberStrategy implements NumberStrategy {
             if (splitResult.matches(".*\\D.*")) {
                 throw new IllegalArgumentException("양수 이외에 다른 문자가 들어왔다");
             }
-            Integer operand = Integer.parseInt(splitResult);
-            operands.add(operand);
+            try {
+                Integer operand = Integer.parseInt(splitResult);
+                operands.add(operand);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("피연산자가 Integer 범위를 넘어간다");
+            }
         }
         return operands;
     }
