@@ -11,8 +11,8 @@ public class CalculatorController {
     private final OutputView outputView;
 
     public CalculatorController() {
-        this.inputView = new InputView();
-        this.outputView = new OutputView();
+        this.inputView = InputView.createInputView();
+        this.outputView = OutputView.createOutputView();
     }
 
     public void run() {
