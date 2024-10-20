@@ -38,6 +38,17 @@ public class Application {
         return input.split(delimiter);
     }
 
+    // 문자열 더하는 메서드
+    public static int addString(String[] numbers){
+        int sum = 0;
+        for(String num: numbers){
+            sum += Integer.parseInt(num);
+        }
+        return sum;
+    }
+
+
+
 
     public static void main(String[] args) {
         String input = Console.readLine();
