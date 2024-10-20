@@ -39,7 +39,7 @@ public class CommandExtractor {
 
         String customSeparator = matcher.group(1);
         validateMultipleCustomSeparator(matcher);
-        return Separator.create(customSeparator);
+        return new Separator(customSeparator);
     }
 
     private void validateMultipleCustomSeparator(Matcher matcher) {
@@ -53,7 +53,7 @@ public class CommandExtractor {
         if (expression.isEmpty()) {
             throw new IllegalArgumentException("계산할 식을 찾을 수 없어요. 입력값을 확인해주세요.");
         }
-        return Expression.create(expression);
+        return new Expression(expression);
     }
 
     private String removeCustomSeparator(String input) {

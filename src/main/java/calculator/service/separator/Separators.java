@@ -15,7 +15,7 @@ public class Separators {
     public static Separators init() {
         List<Separator> defaultSeparators = DefaultSeparatorType.getDefaults()
                 .stream()
-                .map(Separator::create)
+                .map(Separator::new)
                 .collect(Collectors.toList());
         return new Separators(defaultSeparators);
     }

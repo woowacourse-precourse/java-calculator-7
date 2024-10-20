@@ -15,10 +15,6 @@ public record Expression(String value) {
         }
     }
 
-    public static Expression create(String value) {
-        return new Expression(value);
-    }
-
     public String[] split(List<String> separators) {
         String recognizedSeparatorsRegex = String.join(Constants.OR, separators);
         validateExpression(recognizedSeparatorsRegex, value);

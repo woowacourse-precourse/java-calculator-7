@@ -8,10 +8,6 @@ public record Separator(String regex) {
         validateRegex(regex);
     }
 
-    public static Separator create(String regex) {
-        return new Separator(regex);
-    }
-
     private void validateRegex(String regex) {
         if (regex == null || regex.isEmpty()) {
             throw new IllegalArgumentException("구분자를 찾을 수 없어요. 입력하신 커스텀 구분자를 확인해주세요.");
