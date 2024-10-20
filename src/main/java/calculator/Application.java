@@ -18,13 +18,18 @@ public class Application {
         delimiters.add((int)':');
         delimiters.add((int)',');
 
-        var result = 0;
-
-        var now = bf.readLine();
+        String now = bf.readLine();
 
         while (isCommand(now)) {
-            break;
+            addDelimiter(now);
+            now = bf.readLine();
         }
+
+        List<String> nums = extract(now);
+
+        var result = sum(nums);
+
+        System.out.println("결과 : " + result);
     }
 
     static private boolean isCommand(String s) {
