@@ -14,7 +14,7 @@ public class Separator {
             int prefixIdx = input.indexOf(Constants.CUSTOM_SEPARATOR_PREFIX);
             int suffixIdx = input.lastIndexOf(Constants.CUSTOM_SEPARATOR_SUFFIX);
 
-            String customSeparator = String.valueOf(input.charAt(suffixIdx - 1));
+            String customSeparator = getCustomSeparator(input, suffixIdx);
             StringBuilder sb = new StringBuilder(input);
             sb.delete(prefixIdx, suffixIdx + 2);
             input = sb.toString();
@@ -27,5 +27,9 @@ public class Separator {
 
     public boolean isContainsCustomSeparatorSymbol(String input) {
         return input.startsWith(Constants.CUSTOM_SEPARATOR_PREFIX) && input.contains(Constants.CUSTOM_SEPARATOR_SUFFIX);
+    }
+
+    public String getCustomSeparator(String input, int suffixIdx) {
+        return String.valueOf(input.charAt(suffixIdx - 1));
     }
 }
