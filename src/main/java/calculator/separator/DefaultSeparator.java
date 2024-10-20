@@ -35,9 +35,7 @@ public class DefaultSeparator {
                 .collect(Collectors.joining("|"));
 
         String regex = "^[\\d" + allowedSeparators + "]+$";
-
-        System.out.println(regex);
-
+        
         return !Pattern.matches(regex, input);
     }
 
