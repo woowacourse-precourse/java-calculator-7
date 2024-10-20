@@ -16,14 +16,16 @@ public class Model {
     }
 
     public int result(String input) {
-        if(input.isEmpty()) return 0;
+        if (input.isEmpty()) {
+            return 0;
+        }
         String numString = isCustom(input);
         addNumbers(numString);
         return sum;
     }
 
     public String isCustom(String input) {
-        if(input.startsWith("//")) {
+        if (input.startsWith("//")) {
             isValidCustom(input);
             int stringIndex = input.indexOf("\\n");
             String customDelimiter = input.substring(2, stringIndex);
@@ -35,17 +37,17 @@ public class Model {
     }
 
     public void isValidCustom(String input) {
-        if(!input.contains("\\n")) {
+        if (!input.contains("\\n")) {
             Exception.exceptionInputPattern();
         }
     }
 
     public void addNumbers(String numString) {
-        for(String deli : delimiter) {
+        for (String deli : delimiter) {
             numString = numString.replace(deli, ",");
         }
         String[] numbers = numString.split(",");
-        for(String num : numbers) {
+        for (String num : numbers) {
             int n = isValidInteger(num);
             isOverZero(n);
             sum += n;
@@ -63,7 +65,9 @@ public class Model {
     }
 
     public void isOverZero(int n) {
-        if(n < 0) Exception.exceptionInputPattern();
+        if (n < 0) {
+            Exception.exceptionInputPattern();
+        }
     }
 
 }
